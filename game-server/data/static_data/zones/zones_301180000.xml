@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301180000" name="IDLDF5RE_03_FLYING_ZONE" area_type="POLYGON" zone_type="FLY" flags="12">
+        <points bottom="19.835526" top="619.8355">
+            <point x="35.421326" y="493.66827"/>
+            <point x="483.2257" y="486.49054"/>
+            <point x="491.0349" y="5.609985"/>
+            <point x="32.173615" y="13.454285"/>
+        </points>
+    </zone>
+    <zone mapid="301180000" name="IDLDF5RE_03_ITEMUSEAREA_ALL" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
+        <points bottom="26.652649" top="626.65265">
+            <point x="108.03661" y="115.17149"/>
+            <point x="404.2846" y="109.077805"/>
+            <point x="408.0346" y="405.3258"/>
+            <point x="107.09911" y="405.3258"/>
+        </points>
+    </zone>
+    <zone mapid="301180000" name="IDLDF5RE_03_ITEMUSEAREA_ALL_LOSE" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
+        <points bottom="24.323906" top="624.3239">
+            <point x="108.97182" y="110.95436"/>
+            <point x="405.2198" y="104.86067"/>
+            <point x="408.9698" y="401.10864"/>
+            <point x="108.03432" y="401.10864"/>
+        </points>
+    </zone>
+    <zone mapid="301180000" name="LEGIONS_VOID_CUBE_301180000" area_type="POLYGON" zone_type="SUB" priority="17" flags="4">
+        <points bottom="27.651596" top="627.6516">
+            <point x="123.88135" y="124.68895"/>
+            <point x="389.68298" y="120.38924"/>
+            <point x="390.46472" y="390.09973"/>
+            <point x="123.88135" y="385.40912"/>
+        </points>
+    </zone>
+    <zone mapid="301180000" name="PVP_183_301180000" area_type="POLYGON" zone_type="PVP" flags="64">
+        <points bottom="70.69776" top="670.69775">
+            <point x="105.51843" y="135.74059"/>
+            <point x="400.3302" y="130.69716"/>
+            <point x="398.9547" y="375.53302"/>
+            <point x="105.51846" y="373.24054"/>
+        </points>
+    </zone>
+</zones>

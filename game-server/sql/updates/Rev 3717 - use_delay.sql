@@ -1,0 +1,1 @@
+ALTER TABLE item_cooldowns MODIFY use_delay INTEGER unsigned NOT NULL;

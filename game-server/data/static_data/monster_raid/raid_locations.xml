@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="raid_locations.xsd">
+    <!-- Verteron -->
+    <raid_location id="1" world="210030000" x="1587.52" y="2078.81" z="155.856" h="29"/>
+    <raid_location id="2" world="210030000" x="2484.98" y="826.09" z="100.379" h="29"/>
+    <raid_location id="3" world="210030000" x="1703.98" y="1663.38" z="102.163" h="29"/>
+    <!-- Altgard -->
+    <raid_location id="4" world="220030000" x="2893.61" y="1514.20" z="250.263" h="28"/>
+    <raid_location id="5" world="220030000" x="1868.05" y="1672.47" z="247.375" h="28"/>
+    <raid_location id="6" world="220030000" x="1759.48" y="504.17" z="247.282" h="28"/>
+    <!-- Eltnen -->
+    <raid_location id="7" world="210020000" x="256.04" y="2135.38" z="207.375" h="28"/>
+    <raid_location id="8" world="210020000" x="859.62" y="1151.20" z="278.398" h="28"/>
+    <raid_location id="9" world="210020000" x="1519.67" y="1911.02" z="289.540" h="28"/>
+    <!-- Morheim -->
+    <raid_location id="10" world="220020000" x="575.64" y="361.32" z="484.0" h="26"/>
+    <raid_location id="11" world="220020000" x="401.12" y="1722.09" z="441.113" h="26"/>
+    <raid_location id="12" world="220020000" x="1050.08" y="1247.85" z="252.596" h="26"/>
+    <!-- Theobomos -->
+    <raid_location id="13" world="210060000" x="2429.27" y="2619.89" z="40.25" h="27"/>
+    <raid_location id="14" world="210060000" x="1771.80" y="1356.03" z="35.384" h="27"/>
+    <raid_location id="15" world="210060000" x="556.65" y="2232.53" z="57.271" h="27"/>
+    <!-- Brusthonin -->
+    <raid_location id="16" world="220050000" x="419.54" y="2838.53" z="251.723" h="24"/>
+    <raid_location id="17" world="220050000" x="2480.16" y="1901.30" z="42.635" h="24"/>
+    <raid_location id="18" world="220050000" x="336.69" y="369.99" z="22.801" h="24"/>
+    <!-- Heiron -->
+    <raid_location id="19" world="210040000" x="382.86" y="2929.85" z="109.925" h="22"/>
+    <raid_location id="20" world="210040000" x="1470.21" y="1891.81" z="132.401" h="22"/>
+    <raid_location id="21" world="210040000" x="540.81" y="2108.73" z="113.226" h="22"/>
+    <!-- Beluslan -->
+    <raid_location id="22" world="220040000" x="2566.49" y="286.66" z="312.142" h="26"/>
+    <raid_location id="23" world="220040000" x="782.26" y="1239.65" z="241.452" h="26"/>
+    <raid_location id="24" world="220040000" x="467.31" y="1786.30" z="216.008" h="26"/>
+    <!-- Inggison -->
+    <raid_location id="25" world="210050000" x="2729.83" y="1874.37" z="218.769" h="27"/>
+    <raid_location id="26" world="210050000" x="1904.77" y="1951.70" z="314.773" h="27"/>
+    <raid_location id="27" world="210050000" x="2757.93" y="826.57" z="392.919" h="27"/>
+    <!-- Gelkmaros -->
+    <raid_location id="28" world="220070000" x="598.19" y="1342.64" z="296.935" h="27"/>
+    <raid_location id="29" world="220070000" x="2180.12" y="934.13" z="195.471" h="27"/>
+    <raid_location id="30" world="220070000" x="1492.03" y="1254.61" z="322.331" h="27"/>
+    <!-- Reshanta -->
+    <raid_location id="31" world="400010000" x="808.98" y="848.80" z="1678.128" h="32"/>
+    <raid_location id="32" world="400010000" x="2020.89" y="2833.78" z="2851.830" h="32"/>
+    <raid_location id="33" world="400010000" x="2284.99" y="848.75" z="2842.357" h="32"/>
+    <raid_location id="34" world="400010000" x="1121.71" y="2097.28" z="2900.077" h="32"/>
+    <raid_location id="35" world="400010000" x="3330.80" y="1338.18" z="2676.321" h="32"/>
+    <!-- Katalam -->
+    <raid_location id="36" world="600050000" x="1289.84" y="2062.84" z="81.601" h="27"/>
+    <raid_location id="37" world="600050000" x="1328.94" y="741.74" z="150.724" h="27"/>
+    <raid_location id="38" world="600050000" x="2879.19" y="658.59" z="268.655" h="27"/>
+    <raid_location id="39" world="600050000" x="2798.33" y="2238.55" z="275.708" h="27"/>
+    <!-- Danaria -->
+    <raid_location id="40" world="600060000" x="2714.79" y="1835.91" z="163.411" h="26"/>
+    <raid_location id="41" world="600060000" x="1547.05" y="2154.18" z="176.003" h="26"/>
+    <raid_location id="42" world="600060000" x="2442.33" y="1261.64" z="105.882" h="27"/>
+    <raid_location id="43" world="600060000" x="892.77" y="1721.95" z="364.152" h="27"/>
+    <raid_location id="44" world="600060000" x="1679.33" y="1619.17" z="160.674" h="27"/>
+    <!-- Levinshor -->
+    <raid_location id="45" world="600100000" x="1837.98" y="141.26" z="252.797" h="78"/>
+    <raid_location id="46" world="600100000" x="681.65" y="1000.85" z="279.29956" h="78"/>
+    <raid_location id="47" world="600100000" x="1160.37" y="1074.92" z="316.228" h="78"/>
+    <raid_location id="48" world="600100000" x="386.81" y="1809.40" z="231.846" h="78"/>
+    <!-- Kaldor -->
+    <raid_location id="49" world="600090000" x="289.60" y="505.57" z="167.922" h="10"/>
+    <raid_location id="50" world="600090000" x="656.02" y="808.35" z="177.327" h="10"/>
+    <raid_location id="51" world="600090000" x="1181.87" y="348.77" z="141.103" h="10"/>
+</raid_locations>

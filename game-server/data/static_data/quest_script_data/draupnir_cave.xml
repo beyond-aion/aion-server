@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+  		[BEGIN] SUMMARY
+			1685 [XML] The Draupnir Weapons
+			1686 [XML] A Cube for Michalis
+			1687 [SCRIPT] The Tigraki Agreement
+			1688 [XML] The Tigraki Assignment
+			1689 [XML] The Draconic Assignment
+			1690 [XML] Return to Draupnir Cave
+			2631 [XML] Jaadis's Bioweapon
+			2632 [XML] Get 'Em Young
+			2633 [SCRIPT] Destroying Balaur Weapons
+			2634 [SCRIPT] The Draupnir Redemption
+			2657 [XML] Materials for All Magic Wards
+			2677 [XML] Making a Small Flame Ward
+			2678 [XML] Making a Huge Flame Ward
+			2679 [XML] Making a Blue Flame Ward
+			3532 [XML] Commander Bakarma
+			14270 [TODO] [Group] A Bio Weapon Bio
+			14270 [TODO] [Group] A Bio Weapon Bio
+			24270 [TODO] [Group] To Steal a Secret
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="1686" start_npc_ids="204500" end_npc_ids="278501"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="1685" start_npc_ids="204833" end_npc_ids="204500"/>
+	<item_collecting id="1688" start_npc_ids="204601"/>
+	<item_collecting id="1690" start_npc_ids="204601"/>
+	<item_collecting id="2631" start_npc_ids="204784"/>
+	<item_collecting id="2657" start_npc_ids="204817"/>
+	<item_collecting id="2677" start_npc_ids="204817"/>
+	<item_collecting id="2678" start_npc_ids="204817"/>
+	<item_collecting id="2679" start_npc_ids="204817"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="2632" start_npc_ids="204799">
+		<monster var="0" end_var="4" npc_ids="213563"/>
+		<monster var="1" end_var="6" npc_ids="213564"/>
+	</monster_hunt>
+	<monster_hunt id="3532" start_npc_ids="204550">
+		<monster var="0" end_var="1" npc_ids="213780"/>
+	</monster_hunt>
+</quest_scripts>

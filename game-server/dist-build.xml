@@ -1,0 +1,48 @@
+<project default="dist-build.xml.main">
+
+    <scriptdef name="dependencyJarName" language="javascript">
+        <attribute name="dependencypath"/>
+        <attribute name="property"/>
+        <![CDATA[
+            var text = attributes.get("dependencypath");
+            text = text.replace("\\", "/");
+            var lastIndex = text.lastIndexOf("/");
+            var jarName = text.substring(lastIndex + 1);
+            project.setProperty(attributes.get("property"), jarName);
+        ]]>
+    </scriptdef>
+
+    <target name="dist-build.xml.main" depends="clean">
+        <!-- init property -->
+        <dependencyJarName property="dist-build.jar.name" dependencypath="${dist-build.jar.path}"/>
+
+        <!-- copy templates -->
+        <copy file="./dist/Template-StartGS.sh" tofile="./dist/StartGS.sh"/>
+        <copy file="./dist/Template-StartGS.bat" tofile="./dist/StartGS.bat"/>
+        <copy file="./dist/Template-StartGS_loop.sh" tofile="./dist/StartGS_loop.sh"/>
+
+        <!-- replace tokens -->
+        <replace file="./dist/StartGS.sh" token="{javaagentlib}" value="al-commons-2.0.jar"/>
+        <replace file="./dist/StartGS.bat" token="{javaagentlib}" value="al-commons-2.0.jar"/>
+        <replace file="./dist/StartGS_loop.sh" token="{javaagentlib}" value="al-commons-2.0.jar"/>
+
+
+    </target>
+
+    <target name="clean">
+        <!-- delete old files -->
+        <delete file="./dist/StartGS.sh"/>
+        <delete file="./dist/StartGS.bat"/>
+        <delete file="./dist/StartGS_loop.sh"/>
+    	<delete dir="${build.home}/admincommands"/>
+    	<delete dir="${build.home}/ai"/>
+   		<delete dir="${build.home}/data"/>
+    	<delete dir="${build.home}/instance"/>
+    	<delete dir="${build.home}/mysql5"/>
+    	<delete dir="${build.home}/quest"/>
+    	<delete dir="${build.home}/zone"/>
+        <delete dir="${build.home}/playercommands"/>
+        <delete dir="${build.home}/weddingcommands"/>
+    </target>
+
+</project>

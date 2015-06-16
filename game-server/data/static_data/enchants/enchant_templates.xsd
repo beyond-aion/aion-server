@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
+	<xs:include schemaLocation="items/item_templates.xsd"/>
+	<xs:element name="enchant_templates">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="enchant_list" type="EnchantList" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="EnchantList">
+		<xs:sequence>
+			<xs:element name="enchant_data" type="EnchantData" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="item_group" type="ItemGroup" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="EnchantData">
+		<xs:sequence>
+			<xs:element name="enchant_stat" type="EnchantStat" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="level" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="EnchantStat">
+		<xs:attribute name="stat" type="modifiersenum" use="required"/>
+		<xs:attribute name="value" type="xs:int" use="required"/>
+	</xs:complexType>
+</xs:schema>

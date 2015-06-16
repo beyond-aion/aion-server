@@ -1,0 +1,3651 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<enchant_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="enchant_templates.xsd">
+	<enchant_list item_group="SWORD">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="MACE">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="6"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="9"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="15"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="18"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="21"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="27"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="30"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="33"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="39"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="42"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="45"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="51"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="54"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="57"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="DAGGER">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="ORB">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="8"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="16"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="20"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="28"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="32"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="40"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="44"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="52"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="56"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="64"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="68"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="72"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="76"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="80"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="SPELLBOOK">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="6"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="9"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="15"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="18"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="21"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="27"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="30"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="33"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="39"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="42"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="45"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="51"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="54"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="57"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="GREATSWORD">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="POLEARM">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="STAFF">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="6"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="9"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="15"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="18"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="21"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="27"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="30"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="33"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="39"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="42"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="45"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="51"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="54"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="57"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="3"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="BOW">
+		<enchant_data level="1">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="PHYSICAL_ATTACK" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="GUN">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="2"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="6"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="8"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="10"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="14"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="16"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="18"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="20"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="22"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="26"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="28"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="30"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="32"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="34"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="38"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="40"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="2"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CANNON">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="8"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="16"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="20"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="28"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="32"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="40"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="44"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="52"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="56"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="64"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="68"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="72"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="76"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="80"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="HARP">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="8"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="16"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="20"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="28"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="32"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="40"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="44"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="52"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="56"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="64"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="68"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="72"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="76"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="80"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="KEYBLADE">
+		<enchant_data level="1">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAGICAL_ATTACK" value="8"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="40"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAGICAL_ATTACK" value="12"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="60"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAGICAL_ATTACK" value="16"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="80"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAGICAL_ATTACK" value="20"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="100"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAGICAL_ATTACK" value="24"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="120"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAGICAL_ATTACK" value="28"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="140"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAGICAL_ATTACK" value="32"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="160"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAGICAL_ATTACK" value="36"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="180"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAGICAL_ATTACK" value="40"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="200"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAGICAL_ATTACK" value="44"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="220"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAGICAL_ATTACK" value="48"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="240"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAGICAL_ATTACK" value="52"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="260"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAGICAL_ATTACK" value="56"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="280"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAGICAL_ATTACK" value="60"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="300"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAGICAL_ATTACK" value="64"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="320"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAGICAL_ATTACK" value="68"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="340"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAGICAL_ATTACK" value="72"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="360"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAGICAL_ATTACK" value="76"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="380"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAGICAL_ATTACK" value="80"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="400"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAGICAL_ATTACK" value="4"/>
+			<enchant_stat stat="BOOST_MAGICAL_SKILL" value="20"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="SHIELD">
+		<enchant_data level="1">
+			<enchant_stat stat="DAMAGE_REDUCE" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="DAMAGE_REDUCE" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="DAMAGE_REDUCE" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="DAMAGE_REDUCE" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="DAMAGE_REDUCE" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="DAMAGE_REDUCE" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="DAMAGE_REDUCE" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="DAMAGE_REDUCE" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="DAMAGE_REDUCE" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="BLOCK" value="30"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="BLOCK" value="60"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="BLOCK" value="90"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="BLOCK" value="120"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="BLOCK" value="150"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="BLOCK" value="180"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="BLOCK" value="210"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="BLOCK" value="240"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="BLOCK" value="270"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="BLOCK" value="300"/>
+			<enchant_stat stat="DAMAGE_REDUCE" value="20"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="BLOCK" value="30"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="RB_TORSO">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="14"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="28"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="42"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="9"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="15"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="98"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="21"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="21"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="126"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="27"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="27"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="154"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="33"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="33"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="168"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="182"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="39"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="39"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="196"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="42"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="210"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="45"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="224"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="48"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="238"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="51"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="51"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="252"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="54"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="266"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="57"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="57"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="280"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="60"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="14"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="RB_PANTS">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="9"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="15"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="21"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="27"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="132"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="22"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="33"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="156"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="26"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="39"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="168"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="42"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="45"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="192"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="204"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="34"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="51"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="216"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="54"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="228"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="38"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="57"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="240"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="RB_SHOULDER">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="50"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="7"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="100"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="110"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="11"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="130"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="13"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="150"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="170"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="17"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="190"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="19"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="200"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="RB_GLOVES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="50"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="7"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="100"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="110"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="11"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="130"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="13"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="150"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="170"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="17"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="190"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="19"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="200"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="RB_SHOES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="50"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="7"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="100"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="110"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="11"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="130"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="13"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="150"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="170"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="17"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="190"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="19"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="200"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="1"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="LT_TORSO">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="9"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="15"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="21"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="27"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="132"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="33"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="44"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="156"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="39"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="52"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="168"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="42"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="56"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="45"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="192"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="48"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="64"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="204"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="51"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="68"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="216"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="54"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="228"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="57"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="76"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="240"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="60"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="LT_PANTS">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="9"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="50"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="15"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="21"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="21"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="27"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="27"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="100"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="110"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="33"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="33"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="130"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="39"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="39"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="42"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="150"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="45"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="170"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="51"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="51"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="54"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="190"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="57"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="57"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="200"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="LT_SHOULDER">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="88"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="22"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="104"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="26"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="128"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="136"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="34"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="152"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="38"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="LT_GLOVES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="88"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="22"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="104"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="26"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="128"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="136"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="34"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="152"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="38"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="LT_SHOES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="14"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="88"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="22"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="104"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="26"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="128"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="136"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="34"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="152"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="38"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="2"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CH_TORSO">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="9"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="50"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="15"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="25"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="70"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="21"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="35"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="27"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="100"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="50"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="110"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="33"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="55"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="130"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="39"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="65"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="140"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="42"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="70"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="150"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="45"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="75"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="48"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="170"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="51"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="85"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="180"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="54"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="90"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="190"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="57"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="95"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="200"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="60"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="100"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="10"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CH_PANTS">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="9"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="15"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="21"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="27"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="88"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="44"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="33"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="104"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="52"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="39"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="56"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="42"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="45"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="128"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="64"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="136"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="68"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="51"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="54"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="152"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="76"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="57"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CH_SHOULDER">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="18"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="42"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="21"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="54"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="27"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="66"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="33"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="78"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="39"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="102"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="51"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="114"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="57"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CH_GLOVES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="18"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="42"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="21"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="54"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="27"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="66"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="33"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="78"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="39"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="102"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="51"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="114"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="57"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="CH_SHOES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="18"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="9"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="42"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="21"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="54"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="27"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="66"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="33"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="78"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="39"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="102"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="51"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="114"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="57"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="3"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="PL_TORSO">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="9"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="18"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="15"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="21"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="42"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="27"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="54"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="88"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="33"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="66"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="44"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="104"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="39"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="78"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="52"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="112"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="42"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="84"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="56"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="45"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="90"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="128"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="48"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="96"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="64"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="136"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="51"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="102"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="68"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="144"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="54"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="108"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="72"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="152"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="57"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="114"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="76"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="160"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="60"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="120"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="80"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="3"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="6"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="PL_PANTS">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="10"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="18"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="15"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="9"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="30"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="25"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="15"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="30"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="42"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="35"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="21"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="54"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="45"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="27"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="50"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="66"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="55"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="33"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="78"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="65"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="39"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="84"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="70"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="42"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="90"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="75"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="45"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="96"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="48"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="102"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="85"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="51"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="108"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="90"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="54"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="114"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="95"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="57"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="120"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="100"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="60"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="6"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="5"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="3"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="PL_SHOULDER">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="28"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="44"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="44"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="52"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="52"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="56"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="64"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="68"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="68"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="76"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="76"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="PL_GLOVES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="28"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="44"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="44"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="52"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="52"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="56"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="64"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="68"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="68"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="76"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="76"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+	<enchant_list item_group="PL_SHOES">
+		<enchant_data level="1">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+		<enchant_data level="2">
+			<enchant_stat stat="MAXHP" value="8"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="4"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="8"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="4"/>
+		</enchant_data>
+		<enchant_data level="3">
+			<enchant_stat stat="MAXHP" value="12"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="6"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="12"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="6"/>
+		</enchant_data>
+		<enchant_data level="4">
+			<enchant_stat stat="MAXHP" value="16"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="8"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="16"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="8"/>
+		</enchant_data>
+		<enchant_data level="5">
+			<enchant_stat stat="MAXHP" value="20"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="10"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="20"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="10"/>
+		</enchant_data>
+		<enchant_data level="6">
+			<enchant_stat stat="MAXHP" value="24"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="12"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="24"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="12"/>
+		</enchant_data>
+		<enchant_data level="7">
+			<enchant_stat stat="MAXHP" value="28"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="14"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="28"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="14"/>
+		</enchant_data>
+		<enchant_data level="8">
+			<enchant_stat stat="MAXHP" value="32"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="16"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="32"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="16"/>
+		</enchant_data>
+		<enchant_data level="9">
+			<enchant_stat stat="MAXHP" value="36"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="18"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="36"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="18"/>
+		</enchant_data>
+		<enchant_data level="10">
+			<enchant_stat stat="MAXHP" value="40"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="20"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="40"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="20"/>
+		</enchant_data>
+		<enchant_data level="11">
+			<enchant_stat stat="MAXHP" value="44"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="22"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="44"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="22"/>
+		</enchant_data>
+		<enchant_data level="12">
+			<enchant_stat stat="MAXHP" value="48"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="24"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="48"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="24"/>
+		</enchant_data>
+		<enchant_data level="13">
+			<enchant_stat stat="MAXHP" value="52"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="26"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="52"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="26"/>
+		</enchant_data>
+		<enchant_data level="14">
+			<enchant_stat stat="MAXHP" value="56"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="28"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="56"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="28"/>
+		</enchant_data>
+		<enchant_data level="15">
+			<enchant_stat stat="MAXHP" value="60"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="30"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="60"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="30"/>
+		</enchant_data>
+		<enchant_data level="16">
+			<enchant_stat stat="MAXHP" value="64"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="32"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="64"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="32"/>
+		</enchant_data>
+		<enchant_data level="17">
+			<enchant_stat stat="MAXHP" value="68"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="34"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="68"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="34"/>
+		</enchant_data>
+		<enchant_data level="18">
+			<enchant_stat stat="MAXHP" value="72"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="36"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="72"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="36"/>
+		</enchant_data>
+		<enchant_data level="19">
+			<enchant_stat stat="MAXHP" value="76"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="38"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="76"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="38"/>
+		</enchant_data>
+		<enchant_data level="20">
+			<enchant_stat stat="MAXHP" value="80"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="40"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="80"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="40"/>
+		</enchant_data>
+		<enchant_data level="21">
+			<enchant_stat stat="MAXHP" value="4"/>
+			<enchant_stat stat="MAGICAL_DEFEND" value="2"/>
+			<enchant_stat stat="PHYSICAL_DEFENSE" value="4"/>
+			<enchant_stat stat="PHYSICAL_CRITICAL_RESIST" value="2"/>
+		</enchant_data>
+	</enchant_list>
+</enchant_templates>

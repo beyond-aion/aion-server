@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			10060 [SCRIPT] The Heart of Tiamat
+			10061 [SCRIPT] Heaviest of Hearts
+			10062 [SCRIPT] Fire and Wrath
+			10063 [SCRIPT] Shot Through the Heart
+			10064 [SCRIPT] The Oldest of Foes
+			10065 [SCRIPT] The Lay of the Land
+			12000 [XML] Friends in Deed
+			12001 [XML] I Want My Frillneck Back Ribs
+			12002 [XML] Undermining the Cavalry
+			12003 [XML] And See The World
+			12004 [SCRIPT] Can't Fly On Hungry Wings
+			12005 [XML] [Daily] Pride and Prejudice
+			12006 [XML] [Service/Daily] Banishing the Shade-Touched
+			12007 [SCRIPT] [Service/Group] Knock Knock, Naduka
+			12008 [XML] Burst Bubbles
+			12009 [XML] Bunches of Fun
+			12010 [XML] The Betrayers
+			12011 [XML] Mane Income
+			12012 [XML] [Service/Group] Defeating the Naduka Legion
+			12013 [XML] Business is Booming... er, Burning
+			12014 [XML] This Little Light of Mine
+			12015 [XML] Trollpindemnity
+			12016 [XML] Phavilian's Pride
+			12017 [XML] One-Upping the Asmodian Adversary
+			12018 [XML] Uncanny Undead
+			12019 [XML] [Group] No Exit
+			12020 [XML] Clearing the Garrison
+			12021 [XML] [Daily] Klaw Workers, What Irkers
+			12022 [XML] [Service/Daily/Group] Flavia's Proof
+			12023 [XML] Bad, Bad Marconnut
+			12024 [XML] Glitter and Dust
+			12025 [XML] [Daily] Such Thrilling Treachery
+			12026 [XML] Faith and Protectorate Arms
+			12027 [XML] [Daily] Not Vengeance, Just Tactics
+			12028 [XML] [Service/Daily] A Masquerade of Peace
+			12029 [XML] [Service/Group] Cutting off the Master-at-arms
+			12040 [XML] [Daily] A Vital Assignment
+			12044 [XML] [Daily] Divided Attentions
+			12049 [XML] [Daily/Coin] Siege the Day!
+			12050 [SCRIPT] [Service/Daily] A Stronger Enmity
+			12051 [XML] Scout's Dishonor
+			12052 [XML] Tulin's in Trouble
+			12053 [XML] [Daily/Group] Asmodian Occupation Ender
+			12054 [XML] [Daily/Group] Basilika Artifacts
+			12055 [XML] Behind Enemy Lines
+			12056 [XML] Hascal Rascals
+			12057 [XML] Wrascally Wriggots
+			12058 [XML] Origins
+			12059 [XML] Cutting Down the Competition
+			12060 [XML] Their Deaths are Legion
+			12061 [XML] Platinum Time Lucky
+			12062 [XML] [Service/Weekly] Croaking the Gurriki
+			12063 [XML] [Service/Daily/Group] Hostile Territory
+			12064 [XML] [Service/Weekly] War on Three Fronts
+			12065 [XML] [Service/Daily/Group] Contested
+			12066 [SCRIPT] [Service] Test Subject
+			12067 [XML] Enter the Scolopen
+			20060 [SCRIPT] The Four Hearts
+			20061 [SCRIPT] Powering On
+			20062 [SCRIPT] Watching, Waiting
+			20063 [SCRIPT] The Serpent of Fear
+			20064 [SCRIPT] Nemesis
+			20065 [SCRIPT] Tiamarantan Training
+			22000 [XML] The Future is Oculazen
+			22001 [XML] From Poison to Potion
+			22002 [XML] Toppling the Cavalry
+			22003 [XML] Weakening the Fissure's Influence
+			22004 [SCRIPT] Only As Good As Its Supply Lines
+			22005 [XML] Scaredy Korbats
+			22006 [XML] [Daily] Snuff Out the Light
+			22007 [XML] Operational Efficiency
+			22008 [XML] Rainbow Rocks
+			22009 [XML] Reian Treachery
+			22010 [XML] Twin Cogs
+			22011 [XML] [Service/Group] Tabula Basrasa
+			22012 [XML] Feelin' Hot, Hot, Hot
+			22013 [XML] Bubble and Croak
+			22014 [XML] An Acquired Taste
+			22015 [XML] Pride and Chagrin
+			22016 [XML] [Daily] A Good Basrasa is a Deadrasa
+			22017 [XML] One-Upping the Elyos Enemy
+			22018 [XML] A Ghoulish Acquisition
+			22019 [XML] [Group] Elite Extermination
+			22020 [XML] Digging for Power
+			22021 [XML] Pounding Petras
+			22022 [XML] [Service/Daily/Group] Alpen's Proof
+			22023 [XML] Lumpbrow Brisket
+			22024 [XML] Attack of the Killer Lapilimas
+			22025 [XML] [Daily] Sudden but Inevitable Betrayal
+			22026 [XML] Insignia Instigator
+			22027 [XML] [Daily] Tiamarantian Champion
+			22028 [XML] [Service/Daily] In the Eye of Chaos
+			22029 [XML] [Group] Be Brilla-iant
+			22040 [XML] [Service/Daily] Vital Supplies
+			22044 [XML] [Service/Daily] Respite
+			22049 [XML] [Daily/Coin] Laying Siege
+			22050 [SCRIPT] [Service/Daily] Preemptive Trucebreaking
+			22051 [XML] New Friends Versus Old Traditions
+			22052 [XML] Asmodian Unleashed
+			22053 [XML] [Daily/Group] Ellie Artifaction
+			22054 [XML] [Daily/Group] Down to the Underground
+			22055 [XML] Spy Hunter
+			22056 [XML] Not So Happy Trees
+			22057 [XML] Leowasps on the Loose
+			22058 [XML] Lasi, Come Home!
+			22059 [XML] Don't Cut it All Off
+			22060 [XML] Capability Confirmation
+			22061 [XML] Gifts Spring Non-Eternal
+			22062 [XML] [Service/Weekly] Playing Avenger
+			22063 [XML] [Service/Daily/Group] Show of Strength
+			22064 [XML] [Service/Weekly] Games Daevas Play
+			22065 [XML] [Service/Daily/Group] Hot Zone
+			22066 [SCRIPT] [Service] Combat in the Source
+			22067 [XML] Petrahulk, Smash!
+			24080 [SCRIPT] Conspiracy in Tiamaranta
+			24081 [SCRIPT] Secrets Within the Heart
+			41500 [XML] Geological Studies
+			41501 [XML] Crater Rocks
+			41502 [SCRIPT] Hidden Connections
+			41503 [SCRIPT] Power Cut
+			41504 [SCRIPT] Groundbreaking
+			41505 [XML] Cavalry Must Train Somewhere
+			41506 [SCRIPT] Scouting for Weakness
+			41507 [XML] Keep Up the Assault
+			41508 [XML] Cut Off the Reinforcements
+			41509 [SCRIPT] Try and Catch the Wind
+			41510 [XML] Parts and Pieces
+			41511 [SCRIPT] Sludgers in the Supply Lines
+			41512 [XML] Big Supplies
+			41513 [SCRIPT] It's a Minefield Out There
+			41514 [SCRIPT] [Daily] Barren Prospects
+			41515 [XML] [Daily] Supply and Demand
+			41516 [XML] Live Fire Test
+			41517 [SCRIPT] Tripping the Rift
+			41518 [SCRIPT] Rumors Abound
+			41519 [SCRIPT] Kill the Shepherd, Save the Flock
+			41520 [XML] Bringing the Mountain to Kiriyu
+			41521 [SCRIPT] Into the Whirlwind
+			41522 [XML] Riftsmashing
+			41523 [XML] [Daily] The Ruinous Horse Tracks
+			41524 [XML] [Daily] Kalbas Konundrum
+			41525 [SCRIPT] Volcanic Volunteerism
+			41526 [SCRIPT] Pyro-mania!
+			41527 [SCRIPT] A Nice, Healing Bath
+			41528 [XML] Water, Water Everywhere
+			41529 [SCRIPT] A Brief Investigation
+			41530 [SCRIPT] One Froggy Evening
+			41531 [XML] [Daily] Invasive Species
+			41532 [XML] [Daily] Made of Meat
+			41533 [XML] [Daily] Korbat-ter Up
+			41534 [XML] Fight Against Nature
+			41535 [XML] Treasures of the Past
+			41536 [XML] A Message in Stone
+			41537 [SCRIPT] Stony-Hearted Ancestors
+			41538 [XML] Satra's Being and Nothingness
+			41539 [XML] [Group] Insignia-stentialism
+			41540 [SCRIPT] [Daily] It's All in the Aether
+			41541 [XML] [Daily] You're So Vain
+			41542 [XML] A Froggy Notion
+			41543 [XML] Form and Fortune
+			41544 [XML] For a Lock of Hair
+			41545 [SCRIPT] Unwitting Subjects
+			41546 [SCRIPT] Jumping to Conclusions
+			41547 [XML] [Group] A Merciless Appetite
+			41548 [XML] [Group] Croak and Dagger
+			41549 [XML] Toadily Too Much
+			41550 [XML] [Group] The Price of Doing Business
+			41551 [SCRIPT] An Innocent Plan
+			41552 [SCRIPT] Enos Avenger
+			41553 [SCRIPT] Double-dipper
+			41554 [XML] [Group] The Crystal Collectors
+			41555 [XML] [Daily] Crystal Protection League
+			41556 [SCRIPT] [Group] Secrets of Morale
+			41557 [SCRIPT] Mark of the Traitor
+			41558 [SCRIPT] Punish or Pardon?
+			41567 [XML] The Ribbiting Truth
+			41570 [SCRIPT] A Basket in Waiting
+			41571 [XML] Death in a Red Cloak
+			41572 [XML] The Big, Bad Worg Skin
+			41573 [SCRIPT] A Crystal of Mamut Proportions
+			41574 [XML] Essence of Mamut
+			41575 [XML] A Mamut Ghost Story
+			41576 [SCRIPT] The Case of the Strange Necklace
+			41577 [SCRIPT] The Dangers of Solitude
+			41578 [XML] A Dummy's Murmurs
+			41579 [SCRIPT] Through the Looking Glass
+			41580 [XML] Orph's Adventures in Avad-land
+			41581 [XML] Aether Orph
+			41582 [SCRIPT] Lost Marbles
+			41583 [SCRIPT] Significant Find
+			41584 [XML] What a Sap!
+			41590 [XML] Siege Mentality
+			41591 [XML] Mahok's Folly
+			41592 [XML] The Missing Tools
+			41593 [SCRIPT] Charged Defenses
+			41594 [XML] Gruel or Griffon Omelets?
+			41595 [XML] Fur and Loathing
+			41596 [XML] Lost and Found
+			41597 [XML] Weapon of Choice
+			41598 [SCRIPT] Making Balaur Luck
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="12055" start_npc_ids="205919" end_npc_ids="800221"/>
+	<report_to id="41500" start_npc_ids="205887" end_npc_ids="205935"/>
+	<report_to id="41505" start_npc_ids="205888" end_npc_ids="205934"/>
+	<report_to id="41542" start_npc_ids="205874" end_npc_ids="205969"/>
+	<report_to_many id="41544" start_npc_ids="205969" end_npc_ids="205969">
+		<npc_infos var="0" npc_id="205915" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="205969" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to id="41567" start_npc_ids="205874" end_npc_ids="205969"/>
+	<report_to id="41571" start_npc_ids="205962" end_npc_ids="800175"/>
+	<report_to id="41575" start_npc_ids="205972" end_npc_ids="800180"/>
+	<!-- COLLECTING QUESTS -->
+	<fountain_rewards id="12061" start_npc_ids="730553"/>
+	<fountain_rewards id="22061" start_npc_ids="730554"/>
+	<item_collecting id="12001" start_npc_ids="205918"/>
+	<item_collecting id="12009" start_npc_ids="205920"/>
+	<item_collecting id="12011" start_npc_ids="205906"/>
+	<item_collecting id="12014" start_npc_ids="205903"/>
+	<item_collecting id="12018" start_npc_ids="205922"/>
+	<item_collecting id="12022" start_npc_ids="205921"/>
+	<item_collecting id="12024" start_npc_ids="205967"/>
+	<item_collecting id="12026" start_npc_ids="205840"/>
+	<item_collecting id="12040" start_npc_ids="800042 800043 800044 800045"/>
+	<item_collecting id="12058" start_npc_ids="205902"/>
+	<item_collecting id="12060" start_npc_ids="205921" end_npc_ids="205842"/>
+	<item_collecting id="22001" start_npc_ids="205924"/>
+	<item_collecting id="22008" start_npc_ids="205906"/>
+	<item_collecting id="22010" start_npc_ids="205902"/>
+	<item_collecting id="22012" start_npc_ids="205926"/>
+	<item_collecting id="22014" start_npc_ids="205964"/>
+	<item_collecting id="22018" start_npc_ids="205928"/>
+	<item_collecting id="22022" start_npc_ids="205927"/>
+	<item_collecting id="22023" start_npc_ids="205971"/>
+	<item_collecting id="22026" start_npc_ids="205850"/>
+	<item_collecting id="22040" start_npc_ids="800046 800047 800048 800049"/>
+	<item_collecting id="22058" start_npc_ids="205895"/>
+	<item_collecting id="22059" start_npc_ids="205961"/>
+	<item_collecting id="22060" start_npc_ids="205927" end_npc_ids="205864"/>
+	<item_collecting id="41501" start_npc_ids="205935"/>
+	<item_collecting id="41510" start_npc_ids="205936"/>
+	<item_collecting id="41512" start_npc_ids="205948"/>
+	<item_collecting id="41516" start_npc_ids="205936" start_dialog_id="4762" start_dialog_id2="1011"/>
+	<item_collecting id="41520" start_npc_ids="205962"/>
+	<item_collecting id="41528" start_npc_ids="205964"/>
+	<item_collecting id="41532" start_npc_ids="205964"/>
+	<item_collecting id="41535" start_npc_ids="205944"/>
+	<item_collecting id="41539" start_npc_ids="205943"/>
+	<item_collecting id="41543" start_npc_ids="205969"/>
+	<item_collecting id="41554" start_npc_ids="205972"/>
+	<item_collecting id="41572" start_npc_ids="800175" end_npc_ids="205962"/>
+	<item_collecting id="41574" start_npc_ids="205972"/>
+	<item_collecting id="41580" start_npc_ids="205940"/>
+	<item_collecting id="41584" start_npc_ids="205948"/>
+	<item_collecting id="41592" start_npc_ids="205945"/>
+	<item_collecting id="41594" start_npc_ids="205897"/>
+	<item_collecting id="41596" start_npc_ids="205903"/>
+	<item_collecting id="41597" start_npc_ids="205903"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="12000" start_npc_ids="205844">
+		<monster var="0" end_var="9" npc_ids="218218"/>
+	</monster_hunt>
+	<monster_hunt id="12002" start_npc_ids="205934">
+		<monster var="0" end_var="15" npc_ids="218230"/>
+	</monster_hunt>
+	<monster_hunt id="12003" start_npc_ids="205843">
+		<monster var="0" end_var="13" npc_ids="218223"/>
+	</monster_hunt>
+	<monster_hunt id="12005" start_npc_ids="205933">
+		<monster var="0" end_var="9" npc_ids="218227"/>
+	</monster_hunt>
+	<kill_in_world id="12006" start_npc_ids="205917" end_npc_ids="205917" worlds="600030000" amount="5"/>
+	<monster_hunt id="12008" start_npc_ids="205919">
+		<monster var="0" end_var="8" npc_ids="218260 218261"/>
+		<monster var="1" end_var="6" npc_ids="218262 218263"/>
+	</monster_hunt>
+	<monster_hunt id="12010" start_npc_ids="205938">
+		<monster var="0" end_var="9" npc_ids="218307 218308"/>
+		<monster var="1" end_var="6" npc_ids="218313 218314"/>
+	</monster_hunt>
+	<monster_hunt id="12012" start_npc_ids="205950">
+		<monster var="0" end_var="6" npc_ids="218303 218304 218305 218306"/>
+	</monster_hunt>
+	<monster_hunt id="12013" start_npc_ids="205907">
+		<monster var="0" end_var="7" npc_ids="218346 218347"/>
+		<monster var="1" end_var="7" npc_ids="218350 218351"/>
+	</monster_hunt>
+	<monster_hunt id="12015" start_npc_ids="205941">
+		<monster var="0" end_var="7" npc_ids="218735 218736"/>
+	</monster_hunt>
+	<monster_hunt id="12016" start_npc_ids="205964">
+		<monster var="0" end_var="15" npc_ids="218387 218388 218393 218394 218395 218396 218401 218402"/>
+	</monster_hunt>
+	<monster_hunt id="12017" start_npc_ids="205921">
+		<monster var="0" end_var="9" npc_ids="218748"/>
+	</monster_hunt>
+	<monster_hunt id="12019" start_npc_ids="205943">
+		<monster var="0" end_var="11" npc_ids="218453 218454 218455 218456"/>
+	</monster_hunt>
+	<monster_hunt id="12020" start_npc_ids="205954">
+		<monster var="0" end_var="12" npc_ids="218445 218446"/>
+	</monster_hunt>
+	<monster_hunt id="12021" start_npc_ids="205943">
+		<monster var="0" end_var="10" npc_ids="218750"/>
+	</monster_hunt>
+	<monster_hunt id="12023" start_npc_ids="205974">
+		<monster var="0" end_var="8" npc_ids="218472 218473"/>
+	</monster_hunt>
+	<monster_hunt id="12027" start_npc_ids="205953">
+		<monster var="0" end_var="11" npc_ids="218523 218524 218525 218526 218527 218528 218529 218530"/>
+	</monster_hunt>
+	<kill_in_world id="12025" start_npc_ids="205921" end_npc_ids="205921" worlds="600040000" amount="5"/>
+	<kill_in_world id="12028" start_npc_ids="205957" end_npc_ids="205957" worlds="600040000" amount="5"/>
+	<monster_hunt id="12029" start_npc_ids="205958">
+		<monster var="0" end_var="1" npc_ids="218557"/>
+	</monster_hunt>
+	<monster_hunt id="12044" start_npc_ids="800042 800043 800044 800045">
+		<monster var="0" end_var="11" npc_ids="218224 218274 218275 218356 218357 218438"/>
+	</monster_hunt>
+	<monster_hunt id="12049" start_npc_ids="205917">
+		<monster var="0" end_var="15" npc_ids="259017"/>
+	</monster_hunt>
+	<monster_hunt id="12051" start_npc_ids="205956">
+		<monster var="0" end_var="3" npc_ids="800214"/>
+	</monster_hunt>
+	<monster_hunt id="12052" start_npc_ids="205956">
+		<monster var="0" end_var="1" npc_ids="800215"/>
+	</monster_hunt>
+	<monster_hunt id="12053" start_npc_ids="205844">
+		<monster var="0" end_var="5" npc_ids="259067 259070 259073 259076 259079 259103 259106 259109 259112 259115 259267 259270 259273 259276 259279 259303 259306 259309 259312 259315 259467 259470 259473 259476 259479 259503 259506 259509 259512 259515 259667 259670 259673 259676 259679 259703 259706 259709 259712 259715"/>
+	</monster_hunt>
+	<monster_hunt id="12054" start_npc_ids="205922">
+		<monster var="0" end_var="5" npc_ids="259822 259825 259828 259831 259834 259858 259861 259864 259867 259870 259894 259897 259900 259903 259906"/>
+	</monster_hunt>
+	<monster_hunt id="12056" start_npc_ids="800221" end_npc_ids="205919">
+		<monster var="0" end_var="5" npc_ids="218277"/>
+	</monster_hunt>
+	<monster_hunt id="12057" start_npc_ids="205919">
+		<monster var="0" end_var="10" npc_ids="218264 218265"/>
+	</monster_hunt>
+	<monster_hunt id="12059" start_npc_ids="205937">
+		<monster var="0" end_var="7" npc_ids="218729 218730"/>
+	</monster_hunt>
+	<monster_hunt id="12062" start_npc_ids="205844">
+		<monster var="0" end_var="12" npc_ids="218479 218480 219175 219176 218481 218482 219177"/>
+	</monster_hunt>
+	<monster_hunt id="12063" start_npc_ids="205844">
+		<monster var="0" end_var="10" npc_ids="218484 219230 218485 219178 219231 218488 219234 218489 219235 218486 219232 218487 219233 218490 219236 218491 219237"/>
+	</monster_hunt>
+	<monster_hunt id="12064" start_npc_ids="205843">
+		<monster var="0" end_var="12" npc_ids="218499 218497 218498 218627 218628"/>
+	</monster_hunt>
+	<monster_hunt id="12065" start_npc_ids="205843">
+		<monster var="0" end_var="10" npc_ids="218754 218755 218504 218505 218512 218513"/>
+	</monster_hunt>
+	<monster_hunt id="12067" start_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218726"/>
+	</monster_hunt>
+	<monster_hunt id="22000" start_npc_ids="205865">
+		<monster var="0" end_var="9" npc_ids="218219"/>
+	</monster_hunt>
+	<monster_hunt id="22002" start_npc_ids="205934">
+		<monster var="0" end_var="15" npc_ids="218235"/>
+	</monster_hunt>
+	<monster_hunt id="22003" start_npc_ids="205866">
+		<monster var="0" end_var="13" npc_ids="218727"/>
+	</monster_hunt>
+	<monster_hunt id="22005" start_npc_ids="205933">
+		<monster var="0" end_var="9" npc_ids="218227"/>
+	</monster_hunt>
+	<kill_in_world id="22006" start_npc_ids="205923" end_npc_ids="205923" worlds="600030000" amount="5"/>
+	<monster_hunt id="22007" start_npc_ids="205914" end_npc_ids="205914">
+		<monster var="0" end_var="8" npc_ids="218270 218271"/>
+		<monster var="1" end_var="6" npc_ids="218272 218273"/>
+	</monster_hunt>
+	<monster_hunt id="22009" start_npc_ids="205938" end_npc_ids="205938">
+		<monster var="0" end_var="9" npc_ids="218309 218310"/>
+		<monster var="1" end_var="6" npc_ids="218315 218316"/>
+	</monster_hunt>
+	<monster_hunt id="22011" start_npc_ids="205925" end_npc_ids="205961" end_dialog_id="2375">
+		<monster var="0" end_var="10" npc_ids="218404 218405 218406 218407"/>
+	</monster_hunt>
+	<monster_hunt id="22013" start_npc_ids="205925">
+		<monster var="0" end_var="7" npc_ids="218370 218371"/>
+		<monster var="1" end_var="7" npc_ids="218362 218363"/>
+	</monster_hunt>
+	<monster_hunt id="22015" start_npc_ids="205964">
+		<monster var="0" end_var="15" npc_ids="218389 218390 218391 218392 218397 218398 218399 218400"/>
+	</monster_hunt>
+	<monster_hunt id="22016" start_npc_ids="205940">
+		<monster var="0" end_var="6" npc_ids="218383 218384 218385 218386"/>
+	</monster_hunt>
+	<monster_hunt id="22017" start_npc_ids="205927">
+		<monster var="0" end_var="9" npc_ids="218749"/>
+	</monster_hunt>
+	<monster_hunt id="22019" start_npc_ids="205953">
+		<monster var="0" end_var="11" npc_ids="218449 218450 218451 218452"/>
+	</monster_hunt>
+	<monster_hunt id="22020" start_npc_ids="205944">
+		<monster var="0" end_var="12" npc_ids="218441 218442"/>
+	</monster_hunt>
+	<monster_hunt id="22021" start_npc_ids="205943">
+		<monster var="0" end_var="10" npc_ids="218432"/>
+	</monster_hunt>
+	<monster_hunt id="22024" start_npc_ids="205930">
+		<monster var="0" end_var="8" npc_ids="218629 218630"/>
+	</monster_hunt>
+	<kill_in_world id="22025" start_npc_ids="205927" end_npc_ids="205927" worlds="600040000" amount="5"/>
+	<monster_hunt id="22027" start_npc_ids="205943">
+		<monster var="0" end_var="11" npc_ids="218523 218524 218525 218526 218527 218528 218529 218530"/>
+	</monster_hunt>
+	<kill_in_world id="22028" start_npc_ids="205959" end_npc_ids="205959" worlds="600040000" amount="5"/>
+	<monster_hunt id="22029" start_npc_ids="205960">
+		<monster var="0" end_var="1" npc_ids="218559"/>
+	</monster_hunt>
+	<monster_hunt id="22044" start_npc_ids="800046 800047 800048 800049">
+		<monster var="0" end_var="11" npc_ids="218224 218274 218275 218356 218357 218438"/>
+	</monster_hunt>
+	<monster_hunt id="22049" start_npc_ids="205923">
+		<monster var="0" end_var="15" npc_ids="259017"/>
+	</monster_hunt>
+	<monster_hunt id="22051" start_npc_ids="205961">
+		<monster var="0" end_var="3" npc_ids="800219"/>
+	</monster_hunt>
+	<monster_hunt id="22052" start_npc_ids="205961">
+		<monster var="0" end_var="1" npc_ids="800220"/>
+	</monster_hunt>
+	<monster_hunt id="22053" start_npc_ids="205866">
+		<monster var="0" end_var="5" npc_ids="259066 259069 259072 259075 259078 259102 259105 259108 259111 259114 259266 259269 259272 259275 259278 259302 259305 259308 259311 259314 259466 259469 259472 259475 259478 259502 259505 259508 259511 259514 259666 259669 259672 259675 259678 259702 259705 259708 259711 259714"/>
+	</monster_hunt>
+	<monster_hunt id="22054" start_npc_ids="205928">
+		<monster var="0" end_var="5" npc_ids="259821 259824 259827 259830 259833 259857 259860 259863 259866 259869 259893 259896 259899 259902 259905"/>
+	</monster_hunt>
+	<monster_hunt id="22056" start_npc_ids="205926">
+		<monster var="0" end_var="5" npc_ids="218366 218367"/>
+	</monster_hunt>
+	<monster_hunt id="22057" start_npc_ids="205926">
+		<monster var="0" end_var="7" npc_ids="218354 218355"/>
+	</monster_hunt>
+	<monster_hunt id="22062" start_npc_ids="205866">
+		<monster var="0" end_var="12" npc_ids="218479 218480 219175 219176 218481 218482 219177"/>
+	</monster_hunt>
+	<monster_hunt id="22063" start_npc_ids="205866">
+		<monster var="0" end_var="10" npc_ids="218484 219230 218485 219178 219231 218488 219234 218489 219235 218486 219232 218487 219233 218490 219236 218491 219237"/>
+	</monster_hunt>
+	<monster_hunt id="22064" start_npc_ids="205865">
+		<monster var="0" end_var="12" npc_ids="218499 218497 218498 218627 218628"/>
+	</monster_hunt>
+	<monster_hunt id="22065" start_npc_ids="205865">
+		<monster var="0" end_var="10" npc_ids="218754 218755 218504 218505 218512 218513"/>
+	</monster_hunt>
+	<monster_hunt id="22067" start_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218223"/>
+	</monster_hunt>
+	<monster_hunt id="41507" start_npc_ids="205934">
+		<monster var="0" end_var="12" npc_ids="218228 218233"/>
+	</monster_hunt>
+	<monster_hunt id="41508" start_npc_ids="205934">
+		<monster var="0" end_var="8" npc_ids="218228 218233"/>
+	</monster_hunt>
+	<monster_hunt id="41515" start_npc_ids="205948">
+		<monster var="0" end_var="8" npc_ids="218216"/>
+		<monster var="1" end_var="12" npc_ids="218217"/>
+	</monster_hunt>
+	<monster_hunt id="41522" start_npc_ids="205938">
+		<monster var="0" end_var="5" npc_ids="701262"/>
+	</monster_hunt>
+	<monster_hunt id="41523" start_npc_ids="205962">
+		<monster var="0" end_var="6" npc_ids="218288 218289"/>
+	</monster_hunt>
+	<monster_hunt id="41524" start_npc_ids="205949">
+		<monster var="0" end_var="11" npc_ids="218298"/>
+	</monster_hunt>
+	<monster_hunt id="41531" start_npc_ids="205941">
+		<monster var="0" end_var="10" npc_ids="218338 218339 218342 218343"/>
+	</monster_hunt>
+	<monster_hunt id="41533" start_npc_ids="205939">
+		<monster var="0" end_var="11" npc_ids="218378"/>
+	</monster_hunt>
+	<monster_hunt id="41534" start_npc_ids="205889" end_npc_ids="205916" end_dialog_id="2375">
+		<monster var="0" end_var="7" npc_ids="218429 218430 218431"/>
+	</monster_hunt>
+	<monster_hunt id="41538" start_npc_ids="205943">
+		<monster var="0" end_var="9" npc_ids="218441 218442 218443 218444"/>
+	</monster_hunt>
+	<monster_hunt id="41541" start_npc_ids="205942">
+		<monster var="0" end_var="11" npc_ids="218440"/>
+	</monster_hunt>
+	<monster_hunt id="41547" start_npc_ids="205970">
+		<monster var="0" end_var="1" npc_ids="218493"/>
+	</monster_hunt>
+	<monster_hunt id="41548" start_npc_ids="205915">
+		<monster var="0" end_var="9" npc_ids="218484 219230 218485 219178 219231 218486 219232 218487 219233"/>
+	</monster_hunt>
+	<monster_hunt id="41549" start_npc_ids="205915">
+		<monster var="0" end_var="7" npc_ids="218479 219175 218481 218482"/>
+	</monster_hunt>
+	<monster_hunt id="41550" start_npc_ids="205908" end_npc_ids="205966" end_dialog_id="2375">
+		<monster var="0" end_var="6" npc_ids="218504 218505"/>
+	</monster_hunt>
+	<monster_hunt id="41555" start_npc_ids="205972">
+		<monster var="0" end_var="6" npc_ids="218508 218509 218510 218511"/>
+	</monster_hunt>
+	<monster_hunt id="41578" start_npc_ids="800176">
+		<monster var="0" end_var="10" npc_ids="218282 218283"/>
+	</monster_hunt>
+	<monster_hunt id="41590" start_npc_ids="205955">
+		<monster var="0" end_var="5" npc_ids="218927 218930"/>
+		<monster var="1" end_var="5" npc_ids="218929 218929"/>
+	</monster_hunt>
+	<monster_hunt id="41591" start_npc_ids="205955">
+		<monster var="0" end_var="1" npc_ids="218935"/>
+	</monster_hunt>
+	<monster_hunt id="41595" start_npc_ids="205907">
+		<monster var="0" end_var="9" npc_ids="218344 218345"/>
+		<monster var="1" end_var="9" npc_ids="218358 218359"/>
+	</monster_hunt>
+</quest_scripts>

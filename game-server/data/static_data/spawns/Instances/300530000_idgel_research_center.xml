@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="300530000">
+		<!-- Reian Victim -->
+		<spawn npc_id="233166">
+			<spot x="524.7421" y="424.1982" z="102.6956"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233175">
+			<spot x="535.4353" y="417.0122" z="102.6955" h="43"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233171">
+			<spot x="523.5078" y="420.3720" z="102.6956" h="15"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233174">
+			<spot x="531.9282" y="416.5787" z="102.6955" h="40"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233172">
+			<spot x="525.8267" y="418.1187" z="102.6955" h="13"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233168">
+			<spot x="531.4841" y="423.2100" z="102.6955" h="80"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233169">
+			<spot x="535.2512" y="422.0352" z="102.6955" h="60"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="230376">
+			<spot x="532.4249" y="427.4547" z="102.6955" h="40"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233176">
+			<spot x="538.8953" y="417.8576" z="102.6955" h="46"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233173">
+			<spot x="529.1270" y="418.9507" z="102.6955" h="10"/>
+		</spawn>
+		<!-- Sheban Drakan Bladesman -->
+		<spawn npc_id="230120">
+			<spot x="530.2171" y="430.1697" z="102.6956" h="100"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="230119">
+			<spot x="524.7245" y="427.7437" z="102.6956" h="100"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233164">
+			<spot x="535.2881" y="426.4984" z="102.6955" h="86"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233170">
+			<spot x="539.0958" y="421.9607" z="102.6955" h="60"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233165">
+			<spot x="538.9805" y="426.1727" z="102.6955" h="73"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233167">
+			<spot x="527.7064" y="422.2418" z="102.6955"/>
+		</spawn>
+		<!-- Reian Victim -->
+		<spawn npc_id="233163">
+			<spot x="527.8575" y="425.8498" z="102.6956" h="93"/>
+		</spawn>
+		<!-- Experiment Report -->
+		<spawn npc_id="701892">
+			<spot x="603.3467" y="419.3845" z="97.2293" h="33"/>
+		</spawn>
+		<!-- Sheban Research Supervisor -->
+		<spawn npc_id="233193">
+			<spot x="568.7799" y="466.9885" z="102.2016" h="30"/>
+		</spawn>
+		<!-- Beritra's Army Supplies (Fix spot)-->
+		<spawn npc_id="701935">
+			<spot x="565.3815" y="466.3348" z="102.1700" h="30"/>
+			<spot x="529.1258" y="412.0161" z="103.5484" h="27"/>
+			<spot x="467.6394" y="467.3893" z="102.6373"/>
+			<spot x="674.7299" y="467.7227" z="102.6400" h="60"/>
+		</spawn>
+		<!-- Suspicious Pot -->
+		<spawn npc_id="230105">
+			<spot x="625.6096" y="455.2664" z="102.4416"/>
+			<spot x="550.1896" y="491.0951" z="102.6583"/>
+			<spot x="643.3046" y="482.2900" z="102.6499"/>
+			<spot x="527.5287" y="527.0185" z="109.7162"/>
+			<spot x="591.8686" y="481.7714" z="102.7983"/>
+		</spawn>
+		<!-- Suspicious Pot -->
+		<spawn npc_id="701570">
+			<spot static_id="26" x="575.0269" y="446.2649" z="102.6553"/>
+			<spot static_id="30" x="611.00342" y="422.85864" z="97.18119"/>
+			<spot static_id="28" x="498.39359" y="473.13531" z="102.5532"/>
+			<spot static_id="29" x="516.43921" y="481.86304" z="102.44009"/>
+			<spot static_id="22" x="512.33252" y="513.44977" z="109.67837"/>
+		</spawn>
+		<!-- Burned Reian -->
+		<spawn npc_id="701877">
+			<spot x="643.7368" y="472.7700" z="102.6499" h="90"/>
+		</spawn>
+		<!-- Suspicious Wall -->
+		<spawn npc_id="730725">
+			<spot x="654.9935" y="449.8766" z="103.6085" static_id="33"/>
+			<spot x="503.9666" y="486.1282" z="102.6932" static_id="11"/>
+			<spot x="602.5998" y="509.6013" z="103.6575" static_id="34"/>
+			<spot x="595.5417" y="400.9043" z="97.7189" static_id="35"/>
+		</spawn>
+		<!-- Test Apparatus Storage -->
+		<spawn npc_id="230102">
+			<spot x="503.7219" y="492.6773" z="103.0786" h="90" static_id="18"/>
+			<spot x="595.7595" y="511.9913" z="103.9249" static_id="21"/>
+		</spawn>
+		<!-- Seal Siege Cannon -->
+		<spawn npc_id="700642">
+			<spot x="641.3427" y="502.8264" z="102.5238" h="80"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="730714">
+			<spot x="516.3456" y="471.6506" z="102.6361"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="730713">
+			<spot x="516.3456" y="462.9636" z="102.6361"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="730715">
+			<spot x="516.3456" y="480.3505" z="102.6361"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="206298">
+			<spot x="516.3456" y="454.2453" z="102.6361"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="206296">
+			<spot x="474.7970" y="467.7554" z="102.6373"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="284666">
+			<spot x="478.9899" y="467.4096" z="102.6373"/>
+		</spawn>
+		<!-- Test Apparatus Storage -->
+		<spawn npc_id="230101">
+			<spot x="590.6790" y="399.2412" z="97.7150" h="90" static_id="19"/>
+		</spawn>
+		<!-- Test Apparatus Storage -->
+		<spawn npc_id="230100">
+			<spot x="655.2386" y="444.2306" z="103.9102" h="30" static_id="20"/>
+		</spawn>
+		<!-- Flame Beast Animation -->
+		<spawn npc_id="284642">
+			<spot x="663.5840" y="472.7128" z="102.6400"/>
+			<spot x="657.3707" y="461.5529" z="102.6400"/>
+			<spot x="658.9018" y="467.3401" z="102.6400"/>
+			<spot x="663.5356" y="461.2969" z="102.6400"/>
+			<spot x="670.0380" y="462.9056" z="102.6400"/>
+			<spot x="657.2252" y="473.9533" z="102.6400"/>
+			<spot x="668.1200" y="467.7143" z="102.6400"/>
+			<spot x="670.8380" y="473.8010" z="102.6400"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="206292">
+			<spot x="662.7725" y="467.4198" z="102.6400"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="206295">
+			<spot x="667.7463" y="467.4192" z="102.6400"/>
+		</spawn>
+		<!--   -->
+		<spawn npc_id="284665">
+			<spot x="662.9818" y="467.4192" z="102.6400"/>
+		</spawn>
+	</spawn_map>
+</spawns>

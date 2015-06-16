@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rift_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rift_schedule.xsd">
+	<rift id="210020000">
+		<open schedule="0 0 13 ? * MON,FRI"/>
+		<open schedule="0 0 15 ? * SUN"/>
+		<open schedule="0 0 17 ? * MON,THU,SAT"/>
+	</rift>
+	<rift id="210040000">
+		<open schedule="0 0 1 ? * MON,THU,SAT"/>
+		<open schedule="0 0 15 ? * MON,THU"/>
+		<open schedule="0 0 19 ? * MON,FRI,SUN"/>
+	</rift>
+	<rift id="210050000">
+		<open schedule="0 0 1 ? * SUN" spawn="true"/>
+		<open schedule="0 0 3 ? * SAT" spawn="true"/>
+		<open schedule="0 0 11 ? * MON,THU" spawn="true"/>
+		<open schedule="0 0 13 ? * SAT" spawn="true"/>
+		<open schedule="0 0 16 ? * MON,FRI" spawn="true"/>
+		<open schedule="0 0 19 ? * SUN" spawn="true"/>
+		<open schedule="0 0 23 ? * MON,THU" spawn="true"/>
+		<open schedule="0 0 5,9,15 ? * SUN"/>
+		<open schedule="0 0 5,21 ? * MON"/>
+		<open schedule="0 0 2,7,9,15,19 ? * TUE"/>
+		<open schedule="0 0 2,7,9,15,19 ? * WED"/>
+		<open schedule="0 0 2,5,19,21 ? * THU"/>
+		<open schedule="0 0 5,9,15 ? * FRI"/>
+		<open schedule="0 0 7,16,23 ? * SAT"/>
+	</rift>
+	<rift id="220020000">
+		<open schedule="0 0 13 ? * TUE,THU"/>
+		<open schedule="0 0 15 ? * SAT"/>
+		<open schedule="0 0 17 ? * TUE,FRI,SUN"/>
+	</rift>
+	<rift id="220040000">
+		<open schedule="0 0 1 ? * TUE,FRI,SUN"/>
+		<open schedule="0 0 15 ? * TUE,FRI"/>
+		<open schedule="0 0 19 ? * TUE,THU,SAT"/>
+	</rift>
+	<rift id="220070000">
+		<open schedule="0 0 1 ? * SAT" spawn="true"/>
+		<open schedule="0 0 3 ? * SUN" spawn="true"/>
+		<open schedule="0 0 11 ? * TUE,FRI" spawn="true"/>
+		<open schedule="0 0 13 ? * SUN" spawn="true"/>
+		<open schedule="0 0 16 ? * TUE,THU" spawn="true"/>
+		<open schedule="0 0 19 ? * SAT" spawn="true"/>
+		<open schedule="0 0 23 ? * TUE,FRI" spawn="true"/>
+		<open schedule="0 0 7,16,23 ? * SUN"/>
+		<open schedule="0 0 2,7,9,15,19 ? * MON"/>
+		<open schedule="0 0 5,21 ? * TUE"/>
+		<open schedule="0 0 5,11,16,21,23 ? * WED"/>
+		<open schedule="0 0 7,9,15 ? * THU"/>
+		<open schedule="0 0 2,7,19 ? * FRI"/>
+		<open schedule="0 0 5,9,15 ? * SAT"/>
+	</rift>
+</rift_schedule>

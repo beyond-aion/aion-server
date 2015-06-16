@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+		[BEGIN] SUMMARY
+			39700 [XML] Introducing The Merry and Green
+			39701 [XML] [Daily] A Foreign Idium
+			39702 [XML] [Daily] The Rava Rave
+			39703 [XML] [Daily] Oodles of Skurvs
+			39704 [TODO] [Daily] The Pirate Farm
+			39705 [TODO] [Daily] Felling the Kobolds
+			39706 [XML] [Daily] Logging Sabotage
+			39707 [XML] [Daily] As the Worm Turns
+			39708 [XML] [Daily] This Task Stinks
+			39709 [XML] [Daily] Everybody Must Get Stones
+			39710 [XML] [Daily] Slime Time
+			39711 [XML] [Daily] The Ksellid Ksituation
+			39712 [XML] [Daily] All-Too-Potent Potables
+			39713 [TODO] [Daily] Fresh Powder
+			39714 [TODO] [Daily] Trained Investigator
+			39715 [XML] [Daily] Luluba Lullaby
+			39717 [TODO] [Daily] A Conspiracy Unfolds
+			39718 [TODO] [Daily] Vile Waters
+			39719 [TODO] [Daily] Trainspotting
+			49700 [TODO] Meet the Merry and Green
+			49701 [XML] [Daily] Blowing the Whistle
+			49702 [XML] [Daily] Invasive Species
+			49703 [TODO] [Daily] The Plantation Situation
+			49704 [TODO] [Daily] Down on the Farm
+			49705 [TODO] [Daily] Cutting Down Loggers
+			49706 [XML] [Daily] The Monkeywrench Gang
+			49707 [XML] [Daily] You're the Early Bird
+			49708 [XML] [Daily] Curbside Pickup
+			49709 [XML] [Daily] Stones from the Lowest Bidder
+			49710 [XML] [Daily] He Slimed Me, Daeva
+			49711 [XML] [Daily] The Captive Ksellids
+			49712 [XML] [Daily] Don't Drink the Water
+			49713 [TODO] [Daily] Purifying the Swamp
+			49714 [TODO] [Daily] A Rail Mystery
+			49715 [XML] [Daily] Lulu of a Problem
+			49717 [TODO] [Daily] Executive on the Lam
+			49718 [TODO] [Daily] Testing the Waters
+			49719 [TODO] [Daily] The Missing Agent
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="39700" start_npc_ids="800930" end_npc_ids="800945"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="39701" start_npc_ids="800931 800932" />
+	<item_collecting id="39708" start_npc_ids="800931 800932" />
+	<item_collecting id="39709" start_npc_ids="800936 800937 800938" />
+	<item_collecting id="49701" start_npc_ids="800934 800935" />
+	<item_collecting id="49708" start_npc_ids="800934 800935" />
+	<item_collecting id="49709" start_npc_ids="800936 800937 800938" />
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="39702" start_npc_ids="800931 800932">
+		<monster var="0" end_var="6" npc_ids="701568" />
+	</monster_hunt>
+	<monster_hunt id="39703" start_npc_ids="800931 800932">
+		<monster var="0" end_var="7" npc_ids="801675" />
+	</monster_hunt>
+	<monster_hunt id="39706" start_npc_ids="800931 800932">
+		<monster var="0" end_var="10" npc_ids="230349 233011" />
+	</monster_hunt>
+	<monster_hunt id="39707" start_npc_ids="800931 800932">
+		<monster var="0" end_var="10" npc_ids="230318" />
+	</monster_hunt>
+	<monster_hunt id="39710" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="230510" />
+	</monster_hunt>
+	<monster_hunt id="39711" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="231271 231272" />
+	</monster_hunt>
+	<monster_hunt id="39712" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="6" npc_ids="701676" />
+	</monster_hunt>
+	<monster_hunt id="39715" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
+	</monster_hunt>
+	<monster_hunt id="49702" start_npc_ids="800934 800935">
+		<monster var="0" end_var="6" npc_ids="701568" />
+	</monster_hunt>
+	<monster_hunt id="49706" start_npc_ids="800934 800935">
+		<monster var="0" end_var="10" npc_ids="230359 233010" />
+	</monster_hunt>
+	<monster_hunt id="49707" start_npc_ids="800934 800935">
+		<monster var="0" end_var="10" npc_ids="230269" />
+	</monster_hunt>
+	<monster_hunt id="49710" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="230510" />
+	</monster_hunt>
+	<monster_hunt id="49711" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="231271 231272" />
+	</monster_hunt>
+	<monster_hunt id="49712" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="6" npc_ids="701676" />
+	</monster_hunt>
+	<monster_hunt id="49715" start_npc_ids="800936 800937 800938">
+		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+</quest_scripts>

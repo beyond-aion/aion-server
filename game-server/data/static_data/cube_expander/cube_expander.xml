@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cube_expander xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cube_expander.xsd">
+	<!-- Poeta -->
+	<cube_npc id="798008">
+		<expand price="1000" level="1"/>
+	</cube_npc>
+	<!-- Sanctum -->
+	<cube_npc id="798011">
+		<expand price="12000" level="2"/>
+		<expand price="80000" level="3"/>
+		<expand price="180000" level="4"/>
+	</cube_npc>
+	<cube_npc id="798012">
+		<expand price="12000" level="2"/>
+		<expand price="80000" level="3"/>
+		<expand price="180000" level="4"/>
+	</cube_npc>
+	<!-- Ishalgen -->
+	<cube_npc id="798037">
+		<expand price="1000" level="1"/>
+	</cube_npc>
+	<!-- Pandaemonium -->
+	<cube_npc id="798058">
+		<expand price="1000" level="1"/>
+		<expand price="12000" level="2"/>
+		<expand price="80000" level="3"/>
+		<expand price="180000" level="4"/>
+	</cube_npc>
+	<cube_npc id="798059">
+		<expand price="1000" level="1"/>
+		<expand price="12000" level="2"/>
+		<expand price="80000" level="3"/>
+		<expand price="180000" level="4"/>
+	</cube_npc>
+	<!-- Abyss, Tigraki Island -->
+	<cube_npc id="279022">
+		<expand price="360000" level="5"/>
+	</cube_npc>
+</cube_expander>

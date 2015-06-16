@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<curing_objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="curing_objects.xsd">
+	<!-- Pernon -->
+	<curing_object map_id="710010000" x="1765.6873" y="2601.5105" z="231.19335" range="10.3"/>
+	<curing_object map_id="710010000" x="2169.9587" y="894.63275" z="77.3505" range="10.3"/>
+	<curing_object map_id="710010000" x="873.3462" y="906.87054" z="134.6323" range="11.2"/>
+	<curing_object map_id="710010000" x="1150.5974" y="1553.1467" z="94.22726" range="16.5"/>
+	<curing_object map_id="710010000" x="1067.3231" y="1451.6561" z="95.149492" range="16.5"/>
+	<!-- Oriel -->
+	<curing_object map_id="700010000" x="2519.195" y="1616.9238" z="180.38708" range="10.3"/>
+	<curing_object map_id="700010000" x="708.17175" y="1095.4746" z="94.218895" range="10.3"/>
+	<curing_object map_id="700010000" x="685.51056" y="2225.5466" z="159.19759" range="11.2"/>
+	<curing_object map_id="700010000" x="1214.8632" y="1910.168" z="95.05228" range="16.5"/>
+	<curing_object map_id="700010000" x="1206.8019" y="1778.9161" z="93.82584" range="16.5"/>
+</curing_objects>

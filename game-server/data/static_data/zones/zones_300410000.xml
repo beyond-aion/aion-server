@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300410000" name="EULOS_CAPTAINS_CABIN_300410000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="970.5719" top="1070.5719">
+            <point x="759.2719" y="199.00795"/>
+            <point x="797.7793" y="192.26016"/>
+            <point x="802.0682" y="212.6792"/>
+            <point x="763.58746" y="221.35068"/>
+        </points>
+    </zone>
+    <zone mapid="300410000" name="EULOS_DECK_300410000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="982.2132" top="1082.2133">
+            <point x="650.4106" y="208.33034"/>
+            <point x="669.175" y="268.50583"/>
+            <point x="820.5843" y="230.32999"/>
+            <point x="805.0551" y="175.33089"/>
+        </points>
+    </zone>
+    <zone mapid="300410000" name="SADONICS_CAPTAINS_CABIN_300410000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="938.69916" top="1038.6992">
+            <point x="779.69653" y="735.9837"/>
+            <point x="777.5166" y="750.9242"/>
+            <point x="809.4855" y="760.00665"/>
+            <point x="812.25745" y="737.518"/>
+        </points>
+    </zone>
+    <zone mapid="300410000" name="SADONICS_DECK_300410000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="954.5797" top="1054.5797">
+            <point x="670.503" y="691.9687"/>
+            <point x="665.3372" y="766.58655"/>
+            <point x="823.65265" y="783.74603"/>
+            <point x="829.42914" y="709.9154"/>
+        </points>
+    </zone>
+</zones>

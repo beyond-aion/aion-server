@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+<!--
+  [BEGIN] SUMMARY
+			30402 [SCRIPT] [Alliance] The Rescue
+			30408 [XML] [Alliance] Dreams of Flight
+			30409 [SCRIPT] Stories of the Past
+			30410 [SCRIPT] [Alliance] Dreams to Reality
+			30412 [XML] [Daily/Alliance/Coin] Housecleaning
+			30420 [XML] [Daily/Alliance] Golem Gutting
+			30452 [SCRIPT] [Alliance] Undoing Spellweaver
+			30458 [XML] [Alliance] Love Is Stupid?
+			30459 [SCRIPT] [Alliance] Master of the Ring
+			30461 [SCRIPT] Ring Around the Shugo
+			30463 [XML] [Daily/Alliance/Coin] Housewarming
+			30471 [XML] [Daily/Alliance] Struggle for Recovery
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="30408" start_npc_ids="799539"/>
+	<item_collecting id="30458" start_npc_ids="799546"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="30412" start_npc_ids="799546"/>
+	<!-- [Alliance] Soul Gutting -->
+	<monster_hunt id="30420" start_npc_ids="205768"/>
+	<monster_hunt id="30463" start_npc_ids="799546"/>
+	<monster_hunt id="30471" start_npc_ids="205797"/>
+</quest_scripts>

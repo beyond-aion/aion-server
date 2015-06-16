@@ -1,0 +1,1 @@
+ALTER TABLE `mail` MODIFY COLUMN `sender_name`  varchar(20);

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300260000" name="CANYONGUARDS_RAVINE_300260000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="362.50168" y="673.62726"/>
+            <point x="336.96106" y="752.9937"/>
+            <point x="314.72604" y="757.5815"/>
+            <point x="336.96222" y="794.2849"/>
+            <point x="268.12555" y="835.3206"/>
+            <point x="228.09612" y="689.69586"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="ELEMENTIS_CAVE_300260000" area_type="POLYGON" zone_type="SUB" priority="1" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="50.443066" y="432.42288"/>
+            <point x="292.7077" y="427.4065"/>
+            <point x="347.2943" y="540.7764"/>
+            <point x="364.75336" y="641.22485"/>
+            <point x="358.68845" y="678.07574"/>
+            <point x="49.1325" y="714.8329"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="ELEMENTIS_FOREST_300260000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="26.21" y="331.03"/>
+            <point x="829.2807" y="330.9452"/>
+            <point x="831.80676" y="1001.53674"/>
+            <point x="24.58966" y="999.1803"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="JURDINS_DOMAIN_300260000" area_type="POLYGON" zone_type="SUB" priority="4" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="460.27487" y="729.9188"/>
+            <point x="555.1305" y="739.8758"/>
+            <point x="486.35934" y="908.1761"/>
+            <point x="465.6047" y="887.6878"/>
+            <point x="448.80472" y="894.103"/>
+            <point x="415.04266" y="878.09265"/>
+            <point x="415.41794" y="855.95233"/>
+            <point x="406.78696" y="806.41797"/>
+            <point x="360.84366" y="777.4404"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="LAKE_ELEMENTIS_300260000" area_type="POLYGON" zone_type="SUB" priority="6" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="510.46036" y="397.46198"/>
+            <point x="634.4951" y="387.7312"/>
+            <point x="656.2958" y="539.76874"/>
+            <point x="557.5966" y="592.0778"/>
+            <point x="474.56033" y="514.9752"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="MACORI_VILLAGE_300260000" area_type="POLYGON" zone_type="SUB" priority="7" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="553.7141" y="739.7803"/>
+            <point x="816.15283" y="773.2016"/>
+            <point x="786.97784" y="977.63654"/>
+            <point x="484.4723" y="907.8836"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="RAVINE_TRAIL_300260000" area_type="POLYGON" zone_type="SUB" priority="3" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="362.52298" y="776.0061"/>
+            <point x="408.58154" y="805.6463"/>
+            <point x="417.3622" y="856.9074"/>
+            <point x="416.67365" y="876.77374"/>
+            <point x="449.85162" y="891.8387"/>
+            <point x="466.5997" y="885.9445"/>
+            <point x="488.9383" y="908.19183"/>
+            <point x="443.18213" y="976.7922"/>
+            <point x="276.7701" y="827.55255"/>
+        </points>
+    </zone>
+    <zone mapid="300260000" name="SPIRIT_GULLY_300260000" area_type="POLYGON" zone_type="SUB" priority="9" flags="0">
+        <points bottom="100.0" top="400.0">
+            <point x="297.4587" y="345.19308"/>
+            <point x="758.79504" y="345.7975"/>
+            <point x="814.5178" y="776.9873"/>
+            <point x="305.70273" y="803.6081"/>
+            <point x="286.4695" y="427.79657"/>
+        </points>
+    </zone>
+</zones>

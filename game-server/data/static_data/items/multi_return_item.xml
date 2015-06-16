@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<multi_return_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="multi_return_item.xsd">
+	<return_item id="1">
+		<return_loc index="0" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+		<return_loc index="1" worldid="210030000" desc="Verteron" alias="LF1A_Return_Area_1"/>
+		<return_loc index="2" worldid="210020000" desc="Eltnen" alias="LF2_Return_Area"/>
+		<return_loc index="3" worldid="210040000" desc="Heiron" alias="LF3_Return_Area_1"/>
+		<return_loc index="4" worldid="210060000" desc="Aetheric Field Observatory Village" alias="LF2A_Return_Area"/>
+	</return_item>
+	<return_item id="2">
+		<return_loc index="0" worldid="400010000" desc="Teminon Fortress" alias="Ab1_Light_Return_Alias"/>
+		<return_loc index="1" worldid="210050000" desc="Inggison Illusion Fortress" alias="LF4_Return_Area_1"/>
+		<return_loc index="2" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
+		<return_loc index="3" worldid="600050000" desc="Kaisinel's Beacon" alias="LDF5a_L_return_Area_1"/>
+		<return_loc index="4" worldid="600060000" desc="Pandarunerk's Delve" alias="LDF5b_return_Area_1"/>
+		<return_loc index="5" worldid="600070000" desc="Segarunerk's Bazaar" alias="LDF5_UNDER_return_Area_1"/>
+		<return_loc index="6" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+		<return_loc index="7" worldid="210030000" desc="Verteron" alias="LF1A_Return_Area_1"/>
+		<return_loc index="8" worldid="210020000" desc="Eltnen" alias="LF2_Return_Area"/>
+		<return_loc index="9" worldid="210040000" desc="Heiron" alias="LF3_Return_Area_1"/>
+		<return_loc index="10" worldid="210060000" desc="Aetheric Field Observatory Village" alias="LF2A_Return_Area"/>
+	</return_item>
+	<return_item id="3">
+		<return_loc index="0" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+		<return_loc index="1" worldid="210030000" desc="Verteron" alias="LF1A_Return_Area_1"/>
+		<return_loc index="2" worldid="210020000" desc="Eltnen" alias="LF2_Return_Area"/>
+		<return_loc index="3" worldid="210040000" desc="Heiron" alias="LF3_Return_Area_1"/>
+		<return_loc index="4" worldid="210060000" desc="Aetheric Field Observatory Village" alias="LF2A_Return_Area"/>
+		<return_loc index="5" worldid="120010000" desc="Pandaemonium" alias="DC1_Return_Area_1"/>
+		<return_loc index="6" worldid="220030000" desc="Altgard" alias="DF1A_Return_Area"/>
+		<return_loc index="7" worldid="220020000" desc="Morheim" alias="DF2_Return_Area_1"/>
+		<return_loc index="8" worldid="220040000" desc="Beluslan" alias="DF3_Return_Area_1"/>
+		<return_loc index="9" worldid="220050000" desc="Baltasar Hill Village" alias="DF2A_Return_Area"/>
+	</return_item>
+	<return_item id="4">
+		<return_loc index="0" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+	</return_item>
+	<return_item id="5">
+		<return_loc index="0" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+		<return_loc index="1" worldid="210030000" desc="Verteron" alias="LF1A_Return_Area_1"/>
+		<return_loc index="2" worldid="210020000" desc="Eltnen" alias="LF2_Return_Area"/>
+		<return_loc index="3" worldid="210040000" desc="Heiron" alias="LF3_Return_Area_1"/>
+		<return_loc index="4" worldid="210060000" desc="Aetheric Field Observatory Village" alias="LF2A_Return_Area"/>
+		<return_loc index="5" worldid="120010000" desc="Pandaemonium" alias="DC1_Return_Area_1"/>
+		<return_loc index="6" worldid="220030000" desc="Altgard" alias="DF1A_Return_Area"/>
+		<return_loc index="7" worldid="220020000" desc="Morheim" alias="DF2_Return_Area_1"/>
+		<return_loc index="8" worldid="220040000" desc="Beluslan" alias="DF3_Return_Area_1"/>
+		<return_loc index="9" worldid="220050000" desc="Baltasar Hill Village" alias="DF2A_Return_Area"/>
+		<return_loc index="10" worldid="400010000" desc="Teminon Fortress" alias="Ab1_Light_Return_Alias"/>
+		<return_loc index="11" worldid="210050000" desc="Inggison Illusion Fortress" alias="LF4_Return_Area_1"/>
+		<return_loc index="12" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
+		<return_loc index="13" worldid="600050000" desc="Kaisinel's Beacon" alias="LDF5a_L_return_Area_1"/>
+		<return_loc index="14" worldid="600060000" desc="Pandarunerk's Delve" alias="LDF5b_return_Area_1"/>
+		<return_loc index="15" worldid="600070000" desc="Segarunerk's Bazaar" alias="LDF5_UNDER_return_Area_1"/>
+		<return_loc index="16" worldid="600070000" desc="Segarunerk's Bazaar" alias="LDF5_UNDER_return_Area_2"/>
+		<return_loc index="17" worldid="600060000" desc="Pandarunerk" alias="LDF5b_return_Area_2"/>
+		<return_loc index="18" worldid="600050000" desc="Danuar Spire" alias="LDF5a_D_return_Area_1"/>
+		<return_loc index="19" worldid="700010000" desc="Elian" alias="HLFP_Binding_Alias_1"/>
+	</return_item>
+	<return_item id="6">
+		<return_loc index="0" worldid="110010000" desc="Sanctum" alias="LC1_Return_Area_1"/>
+		<return_loc index="1" worldid="210030000" desc="Verteron" alias="LF1A_Return_Area_1"/>
+		<return_loc index="2" worldid="210020000" desc="Eltnen" alias="LF2_Return_Area"/>
+		<return_loc index="3" worldid="210040000" desc="Heiron" alias="LF3_Return_Area_1"/>
+		<return_loc index="4" worldid="210060000" desc="Aetheric Field Observatory Village" alias="LF2A_Return_Area"/>
+		<return_loc index="5" worldid="110070000" desc="Kaisinel Academy" alias="Arena_L_Lobby_ReturnArea"/>
+		<return_loc index="6" worldid="700010000" desc="Elian" alias="HLFP_Binding_Alias_1"/>
+		<return_loc index="7" worldid="400010000" desc="Teminon Fortress" alias="Ab1_Light_Return_Alias"/>
+		<return_loc index="8" worldid="210050000" desc="Inggison Illusion Fortress" alias="LF4_Return_Area_1"/>
+		<return_loc index="9" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
+		<return_loc index="10" worldid="600030000" desc="Rancora Fortress" alias="LDF4b_Return_Area_1"/>
+		<return_loc index="11" worldid="600050000" desc="Kaisinel's Beacon" alias="LDF5a_L_return_Area_1"/>
+		<return_loc index="12" worldid="600060000" desc="Pandarunerk's Delve" alias="LDF5b_return_Area_1"/>
+		<return_loc index="13" worldid="600100000" desc="Lumewillow Glade" alias="LDF4_Advance_Return_Area_L"/>
+	</return_item>
+	<return_item id="7">
+		<return_loc index="0" worldid="120010000" desc="Pandaemonium" alias="DC1_Return_Area_1"/>
+		<return_loc index="1" worldid="220030000" desc="Altgard" alias="DF1A_Return_Area"/>
+		<return_loc index="2" worldid="220020000" desc="Morheim" alias="DF2_Return_Area_1"/>
+		<return_loc index="3" worldid="220040000" desc="Beluslan" alias="DF3_Return_Area_1"/>
+		<return_loc index="4" worldid="220050000" desc="Baltasar Hill Village" alias="DF2A_Return_Area"/>
+		<return_loc index="5" worldid="120080000" desc="Marchutan Priory" alias="Arena_D_Lobby_ReturnArea"/>
+		<return_loc index="6" worldid="710010000" desc="Pernon" alias="HDFP_Binding_Alias_1"/>
+		<return_loc index="7" worldid="400010000" desc="Primum Fortress" alias="Ab1_Dark_Return_Alias"/>
+		<return_loc index="8" worldid="220070000" desc="Gelkmaros Fortress" alias="DF4_Return_Area_1"/>
+		<return_loc index="9" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
+		<return_loc index="10" worldid="600030000" desc="Rancora Fortress" alias="LDF4b_Return_Area_1"/>
+		<return_loc index="11" worldid="600050000" desc="Danuar Spire" alias="LDF5a_D_return_Area_1"/>
+		<return_loc index="12" worldid="600060000" desc="Pandarunerk" alias="LDF5b_return_Area_2"/>
+		<return_loc index="13" worldid="600100000" desc="Pinnacle Cataract" alias="LDF4_Advance_Return_Area_D"/>
+	</return_item>
+</multi_return_item>

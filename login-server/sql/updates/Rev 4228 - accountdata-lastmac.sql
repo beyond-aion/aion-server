@@ -1,0 +1,1 @@
+ALTER TABLE `account_data` ADD COLUMN `last_mac` varchar(20) NOT NULL DEFAULT 'xx-xx-xx-xx-xx-xx' AFTER `last_ip`;

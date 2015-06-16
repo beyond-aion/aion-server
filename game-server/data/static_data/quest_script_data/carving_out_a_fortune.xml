@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			2096 [SCRIPT] Twice as Bright
+			2097 [SCRIPT] Spirit Blade
+			2098 [SCRIPT] But What we Make
+			2099 [SCRIPT] To Face the Future
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

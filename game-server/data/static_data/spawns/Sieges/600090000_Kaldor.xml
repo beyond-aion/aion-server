@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="600090000">
+		<siege_spawn siege_id="7011">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- Squad Prime Knight(LDF5_Fortress_7011_Guard_Kn_MistOff_D_4) -->
+					<spawn npc_id="251923" respawn_time="295">
+						<spot x="661.77936" y="242.28836" z="141.75000" h="45"/>
+						<spot x="716.11707" y="236.21933" z="141.95473" h="60"/>
+						<spot x="866.71039" y="236.22334" z="141.94272"/>
+						<spot x="908.76324" y="251.64159" z="142.00986"/>
+						<spot x="667.96692" y="350.30038" z="142.26671" h="60"/>
+						<spot x="907.55176" y="355.92920" z="142.04257" h="15"/>
+						<spot x="716.74554" y="399.42947" z="142.32840" h="30"/>
+						<spot x="910.14685" y="314.60156" z="142.55579"/>
+					</spawn>
+					<!-- Squad Prime Soldier(LDF5_Fortress_7011_Guard_Fi_E_MistOff_D_4) -->
+					<spawn npc_id="252267" respawn_time="295">
+						<spot x="788.85931" y="349.15533" z="143.21539" h="30"/>
+						<spot x="784.49316" y="349.15533" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Squad Prime Ranger(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOff_D_4) -->
+					<spawn npc_id="251928" respawn_time="295">
+						<spot x="784.32812" y="345.75262" z="153.70628" h="30"/>
+						<spot x="788.91486" y="345.74042" z="153.70628" h="30"/>
+					</spawn>
+ 					<!-- Squad Prime Ranger(LDF5_Fortress_7011_Guard_Ra_MistOff_D_4) -->
+					<spawn npc_id="251938" respawn_time="295">
+						<spot x="820.06696" y="410.06512" z="142.37500" h="30"/>
+						<spot x="823.23169" y="413.47601" z="142.46725" h="30"/>
+						<spot x="750.81036" y="412.12500" z="141.99219" h="30"/>
+						<spot x="825.8337" y="410.1206" z="142.375" h="30" />
+						<spot x="753.4124" y="409.5236" z="142.0871" h="30" />
+						<spot x="747.6456" y="409.4681" z="142.0581" h="30" />
+					</spawn>
+					<!-- Squad Prime Mender(LDF5_Fortress_7011_Guard_Pr_MistOff_D_4) -->
+					<spawn npc_id="251948" respawn_time="295">
+						<spot x="787.21545" y="364.82339" z="141.94272" h="30"/>
+					</spawn>
+					<!-- Squad Prime Sorcerer(LDF5_Fortress_7011_Guard_Wi_MistOff_D_4) -->
+					<spawn npc_id="251953" respawn_time="295">
+						<spot x="902.90405" y="248.20709" z="142.33260"/>
+						<spot x="672.64862" y="345.99207" z="142.24551" h="60"/>
+						<spot x="786.81226" y="346.10339" z="143.21539" h="30"/>
+						<spot x="665.55316" y="238.50322" z="141.84708" h="60"/>
+						<spot x="716.21887" y="240.10814" z="141.99181" h="60"/>
+						<spot x="789.20801" y="367.70819" z="141.94272" h="15"/>
+						<spot x="904.42010" y="310.99350" z="142.61060"/>
+						<spot x="900.51794" y="355.70853" z="142.39935" h="15"/>
+						<spot x="866.81079" y="240.88737" z="141.94272"/>
+						<spot x="705.20709" y="293.45618" z="141.94272" h="60"/>
+						<spot x="715.55731" y="393.49603" z="142.16432" h="30"/>
+					</spawn>
+					<!-- Squad Prime Warlock(LDF5_Fortress_7011_Guard_El_MistOff_D_4) -->
+					<spawn npc_id="251958" respawn_time="295">
+						<spot x="785.16260" y="367.71588" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Squad Prime Infantry(LDF5_Fortress_7011_Guard_Gu_Nomove_MistOff_D_4) -->
+					<spawn npc_id="251933" respawn_time="295">
+						<spot x="726.65167" y="257.64954" z="150.94499" h="60"/>
+						<spot x="726.63934" y="254.83972" z="150.94499" h="60"/>
+						<spot x="838.20007" y="309.75491" z="153.73790"/>
+						<spot x="838.16534" y="257.63177" z="153.74861"/>
+						<spot x="838.14478" y="254.95366" z="153.77245"/>
+						<spot x="838.17950" y="307.07681" z="153.76024"/>
+						<spot x="726.44891" y="306.78067" z="151.35907" h="60"/>
+						<spot x="726.47675" y="309.49591" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Asmodian Squad Prime Nightblade(LDF5_Fortress_7011_Guard_As_Hi_MistOn_D_4) -->
+					<spawn npc_id="252103" respawn_time="295">
+						<spot x="768.15619" y="398.84683" z="142.31865" h="90"/>
+						<spot x="802.01611" y="398.56271" z="141.94272" h="90"/>
+						<spot x="806.56909" y="398.56802" z="141.94272" h="90"/>
+						<spot x="772.72778" y="398.85214" z="142.17332" h="90"/>
+						<spot x="863.22131" y="336.28964" z="141.94272"/>
+					</spawn>
+					<!-- Squad Prime Soldier(LDF5_Fortress_7011_Guard_Fi_E_MistOff_D_4) -->
+					<spawn npc_id="252267" respawn_time="295">
+						<spot x="910.29523" y="307.84070" z="142.22881"/>
+						<spot x="710.56195" y="396.25778" z="142.21487" h="45"/>
+						<spot x="666.22528" y="343.76501" z="142.23592" h="60"/>
+						<spot x="660.59857" y="236.16972" z="141.75000" h="60"/>
+						<spot x="902.46985" y="362.61896" z="141.97958" h="15"/>
+						<spot x="908.77448" y="244.68440" z="141.82773"/>
+					</spawn>
+					
+ 					<!-- Borghildr(LDF5_Fortress_D_L_warehouse) -->
+  					<spawn npc_id="802406" respawn_time="295">
+    					<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Hildia(LDF5_Fortress_D_L_Apseller_good) -->
+  					<spawn npc_id="802408" respawn_time="295">
+    					<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Ingvud(LDF5_Fortress_D_L_Exchange_v30abyss_35) -->
+  					<spawn npc_id="802410" respawn_time="295">
+    					<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Thamril(LDF5_Fortress_D_L_component) -->
+  					<spawn npc_id="802412" respawn_time="295">
+    					<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Winoa(LDF5_Fortress_D_L_exchange) -->
+  					<spawn npc_id="802414" respawn_time="295">
+    					<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Vifo(LDF5_Fortress_D_Seller_PvPCoin_matter) -->
+  					<spawn npc_id="802416" respawn_time="295">
+    					<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gramul(LDF5_Fortress_D_warehouse) -->
+  					<spawn npc_id="802418" respawn_time="295">
+    					<spot x="754.054016" y="277.743774" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Faftvin(LDF5_Fortress_D_Holy_Recharger) -->
+  					<spawn npc_id="802420" respawn_time="295">
+    					<spot x="754.067078" y="286.740662" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Renga(LDF5_Fortress_D_Spell_Recharger) -->
+  					<spawn npc_id="802422" respawn_time="295">
+    					<spot x="754.061340" y="283.741882" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Bergla(LDF5_Fortress_D_master_stigma) -->
+  					<spawn npc_id="802424" respawn_time="295">
+    					<spot x="754.059570" y="289.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Dungvar(LDF5_Fortress_D_seller_food) -->
+  					<spawn npc_id="802426" respawn_time="295">
+    					<spot x="754.070068" y="280.738647" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Arunerk(LDF5_Fortress_D_Exchange_v30abyss_29) -->
+  					<spawn npc_id="804610" respawn_time="295">
+    					<spot x="754.059570" y="292.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Lihum(LDF5_Fortress_D_L_Material_PvE) -->
+  					<spawn npc_id="804617" respawn_time="295">
+    					<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Kanita(LDF5_Fortress_D_L_Material_PvP) -->
+  					<spawn npc_id="804618" respawn_time="295">
+    					<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
+  					</spawn>
+					<!-- Kilmorn(LDF5_Fortress_D_mercenary) -->
+  					<spawn npc_id="802436" respawn_time="295">
+    					<spot x="754.318298" y="281.967621" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Ildina(ldf5_fortress_7011_DynTeleporter_Da) -->
+					<spawn npc_id="802450" respawn_time="295">
+						<spot x="754.20966" y="273.4355" z="155.6706" h="6" />
+					</spawn>
+ 					<!-- LDF5_Fortress_7011_Race_Check_Asmo -->
+					<spawn npc_id="802457">
+						<spot x="754.017" y="270.716" z="155.67061"/>
+					</spawn>
+  					<!-- LDF5_Fortress_7011_MistOn_Check -->
+					<spawn npc_id="802459">
+						<spot x="754.01056" y="268.1861" z="155.6706"/>
+					</spawn>
+					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_D_C1) -->
+  					<spawn npc_id="802473" respawn_time="295">
+						<spot x="770.4316" y="248.5618" z="156.9872" h="61"/>
+					</spawn>
+  					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_D_C2) -->
+  					<spawn npc_id="802475" respawn_time="295">
+						<spot x="802.7849" y="248.5716" z="156.9872"/>
+					</spawn>
+  					<!-- Teleport Device(ldf5_fortress_7011_Teleporter_Off_Da -->
+  					<spawn npc_id="804487" respawn_time="295">
+    					<spot x="753.824585" y="274.743774" z="156.987228" static_id="225"/>
+  					</spawn>
+					<!-- Canute(LDF5_Fortress_D_mercenary_02) -->
+					<spawn npc_id="804558" respawn_time="295">
+    					<spot x="754.322876" y="279.971710" z="142.98958"/>
+  					</spawn>
+  					<!-- Gordven(LDF5_Fortress_D_mercenary_03) -->
+  					<spawn npc_id="804560" respawn_time="295">
+    					<spot x="754.318726" y="283.965668" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Anoha's Sword(LDF5_Fortress_Named_Spawn_FOBJ_D) -->
+  					<spawn npc_id="804577" respawn_time="295">
+    					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
+  					</spawn>
+  					<!-- Falfyr(LDF5_Fortress_7011_Phillipa_D_E) -->
+  					<spawn npc_id="804589" respawn_time="295">
+    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
+  					</spawn>
+  					<!-- Banuan(LDF5_Fortress_7011_Banuan_D_E) -->
+  					<spawn npc_id="804590" respawn_time="295">
+    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
+  					</spawn>
+  					<!-- Salonte(LDF5_Fortress_7011_Salonte_D_L_E) -->
+  					<spawn npc_id="804591" respawn_time="295">
+    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+  					</spawn>
+ 					<!-- Mailbox -->
+  					<spawn npc_id="700079" respawn_time="295">
+    					<spot x="401.6335" y="1351.477" z="163.8329" h="15" static_id="441"/>
+    					<spot x="754.059570" y="295.750824" z="156.987228" h="0"/>
+  					</spawn>
+					
+					
+					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Da) -->
+					<spawn npc_id="252495">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_F_D -->
+					<spawn npc_id="250189">
+						<spot x="743.48914" y="251.6112" z="158.28091" static_id="649"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_R_D -->
+					<spawn npc_id="250191">
+						<spot x="748.7023" y="260.82178" z="158.28091" static_id="651"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_F_D -->
+					<spawn npc_id="250193">
+						<spot x="743.81555" y="313.11877" z="158.28091" static_id="645"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_R_D -->
+					<spawn npc_id="250195">
+						<spot x="748.6312" y="303.5331" z="158.28091" static_id="638"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_F_D -->
+					<spawn npc_id="250197">
+						<spot x="783.6566" y="332.9571" z="157.2171" h="30" static_id="504"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_R_D -->
+					<spawn npc_id="250199">
+						<spot x="791.4443" y="327.9422" z="157.61887" h="90" static_id="505"/>
+					</spawn>
+ 					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_F_D -->
+					<spawn npc_id="250201">
+						<spot x="830.50055" y="312.9942" z="156.61975" h="30" static_id="635"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_R_D -->
+					<spawn npc_id="250203">
+						<spot x="825.20844" y="303.93146" z="157.0737" h="90" static_id="632"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_F_D -->
+					<spawn npc_id="250205">
+						<spot x="830.30115" y="251.33136" z="156.61975" h="30" static_id="653"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_R_D -->
+					<spawn npc_id="250207">
+						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
+					</spawn>
+ 				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- Squad Prime Knight(LDF5_Fortress_7011_Guard_Kn_MistOn_D_4) -->
+					<spawn npc_id="251963">
+						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
+						<spot x="780.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="825.93555" y="416.37271" z="142.53706" h="30"/>
+						<spot x="764.94861" y="371.66461" z="141.94272" h="45"/>
+						<spot x="731.68829" y="372.07904" z="141.94272" h="30"/>
+						<spot x="800.97174" y="380.24463" z="141.94272" h="15"/>
+						<spot x="875.91498" y="326.52100" z="141.98843" h="15"/>
+						<spot x="840.76447" y="372.39435" z="141.94272" h="30"/>
+						<spot x="716.19727" y="236.24512" z="141.94963" h="60"/>
+						<spot x="714.83624" y="400.39774" z="142.27740" h="30"/>
+						<spot x="769.15497" y="375.69849" z="141.94272" h="45"/>
+						<spot x="657.70074" y="240.42207" z="141.75000" h="45"/>
+						<spot x="666.31061" y="351.49246" z="142.25000" h="60"/>
+						<spot x="753.45288" y="415.15576" z="142.03804" h="30"/>
+						<spot x="878.91498" y="324.52100" z="141.94272"/>
+						<spot x="703.07416" y="295.46201" z="141.94272" h="60"/>
+						<spot x="808.17450" y="372.49567" z="141.94272" h="15"/>
+						<spot x="788.63733" y="573.87665" z="149.98268" h="30"/>
+						<spot x="906.70367" y="250.88484" z="142.04237"/>
+						<spot x="772.86603" y="379.63693" z="141.94272" h="45"/>
+						<spot x="793.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="804.73822" y="376.33362" z="141.94272" h="15"/>
+						<spot x="820.12524" y="416.28625" z="142.56149" h="30"/>
+						<spot x="908.12756" y="314.32373" z="142.84624"/>
+						<spot x="907.56140" y="356.00574" z="142.04118" h="15"/>
+						<spot x="866.85187" y="236.37996" z="141.94272"/>
+						<spot x="784.65283" y="573.89642" z="149.98476" h="30"/>
+						<spot x="702.97437" y="291.07028" z="141.94272" h="60"/>
+					</spawn>
+					<!-- Squad Prime Soldier(LDF5_Fortress_7011_Guard_Fi_E_MistOn_D_4) -->
+					<spawn npc_id="252282">
+						<spot x="445.43762" y="448.41092" z="150.11887" h="45"/>
+						<spot x="840.59753" y="779.11914" z="166.42725" h="90"/>
+						<spot x="789.46729" y="416.08563" z="142.09706" h="30"/>
+						<spot x="786.66547" y="571.83875" z="149.76849" h="30"/>
+						<spot x="883.83698" y="256.37454" z="142.02147"/>
+						<spot x="830.90674" y="816.47675" z="164.30374" h="60"/>
+						<spot x="749.12769" y="379.94748" z="141.94272" h="30"/>
+						<spot x="823.16504" y="413.47894" z="142.46637" h="30"/>
+						<spot x="785.46088" y="416.09012" z="142.09131" h="30"/>
+						<spot x="786.80548" y="315.72934" z="142.98958" h="30"/>
+						<spot x="884.12323" y="295.75946" z="141.94272"/>
+						<spot x="750.73309" y="412.23380" z="141.98538" h="30"/>
+						<spot x="1188.46667" y="228.51892" z="135.37173" h="45"/>
+						<spot x="804.64282" y="372.50452" z="141.94272" h="15"/>
+						<spot x="686.39270" y="312.14178" z="141.94272" h="30"/>
+						<spot x="824.41443" y="381.23749" z="141.94272" h="30"/>
+						<spot x="772.83765" y="375.72400" z="141.94272" h="45"/>
+						<spot x="464.67712" y="415.16446" z="151.42722" h="80"/>
+						<spot x="1222.77661" y="230.48108" z="136.76160" h="30"/>
+						<spot x="876.95361" y="355.80032" z="141.94272"/>
+						<spot x="686.68817" y="256.11761" z="141.94272" h="75"/>
+						<spot x="783.56891" y="349.38141" z="143.21539" h="30"/>
+						<spot x="789.85815" y="349.14957" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Squad Prime Ranger(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOn_D_4) -->
+					<spawn npc_id="251968">
+						<spot x="748.01294" y="409.47775" z="142.04930" h="30"/>
+						<spot x="784.24194" y="345.82837" z="153.70628" h="30"/>
+						<spot x="788.82898" y="345.68317" z="153.70628" h="30"/>
+					</spawn>
+					<!-- Squad Prime Ranger(LDF5_Fortress_7011_Guard_Ra_MistOn_D_4) -->
+					<spawn npc_id="251978">
+						<spot x="711.44116" y="392.55478" z="142.23714" h="30"/>
+						<spot x="825.80975" y="410.40988" z="142.37500" h="30"/>
+						<spot x="663.26556" y="238.84058" z="141.82246" h="45"/>
+						<spot x="903.06323" y="352.15964" z="142.43260"/>
+						<spot x="820.06323" y="410.15964" z="142.37500" h="30"/>
+						<spot x="662.55469" y="234.47510" z="141.75000" h="45"/>
+						<spot x="900.63336" y="314.15964" z="142.38458"/>
+						<spot x="673.30280" y="349.68289" z="142.34047" h="60"/>
+						<spot x="812.15796" y="334.37888" z="150.94521"/>
+						<spot x="897.06323" y="359.15964" z="142.26389" h="30"/>
+						<spot x="899.06323" y="245.29036" z="142.29678"/>
+						<spot x="761.52960" y="333.10837" z="150.94521"/>
+						<spot x="718.84497" y="397.46881" z="142.27475" h="30"/>
+						<spot x="900.63336" y="308.15964" z="142.38135"/>
+						<spot x="672.46405" y="344.07443" z="142.19971" h="60"/>
+						<spot x="753.41479" y="409.54483" z="142.08411" h="30"/>
+						<spot x="899.06323" y="251.15964" z="142.27756"/>
+						<spot x="792.83521" y="412.77975" z="142.32626" h="30"/>
+						<spot x="782.45984" y="412.67166" z="142.20802" h="30"/>
+					</spawn>
+					<!-- Squad Prime Infantry(LDF5_Fortress_7011_Guard_Gu_MistOn_D_4) -->
+					<spawn npc_id="251983">
+						<spot x="841.65753" y="794.00696" z="167.27507" h="90"/>
+						<spot x="1224.61511" y="201.54649" z="136.00000" h="30"/>
+						<spot x="1201.93982" y="204.57384" z="138.37239" h="45"/>
+						<spot x="476.95715" y="446.58258" z="152.75380" h="15"/>
+						<spot x="487.49066" y="423.78125" z="153.78186" h="45"/>
+						<spot x="862.83521" y="809.18048" z="164.78224" h="36"/>
+					</spawn>
+					<!-- Squad Prime Mender(LDF5_Fortress_7011_Guard_Pr_MistOn_D_4) -->
+					<spawn npc_id="251988">
+						<spot x="801.03687" y="372.41360" z="141.94272" h="15"/>
+						<spot x="772.83087" y="371.69852" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Squad Prime Sorcerer(LDF5_Fortress_7011_Guard_Wi_MistOn_D_4) -->
+					<spawn npc_id="251993">
+						<spot x="787.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="726.87787" y="282.18811" z="142.06129" h="60"/>
+						<spot x="716.26025" y="240.10521" z="141.98898" h="60"/>
+						<spot x="787.37830" y="412.73999" z="142.28989" h="30"/>
+						<spot x="659.82214" y="237.29395" z="141.75000" h="45"/>
+						<spot x="846.78717" y="282.47385" z="142.04364"/>
+						<spot x="715.00598" y="395.23944" z="142.17029" h="30"/>
+						<spot x="784.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="901.10779" y="356.94046" z="142.40327" h="30"/>
+						<spot x="902.99194" y="248.24072" z="142.29526"/>
+						<spot x="669.16492" y="347.73056" z="142.25000" h="60"/>
+						<spot x="904.40918" y="311.17413" z="142.60883"/>
+						<spot x="866.91498" y="240.92087" z="141.94272"/>
+					</spawn>
+					<!-- Squad Prime Warlock(LDF5_Fortress_7011_Guard_El_MistOn_D_4) -->
+					<spawn npc_id="251998">
+						<spot x="768.98590" y="371.71964" z="141.94272" h="45"/>
+						<spot x="875.59454" y="323.31335" z="141.94272" h="15"/>
+						<spot x="706.35205" y="293.30908" z="141.94272" h="60"/>
+						<spot x="801.06580" y="376.34845" z="141.94272" h="15"/>
+						<spot x="830.03967" y="554.67242" z="149.63164" h="30"/>
+						<spot x="744.51947" y="549.03375" z="147.24579" h="30"/>
+						<spot x="786.79297" y="312.86292" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Squad Prime Infantry(LDF5_Fortress_7011_Guard_Gu_Nomove_MistOn_D_4) -->
+					<spawn npc_id="251973">
+						<spot x="871.10468" y="269.36121" z="148.36076"/>
+						<spot x="777.91492" y="567.10669" z="155.96236" h="15"/>
+						<spot x="871.60553" y="297.48273" z="148.11391"/>
+						<spot x="726.22510" y="256.16418" z="150.94499" h="60"/>
+						<spot x="871.10468" y="266.36121" z="148.36076"/>
+						<spot x="704.00342" y="260.14362" z="148.36076" h="60"/>
+						<spot x="795.13708" y="567.97729" z="156.13350" h="45"/>
+						<spot x="697.17932" y="335.35001" z="148.11391" h="60"/>
+						<spot x="697.17932" y="332.35001" z="148.11391" h="60"/>
+						<spot x="704.00342" y="263.14362" z="148.36076" h="60"/>
+						<spot x="871.60553" y="300.48273" z="148.11391"/>
+						<spot x="726.70807" y="308.14740" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Asmodian Squad Prime Nightblade(LDF5_Fortress_7011_Guard_As_Hi_MistOn_D_4) -->
+					<spawn npc_id="252103">
+						<spot x="772.06476" y="551.69507" z="150.12692"/>
+						<spot x="800.91052" y="552.37909" z="150.29807" h="60"/>
+						<spot x="880.18573" y="395.29965" z="143.25000" h="30"/>
+						<spot x="692.13068" y="394.78125" z="142.00000" h="30"/>
+						<spot x="919.78937" y="286.68723" z="142.48683" h="15"/>
+						<spot x="876.60889" y="395.74756" z="144.86809" h="30"/>
+						<spot x="917.22119" y="283.46585" z="143.91550" h="15"/>
+						<spot x="815.63135" y="802.05109" z="160.01938" h="36"/>
+						<spot x="471.04428" y="405.17090" z="152.74208" h="45"/>
+						<spot x="773.75970" y="553.19519" z="150.12692"/>
+						<spot x="653.96271" y="278.96600" z="144.71469" h="60"/>
+						<spot x="690.83759" y="389.53189" z="144.45053" h="30"/>
+						<spot x="1225.61804" y="246.18971" z="135.77419" h="45"/>
+						<spot x="650.78497" y="283.74808" z="143.65649" h="60"/>
+						<spot x="802.34998" y="398.54166" z="141.94272" h="90"/>
+						<spot x="772.82507" y="398.74142" z="142.14346" h="90"/>
+						<spot x="768.82507" y="398.74142" z="142.33075" h="90"/>
+						<spot x="864.98383" y="796.78802" z="164.91185" h="36"/>
+						<spot x="799.30908" y="553.94360" z="150.29807" h="60"/>
+						<spot x="502.66284" y="451.03809" z="152.12500" h="30"/>
+						<spot x="1187.04956" y="247.07819" z="136.00620" h="45"/>
+					</spawn>
+					<!-- Squad Prime Soldier(LDF5_Fortress_7011_Guard_Fi_E_MistOn_D_4) -->
+					<spawn npc_id="252282">
+						<spot x="906.36987" y="245.22900" z="142.07637"/>
+						<spot x="656.73126" y="235.36198" z="141.75000" h="60"/>
+						<spot x="664.74524" y="345.38605" z="142.32843" h="60"/>
+						<spot x="844.38745" y="372.28705" z="141.94272" h="30"/>
+						<spot x="908.06281" y="308.29742" z="142.54651"/>
+						<spot x="710.63812" y="397.19809" z="142.21011" h="45"/>
+						<spot x="783.24103" y="315.31235" z="142.98958" h="30"/>
+						<spot x="735.31128" y="371.97174" z="142.09842" h="30"/>
+						<spot x="790.24030" y="315.26315" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Squad Prime Ranger(LDF5_Fortress_7011_Guard_Ra_FP_MistOn_D_4) -->
+					<spawn npc_id="881589">
+						<spot x="847.91888" y="255.87595" z="150.94499"/>
+						<spot x="847.81573" y="307.83362" z="150.94499"/>
+						<spot x="738.80658" y="555.85138" z="148.97874" h="30"/>
+						<spot x="750.67383" y="555.87958" z="148.84436" h="30"/>
+						<spot x="836.08160" y="562.39136" z="150.99133" h="30"/>
+						<spot x="824.21436" y="562.36316" z="150.18428" h="30"/>
+					</spawn>
+					<!-- Asmodian Satchel Charge(LDF5_Fortress_Trap_Dark_TankDispel) -->
+					<spawn npc_id="252429">
+						<spot x="734.61761" y="353.61874" z="142.19995" h="30"/>
+						<spot x="711.01477" y="336.43121" z="141.94272" h="30"/>
+						<spot x="863.15674" y="336.22574" z="141.94272" h="30"/>
+						<spot x="839.78546" y="353.86581" z="142.19995" h="30"/>
+					</spawn>
+
+					<!-- Asmodian Bind Point Spellmaster(LDF5_Fortress_7011_GBBoss_Wi_Da_65_Ah) -->
+					<spawn npc_id="881604">
+						<spot x="1076.68774" y="711.34967" z="185.12500" h="30"/>
+						<spot x="742.77997" y="993.63940" z="151.65121" h="30"/>
+					</spawn>
+					<!-- Asmodian Bind Point Assault Commander(LDF5_Fortress_7011_GBBoss_Fi_Da_65_Ah) -->
+					<spawn npc_id="881605">
+						<spot x="742.68774" y="997.37482" z="151.75000" h="30"/>
+					</spawn>
+					<!-- Asmodian Bind Point Chief Inspector(LDF5_Fortress_7011_GBBoss_Ra_Da_65_Ah) -->
+					<spawn npc_id="881606">
+						<spot x="556.46411" y="679.24323" z="153.05942" h="30"/>
+					</spawn>
+					<!-- Asmodian Bind Point Spellbinder(LDF5_Fortress_7011_GBBoss_Wi_Da_65_Ah) -->
+					<spawn npc_id="881607">
+						<spot x="1077.67725" y="714.02515" z="185.12186" h="30"/>
+					</spawn>
+					<!-- Asmodian Satchel Charge(LDF5_Fortress_Trap_120_Dark_TankDispel) -->
+					<spawn npc_id="882294">
+						<spot x="786.58350" y="568.86957" z="149.45642" h="30"/>
+					</spawn>
+					
+  					<!-- Borghildr(LDF5_Fortress_D_L_warehouse) -->
+  					<spawn npc_id="802406">
+    					<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Hildia(LDF5_Fortress_D_L_Apseller_good) -->
+  					<spawn npc_id="802408">
+    					<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Ingvud(LDF5_Fortress_D_L_Exchange_v30abyss_35) -->
+  					<spawn npc_id="802410">
+    					<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Thamril(LDF5_Fortress_D_L_component) -->
+  					<spawn npc_id="802412">
+    					<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Winoa(LDF5_Fortress_D_L_exchange) -->
+  					<spawn npc_id="802414">
+    					<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Vifo(LDF5_Fortress_D_Seller_PvPCoin_matter) -->
+  					<spawn npc_id="802416">
+    					<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gramul(LDF5_Fortress_D_warehouse) -->
+  					<spawn npc_id="802418">
+    					<spot x="754.054016" y="277.743774" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Faftvin(LDF5_Fortress_D_Holy_Recharger) -->
+  					<spawn npc_id="802420">
+    					<spot x="754.067078" y="286.740662" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Renga(LDF5_Fortress_D_Spell_Recharger) -->
+  					<spawn npc_id="802422">
+    					<spot x="754.061340" y="283.741882" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Bergla(LDF5_Fortress_D_master_stigma) -->
+  					<spawn npc_id="802424">
+    					<spot x="754.059570" y="289.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Dungvar(LDF5_Fortress_D_seller_food) -->
+  					<spawn npc_id="802426">
+    					<spot x="754.070068" y="280.738647" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Arunerk(LDF5_Fortress_D_Exchange_v30abyss_29) -->
+  					<spawn npc_id="804610">
+    					<spot x="754.059570" y="292.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Lihum(LDF5_Fortress_D_L_Material_PvE) -->
+  					<spawn npc_id="804617">
+    					<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Kanita(LDF5_Fortress_D_L_Material_PvP) -->
+  					<spawn npc_id="804618">
+    					<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
+  					</spawn>
+					<!-- Kilmorn(LDF5_Fortress_D_mercenary) -->
+  					<spawn npc_id="802436">
+    					<spot x="754.318298" y="281.967621" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Ildina(ldf5_fortress_7011_DynTeleporter_Da) -->
+					<spawn npc_id="802450">
+						<spot x="754.20966" y="273.4355" z="155.6706" h="6" />
+					</spawn>
+ 					<!-- LDF5_Fortress_7011_Race_Check_Asmo -->
+					<spawn npc_id="802457">
+						<spot x="754.017" y="270.716" z="155.67061"/>
+					</spawn>
+  					<!-- LDF5_Fortress_7011_MistOn_Check -->
+					<spawn npc_id="802459">
+						<spot x="754.01056" y="268.1861" z="155.6706"/>
+					</spawn>
+					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_D_C1) -->
+  					<spawn npc_id="802473">
+						<spot x="770.4316" y="248.5618" z="156.9872" h="61"/>
+					</spawn>
+  					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_D_C2) -->
+  					<spawn npc_id="802475">
+						<spot x="802.7849" y="248.5716" z="156.9872"/>
+					</spawn>
+  					<!-- Teleport Device(ldf5_fortress_7011_Teleporter_Off_Da -->
+  					<spawn npc_id="804487">
+    					<spot x="753.824585" y="274.743774" z="156.987228" static_id="225"/>
+  					</spawn>
+					<!-- Canute(LDF5_Fortress_D_mercenary_02) -->
+					<spawn npc_id="804558">
+    					<spot x="754.322876" y="279.971710" z="142.98958"/>
+  					</spawn>
+  					<!-- Gordven(LDF5_Fortress_D_mercenary_03) -->
+  					<spawn npc_id="804560">
+    					<spot x="754.318726" y="283.965668" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Anoha's Sword(LDF5_Fortress_Named_Spawn_FOBJ_D) -->
+  					<spawn npc_id="804577">
+    					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
+  					</spawn>
+  					<!-- Falfyr(LDF5_Fortress_7011_Phillipa_D_E) -->
+  					<spawn npc_id="804589">
+    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
+  					</spawn>
+  					<!-- Banuan(LDF5_Fortress_7011_Banuan_D_E) -->
+  					<spawn npc_id="804590">
+    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
+  					</spawn>
+  					<!-- Salonte(LDF5_Fortress_7011_Salonte_D_L_E) -->
+  					<spawn npc_id="804591">
+    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+  					</spawn>
+					<!-- Mailbox -->
+  					<spawn npc_id="700079">
+    					<spot x="401.6335" y="1351.477" z="163.8329" h="15" static_id="441"/>
+    					<spot x="754.059570" y="295.750824" z="156.987228" h="0"/>
+  					</spawn>
+					
+					
+					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Da) -->
+					<spawn npc_id="252495">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+ 					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_F_D -->
+					<spawn npc_id="250189">
+						<spot x="743.48914" y="251.6112" z="158.28091" static_id="649"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_R_D -->
+					<spawn npc_id="250191">
+						<spot x="748.7023" y="260.82178" z="158.28091" static_id="651"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_F_D -->
+					<spawn npc_id="250193">
+						<spot x="743.81555" y="313.11877" z="158.28091" static_id="645"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_R_D -->
+					<spawn npc_id="250195">
+						<spot x="748.6312" y="303.5331" z="158.28091" static_id="638"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_F_D -->
+					<spawn npc_id="250197">
+						<spot x="783.6566" y="332.9571" z="157.2171" h="30" static_id="504"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_R_D -->
+					<spawn npc_id="250199">
+						<spot x="791.4443" y="327.9422" z="157.61887" h="90" static_id="505"/>
+					</spawn>
+ 					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_F_D -->
+					<spawn npc_id="250201">
+						<spot x="830.50055" y="312.9942" z="156.61975" h="30" static_id="635"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_R_D -->
+					<spawn npc_id="250203">
+						<spot x="825.20844" y="303.93146" z="157.0737" h="90" static_id="632"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_F_D -->
+					<spawn npc_id="250205">
+						<spot x="830.30115" y="251.33136" z="156.61975" h="30" static_id="653"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_R_D -->
+					<spawn npc_id="250207">
+						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
+					</spawn>
+					
+ 					<!-- Castle Gate(LDF5_Fortress_7011_Door_Da) -->
+  					<spawn npc_id="252116">
+    					<spot x="787.00000" y="341.91000" z="143.06000" static_id="1657"/>
+  					</spawn>
+					<!-- Asmodian Gate(LDF5_Fortress_7011_Door_B_Da) -->
+  					<spawn npc_id="881576">
+						<spot x="742.8768" y="987.9254" z="151.0149" static_id="282"/>
+  					</spawn>
+  					<!-- Asmodian Gate(LDF5_Fortress_7011_Door_D_Da) -->
+  					<spawn npc_id="881579">
+    					<spot x="786.43964" y="564.19983" z="148.77126" static_id="276"/>
+  					</spawn>
+ 					
+					
+					<!-- Gate Teleport Device(LDF5_Fortress_7011_barricade_Tele_F_D_C1) -->
+					<spawn npc_id="702594">
+					    <spot x="561.62732" y="678.724" z="153.68115" static_id="95"/>
+					</spawn>
+					<!-- Gate Teleport Device(LDF5_Fortress_7011_barricade_Tele_R_D_C1) -->
+					<spawn npc_id="702596">
+					    <spot x="563.2450" y="668.33148" z="152.7072" static_id="132"/>
+					</spawn>
+					<!-- Gate Teleport Device" cName="LDF5_Fortress_7011_barricade_Tele_F_D_C2) -->
+					<spawn npc_id="702598">
+					    <spot x="1072.7261" y="711.32611" z="185.47467" static_id="544"/>
+					</spawn>
+					<!-- Gate Teleport Device" cName="LDF5_Fortress_7011_barricade_Tele_R_D_C2) -->
+					<spawn npc_id="702600">
+					    <spot x="1071.1566" y="704.1889" z="185.47467" static_id="508"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Dhealer_1 -->
+					<spawn npc_id="297537">
+					    <spot x="786.97711" y="259.64624" z="143.00507" static_id="977"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Dhealer_2 -->
+					<spawn npc_id="297538">
+					    <spot x="802.72742" y="297.94226" z="143.00507" static_id="1018"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Dhealer_3 -->
+					<spawn npc_id="297539">
+					    <spot x="771.23541" y="297.91895" z="143.00507" static_id="1044"/>
+					</spawn>
+					<!-- Asmodians Fence (Object Normal lvl:3) -->
+					<spawn npc_id="272258">
+						<spot x="742.86737" y="988.29895" z="151.11795" static_id="185"/>
+						<spot x="557.69177" y="672.47235" z="152.60912" static_id="258"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="540"/>
+					</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_1) -->
+        			<spawn npc_id="252171">
+					    <spot x="670.1999" y="285.1302" z="152.23602" h="29"/>
+					</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_2) -->
+					<spawn npc_id="252172">
+            			<spot z="152.9179" y="377.18527" x="696.1827" h="45"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_3) -->
+					<spawn npc_id="252173">
+            			<spot z="152.9179" y="411.75964" x="767.7126" h="31"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_4) -->
+					<spawn npc_id="252174">
+            			<spot z="153.03584" y="411.54135" x="806.49084" h="28"/>
+        			</spawn>
+  					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_5) -->
+					<spawn npc_id="252175">
+            			<spot z="150.43156" y="383.5566" x="787.1603" h="91"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_6) -->
+					<spawn npc_id="252176">
+            			<spot z="153.24277" y="380.38666" x="875.8561" h="20"/>
+        			</spawn>
+        			<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_D_7) -->
+  					<spawn npc_id="252177">
+					    <spot x="901.3304" y="290.0627" z="152.27827" h="6"/>
+					</spawn>
+					
+					<!-- Asmodian Veteran Guardian General(LDF5_Fortress_7011_Boss_Da_4) -->
+					<spawn npc_id="251833">
+						<spot x="787.02789" y="282.03790" z="143.28697" h="30" />
+					</spawn>
+					
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Garrison Prime Templar(LDF5_Fortress_7011_Guard_Kn_MistOff_L_4) -->
+					<spawn npc_id="251843" respawn_time="295">
+						<spot x="661.77936" y="242.28836" z="141.75000" h="45"/>
+						<spot x="716.11707" y="236.21933" z="141.95473" h="60"/>
+						<spot x="866.71039" y="236.22334" z="141.94272"/>
+						<spot x="908.76324" y="251.64159" z="142.00986"/>
+						<spot x="667.96692" y="350.30038" z="142.26671" h="60"/>
+						<spot x="907.55176" y="355.92920" z="142.04257" h="15"/>
+						<spot x="716.74554" y="399.42947" z="142.32840" h="30"/>
+						<spot x="910.14685" y="314.60156" z="142.55579"/>
+					</spawn>
+					<!-- Garrison Prime Guard(LDF5_Fortress_7011_Guard_Fi_E_MistOff_L_4) -->
+					<spawn npc_id="252262" respawn_time="295">
+						<spot x="788.85931" y="349.15533" z="143.21539" h="30"/>
+						<spot x="784.49316" y="349.15533" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Archer(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOff_L_4) -->
+					<spawn npc_id="251848" respawn_time="295">
+						<spot x="784.32812" y="345.75262" z="153.70628" h="30"/>
+						<spot x="788.91486" y="345.74042" z="153.70628" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Archer(LDF5_Fortress_7011_Guard_Ra_MistOff_L_4) -->
+					<spawn npc_id="251858" respawn_time="295">
+						<spot x="820.06696" y="410.06512" z="142.37500" h="30"/>
+						<spot x="823.23169" y="413.47601" z="142.46725" h="30"/>
+						<spot x="750.81036" y="412.12500" z="141.99219" h="30"/>
+						<spot x="825.8337" y="410.1206" z="142.375" h="30" />
+						<spot x="753.4124" y="409.5236" z="142.0871" h="30" />
+						<spot x="747.6456" y="409.4681" z="142.0581" h="30" />
+					</spawn>
+					<!-- Garrison Prime Priest(LDF5_Fortress_7011_Guard_Pr_MistOff_L_4) -->
+					<spawn npc_id="251868" respawn_time="295">
+						<spot x="787.21545" y="364.82339" z="141.94272" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Magus(LDF5_Fortress_7011_Guard_Wi_MistOff_L_4) -->
+					<spawn npc_id="251873" respawn_time="295">
+						<spot x="902.90405" y="248.20709" z="142.33260"/>
+						<spot x="672.64862" y="345.99207" z="142.24551" h="60"/>
+						<spot x="786.81226" y="346.10339" z="143.21539" h="30"/>
+						<spot x="665.55316" y="238.50322" z="141.84708" h="60"/>
+						<spot x="716.21887" y="240.10814" z="141.99181" h="60"/>
+						<spot x="789.20801" y="367.70819" z="141.94272" h="15"/>
+						<spot x="904.42010" y="310.99350" z="142.61060"/>
+						<spot x="900.51794" y="355.70853" z="142.39935" h="15"/>
+						<spot x="866.81079" y="240.88737" z="141.94272"/>
+						<spot x="705.20709" y="293.45618" z="141.94272" h="60"/>
+						<spot x="715.55731" y="393.49603" z="142.16432" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Evoker(LDF5_Fortress_7011_Guard_El_MistOff_L_4) -->
+					<spawn npc_id="251878" respawn_time="295">
+						<spot x="785.16260" y="367.71588" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Garrison Prime Soldier(LDF5_Fortress_7011_Guard_Gu_Nomove_MistOff_L_4) -->
+					<spawn npc_id="251853" respawn_time="295">
+						<spot x="726.65167" y="257.64954" z="150.94499" h="60"/>
+						<spot x="726.63934" y="254.83972" z="150.94499" h="60"/>
+						<spot x="838.20007" y="309.75491" z="153.73790"/>
+						<spot x="838.16534" y="257.63177" z="153.74861"/>
+						<spot x="838.14478" y="254.95366" z="153.77245"/>
+						<spot x="838.17950" y="307.07681" z="153.76024"/>
+						<spot x="726.44891" y="306.78067" z="151.35907" h="60"/>
+						<spot x="726.47675" y="309.49591" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Elyos Force Prime Enforcer(LDF5_Fortress_7011_Guard_As_Hi_MistOn_L_4) -->
+					<spawn npc_id="252098" respawn_time="295">
+						<spot x="768.15619" y="398.84683" z="142.31865" h="90"/>
+						<spot x="802.01611" y="398.56271" z="141.94272" h="90"/>
+						<spot x="806.56909" y="398.56802" z="141.94272" h="90"/>
+						<spot x="772.72778" y="398.85214" z="142.17332" h="90"/>
+						<spot x="863.22131" y="336.28964" z="141.94272"/>
+					</spawn>
+					<!-- Garrison Prime Guard(LDF5_Fortress_7011_Guard_Fi_E_MistOff_L_4) -->
+					<spawn npc_id="252262" respawn_time="295">
+						<spot x="910.29523" y="307.84070" z="142.22881"/>
+						<spot x="710.56195" y="396.25778" z="142.21487" h="45"/>
+						<spot x="666.22528" y="343.76501" z="142.23592" h="60"/>
+						<spot x="660.59857" y="236.16972" z="141.75000" h="60"/>
+						<spot x="902.46985" y="362.61896" z="141.97958" h="15"/>
+						<spot x="908.77448" y="244.68440" z="141.82773"/>
+					</spawn>
+					
+					<!-- Donia(LDF5_Fortress_L_L_warehouse) -->
+  					<spawn npc_id="802405" respawn_time="295">
+    					<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Luanon(LDF5_Fortress_L_L_Apseller_good) -->
+  					<spawn npc_id="802407" respawn_time="295">
+    					<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Dafine(LDF5_Fortress_L_L_Exchange_v30abyss_35) -->
+  					<spawn npc_id="802409" respawn_time="295">
+    					<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gnaeus(LDF5_Fortress_L_L_component) -->
+  					<spawn npc_id="802411" respawn_time="295">
+    					<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gius(LDF5_Fortress_L_L_exchange) -->
+  					<spawn npc_id="802413" respawn_time="295">
+    					<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Treia(LDF5_Fortress_L_Seller_PvPCoin_matter) -->
+  					<spawn npc_id="802415" respawn_time="295">
+    					<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Elphina(LDF5_Fortress_L_warehouse) -->
+  					<spawn npc_id="802417" respawn_time="295">
+    					<spot x="754.054016" y="277.743774" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Hasvinar(LDF5_Fortress_L_Holy_Recharger) -->
+  					<spawn npc_id="802419" respawn_time="295">
+    					<spot x="754.067078" y="286.740662" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Ceidon(LDF5_Fortress_L_Spell_Recharger) -->
+  					<spawn npc_id="802421" respawn_time="295">
+    					<spot x="754.061340" y="283.741882" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Anantus(LDF5_Fortress_L_master_stigma) -->
+  					<spawn npc_id="802423" respawn_time="295">
+    					<spot x="754.059570" y="289.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Chaerus(LDF5_Fortress_L_seller_food) -->
+  					<spawn npc_id="802425" respawn_time="295">
+    					<spot x="754.070068" y="280.738647" z="156.987228" h="0"/>
+  					</spawn>
+ 					<!-- Arianerk(LDF5_Fortress_L_Exchange_v30abyss_29) -->
+  					<spawn npc_id="804611" respawn_time="295">
+    					<spot x="754.059570" y="292.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Mondus(LDF5_Fortress_L_L_Material_PvE) -->
+  					<spawn npc_id="804615" respawn_time="295">
+    					<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!--Tirdone" cName="LDF5_Fortress_L_L_Material_PvP) -->
+  					<spawn npc_id="804616" respawn_time="295">
+    					<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
+  					</spawn>
+					<!-- Tilion(LDF5_Fortress_L_mercenary) -->
+  					<spawn npc_id="802435" respawn_time="295">
+    					<spot x="754.318298" y="281.967621" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Dinatria(ldf5_fortress_7011_DynTeleporter_Li) -->
+					<spawn npc_id="802449" respawn_time="295">
+						<spot x="754.20966" y="273.4355" z="155.6706" h="6" />
+					</spawn>
+ 					<!-- None(LDF5_Fortress_7011_Race_Check_El) -->
+					<spawn npc_id="802456" respawn_time="295">
+						<spot x="754.017" y="270.716" z="155.67061"/>
+					</spawn>
+  					<!-- LDF5_Fortress_7011_MistOn_Check -->
+					<spawn npc_id="802459" respawn_time="295">
+						<spot x="754.01056" y="268.1861" z="155.6706"/>
+					</spawn>
+					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_L_C1) -->
+  					<spawn npc_id="802472" respawn_time="295">
+						<spot x="770.4316" y="248.5618" z="156.9872" h="61"/>
+					</spawn>
+  					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_L_C2) -->
+  					<spawn npc_id="802474" respawn_time="295">
+						<spot x="802.7849" y="248.5716" z="156.9872"/>
+					</spawn>
+  					<!-- Teleport Device(ldf5_fortress_7011_Teleporter_Off_Li -->
+  					<spawn npc_id="804486" respawn_time="295">
+    					<spot x="753.824585" y="274.743774" z="156.987228" static_id="225"/>
+  					</spawn>
+					<!-- Philonu(LDF5_Fortress_L_mercenary_02) -->
+					<spawn npc_id="804557" respawn_time="295">
+    					<spot x="754.322876" y="279.971710" z="142.98958"/>
+  					</spawn>
+  					<!-- Beros(LDF5_Fortress_L_mercenary_03) -->
+  					<spawn npc_id="804559" respawn_time="295">
+    					<spot x="754.318726" y="283.965668" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Anoha's Sword(LDF5_Fortress_Named_Spawn_FOBJ_L) -->
+  					<spawn npc_id="804576" respawn_time="295">
+    					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
+  					</spawn>
+  					<!-- Venia(LDF5_Fortress_7011_Benia_L_L_E) -->
+  					<spawn npc_id="804586" respawn_time="295">
+    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
+  					</spawn>
+  					<!-- Setanos(LDF5_Fortress_7011_Setanos_L_L_E) -->
+  					<spawn npc_id="804587" respawn_time="295">
+    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
+  					</spawn>
+  					<!-- Leton(LDF5_Fortress_Reton_E) -->
+  					<spawn npc_id="804588" respawn_time="295">
+    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+  					</spawn>
+ 					<!-- Mailbox -->
+  					<spawn npc_id="700000" respawn_time="295">
+    					<spot x="401.6335" y="1351.477" z="163.8329" h="15" static_id="441"/>
+    					<spot x="754.059570" y="295.750824" z="156.987228" h="0"/>
+  					</spawn>
+					
+					
+					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Li) -->
+					<spawn npc_id="252494" respawn_time="295">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+					
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_F_L -->
+					<spawn npc_id="250188" respawn_time="295">
+						<spot x="743.48914" y="251.6112" z="158.28091" static_id="649"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_R_L -->
+					<spawn npc_id="250190" respawn_time="295">
+						<spot x="748.7023" y="260.82178" z="158.28091" static_id="651"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_F_L -->
+					<spawn npc_id="250192" respawn_time="295">
+						<spot x="743.81555" y="313.11877" z="158.28091" static_id="645"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_R_L -->
+					<spawn npc_id="250194" respawn_time="295">
+						<spot x="748.6312" y="303.5331" z="158.28091" static_id="638"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_F_L -->
+					<spawn npc_id="250196" respawn_time="295">
+						<spot x="783.6566" y="332.9571" z="157.2171" h="30" static_id="504"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_R_L -->
+					<spawn npc_id="250198" respawn_time="295">
+						<spot x="791.4443" y="327.9422" z="157.61887" h="90" static_id="505"/>
+					</spawn>
+ 					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_F_L -->
+					<spawn npc_id="250200" respawn_time="295">
+						<spot x="830.50055" y="312.9942" z="156.61975" h="30" static_id="635"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_R_L -->
+					<spawn npc_id="250202" respawn_time="295">
+						<spot x="825.20844" y="303.93146" z="157.0737" h="90" static_id="632"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_F_L -->
+					<spawn npc_id="250204" respawn_time="295">
+						<spot x="830.30115" y="251.33136" z="156.61975" h="30" static_id="653"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_R_L -->
+					<spawn npc_id="250206" respawn_time="295">
+						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
+					</spawn>
+ 				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- Garrison Prime Templar(LDF5_Fortress_7011_Guard_Kn_MistOn_L_4) -->
+					<spawn npc_id="251883">
+						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
+						<spot x="780.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="825.93555" y="416.37271" z="142.53706" h="30"/>
+						<spot x="764.94861" y="371.66461" z="141.94272" h="45"/>
+						<spot x="731.68829" y="372.07904" z="141.94272" h="30"/>
+						<spot x="800.97174" y="380.24463" z="141.94272" h="15"/>
+						<spot x="875.91498" y="326.52100" z="141.98843" h="15"/>
+						<spot x="840.76447" y="372.39435" z="141.94272" h="30"/>
+						<spot x="716.19727" y="236.24512" z="141.94963" h="60"/>
+						<spot x="714.83624" y="400.39774" z="142.27740" h="30"/>
+						<spot x="769.15497" y="375.69849" z="141.94272" h="45"/>
+						<spot x="657.70074" y="240.42207" z="141.75000" h="45"/>
+						<spot x="666.31061" y="351.49246" z="142.25000" h="60"/>
+						<spot x="753.45288" y="415.15576" z="142.03804" h="30"/>
+						<spot x="878.91498" y="324.52100" z="141.94272"/>
+						<spot x="703.07416" y="295.46201" z="141.94272" h="60"/>
+						<spot x="808.17450" y="372.49567" z="141.94272" h="15"/>
+						<spot x="788.63733" y="573.87665" z="149.98268" h="30"/>
+						<spot x="906.70367" y="250.88484" z="142.04237"/>
+						<spot x="772.86603" y="379.63693" z="141.94272" h="45"/>
+						<spot x="793.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="804.73822" y="376.33362" z="141.94272" h="15"/>
+						<spot x="820.12524" y="416.28625" z="142.56149" h="30"/>
+						<spot x="908.12756" y="314.32373" z="142.84624"/>
+						<spot x="907.56140" y="356.00574" z="142.04118" h="15"/>
+						<spot x="866.85187" y="236.37996" z="141.94272"/>
+						<spot x="784.65283" y="573.89642" z="149.98476" h="30"/>
+						<spot x="702.97437" y="291.07028" z="141.94272" h="60"/>
+					</spawn>
+					<!-- Garrison Prime Guard(LDF5_Fortress_7011_Guard_Fi_E_MistOn_L_4) -->
+					<spawn npc_id="252277">
+						<spot x="445.43762" y="448.41092" z="150.11887" h="45"/>
+						<spot x="840.59753" y="779.11914" z="166.42725" h="90"/>
+						<spot x="789.46729" y="416.08563" z="142.09706" h="30"/>
+						<spot x="786.66547" y="571.83875" z="149.76849" h="30"/>
+						<spot x="883.83698" y="256.37454" z="142.02147"/>
+						<spot x="830.90674" y="816.47675" z="164.30374" h="60"/>
+						<spot x="749.12769" y="379.94748" z="141.94272" h="30"/>
+						<spot x="823.16504" y="413.47894" z="142.46637" h="30"/>
+						<spot x="785.46088" y="416.09012" z="142.09131" h="30"/>
+						<spot x="786.80548" y="315.72934" z="142.98958" h="30"/>
+						<spot x="884.12323" y="295.75946" z="141.94272"/>
+						<spot x="750.73309" y="412.23380" z="141.98538" h="30"/>
+						<spot x="1188.46667" y="228.51892" z="135.37173" h="45"/>
+						<spot x="804.64282" y="372.50452" z="141.94272" h="15"/>
+						<spot x="686.39270" y="312.14178" z="141.94272" h="30"/>
+						<spot x="824.41443" y="381.23749" z="141.94272" h="30"/>
+						<spot x="772.83765" y="375.72400" z="141.94272" h="45"/>
+						<spot x="464.67712" y="415.16446" z="151.42722" h="80"/>
+						<spot x="1222.77661" y="230.48108" z="136.76160" h="30"/>
+						<spot x="876.95361" y="355.80032" z="141.94272"/>
+						<spot x="686.68817" y="256.11761" z="141.94272" h="75"/>
+						<spot x="783.56891" y="349.38141" z="143.21539" h="30"/>
+						<spot x="789.85815" y="349.14957" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Archer(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOn_L_4) -->
+					<spawn npc_id="251888">
+						<spot x="748.01294" y="409.47775" z="142.04930" h="30"/>
+						<spot x="784.24194" y="345.82837" z="153.70628" h="30"/>
+						<spot x="788.82898" y="345.68317" z="153.70628" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Archer(LDF5_Fortress_7011_Guard_Ra_MistOn_L_4) -->
+					<spawn npc_id="251898">
+						<spot x="711.44116" y="392.55478" z="142.23714" h="30"/>
+						<spot x="825.80975" y="410.40988" z="142.37500" h="30"/>
+						<spot x="663.26556" y="238.84058" z="141.82246" h="45"/>
+						<spot x="903.06323" y="352.15964" z="142.43260"/>
+						<spot x="820.06323" y="410.15964" z="142.37500" h="30"/>
+						<spot x="662.55469" y="234.47510" z="141.75000" h="45"/>
+						<spot x="900.63336" y="314.15964" z="142.38458"/>
+						<spot x="673.30280" y="349.68289" z="142.34047" h="60"/>
+						<spot x="812.15796" y="334.37888" z="150.94521"/>
+						<spot x="897.06323" y="359.15964" z="142.26389" h="30"/>
+						<spot x="899.06323" y="245.29036" z="142.29678"/>
+						<spot x="761.52960" y="333.10837" z="150.94521"/>
+						<spot x="718.84497" y="397.46881" z="142.27475" h="30"/>
+						<spot x="900.63336" y="308.15964" z="142.38135"/>
+						<spot x="672.46405" y="344.07443" z="142.19971" h="60"/>
+						<spot x="753.41479" y="409.54483" z="142.08411" h="30"/>
+						<spot x="899.06323" y="251.15964" z="142.27756"/>
+						<spot x="792.83521" y="412.77975" z="142.32626" h="30"/>
+						<spot x="782.45984" y="412.67166" z="142.20802" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Soldier(LDF5_Fortress_7011_Guard_Gu_MistOn_L_4) -->
+					<spawn npc_id="251903">
+						<spot x="841.65753" y="794.00696" z="167.27507" h="90"/>
+						<spot x="1224.61511" y="201.54649" z="136.00000" h="30"/>
+						<spot x="1201.93982" y="204.57384" z="138.37239" h="45"/>
+						<spot x="476.95715" y="446.58258" z="152.75380" h="15"/>
+						<spot x="487.49066" y="423.78125" z="153.78186" h="45"/>
+						<spot x="862.83521" y="809.18048" z="164.78224" h="36"/>
+					</spawn>
+					<!-- Garrison Prime Priest(LDF5_Fortress_7011_Guard_Pr_MistOn_L_4) -->
+					<spawn npc_id="251908">
+						<spot x="801.03687" y="372.41360" z="141.94272" h="15"/>
+						<spot x="772.83087" y="371.69852" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Garrison Prime Magus(LDF5_Fortress_7011_Guard_Wi_MistOn_L_4) -->
+					<spawn npc_id="251913">
+						<spot x="787.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="726.87787" y="282.18811" z="142.06129" h="60"/>
+						<spot x="716.26025" y="240.10521" z="141.98898" h="60"/>
+						<spot x="787.37830" y="412.73999" z="142.28989" h="30"/>
+						<spot x="659.82214" y="237.29395" z="141.75000" h="45"/>
+						<spot x="846.78717" y="282.47385" z="142.04364"/>
+						<spot x="715.00598" y="395.23944" z="142.17029" h="30"/>
+						<spot x="784.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="901.10779" y="356.94046" z="142.40327" h="30"/>
+						<spot x="902.99194" y="248.24072" z="142.29526"/>
+						<spot x="669.16492" y="347.73056" z="142.25000" h="60"/>
+						<spot x="904.40918" y="311.17413" z="142.60883"/>
+						<spot x="866.91498" y="240.92087" z="141.94272"/>
+					</spawn>
+					<!-- Garrison Prime Evoker(LDF5_Fortress_7011_Guard_El_MistOn_L_4) -->
+					<spawn npc_id="251918">
+						<spot x="768.98590" y="371.71964" z="141.94272" h="45"/>
+						<spot x="875.59454" y="323.31335" z="141.94272" h="15"/>
+						<spot x="706.35205" y="293.30908" z="141.94272" h="60"/>
+						<spot x="801.06580" y="376.34845" z="141.94272" h="15"/>
+						<spot x="830.03967" y="554.67242" z="149.63164" h="30"/>
+						<spot x="744.51947" y="549.03375" z="147.24579" h="30"/>
+						<spot x="786.79297" y="312.86292" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Soldier("LDF5_Fortress_7011_Guard_Gu_Nomove_MistOn_L_4) -->
+					<spawn npc_id="251893">
+						<spot x="871.10468" y="269.36121" z="148.36076"/>
+						<spot x="777.91492" y="567.10669" z="155.96236" h="15"/>
+						<spot x="871.60553" y="297.48273" z="148.11391"/>
+						<spot x="726.22510" y="256.16418" z="150.94499" h="60"/>
+						<spot x="871.10468" y="266.36121" z="148.36076"/>
+						<spot x="704.00342" y="260.14362" z="148.36076" h="60"/>
+						<spot x="795.13708" y="567.97729" z="156.13350" h="45"/>
+						<spot x="697.17932" y="335.35001" z="148.11391" h="60"/>
+						<spot x="697.17932" y="332.35001" z="148.11391" h="60"/>
+						<spot x="704.00342" y="263.14362" z="148.36076" h="60"/>
+						<spot x="871.60553" y="300.48273" z="148.11391"/>
+						<spot x="726.70807" y="308.14740" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Elyos Force Prime Enforcer(LDF5_Fortress_7011_Guard_As_Hi_MistOn_L_4) -->
+					<spawn npc_id="252098">
+						<spot x="772.06476" y="551.69507" z="150.12692"/>
+						<spot x="800.91052" y="552.37909" z="150.29807" h="60"/>
+						<spot x="880.18573" y="395.29965" z="143.25000" h="30"/>
+						<spot x="692.13068" y="394.78125" z="142.00000" h="30"/>
+						<spot x="919.78937" y="286.68723" z="142.48683" h="15"/>
+						<spot x="876.60889" y="395.74756" z="144.86809" h="30"/>
+						<spot x="917.22119" y="283.46585" z="143.91550" h="15"/>
+						<spot x="815.63135" y="802.05109" z="160.01938" h="36"/>
+						<spot x="471.04428" y="405.17090" z="152.74208" h="45"/>
+						<spot x="773.75970" y="553.19519" z="150.12692"/>
+						<spot x="653.96271" y="278.96600" z="144.71469" h="60"/>
+						<spot x="690.83759" y="389.53189" z="144.45053" h="30"/>
+						<spot x="1225.61804" y="246.18971" z="135.77419" h="45"/>
+						<spot x="650.78497" y="283.74808" z="143.65649" h="60"/>
+						<spot x="802.34998" y="398.54166" z="141.94272" h="90"/>
+						<spot x="772.82507" y="398.74142" z="142.14346" h="90"/>
+						<spot x="768.82507" y="398.74142" z="142.33075" h="90"/>
+						<spot x="864.98383" y="796.78802" z="164.91185" h="36"/>
+						<spot x="799.30908" y="553.94360" z="150.29807" h="60"/>
+						<spot x="502.66284" y="451.03809" z="152.12500" h="30"/>
+						<spot x="1187.04956" y="247.07819" z="136.00620" h="45"/>
+					</spawn>
+					<!-- Garrison Prime Guard(LDF5_Fortress_7011_Guard_Fi_E_MistOn_L_4) -->
+					<spawn npc_id="252277">
+						<spot x="906.36987" y="245.22900" z="142.07637"/>
+						<spot x="656.73126" y="235.36198" z="141.75000" h="60"/>
+						<spot x="664.74524" y="345.38605" z="142.32843" h="60"/>
+						<spot x="844.38745" y="372.28705" z="141.94272" h="30"/>
+						<spot x="908.06281" y="308.29742" z="142.54651"/>
+						<spot x="710.63812" y="397.19809" z="142.21011" h="45"/>
+						<spot x="783.24103" y="315.31235" z="142.98958" h="30"/>
+						<spot x="735.31128" y="371.97174" z="142.09842" h="30"/>
+						<spot x="790.24030" y="315.26315" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Garrison Prime Archer(LDF5_Fortress_7011_Guard_Ra_FP_MistOn_L_4) -->
+					<spawn npc_id="881584">
+						<spot x="847.91888" y="255.87595" z="150.94499"/>
+						<spot x="847.81573" y="307.83362" z="150.94499"/>
+						<spot x="738.80658" y="555.85138" z="148.97874" h="30"/>
+						<spot x="750.67383" y="555.87958" z="148.84436" h="30"/>
+						<spot x="836.08160" y="562.39136" z="150.99133" h="30"/>
+						<spot x="824.21436" y="562.36316" z="150.18428" h="30"/>
+					</spawn>
+					<!-- Elyos Satchel Charge(LDF5_Fortress_Trap_Light_TankDispel) -->
+					<spawn npc_id="252428">
+						<spot x="734.61761" y="353.61874" z="142.19995" h="30"/>
+						<spot x="711.01477" y="336.43121" z="141.94272" h="30"/>
+						<spot x="863.15674" y="336.22574" z="141.94272" h="30"/>
+						<spot x="839.78546" y="353.86581" z="142.19995" h="30"/>
+					</spawn>
+					
+					<!-- Elyos Bind Point Spellmaster(LDF5_Fortress_7011_GBBoss_Wi_Li_65_Ah) -->
+					<spawn npc_id="881601">
+						<spot x="1076.68774" y="711.34967" z="185.12500" h="30"/>
+						<spot x="742.77997" y="993.63940" z="151.65121" h="30"/>
+					</spawn>
+					<!-- Elyos Bind Point Battle Captain(LDF5_Fortress_7011_GBBoss_Fi_Li_65_Ah) -->
+					<spawn npc_id="881602">
+						<spot x="742.68774" y="997.37482" z="151.75000" h="30"/>
+					</spawn>
+					<!-- Elyos Bind Point Chief Inquirer(LDF5_Fortress_7011_GBBoss_Ra_Li_65_Ah) -->
+					<spawn npc_id="881603">
+						<spot x="556.46411" y="679.24323" z="153.05942" h="30"/>
+					</spawn>
+					<!-- Elyos Bind Point Spellmaster(LDF5_Fortress_7011_GBBoss_Wi_Li_65_Ah) -->
+					<spawn npc_id="881604">
+						<spot x="1077.67725" y="714.02515" z="185.12186" h="30"/>
+					</spawn>
+					<!-- Elyos Satchel Charge(LDF5_Fortress_Trap_120_Light_TankDispel) -->
+					<spawn npc_id="882293">
+						<spot x="786.58350" y="568.86957" z="149.45642" h="30"/>
+					</spawn>
+					
+					<!-- Donia(LDF5_Fortress_L_L_warehouse) -->
+  					<spawn npc_id="802405">
+    					<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Luanon(LDF5_Fortress_L_L_Apseller_good) -->
+  					<spawn npc_id="802407">
+    					<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Dafine(LDF5_Fortress_L_L_Exchange_v30abyss_35) -->
+  					<spawn npc_id="802409">
+    					<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gnaeus(LDF5_Fortress_L_L_component) -->
+  					<spawn npc_id="802411">
+    					<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Gius(LDF5_Fortress_L_L_exchange) -->
+  					<spawn npc_id="802413">
+    					<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Treia(LDF5_Fortress_L_Seller_PvPCoin_matter) -->
+  					<spawn npc_id="802415">
+    					<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!-- Elphina(LDF5_Fortress_L_warehouse) -->
+  					<spawn npc_id="802417">
+    					<spot x="754.054016" y="277.743774" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Hasvinar(LDF5_Fortress_L_Holy_Recharger) -->
+  					<spawn npc_id="802419">
+    					<spot x="754.067078" y="286.740662" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Ceidon(LDF5_Fortress_L_Spell_Recharger) -->
+  					<spawn npc_id="802421">
+    					<spot x="754.061340" y="283.741882" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Anantus(LDF5_Fortress_L_master_stigma) -->
+  					<spawn npc_id="802423">
+    					<spot x="754.059570" y="289.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Chaerus(LDF5_Fortress_L_seller_food) -->
+  					<spawn npc_id="802425">
+    					<spot x="754.070068" y="280.738647" z="156.987228" h="0"/>
+  					</spawn>
+ 					<!-- Arianerk(LDF5_Fortress_L_Exchange_v30abyss_29) -->
+  					<spawn npc_id="804611">
+    					<spot x="754.059570" y="292.750824" z="156.987228" h="0"/>
+  					</spawn>
+  					<!-- Mondus(LDF5_Fortress_L_L_Material_PvE) -->
+  					<spawn npc_id="804615">
+    					<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
+  					</spawn>
+  					<!--Tirdone" cName="LDF5_Fortress_L_L_Material_PvP) -->
+  					<spawn npc_id="804616">
+    					<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
+  					</spawn>
+					<!-- Tilion(LDF5_Fortress_L_mercenary) -->
+  					<spawn npc_id="802435">
+    					<spot x="754.318298" y="281.967621" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Dinatria(ldf5_fortress_7011_DynTeleporter_Li) -->
+					<spawn npc_id="802449">
+						<spot x="754.20966" y="273.4355" z="155.6706" h="6" />
+					</spawn>
+ 					<!-- None(LDF5_Fortress_7011_Race_Check_El) -->
+					<spawn npc_id="802456">
+						<spot x="754.017" y="270.716" z="155.67061"/>
+					</spawn>
+  					<!-- LDF5_Fortress_7011_MistOn_Check -->
+					<spawn npc_id="802459">
+						<spot x="754.01056" y="268.1861" z="155.6706"/>
+					</spawn>
+					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_L_C1) -->
+  					<spawn npc_id="802472">
+						<spot x="770.4316" y="248.5618" z="156.9872" h="61"/>
+					</spawn>
+  					<!-- Danuar Teleport Device(LDF5_Fortress_Teleporter_7011_L_C2) -->
+  					<spawn npc_id="802474">
+						<spot x="802.7849" y="248.5716" z="156.9872"/>
+					</spawn>
+  					<!-- Teleport Device(ldf5_fortress_7011_Teleporter_Off_Li -->
+  					<spawn npc_id="804486">
+    					<spot x="753.824585" y="274.743774" z="156.987228" static_id="225"/>
+  					</spawn>
+					<!-- Philonu(LDF5_Fortress_L_mercenary_02) -->
+					<spawn npc_id="804557">
+    					<spot x="754.322876" y="279.971710" z="142.98958"/>
+  					</spawn>
+  					<!-- Beros(LDF5_Fortress_L_mercenary_03) -->
+  					<spawn npc_id="804559">
+    					<spot x="754.318726" y="283.965668" z="143.977325" h="0"/>
+  					</spawn>
+					<!-- Anoha's Sword(LDF5_Fortress_Named_Spawn_FOBJ_L) -->
+  					<spawn npc_id="804576">
+    					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
+  					</spawn>
+  					<!-- Venia(LDF5_Fortress_7011_Benia_L_L_E) -->
+  					<spawn npc_id="804586">
+    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
+  					</spawn>
+  					<!-- Setanos(LDF5_Fortress_7011_Setanos_L_L_E) -->
+  					<spawn npc_id="804587">
+    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
+  					</spawn>
+  					<!-- Leton(LDF5_Fortress_Reton_E) -->
+  					<spawn npc_id="804588">
+    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+  					</spawn>
+ 					<!-- Mailbox -->
+  					<spawn npc_id="700000">
+    					<spot x="401.6335" y="1351.477" z="163.8329" h="15" static_id="441"/>
+    					<spot x="754.059570" y="295.750824" z="156.987228" h="0"/>
+  					</spawn>
+					
+					
+					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Li) -->
+					<spawn npc_id="252494">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+					
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_F_L -->
+					<spawn npc_id="250188">
+						<spot x="743.48914" y="251.6112" z="158.28091" static_id="649"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door1_Tele_R_L -->
+					<spawn npc_id="250190">
+						<spot x="748.7023" y="260.82178" z="158.28091" static_id="651"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_F_L -->
+					<spawn npc_id="250192">
+						<spot x="743.81555" y="313.11877" z="158.28091" static_id="645"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door2_Tele_R_L -->
+					<spawn npc_id="250194">
+						<spot x="748.6312" y="303.5331" z="158.28091" static_id="638"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_F_L -->
+					<spawn npc_id="250196">
+						<spot x="783.6566" y="332.9571" z="157.2171" h="30" static_id="504"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door3_Tele_R_L -->
+					<spawn npc_id="250198">
+						<spot x="791.4443" y="327.9422" z="157.61887" h="90" static_id="505"/>
+					</spawn>
+ 					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_F_L -->
+					<spawn npc_id="250200">
+						<spot x="830.50055" y="312.9942" z="156.61975" h="30" static_id="635"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door4_Tele_R_L -->
+					<spawn npc_id="250202">
+						<spot x="825.20844" y="303.93146" z="157.0737" h="90" static_id="632"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_F_L -->
+					<spawn npc_id="250204">
+						<spot x="830.30115" y="251.33136" z="156.61975" h="30" static_id="653"/>
+					</spawn>
+  					<!-- Outer Gate Teleport Device(LDF5_Fortress_Door5_Tele_R_L -->
+					<spawn npc_id="250206">
+						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
+					</spawn>
+  
+					
+ 					<!-- Castle Gate(LDF5_Fortress_7011_Door_Li) -->
+  					<spawn npc_id="252115">
+    					<spot x="787.00000" y="341.91000" z="143.06000" static_id="1657"/>
+  					</spawn>
+					<!-- Asmodian Gate(LDF5_Fortress_7011_Door_B_Li) -->
+  					<spawn npc_id="881575">
+						<spot x="742.8768" y="987.9254" z="151.0149" static_id="282"/>
+  					</spawn>
+  					<!-- Asmodian Gate(LDF5_Fortress_7011_Door_D_Li) -->
+  					<spawn npc_id="881578">
+    					<spot x="786.43964" y="564.19983" z="148.77126" static_id="276"/>
+  					</spawn>
+ 					
+					
+					<!-- Gate Teleport Device(LDF5_Fortress_7011_barricade_Tele_F_L_C1) -->
+					<spawn npc_id="702593">
+					    <spot x="561.62732" y="678.724" z="153.68115" static_id="95"/>
+					</spawn>
+					<!-- Gate Teleport Device(LDF5_Fortress_7011_barricade_Tele_R_L_C1) -->
+					<spawn npc_id="702595">
+					    <spot x="563.2450" y="668.33148" z="152.7072" static_id="132"/>
+					</spawn>
+					<!-- Gate Teleport Device" cName="LDF5_Fortress_7011_barricade_Tele_F_L_C2) -->
+					<spawn npc_id="702597">
+					    <spot x="1072.7261" y="711.32611" z="185.47467" static_id="544"/>
+					</spawn>
+					<!-- Gate Teleport Device" cName="LDF5_Fortress_7011_barricade_Tele_R_L_C2) -->
+					<spawn npc_id="702599">
+					    <spot x="1071.1566" y="704.1889" z="185.47467" static_id="508"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Lhealer_1 -->
+					<spawn npc_id="297534">
+					    <spot x="786.97711" y="259.64624" z="143.00507" static_id="977"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Lhealer_2 -->
+					<spawn npc_id="297535">
+					    <spot x="802.72742" y="297.94226" z="143.00507" static_id="1018"/>
+					</spawn>
+					<!-- BLDF5_Fortress_Lhealer_3 -->
+					<spawn npc_id="297535">
+					    <spot x="771.23541" y="297.91895" z="143.00507" static_id="1044"/>
+					</spawn>
+					<!-- Elyos Fence(LDF5a_5011_barricade01_L) -->
+					<spawn npc_id="272255">
+						<spot x="742.86737" y="988.29895" z="151.11795" static_id="185"/>
+						<spot x="557.69177" y="672.47235" z="152.60912" static_id="258"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="540"/>
+					</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_1) -->
+        			<spawn npc_id="252164">
+					    <spot x="670.1999" y="285.1302" z="152.23602" h="29"/>
+					</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_2) -->
+					<spawn npc_id="252165">
+            			<spot z="152.9179" y="377.18527" x="696.1827" h="45"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_3) -->
+					<spawn npc_id="252166">
+            			<spot z="152.9179" y="411.75964" x="767.7126" h="31"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_4) -->
+					<spawn npc_id="252167">
+            			<spot z="153.03584" y="411.54135" x="806.49084" h="28"/>
+        			</spawn>
+  					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_5) -->
+					<spawn npc_id="252168">
+            			<spot z="150.43156" y="383.5566" x="787.1603" h="91"/>
+        			</spawn>
+					<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_6) -->
+					<spawn npc_id="252169">
+            			<spot z="153.24277" y="380.38666" x="875.8561" h="20"/>
+        			</spawn>
+        			<!-- Asmodian Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_7) -->
+  					<spawn npc_id="252170">
+					    <spot x="901.3304" y="290.0627" z="152.27827" h="6"/>
+					</spawn>
+					
+					<!-- Elyos Veteran Guardian General(LDF5_Fortress_7011_Boss_Li_4) -->
+					<spawn npc_id="251828">
+						<spot x="787.02789" y="282.03790" z="143.28697" h="30" />
+					</spawn>
+					
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Pashid Prime Dragoon(LDF5_Fortress_7011_Guard_Kn_MistOff_DR_4) -->
+					<spawn npc_id="252003" respawn_time="295">
+						<spot x="661.77936" y="242.28836" z="141.75000" h="45"/>
+						<spot x="716.11707" y="236.21933" z="141.95473" h="60"/>
+						<spot x="866.71039" y="236.22334" z="141.94272"/>
+						<spot x="908.76324" y="251.64159" z="142.00986"/>
+						<spot x="667.96692" y="350.30038" z="142.26671" h="60"/>
+						<spot x="907.55176" y="355.92920" z="142.04257" h="15"/>
+						<spot x="716.74554" y="399.42947" z="142.32840" h="30"/>
+						<spot x="910.14685" y="314.60156" z="142.55579"/>
+					</spawn>
+					<!-- Pashid Prime Dragonknight(LDF5_Fortress_7011_Guard_Fi_MistOff_DR_4) -->
+					<spawn npc_id="252008" respawn_time="295">
+						<spot x="788.85931" y="349.15533" z="143.21539" h="30"/>
+						<spot x="784.49316" y="349.15533" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Patrol(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOff_DR_4) -->
+					<spawn npc_id="252013" respawn_time="295">
+						<spot x="784.32812" y="345.75262" z="153.70628" h="30"/>
+						<spot x="788.91486" y="345.74042" z="153.70628" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Patrol(LDF5_Fortress_7011_Guard_Ra_MistOff_DR_4) -->
+					<spawn npc_id="252018" respawn_time="295">
+						<spot x="820.06696" y="410.06512" z="142.37500" h="30"/>
+						<spot x="823.23169" y="413.47601" z="142.46725" h="30"/>
+						<spot x="750.81036" y="412.12500" z="141.99219" h="30"/>
+						<spot x="825.8337" y="410.1206" z="142.375" h="30" />
+						<spot x="753.4124" y="409.5236" z="142.0871" h="30" />
+						<spot x="747.6456" y="409.4681" z="142.0581" h="30" />
+					</spawn>
+					<!-- Pashid Prime Fleshmender(LDF5_Fortress_7011_Guard_Pr_MistOff_DR_4) -->
+					<spawn npc_id="252028" respawn_time="295">
+						<spot x="787.21545" y="364.82339" z="141.94272" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Wizard(LDF5_Fortress_7011_Guard_Wi_MistOff_DR_4) -->
+					<spawn npc_id="252033" respawn_time="295">
+						<spot x="902.90405" y="248.20709" z="142.33260"/>
+						<spot x="672.64862" y="345.99207" z="142.24551" h="60"/>
+						<spot x="786.81226" y="346.10339" z="143.21539" h="30"/>
+						<spot x="665.55316" y="238.50322" z="141.84708" h="60"/>
+						<spot x="716.21887" y="240.10814" z="141.99181" h="60"/>
+						<spot x="789.20801" y="367.70819" z="141.94272" h="15"/>
+						<spot x="904.42010" y="310.99350" z="142.61060"/>
+						<spot x="900.51794" y="355.70853" z="142.39935" h="15"/>
+						<spot x="866.81079" y="240.88737" z="141.94272"/>
+						<spot x="705.20709" y="293.45618" z="141.94272" h="60"/>
+						<spot x="715.55731" y="393.49603" z="142.16432" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Conjurer(LDF5_Fortress_7011_Guard_El_MistOff_DR_4) -->
+					<spawn npc_id="252038" respawn_time="295">
+						<spot x="785.16260" y="367.71588" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Pashid Defender Elite Reserve(LDF5_Fortress_7011_Guard_Gu_Nomove_MistOff_DR_4) -->
+					<spawn npc_id="252083" respawn_time="295">
+						<spot x="726.65167" y="257.64954" z="150.94499" h="60"/>
+						<spot x="726.63934" y="254.83972" z="150.94499" h="60"/>
+						<spot x="838.20007" y="309.75491" z="153.73790"/>
+						<spot x="838.16534" y="257.63177" z="153.74861"/>
+						<spot x="838.14478" y="254.95366" z="153.77245"/>
+						<spot x="838.17950" y="307.07681" z="153.76024"/>
+						<spot x="726.44891" y="306.78067" z="151.35907" h="60"/>
+						<spot x="726.47675" y="309.49591" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Pashid Defender Prime Ambusher(LDF5_Fortress_7011_Guard_As_Hi_MistOff_DR_4) -->
+					<spawn npc_id="252093" respawn_time="295">
+						<spot x="768.15619" y="398.84683" z="142.31865" h="90"/>
+						<spot x="802.01611" y="398.56271" z="141.94272" h="90"/>
+						<spot x="806.56909" y="398.56802" z="141.94272" h="90"/>
+						<spot x="772.72778" y="398.85214" z="142.17332" h="90"/>
+						<spot x="863.22131" y="336.28964" z="141.94272"/>
+					</spawn>
+					<!-- Pashid Prime Grunt(LDF5_Fortress_7011_Guard_Fi_E_MistOff_DR_4) -->
+					<spawn npc_id="252272" respawn_time="295">
+						<spot x="910.29523" y="307.84070" z="142.22881"/>
+						<spot x="710.56195" y="396.25778" z="142.21487" h="45"/>
+						<spot x="666.22528" y="343.76501" z="142.23592" h="60"/>
+						<spot x="660.59857" y="236.16972" z="141.75000" h="60"/>
+						<spot x="902.46985" y="362.61896" z="141.97958" h="15"/>
+						<spot x="908.77448" y="244.68440" z="141.82773"/>
+					</spawn>
+					<!-- LDF5_Fortress_7011_Dynamic_Bal(ldf5_fortress_7011_DynTeleporter_Dr) -->
+					<spawn npc_id="802461" respawn_time="295">
+						<spot x="754.20966" y="273.43549" z="155.67059" h="6"/>
+					</spawn>
+					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Dr) -->
+					<spawn npc_id="252496">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- Pashid Prime Dragoon(LDF5_Fortress_7011_Guard_Kn_MistOn_DR_4) -->
+					<spawn npc_id="252043">
+						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
+						<spot x="780.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="825.93555" y="416.37271" z="142.53706" h="30"/>
+						<spot x="764.94861" y="371.66461" z="141.94272" h="45"/>
+						<spot x="731.68829" y="372.07904" z="141.94272" h="30"/>
+						<spot x="800.97174" y="380.24463" z="141.94272" h="15"/>
+						<spot x="875.91498" y="326.52100" z="141.98843" h="15"/>
+						<spot x="840.76447" y="372.39435" z="141.94272" h="30"/>
+						<spot x="716.19727" y="236.24512" z="141.94963" h="60"/>
+						<spot x="714.83624" y="400.39774" z="142.27740" h="30"/>
+						<spot x="769.15497" y="375.69849" z="141.94272" h="45"/>
+						<spot x="657.70074" y="240.42207" z="141.75000" h="45"/>
+						<spot x="666.31061" y="351.49246" z="142.25000" h="60"/>
+						<spot x="753.45288" y="415.15576" z="142.03804" h="30"/>
+						<spot x="878.91498" y="324.52100" z="141.94272"/>
+						<spot x="703.07416" y="295.46201" z="141.94272" h="60"/>
+						<spot x="808.17450" y="372.49567" z="141.94272" h="15"/>
+						<spot x="788.63733" y="573.87665" z="149.98268" h="30"/>
+						<spot x="906.70367" y="250.88484" z="142.04237"/>
+						<spot x="772.86603" y="379.63693" z="141.94272" h="45"/>
+						<spot x="793.15497" y="348.69849" z="143.21539" h="30"/>
+						<spot x="804.73822" y="376.33362" z="141.94272" h="15"/>
+						<spot x="820.12524" y="416.28625" z="142.56149" h="30"/>
+						<spot x="908.12756" y="314.32373" z="142.84624"/>
+						<spot x="907.56140" y="356.00574" z="142.04118" h="15"/>
+						<spot x="866.85187" y="236.37996" z="141.94272"/>
+						<spot x="784.65283" y="573.89642" z="149.98476" h="30"/>
+						<spot x="702.97437" y="291.07028" z="141.94272" h="60"/>
+					</spawn>
+					<!-- Pashid Prime Dragonknight(LDF5_Fortress_7011_Guard_Fi_MistOn_DR_4) -->
+					<spawn npc_id="252048">
+						<spot x="445.43762" y="448.41092" z="150.11887" h="45"/>
+						<spot x="840.59753" y="779.11914" z="166.42725" h="90"/>
+						<spot x="789.46729" y="416.08563" z="142.09706" h="30"/>
+						<spot x="786.66547" y="571.83875" z="149.76849" h="30"/>
+						<spot x="883.83698" y="256.37454" z="142.02147"/>
+						<spot x="830.90674" y="816.47675" z="164.30374" h="60"/>
+						<spot x="749.12769" y="379.94748" z="141.94272" h="30"/>
+						<spot x="823.16504" y="413.47894" z="142.46637" h="30"/>
+						<spot x="785.46088" y="416.09012" z="142.09131" h="30"/>
+						<spot x="786.80548" y="315.72934" z="142.98958" h="30"/>
+						<spot x="884.12323" y="295.75946" z="141.94272"/>
+						<spot x="750.73309" y="412.23380" z="141.98538" h="30"/>
+						<spot x="1188.46667" y="228.51892" z="135.37173" h="45"/>
+						<spot x="804.64282" y="372.50452" z="141.94272" h="15"/>
+						<spot x="686.39270" y="312.14178" z="141.94272" h="30"/>
+						<spot x="824.41443" y="381.23749" z="141.94272" h="30"/>
+						<spot x="772.83765" y="375.72400" z="141.94272" h="45"/>
+						<spot x="464.67712" y="415.16446" z="151.42722" h="80"/>
+						<spot x="1222.77661" y="230.48108" z="136.76160" h="30"/>
+						<spot x="876.95361" y="355.80032" z="141.94272"/>
+						<spot x="686.68817" y="256.11761" z="141.94272" h="75"/>
+						<spot x="783.56891" y="349.38141" z="143.21539" h="30"/>
+						<spot x="789.85815" y="349.14957" z="143.21539" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Patrol(LDF5_Fortress_7011_Guard_Ra_Nomove_MistOn_DR_4) -->
+					<spawn npc_id="252053">
+						<spot x="748.01294" y="409.47775" z="142.04930" h="30"/>
+						<spot x="784.24194" y="345.82837" z="153.70628" h="30"/>
+						<spot x="788.82898" y="345.68317" z="153.70628" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Patrol(LDF5_Fortress_7011_Guard_Ra_MistOn_DR_4) -->
+					<spawn npc_id="252058">
+						<spot x="711.44116" y="392.55478" z="142.23714" h="30"/>
+						<spot x="825.80975" y="410.40988" z="142.37500" h="30"/>
+						<spot x="663.26556" y="238.84058" z="141.82246" h="45"/>
+						<spot x="903.06323" y="352.15964" z="142.43260"/>
+						<spot x="820.06323" y="410.15964" z="142.37500" h="30"/>
+						<spot x="662.55469" y="234.47510" z="141.75000" h="45"/>
+						<spot x="900.63336" y="314.15964" z="142.38458"/>
+						<spot x="673.30280" y="349.68289" z="142.34047" h="60"/>
+						<spot x="812.15796" y="334.37888" z="150.94521"/>
+						<spot x="897.06323" y="359.15964" z="142.26389" h="30"/>
+						<spot x="899.06323" y="245.29036" z="142.29678"/>
+						<spot x="761.52960" y="333.10837" z="150.94521"/>
+						<spot x="718.84497" y="397.46881" z="142.27475" h="30"/>
+						<spot x="900.63336" y="308.15964" z="142.38135"/>
+						<spot x="672.46405" y="344.07443" z="142.19971" h="60"/>
+						<spot x="753.41479" y="409.54483" z="142.08411" h="30"/>
+						<spot x="899.06323" y="251.15964" z="142.27756"/>
+						<spot x="792.83521" y="412.77975" z="142.32626" h="30"/>
+						<spot x="782.45984" y="412.67166" z="142.20802" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Grunt(LDF5_Fortress_7011_Guard_Gu_MistOn_DR_4) -->
+					<spawn npc_id="252063">
+						<spot x="841.65753" y="794.00696" z="167.27507" h="90"/>
+						<spot x="1224.61511" y="201.54649" z="136.00000" h="30"/>
+						<spot x="1201.93982" y="204.57384" z="138.37239" h="45"/>
+						<spot x="476.95715" y="446.58258" z="152.75380" h="15"/>
+						<spot x="487.49066" y="423.78125" z="153.78186" h="45"/>
+						<spot x="862.83521" y="809.18048" z="164.78224" h="36"/>
+					</spawn>
+					<!-- Pashid Prime Fleshmender(LDF5_Fortress_7011_Guard_Pr_MistOn_DR_4) -->
+					<spawn npc_id="252068">
+						<spot x="801.03687" y="372.41360" z="141.94272" h="15"/>
+						<spot x="772.83087" y="371.69852" z="141.94272" h="45"/>
+					</spawn>
+					<!-- Pashid Prime Wizard(LDF5_Fortress_7011_Guard_Wi_MistOn_DR_4) -->
+					<spawn npc_id="252073">
+						<spot x="787.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="726.87787" y="282.18811" z="142.06129" h="60"/>
+						<spot x="716.26025" y="240.10521" z="141.98898" h="60"/>
+						<spot x="787.37830" y="412.73999" z="142.28989" h="30"/>
+						<spot x="659.82214" y="237.29395" z="141.75000" h="45"/>
+						<spot x="846.78717" y="282.47385" z="142.04364"/>
+						<spot x="715.00598" y="395.23944" z="142.17029" h="30"/>
+						<spot x="784.86914" y="346.03128" z="143.21539" h="30"/>
+						<spot x="901.10779" y="356.94046" z="142.40327" h="30"/>
+						<spot x="902.99194" y="248.24072" z="142.29526"/>
+						<spot x="669.16492" y="347.73056" z="142.25000" h="60"/>
+						<spot x="904.40918" y="311.17413" z="142.60883"/>
+						<spot x="866.91498" y="240.92087" z="141.94272"/>
+					</spawn>
+					<!-- Pashid Prime Conjurer(LDF5_Fortress_7011_Guard_El_MistOn_DR_4) -->
+					<spawn npc_id="252078">
+						<spot x="768.98590" y="371.71964" z="141.94272" h="45"/>
+						<spot x="875.59454" y="323.31335" z="141.94272" h="15"/>
+						<spot x="706.35205" y="293.30908" z="141.94272" h="60"/>
+						<spot x="801.06580" y="376.34845" z="141.94272" h="15"/>
+						<spot x="830.03967" y="554.67242" z="149.63164" h="30"/>
+						<spot x="744.51947" y="549.03375" z="147.24579" h="30"/>
+						<spot x="786.79297" y="312.86292" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Pashid Force Elite Reserve(LDF5_Fortress_7011_Guard_Gu_Nomove_MistOn_DR_4) -->
+					<spawn npc_id="252088">
+						<spot x="871.10468" y="269.36121" z="148.36076"/>
+						<spot x="777.91492" y="567.10669" z="155.96236" h="15"/>
+						<spot x="871.60553" y="297.48273" z="148.11391"/>
+						<spot x="726.22510" y="256.16418" z="150.94499" h="60"/>
+						<spot x="871.10468" y="266.36121" z="148.36076"/>
+						<spot x="704.00342" y="260.14362" z="148.36076" h="60"/>
+						<spot x="795.13708" y="567.97729" z="156.13350" h="45"/>
+						<spot x="697.17932" y="335.35001" z="148.11391" h="60"/>
+						<spot x="697.17932" y="332.35001" z="148.11391" h="60"/>
+						<spot x="704.00342" y="263.14362" z="148.36076" h="60"/>
+						<spot x="871.60553" y="300.48273" z="148.11391"/>
+						<spot x="726.70807" y="308.14740" z="150.94499" h="60"/>
+					</spawn>
+					<!-- Pashid Force Prime Ambusher(LDF5_Fortress_7011_Guard_As_Hi_MistOn_DR_4) -->
+					<spawn npc_id="252108">
+						<spot x="772.06476" y="551.69507" z="150.12692"/>
+						<spot x="800.91052" y="552.37909" z="150.29807" h="60"/>
+						<spot x="880.18573" y="395.29965" z="143.25000" h="30"/>
+						<spot x="692.13068" y="394.78125" z="142.00000" h="30"/>
+						<spot x="919.78937" y="286.68723" z="142.48683" h="15"/>
+						<spot x="876.60889" y="395.74756" z="144.86809" h="30"/>
+						<spot x="917.22119" y="283.46585" z="143.91550" h="15"/>
+						<spot x="815.63135" y="802.05109" z="160.01938" h="36"/>
+						<spot x="471.04428" y="405.17090" z="152.74208" h="45"/>
+						<spot x="773.75970" y="553.19519" z="150.12692"/>
+						<spot x="653.96271" y="278.96600" z="144.71469" h="60"/>
+						<spot x="690.83759" y="389.53189" z="144.45053" h="30"/>
+						<spot x="1225.61804" y="246.18971" z="135.77419" h="45"/>
+						<spot x="650.78497" y="283.74808" z="143.65649" h="60"/>
+						<spot x="802.34998" y="398.54166" z="141.94272" h="90"/>
+						<spot x="772.82507" y="398.74142" z="142.14346" h="90"/>
+						<spot x="768.82507" y="398.74142" z="142.33075" h="90"/>
+						<spot x="864.98383" y="796.78802" z="164.91185" h="36"/>
+						<spot x="799.30908" y="553.94360" z="150.29807" h="60"/>
+						<spot x="502.66284" y="451.03809" z="152.12500" h="30"/>
+						<spot x="1187.04956" y="247.07819" z="136.00620" h="45"/>
+					</spawn>
+					<!-- Pashid Heavy Howitzer(LDF5_Fortress_7011_Guard_SWHowitzer_MistOn_DR_4) -->
+					<spawn npc_id="252113">
+						<spot x="744.57935" y="555.93768" z="149.03877" h="30"/>
+						<spot x="787.04413" y="381.04166" z="150.43178" h="90"/>
+						<spot x="875.85608" y="380.38666" z="152.04544" h="18"/>
+						<spot x="830.20618" y="562.32593" z="150.41206" h="30"/>
+						<spot x="806.49084" y="411.54135" z="152.19354" h="30"/>
+						<spot x="767.71259" y="411.75964" z="152.20274" h="30"/>
+						<spot x="902.56018" y="275.55267" z="152.08636"/>
+						<spot x="667.61359" y="270.21060" z="152.08636" h="60"/>
+						<spot x="696.18268" y="377.18527" z="152.08636" h="45"/>
+					</spawn>
+					<!-- Pashid Prime Grunt(LDF5_Fortress_7011_Guard_Fi_E_MistOn_DR_4) -->
+					<spawn npc_id="252287">
+						<spot x="906.36987" y="245.22900" z="142.07637"/>
+						<spot x="656.73126" y="235.36198" z="141.75000" h="60"/>
+						<spot x="664.74524" y="345.38605" z="142.32843" h="60"/>
+						<spot x="844.38745" y="372.28705" z="141.94272" h="30"/>
+						<spot x="908.06281" y="308.29742" z="142.54651"/>
+						<spot x="710.63812" y="397.19809" z="142.21011" h="45"/>
+						<spot x="783.24103" y="315.31235" z="142.98958" h="30"/>
+						<spot x="735.31128" y="371.97174" z="142.09842" h="30"/>
+						<spot x="790.24030" y="315.26315" z="142.98958" h="30"/>
+					</spawn>
+					<!-- Pashid Prime Patrol(LDF5_Fortress_7011_Guard_Ra_FP_MistOn_DR_4) -->
+					<spawn npc_id="881594">
+						<spot x="847.91888" y="255.87595" z="150.94499"/>
+						<spot x="847.81573" y="307.83362" z="150.94499"/>
+						<spot x="738.80658" y="555.85138" z="148.97874" h="30"/>
+						<spot x="750.67383" y="555.87958" z="148.84436" h="30"/>
+						<spot x="836.08160" y="562.39136" z="150.99133" h="30"/>
+						<spot x="824.21436" y="562.36316" z="150.18428" h="30"/>
+					</spawn>
+					<!-- Pashid Satchel Charge(LDF5_Fortress_Trap_Dragon_TankDispel) -->
+					<spawn npc_id="252430">
+						<spot x="734.61761" y="353.61874" z="142.19995" h="30"/>
+						<spot x="711.01477" y="336.43121" z="141.94272" h="30"/>
+						<spot x="863.15674" y="336.22574" z="141.94272" h="30"/>
+						<spot x="839.78546" y="353.86581" z="142.19995" h="30"/>
+					</spawn>
+					<!-- LDF5_Fortress_7011_Dynamic_Bal(ldf5_fortress_7011_DynTeleporter_Dr) -->
+					<spawn npc_id="802461">
+						<spot x="754.20966" y="273.43549" z="155.67059" h="6"/>
+					</spawn>
+					<!-- Pashid Bind Point Assault Captain(LDF5_Fortress_7011_GBKiller_DR_65_Ah) -->
+					<spawn npc_id="881598">
+						<spot x="1076.68774" y="711.34967" z="185.12500" h="30"/>
+						<spot x="742.77997" y="993.63940" z="151.65121" h="30"/>
+					</spawn>
+					<!-- Pashid Bind Point Commander(LDF5_Fortress_7011_GBBoss_Fi_DR_65_Ah) -->
+					<spawn npc_id="881599">
+						<spot x="742.68774" y="997.37482" z="151.75000" h="30"/>
+					</spawn>
+					<!-- Pashid Bind Point Search Captain(LDF5_Fortress_7011_GBBoss_Ra_DR_65_Ah) -->
+					<spawn npc_id="881600">
+						<spot x="556.46411" y="679.24323" z="153.05942" h="30"/>
+					</spawn>
+					<!-- Pashid Bind Point Prime Sorceress(LDF5_Fortress_7011_GBBoss_Wi_DR_65_Ah) -->
+					<spawn npc_id="881601">
+						<spot x="1077.67725" y="714.02515" z="185.12186" h="30"/>
+					</spawn>
+					<!-- Pashid Satchel Charge(LDF5_Fortress_Trap_120_Dragon_TankDispel) -->
+					<spawn npc_id="882295">
+						<spot x="786.58350" y="568.86957" z="149.45642" h="30"/>
+					</spawn>
+
+  					<!-- Castle Gate(LDF5_Fortress_7011_Door_Dr) -->
+  					<spawn npc_id="252117">
+    					<spot x="787.00000" y="341.91000" z="143.06000" static_id="1657"/>
+  					</spawn>
+					<!-- Outer Gate(LDF5_Fortress_7011_Terrace_Door_Dr) -->
+					<spawn npc_id="252291">
+						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+					</spawn>
+					<!-- Balaur Gate(LDF5_Fortress_7011_Door_B_Dr) -->
+  					<spawn npc_id="881577">
+ 						<spot x="742.8768" y="987.9254" z="151.0149" static_id="347"/>
+  					</spawn>
+  					<!-- Balaur Gate(LDF5_Fortress_7011_Door_D_Dr) -->
+  					<spawn npc_id="881580">
+    					<spot x="786.43964" y="564.19983" z="148.77126" static_id="269"/>
+  					</spawn>
+					<!-- Balaur Picket(LDF5a_5011_barricade01_DR) -->
+					<spawn npc_id="272261">
+						<spot x="742.86737" y="988.29895" z="151.11795" static_id="185"/>
+						<spot x="557.69177" y="672.47235" z="152.60912" static_id="258"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="540"/>
+					</spawn>
+
+					<!-- Pashid Veteran Guardian General(LDF5_Fortress_7011_Boss_Dr_4) -->
+					<spawn npc_id="251838">
+						<spot x="787.02789" y="282.03790" z="143.28697" h="30" />
+					</spawn>
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="7012">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- Squad Veteran Artifact Protector(LDF5_Fortress_7012_Boss_Da_4) -->
+					<spawn npc_id="252186" respawn_time="295">
+						<spot x="839.2666" y="793.2137" z="167.13564" h="86" />
+					</spawn>
+					<!-- Squad Artifact Savant Defender(LDF5_Fortress_7012_Guard_Kn_D) -->
+					<spawn npc_id="252227" respawn_time="295">
+						<spot x="841.6434" y="815.8891" z="164.77773" h="45" />
+						<spot x="864.85565" y="800.7359" z="164.67848" h="60" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Tracker(LDF5_Fortress_7012_Guard_Ra_D) -->
+					<spawn npc_id="252228" respawn_time="295">
+						<spot x="829.9286" y="783.938" z="165.20201" h="90" />
+						<spot x="853.0012" y="813.36127" z="164.53992" h="20" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Healer(LDF5_Fortress_7012_Guard_Pr_D) -->
+					<spawn npc_id="252229" respawn_time="295">
+						<spot x="836.47070" y="794.38782" z="167.13480" h="86" />
+					</spawn>
+					<!-- Squad Artifact Savant Warmage(LDF5_Fortress_7012_Guard_Wi_D) -->
+					<spawn npc_id="252230" respawn_time="295">
+						<spot x="851.751" y="783.4045" z="166.48056" h="86" />
+						<spot x="824.342" y="807.25146" z="164.56009" h="60" />
+					</spawn>
+					<!-- (B): Hellfire Array(LDF5_Fortress_Artifact_70121_D) -->
+					<spawn npc_id="252293" respawn_time="295">
+						<spot x="840.4733" y="801.1002" z="165" static_id="550" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7012_DynTeleporter_Da) -->
+					<spawn npc_id="804529" respawn_time="295">
+						<spot x="865.1982" y="802.3431" z="164.96552" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Asmo(LDF5_Fortress_7012_Owner_D) -->
+					<spawn npc_id="804538" respawn_time="295">
+						<spot x="855.0255" y="818.8858" z="164.78502" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Pashid Veteran Artifact Protector(LDF5_Fortress_7012_Boss_Dr_4) -->
+					<spawn npc_id="252191" respawn_time="295">
+						<spot x="839.2666" y="793.2137" z="167.13564" h="86" />
+					</spawn>
+					<!-- Pashid Artifact Savant Defender(LDF5_Fortress_7012_Guard_Kn_DR) -->
+					<spawn npc_id="252231" respawn_time="295">
+						<spot x="841.6434" y="815.8891" z="164.77773" h="45" />
+						<spot x="864.85565" y="800.7359" z="164.67848" h="60" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Tracker(LDF5_Fortress_7012_Guard_Ra_DR) -->
+					<spawn npc_id="252232" respawn_time="295">
+						<spot x="829.9286" y="783.938" z="165.20201" h="90" />
+						<spot x="853.0012" y="813.36127" z="164.53992" h="20" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Healer(LDF5_Fortress_7012_Guard_Pr_DR) -->
+					<spawn npc_id="252233" respawn_time="295">
+						<spot x="836.47070" y="794.38782" z="167.13480" h="86" />
+					</spawn>
+					<!-- Pashid Artifact Savant Warmage(LDF5_Fortress_7012_Guard_Wi_DR) -->
+					<spawn npc_id="252234" respawn_time="295">
+						<spot x="851.751" y="783.4045" z="166.48056" h="86" />
+						<spot x="824.342" y="807.25146" z="164.56009" h="60" />
+					</spawn>
+					<!-- (B): Hellfire Array(LDF5_Fortress_Artifact_70121_Dr) -->
+					<spawn npc_id="252294" respawn_time="295">
+						<spot x="840.4733" y="801.1002" z="165" static_id="549" />
+					</spawn>
+					<!-- Pashid Assault Leader(LDF5_Fortress_7012_Artifact_Killer_As_Dr_65_Ah) ???
+					<spawn npc_id="252431" respawn_time="295">
+						<spot x="837.56903" y="788.26245" z="165.67386" h="30" />
+						<spot x="838.08923" y="786.8826" z="165.89525" h="15" />
+					</spawn>  -->
+					<!-- Teleport Device(LDF5_Fortress_7012_DynTeleporter_Dr) -->
+					<spawn npc_id="804530" respawn_time="295">
+						<spot x="865.1982" y="802.3431" z="164.96552" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Bal(LDF5_Fortress_7012_Owner_Dr) -->
+					<spawn npc_id="804539" respawn_time="295">
+						<spot x="855.0255" y="818.8858" z="164.78502" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<spawn npc_id="252181" respawn_time="295">
+						<spot x="839.2666" y="793.2137" z="167.135635" h="86" />
+					</spawn>
+					<spawn npc_id="802443" respawn_time="295">
+						<spot x="865.881653" y="805.2901" z="165.499023" h="60" />
+					</spawn>
+
+					<!-- Garrison Veteran Artifact Protector(LDF5_Fortress_7012_Boss_Li_4) -->
+					<spawn npc_id="252181" respawn_time="295">
+						<spot x="839.2666" y="793.2137" z="167.13564" h="86" />
+					</spawn>
+					<!-- Garrison Artifact Savant Defender(LDF5_Fortress_7012_Guard_Kn_L) -->
+					<spawn npc_id="252223" respawn_time="295">
+						<spot x="841.6434" y="815.8891" z="164.77773" h="45" />
+						<spot x="864.85565" y="800.7359" z="164.67848" h="60" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Tracker(LDF5_Fortress_7012_Guard_Ra_L) -->
+					<spawn npc_id="252224" respawn_time="295">
+						<spot x="829.9286" y="783.938" z="165.20201" h="90" />
+						<spot x="853.0012" y="813.36127" z="164.53992" h="20" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Healer(LDF5_Fortress_7012_Guard_Pr_L) -->
+					<spawn npc_id="252225" respawn_time="295">
+						<spot x="836.47070" y="794.38782" z="167.13480" h="86" />
+					</spawn>
+					<!-- Garrison Artifact Savant Warmage(LDF5_Fortress_7012_Guard_Wi_L) -->
+					<spawn npc_id="252226" respawn_time="295">
+						<spot x="851.751" y="783.4045" z="166.48056" h="86" />
+						<spot x="824.342" y="807.25146" z="164.56009" h="60" />
+					</spawn>
+					<!-- (B): Hellfire Array(LDF5_Fortress_Artifact_70121_L) -->
+					<spawn npc_id="252292" respawn_time="295">
+						<spot x="840.4733" y="801.1002" z="165" static_id="551" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7012_DynTeleporter_Li) -->
+					<spawn npc_id="804528" respawn_time="295">
+						<spot x="865.1982" y="802.3431" z="164.96552" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_El(LDF5_Fortress_7012_Owner_L) -->
+					<spawn npc_id="804537" respawn_time="295">
+						<spot x="855.0255" y="818.8858" z="164.78502" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="7013">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- Squad Veteran Artifact Protector(LDF5_Fortress_7013_Boss_Da_4) -->
+					<spawn npc_id="252201" respawn_time="295">
+						<spot x="478.81744" y="444.46005" z="152.74867" h="15" />
+					</spawn>
+					<!-- Squad Artifact Savant Defender(LDF5_Fortress_7013_Guard_Kn_D) -->
+					<spawn npc_id="252239" respawn_time="295">
+						<spot x="460.44843" y="422.94504" z="151.56894" h="80" />
+						<spot x="449.94864" y="441.48257" z="150.28876" h="50" />
+						<spot x="484.393" y="458.6411" z="150.45993" h="15" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Tracker(LDF5_Fortress_7013_Guard_Ra_D) -->
+					<spawn npc_id="252240" respawn_time="295">
+						<spot x="473.52493" y="417.5762" z="151.07947" h="90" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Healer"(LDF5_Fortress_7013_Guard_Pr_D) -->
+					<spawn npc_id="252241" respawn_time="295">
+						<spot x="480.55267" y="442.66135" z="152.75969" h="15" />
+					</spawn>
+					<!-- Squad Artifact Savant Warmage(LDF5_Fortress_7013_Guard_Wi_D) -->
+					<spawn npc_id="252242" respawn_time="295">
+						<spot x="453.13644" y="449.92587" z="151.20845" h="60" />
+						<spot x="493.09726" y="448.58118" z="151.72583" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70131_Da) -->
+					<spawn npc_id="252296" respawn_time="295">
+						<spot x="472.1639" y="440.5155" z="151" static_id="24" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7013_DynTeleporter_Da) -->
+					<spawn npc_id="804532" respawn_time="295">
+						<spot x="490.66672" y="427.2991" z="154.25858" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Asmo(LDF5_Fortress_7013_Owner_D) -->
+					<spawn npc_id="804541" respawn_time="295">
+						<spot x="498.72632" y="429.62427" z="155.41124" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Pashid Veteran Artifact Protector(LDF5_Fortress_7013_Boss_Dr_4) -->
+					<spawn npc_id="252206" respawn_time="295">
+						<spot x="478.81744" y="444.46005" z="152.74867" h="15" />
+					</spawn>
+					<!-- Pashid Artifact Savant Defender(LDF5_Fortress_7013_Guard_Kn_DR) -->
+					<spawn npc_id="252243" respawn_time="295">
+						<spot x="460.44843" y="422.94504" z="151.56894" h="80" />
+						<spot x="449.94864" y="441.48257" z="150.28876" h="50" />
+						<spot x="484.393" y="458.6411" z="150.45993" h="15" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Tracker(LDF5_Fortress_7013_Guard_Ra_DR) -->
+					<spawn npc_id="252244" respawn_time="295">
+						<spot x="473.52493" y="417.5762" z="151.07947" h="90" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Healer(LDF5_Fortress_7013_Guard_Pr_DR) -->
+					<spawn npc_id="252245" respawn_time="295">
+						<spot x="480.55267" y="442.66135" z="152.75969" h="15" />
+					</spawn>
+					<!-- Pashid Artifact Savant Warmage(LDF5_Fortress_7013_Guard_Wi_DR) -->
+					<spawn npc_id="252246" respawn_time="295">
+						<spot x="453.13644" y="449.92587" z="151.20845" h="60" />
+						<spot x="493.09726" y="448.58118" z="151.72583" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70131_Dr) -->
+					<spawn npc_id="252297" respawn_time="295">
+						<spot x="472.1639" y="440.5155" z="151" static_id="31" />
+					</spawn>
+					<!-- Pashid Assault Leader(LDF5_Fortress_7013_Artifact_Killer_As_Dr_65_Ah)
+					<spawn npc_id="252432" respawn_time="295">
+						<spot x="483.07526" y="447.66486" z="150.95374" h="75" />
+						<spot x="482.934" y="447.21085" z="150.99095" h="75" />
+					</spawn>  -->
+					<!-- Teleport Device(LDF5_Fortress_7013_DynTeleporter_Dr) -->
+					<spawn npc_id="804533" respawn_time="295">
+						<spot x="490.66672" y="427.2991" z="154.25858" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Bal(LDF5_Fortress_7013_Owner_Dr) -->
+					<spawn npc_id="804542" respawn_time="295">
+						<spot x="498.72632" y="429.62427" z="155.41124" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Garrison Veteran Artifact Protector(LDF5_Fortress_7013_Boss_Li_4) -->
+					<spawn npc_id="252196" respawn_time="295">
+						<spot x="478.81744" y="444.46005" z="152.74867" h="15" />
+					</spawn>
+					<!-- Garrison Artifact Savant Defender(LDF5_Fortress_7013_Guard_Kn_L) -->
+					<spawn npc_id="252235" respawn_time="295">
+						<spot x="460.44843" y="422.94504" z="151.56894" h="80" />
+						<spot x="449.94864" y="441.48257" z="150.28876" h="50" />
+						<spot x="484.393" y="458.6411" z="150.45993" h="15" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Tracker(LDF5_Fortress_7013_Guard_Ra_L) -->
+					<spawn npc_id="252236" respawn_time="295">
+						<spot x="473.52493" y="417.5762" z="151.07947" h="90" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Healer(LDF5_Fortress_7013_Guard_Pr_L) -->
+					<spawn npc_id="252237" respawn_time="295">
+						<spot x="480.55267" y="442.66135" z="152.75969" h="15" />
+					</spawn>
+					<!-- Garrison Artifact Savant Warmage(LDF5_Fortress_7013_Guard_Wi_L) -->
+					<spawn npc_id="252238" respawn_time="295">
+						<spot x="453.13644" y="449.92587" z="151.20845" h="60" />
+						<spot x="493.09726" y="448.58118" z="151.72583" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70131_Li) -->
+					<spawn npc_id="252295" respawn_time="295">
+						<spot x="472.1639" y="440.5155" z="151" static_id="35" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7013_DynTeleporter_Li) -->
+					<spawn npc_id="804531" respawn_time="295">
+						<spot x="490.66672" y="427.2991" z="154.25858" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_El(LDF5_Fortress_7013_Owner_L) -->
+					<spawn npc_id="804540" respawn_time="295">
+						<spot x="498.72632" y="429.62427" z="155.41124" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="7014">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- Squad Veteran Artifact Protector(LDF5_Fortress_7014_Boss_Da_4) -->
+					<spawn npc_id="252216" respawn_time="295">
+						<spot x="1204.02625" y="205.399277" z="138.364136" h="45" />
+					</spawn>
+					<!-- Squad Artifact Savant Defender(LDF5_Fortress_7014_Guard_Kn_D) -->
+					<spawn npc_id="252251" respawn_time="295">
+						<spot x="1228.1453" y="225.81429" z="136.0" h="30" />
+						<spot x="1194.4471" y="234.91045" z="136.44765" h="45" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Tracker(LDF5_Fortress_7014_Guard_Ra_D) -->
+					<spawn npc_id="252252" respawn_time="295">
+						<spot x="1219.7482" y="219.31056" z="136.0" h="30" />
+						<spot x="1192.9865" y="223.85869" z="135.8733" h="30" />
+					</spawn>
+					<!-- Squad Artifact Savant Master Healer(LDF5_Fortress_7014_Guard_Pr_D) -->
+					<spawn npc_id="252253" respawn_time="295">
+						<spot x="1206.2028" y="206.49586" z="138.37029" h="30" />
+					</spawn>
+					<!-- Squad Artifact Savant Warmage(LDF5_Fortress_7014_Guard_Wi_D) -->
+					<spawn npc_id="252254" respawn_time="295">
+						<spot x="1217.0295" y="228.73668" z="136.65274" h="30" />
+						<spot x="1185.8403" y="228.60164" z="135.07742" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70141_Da) -->
+					<spawn npc_id="252299" respawn_time="295">
+						<spot x="1206.809" y="199.8291" z="136.375" static_id="553" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7014_DynTeleporter_Da) -->
+					<spawn npc_id="804535" respawn_time="295">
+						<spot x="1229.53369" y="194.51637" z="136" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Asmo(LDF5_Fortress_7014_Owner_D) -->
+					<spawn npc_id="804544" respawn_time="295">
+						<spot x="1217.60925" y="181.56523" z="136" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Pashid Veteran Artifact Protector(LDF5_Fortress_7014_Boss_Dr_4) -->
+					<spawn npc_id="252221" respawn_time="295">
+						<spot x="1204.02625" y="205.399277" z="138.364136" h="45" />
+					</spawn>
+					<!-- Pashid Artifact Savant Defender(LDF5_Fortress_7014_Guard_Kn_DR) -->
+					<spawn npc_id="252255" respawn_time="295">
+						<spot x="1228.1453" y="225.81429" z="136.0" h="30" />
+						<spot x="1194.4471" y="234.91045" z="136.44765" h="45" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Tracker(LDF5_Fortress_7014_Guard_Ra_DR) -->
+					<spawn npc_id="252256" respawn_time="295">
+						<spot x="1219.7482" y="219.31056" z="136.0" h="30" />
+						<spot x="1192.9865" y="223.85869" z="135.8733" h="30" />
+					</spawn>
+					<!-- Pashid Artifact Savant Master Healer(LDF5_Fortress_7014_Guard_Pr_DR) -->
+					<spawn npc_id="252257" respawn_time="295">
+						<spot x="1206.2028" y="206.49586" z="138.37029" h="30" />
+					</spawn>
+					<!-- Pashid Artifact Savant Warmage(LDF5_Fortress_7014_Guard_Wi_DR) -->
+					<spawn npc_id="252258" respawn_time="295">
+						<spot x="1217.0295" y="228.73668" z="136.65274" h="30" />
+						<spot x="1185.8403" y="228.60164" z="135.07742" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70141_Dr) -->
+					<spawn npc_id="252300" respawn_time="295">
+						<spot x="1206.809" y="199.8291" z="136.375" static_id="554" />
+					</spawn>
+					<!-- Pashid Assault Leader(LDF5_Fortress_7014_Artifact_Killer_As_Dr_65_Ah)
+					<spawn npc_id="252433" respawn_time="295">
+						<spot x="1200.5625" y="211.16716" z="136.375" h="105" />
+						<spot x="1201.6398" y="209.91783" z="136.375" h="105" />
+					</spawn> -->
+					<!-- Teleport Device(LDF5_Fortress_7014_DynTeleporter_Dr) -->
+					<spawn npc_id="804536" respawn_time="295">
+						<spot x="1229.53369" y="194.51637" z="136" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_Bal(LDF5_Fortress_7014_Owner_Dr) -->
+					<spawn npc_id="804545" respawn_time="295">
+						<spot x="1217.60925" y="181.56523" z="136" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Garrison Veteran Artifact Protector(LDF5_Fortress_7014_Boss_Li_4) -->
+					<spawn npc_id="252211" respawn_time="295">
+						<spot x="1204.02625" y="205.399277" z="138.364136" h="45" />
+					</spawn>
+					<!-- Garrison Artifact Savant Defender(LDF5_Fortress_7014_Guard_Kn_L) -->
+					<spawn npc_id="252247" respawn_time="295">
+						<spot x="1228.1453" y="225.81429" z="136.0" h="30" />
+						<spot x="1194.4471" y="234.91045" z="136.44765" h="45" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Tracker(LDF5_Fortress_7014_Guard_Ra_L) -->
+					<spawn npc_id="252248" respawn_time="295">
+						<spot x="1219.7482" y="219.31056" z="136.0" h="30" />
+						<spot x="1192.9865" y="223.85869" z="135.8733" h="30" />
+					</spawn>
+					<!-- Garrison Artifact Savant Master Healer(LDF5_Fortress_7014_Guard_Pr_L) -->
+					<spawn npc_id="252249" respawn_time="295">
+						<spot x="1206.2028" y="206.49586" z="138.37029" h="30" />
+					</spawn>
+					<!-- Garrison Artifact Savant Warmage(LDF5_Fortress_7014_Guard_Wi_L) -->
+					<spawn npc_id="252250" respawn_time="295">
+						<spot x="1217.0295" y="228.73668" z="136.65274" h="30" />
+						<spot x="1185.8403" y="228.60164" z="135.07742" h="30" />
+					</spawn>
+					<!-- (B): Soul Crush(LDF5_Fortress_Artifact_70141_Li) -->
+					<spawn npc_id="252298" respawn_time="295">
+						<spot x="1206.809" y="199.8291" z="136.375" static_id="553" />
+					</spawn>
+					<!-- Teleport Device(LDF5_Fortress_7014_DynTeleporter_Li) -->
+					<spawn npc_id="804534" respawn_time="295">
+						<spot x="1229.53369" y="194.51637" z="136" />
+					</spawn>
+					<!-- LDF5_Fortress_7011_Race_Check_El(LDF5_Fortress_7014_Owner_Li) -->
+					<spawn npc_id="804543" respawn_time="295">
+						<spot x="1217.60925" y="181.56523" z="136" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+	</spawn_map>
+</spawns>

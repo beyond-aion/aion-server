@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301330000">
+		<!-- Danuar Reliquary Novun -->
+		<spawn npc_id="284377">
+			<spot x="255.37" y="263.11" z="241.81252" h="90"/>
+		</spawn>
+		<!-- Idean Lapilima -->
+		<spawn npc_id="284378">
+			<spot x="248.03435" y="263.18369" z="243.28584" h="96"/>
+		</spawn>
+		<!-- Idean Obscura -->
+		<spawn npc_id="284379">
+			<spot x="262.16617" y="266.0946" z="243.08418" h="90"/>
+		</spawn>
+		<!-- Lucky Lunarinerk -->
+		<spawn npc_id="832268">
+			<spot x="246" y="254" z="241.8917" h="6" />
+		</spawn>
+		<!-- Treasure Chest -->
+		<spawn npc_id="832259" respawn_time="295">
+			<spot x="269" y="260" z="241.8951" h="63" />
+			<spot x="268" y="263" z="241.8923" h="68" />
+		</spawn>
+	</spawn_map>
+</spawns>

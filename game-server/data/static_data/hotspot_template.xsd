@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
+	<xs:include schemaLocation="global_types.xsd"/>
+  <xs:element name="hotspot_template">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="hotspot_location"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hotspot_location">
+    <xs:complexType>
+      <xs:attribute name="id" use="required" type="xs:integer"/>
+      <xs:attribute name="price" use="required" type="xs:integer"/>
+      <xs:attribute name="race" type="Race" default="PC_ALL"/>
+      <xs:attribute name="worldId" use="required" type="xs:integer"/>
+      <xs:attribute name="x" use="required" type="xs:decimal"/>
+      <xs:attribute name="y" use="required" type="xs:decimal"/>
+      <xs:attribute name="z" use="required" type="xs:decimal"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

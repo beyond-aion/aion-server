@@ -1,0 +1,2 @@
+ALTER TABLE `player_registered_items` ADD COLUMN `floor` tinyint(4) NOT NULL DEFAULT '0' after `area`;
+UPDATE `player_registered_items` SET `floor` = -1 WHERE `area` = 'DECOR' AND `owner_use_count` = '0';

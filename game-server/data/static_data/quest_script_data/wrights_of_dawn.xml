@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+  		[BEGIN] SUMMARY
+			37500: [XML] [Daily] Abyssal Accolades
+			37501: [XML] [Daily] Balaurean Benefits
+			37502: [XML] [Daily] Tiamarantean Treasures
+			37503: [XML] [Daily] Seraphic Sanction
+		[END] SUMMARY
+	-->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="37500" start_npc_ids="0" end_npc_ids="205546 205551"/>
+	<item_collecting id="37501" start_npc_ids="0" end_npc_ids="205546 205551"/>
+	<item_collecting id="37502" start_npc_ids="0" end_npc_ids="205546 205551"/>
+	<item_collecting id="37503" start_npc_ids="0" end_npc_ids="205546 205551"/>
+</quest_scripts>

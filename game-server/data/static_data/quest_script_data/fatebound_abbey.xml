@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			29600 [XML] Welcome Back
+			29601 [XML] Instruction on Instructors
+			29602 [XML] The Sheen of Newness
+			29603 [XML] [Daily] Brusthonin Brushback
+			29604 [XML] Drop into Draupnir
+			29605 [XML] Spiking the Spirits
+			29606 [XML] For Great Justice!
+			29607 [XML] Back to the Future from the Present
+			29608 [XML] Ready for Gelkmaros
+			29609 [XML] [Daily] Trouble Near Taloc
+			29610 [XML] Aether Aegis
+			29611 [XML] Under a Spell in Undirborg
+			29612 [XML] Temple and Tomb
+			29613 [XML] Allies for Peace
+			29614 [XML] [Daily] Protect the Oasis
+			29615 [XML] Dredgion Dismantling
+			29616 [XML] Weaken the Stronghold
+			29617 [XML] A Time to Kill
+			29618 [XML] Recovering from Betrayal
+			29619 [XML] Reclaiming Relics
+			29620 [XML] Dispatched Once More
+			29621 [XML] Something in the Road
+			29622 [XML] Down in the Depths
+			29623 [XML] Right Time for a War
+			29624 [XML] Flames and Stone
+			29625 [XML] [Daily] Supplies Are Coming
+			29626 [XML] A Game of Bridge
+			29627 [XML] Come Back with Friends
+			29628 [XML] Foundry-Field Link
+			29629 [XML] Hyperion before It was Cool
+			29630 [XML] Light Up the Obelisk
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+    <report_to id="29600" start_npc_ids="209677" end_npc_ids="804662"/>
+	<report_to_many id="29601" start_npc_ids="804662" end_npc_ids="804666">
+		<npc_infos var="0" npc_id="804663" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="804664" quest_dialog="1693"/>
+		<npc_infos var="2" npc_id="804665" quest_dialog="2034"/>
+		<npc_infos var="3" npc_id="804666" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="29602" start_npc_ids="804663" end_npc_ids="798155">
+		<npc_infos var="0" npc_id="205986" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="209476" quest_dialog="1693" close_dialog="1009"/>
+	</report_to_many>
+	<report_to id="29604" start_npc_ids="804663" end_npc_ids="204817"/>
+	<report_to id="29605" start_npc_ids="804663" end_npc_ids="800421"/>
+	<report_to id="29606" start_npc_ids="804663" end_npc_ids="205225"/>
+	<report_to id="29607" start_npc_ids="804663" end_npc_ids="204837"/>
+	<report_to_many id="29608" start_npc_ids="804664" end_npc_ids="799225">
+		<npc_infos var="0" npc_id="205986" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="799225" quest_dialog="1693" close_dialog="1009"/>
+	</report_to_many>
+	<report_to id="29610" start_npc_ids="804664" end_npc_ids="799208"/>
+	<report_to id="29611" start_npc_ids="804664" end_npc_ids="799333"/>
+	<report_to id="29612" start_npc_ids="804664" end_npc_ids="799225"/>
+	<report_to id="29613" start_npc_ids="804664" end_npc_ids="802463"/>
+	<report_to id="29615" start_npc_ids="804665" end_npc_ids="799531"/>
+	<report_to id="29616" start_npc_ids="804665" end_npc_ids="205864"/>
+	<report_to id="29617" start_npc_ids="804665" end_npc_ids="205886"/>
+	<report_to id="29618" start_npc_ids="804665" end_npc_ids="205864"/>
+	<report_to id="29619" start_npc_ids="804665" end_npc_ids="800070"/>
+	<report_to id="29620" start_npc_ids="804666" end_npc_ids="800529"/>
+	<report_to id="29621" start_npc_ids="804666" end_npc_ids="802054"/>
+	<report_to id="29622" start_npc_ids="804666" end_npc_ids="801545"/>
+	<report_to id="29623" start_npc_ids="804666" end_npc_ids="802353"/>
+	<report_to id="29624" start_npc_ids="804666" end_npc_ids="802433"/>
+	<report_to id="29626" start_npc_ids="804666" end_npc_ids="804614"/>
+	<report_to id="29627" start_npc_ids="804666" end_npc_ids="804614"/>
+	<report_to id="29628" start_npc_ids="804666" end_npc_ids="802353"/>
+	<report_to id="29629" start_npc_ids="804666" end_npc_ids="801947"/>
+	<report_to id="29630" start_npc_ids="804666" end_npc_ids="804599"/>
+	<!-- MONSTER HUNT QUESTS -->
+	<monster_hunt id="29603" start_npc_ids="804651" end_npc_ids="209476">	
+		<monster var="0" npc_ids="214498 214494" end_var="10"/>
+	</monster_hunt>
+	<monster_hunt id="29609" start_npc_ids="804651" end_npc_ids="799225">	
+		<monster var="0" npc_ids="215989 215931" end_var="10"/>
+	</monster_hunt>
+	<monster_hunt id="29614" start_npc_ids="804651" end_npc_ids="802463">	
+		<monster var="0" npc_ids="217873 217879" end_var="10"/>
+	</monster_hunt>
+	<monster_hunt id="29625" start_npc_ids="804651" end_npc_ids="800529">	
+		<monster var="0" npc_ids="230162 230161" end_var="10"/>
+	</monster_hunt>
+</quest_scripts>

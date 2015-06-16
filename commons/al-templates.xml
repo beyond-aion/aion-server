@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template autoinsert="true" context="java" deleted="false" description="Db.insertUpdate - delete" enabled="true" name="DBdelete">
+		DB.insertUpdate("DELETE FROM table WHERE column=5"/*, "Optional Error message "*/);</template><template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - simple insert" enabled="true" name="DBinsert">DB.insertUpdate("INSERT INTO table(column1,column2) VALUES(5,10)"/*, Optional Error message "*/);</template><template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - batch insert" enabled="true" name="DBinsertBatch">DB.insertUpdate("INSERT INTO table(column1, column2) VALUES(?,?)", new IUStH(){&#13;
+			@Override&#13;
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException&#13;
+			{&#13;
+				//if we wanna batch processing we may iterate some collection adding to batch and then executing whole batch&#13;
+				//for(Element e: collection)&#13;
+				//{&#13;
+					stmt.setInt(1, 20);&#13;
+					stmt.setInt(2, 0); // values will ofc depend on e ;)&#13;
+					stmt.addBatch();&#13;
+				//}&#13;
+				stmt.executeBatch(); // exec batch&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - insert with params" enabled="true" name="DBinsertParams">
+		DB.insertUpdate("INSERT INTO table(column1, column2) VALUES(?,?)", new IUStH(){&#13;
+			@Override&#13;
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException&#13;
+			{&#13;
+				//Here we can set parameters of stmt if used ? in query&#13;
+				stmt.setInt(1, 20);&#13;
+				stmt.setInt(2, 0);&#13;
+				&#13;
+				stmt.executeUpdate(); //and execute query&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.select - simple select" enabled="true" name="DBselect">
+		DB.select("SELECT column1, column2 FROM table WHERE column3=5", new ReadStH(){&#13;
+			public void handleRead(ResultSet rset)&#13;
+			{&#13;
+				//Here we pull data from rset&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.select - select with params" enabled="true" name="DBselectParams">
+		DB.select("SELECT column1, column2 FROM table WHERE column3=?", new ParamReadStH(){&#13;
+			@Override&#13;
+			public void setParams(PreparedStatement stmt) throws SQLException&#13;
+			{&#13;
+				//If you use params in query we HAVE to set them here&#13;
+				stmt.setInt(1, 100);&#13;
+			}&#13;
+			@Override&#13;
+			public void handleRead(ResultSet rset) throws SQLException&#13;
+			{&#13;
+				//Here we can pull data from rset&#13;
+				&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - simple update" enabled="true" name="DBupdate">
+		DB.insertUpdate("UPDATE table SET column='value' WHERE other_column=10"/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - batch update" enabled="true" name="DBupdateBatch">
+		DB.insertUpdate("UPDATE table SET column1=?, column2=? WHERE column3=?", new IUStH(){&#13;
+			@Override&#13;
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException&#13;
+			{&#13;
+				//if we wanna batch processing we may iterate some collection adding to batch and then executing whole batch&#13;
+				//for(Element e: collection)&#13;
+				//{&#13;
+					stmt.setInt(1, 20);&#13;
+					stmt.setInt(2, 0); // values will ofc depend on e ;)&#13;
+					stmt.addBatch();&#13;
+				//}&#13;
+				stmt.executeBatch(); // exec batch&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="DB.insertUpdate - update with params" enabled="true" name="DBupdateParams">
+		DB.insertUpdate("UPDATE table SET column1=?, column2=? WHERE column3=?", new IUStH(){&#13;
+			@Override&#13;
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException&#13;
+			{&#13;
+				//Here we can set parameters of stmt if used ? in query&#13;
+				stmt.setInt(1, 20);&#13;
+				stmt.setInt(2, 0); // values will ofc depend on e ;)&#13;
+				&#13;
+				stmt.executeUpdate(); //and execute query&#13;
+			}&#13;
+		}/*, "Optional Error message "*/);
+	</template>
+</templates>

@@ -1,0 +1,2035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="220070000">
+		<siege_spawn siege_id="3011">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+				    <!-- (A): Chaos Rage -->
+					<spawn npc_id="257802" respawn_time="295">
+						<spot x="1139.619" y="826.4529" z="310.0911" static_id="853"/>
+					</spawn>
+					<!-- Bafur -->
+					<spawn npc_id="799301" respawn_time="295">
+						<spot x="1253.019" y="849.5270" z="310.1731" h="60"/>
+					</spawn>
+					<!-- Bulak -->
+					<spawn npc_id="832241" respawn_time="295">
+						<spot x="1220.140" y="861.4579" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Casf -->
+					<spawn npc_id="832238" respawn_time="295">
+						<spot x="1166.012" y="862.0111" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Dilbeek -->
+					<spawn npc_id="799372" respawn_time="295">
+						<spot x="1133.978" y="848.1271" z="310.7149" h="30"/>
+					</spawn>
+					<!-- Dimensional Rift -->
+					<spawn npc_id="730409" respawn_time="295">
+						<spot x="1125.384" y="854.1401" z="310.7177"/>
+					</spawn>
+					<!-- Esendia -->
+					<spawn npc_id="799306" respawn_time="295">
+						<spot x="1129.529" y="848.1121" z="310.7149" h="30"/>
+					</spawn>
+					<!-- Fortress Assassin -->
+					<spawn npc_id="257691" respawn_time="295">
+						<spot x="1139.188" y="924.1086" z="306.1445"/>
+						<spot x="1200.630" y="914.6228" z="305.0243" h="60"/>
+						<spot x="1224.888" y="911.0313" z="303.9967" h="19"/>
+						<spot x="1253.209" y="923.2527" z="304.1990" h="60"/>
+						<spot x="1224.441" y="970.0753" z="303.9906" h="79"/>
+					</spawn>
+					<!-- Fortress Gallowglass -->
+					<spawn npc_id="257688" respawn_time="295">
+						<spot x="1261.160" y="885.7995" z="307.1597"/>
+						<spot x="1162.017" y="908.1660" z="303.9966" h="90"/>
+						<spot x="1241.156" y="924.2156" z="303.9967" h="9"/>
+						<spot x="1193.819" y="973.4277" z="303.3377" h="30"/>
+						<spot x="1193.309" y="999.2737" z="302.6298" h="30"/>
+						<spot x="1167.256" y="843.9475" z="309.3598" h="30"/>
+						<spot x="1129.806" y="826.3463" z="310.0370" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256744" respawn_time="295">
+						<spot x="1207.059" y="967.9080" z="318.2860" h="30"/>
+						<spot x="1191.120" y="968.2304" z="318.2481" h="30"/>
+					</spawn>
+					<!-- Fortress High Magus -->
+					<spawn npc_id="257682" respawn_time="295">
+						<spot x="1132.664" y="893.0051" z="306.3405"/>
+						<spot x="1145.146" y="852.9622" z="310.2343" h="29"/>
+					</spawn>
+					<!-- Fortress Mage -->
+					<spawn npc_id="257697" respawn_time="295">
+						<spot x="1226.560" y="842.6376" z="309.3598" h="30"/>
+						<spot x="1228.864" y="885.3921" z="307.1637" h="34"/>
+						<spot x="1175.554" y="926.4194" z="303.9967" h="27"/>
+						<spot x="1195.293" y="914.6389" z="305.0238"/>
+						<spot x="1209.047" y="999.0750" z="302.5650" h="30"/>
+					</spawn>
+					<!-- Fortress Medic -->
+					<spawn npc_id="257685" respawn_time="295">
+						<spot x="1253.561" y="911.7961" z="303.9967" h="60"/>
+						<spot x="1191.625" y="937.8454" z="306.8336"/>
+					</spawn>
+					<!-- Fortress Priest -->
+					<spawn npc_id="257700" respawn_time="295">
+						<spot x="1188.883" y="852.5366" z="309.3598" h="30"/>
+						<spot x="1236.493" y="850.4531" z="309.3569" h="112"/>
+						<spot x="1132.306" y="917.9767" z="306.1445"/>
+						<spot x="1139.101" y="913.5026" z="306.1445"/>
+						<spot x="1276.469" y="896.5034" z="305.9637" h="41"/>
+						<spot x="1173.767" y="971.0237" z="303.9319" h="77"/>
+						<spot x="1204.456" y="973.4072" z="303.5571" h="30"/>
+						<spot x="1149.328" y="826.2344" z="310.0946" h="30"/>
+					</spawn>
+					<!-- Fortress Sniper -->
+					<spawn npc_id="257694" respawn_time="295">
+						<spot x="1146.758" y="879.4489" z="319.4952" h="30"/>
+						<spot x="1170.899" y="878.5101" z="318.6478" h="30"/>
+						<spot x="1247.459" y="877.2820" z="318.7961" h="30"/>
+						<spot x="1224.789" y="877.6854" z="318.7961" h="30"/>
+						<spot x="1276.149" y="876.5801" z="318.7961" h="30"/>
+						<spot x="1186.132" y="921.6365" z="317.9797" h="60"/>
+						<spot x="1210.356" y="920.5220" z="317.9649"/>
+						<spot x="1244.246" y="901.2668" z="315.8094" h="36"/>
+						<spot x="1177.893" y="959.0638" z="318.0062" h="30"/>
+						<spot x="1156.378" y="938.8150" z="316.0938" h="96"/>
+						<spot x="1161.278" y="955.4142" z="317.9516" h="30"/>
+						<spot x="1235.162" y="954.3676" z="317.9835" h="30"/>
+						<spot x="1220.356" y="958.1935" z="318.0105" h="30"/>
+						<spot x="1238.211" y="938.2935" z="316.1651" h="80"/>
+						<spot x="1149.051" y="963.8514" z="317.9516" h="30"/>
+						<spot x="1248.748" y="962.3641" z="318.0475" h="30"/>
+					</spawn>
+					<!-- Fortress Trigger -->
+					<spawn npc_id="257676" respawn_time="295">
+						<spot x="1205.594" y="852.1262" z="309.4951" h="30"/>
+						<spot x="1193.319" y="886.3775" z="307.2867" h="30"/>
+						<spot x="1205.568" y="937.8925" z="306.8336" h="60"/>
+					</spawn>
+					<!-- Fortress Warrior -->
+					<spawn npc_id="257673" respawn_time="295">
+						<spot x="1202.404" y="886.3044" z="307.3172" h="30"/>
+						<spot x="1288.854" y="915.6803" z="305.9637" h="60"/>
+						<spot x="1254.194" y="843.8364" z="310.1628" h="25"/>
+					</spawn>
+					<!-- Hendele -->
+					<spawn npc_id="799587" respawn_time="295">
+						<spot x="1126.271" y="858.3369" z="310.7178"/>
+					</spawn>
+					<!-- Inthedra -->
+					<spawn npc_id="799303" respawn_time="295">
+						<spot x="1129.763" y="864.4843" z="310.7149" h="90"/>
+					</spawn>
+					<!-- Isseim -->
+					<spawn npc_id="799302" respawn_time="295">
+						<spot x="1253.238" y="860.0521" z="310.1744" h="60"/>
+					</spawn>
+					<!-- Karystli -->
+					<spawn npc_id="257826" respawn_time="295">
+						<spot x="1132.833" y="858.9804" z="310.7175"/>
+					</spawn>
+					<!-- Katya -->
+					<spawn npc_id="832242" respawn_time="295">
+						<spot x="1223.469" y="861.4977" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Krizarid -->
+					<spawn npc_id="799305" respawn_time="295">
+						<spot x="1252.663" y="845.9402" z="310.1737" h="60"/>
+					</spawn>
+					<!-- Lenber -->
+					<spawn npc_id="832237" respawn_time="295">
+						<spot x="1162.472" y="862.0309" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Luwe -->
+					<spawn npc_id="832245" respawn_time="295">
+						<spot x="1233.554" y="861.5773" z="309.3596" h="90"/>
+					</spawn>
+					<!-- Maiya -->
+					<spawn npc_id="832244" respawn_time="295">
+						<spot x="1230.186" y="861.5375" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Matinerk -->
+					<spawn npc_id="832240" respawn_time="295">
+						<spot x="1172.892" y="862.1108" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Moritz -->
+					<spawn npc_id="799304" respawn_time="295">
+						<spot x="1252.933" y="863.7654" z="310.1399" h="60"/>
+					</spawn>
+					<!-- Nipulungen -->
+					<spawn npc_id="832178" respawn_time="295">
+						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
+					</spawn>
+					<!-- Obeda -->
+					<spawn npc_id="832239" respawn_time="295">
+						<spot x="1169.502" y="862.0510" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Ranack -->
+					<spawn npc_id="799327" respawn_time="295">
+						<spot x="1171.025" y="889.2034" z="307.2867"/>
+					</spawn>
+					<!-- Teimor -->
+					<spawn npc_id="832243" respawn_time="295">
+						<spot x="1226.817" y="861.5574" z="309.3598" h="90"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257834" respawn_time="295">
+						<spot x="1285.376" y="882.9367" z="306.0251" h="76"/>
+						<spot x="1150.463" y="918.1547" z="303.9966" h="30"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="257802">
+						<spot x="1139.619" y="826.4529" z="310.0911" static_id="853"/>
+					</spawn>
+					<!-- Bafur -->
+					<spawn npc_id="799301">
+						<spot x="1253.019" y="849.527" z="310.1731" h="60"/>
+					</spawn>
+					<!-- Dilbeek -->
+					<spawn npc_id="799372">
+						<spot x="1133.978" y="848.1271" z="310.7149" h="30"/>
+					</spawn>
+					<!-- Esendia -->
+					<spawn npc_id="799306">
+						<spot x="1129.529" y="848.1121" z="310.7149" h="30"/>
+					</spawn>
+					<!-- Hendele -->
+					<spawn npc_id="799587">
+						<spot x="1126.271" y="858.3369" z="310.7178"/>
+					</spawn>
+					<!-- Isseim -->
+					<spawn npc_id="799302">
+						<spot x="1253.238" y="860.0521" z="310.1744" h="60"/>
+					</spawn>
+					<!-- Karystli -->
+					<spawn npc_id="257826">
+						<spot x="1132.833" y="858.9804" z="310.7175"/>
+					</spawn>
+					<!-- Krizarid -->
+					<spawn npc_id="799305">
+						<spot x="1253.2438" y="863.8610" z="310.1369" h="60"/>
+					</spawn>
+					<!-- Nipulungen -->
+					<spawn npc_id="832178">
+						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
+					</spawn>
+					<!-- Ranack -->
+					<spawn npc_id="799327">
+						<spot x="1176.0325" y="888.7786" z="307.287"/>
+					</spawn>
+					<!-- Sigde -->
+					<spawn npc_id="832067">
+						<spot x="1242.45" y="811.3737" z="309.9587" h="30"/>
+					</spawn>
+					<!-- Vermir -->
+					<spawn npc_id="832068">
+						<spot x="1197.607" y="866.4813" z="321.0948" h="30"/>
+					</spawn>					
+					<!-- Neblar -->
+					<spawn npc_id="832069">
+						<spot x="1246.019" y="811.3867" z="309.9616" h="30"/>						
+					</spawn>
+					<!-- Hoggr -->
+					<spawn npc_id="832070">
+						<spot x="1248.896" y="811.4228" z="309.9641" h="30"/>
+					</spawn>					
+					<!-- Vitality Well -->
+					<spawn npc_id="257799">
+						<spot x="1264.156" y="832.4249" z="310.0596" h="60"/>
+						<spot x="1151.069" y="891.4075" z="305.9621" h="60"/>
+					</spawn>
+					<!-- STR_LDF4_Condition_NoShow_Ver47_T17 -->
+					<spawn npc_id="832115">
+						<spot x="1186.705" y="892.2175" z="307.2867" h="30"/>
+					</spawn>
+					<!-- Ereshkigal Memorial Tower -->
+					<spawn npc_id="700756">
+						<spot x="1110.596" y="1048.852" z="272.967" static_id="1218"/>
+					</spawn>
+					<!-- Destroyed Tower Core -->
+					<spawn npc_id="296905">
+						<spot x="1196.401" y="791.6374" z="313.9924"/>
+					</spawn>
+					<!-- Asmodian Novice Assassin -->
+					<spawn npc_id="257661">
+						<spot x="1149.389" y="826.4300" z="310.097" h="30"/>
+						<spot x="1224.801" y="916.1140" z="303.997"/>
+						<spot x="1272.155" y="889.9625" z="306.535" h="30"/>
+					</spawn>					
+					<!-- Cadet Mage -->
+					<spawn npc_id="257667">
+						<spot x="1202.668" y="973.0288" z="303.4774" h="30"/>
+						<spot x="1208.277" y="999.4622" z="302.2778" h="30"/>
+					</spawn>					
+					<!-- Cadet Priest -->
+					<spawn npc_id="257670">
+						<spot x="1130.998" y="823.2794" z="310.0344" h="30"/>
+						<spot x="1197.636" y="883.4292" z="307.2867" h="30"/>
+						<spot x="1195.722" y="973.0212" z="303.3723" h="30"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257658">
+						<spot x="1166.954" y="913.8043" z="303.9967"/>
+						<spot x="1193.001" y="999.6410" z="302.6810" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256744">
+						<spot x="1207.059" y="967.9080" z="318.2860" h="30"/>
+						<spot x="1191.120" y="968.2304" z="318.2481" h="30"/>
+					</spawn>					
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257834">
+						<spot x="1150.463" y="918.1550" z="303.9970" h="30"/>
+						<spot x="1285.376" y="882.9370" z="306.0250" h="76"/>
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="257796">
+						<spot x="1198.190" y="908.5160" z="306.1050" static_id="969"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="257823">
+						<spot x="1259.086" y="822.1573" z="310.0542" h="30"/>
+					</spawn>	
+					<!-- Fortress Gate -->
+					<spawn npc_id="257840">
+						<spot x="1197.171" y="869.4020" z="308.6190" h="30" static_id="981"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="257793">
+						<spot x="1198.499" y="930.7560" z="306.6950" h="30" static_id="963"/>
+					</spawn>
+					<!-- Stallari -->
+					<spawn npc_id="257605">
+						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+					</spawn>					
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Fortress High Magus -->
+					<spawn npc_id="257683" respawn_time="295">
+						<spot x="1148.869" y="848.922" z="309.554" h="116"/>
+						<spot x="1128.600" y="892.125" z="306.340"/>
+					</spawn>
+					<!-- Quartermaster -->
+					<spawn npc_id="257830" respawn_time="295">
+						<spot x="1125.586" y="849.355" z="310.716"/>
+						<spot x="1125.717" y="859.809" z="310.716"/>
+						<spot x="1171.025" y="889.203" z="307.287"/>
+					</spawn>
+					<!-- DF4_3011_DirectTeleporter_Dr -->
+					<spawn npc_id="257827" respawn_time="295">
+						<spot x="1132.812" y="859.635" z="310.716"/>
+					</spawn>
+					<!-- Fortress Sniper -->
+					<spawn npc_id="257695" respawn_time="295">
+						<spot x="1146.758" y="879.449" z="319.495" h="30"/>
+						<spot x="1170.899" y="878.510" z="318.664" h="30"/>
+						<spot x="1186.132" y="921.637" z="317.981" h="60"/>
+						<spot x="1210.356" y="920.522" z="317.965"/>
+						<spot x="1161.278" y="955.414" z="317.873" h="30"/>
+						<spot x="1177.893" y="959.064" z="317.964" h="30"/>
+						<spot x="1156.378" y="938.815" z="316.094" h="96"/>
+						<spot x="1220.356" y="958.194" z="317.964" h="30"/>
+						<spot x="1149.051" y="963.851" z="317.902" h="30"/>
+						<spot x="1191.963" y="970.381" z="317.964" h="30"/>
+						<spot x="1209.802" y="970.055" z="317.964" h="30"/>
+						<spot x="1206.299" y="970.134" z="317.964" h="30"/>
+						<spot x="1188.395" y="970.364" z="317.964" h="30"/>
+						<spot x="1235.162" y="954.368" z="317.957" h="30"/>
+						<spot x="1238.211" y="938.293" z="316.165" h="80"/>
+						<spot x="1248.748" y="962.364" z="318.020" h="30"/>
+						<spot x="1244.246" y="901.267" z="315.809" h="36"/>
+					</spawn>
+					<!-- Fortress Warrior -->
+					<spawn npc_id="257674" respawn_time="295">
+						<spot x="1202.404" y="886.304" z="307.317" h="30"/>
+						<spot x="1288.854" y="915.680" z="305.964" h="60"/>
+					</spawn>
+					<!-- Fortress Trigger -->
+					<spawn npc_id="257677" respawn_time="295">
+						<spot x="1193.319" y="886.378" z="307.287" h="30"/>
+						<spot x="1205.568" y="937.893" z="306.834" h="60"/>
+					</spawn>
+					<!-- Fortress Priest -->
+					<spawn npc_id="257701" respawn_time="295">
+						<spot x="1128.417" y="919.178" z="305.962"/>
+						<spot x="1142.432" y="910.293" z="304.363"/>
+						<spot x="1174.319" y="977.259" z="304.657" h="112"/>
+						<spot x="1204.456" y="973.407" z="303.557" h="30"/>
+						<spot x="1275.491" y="889.406" z="305.972" h="43"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257835" respawn_time="295">
+						<spot x="1150.463" y="918.155" z="303.997" h="30"/>
+					</spawn>
+					<!-- Fortress Assassin -->
+					<spawn npc_id="257692" respawn_time="295">
+						<spot x="1142.616" y="925.032" z="304.201"/>
+						<spot x="1203.156" y="915.151" z="305.103" h="60"/>
+						<spot x="1227.092" y="912.118" z="303.997" h="31"/>
+						<spot x="1231.634" y="972.926" z="303.514" h="74"/>
+						<spot x="1254.468" y="923.253" z="304.199" h="60"/>
+					</spawn>
+					<!-- Fortress Gallowglass -->
+					<spawn npc_id="257689" respawn_time="295">
+						<spot x="1157.867" y="907.576" z="303.997" h="70"/>
+						<spot x="1193.819" y="973.428" z="303.338" h="30"/>
+						<spot x="1193.309" y="999.274" z="302.630" h="30"/>
+						<spot x="1233.695" y="918.658" z="303.997" h="44"/>
+						<spot x="1253.065" y="888.033" z="307.160" h="63"/>
+					</spawn>
+					<!-- Fortress Mage -->
+					<spawn npc_id="257698" respawn_time="295">
+						<spot x="1175.316" y="927.324" z="303.997" h="97"/>
+						<spot x="1192.926" y="914.767" z="305.151"/>
+						<spot x="1209.047" y="999.075" z="302.565" h="30"/>
+						<spot x="1224.327" y="886.724" z="307.166" h="53"/>
+					</spawn>
+					<!-- Fortress Medic -->
+					<spawn npc_id="257686" respawn_time="295">
+						<spot x="1191.625" y="937.845" z="306.834"/>
+						<spot x="1253.763" y="911.190" z="303.997" h="60"/>
+					</spawn>
+					<!-- Ereshkigal Memorial Tower -->
+					<spawn npc_id="700756" respawn_time="295">
+						<spot x="1110.596" y="1048.852" z="272.967" static_id="1218"/>
+					</spawn>
+					<!-- (B): Vorgaltems Favor -->
+					<spawn npc_id="257803" respawn_time="295">
+						<spot x="1139.65" y="826.572" z="310.027" static_id="980"/>
+					</spawn>
+					<!-- Linar -->
+					<spawn npc_id="799362" respawn_time="295">
+						<spot x="1297.75" y="1559.66" z="304.354"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="257803">
+						<spot x="1139.619" y="826.4529" z="310.0911" static_id="853"/>
+					</spawn>
+					<!-- Balaur Novice Assassin -->
+					<spawn npc_id="257662">
+						<spot x="1149.389" y="826.4300" z="310.097" h="30"/>
+						<spot x="1224.801" y="916.1140" z="303.997"/>
+						<spot x="1272.155" y="889.9625" z="306.535" h="30"/>
+					</spawn>					
+					<!-- Cadet Mage -->
+					<spawn npc_id="257668">
+						<spot x="1202.668" y="973.0288" z="303.4774" h="30"/>
+						<spot x="1208.277" y="999.4622" z="302.2778" h="30"/>
+					</spawn>					
+					<!-- Cadet Priest -->
+					<spawn npc_id="257671">
+						<spot x="1130.998" y="823.2794" z="310.0344" h="30"/>
+						<spot x="1197.636" y="883.4292" z="307.2867" h="30"/>
+						<spot x="1195.722" y="973.0212" z="303.3723" h="30"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257659">
+						<spot x="1166.954" y="913.8043" z="303.9967"/>
+						<spot x="1193.001" y="999.6410" z="302.6810" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256745">
+						<spot x="1207.059" y="967.9080" z="318.2860" h="30"/>
+						<spot x="1191.120" y="968.2304" z="318.2481" h="30"/>
+					</spawn>					
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257835">
+						<spot x="1150.463" y="918.1550" z="303.9970" h="30"/>
+						<spot x="1285.376" y="882.9370" z="306.0250" h="76"/>
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="257797">
+						<spot x="1198.190" y="908.5160" z="306.1050" static_id="969"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="257824">
+						<spot x="1259.086" y="822.1573" z="310.0542" h="30"/>
+					</spawn>	
+					<!-- Fortress Gate -->
+					<spawn npc_id="257841">
+						<spot x="1197.171" y="869.4020" z="308.6190" h="30" static_id="981"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="257794">
+						<spot x="1198.499" y="930.7560" z="306.6950" h="30" static_id="963"/>
+					</spawn>
+					<!-- Stallari -->
+					<spawn npc_id="257610">
+						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+					</spawn>
+					<!-- Linar -->
+					<spawn npc_id="799362" respawn_time="295">
+						<spot x="1297.75" y="1559.66" z="304.354"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Alcibia -->
+					<spawn npc_id="799039" respawn_time="295">
+						<spot x="1279.79" y="849.596" z="310.541" h="60"/>
+					</spawn>
+					<!-- Cadet Mage -->
+					<spawn npc_id="257666" respawn_time="295">
+						<spot x="1193.43" y="973.337" z="303.381" h="30"/>
+						<spot x="1161.64" y="913.169" z="303.997"/>
+						<spot x="1238.16" y="923.17" z="303.997" h="113"/>
+						<spot x="1167.48" y="980.444" z="304.368" h="5"/>
+						<spot x="1130.24" y="826.435" z="310.04" h="30"/>
+						<spot x="1226.55" y="842.669" z="309.36" h="15"/>
+					</spawn>
+					<!-- Seasoned Assassin -->
+					<spawn npc_id="257645" respawn_time="295">
+						<spot x="1253.29" y="839.511" z="310.15"/>
+						<spot x="1153.61" y="853.293" z="309.385" h="114"/>
+					</spawn>
+					<!-- Macar -->
+					<spawn npc_id="799061" respawn_time="295">
+						<spot x="1125.59" y="849.355" z="312.276"/>
+					</spawn>
+					<!-- Seasoned Crusader -->
+					<spawn npc_id="257642" respawn_time="295">
+						<spot x="1254.21" y="911.163" z="303.997" h="60"/>
+						<spot x="1289.06" y="915.507" z="305.964" h="60"/>
+					</spawn>
+					<!-- Cadet Priest -->
+					<spawn npc_id="257669" respawn_time="295">
+						<spot x="1226.85" y="976.839" z="303.405" h="115"/>
+						<spot x="1209.44" y="999.427" z="302.63" h="30"/>
+						<spot x="1278.71" y="889.958" z="305.964" h="118"/>
+						<spot x="1205.62" y="852.322" z="309.493" h="30"/>
+						<spot x="1254.27" y="923.161" z="304.2" h="60"/>
+						<spot x="1192.75" y="915.364" z="305.148"/>
+					</spawn>
+					<!-- Seasoned Curate -->
+					<spawn npc_id="257654" respawn_time="295">
+						<spot x="1193.23" y="886.462" z="307.287" h="30"/>
+						<spot x="1205.23" y="937.506" z="306.834" h="60"/>
+					</spawn>
+					<!-- DF4_3011_DirectTeleporter_Li -->
+					<spawn npc_id="257825" respawn_time="295">
+						<spot x="1132.81" y="859.635" z="310.716"/>
+					</spawn>
+					<!-- Seasoned Magus -->
+					<spawn npc_id="257651" respawn_time="295">
+						<spot x="1202.34" y="886.515" z="307.319" h="30"/>
+					</spawn>
+					<!-- Veteran Crusader -->
+					<spawn npc_id="257619" respawn_time="295">
+						<spot x="1188.63" y="852.851" z="309.36" h="30"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257833" respawn_time="295">
+						<spot x="1285.38" y="882.937" z="306.025" h="76"/>
+						<spot x="1150.46" y="918.155" z="303.997" h="30"/>
+					</spawn>
+					<!-- Madonia -->
+					<spawn npc_id="799040" respawn_time="295">
+						<spot x="1280.02" y="858.892" z="310.541" h="60"/>
+					</spawn>
+					<!-- Cadet Archer -->
+					<spawn npc_id="257663" respawn_time="295">
+						<spot x="1149.28" y="964.102" z="317.902" h="30"/>
+						<spot x="1248.88" y="962.263" z="318.02" h="30"/>
+						<spot x="1275.84" y="876.835" z="318.796" h="30"/>
+						<spot x="1162.58" y="955.681" z="317.87" h="30"/>
+						<spot x="1206.05" y="970.236" z="317.964" h="30"/>
+						<spot x="1186.18" y="922.084" z="317.991" h="60"/>
+						<spot x="1239.14" y="938.032" z="316.142" h="83"/>
+						<spot x="1210.62" y="920.92" z="317.975"/>
+						<spot x="1220.4" y="958.302" z="317.964" h="30"/>
+						<spot x="1235.31" y="954.506" z="317.957" h="30"/>
+						<spot x="1192.11" y="970.58" z="317.964" h="30"/>
+						<spot x="1244" y="901.207" z="315.809" h="36"/>
+						<spot x="1178.87" y="879.034" z="318.767" h="30"/>
+						<spot x="1177.98" y="959.294" z="317.964" h="30"/>
+						<spot x="1225.58" y="877.681" z="318.796" h="30"/>
+						<spot x="1150.08" y="878.895" z="318.664" h="30"/>
+						<spot x="1155.13" y="938.415" z="316.057" h="96"/>
+						<spot x="1209.86" y="970.119" z="317.964" h="30"/>
+						<spot x="1246.92" y="877.373" z="318.796" h="30"/>
+						<spot x="1188.3" y="970.409" z="317.964" h="30"/>
+					</spawn>
+					<!-- Veteran Assassin -->
+					<spawn npc_id="257630" respawn_time="295">
+						<spot x="1191.83" y="937.47" z="306.834"/>
+					</spawn>
+					<!-- Cadet Assassin -->
+					<spawn npc_id="257660" respawn_time="295">
+						<spot x="1171.39" y="924.857" z="303.997" h="5"/>
+						<spot x="1149.39" y="826.43" z="310.096" h="30"/>
+						<spot x="1226.72" y="911.981" z="303.997" h="117"/>
+						<spot x="1228.57" y="886.197" z="307.164" h="114"/>
+						<spot x="1142.27" y="910.356" z="304.382"/>
+						<spot x="1167.69" y="843.924" z="309.36" h="45"/>
+						<spot x="1204.53" y="973.523" z="303.555" h="30"/>
+					</spawn>
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="257801" respawn_time="295">
+						<spot x="1139.619" y="826.4529" z="310.0911" static_id="853"/>
+					</spawn>
+					<!-- Arianos -->
+					<spawn npc_id="799042" respawn_time="295">
+						<spot x="1273.09" y="859.039" z="312.123"/>
+					</spawn>
+					<!-- Stanis -->
+					<spawn npc_id="799043" respawn_time="295">
+						<spot x="1171.02" y="889.203" z="307.287"/>
+					</spawn>
+					<!-- Liriope -->
+					<spawn npc_id="799044" respawn_time="295">
+						<spot x="1272.77" y="849.932" z="312.123"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257657" respawn_time="295">
+						<spot x="1129.48" y="918.3" z="305.962"/>
+						<spot x="1237.23" y="853.37" z="309.356"/>
+						<spot x="1258.53" y="885.969" z="307.16" h="3"/>
+						<spot x="1203.5" y="914.933" z="305.144" h="60"/>
+						<spot x="1142.81" y="925.024" z="304.201"/>
+						<spot x="1193" y="999.641" z="302.681" h="30"/>
+					</spawn>
+					<!-- Linar -->
+					<spawn npc_id="799362" respawn_time="295">
+						<spot x="1297.75" y="1559.66" z="304.354"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="257801">
+						<spot x="1139.619" y="826.4529" z="310.0911" static_id="853"/>
+					</spawn>
+					<!-- Alcibia -->
+					<spawn npc_id="799039">
+						<spot x="1253.019" y="849.527" z="310.1731" h="60"/>
+					</spawn>
+					<!-- Arianos -->
+					<spawn npc_id="799042">
+						<spot x="1253.2438" y="863.8610" z="310.1369" h="60"/>
+					</spawn>
+					<!-- Becaria -->
+					<spawn npc_id="799041">
+						<spot x="1129.5745" y="865.0427" z="310.7147" h="90"/>
+					</spawn>
+					<!-- Linar -->
+					<spawn npc_id="799362">
+						<spot x="1297.750" y="1559.6600" z="304.3540"/>
+					</spawn>
+					<!-- Liriope -->
+					<spawn npc_id="799044">
+						<spot x="1129.644" y="848.0694" z="310.7149" h="30"/>
+					</spawn>					
+					<!-- Macar -->
+					<spawn npc_id="799061">
+						<spot x="1133.978" y="848.1271" z="310.7149" h="30"/>
+					</spawn>
+					<!-- Madonia -->
+					<spawn npc_id="799040">
+						<spot x="1253.238" y="860.0521" z="310.1744" h="60"/>
+					</spawn>
+					<!-- Oxiateres -->
+					<spawn npc_id="832174">
+						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
+					</spawn>
+					<!-- Prodicus -->
+					<spawn npc_id="832054">
+						<spot x="1248.896" y="811.4228" z="309.9641" h="30"/>
+					</spawn>
+					<!-- Sothgenes -->
+					<spawn npc_id="832053">
+						<spot x="1246.019" y="811.3867" z="309.9616" h="30"/>
+					</spawn>					
+					<!-- Stanis -->
+					<spawn npc_id="799043">
+						<spot x="1176.033" y="888.7786" z="307.2870"/>
+					</spawn>
+					<!-- Tirtaeus -->
+					<spawn npc_id="832051">
+						<spot x="1242.450" y="811.3737" z="309.9587" h="30"/>
+					</spawn>
+					<!-- Xenodotos -->
+					<spawn npc_id="832052">
+						<spot x="1197.607" y="866.4813" z="321.0948" h="30"/>
+					</spawn>					
+					<!-- Cadet Assassin -->
+					<spawn npc_id="257660">
+						<spot x="1149.389" y="826.4300" z="310.097" h="30"/>
+						<spot x="1224.801" y="916.1140" z="303.997"/>
+						<spot x="1272.155" y="889.9625" z="306.535" h="30"/>
+					</spawn>										
+					<!-- Cadet Mage -->
+					<spawn npc_id="257666">
+						<spot x="1202.668" y="973.0288" z="303.4774" h="30"/>
+						<spot x="1208.277" y="999.4622" z="302.2778" h="30"/>
+					</spawn>
+					<!-- Cadet Priest -->
+					<spawn npc_id="257669">
+						<spot x="1130.998" y="823.2794" z="310.0344" h="30"/>
+						<spot x="1197.636" y="883.4292" z="307.2867" h="30"/>
+						<spot x="1195.722" y="973.0212" z="303.3723" h="30"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257657">
+						<spot x="1166.954" y="913.8043" z="303.9967"/>
+						<spot x="1193.001" y="999.6410" z="302.6810" h="30"/>
+					</spawn>					
+					<!-- Vitality Well -->
+					<spawn npc_id="257798">
+						<spot x="1264.156" y="832.4249" z="310.0596" h="60"/>
+						<spot x="1151.069" y="891.4075" z="305.9621" h="60"/>
+					</spawn>
+					<!-- DF4_3011_DirectTeleporter_Li -->
+					<spawn npc_id="257825">
+						<spot x="1132.81" y="859.635" z="310.716"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256743">
+						<spot x="1207.059" y="967.9080" z="318.2860" h="30"/>
+						<spot x="1191.120" y="968.2304" z="318.2481" h="30"/>
+					</spawn>	
+					<!-- Teleportation Tower -->
+					<spawn npc_id="257833">
+						<spot x="1285.38" y="882.937" z="306.025" h="76"/>
+						<spot x="1150.46" y="918.155" z="303.997" h="30"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="257822">
+						<spot x="1259.086" y="822.1573" z="310.0542" h="30"/>
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="257795">
+						<spot x="1198.14" y="908.588" z="306.019"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="257792">
+						<spot x="1198.5" y="930.196" z="306.774" h="30" static_id="963"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="257839">
+						<spot x="1197.39" y="869.553" z="308.41" h="30" static_id="981"/>
+					</spawn>
+					<!-- Dux -->
+					<spawn npc_id="257600">
+						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3012">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (A): Lava Explosion(DF4_Artifact_30121_Da) -->
+					<spawn npc_id="257805" respawn_time="295">
+						<spot x="1250.816" y="1180.468" z="264.8813" static_id="845" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3012_Boss_Da_1) -->
+					<spawn npc_id="257707" respawn_time="295">
+						<spot x="1264.373" y="1176.297" z="266.5672" h="53" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3012_guardS_Da_Pr_1) -->
+					<spawn npc_id="257730" respawn_time="295">
+						<spot x="1243.184" y="1194.843" z="266.023" h="70" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3012_guardS_Da_As_1) -->
+					<spawn npc_id="257721" respawn_time="295">
+						<spot x="1246.591" y="1166.764" z="266.1478" h="60" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3012_guardS_Da_Fi_1) -->
+					<spawn npc_id="257718" respawn_time="295">
+						<spot x="1257.267" y="1193.469" z="267.363" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3012_guardS_Da_Wi_1) -->
+					<spawn npc_id="257727" respawn_time="295">
+						<spot x="1234.491" y="1180.973" z="265.9673" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Lava Explosion(DF4_Artifact_30121_Dr) -->
+					<spawn npc_id="257806" respawn_time="295">
+						<spot x="1250.816" y="1180.468" z="264.8813" static_id="982" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3012_Boss_Dr_1) -->
+					<spawn npc_id="257712" respawn_time="295">
+						<spot x="1264.373" y="1176.297" z="266.5672" h="53" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3012_guardS_Dr_Pr_1) -->
+					<spawn npc_id="257731" respawn_time="295">
+						<spot x="1243.184" y="1194.843" z="266.023" h="70" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3012_guardS_Dr_As_1) -->
+					<spawn npc_id="257722" respawn_time="295">
+						<spot x="1246.591" y="1166.764" z="266.1478" h="60" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3012_guardS_Dr_Fi_1) -->
+					<spawn npc_id="257719" respawn_time="295">
+						<spot x="1257.267" y="1193.469" z="267.363" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3012_guardS_Dr_Wi_1) -->
+					<spawn npc_id="257728" respawn_time="295">
+						<spot x="1234.491" y="1180.973" z="265.9673" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (E): Lava Explosion(DF4_Artifact_30121_Li) -->
+					<spawn npc_id="257804" respawn_time="295">
+						<spot x="1250.816" y="1180.468" z="264.8813" static_id="967" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3012_Boss_Li_1) -->
+					<spawn npc_id="257702" respawn_time="295">
+						<spot x="1264.373" y="1176.297" z="266.5672" h="53" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3012_guardS_Li_Pr_1) -->
+					<spawn npc_id="257729" respawn_time="295">
+						<spot x="1243.184" y="1194.843" z="266.023" h="70" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3012_guardS_Li_As_1) -->
+					<spawn npc_id="257720" respawn_time="295">
+						<spot x="1246.591" y="1166.764" z="266.1478" h="60" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3012_guardS_Li_Fi_1) -->
+					<spawn npc_id="257717" respawn_time="295">
+						<spot x="1257.267" y="1193.469" z="267.363" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3012_guardS_Li_Wi_1) -->
+					<spawn npc_id="257726" respawn_time="295">
+						<spot x="1234.491" y="1180.973" z="265.9673" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3013">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (B): Soul Destruction(DF4_Artifact_30131_Da) -->
+					<spawn npc_id="257808" respawn_time="295">
+						<spot x="1135.65" y="1515.003" z="282.75" static_id="985" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3013_Boss_Da_1) -->
+					<spawn npc_id="257752" respawn_time="295">
+						<spot x="1119.699" y="1511.575" z="282.75" h="117" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3013_guardS_Da_Pr_1) -->
+					<spawn npc_id="257775" respawn_time="295">
+						<spot x="1132.907" y="1500.447" z="282.75" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3013_guardS_Da_As_1) -->
+					<spawn npc_id="257766" respawn_time="295">
+						<spot x="1150.061" y="1508.107" z="282.7464" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3013_guardS_Da_Fi_1) -->
+					<spawn npc_id="257763" respawn_time="295">
+						<spot x="1128.182" y="1529.056" z="282.75" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3013_guardS_Da_Wi_1) -->
+					<spawn npc_id="257772" respawn_time="295">
+						<spot x="1146.755" y="1526.944" z="282.75" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Soul Destruction(DF4_Artifact_30131_Dr) -->
+					<spawn npc_id="257809" respawn_time="295">
+						<spot x="1135.65" y="1515.003" z="282.75" static_id="966" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3013_Boss_Dr_1) -->
+					<spawn npc_id="257757" respawn_time="295">
+						<spot x="1119.699" y="1511.575" z="282.75" h="117" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3013_guardS_Dr_Pr_1) -->
+					<spawn npc_id="257776" respawn_time="295">
+						<spot x="1132.907" y="1500.447" z="282.75" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3013_guardS_Dr_As_1) -->
+					<spawn npc_id="257767" respawn_time="295">
+						<spot x="1150.061" y="1508.107" z="282.7464" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3013_guardS_Dr_Fi_1) -->
+					<spawn npc_id="257764" respawn_time="295">
+						<spot x="1128.182" y="1529.056" z="282.75" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3013_guardS_Dr_Wi_1) -->
+					<spawn npc_id="257773" respawn_time="295">
+						<spot x="1146.755" y="1526.944" z="282.75" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (B): Soul Destruction(DF4_Artifact_30131_Li) -->
+					<spawn npc_id="257807" respawn_time="295">
+						<spot x="1135.65" y="1515.003" z="282.75" static_id="852" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3013_Boss_Li_1) -->
+					<spawn npc_id="257747" respawn_time="295">
+						<spot x="1119.699" y="1511.575" z="282.75" h="117" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3013_guardS_Li_Pr_1) -->
+					<spawn npc_id="257774" respawn_time="295">
+						<spot x="1132.907" y="1500.447" z="282.75" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3013_guardS_Li_As_1) -->
+					<spawn npc_id="257765" respawn_time="295">
+						<spot x="1150.061" y="1508.107" z="282.7464" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3013_guardS_Li_Fi_1) -->
+					<spawn npc_id="257762" respawn_time="295">
+						<spot x="1128.182" y="1529.056" z="282.75" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3013_guardS_Li_Wi_1) -->
+					<spawn npc_id="257771" respawn_time="295">
+						<spot x="1146.755" y="1526.944" z="282.75" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3014">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (A): Blaze of the Abyss(DF4_Artifact_30141_Da) -->
+					<spawn npc_id="252331" respawn_time="295">
+						<spot x="1217.083" y="1320.058" z="298.25" static_id="3194" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3014_Boss_Da_1) -->
+					<spawn npc_id="252439" respawn_time="295">
+						<spot x="1208.571" y="1304.767" z="298.4041" h="15" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3014_guardS_Da_As_1) -->
+					<spawn npc_id="256720" respawn_time="295">
+						<spot x="1204.098" y="1321.117" z="298.125" h="60" />
+						<spot x="1227.231" y="1308.034" z="298.4992" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3014_guardS_Da_Fi_1) -->
+					<spawn npc_id="256723" respawn_time="295">
+						<spot x="1208.677" y="1331.69" z="298.1948" h="43" />
+						<spot x="1230.615" y="1320.41" z="298.2885" />
+						<spot x="1251.965" y="1319.67" z="302.3506" h="116" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3014_guardS_Da_Pr_1) -->
+					<spawn npc_id="256726" respawn_time="295">
+						<spot x="1250.722" y="1309.726" z="302.348" h="116" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3014_guardS_Da_Wi_1) -->
+					<spawn npc_id="256729" respawn_time="295">
+						<spot x="1216.984" y="1333.813" z="298.125" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Blaze of the Abyss(DF4_Artifact_30141_Dr) -->
+					<spawn npc_id="252332" respawn_time="295">
+						<spot x="1217.083" y="1320.058" z="298.25" static_id="4099" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3014_Boss_Dr_1) -->
+					<spawn npc_id="252444" respawn_time="295">
+						<spot x="1208.571" y="1304.767" z="298.4041" h="15" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3014_guardS_Dr_As_1) -->
+					<spawn npc_id="256721" respawn_time="295">
+						<spot x="1204.098" y="1321.117" z="298.125" h="60" />
+						<spot x="1227.231" y="1308.034" z="298.4992" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3014_guardS_Dr_Fi_1) -->
+					<spawn npc_id="256724" respawn_time="295">
+						<spot x="1208.677" y="1331.69" z="298.1948" h="43" />
+						<spot x="1230.615" y="1320.41" z="298.2885" />
+						<spot x="1251.965" y="1319.67" z="302.3506" h="116" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3014_guardS_Dr_Pr_1) -->
+					<spawn npc_id="256727" respawn_time="295">
+						<spot x="1250.722" y="1309.726" z="302.348" h="116" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3014_guardS_Dr_Wi_1) -->
+					<spawn npc_id="256730" respawn_time="295">
+						<spot x="1216.984" y="1333.813" z="298.125" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (E): Blaze of the Abyss(DF4_Artifact_30141_Li) -->
+					<spawn npc_id="252330" respawn_time="295">
+						<spot x="1217.083" y="1320.058" z="298.25" static_id="4100" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3014_Boss_Li_1) -->
+					<spawn npc_id="252434" respawn_time="295">
+						<spot x="1208.571" y="1304.767" z="298.4041" h="15" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3014_guardS_Li_As_1) -->
+					<spawn npc_id="256719" respawn_time="295">
+						<spot x="1204.098" y="1321.117" z="298.125" h="60" />
+						<spot x="1227.231" y="1308.034" z="298.4992" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3014_guardS_Li_Fi_1) -->
+					<spawn npc_id="256722" respawn_time="295">
+						<spot x="1208.677" y="1331.69" z="298.1948" h="43" />
+						<spot x="1230.615" y="1320.41" z="298.2885" />
+						<spot x="1251.965" y="1319.67" z="302.3506" h="116" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3014_guardS_Li_Pr_1) -->
+					<spawn npc_id="256725" respawn_time="295">
+						<spot x="1250.722" y="1309.726" z="302.348" h="116" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3014_guardS_Li_Wi_1) -->
+					<spawn npc_id="256728" respawn_time="295">
+						<spot x="1216.984" y="1333.813" z="298.125" h="30" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3021">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="258102" respawn_time="295">
+						<spot x="1823.763" y="1064.033" z="326.9442" static_id="857" />
+					</spawn>
+					<!-- Aino -->
+					<spawn npc_id="832251" respawn_time="295">
+						<spot x="1906.67" y="1100.687" z="326.2095" h="90" />
+					</spawn>
+					<!-- Ashinerk -->
+					<spawn npc_id="832249" respawn_time="295">
+						<spot x="1855.34" y="1100.323" z="326.2095" h="90" />
+					</spawn>
+					<!-- Cozett -->
+					<spawn npc_id="799315" respawn_time="295">
+						<spot x="1812.521" y="1086.591" z="327.565" h="30" />
+					</spawn>
+					<!-- Dekel -->
+					<spawn npc_id="799312" respawn_time="295">
+						<spot x="1812.543" y="1101.495" z="327.565" h="90" />
+					</spawn>
+					<!-- Dimensional Rift -->
+					<spawn npc_id="730409" respawn_time="295">
+						<spot x="1808.456" y="1091.661" z="327.5673" />
+					</spawn>
+					<!-- Edao -->
+					<spawn npc_id="832179" respawn_time="295">
+						<spot x="1817.4" y="1101.612" z="327.5649" h="90" />
+					</spawn>
+					<!-- Eistin -->
+					<spawn npc_id="799373" respawn_time="295">
+						<spot x="1817.654" y="1086.576" z="327.5649" h="30" />
+					</spawn>
+					<!-- Fortress Assassin -->
+					<spawn npc_id="257991" respawn_time="295">
+						<spot x="1820.039" y="1163.53" z="322.9942" />
+						<spot x="1882.454" y="1153.505" z="321.8741" h="60" />
+						<spot x="1910.319" y="1154.126" z="320.8464" h="25" />
+						<spot x="1885.331" y="1211.875" z="320.5" h="30" />
+						<spot x="1964.456" y="1127.905" z="322.8134" h="24" />
+						<spot x="1909.736" y="1082.584" z="326.2095" h="30" />
+						<spot x="1831.499" y="1060.697" z="326.9124" h="30" />
+					</spawn>
+					<!-- Fortress Gallowglass -->
+					<spawn npc_id="257988" respawn_time="295">
+						<spot x="1820.169" y="1150.024" z="322.9942" />
+						<spot x="1902.794" y="1127.774" z="324.0178" h="60" />
+						<spot x="1814.54" y="1156.514" z="322.9942" />
+						<spot x="1855.25" y="1165.422" z="320.8464" h="27" />
+						<spot x="1877.28" y="1153.474" z="321.8735" />
+						<spot x="1922.606" y="1166.745" z="320.8464" h="29" />
+						<spot x="1850.632" y="1213.373" z="320.375" h="27" />
+						<spot x="1874.828" y="1211.666" z="320.5" h="30" />
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256747" respawn_time="295">
+						<spot x="1872.272" y="1206.585" z="335.1003" h="30" />
+						<spot x="1888.117" y="1206.542" z="335.1464" h="30" />
+					</spawn>
+					<!-- Fortress High Magus -->
+					<spawn npc_id="257982" respawn_time="295">
+						<spot x="1815.01" y="1131.426" z="323.1904" />
+						<spot x="1886.849" y="1176.318" z="323.6833" h="60" />
+					</spawn>
+					<!-- Fortress Mage -->
+					<spawn npc_id="257997" respawn_time="295">
+						<spot x="1938.372" y="1126.01" z="324.0094" h="1" />
+						<spot x="1937.918" y="1160.431" z="321.0273" h="60" />
+						<spot x="1911.738" y="1215.177" z="321.0222" h="24" />
+						<spot x="1889.927" y="1237.997" z="321.1154" h="30" />
+						<spot x="1814.272" y="1061.426" z="326.8846" h="30" />
+					</spawn>
+					<!-- Fortress Medic -->
+					<spawn npc_id="257985" respawn_time="295">
+						<spot x="1884.782" y="1125.486" z="324.173" h="30" />
+						<spot x="1971.402" y="1155.504" z="322.8134" h="60" />
+					</spawn>
+					<!-- Fortress Priest -->
+					<spawn npc_id="258000" respawn_time="295">
+						<spot x="1888.776" y="1091.184" z="326.3405" h="30" />
+						<spot x="1842.961" y="1154.284" z="320.8464" h="23" />
+						<spot x="1873.277" y="1237.666" z="320.8643" h="30" />
+						<spot x="1925.425" y="1094.743" z="326.3258" h="6" />
+						<spot x="1850.339" y="1082.531" z="326.2095" h="30" />
+					</spawn>
+					<!-- Fortress Sniper -->
+					<spawn npc_id="257994" respawn_time="295">
+						<spot x="1832.875" y="1116.75" z="335.5121" h="30" />
+						<spot x="1861.302" y="1117.447" z="335.6169" h="30" />
+						<spot x="1909.537" y="1116.897" z="335.6458" h="30" />
+						<spot x="1931.013" y="1116.853" z="335.6458" h="30" />
+						<spot x="1927.762" y="1141.409" z="332.6591" h="41" />
+						<spot x="1836.238" y="1176.13" z="332.8933" h="96" />
+						<spot x="1867.922" y="1159.045" z="334.8134" h="60" />
+						<spot x="1892.567" y="1158.815" z="334.8143" />
+						<spot x="1924.225" y="1176.045" z="332.8921" h="30" />
+						<spot x="1830.424" y="1201.823" z="334.8013" h="30" />
+						<spot x="1844.397" y="1193.604" z="334.8013" h="30" />
+						<spot x="1858.808" y="1197.003" z="334.8558" h="30" />
+						<spot x="1916.093" y="1193.599" z="334.8324" h="30" />
+						<spot x="1901.848" y="1196.968" z="334.8602" h="30" />
+						<spot x="1929.966" y="1201.831" z="334.897" h="30" />
+						<spot x="1959.024" y="1116.879" z="335.6458" h="30" />
+					</spawn>
+					<!-- Fortress Trigger -->
+					<spawn npc_id="257976" respawn_time="295">
+						<spot x="1871.903" y="1091.28" z="326.2095" h="30" />
+						<spot x="1873.475" y="1176.371" z="323.6834" />
+						<spot x="1941.325" y="1072.335" z="326.9437" h="102" />
+					</spawn>
+					<!-- Fortress Warrior -->
+					<spawn npc_id="257973" respawn_time="295">
+						<spot x="1875.715" y="1125.407" z="324.1364" h="30" />
+						<spot x="1937.894" y="1150.891" z="321.0417" h="60" />
+						<spot x="1834.786" y="1089.29" z="326.2014" h="100" />
+					</spawn>
+					<!-- Gaudra -->
+					<spawn npc_id="258126" respawn_time="295">
+						<spot x="1816.038" y="1095.634" z="327.5677" />
+					</spawn>
+					<!-- Gereir -->
+					<spawn npc_id="832247" respawn_time="295">
+						<spot x="1848.46" y="1100.223" z="326.2095" h="90" />
+					</spawn>
+					<!-- Hrimfaxi -->
+					<spawn npc_id="799328" respawn_time="295">
+						<spot x="1854.463" y="1127" z="324.1364" />
+					</spawn>
+					<!-- Hroth -->
+					<spawn npc_id="832246" respawn_time="295">
+						<spot x="1844.919" y="1100.243" z="326.2095" h="90" />
+					</spawn>
+					<!-- Hruntig -->
+					<spawn npc_id="832252" respawn_time="295">
+						<spot x="1910.019" y="1100.747" z="326.2095" h="90" />
+					</spawn>
+					<!-- Kalita -->
+					<spawn npc_id="832254" respawn_time="295">
+						<spot x="1916.755" y="1100.767" z="326.2091" h="90" />
+					</spawn>
+					<!-- Launi -->
+					<spawn npc_id="832248" respawn_time="295">
+						<spot x="1851.95" y="1100.263" z="326.2095" h="90" />
+					</spawn>
+					<!-- Ogel -->
+					<spawn npc_id="832250" respawn_time="295">
+						<spot x="1903.341" y="1100.647" z="326.2095" h="90" />
+					</spawn>
+					<!-- Ormele -->
+					<spawn npc_id="799310" respawn_time="295">
+						<spot x="1936.894" y="1090.127" z="327.0182" h="60" />
+					</spawn>
+					<!-- Ovirin -->
+					<spawn npc_id="799588" respawn_time="295">
+						<spot x="1809.514" y="1096.145" z="327.5675" />
+					</spawn>
+					<!-- Risa -->
+					<spawn npc_id="799313" respawn_time="295">
+						<spot x="1936.753" y="1102.52" z="326.9912" h="60" />
+					</spawn>
+					<!-- Soyle -->
+					<spawn npc_id="832253" respawn_time="295">
+						<spot x="1913.387" y="1100.727" z="326.2095" h="90" />
+					</spawn>
+					<!-- Svidar -->
+					<spawn npc_id="799314" respawn_time="295">
+						<spot x="1936.682" y="1086.706" z="327.0184" h="60" />
+					</spawn>
+					<!-- Tamuz -->
+					<spawn npc_id="799311" respawn_time="295">
+						<spot x="1936.902" y="1098.72" z="327.0212" h="60" />
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258134" respawn_time="295">
+						<spot x="1831.009" y="1155.404" z="320.8464" h="30" />
+						<spot x="1968.254" y="1122.712" z="322.8796" h="76" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="258102">
+						<spot x="1823.763" y="1064.033" z="326.9442" static_id="857"/>
+					</spawn>
+					<!-- Bradu -->
+					<spawn npc_id="832074">
+						<spot x="1931.761" y="1051.743" z="326.8218" h="30"/>
+					</spawn>
+					<!-- Cozett -->
+					<spawn npc_id="799315">
+						<spot x="1812.521" y="1086.591" z="327.5650" h="30"/>
+					</spawn>
+					<!-- Destroyed Tower Core -->
+					<spawn npc_id="296905">
+						<spot x="1879.970" y="1029.890" z="330.7799"/>
+					</spawn>
+					<!-- Edao -->
+					<spawn npc_id="832179">
+						<spot x="1817.400" y="1101.612" z="327.5649" h="90"/>
+					</spawn>
+					<!-- Eistin -->
+					<spawn npc_id="799373">
+						<spot x="1817.654" y="1086.576" z="327.5649" h="30"/>
+					</spawn>					
+					<!-- Gaudra -->
+					<spawn npc_id="258126">
+						<spot x="1816.038" y="1095.634" z="327.5677"/>
+					</spawn>
+					<!-- Hrimfaxi -->
+					<spawn npc_id="799328">
+						<spot x="1854.463" y="1127" z="324.1364"/>
+					</spawn>
+					<!-- Naregin -->
+					<spawn npc_id="832071">
+						<spot x="1924.706" y="1051.590" z="326.8160" h="30"/>
+					</spawn>
+					<!-- Nisir -->
+					<spawn npc_id="832072">
+						<spot x="1879.863" y="1106.698" z="337.9445" h="30"/>
+					</spawn>
+					<!-- Ormele -->
+					<spawn npc_id="799310">
+						<spot x="1936.894" y="1090.127" z="327.0182" h="60"/>
+					</spawn>
+					<!-- Ovirin -->
+					<spawn npc_id="799588">
+						<spot x="1809.514" y="1096.145" z="327.5675"/>
+					</spawn>
+					<!-- Sirav -->
+					<spawn npc_id="832073">
+						<spot x="1928.236" y="1051.704" z="326.8193" h="30"/>
+					</spawn>
+					<!-- Tamuz -->
+					<spawn npc_id="799311">
+						<spot x="1936.902" y="1098.720" z="327.0212" h="60"/>
+					</spawn>
+					<!-- STR_LDF4_Condition_NoShow_Ver47_T20 -->
+					<spawn npc_id="832118">
+						<spot x="1868.557" y="1130.675" z="324.1364" h="30"/>
+					</spawn>
+					<!-- Vitality Well -->
+					<spawn npc_id="258099">
+						<spot x="1833.030" y="1128.823" z="322.8118" h="63"/>
+						<spot x="1948.891" y="1071.787" z="326.9009" h="63"/>
+					</spawn>					
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257958">
+						<spot x="1814.057" y="1063.728" z="326.8910" h="30"/>
+						<spot x="1910.727" y="1149.983" z="320.8460" h="30"/>
+						<spot x="1889.602" y="1238.244" z="321.0780" h="30"/>
+					</spawn>
+					<!-- Asmodian Novice Assassin -->
+					<spawn npc_id="257961">
+						<spot x="1833.001" y="1063.707" z="326.9420" h="30"/>
+						<spot x="1922.009" y="1162.908" z="320.8460" h="30"/>
+						<spot x="1885.507" y="1211.837" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Cadet Mage -->
+					<spawn npc_id="257967">
+						<spot x="1873.131" y="1238.663" z="320.9020" h="30"/>
+						<spot x="1848.088" y="1150.170" z="320.8464"/>
+					</spawn>								
+					<!-- Cadet Priest -->
+					<spawn npc_id="257970">
+						<spot x="1880.154" y="1121.923" z="324.1364" h="30"/>
+						<spot x="1874.568" y="1211.729" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256747" respawn_time="295">
+						<spot x="1872.272" y="1206.585" z="335.1003" h="30" />
+						<spot x="1888.117" y="1206.542" z="335.1464" h="30" />
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="258096">
+						<spot x="1880.248" y="1147.015" z="322.9545" static_id="855"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="258123">
+						<spot x="1945.193" y="1061.886" z="326.8905" h="30"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258134">
+						<spot x="1968.254" y="1122.712" z="322.8800" h="76"/>
+						<spot x="1831.009" y="1155.404" z="320.8460" h="30"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258140">
+						<spot x="1879.629" y="1107.690" z="325.5030" h="30" static_id="983"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258093">
+						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+					</spawn>
+					<!-- Stallari -->
+					<spawn npc_id="257905">
+						<spot x="1878.775" y="1026.996" z="330.7946" h="30"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- Fortress Mage -->
+					<spawn npc_id="257998" respawn_time="295">
+						<spot x="1813.884" y="1063.818" z="326.890" h="30"/>
+						<spot x="1912.316" y="1209.466" z="320.500" h="104"/>
+						<spot x="1889.927" y="1237.997" z="321.115" h="30"/>
+						<spot x="1937.918" y="1160.431" z="321.027" h="60"/>
+						<spot x="1934.922" y="1127.695" z="324.009" h="63"/>
+					</spawn>
+					<!-- Quartermaster -->
+					<spawn npc_id="258130" respawn_time="295">
+						<spot x="1809.125" y="1086.661" z="327.566"/>
+						<spot x="1809.080" y="1097.796" z="327.566"/>
+						<spot x="1854.463" y="1127.000" z="324.136"/>
+						<spot x="1955.224" y="1090.203" z="327.391" h="60"/>
+						<spot x="1955.432" y="1099.608" z="327.391" h="60"/>
+						<spot x="1963.140" y="1099.580" z="327.391" h="60"/>
+					</spawn>
+					<!-- (B): Crimson Favor -->
+					<spawn npc_id="258103" respawn_time="295">
+						<spot x="1823.763" y="1064.033" z="326.944" static_id="854"/>
+					</spawn>
+					<!-- Fortress Priest -->
+					<spawn npc_id="258001" respawn_time="295">
+						<spot x="1850.339" y="1082.531" z="326.209" h="30"/>
+						<spot x="1836.520" y="1149.276" z="320.846" h="61"/>
+						<spot x="1873.277" y="1237.666" z="320.864" h="30"/>
+						<spot x="1919.695" y="1092.441" z="326.207" h="2"/>
+						<spot x="1888.776" y="1091.184" z="326.340" h="30"/>
+					</spawn>
+					<!-- Fortress Assassin -->
+					<spawn npc_id="257992" respawn_time="295">
+						<spot x="1832.882" y="1063.624" z="326.941" h="30"/>
+						<spot x="1824.883" y="1162.684" z="321.050"/>
+						<spot x="1885.205" y="1153.880" z="321.962" h="60"/>
+						<spot x="1885.331" y="1211.875" z="320.500" h="30"/>
+						<spot x="1910.040" y="1152.270" z="320.846" h="88"/>
+						<spot x="1961.247" y="1132.768" z="322.813" h="18"/>
+					</spawn>
+					<!-- DF4_3021_DirectTeleporter_Dr -->
+					<spawn npc_id="258127" respawn_time="295">
+						<spot x="1815.524" y="1097.644" z="327.566"/>
+					</spawn>
+					<!-- Fortress Sniper -->
+					<spawn npc_id="257995" respawn_time="295">
+						<spot x="1832.875" y="1116.750" z="335.514" h="30"/>
+						<spot x="1861.302" y="1117.447" z="335.617" h="30"/>
+						<spot x="1836.238" y="1176.130" z="332.893" h="96"/>
+						<spot x="1867.922" y="1159.045" z="334.813" h="60"/>
+						<spot x="1892.567" y="1158.815" z="334.814"/>
+						<spot x="1844.397" y="1193.604" z="334.718" h="30"/>
+						<spot x="1830.424" y="1201.823" z="334.752" h="30"/>
+						<spot x="1858.808" y="1197.003" z="334.814" h="30"/>
+						<spot x="1869.373" y="1208.886" z="334.814" h="30"/>
+						<spot x="1873.144" y="1208.937" z="334.814" h="30"/>
+						<spot x="1887.217" y="1208.875" z="334.814" h="30"/>
+						<spot x="1901.848" y="1196.968" z="334.814" h="30"/>
+						<spot x="1891.008" y="1208.830" z="334.814" h="30"/>
+						<spot x="1916.093" y="1193.599" z="334.806" h="30"/>
+						<spot x="1929.966" y="1201.831" z="334.870" h="30"/>
+						<spot x="1924.225" y="1176.045" z="332.892" h="83"/>
+						<spot x="1927.762" y="1141.409" z="332.659" h="41"/>
+						<spot x="1959.024" y="1116.879" z="335.646" h="30"/>
+						<spot x="1931.013" y="1116.853" z="335.646" h="30"/>
+						<spot x="1909.537" y="1116.897" z="335.646" h="30"/>
+					</spawn>
+					<!-- Fortress Warrior -->
+					<spawn npc_id="257974" respawn_time="295">
+						<spot x="1839.118" y="1090.791" z="326.205" h="5"/>
+						<spot x="1875.715" y="1125.407" z="324.136" h="30"/>
+						<spot x="1937.894" y="1150.891" z="321.042" h="60"/>
+					</spawn>
+					<!-- Fortress Trigger -->
+					<spawn npc_id="257977" respawn_time="295">
+						<spot x="1871.903" y="1091.280" z="326.210" h="30"/>
+						<spot x="1873.475" y="1176.371" z="323.683"/>
+						<spot x="1937.538" y="1079.444" z="326.997" h="117"/>
+					</spawn>
+					<!-- Fortress High Magus -->
+					<spawn npc_id="257983" respawn_time="295">
+						<spot x="1811.903" y="1129.575" z="323.190"/>
+						<spot x="1886.849" y="1176.318" z="323.683" h="60"/>
+					</spawn>
+					<!-- Fortress Gallowglass -->
+					<spawn npc_id="257989" respawn_time="295">
+						<spot x="1824.760" y="1147.860" z="321.182"/>
+						<spot x="1903.646" y="1129.628" z="324.018" h="28"/>
+						<spot x="1811.632" y="1155.008" z="322.812"/>
+						<spot x="1850.204" y="1158.366" z="320.846" h="79"/>
+						<spot x="1875.018" y="1154.058" z="321.998"/>
+						<spot x="1849.899" y="1215.266" z="320.394" h="10"/>
+						<spot x="1874.828" y="1211.666" z="320.500" h="30"/>
+						<spot x="1919.870" y="1165.489" z="320.846" h="61"/>
+					</spawn>
+					<!-- Fortress Medic -->
+					<spawn npc_id="257986" respawn_time="295">
+						<spot x="1884.782" y="1125.486" z="324.173" h="30"/>
+						<spot x="1971.402" y="1155.504" z="322.813" h="60"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258135" respawn_time="295">
+						<spot x="1831.009" y="1155.404" z="320.846" h="30"/>
+						<spot x="1968.254" y="1122.712" z="322.880" h="76"/>
+					</spawn>
+					<!-- Soul Healer -->
+					<spawn npc_id="258129" respawn_time="295">
+						<spot x="1962.986" y="1090.182" z="327.391" h="60"/>
+					</spawn>
+					<!-- Raeyena -->
+					<spawn npc_id="799363" respawn_time="295">
+						<spot x="2448.0208" y="1293.6962" z="332.1239" h="56"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="258103">
+						<spot x="1823.763" y="1064.033" z="326.9442" static_id="857"/>
+					</spawn>
+					<!-- Vitality Well -->
+					<spawn npc_id="258100">
+						<spot x="1833.030" y="1128.823" z="322.8118" h="63"/>
+						<spot x="1948.891" y="1071.787" z="326.9009" h="63"/>
+					</spawn>					
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257959">
+						<spot x="1814.057" y="1063.728" z="326.8910" h="30"/>
+						<spot x="1910.727" y="1149.983" z="320.8460" h="30"/>
+						<spot x="1889.602" y="1238.244" z="321.0780" h="30"/>
+					</spawn>
+					<!-- Balaur Novice Assassin -->
+					<spawn npc_id="257962">
+						<spot x="1833.001" y="1063.707" z="326.9420" h="30"/>
+						<spot x="1922.009" y="1162.908" z="320.8460" h="30"/>
+						<spot x="1885.507" y="1211.837" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Cadet Mage -->
+					<spawn npc_id="257968">
+						<spot x="1873.131" y="1238.663" z="320.9020" h="30"/>
+						<spot x="1848.088" y="1150.170" z="320.8464"/>
+					</spawn>								
+					<!-- Cadet Priest -->
+					<spawn npc_id="257971">
+						<spot x="1880.154" y="1121.923" z="324.1364" h="30"/>
+						<spot x="1874.568" y="1211.729" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256748" respawn_time="295">
+						<spot x="1872.272" y="1206.585" z="335.1003" h="30" />
+						<spot x="1888.117" y="1206.542" z="335.1464" h="30" />
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="258097">
+						<spot x="1880.248" y="1147.015" z="322.9545" static_id="855"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="258124">
+						<spot x="1945.193" y="1061.886" z="326.8905" h="30"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258135">
+						<spot x="1968.254" y="1122.712" z="322.8800" h="76"/>
+						<spot x="1831.009" y="1155.404" z="320.8460" h="30"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258141">
+						<spot x="1879.629" y="1107.690" z="325.5030" h="30" static_id="983"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258094">
+						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+					</spawn>
+					<!-- Ulsaruk -->
+					<spawn npc_id="257910">
+						<spot x="1878.775" y="1026.996" z="330.7946" h="30"/>
+					</spawn>
+					<!-- Raeyena -->
+					<spawn npc_id="799363" respawn_time="295">
+						<spot x="2448.0208" y="1293.6962" z="332.1239" h="56"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Seasoned Magus -->
+					<spawn npc_id="257951" respawn_time="295">
+						<spot x="1875.32" y="1125.3" z="324.136" h="30"/>
+						<spot x="1835.35" y="1093.3" z="326.303" h="33"/>
+					</spawn>
+					<!-- Cadet Priest -->
+					<spawn npc_id="257969" respawn_time="295">
+						<spot x="1923.69" y="1096.77" z="326.337" h="26"/>
+						<spot x="1824.65" y="1162.46" z="321.053"/>
+						<spot x="1889.57" y="1091.15" z="326.367" h="30"/>
+						<spot x="1936.77" y="1126.45" z="324.009" h="2"/>
+					</spawn>
+					<!-- Veteran Curate -->
+					<spawn npc_id="257939" respawn_time="295">
+						<spot x="1891.53" y="1278.14" z="314.962" h="107"/>
+					</spawn>
+					<!-- (E): Crimson Favor -->
+					<spawn npc_id="258101" respawn_time="295">
+						<spot x="1823.69" y="1064.02" z="326.865" static_id="870"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258133" respawn_time="295">
+						<spot x="1831.01" y="1155.4" z="320.846" h="30"/>
+						<spot x="1968.25" y="1122.71" z="322.88" h="76"/>
+					</spawn>
+					<!-- Seasoned Crusader -->
+					<spawn npc_id="257942" respawn_time="295">
+						<spot x="1937.62" y="1150.76" z="320.892" h="60"/>
+						<spot x="1971.58" y="1155.94" z="322.813" h="60"/>
+					</spawn>
+					<!-- Lisimakos -->
+					<spawn npc_id="799062" respawn_time="295">
+						<spot x="1809.13" y="1086.66" z="328.617"/>
+					</spawn>
+					<!-- Eleusis -->
+					<spawn npc_id="799048" respawn_time="295">
+						<spot x="1955.43" y="1099.61" z="328.775"/>
+					</spawn>
+					<!-- Veteran Assassin -->
+					<spawn npc_id="257930" respawn_time="295">
+						<spot x="1871.96" y="1091.31" z="326.21" h="30"/>
+					</spawn>
+					<!-- Cadet Assassin -->
+					<spawn npc_id="257960" respawn_time="295">
+						<spot x="1833" y="1063.71" z="326.942" h="30"/>
+						<spot x="1837.67" y="1150.92" z="320.846" h="64"/>
+						<spot x="1812.34" y="1155.11" z="322.812"/>
+						<spot x="1937.71" y="1160.44" z="320.956" h="60"/>
+						<spot x="1920.17" y="1157.61" z="320.846" h="56"/>
+						<spot x="1885.21" y="1153.93" z="321.963" h="60"/>
+					</spawn>
+					<!-- Temenos -->
+					<spawn npc_id="799049" respawn_time="295">
+						<spot x="1854.46" y="1127" z="324.136"/>
+					</spawn>
+					<!-- Lysan -->
+					<spawn npc_id="799050" respawn_time="295">
+						<spot x="1955.22" y="1090.2" z="328.775"/>
+					</spawn>
+					<!-- Cadet Archer -->
+					<spawn npc_id="257963" respawn_time="295">
+						<spot x="1873.22" y="1208.88" z="334.814" h="26"/>
+						<spot x="1916.99" y="1193.66" z="334.808" h="23"/>
+						<spot x="1869.29" y="1208.85" z="334.814" h="21"/>
+						<spot x="1891.11" y="1208.96" z="334.814" h="35"/>
+						<spot x="1858.69" y="1197.02" z="334.814" h="31"/>
+						<spot x="1843.13" y="1193.49" z="334.721" h="22"/>
+						<spot x="1830.15" y="1201.8" z="334.752" h="12"/>
+						<spot x="1929.99" y="1201.67" z="334.869" h="35"/>
+						<spot x="1901.86" y="1197.01" z="334.814" h="34"/>
+						<spot x="1887.08" y="1208.98" z="334.814" h="37"/>
+						<spot x="1927.7" y="1141.25" z="332.659" h="36"/>
+						<spot x="1861.35" y="1117.3" z="335.617" h="30"/>
+						<spot x="1930.97" y="1116.76" z="335.646" h="30"/>
+						<spot x="1909.74" y="1116.72" z="335.646" h="30"/>
+						<spot x="1922.26" y="1176.77" z="332.95" h="83"/>
+						<spot x="1892.46" y="1159.41" z="334.815"/>
+						<spot x="1867.99" y="1159.91" z="334.828" h="60"/>
+						<spot x="1839.25" y="1177.17" z="332.978" h="96"/>
+						<spot x="1830.56" y="1117.14" z="335.914" h="30"/>
+						<spot x="1959.67" y="1116.7" z="335.646" h="30"/>
+					</spawn>
+					<!-- DF4_3021_DynTeleporter_Li -->
+					<spawn npc_id="258125" respawn_time="295">
+						<spot x="1815.13" y="1097.46" z="327.566"/>
+					</spawn>
+					<!-- Cadet Mage -->
+					<spawn npc_id="257966" respawn_time="295">
+						<spot x="1910.01" y="1082.08" z="326.21" h="30"/>
+						<spot x="1856.21" y="1164.09" z="320.846" h="109"/>
+						<spot x="1961.07" y="1124.56" z="322.813" h="77"/>
+					</spawn>
+					<!-- Theoria -->
+					<spawn npc_id="799045" respawn_time="295">
+						<spot x="1962.99" y="1090.18" z="327.391" h="60"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257957" respawn_time="295">
+						<spot x="1850.46" y="1081.99" z="326.21" h="30"/>
+						<spot x="1814.06" y="1063.73" z="326.891" h="30"/>
+						<spot x="1824.81" y="1147.92" z="321.151"/>
+						<spot x="1912.23" y="1129.34" z="324.013" h="109"/>
+						<spot x="1874.66" y="1153.81" z="321.997"/>
+						<spot x="1908.5" y="1154.51" z="320.846" h="43"/>
+					</spawn>
+					<!-- Ateleia -->
+					<spawn npc_id="799046" respawn_time="295">
+						<spot x="1963.14" y="1099.58" z="327.391" h="60"/>
+					</spawn>
+					<!-- Mallana -->
+					<spawn npc_id="799047" respawn_time="295">
+						<spot x="1809.08" y="1097.8" z="329.011"/>
+					</spawn>
+					<!-- Raeyena -->
+					<spawn npc_id="799363" respawn_time="295">
+						<spot x="2448.0208" y="1293.6962" z="332.1239" h="56"/>
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- (A): Chaos Rage -->
+					<spawn npc_id="258101">
+						<spot x="1823.763" y="1064.033" z="326.9442" static_id="857"/>
+					</spawn>
+					<!-- Ateleia -->
+					<spawn npc_id="799046">
+						<spot x="1936.902" y="1098.720" z="327.0212" h="60"/>
+					</spawn>					
+					<!-- Damasanor -->
+					<spawn npc_id="832175">
+						<spot x="1817.400" y="1101.612" z="327.5649" h="90"/>
+					</spawn>
+					<!-- Eleusis -->
+					<spawn npc_id="799048">
+						<spot x="1936.633" y="1103.466" z="326.9826" h="60"/>
+					</spawn>
+					<!-- Eusebius -->
+					<spawn npc_id="832057">
+						<spot x="1928.236" y="1051.704" z="326.8193" h="30"/>
+					</spawn>
+					<!-- Isidore -->
+					<spawn npc_id="832056">
+						<spot x="1879.863" y="1106.698" z="337.9445" h="30"/>
+					</spawn>
+					<!-- Lisimakos -->
+					<spawn npc_id="799062">
+						<spot x="1817.654" y="1086.576" z="327.5649" h="30"/>
+					</spawn>
+					<!-- Lysan -->
+					<spawn npc_id="799050">
+						<spot x="1812.521" y="1086.591" z="327.5650"/>
+					</spawn>
+					<!-- Mallana -->
+					<spawn npc_id="799047">
+						<spot x="1812.569" y="1101.717" z="327.5659"/>
+					</spawn>					
+					<!-- Osander -->
+					<spawn npc_id="832055">
+						<spot x="1924.706" y="1051.590" z="326.8160" h="30"/>
+					</spawn>										
+					<!-- Temenos -->
+					<spawn npc_id="799049">
+						<spot x="1854.463" y="1127" z="324.1364"/>
+					</spawn>
+					<!-- Theoria -->
+					<spawn npc_id="799045">
+						<spot x="1936.894" y="1090.127" z="327.0182" h="60"/>
+					</spawn>
+					<!-- Theramenes -->
+					<spawn npc_id="832058">
+						<spot x="1931.761" y="1051.743" z="326.8218" h="30"/>
+					</spawn>					
+					<!-- Vitality Well -->
+					<spawn npc_id="258098">
+						<spot x="1833.030" y="1128.823" z="322.8118" h="63"/>
+						<spot x="1948.891" y="1071.787" z="326.9009" h="63"/>
+					</spawn>
+					<!-- DF4_3021_DynTeleporter_Li -->
+					<spawn npc_id="258125">
+						<spot x="1815.13" y="1097.46" z="327.566"/>
+					</spawn>
+					<!-- Cadet Fighter -->
+					<spawn npc_id="257957">
+						<spot x="1814.057" y="1063.728" z="326.8910" h="30"/>
+						<spot x="1910.727" y="1149.983" z="320.8460" h="30"/>
+						<spot x="1889.602" y="1238.244" z="321.0780" h="30"/>
+					</spawn>
+					<!-- Cadet Assassin -->
+					<spawn npc_id="257960">
+						<spot x="1833.001" y="1063.707" z="326.9420" h="30"/>
+						<spot x="1922.009" y="1162.908" z="320.8460" h="30"/>
+						<spot x="1885.507" y="1211.837" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Cadet Mage -->
+					<spawn npc_id="257966">
+						<spot x="1873.131" y="1238.663" z="320.9020" h="30"/>
+						<spot x="1848.088" y="1150.170" z="320.8464"/>
+					</spawn>								
+					<!-- Cadet Priest -->
+					<spawn npc_id="257969">
+						<spot x="1880.154" y="1121.923" z="324.1364" h="30"/>
+						<spot x="1874.568" y="1211.729" z="320.5000" h="30"/>
+					</spawn>
+					<!-- Fortress Gun -->
+					<spawn npc_id="256746">
+						<spot x="1872.272" y="1206.585" z="335.1003" h="30" />
+						<spot x="1888.117" y="1206.542" z="335.1464" h="30" />
+					</spawn>
+					<!-- Gate Stone -->
+					<spawn npc_id="258095">
+						<spot x="1880.248" y="1147.015" z="322.9545" static_id="855"/>
+					</spawn>
+					<!-- Field Activation Stone -->
+					<spawn npc_id="258122">
+						<spot x="1945.193" y="1061.886" z="326.8905" h="30"/>
+					</spawn>
+					<!-- Teleportation Tower -->
+					<spawn npc_id="258133">
+						<spot x="1968.254" y="1122.712" z="322.8800" h="76"/>
+						<spot x="1831.009" y="1155.404" z="320.8460" h="30"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258139">
+						<spot x="1879.629" y="1107.690" z="325.5030" h="30" static_id="983"/>
+					</spawn>
+					<!-- Fortress Gate -->
+					<spawn npc_id="258092">
+						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+					</spawn>
+					<!-- Dux -->
+					<spawn npc_id="257900">
+						<spot x="1878.775" y="1026.996" z="330.7946" h="30"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3022">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (A): Lava Explosion(DF4_Artifact_30221_Da) -->
+					<spawn npc_id="258105" respawn_time="295">
+						<spot x="2043.113" y="1482.76" z="333.375" static_id="968" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3022_Boss_Da_1) -->
+					<spawn npc_id="258007" respawn_time="295">
+						<spot x="2047.738" y="1468.127" z="333.1166" h="103" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3022_guardS_Da_Pr_1) -->
+					<spawn npc_id="258030" respawn_time="295">
+						<spot x="2026.464" y="1478.192" z="332.9978" h="73" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3022_guardS_Da_As_1) -->
+					<spawn npc_id="258021" respawn_time="295">
+						<spot x="2034.366" y="1468.404" z="332.0734" h="73" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3022_guardS_Da_Fi_1) -->
+					<spawn npc_id="258018" respawn_time="295">
+						<spot x="2059.871" y="1477.525" z="333.6169" h="110" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3022_guardS_Da_Wi_1) -->
+					<spawn npc_id="258027" respawn_time="295">
+						<spot x="2057.629" y="1489.023" z="333.5544" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Lava Explosion(DF4_Artifact_30221_Dr) -->
+					<spawn npc_id="258106" respawn_time="295">
+						<spot x="2043.113" y="1482.76" z="333.375" static_id="867" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3022_Boss_Dr_1) -->
+					<spawn npc_id="258012" respawn_time="295">
+						<spot x="2047.738" y="1468.127" z="333.1166" h="103" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3022_guardS_Dr_Pr_1) -->
+					<spawn npc_id="258031" respawn_time="295">
+						<spot x="2026.464" y="1478.192" z="332.9978" h="73" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3022_guardS_Dr_As_1) -->
+					<spawn npc_id="258022" respawn_time="295">
+						<spot x="2034.366" y="1468.404" z="332.0734" h="73" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3022_guardS_Dr_Fi_1) -->
+					<spawn npc_id="258019" respawn_time="295">
+						<spot x="2059.871" y="1477.525" z="333.6169" h="110" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3022_guardS_Dr_Wi_1) -->
+					<spawn npc_id="258028" respawn_time="295">
+						<spot x="2057.629" y="1489.023" z="333.5544" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (E): Lava Explosion(DF4_Artifact_30221_Li) -->
+					<spawn npc_id="258104" respawn_time="295">
+						<spot x="2043.113" y="1482.76" z="333.375" static_id="850" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3022_Boss_Li_1) -->
+					<spawn npc_id="258002" respawn_time="295">
+						<spot x="2047.738" y="1468.127" z="333.1166" h="103" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3022_guardS_Li_Pr_1) -->
+					<spawn npc_id="258029" respawn_time="295">
+						<spot x="2026.464" y="1478.192" z="332.9978" h="73" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3022_guardS_Li_As_1) -->
+					<spawn npc_id="258020" respawn_time="295">
+						<spot x="2034.366" y="1468.404" z="332.0734" h="73" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3022_guardS_Li_Fi_1) -->
+					<spawn npc_id="258017" respawn_time="295">
+						<spot x="2059.871" y="1477.525" z="333.6169" h="110" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3022_guardS_Li_Wi_1) -->
+					<spawn npc_id="258026" respawn_time="295">
+						<spot x="2057.629" y="1489.023" z="333.5544" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3023">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (A): Soul Destruction(DF4_Artifact_30231_Da) -->
+					<spawn npc_id="258108" respawn_time="295">
+						<spot x="1678.007" y="1317.797" z="328.1377" static_id="847" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3023_Boss_Da_1) -->
+					<spawn npc_id="258052" respawn_time="295">
+						<spot x="1671.515" y="1301.491" z="327.0341" h="26" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3023_guardS_Da_As_1) -->
+					<spawn npc_id="258066" respawn_time="295">
+						<spot x="1686.708" y="1330.639" z="326.8449" h="30" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3023_guardS_Da_Pr_1) -->
+					<spawn npc_id="258075" respawn_time="295">
+						<spot x="1693.451" y="1313.614" z="327.6027" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3023_guardS_Da_Fi_1) -->
+					<spawn npc_id="258063" respawn_time="295">
+						<spot x="1670.159" y="1331.895" z="326.5319" h="45" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3023_guardS_Da_Wi_1) -->
+					<spawn npc_id="258072" respawn_time="295">
+						<spot x="1661.885" y="1317.054" z="326.0062" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Soul Destruction(DF4_Artifact_30231_Dr) -->
+					<spawn npc_id="258109" respawn_time="295">
+						<spot x="1678.007" y="1317.797" z="328.1377" static_id="961" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3023_Boss_Dr_1) -->
+					<spawn npc_id="258057" respawn_time="295">
+						<spot x="1671.515" y="1301.491" z="327.0341" h="26" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3023_guardS_Dr_As_1) -->
+					<spawn npc_id="258067" respawn_time="295">
+						<spot x="1686.708" y="1330.639" z="326.8449" h="30" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3023_guardS_Dr_Pr_1) -->
+					<spawn npc_id="258076" respawn_time="295">
+						<spot x="1693.451" y="1313.614" z="327.6027" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3023_guardS_Dr_Fi_1) -->
+					<spawn npc_id="258064" respawn_time="295">
+						<spot x="1670.159" y="1331.895" z="326.5319" h="45" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3023_guardS_Dr_Wi_1) -->
+					<spawn npc_id="258073" respawn_time="295">
+						<spot x="1661.885" y="1317.054" z="326.0062" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (E): Soul Destruction(DF4_Artifact_30231_Li) -->
+					<spawn npc_id="258107" respawn_time="295">
+						<spot x="1678.007" y="1317.797" z="328.1377" static_id="964" />
+					</spawn>
+					<!-- Artifact Guardian(DF4_3023_Boss_Li_1) -->
+					<spawn npc_id="258047" respawn_time="295">
+						<spot x="1671.515" y="1301.491" z="327.0341" h="26" />
+					</spawn>
+					<!-- Artifact Assassin(DF4_3023_guardS_Li_As_1) -->
+					<spawn npc_id="258065" respawn_time="295">
+						<spot x="1686.708" y="1330.639" z="326.8449" h="30" />
+					</spawn>
+					<!-- Artifact Archduke(DF4_3023_guardS_Li_Pr_1) -->
+					<spawn npc_id="258074" respawn_time="295">
+						<spot x="1693.451" y="1313.614" z="327.6027" />
+					</spawn>
+					<!-- Artifact Champion(DF4_3023_guardS_Li_Fi_1) -->
+					<spawn npc_id="258062" respawn_time="295">
+						<spot x="1670.159" y="1331.895" z="326.5319" h="45" />
+					</spawn>
+					<!-- Artifact High Magus(DF4_3023_guardS_Li_Wi_1) -->
+					<spawn npc_id="258071" respawn_time="295">
+						<spot x="1661.885" y="1317.054" z="326.0062" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3024">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+					<!-- (B): Blaze of the Abyss(DF4_Artifact_30241_Da) -->
+					<spawn npc_id="252334" respawn_time="295">
+						<spot x="1862.545" y="1422.47" z="332.625" static_id="4102" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3024_Boss_Da_1) -->
+					<spawn npc_id="252454" respawn_time="295">
+						<spot x="1849.613" y="1432.594" z="332.375" h="67" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3024_guardS_Da_As_1) -->
+					<spawn npc_id="256732" respawn_time="295">
+						<spot x="1817.279" y="1417.761" z="333.8001" h="117" />
+						<spot x="1875.138" y="1414.491" z="332.4693" h="110" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3024_guardS_Da_Fi_1) -->
+					<spawn npc_id="256735" respawn_time="295">
+						<spot x="1862.851" y="1407.495" z="332.4603" h="90" />
+						<spot x="1888.971" y="1427.321" z="331.5643" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3024_guardS_Da_Pr_1) -->
+					<spawn npc_id="256738" respawn_time="295">
+						<spot x="1847.346" y="1420.331" z="332.4091" h="60" />
+						<spot x="1857.24" y="1452.201" z="332.6376" h="40" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3024_guardS_Da_Wi_1) -->
+					<spawn npc_id="256741" respawn_time="295">
+						<spot x="1867.628" y="1435.55" z="332.2781" h="20" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+					<!-- (B): Blaze of the Abyss(DF4_Artifact_30241_Dr) -->
+					<spawn npc_id="252335" respawn_time="295">
+						<spot x="1862.545" y="1422.47" z="332.625" static_id="4103" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3024_Boss_Dr_1) -->
+					<spawn npc_id="252459" respawn_time="295">
+						<spot x="1849.613" y="1432.594" z="332.375" h="67" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3024_guardS_Dr_As_1) -->
+					<spawn npc_id="256733" respawn_time="295">
+						<spot x="1817.279" y="1417.761" z="333.8001" h="117" />
+						<spot x="1875.138" y="1414.491" z="332.4693" h="110" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3024_guardS_Dr_Fi_1) -->
+					<spawn npc_id="256736" respawn_time="295">
+						<spot x="1862.851" y="1407.495" z="332.4603" h="90" />
+						<spot x="1888.971" y="1427.321" z="331.5643" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3024_guardS_Dr_Pr_1) -->
+					<spawn npc_id="256739" respawn_time="295">
+						<spot x="1847.346" y="1420.331" z="332.4091" h="60" />
+						<spot x="1857.24" y="1452.201" z="332.6376" h="40" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3024_guardS_Dr_Wi_1) -->
+					<spawn npc_id="256742" respawn_time="295">
+						<spot x="1867.628" y="1435.55" z="332.2781" h="20" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- (B): Blaze of the Abyss(DF4_Artifact_30241_Li) -->
+					<spawn npc_id="252333" respawn_time="295">
+						<spot x="1862.545" y="1422.47" z="332.625" static_id="4104" />
+					</spawn>
+					<!-- Initiate Protector(DF4_3024_Boss_Li_1) -->
+					<spawn npc_id="252449" respawn_time="295">
+						<spot x="1849.613" y="1432.594" z="332.375" h="67" />
+					</spawn>
+					<!-- Veteran Assassin(DF4_3024_guardS_Li_As_1) -->
+					<spawn npc_id="256731" respawn_time="295">
+						<spot x="1817.279" y="1417.761" z="333.8001" h="117" />
+						<spot x="1875.138" y="1414.491" z="332.4693" h="110" />
+					</spawn>
+					<!-- Veteran Crusader(DF4_3024_guardS_Li_Fi_1) -->
+					<spawn npc_id="256734" respawn_time="295">
+						<spot x="1862.851" y="1407.495" z="332.4603" h="90" />
+						<spot x="1888.971" y="1427.321" z="331.5643" />
+					</spawn>
+					<!-- Veteran Curate(DF4_3024_guardS_Li_Pr_1) -->
+					<spawn npc_id="256737" respawn_time="295">
+						<spot x="1847.346" y="1420.331" z="332.4091" h="60" />
+						<spot x="1857.24" y="1452.201" z="332.6376" h="40" />
+					</spawn>
+					<!-- Veteran Magus(DF4_3024_guardS_Li_Wi_1) -->
+					<spawn npc_id="256740" respawn_time="295">
+						<spot x="1867.628" y="1435.55" z="332.2781" h="20" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+		<siege_spawn siege_id="3111">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- Enraged Mastarius -->
+					<spawn npc_id="258205">
+						<spot x="1822.23" y="1976.96" z="392.035" h="48"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+	</spawn_map>
+</spawns>

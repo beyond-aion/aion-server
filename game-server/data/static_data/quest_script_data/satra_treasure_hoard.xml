@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+		[BEGIN] SUMMARY
+			18900 [XML] [Group] Treasure Trove
+			18901 [SCRIPT] [Group] Punishing the Punisher
+			18902 [SCRIPT] [Group]  Punisher's Posture
+			18903 [SCRIPT] [Group] Gates of Satra
+			18904 [SCRIPT] [Daily/Group] According To His Ability
+			28900 [XML] [Group] Treasure Eye-land
+			28901 [SCRIPT] [Group] Muzzle Tussle
+			28902 [SCRIPT] [Group] Punisher Unleashed
+			28903 [SCRIPT] [Group] Knockin' On Satra's Gates
+			28904 [SCRIPT] [Daily/Group] Apsilon's Abilities
+		[END] SUMMARY
+	-->
+       <!-- REPORTING QUESTS -->
+	<report_to id="18900" start_npc_ids="205842" end_npc_ids="800332"/>
+	<report_to id="28900" start_npc_ids="205864" end_npc_ids="800332"/>
+</quest_scripts>

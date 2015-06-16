@@ -1,0 +1,1 @@
+ALTER TABLE players ADD COLUMN dp int(3) NOT NULL default '0' AFTER `title_id`

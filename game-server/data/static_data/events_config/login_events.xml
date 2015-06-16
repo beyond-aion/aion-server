@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<login_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="login_events.xsd">
+    <login_event id="1" name="test_attend_reward_01_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="DAILY" attend_num="1" reward_item="188052315"
+                 reward_item_num="1" reward_item_expire="1440"/>
+    <login_event id="2" name="test_attend_reward_01_cumulative_5day" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="5" reward_item="165010001"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="3" name="test_attend_reward_01_cumulative_10day" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="10" reward_item="166000120"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="4" name="test_attend_reward_01_cumulative_15day" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="15" reward_item="166030005"
+                 reward_item_num="1" reward_item_expire="10"/>
+    <login_event id="5" name="test_attend_reward_01_cumulative_20day" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="20" reward_item="168000118"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="6" name="test_attend_reward_01_cumulative_30day" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="30" reward_item="169220032"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="7" name="test_attend_reward_01_anniversary_1??" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="4" reward_item="188052830"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="8" name="test_attend_reward_01_anniversary_2??" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="5" reward_item="188052831"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="9" name="test_attend_reward_02_daily" active="1" period_start="2014-03-15T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="DAILY" attend_num="1" reward_item="166000010"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="10" name="test_attend_reward_02_cumulative_10day" active="0" period_start="2014-03-15T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="10" reward_item="166000030"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="11" name="test_attend_reward_02_cumulative_20day" active="0" period_start="2014-03-15T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="20" reward_item="166000040"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="12" name="test_attend_reward_02_daily_off" active="0" period_start="2014-03-15T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="DAILY" attend_num="1" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="13" name="test_attend_reward_02_cumulative_5day_off" active="0" period_start="2014-03-15T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="CUMULATIVE" attend_num="5" reward_item="166000060"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="14" name="account_create_anniversary_reward_01month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="1" reward_item="188053423"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="15" name="account_create_anniversary_reward_02month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="2" reward_item="188053424"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="16" name="account_create_anniversary_reward_03month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="3" reward_item="188053425"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="17" name="account_create_anniversary_reward_04month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="4" reward_item="188053426"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="18" name="account_create_anniversary_reward_05month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="5" reward_item="188053427"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="19" name="account_create_anniversary_reward_06month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="6" reward_item="188053428"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="20" name="account_create_anniversary_reward_07month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="7" reward_item="188053429"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="21" name="account_create_anniversary_reward_08month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="8" reward_item="188053430"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="22" name="account_create_anniversary_reward_09month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="9" reward_item="188053431"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="23" name="account_create_anniversary_reward_10month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="10" reward_item="188053432"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="24" name="account_create_anniversary_reward_11month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="11" reward_item="188053433"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="25" name="account_create_anniversary_reward_12month" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2050-12-31T08:59:59" attend_type="ANNIVERSARY" attend_num="12" reward_item="188053434"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="26" name="account_create_anniversary_reward_21month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="1" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="27" name="account_create_anniversary_reward_22month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="2" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="28" name="account_create_anniversary_reward_23month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="3" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="29" name="account_create_anniversary_reward_24month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="4" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="30" name="account_create_anniversary_reward_25month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="5" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="31" name="account_create_anniversary_reward_26month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="6" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="32" name="account_create_anniversary_reward_27month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="7" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="33" name="account_create_anniversary_reward_28month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="8" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="34" name="account_create_anniversary_reward_29month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="9" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="35" name="account_create_anniversary_reward_30month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="10" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="36" name="account_create_anniversary_reward_31month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="11" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="37" name="account_create_anniversary_reward_32month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="12" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="38" name="account_create_anniversary_reward_33month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="1" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="39" name="account_create_anniversary_reward_34month" active="0" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-01T00:00:00" attend_type="ANNIVERSARY" attend_num="2" reward_item="166000050"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="40" name="2014_attend_reward_month_04_7day" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2014-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="41" name="2014_attend_reward_month_04_14day" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2014-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="42" name="2014_attend_reward_month_04_21day" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2014-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="43" name="2014_attend_reward_month_04_28day" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2014-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="44" name="2014_attend_reward_daily_season_01" active="1" period_start="2014-04-01T09:00:00"
+                 period_end="2014-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="45" name="2014_attend_reward_daily_season_02" active="1" period_start="2014-06-01T09:00:00"
+                 period_end="2014-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="46" name="2014_attend_reward_daily_season_03" active="1" period_start="2014-09-01T09:00:00"
+                 period_end="2014-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="47" name="2014_attend_reward_daily_season_04" active="1" period_start="2014-12-21T09:00:00"
+                 period_end="2015-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="48" name="2014_attend_reward_month_05_21day" active="1" period_start="2014-05-01T09:00:00"
+                 period_end="2014-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="49" name="2014_attend_reward_month_05_28day" active="1" period_start="2014-05-01T09:00:00"
+                 period_end="2014-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="50" name="2014_attend_reward_month_06_7day" active="1" period_start="2014-06-01T09:00:00"
+                 period_end="2014-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="51" name="2014_attend_reward_month_06_14day" active="1" period_start="2014-06-01T09:00:00"
+                 period_end="2014-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="52" name="2014_attend_reward_month_06_21day" active="1" period_start="2014-06-01T09:00:00"
+                 period_end="2014-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="53" name="2014_attend_reward_month_06_28day" active="1" period_start="2014-06-01T09:00:00"
+                 period_end="2014-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="54" name="2014_attend_reward_month_07_7day" active="1" period_start="2014-07-01T09:00:00"
+                 period_end="2014-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="55" name="2014_attend_reward_month_07_14day" active="1" period_start="2014-07-01T09:00:00"
+                 period_end="2014-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="56" name="2014_attend_reward_month_07_21day" active="1" period_start="2014-07-01T09:00:00"
+                 period_end="2014-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="57" name="2014_attend_reward_month_07_28day" active="1" period_start="2014-07-01T09:00:00"
+                 period_end="2014-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="58" name="2014_attend_reward_month_08_7day" active="1" period_start="2014-08-01T09:00:00"
+                 period_end="2014-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="59" name="2014_attend_reward_month_08_14day" active="1" period_start="2014-08-01T09:00:00"
+                 period_end="2014-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="60" name="2014_attend_reward_month_08_21day" active="1" period_start="2014-08-01T09:00:00"
+                 period_end="2014-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="61" name="2014_attend_reward_month_08_28day" active="1" period_start="2014-08-01T09:00:00"
+                 period_end="2014-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="62" name="2014_attend_reward_month_09_7day" active="1" period_start="2014-09-01T09:00:00"
+                 period_end="2014-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="63" name="2014_attend_reward_month_09_14day" active="1" period_start="2014-09-01T09:00:00"
+                 period_end="2014-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="64" name="2014_attend_reward_month_09_21day" active="1" period_start="2014-09-01T09:00:00"
+                 period_end="2014-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="65" name="2014_attend_reward_month_09_28day" active="1" period_start="2014-09-01T09:00:00"
+                 period_end="2014-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="66" name="2014_attend_reward_month_10_7day" active="1" period_start="2014-10-01T09:00:00"
+                 period_end="2014-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="67" name="2014_attend_reward_month_10_14day" active="1" period_start="2014-10-01T09:00:00"
+                 period_end="2014-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="68" name="2014_attend_reward_month_10_21day" active="1" period_start="2014-10-01T09:00:00"
+                 period_end="2014-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="69" name="2014_attend_reward_month_10_28day" active="1" period_start="2014-10-01T09:00:00"
+                 period_end="2014-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="70" name="2014_attend_reward_month_11_7day" active="1" period_start="2014-11-01T09:00:00"
+                 period_end="2014-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="71" name="2014_attend_reward_month_11_14day" active="1" period_start="2014-11-01T09:00:00"
+                 period_end="2014-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="72" name="2014_attend_reward_month_11_21day" active="1" period_start="2014-11-01T09:00:00"
+                 period_end="2014-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="73" name="2014_attend_reward_month_11_28day" active="1" period_start="2014-11-01T09:00:00"
+                 period_end="2014-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="74" name="2014_attend_reward_month_12_7day" active="1" period_start="2014-12-01T09:00:00"
+                 period_end="2015-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="75" name="2014_attend_reward_month_12_14day" active="1" period_start="2014-12-01T09:00:00"
+                 period_end="2015-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="76" name="2014_attend_reward_month_12_21day" active="1" period_start="2014-12-01T09:00:00"
+                 period_end="2015-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="77" name="2014_attend_reward_month_12_28day" active="1" period_start="2014-12-01T09:00:00"
+                 period_end="2015-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="78" name="2015_attend_reward_daily_season_01" active="1" period_start="2015-03-01T09:00:00"
+                 period_end="2015-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="79" name="2015_attend_reward_daily_season_02" active="1" period_start="2015-06-01T09:00:00"
+                 period_end="2015-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="80" name="2015_attend_reward_daily_season_03" active="1" period_start="2015-09-01T09:00:00"
+                 period_end="2015-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="81" name="2015_attend_reward_daily_season_04" active="1" period_start="2015-12-01T09:00:00"
+                 period_end="2016-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="82" name="2015_attend_reward_month_01_7day" active="1" period_start="2015-01-01T09:00:00"
+                 period_end="2015-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="83" name="2015_attend_reward_month_01_14day" active="1" period_start="2015-01-01T09:00:00"
+                 period_end="2015-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="84" name="2015_attend_reward_month_01_21day" active="1" period_start="2015-01-01T09:00:00"
+                 period_end="2015-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="85" name="2015_attend_reward_month_01_28day" active="1" period_start="2015-01-01T09:00:00"
+                 period_end="2015-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="86" name="2015_attend_reward_month_02_7day" active="1" period_start="2015-02-01T09:00:00"
+                 period_end="2015-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="87" name="2015_attend_reward_month_02_14day" active="1" period_start="2015-02-01T09:00:00"
+                 period_end="2015-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="88" name="2015_attend_reward_month_02_21day" active="1" period_start="2015-02-01T09:00:00"
+                 period_end="2015-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="89" name="2015_attend_reward_month_02_28day" active="1" period_start="2015-02-01T09:00:00"
+                 period_end="2015-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="90" name="2015_attend_reward_month_03_7day" active="1" period_start="2015-03-01T09:00:00"
+                 period_end="2015-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="91" name="2015_attend_reward_month_03_14day" active="1" period_start="2015-03-01T09:00:00"
+                 period_end="2015-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="92" name="2015_attend_reward_month_03_21day" active="1" period_start="2015-03-01T09:00:00"
+                 period_end="2015-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="93" name="2015_attend_reward_month_03_28day" active="1" period_start="2015-03-01T09:00:00"
+                 period_end="2015-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="94" name="2015_attend_reward_month_04_7day" active="1" period_start="2015-04-01T09:00:00"
+                 period_end="2015-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="95" name="2015_attend_reward_month_04_14day" active="1" period_start="2015-04-01T09:00:00"
+                 period_end="2015-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="96" name="2015_attend_reward_month_04_21day" active="1" period_start="2015-04-01T09:00:00"
+                 period_end="2015-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="97" name="2015_attend_reward_month_04_28day" active="1" period_start="2015-04-01T09:00:00"
+                 period_end="2015-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="98" name="2015_attend_reward_month_05_7day" active="1" period_start="2015-05-01T09:00:00"
+                 period_end="2015-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="99" name="2015_attend_reward_month_05_14day" active="1" period_start="2015-05-01T09:00:00"
+                 period_end="2015-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="100" name="2015_attend_reward_month_05_21day" active="1" period_start="2015-05-01T09:00:00"
+                 period_end="2015-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="101" name="2015_attend_reward_month_05_28day" active="1" period_start="2015-05-01T09:00:00"
+                 period_end="2015-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="102" name="2015_attend_reward_month_06_7day" active="1" period_start="2015-06-01T09:00:00"
+                 period_end="2015-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="103" name="2015_attend_reward_month_06_14day" active="1" period_start="2015-06-01T09:00:00"
+                 period_end="2015-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="104" name="2015_attend_reward_month_06_21day" active="1" period_start="2015-06-01T09:00:00"
+                 period_end="2015-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="105" name="2015_attend_reward_month_06_28day" active="1" period_start="2015-06-01T09:00:00"
+                 period_end="2015-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="106" name="2015_attend_reward_month_07_7day" active="1" period_start="2015-07-01T09:00:00"
+                 period_end="2015-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="107" name="2015_attend_reward_month_07_14day" active="1" period_start="2015-07-01T09:00:00"
+                 period_end="2015-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="108" name="2015_attend_reward_month_07_21day" active="1" period_start="2015-07-01T09:00:00"
+                 period_end="2015-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="109" name="2015_attend_reward_month_07_28day" active="1" period_start="2015-07-01T09:00:00"
+                 period_end="2015-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="110" name="2015_attend_reward_month_08_7day" active="1" period_start="2015-08-01T09:00:00"
+                 period_end="2015-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="111" name="2015_attend_reward_month_08_14day" active="1" period_start="2015-08-01T09:00:00"
+                 period_end="2015-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="112" name="2015_attend_reward_month_08_21day" active="1" period_start="2015-08-01T09:00:00"
+                 period_end="2015-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="113" name="2015_attend_reward_month_08_28day" active="1" period_start="2015-08-01T09:00:00"
+                 period_end="2015-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="114" name="2015_attend_reward_month_09_7day" active="1" period_start="2015-09-01T09:00:00"
+                 period_end="2015-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="115" name="2015_attend_reward_month_09_14day" active="1" period_start="2015-09-01T09:00:00"
+                 period_end="2015-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="116" name="2015_attend_reward_month_09_21day" active="1" period_start="2015-09-01T09:00:00"
+                 period_end="2015-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="117" name="2015_attend_reward_month_09_28day" active="1" period_start="2015-09-01T09:00:00"
+                 period_end="2015-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="118" name="2015_attend_reward_month_10_7day" active="1" period_start="2015-10-01T09:00:00"
+                 period_end="2015-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="119" name="2015_attend_reward_month_10_14day" active="1" period_start="2015-10-01T09:00:00"
+                 period_end="2015-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="120" name="2015_attend_reward_month_10_21day" active="1" period_start="2015-10-01T09:00:00"
+                 period_end="2015-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="121" name="2015_attend_reward_month_10_28day" active="1" period_start="2015-10-01T09:00:00"
+                 period_end="2015-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="122" name="2015_attend_reward_month_11_7day" active="1" period_start="2015-11-01T09:00:00"
+                 period_end="2015-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="123" name="2015_attend_reward_month_11_14day" active="1" period_start="2015-11-01T09:00:00"
+                 period_end="2015-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="124" name="2015_attend_reward_month_11_21day" active="1" period_start="2015-11-01T09:00:00"
+                 period_end="2015-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="125" name="2015_attend_reward_month_11_28day" active="1" period_start="2015-11-01T09:00:00"
+                 period_end="2015-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="126" name="2015_attend_reward_month_12_7day" active="1" period_start="2015-12-01T09:00:00"
+                 period_end="2016-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="127" name="2015_attend_reward_month_12_14day" active="1" period_start="2015-12-01T09:00:00"
+                 period_end="2016-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="128" name="2015_attend_reward_month_12_21day" active="1" period_start="2015-12-01T09:00:00"
+                 period_end="2016-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="129" name="2015_attend_reward_month_12_28day" active="1" period_start="2015-12-01T09:00:00"
+                 period_end="2016-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="130" name="test_attend_reward_03_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-15T00:00:00" attend_type="DAILY" attend_num="1" reward_item="100900605"
+                 reward_item_num="2" reward_item_expire="0"/>
+    <login_event id="131" name="test_attend_reward_04_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-15T00:00:00" attend_type="DAILY" attend_num="1" reward_item="169000010"
+                 reward_item_num="50000" reward_item_expire="0"/>
+    <login_event id="132" name="test_attend_reward_05_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-15T00:00:00" attend_type="DAILY" attend_num="1" reward_item="190100073"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="133" name="test_attend_reward_06_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-15T00:00:00" attend_type="DAILY" attend_num="1" reward_item="190100079"
+                 reward_item_num="1" reward_item_expire="1440"/>
+    <login_event id="134" name="test_attend_reward_07_daily" active="1" period_start="2014-03-01T00:00:00"
+                 period_end="2014-05-15T00:00:00" attend_type="DAILY" attend_num="1" reward_item="190100085"
+                 reward_item_num="1" reward_item_expire="10"/>
+    <login_event id="135" name="2016_attend_reward_daily_season_01" active="1" period_start="2016-03-01T09:00:00"
+                 period_end="2016-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="136" name="2016_attend_reward_daily_season_02" active="1" period_start="2016-06-01T09:00:00"
+                 period_end="2016-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="137" name="2016_attend_reward_daily_season_03" active="1" period_start="2016-09-01T09:00:00"
+                 period_end="2016-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="138" name="2016_attend_reward_daily_season_04" active="1" period_start="2016-12-01T09:00:00"
+                 period_end="2017-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="139" name="2016_attend_reward_month_01_7day" active="1" period_start="2016-01-01T09:00:00"
+                 period_end="2016-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="140" name="2016_attend_reward_month_01_14day" active="1" period_start="2016-01-01T09:00:00"
+                 period_end="2016-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="141" name="2016_attend_reward_month_01_21day" active="1" period_start="2016-01-01T09:00:00"
+                 period_end="2016-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="142" name="2016_attend_reward_month_01_28day" active="1" period_start="2016-01-01T09:00:00"
+                 period_end="2016-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="143" name="2016_attend_reward_month_02_7day" active="1" period_start="2016-02-01T09:00:00"
+                 period_end="2016-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="144" name="2016_attend_reward_month_02_14day" active="1" period_start="2016-02-01T09:00:00"
+                 period_end="2016-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="145" name="2016_attend_reward_month_02_21day" active="1" period_start="2016-02-01T09:00:00"
+                 period_end="2016-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="146" name="2016_attend_reward_month_02_28day" active="1" period_start="2016-02-01T09:00:00"
+                 period_end="2016-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="147" name="2016_attend_reward_month_03_7day" active="1" period_start="2016-03-01T09:00:00"
+                 period_end="2016-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="148" name="2016_attend_reward_month_03_14day" active="1" period_start="2016-03-01T09:00:00"
+                 period_end="2016-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="149" name="2016_attend_reward_month_03_21day" active="1" period_start="2016-03-01T09:00:00"
+                 period_end="2016-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="150" name="2016_attend_reward_month_03_28day" active="1" period_start="2016-03-01T09:00:00"
+                 period_end="2016-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="151" name="2016_attend_reward_month_04_7day" active="1" period_start="2016-04-01T09:00:00"
+                 period_end="2016-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="152" name="2016_attend_reward_month_04_14day" active="1" period_start="2016-04-01T09:00:00"
+                 period_end="2016-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="153" name="2016_attend_reward_month_04_21day" active="1" period_start="2016-04-01T09:00:00"
+                 period_end="2016-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="154" name="2016_attend_reward_month_04_28day" active="1" period_start="2016-04-01T09:00:00"
+                 period_end="2016-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="155" name="2016_attend_reward_month_05_7day" active="1" period_start="2016-05-01T09:00:00"
+                 period_end="2016-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="156" name="2016_attend_reward_month_05_14day" active="1" period_start="2016-05-01T09:00:00"
+                 period_end="2016-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="157" name="2016_attend_reward_month_05_21day" active="1" period_start="2016-05-01T09:00:00"
+                 period_end="2016-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="158" name="2016_attend_reward_month_05_28day" active="1" period_start="2016-05-01T09:00:00"
+                 period_end="2016-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="159" name="2016_attend_reward_month_06_7day" active="1" period_start="2016-06-01T09:00:00"
+                 period_end="2016-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="160" name="2016_attend_reward_month_06_14day" active="1" period_start="2016-06-01T09:00:00"
+                 period_end="2016-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="161" name="2016_attend_reward_month_06_21day" active="1" period_start="2016-06-01T09:00:00"
+                 period_end="2016-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="162" name="2016_attend_reward_month_06_28day" active="1" period_start="2016-06-01T09:00:00"
+                 period_end="2016-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="163" name="2016_attend_reward_month_07_7day" active="1" period_start="2016-07-01T09:00:00"
+                 period_end="2016-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="164" name="2016_attend_reward_month_07_14day" active="1" period_start="2016-07-01T09:00:00"
+                 period_end="2016-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="165" name="2016_attend_reward_month_07_21day" active="1" period_start="2016-07-01T09:00:00"
+                 period_end="2016-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="166" name="2016_attend_reward_month_07_28day" active="1" period_start="2016-07-01T09:00:00"
+                 period_end="2016-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="167" name="2016_attend_reward_month_08_7day" active="1" period_start="2016-08-01T09:00:00"
+                 period_end="2016-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="168" name="2016_attend_reward_month_08_14day" active="1" period_start="2016-08-01T09:00:00"
+                 period_end="2016-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="169" name="2016_attend_reward_month_08_21day" active="1" period_start="2016-08-01T09:00:00"
+                 period_end="2016-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="170" name="2016_attend_reward_month_08_28day" active="1" period_start="2016-08-01T09:00:00"
+                 period_end="2016-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="171" name="2016_attend_reward_month_09_7day" active="1" period_start="2016-09-01T09:00:00"
+                 period_end="2016-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="172" name="2016_attend_reward_month_09_14day" active="1" period_start="2016-09-01T09:00:00"
+                 period_end="2016-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="173" name="2016_attend_reward_month_09_21day" active="1" period_start="2016-09-01T09:00:00"
+                 period_end="2016-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="174" name="2016_attend_reward_month_09_28day" active="1" period_start="2016-09-01T09:00:00"
+                 period_end="2016-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="175" name="2016_attend_reward_month_10_7day" active="1" period_start="2016-10-01T09:00:00"
+                 period_end="2016-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="176" name="2016_attend_reward_month_10_14day" active="1" period_start="2016-10-01T09:00:00"
+                 period_end="2016-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="177" name="2016_attend_reward_month_10_21day" active="1" period_start="2016-10-01T09:00:00"
+                 period_end="2016-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="178" name="2016_attend_reward_month_10_28day" active="1" period_start="2016-10-01T09:00:00"
+                 period_end="2016-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="179" name="2016_attend_reward_month_11_7day" active="1" period_start="2016-11-01T09:00:00"
+                 period_end="2016-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="180" name="2016_attend_reward_month_11_14day" active="1" period_start="2016-11-01T09:00:00"
+                 period_end="2016-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="181" name="2016_attend_reward_month_11_21day" active="1" period_start="2016-11-01T09:00:00"
+                 period_end="2016-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="182" name="2016_attend_reward_month_11_28day" active="1" period_start="2016-11-01T09:00:00"
+                 period_end="2016-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="183" name="2016_attend_reward_month_12_7day" active="1" period_start="2016-12-01T09:00:00"
+                 period_end="2017-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="184" name="2016_attend_reward_month_12_14day" active="1" period_start="2016-12-01T09:00:00"
+                 period_end="2017-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="185" name="2016_attend_reward_month_12_21day" active="1" period_start="2016-12-01T09:00:00"
+                 period_end="2017-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="186" name="2016_attend_reward_month_12_28day" active="1" period_start="2016-12-01T09:00:00"
+                 period_end="2017-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="187" name="2017_attend_reward_daily_season_01" active="1" period_start="2017-03-01T09:00:00"
+                 period_end="2017-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="188" name="2017_attend_reward_daily_season_02" active="1" period_start="2017-06-01T09:00:00"
+                 period_end="2017-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="189" name="2017_attend_reward_daily_season_03" active="1" period_start="2017-09-01T09:00:00"
+                 period_end="2017-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="190" name="2017_attend_reward_daily_season_04" active="1" period_start="2017-12-01T09:00:00"
+                 period_end="2018-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="191" name="2017_attend_reward_month_01_7day" active="1" period_start="2017-01-01T09:00:00"
+                 period_end="2017-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="192" name="2017_attend_reward_month_01_14day" active="1" period_start="2017-01-01T09:00:00"
+                 period_end="2017-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="193" name="2017_attend_reward_month_01_21day" active="1" period_start="2017-01-01T09:00:00"
+                 period_end="2017-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="194" name="2017_attend_reward_month_01_28day" active="1" period_start="2017-01-01T09:00:00"
+                 period_end="2017-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="195" name="2017_attend_reward_month_02_7day" active="1" period_start="2017-02-01T09:00:00"
+                 period_end="2017-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="196" name="2017_attend_reward_month_02_14day" active="1" period_start="2017-02-01T09:00:00"
+                 period_end="2017-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="197" name="2017_attend_reward_month_02_21day" active="1" period_start="2017-02-01T09:00:00"
+                 period_end="2017-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="198" name="2017_attend_reward_month_02_28day" active="1" period_start="2017-02-01T09:00:00"
+                 period_end="2017-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="199" name="2017_attend_reward_month_03_7day" active="1" period_start="2017-03-01T09:00:00"
+                 period_end="2017-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="200" name="2017_attend_reward_month_03_14day" active="1" period_start="2017-03-01T09:00:00"
+                 period_end="2017-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="201" name="2017_attend_reward_month_03_21day" active="1" period_start="2017-03-01T09:00:00"
+                 period_end="2017-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="202" name="2017_attend_reward_month_03_28day" active="1" period_start="2017-03-01T09:00:00"
+                 period_end="2017-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="203" name="2017_attend_reward_month_04_7day" active="1" period_start="2017-04-01T09:00:00"
+                 period_end="2017-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="204" name="2017_attend_reward_month_04_14day" active="1" period_start="2017-04-01T09:00:00"
+                 period_end="2017-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="205" name="2017_attend_reward_month_04_21day" active="1" period_start="2017-04-01T09:00:00"
+                 period_end="2017-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="206" name="2017_attend_reward_month_04_28day" active="1" period_start="2017-04-01T09:00:00"
+                 period_end="2017-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="207" name="2017_attend_reward_month_05_7day" active="1" period_start="2017-05-01T09:00:00"
+                 period_end="2017-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="208" name="2017_attend_reward_month_05_14day" active="1" period_start="2017-05-01T09:00:00"
+                 period_end="2017-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="209" name="2017_attend_reward_month_05_21day" active="1" period_start="2017-05-01T09:00:00"
+                 period_end="2017-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="210" name="2017_attend_reward_month_05_28day" active="1" period_start="2017-05-01T09:00:00"
+                 period_end="2017-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="211" name="2017_attend_reward_month_06_7day" active="1" period_start="2017-06-01T09:00:00"
+                 period_end="2017-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="212" name="2017_attend_reward_month_06_14day" active="1" period_start="2017-06-01T09:00:00"
+                 period_end="2017-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="213" name="2017_attend_reward_month_06_21day" active="1" period_start="2017-06-01T09:00:00"
+                 period_end="2017-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="214" name="2017_attend_reward_month_06_28day" active="1" period_start="2017-06-01T09:00:00"
+                 period_end="2017-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="215" name="2017_attend_reward_month_07_7day" active="1" period_start="2017-07-01T09:00:00"
+                 period_end="2017-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="216" name="2017_attend_reward_month_07_14day" active="1" period_start="2017-07-01T09:00:00"
+                 period_end="2017-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="217" name="2017_attend_reward_month_07_21day" active="1" period_start="2017-07-01T09:00:00"
+                 period_end="2017-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="218" name="2017_attend_reward_month_07_28day" active="1" period_start="2017-07-01T09:00:00"
+                 period_end="2017-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="219" name="2017_attend_reward_month_08_7day" active="1" period_start="2017-08-01T09:00:00"
+                 period_end="2017-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="220" name="2017_attend_reward_month_08_14day" active="1" period_start="2017-08-01T09:00:00"
+                 period_end="2017-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="221" name="2017_attend_reward_month_08_21day" active="1" period_start="2017-08-01T09:00:00"
+                 period_end="2017-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="222" name="2017_attend_reward_month_08_28day" active="1" period_start="2017-08-01T09:00:00"
+                 period_end="2017-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="223" name="2017_attend_reward_month_09_7day" active="1" period_start="2017-09-01T09:00:00"
+                 period_end="2017-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="224" name="2017_attend_reward_month_09_14day" active="1" period_start="2017-09-01T09:00:00"
+                 period_end="2017-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="225" name="2017_attend_reward_month_09_21day" active="1" period_start="2017-09-01T09:00:00"
+                 period_end="2017-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="226" name="2017_attend_reward_month_09_28day" active="1" period_start="2017-09-01T09:00:00"
+                 period_end="2017-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="227" name="2017_attend_reward_month_10_7day" active="1" period_start="2017-10-01T09:00:00"
+                 period_end="2017-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="228" name="2017_attend_reward_month_10_14day" active="1" period_start="2017-10-01T09:00:00"
+                 period_end="2017-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="229" name="2017_attend_reward_month_10_21day" active="1" period_start="2017-10-01T09:00:00"
+                 period_end="2017-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="230" name="2017_attend_reward_month_10_28day" active="1" period_start="2017-10-01T09:00:00"
+                 period_end="2017-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="231" name="2017_attend_reward_month_11_7day" active="1" period_start="2017-11-01T09:00:00"
+                 period_end="2017-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="232" name="2017_attend_reward_month_11_14day" active="1" period_start="2017-11-01T09:00:00"
+                 period_end="2017-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="233" name="2017_attend_reward_month_11_21day" active="1" period_start="2017-11-01T09:00:00"
+                 period_end="2017-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="234" name="2017_attend_reward_month_11_28day" active="1" period_start="2017-11-01T09:00:00"
+                 period_end="2017-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="235" name="2017_attend_reward_month_12_7day" active="1" period_start="2017-12-01T09:00:00"
+                 period_end="2018-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="236" name="2017_attend_reward_month_12_14day" active="1" period_start="2017-12-01T09:00:00"
+                 period_end="2018-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="237" name="2017_attend_reward_month_12_21day" active="1" period_start="2017-12-01T09:00:00"
+                 period_end="2018-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="238" name="2017_attend_reward_month_12_28day" active="1" period_start="2017-12-01T09:00:00"
+                 period_end="2018-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="239" name="2018_attend_reward_daily_season_01" active="1" period_start="2018-03-01T09:00:00"
+                 period_end="2018-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="240" name="2018_attend_reward_daily_season_02" active="1" period_start="2018-06-01T09:00:00"
+                 period_end="2018-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="241" name="2018_attend_reward_daily_season_03" active="1" period_start="2018-09-01T09:00:00"
+                 period_end="2018-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="242" name="2018_attend_reward_daily_season_04" active="1" period_start="2018-12-01T09:00:00"
+                 period_end="2019-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="243" name="2018_attend_reward_month_01_7day" active="1" period_start="2018-01-01T09:00:00"
+                 period_end="2018-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="244" name="2018_attend_reward_month_01_14day" active="1" period_start="2018-01-01T09:00:00"
+                 period_end="2018-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="245" name="2018_attend_reward_month_01_21day" active="1" period_start="2018-01-01T09:00:00"
+                 period_end="2018-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="246" name="2018_attend_reward_month_01_28day" active="1" period_start="2018-01-01T09:00:00"
+                 period_end="2018-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="247" name="2018_attend_reward_month_02_7day" active="1" period_start="2018-02-01T09:00:00"
+                 period_end="2018-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="248" name="2018_attend_reward_month_02_14day" active="1" period_start="2018-02-01T09:00:00"
+                 period_end="2018-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="249" name="2018_attend_reward_month_02_21day" active="1" period_start="2018-02-01T09:00:00"
+                 period_end="2018-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="250" name="2018_attend_reward_month_02_28day" active="1" period_start="2018-02-01T09:00:00"
+                 period_end="2018-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="251" name="2018_attend_reward_month_03_7day" active="1" period_start="2018-03-01T09:00:00"
+                 period_end="2018-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="252" name="2018_attend_reward_month_03_14day" active="1" period_start="2018-03-01T09:00:00"
+                 period_end="2018-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="253" name="2018_attend_reward_month_03_21day" active="1" period_start="2018-03-01T09:00:00"
+                 period_end="2018-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="254" name="2018_attend_reward_month_03_28day" active="1" period_start="2018-03-01T09:00:00"
+                 period_end="2018-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="255" name="2018_attend_reward_month_04_7day" active="1" period_start="2018-04-01T09:00:00"
+                 period_end="2018-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="256" name="2018_attend_reward_month_04_14day" active="1" period_start="2018-04-01T09:00:00"
+                 period_end="2018-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="257" name="2018_attend_reward_month_04_21day" active="1" period_start="2018-04-01T09:00:00"
+                 period_end="2018-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="258" name="2018_attend_reward_month_04_28day" active="1" period_start="2018-04-01T09:00:00"
+                 period_end="2018-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="259" name="2018_attend_reward_month_05_7day" active="1" period_start="2018-05-01T09:00:00"
+                 period_end="2018-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="260" name="2018_attend_reward_month_05_14day" active="1" period_start="2018-05-01T09:00:00"
+                 period_end="2018-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="261" name="2018_attend_reward_month_05_21day" active="1" period_start="2018-05-01T09:00:00"
+                 period_end="2018-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="262" name="2018_attend_reward_month_05_28day" active="1" period_start="2018-05-01T09:00:00"
+                 period_end="2018-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="263" name="2018_attend_reward_month_06_7day" active="1" period_start="2018-06-01T09:00:00"
+                 period_end="2018-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="264" name="2018_attend_reward_month_06_14day" active="1" period_start="2018-06-01T09:00:00"
+                 period_end="2018-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="265" name="2018_attend_reward_month_06_21day" active="1" period_start="2018-06-01T09:00:00"
+                 period_end="2018-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="266" name="2018_attend_reward_month_06_28day" active="1" period_start="2018-06-01T09:00:00"
+                 period_end="2018-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="267" name="2018_attend_reward_month_07_7day" active="1" period_start="2018-07-01T09:00:00"
+                 period_end="2018-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="268" name="2018_attend_reward_month_07_14day" active="1" period_start="2018-07-01T09:00:00"
+                 period_end="2018-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="269" name="2018_attend_reward_month_07_21day" active="1" period_start="2018-07-01T09:00:00"
+                 period_end="2018-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="270" name="2018_attend_reward_month_07_28day" active="1" period_start="2018-07-01T09:00:00"
+                 period_end="2018-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="271" name="2018_attend_reward_month_08_7day" active="1" period_start="2018-08-01T09:00:00"
+                 period_end="2018-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="272" name="2018_attend_reward_month_08_14day" active="1" period_start="2018-08-01T09:00:00"
+                 period_end="2018-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="273" name="2018_attend_reward_month_08_21day" active="1" period_start="2018-08-01T09:00:00"
+                 period_end="2018-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="274" name="2018_attend_reward_month_08_28day" active="1" period_start="2018-08-01T09:00:00"
+                 period_end="2018-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="275" name="2018_attend_reward_month_09_7day" active="1" period_start="2018-09-01T09:00:00"
+                 period_end="2018-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="276" name="2018_attend_reward_month_09_14day" active="1" period_start="2018-09-01T09:00:00"
+                 period_end="2018-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="277" name="2018_attend_reward_month_09_21day" active="1" period_start="2018-09-01T09:00:00"
+                 period_end="2018-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="278" name="2018_attend_reward_month_09_28day" active="1" period_start="2018-09-01T09:00:00"
+                 period_end="2018-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="279" name="2018_attend_reward_month_10_7day" active="1" period_start="2018-10-01T09:00:00"
+                 period_end="2018-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="280" name="2018_attend_reward_month_10_14day" active="1" period_start="2018-10-01T09:00:00"
+                 period_end="2018-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="281" name="2018_attend_reward_month_10_21day" active="1" period_start="2018-10-01T09:00:00"
+                 period_end="2018-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="282" name="2018_attend_reward_month_10_28day" active="1" period_start="2018-10-01T09:00:00"
+                 period_end="2018-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="283" name="2018_attend_reward_month_11_7day" active="1" period_start="2018-11-01T09:00:00"
+                 period_end="2018-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="284" name="2018_attend_reward_month_11_14day" active="1" period_start="2018-11-01T09:00:00"
+                 period_end="2018-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="285" name="2018_attend_reward_month_11_21day" active="1" period_start="2018-11-01T09:00:00"
+                 period_end="2018-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="286" name="2018_attend_reward_month_11_28day" active="1" period_start="2018-11-01T09:00:00"
+                 period_end="2018-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="287" name="2018_attend_reward_month_12_7day" active="1" period_start="2018-12-01T09:00:00"
+                 period_end="2019-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="288" name="2018_attend_reward_month_12_14day" active="1" period_start="2018-12-01T09:00:00"
+                 period_end="2019-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="289" name="2018_attend_reward_month_12_21day" active="1" period_start="2018-12-01T09:00:00"
+                 period_end="2019-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="290" name="2018_attend_reward_month_12_28day" active="1" period_start="2018-12-01T09:00:00"
+                 period_end="2019-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="291" name="2019_attend_reward_daily_season_01" active="1" period_start="2019-03-01T09:00:00"
+                 period_end="2019-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="292" name="2019_attend_reward_daily_season_02" active="1" period_start="2019-06-01T09:00:00"
+                 period_end="2019-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="293" name="2019_attend_reward_daily_season_03" active="1" period_start="2019-09-01T09:00:00"
+                 period_end="2019-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="294" name="2019_attend_reward_daily_season_04" active="1" period_start="2019-12-01T09:00:00"
+                 period_end="2020-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="295" name="2019_attend_reward_month_01_7day" active="1" period_start="2019-01-01T09:00:00"
+                 period_end="2019-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="296" name="2019_attend_reward_month_01_14day" active="1" period_start="2019-01-01T09:00:00"
+                 period_end="2019-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="297" name="2019_attend_reward_month_01_21day" active="1" period_start="2019-01-01T09:00:00"
+                 period_end="2019-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="298" name="2019_attend_reward_month_01_28day" active="1" period_start="2019-01-01T09:00:00"
+                 period_end="2019-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="299" name="2019_attend_reward_month_02_7day" active="1" period_start="2019-02-01T09:00:00"
+                 period_end="2019-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="300" name="2019_attend_reward_month_02_14day" active="1" period_start="2019-02-01T09:00:00"
+                 period_end="2019-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="301" name="2019_attend_reward_month_02_21day" active="1" period_start="2019-02-01T09:00:00"
+                 period_end="2019-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="302" name="2019_attend_reward_month_02_28day" active="1" period_start="2019-02-01T09:00:00"
+                 period_end="2019-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="303" name="2019_attend_reward_month_03_7day" active="1" period_start="2019-03-01T09:00:00"
+                 period_end="2019-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="304" name="2019_attend_reward_month_03_14day" active="1" period_start="2019-03-01T09:00:00"
+                 period_end="2019-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="305" name="2019_attend_reward_month_03_21day" active="1" period_start="2019-03-01T09:00:00"
+                 period_end="2019-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="306" name="2019_attend_reward_month_03_28day" active="1" period_start="2019-03-01T09:00:00"
+                 period_end="2019-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="307" name="2019_attend_reward_month_04_7day" active="1" period_start="2019-04-01T09:00:00"
+                 period_end="2019-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="308" name="2019_attend_reward_month_04_14day" active="1" period_start="2019-04-01T09:00:00"
+                 period_end="2019-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="309" name="2019_attend_reward_month_04_21day" active="1" period_start="2019-04-01T09:00:00"
+                 period_end="2019-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="310" name="2019_attend_reward_month_04_28day" active="1" period_start="2019-04-01T09:00:00"
+                 period_end="2019-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="311" name="2019_attend_reward_month_05_7day" active="1" period_start="2019-05-01T09:00:00"
+                 period_end="2019-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="312" name="2019_attend_reward_month_05_14day" active="1" period_start="2019-05-01T09:00:00"
+                 period_end="2019-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="313" name="2019_attend_reward_month_05_21day" active="1" period_start="2019-05-01T09:00:00"
+                 period_end="2019-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="314" name="2019_attend_reward_month_05_28day" active="1" period_start="2019-05-01T09:00:00"
+                 period_end="2019-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="315" name="2019_attend_reward_month_06_7day" active="1" period_start="2019-06-01T09:00:00"
+                 period_end="2019-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="316" name="2019_attend_reward_month_06_14day" active="1" period_start="2019-06-01T09:00:00"
+                 period_end="2019-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="317" name="2019_attend_reward_month_06_21day" active="1" period_start="2019-06-01T09:00:00"
+                 period_end="2019-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="318" name="2019_attend_reward_month_06_28day" active="1" period_start="2019-06-01T09:00:00"
+                 period_end="2019-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="319" name="2019_attend_reward_month_07_7day" active="1" period_start="2019-07-01T09:00:00"
+                 period_end="2019-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="320" name="2019_attend_reward_month_07_14day" active="1" period_start="2019-07-01T09:00:00"
+                 period_end="2019-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="321" name="2019_attend_reward_month_07_21day" active="1" period_start="2019-07-01T09:00:00"
+                 period_end="2019-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="322" name="2019_attend_reward_month_07_28day" active="1" period_start="2019-07-01T09:00:00"
+                 period_end="2019-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="323" name="2019_attend_reward_month_08_7day" active="1" period_start="2019-08-01T09:00:00"
+                 period_end="2019-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="324" name="2019_attend_reward_month_08_14day" active="1" period_start="2019-08-01T09:00:00"
+                 period_end="2019-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="325" name="2019_attend_reward_month_08_21day" active="1" period_start="2019-08-01T09:00:00"
+                 period_end="2019-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="326" name="2019_attend_reward_month_08_28day" active="1" period_start="2019-08-01T09:00:00"
+                 period_end="2019-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="327" name="2019_attend_reward_month_09_7day" active="1" period_start="2019-09-01T09:00:00"
+                 period_end="2019-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="328" name="2019_attend_reward_month_09_14day" active="1" period_start="2019-09-01T09:00:00"
+                 period_end="2019-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="329" name="2019_attend_reward_month_09_21day" active="1" period_start="2019-09-01T09:00:00"
+                 period_end="2019-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="330" name="2019_attend_reward_month_09_28day" active="1" period_start="2019-09-01T09:00:00"
+                 period_end="2019-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="331" name="2019_attend_reward_month_10_7day" active="1" period_start="2019-10-01T09:00:00"
+                 period_end="2019-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="332" name="2019_attend_reward_month_10_14day" active="1" period_start="2019-10-01T09:00:00"
+                 period_end="2019-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="333" name="2019_attend_reward_month_10_21day" active="1" period_start="2019-10-01T09:00:00"
+                 period_end="2019-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="334" name="2019_attend_reward_month_10_28day" active="1" period_start="2019-10-01T09:00:00"
+                 period_end="2019-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="335" name="2019_attend_reward_month_11_7day" active="1" period_start="2019-11-01T09:00:00"
+                 period_end="2019-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="336" name="2019_attend_reward_month_11_14day" active="1" period_start="2019-11-01T09:00:00"
+                 period_end="2019-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="337" name="2019_attend_reward_month_11_21day" active="1" period_start="2019-11-01T09:00:00"
+                 period_end="2019-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="338" name="2019_attend_reward_month_11_28day" active="1" period_start="2019-11-01T09:00:00"
+                 period_end="2019-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="339" name="2019_attend_reward_month_12_7day" active="1" period_start="2019-12-01T09:00:00"
+                 period_end="2020-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="340" name="2019_attend_reward_month_12_14day" active="1" period_start="2019-12-01T09:00:00"
+                 period_end="2020-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="341" name="2019_attend_reward_month_12_21day" active="1" period_start="2019-12-01T09:00:00"
+                 period_end="2020-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="342" name="2019_attend_reward_month_12_28day" active="1" period_start="2019-12-01T09:00:00"
+                 period_end="2020-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="343" name="2020_attend_reward_daily_season_01" active="1" period_start="2020-03-01T09:00:00"
+                 period_end="2020-06-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053409"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="344" name="2020_attend_reward_daily_season_02" active="1" period_start="2020-06-01T09:00:00"
+                 period_end="2020-09-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053410"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="345" name="2020_attend_reward_daily_season_03" active="1" period_start="2020-09-01T09:00:00"
+                 period_end="2020-12-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053411"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="346" name="2020_attend_reward_daily_season_04" active="1" period_start="2020-12-01T09:00:00"
+                 period_end="2021-03-01T08:59:59" attend_type="DAILY" attend_num="1" reward_item="188053412"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="347" name="2020_attend_reward_month_01_7day" active="1" period_start="2020-01-01T09:00:00"
+                 period_end="2020-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="348" name="2020_attend_reward_month_01_14day" active="1" period_start="2020-01-01T09:00:00"
+                 period_end="2020-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="349" name="2020_attend_reward_month_01_21day" active="1" period_start="2020-01-01T09:00:00"
+                 period_end="2020-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="350" name="2020_attend_reward_month_01_28day" active="1" period_start="2020-01-01T09:00:00"
+                 period_end="2020-02-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="351" name="2020_attend_reward_month_02_7day" active="1" period_start="2020-02-01T09:00:00"
+                 period_end="2020-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="352" name="2020_attend_reward_month_02_14day" active="1" period_start="2020-02-01T09:00:00"
+                 period_end="2020-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="353" name="2020_attend_reward_month_02_21day" active="1" period_start="2020-02-01T09:00:00"
+                 period_end="2020-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="354" name="2020_attend_reward_month_02_28day" active="1" period_start="2020-02-01T09:00:00"
+                 period_end="2020-03-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="355" name="2020_attend_reward_month_03_7day" active="1" period_start="2020-03-01T09:00:00"
+                 period_end="2020-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="356" name="2020_attend_reward_month_03_14day" active="1" period_start="2020-03-01T09:00:00"
+                 period_end="2020-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="357" name="2020_attend_reward_month_03_21day" active="1" period_start="2020-03-01T09:00:00"
+                 period_end="2020-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="358" name="2020_attend_reward_month_03_28day" active="1" period_start="2020-03-01T09:00:00"
+                 period_end="2020-04-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="359" name="2020_attend_reward_month_04_7day" active="1" period_start="2020-04-01T09:00:00"
+                 period_end="2020-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="360" name="2020_attend_reward_month_04_14day" active="1" period_start="2020-04-01T09:00:00"
+                 period_end="2020-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="361" name="2020_attend_reward_month_04_21day" active="1" period_start="2020-04-01T09:00:00"
+                 period_end="2020-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="362" name="2020_attend_reward_month_04_28day" active="1" period_start="2020-04-01T09:00:00"
+                 period_end="2020-05-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="363" name="2020_attend_reward_month_05_7day" active="1" period_start="2020-05-01T09:00:00"
+                 period_end="2020-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="364" name="2020_attend_reward_month_05_14day" active="1" period_start="2020-05-01T09:00:00"
+                 period_end="2020-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="365" name="2020_attend_reward_month_05_21day" active="1" period_start="2020-05-01T09:00:00"
+                 period_end="2020-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="366" name="2020_attend_reward_month_05_28day" active="1" period_start="2020-05-01T09:00:00"
+                 period_end="2020-06-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="367" name="2020_attend_reward_month_06_7day" active="1" period_start="2020-06-01T09:00:00"
+                 period_end="2020-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="368" name="2020_attend_reward_month_06_14day" active="1" period_start="2020-06-01T09:00:00"
+                 period_end="2020-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="369" name="2020_attend_reward_month_06_21day" active="1" period_start="2020-06-01T09:00:00"
+                 period_end="2020-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="370" name="2020_attend_reward_month_06_28day" active="1" period_start="2020-06-01T09:00:00"
+                 period_end="2020-07-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="371" name="2020_attend_reward_month_07_7day" active="1" period_start="2020-07-01T09:00:00"
+                 period_end="2020-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="372" name="2020_attend_reward_month_07_14day" active="1" period_start="2020-07-01T09:00:00"
+                 period_end="2020-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="373" name="2020_attend_reward_month_07_21day" active="1" period_start="2020-07-01T09:00:00"
+                 period_end="2020-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="374" name="2020_attend_reward_month_07_28day" active="1" period_start="2020-07-01T09:00:00"
+                 period_end="2020-08-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="375" name="2020_attend_reward_month_08_7day" active="1" period_start="2020-08-01T09:00:00"
+                 period_end="2020-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="376" name="2020_attend_reward_month_08_14day" active="1" period_start="2020-08-01T09:00:00"
+                 period_end="2020-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="377" name="2020_attend_reward_month_08_21day" active="1" period_start="2020-08-01T09:00:00"
+                 period_end="2020-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="378" name="2020_attend_reward_month_08_28day" active="1" period_start="2020-08-01T09:00:00"
+                 period_end="2020-09-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="379" name="2020_attend_reward_month_09_7day" active="1" period_start="2020-09-01T09:00:00"
+                 period_end="2020-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="380" name="2020_attend_reward_month_09_14day" active="1" period_start="2020-09-01T09:00:00"
+                 period_end="2020-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="381" name="2020_attend_reward_month_09_21day" active="1" period_start="2020-09-01T09:00:00"
+                 period_end="2020-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="382" name="2020_attend_reward_month_09_28day" active="1" period_start="2020-09-01T09:00:00"
+                 period_end="2020-10-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="383" name="2020_attend_reward_month_10_7day" active="1" period_start="2020-10-01T09:00:00"
+                 period_end="2020-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="384" name="2020_attend_reward_month_10_14day" active="1" period_start="2020-10-01T09:00:00"
+                 period_end="2020-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="385" name="2020_attend_reward_month_10_21day" active="1" period_start="2020-10-01T09:00:00"
+                 period_end="2020-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="386" name="2020_attend_reward_month_10_28day" active="1" period_start="2020-10-01T09:00:00"
+                 period_end="2020-11-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="387" name="2020_attend_reward_month_11_7day" active="1" period_start="2020-11-01T09:00:00"
+                 period_end="2020-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053416"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="388" name="2020_attend_reward_month_11_14day" active="1" period_start="2020-11-01T09:00:00"
+                 period_end="2020-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="186000247"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="389" name="2020_attend_reward_month_11_21day" active="1" period_start="2020-11-01T09:00:00"
+                 period_end="2020-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053417"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="390" name="2020_attend_reward_month_11_28day" active="1" period_start="2020-11-01T09:00:00"
+                 period_end="2020-12-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+    <login_event id="391" name="2020_attend_reward_month_12_7day" active="1" period_start="2020-12-01T09:00:00"
+                 period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="7" reward_item="188053418"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="392" name="2020_attend_reward_month_12_14day" active="1" period_start="2020-12-01T09:00:00"
+                 period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="393" name="2020_attend_reward_month_12_21day" active="1" period_start="2020-12-01T09:00:00"
+                 period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419"
+                 reward_item_num="1" reward_item_expire="0"/>
+    <login_event id="394" name="2020_attend_reward_month_12_28day" active="1" period_start="2020-12-01T09:00:00"
+                 period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_item="166030008"
+                 reward_item_num="1" reward_item_expire="10080"/>
+</login_events>

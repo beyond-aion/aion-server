@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300900000">
+		<!-- Hyperion Defense Officer -->
+		<spawn npc_id="230396">
+			<spot x="144.38441" y="153.66823" z="125.40982" h="100"/>
+		</spawn>
+		<!-- Hyperion Rescue Specialist -->
+		<spawn npc_id="230397">
+			<spot x="139.47206" y="154.24626" z="125.40982" h="106"/>
+			<spot x="144.20297" y="159.09036" z="125.40982" h="100"/>
+		</spawn>
+		<spawn npc_id="701850">
+			<spot x="128.9771" y="138.0067" z="112.3225" h="60"/>
+		</spawn>
+		<!-- Kahrun -->
+		<spawn npc_id="800842">
+            <spot x="142.27884" y="156.19482" z="122.1195" h="100"/>
+		</spawn>
+		<!-- Danuar Idgel Cube -->
+		<spawn npc_id="701558">
+			<spot x="115.5321" y="141.0908" z="113.6032" h="60" static_id="1652"/>
+		</spawn>
+	</spawn_map>
+</spawns>

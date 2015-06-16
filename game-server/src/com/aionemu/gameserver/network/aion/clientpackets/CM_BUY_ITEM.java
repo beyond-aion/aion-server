@@ -1,0 +1,209 @@
+package com.aionemu.gameserver.network.aion.clientpackets;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.configs.main.AntiHackConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
+import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
+import com.aionemu.gameserver.model.trade.RepurchaseList;
+import com.aionemu.gameserver.model.trade.TradeList;
+import com.aionemu.gameserver.network.aion.AionClientPacket;
+import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.PrivateStoreService;
+import com.aionemu.gameserver.services.RepurchaseService;
+import com.aionemu.gameserver.services.TradeService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
+
+/**
+ * @author orz, ATracer, Simple, xTz
+ */
+public class CM_BUY_ITEM extends AionClientPacket {
+
+	private static final Logger log = LoggerFactory.getLogger(CM_BUY_ITEM.class);
+	private int sellerObjId;
+	private int tradeActionId;
+	private int amount;
+	private int itemId;
+	private long count;
+	private boolean isAudit;
+	private TradeList tradeList;
+	private RepurchaseList repurchaseList;
+
+	public CM_BUY_ITEM(int opcode, State state, State... restStates) {
+		super(opcode, state, restStates);
+	}
+
+	@Override
+	protected void readImpl() {
+		Player player = getConnection().getActivePlayer();
+		sellerObjId = readD();
+		tradeActionId = readH();
+		amount = readH(); // total no of items
+
+		if (amount < 0 || amount > 36) {
+			isAudit = true;
+			AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM amount: " + amount);
+			return;
+		}
+		if (tradeActionId == 2) {
+			repurchaseList = new RepurchaseList(sellerObjId);
+		}
+		else {
+			tradeList = new TradeList(sellerObjId);
+		}
+
+		for (int i = 0; i < amount; i++) {
+			itemId = readD();
+			count = readQ();
+
+			// prevent exploit packets
+			if (count < 0 || (itemId <= 0 && tradeActionId != 0) || count > 20000) {
+				isAudit = true;
+				AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM item: " + itemId + " count: " + count);
+				break;
+			}
+
+			switch (tradeActionId) {
+				case 0:// private store
+				case 1:// sell to shop
+				case 17:// sell to pet
+					tradeList.addSellItem(itemId, count);
+					break;
+				case 2:// repurchase
+					repurchaseList.addRepurchaseItem(player, itemId, count);
+					break;
+				case 13:// buy from shop
+				case 14:// buy from abyss shop
+				case 15:// buy from reward shop
+				case 16:// buy from general shop
+					tradeList.addBuyItem(itemId, count);
+					break;
+			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void runImpl() {
+		Player player = getConnection().getActivePlayer();
+
+		if (isAudit || player == null)
+			return;
+
+		VisibleObject target = player.getKnownList().getKnownObjects().get(sellerObjId);
+
+		if (target == null)
+			return;
+		
+		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_TRADE) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
+			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			return;
+		}
+
+		if (target instanceof Player && tradeActionId == 0) {
+			Player targetPlayer = (Player) target;
+			PrivateStoreService.sellStoreItem(targetPlayer, player, tradeList);
+		}
+		else if (target instanceof Npc) {
+			Npc npc = (Npc) target;
+			TradeListTemplate tradeTemplate = null;
+			switch (tradeActionId) {
+				case 1:// sell to shop
+					if (npc.canPurchase()) {
+						tradeTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
+						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
+							TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
+						else
+							TradeService.performSellToPurchaseShop(player, tradeList, tradeTemplate);
+					}
+					else if (npc.canSellTo()) {
+						TradeService.performSellToShop(player, tradeList);
+					}
+					break;
+				case 2:// repurchase
+					if (npc.canSellTo())
+						RepurchaseService.getInstance().repurchaseFromShop(player, repurchaseList);
+					break;
+				case 13:// buy from shop
+					if (npc.canBuyFrom()) {
+						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
+						if (tradeTemplate.getTradeNpcType() == TradeNpcType.NORMAL) {
+							boolean success = true;
+							if (tradeTemplate.getNpcId() == 798400 || tradeTemplate.getNpcId() == 798395 || tradeTemplate.getNpcId() == 798394
+								|| tradeTemplate.getNpcId() == 798399)
+							{
+								// check kinah first
+								int tradeModifier = tradeTemplate.getSellPriceRate();
+								success = tradeList.calculateBuyListPrice(player, tradeModifier);
+								if (success) {
+									success = TradeService.performBuyFromRewardShop(npc, player, tradeList);
+									if (success) {
+										TradeService.performBuyFromShop(npc, player, tradeList, false);
+										success = false;
+									}
+								}
+							}
+							if (success)
+								TradeService.performBuyFromShop(npc, player, tradeList);
+						}
+					}
+					break;
+				case 14:// buy from abyss shop
+					if (npc.canBuyFrom()) {
+						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
+						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
+							TradeService.performBuyFromAbyssShop(npc, player, tradeList);
+					}
+					break;
+				case 15:// buy from reward shop
+					if (npc.canBuyFrom()) {
+						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
+						if (tradeTemplate.getTradeNpcType() == TradeNpcType.REWARD)
+							TradeService.performBuyFromRewardShop(npc, player, tradeList);
+					}
+					break;
+				case 16:// buy from general shop (need Rank General or higher)
+					if (npc.canBuyFrom()) {
+						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
+						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS_KINAH) {
+							boolean success = true;
+							if (tradeTemplate.getNpcId() == 802216 || tradeTemplate.getNpcId() == 802218)
+							{
+								// check kinah first
+								int tradeModifier = tradeTemplate.getSellPriceRate2();
+								success = tradeList.calculateBuyListPrice(player, tradeModifier);
+								if (success) {
+									success = TradeService.performBuyFromGeneralShop(npc, player, tradeList);
+									if (success) {
+										TradeService.performBuyFromShop(npc, player, tradeList, false);
+										success = false;
+									}
+								}
+							}
+							if (success)
+								TradeService.performBuyFromShop(npc, player, tradeList);
+						}
+					}
+					break;	
+				default:
+					log.info(String.format("Unhandle shop action unk1: %d", tradeActionId));
+					break;
+			}
+		}else if (target instanceof Pet) {
+			if(tradeActionId == 17){
+				TradeService.performSellToShop(player, tradeList);
+			}
+		}
+	}
+}

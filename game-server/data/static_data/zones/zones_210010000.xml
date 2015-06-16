@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="210010000" name="AGARIC_SPORE_ROAD_210010000" area_type="POLYGON" zone_type="SUB" priority="18" flags="7">
+        <points bottom="69.0" top="219.0">
+            <point x="327.70764" y="1767.9928"/>
+            <point x="397.49014" y="1669.589"/>
+            <point x="258.95447" y="1539.4612"/>
+            <point x="373.6011" y="1396.4698"/>
+            <point x="412.53174" y="1297.5234"/>
+            <point x="441.48053" y="1279.721"/>
+            <point x="436.24182" y="1221.8549"/>
+            <point x="394.43127" y="1223.7169"/>
+            <point x="141.02927" y="1286.1857"/>
+            <point x="72.49347" y="1492.7302"/>
+            <point x="65.89319" y="1617.7998"/>
+            <point x="154.312" y="1677.5032"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="AGERS_FARM_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="80.0" top="230.0">
+            <point x="738.92" y="954.69"/>
+            <point x="727.00574" y="990.57983"/>
+            <point x="711.56134" y="1007.0539"/>
+            <point x="674.3477" y="1004.70044"/>
+            <point x="647.0959" y="958.3676"/>
+            <point x="558.069" y="890.4233"/>
+            <point x="568.9536" y="832.9113"/>
+            <point x="629.5889" y="823.89874"/>
+            <point x="653.2932" y="800.1817"/>
+            <point x="699.5885" y="806.1542"/>
+            <point x="739.1555" y="878.6693"/>
+            <point x="707.11536" y="933.3154"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="AKARIOS_PLAINS_210010000" area_type="POLYGON" zone_type="SUB" priority="18" flags="7">
+        <points bottom="80.0" top="230.0">
+            <point x="1086.124" y="902.6603"/>
+            <point x="1269.9868" y="1016.56586"/>
+            <point x="1286.4476" y="1138.3992"/>
+            <point x="1197.1454" y="1268.354"/>
+            <point x="930.6278" y="1310.0892"/>
+            <point x="829.56305" y="1306.2527"/>
+            <point x="806.05664" y="1281.7052"/>
+            <point x="844.96094" y="1036.612"/>
+            <point x="1005.4755" y="958.6137"/>
+            <point x="1029.0189" y="909.8229"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="AKARIOS_VILLAGE_210010000" area_type="POLYGON" zone_type="SUB" priority="17" flags="7">
+        <points bottom="92.0" top="242.0">
+            <point x="815.3019" y="1199.361"/>
+            <point x="810.34625" y="1188.6573"/>
+            <point x="815.9429" y="1176.4808"/>
+            <point x="827.6632" y="1171.239"/>
+            <point x="844.9101" y="1173.8066"/>
+            <point x="859.64636" y="1169.2723"/>
+            <point x="872.595" y="1171.7307"/>
+            <point x="885.7041" y="1190.6105"/>
+            <point x="883.9563" y="1206.2065"/>
+            <point x="893.9055" y="1213.8701"/>
+            <point x="891.7936" y="1256.1763"/>
+            <point x="846.1906" y="1291.8833"/>
+            <point x="812.456" y="1301.2319"/>
+            <point x="789.1583" y="1280.4952"/>
+            <point x="787.33746" y="1258.6533"/>
+            <point x="794.3882" y="1228.1123"/>
+            <point x="803.88654" y="1207.6547"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="CLIONA_LAKE_210010000" area_type="POLYGON" zone_type="SUB" priority="19" flags="7">
+        <points bottom="67.0" top="217.0">
+            <point x="808.16797" y="1286.6475"/>
+            <point x="846.9823" y="1037.8456"/>
+            <point x="679.50305" y="759.27423"/>
+            <point x="530.10815" y="828.1706"/>
+            <point x="442.80664" y="1062.208"/>
+            <point x="461.15332" y="1145.166"/>
+            <point x="486.06772" y="1215.7269"/>
+            <point x="430.60077" y="1231.545"/>
+            <point x="430.00208" y="1268.3289"/>
+            <point x="484.06937" y="1273.543"/>
+            <point x="501.41168" y="1253.9336"/>
+            <point x="507.36386" y="1269.7329"/>
+            <point x="651.935" y="1308.474"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="DAMINU_FOREST_210010000" area_type="POLYGON" zone_type="SUB" priority="20" flags="7">
+        <points bottom="90.0" top="240.0">
+            <point x="616.4644" y="1713.8632"/>
+            <point x="717.4304" y="1664.408"/>
+            <point x="733.87384" y="1532.7997"/>
+            <point x="656.4153" y="1308.039"/>
+            <point x="507.55545" y="1266.5165"/>
+            <point x="416.8027" y="1362.6011"/>
+            <point x="405.40143" y="1514.9602"/>
+            <point x="426.1966" y="1642.3264"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="DEFORESTED_AREA_210010000" area_type="POLYGON" zone_type="SUB" priority="19" flags="7">
+        <points bottom="105.0" top="255.0">
+            <point x="524.41" y="1952.03"/>
+            <point x="712.3549" y="1999.3376"/>
+            <point x="782.0068" y="1854.4257"/>
+            <point x="635.4549" y="1714.8483"/>
+            <point x="410.73752" y="1630.5668"/>
+            <point x="322.34924" y="1768.0294"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="FEIRAS_FERRY_PORT_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="80.0" top="230.0">
+            <point x="567.9952" y="1081.4148"/>
+            <point x="558.43854" y="1098.4375"/>
+            <point x="559.6331" y="1117.8496"/>
+            <point x="578.56793" y="1135.1556"/>
+            <point x="607.2574" y="1125.6764"/>
+            <point x="617.09216" y="1097.0038"/>
+            <point x="601.51794" y="1073.3739"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="KABARAH_STRIP_MINE_210010000" area_type="POLYGON" zone_type="SUB" priority="17" flags="7">
+        <points bottom="95.0" top="245.0">
+            <point x="487.61" y="2013.67"/>
+            <point x="376.37753" y="2141.4343"/>
+            <point x="232.59515" y="2165.455"/>
+            <point x="166.68939" y="2035.845"/>
+            <point x="143.55234" y="1750.1194"/>
+            <point x="203.60223" y="1688.7827"/>
+            <point x="320.7978" y="1760.2285"/>
+            <point x="413.36066" y="1838.154"/>
+            <point x="453.5626" y="1889.7427"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="KALES_FARM_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="80.0" top="230.0">
+            <point x="922.05" y="1046.26"/>
+            <point x="960.8951" y="1046.4326"/>
+            <point x="988.24915" y="1114.6028"/>
+            <point x="986.2069" y="1138.6249"/>
+            <point x="956.9407" y="1143.6997"/>
+            <point x="943.16925" y="1136.3232"/>
+            <point x="917.13983" y="1140.2362"/>
+            <point x="881.1332" y="1086.6588"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q1006" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
+        <points bottom="95.0" top="145.0">
+            <point x="659.15" y="1031.3351"/>
+            <point x="667.8078" y="1059.8772"/>
+            <point x="655.82007" y="1089.561"/>
+            <point x="621.26556" y="1087.5304"/>
+            <point x="605.0917" y="1060.5104"/>
+            <point x="614.03485" y="1032.3488"/>
+            <point x="638.5594" y="1023.51886"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q14031" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
+        <points bottom="128.78297" top="138.78297">
+            <point x="282.616" y="1014.4377"/>
+            <point x="284.9224" y="1025.5674"/>
+            <point x="287.67426" y="1024.9883"/>
+            <point x="292.92578" y="1027.3872"/>
+            <point x="310.38116" y="1024.9395"/>
+            <point x="306.37662" y="1005.6477"/>
+            <point x="289.33942" y="1009.25037"/>
+            <point x="285.46042" y="1014.036"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="LF1_NEIN_AKARIOS_1" area_type="POLYGON" zone_type="SUB">
+        <points bottom="111.0" top="161.0">
+            <point x="1056.11" y="1010.73"/>
+            <point x="1052.7585" y="1030.0403"/>
+            <point x="1069.8346" y="1054.4575"/>
+            <point x="1085.1553" y="1056.213"/>
+            <point x="1092.6559" y="1045.8397"/>
+            <point x="1093.9326" y="1014.87933"/>
+            <point x="1072.8668" y="1005.9423"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="LF1_NEIN_AKARIOS_2" area_type="POLYGON" zone_type="SUB">
+        <points bottom="111.0" top="161.0">
+            <point x="1035.8132" y="1139.2426"/>
+            <point x="1037.526" y="1149.0573"/>
+            <point x="1055.3617" y="1160.3074"/>
+            <point x="1062.0731" y="1156.7452"/>
+            <point x="1064.1296" y="1152.196"/>
+            <point x="1055.0245" y="1150.7351"/>
+            <point x="1045.6066" y="1147.1156"/>
+            <point x="1040.3542" y="1138.48"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="MELPONEHS_CAMPSITE_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="63.689964" top="213.68996">
+            <point x="430.75284" y="1725.1455"/>
+            <point x="448.86868" y="1728.1011"/>
+            <point x="454.7948" y="1752.4191"/>
+            <point x="445.12064" y="1771.6398"/>
+            <point x="429.0501" y="1772.4678"/>
+            <point x="410.34616" y="1766.3628"/>
+            <point x="411.03653" y="1738.5012"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="NYMPHS_POND_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="63.589996" top="213.59">
+            <point x="488.71" y="1572.85"/>
+            <point x="467.57928" y="1582.3063"/>
+            <point x="453.77087" y="1570.0212"/>
+            <point x="445.1242" y="1552.5544"/>
+            <point x="456.41522" y="1530.6934"/>
+            <point x="476.59488" y="1526.939"/>
+            <point x="491.495" y="1533.3918"/>
+            <point x="496.07062" y="1543.0123"/>
+            <point x="503.65622" y="1562.6334"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="TIMOLIA_MINE_1_210010000" area_type="POLYGON" zone_type="SUB" priority="17" flags="7">
+        <points bottom="69.1" top="219.09999">
+            <point x="31.513777" y="1319.3798"/>
+            <point x="335.83643" y="1238.577"/>
+            <point x="443.9235" y="718.0803"/>
+            <point x="36.760735" y="714.9321"/>
+        </points>
+    </zone>
+    <zone mapid="210010000" name="WORG_RUN_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">
+        <points bottom="95.0" top="245.0">
+            <point x="612.0576" y="1784.7971"/>
+            <point x="579.0574" y="1828.6158"/>
+            <point x="551.25696" y="1834.1295"/>
+            <point x="549.46985" y="1870.2069"/>
+            <point x="583.1578" y="1888.4882"/>
+            <point x="617.33044" y="1942.6616"/>
+            <point x="706.34235" y="1928.0735"/>
+            <point x="753.09753" y="1855.0566"/>
+            <point x="669.7578" y="1782.0183"/>
+        </points>
+    </zone>
+</zones>

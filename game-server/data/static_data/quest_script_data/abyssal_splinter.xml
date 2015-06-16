@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			30251 [XML] The Road to Reshanta
+			30252 [XML] To the Abyssal Splinter
+			30253 [XML] Fifth Column?
+			30254 [XML] What's Down There?
+			30255 [SCRIPT] The Last Crusade
+			30256 [XML] Leize-y Shoes
+			30257 [XML] Leize-ing Gloves Away
+			30258 [XML] Leize-y Shrug
+			30259 [XML] Leize's Legs
+			30260 [XML] Rosarea's Heart
+			30261 [SCRIPT] Weird Fragment
+			30262 [XML] Fragment Removal
+			30263 [SCRIPT] Daevas Fear To Tread
+			30264 [SCRIPT] A Necklace with History
+			30265 [SCRIPT] A Polearm Walks into a Bar
+			30266 [XML] Watch the Watcher Die
+			30267 [XML] Fragmenting Fragments
+			30351 [XML] Visiting Vare
+			30352 [XML] A New Abyss
+			30353 [XML] Debug the Abyssal Splinter
+			30354 [XML] Like Night and Day
+			30355 [SCRIPT] The Protector's Madness
+			30356 [XML] Laize's Panoply: Shoes
+			30357 [XML] Laize's Panoply: Gloves
+			30358 [XML] Laize's Panoply: Shoulderplates
+			30359 [XML] Laize's Panoply: Gaiters
+			30360 [XML] Laize's Panoply: Breastplate
+			30361 [SCRIPT] Strange Fragment
+			30362 [XML] Obliterate the Orkanimum
+			30363 [SCRIPT] Fools Rush In...
+			30364 [SCRIPT] Remembrance of Spirits Past
+			30365 [SCRIPT] A Ray of Hope
+			30366 [XML] Whipping the Watchers
+			30367 [XML] Fragmentary Knowledge
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="30251" start_npc_ids="799053" end_npc_ids="278549"/>
+	<report_to id="30252" start_npc_ids="278549" end_npc_ids="260264"/>
+	<report_to id="30351" start_npc_ids="799364" end_npc_ids="278048"/>
+	<report_to id="30352" start_npc_ids="278048" end_npc_ids="260265"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="30260" start_npc_ids="278652"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="30253" start_npc_ids="260264"/>
+	<monster_hunt id="30254" start_npc_ids="260264"/>
+	<monster_hunt id="30256" start_npc_ids="278652"/>
+	<monster_hunt id="30257" start_npc_ids="278652"/>
+	<monster_hunt id="30258" start_npc_ids="278652"/>
+	<monster_hunt id="30259" start_npc_ids="278652"/>
+	<monster_hunt id="30262" start_npc_ids="260264"/>
+	<monster_hunt id="30266" start_npc_ids="260264"/>
+	<monster_hunt id="30267" start_npc_ids="260264"/>
+	<monster_hunt id="30353" start_npc_ids="260265"/>
+	<monster_hunt id="30354" start_npc_ids="260265"/>
+	<monster_hunt id="30356" start_npc_ids="278152"/>
+	<monster_hunt id="30357" start_npc_ids="278152"/>
+	<monster_hunt id="30358" start_npc_ids="278152"/>
+	<monster_hunt id="30359" start_npc_ids="278152"/>
+	<monster_hunt id="30360" start_npc_ids="278152"/>
+	<monster_hunt id="30362" start_npc_ids="260265"/>
+	<monster_hunt id="30366" start_npc_ids="260265"/>
+	<monster_hunt id="30367" start_npc_ids="260265"/>
+</quest_scripts>

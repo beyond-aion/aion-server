@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+<!--
+  [BEGIN] SUMMARY
+			18700 [SCRIPT] [Group] Prison Break-In
+			18701 [XML] [Group] Seismoracle
+			18702 [XML] [Group] To Save the Surface
+			18703 [SСRIPT] Egg on Your Face
+			18704 [XML] [Group] Freedom to Kill
+			18705 [XML] [Group] Countdown to Extinction
+			18706 [UNUSED] Intricacies of Fate
+			18707 [XML] [Group] Pill For What Ails Ya
+			18708 [XML] Sealed With the Truth
+			18709 [SCRIPT] Reaching Out to the Past
+			18710 [SCRIPT] Tipping the Scales
+			18711 [XML] [Group] Eye of the Sword
+			18712 [XML] The Enchanted Sword
+			18713 [XML] [Group] Eye of the Dagger
+			18714 [XML] The Enchanted Dagger
+			18715 [XML] [Group] Eye of the Mace
+			18716 [XML] The Enchanted Mace
+			18717 [XML] [Group] Eye of the Orb
+			18718 [XML] The Enchanted Orb
+			18719 [XML] [Group] Eye of the Spellbook
+			18720 [XML] The Enchanted Spellbook
+			18721 [XML] [Group] Eye of the Greatsword
+			18722 [XML] The Enchanted Greatsword
+			18723 [XML] [Group] Eye of the Polearm
+			18724 [XML] The Enchanted Polearm
+			18725 [XML] [Group] Eye of the Staff
+			18726 [XML] The Enchanted Staff
+			18727 [XML] [Group] Eye of the Bow
+			18728 [XML] The Enchanted Bow
+			18729 [XML] [Group] A Bloody Upgrade
+			18730 [XML] An Oomph
+			18731 [XML] [Group] A Weapon's Potential
+			18732 [XML] [Group] An Extra Boost
+			18733 [XML] [Group] Draw Out the Power
+			18734 [XML] Proove the Power
+			18735 [XML] [Group] Potential of Weapon
+			18736 [XML] A True Potential
+			28700 [XML] [Group] Raksang: the Prison of Death
+			28701 [XML] [Group] Imminent Collapse
+			28702 [XML] [Group] Dig Dug
+			28703 [SCRIPT] Hatching a Plan
+			28704 [XML] [Group] Raksang Rampage
+			28705 [XML] [Group] Into the Breach
+			28706 [UNUSED] A Glimpse of Fate
+			28707 [XML] [Group] Miracle Drug?
+			28708 [XML] Hard Evidence
+			28709 [SCRIPT] Maduka's Message
+			28710 [SCRIPT] Scaling Rewards
+			28711 [XML] [Group] The Sword and the Eye
+			28712 [XML] The Iris Sword
+			28713 [XML] [Group] The Dagger and the Eye
+			28714 [XML] The Iris Dagger
+			28715 [XML] [Group] The Mace and the Eye
+			28716 [XML] The Iris Mace
+			28717 [XML] [Group] The Orb and the Eye
+			28718 [XML] The Iris Orb
+			28719 [XML] [Group] The Spellbook and the Eye
+			28720 [XML] The Iris Spellbook
+			28721 [XML] [Group] The Greatsword and the Eye
+			28722 [XML] The Iris Greatsword
+			28723 [XML] [Group] The Polearm and the Eye
+			28724 [XML] The Iris Polearm
+			28725 [XML] [Group] The Staff and the Eye
+			28726 [XML] The Iris Staff
+			28727 [XML] [Group] The Bow and the Eye
+			28728 [XML] The Iris Bow
+			28728 [XML] [Group] Potential of a Weapon
+			28730 [XML] Weapon Using Its Potential Power
+			28731 [XML] [Group] Potential of Weapon
+			28732 [XML] Weapon Using Potentials
+			28733 [XML] [Group] A Power Upgrade
+			28734 [XML] Unlimited Potential
+			28735 [XML] [Group] Power Up
+			28736 [XML] Stronger and Stronger
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="18712" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18714" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18716" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18718" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18720" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18722" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18724" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18726" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18728" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18730" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18732" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="18734" start_npc_ids="799433" end_npc_ids="205591"/>
+	<report_to id="28712" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28714" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28716" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28718" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28720" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28722" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28724" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28726" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28728" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28730" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28732" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28734" start_npc_ids="799437" end_npc_ids="205591"/>
+	<report_to id="28736" start_npc_ids="799437" end_npc_ids="205591"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="18707" start_npc_ids="799532"/>
+	<item_collecting id="18711" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18713" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18715" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18717" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18719" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18721" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18723" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18725" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18727" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18729" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18731" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18733" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="18735" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="28707" start_npc_ids="799266"/>
+	<item_collecting id="28711" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28713" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28715" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28717" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28719" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28721" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28723" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28725" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28727" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28729" start_npc_ids="799531" end_npc_ids="799437"/>
+	<item_collecting id="28731" start_npc_ids="799531" end_npc_ids="799433"/>
+	<item_collecting id="28733" start_npc_ids="799531" end_npc_ids="799433"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="18701" start_npc_ids="799434">
+		<monster var="0" end_var="20" npc_ids="217415 217416 217419 217420 217772 217773 217774 218631 218632 217423 217411 217412 217413 217414 217417 217418"/>
+	</monster_hunt>
+	<monster_hunt id="18702" start_npc_ids="799434">
+		<monster var="0" end_var="20" npc_ids="217415 217416 217419 217420 217772 217773 217774 218631 218632 217423 217411 217412 217413 217414 217417 217418"/>
+	</monster_hunt>
+	<monster_hunt id="18704" start_npc_ids="799433">
+		<monster var="0" end_var="15" npc_ids="217645 217646 217641 217769 217770 217771 217642 217643 217469 217644 217775 217776 217777"/>
+	</monster_hunt>
+	<monster_hunt id="18705" start_npc_ids="799433">
+		<monster var="0" end_var="15" npc_ids="217645 217646 217641 217769 217770 217771 217642 217643 217469 217644 217775 217776 217777"/>
+	</monster_hunt>
+	<monster_hunt id="28701" start_npc_ids="799434">
+		<monster var="0" end_var="20" npc_ids="217415 217416 217419 217420 217772 217773 217774 218631 218632 217423 217411 217412 217413 217414 217417 217418"/>
+	</monster_hunt>
+	<monster_hunt id="28702" start_npc_ids="799434">
+		<monster var="0" end_var="20" npc_ids="217415 217416 217419 217420 217772 217773 217774 218631 218632 217423 217411 217412 217413 217414 217417 217418"/>
+	</monster_hunt>
+	<monster_hunt id="28704" start_npc_ids="799437">
+		<monster var="0" end_var="15" npc_ids="217645 217646 217641 217769 217770 217771 217642 217643 217469 217644 217775 217776 217777"/>
+	</monster_hunt>
+	<monster_hunt id="28705" start_npc_ids="799437">
+		<monster var="0" end_var="15" npc_ids="217645 217646 217641 217769 217770 217771 217642 217643 217469 217644 217775 217776 217777"/>
+	</monster_hunt>
+</quest_scripts>

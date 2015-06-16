@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			18603 [UNUSED] Kromede's Mission
+			18604 [SCRIPT] Meeting with Rotan
+			18618 [XML] Kaliga's Collection
+			18619 [XML] Kaliga's Collection
+			18620 [XML] Kaliga's Collection
+			18621 [XML] Kaliga's Collection
+			18622 [XML] Kaliga's Collection
+			18623 [XML] Kaliga's Collection
+			18624 [XML] Kaliga's Collection
+			18625 [XML] Kaliga's Collection
+			18626 [XML] Kaliga's Collection
+			18627 [XML] Kaliga's Collection
+			18643 [XML] Kaliga's Collection
+			18644 [XML] Kaliga's Collection
+			18645 [XML] Kaliga's Collection
+			18648 [XML] A Peek into Kaliga's Trove
+			28603 [UNUSED] Kromede's Burden
+			28604 [SCRIPT] Recovering Rotan
+			28618 [XML] Kaliga's Collection
+			28619 [XML] Kaliga's Collection
+			28620 [XML] Kaliga's Collection
+			28621 [XML] Kaliga's Collection
+			28622 [XML] Kaliga's Collection
+			28623 [XML] Kaliga's Collection
+			28624 [XML] Kaliga's Collection
+			28625 [XML] Kaliga's Collection
+			28626 [XML] Kaliga's Collection
+			28627 [XML] Kaliga's Collection
+			28643 [XML] Kaliga's Collection
+			28644 [XML] Kaliga's Collection
+			28645 [XML] Kaliga's Collection
+			28648 [XML] Kaliga's Collection
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="18618" start_npc_ids="730326"/>
+	<item_collecting id="18619" start_npc_ids="730327"/>
+	<item_collecting id="18620" start_npc_ids="730328"/>
+	<item_collecting id="18621" start_npc_ids="730329"/>
+	<item_collecting id="18622" start_npc_ids="730330"/>
+	<item_collecting id="18623" start_npc_ids="730331"/>
+	<item_collecting id="18624" start_npc_ids="730332"/>
+	<item_collecting id="18625" start_npc_ids="730333"/>
+	<item_collecting id="18626" start_npc_ids="730334"/>
+	<item_collecting id="18627" start_npc_ids="730335"/>
+	<item_collecting id="18643" start_npc_ids="730775"/>
+	<item_collecting id="18644" start_npc_ids="730776"/>
+	<item_collecting id="18645" start_npc_ids="730777"/>
+	<item_collecting id="18648" start_npc_ids="730887"/>
+	<item_collecting id="28618" start_npc_ids="730326"/>
+	<item_collecting id="28619" start_npc_ids="730327"/>
+	<item_collecting id="28620" start_npc_ids="730328"/>
+	<item_collecting id="28621" start_npc_ids="730329"/>
+	<item_collecting id="28622" start_npc_ids="730330"/>
+	<item_collecting id="28623" start_npc_ids="730331"/>
+	<item_collecting id="28624" start_npc_ids="730332"/>
+	<item_collecting id="28625" start_npc_ids="730333"/>
+	<item_collecting id="28626" start_npc_ids="730334"/>
+	<item_collecting id="28627" start_npc_ids="730335"/>
+	<item_collecting id="28643" start_npc_ids="730775"/>
+	<item_collecting id="28644" start_npc_ids="730776"/>
+	<item_collecting id="28645" start_npc_ids="730777"/>
+	<item_collecting id="28648" start_npc_ids="730887"/>
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

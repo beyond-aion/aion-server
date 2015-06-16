@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<absolute_stats>
+    <stats_set id="1">
+        <modifiers>
+            <abs name="POWER" value="1"/>
+            <abs name="HEALTH" value="2"/>
+            <abs name="AGILITY" value="3"/>
+            <abs name="ACCURACY" value="4"/>
+            <abs name="KNOWLEDGE" value="5"/>
+            <abs name="WILL" value="6"/>
+            <abs name="FIRE_RESISTANCE" value="11"/>
+            <abs name="EARTH_RESISTANCE" value="12"/>
+            <abs name="WATER_RESISTANCE" value="13"/>
+            <abs name="WIND_RESISTANCE" value="14"/>
+            <abs name="ELEMENTAL_RESISTANCE_LIGHT" value="15"/>
+            <abs name="ELEMENTAL_RESISTANCE_DARK" value="16"/>
+            <abs name="MAXHP" value="101"/>
+            <abs name="REGEN_HP" value="102"/>
+            <abs name="MAXHP" value="103" bonus="true"/>
+            <abs name="MAXMP" value="111"/>
+            <abs name="REGEN_MP" value="112"/>
+            <abs name="MAXMP" value="113" bonus="true"/>
+            <abs name="MAXDP" value="121"/>
+            <abs name="MAXDP" value="122" bonus="true"/>
+            <abs name="FLY_TIME" value="131"/>
+            <abs name="FLY_TIME" value="134" bonus="true"/>
+            <abs name="MIN_DAMAGES" value="141"/>
+            <abs name="MAX_DAMAGES" value="142"/>
+            <abs name="PHYSICAL_ATTACK" value="211"/>
+            <abs name="PHYSICAL_DEFENSE" value="212"/>
+            <abs name="EVASION" value="221"/>
+            <abs name="PARRY" value="222"/>
+            <abs name="BLOCK" value="223"/>
+            <abs name="DAMAGE_REDUCE" value="30"/>
+            <abs name="DAMAGE_REDUCE_MAX" value="100"/>
+            <abs name="PHYSICAL_CRITICAL" value="224"/>
+            <abs name="HIT_COUNT" value="225"/>
+            <abs name="PHYSICAL_ACCURACY" value="226"/>
+            <abs name="PHYSICAL_CRITICAL_RESIST" value="227"/>
+            <abs name="PHYSICAL_CRITICAL_DAMAGE_REDUCE" value="228"/>
+            <abs name="PVP_ATTACK_RATIO_PHYSICAL" value="229"/>
+            <abs name="PVP_DEFEND_RATIO_PHYSICAL" value="230"/>
+            <abs name="PVE_ATTACK_RATIO_PHYSICAL" value="231"/>
+            <abs name="PVE_DEFEND_RATIO_PHYSICAL" value="231"/>
+            <abs name="MAGICAL_ATTACK" value="311"/>
+            <abs name="MAGICAL_DEFEND" value="312"/>
+            <abs name="MAGICAL_RESIST" value="313"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="314"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="315"/>
+            <abs name="HEAL_BOOST" value="316"/>
+            <abs name="MAGICAL_CRITICAL" value="317"/>
+            <abs name="MAGICAL_ACCURACY" value="318"/>
+            <abs name="CONCENTRATION" value="319"/>
+            <abs name="MAGICAL_CRITICAL_RESIST" value="320"/>
+            <abs name="MAGICAL_CRITICAL_DAMAGE_REDUCE" value="321"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="322"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="323"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="324"/>
+            <abs name="PVE_DEFEND_RATIO_MAGICAL" value="325"/>
+            <abs name="SPEED" value="411100"/>
+            <abs name="FLY_SPEED" value="412100"/>
+            <abs name="ATTACK_RANGE" value="413200"/>
+            <abs name="ATTACK_SPEED" value="415"/>
+            <abs name="BOOST_CASTING_TIME" value="500"/>
+            <abs name="POISON_RESISTANCE" value="511"/>
+            <abs name="BLEED_RESISTANCE" value="512"/>
+            <abs name="PARALYZE_RESISTANCE" value="513"/>
+            <abs name="SLEEP_RESISTANCE" value="514"/>
+            <abs name="BLIND_RESISTANCE" value="515"/>
+            <abs name="CHARM_RESISTANCE" value="516"/>
+            <abs name="DISEASE_RESISTANCE" value="517"/>
+            <abs name="SILENCE_RESISTANCE" value="518"/>
+            <abs name="FEAR_RESISTANCE" value="519"/>
+            <abs name="CURSE_RESISTANCE" value="520"/>
+            <abs name="CONFUSE_RESISTANCE" value="521"/>
+            <abs name="STUN_RESISTANCE" value="522"/>
+            <abs name="PERIFICATION_RESISTANCE" value="523"/>
+            <abs name="STUMBLE_RESISTANCE" value="524"/>
+            <abs name="STAGGER_RESISTANCE" value="525"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="526"/>
+            <abs name="SNARE_RESISTANCE" value="527"/>
+            <abs name="SLOW_RESISTANCE" value="528"/>
+            <abs name="SPIN_RESISTANCE" value="529"/>
+            <abs name="BIND_RESISTANCE" value="530"/>
+            <abs name="DEFORM_RESISTANCE" value="531"/>
+            <abs name="PULLED_RESISTANCE" value="532"/>
+            <abs name="NOFLY_RESISTANCE" value="533"/>
+            <abs name="POISON_RESISTANCE_PENETRATION" value="611"/>
+            <abs name="BLEED_RESISTANCE_PENETRATION" value="612"/>
+            <abs name="PARALYZE_RESISTANCE_PENETRATION" value="613"/>
+            <abs name="SLEEP_RESISTANCE_PENETRATION" value="614"/>
+            <abs name="BLIND_RESISTANCE_PENETRATION" value="615"/>
+            <abs name="CHARM_RESISTANCE_PENETRATION" value="616"/>
+            <abs name="DISEASE_RESISTANCE_PENETRATION" value="617"/>
+            <abs name="SILENCE_RESISTANCE_PENETRATION" value="618"/>
+            <abs name="FEAR_RESISTANCE_PENETRATION" value="619"/>
+            <abs name="CURSE_RESISTANCE_PENETRATION" value="620"/>
+            <abs name="CONFUSE_RESISTANCE_PENETRATION" value="621"/>
+            <abs name="STUN_RESISTANCE_PENETRATION" value="622"/>
+            <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="623"/>
+            <abs name="STUMBLE_RESISTANCE_PENETRATION" value="624"/>
+            <abs name="STAGGER_RESISTANCE_PENETRATION" value="625"/>
+            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="626"/>
+            <abs name="SNARE_RESISTANCE_PENETRATION" value="627"/>
+            <abs name="SLOW_RESISTANCE_PENETRATION" value="628"/>
+            <abs name="SPIN_RESISTANCE_PENETRATION" value="629"/>
+            <abs name="BIND_RESISTANCE_PENETRATION" value="630"/>
+            <abs name="DEFORM_RESISTANCE_PENETRATION" value="631"/>
+            <abs name="PULLED_RESISTANCE_PENETRATION" value="632"/>
+            <abs name="NOFLY_RESISTANCE_PENETRATION" value="633"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="2">
+        <modifiers>
+            <abs name="POWER" value="21"/>
+            <abs name="HEALTH" value="22"/>
+            <abs name="AGILITY" value="23"/>
+            <abs name="ACCURACY" value="24"/>
+            <abs name="KNOWLEDGE" value="25"/>
+            <abs name="WILL" value="26"/>
+            <abs name="FIRE_RESISTANCE" value="211"/>
+            <abs name="EARTH_RESISTANCE" value="212"/>
+            <abs name="WATER_RESISTANCE" value="213"/>
+            <abs name="WIND_RESISTANCE" value="214"/>
+            <abs name="ELEMENTAL_RESISTANCE_LIGHT" value="215"/>
+            <abs name="ELEMENTAL_RESISTANCE_DARK" value="216"/>
+            <abs name="MAXHP" value="2101"/>
+            <abs name="REGEN_HP" value="2102"/>
+            <abs name="MAXHP" value="2103" bonus="true"/>
+            <abs name="MAXMP" value="2111"/>
+            <abs name="REGEN_MP" value="21112"/>
+            <abs name="MAXMP" value="2113" bonus="true"/>
+            <abs name="MAXDP" value="2121"/>
+            <abs name="MAXDP" value="2122" bonus="true"/>
+            <abs name="FLY_TIME" value="2131"/>
+            <abs name="FLY_TIME" value="2134" bonus="true"/>
+            <abs name="MIN_DAMAGES" value="2141"/>
+            <abs name="MAX_DAMAGES" value="2142"/>
+            <abs name="PHYSICAL_ATTACK" value="2211"/>
+            <abs name="PHYSICAL_DEFENSE" value="2212"/>
+            <abs name="EVASION" value="2221"/>
+            <abs name="PARRY" value="2222"/>
+            <abs name="BLOCK" value="2223"/>
+            <abs name="DAMAGE_REDUCE" value="20"/>
+            <abs name="DAMAGE_REDUCE_MAX" value="200"/>
+            <abs name="PHYSICAL_CRITICAL" value="2224"/>
+            <abs name="HIT_COUNT" value="2225"/>
+            <abs name="PHYSICAL_ACCURACY" value="2226"/>
+            <abs name="PHYSICAL_CRITICAL_RESIST" value="2227"/>
+            <abs name="PHYSICAL_CRITICAL_DAMAGE_REDUCE" value="2228"/>
+            <abs name="PVP_ATTACK_RATIO_PHYSICAL" value="2229"/>
+            <abs name="PVP_DEFEND_RATIO_PHYSICAL" value="2230"/>
+            <abs name="PVE_ATTACK_RATIO_PHYSICAL" value="2231"/>
+            <abs name="PVE_DEFEND_RATIO_PHYSICAL" value="2231"/>
+            <abs name="MAGICAL_ATTACK" value="2311"/>
+            <abs name="MAGICAL_DEFEND" value="2312"/>
+            <abs name="MAGICAL_RESIST" value="2313"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="2314"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="2315"/>
+            <abs name="HEAL_BOOST" value="2316"/>
+            <abs name="MAGICAL_CRITICAL" value="2317"/>
+            <abs name="MAGICAL_ACCURACY" value="2318"/>
+            <abs name="CONCENTRATION" value="2319"/>
+            <abs name="MAGICAL_CRITICAL_RESIST" value="2320"/>
+            <abs name="MAGICAL_CRITICAL_DAMAGE_REDUCE" value="2321"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="2322"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="2323"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="2324"/>
+            <abs name="PVE_DEFEND_RATIO_MAGICAL" value="2325"/>
+            <abs name="SPEED" value="511200"/>
+            <abs name="FLY_SPEED" value="512200"/>
+            <abs name="ATTACK_RANGE" value="513200"/>
+            <abs name="ATTACK_SPEED" value="515"/>
+            <abs name="BOOST_CASTING_TIME" value="1500"/>
+            <abs name="POISON_RESISTANCE" value="711"/>
+            <abs name="BLEED_RESISTANCE" value="712"/>
+            <abs name="PARALYZE_RESISTANCE" value="713"/>
+            <abs name="SLEEP_RESISTANCE" value="714"/>
+            <abs name="BLIND_RESISTANCE" value="715"/>
+            <abs name="CHARM_RESISTANCE" value="716"/>
+            <abs name="DISEASE_RESISTANCE" value="717"/>
+            <abs name="SILENCE_RESISTANCE" value="718"/>
+            <abs name="FEAR_RESISTANCE" value="719"/>
+            <abs name="CURSE_RESISTANCE" value="720"/>
+            <abs name="CONFUSE_RESISTANCE" value="721"/>
+            <abs name="STUN_RESISTANCE" value="722"/>
+            <abs name="PERIFICATION_RESISTANCE" value="723"/>
+            <abs name="STUMBLE_RESISTANCE" value="724"/>
+            <abs name="STAGGER_RESISTANCE" value="725"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="726"/>
+            <abs name="SNARE_RESISTANCE" value="727"/>
+            <abs name="SLOW_RESISTANCE" value="728"/>
+            <abs name="SPIN_RESISTANCE" value="729"/>
+            <abs name="BIND_RESISTANCE" value="730"/>
+            <abs name="DEFORM_RESISTANCE" value="731"/>
+            <abs name="PULLED_RESISTANCE" value="732"/>
+            <abs name="NOFLY_RESISTANCE" value="733"/>
+            <abs name="POISON_RESISTANCE_PENETRATION" value="811"/>
+            <abs name="BLEED_RESISTANCE_PENETRATION" value="812"/>
+            <abs name="PARALYZE_RESISTANCE_PENETRATION" value="813"/>
+            <abs name="SLEEP_RESISTANCE_PENETRATION" value="814"/>
+            <abs name="BLIND_RESISTANCE_PENETRATION" value="815"/>
+            <abs name="CHARM_RESISTANCE_PENETRATION" value="816"/>
+            <abs name="DISEASE_RESISTANCE_PENETRATION" value="817"/>
+            <abs name="SILENCE_RESISTANCE_PENETRATION" value="818"/>
+            <abs name="FEAR_RESISTANCE_PENETRATION" value="819"/>
+            <abs name="CURSE_RESISTANCE_PENETRATION" value="820"/>
+            <abs name="CONFUSE_RESISTANCE_PENETRATION" value="821"/>
+            <abs name="STUN_RESISTANCE_PENETRATION" value="822"/>
+            <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="823"/>
+            <abs name="STUMBLE_RESISTANCE_PENETRATION" value="824"/>
+            <abs name="STAGGER_RESISTANCE_PENETRATION" value="825"/>
+            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="826"/>
+            <abs name="SNARE_RESISTANCE_PENETRATION" value="827"/>
+            <abs name="SLOW_RESISTANCE_PENETRATION" value="828"/>
+            <abs name="SPIN_RESISTANCE_PENETRATION" value="829"/>
+            <abs name="BIND_RESISTANCE_PENETRATION" value="830"/>
+            <abs name="DEFORM_RESISTANCE_PENETRATION" value="831"/>
+            <abs name="PULLED_RESISTANCE_PENETRATION" value="832"/>
+            <abs name="NOFLY_RESISTANCE_PENETRATION" value="833"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="3">
+        <modifiers>
+            <abs name="POWER" value="200"/>
+            <abs name="HEALTH" value="200"/>
+            <abs name="ATTACK_RANGE" value="100000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="4">
+        <modifiers>
+            <abs name="AGILITY" value="200"/>
+            <abs name="ACCURACY" value="200"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="2000"/>
+            <abs name="DAMAGE_REDUCE" value="50"/>
+            <abs name="DAMAGE_REDUCE_MAX" value="100"/>
+            <abs name="ATTACK_RANGE" value="50000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="5">
+        <modifiers>
+            <abs name="KNOWLEDGE" value="200"/>
+            <abs name="WILL" value="200"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="5000"/>
+            <abs name="ATTACK_RANGE" value="30000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="6">
+        <modifiers>
+            <abs name="FIRE_RESISTANCE" value="200"/>
+            <abs name="EARTH_RESISTANCE" value="200"/>
+            <abs name="WATER_RESISTANCE" value="200"/>
+            <abs name="WIND_RESISTANCE" value="200"/>
+            <abs name="ELEMENTAL_RESISTANCE_LIGHT" value="200"/>
+            <abs name="ELEMENTAL_RESISTANCE_DARK" value="200"/>
+            <abs name="PVP_ATTACK_RATIO_PHYSICAL" value="300"/>
+            <abs name="PVP_DEFEND_RATIO_PHYSICAL" value="300"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="7">
+        <modifiers>
+            <abs name="MAXHP" value="1000000"/>
+            <abs name="REGEN_HP" value="500"/>
+            <abs name="MAXHP" value="5000" bonus="true"/>
+            <abs name="MAXMP" value="1000000"/>
+            <abs name="REGEN_MP" value="500"/>
+            <abs name="MAXMP" value="5000" bonus="true"/>
+            <abs name="MAXDP" value="10000"/>
+            <abs name="MAXDP" value="5000" bonus="true"/>
+            <abs name="FLY_TIME" value="1000000"/>
+            <abs name="FLY_TIME" value="5000" bonus="true"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="8">
+        <modifiers>
+            <abs name="HEALTH" value="500"/>
+            <abs name="MAXHP" value="2000000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="9">
+        <modifiers>
+            <abs name="MAXHP" value="2000000"/>
+            <abs name="MAXHP" value="1000000" bonus="true"/>
+            <abs name="PVP_DODGE" value="500"/>
+            <abs name="PVP_BLOCK" value="500"/>
+            <abs name="PVP_PARRY" value="500"/>
+            <abs name="PVP_HIT_ACCURACY" value="500"/>
+            <abs name="PVP_MAGICAL_RESIST" value="500"/>
+            <abs name="PVP_MAGICAL_HIT_ACCURACY" value="500"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="10">
+        <modifiers>
+            <abs name="MAXHP" value="1000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="11">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="1000"/>
+            <abs name="MAX_DAMAGES" value="1000"/>
+            <abs name="HIT_COUNT" value="1"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="12">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="2000"/>
+            <abs name="MAX_DAMAGES" value="5000"/>
+            <abs name="HIT_COUNT" value="1"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="13">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="1000"/>
+            <abs name="MAX_DAMAGES" value="1000"/>
+            <abs name="HIT_COUNT" value="1"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="14">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="2000"/>
+            <abs name="MAX_DAMAGES" value="5000"/>
+            <abs name="HIT_COUNT" value="1"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="15">
+        <modifiers>
+            <abs name="POWER" value="500"/>
+            <abs name="KNOWLEDGE" value="500"/>
+            <abs name="MIN_DAMAGES" value="8000"/>
+            <abs name="MAX_DAMAGES" value="8000"/>
+            <abs name="HIT_COUNT" value="1"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="16">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="1000"/>
+            <abs name="MAX_DAMAGES" value="1000"/>
+            <abs name="PHYSICAL_DEFENSE" value="1000"/>
+            <abs name="HIT_COUNT" value="2"/>
+            <abs name="MAGICAL_DEFEND" value="1000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="17">
+        <modifiers>
+            <abs name="BOOST_MAGICAL_SKILL" value="1000"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="2000"/>
+            <abs name="BOOST_CASTING_TIME" value="1500"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="18">
+        <modifiers>
+            <abs name="MAGICAL_RESIST" value="2000"/>
+            <abs name="ATTACK_RANGE" value="20000"/>
+            <abs name="ATTACK_SPEED" value="5000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="19">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="1000"/>
+            <abs name="MAX_DAMAGES" value="1000"/>
+            <abs name="EVASION" value="2000"/>
+            <abs name="HIT_COUNT" value="1"/>
+            <abs name="PHYSICAL_ACCURACY" value="2000"/>
+            <abs name="MAGICAL_CRITICAL" value="2000"/>
+            <abs name="MAGICAL_ACCURACY" value="2000"/>
+            <abs name="CONCENTRATION" value="1000"/>
+            <abs name="SPEED" value="40000"/>
+            <abs name="FLY_SPEED" value="40000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="20">
+        <modifiers>
+            <abs name="MIN_DAMAGES" value="1000"/>
+            <abs name="MAX_DAMAGES" value="3000"/>
+            <abs name="PARRY" value="5000"/>
+            <abs name="BLOCK" value="2000"/>
+            <abs name="DAMAGE_REDUCE" value="50"/>
+            <abs name="DAMAGE_REDUCE_MAX" value="100"/>
+            <abs name="PHYSICAL_CRITICAL" value="2000"/>
+            <abs name="HIT_COUNT" value="1"/>
+            <abs name="PHYSICAL_CRITICAL_RESIST" value="50"/>
+            <abs name="PHYSICAL_CRITICAL_DAMAGE_REDUCE" value="100"/>
+            <abs name="MAGICAL_CRITICAL_RESIST" value="20"/>
+            <abs name="MAGICAL_CRITICAL_DAMAGE_REDUCE" value="300"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="21">
+        <modifiers>
+            <abs name="PVE_ATTACK_RATIO_PHYSICAL" value="500"/>
+            <abs name="PVE_DEFEND_RATIO_PHYSICAL" value="500"/>
+            <abs name="HEAL_BOOST" value="1000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="500"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="500"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="300"/>
+            <abs name="PVE_DEFEND_RATIO_MAGICAL" value="300"/>
+            <abs name="POISON_RESISTANCE" value="500"/>
+            <abs name="BLEED_RESISTANCE" value="500"/>
+            <abs name="PARALYZE_RESISTANCE" value="500"/>
+            <abs name="SLEEP_RESISTANCE" value="500"/>
+            <abs name="BLIND_RESISTANCE" value="500"/>
+            <abs name="CHARM_RESISTANCE" value="500"/>
+            <abs name="DISEASE_RESISTANCE" value="500"/>
+            <abs name="SILENCE_RESISTANCE" value="500"/>
+            <abs name="FEAR_RESISTANCE" value="500"/>
+            <abs name="CURSE_RESISTANCE" value="500"/>
+            <abs name="CONFUSE_RESISTANCE" value="500"/>
+            <abs name="STUN_RESISTANCE" value="500"/>
+            <abs name="PERIFICATION_RESISTANCE" value="500"/>
+            <abs name="STUMBLE_RESISTANCE" value="500"/>
+            <abs name="STAGGER_RESISTANCE" value="500"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="500"/>
+            <abs name="SNARE_RESISTANCE" value="500"/>
+            <abs name="SLOW_RESISTANCE" value="500"/>
+            <abs name="SPIN_RESISTANCE" value="500"/>
+            <abs name="BIND_RESISTANCE" value="500"/>
+            <abs name="DEFORM_RESISTANCE" value="500"/>
+            <abs name="PULLED_RESISTANCE" value="500"/>
+            <abs name="NOFLY_RESISTANCE" value="500"/>
+            <abs name="POISON_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="BLEED_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="PARALYZE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="SLEEP_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="BLIND_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="CHARM_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="DISEASE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="SILENCE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="FEAR_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="CURSE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="CONFUSE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="STUN_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="STUMBLE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="STAGGER_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="SNARE_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="SLOW_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="SPIN_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="BIND_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="DEFORM_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="PULLED_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="NOFLY_RESISTANCE_PENETRATION" value="500"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="22">
+        <modifiers>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="MAXHP" value="100000" bonus="true"/>
+            <abs name="MAXMP" value="100000"/>
+            <abs name="MAXMP" value="50000" bonus="true"/>
+            <abs name="MIN_DAMAGES" value="2000"/>
+            <abs name="MAX_DAMAGES" value="2000"/>
+            <abs name="PHYSICAL_DEFENSE" value="2000"/>
+            <abs name="EVASION" value="1000"/>
+            <abs name="PARRY" value="1000"/>
+            <abs name="PHYSICAL_CRITICAL" value="1000"/>
+            <abs name="HIT_COUNT" value="1"/>
+            <abs name="PHYSICAL_ACCURACY" value="1000"/>
+            <abs name="PHYSICAL_CRITICAL_RESIST" value="10"/>
+            <abs name="PHYSICAL_CRITICAL_DAMAGE_REDUCE" value="200"/>
+            <abs name="MAGICAL_DEFEND" value="1000"/>
+            <abs name="MAGICAL_RESIST" value="1000"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="200"/>
+            <abs name="CONCENTRATION" value="500"/>
+            <abs name="MAGICAL_CRITICAL_RESIST" value="10"/>
+            <abs name="MAGICAL_CRITICAL_DAMAGE_REDUCE" value="200"/>
+            <abs name="SPEED" value="50000"/>
+            <abs name="FLY_SPEED" value="50000"/>
+            <abs name="ATTACK_RANGE" value="30000"/>
+            <abs name="ATTACK_SPEED" value="200"/>
+            <abs name="BOOST_CASTING_TIME" value="1000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="23">
+        <modifiers>
+            <abs name="MAXHP" value="200"/>
+            <abs name="MAXMP" value="200"/>
+            <abs name="MIN_DAMAGES" value="50"/>
+            <abs name="MAX_DAMAGES" value="100"/>
+            <abs name="PHYSICAL_DEFENSE" value="0"/>
+            <abs name="HIT_COUNT" value="1"/>
+            <abs name="MAGICAL_DEFEND" value="0"/>
+            <abs name="MAGICAL_RESIST" value="0"/>
+            <abs name="SPEED" value="10000"/>
+            <abs name="FLY_SPEED" value="10000"/>
+            <abs name="ATTACK_SPEED" value="1000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="24">
+        <modifiers>
+            <abs name="MAXHP" value="100000"/>
+            <abs name="MAXHP" value="50000" bonus="true"/>
+            <abs name="MAXMP" value="50000"/>
+            <abs name="MAXMP" value="25000" bonus="true"/>
+            <abs name="MIN_DAMAGES" value="2000"/>
+            <abs name="MAX_DAMAGES" value="2000"/>
+            <abs name="PHYSICAL_DEFENSE" value="1000"/>
+            <abs name="EVASION" value="1000"/>
+            <abs name="PARRY" value="1000"/>
+            <abs name="PHYSICAL_CRITICAL" value="1000"/>
+            <abs name="HIT_COUNT" value="1"/>
+            <abs name="PHYSICAL_ACCURACY" value="1000"/>
+            <abs name="PHYSICAL_CRITICAL_RESIST" value="10"/>
+            <abs name="PHYSICAL_CRITICAL_DAMAGE_REDUCE" value="200"/>
+            <abs name="MAGICAL_DEFEND" value="1000"/>
+            <abs name="MAGICAL_RESIST" value="1000"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="200"/>
+            <abs name="MAGICAL_CRITICAL" value="2000"/>
+            <abs name="CONCENTRATION" value="500"/>
+            <abs name="MAGICAL_CRITICAL_RESIST" value="10"/>
+            <abs name="MAGICAL_CRITICAL_DAMAGE_REDUCE" value="200"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="200"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="200"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="FLY_SPEED" value="0"/>
+            <abs name="ATTACK_RANGE" value="50000"/>
+            <abs name="ATTACK_SPEED" value="200"/>
+            <abs name="BOOST_CASTING_TIME" value="1000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="25">
+        <modifiers>
+            <abs name="PHYSICAL_CRITICAL" value="0"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGIC_SKILL_BOOST_RESIST" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="26">
+        <modifiers>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_ACCURACY" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="0"/>
+            <abs name="CONCENTRATION" value="0"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="27">
+        <modifiers>
+            <abs name="MAXHP" value="3000"/>
+            <abs name="REGEN_HP" value="300"/>
+            <abs name="MAXMP" value="1000"/>
+            <abs name="REGEN_MP" value="100"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="28">
+        <modifiers>
+            <abs name="MAXHP" value="7000"/>
+            <abs name="REGEN_HP" value="700"/>
+            <abs name="MAXMP" value="1000"/>
+            <abs name="REGEN_MP" value="100"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="29">
+        <modifiers>
+            <abs name="MAXHP" value="32850"/>
+            <abs name="REGEN_HP" value="3285"/>
+            <abs name="MAXHP" value="32850" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="30">
+        <modifiers>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="31">
+        <modifiers>
+            <abs name="MAXHP" value="50000"/>
+            <abs name="MAXHP" value="50000" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="32">
+        <modifiers>
+            <abs name="MAXHP" value="14000"/>
+            <abs name="MAXHP" value="14000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="5000"/>
+            <abs name="EVASION" value="10"/>
+            <abs name="PARRY" value="10"/>
+            <abs name="BLOCK" value="10"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="SPEED" value="4000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="33">
+        <modifiers>
+            <abs name="MAXHP" value="98550"/>
+            <abs name="REGEN_HP" value="9855"/>
+            <abs name="MAXHP" value="98550" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="SPEED" value="8000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="34">
+        <modifiers>
+            <abs name="MAXHP" value="50000"/>
+            <abs name="MAXHP" value="50000" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="35">
+        <modifiers>
+            <abs name="MAXHP" value="100000"/>
+            <abs name="MAXHP" value="100000" bonus="true"/>
+            <abs name="MAGICAL_ACCURACY" value="2500"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="36">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="100000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="100000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="37">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="100000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="100000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="9000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="38">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="39">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="40">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="0"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="0"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="41">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="PVE_ATTACK_RATIO_PHYSICAL" value="200"/>
+            <abs name="PVE_DEFEND_RATIO_PHYSICAL" value="300"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="0"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="0"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="0"/>
+            <abs name="PVE_DEFEND_RATIO_MAGICAL" value="300"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="42">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="PVP_ATTACK_RATIO_PHYSICAL" value="600"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="9000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="43">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVP_DEFEND_RATIO_MAGICAL" value="0"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="0"/>
+            <abs name="SPEED" value="7000"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="44">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="200000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="200000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="PVP_ATTACK_RATIO_PHYSICAL" value="600"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="45">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="1920639"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="1920639" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="1759"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="PHYSICAL_CRITICAL" value="3214"/>
+            <abs name="MAGICAL_DEFEND" value="195"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="PVP_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="PVE_ATTACK_RATIO_MAGICAL" value="600"/>
+            <abs name="SPEED" value="0"/>
+            <abs name="POISON_RESISTANCE" value="9999"/>
+            <abs name="BLEED_RESISTANCE" value="9999"/>
+            <abs name="PARALYZE_RESISTANCE" value="9999"/>
+            <abs name="SLEEP_RESISTANCE" value="9999"/>
+            <abs name="BLIND_RESISTANCE" value="9999"/>
+            <abs name="CHARM_RESISTANCE" value="9999"/>
+            <abs name="DISEASE_RESISTANCE" value="9999"/>
+            <abs name="SILENCE_RESISTANCE" value="9999"/>
+            <abs name="FEAR_RESISTANCE" value="9999"/>
+            <abs name="CURSE_RESISTANCE" value="9999"/>
+            <abs name="CONFUSE_RESISTANCE" value="9999"/>
+            <abs name="STUN_RESISTANCE" value="9999"/>
+            <abs name="PERIFICATION_RESISTANCE" value="9999"/>
+            <abs name="STUMBLE_RESISTANCE" value="9999"/>
+            <abs name="STAGGER_RESISTANCE" value="9999"/>
+            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="SNARE_RESISTANCE" value="9999"/>
+            <abs name="SLOW_RESISTANCE" value="9999"/>
+            <abs name="SPIN_RESISTANCE" value="9999"/>
+            <abs name="BIND_RESISTANCE" value="9999"/>
+            <abs name="DEFORM_RESISTANCE" value="9999"/>
+            <abs name="PULLED_RESISTANCE" value="9999"/>
+            <abs name="NOFLY_RESISTANCE" value="9999"/>
+            <abs name="ROOT_RESISTANCE" value="9999"/>
+        </modifiers>
+    </stats_set>
+</absolute_stats>

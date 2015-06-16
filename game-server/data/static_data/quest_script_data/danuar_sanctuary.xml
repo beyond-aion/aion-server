@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+		[BEGIN] SUMMARY
+			16980 [XML] Ancient Tomb
+			16981 [XML] Impede the Collection of Relics
+			16982 [SCRIPT] Unexpected Gain
+			16983 [SCRIPT] Special Unlocking Device
+			16984 [TODO] Danuar Sanctuary
+			16989 [TODO] Kamar Battlefield
+			26980 [XML] Buried with Their Treasure
+			26981 [XML] Complicate Their Research
+			26982 [SCRIPT] A Record of Idgel Uses
+			26983 [SCRIPT] Spooky Action at a Distance
+			26984 [TODO] Danuar Sanctuary
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="16980" start_npc_ids="801543" end_npc_ids="801953"/>
+	<report_to id="26980" start_npc_ids="801547" end_npc_ids="801954"/>
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="16981" start_npc_ids="801953">
+		<monster var="0" end_var="1" npc_ids="233382"/>
+		<monster var="1" end_var="1" npc_ids="233380"/>
+		<monster var="2" end_var="1" npc_ids="233381"/>
+	</monster_hunt>
+	<monster_hunt id="26981" start_npc_ids="801954">
+		<monster var="0" end_var="1" npc_ids="233382"/>
+		<monster var="1" end_var="1" npc_ids="233380"/>
+		<monster var="2" end_var="1" npc_ids="233381"/>
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+</quest_scripts>

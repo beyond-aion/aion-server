@@ -1,0 +1,1 @@
+ALTER TABLE player_pets DROP COLUMN idx;

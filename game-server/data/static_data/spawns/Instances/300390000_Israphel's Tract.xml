@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300390000">
+		<!-- Israphel -->
+		<spawn npc_id="205988">
+			<spot x="221.744" y="247.980" z="206.032" h="105"/>
+		</spawn>
+		<!-- Rippling Abyss Gate -->
+		<spawn npc_id="730496">
+			<spot x="228.081" y="261.709" z="205.655" h="90"/>
+		</spawn>
+	</spawn_map>
+</spawns>

@@ -1,0 +1,1873 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempering_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="tempering_templates.xsd">
+	<tempering_list item_group="SWORD">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="MACE">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="DAGGER">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="ORB">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="SPELLBOOK">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="GREATSWORD">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="POLEARM">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="STAFF">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="BOW">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="GUN">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CANNON">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="HARP">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="KEYBLADE">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="SHIELD">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RB_TORSO">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RB_PANTS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RB_SHOULDER">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RB_GLOVES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RB_SHOES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="LT_TORSO">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="LT_PANTS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="LT_SHOULDER">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="LT_GLOVES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="LT_SHOES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CH_TORSO">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CH_PANTS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CH_SHOULDER">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CH_GLOVES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="CH_SHOES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="PL_TORSO">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="PL_PANTS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="PL_SHOULDER">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="PL_GLOVES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="PL_SHOES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="1"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="1"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="4"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="4"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="5"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="5"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="6"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="6"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="8"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="8"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="10"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="10"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="HEADS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="12"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="12"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="17"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="17"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="25"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="25"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="35"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="35"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="47"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="47"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="62"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="62"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="77"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="77"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="97"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="97"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="RINGS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="15"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="15"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="21"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="21"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="31"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="31"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="45"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="45"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="63"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="63"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="83"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="83"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="103"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="103"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="129"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="129"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="EARRINGS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="12"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="12"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="17"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="17"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="25"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="25"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="35"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="35"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="47"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="47"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="62"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="62"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="77"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="77"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="97"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="97"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="NECKLACES">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="2"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="2"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="7"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="7"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="12"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="12"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="17"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="17"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="25"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="25"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="35"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="35"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="47"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="47"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="62"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="62"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="77"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="77"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_ATTACK_RATIO_MAGICAL" value="97"/>
+			<tempering_stat stat="PVP_ATTACK_RATIO_PHYSICAL" value="97"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="BELTS">
+		<tempering_data level="1">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="3"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="3"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="9"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="9"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="15"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="15"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="21"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="21"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="31"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="31"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="45"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="45"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="63"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="63"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="83"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="83"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="103"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="103"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PVP_DEFEND_RATIO_PHYSICAL" value="129"/>
+			<tempering_stat stat="PVP_DEFEND_RATIO_MAGICAL" value="129"/>
+		</tempering_data>
+	</tempering_list>
+	<tempering_list item_group="WINGS">
+		<tempering_data level="1">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="15"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="10"/>
+		</tempering_data>
+		<tempering_data level="2">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="30"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="20"/>
+		</tempering_data>
+		<tempering_data level="3">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="45"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="30"/>
+		</tempering_data>
+		<tempering_data level="4">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="60"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="40"/>
+		</tempering_data>
+		<tempering_data level="5">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="90"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="60"/>
+		</tempering_data>
+		<tempering_data level="6">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="120"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="80"/>
+		</tempering_data>
+		<tempering_data level="7">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="150"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="100"/>
+		</tempering_data>
+		<tempering_data level="8">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="180"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="120"/>
+		</tempering_data>
+		<tempering_data level="9">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="220"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="145"/>
+		</tempering_data>
+		<tempering_data level="10">
+			<tempering_stat stat="PHYSICAL_ACCURACY" value="270"/>
+			<tempering_stat stat="MAGICAL_ACCURACY" value="175"/>
+		</tempering_data>
+	</tempering_list>
+</tempering_templates>

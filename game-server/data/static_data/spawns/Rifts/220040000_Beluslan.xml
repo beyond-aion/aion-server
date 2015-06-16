@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="220040000">
+		<!-- Rift -->
+		<spawn npc_id="700137" handler="RIFT">
+			<spot x="233.323" y="150.91" z="240.881" anchor="BELUSLAN_AM"/>		<!-- id 2240 -->
+			<spot x="1301.48" y="634.125" z="247" anchor="BELUSLAN_BM"/>		<!-- id 2241 -->
+			<spot x="767.402" y="2226.19" z="269.01" anchor="BELUSLAN_CM"/>		<!-- id 2242 -->
+			<spot x="2069.54" y="262.812" z="382.404" anchor="BELUSLAN_DM"/>	<!-- id 2243 -->
+			<spot x="2842.68" y="618.865" z="514.5" anchor="BELUSLAN_EM"/>		<!-- id 2244 -->
+			<spot x="2812.16" y="2561.9" z="646.98" anchor="BELUSLAN_FM"/>		<!-- id 2245 -->
+			<spot x="1596.5" y="2053.25" z="582.12" anchor="BELUSLAN_GM"/>		<!-- id 2246 -->
+			<spot x="127.164" y="1064.98" z="297.607" anchor="BELUSLAN_AS"/>	<!-- id 2140 -->
+			<spot x="1068.44" y="315.975" z="348.883" anchor="BELUSLAN_BS"/>	<!-- id 2141 -->
+			<spot x="1044.36" y="2056.87" z="277.62" anchor="BELUSLAN_CS"/>		<!-- id 2142 -->
+			<spot x="2125.49" y="456.098" z="387.24" anchor="BELUSLAN_DS"/>		<!-- id 2143 -->
+			<spot x="2826.67" y="564.567" z="509.715" anchor="BELUSLAN_ES"/>	<!-- id 2144 -->
+			<spot x="2725.69" y="2343.18" z="596.106" anchor="BELUSLAN_FS"/>	<!-- id 2145 -->
+			<spot x="1744.01" y="1900.66" z="589.084" anchor="BELUSLAN_GS"/>	<!-- id 2146 -->
+		</spawn>
+		<!-- BELUSLAN_AM -->
+		<rift_spawn id="2240">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_BM -->
+		<rift_spawn id="2241">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_CM -->
+		<rift_spawn id="2242">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_DM -->
+		<rift_spawn id="2243">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_EM -->
+		<rift_spawn id="2244">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_FM -->
+		<rift_spawn id="2245">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_GM -->
+		<rift_spawn id="2246">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_AS -->
+		<rift_spawn id="2140">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_BS -->
+		<rift_spawn id="2141">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_CS -->
+		<rift_spawn id="2142">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_DS -->
+		<rift_spawn id="2143">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_ES -->
+		<rift_spawn id="2144">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_FS -->
+		<rift_spawn id="2145">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+		<!-- BELUSLAN_GS -->
+		<rift_spawn id="2146">
+			<!-- someone to spawn -->
+			<!-- <spawn npc_id="000" respawn_time="000">
+				<spot x="000.000" y="000.000" z="000.000"/>
+			</spawn> -->
+		</rift_spawn>
+	</spawn_map>
+</spawns>

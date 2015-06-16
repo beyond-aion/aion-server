@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300070000">
+		<!-- Dakaer Adjutant -->
+		<spawn npc_id="214782">
+			<spot x="617.8574" y="460.1232" z="102.6442" h="53"/>
+		</spawn>
+		<!-- Dakaer Bloodbinder -->
+		<spawn npc_id="214778">
+			<spot x="568.63" y="480.14" z="99.185356" h="53" walker_id="8EDED245450CE9C5F1E224BCF3BBE35D0C1B5A57"/>
+			<spot x="573.0536" y="481.4633" z="99.4469" h="53"/>
+			<spot x="575.1885" y="462.7322" z="99.7058" h="23"/>
+		</spawn>
+		<!-- Dakaer Bonesetter -->
+		<spawn npc_id="215448">
+			<spot x="485.38" y="562.47" z="100.506744" h="32" walker_id="6854F4BF8880D22BC1373E47427EEE84AC848980"/>
+			<spot x="497.6167" y="567.0253" z="99.8530"/>
+			<spot x="504.15" y="542.48" z="98.73432" h="89" walker_id="D8908FE717E2269C9263C19102DE240418BCBF45"/>
+			<spot x="507.7102" y="544.0484" z="99.2296" h="90"/>
+			<spot x="523.02" y="599.44" z="100.50599" h="89" walker_id="28CE19D8AC55E8665081C6B9DB4ECE74B5082413"/>
+		</spawn>
+		<!-- Dakaer Bulwark -->
+		<spawn npc_id="214779">
+			<spot x="390.3605" y="507.6908" z="102.6298" h="113"/>
+		</spawn>
+		<!-- Dakaer Clawguard -->
+		<spawn npc_id="215445">
+			<spot x="507.8285" y="509.3904" z="88.9788" h="90"/>
+		</spawn>
+		<!-- Dakaer Escort -->
+		<spawn npc_id="214771">
+			<spot x="409.8103" y="504.9422" z="99.6912" h="113"/>
+			<spot x="412.7484" y="478.7432" z="99.6912" h="23"/>
+			<spot x="426.3213" y="513.0915" z="99.6912" h="83"/>
+			<spot x="437.9951" y="492.4593" z="99.3741" h="113"/>
+			<spot x="439.93" y="487.69" z="99.137794" h="119" walker_id="699DCF2D22BA549C010E6A956196D8FA131B38DA"/>
+			<spot x="500.02" y="504.13" z="88.9788" h="74" walker_id="43E5C273E7DEC99788E97DBB6B064EB811FEEBA9"/>
+			<spot x="500.18" y="456.77" z="86.723595" h="43" walker_id="4FA7954AA34BB35D2F305945986796BD50370574" walker_index="1"/>
+			<spot x="508.04" y="504.05" z="88.97879" h="112" walker_id="4063CCCD91EDDF10A2D13C39FD5A33E25EA3A128" walker_index="1"/>
+			<spot x="508.33" y="464.13" z="86.757065" h="54" walker_id="A5E453154B77E3499EC78BBBDB1E84CF326A6268"/>
+		</spawn>
+		<!-- Dakaer Fighter -->
+		<spawn npc_id="214775">
+			<spot x="524.1046" y="488.7642" z="87.1731" h="60"/>
+			<spot x="568.63" y="480.14" z="99.185356" h="53" walker_id="8EDED245450CE9C5F1E224BCF3BBE35D0C1B5A57"/>
+			<spot x="585.2262" y="486.9963" z="99.7058" h="83"/>
+			<spot x="598.7422" y="463.6524" z="99.7058" h="53"/>
+			<spot x="601.2036" y="470.3474" z="99.7058" h="53"/>
+		</spawn>
+		<!-- Dakaer Flameraider -->
+		<spawn npc_id="215446">
+			<spot x="485.38" y="562.47" z="100.506744" h="32" walker_id="6854F4BF8880D22BC1373E47427EEE84AC848980"/>
+			<spot x="497.5943" y="580.3448" z="99.8530"/>
+			<spot x="504.15" y="542.48" z="98.73432" h="89" walker_id="D8908FE717E2269C9263C19102DE240418BCBF45"/>
+			<spot x="506.7138" y="591.3669" z="99.8530" h="13"/>
+			<spot x="510.9948" y="566.9924" z="99.8530" h="60"/>
+			<spot x="511.0038" y="580.3860" z="99.8530" h="60"/>
+			<spot x="523.02" y="599.44" z="100.50599" h="89" walker_id="28CE19D8AC55E8665081C6B9DB4ECE74B5082413"/>
+		</spawn>
+		<!-- Dakaer Healer -->
+		<spawn npc_id="214774">
+			<spot x="435.5931" y="486.2476" z="99.3904" h="113"/>
+			<spot x="439.93" y="487.69" z="99.137794" h="119" walker_id="699DCF2D22BA549C010E6A956196D8FA131B38DA"/>
+			<spot x="484.2361" y="478.6277" z="87.1979"/>
+			<spot x="500.02" y="504.13" z="88.9788" h="74" walker_id="43E5C273E7DEC99788E97DBB6B064EB811FEEBA9"/>
+			<spot x="500.18" y="456.77" z="86.723595" h="43" walker_id="4FA7954AA34BB35D2F305945986796BD50370574" walker_index="1"/>
+			<spot x="508.04" y="504.05" z="88.97879" h="112" walker_id="4063CCCD91EDDF10A2D13C39FD5A33E25EA3A128" walker_index="1"/>
+			<spot x="508.33" y="464.13" z="86.757065" h="54" walker_id="A5E453154B77E3499EC78BBBDB1E84CF326A6268"/>
+		</spawn>
+		<!-- Dakaer Manbane -->
+		<spawn npc_id="214776">
+			<spot x="524.0457" y="478.7400" z="87.1945" h="60"/>
+			<spot x="568.63" y="480.14" z="99.185356" h="53" walker_id="8EDED245450CE9C5F1E224BCF3BBE35D0C1B5A57"/>
+			<spot x="570.6657" y="475.2390" z="99.4300" h="53"/>
+		</spawn>
+		<!-- Dakaer Operative -->
+		<spawn npc_id="214772">
+			<spot x="439.93" y="487.69" z="99.137794" h="119" walker_id="699DCF2D22BA549C010E6A956196D8FA131B38DA"/>
+			<spot x="500.02" y="504.13" z="88.9788" h="74" walker_id="43E5C273E7DEC99788E97DBB6B064EB811FEEBA9"/>
+			<spot x="500.18" y="456.77" z="86.723595" h="43" walker_id="4FA7954AA34BB35D2F305945986796BD50370574" walker_index="1"/>
+			<spot x="508.04" y="504.05" z="88.97879" h="112" walker_id="4063CCCD91EDDF10A2D13C39FD5A33E25EA3A128" walker_index="1"/>
+			<spot x="508.33" y="464.13" z="86.757065" h="54" walker_id="A5E453154B77E3499EC78BBBDB1E84CF326A6268"/>
+		</spawn>
+		<!-- Dakaer Ranger -->
+		<spawn npc_id="215447">
+			<spot x="485.38" y="562.47" z="100.506744" h="32" walker_id="6854F4BF8880D22BC1373E47427EEE84AC848980"/>
+			<spot x="500.4142" y="544.0933" z="99.2487" h="90"/>
+			<spot x="500.5325" y="509.4352" z="88.9788" h="90"/>
+			<spot x="504.15" y="542.48" z="98.73432" h="89" walker_id="D8908FE717E2269C9263C19102DE240418BCBF45"/>
+			<spot x="523.02" y="599.44" z="100.50599" h="89" walker_id="28CE19D8AC55E8665081C6B9DB4ECE74B5082413"/>
+		</spawn>
+		<!-- Dakaer Scout -->
+		<spawn npc_id="214773">
+			<spot x="406.7609" y="496.6715" z="99.6912" h="113"/>
+			<spot x="439.93" y="487.69" z="99.137794" h="119" walker_id="699DCF2D22BA549C010E6A956196D8FA131B38DA"/>
+			<spot x="484.3111" y="488.6837" z="87.1755"/>
+			<spot x="500.02" y="504.13" z="88.9788" h="74" walker_id="43E5C273E7DEC99788E97DBB6B064EB811FEEBA9"/>
+			<spot x="500.18" y="456.77" z="86.723595" h="43" walker_id="4FA7954AA34BB35D2F305945986796BD50370574" walker_index="1"/>
+			<spot x="508.04" y="504.05" z="88.97879" h="112" walker_id="4063CCCD91EDDF10A2D13C39FD5A33E25EA3A128" walker_index="1"/>
+			<spot x="508.33" y="464.13" z="86.757065" h="54" walker_id="A5E453154B77E3499EC78BBBDB1E84CF326A6268"/>
+		</spawn>
+		<!-- Dakaer Sentinel -->
+		<spawn npc_id="214777">
+			<spot x="568.63" y="480.14" z="99.185356" h="53" walker_id="8EDED245450CE9C5F1E224BCF3BBE35D0C1B5A57"/>
+			<spot x="584.0784" y="459.4823" z="99.7058" h="23"/>
+			<spot x="594.1416" y="484.0877" z="99.7058" h="83"/>
+		</spawn>
+		<!-- Ebonlord Vasana -->
+		<spawn npc_id="215450">
+			<spot x="504.0030" y="612.1686" z="103.6952" h="90"/>
+		</spawn>
+		<!-- Flash Lapilimo -->
+		<spawn npc_id="283215">
+			<spot x="504.2821" y="405.5221" z="93.8281"/>
+			<spot x="504.2821" y="453.8559" z="86.7039"/>
+		</spawn>
+		<!-- Golden Fortress Crate -->
+		<spawn npc_id="700472">
+			<spot x="379.5858" y="511.9879" z="102.6181" h="113"/>
+		</spawn>
+		<!-- Jeweled Fortress Crate -->
+		<spawn npc_id="700473">
+			<spot x="626.9777" y="456.4955" z="102.6327" h="53"/>
+		</spawn>
+		<!-- Magic Fortress Crate -->
+		<spawn npc_id="700474">
+			<spot x="503.8427" y="630.1634" z="104.5488" h="90"/>
+		</spawn>
+		<!-- Old Stone Statue -->
+		<spawn npc_id="700480">
+			<spot x="505.2431" y="377.0414" z="93.8944" h="30" static_id="33"/>
+		</spawn>
+		<!-- Treasurer Manonasa -->
+		<spawn npc_id="215443">
+			<spot x="485.38" y="562.47" z="100.506744" h="32" walker_id="6854F4BF8880D22BC1373E47427EEE84AC848980"/>
+			<spot x="504.15" y="542.48" z="98.73432" h="89" walker_id="D8908FE717E2269C9263C19102DE240418BCBF45"/>
+			<spot x="523.02" y="599.44" z="100.50599" h="89" walker_id="28CE19D8AC55E8665081C6B9DB4ECE74B5082413"/>
+		</spawn>
+	</spawn_map>
+</spawns>

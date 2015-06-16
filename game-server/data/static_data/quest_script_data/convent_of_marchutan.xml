@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			20000 [SCRIPT] Vidar's Call
+			20001 [SCRIPT] Traveling to Gelkmaros
+			29500 [UNUSED] Gaining the Templar's Stigma (level 99)
+			29501 [UNUSED] Gaining the Gladiator's Stigma (level 99)
+			29502 [UNUSED] Gaining the Cleric's Stigma (level 99)
+			29503 [UNUSED] Gaining the Chanter's Stigma (level 99)
+			29504 [UNUSED] Gaining the Assassin's Stigma (level 99)
+			29505 [UNUSED] Gaining the Ranger's Stigma (level 99)
+			29506 [UNUSED] Gaining the Sorcerer's Stigma (level 99)
+			29507 [UNUSED] Gaining the Spiritmaster's Stigma (level 99)
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

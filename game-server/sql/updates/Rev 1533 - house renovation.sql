@@ -1,0 +1,1 @@
+DELETE FROM `houses` WHERE `player_id` = 0 AND `address` <> 2001 AND `address` <> 3001;

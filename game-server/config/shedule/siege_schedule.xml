@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<siege_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_schedule.xsd">
+	<!-- Divine Fortress -->
+	<fortress id="1011">
+		<siegeTime>0 0 23 ? * SAT</siegeTime>
+	</fortress>
+	<!-- Siel's Western Fortress -->
+	<fortress id="1131">
+		<siegeTime>0 0 16 ? * TUE,FRI,SAT</siegeTime>
+		<siegeTime>0 0 22 ? * THU,SUN</siegeTime>
+	</fortress>
+	<!-- Siel's Eastern Fortress -->
+	<fortress id="1132">
+		<siegeTime>0 0 16 ? * TUE,FRI,SAT</siegeTime>
+		<siegeTime>0 0 22 ? * THU,SUN</siegeTime>
+	</fortress>
+	<!-- Sulfur Fortress -->
+	<fortress id="1141">
+		<siegeTime>0 0 16 ? * MON,FRI,SAT</siegeTime>
+		<siegeTime>0 0 22 ? * WED,SUN</siegeTime>
+	</fortress>
+	<!-- Roah Fortress -->
+	<fortress id="1211">
+		<siegeTime>0 0 16 ? * MON,FRI,SAT</siegeTime>
+		<siegeTime>0 0 22 ? * WED,SUN</siegeTime>
+	</fortress>
+	<!-- Krotan Refuge -->
+	<fortress id="1221">
+		<siegeTime>0 0 16 ? * WED,THU,SUN</siegeTime>
+		<siegeTime>0 0 22 ? * MON,FRI,SAT</siegeTime>
+	</fortress>
+	<!-- Kysis Fortress -->
+	<fortress id="1231">
+		<siegeTime>0 0 16 ? * WED,SUN</siegeTime>
+		<siegeTime>0 0 22 ? * TUE,FRI,SAT</siegeTime>
+	</fortress>
+	<!-- Miren Fortress -->
+	<fortress id="1241">
+		<siegeTime>0 0 16 ? * THU,SUN</siegeTime>
+		<siegeTime>0 0 22 ? * MON,TUE,FRI,SAT</siegeTime>
+	</fortress>
+	<!-- Asteria Fortress -->
+	<fortress id="1251">
+		<siegeTime>0 0 16 ? * MON,FRI,SAT</siegeTime>
+		<siegeTime>0 0 22 ? * WED,SUN</siegeTime>
+	</fortress>
+	<!-- Temple of Scales -->
+	<fortress id="2011">
+		<siegeTime>0 0 13 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * MON,WED,SUN</siegeTime>
+	</fortress>
+	<!-- Altar of Avarice -->
+	<fortress id="2021">
+		<siegeTime>0 0 13 ? * FRI,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * TUE,WED,SUN</siegeTime>
+	</fortress>
+	<!-- Vorgaltem Citadel -->
+	<fortress id="3011">
+		<siegeTime>0 0 13 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * MON,WED,SUN</siegeTime>
+	</fortress>
+	<!-- Crimson Temple -->
+	<fortress id="3021">
+		<siegeTime>0 0 13 ? * FRI,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * TUE,WED,SUN</siegeTime>
+	</fortress>
+	<!-- Heart of Fissure -->
+	<source id="4011">
+		<siegeTime>0 55 13 ? * MON,WED,THU</siegeTime>
+		<siegeTime>0 55 17 ? * *</siegeTime>
+		<siegeTime>0 55 20 ? * TUE,SAT,SUN</siegeTime>
+	</source>
+	<!-- Heart of Gravity -->
+	<source id="4021">
+		<siegeTime>0 55 13 ? * MON,WED,THU</siegeTime>
+		<siegeTime>0 55 17 ? * *</siegeTime>
+		<siegeTime>0 55 20 ? * TUE,SAT,SUN</siegeTime>
+	</source>
+	<!-- Heart of Wrath -->
+	<source id="4031">
+		<siegeTime>0 55 13 ? * MON,WED,THU</siegeTime>
+		<siegeTime>0 55 17 ? * *</siegeTime>
+		<siegeTime>0 55 20 ? * TUE,SAT,SUN</siegeTime>
+	</source>
+	<!-- Heart of Petrification -->
+	<source id="4041">
+		<siegeTime>0 55 13 ? * MON,WED,THU</siegeTime>
+		<siegeTime>0 55 17 ? * *</siegeTime>
+		<siegeTime>0 55 20 ? * TUE,SAT,SUN</siegeTime>
+	</source>
+	<!-- Sillus Fortress -->
+	<fortress id="5011">
+		<siegeTime>0 0 14 ? * SAT</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
+	</fortress>
+	<!-- Silona Fortress -->
+	<fortress id="6011">
+		<siegeTime>0 0 14 ? * TUE,FRI,SUN</siegeTime>
+	</fortress>
+	<!-- Pradeth Fortress -->
+	<fortress id="6021">
+		<siegeTime>0 0 14 ? * SUN</siegeTime>
+		<siegeTime>0 0 21 ? * WED,FRI</siegeTime>
+	</fortress>
+	<!-- Wealhtheow Keep -->
+	<fortress id="7011">
+		<siegeTime>0 0 18 ? * SAT</siegeTime>
+	</fortress>
+	<!--
+	<fortress id="10111">
+		<siegeTime>0 0 19 ? * SUN</siegeTime>
+	</fortress>
+	<fortress id="10211">
+		<siegeTime>0 0 19 ? * SUN</siegeTime>
+	</fortress>
+	<fortress id="10311">
+		<siegeTime>0 0 19 ? * SUN</siegeTime>
+	</fortress>
+	<fortress id="10411">
+		<siegeTime>0 0 19 ? * SUN</siegeTime>
+	</fortress>
+	-->
+</siege_schedule>

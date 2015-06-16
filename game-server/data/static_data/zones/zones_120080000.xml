@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="120080000" name="CRUCIBLE_COLISEUM_120080000" area_type="POLYGON" zone_type="SUB" priority="12" flags="50">
+        <points bottom="25.699594" top="125.69959">
+            <point x="519.05536" y="282.7811"/>
+            <point x="585.2158" y="282.7811"/>
+            <point x="585.2158" y="359.22803"/>
+            <point x="519.2891" y="359.22803"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="HALL_OF_FAME_120080000" area_type="POLYGON" zone_type="SUB" priority="11" flags="50">
+        <points bottom="92.60427" top="192.60428">
+            <point x="326.16614" y="203.63135"/>
+            <point x="326.16614" y="295.6403"/>
+            <point x="427.7026" y="295.6403"/>
+            <point x="467.17392" y="261.88553"/>
+            <point x="467.22708" y="239.38234"/>
+            <point x="426.886" y="203.63136"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="LIMITAREA_ARENA_D_LOBBY_45" area_type="POLYGON" zone_type="LIMIT" flags="48">
+        <points bottom="92.50318" top="122.50318">
+            <point x="331.13" y="223.64"/>
+            <point x="330.6646" y="276.3468"/>
+            <point x="356.9058" y="277.68896"/>
+            <point x="361.6409" y="275.80032"/>
+            <point x="364.23587" y="274.58276"/>
+            <point x="369.84955" y="273.62674"/>
+            <point x="380.23346" y="269.36218"/>
+            <point x="386.9783" y="262.91248"/>
+            <point x="389.68964" y="255.171"/>
+            <point x="389.65436" y="245.97931"/>
+            <point x="387.211" y="238.53287"/>
+            <point x="380.3463" y="231.72224"/>
+            <point x="370.1345" y="227.62292"/>
+            <point x="362.48236" y="226.28079"/>
+            <point x="359.4032" y="224.53554"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="MARCHUTAN_PRIORY_120080000" area_type="POLYGON" zone_type="SUB" priority="20" flags="50">
+        <points bottom="53.92791" top="173.92792">
+            <point x="321.8862" y="157.60509"/>
+            <point x="324.49826" y="364.7616"/>
+            <point x="640.975" y="362.55127"/>
+            <point x="639.73236" y="156.16019"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="MARCHUTAN_PRIORY_ENTRANCE_120080000" area_type="POLYGON" zone_type="SUB" priority="12" flags="50">
+        <points bottom="30.843681" top="130.84367">
+            <point x="529.3212" y="197.2183"/>
+            <point x="529.3212" y="217.10847"/>
+            <point x="569.6682" y="217.05182"/>
+            <point x="569.6682" y="197.16165"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="MARCHUTAN_PRIORY_LOBBY_120080000" area_type="POLYGON" zone_type="SUB" priority="14" flags="50">
+        <points bottom="25.699594" top="125.69959">
+            <point x="516.39453" y="211.6539"/>
+            <point x="588.3288" y="211.4548"/>
+            <point x="588.5279" y="288.29993"/>
+            <point x="516.6283" y="288.10083"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="REWARDS_OFFICE_120080000" area_type="POLYGON" zone_type="SUB" priority="12" flags="50">
+        <points bottom="25.699594" top="125.69959">
+            <point x="461.94617" y="179.0458"/>
+            <point x="508.76196" y="179.0458"/>
+            <point x="508.77472" y="229.35532"/>
+            <point x="519.2431" y="229.35533"/>
+            <point x="519.2431" y="274.5407"/>
+            <point x="509.24054" y="274.59174"/>
+            <point x="509.4607" y="322.5211"/>
+            <point x="461.94702" y="322.57208"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="THE_SHRINE_OF_HEROES_120080000" area_type="POLYGON" zone_type="SUB" priority="10" flags="50">
+        <points bottom="92.71776" top="122.71776">
+            <point x="380.24377" y="231.86996"/>
+            <point x="386.95996" y="238.59967"/>
+            <point x="389.4615" y="246.04309"/>
+            <point x="389.4875" y="255.26468"/>
+            <point x="386.8604" y="262.75323"/>
+            <point x="380.1199" y="269.1692"/>
+            <point x="369.96484" y="273.2895"/>
+            <point x="364.08264" y="274.24402"/>
+            <point x="361.6333" y="275.58038"/>
+            <point x="356.7771" y="277.44226"/>
+            <point x="330.53772" y="275.9934"/>
+            <point x="331.10367" y="223.4317"/>
+            <point x="359.32617" y="224.79292"/>
+            <point x="362.4207" y="226.54443"/>
+            <point x="370.11337" y="227.7752"/>
+        </points>
+    </zone>
+</zones>

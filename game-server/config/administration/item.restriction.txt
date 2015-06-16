@@ -1,0 +1,5 @@
+# item destriction file
+# put itemId on a line to allow mail/broker/"//add" it
+# make sure that you have enabled gameserver.administration.trade.item.restriction = true @admin.properties
+10000001
+10000002

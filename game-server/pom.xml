@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.aionlightning</groupId>
+	<artifactId>al-game</artifactId>
+	<version>1.0</version>
+	<name>Aion Lightning Game Server</name>
+	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<scm>
+		<developerConnection>scm:svn:https://subversion.assembla.com/svn/AionLightning/trunk/AL-Game</developerConnection>
+		<url>http://aion-lightning.org/</url>
+	</scm>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include> **/*.class </include>
+				</includes>
+				<excludes>
+					<exclude> **/*.png </exclude>
+					<exclude> **/*.jpg </exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>data/scripts/system/database</directory>
+				<excludes>
+					<exclude> **/*.java </exclude>
+					<exclude> **/*.properties </exclude>
+					<exclude> **/*.xml </exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>data/scripts/system/handlers</directory>
+				<excludes>
+					<exclude> **/*.java </exclude>
+					<exclude> **/*.properties </exclude>
+					<exclude> **/*.xml </exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<finalName>AL-Game</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<providerImplementations>
+						<svn>javasvn</svn>
+					</providerImplementations>
+					<revisionOnScmFailure>undefined</revisionOnScmFailure>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerVersion>1.8</compilerVersion>
+					<showWarnings>true</showWarnings>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<debug>true</debug>
+					<encoding>UTF-8</encoding>
+					<excludes>
+						<exclude>data/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<POMVersion>${project.version}</POMVersion>
+							<Revision>${buildNumber}</Revision>
+							<Date>${maven.build.timestamp}</Date>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>clean-dist-folder</id>
+						<phase>clean</phase>
+						<configuration>
+							<target>
+								<property name="dist-build.jar.path" value="${maven.dependency.org.aionlightning.al-commons.jar.path}" />
+								<ant antfile="${basedir}/dist-build.xml" target="clean" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<property name="dist-build.jar.path" value="${maven.dependency.org.aionlightning.al-commons.jar.path}" />
+								<ant antfile="${basedir}/dist-build.xml" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>local-libs</id>
+			<name>Embedded libs</name>
+			<url>file://${basedir}/libs/</url>
+		</repository>
+		<repository>
+			<id>java.net-Public</id>
+			<name>Maven Java Net Snapshots and Releases</name>
+			<url>https://maven.java.net/content/repositories/public/</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>jboss-public-repository</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+		<repository>
+			<id>web-media-repository</id>
+			<name>Web Media</name>
+			<url>http://maven2.webmedia.ee/</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.aionlightning</groupId>
+			<artifactId>al-commons</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.lambdaj</groupId>
+			<artifactId>lambdaj</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

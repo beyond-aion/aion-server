@@ -1,0 +1,1 @@
+ALTER TABLE `players` ADD COLUMN `world_owner` int(11) NOT NULL default '0' after `world_id`;

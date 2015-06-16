@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="600090000">
+		<base_spawn id="6090"> 
+			<simple_race race="ELYOS">
+				<!-- Stonereach Garrison Commander(LDF5_Fortress_EChief_V01_Li_65_An) -->
+				<spawn npc_id="234039" handler="BOSS">
+					<spot x="252.75955" y="1167.31592" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Garrison Thrasher(LDF5_Fortress_Killer_V01_Li_65_An) -->
+				<spawn npc_id="234105" handler="ATTACKER">
+					<spot x="254.96692" y="1167.34143" z="129.87500" h="60"/>
+				</spawn>
+				<!-- Stonereach Garrison Defender(LDF5_Fortress_vGuard_V01_Li_Kn_65_An) -->
+				<spawn npc_id="234045" respawn_time="295">
+					<spot x="292.98416" y="1165.27368" z="128.68849"/>
+					<spot x="915.00610" y="1198.60181" z="143.75000" h="75"/>
+					<spot x="633.13293" y="1320.61719" z="150.37500" h="90"/>
+					<spot x="292.91833" y="1170.57825" z="128.76021"/>
+					<spot x="907.71210" y="1204.52600" z="143.76799" h="75"/>
+					<spot x="242.72238" y="1178.29443" z="130.00000"/>
+				</spawn>
+				<!-- Stonereach Garrison Infantry(LDF5_Fortress_vGuard_V01_Li_Fi_65_An) -->
+				<spawn npc_id="234048" respawn_time="295">
+					<spot x="275.24826" y="1153.71301" z="129.00000"/>
+					<spot x="276.43271" y="1181.66785" z="129.01344" h="105"/>
+				</spawn>
+				<!-- Stonereach Garrison Patrol(LDF5_Fortress_vGuard_V01_Li_Ra_65_An) -->
+				<spawn npc_id="234051" respawn_time="295">
+					<spot x="630.55664" y="1328.00232" z="150.35156" h="90"/>
+				</spawn>
+				<!-- Stonereach Garrison Guard(LDF5_Fortress_EvGuard_V01_Li_Kn_65_Ae) -->
+				<spawn npc_id="234075" respawn_time="295">
+					<spot x="628.25958" y="1320.86145" z="150.39122" h="90"/>
+					<spot x="613.16266" y="1361.28247" z="150.38156"/>
+				</spawn>
+				<!-- Stonereach Garrison Lieutenant(LDF5_Fortress_EvGuard_V01_Li_Fi_65_Ae) -->
+				<spawn npc_id="234078" respawn_time="295">
+					<spot x="634.96411" y="1319.65820" z="150.37500" h="90"/>
+					<spot x="643.03107" y="1340.31006" z="150.35156" h="60"/>
+					<spot x="626.51453" y="1319.82019" z="150.37500" h="90"/>
+				</spawn>
+				<!-- Stonereach Garrison Watchguard(LDF5_Fortress_EvGuard_V01_Li_Ra_65_Ae) -->
+				<spawn npc_id="234081" respawn_time="295">
+					<spot x="613.83997" y="1341.70154" z="150.32417"/>
+					<spot x="643.04047" y="1360.53906" z="150.53748" h="60"/>
+					<spot x="268.28598" y="1163.85376" z="129.10713"/>
+				</spawn>
+				<!-- Stonereach Garrison Sorcerer(LDF5_Fortress_EvGuard_V01_Li_Wi_65_Ae) -->
+				<spawn npc_id="234084" respawn_time="295">
+					<spot x="613.81122" y="1332.06311" z="150.32417"/>
+					<spot x="258.65826" y="1182.24243" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Garrison Healer(LDF5_Fortress_EvGuard_V01_Li_Pr_65_Ae) -->
+				<spawn npc_id="234087" respawn_time="295">
+					<spot x="643.17633" y="1330.32739" z="150.35156" h="60"/>
+				</spawn>
+				<!-- Stonereach Lightbringer(LDF5_Fortress_v01_Tank_Light) -->
+				<spawn npc_id="234533" respawn_time="295">
+					<spot x="608.01819" y="1336.20947" z="150.32417"/>
+					<spot x="648.74310" y="1335.78113" z="150.48610" h="60"/>
+				</spawn>
+				<!-- Broken Lightbringer(LDF5_Fortress_v01_Tank_Fake_Light) -->
+				<spawn npc_id="234535" respawn_time="295">
+					<spot x="648.09583" y="1352.22839" z="150.49156" h="60"/>
+					<spot x="607.85248" y="1353.31885" z="150.38156"/>
+					<spot x="648.08160" y="1368.96216" z="150.53748" h="60"/>
+					<spot x="608.21680" y="1369.91785" z="150.53748"/>
+				</spawn>
+				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_L) -->
+				<spawn npc_id="802365" respawn_time="295">
+					<spot x="243.81123" y="1167.27368" z="130.49934"/>
+				</spawn>
+				<!-- Stonereach Outpost Chariot Depot(LDF5Fortress2_v01_Flag_L) -->
+				<spawn npc_id="802371" respawn_time="295">
+					<spot x="630.99011" y="1355.65759" z="150.41344"/>
+				</spawn>
+				<!-- Liana(LDF5_Fortress_v01_L_seller_good) -->
+				<spawn npc_id="802385" respawn_time="295">
+					<spot x="267.02676" y="1143.21216" z="128.82576" h="30"/>
+				</spawn>
+				<!-- Imira(LDF5_Fortress_v01_L_seller_food) -->
+				<spawn npc_id="802387" respawn_time="295">
+					<spot x="263.73010" y="1143.14624" z="128.89099" h="15"/>
+				</spawn>
+				<!-- Seis(LDF5_Fortress_v01_L_warehouse) -->
+				<spawn npc_id="802389" respawn_time="295">
+					<spot x="239.80052" y="1156.43018" z="129.34312"/>
+				</spawn>
+				<!-- Batiron(LDF5_Fortress_v01_L_APseller_good) -->
+				<spawn npc_id="802393" respawn_time="295">
+					<spot x="240.03220" y="1152.80469" z="128.91791" h="8"/>
+				</spawn>
+				<!-- Saliones(LDF5_Fortress_v01_L_Seller_PvPCoin_matter) -->
+				<spawn npc_id="804472" respawn_time="295">
+					<spot x="242.03349" y="1149.84888" z="128.94292" h="15"/>
+				</spawn>
+				<!-- Caetess(LDF5_Fortress_Village_Guard01_L) -->
+				<spawn npc_id="802427" respawn_time="295">
+					<spot x="250.82387" y="1156.44336" z="129.38463"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="804524" respawn_time="295">
+					<spot x="242.672" y="1180.908" z="131.1318" static_id="202" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- Stonereach Squad Commander(LDF5_Fortress_EChief_V01_Da_65_An) -->
+				<spawn npc_id="234040" handler="BOSS">
+					<spot x="252.75955" y="1167.31592" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Survey Thrasher(LDF5_Fortress_Killer_V01_Da_65_An) -->
+				<spawn npc_id="234106" handler="ATTACKER">
+					<spot x="254.96692" y="1167.34143" z="129.87500" h="60"/>
+				</spawn>
+				<!-- Stonereach Squad Defender(LDF5_Fortress_vGuard_V01_Da_Kn_65_An) -->
+				<spawn npc_id="234046" respawn_time="295">
+					<spot x="915.00610" y="1198.60181" z="143.75000" h="75"/>
+					<spot x="633.13293" y="1320.61719" z="150.37500" h="90"/>
+					<spot x="907.71210" y="1204.52600" z="143.76799" h="75"/>
+				</spawn>
+				<!-- Stonereach Squad Watch(LDF5_Fortress_vGuard_V01_Da_Ra_65_An) -->
+				<spawn npc_id="234052" respawn_time="295">
+					<spot x="630.55664" y="1328.00232" z="150.35156" h="90"/>
+				</spawn>
+				<!-- Stonereach Squad Defender(LDF5_Fortress_EvGuard_V01_Da_Kn_65_Ae) -->
+				<spawn npc_id="234076" respawn_time="295">
+					<spot x="628.25958" y="1320.86145" z="150.39122" h="90"/>
+					<spot x="613.16266" y="1361.28247" z="150.38156"/>
+					<spot x="242.72238" y="1178.29443" z="130.00000"/>
+					<spot x="292.9183" y="1170.578" z="128.7602" />
+					<spot x="292.9842" y="1165.274" z="128.6885" />
+				</spawn>
+				<!-- Stonereach Squad Watchguard(LDF5_Fortress_EvGuard_V01_Da_Ra_65_Ae) -->
+				<spawn npc_id="234082" respawn_time="295">
+					<spot x="613.83997" y="1341.70154" z="150.32417"/>
+					<spot x="643.04047" y="1360.53906" z="150.53748" h="60"/>
+					<spot x="268.25708" y="1163.4642" z="129.12634" h="5"/>
+				</spawn>
+				<!-- Stonereach Squad Sorcerer(LDF5_Fortress_EvGuard_V01_Da_Wi_65_Ae) -->
+				<spawn npc_id="234085" respawn_time="295">
+					<spot x="613.81122" y="1332.06311" z="150.32417"/>
+					<spot x="258.65826" y="1182.24243" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Squad Attendant(LDF5_Fortress_EvGuard_V01_Da_Pr_65_Ae) -->
+				<spawn npc_id="234088" respawn_time="295">
+					<spot x="643.17633" y="1330.32739" z="150.35156" h="60"/>
+				</spawn>
+				<!-- Stonereach Shadecaster(LDF5_Fortress_v01_Tank_Dark) -->
+				<spawn npc_id="234534" respawn_time="295">
+					<spot x="608.01819" y="1336.20947" z="150.32417"/>
+					<spot x="648.74310" y="1335.78113" z="150.48610" h="60"/>
+				</spawn>
+				<!-- Broken Shadecaster(LDF5_Fortress_v01_Tank_Fake_Dark) -->
+				<spawn npc_id="234536" respawn_time="295">
+					<spot x="648.09583" y="1352.22839" z="150.49156" h="60"/>
+					<spot x="607.85248" y="1353.31885" z="150.38156"/>
+					<spot x="648.08160" y="1368.96216" z="150.53748" h="60"/>
+					<spot x="608.21680" y="1369.91785" z="150.53748"/>
+				</spawn>
+				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_D) -->
+				<spawn npc_id="802366" respawn_time="295">
+					<spot x="243.81123" y="1167.27368" z="130.49934"/>
+				</spawn>
+				<!-- Stonereach Outpost Chariot Depot(LDF5Fortress2_v01_Flag_D) -->
+				<spawn npc_id="802372" respawn_time="295">
+					<spot x="630.99011" y="1355.65759" z="150.41344"/>
+				</spawn>
+				<!-- Taboran(LDF5_Fortress_v01_D_seller_good) -->
+				<spawn npc_id="802386" respawn_time="295">
+					<spot x="267.02676" y="1143.21216" z="128.82576" h="30"/>
+				</spawn>
+				<!-- Yanol(LDF5_Fortress_v01_D_seller_food) -->
+				<spawn npc_id="802388" respawn_time="295">
+					<spot x="263.73010" y="1143.14624" z="128.89099" h="15"/>
+				</spawn>
+				<!-- Irusil(LDF5_Fortress_v01_D_warehouse) -->
+				<spawn npc_id="802390" respawn_time="295">
+					<spot x="239.80052" y="1156.43018" z="129.34312"/>
+				</spawn>
+				<!-- Kashian(LDF5_Fortress_v01_D_APseller_good) -->
+				<spawn npc_id="802394" respawn_time="295">
+					<spot x="240.03220" y="1152.80469" z="128.91791" h="8"/>
+				</spawn>
+				<!-- Rubbon(LDF5_Fortress_v01_D_Seller_PvPCoin_matter) -->
+				<spawn npc_id="804474" respawn_time="295">
+					<spot x="242.03349" y="1149.84888" z="128.94292" h="15"/>
+				</spawn>
+				<!-- Vidarr(LDF5_Fortress_Village_Guard01_D) -->
+				<spawn npc_id="802429" respawn_time="295">
+					<spot x="250.82387" y="1156.44336" z="129.38463"/>
+				</spawn>
+				<!-- Stonereach Squad Watchguard -->
+				<spawn npc_id="234082" respawn_time="295">
+					<spot x="268.286" y="1163.854" z="129.1149" />
+				</spawn>
+				<!-- Stonereach Squad Lieutenant -->
+				<spawn npc_id="234079" respawn_time="295">
+					<spot x="276.4327" y="1181.668" z="129.0134" h="105" />
+					<spot x="275.2483" y="1153.713" z="129" />
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="804525" respawn_time="295">
+					<spot x="242.672" y="1180.908" z="131.1318" static_id="202" />
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- Stonereach Force Commander(LDF5_Fortress_EChief_V01_Dr_65_An) -->
+				<spawn npc_id="234038" handler="BOSS">
+					<spot x="252.75955" y="1167.31592" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Force Thrasher(LDF5_Fortress_Killer_V01_Dr_65_An) -->
+				<spawn npc_id="234104" handler="ATTACKER">
+					<spot x="254.96692" y="1167.34143" z="129.87500" h="60"/>
+				</spawn>
+				<!-- Stonereach Force Defender(LDF5_Fortress_vGuard_V01_Dr_Kn_65_An) -->
+				<spawn npc_id="234044" respawn_time="295">
+					<spot x="292.98416" y="1165.27368" z="128.68849"/>
+					<spot x="915.00610" y="1198.60181" z="143.75000" h="75"/>
+					<spot x="633.13293" y="1320.61719" z="150.37500" h="90"/>
+					<spot x="292.91833" y="1170.57825" z="128.76021"/>
+					<spot x="907.71210" y="1204.52600" z="143.76799" h="75"/>
+				</spawn>
+				<!-- Stonereach Force Soldier(LDF5_Fortress_vGuard_V01_Dr_Fi_65_An) -->
+				<spawn npc_id="234047" respawn_time="295">
+					<spot x="275.24826" y="1153.71301" z="129.00000"/>
+					<spot x="276.43271" y="1181.66785" z="129.01344" h="105"/>
+				</spawn>
+				<!-- Stonereach Force Watch(LDF5_Fortress_vGuard_V01_Dr_Ra_65_An) -->
+				<spawn npc_id="234050" respawn_time="295">
+					<spot x="630.55664" y="1328.00232" z="150.35156" h="90"/>
+				</spawn>
+				<!-- Stonereach Force Defender(LDF5_Fortress_EvGuard_V01_Dr_Kn_65_Ae) -->
+				<spawn npc_id="234074" respawn_time="295">
+					<spot x="628.25958" y="1320.86145" z="150.39122" h="90"/>
+					<spot x="613.16266" y="1361.28247" z="150.38156"/>
+					<spot x="310.17764" y="1176.16516" z="128.78175"/>
+					<spot x="242.72238" y="1178.29443" z="130.00000"/>
+					<spot x="245.35670" y="1202.22107" z="129.87500" h="30"/>
+					<spot x="250.57475" y="1202.09033" z="129.95844" h="30"/>
+				</spawn>
+				<!-- Stonereach Force Lieutenant(LDF5_Fortress_EvGuard_V01_Dr_Fi_65_Ae) -->
+				<spawn npc_id="234077" respawn_time="295">
+					<spot x="634.96411" y="1319.65820" z="150.37500" h="90"/>
+					<spot x="309.25546" y="1158.28198" z="129.35738"/>
+					<spot x="643.03107" y="1340.31006" z="150.35156" h="60"/>
+					<spot x="258.17230" y="1180.36121" z="129.87500"/>
+					<spot x="626.51453" y="1319.82019" z="150.37500" h="90"/>
+				</spawn>
+				<!-- Stonereach Force Watchguard(LDF5_Fortress_EvGuard_V01_Dr_Ra_65_Ae) -->
+				<spawn npc_id="234080" respawn_time="295">
+					<spot x="613.83997" y="1341.70154" z="150.32417"/>
+					<spot x="643.04047" y="1360.53906" z="150.53748" h="60"/>
+					<spot x="268.28598" y="1163.85376" z="129.10713"/>
+					<spot x="310.26639" y="1161.31140" z="129.16803"/>
+					<spot x="247.83727" y="1197.22229" z="129.87500" h="30"/>
+				</spawn>
+				<!-- Stonereach Force Sorcerer(LDF5_Fortress_EvGuard_V01_Dr_Wi_65_Ae) -->
+				<spawn npc_id="234083" respawn_time="295">
+					<spot x="613.81122" y="1332.06311" z="150.32417"/>
+					<spot x="306.27444" y="1176.23450" z="128.67146"/>
+					<spot x="306.50519" y="1160.55603" z="128.95889"/>
+					<spot x="258.65826" y="1182.24243" z="129.87500"/>
+				</spawn>
+				<!-- Stonereach Force Attendant(LDF5_Fortress_EvGuard_V01_Dr_Pr_65_Ae) -->
+				<spawn npc_id="234086" respawn_time="295">
+					<spot x="308.31470" y="1179.14893" z="129.14362"/>
+					<spot x="643.17633" y="1330.32739" z="150.35156" h="60"/>
+					<spot x="266.33609" y="1154.98438" z="129.22899" h="15"/>
+				</spawn>
+				<!-- Stonereach Force Aegis(LDF5_Fortress_inspector_V01_Dr_Ae) -->
+				<spawn npc_id="234136" respawn_time="295">
+					<spot x="313.06473" y="1209.07239" z="132.70059" h="90"/>
+				</spawn>
+				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_Dr) -->
+				<spawn npc_id="802367" respawn_time="295">
+					<spot x="243.81123" y="1167.27368" z="130.49934"/>
+				</spawn>
+				<!-- Stonereach Outpost Chariot Depot(LDF5Fortress2_v01_Flag_Dr) -->
+				<spawn npc_id="802373" respawn_time="295">
+					<spot x="630.99011" y="1355.65759" z="150.41344"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>	
+		<base_spawn id="6091"> 
+			<simple_race race="ELYOS">
+				<!-- Flamecrest Garrison Commander(LDF5_Fortress_EChief_V02_Li_65_An) -->
+				<spawn npc_id="234042" handler="BOSS">
+					<spot x="1351.86072" y="1125.89331" z="184.51741" h="50"/>
+				</spawn>
+				<!-- Flamecrest Scout Thrasher(LDF5_Fortress_Killer_V02_Li_65_An) -->
+				<spawn npc_id="234108" handler="ATTACKER">
+					<spot x="1349.68896" y="1126.83325" z="184.75000" h="110"/>
+				</spawn>
+				<!-- Flamecrest Garrison Guard(LDF5_Fortress_EvGuard_V02_Li_Kn_65_Ae) -->
+				<spawn npc_id="234090" respawn_time="295">
+					<spot x="948.56775" y="1226.52075" z="143.83183" h="46"/>
+					<spot x="1357.032" y="1112.455" z="184.5721" h="45" />
+					<spot x="1313.856" y="1133.398" z="184.75" h="45" />
+					<spot x="1315.644" y="1137.956" z="184.931" h="45" />
+				</spawn>
+				<!-- Flamecrest Garrison Lieutenant(LDF5_Fortress_EvGuard_V02_Li_Fi_65_Ae) -->
+				<spawn npc_id="234093" respawn_time="295">
+					<spot x="916.14948" y="1196.77600" z="143.83585" h="75"/>
+					<spot x="935.27057" y="1211.84802" z="143.70866" h="46"/>
+					<spot x="906.04492" y="1205.54175" z="143.84636" h="75"/>
+					<spot x="1335.31250" y="1145.60999" z="184.75000" h="66"/>
+					<spot x="1326.38489" y="1118.66052" z="184.75000" h="33"/>
+				</spawn>
+				<!-- Flamecrest Garrison Watchguard(LDF5_Fortress_EvGuard_V02_Li_Ra_65_Ae) -->
+				<spawn npc_id="234096" respawn_time="295">
+					<spot x="912.97333" y="1229.90112" z="143.61853" h="105"/>
+					<spot x="915.59167" y="1206.08875" z="143.59645" h="75"/>
+					<spot x="925.17706" y="1246.84045" z="143.67592" h="15"/>
+					<spot x="1337.01379" y="1134.03918" z="184.50000" h="56"/>
+				</spawn>
+				<!-- Flamecrest Garrison Sorcerer(LDF5_Fortress_EvGuard_V02_Li_Wi_65_Ae) -->
+				<spawn npc_id="234099" respawn_time="295">
+					<spot x="907.78497" y="1223.67981" z="143.61853" h="105"/>
+					<spot x="1344.01233" y="1114.29260" z="184.75000" h="50"/>
+				</spawn>
+				<!-- Flamecrest Garrison Healer(LDF5_Fortress_EvGuard_V02_Li_Pr_65_Ae) -->
+				<spawn npc_id="234102" respawn_time="295">
+					<spot x="928.66608" y="1203.58191" z="143.70866" h="46"/>
+				</spawn>
+				<!-- Flamecrest Garrison Aegis(LDF5_Fortress_inspector_V02_Li_Ae) -->
+				<spawn npc_id="234137" respawn_time="295">
+					<spot x="1302.57776" y="1210.03113" z="188.12500" h="90"/>
+				</spawn>
+				<!-- Flamecrest Lightbringer(LDF5_Fortress_v02_Tank_Light) -->
+				<spawn npc_id="234537" respawn_time="295">
+					<spot x="936.31970" y="1204.13147" z="143.70866" h="46"/>
+					<spot x="905.93884" y="1230.74719" z="143.61853" h="106"/>
+				</spawn>
+				<!-- Broken Lightbringer(LDF5_Fortress_v02_Tank_Fake_Light) -->
+				<spawn npc_id="234539" respawn_time="295">
+					<spot x="946.33105" y="1217.36353" z="143.78592" h="46"/>
+					<spot x="956.67560" y="1229.95410" z="143.83183" h="46"/>
+					<spot x="915.85022" y="1243.73132" z="143.67592" h="106"/>
+					<spot x="926.25543" y="1256.68176" z="143.83183" h="106"/>
+				</spawn>
+				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_L) -->
+				<spawn npc_id="802368" respawn_time="295">
+					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
+				</spawn>
+				<!-- Flamecrest Outpost Chariot Depot(LDF5Fortress2_v02_Flag_L) -->
+				<spawn npc_id="802377" respawn_time="295">
+					<spot x="932.84442" y="1228.99438" z="143.70779"/>
+				</spawn>
+				<!-- Patiom(LDF5_Fortress_v02_L_seller_good) -->
+				<spawn npc_id="802395" respawn_time="295">
+					<spot x="1344.94971" y="1154.45715" z="184.69469" h="90"/>
+				</spawn>
+				<!-- Minoz(LDF5_Fortress_v02_L_seller_food) -->
+				<spawn npc_id="802397" respawn_time="295">
+					<spot x="1348.00256" y="1152.94324" z="184.69550" h="75"/>
+				</spawn>
+				<!-- Miria(LDF5_Fortress_v02_L_warehouse) -->
+				<spawn npc_id="802399" respawn_time="295">
+					<spot x="1368.12085" y="1131.56982" z="184.40944" h="60"/>
+				</spawn>
+				<!-- Liyana(LDF5_Fortress_v02_L_APseller_good) -->
+				<spawn npc_id="802403" respawn_time="295">
+					<spot x="1369.64380" y="1135.19617" z="184.68321" h="60"/>
+				</spawn>
+				<!-- Dinotia(LDF5_Fortress_v02_L_Seller_PvPCoin_matter) -->
+				<spawn npc_id="804473" respawn_time="295">
+					<spot x="1368.32495" y="1139.94507" z="184.75803" h="66"/>
+				</spawn>
+				<!-- Milda(LDF5_Fortress_Village_Guard02_L) -->
+				<spawn npc_id="802428" respawn_time="295">
+					<spot x="1359.08240" y="1132.95520" z="184.68234" h="66"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="804526" respawn_time="295">
+					<spot x="1356.727" y="1109.768" z="186.9119" h="50" static_id="19" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- Flamecrest Squad Commander(LDF5_Fortress_EChief_V02_Da_65_An) -->
+				<spawn npc_id="234043" handler="BOSS">
+					<spot x="1351.86072" y="1125.89331" z="184.51741" h="50"/>
+				</spawn>
+				<!-- Flamecrest Squad Thrasher(LDF5_Fortress_Killer_V02_Da_65_An) -->
+				<spawn npc_id="234109" handler="ATTACKER">
+					<spot x="1349.68896" y="1126.83325" z="184.75000" h="110"/>
+				</spawn>
+				<!-- Flamecrest Squad Leutenant -->
+				<spawn npc_id="234094" respawn_time="295">
+					<spot x="1335.31250" y="1145.60999" z="184.75000" h="66"/>
+					<spot x="1326.38489" y="1118.66052" z="184.75000" h="33"/>
+				</spawn>
+				<!-- Flamecrest Garrison Sorcerer(LDF5_Fortress_EvGuard_V02_Da_Wi_65_Ae) -->
+				<spawn npc_id="234100" respawn_time="295">
+					<spot x="907.78497" y="1223.67981" z="143.61853" h="105"/>
+					<spot x="1344.01233" y="1114.29260" z="184.75000" h="50"/>
+				</spawn>
+				<!-- Flamecrest Squad Defender(LDF5_Fortress_EvGuard_V02_Da_Kn_65_Ae) -->
+				<spawn npc_id="234091" respawn_time="295">
+					<spot x="948.56775" y="1226.52075" z="143.83183" h="46"/>
+					<spot x="1357.032" y="1112.455" z="184.5721" h="45" />
+					<spot x="1313.856" y="1133.398" z="184.75" h="45" />
+					<spot x="1315.644" y="1137.956" z="184.931" h="45" />
+				</spawn>
+				<!-- Flamecrest Squad Lieutenant(LDF5_Fortress_EvGuard_V02_Da_Fi_65_Ae) -->
+				<spawn npc_id="234094" respawn_time="295">
+					<spot x="916.14948" y="1196.77600" z="143.83585" h="75"/>
+					<spot x="935.27057" y="1211.84802" z="143.70866" h="46"/>
+					<spot x="906.04492" y="1205.54175" z="143.84636" h="75"/>
+				</spawn>
+				<!-- Flamecrest Squad Watchguard(LDF5_Fortress_EvGuard_V02_Da_Ra_65_Ae) -->
+				<spawn npc_id="234097" respawn_time="295">
+					<spot x="912.97333" y="1229.90112" z="143.61853" h="105"/>
+					<spot x="915.59167" y="1206.08875" z="143.59645" h="75"/>
+					<spot x="925.17706" y="1246.84045" z="143.67592" h="15"/>
+					<spot x="1337.01379" y="1134.03918" z="184.50000" h="56"/>
+				</spawn>
+				<!-- Flamecrest Squad Attendant(LDF5_Fortress_EvGuard_V02_Da_Pr_65_Ae) -->
+				<spawn npc_id="234103" respawn_time="295">
+					<spot x="928.66608" y="1203.58191" z="143.70866" h="46"/>
+				</spawn>
+				<!-- Flamecrest Squad Aegis(LDF5_Fortress_inspector_V02_Da_Ae) -->
+				<spawn npc_id="234138" respawn_time="295">
+					<spot x="1302.57776" y="1210.03113" z="188.12500" h="90"/>
+				</spawn>
+				<!-- Flamecrest Shadecaster(LDF5_Fortress_v02_Tank_Dark) -->
+				<spawn npc_id="234538" respawn_time="295">
+					<spot x="936.31970" y="1204.13147" z="143.70866" h="46"/>
+					<spot x="905.93884" y="1230.74719" z="143.61853" h="106"/>
+				</spawn>
+				<!-- Broken Shadecaster(LDF5_Fortress_v02_Tank_Fake_Dark) -->
+				<spawn npc_id="234540" respawn_time="295">
+					<spot x="946.33105" y="1217.36353" z="143.78592" h="46"/>
+					<spot x="956.67560" y="1229.95410" z="143.83183" h="46"/>
+					<spot x="915.85022" y="1243.73132" z="143.67592" h="106"/>
+					<spot x="926.25543" y="1256.68176" z="143.83183" h="106"/>
+				</spawn>
+				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_D) -->
+				<spawn npc_id="802369" respawn_time="295">
+					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
+				</spawn>
+				<!-- Flamecrest Outpost Chariot Depot(LDF5Fortress2_v02_Flag_D) -->
+				<spawn npc_id="802375" respawn_time="295">
+					<spot x="932.84442" y="1228.99438" z="143.70779"/>
+				</spawn>
+				<!-- Zamoia(LDF5_Fortress_v02_D_seller_good) -->
+				<spawn npc_id="802396" respawn_time="295">
+					<spot x="1344.94971" y="1154.45715" z="184.69469" h="90"/>
+				</spawn>
+				<!-- Nodos(LDF5_Fortress_v02_D_seller_food) -->
+				<spawn npc_id="802398" respawn_time="295">
+					<spot x="1348.00256" y="1152.94324" z="184.69550" h="75"/>
+				</spawn>
+				<!-- Uron(LDF5_Fortress_v02_D_warehouse) -->
+				<spawn npc_id="802400" respawn_time="295">
+					<spot x="1368.12085" y="1131.56982" z="184.40944" h="60"/>
+				</spawn>
+				<!-- Heidrun(LDF5_Fortress_v02_D_APseller_good) -->
+				<spawn npc_id="802404" respawn_time="295">
+					<spot x="1369.64380" y="1135.19617" z="184.68321" h="60"/>
+				</spawn>
+				<!-- Helvatun(LDF5_Fortress_v02_D_Seller_PvPCoin_matter) -->
+				<spawn npc_id="804475" respawn_time="295">
+					<spot x="1368.32495" y="1139.94507" z="184.75803" h="66"/>
+				</spawn>
+				<!-- Tortius(LDF5_Fortress_Village_Guard02_D) -->
+				<spawn npc_id="802430" respawn_time="295">
+					<spot x="1359.08240" y="1132.95520" z="184.68234" h="66"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="804527" respawn_time="295">
+					<spot x="1356.727" y="1109.768" z="186.9119" h="50" static_id="19" />
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- Flamecrest Force Commander(LDF5_Fortress_EChief_V02_Dr_65_An) -->
+				<spawn npc_id="234041" handler="BOSS">
+					<spot x="1351.86072" y="1125.89331" z="184.51741" h="50"/>
+				</spawn>
+				<!-- Flamecrest Force Thrasher(LDF5_Fortress_Killer_V02_Dr_65_An) -->
+				<spawn npc_id="234107" handler="ATTACKER">
+					<spot x="1349.68896" y="1126.83325" z="184.75000" h="110"/>
+				</spawn>
+				<!-- Flamecrest Force Defender(LDF5_Fortress_vGuard_V02_Dr_Kn_65_An) -->
+				<spawn npc_id="234059" respawn_time="295">
+					<spot x="1313.85596" y="1133.39783" z="184.75000" h="51"/>
+					<spot x="1315.64392" y="1137.95630" z="184.93051" h="51"/>
+				</spawn>
+				<!-- Flamecrest Force Soldier(LDF5_Fortress_vGuard_V02_Dr_Fi_65_An) -->
+				<spawn npc_id="234062" respawn_time="295">
+					<spot x="1335.31250" y="1145.60999" z="184.75000" h="66"/>
+					<spot x="1326.38489" y="1118.66052" z="184.75000" h="33"/>
+				</spawn>
+				<!-- Flamecrest Force Sorcerer(LDF5_Fortress_vGuard_V02_Dr_Wi_65_An) -->
+				<spawn npc_id="234068" respawn_time="295">
+					<spot x="1344.01233" y="1114.29260" z="184.75000" h="50"/>
+				</spawn>
+				<!-- Flamecrest Force Defender(LDF5_Fortress_EvGuard_V02_Dr_Kn_65_Ae) -->
+				<spawn npc_id="234089" respawn_time="295">
+					<spot x="1298.89734" y="1139.57227" z="184.44391" h="40"/>
+					<spot x="948.56775" y="1226.52075" z="143.83183" h="46"/>
+					<spot x="1363.82874" y="1154.56641" z="184.88554" h="20"/>
+					<spot x="1360.31689" y="1155.40930" z="184.88576" h="20"/>
+				</spawn>
+				<!-- Flamecrest Force Lieutenant(LDF5_Fortress_EvGuard_V02_Dr_Fi_65_Ae) -->
+				<spawn npc_id="234092" respawn_time="295">
+					<spot x="916.14948" y="1196.77600" z="143.83585" h="75"/>
+					<spot x="935.27057" y="1211.84802" z="143.70866" h="46"/>
+					<spot x="1304.01001" y="1152.91943" z="183.01070" h="51"/>
+					<spot x="906.04492" y="1205.54175" z="143.84636" h="75"/>
+				</spawn>
+				<!-- Flamecrest Force Watchguard(LDF5_Fortress_EvGuard_V02_Dr_Ra_65_Ae) -->
+				<spawn npc_id="234095" respawn_time="295">
+					<spot x="912.97333" y="1229.90112" z="143.61853" h="105"/>
+					<spot x="1361.22998" y="1150.03125" z="184.88771" h="20"/>
+					<spot x="915.59167" y="1206.08875" z="143.59645" h="75"/>
+					<spot x="1307.10718" y="1156.25012" z="182.91293" h="51"/>
+					<spot x="925.17706" y="1246.84045" z="143.67592" h="15"/>
+					<spot x="1337.01379" y="1134.03918" z="184.50000" h="56"/>
+				</spawn>
+				<!-- Flamecrest Force Sorcerer(LDF5_Fortress_EvGuard_V02_Dr_Wi_65_Ae) -->
+				<spawn npc_id="234098" respawn_time="295">
+					<spot x="1300.63330" y="1134.09155" z="184.45470" h="38"/>
+					<spot x="907.78497" y="1223.67981" z="143.61853" h="105"/>
+					<spot x="1352.42273" y="1127.95447" z="184.59857" h="51"/>
+					<spot x="1308.39685" y="1152.32202" z="183.50935" h="38"/>
+				</spawn>
+				<!-- Flamecrest Force Attendant(LDF5_Fortress_EvGuard_V02_Dr_Pr_65_Ae) -->
+				<spawn npc_id="234101" respawn_time="295">
+					<spot x="1343.64648" y="1140.06787" z="184.75000" h="60"/>
+					<spot x="1296.28455" y="1135.98865" z="184.50000" h="40"/>
+					<spot x="1350.93604" y="1124.08618" z="184.57188" h="51"/>
+					<spot x="928.66608" y="1203.58191" z="143.70866" h="46"/>
+				</spawn>
+				<!-- Flamecrest Force Aegis(LDF5_Fortress_inspector_V02_Dr_Ae) -->
+				<spawn npc_id="234139" respawn_time="295">
+					<spot x="1302.57776" y="1210.03113" z="188.12500" h="90"/>
+				</spawn>
+				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_Dr) -->
+				<spawn npc_id="802370" respawn_time="295">
+					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
+				</spawn>
+				<!-- Flamecrest Outpost Chariot Depot(LDF5Fortress2_v02_Flag_Dr) -->
+				<spawn npc_id="802376" respawn_time="295">
+					<spot x="932.84442" y="1228.99438" z="143.70779"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		</spawn_map>
+</spawns>

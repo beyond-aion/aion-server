@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!-- 
+		[BEGIN] SUMMARY
+			13600 [XML] No Tours, No Help
+			13601 [SCRIPT] These Two Don't Get Along
+			13602 [XML] A Shugo? Lie for Money? Never!
+			13603 [XML] Search and Destroy
+			13604 [XML] You Should Read the Letter
+			13605 [XML] Unsafe Work Environment
+			13606 [XML] Overtime Pay
+			13607 [XML] It's not the Taste, So Much the Texture
+			13608 [XML] One Daeva Army
+			13609 [XML] Fetch Me My Biohazard Suit!
+			13610 [XML] Aren't Clodworms Smaller?
+			13611 [XML] Foe of My Foe
+			13612 [XML] The Remnant Officer's Offer
+			13613 [XML] The Officer's Offer Redux
+			13614 [XML] Would You Like to Know My Secret?
+			13615 [SCRIPT] [Alliance] Hyperion Unearthed
+			13616 [SCRIPT] Kill the Dead
+			13617 [XML] Tomb of the Elder
+			13618 [SCRIPT] Seek and Interpret
+			13619 [XML] [Alliance] Removing the Remnants
+			13620 [XML] Conquer and Divide
+			13621 [SCRIPT] [Urgent Order] Kurius' Request
+			13650 [XML] All You Need Is Kinah
+			13651 [XML] [Group] Genuine Danuar Souvenirs
+			13652 [XML] Healthy Calcium Supplement
+			13653 [XML] The Ide Adds Flavor
+			13654 [XML] [Coin] A Graveyard Smash
+			13655 [XML] [Coin] From The Cold Dead Klaws
+			13656 [XML] [Coin] Night of the Grimy Clodworms
+			13657 [XML] I Earned These Legitimately
+			23600 [XML] Mother's Wishes
+			23601 [SCRIPT] Unfurled Wings with Empty Stomachs
+			23602 [XML] A Tear-Jerking Tail
+			23603 [XML] The Back Way In
+			23604 [XML] Sneak a Peek
+			23605 [XML] Keep Away from the Infected
+			23606 [XML] A Healthy Glow
+			23607 [XML] Like Momma Shugo Used to Make
+			23608 [XML] Strategic Response
+			23609 [XML] Chronicle of Disaster
+			23610 [XML] Resistance is Futile
+			23611 [XML] Caged Vengeance
+			23612 [XML] Not a Werekarnif
+			23613 [XML] Bothering Brothers
+			23614 [XML] Hyperion Hype
+			23615 [SCRIPT] [Alliance] Beyond the Depths
+			23616 [XML] Shadows of Despair
+			23617 [XML] Marones Rising
+			23618 [SCRIPT] Records of the Past
+			23619 [XML] [Alliance] Breaking Beritra's Fist
+			23620 [XML] Reducing Staff
+			23621 [SCRIPT] [Urgent Order] Otur's Request
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="13600" start_npc_ids="801540" end_npc_ids="801541"/>
+	<report_to id="13602" start_npc_ids="801549" end_npc_ids="801540"/>
+	<report_to id="13604" start_npc_ids="801541" end_npc_ids="801540"/>
+	<report_to id="13612" start_npc_ids="801551" end_npc_ids="801540"/>
+	<report_to id="13613" start_npc_ids="730821" end_npc_ids="801541"/>
+	<report_to id="13650" start_npc_ids="801144" end_npc_ids="801323"/>
+	<report_to id="23600" start_npc_ids="801544" end_npc_ids="801545"/>
+	<report_to id="23602" start_npc_ids="801549" end_npc_ids="801544"/>
+	<report_to id="23604" start_npc_ids="801545" end_npc_ids="801544"/>
+	<report_to id="23612" start_npc_ids="801551" end_npc_ids="801544"/>
+	<report_to id="23613" start_npc_ids="730825" end_npc_ids="801545"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="13606" start_npc_ids="801540" end_npc_ids="801541"/>
+	<item_collecting id="13607" start_npc_ids="801548"/>
+	<item_collecting id="13609" start_npc_ids="801541"/>
+	<item_collecting id="13614" start_npc_ids="801541" next_npc_id="801551" end_npc_ids="801551"/>
+	<item_collecting id="13651" start_npc_ids="801323"/>
+	<item_collecting id="13652" start_npc_ids="801548"/>
+	<item_collecting id="13653" start_npc_ids="801548"/>
+	<item_collecting id="13655" start_npc_ids="801323"/>
+	<item_collecting id="13657" start_npc_ids="801312"/>
+	<item_collecting id="23606" start_npc_ids="801544" end_npc_ids="801545"/>
+	<item_collecting id="23607" start_npc_ids="801548"/>
+	<item_collecting id="23609" start_npc_ids="801545"/>
+	<item_collecting id="23614" start_npc_ids="801545" next_npc_id="801551" end_npc_ids="801551"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="13605" start_npc_ids="801540" end_npc_ids="801541">
+		<monster var="0" end_var="6" npc_ids="230875 230876"/>
+	</monster_hunt>
+	<monster_hunt id="13608" start_npc_ids="801542" end_npc_ids="801541" end_dialog_id="2375">
+		<monster var="0" end_var="9" npc_ids="230880 230881 230888 230892 230893 230894 230896 230897"/>
+	</monster_hunt>
+	<monster_hunt id="13610" start_npc_ids="801541">
+		<monster var="0" end_var="11" npc_ids="230950 230951 230932 230933 230940 230944 230945 230946 230947 230948 230949"/>
+	</monster_hunt>
+	<monster_hunt id="13611" start_npc_ids="801550" end_npc_ids="801541">
+		<monster var="0" end_var="1" npc_ids="230997"/>
+	</monster_hunt>
+	<monster_hunt id="13617" start_npc_ids="730822" end_npc_ids="801543">
+		<monster var="0" end_var="1" npc_ids="233041"/>
+	</monster_hunt>
+	<monster_hunt id="13619" start_npc_ids="801541" end_npc_ids="801541">
+		<monster var="0" end_var="7" npc_ids="230929 230920 230923 230931 230925 230924 230926"/>
+		<monster var="1" end_var="1" npc_ids="230995"/>
+	</monster_hunt>
+	<monster_hunt id="13620" start_npc_ids="801541">
+		<monster var="0" end_var="1" npc_ids="230996"/>
+	</monster_hunt>
+	<monster_hunt id="13654" start_npc_ids="801323">
+		<monster var="0" end_var="6" npc_ids="230864"/>
+	</monster_hunt>
+	<monster_hunt id="13656" start_npc_ids="801549">
+		<monster var="0" end_var="6" npc_ids="230861"/>
+	</monster_hunt>
+	<monster_hunt id="23605" start_npc_ids="801544" end_npc_ids="801545">
+		<monster var="0" end_var="6" npc_ids="230875 230876"/>
+	</monster_hunt>
+	<monster_hunt id="23608" start_npc_ids="801546" end_npc_ids="801545" end_dialog_id="2375">
+		<monster var="0" end_var="9" npc_ids="230880 230881 230888 230892 230893 230894 230896 230897"/>
+	</monster_hunt>
+	<monster_hunt id="23610" start_npc_ids="801545">
+		<monster var="0" end_var="11" npc_ids="230950 230951 230932 230933 230940 230944 230945 230946 230947 230948 230949"/>
+	</monster_hunt>
+	<monster_hunt id="23611" start_npc_ids="801550" end_npc_ids="801545">
+		<monster var="0" end_var="1" npc_ids="230997"/>
+	</monster_hunt>
+	<monster_hunt id="23617" start_npc_ids="730826" end_npc_ids="801547">
+		<monster var="0" end_var="1" npc_ids="233040"/>
+	</monster_hunt>
+	<monster_hunt id="23619" start_npc_ids="801545" end_npc_ids="801545">
+		<monster var="0" end_var="7" npc_ids="230929 230920 230923 230931 230925 230924 230926"/>
+		<monster var="1" end_var="1" npc_ids="230995"/>
+	</monster_hunt>
+	<monster_hunt id="23620" start_npc_ids="801545">
+		<monster var="0" end_var="1" npc_ids="230996"/>
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+	<!-- KILL IN WORLD QUESTS -->
+	<kill_in_world id="13603" start_npc_ids="801540" end_npc_ids="801542" worlds="600070000" invasion_world="600070000" amount="3"/>
+	<kill_in_world id="23603" start_npc_ids="801544" end_npc_ids="801546" worlds="600070000" invasion_world="600070000" amount="3"/>
+	<!-- ZONE QUESTS -->
+</quest_scripts>

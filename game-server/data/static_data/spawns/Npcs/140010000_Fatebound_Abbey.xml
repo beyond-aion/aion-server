@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns>
+	<spawn_map map_id="140010000">
+		<!-- Balaurea Advance Portal -->
+		<spawn npc_id="804683" respawn_time="295">
+			<spot x="210.1606" y="256.4979" z="97.08673" static_id="73" />
+		</spawn>
+		<!-- Balaurea Invasion Portal -->
+		<spawn npc_id="804684" respawn_time="295">
+			<spot x="210.0377" y="276.0881" z="97.08673" static_id="48" />
+		</spawn>
+		<!-- Dagrun -->
+		<spawn npc_id="804670" respawn_time="295">
+			<spot x="253.7918" y="256.4073" z="95.78591" h="30" />
+		</spawn>
+		<!-- Zhenya -->
+		<spawn npc_id="804668" respawn_time="295">
+			<spot x="253.8701" y="276.0541" z="95.78592" h="90" />
+		</spawn>
+		<!-- Guthrum -->
+		<spawn npc_id="804667" respawn_time="295">
+			<spot x="250.7061" y="276.0541" z="95.78592" h="90" />
+		</spawn>
+		<!-- Jarl -->
+		<spawn npc_id="804669" respawn_time="295">
+			<spot x="250.7218" y="256.4073" z="95.7859" h="30" />
+		</spawn>
+		<!-- Eomer -->
+		<spawn npc_id="804671" respawn_time="295">
+			<spot x="242.7678" y="270.8126" z="95.78591" />
+		</spawn>
+		<!-- Belia -->
+		<spawn npc_id="804672" respawn_time="295">
+			<spot x="242.6335" y="261.4738" z="95.78593" />
+		</spawn>
+		<!-- Atreia Defense Portal -->
+		<spawn npc_id="804682" respawn_time="295">
+			<spot x="229.7724" y="256.9917" z="97.08676" static_id="52" />
+		</spawn>
+		<!-- Balaurea Frontier Portal -->
+		<spawn npc_id="804685" respawn_time="295">
+			<spot x="229.6155" y="275.7196" z="97.08678" static_id="68" />
+		</spawn>
+		<!-- Sigurd -->
+		<spawn npc_id="804666" respawn_time="295">
+			<spot x="229.8544" y="272.6894" z="97.08669" h="75" />
+		</spawn>
+		<!-- Irinerk -->
+		<spawn npc_id="804696" respawn_time="295">
+			<spot x="256.9866" y="256.4073" z="95.78593" h="30" />
+		</spawn>
+		<!-- Pandaemonium Teleport Statue -->
+		<spawn npc_id="804688" respawn_time="295">
+			<spot x="286.936" y="266.1089" z="96.48732" static_id="83" />
+		</spawn>
+		<!-- Tet -->
+		<spawn npc_id="804694" respawn_time="295">
+			<spot x="257.0283" y="276.0541" z="95.78593" h="90" />
+		</spawn>
+		<!-- <Divine Equipment Distributor> -->
+		<spawn npc_id="804664" respawn_time="295">
+			<spot x="209.7931" y="259.3291" z="97.08666" h="15" />
+		</spawn>
+		<!-- <Divine Equipment Distributor> -->
+		<spawn npc_id="804665" respawn_time="295">
+			<spot x="212.8975" y="276.2695" z="97.08668" h="106" />
+		</spawn>
+		<!-- Baiern -->
+		<spawn npc_id="804663" respawn_time="295">
+			<spot x="229.9643" y="259.7499" z="97.08669" h="45" />
+		</spawn>
+		<!-- Jacksen -->
+		<spawn npc_id="804662" respawn_time="295">
+			<spot x="269.4652" y="261.9121" z="96.10612" h="15" />
+		</spawn>
+	</spawn_map>
+</spawns>

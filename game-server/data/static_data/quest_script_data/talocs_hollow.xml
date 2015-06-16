@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			11463 [UNUSED] Trapped Within level 99
+			11464 [XML] The Wounds of Change
+			11465 [SCRIPT] Mysterious Seed
+			11466 [SCRIPT] A Hard Seed to Crack
+			11467 [SCRIPT] Death to the Queen
+			11468 [SCRIPT] With Friends Like These
+			21461 [XML] The Lost Tome
+			21463 [UNUSED] Handprints and Silk level 99
+			21464 [XML] Soiled Soil
+			21465 [SCRIPT] Mysterious Seed
+			21467 [SCRIPT] Spawning the Sap Suckers
+			21468 [SCRIPT] The Struggle Within
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="11464" start_npc_ids="799526" end_npc_ids="799503"/>
+	<item_collecting id="21461" start_npc_ids="799502" end_npc_ids="799256"/>
+	<item_collecting id="21464" start_npc_ids="799526" end_npc_ids="799503"/>
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

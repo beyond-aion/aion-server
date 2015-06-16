@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300330000">
+		<!-- Flowing Dimensional Exit -->
+		<spawn npc_id="730498">
+			<spot x="211.820" y="244.359" z="124.942" h="30" static_id="8"/>
+		</spawn>
+		<!-- LDF4a_Invisible_npc_12 -->
+		<spawn npc_id="207070">
+			<spot x="220.371" y="244.475" z="124.942" h="30"/>
+		</spawn>
+		<!-- Light Pillar 1 -->
+		<spawn npc_id="701157">
+			<spot x="249.560" y="267.664" z="124.942"/>
+		</spawn>
+		<!-- Light Pillar 2 -->
+		<spawn npc_id="701158">
+			<spot x="273.144" y="245.070" z="124.942"/>
+		</spawn>
+		<!-- Light Pillar 3 -->
+		<spawn npc_id="701159">
+			<spot x="250.568" y="222.129" z="124.942"/>
+		</spawn>
+	</spawn_map>
+</spawns>

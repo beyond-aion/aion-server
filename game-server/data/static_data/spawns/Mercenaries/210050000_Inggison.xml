@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="210050000">
+		<mercenary_spawn siege_id="2011">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Hired Archer -->
+					<spawn npc_id="252354">
+						<spot x="1777.1023" y="2172.5676" z="333.5149" h="95"/>
+						<spot x="1786.9192" y="2175.2842" z="333.5240" h="95"/>
+						<spot x="1753.3438" y="2220.7070" z="328.5176" h="100"/>
+						<spot x="1718.4874" y="2209.8801" z="328.5682" h="80"/>
+					</spawn>
+					<!-- Asmodian Hired Mage -->
+					<spawn npc_id="252355">
+						<spot x="1752.5817" y="2166.7556" z="333.6398" h="65"/>
+						<spot x="1745.5027" y="2164.5342" z="333.6417" h="5"/>
+						<spot x="1758.2124" y="2232.2744" z="328.4252"/>
+						<spot x="1706.2742" y="2217.3591" z="328.4234" h="65"/>
+					</spawn>
+					<!-- Asmodian Hired Healer -->
+					<spawn npc_id="252356">
+						<spot x="1740.4622" y="2194.0276" z="324.2325" h="95"/>
+					</spawn>
+					<!-- Asmodian Hired Blade -->
+					<spawn npc_id="252357">
+						<spot x="1736.2449" y="2189.6465" z="324.3564" h="95"/>
+						<spot x="1746.8156" y="2192.6558" z="324.2325" h="95"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Asmodian Hired Fighter -->
+					<spawn npc_id="252353">
+						<spot x="1755.1162" y="2157.8228" z="322.1594" h="95"/>
+						<spot x="1748.1093" y="2155.6309" z="322.1900" h="95"/>
+						<spot x="1792.1862" y="2171.0159" z="320.8348" h="5"/>
+						<spot x="1794.2888" y="2164.1108" z="320.8348" h="5"/>
+						<spot x="1706.2522" y="2108.8610" z="318.9370" h="5"/>
+						<spot x="1704.7058" y="2114.8984" z="318.8694" h="5"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832083">
+						<spot x="1730.0239" y="2195.0667" z="327.0856" h="95"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832084">
+						<spot x="1749.2192" y="2200.4900" z="327.0626" h="95"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Hired Archer -->
+					<spawn npc_id="252349">
+						<spot x="1777.1023" y="2172.5676" z="333.5149" h="95"/>
+						<spot x="1786.9192" y="2175.2842" z="333.5240" h="95"/>
+						<spot x="1753.3438" y="2220.7070" z="328.5176" h="100"/>
+						<spot x="1718.4874" y="2209.8801" z="328.5682" h="80"/>
+					</spawn>
+					<!-- Elyos Hired Mage -->
+					<spawn npc_id="252350">
+						<spot x="1752.5817" y="2166.7556" z="333.6398" h="65"/>
+						<spot x="1745.5027" y="2164.5342" z="333.6417" h="5"/>
+						<spot x="1758.2124" y="2232.2744" z="328.4252"/>
+						<spot x="1706.2742" y="2217.3591" z="328.4234" h="65"/>
+					</spawn>
+					<!-- Elyos Hired Healer -->
+					<spawn npc_id="252351">
+						<spot x="1740.4622" y="2194.0276" z="324.2325" h="95"/>
+					</spawn>
+					<!-- Elyos Hired Blade -->
+					<spawn npc_id="252352">
+						<spot x="1736.2449" y="2189.6465" z="324.3564" h="95"/>
+						<spot x="1746.8156" y="2192.6558" z="324.2325" h="95"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Hired Fighter -->
+					<spawn npc_id="252348">
+						<spot x="1755.1162" y="2157.8228" z="322.1594" h="95"/>
+						<spot x="1748.1093" y="2155.6309" z="322.1900" h="95"/>
+						<spot x="1792.1862" y="2171.0159" z="320.8348" h="5"/>
+						<spot x="1794.2888" y="2164.1108" z="320.8348" h="5"/>
+						<spot x="1706.2522" y="2108.8610" z="318.9370" h="5"/>
+						<spot x="1704.7058" y="2114.8984" z="318.8694" h="5"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832075">
+						<spot x="1730.0239" y="2195.0667" z="327.0856" h="95"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832076">
+						<spot x="1749.2192" y="2200.4900" z="327.0626" h="95"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+		<mercenary_spawn siege_id="2021">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Hired Archer -->
+					<spawn npc_id="252364">
+						<spot x="881.3605" y="1899.0472" z="345.9400" h="83"/>
+						<spot x="890.8038" y="1894.8689" z="345.9486" h="83"/>
+						<spot x="894.4816" y="1951.8325" z="340.9345" h="90"/>
+						<spot x="859.9730" y="1965.0891" z="340.9930" h="65"/>
+					</spawn>
+					<!-- Asmodian Hired Mage -->
+					<spawn npc_id="252365">
+						<spot x="859.1223" y="1910.2017" z="346.0646" h="51"/>
+						<spot x="852.4225" y="1913.1653" z="346.0663" h="111"/>
+						<spot x="905.6429" y="1956.9131" z="340.8502" h="103"/>
+						<spot x="856.2773" y="1978.5989" z="340.8479" h="55"/>
+					</spawn>
+					<!-- Asmodian Hired Healer -->
+					<spawn npc_id="252366">
+						<spot x="867.7690" y="1939.0782" z="336.8147" h="83"/>
+					</spawn>
+					<!-- Asmodian Hired Blade -->
+					<spawn npc_id="252367">
+						<spot x="871.2363" y="1933.5188" z="336.6573" h="83"/>
+						<spot x="861.2012" y="1938.0370" z="336.8032" h="83"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Asmodian Hired Fighter -->
+					<spawn npc_id="252363">
+						<spot x="848.8162" y="1904.7040" z="334.6120" h="83"/>
+						<spot x="855.3209" y="1901.8362" z="334.5842" h="83"/>
+						<spot x="892.3444" y="1888.2137" z="333.2596" h="113"/>
+						<spot x="889.4712" y="1881.4977" z="333.2596" h="113"/>
+						<spot x="789.1035" y="1900.9847" z="331.2943" h="113"/>
+						<spot x="786.6456" y="1895.6367" z="331.3633" h="113"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832085">
+						<spot x="859.6723" y="1649.7955" z="339.5091" h="83"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832086">
+						<spot x="879.1707" y="1938.1621" z="339.4828" h="83"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Hired Archer -->
+					<spawn npc_id="252359">
+						<spot x="881.3605" y="1899.0472" z="345.9400" h="83"/>
+						<spot x="890.8038" y="1894.8689" z="345.9486" h="83"/>
+						<spot x="894.4816" y="1951.8325" z="340.9345" h="90"/>
+						<spot x="859.9730" y="1965.0891" z="340.9930" h="65"/>
+					</spawn>
+					<!-- Elyos Hired Mage -->
+					<spawn npc_id="252360">
+						<spot x="859.1223" y="1910.2017" z="346.0646" h="51"/>
+						<spot x="852.4225" y="1913.1653" z="346.0663" h="111"/>
+						<spot x="905.6429" y="1956.9131" z="340.8502" h="103"/>
+						<spot x="856.2773" y="1978.5989" z="340.8479" h="55"/>
+					</spawn>
+					<!-- Elyos Hired Healer -->
+					<spawn npc_id="252361">
+						<spot x="867.7690" y="1939.0782" z="336.8147" h="83"/>
+					</spawn>
+					<!-- Elyos Hired Blade -->
+					<spawn npc_id="252362">
+						<spot x="871.2363" y="1933.5188" z="336.6573" h="83"/>
+						<spot x="861.2012" y="1938.0370" z="336.8032" h="83"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Hired Fighter -->
+					<spawn npc_id="252358">
+						<spot x="848.8162" y="1904.7040" z="334.6120" h="83"/>
+						<spot x="855.3209" y="1901.8362" z="334.5842" h="83"/>
+						<spot x="892.3444" y="1888.2137" z="333.2596" h="113"/>
+						<spot x="889.4712" y="1881.4977" z="333.2596" h="113"/>
+						<spot x="789.1035" y="1900.9847" z="331.2943" h="113"/>
+						<spot x="786.6456" y="1895.6367" z="331.3633" h="113"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832077">
+						<spot x="859.6723" y="1649.7955" z="339.5091" h="83"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Legion Aetheric Cannon -->
+					<spawn npc_id="832078">
+						<spot x="879.1707" y="1938.1621" z="339.4828" h="83"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+	</spawn_map>
+</spawns>

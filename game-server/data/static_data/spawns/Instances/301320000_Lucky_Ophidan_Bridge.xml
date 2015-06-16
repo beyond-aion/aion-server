@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301320000">
+		<!-- Bridge Blocker - not work
+		<spawn npc_id="701932">
+			<spot x="433.7735" y="496.4051" z="606.9036" h="1" static_id="156"/>
+		</spawn> -->
+		<!-- Balic Defense Wall -->
+		<spawn npc_id="231055">
+			<spot x="745.8776" y="470.2699" z="587.6208" h="18"/>
+			<spot x="638.6693" y="430.3680" z="605.9995" h="15" static_id="96"/>
+			<spot x="591.0219" y="422.2652" z="611.6361" h="15" static_id="92"/>
+		</spawn>
+		<!-- Barricade Sentinel -->
+		<spawn npc_id="231191">
+			<spot x="749.8644" y="476.2728" z="586.2487" h="15"/>
+		</spawn>
+		<!-- Guard Post Generator -->
+		<spawn npc_id="230413">
+			<spot x="666.7800" y="474.2100" z="601.1673" h="36" static_id="164"/>
+		</spawn>
+		<!-- Guard Post Generator -->
+		<spawn npc_id="230414">
+			<spot x="525.0189" y="427.7604" z="621.8206" h="15" static_id="160"/>
+		</spawn>
+		<!-- Guard Post Generator -->
+		<spawn npc_id="230415">
+			<spot x="603.0753" y="556.2319" z="592.16406" h="113" static_id="158"/>
+		</spawn>
+		<!-- Guard Post Generator -->
+		<spawn npc_id="230416">
+			<spot x="475.0108" y="523.1021" z="598.8186" h="12" static_id="162"/>
+		</spawn>
+		<!-- Defensive Barrier -->
+		<spawn npc_id="233320">
+			<spot x="753.21399" y="521.01813" z="578.1748" static_id="33"/>
+		</spawn>
+		<!-- Guard Post Magus -->
+		<spawn npc_id="231023">
+			<spot x="691.7036" y="484.0356" z="600.0588" h="100"/>
+			<spot x="682.7852" y="461.2883" z="599.7500"/>
+		</spawn>
+		<!-- Guard Post Scout -->
+		<spawn npc_id="231025">
+			<spot x="693.0908" y="477.4102" z="600.0590" h="100"/>
+			<spot x="688.8356" y="459.6501" z="600.0588"/>
+		</spawn>
+		<!-- Barricade Sentinel -->
+		<spawn npc_id="231192">
+			<spot x="756.0722" y="476.4153" z="586.1962" h="15"/>
+			<spot x="745.1936" y="480.6733" z="586.6174" h="15"/>
+			<spot x="753.1270" y="527.2225" z="576.4176" h="30"/>
+			<spot x="670.4318" y="522.0848" z="595.9419" h="106"/>
+			<spot x="663.0731" y="521.3013" z="594.4981" h="108"/>
+			<spot x="658.7286" y="515.7118" z="594.7202" h="110"/>
+			<spot x="644.0891" y="440.8285" z="605.3864" h="10"/>
+			<spot x="644.3687" y="433.2050" z="604.8242" h="13"/>
+			<spot x="651.1758" y="427.8394" z="605.2583" h="15"/>
+			<spot x="602.4557" y="410.9069" z="607.7069"/>
+			<spot x="596.7388" y="416.4162" z="610.7834"/>
+			<spot x="597.4832" y="424.6239" z="609.8725"/>
+			<spot x="534.9061" y="530.9432" z="605.0566"/>
+			<spot x="532.2374" y="538.6135" z="605.1547"/>
+			<spot x="532.0338" y="547.0760" z="605.2553"/>
+			<spot x="575.9747" y="559.7504" z="594.9178" h="6"/>
+			<spot x="569.5990" y="565.1993" z="597.1354" h="5"/>
+			<spot x="569.7122" y="573.5193" z="597.1970" h="116"/>
+			<spot x="673.2288" y="463.9098" z="599.6687"/>
+		</spawn>
+		<!-- Beritran Recon Raider
+		<spawn npc_id="231194">
+			<spot x="753.45612" y="532.78217" z="577.423"/>
+		</spawn> -->
+		<!-- Beritran Reserve Assassin -->
+		<spawn npc_id="233319">
+			<spot x="637.9295" y="539.89417" z="589.11395" h="107"/>
+		</spawn>
+		<!-- Beritran Reserve Combatant -->
+		<spawn npc_id="231188">
+            <spot x="448.65036" y="496.9676" z="601.30304" h="15"/>
+            <spot x="452.70447" y="493.12784" z="599.80835" h="15"/>
+            <spot x="539.0002" y="471.5864" z="616.77844" h="90"/>
+            <spot x="567.7505" y="574.9089" z="597.7286" h="110"/>
+            <spot x="719.36505" y="457.021" z="596.3612" h="60"/>
+            <spot x="719.63306" y="462.69928" z="595.4438" h="60"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmRetake_01 -->
+		<spawn npc_id="284761">
+			<spot x="679.10077" y="472.50681" z="599.6938"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmRetake_02 -->
+		<spawn npc_id="284762">
+			<spot x="531.31476" y="436.67841" z="620.25"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmRetake_03 -->
+		<spawn npc_id="284763">
+			<spot x="608.07983" y="556.16522" z="591.7343"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmRetake_04 -->
+		<spawn npc_id="284764">
+			<spot x="483.99963" y="531.0141" z="597.375"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmSupport_01 -->
+		<spawn npc_id="284708">
+			<spot x="719.36505" y="460.12894" z="595.6963" h="60"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmSupport_02 -->
+		<spawn npc_id="284709">
+			<spot x="559.59064" y="424.18433" z="617.7897" h="60"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmSupport_03 -->
+		<spawn npc_id="284710">
+			<spot x="641.93896" y="538.85529" z="589.38806" h="43"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC_SmSupport_04 -->
+		<spawn npc_id="284711">
+			<spot x="450.97543" y="496.16199" z="600.3026" h="15"/>
+		</spawn>
+		<!-- BIDF5_U1_NoShowNPC06_WatchFire -->
+		<spawn npc_id="284770">
+            <spot x="321.19965" y="510.2691" z="607.0973"/>
+            <spot x="323.38892" y="470.804" z="607.0993"/>
+            <spot x="338.6" y="491.01" z="607.473"/>
+            <spot x="354.55875" y="509.51575" z="605.76324"/>
+            <spot x="355.85678" y="471.8842" z="605.76324"/>
+		</spawn>
+		<!-- Defense Post Combatant Captain -->
+		<spawn npc_id="231043">
+			<spot x="479.8578" y="502.1386" z="597.5000" h="2"/>
+		</spawn>
+		<!-- Guard Post Gunner Captain -->
+		<spawn npc_id="231022">
+			<spot x="675.95465" y="472.73349" z="599.81445" h="113"/>
+		</spawn>
+		<!-- Guard Post Combatant -->
+		<spawn npc_id="231027">
+			<spot x="687.5056" y="478.9067" z="599.7500" h="100"/>
+			<spot x="682.9339" y="454.8744" z="600.0589" h="5"/>
+		</spawn>
+		<!-- Guard Post Magus -->
+		<spawn npc_id="231024">
+			<spot x="676.30524" y="484.26764" z="599.625" h="30"/>
+		</spawn>
+		<!-- IDF5_U1_NoShowNPC_SmAmbush -->
+		<spawn npc_id="233332">
+            <spot x="586.24" y="528.64" z="605.98"/>
+            <spot x="499.88284" y="541.43225" z="597.5" h="90"/>
+            <spot x="535.2431" y="544.3823" z="605.5" h="90"/>
+            <spot x="540.80853" y="483.13858" z="614.2658" h="90"/>
+            <spot x="555.8695" y="513.1462" z="609.7851" h="90"/>
+            <spot x="577.5638" y="424.5181" z="615.2068" h="90"/>
+            <spot x="582.5675" y="566.8148" z="593.06494" h="90"/>
+            <spot x="590.05" y="421.82" z="611.8625"/>
+            <spot x="602.42267" y="419.32968" z="608.5767" h="30"/>
+            <spot x="638.27405" y="544.8608" z="589.14215" h="90"/>
+            <spot x="672.47046" y="516.05023" z="596.43066" h="90"/>
+            <spot x="729.1" y="459.88" z="593.66376" h="30"/>
+		</spawn>
+		<!-- IDF5_U1_Transparent NPC_Check Boarding -->
+		<spawn npc_id="701648">
+			<spot x="760.39209" y="528.59869" z="576.86206"/>
+		</spawn>
+		<!-- IDF5_U1_Transparent NPC_Control All Conditions -->
+		<spawn npc_id="701645">
+			<spot x="438.52631" y="487.52994" z="604.1623"/>
+		</spawn>
+		<!-- IDF5_U1_Transparent NPC_Control Player -->
+		<spawn npc_id="701650">
+			<spot x="754.67993" y="501.2832" z="581.6344"/>
+		</spawn>
+		<!-- IDF5_U1_Transparent NPC_Control Start -->
+		<spawn npc_id="701643">
+			<spot x="754.17" y="555.36" z="573.02936"/>
+		</spawn>
+		<!-- IDF5_U1_Transparent NPC_Reset Level -->
+		<spawn npc_id="701642">
+			<spot x="750.76" y="502.65" z="581.415"/>
+		</spawn>
+		<!-- IDF5_U1_WallCtrl03 -->
+		<spawn npc_id="701934">
+			<spot x="749.80206" y="476.29382" z="586.244"/>
+		</spawn>
+		<!-- North Post Combatant -->
+		<spawn npc_id="231033">
+			<spot x="542.17731" y="444.07706" z="620.2452" h="67"/>
+		</spawn>
+		<!-- South Post Cavalry Captain -->
+		<spawn npc_id="231034">
+			<spot x="595.1768" y="550.0948" z="590.5515" h="55"/>
+		</spawn>
+		<!-- South Post Magus -->
+		<spawn npc_id="231037">
+			<spot x="592.0764" y="545.9568" z="590.6277" h="51"/>
+		</spawn>
+		<!-- Southern Approach Post Medic -->
+		<spawn npc_id="231041">
+			<spot x="607.8615" y="566.8472" z="590.5493"/>
+		</spawn>
+		<!-- Northern Approach Post Magus Captain -->
+		<spawn npc_id="231029">
+			<spot x="539.7549" y="441.2372" z="620.2500"/>
+		</spawn>
+		<!-- Northern Approach Post Combatant -->
+		<spawn npc_id="231032">
+			<spot x="525.7185" y="437.7919" z="620.2500" h="60"/>
+		</spawn>
+		<!-- Northern Approach Post Medic -->
+		<spawn npc_id="231030">
+			<spot x="519.9059" y="444.8347" z="620.1250"/>
+		</spawn>
+		<!-- Defense Post Drummer -->
+		<spawn npc_id="231048">
+			<spot x="501.4221" y="525.8579" z="597.5000"/>
+			<spot x="473.8362" y="505.9988" z="597.5000"/>
+			<spot x="464.4532" y="534.8255" z="597.9234"/>
+			<spot x="491.0567" y="550.7822" z="597.9235"/>
+		</spawn>
+		<!-- Defense Post Scout -->
+		<spawn npc_id="231044">
+			<spot x="501.3674" y="520.5580" z="597.5000"/>
+			<spot x="474.9356" y="500.4037" z="597.5000"/>
+			<spot x="484.8596" y="543.6282" z="597.5000"/>
+			<spot x="484.9585" y="549.5791" z="597.9235"/>
+			<spot x="461.7870" y="530.0419" z="597.9234"/>
+		</spawn>
+		<!-- Defense Post Combatant -->
+		<spawn npc_id="231046">
+			<spot x="496.1700" y="518.7544" z="597.5000"/>
+			<spot x="469.4076" y="498.6511" z="597.5000"/>
+			<spot x="464.7030" y="525.2158" z="597.5000"/>
+		</spawn>
+		<!-- Southern Approach Post Combatant -->
+		<spawn npc_id="231035">
+			<spot x="590.4158" y="553.6599" z="590.6250" h="50"/>
+			<spot x="617.5713" y="545.3123" z="590.6895"/>
+		</spawn>
+		<!-- Southern Approach Post Drummer -->
+		<spawn npc_id="231039">
+			<spot x="613.6081" y="549.3801" z="590.6250"/>
+		</spawn>
+		<!-- Beritran Support Combatant -->
+		<spawn npc_id="231184">
+			<spot x="536.8798" y="444.6791" z="620.2500" h="43"/>
+			<spot x="531.7712" y="439.7274" z="620.2376" h="38"/>
+			<spot x="533.4810" y="436.3347" z="620.2500" h="46"/>
+			<spot x="531.2727" y="430.5270" z="621.1494" h="63"/>
+			<spot x="522.6837" y="441.3993" z="620.2500" h="50"/>
+		</spawn>
+		<!-- Beritran Support Combatant -->
+		<spawn npc_id="231185">
+			<spot x="540.7522" y="449.4596" z="620.1250" h="24"/>
+			<spot x="521.3420" y="441.0850" z="620.2500" h="66"/>
+			<spot x="524.5197" y="437.3647" z="620.2500" h="79"/>
+			<spot x="527.9506" y="449.0700" z="620.3750" h="31"/>
+			<spot x="533.6871" y="450.2687" z="620.2500" h="27"/>
+		</spawn>
+		<!-- Surkana Defense Wall -->
+		<spawn npc_id="231056">
+			<spot x="653.9535" y="525.3965" z="596.9090" h="15" static_id="165"/>
+			<spot x="564.9367" y="558.1517" z="603.0162" h="15" static_id="102"/>
+			<spot x="524.7491" y="540.4728" z="606.8528" h="15" static_id="98"/>
+		</spawn>
+		<!-- Beritran Supply Box -->
+		<spawn npc_id="231058">
+			<spot x="621.5468" y="514.4356" z="592.3577" h="60" static_id="35"/>
+			<spot x="572.4695" y="476.9594" z="620.34247" h="100" static_id="36"/>
+			<spot x="582.9125" y="396.3757" z="603.4048" h="13" static_id="34"/>
+		</spawn>
+		<!-- Vera -->
+		<spawn npc_id="284689">
+            <spot x="527.8859" y="544.41754" z="604.4857"/>
+            <spot x="528.7177" y="438.36246" z="620.25"/>
+            <spot x="539.1515" y="477.79053" z="615.0"/>
+            <spot x="553.83344" y="551.77875" z="602.1199"/>
+            <spot x="556.7453" y="515.37213" z="609.2893"/>
+            <spot x="563.5518" y="422.09592" z="617.42505"/>
+            <spot x="567.399" y="568.4425" z="597.8128"/>
+            <spot x="623.5229" y="407.37372" z="609.77985"/>
+            <spot x="624.21466" y="425.71594" z="607.50867"/>
+            <spot x="649.90643" y="531.5234" z="591.8771"/>
+            <spot x="675.99756" y="505.26746" z="597.84125"/>
+            <spot x="716.4123" y="461.41483" z="595.97424"/>
+            <spot x="728.546" y="536.45526" z="577.03394"/>
+            <spot x="745.9216" y="564.5729" z="573.0098"/>
+            <spot x="750.49426" y="509.5145" z="580.34155"/>
+            <spot x="750.95776" y="492.09534" z="583.8624"/>
+            <spot x="754.92285" y="537.5637" z="575.07214"/>
+            <spot x="766.31555" y="584.27826" z="574.66583"/>
+            <spot x="767.6136" y="554.21985" z="572.98627"/>
+		</spawn>
+	</spawn_map>
+</spawns>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="320070000">
+		<!-- Skuld -->
+		<spawn npc_id="204264">
+			<spot x="245.815" y="248.099" z="125.837" h="51"/>
+		</spawn>
+	</spawn_map>
+</spawns>

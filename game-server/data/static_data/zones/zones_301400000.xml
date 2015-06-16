@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301400000" name="IDSWEEP_ITEMAREA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="19.280296" top="669.2803">
+            <point x="50.75171" y="52.958588"/>
+            <point x="663.76965" y="53.78894"/>
+            <point x="687.81323" y="983.4658"/>
+            <point x="13.51442" y="970.3185"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="IDSWEEP_WORLD_NOGLIDE" area_type="POLYGON" zone_type="LIMIT" flags="0">
+        <points bottom="14.314783" top="664.31476">
+            <point x="56.63315" y="44.098038"/>
+            <point x="688.28955" y="44.1604"/>
+            <point x="689.05994" y="996.5127"/>
+            <point x="23.871353" y="998.3125"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="INDINERK_JONAKAKS_SECRET_PASSAGE_301400000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="387.94833" top="447.94833">
+            <point x="516.1126" y="270.6416"/>
+            <point x="579.8753" y="270.50314"/>
+            <point x="578.08575" y="327.9214"/>
+            <point x="515.9703" y="327.59464"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="SUSPICIOUS_EVIDENCE_301400000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+        <points bottom="392.5134" top="452.5134">
+            <point x="518.2654" y="321.98044"/>
+            <point x="582.0281" y="321.84198"/>
+            <point x="582.399" y="440.38278"/>
+            <point x="518.2467" y="440.60184"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="THE_GOLDEN_GATEWAY_301400000" area_type="POLYGON" zone_type="SUB" priority="12" flags="0">
+        <points bottom="367.65793" top="427.65793">
+            <point x="483.54196" y="594.60486"/>
+            <point x="545.55524" y="655.0344"/>
+            <point x="501.77826" y="691.8493"/>
+            <point x="436.9232" y="642.3188"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="THE_GOLDEN_ROAD_301400000" area_type="POLYGON" zone_type="SUB" priority="13" flags="0">
+        <points bottom="368.09857" top="428.09857">
+            <point x="505.9554" y="434.52426"/>
+            <point x="585.5203" y="434.3627"/>
+            <point x="548.49347" y="664.43396"/>
+            <point x="486.8306" y="606.0704"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="THE_SHUGO_EMPERORS_SECRET_VAULT_301400000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
+        <points bottom="1.137445" top="651.13745">
+            <point x="-242.3527" y="119.66956"/>
+            <point x="387.7669" y="130.47314"/>
+            <point x="378.39795" y="1085.6637"/>
+            <point x="-274.96838" y="1069.8942"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="THE_SHUGO_EMPERORS_VAULT_301400000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
+        <points bottom="364.70807" top="444.70807">
+            <point x="119.07892" y="457.18646"/>
+            <point x="222.71045" y="457.667"/>
+            <point x="222.42978" y="569.6531"/>
+            <point x="118.79824" y="566.36584"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="TRILLIRUNERKS_PRIZED_COFFERS_1_301400000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
+        <points bottom="366.58975" top="446.58975">
+            <point x="123.21449" y="300.41708"/>
+            <point x="226.84601" y="300.89758"/>
+            <point x="226.56534" y="412.8837"/>
+            <point x="122.933815" y="409.59647"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="TRILLIRUNERKS_PRIZED_COFFERS_2_301400000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
+        <points bottom="364.80807" top="444.80807">
+            <point x="124.95336" y="154.10016"/>
+            <point x="228.58488" y="154.58067"/>
+            <point x="228.30421" y="266.56677"/>
+            <point x="124.67268" y="263.27954"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="TRILLIRUNERKS_PRIZED_COFFERS_301400000" area_type="POLYGON" zone_type="SUB" priority="11" flags="0">
+        <points bottom="338.5444" top="438.5444">
+            <point x="380.37933" y="580.3677"/>
+            <point x="516.4107" y="733.69836"/>
+            <point x="381.9339" y="875.5537"/>
+            <point x="231.11818" y="729.1356"/>
+        </points>
+    </zone>
+</zones>

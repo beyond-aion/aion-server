@@ -1,0 +1,8 @@
+ALTER TABLE account_data ADD COLUMN last_hdd_serial VARCHAR(100) DEFAULT NULL AFTER last_mac;
+
+CREATE TABLE `banned_hdd` (
+	`id` int(10) NOT NULL AUTO_INCREMENT,
+  `serial` varchar(100) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

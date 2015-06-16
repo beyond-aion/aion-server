@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			36015 [XML] A Taste for Adventure
+			36016 [XML] The Jeweled Box
+			36017 [XML] [Spy/Weekly] What a Beautiful Chest
+			36500 [XML] Redfur, Dead or Alive
+			36502 [XML] Going Shulack Hunting
+			36503 [XML] Aether He Goes or I Do
+			36504 [XML] The Avian Flew
+			36505 [XML] The Tainted Spirit
+			36506 [XML] Underground, Understand?
+			36508 [XML] No Time for Tricks
+			36509 [XML] Whip It Good
+			36510 [XML] Straighten Out the Twister
+			36511 [XML] Teaching a Scholar to Die
+			36512 [XML] Blackheart, Cold Hands
+			36514 [XML] Find, Kill, and Drink Ale
+			36515 [XML] Kill Orb Be Killed
+			36516 [XML] Releasing Bad Gas
+			36517 [XML] Killing Pride
+			36518 [XML] A Killer Hunts a Killer
+			36519 [XML] The Bowmaster Disaster
+			36520 [XML] Watching You Die
+			36521 [XML] Das Spidona
+			36522 [XML] The Drana Huffer
+			36523 [XML] A Part of Ricardo
+			36524 [XML] Reian, Reian, Go Away
+			36525 [XML] A Tall Tail
+			36526 [XML] Cut Up the Nightbutcher
+			36527 [XML] To Kill a Gryphu
+			36528 [XML] A Sticky Situation
+			38002 [SCRIPT] Fortuneers Call to Arms
+			38005 [XML] Fortuneers Call to Arms
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to start_npc_ids="203726" end_npc_ids="799840" id="38005"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="36015" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36016" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36017" start_npc_ids="799837 799838" end_npc_ids="799837 799838"/>
+	<item_collecting id="36503" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36509" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36515" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36520" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36522" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36524" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36525" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36527" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36528" start_npc_ids="0" end_npc_ids="799837 799838"/>
+	<item_collecting id="36519" start_npc_ids="799837 799838" end_npc_ids="799837 799838"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="36500" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="216604"/>
+	</monster_hunt>
+	<monster_hunt id="36502" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="216606"/>
+	</monster_hunt>
+	<monster_hunt id="36508" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="216612"/>
+	</monster_hunt>
+	<monster_hunt id="36514" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="216618"/>
+	</monster_hunt>
+	<monster_hunt id="36518" start_npc_ids="799837 799838" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="216622"/>
+	</monster_hunt>
+	<monster_hunt id="36521" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="217008"/>
+	</monster_hunt>
+	<monster_hunt id="36523" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="217074"/>
+	</monster_hunt>
+	<monster_hunt id="36526" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" npc_ids="217013"/>
+	</monster_hunt>
+	<kill_spawned id="36504" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700759" npc_ids="216608"/>
+	</kill_spawned>
+	<kill_spawned id="36505" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700760" npc_ids="216609"/>
+	</kill_spawned>
+	<kill_spawned id="36506" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="206134" npc_ids="216610"/>
+	</kill_spawned>
+	<kill_spawned id="36510" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700761" npc_ids="216614"/>
+	</kill_spawned>
+	<kill_spawned id="36511" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700762" npc_ids="216615"/>
+	</kill_spawned>
+	<kill_spawned id="36512" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="206136" npc_ids="216616"/>
+	</kill_spawned>
+	<kill_spawned id="36516" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700763" npc_ids="216620"/>
+	</kill_spawned>
+	<kill_spawned id="36517" start_npc_ids="0" end_npc_ids="799837 799838">
+		<monster var="0" end_var="1" spawner_object="700764" npc_ids="216621"/>
+	</kill_spawned>
+</quest_scripts>

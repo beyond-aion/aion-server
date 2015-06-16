@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			18400 [SCRIPT] The Vanishings
+			18401 [XML] Research and Destruction
+			18402 [SCRIPT] Rooting Out Corruption
+			18403 [XML] Dratamin! Foiled Again!
+			18404 [XML] Surkana-in-the-Box
+			18405 [SCRIPT] Memories, in the Corner of His Mind
+			18406 [SCRIPT] Playing to the Hilt
+			18407 [SCRIPT] Drakan Journalism
+			18408 [XML] A Nasty Breakup
+			18409 [SCRIPT] Tiamat's Power Unleashed
+			18410 [SCRIPT] Pursuing the Prisoners
+			18411 [XML] Heart of Drazma
+			18412 [UNUSED] Hidden Quest to Play Cut Scenes (Elyos)
+			18413 [UNUSED] Gambling Quest (Fair)
+			18414 [UNUSED] Gambling NPC's Secret
+			28400 [SCRIPT] Inspect the Inspectors
+			28401 [XML] [Group] R&D: Researcher and Destroy
+			28402 [SCRIPT] Saving Dalia
+			28403 [XML] Drata Me, Drata You
+			28404 [XML] Surkana Collector
+			28405 [SCRIPT] Kexkra's Past
+			28406 [SCRIPT] Finder's Fee
+			28407 [SCRIPT] The Gathering
+			28408 [XML] Getting the Gang Together
+			28409 [SCRIPT] Make the Blade Complete
+			28410 [SCRIPT] Fortress Unsecured
+			28411 [XML] Esoterrace Blockade
+			28412 [UNUSED] Hidden Quest to Play Cut Scenes (Asmodian)
+			28413 [UNUSED] Gambling Quest (Fair)
+			28414 [UNUSED] Gambling NPC's Secret
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="18403" start_npc_ids="799586"/>
+	<item_collecting id="18404" start_npc_ids="799586"/>
+	<item_collecting id="18408" start_npc_ids="799553"/>
+	<item_collecting id="18411" start_npc_ids="799586"/>
+	<item_collecting id="28403" start_npc_ids="799589"/>
+	<item_collecting id="28404" start_npc_ids="799589"/>
+	<item_collecting id="28408" start_npc_ids="799558"/>
+	<item_collecting id="28411" start_npc_ids="799589"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="18401" start_npc_ids="799553">
+		<monster var="0" end_var="20" npc_ids="217202 217200 217228 217203 217201"/>
+	</monster_hunt>
+	<monster_hunt id="28401" start_npc_ids="799558">
+		<monster var="0" end_var="20" npc_ids="217202 217200 217228 217203 217201"/>
+	</monster_hunt>
+</quest_scripts>

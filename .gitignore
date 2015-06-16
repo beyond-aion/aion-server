@@ -1,0 +1,6 @@
+commons/target/
+chat-server/target/
+game-server/target/
+login-server/target/
+game-server/dist/StartGS.bat
+game-server/dist/StartGS.sh

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="110070000">
+		<!-- Crucible Guard -->
+		<spawn npc_id="799633" respawn_time="295">
+			<spot x="495.8050" y="217.4153" z="127.2953" h="30"/>
+			<spot x="513.9690" y="217.4179" z="127.2954" h="30"/>
+			<spot x="568.3924" y="240.6126" z="127.2458" h="15"/>
+			<spot x="574.3513" y="269.5636" z="127.2458" h="106"/>
+			<spot x="569.0079" y="264.2847" z="127.2457" h="106"/>
+			<spot x="573.1162" y="235.9949" z="127.2457" h="15"/>
+			<spot x="596.4377" y="235.8395" z="127.2458" h="43"/>
+			<spot x="601.4633" y="240.9161" z="127.2457" h="46"/>
+			<spot x="600.5625" y="264.3542" z="127.2458" h="76"/>
+			<spot x="595.3439" y="269.6938" z="127.2458" h="76"/>
+		</spawn>
+		<!-- Crucible Guard -->
+		<spawn npc_id="799632" respawn_time="295">
+			<spot x="488.8033" y="217.3897" z="127.2954" h="30"/>
+			<spot x="506.9673" y="217.3922" z="127.2953" h="30"/>
+		</spawn>
+		<!-- Crucible Challenge Entrance -->
+		<spawn npc_id="730461" respawn_time="295">
+			<spot x="492.1418" y="215.5870" z="127.3605" static_id="15"/>
+		</spawn>
+		<!-- Empyrean Crucible Entrance -->
+		<spawn npc_id="730430" respawn_time="295">
+			<spot x="511.5854" y="215.7292" z="127.3605" static_id="1"/>
+		</spawn>
+		<!-- Adel -->
+		<spawn npc_id="205319" respawn_time="295">
+			<spot x="525.7344" y="222.6236" z="126.9759" h="55"/>
+		</spawn>
+		<!-- Rakwis -->
+		<spawn npc_id="205318" respawn_time="295">
+			<spot x="522.2515" y="220.8994" z="126.9759" h="40"/>
+		</spawn>
+		<!-- Giniki -->
+		<spawn npc_id="800500" respawn_time="295">
+			<spot x="448.2374" y="234.6875" z="126.9716" h="30"/>
+		</spawn>
+		<!-- Balaurea Teleporter -->
+		<spawn npc_id="730425" respawn_time="295">
+			<spot x="459.8366" y="251.7952" z="127.1336" static_id="1601"/>
+		</spawn>
+		<!-- Radaman -->
+		<spawn npc_id="800501" respawn_time="295">
+			<spot x="456.6981" y="234.6875" z="126.9716" h="30"/>
+		</spawn>
+		<!-- Perbano -->
+		<spawn npc_id="205315" respawn_time="295">
+			<spot x="483.3091" y="251.0723" z="126.9759" h="60"/>
+		</spawn>
+		<!-- Molfus -->
+		<spawn npc_id="205309" respawn_time="295">
+			<spot x="492.0916" y="251.6501" z="127.0083" h="74"/>
+		</spawn>
+		<!-- Helbe -->
+		<spawn npc_id="205317" respawn_time="295">
+			<spot x="524.1465" y="227.7649" z="126.9759" h="96"/>
+		</spawn>
+		<!-- Sanctum Teleport Statue -->
+		<spawn npc_id="730424" respawn_time="295">
+			<spot x="443.8786" y="258.6037" z="126.9717" static_id="328"/>
+		</spawn>
+		<!-- Barius -->
+		<spawn npc_id="205456" respawn_time="295">
+			<spot x="476.9819" y="271.4279" z="126.9759" h="90"/>
+		</spawn>
+		<!-- Inggril -->
+		<spawn npc_id="205316" respawn_time="295">
+			<spot x="479.4092" y="279.1825" z="127.5146" h="90"/>
+		</spawn>
+		<!-- Junos -->
+		<spawn npc_id="205985" respawn_time="295">
+			<spot x="529.3794" y="256.7786" z="127.2954" h="60"/>
+		</spawn>
+		<!-- Romonia -->
+		<spawn npc_id="205444" respawn_time="295">
+			<spot x="455.8229" y="309.6884" z="126.0967" h="30"/>
+		</spawn>
+		<!-- Modaro -->
+		<spawn npc_id="205443" respawn_time="295">
+			<spot x="440.4519" y="325.1010" z="126.0967"/>
+		</spawn>
+		<!-- Adinale -->
+		<spawn npc_id="205451" respawn_time="295">
+			<spot x="455.7056" y="340.2245" z="126.0967" h="93"/>
+		</spawn>
+		<!-- Liyre -->
+		<spawn npc_id="207021" respawn_time="295">
+			<spot x="548.8219" y="246.9210" z="127.2859" h="39"/>
+		</spawn>
+		<!-- Scobi -->
+		<spawn npc_id="207019" respawn_time="295">
+			<spot x="547.0708" y="246.9445" z="127.2859" h="30"/>
+		</spawn>
+		<!-- Marre -->
+		<spawn npc_id="207020" respawn_time="295">
+			<spot x="547.0790" y="259.1005" z="127.2859" h="90"/>
+		</spawn>
+		<!-- Marion -->
+		<spawn npc_id="207022" respawn_time="295">
+			<spot x="548.8115" y="259.0627" z="127.2859" h="90"/>
+		</spawn>
+		<!-- Arena Of Harmony Gate -->
+		<spawn npc_id="730576" respawn_time="295">
+			<spot x="571.3831" y="267.3938" z="127.2460" static_id="36"/>
+		</spawn>
+		<!-- Polus -->
+		<spawn npc_id="205489" respawn_time="295">
+			<spot x="553.5189" y="309.5859" z="126.0967" h="30"/>
+		</spawn>
+		<!-- Tyri -->
+		<spawn npc_id="207023" respawn_time="295">
+			<spot x="559.8903" y="314.4474" z="126.0967" h="43"/>
+		</spawn>
+		<!-- Jailos -->
+		<spawn npc_id="205488" respawn_time="295">
+			<spot x="550.9680" y="309.5895" z="126.0967" h="30"/>
+		</spawn>
+		<!-- Forde -->
+		<spawn npc_id="207024" respawn_time="295">
+			<spot x="558.5809" y="314.0392" z="126.0967" h="45"/>
+		</spawn>
+		<!-- Arena Of Glory Gate -->
+		<spawn npc_id="730644" respawn_time="295">
+			<spot x="570.1114" y="237.7756" z="127.3317" static_id="77"/>
+		</spawn>
+		<!-- Ambos -->
+		<spawn npc_id="207095" respawn_time="295">
+			<spot x="604.7497" y="254.3211" z="126.9815" h="60"/>
+		</spawn>
+		<!-- Poria -->
+		<spawn npc_id="207092" respawn_time="295">
+			<spot x="604.7415" y="252.9782" z="126.9815" h="60"/>
+		</spawn>
+		<!-- Arena Of Discipline Gate -->
+		<spawn npc_id="730483" respawn_time="295">
+			<spot x="599.4021" y="237.4411" z="127.3400" static_id="31"/>
+		</spawn>
+		<!-- Valdia -->
+		<spawn npc_id="207121" respawn_time="295">
+			<spot x="604.7266" y="251.5166" z="126.9815" h="60"/>
+		</spawn>
+		<!-- Moeris -->
+		<spawn npc_id="207125" respawn_time="295">
+			<spot x="604.7266" y="250.1247" z="126.9815" h="60"/>
+		</spawn>
+		<!-- Arena Of Chaos Gate -->
+		<spawn npc_id="730481" respawn_time="295">
+			<spot x="599.1415" y="266.1252" z="127.2459" static_id="17"/>
+		</spawn>
+		<!-- Sutien -->
+		<spawn npc_id="207031" respawn_time="295">
+			<spot x="567.4857" y="324.9264" z="126.0967" h="60"/>
+		</spawn>
+		<!-- Kirroy -->
+		<spawn npc_id="205311" respawn_time="295">
+			<spot x="567.4394" y="326.5379" z="126.0967" h="60"/>
+		</spawn>
+		<!-- Howkis -->
+		<spawn npc_id="205310" respawn_time="295">
+			<spot x="567.4409" y="323.2314" z="126.0967" h="60"/>
+		</spawn>
+		<!-- Monilou -->
+		<spawn npc_id="205313" respawn_time="295">
+			<spot x="553.6301" y="340.1852" z="126.0967" h="90"/>
+		</spawn>
+		<!-- Tanato -->
+		<spawn npc_id="205312" respawn_time="295">
+			<spot x="550.9684" y="340.1774" z="126.0967" h="90"/>
+		</spawn>
+		<!-- Tisiphone -->
+		<spawn npc_id="802437" respawn_time="295">
+			<spot x="499.5055" y="411.4880" z="126.7896" h="90"/>
+		</spawn>
+		<!-- Keraunos -->
+		<spawn npc_id="802438" respawn_time="295">
+			<spot x="508.7759" y="415.6152" z="126.7896" h="45"/>
+		</spawn>
+		<!-- Iriana -->
+		<spawn npc_id="798715" respawn_time="295">
+			<spot x="509.3528" y="401.2412" z="126.7896" h="78" />
+		</spawn>
+		<!-- Hall Guard -->
+		<spawn npc_id="702556" respawn_time="295">
+			<spot x="509.3723" y="390.7197" z="126.7896" h="60" />
+		</spawn>
+		<!-- Millen -->
+		<spawn npc_id="798714" respawn_time="295">
+			<spot x="515.2087" y="431.9506" z="130.7629" h="36" />
+		</spawn>
+		<!-- Kilix -->
+		<spawn npc_id="802216" respawn_time="295">
+			<spot x="517.0146" y="435.0202" z="130.7615" h="36" />
+		</spawn>
+		<!-- Hall Guard -->
+		<spawn npc_id="702558" respawn_time="295">
+			<spot x="518.1172" y="438.6016" z="130.761" h="36" />
+		</spawn>
+		<!-- Adrass -->
+		<spawn npc_id="798514" respawn_time="295">
+			<spot x="482.4257" y="392.8741" z="126.7896" />
+		</spawn>
+		<!-- Perna -->
+		<spawn npc_id="798515" respawn_time="295">
+			<spot x="482.4258" y="394.5887" z="126.7895" />
+		</spawn>
+		<!-- Kyra -->
+		<spawn npc_id="802215" respawn_time="295">
+			<spot x="509.3528" y="397.7412" z="126.7896" h="60" />
+		</spawn>
+		<!-- Agaron -->
+		<spawn npc_id="804184" respawn_time="295">
+			<spot x="509.3464" y="394.2197" z="126.7896" h="60" />
+		</spawn>
+		<!-- Chthonios -->
+		<spawn npc_id="804186" respawn_time="295">
+			<spot x="497.8528" y="401.2412" z="126.7895" />
+		</spawn>
+		<!-- Athea -->
+		<spawn npc_id="804185" respawn_time="295">
+			<spot x="497.857" y="397.7197" z="126.7895" />
+		</spawn>
+		<!-- Hypsitos -->
+		<spawn npc_id="804674" respawn_time="295">
+			<spot x="497.8723" y="394.2197" z="126.7895" />
+		</spawn>
+		<!-- Allea -->
+		<spawn npc_id="804673" respawn_time="295">
+			<spot x="497.8723" y="390.7197" z="126.7896" />
+		</spawn>
+		<!-- Pythagoras -->
+		<spawn npc_id="804596" respawn_time="295">
+			<spot x="489.848" y="435.0494" z="130.7632" h="23" />
+		</spawn>
+		<!-- Artemis -->
+		<spawn npc_id="804187" respawn_time="295">
+			<spot x="489.1157" y="438.5985" z="130.7628" h="23" />
+		</spawn>
+		<!-- Millen -->
+		<spawn npc_id="802213" respawn_time="295">
+			<spot x="491.6286" y="431.9392" z="130.7634" h="23" />
+		</spawn>
+		<!-- Cadmar -->
+		<spawn npc_id="802540" respawn_time="295">
+			<spot x="494.658" y="409.1099" z="126.7896" h="90" />
+		</spawn>
+		<!-- Allona -->
+		<spawn npc_id="802541" respawn_time="295">
+			<spot x="512.7709" y="409.0675" z="126.7896" h="90" />
+		</spawn>
+		<!-- Adrass -->
+		<spawn npc_id="798514" respawn_time="295">
+			<spot x="482.4257" y="392.8741" z="126.7896" />
+		</spawn>
+		<!-- Perna -->
+		<spawn npc_id="798515" respawn_time="295">
+			<spot x="482.4258" y="394.5887" z="126.7895" />
+		</spawn>
+	</spawn_map>
+</spawns>

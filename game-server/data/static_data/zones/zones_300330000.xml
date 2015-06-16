@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300330000" name="IDLDF4A_ITEMUSEAREA_Q14071" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+        <points bottom="116.44297" top="166.44296">
+            <point x="242.48143" y="235.46689"/>
+            <point x="239.84064" y="239.30362"/>
+            <point x="238.38852" y="243.10521"/>
+            <point x="238.43816" y="247.48491"/>
+            <point x="239.83571" y="251.2492"/>
+            <point x="242.66628" y="254.87715"/>
+            <point x="246.80081" y="256.82214"/>
+            <point x="250.17484" y="257.76773"/>
+            <point x="254.27081" y="256.87137"/>
+            <point x="258.22122" y="254.66382"/>
+            <point x="260.68634" y="251.64272"/>
+            <point x="262.42395" y="247.15144"/>
+            <point x="262.45944" y="243.2508"/>
+            <point x="260.85873" y="238.99919"/>
+            <point x="258.56897" y="236.11873"/>
+            <point x="254.79683" y="234.0808"/>
+            <point x="250.35214" y="233.17862"/>
+            <point x="246.15459" y="233.83131"/>
+        </points>
+    </zone>
+    <zone mapid="300330000" name="IDLDF4A_ITEMUSEAREA_Q14095" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+        <points bottom="116.44297" top="166.44296">
+            <point x="245.9266" y="245.01283"/>
+            <point x="246.02083" y="249.42555"/>
+            <point x="248.62474" y="251.5294"/>
+            <point x="252.19699" y="251.68205"/>
+            <point x="254.63354" y="249.98625"/>
+            <point x="254.64398" y="245.3961"/>
+            <point x="252.17598" y="243.44716"/>
+            <point x="248.67229" y="243.40605"/>
+        </points>
+    </zone>
+</zones>

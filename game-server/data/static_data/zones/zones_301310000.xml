@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301310000" name="BLOOD_GROUNDS_301310000" area_type="POLYGON" zone_type="SUB" priority="12" flags="0">
+        <points bottom="70.86074" top="170.86075">
+            <point x="233.15758" y="222.39568"/>
+            <point x="227.37436" y="224.74605"/>
+            <point x="225.57462" y="254.82803"/>
+            <point x="225.08443" y="263.49957"/>
+            <point x="228.13461" y="278.2576"/>
+            <point x="235.01338" y="291.79156"/>
+            <point x="248.70169" y="300.24435"/>
+            <point x="266.4459" y="306.71466"/>
+            <point x="295.96454" y="299.3437"/>
+            <point x="301.02893" y="293.30307"/>
+            <point x="303.19208" y="277.2829"/>
+            <point x="301.3942" y="263.11545"/>
+            <point x="302.44476" y="246.65126"/>
+            <point x="295.67953" y="227.65271"/>
+            <point x="279.03494" y="220.37476"/>
+            <point x="262.7251" y="217.5263"/>
+            <point x="250.9178" y="219.70435"/>
+        </points>
+    </zone>
+    <zone mapid="301310000" name="PATH_OF_WAR_301310000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+        <points bottom="71.23212" top="171.23212">
+            <point x="256.80444" y="196.23024"/>
+            <point x="254.79854" y="201.05812"/>
+            <point x="235.21259" y="220.38509"/>
+            <point x="224.21019" y="232.70456"/>
+            <point x="225.37384" y="254.407"/>
+            <point x="224.84534" y="263.9296"/>
+            <point x="222.78122" y="270.87735"/>
+            <point x="194.00818" y="271.9863"/>
+            <point x="195.11296" y="236.18237"/>
+            <point x="199.94743" y="221.05338"/>
+            <point x="172.33347" y="213.19278"/>
+            <point x="201.72182" y="165.50739"/>
+            <point x="224.83617" y="187.58063"/>
+            <point x="238.12239" y="169.67662"/>
+            <point x="258.1743" y="189.26868"/>
+        </points>
+    </zone>
+    <zone mapid="301310000" name="SOLDIERS_PASS_301310000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+        <points bottom="71.23212" top="171.23212">
+            <point x="274.5" y="316.81342"/>
+            <point x="278.74063" y="310.55832"/>
+            <point x="295.47745" y="296.19742"/>
+            <point x="303.15256" y="263.09036"/>
+            <point x="304.07294" y="254.56464"/>
+            <point x="304.64215" y="244.60793"/>
+            <point x="338.53638" y="240.24309"/>
+            <point x="332.65707" y="286.55127"/>
+            <point x="367.65945" y="302.11685"/>
+            <point x="330.22888" y="354.2405"/>
+            <point x="292.63257" y="349.4594"/>
+            <point x="275.64487" y="330.71835"/>
+            <point x="273.48978" y="324.4526"/>
+        </points>
+    </zone>
+    <zone mapid="301310000" name="THE_KILN_301310000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="71.13212" top="171.13211">
+            <point x="258.44775" y="366.98315"/>
+            <point x="246.63007" y="337.93774"/>
+            <point x="254.43527" y="325.95923"/>
+            <point x="268.4283" y="327.47568"/>
+            <point x="273.8747" y="330.9629"/>
+            <point x="292.13858" y="350.30765"/>
+            <point x="280.96997" y="376.1566"/>
+        </points>
+    </zone>
+    <zone mapid="301310000" name="WAR_ROOM_301310000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="71.13212" top="171.13211">
+            <point x="258.15573" y="188.53374"/>
+            <point x="238.90198" y="168.88733"/>
+            <point x="262.10266" y="149.17879"/>
+            <point x="284.00616" y="175.80283"/>
+            <point x="272.19016" y="190.11823"/>
+            <point x="266.43777" y="191.21239"/>
+        </points>
+    </zone>
+</zones>

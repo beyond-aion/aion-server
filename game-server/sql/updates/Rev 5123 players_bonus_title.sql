@@ -1,0 +1,1 @@
+ALTER TABLE `players` ADD COLUMN `bonus_title_id` int(3) NOT NULL DEFAULT '-1' AFTER `title_id`;

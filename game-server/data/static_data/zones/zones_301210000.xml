@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301210000" name="BRIDGE_WATCHPOST_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="572.2491" top="672.2491">
+            <point x="478.42157" y="515.84155"/>
+            <point x="493.16483" y="507.62778"/>
+            <point x="510.90338" y="513.79034"/>
+            <point x="519.73615" y="527.6997"/>
+            <point x="519.07263" y="558.3982"/>
+            <point x="487.81165" y="564.856"/>
+            <point x="469.87964" y="553.9892"/>
+            <point x="466.15872" y="530.67645"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="CHOKEPOINT_DEFENSE_POST_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="569.7392" top="669.7392">
+            <point x="642.1741" y="458.06958"/>
+            <point x="673.92645" y="440.64374"/>
+            <point x="705.0208" y="447.33893"/>
+            <point x="716.07367" y="484.56705"/>
+            <point x="686.8018" y="508.333"/>
+            <point x="657.8986" y="502.0044"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="ENGULFED_OPHIDAN_BRIDGE_301210000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
+        <points bottom="481.84906" top="781.84906">
+            <point x="238.31024" y="305.57416"/>
+            <point x="829.20886" y="290.90622"/>
+            <point x="822.2838" y="638.48596"/>
+            <point x="235.39577" y="641.6328"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="478.2479" top="778.24786">
+            <point x="235.38264" y="641.6372"/>
+            <point x="243.38167" y="332.39078"/>
+            <point x="823.73804" y="295.23404"/>
+            <point x="817.88696" y="638.008"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_LOSE" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="478.2479" top="778.24786">
+            <point x="239.03528" y="640.3707"/>
+            <point x="247.0343" y="331.1243"/>
+            <point x="827.3907" y="293.96756"/>
+            <point x="821.5396" y="636.7415"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="NORTHERN_APPROACH_POST_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="591.2792" top="691.2792">
+            <point x="505.1086" y="424.5223"/>
+            <point x="521.36035" y="409.7869"/>
+            <point x="552.1391" y="413.1957"/>
+            <point x="556.1984" y="433.43707"/>
+            <point x="548.55853" y="464.24564"/>
+            <point x="525.46716" y="467.86493"/>
+            <point x="505.62073" y="454.31863"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="NORTHERN_REARGUARD_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="579.2922" top="679.2922">
+            <point x="304.78333" y="434.81427"/>
+            <point x="356.94058" y="449.38766"/>
+            <point x="367.5496" y="475.52548"/>
+            <point x="367.57785" y="510.13812"/>
+            <point x="356.57065" y="530.95807"/>
+            <point x="307.73026" y="544.6113"/>
+            <point x="285.25342" y="520.0998"/>
+            <point x="286.17673" y="457.51843"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="SOUTHERN_APPROACH_POST_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="555.33856" top="655.33856">
+            <point x="575.3541" y="549.30206"/>
+            <point x="586.6293" y="543.5332"/>
+            <point x="596.10736" y="536.4535"/>
+            <point x="614.5791" y="535.13416"/>
+            <point x="633.4921" y="537.22766"/>
+            <point x="641.25165" y="556.77765"/>
+            <point x="628.1894" y="573.3366"/>
+            <point x="612.4274" y="582.60767"/>
+            <point x="587.8476" y="578.64233"/>
+        </points>
+    </zone>
+    <zone mapid="301210000" name="SOUTHERN_REARGUARD_301210000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="531.6173" top="631.6173">
+            <point x="778.39056" y="507.357"/>
+            <point x="731.45514" y="513.96655"/>
+            <point x="705.0993" y="554.4496"/>
+            <point x="717.99" y="609.36707"/>
+            <point x="804.06067" y="604.12964"/>
+            <point x="822.5365" y="569.5513"/>
+            <point x="807.71967" y="519.29675"/>
+        </points>
+    </zone>
+</zones>

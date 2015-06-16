@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			80585 [XML] A Luckier Fight
+			80586 [TODO] Crystals Bring Luck
+			80587 [XML] Find the Journal
+			80588 [TODO] Enter with Luck
+			80589 [XML] A Vicarious Memento
+			80590 [XML] New Cave, New Luck
+			80591 [TODO] Lucky Entry
+			80592 [XML] The Lost Journal
+			80593 [TODO] Into the Reliquary
+			80594 [XML] Memento Mauling
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="80585" start_npc_ids="832267"/>
+	<item_collecting id="80587" start_npc_ids="832267"/>
+	<item_collecting id="80589" start_npc_ids="832267"/>
+	<item_collecting id="80590" start_npc_ids="832267"/>
+	<item_collecting id="80592" start_npc_ids="832267"/>
+	<item_collecting id="80594" start_npc_ids="832267"/>
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300540000">
+		<!-- Vivinite -->
+		<spawn npc_id="400264" respawn_time="230">
+			<spot x="649.60004" y="627.0412" z="190.34866"/>
+			<spot x="676.14178" y="644.81213" z="201.90752" h="40"/>
+			<spot x="692.13165" y="641.19482" z="204.81216" h="27"/>
+			<spot x="699.55042" y="690.80084" z="203.18326" h="2"/>
+			<spot x="702.73596" y="668.70129" z="206.57002"/>
+			<spot x="706.67865" y="697.47046" z="200.11401" h="10"/>
+		</spawn>
+		<!-- Vivinari -->
+		<spawn npc_id="400465" respawn_time="230">
+			<spot x="361.34457" y="393.96866" z="226.60843" h="23"/>
+			<spot x="361.42459" y="378.72409" z="225.4488" h="30"/>
+			<spot x="375.98892" y="337.61179" z="227.7253"/>
+			<spot x="379.22412" y="354.69556" z="226.73273" h="23"/>
+			<spot x="401.09631" y="310.0134" z="231.35165" h="45"/>
+			<spot x="422.47861" y="309.98969" z="235.0585" h="60"/>
+		</spawn>
+		<!-- Vivinari -->
+		<spawn npc_id="401118" respawn_time="230">
+			<spot x="372.36194" y="372.96191" z="225.94592" h="90"/>
+		</spawn>
+		<!-- Vivinite -->
+		<spawn npc_id="401119" respawn_time="230">
+			<spot x="702.90332" y="682.36603" z="205.49097" h="94"/>
+		</spawn>
+	</spawn_map>
+</spawns>

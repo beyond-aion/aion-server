@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300500000" name="EXTRADIMENSIONAL_VOID_300500000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="100.0" top="200.0">
+            <point x="200.0" y="195.0"/>
+            <point x="200.0" y="295.0"/>
+            <point x="300.0" y="295.0"/>
+            <point x="300.0" y="195.0"/>
+        </points>
+    </zone>
+</zones>

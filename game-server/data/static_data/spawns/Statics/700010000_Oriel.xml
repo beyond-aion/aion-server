@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="700010000">
+		<!-- Loom of Concentration -->
+		<spawn npc_id="150000030" handler="STATIC">
+			<spot x="1325.385" y="1781.909" z="101.249" static_id="1839"/>
+			<spot x="1325.849" y="1786.782" z="101.235" static_id="1849"/>
+		</spawn>
+		<!-- Loom -->
+		<spawn npc_id="150000015" handler="STATIC">
+			<spot x="1323.189" y="1761.000" z="101.214" static_id="1843"/>
+			<spot x="1323.933" y="1766.277" z="101.205" static_id="1841"/>
+		</spawn>
+		<!-- Alchemist's Table of Concentration -->
+		<spawn npc_id="150000029" handler="STATIC">
+			<spot x="1381.412" y="1771.276" z="101.524" static_id="1829"/>
+			<spot x="1379.742" y="1776.880" z="101.558" static_id="1582"/>
+		</spawn>
+		<!--Alchemist's Table -->
+		<spawn npc_id="150000013" handler="STATIC">
+			<spot x="1386.846" y="1750.614" z="101.566" static_id="1779"/>
+			<spot x="1385.345" y="1756.413" z="101.553" static_id="1837"/>
+		</spawn>
+		<!-- Dresser of Concentration -->
+		<spawn npc_id="150000025" handler="STATIC">
+			<spot x="1421.602" y="1807.371" z="101.222" static_id="1832"/>
+			<spot x="1422.757" y="1801.297" z="101.219" static_id="1851"/>
+		</spawn>
+		<!-- Oven -->
+		<spawn npc_id="150000009" handler="STATIC">
+			<spot x="1418.862" y="1822.505" z="101.228" static_id="1833"/>
+			<spot x="1417.748" y="1828.397" z="101.224" static_id="1856"/>
+		</spawn>
+		<!-- Craft Table of Concentration -->
+		<spawn npc_id="150000026" handler="STATIC">
+			<spot x="1383.042" y="1879.046" z="100.988" static_id="1840"/>
+			<spot x="1387.780" y="1882.662" z="100.990" static_id="1835"/>
+		</spawn>
+		<!-- Armor Forge -->
+		<spawn npc_id="150000010" handler="STATIC">
+			<spot x="1405.968" y="1896.308" z="100.993" static_id="1850"/>
+			<spot x="1401.201" y="1892.788" z="100.992" static_id="1847"/>
+		</spawn>
+		<!-- Weapon Forge of Concentration -->
+		<spawn npc_id="150000027" handler="STATIC">
+			<spot x="1419.609" y="1919.318" z="100.989" static_id="1830"/>
+			<spot x="1418.271" y="1924.531" z="100.989" static_id="1834"/>
+		</spawn>
+		<!-- Handicrafting Shelf of Concentration -->
+		<spawn npc_id="150000028" handler="STATIC">
+			<spot x="1363.949" y="1951.569" z="101.298" static_id="1855"/>
+			<spot x="1363.493" y="1956.780" z="101.293" static_id="1844"/>
+		</spawn>
+		<!-- Weapon Forge -->
+		<spawn npc_id="150000011" handler="STATIC">
+			<spot x="1414.060" y="1940.103" z="100.994" static_id="1845"/>
+			<spot x="1412.859" y="1945.035" z="100.977" static_id="1838"/>
+		</spawn>
+		<!-- Workbench -->
+		<spawn npc_id="150000012" handler="STATIC">
+			<spot x="1361.224" y="1977.816" z="101.290" static_id="1842"/>
+			<spot x="1361.656" y="1972.245" z="101.294" static_id="1831"/>
+		</spawn>
+		<!-- Construction Bench of Concentration -->
+		<spawn npc_id="150000031" handler="STATIC">
+			<spot x="1332.457" y="1994.988" z="101.356" static_id="1846"/>
+			<spot x="1338.361" y="1995.915" z="101.364" static_id="1836"/>
+		</spawn>
+		<!-- Construction Bench -->
+		<spawn npc_id="150000023" handler="STATIC">
+			<spot x="1312.126" y="1991.612" z="101.360" static_id="1854"/>
+			<spot x="1317.314" y="1992.644" z="101.364" static_id="1848"/>
+		</spawn>
+	</spawn_map>
+</spawns>

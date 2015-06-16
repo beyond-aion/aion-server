@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300380000">
+		<!-- Empress Muada -->
+		<spawn npc_id="218782">
+			<spot x="526.86694" y="517.73578" z="105.48243" h="45"/>
+		</spawn>
+		<!-- LDF4a_SandWarm_Monarch_forACT -->
+		<spawn npc_id="282969">
+			<spot x="523.000" y="541.000" z="106.000"/>
+		</spawn>
+		<!-- Muada's Trencher Exit -->
+		<spawn npc_id="730497">
+			<spot x="457.428" y="634.999" z="125.872" h="88"/>
+		</spawn>
+	</spawn_map>
+</spawns>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+<!--
+  [BEGIN] SUMMARY
+			12030 [XML] DRAKINT: Crystal Map
+			12031 [SCRIPT] A Path Uncertain
+			12032 [XML] De-Orb It
+			12033 [XML] [Daily] Cannon Aid
+			12034 [XML] [Service/Daily/Group] Legionary's Rings
+			12035 [XML] [Group] Eye Spy, Time to Die
+			12036 [XML] [Service/Daily] Outer Ring Patrol
+			12037 [XML] [Service] Puncture the Protectorate
+			22030 [XML] Mapping the Battlefield
+			22031 [SCRIPT] A Secret Passage
+			22032 [XML] [Group] Orb It All
+			22033 [XML] [Daily] Cannon Fires
+			22034 [XML] [Service/Daily/Group] Crack Drak, Bring Ring
+			22035 [XML] [Group] Eye Spy
+			22036 [XML] [Service/Daily] Protectorate Extinguishment
+			22037 [XML] [Group] Antsy Assassinations
+			24090 [SCRIPT] Footsteps of the Past
+			24091 [SCRIPT] Unending Mission
+		[END] SUMMARY
+-->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="12030" start_npc_ids="205888" end_npc_ids="205957"/>
+	<item_collecting id="12034" start_npc_ids="205957"/>
+	<item_collecting id="22030" start_npc_ids="205887" end_npc_ids="205959"/>
+	<item_collecting id="22034" start_npc_ids="205959"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="12032" start_npc_ids="205958">
+		<monster var="0" end_var="10" npc_ids="701413"/>
+	</monster_hunt>
+	<monster_hunt id="12033" start_npc_ids="205958">
+		<monster var="0" end_var="3" npc_ids="218920"/>
+	</monster_hunt>
+	<monster_hunt id="12035" start_npc_ids="205958">
+		<monster var="0" end_var="1" npc_ids="800211"/>
+		<monster var="1" end_var="1" npc_ids="800212" npc_seq="1"/>
+		<monster var="2" end_var="1" npc_ids="800213" npc_seq="2"/>
+	</monster_hunt>
+	<monster_hunt id="12036" start_npc_ids="205957">
+		<monster var="0" end_var="10" npc_ids="219207 219188 219189 219190"/>
+	</monster_hunt>
+	<monster_hunt id="12037" start_npc_ids="205843">
+		<monster var="0" end_var="1" npc_ids="218556"/>
+		<monster var="1" end_var="1" npc_ids="218554" npc_seq="1"/>
+		<monster var="2" end_var="1" npc_ids="218559" npc_seq="2"/>
+	</monster_hunt>
+	<monster_hunt id="22032" start_npc_ids="205960">
+		<monster var="0" end_var="10" npc_ids="701413"/>
+	</monster_hunt>
+	<monster_hunt id="22033" start_npc_ids="205960">
+		<monster var="0" end_var="3" npc_ids="218920"/>
+	</monster_hunt>
+	<monster_hunt id="22035" start_npc_ids="205960">
+		<monster var="0" end_var="1" npc_ids="800216"/>
+		<monster var="1" end_var="1" npc_ids="800217" npc_seq="1"/>
+		<monster var="2" end_var="1" npc_ids="800218" npc_seq="2"/>
+	</monster_hunt>
+	<monster_hunt id="22036" start_npc_ids="205959">
+		<monster var="0" end_var="10" npc_ids="219207 219188 219189 219190"/>
+	</monster_hunt>
+	<monster_hunt id="22037" start_npc_ids="205960">
+		<monster var="0" end_var="1" npc_ids="218556"/>
+		<monster var="1" end_var="1" npc_ids="218554" npc_seq="1"/>
+		<monster var="2" end_var="1" npc_ids="218557" npc_seq="2"/>
+	</monster_hunt>
+</quest_scripts>

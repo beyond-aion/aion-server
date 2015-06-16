@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301110000">
+		<!-- Danuar Reliquary Novun -->
+		<spawn npc_id="284377">
+			<spot x="255.37" y="263.11" z="241.81252" h="90"/>
+		</spawn>
+		<!-- Idean Lapilima -->
+		<spawn npc_id="284378">
+			<spot x="248.03435" y="263.18369" z="243.28584" h="96"/>
+		</spawn>
+		<!-- Idean Obscura -->
+		<spawn npc_id="284379">
+			<spot x="262.16617" y="266.0946" z="243.08418" h="90"/>
+		</spawn>
+	</spawn_map>
+</spawns>

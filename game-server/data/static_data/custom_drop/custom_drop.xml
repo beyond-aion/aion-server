@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom_drop xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="custom_drop.xsd">
+	<!-- 
+	Examples of usage:
+	Custom drop with "FULL" replace type will replace the original drop for this npc, and set custom drop for him.
+	<npc_drop npc_id="216183" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="false" name="NAMED_TEMPERING_SOLUTION">
+			<drop item_id="166030005" min_amount="1" max_amount="1" chance="90" no_reduce="true" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	
+	Custom drop with "PARTIAL" replace type will replace only specified drop groups for this npc, all the rest groups will
+	stay with original drop.
+	<npc_drop npc_id="214904" replace_type="PARTIAL">
+		<drop_group race="PC_ALL" use_category="false" name="NAMED_TEMPERING_SOLUTION">
+			<drop item_id="166030005" min_amount="1" max_amount="1" chance="15" no_reduce="true" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	-->
+</custom_drop>

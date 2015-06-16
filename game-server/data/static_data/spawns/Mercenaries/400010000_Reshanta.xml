@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="400010000">
+		<mercenary_spawn siege_id="1011">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Divine Fortress Hired Aggressor -->
+					<spawn npc_id="881543" respawn_time="295">
+						<spot x="2123.732" y="2008.996" z="2320.160" h="30"/>
+						<spot x="2125.959" y="2008.680" z="2320.161" h="90"/>
+						<spot x="2136.299" y="1847.520" z="2316.173" h="90"/>
+						<spot x="2139.333" y="1847.217" z="2316.061" h="90"/>
+						<spot x="2148.864" y="2008.138" z="2320.165" h="30"/>
+						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>
+					</spawn>
+					<!-- Divine Fortress Hired Assailant -->
+					<spawn npc_id="881545" respawn_time="295">
+						<spot x="2125.854" y="2005.387" z="2319.545"/>
+						<spot x="2131.592" y="1857.717" z="2331.131"/>
+						<spot x="2131.675" y="1854.524" z="2330.342"/>
+						<spot x="2144.867" y="1840.355" z="2327.478" h="60"/>
+						<spot x="2144.873" y="1843.851" z="2328.337" h="60"/>
+						<spot x="2150.559" y="2004.120" z="2319.619" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Divine Fortress Hired Aggressor -->
+					<spawn npc_id="881543" respawn_time="295">
+						<spot x="2126.451" y="1950.818" z="2322.073" h="30"/>
+						<spot x="2126.793" y="1908.413" z="2322.073" h="90"/>
+						<spot x="2129.175" y="1950.926" z="2322.073" h="30"/>
+						<spot x="2129.492" y="1908.365" z="2322.073" h="90"/>
+						<spot x="2144.903" y="1951.235" z="2322.073" h="30"/>
+						<spot x="2146.495" y="1906.252" z="2322.073" h="90"/>
+						<spot x="2147.519" y="1951.180" z="2322.073" h="30"/>
+						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>	
+					</spawn>
+					<!-- Divine Fortress Hired Assailant -->
+					<spawn npc_id="881545" respawn_time="295">
+						<spot x="2125.278" y="1948.829" z="2322.073" h="30"/>
+						<spot x="2125.290" y="1911.243" z="2322.073" h="90"/>
+						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>
+						<spot x="2150.754" y="1909.024" z="2322.073" h="90"/>
+					</spawn>
+				</mercenary_zone>					
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Divine Fortress Hired Warrior -->
+					<spawn npc_id="881540" respawn_time="295">
+						<spot x="2123.732" y="2008.996" z="2320.160" h="30"/>
+						<spot x="2125.959" y="2008.680" z="2320.161" h="90"/>
+						<spot x="2136.299" y="1847.520" z="2316.173" h="90"/>
+						<spot x="2139.333" y="1847.217" z="2316.061" h="90"/>
+						<spot x="2148.864" y="2008.138" z="2320.165" h="30"/>
+						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>						
+					</spawn>
+					<!-- Divine Fortress Hired Challenger -->
+					<spawn npc_id="881542" respawn_time="295">
+						<spot x="2125.854" y="2005.387" z="2319.545"/>
+						<spot x="2131.592" y="1857.717" z="2331.131"/>
+						<spot x="2131.675" y="1854.524" z="2330.342"/>
+						<spot x="2144.867" y="1840.355" z="2327.478" h="60"/>
+						<spot x="2144.873" y="1843.851" z="2328.337" h="60"/>
+						<spot x="2150.559" y="2004.120" z="2319.619" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Divine Fortress Hired Warrior -->
+					<spawn npc_id="881540" respawn_time="295">
+						<spot x="2126.451" y="1950.818" z="2322.073" h="30"/>
+						<spot x="2126.793" y="1908.413" z="2322.073" h="90"/>
+						<spot x="2129.175" y="1950.926" z="2322.073" h="30"/>
+						<spot x="2129.492" y="1908.365" z="2322.073" h="90"/>
+						<spot x="2144.903" y="1951.235" z="2322.073" h="30"/>
+						<spot x="2146.495" y="1906.252" z="2322.073" h="90"/>
+						<spot x="2147.519" y="1951.180" z="2322.073" h="30"/>
+						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>						
+					</spawn>
+					<!-- Divine Fortress Hired Challenger -->
+					<spawn npc_id="881542" respawn_time="295">
+						<spot x="2125.278" y="1948.829" z="2322.073" h="30"/>
+						<spot x="2125.290" y="1911.243" z="2322.073" h="90"/>
+						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>
+						<spot x="2150.754" y="1909.024" z="2322.073" h="90"/>
+					</spawn>
+				</mercenary_zone>						
+			</mercenary_race>
+		</mercenary_spawn>
+		<mercenary_spawn siege_id="1221">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251589">
+						<spot x="2057.5918" y="1347.0212" z="2962.6184" h="30"/>
+						<spot x="2053.4607" y="1346.9598" z="2962.5044" h="30"/>
+						<spot x="2060.9565" y="1202.6161" z="2961.5010" h="90"/>
+						<spot x="2057.1167" y="1202.4292" z="2961.4500" h="90"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251589">
+						<spot x="1997.7346" y="1287.4924" z="2966.4172" h="60"/>
+						<spot x="1998.0040" y="1290.5354" z="2966.4358" h="60"/>
+						<spot x="2099.4792" y="1269.1951" z="2964.0415" h="30"/>
+						<spot x="2102.8980" y="1269.0984" z="2964.0461" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251589">
+						<spot x="2062.0515" y="1274.2686" z="2986.5774" h="30"/>
+						<spot x="2052.5442" y="1274.1907" z="2986.5774" h="30"/>
+						<spot x="2055.6736" y="1264.8450" z="2956.2788" h="30"/>
+						<spot x="2059.3660" y="1264.9150" z="2956.2788" h="30"/>
+						<spot x="2032.1768" y="1371.7334" z="2976.0986" h="40"/>
+						<spot x="2039.7246" y="1376.1112" z="2976.1606" h="40"/>
+						<spot x="2072.9194" y="1372.6720" z="2974.6743" h="20"/>
+						<spot x="2080.1982" y="1367.5298" z="2974.7795" h="20"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251588">
+						<spot x="2057.5918" y="1347.0212" z="2962.6184" h="30"/>
+						<spot x="2053.4607" y="1346.9598" z="2962.5044" h="30"/>
+						<spot x="2060.9565" y="1202.6161" z="2961.5010" h="90"/>
+						<spot x="2057.1167" y="1202.4292" z="2961.4500" h="90"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251588">
+						<spot x="1997.7346" y="1287.4924" z="2966.4172" h="60"/>
+						<spot x="1998.0040" y="1290.5354" z="2966.4358" h="60"/>
+						<spot x="2099.4792" y="1269.1951" z="2964.0415" h="30"/>
+						<spot x="2102.8980" y="1269.0984" z="2964.0461" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251588">
+						<spot x="2062.0515" y="1274.2686" z="2986.5774" h="30"/>
+						<spot x="2052.5442" y="1274.1907" z="2986.5774" h="30"/>
+						<spot x="2055.6736" y="1264.8450" z="2956.2788" h="30"/>
+						<spot x="2059.3660" y="1264.9150" z="2956.2788" h="30"/>
+						<spot x="2032.1768" y="1371.7334" z="2976.0986" h="40"/>
+						<spot x="2039.7246" y="1376.1112" z="2976.1606" h="40"/>
+						<spot x="2072.9194" y="1372.6720" z="2974.6743" h="20"/>
+						<spot x="2080.1982" y="1367.5298" z="2974.7795" h="20"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+		<mercenary_spawn siege_id="1231">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251593">
+						<spot x="2443.0073" y="2101.6858" z="3047.6592" h="63"/>
+						<spot x="2443.6294" y="2098.0176" z="3047.6880" h="63"/>
+						<spot x="2567.7986" y="2118.1194" z="3048.0100" h="3"/>
+						<spot x="2568.1511" y="2114.3613" z="3048.0183" h="3"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251593">
+						<spot x="2506.9570" y="2051.8032" z="3057.8200" h="92"/>
+						<spot x="2520.5083" y="2053.5618" z="3057.8200" h="92"/>
+						<spot x="2492.4973" y="2162.9595" z="3057.8200" h="33"/>
+						<spot x="2506.0170" y="2164.6187" z="3057.8200" h="33"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251593">
+						<spot x="2506.7722" y="2103.5654" z="3073.0066" h="64"/>
+						<spot x="2505.6582" y="2112.9377" z="3073.0066" h="64"/>
+						<spot x="2513.3723" y="2111.0940" z="3042.7080" h="64"/>
+						<spot x="2513.9094" y="2107.3057" z="3042.7080" h="64"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251592">
+						<spot x="2443.0073" y="2101.6858" z="3047.6592" h="63"/>
+						<spot x="2443.6294" y="2098.0176" z="3047.6880" h="63"/>
+						<spot x="2567.7986" y="2118.1194" z="3048.0100" h="3"/>
+						<spot x="2568.1511" y="2114.3613" z="3048.0183" h="3"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251592">
+						<spot x="2506.9570" y="2051.8032" z="3057.8200" h="92"/>
+						<spot x="2520.5083" y="2053.5618" z="3057.8200" h="92"/>
+						<spot x="2492.4973" y="2162.9595" z="3057.8200" h="33"/>
+						<spot x="2506.0170" y="2164.6187" z="3057.8200" h="33"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251592">
+						<spot x="2506.7722" y="2103.5654" z="3073.0066" h="64"/>
+						<spot x="2505.6582" y="2112.9377" z="3073.0066" h="64"/>
+						<spot x="2513.3723" y="2111.0940" z="3042.7080" h="64"/>
+						<spot x="2513.9094" y="2107.3057" z="3042.7080" h="64"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+		<mercenary_spawn siege_id="1241">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251591">
+						<spot x="1807.4221" y="2224.1870" z="2947.3591" h="100"/>
+						<spot x="1810.7523" y="2225.8232" z="2947.3728" h="100"/>
+						<spot x="1815.5481" y="2218.0810" z="2946.9724" h="100"/>
+						<spot x="1809.5731" y="2214.9934" z="2947.0583" h="100"/>
+						<spot x="1752.3201" y="2339.2258" z="2947.6106" h="40"/>
+						<spot x="1757.6082" y="2341.5754" z="2947.6177" h="40"/>
+						<spot x="1754.3926" y="2348.6506" z="2946.9365" h="40"/>
+						<spot x="1748.8613" y="2345.9546" z="2946.8845" h="40"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Asmodian Mercenary Sureshot -->
+					<spawn npc_id="251591">
+						<spot x="1778.8844" y="2282.2083" z="2942.4110" h="40"/>
+						<spot x="1783.8508" y="2284.8577" z="2942.4110" h="40"/>
+						<spot x="1770.9019" y="2296.3926" z="2942.4175" h="8"/>
+						<spot x="1779.2520" y="2300.2900" z="2942.4175" h="68"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251590">
+						<spot x="1807.4221" y="2224.1870" z="2947.3591" h="100"/>
+						<spot x="1810.7523" y="2225.8232" z="2947.3728" h="100"/>
+						<spot x="1815.5481" y="2218.0810" z="2946.9724" h="100"/>
+						<spot x="1809.5731" y="2214.9934" z="2947.0583" h="100"/>
+						<spot x="1752.3201" y="2339.2258" z="2947.6106" h="40"/>
+						<spot x="1757.6082" y="2341.5754" z="2947.6177" h="40"/>
+						<spot x="1754.3926" y="2348.6506" z="2946.9365" h="40"/>
+						<spot x="1748.8613" y="2345.9546" z="2946.8845" h="40"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Mercenary Sureshot -->
+					<spawn npc_id="251590">
+						<spot x="1778.8844" y="2282.2083" z="2942.4110" h="40"/>
+						<spot x="1783.8508" y="2284.8577" z="2942.4110" h="40"/>
+						<spot x="1770.9019" y="2296.3926" z="2942.4175" h="8"/>
+						<spot x="1779.2520" y="2300.2900" z="2942.4175" h="68"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+	</spawn_map>
+</spawns>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301340000" name="CENTRAL_LABORATORY_1_301340000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="212.0369" top="612.0369">
+            <point x="208.42235" y="243.426"/>
+            <point x="223.92006" y="226.24782"/>
+            <point x="245.20607" y="220.2728"/>
+            <point x="267.61243" y="227.18141"/>
+            <point x="281.9898" y="245.85335"/>
+            <point x="283.1101" y="271.6206"/>
+            <point x="272.4671" y="289.54572"/>
+            <point x="254.35532" y="299.62854"/>
+            <point x="232.13571" y="301.49573"/>
+            <point x="220.93254" y="294.02698"/>
+            <point x="206.55515" y="279.27612"/>
+            <point x="202.82076" y="261.16437"/>
+            <point x="204.87468" y="251.45494"/>
+        </points>
+    </zone>
+    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_1" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="214.15343" top="614.15344">
+            <point x="341.53043" y="242.70467"/>
+            <point x="342.27307" y="286.70828"/>
+            <point x="312.38034" y="332.75427"/>
+            <point x="259.69238" y="366.08923"/>
+            <point x="196.31079" y="347.5759"/>
+            <point x="151.14688" y="302.59384"/>
+            <point x="146.87648" y="241.87999"/>
+            <point x="168.97113" y="179.86644"/>
+            <point x="236.74043" y="161.11385"/>
+            <point x="299.66855" y="173.8624"/>
+            <point x="334.76004" y="208.21121"/>
+            <point x="340.14444" y="236.24728"/>
+            <point x="287.97137" y="242.18869"/>
+            <point x="261.9777" y="222.13641"/>
+            <point x="228.17873" y="217.4475"/>
+            <point x="207.01242" y="241.39883"/>
+            <point x="202.74203" y="268.3209"/>
+            <point x="220.56628" y="291.90088"/>
+            <point x="246.93132" y="301.18436"/>
+            <point x="262.71323" y="298.3993"/>
+            <point x="280.3518" y="278.71835"/>
+            <point x="285.7362" y="244.36954"/>
+            <point x="340.63504" y="238.2803"/>
+        </points>
+    </zone>
+    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_BOSS_1" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="214.05345" top="614.05347">
+            <point x="226.79466" y="224.02011"/>
+            <point x="249.90364" y="222.45354"/>
+            <point x="270.7332" y="231.61443"/>
+            <point x="281.03976" y="244.09079"/>
+            <point x="279.2316" y="274.82968"/>
+            <point x="262.59644" y="295.0812"/>
+            <point x="237.46286" y="296.70856"/>
+            <point x="218.11545" y="285.85953"/>
+            <point x="206.36234" y="267.05457"/>
+            <point x="212.3293" y="239.932"/>
+            <point x="220.64688" y="231.07198"/>
+        </points>
+    </zone>
+    <zone mapid="301340000" name="LINKGATE_FOUNDRY_4_301340000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
+        <points bottom="211.93694" top="611.93695">
+            <point x="50.60065" y="53.26158"/>
+            <point x="442.48254" y="59.51866"/>
+            <point x="442.9487" y="450.66187"/>
+            <point x="53.621685" y="450.77917"/>
+        </points>
+    </zone>
+</zones>

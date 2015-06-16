@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			10000 [SCRIPT] Lavirintos's Call
+			10001 [SCRIPT] Bound for Inggison!
+			19500 [UNUSED] Gaining the Templar's Stigma (level 99)
+			19501 [UNUSED] Gaining the Gladiator's Stigma (level 99)
+			19502 [UNUSED] Gaining the Cleric's Stigma (level 99)
+			19503 [UNUSED] Gaining the Chanter's Stigma (level 99)
+			19504 [UNUSED] Gaining the Assassin's Stigma (level 99)
+			19505 [UNUSED] Gaining the Ranger's Stigma (level 99)
+			19506 [UNUSED] Gaining the Sorcerer's Stigma (level 99)
+			19507 [UNUSED] Gaining the Spiritmaster's Stigma (level 99)
+			80150 [XML] [Event] A Broken Mark
+			80151 [XML] [Event] Your Shining Future
+			80152 [XML] [Event] A Faded Mark
+			80153 [XML] [Event] Your Sparkling Future
+			80154 [XML] [Event] The Broken Mark
+			80155 [XML] [Event] Your Shining Fate
+			80156 [XML] [Event] The Faded Mark
+			80157 [XML] [Event] Your Sparkling Fate
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="80150" start_npc_ids="830247" end_npc_ids="830247"/>
+	<item_collecting id="80151" start_npc_ids="830247" end_npc_ids="830247"/>
+	<item_collecting id="80152" start_npc_ids="830247" end_npc_ids="830247"/>
+	<item_collecting id="80153" start_npc_ids="830247" end_npc_ids="830247"/>
+	<item_collecting id="80154" start_npc_ids="830248" end_npc_ids="830248"/>
+	<item_collecting id="80155" start_npc_ids="830248" end_npc_ids="830248"/>
+	<item_collecting id="80156" start_npc_ids="830248" end_npc_ids="830248"/>
+	<item_collecting id="80157" start_npc_ids="830248" end_npc_ids="830248"/>
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

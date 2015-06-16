@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+		[BEGIN] SUMMARY
+			18020 [XML] From Beneath It Stores Things
+			18021 [XML] [Group] Into the Void
+			18022 [XML] [Group] From the Void with Love
+			18023 [XML] [Group] Better Than Resco
+			28020 [XML] Into the Void
+			28021 [XML] [Group] Aetheric Ambushers
+			28022 [XML] [Group] Formarsh's Folly
+			28023 [XML] [Group] Vengence in the Void
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="18020" start_npc_ids="800569" end_npc_ids="800570"/>
+	<report_to id="28020" start_npc_ids="800571" end_npc_ids="800572"/>
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="18021" start_npc_ids="800570" end_npc_ids="800569">
+		<monster var="0" end_var="3" npc_ids="230084 233284 230088 230089"/>
+	</monster_hunt>
+	<monster_hunt id="18022" start_npc_ids="800570" end_npc_ids="800569">
+		<monster var="0" end_var="1" npc_ids="230355 233281"/>
+	</monster_hunt>
+	<monster_hunt id="18023" start_npc_ids="800570" end_npc_ids="800569">
+		<monster var="0" end_var="1" npc_ids="230092 230093 233279 233280"/>
+	</monster_hunt>
+	<monster_hunt id="28021" start_npc_ids="800572" end_npc_ids="800571">
+		<monster var="0" end_var="3" npc_ids="230084 233284 230088 230089"/>
+	</monster_hunt>
+	<monster_hunt id="28022" start_npc_ids="800572" end_npc_ids="800571">
+		<monster var="0" end_var="1" npc_ids="230355 233281"/>
+	</monster_hunt>
+	<monster_hunt id="28023" start_npc_ids="800572" end_npc_ids="800571">
+		<monster var="0" end_var="1" npc_ids="230092 230093 233279 233280"/>
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+</quest_scripts>

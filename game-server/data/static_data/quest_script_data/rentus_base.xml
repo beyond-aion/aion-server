@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+<!--
+  [BEGIN] SUMMARY
+			30500 [SCRIPT] Desperation
+			30501 [SCRIPT] [Group] Infiltrating Rentus
+			30502 [SCRIPT] [Group] Conquer the Vasharti
+			30503 [SCRIPT] [Group] Rodelion Rescue
+			30504 [SCRIPT] [Group] The Search for Paios
+			30505 [XML] [Group] Journal of a Traitor
+			30506 [SCRIPT] [Group] Tragic Reasons
+			30507 [XML] [Group] An Old Friend
+			30508 [XML] [Group] Returning the Favor
+			30509 [XML] The Weight of Guilt
+			30510 [XML] [Group] An Engaging Quest
+			30511 [XML] [Group] Seal Their Doom
+			30512 [XML] [Group] Pride of the Elyos
+			30513 [XML] [Group] Powerful Rangers
+			30550 [SCRIPT] Moment of Crisis
+			30551 [SCRIPT] [Group] On to Rentus Base
+			30552 [SCRIPT] [Group] Drive Out the Vasharti
+			30553 [SCRIPT] [Group] Comrades in Arms
+			30554 [SCRIPT] [Group] Saving Private Paios
+			30555 [XML] [Group] Traitorous Words
+			30556 [SCRIPT] [Group] The Whole Story
+			30557 [XML] [Group] Tragedy of the Past
+			30558 [XML] [Group] Shame of the Gergers
+			30559 [XML] [Group] Mark of Pride
+			30560 [XML] There's an Emo Reian?!
+			30561 [XML] [Group] For the Reians' Sake
+			30562 [XML] [Group] Slaking Bloodthirst
+			30563 [XML] [Group] Never Bow Down
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="30507" start_npc_ids="799543" end_npc_ids="790001"/>
+	<report_to id="30508" start_npc_ids="790001" end_npc_ids="799543"/>
+	<report_to id="30509" start_npc_ids="799550" end_npc_ids="799597"/>
+	<report_to id="30557" start_npc_ids="799543" end_npc_ids="203643"/>
+	<report_to id="30558" start_npc_ids="203643" end_npc_ids="799543"/>
+	<report_to id="30560" start_npc_ids="205439" end_npc_ids="205440"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="30510" start_npc_ids="799597"/>
+	<item_collecting id="30511" start_npc_ids="205947"/>
+	<item_collecting id="30513" start_npc_ids="799549"/>
+	<item_collecting id="30559" start_npc_ids="205439"/>
+	<item_collecting id="30561" start_npc_ids="205947"/>
+	<item_collecting id="30563" start_npc_ids="205973"  end_npc_ids="799549"/>
+	<!-- ITEM ORDERS QUESTS -->
+	<item_order end_npc_id="799544" id="30505"/>
+	<item_order end_npc_id="799544" id="30555"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="30512" start_npc_ids="205934">
+		<monster var="0" end_var="15" npc_ids="217290 217296 217297"/>
+	</monster_hunt>
+	<monster_hunt id="30562" start_npc_ids="205934">
+		<monster var="0" end_var="15" npc_ids="217290 217296 217297"/>
+	</monster_hunt>
+</quest_scripts>

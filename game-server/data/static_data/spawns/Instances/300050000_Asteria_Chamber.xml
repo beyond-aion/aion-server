@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300050000">
+		<!-- Beautiful Landscape Painting -->
+		<spawn npc_id="700461">
+			<spot x="461.056" y="567.035" z="205.751" static_id="33"/>
+		</spawn>
+		<!-- Dakaer Ambusher -->
+		<spawn npc_id="214757">
+			<spot x="509.69" y="476.25" z="198.88869" h="91" walker_id="DF874297E405E3727BEF26332950D6F1723E6949"/>
+			<spot x="521.9" y="536.15" z="199.23654" h="88" walker_id="DE1CFBF3CEA512016CBB4DCC1D7376431106384B"/>
+			<spot x="534.92" y="441.59" z="198.88867" h="30" walker_id="98217E747FB7EAD3302EB7224D03CAEEBA39E23B"/>
+		</spawn>
+		<!-- Dakaer Bloodbinder -->
+		<spawn npc_id="214759">
+			<spot x="509.69" y="476.25" z="198.88869" h="91" walker_id="DF874297E405E3727BEF26332950D6F1723E6949"/>
+			<spot x="521.9" y="536.15" z="199.23654" h="88" walker_id="DE1CFBF3CEA512016CBB4DCC1D7376431106384B"/>
+			<spot x="534.92" y="441.59" z="198.88867" h="30" walker_id="98217E747FB7EAD3302EB7224D03CAEEBA39E23B"/>
+		</spawn>
+		<!-- Dakaer Bonesetter -->
+		<spawn npc_id="215442">
+			<spot x="602.39" y="565.13" z="205.12793" h="59" walker_id="7FE2207760E74E75893A24C7CD24C5FE18F74BAE"/>
+			<spot x="618.71" y="570.78" z="204.04141" walker_id="D046FEAAF6EFC57124DC04B1D8A082D5CD4AF797"/>
+			<spot x="646.74" y="559.62" z="204.04143" h="61" walker_id="6F926A43811DF978C2516DF979AA313CF101BD73"/>
+		</spawn>
+		<!-- Dakaer Chanter -->
+		<spawn npc_id="214762">
+			<spot x="524.581" y="701.294" z="191.898" h="94"/>
+		</spawn>
+		<!-- Dakaer Geomancer -->
+		<spawn npc_id="214755">
+			<spot x="500.79" y="564.15" z="198.875" h="32" walker_id="AEFA0BE398324246507C96C11473D230A1148F1B"/>
+			<spot x="508.6" y="558.58" z="198.81375" h="87" walker_id="1176984767E64D4C77340FE481023E398C5CAC9A" walker_index="2"/>
+			<spot x="524.72" y="592.16" z="199.55836" h="30" walker_id="799A9289433335ABD8F8E26F518937FB8C75D0F6"/>
+			<spot x="547.5" y="567.06" z="198.875" h="83" walker_id="8361DF322C908A577CF38873B6B7C3475BE9DDAD" walker_index="1"/>
+		</spawn>
+		<!-- Dakaer Lurker -->
+		<spawn npc_id="215440">
+			<spot x="602.39" y="565.13" z="205.12793" h="59" walker_id="7FE2207760E74E75893A24C7CD24C5FE18F74BAE"/>
+			<spot x="618.71" y="570.78" z="204.04141" walker_id="D046FEAAF6EFC57124DC04B1D8A082D5CD4AF797"/>
+			<spot x="646.74" y="559.62" z="204.04143" h="61" walker_id="6F926A43811DF978C2516DF979AA313CF101BD73"/>
+		</spawn>
+		<!-- Dakaer Reconnoiterer -->
+		<spawn npc_id="215439">
+			<spot x="602.39" y="565.13" z="205.12793" h="59" walker_id="7FE2207760E74E75893A24C7CD24C5FE18F74BAE"/>
+			<spot x="618.71" y="570.78" z="204.04141" walker_id="D046FEAAF6EFC57124DC04B1D8A082D5CD4AF797"/>
+			<spot x="646.74" y="559.62" z="204.04143" h="61" walker_id="6F926A43811DF978C2516DF979AA313CF101BD73"/>
+		</spawn>
+		<!-- Dakaer Scout -->
+		<spawn npc_id="214756">
+			<spot x="509.69" y="476.25" z="198.88869" h="91" walker_id="DF874297E405E3727BEF26332950D6F1723E6949"/>
+			<spot x="521.9" y="536.15" z="199.23654" h="88" walker_id="DE1CFBF3CEA512016CBB4DCC1D7376431106384B"/>
+			<spot x="534.92" y="441.59" z="198.88867" h="30" walker_id="98217E747FB7EAD3302EB7224D03CAEEBA39E23B"/>
+		</spawn>
+		<!-- Dakaer Sentinel -->
+		<spawn npc_id="214752">
+			<spot x="500.79" y="564.15" z="198.875" h="32" walker_id="AEFA0BE398324246507C96C11473D230A1148F1B"/>
+			<spot x="524.72" y="592.16" z="199.55836" h="30" walker_id="799A9289433335ABD8F8E26F518937FB8C75D0F6"/>
+			<spot x="531.69" y="549.49" z="198.85562" h="28" walker_id="6C2DE92D9F3B54A1B24CC7F18DCFDE626267A867" walker_index="2"/>
+			<spot x="547.5" y="567.06" z="198.875" h="83" walker_id="8361DF322C908A577CF38873B6B7C3475BE9DDAD" walker_index="1"/>
+		</spawn>
+		<!-- Dakaer Sentinel -->
+		<spawn npc_id="214754">
+			<spot x="500.79" y="564.15" z="198.875" h="32" walker_id="AEFA0BE398324246507C96C11473D230A1148F1B"/>
+			<spot x="516.874" y="672.555" z="190.308" h="102"/>
+			<spot x="516.875" y="663.845" z="190.308" h="10"/>
+			<spot x="521.353" y="641.369" z="190.308" h="61"/>
+			<spot x="521.653" y="589.004" z="199.562" h="59"/>
+			<spot x="524.72" y="592.16" z="199.55836" h="30" walker_id="799A9289433335ABD8F8E26F518937FB8C75D0F6"/>
+			<spot x="527.517" y="588.955" z="199.515" h="96"/>
+			<spot x="527.863" y="641.433" z="190.308" h="45"/>
+			<spot x="532.216" y="672.619" z="190.308" h="104"/>
+			<spot x="532.217" y="663.909" z="190.308" h="119"/>
+			<spot x="539.91" y="574.21" z="198.66013" h="112" walker_id="1BF924C124FF95F03DA6BFE0EF5F517F3AC004D6" walker_index="2"/>
+			<spot x="547.5" y="567.06" z="198.875" h="83" walker_id="8361DF322C908A577CF38873B6B7C3475BE9DDAD" walker_index="1"/>
+		</spawn>
+		<!-- Dakaer Sharpshooter -->
+		<spawn npc_id="215441">
+			<spot x="553.4" y="568.168" z="198.825" h="47"/>
+			<spot x="553.477" y="562.092" z="198.658" h="8"/>
+			<spot x="582.842" y="562.198" z="203.157" h="110"/>
+			<spot x="582.847" y="566.991" z="203.365" h="112"/>
+			<spot x="602.39" y="565.13" z="205.12793" h="59" walker_id="7FE2207760E74E75893A24C7CD24C5FE18F74BAE"/>
+			<spot x="607.16" y="561.819" z="204.954" h="79"/>
+			<spot x="607.195" y="568.494" z="204.954" h="112"/>
+			<spot x="618.71" y="570.78" z="204.04141" walker_id="D046FEAAF6EFC57124DC04B1D8A082D5CD4AF797"/>
+			<spot x="621.338" y="550.125" z="204.041" h="68"/>
+			<spot x="621.551" y="580.58" z="204.041" h="31"/>
+			<spot x="635.076" y="545.725" z="204.041" h="103"/>
+			<spot x="635.152" y="584.838" z="204.041" h="37"/>
+			<spot x="646.74" y="559.62" z="204.04143" h="61" walker_id="6F926A43811DF978C2516DF979AA313CF101BD73"/>
+			<spot x="648.701" y="579.815" z="204.041" h="104"/>
+			<spot x="649" y="551.087" z="204.041" h="33"/>
+		</spawn>
+		<!-- Dakaer Sniper -->
+		<spawn npc_id="214758">
+			<spot x="509.69" y="476.25" z="198.88869" h="91" walker_id="DF874297E405E3727BEF26332950D6F1723E6949"/>
+			<spot x="514.467" y="455.332" z="198.169" h="88"/>
+			<spot x="514.508" y="464.034" z="198.169" h="76"/>
+			<spot x="518.425" y="539.418" z="198.839" h="39"/>
+			<spot x="518.925" y="485.981" z="198.169" h="13"/>
+			<spot x="521.9" y="536.15" z="199.23654" h="88" walker_id="DE1CFBF3CEA512016CBB4DCC1D7376431106384B"/>
+			<spot x="524.768" y="539.589" z="198.875" h="105"/>
+			<spot x="525.435" y="486.028" z="198.169" h="44"/>
+			<spot x="529.942" y="455.32" z="198.169" h="21"/>
+			<spot x="529.983" y="464.022" z="198.169" h="77"/>
+			<spot x="534.92" y="441.59" z="198.88867" h="30" walker_id="98217E747FB7EAD3302EB7224D03CAEEBA39E23B"/>
+		</spawn>
+		<!-- Dakaer Tactician -->
+		<spawn npc_id="214766">
+			<spot x="522.305" y="426.24" z="199.759" h="83"/>
+		</spawn>
+		<!-- Dakaer Trooper -->
+		<spawn npc_id="214753">
+			<spot x="500.79" y="564.15" z="198.875" h="32" walker_id="AEFA0BE398324246507C96C11473D230A1148F1B"/>
+			<spot x="517.81" y="582.05" z="198.64" h="55" walker_id="185A712696C22B516E25130B10D0B26BB3DF1159" walker_index="2"/>
+			<spot x="524.72" y="592.16" z="199.55836" h="30" walker_id="799A9289433335ABD8F8E26F518937FB8C75D0F6"/>
+			<spot x="547.5" y="567.06" z="198.875" h="83" walker_id="8361DF322C908A577CF38873B6B7C3475BE9DDAD" walker_index="1"/>
+		</spawn>
+		<!-- Ebonlord Kiriel -->
+		<spawn npc_id="215444">
+			<spot x="666.655" y="565.212" z="206.145" h="81"/>
+		</spawn>
+		<!-- Golden Abyss Crate -->
+		<spawn npc_id="700475">
+			<spot x="524.535" y="705.136" z="191.898" h="34"/>
+		</spawn>
+		<!-- IDAB1_SensoryArea_Timer_A -->
+		<spawn npc_id="206087">
+			<spot x="479.589" y="567.707" z="205.124" h="109"/>
+		</spawn>
+		<!-- Jeweled Abyss Crate -->
+		<spawn npc_id="700476">
+			<spot x="522.255" y="422.553" z="199.759" h="30"/>
+		</spawn>
+		<!-- Magic Abyss Crate -->
+		<spawn npc_id="700477">
+			<spot x="669.98" y="565.114" z="206.145" h="60"/>
+		</spawn>
+	</spawn_map>
+</spawns>

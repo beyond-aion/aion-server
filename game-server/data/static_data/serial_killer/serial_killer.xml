@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serial_killers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="serial_killer.xsd">
+	<rank_restriction rank_num="1" restrict_direct_portal="true" restrict_dynamic_bindstone="false">
+		<penalty_attr stat="PHYSICAL_ACCURACY" func="ADD" value="-530"/>
+		<penalty_attr stat="MAGICAL_ACCURACY" func="ADD" value="-460"/>
+		<penalty_attr stat="PVP_ATTACK_RATIO" func="ADD" value="-130"/>
+		<penalty_attr stat="PVP_DEFEND_RATIO" func="ADD" value="-125"/>
+		<penalty_attr stat="SPEED" func="PERCENT" value="-50"/>
+	</rank_restriction>
+	<rank_restriction rank_num="2" restrict_direct_portal="true" restrict_dynamic_bindstone="true">
+		<penalty_attr stat="PHYSICAL_ACCURACY" func="ADD" value="-1100"/>
+		<penalty_attr stat="MAGICAL_ACCURACY" func="ADD" value="-800"/>
+		<penalty_attr stat="PVP_ATTACK_RATIO" func="ADD" value="-500"/>
+		<penalty_attr stat="PVP_DEFEND_RATIO" func="ADD" value="-350"/>
+		<penalty_attr stat="SPEED" func="PERCENT" value="-70"/>
+	</rank_restriction>
+</serial_killers>

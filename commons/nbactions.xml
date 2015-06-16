@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Install</actionName>
+            <displayName>Install</displayName>
+            <goals>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-Compile</actionName>
+            <displayName>Compile</displayName>
+            <goals>
+                <goal>compile</goal>
+            </goals>
+        </action>
+    </actions>

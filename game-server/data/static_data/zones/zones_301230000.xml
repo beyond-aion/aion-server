@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301230000" name="EAST_PLATFORM_301230000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
+        <points bottom="219.12285" top="369.12286">
+            <point x="239.41135" y="276.45935"/>
+            <point x="182.61646" y="361.5464"/>
+            <point x="354.04593" y="328.1574"/>
+            <point x="276.9323" y="278.15906"/>
+        </points>
+    </zone>
+    <zone mapid="301230000" name="ILLUMINARY_OBELISK_301230000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
+        <points bottom="-24.782446" top="675.2175">
+            <point x="-6.78891" y="-4.500717"/>
+            <point x="485.49918" y="1.410172"/>
+            <point x="488.03238" y="486.94293"/>
+            <point x="-8.477722" y="488.6317"/>
+        </points>
+    </zone>
+    <zone mapid="301230000" name="NORTH_PLATFORM_301230000" area_type="POLYGON" zone_type="SUB" priority="12" flags="0">
+        <points bottom="218.46658" top="368.46658">
+            <point x="243.03593" y="234.12038"/>
+            <point x="201.02037" y="195.68839"/>
+            <point x="165.14127" y="253.97473"/>
+            <point x="206.39954" y="328.29578"/>
+            <point x="240.95668" y="276.10938"/>
+        </points>
+    </zone>
+    <zone mapid="301230000" name="SHIELD_GENERATION_HUB_301230000" area_type="POLYGON" zone_type="SUB" priority="12" flags="0">
+        <points bottom="423.48172" top="523.48175">
+            <point x="211.90648" y="202.93643"/>
+            <point x="252.126" y="187.48169"/>
+            <point x="285.45612" y="190.64713"/>
+            <point x="319.34476" y="226.77022"/>
+            <point x="323.9998" y="269.22418"/>
+            <point x="309.84848" y="308.51273"/>
+            <point x="282.10446" y="326.38806"/>
+            <point x="246.35376" y="331.0431"/>
+            <point x="212.09267" y="317.078"/>
+            <point x="192.9139" y="291.19598"/>
+            <point x="186.21066" y="247.4386"/>
+            <point x="202.59639" y="213.9223"/>
+        </points>
+    </zone>
+    <zone mapid="301230000" name="SOUTH_PLATFORM_301230000" area_type="POLYGON" zone_type="SUB" priority="13" flags="0">
+        <points bottom="216.40552" top="366.40552">
+            <point x="274.981" y="277.9923"/>
+            <point x="317.2874" y="309.0323"/>
+            <point x="353.75436" y="254.73082"/>
+            <point x="310.01892" y="196.38503"/>
+            <point x="276.68707" y="235.60564"/>
+        </points>
+    </zone>
+    <zone mapid="301230000" name="WEST_PLATFORM_301230000" area_type="POLYGON" zone_type="SUB" priority="11" flags="0">
+        <points bottom="211.9011" top="361.9011">
+            <point x="276.94943" y="240.05602"/>
+            <point x="310.59317" y="197.8332"/>
+            <point x="258.26053" y="169.52383"/>
+            <point x="203.53613" y="197.9911"/>
+            <point x="243.72765" y="235.12045"/>
+        </points>
+    </zone>
+</zones>

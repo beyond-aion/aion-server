@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			37000 [SCRIPT] Toxic Instruction
+			37001 [XML] A Tursin's Fickle Flame
+			37002 [XML] Elite (Homework) Assignment
+			37003 [SCRIPT] Camouflage Killers
+			37004 [XML] Eracus Purification
+			37005 [XML] Kaidan Treasure
+			37006 [SCRIPT] Now You See Them...
+			37007 [XML] Lost Leaders
+			37008 [XML] Oh, Behave! A Lepharist Quest
+			38006 [SCRIPT] Matriculation Day
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="37001" start_npc_ids="0" end_npc_ids="799835"/>
+	<item_collecting id="37005" start_npc_ids="0" end_npc_ids="799836"/>
+	<item_collecting id="37008" start_npc_ids="0" end_npc_ids="799836"/>
+	<!-- HUNTING QUESTS -->
+	<mentor_monster_hunt id="37002" start_npc_ids="0" end_npc_ids="799835">
+		<monster var="0" end_var="5" npc_ids="210168 210179 210180 210185 210186 210694"/>
+	</mentor_monster_hunt>
+	<mentor_monster_hunt id="37004" start_npc_ids="0" end_npc_ids="799836">
+		<monster var="0" end_var="5" npc_ids="211786 211785 211784 211781 211783 211782 211787"/>
+	</mentor_monster_hunt>
+	<mentor_monster_hunt id="37007" start_npc_ids="0" end_npc_ids="799836">
+		<monster var="0" end_var="5" npc_ids="212025 212029 212033"/>
+	</mentor_monster_hunt>
+</quest_scripts>

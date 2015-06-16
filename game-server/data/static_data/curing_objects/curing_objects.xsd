@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
+	<xs:element name="curing_objects">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="curing_object" type="CuringTemplate" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="CuringTemplate">
+		<xs:attribute name="map_id" type="xs:int"/>
+		<xs:attribute name="x" type="xs:float"/>
+		<xs:attribute name="y" type="xs:float"/>
+		<xs:attribute name="z" type="xs:float"/>
+		<xs:attribute name="range" type="xs:float"/>
+	</xs:complexType>
+</xs:schema>

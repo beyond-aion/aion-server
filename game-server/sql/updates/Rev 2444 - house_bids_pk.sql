@@ -1,0 +1,1 @@
+ALTER TABLE `house_bids` DROP PRIMARY KEY, ADD PRIMARY KEY (`player_id`,`house_id`,`bid`);

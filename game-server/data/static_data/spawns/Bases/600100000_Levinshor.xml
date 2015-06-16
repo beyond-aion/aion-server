@@ -1,0 +1,1924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="600100000">
+		<base_spawn id="6101"> 
+			<simple_race race="ELYOS">
+				<!-- West Picket -->
+				<spawn npc_id="832125">
+					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
+				</spawn>
+				<!-- West Picket Garrison Warcaptain -->
+				<spawn npc_id="235157" handler="BOSS">
+					<spot x="808.334" y="625.9313" z="276.5" h="15"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235318" handler="ATTACKER">
+					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="829.0032" y="641.5419" z="274.6819" h="21"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="819.605" y="644.7008" z="275.6552" h="21"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="817.577" y="606.7065" z="276.5" h="90"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="800.541" y="611.2033" z="276.4248" h="75"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="792.3545" y="630.4482" z="276.352" h="51"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
+				</spawn>
+				<!-- Tipaon -->
+				<spawn npc_id="802334" respawn_time="295">
+					<spot x="808.9643" y="635.1075" z="276.375" h="15"/>
+				</spawn>
+				<!-- Metophon -->
+				<spawn npc_id="802631" respawn_time="295">
+					<spot x="808.7373" y="642.1046" z="276.25" h="111"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- West Picket -->
+				<spawn npc_id="832146">
+					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
+				</spawn>
+				<!-- West Picket Defense Warcaptain -->
+				<spawn npc_id="235170" handler="BOSS">
+					<spot x="808.334" y="625.9313" z="276.5" h="15"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235312" handler="ATTACKER">
+					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="829.0032" y="641.5419" z="274.6819" h="21"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="819.605" y="644.7008" z="275.6552" h="21"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="817.577" y="606.7065" z="276.5" h="90"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="800.541" y="611.2033" z="276.4248" h="75"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="792.3545" y="630.4482" z="276.352" h="51"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
+				</spawn>
+				<!-- Vanst -->
+				<spawn npc_id="802342" respawn_time="295">
+					<spot x="808.9643" y="635.1075" z="276.375" h="15"/>
+				</spawn>
+				<!-- Hrafni -->
+				<spawn npc_id="802653" respawn_time="295">
+					<spot x="808.7373" y="642.1046" z="276.25" h="111"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- West Picket -->
+				<spawn npc_id="832167">
+					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
+				</spawn>
+				<!-- West Picket Force Subjugator -->
+				<spawn npc_id="235144" handler="BOSS">
+					<spot x="808.334" y="625.9313" z="276.5" h="15"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235313" handler="ATTACKER">
+					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="829.0032" y="641.5419" z="274.6819" h="21"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="819.605" y="644.7008" z="275.6552" h="21"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="817.577" y="606.7065" z="276.5" h="90"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="800.541" y="611.2033" z="276.4248" h="75"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="792.3545" y="630.4482" z="276.352" h="51"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>	
+		<base_spawn id="6102"> 
+			<simple_race race="ELYOS">
+				<!-- North Picket -->
+				<spawn npc_id="832132">
+					<spot x="536.7863" y="584.1077" z="265.375" h="67"/>
+				</spawn>
+				<!-- North Picket Garrison Warcaptain -->
+				<spawn npc_id="235146" handler="BOSS">
+					<spot x="538.2747" y="585.1917" z="265.375" h="66"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235234" handler="ATTACKER">
+					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="531.3217" y="575.1636" z="264.6354" h="66"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="526.1775" y="583.5342" z="264.69" h="66"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="542.729" y="575.2579" z="265.3455" h="96"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="534.3674" y="598.6465" z="265.2039" h="45"/>
+				</spawn>
+				<!-- Enther -->
+				<spawn npc_id="802352" respawn_time="295">
+					<spot x="543.1124" y="579.8049" z="265.375" h="60"/>
+				</spawn>
+				<!-- Stella -->
+				<spawn npc_id="802557" respawn_time="295">
+					<spot x="539.0778" y="577.549" z="265.375" h="45"/>
+				</spawn>
+				<!-- Camelia -->
+				<spawn npc_id="802564" respawn_time="295">
+					<spot x="531.7267" y="589.9037" z="265.2552" h="110"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- North Picket -->
+				<spawn npc_id="832153">
+					<spot x="536.7863" y="584.1077" z="265.375" h="59"/>
+				</spawn>
+				<!-- North Picket Defense Warcaptain -->
+				<spawn npc_id="235159" handler="BOSS">
+					<spot x="538.2747" y="585.1917" z="265.375" h="66"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235247" handler="ATTACKER">
+					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="531.3217" y="575.1636" z="264.6354" h="66"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="526.1775" y="583.5342" z="264.69" h="66"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="542.729" y="575.2579" z="265.3455" h="96"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="534.3674" y="598.6465" z="265.2039" h="45"/>
+				</spawn>
+				<!-- Widena -->
+				<spawn npc_id="802571" respawn_time="295">
+					<spot x="539.07776" y="577.54901" z="265.25113" h="45"/>
+				</spawn>
+				<!-- Ketide -->
+				<spawn npc_id="802578" respawn_time="295">
+					<spot x="531.72668" y="589.90375" z="264.86246" h="110"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- North Picket -->
+				<spawn npc_id="832817">
+					<spot x="536.7863" y="584.1077" z="265.375" h="59"/>
+				</spawn>
+				<!-- North Picket Force Subjugator -->
+				<spawn npc_id="235066" handler="BOSS">
+					<spot x="538.2747" y="585.1917" z="265.375" h="66"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235223" handler="ATTACKER">
+					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="531.3217" y="575.1636" z="264.6354" h="66"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="526.1775" y="583.5342" z="264.69" h="66"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="542.729" y="575.2579" z="265.3455" h="96"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="534.3674" y="598.6465" z="265.2039" h="45"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+			<base_spawn id="6103"> 
+			<simple_race race="ELYOS">
+				<!-- North Outpost -->
+				<spawn npc_id="832122">
+					<spot x="376.5099" y="999.5588" z="248.375" h="76"/>
+				</spawn>
+				<!-- North Outpost Garrison Warcaptain -->
+				<spawn npc_id="235147" handler="BOSS">
+					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235238" handler="ATTACKER">
+					<spot x="378.05429" y="1002.6058" z="248.4784"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="365.6246" y="981.9842" z="247.999" h="81"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="376.5127" y="979.0984" z="248.1007" h="81"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="354.6656" y="999.4943" z="248.9579" h="66"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="364.0923" y="1016.465" z="249.5247" h="45"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="396.6095" y="994.9882" z="249.3328" h="110"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
+				</spawn>
+				<!-- Fona -->
+				<spawn npc_id="802331" respawn_time="295">
+					<spot x="380.78894" y="993.42743" z="248.375" h="75"/>
+				</spawn>
+				<!-- Panses -->
+				<spawn npc_id="802559" respawn_time="295">
+					<spot x="381.32571" y="983.50977" z="248.32654" h="60"/>
+				</spawn>
+				<!-- Ariantos -->
+				<spawn npc_id="802565" respawn_time="295">
+					<spot x="360.67563" y="993.1745" z="248.3828"/>
+				</spawn>
+				<!-- Anemone -->
+				<spawn npc_id="802570" respawn_time="295">
+					<spot x="383.17896" y="986.17712" z="248.375" h="60"/>
+				</spawn>
+				</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- North Outpost -->
+				<spawn npc_id="235160">
+					<spot x="376.5099" y="999.5588" z="248.375" h="83"/>
+				</spawn>
+				<!-- North Outpost Defense Warcaptain -->
+				<spawn npc_id="235160" handler="BOSS">
+					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235251" handler="ATTACKER">
+					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="365.6246" y="981.9842" z="247.999" h="81"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="376.5127" y="979.0984" z="248.1007" h="81"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="354.6656" y="999.4943" z="248.9579" h="66"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="364.0923" y="1016.465" z="249.5247" h="45"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="396.6095" y="994.9882" z="249.3328" h="110"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
+				</spawn>
+				<!-- Apeit -->
+				<spawn npc_id="802339" respawn_time="295">
+					<spot x="380.78894" y="993.42743" z="248.375" h="75"/>
+				</spawn>
+				<!-- Varco -->
+				<spawn npc_id="802584" respawn_time="295">
+					<spot x="383.17896" y="986.17712" z="248.375" h="60"/>
+				</spawn>
+				<!-- Nivena -->
+				<spawn npc_id="802573" respawn_time="295">
+					<spot x="381.32571" y="983.50977" z="248.32654" h="60"/>
+				</spawn>
+				<!-- Abeorn -->
+				<spawn npc_id="802579" respawn_time="295">
+					<spot x="360.67563" y="993.1745" z="248.3828"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- North Outpost -->
+				<spawn npc_id="832164">
+					<spot x="376.5099" y="999.5588" z="248.375" h="86"/>
+				</spawn>
+				<!-- North Outpost Force Subjugator -->
+				<spawn npc_id="235067" handler="BOSS">
+					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235227" handler="ATTACKER">
+					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="365.6246" y="981.9842" z="247.999" h="81"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="376.5127" y="979.0984" z="248.1007" h="81"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="354.6656" y="999.4943" z="248.9579" h="66"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="364.0923" y="1016.465" z="249.5247" h="45"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="396.6095" y="994.9882" z="249.3328" h="110"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6104"> 
+			<simple_race race="ELYOS">
+				<!-- North Relay -->
+				<spawn npc_id="832120">
+					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
+				</spawn>
+				<!-- North Relay Garrison Commander -->
+				<spawn npc_id="235148" handler="BOSS">
+					<spot x="519.3247" y="1172.088" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Guardian Blademaster -->
+				<spawn npc_id="235242" handler="ATTACKER">
+					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Guardian Elite Templar -->
+				<spawn npc_id="235190" respawn_time="295">
+					<spot x="479.4055" y="1185.798" z="276.3712" h="60"/>
+					<spot x="511.6774" y="1179.708" z="276.5" h="60"/>
+				</spawn>
+				<!-- Guardian Elite Warrior -->
+				<spawn npc_id="235191" respawn_time="295">
+					<spot x="479.6862" y="1174.439" z="276.1207" h="60"/>
+					<spot x="511.5595" y="1166.282" z="276.5" h="60"/>
+				</spawn>
+				<!-- Guardian Elite Magus -->
+				<spawn npc_id="235192" respawn_time="295">
+					<spot x="536.8365" y="1212.441" z="276.625" h="30"/>
+					<spot x="490.407" y="1136.502" z="276.2564" h="21"/>
+				</spawn>
+				<!-- Guardian Elite Enforcer -->
+				<spawn npc_id="235193" respawn_time="295">
+					<spot x="526.8979" y="1210.031" z="276.5019" h="30"/>
+					<spot x="524.3995" y="1138.083" z="276.375" h="90"/>
+				</spawn>
+				<!-- Guardian Elite Patrol -->
+				<spawn npc_id="235194" respawn_time="295">
+					<spot x="498.8546" y="1213.121" z="276.375" h="90"/>
+					<spot x="512.0811" y="1137.347" z="276.375" h="90"/>
+					<spot x="552.9031" y="1137.024" z="276.6391" h="32"/>
+					<spot x="567.941" y="1205.081" z="276.875" h="21"/>
+				</spawn>
+				<!-- Olympon -->
+				<spawn npc_id="802329" respawn_time="295">
+					<spot x="508.18683" y="1156.55" z="276.6104" h="60"/>
+				</spawn>
+				<!-- Dalia -->
+				<spawn npc_id="802563" respawn_time="295">
+					<spot x="480.77573" y="1148.5426" z="276.5" h="15"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804565" respawn_time="295">
+					<spot x="524.90576" y="1171.7664" z="278.37909" h="59"/>
+				</spawn>
+				<!-- Categion -->
+				<spawn npc_id="802568" respawn_time="295">
+					<spot x="481.86017" y="1208.6219" z="277.06323" h="105"/>
+				</spawn>
+				<!-- Pygme -->
+				<spawn npc_id="802621" respawn_time="295">
+					<spot x="478.08047" y="1202.0717" z="276.375" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- North Relay -->
+				<spawn npc_id="832141">
+					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
+				</spawn>
+				<!-- North Relay Defense Commander -->
+				<spawn npc_id="235161" handler="BOSS">
+					<spot x="519.3247" y="1172.088" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Archon Thunderstrike -->
+				<spawn npc_id="235255" handler="ATTACKER">
+					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Archon Elite Knight -->
+				<spawn npc_id="235202" respawn_time="295">
+					<spot x="479.4055" y="1185.798" z="276.3712" h="60"/>
+					<spot x="511.6774" y="1179.708" z="276.5" h="60"/>
+				</spawn>
+				<!-- Archon Elite Aggressor -->
+				<spawn npc_id="235203" respawn_time="295">
+					<spot x="479.6862" y="1174.439" z="276.1207" h="60"/>
+					<spot x="511.5595" y="1166.282" z="276.5" h="60"/>
+				</spawn>
+				<!-- Archon Elite Sorcerer -->
+				<spawn npc_id="235204" respawn_time="295">
+					<spot x="536.8365" y="1212.441" z="276.625" h="30"/>
+					<spot x="490.407" y="1136.502" z="276.2564" h="21"/>
+				</spawn>
+				<!-- Archon Elite Nightblade -->
+				<spawn npc_id="235205" respawn_time="295">
+					<spot x="526.8979" y="1210.031" z="276.5019" h="30"/>
+					<spot x="524.3995" y="1138.083" z="276.375" h="90"/>
+				</spawn>
+				<!-- Archon Elite Sentry -->
+				<spawn npc_id="235206" respawn_time="295">
+					<spot x="498.8546" y="1213.121" z="276.375" h="90"/>
+					<spot x="512.0811" y="1137.347" z="276.375" h="90"/>
+					<spot x="552.9031" y="1137.024" z="276.6391" h="32"/>
+					<spot x="567.941" y="1205.081" z="276.875" h="21"/>
+				</spawn>
+				<!-- Kenoen -->
+				<spawn npc_id="802348" respawn_time="295">
+					<spot x="508.18683" y="1156.55" z="276.6104" h="60"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804568" respawn_time="295">
+					<spot x="524.90576" y="1171.7664" z="278.37909" h="59"/>
+				</spawn>
+				<!-- Drins -->
+				<spawn npc_id="802577" respawn_time="295">
+					<spot x="480.77573" y="1148.5426" z="276.5" h="15"/>
+				</spawn>
+				<!-- Anmir -->
+				<spawn npc_id="802582" respawn_time="295">
+					<spot x="481.86017" y="1208.6219" z="277.06323" h="105"/>
+				</spawn>
+				<!-- Vetmimir -->
+				<spawn npc_id="802643" respawn_time="295">
+					<spot x="478.08047" y="1202.0717" z="276.375" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- North Relay -->
+				<spawn npc_id="832162">
+					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
+				</spawn>
+				<!-- North Relay Force Subjugator -->
+				<spawn npc_id="235068" respawn_time="295">
+					<spot x="519.3247" y="1172.088" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Drakan Blademaster -->
+				<spawn npc_id="235231" handler="ATTACKER">
+					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+				</spawn>
+				<!-- Sheban Elite Scaleguard -->
+				<spawn npc_id="235178" respawn_time="295">
+					<spot x="479.4055" y="1185.798" z="276.3712" h="60"/>
+					<spot x="511.6774" y="1179.708" z="276.5" h="60"/>
+				</spawn>
+				<!-- Sheban Elite Contender -->
+				<spawn npc_id="235179" respawn_time="295">
+					<spot x="479.6862" y="1174.439" z="276.1207" h="60"/>
+					<spot x="511.5595" y="1166.282" z="276.5" h="60"/>
+				</spawn>
+				<!-- Sheban Elite Spellslinger -->
+				<spawn npc_id="235180" respawn_time="295">
+					<spot x="536.8365" y="1212.441" z="276.625" h="30"/>
+					<spot x="490.407" y="1136.502" z="276.2564" h="21"/>
+				</spawn>
+				<!-- Sheban Elite Scaleblade -->
+				<spawn npc_id="235181" respawn_time="295">
+					<spot x="526.8979" y="1210.031" z="276.5019" h="30"/>
+					<spot x="524.3995" y="1138.083" z="276.375" h="90"/>
+				</spawn>
+				<!-- Sheban Elite Tracker -->
+				<spawn npc_id="235182" respawn_time="295">
+					<spot x="498.8546" y="1213.121" z="276.375" h="90"/>
+					<spot x="512.0811" y="1137.347" z="276.375" h="90"/>
+					<spot x="552.9031" y="1137.024" z="276.6391" h="32"/>
+					<spot x="567.941" y="1205.081" z="276.875" h="21"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6105"> 
+			<simple_race race="ELYOS">
+				<!-- East Outpost -->
+				<spawn npc_id="832123">
+					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
+				</spawn>
+				<!-- East Outpost Garrison Warcaptain -->
+				<spawn npc_id="235150" handler="BOSS">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235318" handler="ATTACKER">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="883.655" y="1845.741" z="228.7306" h="70"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="875.7573" y="1853.358" z="229.2194" h="70"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="904.0253" y="1850.095" z="229.3723" h="105"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="907.2269" y="1865.259" z="230.6554" h="111"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="886.8635" y="1885.038" z="230.75" h="45"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
+				</spawn>
+				<!-- Feleus -->
+				<spawn npc_id="802332" respawn_time="295">
+					<spot x="892.56335" y="1857.2535" z="229.42825" h="105"/>
+				</spawn>
+				<!-- Melly -->
+				<spawn npc_id="802614" respawn_time="295">
+					<spot x="892.21436" y="1850.1084" z="229.42825" h="52"/>
+				</spawn>
+				<!-- Rotos -->
+				<spawn npc_id="802615" respawn_time="295">
+					<spot x="878.75586" y="1860.849" z="229.23175"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- East Outpost -->
+				<spawn npc_id="832144">
+					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
+				</spawn>
+				<!-- East Outpost Defense Warcaptain -->
+				<spawn npc_id="235163" handler="BOSS">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235312" handler="ATTACKER">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="883.655" y="1845.741" z="228.7306" h="70"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="875.7573" y="1853.358" z="229.2194" h="70"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="904.0253" y="1850.095" z="229.3723" h="105"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="907.2269" y="1865.259" z="230.6554" h="111"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="886.8635" y="1885.038" z="230.75" h="45"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
+				</spawn>
+				<!-- Reheln -->
+				<spawn npc_id="802340" respawn_time="295">
+					<spot x="892.56335" y="1857.2535" z="229.42825" h="105"/>
+				</spawn>
+				<!-- Niberus -->
+				<spawn npc_id="802572" respawn_time="295">
+					<spot x="878.75586" y="1860.849" z="229.23175"/>
+				</spawn>
+				<!-- Valdmark -->
+				<spawn npc_id="802583" respawn_time="295">
+					<spot x="892.21436" y="1850.1084" z="229.42825" h="52"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- East Outpost -->
+				<spawn npc_id="832165">
+					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
+				</spawn>
+				<!-- East Outpost Force Subjugator -->
+				<spawn npc_id="235070" handler="BOSS">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235313" handler="ATTACKER">
+					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="883.655" y="1845.741" z="228.7306" h="70"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="875.7573" y="1853.358" z="229.2194" h="70"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="904.0253" y="1850.095" z="229.3723" h="105"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="907.2269" y="1865.259" z="230.6554" h="111"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="886.8635" y="1885.038" z="230.75" h="45"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6106"> 
+			<simple_race race="ELYOS">
+				<!-- East Relay -->
+				<spawn npc_id="832124">
+					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
+				</spawn>
+				<!-- East Relay Garrison Warcaptain -->
+				<spawn npc_id="235149" handler="BOSS">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235268" handler="ATTACKER">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="550.9852" y="1570.897" z="234.5836" h="21"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="538.4956" y="1572.861" z="234.4288" h="21"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="531.1891" y="1545.311" z="234.5175" h="68"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="548.0823" y="1540.354" z="234.6199" h="96"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="526.4655" y="1559.047" z="234.7957" h="47"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="551.2578" y="1557.063" z="234.5" h="89"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="731456" respawn_time="295">
+					<spot x="543.4838" y="1548.385" z="235.5931" h="105" static_id="683"/>
+				</spawn>
+				<!-- Titanos -->
+				<spawn npc_id="802333" respawn_time="295">
+					<spot x="537.7369" y="1559.062" z="234.625" h="15"/>
+				</spawn>
+				<!-- Nymphaia -->
+				<spawn npc_id="802560" respawn_time="295">
+					<spot x="552.5982" y="1562.286" z="234.5" h="60"/>
+				</spawn>
+				<!-- Craneia -->
+				<spawn npc_id="802567" respawn_time="295">
+					<spot x="535.9156" y="1565.105" z="234.4339"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- East Relay -->
+				<spawn npc_id="832145">
+					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
+				</spawn>
+				<!-- East Relay Defense Warcaptain -->
+				<spawn npc_id="235162" handler="BOSS">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235262" handler="ATTACKER">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="550.9852" y="1570.897" z="234.5836" h="21"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="538.4956" y="1572.861" z="234.4288" h="21"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="531.1891" y="1545.311" z="234.5175" h="75"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="548.0823" y="1540.354" z="234.6199" h="96"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="526.4655" y="1559.047" z="234.7957" h="51"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="551.2578" y="1557.063" z="234.5" h="45"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="731462" respawn_time="295">
+					<spot x="543.4838" y="1548.385" z="235.5931" h="105" static_id="683"/>
+				</spawn>
+				<!-- Shri -->
+				<spawn npc_id="802341" respawn_time="295">
+					<spot x="537.73688" y="1559.0624" z="234.49362" h="15"/>
+				</spawn>
+				<!-- Gafyr -->
+				<spawn npc_id="802574" respawn_time="295">
+					<spot x="552.5982" y="1562.286" z="234.5" h="60"/>
+				</spawn>
+				<!-- Engor -->
+				<spawn npc_id="802581" respawn_time="295">
+					<spot x="535.9156" y="1565.105" z="234.4339"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- East Relay -->
+				<spawn npc_id="832166">
+					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
+				</spawn>
+				<!-- East Relay Force Subjugator -->
+				<spawn npc_id="235069" handler="BOSS">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235263" handler="ATTACKER">
+					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="550.9852" y="1570.897" z="234.5836" h="21"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="538.4956" y="1572.861" z="234.4288" h="21"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="531.1891" y="1545.311" z="234.5175" h="75"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="548.0823" y="1540.354" z="234.6199" h="96"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="526.4655" y="1559.047" z="234.7957" h="51"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="551.2578" y="1557.063" z="234.5" h="45"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6107"> 
+			<simple_race race="ELYOS">
+				<!-- South Outpost -->
+				<spawn npc_id="832126">
+					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
+				</spawn>
+				<!-- South Outpost Garrison Warcaptain -->
+				<spawn npc_id="235153" handler="BOSS">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235288" handler="ATTACKER">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="1886.224" y="807.0076" z="237.5131" h="66"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="1884.917" y="818.7586" z="237.3903" h="66"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="1904.236" y="792.814" z="237.875" h="75"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="1919.403" y="798.0978" z="237.875" h="105"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="1900.763" y="832.2151" z="237.8833" h="30"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
+				</spawn>
+				<!-- Rovicos -->
+				<spawn npc_id="802335" respawn_time="295">
+					<spot x="1901.731" y="807.8081" z="237.875" h="60"/>
+				</spawn>
+				<!-- Ariantos -->
+				<spawn npc_id="802565" respawn_time="295">
+					<spot x="1895.251" y="802.4997" z="237.8633" h="30"/>
+				</spawn>
+				<!-- Craneia -->
+				<spawn npc_id="802567" respawn_time="295">
+					<spot x="1897.313" y="799.8699" z="237.875" h="21"/>
+				</spawn>
+				<!-- Anemone -->
+				<spawn npc_id="802570" respawn_time="295">
+					<spot x="1894.93" y="822.0237" z="237.8082" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- South Outpost -->
+				<spawn npc_id="832147">
+					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
+				</spawn>
+				<!-- South Outpost Defense Warcaptain -->
+				<spawn npc_id="235166" handler="BOSS">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235301" handler="ATTACKER">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="1886.224" y="807.0076" z="237.5131" h="66"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="1884.917" y="818.7586" z="237.3903" h="66"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="1904.236" y="792.814" z="237.875" h="75"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="1919.403" y="798.0978" z="237.875" h="105"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="1900.763" y="832.2151" z="237.8833" h="30"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
+				</spawn>
+				<!-- Rink -->
+				<spawn npc_id="802343" respawn_time="295">
+					<spot x="1901.731" y="807.8081" z="237.875" h="60"/>
+				</spawn>
+				<!-- Atald -->
+				<spawn npc_id="802594" respawn_time="295">
+					<spot x="1897.313" y="799.8699" z="237.875" h="21"/>
+				</spawn>
+				<!-- Legen -->
+				<spawn npc_id="802596" respawn_time="295">
+					<spot x="1895.251" y="802.4997" z="237.8633" h="30"/>
+				</spawn>
+				<!-- Hljod -->
+				<spawn npc_id="802601" respawn_time="295">
+					<spot x="1894.93" y="822.0237" z="237.8082" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- South Outpost -->
+				<spawn npc_id="832168">
+					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
+				</spawn>
+				<!-- South Outpost Force Subjugator -->
+				<spawn npc_id="235073" handler="BOSS">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235277" handler="ATTACKER">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="1886.224" y="807.0076" z="237.5131" h="66"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="1884.917" y="818.7586" z="237.3903" h="66"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="1904.236" y="792.814" z="237.875" h="75"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="1919.403" y="798.0978" z="237.875" h="105"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="1900.763" y="832.2151" z="237.8833" h="30"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6108"> 
+			<simple_race race="ELYOS">
+				<!-- South Relay -->
+				<spawn npc_id="832121">
+					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
+				</spawn>
+				<!-- South Relay Garrison Commander -->
+				<spawn npc_id="235154" handler="BOSS">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Guardian Blademaster -->
+				<spawn npc_id="235292" handler="ATTACKER">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Guardian Elite Templar -->
+				<spawn npc_id="235190" respawn_time="295">
+					<spot x="1410.29" y="846.6133" z="258.125"/>
+					<spot x="1440.508" y="844.4385" z="258.0635"/>
+				</spawn>
+				<!-- Guardian Elite Warrior -->
+				<spawn npc_id="235191" respawn_time="295">
+					<spot x="1410.991" y="857.0489" z="258.28"/>
+					<spot x="1440.576" y="854.0511" z="258.161"/>
+				</spawn>
+				<!-- Guardian Elite Magus -->
+				<spawn npc_id="235192" respawn_time="295">
+					<spot x="1422.292" y="816.6415" z="258.1975" h="45"/>
+				</spawn>
+				<!-- Guardian Elite Enforcer -->
+				<spawn npc_id="235193" respawn_time="295">
+					<spot x="1380.078" y="818.1731" z="259.2103" h="90"/>
+					<spot x="1389.734" y="890.2941" z="258.125" h="3"/>
+				</spawn>
+				<!-- Guardian Elite Patrol -->
+				<spawn npc_id="235194" respawn_time="295">
+					<spot x="1392.526" y="817.1248" z="259.1975" h="90"/>
+					<spot x="1344.645" y="825.3068" z="258.25" h="110"/>
+					<spot x="1402.182" y="889.2458" z="258.125" h="30"/>
+					<spot x="1363.553" y="888.6819" z="258.125" h="4"/>
+				</spawn>
+				<!-- Guardian Elite Priest -->
+				<spawn npc_id="235195" respawn_time="295">
+					<spot x="1429.018" y="886.0143" z="258.1891" h="75"/>
+				</spawn>
+				<!-- Pompeius -->
+				<spawn npc_id="802330" respawn_time="295">
+					<spot x="1414.35" y="867.9044" z="258.0972"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804564" respawn_time="295">
+					<spot x="1395.686" y="853.3888" z="259.5404" h="118"/>
+				</spawn>
+				<!-- Camelia -->
+				<spawn npc_id="802564" respawn_time="295">
+					<spot x="1444.612" y="870.0577" z="258.25" h="60"/>
+				</spawn>
+				<!-- Konos -->
+				<spawn npc_id="802616" respawn_time="295">
+					<spot x="1433.678" y="819.8065" z="258.125" h="45"/>
+				</spawn>
+				<!-- Chromino -->
+				<spawn npc_id="802627" respawn_time="295">
+					<spot x="1442.66" y="874.5177" z="258.25" h="66"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- South Relay -->
+				<spawn npc_id="832142">
+					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
+				</spawn>
+				<!-- South Relay Defense Commander -->
+				<spawn npc_id="235167" handler="BOSS">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Archon Thunderstrike -->
+				<spawn npc_id="235305" handler="ATTACKER">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Archon Elite Knight -->
+				<spawn npc_id="235202" respawn_time="295">
+					<spot x="1410.29" y="846.6133" z="258.125"/>
+					<spot x="1440.508" y="844.4385" z="258.0635"/>
+				</spawn>
+				<!-- Archon Elite Aggressor -->
+				<spawn npc_id="235203" respawn_time="295">
+					<spot x="1410.991" y="857.0489" z="258.28"/>
+					<spot x="1440.576" y="854.0511" z="258.161"/>
+				</spawn>
+				<!-- Archon Elite Sorcerer -->
+				<spawn npc_id="235204" respawn_time="295">
+					<spot x="1422.292" y="816.6415" z="258.1975" h="45"/>
+				</spawn>
+				<!-- Archon Elite Nightblade -->
+				<spawn npc_id="235205" respawn_time="295">
+					<spot x="1380.078" y="818.1731" z="259.2103" h="90"/>
+					<spot x="1389.734" y="890.2941" z="258.125" h="3"/>
+				</spawn>
+				<!-- Archon Elite Sentry -->
+				<spawn npc_id="235206" respawn_time="295">
+					<spot x="1392.526" y="817.1248" z="259.1975" h="90"/>
+					<spot x="1344.645" y="825.3068" z="258.25" h="110"/>
+					<spot x="1402.182" y="889.2458" z="258.125" h="30"/>
+					<spot x="1363.553" y="888.6819" z="258.125" h="4"/>
+				</spawn>
+				<!-- Archon Elite Mender -->
+				<spawn npc_id="235207" respawn_time="295">
+					<spot x="1429.018" y="886.0143" z="258.1891" h="75"/>
+				</spawn>
+				<!-- Mete -->
+				<spawn npc_id="802349" respawn_time="295">
+					<spot x="1414.35" y="867.9044" z="258.0972"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804567" respawn_time="295">
+					<spot x="1395.686" y="853.3888" z="259.5404" h="118"/>
+				</spawn>
+				<!-- Himinn -->
+				<spawn npc_id="802599" respawn_time="295">
+					<spot x="1444.612" y="870.0577" z="258.25" h="60"/>
+				</spawn>
+				<!-- Schupecht -->
+				<spawn npc_id="802638" respawn_time="295">
+					<spot x="1433.678" y="819.8065" z="258.125" h="45"/>
+				</spawn>
+				<!-- Holta -->
+				<spawn npc_id="802649" respawn_time="295">
+					<spot x="1442.66" y="874.5177" z="258.25" h="66"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- South Relay -->
+				<spawn npc_id="832163">
+					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
+				</spawn>
+				<!-- South Relay Force War Subjugator -->
+				<spawn npc_id="235141" handler="BOSS">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Drakan Blademaster -->
+				<spawn npc_id="235281" handler="ATTACKER">
+					<spot x="1401.609" y="852.7" z="259.5403"/>
+				</spawn>
+				<!-- Sheban Elite Scaleguard -->
+				<spawn npc_id="235178" respawn_time="295">
+					<spot x="1410.29" y="846.6133" z="258.125"/>
+					<spot x="1440.508" y="844.4385" z="258.0635"/>
+				</spawn>
+				<!-- Sheban Elite Contender -->
+				<spawn npc_id="235179" respawn_time="295">
+					<spot x="1410.991" y="857.0489" z="258.28"/>
+					<spot x="1440.576" y="854.0511" z="258.161"/>
+				</spawn>
+				<!-- Sheban Elite Spellslinger -->
+				<spawn npc_id="235180" respawn_time="295">
+					<spot x="1422.292" y="816.6415" z="258.1975" h="45"/>
+				</spawn>
+				<!-- Sheban Elite Scaleblade -->
+				<spawn npc_id="235181" respawn_time="295">
+					<spot x="1380.078" y="818.1731" z="259.2103" h="90"/>
+					<spot x="1389.734" y="890.2941" z="258.125" h="3"/>
+				</spawn>
+				<!-- Sheban Elite Tracker -->
+				<spawn npc_id="235182" respawn_time="295">
+					<spot x="1392.526" y="817.1248" z="259.1975" h="90"/>
+					<spot x="1344.645" y="825.3068" z="258.25" h="110"/>
+					<spot x="1402.182" y="889.2458" z="258.125" h="30"/>
+					<spot x="1363.553" y="888.6819" z="258.125" h="4"/>
+				</spawn>
+				<!-- Sheban Elite Hidestitcher -->
+				<spawn npc_id="235183" respawn_time="295">
+					<spot x="1429.018" y="886.0143" z="258.1891" h="75"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6109"> 
+			<simple_race race="ELYOS">
+				<!-- South Picket -->
+				<spawn npc_id="832138">
+					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
+				</spawn>
+				<!-- South Picket Garrison Warcaptain -->
+				<spawn npc_id="235152" handler="BOSS">
+					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235284" handler="ATTACKER">
+					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="1627.468" y="1545.009" z="247.7168" h="88"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="1616.125" y="1551.58" z="247.2332" h="101"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="1640.607" y="1565.124" z="247.7713" h="6"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="1615.343" y="1567.871" z="247.5785" h="55"/>
+				</spawn>
+				<!-- Amigdale -->
+				<spawn npc_id="802604" respawn_time="295">
+					<spot x="1633.021" y="1552.508" z="247.8595" h="45"/>
+				</spawn>
+				<!-- Secalin -->
+				<spawn npc_id="802609" respawn_time="295">
+					<spot x="1618.363" y="1563.365" z="247.608" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- South Picket -->
+				<spawn npc_id="832159">
+					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
+				</spawn>
+				<!-- South Picket Defense Warcaptain -->
+				<spawn npc_id="235165" handler="BOSS">
+					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235297" handler="ATTACKER">
+					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="1627.468" y="1545.009" z="247.7168" h="75"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="1616.125" y="1551.58" z="247.2332" h="75"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="1640.507" y="1565.124" z="247.7713"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="1615.343" y="1567.871" z="247.5785" h="51"/>
+				</spawn>
+				<!-- Tolor -->
+				<spawn npc_id="802354" respawn_time="295">
+					<spot x="1619.645" y="1559.977" z="247.6017" h="10"/>
+				</spawn>
+				<!-- Salvita -->
+				<spawn npc_id="802590" respawn_time="295">
+					<spot x="1633.021" y="1552.508" z="247.8595" h="45"/>
+				</spawn>
+				<!-- Foir -->
+				<spawn npc_id="802595" respawn_time="295">
+					<spot x="1618.363" y="1563.365" z="247.608" h="105"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- South Picket -->
+				<spawn npc_id="832818">
+					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
+				</spawn>
+				<!-- South Picket Force Warcaptain -->
+				<spawn npc_id="235072" handler="BOSS">
+					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235273" handler="ATTACKER">
+					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="1627.468" y="1545.009" z="247.7168" h="75"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="1616.125" y="1551.58" z="247.2332" h="75"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="1640.507" y="1565.124" z="247.7713"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="1615.343" y="1567.871" z="247.5785" h="51"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6110"> 
+			<simple_race race="ELYOS">
+				<!-- West Outpost -->
+				<spawn npc_id="832127">
+					<spot x="1168.28" y="247.8889" z="239.125" h="60"/>
+				</spawn>
+				<!-- West Outpost Garrison Warcaptain -->
+				<spawn npc_id="235156" handler="BOSS">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235318" handler="ATTACKER">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="1187.544" y="257.4102" z="236.9035" h="15"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="1181.666" y="264.8745" z="236.7957" h="15"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="1168.095" y="224.9149" z="239.125" h="90"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="1151.234" y="230.3043" z="239.125" h="75"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="1146.117" y="251.8072" z="239.125" h="111"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="1172.821" y="242.3675" z="239.125" h="75"/>
+				</spawn>
+				<!-- Faris -->
+				<spawn npc_id="802336" respawn_time="295">
+					<spot x="1165.077" y="253.3601" z="239.125"/>
+				</spawn>
+				<!-- Ananas -->
+				<spawn npc_id="802603" respawn_time="295">
+					<spot x="1165.745" y="260.2341" z="239.1543" h="105"/>
+				</spawn>
+				<!-- Melly -->
+				<spawn npc_id="802614" respawn_time="295">
+					<spot x="1178.191" y="242.5566" z="239.2032" h="45"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- West Outpost -->
+				<spawn npc_id="832148">
+					<spot x="1168.28" y="247.8889" z="239.125" h="11"/>
+				</spawn>
+				<!-- West Outpost Defense Warcaptain -->
+				<spawn npc_id="235169" handler="BOSS">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235312" handler="ATTACKER">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="1187.544" y="257.4102" z="236.9035" h="15"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="1181.666" y="264.8745" z="236.7957" h="15"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="1168.095" y="224.9149" z="239.125" h="31"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="1151.234" y="230.3043" z="239.125" h="75"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="1146.117" y="251.8072" z="239.125" h="51"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="1172.821" y="242.3675" z="239.125" h="33"/>
+				</spawn>
+				<!-- Kestum -->
+				<spawn npc_id="802344" respawn_time="295">
+					<spot x="1165.077" y="253.3601" z="239.125"/>
+				</spawn>
+				<!-- Asara -->
+				<spawn npc_id="802355" respawn_time="295">
+					<spot x="1177.817" y="246.859" z="239.417" h="60"/>
+				</spawn>
+				<!-- Minfyr -->
+				<spawn npc_id="802589" respawn_time="295">
+					<spot x="1165.745" y="260.2341" z="239.1543" h="105"/>
+				</spawn>
+				<!-- Rhein -->
+				<spawn npc_id="802600" respawn_time="295">
+					<spot x="1178.191" y="242.5566" z="239.2032" h="45"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- West Outpost -->
+				<spawn npc_id="832169">
+					<spot x="1168.28" y="247.8889" z="239.125" h="60"/>
+				</spawn>
+				<!-- West Outpost Force Subjugator -->
+				<spawn npc_id="235143" handler="BOSS">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235313" handler="ATTACKER">
+					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="1187.544" y="257.4102" z="236.9035" h="27"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="1181.666" y="264.8745" z="236.7957" h="97"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="1168.095" y="224.9149" z="239.125" h="31"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="1151.234" y="230.3043" z="239.125" h="57"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="1146.117" y="251.8072" z="239.125" h="51"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="1172.821" y="242.3675" z="239.125" h="103"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6111"> 
+			<simple_race race="ELYOS">
+				<!-- West Relay -->
+				<spawn npc_id="832128">
+					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
+				</spawn>
+				<!-- West Relay Garrison Warcaptain -->
+				<spawn npc_id="235155" handler="BOSS">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235318" handler="ATTACKER">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="1656.336" y="235.1442" z="251.3305" h="51"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="1658.585" y="245.7578" z="251.5321" h="51"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="1668.132" y="219.6423" z="251.375" h="110"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="1686.322" y="224.124" z="251.5" h="105"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="1691.307" y="244.4091" z="251.6151" h="15"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="1674.649" y="246.2789" z="251.625" h="85"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="731461" respawn_time="295">
+					<spot x="1679.693" y="239.6637" z="252" h="60" static_id="947"/>
+				</spawn>
+				<!-- Pasi -->
+				<spawn npc_id="802337" respawn_time="295">
+					<spot x="1671.74" y="232.4037" z="251.75" h="45"/>
+				</spawn>
+				<!-- Phumius -->
+				<spawn npc_id="802605" respawn_time="295">
+					<spot x="1666.58" y="247.9582" z="251.625" h="90"/>
+				</spawn>
+				<!-- Phoenis -->
+				<spawn npc_id="802612" respawn_time="295">
+					<spot x="1665.161" y="226.3457" z="251.375" h="30"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- West Relay -->
+				<spawn npc_id="832149">
+					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
+				</spawn>
+				<!-- West Relay Force Subjugator -->
+				<spawn npc_id="235142" handler="BOSS">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235312" handler="ATTACKER">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="1656.336" y="235.1442" z="251.3305" h="51"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="1658.585" y="245.7578" z="251.5321" h="51"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="1668.132" y="219.6423" z="251.375" h="81"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="1686.322" y="224.124" z="251.5" h="105"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="1691.307" y="244.4091" z="251.6151" h="15"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="1674.649" y="246.2789" z="251.625" h="66"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="731459" respawn_time="295">
+					<spot x="1679.693" y="239.6637" z="252" h="60" static_id="947"/>
+				</spawn>
+				<!-- Gemuit -->
+				<spawn npc_id="802345" respawn_time="295">
+					<spot x="1671.74" y="232.40367" z="253.25974" h="45"/>
+				</spawn>
+				<!-- Illadil -->
+				<spawn npc_id="802591" respawn_time="295">
+					<spot x="1666.5803" y="247.95821" z="253.05057" h="90"/>
+				</spawn>
+				<!-- Vidblainn -->
+				<spawn npc_id="802598" respawn_time="295">
+					<spot x="1665.1614" y="226.34572" z="251.5" h="30"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- West Relay -->
+				<spawn npc_id="832170">
+					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
+				</spawn>
+				<!-- West Relay Force Subjugator -->
+				<spawn npc_id="235142" handler="BOSS">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235313" handler="ATTACKER">
+					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="1656.336" y="235.1442" z="251.3305" h="51"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="1658.585" y="245.7578" z="251.5321" h="51"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="1668.132" y="219.6423" z="251.375" h="81"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="1686.322" y="224.124" z="251.5" h="105"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="1691.307" y="244.4091" z="251.6151" h="15"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="1674.649" y="246.2789" z="251.625" h="66"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6112"> 
+			<simple_race race="ELYOS">
+				<!-- East Picket -->
+				<spawn npc_id="832129">
+					<spot x="1258.119" y="1437.25" z="275" h="5"/>
+				</spawn>
+				<!-- East Picket Garrison Warcaptain -->
+				<spawn npc_id="235151" handler="BOSS">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Guardian Windblade -->
+				<spawn npc_id="235268" handler="ATTACKER">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Guardian Templar -->
+				<spawn npc_id="235184" respawn_time="295">
+					<spot x="1270.212" y="1443.202" z="274.5" h="6"/>
+				</spawn>
+				<!-- Guardian Warrior -->
+				<spawn npc_id="235185" respawn_time="295">
+					<spot x="1272.464" y="1431.106" z="274.609" h="6"/>
+				</spawn>
+				<!-- Guardian Magus -->
+				<spawn npc_id="235186" respawn_time="295">
+					<spot x="1249.785" y="1454.803" z="275.8056" h="30"/>
+				</spawn>
+				<!-- Guardian Enforcer -->
+				<spawn npc_id="235187" respawn_time="295">
+					<spot x="1241.916" y="1413.807" z="274.6202" h="75"/>
+				</spawn>
+				<!-- Guardian Patrol -->
+				<spawn npc_id="235188" respawn_time="295">
+					<spot x="1234.362" y="1451.005" z="276.7048" h="45"/>
+				</spawn>
+				<!-- Guardian Priest -->
+				<spawn npc_id="235189" respawn_time="295">
+					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
+				</spawn>
+				<!-- Penteus -->
+				<spawn npc_id="802338" respawn_time="295">
+					<spot x="1256.097" y="1445.76" z="275.3487"/>
+				</spawn>
+				<!-- Percicos -->
+				<spawn npc_id="802602" respawn_time="295">
+					<spot x="1269.725" y="1426.393" z="274.7288" h="30"/>
+				</spawn>
+				<!-- Pone -->
+				<spawn npc_id="802629" respawn_time="295">
+					<spot x="1261.136" y="1451.399" z="274.858" h="96"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- East Picket -->
+				<spawn npc_id="832150">
+					<spot x="1258.119" y="1437.25" z="275" h="5"/>
+				</spawn>
+				<!-- East Picket Defense Warcaptain -->
+				<spawn npc_id="235164" handler="BOSS">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Archon Quickblade -->
+				<spawn npc_id="235262" handler="ATTACKER">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Archon Knight -->
+				<spawn npc_id="235196" respawn_time="295">
+					<spot x="1270.212" y="1443.202" z="274.5" h="6"/>
+				</spawn>
+				<!-- Archon Aggressor -->
+				<spawn npc_id="235197" respawn_time="295">
+					<spot x="1272.464" y="1431.106" z="274.609" h="6"/>
+				</spawn>
+				<!-- Archon Sorcerer -->
+				<spawn npc_id="235198" respawn_time="295">
+					<spot x="1249.785" y="1454.803" z="275.8056" h="30"/>
+				</spawn>
+				<!-- Archon Nightblade -->
+				<spawn npc_id="235199" respawn_time="295">
+					<spot x="1241.916" y="1413.807" z="274.6202" h="75"/>
+				</spawn>
+				<!-- Archon Sentry -->
+				<spawn npc_id="235200" respawn_time="295">
+					<spot x="1234.362" y="1451.005" z="276.7048" h="45"/>
+				</spawn>
+				<!-- Archon Mender -->
+				<spawn npc_id="235201" respawn_time="295">
+					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
+				</spawn>
+				<!-- Kaymen -->
+				<spawn npc_id="802346" respawn_time="295">
+					<spot x="1256.0966" y="1445.7599" z="275.2316"/>
+				</spawn>
+				<!-- Aramilda -->
+				<spawn npc_id="802588" respawn_time="295">
+					<spot x="1269.7251" y="1426.3931" z="274.7081" h="30"/>
+				</spawn>
+				<!-- Holdor -->
+				<spawn npc_id="802651" respawn_time="295">
+					<spot x="1261.1362" y="1451.3992" z="274.66406" h="97"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- East Picket -->
+				<spawn npc_id="832171">
+					<spot x="1258.119" y="1437.25" z="275" h="5"/>
+				</spawn>
+				<!-- East Picket Force Subjugator -->
+				<spawn npc_id="235071" handler="BOSS">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Drakan Spiralblade -->
+				<spawn npc_id="235263" handler="ATTACKER">
+					<spot x="1249.33" y="1433.928" z="275.0831" h="6"/>
+				</spawn>
+				<!-- Sheban Scaleguard -->
+				<spawn npc_id="235172" respawn_time="295">
+					<spot x="1270.212" y="1443.202" z="274.5" h="6"/>
+				</spawn>
+				<!-- Sheban Contender -->
+				<spawn npc_id="235173" respawn_time="295">
+					<spot x="1272.464" y="1431.106" z="274.609" h="6"/>
+				</spawn>
+				<!-- Sheban Spellslinger -->
+				<spawn npc_id="235174" respawn_time="295">
+					<spot x="1249.785" y="1454.803" z="275.8056" h="30"/>
+				</spawn>
+				<!-- Sheban Scaleblade -->
+				<spawn npc_id="235175" respawn_time="295">
+					<spot x="1241.916" y="1413.807" z="274.6202" h="75"/>
+				</spawn>
+				<!-- Sheban Tracker -->
+				<spawn npc_id="235176" respawn_time="295">
+					<spot x="1234.362" y="1451.005" z="276.7048" h="45"/>
+				</spawn>
+				<!-- Sheban Hidestitcher -->
+				<spawn npc_id="235177" respawn_time="295">
+					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="6113"> 
+			<simple_race race="ELYOS">
+				<!-- Dragon Lord's Shrine -->
+				<spawn npc_id="832119">
+					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
+				</spawn>
+				<!-- Shrine Garrison Commander -->
+				<spawn npc_id="235158" handler="BOSS">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Archon Thunderstrike -->
+				<spawn npc_id="235255" handler="ATTACKER">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Guardian Elite Templar -->
+				<spawn npc_id="235190" respawn_time="295">
+					<spot x="908.1981" y="1056.425" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Guardian Elite Warrior -->
+				<spawn npc_id="235191" respawn_time="295">
+					<spot x="915.9265" y="1067.358" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Guardian Elite Magus -->
+				<spawn npc_id="235192" respawn_time="295">
+					<spot x="935.0168" y="1038.864" z="334.2469" h="45"/>
+					<spot x="961.1348" y="1010.088" z="334.9938" h="81"/>
+					<spot x="984.0042" y="1039.725" z="334.9939" h="15"/>
+				</spawn>
+				<!-- Guardian Elite Enforcer -->
+				<spawn npc_id="235193" respawn_time="295">
+					<spot x="935.3301" y="997.476" z="333.9691" h="75"/>
+					<spot x="972.1849" y="986.593" z="334.5486" h="6"/>
+					<spot x="1001.872" y="1041.461" z="334.7163" h="111"/>
+					<spot x="988.6609" y="1061.603" z="334.0082" h="21"/>
+				</spawn>
+				<!-- Guardian Elite Patrol -->
+				<spawn npc_id="235194" respawn_time="295">
+					<spot x="917.2454" y="1017.838" z="334.4424" h="15"/>
+					<spot x="948.9037" y="984.6534" z="334" h="75"/>
+					<spot x="954.0264" y="1073.348" z="334.2469" h="81"/>
+					<spot x="976.2064" y="1067.577" z="334.375" h="21"/>
+				</spawn>
+				<!-- Guardian Elite Priest -->
+				<spawn npc_id="235195" respawn_time="295">
+					<spot x="943.4745" y="1052.504" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Povit -->
+				<spawn npc_id="802328" respawn_time="295">
+					<spot x="934.19684" y="1027.8263" z="334.24686" h="45"/>
+				</spawn>
+				<!-- Queilos -->
+				<spawn npc_id="802632" respawn_time="295">
+					<spot x="909.14203" y="1028.5542" z="334.24686" h="13"/>
+				</spawn>
+				<!-- Seneion -->
+				<spawn npc_id="802633" respawn_time="295">
+					<spot x="908.61084" y="1034.8704" z="334.24686" h="13"/>
+				</spawn>
+				<!-- Cardia -->
+				<spawn npc_id="802634" respawn_time="295">
+					<spot x="909.87396" y="1022.699" z="334.5455" h="13"/>
+				</spawn>
+				<!-- Dianoia -->
+				<spawn npc_id="802635" respawn_time="295">
+					<spot x="929.09875" y="1073.1062" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Melos -->
+				<spawn npc_id="802636" respawn_time="295">
+					<spot x="943.24811" y="1077.1174" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Nellipus -->
+				<spawn npc_id="802637" respawn_time="295">
+					<spot x="936.02435" y="1075.1494" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804563" respawn_time="295">
+					<spot x="957.64752" y="1034.6707" z="334.24686" h="49"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<!-- Dragon Lord's Shrine -->
+				<spawn npc_id="832140">
+					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
+				</spawn>
+				<!-- Shrine Defense Commander -->
+				<spawn npc_id="235171" handler="BOSS">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Archon Thunderstrike -->
+				<spawn npc_id="235255" handler="ATTACKER">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Archon Elite Knight -->
+				<spawn npc_id="235202" respawn_time="295">
+					<spot x="908.1981" y="1056.425" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Archon Elite Aggressor -->
+				<spawn npc_id="235203" respawn_time="295">
+					<spot x="915.9265" y="1067.358" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Archon Elite Sorcerer -->
+				<spawn npc_id="235204" respawn_time="295">
+					<spot x="935.0168" y="1038.864" z="334.2469" h="45"/>
+					<spot x="961.1348" y="1010.088" z="334.9938" h="81"/>
+					<spot x="984.0042" y="1039.725" z="334.9939" h="15"/>
+				</spawn>
+				<!-- Archon Elite Nightblade -->
+				<spawn npc_id="235205" respawn_time="295">
+					<spot x="935.3301" y="997.476" z="333.9691" h="75"/>
+					<spot x="972.1849" y="986.593" z="334.5486" h="6"/>
+					<spot x="1001.872" y="1041.461" z="334.7163" h="111"/>
+					<spot x="988.6609" y="1061.603" z="334.0082" h="21"/>
+				</spawn>
+				<!-- Archon Elite Sentry -->
+				<spawn npc_id="235206" respawn_time="295">
+					<spot x="917.2454" y="1017.838" z="334.4424" h="15"/>
+					<spot x="948.9037" y="984.6534" z="334" h="75"/>
+					<spot x="954.0264" y="1073.348" z="334.2469" h="81"/>
+					<spot x="976.2064" y="1067.577" z="334.375" h="21"/>
+				</spawn>
+				<!-- Archon Elite Mender -->
+				<spawn npc_id="235207" respawn_time="295">
+					<spot x="943.4745" y="1052.504" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Ziln -->
+				<spawn npc_id="802347" respawn_time="295">
+					<spot x="934.19684" y="1027.8263" z="334.24686" h="45"/>
+				</spawn>
+				<!-- Hilmir -->
+				<spawn npc_id="802654" respawn_time="295">
+					<spot x="909.14203" y="1028.5542" z="334.24686" h="13"/>
+				</spawn>
+				<!-- Tyn -->
+				<spawn npc_id="802655" respawn_time="295">
+					<spot x="908.61084" y="1034.8704" z="334.24686" h="13"/>
+				</spawn>
+				<!-- Hiler -->
+				<spawn npc_id="802656" respawn_time="295">
+					<spot x="909.87396" y="1022.699" z="334.5455" h="13"/>
+				</spawn>
+				<!-- Nouvigg -->
+				<spawn npc_id="802657" respawn_time="295">
+					<spot x="929.09875" y="1073.1062" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Stumk -->
+				<spawn npc_id="802658" respawn_time="295">
+					<spot x="943.24811" y="1077.1174" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Biembro -->
+				<spawn npc_id="802659" respawn_time="295">
+					<spot x="936.02435" y="1075.1494" z="334.24686" h="97"/>
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="804566" respawn_time="295">
+					<spot x="957.64752" y="1034.6707" z="334.24686" h="49"/>
+				</spawn>
+				<!-- Sirot -->
+				<spawn npc_id="832841" respawn_time="295">
+					<spot x="922.0742" y="1056.0228" z="334.24686" h="45"/>
+				</spawn>
+			</simple_race>
+			<simple_race race="NPC">
+				<!-- Dragon Lord's Shrine -->
+				<spawn npc_id="832161">
+					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
+				</spawn>
+				<!-- Shrine Force Subjugator -->
+				<spawn npc_id="235145" handler="BOSS">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Archon Thunderstrike -->
+				<spawn npc_id="235255" handler="ATTACKER">
+					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+				</spawn>
+				<!-- Sheban Elite Scaleguard -->
+				<spawn npc_id="235178" respawn_time="295">
+					<spot x="908.1981" y="1056.425" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Sheban Elite Contender -->
+				<spawn npc_id="235179" respawn_time="295">
+					<spot x="915.9265" y="1067.358" z="334.2469" h="45"/>
+				</spawn>
+				<!-- Sheban Elite Spellslinger -->
+				<spawn npc_id="235180" respawn_time="295">
+					<spot x="935.0168" y="1038.864" z="334.2469" h="45"/>
+					<spot x="961.1348" y="1010.088" z="334.9938" h="81"/>
+					<spot x="984.0042" y="1039.725" z="334.9939" h="15"/>
+				</spawn>
+				<!-- Sheban Elite Scaleblade -->
+				<spawn npc_id="235181" respawn_time="295">
+					<spot x="935.3301" y="997.476" z="333.9691" h="75"/>
+					<spot x="972.1849" y="986.593" z="334.5486" h="6"/>
+					<spot x="1001.872" y="1041.461" z="334.7163" h="111"/>
+					<spot x="988.6609" y="1061.603" z="334.0082" h="21"/>
+				</spawn>
+				<!-- Sheban Elite Tracker -->
+				<spawn npc_id="235182" respawn_time="295">
+					<spot x="917.2454" y="1017.838" z="334.4424" h="15"/>
+					<spot x="948.9037" y="984.6534" z="334" h="75"/>
+					<spot x="954.0264" y="1073.348" z="334.2469" h="81"/>
+					<spot x="976.2064" y="1067.577" z="334.375" h="21"/>
+				</spawn>
+				<!-- Sheban Elite Hidestitcher -->
+				<spawn npc_id="235183" respawn_time="295">
+					<spot x="943.4745" y="1052.504" z="334.2469" h="45"/>
+				</spawn>
+			</simple_race>
+		</base_spawn>
+	</spawn_map>
+</spawns>

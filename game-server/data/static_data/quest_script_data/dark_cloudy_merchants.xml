@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+<!--
+  [BEGIN] SUMMARY
+			39500 [XML] It Was A Dark and Cloudy... Merchant
+			39501 [XML] [Daily] Periwinkle Pluma Pickle
+			39502 [XML] [Daily] Ribbit Responsibility
+			39503 [XML] [Daily] Moonflower Mess
+			39504 [XML] [Daily] Snuffler Snarl
+			39505 [SCRIPT] [Daily] Backbiting Botheration
+			39506 [XML] [Daily] Crystal Spirit Complication
+			39507 [XML] [Daily] Impeding Laupedes
+			39508 [XML] [Daily] Tyrhund Tribulations
+			39509 [XML] [Daily] Serrator Stress
+			39510 [SCRIPT] [Daily] Zorinerk Versus the Shulacks
+			39511 [XML] [Daily] Twister Torment
+			39512 [XML] [Daily] Zanthay Zeal
+			39513 [XML] [Daily] Wriggot Woe
+			39514 [XML] [Daily] Spirit-ual Strife
+			39515 [SCRIPT] [Daily] Untruth Upset
+			39516 [XML] [Daily] Undead Unrest
+			39517 [XML] [Daily] Boggart Boondoggle
+			39518 [XML] [Daily] Sludger Scourge
+			39519 [XML] [Daily] Enos Emergency
+			39520 [SCRIPT] [Daily] Vilmanerk Versus Dragonbound
+			39521 [XML] It Was A Dark and Cloudy... Shugo
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="39500" start_npc_ids="800084" end_npc_ids="205631"/>
+	<report_to id="39521" start_npc_ids="800085" end_npc_ids="205631"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="39501" start_npc_ids="0" end_npc_ids="205628">
+		<monster var="0" end_var="5" npc_ids="217936 219208 284931"/>
+	</monster_hunt>
+	<monster_hunt id="39502" start_npc_ids="0" end_npc_ids="205628">
+		<monster var="0" end_var="5" npc_ids="218580"/>
+	</monster_hunt>
+	<monster_hunt id="39503" start_npc_ids="0" end_npc_ids="205628">
+		<monster var="0" end_var="5" npc_ids="217970"/>
+	</monster_hunt>
+	<monster_hunt id="39504" start_npc_ids="0" end_npc_ids="205628">
+		<monster var="0" end_var="5" npc_ids="217974"/>
+	</monster_hunt>
+	<monster_hunt id="39506" start_npc_ids="0" end_npc_ids="205629">
+		<monster var="0" end_var="5" npc_ids="218606 218607"/>
+	</monster_hunt>
+	<monster_hunt id="39507" start_npc_ids="0" end_npc_ids="205629">
+		<monster var="0" end_var="5" npc_ids="218088 218089"/>
+	</monster_hunt>
+	<monster_hunt id="39508" start_npc_ids="0" end_npc_ids="205629">
+		<monster var="0" end_var="5" npc_ids="218142 218143"/>
+	</monster_hunt>
+	<monster_hunt id="39509" start_npc_ids="0" end_npc_ids="205629">
+		<monster var="0" end_var="5" npc_ids="218110 218111"/>
+	</monster_hunt>
+	<monster_hunt id="39511" start_npc_ids="0" end_npc_ids="205884">
+		<monster var="0" end_var="5" npc_ids="218215"/>
+	</monster_hunt>
+	<monster_hunt id="39512" start_npc_ids="0" end_npc_ids="205884">
+		<monster var="0" end_var="5" npc_ids="218220"/>
+	</monster_hunt>
+	<monster_hunt id="39513" start_npc_ids="0" end_npc_ids="205884">
+		<monster var="0" end_var="5" npc_ids="218264 218265"/>
+	</monster_hunt>
+	<monster_hunt id="39514" start_npc_ids="0" end_npc_ids="205884">
+		<monster var="0" end_var="5" npc_ids="218350 218351"/>
+	</monster_hunt>
+	<monster_hunt id="39516" start_npc_ids="0" end_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218425 218426 218427 218428"/>
+	</monster_hunt>
+	<monster_hunt id="39517" start_npc_ids="0" end_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218437"/>
+	</monster_hunt>
+	<monster_hunt id="39518" start_npc_ids="0" end_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218478"/>
+	</monster_hunt>
+	<monster_hunt id="39519" start_npc_ids="0" end_npc_ids="205885">
+		<monster var="0" end_var="5" npc_ids="218497 218498"/>
+	</monster_hunt>
+</quest_scripts>

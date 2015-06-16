@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="110070000" name="CRUCIBLE_COLISEUM_1_110070000" area_type="POLYGON" zone_type="SUB" priority="12" flags="54">
+        <points bottom="100.17214" top="200.17213">
+            <point x="538.52856" y="219.4367"/>
+            <point x="539.32635" y="289.71164"/>
+            <point x="626.0972" y="289.47266"/>
+            <point x="625.86615" y="218.40993"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="KAISINEL_ACADEMY_110070000" area_type="POLYGON" zone_type="SUB" priority="20" flags="54">
+        <points bottom="121.02234" top="221.02234">
+            <point x="409.89398" y="174.80971"/>
+            <point x="630.5267" y="173.83981"/>
+            <point x="631.2345" y="499.18155"/>
+            <point x="410.86624" y="503.03247"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="KAISINEL_ACADEMY_ENTRANCE_110070000" area_type="POLYGON" zone_type="SUB" priority="12" flags="54">
+        <points bottom="84.66969" top="184.6697">
+            <point x="431.9383" y="214.80624"/>
+            <point x="432.51428" y="292.85095"/>
+            <point x="463.90494" y="293.13895"/>
+            <point x="463.90494" y="214.80624"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="KAISINEL_ACADEMY_LOBBY_110070000" area_type="POLYGON" zone_type="SUB" priority="14" flags="54">
+        <points bottom="100.17214" top="200.17213">
+            <point x="455.05917" y="192.6201"/>
+            <point x="455.15247" y="301.70828"/>
+            <point x="543.0331" y="301.03296"/>
+            <point x="543.1609" y="193.87756"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="LIMITAREA_ARENA_L_LOBBY_AREA" area_type="POLYGON" zone_type="LIMIT" flags="52">
+        <points bottom="125.0" top="175.0">
+            <point x="475.83" y="468.89"/>
+            <point x="475.63406" y="444.59375"/>
+            <point x="477.5934" y="441.2628"/>
+            <point x="479.42218" y="437.2134"/>
+            <point x="479.94467" y="434.5356"/>
+            <point x="481.055" y="431.27"/>
+            <point x="482.29593" y="427.93906"/>
+            <point x="486.0181" y="421.14655"/>
+            <point x="488.6964" y="418.59882"/>
+            <point x="491.1778" y="416.57468"/>
+            <point x="494.05173" y="415.00702"/>
+            <point x="497.77454" y="413.83154"/>
+            <point x="508.61685" y="413.76572"/>
+            <point x="515.932" y="416.18213"/>
+            <point x="520.8955" y="421.2114"/>
+            <point x="523.18225" y="424.67374"/>
+            <point x="524.9455" y="428.0042"/>
+            <point x="526.2516" y="431.72684"/>
+            <point x="527.2313" y="434.7319"/>
+            <point x="527.4922" y="437.67062"/>
+            <point x="529.0597" y="443.09155"/>
+            <point x="529.0597" y="468.62875"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="REWARDS_OFFICE_1_110070000" area_type="POLYGON" zone_type="SUB" priority="12" flags="54">
+        <points bottom="100.17214" top="200.17213">
+            <point x="433.38232" y="294.28958"/>
+            <point x="434.32736" y="349.13562"/>
+            <point x="574.181" y="349.24475"/>
+            <point x="575.2816" y="294.36087"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="THE_GALLERY_OF_HEROES_1_110070000" area_type="POLYGON" zone_type="SUB" priority="10" flags="54">
+        <points bottom="125.7227" top="175.7227">
+            <point x="479.55563" y="437.1062"/>
+            <point x="480.0003" y="434.58942"/>
+            <point x="481.07736" y="431.36102"/>
+            <point x="482.38895" y="428.00165"/>
+            <point x="486.26614" y="421.1119"/>
+            <point x="488.80078" y="418.73056"/>
+            <point x="491.3982" y="416.68903"/>
+            <point x="494.2664" y="415.14618"/>
+            <point x="497.9792" y="413.98303"/>
+            <point x="508.54086" y="414.01117"/>
+            <point x="515.8511" y="416.46765"/>
+            <point x="520.79095" y="421.36417"/>
+            <point x="522.8428" y="424.6344"/>
+            <point x="524.64685" y="428.0393"/>
+            <point x="526.07745" y="431.78403"/>
+            <point x="526.96783" y="434.57492"/>
+            <point x="527.4652" y="437.64542"/>
+            <point x="529.0287" y="443.05127"/>
+            <point x="529.0288" y="468.4738"/>
+            <point x="475.9116" y="468.86227"/>
+            <point x="475.9093" y="444.56335"/>
+            <point x="477.61133" y="441.26007"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="WALK_OF_FAME_110070000" area_type="POLYGON" zone_type="SUB" priority="11" flags="54">
+        <points bottom="115.38455" top="215.38455">
+            <point x="457.62347" y="377.53824"/>
+            <point x="457.25635" y="475.92657"/>
+            <point x="551.7899" y="475.74304"/>
+            <point x="550.3214" y="381.9437"/>
+            <point x="517.1061" y="338.04874"/>
+            <point x="490.041" y="338.0154"/>
+        </points>
+    </zone>
+</zones>

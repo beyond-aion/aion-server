@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="140010000" name="FATEBOUND_ABBEY_140010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="95.73969" top="145.7397">
+            <point x="200.4839" y="239.13174"/>
+            <point x="243.5309" y="235.21544"/>
+            <point x="268.50992" y="240.39894"/>
+            <point x="276.6924" y="258.45825"/>
+            <point x="298.32623" y="258.06732"/>
+            <point x="298.32712" y="274.842"/>
+            <point x="277.66827" y="274.56052"/>
+            <point x="265.95755" y="292.02896"/>
+            <point x="243.29654" y="297.5783"/>
+            <point x="200.84297" y="295.26022"/>
+        </points>
+    </zone>
+    <zone mapid="140010000" name="LIMITAREALIMIT_AREA1" area_type="POLYGON" zone_type="LIMIT" flags="0">
+        <points bottom="96.0755" top="146.0755">
+            <point x="298.50058" y="258.36505"/>
+            <point x="298.33676" y="274.8251"/>
+            <point x="277.6608" y="274.59882"/>
+            <point x="265.86758" y="291.93878"/>
+            <point x="243.64752" y="297.5366"/>
+            <point x="200.90874" y="295.27393"/>
+            <point x="200.7296" y="239.1961"/>
+            <point x="243.51616" y="235.1961"/>
+            <point x="268.8376" y="240.2741"/>
+            <point x="276.3902" y="258.51978"/>
+        </points>
+    </zone>
+</zones>

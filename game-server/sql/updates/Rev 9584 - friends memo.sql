@@ -1,0 +1,1 @@
+ALTER TABLE `friends` ADD COLUMN `memo` varchar(100) NOT NULL DEFAULT '' AFTER `friend`;

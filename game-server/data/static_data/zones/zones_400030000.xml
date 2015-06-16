@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="400030000" name="AHSERIONS_BULWARK_400030000" area_type="POLYGON" zone_type="SUB" priority="1" flags="3">
+        <points bottom="674.4386" top="774.4386">
+            <point x="470.98044" y="492.4859"/>
+            <point x="490.91577" y="472.04883"/>
+            <point x="527.2173" y="472.95114"/>
+            <point x="550.3156" y="496.97556"/>
+            <point x="549.7942" y="530.4175"/>
+            <point x="525.94586" y="554.0352"/>
+            <point x="491.57" y="554.16846"/>
+            <point x="468.93375" y="529.106"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="AHSERIONS_FLIGHT_400030000" area_type="POLYGON" zone_type="SUB" priority="2" flags="3">
+        <points bottom="651.6107" top="751.6107">
+            <point x="430.81662" y="465.88742"/>
+            <point x="430.46033" y="558.49243"/>
+            <point x="466.30453" y="593.8476"/>
+            <point x="552.5372" y="592.6222"/>
+            <point x="588.08356" y="557.8607"/>
+            <point x="586.9872" y="466.46976"/>
+            <point x="554.9275" y="433.53687"/>
+            <point x="466.35403" y="435.80325"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="AHSERIONS_FLIGHT_OUTER_PATH_400030000" area_type="POLYGON" zone_type="SUB" priority="3" flags="3">
+        <points bottom="684.875" top="884.875">
+            <point x="348.3099" y="442.6286"/>
+            <point x="440.33923" y="349.55637"/>
+            <point x="585.1304" y="351.64923"/>
+            <point x="676.978" y="442.3028"/>
+            <point x="672.0757" y="591.23755"/>
+            <point x="578.5786" y="674.11835"/>
+            <point x="434.4027" y="677.4768"/>
+            <point x="353.6431" y="576.70386"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="ASPIDA_CAMP_ENTRANCE_400030000" area_type="POLYGON" zone_type="SUB" priority="5" flags="3">
+        <points bottom="640.3149" top="740.3149">
+            <point x="393.58646" y="569.49384"/>
+            <point x="450.4105" y="628.07715"/>
+            <point x="261.0362" y="826.6272"/>
+            <point x="203.72043" y="765.8175"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="ATANATOS_CAMP_ENTRANCE_400030000" area_type="POLYGON" zone_type="SUB" priority="5" flags="3">
+        <points bottom="623.49066" top="723.49066">
+            <point x="561.8582" y="623.16095"/>
+            <point x="626.8474" y="555.7315"/>
+            <point x="822.46704" y="768.6872"/>
+            <point x="765.6923" y="824.1416"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="BELUS_CAMP_ENTRANCE_400030000" area_type="POLYGON" zone_type="SUB" priority="5" flags="3">
+        <points bottom="643.9698" top="743.9698">
+            <point x="232.18343" y="288.33646"/>
+            <point x="285.72467" y="231.79254"/>
+            <point x="470.84106" y="429.8278"/>
+            <point x="397.17615" y="484.86475"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="CHARIOT_HANGAR_II_400030000" area_type="POLYGON" zone_type="SUB" priority="4" flags="3">
+        <points bottom="663.8539" top="763.8539">
+            <point x="668.53" y="549.8123"/>
+            <point x="668.6222" y="476.63193"/>
+            <point x="756.4443" y="472.5304"/>
+            <point x="756.42883" y="557.20905"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="CHARIOT_HANGAR_I_400030000" area_type="POLYGON" zone_type="SUB" priority="4" flags="3">
+        <points bottom="659.07074" top="759.07074">
+            <point x="349.61447" y="475.40967"/>
+            <point x="350.10477" y="549.4988"/>
+            <point x="273.8927" y="550.12305"/>
+            <point x="272.18774" y="463.1716"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="DISILLON_CAMP_ENTRANCE_400030000" area_type="POLYGON" zone_type="SUB" priority="5" flags="3">
+        <points bottom="684.25" top="784.25">
+            <point x="629.1884" y="449.9999"/>
+            <point x="571.23676" y="393.77487"/>
+            <point x="762.059" y="204.21361"/>
+            <point x="817.5404" y="261.7965"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="IGNUS_ENGINE_HANGAR_II_400030000" area_type="POLYGON" zone_type="SUB" priority="4" flags="3">
+        <points bottom="674.96967" top="774.96967">
+            <point x="473.00552" y="676.9572"/>
+            <point x="545.63904" y="677.17786"/>
+            <point x="547.24994" y="763.64825"/>
+            <point x="467.608" y="764.9775"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="IGNUS_ENGINE_HANGAR_I_400030000" area_type="POLYGON" zone_type="SUB" priority="4" flags="3">
+        <points bottom="669.124" top="769.124">
+            <point x="546.0368" y="352.31207"/>
+            <point x="470.83206" y="353.97006"/>
+            <point x="470.1865" y="270.19293"/>
+            <point x="555.6837" y="266.4577"/>
+        </points>
+    </zone>
+    <zone mapid="400030000" name="LIMITAREAGAB1_SUB_DESIGN_41" area_type="POLYGON" zone_type="LIMIT" flags="0">
+        <points bottom="477.4518" top="977.45184">
+            <point x="182.57175" y="43.104614"/>
+            <point x="191.19865" y="937.43286"/>
+            <point x="999.22144" y="962.6262"/>
+            <point x="1016.0067" y="70.532684"/>
+        </points>
+    </zone>
+</zones>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!-- 
+		[BEGIN] SUMMARY
+			16970 [XML] The Ophidan Bridge
+			16971 [XML] [Group] Theano's Theories
+			16972 [XML] [Group] Beritra's Most Favorite Gun
+			16973 [TODO] Ophidan Bridge
+			16979 [XML] Engulfed Bridge
+			26970 [XML] Find the Vera Siege Ballista
+			26971 [XML] [Group] Penetrate the Guard Post
+			26972 [XML] [Group] Volatile Vera (rep)
+			26973 [TODO] Ophidan Bridge
+			26979 [XML] Defend the Advance Route to the Last Soldiers
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="16970" start_npc_ids="801762" end_npc_ids="801763"/>
+	<report_to id="16979" start_npc_ids="801762" end_npc_ids="801763"/>
+	<report_to id="26970" start_npc_ids="801764" end_npc_ids="801765"/>
+	<report_to id="26979" start_npc_ids="802026" end_npc_ids="801764"/>
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="16971" start_npc_ids="801763" end_npc_ids="801762">
+		<monster var="0" end_var="1" npc_ids="230413 230414 230415 230416"/>
+	</monster_hunt>
+	<monster_hunt id="16972" start_npc_ids="801762">
+		<monster var="0" end_var="1" npc_ids="231050"/>
+	</monster_hunt>
+	<monster_hunt id="26971" start_npc_ids="801765" end_npc_ids="801764">
+		<monster var="0" end_var="1" npc_ids="230413 230414 230415 230416"/>
+	</monster_hunt>
+	<monster_hunt id="26972" start_npc_ids="801764">
+		<monster var="0" end_var="1" npc_ids="231050"/>
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+</quest_scripts>

@@ -1,0 +1,67 @@
+package quest.event_quests;
+
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.questEngine.model.QuestState;
+import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.EventService;
+import com.aionemu.gameserver.services.QuestService;
+
+public class _80008PieceOfCake extends QuestHandler {
+
+	private final static int questId = 80008;
+
+	public _80008PieceOfCake() {
+		super(questId);
+	}
+
+	@Override
+	public void register() {
+		qe.registerQuestNpc(798415).addOnTalkEvent(questId);
+		qe.registerOnLevelUp(questId);
+	}
+
+	@Override
+	public boolean onDialogEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+
+		if (env.getTargetId() == 0) {
+			if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				QuestService.startEventQuest(env, QuestStatus.START);
+				closeDialogWindow(env);
+				return true;
+			}
+		}
+
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null)
+			return false;
+
+		int var = qs.getQuestVarById(0);
+
+		if (qs.getStatus() == QuestStatus.START) {
+			if (env.getTargetId() == 798415) {
+				switch (env.getDialog()) {
+					case QUEST_SELECT:
+						if (var == 0)
+							return sendQuestDialog(env, 2375);
+					case SELECT_QUEST_REWARD:
+						removeQuestItem(env, 182214006, 1);
+						return defaultCloseDialog(env, 0, 1, true, true);
+				}
+			}
+		}
+		return sendQuestRewardDialog(env, 798415, 0);
+	}
+	
+	@Override
+	public boolean onLvlUpEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
+			QuestService.abandonQuest(player, questId);
+		return true;
+	}
+}

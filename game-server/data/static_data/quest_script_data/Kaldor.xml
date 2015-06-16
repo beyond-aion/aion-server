@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quest_scripts>
+	<!--
+  		[BEGIN] SUMMARY
+  			13800 [XML] New Lands to Behold
+  			13801 [XML] [Urgent Order] Minus One
+  			13802 [XML] [Weekly] A Stone's Throw Away from Stonereach
+  			13803 [XML] [Weekly] Watching Valiant's Watch
+  			13804 [XML] [Weekly] Iron and Ire
+  			13805 [XML] [Weekly] Cross Country Cross Up
+  			13806 [XML] Hymrunerk Power and Associates
+  			13807 [XML] The Flames of Kaldor
+  			13808 [XML] Obnoxious Obscuras
+  			13809 [XML] Tree is Company
+  			13810 [XML] Legends of Folly
+  			13811 [XML] Remnants of the Past
+  			13812 [XML] An Unlikely Alliance
+  			13813 [XML] [Weekly] Rabble Unroused
+  			13814 [XML] [Weekly] Jobs Beget Jobs
+  			13815 [XML] [Weekly] Broken
+  			13816 [TODO] [Weekly] Ancient Hero
+  			13817 [SCRIPT] [Weekly] The Fury Within
+  			13818 [XML] [Weekly] Indirect Warfare
+  			13819 [XML] [Weekly] On the Heels of Failure
+			13820 [XML] [Weekly] Keen Resource
+			13821 [XML] [Weekly] Ashen Duty
+  			16922 [XML] Shugo Checkup
+  			23800 [XML] A Full New World
+  			23801 [XML] [Urgent Order] Feroz's Request
+  			23802 [XML] [Weekly] Pathway Thrashing
+  			23803 [XML] [Weekly] Selfless at Stonereach
+  			23804 [XML] [Weekly] Flamecrest Fallen
+  			23805 [XML] [Weekly] Vanguard Down
+  			23806 [XML] Talking 'Bout My Generators
+  			23807 [XML] An Ample Sample
+  			23808 [XML] Keeping the Keep Clear
+  			23809 [XML] Scar of the Past
+  			23810 [XML] Memory of the Collapsed Rune
+  			23811 [XML] Cozy Conspiracy
+  			23812 [XML] They've Got a Plot
+  			23813 [XML] [Weekly] Vanquish the Vicinity
+  			23814 [XML] [Weekly] Timberrrrrr
+  			23815 [XML] [Weekly] A Spirit Released
+  			23816 [TODO] [Weekly] Old Hero
+  			23817 [SCRIPT] [Weekly] Free Spirit
+  			23818 [XML] [Weekly] Spirit, Surprise, Strike
+  			23819 [XML] [Weekly] Agitator Devastator
+			23820 [XML] [Weekly] No Heckling Allowed
+			23821 [XML] [Weekly] Due Diligence
+  			26922 [TODO] Another Passage
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_to_many id="13800" start_npc_ids="800527" end_npc_ids="801163">
+		<npc_infos var="0" npc_id="800958" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="801163" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many> 
+	<report_to_many id="13809" start_npc_ids="802427" end_npc_ids="802427">
+		<npc_infos var="0" npc_id="730969" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="730970" quest_dialog="1693"/>
+		<npc_infos var="2" npc_id="730971" quest_dialog="2034"/>
+		<npc_infos var="3" npc_id="802427" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="13815" start_npc_ids="804586" end_npc_ids="804586">
+		<npc_infos var="0" npc_id="804595" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="804586" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="23800" start_npc_ids="800529" end_npc_ids="802433">
+		<npc_infos var="0" npc_id="800980" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="802433" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many> 
+	<report_to_many id="23809" start_npc_ids="802429" end_npc_ids="802429">
+		<npc_infos var="0" npc_id="730969" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="730970" quest_dialog="1693"/>
+		<npc_infos var="2" npc_id="730971" quest_dialog="2034"/>
+		<npc_infos var="3" npc_id="802429" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="23815" start_npc_ids="804591" end_npc_ids="804591">
+		<npc_infos var="0" npc_id="804594" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="804591" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to id="16922" start_npc_ids="802431" end_npc_ids="804628"/>
+	<report_to id="26922" start_npc_ids="802433" end_npc_ids="804628"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="13806" start_npc_ids="802358"/>
+	<item_collecting id="13807" start_npc_ids="802432"/>
+	<item_collecting id="13810" start_npc_ids="802428"/>
+	<item_collecting id="23806" start_npc_ids="802362"/>
+	<item_collecting id="23807" start_npc_ids="802434"/>
+	<item_collecting id="23810" start_npc_ids="802430"/>
+	<item_collecting id="13812" start_npc_ids="802428"/>
+	<item_collecting id="13813" start_npc_ids="804584"/>
+	<item_collecting id="13819" start_npc_ids="804588"/>
+	<item_collecting id="13820" start_npc_ids="804584"/>
+	<item_collecting id="13821" start_npc_ids="804584"/>
+	<item_collecting id="23812" start_npc_ids="802430"/>
+	<item_collecting id="23813" start_npc_ids="804589"/>
+	<item_collecting id="23819" start_npc_ids="804593"/>
+	<item_collecting id="23820" start_npc_ids="804589"/>
+	<item_collecting id="23821" start_npc_ids="804589"/>
+	<!-- MONSTER HUNT QUESTS -->
+	<monster_hunt id="13802" start_npc_ids="802427">	
+		<monster var="0" npc_ids="234141" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="13803" start_npc_ids="802427">	
+		<monster var="0" npc_ids="234115" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="13804" start_npc_ids="802428">	
+		<monster var="0" npc_ids="234145" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="13805" start_npc_ids="802428">	
+		<monster var="0" npc_ids="234122" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="13808" start_npc_ids="802431">	
+		<monster var="0" npc_ids="234294 234530" end_var="5"/>
+		<monster var="1" npc_ids="234529" end_var="3"/>
+	</monster_hunt>
+	<monster_hunt id="13811" start_npc_ids="802427">	
+		<monster var="0" npc_ids="234659 234660 234661" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="13814" start_npc_ids="804585">	
+		<monster var="0" npc_ids="234659 234660 234661" end_var="15"/><!-- TODO -->
+	</monster_hunt>
+	<monster_hunt id="23802" start_npc_ids="802429">	
+		<monster var="0" npc_ids="234048" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23803" start_npc_ids="802429">	
+		<monster var="0" npc_ids="234045" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23804" start_npc_ids="802430">	
+		<monster var="0" npc_ids="234063" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23805" start_npc_ids="802430">	
+		<monster var="0" npc_ids="234065" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23808" start_npc_ids="802433">	
+		<monster var="0" npc_ids="234529" end_var="3"/>
+		<monster var="1" npc_ids="234294 234530" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23811" start_npc_ids="802429">	
+		<monster var="0" npc_ids="234659 234660 234661" end_var="5"/>
+	</monster_hunt>
+	<monster_hunt id="23814" start_npc_ids="804590">	
+		<monster var="0" npc_ids="234267" end_var="15"/>
+	</monster_hunt>
+	<!-- KILL IN WORLD QUESTS -->
+    <kill_in_world id="13801" start_npc_ids="000000" end_npc_ids="802431" worlds="600090000" amount="1"/>
+	<kill_in_world id="13818" start_npc_ids="804588" end_npc_ids="804588" worlds="600090000" amount="6"/>
+	<kill_in_world id="23801" start_npc_ids="000000" end_npc_ids="802433" worlds="600090000" amount="1"/>
+	<kill_in_world id="23818" start_npc_ids="804593" end_npc_ids="804593" worlds="600090000" amount="6"/>
+</quest_scripts>

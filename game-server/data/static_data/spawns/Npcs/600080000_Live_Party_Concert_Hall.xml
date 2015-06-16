@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="600080000">
+		<!-- Concert Hall Exit Usher -->
+		<spawn npc_id="831668" respawn_time="295">
+			<spot x="1508.7533" y="1482.7859" z="565.90674" h="15"/>
+		</spawn>
+		<!-- Concert Hall Exit Usher -->
+		<spawn npc_id="831669" respawn_time="295">
+			<spot x="1505.0033" y="1486.2859" z="565.90674" h="15"/>
+		</spawn>
+		<!-- Concert Hall Exit Usher -->
+		<spawn npc_id="831670" respawn_time="295">
+			<spot x="1505.0033" y="1537.0359" z="565.87994" h="105"/>
+		</spawn>
+		<!-- Concert Hall Exit Usher -->
+		<spawn npc_id="831671" respawn_time="295">
+			<spot x="1508.5033" y="1540.2859" z="565.8797" h="105"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831640" respawn_time="295">
+			<spot x="1551.4689" y="1508.3958" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831641" respawn_time="295">
+			<spot x="1553.8622" y="1510.0067" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831642" respawn_time="295">
+			<spot x="1553.8474" y="1513.1757" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831643" respawn_time="295">
+			<spot x="1551.4486" y="1514.7303" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831645" respawn_time="295">
+			<spot x="1553.8622" y="1506.8083" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831646" respawn_time="295">
+			<spot x="1553.877" y="1516.3296" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUGoodDay_Dancer -->
+		<spawn npc_id="831647" respawn_time="295">
+			<spot x="1551.4634" y="1517.8844" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUThemeSong_Israpel -->
+		<spawn npc_id="831652" respawn_time="295">
+			<spot x="1552.6637" y="1515.728" z="567.63165" h="11"/>
+		</spawn>
+		<!-- IUThemeSong_Kahrun -->
+		<spawn npc_id="831649" respawn_time="295">
+			<spot x="1555.1962" y="1513.1829" z="567.63165" h="11"/>
+		</spawn>
+		<!-- IUThemeSong_Kromede -->
+		<spawn npc_id="831650" respawn_time="295">
+			<spot x="1555.1688" y="1509.8182" z="567.63165" h="11"/>
+		</spawn>
+		<!-- IUThemeSong_Lighting -->
+		<spawn npc_id="831656" respawn_time="295">
+			<spot x="1532.48" y="1511.5601" z="575" h="90"/>
+		</spawn>
+		<!-- IUThemeSong_Tiamat -->
+		<spawn npc_id="831651" respawn_time="295">
+			<spot x="1552.658" y="1507.3202" z="567.63165" h="11"/>
+		</spawn>
+		<!-- IUThemeSong_Vasharti -->
+		<spawn npc_id="831653" respawn_time="295">
+			<spot x="1550.9604" y="1518.1902" z="567.63165" h="11"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831633" respawn_time="295">
+			<spot x="1553.8553" y="1505.209" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831634" respawn_time="295">
+			<spot x="1551.5784" y="1507.7809" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831635" respawn_time="295">
+			<spot x="1553.8646" y="1509.4569" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831636" respawn_time="295">
+			<spot x="1551.6274" y="1511.6073" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831637" respawn_time="295">
+			<spot x="1553.8915" y="1513.9597" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831638" respawn_time="295">
+			<spot x="1551.5425" y="1515.4755" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Dancer -->
+		<spawn npc_id="831639" respawn_time="295">
+			<spot x="1553.8555" y="1517.8787" z="567.63165" h="118"/>
+		</spawn>
+		<!-- IUYouandI_Lighting -->
+		<spawn npc_id="831654" respawn_time="295">
+			<spot x="1532.48" y="1511.5601" z="575" h="90"/>
+		</spawn>
+		<!-- Live Party Operating Helper -->
+		<spawn npc_id="831708" respawn_time="295">
+			<spot x="1492.1527" y="1511.5634" z="565.9067"/>
+		</spawn>
+	</spawn_map>
+</spawns>

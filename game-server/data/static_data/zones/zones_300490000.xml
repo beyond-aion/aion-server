@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300490000" name="THRONE_OF_BLOOD_1_300490000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="157.0" top="557.0">
+            <point x="399.0" y="412.0"/>
+            <point x="609.0" y="412.0"/>
+            <point x="609.0" y="632.0"/>
+            <point x="399.0" y="632.0"/>
+        </points>
+    </zone>
+</zones>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bind_points xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bind_points.xsd">
+    <bind_point npcid="250092" name="Binding_Stone_Abyss_Li" price="-1"/><!-- 2.6new -->
+    <bind_point npcid="250093" name="Binding_Stone_Abyss_Da" price="-1"/><!-- 2.6new -->
+	<bind_point npcid="700012" name="Binding_Stone_NPC" price="10500"/><!-- KATALAM 4.3 NA -->
+    <bind_point npcid="700013" name="Binding_Stone_akarios" price="47"/><!-- Akarios Village -->
+    <bind_point npcid="700014" name="Binding_Stone_melpone" price="143"/><!-- Melponeh Campsite -->
+    <bind_point npcid="700015" name="Binding_Stone_verterron" price="480"/><!-- Verteron Citadel -->
+    <bind_point npcid="700016" name="Binding_Stone_tolbas" price="671"/><!-- Tolbas Village -->
+    <bind_point npcid="700017" name="Binding_Stone_Illusionary_lake" price="864"/><!-- Ardus Shrine -->
+    <bind_point npcid="700018" name="Binding_Stone_elysium" price="1681"/><!-- Sanctum -->
+    <bind_point npcid="700019" name="Binding_Stone_kantas" price="960"/><!-- Cantas Coast -->
+    <bind_point npcid="700020" name="Binding_Stone_artamia" price="864"/><!-- Pilgrim's Respite -->
+    <bind_point npcid="700021" name="Binding_Stone_eltenen" price="2857"/><!-- Eltnen Fortress -->
+    <bind_point npcid="700022" name="Binding_Stone_eracus" price="4959"/><!-- Golden Bough Garrison -->
+    <bind_point npcid="700023" name="Binding_Stone_ageiron" price="6809"/><!-- Agairon Village -->
+    <bind_point npcid="700024" name="Binding_Stone_interdika" price="6726"/><!-- New Heiron Gate -->
+    <bind_point npcid="700025" name="Binding_Stone_LF3_sanctuary" price="8936"/><!-- Heiron Observatory -->
+    <bind_point npcid="700026" name="Binding_Stone_holytree" price="11675"/><!-- Arbolus Haven -->
+    <bind_point npcid="700027" name="Binding_Stone_silent" price="12647"/><!-- Jeiaparan Village -->
+    <bind_point npcid="700062" name="Binding_Stone_Dark" price="-1"/><!-- 2.6new -->
+    <bind_point npcid="700063" name="Binding_Stone_alder" price="43"/><!-- Aldelle Village -->
+    <bind_point npcid="700064" name="Binding_Stone_anturn" price="134"/><!-- Anturoon Crossing -->
+    <bind_point npcid="700065" name="Binding_Stone_altgard" price="451"/><!-- Altgard Fortress -->
+    <bind_point npcid="700066" name="Binding_Stone_basfelt" price="632"/><!-- Basfelt Village -->
+    <bind_point npcid="700067" name="Binding_Stone_impetusium" price="813"/><!-- Heart Of Impetusium -->
+	<bind_point npcid="700068" name="Binding_Stone_pandemonium" price="1582"/><!-- Pandaemonium -->
+	<bind_point npcid="700118" name="BindStone_light_normal_test" price="60000"/><!-- New 4.7 NA -->
+	<bind_point npcid="700119" name="BindStone_light_guild_test" price="60000"/><!-- New 4.7 NA -->
+	<bind_point npcid="700120" name="BindStone_dark_normal_test" price="60000"/><!-- New 4.7 NA -->
+	<bind_point npcid="700121" name="BindStone_dark_guild_test" price="60000"/><!-- New 4.7 NA -->
+    <bind_point npcid="700213" name="Binding_Stone_Morheim_Camp" price="4353"/><!-- Desert Garrison -->
+    <bind_point npcid="700231" name="Binding_Stone_morheim" price="2690"/><!-- Morheim Ice Fortress -->
+    <bind_point npcid="700232" name="Binding_Stone_iralsig" price="6095"/><!-- Alsig Village -->
+    <bind_point npcid="700255" name="Binding_Stone_LF2_sanctuary" price="7567"/><!-- Eltnen Observatory -->
+    <bind_point npcid="700256" name="Binding_Stone_LF2_GuardPoint" price="5632"/><!-- Novan Crossing -->
+    <bind_point npcid="700257" name="Binding_Stone_LF2_ScoutCamp" price="7987"/><!-- Kuriullu Outpost -->
+    <bind_point npcid="700258" name="Binding_Stone_DF2_GundalpunHouse" price="3720"/><!-- Kellans Cabin -->
+    <bind_point npcid="700259" name="Binding_Stone_DF2_UtgarCamp" price="4353"/><!-- Slag Bulwark -->
+    <bind_point npcid="700260" name="Binding_Stone_DF2_sanctuary" price="7125"/><!-- Morheim Observatory -->
+	<bind_point npcid="700261" name="Binding_Stone_DF2_ModgudCamp" price="7758"/><!-- Halabana Outpost -->
+	<bind_point npcid="700297" name="Binding_Stone_DF3_OP" price="6333"/><!-- Beluslan Fortress -->
+    <bind_point npcid="700298" name="Binding_Stone_DF3_refugeeVil" price="9737"/><!-- Besfer Refugee Camp -->
+    <bind_point npcid="700299" name="Binding_Stone_DF3_LycanVil" price="14046"/><!-- Red Mane Cavern -->
+    <bind_point npcid="700300" name="Binding_Stone_DF3_Flame" price="7758"/><!-- Camp Kistenian -->
+    <bind_point npcid="700301" name="Binding_Stone_DF3_LycanHideout" price="12823"/><!-- Hoarfrost Shelter -->
+    <bind_point npcid="700343" name="Binding_Stone_LF2a_Camp" price="2269"/><!-- Meniherk Excavation Camp -->
+    <bind_point npcid="700344" name="Binding_Stone_DF2a_Camp" price="2136"/><!-- Settlers Campsite -->
+    <bind_point npcid="700399" name="Binding_Stone_LF2a_Sanctuary" price="21621"/><!-- Observatory Village -->
+    <bind_point npcid="700400" name="Binding_Stone_LF2a_Jamanok" price="24323"/><!-- Jamanok Inn -->
+    <bind_point npcid="700401" name="Binding_Stone_DF2a_Veldazar" price="20358"/><!-- Baltasar Hill Village -->
+    <bind_point npcid="700402" name="Binding_Stone_DF2a_BumBum" price="22902"/><!-- BuBu Village -->
+    <bind_point npcid="700816" name="Binding_Stone_LF2a_Anangke" price="22702"/><!-- Port Anangke -->
+    <bind_point npcid="700817" name="Binding_Stone_LF2a_Dirmoi" price="20180"/><!-- Josnack's Vigil -->
+    <bind_point npcid="700818" name="Binding_Stone_LF3_Senemonea" price="7207"/><!-- Senea Campsite -->
+    <bind_point npcid="700819" name="Binding_Stone_LF3_Kishar" price="9609"/><!-- Kishar Observation Post -->
+    <bind_point npcid="700820" name="Binding_Stone_LF3_Chengarung" price="12012"/><!-- Changarnerk's Campsite -->
+    <bind_point npcid="700821" name="Binding_Stone_DF1a_Port" price="2035"/><!-- Trader Berth -->
+    <bind_point npcid="700822" name="Binding_Stone_DF1a_Kalbaria" price="2035"/><!-- Altgard Observatory -->
+    <bind_point npcid="700823" name="Binding_Stone_DF2a_Deathvalley" price="21489"/><!-- Edge Of Torment -->
+    <bind_point npcid="700824" name="Binding_Stone_DF2a_Iulru" price="21489"/><!-- Iollu Overlook -->
+    <bind_point npcid="700825" name="Binding_Stone_DF3_Kidorun" price="9048"/><!-- Kidorun Campsite -->
+	<bind_point npcid="701242" name="Yun_Binding_stone_LDF4b_OP_L" price="62459"/><!-- Rankora Fortress -->
+    <bind_point npcid="701243" name="Yun_Binding_stone_LDF4b_TW1" price="62459"/><!-- Prago Outpost -->
+    <bind_point npcid="701244" name="Yun_Binding_stone_LDF4b_TW2" price="64641"/><!-- 3.0 new -->
+    <bind_point npcid="701245" name="Yun_Binding_stone_LDF4b_TW3" price="64641"/><!-- Cindercone Outpost -->
+    <bind_point npcid="701246" name="Yun_Binding_stone_LDF4b_TW4" price="66855"/><!-- Petro Outpost -->
+    <bind_point npcid="701247" name="Yun_Binding_stone_LDF4b_C1" price="62459"/><!-- Gurrik Tree -->
+    <bind_point npcid="701248" name="Yun_Binding_stone_LDF4b_C2" price="66855"/><!-- Black Cloud Camp -->
+	<bind_point npcid="701270" name="asmodian obelisk" price="62459"/><!-- Rankora Fortress -->
+    <bind_point npcid="701361" name="Binding_Stone_Elyan" price="2071"/><!-- Oriel Plaza -->
+    <bind_point npcid="701362" name="Binding_Stone_Pernon" price="2071"/><!-- Pernon Plaza -->
+    <bind_point npcid="701504" name="Binding_Stone_LF2a_C5" price="15440"/><!-- Honglas's Barracks -->
+    <bind_point npcid="701505" name="Binding_Stone_LF2a_B2" price="14746"/><!-- Latheron Coast Base Camp -->
+    <bind_point npcid="701506" name="Binding_Stone_LF3_F3" price="19797"/><!-- Coast Watchers Post -->
+    <bind_point npcid="701507" name="Binding_Stone_LF3_E" price="18790"/><!-- Reaper Outpost -->
+    <bind_point npcid="701508" name="Binding_Stone_DF2a_A3" price="15852"/><!-- Need Sniff Price-->
+    <bind_point npcid="701509" name="Binding_Stone_DF2a_C3" price="15440"/><!-- Kamstow's Barracks -->
+	<bind_point npcid="702232" name="1401_D_Binding_stone_L" price="600"/><!-- Drakenwreck Obelisk Need Sniff Price-->
+    <bind_point npcid="702233" name="1401_D_Binding_stone_D" price="600"/><!-- Drakenwreck Obelisk Need Sniff Price-->
+    <bind_point npcid="702236" name="1402_D_Binding_stone_L" price="600"/><!-- Grave of Claws Obelisk Need Sniff Price-->
+    <bind_point npcid="702237" name="1402_D_Binding_stone_D" price="600"/><!-- Grave of Claws Obelisk Need Sniff Price-->
+    <bind_point npcid="702240" name="1403_D_Binding_stone_L" price="600"/><!-- Drakenfall Obelisk Need Sniff Price-->
+    <bind_point npcid="702241" name="1403_D_Binding_stone_D" price="600"/><!-- Drakenfall Obelisk Need Sniff Price-->
+	<bind_point npcid="702574" name="LDF5_Fortress_Binding_stone_L" price="60000"/><!-- New 4.7 NA -->
+	<bind_point npcid="702575" name="LDF5_Fortress_Binding_stone_D" price="60000"/><!-- New 4.7 NA -->
+	<bind_point npcid="730071" name="Binding_Stone_Ab1_LightStart" price="4324"/><!-- Teminon Fortresss -->
+    <bind_point npcid="730072" name="Binding_Stone_Ab1_DarkStart" price="4071"/><!-- Primum Fortress -->
+	<bind_point npcid="730235" name="Binding_Stone_LF4_OP" price="28755"/><!-- Soteria Sanctuary -->
+    <bind_point npcid="730236" name="Binding_Stone_LF4_Town" price="42093"/><!-- Undirborg Observation Post -->
+    <bind_point npcid="730237" name="Binding_Stone_LF4_Fort" price="26920"/><!-- Inggison Illusion Fortress -->
+    <bind_point npcid="730238" name="Binding_Stone_DF4_OP" price="24882"/><!-- Gelkmaros Fortress -->
+    <bind_point npcid="730239" name="Binding_Stone_DF4_Town" price="26578"/><!-- Rhonnam Refugee Village -->
+    <bind_point npcid="730240" name="Binding_Stone_DF4_Fort" price="-1"/><!-- 2.6 new -->
+    <bind_point npcid="730281" name="Binding_Stone_LF4_B5" price="-1"/><!-- 2.6 new -->
+    <bind_point npcid="730282" name="Binding_Stone_LF4_C4" price="-1"/><!-- 2.6 new -->
+    <bind_point npcid="730283" name="Binding_Stone_DF4_B6" price="38906"/><!-- Subterranea Obsvervation Post -->
+    <bind_point npcid="730284" name="Binding_Stone_DF4_C3" price="41945"/><!-- Volgaltem Scout Post -->
+	<bind_point npcid="730844" name="Binding_Stone_LDF5_L" price="85185"/><!-- Kaisinel's Beacon -->
+    <bind_point npcid="730845" name="Binding_Stone_LDF5_D" price="85185"/><!-- Relics of Sorrow -->
+    <bind_point npcid="730846" name="Binding_Stone_LDF5b_L_Shugo" price="127778"/><!-- Goldrine Free City -->
+    <bind_point npcid="730847" name="Binding_Stone_LDF5b_D_Shugo" price="127778"/><!-- Pandarunerk's Delve -->
+    <bind_point npcid="730848" name="Binding_Stone_LDF5_Under_L" price="4259301"/><!-- New 4.3 NA Idian Depths -->
+    <bind_point npcid="730849" name="Binding_Stone_LDF5_Under_D" price="4259301"/><!-- New 4.3 NA Idian Depths -->
+	<bind_point npcid="731453" name="LDF4_Advance_Binding_stone_L" price="103224"/><!-- New 4.7.1 NA -->
+	<bind_point npcid="731454" name="LDF4_Advance_Binding_stone_D" price="101161"/><!-- New 4.7.1 NA -->
+    <bind_point npcid="800009" name="Yun_Binding_stone_LDF4a_OP" price="56026"/><!-- Kamar -->
+    <bind_point npcid="800010" name="Yun_Binding_stone_LDF4a_TW1" price="58045"/><!-- Western Guardian's Seal -->
+    <bind_point npcid="800011" name="Yun_Binding_stone_LDF4a_TW2" price="58045"/><!-- Eastern Guardian's Seal -->
+    <bind_point npcid="800012" name="Yun_Binding_stone_LDF4a_A2" price="56026"/><!-- Garldar Village -->
+    <bind_point npcid="800013" name="Yun_Binding_stone_LDF4a_B1" price="59273"/><!-- Herbalist's Camp -->
+    <bind_point npcid="800014" name="Yun_Binding_stone_LDF4a_B2" price="58045"/><!-- Jotun Research Expedition -->
+    <bind_point npcid="800015" name="Yun_Binding_stone_LDF4a_C1" price="61165"/><!-- Twisted Land Research Expedition -->
+    <bind_point npcid="800016" name="Yun_Binding_stone_LDF4a_C2" price="62459"/><!-- Sabat's End -->
+    <bind_point npcid="800057" name="LDF4a_D_Binding_stone" price="61165"/><!-- Hushblade Garrison -->
+    <bind_point npcid="800058" name="LDF4a_D_Binding_stone_D" price="61165"/><!-- Fatebound Garrison -->
+    <bind_point npcid="800112" name="Yun_Binding_stone_LDF4a_A2_2" price="56026"/><!-- Nalotia's Cabin -->	
+</bind_points>

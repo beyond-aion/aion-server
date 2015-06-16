@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301130000">
+		<!-- Afflicted Combatant -->
+		<spawn npc_id="284440">
+			<spot x="291.52863" y="890.2809" z="411.45676" h="60"/>
+			<spot x="293.87274" y="892.06396" z="411.37183" h="30"/>
+			<spot x="294.0236" y="888.3518" z="411.45676"/>
+			<spot x="306.23566" y="904.3292" z="411.45676" h="90"/>
+			<spot x="308.57977" y="906.1123" z="411.45676" h="30"/>
+			<spot x="308.73062" y="902.40015" z="411.45676"/>
+			<spot x="311.61057" y="877.1111" z="411.33" h="60"/>
+			<spot x="313.90564" y="878.8968" z="411.33" h="45"/>
+			<spot x="314.10553" y="875.182" z="411.33" h="105"/>
+		</spawn>
+		<!-- Archmagus Sayahum -->
+		<spawn npc_id="233257">
+			<spot x="263.4655" y="456.98572" z="156.70569" h="90"/>
+		</spawn>
+		<!-- BIDVritra_Base_Boss_StartNPC -->
+		<spawn npc_id="284668">
+			<spot x="109.77601" y="889.8691" z="411.53635" h="60"/>
+			<spot x="307.9712" y="889.81006" z="411.5354" h="60"/>
+			<spot x="503.84528" y="889.6713" z="411.537" h="60"/>
+			<spot x="703.90173" y="889.7079" z="411.53632" h="60"/>
+			<spot x="899.8686" y="889.7701" z="411.537" h="60"/>
+		</spawn>
+		<!-- IDVritra_Base_GameStart -->
+		<spawn npc_id="284701">
+			<spot x="639.6475" y="211.23352" z="190.875"/>
+		</spawn>
+		<!-- BIDVritra_Base_Temp01 -->
+		<spawn npc_id="284670">
+			<spot x="888.235" y="877.911" z="411.45676" h="60"/>
+			<spot x="899.64044" y="874.6363" z="411.45676" h="60"/>
+			<spot x="910.5698" y="877.9197" z="411.45676" h="60"/>
+		</spawn>
+		<!-- BIDVritra_Base_Temp02 -->
+		<spawn npc_id="284671">
+			<spot x="888.2383" y="901.4633" z="411.45676" h="60"/>
+			<spot x="899.5732" y="905.0094" z="411.45676" h="60"/>
+			<spot x="910.32526" y="900.78186" z="411.45676" h="60"/>
+		</spawn>
+		<!-- BIDVritra_Base_Temp03 -->
+		<spawn npc_id="284672">
+			<spot x="899.8189" y="889.72455" z="411.5368" h="60"/>
+		</spawn>
+		<!-- Brainwashed Combatant -->
+		<spawn npc_id="284438">
+			<spot x="489.19495" y="887.62885" z="411.44113"/>
+			<spot x="506.9828" y="875.74725" z="411.33" h="33"/>
+			<spot x="510.444" y="902.2241" z="411.33" h="75"/>
+		</spawn>
+		<!-- Brainwashed Spellcaster -->
+		<spawn npc_id="284439">
+			<spot x="489.41266" y="892.1056" z="411.33"/>
+			<spot x="506.71103" y="904.02" z="411.33" h="87"/>
+			<spot x="510.34674" y="878.0253" z="411.33" h="45"/>
+		</spawn>
+		<!-- Brigade General Sheba -->
+		<spawn npc_id="230858">
+			<spot x="899.76935" y="889.67096" z="411.5366" h="60"/>
+		</spawn>
+		<!-- Chief Gunner Kurmata -->
+		<spawn npc_id="230851">
+			<spot x="630.62256" y="496.80316" z="202.5307" h="90"/>
+		</spawn>
+		<!-- Chief of Staff Moriata -->
+		<spawn npc_id="230853">
+			<spot x="146.14592" y="429.8655" z="150.77364"/>
+		</spawn>
+		<!-- Commander Ranodim -->
+		<spawn npc_id="233316">
+			<spot x="289.8795" y="343.75858" z="159.34445" h="90"/>
+		</spawn>
+		<!-- Contaminated Bloodwing -->
+		<spawn npc_id="233318">
+			<spot x="467.9899" y="292.37143" z="160.79488"/>
+			<spot x="471.72095" y="272.09576" z="166.87561"/>
+			<spot x="496.081" y="302.93884" z="177.61809"/>
+			<spot x="503.4583" y="290.3955" z="175.51555"/>
+		</spawn>
+		<!-- Crystalline Test Subject -->
+		<spawn npc_id="230841">
+			<spot x="466.3141" y="380.983" z="182.15321"/>
+			<spot x="469.48065" y="412.49805" z="180.94296" h="82"/>
+			<spot x="490.83456" y="391.81262" z="180.94296" h="82"/>
+			<spot x="491.4993" y="382.67776" z="180.94296" h="27"/>
+		</spawn>
+		<!-- Darkblade Ovanuka -->
+		<spawn npc_id="233256">
+			<spot x="262.54938" y="401.03094" z="156.83209" h="30"/>
+		</spawn>
+		<!-- Debilitation Turret -->
+		<spawn npc_id="230836">
+			<spot x="625.28754" y="308.55328" z="200.38022" h="105"/>
+			<spot x="654.1997" y="308.6487" z="200.38713" h="75"/>
+		</spawn>
+		<!-- Derakanak the Reaver -->
+		<spawn npc_id="233258">
+			<spot x="495.6287" y="533.7886" z="181.74464" h="90"/>
+		</spawn>
+		<!-- Gatekeeper Stranir - invisible system npc 
+		<spawn npc_id="284673">
+			<spot x="379.81992" y="292.5214" z="158.96407" h="90"/>
+		</spawn> -->
+		<!-- Gatekeeper Stranir -->
+		<spawn npc_id="233255">
+			<spot x="382.61844" y="292.23105" z="159.26079"/>
+		</spawn>
+		<!-- Golem Loadbearer -->
+		<spawn npc_id="230844">
+			<spot x="282.13544" y="327.89053" z="159.36792"/>
+			<spot x="296.80286" y="328.27884" z="159.36792" h="60"/>
+		</spawn>
+		<!-- Guard Captain Ahuradim -->
+		<spawn npc_id="230857">
+			<spot x="703.7477" y="889.7424" z="411.53677" h="60"/>
+		</spawn>
+		<!-- Guard Captain Rohuka -->
+		<spawn npc_id="230849">
+			<spot x="600.34686" y="354.4385" z="202.91283"/>
+		</spawn>
+		<!-- Inquisitor Jardaraka -->
+		<spawn npc_id="230856">
+			<spot x="503.60672" y="889.65906" z="411.53677" h="60"/>
+		</spawn>
+		<!-- Medical Officer Surkihan -->
+		<spawn npc_id="230855">
+			<spot x="307.83704" y="889.7726" z="411.5358" h="60"/>
+		</spawn>
+		<!-- Military Supply Base Flame Cannon -->
+		<spawn npc_id="284453">
+			<spot x="641.6695" y="495.08136" z="202.51562" h="75"/>
+		</spawn>
+		<!-- Protective Shield Generator -->
+		<spawn npc_id="284437">
+			<spot x="688.79" y="889.9065" z="411.45676"/>
+		</spawn>
+		<!-- Protective Shield Generator -->
+		<spawn npc_id="284445">
+			<spot x="709.76355" y="874.6016" z="411.33" h="45"/>
+		</spawn>
+		<!-- Protective Shield Generator -->
+		<spawn npc_id="284446">
+			<spot x="709.9149" y="904.41016" z="411.33" h="75"/>
+		</spawn>
+		<!-- Researcher Teselik -->
+		<spawn npc_id="230850">
+			<spot x="480.297" y="331.069" z="181.79274" h="30"/>
+		</spawn>
+		<!-- Rusted Prototype -->
+		<spawn npc_id="801955">
+			<spot x="490.3563" y="380.8928" z="181.98257" static_id="134"/>
+			<spot x="455.2488" y="502.4285" z="181.88536" static_id="136"/>
+			<spot x="431.4404" y="452.87" z="182.09003" static_id="178"/>
+		</spawn>
+		<!-- Sauro Larva Detonator -->
+		<spawn npc_id="230839">
+			<spot x="639.4159" y="229.35568" z="191.13066" h="90" random_walk="1"/>
+			<spot x="641.10492" y="226.21539" z="191.13066" h="90" random_walk="1"/>
+			<spot x="642.68182" y="229.11472" z="191.13066" h="90" random_walk="1"/>
+		</spawn>
+		<!-- Sauro Supply Base Drone -->
+		<spawn npc_id="230843">
+			<spot x="497.55" y="488.23" z="182.35551" h="60" walker_id="1257DA3BCA1845C22F71D62758DC9A7B730E0457"/>
+		</spawn>
+		<!-- Sauro Supply Base Researcher -->
+		<spawn npc_id="230845">
+			<spot x="463.4862" y="379.14288" z="182.15321" h="30"/>
+			<spot x="494.2933" y="401.83875" z="182.13792" h="30"/>
+			<spot x="497.21927" y="369.42593" z="182.14955" h="90"/>
+			<spot x="497.90283" y="383.48434" z="182.14955" h="90"/>
+		</spawn>
+		<!-- Sheban Legion Ambusher -->
+		<spawn npc_id="230792">
+			<spot x="218.39" y="429.29" z="158.79059" h="90" walker_id="81A571ECA5C22C6BCC7E3F40B881DAF1B6C9983B"/>
+			<spot x="293.87756" y="337.73004" z="159.36792" h="90"/>
+			<spot x="293.87756" y="337.73004" z="159.39603" h="90"/>
+			<spot x="659.46" y="245.96" z="190.875" h="90" walker_id="65CDB06A7A9CA1D6938F1A91238AA969FB2A214C"/>
+		</spawn>
+		<!-- Sheban Legion Ambusher -->
+		<spawn npc_id="230793">
+			<spot x="425.8472" y="292.9257" z="159.94757" h="90"/>
+			<spot x="638.6805" y="259.4768" z="190.875"/>
+		</spawn>
+		<!-- Sheban Bladesman 
+		<spawn npc_id="233286">
+		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>
+		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>
+		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>
+		</spawn> -->
+		<!-- Sheban Legion Ambusher -->
+		<spawn npc_id="233277">
+			<spot x="289.75497" y="433.411" z="158.95453"/>
+			<spot x="479.37" y="429.74" z="182.1956" h="60" walker_id="8414C1A26D8F01E857D420CFEEA8927A47200FFF"/>
+			<spot x="480.07785" y="435.25272" z="184.16982" h="30"/>
+		</spawn>
+		<!-- Sheban Legion Assaulter -->
+		<spawn npc_id="230786">
+			<spot x="301.05884" y="387.60233" z="159.24852" h="30"/>
+			<spot x="622.71265" y="334.80887" z="204.16"/>
+			<spot x="624.70306" y="357.2386" z="202.78787"/>
+			<spot x="628.05" y="299.89" z="200.38022" h="90" walker_id="8B1F68592074C17F46A2741D9DB669FA625F9350"/>
+			<spot x="630.22" y="453.4" z="202.60855" h="90" walker_id="A16D729A9689377CE14917D08E04866268AB71D3"/>
+			<spot x="639.91" y="355.83" z="202.89104" h="90" walker_id="AC05D88765D559C54D289A0B0E0104E1DA03DE53"/>
+			<spot x="651.36" y="299.74" z="200.38713" h="90" walker_id="7079A5F73AB255CBD4E1D0C14351F8BC6CB2F9C3"/>
+			<spot x="656.5485" y="334.82687" z="204.16" h="60"/>
+			<spot x="656.7276" y="386.75317" z="204.15465" h="60"/>
+		</spawn>
+		<!-- Sheban Legion Assaulter -->
+		<spawn npc_id="230787">
+			<spot x="601.25977" y="472.03192" z="191.13799" h="75"/>
+			<spot x="599.04236" y="502.11124" z="191.16943" h="105"/>
+			<spot x="602.89294" y="513.48047" z="191.14013" h="105"/>
+			<spot x="611.90894" y="487.1522" z="202.77065" h="90"/>
+		</spawn>
+		<!-- Sheban Legion Beastrider -->
+		<spawn npc_id="230810">
+			<spot x="297.97946" y="292.20779" z="160.35104"/>
+			<spot x="639.53" y="424.01" z="202.77643" h="90" walker_id="2AB13A621C1D1BD47E9B295BBCB88DC582C55000"/>
+			<spot x="654.37" y="372.96" z="204.14606" h="1" walker_id="BDD2D0EDED18E059EEFE673351BF4B1741841DD9"/>
+		</spawn>
+		<!-- Sheban Legion Drummer -->
+		<spawn npc_id="230820">
+			<spot x="301.05087" y="362.48654" z="159.24051" h="30"/>
+			<spot x="333.461" y="291.49805" z="159.38156"/>
+			<spot x="422.50385" y="291.91162" z="159.52084"/>
+			<spot x="571.49176" y="487.63068" z="191.98903"/>
+		</spawn>
+		<!-- Sheban Legion Bodyguard -->
+		<spawn npc_id="230826" respawn_time="295">
+			<spot x="442.99243" y="448.43665" z="182.09772" h="30"/>
+			<spot x="443.38834" y="450.95374" z="182.37857" h="82"/>
+			<spot x="453.11" y="464.24" z="182.0713" h="82" walker_id="6297C57FA88B164B4AE6100CD27350BE82C36D5A"/>
+			<spot x="494.67883" y="405.60382" z="183.35124" h="30"/>
+			<spot x="495.07474" y="408.12091" z="183.35124" h="82"/>
+			<spot x="495.36176" y="514.1958" z="181.82288" h="30"/>
+			<spot x="495.75766" y="516.71289" z="181.66089" h="82"/>
+			<spot x="514.97" y="504.53" z="181.9925" h="82" walker_id="F65D48AED139919120F61B5F85BE3828D216675A"/>
+			<spot x="605.75055" y="460.0632" z="191.71703" h="40"/>
+			<spot x="608.29865" y="461.4866" z="191.71703" h="40"/>
+		</spawn>
+		<!-- Sheban Legion Gunner -->
+		<spawn npc_id="230814">
+			<spot x="278.71542" y="363.07172" z="159.24051" h="30"/>
+			<spot x="580.53" y="486.62" z="191.18074" h="93" walker_id="A02A1C52B3179D3F17DCC65424A1B7F8CB773442"/>
+			<spot x="338.29773" y="295.50653" z="159.47446"/>
+			<spot x="633.78" y="492.84" z="202.5307" h="30" walker_id="8C0C4A9EDAF819ED332F578C7AECC91A38A98785"/>
+			<spot x="573.90027" y="485.8027" z="191.82411"/>
+			<spot x="582.139" y="456.90952" z="191.74516" h="90"/>
+			<spot x="605.1631" y="486.8443" z="191.0386" h="90"/>
+		</spawn>
+		<!-- Sheban Legion Medic -->
+		<spawn npc_id="230804">
+			<spot x="601.1664" y="500.84058" z="191.13799" h="45"/>
+		</spawn>
+		<!-- Sheban Legion Sorcerer -->
+		<spawn npc_id="230798">
+			<spot x="478.44202" y="361.4509" z="182.2329" h="30"/>
+			<spot x="670.4695" y="354.25208" z="203.68098" h="75"/>
+		</spawn>
+		<!-- Sheban Legion Scout -->
+		<spawn npc_id="230830" respawn_time="295">
+			<spot x="444.86887" y="449.78113" z="182.0" h="48"/>
+			<spot x="497.23819" y="515.54028" z="181.84648" h="48"/>
+			<spot x="606.79773" y="461.35864" z="191.71703" h="40"/>
+			<spot x="617.37805" y="215.2439" z="192.46178"/>
+			<spot x="657.66956" y="215.9304" z="192.37367" h="60"/>
+		</spawn>
+		<!-- Sly Uterunerk -->
+		<spawn npc_id="230854">
+			<spot x="109.83206" y="889.8425" z="411.5362" h="60"/>
+		</spawn>
+		<!-- Tamed Spaller Fighter -->
+		<spawn npc_id="230838">
+			<spot x="248.27574" y="429.38965" z="159.32843" random_walk="1"/>
+		</spawn>
+		<!-- Tamed Spaller Gatherer -->
+		<spawn npc_id="230837">
+			<spot x="480.03915" y="407.32013" z="182.2329" h="30"/>
+		</spawn>
+		<!-- Sauro Base Grave Robber -->
+		<spawn npc_id="230846">
+			<spot x="464.5056" y="402.036" z="182.15321" h="4"/>
+		</spawn>
+		<!-- Skeletal Test Subject -->
+		<spawn npc_id="230842">
+			<spot x="469.7816" y="387.9862" z="181.98625"/>
+			<spot x="497.36731" y="387.06223" z="181.68219" h="105"/>
+		</spawn>
+	</spawn_map>
+</spawns>

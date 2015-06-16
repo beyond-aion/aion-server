@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301210000">
+		<!-- Power Generator 
+		<spawn npc_id="702002">
+			<spot x="674.7606" y="472.8621" z="600.1447"/>
+			<spot x="599.8735" y="560.9525" z="591.7767"/>
+			<spot x="492.2352" y="532.4918" z="598.8186"/>
+			<spot x="528.6144" y="432.0623" z="621.3428"/>
+		</spawn>
+		 Power Generator
+		<spawn npc_id="702001">
+			<spot x="492.2352" y="532.4918" z="598.8186"/>
+		</spawn>
+		Power Generator
+		<spawn npc_id="701978">
+			<spot x="490.9062" y="536.0228" z="598.8186"/>
+		</spawn>
+		Elyos Aetheric Cannon
+		<spawn npc_id="701939">
+			<spot x="660.36865" y="461.0626" z="600.2547"/>
+			<spot x="667.22784" y="488.69467" z="599.8417"/>
+			<spot x="670.0791" y="458.5767" z="599.75"/>
+			<spot x="671.87946" y="472.70087" z="600.772"/>
+			<spot x="679.0547" y="488.28452" z="599.75"/>
+		</spawn> 
+		Elyos Aetheric Cannon
+		<spawn npc_id="701942">
+			<spot x="477.32898" y="537.0476" z="597.375"/>
+			<spot x="482.75482" y="546.7067" z="597.5"/>
+			<spot x="486.86075" y="523.6781" z="597.375"/>
+			<spot x="492.95834" y="533.3082" z="598.8186"/>
+			<spot x="493.98892" y="549.46606" z="597.6485"/>
+			<spot x="503.4563" y="526.20776" z="597.5"/>
+			<spot x="505.39758" y="551.0327" z="597.7016"/>
+			<spot x="508.31046" y="539.70984" z="598.1651"/>
+		</spawn>
+		Artillery Box 
+		<spawn npc_id="702050">
+			<spot x="332.4941" y="490.57327" z="596.8496"/>
+			<spot x="756.62006" y="550.3218" z="577.5133" h="30"/>
+		</spawn> -->
+		<!-- Advance Route Teleport Statue -->
+		<spawn npc_id="802023">
+			<spot x="337.148" y="491.3694" z="597.2803" static_id="156" />
+			<spot x="755.7413" y="546.5237" z="577.8664" static_id="155" />
+		</spawn>
+		<!-- Beritra Barricade -->
+		<spawn npc_id="233856">
+			<spot x="745.4883" y="471.2287" z="587.5797" static_id="33"/>
+			<spot x="653.4449" y="525.1905" z="593.1765" static_id="167"/>
+			<spot x="636.9030" y="432.5039" z="606.2651" static_id="96"/>
+			<spot x="590.3155" y="422.0233" z="612.0449" static_id="92"/>
+			<spot x="564.3413" y="558.2911" z="599.2684" static_id="168"/>		
+			<spot x="429.0614" y="496.5841" z="601.2332" static_id="165" />
+		</spawn>
+		<!-- Guard Post Combatant -->
+		<spawn npc_id="233485">
+			<spot x="689.6600" y="481.7697" z="599.9259" h="113"/>
+			<spot x="684.0505" y="457.9378" z="599.9777"/>
+		</spawn>
+		<!-- Guard Post Rearguard -->
+		<spawn npc_id="233487">
+			<spot x="676.92" y="471.99" z="599.625" h="12" walker_id="7C71330C83F9A1C833644C02E1DB8350A39BD40E"/>
+		</spawn>
+		<!-- Guard Post Magus -->
+		<spawn npc_id="233484">
+			<spot x="684.2402" y="486.7203" z="599.8766" h="113"/>
+			<spot x="676.4473" y="454.6455" z="599.9539"/>
+		</spawn>
+		<!-- Guard Post Scout -->
+		<spawn npc_id="233486">
+			<spot x="682.2443" y="478.4729" z="599.6403" h="113"/>
+			<spot x="678.4882" y="462.8195" z="599.7500"/>
+		</spawn>
+		<!-- Southern Approach Post Combatant -->
+		<spawn npc_id="233481">
+			<spot x="617.7361" y="551.5293" z="590.7374"/>
+			<spot x="591.3549" y="559.1093" z="590.6250" h="60"/>
+		</spawn>
+		<!-- Southern Approach Post Assaulter -->
+		<spawn npc_id="233483">
+			<spot x="600.9810" y="545.0751" z="590.5579"/>
+		</spawn>
+		<!-- Southern Approach Post Scout -->
+		<spawn npc_id="233482">
+			<spot x="605.75" y="567.84" z="590.5" h="112" walker_id="589DE07A4C7516E8F8196D55E197663278B54B0A"/>
+		</spawn>
+		<!-- Defense Post Scout -->
+		<spawn npc_id="233476">
+			<spot x="497.5978" y="529.5842" z="597.8945" h="107"/>
+		</spawn>
+		<!-- Defense Post Rearguard -->
+		<spawn npc_id="233477">
+			<spot x="499.66" y="544.28" z="597.5" h="50" walker_id="437492625A9F64B5B26826FB789768B8E0B181E4"/>
+		</spawn>
+		<!-- Defense Post Combatant -->
+		<spawn npc_id="233475">
+			<spot x="499.2859" y="520.0741" z="597.6484" h="66"/>
+			<spot x="551.1729" y="512.6812" z="610.2740" h="115"/>
+		</spawn>
+		<!-- Northern Approach Post Combatant -->
+		<spawn npc_id="233479">
+			<spot x="536.2883" y="449.2730" z="620.2500" h="30"/>
+			<spot x="536.1005" y="429.3161" z="620.2500" h="13"/>
+		</spawn>
+		<!-- Northern Approach Post Magician -->
+		<spawn npc_id="233480">
+			<spot x="528.5531" y="439.0851" z="620.2313" h="15"/>
+		</spawn>
+		<!-- Northern Approach Post Magus -->
+		<spawn npc_id="233478">
+			<spot x="518.1418" y="442.0610" z="620.1335" h="15"/>
+			<spot x="541.5228" y="538.1339" z="605.8750" h="15"/>
+		</spawn>
+		<!-- Balaur Power Generator -->
+		<spawn npc_id="701945">
+			<spot x="670.7174" y="473.5885" z="601.1672" static_id="164"/>
+			<spot x="605.8131" y="555.8560" z="592.1641" static_id="158"/>
+			<spot x="490.9199" y="535.1290" z="605.3778" static_id="162"/>
+			<spot x="525.7670" y="430.8610" z="621.8206" static_id="160"/>
+		</spawn>
+		<!-- Beritra's Sentinel -->
+		<spawn npc_id="233473">
+			<spot x="579.7734" y="414.2297" z="614.8354" h="60"/>
+			<spot x="645.4831" y="434.3427" z="604.5969" h="6"/>
+			<spot x="659.1355" y="517.2366" z="594.5239" h="100"/>
+			<spot x="666.4432" y="525.0786" z="594.5362" h="100"/>
+			<spot x="421.2456" y="500.77698" z="602.7708" h="60"/>
+			<spot x="422.06882" y="489.90118" z="602.57086" h="60"/>
+			<spot x="423.17984" y="495.15625" z="602.5191" h="60"/>
+			<spot x="554.5385" y="558.9717" z="601.55414" h="80"/>
+			<spot x="559.7974" y="553.7289" z="600.63763" h="70"/>
+			<spot x="564.2214" y="547.7628" z="600.9175" h="66"/>
+			<spot x="579.8303" y="427.9583" z="614.54504" h="60"/>
+			<spot x="582.4172" y="420.9126" z="614.0729" h="60"/>
+			<spot x="645.1691" y="443.3099" z="605.76404"/>
+			<spot x="652.0806" y="428.299" z="605.2586" h="10"/>
+			<spot x="660.6929" y="522.7841" z="594.03503" h="100"/>
+			<spot x="744.7095" y="483.444" z="586.39215" h="15"/>
+			<spot x="750.1819" y="477.0227" z="586.19745" h="15"/>
+			<spot x="758.2744" y="473.9114" z="586.87415" h="15"/>
+		</spawn>
+		<!-- Defense Post Mortar -->
+		<spawn npc_id="701972">
+			<spot x="338.25946" y="484.0296" z="597.07117" h="47"/>
+			<spot x="748.4013" y="546.6983" z="577.7287" h="16"/>
+		</spawn>
+		<!-- Guard Post Mortar -->
+		<spawn npc_id="701969">
+			<spot x="337.9683" y="498.23044" z="597.04364" h="73"/>
+			<spot x="762.8" y="544.557" z="577.70056" h="40"/>
+		</spawn>
+		<!-- Landing Mortar -->
+		<spawn npc_id="701973">
+			<spot x="746.53644" y="497.20605" z="583.4729"/>
+		</spawn>
+		<!-- Northern Approach Post Mortar -->
+		<spawn npc_id="701970">
+			<spot x="759.7722" y="543.9368" z="577.7042" h="36"/>
+			<spot x="338.9799" y="495.51318" z="597.0473" h="70"/>
+		</spawn>
+		<!-- Southern Approach Post Mortar -->
+		<spawn npc_id="701971">
+			<spot x="339.0884" y="486.86746" z="597.06323" h="50"/>
+			<spot x="751.1659" y="545.3567" z="577.72034" h="20"/>
+		</spawn>
+		<!-- Timer NPC -->
+		<spawn npc_id="701938">
+			<spot x="729.1168" y="461.3635" z="593.681"/>
+		</spawn>
+		<!-- Supply Box -->
+		<spawn npc_id="701974">
+			<spot x="757.53796" y="558.07294" z="576.89954" h="26"/>
+			<spot x="325.07175" y="490.19458" z="596.0416"/>
+		</spawn>
+	</spawn_map>
+</spawns>

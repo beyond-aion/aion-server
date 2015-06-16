@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300270000">
+		<!-- Argent Manor Exit -->
+		<spawn npc_id="730382">
+			<spot x="1006.381" y="1205.520" z="66.803" static_id="223"/>
+		</spawn>
+		<!-- Cadella -->
+		<spawn npc_id="217237">
+			<spot x="979.3418" y="1089.2345" z="72.004921" h="60"/>
+		</spawn>
+		<!-- Celestial Observatory Exit -->
+		<spawn npc_id="730394">
+			<spot x="864.737" y="1259.673" z="195.003" h="90" static_id="12"/>
+		</spawn>
+		<!-- Davlin -->
+		<spawn npc_id="799537">
+			<spot x="845.9754" y="1211.778" z="196.36682" h="17"/>
+		</spawn>
+		<!-- Davlin's Apprentice -->
+		<spawn npc_id="205498">
+			<spot x="951.75" y="1216.04" z="53.643307" h="4" walker_id="69B73541CCBF9F7BAB484BA68FF4BE0D2A9B6AD6"/>
+		</spawn>
+		<!-- Davlin's Assistant -->
+		<spawn npc_id="205496">
+			<spot x="940.74384" y="1233.8206" z="55.004841" h="105"/>
+			<spot x="968.76642" y="1234.6626" z="55.004841" h="30"/>
+		</spawn>
+		<!-- Davlin's Assistant -->
+		<spawn npc_id="205497">
+			<spot x="950.39825" y="1240.1698" z="55.53043" h="23"/>
+			<spot x="964.41479" y="1238.3698" z="55.004841" h="83"/>
+		</spawn>
+		<!-- Elemental Iron Prison -->
+		<spawn npc_id="217243">
+			<spot x="955.66998" y="1218" z="54.982494" h="90"/>
+		</spawn>
+		<!-- Loyal Hetgolem -->
+		<spawn npc_id="217264">
+			<spot x="958.51501" y="1043.5978" z="71.842522" h="30"/>
+			<spot x="986.49" y="1136.68" z="69.96137" h="64" walker_id="1F4103AB22F0364768C93ED8738EBEF68B6ECC3A"/>
+			<spot x="1014.49" y="1109.64" z="69.90551" h="55" walker_id="966961B6A1662542E0A92C382F2490D28E54C9D5"/>
+		</spawn>
+		<!-- Magic Pinwheel -->
+		<spawn npc_id="701003">
+			<spot x="937.647" y="1190.797" z="55.056" static_id="67"/>
+		</spawn>
+		<!-- Magical Soil Mound -->
+		<spawn npc_id="701004">
+			<spot x="973.436" y="1177.406" z="54.086" static_id="19"/>
+		</spawn>
+		<!-- Melee Hetgolem -->
+		<spawn npc_id="217265">
+			<spot x="939.63763" y="1142.8478" z="71.842522"/>
+			<spot x="939.70038" y="1134.9154" z="71.842522"/>
+			<spot x="952.74243" y="1043.6027" z="71.842522" h="30"/>
+			<spot x="991.0863" y="1042.3263" z="71.842522" h="75"/>
+			<spot x="1000.6413" y="1055.9924" z="71.842522" h="30"/>
+			<spot x="1014.2941" y="1056.0337" z="71.842522" h="30"/>
+			<spot x="1023.24" y="1114.61" z="69.89961" h="63" walker_id="288A3D5CC8020E691FAC840E91730394FFFA39DB"/>
+			<spot x="1024.5029" y="1128.177" z="71.842522" h="60"/>
+			<spot x="1024.6709" y="1109.879" z="71.842522" h="15"/>
+		</spawn>
+		<!-- Nameless Wall -->
+		<spawn npc_id="701000">
+			<spot x="955.638" y="1220.369" z="55.005" static_id="617"/>
+		</spawn>
+		<!-- Spirit's Bucket -->
+		<spawn npc_id="701002">
+			<spot x="974.812" y="1212.864" z="53.725" static_id="69"/>
+		</spawn>
+		<!-- Transformation Bonfire -->
+		<spawn npc_id="701001">
+			<spot x="936.397" y="1206.214" z="53.737" static_id="23"/>
+		</spawn>
+		<!-- Unfinished Pletus -->
+		<spawn npc_id="217239">
+			<spot x="897.23145" y="1090.822" z="85.504662"/>
+		</spawn>
+		<!-- Zadra Spellweaver -->
+		<spawn npc_id="217241">
+			<spot x="1006.08" y="1269.68" z="95.93843" h="90" walker_id="376903A0E0C0B15357E7D2704CCFE78D2C35A6EE"/>
+		</spawn>
+		<!-- Zadra Spellweaver -->
+		<spawn npc_id="217240">
+			<spot x="864.899" y="1234.458" z="194.979" h="30"/>
+		</spawn>
+		<!-- Zadra Spellweaver -->
+		<spawn npc_id="282266">
+			<spot x="866.597" y="1238.338" z="194.979" h="40"/>
+		</spawn>
+	</spawn_map>
+</spawns>

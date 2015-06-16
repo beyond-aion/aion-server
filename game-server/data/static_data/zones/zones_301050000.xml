@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301050000" name="ANCHOR_POINT_301050000" area_type="POLYGON" zone_type="SUB" priority="13" flags="0">
+        <points bottom="1003.9579" top="1053.9579">
+            <point x="628.72406" y="449.54007"/>
+            <point x="648.7869" y="444.11163"/>
+            <point x="720.8334" y="444.17032"/>
+            <point x="720.7034" y="472.5509"/>
+            <point x="696.5681" y="472.4815"/>
+            <point x="693.8979" y="463.29074"/>
+            <point x="673.2219" y="457.34937"/>
+            <point x="649.87244" y="455.81348"/>
+            <point x="628.483" y="459.65265"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="MAIN_DECK_301050000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+        <points bottom="1005.0" top="1155.0">
+            <point x="348.37" y="419.42"/>
+            <point x="656.1535" y="420.12592"/>
+            <point x="656.85046" y="517.7537"/>
+            <point x="698.7809" y="517.7537"/>
+            <point x="698.75305" y="596.00726"/>
+            <point x="348.213" y="595.83356"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="MUNITIONS_DEPOT_301050000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+        <points bottom="1003.9579" top="1053.9579">
+            <point x="655.44214" y="458.35825"/>
+            <point x="673.6037" y="456.49463"/>
+            <point x="694.6169" y="462.74677"/>
+            <point x="699.5873" y="483.22968"/>
+            <point x="723.72894" y="483.03265"/>
+            <point x="723.76154" y="533.3461"/>
+            <point x="700.4722" y="533.3277"/>
+            <point x="700.35596" y="515.4898"/>
+            <point x="655.4387" y="515.5265"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="MUNITIONS_REPAIR_301050000" area_type="POLYGON" zone_type="SUB" priority="13" flags="0">
+        <points bottom="1003.9579" top="1053.9579">
+            <point x="654.8981" y="517.1009"/>
+            <point x="699.54755" y="516.9603"/>
+            <point x="699.5197" y="532.6797"/>
+            <point x="716.5268" y="532.7277"/>
+            <point x="716.5458" y="554.2033"/>
+            <point x="665.977" y="566.13116"/>
+            <point x="656.08594" y="551.8714"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="STEEL_ROSE_BRIDGE_301050000" area_type="POLYGON" zone_type="SUB" priority="11" flags="0">
+        <points bottom="1064.1908" top="1114.1908">
+            <point x="371.24597" y="481.42322"/>
+            <point x="442.97528" y="482.06305"/>
+            <point x="443.14017" y="537.7601"/>
+            <point x="371.24255" y="536.7573"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="STEEL_ROSE_DECK_301050000" area_type="POLYGON" zone_type="SUB" priority="18" flags="0">
+        <points bottom="979.1417" top="1119.1417">
+            <point x="353.60352" y="408.27298"/>
+            <point x="826.7798" y="408.273"/>
+            <point x="824.82623" y="598.3398"/>
+            <point x="353.9163" y="596.5789"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="STEEL_ROSE_INTERIOR_2_301050000" area_type="POLYGON" zone_type="SUB" priority="20" flags="0">
+        <points bottom="849.406" top="1149.406">
+            <point x="199.80598" y="397.33426"/>
+            <point x="810.93854" y="398.59296"/>
+            <point x="812.1973" y="647.87"/>
+            <point x="200.11874" y="645.75055"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="THORN_CANNON_301050000" area_type="POLYGON" zone_type="SUB" priority="13" flags="0">
+        <points bottom="988.7941" top="1068.7941">
+            <point x="723.1196" y="453.37546"/>
+            <point x="793.09125" y="453.35086"/>
+            <point x="793.04987" y="567.02264"/>
+            <point x="723.1162" y="566.92194"/>
+        </points>
+    </zone>
+    <zone mapid="301050000" name="UPPER_BALCONY_301050000" area_type="POLYGON" zone_type="SUB" priority="12" flags="0">
+        <points bottom="1054.0" top="1104.0">
+            <point x="354.52" y="443.21"/>
+            <point x="491.9169" y="443.5051"/>
+            <point x="492.08182" y="575.03784"/>
+            <point x="354.86124" y="575.4071"/>
+        </points>
+    </zone>
+</zones>

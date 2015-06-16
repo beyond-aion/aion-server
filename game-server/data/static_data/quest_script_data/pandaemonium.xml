@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			2900 [SCRIPT] No Escaping Destiny
+			2905 [XML] [Craft] Elgar's Mistake
+			2906 [XML] [Craft] Ingots for Armor
+			2907 [XML] [Craft] Cooking Commitment
+			2908 [XML] [Craft] The Governor's Chair
+			2909 [XML] [Craft] The Basics of Alchemy
+			2910 [XML] [Craft] Wasted Materials
+			2911 [SCRIPT] Song of Blessing
+			2912 [SCRIPT] Follow the Ribbon
+			2913 [SCRIPT] A Chain of Debt
+			2914 [SCRIPT] A Token of Lost Love
+			2915 [XML] Helping Apellbine
+			2916 [SCRIPT] Man in the Long Black Robe
+			2917 [SCRIPT] Arekedil's Heritage
+			2918 [SCRIPT] Deep Maternal Love
+			2919 [SCRIPT] Book of Oblivion
+			2920 [SCRIPT] Elementary, My Dear Daeva
+			2921 [SCRIPT] Love at First Sight
+			2922 [SCRIPT] Fascinating Gift
+			2923 [XML] A Rose Will Bloom
+			2924 [XML] Siel's Tears
+			2925 [SCRIPT] A Heartfelt Confession
+			2926 [XML] Heart in Love
+			2927 [XML] A Many-Splendored Ring
+			2928 [SCRIPT] Power of Love
+			2931 [XML] [Expert] Weaponsmithing Expert
+			2932 [XML] [Expert] Armorsmithing Expert
+			2933 [XML] [Expert] Handicrafting Expert
+			2934 [XML] [Expert] Cooking Expert
+			2935 [XML] [Expert] Alchemy Expert
+			2936 [XML] [Expert] Tailoring Expert
+			2937 [SCRIPT] Unexpected Reward
+			2938 [SCRIPT] Secret Library Access
+			2939 [XML] Weapon for Fraiban
+			2940 [XML] Kinterun's Package
+			2941 [XML] Salix Staff Handle
+			2942 [XML] Fried Chikra
+			2943 [XML] Homebody Honir
+			2944 [XML] Cloth for Bacht
+			2948 [SCRIPT] Huron's Letter
+			2949 [XML] Just Dye, Already
+			2950 [XML] Materials for 100-slot Cube
+			2951 [XML] Looking for Garkbinerk
+			2952 [SCRIPT] Winning Vindachinerk's Favor
+			2953 [SCRIPT] Delivering Supply Request
+			2954 [SCRIPT] Delivering Odella Juice
+			2955 [XML] A Feast for a Son
+			2956 [XML] Preparing the Banquet
+			2957 [SCRIPT] Flowers for the Banquet
+			2958 [SCRIPT] Last Minute Worries
+			2959 [XML] You Never Call, You Never Write
+			2960 [XML] Peace Offering
+			2961 [XML] A Secret Request
+			2962 [SCRIPT] Jafnhar's Whereabouts
+			2963 [SCRIPT] On Behalf of a Friend
+			2964 [XML] Striking at Shadows
+			2965 [SCRIPT] Ancient Weapons
+			2966 [XML] A Sword Gone Astray
+			2967 [XML] A Helmet Gone Astray
+			2968 [XML] A Staff Gone Astray
+			2969 [XML] Combat Rations
+			2970 [XML] Combat Potions
+			2971 [XML] A Robe Gone Astray
+			2972 [SCRIPT] [Expert] Weaponsmith's Test
+			2973 [SCRIPT] [Expert] Weaponsmith's Final Exam
+			2974 [SCRIPT] [Expert] Armorsmith's Test
+			2975 [SCRIPT] [Expert] Armorsmith's Final Exam
+			2976 [SCRIPT] [Expert] Handicrafter's Test
+			2977 [SCRIPT] [Expert] Handicrafter's Final Exam
+			2978 [SCRIPT] [Expert] Cook's Test
+			2979 [SCRIPT] [Expert] Cook's Final Exam
+			2980 [SCRIPT] [Expert] Alchemist's Test
+			2981 [SCRIPT] [Expert] Alchemist's Final Exam
+			2982 [SCRIPT] [Expert] Tailor's Test
+			2983 [SCRIPT] [Expert] Tailor's Final Exam
+			2984 [XML] Ingredients for Dye
+			2985 [SCRIPT] An Expert's Reward
+			4201 [XML] Sandblossom Wine
+			4202 [XML] Request of a Wine Lover
+			4203 [XML] Anikiki's Taming Manual
+			4204 [XML] Deliver the Taming Manual
+			4206 [XML] Hat of the Steel Beard Pirates
+			4207 [XML] Log of the Steel Rake
+			4209 [XML] Rendezvous with the Spy
+			4210 [SCRIPT] Missing Haorunerk
+			4212 [SCRIPT] Missing Sidrunerk
+			4213 [XML] Unlucky Nekai
+			4214 [XML] Black Cloud Ledgers
+			4215 [XML] The Medicine Thief
+			4216 [XML] A Present for Father
+			4218 [XML] Mysterious Amabille
+			4901 [XML] Kalsten's Recommendation
+			4902 [XML] Thialfi's Recommendation
+			4903 [XML] Ve's Recommendation
+			4904 [XML] Lyfjaberga's Recommendation
+			4905 [SCRIPT] Interviewing the Veterans
+			4906 [SCRIPT] Tales of Heroes
+			4907 [XML] Lepharists in Elysea
+			4908 [4.0] Shugo Express Mail
+			4909 [XML] 3 Fragments of Agrif's Rage
+			4910 [XML] 2 Fragments of Agrif's Rage
+			4911 [XML] Hilt of Agrif's Rage
+			4912 [XML] The Curse of Agrif's Rage
+			4913 [XML] A Future Threat
+			4914 [XML] Lifeform Remodeling Report
+			4915 [XML] Obtaining the Dragel
+			4916 [XML] Acquiring the Drana
+			4917 [XML] Information Collector Chopirunerk
+			4918 [XML] Gathering the Surkana
+			4919 [XML] Acquiring the Drazma
+			4920 [SCRIPT] Making the Activated Surkana
+			4921 [XML] Chopirunerk's Reward
+			4922 [XML] The Gladiator Preceptor's Test
+			4923 [XML] The Templar Preceptor's Test
+			4924 [XML] The Ranger Preceptor's Test
+			4925 [XML] The Assassin Preceptor's Test
+			4926 [XML] The Sorcerer Preceptor's Test
+			4927 [XML] The Spiritmaster Preceptor's Test
+			4928 [XML] The Cleric Preceptor's Test
+			4929 [XML] The Chanter Preceptor's Test
+			4930 [XML] Advice of Destiny
+			4931 [XML] Enlightenment of Destiny
+			4932 [XML] Teachings of Destiny
+			4933 [XML] Intention of Lord Marchutan
+			4945 [XML] [Top Expert] Weaponsmithing Zeal
+			4946 [XML] [Top Expert] Weaponsmith's Skill
+			4947 [XML] [Top Expert] Weaponsmithing Expert
+			4948 [XML] [Top Expert] Armorsmithing Zeal
+			4949 [XML] [Top Expert] Armorsmith's Skill
+			4950 [XML] [Top Expert] Armorsmithing Expert
+			4951 [XML] [Top Expert] Handicrafting Zeal
+			4952 [XML] [Top Expert] Handicrafter's Skill
+			4953 [XML] [Top Expert] Handicrafting Expert
+			4954 [XML] [Top Expert] Cooking Zeal
+			4955 [XML] [Top Expert] Cook's Skill
+			4956 [XML] [Top Expert] Cooking Expert
+			4957 [XML] [Top Expert] Alchemy Zeal
+			4958 [XML] [Top Expert] Alchemist's Skill
+			4959 [XML] [Top Expert] Alchemy Expert
+			4960 [XML] [Top Expert] Tailoring Zeal
+			4961 [XML] [Top Expert] Tailor's Skill
+			4962 [XML] [Top Expert] Tailoring Expert
+			4963 [UNUSED] Epilogue
+			4964 [XML] Payrinrinerk's Information
+			4965 [XML] Secretive Communication
+			4966 [SCRIPT] Ninis's First Charm
+			4967 [SCRIPT] Ninis's Second Charm
+			4968 [SCRIPT] Ninis's Third Charm
+			4969 [SCRIPT] Ninis's Fourth Charm
+			4970 [SCRIPT] The Fashionistas
+			4971 [SCRIPT] Project Runway
+			4972 [SCRIPT] Judge Not
+			4973 [SCRIPT] Marra's Worry
+			4974 [SCRIPT] The Secret of His Success
+			4975 [XML] Moorinerk's Offer
+			4976 [SCRIPT] A Settler's Ambition
+			4977 [XML] Drana Gluttony
+			4978 [XML] Safecracking
+			4979 [XML] In Shugo's Clothing
+			9551 [XML] [Event] The Lost Contract
+			9552 [XML] [Event] Runaway Invitations
+			9553 [TODO] [Event] Solorius Romance
+			9559 [TODO] [Event] The Taste of Success
+			9561 [TODO] [Event] Daeva's Day
+			28225 [XML] A New Challenge
+			29000 [SCRIPT] [Expert] Essencetapper's Test
+			29001 [SCRIPT] [Expert] Essencetapping Expert
+			29002 [SCRIPT] [Expert] Aethertapper's Test
+			29003 [SCRIPT] [Expert] Aethertapping Expert
+			29004 [SCRIPT] Veldina's Call
+			29008 [SCRIPT] [Master] Weaponsmith's Potential
+			29009 [XML] [Master] Weaponsmithing Master
+			29014 [SCRIPT] [Master] Armorsmith's Potential
+			29015 [XML] [Master] Armorsmithing Master
+			29020 [SCRIPT] [Master] Tailor's Potential
+			29021 [XML] [Master] Tailoring Master
+			29026 [SCRIPT] [Master] Handicrafter's Potential
+			29027 [XML] [Master] Handicrafting Master
+			29032 [SCRIPT] [Master] Alchemist's Potential
+			29033 [XML] [Master] Alchemy Master
+			29038 [SCRIPT] [Master] Cook's Potential
+			29039 [XML] [Master] Cooking Master
+			29040 [XML] Mane's Best Friend
+			29041 [XML] Black Clouds Stop Play
+			29042 [XML] An Awkward Alliance
+			29043 [XML] Flower Power
+			29044 [XML] Pet Perceptions
+			29045 [XML] A Passion for Pets
+			29047 [XML] Secrets and Lies
+			29048 [SCRIPT] Seriphim's Teachings
+			29049 [TODO] [Craft] Construction Basics
+			29050 [XML] [Expert] Construction Expert
+			29051 [TODO] Running the Tables
+			29052 [SCRIPT] [Expert] Passion for Construction
+			29053 [SCRIPT] [Expert] Expert of Construction
+			29054 [XML] [Expert] Construction Zeal
+			29055 [SCRIPT] [Expert] Constructor's Final Exam
+			29056 [XML] [Expert] Expert Constructor
+			29057 [SCRIPT] [Master] Constructor's Potential
+			29058 [XML] [Master] Construction Master
+			29059 [TODO] Possession Isn't Integrity
+			29060 [XML] New Trainer
+			29061 [XML] New Trainer
+			29062 [XML] New Trainer
+			29063 [XML] New Trainer
+			29072 [XML] Mezaina's Recommendation
+			29073 [XML] Machi's Recommendation
+			29074 [XML] The Gunslinger Preceptor's Test
+			29075 [XML] The Songweaver Preceptor's Test
+			29076 [XML] A New Preceptor
+			29077 [XML] A New Preceptor
+			48008 [TODO] The Art of the Craft
+			51000 [TODO] [Event] Heat of High Summer
+			51001 [TODO] [Event] Heat of High Summer
+			51005 [TODO] [Event] Festival Energy
+			51006 [TODO] [Event] The Day of the Daeva
+			80001 [SCRIPT] [Event] Festive Daeva's Day
+			80009 [SCRIPT] [Event] The Cake is the Truth!
+			80013 [XML] [Event] The Pumpkin King
+			80014 [XML] [Event] The Desperate Pumpkin King
+			80015 [XML] [Event] Candy, Candy Everywhere
+			80018 [SCRIPT] [Event] Sock it to 'Em
+			80019 [TODO] [Event] Filth and Frolics
+			80021 [SCRIPT] [Event] Festive Us
+			80025 [XML] [Event] Basic Vittles
+			80026 [XML] [Event] Regular Vittles
+			80027 [XML] [Event] Plentiful Vittles
+			80031 [SCRIPT] [Event] The Fayrefolk
+			80032 [SCRIPT] [Event] A Charmed Existence
+			80033 [SCRIPT] [Event] Averting the Gaze
+			80037 [SCRIPT] [Event] From the Gutter
+			80038 [SCRIPT] [Event] Mighty Aspirations
+			80039 [SCRIPT] [Event] The Chosen Few
+			80041 [XML] [Event] The Mortality Festival
+			80046 [XML] [Event] Remember the Best
+			80047 [XML] [Event] I'd Hate to see the Worst
+			80048 [XML] [Event] Landlubber no More
+			80049 [XML] [Event] Soon We'll Sail
+			80052 [XML] [Event] Lazy Larceny
+			80053 [XML] [Event] Wickless Wonder
+			80056 [XML] [Event] O-ribbon-al Prankster
+			80057 [XML] [Event] Ribbon Robber
+			80066 [XML] [Event] Not Worth the Paper It's On
+			80067 [XML] [Event] Earning Envelopes
+			80068 [XML] [Event] Before the Ink Dries
+			80069 [XML] [Event] Wax On, Wax Off
+			80071 [TODO] [Event] Remember your Roots
+			80074 [TODO] [Event] Swimsuits Galore
+			80075 [TODO] [Event] Kinah Galore
+			80077 [XML] [Event] Delving Into Daru Days
+			80082 [XML] [Event] Daru Snacks
+			80083 [XML] [Event] Daru Nutrition
+			80084 [XML] [Event] Dishes For Darus
+			80085 [XML] [Event] Food For Thought...and Darus
+			80098 [XML] [Event] Visions of White
+			80099 [XML] [Event] Visions of Blue
+			80100 [XML] [Event] Visions of Yellow
+			80101 [XML] [Event] Visions of Red
+			80102 [XML] [Event] Witch White Sparks?
+			80103 [XML] [Event] Witch Blue Sparks?
+			80104 [XML] [Event] Witch Yellow Sparks?
+			80105 [XML] [Event] Witch Red Sparks?
+			80106 [XML] [Event] Pumpkin Whites
+			80107 [XML] [Event] Pumpkin Blues
+			80108 [XML] [Event] Pumpkin Yellows
+			80109 [XML] [Event] Pumpkin Reds
+			80111 [XML] [Event] What Witch, Where?
+			80120 [XML] [Event] Stunned and Awed
+			80121 [XML] [Event] Chitter-Chitter Blingbling
+			80122 [XML] [Event] Ch-leaf-ly Potcrabs
+			80123 [XML] [Event] Absolutely Stunning
+			80124 [XML] [Event] Team Blingbling
+			80125 [XML] [Event] Parade Volunteering
+			80126 [XML] [Event] How About Zugog?
+			80127 [XML] [Event] Honor's Marching On
+			80129 [XML] [Event] On a Full Stomach
+			80130 [XML] [Event] Shadowy Recruitment
+			80131 [XML] [Event] Information Exchange
+			80132 [XML] [Event] Drawn Into the Game
+			80133 [TODO] [Event] Making Contact
+			80161 [XML] [Event] Fashion Advice
+			80166 [XML] [Event] Prizes Galore!
+			80167 [XML] [Event] Everyone's Having Fun... Right?
+			80168 [XML] [Event] Taking a Powder
+			80169 [XML] [Event] Prize Fights
+			80171 [XML] [Event] Taking Your Lumps
+			80256 [TODO] [Event] Big Bada Boom!
+			80270 [XML] [Event] Service With a Smile
+			80273 [TODO] [Event] Ascension Celebration!
+			80468 [TODO] [Event] Powder Your Stats
+			80470 [TODO] [Event] The Powder to Do More
+			80472 [TODO] [Event] Take Wing, Daeva!
+			80549 [XML] [Event/Daily] A Gracious Hand
+			80550 [XML] [Event/Daily] A Gallant Mission
+			80551 [XML] [Event/Daily] Bundle the Joy
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="2939" start_npc_ids="204104" end_npc_ids="278010"/>
+	<report_to id="2940" start_npc_ids="204106" end_npc_ids="278011"/>
+	<report_to id="2941" start_npc_ids="204108" end_npc_ids="278010"/>
+	<report_to id="2942" start_npc_ids="204100" end_npc_ids="278007"/>
+	<report_to id="2943" start_npc_ids="204102" end_npc_ids="278010"/>
+	<report_to id="2944" start_npc_ids="204110" end_npc_ids="278011"/>
+	<report_to id="2951" start_npc_ids="798059" end_npc_ids="279006"/>
+	<report_to id="2955" start_npc_ids="204242" end_npc_ids="204127"/>
+	<report_to id="2959" start_npc_ids="204211" end_npc_ids="204164"/>
+	<report_to id="2961" start_npc_ids="204055" end_npc_ids="204253"/>
+	<report_to id="2964" start_npc_ids="204253" end_npc_ids="278137"/>
+	<report_to id="2984" start_npc_ids="204138" end_npc_ids="204121"/>
+	<report_to id="4204" start_npc_ids="204283" end_npc_ids="279008"/>
+	<report_to id="4209" start_npc_ids="204284" end_npc_ids="798331"/>
+	<report_to id="4218" start_npc_ids="204284" end_npc_ids="798334"/>
+	<report_to id="4901" start_npc_ids="204080" end_npc_ids="204056"/>
+	<report_to id="4902" start_npc_ids="204081" end_npc_ids="204057"/>
+	<report_to id="4903" start_npc_ids="204082" end_npc_ids="204058"/>
+	<report_to id="4904" start_npc_ids="204083" end_npc_ids="204059"/>
+	<report_to id="4913" start_npc_ids="204182" end_npc_ids="204837"/>
+	<report_to id="4917" start_npc_ids="203385" end_npc_ids="798358"/>
+	<report_to id="4921" start_npc_ids="798358" end_npc_ids="279022"/>
+	<report_to id="4964" start_npc_ids="204286" end_npc_ids="204051"/>
+	<report_to id="4965" start_npc_ids="204182" end_npc_ids="204207"/>
+	<report_to id="29040" start_npc_ids="798385" end_npc_ids="798443"/>
+	<report_to id="29041" start_npc_ids="204051" end_npc_ids="204286"/>
+	<report_to id="29044" start_npc_ids="798443" end_npc_ids="798441"/>
+	<report_to id="29045" start_npc_ids="798441" end_npc_ids="798442"/>
+	<report_to id="29060" start_npc_ids="204056" end_npc_ids="798701"/>
+	<report_to id="29061" start_npc_ids="204057" end_npc_ids="798702"/>
+	<report_to id="29062" start_npc_ids="204058" end_npc_ids="798703"/>
+	<report_to id="29063" start_npc_ids="204059" end_npc_ids="798704"/>
+	<report_to id="29072" start_npc_ids="801220" end_npc_ids="801222"/>
+	<report_to id="29073" start_npc_ids="801221" end_npc_ids="801223"/>
+	<report_to id="29076" start_npc_ids="801222" end_npc_ids="801224"/>
+	<report_to id="29077" start_npc_ids="801223" end_npc_ids="801225"/>
+	<report_to id="80270" start_npc_ids="831177" end_npc_ids="831178"/>
+	<report_to id="80549" start_npc_ids="831999" end_npc_ids="831999"/>
+	<report_to id="80550" start_npc_ids="831999" end_npc_ids="831999"/>
+	<report_to id="80551" start_npc_ids="832008" end_npc_ids="831999"/>
+	<report_to_many id="4201" start_npc_ids="204282" end_npc_ids="204173">
+		<npc_infos npc_id="279009" var="0" quest_dialog="1352"/>
+		<npc_infos npc_id="204173" var="1" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="4914" start_item_id="182207127" end_npc_ids="203385">
+		<npc_infos npc_id="204182" var="0" quest_dialog="1352"/>
+		<npc_infos npc_id="203385" var="1" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="29047" start_npc_ids="204052" end_npc_ids="204052">
+		<npc_infos npc_id="204052" var="0" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="28225" start_npc_ids="205472" end_npc_ids="205323">
+	    <npc_infos npc_id="205321" var="0" quest_dialog="1352"/>
+		<npc_infos npc_id="205323" var="1" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<skill_use id="4922" start_npc_id="204056">
+		<skill end_var="10" ids="272"/>
+	</skill_use>
+	<skill_use id="4923" start_npc_id="204056">
+		<skill end_var="10" ids="516"/>
+	</skill_use>
+	<skill_use id="4924" start_npc_id="204057">
+		<skill end_var="10" ids="799"/>
+	</skill_use>
+	<skill_use id="4925" start_npc_id="204057">
+		<skill end_var="10" ids="851"/>
+	</skill_use>
+	<skill_use id="4926" start_npc_id="204058">
+		<skill end_var="10" ids="1497"/>
+	</skill_use>
+	<skill_use id="4927" start_npc_id="204058">
+		<skill end_var="10" ids="1627"/>
+	</skill_use>
+	<skill_use id="4928" start_npc_id="204059">
+		<skill end_var="10" ids="1165"/>
+	</skill_use>
+	<skill_use id="4929" start_npc_id="204059">
+		<skill end_var="10" ids="1328"/>
+	</skill_use>
+	<skill_use id="4930" start_npc_id="204083" end_npc_id="204059">
+		<skill end_var="10" ids="9912"/>
+	</skill_use>
+	<skill_use id="4931" start_npc_id="204059">
+		<skill end_var="100" ids="9912"/>
+	</skill_use>
+	<skill_use id="4932" start_npc_id="204083" end_npc_id="204059">
+		<skill end_var="10" ids="972 973 974 990 1057 1128 1051 2139"/>
+	</skill_use>
+	<skill_use id="4933" start_npc_id="204059">
+		<skill end_var="20" ids="972 973 974 990 1057 1128 1051 2139"/>
+	</skill_use>
+	<skill_use id="29074" start_npc_id="801222">
+		<skill end_var="10" ids="3282"/>
+	</skill_use>
+	<skill_use id="29075" start_npc_id="801223">
+		<skill end_var="10" ids="3115"/>
+	</skill_use>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="2905" start_npc_ids="204104"/>
+	<item_collecting id="2906" start_npc_ids="204106"/>
+	<item_collecting id="2907" start_npc_ids="204100"/>
+	<item_collecting id="2908" start_npc_ids="204108"/>
+	<item_collecting id="2909" start_npc_ids="204102"/>
+	<item_collecting id="2910" start_npc_ids="204110"/>
+	<item_collecting id="2915" start_npc_ids="204173"/>
+	<item_collecting id="2923" start_npc_ids="798058"/>
+	<item_collecting id="2924" start_npc_ids="204108"/>
+	<item_collecting id="2926" start_npc_ids="204261"/>
+	<item_collecting id="2927" start_npc_ids="204261"/>
+	<item_collecting id="2949" start_npc_ids="204121"/>
+	<item_collecting id="2950" start_npc_ids="798059"/>
+	<item_collecting id="2956" start_npc_ids="204127"/>
+	<item_collecting id="2960" start_npc_ids="204164"/>
+	<item_collecting id="4202" start_npc_ids="204173"/>
+	<item_collecting id="4203" start_npc_ids="204283"/>
+	<item_collecting id="4206" start_npc_ids="204285"/>
+	<item_collecting id="4207" start_npc_ids="204284"/>
+	<item_collecting id="4214" start_npc_ids="204284"/>
+	<item_collecting id="4215" start_npc_ids="204072"/>
+	<item_collecting id="4216" start_npc_ids="204282"/>
+	<item_collecting id="4907" start_npc_ids="204208"/>
+	<item_collecting id="4909" start_npc_ids="798317"/>
+	<item_collecting id="4910" start_npc_ids="798317"/>
+	<item_collecting id="4911" start_npc_ids="798317"/>
+	<item_collecting id="4912" start_npc_ids="798317"/>
+	<item_collecting id="4915" start_npc_ids="203385"/>
+	<item_collecting id="4916" start_npc_ids="203385"/>
+	<item_collecting id="4918" start_npc_ids="798358"/>
+	<item_collecting id="4919" start_npc_ids="798358"/>
+	<item_collecting id="4945" start_npc_ids="204104"/>
+	<item_collecting id="4946" start_npc_ids="204104"/>
+	<item_collecting id="4948" start_npc_ids="204106"/>
+	<item_collecting id="4949" start_npc_ids="204106"/>
+	<item_collecting id="4951" start_npc_ids="204108"/>
+	<item_collecting id="4952" start_npc_ids="204108"/>
+	<item_collecting id="4954" start_npc_ids="204100"/>
+	<item_collecting id="4955" start_npc_ids="204100"/>
+	<item_collecting id="4957" start_npc_ids="204102"/>
+	<item_collecting id="4958" start_npc_ids="204102"/>
+	<item_collecting id="4960" start_npc_ids="204110"/>
+	<item_collecting id="4961" start_npc_ids="204110"/>
+	<item_collecting id="4975" start_npc_ids="204283"/>
+	<item_collecting id="9551" start_npc_ids="204209"/>
+	<item_collecting id="9552" start_npc_ids="204209"/>
+	<item_collecting id="29042" start_npc_ids="204286"/>
+	<item_collecting id="29043" start_npc_ids="798445"/>
+	<item_collecting id="29054" start_npc_ids="798452"/>
+	<item_collecting id="80015" start_npc_ids="799788"/>
+	<item_collecting id="80025" start_npc_ids="799777"/>
+	<item_collecting id="80026" start_npc_ids="799777"/>
+	<item_collecting id="80027" start_npc_ids="799777"/>
+	<item_collecting id="80041" start_npc_ids="799785"/>
+	<item_collecting id="80046" start_npc_ids="799787"/>
+	<item_collecting id="80047" start_npc_ids="799787"/>
+	<item_collecting id="80048" start_npc_ids="799787"/>
+	<item_collecting id="80049" start_npc_ids="799787"/>
+	<item_collecting id="80052" start_npc_ids="799786"/>
+	<item_collecting id="80053" start_npc_ids="799786"/>
+	<item_collecting id="80056" start_npc_ids="799782"/>
+	<item_collecting id="80057" start_npc_ids="799782"/>
+	<item_collecting id="80066" start_npc_ids="205479"/>
+	<item_collecting id="80067" start_npc_ids="205479"/>
+	<item_collecting id="80068" start_npc_ids="205479"/>
+	<item_collecting id="80069" start_npc_ids="205479"/>
+	<item_collecting id="80077" start_npc_ids="205483"/>
+	<item_collecting id="80082" start_npc_ids="205483"/>
+	<item_collecting id="80083" start_npc_ids="205483"/>
+	<item_collecting id="80084" start_npc_ids="205483"/>
+	<item_collecting id="80085" start_npc_ids="205483"/>
+	<item_collecting id="80098" start_npc_ids="205485"/>
+	<item_collecting id="80099" start_npc_ids="205485"/>
+	<item_collecting id="80100" start_npc_ids="205485"/>
+	<item_collecting id="80101" start_npc_ids="205485"/>
+	<item_collecting id="80102" start_npc_ids="205485"/>
+	<item_collecting id="80103" start_npc_ids="205485"/>
+	<item_collecting id="80104" start_npc_ids="205485"/>
+	<item_collecting id="80105" start_npc_ids="205485"/>
+	<item_collecting id="80106" start_npc_ids="205485"/>
+	<item_collecting id="80107" start_npc_ids="205485"/>
+	<item_collecting id="80108" start_npc_ids="205485"/>
+	<item_collecting id="80109" start_npc_ids="205485"/>
+	<item_collecting id="80111" start_npc_ids="205485"/>
+	<item_collecting id="80120" start_npc_ids="205487"/>
+	<item_collecting id="80121" start_npc_ids="205487"/>
+	<item_collecting id="80122" start_npc_ids="205487"/>
+	<item_collecting id="80123" start_npc_ids="205487"/>
+	<item_collecting id="80124" start_npc_ids="205487"/>
+	<item_collecting id="80125" start_npc_ids="205487"/>
+	<item_collecting id="80126" start_npc_ids="205487"/>
+	<item_collecting id="80127" start_npc_ids="205487"/>
+	<item_collecting id="80129" start_npc_ids="205487"/>
+	<item_collecting id="80130" start_npc_ids="205487"/>
+	<item_collecting id="80131" start_npc_ids="205487"/>
+	<item_collecting id="80132" start_npc_ids="205487"/>
+	<item_collecting id="80161" start_npc_ids="830536"/>
+	<item_collecting id="80166" start_npc_ids="800274"/>
+	<item_collecting id="80167" start_npc_ids="800275"/>
+	<item_collecting id="80168" start_npc_ids="800276"/>
+	<item_collecting id="80169" start_npc_ids="800277"/>
+	<item_collecting id="80171" start_npc_ids="800274"/>
+	<crafting_rewards id="4947" start_npc_id="204104" end_npc_id="204052" skill_id="40002" level_reward="400"/>
+	<crafting_rewards id="4950" start_npc_id="204106" end_npc_id="204052" skill_id="40003" level_reward="400"/>
+	<crafting_rewards id="4953" start_npc_id="204108" end_npc_id="204052" skill_id="40008" level_reward="400"/>
+	<crafting_rewards id="4956" start_npc_id="204100" end_npc_id="204052" skill_id="40001" level_reward="400"/>
+	<crafting_rewards id="4959" start_npc_id="204102" end_npc_id="204052" skill_id="40007" level_reward="400"/>
+	<crafting_rewards id="4962" start_npc_id="204110" end_npc_id="204052" skill_id="40004" level_reward="400"/>
+	<crafting_rewards id="29056" start_npc_id="798452" end_npc_id="204052" skill_id="40010" level_reward="400"/>
+	<crafting_rewards id="2931" start_npc_id="204104" end_npc_id="204052" movie="125" skill_id="40002" level_reward="400"/>
+	<crafting_rewards id="2932" start_npc_id="204106" end_npc_id="204052" movie="126" skill_id="40003" level_reward="400"/>
+	<crafting_rewards id="2933" start_npc_id="204108" end_npc_id="204052" movie="127" skill_id="40008" level_reward="400"/>
+	<crafting_rewards id="2934" start_npc_id="204100" end_npc_id="204052" movie="128" skill_id="40001" level_reward="400"/>
+	<crafting_rewards id="2935" start_npc_id="204102" end_npc_id="204052" movie="129" skill_id="40007" level_reward="400"/>
+	<crafting_rewards id="2936" start_npc_id="204110" end_npc_id="204052" movie="130" skill_id="40004" level_reward="400"/>
+	<crafting_rewards id="29050" start_npc_id="798452" end_npc_id="204052" movie="146" skill_id="40010" level_reward="400"/>
+	<crafting_rewards id="29009" start_npc_id="204104" end_npc_id="798800" movie="140" skill_id="40002" level_reward="500"/>
+	<crafting_rewards id="29015" start_npc_id="204106" end_npc_id="798800" movie="141" skill_id="40003" level_reward="500"/>
+	<crafting_rewards id="29027" start_npc_id="204108" end_npc_id="798800" movie="142" skill_id="40008" level_reward="500"/>
+	<crafting_rewards id="29039" start_npc_id="204100" end_npc_id="798800" movie="143" skill_id="40001" level_reward="500"/>
+	<crafting_rewards id="29033" start_npc_id="204102" end_npc_id="798800" movie="144" skill_id="40007" level_reward="500"/>
+	<crafting_rewards id="29021" start_npc_id="204110" end_npc_id="798800" movie="145" skill_id="40004" level_reward="500"/>
+	<crafting_rewards id="29058" start_npc_id="798452" end_npc_id="798800" movie="147" skill_id="40010" level_reward="500"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="4213" start_npc_ids="204202">
+		<monster var="0" end_var="4" npc_ids="215032 215408"/>
+		<monster var="1" end_var="4" npc_ids="215410"/>
+	</monster_hunt>
+	<monster_hunt id="4977" start_npc_ids="203385">
+		<monster var="0" end_var="8" npc_ids="214849 214850 214851 214880 215388 215389 286787 214895 214896 214897"/>
+	</monster_hunt>
+	<monster_hunt id="4978" start_npc_ids="204286">
+		<monster var="0" end_var="1" npc_ids="219033"/>
+	</monster_hunt>
+	<monster_hunt id="4979" start_npc_ids="204283">
+		<monster var="0" end_var="1" npc_ids="215081"/>
+	</monster_hunt>
+	<monster_hunt id="80013" start_npc_ids="799788">
+		<monster var="0" end_var="15" npc_ids="217161"/>
+	</monster_hunt>
+	<monster_hunt id="80014" start_npc_ids="799788">
+		<monster var="0" end_var="12" npc_ids="217161"/>
+	</monster_hunt>
+	<!-- ITEM ORDERS QUESTS -->
+	<item_order end_npc_id="278055" id="2966"/>
+	<item_order end_npc_id="278055" id="2967"/>
+	<item_order end_npc_id="278055" id="2968"/>
+	<item_order end_npc_id="278056" id="2969"/>
+	<item_order end_npc_id="278056" id="2970"/>
+	<item_order end_npc_id="278056" id="2971"/>
+</quest_scripts>

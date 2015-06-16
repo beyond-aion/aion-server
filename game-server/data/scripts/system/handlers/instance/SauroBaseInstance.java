@@ -1,0 +1,160 @@
+package instance;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
+import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.StaticDoor;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldPosition;
+
+
+/**
+ * @author Cheatkiller
+ *
+ */
+@InstanceID(301130000)
+public class SauroBaseInstance extends GeneralInstanceHandler {
+	
+	private Map<Integer, StaticDoor> doors;
+	private static List<WorldPosition> chestPoints = new ArrayList<>();
+	static {
+		chestPoints.add(new WorldPosition(301130000, 253.97533f, 363.97156f, 159.64023f, (byte) 0));
+		chestPoints.add(new WorldPosition(301130000, 262.36151f, 393.78619f, 156.83209f, (byte) 30));
+		chestPoints.add(new WorldPosition(301130000, 263.41193f, 463.63086f, 156.70573f, (byte) 90));
+		chestPoints.add(new WorldPosition(301130000, 282.64951f, 330.15793f, 159.36792f, (byte) 0));
+		chestPoints.add(new WorldPosition(301130000, 300.37936f, 332.13354f, 159.74071f, (byte) 60));
+		chestPoints.add(new WorldPosition(301130000, 325.39862f, 364.31143f, 160.89003f, (byte) 60));
+		chestPoints.add(new WorldPosition(301130000, 325.41577f, 388.60355f, 160.89003f, (byte) 60));
+		chestPoints.add(new WorldPosition(301130000, 431.13638f, 481.81009f, 183.08244f, (byte) 0));
+		chestPoints.add(new WorldPosition(301130000, 465.58185f, 412.19705f, 183.75404f, (byte) 90));
+		chestPoints.add(new WorldPosition(301130000, 467.54926f, 377.6048f, 182.8183f, (byte) 30));
+		chestPoints.add(new WorldPosition(301130000, 495.8497f, 359.10245f, 182.77852f, (byte) 30));
+		chestPoints.add(new WorldPosition(301130000, 496.02997f, 381.77118f, 182.94859f, (byte) 30));
+		chestPoints.add(new WorldPosition(301130000, 497.55228f, 402.35077f, 183.24211f, (byte) 30));
+		chestPoints.add(new WorldPosition(301130000, 510.22513f, 535.37701f, 182.3832f, (byte) 90));
+		chestPoints.add(new WorldPosition(301130000, 518.31726f, 463.9472f, 182.00262f, (byte) 45));
+		chestPoints.add(new WorldPosition(301130000, 519.60052f, 505.98093f, 182.13989f, (byte) 60));
+		chestPoints.add(new WorldPosition(301130000, 569.55652f, 495.64389f, 193.63138f, (byte) 0));
+		chestPoints.add(new WorldPosition(301130000, 576.3725f, 500.66254f, 202.54437f, (byte) 105));
+		chestPoints.add(new WorldPosition(301130000, 576.96289f, 471.08911f, 202.54466f, (byte) 15));
+		chestPoints.add(new WorldPosition(301130000, 599.65344f, 361.96112f, 204.74123f, (byte) 0));
+		chestPoints.add(new WorldPosition(301130000, 656.28381f, 398.28476f, 204.74123f, (byte) 90));
+		chestPoints.add(new WorldPosition(301130000, 666.01855f, 363.71048f, 204.74123f, (byte) 90));
+		chestPoints.add(new WorldPosition(301130000, 666.21979f, 345.6026f, 204.63773f, (byte) 30));	 
+	}
+	
+	
+	@Override
+	public void onInstanceDestroy() {
+		doors.clear();
+	}
+
+	@Override
+	public void onInstanceCreate(WorldMapInstance instance) {
+		super.onInstanceCreate(instance);
+		doors = instance.getDoors();
+		//spawn Sauro Base Grave Robber (pool=1)
+		switch ((int)Rnd.get(1, 5)) {
+			case 1:
+				spawn(230846, 460.69705f, 390.10602f, 182.75943f, (byte) 0);
+				break;
+			case 2:
+				spawn(230846, 463.92523f, 402.63937f, 183.31064f, (byte) 0);
+				break;
+			case 3:
+				spawn(230846, 496.42526f, 412.04755f, 182.72771f, (byte) 0);
+				break;
+			case 4:
+				spawn(230846, 497.27997f, 361.05948f, 182.45613f, (byte) 0);
+				break;
+			case 5:
+				spawn(230846, 497.55908f,389.86649f, 182.8175f, (byte) 0);
+				break;
+		}
+		
+		List<WorldPosition> temp = new ArrayList<>(chestPoints);
+		for (int i = 0; i < 8; i++) {
+		    int index = Rnd.get(0, temp.size() - 1);
+		    WorldPosition pos = temp.get(index);
+		    spawn(230847, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+		    temp.remove(index);
+		}
+		for (int i = 0; i < temp.size(); i++) {
+			spawn(230848, temp.get(i).getX(), temp.get(i).getY(), temp.get(i).getZ(), (byte) temp.get(i).getHeading());
+		}
+	}
+	
+	@Override
+	public void onDie(Npc npc) {
+		switch (npc.getNpcId()) {
+			case 230849:
+				sendMsg(1401914);
+				doors.get(383).setOpen(true);
+				break;
+			case 230830:
+				sendMsg(1401915);
+				doors.get(59).setOpen(true);
+				break;
+			case 230837:
+				sendMsg(1401916);
+				doors.get(372).setOpen(true);
+				break;
+			case 230850:
+				sendMsg(1401917);
+				doors.get(375).setOpen(true);
+				break;
+			case 233255:
+				sendMsg(1401918);
+				doors.get(378).setOpen(true);
+				break;
+			case 233316:
+				sendMsg(1401919);
+				doors.get(388).setOpen(true);
+				break;
+			case 230838:
+				sendMsg(1401920);
+				doors.get(376).setOpen(true);
+				break;
+			case 230853:
+				sendMsg(1401921);
+				spawn(730872, 129.16417f, 432.32669f, 153.33147f, (byte) 2, 3);// Boss Teleporter
+				break;
+			case 230854:
+				spawn(801967, 91.69f, 889.8f, 411.45f, (byte) 120);// Sauro Exit
+				break;
+			case 230855:
+				spawn(801967, 289.38f, 889.82f, 411.45f, (byte) 120);// Sauro Exit
+				break;
+			case 230856:
+				spawn(801967, 485.1f, 889.93f, 411.45f, (byte) 0);// Sauro Exit
+				break;
+			case 230857:
+				spawn(801967, 721.84f, 889.93f, 411.45f, (byte) 60);// Sauro Exit
+				break;
+			case 230858:
+				spawn(801967, 880.82f, 889.93f, 411.45f, (byte) 120);// Sauro Exit
+				break;
+		}
+	}
+	
+	@Override
+	public void handleUseItemFinish(Player player, Npc npc) {
+		switch(npc.getNpcId()) {
+			case 730876:
+				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+				break;
+			case 730877:
+				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
+				break;
+		}
+	}
+}
+				

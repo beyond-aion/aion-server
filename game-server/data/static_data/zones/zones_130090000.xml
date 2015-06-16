@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="130090000" name="LIMITAREALIMIT_AREA1_1" area_type="POLYGON" zone_type="LIMIT" flags="4">
+        <points bottom="128.8516" top="178.8516">
+            <point x="241.19194" y="216.77425"/>
+            <point x="252.76454" y="216.78862"/>
+            <point x="252.84427" y="234.17259"/>
+            <point x="267.49484" y="242.03221"/>
+            <point x="272.40775" y="270.3263"/>
+            <point x="272.14145" y="307.45023"/>
+            <point x="222.34756" y="306.68445"/>
+            <point x="221.17432" y="271.3053"/>
+            <point x="226.57954" y="243.69508"/>
+            <point x="241.42401" y="234.00293"/>
+        </points>
+    </zone>
+    <zone mapid="130090000" name="WISPLIGHT_ABBEY_130090000" area_type="POLYGON" zone_type="SUB" priority="16" flags="4">
+        <points bottom="128.69862" top="178.69862">
+            <point x="241.24089" y="216.76678"/>
+            <point x="252.86084" y="216.56024"/>
+            <point x="252.98154" y="234.20801"/>
+            <point x="267.48425" y="242.41962"/>
+            <point x="272.58734" y="270.3168"/>
+            <point x="271.9877" y="308.15485"/>
+            <point x="221.93536" y="307.0334"/>
+            <point x="220.57446" y="271.4743"/>
+            <point x="225.91702" y="244.02325"/>
+            <point x="241.01822" y="233.57365"/>
+        </points>
+    </zone>
+</zones>

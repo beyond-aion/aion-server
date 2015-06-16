@@ -1,0 +1,1 @@
+ALTER TABLE `players` MODIFY COLUMN `mailbox_letters` tinyint(4) UNSIGNED NOT NULL default '0';

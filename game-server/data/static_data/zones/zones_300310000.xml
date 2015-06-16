@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="300310000" name="FLYINGZONE_01" area_type="POLYGON" zone_type="FLY" flags="12">
+        <points bottom="509.70026" top="1183.7002">
+            <point x="722.728" y="839.0676"/>
+            <point x="693.9366" y="856.2961"/>
+            <point x="653.5497" y="857.54535"/>
+            <point x="612.21173" y="850.72705"/>
+            <point x="583.4593" y="840.17633"/>
+            <point x="511.3476" y="830.9981"/>
+            <point x="493.46436" y="820.1574"/>
+            <point x="474.39066" y="804.84216"/>
+            <point x="452.26892" y="773.99945"/>
+            <point x="445.05258" y="736.6919"/>
+            <point x="442.3058" y="699.6235"/>
+            <point x="447.5454" y="663.84515"/>
+            <point x="469.48807" y="598.9813"/>
+            <point x="493.64023" y="571.3526"/>
+            <point x="525.8679" y="555.7305"/>
+            <point x="560.306" y="541.57294"/>
+            <point x="595.2559" y="529.14"/>
+            <point x="618.28625" y="499.784"/>
+            <point x="684.37384" y="482.60202"/>
+            <point x="719.8101" y="485.27176"/>
+            <point x="760.64374" y="527.95056"/>
+            <point x="768.5283" y="560.3834"/>
+            <point x="766.7738" y="600.39655"/>
+            <point x="778.61957" y="675.6432"/>
+            <point x="779.3685" y="705.0309"/>
+            <point x="773.0716" y="727.92267"/>
+            <point x="764.22876" y="746.2153"/>
+            <point x="748.6833" y="763.6953"/>
+            <point x="734.52673" y="796.07825"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="HELLPATH_300310000" area_type="POLYGON" zone_type="SUB" priority="16" flags="4">
+        <points bottom="93.61614" top="213.61613">
+            <point x="463.63333" y="912.0539"/>
+            <point x="135.79825" y="784.30145"/>
+            <point x="312.05634" y="406.85635"/>
+            <point x="419.71518" y="439.80084"/>
+            <point x="494.64166" y="829.9853"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="IDRAKSHA_ITEMUSEAREA_Q28703" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
+        <points bottom="517.0579" top="537.0579">
+            <point x="678.02673" y="679.9397"/>
+            <point x="671.4266" y="672.4489"/>
+            <point x="665.92944" y="668.51294"/>
+            <point x="662.6164" y="662.2924"/>
+            <point x="663.8051" y="654.0925"/>
+            <point x="681.5312" y="649.0088"/>
+            <point x="690.41205" y="660.0563"/>
+            <point x="693.732" y="676.63306"/>
+            <point x="682.6654" y="680.2667"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSANG_300310000" area_type="POLYGON" zone_type="SUB" priority="30" flags="4">
+        <points bottom="20.662651" top="1320.6626">
+            <point x="1141.6831" y="1194.8307"/>
+            <point x="1247.4388" y="852.154"/>
+            <point x="854.0191" y="32.38684"/>
+            <point x="374.5216" y="103.946045"/>
+            <point x="25.407227" y="768.93304"/>
+            <point x="216.21722" y="1008.5937"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSANG_DEPTHS_300310000" area_type="POLYGON" zone_type="SUB" priority="20" flags="4">
+        <points bottom="520.9674" top="720.9674">
+            <point x="886.59784" y="715.149"/>
+            <point x="833.43024" y="848.4291"/>
+            <point x="744.51746" y="930.50635"/>
+            <point x="628.0668" y="941.0736"/>
+            <point x="519.4185" y="919.7231"/>
+            <point x="444.1455" y="818.8579"/>
+            <point x="424.78122" y="680.27136"/>
+            <point x="477.18015" y="561.2704"/>
+            <point x="576.21893" y="492.94308"/>
+            <point x="684.2692" y="482.68753"/>
+            <point x="800.26654" y="512.22906"/>
+            <point x="868.46326" y="603.41583"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSANG_DUNGEON_CHASM_300310000" area_type="POLYGON" zone_type="SUB" priority="28" flags="4">
+        <points bottom="497.13422" top="1177.1342">
+            <point x="888.809" y="717.4702"/>
+            <point x="835.6413" y="848.9852"/>
+            <point x="746.72864" y="931.94495"/>
+            <point x="625.8652" y="944.2773"/>
+            <point x="518.98206" y="923.8094"/>
+            <point x="441.06134" y="819.41406"/>
+            <point x="421.6971" y="680.8275"/>
+            <point x="475.8611" y="559.17883"/>
+            <point x="575.7824" y="490.8516"/>
+            <point x="684.71533" y="479.7134"/>
+            <point x="800.71265" y="509.255"/>
+            <point x="871.557" y="603.0895"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSANG_ENTRANCE_300310000" area_type="POLYGON" zone_type="SUB" priority="10" flags="4">
+        <points bottom="1170.4762" top="1214.4762">
+            <point x="517.40857" y="608.58734"/>
+            <point x="573.85596" y="577.26447"/>
+            <point x="660.9749" y="644.97437"/>
+            <point x="571.07227" y="748.7271"/>
+            <point x="496.57178" y="675.6497"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSHAS_CRYPT_300310000" area_type="POLYGON" zone_type="SUB" priority="10" flags="4">
+        <points bottom="102.73846" top="202.73846">
+            <point x="1111.5901" y="892.6823"/>
+            <point x="1122.6277" y="930.2678"/>
+            <point x="1087.4762" y="1011.8365"/>
+            <point x="1055.8027" y="1015.7972"/>
+            <point x="1007.3431" y="942.5539"/>
+            <point x="1008.98956" y="899.95996"/>
+            <point x="1037.3569" y="869.6666"/>
+            <point x="1080.7881" y="867.5021"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="RAKSHAS_SEAL_300310000" area_type="POLYGON" zone_type="SUB" priority="20" flags="4">
+        <points bottom="33.552437" top="233.55244">
+            <point x="324.57892" y="901.671"/>
+            <point x="100.82146" y="797.6303"/>
+            <point x="298.74576" y="376.6383"/>
+            <point x="432.00638" y="417.761"/>
+            <point x="1168.7965" y="899.9598"/>
+            <point x="1110.4126" y="1068.7306"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="REFLECTING_CHAMBER_300310000" area_type="POLYGON" zone_type="SUB" priority="10" flags="4">
+        <points bottom="891.3369" top="951.3369">
+            <point x="710.3996" y="251.96814"/>
+            <point x="727.65814" y="245.70901"/>
+            <point x="741.73486" y="249.4281"/>
+            <point x="749.27246" y="256.39618"/>
+            <point x="752.14636" y="321.92664"/>
+            <point x="746.4136" y="332.75647"/>
+            <point x="732.79083" y="339.1315"/>
+            <point x="716.91394" y="334.38763"/>
+            <point x="706.7927" y="322.2302"/>
+            <point x="704.6783" y="264.29398"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="SEAL_GENERATION_ZONE_300310000" area_type="POLYGON" zone_type="SUB" priority="20" flags="4">
+        <points bottom="1176.3881" top="1236.3881">
+            <point x="514.04895" y="605.0783"/>
+            <point x="573.9244" y="571.5484"/>
+            <point x="734.4134" y="694.3054"/>
+            <point x="881.99805" y="834.9967"/>
+            <point x="766.78345" y="955.8628"/>
+            <point x="737.6985" y="931.3806"/>
+            <point x="728.1157" y="862.71423"/>
+            <point x="616.3693" y="797.0593"/>
+            <point x="492.1632" y="676.9879"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="STORAGE_CHAMBER_300310000" area_type="POLYGON" zone_type="SUB" priority="10" flags="4">
+        <points bottom="1191.8971" top="1291.8971">
+            <point x="869.8797" y="905.2692"/>
+            <point x="888.80585" y="929.72943"/>
+            <point x="869.7537" y="987.0909"/>
+            <point x="825.2764" y="963.06256"/>
+            <point x="793.4752" y="936.2762"/>
+            <point x="801.7568" y="905.1319"/>
+            <point x="821.2674" y="870.9125"/>
+            <point x="828.5959" y="862.42847"/>
+            <point x="845.3049" y="850.37164"/>
+            <point x="874.5825" y="870.60785"/>
+            <point x="874.4083" y="892.7284"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="TERRORS_VAULT_300310000" area_type="POLYGON" zone_type="SUB" priority="20" flags="4">
+        <points bottom="904.4281" top="994.4281">
+            <point x="398.50067" y="492.771"/>
+            <point x="290.72827" y="381.68073"/>
+            <point x="455.2418" y="147.90866"/>
+            <point x="623.1394" y="118.80194"/>
+            <point x="785.15796" y="217.97205"/>
+            <point x="804.31305" y="348.6362"/>
+            <point x="732.0126" y="389.58466"/>
+            <point x="624.99133" y="381.01105"/>
+            <point x="519.8176" y="491.04474"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="TORMENTS_FORGE_300310000" area_type="POLYGON" zone_type="SUB" priority="20" flags="4">
+        <points bottom="704.07587" top="854.07587">
+            <point x="1005.6374" y="702.77637"/>
+            <point x="1087.4834" y="789.0128"/>
+            <point x="1087.0272" y="923.23816"/>
+            <point x="996.0829" y="1022.9811"/>
+            <point x="782.601" y="1031.5745"/>
+            <point x="704.23517" y="945.58344"/>
+            <point x="739.6173" y="891.00287"/>
+            <point x="775.57367" y="860.9572"/>
+            <point x="795.98535" y="795.9711"/>
+            <point x="929.52527" y="702.4796"/>
+        </points>
+    </zone>
+    <zone mapid="300310000" name="TORMENT_CHAMBER_300310000" area_type="POLYGON" zone_type="SUB" priority="10" flags="4">
+        <points bottom="706.4138" top="836.4138">
+            <point x="740.22437" y="917.4649"/>
+            <point x="775.8391" y="928.8802"/>
+            <point x="802.191" y="919.106"/>
+            <point x="824.92303" y="922.3663"/>
+            <point x="841.25543" y="935.8775"/>
+            <point x="844.97595" y="963.745"/>
+            <point x="832.1693" y="999.3864"/>
+            <point x="799.0912" y="1009.4981"/>
+            <point x="775.7368" y="998.94165"/>
+            <point x="761.7641" y="969.18005"/>
+            <point x="729.1892" y="937.9454"/>
+        </points>
+    </zone>
+</zones>

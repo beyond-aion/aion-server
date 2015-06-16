@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			9546 [UNUSED] Ready for the Abyss
+			9547 [UNUSED] Ready for the Abyss
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<!-- <report_to id="9546" start_npc_ids="798129" end_npc_ids="798129"/>  -->
+	<!-- <report_to id="9547" start_npc_ids="798130" end_npc_ids="798130"/>	 -->
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

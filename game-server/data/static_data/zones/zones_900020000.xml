@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="900020000" name="HOUSE_0" area_type="POLYGON" zone_type="HOUSE">
+        <points bottom="19.778467" top="25.778467">
+            <point x="85.01582" y="184.5904"/>
+            <point x="110.01582" y="184.5904"/>
+            <point x="110.01582" y="209.5904"/>
+            <point x="85.01582" y="209.5904"/>
+        </points>
+    </zone>
+    <zone mapid="900020000" name="PVP_67_900020000" area_type="POLYGON" zone_type="PVP" flags="0">
+        <points bottom="12.740152" top="42.74015">
+            <point x="7.416304" y="15.731413"/>
+            <point x="29.334476" y="15.731414"/>
+            <point x="29.334473" y="37.64959"/>
+            <point x="7.248989" y="37.816902"/>
+        </points>
+    </zone>
+</zones>

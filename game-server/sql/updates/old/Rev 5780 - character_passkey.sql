@@ -1,0 +1,1 @@
+ALTER TABLE `player_passkey` MODIFY COLUMN `passkey` varchar(32) NOT NULL DEFAULT '';

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="220010000" name="ALDELLE_BASIN_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="50.0" top="450.0">
+            <point x="623.5147" y="2716.0735"/>
+            <point x="562.69794" y="2764.8044"/>
+            <point x="555.9637" y="2798.8735"/>
+            <point x="570.6801" y="2896.8174"/>
+            <point x="626.82574" y="2904.112"/>
+            <point x="692.7875" y="2837.1812"/>
+            <point x="693.4401" y="2762.8389"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ALDELLE_HILL_220010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="622.58" y="2499.35"/>
+            <point x="667.37756" y="2550.1506"/>
+            <point x="578.69763" y="2633.0723"/>
+            <point x="573.32306" y="2679.9075"/>
+            <point x="722.76746" y="2776.6199"/>
+            <point x="711.5344" y="2870.4631"/>
+            <point x="561.1054" y="2989.0627"/>
+            <point x="79.57263" y="2990.5735"/>
+            <point x="35.22467" y="2949.4805"/>
+            <point x="21.537415" y="2465.2324"/>
+            <point x="54.900146" y="2434.7178"/>
+            <point x="460.5883" y="2496.847"/>
+            <point x="520.49896" y="2482.1711"/>
+            <point x="579.9372" y="2502.5886"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ALDELLE_VILLAGE_220010000" area_type="POLYGON" zone_type="SUB" priority="13" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="582.0569" y="2507.825"/>
+            <point x="621.35187" y="2501.1648"/>
+            <point x="660.9798" y="2455.5427"/>
+            <point x="640.3333" y="2395.6013"/>
+            <point x="573.48694" y="2357.1228"/>
+            <point x="530.86194" y="2379.4343"/>
+            <point x="522.53674" y="2396.4177"/>
+            <point x="490.90097" y="2395.7517"/>
+            <point x="478.57965" y="2414.4001"/>
+            <point x="508.21738" y="2440.3748"/>
+            <point x="523.53577" y="2484.9978"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ANTUROON_COAST_220010000" area_type="POLYGON" zone_type="SUB" priority="14" flags="3">
+        <points bottom="100.19997" top="500.19995">
+            <point x="1058.8289" y="1872.4465"/>
+            <point x="1079.8212" y="1892.845"/>
+            <point x="1081.8689" y="1930.7288"/>
+            <point x="1192.5411" y="1986.1202"/>
+            <point x="1243.6415" y="1965.4633"/>
+            <point x="1290.0942" y="1644.1023"/>
+            <point x="1267.5947" y="1623.1167"/>
+            <point x="1130.4879" y="1598.489"/>
+            <point x="1110.9794" y="1655.4385"/>
+            <point x="1128.3595" y="1713.6243"/>
+            <point x="1118.9612" y="1746.7054"/>
+            <point x="1166.3223" y="1779.7103"/>
+            <point x="1174.3207" y="1819.6912"/>
+            <point x="1164.176" y="1842.9344"/>
+            <point x="1172.1879" y="1853.2354"/>
+            <point x="1166.3289" y="1874.6565"/>
+            <point x="1161.887" y="1876.012"/>
+            <point x="1127.6969" y="1855.3967"/>
+            <point x="1107.7976" y="1856.3953"/>
+            <point x="1074.7201" y="1842.5461"/>
+            <point x="1059.2621" y="1857.2826"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ANTUROON_CROSSING_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.1" top="500.1">
+            <point x="1002.911" y="1979.6873"/>
+            <point x="1072.2114" y="1950.6683"/>
+            <point x="1196.2632" y="1990.8702"/>
+            <point x="1245.0604" y="1966.5336"/>
+            <point x="1292.1309" y="1643.9008"/>
+            <point x="1268.3926" y="1620.9282"/>
+            <point x="1129.7916" y="1596.0413"/>
+            <point x="1105.1996" y="1525.5751"/>
+            <point x="926.4704" y="1470.2571"/>
+            <point x="841.9259" y="1525.9017"/>
+            <point x="810.92175" y="1627.9054"/>
+            <point x="733.5797" y="1729.2489"/>
+            <point x="729.5492" y="1803.6589"/>
+            <point x="788.4571" y="1828.7722"/>
+            <point x="854.6696" y="1820.5513"/>
+            <point x="876.37256" y="1855.896"/>
+            <point x="994.30817" y="1978.1224"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ANTUROON_SENTRY_POST_220010000" area_type="POLYGON" zone_type="SUB" priority="14" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="952.5838" y="1669.3107"/>
+            <point x="963.8284" y="1690.4136"/>
+            <point x="962.7502" y="1706.7413"/>
+            <point x="957.97504" y="1718.7561"/>
+            <point x="938.41254" y="1720.4504"/>
+            <point x="923.3171" y="1705.355"/>
+            <point x="920.54443" y="1684.4061"/>
+            <point x="933.4834" y="1666.8461"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="DARU_SPRING_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="1075.9462" y="2331.053"/>
+            <point x="1128.3969" y="2346.0706"/>
+            <point x="1121.0605" y="2427.7886"/>
+            <point x="1077.4824" y="2449.7168"/>
+            <point x="1032.7938" y="2440.002"/>
+            <point x="1023.518" y="2343.4563"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="DF1_ITEMUSEAREA_Q24031" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+        <points bottom="317.5877" top="327.5877">
+            <point x="658.8078" y="864.6806"/>
+            <point x="670.46185" y="866.78955"/>
+            <point x="681.7979" y="852.7986"/>
+            <point x="669.2742" y="845.0955"/>
+            <point x="655.62396" y="847.1312"/>
+            <point x="653.9039" y="854.53516"/>
+            <point x="655.3538" y="859.3701"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5012" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+        <points bottom="220.0" top="320.0">
+            <point x="1120.15" y="2378.2"/>
+            <point x="1101.4846" y="2359.7937"/>
+            <point x="1087.8282" y="2357.0867"/>
+            <point x="1076.6725" y="2364.6487"/>
+            <point x="1066.2556" y="2378.9678"/>
+            <point x="1069.8475" y="2404.3367"/>
+            <point x="1087.243" y="2421.4954"/>
+            <point x="1113.2179" y="2412.25"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5029" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+        <points bottom="250.0" top="350.0">
+            <point x="467.66992" y="1339.618"/>
+            <point x="454.18732" y="1340.4879"/>
+            <point x="446.6849" y="1357.1237"/>
+            <point x="455.70956" y="1367.2356"/>
+            <point x="468.2136" y="1367.6705"/>
+            <point x="477.02078" y="1352.992"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="DUBARO_VINE_CANYON_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="597.59" y="731.53186"/>
+            <point x="509.45367" y="832.8229"/>
+            <point x="579.83124" y="1193.919"/>
+            <point x="786.7477" y="1249.1799"/>
+            <point x="872.2549" y="946.6226"/>
+            <point x="747.2854" y="730.8858"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="EYVINDR_ANCHORAGE_220010000" area_type="POLYGON" zone_type="SUB" priority="12" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="1213.5924" y="1855.5853"/>
+            <point x="1170.8463" y="1849.3516"/>
+            <point x="1163.1283" y="1875.4741"/>
+            <point x="1193.4069" y="1902.1904"/>
+            <point x="1255.7449" y="1877.8489"/>
+            <point x="1249.2142" y="1846.9768"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="GUHEITUNS_TENT_220010000" area_type="POLYGON" zone_type="SUB" priority="10" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="223.32971" y="2656.0686"/>
+            <point x="247.49666" y="2661.004"/>
+            <point x="262.38705" y="2676.2224"/>
+            <point x="261.6487" y="2699.1663"/>
+            <point x="245.9448" y="2712.8828"/>
+            <point x="223.20332" y="2712.6453"/>
+            <point x="209.03638" y="2696.2297"/>
+            <point x="207.55109" y="2671.625"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="HATATAS_HIDEOUT_220010000" area_type="POLYGON" zone_type="SUB" priority="14" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="623.2" y="815.58496"/>
+            <point x="595.8328" y="879.2434"/>
+            <point x="611.8962" y="926.83856"/>
+            <point x="685.07367" y="933.97784"/>
+            <point x="726.12445" y="890.5473"/>
+            <point x="692.21295" y="825.104"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ISHALGEN_PRISON_CAMP_220010000" area_type="POLYGON" zone_type="SUB" priority="14" flags="3">
+        <points bottom="0.1" top="400.1">
+            <point x="733.7" y="1648.14"/>
+            <point x="761.01825" y="1700.5374"/>
+            <point x="741.7611" y="1726.96"/>
+            <point x="733.9047" y="1817.7867"/>
+            <point x="666.36914" y="1941.8074"/>
+            <point x="493.12408" y="2007.419"/>
+            <point x="290.84665" y="1972.8491"/>
+            <point x="291.2945" y="1797.2957"/>
+            <point x="569.67065" y="1599.2312"/>
+            <point x="643.5241" y="1645.7428"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ISHALGEN_SENTRY_POST_220010000" area_type="POLYGON" zone_type="SUB" priority="13" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="523.6727" y="1881.6066"/>
+            <point x="512.1981" y="1884.5234"/>
+            <point x="510.81607" y="1901.5568"/>
+            <point x="525.1833" y="1906.3677"/>
+            <point x="531.1088" y="1900.6775"/>
+            <point x="531.53735" y="1887.9216"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="KARDS_CAMPSITE_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="1062.6934" y="2031.1786"/>
+            <point x="1082.2245" y="2046.3899"/>
+            <point x="1073.8651" y="2073.5344"/>
+            <point x="1041.7147" y="2072.9465"/>
+            <point x="1036.9457" y="2041.9596"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="LAKE_TUNAPRE_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="575.32" y="2362.33"/>
+            <point x="711.7371" y="2370.4792"/>
+            <point x="686.6005" y="2404.2993"/>
+            <point x="704.4247" y="2445.889"/>
+            <point x="786.6899" y="2404.2993"/>
+            <point x="754.24084" y="2184.9253"/>
+            <point x="764.7596" y="2119.3264"/>
+            <point x="756.2678" y="2040.3723"/>
+            <point x="674.8182" y="1951.3898"/>
+            <point x="491.402" y="2009.1671"/>
+            <point x="289.05615" y="1977.382"/>
+            <point x="146.1983" y="2310.7861"/>
+            <point x="224.52493" y="2385.0425"/>
+            <point x="374.51346" y="2482.1282"/>
+            <point x="462.12033" y="2499.8694"/>
+            <point x="525.4075" y="2482.5469"/>
+            <point x="509.75607" y="2438.5898"/>
+            <point x="482.7824" y="2414.2803"/>
+            <point x="491.1076" y="2399.961"/>
+            <point x="527.0725" y="2398.629"/>
+            <point x="533.22906" y="2380.5898"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="MUNIHELE_FOREST_220010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="788.35" y="2086.35"/>
+            <point x="762.13245" y="2118.2495"/>
+            <point x="752.0778" y="2179.4915"/>
+            <point x="843.03455" y="2403.315"/>
+            <point x="1008.2916" y="2410.1418"/>
+            <point x="1104.365" y="2477.21"/>
+            <point x="1259.9436" y="2337.99"/>
+            <point x="1336.2693" y="2116.3145"/>
+            <point x="1260.2703" y="2021.2051"/>
+            <point x="1042.0503" y="1953.4937"/>
+            <point x="1001.32935" y="1977.6672"/>
+            <point x="855.7032" y="1822.0885"/>
+            <point x="775.15656" y="1865.8091"/>
+            <point x="692.5935" y="1980.2506"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="NEGIS_DOCK_220010000" area_type="POLYGON" zone_type="SUB" priority="13" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="482.78" y="2307.6"/>
+            <point x="511.3817" y="2323.9438"/>
+            <point x="531.44006" y="2309.8289"/>
+            <point x="519.55365" y="2283.0842"/>
+            <point x="487.60886" y="2284.9417"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="ODELLA_PLANTATION_220010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="862.18" y="1505.1147"/>
+            <point x="786.0796" y="1247.1328"/>
+            <point x="651.7297" y="1211.9673"/>
+            <point x="554.2214" y="1280.8999"/>
+            <point x="434.6672" y="1281.0518"/>
+            <point x="373.91022" y="1366.8763"/>
+            <point x="399.0504" y="1615.8087"/>
+            <point x="466.1805" y="1679.115"/>
+            <point x="569.8574" y="1604.2333"/>
+            <point x="640.25183" y="1650.6741"/>
+            <point x="736.74744" y="1651.3956"/>
+            <point x="824.96375" y="1619.2728"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="SAP_FARM_220010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="842.30707" y="2217.92"/>
+            <point x="848.66364" y="2234.7012"/>
+            <point x="862.90247" y="2235.973"/>
+            <point x="870.7846" y="2224.0222"/>
+            <point x="864.9366" y="2209.5293"/>
+            <point x="851.2063" y="2208.5122"/>
+        </points>
+    </zone>
+    <zone mapid="220010000" name="THE_FORSAKEN_HOLLOW_220010000" area_type="POLYGON" zone_type="SUB" priority="12" flags="3">
+        <points bottom="100.0" top="500.0">
+            <point x="375.25818" y="1855.11"/>
+            <point x="351.11575" y="1872.1367"/>
+            <point x="347.55792" y="1902.3783"/>
+            <point x="376.52884" y="1930.0786"/>
+            <point x="403.4667" y="1926.0125"/>
+            <point x="426.84674" y="1915.5931"/>
+            <point x="434.97894" y="1872.8992"/>
+            <point x="418.71457" y="1850.2815"/>
+        </points>
+    </zone>
+</zones>

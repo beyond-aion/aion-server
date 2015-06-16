@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			18500 [SCRIPT] Big Kinah
+			18501 [XML] Shugo Indemnity
+			18502 [UNUSED] Every Shugo Has A Price
+			18503 [XML] The Maltese Odium
+			18504 [XML] A Touch of Odium
+			18505 [XML] The Big Sleep
+			18506 [XML] The Third Shugo
+			18507 [XML] The Big Boss
+			18508 [XML] A Handshake Deal
+			18509 [XML] This Shugo for Hire
+			18510 [SCRIPT] Murder, My Shugo
+			18511 [SCRIPT] Out of the Past
+			28500 [SCRIPT] Odella, Odella, Where Art Thou?
+			28501 [XML] The Price of Loyalty
+			28502 [UNUSED] One Who Rules Haramel
+			28503 [XML] Odella for Vuet
+			28504 [XML] Follow the Leaders and Kill 'em
+			28505 [XML] Overseers Under Attack
+			28506 [XML] Guess Who
+			28507 [XML] Hammertime
+			28508 [XML] Securing Moofrenerk's Retreat
+			28509 [XML] What is Inside the Box?
+			28510 [SCRIPT] Destroy the Haramel Facilities
+			28511 [SCRIPT] The Soup? Nutsy!
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to id="18506" start_npc_ids="799523" end_npc_ids="799524"/>
+	<report_to id="28506" start_npc_ids="799523" end_npc_ids="799524"/>
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="18501" start_npc_ids="799522" end_npc_ids="799523"/>
+	<item_collecting id="18503" start_npc_ids="799523" end_npc_ids="790000"/>
+	<item_collecting id="18505" start_npc_ids="203167"/>
+	<item_collecting id="18509" start_npc_ids="799523" end_npc_ids="799524"/>
+	<item_collecting id="28501" start_npc_ids="799522" end_npc_ids="799523"/>
+	<item_collecting id="28503" start_npc_ids="799523" end_npc_ids="203580"/>
+	<item_collecting id="28505" start_npc_ids="203659"/>
+	<item_collecting id="28509" start_npc_ids="799523" end_npc_ids="799524"/>
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="18504" start_npc_ids="203166">
+		<monster var="0" end_var="65" npc_ids="216897 216905 216907 216913 216914 216915 216922 216898 216901 216902"/>
+	</monster_hunt>
+	<monster_hunt id="18507" start_npc_ids="799524" end_npc_ids="203166">
+		<monster var="0" end_var="1" npc_ids="216922"/>
+	</monster_hunt>
+	<monster_hunt id="18508" start_npc_ids="799522" end_npc_ids="799523">
+		<monster var="0" end_var="2" npc_ids="216898"/>
+		<monster var="1" end_var="3" npc_ids="216901"/>
+		<monster var="2" end_var="3" npc_ids="216902"/>
+	</monster_hunt>
+	<monster_hunt id="28504" start_npc_ids="203649">
+		<monster var="0" end_var="65" npc_ids="216897 216905 216907 216913 216914 216915 216922 216898 216901 216902"/>
+	</monster_hunt>
+	<monster_hunt id="28507" start_npc_ids="799524" end_npc_ids="203649">
+		<monster var="0" end_var="1" npc_ids="216922"/>
+	</monster_hunt>
+	<monster_hunt id="28508" start_npc_ids="799522" end_npc_ids="799523">
+		<monster var="0" end_var="2" npc_ids="216898"/>
+		<monster var="1" end_var="3" npc_ids="216901"/>
+		<monster var="2" end_var="3" npc_ids="216902"/>
+	</monster_hunt>
+</quest_scripts>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300400000">
+		<!-- LDF4b_Mission_DrakanSpawnD_Invisible -->
+		<spawn npc_id="282968">
+			<spot x="514.135" y="725.839" z="178.393"/>
+		</spawn>
+		<!-- LDF4b_Mission_EnemySpawn_Invisible -->
+		<spawn npc_id="282955">
+			<spot x="491.621" y="710.183" z="178.393"/>
+		</spawn>
+		<!-- LDF4b_Mission_EnemySpawnD_Invisible -->
+		<spawn npc_id="282966">
+			<spot x="513.862" y="724.003" z="178.393"/>
+		</spawn>
+		<!-- LDF4b_Mission_YunSpawnD_Invisible -->
+		<spawn npc_id="282967">
+			<spot x="491.307" y="718.060" z="178.393"/>
+		</spawn>
+	</spawn_map>
+</spawns>

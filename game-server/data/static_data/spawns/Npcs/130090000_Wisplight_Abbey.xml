@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns>
+	<spawn_map map_id="130090000">
+		<!-- Sanctum Teleport Statue -->
+		<spawn npc_id="804687" respawn_time="295">
+			<spot x="247.0072" y="220.5232" z="129.3826" static_id="81" />
+		</spawn>
+		<!-- Amrinerk -->
+		<spawn npc_id="804695" respawn_time="295">
+			<spot x="235.3148" y="252.5274" z="128.8576" />
+		</spawn>
+		<!-- Dereus -->
+		<spawn npc_id="804693" respawn_time="295">
+			<spot x="258.306" y="252.3251" z="128.8576" h="60" />
+		</spawn>
+		<!-- Atreia Defense Portal -->
+		<spawn npc_id="804677" respawn_time="295">
+			<spot x="236.8319" y="281.6664" z="130.2111" static_id="2" />
+		</spawn>
+		<!-- Balaurea Frontier Portal -->
+		<spawn npc_id="804680" respawn_time="295">
+			<spot x="256.8341" y="281.0294" z="130.2111" static_id="26" />
+		</spawn>
+		<!-- Balaurea Advance Portal -->
+		<spawn npc_id="804678" respawn_time="295">
+			<spot x="238.1826" y="299.7828" z="130.211" static_id="1" />
+		</spawn>
+		<!-- Balaurea Invasion Portal -->
+		<spawn npc_id="804679" respawn_time="295">
+			<spot x="256.4538" y="299.1452" z="130.2111" static_id="18" />
+		</spawn>
+		<!-- <Honorable Ceramium Trader> -->
+		<spawn npc_id="804659" respawn_time="295">
+			<spot x="235.3148" y="256.392" z="128.8576" />
+		</spawn>
+		<!-- Allea -->
+		<spawn npc_id="804660" respawn_time="295">
+			<spot x="251.582" y="266.7474" z="128.8576" h="90" />
+		</spawn>
+		<!-- Arishin -->
+		<spawn npc_id="804653" respawn_time="295">
+			<spot x="240.6558" y="299.6494" z="130.211" h="105" />
+		</spawn>
+		<!-- Baloy -->
+		<spawn npc_id="804655" respawn_time="295">
+			<spot x="254.0073" y="280.7171" z="130.2111" h="45" />
+		</spawn>
+		<!-- Cusefort -->
+		<spawn npc_id="804656" respawn_time="295">
+			<spot x="258.306" y="259.8733" z="128.8575" h="60" />
+		</spawn>
+		<!-- Frorena -->
+		<spawn npc_id="804658" respawn_time="295">
+			<spot x="235.3421" y="260.162" z="128.8576" />
+		</spawn>
+		<!-- Heirin -->
+		<spawn npc_id="804651" respawn_time="295">
+			<spot x="243.3812" y="238.8034" z="129.2283" h="105" />
+		</spawn>
+		<!-- Hypsitos -->
+		<spawn npc_id="804661" respawn_time="295">
+			<spot x="242.5005" y="266.8503" z="128.8576" h="90" />
+		</spawn>
+		<!-- Naptil -->
+		<spawn npc_id="804654" respawn_time="295">
+			<spot x="256.4261" y="296.4617" z="130.2111" h="75" />
+		</spawn>
+		<!-- Nicorun -->
+		<spawn npc_id="804652" respawn_time="295">
+			<spot x="239.3579" y="281.1415" z="130.2111" h="15" />
+		</spawn>
+		<!-- Terraris -->
+		<spawn npc_id="804657" respawn_time="295">
+			<spot x="258.306" y="256.1238" z="128.8575" h="60" />
+		</spawn>
+	</spawn_map>
+</spawns>

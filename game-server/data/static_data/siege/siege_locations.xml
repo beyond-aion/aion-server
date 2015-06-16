@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<siege_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_locations.xsd">
+	<siege_location id="0" type="UNDERPASS" world="210050000" name_id="0"/>
+	<siege_location id="0" type="UNDERPASS" world="220070000" name_id="0"/>
+	<siege_location id="1" type="INDUN" world="210040000" name_id="0"/>
+	<siege_location id="2" type="INDUN" world="220040000" name_id="0"/>
+	<siege_location id="3" type="INDUN" world="210020000" name_id="0"/>
+	<siege_location id="3" type="INDUN" world="220020000" name_id="0"/>
+	<siege_location id="4" type="INDUN" world="210040000" name_id="0"/>
+	<siege_location id="5" type="INDUN" world="220040000" name_id="0"/>
+	<siege_location id="6" type="INDUN" world="210060000" name_id="0"/>
+	<siege_location id="7" type="INDUN" world="220050000" name_id="0"/>
+	<siege_location id="8" type="INDUN" world="400010000" name_id="0"/>
+	<siege_location id="8" type="INDUN" world="400010000" name_id="0"/>
+	<siege_location id="9" type="INDUN" world="210040000" name_id="0"/>
+	<siege_location id="9" type="INDUN" world="220040000" name_id="0"/>
+	<siege_location id="18" type="INDUN" world="120010000" name_id="0"/>
+	<siege_location id="18" type="INDUN" world="110010000" name_id="0"/>
+	<siege_location id="25" type="INDUN" world="210040000" name_id="0"/>
+	<siege_location id="26" type="INDUN" world="210050000" name_id="0"/>
+	<siege_location id="26" type="INDUN" world="220070000" name_id="0"/>
+	<siege_location id="27" type="INDUN" world="210050000" name_id="0"/>
+	<siege_location id="27" type="INDUN" world="220070000" name_id="0"/>
+	<siege_location id="28" type="INDUN" world="600010000" name_id="0"/>
+	<siege_location id="29" type="INDUN" world="210050000" name_id="0"/>
+	<siege_location id="29" type="INDUN" world="220070000" name_id="0"/>
+	<siege_location id="45" type="INDUN" world="210040000" name_id="0"/>
+	<siege_location id="45" type="INDUN" world="220040000" name_id="0"/>
+	<siege_location id="46" type="INDUN" world="220030000" name_id="0"/>
+	<siege_location id="46" type="INDUN" world="210030000" name_id="0"/>
+	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="801821" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12078" cd="7200"/>
+		<siege_reward top="24" itemid="186000147" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="3"/>
+		<siege_reward top="60" itemid="186000030" m_count="3"/>
+		<siege_reward top="80" itemid="186000030" m_count="3"/>
+		<legion_reward itemid="186000147" m_count="1"/>
+		<legion_reward itemid="186000030" m_count="150"/>
+		<legion_reward itemid="186000031" m_count="150"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001527" m_count="1"/>
+	</siege_location>
+	<siege_location id="1012" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="3" skill="12092" cd="1800"/>
+	</siege_location>
+	<siege_location id="1013" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12079" cd="2700"/>
+	</siege_location>
+	<siege_location id="1014" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12079" cd="2700"/>
+	</siege_location>
+	<siege_location id="1015" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+	</siege_location>
+	<siege_location id="1016" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12081" cd="2700"/>
+	</siege_location>
+	<siege_location id="1017" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="3" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1018" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="3" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1019" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="3" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1020" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12087" cd="900"/>
+	</siege_location>
+	<siege_location id="1131" type="FORTRESS" world="400010000" name_id="801823" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12147" cd="3600"/>
+		<siege_reward top="12" itemid="186000096" m_count="3"/>
+		<siege_reward top="20" itemid="186000030" m_count="3"/>
+		<siege_reward top="30" itemid="186000030" m_count="2"/>
+		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="186000096" m_count="3"/>
+		<legion_reward itemid="186000030" m_count="20"/>
+		<legion_reward itemid="186000031" m_count="60"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001519" m_count="1"/>
+	</siege_location>
+	<siege_location id="1132" type="FORTRESS" world="400010000" name_id="801825" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12148" cd="3600"/>
+		<siege_reward top="12" itemid="186000096" m_count="3"/>
+		<siege_reward top="20" itemid="186000030" m_count="3"/>
+		<siege_reward top="30" itemid="186000030" m_count="2"/>
+		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="186000096" m_count="3"/>
+		<legion_reward itemid="186000030" m_count="20"/>
+		<legion_reward itemid="186000031" m_count="60"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001520" m_count="1"/>
+	</siege_location>
+	<siege_location id="1133" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12043" cd="2700"/>
+	</siege_location>
+	<siege_location id="1134" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12043" cd="2700"/>
+	</siege_location>
+	<siege_location id="1135" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12042" cd="900"/>
+	</siege_location>
+	<siege_location id="1141" type="FORTRESS" world="400010000" name_id="801827" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12149" cd="3600"/>
+		<siege_reward top="12" itemid="186000096" m_count="3"/>
+		<siege_reward top="20" itemid="186000030" m_count="3"/>
+		<siege_reward top="30" itemid="186000030" m_count="2"/>
+		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="186000096" m_count="3"/>
+		<legion_reward itemid="186000030" m_count="20"/>
+		<legion_reward itemid="186000031" m_count="60"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001521" m_count="1"/>
+	</siege_location>
+	<siege_location id="1142" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12043" cd="2700"/>
+	</siege_location>
+	<siege_location id="1143" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12042" cd="900"/>
+	</siege_location>
+	<siege_location id="1144" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12045" cd="900"/>
+	</siege_location>
+	<siege_location id="1145" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12057" cd="2700"/>
+	</siege_location>
+	<siege_location id="1146" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="8387" cd="2700"/>
+	</siege_location>
+	<siege_location id="1211" type="FORTRESS" world="400010000" name_id="801829" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12150" cd="5400"/>
+		<siege_reward top="18" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000030" m_count="3"/>
+		<siege_reward top="45" itemid="186000030" m_count="2"/>
+		<siege_reward top="60" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="186000096" m_count="3"/>
+		<legion_reward itemid="186000030" m_count="50"/>
+		<legion_reward itemid="186000031" m_count="70"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001522" m_count="1"/>
+	</siege_location>
+	<siege_location id="1212" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12081" cd="2700"/>
+	</siege_location>
+	<siege_location id="1213" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+	</siege_location>
+	<siege_location id="1214" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12083" cd="2700"/>
+	</siege_location>
+	<siege_location id="1215" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12082" cd="900"/>
+	</siege_location>
+	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="801831" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12152" cd="5400"/>
+		<siege_reward top="12" itemid="186000242" m_count="3"/>
+		<siege_reward top="40" itemid="186000242" m_count="2"/>
+		<siege_reward top="40" itemid="186000242" m_count="1"/>
+		<siege_reward top="100" itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052762" m_count="1"/>
+		<legion_reward itemid="188052114" m_count="1"/>
+		<legion_reward itemid="122001629" m_count="1"/>
+	</siege_location>
+	<siege_location id="1222" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1223" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12089" cd="2700"/>
+	</siege_location>
+	<siege_location id="1224" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="3" skill="12091" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="801833" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12153" cd="5400"/>
+		<siege_reward top="12" itemid="186000242" m_count="3"/>
+		<siege_reward top="40" itemid="186000242" m_count="2"/>
+		<siege_reward top="40" itemid="186000242" m_count="1"/>
+		<siege_reward top="100" itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052763" m_count="1"/>
+		<legion_reward itemid="188052115" m_count="1"/>
+		<legion_reward itemid="122001630" m_count="1"/>
+	</siege_location>
+	<siege_location id="1232" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1233" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+	</siege_location>
+	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="801835" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12154" cd="5400"/>
+		<siege_reward top="12" itemid="186000242" m_count="3"/>
+		<siege_reward top="40" itemid="186000242" m_count="2"/>
+		<siege_reward top="40" itemid="186000242" m_count="1"/>
+		<siege_reward top="100" itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052764" m_count="1"/>
+		<legion_reward itemid="188052116" m_count="1"/>
+		<legion_reward itemid="122001631" m_count="1"/>
+	</siege_location>
+	<siege_location id="1242" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+	</siege_location>
+	<siege_location id="1243" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="1" skill="12089" cd="900"/>
+	</siege_location>
+	<siege_location id="1251" type="FORTRESS" world="400010000" name_id="801837" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020000" count="1" skill="12151" cd="5400"/>
+		<siege_reward top="18" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000030" m_count="3"/>
+		<siege_reward top="45" itemid="186000030" m_count="2"/>
+		<siege_reward top="60" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="186000096" m_count="3"/>
+		<legion_reward itemid="186000030" m_count="50"/>
+		<legion_reward itemid="186000031" m_count="70"/>
+		<legion_reward itemid="188051893" m_count="1"/>
+		<legion_reward itemid="122001522" m_count="1"/>
+	</siege_location>
+	<siege_location id="1252" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12087" cd="900"/>
+	</siege_location>
+	<siege_location id="1253" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="1" skill="12088" cd="900"/>
+	</siege_location>
+	<siege_location id="1254" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020000" count="2" skill="12086" cd="2700"/>
+	</siege_location>
+	<siege_location id="1401" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="2700"/>
+	</siege_location>
+	<siege_location id="1402" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="2700"/>
+	</siege_location>
+	<siege_location id="1403" type="ARTIFACT" world="400010000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="2700"/>
+	</siege_location>
+	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="802577" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020001" count="3" skill="12155" cd="7200"/>
+		<siege_reward top="12" itemid="186000147" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000096" m_count="2"/>
+		<siege_reward top="180" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="186000147" m_count="1"/>
+		<legion_reward itemid="188051892" m_count="1"/>
+		<legion_reward itemid="122001529" m_count="1"/>
+	</siege_location>
+	<siege_location id="2012" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
+	</siege_location>
+	<siege_location id="2013" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" cd="1800"/>
+	</siege_location>
+	<siege_location id="2014" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="1800"/>
+	</siege_location>
+	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="802581" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020001" count="2" skill="12156" cd="7200"/>
+		<siege_reward top="12" itemid="186000147" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000096" m_count="2"/>
+		<siege_reward top="180" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="186000147" m_count="1"/>
+		<legion_reward itemid="188051892" m_count="1"/>
+		<legion_reward itemid="122001528" m_count="1"/>
+	</siege_location>
+	<siege_location id="2022" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
+	</siege_location>
+	<siege_location id="2023" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" cd="1800"/>
+	</siege_location>
+	<siege_location id="2024" type="ARTIFACT" world="210050000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="1800"/>
+	</siege_location>
+	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="802585" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020001" count="2" skill="12157" cd="7200"/>
+		<siege_reward top="12" itemid="186000147" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000096" m_count="2"/>
+		<siege_reward top="180" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="186000147" m_count="1"/>
+		<legion_reward itemid="188051892" m_count="1"/>
+		<legion_reward itemid="122001530" m_count="1"/>
+	</siege_location>
+	<siege_location id="3012" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
+	</siege_location>
+	<siege_location id="3013" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" cd="1800"/>
+	</siege_location>
+	<siege_location id="3014" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="1800"/>
+	</siege_location>
+	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="802589" siege_duration="3600" influence="8">
+		<artifact_activation itemid="188020001" count="3" skill="12158" cd="7200"/>
+		<siege_reward top="12" itemid="186000147" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="3"/>
+		<siege_reward top="30" itemid="186000096" m_count="2"/>
+		<siege_reward top="180" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="186000147" m_count="1"/>
+		<legion_reward itemid="188051892" m_count="1"/>
+		<legion_reward itemid="122001531" m_count="1"/>
+	</siege_location>
+	<siege_location id="3022" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
+	</siege_location>
+	<siege_location id="3023" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12090" cd="1800"/>
+	</siege_location>
+	<siege_location id="3024" type="ARTIFACT" world="220070000">
+		<artifact_activation itemid="188020002" count="2" skill="12159" cd="1800"/>
+	</siege_location>
+	<siege_location id="2111" type="BOSSRAID_LIGHT" world="210050000" fortress_dependency="2011 2021" siege_duration="7200"/>
+	<siege_location id="3111" type="BOSSRAID_DARK" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
+	<!-- 3.0 -->
+	<siege_location id="4011" type="SOURCE" world="600030000" name_id="804123" siege_duration="3600">
+		<siege_reward top="24" itemid="186000147" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="24" itemid="186000096" m_count="1"/>
+	</siege_location>
+	<siege_location id="4012" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12124" cd="300"/>
+	</siege_location>
+	<siege_location id="4013" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12125" cd="300"/>
+	</siege_location>
+	<siege_location id="4021" type="SOURCE" world="600030000" name_id="804127" siege_duration="3600">
+		<siege_reward top="24" itemid="186000147" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="24" itemid="186000096" m_count="1"/>
+	</siege_location>
+	<siege_location id="4022" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12126" cd="300"/>
+	</siege_location>
+	<siege_location id="4023" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12127" cd="300"/>
+	</siege_location>
+	<siege_location id="4031" type="SOURCE" world="600030000" name_id="804131" siege_duration="3600">
+		<siege_reward top="24" itemid="186000147" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="24" itemid="186000096" m_count="1"/>
+	</siege_location>
+	<siege_location id="4032" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12128" cd="300"/>
+	</siege_location>
+	<siege_location id="4033" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12129" cd="300"/>
+	</siege_location>
+	<siege_location id="4041" type="SOURCE" world="600030000" name_id="804135" siege_duration="3600">
+		<siege_reward top="24" itemid="186000147" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="16" itemid="186000096" m_count="1"/>
+		<siege_reward top="24" itemid="186000096" m_count="1"/>
+	</siege_location>
+	<siege_location id="4042" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12130" cd="300"/>
+	</siege_location>
+	<siege_location id="4043" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12131" cd="300"/>
+	</siege_location>
+	<siege_location id="4051" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12132" cd="300"/>
+	</siege_location>
+	<siege_location id="4052" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12133" cd="300"/>
+	</siege_location>
+	<siege_location id="4053" type="ARTIFACT" world="600030000">
+		<artifact_activation itemid="188020001" count="1" skill="12134" cd="300"/>
+	</siege_location>
+	<siege_location id="5011" type="FORTRESS" world="600050000" name_id="807221" siege_duration="3600" influence="0">
+		<siege_reward top="12" itemid="188052363" m_count="1"/>
+		<siege_reward top="30" itemid="188052364" m_count="1"/>
+		<siege_reward top="50" itemid="188052365" m_count="1"/>
+		<siege_reward top="200" itemid="188052366" m_count="1"/>
+		<legion_reward itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052377" m_count="1"/>
+		<legion_reward itemid="190000079" m_count="1"/>
+	</siege_location>
+	<siege_location id="6011" type="FORTRESS" world="600060000" name_id="807225" siege_duration="3600" influence="0">
+		<siege_reward top="12" itemid="188052367" m_count="1"/>
+		<siege_reward top="30" itemid="188052368" m_count="1"/>
+		<siege_reward top="50" itemid="188052369" m_count="1"/>
+		<siege_reward top="200" itemid="188052370" m_count="1"/>
+		<legion_reward itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052379" m_count="1"/>
+		<legion_reward itemid="187000118" m_count="1"/>
+	</siege_location>
+	<siege_location id="6021" type="FORTRESS" world="600060000" name_id="807229" siege_duration="3600" influence="0">
+		<siege_reward top="12" itemid="188052371" m_count="1"/>
+		<siege_reward top="30" itemid="188052372" m_count="1"/>
+		<siege_reward top="50" itemid="188052373" m_count="1"/>
+		<siege_reward top="200" itemid="188052374" m_count="1"/>
+		<legion_reward itemid="186000242" m_count="1"/>
+		<legion_reward itemid="188052381" m_count="1"/>
+		<legion_reward itemid="125003501" m_count="1"/>
+	</siege_location>
+	<!-- Wealhtheow's Keep -->
+	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="808285" occupy_count="2" owner_gp="1000" siege_duration="3600" influence="8">
+	    <siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="182215545" m_count="1"/>
+		<legion_reward itemid="185000215" m_count="1"/>
+		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="186000096" m_count="50"/>
+	</siege_location>
+	<!-- Hero's Fall -->
+	<siege_location id="7012" type="ARTIFACT" world="600090000" influence="1">
+		<artifact_activation itemid="188020002" count="4" skill="12159" repeat_count="5" repeat_interval="3" cd="900"/>
+	</siege_location>
+	<!-- Ashen Glade -->
+	<siege_location id="7013" type="ARTIFACT" world="600090000" influence="1">
+		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="600"/>
+	</siege_location>
+	<!-- Molten Cliffs -->
+	<siege_location id="7014" type="ARTIFACT" world="600090000" influence="1">
+		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="600"/>
+	</siege_location>
+	<!-- Panesterra -->
+	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="808317" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="186000096" m_count="50"/>
+	</siege_location>
+	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="808347" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="186000096" m_count="50"/>
+	</siege_location>
+	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="808349" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="186000096" m_count="50"/>
+	</siege_location>
+	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="808351" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="186000096" m_count="50"/>
+	</siege_location>
+</siege_locations>

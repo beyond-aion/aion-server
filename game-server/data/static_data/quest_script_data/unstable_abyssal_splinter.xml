@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+<!--
+  [BEGIN] SUMMARY
+			30276 [XML] To the Unstable Abyssal Splinter
+			30277 [XML] [Alliance] Along Came the Spider
+			30278 [XML] [Alliance] Unstable Light and Dar
+			30279 [XML] [Alliance] Terminate Yamennes
+			30280 [XML] [Alliance] Fragment Destruction
+			30281 [XML] [Alliance] Fragment Fury
+			30282 [XML] [Alliance] Kill Unstable Watchers
+			30283 [XML] [Alliance] Artisan's Experiment
+			30376 [XML] Abyss of a Problem
+			30377 [XML] [Alliance] Kaluva-phobia
+			30378 [XML] [Alliance] Unstable Night and Day
+			30379 [XML] [Alliance] Protector's Madness
+			30380 [XML] [Alliance] Frag the Fragment
+			30381 [XML] [Alliance] Fragment Removal
+			30382 [XML] [Alliance] Watcher Wrangler
+			30383 [XML] [Alliance] Artisan's Ideas
+		[END] SUMMARY
+-->
+	<!-- REPORTING QUESTS -->
+	<report_to_many id="30276" start_npc_ids="800165" end_npc_ids="260264">
+		<npc_infos var="0" npc_id="278549" quest_dialog="1352"/>
+	</report_to_many>
+	<report_to_many id="30376" start_npc_ids="800170" end_npc_ids="260265">
+		<npc_infos var="0" npc_id="278048" quest_dialog="1352"/>
+	</report_to_many>
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+	<monster_hunt id="30277" start_npc_ids="260264">
+		<monster var="0" end_var="1" npc_ids="219553"/>
+	</monster_hunt>
+	<monster_hunt id="30278" start_npc_ids="260264">
+		<monster var="0" end_var="1" npc_ids="219551"/>
+		<monster var="1" end_var="1" npc_ids="219552"/>
+	</monster_hunt>
+	<monster_hunt id="30279" start_npc_ids="260264" end_npc_ids="278501">
+		<monster var="0" end_var="1" npc_ids="219555 219563"/>
+	</monster_hunt>
+	<monster_hunt id="30280" start_npc_ids="260264">
+		<monster var="0" end_var="2" npc_ids="701588"/>
+	</monster_hunt>
+	<monster_hunt id="30281" start_npc_ids="260264">
+		<monster var="0" end_var="10" npc_ids="701587"/>
+	</monster_hunt>
+	<monster_hunt id="30282" start_npc_ids="260264">
+		<monster var="0" end_var="3" npc_ids="219548"/>
+	</monster_hunt>
+	<monster_hunt id="30283" start_npc_ids="278652">
+		<monster var="0" end_var="3" npc_ids="219545"/>
+		<monster var="0" end_var="3" npc_ids="219545"/>
+	</monster_hunt>
+	<monster_hunt id="30377" start_npc_ids="260265">
+		<monster var="0" end_var="1" npc_ids="219553"/>
+	</monster_hunt>
+	<monster_hunt id="30378" start_npc_ids="260265">
+		<monster var="0" end_var="1" npc_ids="219551"/>
+		<monster var="1" end_var="1" npc_ids="219552"/>
+	</monster_hunt>
+	<monster_hunt id="30379" start_npc_ids="260265" end_npc_ids="278001">
+		<monster var="0" end_var="1" npc_ids="219555 219563"/>
+	</monster_hunt>
+	<monster_hunt id="30380" start_npc_ids="260265">
+		<monster var="0" end_var="2" npc_ids="701588"/>
+	</monster_hunt>
+	<monster_hunt id="30381" start_npc_ids="260265">
+		<monster var="0" end_var="10" npc_ids="701587"/>
+	</monster_hunt>
+	<monster_hunt id="30382" start_npc_ids="260265">
+		<monster var="0" end_var="3" npc_ids="219548"/>
+	</monster_hunt>
+	<monster_hunt id="30383" start_npc_ids="278152">
+		<monster var="0" end_var="3" npc_ids="219545"/>
+		<monster var="0" end_var="10" npc_ids="219561 219562 219550"/>
+	</monster_hunt>
+</quest_scripts>
