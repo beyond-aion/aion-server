@@ -170,7 +170,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 				}
 				changeQuestStep(env, var, var + 1, false);
 				Creature creature = (Creature) player.getTarget();
-				creature.getController().onAttack(player, creature.getLifeStats().getMaxHp() + 1, true);
+				creature.getController().die();
 			}
 		}
 		return false;

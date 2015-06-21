@@ -89,9 +89,10 @@ public class _1364JourneytoAgairon extends QuestHandler {
 	}
 
 	@Override
-	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 1, true, 12); // reward
-	}
+ 	public boolean onNpcReachTargetEvent(QuestEnv env) {
+		changeQuestStep(env, 1, 3, false);
+		return defaultFollowEndEvent(env, 3, 3, true, 47); // reward
+ 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {

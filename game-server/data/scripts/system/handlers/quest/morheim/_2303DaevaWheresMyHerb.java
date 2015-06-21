@@ -24,7 +24,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 	public void register() {
 		int[] mobs = { 211298, 211305, 211304, 211297 };
 		qe.registerQuestNpc(798082).addOnQuestStart(questId);
-		qe.registerQuestNpc(798082).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204378).addOnTalkEvent(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -106,7 +106,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 		}
 		else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 798082) { // Bicorunerk
+			if (targetId == 204378) { // Favyr
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 15) {

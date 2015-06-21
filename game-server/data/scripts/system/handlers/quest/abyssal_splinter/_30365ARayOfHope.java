@@ -105,10 +105,8 @@ public class _30365ARayOfHope extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (QuestService.startQuest(env)) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
-			}
-		}
+			return HandlerResult.fromBoolean(QuestService.startQuest(env));
+    }
 		return HandlerResult.FAILED;
 	}
 }

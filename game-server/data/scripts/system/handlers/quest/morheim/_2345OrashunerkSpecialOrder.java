@@ -26,7 +26,7 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 		qe.registerQuestNpc(798084).addOnQuestStart(questId);
 		qe.registerQuestNpc(798084).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700238).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204339).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204304).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 			}
 		}
 		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204339) {
+			if (targetId == 204304) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					if(qs.getQuestVarById(0) == 10) {
 						removeQuestItem(env, 182204137, 1);

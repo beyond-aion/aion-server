@@ -62,7 +62,8 @@ public class _30261WeirdFragment extends QuestHandler {
 							}
 						}
 						case SETPRO2: {
-							return defaultCloseDialog(env, 1, 2, true, false); // reward
+							changeQuestStep(env, 1, 2, false);
+							return defaultCloseDialog(env, 2, 2, true, false); // reward
 						}
 					}
 					break;
@@ -82,11 +83,8 @@ public class _30261WeirdFragment extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (QuestService.startQuest(env)) {
-				removeQuestItem(env, 182209800, 1);
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
-			}
-		}
+			return HandlerResult.fromBoolean(QuestService.startQuest(env));
+    }
 		return HandlerResult.FAILED;
 	}
 }

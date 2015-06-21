@@ -49,9 +49,9 @@ public class _30264ANecklacewithHistory extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (QuestService.startQuest(env)) {
 				changeQuestStep(env, 0, 0, true); // reward
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+				return HandlerResult.SUCCESS;
 			}
-		}
-		return HandlerResult.UNKNOWN;
+		} 
+		return HandlerResult.FAILED;
 	}
 }

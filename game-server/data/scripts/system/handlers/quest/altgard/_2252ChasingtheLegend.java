@@ -91,24 +91,14 @@ public class _2252ChasingtheLegend extends QuestHandler {
 				switch (dialog) {
 					case USE_OBJECT:
 						if (var == 0) {
-							PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), targetId, 3000, 1));
-							PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.NEUTRALMODE_IN_STANDING, 0, targetId), true);
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									Npc npc = (Npc) player.getTarget();
-									if (npc == null || npc.getObjectId() != targetId)
-										return;
-									QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 210634, npc.getX(), npc.getY(), npc.getZ(),
-										npc.getHeading()); // Minusha's Spirit
-									if (player.getTarget() == null || player.getTarget().getObjectId() != targetId)
-										return;
-									PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), targetId, 3000, 0));
-									PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_LOOT, 0, targetId), true);
-									((Npc) player.getTarget()).getController().onDie(null);
-								}
-							}, 3000);
+							PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, targetId), true);
+							PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), targetId, 3000, 0));
+							PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, targetId), true);
+							Npc npc = (Npc) player.getTarget();
+							if (npc == null || npc.getNpcId() != targetId)
+								return false;
+							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 210634, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // Minusha's Spirit
+              ((Npc)player.getTarget()).getController().die();
 						}
 				}
 			}

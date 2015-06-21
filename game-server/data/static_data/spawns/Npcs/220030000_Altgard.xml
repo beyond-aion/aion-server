@@ -2258,10 +2258,6 @@
 			<spot x="2406.55" y="1272.58" z="256.911" h="103"/>
 			<spot x="2411.9" y="1269.2" z="257.05" h="69"/>
 		</spawn>
-		<!-- Minushan's Spirit -->
-		<spawn npc_id="210634" respawn_time="295">
-			<spot x="2407.55" y="1267.02" z="257.34" h="47"/>
-		</spawn>
 		<!-- Mirokin -->
 		<spawn npc_id="203632" respawn_time="295">
 			<spot x="1779.8" y="695.793" z="264.273" h="116"/>

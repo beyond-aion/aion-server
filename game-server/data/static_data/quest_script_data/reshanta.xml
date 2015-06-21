@@ -397,7 +397,7 @@
 	<report_to id="2776" start_npc_ids="278103" end_npc_ids="278039"/>
 	<report_to id="3731" start_npc_ids="203919" end_npc_ids="800518"/>
 	<report_to id="4701" start_npc_ids="278035" end_npc_ids="278016"/>
-	<report_to id="4731" start_npc_ids="204399" end_npc_ids="800519"/>
+	<report_to id="4731" start_npc_ids="204301" end_npc_ids="800519"/>
 	<report_to_many id="2725" start_npc_ids="278003" end_npc_ids="278086">
 		<npc_infos var="0" npc_id="278091" quest_dialog="1352" close_dialog="10000"/>
 		<npc_infos var="1" npc_id="278086" quest_dialog="2375" close_dialog="1009"/>

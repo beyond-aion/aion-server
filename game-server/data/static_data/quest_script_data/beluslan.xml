@@ -255,7 +255,7 @@
 			26902 [XML] [Spy] An Eye on the Research
 			26903 [XML] [Spy] Bottling Kishar Krall
 			26907 [XML] Malek-nant Growth
-			26908 [SCRIPT] Blast it, Neritra, I'm a Researcher
+			26908 [XML] Blast it, Neritra, I'm a Researcher
 			26909 [SCRIPT] Tribal Emblems
 			28600 [SCRIPT] Suspicious Errand
 			28601 [SCRIPT] Nightmares and Dreamscapes
@@ -745,6 +745,9 @@
 	<monster_hunt id="26907" start_npc_ids="204702">
 		<monster var="0" end_var="1" npc_ids="231567 231568"/>
 	</monster_hunt>
+  <monster_hunt id="26908" start_npc_ids="204702" end_npc_ids="204817" end_dialog_id="2375">
+    <monster var="0" end_var="1" npc_ids="231570 231571"/>
+  </monster_hunt>
 	<monster_hunt id="80224" start_npc_ids="831027">
 		<monster var="0" end_var="3" npc_ids="213776"/>
 		<monster var="1" end_var="3" npc_ids="213778"/>
