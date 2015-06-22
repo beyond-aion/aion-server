@@ -565,7 +565,7 @@ public class QuestEngine implements GameEngine {
 			QuestHandler questHandler = getQuestHandlerByQuestId(questId);
 			if (questHandler != null) {
 				env.setQuestId(questId);
-				questHandler.onQuestTimerEndEvent(env);
+				questHandler.onInvisibleTimerEndEvent(env);
 			}
 		}
 	}

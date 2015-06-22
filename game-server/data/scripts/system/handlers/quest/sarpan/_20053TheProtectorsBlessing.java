@@ -1,6 +1,7 @@
 package quest.sarpan;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnInvisibleTimerEnd(questId);
 		qe.registerOnDie(questId);
+		//TODO: handle seal destruction
 	}
 
 	@Override
@@ -87,22 +89,6 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					}
 					break;
 				}
-				// case 730488: { // Flowing Abyss Gate
-				// switch (dialog) {
-				// case USE_OBJECT: {
-				// if (var == 1) {
-				// return sendQuestDialog(env, 1693);
-				// }
-				// }
-				// case SETPRO3: {
-				// changeQuestStep(env, 1, 2, false); // 2
-				// TeleportService2.teleportTo(player, 300330000, 1, 216.56151f, 244.50179f, 124.94201f, (byte) 0,
-				// TeleportAnimation.BEAM_ANIMATION);
-				// return closeDialogWindow(env);
-				// }
-				// }
-				// break;
-				// }
 				case 730493: { // Protector's Seal
 					switch (dialog) {
 						case USE_OBJECT: {
@@ -110,7 +96,6 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 								changeQuestStep(env, 2, 3, false); // 3
 								QuestService.questTimerStart(env, 180); // 3 minutes
 								QuestService.invisibleTimerStart(env, 170); // 2:50 minutes invisible timer for dragon spawn
-																														// doesent work. maybe should be 2:40?
 								spawn(player);
 								return true;
 							}
@@ -118,7 +103,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					}
 					break;
 				}
-				case 205795: { // Oriata should be spawned after timer ends?
+				case 205795: { // Oriata
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 4) {
@@ -165,7 +150,11 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 			if (player.getWorldId() == 300330000) {
 				if (var == 1) {
 					changeQuestStep(env, 1, 2, false); // 2
-					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.331f, 245.21f, 126.27f, (byte) 0);
+					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.331f, 245.21f, 126.27f, (byte) 60);
+					return true;
+				}
+				else if (var == 5) {
+					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
 					return true;
 				}
 			}
@@ -208,8 +197,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
-				int targetId = env.getTargetId();
-				if (mobs.contains(targetId)) {
+				if (mobs.contains(env.getTargetId())) {
 					spawn(player);
 					return true;
 				}
@@ -226,6 +214,8 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
 				changeQuestStep(env, 3, 4, false); // 4
+				despawnMobsAndSeal();
+        QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
 				return playQuestMovie(env, 708);
 			}
 		}
@@ -290,5 +280,14 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		Npc spawn = (Npc) QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 218890, 250.970f, 221.711f, 124.942f,
 			(byte) 0);
 		spawn.getAggroList().addHate(player, 1);
+	}
+	
+	private void despawnMobsAndSeal() {
+		Collection<Npc> allNpcs = World.getInstance().getNpcs();
+		for (Npc npc : allNpcs) {
+			if (npc.getNpcId() == 730493 || npc.getNpcId() == 218890 || mobs.contains(npc.getNpcId())) {
+				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+			}
+		}
 	}
 }
