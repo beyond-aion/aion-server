@@ -27,7 +27,6 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	private int destroyedFragments;
 	private int killedPazuzuWorms = 0;
-	private boolean bossSpawned = false;
 
 	@Override
 	public void onDie(Npc npc) {
@@ -131,10 +130,6 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private boolean isSpawned(int npcId) {
-		return !instance.getNpcs(npcId).isEmpty();
-	}
-
 	@Override
 	public void onInstanceDestroy() {
 		destroyedFragments = 0;
@@ -145,22 +140,20 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		switch(npc.getNpcId()) {
 			case 700957:
 				sendMsg(1400732);
-				spawn(219555, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-                                npc.getController().onDelete();
+				spawn(219563, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
+        npc.getController().onDelete();
 				break;
 			case 701589:
 				sendMsg(1400731);
-				spawn(219563, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-                                npc.getController().onDelete();
+				spawn(219555, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
+        npc.getController().onDelete();
 				break;				
 		}
 	}
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-			: lastAttacker.getObjectId()), true);
-
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}
@@ -170,18 +163,18 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnPazuzuGenesisTreasureBoxes() {
-		spawn(701576, 651.53204f, 357.085f, 466.8837f, (byte) 66);
-		spawn(701576, 647.00446f, 357.2484f, 466.14117f, (byte) 0);
-		spawn(701576, 653.8384f, 360.39508f, 466.8837f, (byte) 100);
+		spawn(701576, 651.53204f, 357.085f, 466.1315f, (byte) 66);
+		spawn(701576, 647.00446f, 357.2484f, 465.8960f, (byte) 0);
+		spawn(701576, 653.8384f, 360.39508f, 466.4391f, (byte) 100);
 	}
 
 	private void spawnPazuzuAbyssalTreasureBox() {
-		spawn(701575, 649.24286f, 361.33755f, 467.89145f, (byte) 33);
+		spawn(701575, 649.24286f, 361.33755f, 466.0427f, (byte) 33);
 	}
 
 	private void spawnPazuzusTreasureBox() {
 		if (Rnd.get(0, 100) >= 80) { // 20% chance, not retail
-			spawn(700861, 649.243f, 362.338f, 466.0451f, (byte) 0);
+			spawn(700861, 649.243f, 362.338f, 466.0118f, (byte) 0);
 		}
 	}
 
@@ -190,13 +183,13 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnKaluvaGenesisTreasureBoxes() {
-		spawn(701576, 601.2931f, 584.66705f, 424.2829f, (byte) 6);
-		spawn(701576, 597.2156f, 583.95416f, 424.2829f, (byte) 66);
-		spawn(701576, 602.9586f, 589.2678f, 424.2829f, (byte) 100);
+		spawn(701576, 601.2931f, 584.66705f, 422.9955f, (byte) 6);
+		spawn(701576, 597.2156f, 583.95416f, 423.3474f, (byte) 66);
+		spawn(701576, 602.9586f, 589.2678f, 422.8296f, (byte) 100);
 	}
 
 	private void spawnKaluvaAbyssalTreasureBox() {
-		spawn(701577, 598.82776f, 588.25946f, 424.29065f, (byte) 113);
+		spawn(701577, 598.82776f, 588.25946f, 422.7739f, (byte) 113);
 	}
 
 	private void spawnDayshadeAetherFragment() {
@@ -215,13 +208,13 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnYamennesGenesisTreasureBoxes() {
-		spawn(701576, 326.978f, 729.8414f, 198.46796f, (byte) 16);
-		spawn(701576, 326.5296f, 735.13324f, 198.46796f, (byte) 66);
-		spawn(701576, 329.8462f, 738.41095f, 198.46796f, (byte) 3);
+		spawn(701576, 326.978f, 729.8414f, 197.7078f, (byte) 16);
+		spawn(701576, 326.5296f, 735.13324f, 197.6681f, (byte) 66);
+		spawn(701576, 329.8462f, 738.41095f, 197.7329f, (byte) 3);
 	}
 
 	private void spawnYamennesAbyssalTreasureBox(int npcId) {
-		spawn(npcId, 330.891f, 733.2943f, 198.55286f, (byte) 113);
+		spawn(npcId, 330.891f, 733.2943f, 197.6404f, (byte) 113);
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {

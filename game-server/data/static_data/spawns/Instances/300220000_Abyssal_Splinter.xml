@@ -3,7 +3,6 @@
 	<spawn_map map_id="300220000">
 		<!-- Abyssal Splinter Exit -->
 		<spawn npc_id="730317">
-			<spot x="328.476" y="762.585" z="197.479" h="90"/>
 			<spot x="719.756" y="161.833" z="449.343" h="40"/>
 		</spawn>
 		<!-- Ametgolem of Guarding -->
@@ -17,8 +16,12 @@
 		</spawn>
 		<!-- Artifact of Protection -->
 		<spawn npc_id="700856">
-			<spot x="328.492" y="755.354" z="195.503" h="84"/>
+			<spot x="326.1492" y="766.9335" z="203.1832" static_id="60"/>
 		</spawn>
+    <!-- Broken Orkanimum -->
+    <spawn npc_id="700862">
+      <spot x="814.7477" y="645.96875" z="455.1076" h="72"/>
+    </spawn>
 		<!-- Cobweb -->
 		<spawn npc_id="281910">
 			<spot x="609.261" y="531.14" z="422.934" h="31"/>
@@ -97,6 +100,10 @@
 		<spawn npc_id="216951">
 			<spot x="669.5757" y="335.1355" z="467.42245" h="76"/>
 		</spawn>
+    <!-- Polearm of Akarios -->
+    <spawn npc_id="700864">
+      <spot x="398.192" y="682.253" z="439.470" h="76"/>
+    </spawn>
 		<!-- Summoned Orkanimum -->
 		<spawn npc_id="281903">
 			<spot x="644.708" y="267.345" z="462.163" h="90"/>
@@ -109,5 +116,9 @@
 			<spot x="334.001" y="707.736" z="197.779" h="32"/>
 			<spot x="362.192" y="741.592" z="197.301" h="67"/>
 		</spawn>
+    <!-- Worn Book -->
+    <spawn npc_id="700865">
+      <spot x="447.703" y="728.164" z="437.768" h="72"/>
+    </spawn>
 	</spawn_map>
 </spawns>

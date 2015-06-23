@@ -69,9 +69,9 @@
 		<spawn npc_id="219554">
 			<spot x="669.5757" y="335.1355" z="465.8946" h="76" />
 		</spawn>
-		<!-- Unstable Abyssal Splinter Exit -->
-		<spawn npc_id="730828">
-			<spot x="708.9777" y="160.1729" z="453.5694" h="100" static_id="84" />
+		<!-- (Unstable) Abyssal Splinter Exit -->
+		<spawn npc_id="730317">
+			<spot x="719.756" y="161.833" z="449.343" h="40" />
 		</spawn>
 		<!-- Unstable Flash Lapilimo -->
 		<spawn npc_id="219550">
