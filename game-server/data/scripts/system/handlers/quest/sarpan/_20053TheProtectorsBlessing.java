@@ -49,7 +49,6 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnInvisibleTimerEnd(questId);
 		qe.registerOnDie(questId);
-		//TODO: handle seal destruction
 	}
 
 	@Override
@@ -109,7 +108,6 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 								return sendQuestDialog(env, 2375);
 							}
 							else if (var == 5) {
-								playQuestMovie(env, 710);
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -117,6 +115,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 							return checkQuestItems(env, 5, 5, true, 10000, 10001); // reward
 						}
 						case SETPRO5: {
+							playQuestMovie(env, 710);
 							return defaultCloseDialog(env, 4, 5); // 5
 						}
 						case FINISH_DIALOG: {
@@ -212,10 +211,18 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
-				changeQuestStep(env, 3, 4, false); // 4
-				despawnMobsAndSeal();
-        QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
-				return playQuestMovie(env, 708);
+				if (sealHasDied()) {
+					changeQuestStep(env, 3, 2, false); // 2
+					despawnMobsAndSeal();
+					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.331f, 245.21f, 126.27f, (byte) 60);
+					return true;
+				}
+				else {
+					changeQuestStep(env, 3, 4, false); // 4
+					despawnMobsAndSeal();
+					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
+					return playQuestMovie(env, 708);
+				}
 			}
 		}
 		return false;
@@ -281,11 +288,21 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		spawn.getAggroList().addHate(player, 1);
 	}
 	
+	private boolean sealHasDied() {
+		Collection<Npc> allNpcs = World.getInstance().getNpcs();
+		for (Npc npc : allNpcs) {
+			if (npc.getNpcId() == 730493) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	private void despawnMobsAndSeal() {
 		Collection<Npc> allNpcs = World.getInstance().getNpcs();
 		for (Npc npc : allNpcs) {
 			if (npc.getNpcId() == 730493 || npc.getNpcId() == 218890 || mobs.contains(npc.getNpcId())) {
-				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+				npc.getController().onDelete();
 			}
 		}
 	}
