@@ -89,9 +89,6 @@ public class BannedIpController {
 	 * @return was ip banned or not
 	 */
 	public static boolean banIp(String ip, Timestamp expireTime) {
-		if(ip.equals("127.0.0.1"))
-			return false;
-		
 		BannedIP ipBan = new BannedIP();
 		ipBan.setMask(ip);
 		ipBan.setTimeEnd(expireTime);

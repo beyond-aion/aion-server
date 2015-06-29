@@ -111,26 +111,23 @@ public class CM_LOGIN extends AionClientPacket {
 				log.debug("" + user + " got authed state");
 				break;
 			case INVALID_PASSWORD:
+			case INVALID_PASSWORD2:
+			case INVALID_PASSWORD3:
 				if (Config.ENABLE_BRUTEFORCE_PROTECTION) {
 					String ip = client.getIP();
-					if (BruteForceProtector.getInstance().addFailedConnect(ip)) {
+					if ((!ip.equals("127.0.0.1")) && BruteForceProtector.getInstance().addFailedConnect(ip)) {
 						Timestamp newTime = new Timestamp(System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
 						BannedIpController.banIp(ip, newTime);
 						log.debug(user + " on " + ip + " banned for " + Config.WRONG_LOGIN_BAN_TIME + " min. bruteforce");
 						client.close(new SM_LOGIN_FAIL(AionAuthResponse.BAN_IP), false);
-					}
-					else {
-						log.debug(user + " got invalid password attemp state");
-						client.sendPacket(new SM_LOGIN_FAIL(response));
+						break;
 					}
 				}
-				else {
-					log.debug(user + " got invalid password attemp state");
-					client.sendPacket(new SM_LOGIN_FAIL(response));
-				}
+				log.debug(user + " got invalid password attempt state");
+				client.sendPacket(new SM_LOGIN_FAIL(response));
 				break;
 			default:
-				log.debug(user + " got unknown (" + response.toString() + ") attemp state");
+				log.debug(user + " got unknown (" + response.toString() + ") attempt state");
 				client.close(new SM_LOGIN_FAIL(response), false);
 				break;
 		}
