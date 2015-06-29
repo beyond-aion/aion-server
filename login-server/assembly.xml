@@ -6,7 +6,7 @@
 	</formats>
 	<fileSets>
 		<fileSet>
-			<outputDirectory>loginserver</outputDirectory>
+			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>config/**/*</include>
 				<include>data/**/*</include>
@@ -14,7 +14,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>dist/</directory>
-			<outputDirectory>loginserver</outputDirectory>
+			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>*.*</include>
 			</includes>
@@ -23,13 +23,13 @@
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>false</useProjectArtifact>
-			<outputDirectory>loginserver/libs</outputDirectory>
+			<outputDirectory>libs</outputDirectory>
 		</dependencySet>
 	</dependencySets>
 	<files>
 		<file>
 			<source>./target/AL-Login.jar</source>
-			<destName>loginserver/libs/AL-Login.jar</destName>
+			<destName>libs/AL-Login.jar</destName>
 		</file>
 	</files>
 </assembly>
