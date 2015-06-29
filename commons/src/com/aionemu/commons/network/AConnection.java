@@ -152,9 +152,11 @@ public abstract class AConnection {
 				return false;
 			try {
 				if (socketChannel.isOpen()) {
-					socketChannel.close();
+					socketChannel.shutdownInput();
+					socketChannel.shutdownOutput();
 					key.attach(null);
 					key.cancel();
+					socketChannel.close();
 				}
 				closed = true;
 			}
