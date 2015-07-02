@@ -12,6 +12,7 @@ import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.model.Account;
+import com.aionemu.loginserver.model.ExternalAuth;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.LoginConnection;
@@ -24,12 +25,14 @@ import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_AUTH_
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_CHARACTER_RESPONSE;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 import com.aionemu.loginserver.utils.AccountUtils;
+import com.aionemu.loginserver.utils.ExternalAuthUtil;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * This class is resposible for controlling all account actions
  * 
- * @author KID
- * @author SoulKeeper
+ * @author KID, SoulKeeper
+ * @modified Neon
  */
 public class AccountController {
 
@@ -134,7 +137,7 @@ public class AccountController {
 	}
 
 	/**
-	 * Tries to authentificate account.<br>
+	 * Tries to authenticate account.<br>
 	 * If success returns {@link AionAuthResponse#AUTHED} and sets account object to connection.<br>
 	 * If {@link com.aionemu.loginserver.configs.Config#ACCOUNT_AUTO_CREATION} is enabled - creates new account.<br>
 	 * 
@@ -152,35 +155,75 @@ public class AccountController {
 			return AionAuthResponse.BAN_IP;
 		}
 
-		Account account = loadAccount(name);
+		String accountName = name;
+
+		if (Config.AUTH_EXTERNAL) {
+			// authenticate remotely and return received auth state on error
+			ExternalAuth auth = ExternalAuthUtil.requestInfo(name, password);
+
+			// if error during auth server connection
+			if (auth == null) {
+				return AionAuthResponse.ACCOUNT_SERVER_DOWN;
+			}
+
+			// if received no auth state for account
+			if (auth.getAuthState() == null) {
+				return AionAuthResponse.AUTHORIZATION_ERROR4;
+			}
+			
+			AionAuthResponse response = AionAuthResponse.getResponseById(auth.getAuthState());
+			
+			// if received invalid auth state
+			if (response == null) {
+				return AionAuthResponse.AUTHORIZATION_ERROR4;
+			}
+			
+			switch (response) {
+				case AUTHED:
+					// name for this account as sent by external auth server
+					accountName = auth.getIdentifier();
+					break;
+				default:
+					// directly return received auth state
+					return response;
+			}
+		}
+
+		// if no or empty account name
+		if (StringUtils.isNullOrEmpty(accountName)) {
+			return AionAuthResponse.FAILED_ACCOUNT_INFO;
+		}
+		
+		Account account = loadAccount(accountName);
 
 		// Try to create new account
 		if (account == null && Config.ACCOUNT_AUTO_CREATION) {
-			account = createAccount(name, password);
+			account = createAccount(accountName, password);
 		}
 
-		// If account not found and not created
+		// if account not found and not created
 		if (account == null) {
-			return AionAuthResponse.INVALID_PASSWORD;
+			return AionAuthResponse.NO_SUCH_ACCOUNT;
 		}
 
-		if (account.getAccessLevel() < Config.MAINTENANCE_MOD_GMLEVEL && Config.MAINTENANCE_MOD) {
+		// if server is under maintenance and account has not the required access level
+		if (Config.MAINTENANCE_MOD && account.getAccessLevel() < Config.MAINTENANCE_MOD_GMLEVEL) {
 			return AionAuthResponse.GM_ONLY;
 		}
 
-		// check for paswords beeing equals
-		if (!account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
+		// if not external authentication, verify password hash from database
+		if (!Config.AUTH_EXTERNAL && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
 			return AionAuthResponse.INVALID_PASSWORD;
 		}
 
-		// check for paswords beeing equals
+		// if account is not activated
 		if (account.getActivated() != 1) {
 			return AionAuthResponse.INVALID_PASSWORD;
 		}
 
-		// If account expired
+		// if account expired
 		if (AccountTimeController.isAccountExpired(account)) {
-			return AionAuthResponse.TIME_EXPIRED;
+			return AionAuthResponse.TIME_EXPIRED2;
 		}
 
 		// if account is banned
@@ -217,7 +260,7 @@ public class AccountController {
 
 		// if everything was OK
 		getAccountDAO().updateLastIp(account.getId(), connection.getIP());
-	    // last mac is updated after receiving packet from gameserver
+		// last mac is updated after receiving packet from gameserver
 		getAccountDAO().updateMembership(account.getId());
 
 		return AionAuthResponse.AUTHED;
@@ -243,7 +286,7 @@ public class AccountController {
 			}
 		}
 	}
-	
+
 	/**
 	 * Refresh last_mac of account
 	 * 
@@ -256,7 +299,7 @@ public class AccountController {
 	public static boolean refreshAccountsLastMac(int accountId, String address) {
 		return getAccountDAO().updateLastMac(accountId, address);
 	}
-	
+
 	/**
 	 * Refresh last_hdd_serial of account
 	 * 
@@ -269,7 +312,7 @@ public class AccountController {
 	public static boolean refreshAccountsLastHDDSerial(int accountId, String hddSerial) {
 		return getAccountDAO().updateLastHDDSerial(accountId, hddSerial);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -291,7 +334,7 @@ public class AccountController {
 		}
 		return account;
 	}
-	
+
 	public static Account loadAccount(int id) {
 		Account account = getAccountDAO().getAccount(id);
 		if (account != null) {
@@ -310,7 +353,7 @@ public class AccountController {
 	 * @return account object or null
 	 */
 	public static Account createAccount(String name, String password) {
-		String passwordHash = AccountUtils.encodePassword(password);
+		String passwordHash = (!Config.AUTH_EXTERNAL) ? AccountUtils.encodePassword(password) : "";
 		Account account = new Account();
 
 		account.setName(name);

@@ -154,19 +154,19 @@ public class Account {
 	}
 
 	/**
-	 * Returns account activated
+	 * Returns activation status of account
 	 * 
-	 * @return access level of account
+	 * @return activation status of account
 	 */
 	public byte getActivated() {
 		return activated;
 	}
 
 	/**
-	 * Sets access level of account
+	 * Sets account activation status
 	 * 
 	 * @param activated
-	 *          access level of account
+	 *          whether the account is activated and can log in
 	 */
 	public void setActivated(byte activated) {
 		this.activated = activated;
@@ -232,7 +232,7 @@ public class Account {
 	/**
 	 * Returns IP that player is forced to use with his account
 	 * 
-	 * @return ip that player is forsed to use with his account
+	 * @return ip that player is forced to use with his account
 	 */
 	public String getIpForce() {
 		return ipForce;
@@ -263,7 +263,7 @@ public class Account {
 	}
 
 	/**
-	 * Retunrns true if players name and password has are equals
+	 * Returns true if players name and password has are equals
 	 * 
 	 * @param o
 	 *          another player to check

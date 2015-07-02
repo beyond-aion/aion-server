@@ -4,7 +4,8 @@
 DROP TABLE IF EXISTS `account_data`;
 CREATE TABLE `account_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `ext_auth_name` varchar(45) DEFAULT NULL,
   `password` varchar(65) NOT NULL,
   `activated` boolean NOT NULL DEFAULT TRUE, 
   `access_level` tinyint(3) NOT NULL DEFAULT '0',
@@ -18,7 +19,8 @@ CREATE TABLE `account_data` (
   `expire` date DEFAULT NULL,
   `toll` bigint(13) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `ext_auth_name` (`ext_auth_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

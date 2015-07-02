@@ -12,8 +12,7 @@ import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.utils.PropertiesUtils;
 
 /**
- * @author -Nemesiss-
- * @author SoulKeeper
+ * @author -Nemesiss-, SoulKeeper
  */
 public class Config {
 
@@ -23,10 +22,7 @@ public class Config {
 	protected static final Logger log = LoggerFactory.getLogger(Config.class);
 
 	@Property(key = "accounts.charset", defaultValue = "ISO8859_2")
-	public static String			ACCOUNT_CHARSET;
-
-	@Property(key = "network.fastreconnection.time", defaultValue = "10")
-	public static int				FAST_RECONNECTION_TIME;
+	public static String ACCOUNT_CHARSET;
 
 	/**
 	 * Login Server port
@@ -35,25 +31,25 @@ public class Config {
 	public static int LOGIN_PORT;
 
 	/**
-	 * Login Server bind ip
+	 * Login Server bind IP
 	 */
 	@Property(key = "loginserver.network.client.host", defaultValue = "localhost")
 	public static String LOGIN_BIND_ADDRESS;
 
 	/**
-	 * Login Server port
+	 * Game Server port
 	 */
 	@Property(key = "loginserver.network.gameserver.port", defaultValue = "9014")
 	public static int GAME_PORT;
 
 	/**
-	 * Login Server bind ip
+	 * Game Server host
 	 */
 	@Property(key = "loginserver.network.gameserver.host", defaultValue = "*")
 	public static String GAME_BIND_ADDRESS;
 
 	/**
-	 * Number of trys of login before ban
+	 * Number of login tries before ban
 	 */
 	@Property(key = "loginserver.network.client.logintrybeforeban", defaultValue = "5")
 	public static int LOGIN_TRY_BEFORE_BAN;
@@ -65,54 +61,82 @@ public class Config {
 	public static int WRONG_LOGIN_BAN_TIME;
 
 	/**
-	 * Number of Threads that will handle io read (>= 0)
+	 * Number of Threads that will handle IO read (>= 0)
 	 */
 	@Property(key = "loginserver.network.nio.threads.read", defaultValue = "0")
 	public static int NIO_READ_THREADS;
 
 	/**
-	 * Number of Threads that will handle io write (>= 0)
+	 * Number of Threads that will handle IO write (>= 0)
 	 */
 	@Property(key = "loginserver.network.nio.threads.write", defaultValue = "0")
 	public static int NIO_WRITE_THREADS;
 
 	/**
-	 * Should server automaticly create accounts for users or not?
+	 * Should server automatically create accounts for users or not?
 	 */
 	@Property(key = "loginserver.accounts.autocreate", defaultValue = "true")
 	public static boolean ACCOUNT_AUTO_CREATION;
+	
+	/**
+	 * Enable\disable external authentication for accounts
+	 */
+	@Property(key = "loginserver.accounts.externalauth", defaultValue = "false")
+	public static boolean AUTH_EXTERNAL;
+	
+	/**
+	 * URL for external authentication, that is used to receive an JSON encoded string, holding the auth status
+	 */
+	@Property(key = "loginserver.accounts.externalauth.url", defaultValue = "")
+	public static String AUTH_EXTERNAL_JSON_URL;
 
 	/**
-	 * Set the server on maintenance mod
+	 * Set the server on maintenance mode
 	 */
 	@Property(key = "loginserver.server.maintenance", defaultValue = "false")
 	public static boolean MAINTENANCE_MOD;
 	/**
-	 * Set GM level for maintenance mod
+	 * Set GM level for maintenance mode
 	 */
 	@Property(key = "loginserver.server.maintenance.gmlevel", defaultValue = "3")
 	public static int MAINTENANCE_MOD_GMLEVEL;
 	
 	/**
-	 * Enable\disable flood protector from 1 ip on account login
+	 * Enable\disable flood protector from 1 IP on account login
 	 */
 	@Property(key = "loginserver.server.floodprotector", defaultValue = "true")
 	public static boolean ENABLE_FLOOD_PROTECTION;
 	
 	/**
-	 * Enable\disable flood protector from 1 ip on account login
+	 * Legal reconnection time. if faster - ban for loginserver.network.client.bantimeforbruteforcing min
+	 */
+	@Property(key = "loginserver.server.floodprotector.fastreconnection.time", defaultValue = "10")
+	public static int FAST_RECONNECTION_TIME;
+	
+	/**
+	 * IP's excluded from flood protection
+	 */
+	@Property(key = "loginserver.server.floodprotector.excluded.ips", defaultValue = "")
+	public static String EXCLUDED_IP;
+	
+	/**
+	 * Enable\disable brute-force protector from 1 IP on account login
 	 */
 	@Property(key = "loginserver.server.bruteforceprotector", defaultValue = "true")
 	public static boolean ENABLE_BRUTEFORCE_PROTECTION;
 	
+	/**
+	 * Enable\disable checking GS if it is still alive
+	 */
 	@Property(key = "loginserver.server.pingpong", defaultValue = "true")
 	public static boolean ENABLE_PINGPONG;
 	
+	/**
+	 * Time between checks (in milliseconds)
+	 */
 	@Property(key = "loginserver.server.pingpong.delay", defaultValue = "3000")
 	public static int PINGPONG_DELAY;
-	
-	@Property(key = "loginserver.excluded.ips", defaultValue = "")
-	public static String EXCLUDED_IP;
+
 
 	/**
 	 * Load configs from files.

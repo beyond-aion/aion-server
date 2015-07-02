@@ -30,8 +30,8 @@ public class MySQL5AccountDAO extends AccountDAO {
 	@Override
 	public Account getAccount(String name) {
 		Account account = null;
-		PreparedStatement st = DB.prepareStatement("SELECT * FROM account_data WHERE `name` = ?");
-
+		PreparedStatement st = DB.prepareStatement("SELECT * FROM account_data WHERE `" + MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME + "` = ?");
+		
 		try {
 			st.setString(1, name);
 
@@ -52,7 +52,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setIpForce(rs.getString("ip_force"));
 			}
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			log.error("Can't select account with name: " + name, e);
 		}
 		finally {
@@ -87,7 +87,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setIpForce(rs.getString("ip_force"));
 			}
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			log.error("Can't select account with name: " + id, e);
 		}
 		finally {
@@ -103,7 +103,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 	@Override
 	public int getAccountId(String name) {
 		int id = -1;
-		PreparedStatement st = DB.prepareStatement("SELECT `id` FROM account_data WHERE `name` = ?");
+		PreparedStatement st = DB.prepareStatement("SELECT `id` FROM account_data WHERE `" + MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME + "` = ?");
 
 		try {
 			st.setString(1, name);
@@ -154,7 +154,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 	public boolean insertAccount(Account account) {
 		int result = 0;
 		PreparedStatement st = DB
-			.prepareStatement("INSERT INTO account_data(`name`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force, toll) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			.prepareStatement("INSERT INTO account_data(`" + MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME + "`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force, toll) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		try {
 			st.setString(1, account.getName());
@@ -170,7 +170,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 			result = st.executeUpdate();
 		}
 		catch (SQLException e) {
-			log.error("Can't inser account", e);
+			log.error("Can't insert account", e);
 		}
 		finally {
 			DB.close(st);
@@ -190,7 +190,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 	public boolean updateAccount(Account account) {
 		int result = 0;
 		PreparedStatement st = DB
-			.prepareStatement("UPDATE account_data SET `name` = ?, `password` = ?, access_level = ?, membership = ?, last_server = ?, last_ip = ?, last_mac = ?, ip_force = ? WHERE `id` = ?");
+			.prepareStatement("UPDATE account_data SET `" + MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME + "` = ?, `password` = ?, access_level = ?, membership = ?, last_server = ?, last_ip = ?, last_mac = ?, ip_force = ? WHERE `id` = ?");
 
 		try {
 			st.setString(1, account.getName());

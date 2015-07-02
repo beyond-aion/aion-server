@@ -1,5 +1,7 @@
 package mysql5;
 
+import com.aionemu.loginserver.configs.Config;
+
 /**
  * DAO utils for MySQL5
  * 
@@ -11,6 +13,11 @@ public class MySQL5DAOUtils {
 	 * Constant for MySQL name ;)
 	 */
 	public static final String MYSQL_DB_NAME = "MySQL";
+	
+	/**
+	 * Constant for account name
+	 */
+	public static final String MYSQL_TABLE_ACCOUNT_NAME = (!Config.AUTH_EXTERNAL) ? "name" : "ext_auth_name";
 
 	/**
 	 * Returns true only if DB supports MySQL5
