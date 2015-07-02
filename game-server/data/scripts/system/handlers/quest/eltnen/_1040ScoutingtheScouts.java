@@ -92,11 +92,11 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 					case SELECT_ACTION_1013:
 						if (var == 0)
-							playQuestMovie(env, 183);
+							return playQuestMovie(env, 183);
 					case SETPRO1:
-						defaultCloseDialog(env, 0, 1); // 1
+						return defaultCloseDialog(env, 0, 1); // 1
 					case SETPRO2:
-						defaultCloseDialog(env, 4, 5); // 5
+						return defaultCloseDialog(env, 4, 5); // 5
 				}
 			}
 			else if (targetId == 203901) // Telemachus
@@ -143,7 +143,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 						else if (var == 9)
 							return sendQuestDialog(env, 2716);
 					case SETPRO5:
-						defaultCloseDialog(env, 7, 8); // 8
+						return defaultCloseDialog(env, 7, 8); // 8
 					case SETPRO6:
 						if (var == 9) {
 							TeleportService2.teleportTo(player, 210020000, 1606, 1529, 318);
