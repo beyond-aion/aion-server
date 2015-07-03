@@ -5233,6 +5233,10 @@
 		<spawn npc_id="204578" respawn_time="295">
 			<spot x="699.523" y="627.115" z="130" h="63"/>
 		</spawn>
+    <!-- Kurochinerk -->
+    <spawn npc_id="804601" respawn_time="295">
+			<spot x="2433.3" y="396.8" z="412.44" h="110"/>
+		</spawn>
 		<!-- Lab Chief Eirin -->
 		<spawn npc_id="214101" respawn_time="3600">
 			<spot x="384.334" y="742.421" z="127.462"/>
