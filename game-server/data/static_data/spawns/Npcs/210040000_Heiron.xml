@@ -332,7 +332,7 @@
 		</spawn>
 		<!-- High Shaman Traska -->
 		<spawn npc_id="219070" respawn_time="300">
-			<spot x="2452.3230" y="1626.9126" z="132.0000" h="93"/>
+			<spot x="2454.71" y="1627.63" z="132.0" h="93"/>
 		</spawn>
 		<!-- Kishar Scout -->
 		<spawn npc_id="219072" respawn_time="300">
@@ -2975,7 +2975,7 @@
 		</spawn>
 		<!-- High Shaman Kanshasha -->
 		<spawn npc_id="212234" respawn_time="300">
-			<spot x="2452.27" y="1626.71" z="132" h="11"/>
+			<spot x="2451.41" y="1626.74" z="132.0" h="93"/>
 		</spawn>
 		<!-- Hypnus -->
 		<spawn npc_id="799809" respawn_time="295">
