@@ -700,7 +700,7 @@
 	<monster_hunt id="18606" start_npc_ids="205231">
 		<monster var="0" end_var="1" npc_ids="216968"/>
 	</monster_hunt>
-	<monster_hunt id="18617" start_npc_ids="204639">
+	<monster_hunt id="18617" start_npc_ids="205230">
 		<monster var="0" end_var="1" npc_ids="217119 217006"/>
 	</monster_hunt>
 	<monster_hunt id="16902" start_npc_ids="258230" end_npc_ids="204612" end_dialog_id="2375">
