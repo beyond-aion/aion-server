@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _18600ScoringSomeBadStigma extends QuestHandler {
 
 	private final static int _questId = 18600;
-	private final static int[] _npcs = { 204500, 798321, 205228 };
+	private final static int[] _npcs = { 204500, 804601, 205228 };
 
 	public _18600ScoringSomeBadStigma() {
 		super(_questId);
@@ -61,7 +61,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 		}
-		if (targetId == 798321) // Koruchinerk
+		if (targetId == 804601) // Koruchinerk
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
