@@ -136,24 +136,16 @@ public class _1062IndratuLegion extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (targetId == 700220 && qs.getQuestVarById(0) > 2 && qs.getQuestVarById(0) < 12) {
-			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-			updateQuestStatus(env);
-			return true;
-		}
-		if (targetId == 700220 && qs.getQuestVarById(0) == 12) {
-			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-			updateQuestStatus(env);
-			final Npc npc = (Npc) env.getVisibleObject();
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212588, npc.getX(), npc.getY(),
-						npc.getZ(), npc.getHeading());
-				}
-			}, 3000);
-			return true;
+		if (targetId == 700220) {
+			if (qs.getQuestVarById(0) > 2 && qs.getQuestVarById(0) < 7) {
+				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+				updateQuestStatus(env);
+				return true;
+			}
+			else if (qs.getQuestVarById(0) == 7) {
+				changeQuestStep(env, 7, 13, false);
+				return true;
+			}
 		}
 		if (targetId == 212588 && qs.getQuestVarById(0) == 13) {
 			qs.setStatus(QuestStatus.REWARD);
