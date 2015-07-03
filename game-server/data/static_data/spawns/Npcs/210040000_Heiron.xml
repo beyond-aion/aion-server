@@ -133,6 +133,10 @@
 		<spawn npc_id="204513" respawn_time="295">
 			<spot x="2544" y="337" z="412" h="45"/>
 		</spawn>
+    <!-- Anaxa -->
+    <spawn npc_id="832824" respawn_time="295">
+			<spot x="2536.3" y="2679.4" z="156.78" h="46"/>
+		</spawn>
 		<!-- Ancient Dark Spirit -->
 		<spawn npc_id="211249" respawn_time="295">
 			<spot x="425.18" y="2874.64" z="105.784" h="75" random_walk="8"/>
