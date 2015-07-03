@@ -38,7 +38,7 @@
 		<monster var="0" end_var="4" npc_ids="213563"/>
 		<monster var="1" end_var="6" npc_ids="213564"/>
 	</monster_hunt>
-	<monster_hunt id="3532" start_npc_ids="204550">
+	<monster_hunt id="3532" start_npc_ids="832824">
 		<monster var="0" end_var="1" npc_ids="213780"/>
 	</monster_hunt>
 </quest_scripts>
