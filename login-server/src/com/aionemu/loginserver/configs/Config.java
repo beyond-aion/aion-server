@@ -21,9 +21,6 @@ public class Config {
 	 */
 	protected static final Logger log = LoggerFactory.getLogger(Config.class);
 
-	@Property(key = "accounts.charset", defaultValue = "ISO8859_2")
-	public static String ACCOUNT_CHARSET;
-
 	/**
 	 * Login Server port
 	 */
@@ -61,16 +58,14 @@ public class Config {
 	public static int WRONG_LOGIN_BAN_TIME;
 
 	/**
-	 * Number of Threads that will handle IO read (>= 0)
+	 * Number of threads dedicated to be doing io read & write.
+	 * There is always 1 acceptor thread.
+	 * If value is < 1 - acceptor thread will also handle read & write.
+	 * If value is > 0 - there will be given amount of read & write threads
+	 * + 1 acceptor thread.
 	 */
-	@Property(key = "loginserver.network.nio.threads.read", defaultValue = "0")
-	public static int NIO_READ_THREADS;
-
-	/**
-	 * Number of Threads that will handle IO write (>= 0)
-	 */
-	@Property(key = "loginserver.network.nio.threads.write", defaultValue = "0")
-	public static int NIO_WRITE_THREADS;
+	@Property(key = "loginserver.network.nio.threads", defaultValue = "0")
+	public static int NIO_READ_WRITE_THREADS;
 
 	/**
 	 * Should server automatically create accounts for users or not?

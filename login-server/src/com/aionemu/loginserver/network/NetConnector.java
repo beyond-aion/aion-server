@@ -24,7 +24,7 @@ public class NetConnector {
 		ServerCfg gs = new ServerCfg(Config.GAME_BIND_ADDRESS, Config.GAME_PORT, "Gs Connections",
 			new GsConnectionFactoryImpl());
 
-		instance = new NioServer(Config.NIO_READ_THREADS, gs, aion);
+		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, gs, aion);
 	}
 
 	/**
