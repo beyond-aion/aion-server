@@ -133,8 +133,8 @@
 		<spawn npc_id="204513" respawn_time="295">
 			<spot x="2544" y="337" z="412" h="45"/>
 		</spawn>
-    <!-- Anaxa -->
-    <spawn npc_id="832824" respawn_time="295">
+		<!-- Anaxa -->
+		<spawn npc_id="832824" respawn_time="295">
 			<spot x="2536.3" y="2679.4" z="156.78" h="46"/>
 		</spawn>
 		<!-- Ancient Dark Spirit -->
@@ -5237,8 +5237,8 @@
 		<spawn npc_id="204578" respawn_time="295">
 			<spot x="699.523" y="627.115" z="130" h="63"/>
 		</spawn>
-    <!-- Kurochinerk -->
-    <spawn npc_id="804601" respawn_time="295">
+		<!-- Kurochinerk -->
+		<spawn npc_id="804601" respawn_time="295">
 			<spot x="2433.3" y="396.8" z="412.44" h="110"/>
 		</spawn>
 		<!-- Lab Chief Eirin -->
