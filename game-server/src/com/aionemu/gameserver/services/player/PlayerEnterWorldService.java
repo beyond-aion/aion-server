@@ -133,36 +133,10 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public final class PlayerEnterWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
-	private static final String serverName = "Welcome to " + GSConfig.SERVER_NAME + "!";
-	private static final String serverIntro = "Please remember:";
-	private static final String serverInfo;
-	private static final String alInfo;
+	private static final Version gsVer = new Version(GameServer.class);
+	private static final String welcomeInfo = GSConfig.SERVER_MOTD;
+	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + gsVer.getDate();
 	private static final Set<Integer> pendingEnterWorld = new HashSet<Integer>();
-
-	static {
-		String infoBuffer;
-		String alBuffer;
-
-		infoBuffer = "Announcement : " + GSConfig.SERVER_NAME + " Staff will never ask for your password.\n";
-		infoBuffer += "Announcement : Advertising for another server is prohibited.";
-
-		alBuffer = "=============================\n";
-		alBuffer += "Developed by Aion-Lightning\nhttp://www.aion-lightning.org\n";
-		alBuffer += "Copyright 2014\n";
-
-		if (GSConfig.SERVER_MOTD_DISPLAYREV) {
-			alBuffer += "-----------------------------\n";
-			alBuffer += "Server Revision: " + String.format("%-6s", new Version(GameServer.class).getRevision()) + "\n";
-		}
-		alBuffer += "=============================\n";
-		alBuffer += "Please enjoy your stay on our server.";
-
-		serverInfo = infoBuffer;
-		alInfo = alBuffer;
-
-		infoBuffer = null;
-		alBuffer = null;
-	}
 
 	/**
 	 * @param objectId
@@ -456,10 +430,11 @@ public final class PlayerEnterWorldService {
 			ChatBanService.onLogin(player);
 
 			// Intro message
-			PacketSendUtility.sendWhiteMessage(player, serverName);
-			PacketSendUtility.sendYellowMessage(player, serverIntro);
-			PacketSendUtility.sendBrightYellowMessage(player, serverInfo);
-			PacketSendUtility.sendWhiteMessage(player, alInfo);
+			if (welcomeInfo != null && !welcomeInfo.isEmpty()) 
+				PacketSendUtility.sendWhiteMessage(player, welcomeInfo);
+			
+			if (GSConfig.SERVER_MOTD_DISPLAY_REV && versionInfo != null && !versionInfo.isEmpty()) 
+				PacketSendUtility.sendWhiteMessage(player, versionInfo);
 
 			player.setRates(Rates.getRatesFor(client.getAccount().getMembership()));
 			if (CustomConfig.PREMIUM_NOTIFY) {
