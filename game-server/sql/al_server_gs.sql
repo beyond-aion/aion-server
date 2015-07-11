@@ -47,6 +47,9 @@ CREATE TABLE IF NOT EXISTS `players` (
   `note` text,
   `mentor_flag_time` INT(11) NOT NULL DEFAULT '0',
   `last_transfer_time` decimal(20) NOT NULL default '0',
+  `stamps` int(11) NOT NULL DEFAULT '0',
+  `last_stamp` timestamp NULL DEFAULT NULL,
+  `rewarded_pass` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`),
   INDEX (`account_id`)
@@ -633,7 +636,7 @@ CREATE TABLE IF NOT EXISTS `ingameshop` (
 -- ----------------------------
 -- Table structure for `ingameshop_log`
 -- ----------------------------
-CREATE TABLE `ingameshop_log` (
+CREATE TABLE IF NOT EXISTS `ingameshop_log` (
 	`transaction_id` INT(11) NOT NULL AUTO_INCREMENT,
 	`transaction_type` ENUM('BUY','GIFT') NOT NULL,
 	`transaction_date` TIMESTAMP NULL DEFAULT NULL,
@@ -647,6 +650,20 @@ CREATE TABLE `ingameshop_log` (
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+-- ----------------------------
+-- Table structure for `ingameshop_requests`
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `ingameshop_requests` (
+	`request_id` int(11) NOT NULL AUTO_INCREMENT,
+	`item_id` int(11) NOT NULL,
+	`item_count` bigint(21) NOT NULL,
+	`buyer_character_name` varchar(20) NOT NULL,
+	`receiver_character_name` varchar(20) NOT NULL,
+	`delivered` tinyint(1) NOT NULL DEFAULT '0',
+	`delivered_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`request_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `old_names`
