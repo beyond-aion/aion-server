@@ -2,11 +2,10 @@
 	<id>dist</id>
 	<formats>
 		<format>zip</format>
-		<format>dir</format>
 	</formats>
 	<fileSets>
 		<fileSet>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>config/**/*</include>
 				<include>data/**/*</include>
@@ -14,7 +13,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>dist/</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>*.*</include>
 			</includes>

@@ -5,7 +5,7 @@
 	</formats>
 	<fileSets>
 		<fileSet>
-			<outputDirectory>gameserver</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>config/**/*</include>
 				<include>data/**/*</include>
@@ -13,7 +13,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>dist/</directory>
-			<outputDirectory>gameserver</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>*.*</include>
 			</includes>
@@ -25,13 +25,13 @@
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>false</useProjectArtifact>
-			<outputDirectory>gameserver/libs</outputDirectory>
+			<outputDirectory>libs</outputDirectory>
 		</dependencySet>
 	</dependencySets>
 	<files>
 		<file>
 			<source>./target/AL-Game.jar</source>
-			<destName>gameserver/libs/AL-Game.jar</destName>
+			<destName>libs/AL-Game.jar</destName>
 		</file>
 	</files>
 </assembly>

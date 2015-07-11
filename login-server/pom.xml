@@ -7,11 +7,12 @@
 	<name>Aion Lightning Login Server</name>
 	<packaging>jar</packaging>
 	<scm>
-		<developerConnection>scm:svn:https://subversion.assembla.com/svn/AionLightning/trunk/AL-Login</developerConnection>
+		<developerConnection>scm:git:https://none</developerConnection>
 		<url>http://aion-lightning.org/</url>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -31,11 +32,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.3</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<compilerVersion>1.8</compilerVersion>
 					<showWarnings>true</showWarnings>
 					<debug>true</debug>
 					<encoding>UTF-8</encoding>
@@ -46,7 +46,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>2.5.5</version>
 				<configuration>
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
@@ -64,12 +64,14 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.0</version>
+				<version>1.3</version>
 				<configuration>
 					<providerImplementations>
 						<svn>javasvn</svn>
 					</providerImplementations>
 					<revisionOnScmFailure>undefined</revisionOnScmFailure>
+					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+					<shortRevisionLength>7</shortRevisionLength>
 				</configuration>
 				<executions>
 					<execution>
@@ -82,13 +84,15 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>2.6</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
 							<Agent-Class>com.zaxxer.hikari.javassist.HikariInstrumentationAgent</Agent-Class>
 							<POMVersion>${project.version}</POMVersion>
 							<Revision>${buildNumber}</Revision>
+							<Branch>${scmBranch}</Branch>
+							<CommitTime>undefined</CommitTime>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>
@@ -97,7 +101,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.10</version>
+				<version>2.18.1</version>
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
