@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- TODO:
+		Recipes,
+		Special Crafting Materials
+	-->
+	<!-- Candy Essences -->
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="SPAKLE" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="152016001" name="Sparkie Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="LUPYLLINI" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="152016002" name="Pluma Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="FLYINGEYE" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152016003" name="Oculazen Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="FUNGY" />
+			<gd_npc_group group="FUNGUS" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152016004" name="Oculazen Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="DRAKY" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152016005" name="Wasteland Drakie Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="GRIFFO" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016006" name="Griffo Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="AGRINT" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016007" name="Agrint Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="MAHISHA_DRAKY" />
+		</gd_npc_groups>
+		<gd_npc_names>
+			<gd_npc_name value="Malek" function="START_WITH" />
+		</gd_npc_names>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016008" name="Malek Drake Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="AGRINT_ICE" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016009" name="Frozen Agrint Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="BROWNIEF" />
+		</gd_npc_groups>
+		<gd_npc_names>
+			<gd_npc_name value="Kobold" function="CONTAINS" />
+		</gd_npc_names>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016010" name="Kobold Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="KRALLSCOUT" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152016011" name="Krall Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="SKELETON" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152016012" name="Anubite Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="GRAVEKNIGHT" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152016013" name="Unfest Essence" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-5" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="FUNGY_MOOKIE" />
+		</gd_npc_groups>
+		<gd_npc_names>
+			<gd_npc_name value="Poco Mookie" function="CONTAINS" />
+		</gd_npc_names>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152016014" name="Essence of Poco Mookie" /><!-- Elyos -->
+			<gd_item id="152016015" name="Essence of Poco Mookie" /><!-- Asmodian -->
+		</gd_items>
+	</gd_rule>
+	<!-- Ide Materials -->
+	<gd_rule rule_name="Ide Materials" base_chance="4" max_diff="5" fixed_chance="true">
+		<gd_worlds>
+			<gd_world wd_type="KATALAMIA" />
+			<gd_world wd_type="KATALAM_INSTANCE" />
+			<gd_world wd_type="DANARIA_INSTANCE" />
+			<gd_world wd_type="IDIAN_DEPTH_INSTANCE" />
+		</gd_worlds>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000315" name="Ide Shard" />
+			<gd_item id="186000316" name="Strange Ide Crystal" />
+		</gd_items>
+	</gd_rule>
+	<!-- Enigmatic Ore -->
+	<gd_rule rule_name="Enigmatic Ore" base_chance="2" min_diff="0" max_diff="4">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012579" name="Enigmatic Ore" />
+		</gd_items>
+	</gd_rule>
+	<!-- Rawhide -->
+	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="10" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="152010310" name="Thin Rawhide" />
+			<!-- Level 20 -->
+			<gd_item id="152010311" name="Thick Rawhide" />
+			<!-- Level 30 -->
+			<gd_item id="152010312" name="Strong Rawhide" />
+			<!-- Level 40 -->
+			<gd_item id="152010313" name="Tough Rawhide" />
+			<!-- Level 50 -->
+			<gd_item id="152010318" name="Firm Rawhide" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010322" name="Sublime Rawhide" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Rawhide (Rare)" base_chance="8" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010323" name="Buttery Rawhide" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Rawhide (Legend)" base_chance="4" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010324" name="Splendiferous Rawhide" />
+		</gd_items>
+	</gd_rule>
+	<!-- Elemental Stones -->
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="10" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="ELEMENTAL" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="OUTSIDER" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="152010314" name="Lesser Elemental Stone" />
+			<!-- Level 20 -->
+			<gd_item id="152010315" name="Elemental Stone" />
+			<!-- Level 30 -->
+			<gd_item id="152010316" name="Greater Elemental Stone" />
+			<!-- Level 40 -->
+			<gd_item id="152010317" name="Major Elemental Stone" />
+			<!-- Level 50 -->
+			<gd_item id="152010319" name="Fine Elemental Stone" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="ELEMENTAL" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="OUTSIDER" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010325" name="Wispy Elemental Stone" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="8" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010326" name="Sublime Wispy Elemental Stone" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="4" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="ELEMENTAL" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="OUTSIDER" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152010327" name="Resplendent Wispy Elemental Stone" />
+		</gd_items>
+	</gd_rule>
+	<!-- Flux -->
+	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="-2" max_diff="2" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 15 -->
+			<gd_item id="152011001" name="Minor Weapon Flux" />
+			<gd_item id="152011021" name="Minor Armor Flux" />
+			<gd_item id="152011041" name="Minor Accessory Flux" />
+			<!-- Level 20 -->
+			<gd_item id="152011002" name="Lesser Weapon Flux" />
+			<gd_item id="152011022" name="Lesser Armor Flux" />
+			<gd_item id="152011042" name="Lesser Accessory Flux" />
+			<!-- Level 25 -->
+			<gd_item id="152011003" name="Weapon Flux" />
+			<gd_item id="152011023" name="Armor Flux" />
+			<gd_item id="152011043" name="Accessory Flux" />
+			<!-- Level 30 -->
+			<gd_item id="152011004" name="Greater Weapon Flux" />
+			<gd_item id="152011024" name="Greater Armor Flux" />
+			<gd_item id="152011044" name="Greater Accessory Flux" />
+			<!-- Level 35 -->
+			<gd_item id="152011005" name="Major Weapon Flux" />
+			<gd_item id="152011025" name="Major Armor Flux" />
+			<gd_item id="152011045" name="Major Accessory Flux" />
+			<!-- Level 40 -->
+			<gd_item id="152011006" name="Fine Weapon Flux" />
+			<gd_item id="152011026" name="Fine Armor Flux" />
+			<gd_item id="152011046" name="Fine Accessory Flux" />
+			<!-- Level 45 -->
+			<gd_item id="152011007" name="Superb Weapon Flux" />
+			<gd_item id="152011027" name="Superb Armor Flux" />
+			<gd_item id="152011047" name="Superb Accessory Flux" />
+			<!-- Level 50 -->
+			<gd_item id="152011008" name="Premium Weapon Flux" />
+			<gd_item id="152011028" name="Premium Armor Flux" />
+			<gd_item id="152011048" name="Premium Accessory Flux" />
+			<!-- Level 55 -->
+			<gd_item id="152011065" name="Special Greater Weapon Flux" />
+			<gd_item id="152011070" name="Special Greater Armor Flux" />
+			<gd_item id="152011075" name="Special Greater Accessory Flux" />
+			<!-- Level 58 -->
+			<gd_item id="152011080" name="Finest Weapon Flux" />
+			<gd_item id="152011084" name="Finest Armor Flux" />
+			<gd_item id="152011088" name="Finest Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152011100" name="Lesser Mystic Weapon Flux" />
+			<gd_item id="152011103" name="Lesser Mystic Armor Flux" />
+			<gd_item id="152011106" name="Lesser Mystic Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="-2" max_diff="2" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 25 -->
+			<gd_item id="152011009" name="Worthy Weapon Flux" />
+			<gd_item id="152011029" name="Worthy Armor Flux" />
+			<gd_item id="152011049" name="Worthy Accessory Flux" />
+			<!-- Level 30 -->
+			<gd_item id="152011010" name="Worthy Greater Weapon Flux" />
+			<gd_item id="152011030" name="Worthy Greater Armor Flux" />
+			<gd_item id="152011050" name="Worthy Greater Accessory Flux" />
+			<!-- Level 35 -->
+			<gd_item id="152011011" name="Worthy Major Weapon Flux" />
+			<gd_item id="152011031" name="Worthy Major Armor Flux" />
+			<gd_item id="152011051" name="Worthy Major Accessory Flux" />
+			<!-- Level 40 -->
+			<gd_item id="152011012" name="Worthy Fine Weapon Flux" />
+			<gd_item id="152011032" name="Worthy Fine Armor Flux" />
+			<gd_item id="152011052" name="Worthy Fine Accessory Flux" />
+			<!-- Level 45 -->
+			<gd_item id="152011013" name="Worthy Superb Weapon Flux" />
+			<gd_item id="152011033" name="Worthy Superb Armor Flux" />
+			<gd_item id="152011053" name="Worthy Superb Accessory Flux" />
+			<!-- Level 50 -->
+			<gd_item id="152011014" name="Worthy Premium Weapon Flux" />
+			<gd_item id="152011034" name="Worthy Premium Armor Flux" />
+			<gd_item id="152011054" name="Worthy Premium Accessory Flux" />
+			<!-- Level 55 -->
+			<gd_item id="152011066" name="Worthy Special Greater Weapon Flux" />
+			<gd_item id="152011071" name="Worthy Special Greater Armor Flux" />
+			<gd_item id="152011076" name="Worthy Special Greater Accessory Flux" />
+			<!-- Level 58 -->
+			<gd_item id="152011081" name="Worthy Finest Weapon Flux" />
+			<gd_item id="152011085" name="Worthy Finest Armor Flux" />
+			<gd_item id="152011089" name="Worthy Finest Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152011101" name="Mystic Weapon Flux" />
+			<gd_item id="152011104" name="Mystic Armor Flux" />
+			<gd_item id="152011107" name="Mystic Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="-2" max_diff="2" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 35 -->
+			<gd_item id="152011015" name="Expert Major Weapon Flux" />
+			<gd_item id="152011035" name="Expert Major Armor Flux" />
+			<gd_item id="152011055" name="Expert Major Accessory Flux" />
+			<!-- Level 40 -->
+			<gd_item id="152011016" name="Expert Fine Weapon Flux" />
+			<gd_item id="152011036" name="Expert Fine Armor Flux" />
+			<gd_item id="152011056" name="Expert Fine Accessory Flux" />
+			<!-- Level 45 -->
+			<gd_item id="152011017" name="Expert Superb Weapon Flux" />
+			<gd_item id="152011037" name="Expert Superb Armor Flux" />
+			<gd_item id="152011057" name="Expert Superb Accessory Flux" />
+			<!-- Level 50 -->
+			<gd_item id="152011018" name="Expert Premium Weapon Flux" />
+			<gd_item id="152011038" name="Expert Premium Armor Flux" />
+			<gd_item id="152011058" name="Expert Premium Accessory Flux" />
+			<!-- Level 55 -->
+			<gd_item id="152011067" name="Expert Special Greater Weapon Flux" />
+			<gd_item id="152011072" name="Expert Special Greater Armor Flux" />
+			<gd_item id="152011077" name="Expert Special Greater Accessory Flux" />
+			<!-- Level 58 -->
+			<gd_item id="152011082" name="Expert Finest Weapon Flux" />
+			<gd_item id="152011086" name="Expert Finest Armor Flux" />
+			<gd_item id="152011090" name="Expert Finest Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="0" max_diff="4" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152011102" name="Greater Mystic Weapon Flux" />
+			<gd_item id="152011105" name="Greater Mystic Armor Flux" />
+			<gd_item id="152011108" name="Greater Mystic Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Flux (Unique)" base_chance="1" min_diff="-2" max_diff="2" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 45 -->
+			<gd_item id="152011059" name="Master Superb Weapon Flux" />
+			<gd_item id="152011061" name="Master Superb Armor Flux" />
+			<gd_item id="152011063" name="Master Superb Accessory Flux" />
+			<!-- Level 50 -->
+			<gd_item id="152011060" name="Master Premium Weapon Flux" />
+			<gd_item id="152011062" name="Master Premium Armor Flux" />
+			<gd_item id="152011064" name="Master Premium Accessory Flux" />
+			<!-- Level 55 -->
+			<gd_item id="152011068" name="Master Special Greater Weapon Flux" />
+			<gd_item id="152011073" name="Master Special Greater Armor Flux" />
+			<gd_item id="152011078" name="Master Special Greater Accessory Flux" />
+			<!-- Level 58 -->
+			<gd_item id="152011083" name="Master Finest Weapon Flux" />
+			<gd_item id="152011087" name="Master Finest Armor Flux" />
+			<gd_item id="152011091" name="Master Finest Accessory Flux" />
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Hearts -->
+	<gd_rule rule_name="Balaur Heart" base_chance="4" min_diff="-9" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="186000033" name="Hot Balaur Heart" />
+			<!-- Level 60 -->
+			<gd_item id="186000097" name="Burning Balaur Heart" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Heart" base_chance="4" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="186000235" name="Divine Balaur Heart" />
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Souls -->
+	<gd_rule rule_name="Balaur Souls (Common)" base_chance="3" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152013037" name="Mortal Wrath" />
+			<gd_item id="152013040" name="Mortal Envy" />
+			<gd_item id="152013043" name="Mortal Pride" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="-5" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152013001" name="Vicious Mind of Wrath" />
+			<gd_item id="152013007" name="Vicious Terrifying Mind" />
+			<gd_item id="152013013" name="Vicious Mind of Pleasure" />
+			<!-- Level 40 -->
+			<gd_item id="152013002" name="Wrathful Will" />
+			<gd_item id="152013008" name="Terrifying Will" />
+			<gd_item id="152013014" name="Violent Will" />
+			<!-- Level 50 -->
+			<gd_item id="152013003" name="Wrathful Ego" />
+			<gd_item id="152013009" name="Terrifying Ego" />
+			<gd_item id="152013015" name="Violent Ego" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="0" max_diff="2">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152013019" name="Execration of Wrath" />
+			<gd_item id="152013022" name="Execration of Terror" />
+			<gd_item id="152013025" name="Execration of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="-2" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152013028" name="Urge of Wrath" />
+			<gd_item id="152013031" name="Urge of Terror" />
+			<gd_item id="152013034" name="Urge of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152013038" name="Deadly Wrath" />
+			<gd_item id="152013041" name="Deadly Envy" />
+			<gd_item id="152013044" name="Deadly Pride" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="-5" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 30 // no related recipes implemented
+				<gd_item id="152013004" name="Maddened Wrathful Mind" />
+				<gd_item id="152013010" name="Berserk Vicious Terrifying Mind" />
+				<gd_item id="152013016" name="Fatal Vicious Mind of Pleasure" />
+			-->
+			<!-- Level 40 -->
+			<gd_item id="152013005" name="Maddened Wrathful Will" />
+			<gd_item id="152013011" name="Berserk Terrifying Will" />
+			<gd_item id="152013017" name="Fatal Violent Will" />
+			<!-- Level 50 -->
+			<gd_item id="152013006" name="Maddened Wrathful Ego" />
+			<gd_item id="152013012" name="Berserk Terrifying Ego" />
+			<gd_item id="152013018" name="Fatal Violent Ego" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="0" max_diff="2">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152013020" name="Maddened Execration of Wrath" />
+			<gd_item id="152013023" name="Berserk Execration of Terror" />
+			<gd_item id="152013026" name="Fatal Execration of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="-2" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152013029" name="Maddened Urge of Wrath" />
+			<gd_item id="152013032" name="Berserk Urge of Terror" />
+			<gd_item id="152013035" name="Fatal Urge of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152013039" name="Malicious Wrath" />
+			<gd_item id="152013042" name="Malicious Envy" />
+			<gd_item id="152013045" name="Malicious Pride" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152013021" name="Clouded Execration of Wrath" />
+			<gd_item id="152013024" name="Furious Execration of Terror" />
+			<gd_item id="152013027" name="Inescapable Execration of Pleasure" />
+			<!-- Level 60 -->
+			<gd_item id="152013030" name="Clouded Urge of Wrath" />
+			<gd_item id="152013033" name="Furious Urge of Terror" />
+			<gd_item id="152013036" name="Inescapable Urge of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Horns & Scales -->
+	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="-5" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152014001" name="Thick Balaur Horn" />
+			<gd_item id="152014002" name="Thick Balaur Scale" />
+			<!-- Level 40 -->
+			<gd_item id="152014006" name="Hard Balaur Horn" />
+			<gd_item id="152014007" name="Hard Balaur Scale" />
+			<!-- Level 50 -->
+			<gd_item id="152014011" name="Solid Balaur Horn" />
+			<gd_item id="152014012" name="Solid Balaur Scale" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="-5" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014016" name="Firm Balaur Horn" />
+			<gd_item id="152014017" name="Firm Balaur Scale" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152014021" name="Gleaming Balaur Horn" />
+			<gd_item id="152014022" name="Gleaming Balaur Scale" />
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Skin & Meat -->
+	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-5" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152014003" name="Thick Balaur Skin" />
+			<gd_item id="152014005" name="Tough Balaur Meat" />
+			<!-- Level 40 -->
+			<gd_item id="152014008" name="Hard Balaur Skin" />
+			<gd_item id="152014010" name="Tender Balaur Meat" />
+			<!-- Level 50 -->
+			<gd_item id="152014013" name="Solid Balaur Skin" />
+			<gd_item id="152014015" name="Fresh Balaur Meat" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-5" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014018" name="Firm Balaur Skin" />
+			<gd_item id="152014020" name="Lustrous Balaur Meat" />
+
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152014023" name="Gleaming Balaur Skin" />
+			<gd_item id="152014025" name="Gleaming Balaur Meat" />
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Blood -->
+	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-5" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152014004" name="Cold Balaur Blood Stain" />
+			<!-- Level 40 -->
+			<gd_item id="152014009" name="Hot Balaur Blood Stain" />
+			<!-- Level 50 -->
+			<gd_item id="152014014" name="Boiling Balaur Blood Stain" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-5" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014019" name="Burning Balaur Blood Stain" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="0" max_diff="4">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152014024" name="Gleaming Balaur Blood" />
+		</gd_items>
+	</gd_rule>
+</global_rules>

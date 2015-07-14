@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!--
+		TODO:
+		Quest Starting Items
+	-->
+	<!-- Kinah -->
+	<gd_rule rule_name="Kinah" base_chance="17.5" min_count="9" max_count="22">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 1 -->
+			<gd_item id="182400001" name="Kinah" />
+		</gd_items>
+	</gd_rule>
+	<!-- Buff Food -->
+	<gd_rule rule_name="Buff Food" base_chance="2.5" min_diff="-9" max_diff="0">
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="160003551" name="Minor Rally Serum" />
+			<gd_item id="160003557" name="Minor Focus Agent" />
+			<!-- Level 20 -->
+			<gd_item id="160003552" name="Lesser Rally Serum" />
+			<gd_item id="160003558" name="Lesser Focus Agent" />
+			<!-- Level 30 -->
+			<gd_item id="160003553" name="Rally Serum" />
+			<gd_item id="160003559" name="Focus Agent" />
+			<!-- Level 40 -->
+			<gd_item id="160003554" name="Greater Rally Serum" />
+			<gd_item id="160003560" name="Greater Focus Agent" />
+			<!-- Level 50 -->
+			<gd_item id="160003555" name="Major Rally Serum" />
+			<gd_item id="160003561" name="Major Focus Agent" />
+			<!-- Level 60 -->
+			<gd_item id="160003556" name="Fine Rally Serum" />
+			<gd_item id="160003562" name="Fine Focus Agent" />
+		</gd_items>
+	</gd_rule>
+	<!-- Potions (white, 1-60) -->
+	<gd_rule rule_name="Potions (Common)" base_chance="3" min_diff="-9" max_diff="0">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="162000002" name="Minor Life Potion" />
+			<gd_item id="162000007" name="Minor Mana Potion" />
+			<gd_item id="162000052" name="Minor Life Elixir" />
+			<gd_item id="162000057" name="Minor Mana Elixir" />
+			<!-- Level 20 -->
+			<gd_item id="162000003" name="Lesser Life Potion" />
+			<gd_item id="162000008" name="Lesser Mana Potion" />
+			<gd_item id="162000053" name="Lesser Life Elixir" />
+			<gd_item id="162000058" name="Lesser Mana Elixir" />
+			<!-- Level 30 -->
+			<gd_item id="162000004" name="Life Potion" />
+			<gd_item id="162000009" name="Mana Potion" />
+			<gd_item id="162000054" name="Regular Life Elixir" />
+			<gd_item id="162000059" name="Regular Mana Elixir" />
+			<!-- Level 40 -->
+			<gd_item id="162000005" name="Greater Life Potion" />
+			<gd_item id="162000010" name="Greater Mana Potion" />
+			<gd_item id="162000055" name="Greater Life Elixir" />
+			<gd_item id="162000060" name="Greater Mana Elixir" />
+			<!-- Level 50 -->
+			<gd_item id="162000006" name="Major Life Potion" />
+			<gd_item id="162000011" name="Major Mana Potion" />
+			<gd_item id="162000056" name="Major Life Elixir" />
+			<gd_item id="162000061" name="Major Mana Elixir" />
+			<!-- Level 60 -->
+			<gd_item id="162000075" name="Fine Life Potion" />
+			<gd_item id="162000076" name="Fine Mana Potion" />
+			<gd_item id="162000085" name="Fine Life Elixir" />
+			<gd_item id="162000086" name="Fine Mana Elixir" />
+			<!-- Level 70 // deactivated for now (remove 61-65 rule when changing)
+				<gd_item id="162000119" name="Superior Life Potion"/>
+				<gd_item id="162000120" name="Superior Mana Potion"/>
+				<gd_item id="162000128" name="Superior Life Elixir"/>
+				<gd_item id="162000129" name="Superior Mana Elixir"/>
+			-->
+		</gd_items>
+	</gd_rule>
+	<!-- Potions (white, 61-65) -->
+	<gd_rule rule_name="Potions (Common)" base_chance="3" min_diff="1" max_diff="5">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="162000075" name="Fine Life Potion" />
+			<gd_item id="162000076" name="Fine Mana Potion" />
+		</gd_items>
+	</gd_rule>
+	<!-- Potions (green, 1-60) -->
+	<gd_rule rule_name="Potions (Rare)" base_chance="2" min_diff="-9" max_diff="0">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="162000012" name="Minor Life Serum" />
+			<gd_item id="162000017" name="Minor Mana Serum" />
+			<gd_item id="162000087" name="Minor Panacea of Life" />
+			<gd_item id="162000093" name="Minor Panacea of Mana" />
+			<!-- Level 20 -->
+			<gd_item id="162000013" name="Lesser Life Serum" />
+			<gd_item id="162000018" name="Lesser Mana Serum" />
+			<gd_item id="162000088" name="Lesser Panacea of Life" />
+			<gd_item id="162000094" name="Lesser Panacea of Mana" />
+			<!-- Level 30 -->
+			<gd_item id="162000014" name="Life Serum" />
+			<gd_item id="162000019" name="Mana Serum" />
+			<gd_item id="162000089" name="Panacea of Life" />
+			<gd_item id="162000095" name="Panacea of Mana" />
+			<!-- Level 40 -->
+			<gd_item id="162000015" name="Greater Life Serum" />
+			<gd_item id="162000020" name="Greater Mana Serum" />
+			<gd_item id="162000090" name="Greater Panacea of Life" />
+			<gd_item id="162000096" name="Greater Panacea of Mana" />
+			<!-- Level 50 -->
+			<gd_item id="162000016" name="Major Life Serum" />
+			<gd_item id="162000021" name="Major Mana Serum" />
+			<gd_item id="162000091" name="Major Panacea of Life" />
+			<gd_item id="162000097" name="Major Panacea of Mana" />
+			<!-- Level 60 -->
+			<gd_item id="162000077" name="Fine Life Serum" />
+			<gd_item id="162000078" name="Fine Mana Serum" />
+			<gd_item id="162000092" name="Fine Panacea of Life" />
+			<gd_item id="162000098" name="Fine Panacea of Mana" />
+			<!-- Level 70 // deactivated for now (remove 61-65 rule when changing)
+				<gd_item id="162000122" name="Superior Life Serum"/>
+				<gd_item id="162000123" name="Superior Mana Serum"/>
+			-->
+		</gd_items>
+	</gd_rule>
+	<!-- Potions (green, 61-65) -->
+	<gd_rule rule_name="Potions (Rare)" base_chance="2" min_diff="1" max_diff="5">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="162000077" name="Fine Life Serum" />
+			<gd_item id="162000078" name="Fine Mana Serum" />
+		</gd_items>
+	</gd_rule>
+	<!-- Power Shards -->
+	<gd_rule rule_name="Power Shards" base_chance="5" min_count="2" max_count="15" min_diff="0" max_diff="9">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 1 -->
+			<gd_item id="169000003" name="Minor Power Shard" />
+			<!-- Level 10 -->
+			<gd_item id="169000004" name="Lesser Power Shard" />
+			<!-- Level 20 -->
+			<gd_item id="169000005" name="Power Shard" />
+			<!-- Level 30 -->
+			<gd_item id="169000007" name="Greater Power Shard" />
+			<!-- Level 40 -->
+			<gd_item id="169000008" name="Fine Power Shard" />
+			<!-- Level 50 -->
+			<gd_item id="169000009" name="Premium Power Shard" />
+			<!-- Level 60 -->
+			<gd_item id="169000010" name="Superior Power Shard" />
+		</gd_items>
+	</gd_rule>
+	<!-- Stigma Shards -->
+	<gd_rule rule_name="Stigma Shards" base_chance="7" min_count="5" max_count="20">
+		<gd_worlds>
+			<gd_world wd_type="ABYSS" />
+			<gd_world wd_type="ABYSS_INSTANCE" />
+			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_INSTANCE" />
+			<gd_world wd_type="PANESTERRA" />
+			<gd_world wd_type="TIAMARANTA_SARPAN" />
+			<gd_world wd_type="SARPAN_INSTANCE" />
+			<gd_world wd_type="TIAMARANTA_INSTANCE" />
+			<gd_world wd_type="KATALAMIA" />
+			<gd_world wd_type="KATALAM_INSTANCE" />
+			<gd_world wd_type="DANARIA_INSTANCE" />
+			<gd_world wd_type="IDIAN_DEPTH" />
+			<gd_world wd_type="IDIAN_DEPTH_INSTANCE" />
+			<gd_world wd_type="LEVINSHOR_INSTANCE" />
+			<gd_world wd_type="DREDGION_INSTANCE" />
+		</gd_worlds>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="141000001" name="Stigma Shard" />
+		</gd_items>
+	</gd_rule>
+	<!-- Stigmas -->
+	<gd_rule rule_name="Stigmas (Rare)" base_chance="1" min_diff="-1" max_diff="1">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Common -->
+			<gd_item id="140000005" name="Advanced Dual-Wielding I" />
+			<gd_item id="140000008" name="Improved Stamina I" />
+			<gd_item id="140000026" name="Holy Shield I" />
+			<gd_item id="140000027" name="Divine Fury I" />
+			<gd_item id="140000047" name="Arrow Deluge I" />
+			<gd_item id="140000048" name="Sleep Arrow I" />
+			<gd_item id="140000076" name="Sigil Strike I" />
+			<gd_item id="140000077" name="Flurry I" />
+			<gd_item id="140000098" name="Grace of Empyrean Lord I" />
+			<gd_item id="140000099" name="Blinding Light I" />
+			<gd_item id="140000112" name="Rage Spell I" />
+			<gd_item id="140000113" name="Healing Conduit I" />
+			<gd_item id="140000130" name="Curse of Roots I" />
+			<gd_item id="140000131" name="Lumiel's Wisdom I" />
+			<gd_item id="140000147" name="Absorb Vitality I" />
+			<gd_item id="140000148" name="Body Root I" />
+			<gd_item id="140000859" name="Freestyle I" />
+			<gd_item id="140000927" name="Stopping Power I" />
+			<gd_item id="140000943" name="Nature's Favor I" />
+			<gd_item id="140001002" name="Nullification Trigger I" />
+			<gd_item id="140001003" name="Life Support Trigger I" />
+			<gd_item id="140000009" name="Crippling Cut I" />
+			<gd_item id="140000028" name="Doom Lure I" />
+			<gd_item id="140000049" name="Retreating Slash I" />
+			<gd_item id="140000078" name="Aethertwisting I" />
+			<gd_item id="140000149" name="Enmity Swap I" />
+			<gd_item id="140000274" name="Protective Ward I" />
+			<gd_item id="140000029" name="Provoking Roar I" />
+			<gd_item id="140000050" name="Arrow Deluge II" />
+			<gd_item id="140000051" name="Silence Arrow I" />
+			<gd_item id="140000079" name="Sigil Strike II" />
+			<gd_item id="140000080" name="Ambush I" />
+			<gd_item id="140000100" name="Flash of Recovery I" />
+			<gd_item id="140000114" name="Healing Conduit II" />
+			<gd_item id="140000115" name="Promise of Aether I" />
+			<gd_item id="140000150" name="Absorb Vitality II" />
+			<gd_item id="140000151" name="Ignite Aether I" />
+			<gd_item id="140000215" name="Severe Weakening Blow I" />
+			<gd_item id="140000891" name="Hymn of Rejuvenation I" />
+			<gd_item id="140000944" name="Nature's Favor II" />
+			<gd_item id="140001011" name="Drillbore I" />
+			<gd_item id="140001004" name="Life Support Trigger II" />
+			<gd_item id="140000010" name="Crippling Cut II" />
+			<gd_item id="140000011" name="Ankle Snare I" />
+			<gd_item id="140000030" name="Punishment I" />
+			<gd_item id="140000081" name="Apply Deadly Poison I" />
+			<gd_item id="140000101" name="Festering Wound I" />
+			<gd_item id="140000102" name="Reverse Condition I" />
+			<gd_item id="140000116" name="Word of Protection I" />
+			<gd_item id="140000117" name="Binding Word I" />
+			<gd_item id="140000134" name="Curse of Weakness I" />
+			<gd_item id="140000135" name="Zikel's Wisdom I" />
+			<gd_item id="140000152" name="Sigil of Silence I" />
+			<gd_item id="140000168" name="Vengeful Strike I" />
+			<gd_item id="140000229" name="Incite Rage I" />
+			<gd_item id="140000239" name="Bow of Blessing I" />
+			<gd_item id="140000252" name="Rune Burst I" />
+			<gd_item id="140000263" name="Earth's Wrath I" />
+			<gd_item id="140000275" name="Protective Ward II" />
+			<gd_item id="140000898" name="Cherubim Call I" />
+			<gd_item id="140000974" name="Quieting Gale I" />
+			<gd_item id="140000012" name="Lockdown I" />
+			<gd_item id="140000031" name="Holy Shield II" />
+			<gd_item id="140000032" name="Provoking Roar II" />
+			<gd_item id="140000054" name="Arrow Deluge III" />
+			<gd_item id="140000055" name="Silence Arrow II" />
+			<gd_item id="140000082" name="Sigil Strike III" />
+			<gd_item id="140000083" name="Ambush II" />
+			<gd_item id="140000103" name="Flash of Recovery II" />
+			<gd_item id="140000118" name="Healing Conduit III" />
+			<gd_item id="140000153" name="Absorb Vitality III" />
+			<gd_item id="140000154" name="Ignite Aether II" />
+			<gd_item id="140000216" name="Severe Weakening Blow II" />
+			<gd_item id="140000253" name="Oath of Accuracy I" />
+			<gd_item id="140000287" name="Wind Cut Down I" />
+			<gd_item id="140000297" name="Blessing of Fire I" />
+			<gd_item id="140000892" name="Hymn of Rejuvenation II" />
+			<gd_item id="140000945" name="Nature's Favor III" />
+			<gd_item id="140001012" name="Drillbore II" />
+			<gd_item id="140001005" name="Life Support Trigger III" />
+			<gd_item id="140000013" name="Crippling Cut III" />
+			<gd_item id="140000014" name="Howl I" />
+			<gd_item id="140000033" name="Punishment II" />
+			<gd_item id="140000034" name="Break Power I" />
+			<gd_item id="140000060" name="Breath of Nature I" />
+			<gd_item id="140000084" name="Rune Knife I" />
+			<gd_item id="140000104" name="Sage's Wisdom I" />
+			<gd_item id="140000119" name="Word of Life I" />
+			<gd_item id="140000136" name="Fire Burst I" />
+			<gd_item id="140000155" name="Weaken Spirit I" />
+			<gd_item id="140000156" name="Spirit Wall of Protection I" />
+			<gd_item id="140000169" name="Vengeful Strike II" />
+			<gd_item id="140000217" name="Dauntless Spirit I" />
+			<gd_item id="140000230" name="Incite Rage II" />
+			<gd_item id="140000254" name="Rune Burst II" />
+			<gd_item id="140000264" name="Earth's Wrath II" />
+			<gd_item id="140000276" name="Protective Ward III" />
+			<gd_item id="140000498" name="Absorbing Fury I" />
+			<gd_item id="140000975" name="Quieting Gale II" />
+			<gd_item id="140001018" name="Riplash I" />
+			<gd_item id="140000935" name="Frozen Blitz I" />
+			<gd_item id="140000929" name="Blazing Bombardment I" />
+			<gd_item id="140000015" name="Lockdown II" />
+			<gd_item id="140000016" name="Unwavering Devotion I" />
+			<gd_item id="140000035" name="Provoking Roar III" />
+			<gd_item id="140000036" name="Bodyguard I" />
+			<gd_item id="140000061" name="Arrow Deluge IV" />
+			<gd_item id="140000062" name="Silence Arrow III" />
+			<gd_item id="140000063" name="Sniper Stance I" />
+			<gd_item id="140000085" name="Sigil Strike IV" />
+			<gd_item id="140000086" name="Ambush III" />
+			<gd_item id="140000087" name="Eye of Wrath I" />
+			<gd_item id="140000088" name="Blinding Burst I" />
+			<gd_item id="140000105" name="Flash of Recovery III" />
+			<gd_item id="140000120" name="Healing Conduit IV" />
+			<gd_item id="140000121" name="Promise of Aether II" />
+			<gd_item id="140000139" name="Vaizel's Wisdom I" />
+			<gd_item id="140000157" name="Absorb Vitality IV" />
+			<gd_item id="140000158" name="Ignite Aether III" />
+			<gd_item id="140000159" name="Fear Shriek I" />
+			<gd_item id="140000218" name="Severe Weakening Blow III" />
+			<gd_item id="140000288" name="Wind Cut Down II" />
+			<gd_item id="140000298" name="Blessing of Fire II" />
+			<gd_item id="140000878" name="Half-Stop I" />
+			<gd_item id="140000893" name="Hymn of Rejuvenation III" />
+			<gd_item id="140000946" name="Nature's Favor IV" />
+			<gd_item id="140001013" name="Drillbore III" />
+			<gd_item id="140001024" name="Recharge I" />
+			<gd_item id="140001006" name="Life Support Trigger IV" />
+			<gd_item id="140000007" name="Advanced Dual-Wielding II" />
+			<gd_item id="140000017" name="Crippling Cut IV" />
+			<gd_item id="140000018" name="Siegebreaker I" />
+			<gd_item id="140000037" name="Punishment III" />
+			<gd_item id="140000038" name="Break Power II" />
+			<gd_item id="140000066" name="Breath of Nature II" />
+			<gd_item id="140000089" name="Rune Knife II" />
+			<gd_item id="140000106" name="Splendor of Recovery I" />
+			<gd_item id="140000122" name="Word of Life II" />
+			<gd_item id="140000123" name="Word of Inspiration I" />
+			<gd_item id="140000140" name="Curse of Weakness II" />
+			<gd_item id="140000160" name="Weaken Spirit II" />
+			<gd_item id="140000170" name="Vengeful Strike III" />
+			<gd_item id="140000214" name="Cloaking Word I" />
+			<gd_item id="140000219" name="Dauntless Spirit II" />
+			<gd_item id="140000231" name="Incite Rage III" />
+			<gd_item id="140000255" name="Rune Burst III" />
+			<gd_item id="140000265" name="Earth's Wrath III" />
+			<gd_item id="140000277" name="Protective Ward IV" />
+			<gd_item id="140000278" name="Splash Swing I" />
+			<gd_item id="140000500" name="Inquisitor's Blow I" />
+			<gd_item id="140000503" name="Flash of Speed I" />
+			<gd_item id="140000509" name="Transference I" />
+			<gd_item id="140000863" name="Composer's Bar I" />
+			<gd_item id="140000955" name="Power Grab I" />
+			<gd_item id="140000976" name="Quieting Gale III" />
+			<gd_item id="140001019" name="Riplash II" />
+			<gd_item id="140001029" name="Steel Storm I" />
+			<gd_item id="140000090" name="Sigil Strike V" />
+			<gd_item id="140000161" name="Absorb Vitality V" />
+			<gd_item id="140000936" name="Frozen Blitz II" />
+			<gd_item id="140000039" name="Holy Shield III" />
+			<gd_item id="140000067" name="Silence Arrow IV" />
+			<gd_item id="140000162" name="Ignite Aether IV" />
+			<gd_item id="140000930" name="Blazing Bombardment II" />
+			<gd_item id="140000019" name="Lockdown III" />
+			<gd_item id="140000040" name="Provoking Roar IV" />
+			<gd_item id="140000068" name="Arrow Deluge V" />
+			<gd_item id="140000091" name="Ambush IV" />
+			<gd_item id="140000107" name="Flash of Recovery IV" />
+			<gd_item id="140000124" name="Healing Conduit V" />
+			<gd_item id="140000220" name="Severe Weakening Blow IV" />
+			<gd_item id="140000289" name="Wind Cut Down III" />
+			<gd_item id="140000299" name="Blessing of Fire III" />
+			<gd_item id="140000505" name="Soul Lock I" />
+			<gd_item id="140000869" name="Stinging Note I" />
+			<gd_item id="140000894" name="Hymn of Rejuvenation IV" />
+			<gd_item id="140000947" name="Nature's Favor V" />
+			<gd_item id="140001014" name="Drillbore IV" />
+			<gd_item id="140001025" name="Recharge II" />
+			<gd_item id="140000020" name="Earthquake Wave I" />
+			<gd_item id="140000041" name="Power of Restoration I" />
+			<gd_item id="140000069" name="Focused Shots I" />
+			<gd_item id="140000092" name="Throw Shuriken I" />
+			<gd_item id="140000108" name="Splendor of Purification I" />
+			<gd_item id="140000125" name="Enhancement Mantra I" />
+			<gd_item id="140000163" name="Spirit Recovery I" />
+			<gd_item id="140001007" name="Life Support Trigger V" />
+			<gd_item id="140000189" name="Draining Blow I" />
+			<gd_item id="140000192" name="Aether Armor I" />
+			<gd_item id="140000195" name="Bestial Fury I" />
+			<gd_item id="140000198" name="Shadow Walk I" />
+			<gd_item id="140000201" name="Stability I" />
+			<gd_item id="140000204" name="Recovery Spell I" />
+			<gd_item id="140000207" name="Ice Harpoon I" />
+			<gd_item id="140000210" name="Cyclone of Wrath I" />
+			<gd_item id="140000504" name="Noble Grace I" />
+			<gd_item id="140000021" name="Crippling Cut V" />
+			<gd_item id="140000022" name="Siegebreaker II" />
+			<gd_item id="140000042" name="Punishment IV" />
+			<gd_item id="140000043" name="Break Power III" />
+			<gd_item id="140000072" name="Breath of Nature III" />
+			<gd_item id="140000093" name="Rune Knife III" />
+			<gd_item id="140000109" name="Splendor of Recovery II" />
+			<gd_item id="140000126" name="Word of Life III" />
+			<gd_item id="140000143" name="Fire Burst II" />
+			<gd_item id="140000164" name="Weaken Spirit III" />
+			<gd_item id="140000236" name="Incite Rage IV" />
+			<gd_item id="140000260" name="Rune Burst IV" />
+			<gd_item id="140000270" name="Earth's Wrath IV" />
+			<gd_item id="140000283" name="Protective Ward V" />
+			<gd_item id="140000284" name="Splash Swing II" />
+			<gd_item id="140000499" name="Absorbing Fury II" />
+			<gd_item id="140000513" name="Howl II" />
+			<gd_item id="140000956" name="Power Grab II" />
+			<gd_item id="140000977" name="Quieting Gale IV" />
+			<gd_item id="140001020" name="Riplash III" />
+			<gd_item id="140001030" name="Steel Storm II" />
+			<gd_item id="140000094" name="Sigil Strike VI" />
+			<gd_item id="140000165" name="Absorb Vitality VI" />
+			<gd_item id="140000171" name="Vengeful Strike IV" />
+			<gd_item id="140000225" name="Dauntless Spirit III" />
+			<gd_item id="140000937" name="Frozen Blitz III" />
+			<gd_item id="140000023" name="Slaughter I" />
+			<gd_item id="140000044" name="Terrible Howl I" />
+			<gd_item id="140000073" name="Silence Arrow V" />
+			<gd_item id="140000074" name="Nature's Resolve I" />
+			<gd_item id="140000110" name="Sympathetic Heal I" />
+			<gd_item id="140000127" name="Soul Crush I" />
+			<gd_item id="140000144" name="Barrier of Severance I" />
+			<gd_item id="140000166" name="Ignite Aether V" />
+			<gd_item id="140000167" name="Spirit Substitution I" />
+			<gd_item id="140000213" name="Deadly Abandon I" />
+			<gd_item id="140000502" name="Keen Cleverness I" />
+			<gd_item id="140000541" name="Bodyguard II" />
+			<gd_item id="140000931" name="Blazing Bombardment III" />
+			<gd_item id="140000024" name="Lockdown IV" />
+			<gd_item id="140000045" name="Provoking Roar V" />
+			<gd_item id="140000075" name="Arrow Deluge VI" />
+			<gd_item id="140000096" name="Ambush V" />
+			<gd_item id="140000111" name="Flash of Recovery V" />
+			<gd_item id="140000128" name="Healing Conduit VI" />
+			<gd_item id="140000129" name="Promise of Aether III" />
+			<gd_item id="140000226" name="Severe Weakening Blow V" />
+			<gd_item id="140000294" name="Wind Cut Down IV" />
+			<gd_item id="140000305" name="Blessing of Fire IV" />
+			<gd_item id="140000870" name="Stinging Note II" />
+			<gd_item id="140000895" name="Hymn of Rejuvenation V" />
+			<gd_item id="140000948" name="Nature's Favor VI" />
+			<gd_item id="140001015" name="Drillbore V" />
+			<gd_item id="140001026" name="Recharge III" />
+			<gd_item id="140000025" name="Earthquake Wave II" />
+			<gd_item id="140000046" name="Power of Restoration II" />
+			<gd_item id="140000097" name="Throw Shuriken II" />
+			<gd_item id="140001008" name="Life Support Trigger VI" />
+			<gd_item id="140000377" name="Cyclone of Wrath II" />
+			<gd_item id="140000415" name="Stabilize II" />
+			<gd_item id="140000424" name="Ice Harpoon II" />
+			<gd_item id="140000473" name="Recovery Spell II" />
+			<gd_item id="140000495" name="Draining Blow II" />
+			<gd_item id="140000330" name="Crippling Cut VI" />
+			<gd_item id="140000334" name="Breath of Nature IV" />
+			<gd_item id="140000335" name="Earth's Wrath V" />
+			<gd_item id="140000360" name="Rune Burst V" />
+			<gd_item id="140000366" name="Break Power IV" />
+			<gd_item id="140000374" name="Protective Ward VI" />
+			<gd_item id="140000376" name="Incite Rage V" />
+			<gd_item id="140000393" name="Word of Life IV" />
+			<gd_item id="140000397" name="Siegebreaker III" />
+			<gd_item id="140000398" name="Siegebreaker III" />
+			<gd_item id="140000409" name="Curse of Weakness III" />
+			<gd_item id="140000433" name="Rune Knife IV" />
+			<gd_item id="140000438" name="Splash Swing III" />
+			<gd_item id="140000452" name="Weaken Spirit IV" />
+			<gd_item id="140000461" name="Punishment V" />
+			<gd_item id="140000470" name="Splendor of Recovery III" />
+			<gd_item id="140000487" name="Fire Burst III" />
+			<gd_item id="140000501" name="Inquisitor's Blow II" />
+			<gd_item id="140000510" name="Transference II" />
+			<gd_item id="140000514" name="Absorbing Fury III" />
+			<gd_item id="140000957" name="Power Grab III" />
+			<gd_item id="140000978" name="Quieting Gale V" />
+			<gd_item id="140001021" name="Riplash IV" />
+			<gd_item id="140001031" name="Steel Storm III" />
+			<gd_item id="140000321" name="Dauntless Spirit IV" />
+			<gd_item id="140000375" name="Vengeful Strike V" />
+			<gd_item id="140000391" name="Absorb Vitality VII" />
+			<gd_item id="140000425" name="Sigil Strike VII" />
+			<gd_item id="140000938" name="Frozen Blitz IV" />
+			<gd_item id="140000317" name="Sympathetic Heal II" />
+			<gd_item id="140000336" name="Punishing Earth I" />
+			<gd_item id="140000355" name="Ignite Aether VI" />
+			<gd_item id="140000356" name="Venomous Strike I" />
+			<gd_item id="140000365" name="Barricade of Steel I" />
+			<gd_item id="140000373" name="Holy Shield IV" />
+			<gd_item id="140000390" name="Exchange Vitality I" />
+			<gd_item id="140000394" name="Second Wind I" />
+			<gd_item id="140000423" name="Withering Gloom I" />
+			<gd_item id="140000466" name="Silence Arrow VI" />
+			<gd_item id="140000483" name="Soul Crush II" />
+			<gd_item id="140000484" name="Hit Mantra I" />
+			<gd_item id="140000906" name="Ode to Friendship I" />
+			<gd_item id="140000920" name="Sighting I" />
+			<gd_item id="140000932" name="Blazing Bombardment IV" />
+			<gd_item id="140001034" name="Aimbot Assist I" />
+			<gd_item id="140000311" name="Lockdown V" />
+			<gd_item id="140000337" name="Provoking Roar VI" />
+			<gd_item id="140000364" name="Wind Cut Down V" />
+			<gd_item id="140000378" name="Blessing of Fire V" />
+			<gd_item id="140000408" name="Severe Weakening Blow VI" />
+			<gd_item id="140000419" name="Ambush VI" />
+			<gd_item id="140000430" name="Promise of Aether IV" />
+			<gd_item id="140000471" name="Flash of Recovery VI" />
+			<gd_item id="140000485" name="Arrow Deluge VII" />
+			<gd_item id="140000494" name="Healing Conduit VII" />
+			<gd_item id="140000506" name="Soul Lock II" />
+			<gd_item id="140000871" name="Stinging Note III" />
+			<gd_item id="140000896" name="Hymn of Rejuvenation VI" />
+			<gd_item id="140000949" name="Nature's Favor VII" />
+			<gd_item id="140001016" name="Drillbore VI" />
+			<gd_item id="140001027" name="Recharge IV" />
+			<gd_item id="140000515" name="Earthquake Wave III" />
+			<gd_item id="140000542" name="Power of Restoration III" />
+			<gd_item id="140000586" name="Throw Shuriken III" />
+			<gd_item id="140001009" name="Life Support Trigger VII" />
+			<gd_item id="140000520" name="Draining Blow III" />
+			<gd_item id="140000614" name="Stability III" />
+			<gd_item id="140000637" name="Recovery Spell III" />
+			<gd_item id="140000659" name="Ice Harpoon III" />
+			<gd_item id="140000672" name="Cyclone of Wrath III" />
+			<gd_item id="140000528" name="Crippling Cut VII" />
+			<gd_item id="140000529" name="Siegebreaker IV" />
+			<gd_item id="140000530" name="Howl III" />
+			<gd_item id="140000531" name="Absorbing Fury IV" />
+			<gd_item id="140000539" name="Spin Block I" />
+			<gd_item id="140000549" name="Punishment VI" />
+			<gd_item id="140000550" name="Incite Rage VI" />
+			<gd_item id="140000551" name="Break Power V" />
+			<gd_item id="140000554" name="Inquisitor's Blow III" />
+			<gd_item id="140000562" name="Stubborn Spirit I" />
+			<gd_item id="140000570" name="Breath of Nature V" />
+			<gd_item id="140000593" name="Rune Burst VI" />
+			<gd_item id="140000594" name="Rune Knife V" />
+			<gd_item id="140000606" name="Shadowfall I" />
+			<gd_item id="140000618" name="Earth's Wrath VI" />
+			<gd_item id="140000619" name="Splendor of Recovery IV" />
+			<gd_item id="140000632" name="Saving Grace I" />
+			<gd_item id="140000641" name="Word of Life V" />
+			<gd_item id="140000642" name="Protective Ward VII" />
+			<gd_item id="140000643" name="Splash Swing IV" />
+			<gd_item id="140000654" name="Rise I" />
+			<gd_item id="140000662" name="Fire Burst IV" />
+			<gd_item id="140000669" name="Absolute Zero I" />
+			<gd_item id="140000676" name="Weaken Spirit V" />
+			<gd_item id="140000677" name="Transference III" />
+			<gd_item id="140000686" name="Soul Torrent I" />
+			<gd_item id="140000958" name="Power Grab IV" />
+			<gd_item id="140000967" name="Stable Stance I" />
+			<gd_item id="140000979" name="Quieting Gale VI" />
+			<gd_item id="140001022" name="Riplash V" />
+			<gd_item id="140001032" name="Steel Storm IV" />
+			<gd_item id="140001036" name="Gattling Gun I" />
+			<gd_item id="140000532" name="Vengeful Strike VI" />
+			<gd_item id="140000533" name="Dauntless Spirit V" />
+			<gd_item id="140000600" name="Sigil Strike VIII" />
+			<gd_item id="140000679" name="Absorb Vitality VIII" />
+			<gd_item id="140000939" name="Frozen Blitz V" />
+			<gd_item id="140000540" name="Exhausting Wave I (Revival Wave I)" />
+			<gd_item id="140000558" name="Barricade of Steel II" />
+			<gd_item id="140000559" name="Bodyguard III" />
+			<gd_item id="140000563" name="Illusion Chains I" />
+			<gd_item id="140000577" name="Determination of Absorption II" />
+			<gd_item id="140000578" name="Silence Arrow VII" />
+			<gd_item id="140000585" name="Misery Shot I" />
+			<gd_item id="140000605" name="Venomous Strike II" />
+			<gd_item id="140000627" name="Sympathetic Heal III" />
+			<gd_item id="140000631" name="Punishing Earth II" />
+			<gd_item id="140000633" name="Sacrificial Power I" />
+			<gd_item id="140000652" name="Soul Crush III" />
+			<gd_item id="140000653" name="Hit Mantra II" />
+			<gd_item id="140000655" name="Annihilation I (Burst I)" />
+			<gd_item id="140000670" name="Storm Strike I" />
+			<gd_item id="140000681" name="Ignite Aether VII" />
+			<gd_item id="140000685" name="Withering Gloom II" />
+			<gd_item id="140000687" name="Sympathetic Mind I" />
+			<gd_item id="140000933" name="Blazing Bombardment V" />
+			<gd_item id="140001035" name="Aimbot Assist II" />
+			<gd_item id="140000707" name="Lockdown VI" />
+			<gd_item id="140000716" name="Severe Weakening Blow VII" />
+			<gd_item id="140000729" name="Wind Cut Down VI" />
+			<gd_item id="140000743" name="Blessing of Fire VI" />
+			<gd_item id="140000754" name="Arrow Deluge VIII" />
+			<gd_item id="140000787" name="Healing Conduit VIII" />
+			<gd_item id="140000788" name="Promise of Aether V" />
+			<gd_item id="140000807" name="Provoking Roar VII" />
+			<gd_item id="140000808" name="Incite Rage VII" />
+			<gd_item id="140000826" name="Flash of Recovery VII" />
+			<gd_item id="140000850" name="Ambush VII" />
+			<gd_item id="140000872" name="Stinging Note IV" />
+			<gd_item id="140000897" name="Hymn of Rejuvenation VII" />
+			<gd_item id="140000950" name="Nature's Favor VIII" />
+			<gd_item id="140001017" name="Drillbore VII" />
+			<gd_item id="140001028" name="Recharge V" />
+			<gd_item id="140000695" name="Break Away I" />
+			<gd_item id="140000702" name="Feint I" />
+			<gd_item id="140000703" name="Earthen Call I" />
+			<gd_item id="140000704" name="Power Sprint I" />
+			<gd_item id="140000705" name="Magical Defense I" />
+			<gd_item id="140000706" name="Restoration Sacrifice I" />
+			<gd_item id="140000719" name="Earthquake Wave IV" />
+			<gd_item id="140000814" name="Power of Restoration IV" />
+			<gd_item id="140000854" name="Acceleration Cheer I" />
+			<gd_item id="140000855" name="Wake Up I" />
+			<gd_item id="140000858" name="Mvt. 1: Spring I" />
+			<gd_item id="140000986" name="Survival Instinct I" />
+			<gd_item id="140001010" name="Life Support Trigger VIII" />
+			<gd_item id="140001039" name="Aether Recharge I" />
+			<gd_item id="140000723" name="Draining Blow IV" />
+			<gd_item id="140000746" name="Cyclone of Wrath IV" />
+			<gd_item id="140000796" name="Recovery Spell IV" />
+			<gd_item id="140000836" name="Stability IV" />
+			<gd_item id="140000851" name="Ice Harpoon IV" />
+			<gd_item id="140000709" name="Crippling Cut VIII" />
+			<gd_item id="140000715" name="Siegebreaker V" />
+			<gd_item id="140000724" name="Absorbing Fury V" />
+			<gd_item id="140000736" name="Curse of Weakness IV" />
+			<gd_item id="140000750" name="Weaken Spirit VI" />
+			<gd_item id="140000780" name="Rune Knife VI" />
+			<gd_item id="140000781" name="Rune Burst VII" />
+			<gd_item id="140000800" name="Protective Ward VIII" />
+			<gd_item id="140000801" name="Word of Life VI" />
+			<gd_item id="140000802" name="Splash Swing V" />
+			<gd_item id="140000819" name="Break Power VI" />
+			<gd_item id="140000820" name="Punishment VII" />
+			<gd_item id="140000821" name="Incite Rage VIII" />
+			<gd_item id="140000825" name="Inquisitor's Blow IV" />
+			<gd_item id="140000840" name="Splendor of Recovery V" />
+			<gd_item id="140000841" name="Earth's Wrath VII" />
+			<gd_item id="140000842" name="Saving Grace II" />
+			<gd_item id="140000959" name="Power Grab V" />
+			<gd_item id="140000980" name="Quieting Gale VII" />
+			<gd_item id="140001023" name="Riplash VI" />
+			<gd_item id="140001033" name="Steel Storm V" />
+			<gd_item id="140001037" name="Gattling Gun II" />
+			<gd_item id="140000691" name="Fettertwine I" />
+			<gd_item id="140000692" name="Somnolence I" />
+			<gd_item id="140000693" name="Punishing Thrust I" />
+			<gd_item id="140000694" name="Dilation Arrow I" />
+			<gd_item id="140000696" name="Searching Strike I" />
+			<gd_item id="140000699" name="Retribution Lightning I" />
+			<gd_item id="140000700" name="Leaping Flash I" />
+			<gd_item id="140000701" name="Command: Bodyguard I" />
+			<gd_item id="140000708" name="Dauntless Spirit VI" />
+			<gd_item id="140000713" name="Vengeful Strike VII" />
+			<gd_item id="140000752" name="Absorb Vitality IX" />
+			<gd_item id="140000784" name="Sigil Strike IX" />
+			<gd_item id="140000862" name="Song of Sanctuary I" />
+			<gd_item id="140000940" name="Frozen Blitz VI" />
+			<gd_item id="140000981" name="Missile Guide I" />
+			<gd_item id="140001038" name="Leeching Steel I" />
+			<!-- Elyos only -->
+			<gd_item id="140000132" name="Ice Sheet I" />
+			<gd_item id="140000052" name="Snare Trap I" />
+			<gd_item id="140000056" name="Trap of Clairvoyance I" />
+			<gd_item id="140000058" name="Snare Trap II" />
+			<gd_item id="140000137" name="Ice Sheet II" />
+			<gd_item id="140000240" name="Trap of Slowing I" />
+			<gd_item id="140000064" name="Snare Trap III" />
+			<gd_item id="140000242" name="Trap of Slowing II" />
+			<gd_item id="140000507" name="Summon Whirlwind I" />
+			<gd_item id="140000141" name="Boon of Strength I" />
+			<gd_item id="140000070" name="Snare Trap IV" />
+			<gd_item id="140000145" name="Ice Sheet III" />
+			<gd_item id="140000248" name="Trap of Slowing III" />
+			<gd_item id="140000190" name="Shattering Wave I" />
+			<gd_item id="140000193" name="Punishment of Light I" />
+			<gd_item id="140000196" name="Holy Arrow I" />
+			<gd_item id="140000199" name="Divine Rune I" />
+			<gd_item id="140000202" name="Yustiel's Splendor I" />
+			<gd_item id="140000205" name="Divine Curtain I" />
+			<gd_item id="140000208" name="Big Magma Eruption I" />
+			<gd_item id="140000211" name="Spirit Burn-to-Ashes I" />
+			<gd_item id="140000431" name="Snare Trap V" />
+			<gd_item id="140000420" name="Call Gryphu I" />
+			<gd_item id="140000343" name="Trap of Slowing IV" />
+			<gd_item id="140000383" name="Ice Sheet IV" />
+			<gd_item id="140000511" name="Summon Whirlwind II" />
+			<gd_item id="140000516" name="Shattering Wave II" />
+			<gd_item id="140000543" name="Punishment of Light II" />
+			<gd_item id="140000609" name="Yustiel's Splendor II" />
+			<gd_item id="140000634" name="Divine Curtain II" />
+			<gd_item id="140000656" name="Big Magma Eruption II" />
+			<gd_item id="140000568" name="Snare Trap VI" />
+			<gd_item id="140000583" name="Skybound Trap I" />
+			<gd_item id="140000581" name="Call Gryphu II" />
+			<gd_item id="140000607" name="Slayer Form I" />
+			<gd_item id="140000732" name="Ice Sheet V" />
+			<gd_item id="140000852" name="Trap of Slowing V" />
+			<gd_item id="140000739" name="Big Magma Eruption III" />
+			<gd_item id="140000793" name="Divine Curtain III" />
+			<gd_item id="140000812" name="Punishment of Light III" />
+			<gd_item id="140000831" name="Yustiel's Splendor III" />
+			<gd_item id="140001001" name="Shattering Wave III" />
+			<gd_item id="140000763" name="Snare Trap VII" />
+			<gd_item id="140000769" name="Skybound Trap II" />
+			<!-- Asmodian only -->
+			<gd_item id="140000133" name="Ice Sheet I" />
+			<gd_item id="140000053" name="Snare Trap I" />
+			<gd_item id="140000057" name="Trap of Clairvoyance I" />
+			<gd_item id="140000059" name="Snare Trap II" />
+			<gd_item id="140000138" name="Ice Sheet II" />
+			<gd_item id="140000241" name="Trap of Slowing I" />
+			<gd_item id="140000065" name="Snare Trap III" />
+			<gd_item id="140000243" name="Trap of Slowing II" />
+			<gd_item id="140000508" name="Summon Whirlwind I" />
+			<gd_item id="140000142" name="Boon of Quickness I" />
+			<gd_item id="140000071" name="Snare Trap IV" />
+			<gd_item id="140000146" name="Ice Sheet III" />
+			<gd_item id="140000249" name="Trap of Slowing III" />
+			<gd_item id="140000191" name="Piercing Rupture I" />
+			<gd_item id="140000194" name="Punishment of Darkness I" />
+			<gd_item id="140000197" name="Deadly Arrow I" />
+			<gd_item id="140000200" name="Rune Swipe I" />
+			<gd_item id="140000203" name="Marchutan's Splendor I" />
+			<gd_item id="140000206" name="Curtain of Aether I" />
+			<gd_item id="140000209" name="Lava Tempest I" />
+			<gd_item id="140000212" name="Spirit Explosion I" />
+			<gd_item id="140000432" name="Snare Trap V" />
+			<gd_item id="140000421" name="Call Gryphu I" />
+			<gd_item id="140000344" name="Trap of Slowing IV" />
+			<gd_item id="140000384" name="Ice Sheet IV" />
+			<gd_item id="140000512" name="Summon Whirlwind II" />
+			<gd_item id="140000517" name="Piercing Rupture II" />
+			<gd_item id="140000544" name="Punishment of Darkness II" />
+			<gd_item id="140000610" name="Marchutan's Splendor II" />
+			<gd_item id="140000635" name="Curtain of Aether II" />
+			<gd_item id="140000657" name="Lava Tempest II" />
+			<gd_item id="140000569" name="Snare Trap VI" />
+			<gd_item id="140000584" name="Skybound Trap I" />
+			<gd_item id="140000582" name="Call Gryphu II" />
+			<gd_item id="140000608" name="Slayer Form I" />
+			<gd_item id="140000733" name="Ice Sheet V" />
+			<gd_item id="140000853" name="Trap of Slowing V" />
+			<gd_item id="140000714" name="Piercing Rupture III" />
+			<gd_item id="140000738" name="Lava Tempest III" />
+			<gd_item id="140000794" name="Curtain of Aether III" />
+			<gd_item id="140000813" name="Punishment of Darkness III" />
+			<gd_item id="140000832" name="Marchutan's Splendor III" />
+			<gd_item id="140000764" name="Snare Trap VII" />
+			<gd_item id="140000770" name="Skybound Trap II" />
+		</gd_items>
+	</gd_rule>
+	<!-- Godstones (blue, dmg) -->
+	<gd_rule rule_name="Godstones (Legend)" base_chance="0.05">
+		<gd_items>
+			<gd_item id="168000028" name="Godstone: Magical Fire Strike" />
+			<gd_item id="168000029" name="Godstone: Magical Fire Smash" />
+			<gd_item id="168000030" name="Godstone: Magical Earth Strike" />
+			<gd_item id="168000031" name="Godstone: Magical Earth Smash" />
+			<gd_item id="168000032" name="Godstone: Bleeding Altered State Strike" />
+			<gd_item id="168000033" name="Godstone: Bleeding Altered State Smash" />
+			<gd_item id="168000043" name="Godstone: Boreas' Encouragement" />
+			<gd_item id="168000044" name="Godstone: Charna's Cleverness" />
+			<gd_item id="168000045" name="Godstone: Thrasymedes' Wit" />
+			<gd_item id="168000046" name="Godstone: Jumentis' Agility" />
+			<gd_item id="168000047" name="Godstone: Traufnir's Bravery" />
+			<gd_item id="168000048" name="Godstone: Sif's Knowledge" />
+			<gd_item id="168000049" name="Godstone: Freyr's Wisdom" />
+			<gd_item id="168000050" name="Godstone: Sigyn's Intelligence" />
+		</gd_items>
+	</gd_rule>
+	<!-- Godstones (blue, effects) -->
+	<gd_rule rule_name="Godstones (Legend)" base_chance="0.008">
+		<gd_items>
+			<gd_item id="168000034" name="Godstone: Fasimedes' Majesty" />
+			<gd_item id="168000035" name="Godstone: Vidar's Dignity" />
+			<gd_item id="168000036" name="Godstone: Helkes' Revenge" />
+			<gd_item id="168000039" name="Godstone: Deltras' Loyalty" />
+			<gd_item id="168000041" name="Godstone: Orissan's Blood" />
+			<gd_item id="168000042" name="Godstone: Mahisha's Wrath" />
+			<gd_item id="168000073" name="Godstone: Khrudgelmir's Tacitness" />
+			<gd_item id="168000074" name="Godstone: Bollvig's Tragedy" />
+			<gd_item id="168000075" name="Godstone: Ieo's Sadness" />
+		</gd_items>
+	</gd_rule>
+	<!-- Godstones (gold) -->
+	<gd_rule rule_name="Godstones (Unique)" base_chance="0.004">
+		<gd_items>
+			<gd_item id="168000051" name="Godstone: Nezekan's Valiance" />
+			<gd_item id="168000052" name="Godstone: Kaisinel's Terror" />
+			<gd_item id="168000053" name="Godstone: Yustiel's Heart" />
+			<gd_item id="168000054" name="Godstone: Vaizel's Will" />
+			<gd_item id="168000117" name="Godstone: Meslamtaeda's Greed" />
+			<gd_item id="168000118" name="Godstone: Ereshkigal's Honor" />
+			<gd_item id="168000119" name="Godstone: Nezekan's Advance" />
+			<gd_item id="168000120" name="Godstone: Beritra's Plot" />
+			<gd_item id="168000121" name="Godstone: Fregion's Trick" />
+			<gd_item id="168000122" name="Godstone: Lumiel's Intervention" />
+			<gd_item id="168000123" name="Godstone: Kaisinel's Fantasy" />
+			<gd_item id="168000124" name="Godstone: Zikel's Arrogance" />
+			<gd_item id="168000125" name="Godstone: Fregion's Stratagem" />
+		</gd_items>
+	</gd_rule>
+	<!-- Manastones (white) -->
+	<gd_rule rule_name="Manastones (Common)" base_chance="10" min_diff="-9" max_diff="0">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="167000226" name="Manastone: HP +20" />
+			<gd_item id="167000227" name="Manastone: MP +20" />
+			<gd_item id="167000228" name="Manastone: Accuracy +12" />
+			<gd_item id="167000229" name="Manastone: Evasion +4" />
+			<gd_item id="167000230" name="Manastone: Attack +1" />
+			<gd_item id="167000231" name="Manastone: Magic Boost +12" />
+			<gd_item id="167000232" name="Manastone: Parry +12" />
+			<gd_item id="167000233" name="Manastone: Block +12" />
+			<gd_item id="167000235" name="Manastone: Crit Strike +4" />
+			<!-- Level 20 -->
+			<gd_item id="167000258" name="Manastone: HP +30" />
+			<gd_item id="167000259" name="Manastone: MP +30" />
+			<gd_item id="167000260" name="Manastone: Accuracy +14" />
+			<gd_item id="167000261" name="Manastone: Evasion +6" />
+			<gd_item id="167000263" name="Manastone: Magic Boost +14" />
+			<gd_item id="167000264" name="Manastone: Parry +14" />
+			<gd_item id="167000265" name="Manastone: Block +14" />
+			<gd_item id="167000267" name="Manastone: Crit Strike +6" />
+			<!-- Level 30 -->
+			<gd_item id="167000290" name="Manastone: HP +40" />
+			<gd_item id="167000291" name="Manastone: MP +40" />
+			<gd_item id="167000292" name="Manastone: Accuracy +16" />
+			<gd_item id="167000293" name="Manastone: Evasion +8" />
+			<gd_item id="167000294" name="Manastone: Attack +2" />
+			<gd_item id="167000295" name="Manastone: Magic Boost +16" />
+			<gd_item id="167000296" name="Manastone: Parry +16" />
+			<gd_item id="167000297" name="Manastone: Block +16" />
+			<gd_item id="167000299" name="Manastone: Crit Strike +8" />
+			<!-- Level 40 -->
+			<gd_item id="167000322" name="Manastone: HP +50" />
+			<gd_item id="167000323" name="Manastone: MP +50" />
+			<gd_item id="167000324" name="Manastone: Accuracy +18" />
+			<gd_item id="167000325" name="Manastone: Evasion +10" />
+			<gd_item id="167000327" name="Manastone: Magic Boost +18" />
+			<gd_item id="167000328" name="Manastone: Parry +18" />
+			<gd_item id="167000329" name="Manastone: Block +18" />
+			<gd_item id="167000331" name="Manastone: Crit Strike +10" />
+			<!-- Level 50 -->
+			<gd_item id="167000354" name="Manastone: HP +60" />
+			<gd_item id="167000355" name="Manastone: MP +60" />
+			<gd_item id="167000356" name="Manastone: Accuracy +20" />
+			<gd_item id="167000357" name="Manastone: Evasion +12" />
+			<gd_item id="167000358" name="Manastone: Attack +3" />
+			<gd_item id="167000359" name="Manastone: Magic Boost +20" />
+			<gd_item id="167000360" name="Manastone: Parry +20" />
+			<gd_item id="167000361" name="Manastone: Block +20" />
+			<gd_item id="167000363" name="Manastone: Crit Strike +12" />
+			<!-- Level 60 -->
+			<gd_item id="167000543" name="Manastone: HP +70" />
+			<gd_item id="167000544" name="Manastone: MP +70" />
+			<gd_item id="167000545" name="Manastone: Accuracy +22" />
+			<gd_item id="167000546" name="Manastone: Evasion +14" />
+			<gd_item id="167000547" name="Manastone: Magic Boost +22" />
+			<gd_item id="167000548" name="Manastone: Parry +22" />
+			<gd_item id="167000549" name="Manastone: Block +22" />
+			<gd_item id="167000550" name="Manastone: Crit Strike +14" />
+			<!-- Level 70 -->
+			<gd_item id="167000758" name="Manastone: HP +80" />
+			<gd_item id="167000759" name="Manastone: MP +80" />
+			<gd_item id="167000760" name="Manastone: Accuracy +24" />
+			<gd_item id="167000761" name="Manastone: Evasion +16" />
+			<gd_item id="167000762" name="Manastone: Magic Boost +24" />
+			<gd_item id="167000763" name="Manastone: Parry +24" />
+			<gd_item id="167000764" name="Manastone: Block +24" />
+			<gd_item id="167000765" name="Manastone: Crit Strike +16" />
+		</gd_items>
+	</gd_rule>
+	<!-- Manastones (white, with odd lvl diffs) -->
+	<gd_rule rule_name="Manastones (Common)" base_chance="1" min_diff="1" max_diff="10">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="167000230" name="Manastone: Attack +1" />
+			<!-- Level 30 -->
+			<gd_item id="167000294" name="Manastone: Attack +2" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Manastones (Common)" base_chance="1" min_diff="1" max_diff="15">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="167000358" name="Manastone: Attack +3" />
+		</gd_items>
+	</gd_rule>
+	<!-- Manastones (green) -->
+	<gd_rule rule_name="Manastones (Rare)" base_chance="5" min_diff="-9" max_diff="0">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="167000418" name="Manastone: HP +55" />
+			<gd_item id="167000419" name="Manastone: MP +55" />
+			<gd_item id="167000420" name="Manastone: Accuracy +19" />
+			<gd_item id="167000421" name="Manastone: Evasion +9" />
+			<gd_item id="167000423" name="Manastone: Magic Boost +19" />
+			<gd_item id="167000424" name="Manastone: Parry +19" />
+			<gd_item id="167000425" name="Manastone: Block +19" />
+			<gd_item id="167000427" name="Manastone: Crit Strike +9" />
+			<!-- Level 30 -->
+			<gd_item id="167000450" name="Manastone: HP +65" />
+			<gd_item id="167000451" name="Manastone: MP +65" />
+			<gd_item id="167000454" name="Manastone: Attack +4" />
+			<gd_item id="167000452" name="Manastone: Accuracy +21" />
+			<gd_item id="167000453" name="Manastone: Evasion +11" />
+			<gd_item id="167000455" name="Manastone: Magic Boost +21" />
+			<gd_item id="167000456" name="Manastone: Parry +21" />
+			<gd_item id="167000457" name="Manastone: Block +21" />
+			<gd_item id="167000459" name="Manastone: Crit Strike +11" />
+			<!-- Level 40 -->
+			<gd_item id="167000482" name="Manastone: HP +75" />
+			<gd_item id="167000483" name="Manastone: MP +75" />
+			<gd_item id="167000484" name="Manastone: Accuracy +23" />
+			<gd_item id="167000485" name="Manastone: Evasion +13" />
+			<gd_item id="167000487" name="Manastone: Magic Boost +23" />
+			<gd_item id="167000488" name="Manastone: Parry +23" />
+			<gd_item id="167000489" name="Manastone: Block +23" />
+			<gd_item id="167000491" name="Manastone: Crit Strike +13" />
+			<!-- Level 50 -->
+			<gd_item id="167000514" name="Manastone: HP +85" />
+			<gd_item id="167000515" name="Manastone: MP +85" />
+			<gd_item id="167000518" name="Manastone: Attack +5" />
+			<gd_item id="167000516" name="Manastone: Accuracy +25" />
+			<gd_item id="167000517" name="Manastone: Evasion +15" />
+			<gd_item id="167000519" name="Manastone: Magic Boost +25" />
+			<gd_item id="167000520" name="Manastone: Parry +25" />
+			<gd_item id="167000521" name="Manastone: Block +25" />
+			<gd_item id="167000522" name="Manastone: Crit Strike +15" />
+			<gd_item id="167000541" name="Manastone: Magical Accuracy +12" />
+			<gd_item id="167000542" name="Manastone: Resist Magic +12" />
+			<!-- Level 60 -->
+			<gd_item id="167000551" name="Manastone: HP +95" />
+			<gd_item id="167000552" name="Manastone: MP +95" />
+			<gd_item id="167000553" name="Manastone: Accuracy +27" />
+			<gd_item id="167000554" name="Manastone: Evasion +17" />
+			<gd_item id="167000563" name="Manastone: Healing Boost +3" />
+			<gd_item id="167000555" name="Manastone: Magic Boost +27" />
+			<gd_item id="167000556" name="Manastone: Parry +27" />
+			<gd_item id="167000557" name="Manastone: Block +27" />
+			<gd_item id="167000558" name="Manastone: Crit Strike +17" />
+			<gd_item id="167000560" name="Manastone: Magical Accuracy +14" />
+			<gd_item id="167000559" name="Manastone: Maximum Flight Time +7" />
+			<gd_item id="167000561" name="Manastone: Resist Magic +14" />
+			<!-- Level 70 -->
+			<gd_item id="167000766" name="Manastone: HP +100" />
+			<gd_item id="167000767" name="Manastone: MP +105" />
+			<gd_item id="167000768" name="Manastone: Accuracy +29" />
+			<gd_item id="167000769" name="Manastone: Evasion +19" />
+			<gd_item id="167000770" name="Manastone: Magic Boost +28" />
+			<gd_item id="167000771" name="Manastone: Parry +29" />
+			<gd_item id="167000772" name="Manastone: Block +29" />
+			<gd_item id="167000773" name="Manastone: Crit Strike +19" />
+			<gd_item id="167000775" name="Manastone: Magical Accuracy +16" />
+			<gd_item id="167000776" name="Manastone: Resist Magic +16" />
+			<gd_item id="167000777" name="Manastone: Crit Spell +5" />
+		</gd_items>
+	</gd_rule>
+	<!-- Manastones (green, with odd level diffs) -->
+	<gd_rule rule_name="Manastones (Rare)" base_chance="0.5" min_diff="1" max_diff="10">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="167000454" name="Manastone: Attack +4" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Manastones (Rare)" base_chance="0.5" min_diff="1" max_diff="15">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="167000518" name="Manastone: Attack +5" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Manastones (Rare)" base_chance="0.5" min_diff="1" max_diff="5">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="167000559" name="Manastone: Maximum Flight Time +7" />
+			<gd_item id="167000563" name="Manastone: Healing Boost +3" />
+		</gd_items>
+	</gd_rule>
+</global_rules>
