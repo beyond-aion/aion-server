@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="global_rules.xsd">
-	<gd_rule rule_name="Windy Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<gd_rule rule_name="Windy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -23,8 +21,7 @@
 			<gd_item id="152012562" name="Windy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Sylvan Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Sylvan Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -44,8 +41,7 @@
 			<gd_item id="152012563" name="Sylvan Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mysterious Anima" min_count="1"
-		base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Mysterious Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -73,8 +69,7 @@
 			<gd_item id="152012564" name="Mysterious Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Snowy Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Snowy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -95,8 +90,7 @@
 			<gd_item id="152012565" name="Snowy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Devastated Anima" min_count="1"
-		base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Devastated Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -118,8 +112,7 @@
 			<gd_item id="152012566" name="Devastated Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mossy Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Mossy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>
@@ -143,8 +136,7 @@
 			<gd_item id="152012567" name="Mossy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Waterlogged Anima" min_count="1"
-		base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Waterlogged Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600060000" name="Danaria" />
 		</gd_maps>

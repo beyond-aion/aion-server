@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="global_rules.xsd">
-	<gd_rule rule_name="Junk Taloc's Leaf Fragment" min_count="1"
-		base_chance="40" min_diff="-5" max_diff="10">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<gd_rule rule_name="Junk Taloc's Leaf Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
 		<gd_maps>
 			<gd_map map_id="300190000" name="Taloc's Hollow" />
 		</gd_maps>
@@ -25,8 +23,7 @@
 			<gd_item id="182005957" name="Taloc's Leaf Fragment" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Stem Fragment" min_count="1"
-		base_chance="40" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Junk Taloc's Stem Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
 		<gd_maps>
 			<gd_map map_id="300190000" name="Taloc's Hollow" />
 		</gd_maps>
@@ -48,8 +45,7 @@
 			<gd_item id="182005958" name="Taloc's Stem Fragment" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Root Fragment" min_count="1"
-		base_chance="40" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Junk Taloc's Root Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
 		<gd_maps>
 			<gd_map map_id="300190000" name="Taloc's Hollow" />
 		</gd_maps>
@@ -67,8 +63,7 @@
 			<gd_item id="182005959" name="Taloc's Root Fragment" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Aether Permeated Taloc Leaf"
-		min_count="1" base_chance="30" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Common Aether Permeated Taloc Leaf" min_count="1" base_chance="30" min_diff="-5" max_diff="10">
 		<gd_maps>
 			<gd_map map_id="300190000" name="Taloc's Hollow" />
 		</gd_maps>
@@ -91,8 +86,7 @@
 			<gd_item id="152012051" name="Aether Permeated Taloc Leaf" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Poisoned Taloc Leaf" min_count="1"
-		base_chance="30" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Common Poisoned Taloc Leaf" min_count="1" base_chance="30" min_diff="-5" max_diff="10">
 		<gd_maps>
 			<gd_map map_id="300190000" name="Taloc's Hollow" />
 		</gd_maps>

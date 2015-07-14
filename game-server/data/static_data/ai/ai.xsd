@@ -4,6 +4,7 @@
 	<xs:element name="ai_templates">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element name="ai" type="Ai" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>

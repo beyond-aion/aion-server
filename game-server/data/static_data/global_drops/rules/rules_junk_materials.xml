@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="global_rules.xsd">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<gd_rule rule_name="JUNK_AGRINT_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182003823" name="Rotten Agrint Root"/>

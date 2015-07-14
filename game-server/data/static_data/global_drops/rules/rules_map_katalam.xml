@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="global_rules.xsd">
-	<gd_rule rule_name="Grassy Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<gd_rule rule_name="Grassy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam" />
 		</gd_maps>
@@ -30,8 +28,7 @@
 			<gd_item id="152012559" name="Grassy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tainted Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Tainted Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam" />
 		</gd_maps>
@@ -49,8 +46,7 @@
 			<gd_item id="152012560" name="Tainted Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Frozen Anima" min_count="1" base_chance="5"
-		min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Frozen Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam" />
 		</gd_maps>

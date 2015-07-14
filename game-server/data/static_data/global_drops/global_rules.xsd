@@ -8,6 +8,7 @@
 	<xs:element name="global_rules">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rule" type="GlobalRule"/>
 			</xs:sequence>
 		</xs:complexType>
@@ -47,7 +48,7 @@
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropItem">
-        <xs:attribute type="xs:int" name="id" use="optional"/>
+        <xs:attribute type="xs:int" name="id" use="required"/>
         <xs:attribute type="xs:string" name="name" use="optional"/>
 	</xs:complexType>
 

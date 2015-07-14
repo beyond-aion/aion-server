@@ -1,11 +1,14 @@
 <?xml version="1.0" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="fortress" type="fortress"/>
+	<xs:element name="source" type="source"/>
 	<xs:element name="siege_schedule" type="siegeSchedule"/>
 	<xs:complexType name="siegeSchedule">
 		<xs:sequence>
-			<xs:element ref="fortress" minOccurs="1" maxOccurs="unbounded"/>
-			<xs:element ref="source" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="fortress" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element ref="source" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="fortress">

@@ -87,12 +87,8 @@
 		<import file="pet_skills" skipRoot="true"/>
 	</pet_skill_templates>
 	<import file="pets/pets.xml"/>
-	<pet_feed>
-		<import file="pets/pet_feed.xml" skipRoot="true"/>
-	</pet_feed>
-	<dopings>
-		<import file="pets/pet_doping.xml" skipRoot="true"/>
-	</dopings>
+	<import file="pets/pet_feed.xml"/>
+	<import file="pets/pet_doping.xml"/>
 	<import file="quest_data/quest_data.xml"/>
 	<quest_scripts>
 		<import file="quest_script_data" skipRoot="true"/>
@@ -143,9 +139,7 @@
 	<import file="cosmetic_items/cosmetic_items.xml"/>
 	<import file="npc_shouts/npc_shouts.xml"/>
 	<import file="auto_group/auto_group.xml"/>
-	<events_config>
-		<import file="events_config/events_config.xml" skipRoot="true"/>
-	</events_config>
+	<import file="events_config/events_config.xml"/>
 	<import file="polymorph_panels/polymorph_panels.xml"/>
 	<import file="instance_bonusattr/instance_bonusattr.xml"/>
 	<import file="housing/housing_objects.xml"/>

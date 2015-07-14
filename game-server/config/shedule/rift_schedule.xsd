@@ -9,12 +9,12 @@
 	</xs:complexType>
 	<xs:complexType name="rift">
 		<xs:sequence>
-			<xs:attribute name="open" type="OpenRift" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="open" type="OpenRift" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="OpenRift">
-		<xs:attribute name="spawn" type="xs:boolean" use="required"/>
+		<xs:attribute name="spawn" type="xs:boolean" use="optional"/>
 		<xs:attribute name="schedule" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>

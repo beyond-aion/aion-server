@@ -5,7 +5,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="pet_skill" type="PetSkill" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="pet_skill" type="PetSkill" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

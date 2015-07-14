@@ -11,7 +11,7 @@
 
 	<xs:complexType name="IGCategory">
 		<xs:sequence>
-			<xs:element name="sub_category" type="IGSubCategory" minOccurs="0" maxOccurs="16"/>
+			<xs:element name="sub_category" type="IGSubCategory" minOccurs="0" maxOccurs="18"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int" use="required"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
