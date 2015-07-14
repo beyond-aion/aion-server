@@ -21,7 +21,7 @@ public class cmd_noexp extends PlayerCommand {
 		}
 		else {
 			player.getCommonData().setNoExp(true);
-			PacketSendUtility.sendMessage(player, "Experience rewards are desactivated !");
+			PacketSendUtility.sendMessage(player, "Experience rewards are deactivated !");
 		}
 	}
 
