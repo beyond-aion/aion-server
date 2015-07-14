@@ -69,19 +69,21 @@ public class DropInfo extends AdminCommand {
 				currentNpc = ((Npc)visibleObject);
 			}
 		}
-		if (npcDrop == null){
+		if (npcDrop == null && !EventsConfig.ENABLE_EVENT_SERVICE && !DropConfig.ENABLE_GLOBAL_DROPS) {
 			PacketSendUtility.sendMessage(player, "No drops for the selected NPC");
 			return;
 		}
 		
 		int count = 0;
-		PacketSendUtility.sendMessage(player, "[Drop Info for the specified NPC]\n");
-		for (DropGroup dropGroup: npcDrop.getDropGroup()){
-			String maxItems = (DropConfig.DROP_ENABLE_SUPPORT_NEW_DROP_CATEGORY_CALCULATION && DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES ? " MaxDropGroup: " + dropGroup.getMaxItems() : (dropGroup.isUseCategory() ?  " MaxDropGroup: 1": " MaxDropGroup: 99"));
-			PacketSendUtility.sendMessage(player, "DropGroup: "+ dropGroup.getGroupName() + maxItems);
-			for (Drop drop : dropGroup.getDrop()){
-				PacketSendUtility.sendMessage(player, "[item:" + drop.getItemId() + "]" + "	Rate: " + drop.getChance());
-				count ++;
+		PacketSendUtility.sendMessage(player, "\n[Drop Info for the specified NPC]");
+		if (npcDrop != null) {
+			for (DropGroup dropGroup: npcDrop.getDropGroup()){
+				String maxItems = (DropConfig.DROP_ENABLE_SUPPORT_NEW_DROP_CATEGORY_CALCULATION && DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES ? " MaxDropGroup: " + dropGroup.getMaxItems() : (dropGroup.isUseCategory() ?  " MaxDropGroup: 1": " MaxDropGroup: 99"));
+				PacketSendUtility.sendMessage(player, "DropGroup: "+ dropGroup.getGroupName() + maxItems);
+				for (Drop drop : dropGroup.getDrop()){
+					PacketSendUtility.sendMessage(player, "[item:" + drop.getItemId() + "]" + "	Rate: " + drop.getChance());
+					count ++;
+				}
 			}
 		}
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
@@ -278,6 +280,8 @@ public class DropInfo extends AdminCommand {
 						continue;
 					if (!checkGlobalRuleNpcs (rule, currentNpc))
 						continue;
+					if (!checkGlobalRuleNpcGroups(rule, currentNpc)) //drop group from npc_templates
+						continue;
 					//not used anymore, converted into Ids during Load Static Data
 					//if (!checkGlobalRuleNpcNames (rule, currentNpc))
 					//	continue;
@@ -417,6 +421,21 @@ public class DropInfo extends AdminCommand {
 		}
 		return true;
 	}
+	
+	private boolean checkGlobalRuleNpcGroups (GlobalRule rule, Npc npc) {
+		if (rule.getGlobalRuleNpcGroups() != null) {
+			boolean	stepCheck= false;
+			for (GlobalDropNpcGroup gdGroup : rule.getGlobalRuleNpcGroups().getGlobalDropNpcGroups()) {
+				if (gdGroup.getGroup().equals(npc.getGroupDrop())) {
+					stepCheck = true;
+					break;
+				}	
+			}	
+			return stepCheck;
+		}
+		return true;
+	}
+	
 	//not used anymore, converted into Ids during Load Static Data
 /**
 	private boolean checkGlobalRuleNpcNames (GlobalRule rule, Npc npc) {
@@ -441,7 +460,6 @@ public class DropInfo extends AdminCommand {
 		return true;
 	}
 **/
-	
 	private boolean checkGlobalRuleExcludedNpcs (GlobalRule rule, Npc npc) {
 		boolean stepCheck= false;
 		if (rule.getGlobalRuleExcludedNpcs() != null) {
