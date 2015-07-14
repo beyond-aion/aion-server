@@ -48,6 +48,18 @@ public class GMList extends AdminCommand {
 						case 5:
 							nameFormat = AdminConfig.CUSTOMTAG_ACCESS5;
 							break;
+						case 6:
+							nameFormat = AdminConfig.CUSTOMTAG_ACCESS6;
+							break;
+						case 7:
+							nameFormat = AdminConfig.CUSTOMTAG_ACCESS7;
+							break;
+						case 8:
+							nameFormat = AdminConfig.CUSTOMTAG_ACCESS8;
+							break;
+						case 9:
+							nameFormat = AdminConfig.CUSTOMTAG_ACCESS9;
+							break;
 					}
 				}
 

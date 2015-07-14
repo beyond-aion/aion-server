@@ -14,8 +14,6 @@ public class AdminConfig {
 	public static int GM_LEVEL;
 	@Property(key = "gameserver.administration.gmpanel", defaultValue = "3")
 	public static int GM_PANEL;
-	@Property(key = "gameserver.administration.baseshield", defaultValue = "3")
-	public static int COMMAND_BASESHIELD;
 	@Property(key = "gameserver.administration.flight.freefly", defaultValue = "3")
 	public static int GM_FLIGHT_FREE;
 	@Property(key = "gameserver.administration.flight.unlimited", defaultValue = "3")
@@ -42,8 +40,6 @@ public class AdminConfig {
 	public static boolean VISION_GM_CONNECTION;
 	@Property(key = "gameserver.administration.whisper.gm.connection", defaultValue = "false")
 	public static boolean WHISPER_GM_CONNECTION;
-	@Property(key = "gameserver.administration.quest.dialog.log", defaultValue = "false")
-	public static boolean QUEST_DIALOG_LOG;
 	@Property(key = "gameserver.administration.trade.item.restriction", defaultValue = "false")
 	public static boolean ENABLE_TRADEITEM_RESTRICTION;
 
@@ -62,6 +58,14 @@ public class AdminConfig {
 	public static String CUSTOMTAG_ACCESS4;
 	@Property(key = "gameserver.customtag.access5", defaultValue = "<TAG_HERE> %s")
 	public static String CUSTOMTAG_ACCESS5;
+	@Property(key = "gameserver.customtag.access6", defaultValue = "<TAG_HERE> %s")
+	public static String CUSTOMTAG_ACCESS6;
+	@Property(key = "gameserver.customtag.access7", defaultValue = "<TAG_HERE> %s")
+	public static String CUSTOMTAG_ACCESS7;
+	@Property(key = "gameserver.customtag.access8", defaultValue = "<TAG_HERE> %s")
+	public static String CUSTOMTAG_ACCESS8;
+	@Property(key = "gameserver.customtag.access9", defaultValue = "<TAG_HERE> %s")
+	public static String CUSTOMTAG_ACCESS9;
 	
 	@Property(key = "gameserver.admin.announce.levels", defaultValue = "*")
 	public static String ANNOUNCE_LEVEL_LIST;
