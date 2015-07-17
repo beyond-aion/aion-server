@@ -22,6 +22,8 @@ public class CM_PLAYER_AUTH extends GsClientPacket
 	private int playerId;
 	private String playerLogin;
 	private String nick;
+	private int accessLevel;
+	private int raceId;
 
 	public CM_PLAYER_AUTH(ByteBuffer buf, GsConnection connection)
 	{
@@ -34,6 +36,8 @@ public class CM_PLAYER_AUTH extends GsClientPacket
 		playerId = readD();
 		playerLogin = readS();
 		nick = readS();
+		accessLevel = readD();
+		raceId = readD();
 	}
 
 	@Override
