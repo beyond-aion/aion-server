@@ -3030,6 +3030,10 @@
 		<spawn npc_id="203621" respawn_time="295">
 			<spot x="1880.24" y="706.68" z="258.21" h="112" walker_id="BE9D882E3D9AFDEF96FFA5076FA3C28436E1A124"/>
 		</spawn>
+    <!-- Shezen -->
+    <spawn npc_id="804605" respawn_time="295">
+      <spot x="2892.2" y="1485.3" z="249.24" h="36"/>
+    </spawn>
 		<!-- Shugo Laborer -->
 		<spawn npc_id="798104" respawn_time="295">
 			<spot x="2628.57" y="1644.75" z="253.42188" h="7" walker_id="51AA479BFB5537E99E45B1A35522BA4F4841F143"/>
