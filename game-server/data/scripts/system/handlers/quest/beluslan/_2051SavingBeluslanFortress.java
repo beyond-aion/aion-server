@@ -8,6 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Rhys2002
@@ -88,7 +89,8 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 				case SETPRO2:
 					return defaultCloseDialog(env, 1, 11);
 				case SETPRO3:
-					return defaultCloseDialog(env, 2, 3);
+					defaultCloseDialog(env, 2, 3);
+					return TeleportService2.teleportTo(player, 120010000, 1368.81f, 1054.69f, 206.53f, (byte)89);
 				case SETPRO7:
 					return defaultCloseDialog(env, 6, 7);
 			}
@@ -134,6 +136,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 11)
+						TeleportService2.teleportTo(player, 220040000, 370.05f, 427.5f, 222.11f, (byte)109);
 						return useQuestObject(env, 11, 2, false, 0);
 			}
 		}
