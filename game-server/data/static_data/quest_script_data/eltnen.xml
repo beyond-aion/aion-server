@@ -364,15 +364,15 @@
 	<item_collecting id="1480" start_npc_ids="203912" end_npc_ids="203898"/>
 	<item_collecting id="1481" start_npc_ids="203898"/>
 	<item_collecting id="1486" start_npc_ids="203923"/>
-	<item_collecting id="1487" start_npc_ids="798126"/>
+	<item_collecting id="1487" start_npc_ids="204000"/>
 	<item_collecting id="1490" start_npc_ids="798126" end_npc_ids="204007"/>
 	<item_collecting id="1491" start_npc_ids="798151"/>
 	<item_collecting id="1492" start_npc_ids="798151"/>
 	<item_collecting id="1493" start_npc_ids="798151"/>
 	<item_collecting id="1494" start_npc_ids="798151"/>
 	<item_collecting id="1495" start_npc_ids="798151"/>
-	<item_collecting id="1496" start_npc_ids="204045"/>
-	<item_collecting id="1498" start_npc_ids="204045"/>
+	<item_collecting id="1496" start_npc_ids="204045" end_npc_ids="204004"/>
+	<item_collecting id="1498" start_npc_ids="204004"/>
 	<item_collecting id="3303" start_npc_ids="203994"/>
 	<item_collecting id="3304" start_npc_ids="204042"/>
 	<item_collecting id="3305" start_npc_ids="204042"/>
@@ -562,7 +562,7 @@
 		<monster var="1" end_var="1" npc_ids="213796"/>
 		<monster var="2" end_var="1" npc_ids="213797"/>
 	</monster_hunt>
-	<monster_hunt id="1497" start_npc_ids="204045">
+	<monster_hunt id="1497" start_npc_ids="204003">
 		<monster var="0" end_var="5" npc_ids="235478 235479"/>
 		<monster var="1" end_var="5" npc_ids="235470 235471"/>
 	</monster_hunt>

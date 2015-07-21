@@ -136,7 +136,7 @@
 	<item_collecting id="1132" start_npc_ids="203101" end_npc_ids="203097"/>
 	<item_collecting id="1136" start_npc_ids="203100"/>
 	<item_collecting id="1137" start_npc_ids="203111"/>
-	<item_collecting id="1144" start_npc_ids="730001" end_npc_ids="203130"/>
+	<item_collecting id="1144" start_npc_ids="203130"/>
 	<item_collecting id="1145" start_npc_ids="203124"/>
 	<item_collecting id="1148" start_npc_ids="203154"/>
 	<item_collecting id="1151" start_npc_ids="203125"/>

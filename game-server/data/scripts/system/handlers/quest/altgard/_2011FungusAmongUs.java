@@ -43,7 +43,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
 		if (targetId == 700092) {
-			if (var > 0 && var < 6) {
+			if (var > 1 && var < 6) {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;

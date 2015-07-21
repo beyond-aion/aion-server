@@ -1057,7 +1057,7 @@
 		</spawn>
 		<!-- Gallant Guestbloom -->
 		<spawn npc_id="730524" respawn_time="295">
-			<spot x="1166.7133" y="1477.1891" z="102.29111" h="62"/>
+			<spot x="1166.7133" y="1477.1891" z="101.78" h="62"/>
 		</spawn>
 		<!-- Ganakas -->
 		<spawn npc_id="830445" respawn_time="295">
@@ -1779,7 +1779,7 @@
 		</spawn>
 		<!-- Lockbuster -->
 		<spawn npc_id="730534" respawn_time="295">
-			<spot x="1154.6118" y="1482.9836" z="102.60033" h="95"/>
+			<spot x="1154.6118" y="1482.9836" z="101.78" h="95"/>
 		</spawn>
 		<!-- Logirunerk -->
 		<spawn npc_id="830662" respawn_time="295">

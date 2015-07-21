@@ -85,7 +85,7 @@ public class _1346KillingforCastor extends QuestHandler {
 		}
 		else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203965) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(1) == 6 && qs.getQuestVarById(0) == 4) {
+				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 9) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
