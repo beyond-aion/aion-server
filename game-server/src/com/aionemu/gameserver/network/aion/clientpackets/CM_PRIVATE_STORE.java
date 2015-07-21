@@ -59,17 +59,17 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 			int itemObjId = readD();
 			int itemId = readD();
 			int count = readH();
-			long price = readD();
+			long price = readQ();
 			Item item = activePlayer.getInventory().getItemByObjId(itemObjId);
 			if ((price < 0 || item == null || item.getItemId() != itemId || item.getItemCount() < count) && !cancelStore) {
 				PacketSendUtility.sendMessage(activePlayer, "Invalid item.");
 				cancelStore = true;
-                                return;
+				return;
 			}
 			else if (item.getPackCount() <= 0 && !item.isTradeable(activePlayer)) {
 				PacketSendUtility.sendPacket(activePlayer, new SM_SYSTEM_MESSAGE(1300344, new DescriptionId(item.getNameId())));
 				cancelStore = true;
-                                return;
+				return;
 			}
 
 			tradePSItems[i] = new TradePSItem(itemObjId, itemId, count, price);
@@ -84,13 +84,13 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 		if (activePlayer.getLifeStats().isAlreadyDead()) {
 			return;
 		}
-		
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_PRIVATESTORE) {
+
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_PRIVATESTORE) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		if (!cancelStore && itemCount > 0) {
 			PrivateStoreService.addItems(activePlayer, tradePSItems);
 		}
