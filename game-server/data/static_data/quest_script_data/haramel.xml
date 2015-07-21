@@ -33,7 +33,7 @@
 	<report_to id="28506" start_npc_ids="799523" end_npc_ids="799524"/>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18501" start_npc_ids="799522" end_npc_ids="799523"/>
-	<item_collecting id="18503" start_npc_ids="799523" end_npc_ids="790000"/>
+	<item_collecting id="18503" start_npc_ids="799523" end_npc_ids="203166"/>
 	<item_collecting id="18505" start_npc_ids="203166" end_npc_ids="203106"/>
 	<item_collecting id="18509" start_npc_ids="799523" end_npc_ids="799524"/>
 	<item_collecting id="28501" start_npc_ids="799522" end_npc_ids="799523"/>
