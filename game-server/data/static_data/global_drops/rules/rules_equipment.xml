@@ -9120,26 +9120,26 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 25 -->
-			<gd_item id="114300387" name="Descendant's Boots" />
-			<gd_item id="110600412" name="Descendant's Breastplate" />
-			<gd_item id="113300372" name="Descendant's Breeches" />
-			<gd_item id="114500405" name="Descendant's Brogans" />
-			<gd_item id="113500397" name="Descendant's Chausses" />
-			<gd_item id="111600388" name="Descendant's Gauntlets" />
-			<gd_item id="111100356" name="Descendant's Gloves" />
-			<gd_item id="113600381" name="Descendant's Greaves" />
-			<gd_item id="111500398" name="Descendant's Handguards" />
-			<gd_item id="110500415" name="Descendant's Hauberk" />
-			<gd_item id="110300384" name="Descendant's Jerkin" />
-			<gd_item id="113100358" name="Descendant's Leggings" />
-			<gd_item id="112100326" name="Descendant's Pauldrons" />
-			<gd_item id="114600378" name="Descendant's Sabatons" />
-			<gd_item id="114100378" name="Descendant's Shoes" />
-			<gd_item id="112300328" name="Descendant's Shoulderguards" />
-			<gd_item id="112600370" name="Descendant's Shoulderplates" />
-			<gd_item id="112500369" name="Descendant's Spaulders" />
-			<gd_item id="110100426" name="Descendant's Tunic" />
-			<gd_item id="111300355" name="Descendant's Vambrace" />
+			<gd_item id="114300430" name="Departed Soul's Boots" />
+			<gd_item id="110600455" name="Departed Soul's Breastplate" />
+			<gd_item id="113300416" name="Departed Soul's Breeches" />
+			<gd_item id="114500447" name="Departed Soul's Brogans" />
+			<gd_item id="113500439" name="Departed Soul's Chausses" />
+			<gd_item id="111600429" name="Departed Soul's Gauntlets" />
+			<gd_item id="111100401" name="Departed Soul's Gloves" />
+			<gd_item id="113600423" name="Departed Soul's Greaves" />
+			<gd_item id="111500441" name="Departed Soul's Handguards" />
+			<gd_item id="110500459" name="Departed Soul's Hauberk" />
+			<gd_item id="110300431" name="Departed Soul's Jerkin" />
+			<gd_item id="113100400" name="Departed Soul's Leggings" />
+			<gd_item id="112100366" name="Departed Soul's Pauldrons" />
+			<gd_item id="114600416" name="Departed Soul's Sabatons" />
+			<gd_item id="114100417" name="Departed Soul's Shoes" />
+			<gd_item id="112300366" name="Departed Soul's Shoulderguards" />
+			<gd_item id="112600410" name="Departed Soul's Shoulderplates" />
+			<gd_item id="112500405" name="Departed Soul's Spaulders" />
+			<gd_item id="110100469" name="Departed Soul's Tunic" />
+			<gd_item id="111300403" name="Departed Soul's Vambrace" />
 			<!-- Level 35 -->
 			<gd_item id="114300436" name="Dolan's Boots" />
 			<gd_item id="110600461" name="Dolan's Breastplate" />
@@ -9196,26 +9196,26 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 25 -->
-			<gd_item id="114300430" name="Departed Soul's Boots" />
-			<gd_item id="110600455" name="Departed Soul's Breastplate" />
-			<gd_item id="113300416" name="Departed Soul's Breeches" />
-			<gd_item id="114500447" name="Departed Soul's Brogans" />
-			<gd_item id="113500439" name="Departed Soul's Chausses" />
-			<gd_item id="111600429" name="Departed Soul's Gauntlets" />
-			<gd_item id="111100401" name="Departed Soul's Gloves" />
-			<gd_item id="113600423" name="Departed Soul's Greaves" />
-			<gd_item id="111500441" name="Departed Soul's Handguards" />
-			<gd_item id="110500459" name="Departed Soul's Hauberk" />
-			<gd_item id="110300431" name="Departed Soul's Jerkin" />
-			<gd_item id="113100400" name="Departed Soul's Leggings" />
-			<gd_item id="112100366" name="Departed Soul's Pauldrons" />
-			<gd_item id="114600416" name="Departed Soul's Sabatons" />
-			<gd_item id="114100417" name="Departed Soul's Shoes" />
-			<gd_item id="112300366" name="Departed Soul's Shoulderguards" />
-			<gd_item id="112600410" name="Departed Soul's Shoulderplates" />
-			<gd_item id="112500405" name="Departed Soul's Spaulders" />
-			<gd_item id="110100469" name="Departed Soul's Tunic" />
-			<gd_item id="111300403" name="Departed Soul's Vambrace" />
+			<gd_item id="114300387" name="Descendant's Boots" />
+			<gd_item id="110600412" name="Descendant's Breastplate" />
+			<gd_item id="113300372" name="Descendant's Breeches" />
+			<gd_item id="114500405" name="Descendant's Brogans" />
+			<gd_item id="113500397" name="Descendant's Chausses" />
+			<gd_item id="111600388" name="Descendant's Gauntlets" />
+			<gd_item id="111100356" name="Descendant's Gloves" />
+			<gd_item id="113600381" name="Descendant's Greaves" />
+			<gd_item id="111500398" name="Descendant's Handguards" />
+			<gd_item id="110500415" name="Descendant's Hauberk" />
+			<gd_item id="110300384" name="Descendant's Jerkin" />
+			<gd_item id="113100358" name="Descendant's Leggings" />
+			<gd_item id="112100326" name="Descendant's Pauldrons" />
+			<gd_item id="114600378" name="Descendant's Sabatons" />
+			<gd_item id="114100378" name="Descendant's Shoes" />
+			<gd_item id="112300328" name="Descendant's Shoulderguards" />
+			<gd_item id="112600370" name="Descendant's Shoulderplates" />
+			<gd_item id="112500369" name="Descendant's Spaulders" />
+			<gd_item id="110100426" name="Descendant's Tunic" />
+			<gd_item id="111300355" name="Descendant's Vambrace" />
 			<!-- Level 35 -->
 			<gd_item id="114300392" name="Judgment Boots" />
 			<gd_item id="110600418" name="Judgment Breastplate" />
