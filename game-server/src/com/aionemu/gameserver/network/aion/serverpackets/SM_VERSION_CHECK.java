@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.TimeZone;
 
 import com.aionemu.gameserver.GameServer;
