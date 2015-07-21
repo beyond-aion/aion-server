@@ -162,6 +162,11 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 		return 0;
 	}
 
+	/**
+	 * Read short from this packet buffer.
+	 * 
+	 * @return int
+	 */
 	protected final int readH() {
 		try {
 			return buf.getShort() & 0xFFFF;

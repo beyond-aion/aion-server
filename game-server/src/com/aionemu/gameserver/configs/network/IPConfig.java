@@ -38,10 +38,6 @@ public class IPConfig {
 	 * Default address
 	 */
 	private static byte[] defaultAddress;
-	/**
-	 * Chat server address
-	 */
-	private static byte[] chatserverAddress;
 
 	/**
 	 * Method that loads IPConfig
@@ -57,7 +53,6 @@ public class IPConfig {
 					if (qName.equals("ipconfig")) {
 						try {
 							defaultAddress = InetAddress.getByName(attributes.getValue("default")).getAddress();
-							chatserverAddress = InetAddress.getByName(attributes.getValue("chat_server")).getAddress();
 						}
 						catch (UnknownHostException e) {
 							throw new RuntimeException("Failed to resolve DSN for address: " + attributes.getValue("default"), e);
@@ -95,9 +90,5 @@ public class IPConfig {
 	 */
 	public static byte[] getDefaultAddress() {
 		return defaultAddress;
-	}
-	
-	public static byte[] getChatServerAddress() {
-		return chatserverAddress;
 	}
 }

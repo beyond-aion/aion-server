@@ -1,10 +1,13 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.TimeZone;
+
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.network.NetworkController;
@@ -65,6 +68,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		//aion 3.0.0.0 = 194
+		//aion 3.1.0.0 = 195
 		//aion 3.5.0.0 = 196
 		//aion 4.0.0.0 = 201
 		//aion 4.5.0.0 = 203
@@ -102,8 +106,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		else {
 			writeC(serverMode | characterCreateMode);
 		}
-
-		writeD((int) (System.currentTimeMillis() / 1000 - 29520)); //TODO Why 29520?
+		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond());// server time
 		writeH(350);//unk
 		writeH(2561);//unk
 		writeH(2561);//unk
@@ -114,9 +117,9 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(EventService.getInstance().getEventType().getId());
 		writeC(0);//unk
 		writeC(0);//unk
-		writeD(1415577600);//unk
-		writeC(0x00);//unk
-		writeC(0x00);//unk
+		writeD(0 * 65536); // negative server time offset (timeInSeconds * 2^16, accepts only positive numbers)
+		writeC(0x00);// unk (server time related)
+		writeC(0x00);// unk (server time related)
 		writeC(0x04);//unk
 		writeC(120);//unk
 		writeH(25233);//unk
@@ -137,7 +140,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		{
 			writeC(0x00);//spacer
 			// if the correct ip is not sent it will not work
-			writeB(IPConfig.getChatServerAddress());
+			writeB(ChatService.getIp());
 			writeH(ChatService.getPort());
 		}
 	}
