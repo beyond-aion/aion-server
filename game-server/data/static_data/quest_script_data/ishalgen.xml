@@ -62,7 +62,7 @@
 	<report_to id="2131" start_npc_ids="203515" end_npc_ids="203542"/>
 	<report_to id="2137" start_npc_ids="203539" end_npc_ids="203541"/>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="2104" start_npc_ids="203502"/>
+	<item_collecting id="2104" start_npc_ids="203502" end_npc_ids="203526"/>
 	<item_collecting id="2105" start_npc_ids="203502"/>
 	<item_collecting id="2108" start_npc_ids="798037"/>
 	<item_collecting id="2109" start_npc_ids="203532"/>
