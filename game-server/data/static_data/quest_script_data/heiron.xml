@@ -586,15 +586,14 @@
 		<monster var="0" end_var="15" npc_ids="211918 211919"/>
 		<monster var="1" end_var="12" npc_ids="211920 211921"/>
 	</monster_hunt>
-	<!-- [Group] It's for Your Own Good -->
 	<monster_hunt id="1652" start_npc_ids="204533">
 		<monster var="0" end_var="7" npc_ids="212600 212601"/>
 		<monster var="1" end_var="7" npc_ids="212603 212604"/>
 		<monster var="2" end_var="12" npc_ids="212596 212597"/>
 	</monster_hunt>
-	<monster_hunt id="1654" start_npc_ids="204600">
-		<monster var="0" end_var="5" npc_ids="219107 219108 219134 219136 219133 219135"/>
-		<monster var="1" end_var="4" npc_ids="219110 219138"/>
+	<monster_hunt id="1654" start_npc_ids="800413">
+		<monster var="0" end_var="5" npc_ids="219107 219108"/>
+		<monster var="1" end_var="4" npc_ids="219110"/>
 	</monster_hunt>
 	<monster_hunt id="1662" start_npc_ids="204602">
 		<monster var="0" end_var="3" npc_ids="219050"/>
