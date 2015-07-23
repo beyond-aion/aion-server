@@ -604,9 +604,9 @@
 	<monster_hunt id="1665" start_npc_ids="204610">
 		<monster var="0" end_var="1" npc_ids="212280"/>
 	</monster_hunt>
-	<monster_hunt id="1666" start_npc_ids="204601">
-		<monster var="0" end_var="5" npc_ids="219112 219139"/>
-		<monster var="1" end_var="5" npc_ids="219106 219131"/>
+	<monster_hunt id="1666" start_npc_ids="800413">
+		<monster var="0" end_var="5" npc_ids="213974 214055"/>
+		<monster var="1" end_var="5" npc_ids="213964 213965 219106 214046 214044 214045"/>
 	</monster_hunt>
 	<monster_hunt id="1667" start_npc_ids="205306">
 		<monster var="0" end_var="5" npc_ids="211231 211246"/>
