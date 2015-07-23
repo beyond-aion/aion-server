@@ -28,8 +28,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 798928, 798975, 798981, 730226, 730227, 730228, 798513, 798225, 798979, 798990, 730295, 700604,
-			730229 };
+		int[] npcs = { 798928, 798975, 798981, 730226, 730227, 730228, 798513, 798225, 798979, 798990, 730295, 700604, 730229 };
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
@@ -40,6 +39,16 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
+	}
+	
+	@Override
+	public boolean onZoneMissionEndEvent(QuestEnv env) {
+		return defaultOnZoneMissionEndEvent(env);
+	}
+
+	@Override
+	public boolean onLvlUpEvent(QuestEnv env) {
+		return defaultOnLvlUpEvent(env, 10020, true);
 	}
 
 	@Override
@@ -294,8 +303,6 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
 
-		final Npc npc = (Npc) env.getVisibleObject();
-
 		switch (env.getTargetId()) {
 			case 216531:
 				if (qs.getQuestVarById(0) == 14 || qs.getQuestVarById(0) == 15) {
@@ -306,16 +313,5 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 				}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = { 1094, 10020 };
-		return defaultOnLvlUpEvent(env, quests, true);
 	}
 }
