@@ -64129,4 +64129,20 @@
 	<npcskills npcid="701950">
         <npcskill skillid="21420" skilllevel="1" probability="100"/>
     </npcskills>
+	<npcskills npcid="235064"> <!-- Empowered Veille -->
+		<npcskill skillid="21773" skilllevel="65" probability="100" cooldown="20000" maxhp="95"/>
+		<npcskill skillid="21774" skilllevel="65" probability="100" cooldown="40000" maxhp="95"/>
+		<npcskill skillid="21775" skilllevel="65" probability="100" cooldown="60000" maxhp="95"/>
+		<npcskill skillid="21776" skilllevel="65" probability="100" cooldown="50000" maxhp="95"/>
+		<npcskill skillid="21777" skilllevel="65" probability="100" cooldown="90000" maxhp="50"/>
+		<npcskill skillid="21778" skilllevel="65" probability="100" cooldown="300000" maxhp="50"/>
+	</npcskills>
+	<npcskills npcid="235065"> <!-- Empowered Mastarius -->
+		<npcskill skillid="21773" skilllevel="65" probability="100" cooldown="20000" maxhp="95"/>
+		<npcskill skillid="21774" skilllevel="65" probability="100" cooldown="40000" maxhp="95"/>
+		<npcskill skillid="21775" skilllevel="65" probability="100" cooldown="60000" maxhp="95"/>
+		<npcskill skillid="21776" skilllevel="65" probability="100" cooldown="50000" maxhp="95"/>
+		<npcskill skillid="21777" skilllevel="65" probability="100" cooldown="90000" maxhp="50"/>
+		<npcskill skillid="21778" skilllevel="65" probability="100" cooldown="300000" maxhp="50"/>
+	</npcskills>
 </npc_skill_templates>

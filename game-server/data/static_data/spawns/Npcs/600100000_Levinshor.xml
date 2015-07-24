@@ -654,14 +654,14 @@
         <spawn npc_id="702571" respawn_time="295">
             <spot x="937.9094" y="1048.9308" z="334.24686" h="105"/>
         </spawn>
-		<!-- Enchanted Book -->
-        <spawn npc_id="702637" respawn_time="295">
+		<!-- Enchanted Book --> <!-- Agents Fight will handle this spawn -->
+        <!-- <spawn npc_id="702637" respawn_time="295">
             <spot x="924.98914" y="1041.9464" z="334.24686" h="60"/>
-        </spawn>
-		<!-- Enchanted Book -->
-        <spawn npc_id="702638" respawn_time="295">
+        </spawn> -->
+		<!-- Enchanted Book --> <!-- Agents Fight will handle this spawn -->
+       <!-- <spawn npc_id="702638" respawn_time="295">
             <spot x="935.0649" y="1060.954" z="334.24686" h="60"/>
-        </spawn>
+        </spawn> -->
 		<!-- Enchanted Book -->
         <spawn npc_id="804480" respawn_time="295">
             <spot x="1011.1578" y="999.4379" z="335.64252" h="45"/>
@@ -2346,11 +2346,11 @@
 		</spawn>
 		<!-- Patch note : - Empowered Veille will spawn near Lawbringer’s Cut, and Empowered Mastarius will spawn near
 Valpura Heights. They march to battle in Flameberth Downs. -->
-		<!-- Empowered Mastarius
+		<!-- Empowered Mastarius FLAG
 		<spawn npc_id="832831" respawn_time="295">
 			<spot x="912.7304" y="1126.947" z="331.4515"/>
 		</spawn> -->
-		<!-- Empowered Veille 
+		<!-- Empowered Veille  FLAG
 		<spawn npc_id="832830" respawn_time="295">
 			<spot x="855.919" y="1066.405" z="332.6346"/>
 		</spawn> -->
@@ -2389,32 +2389,32 @@ Valpura Heights. They march to battle in Flameberth Downs. -->
 			<spot x="818.7015" y="1498.764" z="264.2395" h="29" />
 			<spot x="743.9664" y="1542.596" z="242.3356" h="61" />
 		</spawn>
-		<!-- Veille Assassin -->
+		<!-- Veille Assassin Agents Fight will handle these spawns
         <spawn npc_id="235337" respawn_time="295">
             <spot x="879.25665" y="1073.9158" z="332.47516" h="15"/>
-        </spawn>
-		<!-- Veille Battlemage -->
+        </spawn> -->
+		<!-- Veille Battlemage
         <spawn npc_id="235336" respawn_time="295">
             <spot x="891.14954" y="1084.6208" z="332.62933" h="15"/>
-        </spawn>
-		<!-- Veille Healer -->
+        </spawn> -->
+		<!-- Veille Healer
         <spawn npc_id="235339" respawn_time="295">
             <spot x="861.56366" y="1093.5527" z="332.47516" h="15"/>
-        </spawn>
-		<!-- Veille Protector -->
+        </spawn> -->
+		<!-- Veille Protector
         <spawn npc_id="235334" respawn_time="295">
             <spot x="866.6202" y="1074.9463" z="332.6346" h="15"/>
             <spot x="887.33167" y="1097.6967" z="332.6475" h="15"/>
-        </spawn>
-		<!-- Veille Seeker -->
+        </spawn> -->
+		<!-- Veille Seeker
         <spawn npc_id="235338" respawn_time="295">
             <spot x="868.40796" y="1103.6102" z="332.47516" h="15"/>
-        </spawn>
-		<!-- Veille Soldier -->
+        </spawn> -->
+		<!-- Veille Soldier
         <spawn npc_id="235335" respawn_time="295">
             <spot x="858.4362" y="1083.3335" z="332.53122" h="15"/>
             <spot x="878.1199" y="1106.6002" z="332.47516" h="15"/>
-        </spawn>
+        </spawn> -->
 		<!-- Warning Area -->
         <spawn npc_id="832819" respawn_time="295">
             <spot x="387.07968" y="1809.5051" z="226.44247" h="105"/>
