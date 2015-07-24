@@ -396,14 +396,17 @@ public class SiegeService {
 		}, SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 		log.debug("Broadcasting Siege Location status based on expression: " + SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 		
-		CronService.getInstance().schedule(new Runnable() {
+		
+		if (SiegeConfig.ENABLE_AGENTS_FIGHT) {
+			CronService.getInstance().schedule(new Runnable() {
 			
-			@Override
-			public void run() {
-				AgentsFightService.getInstance().onStart();
-			}
+				@Override
+				public void run() {
+					AgentsFightService.getInstance().onStart();
+				}
 			
-		}, AGENTS_FIGHT_SCHEDULE);
+			}, AGENTS_FIGHT_SCHEDULE);
+		}
 	}
 
 	public void checkSiegeStart(final int locationId) {
