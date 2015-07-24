@@ -88,4 +88,37 @@ public class SiegeConfig {
 	 */
 	@Property(key = "gameserver.raid.time2", defaultValue = "0 0 18/22 ? * THU")
 	public static String RAID_SPAWN_SCHEDULE2;
+	
+	/**
+	 * Enable Agents Fight
+	 */
+	@Property(key ="gameserver.agents.fight.enable", defaultValue = "true")
+	public static boolean ENABLE_AGENTS_FIGHT;
+	
+	/**
+	 * Agents Fight schedule
+	 */
+	@Property(key ="gameserver.agents.fight", defaultValue = "0 0 23 ? * WED,FRI,SUN")
+	public static String AGENTS_FIGHT_SCHEDULE;
+	
+	/**
+	 * Max GP that will be distributed to all players who participated
+	 */
+	@Property(key ="gameserver.agents.fight.max.gp.reward", defaultValue = "1500")
+	public static int AGENTS_FIGHT_MAX_GP_REWARD;
+	
+	/**
+	 * Max GP a Player can get for the fight
+	 */
+	@Property(key ="gameserver.agents.fight.player.gp.limit", defaultValue = "250")
+	public static int AGENTS_FIGHT_PLAYER_GP_LIMIT;
+	
+	/**
+	 * AP multiplier to calculate the gp reward.
+	 * This is just for calculation! The AP Amount a player made during the fight 
+	 * is added to the players total dmg and then divided by the total dmg of all players
+	 * 0 = deactivate calculation based on AP
+	 */
+	@Property(key ="gameserver.agents.fight.ap.multi", defaultValue = "3")
+	public static float AGENTS_FIGHT_AP_MULTI;
 }
