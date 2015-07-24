@@ -23,9 +23,11 @@
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="30276" start_npc_ids="800165" end_npc_ids="260264">
 		<npc_infos var="0" npc_id="278549" quest_dialog="1352"/>
+    <npc_infos var="1" npc_id="260264" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<report_to_many id="30376" start_npc_ids="800170" end_npc_ids="260265">
 		<npc_infos var="0" npc_id="278048" quest_dialog="1352"/>
+    <npc_infos var="1" npc_id="260265" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<!-- COLLECTING QUESTS -->
 	<!-- HUNTING QUESTS -->
