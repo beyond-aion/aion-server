@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -35,8 +37,8 @@ import javolution.util.FastList;
 public class AgentsFightService {
 
 	private static final AgentsFightService instance = new AgentsFightService();
-	
-	private AtomicBoolean started = new AtomicBoolean(false);
+	private static final Logger log = LoggerFactory.getLogger(AgentsFightService.class);
+	private boolean started = false;
 	private Future<?> timer, adds, flags;
 	private final AgentsFightCounter counter = new AgentsFightCounter();
 	private final static AgentsFightAPListener apListener = new AgentsFightAPListener();
@@ -51,13 +53,25 @@ public class AgentsFightService {
 	}
 	
 	public void onStart() {
-		if (started.compareAndSet(false, true)) {
-			spawnAgents();
-			spawnFlags();
-			spawnAdds();
-			sendMsg(1402543, 0); //Agents spawned
-			startTimer();
+		boolean doubleStart = false;
+		synchronized (this) {
+			if (started) {
+				doubleStart = true;
+			} else {
+				started = true;
+			}
 		}
+		
+		if (doubleStart) {
+			log.error("Attempt to start Agents Fight for the 2nd time.");
+			return;
+		}
+		
+		spawnAgents();
+		spawnFlags();
+		spawnAdds();
+		sendMsg(1402543, 0); //Agents spawned
+		startTimer();
 		
 	}
 
@@ -97,7 +111,7 @@ public class AgentsFightService {
 		flags = ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				if (started.get()) {
+				if (started) {
 					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832831, 912.44f, 1127.38f, 336.59f, (byte) 6), 1); //Flag
 					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832830, 855.63f, 1066.84f, 336.59f, (byte) 6), 1); //Flag
 					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 702638, 934.88f, 1061.09f, 343.67f, (byte) 3), 1); //Quest Npc
@@ -117,7 +131,7 @@ public class AgentsFightService {
 
 			@Override
 			public void run() {
-				if (started.get()) {
+				if (started) {
 					//Veille Adds
 					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235334, 862.96f, 1094.75f, 333f, (byte) 113), 1);
 					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235335, 862.4f, 1090.33f, 333f, (byte) 2), 1);
@@ -158,55 +172,67 @@ public class AgentsFightService {
 		}
 	}
 	
-	public synchronized void stop(NpcAI2 npcAI) {
-		if (started.compareAndSet(true, false)) {
-			cancelTask();
-			if (npcAI == null) {
-				deleteNpc(235065);
-				deleteNpc(235064);
-				getCounter().clearAll();
-			} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) {
-				deleteNpc(235065);
+	public void stop(NpcAI2 npcAI) {
+		
+		boolean doubleStop = false;
+		synchronized (this) {
+			if (started) {
+					started = false;
 			} else {
-				deleteNpc(235064);
+				doubleStop = true;
 			}
-			deleteNpc(702638);
-			deleteNpc(702637);
-			deleteNpc(832830);
-			deleteNpc(832831);
+		}
+		if (doubleStop) {
+			log.info("Attempt to stop Agents Fight for the 2nd time.");
+			return;
+		}
+		
+		cancelTask();
+		if (npcAI == null) {
+			deleteNpc(235065);
+			deleteNpc(235064);
+			getCounter().clearAll();
+		} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) {
+			deleteNpc(235065);
+		} else {
+			deleteNpc(235064);
+		}
+		deleteNpc(702638);
+		deleteNpc(702637);
+		deleteNpc(832830);
+		deleteNpc(832831);
 			
-			//delete adds
-			deleteNpc(235334);
-			deleteNpc(235335);
-			deleteNpc(235336);
-			deleteNpc(235337);
-			deleteNpc(235338);
-			deleteNpc(235339);
-			deleteNpc(235340);
-			deleteNpc(235341);
-			deleteNpc(235342);
-			deleteNpc(235343);
-			deleteNpc(235344);
-			deleteNpc(235345);
-			
-			agents.clear();
-			GlobalCallbackHelper.removeCallback(apListener);
-			if (npcAI == null) {
-				return;
-			} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) { //Asmodians win
-				calculateSinglePlayersGloryPoints(getCounter().getRaceCounter(Race.ASMODIANS));
-				@SuppressWarnings("rawtypes")
-				Base base = BaseService.getInstance().getActiveBase(6113);
-				if (base != null) {
-					BaseService.getInstance().capture(base.getId(), Race.ASMODIANS);
-				}
-			} else { //Elyos win
-				calculateSinglePlayersGloryPoints(getCounter().getRaceCounter(Race.ELYOS));
-				@SuppressWarnings("rawtypes")
-				Base base = BaseService.getInstance().getActiveBase(6113);
-				if (base != null) {
-					BaseService.getInstance().capture(base.getId(), Race.ELYOS);
-				}
+		//delete adds
+		deleteNpc(235334);
+		deleteNpc(235335);
+		deleteNpc(235336);
+		deleteNpc(235337);
+		deleteNpc(235338);
+		deleteNpc(235339);
+		deleteNpc(235340);
+		deleteNpc(235341);
+		deleteNpc(235342);
+		deleteNpc(235343);
+		deleteNpc(235344);
+		deleteNpc(235345);
+		
+		agents.clear();
+		GlobalCallbackHelper.removeCallback(apListener);
+		if (npcAI == null) {
+			return;
+		} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) { //Asmodians win
+			calculateSinglePlayersGloryPoints(getCounter().getRaceCounter(Race.ASMODIANS));
+			@SuppressWarnings("rawtypes")
+			Base base = BaseService.getInstance().getActiveBase(6113);
+			if (base != null) {
+				BaseService.getInstance().capture(base.getId(), Race.ASMODIANS);
+			}
+		} else { //Elyos win
+			calculateSinglePlayersGloryPoints(getCounter().getRaceCounter(Race.ELYOS));
+			@SuppressWarnings("rawtypes")
+			Base base = BaseService.getInstance().getActiveBase(6113);
+			if (base != null) {
+				BaseService.getInstance().capture(base.getId(), Race.ELYOS);
 			}
 		}
 	}
@@ -245,13 +271,12 @@ public class AgentsFightService {
 	 * @param abyssPoints
 	 */
 	public void addAP(Player player, int ap) {
-		if (!started.get()) {
+		if (!started) {
 			return;
 		}
 		if (player == null) {
 			return;
 		}
-	
 		getCounter().addAP(player, ap);
 	}
 
@@ -260,7 +285,7 @@ public class AgentsFightService {
 	 * @param damage
 	 */
 	public void addDamage(Creature attacker, int damage) {
-		if (!started.get()) {
+		if (!started) {
 			return;
 		}
 		if (attacker == null) {
