@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -24,7 +25,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.google.common.collect.Lists;
 
@@ -37,12 +37,13 @@ import javolution.util.FastList;
 public class AgentsFightService {
 
 	private static final AgentsFightService instance = new AgentsFightService();
-	private static final Logger log = LoggerFactory.getLogger(AgentsFightService.class);
+	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 	private boolean started = false;
 	private Future<?> timer, adds, flags;
 	private final AgentsFightCounter counter = new AgentsFightCounter();
 	private final static AgentsFightAPListener apListener = new AgentsFightAPListener();
 	private List<Npc> agents = new FastList<>();
+	private List<Npc> spawnedNpcs = new FastList<>();
 	
 	public static AgentsFightService getInstance() {
 		return instance;
@@ -63,10 +64,13 @@ public class AgentsFightService {
 		}
 		
 		if (doubleStart) {
-			log.error("Attempt to start Agents Fight for the 2nd time.");
+			if (LoggingConfig.LOG_SIEGE)
+				log.error("[AGENTS FIGHT SERVICE] Attempt to start Agents Fight for the 2nd time.");
 			return;
 		}
 		
+		if (LoggingConfig.LOG_SIEGE)
+			log.info("[AGENTS FIGHT SERVICE] Agents Fight started.");
 		spawnAgents();
 		spawnFlags();
 		spawnAdds();
@@ -112,10 +116,10 @@ public class AgentsFightService {
 			@Override
 			public void run() {
 				if (started) {
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832831, 912.44f, 1127.38f, 336.59f, (byte) 6), 1); //Flag
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832830, 855.63f, 1066.84f, 336.59f, (byte) 6), 1); //Flag
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 702638, 934.88f, 1061.09f, 343.67f, (byte) 3), 1); //Quest Npc
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 702637, 924.80f, 1042.08f, 343.67f, (byte) 3), 1); //Timer Npc
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832831, 912.44f, 1127.38f, 336.59f, (byte) 6), 1)); //Flag
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 832830, 855.63f, 1066.84f, 336.59f, (byte) 6), 1)); //Flag
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 702638, 934.88f, 1061.09f, 343.67f, (byte) 3), 1)); //Quest Npc
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 702637, 924.80f, 1042.08f, 343.67f, (byte) 3), 1)); //Timer Npc
 					GlobalCallbackHelper.addCallback(apListener);
 					for (Npc npc : agents) {
 						if (npc != null && !npc.getLifeStats().isAlreadyDead())
@@ -133,20 +137,20 @@ public class AgentsFightService {
 			public void run() {
 				if (started) {
 					//Veille Adds
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235334, 862.96f, 1094.75f, 333f, (byte) 113), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235335, 862.4f, 1090.33f, 333f, (byte) 2), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235336, 863.6f, 1084.9f, 333f, (byte) 9), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235337, 868f, 1089.5f, 333f, (byte) 21), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235338, 872.9f, 1077.2f, 333f, (byte) 27), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235339, 881f, 1089.1f, 333f, (byte) 38), 1);
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235334, 862.96f, 1094.75f, 333f, (byte) 113), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235335, 862.4f, 1090.33f, 333f, (byte) 2), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235336, 863.6f, 1084.9f, 333f, (byte) 9), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235337, 868f, 1089.5f, 333f, (byte) 21), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235338, 872.9f, 1077.2f, 333f, (byte) 27), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235339, 881f, 1089.1f, 333f, (byte) 38), 1));
 				
 					//Masta Adds
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235340, 888.6f, 1086.2f, 333f, (byte) 53), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235341, 889f, 1094.1f, 333f, (byte) 66), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235342, 885.44f, 1100f, 333f, (byte) 75), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235343, 881.3f, 1102.8f, 333f, (byte) 85), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235344, 875.3f, 1104f, 333f, (byte) 91), 1);
-					SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235345, 869.5f, 1102.3f, 333f, (byte) 99), 1);
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235340, 888.6f, 1086.2f, 333f, (byte) 53), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235341, 889f, 1094.1f, 333f, (byte) 66), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235342, 885.44f, 1100f, 333f, (byte) 75), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235343, 881.3f, 1102.8f, 333f, (byte) 85), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235344, 875.3f, 1104f, 333f, (byte) 91), 1));
+					spawnedNpcs.add((Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600100000, 235345, 869.5f, 1102.3f, 333f, (byte) 99), 1));
 				}
 			}
 		}, /*(1000 * 60 * 5) + 40000*/ 60000);
@@ -183,7 +187,8 @@ public class AgentsFightService {
 			}
 		}
 		if (doubleStop) {
-			log.info("Attempt to stop Agents Fight for the 2nd time.");
+			if (LoggingConfig.LOG_SIEGE)
+				log.error("[AGENTS FIGHT SERVICE] Attempt to stop Agents Fight for the 2nd time.");
 			return;
 		}
 		
@@ -192,32 +197,23 @@ public class AgentsFightService {
 			deleteNpc(235065);
 			deleteNpc(235064);
 			getCounter().clearAll();
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("[AGENTS FIGHT SERVICE] Agents Fight finished. Time's up.");
 		} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) {
 			deleteNpc(235065);
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("[AGENTS FIGHT SERVICE] Agents Fight finished. ASMODIANS won!");
 		} else {
 			deleteNpc(235064);
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("[AGENTS FIGHT SERVICE] Agents Fight finished. ELYOS won!");
 		}
-		deleteNpc(702638);
-		deleteNpc(702637);
-		deleteNpc(832830);
-		deleteNpc(832831);
-			
-		//delete adds
-		deleteNpc(235334);
-		deleteNpc(235335);
-		deleteNpc(235336);
-		deleteNpc(235337);
-		deleteNpc(235338);
-		deleteNpc(235339);
-		deleteNpc(235340);
-		deleteNpc(235341);
-		deleteNpc(235342);
-		deleteNpc(235343);
-		deleteNpc(235344);
-		deleteNpc(235345);
 		
-		agents.clear();
+		deleteNpc(0);
+		
 		GlobalCallbackHelper.removeCallback(apListener);
+		spawnedNpcs.clear();
+		agents.clear();
 		if (npcAI == null) {
 			return;
 		} else if (npcAI.getOwner().getRace() == Race.GHENCHMAN_LIGHT) { //Asmodians win
@@ -260,9 +256,18 @@ public class AgentsFightService {
 	}
 
 	private void deleteNpc(int id) {
-		WorldMapInstance world = World.getInstance().getWorldMap(600100000).getMainWorldMapInstance();
-		if (world.getNpc(id) != null) {
-			world.getNpc(id).getController().onDelete();
+		if (id == 0) { //delete all spawns except agents
+			for (Npc npc : spawnedNpcs) {
+				if (npc != null) {
+					npc.getController().onDelete();
+				}
+			}
+		} else { //delete agent with id
+			for (Npc npc : agents) {
+				if (npc != null && npc.getNpcId() == id) {
+					npc.getController().delete();
+				}
+			}
 		}
 	}
 
@@ -298,49 +303,56 @@ public class AgentsFightService {
 		}
 	}
 	
-	private void calculateSinglePlayersGloryPoints(AgentsFightRaceCounter counter) {
+	private void calculateSinglePlayersGloryPoints(AgentsFightRaceCounter raceCounter) {
 		float multi = SiegeConfig.AGENTS_FIGHT_AP_MULTI;
-		long totalDmgAndAp = (long) (counter.getTotalAp() * multi + counter.getTotalDmg());
+		long totalDmgAndAp = (long) (raceCounter.getTotalAp() * multi + raceCounter.getTotalDmg());
 		if (totalDmgAndAp <= 0) {
 			getCounter().clearAll();
 			return;
 		}
-		Map<Integer, Long> playerAP = counter.getPlayerAbyssPoints();
-		Map<Integer, Long> playerDmg = counter.getPlayerDamage();
-		List<Integer> allDmgPlayers = Lists.newArrayList(playerDmg.keySet());
-		List<Integer> allAPPlayers = Lists.newArrayList(playerAP.keySet());
+		Map<Integer, Long> playersApCounter = raceCounter.getPlayerAbyssPoints();
+		Map<Integer, Long> playersDmgCounter = raceCounter.getPlayerDamage();
+		List<Integer> allDmgPlayers = null;
+		List<Integer> allApPlayers = null;
+		if (playersDmgCounter != null && !playersDmgCounter.isEmpty()) {
+			allDmgPlayers = Lists.newArrayList(playersDmgCounter.keySet());
+		}
+		if (playersApCounter != null && !playersApCounter.isEmpty()) {
+			allApPlayers = Lists.newArrayList(playersApCounter.keySet());
+		}
 		
 		List<Integer> allPlayers = new ArrayList<>(); 
-		if (allDmgPlayers != null) {
-			for (Integer dmg : allDmgPlayers) {
-				if (!allPlayers.contains(dmg)) {
-					allPlayers.add(dmg);
+		if (allDmgPlayers != null && !allDmgPlayers.isEmpty()) {
+			for (Integer dmgPlayer : allDmgPlayers) {
+				if (!allPlayers.contains(dmgPlayer)) {
+					allPlayers.add(dmgPlayer);
 				}	
 			}
 		}
-		if (allAPPlayers != null) {
-			for (Integer ap : allAPPlayers) {
-				if (!allPlayers.contains(ap)) {
-					allPlayers.add(ap);
+		if (allApPlayers != null && !allApPlayers.isEmpty()) {
+			for (Integer apPlayer : allApPlayers) {
+				if (!allPlayers.contains(apPlayer)) {
+					allPlayers.add(apPlayer);
 				}
 			}
 		}
 		
-		if (allPlayers == null || allPlayers.isEmpty()) {
+		if (allPlayers.isEmpty()) {
 			getCounter().clearAll();
 			return;
 		}
 		
 		int maxGP = SiegeConfig.AGENTS_FIGHT_MAX_GP_REWARD;
 		int maxSinglePlayerGp = SiegeConfig.AGENTS_FIGHT_PLAYER_GP_LIMIT;
-		for (Integer i : allPlayers) {
+		int rewardedPlayers = 0;
+		for (Integer playerId : allPlayers) {
 			long dmg = 0;
 			long ap = 0;
-			if (playerDmg.containsKey(i)) {
-				dmg = playerDmg.get(i);
+			if (playersDmgCounter.containsKey(playerId)) {
+				dmg = playersDmgCounter.get(playerId);
 			}
-			if (playerAP.containsKey(i)) {
-				ap = playerAP.get(i);
+			if (playersApCounter.containsKey(playerId)) {
+				ap = playersApCounter.get(playerId);
 			}
 			
 			if (ap <= 0 && dmg <= 0) {
@@ -354,9 +366,20 @@ public class AgentsFightService {
 				rewardGp = maxSinglePlayerGp;
 			}
 			
-			if (rewardGp > 0)
-				GloryPointsService.increaseGp(i, Math.round(rewardGp));
+			if (rewardGp > 0) {
+				int reward = Math.round(rewardGp);
+				GloryPointsService.increaseGp(playerId, reward);
+				rewardedPlayers++;
+				if (LoggingConfig.LOG_SIEGE)
+					log.info("[AGENTS FIGHT SERVICE] REWARDED playerId: " + playerId + " WITH " + reward + " GLORY POINTS");
+			}
 		}
 		getCounter().clearAll();
+		if (LoggingConfig.LOG_SIEGE)
+			log.info("[AGENTS FIGHT SERVICE] REWARDED A TOTAL OF " + rewardedPlayers +  " PLAYERS.");
+	}
+	
+	public boolean isStarted() {
+		return started;
 	}
 }
