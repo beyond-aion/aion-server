@@ -1,16 +1,12 @@
 package quest.morheim;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -21,16 +17,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423).
- * Protect Kargate from the Balaur: <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (280818), Crusader
- * (211624), Chandala Scaleguard (213578), Chandala Fangblade (213579). Speak to Kargate. Report back to Aegir.
+ * Protect Kargate from the Balaur: Crusader(213575) and Draconute Scout(213576). Speak to Kargate. Report back to Aegir.
  * 
  * @author vlog
+ * @reworked Pad
+ * 
  */
 public class _2041HoldTheFrontLine extends QuestHandler {
 
 	private final static int questId = 2041;
 	private final static int[] npcIds = { 204301, 204403, 204432 };
-	private final static int[] mobIds = { 280818, 211624, 213578, 213579 };
+	private final static int[] mobIds = { 213575, 280818 };
+	private int balaurKilled = 0;
 
 	public _2041HoldTheFrontLine() {
 		super(questId);
@@ -40,12 +38,13 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 	public void register() {
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
-		for (int mob : mobIds)
-			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		qe.registerOnQuestTimerEnd(questId);
-		qe.registerOnDie(questId);
+		qe.registerOnLogOut(questId);
+		qe.registerOnEnterWorld(questId);
 		for (int npcId : npcIds)
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
+		for (int mobId : mobIds)
+			qe.registerQuestNpc(mobId).addOnKillEvent(questId);
 	}
 
 	@Override
@@ -83,7 +82,9 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 						case SETPRO1:
-							return defaultCloseDialog(env, 0, 1); // 1
+							defaultCloseDialog(env, 0, 1); // 1
+							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte)40, TeleportAnimation.BEAM_ANIMATION);
+							return true;
 					}
 					break;
 				}
@@ -93,7 +94,9 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 						case SETPRO2:
-							return defaultCloseDialog(env, 1, 2); // 2
+							defaultCloseDialog(env, 1, 2); // 2
+							TeleportService2.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte)12, TeleportAnimation.BEAM_ANIMATION);
+							return true;
 					}
 					break;
 				}
@@ -104,45 +107,18 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 							else if (var == 4)
 								return sendQuestDialog(env, 2034);
-						case SETPRO3: {
-							boolean areSpawned = false;
-							if (player.isInGroup2()) {
-								PlayerGroup playerGroup = player.getPlayerGroup2();
-								for (Player p : playerGroup.getMembers()) {
-									QuestState qs1 = p.getQuestStateList().getQuestState(questId);
-									if (qs1 != null && qs1.getStatus() == QuestStatus.START && qs1.getQuestVarById(0) == 3) {
-										areSpawned = true;
-									}
-								}
-							}
-							if (!areSpawned) {
-								List<Npc> mobs = new ArrayList<Npc>();
-								// Crusader (2)
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-								// Draconute Scout (2)
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-
-								for (Npc mob : mobs) {
-									mob.setTarget(player);
-									((AbstractAI) mob.getAi2()).setStateIfNot(AIState.WALKING);
-									mob.setState(1);
-									mob.getMoveController().moveToTargetObject();
-									PacketSendUtility.broadcastPacket(mob, new SM_EMOTION(mob, EmotionType.START_EMOTE2, 0, mob.getObjectId()));
-								}
-							}
-							QuestService.questTimerStart(env, 240); // 4 minutes
+						case SETPRO3: {	
+							balaurKilled = 0;
+							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte)94); // Crusader
+							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 259.10f, 261.79f, 227.77f, (byte)94); // Draconute Scout							
+							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
 						}
 						case SETPRO4:
 							if (var == 4) {
-								TeleportService2.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f);
-								return defaultCloseDialog(env, 4, 4, true, false); // reward
+								defaultCloseDialog(env, 4, 4, true, false); // reward
+								TeleportService2.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte)73, TeleportAnimation.BEAM_ANIMATION);
+								return true;
 							}
 					}
 					break;
@@ -158,183 +134,99 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-
-		int var = qs.getQuestVarById(0);
-		if (var != 3)
-			return false;
-
-		int var1 = qs.getQuestVarById(1); // first flow
-		int var2 = qs.getQuestVarById(2); // second flow
-		int var3 = qs.getQuestVarById(3); // third flow
-		int var4 = qs.getQuestVarById(4); // fourth flow
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
-		switch (targetId) {
-			case 211624:
-			case 280818:
-				if (var1 >= 0 || var1 < 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-							qs.setQuestVarById(1, var1 + 1); // 1: 1, 2, 3
-							return true;
+		
+		if (qs.getQuestVarById(0) == 3) {
+			int targetId = env.getTargetId();
+			if (targetId == 213575 || targetId == 280818) {
+				balaurKilled++;
+				if (balaurKilled == 2) {
+					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte)94); // Crusader
+					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 259.10f, 261.79f, 227.77f, (byte)94); // Draconute Scout	
+				}
+				else if (balaurKilled == 4) {
+					QuestService.questTimerEnd(env);
+					if (kargateIsAlive(env)) {
+						changeQuestStep(env, 3, 4, false);
+						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+					}
+					else {
+						changeQuestStep(env, 3, 2, false);
+						QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte)0);
 					}
 				}
-				else if (var1 == 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-							List<Npc> mobs = new ArrayList<Npc>();
-							qs.setQuestVarById(1, 4); // 1: 4
-							// Draconute Scout (2)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Chandala Scaleguard (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-
-							for (Npc mob : mobs) {
-								mob.getAggroList().addHate(player, 1);
-							}
-
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 >= 0 && var2 < 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-							qs.setQuestVarById(2, var2 + 1); // 2: 1, 2, 3
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 == 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-							List<Npc> mobs = new ArrayList<Npc>();
-							qs.setQuestVarById(2, 4); // 2: 4
-							// Draconute Scout (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Chandala Scaleguard (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Chandala Fangblade (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-
-							for (Npc mob : mobs) {
-								mob.getAggroList().addHate(player, 1);
-							}
-
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 >= 0 && var3 < 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-						case 213579:
-							qs.setQuestVarById(3, var3 + 1); // 3: 1, 2, 3
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 3) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-						case 213579:
-							List<Npc> mobs = new ArrayList<Npc>();
-							qs.setQuestVarById(3, 4); // 3: 4
-							// Draconute Scout (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Chandala Scaleguard (2)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							// Chandala Fangblade (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-
-							for (Npc mob : mobs) {
-								mob.getAggroList().addHate(player, 1);
-							}
-
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 >= 0 && var4 < 4) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-						case 213579:
-							qs.setQuestVarById(4, var4 + 1); // 4: 1, 2, 3, 4
-							return true;
-					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 == 4) {
-					switch (targetId) {
-						case 211624:
-						case 280818:
-						case 213578:
-						case 213579:
-							qs.setQuestVar(4); // 4
-							updateQuestStatus(env);
-							QuestService.questTimerEnd(env);
-							return true;
-					}
-				}
+				return true;
+			}
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
+		
 		if (qs.getQuestVarById(0) == 3) {
-			qs.setQuestVar(4); // 4
-			updateQuestStatus(env);
+			deleteBalaur(env);
+			if (kargateIsAlive(env)) {
+				changeQuestStep(env, 3, 4, false);
+				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+			}
+			else {
+				changeQuestStep(env, 3, 2, false);
+				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte)0);
+			}
 			return true;
 		}
 		return false;
 	}
-
+	
 	@Override
-	public boolean onDieEvent(QuestEnv env) {
+	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
+		
 		if (qs.getQuestVarById(0) == 3) {
+			deleteBalaur(env);
 			QuestService.questTimerEnd(env);
-			qs.setQuestVar(2); // 2
-			updateQuestStatus(env);
+			changeQuestStep(env, 3, 2, false);
+			if (!kargateIsAlive(env))
+				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte)0);
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null || qs.getStatus() != QuestStatus.START)
+			return false;
+		
+		if (qs.getQuestVarById(0) == 3 && player.getWorldId() != 320040000) {
+			QuestService.questTimerEnd(env);
+			changeQuestStep(env, 3, 2, false);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean kargateIsAlive(QuestEnv env) {
+		Npc kargate = env.getPlayer().getPosition().getWorldMapInstance().getNpc(204432);
+		if (kargate != null && !kargate.getLifeStats().isAlreadyDead())
+			return true;
+		return false;
+	}
+	
+	private void deleteBalaur(QuestEnv env) {
+		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs();
+		for (Npc npc : npcs) {
+			if (npc.getNpcId() == 213575 || npc.getNpcId() == 280818)
+				npc.getController().onDelete();
+		}
 	}
 }

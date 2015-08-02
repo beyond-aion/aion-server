@@ -319,7 +319,7 @@
 	<!-- Bregiron -->
 	<portal_loc world_id="320030000" loc_id="3200300" x="274.2" y="171.7" z="204.3"/>
 	<!-- Nidalber -->
-	<portal_loc world_id="320040000" loc_id="3200400" x="277.2907" y="170.9613" z="204.3471"/>
+	<portal_loc world_id="320040000" loc_id="3200400" x="277.2907" y="170.9613" z="204.3471" h="34"/>
 	<!-- Sliver of Darkness -->
 	<portal_loc world_id="310070000" loc_id="3100700" x="338" y="101" z="1191"/>
 	<!-- Space of Destiny -->
