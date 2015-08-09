@@ -56,7 +56,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.agentsfight.AgentsFightService;
 import com.aionemu.gameserver.services.siegeservice.ArtifactSiege;
 import com.aionemu.gameserver.services.siegeservice.FortressSiege;
 import com.aionemu.gameserver.services.siegeservice.OutpostSiege;
@@ -108,11 +107,6 @@ public class SiegeService {
 	/**
 	 * Singleton that is loaded on the class initialization. Guys, we really do not SingletonHolder classes
 	 */
-	/**
-	 * Agents Fight schedule
-	 */
-	private static final String AGENTS_FIGHT_SCHEDULE = SiegeConfig.AGENTS_FIGHT_SCHEDULE;
-	
 	private static final SiegeService instance = new SiegeService();
 	/**
 	 * Map that holds fortressId to Siege. We can easily know what fortresses is under siege ATM :)
@@ -395,18 +389,6 @@ public class SiegeService {
 
 		}, SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 		log.debug("Broadcasting Siege Location status based on expression: " + SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
-		
-		
-		if (SiegeConfig.ENABLE_AGENTS_FIGHT) {
-			CronService.getInstance().schedule(new Runnable() {
-			
-				@Override
-				public void run() {
-					AgentsFightService.getInstance().onStart();
-				}
-			
-			}, AGENTS_FIGHT_SCHEDULE);
-		}
 	}
 
 	public void checkSiegeStart(final int locationId) {
