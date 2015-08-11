@@ -48,8 +48,6 @@ public class TribeRelationService {
 				}
 				break;
 		}
-		if ((creature1.getTribe() == TribeClass.DRAMA_KIMEIA_MOB && creature2.getTribe() == TribeClass.DRAMA_KIMEIA_DARKNPC) || (creature1.getTribe() == TribeClass.NLIZARDMAN && creature2.getTribe() == TribeClass.DRAMA_KIMEIA_DARKNPC))
-			return true;
 		return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe());
 	}
 			

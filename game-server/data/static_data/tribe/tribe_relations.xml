@@ -320,7 +320,7 @@
         <aggro>DRAMA_EVE_NONPC_A</aggro>
     </tribe>
     <tribe name="DRAMA_KIMEIA_DARKNPC" base="GENERAL_DARK">
-        <friend>DRAMA_KIMEIA_MOB</friend>
+        <aggro>DRAMA_KIMEIA_MOB NLIZARDMAN</aggro>
     </tribe>
     <tribe name="DRAMA_KIMEIA_MOB" base="MONSTER">
         <aggro>PC GUARD PC_DARK GUARD_DARK DRAMA_KIMEIA_NPC DRAMA_KIMEIA_DARKNPC</aggro>
@@ -2003,7 +2003,7 @@
         <support>PC PC_DARK YUN_GUARD NEUTRAL_LGUARD NEUTRAL_DGUARD</support>
     </tribe>
     <tribe name="NLIZARDMAN" base="MONSTER">
-        <aggro>PC GUARD PC_DARK GUARD_DARK</aggro>
+        <aggro>DRAMA_KIMEIA_DARKNPC PC GUARD PC_DARK GUARD_DARK</aggro>
         <support>NLIZARDMAN NLIZARDRAISER NLIZARDPET NLIZARDPRIEST NNAGA_PRIEST NNAGA NNAGA_ELEMENTALIST NNAGA_PRIESTBOSS XDRAKAN XDRAKAN_ELEMENTALIST XDRAKAN_PRIEST DRAGON NLIZARDMAN2</support>
     </tribe>
     <tribe name="NLIZARDMAN2" base="MONSTER">
