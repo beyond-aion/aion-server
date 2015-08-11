@@ -8,13 +8,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.agentsfight.AgentsFightService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Pad
- *
+ * TODO: implement AgentFight condition
  */
 public class _13744AgentinNeed extends QuestHandler {
 	
@@ -35,7 +34,7 @@ public class _13744AgentinNeed extends QuestHandler {
 	
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000")) && AgentsFightService.getInstance().isStarted()) {
+		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000")) /* && AgentsFightService.getInstance().isStarted() */) {
 			Player player = env.getPlayer();
 			if (player == null)
 				return false;
@@ -57,7 +56,7 @@ public class _13744AgentinNeed extends QuestHandler {
 			return false;
 		
 		VisibleObject target = env.getVisibleObject();
-		if (target instanceof Player && player != null && (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) && AgentsFightService.getInstance().isStarted()) {
+		if (target instanceof Player && player != null && (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) /* && AgentsFightService.getInstance().isStarted() */) {
 			if ((player.getLevel() >= (((Player)target).getLevel() - 5)) && (player.getLevel() <= (((Player)target).getLevel() + 9))) {
 				int var1 = qs.getQuestVarById(1);
 				if (var1 >= 0 && var1 < 11) {
