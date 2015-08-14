@@ -317,9 +317,7 @@ CREATE TABLE IF NOT EXISTS `legions` (
   `legionary_permission` INT(11) NOT NULL DEFAULT 6144,
   `volunteer_permission` INT(11) NOT NULL DEFAULT 2048,
   `disband_time` int(11) NOT NULL default '0',
-  `rank_cp` INT(11) NOT NULL DEFAULT '0',
-  `rank_pos` INT(11) NOT NULL DEFAULT '0',
-  `old_rank_pos` INT(11) NOT NULL DEFAULT '0',
+  `siege_glory_points` INT(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
