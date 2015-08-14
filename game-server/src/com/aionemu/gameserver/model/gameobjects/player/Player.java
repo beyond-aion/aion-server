@@ -324,25 +324,6 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Only use for the Size admin command
-	 * 
-	 * @return PlayerAppearance : The saved player's appearance, to rollback his appearance
-	 */
-	public PlayerAppearance getSavedPlayerAppearance() {
-		return savedPlayerAppearance;
-	}
-
-	/**
-	 * Only use for the Size admin command
-	 * 
-	 * @param playerAppearance
-	 *          PlayerAppearance : The saved player's appearance, to rollback his appearance
-	 */
-	public void setSavedPlayerAppearance(PlayerAppearance savedPlayerAppearance) {
-		this.savedPlayerAppearance = savedPlayerAppearance;
-	}
-
-	/**
 	 * Set connection of this player.
 	 * 
 	 * @param clientConnection
