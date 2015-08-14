@@ -32,7 +32,6 @@ import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
-import com.aionemu.gameserver.configs.main.WeddingsConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
@@ -78,7 +77,6 @@ public class Configure extends AdminCommand {
 		.put("shutdown", ShutdownConfig.class)
 		.put("siege", SiegeConfig.class)
 		.put("thread", ThreadConfig.class)
-		.put("weddings", WeddingsConfig.class)
 		.put("world", WorldConfig.class)
 		.put("ipconfig", IPConfig.class)
 		.put("network", NetworkConfig.class)
@@ -156,7 +154,7 @@ public class Configure extends AdminCommand {
 					return;
 				}
 			}
-			PacketSendUtility.sendMessage(player, "Property changed and applyed");
+			PacketSendUtility.sendMessage(player, "Property changed and applied");
 		}
 	}
 

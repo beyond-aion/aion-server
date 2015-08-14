@@ -53,7 +53,7 @@ public class ChatCommandsLoader implements ClassListener {
 			return false;
 
 		if (!ClassUtils.isSubclass(clazz, AdminCommand.class) && !ClassUtils.isSubclass(clazz, PlayerCommand.class)
-			&& !ClassUtils.isSubclass(clazz, WeddingCommand.class) && !ClassUtils.isSubclass(clazz, ConsoleCommand.class))
+			&& !ClassUtils.isSubclass(clazz, ConsoleCommand.class))
 			return false;
 		return true;
 	}

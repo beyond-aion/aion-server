@@ -222,7 +222,6 @@ public class Player extends Creature {
 
 	private EmotionList emotions;
 	private MotionList motions;
-	private int partnerId;
 
 	private long flyReuseTime;
 
@@ -1995,10 +1994,6 @@ public class Player extends Creature {
 		return playerCommonData.getRace();
 	}
 
-	public Player findPartner() {
-		return World.getInstance().findPlayer(partnerId);
-	}
-
 	private PlayerVarsDAO daoVars;
 	private Map<String, Object> vars = FastMap.newInstance();
 
@@ -2032,14 +2027,6 @@ public class Player extends Creature {
 
 	public void setVars(Map<String, Object> map) {
 		this.vars = map;
-	}
-
-	public boolean isMarried() {
-		return partnerId != 0;
-	}
-
-	public void setPartnerId(int partnerId) {
-		this.partnerId = partnerId;
 	}
 
 	@Override

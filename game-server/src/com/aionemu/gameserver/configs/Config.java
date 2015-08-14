@@ -42,7 +42,6 @@ import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
-import com.aionemu.gameserver.configs.main.WeddingsConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
@@ -181,9 +180,6 @@ public class Config {
 
 			ConfigurableProcessor.process(ThreadConfig.class, mainProps);
 			log.info("Loading: " + main + "/thread.properties");
-
-			ConfigurableProcessor.process(WeddingsConfig.class, mainProps);
-			log.info("Loading: " + main + "/weddings.properties");
 
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
 			log.info("Loading: " + main + "/world.properties");
@@ -334,9 +330,6 @@ public class Config {
 
 			ConfigurableProcessor.process(ThreadConfig.class, mainProps);
 			log.info("Reload: " + main + "/thread.properties");
-
-			ConfigurableProcessor.process(WeddingsConfig.class, mainProps);
-			log.info("Reload: " + main + "/weddings.properties");
 
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
 			log.info("Reload: " + main + "/world.properties");

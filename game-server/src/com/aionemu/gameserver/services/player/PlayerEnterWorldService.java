@@ -31,7 +31,6 @@ import com.aionemu.gameserver.dao.PlayerPassportsDAO;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
-import com.aionemu.gameserver.dao.WeddingDAO;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.account.Account;
@@ -589,7 +588,6 @@ public final class PlayerEnterWorldService {
 				RelinquishCraftStatus.removeExcessCraftStatus(player, false);
 
 			PlayerTransferService.getInstance().onEnterWorld(player);
-			player.setPartnerId(DAOManager.getDAO(WeddingDAO.class).loadPartnerId(player));
 		}
 		else {
 			log.info("[DEBUG] enter world" + objectId + ", Player: " + player);

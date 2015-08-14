@@ -71,7 +71,7 @@ public class ChatProcessor implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		final File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"),
-			new File("./data/scripts/system/playerhandlers.xml"), new File("./data/scripts/system/weddinghandlers.xml"), new File("./data/scripts/system/consolehandlers.xml") };
+			new File("./data/scripts/system/playerhandlers.xml"), new File("./data/scripts/system/consolehandlers.xml") };
 		final CountDownLatch loadLatch = new CountDownLatch(files.length);
 
 		for (int i = 0; i < files.length; i++) {
@@ -167,13 +167,6 @@ public class ChatProcessor implements GameEngine {
 			if(cmd != null && cmd instanceof AdminCommand )
 				cmd.process(player, text.substring(2));
 			return true;
-		}
-		else if(text.startsWith("..")) {
-			ChatCommand cmd = getCommand(text.substring(2));
-			if(cmd != null && cmd instanceof WeddingCommand)
-				return cmd.process(player, text.substring(2));
-			else
-				return true;
 		}
 		else if (text.startsWith(".")){
 			ChatCommand cmd = getCommand(text.substring(1));

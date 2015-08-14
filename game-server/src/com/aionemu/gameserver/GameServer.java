@@ -39,7 +39,6 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
-import com.aionemu.gameserver.configs.main.WeddingsConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -81,7 +80,6 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WeatherService;
-import com.aionemu.gameserver.services.WeddingService;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -304,8 +302,6 @@ public class GameServer {
 			PlayerEventService.getInstance();
 		if (EventsConfig.ENABLE_EVENT_SERVICE)
 			EventService.getInstance().start();
-		if (WeddingsConfig.WEDDINGS_ENABLE)
-			WeddingService.getInstance();
 
 		AdminService.getInstance();
 		PlayerTransferService.getInstance();

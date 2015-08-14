@@ -106,8 +106,6 @@ public class CommandsConfig {
 	public static int LEGION;
 	@Property(key = "map", defaultValue = "3")
 	public static int MAP;
-	@Property(key = "marrydel", defaultValue = "3")
-	public static int MARRYDEL;
 	@Property(key = "morph", defaultValue = "3")
 	public static int MORPH;
 	@Property(key = "motion", defaultValue = "3")
