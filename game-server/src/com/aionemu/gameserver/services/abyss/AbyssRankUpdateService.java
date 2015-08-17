@@ -15,7 +15,6 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,12 +37,6 @@ public class AbyssRankUpdateService {
 	}
 
 	public void scheduleUpdate() {
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
-		int nextTime = dao.load("abyssRankUpdate");
-		if (nextTime < System.currentTimeMillis()/1000){
-			performUpdate();
-		}
-
 		log.info("Starting ranking update task based on cron expression: " + RankingConfig.TOP_RANKING_UPDATE_RULE);
 		CronService.getInstance().schedule(new Runnable() {
 			@Override
