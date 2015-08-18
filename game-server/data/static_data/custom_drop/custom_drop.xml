@@ -17,4 +17,13 @@
 		</drop_group>
 	</npc_drop>
 	-->
+	<!-- Chests -->
+	<!-- Poeta -->
+	<npc_drop npc_id="211822" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="POETA_TREASURE_BOX_ARMOR_COMMON">
+			<drop item_id="111500472" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="111100433" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="111300435" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
 </custom_drop>
