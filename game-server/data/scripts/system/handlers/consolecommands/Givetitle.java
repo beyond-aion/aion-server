@@ -1,10 +1,10 @@
 package consolecommands;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -23,7 +23,7 @@ public class Givetitle extends ConsoleCommand {
 			return;
 		}
 
-		if (admin.getAccessLevel() < CommandsConfig.SET) {
+		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
 			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
 			return;
 		}

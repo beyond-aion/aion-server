@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -9,6 +8,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -27,7 +27,7 @@ public class Leveldown extends ConsoleCommand {
 			return;
 		}
 
-		if (admin.getAccessLevel() < CommandsConfig.SET) {
+		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
 			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
 			return;
 		}

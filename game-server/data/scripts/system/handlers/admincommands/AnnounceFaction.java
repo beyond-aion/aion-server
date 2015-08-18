@@ -2,11 +2,11 @@ package admincommands;
 
 import java.util.Iterator;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -23,16 +23,18 @@ public class AnnounceFaction extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 2) {
-			PacketSendUtility.sendMessage(player, "Syntax: //announcefaction <ely | asmo> <message>");
-		}
-		else {
-			Iterator<Player> iter = World.getInstance().getPlayersIterator();
+			onFail(player, null);
+		} else {
 			String message = null;
 
 			if (params[0].equals("ely"))
-				message = "Elyos : ";
-			else
-				message = "Asmodians : ";
+				message = "Elyos: ";
+			else if (params[0].equals("asmo"))
+				message = "Asmodians: ";
+			else {
+				onFail(player, null);
+				return;
+			}
 
 			// Add with space
 			for (int i = 1; i < params.length - 1; i++)
@@ -42,15 +44,14 @@ public class AnnounceFaction extends AdminCommand {
 			message += params[params.length - 1];
 
 			Player target = null;
-
+			Iterator<Player> iter = World.getInstance().getPlayersIterator();
+			
 			while (iter.hasNext()) {
 				target = iter.next();
 
-				if (target.getAccessLevel() > CommandsConfig.ANNONCEFACTION || target.getRace() == Race.ELYOS
-					&& params[0].equals("ely"))
-					PacketSendUtility.sendBrightYellowMessageOnCenter(target, message);
-				else if (target.getAccessLevel() > CommandsConfig.ANNONCEFACTION
-					|| target.getCommonData().getRace() == Race.ASMODIANS && params[0].equals("asmo"))
+				if (ChatProcessor.getInstance().isCommandAllowed(target, this.getAlias()) ||
+					(params[0].equals("ely") && target.getRace() == Race.ELYOS) ||
+					(params[0].equals("asmo") && target.getRace() == Race.ASMODIANS))
 					PacketSendUtility.sendBrightYellowMessageOnCenter(target, message);
 			}
 		}

@@ -200,6 +200,10 @@ public class ChatProcessor implements GameEngine {
 		return cmd;
 	}
 	
+	public boolean isCommandAllowed(Player executor, String alias) {
+		return isCommandExists(alias) && this.commands.get(alias).checkLevel(executor);
+	}
+	
 	public boolean isCommandExists(String alias) {
 		return this.commands.containsKey(alias); 
 	}

@@ -2,7 +2,6 @@ package admincommands;
 
 import java.lang.reflect.Field;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -59,10 +58,6 @@ public class Equip extends AdminCommand {
 			else
 				i++;
 			if ("socket".startsWith(params[i])) {
-				if (admin.getAccessLevel() < CommandsConfig.EQUIP) {
-					PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-					return;
-				}
 				int manastone = 167000551;
 				int quant = 0;
 				try {
@@ -77,10 +72,6 @@ public class Equip extends AdminCommand {
 				return;
 			}
 			if ("enchant".startsWith(params[i])) {
-				if (admin.getAccessLevel() < CommandsConfig.EQUIP) {
-					PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-					return;
-				}
 				int enchant = 0;
 				try {
 					enchant = params[i + 1] == null ? enchant : Integer.parseInt(params[i + 1]);
@@ -93,10 +84,6 @@ public class Equip extends AdminCommand {
 				return;
 			}
 			if ("tamper".startsWith(params[i])) {
-				if (admin.getAccessLevel() < CommandsConfig.EQUIP) {
-					PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-					return;
-				}
 				int tampering = 0;
 				try {
 					tampering = params[i + 1] == null ? tampering : Integer.parseInt(params[i + 1]);
@@ -109,10 +96,6 @@ public class Equip extends AdminCommand {
 				return;
 			}
 			if ("godstone".startsWith(params[i])) {
-				if (admin.getAccessLevel() < CommandsConfig.EQUIP) {
-					PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-					return;
-				}
 				int godstone = 100;
 				try {
 					godstone = params[i + 1] == null ? godstone : Integer.parseInt(params[i + 1]);

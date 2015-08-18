@@ -1,12 +1,10 @@
 package consolecommands;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -25,7 +23,7 @@ public class Classup extends ConsoleCommand {
 			return;
 		}
 
-		if (admin.getAccessLevel() < CommandsConfig.SET) {
+		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
 			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
 			return;
 		}
@@ -44,9 +42,10 @@ public class Classup extends ConsoleCommand {
 		final Player player = (Player) target;
 
 		if (player.getLevel() < 10) {
-			int questId = player.getRace() == Race.ELYOS ? 1007 : 2009;
+			// why is this called and then not used in any meaningful way?
+//			int questId = player.getRace() == Race.ELYOS ? 1007 : 2009;
+//			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			int level = 10;
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			player.getCommonData().setDaeva(true);
 			player.getCommonData().setLevel(level);
 			player.getController().upgradePlayer();

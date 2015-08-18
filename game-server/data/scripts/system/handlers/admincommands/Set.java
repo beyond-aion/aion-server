@@ -2,7 +2,6 @@ package admincommands;
 
 import java.util.Arrays;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -49,11 +48,6 @@ public class Set extends AdminCommand {
 		String paramValue = params[1];
 
 		if (params[0].equals("class")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			byte newClass;
 			try {
 				newClass = Byte.parseByte(paramValue);
@@ -67,11 +61,6 @@ public class Set extends AdminCommand {
 			setClass(target, oldClass, newClass);
 		}
 		else if (params[0].equals("exp")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			long exp;
 			try {
 				exp = Long.parseLong(paramValue);
@@ -85,11 +74,6 @@ public class Set extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Set exp of target to " + paramValue);
 		}
 		else if (params[0].equals("ap")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			int ap;
 			try {
 				ap = Integer.parseInt(paramValue);
@@ -109,11 +93,6 @@ public class Set extends AdminCommand {
 			}
 		}
 		else if (params[0].equals("gp")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			int gp;
 			try {
 				gp = Integer.parseInt(paramValue);
@@ -133,11 +112,6 @@ public class Set extends AdminCommand {
 			}
 		}
 		else if (params[0].equals("level")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			int level;
 			try {
 				level = Integer.parseInt(paramValue);
@@ -176,11 +150,6 @@ public class Set extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + level);
 		}
 		else if (params[0].equals("title")) {
-			if (admin.getAccessLevel() < CommandsConfig.SET) {
-				PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
-				return;
-			}
-
 			int titleId;
 			try {
 				titleId = Integer.parseInt(paramValue);

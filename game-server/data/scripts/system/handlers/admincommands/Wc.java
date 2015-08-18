@@ -1,11 +1,11 @@
 package admincommands;
 
-import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
@@ -58,12 +58,13 @@ public class Wc extends AdminCommand {
 		final String sMessage = message.substring(0, CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
 		final boolean toAll = params[0].equals("ALL");
 		final Race race = adminRace;
+		final String cmdAlias = this.getAlias();
 		
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
-				if (toAll || player.getRace() == race || player.getAccessLevel() >= CommandsConfig.WC) {
+				if (toAll || player.getRace() == race || ChatProcessor.getInstance().isCommandAllowed(player, cmdAlias)) {
 					PacketSendUtility.sendMessage(player, sMessage);
 				}
 			}
