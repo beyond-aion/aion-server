@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Zone Drops -->
+	<gd_rule rule_name="Tursin Armor (Rare)" base_chance="0.25">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TURSIN_GARRISON_210030000"/>
+			<gd_zone zone="TURSIN_OUTPOST_210030000"/>
+		</gd_zones>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="110100423" name="Shaman's Tunic"/>
+			<gd_item id="111100355" name="Shaman's Gloves"/>
+			<gd_item id="112100325" name="Shaman's Pauldrons"/>
+			<gd_item id="113100357" name="Shaman's Leggings"/>
+			<gd_item id="114100377" name="Shaman's Shoes"/>
+			<gd_item id="125000925" name="Shaman's Headband"/>
+			<gd_item id="110300382" name="Sentinel's Jerkin"/>
+			<gd_item id="111300354" name="Sentinel's Vambrace"/>
+			<gd_item id="112300327" name="Sentinel's Shoulderguards"/>
+			<gd_item id="113300371" name="Sentinel's Breeches"/>
+			<gd_item id="114300385" name="Sentinel's Boots"/>
+			<gd_item id="125000926" name="Sentinel's Hat"/>
+			<gd_item id="110500413" name="Trainee's Hauberk"/>
+			<gd_item id="111500397" name="Trainee's Handguards"/>
+			<gd_item id="112500368" name="Trainee's Spaulders"/>
+			<gd_item id="113500396" name="Trainee's Chausses"/>
+			<gd_item id="114500404" name="Trainee's Brogans"/>
+			<gd_item id="125000927" name="Trainee's Chain Helm"/>
+			<gd_item id="110600410" name="Bodyguard's Breastplate"/>
+			<gd_item id="111600386" name="Bodyguard's Gauntlets"/>
+			<gd_item id="112600369" name="Bodyguard's Shoulderplates"/>
+			<gd_item id="113600380" name="Bodyguard's Greaves"/>
+			<gd_item id="114600377" name="Bodyguard's Sabatons"/>
+			<gd_item id="125000928" name="Bodyguard's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Boss Belt (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+			<gd_npc npc_id="210308" name="Hakka the Bigmouth"/>
+			<gd_npc npc_id="210309" name="Scrapper Tunkara"/>
+			<gd_npc npc_id="210310" name="Blindeye"/>
+			<gd_npc npc_id="210311" name="Scrapper Kuntura"/>
+			<gd_npc npc_id="210312" name="Kumbacha the Shaman"/>
+			<gd_npc npc_id="210314" name="Scout Takata"/>
+			<gd_npc npc_id="210315" name="Smackstopper Tambaku"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="123000889" name="Tursin Leather Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Boss Accessoire (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+			<gd_npc npc_id="210308" name="Hakka the Bigmouth"/>
+			<gd_npc npc_id="210309" name="Scrapper Tunkara"/>
+			<gd_npc npc_id="210310" name="Blindeye"/>
+			<gd_npc npc_id="210311" name="Scrapper Kuntura"/>
+			<gd_npc npc_id="210312" name="Kumbacha the Shaman"/>
+			<gd_npc npc_id="210314" name="Scout Takata"/>
+			<gd_npc npc_id="210315" name="Smackstopper Tambaku"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="122000901" name="Tursin Seal"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lepharist Mask" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210077" name="Peon"/>
+			<gd_npc npc_id="210316" name="Cavil"/>
+			<gd_npc npc_id="210698" name="Peon"/>
+			<gd_npc npc_id="210706" name="Laborer"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="125001826" name="Novice Lepharist Mask"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lepharist Hood" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210699" name="Shaman"/>
+			<gd_npc npc_id="210700" name="Shaman"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="125001816" name="Novice Lepharist Hood"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Odium Refining Method" base_chance="5" >
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210332" name="Kobold Cook"/>
+			<gd_npc npc_id="210333" name="Kobold Cook"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182200558" name="Odium Refining Method"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lepharist Veil" base_chance="0.6" >
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210688" name="Thief"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001831" name="Novice Lepharist Veil"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lepharist Red Headband" base_chance="0.33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210073" name="Shipwrecked Deckhand"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="125001812" name="Experienced Lepharist Red Headband"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lepharist White Headband" base_chance="0.33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210074" name="Shipwrecked Crewmember"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="125001806" name="Novice Lepharist White Headband"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kraka Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="100200237" name="Commander's Dagger"/>
+			<gd_item id="100900142" name="Commander's Greatsword"/>
+			<gd_item id="100500145" name="Commander's Jewel"/>
+			<gd_item id="101700157" name="Commander's Longbow"/>
+			<gd_item id="101300138" name="Commander's Spear"/>
+			<gd_item id="101500146" name="Commander's Staff"/>
+			<gd_item id="100000221" name="Commander's Sword"/>
+			<gd_item id="100600160" name="Commander's Tome"/>
+			<gd_item id="100100135" name="Commander's Warhammer"/>
+			<gd_item id="101800263" name="Commander's Pistol"/>
+			<gd_item id="101900265" name="Commander's Aethercannon"/>
+			<gd_item id="102000276" name="Commander's Harp"/>
+			<gd_item id="102100247" name="Commander's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kraka Accessoire (Rare)" base_chance="80">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="122000506" name="Kraka's Seal"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kraka Head (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="125000929" name="Kraka's Mask"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kraka Souvenir (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210187" name="Chieftain Kraka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170490005" name="[Souvenir] Chieftain Kraka's Drum"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Chankaki Armor (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210296" name="Shaman Chankaki"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="110100424" name="Chankaki's Tunic"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Shalph Armor (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210298" name="Wind Spirit Shalph"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="114300386" name="Shalph's Boots"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Hakka Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210308" name="Hakka the Bigmouth"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="100200236" name="Hakka's Dagger"/>
+			<gd_item id="101800262" name="Hakka's Pistol"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Hakka Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210308" name="Hakka the Bigmouth"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="114100377" name="Shaman's Shoes"/>
+			<gd_item id="114300385" name="Sentinel's Boots"/>
+			<gd_item id="114500404" name="Trainee's Brogans"/>
+			<gd_item id="114600377" name="Bodyguard's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tunkara Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210309" name="Scrapper Tunkara"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="100000220" name="Tunkara's Sword"/>
+			<gd_item id="100500144" name="Tunkara's Jewel"/>
+			<gd_item id="102100246" name="Tunkara's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tunkara Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210309" name="Scrapper Tunkara"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="111100355" name="Shaman's Gloves"/>
+			<gd_item id="111300354" name="Sentinel's Vambrace"/>
+			<gd_item id="111500397" name="Trainee's Handguards"/>
+			<gd_item id="111600386" name="Bodyguard's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Blindeye Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210310" name="Blindeye"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="101700156" name="Blindeye's Longbow"/>
+			<gd_item id="100100134" name="Blindeye's Warhammer"/>
+			<gd_item id="101900264" name="Blindeye's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Blindeye Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210310" name="Blindeye"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="112100325" name="Shaman's Pauldrons"/>
+			<gd_item id="112300327" name="Sentinel's Shoulderguards"/>
+			<gd_item id="112500368" name="Trainee's Spaulders"/>
+			<gd_item id="112600369" name="Bodyguard's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kuntura Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210311" name="Scrapper Kuntura"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="100900141" name="Kuntura's Greatsword"/>
+			<gd_item id="100600159" name="Kuntura's Tome"/>
+			<gd_item id="102000275" name="Kuntura's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kuntura Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210311" name="Scrapper Kuntura"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="113100357" name="Shaman's Leggings"/>
+			<gd_item id="113300371" name="Sentinel's Breeches"/>
+			<gd_item id="113500396" name="Trainee's Chausses"/>
+			<gd_item id="113600380" name="Bodyguard's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kumbacha Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210312" name="Kumbacha the Shaman"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="101300137" name="Kumbacha's Spear"/>
+			<gd_item id="101500145" name="Kumbacha's Staff"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Kumbacha Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210312" name="Kumbacha the Shaman"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="110100423" name="Shaman's Tunic"/>
+			<gd_item id="110300382" name="Sentinel's Jerkin"/>
+			<gd_item id="110500413" name="Trainee's Hauberk"/>
+			<gd_item id="110600410" name="Bodyguard's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Aishi Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210313" name="Aishi"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 19 -->
+			<gd_item id="100500507" name="Aishi's Jewel"/>
+			<gd_item id="100600543" name="Aishi's Tome"/>
+			<gd_item id="102000534" name="Aishi's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Aishi Accessoire (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210313" name="Aishi"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 19 -->
+			<gd_item id="120000553" name="Aishi's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Takata Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210314" name="Scout Takata"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="125000925" name="Shaman's Headband"/>
+			<gd_item id="125000926" name="Sentinel's Hat"/>
+			<gd_item id="125000927" name="Trainee's Chain Helm"/>
+			<gd_item id="125000928" name="Bodyguard's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Takata Accessoire (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210314" name="Scout Takata"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="120000552" name="Takata's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tambaku Shield (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210315" name="Smackstopper Tambaku"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="115000477" name="Tambaku's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tambaku Accessoire (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210315" name="Smackstopper Tambaku"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="123000616" name="Tambaku's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lamega Shield (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210334" name="Lamega"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 19 -->
+			<gd_item id="115000394" name="Lamega Shell"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lamega Accessoire (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210334" name="Lamega"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 19 -->
+			<gd_item id="122000884" name="Lamega's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mepisto Armor (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210345" name="Lonely Mepisto"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 20 -->
+			<gd_item id="111600387" name="Mepisto's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Suspicious Box Weapon (Rare)" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211823" name="Suspicious Box"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 16 -->
+			<gd_item id="100000219" name="Head Priest's Sword"/>
+			<gd_item id="100200235" name="Head Priest's Dagger"/>
+			<gd_item id="100500143" name="Head Priest's Orb"/>
+			<gd_item id="101700155" name="Head Priest's Longbow"/>
+			<gd_item id="100900140" name="Head Priest's Greatsword"/>
+			<gd_item id="101300136" name="Head Priest's Spear"/>
+			<gd_item id="100100133" name="Head Priest's Warhammer"/>
+			<gd_item id="101500144" name="Head Priest's Staff"/>
+			<gd_item id="100600158" name="Head Priest's Tome"/>
+			<gd_item id="101800261" name="Head Priest's Pistol"/>
+			<gd_item id="101900263" name="Head Priest's Aethercannon"/>
+			<gd_item id="102000274" name="Head Priest's Harp"/>
+			<gd_item id="102100245" name="Head Priest's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Suspicious Box Accessoire (Rare)" base_chance="6.5">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211823" name="Suspicious Box"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 16 -->
+			<gd_item id="122000600" name="Head Priest's Jewel Ring"/>
+			<gd_item id="122000601" name="Head Priest's Manastone Ring"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Events -->
+	<gd_rule rule_name="Shulack Sugarcrook Event Quest" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217161" name="Shulack Sugarcrook"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="164002037" name="[Event] Castings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Shulack Sugarcrook Event Potion" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217161" name="Shulack Sugarcrook"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="160010147" name="[Event] Creamy Pumpkin Ale"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Shulack Sugarcrook Event Bundle" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217161" name="Shulack Sugarcrook"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051337" name="[Event] Sugarcrook's Pack"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Epiclone Event Bundle" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217733" name="Epiclone"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051340" name="[Event] Aion's Star"/>
+		</gd_items>
+	</gd_rule>	
+</global_rules>
