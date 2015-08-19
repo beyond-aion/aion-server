@@ -40,6 +40,17 @@ public class AdminConfig {
 	public static boolean VISION_GM_CONNECTION;
 	@Property(key = "gameserver.administration.whisper.gm.connection", defaultValue = "false")
 	public static boolean WHISPER_GM_CONNECTION;
+	
+	/**
+	 * GM announce options
+	 */
+	@Property(key = "gameserver.administration.announce.levels", defaultValue = "*")
+	public static String ANNOUNCE_LEVEL_LIST;
+	@Property(key = "gameserver.administration.announce.login_to_all_players", defaultValue = "true")
+	public static boolean ANNOUNCE_LOGIN_TO_ALL_PLAYERS;
+	@Property(key = "gameserver.administration.announce.logout_to_all_players", defaultValue = "true")
+	public static boolean ANNOUNCE_LOGOUT_TO_ALL_PLAYERS;
+	
 	@Property(key = "gameserver.administration.trade.item.restriction", defaultValue = "false")
 	public static boolean ENABLE_TRADEITEM_RESTRICTION;
 
@@ -66,7 +77,4 @@ public class AdminConfig {
 	public static String CUSTOMTAG_ACCESS8;
 	@Property(key = "gameserver.customtag.access9", defaultValue = "<TAG_HERE> %s")
 	public static String CUSTOMTAG_ACCESS9;
-	
-	@Property(key = "gameserver.admin.announce.levels", defaultValue = "*")
-	public static String ANNOUNCE_LEVEL_LIST;
 }

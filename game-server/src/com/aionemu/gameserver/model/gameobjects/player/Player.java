@@ -96,7 +96,6 @@ import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -116,7 +115,6 @@ public class Player extends Creature {
 	public InGameShop inGameShop;
 	public WindstreamPath windstreamPath;
 	private PlayerAppearance playerAppearance;
-	private PlayerAppearance savedPlayerAppearance;
 	private PlayerCommonData playerCommonData;
 	private Account playerAccount;
 	private LegionMember legionMember;
@@ -314,6 +312,22 @@ public class Player extends Creature {
 		return playerCommonData.getName();
 	}
 
+	public String getName(boolean displayCustomTag) {
+		String nameFormat = "%s";
+
+		if (displayCustomTag) {
+			try {
+				String tagID = "CUSTOMTAG_ACCESS" + getAccessLevel();
+				nameFormat = AdminConfig.class.getField(tagID).get(null).toString();
+			}
+			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+				// should never happen
+			}
+		}
+		
+		return String.format(nameFormat, getName());
+	}
+	
 	public PlayerAppearance getPlayerAppearance() {
 		return playerAppearance;
 	}

@@ -31,6 +31,6 @@ public class AuditLogger {
 			log.info(message);
 
 			if (SecurityConfig.GM_AUDIT_MESSAGE_BROADCAST)
-				GMService.getInstance().broadcastMesage(message);
+				GMService.getInstance().broadcastMessageToGMs(message);
 	}
 }

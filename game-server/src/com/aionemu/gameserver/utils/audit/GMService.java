@@ -8,17 +8,16 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author MrPoke
- *
+ * @modified Neon
  */
 public class GMService {
+
 	public static final GMService getInstance() {
 		return SingletonHolder.instance;
 	}
@@ -26,45 +25,61 @@ public class GMService {
 	private Map<Integer, Player> gms = new FastMap<Integer, Player>();
 	private boolean announceAny = false;
 	private List<Byte> announceList;
+
 	private GMService() {
 		announceList = new ArrayList<Byte>();
 		announceAny = AdminConfig.ANNOUNCE_LEVEL_LIST.equals("*");
 		if (!announceAny) {
 			try {
 				for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
-					announceList.add(Byte.parseByte(level));
-			} catch (Exception e) {
-				announceAny = true;
+					if (!level.equals("0"))
+						announceList.add(Byte.parseByte(level));
+			}
+			catch (Exception e) {
 			}
 		}
 	}
-	
-	public Collection<Player> getGMs(){
+
+	public Collection<Player> getAnnounceGMs() {
 		return gms.values();
 	}
-	public void onPlayerLogin(Player player){
-		if (player.isGM()){
+
+	public void onPlayerLogin(Player player) {
+		if (player.isGM()) {
 			gms.put(player.getObjectId(), player);
-			
-			if(announceAny) 
-				broadcastMesage("GM: "+player.getName()+ " logged in.");
-			else if (announceList.contains(player.getAccessLevel())) 
-				broadcastMesage("GM: "+player.getName()+ " logged in.");
-		}
-	}
-	
-	public void onPlayerLogedOut(Player player){
-		gms.remove(player.getObjectId());
-	}
-
-	public void broadcastMesage(String message){
-		SM_MESSAGE packet = new SM_MESSAGE(0, null, message, ChatType.YELLOW);
-		for (Player player : gms.values()){
-			PacketSendUtility.sendPacket(player, packet);
+			broadcastGMConnectionMessage(player, "login", "%s logged in.");
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
+	public void onPlayerLogout(Player player) {
+		if (gms.remove(player.getObjectId()) != null)
+			broadcastGMConnectionMessage(player, "logout", "%s went offline.");
+	}
+
+	public void broadcastMessageToGMs(String message) {
+		for (Player gm : getAnnounceGMs()) {
+			PacketSendUtility.sendYellowMessage(gm, message);
+		}
+	}
+
+	private void broadcastMessageToAllPlayers(String message) {
+		for (Player player : World.getInstance().getAllPlayers()) {
+			PacketSendUtility.sendYellowMessage(player, message);
+		}
+	}
+
+	private void broadcastGMConnectionMessage(Player gm, String event, String format) {
+		if (announceAny || announceList.contains(gm.getAccessLevel())) {
+			String message = String.format(format, AdminConfig.CUSTOMTAG_ENABLE ? gm.getName(true) : "GM: " + gm.getName());
+
+			if (("logout".equals(event) && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)
+				|| ("login".equals(event) && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS))
+				broadcastMessageToAllPlayers(message);
+			else
+				broadcastMessageToGMs(message);
+		}
+	}
+
 	private static class SingletonHolder {
 
 		protected static final GMService instance = new GMService();

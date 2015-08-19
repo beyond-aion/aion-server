@@ -91,43 +91,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 
 		writeC(player.getHeading());
 
-		String nameFormat = "%s";
-		// orphaned players - later find/remove them
-		if (player.getClientConnection() != null) {
-			if (AdminConfig.CUSTOMTAG_ENABLE) {
-				switch (player.getClientConnection().getAccount().getAccessLevel()) {
-					case 1:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS1;
-						break;
-					case 2:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS2;
-						break;
-					case 3:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS3;
-						break;
-					case 4:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS4;
-						break;
-					case 5:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS5;
-						break;
-					case 6:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS6;
-						break;
-					case 7:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS7;
-						break;
-					case 8:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS8;
-						break;
-					case 9:
-						nameFormat = AdminConfig.CUSTOMTAG_ACCESS9;
-						break;
-				}
-			}
-		}
-
-		writeS(String.format(nameFormat, player.getName()));
+		writeS(player.getName(AdminConfig.CUSTOMTAG_ENABLE));
 
 		writeH(pcd.getTitleId());
 		writeH(player.getCommonData().isHaveMentorFlag() ? 1 : 0);

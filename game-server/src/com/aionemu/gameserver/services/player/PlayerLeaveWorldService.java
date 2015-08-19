@@ -88,7 +88,7 @@ public class PlayerLeaveWorldService {
 		}
 		SerialKillerService.getInstance().onLogout(player);
 		InstanceService.onLogOut(player);
-		GMService.getInstance().onPlayerLogedOut(player);
+		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
 		player.getMoveController().abortMove();
 		
