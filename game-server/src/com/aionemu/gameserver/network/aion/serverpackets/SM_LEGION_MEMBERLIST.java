@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
+import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -58,7 +59,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 				writeD(0);
 				writeD(0);
 			}
-			writeD(1); //This is server_id. Need to be dynamic! TODO: add to account model?
+			writeD(NetworkConfig.GAMESERVER_ID); // TODO: add to account model? displays server number for each away player in region field
 		}
 	}
 }
