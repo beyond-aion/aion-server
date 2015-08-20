@@ -20,10 +20,296 @@
 	<!-- Chests -->
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
-		<drop_group race="PC_ALL" use_category="true" name="POETA_TREASURE_BOX_ARMOR_COMMON">
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_ARMOR_COMMON">
 			<drop item_id="111500472" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
 			<drop item_id="111100433" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
 			<drop item_id="111300435" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Unstable Abyssal Splinter -->
+	<npc_drop npc_id="701574" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_LEGION_COIN">
+			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_ANCIENT_ICON">
+			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="186000065" min_amount="1" max_amount="2" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000064" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_ANCIENT_SEAL">
+			<drop item_id="186000062" min_amount="1" max_amount="2" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000061" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000060" min_amount="1" max_amount="1" chance="2" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_ANCIENT_GOBLET">
+			<drop item_id="186000058" min_amount="1" max_amount="1" chance="0.5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000057" min_amount="1" max_amount="1" chance="0.4" no_reduce="false" each_member="false"/>
+			<drop item_id="186000056" min_amount="1" max_amount="1" chance="0.2" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_ANCIENT_CROWN">
+			<drop item_id="186000054" min_amount="1" max_amount="1" chance="0.5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000053" min_amount="1" max_amount="1" chance="0.4" no_reduce="false" each_member="false"/>
+			<drop item_id="186000052" min_amount="1" max_amount="1" chance="0.3" no_reduce="false" each_member="false"/>
+			<drop item_id="186000051" min_amount="1" max_amount="1" chance="0.2" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ANCIENT_TREASURE_BOX_SUPPLEMENTS">
+			<drop item_id="166100011" min_amount="10" max_amount="30" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701575" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_LEGION_COIN">
+			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_ICON">
+			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000064" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_SEAL">
+			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" no_reduce="false" each_member="false"/>
+			<drop item_id="186000061" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000060" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_GOBLET">
+			<drop item_id="186000058" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="186000057" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000056" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_CROWN">
+			<drop item_id="186000054" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000053" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="186000052" min_amount="1" max_amount="1" chance="2" no_reduce="false" each_member="false"/>
+			<drop item_id="186000051" min_amount="1" max_amount="1" chance="1" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SUPPLEMENTS">
+			<drop item_id="166100011" min_amount="10" max_amount="30" chance="60" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ARMOR_UNIQUE">
+			<drop item_id="112101297" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="112301278" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="112501267" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="112601286" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701576" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_LEGION_COIN">
+			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_ANCIENT_ICON">
+			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000064" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_ANCIENT_SEAL">
+			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" no_reduce="false" each_member="false"/>
+			<drop item_id="186000061" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000060" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_ANCIENT_GOBLET">
+			<drop item_id="186000058" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="186000057" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000056" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_ANCIENT_CROWN">
+			<drop item_id="186000054" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000053" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="186000052" min_amount="1" max_amount="1" chance="2" no_reduce="false" each_member="false"/>
+			<drop item_id="186000051" min_amount="1" max_amount="1" chance="1" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="GENESIS_TREASURE_BOX_SUPPLEMENTS">
+			<drop item_id="166100011" min_amount="10" max_amount="30" chance="60" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701577" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_KEY">
+			<drop item_id="185000104" min_amount="1" max_amount="1" chance="100" no_reduce="true" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_LEGION_COIN">
+			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_ICON">
+			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000064" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_SEAL">
+			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" no_reduce="false" each_member="false"/>
+			<drop item_id="186000061" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000060" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_GOBLET">
+			<drop item_id="186000058" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="186000057" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000056" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_CROWN">
+			<drop item_id="186000054" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000053" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="186000052" min_amount="1" max_amount="1" chance="2" no_reduce="false" each_member="false"/>
+			<drop item_id="186000051" min_amount="1" max_amount="1" chance="1" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SUPPLEMENTS">
+			<drop item_id="166100011" min_amount="10" max_amount="30" chance="60" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ARMOR_UNIQUE">
+			<drop item_id="111601306" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="111101340" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="111501327" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="111301335" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701578" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_LEGION_COIN">
+			<drop item_id="186000199" min_amount="1" max_amount="10" chance="100" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_ICON">
+			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000064" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_SEAL">
+			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" no_reduce="false" each_member="false"/>
+			<drop item_id="186000061" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+			<drop item_id="186000060" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_GOBLET">
+			<drop item_id="186000058" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="186000057" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="186000056" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ANCIENT_CROWN">
+			<drop item_id="186000054" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+			<drop item_id="186000053" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="186000052" min_amount="1" max_amount="1" chance="2" no_reduce="false" each_member="false"/>
+			<drop item_id="186000051" min_amount="1" max_amount="1" chance="1" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SUPPLEMENTS">
+			<drop item_id="166100011" min_amount="10" max_amount="30" chance="60" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ARMOR_UNIQUE">
+			<drop item_id="113301359" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="113501342" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="113601295" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="113101357" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="114301394" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="114501350" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="114601292" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="114101388" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701579" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SOUVENIR">
+			<drop item_id="170490004" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_MEDAL">
+			<drop item_id="186000147" min_amount="1" max_amount="4" chance="100" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_WEAPON_UNIQUE">
+			<drop item_id="101501124" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100901106" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101701135" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101301043" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100201252" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100001413" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100601154" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100101090" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100501098" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101800813" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101900817" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="102000851" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="102100712" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ARMOR_UNIQUE">
+			<drop item_id="110601343" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="110301394" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="110501369" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="110101486" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_HEADBAND_UNIQUE">
+			<drop item_id="125003227" min_amount="1" max_amount="1" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="125003229" min_amount="1" max_amount="1" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="125003228" min_amount="1" max_amount="1" chance="50" no_reduce="false" each_member="false"/>
+			<drop item_id="125003230" min_amount="1" max_amount="1" chance="50" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SHIELD_UNIQUE">
+			<drop item_id="115001463" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701580" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SOUVENIR">
+			<drop item_id="170490004" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_MEDAL">
+			<drop item_id="186000147" min_amount="1" max_amount="8" chance="100" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_WEAPON_EPIC">
+			<drop item_id="100201266" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="101501138" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="100501112" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="100901121" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="101701156" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="101301057" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="100001448" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="100601193" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="100101105" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="101800916" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="101900895" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="102000933" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+			<drop item_id="102100771" min_amount="1" max_amount="1" chance="3" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_WEAPON_UNIQUE">
+			<drop item_id="101501124" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100901106" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101701135" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101301043" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100201252" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100001413" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100601154" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100101090" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="100501098" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101800813" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="101900817" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="102000851" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+			<drop item_id="102100712" min_amount="1" max_amount="1" chance="10" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_ARMOR_UNIQUE">
+			<drop item_id="110601343" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="110301394" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="110501369" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+			<drop item_id="110101486" min_amount="1" max_amount="1" chance="20" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_HEADBAND_UNIQUE">
+			<drop item_id="125003227" min_amount="1" max_amount="1" chance="60" no_reduce="false" each_member="false"/>
+			<drop item_id="125003229" min_amount="1" max_amount="1" chance="60" no_reduce="false" each_member="false"/>
+			<drop item_id="125003228" min_amount="1" max_amount="1" chance="60" no_reduce="false" each_member="false"/>
+			<drop item_id="125003230" min_amount="1" max_amount="1" chance="60" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SHIELD_EPIC">
+			<drop item_id="115001476" min_amount="1" max_amount="1" chance="5" no_reduce="false" each_member="false"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="ABYSSAL_TREASURE_BOX_SHIELD_UNIQUE">
+			<drop item_id="115001463" min_amount="1" max_amount="1" chance="15" no_reduce="false" each_member="false"/>
+		</drop_group>
+	</npc_drop>
 </custom_drop>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
