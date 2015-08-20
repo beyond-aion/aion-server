@@ -296,9 +296,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.limits.update", defaultValue = "0 0 0 * * ?")
 	public static String LIMITS_UPDATE;
 
-	@Property(key = "gameserver.chat.text.length", defaultValue = "150")
-	public static int MAX_CHAT_TEXT_LENGHT;
-
 	@Property(key = "gameserver.abyssxform.afterlogout", defaultValue = "false")
 	public static boolean ABYSSXFORM_LOGOUT;
 
