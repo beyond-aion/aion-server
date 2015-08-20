@@ -868,4 +868,45 @@
 			<gd_item id="152000501"/>
 		</gd_items>
 	</gd_rule>
+	<!-- Ores -->
+	<gd_rule rule_name="Verteron Ore" base_chance="0.75" >
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npc_names>
+			<gd_npc_name function="EQUALS" value="Dukaki Miner"/>
+			<gd_npc_name function="EQUALS" value="Dukaki Peon"/>
+		</gd_npc_names>
+		<gd_items>
+			<gd_item id="152000101" name="Silver Ore"/>
+			<gd_item id="152000201" name="Iron Ore"/>
+			<gd_item id="152000301" name="Rose Quartz Ore"/>
+			<gd_item id="152000302" name="Amethyst Ore"/>
+			<gd_item id="152000303" name="Crystal Ore"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Fragments -->
+	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" >
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210343" name="Ancient Elyos Spirit"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012001" name="Ectoplasm Fragment"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Scales -->
+	<gd_rule rule_name="Wriggot Scale" base_chance="4" >
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210274" name="Violent Wriggot"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012002" name="Wriggot Scale"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

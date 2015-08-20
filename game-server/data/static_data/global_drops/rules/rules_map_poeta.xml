@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Sparkie Carapace Shield" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210010000" name="Poeta" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210307" name="Gatekeeper Kirrin"/>
+			<gd_npc npc_id="210120" name="Elder Sparkie"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 8 -->
+			<gd_item id="115000393" name="Sparkie Carapace Shield" />
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Tirratirra Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210010000" name="Poeta" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc name="Tirratirra" npc_id="210302"/>
+			<gd_npc npc_id="210302" name="Tirratirra"/>
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 4 -->
@@ -19,7 +34,7 @@
 			<gd_map map_id="210010000" name="Poeta" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc name="Tirratirra" npc_id="210302"/>
+			<gd_npc npc_id="210302" name="Tirratirra"/>
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 4 -->
@@ -33,7 +48,7 @@
 			<gd_map map_id="210010000" name="Poeta" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc name="Fauron" npc_id="210305"/>
+			<gd_npc npc_id="210305" name="Fauron"/>
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 6 -->
@@ -47,7 +62,7 @@
 			<gd_map map_id="210010000" name="Poeta" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc name="Gatekeeper Kirrin" npc_id="210307"/>
+			<gd_npc npc_id="210307" name="Gatekeeper Kirrin"/>
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 8 -->
@@ -56,25 +71,12 @@
 			<gd_item id="110100503" name="Agaric Tunic" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Sparkie Carapace Shield" base_chance="33">
-		<gd_maps>
-			<gd_map map_id="210010000" name="Poeta" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc name="Gatekeeper Kirrin" npc_id="210307"/>
-			<gd_npc name="Elder Sparkie" npc_id="210120"/>
-		</gd_npcs>
-		<gd_items>
-			<!-- Level 8 -->
-			<gd_item id="115000393" name="Sparkie Carapace Shield" />
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Carrot Juice of Paruru" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210010000" name="Poeta" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc name="Paruru Slowlegs" npc_id="210673"/>
+			<gd_npc npc_id="210673" name="Paruru Slowlegs"/>
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 8 -->
