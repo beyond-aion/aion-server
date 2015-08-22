@@ -1,6 +1,6 @@
 package consolecommands;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -54,7 +54,7 @@ public class Addcskill extends ConsoleCommand {
 
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 			Unmarshaller un = jc.createUnmarshaller();
-			SkillData data = (SkillData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/skills.xml"));
+			SkillData data = (SkillData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/skills.xml"));
 
 			SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 

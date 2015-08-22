@@ -51,6 +51,6 @@ public class Set_vitalpoint extends ConsoleCommand {
 
 	@Override
 	public void onFail(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///teleport_to_named <named name>");
+		PacketSendUtility.sendMessage(admin, "syntax ///set_vitalpoint <value>");
 	}
 }

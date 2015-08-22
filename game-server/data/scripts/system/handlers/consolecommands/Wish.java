@@ -1,6 +1,6 @@
 package consolecommands;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,7 +21,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.model.gameobjects.Item;
 
@@ -79,7 +78,7 @@ public class Wish extends ConsoleCommand {
 
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 			Unmarshaller un = jc.createUnmarshaller();
-			ItemData data = (ItemData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/items.xml"));
+			ItemData data = (ItemData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/items.xml"));
 
 			ItemTemplate itemTemplate = data.getItemTemplate(objName);
 
@@ -134,7 +133,7 @@ public class Wish extends ConsoleCommand {
 
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 			Unmarshaller un = jc.createUnmarshaller();
-			NpcData data = (NpcData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
+			NpcData data = (NpcData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
 
 			NpcTemplate npcTemplate = data.getNpcTemplate(objName);
 
