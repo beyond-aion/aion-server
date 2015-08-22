@@ -10,9 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -44,6 +41,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -54,7 +52,6 @@ public class DropRegistrationService {
 	private Map<Integer, Set<DropItem>> currentDropMap = new ConcurrentHashMap<>();
 	private Map<Integer, DropNpc> dropRegistrationMap = new ConcurrentHashMap<>();
 	private FastList<Integer> noReductionMaps;
-	private static Logger log = LoggerFactory.getLogger(DropRegistrationService.class);
 
 	public void registerDrop(Npc npc, Player player, Collection<Player> groupMembers) {
 		registerDrop(npc, player, player.getLevel(), groupMembers);
@@ -216,7 +213,7 @@ public class DropRegistrationService {
 								|| npc.getSpawn() instanceof VortexSpawnTemplate || npc.getSpawn() instanceof BaseSpawnTemplate) 
 								continue;
 							//if npc level ==1 means missing stats, so better exclude it from drops
-							if (!isChest && npc.getLevel() < 2)  {
+							if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId())  {
 								continue;
 							}
 							//if abyss type npc != null or npc is chest, the npc will be excluded from drops
@@ -307,7 +304,7 @@ public class DropRegistrationService {
 							|| npc.getSpawn() instanceof VortexSpawnTemplate || npc.getSpawn() instanceof BaseSpawnTemplate) 
 							continue;
 						//if npc level ==1 means missing stats, so better exclude it from drops
-						if (!isChest && npc.getLevel() < 2)  {
+						if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId())  {
 							continue;
 						}
 						//if abyss type npc != null or npc is chest, the npc will be excluded from drops

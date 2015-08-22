@@ -32,6 +32,7 @@ import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldDropType;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -139,7 +140,7 @@ public class DropInfo extends AdminCommand {
 								continue;
 							}
 							//if npc level ==1 means missing stats, so better exclude it from drops
-							if (!isNpcChest && currentNpc.getLevel() < 2)  {
+							if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId() && currentNpc.getWorldId() != WorldMapType.ISHALGEN.getId())  {
 								continue;
 							}
 							//if abyss type npc != null or npc is chest, the npc will be excluded from drops
@@ -244,7 +245,7 @@ public class DropInfo extends AdminCommand {
 							continue;
 						}
 						//if npc level ==1 means missing stats, so better exclude it from drops
-						if (!isNpcChest && currentNpc.getLevel() < 2)  {
+						if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId() && currentNpc.getWorldId() != WorldMapType.ISHALGEN.getId())  {
 							continue;
 						}
 						//if abyss type npc != null or npc is chest, the npc will be excluded from drops
