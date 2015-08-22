@@ -317,6 +317,8 @@ CREATE TABLE IF NOT EXISTS `legions` (
   `legionary_permission` INT(11) NOT NULL DEFAULT 6144,
   `volunteer_permission` INT(11) NOT NULL DEFAULT 2048,
   `disband_time` int(11) NOT NULL default '0',
+  `rank_pos` INT(11) NOT NULL DEFAULT '0',
+  `old_rank_pos` INT(11) NOT NULL DEFAULT '0',
   `siege_glory_points` INT(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`)
@@ -365,34 +367,6 @@ CREATE TABLE IF NOT EXISTS `legion_history` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`legion_id`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE legion_wars (
-  `legion_id1` int(11) NOT NULL,
-  `legion_id2` int(11) NOT NULL,
-  PRIMARY KEY (`legion_id1`,`legion_id2`),
-  FOREIGN KEY (`legion_id1`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`legion_id2`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `legion_wars_history`;
-CREATE TABLE `legion_wars_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `legion_id1` int(11) NOT NULL,
-  `legion_id2` int(11) NOT NULL,
-  `action` enum ('STARTED_WAR','FINISHED_WAR') NOT NULL,
-  `action_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`legion_id1`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`legion_id2`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `legion_wars_requests` (
-  `requester_legion_id` int(11) NOT NULL,
-  `responser_legion_id` int(11) NOT NULL,
-  PRIMARY KEY (`requester_legion_id`,`responser_legion_id`),
-  FOREIGN KEY (`requester_legion_id`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`responser_legion_id`) REFERENCES `legions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- ----------------------------
 -- Table structure for `player_recipes`
@@ -513,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `announcements` (
 -- Table structure for `player_life_stats`
 -- ----------------------------
 
-CREATE  TABLE IF NOT EXISTS `player_life_stats` (
+CREATE TABLE IF NOT EXISTS `player_life_stats` (
   `player_id` INT(11) NOT NULL ,
   `hp` INT(11) NOT NULL DEFAULT 1 ,
   `mp` INT(11) NOT NULL DEFAULT 1 ,
@@ -537,7 +511,7 @@ CREATE TABLE IF NOT EXISTS `siege_locations` (
 -- Table structure for `siege_mercenaries`
 -- ----------------------------
 
-CREATE TABLE `siege_mercenaries` (
+CREATE TABLE IF NOT EXISTS `siege_mercenaries` (
   `location_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `race` enum('ELYOS','ASMODIANS') NOT NULL,
