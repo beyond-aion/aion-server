@@ -4,20 +4,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.CommandsAccessService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author synchro2
+ * @modified Neon
  */
 public abstract class AdminCommand extends ChatCommand {
 
+	public final static String PREFIX = "//";
 	static final Logger log = LoggerFactory.getLogger("ADMINAUDIT_LOG");
 
 	public AdminCommand(String alias) {
-		super(alias);
+		this(alias, "");
+	}
+
+	public AdminCommand(String alias, String description) {
+		super(alias, description, PREFIX);
 	}
 
 	@Override
@@ -26,36 +31,34 @@ public abstract class AdminCommand extends ChatCommand {
 	}
 
 	@Override
-	boolean process(Player player, String text) {
+	boolean process(Player player, String params) {
 
 		if (!checkLevel(player)) {
 			if (LoggingConfig.LOG_GMAUDIT)
-				log.info("[ADMIN COMMAND] > [Player: " + player.getName() + "] has tried to use the command " + getAlias()
+				log.info("[ADMIN COMMAND] > [Player: " + player.getName() + "] has tried to use the command " + getAliasWithPrefix()
 					+ " without having the rights");
 			if (player.isGM()) {
-				PacketSendUtility.sendMessage(player, "[WARN] You need to have access level " + this.getLevel() + " or more to use " + getAlias());
+				PacketSendUtility.sendMessage(player, "[WARN] You need to have access level " + getLevel() + " or more to use "
+					+ getAliasWithPrefix());
 				return true;
 			}
+			// return false so chat will send this message (this way you can't guess admin commands without rights)
 			return false;
 		}
 
 		boolean success = false;
-		if (text.length() == getAlias().length())
+		if (params.isEmpty())
 			success = this.run(player, EMPTY_PARAMS);
 		else
-			success = this.run(player, text.substring(getAlias().length() + 1).split(" "));
+			success = this.run(player, params.split(" "));
 
-		if (LoggingConfig.LOG_GMAUDIT) {
-			if (player.getTarget() != null && player.getTarget() instanceof Creature) {
-				Creature target = (Creature) player.getTarget();
-				log.info("[ADMIN COMMAND] > [Name: " + player.getName() + "][Target : " + target.getName() + "]: " + text);
-			}
-			else
-				log.info("[ADMIN COMMAND] > [Name: " + player.getName() + "]: " + text);
-		}
+		if (LoggingConfig.LOG_GMAUDIT)
+			log.info("[ADMIN COMMAND] > [Name: " + player.getName() + "]"
+				+ (player.getTarget() != null ? "[Target : " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
+				+ params);
 
 		if (!success) {
-			PacketSendUtility.sendMessage(player, "<You have failed to execute " + text + ">");
+			PacketSendUtility.sendMessage(player, "<You have failed to execute " + getAliasWithPrefix() + ">");
 			return true;
 		}
 		else

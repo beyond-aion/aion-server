@@ -2,6 +2,8 @@ package com.aionemu.gameserver.utils.chathandlers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
@@ -23,7 +25,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author KID
- * @Modified Rolandas
+ * @modified Rolandas, Neon
  */
 public class ChatProcessor implements GameEngine {
 
@@ -162,50 +164,54 @@ public class ChatProcessor implements GameEngine {
 		if (text.split(" ").length == 0)
 			return false;
 
-		if(text.startsWith("//")) {
-			ChatCommand cmd = getCommand(text.substring(2));
-			if(cmd != null && cmd instanceof AdminCommand )
-				cmd.process(player, text.substring(2));
-			return true;
-		}
-		else if (text.startsWith(".")){
-			ChatCommand cmd = getCommand(text.substring(1));
+		if (text.startsWith(AdminCommand.PREFIX)) {
+			ChatCommand cmd = getCommand(text.substring(AdminCommand.PREFIX.length()).split(" ")[0]);
 
-			if(cmd != null && (cmd instanceof PlayerCommand || (CustomConfig.ENABLE_ADMIN_DOT_COMMANDS && cmd instanceof AdminCommand)))
-				return cmd.process(player, text.substring(1));
-			else
-				return false;
+			if (cmd != null && cmd instanceof AdminCommand)
+				return cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
 		}
-		else
-			return false;
+		else if (text.startsWith(PlayerCommand.PREFIX)) {
+			ChatCommand cmd = getCommand(text.split(" ")[0].substring(PlayerCommand.PREFIX.length()));
+
+			if (cmd != null && (cmd instanceof PlayerCommand || (CustomConfig.ENABLE_ADMIN_DOT_COMMANDS && cmd instanceof AdminCommand)))
+				return cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
+		}
+
+		return false;
 	}
 
 	public void handleConsoleCommand(Player player, String text) {
 		if (text.split(" ").length == 0)
 			return;
 
+		// temporary fix because AdminCommand is already called addskill
 		text = text.replaceAll("addskill", "addcskill");
+		ChatCommand cmd = getCommand(text.substring(ConsoleCommand.PREFIX.length()).split(" ")[0]);
 
-		ChatCommand cmd = getCommand(text);
-		if(cmd != null && cmd instanceof ConsoleCommand)
-			cmd.process(player, text);
+		if (cmd != null && cmd instanceof ConsoleCommand)
+			cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
 		else
 			log.warn("Command: " + text + ". Fail");
-
 	}
 
-	private ChatCommand getCommand(String text) {
-		String alias = text.split(" ")[0];
-		ChatCommand cmd = this.commands.get(alias);
-		return cmd;
+	private ChatCommand getCommand(String alias) {
+		return this.commands.get(alias);
 	}
-	
+
+	public Collection<ChatCommand> getCommandList() {
+		return Collections.unmodifiableCollection(this.commands.values());
+	}
+
 	public boolean isCommandAllowed(Player executor, String alias) {
-		return isCommandExists(alias) && this.commands.get(alias).checkLevel(executor);
+		return isCommandAllowed(executor, getCommand(alias));
 	}
-	
+
+	public boolean isCommandAllowed(Player executor, ChatCommand command) {
+		return command != null && command.checkLevel(executor);
+	}
+
 	public boolean isCommandExists(String alias) {
-		return this.commands.containsKey(alias); 
+		return this.commands.containsKey(alias);
 	}
 
 	public void onCompileDone() {

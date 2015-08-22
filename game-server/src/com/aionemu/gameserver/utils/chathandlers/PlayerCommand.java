@@ -6,11 +6,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author synchro2
+ * @modified Neon
  */
 public abstract class PlayerCommand extends ChatCommand {
 
+	public final static String PREFIX = ".";
+
 	public PlayerCommand(String alias) {
-		super(alias);
+		this(alias, "");
+	}
+
+	public PlayerCommand(String alias, String description) {
+		super(alias, description, PREFIX);
 	}
 
 	@Override
@@ -19,17 +26,18 @@ public abstract class PlayerCommand extends ChatCommand {
 	}
 
 	@Override
-	boolean process(Player player, String text) {
+	boolean process(Player player, String params) {
+
 		if (!checkLevel(player)) {
-			PacketSendUtility.sendMessage(player, "You not have permission for use this command.");
+			PacketSendUtility.sendMessage(player, "You don't have permission to use this command.");
 			return true;
 		}
 
 		boolean success = false;
-		if (text.length() == getAlias().length())
+		if (params.isEmpty())
 			success = this.run(player, EMPTY_PARAMS);
 		else
-			success = this.run(player, text.substring(getAlias().length() + 1).split(" "));
+			success = this.run(player, params.split(" "));
 
 		return success;
 	}
