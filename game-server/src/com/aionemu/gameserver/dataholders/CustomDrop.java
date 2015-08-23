@@ -3,6 +3,7 @@ package com.aionemu.gameserver.dataholders;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -51,5 +52,9 @@ public class CustomDrop {
 
 	public int size() {
 		return dropById.size();
+	}
+	
+	public Set<Integer> getNpcIds() {
+		return dropById.keySet();
 	}
 }

@@ -30,35 +30,16 @@ public class NpcDropData {
 
 	private static Logger log = LoggerFactory.getLogger(DataManager.class);
 
-	private List<NpcDrop> npcDrop;
-
-	/**
-	 * @return the npcDrop
-	 */
-	public List<NpcDrop> getNpcDrop() {
-		return npcDrop;
-	}
-
-	/**
-	 * @param npcDrop
-	 *          the npcDrop to set
-	 */
-	public void setNpcDrop(List<NpcDrop> npcDrop) {
-		this.npcDrop = npcDrop;
-	}
-
-	public int size() {
-		return npcDrop.size();
-	}
-
-	public static NpcDropData load() {
+	public static void load() {
 
 		List<Drop> drops = new ArrayList<Drop>();
 		List<String> names = new ArrayList<String>();
-		List<NpcDrop> npcDrops = new ArrayList<NpcDrop>();
 		FileChannel roChannel = null;
 		MappedByteBuffer buffer;
-
+		int npcCount = 0;
+		int npcsSkipped = 0;
+		int npcsSkippedCustom = 0;
+		
 		try (RandomAccessFile file = new RandomAccessFile("data/static_data/npc_drop.dat", "r")) {
 			roChannel = file.getChannel();
 			int size = (int) roChannel.size();
@@ -80,47 +61,45 @@ public class NpcDropData {
 			}
 
 			count = buffer.getInt();
+			npcCount = count;
+			
 			for (int i = 0; i < count; i++) {
 				int npcId = buffer.getInt();
-
-				int groupCount = buffer.getInt();
-				List<DropGroup> dropGroupList = new ArrayList<DropGroup>(groupCount);
-				for (int groupIndex = 0; groupIndex < groupCount; groupIndex++) {
-					Race race;
-					byte raceId = buffer.get();
-					switch (raceId) {
-						case 0:
-							race = Race.ELYOS;
-							break;
-						case 1:
-							race = Race.ASMODIANS;
-							break;
-						default:
-							race = Race.PC_ALL;
-					}
-
-					boolean useCategory = buffer.get() == 1 ? true : false;
-					String groupName = names.get(buffer.getShort());
-					int maxItems = DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES ? buffer.getInt() : 1;
-					
-					int dropCount = buffer.getInt();
-					List<Drop> dropList = new ArrayList<Drop>(dropCount);
-					for (int dropIndex = 0; dropIndex < dropCount; dropIndex++) {
-						dropList.add(drops.get(buffer.getInt()));
-					}
-					DropGroup dropGroup = new DropGroup(dropList, race, useCategory, groupName, maxItems);
-					dropGroupList.add(dropGroup);
-				}
-				NpcDrop npcDrop = new NpcDrop(dropGroupList, npcId);
-				npcDrops.add(npcDrop);
-				
-				NpcDrop customDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npcId);
-				if(customDrop != null)
-					mergeWithCustomDrop(npcDrop, customDrop);
-				
 				NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				if (npcTemplate != null) {
-					npcTemplate.setNpcDrop(npcDrop);
+					int groupCount = buffer.getInt();
+					List<DropGroup> dropGroupList = new ArrayList<DropGroup>(groupCount);
+					for (int groupIndex = 0; groupIndex < groupCount; groupIndex++) {
+						Race race;
+						byte raceId = buffer.get();
+						switch (raceId) {
+							case 0:
+								race = Race.ELYOS;
+								break;
+							case 1:
+								race = Race.ASMODIANS;
+								break;
+							default:
+								race = Race.PC_ALL;
+						}
+	
+						boolean useCategory = buffer.get() == 1 ? true : false;
+						String groupName = names.get(buffer.getShort());
+						int maxItems = DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES ? buffer.getInt() : 1;
+						int dropCount = buffer.getInt();
+						List<Drop> dropList = new ArrayList<Drop>(dropCount);
+						
+						for (int dropIndex = 0; dropIndex < dropCount; dropIndex++) {
+							dropList.add(drops.get(buffer.getInt()));
+						}
+						
+						DropGroup dropGroup = new DropGroup(dropList, race, useCategory, groupName, maxItems);
+						dropGroupList.add(dropGroup);
+					}
+					
+					npcTemplate.setNpcDrop(new NpcDrop(dropGroupList, npcId));
+				} else {
+					npcsSkipped += 1;
 				}
 			}
 			drops.clear();
@@ -129,16 +108,42 @@ public class NpcDropData {
 			names = null;
 		}
 		catch (FileNotFoundException e) {
-			log.error("Drop loader: Missing npc_drop.dat!!!");
+			log.warn("Drop loader: Missing npc_drop.dat.");
 		}
 		catch (IOException e) {
 			log.error("Drop loader: IO error in drop Loading.");
 		}
-		NpcDropData dropData = new NpcDropData();
-		log.info("Drop loader: Npc drops loading done.");
-		dropData.setNpcDrop(npcDrops);
-		return dropData;
-
+		finally {
+			// insert custom drops
+			for (int npcId : DataManager.CUSTOM_NPC_DROP.getNpcIds()) {
+				NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
+				if (npcTemplate != null) {
+					NpcDrop npcDrop = npcTemplate.getNpcDrop();
+					if (npcDrop == null) {
+						npcCount += 1;
+						npcDrop = new NpcDrop(npcId);
+					}
+					
+					NpcDrop customDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npcId);
+					if (customDrop != null) {
+						mergeWithCustomDrop(npcDrop, customDrop);
+						npcTemplate.setNpcDrop(npcDrop);
+					} else {
+						npcsSkippedCustom += 1;
+					}
+				} else {
+					npcsSkippedCustom += 1;
+				}
+			}
+		}
+		
+		if (npcsSkipped > 0)
+			log.error("Drop loader: Couldn't set drops for " + npcsSkipped + " npcs (missing npc templates).");
+		
+		if (npcsSkippedCustom > 0)
+			log.error("Drop loader: Couldn't set custom drops for " + npcsSkippedCustom + " npcs (missing npc templates or drop info).");
+		
+		log.info("Drop loader: Loaded drops successfully for " + (npcCount - npcsSkipped) + " npcs.");
 	}
 
 	public static void reload() {
@@ -153,17 +158,17 @@ public class NpcDropData {
 		});
 		load();
 	}
-	
+
 	private static void mergeWithCustomDrop(NpcDrop originalDrop, NpcDrop customDrop) {
-		if(customDrop.getReplaceType() == ReplaceType.FULL) {
+		if (customDrop.getReplaceType() == ReplaceType.FULL) {
 			originalDrop.getDropGroup().clear();
 			originalDrop.getDropGroup().addAll(customDrop.getDropGroup());
 		}
-		else if(customDrop.getReplaceType() == ReplaceType.PARTIAL) {
+		else if (customDrop.getReplaceType() == ReplaceType.PARTIAL) {
 			List<DropGroup> toDel = new ArrayList<DropGroup>();
-			for(DropGroup customDg : customDrop.getDropGroup()) {
-				for(DropGroup originalDg : originalDrop.getDropGroup()) {
-					if(originalDg.getGroupName().equals(customDg.getGroupName())) {
+			for (DropGroup customDg : customDrop.getDropGroup()) {
+				for (DropGroup originalDg : originalDrop.getDropGroup()) {
+					if (originalDg.getGroupName().equals(customDg.getGroupName())) {
 						toDel.add(originalDg);
 					}
 				}
@@ -174,5 +179,5 @@ public class NpcDropData {
 			toDel = null;
 		}
 	}
-	
+
 }
