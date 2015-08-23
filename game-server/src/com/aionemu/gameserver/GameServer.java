@@ -29,6 +29,7 @@ import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.AEInfos;
+import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
@@ -96,7 +97,6 @@ import com.aionemu.gameserver.taskmanager.fromdb.TaskFromDBManager;
 import com.aionemu.gameserver.utils.AEVersions;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.ThreadUncaughtExceptionHandler;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
 import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
@@ -188,22 +188,25 @@ public class GameServer {
 
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
+		
+		ConsoleUtil.printSection("Static Data");
 		DataManager.getInstance();
-		Util.printSection("IDFactory");
+		
+		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
 
-		Util.printSection("Zone");
+		ConsoleUtil.printSection("Zone");
 		ZoneService.getInstance().load(null);
 
-		Util.printSection("Geodata");
+		ConsoleUtil.printSection("Geodata");
 		GeoService.getInstance().initializeGeo();
 		// ZoneService.getInstance().saveMaterialZones();
 		System.gc();
 
-		Util.printSection("World");
+		ConsoleUtil.printSection("World");
 		World.getInstance();
 
-		Util.printSection("Drops");
+		ConsoleUtil.printSection("Drops");
 		DropRegistrationService.getInstance();
 
 		GameServer gs = new GameServer();
@@ -232,7 +235,7 @@ public class GameServer {
 
 		// This is loading only siege location data
 		// No Siege schedule or spawns
-		Util.printSection("Location Data");
+		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance().initBaseLocations();
 		SiegeService.getInstance().initSiegeLocations();
 		InvasionRaidService.getInstance().initRaidLocations();
@@ -240,7 +243,7 @@ public class GameServer {
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
 
-		Util.printSection("Spawns");
+		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();
 		RiftService.getInstance().initRifts();
 		InstanceRiftSpawnManager.spawnAll();
@@ -248,7 +251,7 @@ public class GameServer {
 		if (SiegeConfig.SIEGE_ENABLED)
 			ShieldService.getInstance().spawnAll();
 
-		Util.printSection("Limits");
+		ConsoleUtil.printSection("Limits");
 		LimitedItemTradeService.getInstance().start();
 		if (CustomConfig.LIMITS_ENABLED)
 			PlayerLimitService.getInstance().scheduleUpdate();
@@ -256,22 +259,22 @@ public class GameServer {
 
 		// Init Sieges... It's separated due to spawn engine.
 		// It should not spawn siege NPCs
-		Util.printSection("Siege Schedule initialization");
+		ConsoleUtil.printSection("Siege Schedule initialization");
 		SiegeService.getInstance().initSieges();
 
-		Util.printSection("World Bases initialization");
+		ConsoleUtil.printSection("World Bases initialization");
 		BaseService.getInstance().initBases();
 		
-		Util.printSection("Invasion Raid initialization");
+		ConsoleUtil.printSection("Invasion Raid initialization");
 		InvasionRaidService.getInstance().initRaids();
 
-		Util.printSection("Serial Killers initialization");
+		ConsoleUtil.printSection("Serial Killers initialization");
 		SerialKillerService.getInstance().initSerialKillers();
 
-		Util.printSection("Dispute Lands initialization");
+		ConsoleUtil.printSection("Dispute Lands initialization");
 		DisputeLandService.getInstance().init();
 
-		Util.printSection("TaskManagers");
+		ConsoleUtil.printSection("TaskManagers");
 		//PacketBroadcaster.getInstance();
 
 		GameTimeService.getInstance();
@@ -295,6 +298,7 @@ public class GameServer {
 		HTMLCache.getInstance();
 		AbyssRankUpdateService.getInstance().scheduleUpdate();
 		TaskFromDBManager.getInstance();
+		ConsoleUtil.printSection("Periodic Instances");
 		PeriodicInstanceManager.getInstance();
 		if (CustomConfig.ENABLE_REWARD_SERVICE)
 			RewardService.getInstance();
@@ -305,21 +309,22 @@ public class GameServer {
 
 		AdminService.getInstance();
 		PlayerTransferService.getInstance();
+		
+		ConsoleUtil.printSection("Housing");
 		HousingBidService.getInstance().start();
 		MaintenanceTask.getInstance();
 		TownService.getInstance();
 		ChallengeTaskService.getInstance();
+		
 		CommandsAccessService.getInstance();
 		WebshopService.getInstance();
 		
-		Util.printSection("System");
+		ConsoleUtil.printSection("System Info");
 		AEVersions.printFullVersionInfo();
-		System.gc();
 		AEInfos.printAllInfos();
-
-		Util.printSection("GameServerLog");
 		log.info("AL Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
+		System.gc();
 		gs.startServers();
 
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
@@ -352,7 +357,7 @@ public class GameServer {
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
 	private void startServers() {
-		Util.printSection("Starting Network");
+		ConsoleUtil.printSection("Starting Network");
 		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS,
 			NetworkConfig.GAME_PORT, "Game Connections", new GameConnectionFactoryImpl()));
 
@@ -395,12 +400,12 @@ public class GameServer {
 		// DateTime zone override from configs
 		DateTimeUtil.init();
 		// Second should be database factory
-		Util.printSection("DataBase");
+		ConsoleUtil.printSection("DataBase");
 		DatabaseFactory.init();
 		// Initialize DAOs
 		DAOManager.init();
 		// Initialize thread pools
-		Util.printSection("Threads");
+		ConsoleUtil.printSection("Threads");
 		ThreadConfig.load();
 		ThreadPoolManager.getInstance();
 	}

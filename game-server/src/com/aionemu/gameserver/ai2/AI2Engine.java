@@ -25,7 +25,6 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author ATracer
@@ -62,41 +61,34 @@ public class AI2Engine implements GameEngine {
 				progressLatch.countDown();
 		}
 	}
-	
-	public void reload()
-	  {
-		Util.printSection("AI2");
-	    log.info("AI2 engine reload started");
-	    ScriptManager scriptManager;
-	    try
-	    {
-	      scriptManager = new ScriptManager();
-	      AggregatedClassListener acl = new AggregatedClassListener();
-	      acl.addClassListener(new OnClassLoadUnloadListener());
-	      acl.addClassListener(new ScheduledTaskClassListener());
-	      acl.addClassListener(new AI2HandlerClassListener());
-	      scriptManager.setGlobalClassListener(acl);
-	      try
-	      {
-	        scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
-	        log.info("Loaded " + aiMap.size() + " ai handlers.");
-			validateScripts();
-	      }
-	      catch (Exception e)
-	      {
-	        throw new GameServerError("Can't initialize AI2 handlers.", e);
-	      }
-	    }
-	    catch (Exception e1)
-	    {
-	      throw new GameServerError("Can't reload AI2 engine.", e1);
-	    }
-	    if (scriptManager != null)
-	    {
-	      shutdown();
-	      load(null);
-	    }
-	  }
+
+	public void reload() {
+		log.info("AI2 engine reload started");
+		ScriptManager scriptManager;
+		try {
+			scriptManager = new ScriptManager();
+			AggregatedClassListener acl = new AggregatedClassListener();
+			acl.addClassListener(new OnClassLoadUnloadListener());
+			acl.addClassListener(new ScheduledTaskClassListener());
+			acl.addClassListener(new AI2HandlerClassListener());
+			scriptManager.setGlobalClassListener(acl);
+			try {
+				scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
+				log.info("Loaded " + aiMap.size() + " ai handlers.");
+				validateScripts();
+			}
+			catch (Exception e) {
+				throw new GameServerError("Can't initialize AI2 handlers.", e);
+			}
+		}
+		catch (Exception e1) {
+			throw new GameServerError("Can't reload AI2 engine.", e1);
+		}
+		if (scriptManager != null) {
+			shutdown();
+			load(null);
+		}
+	}
 
 	@Override
 	public void shutdown() {
@@ -137,7 +129,7 @@ public class AI2Engine implements GameEngine {
 	public void setupAI(AiNames aiName, Npc owner) {
 		setupAI(aiName.getName(), owner);
 	}
-	
+
 	private void validateScripts() {
 		Collection<String> npcAINames = selectDistinct(with(DataManager.NPC_DATA.getNpcData().valueCollection()).extract(on(NpcTemplate.class).getAi()));
 		for (String name : npcAINames) {
@@ -149,7 +141,7 @@ public class AI2Engine implements GameEngine {
 			}
 		}
 		npcAINames.removeAll(aiMap.keySet());
-		if(npcAINames.size() > 0){
+		if (npcAINames.size() > 0) {
 			log.warn("Bad AI names: " + join(npcAINames));
 		}
 	}

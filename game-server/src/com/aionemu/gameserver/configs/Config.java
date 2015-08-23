@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
+import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
@@ -45,7 +46,6 @@ import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Nemesiss, SoulKeeper
@@ -69,7 +69,7 @@ public class Config {
 			}
 
 			// Administration
-			Util.printSection("Administration");
+			ConsoleUtil.printSection("Administration");
 			String administration = "./config/administration";
 
 			Properties[] adminProps = PropertiesUtils.loadAllFromDirectory(administration);
@@ -82,7 +82,7 @@ public class Config {
 			log.info("Loading: " + administration + "/developer.properties");
 
 			// Main
-			Util.printSection("Main");
+			ConsoleUtil.printSection("Main");
 			String main = "./config/main";
 
 			Properties[] mainProps = PropertiesUtils.loadAllFromDirectory(main);
@@ -188,7 +188,7 @@ public class Config {
 			log.info("Loading: " + main + "/antihack.properties");
 
 			// Network
-			Util.printSection("Network");
+			ConsoleUtil.printSection("Network");
 			String network = "./config/network";
 
 			Properties[] networkProps = PropertiesUtils.loadAllFromDirectory(network);

@@ -7,49 +7,45 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
-
-
 
 /**
  * @author ViAl
- *
  */
 public class PeriodicInstanceManager {
+
 	/**
 	 * InstanceMaskID - Service
 	 */
 	private Map<Byte, PeriodicInstance> services;
-	
+
 	private PeriodicInstanceManager() {
 		this.services = new HashMap<Byte, PeriodicInstance>();
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
-			Util.printSection("Dredgion");
 			DredgionService2.getInstance().initIfEnabled();
 			registerInstance(DredgionService2.getInstance());
-			Util.printSection("Kamar");
+
 			KamarBattlefieldService.getInstance().initIfEnabled();
 			registerInstance(KamarBattlefieldService.getInstance());
-			Util.printSection("Engulfed OB");
+
 			EngulfedOphidianBridgeService.getInstance().initIfEnabled();
 			registerInstance(EngulfedOphidianBridgeService.getInstance());
-			Util.printSection("Iron Wall Front");
+
 			IronWallFrontService.getInstance().initIfEnabled();
 			registerInstance(IronWallFrontService.getInstance());
-			Util.printSection("Idgel Dome");
+
 			IdgelDomeService.getInstance().initIfEnabled();
 			registerInstance(IdgelDomeService.getInstance());
 		}
 	}
-	
+
 	public void registerInstance(PeriodicInstance instance) {
-		for(byte maskId : instance.getMaskIds()) {
+		for (byte maskId : instance.getMaskIds()) {
 			this.services.put(maskId, instance);
 		}
 	}
-	
+
 	public void handleRequest(Player player, byte maskId) {
-		if(this.services.containsKey(maskId)) {
+		if (this.services.containsKey(maskId)) {
 			PeriodicInstance instance = this.services.get(maskId);
 			instance.showWindow(player);
 		}
@@ -57,12 +53,13 @@ public class PeriodicInstanceManager {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
 		}
 	}
-	
+
 	public static PeriodicInstanceManager getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
-	
+
 	private static class SingletonHolder {
+
 		private static final PeriodicInstanceManager INSTANCE = new PeriodicInstanceManager();
 	}
 

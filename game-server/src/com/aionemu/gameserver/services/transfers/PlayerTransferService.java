@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.transfers;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.List;
 import java.util.Map;
 
