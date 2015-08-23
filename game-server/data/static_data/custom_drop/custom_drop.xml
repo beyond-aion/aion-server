@@ -18,6 +18,65 @@
 	</npc_drop>
 	-->
 	<!-- Chests -->
+	<!-- Argent Manor -->
+	<npc_drop npc_id="701011" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_ARMOR_EPIC">
+			<drop item_id="111101240" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="111601208" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_SHIELD_UNIQUE">
+			<drop item_id="115001309" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_WEAPON_UNIQUE">
+			<drop item_id="100601036" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_ACCESSOIRE_UNIQUE">
+			<drop item_id="122001398" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="122001399" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="121001155" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121001156" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_ARMOR_LEGEND">
+			<drop item_id="114601189" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501247" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114301289" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114101283" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112601183" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501171" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112301178" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112101195" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111601205" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501226" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111301232" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111101237" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701013" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="PLETUS_TREASURE_BOX_ARMOR_EPIC">
+			<drop item_id="114101286" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="114601192" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="PLETUS_TREASURE_BOX_WEAPON_UNIQUE">
+			<drop item_id="101701006" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="101300927" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="PLETUS_TREASURE_BOX_ACCESSOIRE_UNIQUE">
+			<drop item_id="122001398" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="122001399" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="121001155" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121001156" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="PLETUS_TREASURE_BOX_ARMOR_LEGEND">
+			<drop item_id="113601196" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501243" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113301258" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113101256" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110601236" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110501267" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110301289" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110101362" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="TREASURE_BOX_ARMOR_COMMON">
