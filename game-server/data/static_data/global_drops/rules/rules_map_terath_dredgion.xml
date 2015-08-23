@@ -58,7 +58,7 @@
 			<gd_item id="123001270" name="Ksanat's Belt"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Gatekeeper Payad Key" base_chance="100">
+	<gd_rule rule_name="Gatekeeper Payad Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300440000" name="Terath_Dredgion"/>
 		</gd_maps>

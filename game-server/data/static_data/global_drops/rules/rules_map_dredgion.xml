@@ -18,7 +18,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Brig Keys 5" base_chance="5">
+	<gd_rule rule_name="Brig Keys 5" base_chance="5" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -34,7 +34,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="The Brig Key 50" base_chance="50">
+	<gd_rule rule_name="The Brig Key 50" base_chance="50" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="185000040" name="The Brig Key"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Secondary Brig Key 50" base_chance="50">
+	<gd_rule rule_name="Secondary Brig Key 50" base_chance="50" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>

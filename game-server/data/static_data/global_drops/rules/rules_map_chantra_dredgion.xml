@@ -66,7 +66,7 @@
 			<gd_item id="122001267" name="Kumar's Turquoise Ring"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Gatekeeper Sarta Key" base_chance="100">
+	<gd_rule rule_name="Gatekeeper Sarta Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300210000" name="Chantra_Dredgion"/>
 		</gd_maps>
