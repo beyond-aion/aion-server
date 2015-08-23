@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
@@ -74,9 +73,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private BoundRadius boundRadius;
 
 	private long lastTransferTime;
-	private int stamps = 0;
-	private int passportReward = 0;
-	private PassportsList playerPassports;
 
 	// TODO: Move all function to playerService or Player class.
 	public PlayerCommonData(int objId) {
@@ -467,14 +463,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		lastOnline = timestamp;
 	}
 
-	public Timestamp getLastStamp() {
-		return lastStamp;
-	}
-
-	public void setLastStamp(Timestamp timestamp) {
-		this.lastStamp = timestamp;
-	}
-
 
 	public int getLevel() {
 		if (isDaeva || !online)
@@ -669,25 +657,5 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public void setDaeva(boolean isDaeva) {
 		this.isDaeva = isDaeva;
-	}
-
-	public int getPassportStamps() {
-		return stamps;
-	}
-
-	public void setPassportStamps(int value) {
-		this.stamps = value;
-	}
-	
-	public void increasePassportStamps() {
-		this.stamps++;
-	}
-
-	public PassportsList getPassportsList() {
-		return playerPassports;
-	}
-
-	public void setPassportsList(PassportsList pp) {
-		playerPassports = pp;
 	}
 }

@@ -120,6 +120,8 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	 * @return
 	 */
 	public abstract int getAccountIdByName(final String name);
+	
+	public abstract int getAccountId(final int playerId);
 
 	/**
 	 * Identifier name for all PlayerDAO classes

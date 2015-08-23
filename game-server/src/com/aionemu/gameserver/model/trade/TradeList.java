@@ -87,7 +87,7 @@ public class TradeList {
 	/**
 	 * @return true or false
 	 */
-	public boolean calculateAbyssBuyListPrice(Player player, int modifier) {
+	public boolean calculateAbyssRewardBuyList(Player player, int modifier) {
 		int ap = player.getAbyssRank().getAp();
 
 		this.requiredAp = 0;
@@ -95,60 +95,29 @@ public class TradeList {
 
 		for (TradeItem tradeItem : tradeItems) {
 			Acquisition aquisition = tradeItem.getItemTemplate().getAcquisition();
-			if (aquisition == null || aquisition.getType() != AcquisitionType.ABYSS
-				&& aquisition.getType() != AcquisitionType.AP)
+			if (aquisition == null)
 				continue;
+			
+			if (aquisition.getType().equals(AcquisitionType.AP) || aquisition.getType().equals(AcquisitionType.ABYSS))
+			   requiredAp += (int)((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
 
-			requiredAp += (int)((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
-
-			int abysItemId = aquisition.getItemId();
-			if (abysItemId == 0) // no abyss required item (medals, etc))
+			int rewardItemId = aquisition.getItemId();
+			if (rewardItemId == 0) // no required item (medals, etc))
 				continue;
 			
 			long alreadyAddedCount = 0;
-			if (requiredItems.containsKey(abysItemId))
-				alreadyAddedCount = requiredItems.get(abysItemId);
+			if (requiredItems.containsKey(rewardItemId))
+				alreadyAddedCount = requiredItems.get(rewardItemId);
 			if (alreadyAddedCount == 0)
-				requiredItems.put(abysItemId, (long) aquisition.getItemCount());
+				requiredItems.put(rewardItemId, (long) aquisition.getItemCount() * tradeItem.getCount());
 			else
-				requiredItems.put(abysItemId, alreadyAddedCount + aquisition.getItemCount() * tradeItem.getCount());
+				requiredItems.put(rewardItemId, alreadyAddedCount + aquisition.getItemCount() * tradeItem.getCount());
 		}
 
 		if (ap < requiredAp) {
 			// You do not have enough Abyss Points.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
 			return false;
-		}
-
-		for (Integer itemId : requiredItems.keySet()) {
-			long count = player.getInventory().getItemCountByItemId(itemId);
-			if (requiredItems.get(itemId) < 1 || count < requiredItems.get(itemId))
-				return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * @return true or false
-	 */
-	public boolean calculateRewardBuyListPrice(Player player) {
-		this.requiredItems.clear();
-
-		for (TradeItem tradeItem : tradeItems) {
-			Acquisition aquisition = tradeItem.getItemTemplate().getAcquisition();
-			if (aquisition == null || aquisition.getType() != AcquisitionType.REWARD
-				&& aquisition.getType() != AcquisitionType.COUPON)
-				continue;
-
-			int itemId = aquisition.getItemId();
-			long alreadyAddedCount = 0;
-			if (requiredItems.containsKey(itemId))
-				alreadyAddedCount = requiredItems.get(itemId);
-			if (alreadyAddedCount == 0)
-				requiredItems.put(itemId, aquisition.getItemCount() * tradeItem.getCount());
-			else
-				requiredItems.put(itemId, alreadyAddedCount + aquisition.getItemCount() * tradeItem.getCount());
 		}
 
 		for (Integer itemId : requiredItems.keySet()) {

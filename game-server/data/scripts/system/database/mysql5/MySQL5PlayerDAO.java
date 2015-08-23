@@ -132,7 +132,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, item_expands=?, advenced_stigma_slot_size=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=?, stamps=?, last_stamp=? WHERE id=?")) {
+					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, item_expands=?, advenced_stigma_slot_size=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 				log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 				PlayerCommonData pcd = player.getCommonData();
 				stmt.setString(1, player.getName());
@@ -172,9 +172,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				else {
 					stmt.setInt(27, player.getPosition().getWorldMapInstance().getOwnerId());
 				}
-				stmt.setInt(28, pcd.getPassportStamps());
-				stmt.setTimestamp(29, pcd.getLastStamp());
-				stmt.setInt(30, player.getObjectId());
+				stmt.setInt(28, player.getObjectId());
 				stmt.execute();
 			}
 		}
@@ -331,8 +329,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setWorldOwnerId(resultSet.getInt("world_owner"));
 						cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
 						cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
-						cd.setPassportStamps(resultSet.getInt("stamps"));
-						cd.setLastStamp(resultSet.getTimestamp("last_stamp"));
 					}
 					else {
 						log.info("Missing PlayerCommonData from db " + playerObjId);
@@ -592,6 +588,25 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 		return accountId;
 	}
+	
+	@Override
+	public int getAccountId(final int playerId) {
+		int accountId = 0;
+		try {
+			try (Connection con = DatabaseFactory.getConnection();
+				PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `id` = ?")) {
+				stmt.setInt(1, playerId);
+				try (ResultSet rs = stmt.executeQuery()) {
+					rs.next();
+					accountId = rs.getInt("account_id");
+				}
+			}
+		}
+		catch (Exception e) {
+			return 0;
+		}
+		return accountId;
+	}
 
 	/**
 	 * @author xTz
@@ -639,7 +654,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("SELECT COUNT(DISTINCT(`account_id`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
+					.prepareStatement("SELECT COUNT(DISTINCT(`account_name`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
 				stmt.setString(1, race.name());
 				stmt.setLong(2, DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(GSConfig.RATIO_MIN_REQUIRED_LEVEL));
 				try (ResultSet rs = stmt.executeQuery()) {

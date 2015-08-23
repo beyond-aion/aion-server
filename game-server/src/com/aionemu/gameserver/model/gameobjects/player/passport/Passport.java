@@ -43,9 +43,9 @@ public class Passport {
 	
 	public int getRewardStatus() {
 		if(this.isFakeStamp())
-			return 0;
+			return this.rewarded ? 2 : 0;
 		else
-			return this.rewarded == false ? 1 : 3;
+			return this.rewarded  ? 3 : 1;
 	}
 	
 	public Timestamp getArriveDate() {
@@ -61,8 +61,14 @@ public class Passport {
 	}
 
 	public void setState(PersistentState state) {
-		if(this.state == PersistentState.NEW && state != PersistentState.DELETED)
-			return;
+		if(this.state == PersistentState.NEW) {
+		   if (state == PersistentState.UPDATE_REQUIRED)
+			   return;
+		   else if (state == PersistentState.DELETED) {
+			  this.state = PersistentState.NOACTION;
+			  return;
+		   }
+		}
 		this.state = state;
 	}
 	

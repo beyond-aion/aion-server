@@ -69,8 +69,8 @@ import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.FlyRingService;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.HousingBidService;
-import com.aionemu.gameserver.services.InvasionRaidService;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
+import com.aionemu.gameserver.services.MonsterRaidService;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.RiftService;
@@ -238,7 +238,7 @@ public class GameServer {
 		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance().initBaseLocations();
 		SiegeService.getInstance().initSiegeLocations();
-		InvasionRaidService.getInstance().initRaidLocations();
+		MonsterRaidService.getInstance().initMonsterRaidLocations();
 		//DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
@@ -265,8 +265,8 @@ public class GameServer {
 		ConsoleUtil.printSection("World Bases initialization");
 		BaseService.getInstance().initBases();
 		
-		ConsoleUtil.printSection("Invasion Raid initialization");
-		InvasionRaidService.getInstance().initRaids();
+		ConsoleUtil.printSection("Monster Raid initialization");
+		MonsterRaidService.getInstance().initMonsterRaids();
 
 		ConsoleUtil.printSection("Serial Killers initialization");
 		SerialKillerService.getInstance().initSerialKillers();

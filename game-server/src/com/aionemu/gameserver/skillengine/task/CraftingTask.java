@@ -137,16 +137,16 @@ public class CraftingTask extends AbstractCraftTask {
 		while (easeLevel > 1)
 			maxFailureChance /= easeLevel--;
 		
-		if (recipeTemplate.getSkillid() == 40009)
-			maxFailureChance = 0;
+		
 
 		int multi = Math.max(1, maxFailureChance);
-		if (Rnd.get(100) > multi) {
-			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue);
-		}
-		else {
-			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue);
-		}
+		if (recipeTemplate.getSkillid() == 40009)
+			multi = 0;
+		
+		if (Rnd.get(100) > multi)
+			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi/5, 1)));
+		else
+			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi/5, 1)));
 
 		if (currentSuccessValue >= completeValue) {
 			currentSuccessValue = completeValue;

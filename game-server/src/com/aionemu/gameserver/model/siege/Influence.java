@@ -10,10 +10,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- * Calculates fortresses as 10 points and artifacts as 1 point each. Need to
- * find retail calculation. (Upper forts worth more...)
+ * Calculates only fortresses (artifacts arent included for Influence) with their template Values
  *
  * @author Sarynth
+ * @reworked Whoop
  */
 public class Influence {
 
@@ -30,6 +30,15 @@ public class Influence {
 	private float tiamaranta_e = 0;
 	private float tiamaranta_a = 0;
 	private float tiamaranta_b = 0;
+	private float katalam_e = 0;
+	private float katalam_a = 0;
+	private float katalam_b = 0;
+	private float danaria_e = 0;
+	private float danaria_a = 0;
+	private float danaria_b = 0;
+	private float kaldor_e = 0;
+	private float kaldor_a = 0;
+	private float kaldor_b = 0;
 	private float global_e = 0;
 	private float global_a = 0;
 	private float global_b = 0;
@@ -53,26 +62,29 @@ public class Influence {
 	 * calculate influence
 	 */
 	private void calculateInfluence() {
-		float balaurea = 0.0019512194f;
-		float abyss = 0.006097561f;
 		float e_inggison = 0;
 		float a_inggison = 0;
 		float b_inggison = 0;
-		float t_inggison = 0;
 		float e_gelkmaros = 0;
 		float a_gelkmaros = 0;
 		float b_gelkmaros = 0;
-		float t_gelkmaros = 0;
 		float e_abyss = 0;
 		float a_abyss = 0;
 		float b_abyss = 0;
-		float t_abyss = 0;
+		float e_katalam = 0;
+		float a_katalam = 0;
+		float b_katalam = 0;
+		float e_danaria = 0;
+		float a_danaria = 0;
+		float b_danaria = 0;
+		float e_kaldor = 0;
+		float a_kaldor = 0;
+		float b_kaldor = 0;
 
 		for (SiegeLocation sLoc : SiegeService.getInstance().getSiegeLocations().values()) {
-			switch (sLoc.getWorldId()) {
-				case 210050000:
-					if (sLoc instanceof FortressLocation) {
-						t_inggison += sLoc.getInfluenceValue();
+			if (sLoc instanceof FortressLocation) {
+				switch (sLoc.getWorldId()) {
+					case 210050000:					
 						switch (sLoc.getRace()) {
 							case ELYOS:
 								e_inggison += sLoc.getInfluenceValue();
@@ -84,11 +96,8 @@ public class Influence {
 								b_inggison += sLoc.getInfluenceValue();
 								break;
 						}
-					}
-					break;
-				case 220070000:
-					if (sLoc instanceof FortressLocation) {
-						t_gelkmaros += sLoc.getInfluenceValue();
+						break;
+					case 220070000:
 						switch (sLoc.getRace()) {
 							case ELYOS:
 								e_gelkmaros += sLoc.getInfluenceValue();
@@ -100,40 +109,85 @@ public class Influence {
 								b_gelkmaros += sLoc.getInfluenceValue();
 								break;
 						}
-					}
-					break;
-				case 400010000:
-					t_abyss += sLoc.getInfluenceValue();
-					switch (sLoc.getRace()) {
-						case ELYOS:
-							e_abyss += sLoc.getInfluenceValue();
-							break;
-						case ASMODIANS:
-							a_abyss += sLoc.getInfluenceValue();
-							break;
-						case BALAUR:
-							b_abyss += sLoc.getInfluenceValue();
-							break;
-					}
-					break;
+						break;
+					case 400010000:
+						switch (sLoc.getRace()) {
+							case ELYOS:
+								e_abyss += sLoc.getInfluenceValue();
+								break;
+							case ASMODIANS:
+								a_abyss += sLoc.getInfluenceValue();
+								break;
+							case BALAUR:
+								b_abyss += sLoc.getInfluenceValue();
+								break;
+						}
+						break;
+					case 600050000:
+						switch (sLoc.getRace()) {
+							case ELYOS:
+								e_katalam += sLoc.getInfluenceValue();
+								break;
+							case ASMODIANS:
+								a_katalam += sLoc.getInfluenceValue();
+								break;
+							case BALAUR:
+								b_katalam += sLoc.getInfluenceValue();
+								break;
+						}
+						break;
+					case 600060000:
+						switch (sLoc.getRace()) {
+							case ELYOS:
+								e_danaria += sLoc.getInfluenceValue();
+								break;
+							case ASMODIANS:
+								a_danaria += sLoc.getInfluenceValue();
+								break;
+							case BALAUR:
+								b_danaria += sLoc.getInfluenceValue();
+								break;
+						}
+						break;
+					case 600090000:
+						switch (sLoc.getRace()) {
+							case ELYOS:
+								e_kaldor += sLoc.getInfluenceValue();
+								break;
+							case ASMODIANS:
+								a_kaldor += sLoc.getInfluenceValue();
+								break;
+							case BALAUR:
+								b_kaldor += sLoc.getInfluenceValue();
+								break;
+						}
+						break;
+				}
 			}
 		}
+		//reset Values
+		abyss_e = e_abyss;
+		abyss_a = a_abyss;
+		abyss_b = b_abyss;
+		inggison_e = e_inggison;
+		inggison_a = a_inggison;
+		inggison_b = b_inggison;
+		gelkmaros_e = e_gelkmaros;
+		gelkmaros_a = a_gelkmaros;
+		gelkmaros_b = b_gelkmaros;
+		katalam_e = e_katalam;
+		katalam_a = a_katalam;
+		katalam_b = b_katalam;
+		danaria_e = e_danaria;
+		danaria_a = a_danaria;
+		danaria_b = b_danaria;
+		kaldor_e = e_kaldor;
+		kaldor_a = a_kaldor;
+		kaldor_b = b_kaldor;		
 
-		inggison_e = e_inggison / t_inggison;
-		inggison_a = a_inggison / t_inggison;
-		inggison_b = b_inggison / t_inggison;
-
-		gelkmaros_e = e_gelkmaros / t_gelkmaros;
-		gelkmaros_a = a_gelkmaros / t_gelkmaros;
-		gelkmaros_b = b_gelkmaros / t_gelkmaros;
-
-		abyss_e = e_abyss / t_abyss;
-		abyss_a = a_abyss / t_abyss;
-		abyss_b = b_abyss / t_abyss;
-
-		global_e = (inggison_e * balaurea + gelkmaros_e * balaurea + abyss_e * abyss) * 100f;
-		global_a = (inggison_a * balaurea + gelkmaros_a * balaurea + abyss_a * abyss) * 100f;
-		global_b = (inggison_b * balaurea + gelkmaros_b * balaurea + abyss_b * abyss) * 100f;
+		global_e = (abyss_e + inggison_e + gelkmaros_e + katalam_e + danaria_e + kaldor_e) / 100f;
+		global_a = (abyss_a + inggison_a + gelkmaros_a + katalam_a + danaria_a + kaldor_a) / 100f;
+		global_b = (abyss_b + inggison_b + gelkmaros_b + katalam_b + danaria_b + kaldor_b) / 100f;
 	}
 
 	/**
@@ -255,6 +309,78 @@ public class Influence {
 	 */
 	public float getTiamarantaBalaursInfluence() {
 		return this.tiamaranta_b;
+	}
+
+	
+	/**
+	 * @return elyos control
+	 */
+	public float getKatalamElyosInfluence() {
+		return this.katalam_e;
+	}
+
+	
+	/**
+	 * @return asmos control
+	 */
+	public float getKatalamAsmodiansInfluence() {
+		return this.katalam_a;
+	}
+
+	
+	/**
+	 * @return balaur control
+	 */
+	public float getKatalamBalaursInfluence() {
+		return this.katalam_b;
+	}
+
+	
+	/**
+	 * @return elyos control
+	 */
+	public float getDanariaElyosInfluence() {
+		return this.danaria_e;
+	}
+
+	
+	/**
+	 * @return asmos control
+	 */
+	public float getDanariaAsmodiansInfluence() {
+		return this.danaria_a;
+	}
+
+	
+	/**
+	 * @return balaur control
+	 */
+	public float getDanariaBalaursInfluence() {
+		return this.danaria_b;
+	}
+
+	
+	/**
+	 * @return elyos control
+	 */
+	public float getKaldorElyosInfluence() {
+		return kaldor_e;
+	}
+
+	
+	/**
+	 * @return asmos control
+	 */
+	public float getKaldorAsmodiansInfluence() {
+		return kaldor_a;
+	}
+
+	
+	/**
+	 * @return balaur control
+	 */
+	public float getKaldorBalaursInfluence() {
+		return kaldor_b;
 	}
 
 	/**

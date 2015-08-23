@@ -155,7 +155,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	  try {
 		 // Players gain buffs on capture of some fortresses
 		 applyWorldBuffs(winner.getSiegeRace(), getSiegeLocation().getRace());
-		 for (int i = 1; i < 4; i++) {
+		 for (int i = 1; i <= 4; i++) {
 			getSiegeLocation().despawnMercenaries(i);
 		 }
 	  }
@@ -165,6 +165,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 	  // Set new fortress and artifact owner race
 	  getSiegeLocation().setRace(winner.getSiegeRace());
 	  getArtifact().setRace(winner.getSiegeRace());
+	  
+	  //reset occupy count
+	  getSiegeLocation().setOccupiedCount(0);
 	  
 	  if (this.oldLegionId != 0 && GloryPointsRewards.hasRewardForSiege(getSiegeLocationId())) { //make sure holding GP are deducted on Capture
 		 int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
@@ -193,8 +196,13 @@ public class FortressSiege extends Siege<FortressLocation> {
    }
    
    private void onDefended() {
-  	 SiegeRace loserRace = getSiegeLocation().getRace() != SiegeRace.BALAUR ? (getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS) : null;
-
+  	 SiegeRace loserRace = getSiegeLocation().getRace() != SiegeRace.BALAUR ? (getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS) : SiegeRace.BALAUR;
+	 
+	 //Increase fortress occupied count
+	 if (getSiegeLocation().getRace() != SiegeRace.BALAUR && getSiegeLocation().getTemplate().getMaxOccupyCount() > 0) {
+		getSiegeLocation().increaseOccupiedCount();
+	 }
+	 
   	 try {
   		 // Players gain buffs for successfully defense / failed capture the fortress
   		 applyWorldBuffs(getSiegeLocation().getRace(), loserRace);

@@ -45,6 +45,8 @@ public class ItemData extends ReloadableData {
 	Map<Integer, List<ItemTemplate>> eventManastones = new HashMap<>();
 	@XmlTransient
 	Map<Integer, List<ItemTemplate>> stampManastones = new HashMap<>();
+	@XmlTransient
+	Map<Integer, List<ItemTemplate>> specialManastones = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		items = new TIntObjectHashMap<ItemTemplate>();
@@ -69,6 +71,13 @@ public class ItemData extends ReloadableData {
 					else
 						if (!it.getName().toLowerCase().startsWith("[legion]"))
 							manastones.get(level).add(it);
+			} else if (it.getItemGroup().equals(ItemGroup.SPECIAL_MANASTONE)) {
+				int level = it.getLevel();
+				if (!specialManastones.containsKey(level))
+					specialManastones.put(level,  new ArrayList<ItemTemplate>());
+				
+				if (!it.getName().toLowerCase().startsWith("[stamp]"))
+					specialManastones.get(level).add(it);
 			}
 			/** NOT USED
 			if (it.getActions() == null)
@@ -124,8 +133,13 @@ public class ItemData extends ReloadableData {
 	public Map<Integer, List<ItemTemplate>> getEventManastones() {
 		return eventManastones;
 	}
+	
 	public Map<Integer, List<ItemTemplate>> getStampManastones() {
 		return stampManastones;
+	}
+	
+	public Map<Integer, List<ItemTemplate>> getSpecialManastones() {
+		return specialManastones;
 	}
 	//public ItemTemplate getPetEggTemplate(int petId) {
 	//	return petEggs.get(petId);

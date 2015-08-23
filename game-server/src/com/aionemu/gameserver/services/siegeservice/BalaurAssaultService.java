@@ -29,8 +29,11 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author synchro2 @reworked Luzien TODO: Send Peace Dredgion without assault
- * @modified Whoop
+ * @author synchro2
+ * @reworked Luzien
+ * @modified Whoop 
+ * 
+ * TODO: Send Peace Dredgion without assault
  */
 public class BalaurAssaultService {
 
@@ -77,7 +80,6 @@ public class BalaurAssaultService {
 				log.info("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
 			else {
 				log.info("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
-				newAssault(siege, Rnd.get(60, 300));
 			}
 			artifactAssaults.remove(locId);
 		}
@@ -108,7 +110,7 @@ public class BalaurAssaultService {
 	private boolean calculateArtifactAssault(ArtifactLocation artifact) {
 		int locationId = artifact.getLocationId();
 		
-		if (artifactAssaults.containsKey(locationId))
+		if (artifactAssaults.containsKey(locationId) || artifact.getRace() == SiegeRace.BALAUR)
 			return false;
 		
 		return true;

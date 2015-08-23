@@ -19,7 +19,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class SourceLocation extends SiegeLocation {
 
 	protected List<SiegeReward> siegeRewards;
-	
+	private boolean status;
 
 	public SourceLocation() {
 	}
@@ -31,6 +31,14 @@ public class SourceLocation extends SiegeLocation {
 
 	public List<SiegeReward> getReward() {
 		return this.siegeRewards;
+	}
+
+	public boolean isPreparations() {
+		return status;
+	}
+
+	public void setPreparation(boolean status) {
+		this.status = status;
 	}
 
 	@Override
