@@ -5,20 +5,19 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
 import com.aionemu.gameserver.model.templates.mail.Mails;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * This class is holding whole static data, that is loaded from /data/static_data directory.<br> The data is loaded by XMLDataLoader using JAXB.<br> <br> This class temporarily
  * also contains data loaded from txt files by DataLoaders. It'll be changed later.
  *
- * @author Luno , orz modified by Wakizashi
+ * @author Luno , orz
+ * @modified Wakizashi, Neon
  */
 public final class DataManager {
 
 	static Logger log = LoggerFactory.getLogger(DataManager.class);
 	public static NpcData NPC_DATA;
 	public static CustomDrop CUSTOM_NPC_DROP;
-	public static NpcDropData NPC_DROP_DATA;
 	public static GlobalDropData GLOBAL_DROP_DATA;
 	public static GlobalNpcExclusionData GLOBAL_EXCLUSION_DATA;
 	public static NpcShoutData NPC_SHOUT_DATA;
@@ -119,14 +118,17 @@ public final class DataManager {
 	}
 
 	private DataManager() {
-		Util.printSection("Static Data");
 
 		this.loader = XmlDataLoader.getInstance();
 
 		long start = System.currentTimeMillis();
 		StaticData data = loader.loadStaticData();
 		long time = System.currentTimeMillis() - start;
-
+		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
+		
+		start = System.currentTimeMillis();
+		NPC_DATA = data.npcData;
+		CUSTOM_NPC_DROP = data.customNpcDrop;
 		WORLD_MAPS_DATA = data.worldMapsData;
 		MATERIAL_DATA = data.materiaData;
 		MAP_WEATHER_DATA = data.mapWeatherData;
@@ -137,8 +139,6 @@ public final class DataManager {
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;
 		ITEM_RANDOM_BONUSES = data.itemRandomBonuses;
-		NPC_DATA = data.npcData;
-		CUSTOM_NPC_DROP = data.customNpcDrop;
 		NPC_SHOUT_DATA = data.npcShoutData;
 		GATHERABLE_DATA = data.gatherableData;
 		PLAYER_INITIAL_DATA = data.playerInitialData;
@@ -206,11 +206,9 @@ public final class DataManager {
 		SYSTEM_MAIL_TEMPLATES = data.systemMailTemplates;
 		CHALLENGE_DATA = data.challengeData;
 		TOWN_SPAWNS_DATA = data.townSpawnsData;
-		ITEM_DATA.cleanup();
 		SERIAL_KILLER_DATA = data.serialKillerData;
 		ENCHANT_DATA = data.enchantData;
 		TEMPERING_DATA = data.temperingData;
-		NPC_DROP_DATA = NpcDropData.load();
 		GLOBAL_DROP_DATA = data.globalDropData;
 		GLOBAL_EXCLUSION_DATA = data.globalExclusionData;
 		MULTIRETURN_DATA = data.multiReturnItem;
@@ -219,13 +217,14 @@ public final class DataManager {
 		ARCADE_UPGRADE_DATA = data.arcadeUpgradeData;
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
 		RAID_DATA = data.raidData;
+		
+		// subsequent data processing and modifications (order is important)
+		ITEM_DATA.cleanup();
+		NpcDropData.load();
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData());
-		// some sexy time message
-		long seconds = time / 1000;
-
-		String timeMsg = seconds > 0 ? seconds + " seconds" : time + " miliseconds";
-
-		log.info("##### [Static Data loaded in: " + timeMsg + "] #####");
+		
+		time = System.currentTimeMillis() - start;
+		log.info("##### [Static Data processed in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
 	}
 
 	@SuppressWarnings("synthetic-access")

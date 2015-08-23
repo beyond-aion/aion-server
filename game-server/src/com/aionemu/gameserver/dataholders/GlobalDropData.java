@@ -3,7 +3,6 @@ package com.aionemu.gameserver.dataholders;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static ch.lambdaj.Lambda.having;
@@ -14,10 +13,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import org.hamcrest.Matchers;
 
@@ -25,10 +22,7 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcName;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcs;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItems;
 import com.aionemu.gameserver.model.templates.globaldrops.StringFunction;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 
@@ -55,7 +49,6 @@ public class GlobalDropData {
 	}
 
 	public void processRules(TIntObjectHashMap<NpcTemplate> npcs) {
-		//System.out.println("Start Global Drop Rules Elaboration");
 		List<NpcTemplate> npcList = new ArrayList<NpcTemplate>();
 		npcList.addAll(npcs.valueCollection());
 		for (GlobalRule gr : gdRules) {
@@ -65,11 +58,9 @@ public class GlobalDropData {
 					gr.setNpcs(new GlobalDropNpcs());
 					gr.getGlobalRuleNpcs().addNpcs(allowedNpcs);
 					gr.getGlobalRuleNpcNames().getGlobalDropNpcNames().clear();
-					//System.out.println(gr.getRuleName() + " - Final npc Ids: " + gr.getGlobalRuleNpcs().getGlobalDropNpcs().size());
 				}
 			}
 		}
-		//System.out.println("Global Drop Rules Elaboration Completed!");
 	}
 	
 	private List<GlobalDropNpc> getAllowedNpcs (GlobalRule rule , List<NpcTemplate> npcs) {
@@ -88,7 +79,6 @@ public class GlobalDropData {
 					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.startsWith(gdNpcName.getValue().toLowerCase())));
 				else if (gdNpcName.getFunction().equals(StringFunction.EQUALS)) {
 						matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.equalToIgnoringCase(gdNpcName.getValue().toLowerCase())));
-						//System.out.println("Matches Npcs : "+ matchesNpcs.size());
 				}
 			for (NpcTemplate npc : matchesNpcs) {
 					GlobalDropNpc gdNpc = new GlobalDropNpc();

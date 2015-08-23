@@ -10,36 +10,6 @@ import com.aionemu.gameserver.configs.main.NameConfig;
 public class Util {
 
 	/**
-	 * @param s
-	 */
-	public static void printSection(String s) {
-		s = "[ " + s + " ]";
-
-		while (s.length() < 79)
-			s = "=" + s + "=";
-
-		System.out.println(s);
-	}
-
-	public static void printProgressBarHeader(int size) {
-		StringBuilder header = new StringBuilder("0%[");
-		for (int i = 0; i < size; i++) {
-			header.append("-");
-		}
-		header.append("]100%");
-		System.out.println(header);
-		System.out.print("   ");
-	}
-
-	public static void printCurrentProgress() {
-		System.out.print("+");
-	}
-
-	public static void printEndProgress() {
-		System.out.print(" Done. \n");
-	}
-
-	/**
 	 * Convert data from given ByteBuffer to hex
 	 * 
 	 * @param data

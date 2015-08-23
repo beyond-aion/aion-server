@@ -172,8 +172,7 @@ public class Reload extends AdminCommand {
 			}
 			if(data != null)
 				DataManager.CUSTOM_NPC_DROP = data;
-			NpcDropData npcDropData = NpcDropData.load();
-			DataManager.NPC_DROP_DATA = npcDropData;
+			NpcDropData.reload();
 			PacketSendUtility.sendMessage(admin, "NpcDrops successfully reloaded!");
 		}
 		else if (params[0].equals("gameshop")) {
