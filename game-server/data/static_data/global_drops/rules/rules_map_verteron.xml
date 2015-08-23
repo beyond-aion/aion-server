@@ -213,7 +213,7 @@
 			<gd_item id="125000929" name="Kraka's Mask"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Kraka Souvenir (Legend)" base_chance="20">
+	<gd_rule rule_name="Kraka Souvenir (Legend)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
@@ -542,7 +542,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Events -->
-	<gd_rule rule_name="Shulack Sugarcrook Event Quest" base_chance="15">
+	<gd_rule rule_name="Shulack Sugarcrook Event Quest" base_chance="15" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
@@ -553,7 +553,7 @@
 			<gd_item id="164002037" name="[Event] Castings"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Shulack Sugarcrook Event Potion" base_chance="4">
+	<gd_rule rule_name="Shulack Sugarcrook Event Potion" base_chance="4" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
@@ -564,7 +564,7 @@
 			<gd_item id="160010147" name="[Event] Creamy Pumpkin Ale"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Shulack Sugarcrook Event Bundle" base_chance="4">
+	<gd_rule rule_name="Shulack Sugarcrook Event Bundle" base_chance="4" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
@@ -575,7 +575,7 @@
 			<gd_item id="188051337" name="[Event] Sugarcrook's Pack"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Epiclone Event Bundle" base_chance="2">
+	<gd_rule rule_name="Epiclone Event Bundle" base_chance="2" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>

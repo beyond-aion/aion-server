@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Map Drops -->
+	<gd_rule rule_name="Noble Draconute Armor" base_chance="33.33">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_items>
+			<gd_item id="182003802" name="Noble Draconute Armor"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Blue Balaur Scale" base_chance="12">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_items>
+			<gd_item id="186000048" name="Blue Balaur Scale"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Brig Keys 5" base_chance="5" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214807" name="Baranath Vanguard"/>
+			<gd_npc npc_id="214810" name="Baranath Medic"/>
+			<gd_npc npc_id="214813" name="Baranath Scourge"/>
+			<gd_npc npc_id="214814" name="Baranath Fleshmender"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000040" name="The Brig Key"/>
+			<gd_item id="185000072" name="Secondary Brig Key"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="The Brig Key 50" base_chance="50" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215087" name="Sentinel Garkusa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000040" name="The Brig Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Secondary Brig Key 50" base_chance="50" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215088" name="Prison Guard Mahnena"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000072" name="Secondary Brig Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Adjutant Kalanadi Accessoire Legend" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215093" name="Adjutant Kalanadi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000836" name="Kalanadi's Necklace"/>
+			<gd_item id="122001053" name="Kalanadi's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Adjutant Kalanadi Accessoire Unique" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215093" name="Adjutant Kalanadi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000941" name="Kalanadi's Belt"/>
+			<gd_item id="123000942" name="Kalanadi's Band"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Supervisor Lakhane Accessoire Legend" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215427" name="Supervisor Lakhane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000837" name="Lakhane's Necklace"/>
+			<gd_item id="122001054" name="Lakhane's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Supervisor Lakhane Headband Unique" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="300110000" name="Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215427" name="Supervisor Lakhane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001995" name="Lakhane's Kerchief"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>
