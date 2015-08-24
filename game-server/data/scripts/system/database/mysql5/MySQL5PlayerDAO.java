@@ -654,7 +654,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("SELECT COUNT(DISTINCT(`account_name`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
+					.prepareStatement("SELECT COUNT(DISTINCT(`account_id`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
 				stmt.setString(1, race.name());
 				stmt.setLong(2, DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(GSConfig.RATIO_MIN_REQUIRED_LEVEL));
 				try (ResultSet rs = stmt.executeQuery()) {
