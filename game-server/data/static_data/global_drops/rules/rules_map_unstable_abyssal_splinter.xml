@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Pazuzu's Necklace" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Necklace" base_chance="100" each_member="true">
 		<gd_maps>
 			<gd_map map_id="300600000" name="Unstable_Abyssal_Splinter" />
 		</gd_maps>

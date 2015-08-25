@@ -34,7 +34,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="The Brig Key 50" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Key 50" base_chance="50" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="185000040" name="The Brig Key"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Secondary Brig Key 50" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Key 50" base_chance="50" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -56,7 +56,7 @@
 			<gd_item id="185000072" name="Secondary Brig Key"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Adjutant Kalanadi Accessoire Legend" base_chance="25">
+	<gd_rule rule_name="Named Accessory Legend" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -68,7 +68,7 @@
 			<gd_item id="122001053" name="Kalanadi's Ring"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Adjutant Kalanadi Accessoire Unique" base_chance="50">
+	<gd_rule rule_name="Named Accessory Unique" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="123000942" name="Kalanadi's Band"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Supervisor Lakhane Accessoire Legend" base_chance="50">
+	<gd_rule rule_name="Named Accessory Legend" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
@@ -92,7 +92,7 @@
 			<gd_item id="122001054" name="Lakhane's Ring"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Supervisor Lakhane Headband Unique" base_chance="25">
+	<gd_rule rule_name="Named Headband Unique" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="300110000" name="Dredgion"/>
 		</gd_maps>
