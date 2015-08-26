@@ -52,6 +52,9 @@
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701013" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Single)">
+			<drop item_id="166500002" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Epic)">
 			<drop item_id="114101286" min_amount="1" max_amount="1" chance="5"/>
 			<drop item_id="114601192" min_amount="1" max_amount="1" chance="5"/>
@@ -77,12 +80,33 @@
 			<drop item_id="110101362" min_amount="1" max_amount="1" chance="30"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Danuar Reliquary -->
+	<npc_drop npc_id="701795" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
+			<drop item_id="166500002" min_amount="1" max_amount="1" chance="5" each_member="true"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Dragon Lords Refuge -->
+	<npc_drop npc_id="701542" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
+			<drop item_id="166500002" min_amount="1" max_amount="1" chance="5" each_member="true"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
 			<drop item_id="111500472" min_amount="1" max_amount="1" chance="15"/>
 			<drop item_id="111100433" min_amount="1" max_amount="1" chance="15"/>
 			<drop item_id="111300435" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Tiamat Stronghold -->
+	<npc_drop npc_id="701541" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Tempering Solution (Shared)">
+			<drop item_id="166030005" min_amount="1" max_amount="1" chance="2.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Tempering Solution Chest (Shared)">
+			<drop item_id="188053083" min_amount="1" max_amount="1" chance="2.5" each_member="true"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Unstable Abyssal Splinter -->
