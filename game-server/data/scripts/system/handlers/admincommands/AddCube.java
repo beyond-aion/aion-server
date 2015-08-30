@@ -47,7 +47,7 @@ public class AddCube extends AdminCommand {
    }
 
    @Override
-   public void onFail(Player admin, String message) {
+   public void info(Player admin, String message) {
 	  PacketSendUtility.sendMessage(admin, "Syntax: //addcube <player name>");
    }
 }

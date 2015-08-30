@@ -52,7 +52,7 @@ public class SysMail extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 5) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -65,7 +65,7 @@ public class SysMail extends AdminCommand {
 
 		if (paramValues[0].startsWith("$$") || paramValues[0].startsWith("%")) {
 			if (params.length < 6) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 			sender = paramValues[0];
@@ -267,7 +267,7 @@ public class SysMail extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "No parameters detected.\n"
 			+ "Please use //sysmail [%|$$<Sender>] <Recipient> <Regular|Blackcloud|Express> <Item> <Count> <Kinah> [|Title|] [|Message|]\n"
 			+ "Sender name must start with % or $$. Can be ommitted.\n" 

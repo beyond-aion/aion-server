@@ -19,7 +19,7 @@ public class GroupToMe extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 1) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -44,7 +44,7 @@ public class GroupToMe extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //grouptome <player>");
 	}
 }

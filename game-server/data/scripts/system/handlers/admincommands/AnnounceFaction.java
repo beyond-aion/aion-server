@@ -23,7 +23,7 @@ public class AnnounceFaction extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 2) {
-			onFail(player, null);
+			info(player, null);
 		} else {
 			String message = null;
 
@@ -32,7 +32,7 @@ public class AnnounceFaction extends AdminCommand {
 			else if (params[0].equals("asmo"))
 				message = "Asmodians: ";
 			else {
-				onFail(player, null);
+				info(player, null);
 				return;
 			}
 
@@ -58,7 +58,7 @@ public class AnnounceFaction extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //announcefaction <ely | asmo> <message>");
 	}
 }

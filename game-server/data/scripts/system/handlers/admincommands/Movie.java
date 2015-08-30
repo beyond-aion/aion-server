@@ -17,7 +17,7 @@ public class Movie extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 1) {
-			onFail(player, null);
+			info(player, null);
 		}
 		else {
 			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(Integer.parseInt(params[0]), Integer.parseInt(params[1])));
@@ -25,7 +25,7 @@ public class Movie extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "//movie <type> <id>");
 	}
 }

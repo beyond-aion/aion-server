@@ -17,7 +17,7 @@ public class Ranking extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length == 0) {
-			onFail(admin, null);
+			info(admin, null);
 		}
 		else if ("update".equalsIgnoreCase(params[0])) {
 			AbyssRankUpdateService.getInstance().performUpdate();
@@ -25,7 +25,7 @@ public class Ranking extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //ranking update");
 	}
 }

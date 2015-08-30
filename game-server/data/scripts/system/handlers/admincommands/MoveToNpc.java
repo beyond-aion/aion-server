@@ -25,7 +25,7 @@ public class MoveToNpc extends AdminCommand {
 			npcId = Integer.valueOf(params[0]);
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
-			onFail(player, e.getMessage());
+			info(player, e.getMessage());
 		}
 		catch (NumberFormatException e) {
 			String npcName = "";
@@ -67,7 +67,7 @@ public class MoveToNpc extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //movetonpc <npc_id|npc name>");
 	}
 }

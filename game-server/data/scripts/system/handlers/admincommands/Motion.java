@@ -29,11 +29,11 @@ public class Motion extends AdminCommand implements StatOwner {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length == 0) {
-			onFail(player, "");
+			info(player, "");
 			return;
 		}
 		if (params[0].equalsIgnoreCase("help")) {
-			onFail(player, "");
+			info(player, "");
 			PacketSendUtility.sendMessage(player, "//motion start - starts MotionLoggingService, plus loads data from db");
 			PacketSendUtility.sendMessage(player, "//motion advanced - turns on/of advanced logging info");
 			PacketSendUtility.sendMessage(player, "//motion as (value) - adds attack speed");
@@ -76,7 +76,7 @@ public class Motion extends AdminCommand implements StatOwner {
 			PacketSendUtility.sendMessage(player, "Attack Speed updated");
 		}
 		else
-			onFail(player, "");
+			info(player, "");
 	}
 	
 	private void addAttackSpeed(Player player, int i) {
@@ -91,7 +91,7 @@ public class Motion extends AdminCommand implements StatOwner {
 	}
 	
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax: //motion <HELP|analyze|savetosql|advanced|as>");
 	}
 

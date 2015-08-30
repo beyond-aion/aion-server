@@ -54,7 +54,7 @@ public class SecurityToken extends AdminCommand {
 	}
 	
 	@Override
-	public void onFail(Player admin, String message) {
+	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "Syntax: //stoken <playername> || //stoken show <playername>");
 	}
 

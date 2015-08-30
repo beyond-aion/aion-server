@@ -21,7 +21,7 @@ public class Remove extends AdminCommand {
    @Override
    public void execute(Player admin, String... params) {
 	  if (params.length < 2) {
-		 onFail(admin, null);
+		 info(admin, null);
 		 return;
 	  }
 
@@ -30,7 +30,7 @@ public class Remove extends AdminCommand {
 	  byte itemCountIndex = 2;
 	  Player target = World.getInstance().findPlayer(Util.convertName(params[0]));
 	  if (target == null) {
-		 onFail(admin, "Player isn't online.");
+		 info(admin, "Player isn't online.");
 		 return;
 	  }
 
@@ -56,7 +56,7 @@ public class Remove extends AdminCommand {
 
 	  }
 	  catch (NumberFormatException e) {
-		 onFail(admin, "Invalid number parameter passed.");
+		 info(admin, "Invalid number parameter passed.");
 		 return;
 	  }
 
@@ -71,24 +71,24 @@ public class Remove extends AdminCommand {
 				  PacketSendUtility.sendMessage(target, "Admin removed " + itemCount + "x [item:" + itemId + "] from your inventory.");
 			   }
 			   else {
-				  onFail(admin, "Player only has " + bagItemCount + " of this item.");
+				  info(admin, "Player only has " + bagItemCount + " of this item.");
 			   }
 			}
 			else {
-			   onFail(admin, "Player doesn't have that item.");
+			   info(admin, "Player doesn't have that item.");
 			}
 		 }
 		 else {
-			onFail(admin, "Invalid item count.");
+			info(admin, "Invalid item count.");
 		 }
 	  }
 	  else {
-		 onFail(admin, "Invalid item ID.");
+		 info(admin, "Invalid item ID.");
 	  }
    }
 
    @Override
-   public void onFail(Player player, String message) {
+   public void info(Player player, String message) {
 	  if (message != null && !message.isEmpty()) {
 		 PacketSendUtility.sendMessage(player, message);
 	  }

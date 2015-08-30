@@ -25,7 +25,7 @@ public class UnBanIp extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //unbanip <mask>");
 	}
 }

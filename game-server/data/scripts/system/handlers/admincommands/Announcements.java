@@ -35,7 +35,7 @@ public class Announcements extends AdminCommand {
 		}
 		else if (params[0].equals("add")) {
 			if ((params.length < 5)) {
-				onFail(player, null);
+				info(player, null);
 				return;
 			}
 
@@ -71,7 +71,7 @@ public class Announcements extends AdminCommand {
 		}
 		else if (params[0].equals("delete")) {
 			if ((params.length < 2)) {
-				onFail(player, null);
+				info(player, null);
 				return;
 			}
 
@@ -82,7 +82,7 @@ public class Announcements extends AdminCommand {
 			}
 			catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "The announcement's ID is wrong !");
-				onFail(player, e.getMessage());
+				info(player, e.getMessage());
 				return;
 			}
 
@@ -95,12 +95,12 @@ public class Announcements extends AdminCommand {
 			PacketSendUtility.sendMessage(player, "The announcement has been deleted with successful !");
 		}
 		else {
-			onFail(player, null);
+			info(player, null);
 		}
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntaxCommand = "Syntax: //announcements list - Obtain all announcements in the database.\n";
 		syntaxCommand += "Syntax: //announcements add <faction: ELYOS | ASMODIANS | ALL> <type: SYSTEM | WHITE | ORANGE | SHOUT | YELLOW> <delay in seconds> <message> - Add an announcements in the database.\n";
 		syntaxCommand += "Syntax: //announcements delete <id (see //announcements list to find all id> - Delete an announcements from the database.";

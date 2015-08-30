@@ -19,7 +19,7 @@ public class cmd_clean extends PlayerCommand {
    @Override
    public void execute(Player player, String... params) {
 	  if (params.length == 0) {
-		 onFail(player, null);
+		 info(player, null);
 		 return;
 	  }
 
@@ -47,7 +47,7 @@ public class cmd_clean extends PlayerCommand {
 		 }
 	  }
 	  catch (NumberFormatException e) {
-		 onFail(player, "Invalid number parameter passed.");
+		 info(player, "Invalid number parameter passed.");
 		 return;
 	  }
 
@@ -61,24 +61,24 @@ public class cmd_clean extends PlayerCommand {
 				  PacketSendUtility.sendMessage(player, "Successfully removed " + itemCount + "x [item:" + itemId + "] from your inventory.");
 			   }
 			   else {
-				  onFail(player, "You only have " + bagItemCount + ".");
+				  info(player, "You only have " + bagItemCount + ".");
 			   }
 			}
 			else {
-			   onFail(player, "You don't have that item.");
+			   info(player, "You don't have that item.");
 			}
 		 }
 		 else {
-			onFail(player, "Invalid item count.");
+			info(player, "Invalid item count.");
 		 }
 	  }
 	  else {
-		 onFail(player, "Invalid item ID.");
+		 info(player, "Invalid item ID.");
 	  }
    }
 
    @Override
-   public void onFail(Player player, String message) {
+   public void info(Player player, String message) {
 	  if (message != null && !message.isEmpty()) {
 		 PacketSendUtility.sendMessage(player, message);
 	  }

@@ -26,7 +26,7 @@ public class EnergyBuff extends AdminCommand {
 
 		Creature creature = (Creature) target;
 		if (params == null || params.length < 1) {
-			onFail(player, null);
+			info(player, null);
 		}
 		else if (target instanceof Player) {
 			if (params[0].equals("repose")) {
@@ -57,7 +57,7 @@ public class EnergyBuff extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntax = "//energy repose|salvation|refresh info|reset|add [points]";
 		PacketSendUtility.sendMessage(player, syntax);
 	}

@@ -22,7 +22,7 @@ public class Damage extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length > 2)
-			onFail(admin, null);
+			info(admin, null);
 
 		VisibleObject target = admin.getTarget();
 		if (target == null)
@@ -42,13 +42,13 @@ public class Damage extends AdminCommand {
 			
 			if (damageType.equalsIgnoreCase("fp") || damageType.equalsIgnoreCase("dp")) {
 				if (!(creature instanceof Player)) {
-					onFail(admin, null);
+					info(admin, null);
 					return;
 				}
 			}
 			
 			if (!damageType.equalsIgnoreCase("hp") && params.length != 2) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 			
@@ -96,13 +96,13 @@ public class Damage extends AdminCommand {
 				}
 			}
 			catch (Exception ex) {
-				onFail(admin, null);
+				info(admin, null);
 			}
 		}
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //damage (mp/fp/dp) <dmg | dmg%>"
 				+ "\n<dmg> must be a number."
 				+ "\n(mp/fp/dp) is optional, leave out to use HP damage"

@@ -22,7 +22,7 @@ public class AddSet extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length == 0 || params.length > 2) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -81,7 +81,7 @@ public class AddSet extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //addset <player> <itemset ID>");
 		PacketSendUtility.sendMessage(player, "syntax //addset <itemset ID>");
 	}

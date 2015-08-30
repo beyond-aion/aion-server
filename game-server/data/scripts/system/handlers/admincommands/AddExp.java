@@ -16,17 +16,17 @@ public class AddExp extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length != 1) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
 		Player target = null;
 
 		if(player.getTarget() == null) {
-			onFail(player, null);
+			info(player, null);
 		}
 		else if (!(player.getTarget() instanceof Player)) {
-			onFail(player, null);
+			info(player, null);
 		}
 		else
 			target = (Player) player.getTarget();
@@ -47,7 +47,7 @@ public class AddExp extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Select a target and use command this way:");
 		PacketSendUtility.sendMessage(player, "syntax //addexp <exp>");
 	}
