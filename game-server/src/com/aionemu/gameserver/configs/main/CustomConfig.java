@@ -308,9 +308,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.quest.questdatakills", defaultValue = "true")
 	public static boolean QUESTDATA_MONSTER_KILLS;
 
-	@Property(key = "gameserver.commands.admin.dot.enable", defaultValue = "false")
-	public static boolean ENABLE_ADMIN_DOT_COMMANDS;
-
 	/**
 	 * Enables sell apitems
 	 */
