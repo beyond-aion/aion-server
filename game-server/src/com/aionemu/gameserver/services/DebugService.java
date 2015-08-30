@@ -36,7 +36,7 @@ public class DebugService {
 	}
 
 	private void analyzeWorldPlayers() {
-		log.info("Starting analysis of world players at " + System.currentTimeMillis());
+		log.info("Starting analysis of world players");
 
 		Iterator<Player> playersIterator = World.getInstance().getPlayersIterator();
 		while (playersIterator.hasNext()) {
@@ -63,6 +63,8 @@ public class DebugService {
 					pingInterval));
 			}
 		}
+		
+		log.info("Analysis of world players finished");
 	}
 
 	@SuppressWarnings("synthetic-access")

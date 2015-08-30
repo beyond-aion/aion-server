@@ -4,7 +4,6 @@ import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptClassLoader;
 import com.aionemu.commons.scripting.ScriptCompiler;
 
-
 import com.aionemu.commons.utils.ExitCode;
 
 import org.slf4j.Logger;
@@ -53,15 +52,11 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *           if compiler is not available
 	 */
 	public ScriptCompilerImpl() {
-		String jdkPath = System.getenv("JAVA_HOME");
-		log.info("JAVA_HOME={}", jdkPath);
-		String jrePath = System.getProperty("java.home");
-		log.info("java.home={}", jrePath);
-
 		javaCompiler = ToolProvider.getSystemJavaCompiler();
 		if (javaCompiler == null) {
-			log.error("Could not find compiler!!! Make sure tools.jar exists in runtime lib folder and javac is in path.");
-			 Runtime.getRuntime().halt(ExitCode.CODE_ERROR);
+			log.info("JAVA_HOME={}", System.getenv("JAVA_HOME"));
+			log.error("Could not find compiler! Make sure javac is in PATH.");
+			Runtime.getRuntime().halt(ExitCode.CODE_ERROR);
 		}
 	}
 
