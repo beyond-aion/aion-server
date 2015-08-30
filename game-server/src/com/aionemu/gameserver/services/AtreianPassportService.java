@@ -90,7 +90,7 @@ public class AtreianPassportService {
 		 toRemove.add(passport);
 	  }
 	  if (!toRemove.isEmpty()) {
-		 DAOManager.getDAO(AccountPassportsDAO.class).store(player.getPlayerAccount().getId(), toRemove);
+		 DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getPlayerAccount().getId(), toRemove);
 		 toRemove.clear();
 	  }
 	  onLogin(player);
@@ -138,7 +138,7 @@ public class AtreianPassportService {
 		 pa.increasePassportStamps();
 		 pa.setLastStamp(new Timestamp(System.currentTimeMillis()));
 		 checkPassportLimit(player);
-		 DAOManager.getDAO(AccountPassportsDAO.class).store(pa); //save account
+		 DAOManager.getDAO(AccountPassportsDAO.class).storePassport(pa); //save account
 		 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NEW_PASSPORT_AVAIBLE);
 	  }
 	  sendPassport(player);
@@ -176,7 +176,7 @@ public class AtreianPassportService {
 	  }
 	  if (!toRemove.isEmpty()) {
 		 pl.removeAll(toRemove);
-		 DAOManager.getDAO(AccountPassportsDAO.class).store(player.getPlayerAccount().getId(), toRemove);
+		 DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getPlayerAccount().getId(), toRemove);
 		 toRemove.clear();
 	  }
 

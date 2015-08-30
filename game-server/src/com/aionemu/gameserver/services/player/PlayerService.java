@@ -15,6 +15,7 @@ import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.PlayerController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
+import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.CraftCooldownsDAO;
 import com.aionemu.gameserver.dao.FriendListDAO;
@@ -149,6 +150,7 @@ public class PlayerService {
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(player);
 		DAOManager.getDAO(CraftCooldownsDAO.class).storeCraftCooldowns(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).storeNpcFactions(player);
+		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getPlayerAccount());
 	}
 
 	/**
@@ -189,6 +191,7 @@ public class PlayerService {
 		DAOManager.getDAO(AbyssRankDAO.class).loadAbyssRank(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).loadNpcFactions(player);
 		DAOManager.getDAO(MotionDAO.class).loadMotionList(player);
+		DAOManager.getDAO(AccountPassportsDAO.class).loadPassport(player.getPlayerAccount());
 		player.setVars(DAOManager.getDAO(PlayerVarsDAO.class).load(player.getObjectId()));
 		player.setEffectController(new PlayerEffectController(player));
 		player.setFlyController(new FlyController(player));

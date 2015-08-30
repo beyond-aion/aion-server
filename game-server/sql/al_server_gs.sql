@@ -47,9 +47,6 @@ CREATE TABLE IF NOT EXISTS `players` (
   `note` text,
   `mentor_flag_time` INT(11) NOT NULL DEFAULT '0',
   `last_transfer_time` decimal(20) NOT NULL default '0',
-  `stamps` int(11) NOT NULL DEFAULT '0',
-  `last_stamp` timestamp NULL DEFAULT NULL,
-  `rewarded_pass` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`),
   INDEX (`account_id`)
@@ -504,6 +501,7 @@ CREATE TABLE IF NOT EXISTS `siege_locations` (
   `id` int(11) NOT NULL,
   `race` enum('ELYOS', 'ASMODIANS', 'BALAUR') NOT NULL,
   `legion_id` int (11) NOT NULL,
+  `occupy_count` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -877,14 +875,24 @@ CREATE TABLE `commands_access` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for player_passports
+-- Table structure for account_passports
 -- ----------------------------
-DROP TABLE IF EXISTS `player_passports`;
-CREATE TABLE `player_passports` (
-  `player_id` int(11) NOT NULL,
-  `passportid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `account_passports`;
+CREATE TABLE `account_passports` (
+  `account_id` int(11) NOT NULL,
+  `passport_id` int(11) NOT NULL,
   `rewarded` int(11) NOT NULL,
-  `arrive_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`player_id`,`passportid`,`arrive_date`),
-  CONSTRAINT `player_passports` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `arrive_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`player_id`,`passport_id`,`arrive_date`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+-- ----------------------------
+-- Table structure for `account_stamps`
+-- ----------------------------
+DROP TABLE IF EXISTS `account_stamps`;
+CREATE TABLE `account_stamps` (
+  `account_id` int(11) NOT NULL,
+  `stamps` tinyint(2) NOT NULL DEFAULT '0',
+  `last_stamp` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
