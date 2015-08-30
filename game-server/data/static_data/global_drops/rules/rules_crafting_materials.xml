@@ -855,6 +855,19 @@
 			<gd_item id="152014024" name="Gleaming Balaur Blood" />
 		</gd_items>
 	</gd_rule>
+	<!-- Drana -->
+	<gd_rule rule_name="Concentrated Drana" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="300040000" name="Dark_Poeta"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215280" name="Tahabata Pyrelord"/>
+			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012805" name="Concentrated Drana"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Logs -->
 	<gd_rule rule_name="Betua Log" base_chance="5">
 		<gd_maps>

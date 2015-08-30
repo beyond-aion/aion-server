@@ -285,7 +285,7 @@ public class StaticData {
     public AtreianPassportData atreianPassportData;
 
 	@XmlElement(name = "raid_locations")
-	public RaidData raidData;
+	public MonsterRaidData raidData;
 
 	// JAXB callback
 	@SuppressWarnings("unused")

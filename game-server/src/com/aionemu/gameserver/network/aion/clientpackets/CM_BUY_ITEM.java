@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.PrivateStoreService;
 import com.aionemu.gameserver.services.RepurchaseService;
 import com.aionemu.gameserver.services.TradeService;
@@ -118,6 +119,10 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		else if (target instanceof Npc) {
 			Npc npc = (Npc) target;
 			TradeListTemplate tradeTemplate = null;
+			if (DialogService.isSubDialogRestricted(0, player, npc)) {
+				AuditLogger.info(player, "Player " + player.getName() + " try buy item no right ");
+				return;
+			}
 			switch (tradeActionId) {
 				case 1:// sell to shop
 					if (npc.canPurchase()) {
@@ -136,66 +141,14 @@ public class CM_BUY_ITEM extends AionClientPacket {
 						RepurchaseService.getInstance().repurchaseFromShop(player, repurchaseList);
 					break;
 				case 13:// buy from shop
-					if (npc.canBuyFrom()) {
-						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
-						if (tradeTemplate.getTradeNpcType() == TradeNpcType.NORMAL) {
-							boolean success = true;
-							if (tradeTemplate.getNpcId() == 798400 || tradeTemplate.getNpcId() == 798395 || tradeTemplate.getNpcId() == 798394
-								|| tradeTemplate.getNpcId() == 798399)
-							{
-								// check kinah first
-								int tradeModifier = tradeTemplate.getSellPriceRate();
-								success = tradeList.calculateBuyListPrice(player, tradeModifier);
-								if (success) {
-									success = TradeService.performBuyFromRewardShop(npc, player, tradeList);
-									if (success) {
-										TradeService.performBuyFromShop(npc, player, tradeList, false);
-										success = false;
-									}
-								}
-							}
-							if (success)
-								TradeService.performBuyFromShop(npc, player, tradeList);
-						}
-					}
-					break;
 				case 14:// buy from abyss shop
+				case 15: //reward shop
+				case 16:// abyss_kinah shop
 					if (npc.canBuyFrom()) {
-						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
-						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
-							TradeService.performBuyFromAbyssShop(npc, player, tradeList);
+					   if (DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId()) != null)
+						   TradeService.performBuyFromShop(npc, player, tradeList);
 					}
 					break;
-				case 15:// buy from reward shop
-					if (npc.canBuyFrom()) {
-						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
-						if (tradeTemplate.getTradeNpcType() == TradeNpcType.REWARD)
-							TradeService.performBuyFromRewardShop(npc, player, tradeList);
-					}
-					break;
-				case 16:// buy from general shop (need Rank General or higher)
-					if (npc.canBuyFrom()) {
-						tradeTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
-						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS_KINAH) {
-							boolean success = true;
-							if (tradeTemplate.getNpcId() == 802216 || tradeTemplate.getNpcId() == 802218)
-							{
-								// check kinah first
-								int tradeModifier = tradeTemplate.getSellPriceRate2();
-								success = tradeList.calculateBuyListPrice(player, tradeModifier);
-								if (success) {
-									success = TradeService.performBuyFromGeneralShop(npc, player, tradeList);
-									if (success) {
-										TradeService.performBuyFromShop(npc, player, tradeList, false);
-										success = false;
-									}
-								}
-							}
-							if (success)
-								TradeService.performBuyFromShop(npc, player, tradeList);
-						}
-					}
-					break;	
 				default:
 					log.info(String.format("Unhandle shop action unk1: %d", tradeActionId));
 					break;

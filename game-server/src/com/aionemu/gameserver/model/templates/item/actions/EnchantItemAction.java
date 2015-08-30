@@ -60,17 +60,19 @@ public class EnchantItemAction extends AbstractItemAction {
 						SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
 			}
-
-			if(targetItem.isAmplified()) {
-				if(targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL) {
+			else if (!targetItem.isAmplified() && targetItem.getEnchantLevel() >= targetItem.getMaxEnchantLevel()) {
+				PacketSendUtility.sendPacket(player,
+						SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				return false;
+			}
+			else if (targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL) {
 					PacketSendUtility.sendPacket(player,
 							SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 					return false;
-				}
 			}
-			else if (targetItem.getEnchantLevel() >= targetItem.getMaxEnchantLevel()) {
-				PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+			else if (targetItem.isAmplified() && parentItem.getItemId() != 166020000) { //only omega enchantment stone
+			   PacketSendUtility.sendPacket(player,
+						SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(new DescriptionId(parentItem.getItemTemplate().getNameId())));
 				return false;
 			}
 		}
@@ -113,7 +115,7 @@ public class EnchantItemAction extends AbstractItemAction {
 		final int currentEnchant = targetItem.getEnchantLevel();
 		final boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 2000, 0, 0, 1, 0, 0));
+		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), stoneType ? 5000 : 2000, 0, 0, 1, 0, 0));
 		
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
@@ -154,7 +156,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				}
 			}
 
-		},2000));
+		}, stoneType ? 5000 : 2000));
 	}
 
 	/**

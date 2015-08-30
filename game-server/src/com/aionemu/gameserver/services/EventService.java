@@ -192,7 +192,7 @@ public class EventService {
 
 	private void checkEvents() {
 		List<EventTemplate> newEvents = new ArrayList<EventTemplate>();
-		List<EventTemplate> allEvents = DataManager.EVENT_DATA.getAllEvents();
+		List<EventTemplate> allEvents = DataManager.EVENT_DATA.getActiveEvents();
 
 		for (EventTemplate et : allEvents) {
 			if (et.isActive()) {

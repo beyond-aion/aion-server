@@ -1,5 +1,16 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import com.aionemu.commons.utils.Rnd;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -28,14 +39,6 @@ import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author ATracer, Wakizashi, xTz
@@ -159,6 +162,12 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 				this.fusionedItemTemplate = null;
 				this.optionalFusionSocket = 0;
 			}
+		}
+		// Migration. Items dropped before implementation of enchantbonus
+		if (!this.isAmplified && this.enchantLevel > itemTemplate.getMaxEnchantLevel()+this.enchantBonus) {
+		   if (this.enchantBonus==0 && itemTemplate.getMaxEnchantBonus() > 0)
+			  this.enchantBonus = Rnd.get(0, itemTemplate.getMaxEnchantBonus());
+		   this.enchantLevel = Math.min(itemTemplate.getMaxEnchantLevel()+this.enchantBonus, this.enchantLevel);
 		}
 		updateChargeInfo(charge);
 	}
@@ -846,7 +855,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		return Math.max(thisChargeLevel, fusionedChargeLevel);
 	}
 	
-	/*
+		/*
 	* Check for disabled charge levels due to recommend rank restriction
 	*/
 	public int getAvailableChargeLevel(Player player) {
@@ -858,6 +867,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	  }
 	   return Math.max(0, result);
 	}
+
 
 	@Override
 	public boolean canExpireNow() {

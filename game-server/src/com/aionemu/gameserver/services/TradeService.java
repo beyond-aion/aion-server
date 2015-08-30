@@ -27,6 +27,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.TradeinItem;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
+import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -50,59 +51,6 @@ public class TradeService {
 	private static final Logger log = LoggerFactory.getLogger(TradeService.class);
 	private static final TradeListData tradeListData = DataManager.TRADE_LIST_DATA;
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
-
-	public static boolean performBuyFromShop(Npc npc, Player player, TradeList tradeList) {
-		return performBuyFromShop(npc, player, tradeList, true);
-	}
-
-	/**
-	 * @param player
-	 * @param tradeList
-	 * @return true or false
-	 */
-	public static boolean performBuyFromShop(Npc npc, Player player, TradeList tradeList, boolean addItems) {
-		if (!RestrictionsManager.canTrade(player)) {
-			return false;
-		}
-
-		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be sold by this npc.");
-			return false;
-		}
-
-		Storage inventory = player.getInventory();
-
-		int tradeModifier = tradeListData.getTradeListTemplate(npc.getNpcId()).getSellPriceRate();
-
-		// 1. check kinah
-		if (!tradeList.calculateBuyListPrice(player, tradeModifier))
-			return false;
-
-		// 2. check free slots, need to check retail behaviour
-		int freeSlots = inventory.getFreeSlots();
-		if (freeSlots < tradeList.size())
-			return false; // TODO message
-
-		long tradeListPrice = tradeList.getRequiredKinah();
-		
-        for (TradeItem tradeItem : tradeList.getTradeItems()) {
-            if (!canBuyLimitItem(npc, player, tradeItem)) {
-                return false;
-            }
-			if (addItems) {
-				long count = ItemService.addItem(player, tradeItem.getItemTemplate().getTemplateId(), tradeItem.getCount());
-				if (count != 0) {
-					log.warn(String.format("CHECKPOINT: itemservice couldnt add all items on buy: %d %d %d %d", player.getObjectId(), tradeItem
-						.getItemTemplate().getTemplateId(), tradeItem.getCount(), count));
-					inventory.decreaseKinah(tradeListPrice);
-					return false;
-				}
-			}
-		}
-		inventory.decreaseKinah(tradeListPrice);
-		// TODO message
-		return true;
-	}
 
     private static boolean canBuyLimitItem(Npc npc, Player player, TradeItem tradeItem) {
         // check if soldOutItem
@@ -144,76 +92,32 @@ public class TradeService {
 			}
             return true;
     }
-
-	/**
-	 * Probably later merge with regular buy
-	 * 
-	 * @param player
-	 * @param tradeList
-	 * @return true or false
-	 */
-	public static boolean performBuyFromAbyssShop(Npc npc, Player player, TradeList tradeList) {
-		if (!RestrictionsManager.canTrade(player)) {
-			return false;
-		}
-
-		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be selled from this npc");
-			return false;
-		}
-
-		Storage inventory = player.getInventory();
-		int freeSlots = inventory.getFreeSlots();
-
-		int tradeModifier = tradeListData.getTradeListTemplate(npc.getNpcId()).getSellPriceRate();
-
-		if (!tradeList.calculateAbyssBuyListPrice(player, tradeModifier))
-			return false;
-
-		if (tradeList.getRequiredAp() < 0) {
-			AuditLogger.info(player, "Posible client hack. tradeList.getRequiredAp() < 0");
-			// You do not have enough Abyss Points.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
-			return false;
-		}
-
-		// 2. check free slots, need to check retail behaviour
-		if (freeSlots < tradeList.size()) {
-			// You cannot trade as your inventory is full.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300762));
-			return false;
-		}
-
-		AbyssPointsService.addAp(player, -tradeList.getRequiredAp());
-		Map<Integer, Long> requiredItems = tradeList.getRequiredItems();
-		for (Integer itemId : requiredItems.keySet()) {
-			if (!player.getInventory().decreaseByItemId(itemId, requiredItems.get(itemId))) {
-				AuditLogger.info(player, "Possible hack. Not removed items on buy in abyss shop.");
-				return false;
-			}
-		}
-
-		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long count = ItemService.addItem(player, tradeItem.getItemTemplate().getTemplateId(), tradeItem.getCount());
-			if (count != 0) {
-				log.warn(String.format("CHECKPOINT: itemservice couldnt add all items on buy: %d %d %d %d", player.getObjectId(), tradeItem
-					.getItemTemplate().getTemplateId(), tradeItem.getCount(), count));
-				return false;
-			}
-
-			if (tradeItem.getCount() > 1) // You have purchased %1 %0s.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300785, new DescriptionId(tradeItem.getItemTemplate().getNameId()),
-					tradeItem.getCount()));
-			else
-				// You have purchased %0.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300784, new DescriptionId(tradeItem.getItemTemplate().getNameId())));
-		}
-
-		return true;
-	}
 	
-	//buy from General shop (need rank general)
-	public static boolean performBuyFromGeneralShop(Npc npc, Player player, TradeList tradeList) {
+	public static boolean performBuyFromShop(Npc npc, Player player, TradeList tradeList) {
+	   TradeNpcType npcType = tradeListData.getTradeListTemplate(npc.getNpcId()).getTradeNpcType();
+	   switch (npcType) {
+		  case NORMAL: 
+		  case ABYSS_KINAH:
+			 return performBuyTransaction(npc, player, tradeList, true);//trade including kinah
+		  case ABYSS:
+		  case REWARD:
+			 return performBuyTransaction(npc, player, tradeList, false); //trade without kinah
+		  default:
+			 log.warn("Unhandled TradeNpcType:"+npcType.name()); 
+	   }
+	   return false;
+	}
+
+	/**
+	 * General Trade with NPC method.
+	 * Handles buy items for AP and/or tokens (coins etc.) and/or kinah
+	 * 
+	 * @param player
+	 * @param tradeList
+	 * @param useKinah shop subtracts kinah value of items or not
+	 * @return true or false
+	 */
+	public static boolean performBuyTransaction(Npc npc, Player player, TradeList tradeList, boolean useKinah) {
 		if (!RestrictionsManager.canTrade(player)) {
 			return false;
 		}
@@ -225,107 +129,82 @@ public class TradeService {
 
 		Storage inventory = player.getInventory();
 		int freeSlots = inventory.getFreeSlots();
-		
-		//New Sell Price 2
-		int tradeModifier = tradeListData.getTradeListTemplate(npc.getNpcId()).getSellPriceRate2();
 
-		if (!tradeList.calculateAbyssBuyListPrice(player, tradeModifier))
+		//strange new attributes for new trader type
+		TradeListTemplate template = tradeListData.getTradeListTemplate(npc.getNpcId());
+		int sellModifier = template.getTradeNpcType().equals(TradeNpcType.ABYSS_KINAH) ? template.getSellPriceRate2() : template.getSellPriceRate();
+		int apSellModifier = template.getTradeNpcType().equals(TradeNpcType.ABYSS_KINAH) ? template.getApSellPriceRate2() : template.getSellPriceRate();
+
+		// 1. If useKinah, check for required Kinah
+		if (useKinah && !tradeList.calculateBuyListPrice(player, sellModifier)) {
+		   PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY);
+		   return false;
+		}
+		
+		// 2. check required AP + select required items
+		if (!tradeList.calculateAbyssRewardBuyList(player, apSellModifier)) {
+		   // You do not have enough Abyss Points.
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
 			return false;
+		}
 		
-		if (!tradeList.calculateBuyListPrice(player, tradeModifier))
-			return false;	
-
+		// 3. check exploit
 		if (tradeList.getRequiredAp() < 0) {
 			AuditLogger.info(player, "Posible client hack. tradeList.getRequiredAp() < 0");
 			// You do not have enough Abyss Points.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
 			return false;
 		}
-		
-		//Inventory free slots Check
+
+		// 4. check free slots
 		if (freeSlots < tradeList.size()) {
 			// You cannot trade as your inventory is full.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300762));
 			return false;
 		}
 		
-		//Remove AP Check
-		AbyssPointsService.addAp(player, -tradeList.getRequiredAp());
-		Map<Integer, Long> requiredItems = tradeList.getRequiredItems();
-		for (Integer itemId : requiredItems.keySet()) {
-			if (!player.getInventory().decreaseByItemId(itemId, requiredItems.get(itemId))) {
-				AuditLogger.info(player, "Possible hack. Not removed items on buy in abyss shop.");
-				return false;
-			}
-		}
-
-		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long count = ItemService.addItem(player, tradeItem.getItemTemplate().getTemplateId(), tradeItem.getCount());
-			if (count != 0) {
-				log.warn(String.format("CHECKPOINT: itemservice couldnt add all items on buy: %d %d %d %d", player.getObjectId(), tradeItem
-					.getItemTemplate().getTemplateId(), tradeItem.getCount(), count));
-				return false;
-			}
-
-			if (tradeItem.getCount() > 1) // You have purchased %1 %0s.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300785, new DescriptionId(tradeItem.getItemTemplate().getNameId()),
-					tradeItem.getCount()));
-			else
-				// You have purchased %0.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300784, new DescriptionId(tradeItem.getItemTemplate().getNameId())));
-		}
-
-		return true;
-	}
-
-	/**
-	 * Probably later merge with regular buy
-	 * 
-	 * @param player
-	 * @param tradeList
-	 * @return true or false
-	 */
-	public static boolean performBuyFromRewardShop(Npc npc, Player player, TradeList tradeList) {
-		if (!RestrictionsManager.canTrade(player)) {
-			return false;
-		}
-
-		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be selled from this npc");
-			return false;
-		}
-
-		Storage inventory = player.getInventory();
-		int freeSlots = inventory.getFreeSlots();
-
-		// 1. check required items
-		if (!tradeList.calculateRewardBuyListPrice(player))
-			return false;
-
-		// 2. check free slots, need to check retail behaviour
-		if (freeSlots < tradeList.size())
-			return false; // TODO message
-
-		Map<Integer, Long> requiredItems = tradeList.getRequiredItems();
-		for (Integer itemId : requiredItems.keySet()) {
-			if (!player.getInventory().decreaseByItemId(itemId, requiredItems.get(itemId))) {
-				AuditLogger.info(player, "Possible hack. Not removed items on buy in rewardshop.");
-				return false;
-			}
-		}
-
+		//5. check limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
             if (!canBuyLimitItem(npc, player, tradeItem)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_BUYING_CANT_SELECT_NO_ITEMS);
                 return false;
             }
+		}
+
+		// 6. subtract all costs
+		long tradeListPrice = tradeList.getRequiredKinah();
+		if (tradeList.getRequiredAp() > 0)
+		 AbyssPointsService.addAp(player, -tradeList.getRequiredAp());
+		
+		if (useKinah && tradeListPrice > 0)
+		   if (!inventory.tryDecreaseKinah(tradeListPrice))
+			   return false;
+		
+		Map<Integer, Long> requiredItems = tradeList.getRequiredItems();
+		for (Integer itemId : requiredItems.keySet()) {
+			if (!player.getInventory().decreaseByItemId(itemId, requiredItems.get(itemId))) {
+				AuditLogger.info(player, "Possible hack. Not removed items on buy in abyss shop.");
+				return false;
+			}
+		}
+
+		//7. finally add items
+		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			long count = ItemService.addItem(player, tradeItem.getItemTemplate().getTemplateId(), tradeItem.getCount());
 			if (count != 0) {
 				log.warn(String.format("CHECKPOINT: itemservice couldnt add all items on buy: %d %d %d %d", player.getObjectId(), tradeItem
 					.getItemTemplate().getTemplateId(), tradeItem.getCount(), count));
 				return false;
 			}
+
+			if (tradeItem.getCount() > 1) // You have purchased %1 %0s.
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300785, new DescriptionId(tradeItem.getItemTemplate().getNameId()),
+					tradeItem.getCount()));
+			else
+				// You have purchased %0.
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300784, new DescriptionId(tradeItem.getItemTemplate().getNameId())));
 		}
-		// TODO message
+
 		return true;
 	}
 
@@ -467,6 +346,7 @@ public class TradeService {
 						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
 						return false;
 					}
+                                    continue;
 				case 2:
 					if (item1 == null || item2 == null)
 						return false;
@@ -474,6 +354,7 @@ public class TradeService {
 						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
 						return false;
 					}
+                                    continue;
 				case 3:
 					if (item1 == null || item2 == null || item3 == null)
 						return false;
@@ -481,6 +362,7 @@ public class TradeService {
 						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
 						return false;
 					}
+                                    continue;
 			}
 		}
 		/*** End Implementing Anti-Cheat System ***/
@@ -543,6 +425,7 @@ public class TradeService {
 				return false;
 			}
 			int itemId = item.getItemId();
+			
 			boolean valid = false;
 			for (TradeTab tab : purchaseTemplate.getTradeTablist()) {
 				GoodsList goodList = goodsListData.getGoodsPurchaseListById(tab.getId());

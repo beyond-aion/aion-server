@@ -1817,6 +1817,10 @@
 					<spawn npc_id="252293" respawn_time="295">
 						<spot x="840.4733" y="801.1002" z="165" static_id="550" />
 					</spawn>
+					<!-- Real Teleport Device! -->
+					<spawn npc_id="802444" respawn_time="295">
+						<spot x="865.881653" y="805.2901" z="165.499023" h="60" />
+					</spawn>
 					<!-- Teleport Device(LDF5_Fortress_7012_DynTeleporter_Da) -->
 					<spawn npc_id="804529" respawn_time="295">
 						<spot x="865.1982" y="802.3431" z="164.96552" />
@@ -1877,9 +1881,6 @@
 			</siege_race>
 			<siege_race race="ELYOS">
 				<siege_mod mod="PEACE">
-					<spawn npc_id="252181" respawn_time="295">
-						<spot x="839.2666" y="793.2137" z="167.135635" h="86" />
-					</spawn>
 					<spawn npc_id="802443" respawn_time="295">
 						<spot x="865.881653" y="805.2901" z="165.499023" h="60" />
 					</spawn>

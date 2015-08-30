@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
 import com.aionemu.gameserver.model.items.storage.Storage;
 
 /**
@@ -56,6 +57,10 @@ public class Account implements Iterable<PlayerAccountData> {
 	private String allowedHddSerial = "";
 	
 	private boolean isHacked = false;
+	
+	private int stamps = 0;
+	private PassportsList playerPassports;
+    private Timestamp lastStamp;
     
     public String getSecurityToken() {
     	return securityToken;
@@ -291,5 +296,33 @@ public class Account implements Iterable<PlayerAccountData> {
 	
 	public void setHacked(boolean isHacked) {
 		this.isHacked = isHacked;
+	}
+	
+	public int getPassportStamps() {
+		return stamps;
+	}
+
+	public void setPassportStamps(int value) {
+		this.stamps = value;
+	}
+	
+	public void increasePassportStamps() {
+		this.stamps++;
+	}
+
+	public PassportsList getPassportsList() {
+		return playerPassports;
+	}
+
+	public void setPassportsList(PassportsList pp) {
+		playerPassports = pp;
+	}
+	
+	public Timestamp getLastStamp() {
+		return lastStamp;
+	}
+
+	public void setLastStamp(Timestamp timestamp) {
+		this.lastStamp = timestamp;
 	}
 }

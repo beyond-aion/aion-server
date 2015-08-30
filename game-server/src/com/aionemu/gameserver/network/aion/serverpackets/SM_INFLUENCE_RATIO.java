@@ -21,7 +21,7 @@ public class SM_INFLUENCE_RATIO extends AionServerPacket {
 		writeF(inf.getGlobalElyosInfluence());
 		writeF(inf.getGlobalAsmodiansInfluence());
 		writeF(inf.getGlobalBalaursInfluence());
-		writeH(4); // maps count
+		writeH(7); // maps count
 		writeD(210050000);
 		writeF(inf.getInggisonElyosInfluence());
 		writeF(inf.getInggisonAsmodiansInfluence());
@@ -38,6 +38,18 @@ public class SM_INFLUENCE_RATIO extends AionServerPacket {
 		writeF(inf.getTiamarantaElyosInfluence());
 		writeF(inf.getTiamarantaAsmodiansInfluence());
 		writeF(inf.getTiamarantaBalaursInfluence());
+		writeD(600050000);
+		writeF(inf.getKatalamElyosInfluence());
+		writeF(inf.getKatalamAsmodiansInfluence());
+		writeF(inf.getKatalamBalaursInfluence());
+		writeD(600060000);
+		writeF(inf.getDanariaElyosInfluence());
+		writeF(inf.getDanariaAsmodiansInfluence());
+		writeF(inf.getDanariaBalaursInfluence());
+		writeD(600090000);
+		writeF(inf.getKaldorElyosInfluence());
+		writeF(inf.getKaldorAsmodiansInfluence());
+		writeF(inf.getKaldorBalaursInfluence());
 	}
 
 }

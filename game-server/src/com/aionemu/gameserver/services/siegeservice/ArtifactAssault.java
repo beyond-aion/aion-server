@@ -15,6 +15,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 /**
  * @author Luzien
  * @modified Whoop
+ * TODO: onAssaultFail(), if BalaurAssaulter fails to capture
  */
 public class ArtifactAssault extends Assault<ArtifactSiege> {
 	
@@ -32,7 +33,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 			public void run() {
 				spawnAttacker();
 			}
-		}, delay * 60 * 1000);
+		}, delay * 60 * 1000); //Assault between 1h and 10h
 	}
 
 	@Override
@@ -69,10 +70,11 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 	private int getAssaulterIdByBossLvl() {
 		switch (boss.getLevel()) {
 			case 40:
+				return 276719;
 			case 50:
-			case 65:
+				return 277016;
 			default:
-				return 0;
+				return 251160;
 		}
 	}
 }

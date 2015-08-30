@@ -52,6 +52,7 @@ public class DecomposeAction extends AbstractItemAction {
 
 	private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
 	private static final int USAGE_DELAY = 3000;
+	private static Map<Integer, List<ItemTemplate>> specialManastones;
 	private static Map<Integer, List<ItemTemplate>> manastones;
 	private static Map<Race, int[]> chunkEarth = new HashMap<Race, int[]>();
 
@@ -194,23 +195,7 @@ public class DecomposeAction extends AbstractItemAction {
 								switch (randomItem.getType()) {
 									case ENCHANTMENT: {
 										do {
-											randomId = 166000000 + itemLvl + Rnd.get(50);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									}
-									case ENCHANTMENT_BLUE:
-									case ENCHANTMENT_GREEN:
-									case ENCHANTMENT_PURPLE: {
-										int startLevel = randomType.getLevel();
-										do {
-											randomId = 166000000 + startLevel + Rnd.get(20);
+											randomId = 166000191 + Math.round(itemLvl / 100) + Rnd.get(4);
 											i++;
 											if (i > 50) {
 												randomId = 0;
@@ -269,6 +254,36 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 										}
 
+										if (!ItemService.checkRandomTemplate(randomId)) {
+											log.warn("DecomposeAction random item id not found. " + randomId);
+											return;
+										}
+										break;
+									case SPECIAL_MANASTONE_RARE_GRADE:
+									case SPECIAL_MANASTONE_LEGEND_GRADE:
+									case SPECIAL_MANASTONE_UNIQUE_GRADE:
+									case SPECIAL_MANASTONE_EPIC_GRADE:
+										if (specialManastones == null) {
+											specialManastones = DataManager.ITEM_DATA.getSpecialManastones();
+										}
+										List<ItemTemplate> ancientStones = specialManastones.get(randomType.getLevel());
+										if (ancientStones == null) {
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+											return;
+										}
+										ItemQuality itemQuality = ItemQuality.COMMON;
+										if (randomType.name().contains("RARE"))
+											itemQuality = ItemQuality.RARE;
+										else if (randomType.name().contains("LEGEND"))
+											itemQuality = ItemQuality.LEGEND;
+										else if (randomType.name().contains("UNIQUE"))
+											itemQuality = ItemQuality.UNIQUE;
+										else if (randomType.name().contains("EPIC"))
+											itemQuality = ItemQuality.EPIC;
+										List<ItemTemplate> selectedStones = select(ancientStones,
+											having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+										
 										if (!ItemService.checkRandomTemplate(randomId)) {
 											log.warn("DecomposeAction random item id not found. " + randomId);
 											return;

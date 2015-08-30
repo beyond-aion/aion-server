@@ -41,6 +41,8 @@ public class SiegeLocationTemplate {
 	protected int siegeDuration;
 	@XmlAttribute(name = "influence")
 	protected int influenceValue;
+	@XmlAttribute(name = "occupy_count")
+	protected int maxOccupyCount;
 	@XmlList
 	@XmlAttribute(name = "fortress_dependency")
 	protected List<Integer> fortressDependency;
@@ -129,5 +131,11 @@ public class SiegeLocationTemplate {
 	 */
 	public int getInfluenceValue() {
 		return this.influenceValue;
+	}
+	/**
+	 * @return occupyCount
+	 */
+	public int getMaxOccupyCount() {
+	   return this.maxOccupyCount;
 	}
 }

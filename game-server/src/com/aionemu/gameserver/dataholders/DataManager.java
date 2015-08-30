@@ -105,7 +105,7 @@ public final class DataManager {
 	public static ItemPurificationData ITEM_PURIFICATION_DATA;
 	public static ArcadeUpgradeData ARCADE_UPGRADE_DATA;
 	public static AtreianPassportData ATREIAN_PASSPORT_DATA;
-	public static RaidData RAID_DATA;
+	public static MonsterRaidData RAID_DATA;
 	
 	private XmlDataLoader loader;
 

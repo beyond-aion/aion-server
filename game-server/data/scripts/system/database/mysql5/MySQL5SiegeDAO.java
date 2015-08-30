@@ -23,9 +23,9 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5SiegeDAO.class);
 
-	public static final String SELECT_QUERY = "SELECT `id`, `race`, `legion_id` FROM `siege_locations`";
-	public static final String INSERT_QUERY = "INSERT INTO `siege_locations` (`id`, `race`, `legion_id`) VALUES(?, ?, ?)";
-	public static final String UPDATE_QUERY = "UPDATE `siege_locations` SET  `race` = ?, `legion_id` = ? WHERE `id` = ?";
+	public static final String SELECT_QUERY = "SELECT `id`, `race`, `legion_id`, `occupy_count` FROM `siege_locations`";
+	public static final String INSERT_QUERY = "INSERT INTO `siege_locations` (`id`, `race`, `legion_id`, `occupy_count`) VALUES(?, ?, ?, ?)";
+	public static final String UPDATE_QUERY = "UPDATE `siege_locations` SET  `race` = ?, `legion_id` = ?, `occupy_count` = ? WHERE `id` = ?";
 
 	@Override
 	public boolean loadSiegeLocations(final Map<Integer, SiegeLocation> locations) {
@@ -40,6 +40,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 					SiegeLocation loc = locations.get(resultSet.getInt("id"));
 					loc.setRace(SiegeRace.valueOf(resultSet.getString("race")));
 					loc.setLegionId(resultSet.getInt("legion_id"));
+					loc.setOccupiedCount(resultSet.getInt("occupy_count"));
 					loaded.add(loc.getLocationId());
 				}
 			}
@@ -68,7 +69,8 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 			stmt = con.prepareStatement(UPDATE_QUERY);
 			stmt.setString(1, siegeLocation.getRace().toString());
 			stmt.setInt(2, siegeLocation.getLegionId());
-			stmt.setInt(3, siegeLocation.getLocationId());
+			stmt.setInt(3, siegeLocation.getOccupiedCount());
+			stmt.setInt(4, siegeLocation.getLocationId());
 			stmt.execute();
 		}
 		catch (Exception e) {
@@ -94,6 +96,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 			stmt.setInt(1, siegeLocation.getLocationId());
 			stmt.setString(2, siegeLocation.getRace().toString());
 			stmt.setInt(3, siegeLocation.getLegionId());
+			stmt.setInt(4, siegeLocation.getOccupiedCount());
 			stmt.execute();
 		}
 		catch (Exception e) {

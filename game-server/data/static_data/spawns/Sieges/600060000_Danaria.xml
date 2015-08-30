@@ -1782,10 +1782,6 @@
 						<spot x="2671.1729" y="2545.8259" z="265.3799"/>
 						<spot x="2665.5945" y="2545.8135" z="265.3799" h="60"/>
 					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273348">
-						<spot x="2577.1890" y="2591.4185" z="262.7588" h="75"/>
-					</spawn>
 					<!-- Asmodian Offense Archer -->
 					<spawn npc_id="273383">
 						<spot x="2628.4011" y="2583.3174" z="262.8258" h="75"/>
@@ -1925,6 +1921,38 @@
 						<spot x="2554.5000" y="2735.6001" z="262.1537" h="45"/>
 						<spot x="2534.7642" y="2714.9160" z="262.8259" h="45"/>
 					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273348">
+						<spot x="2577.3374" y="2591.0654" z="262.7588" h="75"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273349">
+						<spot x="2561.9600" y="2605.6116" z="262.7588" h="75"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273350">
+						<spot x="2754.9241" y="2781.6892" z="262.8314" h="15"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273351">
+						<spot x="2739.5076" y="2796.3281" z="262.8314" h="15"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273357">
+						<spot x="2662.5588" y="2540.1277" z="265.3799" h="75"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273358">
+						<spot x="2504.7649" y="2686.6785" z="265.3771" h="75"/>
+					</spawn>
+					<!-- empty etched cannon -->
+					<spawn npc_id="273359">
+						<spot x="2811.3433" y="2700.6956" z="265.3734" h="15"/>
+					</spawn>															
+					<!-- empty etched cannon -->
+					<spawn npc_id="273360">
+						<spot x="2654.4199" y="2847.4766" z="265.4351" h="15"/>
+					</spawn>
 					<!-- Wooden Barrel -->
 					<spawn npc_id="701709">
 						<spot x="2586.7788" y="2644.9172" z="255.1774" h="15" static_id="1721"/>
@@ -1948,10 +1976,6 @@
 					<!--   -->
 					<spawn npc_id="258279">
 						<spot x="2607.2998" y="2668.0193" z="254.5064" h="60"/>
-					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273357">
-						<spot x="2662.5588" y="2540.1277" z="265.3799" h="75"/>
 					</spawn>
 					<!-- Berow -->
 					<spawn npc_id="800920">
@@ -2036,12 +2060,8 @@
 					<spawn npc_id="701707">
 						<spot x="2752.4895" y="2694.2014" z="268.3247" h="90"/>
 					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273359">
-						<spot x="2811.9736" y="2700.4751" z="265.3734" h="15"/>
-					</spawn>
 					<!-- Outer Southeastern Gate Control -->
-					<spawn npc_id="701784">
+					<spawn npc_id="701786">
 						<spot x="2790.3918" y="2695.0098" z="267.8447" h="90" static_id="794"/>
 					</spawn>
 					<!-- Wooden Barrel -->
@@ -2050,10 +2070,6 @@
 						<spot x="2731.7827" y="2737.3176" z="253.8348"/>
 						<spot x="2724.8521" y="2744.4177" z="253.8348"/>
 						<spot x="2734.5801" y="2746.9395" z="253.8348"/>
-					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273350">
-						<spot x="2754.9241" y="2781.6892" z="262.8314" h="15"/>
 					</spawn>
 					<!-- Vianka -->
 					<spawn npc_id="800908">
@@ -2066,10 +2082,6 @@
 					<!-- Southwestern Outer Gate -->
 					<spawn npc_id="273289">
 						<spot x="2728.8333" y="2769.0564" z="253.9003" h="15" static_id="1321"/>
-					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273351">
-						<spot x="2739.0774" y="2795.5466" z="262.8314" h="15"/>
 					</spawn>
 					<!-- Grensharlen -->
 					<spawn npc_id="801372">
@@ -2128,10 +2140,6 @@
 					<spawn npc_id="701716">
 						<spot x="2635.1155" y="2807.0029" z="254.5413" h="15" static_id="1516"/>
 					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273360">
-						<spot x="2654.4199" y="2847.4766" z="265.4351" h="15"/>
-					</spawn>
 					<!-- Powder Keg -->
 					<spawn npc_id="701729">
 						<spot x="2612.8071" y="2787.7388" z="253.8609"/>
@@ -2180,16 +2188,12 @@
 						<spot x="2564.7739" y="2693.5750" z="268.3328" h="30"/>
 					</spawn>
 					<!-- Outer Northwestern Gate Control -->
-					<spawn npc_id="701783">
+					<spawn npc_id="701785">
 						<spot x="2527.2380" y="2693.4072" z="267.8323" h="30" static_id="1638"/>
 					</spawn>
 					<!-- Kveldulf -->
 					<spawn npc_id="800918">
 						<spot x="2592.7239" y="2688.5854" z="254.5064" h="15"/>
-					</spawn>
-					<!-- Empty Etched Cannon -->
-					<spawn npc_id="273358">
-						<spot x="2504.7649" y="2686.6785" z="265.3771" h="75"/>
 					</spawn>
 					<!-- Duir -->
 					<spawn npc_id="800905">
@@ -3233,10 +3237,6 @@
 						<spot x="2671.1729" y="2545.8259" z="265.3799"/>
 						<spot x="2665.5945" y="2545.8135" z="265.3799" h="60"/>
 					</spawn>
-					<!-- empty aetheric cannon -->
-					<spawn npc_id="273344">
-						<spot x="2577.1890" y="2591.4185" z="262.7588" h="75"/>
-					</spawn>
 					<!-- elyos offense archer -->
 					<spawn npc_id="273373">
 						<spot x="2628.4011" y="2583.3174" z="262.8258" h="75"/>
@@ -3354,8 +3354,12 @@
 						<spot x="2534.7642" y="2714.9160" z="262.8259" h="45"/>
 					</spawn>
 					<!-- empty aetheric cannon -->
-					<spawn npc_id="273353">
-						<spot x="2662.5588" y="2540.1277" z="265.3799" h="75"/>
+					<spawn npc_id="273344">
+						<spot x="2577.3374" y="2591.0654" z="262.7588" h="75"/>
+					</spawn>
+					<!-- empty aetheric cannon -->
+					<spawn npc_id="273345">
+						<spot x="2561.9600" y="2605.6116" z="262.7588" h="75"/>
 					</spawn>
 					<!-- empty aetheric cannon -->
 					<spawn npc_id="273346">
@@ -3363,16 +3367,24 @@
 					</spawn>
 					<!-- empty aetheric cannon -->
 					<spawn npc_id="273347">
-						<spot x="2739.0774" y="2795.5466" z="262.8314" h="15"/>
+						<spot x="2739.5076" y="2796.3281" z="262.8314" h="15"/>
 					</spawn>
 					<!-- empty aetheric cannon -->
-					<spawn npc_id="273356">
-						<spot x="2654.4199" y="2847.4766" z="265.4351" h="15"/>
+					<spawn npc_id="273353">
+						<spot x="2662.5588" y="2540.1277" z="265.3799" h="75"/>
 					</spawn>
 					<!-- empty aetheric cannon -->
 					<spawn npc_id="273354">
 						<spot x="2504.7649" y="2686.6785" z="265.3771" h="75"/>
 					</spawn>
+					<!-- empty aetheric cannon -->
+					<spawn npc_id="273355">
+						<spot x="2811.3433" y="2700.6956" z="265.3734" h="15"/>
+					</spawn>															
+					<!-- empty aetheric cannon -->
+					<spawn npc_id="273356">
+						<spot x="2654.4199" y="2847.4766" z="265.4351" h="15"/>
+					</spawn>					
 					<!-- Wooden Barrel -->
 					<spawn npc_id="701723">
 						<spot x="2647.0010" y="2582.3052" z="253.8348"/>
@@ -3579,7 +3591,7 @@
 						<spot x="2712.7271" y="2590.3315" z="256.0897" h="75" static_id="2465"/>
 					</spawn>
 					<!-- Outer Southeastern Gate Control -->
-					<spawn npc_id="701786">
+					<spawn npc_id="701784">
 						<spot x="2790.3918" y="2695.0098" z="267.8447" h="90" static_id="794"/>
 					</spawn>
 					<!-- Southwestern Outer Gate -->
@@ -3603,7 +3615,7 @@
 						<spot x="2609.1626" y="2739.7622" z="254.6073" h="45" static_id="1124"/>
 					</spawn>
 					<!-- Outer Northwestern Gate Control -->
-					<spawn npc_id="701785">
+					<spawn npc_id="701783">
 						<spot x="2527.2380" y="2693.4072" z="267.8323" h="30" static_id="1638"/>
 					</spawn>
 					<!-- Dux -->

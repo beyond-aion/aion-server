@@ -55,16 +55,6 @@ public class FortressLocation extends SiegeLocation {
 	}
 
 	/**
-	 * @return isCanTeleport
-	 */
-	@Override
-	public boolean isCanTeleport(Player player) {
-		if (player == null)
-			return canTeleport;
-		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
-	}
-
-	/**
 	 * @return DescriptionId object with fortress name
 	 */
 	public DescriptionId getNameAsDescriptionId() {

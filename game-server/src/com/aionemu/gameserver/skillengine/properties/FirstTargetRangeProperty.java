@@ -30,25 +30,29 @@ public class FirstTargetRangeProperty {
 		if (firstTarget == null)
 			return false;
 
+		if (firstTarget.getObjectId() == effector.getObjectId()) {
+			return true;
+		}
+
+		if (!castState.isCastStart() && !(effector instanceof Player)) { //NPCs don't cancel skills after once started, could be abused -> no range or geo to check
+		   return true;
+		}
+			
+		//on end cast check add revision distance value
+		if(!castState.isCastStart())
+			firstTargetRange += properties.getRevisionDistance();
+		
 		// Add Weapon Range to distance
 		if (properties.isAddWeaponRange()) {
 			firstTargetRange += (float) skill.getEffector().getGameStats().getAttackRange().getCurrent() / 1000f;
 		}
 		
-		//on end cast check add revision distance value
-		if(!castState.isCastStart())
-			firstTargetRange += properties.getRevisionDistance();
-
-		if (firstTarget.getObjectId() == effector.getObjectId()) {
-			return true;
-		}
-
-		if (!MathUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2) && !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {
+		 if (!MathUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2) && !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {
 			if (effector instanceof Player) {
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET);
 			}
 			return false;
-		}
+		 }
 
 		// TODO check for all targets too
 		// Summon Group Member exception

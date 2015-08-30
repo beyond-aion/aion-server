@@ -49,9 +49,6 @@
 	<xs:simpleType name="RandomType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="ENCHANTMENT"/>
-			<xs:enumeration value="ENCHANTMENT_BLUE"/>
-			<xs:enumeration value="ENCHANTMENT_GREEN"/>
-			<xs:enumeration value="ENCHANTMENT_PURPLE"/>
 			<xs:enumeration value="MANASTONE"/>
 			<xs:enumeration value="MANASTONE_COMMON_GRADE_10"/>
 			<xs:enumeration value="MANASTONE_COMMON_GRADE_20"/>
@@ -74,6 +71,10 @@
 			<xs:enumeration value="MANASTONE_LEGEND_GRADE_50"/>
 			<xs:enumeration value="MANASTONE_LEGEND_GRADE_60"/>
 			<xs:enumeration value="MANASTONE_LEGEND_GRADE_70"/>
+			<xs:enumeration value="SPECIAL_MANASTONE_RARE_GRADE"/>
+			<xs:enumeration value="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+			<xs:enumeration value="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+			<xs:enumeration value="SPECIAL_MANASTONE_EPIC_GRADE"/>
 			<xs:enumeration value="ANCIENTITEMS"/>
 			<xs:enumeration value="ANCIENT_CROWN"/>
 			<xs:enumeration value="ANCIENT_GOBLET"/>

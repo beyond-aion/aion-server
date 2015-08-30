@@ -53,6 +53,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
 		return new SM_SYSTEM_MESSAGE(1402650, new Object[]{nameId});
 	}
+	
+	/**
+	 * %0 cannot be used to enchant an amplified item.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402661, new Object[]{nameId});
+	}
+	
+	/**
+	 * %0 successfully enchanted to level %1. The %2 skill has been added.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
+		return new SM_SYSTEM_MESSAGE(1402662, new Object[]{targetName, level, skillName});
+	}
 
 	/**
 	* You inflicted %num1 damage on %0.

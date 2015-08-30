@@ -80,9 +80,10 @@ public class FortressAssault extends Assault<FortressSiege> {
 			return;
 		
 		spawned = true;
-		if (!DataManager.SPAWNS_DATA2.getAssaultSpawnBySiegeId(locationId).getAssaultWaves().isEmpty()) 
+
+		if (DataManager.SPAWNS_DATA2.getAssaultSpawnBySiegeId(locationId).getAssaultWaves().isEmpty()) 
 			return;
-		
+
 		initiateSpawn(getWave(AssaultType.TELEPORT));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 				
@@ -114,7 +115,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 	
 	private void initiateSpawn(AssaultWave wave) {
 		int influenceMultiplier = getInfluenceMultiplier(siegeLocation.getRace());
-		
+
 		for (Spawn spawn : wave.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
 				for (int i = 0; i < influenceMultiplier; i++) {				
@@ -134,7 +135,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 		
 		float x1 = (float) (x + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 		float y1 = (float) (y + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-		
+
 		SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(mapId, npcId, locId, SiegeRace.BALAUR, SiegeModType.ASSAULT, 
 			x1, y1, z, heading);
 		Npc invader = (Npc) SpawnEngine.spawnObject(spawnTemplate, 1);
@@ -144,11 +145,11 @@ public class FortressAssault extends Assault<FortressSiege> {
 				NpcLifeStats life = invader.getLifeStats();
 				int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 				templ.getStatsTemplate().setMaxHp(maxHpPercent);
-				life.setCurrentHpPercent(100);							
+				life.setCurrentHpPercent(100);						
 			}
 		}
 		if (aType != AssaultType.TELEPORT)
-			invader.getAggroList().addHate(boss, 1000);
+			invader.getAggroList().addHate(boss, 100000);
 	}
 	
 	private void announceInvasion(AssaultType aType) {
@@ -192,45 +193,43 @@ public class FortressAssault extends Assault<FortressSiege> {
 		return wave;
 	}
 	
-	private int getInfluenceMultiplier(SiegeRace defender) {
+	private int getInfluenceMultiplier(SiegeRace defender) { //TODO: Maybe more dynamical?
 		float influence;
 		
-		if (defender == SiegeRace.ASMODIANS) {
+		if (defender == SiegeRace.ASMODIANS) 
 			influence = Influence.getInstance().getGlobalAsmodiansInfluence();
-		} else {
+		else 
 			influence = Influence.getInstance().getGlobalElyosInfluence();
-		}
 		
-		if (influence >= 0.9f) {
+		if (influence >= 0.9f)
 			return 3;
-		} else if (influence >= 0.7f) {
+		else if (influence >= 0.7f)
 			return 2;
-		} else  {
+		else
 			return 1;
-		} 
 	}
 	
 	private int getCommanderIdByFortressId() {
 		switch (locationId) {
-			case 1131:
+			case 1131: //Lower Abyss
 			case 1132:
 			case 1141:
 				return 276649; //Lv40
-			case 1211:
+			case 1211: //Outer Abyss
 			case 1251:
 				return 276871; //Lv50
-			case 1011:
+			case 1011: //Divine
 				return 882276;
-			case 1221:
+			case 1221: //Inner Upper Abyss
 			case 1231:
 			case 1241:
 				return 251385;
-			case 2011:
+			case 2011: //Inggison | Gelkmaros
 			case 2021:
 			case 3011:
 			case 3021:
 				return 258236;
-			case 5011:
+			case 5011: //Katalam
 				return 272295;
 			case 6011:
 				return 272795;

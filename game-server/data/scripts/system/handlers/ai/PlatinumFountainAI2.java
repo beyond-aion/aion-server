@@ -1,0 +1,41 @@
+package ai;
+
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+
+
+/**
+ * @author Luzien
+ *
+ */
+@AIName("fountain")
+public class PlatinumFountainAI2 extends ActionItemNpcAI2 {
+	
+	@Override
+	protected void handleDialogStart(Player player) {
+		if (player.getInventory().getItemCountByItemId(186000030) > 0) {
+			super.handleDialogStart(player);
+			PacketSendUtility.sendMessage(player, "Du forderst dein Glück heraus und wirfst eine Goldmedaille in den Brunnen!");
+		}
+		else
+			PacketSendUtility.sendMessage(player, "Du hast leider keine Goldmedaillen bei dir, die du in den Brunnen werfen könntest.");
+	}
+
+	@Override
+	protected void handleUseItemFinish(Player player) {
+		if(!player.getInventory().decreaseByItemId(186000030, 1))
+			return;
+		
+		if(Rnd.get(1, 100) > 89){
+			ItemService.addItem(player, 186000096, 1);
+			PacketSendUtility.sendMessage(player, "Du hattest Glück! Eine Medaille aus reinem Platin springt dir entgegen!");
+		}
+		else {
+			ItemService.addItem(player, 182005205, 1);
+			PacketSendUtility.sendMessage(player, "Du findest leider nur eine alte, verrostete Medaille. Vielleicht hast du beim nächsten Mal mehr Glück!");
+		}
+	}
+}

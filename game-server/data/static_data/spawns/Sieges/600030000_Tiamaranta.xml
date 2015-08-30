@@ -1114,11 +1114,11 @@
 					</spawn>
 					<!-- Betri -->
 					<spawn npc_id="800065" respawn_time="295">
-						<spot x="2515.500" y="2576.300" z="336.170" h="63"/>
+						<spot x="2515.500" y="2576.300" z="338.000" h="20"/>
 					</spawn>
 					<!-- Benjal -->
 					<spawn npc_id="800069" respawn_time="295">
-						<spot x="2860.000" y="2393.400" z="340.500" h="97"/>
+						<spot x="2862.500" y="2395.400" z="342.000" h="34"/>
 					</spawn>
 				</siege_mod>
 			</siege_race>

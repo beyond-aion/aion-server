@@ -906,6 +906,10 @@ public class StatFunctions {
 		if (resistRate <= 0) {
 			resistRate = 1;// its 0.1% because its min possible
 		}
+		//50% Resist Cap. New 4.7
+		if (resistRate > 500) {
+		   resistRate = 500;
+		}
 
 		return resistRate;
 	}

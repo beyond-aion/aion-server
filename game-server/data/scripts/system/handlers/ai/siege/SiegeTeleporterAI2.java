@@ -36,7 +36,8 @@ public class SiegeTeleporterAI2 extends GeneralNpcAI2 {
 
 	private void canTeleport(final boolean status) {
 		final int id = ((SiegeNpc) getOwner()).getSiegeId();
-		SiegeService.getInstance().getFortress(id).setCanTeleport(status);
+		
+		SiegeService.getInstance().getSiegeLocation(id).setCanTeleport(status);
 
 		getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
 

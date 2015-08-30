@@ -35,7 +35,6 @@ import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.dao.PlayerMacrossesDAO;
 import com.aionemu.gameserver.dao.PlayerNpcFactionsDAO;
-import com.aionemu.gameserver.dao.PlayerPassportsDAO;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerRecipesDAO;
@@ -134,7 +133,6 @@ public class PlayerService {
 		DAOManager.getDAO(PlayerSkillListDAO.class).storeSkills(player);
 		DAOManager.getDAO(PlayerSettingsDAO.class).saveSettings(player);
 		DAOManager.getDAO(PlayerQuestListDAO.class).store(player);
-		DAOManager.getDAO(PlayerPassportsDAO.class).store(player);
 		DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishments(player, PunishmentType.PRISON);
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishments(player, PunishmentType.GATHER);
@@ -197,7 +195,6 @@ public class PlayerService {
 		PlayerStatFunctions.addPredefinedStatFunctions(player);
 
 		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(player));
-		player.getCommonData().setPassportsList((DAOManager.getDAO(PlayerPassportsDAO.class).load(player)));
 		player.setRecipeList(DAOManager.getDAO(PlayerRecipesDAO.class).load(player.getObjectId()));
 
 		/**

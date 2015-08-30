@@ -57,4 +57,10 @@ public class EventsConfig {
 
 	@Property(key = "gameserver.event.arcade.chance", defaultValue = "50")
 	public static int EVENT_ARCADE_CHANCE;
+	
+	/**
+	 * Monster Raid
+	 */
+	@Property(key = "gameserver.monster.raid.enable", defaultValue = "false")
+	public static boolean ENABLE_MONSTER_RAID;
 }

@@ -42,9 +42,9 @@ public class SiegeLocation implements ZoneHandler {
 	protected boolean canTeleport = true;
 	protected int siegeDuration;
 	protected int influenceValue;
+	protected int occupiedCount;
 	private FastMap<Integer, Creature> creatures = new FastMap<Integer, Creature>();
 	private FastMap<Integer, Player> players = new FastMap<Integer, Player>();
-	private boolean status;
 
 	public SiegeLocation() {
 	}
@@ -126,6 +126,18 @@ public class SiegeLocation implements ZoneHandler {
 	public boolean isUnderShield() {
 		return this.isUnderShield;
 	}
+	
+	public int getOccupiedCount() {
+	  return occupiedCount;
+   }
+	
+   public void increaseOccupiedCount() {
+	  this.occupiedCount += 1;
+   }
+
+   public void setOccupiedCount(int occupiedCount) {
+	  this.occupiedCount = occupiedCount;
+   }
 
 	/**
 	 * @param value
@@ -150,7 +162,9 @@ public class SiegeLocation implements ZoneHandler {
 	 * @return the canTeleport
 	 */
 	public boolean isCanTeleport(Player player) {
-		return canTeleport;
+		if (player == null)
+			return canTeleport;
+		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
 	}
 
 	/**
@@ -252,14 +266,6 @@ public class SiegeLocation implements ZoneHandler {
 	 */
 	public FastMap<Integer, Player> getPlayers() {
 		return players;
-	}
-	
-	public boolean isPreparations() {
-		return status;
-	}
-
-	public void setPreparation(boolean status) {
-		this.status = status;
 	}
 
 }

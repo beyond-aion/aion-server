@@ -137,7 +137,7 @@ public class HousingBidService extends AbstractCronTask {
 				continue;
 			if (!checkAutoFillingLimits(house.getPlayerRace(), house.getHouseType()))
 				continue;
-			addHouseToAuction(house, house.getDefaultAuctionPrice());
+			if (addHouseToAuction(house, house.getDefaultAuctionPrice()));
 			count++;
 		}
 		return count;

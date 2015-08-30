@@ -3811,19 +3811,19 @@
         <items>
             <item id="160002040" name="Leopis Juice" count="15"/>
         </items>
-		<items>
-			<item id="160002339" name="Poma Wine Herb Dumpling" count="15"/>
-		</items>
-		<items>
-			<item id="160002337" name="Nokara Herb Sushi" count="15"/>
-		</items>
+        <items>
+            <item id="160002339" name="Poma Wine Herb Dumpling" count="15"/>
+        </items>
+        <items>
+            <item id="160002337" name="Nokara Herb Sushi" count="15"/>
+        </items>
         <items>
             <item id="169000009" name="Premium Power Shard" count="350"/>
         </items>
-		<items>
-			<random_item type="SCROLLS" count="25"/>
-		</items>
-	</decomposable>
+        <items>
+            <random_item type="SCROLLS" count="25"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188050570" decomposable_name="General Blood Crusade Supplies">
         <items chance="3.0">
             <item id="160001274" name="Perer Aether Jelly" count="40"/>
@@ -3857,18 +3857,18 @@
         <items>
             <item id="160002040" name="Leopis Juice" count="15"/>
         </items>
-		<items>
-			<item id="160002339" name="Poma Wine Herb Dumpling" count="15"/>
-		</items>
-		<items>
-			<item id="160002337" name="Nokara Herb Sushi" count="15"/>
-		</items>
+        <items>
+            <item id="160002339" name="Poma Wine Herb Dumpling" count="15"/>
+        </items>
+        <items>
+            <item id="160002337" name="Nokara Herb Sushi" count="15"/>
+        </items>
         <items>
             <item id="169000009" name="Premium Power Shard" count="350"/>
         </items>
-		<items>
-			<random_item type="SCROLLS" count="25"/>
-		</items>
+        <items>
+            <random_item type="SCROLLS" count="25"/>
+        </items>
     </decomposable>
     <decomposable item_id="188050572" decomposable_name="Lesser Radiant Ops Reward">
         <items chance="40.0">
@@ -8295,52 +8295,10 @@
     </decomposable>
     <decomposable item_id="188051160" decomposable_name="Antique Enchantment Stone Box">
         <items>
-            <item id="166000095" name="L95 Enchantment Stone" rnd_min="1" rnd_max="5"/>
+            <item id="166000194" name="Delta Enchantment Stone" rnd_min="1" rnd_max="5"/>
         </items>
         <items>
-            <item id="166000096" name="L96 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000097" name="L97 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000098" name="L98 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000099" name="L99 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000100" name="L100 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000101" name="L101 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000102" name="L102 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000103" name="L103 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000104" name="L104 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000105" name="L105 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000106" name="L106 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000107" name="L107 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000108" name="L108 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000109" name="L109 Enchantment Stone" rnd_min="1" rnd_max="5"/>
-        </items>
-        <items>
-            <item id="166000110" name="L110 Enchantment Stone" rnd_min="1" rnd_max="5"/>
+            <item id="166000195" name="Epsilon Enchantment Stone" rnd_min="1" rnd_max="5"/>
         </items>
     </decomposable>
     <decomposable item_id="188051161" decomposable_name="Antique Enchantment Stone Box Bundle">
@@ -8653,7 +8611,7 @@
     </decomposable>
     <decomposable item_id="188051167" decomposable_name="Box of Balaur Materials I">
         <items>
-            <item id="166000110" name="L110 Enchantment Stone" rnd_min="5" rnd_max="10"/>
+            <item id="166000195" name="Epsilon Enchantment Stone" rnd_min="5" rnd_max="10"/>
         </items>
         <items>
             <item id="152014016" name="Firm Balaur Horn" rnd_min="5" rnd_max="10"/>
@@ -12913,7 +12871,7 @@
             <item id="186000051" name="Major Ancient Crown"/>
         </items>
         <items>
-            <item id="166000090" name="L90 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
         </items>
         <items>
             <item id="186000055" name="Major Ancient Goblet"/>
@@ -12937,13 +12895,7 @@
             <item id="161000003" name="Reviving Elemental Stone"/>
         </items>
         <items>
-            <item id="166000080" name="L80 Enchantment Stone"/>
-        </items>
-        <items>
-            <item id="166000075" name="L75 Enchantment Stone"/>
-        </items>
-        <items>
-            <item id="166000070" name="L70 Enchantment Stone"/>
+            <item id="166000193" name="Gamma Enchantment Stone"/>
         </items>
         <items>
             <item id="169000009" name="Premium Power Shard" count="10000"/>
@@ -13163,7 +13115,7 @@
     <decomposable item_id="188051642" decomposable_name="Plastic Surgery Ticket Box (3 days)"/>
     <decomposable item_id="188051643" decomposable_name="Gender Switch Ticket Box (1 day)"/>
     <decomposable item_id="188051644" decomposable_name="Gender Switch Ticket Box (3 days)"/>
-    <decomposable item_id="188051645" decomposable_name="Mithril Contribution Chest"/>
+    <decomposable item_id="188051645" decomposable_name="Mithril Medal Chest"/>
     <decomposable item_id="188051646" decomposable_name="Lukeshunerk's Package"/>
     <decomposable item_id="188051647" decomposable_name="Lukeshunerk's Emergency Supplies"/>
     <decomposable item_id="188051648" decomposable_name="Lukeshunerk's Divination Chest"/>
@@ -14318,38 +14270,14 @@
     </decomposable>
     <decomposable item_id="188051761" decomposable_name="Crafting Association Gift Bundle"/>
     <decomposable item_id="188051762" decomposable_name="Black Cloud Enchantment Box">
-        <items chance="5.0">
-            <item id="166000085" name="L85 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="5.0">
-            <item id="166000086" name="L86 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000087" name="L87 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000088" name="L88 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000089" name="L89 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000090" name="L90 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000091" name="L91 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000092" name="L92 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000093" name="L93 Enchantment Stone" count="2"/>
+        <items>
+            <item id="166000194" name="Delta Enchantment Stone" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188051763" decomposable_name="Chocolate Enchantment Stone Bundle"/>
     <decomposable item_id="188051764" decomposable_name="Superb Chocolate Enchantment Stone Bundle">
         <items>
-            <item id="166000093" name="L93 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
         </items>
     </decomposable>
     <decomposable item_id="188051765" decomposable_name="Candy Enchantment Stone Bundle"/>
@@ -16275,47 +16203,8 @@
     <decomposable item_id="188052078" decomposable_name="[Event] Bundle of Combat Supplies"/>
     <decomposable item_id="188052079" decomposable_name="[Event] Bundle of Elemental Defense"/>
     <decomposable item_id="188052080" decomposable_name="Elite Enchantment Stone Box">
-        <items chance="5.0">
-            <item id="166000087" name="L87 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="5.0">
-            <item id="166000088" name="L88 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="5.0">
-            <item id="166000089" name="L89 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000090" name="L90 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000091" name="L91 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000092" name="L92 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000093" name="L93 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="2.0">
-            <item id="166000094" name="L94 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000095" name="L95 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000096" name="L96 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000097" name="L97 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000098" name="L98 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000099" name="L99 Enchantment Stone" count="2"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000100" name="L100 Enchantment Stone" count="2"/>
+        <items>
+            <item id="166000194" name="Delta Enchantment Stone" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052081" decomposable_name="Premium Enchantment Stone Bundle"/>
@@ -16326,87 +16215,77 @@
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100001407" name="Dragon Lord's Wrath"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
-            <item id="100101084" name="Dragon Lord's Delight"/>
-            <item id="186000147" name="Mithril Medal"/>
-            <item id="182213272" name="Sabat's Song"/>
-        </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100101104" name="Dragon Lord's Delight"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100201246" name="Dragon Lord's Murderous Intent"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100501092" name="Dragon Lord's Arrogance"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100601148" name="Dragon Lord's Distrust"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="100901100" name="Dragon Lord's Hatred"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="101301037" name="Dragon Lord's Greed"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="101501118" name="Dragon Lord's Pride"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="101701129" name="Dragon Lord's Envy"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="101800850" name="Dragon Lord's Resolve"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="101900848" name="Dragon Lord's Courage"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="102000882" name="Dragon Lord's Passion"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="102100742" name="Dragon Lord's Passage"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="115001459" name="Dragon Lord's Sigh"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
         </items>
-        <items chance="0.16">
-            <item id="115001460" name="Dragon Lord's Agony"/>
-            <item id="186000147" name="Mithril Medal"/>
-            <item id="182213272" name="Sabat's Song"/>
-        </items>
-        <items chance="0.16">
+        <items chance="0.18">
             <item id="115001475" name="Dragon Lord's Agony"/>
             <item id="186000147" name="Mithril Medal"/>
             <item id="182213272" name="Sabat's Song"/>
@@ -16598,8 +16477,6 @@
     <decomposable item_id="188052114" decomposable_name="Krotan Refuge Siege Defense Reward Box">
         <items>
             <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="188052544" name="Greater Stigma Bundle" race="ELYOS"/>
-            <item id="188052545" name="Greater Stigma Bundle" race="ASMODIANS"/>
             <item id="164000134" name="Greater Awakening Scroll" count="50"/>
             <item id="164000076" name="Greater Running Scroll" count="50"/>
             <item id="186000247" name="Major Danuar Relic"/>
@@ -16608,8 +16485,6 @@
     <decomposable item_id="188052115" decomposable_name="Kysis Fortress Siege Defense Reward Box">
         <items>
             <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="188052544" name="Greater Stigma Bundle" race="ELYOS"/>
-            <item id="188052545" name="Greater Stigma Bundle" race="ASMODIANS"/>
             <item id="164000134" name="Greater Awakening Scroll" count="50"/>
             <item id="164000076" name="Greater Running Scroll" count="50"/>
             <item id="186000247" name="Major Danuar Relic"/>
@@ -16618,18 +16493,51 @@
     <decomposable item_id="188052116" decomposable_name="Miren Fortress Siege Defense Reward Box">
         <items>
             <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="188052544" name="Greater Stigma Bundle" race="ELYOS"/>
-            <item id="188052545" name="Greater Stigma Bundle" race="ASMODIANS"/>
             <item id="164000134" name="Greater Awakening Scroll" count="50"/>
             <item id="164000076" name="Greater Running Scroll" count="50"/>
             <item id="186000247" name="Major Danuar Relic"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052117" decomposable_name="Divine Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188052118" decomposable_name="Altar of Avarice Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188052119" decomposable_name="Temple of Scales Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188052120" decomposable_name="Vorgaltem Citadel Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188052121" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box"/>
+    <decomposable item_id="188052117" decomposable_name="Divine Fortress Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188052118" decomposable_name="Altar of Avarice Fortress Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188052119" decomposable_name="Temple of Scales Fortress Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188052120" decomposable_name="Vorgaltem Citadel Fortress Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188052121" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
     <decomposable item_id="188052122" decomposable_name="[Event] Jacket Costume Box"/>
     <decomposable item_id="188052123" decomposable_name="[Event] Gloves Costume Box"/>
     <decomposable item_id="188052124" decomposable_name="[Event] Pauldrons Costume Box"/>
@@ -17150,7 +17058,11 @@
     <decomposable item_id="188052192" decomposable_name="Gift-Wrapped Crow Hat"/>
     <decomposable item_id="188052193" decomposable_name="[Event] Kahrun's Symbol Box"/>
     <decomposable item_id="188052194" decomposable_name="[Event] Precious Box"/>
-    <decomposable item_id="188052195" decomposable_name="[Event] Legion Coin Chest"/>
+    <decomposable item_id="188052195" decomposable_name="[Event] Legion Coin Chest">
+		<items>
+			<item id="186000199" name="Legion Coin" rnd_min="5" rnd_max="10"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052196" decomposable_name="[Event] Wyvern Form Candy Box"/>
     <decomposable item_id="188052197" decomposable_name="[Event] Wyvern Form Candy Box"/>
     <decomposable item_id="188052198" decomposable_name="[Event] Medal Bundle"/>
@@ -17524,7 +17436,7 @@
             <random_item type="POTION" count="20"/>
         </items>
         <items chance="20.0">
-            <item id="166000060" name="L60 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="10.0">
             <item id="120000860" name="Guardian Squad Leader's Topaz Earrings" player_class="GLADIATOR"/>
@@ -17587,7 +17499,7 @@
             <random_item type="POTION" count="20"/>
         </items>
         <items chance="20.0">
-            <item id="166000060" name="L60 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="10.0">
             <item id="120000864" name="Archon Squad Leader's Topaz Earrings" player_class="GLADIATOR"/>
@@ -17650,7 +17562,7 @@
             <random_item type="POTION" count="20"/>
         </items>
         <items chance="21.0">
-            <item id="166000065" name="L65 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="3.0">
             <item id="110600822" name="Guardian Centurion's Breastplate" player_class="GLADIATOR"/>
@@ -17778,7 +17690,7 @@
             <random_item type="POTION" count="20"/>
         </items>
         <items chance="21.0">
-            <item id="166000065" name="L65 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="1660000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="3.0">
             <item id="110600824" name="Archon Centurion's Breastplate" player_class="GLADIATOR"/>
@@ -17937,7 +17849,7 @@
             <random_item type="POTION" count="30"/>
         </items>
         <items chance="21.0">
-            <item id="166000065" name="L65 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="3.0">
             <item id="110600822" name="Guardian Centurion's Breastplate" player_class="GLADIATOR"/>
@@ -18065,7 +17977,7 @@
             <random_item type="POTION" count="20"/>
         </items>
         <items chance="21.0">
-            <item id="166000065" name="L65 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="3.0">
             <item id="110600824" name="Archon Centurion's Breastplate" player_class="GLADIATOR"/>
@@ -18193,7 +18105,7 @@
             <random_item type="POTION" count="30"/>
         </items>
         <items chance="28.0">
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="1.0">
             <item id="101300463" name="Guardian Tribunus' Spear" player_class="GLADIATOR"/>
@@ -18282,7 +18194,7 @@
             <random_item type="POTION" count="30"/>
         </items>
         <items chance="28.0">
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="1.0">
             <item id="101300464" name="Archon Tribunus' Spear" player_class="GLADIATOR"/>
@@ -18407,8 +18319,8 @@
         </items>
     </decomposable>
     <decomposable item_id="188052316" decomposable_name="Heavy Green Sack"/>
-    <decomposable item_id="188052317" decomposable_name="[Event] Aion Signet Box"/>
-    <decomposable item_id="188052318" decomposable_name="[Event] Forged Aion Signet">
+    <decomposable item_id="188052317" decomposable_name="[Event] Broken Heart Box"/>
+    <decomposable item_id="188052318" decomposable_name="[Event] Mended Heart">
         <items chance="10.0">
             <item id="141000001" name="Stigma Shard" rnd_min="1000" rnd_max="1250"/>
         </items>
@@ -18454,26 +18366,26 @@
         </items>
     </decomposable>
     <decomposable item_id="188052319" decomposable_name="[Event] Dragon Lord's Wing Box">
-		<items>
-			<item id="187000090" name="Tiamat's Spectral Wings"/>
-		</items>
-	</decomposable>
+        <items>
+            <item id="187000090" name="Tiamat's Spectral Wings"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052320" decomposable_name="[Event] Manastone Bundle">
-		<items>
-			<random_item type="MANASTONE_RARE_GRADE_70" rnd_min="1" rnd_max="5"/>
-		</items>
-	</decomposable>
+        <items>
+            <random_item type="MANASTONE_RARE_GRADE_70" rnd_min="1" rnd_max="5"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052321" decomposable_name="[Event] Protectorate Key Box">
-		<items chance="70">
-			<item id="185000114" name="Protectorate's Treasure Chest Key"/>
-		</items>
-		<items chance="25">
-			<item id="185000115" name="Protectorate's Treasure Crate Key"/>
-		</items>
-		<items chance="5">
-			<item id="185000116" name="Protectorate's Treasure Box Key"/>
-		</items>
-	</decomposable>
+        <items chance="70.0">
+            <item id="185000114" name="Protectorate's Treasure Chest Key"/>
+        </items>
+        <items chance="25.0">
+            <item id="185000115" name="Protectorate's Treasure Crate Key"/>
+        </items>
+        <items chance="5.0">
+            <item id="185000116" name="Protectorate's Treasure Box Key"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052322" decomposable_name="[Event] Hero's Supplements Bundle"/>
     <decomposable item_id="188052323" decomposable_name="[Event] Lesser Composite Manastone Bundle">
         <items>
@@ -18485,7 +18397,7 @@
             <random_item type="MANASTONE_LEGEND_GRADE_60"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052325" decomposable_name="[Event] Aion Signet Box"/>
+    <decomposable item_id="188052325" decomposable_name="[Event] Broken Heart Box"/>
     <decomposable item_id="188052326" decomposable_name="Ceramium Coin Box">
         <items>
             <item id="186000231" name="Ceramium Coin" rnd_min="2" rnd_max="4"/>
@@ -18739,7 +18651,7 @@
     </decomposable>
     <decomposable item_id="188052358" decomposable_name="Power Lockbox Cache">
         <items chance="3.0">
-            <item id="188950011" name="test_pass_cannot use" count="5"/>
+            <item id="188950011" name="Special Courier Pass (Abyss Eternal/Lv. 50 and lower)" count="5"/>
         </items>
         <items chance="3.0">
             <item id="188950012" name="Special Courier Pass (Abyss Eternal/Lv. 51 - 55)" count="5"/>
@@ -18809,13 +18721,10 @@
             <item id="164002183" name="Pandaemonium Instant Scroll" count="2" race="ASMODIANS"/>
         </items>
         <items chance="5.0">
-            <item id="166000100" name="L100 Enchantment Stone" count="3"/>
+            <item id="166000194" name="Delta Enchantment Stone" count="3"/>
         </items>
         <items chance="4.0">
-            <item id="166000110" name="L110 Enchantment Stone" count="3"/>
-        </items>
-        <items chance="4.0">
-            <item id="166000120" name="L120 Enchantment Stone" count="3"/>
+            <item id="166000195" name="Epsilon Enchantment Stone" count="3"/>
         </items>
         <items chance="2.0">
             <item id="186000051" name="Major Ancient Crown" count="10"/>
@@ -18874,7 +18783,7 @@
             <item id="164002111" name="Greater Running Scroll (1 hour)" count="5"/>
         </items>
         <items chance="3.0">
-            <item id="188950011" name="test_pass_cannot use" count="5"/>
+            <item id="188950011" name="Special Courier Pass (Abyss Eternal/Lv. 50 and lower)" count="5"/>
         </items>
         <items chance="3.0">
             <item id="188950012" name="Special Courier Pass (Abyss Eternal/Lv. 51 - 55)" count="5"/>
@@ -18955,7 +18864,7 @@
     </decomposable>
     <decomposable item_id="188052360" decomposable_name="Utility Lockbox Cache">
         <items chance="1.0">
-            <item id="166000130" name="L130 Enchantment Stone" count="10"/>
+            <item id="166020000" name="Omega Enchantment Stone" count="5"/>
         </items>
         <items chance="3.0">
             <item id="166150016" name="Felicitous Socketing (Mythic)"/>
@@ -18979,7 +18888,7 @@
             <item id="164002111" name="Greater Running Scroll (1 hour)" count="5"/>
         </items>
         <items chance="3.0">
-            <item id="188950011" name="test_pass_cannot use" count="5"/>
+            <item id="188950011" name="Special Courier Pass (Abyss Eternal/Lv. 50 and lower)" count="5"/>
         </items>
         <items chance="3.0">
             <item id="188950012" name="Special Courier Pass (Abyss Eternal/Lv. 51 - 55)" count="5"/>
@@ -19028,13 +18937,10 @@
             <item id="164002183" name="Pandaemonium Instant Scroll" count="2" race="ASMODIANS"/>
         </items>
         <items chance="1.0">
-            <item id="166000100" name="L100 Enchantment Stone" count="3"/>
+            <item id="166000194" name="Delta Enchantment Stone" count="3"/>
         </items>
         <items chance="1.0">
-            <item id="166000110" name="L110 Enchantment Stone" count="3"/>
-        </items>
-        <items chance="1.0">
-            <item id="166000120" name="L120 Enchantment Stone" count="3"/>
+            <item id="166000195" name="Epsilon Enchantment Stone" count="3"/>
         </items>
         <items chance="1.0">
             <item id="186000051" name="Major Ancient Crown" count="10"/>
@@ -19672,6 +19578,7 @@
     </decomposable>
     <decomposable item_id="188052389" decomposable_name="Modor's Eternal Weapon Box" selectable="true">
         <items>
+			<item id="100101186" name="Modor's Warhammer"/>
             <item id="100001551" name="Modor's Sword"/>
             <item id="100901206" name="Modor's Greatsword"/>
             <item id="101301134" name="Modor's Polearm"/>
@@ -19940,126 +19847,18 @@
     </decomposable>
     <decomposable item_id="188052420" decomposable_name="Cool Enchantment Stone Bundle">
         <items>
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
         <items>
-            <item id="166000071" name="L71 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000072" name="L72 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000073" name="L73 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000074" name="L74 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000075" name="L75 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000076" name="L76 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000077" name="L77 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000078" name="L78 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000079" name="L79 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000080" name="L80 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000081" name="L81 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000082" name="L82 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000083" name="L83 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000084" name="L84 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000085" name="L85 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000086" name="L86 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000087" name="L87 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000088" name="L88 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000089" name="L89 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000194" name="Delta Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
     </decomposable>
     <decomposable item_id="188052421" decomposable_name="Lv. 4113 Composite Manastone Bundle">
         <items>
-            <item id="166000090" name="L90 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000194" name="Delta Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
         <items>
-            <item id="166000091" name="L91 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000092" name="L92 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000093" name="L93 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000094" name="L94 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000095" name="L95 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000096" name="L96 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000097" name="L97 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000098" name="L98 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000099" name="L99 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000100" name="L100 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000101" name="L101 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000102" name="L102 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000103" name="L103 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000104" name="L104 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000105" name="L105 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000106" name="L106 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000107" name="L107 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000108" name="L108 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000109" name="L109 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000195" name="Epsilon Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
     </decomposable>
     <decomposable item_id="188052422" decomposable_name="Level 30 Battle Supplies"/>
@@ -20096,7 +19895,7 @@
             <random_item type="POTION" count="30"/>
         </items>
         <items chance="27.0">
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="1.0">
             <item id="101300463" name="Guardian Tribunus' Spear" player_class="GLADIATOR"/>
@@ -20185,7 +19984,7 @@
             <random_item type="POTION" count="30"/>
         </items>
         <items chance="27.0">
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="2" rnd_max="8"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="1.0">
             <item id="101300464" name="Archon Tribunus' Spear" player_class="GLADIATOR"/>
@@ -20611,7 +20410,7 @@
     </decomposable>
     <decomposable item_id="188052480" decomposable_name="Abyss Courier Pass Bundle">
         <items chance="10.0">
-            <item id="188950011" name="test_pass_cannot use" rnd_min="4" rnd_max="6"/>
+            <item id="188950011" name="Special Courier Pass (Abyss Eternal/Lv. 50 and lower)" rnd_min="4" rnd_max="6"/>
         </items>
         <items chance="10.0">
             <item id="188950012" name="Special Courier Pass (Abyss Eternal/Lv. 51 - 55)" rnd_min="4" rnd_max="6"/>
@@ -20656,15 +20455,51 @@
     <decomposable item_id="188052485" decomposable_name="Manasearcher's Delight"/>
     <decomposable item_id="188052486" decomposable_name="Lenatinerk's Sanity Saver"/>
     <decomposable item_id="188052487" decomposable_name="Lenatinerk's Big-Ticket Gift"/>
-    <decomposable item_id="188052488" decomposable_name="Large Lesser Supplements Bag (Fabled)"/>
-    <decomposable item_id="188052489" decomposable_name="Large Supplements Bag (Fabled)"/>
-    <decomposable item_id="188052490" decomposable_name="Large Greater Supplements Bag (Fabled)"/>
-    <decomposable item_id="188052491" decomposable_name="Large Lesser Supplements Bag (Eternal)"/>
-    <decomposable item_id="188052492" decomposable_name="Large Supplements Bag (Eternal)"/>
-    <decomposable item_id="188052493" decomposable_name="Large Greater Supplements Bag (Eternal)"/>
-    <decomposable item_id="188052494" decomposable_name="Large Lesser Supplements Bag (Mythic)"/>
-    <decomposable item_id="188052495" decomposable_name="Large Supplements Bag (Mythic)"/>
-    <decomposable item_id="188052496" decomposable_name="Large Greater Supplements Bag (Mythic)"/>
+    <decomposable item_id="188052488" decomposable_name="Large Lesser Supplements Bag (Fabled)">
+		<items>
+			<item id="166100003" name="Lesser Supplements (Fabled)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052489" decomposable_name="Large Supplements Bag (Fabled)">
+		<items>
+			<item id="166100004" name="Supplements (Fabled)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052490" decomposable_name="Large Greater Supplements Bag (Fabled)">
+		<items>
+			<item id="166100005" name="Greater Supplements (Fabled)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052491" decomposable_name="Large Lesser Supplements Bag (Eternal)">
+		<items>
+			<item id="166100006" name="Lesser Supplements (Eternal)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052492" decomposable_name="Large Supplements Bag (Eternal)">
+		<items>
+			<item id="166100007" name="Supplements (Eternal)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052493" decomposable_name="Large Greater Supplements Bag (Eternal)">
+		<items>
+			<item id="166100008" name="Greater Supplements (Eternal)" count ="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052494" decomposable_name="Large Lesser Supplements Bag (Mythic)">
+		<items>
+			<item id="166100009" name="Lesser Supplements (Mythic)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052495" decomposable_name="Large Supplements Bag (Mythic)">
+		<items>
+			<item id="166100010" name="Supplements (Mythic)" count="30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052496" decomposable_name="Large Greater Supplements Bag (Mythic)">
+		<items>
+			<item id="166100011" name="Greater Supplements (Mythic)" count="30"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052497" decomposable_name="[Event] Veteran's Bundle"/>
     <decomposable item_id="188052498" decomposable_name="[Event] The Four Elements"/>
     <decomposable item_id="188052499" decomposable_name="Danuar Reliquary Expedition's Excavation Box">
@@ -20839,7 +20674,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -20857,7 +20692,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -20866,7 +20701,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
             <item id="187000121" name="Hyperion Wings"/>
         </items>
@@ -20876,7 +20711,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
             <item id="187000121" name="Hyperion Wings"/>
         </items>
@@ -20886,7 +20721,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
             <item id="187000121" name="Hyperion Wings"/>
         </items>
@@ -20896,7 +20731,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
             <item id="187000121" name="Hyperion Wings"/>
         </items>
@@ -20906,7 +20741,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -20915,7 +20750,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -20924,7 +20759,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -20933,7 +20768,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -20942,7 +20777,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020057" name="Ancient Manastone: Evasion +23"/>
         </items>
         <items>
@@ -20951,7 +20786,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -20960,7 +20795,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
         </items>
         <items>
@@ -20969,7 +20804,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
         </items>
         <items>
@@ -20978,7 +20813,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
         </items>
         <items>
@@ -20987,7 +20822,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
         </items>
         <items>
@@ -20996,7 +20831,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -21005,7 +20840,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -21014,7 +20849,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -21023,7 +20858,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -21032,7 +20867,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020057" name="Ancient Manastone: Evasion +23"/>
         </items>
         <items>
@@ -21041,7 +20876,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -21050,7 +20885,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
         </items>
         <items>
@@ -21059,7 +20894,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
         </items>
         <items>
@@ -21068,7 +20903,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
         </items>
         <items>
@@ -21077,7 +20912,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
         </items>
         <items>
@@ -21086,7 +20921,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -21095,7 +20930,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -21104,7 +20939,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -21113,7 +20948,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -21122,7 +20957,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020057" name="Ancient Manastone: Evasion +23"/>
         </items>
         <items>
@@ -21131,7 +20966,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -21140,7 +20975,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
         </items>
         <items>
@@ -21149,7 +20984,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
         </items>
         <items>
@@ -21158,7 +20993,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
         </items>
         <items>
@@ -21167,7 +21002,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
         </items>
         <items>
@@ -21176,7 +21011,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -21185,7 +21020,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -21194,7 +21029,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -21203,7 +21038,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -21212,7 +21047,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020057" name="Ancient Manastone: Evasion +23"/>
         </items>
         <items>
@@ -21221,7 +21056,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -21230,7 +21065,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
         </items>
         <items>
@@ -21239,7 +21074,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
         </items>
         <items>
@@ -21248,7 +21083,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
         </items>
         <items>
@@ -21257,7 +21092,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
         </items>
         <items>
@@ -21266,7 +21101,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -21275,7 +21110,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -21284,7 +21119,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -21293,7 +21128,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
         <items>
@@ -21302,7 +21137,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020057" name="Ancient Manastone: Evasion +23"/>
         </items>
         <items>
@@ -21311,7 +21146,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020058" name="Ancient Manastone: Parry +33"/>
         </items>
         <items>
@@ -21320,7 +21155,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020059" name="Ancient Manastone: Block +33"/>
         </items>
         <items>
@@ -21329,7 +21164,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
         </items>
         <items>
@@ -21338,7 +21173,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000096" name="L96 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
         </items>
         <items>
@@ -21347,7 +21182,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000097" name="L97 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
         </items>
         <items>
@@ -21356,7 +21191,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000098" name="L98 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020063" name="Ancient Manastone: Attack +7"/>
         </items>
         <items>
@@ -21365,7 +21200,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000099" name="L99 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
         </items>
         <items>
@@ -21374,7 +21209,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000100" name="L100 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
         </items>
         <items>
@@ -21383,7 +21218,7 @@
             <item id="152012592" name="Earth Scrap"/>
             <item id="169405255" name="Water Eternity"/>
             <item id="152012587" name="Wind Eternity"/>
-            <item id="166000095" name="L95 Enchantment Stone"/>
+            <item id="166000194" name="Delta Enchantment Stone"/>
             <item id="167020056" name="Ancient Manastone: Accuracy +33"/>
         </items>
     </decomposable>
@@ -22788,9 +22623,21 @@
         </items>
     </decomposable>
     <decomposable item_id="188052557" decomposable_name="Harlequin Card Box"/>
-    <decomposable item_id="188052558" decomposable_name="Assured Greater Felicitous Socketing Box (Fabled)"/>
-    <decomposable item_id="188052559" decomposable_name="Assured Greater Felicitous Socketing Box (Eternal)"/>
-    <decomposable item_id="188052560" decomposable_name="Assured Greater Felicitous Socketing Box (Mythic)"/>
+    <decomposable item_id="188052558" decomposable_name="Assured Greater Felicitous Socketing Box (Fabled)">
+		<items>
+			<item id="166150017" name="Assured Greater Felicitous Socketing (Fabled)"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052559" decomposable_name="Assured Greater Felicitous Socketing Box (Eternal)">
+		<items>
+			<item id="166150018" name="Assured Greater Felicitous Socketing (Eternal)"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052560" decomposable_name="Assured Greater Felicitous Socketing Box (Mythic)">
+		<items>
+			<item id="166150019" name="Assured Greater Felicitous Socketing (Mythic)"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052561" decomposable_name="[Event] Consumables Bundle"/>
     <decomposable item_id="188052562" decomposable_name="[Event] Scroll Bundle">
         <items>
@@ -23131,10 +22978,10 @@
     <decomposable item_id="188052583" decomposable_name="Sanctuary Conquerer Mark Bundle"/>
     <decomposable item_id="188052584" decomposable_name="Dragon's Crafting Box"/>
     <decomposable item_id="188052585" decomposable_name="Dragon's Medal Box">
-		<items>
-			<item id="186000243" name="Ceramium Fragment" rnd_min="8" rnd_max="12"/>
-		</items>
-	</decomposable>
+        <items>
+            <item id="186000243" name="Fragmented Ceramium" rnd_min="8" rnd_max="12"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052586" decomposable_name="Sanctuary Fortress Crest Bundle"/>
     <decomposable item_id="188052587" decomposable_name="Dragon's Improvement Box"/>
     <decomposable item_id="188052588" decomposable_name="Sanctuary Idian Bundle"/>
@@ -23551,168 +23398,168 @@
         </items>
     </decomposable>
     <decomposable item_id="188052594" decomposable_name="Highest Grade Material Box">
-		<items chance="5">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items chance="5">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-			<item id="152012592" name="Earth Scrap"/>
-		</items>
-		<items chance="5">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-			<item id="152012589" name="Wind Source"/>
-		</items>
-		<items chance="5">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-			<item id="152012584" name="Water Source"/>
-		</items>
-		<items chance="5">
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-			<item id="152012580" name="Fire Mote"/>
-		</items>
-		<items chance="5">
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-			<item id="152012581" name="Fire Breath"/>
-		</items>
-		<items chance="5">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-			<item id="152012585" name="Wind Mote"/>
-		</items>
-		<items chance="5">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-			<item id="152012586" name="Wind Breath"/>
-		</items>
-		<items chance="12">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-		</items>
-		<items chance="12">
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-		</items>
-		<items chance="12">
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-		</items>
-		<items chance="12">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-		</items>
-		<items chance="12">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-		</items>
-	</decomposable>
+        <items chance="5.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+            <item id="152012592" name="Earth Scrap"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+            <item id="152012589" name="Wind Source"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+            <item id="152012584" name="Water Source"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+            <item id="152012580" name="Fire Mote"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+            <item id="152012581" name="Fire Breath"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+            <item id="152012585" name="Wind Mote"/>
+        </items>
+        <items chance="5.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+            <item id="152012586" name="Wind Breath"/>
+        </items>
+        <items chance="12.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+        </items>
+        <items chance="12.0">
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+        </items>
+        <items chance="12.0">
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+        </items>
+        <items chance="12.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+        </items>
+        <items chance="12.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052595" decomposable_name="High Grade Material Box">
-		<items chance="2.5">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-			<item id="152012592" name="Earth Scrap"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-			<item id="152012589" name="Wind Source"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-			<item id="152012584" name="Water Source"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-			<item id="152012580" name="Fire Mote"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-			<item id="152012581" name="Fire Breath"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-			<item id="152012585" name="Wind Mote"/>
-		</items>
-		<items chance="2.5">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-			<item id="152012586" name="Wind Breath"/>
-		</items>
-		<items chance="16.0">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-		</items>
-		<items chance="16.0">
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-		</items>
-		<items chance="16.0">
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-		</items>
-		<items chance="16.0">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-		</items>
-		<items chance="16.0">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-		</items>
-	</decomposable>
+        <items chance="2.5">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+            <item id="152012592" name="Earth Scrap"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+            <item id="152012589" name="Wind Source"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+            <item id="152012584" name="Water Source"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+            <item id="152012580" name="Fire Mote"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+            <item id="152012581" name="Fire Breath"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+            <item id="152012585" name="Wind Mote"/>
+        </items>
+        <items chance="2.5">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+            <item id="152012586" name="Wind Breath"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052596" decomposable_name="Highest Grade Material Support Bundle">
-		<items>
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items>
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items>
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items>
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items>
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-	</decomposable>
+        <items>
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items>
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items>
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items>
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items>
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052597" decomposable_name="High Grade Material Support Bundle">
-		<items chance="20">
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items chance="16">
-			<item id="152014021" name="Gleaming Balaur Horn" count="10"/>
-		</items>
-		<items chance="16">
-			<item id="152014022" name="Gleaming Balaur Scale" count="10"/>
-		</items>
-		<items chance="16">
-			<item id="152014023" name="Gleaming Balaur Skin" count="10"/>
-		</items>
-		<items chance="16">
-			<item id="152014024" name="Gleaming Balaur Blood" count="10"/>
-		</items>
-		<items chance="16">
-			<item id="152014025" name="Gleaming Balaur Meat" count="10"/>
-		</items>
-	</decomposable>
+        <items chance="20.0">
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014022" name="Gleaming Balaur Scale" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014023" name="Gleaming Balaur Skin" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="10"/>
+        </items>
+        <items chance="16.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="10"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052598" decomposable_name="Low Grade Material Support Bundle">
-		<items chance="5">
-			<item id="152012593" name="Valor's Heart"/>
-		</items>
-		<items chance="19">
-			<item id="152014021" name="Gleaming Balaur Horn" count="5"/>
-		</items>
-		<items chance="19">
-			<item id="152014022" name="Gleaming Balaur Scale" count="5"/>
-		</items>
-		<items chance="19">
-			<item id="152014023" name="Gleaming Balaur Skin" count="5"/>
-		</items>
-		<items chance="19">
-			<item id="152014024" name="Gleaming Balaur Blood" count="5"/>
-		</items>
-		<items chance="19">
-			<item id="152014025" name="Gleaming Balaur Meat" count="5"/>
-		</items>
-	</decomposable>
+        <items chance="5.0">
+            <item id="152012593" name="Valor's Heart"/>
+        </items>
+        <items chance="19.0">
+            <item id="152014021" name="Gleaming Balaur Horn" count="5"/>
+        </items>
+        <items chance="19.0">
+            <item id="152014022" name="Gleaming Balaur Scale" count="5"/>
+        </items>
+        <items chance="19.0">
+            <item id="152014023" name="Gleaming Balaur Skin" count="5"/>
+        </items>
+        <items chance="19.0">
+            <item id="152014024" name="Gleaming Balaur Blood" count="5"/>
+        </items>
+        <items chance="19.0">
+            <item id="152014025" name="Gleaming Balaur Meat" count="5"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052599" decomposable_name="Defender's Supply Box"/>
     <decomposable item_id="188052600" decomposable_name="Beritran Supply Box">
-		<items>
+        <items>
             <item id="167000646" name="Manastone: Attack +5 / HP +42"/>
         </items>
         <items>
@@ -23730,7 +23577,7 @@
         <items>
             <item id="167000654" name="Manastone: Attack +5 / Magical Accuracy +6"/>
         </items>
-		<items>
+        <items>
             <item id="167000655" name="Manastone: Crit Strike +15 / HP +42"/>
         </items>
         <items>
@@ -23748,7 +23595,7 @@
         <items>
             <item id="167000663" name="Manastone: Crit Strike +15 / Magical Accuracy +6"/>
         </items>
-		<items>
+        <items>
             <item id="167000664" name="Manastone: Magic Boost +25 / HP +42"/>
         </items>
         <items>
@@ -23763,7 +23610,7 @@
         <items>
             <item id="167000672" name="Manastone: Magic Boost +25 / Magical Accuracy +6"/>
         </items>
-		<items>
+        <items>
             <item id="167000664" name="Manastone: Magic Boost +25 / HP +42"/>
         </items>
         <items>
@@ -23778,7 +23625,7 @@
         <items>
             <item id="167000672" name="Manastone: Magic Boost +25 / Magical Accuracy +6"/>
         </items>
-	</decomposable>
+    </decomposable>
     <decomposable item_id="188052601" decomposable_name="Composite Manastone Bundle: Attack">
         <items>
             <item id="167000646" name="Manastone: Attack +5 / HP +42"/>
@@ -23906,10 +23753,62 @@
             <item id="186000236" name="Blood Mark"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052607" decomposable_name="Major Relic Box"/>
-    <decomposable item_id="188052608" decomposable_name="Greater Relic Box"/>
-    <decomposable item_id="188052609" decomposable_name="Standard Relic Box"/>
-    <decomposable item_id="188052610" decomposable_name="Lesser Relic Box"/>
+    <decomposable item_id="188052607" decomposable_name="Major Relic Box">
+        <items chance="50.0">
+            <item id="186000051" name="Major Ancient Crown" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000055" name="Major Ancient Goblet" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000063" name="Major Ancient Icon" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000059" name="Major Ancient Seal" count="2"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188052608" decomposable_name="Greater Relic Box">
+        <items chance="50.0">
+            <item id="186000052" name="Greater Ancient Crown" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000056" name="Greater Ancient Goblet" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000064" name="Greater Ancient Icon" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000060" name="Greater Ancient Seal" count="2"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188052609" decomposable_name="Standard Relic Box">
+        <items chance="50.0">
+            <item id="186000065" name="Ancient Icon" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000053" name="Ancient Crown" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000057" name="Ancient Goblet" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000061" name="Ancient Seal" count="2"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188052610" decomposable_name="Lesser Relic Box">
+        <items chance="50.0">
+            <item id="186000066" name="Lesser Ancient Icon" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000054" name="Lesser Ancient Crown" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000058" name="Lesser Ancient Goblet" count="2"/>
+        </items>
+        <items chance="50.0">
+            <item id="186000062" name="Lesser Ancient Seal" count="2"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052611" decomposable_name="Minor Relic Box"/>
     <decomposable item_id="188052612" decomposable_name="Vera's Treasure Crate">
         <items>
@@ -23977,13 +23876,17 @@
     </decomposable>
     <decomposable item_id="188052614" decomposable_name="Defender's Augment Bundle">
         <items>
-            <item id="168310019" name="Major Blessed Augment Level 2"/>
+            <item id="168310019" name="Major Blessed Augment: Level 2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052615" decomposable_name="Old Ring Box"/>
     <decomposable item_id="188052616" decomposable_name="Durga's Fragmented Ceramium Bundle"/>
     <decomposable item_id="188052617" decomposable_name="Bundle Test"/>
-    <decomposable item_id="188052618" decomposable_name="[Event] Summer-Loving Inquin Candy Bundle"/>
+    <decomposable item_id="188052618" decomposable_name="[Event] Summer-Loving Inquin Candy Bundle">
+		<items>
+			<item id="160010102" name="Summer-Loving Inquin Form Candy" count="3"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052619" decomposable_name="Pashid's Claw Bundle">
         <items>
             <item id="182213518" name="Pashid's Claw"/>
@@ -24017,9 +23920,24 @@
             <random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052633" decomposable_name="[Event] Silver Coin Bundle"/>
-    <decomposable item_id="188052634" decomposable_name="[Event] Gold Coin Bundle"/>
-    <decomposable item_id="188052635" decomposable_name="[Event] Platinum Coin Bundle"/>
+    <decomposable item_id="188052633" decomposable_name="[Event] Silver Coin Bundle">
+		<items>
+			<item id="186000003" name="Silver Coin" count="10" race="ELYOS"/>
+			<item id="186000008" name="Silver Coin" count="10" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052634" decomposable_name="[Event] Gold Coin Bundle">
+		<items>
+			<item id="186000004" name="Gold Coin" count="10" race="ELYOS"/>
+			<item id="186000009" name="Gold Coin" count="10" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052635" decomposable_name="[Event] Platinum Coin Bundle">
+		<items>
+			<item id="186000005" name="Platinum Coin" count="10" race="ELYOS"/>
+			<item id="186000010" name="Platinum Coin" count="10" race="ASMODIANS"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052636" decomposable_name="[Event] Lesser Composite Manastone Bundle">
         <items>
             <random_item type="MANASTONE_LEGEND_GRADE_50"/>
@@ -24272,7 +24190,14 @@
         </items>
     </decomposable>
     <decomposable item_id="188052643" decomposable_name="[Event] Mega Kinah Millions Ticket"/>
-    <decomposable item_id="188052644" decomposable_name="Major Ancient Crown Bundle"/>
+    <decomposable item_id="188052644" decomposable_name="Major Ancient Crown Bundle">
+		<items chance="90.0">
+			<item id="186000051" name="Major Ancient Crown" count="3"/>
+		</items>
+		<items chance="10.0">
+			<item id="186000051" name="Major Ancient Crown" count="4"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052645" decomposable_name="[Event] Reward Bundle"/>
     <decomposable item_id="188052646" decomposable_name="Composite Manastone Bundle">
         <items chance="50.0">
@@ -24353,79 +24278,10 @@
     <decomposable item_id="188052666" decomposable_name="Godstone Box"/>
     <decomposable item_id="188052667" decomposable_name="Exigent Enchantment">
         <items>
-            <item id="166000051" name="L51 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000192" name="Beta Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
         <items>
-            <item id="166000052" name="L52 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000053" name="L53 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000054" name="L54 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000055" name="L55 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000056" name="L56 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000057" name="L57 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000058" name="L58 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000059" name="L59 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000060" name="L60 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000061" name="L61 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000062" name="L62 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000063" name="L63 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000064" name="L64 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000065" name="L65 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000066" name="L66 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000067" name="L67 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000068" name="L68 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000069" name="L69 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000070" name="L70 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000071" name="L71 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000072" name="L72 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000073" name="L73 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000074" name="L74 Enchantment Stone" rnd_min="1" rnd_max="3"/>
-        </items>
-        <items>
-            <item id="166000075" name="L75 Enchantment Stone" rnd_min="1" rnd_max="3"/>
+            <item id="166000193" name="Gamma Enchantment Stone" rnd_min="1" rnd_max="3"/>
         </items>
     </decomposable>
     <decomposable item_id="188052668" decomposable_name="Combat Supplies Box"/>
@@ -25276,12 +25132,16 @@
         </items>
     </decomposable>
     <decomposable item_id="188052704" decomposable_name="[Event] Plastic Surgery Ticket Bundle"/>
-    <decomposable item_id="188052705" decomposable_name="[Event] Ancient Coin Bundle"/>
-    <decomposable item_id="188052706" decomposable_name="[Event] Blood Mark Box">
+    <decomposable item_id="188052705" decomposable_name="[Event] Ancient Coin Bundle">
 		<items>
-			<item id="186000236" name="Blood Mark" rnd_min="5" rnd_max="15"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="5" rnd_max="30"/>
 		</items>
 	</decomposable>
+    <decomposable item_id="188052706" decomposable_name="[Event] Blood Mark Box">
+        <items>
+            <item id="186000236" name="Blood Mark" rnd_min="5" rnd_max="15"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052707" decomposable_name="[Event] Nightmare Key Bundle">
         <items>
             <item id="182006891" name="Bronze Key"/>
@@ -25572,7 +25432,44 @@
             <item id="164000134" name="Greater Awakening Scroll" count="5"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052721" decomposable_name="[Event] Manastones of Grace"/>
+    <decomposable item_id="188052721" decomposable_name="[Event] Manastones of Grace">
+ 		<items>
+			<item id="167000734" name="Manastone: Magic Boost +27 / Resist Magic +8" count="3"/>
+		</items>
+		<items>
+			<item id="167000735" name="Manastone: Magic Boost +27 / Magical Accuracy +8" count="3"/>
+		</items>
+		<items>
+			<item id="167000744" name="Manastone: Magical Accuracy +16 / Resist Magic +8" count="3"/>
+		</items>
+		<items>
+			<item id="167000743" name="Manastone: Magical Accuracy +16 / Crit Strike +9" count="3"/>
+		</items>
+		<items>
+			<item id="167000742" name="Manastone: Magical Accuracy +16 / Block +14" count="3"/>
+		</items>
+		<items>
+			<item id="167000738" name="Manastone: Magical Accuracy +16 / Magic Boost +14" count="3"/>
+		</items>
+		<items>
+			<item id="167000715" name="Manastone: Attack +5 / Crit Strike +9" count="3"/>
+		</items>
+		<items>
+			<item id="167000716" name="Manastone: Attack +5 / Resist Magic + 8" count="3"/>
+		</items>
+		<items>
+			<item id="167000725" name="Manastone: Crit Strike +19 / Resist Magic +8" count="3"/>
+		</items>
+		<items>
+			<item id="167000720" name="Manastone: Critical Hit +19 / Attack +2" count="3"/>
+		</items>
+		<items>
+			<item id="167000724" name="Manastone: Crit Strike +19 / Block +14" count="3"/>
+		</items>
+		<items>
+			<item id="167000726" name="Manastone: Crit Strike +19 / Magical Accuracy +8" count="3"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052722" decomposable_name="[Event] Daeva's Day Kisk Present">
         <items>
             <item id="184002016" name="[Event] Birthday Cake Kisk" race="ELYOS"/>
@@ -25624,10 +25521,26 @@
     <decomposable item_id="188052728" decomposable_name="[Event] Dramata Wing Chest"/>
     <decomposable item_id="188052729" decomposable_name="Eternal Bastion Warfront Reward Chest"/>
     <decomposable item_id="188052730" decomposable_name="Prestige Case"/>
-    <decomposable item_id="188052731" decomposable_name="Ancient Crown Case"/>
-    <decomposable item_id="188052732" decomposable_name="Platinum Medal Case"/>
-    <decomposable item_id="188052733" decomposable_name="Mithril Medal Case"/>
-    <decomposable item_id="188052734" decomposable_name="Ceramium Medal Case"/>
+    <decomposable item_id="188052731" decomposable_name="Ancient Crown Case">
+		<items>
+			<random_item type="ANCIENT_CROWN"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052732" decomposable_name="Platinum Medal Case">
+		<items>
+			<item id="186000096" name="Platinum Medal"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052733" decomposable_name="Mithril Medal Case">
+		<items>
+			<item id="186000147" name="Mithril Medal"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188052734" decomposable_name="Ceramium Medal Case">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052735" decomposable_name="Platinum Coin Pouch"/>
     <decomposable item_id="188052736" decomposable_name="Mithril Coin Pouch"/>
     <decomposable item_id="188052737" decomposable_name="Ceramium Coin Pouch"/>
@@ -26216,7 +26129,7 @@
             <random_item type="POTION_50" count="20"/>
         </items>
         <items chance="20.0">
-            <random_item type="ENCHANTMENT_BLUE" rnd_min="2" rnd_max="8"/>
+            <random_item type="ENCHANTMENT" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="20.0">
             <random_item type="MANASTONE_RARE_GRADE_60" rnd_min="2" rnd_max="5"/>
@@ -26290,7 +26203,7 @@
             <random_item type="POTION_50" count="20"/>
         </items>
         <items chance="20.0">
-            <random_item type="ENCHANTMENT_BLUE" rnd_min="2" rnd_max="8"/>
+            <random_item type="ENCHANTMENT" rnd_min="2" rnd_max="8"/>
         </items>
         <items chance="20.0">
             <random_item type="MANASTONE_RARE_GRADE_60" rnd_min="2" rnd_max="5"/>
@@ -26419,7 +26332,7 @@
     </decomposable>
     <decomposable item_id="188052824" decomposable_name="Illuminary Obelisk Enhancement Chest">
         <items>
-            <random_item type="ENCHANTMENT_GREEN" rnd_min="1" rnd_max="3"/>
+            <random_item type="ENCHANTMENT" rnd_min="1" rnd_max="3"/>
         </items>
     </decomposable>
     <decomposable item_id="188052825" decomposable_name="Illuminary Obelisk Idian Pouch">
@@ -26537,6 +26450,12 @@
             <item id="112501553" name="Bulwark Spaulders" player_class="CLERIC"/>
             <item id="111501612" name="Bulwark Handguards" player_class="CLERIC"/>
             <item id="125003881" name="Bulwark Chain Helm" player_class="CLERIC"/>
+            <item id="110551053" name="Aegis Hauberk" player_class="CLERIC"/>
+            <item id="114501639" name="Aegis Brogans" player_class="CLERIC"/>
+            <item id="113501630" name="Aegis Chausses" player_class="CLERIC"/>
+            <item id="112501551" name="Aegis Spaulders" player_class="CLERIC"/>
+            <item id="111501610" name="Aegis Handguards" player_class="CLERIC"/>
+            <item id="125003879" name="Aegis Chain Helm" player_class="CLERIC"/>
             <item id="110101711" name="Bulwark Tunic" player_class="BARD"/>
             <item id="114101589" name="Bulwark Shoes" player_class="BARD"/>
             <item id="112101493" name="Bulwark Pauldrons" player_class="BARD"/>
@@ -26639,6 +26558,12 @@
             <item id="112501554" name="Brazen Bulwark Spaulders" player_class="CLERIC"/>
             <item id="111501613" name="Brazen Bulwark Handguards" player_class="CLERIC"/>
             <item id="125003882" name="Brazen Bulwark Chain Helm" player_class="CLERIC"/>
+            <item id="110551054" name="Brazen Aegis Hauberk" player_class="CLERIC"/>
+            <item id="114501640" name="Brazen Aegis Brogans" player_class="CLERIC"/>
+            <item id="113501631" name="Brazen Aegis Chausses" player_class="CLERIC"/>
+            <item id="112501552" name="Brazen Aegis Spaulders" player_class="CLERIC"/>
+            <item id="111501611" name="Brazen Aegis Handguards" player_class="CLERIC"/>
+            <item id="125003880" name="Brazen Aegis Chain Helm" player_class="CLERIC"/>
             <item id="110101712" name="Brazen Bulwark Tunic" player_class="BARD"/>
             <item id="114101590" name="Brazen Bulwark Shoes" player_class="BARD"/>
             <item id="113101556" name="Brazen Bulwark Leggings" player_class="BARD"/>
@@ -26896,7 +26821,7 @@
     <decomposable item_id="188052932" decomposable_name="[Event] Accelerated Bikron Box"/>
     <decomposable item_id="188052933" decomposable_name="Courage Insignia Box"/>
     <decomposable item_id="188052934" decomposable_name="Greater Scroll Bundle"/>
-    <decomposable item_id="188052935" decomposable_name="Special Contribution Medal Chest"/>
+    <decomposable item_id="188052935" decomposable_name="Special Medal Chest"/>
     <decomposable item_id="188052936" decomposable_name="Shugo Icebox"/>
     <decomposable item_id="188052937" decomposable_name="Farushunerk's Bonus Bundle"/>
     <decomposable item_id="188052938" decomposable_name="Iron Wall Warfront Medal Bundle"/>
@@ -27290,16 +27215,7 @@
     </decomposable>
     <decomposable item_id="188053002" decomposable_name="[Event] Noble Composite Manastone Bundle">
         <items>
-            <random_item type="MANASTONE_RARE_GRADE_30"/>
-        </items>
-        <items>
-            <random_item type="MANASTONE_RARE_GRADE_40"/>
-        </items>
-        <items>
-            <random_item type="MANASTONE_RARE_GRADE_50"/>
-        </items>
-        <items>
-            <random_item type="MANASTONE_RARE_GRADE_70"/>
+            <random_item type="MANASTONE_LEGEND_GRADE_60"/>
         </items>
     </decomposable>
     <decomposable item_id="188053003" decomposable_name="[Event] Weapon Shard Box">
@@ -27567,13 +27483,13 @@
     <decomposable item_id="188053020" decomposable_name="Archon Scroll Bundle"/>
     <decomposable item_id="188053021" decomposable_name="Guardian Summoning Scroll Bundle"/>
     <decomposable item_id="188053022" decomposable_name="Archon Summoning Scroll Bundle"/>
-    <decomposable item_id="188053023" decomposable_name="Special Contribution Medal Chest"/>
+    <decomposable item_id="188053023" decomposable_name="Special Medal Chest"/>
     <decomposable item_id="188053024" decomposable_name="Infused Idian Shugo Box: Physical Attack"/>
     <decomposable item_id="188053025" decomposable_name="Infused Idian Shugo Box: Magical Attack"/>
     <decomposable item_id="188053026" decomposable_name="Infused Idian Shugo Box: Block"/>
     <decomposable item_id="188053027" decomposable_name="Infused Idian Shugo Box: Strike Resist"/>
     <decomposable item_id="188053028" decomposable_name="Infused Idian Shugo Box: Spell Resist"/>
-    <decomposable item_id="188053029" decomposable_name="Infused Idian Lucky Box"/>
+    <decomposable item_id="188053029" decomposable_name="Infused Spring Box"/>
     <decomposable item_id="188053030" decomposable_name="Idgel Dome Reward Box">
         <items>
             <item id="152012598" name="Heart of Destruction" count="2"/>
@@ -27669,7 +27585,7 @@
         <items>
             <item id="186000242" name="Ceramium Medal"/>
             <item id="188052185" name="Composite Manastone Pouch"/>
-            <random_item type="ENCHANTMENT_GREEN" rnd_min="1" rnd_max="3"/>
+            <random_item type="ENCHANTMENT" rnd_min="1" rnd_max="3"/>
         </items>
         <items>
             <item id="186000242" name="Ceramium Medal"/>
@@ -27712,12 +27628,49 @@
     <decomposable item_id="188053135" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box"/>
     <decomposable item_id="188053136" decomposable_name="Balaurea Fortress Siege Defense Consumables Box"/>
     <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle"/>
-    <decomposable item_id="188053138" decomposable_name="Wealhtheow's Keep Siege Defense Reward Box"/>
-    <decomposable item_id="188053139" decomposable_name="Wealhtheow's Keep Siege Defense Consumables Box"/>
-    <decomposable item_id="188053140" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 1"/>
-    <decomposable item_id="188053141" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 2"/>
-    <decomposable item_id="188053142" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 3"/>
-    <decomposable item_id="188053143" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 4"/>
+    <decomposable item_id="188053138" decomposable_name="Wealhtheow's Keep Siege Defense Reward Box">
+		<items>
+            <item id="162000143" name="Brigade General's Liquid Courage" count="5"/>
+            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053139" decomposable_name="Wealhtheow's Keep Siege Defense Consumables Box">
+		<items>
+            <item id="162000122" name="Superior Life Serum" count="500"/>
+            <item id="162000123" name="Superior Mana Serum" count="500"/>
+            <item id="162000124" name="Superior Recovery Serum" count="500"/>
+            <item id="164000259" name="Premium Anti-Shock Scroll" count="50"/>
+            <item id="164000073" name="Greater Courage Scroll" count="50"/>
+            <item id="188052375" name="Nourishing Combat Bundle" count="20"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053140" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 1">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="4"/>
+            <item id="188052362" name="Fortress Assault Stigma Reward Bundle"/>
+            <random_item type="ANCIENT_CROWN"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053141" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 2">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <random_item type="ANCIENT_GOBLET"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053142" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 3">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_SEAL"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053143" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 4">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_ICON"/>
+        </items>
+	</decomposable>
     <decomposable item_id="188053144" decomposable_name="Arcadian Fortress Assault Reward Box: Grade 1"/>
     <decomposable item_id="188053145" decomposable_name="Umbral Fortress Assault Reward Box: Grade 1"/>
     <decomposable item_id="188053146" decomposable_name="Eternum Fortress Assault Reward Box: Grade 1"/>
@@ -27741,22 +27694,106 @@
     <decomposable item_id="188053156" decomposable_name="[Event] Camaraderie Box"/>
     <decomposable item_id="188053157" decomposable_name="Thermal Box"/>
     <decomposable item_id="188053158" decomposable_name="Modor's Supplies"/>
-    <decomposable item_id="188053159" decomposable_name="Altar of Avarice Assault Reward Box: Grade 1"/>
-    <decomposable item_id="188053160" decomposable_name="Altar of Avarice Assault Reward Box: Grade 2"/>
-    <decomposable item_id="188053161" decomposable_name="Altar of Avarice Assault Reward Box: Grade 3"/>
-    <decomposable item_id="188053162" decomposable_name="Altar of Avarice Assault Reward Box: Grade 4"/>
-    <decomposable item_id="188053163" decomposable_name="Temple of Scales Assault Reward Box: Grade 1"/>
-    <decomposable item_id="188053164" decomposable_name="Temple of Scales Assault Reward Box: Grade 2"/>
-    <decomposable item_id="188053165" decomposable_name="Temple of Scales Assault Reward Box: Grade 3"/>
-    <decomposable item_id="188053166" decomposable_name="Temple of Scales Assault Reward Box: Grade 4"/>
-    <decomposable item_id="188053167" decomposable_name="Crimson Temple Assault Reward Box: Grade 1"/>
-    <decomposable item_id="188053168" decomposable_name="Crimson Temple Assault Reward Box: Grade 2"/>
-    <decomposable item_id="188053169" decomposable_name="Crimson Temple Assault Reward Box: Grade 3"/>
-    <decomposable item_id="188053170" decomposable_name="Crimson Temple Assault Reward Box: Grade 4"/>
-    <decomposable item_id="188053171" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 1"/>
-    <decomposable item_id="188053172" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 2"/>
-    <decomposable item_id="188053173" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 3"/>
-    <decomposable item_id="188053174" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 4"/>
+    <decomposable item_id="188053159" decomposable_name="Altar of Avarice Assault Reward Box: Grade 1">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+            <item id="188052362" name="Fortress Assault Stigma Reward Bundle"/>
+            <random_item type="ANCIENT_CROWN"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053160" decomposable_name="Altar of Avarice Assault Reward Box: Grade 2">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <random_item type="ANCIENT_GOBLET"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053161" decomposable_name="Altar of Avarice Assault Reward Box: Grade 3">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_SEAL"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053162" decomposable_name="Altar of Avarice Assault Reward Box: Grade 4">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_ICON"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053163" decomposable_name="Temple of Scales Assault Reward Box: Grade 1">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+            <item id="188052362" name="Fortress Assault Stigma Reward Bundle"/>
+            <random_item type="ANCIENT_CROWN"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053164" decomposable_name="Temple of Scales Assault Reward Box: Grade 2">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <random_item type="ANCIENT_GOBLET"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053165" decomposable_name="Temple of Scales Assault Reward Box: Grade 3">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_SEAL"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053166" decomposable_name="Temple of Scales Assault Reward Box: Grade 4">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_ICON"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053167" decomposable_name="Crimson Temple Assault Reward Box: Grade 1">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+            <item id="188052362" name="Fortress Assault Stigma Reward Bundle"/>
+            <random_item type="ANCIENT_CROWN"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053168" decomposable_name="Crimson Temple Assault Reward Box: Grade 2">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <random_item type="ANCIENT_GOBLET"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053169" decomposable_name="Crimson Temple Assault Reward Box: Grade 3">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_SEAL"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053170" decomposable_name="Crimson Temple Assault Reward Box: Grade 4">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_ICON"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053171" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 1">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+            <item id="188052362" name="Fortress Assault Stigma Reward Bundle"/>
+            <random_item type="ANCIENT_CROWN"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053172" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 2">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <random_item type="ANCIENT_GOBLET"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053173" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 3">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_SEAL"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053174" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 4">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <random_item type="ANCIENT_ICON"/>
+        </items>
+	</decomposable>
     <decomposable item_id="188053175" decomposable_name="Level 2 Grand Invasion Reward Box"/>
     <decomposable item_id="188053176" decomposable_name="Level 1 Grand Invasion Reward Box"/>
     <decomposable item_id="188053177" decomposable_name="Level 2 Grand Invasion Reward Box"/>
@@ -27988,9 +28025,6 @@
     <decomposable item_id="188053211" decomposable_name="[Event] Sauro Commander's Weapon Box"/>
     <decomposable item_id="188053212" decomposable_name="[Event] Dragon Lord's Mythic Weapon Chest">
         <items>
-            <item id="115001460" name="Dragon Lord's Agony"/>
-        </items>
-        <items>
             <item id="115001475" name="Dragon Lord's Agony"/>
         </items>
         <items>
@@ -27998,9 +28032,6 @@
         </items>
         <items>
             <item id="101900848" name="Dragon Lord's Courage"/>
-        </items>
-        <items>
-            <item id="100101084" name="Dragon Lord's Delight"/>
         </items>
         <items>
             <item id="100101104" name="Dragon Lord's Delight"/>
@@ -28113,25 +28144,181 @@
     <decomposable item_id="188053273" decomposable_name="Lannok's Fabled Accessory Box"/>
     <decomposable item_id="188053274" decomposable_name="Triroan's Fabled Weapon Box"/>
     <decomposable item_id="188053275" decomposable_name="Lannok's Fabled Weapon Box"/>
-    <decomposable item_id="188053276" decomposable_name="Anuhart's Fabled Pants Box"/>
-    <decomposable item_id="188053277" decomposable_name="Anuhart's Fabled Shoes Box"/>
-    <decomposable item_id="188053278" decomposable_name="Anuhart's Fabled Gloves Box"/>
-    <decomposable item_id="188053279" decomposable_name="Anuhart's Fabled Chest Box"/>
-    <decomposable item_id="188053280" decomposable_name="Anuhart's Fabled Shoulders Box"/>
-    <decomposable item_id="188053281" decomposable_name="Anuhart's Pants Box"/>
-    <decomposable item_id="188053282" decomposable_name="Anuhart's Shoes Box"/>
-    <decomposable item_id="188053283" decomposable_name="Anuhart's Gloves Box"/>
-    <decomposable item_id="188053284" decomposable_name="Anuhart's Chest Box"/>
-    <decomposable item_id="188053285" decomposable_name="Anuhart's Shoulders Box"/>
-    <decomposable item_id="188053286" decomposable_name="Marabata's Fabled Ring Box"/>
-    <decomposable item_id="188053287" decomposable_name="Dhatra's Fabled Earrings Box"/>
+    <decomposable item_id="188053276" decomposable_name="Anuhart's Fabled Pants Box" selectable="true">
+        <items>
+            <item id="113100876" name="Anuhart Sorcerer's Leggings"/>
+            <item id="113100877" name="Anuhart Spiritmaster's Leggings"/>
+            <item id="113101405" name="Anuhart Songweaver's Leggings"/>
+            <item id="113300893" name="Anuhart Assassin's Breeches"/>
+            <item id="113300894" name="Anuhart Ranger's Breeches"/>
+            <item id="113301404" name="Anuhart Gunslinger's Breeches"/>
+            <item id="113301554" name="Anuhart Gunslinger's Magic Breeches"/>
+            <item id="113500859" name="Anuhart Cleric's Chausses"/>
+            <item id="113500860" name="Anuhart Chanter's Chausses"/>
+            <item id="113501586" name="Anuhart Aethertech's Magic Chausses"/>
+            <item id="113600834" name="Anuhart Gladiator's Greaves"/>
+            <item id="113600835" name="Anuhart Templar's Greaves"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053277" decomposable_name="Anuhart's Fabled Shoes Box" selectable="true">
+        <items>
+            <item id="114100901" name="Anuhart Sorcerer's Shoes"/>
+            <item id="114100902" name="Anuhart Spiritmaster's Shoes"/>
+            <item id="114101436" name="Anuhart Songweaver's Shoes"/>
+            <item id="114300926" name="Anuhart Assassin's Boots"/>
+            <item id="114300927" name="Anuhart Ranger's Boots"/>
+            <item id="114301442" name="Anuhart Gunslinger's Boots"/>
+            <item id="114301592" name="Anuhart Gunslinger's Magic Boots"/>
+            <item id="114500869" name="Anuhart Cleric's Brogans"/>
+            <item id="114500870" name="Anuhart Chanter's Brogans"/>
+            <item id="114501595" name="Anuhart Aethertech's Magic Brogans"/>
+            <item id="114600828" name="Anuhart Gladiator's Sabatons"/>
+            <item id="114600829" name="Anuhart Templar's Sabatons"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053278" decomposable_name="Anuhart's Fabled Gloves Box" selectable="true">
+        <items>
+            <item id="111100866" name="Anuhart Sorcerer's Gloves"/>
+            <item id="111100867" name="Anuhart Spiritmaster's Gloves"/>
+            <item id="111101389" name="Anuhart Songweaver's Gloves"/>
+            <item id="111300867" name="Anuhart Assassin's Vambrace"/>
+            <item id="111300868" name="Anuhart Ranger's Vambrace"/>
+            <item id="111301381" name="Anuhart Gunslinger's Vambrace"/>
+            <item id="111301526" name="Anuhart Gunslinger's Magic Vambrace"/>
+            <item id="111500857" name="Anuhart Cleric's Handguards"/>
+            <item id="111500858" name="Anuhart Chanter's Handguards"/>
+            <item id="111501568" name="Anuhart Aethertech's Magic Handguards"/>
+            <item id="111600845" name="Anuhart Gladiator's Gauntlets"/>
+            <item id="111600846" name="Anuhart Templar's Gauntlets"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053279" decomposable_name="Anuhart's Fabled Chest Box" selectable="true">
+        <items>
+            <item id="110100972" name="Anuhart Sorcerer's Tunic"/>
+            <item id="110100973" name="Anuhart Spiritmaster's Tunic"/>
+            <item id="110101543" name="Anuhart Songweaver's Tunic"/>
+            <item id="110300917" name="Anuhart Assassin's Jerkin"/>
+            <item id="110300918" name="Anuhart Ranger's Jerkin"/>
+            <item id="110301439" name="Anuhart Gunslinger's Jerkin"/>
+            <item id="110301588" name="Anuhart Gunslinger's Magic Jerkin"/>
+            <item id="110500885" name="Anuhart Cleric's Hauberk"/>
+            <item id="110500886" name="Anuhart Chanter's Hauberk"/>
+            <item id="110551010" name="Anuhart Aethertech's Magic Hauberk"/>
+            <item id="110600869" name="Anuhart Gladiator's Breastplate"/>
+            <item id="110600870" name="Anuhart Templar's Breastplate"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053280" decomposable_name="Anuhart's Fabled Shoulders Box" selectable="true">
+        <items>
+            <item id="112100823" name="Anuhart Sorcerer's Pauldrons"/>
+            <item id="112100824" name="Anuhart Spiritmaster's Pauldrons"/>
+            <item id="112101343" name="Anuhart Songweaver's Pauldrons"/>
+            <item id="112300817" name="Anuhart Assassin's Shoulderguards"/>
+            <item id="112300818" name="Anuhart Ranger's Shoulderguards"/>
+            <item id="112301325" name="Anuhart Gunslinger's Shoulderguards"/>
+            <item id="112301467" name="Anuhart Gunslinger's Magic Shoulderguards"/>
+            <item id="112500808" name="Anuhart Cleric's Spaulders"/>
+            <item id="112500809" name="Anuhart Chanter's Spaulders"/>
+            <item id="112501510" name="Anuhart Aethertech's Magic Spaulders"/>
+            <item id="112600819" name="Anuhart Gladiator's Shoulderplates"/>
+            <item id="112600820" name="Anuhart Templar's Shoulderplates"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053281" decomposable_name="Anuhart's Pants Box" selectable="true">
+        <items>
+            <item id="113100875" name="Anuhart Legionary's Leggings"/>
+            <item id="113300892" name="Anuhart Legionary's Breeches"/>
+            <item id="113500858" name="Anuhart Legionary's Chausses"/>
+            <item id="113600833" name="Anuhart Legionary's Greaves"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053282" decomposable_name="Anuhart's Shoes Box" selectable="true">
+        <items>
+            <item id="114100900" name="Anuhart Legionary's Shoes"/>
+            <item id="114300925" name="Anuhart Legionary's Boots"/>
+            <item id="114500868" name="Anuhart Legionary's Brogans"/>
+            <item id="114600827" name="Anuhart Legionary's Sabatons"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053283" decomposable_name="Anuhart's Gloves Box" selectable="true">
+        <items>
+            <item id="111100865" name="Anuhart Legionary's Gloves"/>
+            <item id="111300866" name="Anuhart Legionary's Vambrace"/>
+            <item id="111500856" name="Anuhart Legionary's Handguards"/>
+            <item id="111600844" name="Anuhart Legionary's Gauntlets"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053284" decomposable_name="Anuhart's Chest Box" selectable="true">
+        <items>
+            <item id="110100971" name="Anuhart Legionary's Tunic"/>
+            <item id="110300916" name="Anuhart Legionary's Jerkin"/>
+            <item id="110500884" name="Anuhart Legionary's Hauberk"/>
+            <item id="110600868" name="Anuhart Legionary's Breastplate"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053285" decomposable_name="Anuhart's Shoulders Box" selectable="true">
+        <items>
+            <item id="112100822" name="Anuhart Legionary's Pauldrons"/>
+            <item id="112300816" name="Anuhart Legionary's Shoulderguards"/>
+            <item id="112500807" name="Anuhart Legionary's Spaulders"/>
+            <item id="112600818" name="Anuhart Legionary's Shoulderplates"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053286" decomposable_name="Marabata's Fabled Ring Box" selectable="true">
+        <items>
+            <item id="122001036" name="Lonely Ruby Ring"/>
+            <item id="122001037" name="Lonely Sapphire Ring"/>
+            <item id="122001038" name="Lonely Diamond Ring"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053287" decomposable_name="Dhatra's Fabled Earrings Box" selectable="true">
+        <items>
+            <item id="120000902" name="Earrings of Ascending"/>
+            <item id="122001060" name="Sapphire Ring of Telepathy Controller"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053288" decomposable_name="Anuhart's Fabled Belt Box"/>
-    <decomposable item_id="188053289" decomposable_name="Fabled Dragon Flame Necklace Box"/>
-    <decomposable item_id="188053290" decomposable_name="Vanuka's Fabled Accessory Box"/>
-    <decomposable item_id="188053291" decomposable_name="Marabata's Ring Box"/>
-    <decomposable item_id="188053292" decomposable_name="Dhatra's Earrings Box"/>
-    <decomposable item_id="188053293" decomposable_name="Dragon Flame Shield Box"/>
-    <decomposable item_id="188053294" decomposable_name="Dragon Flame Helmet Box"/>
+    <decomposable item_id="188053289" decomposable_name="Fabled Dragon Flame Necklace Box" selectable="true">
+        <items>
+            <item id="121000820" name="Dragon Flame Diamond Necklace"/>
+            <item id="121000821" name="Dragon Flame Sapphire Necklace"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053290" decomposable_name="Vanuka's Fabled Accessory Box">
+        <items>
+            <item id="123000929" name="Brigade General Anuhart's Leather Belt"/>
+         </items>
+        <items>
+           <item id="123000930" name="Brigade General Anuhart's Sash"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053291" decomposable_name="Marabata's Ring Box" selectable="true">
+        <items>
+            <item id="122001059" name="Diamond Ring of Telepathy Controller"/>
+            <item id="122001060" name="Sapphire Ring of Telepathy Controller"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053292" decomposable_name="Dhatra's Earrings Box" selectable="true">
+        <items>
+            <item id="120000926" name="Anuhart's Diamond Earrings"/>
+            <item id="120000927" name="Anuhart's Sapphire Earrings"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053293" decomposable_name="Dragon Flame Shield Box" selectable="true">
+        <items>
+            <item id="115000857" name="Dragon Flame Shield"/>
+            <item id="115000896" name="Dragon Flame Shield"/>
+            <item id="115000897" name="Dragon Flame Scale Shield"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053294" decomposable_name="Dragon Flame Helmet Box" selectable="true">
+        <items>
+            <item id="125002026" name="Dragon Flame Headband"/>
+            <item id="125002027" name="Dragon Flame Hat"/>
+            <item id="125002028" name="Dragon Flame Chain Helm"/>
+            <item id="125002029" name="Dragon Flame Helm"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053295" decomposable_name="Empyrean Plume Chest" selectable="true">
         <items>
             <item id="187100015" name="Kaisinel's Plume: Attack" race="ELYOS"/>
@@ -28141,20 +28328,74 @@
         </items>
     </decomposable>
     <decomposable item_id="188053296" decomposable_name="Divine Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188053297" decomposable_name="Expeditionary Force Supply Box"/>
-    <decomposable item_id="188053298" decomposable_name="Expeditionary Force Manastone Bundle"/>
-    <decomposable item_id="188053299" decomposable_name="Expeditionary Force Supplement Bundle"/>
-    <decomposable item_id="188053300" decomposable_name="Expeditionary Force Ceramium Medal Box"/>
-    <decomposable item_id="188053301" decomposable_name="Expeditionary Force Supply Box"/>
-    <decomposable item_id="188053302" decomposable_name="Expeditionary Force Manastone Bundle"/>
-    <decomposable item_id="188053303" decomposable_name="Expeditionary Force Supplement Bundle"/>
-    <decomposable item_id="188053304" decomposable_name="Expeditionary Force Ceramium Medal Box"/>
+    <decomposable item_id="188053297" decomposable_name="Expeditionary Force Supply Box">
+		<items>
+			<item id="188053299" name="Expeditionary Force Supplement Bundle"/>
+		</items>
+		<items>
+			<item id="188053301" name="Expeditionary Force Supplement Bundle"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053298" decomposable_name="Expeditionary Force Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053299" decomposable_name="Expeditionary Force Supplement Bundle">
+		<items chance="80">
+			<item id="166100008" name="Greater Supplements (Eternal)" rnd_min="20" rnd_max="50"/>
+		</items>
+		<items chance="20">
+			<item id="166100011" name="Greater Supplements (Mythic)" rnd_min="10" rnd_max="25"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053300" decomposable_name="Expeditionary Force Ceramium Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal" rnd_min="1" rnd_max="2"/>
+		</items>
+		<items>
+			<item id="186000243" name="Fragmented Ceramium" rnd_min="3" rnd_max="10"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053301" decomposable_name="Expeditionary Force Supply Box">
+		<items>
+			<item id="188053302" name="Expeditionary Force Supplement Bundle"/>
+		</items>
+		<items>
+			<item id="188053303" name="Expeditionary Force Supplement Bundle"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053302" decomposable_name="Expeditionary Force Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053303" decomposable_name="Expeditionary Force Supplement Bundle">
+		<items chance="80">
+			<item id="166100008" name="Greater Supplements (Eternal)" rnd_min="20" rnd_max="50"/>
+		</items>
+		<items chance="20">
+			<item id="166100011" name="Greater Supplements (Mythic)" rnd_min="10" rnd_max="25"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053304" decomposable_name="Expeditionary Force Ceramium Medal Box">
+		<items chance="80">
+			<item id="166100008" name="Greater Supplements (Eternal)" rnd_min="20" rnd_max="50"/>
+		</items>
+		<items chance="20">
+			<item id="166100011" name="Greater Supplements (Mythic)" rnd_min="10" rnd_max="25"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053305" decomposable_name="Ancient Goblet Bundle"/>
     <decomposable item_id="188053306" decomposable_name="Ancient Crown Bundle"/>
     <decomposable item_id="188053307" decomposable_name="Legion's Honorable Reward Box"/>
     <decomposable item_id="188053308" decomposable_name="Legion's Illusion Godstone Bundle"/>
     <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box"/>
-    <decomposable item_id="188053310" decomposable_name="Legion's Fine Ancient Manastone Bundle"/>
+    <decomposable item_id="188053310" decomposable_name="Legion's Fine Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053311" decomposable_name="Legion's Greater Ancient Manastone Bundle"/>
     <decomposable item_id="188053312" decomposable_name="Legion's Ancient Manastone Bundle"/>
     <decomposable item_id="188053313" decomposable_name="Legion's Lesser Ancient Manastone Bundle"/>
@@ -28182,9 +28423,42 @@
     <decomposable item_id="188053328" decomposable_name="Levinshor Alliance Heavy Composite Manastone Box"/>
     <decomposable item_id="188053329" decomposable_name="Composite Manastone Box of Ancient Monster"/>
     <decomposable item_id="188053330" decomposable_name="Blessed Medal Box"/>
-    <decomposable item_id="188053331" decomposable_name="Linkgate Foundry Small Ancient Manastone Bundle"/>
-    <decomposable item_id="188053332" decomposable_name="Linkgate Foundry Heavy Ancient Manastone Bundle"/>
-    <decomposable item_id="188053333" decomposable_name="Linkgate Foundry Noble Ancient Manastone Bundle"/>
+    <decomposable item_id="188053331" decomposable_name="Linkgate Foundry Small Ancient Manastone Bundle">
+		<items chance="60">
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="10">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053332" decomposable_name="Linkgate Foundry Heavy Ancient Manastone Bundle">
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="25">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items chance="5">
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053333" decomposable_name="Linkgate Foundry Noble Ancient Manastone Bundle">
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="35">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items chance="35">
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053334" decomposable_name="Generous Blessing Box"/>
     <decomposable item_id="188053335" decomposable_name="Sensible Daeva's Box"/>
     <decomposable item_id="188053336" decomposable_name="Rising Daeva's Box"/>
@@ -28287,10 +28561,98 @@
     <decomposable item_id="188053413" decomposable_name="[Stamp] Noble Coin Pouch"/>
     <decomposable item_id="188053414" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
     <decomposable item_id="188053415" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
-    <decomposable item_id="188053416" decomposable_name="[Stamp] Noble Ancient Manastone Box"/>
-    <decomposable item_id="188053417" decomposable_name="[Stamp] Noble Ancient Manastone Box"/>
-    <decomposable item_id="188053418" decomposable_name="[Stamp] Noble Composite Manastone Box"/>
-    <decomposable item_id="188053419" decomposable_name="[Stamp] Noble Composite Manastone Box"/>
+    <decomposable item_id="188053416" decomposable_name="[Stamp] Noble Ancient Manastone Box">
+        <items>
+            <item id="167020084" name="[Stamp] Ancient Manastone: Accuracy +35"/>
+        </items>
+        <items>
+            <item id="167020085" name="[Stamp] Ancient Manastone: Evasion +24"/>
+        </items>
+        <items>
+            <item id="167020086" name="[Stamp] Ancient Manastone: Crit Strike +24"/>
+        </items>
+        <items>
+            <item id="167020087" name="[Stamp] Ancient Manastone: Crit Spell +9"/>
+        </items>
+        <items>
+            <item id="167020088" name="[Stamp] Ancient Manastone: Magical Critical Resistance +11"/>
+        </items>
+        <items>
+            <item id="167020089" name="[Stamp] Ancient Manastone: Physical Defense +100"/>
+        </items>
+        <items>
+            <item id="167020090" name="[Stamp] Ancient Manastone: Resist Magic +20"/>
+        </items>
+        <items>
+            <item id="167020091" name="[Stamp] Ancient Manastone: Attack +8"/>
+        </items>
+        <items>
+            <item id="167020092" name="[Stamp] Ancient Manastone: Magical Accuracy +22"/>
+        </items>
+        <items>
+            <item id="167020093" name="[Stamp] Ancient Manastone: Magic Boost +35"/>
+        </items>
+        <items>
+            <item id="167020094" name="[Stamp] Ancient Manastone: Magic Suppression +50"/>
+        </items>
+        <items>
+            <item id="167020095" name="[Stamp] Ancient Manastone: Healing Boost +6"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053417" decomposable_name="[Stamp] Noble Ancient Manastone Box">
+        <items>
+            <item id="167020084" name="[Stamp] Ancient Manastone: Accuracy +35"/>
+        </items>
+        <items>
+            <item id="167020085" name="[Stamp] Ancient Manastone: Evasion +24"/>
+        </items>
+        <items>
+            <item id="167020086" name="[Stamp] Ancient Manastone: Crit Strike +24"/>
+        </items>
+        <items>
+            <item id="167020087" name="[Stamp] Ancient Manastone: Crit Spell +9"/>
+        </items>
+        <items>
+            <item id="167020088" name="[Stamp] Ancient Manastone: Magical Critical Resistance +11"/>
+        </items>
+        <items>
+            <item id="167020089" name="[Stamp] Ancient Manastone: Physical Defense +100"/>
+        </items>
+        <items>
+            <item id="167020090" name="[Stamp] Ancient Manastone: Resist Magic +20"/>
+        </items>
+        <items>
+            <item id="167020091" name="[Stamp] Ancient Manastone: Attack +8"/>
+        </items>
+        <items>
+            <item id="167020092" name="[Stamp] Ancient Manastone: Magical Accuracy +22"/>
+        </items>
+        <items>
+            <item id="167020093" name="[Stamp] Ancient Manastone: Magic Boost +35"/>
+        </items>
+        <items>
+            <item id="167020094" name="[Stamp] Ancient Manastone: Magic Suppression +50"/>
+        </items>
+        <items>
+            <item id="167020095" name="[Stamp] Ancient Manastone: Healing Boost +6"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053418" decomposable_name="[Stamp] Noble Composite Manastone Box">
+    	<items chance="34.0">
+           <item id="188052721" name="[Event] Manastones of Grace"></item>
+        </items>
+       <items chance="66.0">
+           <item id="186000273" name="Ruined Hazy Crystal"></item>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053419" decomposable_name="[Stamp] Noble Composite Manastone Box">
+    	<items chance="34.0">
+           <item id="188052721" name="[Event] Manastones of Grace"></item>
+        </items>
+       <items chance="66.0">
+           <item id="186000273" name="Ruined Hazy Crystal"></item>
+        </items>
+    </decomposable>
     <decomposable item_id="188053420" decomposable_name="[Stamp] Noble Manastone Pouch"/>
     <decomposable item_id="188053421" decomposable_name="[Stamp] Noble Enchanting Supplement Pouch"/>
     <decomposable item_id="188053422" decomposable_name="[Stamp] Anniversary Consumables Box"/>
@@ -28421,8 +28783,8 @@
     <decomposable item_id="188053538" decomposable_name="[Event] Daeva's Treasure Heart"/>
     <decomposable item_id="188053539" decomposable_name="[Event] Flying Pagati Box (30 days)"/>
     <decomposable item_id="188053540" decomposable_name="Supply Scroll Bundle"/>
-    <decomposable item_id="188053541" decomposable_name="[Event] Mysterious Fruit Box"/>
-    <decomposable item_id="188053542" decomposable_name="[Event] Hururinrinerk's Gift"/>
+    <decomposable item_id="188053541" decomposable_name="[Event] Fragrant Fruit Box"/>
+    <decomposable item_id="188053542" decomposable_name="[Event] Hirinerk's Gift"/>
     <decomposable item_id="188053543" decomposable_name="Shu-Ghost's Egg and Aether Cherry Box"/>
     <decomposable item_id="188053544" decomposable_name="Pinkybell's Egg and Aether Cherry Box"/>
     <decomposable item_id="188053545" decomposable_name="Royal Kitter's Egg and Aether Cherry Box"/>
@@ -28435,22 +28797,146 @@
     <decomposable item_id="188053552" decomposable_name="Test_EnchantmentStone_Bundle_04"/>
     <decomposable item_id="188053553" decomposable_name="Test_EnchantmentStone_Bundle_05"/>
     <decomposable item_id="188053554" decomposable_name="Test_EnchantmentStone_Bundle_06"/>
-    <decomposable item_id="188053555" decomposable_name="[Abbey] Stigma Shard Bundle"/>
-    <decomposable item_id="188053556" decomposable_name="Resurgent Daevanion Cloth Box"/>
-    <decomposable item_id="188053557" decomposable_name="Resurgent Daevanion Leather Box"/>
-    <decomposable item_id="188053558" decomposable_name="Resurgent Daevanion Magic Leather Box"/>
-    <decomposable item_id="188053559" decomposable_name="Resurgent Daevanion Chain Box"/>
-    <decomposable item_id="188053560" decomposable_name="Resurgent Daevanion Magic Chain Box"/>
-    <decomposable item_id="188053561" decomposable_name="Resurgent Daevanion Plate Box"/>
-    <decomposable item_id="188053562" decomposable_name="Resurgent Daevanion Weapon Box"/>
+    <decomposable item_id="188053555" decomposable_name="[Abbey] Stigma Shard Bundle">
+    	<items>
+			<item id="141000001" name="Stigma Shard" count="100"/>	
+        </items>
+    </decomposable>
+    <decomposable item_id="188053556" decomposable_name="Resurgent Daevanion Cloth Box">
+        <items>
+            <item id="112101625" name="Resurgent Daevanion Pauldrons"/>
+            <item id="111101675" name="Resurgent Daevanion Gloves"/>
+            <item id="113101687" name="Resurgent Daevanion Leggings"/>
+            <item id="110101861" name="Resurgent Daevanion Tunic"/>
+            <item id="114101721" name="Resurgent Daevanion Shoes"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053557" decomposable_name="Resurgent Daevanion Leather Box">
+        <items>
+            <item id="112301729" name="Resurgent Daevanion Shoulderguards"/>
+            <item id="111301790" name="Resurgent Daevanion Vambrace"/>
+            <item id="113301821" name="Resurgent Daevanion Breeches"/>
+            <item id="110301852" name="Resurgent Daevanion Jerkin"/>
+            <item id="114301858" name="Resurgent Daevanion Boots"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053558" decomposable_name="Resurgent Daevanion Magic Leather Box">
+        <items>
+            <item id="112301730" name="Resurgent Daevanion Magic Shoulderguards"/>
+            <item id="111301791" name="Resurgent Daevanion Magic Vambrace"/>
+            <item id="113301822" name="Resurgent Daevanion Magic Breeches"/>
+            <item id="110301853" name="Resurgent Daevanion Magic Jerkin"/>
+            <item id="114301859" name="Resurgent Daevanion Magic Boots"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053559" decomposable_name="Resurgent Daevanion Chain Box">
+        <items>
+            <item id="112501678" name="Resurgent Daevanion Spaulders"/>
+            <item id="111501739" name="Resurgent Daevanion Handguards"/>
+            <item id="113501757" name="Resurgent Daevanion Chausses"/>
+            <item id="110551180" name="Resurgent Daevanion Hauberk"/>
+            <item id="114501767" name="Resurgent Daevanion Brogans"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053560" decomposable_name="Resurgent Daevanion Magic Chain Box">
+        <items>
+            <item id="112501679" name="Resurgent Daevanion  Magic Spaulders"/>
+            <item id="111501740" name="Resurgent Daevanion Magic Handguards"/>
+            <item id="113501758" name="Resurgent Daevanion Magic Chausses"/>
+            <item id="110551181" name="Resurgent Daevanion Magic Hauberk"/>
+            <item id="114501768" name="Resurgent Daevanion Magic Brogans"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053561" decomposable_name="Resurgent Daevanion Plate Box">
+        <items>
+            <item id="112601596" name="Resurgent Daevanion Shoulderplates"/>
+            <item id="111601614" name="Resurgent Daevanion Gauntlets"/>
+            <item id="113601597" name="Resurgent Daevanion Greaves"/>
+            <item id="110601651" name="Resurgent Daevanion Breastplate"/>
+            <item id="114601604" name="Resurgent Daevanion Sabatons"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053562" decomposable_name="Resurgent Daevanion Weapon Box" selectable="true">
+        <items>
+            <item id="100001773" name="Resurgent Daevanion Sword"/>
+            <item id="100101361" name="Resurgent Daevanion Mace"/>
+            <item id="100201536" name="Resurgent Daevanion Dagger"/>
+            <item id="100501338" name="Resurgent Daevanion Orb"/>
+            <item id="100601457" name="Resurgent Daevanion Grimoire"/>
+            <item id="100901402" name="Resurgent Daevanion Greatsword"/>
+            <item id="101301293" name="Resurgent Daevanion Polearm"/>
+            <item id="101501383" name="Resurgent Daevanion Staff"/>
+            <item id="101701393" name="Resurgent Daevanion Bow"/>
+            <item id="101801249" name="Resurgent Daevanion Pistol"/>
+            <item id="101901158" name="Resurgent Daevanion Aethercannon"/>
+            <item id="102001276" name="Resurgent Daevanion Harp"/>
+            <item id="102101093" name="Resurgent Daevanion Cipher-Blade"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053563" decomposable_name="Abbey Resurgence Box"/>
     <decomposable item_id="188053564" decomposable_name="Illusion Godstone Bundle"/>
-    <decomposable item_id="188053565" decomposable_name="Renewed Daevanion Cloth Box"/>
-    <decomposable item_id="188053566" decomposable_name="Renewed Daevanion Leather Box"/>
-    <decomposable item_id="188053567" decomposable_name="Renewed Daevanion Magic Leather Box"/>
-    <decomposable item_id="188053568" decomposable_name="Renewed Daevanion Chain Box"/>
-    <decomposable item_id="188053569" decomposable_name="Renewed Daevanion Plate Box"/>
-    <decomposable item_id="188053570" decomposable_name="Renewed Daevanion Weapon Box"/>
+    <decomposable item_id="188053565" decomposable_name="Renewed Daevanion Cloth Box">
+        <items>
+            <item id="112101626" name="Renewed Daevanion Pauldrons"/>
+            <item id="111101676" name="Renewed Daevanion Gloves"/>
+            <item id="113101688" name="Renewed Daevanion Leggings"/>
+            <item id="110101862" name="Renewed Daevanion Tunic"/>
+            <item id="114101722" name="Renewed Daevanion Shoes"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053566" decomposable_name="Renewed Daevanion Leather Box">
+        <items>
+            <item id="112301731" name="Renewed Daevanion Shoulderguards"/>
+            <item id="111301792" name="Renewed Daevanion Vambrace"/>
+            <item id="113301823" name="Renewed Daevanion Breeches"/>
+            <item id="110301854" name="Renewed Daevanion Jerkin"/>
+            <item id="114301860" name="Renewed Daevanion Boots"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053567" decomposable_name="Renewed Daevanion Magic Leather Box">
+        <items>
+            <item id="112301732" name="Renewed Daevanion Magic Shoulderguards"/>
+            <item id="111301793" name="Renewed Daevanion Magic Vambrace"/>
+            <item id="113301824" name="Renewed Daevanion Magic Breeches"/>
+            <item id="110301855" name="Renewed Daevanion Magic Jerkin"/>
+            <item id="114301861" name="Renewed Daevanion Magic Boots"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053568" decomposable_name="Renewed Daevanion Chain Box">
+        <items>
+            <item id="112501680" name="Renewed Daevanion Spaulders"/>
+            <item id="111501741" name="Renewed Daevanion Handguards"/>
+            <item id="113501759" name="Renewed Daevanion Chausses"/>
+            <item id="110551182" name="Renewed Daevanion Hauberk"/>
+            <item id="114501769" name="Renewed Daevanion Brogans"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053569" decomposable_name="Renewed Daevanion Plate Box">
+        <items>
+            <item id="112601597" name="Renewed Daevanion Shoulderplates"/>
+            <item id="111601615" name="Renewed Daevanion Gauntlets"/>
+            <item id="113601598" name="Renewed Daevanion Greaves"/>
+            <item id="110601652" name="Renewed Daevanion Breastplate"/>
+            <item id="114601605" name="Renewed Daevanion Sabatons"/>
+        </items>
+    </decomposable>
+    <decomposable item_id="188053570" decomposable_name="Renewed Daevanion Weapon Box" selectable="true">
+        <items>
+            <item id="100001774" name="Renewed Daevanion Sword"/>
+            <item id="100101362" name="Renewed Daevanion Mace"/>
+            <item id="100201537" name="Renewed Daevanion Dagger"/>
+            <item id="100501339" name="Renewed Daevanion Orb"/>
+            <item id="100601458" name="Renewed Daevanion Grimoire"/>
+            <item id="100901403" name="Renewed Daevanion Greatsword"/>
+            <item id="101301294" name="Renewed Daevanion Polearm"/>
+            <item id="101501384" name="Renewed Daevanion Staff"/>
+            <item id="101701394" name="Renewed Daevanion Bow"/>
+            <item id="101801250" name="Renewed Daevanion Pistol"/>
+            <item id="101901159" name="Renewed Daevanion Aethercannon"/>
+            <item id="102001277" name="Renewed Daevanion Harp"/>
+            <item id="102101094" name="Renewed Daevanion Cipher-Blade"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053572" decomposable_name="[Event] Guard Chief's Divine Weapon Box"/>
     <decomposable item_id="188053573" decomposable_name="[Event] Guard Chief's Divine Armor Box"/>
     <decomposable item_id="188053574" decomposable_name="[Event] Stormwing's Box"/>
@@ -28460,7 +28946,36 @@
     <decomposable item_id="188053578" decomposable_name="[Event] Elite Tribunus' Weapon Box"/>
     <decomposable item_id="188053579" decomposable_name="[Event] Abbey Bundle"/>
     <decomposable item_id="188053580" decomposable_name="[Event] Noble Abbey Bundle"/>
-    <decomposable item_id="188053581" decomposable_name="Abbey Resurgence Box"/>
+    <decomposable item_id="188053581" decomposable_name="Abbey Resurgence Box">
+        <items minlevel="10" maxlevel="55">
+            <item id="188053570" name="Renewed Daevanion Weapon Box"/>
+            <item id="188053566" name="Renewed Daevanion Leather Box" player_class="RANGER"/>
+            <item id="188053566" name="Renewed Daevanion Leather Box" player_class="ASSASSIN"/>
+            <item id="188053565" name="Renewed Daevanion Cloth Box" player_class="BARD"/>
+            <item id="188053568" name="Renewed Daevanion Chain Box" player_class="CLERIC"/>
+            <item id="188053565" name="Renewed Daevanion Cloth Box" player_class="SORCERER"/>
+            <item id="188053567" name="Renewed Daevanion Magic Leather Box" player_class="GUNNER"/>
+            <item id="188053565" name="Renewed Daevanion Cloth Box" player_class="SPIRIT_MASTER"/>
+            <item id="188053568" name="Renewed Daevanion Chain Box" player_class="CHANTER"/>
+            <item id="188053569" name="Renewed Daevanion Plate Box" player_class="TEMPLAR"/>
+            <item id="188053569" name="Renewed Daevanion Plate Box" player_class="GLADIATOR"/>
+            <item id="188053568" name="Renewed Daevanion Chain Box" player_class="RIDER"/>
+        </items>
+        <items minlevel="56" maxlevel="65">
+            <item id="188053562" name="Resurgent Daevanion Weapon Box"/>
+            <item id="188053557" name="Resurgent Daevanion Leather Box" player_class="RANGER"/>
+            <item id="188053557" name="Resurgent Daevanion Leather Box" player_class="ASSASSIN"/>
+            <item id="188053556" name="Resurgent Daevanion Cloth Box" player_class="BARD"/>
+            <item id="188053559" name="Resurgent Daevanion Chain Box" player_class="CLERIC"/>
+            <item id="188053556" name="Resurgent Daevanion Cloth Box" player_class="SORCERER"/>
+            <item id="188053558" name="Resurgent Daevanion Magic Leather Box" player_class="GUNNER"/>
+            <item id="188053556" name="Resurgent Daevanion Cloth Box" player_class="SPIRIT_MASTER"/>
+            <item id="188053559" name="Resurgent Daevanion Chain Box" player_class="CHANTER"/>
+            <item id="188053561" name="Resurgent Daevanion Plate Box" player_class="TEMPLAR"/>
+            <item id="188053561" name="Resurgent Daevanion Plate Box" player_class="GLADIATOR"/>
+            <item id="188053560" name="Resurgent Daevanion Magic Chain Box" player_class="RIDER"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053582" decomposable_name="Mokchunerk's Gift (Level 65 or higher)"/>
     <decomposable item_id="188053583" decomposable_name="Kikorinerk's Gift (Level 60 or higher)"/>
     <decomposable item_id="188053584" decomposable_name="Aserunerk's Gift (Level 55 or higher)"/>
@@ -28497,12 +29012,68 @@
     <decomposable item_id="188053615" decomposable_name="Buff Pet Bundle"/>
     <decomposable item_id="188053616" decomposable_name="Tidal Idian Bundle"/>
     <decomposable item_id="188053617" decomposable_name="Noble Tidal Idian Bundle"/>
-    <decomposable item_id="188053618" decomposable_name="Honorable Elim's Idian Bundle"/>
+    <decomposable item_id="188053618" decomposable_name="Honorable Elim's Idian Bundle">
+		<items>
+			<item id="169405338" name="Pallasite Ore"/>
+		</items>
+		<items>
+			<item id="169405339" name="Pallasite Crystal"/>
+		</items>
+		<items>
+			<item id="169405340" name="Pallasite Powder"/>
+		</items>
+		<items>
+			<item id="169405341" name="Pallasite Refined Water"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053619" decomposable_name="Ancient Manastone Bundle"/>
     <decomposable item_id="188053620" decomposable_name="Superior Manastone Bundle"/>
     <decomposable item_id="188053621" decomposable_name="Legendary Noble Accessory Bundle"/>
     <decomposable item_id="188053622" decomposable_name="Fire Dragon's Weapon Bundle"/>
-    <decomposable item_id="188053623" decomposable_name="Fire Dragon King's Weapon Bundle"/>
+    <decomposable item_id="188053623" decomposable_name="Fire Dragon King's Weapon Bundle">
+		<items>
+			<item id="100001762" name="Nether Dragon King's Sword"/>
+		</items>
+		<items>
+			<item id="100101356" name="Nether Dragon King's Mace"/>
+		</items>
+		<items>
+			<item id="100201531" name="Nether Dragon King's Dagger"/>
+		</items>
+		<items>
+			<item id="100501333" name="Nether Dragon King's Orb"/>
+		</items>
+		<items>
+			<item id="100601452" name="Nether Dragon King's Spellbook"/>
+		</items>
+		<items>
+			<item id="100901397" name="Nether Dragon King's Greatsword"/>
+		</items>
+		<items>
+			<item id="101301288" name="Nether Dragon King's Polearm"/>
+		</items>
+		<items>
+			<item id="101501378" name="Nether Dragon King's Staff"/>
+		</items>
+		<items>
+			<item id="101701388" name="Nether Dragon King's Bow"/>
+		</items>
+		<items>
+			<item  id="101801244" name="Nether Dragon King's Pistol"/>
+		</items>
+		<items>
+			<item id="101901153" name="Nether Dragon King's Aethercannon"/>
+		</items>
+		<items>
+			<item id="102001271" name="Nether Dragon King's Harp"/>
+		</items>
+		<items>
+			<item id="102101088" name="Nether Dragon King's Cipher-Blade"/>
+		</items>
+		<items>
+			<item id="115001797" name="Nether Dragon King's Shield"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053624" decomposable_name="Unified Return Scroll Bundle"/>
     <decomposable item_id="188053625" decomposable_name="Empyrean Plume Bundle"/>
     <decomposable item_id="188053626" decomposable_name="Strong Wyvern Form Candy Bundle"/>
@@ -28576,13 +29147,13 @@
     <decomposable item_id="188053665" decomposable_name="[Event] Fine Ancient Crown Box"/>
     <decomposable item_id="188053666" decomposable_name="[Event] Ceramium Medal Box"/>
     <decomposable item_id="188053667" decomposable_name="[Event] Mithril Medal Box"/>
-    <decomposable item_id="188053668" decomposable_name="[Event] Serenade's Friendship Box"/>
+    <decomposable item_id="188053668" decomposable_name="[Event] Sonatine's Friendship Box"/>
     <decomposable item_id="188053669" decomposable_name="[Event] Ascension Supply Box"/>
     <decomposable item_id="188053670" decomposable_name="[Event] Weapon Box of the Distorted Balaur Lord"/>
     <decomposable item_id="188053671" decomposable_name="[Event] Pallasite Material Box"/>
-    <decomposable item_id="188053672" decomposable_name="[Event] Ding-Dong's Present"/>
-    <decomposable item_id="188053673" decomposable_name="[Event] Puzzling Pouch"/>
-    <decomposable item_id="188053674" decomposable_name="[Event] Long-Long's Gift"/>
+    <decomposable item_id="188053672" decomposable_name="[Event] Rainbow Gift"/>
+    <decomposable item_id="188053673" decomposable_name="[Event] Coiled Gift"/>
+    <decomposable item_id="188053674" decomposable_name="[Event] Chromatic Gift"/>
     <decomposable item_id="188053677" decomposable_name="[Event] Presto's Friendship Box"/>
     <decomposable item_id="188053687" decomposable_name="Test Item"/>
     <decomposable item_id="188053863" decomposable_name="[Event] Arcade Token Bundle (1)"/>
@@ -28596,24 +29167,24 @@
     <decomposable item_id="188053871" decomposable_name="[Event] Arcade Token Bundle (50)"/>
     <decomposable item_id="188053872" decomposable_name="[Event] Arcade Token Bundle (100)"/>
     <decomposable item_id="188053873" decomposable_name="[Event] Arcade Token Bundle"/>
-    <decomposable item_id="188053874" decomposable_name="Lucky Enchantment Stone Bundle"/>
-    <decomposable item_id="188053875" decomposable_name="Lucky Manastone Box"/>
-    <decomposable item_id="188053876" decomposable_name="Special Lucky Box"/>
-    <decomposable item_id="188053877" decomposable_name="Lucky Enchantment Stone Box"/>
-    <decomposable item_id="188053878" decomposable_name="Oneiric Commander's Divine Weapon Box"/>
-    <decomposable item_id="188053879" decomposable_name="Oneiric Commander's Divine Armor Box"/>
-    <decomposable item_id="188053880" decomposable_name="Oneiric Modor's Weapon Box"/>
-    <decomposable item_id="188053881" decomposable_name="Oneiric Modor's Armor Box"/>
-    <decomposable item_id="188053882" decomposable_name="Oneiric Commander's Divine Plate Armor Box"/>
-    <decomposable item_id="188053883" decomposable_name="Oneiric Executor's Divine Plate Armor Box"/>
-    <decomposable item_id="188053884" decomposable_name="Oneiric Commander's Divine Hauberk Box"/>
-    <decomposable item_id="188053885" decomposable_name="Oneiric Executor's Divine Hauberk Box"/>
-    <decomposable item_id="188053886" decomposable_name="Oneiric Commander's Divine Leather Armor Box"/>
-    <decomposable item_id="188053887" decomposable_name="Oneiric Executor's Divine Leather Armor Box"/>
-    <decomposable item_id="188053888" decomposable_name="Oneiric Commander's Divine Cloth Armor Box"/>
-    <decomposable item_id="188053889" decomposable_name="Oneiric Executor's Divine Cloth Armor Box"/>
-    <decomposable item_id="188053891" decomposable_name="[Event] Oneiric Commander's Divine Weapon Box"/>
-    <decomposable item_id="188053892" decomposable_name="[Event] Oneiric Modor's Weapon Box"/>
+    <decomposable item_id="188053874" decomposable_name="Bona fide Enchantment Stone Bundle"/>
+    <decomposable item_id="188053875" decomposable_name="Bona fide Manastone Box"/>
+    <decomposable item_id="188053876" decomposable_name="Bona fide Lucky Box"/>
+    <decomposable item_id="188053877" decomposable_name="Bona fide Enchantment Stone Box"/>
+    <decomposable item_id="188053878" decomposable_name="Bootleg Abyss Weapon Box"/>
+    <decomposable item_id="188053879" decomposable_name="Bootleg Abyss Armor Box"/>
+    <decomposable item_id="188053880" decomposable_name="Bootleg Modor's Weapon Box"/>
+    <decomposable item_id="188053881" decomposable_name="Bootleg Modor's Armor Box"/>
+    <decomposable item_id="188053882" decomposable_name="Bootleg Divine Plate Armor Crate"/>
+    <decomposable item_id="188053883" decomposable_name="Bootleg Divine Plate Armor Box"/>
+    <decomposable item_id="188053884" decomposable_name="Bootleg Divine Hauberk Crate"/>
+    <decomposable item_id="188053885" decomposable_name="Bootleg Divine Hauberk Box"/>
+    <decomposable item_id="188053886" decomposable_name="Bootleg Divine Leather Armor Crate"/>
+    <decomposable item_id="188053887" decomposable_name="Bootleg Divine Leather Armor Box"/>
+    <decomposable item_id="188053888" decomposable_name="Bootleg Divine Cloth Armor Crate"/>
+    <decomposable item_id="188053889" decomposable_name="Bootleg Divine Cloth Armor Box"/>
+    <decomposable item_id="188053891" decomposable_name="[Event] Bootleg Commander's Divine Weapon Box"/>
+    <decomposable item_id="188053892" decomposable_name="[Event] Bootleg Modor's Weapon Box"/>
     <decomposable item_id="188053895" decomposable_name="Lucky Box"/>
     <decomposable item_id="188053944" decomposable_name="wrap_world_cash_vip_start_coin_6hour"/>
     <decomposable item_id="188053945" decomposable_name="wrap_world_cash_vip_start_coin_1day"/>
@@ -28624,65 +29195,4 @@
     <decomposable item_id="188100066" decomposable_name="[Event] Enchanting Sorcerer Robe Set Bundle (6 hours)"/>
     <decomposable item_id="188100067" decomposable_name="[Event] Velvet Sorcerer Clothes Bundle (6 hours)"/>
     <decomposable item_id="188710084" decomposable_name="Coin Crate"/>
-	<decomposable item_id="188052610" decomposable_name="Simple Relic Chest">
-        <items chance="50.0">
-            <item id="186000066" name="Lesser Ancient Icon" count="2"/>
-        </items>
-        <items chance="50.0">
-            <item id="186000054" name="Lesser Ancient Crown" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000058" name="Lesser Ancient Goblet" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000062" name="Lesser Ancient Seal" count="2"/>
-        </items>
-    </decomposable>
-	<decomposable item_id="188052609" decomposable_name="Normal Relic Chest">
-        <items chance="50.0">
-            <item id="186000065" name="Ancient Icon" count="2"/>
-        </items>
-        <items chance="50.0">
-            <item id="186000053" name="Ancient Crown" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000057" name="Ancient Goblet" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000061" name="Ancient Seal" count="2"/>
-        </items>
-    </decomposable>
-	<decomposable item_id="188052607" decomposable_name="Powerful Relic Chest">
-        <items chance="50.0">
-            <item id="186000051" name="Major Ancient Crown" count="2"/>
-        </items>
-        <items chance="50.0">
-            <item id="186000055" name="Major Ancient Goblet" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000063" name="Major Ancient Icon" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000059" name="Major Ancient Seal" count="2"/>
-        </items>
-    </decomposable>
-	<decomposable item_id="188052608" decomposable_name="Large Relic Chest">
-        <items chance="50.0">
-            <item id="186000052" name="Greater Ancient Crown" count="2"/>
-        </items>
-        <items chance="50.0">
-            <item id="186000056" name="Greater Ancient Goblet" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000064" name="Greater Ancient Icon" count="2"/>
-        </items>
-		<items chance="50.0">
-            <item id="186000060" name="Greater Ancient Seal" count="2"/>
-        </items>
-    </decomposable>
-	<decomposable item_id="188052614" decomposable_name="An Augmentation Package">
-        <items>
-            <item id="168310018" name="Powerful Blessed Augmentation: Level 2" count="1"/>
-        </items>
-    </decomposable>
 </decomposable_items>

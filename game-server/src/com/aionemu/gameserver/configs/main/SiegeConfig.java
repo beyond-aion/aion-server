@@ -70,22 +70,4 @@ public class SiegeConfig {
 	 */
 	@Property(key = "gameserver.siege.ida", defaultValue = "false")
 	public static boolean SIEGE_IDA_ENABLED;
-
-	/**
-	* Invasion raid enable
-	*/
-	@Property(key = "gameserver.raid.enable", defaultValue = "false")
-	public static boolean RAID_ENABLE;
-
-	/**
-	 * invasion raid spawn time
-	 */
-	@Property(key = "gameserver.raid.time1", defaultValue = "0 0 18/22 ? * TUE")
-	public static String RAID_SPAWN_SCHEDULE;
-	
-	/**
-	 * invasion raid spawn time
-	 */
-	@Property(key = "gameserver.raid.time2", defaultValue = "0 0 18/22 ? * THU")
-	public static String RAID_SPAWN_SCHEDULE2;
 }
