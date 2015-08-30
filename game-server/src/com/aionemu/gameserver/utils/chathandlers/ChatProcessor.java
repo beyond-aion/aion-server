@@ -30,6 +30,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ChatProcessor implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatProcessor.class);
+	private static int commandsBefore;
 	private static ChatProcessor instance = new ChatProcessor();
 	private Map<String, ChatCommand> commands = new FastMap<String, ChatCommand>();
 	private Map<String, Byte> accessLevel = new FastMap<String, Byte>();
@@ -64,6 +65,7 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	private void init(final ScriptManager scriptManager, ChatProcessor processor) {
+		commandsBefore = commands.size();
 		loadLevels();
 
 		AggregatedClassListener acl = new AggregatedClassListener();
@@ -216,6 +218,7 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public void onCompileDone() {
-		log.info("Loaded " + commands.size() + " commands.");
+		log.info("Loaded " + (commands.size() - commandsBefore) + " commands.");
+		commandsBefore = commands.size();
 	}
 }
