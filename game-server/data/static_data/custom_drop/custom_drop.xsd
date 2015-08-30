@@ -24,13 +24,13 @@
 		<xs:attribute name="max_items" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="Drop">
-		<xs:attribute name="item_id" type="xs:int" />
-        <xs:attribute name="name" type="xs:string"></xs:attribute>
-        <xs:attribute name="min_amount" type="xs:int" />
-		<xs:attribute name="max_amount" type="xs:int" />
-		<xs:attribute name="chance" type="xs:float" />
-		<xs:attribute name="no_reduce" type="xs:boolean" />
-		<xs:attribute name="each_member" type="xs:boolean" />
+		<xs:attribute name="item_id" type="xs:int"/>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="min_amount" type="xs:int"/>
+		<xs:attribute name="max_amount" type="xs:int"/>
+		<xs:attribute name="chance" type="xs:float"/>
+		<xs:attribute name="no_reduce" type="xs:boolean"/>
+		<xs:attribute name="each_member" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:simpleType name="ReplaceType">
 		<xs:restriction base="xs:string">
