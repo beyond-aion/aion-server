@@ -28,12 +28,10 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
-import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
@@ -165,43 +163,42 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		this.getOwner().getObserveController().notifyDeathObservers(lastAttacker);
 	}
-	
+
 	/**
-     * Perform tasks on Creature death with out emotion effect(need for some quests).
-     *
-     */
-    public void onDieSilence() {
-        this.getOwner().getMoveController().abortMove();
-        this.getOwner().setCasting(null);
-        this.getOwner().getEffectController().removeAllEffects();
-        // exception for player
-        if (getOwner() instanceof Player) {
-            if (((Player) getOwner()).getIsFlyingBeforeDeath()) {
-                getOwner().unsetState(CreatureState.ACTIVE);
-                getOwner().setState(CreatureState.FLOATING_CORPSE);
-            } else
-                this.getOwner().setState(CreatureState.DEAD);
-        } else {
-            if (getOwner() instanceof Npc) {
-                if (((Npc) getOwner()).getObjectTemplate().isFloatCorpse()) {
-                    getOwner().setState(CreatureState.FLOATING_CORPSE);
-                }
-            }
-            this.getOwner().setState(CreatureState.DEAD);
-        }
-    }
+	 * Perform tasks on Creature death with out emotion effect(need for some quests).
+	 */
+	public void onDieSilence() {
+		this.getOwner().getMoveController().abortMove();
+		this.getOwner().setCasting(null);
+		this.getOwner().getEffectController().removeAllEffects();
+		// exception for player
+		if (getOwner() instanceof Player) {
+			if (((Player) getOwner()).getIsFlyingBeforeDeath()) {
+				getOwner().unsetState(CreatureState.ACTIVE);
+				getOwner().setState(CreatureState.FLOATING_CORPSE);
+			}
+			else
+				this.getOwner().setState(CreatureState.DEAD);
+		}
+		else {
+			if (getOwner() instanceof Npc) {
+				if (((Npc) getOwner()).getObjectTemplate().isFloatCorpse()) {
+					getOwner().setState(CreatureState.FLOATING_CORPSE);
+				}
+			}
+			this.getOwner().setState(CreatureState.DEAD);
+		}
+	}
 
 	/**
 	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
 	 */
 	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId) {
-		/**
-		 * to do damage on creature, damage has to be either done by itself or done by enemy
-		 * should fix killing players after duel
-		 */
-		if (attacker != getOwner() && !getOwner().isEnemy(attacker))
+
+		// avoid killing players after duel
+		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && getOwner() != attacker)
 			return;
-		
+
 		if (damage != 0 && !((getOwner() instanceof Npc) && ((Npc) getOwner()).isBoss())) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null && notifyAttack) {
@@ -222,7 +219,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				}
 			}
 		}
-					
+
 		if (damage != 0 && notifyAttack) {
 			getOwner().getObserveController().notifyAttackedObservers(attacker);
 		}
@@ -340,7 +337,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getGameStats().increaseAttackCounter();
 		if (addAttackObservers)
 			getOwner().getObserveController().notifyAttackObservers(target);
-		
+
 		final Creature creature = getOwner();
 		if (time == 0) {
 			target.getController().onAttack(getOwner(), damage, true);
@@ -468,8 +465,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		return false;
 	}
-	
-	
+
 	public boolean useChargeSkill(int skillId, int skillLevel, int time, VisibleObject firstTarget) {
 		try {
 			Player creature = (Player) getOwner();

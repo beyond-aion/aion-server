@@ -86,13 +86,13 @@ public class Heal extends AdminCommand {
 			PacketSendUtility.sendMessage(player, creature.getName() + " has been healed for " + value +" health points!");
 		 }
 		 catch (Exception ex) {
-			onFail(player, null);
+			info(player, null);
 		 }
 	  }
    }
 
    @Override
-   public void onFail(Player player, String message) {
+   public void info(Player player, String message) {
 	  String syntax = "//heal : Full HP and MP\n"
 			  + "//heal dp : Full DP, must be used on a player !\n"
 			  + "//heal fp : Full FP, must be used on a player\n"

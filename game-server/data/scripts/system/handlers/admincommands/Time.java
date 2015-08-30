@@ -21,7 +21,7 @@ public class Time extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 1) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -49,13 +49,13 @@ public class Time extends AdminCommand {
 				hour = Integer.parseInt(params[0]);
 			}
 			catch (NumberFormatException e) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 
 			// A day have only 24 hours!
 			if (hour < 0 || hour > 23) {
-				onFail(admin, null);
+				info(admin, null);
 				PacketSendUtility.sendMessage(admin, "A day have only 24 hours!\n" + "Min value : 0 - Max value : 23");
 				return;
 			}
@@ -84,7 +84,7 @@ public class Time extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntax = "Syntax: //time < dawn | day | dusk | night | desired hour (number) >";
 		PacketSendUtility.sendMessage(player, syntax);
 	}

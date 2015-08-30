@@ -23,7 +23,7 @@ public class Enemy extends AdminCommand {
 			+ "Cancel - Cancel all. Players and Npcs have default enmity to you.";
 
 		if (params.length != 1) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class Enemy extends AdminCommand {
 		}
 
 		else {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -72,7 +72,7 @@ public class Enemy extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntax = "Syntax: //enemy < players | npcs | all | cancel >\nIf you're unsure about what you want to do, type //enemy help";
 		PacketSendUtility.sendMessage(player, syntax);
 	}

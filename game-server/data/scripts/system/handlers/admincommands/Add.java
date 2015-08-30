@@ -24,7 +24,7 @@ public class Add extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if ((params.length < 0) || (params.length < 1)) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 		int itemId = 0;
@@ -128,7 +128,7 @@ public class Add extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //add <player> <item Id | link> <quantity>");
 		PacketSendUtility.sendMessage(player, "syntax //add <item Id | link> <quantity>");
 		PacketSendUtility.sendMessage(player, "syntax //add <item Id | link>");

@@ -30,7 +30,7 @@ public class Collide extends AdminCommand {
 			return;
 		}
 		if (params.length > 1 || params.length == 1 && !"me".equalsIgnoreCase(params[0])) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -149,7 +149,7 @@ public class Collide extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntax = "Syntax: //collide [me]";
 		PacketSendUtility.sendMessage(player, syntax);
 	}

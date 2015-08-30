@@ -22,7 +22,7 @@ public class Delete_items extends ConsoleCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if ((params.length < 0) || (params.length < 1)) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -62,7 +62,7 @@ public class Delete_items extends ConsoleCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax ///delete_items <item quality>");
 	}
 

@@ -23,7 +23,7 @@ public class Neutral extends AdminCommand {
 			+ "Cancel - Cancel all. Players and Npcs have default enmity to you.";
 
 		if (params.length != 1) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class Neutral extends AdminCommand {
 		}
 
 		else {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -72,7 +72,7 @@ public class Neutral extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		String syntax = "Syntax: //neutral < players | npcs | all | cancel >\n"
 			+ "If you're unsure about what you want to do, type //neutral help";
 		PacketSendUtility.sendMessage(player, syntax);

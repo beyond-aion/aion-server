@@ -1,12 +1,8 @@
 package playercommands;
 
-import java.util.Iterator;
-import java.util.List;
-
 import javolution.util.FastList;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ChatCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
@@ -23,31 +19,31 @@ public class Help extends PlayerCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		List<ChatCommand> allowedCommands = getAllowedCommands(player);
+		FastList<ChatCommand> allowedCommands = getAllowedCommands(player);
 
 		if (!allowedCommands.isEmpty() && !(allowedCommands.size() == 1 && allowedCommands.contains(this))) {
-			PacketSendUtility.sendMessage(player, "List of available commands:");
+			StringBuilder sb = new StringBuilder("List of available commands (" + allowedCommands.size() + "):");
 			for (ChatCommand cmd : allowedCommands) {
 				String desc = cmd.getDescription().isEmpty() ? "No description available." : cmd.getDescription();
-				PacketSendUtility.sendMessage(player, "  " + cmd.getAliasWithPrefix() + " - " + desc);
+				sb.append("\n\t[color:" + cmd.getAliasWithPrefix() + ";1 1 1] - " + desc);
 			}
+			sb.append("\nType in [color:<command> help;1 1 1] to get further information about a command.");
+			sendInfo(player, sb.toString());
 		}
 		else {
-			PacketSendUtility.sendMessage(player, "You are not allowed to use any chat commands other than " + getAliasWithPrefix() + ".");
+			sendInfo(player, "You are not allowed to use any chat commands other than [color:" + getAliasWithPrefix() + ";1 1 1].");
 		}
 	}
 
-	private List<ChatCommand> getAllowedCommands(Player player) {
+	private FastList<ChatCommand> getAllowedCommands(Player player) {
 		ChatProcessor cp = ChatProcessor.getInstance();
-		Iterator<ChatCommand> iter = cp.getCommandList().iterator();
-		List<ChatCommand> cmds = new FastList<ChatCommand>();
+		FastList<ChatCommand> cmds = new FastList<ChatCommand>();
 
-		while (iter.hasNext()) {
-			ChatCommand cmd = iter.next();
+		for (ChatCommand cmd : cp.getCommandList()) {
 			if (cp.isCommandAllowed(player, cmd) && !(cmd instanceof ConsoleCommand))
 				cmds.add(cmd);
 		}
-		cmds.sort(null);;
+		cmds.sort(null);
 		
 		return cmds;
 	}

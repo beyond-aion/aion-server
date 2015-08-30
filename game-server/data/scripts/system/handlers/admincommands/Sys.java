@@ -113,7 +113,7 @@ public class Sys extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility
 			.sendMessage(
 				player,

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.utils.chathandlers;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.CommandsAccessService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author synchro2
@@ -12,33 +11,43 @@ public abstract class PlayerCommand extends ChatCommand {
 
 	public final static String PREFIX = ".";
 
+	// only for backwards compatibility TODO: remove when all commands are updated
 	public PlayerCommand(String alias) {
 		this(alias, "");
 	}
 
+	/**
+	 * Registers a new player command.
+	 * 
+	 * @param alias
+	 *          the command name
+	 * @param description
+	 *          description what the command does
+	 */
 	public PlayerCommand(String alias, String description) {
-		super(alias, description, PREFIX);
+		super(PREFIX, alias, description);
 	}
 
 	@Override
-	public boolean checkLevel(Player player) {
-		return player.havePermission(getLevel()) || CommandsAccessService.getInstance().haveRigths(player.getObjectId(), getAlias());
+	public boolean validateAccess(Player player) {
+		return player.havePermission(getLevel()) || CommandsAccessService.getInstance().hasAccess(player.getObjectId(), getAlias());
 	}
 
 	@Override
-	boolean process(Player player, String params) {
+	boolean process(Player player, String... params) {
 
-		if (!checkLevel(player)) {
-			PacketSendUtility.sendMessage(player, "You don't have permission to use this command.");
-			return true;
+		if (!validateAccess(player)) {
+			if (player.isGM()) {
+				sendInfo(player, "<You need membership level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
+				return true;
+			}
+			// return false so chat will send entered text (this way you can't guess commands without rights)
+			return false;
 		}
 
-		boolean success = false;
-		if (params.isEmpty())
-			success = this.run(player, EMPTY_PARAMS);
-		else
-			success = this.run(player, params.split(" "));
+		if (!run(player, params))
+			sendInfo(player, "<Error while executing command>");
 
-		return success;
+		return true;
 	}
 }

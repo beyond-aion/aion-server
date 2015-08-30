@@ -27,7 +27,7 @@ public class Warp extends AdminCommand {
 		int mapL, unk = 0, layerI = -1;
 		
 		if(params.length < 5) {
-			onFail(player, "");
+			info(player, "");
 			return;
 		}
 
@@ -63,7 +63,7 @@ public class Warp extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		if (!GeoDataConfig.GEO_ENABLE) {
 			PacketSendUtility.sendMessage(player, "You must turn on geo in config to use this command!");
 			return;

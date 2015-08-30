@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.CommandsAccessService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ginho1
@@ -17,51 +17,51 @@ public abstract class ConsoleCommand extends ChatCommand {
 	public final static String PREFIX = "";
 	static final Logger log = LoggerFactory.getLogger("ADMINAUDIT_LOG");
 
+	// only for backwards compatibility TODO: remove when all commands are updated
 	public ConsoleCommand(String alias) {
 		this(alias, "");
 	}
 
+	/**
+	 * Registers a new console command.
+	 * 
+	 * @param alias
+	 *          the command name
+	 * @param description
+	 *          description what the command does
+	 */
 	public ConsoleCommand(String alias, String description) {
-		super(alias, description, PREFIX);
+		super(PREFIX, alias, description);
 	}
 
 	@Override
-	public boolean checkLevel(Player player) {
-		return player.getAccessLevel() >= getLevel() || CommandsAccessService.getInstance().haveRigths(player.getObjectId(), getAlias());
+	public boolean validateAccess(Player player) {
+		return player.getAccessLevel() >= getLevel() || CommandsAccessService.getInstance().hasAccess(player.getObjectId(), getAlias());
 	}
 
 	@Override
-	boolean process(Player player, String params) {
+	boolean process(Player player, String... params) {
 
-		if (!checkLevel(player)) {
+		if (!validateAccess(player)) {
 			if (LoggingConfig.LOG_GMAUDIT)
-				log.info("[CONSOLE COMMAND] > [Player: " + player.getName() + "] has tried to use the command " + getAliasWithPrefix()
+				log.info("[Console Command] > [Player: " + player.getName() + "] has tried to use the command " + getAliasWithPrefix()
 					+ " without having the rights");
 			if (player.isGM()) {
-				PacketSendUtility.sendMessage(player, "[WARN] You need to have access level " + getLevel() + " or more to use "
-					+ getAliasWithPrefix());
+				sendInfo(player, "<You need access level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
 				return true;
 			}
-			// return false so chat will send this message (this way you can't guess admin commands without rights)
+			// return false so chat will send entered text (this way you can't guess commands without rights)
 			return false;
 		}
 
-		boolean success = false;
-		if (params.isEmpty())
-			success = this.run(player, EMPTY_PARAMS);
-		else
-			success = this.run(player, params.split(" "));
-
 		if (LoggingConfig.LOG_GMAUDIT)
-			log.info("[CONSOLE COMMAND] > [Name: " + player.getName() + "]"
-				+ (player.getTarget() != null ? "[Target : " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
-				+ params);
+			log.info("[Console Command] > [Player: " + player.getName() + "]"
+				+ (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
+				+ StringUtils.join(params, " "));
 
-		if (!success) {
-			PacketSendUtility.sendMessage(player, "<You have failed to execute " + getAliasWithPrefix() + ">");
-			return true;
-		}
-		else
-			return success;
+		if (!run(player, params))
+			sendInfo(player, "<Error while executing command>");
+
+		return true;
 	}
 }

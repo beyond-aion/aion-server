@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
 
 /**
@@ -43,15 +42,15 @@ public class AEInfos {
 
 	public static String[] getCPUInfo() {
 		return new String[] {
-		"Available CPU(s): " + Runtime.getRuntime().availableProcessors(),
-			"Processor(s) Identifier: " + System.getenv("PROCESSOR_IDENTIFIER"),
+			"Available CPU(s): " + Runtime.getRuntime().availableProcessors(),
+			"Processor Identifier: " + System.getenv("PROCESSOR_IDENTIFIER"),
 			SPACER
 		};
 	}
 
 	public static String[] getOSInfo() {
 		return new String[] {
-		"OS: " + System.getProperty("os.name") + " Build: " + System.getProperty("os.version"),
+			"OS: " + System.getProperty("os.name") + " Build: " + System.getProperty("os.version"),
 			"OS Arch: " + System.getProperty("os.arch"),
 			SPACER
 		};
@@ -59,19 +58,20 @@ public class AEInfos {
 
 	public static String[] getJREInfo() {
 		return new String[] {
-		"Java Platform Information",
-			"Java Runtime  Name: " + System.getProperty("java.runtime.name"),
+			"Java Platform Information",
+			"Java Runtime Name: " + System.getProperty("java.runtime.name"),
 			"Java Version: " + System.getProperty("java.version"),
 			"Java Class Version: " + System.getProperty("java.class.version"),
+			"JRE Path (java.home): " + System.getProperty("java.home"),
+			"JDK Path (JAVA_HOME): " + System.getenv("JAVA_HOME"),
 			SPACER
 		};
 	}
 
 	public static String[] getJVMInfo() {
 		return new String[] {
-		"Virtual Machine Information (JVM)",
+			"Virtual Machine Information (JVM)",
 			"JVM Name: " + System.getProperty("java.vm.name"),
-			"JVM installation directory: " + System.getProperty("java.home"),
 			"JVM version: " + System.getProperty("java.vm.version"),
 			"JVM Vendor: " + System.getProperty("java.vm.vendor"),
 			"JVM Info: " + System.getProperty("java.vm.info"),

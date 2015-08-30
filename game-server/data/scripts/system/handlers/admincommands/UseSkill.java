@@ -24,7 +24,7 @@ public class UseSkill extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length > 4 || params.length <= 0) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 		
@@ -100,7 +100,7 @@ public class UseSkill extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "Target: "+target.getName()+" used skillId:" + skillId+" on its target "+target.getTarget().getName());
 			}
 			else {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 		}
@@ -116,11 +116,11 @@ public class UseSkill extends AdminCommand {
 			skill.useNoAnimationSkill();
 		} 
 		else
-			onFail(admin, null);
+			info(admin, null);
 	}
 	
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, syntax + " \n" +
 				"or use //useskill help.");
 	}

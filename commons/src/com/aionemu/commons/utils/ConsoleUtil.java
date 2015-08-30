@@ -9,7 +9,7 @@ public class ConsoleUtil {
 
 	public static void printSection(String s) {
 		System.out.println();
-		System.out.print(StringUtils.center("[ " + s + " ]", 80, "="));
+		System.out.println(" " + StringUtils.center(" [ " + s + " ] ", 78, "="));
 	}
 
 	public static void printProgressBarHeader(int size) {

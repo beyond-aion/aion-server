@@ -46,7 +46,7 @@ public class Weather extends AdminCommand {
 		}
 
 		if (params.length > 2) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -102,7 +102,7 @@ public class Weather extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //weather <regionName(poeta, ishalgen, etc ...)> <value(0->12)> OR //weather reset");
 	}
 

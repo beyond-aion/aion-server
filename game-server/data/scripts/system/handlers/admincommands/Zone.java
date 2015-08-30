@@ -56,7 +56,7 @@ public class Zone extends AdminCommand {
 			}
 		}
 		else if ("?".equalsIgnoreCase(params[0])) {
-			onFail(admin, null);
+			info(admin, null);
 		}
 		else if ("refresh".equalsIgnoreCase(params[0])) {
 			admin.revalidateZones();
@@ -74,7 +74,7 @@ public class Zone extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //zone refresh | inside");
 	}
 }

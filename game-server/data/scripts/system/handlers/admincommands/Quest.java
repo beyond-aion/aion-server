@@ -271,7 +271,7 @@ public class Quest extends AdminCommand {
 			target.getNpcFactions().sendDailyQuest();
 		}
 		else
-			onFail(admin, null);
+			info(admin, null);
 	}
 
 	private void ShowQuestInfo(Player player, Player admin, String param) {
@@ -299,7 +299,7 @@ public class Quest extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //quest <start|set|setflags|show|delete|daily>");
 	}
 

@@ -30,7 +30,7 @@ public class Teleport_to_named extends ConsoleCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if ((params.length < 0) || (params.length < 1)) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -64,7 +64,7 @@ public class Teleport_to_named extends ConsoleCommand {
 	}
 
 	@Override
-	public void onFail(Player admin, String message) {
+	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "syntax ///teleport_to_named <named name>");
 	}
 

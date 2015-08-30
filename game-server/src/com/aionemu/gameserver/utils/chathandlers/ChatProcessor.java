@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 
 import javolution.util.FastMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,6 @@ import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.GameServerError;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -29,7 +29,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class ChatProcessor implements GameEngine {
 
-	private static final Logger log = LoggerFactory.getLogger("ADMINAUDIT_LOG");
+	private static final Logger log = LoggerFactory.getLogger(ChatProcessor.class);
 	private static ChatProcessor instance = new ChatProcessor();
 	private Map<String, ChatCommand> commands = new FastMap<String, ChatCommand>();
 	private Map<String, Byte> accessLevel = new FastMap<String, Byte>();
@@ -107,12 +107,12 @@ public class ChatProcessor implements GameEngine {
 
 	public void registerCommand(ChatCommand cmd) {
 		if (commands.containsKey(cmd.getAlias())) {
-			log.warn("Command " + cmd.getAlias() + " is already registered. Fail");
+			log.warn("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
 			return;
 		}
 
 		if (!accessLevel.containsKey(cmd.getAlias())) {
-			log.warn("Command " + cmd.getAlias() + " do not have access level. Fail");
+			log.warn("Failed to register chat command: Missing access level for " + cmd.getAlias() + ".");
 			return;
 		}
 
@@ -161,37 +161,38 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public boolean handleChatCommand(Player player, String text) {
-		if (text.split(" ").length == 0)
+		if (text == null || text.isEmpty())
 			return false;
 
-		if (text.startsWith(AdminCommand.PREFIX)) {
-			ChatCommand cmd = getCommand(text.substring(AdminCommand.PREFIX.length()).split(" ")[0]);
+		if (!StringUtils.startsWithAny(text, AdminCommand.PREFIX, PlayerCommand.PREFIX))
+			return false;
 
-			if (cmd != null && cmd instanceof AdminCommand)
-				return cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
-		}
-		else if (text.startsWith(PlayerCommand.PREFIX)) {
-			ChatCommand cmd = getCommand(text.split(" ")[0].substring(PlayerCommand.PREFIX.length()));
-
-			if (cmd != null && (cmd instanceof PlayerCommand || (CustomConfig.ENABLE_ADMIN_DOT_COMMANDS && cmd instanceof AdminCommand)))
-				return cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
+		String cmdName = text.split(" ")[0];
+		String cmdParams = text.substring(cmdName.length()).trim();
+		String[] params = cmdParams.isEmpty() ? new String[] {} : cmdParams.split(" ");
+		for (ChatCommand cmd : getCommandList()) {
+			if (!(cmd instanceof ConsoleCommand) && cmdName.equals(cmd.getAliasWithPrefix()))
+				return cmd.process(player, params);
 		}
 
 		return false;
 	}
 
 	public void handleConsoleCommand(Player player, String text) {
-		if (text.split(" ").length == 0)
+		if (text == null || text.isEmpty())
 			return;
 
+		// split string to { "commandAlias", "sequence of arguments" }
+		String[] cmdItems = text.substring(ConsoleCommand.PREFIX.length()).split(" ", 2);
+		String cmdAlias = cmdItems[0];
+		String[] cmdParams = (cmdItems.length <= 1 ? new String[] {} : cmdItems[1].trim().split(" "));
 		// temporary fix because AdminCommand is already called addskill
-		text = text.replaceAll("addskill", "addcskill");
-		ChatCommand cmd = getCommand(text.substring(ConsoleCommand.PREFIX.length()).split(" ")[0]);
+		if (cmdAlias.equals("addskill"))
+			cmdAlias = "addcskill";
+		ChatCommand cmd = getCommand(cmdAlias);
 
 		if (cmd != null && cmd instanceof ConsoleCommand)
-			cmd.process(player, text.substring(cmd.getAliasWithPrefix().length()).trim());
-		else
-			log.warn("Command: " + text + ". Fail");
+			cmd.process(player, cmdParams);
 	}
 
 	private ChatCommand getCommand(String alias) {
@@ -207,7 +208,7 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public boolean isCommandAllowed(Player executor, ChatCommand command) {
-		return command != null && command.checkLevel(executor);
+		return command != null && command.validateAccess(executor);
 	}
 
 	public boolean isCommandExists(String alias) {

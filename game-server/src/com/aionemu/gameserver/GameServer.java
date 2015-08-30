@@ -396,11 +396,12 @@ public class GameServer {
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 
 		// init config
+		ConsoleUtil.printSection("Configuration");
 		Config.load();
 		// DateTime zone override from configs
 		DateTimeUtil.init();
 		// Second should be database factory
-		ConsoleUtil.printSection("DataBase");
+		ConsoleUtil.printSection("Database");
 		DatabaseFactory.init();
 		// Initialize DAOs
 		DAOManager.init();

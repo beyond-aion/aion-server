@@ -47,7 +47,7 @@ public class Announce extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //announce <anonymous|name> <message>");
 	}
 }

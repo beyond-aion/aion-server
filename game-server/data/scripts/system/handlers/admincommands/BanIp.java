@@ -29,7 +29,7 @@ public class BanIp extends AdminCommand {
 				time = Integer.parseInt(params[1]);
 			}
 			catch (NumberFormatException e) {
-				onFail(player, e.getMessage());
+				info(player, e.getMessage());
 				return;
 			}
 		}
@@ -41,7 +41,7 @@ public class BanIp extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //banip <mask> [time in minutes]");
 	}
 }

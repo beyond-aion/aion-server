@@ -17,7 +17,7 @@ public class UnBanMac extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params == null || params.length < 1) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -31,7 +31,7 @@ public class UnBanMac extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //unbanmac <mac>");
 	}
 }

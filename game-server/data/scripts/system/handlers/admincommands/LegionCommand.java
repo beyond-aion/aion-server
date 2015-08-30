@@ -243,7 +243,7 @@ public class LegionCommand extends AdminCommand {
 		 PacketSendUtility.sendMessage(player, "You have sucessfully promoted " + target.getName() + " to BG rank.");
 	  }
 		else if(params[0].equalsIgnoreCase("help")) {
-			this.onFail(player, null);
+			this.info(player, null);
 		}
 		else if(params[0].equalsIgnoreCase("setrank")) {
 			if(!verifyLenght(player, 3, params)) //legion setrank PLAYER RANK
@@ -296,13 +296,13 @@ public class LegionCommand extends AdminCommand {
 	private boolean verifyLenght(Player player, int size, String... cmd) {
 		boolean ok = cmd.length >= size;
 		if(!ok)
-			this.onFail(player, size+" parameters required for element //legion "+cmd[0]+".");
+			this.info(player, size+" parameters required for element //legion "+cmd[0]+".");
 		
 		return ok;
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		if(message != null)
 			PacketSendUtility.sendMessage(player, "FailReason: "+message);
 		

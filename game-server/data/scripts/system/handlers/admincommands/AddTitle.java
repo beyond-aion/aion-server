@@ -19,7 +19,7 @@ public class AddTitle extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if ((params.length < 1) || (params.length > 2)) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -67,7 +67,7 @@ public class AddTitle extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //addtitle title_id [playerName]");
 	}
 }

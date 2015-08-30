@@ -31,13 +31,13 @@ public class Auction extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
 		if ("remove".equals(params[0])) {
 			if (params.length < 2) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 			String param = params[1].toUpperCase();
@@ -76,7 +76,7 @@ public class Auction extends AdminCommand {
 			boolean noSale = false;
 			if (params.length == 3) {
 				if (!"nosale".equals(params[2])) {
-					onFail(admin, null);
+					info(admin, null);
 					return;
 				}
 				noSale = true;
@@ -92,7 +92,7 @@ public class Auction extends AdminCommand {
 		} else if ("add".equals(params[0])) {
 
 			if (params.length < 3 || params.length > 4) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 
@@ -166,7 +166,7 @@ public class Auction extends AdminCommand {
 			}
 		} else if ("addrandom".equals(params[0])) {
 			if (params.length < 4 || params.length > 5) {
-				onFail(admin, null);
+				info(admin, null);
 				return;
 			}
 			
@@ -268,13 +268,13 @@ public class Auction extends AdminCommand {
 			}
 
 		} else {
-			onFail(admin, null);
+			info(admin, null);
 		}
 
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax:\n"
 						+ " //auction add <zone_name> <house_type> [initial_bid]\n"
 						+ " //auction remove <HOUSE_id|zone_name> [nosale]\n"

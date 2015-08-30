@@ -129,7 +129,7 @@ public class Rename extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n"
 			+ "or use //rename [target] <rename>");
 	}

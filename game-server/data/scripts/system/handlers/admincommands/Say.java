@@ -20,7 +20,7 @@ public class Say extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			onFail(admin, null);
+			info(admin, null);
 			return;
 		}
 
@@ -50,7 +50,7 @@ public class Say extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //say <Text>");
 	}
 }

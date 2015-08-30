@@ -21,7 +21,7 @@ public class Megaphone extends AdminCommand {
 	public void execute(Player player, String... params) {
 
 		if (params.length < 1) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -41,7 +41,7 @@ public class Megaphone extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax: //megaphone <message>");
 	}
 }

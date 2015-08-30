@@ -68,7 +68,7 @@ public class Delete extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player admin, String message) {
+	public void info(Player admin, String message) {
 		// TODO Auto-generated method stub
 	}
 }

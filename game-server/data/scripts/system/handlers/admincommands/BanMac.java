@@ -18,7 +18,7 @@ public class BanMac extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params == null || params.length < 1) {
-			onFail(player, "Please add one or more parameters");
+			info(player, "Please add one or more parameters");
 			return;
 		}
 
@@ -34,7 +34,7 @@ public class BanMac extends AdminCommand {
                             time = 60 * 24 * 365 * 10;
 		}
 		catch (NumberFormatException e) {
-			onFail(player, "Please enter a valid integer amount of minutes");
+			info(player, "Please enter a valid integer amount of minutes");
                         return;
 		}
 
@@ -46,7 +46,7 @@ public class BanMac extends AdminCommand {
                     VisibleObject target = player.getTarget();
                     if (target != null && target instanceof Player) {
 			if (target.getObjectId() == player.getObjectId()) {
-				onFail(player, "Omg, disselect yourself please.");
+				info(player, "Omg, disselect yourself please.");
 				return;
 			}
 
@@ -56,7 +56,7 @@ public class BanMac extends AdminCommand {
                         targetpl.getClientConnection().closeNow();
                     }
                     else {
-                        onFail(player, "You should select a player or give me any mac address");
+                        info(player, "You should select a player or give me any mac address");
                         return;
                     }
                 }
@@ -66,7 +66,7 @@ public class BanMac extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
             if (!message.equals(""))
                 PacketSendUtility.sendMessage(player, message);
             PacketSendUtility.sendMessage(player, "Syntax: //banmac [time in minutes] <mac>");

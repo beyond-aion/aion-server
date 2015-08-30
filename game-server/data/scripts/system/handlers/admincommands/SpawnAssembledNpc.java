@@ -28,7 +28,7 @@ public class SpawnAssembledNpc  extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length != 1) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 		int spawnId = 0;
@@ -36,7 +36,7 @@ public class SpawnAssembledNpc  extends AdminCommand {
 			spawnId = Integer.parseInt(params[0]);
 		}
 		catch(Exception e) {
-			onFail(player, null);
+			info(player, null);
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class SpawnAssembledNpc  extends AdminCommand {
 	}
 
 	@Override
-	public void onFail(Player player, String message) {
+	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "syntax //spawnAssembledNpc <sapwnId>");
 	}
 }
