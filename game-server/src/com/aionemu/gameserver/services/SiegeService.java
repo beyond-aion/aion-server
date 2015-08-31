@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nullable;
 
@@ -34,7 +35,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.siege.GloryPointsRewards;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
@@ -80,8 +80,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
  * 
@@ -123,9 +121,8 @@ public class SiegeService {
 	 */
 	private SiegeSchedule siegeSchedule;
 	/**
-	 * Tiamaranta's eye infiltration route status cl - Western Tiamaranta's Eye Entrance (Center left) cr - Eastern
-	 * Tiamaranta's Eye Entrance (Center right) tl - Eye Abyss Gate Elyos (Top left) tr - Eye Abyss Gate Asmodians (Top
-	 * rigft)
+	 * Tiamaranta's eye infiltration route status cl - Western Tiamaranta's Eye Entrance (Center left) cr - Eastern Tiamaranta's Eye Entrance (Center
+	 * right) tl - Eye Abyss Gate Elyos (Top left) tr - Eye Abyss Gate Asmodians (Top rigft)
 	 */
 	private boolean cl, cr, tl, tr;
 	private FastMap<Integer, VisibleObject> tiamarantaPortals = new FastMap<Integer, VisibleObject>();
@@ -169,8 +166,7 @@ public class SiegeService {
 			sources = DataManager.SIEGE_LOCATION_DATA.getSource();
 			locations = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations();
 			DAOManager.getDAO(SiegeDAO.class).loadSiegeLocations(locations);
-		}
-		else {
+		} else {
 			artifacts = Collections.emptyMap();
 			fortresses = Collections.emptyMap();
 			outposts = Collections.emptyMap();
@@ -217,22 +213,22 @@ public class SiegeService {
 		// Schedule fortresses sieges protector spawn
 		for (final SiegeSchedule.Fortress f : siegeSchedule.getFortressesList()) {
 			for (String siegeTime : f.getSiegeTimes()) {
-			   String preperationCron = getPreperationCronString(siegeTime);
-			   if (preperationCron != null) {
-				CronService.getInstance().schedule(new SiegeStartRunnable(f.getId()), preperationCron);
-				log.debug("Scheduled siege of fortressID " + f.getId() + " based on cron expression: " + preperationCron);
-			   }
+				String preperationCron = getPreperationCronString(siegeTime);
+				if (preperationCron != null) {
+					CronService.getInstance().schedule(new SiegeStartRunnable(f.getId()), preperationCron);
+					log.debug("Scheduled siege of fortressID " + f.getId() + " based on cron expression: " + preperationCron);
+				}
 			}
 		}
 
 		// Schedule sources sieges preparation start
 		for (final SiegeSchedule.Source s : siegeSchedule.getSourcesList()) {
 			for (String siegeTime : s.getSiegeTimes()) {
-			   String preperationCron = getPreperationCronString(siegeTime);
-			   if (preperationCron != null) {
-				CronService.getInstance().schedule(new SiegeStartRunnable(s.getId()), preperationCron);
-				log.debug("Scheduled siege of sourceID " + s.getId() + " based on cron expression: " + preperationCron);
-			   }
+				String preperationCron = getPreperationCronString(siegeTime);
+				if (preperationCron != null) {
+					CronService.getInstance().schedule(new SiegeStartRunnable(s.getId()), preperationCron);
+					log.debug("Scheduled siege of sourceID " + s.getId() + " based on cron expression: " + preperationCron);
+				}
 			}
 		}
 
@@ -254,12 +250,10 @@ public class SiegeService {
 						// TODO: move to datapack
 						tiamarantaEyeBoss.put(bossId,
 							SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600040000, bossId, 759.0958f, 765.6816f, 1226.5004f, (byte) 0), 1));
-						tiamarantaEyeBoss
-							.put(283074, SpawnEngine.spawnObject(
-								SpawnEngine.addNewSingleTimeSpawn(600040000, 283074, 754.84625f, 819.98828f, 1223.957f, (byte) 0), 1));
-						tiamarantaEyeBoss
-							.put(283076, SpawnEngine.spawnObject(
-								SpawnEngine.addNewSingleTimeSpawn(600040000, 283076, 754.90234f, 712.99042f, 1223.957f, (byte) 0), 1));
+						tiamarantaEyeBoss.put(283074,
+							SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600040000, 283074, 754.84625f, 819.98828f, 1223.957f, (byte) 0), 1));
+						tiamarantaEyeBoss.put(283076,
+							SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(600040000, 283076, 754.90234f, 712.99042f, 1223.957f, (byte) 0), 1));
 					}
 					// Berserker is despawned after 1 hr
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -298,8 +292,8 @@ public class SiegeService {
 								SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 2464.9199f, 1689f, 2882.221f, (byte) 0), 1));
 							break;
 						case 2:
-							moltenusAbyssBoss.put(251045, SpawnEngine.spawnObject(
-								SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 2263.4812f, 2587.1633f, 2879.5447f, (byte) 0), 1));
+							moltenusAbyssBoss.put(251045,
+								SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 2263.4812f, 2587.1633f, 2879.5447f, (byte) 0), 1));
 							break;
 						case 3:
 							moltenusAbyssBoss.put(251045,
@@ -366,8 +360,7 @@ public class SiegeService {
 			if (artifact.isStandAlone()) {
 				log.debug("Starting siege of artifact #" + artifact.getLocationId());
 				startSiege(artifact.getLocationId());
-			}
-			else {
+			} else {
 				log.debug("Artifact #" + artifact.getLocationId() + " siege was not started, it belongs to fortress");
 			}
 		}
@@ -470,9 +463,9 @@ public class SiegeService {
 		// Reset Tiamaranta's eye infiltration route status
 		updateTiamarantaRiftsStatus(true, false);
 	}
-	
+
 	public void startPreparations(final int locationId) {
-		log.debug("Starting preparations of siege Location:"+locationId);
+		log.debug("Starting preparations of siege Location:" + locationId);
 		FortressLocation loc = this.getFortress(locationId);
 		// Set siege start timer..
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -484,10 +477,11 @@ public class SiegeService {
 			}
 
 		}, 300 * 1000);
-			if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount() && !loc.getRace().equals(SiegeRace.BALAUR)) {
-			   log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:"+locationId);
-			   this.resetSiegeLocation(loc);	
-			}
+		if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount()
+			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
+			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
+			this.resetSiegeLocation(loc);
+		}
 	}
 
 	public void startSiege(final int siegeLocationId) {
@@ -549,70 +543,70 @@ public class SiegeService {
 
 		siege.stopSiege();
 	}
-	
-	/*
-	* Return location to balaur control
-	*/
-	protected void resetSiegeLocation(SiegeLocation loc) {
-	  // Despawn old npc
-	  deSpawnNpcs(loc.getLocationId());
-	  loc.clearLocation(); //remove all players
-	  // Store old owner for msg
-	  final int oldOwnerRaceId = loc.getRace().getRaceId();
-	  final int legionId = loc.getLegionId();
-	  final String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getLegionName() : "";
-	  final DescriptionId nameId = new DescriptionId(loc.getTemplate().getNameId());
 
-	  // Reset owner
-	  loc.setRace(SiegeRace.BALAUR);
-	  loc.setLegionId(0);
-	  
-	  if (loc instanceof FortressLocation ) {
-		 for (int i = 1; i <= 4; i++) {
-			((FortressLocation) loc).despawnMercenaries(i);
-		 }
-		 ArtifactLocation artifact = getFortressArtifacts().get(loc.getLocationId());
-		 if (artifact != null) {
-			artifact.setRace(SiegeRace.BALAUR);
-			artifact.setLegionId(0);
-		 }
-	  }
-	  
-	   if (legionId != 0 && GloryPointsRewards.hasRewardForSiege(loc.getLocationId())) { //make sure holding GP are deducted on Capture
-		 int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(legionId);
-		 if (oldLegionGeneral != 0) {
-			GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
-			Legion legion = LegionService.getInstance().getLegion(legionId);
-			legion.decreaseSiegeGloryPoints(1000);
-			PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(oldLegionGeneral);
-			if (pcd != null) { // who knows? :D
-				for (Player p : World.getInstance().getAllPlayers())
-					PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(pcd.getName(), 1000));
+	/*
+	 * Return location to balaur control
+	 */
+	protected void resetSiegeLocation(SiegeLocation loc) {
+		// Despawn old npc
+		deSpawnNpcs(loc.getLocationId());
+		loc.clearLocation(); // remove all players
+		// Store old owner for msg
+		final int oldOwnerRaceId = loc.getRace().getRaceId();
+		final int legionId = loc.getLegionId();
+		final String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getLegionName() : "";
+		final DescriptionId nameId = new DescriptionId(loc.getTemplate().getNameId());
+
+		// Reset owner
+		loc.setRace(SiegeRace.BALAUR);
+		loc.setLegionId(0);
+
+		if (loc instanceof FortressLocation) {
+			for (int i = 1; i <= 4; i++) {
+				((FortressLocation) loc).despawnMercenaries(i);
+			}
+			ArtifactLocation artifact = getFortressArtifacts().get(loc.getLocationId());
+			if (artifact != null) {
+				artifact.setRace(SiegeRace.BALAUR);
+				artifact.setLegionId(0);
 			}
 		}
-	  }
-	  loc.setOccupiedCount(0);
 
-	  // On start preparations msg
-	  World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		if (legionId != 0 && loc.hasValidGpRewards()) { // make sure holding GP are deducted on Capture
+			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(legionId);
+			if (oldLegionGeneral != 0) {
+				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
+				Legion legion = LegionService.getInstance().getLegion(legionId);
+				legion.decreaseSiegeGloryPoints(1000);
+				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(oldLegionGeneral);
+				if (pcd != null) { // who knows? :D
+					for (Player p : World.getInstance().getAllPlayers())
+						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(pcd.getName(), 1000));
+				}
+			}
+		}
+		loc.setOccupiedCount(0);
 
-		 @Override
-		 public void visit(Player player) {
-			if (legionId != 0 && player.getRace().getRaceId() == oldOwnerRaceId)
-			   PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301037, legionName, nameId));
+		// On start preparations msg
+		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
 
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301039, loc.getRace().getDescriptionId(), nameId));
+			@Override
+			public void visit(Player player) {
+				if (legionId != 0 && player.getRace().getRaceId() == oldOwnerRaceId)
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301037, legionName, nameId));
 
-			PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO(loc));
-		 }
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301039, loc.getRace().getDescriptionId(), nameId));
 
-	  });
+				PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO(loc));
+			}
 
-	  // Spawn new npc
-	  spawnNpcs(loc.getLocationId(), SiegeRace.BALAUR, SiegeModType.PEACE);
+		});
 
-	  DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
-   }
+		// Spawn new npc
+		spawnNpcs(loc.getLocationId(), SiegeRace.BALAUR, SiegeModType.PEACE);
+
+		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+	}
 
 	/**
 	 * Updates next state for fortresses
@@ -849,8 +843,7 @@ public class SiegeService {
 						break;
 					}
 				}
-			}
-			else {
+			} else {
 				newFortressRace = outpost.getLocationRace();
 			}
 
@@ -858,8 +851,7 @@ public class SiegeService {
 				// In case of balaur fortress ownership
 				// oupost also belongs to balaur
 				newOutpostRace = SiegeRace.BALAUR;
-			}
-			else {
+			} else {
 				// if fortress owner is non-balaur
 				// then outpost owner is opposite to fortress owner
 				// Example: if fortresses are captured by Elyos, then outpost should be captured by Asmo
@@ -880,12 +872,11 @@ public class SiegeService {
 
 				// spawn NPC's or sieges
 				if (SiegeRace.BALAUR != outpost.getRace()) {
-					/*if (outpost.isSiegeAllowed()) {
-						startSiege(outpost.getLocationId());
-					}
-					else {*/
-						spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
-					//}
+					/*
+					 * if (outpost.isSiegeAllowed()) { startSiege(outpost.getLocationId()); } else {
+					 */
+					spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
+					// }
 				}
 			}
 		}
@@ -944,8 +935,7 @@ public class SiegeService {
 		for (VisibleObject portal : tiamarantaPortals.values()) {
 			if (portal != null) {
 				portal.getController().onDelete();
-			}
-			else {
+			} else {
 				for (Npc npc : World.getInstance().getNpcs()) {
 					if (npc.getNpcId() == 701286 || npc.getNpcId() == 701287 || npc.getNpcId() == 701288 || npc.getNpcId() == 701289) {
 						npc.getController().onDelete();
@@ -1143,8 +1133,7 @@ public class SiegeService {
 			PacketSendUtility.sendPacket(player, new SM_INFLUENCE_RATIO());
 			PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO());
 			PacketSendUtility.sendPacket(player, new SM_AFTER_SIEGE_LOCINFO_475());
-			PacketSendUtility.sendPacket(player, new SM_RIFT_ANNOUNCE(getOutpost(3111).isSilenteraAllowed(), getOutpost(2111)
-				.isSilenteraAllowed()));
+			PacketSendUtility.sendPacket(player, new SM_RIFT_ANNOUNCE(getOutpost(3111).isSilenteraAllowed(), getOutpost(2111).isSilenteraAllowed()));
 			PacketSendUtility.sendPacket(player, new SM_RIFT_ANNOUNCE(cl, cr, tl, tr));
 		}
 	}
@@ -1168,11 +1157,10 @@ public class SiegeService {
 
 	public void onWeatherChanged(WeatherEntry entry) {
 		/*
-		 * int siegeLocationId = 10000; Collection<SiegeNpc> siegeNpcs =
-		 * World.getInstance().getLocalSiegeNpcs(siegeLocationId); for (SiegeNpc npc : siegeNpcs) { Boolean condition =
-		 * npc.getObjectTemplate().getMistSpawnCondition(); if (condition == null) continue; if
-		 * (npc.isInsideWeatherZone(entry.getZoneId())) { if (entry.getCode() == 3 && condition || entry.getCode() == 2 &&
-		 * !condition) npc.getController().onDelete(); } }
+		 * int siegeLocationId = 10000; Collection<SiegeNpc> siegeNpcs = World.getInstance().getLocalSiegeNpcs(siegeLocationId); for (SiegeNpc npc :
+		 * siegeNpcs) { Boolean condition = npc.getObjectTemplate().getMistSpawnCondition(); if (condition == null) continue; if
+		 * (npc.isInsideWeatherZone(entry.getZoneId())) { if (entry.getCode() == 3 && condition || entry.getCode() == 2 && !condition)
+		 * npc.getController().onDelete(); } }
 		 */
 	}
 
@@ -1220,21 +1208,21 @@ public class SiegeService {
 			case 94:
 				return 3021; // Crimson Temple
 			case 235:
-            case 236:
-            case 237:
-            case 238:
-                return 5011; // Sillus Fortress
-            case 289:
-            case 290:
-            case 295:
-            case 296:
-                return 6011; // Silona Fortress
-            case 291:
-            case 292:
-            case 297:
-            case 298:
-                return 6021; // Pradeth Fortress
-			//TODO: Artifacts
+			case 236:
+			case 237:
+			case 238:
+				return 5011; // Sillus Fortress
+			case 289:
+			case 290:
+			case 295:
+			case 296:
+				return 6011; // Silona Fortress
+			case 291:
+			case 292:
+			case 297:
+			case 298:
+				return 6021; // Pradeth Fortress
+				// TODO: Artifacts
 		}
 		return 0;
 	}
@@ -1249,38 +1237,38 @@ public class SiegeService {
 		if (player != null && !rvrPlayersOnEvent.contains(player))
 			rvrPlayersOnEvent.add(player);
 	}
-	
+
 	/*
-	* modifies cron string to 5 minutes earlier to allow preperation methods
-	*/
+	 * modifies cron string to 5 minutes earlier to allow preperation methods
+	 */
 	private String getPreperationCronString(String siegeTime) {
-	   String prepCron = "";
-	   try {
-	   String[] crons = siegeTime.split(" ");
-	   byte minutes = Byte.parseByte(crons[1]);
-	   byte hours = Byte.parseByte(crons[2]);
-	   minutes -= 5;
-	   if (minutes < 0) {
-		  minutes += 60;
-		  hours -= 1;
-		  if (hours < 0) {
-			 log.error("Failed converting cron expression:"+siegeTime+"\npreperation over midnight not supported.");
-			 return siegeTime;
-		  }
-	   }
-	   crons[1] = String.valueOf(minutes);
-	   crons[2] = String.valueOf(hours);
-	   for (int i = 0; i < crons.length; i++) {
-		  prepCron += crons[i];
-		  prepCron += " ";
-	   }
-	   prepCron = prepCron.trim();
-	   
-	   }catch (NumberFormatException e) {
-		  log.error("Failed converting cron expression:"+siegeTime, e);
-		  return null;
-	   }
-	   return prepCron;
+		String prepCron = "";
+		try {
+			String[] crons = siegeTime.split(" ");
+			byte minutes = Byte.parseByte(crons[1]);
+			byte hours = Byte.parseByte(crons[2]);
+			minutes -= 5;
+			if (minutes < 0) {
+				minutes += 60;
+				hours -= 1;
+				if (hours < 0) {
+					log.error("Failed converting cron expression:" + siegeTime + "\npreperation over midnight not supported.");
+					return siegeTime;
+				}
+			}
+			crons[1] = String.valueOf(minutes);
+			crons[2] = String.valueOf(hours);
+			for (int i = 0; i < crons.length; i++) {
+				prepCron += crons[i];
+				prepCron += " ";
+			}
+			prepCron = prepCron.trim();
+
+		} catch (NumberFormatException e) {
+			log.error("Failed converting cron expression:" + siegeTime, e);
+			return null;
+		}
+		return prepCron;
 	}
 
 	// clear RVR event players list

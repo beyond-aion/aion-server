@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -165,6 +166,18 @@ public class SiegeLocation implements ZoneHandler {
 		if (player == null)
 			return canTeleport;
 		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
+	}
+	
+	/**
+	 * Validates Gp Rewards for location. Will return false, if some gp attributes are missing.
+	 * @return default true
+	 */
+	public boolean hasValidGpRewards() {
+		for (SiegeReward sr : template.getSiegeRewards()) {
+			if (sr.getGpForWin() == 0 || sr.getGpForDefeat() == 0)
+				return false;
+		}
+		return true;
 	}
 
 	/**

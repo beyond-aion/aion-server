@@ -13,11 +13,6 @@ public class SiegeConfig {
 	@Property(key = "gameserver.siege.enable", defaultValue = "true")
 	public static boolean SIEGE_ENABLED;
 	/**
-	 * Siege Reward Rate
-	 */
-	@Property(key = "gameserver.siege.medal.rate", defaultValue = "1")
-	public static int SIEGE_MEDAL_RATE;
-	/**
 	 * Siege sield Enabled
 	 */
 	@Property(key = "gameserver.siege.shield.enable", defaultValue = "true")

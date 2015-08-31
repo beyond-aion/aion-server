@@ -54,6 +54,8 @@
 		<xs:attribute name="top" type="xs:int" use="required"/>
 		<xs:attribute name="itemid" type="xs:int" use="required"/>
 		<xs:attribute name="m_count" type="xs:int" use="required"/>
+		<xs:attribute name="gp_win" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="gp_defeat" type="xs:int" use="optional" default="0"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeLegionReward">
 		<xs:attribute name="itemid" type="xs:int" use="required"/>
