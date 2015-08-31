@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -50,12 +49,12 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 		final Player player = getConnection().getActivePlayer();
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CHATMESSAGES) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CHATMESSAGES) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		if (ChatProcessor.getInstance().handleChatCommand(player, message))
 			return;
 
@@ -90,36 +89,27 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 					break;
 				case LEAGUE:
 				case LEAGUE_ALERT:
-					if (!player.isInLeague()) {
+					if (!player.isInLeague())
 						return;
-					}
 					broadcastToLeagueMembers(player);
 					break;
 				case NORMAL:
 				case SHOUT:
 					if (player.isGM()) {
-						broadcastFromGm(player);
-					}
-					else {
-						if (CustomConfig.SPEAKING_BETWEEN_FACTIONS) {
-							broadcastToNonBlockedPlayers(player);
-						}
-						else {
-							broadcastToNonBlockedRacePlayers(player);
-						}
+						broadcastToAllPlayers(player);
+					} else {
+						broadcastToNonBlockedPlayers(player);
 					}
 					break;
 				case COMMAND:
-					if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER) {
+					if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER)
 						broadcastFromCommander(player);
-					}
 					break;
 				default:
 					if (player.isGM()) {
-						broadcastFromGm(player);
-					}
-					else {
-						AuditLogger.info(player, String.format("Send message type %s. Message: %s", type, message));
+						broadcastToAllPlayers(player);
+					} else {
+						AuditLogger.info(player, String.format("Player %s sent message type %s. Message: %s", player.getName(), type, message));
 					}
 					break;
 			}
@@ -129,6 +119,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	private void broadcastFromCommander(final Player player) {
 		final int senderRace = player.getRace().getRaceId();
 		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
+
 			@Override
 			public boolean acceptObject(Player object) {
 				return (senderRace == object.getRace().getRaceId() || object.isGM());
@@ -136,12 +127,13 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 		});
 	}
+
 	/**
 	 * Sends message to all players from admin
 	 *
 	 * @param player
 	 */
-	private void broadcastFromGm(final Player player) {
+	private void broadcastToAllPlayers(final Player player) {
 		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true);
 	}
 
@@ -162,33 +154,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	}
 
 	/**
-	 * Sends message to races members (other race will receive an unknown message)
-	 *
-	 * @param player
-	 */
-	private void broadcastToNonBlockedRacePlayers(final Player player) {
-		final int senderRace = player.getRace().getRaceId();
-		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
-
-			@Override
-			public boolean acceptObject(Player object) {
-				return ((senderRace == object.getRace().getRaceId() && !object.getBlockList().contains(player.getObjectId())) || object.isGM());
-			}
-
-		});
-		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, "Unknow Message", type), false, new ObjectFilter<Player>() {
-
-			@Override
-			public boolean acceptObject(Player object) {
-				return senderRace != object.getRace().getRaceId() && !object.getBlockList().contains(player.getObjectId()) && !object.isGM();
-			}
-
-		});
-	}
-
-	/**
-	 * Sends message to all group members (regular player group, or alliance
-	 * sub-group Error 105, random value for players to report. Should never
+	 * Sends message to all group members (regular player group, or alliance sub-group Error 105, random value for players to report. Should never
 	 * happen.
 	 *
 	 * @param player
@@ -196,8 +162,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	private void broadcastToGroupMembers(final Player player) {
 		if (player.isInTeam()) {
 			player.getCurrentGroup().sendPacket(new SM_MESSAGE(player, message, type));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "You are not in an alliance or group. (Error 105)");
 		}
 	}
