@@ -19,6 +19,7 @@ public enum StorageType {
 	PET_BAG_30(40, 30, 6),
 	CASH_PET_BAG_26(41, 26, 6),
 	CASH_PET_BAG_32(42, 32, 6),
+	CASH_PET_BAG_34(43, 34, 6),
 	HOUSE_STORAGE_01(60, 9, 9),
 	HOUSE_STORAGE_02(61, 9, 9),
 	HOUSE_STORAGE_03(62, 9, 9),
@@ -39,7 +40,7 @@ public enum StorageType {
 	MAILBOX(127);
 
 	public static final int PET_BAG_MIN = 32;
-	public static final int PET_BAG_MAX = 42;
+	public static final int PET_BAG_MAX = 43;
 	public static final int HOUSE_WH_MIN = 60;
 	public static final int HOUSE_WH_MAX = 79; // Custom cabinets ?? // since 3.0 to 4.0
 

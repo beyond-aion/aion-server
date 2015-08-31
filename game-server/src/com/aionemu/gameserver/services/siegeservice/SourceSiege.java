@@ -16,7 +16,6 @@ import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SourceLocation;
@@ -25,8 +24,6 @@ import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
@@ -164,11 +161,11 @@ public class SourceSiege extends Siege<SourceLocation> {
 				++rewardedPC;
 				if (LoggingConfig.LOG_SIEGE) {
 					log.info("[SIEGE]  > [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Player Reward to: " +  playerNames.get(playerId) + "] ITEM RETURN "
-						+ topGrade.getItemId() + " ITEM COUNT " + topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE);
+						+ topGrade.getItemId() + " ITEM COUNT " + topGrade.getMedalCount());
 				}
 				MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level
 									, SiegeResult.OCCUPY, System.currentTimeMillis(), topGrade.getItemId()
-									,	topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE, 0);
+									,	topGrade.getMedalCount(), 0);
 				
 			}
 		}
