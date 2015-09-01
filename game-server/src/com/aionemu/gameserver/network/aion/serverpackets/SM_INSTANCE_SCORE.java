@@ -35,7 +35,6 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(mapId);
