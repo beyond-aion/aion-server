@@ -205,6 +205,7 @@ public class Wish extends ConsoleCommand {
 			this.itemId = itemId;
 		}
 
+		@SuppressWarnings("unused")
 		void afterUnmarshal(Unmarshaller u, Object parent) {
 			setItemId(Integer.parseInt(id));
 		}
@@ -220,7 +221,7 @@ public class Wish extends ConsoleCommand {
 
 		public ItemTemplate getItemTemplate(String item) {
 
-			for (ItemTemplate it : its) {
+			for (ItemTemplate it : getData()) {
 				if(it.getName().equals(item))
 					return it;
 			}
@@ -267,6 +268,7 @@ public class Wish extends ConsoleCommand {
 			this.npcId = npcId;
 		}
 
+		@SuppressWarnings("unused")
 		void afterUnmarshal(Unmarshaller u, Object parent) {
 			setNpcId(Integer.parseInt(id));
 		}
@@ -282,7 +284,7 @@ public class Wish extends ConsoleCommand {
 
 		public NpcTemplate getNpcTemplate(String npc) {
 
-			for (NpcTemplate it : its) {
+			for (NpcTemplate it : getData()) {
 				if(it.getName().toLowerCase().equals(npc.toLowerCase()))
 					return it;
 			}

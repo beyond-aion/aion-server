@@ -120,6 +120,7 @@ public class Combineskill extends ConsoleCommand {
 			this.skillId = skillId;
 		}
 
+		@SuppressWarnings("unused")
 		void afterUnmarshal(Unmarshaller u, Object parent) {
 			setSkillId(Integer.parseInt(id));
 		}
@@ -135,7 +136,7 @@ public class Combineskill extends ConsoleCommand {
 
 		public SkillTemplate getSkillTemplate(String skill) {
 
-			for (SkillTemplate it : its) {
+			for (SkillTemplate it : getData()) {
 				if(it.getName().toLowerCase().equals(skill.toLowerCase()))
 					return it;
 			}

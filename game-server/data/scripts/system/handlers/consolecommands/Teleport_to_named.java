@@ -100,6 +100,7 @@ public class Teleport_to_named extends ConsoleCommand {
 			this.npcId = npcId;
 		}
 
+		@SuppressWarnings("unused")
 		void afterUnmarshal(Unmarshaller u, Object parent) {
 			setNpcId(Integer.parseInt(id));
 		}
@@ -115,7 +116,7 @@ public class Teleport_to_named extends ConsoleCommand {
 
 		public NpcTemplate getNpcTemplate(String npc) {
 
-			for (NpcTemplate it : its) {
+			for (NpcTemplate it : getData()) {
 				if(it.getName().toLowerCase().equals(npc.toLowerCase()))
 					return it;
 			}
