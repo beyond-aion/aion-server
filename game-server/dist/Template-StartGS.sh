@@ -14,7 +14,7 @@ run_gs() {
     echo "Exiting script: GameServer is already running."
     exit 2
   fi
-  java -Xms128m -Xmx1536m -ea -javaagent:./libs/{javaagentlib} -cp ./libs/*:AL-Game.jar com.aionemu.gameserver.GameServer > /dev/null 2>&1 &
+  java -Xms128m -Xmx1536m -server -ea -javaagent:./libs/{javaagentlib} -cp ./libs/*:AL-Game.jar com.aionemu.gameserver.GameServer > /dev/null 2>&1 &
   gspid=$!
   echo ${gspid} > gameserver.pid
   echo "GameServer is starting now."

@@ -1,7 +1,6 @@
 package quest.tiamaranta;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**

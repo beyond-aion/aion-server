@@ -13,7 +13,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_BROKER_SELL_WINDOW extends AionClientPacket {
 
-	@SuppressWarnings("unused")
 	private int itemUniqueId;
 
 	public CM_BROKER_SELL_WINDOW(int opcode, State state, State... restStates) {

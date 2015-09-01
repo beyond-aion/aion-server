@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.templates.item.purification.ItemPurification
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 import com.aionemu.gameserver.model.templates.item.purification.SubMaterialItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;

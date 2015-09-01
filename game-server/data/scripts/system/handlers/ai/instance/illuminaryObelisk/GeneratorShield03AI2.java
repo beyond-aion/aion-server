@@ -5,11 +5,9 @@
 package ai.instance.illuminaryObelisk;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import ai.ActionItemNpcAI2;
 import ai.GeneralNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;

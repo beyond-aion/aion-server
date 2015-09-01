@@ -28,7 +28,7 @@ public class InvasionZoneInstance extends ZoneInstance {
 	}
 
 	@Override
-	public boolean onEnter(Creature creature) {
+	public synchronized boolean onEnter(Creature creature) {
 		if (super.onEnter(creature)) {
 			if (creature instanceof Player) {
 				players.put(creature.getObjectId(), (Player) creature);

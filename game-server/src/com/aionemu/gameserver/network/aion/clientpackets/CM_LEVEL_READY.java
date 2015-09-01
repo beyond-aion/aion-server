@@ -17,16 +17,18 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OBJECTS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_COUNT_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM_ANNOUNCE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.services.*;
+import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.SerialKillerService;
+import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.TownService;
+import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.spawnengine.InstanceRiftSpawnManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * Client is saying that level[map] is ready.
@@ -120,13 +122,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		QuestEngine.getInstance().onEnterWorld(new QuestEnv(null, activePlayer, 0, 0));
 
 		activePlayer.getController().onEnterWorld();
-
-		// zone channel message (is this must be here?)
-		if (!WorldMapType.getWorld(activePlayer.getWorldId()).isPersonal())
-			sendPacket(new SM_SYSTEM_MESSAGE(1390122, activePlayer.getPosition().getInstanceId()));
-
-
-
 		activePlayer.getEffectController().updatePlayerEffectIcons(null);
 		sendPacket(SM_CUBE_UPDATE.cubeSize(StorageType.CUBE, activePlayer));
 

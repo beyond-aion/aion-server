@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.TreeSet;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -28,7 +26,6 @@ import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.skillengine.model.Motion;
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;

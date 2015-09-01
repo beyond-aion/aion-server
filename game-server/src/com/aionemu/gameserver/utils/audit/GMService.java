@@ -9,6 +9,10 @@ import javolution.util.FastMap;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -34,8 +38,7 @@ public class GMService {
 				for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
 					if (!level.equals("0"))
 						announceList.add(Byte.parseByte(level));
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 			}
 		}
 	}
@@ -48,6 +51,40 @@ public class GMService {
 		if (player.isGM()) {
 			gms.put(player.getObjectId(), player);
 			broadcastGMConnectionMessage(player, "login", "%s logged in.");
+
+			String delimiter = "=============================";
+			StringBuilder sb = new StringBuilder(delimiter);
+			if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
+				player.setInvul(true);
+				sb.append("\n>> Connection in Invulnerable mode <<");
+			}
+			if (AdminConfig.INVISIBLE_GM_CONNECTION) {
+				player.getEffectController().setAbnormal(AbnormalState.HIDE.getId());
+				player.setVisualState(CreatureVisualState.HIDE20);
+				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
+				sb.append("\n>> Connection in Invisible mode <<");
+			}
+			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")) {
+				player.setAdminNeutral(3);
+				player.setAdminEnmity(0);
+				sb.append("\n>> Connection in Neutral mode <<");
+			}
+			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy")) {
+				player.setAdminNeutral(0);
+				player.setAdminEnmity(3);
+				sb.append("\n>> Connection in Enemy mode <<");
+			}
+			if (AdminConfig.VISION_GM_CONNECTION) {
+				player.setSeeState(CreatureSeeState.SEARCH10);
+				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
+				sb.append("\n>> Connection in Vision mode <<");
+			}
+			if (AdminConfig.WHISPER_GM_CONNECTION) {
+				player.setUnWispable();
+				sb.append("\n>> Accepting Whisper: OFF <<");
+			}
+			if (sb.length() > delimiter.length())
+				PacketSendUtility.sendMessage(player, sb.append("\n" + delimiter).toString());
 		}
 	}
 
