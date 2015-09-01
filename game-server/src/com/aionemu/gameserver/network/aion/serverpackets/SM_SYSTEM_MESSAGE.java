@@ -14675,8 +14675,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have entered zone channel %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPORT_ZONECHANNEL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1390122, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPORT_ZONECHANNEL(int num1) {
+		return new SM_SYSTEM_MESSAGE(1390122, num1);
 	}
 
 	/**
