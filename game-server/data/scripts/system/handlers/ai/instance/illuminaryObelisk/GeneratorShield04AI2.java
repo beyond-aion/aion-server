@@ -1,12 +1,7 @@
-/*
- * Generatos Shield
- * The Illuminary Obelisk
- */
 package ai.instance.illuminaryObelisk;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import ai.GeneralNpcAI2;
 
@@ -28,7 +23,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author M.O.G. Dision
  */
@@ -38,12 +32,10 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 	protected boolean isInstanceDestroyed = false;
 	private boolean isCancelled;
 	private List<Npc> npcs = new ArrayList<Npc>();
-	private Future<?> cancelSpawnTask;
 	private int fazeTask = 0;
 	private Npc gate;
-  private int attackCount;
+	private int attackCount;
 
-	
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -54,51 +46,45 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 		}
 	}
 
-	
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id()));
 	}
-	
+
 	protected void handleUseItemFinish(Player player) {
 		if (getOwner() == null || getOwner().getLifeStats().isAlreadyDead())
 			return;
 		if (player.getInventory().getItemCountByItemId(164000289) == 0) {
 			NpcShoutsService.getInstance().sendMsg(getOwner(), 1402211);
 			return;
-		}
-		else {
+		} else {
 			if (fazeTask == 0) {
 				player.getInventory().decreaseByItemId(164000289, 1);
 				MsgGeneratorFaze();
 				spawn(702224, 212.64922f, 254.5639f, 295.94763f, (byte) 60);
 				fazeTask++;
-			}	
-			else if (fazeTask == 1) {
+			} else if (fazeTask == 1) {
 				player.getInventory().decreaseByItemId(164000289, 1);
 				MsgGeneratorFaze();
 				phaseAttack();
 				spawn(702225, 212.64922f, 254.5639f, 295.94763f, (byte) 60);
 				fazeTask++;
-			}
-			else if (fazeTask == 2) {
+			} else if (fazeTask == 2) {
 				player.getInventory().decreaseByItemId(164000289, 1);
 				MsgGeneratorFazefinal();
 				phaseAttack();
 				spawn(702226, 212.64922f, 254.5639f, 295.94763f, (byte) 60);
 				fazeTask++;
-			}
-			else if (fazeTask == 3) {
+			} else if (fazeTask == 3) {
 				MsgGeneratorFazeEnd();
 			}
 		}
 	}
-	
-	
-	protected void handleUseItemStart(final Player player) {
-		final int delay = 15000;
-		if (delay > 1) {
+
+	protected void handleUseItemStart(final Player player, int usageTime) {
+		if (usageTime >= 1000) {
 			final ItemUseObserver observer = new ItemUseObserver() {
+
 				@Override
 				public void abort() {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
@@ -110,20 +96,20 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 			};
 
 			player.getObserveController().attach(observer);
-			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
+			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), usageTime, 1));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 2));
+					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), usageTime, 2));
 					player.getObserveController().removeObserver(observer);
 					handleUseItemFinish(player);
 				}
 
-			}, delay));
-		}
-		else {
+			}, usageTime));
+		} else {
 			handleUseItemFinish(player);
 		}
 	}
@@ -133,7 +119,7 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 		if (dialogId == 10000) {
 			if (fazeTask == 0) {
 				if (gate == null) {
-					gate = (Npc)spawn(702015, 169.55626f, 254.52907f, 293.04276f, (byte) 0, 17);
+					gate = (Npc) spawn(702015, 169.55626f, 254.52907f, 293.04276f, (byte) 0, 17);
 					GateOpen();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -144,12 +130,11 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 					}, 5000);
 				}
 			}
-			handleUseItemStart(player);
+			handleUseItemStart(player, 15000);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		return false;
 	}
-
 
 	private void phaseAttack() {
 
@@ -184,9 +169,9 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 		}, 20000);
 	}
 
-	private void GenertorAttack() {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402223);
-	}
+//	private void GenertorAttack() {
+//		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402223);
+//	}
 
 	private void GateOpen() {
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402227);
@@ -204,13 +189,13 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402203);
 	}
 
-	private void MsgGeneratorNoIdium() {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402211);
-	}
+//	private void MsgGeneratorNoIdium() {
+//		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402211);
+//	}
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkerId,
 		final boolean isRun) {
-		cancelSpawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
@@ -221,8 +206,7 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
 					if (isRun) {
 						npc.setState(1);
-					}
-					else {
+					} else {
 						npc.setState(CreatureState.WALKING);
 					}
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
@@ -230,7 +214,7 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 			}
 		}, time);
 	}
-	
+
 	protected List<Npc> getNpcs(int npcId) {
 		if (!isInstanceDestroyed) {
 			return getNpcs(npcId);
@@ -245,14 +229,12 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 			}
 		}
 	}
-	
-	
+
 	@Override
 	public boolean canThink() {
 		return false;
 	}
-	
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -262,9 +244,7 @@ public class GeneratorShield04AI2 extends GeneralNpcAI2 {
 		Npc Fase03 = getPosition().getWorldMapInstance().getNpc(702226);
 		if (gate != null)
 			gate.getController().onDelete();
-		for (Npc npc : npcs) {
-			npc.getController().onDelete();
-		}
+		deleteNpcs(npcs);
 		if (Fase01 != null)
 			Fase01.getController().onDelete();
 		if (Fase02 != null)
