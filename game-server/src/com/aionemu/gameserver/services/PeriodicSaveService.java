@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Iterator;
 import java.util.concurrent.Future;
 
 import javolution.util.FastList;
@@ -33,8 +32,7 @@ public class PeriodicSaveService {
 
 		int DELAY_LEGION_ITEM = PeriodicSaveConfig.LEGION_ITEMS * 1000;
 
-		legionWhUpdateTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new LegionWhUpdateTask(),
-			DELAY_LEGION_ITEM, DELAY_LEGION_ITEM);
+		legionWhUpdateTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new LegionWhUpdateTask(), DELAY_LEGION_ITEM, DELAY_LEGION_ITEM);
 	}
 
 	private class LegionWhUpdateTask implements Runnable {
@@ -43,24 +41,16 @@ public class PeriodicSaveService {
 		public void run() {
 			log.info("Legion WH update task started.");
 			long startTime = System.currentTimeMillis();
-			Iterator<Legion> legionsIterator = LegionService.getInstance().getCachedLegionIterator();
 			int legionWhUpdated = 0;
-			while (legionsIterator.hasNext()) {
-				Legion legion = legionsIterator.next();
+			for (Legion legion : LegionService.getInstance().getCachedLegions()) {
 				FastList<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 				allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 				try {
-					/**
-					 * 1. save items first
-					 */
+					// 1. save items first
 					DAOManager.getDAO(InventoryDAO.class).store(allItems, null, null, legion.getLegionId());
-
-					/**
-					 * 2. save item stones
-					 */
+					// 2. save item stones
 					DAOManager.getDAO(ItemStoneListDAO.class).save(allItems);
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					log.error("Exception during periodic saving of legion WH", ex);
 				}
 

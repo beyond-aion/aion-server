@@ -82,6 +82,7 @@ import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
+import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.periodic.PeriodicInstanceManager;
@@ -216,6 +217,7 @@ public class GameServer {
 
 		BannedMacManager.getInstance();
 
+		ConsoleUtil.printSection("Handlers");
 		for (int i = 0; i < parallelEngines.length; i++) {
 			final int index = i;
 			ThreadPoolManager.getInstance().execute(new Runnable() {
@@ -296,6 +298,7 @@ public class GameServer {
 			CuringZoneService.getInstance();
 		RoadService.getInstance();
 		HTMLCache.getInstance();
+		AbyssRankingCache.getInstance();
 		AbyssRankUpdateService.getInstance().scheduleUpdate();
 		TaskFromDBManager.getInstance();
 		ConsoleUtil.printSection("Periodic Instances");
