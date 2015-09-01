@@ -332,7 +332,7 @@ public final class PlayerEnterWorldService {
 						pcd.addReposteEnergy(addResposeEnergy > maxRespose ? maxRespose : addResposeEnergy);
 					}
 				}
-				if (((System.currentTimeMillis() / 1000) - lastOnline) > 300)
+				if (secondsOffline > 5 * 60)
 					player.getCommonData().setDp(0);
 			}
 			InstanceService.onPlayerLogin(player);
