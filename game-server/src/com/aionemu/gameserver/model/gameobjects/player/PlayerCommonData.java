@@ -532,7 +532,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			return;
 
 		int maxDp = (getPlayer() == null) ? -1 : getPlayer().getGameStats().getMaxDp().getCurrent();
-		this.dp = (maxDp >= 0 && maxDp > dp) ? maxDp : dp;
+		this.dp = (maxDp >= 0 && dp > maxDp) ? maxDp : dp;
 
 		if (getPlayer() != null) {
 			PacketSendUtility.broadcastPacket(getPlayer(), new SM_DP_INFO(playerObjId, this.dp), true);
