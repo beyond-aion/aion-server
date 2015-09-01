@@ -910,6 +910,17 @@
 			<gd_item id="152012001" name="Ectoplasm Fragment"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="320100000" name="Fire_Temple"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212808" name="Temple Caryatid"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012509" name="Desert Caryatid Fragment"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Scales -->
 	<gd_rule rule_name="Wriggot Scale" base_chance="4" >
 		<gd_maps>
@@ -920,6 +931,19 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152012002" name="Wriggot Scale"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Stones -->
+	<gd_rule rule_name="Stone of Silence" base_chance="100" >
+		<gd_maps>
+			<gd_map map_id="320100000" name="Fire_Temple"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
+			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012530" name="Stone of Silence"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>
