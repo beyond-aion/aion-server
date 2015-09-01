@@ -44,8 +44,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.Emotion;
 import com.aionemu.gameserver.model.gameobjects.player.motion.Motion;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -69,7 +67,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRICES;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
@@ -113,7 +110,6 @@ import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -302,7 +298,7 @@ public final class PlayerEnterWorldService {
 				if (pcd.isReadyForSalvationPoints()) {
 					// 10 mins offline = 0 salvation points.
 					if (secondsOffline > 10 * 60) {
-						player.getCommonData().resetSalvationPoints();
+						pcd.resetSalvationPoints();
 					}
 				}
 				if (pcd.isReadyForReposteEnergy()) {
@@ -310,7 +306,7 @@ public final class PlayerEnterWorldService {
 					// more than 4 hours offline = start counting Reposte Energy addition.
 					if (secondsOffline > 4 * 3600) {
 						double hours = secondsOffline / 3600d;
-						long maxRespose = player.getCommonData().getMaxReposteEnergy();
+						long maxRespose = pcd.getMaxReposteEnergy();
 						if (hours > 24)
 							hours = 24;
 						// 24 hours offline = 100% Reposte Energy
@@ -333,7 +329,7 @@ public final class PlayerEnterWorldService {
 					}
 				}
 				if (secondsOffline > 5 * 60)
-					player.getCommonData().setDp(0);
+					pcd.setDp(0);
 			}
 			InstanceService.onPlayerLogin(player);
 			client.sendPacket(new SM_UNK_3_5_1());
@@ -437,45 +433,6 @@ public final class PlayerEnterWorldService {
 			player.setRates(Rates.getRatesFor(client.getAccount().getMembership()));
 			if (CustomConfig.PREMIUM_NOTIFY) {
 				showPremiumAccountInfo(client, account);
-			}
-
-			if (player.isGM()) {
-				if (AdminConfig.INVULNERABLE_GM_CONNECTION || AdminConfig.INVISIBLE_GM_CONNECTION
-						|| AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")
-						|| AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy") || AdminConfig.VISION_GM_CONNECTION
-						|| AdminConfig.WHISPER_GM_CONNECTION) {
-					PacketSendUtility.sendMessage(player, "=============================");
-					if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
-						player.setInvul(true);
-						PacketSendUtility.sendMessage(player, ">> Connection in Invulnerable mode <<");
-					}
-					if (AdminConfig.INVISIBLE_GM_CONNECTION) {
-						player.getEffectController().setAbnormal(AbnormalState.HIDE.getId());
-						player.setVisualState(CreatureVisualState.HIDE20);
-						PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
-						PacketSendUtility.sendMessage(player, ">> Connection in Invisible mode <<");
-					}
-					if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")) {
-						player.setAdminNeutral(3);
-						player.setAdminEnmity(0);
-						PacketSendUtility.sendMessage(player, ">> Connection in Neutral mode <<");
-					}
-					if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy")) {
-						player.setAdminNeutral(0);
-						player.setAdminEnmity(3);
-						PacketSendUtility.sendMessage(player, ">> Connection in Enemy mode <<");
-					}
-					if (AdminConfig.VISION_GM_CONNECTION) {
-						player.setSeeState(CreatureSeeState.SEARCH10);
-						PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
-						PacketSendUtility.sendMessage(player, ">> Connection in Vision mode <<");
-					}
-					if (AdminConfig.WHISPER_GM_CONNECTION) {
-						player.setUnWispable();
-						PacketSendUtility.sendMessage(player, ">> Accepting Whisper : OFF <<");
-					}
-					PacketSendUtility.sendMessage(player, "=============================");
-				}
 			}
 
 			// Alliance Packet after SetBindPoint
