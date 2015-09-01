@@ -14,7 +14,7 @@ run_cs() {
     echo "Exiting script: ChatServer is already running."
     exit 2
   fi
-  java -Xms128m -Xmx128m -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Chat.jar com.aionemu.chatserver.ChatServer > /dev/null 2>&1 &
+  java -Xms128m -Xmx128m -server -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Chat.jar com.aionemu.chatserver.ChatServer > /dev/null 2>&1 &
   cspid=$!
   echo ${cspid} > chatserver.pid
   echo "ChatServer is starting now."

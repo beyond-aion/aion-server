@@ -14,7 +14,7 @@ run_ls() {
     echo "Exiting script: LoginServer is already running."
     exit 2
   fi
-  java -Xms32m -Xmx32m -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Login.jar com.aionemu.loginserver.LoginServer > /dev/null 2>&1 &
+  java -Xms32m -Xmx32m -server -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Login.jar com.aionemu.loginserver.LoginServer > /dev/null 2>&1 &
   lspid=$!
   echo ${lspid} > loginserver.pid
   echo "LoginServer is starting now."
