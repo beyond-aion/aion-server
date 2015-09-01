@@ -17,7 +17,6 @@ import javolution.util.FastList;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instanceposition.ChaosInstancePosition;
 import com.aionemu.gameserver.model.instance.instanceposition.DisciplineInstancePosition;
 import com.aionemu.gameserver.model.instance.instanceposition.GenerealInstancePosition;
@@ -31,7 +30,6 @@ import com.aionemu.gameserver.network.aion.instanceinfo.DisciplineScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  *

@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.items.storage.Storage;
 //import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPurificationService;
 import com.aionemu.gameserver.services.item.ItemService;
 

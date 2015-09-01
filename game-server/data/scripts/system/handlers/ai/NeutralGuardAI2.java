@@ -1,6 +1,5 @@
 package ai;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.gameobjects.Creature;

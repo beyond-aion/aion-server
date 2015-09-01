@@ -45,7 +45,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
-import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_COMPLETED_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;

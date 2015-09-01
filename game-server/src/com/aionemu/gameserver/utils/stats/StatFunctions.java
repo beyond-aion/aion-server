@@ -28,7 +28,6 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Preconditions;
 
 /**

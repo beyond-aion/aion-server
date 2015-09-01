@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.team2.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 

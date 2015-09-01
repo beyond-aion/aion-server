@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.aionemu.gameserver.model.templates.npc.GroupDropType;
-
 //import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 
 /**

@@ -1,6 +1,5 @@
 package admincommands;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.CubeExpandService;
 import com.aionemu.gameserver.utils.PacketSendUtility;

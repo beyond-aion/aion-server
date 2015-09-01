@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.controllers.attack;
 
 import com.aionemu.gameserver.skillengine.model.HitType;
-import com.aionemu.gameserver.skillengine.model.ShieldType;
 
 /**
  * @author ATracer modified by Sippolo, kecimis
