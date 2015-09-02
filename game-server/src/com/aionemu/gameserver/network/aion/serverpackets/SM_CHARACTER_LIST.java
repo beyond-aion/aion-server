@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
  * In this packet Server is sending Character List to client.
  * 
  * @author Nemesiss, AEJTester
+ * @modified Neon
  */
 public class SM_CHARACTER_LIST extends PlayerInfo {
 
@@ -31,20 +32,18 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 		this.playOk2 = playOk2;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(playOk2);
-
 		Account account = con.getAccount();
-		writeC(account.size()); // characters count
 
+		writeD(playOk2);
+		writeC(account.size()); // character count
 		for (PlayerAccountData playerData : account.getSortedAccountsList()) {
 			PlayerCommonData pcd = playerData.getPlayerCommonData();
-			CharacterBanInfo cbi = playerData.getCharBanInfo();
 			Player player = PlayerService.getPlayer(pcd.getPlayerObjId(), account);
+			CharacterBanInfo cbi = playerData.getCharBanInfo();
+			boolean isBanned = (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000);
+
 			writePlayerInfo(playerData);
 			writeD(0);
 			writeD(0);
@@ -66,16 +65,10 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 			writeD(0);
 			writeD(0);
 			writeD(0);
-			if (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000) {
-				// client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
-				writeD((int) cbi.getStart()); // startPunishDate
-				writeD((int) cbi.getEnd()); // endPunishDate
-				writeS(cbi.getReason());
-			} else {
-				writeD(0);
-				writeD(0);
-				writeS("");
-			}
+			// client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
+			writeD(isBanned ? (int) cbi.getStart() : 0); // startPunishDate
+			writeD(isBanned ? (int) cbi.getEnd() : 0); // endPunishDate
+			writeS(isBanned ? cbi.getReason() : "");
 		}
 	}
 }
