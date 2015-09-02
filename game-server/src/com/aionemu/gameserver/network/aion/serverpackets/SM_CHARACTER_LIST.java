@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.model.account.Account;
@@ -38,7 +37,7 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(playOk2);
-		
+
 		Account account = con.getAccount();
 		writeC(account.size()); // characters count
 
@@ -47,35 +46,36 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 			CharacterBanInfo cbi = playerData.getCharBanInfo();
 			Player player = PlayerService.getPlayer(pcd.getPlayerObjId(), account);
 			writePlayerInfo(playerData);
-            writeH(0);
-            writeH(0);
 			writeD(0);
-			writeD(0);//4.5
-			writeD(0);//4.5
-			writeD(0);//4.5
-			writeD(0);//4.5
+			writeD(0);
+			writeD(0); // 4.5
+			writeD(0); // 4.5
+			writeD(0); // 4.5
+			writeD(0); // 4.5
 			writeB(new byte[68]);
 			writeD(playerData.getDeletionTimeInSeconds());
-            writeH(player.getPlayerSettings().getDisplay()); //display helmet 0 show, 5 dont show , possible bit operation
+			writeH(player.getPlayerSettings().getDisplay()); // display helmet 0 show, 5 dont show , possible bit operation
 			writeH(0);
-            writeD(0);
-            writeD(DAOManager.getDAO(MailDAO.class).haveUnread(pcd.getPlayerObjId()) ? 1 : 0); // mail
-			writeD(0); //unk
-			writeD(0); //unk
-            writeQ(BrokerService.getInstance().getCollectedMoney(pcd)); // collected money from broker
-            writeD(0);
-            if(cbi != null && cbi.getEnd() > System.currentTimeMillis()/1000){
-				//client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
-				writeD((int) cbi.getStart()); //startPunishDate
-				writeD((int) cbi.getEnd()); //endPunishDate
+			writeD(0);
+			writeD(DAOManager.getDAO(MailDAO.class).haveUnread(pcd.getPlayerObjId()) ? 1 : 0); // mail
+			writeD(0); // unk
+			writeD(0); // unk
+			writeQ(BrokerService.getInstance().getCollectedMoney(pcd)); // collected money from broker
+			writeD(0);
+			writeD(0);
+			writeD(0);
+			writeD(0);
+			writeD(0);
+			if (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000) {
+				// client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
+				writeD((int) cbi.getStart()); // startPunishDate
+				writeD((int) cbi.getEnd()); // endPunishDate
 				writeS(cbi.getReason());
-			}
-			else {
+			} else {
 				writeD(0);
 				writeD(0);
-				writeH(0);
+				writeS("");
 			}
-            writeB(new byte[16]);
 		}
 	}
 }
