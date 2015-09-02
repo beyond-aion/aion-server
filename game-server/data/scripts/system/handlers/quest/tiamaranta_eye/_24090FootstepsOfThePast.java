@@ -45,8 +45,6 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 		Npc npc = (Npc) env.getVisibleObject();
 		int var = qs.getQuestVarById(0);
 		DialogAction dialog = env.getDialog();
-		if (qs == null)
-			return false;
 		if (qs.getStatus() == QuestStatus.START) {			
 			switch (targetId) {
 				case 802059:// Protector Oriata  

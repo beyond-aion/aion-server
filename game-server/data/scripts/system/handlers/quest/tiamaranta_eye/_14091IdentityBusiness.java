@@ -35,14 +35,12 @@ public class _14091IdentityBusiness extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if(qs == null)
+		if (qs == null)
 			return false;
 		int targetId = env.getTargetId();
 		Npc npc = (Npc) env.getVisibleObject();
 		int var = qs.getQuestVarById(0);
 		DialogAction dialog = env.getDialog();
-		if (qs == null)
-			return false;
 		if (qs.getStatus() == QuestStatus.START) {			
 			switch (targetId) {
 				case 802178:// Oriata of the Past  
