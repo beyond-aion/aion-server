@@ -35,6 +35,7 @@ import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+// TODO simplify this by modifying the drop system classes
 /**
  * @author Oliver, modified AionCool, Bobobear
  */
@@ -155,6 +156,7 @@ public class DropInfo extends AdminCommand {
 							chance *= getRankModifier(currentNpc) * getRatingModifier(currentNpc);
 
 						float dropRate = player.getRates().getDropRate() * boostDropRate;
+						@SuppressWarnings("unused")
 						float percent = chance * dropRate > 100f ? 100 : chance * dropRate; 
 						
 						if (!DropConfig.DISABLE_DROP_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest)) && !noReductionMaps.contains(currentNpc.getWorldId())) {
@@ -259,6 +261,7 @@ public class DropInfo extends AdminCommand {
 					if (!rule.isFixedChance())
 						chance *= getRankModifier(currentNpc) * getRatingModifier(currentNpc);
 					float dropRate = player.getRates().getDropRate() * boostDropRate;
+					@SuppressWarnings("unused")
 					float percent = chance * dropRate > 100f ? 100 : chance * dropRate; 
 					
 					if (!DropConfig.DISABLE_DROP_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest)) && !noReductionMaps.contains(currentNpc.getWorldId())) {

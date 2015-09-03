@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -29,10 +26,8 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 	private int extendedRewardIndex;
 	private int lastPage;
 	private int questId;
-	private int unk;
-
 	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(CM_DIALOG_SELECT.class);
+	private int unk;
 
 	/**
 	 * Constructs new instance of <tt>CM_CM_REQUEST_DIALOG </tt> packet
@@ -68,7 +63,8 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 			return;
 
 		if (targetObjectId == 0 || targetObjectId == player.getObjectId()) {
-			if(questTemplate != null && !questTemplate.isCannotShare() && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id())) {
+			if (questTemplate != null && !questTemplate.isCannotShare()
+				&& (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id())) {
 				QuestService.startQuest(env);
 				return;
 			}

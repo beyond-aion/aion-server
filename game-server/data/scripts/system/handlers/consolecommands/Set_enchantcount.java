@@ -31,30 +31,30 @@ public class Set_enchantcount extends ConsoleCommand {
 			info(admin, null);
 			return;
 		}
-		
+
 		int objId;
 		int enchant;
+		@SuppressWarnings("unused")
 		int unk;
 
 		try {
 			objId = Integer.parseInt(params[0]);
 			enchant = Integer.parseInt(params[1]);
 			unk = Integer.parseInt(params[2]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Invalid params.");
 			return;
 		}
-		
+
 		Item item = admin.getInventory().getItemByObjId(objId);
 		if (item == null)
 			item = admin.getEquipment().getEquippedItemByObjId(objId);
-		
-		if(item != null){
+
+		if (item != null) {
 			int curEnchant = item.getEnchantLevel();
 			int maxEnchant = item.getItemTemplate().getMaxEnchantLevel();
 			maxEnchant += item.getItemTemplate().getMaxEnchantBonus();
-			
+
 			if (curEnchant + enchant <= maxEnchant) {
 				curEnchant += enchant;
 				item.setEnchantLevel(Math.min(curEnchant, maxEnchant));
@@ -66,7 +66,7 @@ public class Set_enchantcount extends ConsoleCommand {
 					item.getEnchantEffect().endEffect(admin);
 					item.setEnchantEffect(null);
 				}
-					
+
 				if (item.getEnchantLevel() > 0 && item.isEquipped()) {
 					HashMap<Integer, List<EnchantStat>> enc = DataManager.ENCHANT_DATA.getTemplates(item.getItemTemplate().getItemGroup());
 					if (enc != null) {
@@ -79,10 +79,10 @@ public class Set_enchantcount extends ConsoleCommand {
 					admin.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(item.getNameId()), enchant));
-			}else{
+			} else {
 				PacketSendUtility.sendMessage(admin, "Max Enchat for this item is: " + maxEnchant);
 			}
-		}else{
+		} else {
 			PacketSendUtility.sendMessage(admin, "Invalid item.");
 			return;
 		}

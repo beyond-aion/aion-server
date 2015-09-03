@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.items;
 
 import com.aionemu.commons.database.dao.DAOManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
 import java.util.Collections;
 
 /**
@@ -36,6 +38,7 @@ public class GodStone extends ItemStone {
 	private final int probability;
 	private final int probabilityLeft;
 	private final int breakProb;
+	@SuppressWarnings("unused")
 	private final int nonBreakCount;
 	private final ItemTemplate godItem;
 
@@ -85,7 +88,7 @@ public class GodStone extends ItemStone {
 						effect.initialize();			
 						effect.applyEffect();
 						effect = null;
-						//Illusion Godstones TODO: nonBreakCount, what does it do?
+						//Illusion Godstones TODO: implement nonBreakCount check and procc counter in DB
 						if (breakProb > 0 && Rnd.get(0,1000) < breakProb) {
 						   //TODO: Delay 10 Minutes, send messages etc
 						   //PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(), godItem.getNameId()));
