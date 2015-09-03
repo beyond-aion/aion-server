@@ -1,4 +1,4 @@
-package quest.daevation;
+package quest.daevanion;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -14,24 +14,24 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Rhys2002
  */
-public class _1989ASagesTeachings extends QuestHandler {
+public class _2989CeremonyOfTheWise extends QuestHandler {
 
-	private final static int questId = 1989;
+	private final static int questId = 2989;
 
-	public _1989ASagesTeachings() {
+	public _2989CeremonyOfTheWise() {
 		super(questId);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(203771).addOnQuestStart(questId);
-		qe.registerQuestNpc(203771).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203704).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203705).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203706).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203707).addOnTalkEvent(questId);
-		qe.registerQuestNpc(801214).addOnTalkEvent(questId);
-		qe.registerQuestNpc(801215).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204146).addOnQuestStart(questId);
+		qe.registerQuestNpc(204146).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204056).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204057).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204058).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204059).addOnTalkEvent(questId);
+		qe.registerQuestNpc(801222).addOnTalkEvent(questId);
+		qe.registerQuestNpc(801223).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203771) {
+			if (targetId == 204146) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
@@ -60,7 +60,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			PlayerClass playerClass = player.getCommonData().getPlayerClass();
 			switch (targetId) {
-				case 203704:// Boreas
+				case 204056:// Traufnir
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GLADIATOR || playerClass == PlayerClass.TEMPLAR)
@@ -73,7 +73,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 203705:// Jumentis
+				case 204057:// Sigyn
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.ASSASSIN || playerClass == PlayerClass.RANGER)
@@ -86,7 +86,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 203706:// Charna
+				case 204058:// Sif
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.SORCERER || playerClass == PlayerClass.SPIRIT_MASTER)
@@ -99,7 +99,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 203707:// Thrasymedes
+				case 204059:// Freyr
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.CLERIC || playerClass == PlayerClass.CHANTER)
@@ -112,33 +112,33 @@ public class _1989ASagesTeachings extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 801214:
+				case 801222:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GUNNER || playerClass == PlayerClass.RIDER)
-								return sendQuestDialog(env, 2548);
+								return sendQuestDialog(env, 2546);
 							else
-								return sendQuestDialog(env, 2568);
+								return sendQuestDialog(env, 2589);
 						case SETPRO1:
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 801215:
+				case 801223:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.BARD)
-								return sendQuestDialog(env, 2633);
+								return sendQuestDialog(env, 2631);
 							else
-								return sendQuestDialog(env, 2653);
+								return sendQuestDialog(env, 2674);
 						case SETPRO1:
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 203771:
+				case 204146:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -159,14 +159,14 @@ public class _1989ASagesTeachings extends QuestHandler {
 							}
 						case SELECT_QUEST_REWARD:
 							if (var == 3) {
-								playQuestMovie(env, 105);
+								playQuestMovie(env, 137);
 								player.getCommonData().setDp(0);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 5);
 							}
 							else if (var == 4) {
-								playQuestMovie(env, 105);
+								playQuestMovie(env, 137);
 								player.getCommonData().setDp(0);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
@@ -192,7 +192,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 			}
 		}
 		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203771)
+			if (targetId == 204146)
 				return sendQuestEndDialog(env);
 		}
 		return false;

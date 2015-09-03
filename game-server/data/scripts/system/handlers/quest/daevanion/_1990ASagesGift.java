@@ -1,4 +1,4 @@
-package quest.daevation;
+package quest.daevanion;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

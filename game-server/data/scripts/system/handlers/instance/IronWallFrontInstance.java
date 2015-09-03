@@ -1,4 +1,5 @@
 package instance;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -38,7 +39,6 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 /**
- *
  * @author Tibald
  */
 @InstanceID(301220000)
@@ -49,7 +49,6 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	private long instanceTime;
 	private Future<?> instanceTask;
 	private Future<?> timeCheckTask;
-	private byte timeInMin = -1;
 	private boolean isInstanceDestroyed = false;
 	private static List<WorldPosition> generalsPos = new ArrayList<>();
 	private static List<WorldPosition> garnonPos = new ArrayList<>();
@@ -83,8 +82,9 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			addPlayerToReward(player);
 		}
 		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), ironWallFrontReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()), ironWallFrontReward, getTime()));
-		//sendPacket();
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()),
+			ironWallFrontReward, getTime()));
+		// sendPacket();
 	}
 
 	protected void startInstanceTask() {
@@ -109,44 +109,6 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		}, 1320000);
 	}
 
-	private void startTimeCheck() {
-		int index = Rnd.get(0, garnonPos.size() - 1);
-		WorldPosition pos = garnonPos.get(index);
-		spawn(801903, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
-		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				timeInMin++;
-				switch (timeInMin) {
-					case 5:
-						int index = Rnd.get(0, garnonPos.size() - 1);
-						WorldPosition pos = garnonPos.get(index);
-						spawn(801903, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
-						break;
-					case 10:
-
-						break;
-					case 12:
-						break;
-					case 14:
-
-						break;
-					case 15:
-
-						break;
-					case 18:
-
-						break;
-					case 25:
-						if (timeCheckTask != null && !timeCheckTask.isDone()) {
-							timeCheckTask.cancel(true);
-						}
-						break;
-				}
-			}
-		}, 0, 60000);
-	}
-
 	public void stopInstance() {
 		if (instanceTask != null && !instanceTask.isDone()) {
 			instanceTask.cancel(true);
@@ -160,6 +122,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		ironWallFrontReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = ironWallFrontReward.getWinningRace();
 		instance.doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				IronWallFrontPlayerReward reward = ironWallFrontReward.getPlayerReward(player.getObjectId());
@@ -186,6 +149,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
@@ -226,7 +190,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
 		}
 		ironWallFrontReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward,
+			getTime()));
 		int diff = Math.abs(ironWallFrontReward.getAsmodiansPoint().intValue() - ironWallFrontReward.getElyosPoints().intValue());
 		if (diff >= 30000) {
 			stopInstance();
@@ -317,6 +282,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 
 	public void sendPacket(final AionServerPacket packet) {
 		instance.doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
@@ -351,8 +317,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), ironWallFrontReward, getTime()));
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
@@ -364,7 +330,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				updatePoints(killPoints, lastAttacker.getRace(), true, 0, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
 				ironWallFrontReward.getKillsByRace(lastAttacker.getRace()).increment();
-				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward, getTime()));
+				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
+					ironWallFrontReward, getTime()));
 			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400277, -100));

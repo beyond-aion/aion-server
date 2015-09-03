@@ -1,4 +1,4 @@
-package quest.daevation;
+package quest.daevanion;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -8,21 +8,20 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
+public class _80295DurableDaevanionWeapon extends QuestHandler {
 
-public class _80291DurableDaevanionWeapon extends QuestHandler {
+	private final static int questId = 80295;
 
-	private final static int questId = 80291;
-	
-	public _80291DurableDaevanionWeapon() {
+	public _80295DurableDaevanionWeapon() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
-		qe.registerQuestNpc(831384).addOnQuestStart(questId);
-		qe.registerQuestNpc(831384).addOnTalkEvent(questId);
+		qe.registerQuestNpc(831387).addOnQuestStart(questId);
+		qe.registerQuestNpc(831387).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
@@ -33,21 +32,19 @@ public class _80291DurableDaevanionWeapon extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 831384)
-			{
+			if (targetId == 831387) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					int plate = player.getEquipment().itemSetPartsEquipped(299);
-					int chain = player.getEquipment().itemSetPartsEquipped(298);
-					int leather = player.getEquipment().itemSetPartsEquipped(297);
-					int cloth = player.getEquipment().itemSetPartsEquipped(296);
-					int gunner = player.getEquipment().itemSetPartsEquipped(371);
+					int plate = player.getEquipment().itemSetPartsEquipped(303);
+					int chain = player.getEquipment().itemSetPartsEquipped(302);
+					int leather = player.getEquipment().itemSetPartsEquipped(301);
+					int cloth = player.getEquipment().itemSetPartsEquipped(300);
+					int gunner = player.getEquipment().itemSetPartsEquipped(372);
 
 					if (plate != 5 && chain != 5 && leather != 5 && cloth != 5 && gunner != 5)
 						return sendQuestDialog(env, 1003);
 					else
 						return sendQuestDialog(env, 4762);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -56,10 +53,9 @@ public class _80291DurableDaevanionWeapon extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int var1 = qs.getQuestVarById(1);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 831384) {
+			if (targetId == 831387) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 0)
@@ -75,10 +71,8 @@ public class _80291DurableDaevanionWeapon extends QuestHandler {
 				}
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 831384)
-			{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 831387) {
 				return sendQuestEndDialog(env);
 			}
 			return false;

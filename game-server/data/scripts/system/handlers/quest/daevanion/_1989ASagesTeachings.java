@@ -1,4 +1,4 @@
-package quest.daevation;
+package quest.daevanion;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -14,24 +14,24 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Rhys2002
  */
-public class _2989CeremonyOfTheWise extends QuestHandler {
+public class _1989ASagesTeachings extends QuestHandler {
 
-	private final static int questId = 2989;
+	private final static int questId = 1989;
 
-	public _2989CeremonyOfTheWise() {
+	public _1989ASagesTeachings() {
 		super(questId);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(204146).addOnQuestStart(questId);
-		qe.registerQuestNpc(204146).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204056).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204057).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204058).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204059).addOnTalkEvent(questId);
-		qe.registerQuestNpc(801222).addOnTalkEvent(questId);
-		qe.registerQuestNpc(801223).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203771).addOnQuestStart(questId);
+		qe.registerQuestNpc(203771).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203704).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203705).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203706).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203707).addOnTalkEvent(questId);
+		qe.registerQuestNpc(801214).addOnTalkEvent(questId);
+		qe.registerQuestNpc(801215).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204146) {
+			if (targetId == 203771) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
@@ -60,7 +60,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			PlayerClass playerClass = player.getCommonData().getPlayerClass();
 			switch (targetId) {
-				case 204056:// Traufnir
+				case 203704:// Boreas
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GLADIATOR || playerClass == PlayerClass.TEMPLAR)
@@ -73,7 +73,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 204057:// Sigyn
+				case 203705:// Jumentis
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.ASSASSIN || playerClass == PlayerClass.RANGER)
@@ -86,7 +86,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 204058:// Sif
+				case 203706:// Charna
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.SORCERER || playerClass == PlayerClass.SPIRIT_MASTER)
@@ -99,7 +99,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 204059:// Freyr
+				case 203707:// Thrasymedes
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.CLERIC || playerClass == PlayerClass.CHANTER)
@@ -112,33 +112,33 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 801222:
+				case 801214:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GUNNER || playerClass == PlayerClass.RIDER)
-								return sendQuestDialog(env, 2546);
+								return sendQuestDialog(env, 2548);
 							else
-								return sendQuestDialog(env, 2589);
+								return sendQuestDialog(env, 2568);
 						case SETPRO1:
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 801223:
+				case 801215:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.BARD)
-								return sendQuestDialog(env, 2631);
+								return sendQuestDialog(env, 2633);
 							else
-								return sendQuestDialog(env, 2674);
+								return sendQuestDialog(env, 2653);
 						case SETPRO1:
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
-				case 204146:
+				case 203771:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -159,14 +159,14 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							}
 						case SELECT_QUEST_REWARD:
 							if (var == 3) {
-								playQuestMovie(env, 137);
+								playQuestMovie(env, 105);
 								player.getCommonData().setDp(0);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 5);
 							}
 							else if (var == 4) {
-								playQuestMovie(env, 137);
+								playQuestMovie(env, 105);
 								player.getCommonData().setDp(0);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
@@ -192,7 +192,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 			}
 		}
 		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204146)
+			if (targetId == 203771)
 				return sendQuestEndDialog(env);
 		}
 		return false;
