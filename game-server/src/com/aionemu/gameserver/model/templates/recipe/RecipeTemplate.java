@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.Race;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RecipeTemplate")
 public class RecipeTemplate {
+
 	@XmlElement(name = "components_data")
 	protected List<ComponentsData> componentsData;
 	@XmlElement(name = "comboproduct")
@@ -51,21 +52,20 @@ public class RecipeTemplate {
 	/**
 	 * Gets the value of the component property.
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
-	 * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
-	 * the component property.
-	 * <p>
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the component property.
+	 * </p>
 	 * For example, to add a new item, do as follows:
 	 * 
 	 * <pre>
 	 * getComponent().add(newItem);
 	 * </pre>
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Component }
+	 * Objects of the following type(s) are allowed in the list {@link Component}
 	 */
 	public List<Component> getComponent() {
 		if (componentsData == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.<Component> emptyList();
 		}
 		return this.componentsData.get(0).getComponent(); // to do xTz
 	}

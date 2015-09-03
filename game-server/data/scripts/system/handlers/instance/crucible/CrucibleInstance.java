@@ -21,12 +21,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author xTz
  */
-@SuppressWarnings("rawtypes")
 public class CrucibleInstance extends GeneralInstanceHandler {
 
 	protected boolean isInstanceDestroyed = false;
 	protected StageType stageType = StageType.DEFAULT;
-	protected InstanceReward instanceReward;
+	protected InstanceReward<CruciblePlayerReward> instanceReward;
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -38,10 +37,9 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		instanceReward = new InstanceReward(mapId, instanceId);
+		instanceReward = new InstanceReward<CruciblePlayerReward>(mapId, instanceId);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void addPlayerReward(Player player) {
 		instanceReward.addPlayerReward(new CruciblePlayerReward(player.getObjectId()));
 	}
@@ -49,7 +47,7 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	protected CruciblePlayerReward getPlayerReward(Integer object) {
 		return (CruciblePlayerReward) instanceReward.getPlayerReward(object);
 	}
-	
+
 	@Override
 	public InstanceReward<?> getInstanceReward() {
 		return instanceReward;
@@ -72,8 +70,8 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-			: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;
@@ -94,7 +92,7 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	protected void teleport(Player player, float x, float y, float z, byte h) {
 		TeleportService2.teleportTo(player, mapId, instanceId, x, y, z, h);
 	}
-	
+
 	@Override
 	public StageType getStage() {
 		return stageType;

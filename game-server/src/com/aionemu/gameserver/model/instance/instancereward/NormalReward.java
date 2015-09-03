@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
  * @author Cheatkiller
- *
  */
-public class NormalReward extends InstanceReward {
+public class NormalReward extends InstanceReward<InstancePlayerReward> {
 
 	private int points;
 	private int basicAp;
@@ -20,7 +20,6 @@ public class NormalReward extends InstanceReward {
 	private int rewardItem3Count;
 	private int rewardItem4Count;
 
-
 	public NormalReward(Integer mapId, int instanceId) {
 		super(mapId, instanceId);
 	}
@@ -28,15 +27,15 @@ public class NormalReward extends InstanceReward {
 	public void addPoints(int points) {
 		this.points += points;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
-	
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
+
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
@@ -52,7 +51,7 @@ public class NormalReward extends InstanceReward {
 	public void setBasicAp(int value) {
 		basicAp = value;
 	}
-	
+
 	public int getFinalAp() {
 		return finalAp;
 	}
