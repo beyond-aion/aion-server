@@ -1,15 +1,16 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
+
 /**
  * @author xTz
  */
-@SuppressWarnings("rawtypes")
-public class DarkPoetaReward extends InstanceReward {
+public class DarkPoetaReward extends InstanceReward<InstancePlayerReward> {
 
 	private int points;
 	private int npcKills;
 	private int rank = 7;
-	private int collections; // to do
+	private int collections;
 
 	public DarkPoetaReward(Integer mapId, int instanceId) {
 		super(mapId, instanceId);

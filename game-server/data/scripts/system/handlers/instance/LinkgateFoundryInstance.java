@@ -18,36 +18,32 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @InstanceID(301270000)
 public class LinkgateFoundryInstance extends GeneralInstanceHandler {
-	
-	 private Future<?> timeCheckTask;
-   private byte timeInMin = -1;
-   private boolean isInstanceDestroyed = false;
-   private byte secretLabEntranceCount = 0;
-   
-  @Override
-  public void onEnterInstance(Player player) {
-  	spawn(player.getRace() == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
- 	}
-   
-  @Override
-  public void onDie(Npc npc) {
-  	Player player = npc.getAggroList().getMostPlayerDamage();
-  	switch (npc.getNpcId()) {
-  		case 234990:
+
+	private Future<?> timeCheckTask;
+	private byte timeInMin = -1;
+	private byte secretLabEntranceCount = 0;
+
+	@Override
+	public void onEnterInstance(Player player) {
+		spawn(player.getRace() == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
+	}
+
+	@Override
+	public void onDie(Npc npc) {
+		Player player = npc.getAggroList().getMostPlayerDamage();
+		switch (npc.getNpcId()) {
+			case 234990:
 			case 234991:
 				spawn(player.getRace() == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
 				break;
-  	}
-  }
-  		
-		 	
+		}
+	}
+
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
@@ -69,73 +65,72 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				secretLabEntranceCount++;
 				if (secretLabEntranceCount < 3) {
 					spawn(234992, 244.1839f, 322.5356f, 270.9474f, (byte) 0);
-				}
-				else
+				} else
 					sendMsg(1402603);
 				break;
 		}
 	}
-	
+
 	private void startTimeCheck() {
 		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			 @Override
-			 public void run() {
-				 timeInMin++;
-				 switch (timeInMin) {
-					 case 5:
-						 sendMsg(1402453); // 15 min
-						 break;
-					 case 10:
-						 sendMsg(1402454); // 10 min
-						 break;
-					 case 15:
-						 sendMsg(1402455); // 5 min
-						 break;
-					 case 17:
-						 sendMsg(1402456); // 3 min
-						 break;
-					 case 19:
-						 sendMsg(1402457); // 1 min
-						 break;
-					 case 20:
-						 sendMsg(1402461);
-						 for (Npc npc : instance.getNpcs()) {
-							 if (npc.getNpcId() != 233898 && npc.getNpcId() != 702339) {
-								 npc.getController().onDelete();
-							 }
-						 }
-						 if (timeCheckTask != null && !timeCheckTask.isDone()) {
-               timeCheckTask.cancel(true);
-           } 
-				 }
-			 }
-			 
+
+			@Override
+			public void run() {
+				timeInMin++;
+				switch (timeInMin) {
+					case 5:
+						sendMsg(1402453); // 15 min
+						break;
+					case 10:
+						sendMsg(1402454); // 10 min
+						break;
+					case 15:
+						sendMsg(1402455); // 5 min
+						break;
+					case 17:
+						sendMsg(1402456); // 3 min
+						break;
+					case 19:
+						sendMsg(1402457); // 1 min
+						break;
+					case 20:
+						sendMsg(1402461);
+						for (Npc npc : instance.getNpcs()) {
+							if (npc.getNpcId() != 233898 && npc.getNpcId() != 702339) {
+								npc.getController().onDelete();
+							}
+						}
+						if (timeCheckTask != null && !timeCheckTask.isDone()) {
+							timeCheckTask.cancel(true);
+						}
+				}
+			}
+
 		}, 0, 60000);
 	}
-	
+
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("IDLDF4RE_01_ITEMUSEAREA_BOSS")) {
 			if (timeCheckTask != null && !timeCheckTask.isDone()) {
-        timeCheckTask.cancel(true);
+				timeCheckTask.cancel(true);
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}
-	
-	 @Override
-   public void onInstanceDestroy() {
-       isInstanceDestroyed = true;
-       if (timeCheckTask != null && !timeCheckTask.isDone()) {
-         timeCheckTask.cancel(true);
-     }
-   }
+
+	@Override
+	public void onInstanceDestroy() {
+		if (timeCheckTask != null && !timeCheckTask.isDone()) {
+			timeCheckTask.cancel(true);
+		}
+	}
 }

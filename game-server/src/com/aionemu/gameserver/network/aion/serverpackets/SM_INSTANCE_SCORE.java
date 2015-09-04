@@ -8,40 +8,41 @@ import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
 
 /**
  * @author Dns, ginho1, nrg, xTz
+ * @modified Neon
  */
 public class SM_INSTANCE_SCORE extends AionServerPacket {
 
 	private int mapId;
 	private int instanceTime;
 	private InstanceScoreType instanceScoreType;
-    private InstanceScoreInfo isi;
+	private InstanceScoreInfo isi;
 
-    public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward instanceReward) {
-        this(isi, instanceReward, 0);
-    }
- 
-    public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward instanceReward, InstanceScoreType instanceScoreType) {
-        this(isi, instanceReward, 0);
-        this.instanceScoreType = instanceScoreType;
-    }
+	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward) {
+		this(isi, instanceReward, null, 0);
+	}
 
-    public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward instanceReward, int instanceTime) {
-        instanceScoreType = instanceReward.getInstanceScoreType();
-        this.mapId = instanceReward.getMapId();
+	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, int instanceTime) {
+		this(isi, instanceReward, null, instanceTime);
+	}
+
+	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceScoreType instanceScoreType) {
+		this(isi, instanceReward, instanceScoreType, 0);
+	}
+
+	private SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceScoreType instanceScoreType, int instanceTime) {
+		this.instanceScoreType = instanceScoreType != null ? instanceScoreType : instanceReward.getInstanceScoreType();
+		this.mapId = instanceReward.getMapId();
 		this.instanceTime = instanceTime;
-        this.isi = isi;
-    }
+		this.isi = isi;
+	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(mapId);
 		writeD(instanceTime);
 		writeD(instanceScoreType.getId());
-        if (isi != null) {
-            isi.writeMe(buf);
-        }
+		if (isi != null) {
+			isi.writeMe(buf);
+		}
 	}
 }

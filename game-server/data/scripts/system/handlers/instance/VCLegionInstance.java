@@ -36,7 +36,6 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 	private Future<?> instanceTimer;
 	private long startTime;
 	private NormalReward instanceReward;
-	private boolean isInstanceDestroyed;
 	private Future<?> failTimerTask;
 
 	// TODO static initialization random pos chests (max 5)
@@ -146,8 +145,7 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 		long result = System.currentTimeMillis() - startTime;
 		if (instanceReward.getInstanceScoreType().isPreparing()) {
 			return (int) (120000 - result);
-		}
-		else if (instanceReward.getInstanceScoreType().isStartProgress() && result < 1501000) {
+		} else if (instanceReward.getInstanceScoreType().isStartProgress() && result < 1501000) {
 			return (int) (1500000 - result);
 		}
 		return 0;
@@ -155,11 +153,11 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 
 	private void sendPacket(final int nameId, final int point) {
 		instance.doOnAllPlayers((Player player) -> {
-            if (nameId != 0) {
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
-            }
-            PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
-        });
+			if (nameId != 0) {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
+			}
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
+		});
 	}
 
 	protected int checkRank(int totalPoints) {
@@ -174,8 +172,7 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 			instanceReward.setRewardItem3(188052543);
 			instanceReward.setRewardItem3Count(1);
 			rank = 1;
-		}
-		else if (timeRemain > 600000 && totalPoints >= 6800) {
+		} else if (timeRemain > 600000 && totalPoints >= 6800) {
 			instanceReward.setFinalAp(1020);
 			instanceReward.setRewardItem1(186000240);
 			instanceReward.setRewardItem1Count(8);
@@ -184,28 +181,24 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 			instanceReward.setRewardItem3(188052547);
 			instanceReward.setRewardItem3Count(1);
 			rank = 2;
-		}
-		else if (timeRemain > 600000 && totalPoints > 5700) {
+		} else if (timeRemain > 600000 && totalPoints > 5700) {
 			instanceReward.setFinalAp(892);
 			instanceReward.setRewardItem1(186000240);
 			instanceReward.setRewardItem1Count(7);
 			instanceReward.setRewardItem2(186000243);
 			instanceReward.setRewardItem2Count(2);
 			rank = 3;
-		}
-		else if (timeRemain > 300000 && totalPoints > 3900) {
+		} else if (timeRemain > 300000 && totalPoints > 3900) {
 			instanceReward.setFinalAp(765);
 			instanceReward.setRewardItem1(186000240);
 			instanceReward.setRewardItem1Count(6);
 			rank = 4;
-		}
-		else if (timeRemain > 300000 && totalPoints > 1800) {
+		} else if (timeRemain > 300000 && totalPoints > 1800) {
 			instanceReward.setFinalAp(382);
 			instanceReward.setRewardItem1(186000240);
 			instanceReward.setRewardItem1Count(3);
 			rank = 5;
-		}
-		else {
+		} else {
 			// No Rewards
 			rank = 8;
 		}
@@ -245,7 +238,6 @@ public class VCLegionInstance extends GeneralInstanceHandler {
 			instanceTimer.cancel(false);
 		}
 		cancelFailTask();
-		isInstanceDestroyed = true;
 		doors.clear();
 	}
 

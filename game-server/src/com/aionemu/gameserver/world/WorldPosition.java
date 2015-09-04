@@ -13,7 +13,7 @@ public class WorldPosition {
 	public WorldPosition(int mapId) {
 		this.mapId = mapId;
 	}
-	
+
 	public WorldPosition(int mapId, float x, float y, float z, byte h) {
 		this.mapId = mapId;
 		this.x = x;
@@ -21,7 +21,7 @@ public class WorldPosition {
 		this.z = z;
 		this.heading = h;
 	}
-	
+
 	/**
 	 * Logger
 	 */
@@ -204,27 +204,31 @@ public class WorldPosition {
 		if (newHeading != null)
 			heading = newHeading;
 	}
-	
+
 	public void setZ(float z) {
 		this.z = z;
 	}
-	
+
 	public void setH(byte h) {
 		this.heading = h;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof WorldPosition))
+		if (!(obj instanceof WorldPosition))
 			return false;
 		WorldPosition other = (WorldPosition) obj;
 		return this.mapId == other.mapId && this.x == other.x && this.y == other.y && this.z == other.z && this.heading == other.heading;
 	}
 
 	@Override
-	public String toString() {
-		return "WorldPosition [heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + ", x=" + x
-			+ ", y=" + y + ", z=" + z + "]";
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
 	}
 
+	@Override
+	public String toString() {
+		return "WorldPosition [heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + ", x=" + x + ", y=" + y + ", z=" + z + "]";
+	}
 }

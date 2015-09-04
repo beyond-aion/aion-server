@@ -14,8 +14,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
@@ -30,7 +28,6 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author Source
  */
 public class Base<BL extends BaseLocation> {
@@ -103,7 +100,7 @@ public class Base<BL extends BaseLocation> {
 			case 6113:
 				ending = SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_CHIEF_V13();
 				killers = SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_KILLER_V13();
-				break;	
+				break;
 			default:
 				ending = null;
 				killers = null;
@@ -118,8 +115,7 @@ public class Base<BL extends BaseLocation> {
 		synchronized (this) {
 			if (started) {
 				doubleStart = true;
-			}
-			else {
+			} else {
 				started = true;
 			}
 		}
@@ -157,8 +153,7 @@ public class Base<BL extends BaseLocation> {
 				if (template.getBaseRace().equals(getRace())) {
 					if (template.getHandlerType() == null) {
 						Npc npc = (Npc) SpawnEngine.spawnObject(template, 1);
-						NpcTemplate npcTemplate = npc.getObjectTemplate();
-						if (npcTemplate.getNpcTemplateType().equals(NpcTemplateType.FLAG)) {
+						if (npc.isFlag()) {
 							setFlag(npc);
 							MapRegion mr = npc.getPosition().getMapRegion();
 							mr.activate();
@@ -170,6 +165,7 @@ public class Base<BL extends BaseLocation> {
 
 		if (ending != null) {
 			World.getInstance().getWorldMap(getBaseLocation().getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
 				@Override
 				public void visit(Player player) {
 					PacketSendUtility.sendPacket(player, ending);
@@ -184,6 +180,7 @@ public class Base<BL extends BaseLocation> {
 	private void delayedAssault() {
 		int delay = is_new_map ? Rnd.get(120, 360) : Rnd.get(15, 20);
 		startAssault = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				chooseAttackersRace();
@@ -195,6 +192,7 @@ public class Base<BL extends BaseLocation> {
 	private void delayedSpawn(final Race race) {
 		int delay = is_new_map ? Rnd.get(2, 5) : 30;
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (getRace().equals(race) && getBoss() == null) {
@@ -236,13 +234,11 @@ public class Base<BL extends BaseLocation> {
 	public void spawnAttackers(Race race) {
 		if (getFlag() == null) {
 			throw new NullPointerException("Base:" + getId() + " flag is null!");
-		}
-		else if (!getFlag().getPosition().getMapRegion().isMapRegionActive()) {
+		} else if (!getFlag().getPosition().getMapRegion().isMapRegionActive()) {
 			// 20% chance to capture base in not active region by invaders assault
 			if (Math.random() < 0.2) {
 				BaseService.getInstance().capture(getId(), race);
-			}
-			else {
+			} else {
 				// Next attack
 				delayedAssault();
 			}
@@ -266,6 +262,7 @@ public class Base<BL extends BaseLocation> {
 
 			if (killers != null) {
 				World.getInstance().getWorldMap(getBaseLocation().getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
 					@Override
 					public void visit(Player player) {
 						PacketSendUtility.sendPacket(player, killers);
@@ -275,9 +272,9 @@ public class Base<BL extends BaseLocation> {
 
 			if (getAttackers().isEmpty()) {
 				throw new NullPointerException("No attackers was found for base:" + getId());
-			}
-			else {
+			} else {
 				stopAssault = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						despawnAttackers();

@@ -25,6 +25,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 	private int targetObjectId;
 	private int hitTime;
 	private int level;
+	@SuppressWarnings("unused")
 	private int unk;
 
 	/**
@@ -81,7 +82,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST(1400059));
 			return;
 		}
-		
+
 		if (spellid == 0) {
 			player.getController().cancelCurrentSkill();
 			return;
@@ -100,7 +101,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, STR_SKILL_NOT_READY);
 			return;
 		}
-		
+
 		player.getController().useSkill(template, targetType, x, y, z, hitTime, level);
 	}
 }

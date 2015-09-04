@@ -27,7 +27,6 @@ public class IDShulack_Rose_03Instance extends GeneralInstanceHandler {
 	private AtomicBoolean thirdCannon = new AtomicBoolean();
 	private AtomicBoolean fourthCannon = new AtomicBoolean();
 	private AtomicBoolean teleportEnabled = new AtomicBoolean();
-	private AtomicBoolean teleportEnabled2 = new AtomicBoolean();
 	private AtomicInteger killedBoss = new AtomicInteger();
 
 	@Override
@@ -52,11 +51,9 @@ public class IDShulack_Rose_03Instance extends GeneralInstanceHandler {
 						teleportEnabled.compareAndSet(false, true);
 						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 730.1445f, 508.8899f, 1012.68414f, (byte) 0,
 							TeleportAnimation.BEAM_ANIMATION);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622805)));
-				}
-				else
+				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 730.1445f, 508.8899f, 1012.68414f, (byte) 0,
 						TeleportAnimation.BEAM_ANIMATION);
 				break;
@@ -64,40 +61,35 @@ public class IDShulack_Rose_03Instance extends GeneralInstanceHandler {
 				if (firstCannon.compareAndSet(false, true)) {
 					SkillEngine.getInstance().getSkill(npc, 20385, 60, npc).useNoAnimationSkill();
 					spawn(230729, 569.7891f, 557.9851f, 1022.0135f, (byte) 90);
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
 				break;
 			case 730794:
 				if (secondCannon.compareAndSet(false, true)) {
 					SkillEngine.getInstance().getSkill(npc, 20385, 60, npc).useNoAnimationSkill();
 					spawn(230727, 523.2158f, 549.9458f, 1021.8255f, (byte) 0);
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
 				break;
 			case 730772:
 				if (thirdCannon.compareAndSet(false, true)) {
 					SkillEngine.getInstance().getSkill(npc, 20385, 60, npc).useNoAnimationSkill();
 					spawn(230730, 635.5690f, 539.4214f, 1031.0442f, (byte) 40);
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
 				break;
 			case 730786:
 				if (fourthCannon.compareAndSet(false, true)) {
 					SkillEngine.getInstance().getSkill(npc, 20385, 60, npc).useNoAnimationSkill();
 					spawn(230728, 609.4983f, 455.3484f, 1021.7974f, (byte) 60);
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
 				break;
 			case 730788:
 				if (killedBoss.compareAndSet(4, 0)) {
 					SkillEngine.getInstance().getSkill(npc, 20385, 60, npc).useNoAnimationSkill();
 					spawn(230741, 487.5103f, 508.6524f, 1032.8385f, (byte) 60);
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
 				break;
 		}

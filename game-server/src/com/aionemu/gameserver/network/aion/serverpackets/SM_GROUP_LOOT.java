@@ -13,7 +13,6 @@ public class SM_GROUP_LOOT extends AionServerPacket {
 	private int unk2;
 	private int itemId;
 	private int unk3;
-	private int unk4;
 	private int lootCorpseId;
 	private int distributionId;
 	private int playerId;
@@ -50,6 +49,6 @@ public class SM_GROUP_LOOT extends AionServerPacket {
 		writeD(lootCorpseId);
 		writeC(distributionId);
 		writeD(playerId);
-		writeD((int)luck);
+		writeD((int) luck);
 	}
 }

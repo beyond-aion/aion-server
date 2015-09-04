@@ -21,73 +21,75 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 
-    private int objectId, unk, index;
+	private int objectId;
+	@SuppressWarnings("unused")
+	private int unk;
+	private int index;
 
-    public CM_SELECT_DECOMPOSABLE(int opcode, AionConnection.State state, AionConnection.State... restStates) {
-        super(opcode, state, restStates);
-    }
+	public CM_SELECT_DECOMPOSABLE(int opcode, AionConnection.State state, AionConnection.State... restStates) {
+		super(opcode, state, restStates);
+	}
 
-    @Override
-    protected void readImpl() {
-        objectId = readD();
-        unk = readD();
-        index = readC();
-    }
+	@Override
+	protected void readImpl() {
+		objectId = readD();
+		unk = readD();
+		index = readC();
+	}
 
-    @Override
-    protected void runImpl() {
-        Player player = getConnection().getActivePlayer();
-        if (player != null) {
-        	
-      		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_SELECT_DECOMPOSABLES) {
-      			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-      			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-      			return;
-      		}
-      		
-            Item item = player.getInventory().getItemByObjId(objectId);
-            if (item != null) {
-                List<ResultedItem> selectableItems = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(item.getItemId());
-                if (selectableItems == null) {
-                    return;
-                }
-                // filter By Class
-                Iterator<ResultedItem> iter = selectableItems.iterator();
-                while (iter.hasNext()) {
-                    ResultedItem i = iter.next();
-                    if (!i.getPlayerClass().equals(PlayerClass.ALL)) {
-                        if (!i.getPlayerClass().equals(player.getPlayerClass())) {
-                            iter.remove();
-                            continue;
-                        }
-                    }
-                    if (!i.getRace().equals(Race.PC_ALL)) {
-                        if (!i.getRace().equals(player.getRace())) {
-                            iter.remove();
-                        }
-                    }
-                }
-                if (index + 1 > selectableItems.size()) {
-                    return;
-                }
-                if (player.getInventory().isFull()) {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
-                    return;
-                }
-                PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId()));
-                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(item.getNameId())));
-                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(new DescriptionId(item.getNameId())));
-                player.getInventory().decreaseByObjectId(objectId, 1);
-                PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, Collections.EMPTY_LIST)); // to do
-                ResultedItem selectedItem = selectableItems.get(index);
-                ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getResultCount());
-            }
-        }
-    }
+	@Override
+	protected void runImpl() {
+		Player player = getConnection().getActivePlayer();
+		if (player != null) {
+
+			if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_SELECT_DECOMPOSABLES) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
+				PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+				return;
+			}
+
+			Item item = player.getInventory().getItemByObjId(objectId);
+			if (item != null) {
+				List<ResultedItem> selectableItems = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(item.getItemId());
+				if (selectableItems == null) {
+					return;
+				}
+				// filter By Class
+				Iterator<ResultedItem> iter = selectableItems.iterator();
+				while (iter.hasNext()) {
+					ResultedItem i = iter.next();
+					if (!i.getPlayerClass().equals(PlayerClass.ALL)) {
+						if (!i.getPlayerClass().equals(player.getPlayerClass())) {
+							iter.remove();
+							continue;
+						}
+					}
+					if (!i.getRace().equals(Race.PC_ALL)) {
+						if (!i.getRace().equals(player.getRace())) {
+							iter.remove();
+						}
+					}
+				}
+				if (index + 1 > selectableItems.size()) {
+					return;
+				}
+				if (player.getInventory().isFull()) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+					return;
+				}
+				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(item.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(new DescriptionId(item.getNameId())));
+				player.getInventory().decreaseByObjectId(objectId, 1);
+				PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, Collections.<ResultedItem> emptyList())); // to do
+				ResultedItem selectedItem = selectableItems.get(index);
+				ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getResultCount());
+			}
+		}
+	}
 
 }
