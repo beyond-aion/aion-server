@@ -497,6 +497,75 @@
 			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="2" max_amount="2" chance="5"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Haramel -->
+	<npc_drop npc_id="700829" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Material">
+			<drop item_id="152000901" name="Aether Powder" min_amount="5" max_amount="5" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="169300003" name="Lesser Odella Powder" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="111601071" name="Haramel's Gauntlets" min_amount="1" max_amount="1" chance="66"/>
+			<drop item_id="114601051" name="Haramel's Sabatons" min_amount="1" max_amount="1" chance="66"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="120001115" name="Hamerun's Jewel Earrings" min_amount="1" max_amount="1" chance="33"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700830" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Material">
+			<drop item_id="152000901" name="Aether Powder" min_amount="5" max_amount="5" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="169300003" name="Lesser Odella Powder" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="114301148" name="Haramel's Boots" min_amount="1" max_amount="1" chance="66"/>
+			<drop item_id="111301096" name="Haramel's Vambrace" min_amount="1" max_amount="1" chance="66"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="120001115" name="Hamerun's Jewel Earrings" min_amount="1" max_amount="1" chance="33"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700831" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Material">
+			<drop item_id="152000901" name="Aether Powder" min_amount="5" max_amount="5" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="169300003" name="Lesser Odella Powder" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="114101138" name="Haramel's Boots" min_amount="1" max_amount="1" chance="66"/>
+			<drop item_id="111101097" name="Haramel's Gloves" min_amount="1" max_amount="1" chance="66"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="120001116" name="Hamerun's Crystal Earrings" min_amount="1" max_amount="1" chance="33"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700832" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Material">
+			<drop item_id="152000901" name="Aether Powder" min_amount="5" max_amount="5" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="169300003" name="Lesser Odella Powder" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="114501097" name="Haramel's Brogans" min_amount="1" max_amount="1" chance="66"/>
+			<drop item_id="111501081" name="Haramel's Handguards" min_amount="1" max_amount="1" chance="66"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="120001116" name="Hamerun's Crystal Earrings" min_amount="1" max_amount="1" chance="33"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700853" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Rare)">
+			<drop item_id="101500837" name="Dukaki Peon's Shovel" min_amount="1" max_amount="1" chance="3.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Enchantment Stone">
+			<drop item_id="166000191" name="Alpha Enchantment Stone" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
