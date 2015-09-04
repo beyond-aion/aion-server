@@ -383,6 +383,15 @@
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="0.2"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Danuar Mysticarium -->
+	<npc_drop npc_id="230076" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Manastone Bundle">
+			<drop item_id="188052556" name="Composite Manastone Bundle" min_amount="1" max_amount="1" chance="6"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
