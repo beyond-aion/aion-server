@@ -566,6 +566,17 @@
 			<drop item_id="166000191" name="Alpha Enchantment Stone" min_amount="1" max_amount="1" chance="25"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Idgel Research Center -->
+	<npc_drop npc_id="701570" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="185000168" name="Research Center Key" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701935" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052724" name="Beritran Hoard" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
