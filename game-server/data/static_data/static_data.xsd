@@ -73,7 +73,6 @@
 	<xs:include schemaLocation="housing/houses.xsd"/>
 	<xs:include schemaLocation="housing/house_parts.xsd"/>
 	<xs:include schemaLocation="housing/house_npcs.xsd"/>
-	<xs:include schemaLocation="housing/scripts.xsd"/>
 	<xs:include schemaLocation="curing_objects/curing_objects.xsd"/>
 	<xs:include schemaLocation="mail_templates.xsd"/>
 	<xs:include schemaLocation="mesh_materials/material_templates.xsd"/>
@@ -168,7 +167,6 @@
 					<xs:element ref="buildings" minOccurs="0"/>
 					<xs:element ref="house_parts" minOccurs="0"/>
 					<xs:element ref="house_npcs" minOccurs="0"/>
-					<xs:element ref="lboxes" minOccurs="0"/>
 					<xs:element ref="curing_objects" minOccurs="0"/>
 					<xs:element ref="mails" minOccurs="0"/>
 					<xs:element ref="material_templates" minOccurs="0"/>

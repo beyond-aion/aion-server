@@ -46,7 +46,7 @@ public class StaticData {
 
 	@XmlElement(name = "player_stats_templates")
 	public PlayerStatsData playerStatsData;
-	
+
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
 
@@ -61,7 +61,7 @@ public class StaticData {
 
 	@XmlElement(name = "npc_templates")
 	public NpcData npcData;
-	
+
 	@XmlElement(name = "custom_drop")
 	public CustomDrop customNpcDrop;
 
@@ -100,7 +100,7 @@ public class StaticData {
 
 	@XmlElement(name = "goodslists")
 	public GoodsListData goodsListData;
-	
+
 	@XmlElement(name = "tribe_relations")
 	public TribeRelationsData tribeRelationsData;
 
@@ -233,21 +233,18 @@ public class StaticData {
 	@XmlElement(name = "assembly_items")
 	public AssemblyItemsData assemblyItemData;
 
-	@XmlElement(name = "lboxes")
-	public HouseScriptData houseScriptData;
-
 	@XmlElement(name = "mails")
 	public Mails systemMailTemplates;
 
 	@XmlElement(name = "material_templates")
 	public MaterialData materiaData;
-	
+
 	@XmlElement(name = "challenge_tasks")
 	public ChallengeData challengeData;
-	
+
 	@XmlElement(name = "serial_killers")
 	public SerialKillerData serialKillerData;
-	
+
 	@XmlElement(name = "town_spawns_data")
 	public TownSpawnsData townSpawnsData;
 
@@ -256,7 +253,7 @@ public class StaticData {
 
 	@XmlElement(name = "walker_versions")
 	public WalkerVersionsData walkerVersionsData;
-	
+
 	@XmlElement(name = "tempering_templates")
 	public TemperingData temperingData;
 
@@ -265,10 +262,10 @@ public class StaticData {
 
 	@XmlElement(name = "global_rules")
 	public GlobalDropData globalDropData;
-	
+
 	@XmlElement(name = "global_npc_exclusions")
 	public GlobalNpcExclusionData globalExclusionData;
-	
+
 	@XmlElement(name = "multi_return_item")
 	public MultiReturnItemData multiReturnItem;
 
@@ -277,12 +274,12 @@ public class StaticData {
 
 	@XmlElement(name = "item_purifications")
 	public ItemPurificationData itemPurificationData;
-	
+
 	@XmlElement(name = "arcadelist")
 	public ArcadeUpgradeData arcadeUpgradeData;
 
-    @XmlElement(name = "login_events")
-    public AtreianPassportData atreianPassportData;
+	@XmlElement(name = "login_events")
+	public AtreianPassportData atreianPassportData;
 
 	@XmlElement(name = "raid_locations")
 	public MonsterRaidData raidData;
@@ -364,7 +361,6 @@ public class StaticData {
 		DataManager.log.info("Loaded " + houseBuildingData.size() + " house building styles");
 		DataManager.log.info("Loaded " + housePartsData.size() + " house parts");
 		DataManager.log.info("Loaded " + houseNpcsData.size() + " house spawns");
-		DataManager.log.info("Loaded " + houseScriptData.size() + " house default scripts");
 		DataManager.log.info("Loaded " + curingObjectsData.size() + " curing Objects entries");
 		DataManager.log.info("Loaded " + assemblyItemData.size() + " assembly items entries");
 		DataManager.log.info("Loaded " + challengeData.size() + " challenge tasks entries");
@@ -378,8 +374,7 @@ public class StaticData {
 		DataManager.log.info("Loaded " + hotspotData.size() + " hotspot entries");
 		DataManager.log.info("Loaded " + itemPurificationData.size() + " item purifications entries");
 		DataManager.log.info("Loaded " + arcadeUpgradeData.size() + " arcade upgrade entries");
-        DataManager.log.info("Loaded " + atreianPassportData.size() + " atreian passports");
+		DataManager.log.info("Loaded " + atreianPassportData.size() + " atreian passports");
 		DataManager.log.info("Loaded " + raidData.size() + " raid entries");
 	}
-
 }

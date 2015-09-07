@@ -91,7 +91,6 @@ public final class DataManager {
 	public static HousePartsData HOUSE_PARTS_DATA;
 	public static CuringObjectsData CURING_OBJECTS_DATA;
 	public static HouseNpcsData HOUSE_NPCS_DATA;
-	public static HouseScriptData HOUSE_SCRIPT_DATA;
 	public static Mails SYSTEM_MAIL_TEMPLATES;
 	public static MaterialData MATERIAL_DATA;
 	public static ChallengeData CHALLENGE_DATA;
@@ -202,7 +201,6 @@ public final class DataManager {
 		HOUSE_PARTS_DATA = data.housePartsData;
 		CURING_OBJECTS_DATA = data.curingObjectsData;
 		HOUSE_NPCS_DATA = data.houseNpcsData;
-		HOUSE_SCRIPT_DATA = data.houseScriptData;
 		SYSTEM_MAIL_TEMPLATES = data.systemMailTemplates;
 		CHALLENGE_DATA = data.challengeData;
 		TOWN_SPAWNS_DATA = data.townSpawnsData;

@@ -151,7 +151,6 @@
 	<import file="housing/house_buildings.xml"/>
 	<import file="housing/house_parts.xml"/>
 	<import file="housing/house_npcs.xml"/>
-	<import file="housing/scripts.xml"/>
 	<import file="curing_objects/curing_objects.xml"/>
 	<import file="mail_templates.xml"/>
 	<import file="mesh_materials/material_templates.xml"/>
