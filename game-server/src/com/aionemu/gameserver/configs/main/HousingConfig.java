@@ -62,9 +62,6 @@ public class HousingConfig {
 
 	@Property(key = "gameserver.housing.auction.steplimit", defaultValue = "100")
 	public static float HOUSE_AUCTION_BID_LIMIT;
-
-	@Property(key = "gameserver.housing.scripts.debug", defaultValue = "false")
-	public static boolean HOUSE_SCRIPT_DEBUG;
 	
 	@Property(key = "gameserver.housing.auction.fill.auto", defaultValue = "false")
 	public static boolean FILL_HOUSE_BIDS_AUTO;

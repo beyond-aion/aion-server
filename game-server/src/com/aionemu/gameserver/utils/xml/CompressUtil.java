@@ -9,7 +9,7 @@ import java.util.zip.Inflater;
  */
 public final class CompressUtil {
 
-	public static String Decompress(byte[] bytes) throws Exception {
+	public static String decompress(byte[] bytes) throws Exception {
 		Inflater decompressor = new Inflater();
 		decompressor.setInput(bytes);
 
@@ -22,16 +22,13 @@ public final class CompressUtil {
 				int count = decompressor.inflate(buffer);
 				if (count > 0) {
 					bos.write(buffer, 0, count);
-				}
-				else if (count == 0 && decompressor.finished()) {
+				} else if (count == 0 && decompressor.finished()) {
 					break;
-				}
-				else {
+				} else {
 					throw new RuntimeException("Bad zip data, size: " + bytes.length);
 				}
 			}
-		}
-		finally {
+		} finally {
 			decompressor.end();
 		}
 
@@ -39,7 +36,7 @@ public final class CompressUtil {
 		return bos.toString("UTF-16LE");
 	}
 
-	public static byte[] Compress(String text) throws Exception {
+	public static byte[] compress(String text) throws Exception {
 		Deflater compressor = new Deflater();
 		byte[] bytes = text.getBytes("UTF-16LE");
 		compressor.setInput(bytes);
@@ -47,16 +44,14 @@ public final class CompressUtil {
 		// Create an expandable byte array to hold the compressed data
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		compressor.finish();
-		
+
 		byte[] buffer = new byte[1024];
 		try {
-			while(!compressor.finished())
-      {
-          int count = compressor.deflate(buffer);
-          bos.write(buffer, 0, count);
-      }
-		}
-		finally {
+			while (!compressor.finished()) {
+				int count = compressor.deflate(buffer);
+				bos.write(buffer, 0, count);
+			}
+		} finally {
 			compressor.finish();
 		}
 

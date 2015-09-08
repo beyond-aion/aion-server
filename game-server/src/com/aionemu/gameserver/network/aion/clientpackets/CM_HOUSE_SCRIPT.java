@@ -12,11 +12,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class CM_HOUSE_SCRIPT extends AionClientPacket {
 
+	private final static int MAX_COMPRESSED_SIZE = 8149;
 	int address;
-	int scriptIndex;
+	int scriptId;
 	int totalSize;
 	int compressedSize;
 	int uncompressedSize;
@@ -29,11 +31,11 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		address = readD();
-		scriptIndex = readC();
+		scriptId = readC();
 		totalSize = readH();
 		if (totalSize > 0) {
 			compressedSize = readD();
-			if (compressedSize < 8150) {
+			if (compressedSize <= MAX_COMPRESSED_SIZE) {
 				uncompressedSize = readD();
 				stream = readB(compressedSize);
 			}
@@ -44,13 +46,14 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if (compressedSize > 8149) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW);
-		}
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			return;
+		}
+
+		if (compressedSize > MAX_COMPRESSED_SIZE) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW);
 			return;
 		}
 
@@ -59,16 +62,12 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 			return;
 
 		PlayerScripts scripts = house.getPlayerScripts();
-
-		if (totalSize <= 0) {
-			// Deposit perhaps should send 0, while delete -1
-			// But the client sends the same packets now
-			scripts.addScript(scriptIndex, new byte[0], 0);
+		if (totalSize == 0) {
+			scripts.remove(scriptId);
 		} else {
-			scripts.addScript(scriptIndex, stream, uncompressedSize);
+			scripts.set(scriptId, stream, uncompressedSize);
 		}
-		
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(address, scripts, scriptIndex, scriptIndex));
-	}
 
+		PacketSendUtility.broadcastPacket(player, new SM_HOUSE_SCRIPTS(address, scripts, scriptId));
+	}
 }

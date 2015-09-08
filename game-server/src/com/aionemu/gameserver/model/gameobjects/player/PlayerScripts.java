@@ -1,152 +1,103 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
+import javolution.util.FastMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.utils.xml.CompressUtil;
 
 /**
  * @author Rolandas
+ * @reworked Neon
  */
 public class PlayerScripts {
 
-	private static final Logger logger = LoggerFactory.getLogger(PlayerScripts.class);
+	private static final Logger log = LoggerFactory.getLogger(PlayerScripts.class);
+	private static final byte SCRIPT_LIMIT = 8; // max number of active scripts a player can have
 
-	private final Map<Integer, PlayerScript> scripts;
 	private final int houseObjId;
+	private final FastMap<Integer, PlayerScript> scripts;
 
-	public PlayerScripts(int houseObjectId) {
-		this.scripts = new HashMap<Integer, PlayerScript>(8);
-		for (int index = 0; index < 8; index++)
-			this.scripts.put(index, new PlayerScript());
-		this.houseObjId = houseObjectId;
+	public PlayerScripts(int houseId) {
+		this.houseObjId = houseId;
+		this.scripts = new FastMap<Integer, PlayerScript>();
 	}
 
-	public Map<Integer, PlayerScript> getScripts() {
-		return Collections.unmodifiableMap(scripts);
+	public boolean set(int id, byte[] compressedXML, int uncompressedSize) {
+		return set(id, compressedXML, uncompressedSize, true);
 	}
 
-	public boolean addScript(int position, String scriptXML) {
-		PlayerScript script = scripts.get(position);
-
-		if (scriptXML == null) {
-			script.setData(null, -1);
-		}
-		else if (StringUtils.EMPTY.equals(scriptXML)) {
-			script.setData(new byte[0], 0);
-		}
-		try {
-			byte[] bytes = CompressUtil.Compress(scriptXML);
-			int oldLength = bytes.length;
-			bytes = Arrays.copyOf(bytes, bytes.length + 8);
-			for (int i = oldLength; i < bytes.length; i++)
-				bytes[i] = -51; // Add NC shit bytes, without which fails to load :)
-			script.setData(bytes, scriptXML.length() * 2);
-		}
-		catch (Exception ex) {
-			logger.error("Script compression failed: " + ex);
+	public boolean set(int id, byte[] compressedXML, int uncompressedSize, boolean doStore) {
+		if (count() >= getMaxCount() && !scripts.containsKey(id))
 			return false;
-		}
-		return script == null;
+
+		String scriptXML = decompressAndValidate(compressedXML, uncompressedSize);
+
+		if (scriptXML == null)
+			return false;
+
+		if (doStore)
+			DAOManager.getDAO(HouseScriptsDAO.class).storeScript(houseObjId, id, scriptXML);
+
+		scripts.put(id, new PlayerScript(compressedXML, uncompressedSize));
+		return true;
 	}
 
-	public String getUncompressedScript(int position) {
-		if (!scripts.containsKey(position))
-			return null;
-
-		PlayerScript script = scripts.get(position);
-		byte[] bytes = null;
-
-		script.readLock();
-		bytes = script.getCompressedBytes();
-		script.readUnlock();
-
-		if (bytes == null)
-			return null;
-
-		if (bytes.length == 0)
-			return StringUtils.EMPTY;
-
-		try {
-			return CompressUtil.Decompress(bytes);
-		}
-		catch (Exception ex) {
-			logger.error("Script decompression failed: " + ex);
-			return null;
-		}
+	public boolean remove(int id) {
+		return remove(id, true);
 	}
 
-	public boolean addScript(int position, byte[] compressedXML, int uncompressedSize) {
-		String content = null;
-		int size = -1;
+	public boolean remove(int id, boolean doStore) {
+		if (!scripts.containsKey(id))
+			return false;
 
-		if (compressedXML == null) {
-			// Nothing to do
-		}
-		else if (compressedXML.length == 0) {
-			content = StringUtils.EMPTY;
-			size = 0;
-		}
-		else {
+		if (doStore)
+			DAOManager.getDAO(HouseScriptsDAO.class).deleteScript(houseObjId, id);
+
+		scripts.remove(id);
+		return true;
+	}
+
+	public PlayerScript get(int id) {
+		return scripts.get(id);
+	}
+
+	public Set<Integer> getIds() {
+		return scripts.keySet();
+	}
+
+	public int count() {
+		return scripts.size();
+	}
+
+	public static int getMaxCount() {
+		return (int) SCRIPT_LIMIT;
+	}
+
+	private String decompressAndValidate(byte[] compressedXML, int uncompressedSize) {
+		String scriptXML = "";
+
+		if (compressedXML != null && compressedXML.length > 0) {
 			try {
-				content = CompressUtil.Decompress(compressedXML);
-				byte[] bytes = content.getBytes("UTF-16LE");
-				if (bytes.length != uncompressedSize)
-					return false;
-				size = uncompressedSize;
+				scriptXML = CompressUtil.decompress(compressedXML);
+				byte[] bytes = scriptXML.getBytes("UTF-16LE");
+				if (bytes.length != uncompressedSize) {
+					log.error("New housing script data had unexpected file size after decompression: Expected " + uncompressedSize + " bytes, got "
+						+ bytes.length + " bytes:\n" + scriptXML);
+					return null;
+				}
+			} catch (Exception ex) {
+				log.error("New housing script data could not be decompressed");
+				return null;
 			}
-			catch (Exception ex) {
-				return false;
-			}
 		}
 
-		PlayerScript script = scripts.get(position);
-		script.readLock();
-		byte[] bytes = script.getCompressedBytes();
-		script.readUnlock();
-		script.setData(compressedXML, size);
-
-		if (bytes == null) {
-			DAOManager.getDAO(HouseScriptsDAO.class).addScript(houseObjId, position, content);
-		}
-		else {
-			DAOManager.getDAO(HouseScriptsDAO.class).updateScript(houseObjId, position, content);
-		}
-
-		if (HousingConfig.HOUSE_SCRIPT_DEBUG)
-			logger.info(content);
-
-		return true;
-	}
-
-	public boolean removeScript(int position) {
-		PlayerScript script = scripts.get(position);
-
-		script.readLock();
-		byte[] bytes = script.getCompressedBytes();
-		script.readUnlock();
-
-		if (bytes == null) {
-			return false;
-		}
-		else {
-			script.setData(null, -1);
-			DAOManager.getDAO(HouseScriptsDAO.class).deleteScript(houseObjId, position);
-		}
-		return true;
-	}
-
-	public int getSize() {
-		return 8;
+		return scriptXML;
 	}
 }

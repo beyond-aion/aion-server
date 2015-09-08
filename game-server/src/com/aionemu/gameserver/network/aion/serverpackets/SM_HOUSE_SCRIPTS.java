@@ -1,49 +1,55 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.google.common.primitives.Ints;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 
 	private int address;
 	private PlayerScripts scripts;
-	int from, to;
+	Set<Integer> scriptIds;
 
-	public SM_HOUSE_SCRIPTS(int address, PlayerScripts scripts, int from, int to) {
+	/**
+	 * This packet updates the script information for a house.<br>
+	 * If one or more <tt>scriptIds</tt> are given, only these IDs will be updated, otherwise all existing scripts are updated.
+	 * 
+	 * @param address
+	 * @param scripts
+	 * @param scriptIds
+	 */
+	public SM_HOUSE_SCRIPTS(int address, PlayerScripts scripts, int... scriptIds) {
 		this.address = address;
 		this.scripts = scripts;
-		this.from = from;
-		this.to = to;
+		this.scriptIds = scriptIds.length > 0 ? new HashSet<Integer>(Ints.asList(scriptIds)) : scripts.getIds();
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(address);
-		writeH(to - from + 1);
-		Map<Integer, PlayerScript> scriptMap = scripts.getScripts();
-		for (int position = from; position <= to; position++) {
-			writeC(position);
-			PlayerScript script = scriptMap.get(position);
-			byte[] bytes = script.getCompressedBytes();
-			if (bytes == null) {
-				writeH(-1);
-			}
-			else {
-				if (bytes.length == 0) {
-					writeH(0);
-					continue;
-				}
-				writeH(bytes.length + 8);
-				writeD(bytes.length);
-				writeD(script.getUncompressedSize());
-				writeB(bytes);
+
+		writeD(address); // house address
+		writeH(scriptIds.size()); // number of scripts that will be updated
+		// write scripts in the order that they were passed (not displayed correctly on login, cuz client pre-sorts by ID -_-)
+		for (Integer scriptId : scriptIds) {
+			PlayerScript script = scripts.get(scriptId);
+			writeC(scriptId); // script ID
+			if (script != null && script.getCompressedBytes() != null) {
+				byte[] bytes = script.getCompressedBytes();
+				writeH(8 + bytes.length); // total following byte size for this script
+				writeD(bytes.length); // script size (compressed)
+				writeD(script.getUncompressedSize()); // script size (uncompressed)
+				writeB(bytes); // script content (compressed)
+			} else {
+				writeH(0); // if the script with this ID does not exist (removes it from the in-game list)
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public abstract class HouseScriptsDAO implements DAO {
 
@@ -15,9 +16,7 @@ public abstract class HouseScriptsDAO implements DAO {
 
 	public abstract PlayerScripts getPlayerScripts(int houseId);
 	
-	public abstract void addScript(int houseId, int position, String script);
-
-	public abstract void updateScript(int houseId, int position, String script);
+	public abstract void storeScript(int houseId, int position, String script);
 
 	public abstract void deleteScript(int houseId, int position);
 }

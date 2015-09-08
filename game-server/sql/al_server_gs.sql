@@ -801,12 +801,16 @@ CREATE TABLE `house_bids` (
   CONSTRAINT `house_id_ibfk_1` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for `house_scripts`
+-- ----------------------------
 DROP TABLE IF EXISTS `house_scripts`;
 CREATE TABLE `house_scripts` (
   `house_id` int(11) NOT NULL,
-  `index` tinyint(4) NOT NULL,
-  `script` mediumtext,
-  PRIMARY KEY (`house_id`,`index`),
+  `script_id` tinyint(4) NOT NULL,
+  `script` mediumtext NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`house_id`,`script_id`),
   CONSTRAINT `houses_id_ibfk_1` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=16;
 
