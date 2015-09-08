@@ -613,6 +613,7 @@ public final class PlayerEnterWorldService {
 	private static void playerLoggedIn(Player player) {
 		log.info("Player logged in: " + player.getName() + " Account: " + player.getClientConnection().getAccount().getName());
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, true);
+		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
 		player.onLoggedIn();
 	}
 

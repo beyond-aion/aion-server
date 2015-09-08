@@ -300,7 +300,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (!SiegeService.getInstance().validateLoginZone(getOwner())) {
 			moveToBind = true;
 		}
-		else {
+		else if (getOwner().getCommonData().getLastOnline() != null) {
 			long lastOnline = getOwner().getCommonData().getLastOnline().getTime();
 			long secondsOffline = (System.currentTimeMillis() / 1000) - lastOnline / 1000;
 			if (secondsOffline > 10 * 60) { // Logout in no-recall zone sends you to bindpoint after 10 (??) minutes

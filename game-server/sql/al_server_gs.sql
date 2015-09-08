@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `player_class` enum('WARRIOR','GLADIATOR','TEMPLAR','SCOUT','ASSASSIN','RANGER','MAGE','SORCERER','SPIRIT_MASTER','PRIEST','CLERIC','CHANTER','ENGINEER','GUNNER','ARTIST','BARD','RIDER','ALL') NOT NULL,
   `creation_date` timestamp NULL default NULL,
   `deletion_date` timestamp NULL default NULL,
-  `last_online` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  `last_online` timestamp NULL default NULL,
   `quest_expands` tinyint(1) NOT NULL default '0',
   `npc_expands` tinyint(1) NOT NULL default '0',
   `item_expands` tinyint(1) NOT NULL default '0',

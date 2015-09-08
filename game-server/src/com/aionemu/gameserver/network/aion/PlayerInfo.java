@@ -115,7 +115,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		}
 
 		writeH(accPlData.isLegionMember() ? 0x01 : 0x00);//is in legion?
-		writeD((int)pbd.getLastOnline().getTime());//last online
+		writeD(pbd.getLastOnline() != null ? (int) pbd.getLastOnline().getTime() : 0);//last online
 
 		int itemsDataSize = 0;
 		// TODO figure out this part when fully equipped

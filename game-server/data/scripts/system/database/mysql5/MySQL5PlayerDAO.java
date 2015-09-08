@@ -132,7 +132,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, item_expands=?, advenced_stigma_slot_size=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
+					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, advenced_stigma_slot_size=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 				log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 				PlayerCommonData pcd = player.getCommonData();
 				stmt.setString(1, player.getName());
@@ -146,33 +146,32 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setString(9, player.getGender().toString());
 				stmt.setString(10, player.getRace().toString());
 				stmt.setString(11, pcd.getPlayerClass().toString());
-				stmt.setTimestamp(12, pcd.getLastOnline());
-				stmt.setInt(13, player.getQuestExpands());
-				stmt.setInt(14, player.getNpcExpands());
-				stmt.setInt(15, player.getItemExpands());
-				stmt.setInt(16, pcd.getAdvancedStigmaSlotSize());
-				stmt.setInt(17, player.getWhNpcExpands());
-				stmt.setInt(18, player.getWhBonusExpands());
-				stmt.setString(19, pcd.getNote());
-				stmt.setInt(20, pcd.getTitleId());
-				stmt.setInt(21, pcd.getBonusTitleId());
-				stmt.setInt(22, pcd.getDp());
-				stmt.setInt(23, pcd.getDeathCount());
+				stmt.setInt(12, player.getQuestExpands());
+				stmt.setInt(13, player.getNpcExpands());
+				stmt.setInt(14, player.getItemExpands());
+				stmt.setInt(15, pcd.getAdvancedStigmaSlotSize());
+				stmt.setInt(16, player.getWhNpcExpands());
+				stmt.setInt(17, player.getWhBonusExpands());
+				stmt.setString(18, pcd.getNote());
+				stmt.setInt(19, pcd.getTitleId());
+				stmt.setInt(20, pcd.getBonusTitleId());
+				stmt.setInt(21, pcd.getDp());
+				stmt.setInt(22, pcd.getDeathCount());
 				Mailbox mailBox = player.getMailbox();
 				int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
-				stmt.setInt(24, mails);
-				stmt.setLong(25, pcd.getCurrentReposteEnergy());
-				stmt.setInt(26, pcd.getMentorFlagTime());
+				stmt.setInt(23, mails);
+				stmt.setLong(24, pcd.getCurrentReposteEnergy());
+				stmt.setInt(25, pcd.getMentorFlagTime());
 				if (player.getPosition().getWorldMapInstance() == null) { // FIXME!
 					log.error("Error saving player: " + player.getObjectId() + " " + player.getName()
 						+ ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " "
 						+ player.getY() + " " + player.getZ());
-					stmt.setInt(27, 0);
+					stmt.setInt(26, 0);
 				}
 				else {
-					stmt.setInt(27, player.getPosition().getWorldMapInstance().getOwnerId());
+					stmt.setInt(26, player.getPosition().getWorldMapInstance().getOwnerId());
 				}
-				stmt.setInt(28, player.getObjectId());
+				stmt.setInt(27, player.getObjectId());
 				stmt.execute();
 			}
 		}

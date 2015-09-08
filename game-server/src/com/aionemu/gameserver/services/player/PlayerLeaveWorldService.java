@@ -130,12 +130,14 @@ public class PlayerLeaveWorldService {
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
 
+		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
-		player.getCommonData().setLastOnline(new Timestamp(System.currentTimeMillis()));
+		player.getCommonData().setLastOnline(lastOnline);
 		player.setClientConnection(null);
 
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
+		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
 
 		if (GSConfig.ENABLE_CHAT_SERVER)
 			ChatService.onPlayerLogout(player);
