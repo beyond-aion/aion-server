@@ -1,9 +1,11 @@
 package com.aionemu.gameserver.model.templates.npc;
 
+import com.google.common.annotations.Beta;
+
 /**
  * @author ATracer
  */
-@Deprecated
+@Beta
 public enum NpcTemplateType {
 	MERCENARY,
 	GENERAL,

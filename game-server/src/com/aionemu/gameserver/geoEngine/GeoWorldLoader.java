@@ -3,7 +3,7 @@ package com.aionemu.gameserver.geoEngine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.Buffer;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -16,9 +16,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import sun.misc.Cleaner;
-import sun.nio.ch.DirectBuffer;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -108,8 +105,7 @@ public class GeoWorldLoader {
 							continue;
 						// Ignore mesh for now, should set sizes to 0 in geodata parser
 						geom = new DoorGeometry(name);
-					}
-					else {
+					} else {
 						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
 						geom = new Geometry(null, m);
 						if (mtl != null || m.getMaterialId() == 11) {
@@ -118,8 +114,7 @@ public class GeoWorldLoader {
 						if (modelCount == 1) {
 							geom.setName(name);
 							singleChildMaterialId = geom.getMaterialId();
-						}
-						else
+						} else
 							geom.setName(("child" + c + "_" + name).intern());
 						node.attachChild(geom);
 					}
@@ -174,21 +169,18 @@ public class GeoWorldLoader {
 						if (node instanceof DoorGeometry) {
 							try {
 								nodeClone = node.clone();
-							}
-							catch (CloneNotSupportedException e) {
+							} catch (CloneNotSupportedException e) {
 								e.printStackTrace();
 							}
 							if (createDoors(nodeClone, worldId, matrix3f, loc, scale)) {
 								map.attachChild(nodeClone);
 							}
-						}
-						else {
+						} else {
 							nodeClone = attachChild(map, node, matrix3f, loc, scale);
 							List<Spatial> children = ((Node) node).descendantMatches("child\\d+_" + name.replace("\\", "\\\\"));
 							if (children.size() == 0) {
 								createZone(nodeClone, worldId, 0);
-							}
-							else {
+							} else {
 								for (int c = 0; c < children.size(); c++) {
 									Spatial child = children.get(c);
 									nodeClone = attachChild(map, child, matrix3f, loc, scale);
@@ -197,8 +189,7 @@ public class GeoWorldLoader {
 							}
 						}
 					}
-				}
-				catch (Throwable t) {
+				} catch (Throwable t) {
 					System.out.println(t);
 				}
 			}
@@ -212,8 +203,7 @@ public class GeoWorldLoader {
 		Spatial nodeClone = node;
 		try {
 			nodeClone = node.clone();
-		}
-		catch (CloneNotSupportedException e) {
+		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 		nodeClone.setTransform(matrix, location, scale);
@@ -237,8 +227,7 @@ public class GeoWorldLoader {
 				zoneName += "_" + regionId;
 				node.setName(zoneName);
 				ZoneService.getInstance().createMaterialZoneTemplate(node, worldId, node.getMaterialId(), true);
-			}
-			else {
+			} else {
 				node.setName(zoneName);
 				ZoneService.getInstance().createMaterialZoneTemplate(node, regionId, worldId, node.getMaterialId());
 			}
@@ -246,13 +235,11 @@ public class GeoWorldLoader {
 	}
 
 	/*
-	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked 
-	 * for boxes during the creation. Boxes are more efficient way to handle collisions. So, it replaces 
-	 * geo mesh with the artfitial Box geometry, taken from the static_doors.xml. Basically, you can create
-	 * missing doors here but that is not implemented. matrix is never used, as well as scale.
-	 * Those two arguments are needed if location MUST be repositioned according to geo mesh.
-	 * Geo may have both meshes from mission xml and from other files, so you never know. But now we handle
-	 * just mission xml. Other meshes are ignored.
+	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked for boxes during the creation. Boxes are more
+	 * efficient way to handle collisions. So, it replaces geo mesh with the artfitial Box geometry, taken from the static_doors.xml. Basically, you can
+	 * create missing doors here but that is not implemented. matrix is never used, as well as scale. Those two arguments are needed if location MUST be
+	 * repositioned according to geo mesh. Geo may have both meshes from mission xml and from other files, so you never know. But now we handle just
+	 * mission xml. Other meshes are ignored.
 	 */
 	private static boolean createDoors(Spatial node, int worldId, Matrix3f matrix, Vector3f location, float scale) {
 		DoorGeometry geom = (DoorGeometry) node;
@@ -273,8 +260,7 @@ public class GeoWorldLoader {
 					templatePos = new Vector3f(template.getX(), template.getY(), template.getZ());
 					if (location.distance(templatePos) > 1f)
 						continue;
-				}
-				else
+				} else
 					continue;
 			}
 
@@ -282,7 +268,7 @@ public class GeoWorldLoader {
 			Box boxMesh = new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f()));
 			geom.setMesh(boxMesh);
 			// Assign flags if they are missing in geo (geo bugs)
-			geom.setCollisionFlags((short)((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
+			geom.setCollisionFlags((short) ((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
 			break;
 		}
 		if (geom.getMesh() == null) {
@@ -302,9 +288,9 @@ public class GeoWorldLoader {
 	}
 
 	/**
-	 * Hash formula from paper <a href="http://www.beosil.com/download/CollisionDetectionHashing_VMV03.pdf">
-	 * Optimized Spatial Hashing for Collision Detection of Deformable Objects</a><br> Hash table size 900000,
-	 * the higher value, more precision
+	 * Hash formula from paper <a href="http://www.beosil.com/download/CollisionDetectionHashing_VMV03.pdf"> Optimized Spatial Hashing for Collision
+	 * Detection of Deformable Objects</a><br>
+	 * Hash table size 900000, the higher value, more precision
 	 */
 	private static int getVectorHash(float x, float y, float z) {
 		long xIntBits = Float.floatToIntBits(x);
@@ -313,9 +299,26 @@ public class GeoWorldLoader {
 		return (int) ((xIntBits * 73856093 ^ yIntBits * 19349663 ^ zIntBits * 83492791) % 900000);
 	}
 
-	private static void destroyDirectByteBuffer(Buffer toBeDestroyed) {
-		Cleaner cleaner = ((DirectBuffer) toBeDestroyed).cleaner();
-		if (cleaner != null)
-			cleaner.clean();
+	/**
+	 * DirectByteBuffers are garbage collected by using a phantom reference and a reference queue. Every once a while, the JVM checks the reference
+	 * queue and cleans the DirectByteBuffers. However, as this doesn't happen immediately after discarding all references to a DirectByteBuffer, it's
+	 * easy to OutOfMemoryError yourself using DirectByteBuffers. This function explicitly calls the Cleaner method of a DirectByteBuffer.
+	 * 
+	 * @param toBeDestroyed
+	 *          The DirectByteBuffer that will be "cleaned". Utilizes reflection.
+	 */
+	public static void destroyDirectByteBuffer(ByteBuffer toBeDestroyed) {
+		if (!toBeDestroyed.isDirect())
+			return;
+
+		try {
+			Method cleaner = toBeDestroyed.getClass().getMethod("cleaner");
+			cleaner.setAccessible(true);
+			Method clean = Class.forName("sun.misc.Cleaner").getMethod("clean");
+			clean.setAccessible(true);
+			clean.invoke(cleaner.invoke(toBeDestroyed));
+		} catch (Exception ex) {
+		}
+		toBeDestroyed = null;
 	}
 }

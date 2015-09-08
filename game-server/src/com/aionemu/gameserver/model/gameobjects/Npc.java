@@ -132,7 +132,6 @@ public class Npc extends Creature {
 		return getObjectTemplate().getRank();
 	}
 
-	@SuppressWarnings("deprecation")
 	public NpcTemplateType getNpcTemplateType() {
 		return getObjectTemplate().getNpcTemplateType();
 	}

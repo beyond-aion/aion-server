@@ -30,11 +30,10 @@ public class OutpostLocation extends SiegeLocation {
 	}
 
 	/**
-	 * @deprecated Should be configured from datapack
 	 * @return Outpost Location Race
 	 */
-	@Deprecated
 	public SiegeRace getLocationRace() {
+		// TODO Should be configured from datapack
 		switch (getLocationId()) {
 			case 3111:
 				return SiegeRace.ASMODIANS;

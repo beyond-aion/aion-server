@@ -48,7 +48,6 @@ public class GlobalExclusion {
     return excludedNpcNames;
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<NpcTemplateType> getNpcTemplateTypes() {
     if (excludedTypes == null) {
     	excludedTypes = new ArrayList<NpcTemplateType>();
