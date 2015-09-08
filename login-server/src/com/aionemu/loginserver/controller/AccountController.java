@@ -132,7 +132,7 @@ public class AccountController {
 			client.sendPacket(new SM_UPDATE_SESSION(client.getSessionKey()));
 		}
 		else {
-			client.closeNow();
+			client.close();
 		}
 	}
 
@@ -249,7 +249,7 @@ public class AccountController {
 			if (accountsOnLS.containsKey(account.getId())) {
 				LoginConnection aionConnection = accountsOnLS.remove(account.getId());
 
-				aionConnection.closeNow();
+				aionConnection.close();
 				return AionAuthResponse.ALREADY_LOGGED_IN;
 			}
 			connection.setAccount(account);
@@ -282,7 +282,7 @@ public class AccountController {
 			}
 			if (accountsOnLS.containsKey(accountId)) {
 				LoginConnection conn = accountsOnLS.remove(accountId);
-				conn.closeNow();
+				conn.close();
 			}
 		}
 	}

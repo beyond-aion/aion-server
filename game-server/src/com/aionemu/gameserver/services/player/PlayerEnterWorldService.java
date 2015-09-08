@@ -157,7 +157,7 @@ public final class PlayerEnterWorldService {
 		CharacterBanInfo cbi = client.getAccount().getPlayerAccountData(objectId).getCharBanInfo();
 		if (cbi != null) {
 			if (cbi.getEnd() > System.currentTimeMillis() / 1000) {
-				client.close(new SM_QUIT_RESPONSE(), false);
+				client.close(new SM_QUIT_RESPONSE());
 				return;
 			}
 			else {
@@ -213,7 +213,7 @@ public final class PlayerEnterWorldService {
 					Player player = World.getInstance().findPlayer(objectId);
 					if (player != null) {
 						AuditLogger.info(player, "Duplicate player in world");
-						client.close(new SM_QUIT_RESPONSE(), false);
+						client.close(new SM_QUIT_RESPONSE());
 						return;
 					}
 					enterWorld(client, objectId);
@@ -263,7 +263,7 @@ public final class PlayerEnterWorldService {
 							if (connection.getIP() != null && player.getClientConnection().getIP() != null && (connection.getIP()).equals(player.getClientConnection().getIP())) {
 								if (SecurityConfig.KICK_DUALBOXING && !player.isGM() && !visitors.isGM()) {
 									//kick player already in game (visitor)
-									visitors.getClientConnection().close(new SM_QUIT_RESPONSE(), false);	
+									visitors.getClientConnection().close(new SM_QUIT_RESPONSE());	
 									AuditLogger.info(player, "Dual Boxing detected: Player / Account :" + player.getName() + " / " +  player.getClientConnection().getAccount().getName()
 									+ " with MAC / IP: "  + player.getClientConnection().getMacAddress() + " / " + player.getClientConnection().getIP()
 									+ " has entered in world with same MAC as Player / Account : "  + visitors.getName() + " / " + visitors.getClientConnection().getAccount().getName()

@@ -95,9 +95,8 @@ public class CM_GS_AUTH extends GsClientPacket {
 						client.sendPacket(new SM_HDDBAN_LIST());
 					}}, 500);
 				break;
-
 			default:
-				client.close(new SM_GS_AUTH_RESPONSE(resp), false);
+				client.close(new SM_GS_AUTH_RESPONSE(resp));
 		}
 	}
 }

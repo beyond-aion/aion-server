@@ -42,9 +42,8 @@ public class AionConnection extends AConnection {
 	private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
 
 	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<AionConnection>(
-		NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS,
-		NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD, NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD,
-		new ExecuteWrapper());
+		NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
+		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper());
 
 	/**
 	 * Possible states of AionConnection
@@ -73,7 +72,7 @@ public class AionConnection extends AConnection {
 	 * Current state of this connection
 	 */
 	private volatile State state;
-	
+
 	/**
 	 * AionClient is authenticating by passing to GameServer id of account.
 	 */
@@ -102,8 +101,8 @@ public class AionConnection extends AConnection {
 
 	/** Ping checker - for detecting hanged up connections **/
 	private PingChecker pingChecker;
-	
-	/**  packet flood filter  **/
+
+	/** packet flood filter **/
 	private int[] pff;
 	private long[] pffRequests;
 
@@ -115,7 +114,7 @@ public class AionConnection extends AConnection {
 	 * @throws IOException
 	 */
 	public AionConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192*4, 8192*4);
+		super(sc, d, 8192 * 4, 8192 * 4);
 
 		AionPacketHandlerFactory aionPacketHandlerFactory = AionPacketHandlerFactory.getInstance();
 		this.aionPacketHandler = aionPacketHandlerFactory.getPacketHandler();
@@ -127,8 +126,8 @@ public class AionConnection extends AConnection {
 
 		pingChecker = new PingChecker();
 		pingChecker.start();
-		
-		if(SecurityConfig.PFF_ENABLE) {
+
+		if (SecurityConfig.PFF_ENABLE) {
 			pff = PacketFloodFilter.getInstance().getPackets();
 			pffRequests = new long[pff.length];
 		}
@@ -140,10 +139,9 @@ public class AionConnection extends AConnection {
 		sendPacket(new SM_KEY());
 	}
 
-
 	/**
-	 * Enable crypt key - generate random key that will be used to encrypt second server packet [first one is unencrypted]
-	 * and decrypt client packets. This method is called from SM_KEY server packet, that packet sends key to aion client.
+	 * Enable crypt key - generate random key that will be used to encrypt second server packet [first one is unencrypted] and decrypt client packets.
+	 * This method is called from SM_KEY server packet, that packet sends key to aion client.
 	 * 
 	 * @return "false key" that should by used by aion client to encrypt/decrypt packets.
 	 */
@@ -169,48 +167,47 @@ public class AionConnection extends AConnection {
 				}
 				return true;
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception caught during decrypt!" + ex.getMessage());
 			return false;
 		}
 
-		if(data.remaining() < 5) {//op + static code + op == 5 bytes
-			log.error("Received fake packet from: "+this);
+		if (data.remaining() < 5) {// op + static code + op == 5 bytes
+			log.error("Received fake packet from: " + this);
 			return false;
 		}
-			
+
 		AionClientPacket pck = aionPacketHandler.handle(data, this);
-			
+
 		/**
 		 * Execute packet only if packet exist (!= null) and read was ok.
 		 */
 		if (pck != null) {
-			if(SecurityConfig.PFF_ENABLE) {
+			if (SecurityConfig.PFF_ENABLE) {
 				int opcode = pck.getOpcode();
-				if(pff.length > opcode) {		
-					if(pff[opcode] > 0) {
+				if (pff.length > opcode) {
+					if (pff[opcode] > 0) {
 						long last = this.pffRequests[opcode];
-						if(last == 0)
+						if (last == 0)
 							this.pffRequests[opcode] = System.currentTimeMillis();
 						else {
 							long diff = System.currentTimeMillis() - last;
-							if(diff < pff[opcode]) {
-								log.warn(this+" has flooding "+pck.getClass().getSimpleName()+" "+diff);
-								switch(SecurityConfig.PFF_LEVEL) {
-									case 1: //disconnect
+							if (diff < pff[opcode]) {
+								log.warn(this + " has flooding " + pck.getClass().getSimpleName() + " " + diff);
+								switch (SecurityConfig.PFF_LEVEL) {
+									case 1: // disconnect
 										return false;
 									case 2:
 										break;
 								}
-							}
-							else this.pffRequests[opcode] = System.currentTimeMillis();
+							} else
+								this.pffRequests[opcode] = System.currentTimeMillis();
 						}
 					}
 				}
 			}
-			
-			if(pck.read())
+
+			if (pck.read())
 				packetProcessor.executePacket(pck);
 		}
 
@@ -233,8 +230,7 @@ public class AionConnection extends AConnection {
 			try {
 				packet.write(this, data);
 				return true;
-			}
-			finally {
+			} finally {
 				RunnableStatsManager.handleStats(packet.getClass(), "runImpl()", System.nanoTime() - begin);
 			}
 
@@ -242,30 +238,20 @@ public class AionConnection extends AConnection {
 	}
 
 	/**
-	 * This method is called by Dispatcher when connection is ready to be closed.
-	 * 
-	 * @return time in ms after witch onDisconnect() method will be called. Always return 0.
-	 */
-	@Override
-	protected final long getDisconnectionDelay() {
-		return 0;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected final void onDisconnect() {
-		/**
-		 * Client starts authentication procedure
-		 */
 		pingChecker.stop();
 		if (getAccount() != null) {
 			LoginServer.getInstance().aionClientDisconnected(getAccount().getId());
 		}
 		Player player = getActivePlayer();
 		if (player != null) {
-			PlayerLeaveWorldService.tryLeaveWorld(player);
+			// force stop movement of player
+			player.getMoveController().abortMove();
+			player.getController().stopMoving();
+			PlayerLeaveWorldService.leaveWorldAfterDelay(player, 15); // prevent ctrl+alt+del / close window exploit
 		}
 	}
 
@@ -275,7 +261,7 @@ public class AionConnection extends AConnection {
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to client before closing?
-		close(/* packet, */true);
+		close(/* packet */);
 	}
 
 	/**
@@ -307,22 +293,18 @@ public class AionConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont.
-	 * Connection will be closed [by Dispatcher Thread], and onDisconnect() method will be called to clear all other
-	 * things. forced means that server shouldn't wait with removing this connection.
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
 	 *          Packet that will be send before closing.
-	 * @param forced
-	 *          have no effect in this implementation.
 	 */
-	public final void close(AionServerPacket closePacket, boolean forced) {
+	public final void close(AionServerPacket closePacket) {
 		synchronized (guard) {
 			if (isWriteDisabled())
 				return;
 
 			pendingClose = true;
-			isForcedClosing = forced;
 			sendMsgQueue.clear();
 			sendMsgQueue.addLast(closePacket);
 			enableWriteInterest();
@@ -378,8 +360,7 @@ public class AionConnection extends AConnection {
 		if (player == null) {
 			activePlayer.set(player);
 			setState(State.AUTHED);
-		} 
-		else if (activePlayer.compareAndSet(null, player)) {
+		} else if (activePlayer.compareAndSet(null, player)) {
 			setState(State.IN_GAME);
 			lastPlayerName = player.getName();
 		} else {
@@ -412,10 +393,6 @@ public class AionConnection extends AConnection {
 		this.lastPingTimeMS = lastPingTimeMS;
 	}
 
-	public void closeNow() {
-		this.close(false);
-	}
-
 	public void setMacAddress(String mac) {
 		this.macAddress = mac;
 	}
@@ -436,8 +413,8 @@ public class AionConnection extends AConnection {
 	public String toString() {
 		Player player = activePlayer.get();
 		if (player != null) {
-			return "AionConnection [state=" + state + ", account=" + account + ", getObjectId()=" + player.getObjectId() 
-					+ ", lastPlayerName=" + lastPlayerName + ", macAddress=" + macAddress + ", getIP()=" + getIP() + "]";
+			return "AionConnection [state=" + state + ", account=" + account + ", getObjectId()=" + player.getObjectId() + ", lastPlayerName="
+				+ lastPlayerName + ", macAddress=" + macAddress + ", getIP()=" + getIP() + "]";
 		}
 		return "";
 	}
@@ -464,7 +441,7 @@ public class AionConnection extends AConnection {
 		public void run() {
 			if (System.currentTimeMillis() - getLastPingTimeMS() > checkTime) {
 				log.info("Found hanged up client: " + AionConnection.this + " - closing now :)");
-				closeNow();
+				close();
 			}
 		}
 	}

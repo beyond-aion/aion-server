@@ -488,7 +488,7 @@ public class Skill {
 					// check if values are too low
 					if (clientTime < 0 || checkTme < SecurityConfig.NO_ANIMATION_VALUE) {
 						if (SecurityConfig.NO_ANIMATION_KICK) {
-							player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+							player.getClientConnection().close(new SM_QUIT_RESPONSE());
 							AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/"
 								+ finalTime + ") Kicking Player: " + player.getName());
 						}

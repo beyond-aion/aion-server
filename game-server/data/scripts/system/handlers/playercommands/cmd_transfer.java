@@ -83,7 +83,7 @@ public class cmd_transfer extends PlayerCommand {
 
 		// save new id in db & quit
 		DAOManager.getDAO(PlayerDAO.class).changePlayerId(player, accountId);
-		player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+		player.getClientConnection().close(new SM_QUIT_RESPONSE());
 
 		if (owner != null) {
 			PacketSendUtility.sendMessage(owner, "Player: " + player.getName() + " was transferd to yours account."
@@ -92,7 +92,7 @@ public class cmd_transfer extends PlayerCommand {
 				@Override
 				public void run() {
 					if (owner.isOnline()) {
-						owner.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+						owner.getClientConnection().close(new SM_QUIT_RESPONSE());
 					}
 				}
 

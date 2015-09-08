@@ -117,16 +117,6 @@ public class LoginServerConnection extends AConnection {
 	}
 
 	/**
-	 * This method is called by Dispatcher when connection is ready to be closed.
-	 * 
-	 * @return time in ms after witch onDisconnect() method will be called. Always return 0.
-	 */
-	@Override
-	protected final long getDisconnectionDelay() {
-		return 0;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -140,7 +130,7 @@ public class LoginServerConnection extends AConnection {
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to loginserver before closing?
-		close(/* packet, */true);
+		close(/* packet */);
 	}
 
 	/**
@@ -165,14 +155,12 @@ public class LoginServerConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranted that closePacket will be sent before closing connection, but all past and future packets wont.
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont.
 	 * Connection will be closed [by Dispatcher Thread], and onDisconnect() method will be called to clear all other
-	 * things. forced means that server shouldn't wait with removing this connection.
+	 * things.
 	 * 
 	 * @param closePacket
 	 *          Packet that will be send before closing.
-	 * @param forced
-	 *          have no effect in this implementation.
 	 */
 	public final void close(LsServerPacket closePacket, boolean forced) {
 		synchronized (guard) {
@@ -182,7 +170,6 @@ public class LoginServerConnection extends AConnection {
 			log.debug("sending packet: " + closePacket + " and closing connection after that.");
 
 			pendingClose = true;
-			isForcedClosing = forced;
 			sendMsgQueue.clear();
 			sendMsgQueue.addLast(closePacket);
 			enableWriteInterest();

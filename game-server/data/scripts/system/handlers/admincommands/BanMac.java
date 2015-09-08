@@ -53,7 +53,7 @@ public class BanMac extends AdminCommand {
 			Player targetpl = (Player) target;
 			address = targetpl.getClientConnection().getMacAddress();
 			targetName = targetpl.getName();
-                        targetpl.getClientConnection().closeNow();
+                        targetpl.getClientConnection().close();
                     }
                     else {
                         info(player, "You should select a player or give me any mac address");

@@ -9,19 +9,18 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 
 /**
- * In this packets aion client is asking if may quit.
- * 
  * @author -Nemesiss-
+ * @modified Neon
  */
 public class CM_QUIT extends AionClientPacket {
 
 	/**
-	 * Logout - if true player is wanted to go to character selection.
+	 * if true, player wants to go to the character selection or plastic surgery screen.
 	 */
-	private boolean logout;
+	private boolean stayConnected;
 
 	/**
-	 * Constructs new instance of <tt>CM_QUIT </tt> packet
+	 * Constructs new instance of <tt>CM_QUIT</tt> packet
 	 * 
 	 * @param opcode
 	 */
@@ -31,34 +30,25 @@ public class CM_QUIT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		logout = readC() == 1;
+		stayConnected = readC() == 1;
 	}
 
 	@Override
 	protected void runImpl() {
-		AionConnection client = getConnection();
+		AionConnection con = getConnection();
+		Player player = con.getActivePlayer();
+		boolean charEditScreen = false;
 
-		Player player = null;
-		if (client.getState() == State.IN_GAME) {
-			player = client.getActivePlayer();
-			// TODO! check if may quit
-			if (!logout)
-				LoginServer.getInstance().aionClientDisconnected(client.getAccount().getId());
-
-			PlayerLeaveWorldService.startLeaveWorld(player);
-			client.setActivePlayer(null);
+		if (player != null) {
+			charEditScreen = player.isInEditMode();
+			PlayerLeaveWorldService.leaveWorld(player);
 		}
 
-		if (logout) {
-			if (player != null && player.isInEditMode()) {
-				sendPacket(new SM_QUIT_RESPONSE(true));
-				player.setEditMode(false);
-			}
-			else
-				sendPacket(new SM_QUIT_RESPONSE());
-		}
-		else {
-			client.close(new SM_QUIT_RESPONSE(), false);
+		sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
+
+		if (!stayConnected) {
+			LoginServer.getInstance().aionClientDisconnected(con.getAccount().getId());
+			con.close();
 		}
 	}
 }

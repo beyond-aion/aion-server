@@ -94,11 +94,6 @@ public class ChatServerConnection extends AConnection {
 	}
 
 	@Override
-	protected final long getDisconnectionDelay() {
-		return 0;
-	}
-
-	@Override
 	protected final void onDisconnect() {
 		chatServer.chatServerDown();
 	}
@@ -106,7 +101,7 @@ public class ChatServerConnection extends AConnection {
 	@Override
 	protected final void onServerClose() {
 		// TODO send close packet to chat server
-		close(/* packet, */true);
+		close(/* packet */);
 	}
 
 	/**
@@ -127,9 +122,8 @@ public class ChatServerConnection extends AConnection {
 
 	/**
 	 * @param closePacket
-	 * @param forced
 	 */
-	public final void close(CsServerPacket closePacket, boolean forced) {
+	public final void close(CsServerPacket closePacket) {
 		synchronized (guard) {
 			if (isWriteDisabled())
 				return;
@@ -137,7 +131,6 @@ public class ChatServerConnection extends AConnection {
 			log.info("sending packet: " + closePacket + " and closing connection after that.");
 
 			pendingClose = true;
-			isForcedClosing = forced;
 			sendMsgQueue.clear();
 			sendMsgQueue.addLast(closePacket);
 			enableWriteInterest();

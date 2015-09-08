@@ -9,17 +9,16 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.AccountTime;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_L2AUTH_LOGIN_CHECK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECONNECT_KEY;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_AUTH;
@@ -128,8 +127,8 @@ public class LoginServer {
 			 * will never ends]
 			 */
 			for (AionConnection client : loginRequests.values()) {
-				// TODO! somme error packet!
-				client.close(/* closePacket, */true);
+				// TODO! some error packet!
+				client.close(/* closePacket */);
 			}
 			loginRequests.clear();
 		}
@@ -187,8 +186,8 @@ public class LoginServer {
 		 */
 		if (loginServer == null || loginServer.getState() != State.AUTHED) {
 			log.warn("LS !!! " + (loginServer == null ? "NULL" : loginServer.getState()));
-			// TODO! somme error packet!
-			client.close(/* closePacket, */true);
+			// TODO! some error packet!
+			client.close(/* closePacket */);
 			return;
 		}
 
@@ -219,7 +218,7 @@ public class LoginServer {
 		Account account = AccountService.getAccount(accountId, accountName, accountTime, accessLevel, membership, toll, allowedHddSerial);
 		if (!validateAccount(account)) {
 			log.info("Illegal account auth detected: " + accountId);
-			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName), true);
+			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName));
 			return;
 		}
 
@@ -232,7 +231,7 @@ public class LoginServer {
 		}
 		else {
 			log.info("Account not authed: " + accountId);
-			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName), true);
+			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName));
 		}
 	}
 
@@ -245,13 +244,13 @@ public class LoginServer {
 			if (accountData.getPlayerCommonData().isOnline()) {
 				log.warn("[AUDIT] Possible dupe hack account: " + account.getId());
 				Player player = World.getInstance().findPlayer(accountData.getPlayerCommonData().getPlayerObjId());
-				if (player != null) {
+				if (player != null && player.getClientConnection() != null) {
 					// kick
-					PlayerLeaveWorldService.startLeaveWorld(player);
-				}
-				else {
-					// db update offline
-					DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
+					player.getClientConnection().close(new SM_QUIT_RESPONSE());
+					PlayerLeaveWorldService.leaveWorld(player);
+				} else {
+					// this should never happen, but if: set offline
+					accountData.getPlayerCommonData().setOnline(false);
 				}
 				return false;
 			}
@@ -269,8 +268,8 @@ public class LoginServer {
 		 * There are no connection to LoginServer. We should disconnect this client since authentication is not possible.
 		 */
 		if (loginServer == null || loginServer.getState() != State.AUTHED) {
-			// TODO! somme error packet!
-			client.close(/* closePacket, */false);
+			// TODO! some error packet!
+			client.close(/* closePacket */);
 			return;
 		}
 
@@ -297,7 +296,7 @@ public class LoginServer {
 			return;
 
 		log.info("Account reconnectimg: " + accountId + " = " + client.getAccount().getName());
-		client.close(new SM_RECONNECT_KEY(reconnectKey), false);
+		client.close(new SM_RECONNECT_KEY(reconnectKey));
 	}
 
 	/**
@@ -321,7 +320,7 @@ public class LoginServer {
 
 	private void closeClientWithCheck(AionConnection client, final int accountId) {
 		log.info("Closing client connection " + accountId);
-		client.close(/* closePacket, */false);
+		client.close(/* closePacket */);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -329,7 +328,7 @@ public class LoginServer {
 				AionConnection client = loggedInAccounts.get(accountId);
 				if (client != null) {
 					log.warn("Removing client from server because of stalled connection");
-					client.close(false);
+					client.close();
 					loggedInAccounts.remove(accountId);
 					sendAccountDisconnected(accountId);
 				}
@@ -358,12 +357,12 @@ public class LoginServer {
 			 */
 			for (AionConnection client : loginRequests.values()) {
 				// TODO! some error packet!
-				client.close(/* closePacket, */true);
+				client.close(/* closePacket */);
 			}
 			loginRequests.clear();
 
 			if (loginServer != null)
-				loginServer.close(false);
+				loginServer.close();
 		}
 
 		log.info("GameServer disconnected from the Login Server...");

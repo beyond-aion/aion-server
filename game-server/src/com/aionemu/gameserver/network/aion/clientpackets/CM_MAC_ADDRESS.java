@@ -68,11 +68,11 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 	protected void runImpl() {		
 		if(BannedMacManager.getInstance().isBanned(macAddress)) {
 			//TODO some information packets
-			this.getConnection().closeNow();
+			this.getConnection().close();
 			log.info("[MAC_AUDIT] "+macAddress+" ("+this.getConnection().getIP()+") was kicked due to mac ban");
 		}
 		else if(HDDBanService.getInstance().isBanned(hddSerial)) {
-			this.getConnection().closeNow();
+			this.getConnection().close();
 			log.info("[MAC_AUDIT] Account:"+this.getConnection().getAccount().getName()+", HDD Serial "+hddSerial+" ("+this.getConnection().getIP()+") was kicked due to hdd serial ban");
 		}
 		else {
@@ -95,7 +95,7 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 				if(!HDDBanService.getInstance().isAllowed(account.getAllowedHddSerial(), hddSerial)) {
 					if(AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_KICK) {
 						getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_SYSTEM_ERROR);
-						getConnection().closeNow();
+						getConnection().close();
 						log.info("[MAC_AUDIT] Account:"+account.getName()+",  HDD Serial "+hddSerial+" ("+getConnection().getIP()+") was kicked due to allowed hdd serial mismatch");
 					}
 					else {

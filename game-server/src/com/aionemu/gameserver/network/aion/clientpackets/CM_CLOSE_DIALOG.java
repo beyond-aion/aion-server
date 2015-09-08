@@ -4,6 +4,7 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -12,6 +13,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
 
+/**
+ * @modified Neon
+ */
 public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 	/**
@@ -28,28 +32,24 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		final VisibleObject obj = player.getKnownList().getObject(targetObjectId);
-		final AionConnection client = getConnection();
-		if(obj == null) {
-			return;
-		}
+		VisibleObject target = player.getKnownList().getObject(targetObjectId);
 
-		if (obj instanceof Npc) {
-			Npc npc = (Npc)obj;
+		if (target == null)
+			return;
+
+		AionConnection client = getConnection();
+		Mailbox mailbox = player.getMailbox();
+
+		if (target instanceof Npc) {
+			Npc npc = (Npc) target;
 			npc.getAi2().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
 			DialogService.onCloseDialog(npc, player);
 
@@ -57,15 +57,14 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 				@Override
 				public void run() {
-					client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, (byte)obj.getHeading()));
+					client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, (byte) target.getHeading()));
 				}
-			}, 1200);			
-			
-			
+			}, 1200);
+
 		}
 
-		if (player.getMailbox().mailBoxState != 0) {
-			player.getMailbox().mailBoxState = PlayerMailboxState.CLOSED;
+		if (mailbox != null && mailbox.mailBoxState != PlayerMailboxState.CLOSED) {
+			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 		}
 	}
 }

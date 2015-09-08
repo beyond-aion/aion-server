@@ -22,7 +22,7 @@ public class ShutdownConfig {
 	/**
 	 * Shutdown announce interval.
 	 */
-	@Property(key = "gameserver.shutdown.interval", defaultValue = "1")
+	@Property(key = "gameserver.shutdown.interval", defaultValue = "5")
 	public static int ANNOUNCE_INTERVAL;
 
 	/**

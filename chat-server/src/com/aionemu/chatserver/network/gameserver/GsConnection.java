@@ -58,12 +58,6 @@ public class GsConnection extends AConnection
 	}
 
 	@Override
-	protected final long getDisconnectionDelay()
-	{
-		return 0;
-	}
-
-	@Override
 	protected final void onDisconnect()
 	{
 		GameServerService.getInstance().setOffline();
@@ -72,7 +66,7 @@ public class GsConnection extends AConnection
 	@Override
 	protected final void onServerClose()
 	{
-		close(true);
+		close();
 	}
 
 	public final void sendPacket(GsServerPacket bp)
@@ -86,14 +80,13 @@ public class GsConnection extends AConnection
 		}
 	}
 
-	public final void close(GsServerPacket closePacket, boolean forced)
+	public final void close(GsServerPacket closePacket)
 	{
 		synchronized (guard)
 		{
 			if (isWriteDisabled())
 				return;
 			pendingClose = true;
-			isForcedClosing = forced;
 			sendMsgQueue.clear();
 			sendMsgQueue.addLast(closePacket);
 			enableWriteInterest();

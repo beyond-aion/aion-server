@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_QUIT;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -45,38 +46,23 @@ import com.aionemu.gameserver.utils.audit.GMService;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class PlayerLeaveWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerLeaveWorldService.class);
 
 	/**
-	 * @param player
-	 * @param delay
+	 * This method is called when player leaves the game, which includes just two cases: either player goes back to char selection screen or it's
+	 * leaving the game [closing client].<br>
+	 * <br>
+	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link AionConnection} and {@link CM_QUIT} and must not be called from
+	 * anywhere else</b>
 	 */
-	public static final void startLeaveWorldDelay(final Player player, int delay) {
-		// force stop movement of player
-		player.getController().stopMoving();
+	public static final void leaveWorld(Player player) {
+		AionConnection con = player.getClientConnection();
+		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				startLeaveWorld(player);
-			}
-
-		}, delay);
-	}
-
-	/**
-	 * This method is called when player leaves the game, which includes just
-	 * two cases: either player goes back to char selection screen or it's
-	 * leaving the game [closing client].<br> <br> <b><font color='red'>NOTICE:
-	 * </font> This method is called only from {@link GameConnection} and
-	 * {@link CM_QUIT} and must not be called from anywhere else</b>
-	 */
-	public static final void startLeaveWorld(Player player) {
-		log.info("Player logged out: " + player.getName() + " Account: "
-				+ (player.getClientConnection() != null ? player.getClientConnection().getAccount().getName() : "disconnected"));
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
 		player.onLoggedOut();
@@ -91,7 +77,7 @@ public class PlayerLeaveWorldService {
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
 		player.getMoveController().abortMove();
-		
+
 		if (player.isLooting())
 			DropService.getInstance().closeDropList(player, player.getLootingNpcOid());
 
@@ -108,7 +94,7 @@ public class PlayerLeaveWorldService {
 		DAOManager.getDAO(ItemCooldownsDAO.class).storeItemCooldowns(player);
 		DAOManager.getDAO(HouseObjectCooldownsDAO.class).storeHouseObjectCooldowns(player);
 		DAOManager.getDAO(PlayerLifeStatsDAO.class).updatePlayerLifeStat(player);
-	
+
 		PlayerGroupService.onPlayerLogout(player);
 		PlayerAllianceService.onPlayerLogout(player);
 		// fix legion warehouse exploits
@@ -121,8 +107,7 @@ public class PlayerLeaveWorldService {
 				PlayerReviveService.instanceRevive(player);
 			else
 				PlayerReviveService.bindRevive(player);
-		}
-		else if (DuelService.getInstance().isDueling(player.getObjectId())) {
+		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
 			DuelService.getInstance().loseDuel(player);
 		}
 		Summon summon = player.getSummon();
@@ -134,6 +119,8 @@ public class PlayerLeaveWorldService {
 		if (player.getPostman() != null)
 			player.getPostman().getController().onDelete();
 		player.setPostman(null);
+
+		player.setEditMode(false);
 
 		PunishmentService.stopPrisonTask(player, true);
 		PunishmentService.stopGatherableTask(player, true);
@@ -162,20 +149,24 @@ public class PlayerLeaveWorldService {
 		player.getInventory().setOwner(null);
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
+
+		con.setActivePlayer(null);
 	}
 
 	/**
 	 * @param player
+	 *          the player that left the game
+	 * @param delay
+	 *          the delay in seconds
 	 */
-	public static void tryLeaveWorld(Player player) {
-		player.getMoveController().abortMove();
-		if (player.getController().isInShutdownProgress())
-			PlayerLeaveWorldService.startLeaveWorld(player);
-		// prevent ctrl+alt+del / close window exploit
-		else {
-			int delay = 15;
-			PlayerLeaveWorldService.startLeaveWorldDelay(player, (delay * 1000));
-		}
-	}
+	public static final void leaveWorldAfterDelay(final Player player, int delay) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
+			@Override
+			public void run() {
+				leaveWorld(player);
+			}
+
+		}, delay * 1000);
+	}
 }

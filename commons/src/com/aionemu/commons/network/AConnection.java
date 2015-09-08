@@ -34,10 +34,6 @@ public abstract class AConnection {
 	 */
 	protected boolean pendingClose;
 	/**
-	 * True if OnDisconnect() method should be called immediately after this connection was closed.
-	 */
-	protected boolean isForcedClosing;
-	/**
 	 * True if this connection is already closed.
 	 */
 	protected boolean closed;
@@ -119,17 +115,12 @@ public abstract class AConnection {
 	/**
 	 * Connection will be closed at some time [by Dispatcher Thread], after that onDisconnect() method will be called to
 	 * clear all other things.
-	 * 
-	 * @param forced
-	 *          is just hint that getDisconnectionDelay() should return 0 so OnDisconnect() method will be called without
-	 *          any delay.
 	 */
-	public final void close(boolean forced) {
+	public final void close() {
 		synchronized (guard) {
 			if (isWriteDisabled())
 				return;
 
-			isForcedClosing = forced;
 			getDispatcher().closeConnection(this);
 		}
 	}
@@ -224,13 +215,6 @@ public abstract class AConnection {
 	 * for sending first packet etc.
 	 */
 	abstract protected void initialized();
-
-	/**
-	 * This method is called by Dispatcher when connection is ready to be closed.
-	 * 
-	 * @return time in ms after witch onDisconnect() method will be called.
-	 */
-	abstract protected long getDisconnectionDelay();
 
 	/**
 	 * This method is called by Dispatcher to inform that this connection was closed and should be cleared. This method is

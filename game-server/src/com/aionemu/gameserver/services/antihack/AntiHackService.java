@@ -155,11 +155,11 @@ public class AntiHackService {
 				moveBack(player, x, y, type, pkt);
 				if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3
 						|| player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3)
-					player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
 			case 3:
 				AuditLogger.info(player, message);
-				player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+				player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
 			default:
 				AuditLogger.info(player, message);

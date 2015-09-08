@@ -1548,7 +1548,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @author IlBuono
+	 * @return true, if the character is in plastic surgery/gender switch screen
 	 */
 	public boolean isInEditMode() {
 		return edit_mode;

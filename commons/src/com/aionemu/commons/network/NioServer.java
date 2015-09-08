@@ -251,14 +251,14 @@ public class NioServer {
 			for (Dispatcher d : readWriteDispatchers)
 				for (SelectionKey key : d.selector().keys()) {
 					if (key.attachment() instanceof AConnection) {
-						((AConnection) key.attachment()).close(true);
+						((AConnection) key.attachment()).close();
 					}
 				}
 		}
 		else {
 			for (SelectionKey key : acceptDispatcher.selector().keys()) {
 				if (key.attachment() instanceof AConnection) {
-					((AConnection) key.attachment()).close(true);
+					((AConnection) key.attachment()).close();
 				}
 			}
 		}

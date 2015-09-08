@@ -313,8 +313,7 @@ public abstract class Dispatcher extends Thread {
 
 	/**
 	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread
-	 * [DisconnectionThreadPool] after getDisconnectionDelay() time in ms. This method may only be called by current
-	 * Dispatcher Thread.
+	 * [DisconnectionThreadPool]. This method may only be called by current Dispatcher Thread.
 	 * 
 	 * @param con
 	 */
@@ -326,7 +325,6 @@ public abstract class Dispatcher extends Thread {
 			assert Thread.currentThread() == this;
 
 		if (con.onlyClose())
-		//	dcPool.scheduleDisconnection(new DisconnectionTask(con), con.getDisconnectionDelay());
 			dcPool.execute(new DisconnectionTask(con));
 	}
 }

@@ -45,7 +45,7 @@ public class CM_PING extends AionClientPacket {
 				AuditLogger.info(player, "Possible client timer cheat kicking player: " + pingInterval + ", ip=" + getConnection().getIP());
 				if (SecurityConfig.SECURITY_ENABLE) {
 					PacketSendUtility.sendMessage(player, "You have been triggered Speed Hack detection so you're disconnected.");
-					getConnection().closeNow();
+					getConnection().close();
 				}
 			}
 		}

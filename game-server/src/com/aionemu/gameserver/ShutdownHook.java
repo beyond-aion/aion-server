@@ -35,8 +35,7 @@ public class ShutdownHook extends Thread {
 	public void run() {
 		if (ShutdownConfig.HOOK_MODE == 1) {
 			shutdownHook(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.SHUTDOWN);
-		}
-		else if (ShutdownConfig.HOOK_MODE == 2) {
+		} else if (ShutdownConfig.HOOK_MODE == 2) {
 			shutdownHook(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.RESTART);
 		}
 	}
@@ -57,7 +56,7 @@ public class ShutdownHook extends Thread {
 		}
 	}
 
-	private void sendShutdownMessage(int seconds) {
+	private void broadcastShutdownMessage(int seconds) {
 		try {
 			Iterator<Player> onlinePlayers = World.getInstance().getPlayersIterator();
 			if (!onlinePlayers.hasNext())
@@ -67,8 +66,7 @@ public class ShutdownHook extends Thread {
 				if (player != null && player.getClientConnection() != null)
 					player.getClientConnection().sendPacket(STR_SERVER_SHUTDOWN(String.valueOf(seconds)));
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}
@@ -83,8 +81,7 @@ public class ShutdownHook extends Thread {
 				if (player != null && player.getClientConnection() != null)
 					player.getController().setInShutdownProgress(status);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}
@@ -92,24 +89,21 @@ public class ShutdownHook extends Thread {
 	private void shutdownHook(int duration, int interval, ShutdownMode mode) {
 		for (int i = duration; i >= interval; i -= interval) {
 			try {
-				if (World.getInstance().getPlayersIterator().hasNext()) {
+				if (World.getInstance().getAllPlayers().size() > 0) {
 					log.info("Runtime is " + mode.getText() + " in " + i + " seconds.");
-					sendShutdownMessage(i);
+					broadcastShutdownMessage(i);
 					sendShutdownStatus(ShutdownConfig.SAFE_REBOOT);
-				}
-				else {
+				} else {
 					log.info("Runtime is " + mode.getText() + " now ...");
 					break; // fast exit.
 				}
 
 				if (i > interval) {
 					sleep(interval * 1000);
-				}
-				else {
+				} else {
 					sleep(i * 1000);
 				}
-			}
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				return;
 			}
 		}
@@ -117,19 +111,15 @@ public class ShutdownHook extends Thread {
 		// Disconnect login server from game.
 		LoginServer.getInstance().gameServerDisconnected();
 
-		// Disconnect all players.
-		Iterator<Player> onlinePlayers;
-		onlinePlayers = World.getInstance().getPlayersIterator();
-		while (onlinePlayers.hasNext()) {
-			Player activePlayer = onlinePlayers.next();
+		// Save all players.
+		for (Player activePlayer : World.getInstance().getAllPlayers()) {
 			try {
-				PlayerLeaveWorldService.startLeaveWorld(activePlayer);
-			}
-			catch (Exception e) {
+				PlayerLeaveWorldService.leaveWorld(activePlayer);
+			} catch (Exception e) {
 				log.error("Error while saving player " + e.getMessage());
 			}
 		}
-		log.info("All players are disconnected...");
+		log.info("Finished saving players");
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
 		PeriodicSaveService.getInstance().onShutdown();

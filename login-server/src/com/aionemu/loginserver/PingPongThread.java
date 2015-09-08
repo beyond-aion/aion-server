@@ -63,7 +63,7 @@ public class PingPongThread implements Runnable {
 		if(requests >= 2) {
 			uptime = false;
 			log.info("Gameserver #"+connection.getGameServerInfo().getId()+" [PID="+this.serverPID+"] died, closing.");
-			connection.close(false);
+			connection.close();
 			if(killProcess && serverPID != -1) {
 				if(System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
 					try {
