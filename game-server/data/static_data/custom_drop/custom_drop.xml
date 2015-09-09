@@ -577,6 +577,22 @@
 			<drop item_id="188052724" name="Beritran Hoard" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Krotan Barracks -->
+	<npc_drop npc_id="702288" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
+			<drop item_id="188052743" name="Manastone Box" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="188052744" name="Ancient Relic Box" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="160002421" name="Pepento Salad" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702291" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052742" name="Fortress Supplies" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
