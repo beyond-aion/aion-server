@@ -13,13 +13,13 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.CollisionDieActor;
 import com.aionemu.gameserver.controllers.observer.ShieldObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.shield.Shield;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.jme3.math.Vector3f;
 
 /**
  * @author xavier
@@ -36,7 +36,7 @@ public class ShieldService {
 	}
 
 	private final FastMap<Integer, Shield> sphereShields = new FastMap<Integer, Shield>();
-	private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<Integer, List<SiegeShield>>(0);
+	private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<Integer, List<SiegeShield>>();
 
 	public static final ShieldService getInstance() {
 		return SingletonHolder.instance;

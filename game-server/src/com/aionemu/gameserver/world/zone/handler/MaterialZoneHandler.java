@@ -5,12 +5,12 @@ import javolution.util.FastMap;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.CollisionMaterialActor;
 import com.aionemu.gameserver.controllers.observer.IActor;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.jme3.scene.Spatial;
 
 /**
  * @author Rolandas

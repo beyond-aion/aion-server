@@ -3,8 +3,7 @@ package admincommands;
 import java.util.Iterator;
 
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -12,6 +11,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.jme3.collision.CollisionResult;
 
 /**
  * @author Rolandas
@@ -55,7 +55,7 @@ public class Collide extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "From target direction:");
 		PacketSendUtility.sendMessage(admin, "Target: X=" + x + "; Y=" + y + "; Z=" + z);
 
-		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, false, intentions);
+		CollisionResultsEx results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, false, intentions);
 		CollisionResult closest = results.getClosestCollision();
 
 		if (results.size() == 0) {

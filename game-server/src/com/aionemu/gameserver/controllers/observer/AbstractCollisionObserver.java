@@ -2,12 +2,12 @@ package com.aionemu.gameserver.controllers.observer;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
-import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 
 /**
  * @author MrPoke
@@ -43,7 +43,7 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 						dir.subtractLocal(pos).normalizeLocal();
 						Ray r = new Ray(pos, dir);
 						r.setLimit(limit);
-						CollisionResults results = new CollisionResults(intentions, true, creature.getInstanceId());
+						CollisionResultsEx results = new CollisionResultsEx(intentions, true, creature.getInstanceId());
 						geometry.collideWith(r, results);
 						onMoved(results);
 						oldPos = pos;
@@ -56,5 +56,5 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 		}
 	}
 
-	public abstract void onMoved(CollisionResults result);
+	public abstract void onMoved(CollisionResultsEx result);
 }

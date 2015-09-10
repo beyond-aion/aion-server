@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.world.geo;
 
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 
 /**
  * @author ATracer

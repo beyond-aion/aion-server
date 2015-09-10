@@ -8,10 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -27,6 +24,9 @@ import com.aionemu.gameserver.utils.gametime.DayTime;
 import com.aionemu.gameserver.utils.gametime.GameTime;
 import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.jme3.collision.CollisionResult;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 
 /**
  * @author Rolandas
@@ -97,7 +97,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	}
 
 	@Override
-	public void onMoved(CollisionResults collisionResults) {
+	public void onMoved(CollisionResultsEx collisionResults) {
 		if (isCanceled.get())
 			return;
 		if (collisionResults.size() == 0) {

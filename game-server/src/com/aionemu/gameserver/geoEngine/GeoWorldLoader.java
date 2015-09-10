@@ -10,52 +10,50 @@ import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.math.Matrix3f;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.models.DoorGeometry;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Box;
-import com.aionemu.gameserver.geoEngine.scene.Geometry;
-import com.aionemu.gameserver.geoEngine.scene.Mesh;
-import com.aionemu.gameserver.geoEngine.scene.Node;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.geoEngine.scene.VertexBuffer;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
+import com.aionemu.gameserver.geoEngine.scene.GeometryEx;
+import com.aionemu.gameserver.geoEngine.scene.MeshEx;
+import com.aionemu.gameserver.geoEngine.scene.NodeEx;
+import com.aionemu.gameserver.geoEngine.scene.SpatialEx;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorWorld;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
+import com.jme3.bounding.BoundingBox;
+import com.jme3.bounding.BoundingVolume;
+import com.jme3.math.Matrix3f;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.VertexBuffer;
+import com.jme3.scene.shape.Box;
 
 /**
  * @author Mr. Poke
+ * @modified Neon
  */
 public class GeoWorldLoader {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
-
 	private static String GEO_DIR = "data/geo/";
-
 	private static boolean DEBUG = false;
 
-	public static void setDebugMod(boolean debug) {
-		DEBUG = debug;
-	}
-
-	public static Map<String, Spatial> loadMeshs(String fileName) throws IOException {
-		Map<String, Spatial> geoms = new HashMap<String, Spatial>();
-		File geoFile = new File(fileName);
+	public static Map<String, Spatial> loadMeshes(String fileName) {
+		Map<String, Spatial> geoms = new FastMap<>();
+		File geoFile = new File(GEO_DIR + fileName);
 		FileChannel roChannel = null;
 		MappedByteBuffer geo = null;
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r")) {
@@ -64,16 +62,16 @@ public class GeoWorldLoader {
 			geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, size).load();
 			geo.order(ByteOrder.LITTLE_ENDIAN);
 			while (geo.hasRemaining()) {
-				short namelenght = geo.getShort();
-				byte[] nameByte = new byte[namelenght];
+				short namelength = geo.getShort();
+				byte[] nameByte = new byte[namelength];
 				geo.get(nameByte);
 				String name = new String(nameByte).intern();
-				Node node = new Node(DEBUG ? name : null);
+				NodeEx node = new NodeEx(DEBUG ? name : null);
 				byte intentions = 0;
 				byte singleChildMaterialId = -1;
 				int modelCount = geo.getShort();
 				for (int c = 0; c < modelCount; c++) {
-					Mesh m = new Mesh();
+					MeshEx m = new MeshEx();
 
 					int vectorCount = ((int) geo.getShort()) * 3;
 					ByteBuffer floatBuffer = MappedByteBuffer.allocateDirect(vectorCount * 4);
@@ -89,7 +87,7 @@ public class GeoWorldLoader {
 						indexes.put(geo.getShort());
 					}
 
-					Geometry geom = null;
+					GeometryEx geom = null;
 					m.setCollisionFlags(geo.getShort());
 					if ((m.getIntentions() & CollisionIntention.MOVEABLE.getId()) != 0) {
 						// TODO: skip moveable collisions (ships, shugo boxes), not handled yet
@@ -107,7 +105,7 @@ public class GeoWorldLoader {
 						geom = new DoorGeometry(name);
 					} else {
 						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
-						geom = new Geometry(null, m);
+						geom = new GeometryEx(null, m);
 						if (mtl != null || m.getMaterialId() == 11) {
 							node.setName(name);
 						}
@@ -126,9 +124,10 @@ public class GeoWorldLoader {
 				}
 			}
 			destroyDirectByteBuffer(geo);
+		} catch (IOException e) {
+			log.error("Error loading meshes", e);
 		}
 		return geoms;
-
 	}
 
 	public static boolean loadWorld(int worldId, Map<String, Spatial> models, GeoMap map) throws IOException {
@@ -151,7 +150,7 @@ public class GeoWorldLoader {
 			}
 
 			while (geo.hasRemaining()) {
-				int nameLength = geo.getShort();
+				short nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
 				String name = new String(nameByte);
@@ -163,87 +162,76 @@ public class GeoWorldLoader {
 				Matrix3f matrix3f = new Matrix3f();
 				matrix3f.set(matrix);
 				Spatial node = models.get(name.toLowerCase().intern());
-				try {
-					if (node != null) {
-						Spatial nodeClone = node;
-						if (node instanceof DoorGeometry) {
-							try {
-								nodeClone = node.clone();
-							} catch (CloneNotSupportedException e) {
-								e.printStackTrace();
-							}
-							if (createDoors(nodeClone, worldId, matrix3f, loc, scale)) {
-								map.attachChild(nodeClone);
-							}
+				if (node != null) {
+					Spatial nodeClone = node.deepClone();
+					if (nodeClone instanceof DoorGeometry) {
+						if (createDoors((DoorGeometry) nodeClone, worldId, matrix3f, loc, scale))
+							map.attachChild(nodeClone);
+					} else {
+						attachChild(map, nodeClone, matrix3f, loc, scale);
+						List<Spatial> children = ((Node) nodeClone).descendantMatches("child\\d+_" + name.replace("\\", "\\\\"));
+						if (children.size() == 0) {
+							createZone(nodeClone, worldId, 0);
 						} else {
-							nodeClone = attachChild(map, node, matrix3f, loc, scale);
-							List<Spatial> children = ((Node) node).descendantMatches("child\\d+_" + name.replace("\\", "\\\\"));
-							if (children.size() == 0) {
-								createZone(nodeClone, worldId, 0);
-							} else {
-								for (int c = 0; c < children.size(); c++) {
-									Spatial child = children.get(c);
-									nodeClone = attachChild(map, child, matrix3f, loc, scale);
-									createZone(nodeClone, worldId, c + 1);
-								}
+							for (int c = 0; c < children.size(); c++) {
+								Spatial childClone = children.get(c).deepClone();
+								attachChild(map, childClone, matrix3f, loc, scale);
+								createZone(childClone, worldId, c + 1);
 							}
 						}
 					}
-				} catch (Throwable t) {
-					System.out.println(t);
+				} else {
+					log.warn("Missing mesh for world " + worldId + ": " + name.toLowerCase().intern());
 				}
 			}
 			destroyDirectByteBuffer(geo);
-			map.updateModelBound();
+			map.updateGeometricState();
 		}
 		return true;
 	}
 
-	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, float scale) {
-		Spatial nodeClone = node;
-		try {
-			nodeClone = node.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		nodeClone.setTransform(matrix, location, scale);
-		nodeClone.updateModelBound();
-		map.attachChild(nodeClone);
-		return nodeClone;
+	private static void attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, float scale) {
+		node.setLocalRotation(matrix);
+		node.setLocalTranslation(location);
+		node.setLocalScale(scale);
+		map.attachChild(node);
 	}
 
 	private static void createZone(Spatial node, int worldId, int childNumber) {
-		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (node.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
-			BoundingVolume bv = node.getWorldBound();
-			int regionId = getVectorHash(bv.getCenter().x, bv.getCenter().y, bv.getCenter().z);
-			int index = node.getName().lastIndexOf('\\');
-			int dotIndex = node.getName().lastIndexOf('.');
-			String zoneName = node.getName().substring(index + 1, dotIndex).toUpperCase();
-			if (childNumber > 0)
-				zoneName += "_CHILD" + childNumber;
-			String existingName = zoneName + "_" + regionId + "_" + worldId;
-			if (ZoneName.getId(existingName) != ZoneName.getId(ZoneName.NONE)) {
-				// for override
-				zoneName += "_" + regionId;
-				node.setName(zoneName);
-				ZoneService.getInstance().createMaterialZoneTemplate(node, worldId, node.getMaterialId(), true);
+		if (GeoDataConfig.GEO_MATERIALS_ENABLE)
+			if (node instanceof SpatialEx) {
+				if ((CollisionIntention.MATERIAL.getId() & ((SpatialEx) node).getIntentions()) != 0) {
+					BoundingVolume bv = node.getWorldBound();
+					int regionId = getVectorHash(bv.getCenter().x, bv.getCenter().y, bv.getCenter().z);
+					int index = node.getName().lastIndexOf('\\');
+					int dotIndex = node.getName().lastIndexOf('.');
+					String zoneName = node.getName().substring(index + 1, dotIndex).toUpperCase();
+					if (childNumber > 0)
+						zoneName += "_CHILD" + childNumber;
+					String existingName = zoneName + "_" + regionId + "_" + worldId;
+					if (ZoneName.getId(existingName) != ZoneName.getId(ZoneName.NONE)) {
+						// for override
+						zoneName += "_" + regionId;
+						node.setName(zoneName);
+						ZoneService.getInstance().createMaterialZoneTemplate(node, worldId, ((SpatialEx) node).getMaterialId(), true);
+					} else {
+						node.setName(zoneName);
+						ZoneService.getInstance().createMaterialZoneTemplate(node, regionId, worldId, ((SpatialEx) node).getMaterialId());
+					}
+				}
 			} else {
-				node.setName(zoneName);
-				ZoneService.getInstance().createMaterialZoneTemplate(node, regionId, worldId, node.getMaterialId());
+				throw new AssertionError(node.getClass().getSimpleName() + " " + node.getName() + " is not a member of SpatialEx");
 			}
-		}
 	}
 
-	/*
+	/**
 	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked for boxes during the creation. Boxes are more
 	 * efficient way to handle collisions. So, it replaces geo mesh with the artfitial Box geometry, taken from the static_doors.xml. Basically, you can
 	 * create missing doors here but that is not implemented. matrix is never used, as well as scale. Those two arguments are needed if location MUST be
 	 * repositioned according to geo mesh. Geo may have both meshes from mission xml and from other files, so you never know. But now we handle just
 	 * mission xml. Other meshes are ignored.
 	 */
-	private static boolean createDoors(Spatial node, int worldId, Matrix3f matrix, Vector3f location, float scale) {
-		DoorGeometry geom = (DoorGeometry) node;
-
+	private static boolean createDoors(DoorGeometry geom, int worldId, Matrix3f matrix, Vector3f location, float scale) {
 		StaticDoorWorld worldDoors = DataManager.STATICDOOR_DATA.getStaticDoorWorlds(worldId);
 
 		for (StaticDoorTemplate template : worldDoors.getStaticDoors()) {
@@ -265,25 +253,25 @@ public class GeoWorldLoader {
 			}
 
 			// Replace geo mesh
-			Box boxMesh = new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f()));
-			geom.setMesh(boxMesh);
+			MeshEx mesh = new MeshEx();
+			mesh.setBound(new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f())).getBound());
+			geom.setMesh(mesh);
 			// Assign flags if they are missing in geo (geo bugs)
 			geom.setCollisionFlags((short) ((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
 			break;
 		}
 		if (geom.getMesh() == null) {
-			log.warn("No template for geo door " + node.getName() + " (map=" + worldId + "; pos=" + location.toString() + ")");
+			log.warn("No template for geo door " + geom.getName() + " (map=" + worldId + "; pos=" + location.toString() + ")");
 			return false;
 		}
 
 		// Here if geo has a real mesh, it expands as big as it should be, so replacement falls back to geo mesh
-		node.updateModelBound();
-		BoundingVolume bv = node.getWorldBound();
+		BoundingVolume bv = geom.getWorldBound();
 		int regionId = getVectorHash(bv.getCenter().x, bv.getCenter().y, bv.getCenter().z);
-		int index = node.getName().lastIndexOf('\\');
+		int index = geom.getName().lastIndexOf('\\');
 		// Create a unique name for doors
-		String doorName = worldId + "_" + "DOOR" + "_" + regionId + "_" + node.getName().substring(index + 1).toUpperCase();
-		node.setName(doorName);
+		String doorName = worldId + "_" + "DOOR" + "_" + regionId + "_" + geom.getName().substring(index + 1).toUpperCase();
+		geom.setName(doorName);
 		return true;
 	}
 
@@ -307,7 +295,7 @@ public class GeoWorldLoader {
 	 * @param toBeDestroyed
 	 *          The DirectByteBuffer that will be "cleaned". Utilizes reflection.
 	 */
-	public static void destroyDirectByteBuffer(ByteBuffer toBeDestroyed) {
+	private static void destroyDirectByteBuffer(ByteBuffer toBeDestroyed) {
 		if (!toBeDestroyed.isDirect())
 			return;
 

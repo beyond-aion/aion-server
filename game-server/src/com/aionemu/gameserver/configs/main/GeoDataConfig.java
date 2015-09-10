@@ -57,10 +57,4 @@ public class GeoDataConfig {
 	 */
 	@Property(key = "gameserver.geo.doors.enable", defaultValue = "false")
 	public static boolean GEO_DOORS_ENABLE;
-	
-	/**
-	 * Object factory for geodata primitives enabled
-	 */
-	@Property(key = "gameserver.geodata.objectfactory.enabled", defaultValue = "true")
-	public static boolean GEO_OBJECT_FACTORY_ENABLE;
 }

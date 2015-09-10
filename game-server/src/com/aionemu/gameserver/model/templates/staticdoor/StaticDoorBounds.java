@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.jme3.bounding.BoundingBox;
+import com.jme3.math.Vector3f;
 
 /**
  * @author Rolandas

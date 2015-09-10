@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.templates.zone;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.jme3.bounding.BoundingBox;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 
 /**
  * @author Rolandas

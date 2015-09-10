@@ -4,12 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.jme3.math.Vector3f;
 
 /**
  * @author ATracer
@@ -93,7 +92,7 @@ public class GeoService {
 		return geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z);
 	}
 
-	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, boolean changeDirection, byte intentions) {
+	public CollisionResultsEx getCollisions(VisibleObject object, float x, float y, float z, boolean changeDirection, byte intentions) {
 		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false, object.getInstanceId(), intentions);
 	}
 
