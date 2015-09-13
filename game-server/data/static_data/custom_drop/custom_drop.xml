@@ -593,6 +593,130 @@
 			<drop item_id="188052742" name="Fortress Supplies" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Krotan Chamber -->
+	<npc_drop npc_id="700539" replace_type="FULL">
+		<drop_group race="ELYOS" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000862" name="Guardian Centurion's Garnet Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000788" name="Guardian Centurion's Garnet Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000908" name="Guardian Centurion's Garnet Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000863" name="Guardian Centurion's Lazuli Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000789" name="Guardian Centurion's Lazuli Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000909" name="Guardian Centurion's Lazuli Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000866" name="Archon Centurion's Garnet Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000792" name="Archon Centurion's Garnet Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000912" name="Archon Centurion's Garnet Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000867" name="Archon Centurion's Lazuli Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000793" name="Archon Centurion's Lazuli Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000913" name="Archon Centurion's Lazuli Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000812" name="Guardian Centurion's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000814" name="Archon Centurion's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000897" name="Guardian Centurion's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000898" name="Guardian Centurion's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000901" name="Archon Centurion's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000902" name="Archon Centurion's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001895" name="Guardian Centurion's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001896" name="Guardian Centurion's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001897" name="Guardian Centurion's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001898" name="Guardian Centurion's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001903" name="Archon Centurion's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001904" name="Archon Centurion's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001905" name="Archon Centurion's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001906" name="Archon Centurion's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="114100852" name="Guardian Centurion's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300878" name="Guardian Centurion's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500824" name="Guardian Centurion's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600781" name="Guardian Centurion's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110100912" name="Guardian Centurion's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300867" name="Guardian Centurion's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500837" name="Guardian Centurion's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600822" name="Guardian Centurion's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100824" name="Guardian Centurion's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300842" name="Guardian Commando's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500813" name="Guardian Centurion's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600786" name="Guardian Centurion's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100816" name="Guardian Centurion's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300820" name="Guardian Centurion's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500803" name="Guardian Centurion's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600795" name="Guardian Centurion's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100774" name="Guardian Centurion's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300771" name="Guardian Centurion's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500759" name="Guardian Centurion's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600770" name="Guardian Centurion's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="114100854" name="Archon Centurion's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300880" name="Archon Centurion's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500826" name="Archon Centurion's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600783" name="Archon Centurion's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110100914" name="Archon Centurion's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300869" name="Archon Centurion's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500839" name="Archon Centurion's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600824" name="Archon Centurion's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100826" name="Archon Centurion's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300844" name="Archon Centurion's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500815" name="Archon Centurion's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600788" name="Archon Centurion's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100818" name="Archon Centurion's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300822" name="Archon Centurion's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500805" name="Archon Centurion's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600797" name="Archon Centurion's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100776" name="Archon Centurion's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300773" name="Archon Centurion's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500761" name="Archon Centurion's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600772" name="Archon Centurion's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Kysis Barracks -->
+	<npc_drop npc_id="702292" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
+			<drop item_id="188052743" name="Manastone Box" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="188052744" name="Ancient Relic Box" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="160002428" name="Broiled Spicy Pepento" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="160002421" name="Pepento Salad" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702295" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052742" name="Fortress Supplies" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
