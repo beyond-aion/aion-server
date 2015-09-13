@@ -178,11 +178,6 @@
 			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
 		<repository>
-			<id>web-media-repository</id>
-			<name>Web Media</name>
-			<url>http://maven2.webmedia.ee/</url>
-		</repository>
-		<repository>
 			<id>googlecode.lambdaj</id>
 			<name>LambdaJ Repository</name>
 			<url>https://lambdaj.googlecode.com/svn/repo/releases</url>
