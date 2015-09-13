@@ -717,6 +717,123 @@
 			<drop item_id="188052742" name="Fortress Supplies" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Kysis Chamber -->
+	<npc_drop npc_id="700541" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="2.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700542" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000030" name="Gold Medal" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="50"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="121000834" name="Kysis Diamond Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000835" name="Kysis Sapphire Necklace" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000886" name="Elite Guardian Tribunus' Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000889" name="Elite Archon Tribunus' Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Weapon Box (Unique)">
+			<drop item_id="188052430" name="Guardian Tribunus' Weapon Box" min_amount="1" max_amount="1" chance="10" each_member="true"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Weapon Box (Unique)">
+			<drop item_id="188052431" name="Archon Tribunus' Weapon Box" min_amount="1" max_amount="1" chance="10" each_member="true"/>
+		</drop_group>
+		<drop_group race="ELYOS" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100986" name="Elite Guardian Tribunus' Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300935" name="Elite Guardian Tribunus' Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500903" name="Elite Guardian Tribunus' Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600883" name="Elite Guardian Tribunus' Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100881" name="Elite Guardian Tribunus' Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300886" name="Elite Guardian Tribunus' Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500872" name="Elite Guardian Tribunus' Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600864" name="Elite Guardian Tribunus' Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100838" name="Elite Guardian Tribunus' Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300836" name="Elite Guardian Tribunus' Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500823" name="Elite Guardian Tribunus' Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600838" name="Elite Guardian Tribunus' Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100894" name="Elite Guardian Tribunus' Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300907" name="Elite Guardian Tribunus' Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500877" name="Elite Guardian Tribunus' Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600848" name="Elite Guardian Tribunus' Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100920" name="Elite Guardian Tribunus' Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300941" name="Elite Guardian Tribunus' Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500884" name="Elite Guardian Tribunus' Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600843" name="Elite Guardian Tribunus' Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="ASMODIANS" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100989" name="Elite Archon Tribunus' Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300938" name="Elite Archon Tribunus' Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500906" name="Elite Archon Tribunus' Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600886" name="Elite Archon Tribunus' Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100884" name="Elite Archon Tribunus' Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300889" name="Elite Archon Tribunus' Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500875" name="Elite Archon Tribunus' Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600867" name="Elite Archon Tribunus' Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100841" name="Elite Archon Tribunus' Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300839" name="Elite Archon Tribunus' Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500826" name="Elite Archon Tribunus' Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600841" name="Elite Archon Tribunus' Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100897" name="Elite Archon Tribunus' Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300910" name="Elite Archon Tribunus' Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500880" name="Elite Archon Tribunus' Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600851" name="Elite Archon Tribunus' Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100923" name="Elite Archon Tribunus' Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300944" name="Elite Archon Tribunus' Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500887" name="Elite Archon Tribunus' Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600846" name="Elite Archon Tribunus' Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
