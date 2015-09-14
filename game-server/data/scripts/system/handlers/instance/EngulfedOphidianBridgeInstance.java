@@ -420,19 +420,19 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
             switch (npc.getSpawn().getStaticId()) {
                 case 172:
                 case 173:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), 164);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 164);
                     break;
                 case 169:
                 case 166:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), 158);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 158);
                     break;
                 case 170:
                 case 171:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), 162);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 162);
                     break;
                 case 175:
                 case 174:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), 160);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 160);
                     break;
             }
             updatePoints(-5000, npc.getRace(), true, 0, null);
@@ -449,32 +449,32 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
             }
             switch (npc.getSpawn().getStaticId()) {
                 case 164:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
                     break;
                 case 158:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
                     break;
                 case 162:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
                     break;
                 case 160:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
                     break;
                 case 172:
                 case 173:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
                     break;
                 case 169:
                 case 166:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
                     break;
                 case 170:
                 case 171:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
                     break;
                 case 175:
                 case 174:
-                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
+                    spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
                     break;
             }
             updatePoints(5000, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);

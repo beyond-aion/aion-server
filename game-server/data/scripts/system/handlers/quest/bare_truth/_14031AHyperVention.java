@@ -143,7 +143,7 @@ public class _14031AHyperVention extends QuestHandler {
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
-							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, (float) 257, (float) 257, (float) 226.35, (byte) 95);// Broken
+							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95);// Broken
 																																																																				// Teleporter
 																																																																				// Device
 						}
@@ -215,7 +215,7 @@ public class _14031AHyperVention extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 9 && player.getWorldId() == 320040000) {
 				// Shattered Large Teleporter
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, (float) 257, (float) 257, (float) 226.35, (byte) 95);
+				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, 257, 257, (float) 226.35, (byte) 95);
 				// Captain Tarbana
 				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233878, (float) 262.9, (float) 224.5, (float) 211.348, (byte) 95);
 				// 5x Baranath Sentinel

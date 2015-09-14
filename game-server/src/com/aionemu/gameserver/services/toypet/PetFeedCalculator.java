@@ -80,7 +80,7 @@ public final class PetFeedCalculator {
 				int finalLevel = level;
 				if (finalLevel % 5 == 0)
 					finalLevel--;
-				int pointLevel = (int) itemLevels[finalLevel / 5];
+				int pointLevel = itemLevels[finalLevel / 5];
 				int feedPoints = Math.max(0, pointLevel - 5) / 5 * 8;
 				// System.out.println("ITEM LEVEL: " + level + ", COUNT: " + count + ", STEP: " + feedPoints);
 				pointValues[finalLevel / 5][countIndex++] = getPoints(feedPoints, count);

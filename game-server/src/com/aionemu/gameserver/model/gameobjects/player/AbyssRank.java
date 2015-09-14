@@ -99,7 +99,7 @@ public class AbyssRank {
 
 	  int cappedCount = 0;
 	  if (CustomConfig.ENABLE_AP_CAP)
-		 cappedCount = (long) (currentAp + additionalAp) > CustomConfig.AP_CAP_VALUE ? (int) (CustomConfig.AP_CAP_VALUE - currentAp) : additionalAp;
+		 cappedCount = currentAp + additionalAp > CustomConfig.AP_CAP_VALUE ? (int) (CustomConfig.AP_CAP_VALUE - currentAp) : additionalAp;
 	  else
 		 cappedCount = additionalAp;
 

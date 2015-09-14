@@ -110,7 +110,7 @@ public class _1053TheKlawThreat extends QuestHandler {
 		if (targetId == 700169 || targetId == 700209) {
 			int spawn = Rnd.get(5);
 			if (spawn == 1) {
-				QuestService.addNewSpawn(210040000, 1, 212120, (float) npc.getX(), (float) npc.getY(), (float) npc.getZ(),
+				QuestService.addNewSpawn(210040000, 1, 212120, npc.getX(), npc.getY(), npc.getZ(),
 					(byte) 0);
 				return true;
 			}

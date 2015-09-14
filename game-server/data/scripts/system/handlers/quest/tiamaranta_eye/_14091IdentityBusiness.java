@@ -51,7 +51,7 @@ public class _14091IdentityBusiness extends QuestHandler {
 						case SETPRO1:
 							if (targetId == 802178) 
 								NpcActions.delete(npc);
-							QuestService.addNewSpawn(300500000, player.getInstanceId(), 802063, (float) player.getX(), (float) player.getY(), (float) player.getZ(), (byte) 95);
+							QuestService.addNewSpawn(300500000, player.getInstanceId(), 802063, player.getX(), player.getY(), player.getZ(), (byte) 95);
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
 						break;

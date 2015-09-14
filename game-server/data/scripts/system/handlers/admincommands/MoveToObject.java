@@ -38,7 +38,7 @@ public class MoveToObject extends AdminCommand {
 			return;
 		}
 
-		VisibleObject spawn = (VisibleObject) object;
+		VisibleObject spawn = object;
 
 		TeleportService2.teleportTo(admin, spawn.getWorldId(), spawn.getSpawn().getX(), spawn.getSpawn().getY(), spawn
 			.getSpawn().getZ());

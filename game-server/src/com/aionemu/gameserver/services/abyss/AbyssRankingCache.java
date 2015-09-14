@@ -59,7 +59,7 @@ public class AbyssRankingCache {
 	 * Loads ranking data from DB
 	 */
 	private void refreshCache() {
-		List<Race> races = (List<Race>) Arrays.asList(Race.ASMODIANS, Race.ELYOS);
+		List<Race> races = Arrays.asList(Race.ASMODIANS, Race.ELYOS);
 		FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>>();
 		FastMap<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new FastMap<Race, SM_ABYSS_RANKING_LEGIONS>();
 		FastMap<Integer, Integer> newLegionRanking = new FastMap<Integer, Integer>();

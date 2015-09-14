@@ -27,7 +27,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
    protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		//add player to event list for additional reward
-		if (creature instanceof Player && (int)getPosition().getMapId() == 600010000) {
+		if (creature instanceof Player && getPosition().getMapId() == 600010000) {
 			SiegeService.getInstance().checkRvrPlayerOnEvent((Player)creature);
 		}
 		//TODO Spawn defensive guards (only for bosses in silentera Canyon)
@@ -43,7 +43,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
 
  	//despawn enemy boss (only for silentera)
 	private void despawnEnemyBoss() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			WorldMapInstance instance = getPosition().getWorldMapInstance();
 			deleteNpcs(instance.getNpcs(getNpcId() == 220948 ? 220949 : 220948 ));
 		}
@@ -51,7 +51,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
 	
 	//schedule respawn of both silentera bosses (bosses in other maps must not respawn)
 	private void scheduleRespawn() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 				@Override
 				public void run() {
@@ -70,7 +70,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void performPartecipationReward() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			DateTime now = DateTime.now();
 			int hour = now.getHourOfDay();
 			if (hour >= 19 && hour <= 23) {

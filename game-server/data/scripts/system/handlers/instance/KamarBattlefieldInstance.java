@@ -131,7 +131,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
     private void startTimeCheck() {
         int index = Rnd.get(0, garnonPos.size() - 1);
         WorldPosition pos = garnonPos.get(index);
-        spawn(801903, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+        spawn(801903, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
         timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -185,15 +185,15 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
                         List<WorldPosition> temp = new ArrayList<>(generalsPos);
                         int index = Rnd.get(0, temp.size() - 1);
                         WorldPosition pos = temp.get(index);
-                        spawn(232854, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+                        spawn(232854, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
                         temp.remove(index);
                         index = Rnd.get(0, temp.size() - 1);
                         pos = temp.get(index);
-                        spawn(232853, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+                        spawn(232853, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
                         temp.remove(index);
                         index = Rnd.get(0, temp.size() - 1);
                         pos = temp.get(index);
-                        spawn(232852, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+                        spawn(232852, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
                         temp.remove(index);
                         spawn(232846, 1442.18f, 1370.7f, 600.6902f, (byte) 40);
                         spawn(232846, 1434.45f, 1365.7f, 600.70776f, (byte) 40);

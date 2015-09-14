@@ -267,7 +267,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 				TeleportService2.teleportTo(player, mapId, instanceId, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
 				break;
 			case 702009:
-				TeleportService2.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), (byte) npc.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.BEAM_ANIMATION);
 				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
 				npc.getController().onDelete();
 				break;
@@ -282,7 +282,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 		switch(skillId) {
 			case 21511:
-				spawn(702009, effected.getX(), effected.getY(), effected.getZ(), (byte) effected.getHeading());
+				spawn(702009, effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
 				break;
 		}
 	}
@@ -331,7 +331,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 					public void visit(Player pl) {
 
 						if (pl instanceof Creature) {
-							Creature creature = (Creature) pl;
+							Creature creature = pl;
 							creature.getController().onAttack(pl, creature.getLifeStats().getMaxHp() + 1, true);
 						}
 					}

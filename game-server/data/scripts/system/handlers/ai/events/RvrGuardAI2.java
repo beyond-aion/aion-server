@@ -22,7 +22,7 @@ public class RvrGuardAI2 extends AggressiveNpcAI2 {
    protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		//add player to event list for additional reward
-		if (creature instanceof Player && (int)getPosition().getMapId() == 600010000) {
+		if (creature instanceof Player && getPosition().getMapId() == 600010000) {
 			DateTime now = DateTime.now();
 			int hour = now.getHourOfDay();
 			if (hour >= 19 && hour <= 23) {

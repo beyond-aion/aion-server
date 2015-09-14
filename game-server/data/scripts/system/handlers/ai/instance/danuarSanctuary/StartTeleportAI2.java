@@ -60,7 +60,7 @@ public class StartTeleportAI2 extends NpcAI2 {
 		
 		if (key != null) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), x, y, z, (byte) h, TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), x, y, z, h, TeleportAnimation.BEAM_ANIMATION);
 		}
 		else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));

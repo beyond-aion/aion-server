@@ -29,7 +29,7 @@ public class SummonTrapEffect extends SummonEffect {
 		// should only be set if player has no target to avoid errors
 		if (effect.getEffector().getTarget() == null)
 			effect.getEffector().setTarget(effect.getEffector());
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree((byte) effect.getEffector().getHeading()));
+		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effect.getEffector().getHeading()));
 		float x = effect.getX();
 		float y = effect.getY();
 		float z = effect.getZ();

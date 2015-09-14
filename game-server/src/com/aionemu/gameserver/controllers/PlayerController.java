@@ -721,8 +721,8 @@ public class PlayerController extends CreatureController<Player> {
 	public void startProtectionActiveTask() {
 		if (!getOwner().isProtectionActive()) {
 			getOwner().setVisualState(CreatureVisualState.BLINKING);
-			AttackUtil.cancelCastOn((Creature) getOwner());
-			AttackUtil.removeTargetFrom((Creature) getOwner());
+			AttackUtil.cancelCastOn(getOwner());
+			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
 			Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 

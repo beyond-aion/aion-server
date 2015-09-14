@@ -21,7 +21,7 @@ public class AutoBan {
 		int playerId = player.getObjectId();
 		int time = PunishmentConfig.PUNISHMENT_TIME;
 		int minInDay = 1440;
-		int dayCount = (int)(Math.floor((double)(time/minInDay)));
+		int dayCount = (int)(Math.floor(time/minInDay));
 
 		switch (PunishmentConfig.PUNISHMENT_TYPE) {
 			case 1:

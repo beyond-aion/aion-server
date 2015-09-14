@@ -152,7 +152,7 @@ public class AssaultsPodAI2 extends NpcAI2 {
 	}
 	
 	private void spawnAndMove(int npcId, Npc owner, final String walker) {
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree((byte) owner.getHeading()));
+		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
 		int dist = Rnd.get(2, 10);
 		float x = (float) (Math.cos(radian) * dist);
 		float y = (float) (Math.sin(radian) * dist);

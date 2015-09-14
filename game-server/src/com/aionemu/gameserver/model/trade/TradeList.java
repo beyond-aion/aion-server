@@ -109,7 +109,7 @@ public class TradeList {
 			if (requiredItems.containsKey(rewardItemId))
 				alreadyAddedCount = requiredItems.get(rewardItemId);
 			if (alreadyAddedCount == 0)
-				requiredItems.put(rewardItemId, (long) aquisition.getItemCount() * tradeItem.getCount());
+				requiredItems.put(rewardItemId, aquisition.getItemCount() * tradeItem.getCount());
 			else
 				requiredItems.put(rewardItemId, alreadyAddedCount + aquisition.getItemCount() * tradeItem.getCount());
 		}

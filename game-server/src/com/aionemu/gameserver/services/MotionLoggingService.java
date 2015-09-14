@@ -710,7 +710,7 @@ public class MotionLoggingService {
 				}
 				log.info("maxFrequency: " + maxFrequency + " value: " + value + " size: " + entry2.getValue().size());
 				// if frequency of given value is higher than 70% take it, otherwise do Arithmetic mean
-				if (Math.round((float) entry2.getValue().size() * 0.7f) <= maxFrequency)
+				if (Math.round(entry2.getValue().size() * 0.7f) <= maxFrequency)
 					finalValue = value;
 				else
 					finalValue = total / entry2.getValue().size();
@@ -727,8 +727,8 @@ public class MotionLoggingService {
 		int frequency = 0;
 
 		// 10% tolerance
-		int min = Math.round((float) value * 0.90f);
-		int max = Math.round((float) value * 1.1f);
+		int min = Math.round(value * 0.90f);
+		int max = Math.round(value * 1.1f);
 		for (Integer i : list) {
 			if (i == null)
 				continue;

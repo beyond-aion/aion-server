@@ -445,7 +445,7 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	public int getMinutesTillAuction() {
-		return (int) (getSecondsTillAuction() / 60);
+		return getSecondsTillAuction() / 60;
 	}
 
 	public boolean isBiddingAllowed() {
@@ -492,7 +492,7 @@ public class HousingBidService extends AbstractCronTask {
 				// make the new house inactive until the old one is sold
 				obtainedHouse.setStatus(HouseStatus.INACTIVE);
 				result = AuctionResult.GRACE_START;
-				time = new DateTime((long) (getRunTime() * 1000)).plusWeeks(2).getMillis();
+				time = new DateTime(getRunTime() * 1000).plusWeeks(2).getMillis();
 			}
 		}
 		obtainedHouse.setOwnerId(winner.getPlayerObjId());

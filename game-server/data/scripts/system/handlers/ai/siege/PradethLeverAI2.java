@@ -8,7 +8,6 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -87,7 +86,7 @@ public class PradethLeverAI2 extends ActionItemNpcAI2 {
 				@Override
 				public void run() {
 					if (!gate.getLifeStats().isAlreadyDead()) {
-						gate.getController().onAttack((Creature) gate, (int) Math.round(gate.getLifeStats().getMaxHp() * 0.5), true);
+						gate.getController().onAttack(gate, (int) Math.round(gate.getLifeStats().getMaxHp() * 0.5), true);
 						announceExplosions(finalMsg);
 					}
 				}

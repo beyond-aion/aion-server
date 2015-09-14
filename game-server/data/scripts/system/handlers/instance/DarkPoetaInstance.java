@@ -302,7 +302,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		doors = instance.getDoors();
 		
 		//spawn Anuhart Scalewatch Captain(pool=1)
-		switch ((int)Rnd.get(1, 2)) {
+		switch (Rnd.get(1, 2)) {
 			case 1:
 				spawn(215429, 565.488f, 256.224f, 108.999f, (byte) 52);
 				break;
@@ -312,7 +312,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		}
 		
 		//spawn Anuhart Drakeblade Captain (pool=1)
-		switch ((int)Rnd.get(1, 2)) {
+		switch (Rnd.get(1, 2)) {
 			case 1:
 				spawn(215430, 610.018f, 213.538f, 103.249f, (byte) 108);
 				break;

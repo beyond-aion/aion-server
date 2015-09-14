@@ -405,7 +405,7 @@ public class BrokerService {
 			putToSettled(playerRace, buyingItem, true);
 
 			if (!isEmptyCache) {
-				BrokerItem[] newCache = (BrokerItem[]) ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
+				BrokerItem[] newCache = ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
 				getPlayerCache(player).setBrokerListCache(newCache);
 			}
 

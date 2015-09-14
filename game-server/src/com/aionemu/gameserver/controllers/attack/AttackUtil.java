@@ -258,7 +258,7 @@ public class AttackUtil {
 		}
 				
 		//add critical add dmg
-		coeficient += (float)critAddDmg / 100f;
+		coeficient += critAddDmg / 100f;
 		
 		damages = Math.round(damages * coeficient);
 		
@@ -489,7 +489,7 @@ public class AttackUtil {
 		}
 				
 		if (effected instanceof Npc) {
-			damage = effected.getAi2().modifyDamage(effector, (int) damage);
+			damage = effected.getAi2().modifyDamage(effector, damage);
 			damage = effected.getAi2().modifyDamage(effect.getSkill(), effector, damage);
 		}
 		if (effector instanceof Npc) {

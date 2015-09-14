@@ -77,7 +77,7 @@ public class PlayerTeamDistributionService {
 		 if (member.getWorldId() == 301160000)
 			rewardXp = 0;
 		 else if (filteredStats.mentorCount > 0) {
-			int cape = XPCape.values()[(int) member.getLevel()].value();
+			int cape = XPCape.values()[member.getLevel()].value();
 			if (cape < rewardXp) {
 			   rewardXp = cape;
 			}

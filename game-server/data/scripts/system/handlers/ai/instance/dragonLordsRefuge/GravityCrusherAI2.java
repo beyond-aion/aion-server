@@ -60,7 +60,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
 						@Override
 						public void run() {
 							NpcShoutsService.getInstance().sendMsg(getOwner(), 1401554);
-							spawn(283140, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) getOwner().getHeading());
+							spawn(283140, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 							AI2Actions.deleteOwner(GravityCrusherAI2.this);
 						}
 					}, 3000);

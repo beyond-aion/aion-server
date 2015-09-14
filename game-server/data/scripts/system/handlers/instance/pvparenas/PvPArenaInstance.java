@@ -356,7 +356,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	protected PvPArenaPlayerReward getPlayerReward(Integer object) {
 		instanceReward.regPlayerReward(object);
-		return (PvPArenaPlayerReward) instanceReward.getPlayerReward(object);
+		return instanceReward.getPlayerReward(object);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class Collide extends AdminCommand {
 			return;
 		}
 
-		final byte intentions = (byte) (CollisionIntention.DOOR.getId());
+		final byte intentions = (CollisionIntention.DOOR.getId());
 		float x = target.getX();
 		float y = target.getY();
 		float z = target.getZ();

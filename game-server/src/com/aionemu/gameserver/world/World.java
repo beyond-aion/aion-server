@@ -165,7 +165,7 @@ public class World {
 		if (object.getSpawn() instanceof BaseSpawnTemplate) {
 			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
 			int baseId = bst.getId();
-			baseNpc.get(baseId).remove((Npc) object);
+			baseNpc.get(baseId).remove(object);
 		}
 
 		if (object instanceof Npc) {

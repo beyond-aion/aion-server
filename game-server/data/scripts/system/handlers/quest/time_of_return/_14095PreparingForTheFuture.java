@@ -147,7 +147,7 @@ public class _14095PreparingForTheFuture extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if(var == 1 && player.getWorldId() == 300330000){
-				QuestService.addNewSpawn(300330000, player.getInstanceId(), 802178, (float) 245.54, (float) 245.5, (float) 125, (byte) 95);//Oriata of the Past
+				QuestService.addNewSpawn(300330000, player.getInstanceId(), 802178, (float) 245.54, (float) 245.5, 125, (byte) 95);//Oriata of the Past
 			}			
 		}
 		return false;

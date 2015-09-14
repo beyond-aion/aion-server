@@ -2,7 +2,6 @@ package admincommands;
 
 import java.sql.Timestamp;
 
-import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
@@ -148,7 +147,7 @@ public class HouseCommand extends AdminCommand {
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(),
 				revokedHouse.getAddress().getId(), false));
-			((HouseController) revokedHouse.getController()).updateAppearance();
+			revokedHouse.getController().updateAppearance();
 		}
 	}
 

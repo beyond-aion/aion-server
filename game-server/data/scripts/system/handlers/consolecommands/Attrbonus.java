@@ -46,7 +46,7 @@ public class Attrbonus extends ConsoleCommand implements StatOwner {
 			return;
 		}		
 		
-		Creature effected = (Creature) admin;
+		Creature effected = admin;
 		CreatureGameStats<? extends Creature> cgs = effected.getGameStats();
 		
 		List<IStatFunction> modifiers = new ArrayList<IStatFunction>();

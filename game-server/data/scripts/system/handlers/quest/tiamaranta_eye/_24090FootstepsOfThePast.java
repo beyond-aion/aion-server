@@ -72,7 +72,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 					case SETPRO3:{
 						if (targetId == 730889) 
 							NpcActions.delete(npc);
-						QuestService.addNewSpawn(300490000, player.getInstanceId(), 802178, (float) 461.54, (float) 514.5, (float) 417, (byte) 119);
+						QuestService.addNewSpawn(300490000, player.getInstanceId(), 802178, (float) 461.54, (float) 514.5, 417, (byte) 119);
 						qs.setQuestVar(3);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
@@ -90,7 +90,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 						if (targetId == 802178) 
 							NpcActions.delete(npc);
 						TeleportService2.teleportTo(player, 300500000, player.getInstanceId(), 247, 239, 124, (byte) 10);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 205988, (float) 247.54, (float) 239.5, (float) 124, (byte) 95);
+						QuestService.addNewSpawn(300500000, player.getInstanceId(), 205988, (float) 247.54, (float) 239.5, 124, (byte) 95);
 						qs.setQuestVar(4);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
@@ -107,7 +107,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 					case SETPRO5:{
 						if (targetId == 205988) 
 							NpcActions.delete(npc);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 730890, (float) player.getX(), (float) player.getY(), (float) player.getZ(), (byte) 95);
+						QuestService.addNewSpawn(300500000, player.getInstanceId(), 730890, player.getX(), player.getY(), player.getZ(), (byte) 95);
 						qs.setQuestVar(5);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
@@ -126,7 +126,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 						qs.setQuestVar(6);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 802178, (float) player.getX(), (float) player.getY(), (float) player.getZ(), (byte) 95);
+						QuestService.addNewSpawn(300500000, player.getInstanceId(), 802178, player.getX(), player.getY(), player.getZ(), (byte) 95);
 						return closeDialogWindow(env);
 					}
 					}
@@ -166,7 +166,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q14090"))) {				
 				if (var == 1) {
 					TeleportService2.teleportTo(player, 300490000, player.getInstanceId(), 504, 515, 417, (byte) 10);
-					QuestService.addNewSpawn(300490000, player.getInstanceId(), 730889, (float) 504.54, (float) 515.5, (float) 417, (byte) 95);
+					QuestService.addNewSpawn(300490000, player.getInstanceId(), 730889, (float) 504.54, (float) 515.5, 417, (byte) 95);
 					//maybe video?!
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
 				}

@@ -277,7 +277,7 @@ public class HousingService {
 		currentHouse.getRegistry().save();
 		currentHouse.reloadHouseRegistry(); // load new defaults
 		DAOManager.getDAO(HousesDAO.class).storeHouse(currentHouse);
-		HouseController controller = ((HouseController) currentHouse.getController());
+		HouseController controller = (currentHouse.getController());
 		controller.broadcastAppearance();
 		controller.spawnObjects();
 	}

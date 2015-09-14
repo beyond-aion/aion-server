@@ -62,7 +62,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 	private void rndSpawn(int npcId, int count) {
 		for (int i = 0; i < count; i++) {
 			SpawnTemplate template = rndSpawnInRange(npcId);
-			VisibleObjectSpawner.spawnEnemyServant(template, getOwner().getInstanceId(), getOwner(), (byte) getOwner().getLevel());
+			VisibleObjectSpawner.spawnEnemyServant(template, getOwner().getInstanceId(), getOwner(), getOwner().getLevel());
 		}
 	}
 	

@@ -166,7 +166,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 				continue;
 			}
 
-			if (!team.contains((Player) ai.getAttacker())) {
+			if (!team.contains(ai.getAttacker())) {
 				continue;
 			}
 

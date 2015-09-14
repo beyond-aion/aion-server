@@ -27,7 +27,7 @@ public class HpCondition extends Condition {
 		
 		int valueWithDelta = value + delta * skill.getSkillLevel();
 		if (ratio)
-			valueWithDelta = (int) ((skill.getEffector().getLifeStats().getMaxHp() * valueWithDelta) / 100);
+			valueWithDelta = (skill.getEffector().getLifeStats().getMaxHp() * valueWithDelta) / 100;
 		if (skill.getEffector().getLifeStats().getCurrentHp() > valueWithDelta)
 			skill.getEffector().getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.USED_HP, valueWithDelta, 0, SM_ATTACK_STATUS.LOG.REGULAR, skill.getEffector());
 		return skill.getEffector().getLifeStats().getCurrentHp() >= valueWithDelta;

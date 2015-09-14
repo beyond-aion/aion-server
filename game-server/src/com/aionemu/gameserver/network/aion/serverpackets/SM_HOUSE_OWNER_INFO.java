@@ -78,7 +78,7 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 				writeC(0);
 			}
 			else {
-				int weeks = (int) (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
+				int weeks = (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
 				if (DateTime.now().getDayOfWeek() != 7) // Hack for auction Day, client counts sunday to new week
 					weeks++;
 				writeC(weeks);

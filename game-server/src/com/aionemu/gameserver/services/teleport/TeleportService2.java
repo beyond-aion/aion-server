@@ -178,7 +178,7 @@ public class TeleportService2 {
 		Storage inventory = player.getInventory();
 
 		// TODO: Price vary depending on the influence ratio
-		int basePrice = (int) (location.getPrice());
+		int basePrice = (location.getPrice());
 		// TODO check for location.getPricePvp()
 
 		long transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
@@ -584,7 +584,7 @@ public class TeleportService2 {
 		else if(race == Race.ASMODIANS)
 		{
 			eventPosAsmodians = new double[] {pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading()};
-			log.info("asmo: mapId: "+(int) pos.getMapId()+", instanceId: "+(int) eventPosAsmodians[1]+", X: "+eventPosAsmodians[2]+", Y: "+eventPosAsmodians[3]+", Z: "+eventPosAsmodians[4]+", H: "+(byte) eventPosAsmodians[5]);
+			log.info("asmo: mapId: "+pos.getMapId()+", instanceId: "+(int) eventPosAsmodians[1]+", X: "+eventPosAsmodians[2]+", Y: "+eventPosAsmodians[3]+", Z: "+eventPosAsmodians[4]+", H: "+(byte) eventPosAsmodians[5]);
 		}
 	}
 	public static void teleportToEvent(Player player) {

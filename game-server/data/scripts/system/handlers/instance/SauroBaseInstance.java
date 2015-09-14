@@ -62,7 +62,7 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
 		//spawn Sauro Base Grave Robber (pool=1)
-		switch ((int)Rnd.get(1, 5)) {
+		switch (Rnd.get(1, 5)) {
 			case 1:
 				spawn(230846, 460.69705f, 390.10602f, 182.75943f, (byte) 0);
 				break;
@@ -84,11 +84,11 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 		for (int i = 0; i < 8; i++) {
 		    int index = Rnd.get(0, temp.size() - 1);
 		    WorldPosition pos = temp.get(index);
-		    spawn(230847, pos.getX(), pos.getY(), pos.getZ(), (byte) pos.getHeading());
+		    spawn(230847, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		    temp.remove(index);
 		}
 		for (int i = 0; i < temp.size(); i++) {
-			spawn(230848, temp.get(i).getX(), temp.get(i).getY(), temp.get(i).getZ(), (byte) temp.get(i).getHeading());
+			spawn(230848, temp.get(i).getX(), temp.get(i).getY(), temp.get(i).getZ(), temp.get(i).getHeading());
 		}
 	}
 	

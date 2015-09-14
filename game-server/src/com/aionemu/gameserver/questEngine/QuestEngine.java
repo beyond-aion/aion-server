@@ -1107,7 +1107,7 @@ public class QuestEngine implements GameEngine {
 		QuestHandler handler = questHandlers.get(questId);
 		if (handler == null || !(handler instanceof ConstantSpawnHandler))
 			return;
-		ConstantSpawnHandler checker = (ConstantSpawnHandler) handler;
+		ConstantSpawnHandler checker = handler;
 		HashSet<Integer> allNpcs = checker.getNpcIds();
 		if (allNpcs == null)
 			return;

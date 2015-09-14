@@ -45,7 +45,7 @@ public class SummonLifeStats extends CreatureLifeStats<Summon> {
 
 	@Override
 	public Summon getOwner() {
-		return (Summon) super.getOwner();
+		return super.getOwner();
 	}
 
 	@Override

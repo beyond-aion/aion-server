@@ -459,7 +459,7 @@ public class Skill {
 		// adjust servertime with motion play speed
 		if (motion.getSpeed() != 100) {
 			serverTime /= 100f;
-			serverTime *= (float) motion.getSpeed();
+			serverTime *= motion.getSpeed();
 		}
 
 		Stat2 attackSpeed = player.getGameStats().getAttackSpeed();

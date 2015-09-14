@@ -64,7 +64,7 @@ public class DrakanMedicAI2 extends AggressiveNpcAI2 {
 	
 	private void rndSpawn(int npcId) {
 			SpawnTemplate template = rndSpawnInRange(npcId);
-			VisibleObjectSpawner.spawnEnemyServant(template, getOwner().getInstanceId(), getOwner(), (byte) getOwner().getLevel());
+			VisibleObjectSpawner.spawnEnemyServant(template, getOwner().getInstanceId(), getOwner(), getOwner().getLevel());
 	}
 	
 	private SpawnTemplate rndSpawnInRange(int npcId) {

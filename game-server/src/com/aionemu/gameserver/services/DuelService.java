@@ -58,7 +58,7 @@ public class DuelService {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_HE_REJECT_DUEL(responder.getName()));
 			return;
 		}
-		for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones((Creature) responder)) {
+		for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
 			if (!zone.isOtherRaceDuelsAllowed() && !responder.getRace().equals(requester.getRace())
 					|| (!zone.isSameRaceDuelsAllowed() && responder.getRace().equals(requester.getRace()))) {
 				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE);

@@ -148,7 +148,7 @@ public class MapRegion {
 	 * @param neighbour
 	 */
 	void addNeighbourRegion(MapRegion neighbour) {
-		neighbours = (MapRegion[]) ArrayUtils.add(neighbours, neighbour);
+		neighbours = ArrayUtils.add(neighbours, neighbour);
 	}
 
 	/**

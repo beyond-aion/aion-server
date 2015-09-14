@@ -28,7 +28,7 @@ public class FpAttackInstantEffect extends EffectTemplate {
 			int newValue = value;
 			// Support for values in percentage
 			if (percent)
-				newValue = (int) ((maxFP * value) / 100);
+				newValue = (maxFP * value) / 100;
 			
 			effect.setReserveds(new EffectReserved(position, newValue, "FP", true), false);
 			

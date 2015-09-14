@@ -237,7 +237,7 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 			   @Override
 			   public void run() {
-				  spawn(284385, creature.getX(), creature.getY(), creature.getZ(), (byte) creature.getHeading());
+				  spawn(284385, creature.getX(), creature.getY(), creature.getZ(), creature.getHeading());
 			   }
 
 			}, 1000);

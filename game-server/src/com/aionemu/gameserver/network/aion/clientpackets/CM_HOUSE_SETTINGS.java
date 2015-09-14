@@ -58,7 +58,7 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		house.setSignNotice(signNotice.getBytes(Charset.forName("UTF-16LE")));
 
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), house.getAddress().getId(), true));
-		HouseController controller = (HouseController) house.getController();
+		HouseController controller = house.getController();
 		controller.updateAppearance();
 
 		// TODO: save signNotice

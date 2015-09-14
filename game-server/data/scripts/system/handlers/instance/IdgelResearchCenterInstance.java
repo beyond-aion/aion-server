@@ -356,7 +356,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRandomChest() {
-		switch ((int) Rnd.get(1, 9)) {
+		switch (Rnd.get(1, 9)) {
 			case 1:
 				spawn(701935, 606.4862f, 396.1939f, 97.3460f, (byte) 45);
 				break;
@@ -390,7 +390,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 
 	private void spawnRooms() {
 
-		if ((int) Rnd.get(1, 2) == 1) {
+		if (Rnd.get(1, 2) == 1) {
 			// Retributive Effigy (600P)
 			spawn(230121, 626.6431f, 431.9898f, 97.206f, (byte) 63);
 			// Retributive Effigy (600P)
@@ -409,7 +409,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 			spawn(230122, 600.1626f, 397.91647f, 97.34604f, (byte) 33);
 		}
 
-		switch ((int) Rnd.get(1, 2)) {
+		switch (Rnd.get(1, 2)) {
 			case 1:
 				// Marabata The furious (350P)
 				spawn(230107, 520.45886f, 542.5273f, 110.51807f, (byte) 96);
@@ -417,7 +417,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 				spawn(230115, 590.42004f, 500.8304f, 102.68871f, (byte) 84);
 				// Flame Beast (500P)
 				spawn(230106, 662.9196f, 467.3922f, 102.6400f, (byte) 60);
-				if ((int) Rnd.get(1, 2) == 1) {
+				if (Rnd.get(1, 2) == 1) {
 					// Runaway Reian (400P)
 					spawn(800568, 494.8226f, 513.0217f, 109.686f, (byte) 0);
 					// Weaponized Ragnarok (400P)
@@ -436,7 +436,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 				spawn(230115, 590.42004f, 500.8304f, 102.68871f, (byte) 84);
 				// Flame Beast (500P)
 				spawn(230106, 662.9196f, 467.3922f, 102.6400f, (byte) 60);
-				if ((int) Rnd.get(1, 2) == 1) {
+				if (Rnd.get(1, 2) == 1) {
 					// Runaway Reian (400P)
 					spawn(800568, 494.8226f, 513.0217f, 109.686f, (byte) 0);
 					// Weaponized Ragnarok (400P)
@@ -449,9 +449,9 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 				}
 				break;
 		}
-		switch ((int) Rnd.get(1, 2)) {
+		switch (Rnd.get(1, 2)) {
 			case 1:
-				if ((int) Rnd.get(1, 2) == 1) {
+				if (Rnd.get(1, 2) == 1) {
 					// Reforged ra-45c (400P)
 					spawn(230114, 501.5816f, 433.8426f, 102.64236f, (byte) 30);
 				} else {
@@ -475,7 +475,7 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 				spawn(701883, 497.5672f, 462.6087f, 102.6931f, (byte) 0);
 				break;
 			case 2:
-				if ((int) Rnd.get(1, 2) == 1) {
+				if (Rnd.get(1, 2) == 1) {
 					// Chieftain Sukka (400P)
 					spawn(230116, 501.5816f, 433.8426f, 102.64236f, (byte) 30);
 				} else {

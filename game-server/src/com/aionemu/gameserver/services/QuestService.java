@@ -863,11 +863,11 @@ public final class QuestService {
 	}
 
 	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
-		addNewSpawn(worldId, instanceId, templateId, x, y, z, (byte) heading, 5);
+		addNewSpawn(worldId, instanceId, templateId, x, y, z, heading, 5);
 	}
 
 	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int timeInMin) {
-		final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, (byte) heading);
+		final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, heading);
 		if (!npc.getPosition().isInstanceMap())
 			despawnQuestNpc(npc, timeInMin);
 	}

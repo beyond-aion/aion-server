@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
-import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
@@ -174,7 +173,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			}
 			HousingService.getInstance().switchHouseBuilding(house, buildingId);
 			player.setHouseRegistry(house.getRegistry());
-			((HouseController) house.getController()).updateAppearance();
+			house.getController().updateAppearance();
 		}
 	}
 

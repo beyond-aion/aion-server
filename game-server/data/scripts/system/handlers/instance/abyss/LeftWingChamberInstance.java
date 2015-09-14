@@ -32,7 +32,7 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		spawnRings();
 		//spawn Treasurer Nabatma (pool=1)
-		switch ((int)Rnd.get(1, 2)) {
+		switch (Rnd.get(1, 2)) {
 			case 1:
 				spawn(215424, 502.1326f, 502.89673f, 352.94437f, (byte) 20);
 				break;

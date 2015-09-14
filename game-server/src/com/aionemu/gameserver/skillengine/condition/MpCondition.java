@@ -28,7 +28,7 @@ public class MpCondition extends Condition {
 	public boolean validate(Skill skill) {
 		int valueWithDelta = value + delta * skill.getSkillLevel();
 		if (ratio)
-			valueWithDelta = (int) ((skill.getEffector().getLifeStats().getMaxMp() * valueWithDelta) / 100);
+			valueWithDelta = (skill.getEffector().getLifeStats().getMaxMp() * valueWithDelta) / 100;
 		int changeMpPercent = skill.getBoostSkillCost();
 		if (changeMpPercent != 0) {
 			// changeMpPercent is negative

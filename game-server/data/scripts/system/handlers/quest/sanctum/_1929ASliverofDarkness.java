@@ -192,7 +192,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().onDelete();
 								QuestService.addNewSpawn(310070000, player.getInstanceId(), 212992, (float) 191.9, (float) 267.68,
-									(float) 1374, (byte) 0);
+									1374, (byte) 0);
 								changeQuestStep(env, 96, 97, false); // 97
 								return closeDialogWindow(env);
 							}

@@ -191,7 +191,7 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2
 								{
 									Creature creature = getAggroList().getMostHated();
 									SkillEngine.getInstance().getSkill(getOwner(), 21179, 1, getOwner()).useSkill();
-									spawn(284385, creature.getX(), creature.getY(), creature.getZ(), (byte) creature.getHeading());
+									spawn(284385, creature.getX(), creature.getY(), creature.getZ(), creature.getHeading());
 									ThreadPoolManager.getInstance().schedule(new Runnable()
 									{
 										@Override

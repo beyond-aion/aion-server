@@ -371,7 +371,7 @@ public class VisibleObjectSpawner {
 			NpcObjectType objectType) {
 		int objectId = spawn.getNpcId();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
-		byte servantLevel = (byte) creator.getLevel();
+		byte servantLevel = creator.getLevel();
 		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate,
 				servantLevel);
 		servant.setKnownlist(new NpcKnownList(servant));

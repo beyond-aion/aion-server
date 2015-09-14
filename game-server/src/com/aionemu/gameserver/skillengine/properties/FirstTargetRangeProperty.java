@@ -44,7 +44,7 @@ public class FirstTargetRangeProperty {
 		
 		// Add Weapon Range to distance
 		if (properties.isAddWeaponRange()) {
-			firstTargetRange += (float) skill.getEffector().getGameStats().getAttackRange().getCurrent() / 1000f;
+			firstTargetRange += skill.getEffector().getGameStats().getAttackRange().getCurrent() / 1000f;
 		}
 		
 		 if (!MathUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2) && !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {

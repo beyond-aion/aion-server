@@ -51,7 +51,7 @@ public class SummonServantEffect extends SummonEffect {
 		int instanceId = effector.getInstanceId();
 
 		final Creature target = (Creature) effector.getTarget();
-		final Creature effected = (Creature) effect.getEffected();
+		final Creature effected = effect.getEffected();
 
 		SkillTemplate template = effect.getSkillTemplate();
 
