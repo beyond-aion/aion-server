@@ -34,13 +34,13 @@ public class _20061PoweringOn extends QuestHandler {
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnLevelUp(questId);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 20060 };
 		return defaultOnLvlUpEvent(env, quests, true);
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -72,20 +72,18 @@ public class _20061PoweringOn extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}else if(targetId == 701233){
-				if(qs.getQuestVarById(0) == 3){
+			} else if (targetId == 701233) {
+				if (qs.getQuestVarById(0) == 3) {
 					ItemService.addItem(player, 182212558, 1);
 					env.getVisibleObject().getController().onDelete();
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800018) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -111,6 +109,7 @@ public class _20061PoweringOn extends QuestHandler {
 		return false;
 	}
 
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -118,7 +117,7 @@ public class _20061PoweringOn extends QuestHandler {
 			return false;
 
 		int targetId = 0;
-		
+
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 

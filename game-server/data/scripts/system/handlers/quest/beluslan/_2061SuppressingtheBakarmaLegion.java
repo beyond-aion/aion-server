@@ -94,8 +94,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204702) {
@@ -132,8 +131,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 278001) {
+		} else if (targetId == 278001) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -148,8 +146,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204807) {
+		} else if (targetId == 204807) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -162,8 +159,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 700295 && var >= 4 && var < 8) {
+		} else if (targetId == 700295 && var >= 4 && var < 8) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				if (var == 7) {
 					removeQuestItem(env, 182204320, 1);

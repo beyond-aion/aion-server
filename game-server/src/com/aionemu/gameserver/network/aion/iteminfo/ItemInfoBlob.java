@@ -43,7 +43,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 		ent.setOwner(player, item, null);
 		itemBlobEntries.add(ent);
 	}
-	
+
 	public void addBonusBlobEntry(IStatFunction modifier) {
 		ItemBlobEntry ent = ItemBlobType.STAT_BONUSES.newBlobEntry();
 		ent.setOwner(player, item, modifier);
@@ -72,14 +72,11 @@ public class ItemInfoBlob extends PacketWriteHelper {
 
 			if (itemTemplate.getItemGroup() == ItemGroup.WINGS) {
 				blob.addBlobEntry(ItemBlobType.SLOTS_WING);
-			}
-			else if (itemTemplate.getItemGroup() == ItemGroup.SHIELD) {
+			} else if (itemTemplate.getItemGroup() == ItemGroup.SHIELD) {
 				blob.addBlobEntry(ItemBlobType.SLOTS_SHIELD);
-			}
-			else if (itemTemplate.getItemGroup() == ItemGroup.PLUME) {
+			} else if (itemTemplate.getItemGroup() == ItemGroup.PLUME) {
 				blob.addBlobEntry(ItemBlobType.PLUME_INFO);
-			}
-			else if (itemTemplate.isArmor()) {
+			} else if (itemTemplate.isArmor()) {
 				if (itemTemplate.getItemGroup().getArmorType() == ArmorType.ACCESSORY)
 					blob.addBlobEntry(ItemBlobType.SLOTS_ACCESSORY); // power shards, helmets, earrings, rings, belts
 				else
@@ -136,29 +133,137 @@ public class ItemInfoBlob extends PacketWriteHelper {
 	}
 
 	public enum ItemBlobType {
-		GENERAL_INFO(0x00) { @Override ItemBlobEntry newBlobEntry() { return new GeneralInfoBlobEntry(); } },
-		SLOTS_WEAPON(0x01) { @Override ItemBlobEntry newBlobEntry() { return new WeaponInfoBlobEntry(); } },
-		SLOTS_ARMOR(0x02) { @Override ItemBlobEntry newBlobEntry() { return new ArmorInfoBlobEntry(); } },
-		SLOTS_SHIELD(0x03) { @Override ItemBlobEntry newBlobEntry() { return new ShieldInfoBlobEntry(); } },
-		SLOTS_ACCESSORY(0x04) { @Override ItemBlobEntry newBlobEntry() { return new AccessoryInfoBlobEntry(); } },
-		SLOTS_ARROW(0x05) { @Override ItemBlobEntry newBlobEntry() { return new ArrowInfoBlobEntry(); } },
-		EQUIPPED_SLOT(0x06) { @Override ItemBlobEntry newBlobEntry() { return new EquippedSlotBlobEntry(); } },
+		GENERAL_INFO(0x00) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new GeneralInfoBlobEntry();
+			}
+		},
+		SLOTS_WEAPON(0x01) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new WeaponInfoBlobEntry();
+			}
+		},
+		SLOTS_ARMOR(0x02) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new ArmorInfoBlobEntry();
+			}
+		},
+		SLOTS_SHIELD(0x03) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new ShieldInfoBlobEntry();
+			}
+		},
+		SLOTS_ACCESSORY(0x04) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new AccessoryInfoBlobEntry();
+			}
+		},
+		SLOTS_ARROW(0x05) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new ArrowInfoBlobEntry();
+			}
+		},
+		EQUIPPED_SLOT(0x06) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new EquippedSlotBlobEntry();
+			}
+		},
 		// Removed from 3.5
-		STIGMA_INFO(0x07) { @Override ItemBlobEntry newBlobEntry() { return new StigmaInfoBlobEntry(); } },
+		STIGMA_INFO(0x07) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new StigmaInfoBlobEntry();
+			}
+		},
 		// Removed from 4.5, added back in 4.7
-		STIGMA_SHARD(0x08) { @Override ItemBlobEntry newBlobEntry() { return new StigmaShardInfoBlobEntry(); } },
+		STIGMA_SHARD(0x08) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new StigmaShardInfoBlobEntry();
+			}
+		},
 		// missing(0x09), //15? [Not handled before]
-		PREMIUM_OPTION(0x10) { @Override ItemBlobEntry newBlobEntry() { return new PremiumOptionInfoBlobEntry(); } },
-		POLISH_INFO(0x11) { @Override ItemBlobEntry newBlobEntry() { return new PolishInfoBlobEntry(); } },
-		WRAP_INFO(0x12) { @Override ItemBlobEntry newBlobEntry() { return new WrapInfoBlobEntry(); } },
-		PLUME_INFO(0x13) { @Override ItemBlobEntry newBlobEntry() { return new PlumeInfoBlobEntry(); } },
-		STAT_BONUSES(0x0A) { @Override ItemBlobEntry newBlobEntry() { return new BonusInfoBlobEntry(); } },
+		PREMIUM_OPTION(0x10) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new PremiumOptionInfoBlobEntry();
+			}
+		},
+		POLISH_INFO(0x11) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new PolishInfoBlobEntry();
+			}
+		},
+		WRAP_INFO(0x12) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new WrapInfoBlobEntry();
+			}
+		},
+		PLUME_INFO(0x13) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new PlumeInfoBlobEntry();
+			}
+		},
+		STAT_BONUSES(0x0A) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new BonusInfoBlobEntry();
+			}
+		},
 		// [Not handled before] retail send it xx times (smth dynamically changed)
-		MANA_SOCKETS(0x0B) { @Override ItemBlobEntry newBlobEntry() { return new ManaStoneInfoBlobEntry(); } },
+		MANA_SOCKETS(0x0B) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new ManaStoneInfoBlobEntry();
+			}
+		},
 		// 0x0C - not used?
-		SLOTS_WING(0x0D) { @Override ItemBlobEntry newBlobEntry() { return new WingInfoBlobEntry(); } },
-		COMPOSITE_ITEM(0x0E) { @Override ItemBlobEntry newBlobEntry() { return new CompositeItemBlobEntry(); } },
-		CONDITIONING_INFO(0x0F) { @Override ItemBlobEntry newBlobEntry() { return new ConditioningInfoBlobEntry(); } };
+		SLOTS_WING(0x0D) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new WingInfoBlobEntry();
+			}
+		},
+		COMPOSITE_ITEM(0x0E) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new CompositeItemBlobEntry();
+			}
+		},
+		CONDITIONING_INFO(0x0F) {
+
+			@Override
+			ItemBlobEntry newBlobEntry() {
+				return new ConditioningInfoBlobEntry();
+			}
+		};
 
 		private int entryId;
 

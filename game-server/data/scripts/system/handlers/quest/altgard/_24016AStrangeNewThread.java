@@ -47,13 +47,11 @@ public class _24016AStrangeNewThread extends QuestHandler {
 				case 203557: { // Suthran
 					if (env.getDialog() == DialogAction.QUEST_SELECT && var == 0) {
 						return sendQuestDialog(env, 1011);
-					}
-					else if (env.getDialog() == DialogAction.SETPRO1) {
+					} else if (env.getDialog() == DialogAction.SETPRO1) {
 						TeleportService2.teleportTo(player, 220030000, 2453.1934f, 2555.148f, 316.267f);
 						changeQuestStep(env, 0, 1, false); // 1
 						return closeDialogWindow(env);
-					}
-					else if (env.getDialogId() == DialogAction.SELECT_ACTION_1013.id()) {
+					} else if (env.getDialogId() == DialogAction.SELECT_ACTION_1013.id()) {
 						playQuestMovie(env, 66);
 						return sendQuestDialog(env, 1013);
 					}
@@ -62,27 +60,23 @@ public class _24016AStrangeNewThread extends QuestHandler {
 				case 700140: { // Gate Guardian Stone
 					if (var == 2) {
 						if (env.getDialog() == DialogAction.USE_OBJECT) {
-							QuestService.addNewSpawn(320030000, player.getInstanceId(), 214103, (float) 260.12, (float) 234.93,
-								(float) 216.00, (byte) 90);
+							QuestService.addNewSpawn(320030000, player.getInstanceId(), 214103, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90);
 							return useQuestObject(env, 2, 3, false, false); // 3
 						}
-					}
-					else if (var == 4) {
+					} else if (var == 4) {
 						if (env.getDialog() == DialogAction.USE_OBJECT) {
-							//return playQuestMovie(env, 154); something wrong with movieendevent,quest is not switched to reward state.
+							// return playQuestMovie(env, 154); something wrong with movieendevent,quest is not switched to reward state.
 							changeQuestStep(env, 4, 5, true); // reward
 							TeleportService2.teleportTo(env.getPlayer(), 220030000, 2453.1934f, 2555.148f, 316.267f);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) { // Suthran
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -101,8 +95,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 			if (var >= 2 && player.getWorldId() != 320030000) {
 				changeQuestStep(env, var, 1, false);
 				return true;
-			}
-			else if (var == 1 && player.getWorldId() == 320030000) {
+			} else if (var == 1 && player.getWorldId() == 320030000) {
 				changeQuestStep(env, 1, 2, false); // 2
 				return true;
 			}

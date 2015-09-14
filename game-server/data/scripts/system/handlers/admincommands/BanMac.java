@@ -23,43 +23,40 @@ public class BanMac extends AdminCommand {
 		}
 
 		int time;
-                String address;
-                String targetName = "direct_type";
-                
-                //try parsing
+		String address;
+		String targetName = "direct_type";
+
+		// try parsing
 		try {
 			time = Integer.parseInt(params[0]);
-                        
-                        if (time == 0)  //0 is 10 years since system don't allow infinte banns without rework - it's pseudo infinity
-                            time = 60 * 24 * 365 * 10;
-		}
-		catch (NumberFormatException e) {
+
+			if (time == 0) // 0 is 10 years since system don't allow infinte banns without rework - it's pseudo infinity
+				time = 60 * 24 * 365 * 10;
+		} catch (NumberFormatException e) {
 			info(player, "Please enter a valid integer amount of minutes");
-                        return;
+			return;
 		}
 
-                //is mac defined?
-                if (params.length > 1) {
-                    address = params[1];
-                }
-                else {  //no address defined
-                    VisibleObject target = player.getTarget();
-                    if (target != null && target instanceof Player) {
-			if (target.getObjectId() == player.getObjectId()) {
-				info(player, "Omg, disselect yourself please.");
+		// is mac defined?
+		if (params.length > 1) {
+			address = params[1];
+		} else { // no address defined
+			VisibleObject target = player.getTarget();
+			if (target != null && target instanceof Player) {
+				if (target.getObjectId() == player.getObjectId()) {
+					info(player, "Omg, disselect yourself please.");
+					return;
+				}
+
+				Player targetpl = (Player) target;
+				address = targetpl.getClientConnection().getMacAddress();
+				targetName = targetpl.getName();
+				targetpl.getClientConnection().close();
+			} else {
+				info(player, "You should select a player or give me any mac address");
 				return;
 			}
-
-			Player targetpl = (Player) target;
-			address = targetpl.getClientConnection().getMacAddress();
-			targetName = targetpl.getName();
-                        targetpl.getClientConnection().close();
-                    }
-                    else {
-                        info(player, "You should select a player or give me any mac address");
-                        return;
-                    }
-                }
+		}
 
 		BannedMacManager.getInstance().banAddress(address, System.currentTimeMillis() + time * 60 * 1000,
 			"author=" + player.getName() + ", " + player.getObjectId() + "; target=" + targetName);
@@ -67,10 +64,10 @@ public class BanMac extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-            if (!message.equals(""))
-                PacketSendUtility.sendMessage(player, message);
-            PacketSendUtility.sendMessage(player, "Syntax: //banmac [time in minutes] <mac>");
-            PacketSendUtility.sendMessage(player, "Note: 0 minutes will cause permanent ban");
+		if (!message.equals(""))
+			PacketSendUtility.sendMessage(player, message);
+		PacketSendUtility.sendMessage(player, "Syntax: //banmac [time in minutes] <mac>");
+		PacketSendUtility.sendMessage(player, "Note: 0 minutes will cause permanent ban");
 	}
 
 }

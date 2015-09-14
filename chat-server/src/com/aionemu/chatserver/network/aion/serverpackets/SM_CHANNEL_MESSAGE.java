@@ -9,19 +9,17 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public class SM_CHANNEL_MESSAGE extends AbstractServerPacket
-{
+public class SM_CHANNEL_MESSAGE extends AbstractServerPacket {
+
 	private Message message;
 
-	public SM_CHANNEL_MESSAGE(Message message)
-	{
+	public SM_CHANNEL_MESSAGE(Message message) {
 		super(0x1A);
 		this.message = message;
 	}
 
 	@Override
-	protected void writeImpl(ClientChannelHandler cHandler, ChannelBuffer buf)
-	{
+	protected void writeImpl(ClientChannelHandler cHandler, ChannelBuffer buf) {
 		writeC(buf, getOpCode());
 		writeC(buf, 0x00);
 		writeD(buf, 0x00);

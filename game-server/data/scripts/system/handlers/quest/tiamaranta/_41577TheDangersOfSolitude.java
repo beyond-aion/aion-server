@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41577TheDangersOfSolitude extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _41577TheDangersOfSolitude extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213173, questId);
 		qe.registerQuestNpc(205962).addOnQuestStart(questId);
@@ -37,30 +36,25 @@ public class _41577TheDangersOfSolitude extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205962) { 
+			if (targetId == 205962) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182213173, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 800176) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 800176) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}	
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800176) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -74,15 +68,14 @@ public class _41577TheDangersOfSolitude extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			  return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false)); 
+			return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false));
 		}
 		return HandlerResult.FAILED;
 	}
 }
-

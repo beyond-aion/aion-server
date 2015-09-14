@@ -11,7 +11,7 @@ public enum PlayerHouseOwnerFlags {
 	BIDDING_ALLOWED(1 << 2),
 
 	HOUSE_OWNER((IS_OWNER.getId() | BIDDING_ALLOWED.getId()) & ~BUY_STUDIO_ALLOWED.getId()),
-	SELLING_HOUSE((IS_OWNER.getId() | BIDDING_ALLOWED.getId()) & ~BUY_STUDIO_ALLOWED.getId()), //identical? remove?
+	SELLING_HOUSE((IS_OWNER.getId() | BIDDING_ALLOWED.getId()) & ~BUY_STUDIO_ALLOWED.getId()), // identical? remove?
 
 	// Player status
 	SOLD_HOUSE(BIDDING_ALLOWED.getId() | BUY_STUDIO_ALLOWED.getId());

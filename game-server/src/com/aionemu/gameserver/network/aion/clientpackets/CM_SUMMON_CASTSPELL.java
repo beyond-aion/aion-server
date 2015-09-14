@@ -58,8 +58,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 			if (obj instanceof Creature) {
 				target = (Creature) obj;
 			}
-		}
-		else {
+		} else {
 			target = summon;
 		}
 
@@ -78,8 +77,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 					}
 				});
 			}
-		}
-		else
+		} else
 			log.warn("summon castspell on a wrong target on {}.", player.getName());
 	}
 }

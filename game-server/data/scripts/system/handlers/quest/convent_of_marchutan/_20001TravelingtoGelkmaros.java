@@ -109,22 +109,18 @@ public class _20001TravelingtoGelkmaros extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestStartDialog(env);
-				}
-				else if (var == 5) {
+				} else if (var == 5) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2716);
 					else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
 						TeleportService2.teleportTo(player, 220070000, 1, 1868, 2746, 531, (byte) 20);
 						return true;
-					}
-					else
+					} else
 						return sendQuestStartDialog(env);
 				}
-			}
-			else if (targetId == 204202 && var == 2) {
+			} else if (targetId == 204202 && var == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO3) {
@@ -132,11 +128,9 @@ public class _20001TravelingtoGelkmaros extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 204073 && var == 3) {
+			} else if (targetId == 204073 && var == 3) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialog() == DialogAction.SETPRO4) {
@@ -144,11 +138,9 @@ public class _20001TravelingtoGelkmaros extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 204283 && var == 4) {
+			} else if (targetId == 204283 && var == 4) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SETPRO5.id()) {
@@ -156,24 +148,21 @@ public class _20001TravelingtoGelkmaros extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2802);
 				else {
 					return sendQuestEndDialog(env);
 				}
-			}
-			else if(targetId == 798409){
-				if(env.getDialogId() == DialogAction.SETPRO10.id()){
+			} else if (targetId == 798409) {
+				if (env.getDialogId() == DialogAction.SETPRO10.id()) {
 					TeleportService2.teleportTo(player, 220070000, 1, 1868, 2746, 531, (byte) 20);
 					return true;
-				}else{
+				} else {
 					return sendQuestDialog(env, 2802);
 				}
 			}

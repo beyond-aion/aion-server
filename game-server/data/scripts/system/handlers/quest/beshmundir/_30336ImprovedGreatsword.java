@@ -42,21 +42,18 @@ public class _30336ImprovedGreatsword extends QuestHandler {
 				if (player.getInventory().getItemCountByItemId(100900721) >= 1) { // Noble Siel's Supreme Greatsword
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 4762);
-					}
-					else {
+					} else {
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799336) { // Tataka
 				if (dialog == DialogAction.USE_OBJECT) {
 					if (player.getInventory().getItemCountByItemId(182209734) > 0) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182209734, 1);
 					return sendQuestEndDialog(env);
 				}
@@ -83,7 +80,7 @@ public class _30336ImprovedGreatsword extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		Player player = env.getPlayer();

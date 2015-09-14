@@ -44,12 +44,12 @@ public class _3936DecorationsOfSanctum extends QuestHandler {
 
 		if (qs == null)
 			return false;
-			
+
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Report the result to Dairos.
+			// 1 - Report the result to Dairos.
 				case 203710:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -71,8 +71,7 @@ public class _3936DecorationsOfSanctum extends QuestHandler {
 								removeQuestItem(env, 182206094, 10);
 								changeQuestStep(env, 1, 1, true);
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 					}
 					break;
@@ -80,8 +79,7 @@ public class _3936DecorationsOfSanctum extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203710)
 				return sendQuestEndDialog(env);
 		}

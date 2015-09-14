@@ -6,10 +6,9 @@ import com.aionemu.chatserver.model.Race;
 /**
  * @author ATracer
  */
-public class TradeChannel extends RaceChannel
-{
-	public TradeChannel(Race race, String identifier)
-	{
+public class TradeChannel extends RaceChannel {
+
+	public TradeChannel(Race race, String identifier) {
 		super(ChannelType.TRADE, race, identifier);
 	}
 }

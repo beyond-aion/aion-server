@@ -32,8 +32,7 @@ public class DoubleTransformer implements PropertyTransformer<Double> {
 	public Double transform(String value, Field field) throws TransformationException {
 		try {
 			return Double.parseDouble(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

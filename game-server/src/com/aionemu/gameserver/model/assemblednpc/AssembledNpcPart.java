@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.assemblednpc;
 import com.aionemu.gameserver.model.templates.assemblednpc.AssembledNpcTemplate.AssembledNpcPartTemplate;
 
 /**
- *
  * @author xTz
  */
 public class AssembledNpcPart {

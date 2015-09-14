@@ -27,8 +27,7 @@ public class SM_TARGET_SELECTED extends AionServerPacket {
 				this.currentHp = target.getLifeStats().getCurrentHp();
 				this.maxMp = target.getLifeStats().getMaxMp();
 				this.currentMp = target.getLifeStats().getCurrentMp();
-			}
-			else {
+			} else {
 				// TODO: check various gather on retail
 				this.level = 0;
 				this.maxHp = 0;
@@ -51,8 +50,8 @@ public class SM_TARGET_SELECTED extends AionServerPacket {
 		writeH(level);
 		writeD(maxHp);
 		writeD(currentHp);
-		writeD(maxMp);//new 4.0
-		writeD(currentMp);//new 4.0
+		writeD(maxMp);// new 4.0
+		writeD(currentMp);// new 4.0
 	}
 
 }

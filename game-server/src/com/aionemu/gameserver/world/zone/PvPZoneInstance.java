@@ -4,10 +4,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 
-
 /**
  * @author MrPoke
- *
  */
 public class PvPZoneInstance extends SiegeZoneInstance {
 
@@ -24,8 +22,7 @@ public class PvPZoneInstance extends SiegeZoneInstance {
 		if (super.onEnter(creature)) {
 			creature.setInsideZoneType(ZoneType.PVP);
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -35,8 +32,7 @@ public class PvPZoneInstance extends SiegeZoneInstance {
 		if (super.onLeave(creature)) {
 			creature.unsetInsideZoneType(ZoneType.PVP);
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 }

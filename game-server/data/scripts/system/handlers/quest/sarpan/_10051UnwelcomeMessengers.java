@@ -1,9 +1,9 @@
 package quest.sarpan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -87,8 +87,7 @@ public class _10051UnwelcomeMessengers extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -109,7 +108,7 @@ public class _10051UnwelcomeMessengers extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300390000);
-								InstanceService.registerPlayerWithInstance(newInstance, player); 
+								InstanceService.registerPlayerWithInstance(newInstance, player);
 								TeleportService2.teleportTo(player, 300390000, newInstance.getInstanceId(), 273.96478f, 217.55084f, 207.5269f, (byte) 60,
 									TeleportAnimation.BEAM_ANIMATION);
 								return true;
@@ -132,13 +131,11 @@ public class _10051UnwelcomeMessengers extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205535) { // Killios
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

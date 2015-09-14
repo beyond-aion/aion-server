@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author Luzien, xTz
- *
  */
 @AIName("omega")
 public class OmegaAI2 extends SummonerAI2 {
@@ -40,4 +39,3 @@ public class OmegaAI2 extends SummonerAI2 {
 		return hit;
 	}
 }
-

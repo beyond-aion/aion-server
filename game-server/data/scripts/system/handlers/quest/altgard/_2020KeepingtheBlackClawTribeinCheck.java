@@ -79,14 +79,12 @@ public class _2020KeepingtheBlackClawTribeinCheck extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 5);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 2120);
 							}
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203668)
 				return sendQuestEndDialog(env);
 		}

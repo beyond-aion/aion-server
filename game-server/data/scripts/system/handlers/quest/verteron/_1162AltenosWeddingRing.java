@@ -65,8 +65,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 							qs = player.getQuestStateList().getQuestState(questId);
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
-							PacketSendUtility.broadcastPacket(player.getTarget(), new SM_EMOTION((Creature) player.getTarget(),
-								EmotionType.DIE, 128, 0)); // wtf ?
+							PacketSendUtility.broadcastPacket(player.getTarget(), new SM_EMOTION((Creature) player.getTarget(), EmotionType.DIE, 128, 0)); // wtf ?
 							return true;
 						}
 					}
@@ -81,10 +80,9 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 						return true;
 					}
 				}
-				return false;
+					return false;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203095) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

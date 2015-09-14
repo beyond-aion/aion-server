@@ -98,8 +98,7 @@ public class SpawnsData2 {
 						if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
 							allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 						customs.put(spawn.getNpcId(), spawn);
-					}
-					else if (customs.containsKey(spawn.getNpcId()))
+					} else if (customs.containsKey(spawn.getNpcId()))
 						continue;
 					allSpawnMaps.get(mapId).put(spawn.getNpcId(), new SimpleEntry(new SpawnGroup2(mapId, spawn), spawn));
 				}
@@ -115,8 +114,7 @@ public class SpawnsData2 {
 								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
 									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 								customs.put(spawn.getNpcId(), spawn);
-							}
-							else if (customs.containsKey(spawn.getNpcId()))
+							} else if (customs.containsKey(spawn.getNpcId()))
 								continue;
 							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, baseId, simpleRace.getBaseRace());
 							baseSpawnMaps.get(baseId).add(spawnGroup);
@@ -135,8 +133,7 @@ public class SpawnsData2 {
 								allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 							}
 							customs.put(spawn.getNpcId(), spawn);
-						}
-						else if (customs.containsKey(spawn.getNpcId()))
+						} else if (customs.containsKey(spawn.getNpcId()))
 							continue;
 						SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id);
 						riftSpawnMaps.get(id).add(spawnGroup);
@@ -158,8 +155,7 @@ public class SpawnsData2 {
 									if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
 										allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 									customs.put(spawn.getNpcId(), spawn);
-								}
-								else if (customs.containsKey(spawn.getNpcId()))
+								} else if (customs.containsKey(spawn.getNpcId()))
 									continue;
 								SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType());
 								siegeSpawnMaps.get(siegeId).add(spawnGroup);
@@ -183,8 +179,7 @@ public class SpawnsData2 {
 									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 								}
 								customs.put(spawn.getNpcId(), spawn);
-							}
-							else if (customs.containsKey(spawn.getNpcId()))
+							} else if (customs.containsKey(spawn.getNpcId()))
 								continue;
 							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id, type.getStateType());
 							vortexSpawnMaps.get(id).add(spawnGroup);
@@ -195,15 +190,15 @@ public class SpawnsData2 {
 				for (MercenarySpawn mercenarySpawn : spawnMap.getMercenarySpawns()) {
 					int id = mercenarySpawn.getSiegeId();
 					mercenarySpawns.put(id, mercenarySpawn);
-					for(MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
-						for(MercenaryZone mzone : mrace.getMercenaryZones()) {
+					for (MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
+						for (MercenaryZone mzone : mrace.getMercenaryZones()) {
 							mzone.setWorldId(spawnMap.getMapId());
 							mzone.setSiegeId(mercenarySpawn.getSiegeId());
 						}
-						
+
 					}
 				}
-				
+
 				for (AssaultSpawn assaultSpawn : spawnMap.getAssaultSpawns()) {
 					int id = assaultSpawn.getSiegeId();
 					assaultSpawns.put(id, assaultSpawn);
@@ -251,11 +246,11 @@ public class SpawnsData2 {
 	public List<SpawnGroup2> getVortexSpawnsByLocId(int id) {
 		return vortexSpawnMaps.get(id);
 	}
-	
+
 	public MercenarySpawn getMercenarySpawnBySiegeId(int id) {
 		return mercenarySpawns.get(id);
 	}
-	
+
 	public AssaultSpawn getAssaultSpawnBySiegeId(int id) {
 		return assaultSpawns.get(id);
 	}
@@ -274,8 +269,7 @@ public class SpawnsData2 {
 		try {
 			schema = sf.newSchema(new File("./data/static_data/spawns/spawns.xsd"));
 			jc = JAXBContext.newInstance(SpawnsData2.class);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// ignore, if schemas are wrong then we even could not call the command;
 		}
 
@@ -284,8 +278,7 @@ public class SpawnsData2 {
 				Unmarshaller unmarshaller = jc.createUnmarshaller();
 				unmarshaller.setSchema(schema);
 				data = (SpawnsData2) unmarshaller.unmarshal(fin);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.error(e.getMessage());
 				PacketSendUtility.sendMessage(admin, "Could not load old XML file!");
 				return false;
@@ -301,8 +294,7 @@ public class SpawnsData2 {
 				oldGroup = new Spawn(spawn.getNpcId(), spawn.getRespawnTime(), spawn.getHandlerType());
 				addGroup = true;
 			}
-		}
-		else {
+		} else {
 			if (data == null)
 				data = DataManager.SPAWNS_DATA2;
 			// only remove from memory, will be added back later
@@ -310,9 +302,8 @@ public class SpawnsData2 {
 			addGroup = true;
 		}
 
-		SpawnSpotTemplate spot = new SpawnSpotTemplate(visibleObject.getX(), visibleObject.getY(), visibleObject.getZ(),
-			visibleObject.getHeading(), visibleObject.getSpawn().getRandomWalk(), visibleObject.getSpawn().getWalkerId(), visibleObject
-				.getSpawn().getWalkerIndex());
+		SpawnSpotTemplate spot = new SpawnSpotTemplate(visibleObject.getX(), visibleObject.getY(), visibleObject.getZ(), visibleObject.getHeading(),
+			visibleObject.getSpawn().getRandomWalk(), visibleObject.getSpawn().getWalkerId(), visibleObject.getSpawn().getWalkerIndex());
 		boolean changeX = visibleObject.getX() != spawn.getX();
 		boolean changeY = visibleObject.getY() != spawn.getY();
 		boolean changeZ = visibleObject.getZ() != spawn.getZ();
@@ -332,11 +323,9 @@ public class SpawnsData2 {
 				if (delete || !StringUtils.equals(s.getWalkerId(), spot.getWalkerId())) {
 					oldSpot = s;
 					break;
-				}
-				else
+				} else
 					return false; // nothing to change
-			}
-			else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading() || changeY
+			} else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading() || changeY
 				&& s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading() || changeZ && s.getX() == spot.getX()
 				&& s.getY() == spot.getY() && s.getHeading() == spot.getHeading() || changeH && s.getX() == spot.getX() && s.getY() == spot.getY()
 				&& s.getZ() == spot.getZ()) {
@@ -356,8 +345,7 @@ public class SpawnsData2 {
 			data.templates = new ArrayList<SpawnMap>();
 			map = new SpawnMap(spawn.getWorldId());
 			data.templates.add(map);
-		}
-		else {
+		} else {
 			map = data.templates.get(0);
 		}
 
@@ -374,8 +362,7 @@ public class SpawnsData2 {
 			DataManager.SPAWNS_DATA2.afterUnmarshal(null, null);
 			DataManager.SPAWNS_DATA2.clearTemplates();
 			data.clearTemplates();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			PacketSendUtility.sendMessage(admin, "Could not save XML file!");
 			return false;

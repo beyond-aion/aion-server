@@ -49,7 +49,8 @@ public enum AbyssRankEnum {
 	 * @param required
 	 * @param quota
 	 */
-	private AbyssRankEnum(int id, int pointsGained, int pointsLost, int required, int quota, int descriptionId, int gloryPointsRequired, int gpLossPerDay) {
+	private AbyssRankEnum(int id, int pointsGained, int pointsLost, int required, int quota, int descriptionId, int gloryPointsRequired,
+		int gpLossPerDay) {
 		this.id = id;
 		this.pointsGained = pointsGained;
 		this.pointsLost = pointsLost;
@@ -88,13 +89,10 @@ public enum AbyssRankEnum {
 		return requiredAP;
 	}
 
-	
 	public int getRequiredGP() {
 		return requiredGP;
 	}
 
-
-	
 	public int getGpLossPerDay() {
 		return gpLossPerDay;
 	}
@@ -105,12 +103,12 @@ public enum AbyssRankEnum {
 	public int getQuota() {
 		return quota;
 	}
-	
+
 	public int getDescriptionId() {
 		return descriptionId;
 	}
 
-	public static DescriptionId getRankDescriptionId(Player player){
+	public static DescriptionId getRankDescriptionId(Player player) {
 		int pRankId = player.getAbyssRank().getRank().getId();
 		for (AbyssRankEnum rank : values()) {
 			if (rank.getId() == pRankId) {

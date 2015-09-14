@@ -35,12 +35,12 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 	public static final String SELECT_QUERY = "SELECT `delay_id`, `use_delay`, `reuse_time` FROM `item_cooldowns` WHERE `player_id`=?";
 
 	private static final Predicate<ItemCooldown> itemCooldownPredicate = new Predicate<ItemCooldown>() {
+
 		@Override
 		public boolean apply(@Nullable ItemCooldown input) {
 			return input != null && input.getReuseTime() - System.currentTimeMillis() > 30000;
 		}
 	};
-
 
 	@Override
 	public void loadItemCooldowns(final Player player) {
@@ -77,18 +77,18 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 
 		Map<Integer, ItemCooldown> map = Maps.filterValues(itemCoolDowns, itemCooldownPredicate);
 		final Iterator<Map.Entry<Integer, ItemCooldown>> iterator = map.entrySet().iterator();
-		if(!iterator.hasNext()){
+		if (!iterator.hasNext()) {
 			return;
 		}
 
 		Connection con = null;
 		PreparedStatement st = null;
-		try{
+		try {
 			con = DatabaseFactory.getConnection();
 			con.setAutoCommit(false);
 			st = con.prepareStatement(INSERT_QUERY);
-			
-			while(iterator.hasNext()){
+
+			while (iterator.hasNext()) {
 				Map.Entry<Integer, ItemCooldown> entry = iterator.next();
 				st.setInt(1, player.getObjectId());
 				st.setInt(2, entry.getKey());

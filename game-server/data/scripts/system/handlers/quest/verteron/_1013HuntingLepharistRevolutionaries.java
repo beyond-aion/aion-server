@@ -78,8 +78,7 @@ public class _1013HuntingLepharistRevolutionaries extends QuestHandler {
 						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203126)
 				return sendQuestEndDialog(env);
 		}

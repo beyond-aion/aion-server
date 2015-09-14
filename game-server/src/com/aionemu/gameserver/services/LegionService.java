@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -631,10 +631,12 @@ public class LegionService {
 	private void startBrigadeGeneralChangeProcess(final Player legionLeader, final Player newLegionLeader) {
 		RequestResponseHandler responseHandler = new RequestResponseHandler(legionLeader) {
 
+			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				appointBrigadeGeneral(legionLeader, newLegionLeader);
 			}
 
+			@Override
 			public void denyRequest(Creature requester, Player responder) {
 				return;
 			}
@@ -1020,7 +1022,7 @@ public class LegionService {
 		if (legion == null)
 			return;
 
-		FastList<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
+		FastTable<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 		allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 		try {
 			/**

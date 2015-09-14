@@ -71,14 +71,11 @@ public class _1002RequestoftheElim extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 6) {
+							} else if (var == 6) {
 								return sendQuestDialog(env, 2034);
-							}
-							else if (var == 12) {
+							} else if (var == 12) {
 								return sendQuestDialog(env, 2120);
 							}
 						}
@@ -97,8 +94,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							if (var == 6) {
 								return checkQuestItems(env, 6, 12, false, 2120, 2205); // 12
-							}
-							else if (var == 12) {
+							} else if (var == 12) {
 								return sendQuestDialog(env, 2120);
 							}
 						}
@@ -118,8 +114,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 								((Npc) env.getVisibleObject()).getController().scheduleRespawn();
 								((Npc) env.getVisibleObject()).getController().onDelete();
 								useQuestObject(env, 2, 4, false, false); // 4
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								((Npc) env.getVisibleObject()).getController().scheduleRespawn();
 								((Npc) env.getVisibleObject()).getController().onDelete();
 								return useQuestObject(env, 4, 5, false, false); // 5
@@ -133,8 +128,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 13) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 14) {
+							} else if (var == 14) {
 								return sendQuestDialog(env, 2461);
 							}
 						}
@@ -172,13 +166,11 @@ public class _1002RequestoftheElim extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067) { // Kalio
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2716);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -194,8 +186,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 			if (player.getWorldId() == 310010000) {
 				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
 				return true;
-			}
-			else {
+			} else {
 				int var = qs.getQuestVarById(0);
 				if (var == 20) {
 					changeQuestStep(env, 20, 13, false); // 13
@@ -204,7 +195,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		Player player = env.getPlayer();

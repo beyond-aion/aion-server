@@ -1,6 +1,5 @@
 package ai.instance.padmarashkasCave;
 
-
 import ai.NoActionAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -32,7 +31,7 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 	@Override
 	protected void handleDied() {
 		if (protector != null && !NpcActions.isAlreadyDead(protector)) {
-			SkillEngine.getInstance().getSkill(protector, 20176, 55, protector).useNoAnimationSkill(); //apply wrath buff
+			SkillEngine.getInstance().getSkill(protector, 20176, 55, protector).useNoAnimationSkill(); // apply wrath buff
 		}
 		super.handleDied();
 	}
@@ -62,8 +61,7 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 					break;
 			}
 			isSmallEggProtectorSpawned = true;
-		}
-		else if (!isHugeEggProtectorSpawned && this.getNpcId() == 282614) {
+		} else if (!isHugeEggProtectorSpawned && this.getNpcId() == 282614) {
 			SpawnEliteCommander(); // Random spawn SpawnEliteCommander to protect Egg
 			isHugeEggProtectorSpawned = true;
 		}
@@ -78,8 +76,8 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-						+ y1, getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
 	}
 
 	@Override
@@ -106,7 +104,7 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 				}
 
 			}
-		}, 60000); //TODO: Need right value				
+		}, 60000); // TODO: Need right value
 	}
 
 	private void hugeEggSpawn() {
@@ -119,9 +117,9 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 					attackPlayer((Npc) spawn(282620, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
 				}
 			}
-		}, 120000); //TODO: Need right value		
+		}, 120000); // TODO: Need right value
 	}
-	
+
 	private void attackPlayer(final Npc npc) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -129,11 +127,11 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 			public void run() {
 				Npc padma = getOwner().getPosition().getWorldMapInstance().getNpc(218756);
 				if (padma != null) {
-				  npc.setTarget(padma.getTarget());
-				  ((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
-				  npc.setState(1);
-				  npc.getMoveController().moveToTargetObject();
-				  PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+					npc.setTarget(padma.getTarget());
+					((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
+					npc.setState(1);
+					npc.getMoveController().moveToTargetObject();
+					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}
 			}
 		}, 1000);

@@ -77,7 +77,7 @@ public class LimitedItem {
 		buyCounts.clear();
 	}
 
-	/** 
+	/**
 	 * @param set
 	 *          sellLimit.
 	 */

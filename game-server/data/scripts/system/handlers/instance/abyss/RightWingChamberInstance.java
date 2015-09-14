@@ -19,7 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @InstanceID(300090000)
@@ -36,10 +35,8 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("RIGHT_WING_1", mapId,
-				new Point3D(271.87686, 361.04962,107.83435),
-				new Point3D(262.87686, 361.04962,113.83435),
-				new Point3D(256.22054, 358.58627, 107.83435), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("RIGHT_WING_1", mapId, new Point3D(271.87686, 361.04962, 107.83435), new Point3D(262.87686,
+			361.04962, 113.83435), new Point3D(256.22054, 358.58627, 107.83435), 8), instanceId);
 		f1.spawn();
 	}
 
@@ -72,11 +69,11 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900 - (int) time / 1000));
 			}
 		}
-                
-                if (instanceRace == null) {
-                    instanceRace = player.getRace();
-                    spawnGoldChest();
-                }
+
+		if (instanceRace == null) {
+			instanceRace = player.getRace();
+			spawnGoldChest();
+		}
 	}
 
 	private List<Npc> getNpcs(int npcId) {
@@ -91,7 +88,7 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 	}
-	
+
 	private void spawnGoldChest() {
 		final int chestId = instanceRace.equals(Race.ELYOS) ? 701482 : 701487;
 		spawn(chestId, 261.69f, 206.11f, 102.33f, (byte) 30);

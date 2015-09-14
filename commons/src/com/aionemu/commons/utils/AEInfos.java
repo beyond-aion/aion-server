@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author lord_rex This class is for get/log system informations.
@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 public class AEInfos {
 
 	private static final Logger log = LoggerFactory.getLogger(AEInfos.class);
-	private static final String SPACER = ".................................................."; 
+	private static final String SPACER = "..................................................";
 
 	public static String[] getMemoryInfo() {
 		double max = Runtime.getRuntime().maxMemory() / 1024; // maxMemory is the upper limit the jvm can use
@@ -25,58 +25,34 @@ public class AEInfos {
 		double useable = max - used; // allocated, but non-used and non-allocated memory
 		DecimalFormat df = new DecimalFormat(" (0.00'%')");
 		DecimalFormat df2 = new DecimalFormat(" # 'KB'");
-		return new String[] {
-			"+----",
-			"| Global Memory Information at " + getRealTime().toString() + ":",
-			"|",
-			"| Allowed Memory:" + df2.format(max),
+		return new String[] { "+----", "| Global Memory Information at " + getRealTime().toString() + ":", "|", "| Allowed Memory:" + df2.format(max),
 			"|  |= Allocated Memory:" + df2.format(allocated) + df.format(allocated / max * 100),
-			"|  |= Non-Allocated Memory:" + df2.format(nonAllocated) + df.format(nonAllocated / max * 100),
-			"| Allocated Memory:" + df2.format(allocated),
+			"|  |= Non-Allocated Memory:" + df2.format(nonAllocated) + df.format(nonAllocated / max * 100), "| Allocated Memory:" + df2.format(allocated),
 			"|  |= Used Memory:" + df2.format(used) + df.format(used / max * 100),
 			"|  |= Unused (cached) Memory:" + df2.format(cached) + df.format(cached / max * 100),
-			"| Useable Memory:" + df2.format(useable) + df.format(useable / max * 100),
-			"+----"
-		};
+			"| Useable Memory:" + df2.format(useable) + df.format(useable / max * 100), "+----" };
 	}
 
 	public static String[] getCPUInfo() {
-		return new String[] {
-			"Available CPU(s): " + Runtime.getRuntime().availableProcessors(),
-			"Processor Identifier: " + System.getenv("PROCESSOR_IDENTIFIER"),
-			SPACER
-		};
+		return new String[] { "Available CPU(s): " + Runtime.getRuntime().availableProcessors(),
+			"Processor Identifier: " + System.getenv("PROCESSOR_IDENTIFIER"), SPACER };
 	}
 
 	public static String[] getOSInfo() {
-		return new String[] {
-			"OS: " + System.getProperty("os.name") + " Build: " + System.getProperty("os.version"),
-			"OS Arch: " + System.getProperty("os.arch"),
-			SPACER
-		};
+		return new String[] { "OS: " + System.getProperty("os.name") + " Build: " + System.getProperty("os.version"),
+			"OS Arch: " + System.getProperty("os.arch"), SPACER };
 	}
 
 	public static String[] getJREInfo() {
-		return new String[] {
-			"Java Platform Information",
-			"Java Runtime Name: " + System.getProperty("java.runtime.name"),
-			"Java Version: " + System.getProperty("java.version"),
-			"Java Class Version: " + System.getProperty("java.class.version"),
-			"JRE Path (java.home): " + System.getProperty("java.home"),
-			"JDK Path (JAVA_HOME): " + System.getenv("JAVA_HOME"),
-			SPACER
-		};
+		return new String[] { "Java Platform Information", "Java Runtime Name: " + System.getProperty("java.runtime.name"),
+			"Java Version: " + System.getProperty("java.version"), "Java Class Version: " + System.getProperty("java.class.version"),
+			"JRE Path (java.home): " + System.getProperty("java.home"), "JDK Path (JAVA_HOME): " + System.getenv("JAVA_HOME"), SPACER };
 	}
 
 	public static String[] getJVMInfo() {
-		return new String[] {
-			"Virtual Machine Information (JVM)",
-			"JVM Name: " + System.getProperty("java.vm.name"),
-			"JVM version: " + System.getProperty("java.vm.version"),
-			"JVM Vendor: " + System.getProperty("java.vm.vendor"),
-			"JVM Info: " + System.getProperty("java.vm.info"),
-			SPACER
-		};
+		return new String[] { "Virtual Machine Information (JVM)", "JVM Name: " + System.getProperty("java.vm.name"),
+			"JVM version: " + System.getProperty("java.vm.version"), "JVM Vendor: " + System.getProperty("java.vm.vendor"),
+			"JVM Info: " + System.getProperty("java.vm.info"), SPACER };
 	}
 
 	public static String getRealTime() {

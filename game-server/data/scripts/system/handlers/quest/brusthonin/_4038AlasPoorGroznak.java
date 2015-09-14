@@ -39,13 +39,11 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 			if (targetId == 205150) { // Surt
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730155: { // Groznak's Skull
@@ -53,8 +51,7 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 1) {
+							} else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 						}
@@ -91,13 +88,11 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205150) { // Surt
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

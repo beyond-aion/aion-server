@@ -28,11 +28,11 @@ public class ReverseStat extends Stat2 {
 	public void addToBonus(int bonus) {
 		this.bonus -= bonusRate * bonus;
 	}
-	
+
 	@Override
 	public float calculatePercent(int delta) {
-		float percent =  (100 - delta) / 100f;
-		//TODO need double check here for negatives
+		float percent = (100 - delta) / 100f;
+		// TODO need double check here for negatives
 		return percent < 0 ? 0 : percent;
 	}
 

@@ -40,7 +40,7 @@ public class MpUseAction extends Action {
 			// changeMpPercent is negative
 			valueWithDelta = valueWithDelta - ((valueWithDelta / ((100 / changeMpPercent))));
 		}
-		
+
 		if (effector instanceof Player) {
 			if (currentMp <= 0 || currentMp < valueWithDelta) {
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP);

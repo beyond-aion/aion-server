@@ -31,10 +31,8 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("HEXWAY_WING_1", mapId,
-				new Point3D(576.2102, 585.4146, 353.90677),
-				new Point3D(576.2102, 585.4146, 359.90677),
-				new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("HEXWAY_WING_1", mapId, new Point3D(576.2102, 585.4146, 353.90677), new Point3D(576.2102, 585.4146,
+			359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
 		f1.spawn();
 	}
 

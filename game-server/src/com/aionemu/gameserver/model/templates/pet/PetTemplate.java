@@ -59,8 +59,7 @@ public class PetTemplate {
 				List<PetFunction> result = new ArrayList<PetFunction>();
 				result.add(PetFunction.CreateEmpty());
 				petFunctions = result;
-			}
-			else {
+			} else {
 				for (PetFunction func : petFunctions) {
 					if (func.getPetFunctionType().isPlayerFunction()) {
 						hasPlayerFuncs = true;

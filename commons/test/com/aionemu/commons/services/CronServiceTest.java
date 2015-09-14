@@ -1,6 +1,10 @@
 package com.aionemu.commons.services;
 
-import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
+import java.lang.reflect.Constructor;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
@@ -9,11 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Constructor;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
+import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
 
 /**
  * @author SoulKeeper
@@ -24,7 +24,7 @@ public class CronServiceTest extends Assert {
 	private CronService cronService;
 
 	@BeforeClass
-	public void init() throws Exception{
+	public void init() throws Exception {
 		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
 		cronService = constructor.newInstance();
@@ -58,6 +58,7 @@ public class CronServiceTest extends Assert {
 	public void testCancelRunnableUsingRunnableReference() throws Exception {
 		final AtomicInteger val = new AtomicInteger();
 		Runnable test = new Runnable() {
+
 			@Override
 			public void run() {
 				val.getAndIncrement();
@@ -73,6 +74,7 @@ public class CronServiceTest extends Assert {
 	public void testCancelRunnableUsingJobDetails() throws Exception {
 		final AtomicInteger val = new AtomicInteger();
 		Runnable test = new Runnable() {
+
 			@Override
 			public void run() {
 				val.getAndIncrement();
@@ -94,6 +96,7 @@ public class CronServiceTest extends Assert {
 				cronService.cancel(this);
 			}
 
+			@Override
 			public void finalize() throws Throwable {
 				collected.set(true);
 				super.finalize();
@@ -103,14 +106,14 @@ public class CronServiceTest extends Assert {
 		cronService.schedule(r, "0/2 * * * * ?");
 		r = null;
 		sleep(5);
-		for(int i = 0; i < 100; i++){
+		for (int i = 0; i < 100; i++) {
 			System.gc();
 		}
 		assertEquals(collected.get(), true);
 	}
 
 	@Test
-	public void testGetJobTriggers(){
+	public void testGetJobTriggers() {
 		Runnable r = newRunnable();
 		cronService.schedule(r, "0 15 * * * ?");
 		JobDetail jd = cronService.getRunnables().get(r);
@@ -129,6 +132,7 @@ public class CronServiceTest extends Assert {
 
 	private static Runnable newIncrementingRunnable(final AtomicInteger ref) {
 		return new Runnable() {
+
 			@Override
 			public void run() {
 				if (ref != null) {
@@ -139,10 +143,10 @@ public class CronServiceTest extends Assert {
 	}
 
 	@Test(enabled = false)
-	public static void sleep(int seconds){
-		try{
+	public static void sleep(int seconds) {
+		try {
 			Thread.sleep(seconds * 1000);
-		} catch (InterruptedException e){
+		} catch (InterruptedException e) {
 			throw new RuntimeException("Sleep Interrupted", e);
 		}
 	}

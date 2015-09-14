@@ -49,13 +49,11 @@ public class _14050OrdersFromHeironFortress extends QuestHandler {
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 				int[] ids = { 14051, 14052, 14053, 14054 };
 				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 				}
 			}
 			return sendQuestEndDialog(env);

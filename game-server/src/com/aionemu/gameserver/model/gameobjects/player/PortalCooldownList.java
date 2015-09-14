@@ -39,7 +39,7 @@ public class PortalCooldownList {
 			portalCooldowns.remove(worldId);
 			return false;
 		}
-		
+
 		if (coolDown.getEnterCount() < DataManager.INSTANCE_COOLTIME_DATA.getInstanceMaxCountByWorldId(worldId)) {
 			return false;
 		}
@@ -55,7 +55,7 @@ public class PortalCooldownList {
 		if (portalCooldowns == null || !portalCooldowns.containsKey(worldId))
 			return 0;
 		long coolDown = portalCooldowns.get(worldId).getReuseTime();
-		
+
 		if (coolDown < System.currentTimeMillis()) {
 			portalCooldowns.remove(worldId);
 			return 0;
@@ -63,7 +63,7 @@ public class PortalCooldownList {
 
 		return coolDown;
 	}
-	
+
 	public PortalCooldown getPortalCooldown(int worldId) {
 		if (portalCooldowns == null || !portalCooldowns.containsKey(worldId))
 			return null;
@@ -88,19 +88,18 @@ public class PortalCooldownList {
 			portalCooldowns = new FastMap<>();
 		}
 		PortalCooldown portalCooldown = portalCooldowns.get(worldId);
-		if(portalCooldown == null) {
+		if (portalCooldown == null) {
 			portalCooldown = new PortalCooldown(worldId, useDelay, 0);
 		}
 		portalCooldown.increaseEnterCount();
 		portalCooldowns.put(worldId, portalCooldown);
-		
+
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
 
 		if (owner.isInTeam()) {
 			owner.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO(owner, worldId));
-		}
-		else {
-		  PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO(owner, worldId));
+		} else {
+			PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO(owner, worldId));
 		}
 	}
 

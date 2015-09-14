@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author ATracer
  */
 public class ChatServerConnection extends AConnection {
- 
+
 	private static final Logger log = LoggerFactory.getLogger(ChatServerConnection.class);
 
 	/**
@@ -54,7 +54,7 @@ public class ChatServerConnection extends AConnection {
 	 */
 
 	public ChatServerConnection(SocketChannel sc, Dispatcher d, CsPacketHandler csPacketHandler) throws IOException {
-		super(sc, d, 8192*2, 8192*2);
+		super(sc, d, 8192 * 2, 8192 * 2);
 		this.chatServer = ChatServer.getInstance();
 		this.csPacketHandler = csPacketHandler;
 
@@ -66,7 +66,6 @@ public class ChatServerConnection extends AConnection {
 	protected void initialized() {
 		this.sendPacket(new SM_CS_AUTH());
 	}
-
 
 	@Override
 	public boolean processData(ByteBuffer data) {

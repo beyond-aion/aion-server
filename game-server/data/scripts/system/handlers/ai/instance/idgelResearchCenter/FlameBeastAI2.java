@@ -12,41 +12,32 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Ritsu
- *
  */
 @AIName("flamebeast")
-public class FlameBeastAI2 extends AggressiveNpcAI2 
-{
-	
+public class FlameBeastAI2 extends AggressiveNpcAI2 {
+
 	@Override
-	protected void handleSpawned() 
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
 		SkillEngine.getInstance().getSkill(getOwner(), 21121, 30, getOwner()).useWithoutPropSkill();
 	}
 
 	@Override
-	protected void handleCreatureSee(Creature creature) 
-	{
+	protected void handleCreatureSee(Creature creature) {
 		checkDistance(this, creature);
 	}
 
 	@Override
-	protected void handleCreatureMoved(Creature creature)
-	{
+	protected void handleCreatureMoved(Creature creature) {
 		checkDistance(this, creature);
 	}
 
-	private void checkDistance(NpcAI2 ai, Creature creature) 
-	{
+	private void checkDistance(NpcAI2 ai, Creature creature) {
 		Npc marabata = getPosition().getWorldMapInstance().getNpc(230107);
-		if (creature instanceof Npc)
-		{
-			if (marabata != null && MathUtil.isIn3dRange(getOwner(), marabata, 8) && marabata.getEffectController().hasAbnormalEffect(21121))
-			{
+		if (creature instanceof Npc) {
+			if (marabata != null && MathUtil.isIn3dRange(getOwner(), marabata, 8) && marabata.getEffectController().hasAbnormalEffect(21121)) {
 				WorldMapInstance instance = getPosition().getWorldMapInstance();
 				SkillEngine.getInstance().getSkill(marabata, 21122, 30, marabata).useSkill();
 				SkillEngine.getInstance().getSkill(getOwner(), 21122, 30, getOwner()).useSkill();
@@ -54,9 +45,8 @@ public class FlameBeastAI2 extends AggressiveNpcAI2
 			}
 		}
 	}
-	
-	private void deleteNpcs(List<Npc> npcs)
-	{
+
+	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null)
 				npc.getController().onDelete();
@@ -64,5 +54,3 @@ public class FlameBeastAI2 extends AggressiveNpcAI2
 	}
 
 }
-
-

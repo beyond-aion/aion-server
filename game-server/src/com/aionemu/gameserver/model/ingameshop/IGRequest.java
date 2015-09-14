@@ -1,16 +1,16 @@
 package com.aionemu.gameserver.model.ingameshop;
 
-
 /**
  * @author KID
  */
 public class IGRequest {
+
 	public IGRequest(int requestId, int playerId, int itemObjId) {
 		this.requestId = requestId;
 		this.playerId = playerId;
 		this.itemObjId = itemObjId;
 	}
-	
+
 	public IGRequest(int requestId, int playerId, String receiver, String message, int itemObjId) {
 		this.requestId = requestId;
 		this.playerId = playerId;

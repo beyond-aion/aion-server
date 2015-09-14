@@ -55,12 +55,10 @@ public class _2014ScoutitOut extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 2) {
+							} else if (var == 2) {
 								if (player.getInventory().getItemCountByItemId(182203015) == 0) {
 									return sendQuestDialog(env, 1438);
-								}
-								else {
+								} else {
 									return sendQuestDialog(env, 1352);
 								}
 							}
@@ -98,20 +96,18 @@ public class _2014ScoutitOut extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		return defaultOnGetItemEvent(env, 1, 2, false); // 2

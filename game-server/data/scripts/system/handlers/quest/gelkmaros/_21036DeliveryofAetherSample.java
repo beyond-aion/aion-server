@@ -43,8 +43,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (env.getTargetId() == 798713) {
+			} else if (env.getTargetId() == 798713) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)

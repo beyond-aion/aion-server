@@ -8,5 +8,5 @@ public enum StringFunction {
 	END_WITH,
 	CONTAINS,
 	EQUALS;
-	
+
 }

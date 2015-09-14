@@ -14,13 +14,12 @@ public class StatRateFunction extends StatFunction {
 	public StatRateFunction(StatEnum name, int value, boolean bonus) {
 		super(name, value, bonus);
 	}
-	
+
 	@Override
 	public void apply(Stat2 stat) {
 		if (isBonus()) {
 			stat.addToBonus((int) (stat.getBase() * getValue() / 100f));
-		}
-		else {
+		} else {
 			stat.setBase((int) (stat.getBase() * stat.calculatePercent(getValue())));
 		}
 	}
@@ -29,7 +28,7 @@ public class StatRateFunction extends StatFunction {
 	public final int getPriority() {
 		return isBonus() ? 50 : 20;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "StatRateFunction [" + super.toString() + "]";

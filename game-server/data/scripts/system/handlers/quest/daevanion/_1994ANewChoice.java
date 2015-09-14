@@ -15,8 +15,8 @@ public class _1994ANewChoice extends QuestHandler {
 
 	private final static int questId = 1994;
 	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1183, 1204, 1225, 1246 };
-	private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572,
-		115000826, 101800569, 101900562, 102000592 };
+	private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572, 115000826,
+		101800569, 101900562, 102000592 };
 
 	public _1994ANewChoice() {
 		super(questId);
@@ -42,13 +42,11 @@ public class _1994ANewChoice extends QuestHandler {
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					QuestService.startQuest(env);
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203754) { // Aithra
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					return sendQuestDialog(env, 1011);
@@ -64,12 +62,10 @@ public class _1994ANewChoice extends QuestHandler {
 					if (itemCount > 0) {
 						qs.setReward(dialogIndex << 4);
 						return sendQuestDialog(env, 1013);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else {
+				} else {
 					int savedData = qs.getReward();
 					switch (env.getDialogId()) {
 						case 1012:
@@ -98,8 +94,7 @@ public class _1994ANewChoice extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203754) { // Aithray
 				int savedData = qs.getReward();
 				if (removeQuestItem(env, items[savedData >> 4], 1) && removeQuestItem(env, 186000041, 1)) {

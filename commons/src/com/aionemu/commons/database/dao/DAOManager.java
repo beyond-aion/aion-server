@@ -1,19 +1,23 @@
 package com.aionemu.commons.database.dao;
 
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMajorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMinorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseName;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.bind.JAXBException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.aionemu.commons.database.DatabaseFactory.*;
-import java.io.FileNotFoundException;
-import javax.xml.bind.JAXBException;
 
 /**
  * This class manages {@link DAO} implementations, it resolves valid implementation for current database
@@ -52,17 +56,13 @@ public class DAOManager {
 			scriptManager.setGlobalClassListener(acl);
 
 			scriptManager.load(DatabaseConfig.DATABASE_SCRIPTCONTEXT_DESCRIPTOR);
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw new Error(e.getMessage(), e);
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			throw new Error("Can't load database script context: " + DatabaseConfig.DATABASE_SCRIPTCONTEXT_DESCRIPTOR, e);
-		}
-		catch (JAXBException e) {
+		} catch (JAXBException e) {
 			throw new Error("Can't compile database handlers - check your MySQL5 implementations", e);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new Error("A fatal error occured during loading or compiling the database handlers", e);
 		}
 
@@ -82,6 +82,7 @@ public class DAOManager {
 	 * Returns DAO implementation by DAO class. Typical usage:
 	 * 
 	 * <pre>
+	 * 
 	 * 
 	 * AccountDAO dao = DAOManager.getDAO(AccountDAO.class);
 	 * </pre>
@@ -111,8 +112,7 @@ public class DAOManager {
 	/**
 	 * Registers {@link DAO}.<br>
 	 * First it creates new instance of DAO, then invokes {@link DAO#supports(String, int, int)} <br>
-	 * . If the result was possitive - it associates DAO instance with
-	 * {@link com.aionemu.commons.database.dao.DAO#getClassName()} <br>
+	 * . If the result was possitive - it associates DAO instance with {@link com.aionemu.commons.database.dao.DAO#getClassName()} <br>
 	 * If another DAO was registed - {@link com.aionemu.commons.database.dao.DAOAlreadyRegisteredException} will be thrown
 	 * 
 	 * @param daoClass
@@ -124,8 +124,7 @@ public class DAOManager {
 	 * @throws InstantiationException
 	 *           if something went wrong during instantiation of DAO
 	 */
-	public static void registerDAO(Class<? extends DAO> daoClass) throws DAOAlreadyRegisteredException,
-		IllegalAccessException, InstantiationException {
+	public static void registerDAO(Class<? extends DAO> daoClass) throws DAOAlreadyRegisteredException, IllegalAccessException, InstantiationException {
 		DAO dao = daoClass.newInstance();
 
 		if (!dao.supports(getDatabaseName(), getDatabaseMajorVersion(), getDatabaseMinorVersion())) {

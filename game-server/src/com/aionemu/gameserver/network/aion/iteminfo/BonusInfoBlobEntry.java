@@ -21,8 +21,7 @@ public class BonusInfoBlobEntry extends ItemBlobEntry {
 			writeH(buf, DeveloperConfig.ITEM_STAT_ID);
 			writeD(buf, 10);
 			writeC(buf, 0);
-		}
-		else {
+		} else {
 			writeH(buf, modifier.getName().getItemStoneMask());
 			writeD(buf, modifier.getValue() * modifier.getName().getSign());
 			writeC(buf, modifier instanceof StatRateFunction ? 1 : 0);

@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.model.ExternalAuth;
 
-
 /**
  * @author Woge, Neon
  */
@@ -46,9 +45,7 @@ public class ExternalAuthUtil {
 		JSONParser parser = new JSONParser();
 
 		try {
-			query = String.format("u=%s&p=%s", 
-				URLEncoder.encode(name, charset), 
-				URLEncoder.encode(password, charset));
+			query = String.format("u=%s&p=%s", URLEncoder.encode(name, charset), URLEncoder.encode(password, charset));
 
 			HttpURLConnection connection = (HttpURLConnection) new URL(Config.AUTH_EXTERNAL_JSON_URL).openConnection();
 			connection.setRequestMethod("POST");
@@ -88,8 +85,7 @@ public class ExternalAuthUtil {
 						try {
 							int state = Integer.parseInt(answer.get("state").toString());
 							info.setAuthState(state);
-						}
-						catch (NumberFormatException e) {
+						} catch (NumberFormatException e) {
 							log.error(ExternalAuthUtil.class.getSimpleName() + ": error parsing auth state - " + e.getMessage());
 						}
 					} else {
@@ -101,11 +97,9 @@ public class ExternalAuthUtil {
 			} else {
 				log.error(ExternalAuthUtil.class.getSimpleName() + ": " + Config.AUTH_EXTERNAL_JSON_URL + " returned response code " + responseCode);
 			}
-		}
-		catch (UnsupportedEncodingException | IllegalFormatException  e) {
+		} catch (UnsupportedEncodingException | IllegalFormatException e) {
 			log.error(ExternalAuthUtil.class.getSimpleName() + ": error generating query string - " + e.getMessage());
-		}
-		catch (IOException | ParseException | ClassCastException e) {
+		} catch (IOException | ParseException | ClassCastException e) {
 			log.error(ExternalAuthUtil.class.getSimpleName() + ": " + e.toString());
 		}
 

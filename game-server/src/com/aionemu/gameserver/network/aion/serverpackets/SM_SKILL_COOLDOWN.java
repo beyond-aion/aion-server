@@ -13,14 +13,14 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_SKILL_COOLDOWN extends AionServerPacket {
 
 	private Map<Integer, Long> cooldowns;
-	
+
 	private boolean onLogin;
 
 	public SM_SKILL_COOLDOWN(Map<Integer, Long> cooldowns, boolean onLogin) {
 		this.cooldowns = cooldowns;
 		this.onLogin = onLogin;
 	}
-	
+
 	public SM_SKILL_COOLDOWN(Map<Integer, Long> cooldowns) {
 		this(cooldowns, false);
 	}
@@ -41,7 +41,7 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket {
 				int skillId = skillsWithCooldown.get(index);
 				writeH(skillId);
 				writeD(left > 0 ? left : 0);
-				writeD(onLogin ? 0 :DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown());
+				writeD(onLogin ? 0 : DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown());
 			}
 		}
 	}

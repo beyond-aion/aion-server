@@ -13,10 +13,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropZone")
 public class GlobalDropZone {
 
-    @XmlAttribute(name = "zone", required = true)
-    protected String zone;
- 
- 	public String getZone() {
-        return zone;
-    }
+	@XmlAttribute(name = "zone", required = true)
+	protected String zone;
+
+	public String getZone() {
+		return zone;
+	}
 }

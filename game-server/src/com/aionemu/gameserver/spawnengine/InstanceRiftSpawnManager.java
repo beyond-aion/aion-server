@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-
 /**
  * @author ginho1
  */
@@ -26,8 +25,8 @@ public class InstanceRiftSpawnManager {
 
 	private static final ConcurrentLinkedQueue<VisibleObject> rifts = new ConcurrentLinkedQueue<VisibleObject>();
 
-	private static final int RIFT_RESPAWN_DELAY	= 3600;	// 1 hour
-	private static final int RIFT_LIFETIME		= 3500;	// 1 hour
+	private static final int RIFT_RESPAWN_DELAY = 3600; // 1 hour
+	private static final int RIFT_LIFETIME = 3500; // 1 hour
 
 	public static void spawnAll() {
 
@@ -37,7 +36,7 @@ public class InstanceRiftSpawnManager {
 			public void run() {
 
 				for (RiftEnum rift : RiftEnum.values()) {
-					if(Rnd.get(1, 100) > 30)
+					if (Rnd.get(1, 100) > 30)
 						continue;
 
 					spawnInstanceRift(rift);
@@ -48,9 +47,8 @@ public class InstanceRiftSpawnManager {
 
 	private static void spawnInstanceRift(RiftEnum rift) {
 		log.info("Spawning Instance Rift: " + rift.name());
-	
-		SpawnTemplate spawn = SpawnEngine.addNewSpawn(rift.getWorldId(), rift.getNpcId(),
-				rift.getX(), rift.getY(), rift.getZ(), (byte) 0, 0);
+
+		SpawnTemplate spawn = SpawnEngine.addNewSpawn(rift.getWorldId(), rift.getNpcId(), rift.getX(), rift.getY(), rift.getZ(), (byte) 0, 0);
 
 		if (rift.getStaticId() > 0)
 			spawn.setStaticId(rift.getStaticId());
@@ -68,7 +66,7 @@ public class InstanceRiftSpawnManager {
 
 			@Override
 			public void run() {
-				if(visObj != null && visObj.isSpawned()) {
+				if (visObj != null && visObj.isSpawned()) {
 					visObj.getController().onDelete();
 					rifts.remove(visObj);
 				}
@@ -77,7 +75,7 @@ public class InstanceRiftSpawnManager {
 	}
 
 	public enum RiftEnum {
-    //DraupnirCave(700564, 1617, Race.ELYOS, 210040000, 2528.662f, 2680.882f, 155.050f),
+		// DraupnirCave(700564, 1617, Race.ELYOS, 210040000, 2528.662f, 2680.882f, 155.050f),
 		IndratuFortress(700565, 0, Race.ASMODIANS, 220040000, 1466.8792f, 1947.9192f, 588.06555f);
 
 		private int npc_id;
@@ -85,10 +83,10 @@ public class InstanceRiftSpawnManager {
 		private Race race;
 		private int worldId;
 		private float x;
-		private float y;	
+		private float y;
 		private float z;
 
-		private RiftEnum(int npc_id, int static_id, Race race, int worldId, float x , float y, float z) {
+		private RiftEnum(int npc_id, int static_id, Race race, int worldId, float x, float y, float z) {
 			this.npc_id = npc_id;
 			this.static_id = static_id;
 			this.race = race;
@@ -140,6 +138,7 @@ public class InstanceRiftSpawnManager {
 			WorldMapInstance worldInstance = visObj.getPosition().getMapRegion().getParent();
 
 			worldInstance.doOnAllPlayers(new Visitor<Player>() {
+
 				@Override
 				public void visit(Player player) {
 					if (player.isSpawned()) {
@@ -151,13 +150,13 @@ public class InstanceRiftSpawnManager {
 	}
 
 	public static void sendMessage(Player player, int npc_id) {
-		switch(npc_id) {
+		switch (npc_id) {
 			case 700564:
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400276));
-			break;
+				break;
 			case 700565:
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400275));
-			break;
+				break;
 		}
 	}
 }

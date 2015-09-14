@@ -63,14 +63,12 @@ public class _24052AFrozenCity extends QuestHandler {
 			if (targetId == 204753) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					int[] questItems = { 182215378, 182215379, 182215380 };
 					return sendQuestEndDialog(env, questItems);
 				}
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204753) {
@@ -103,32 +101,27 @@ public class _24052AFrozenCity extends QuestHandler {
 		if (!player.isInsideZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
 			return HandlerResult.FAILED;
 
-		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2
-			|| id != 182215380 && qs.getQuestVarById(0) == 3)
+		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2 || id != 182215380
+			&& qs.getQuestVarById(0) == 3)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				if (qs.getQuestVarById(0) == 1) {
 					playQuestMovie(env, 243);
 					removeQuestItem(env, id, 1);
 					changeQuestStep(env, 1, 2, false); // 2
 					giveQuestItem(env, 182215379, 1);
-				}
-				else if (qs.getQuestVarById(0) == 2) {
+				} else if (qs.getQuestVarById(0) == 2) {
 					playQuestMovie(env, 244);
 					removeQuestItem(env, id, 1);
 					changeQuestStep(env, 2, 3, false); // 3
 					giveQuestItem(env, 182215380, 1);
-				}
-				else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				} else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, id, 1);
 					playQuestMovie(env, 245);
 					changeQuestStep(env, 3, 3, true); // reward

@@ -114,12 +114,12 @@ public class GsPacketHandlerFactory {
 				break;
 			}
 		}
-		
-		if(msg != null) {
+
+		if (msg != null) {
 			msg.setConnection(client);
 			msg.setBuffer(data);
 		}
-		
+
 		return msg;
 	}
 

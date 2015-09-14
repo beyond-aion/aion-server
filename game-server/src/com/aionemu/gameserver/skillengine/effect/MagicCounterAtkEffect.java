@@ -14,8 +14,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 
 /**
  * @author ViAl
@@ -27,7 +27,7 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 	@XmlAttribute
 	protected int maxdmg;
 
-	//TODO bosses are resistent to this?
+	// TODO bosses are resistent to this?
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
@@ -47,15 +47,13 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 						return;
 					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK,
-									damage, true, LOG.MAGICCOUNTERATK);
+						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, true, LOG.MAGICCOUNTERATK);
 					}
 				}
 			};
 			effect.setActionObserver(observer, position);
 			effected.getObserveController().addObserver(observer);
-		}
-		else {
+		} else {
 			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {
 
 				@Override
@@ -64,16 +62,14 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 						return;
 					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK,
-									damage, true, LOG.MAGICCOUNTERATK);
+						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, true, LOG.MAGICCOUNTERATK);
 					}
 				}
 			};
 			effect.setActionObserver(observer, position);
 			effected.getObserveController().addObserver(observer);
 		}
-		}
-		
+	}
 
 	@Override
 	public void endEffect(Effect effect) {

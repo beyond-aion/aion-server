@@ -44,10 +44,10 @@ public class ChestAI2 extends ActionItemNpcAI2 {
 	protected void handleUseItemFinish(Player player) {
 		if (analyzeOpening(player)) {
 			if (getOwner().isInState(CreatureState.DEAD)) {
-              AuditLogger.info(player, "Attempted multiple Chest looting!");
-              return;
-            }
-			
+				AuditLogger.info(player, "Attempted multiple Chest looting!");
+				return;
+			}
+
 			Collection<Player> players = new HashSet<Player>();
 			if (player.isInGroup2()) {
 				for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
@@ -55,23 +55,20 @@ public class ChestAI2 extends ActionItemNpcAI2 {
 						players.add(member);
 					}
 				}
-			}
-			else if (player.isInAlliance2()) {
+			} else if (player.isInAlliance2()) {
 				for (Player member : player.getPlayerAlliance2().getOnlineMembers()) {
 					if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
 						players.add(member);
 					}
 				}
-			}
-			else {
+			} else {
 				players.add(player);
 			}
 			DropRegistrationService.getInstance().registerDrop(getOwner(), player, maxFrom(players).getLevel(), players);
 			AI2Actions.dieSilently(this, player);
 			DropService.getInstance().requestDropList(player, getObjectId());
 			super.handleUseItemFinish(player);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1111301));
 		}
 	}
@@ -96,8 +93,7 @@ public class ChestAI2 extends ActionItemNpcAI2 {
 				}
 				i++;
 				continue;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}

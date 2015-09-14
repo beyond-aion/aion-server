@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Luzien
- * 
  */
 public class _41598MakingBalaurLuck extends QuestHandler {
 
@@ -43,24 +42,22 @@ public class _41598MakingBalaurLuck extends QuestHandler {
 					case USE_OBJECT: {
 						if (!QuestService.inventoryItemCheck(env, true)) {
 							return true;
-						}
-						else return sendQuestDialog(env, 1011);
+						} else
+							return sendQuestDialog(env, 1011);
 					}
 					case QUEST_ACCEPT_SIMPLE: {
 						if (!player.getInventory().isFullSpecialCube()) {
 							if (QuestService.startQuest(env)) {
 								return sendQuestDialog(env, 2375);
 							}
-						}
-						else {
+						} else {
 							PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
 							return sendQuestSelectionDialog(env);
 						}
-					}	
+					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730555) {
 				if (dialog.equals(DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)) {
 					if (QuestService.collectItemCheck(env, false)) {
@@ -70,21 +67,19 @@ public class _41598MakingBalaurLuck extends QuestHandler {
 				}
 				return sendQuestDialog(env, 2375);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 730555) {
 				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
 					if (QuestService.collectItemCheck(env, true))
 						return sendQuestEndDialog(env);
-				}
-				else {
+				} else {
 					return QuestService.abandonQuest(player, questId);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		return env.getTargetId() == 730555;

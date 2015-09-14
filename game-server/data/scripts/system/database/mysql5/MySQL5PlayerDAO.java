@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastMap;
 
@@ -43,7 +44,6 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.google.common.collect.Maps;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author SoulKeeper, Saelya
@@ -66,12 +66,10 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			ResultSet rs = s.executeQuery();
 			rs.next();
 			return rs.getInt("cnt") > 0;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't check if name " + name + ", is used, returning possitive result", e);
 			return true;
-		}
-		finally {
+		} finally {
 			DB.close(s);
 		}
 	}
@@ -95,11 +93,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				String name = rs.getString("name");
 				result.put(id, name);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException("Failed to load player names", e);
-		}
-		finally {
+		} finally {
 			DB.close(s);
 		}
 
@@ -118,8 +114,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setInt(2, player.getObjectId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
 		}
 	}
@@ -164,18 +159,16 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setInt(25, pcd.getMentorFlagTime());
 				if (player.getPosition().getWorldMapInstance() == null) { // FIXME!
 					log.error("Error saving player: " + player.getObjectId() + " " + player.getName()
-						+ ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " "
-						+ player.getY() + " " + player.getZ());
+						+ ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " " + player.getY()
+						+ " " + player.getZ());
 					stmt.setInt(26, 0);
-				}
-				else {
+				} else {
 					stmt.setInt(26, player.getPosition().getWorldMapInstance().getOwnerId());
 				}
 				stmt.setInt(27, player.getObjectId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
 		}
 		if (CacheConfig.CACHE_COMMONDATA) {
@@ -218,8 +211,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setInt(17, player.getWhBonusExpands());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving new player: " + player.getObjectId() + " " + player.getName(), e);
 			return false;
 		}
@@ -243,8 +235,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		int playerObjId = 0;
 
 		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {
 				stmt.setString(1, name);
 				try (ResultSet rset = stmt.executeQuery()) {
 					if (rset.next()) {
@@ -252,8 +243,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore playerId data for player name: " + name + " from DB: " + e.getMessage(), e);
 		}
 
@@ -275,8 +265,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		boolean success = false;
 
 		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT * FROM players WHERE id = ?")) {
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT * FROM players WHERE id = ?")) {
 				stmt.setInt(1, playerObjId);
 				try (ResultSet resultSet = stmt.executeQuery()) {
 					log.debug("[DAO: MySQL5PlayerDAO] loading from db " + playerObjId);
@@ -328,14 +317,12 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setWorldOwnerId(resultSet.getInt("world_owner"));
 						cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
 						cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
-					}
-					else {
+					} else {
 						log.info("Missing PlayerCommonData from db " + playerObjId);
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore PlayerCommonData data for player: " + playerObjId + " from DB: " + e.getMessage(), e);
 		}
 
@@ -357,8 +344,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		PreparedStatement statement = DB.prepareStatement("DELETE FROM players WHERE id = ?");
 		try {
 			statement.setInt(1, playerId);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Some crap, can't set int parameter to PreparedStatement", e);
 		}
 		if (CacheConfig.CACHE_COMMONDATA) {
@@ -466,8 +452,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	 */
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -480,11 +465,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				ids[i] = rs.getInt("id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from players table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 
@@ -581,13 +564,12 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					accountId = rs.getInt("account_id");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 		return accountId;
 	}
-	
+
 	@Override
 	public int getAccountId(final int playerId) {
 		int accountId = 0;
@@ -600,8 +582,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					accountId = rs.getInt("account_id");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 		return accountId;
@@ -613,16 +594,13 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	@Override
 	public void storePlayerName(final PlayerCommonData recipientCommonData) {
 		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
-				log
-					.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
+				log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
 				stmt.setString(1, recipientCommonData.getName());
 				stmt.setInt(2, recipientCommonData.getPlayerObjId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving playerName: " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName(), e);
 		}
 	}
@@ -640,8 +618,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					cnt = rs.getInt("cnt");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 		return cnt;
@@ -661,8 +638,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					count = rs.getInt("count");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 		return count;
@@ -680,8 +656,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					count = rs.getInt("count");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 		return count;
@@ -694,7 +669,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
 
-		final Map<Integer, Integer> inactiveAccounts = FastMap.newInstance();
+		final Map<Integer, Integer> inactiveAccounts = new FastMap<>();
 
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
@@ -712,8 +687,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 					if ((numberOfChars = inactiveAccounts.get(accountId)) != null) {
 						inactiveAccounts.put(accountId, numberOfChars + 1);
-					}
-					else {
+					} else {
 						inactiveAccounts.put(accountId, 1);
 					}
 				}

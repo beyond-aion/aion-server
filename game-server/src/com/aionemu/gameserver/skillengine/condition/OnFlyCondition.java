@@ -25,7 +25,7 @@ public class OnFlyCondition extends Condition {
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
 		return stat.getOwner().isFlying();
 	}
-	
+
 	@Override
 	public boolean validate(Effect effect) {
 		return effect.getEffected().isFlying();

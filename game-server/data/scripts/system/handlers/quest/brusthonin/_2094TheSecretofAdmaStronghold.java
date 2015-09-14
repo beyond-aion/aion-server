@@ -62,8 +62,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 			if (targetId == 204057)
 				return sendQuestEndDialog(env);
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 205150) {
@@ -80,8 +79,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205192) {
+		} else if (targetId == 205192) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -93,8 +91,8 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 					return true;
 				case SETPRO2:
 					if (defaultCloseDialog(env, 1, 2)) {
-					   TeleportService2.teleportToNpc(player, 730137);
-					   return true;
+						TeleportService2.teleportToNpc(player, 730137);
+						return true;
 					}
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (var == 2) {
@@ -102,8 +100,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 10001);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 10008);
 					}
 				case SETPRO4:
@@ -112,8 +109,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 						updateQuestStatus(env);
 					}
 			}
-		}
-		else if (targetId == 205155) {
+		} else if (targetId == 205155) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -126,8 +122,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 730164) {
+		} else if (targetId == 730164) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 6) {
@@ -137,8 +132,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205191) {
+		} else if (targetId == 205191) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 6) {

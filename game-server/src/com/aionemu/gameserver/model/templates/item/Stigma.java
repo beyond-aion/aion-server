@@ -24,19 +24,18 @@ public class Stigma {
 	protected int shard;
 
 	/**
-	 * 
 	 * @return list
 	 */
 	public List<StigmaSkill> getSkills() {
 		List<StigmaSkill> list = new ArrayList<StigmaSkill>();
 		for (String st : skill) {
-			String[] array = st.split(":"); 
-			list.add(new StigmaSkill(Integer.parseInt(array[0]),Integer.parseInt(array[1])));
+			String[] array = st.split(":");
+			list.add(new StigmaSkill(Integer.parseInt(array[0]), Integer.parseInt(array[1])));
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * @return the shard
 	 */
@@ -50,20 +49,21 @@ public class Stigma {
 		}
 		return this.requireSkill;
 	}
-	
+
 	public class StigmaSkill {
+
 		private int skillId;
 		private int skillLvl;
-		
+
 		public StigmaSkill(int skillLvl, int skillId) {
 			this.skillId = skillId;
 			this.skillLvl = skillLvl;
 		}
-		
+
 		public int getSkillLvl() {
 			return this.skillLvl;
 		}
-		
+
 		public int getSkillId() {
 			return this.skillId;
 		}

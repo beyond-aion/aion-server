@@ -12,10 +12,9 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- * Talk with Atropos (798155). Talk with Josnack (798206). Get rid of stones so they can restore the statue: Stone above
- * the Statue (700389) Stone on the Statue Platform (700388) Talk with Atropos. Destroy the Eternal Flames (700390), and
- * collect their Soul Pieces (182208012) (6) from the Burnt Zombies (214552). Take them to Atropos. Receive a reward
- * from Atropos.
+ * Talk with Atropos (798155). Talk with Josnack (798206). Get rid of stones so they can restore the statue: Stone above the Statue (700389) Stone on
+ * the Statue Platform (700388) Talk with Atropos. Destroy the Eternal Flames (700390), and collect their Soul Pieces (182208012) (6) from the Burnt
+ * Zombies (214552). Take them to Atropos. Receive a reward from Atropos.
  * 
  * @author Dune11
  * @reworked vlog
@@ -23,7 +22,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 public class _1092JosnacksDilemma extends QuestHandler {
 
 	private final static int questId = 1092;
-	private final static int[] npc_ids = { 798155, 798206, 700389, 700388};
+	private final static int[] npc_ids = { 798155, 798206, 700389, 700388 };
 
 	public _1092JosnacksDilemma() {
 		super(questId);
@@ -65,8 +64,7 @@ public class _1092JosnacksDilemma extends QuestHandler {
 			if (targetId == 798155)
 				return sendQuestEndDialog(env);
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798155: // Atropos
 					switch (env.getDialog()) {
@@ -168,7 +166,7 @@ public class _1092JosnacksDilemma extends QuestHandler {
 			Storage bag = player.getInventory();
 			if (target instanceof Npc) {
 				Npc npc = (Npc) target;
-				if(npc.getNpcId() == 700390 && var == 4 && (bag.getItemCountByItemId(182208012) < 6)) {
+				if (npc.getNpcId() == 700390 && var == 4 && (bag.getItemCountByItemId(182208012) < 6)) {
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 214552, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 214552, npc.getX() - 2, npc.getY() - 2, npc.getZ(), npc.getHeading());
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 214552, npc.getX() + 2, npc.getY(), npc.getZ(), npc.getHeading());
@@ -179,8 +177,3 @@ public class _1092JosnacksDilemma extends QuestHandler {
 		return false;
 	}
 }
-         
-           
-              	
-				
-				

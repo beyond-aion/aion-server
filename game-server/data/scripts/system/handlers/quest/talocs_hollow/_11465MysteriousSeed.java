@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author madison
- *
  */
 public class _11465MysteriousSeed extends QuestHandler {
 
@@ -27,6 +25,7 @@ public class _11465MysteriousSeed extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182209523, questId);
 		qe.registerQuestNpc(279000).addOnTalkEvent(questId);
@@ -44,32 +43,30 @@ public class _11465MysteriousSeed extends QuestHandler {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
-			}else if(env.getDialogId() == DialogAction.QUEST_REFUSE_1.id()){
+			} else if (env.getDialogId() == DialogAction.QUEST_REFUSE_1.id()) {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
 		}
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START){
-			if(targetId == 279000){
-				switch (dialog){
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 279000) {
+				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_QUEST_REWARD:{
+					case SELECT_QUEST_REWARD: {
 						removeQuestItem(env, 182209523, 1);
 						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 5);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279000) {
 				return sendQuestEndDialog(env);
 			}
-			
+
 		}
 		return false;
 	}
@@ -79,17 +76,15 @@ public class _11465MysteriousSeed extends QuestHandler {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
-		
+
 		if (id != 182209523)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

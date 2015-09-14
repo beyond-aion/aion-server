@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.model.team.legion;
 
-
 /**
  * @author Simple
  */
 public class LegionMember {
+
 	private int objectId = 0;
 	protected Legion legion = null;
 	protected String nickname = "";
@@ -104,14 +104,15 @@ public class LegionMember {
 	public int getChallengeScore() {
 		return challengeScore;
 	}
-	
+
 	/**
-	 * @param challengeScore the challengeScore to set
+	 * @param challengeScore
+	 *          the challengeScore to set
 	 */
 	public void setChallengeScore(int challengeScore) {
 		this.challengeScore = challengeScore;
 	}
-	
+
 	/**
 	 * @param amount
 	 */
@@ -136,8 +137,7 @@ public class LegionMember {
 
 	public boolean hasRights(LegionPermissionsMask permissions) {
 		int legionarPermission = 0;
-		switch (this.getRank())
-		{
+		switch (this.getRank()) {
 			case BRIGADE_GENERAL:
 				return true;
 			case DEPUTY:

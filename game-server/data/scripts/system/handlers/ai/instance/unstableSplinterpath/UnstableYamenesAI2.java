@@ -63,8 +63,7 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					spawnPortal();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -98,8 +97,7 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 				spawn(219579, 375.05f, 750.67f, 216.82f, (byte) 59);
 				spawn(219580, 341.33f, 699.38f, 216.86f, (byte) 59);
 				top = true;
-			}
-			else {
+			} else {
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1400637);
 				spawn(219567, 303.69f, 736.35f, 198.7f, (byte) 0);
 				spawn(219579, 335.19f, 708.92f, 198.9f, (byte) 35);
@@ -118,7 +116,7 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{100});
+		Collections.addAll(percents, new Integer[] { 100 });
 	}
 
 	private void cancelTask() {

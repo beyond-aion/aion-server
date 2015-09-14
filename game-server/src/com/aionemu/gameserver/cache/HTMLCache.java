@@ -47,7 +47,7 @@ public final class HTMLCache {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private FastMap<String, String> cache = new FastMap<String, String>(16000);
+	private FastMap<String, String> cache = new FastMap<String, String>();
 
 	private int loadedFiles;
 	private int size;
@@ -85,18 +85,15 @@ public final class HTMLCache {
 					loadedFiles++;
 					size += html.length();
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("", e);
 
 				reload(true);
 				return;
-			}
-			finally {
+			} finally {
 				IOUtils.closeQuietly(ois);
 			}
-		}
-		else {
+		} else {
 			parseDir(HTML_ROOT);
 		}
 
@@ -104,8 +101,7 @@ public final class HTMLCache {
 
 		if (cacheFile.exists()) {
 			log.info("Cache[HTML]: Compaction skipped!");
-		}
-		else {
+		} else {
 			log.info("Cache[HTML]: Compacting htmls... OK.");
 
 			final StringBuilder sb = new StringBuilder(8192);
@@ -119,8 +115,7 @@ public final class HTMLCache {
 					size += newHtml.length();
 
 					entry.setValue(newHtml);
-				}
-				catch (RuntimeException e) {
+				} catch (RuntimeException e) {
 					log.warn("Cache[HTML]: Error during compaction of " + entry.getKey(), e);
 				}
 			}
@@ -136,11 +131,9 @@ public final class HTMLCache {
 				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(getCacheFile())));
 
 				oos.writeObject(cache);
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				log.warn("", e);
-			}
-			finally {
+			} finally {
 				IOUtils.closeQuietly(oos);
 			}
 		}
@@ -251,11 +244,9 @@ public final class HTMLCache {
 				cache.put(relpath, content);
 
 				return content;
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("Problem with htm file:", e);
-			}
-			finally {
+			} finally {
 				IOUtils.closeQuietly(bis);
 			}
 		}
@@ -277,8 +268,7 @@ public final class HTMLCache {
 
 	@Override
 	public String toString() {
-		return "Cache[HTML]: " + String.format("%.3f", (float) size / 1024) + " kilobytes on " + loadedFiles
-			+ " file(s) loaded.";
+		return "Cache[HTML]: " + String.format("%.3f", (float) size / 1024) + " kilobytes on " + loadedFiles + " file(s) loaded.";
 	}
 
 	public static String getRelativePath(File base, File file) {

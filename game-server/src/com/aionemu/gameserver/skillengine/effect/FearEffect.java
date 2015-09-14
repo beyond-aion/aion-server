@@ -37,13 +37,13 @@ public class FearEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int resistchance = 100;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getEffectController().removeHideEffects();
 		// Fear stops gliding
-		if (effected instanceof Player && ((Player)effected).isInGlidingState()) {
+		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
 
@@ -63,19 +63,18 @@ public class FearEffect extends EffectTemplate {
 		effect.setAbnormal(AbnormalState.FEAR.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR.getId());
 
-		//PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
+		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getController().stopMoving();
 
 		if (effected instanceof Npc)
-			((NpcAI2)effected.getAi2()).setStateIfNot(AIState.FEAR);
+			((NpcAI2) effected.getAi2()).setStateIfNot(AIState.FEAR);
 		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(
-				new FearTask(effector, effected), 0, 1000);
+			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
 			effect.setPeriodicTask(fearTask, position);
 		}
-		
-		//resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage 
-		//example skillId: 540 Terrible howl
+
+		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
+		// example skillId: 540 Terrible howl
 		if (resistchance < 100) {
 			ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 
@@ -98,11 +97,11 @@ public class FearEffect extends EffectTemplate {
 		if (GeoDataConfig.FEAR_ENABLE) {
 			effect.getEffected().getMoveController().abortMove();// TODO impl stopMoving?
 		}
-		if (effect.getEffected() instanceof Npc){
-			((NpcAI2)effect.getEffected().getAi2()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
+		if (effect.getEffected() instanceof Npc) {
+			((NpcAI2) effect.getEffected().getAi2()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
 		}
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
-		
+
 		if (resistchance < 100) {
 			ActionObserver observer = effect.getActionObserver(position);
 			if (observer != null)
@@ -133,18 +132,15 @@ public class FearEffect extends EffectTemplate {
 				float x1 = (float) (Math.cos(radian) * maxDistance);
 				float y1 = (float) (Math.sin(radian) * maxDistance);
 				byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x+x1, y+y1, effected.getZ(), true, intentions);
+				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ(), true, intentions);
 				if (effected.isFlying()) {
 					closestCollision.setZ(effected.getZ());
 				}
-				if (effected instanceof Npc){
-					((Npc)effected).getMoveController().resetMove();
-					((Npc)effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(),
-					closestCollision.getZ());
-				}
-				else{
-					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(),
-						closestCollision.getZ(), moveAwayHeading);
+				if (effected instanceof Npc) {
+					((Npc) effected).getMoveController().resetMove();
+					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+				} else {
+					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
 					effected.getMoveController().startMovingToDestination();
 				}
 			}

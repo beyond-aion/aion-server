@@ -22,7 +22,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author xTz
- * 
  */
 @AIName("quest_use_item")
 public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
@@ -31,8 +30,8 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0, 0),
-			getObjectTemplate().getTemplateId(), QuestActionType.ACTION_ITEM_USE))) {
+		if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0, 0), getObjectTemplate().getTemplateId(),
+			QuestActionType.ACTION_ITEM_USE))) {
 			return;
 		}
 		super.handleDialogStart(player);
@@ -60,20 +59,17 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 				if (registeredPlayers.isEmpty()) {
 					registeredPlayers.add(player);
 				}
-			}
-			else if (player.isInAlliance2()) {
+			} else if (player.isInAlliance2()) {
 				registeredPlayers = QuestService.getEachDropMembersAlliance(player.getPlayerAlliance2(), getNpcId(), questEnv.getQuestId());
 				if (registeredPlayers.isEmpty()) {
 					registeredPlayers.add(player);
 				}
-			}
-			else {
+			} else {
 				registeredPlayers.add(player);
 			}
 			AI2Actions.registerDrop(this, player, registeredPlayers);
 			DropService.getInstance().requestDropList(player, getObjectId());
-		}
-		else if (registeredPlayers.contains(player)) {
+		} else if (registeredPlayers.contains(player)) {
 			DropService.getInstance().requestDropList(player, getObjectId());
 		}
 	}
@@ -87,7 +83,7 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 		super.handleDespawned();
 		registeredPlayers.clear();
 	}
-	
+
 	@Override
 	protected void handleCreatureSee(Creature creature) {
 		CreatureEventHandler.onCreatureSee(this, creature);

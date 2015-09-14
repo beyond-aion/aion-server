@@ -29,7 +29,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author Cheatkiller
  * @modified Luzien
- *
  */
 @AIName("brigadegeneraltahabata")
 public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
@@ -52,6 +51,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void startPiercingStrikeTask() {
 		piercingStrikeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -66,6 +66,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void startFireStormTask() {
 		fireStormTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -97,6 +98,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void useMultiSkill() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				AI2Actions.useSkill(BrigadeGeneralTahabataAI2.this, 20755);
@@ -133,10 +135,10 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				switch (percent) {
 					case 96:
-						lavaEruptionEvent(283116);//4.0
+						lavaEruptionEvent(283116);// 4.0
 						if (isEndPiercingStrike.compareAndSet(true, false))
 							startPiercingStrikeTask();
 						break;
@@ -149,7 +151,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 						AI2Actions.useSkill(this, 20761);
 						break;
 					case 55:
-						lavaEruptionEvent(283118);//4.0
+						lavaEruptionEvent(283118);// 4.0
 						break;
 					case 40:
 					case 25:
@@ -158,14 +160,14 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 					case 20:
 						cancelFireStorm();
 						cancelPiercingStrike();
-						lavaEruptionEvent(283120);//4.0
+						lavaEruptionEvent(283120);// 4.0
 						break;
 					case 10:
 						AI2Actions.useSkill(this, 20942);
 						break;
 					case 7:
 						AI2Actions.useSkill(this, 20883);
-						spawn(283102, 679.88f, 1068.88f, 497.88f, (byte) 0);//4.0
+						spawn(283102, 679.88f, 1068.88f, 497.88f, (byte) 0);// 4.0
 						break;
 				}
 				break;
@@ -176,14 +178,15 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 	private void lavaEruptionEvent(final int floorId) {
 		AI2Actions.targetSelf(BrigadeGeneralTahabataAI2.this);
 		AI2Actions.useSkill(BrigadeGeneralTahabataAI2.this, 20756);
-		if (getPosition().getWorldMapInstance().getNpc(283051) == null) {//4.0
-			spawn(283051, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);//4.0
+		if (getPosition().getWorldMapInstance().getNpc(283051) == null) {// 4.0
+			spawn(283051, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);// 4.0
 		}
 		spawnfloor(floorId);
 	}
 
 	private void spawnfloor(final int floor) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				spawn(floor, 679.88f, 1068.88f, 497.88f, (byte) 0);
@@ -207,8 +210,8 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
 		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-				+ y1, getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
@@ -221,7 +224,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{96, 75, 60, 55, 40, 25, 20, 10, 7});
+		Collections.addAll(percents, new Integer[] { 96, 75, 60, 55, 40, 25, 20, 10, 7 });
 	}
 
 	@Override
@@ -232,13 +235,13 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void deleteAdds() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
-		deleteNpcs(instance.getNpcs(283116));//4.0
-		deleteNpcs(instance.getNpcs(283117));//4.0
-		deleteNpcs(instance.getNpcs(283118));//4.0
-		deleteNpcs(instance.getNpcs(283119));//4.0
-		deleteNpcs(instance.getNpcs(283120));//4.0
-		deleteNpcs(instance.getNpcs(283121));//4.0
-		deleteNpcs(instance.getNpcs(283102));//4.0
+		deleteNpcs(instance.getNpcs(283116));// 4.0
+		deleteNpcs(instance.getNpcs(283117));// 4.0
+		deleteNpcs(instance.getNpcs(283118));// 4.0
+		deleteNpcs(instance.getNpcs(283119));// 4.0
+		deleteNpcs(instance.getNpcs(283120));// 4.0
+		deleteNpcs(instance.getNpcs(283121));// 4.0
+		deleteNpcs(instance.getNpcs(283102));// 4.0
 	}
 
 	@Override

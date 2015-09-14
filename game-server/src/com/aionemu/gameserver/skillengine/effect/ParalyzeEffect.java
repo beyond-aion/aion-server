@@ -31,7 +31,7 @@ public class ParalyzeEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill();
 		if (effected instanceof Player)
-	  	 ((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().onStopGliding();
 		effect.setAbnormal(AbnormalState.PARALYZE.getId());
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
 

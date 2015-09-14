@@ -38,7 +38,7 @@ public enum ItemSlot {
 	SHARD_RIGHT_OR_LEFT(POWER_SHARD_LEFT.slotIdMask | POWER_SHARD_RIGHT.slotIdMask, true), // 24576
 	RIGHT_HAND(MAIN_HAND.slotIdMask | MAIN_OFF_HAND.slotIdMask, true),
 	LEFT_HAND(SUB_HAND.slotIdMask | SUB_OFF_HAND.slotIdMask, true),
-	//TORSO_GLOVE_FOOT_SHOULDER_LEG(0, true), // TODO
+	// TORSO_GLOVE_FOOT_SHOULDER_LEG(0, true), // TODO
 
 	// STIGMA slots
 	STIGMA1(1L << 30),
@@ -48,8 +48,7 @@ public enum ItemSlot {
 	STIGMA5(1L << 34),
 	STIGMA6(1L << 35),
 
-	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask | STIGMA4.slotIdMask
-		| STIGMA5.slotIdMask | STIGMA6.slotIdMask, true),
+	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask | STIGMA4.slotIdMask | STIGMA5.slotIdMask | STIGMA6.slotIdMask, true),
 
 	ADV_STIGMA1(1L << 47),
 	ADV_STIGMA2(1L << 48),
@@ -58,8 +57,8 @@ public enum ItemSlot {
 	ADV_STIGMA5(1L << 51),
 	ADV_STIGMA6(1L << 52),
 
-	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask | ADV_STIGMA4.slotIdMask
-		| ADV_STIGMA5.slotIdMask | ADV_STIGMA6.slotIdMask, true),
+	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask | ADV_STIGMA4.slotIdMask | ADV_STIGMA5.slotIdMask
+		| ADV_STIGMA6.slotIdMask, true),
 	ALL_STIGMA(REGULAR_STIGMAS.slotIdMask | ADVANCED_STIGMAS.slotIdMask, true);
 
 	private long slotIdMask;

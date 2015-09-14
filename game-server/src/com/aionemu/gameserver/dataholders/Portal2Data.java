@@ -21,24 +21,19 @@ import com.aionemu.gameserver.model.templates.portal.PortalScroll;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "portalUse",
-    "portalDialog",
-    "portalScroll"
-})
+@XmlType(name = "", propOrder = { "portalUse", "portalDialog", "portalScroll" })
 @XmlRootElement(name = "portal_templates2")
 public class Portal2Data {
 
-    @XmlElement(name = "portal_use")
-    protected List<PortalUse> portalUse;
-    @XmlElement(name = "portal_dialog")
-    protected List<PortalDialog> portalDialog;
-    @XmlElement(name = "portal_scroll")
-    protected List<PortalScroll> portalScroll;
+	@XmlElement(name = "portal_use")
+	protected List<PortalUse> portalUse;
+	@XmlElement(name = "portal_dialog")
+	protected List<PortalDialog> portalDialog;
+	@XmlElement(name = "portal_scroll")
+	protected List<PortalScroll> portalScroll;
 
 	@XmlTransient
 	private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<PortalUse>();
@@ -73,8 +68,7 @@ public class Portal2Data {
 		PortalDialog portal = portalDialogs.get(npcId);
 		if (portal != null) {
 			for (PortalPath path : portal.getPortalPath()) {
-				if (path.getDialog() == dialogId && (race.equals(path.getRace()) 
-						|| path.getRace().equals(Race.PC_ALL))) {
+				if (path.getDialog() == dialogId && (race.equals(path.getRace()) || path.getRace().equals(Race.PC_ALL))) {
 					return path;
 				}
 			}
@@ -83,7 +77,7 @@ public class Portal2Data {
 	}
 
 	public boolean isPortalNpc(int npcId) {
-		return  portalUses.get(npcId) != null || portalDialogs.get(npcId) != null;
+		return portalUses.get(npcId) != null || portalDialogs.get(npcId) != null;
 	}
 
 	public PortalUse getPortalUse(int npcId) {
@@ -93,7 +87,7 @@ public class Portal2Data {
 	public PortalScroll getPortalScroll(String name) {
 		return portalScrolls.get(name);
 	}
-	
+
 	public int getTeleportDialogId(int npcId) {
 		PortalDialog portal = portalDialogs.get(npcId);
 		return portal == null ? 1011 : portal.getTeleportDialogId();

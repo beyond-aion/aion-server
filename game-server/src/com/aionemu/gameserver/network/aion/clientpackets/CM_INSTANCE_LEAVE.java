@@ -22,7 +22,7 @@ public class CM_INSTANCE_LEAVE extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		if (player.isInInstance()) {
-			player.getPosition().getWorldMapInstance().getInstanceHandler().onExitInstance(player);	
-		}		
+			player.getPosition().getWorldMapInstance().getInstanceHandler().onExitInstance(player);
+		}
 	}
 }

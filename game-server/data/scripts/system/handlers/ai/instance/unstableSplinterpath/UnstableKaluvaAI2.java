@@ -22,9 +22,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("unstablekaluva")
 public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
+
 	private boolean canThink = true;
 	private boolean isInMove = false;
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -35,8 +36,7 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
-	
-	
+
 	private void moveToSpawner(int egg) {
 		Npc spawner = getPosition().getWorldMapInstance().getNpc(egg);
 		if (spawner != null) {
@@ -50,7 +50,7 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 			getMoveController().moveToTargetObject();
 		}
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		if (canThink == false) {
@@ -62,18 +62,17 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 					getEffectController().removeEffect(19152);
 				}
 			}
-			
+
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				
+
 				@Override
-				public void run(){
+				public void run() {
 					canThink = true;
 					Creature creature = getAggroList().getMostHated();
 					if (creature == null || !getOwner().canSee(creature) || NpcActions.isAlreadyDead(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
-					}
-					else {
+					} else {
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();
@@ -88,7 +87,7 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 		}
 		super.handleMoveArrived();
 	}
-	
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
@@ -96,10 +95,10 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private int randomEgg() {
-		int [] npcId = {219971, 219952, 219970, 219969};
-		return npcId [Rnd.get(0, npcId.length -1)];
+		int[] npcId = { 219971, 219952, 219970, 219969 };
+		return npcId[Rnd.get(0, npcId.length - 1)];
 	}
-	
+
 	@Override
 	public boolean canThink() {
 		return canThink;

@@ -24,8 +24,7 @@ public abstract class FIFOExecutableQueue implements Runnable {
 				return;
 
 			state = QUEUED;
-		}
-		finally {
+		} finally {
 			unlock();
 		}
 
@@ -40,6 +39,7 @@ public abstract class FIFOExecutableQueue implements Runnable {
 		lock.unlock();
 	}
 
+	@Override
 	public final void run() {
 		try {
 			while (!isEmpty()) {
@@ -48,13 +48,11 @@ public abstract class FIFOExecutableQueue implements Runnable {
 				try {
 					while (!isEmpty())
 						removeAndExecuteFirst();
-				}
-				finally {
+				} finally {
 					setState(RUNNING, QUEUED);
 				}
 			}
-		}
-		finally {
+		} finally {
 			setState(QUEUED, NONE);
 		}
 	}
@@ -64,8 +62,7 @@ public abstract class FIFOExecutableQueue implements Runnable {
 		try {
 			if (state != expected)
 				throw new IllegalStateException("state: " + state + ", expected: " + expected);
-		}
-		finally {
+		} finally {
 			state = value;
 
 			unlock();

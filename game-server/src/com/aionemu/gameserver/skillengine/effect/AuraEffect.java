@@ -29,7 +29,8 @@ public class AuraEffect extends EffectTemplate {
 	protected int distance;
 	@XmlAttribute(name = "skill_id")
 	protected int skillId;
-	//TODO distancez
+
+	// TODO distancez
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -49,16 +50,15 @@ public class AuraEffect extends EffectTemplate {
 			return;
 		}
 		if (effector.isInGroup2() || effector.isInAlliance2()) {
-			Collection<Player> onlynePlayers = effector.isInGroup2() ? effector.getPlayerGroup2().getOnlineMembers()
-					: effector.getPlayerAllianceGroup2().getOnlineMembers();
-			final int actualRange = (int)(distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
+			Collection<Player> onlynePlayers = effector.isInGroup2() ? effector.getPlayerGroup2().getOnlineMembers() : effector.getPlayerAllianceGroup2()
+				.getOnlineMembers();
+			final int actualRange = (int) (distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
 			for (Player player : onlynePlayers) {
 				if (MathUtil.isIn3dRange(effector, player, actualRange)) {
 					applyAuraTo(player, effect);
 				}
 			}
-		}
-		else {
+		} else {
 			applyAuraTo(effector, effect);
 		}
 		PacketSendUtility.broadcastPacket(effector, new SM_MANTRA_EFFECT(effector, skillId));
@@ -76,7 +76,7 @@ public class AuraEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		effect.setPeriodicTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new AuraTask (effect), 0, 6500), position);
+		effect.setPeriodicTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new AuraTask(effect), 0, 6500), position);
 	}
 
 	private class AuraTask implements Runnable {
@@ -91,16 +91,15 @@ public class AuraEffect extends EffectTemplate {
 		public void run() {
 			onPeriodicAction(effect);
 			/**
-			 * This has the special effect of clearing the current thread's quantum 
-			 * and putting it to the end of the queue for its priority level.
-			 * Will just give-up the thread's turn, and gain it in the next round.
+			 * This has the special effect of clearing the current thread's quantum and putting it to the end of the queue for its priority level. Will just
+			 * give-up the thread's turn, and gain it in the next round.
 			 */
-			Thread.yield(); 
+			Thread.yield();
 		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		
+
 	}
 }

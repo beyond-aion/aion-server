@@ -17,8 +17,7 @@ public class VortexSpawnTemplate extends SpawnTemplate {
 		super(spawnGroup, spot);
 	}
 
-	public VortexSpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId,
-			int staticId, int fly) {
+	public VortexSpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
 		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
 	}
 

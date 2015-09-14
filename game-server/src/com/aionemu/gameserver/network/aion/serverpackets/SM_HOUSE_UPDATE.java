@@ -93,8 +93,7 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 			writeC(0);
 			writeC(0);
 			writeD(0);
-		}
-		else {
+		} else {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
 			writeC(emblem.getEmblemType().getValue());

@@ -81,10 +81,8 @@ public class MySQL5BlockListDAO extends BlockListDAO {
 					int blockedOid = rset.getInt("blocked_player");
 					PlayerCommonData pcd = playerDao.loadPlayerCommonData(blockedOid);
 					if (pcd == null) {
-						log.error("Attempt to load block list for " + player.getName()
-							+ " tried to load a player which does not exist: " + blockedOid);
-					}
-					else {
+						log.error("Attempt to load block list for " + player.getName() + " tried to load a player which does not exist: " + blockedOid);
+					} else {
 						list.put(blockedOid, new BlockedPlayer(pcd, rset.getString("reason")));
 					}
 				}

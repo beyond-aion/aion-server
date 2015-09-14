@@ -46,7 +46,7 @@ public class RestartHandler extends TaskFromDBHandler {
 			@Override
 			public void visit(Player player) {
 				PacketSendUtility.sendBrightYellowMessageOnCenter(player, "Automatic Task: The server will restart in " + warnCountDown
-						+ " seconds ! Please find a safe place and disconnect your character.");
+					+ " seconds ! Please find a safe place and disconnect your character.");
 			}
 		});
 

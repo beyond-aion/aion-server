@@ -19,12 +19,12 @@ public class SeedHetgolemAI2 extends AggressiveNpcAI2 {
 		WorldPosition p = getPosition();
 		if (p != null && p.getWorldMapInstance() != null) {
 			spawn(282441, p.getX(), p.getY(), p.getZ(), p.getHeading());
-			Npc npc = (Npc)spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
+			Npc npc = (Npc) spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
 			NpcActions.delete(npc);
 		}
 		super.handleDied();
 		AI2Actions.deleteOwner(this);
-		
+
 	}
 
 }

@@ -21,13 +21,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * Talk with Pernos (790001). Find Fissure of Destiny (700551) that connects to Karamatis (310120000, 52, 174, 229, 0)
- * and talk with Hermione (205119) (spawn). Proceed to Karamatis and defeat Orissan Legionary (50): Legionary (215396, 
- * 215397, 215398, 215399, 215400), Archon legionary (205021, 205022). Defeat Orissan (215400) (spawn 310120000,
- * 182, 294, 296, 90) (1). Activate the Artifact of Memory (700552). Talk with Lephar (205118) (spawn). Report the
- * result to Fasimedes (203700) (110010000, 1867, 2068, 517).
+ * Talk with Pernos (790001). Find Fissure of Destiny (700551) that connects to Karamatis (310120000, 52, 174, 229, 0) and talk with Hermione (205119)
+ * (spawn). Proceed to Karamatis and defeat Orissan Legionary (50): Legionary (215396, 215397, 215398, 215399, 215400), Archon legionary (205021,
+ * 205022). Defeat Orissan (215400) (spawn 310120000, 182, 294, 296, 90) (1). Activate the Artifact of Memory (700552). Talk with Lephar (205118)
+ * (spawn). Report the result to Fasimedes (203700) (110010000, 1867, 2068, 517).
  * 
- * @author vlog  Reworked Bobobear
+ * @author vlog Reworked Bobobear
  */
 public class _1099AnImportantChoice extends QuestHandler {
 
@@ -103,9 +102,10 @@ public class _1099AnImportantChoice extends QuestHandler {
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 									@Override
 									public void run() {
-										changeQuestStep(env, 1, 2, false); 
+										changeQuestStep(env, 1, 2, false);
 									}
 								}, 43000);
 								return true;
@@ -127,14 +127,13 @@ public class _1099AnImportantChoice extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							}
 						}
-						case SETPRO2: 
-						case SETPRO3: 
+						case SETPRO2:
+						case SETPRO3:
 							return defaultCloseDialog(env, 54, 54, true, false); // reward
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) { // Fasimedes
 				return sendQuestEndDialog(env);
 			}
@@ -153,8 +152,7 @@ public class _1099AnImportantChoice extends QuestHandler {
 				if (var == 51)
 					QuestService.addNewSpawn(310120000, player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
 				return defaultOnKillEvent(env, npcIds, 2, 52); // 2 - 52
-			}
-			else if (var == 52) {
+			} else if (var == 52) {
 				return defaultOnKillEvent(env, 215400, 52, 53); // 53
 			}
 		}
@@ -169,8 +167,8 @@ public class _1099AnImportantChoice extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var > 1) {
 				changeQuestStep(env, var, 1, false); // 1
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -186,8 +184,8 @@ public class _1099AnImportantChoice extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				if (var > 1) {
 					changeQuestStep(env, var, 1, false); // 1
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}

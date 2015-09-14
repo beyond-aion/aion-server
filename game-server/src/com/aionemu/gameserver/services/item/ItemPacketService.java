@@ -50,7 +50,7 @@ public class ItemPacketService {
 		INC_ITEM_REPURCHASE(0x51, true),
 		DEC_KINAH_CUBE(0x5A, true), // expand cube
 		DEC_PET_FOOD(0x5E, true),
-        INC_PASSPORT_ADD(0x8A, true),
+		INC_PASSPORT_ADD(0x8A, true),
 		PUT(0x13, true), // from other storage
 		GET_BACK_FROM_EXCHANGE(0x23, true),
 		PUT_TO_EXCHANGE(0x25, true);
@@ -98,16 +98,15 @@ public class ItemPacketService {
 		BROKER_RETURN(0x2F),
 		MAIL(0x36),
 		REPURCHASE(0x51),
-		SERVER_GENERATED(0x00), //Banquest Table, Extract Enchanment stones, Remodel, Armfusion
+		SERVER_GENERATED(0x00), // Banquest Table, Extract Enchanment stones, Remodel, Armfusion
 		PLAYER_STORE(0x2B),
 		SURVEY(0x40),
-		DECOMPOSABLE(0x50), //also Guestbloom
+		DECOMPOSABLE(0x50), // also Guestbloom
 		PLAYER_EXCHANGE(0x21),
 		PLAYER_EXCHANGE_ITEMS_RETURN(0x23),
 		QUEST_WORK_ITEM2(0x36),
 		QUEST_REWARD_ITEM(0x30),
 		CRAFTED_ITEM(0x2D);
-
 
 		private final int mask;
 
@@ -185,8 +184,7 @@ public class ItemPacketService {
 	public static final void sendItemPacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
 		if (item.getItemCount() <= 0 && !item.getItemTemplate().isKinah()) {
 			sendItemDeletePacket(player, storageType, item, ItemDeleteType.fromUpdateType(updateType));
-		}
-		else {
+		} else {
 			sendItemUpdatePacket(player, storageType, item, updateType);
 		}
 	}

@@ -36,13 +36,11 @@ public class _2985AnExpertsReward extends QuestHandler {
 			if (targetId == 204052) { // Vidar
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204072) { // Roskva
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -54,8 +52,7 @@ public class _2985AnExpertsReward extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204072) { // Roskva
 				return sendQuestEndDialog(env);
 			}

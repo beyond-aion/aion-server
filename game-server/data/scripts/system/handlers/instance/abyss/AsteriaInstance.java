@@ -35,10 +35,8 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("ASTERIA_WING_1", mapId,
-				new Point3D(479.24, 572.57, 202.72),
-				new Point3D(477.95, 567.64, 212.9),
-				new Point3D(477.97, 563.35, 202.12), 10), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("ASTERIA_WING_1", mapId, new Point3D(479.24, 572.57, 202.72), new Point3D(477.95, 567.64, 212.9),
+			new Point3D(477.97, 563.35, 202.12), 10), instanceId);
 		f1.spawn();
 	}
 
@@ -74,11 +72,11 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900 - (int) time / 1000));
 			}
 		}
-                
-                if (instanceRace == null) {
-                    instanceRace = player.getRace();
-                    spawnGoldChest();
-                }
+
+		if (instanceRace == null) {
+			instanceRace = player.getRace();
+			spawnGoldChest();
+		}
 
 	}
 
@@ -94,7 +92,7 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 	}
-	
+
 	private void spawnGoldChest() {
 		final int chestId = instanceRace.equals(Race.ELYOS) ? 701483 : 701488;
 		spawn(chestId, 512.8f, 565.35f, 198f, (byte) 60);

@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41557MarkOfTheTraitor extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _41557MarkOfTheTraitor extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212526, questId);
 		qe.registerQuestNpc(205914).addOnQuestStart(questId);
@@ -36,20 +35,17 @@ public class _41557MarkOfTheTraitor extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205914) { 
+			if (targetId == 205914) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212526, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205914) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -63,15 +59,14 @@ public class _41557MarkOfTheTraitor extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			  return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, true)); // reward
+			return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, true)); // reward
 		}
 		return HandlerResult.FAILED;
 	}
 }
-

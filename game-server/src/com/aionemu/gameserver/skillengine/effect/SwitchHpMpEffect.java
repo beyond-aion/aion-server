@@ -21,7 +21,7 @@ public class SwitchHpMpEffect extends EffectTemplate {
 		int currentHp = lifeStats.getCurrentHp();
 		int currentMp = lifeStats.getCurrentMp();
 
-		//doesnt send sm_attack_status, checked on 4.5
+		// doesnt send sm_attack_status, checked on 4.5
 		lifeStats.increaseHp(currentMp - currentHp);
 		lifeStats.increaseMp(currentHp - currentMp);
 	}

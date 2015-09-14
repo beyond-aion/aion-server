@@ -92,7 +92,7 @@ public class _14014TurningTheIde extends QuestHandler {
 					break;
 			}
 		}
-	
+
 		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203164)
 				return sendQuestEndDialog(env);
@@ -102,10 +102,10 @@ public class _14014TurningTheIde extends QuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		int[] mobs = {210178, 216892};
+		int[] mobs = { 210178, 216892 };
 		return defaultOnKillEvent(env, mobs, 5, 7) || defaultOnKillEvent(env, mobs, 7, true);
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
@@ -117,7 +117,6 @@ public class _14014TurningTheIde extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
 
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {

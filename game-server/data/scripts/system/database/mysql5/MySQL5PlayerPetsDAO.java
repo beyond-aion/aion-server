@@ -38,8 +38,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(5, petId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error update pet #" + petId, e);
 		}
 	}
@@ -57,8 +56,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(3, petId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error update doping for pet #" + petId, e);
 		}
 	}
@@ -73,8 +71,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(3, petId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error update pet #" + petId, e);
 		}
 	}
@@ -93,8 +90,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(6, petCommonData.getExpireTime());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error inserting new pet #" + petCommonData.getPetId() + "[" + petCommonData.getName() + "]", e);
 		}
 	}
@@ -108,8 +104,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(2, petId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error removing pet #" + petId, e);
 		}
 	}
@@ -143,8 +138,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 						if (petCommonData.getRefeedDelay() > 0) {
 							petCommonData.setIsFeedingTime(false);
 							petCommonData.scheduleRefeed(petCommonData.getRefeedDelay());
-						}
-						else if (petCommonData.getFeedProgress() != null)
+						} else if (petCommonData.getFeedProgress() != null)
 							petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.HUNGRY);
 						petCommonData.setStartMoodTime(rs.getLong("mood_started"));
 						petCommonData.setShuggleCounter(rs.getInt("counter"));
@@ -153,8 +147,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 						Timestamp ts = null;
 						try {
 							ts = rs.getTimestamp("despawn_time");
-						}
-						catch (Exception e) {
+						} catch (Exception e) {
 						}
 						if (ts == null)
 							ts = new Timestamp(System.currentTimeMillis());
@@ -163,8 +156,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error getting pets for " + player.getObjectId(), e);
 		}
 		return pets;
@@ -180,8 +172,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(3, petCommonData.getPetId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error update pet #" + petCommonData.getPetId(), e);
 		}
 	}
@@ -201,8 +192,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(7, petCommonData.getPetId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error updating mood for pet #" + petCommonData.getPetId(), e);
 			return false;
 		}

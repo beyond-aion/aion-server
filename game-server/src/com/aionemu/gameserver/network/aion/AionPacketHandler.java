@@ -72,8 +72,7 @@ public class AionPacketHandler {
 	 */
 	private void unknownPacket(State state, int id, ByteBuffer data) {
 		if (NetworkConfig.DISPLAY_UNKNOWNPACKETS) {
-			log.warn(String.format("Unknown packet recived from Aion client: 0x%04X, state=%s %n%s", id, state.toString(),
-				Util.toHex(data)));
+			log.warn(String.format("Unknown packet recived from Aion client: 0x%04X, state=%s %n%s", id, state.toString(), Util.toHex(data)));
 		}
 	}
 }

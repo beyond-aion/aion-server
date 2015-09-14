@@ -4,10 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
 
-import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is designed to process classes and interfaces that have fields marked with {@link Property} annotation
@@ -20,8 +18,7 @@ public class ConfigurableProcessor {
 
 	/**
 	 * This method is an entry point to the parser logic.<br>
-	 * Any object or class that have {@link Property} annotation in it or it's parent class/interface can be submitted
-	 * here.<br>
+	 * Any object or class that have {@link Property} annotation in it or it's parent class/interface can be submitted here.<br>
 	 * If object(new Something()) is submitted, object fields are parsed. (non-static)<br>
 	 * If class is submitted(Sotmething.class), static fields are parsed.<br>
 	 * <p/>
@@ -37,8 +34,7 @@ public class ConfigurableProcessor {
 		if (object instanceof Class) {
 			clazz = (Class<?>) object;
 			object = null;
-		}
-		else {
+		} else {
 			clazz = object.getClass();
 		}
 
@@ -46,8 +42,7 @@ public class ConfigurableProcessor {
 	}
 
 	/**
-	 * This method uses recurcieve calls to launch search for {@link Property} annotation on itself and
-	 * parents\interfaces.
+	 * This method uses recurcieve calls to launch search for {@link Property} annotation on itself and parents\interfaces.
 	 * 
 	 * @param clazz
 	 *          Class of object
@@ -75,8 +70,8 @@ public class ConfigurableProcessor {
 	}
 
 	/**
-	 * This method runs throught the declared fields watching for the {@link Property} annotation. It also watches for the
-	 * field modifiers like {@link java.lang.reflect.Modifier#STATIC} and {@link java.lang.reflect.Modifier#FINAL}
+	 * This method runs throught the declared fields watching for the {@link Property} annotation. It also watches for the field modifiers like
+	 * {@link java.lang.reflect.Modifier#STATIC} and {@link java.lang.reflect.Modifier#FINAL}
 	 * 
 	 * @param clazz
 	 *          Class of object
@@ -110,8 +105,8 @@ public class ConfigurableProcessor {
 
 	/**
 	 * This method takes {@link Property} annotation and does sets value according to annotation property. For this reason
-	 * {@link #getFieldValue(java.lang.reflect.Field, java.util.Properties[])} can be called, however if method sees that
-	 * there is no need - field can remain with it's initial value.
+	 * {@link #getFieldValue(java.lang.reflect.Field, java.util.Properties[])} can be called, however if method sees that there is no need - field can
+	 * remain with it's initial value.
 	 * <p/>
 	 * Also this method is capturing and logging all {@link Exception} that are thrown by underlying methods.
 	 * 
@@ -129,12 +124,10 @@ public class ConfigurableProcessor {
 			Property property = f.getAnnotation(Property.class);
 			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || isKeyPresent(property.key(), props)) {
 				f.set(obj, getFieldValue(f, props));
-			}
-			else if (log.isDebugEnabled()) {
+			} else if (log.isDebugEnabled()) {
 				log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't transform field " + f.getName() + " of class " + f.getDeclaringClass());
 			throw new RuntimeException();
 		}
@@ -162,21 +155,18 @@ public class ConfigurableProcessor {
 
 		if (key.isEmpty()) {
 			log.warn("Property " + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
-		}
-		else {
+		} else {
 			value = findPropertyByKey(key, props);
 		}
 
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
 			if (log.isDebugEnabled()) {
-				log.debug("Using default value for field " + field.getName() + " of class "
-					+ field.getDeclaringClass().getName());
+				log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
 			}
 		}
 
-		PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(),
-			property.propertyTransformer());
+		PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(), property.propertyTransformer());
 		return pt.transform(value, field);
 	}
 

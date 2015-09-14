@@ -18,7 +18,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- *
  * @author xTz
  */
 @AIName("vasuki_lifespark")
@@ -36,8 +35,7 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 	protected void handleSpawned() {
 		if (getNpcId() == 217764) {
 			think = true;
-		}
-		else {
+		} else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
@@ -112,8 +110,7 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 							}
 
 						}, 3500);
-					}
-					else {
+					} else {
 						SkillEngine.getInstance().getSkill(getOwner(), 19974, 46, getOwner()).useNoAnimationSkill();
 					}
 				}

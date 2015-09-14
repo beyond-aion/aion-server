@@ -59,8 +59,7 @@ public class MySQL5PlayerTitleListDAO extends PlayerTitleListDAO {
 				stmt.setInt(3, entry.getExpireTime());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
 			return false;
 		}
@@ -80,8 +79,7 @@ public class MySQL5PlayerTitleListDAO extends PlayerTitleListDAO {
 				stmt.setInt(2, titleId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not delete title for player " + playerId + " from DB: " + e.getMessage(), e);
 			return false;
 		}

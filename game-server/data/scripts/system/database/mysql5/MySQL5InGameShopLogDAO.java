@@ -21,8 +21,8 @@ public class MySQL5InGameShopLogDAO extends InGameShopLogDAO {
 	private static final String INSERT_QUERY = "INSERT INTO `ingameshop_log` (`transaction_type`, `transaction_date`, `payer_name`, `payer_account_name`, `receiver_name`, `item_id`, `item_count`, `item_price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
-	public void log(String transactionType, Timestamp transactionDate, String payerName, String payerAccountName, String receiverName,
-		int itemId, long itemCount, long itemPrice) {
+	public void log(String transactionType, Timestamp transactionDate, String payerName, String payerAccountName, String receiverName, int itemId,
+		long itemCount, long itemPrice) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 				stmt.setString(1, transactionType);
@@ -35,8 +35,7 @@ public class MySQL5InGameShopLogDAO extends InGameShopLogDAO {
 				stmt.setLong(8, itemPrice);
 				stmt.executeUpdate();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error while inserting ingameshop log. " + e);
 		}
 	}

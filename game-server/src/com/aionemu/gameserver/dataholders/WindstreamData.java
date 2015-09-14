@@ -15,40 +15,34 @@ import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 
 /**
  * @author LokiReborn
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "windstreams")
-public class WindstreamData
-{
-	@XmlElement(name="windstream")
+public class WindstreamData {
+
+	@XmlElement(name = "windstream")
 	private List<WindstreamTemplate> wts;
-	
+
 	private TIntObjectHashMap<WindstreamTemplate> windstreams;
-		
-	void afterUnmarshal(Unmarshaller u, Object parent)
-	{
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		windstreams = new TIntObjectHashMap<WindstreamTemplate>();
-		for(WindstreamTemplate wt: wts)
-		{
+		for (WindstreamTemplate wt : wts) {
 			windstreams.put(wt.getMapid(), wt);
 		}
-		
+
 		wts = null;
 	}
-	
-	public WindstreamTemplate getStreamTemplate(int mapId)
-	{
+
+	public WindstreamTemplate getStreamTemplate(int mapId) {
 		return windstreams.get(mapId);
 	}
 
 	/**
 	 * @return items.size()
 	 */
-	public int size()
-	{
+	public int size() {
 		return windstreams.size();
 	}
 }
-

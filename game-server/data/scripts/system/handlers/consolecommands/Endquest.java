@@ -53,8 +53,7 @@ public class Endquest extends ConsoleCommand {
 			else
 				questId = Integer.parseInt(params[0]);
 
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}

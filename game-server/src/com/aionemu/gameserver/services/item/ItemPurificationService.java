@@ -1,5 +1,10 @@
 package com.aionemu.gameserver.services.item;
 
+import javolution.util.FastMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -13,132 +18,128 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
-import javolution.util.FastMap;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author Ranastic
  */
 public class ItemPurificationService {
 
-    private static final Logger log = LoggerFactory.getLogger(ItemPurificationService.class);
+	private static final Logger log = LoggerFactory.getLogger(ItemPurificationService.class);
 
-    public static boolean checkItemUpgrade(Player player, Item baseItem, int resultItemId) {
-        ItemPurificationTemplate itemPurificationTemplate = DataManager.ITEM_PURIFICATION_DATA.getItemPurificationTemplate(baseItem.getItemId());
-        if (itemPurificationTemplate == null) {
-            log.warn(resultItemId + " item's purification template is null");
-            return false;
-        }
+	public static boolean checkItemUpgrade(Player player, Item baseItem, int resultItemId) {
+		ItemPurificationTemplate itemPurificationTemplate = DataManager.ITEM_PURIFICATION_DATA.getItemPurificationTemplate(baseItem.getItemId());
+		if (itemPurificationTemplate == null) {
+			log.warn(resultItemId + " item's purification template is null");
+			return false;
+		}
 
-        FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
+		FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 
-        if (!resultItemMap.containsKey(resultItemId)) {
-            AuditLogger.info(player, resultItemId + " item's baseItem and resultItem is not matched (possible client modify)");
-            return false;
-        }
+		if (!resultItemMap.containsKey(resultItemId)) {
+			AuditLogger.info(player, resultItemId + " item's baseItem and resultItem is not matched (possible client modify)");
+			return false;
+		}
 
-        PurificationResultItem resultItem = resultItemMap.get(resultItemId);
-        Item resultItemName = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
+		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
+		Item resultItemName = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
 
-        if (baseItem.getEnchantLevel() < resultItem.getCheck_enchant_count()) {
-            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(new DescriptionId(baseItem.getNameId())));
-            return false;
-        }
+		if (baseItem.getEnchantLevel() < resultItem.getCheck_enchant_count()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(new DescriptionId(baseItem.getNameId())));
+			return false;
+		}
 
-        for (SubMaterialItem sub : resultItem.getUpgrade_materials().getSubMaterialItem()) {
-            if (player.getInventory().getItemCountByItemId(sub.getId()) < sub.getCount()) {
-                // sub Metarial is not enough
-                return false;
-            }
-        }
+		for (SubMaterialItem sub : resultItem.getUpgrade_materials().getSubMaterialItem()) {
+			if (player.getInventory().getItemCountByItemId(sub.getId()) < sub.getCount()) {
+				// sub Metarial is not enough
+				return false;
+			}
+		}
 
-        if (resultItem.getNeed_abyss_point() != null) {
-            if (player.getAbyssRank().getAp() < resultItem.getNeed_abyss_point().getCount()) {
-                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP);
-                return false;
-            }
-        }
+		if (resultItem.getNeed_abyss_point() != null) {
+			if (player.getAbyssRank().getAp() < resultItem.getNeed_abyss_point().getCount()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP);
+				return false;
+			}
+		}
 
-        if (resultItem.getNeed_kinah() != null) {
-            if (player.getInventory().getKinah() < resultItem.getNeed_kinah().getCount()) {
-                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA);
-                return false;
-            }
-        }
-        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(resultItemName.getNameId())));
-        ItemService.releaseItemId(resultItemName);
-        return true;
-    }
+		if (resultItem.getNeed_kinah() != null) {
+			if (player.getInventory().getKinah() < resultItem.getNeed_kinah().getCount()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA);
+				return false;
+			}
+		}
+		PacketSendUtility.sendPacket(player,
+			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(resultItemName.getNameId())));
+		ItemService.releaseItemId(resultItemName);
+		return true;
+	}
 
-    public static boolean decreaseMaterial(Player player, Item baseItem, int resultItemId) {
-        FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
+	public static boolean decreaseMaterial(Player player, Item baseItem, int resultItemId) {
+		FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 
-        PurificationResultItem resultItem = resultItemMap.get(resultItemId);
+		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
 
-        for (SubMaterialItem item : resultItem.getUpgrade_materials().getSubMaterialItem()) {
-            if (!player.getInventory().decreaseByItemId(item.getId(), item.getCount())) {
-                AuditLogger.info(player, "try item upgrade without sub material");
-                return false;
-            }
-        }
+		for (SubMaterialItem item : resultItem.getUpgrade_materials().getSubMaterialItem()) {
+			if (!player.getInventory().decreaseByItemId(item.getId(), item.getCount())) {
+				AuditLogger.info(player, "try item upgrade without sub material");
+				return false;
+			}
+		}
 
-        if (resultItem.getNeed_abyss_point() != null) {
-            AbyssPointsService.setAp(player, -resultItem.getNeed_abyss_point().getCount());
-        }
+		if (resultItem.getNeed_abyss_point() != null) {
+			AbyssPointsService.setAp(player, -resultItem.getNeed_abyss_point().getCount());
+		}
 
-        if (resultItem.getNeed_kinah() != null) {
-            player.getInventory().decreaseKinah(-resultItem.getNeed_kinah().getCount());
-        }
+		if (resultItem.getNeed_kinah() != null) {
+			player.getInventory().decreaseKinah(-resultItem.getNeed_kinah().getCount());
+		}
 
-        player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
+		player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
 
-        return true;
-    }
-    
-  	public static void upgradeItem(Item sourceItem, Item newItem) {
-  		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
-  		newItem.setItemCreator(sourceItem.getItemCreator());
-  		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
-  		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
-  		newItem.setAmplified(sourceItem.isAmplified());
-  		if (sourceItem.isAmplified()) {
-  			if (newItem.getEnchantLevel() < 20) {
-  				if (sourceItem.getBuffSkill() != 0)
-    				newItem.setBuffSkill(0);
-  			}
-  			if (newItem.getEnchantLevel() < sourceItem.getMaxEnchantLevel()) {
-  				newItem.setAmplified(false);
-  			}
-  		}
-  		newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
-  		if (sourceItem.hasManaStones()) {
-  			for (ManaStone manaStone : sourceItem.getItemStones()) {
-  				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
-  			}
-  		}
-  		if (sourceItem.hasFusionStones()) {
-  			for (ManaStone manaStone : sourceItem.getFusionStones()) {
-  				ItemSocketService.addFusionStone(newItem, manaStone.getItemId());
-  			}
-  		}
-  		if (sourceItem.getGodStone() != null) {
-  			newItem.addGodStone(sourceItem.getGodStone().getItemId());
-  		}
-  		if(sourceItem.getTempering() > 0) {
-  			newItem.setTempering(sourceItem.getTempering());
-  		}		
-  		if (sourceItem.isSoulBound()) {
-  			newItem.setSoulBound(true);
-  		}
-  		newItem.setBonusNumber(newItem.getBonusNumber());
-  		newItem.setRandomStats(newItem.getRandomStats());
-  		newItem.setRandomCount(0);
-  		newItem.setIdianStone(null);
-  		newItem.setItemColor(sourceItem.getItemColor());
-  		newItem.setRndBonus();
-  		newItem.setItemSkinTemplate(null);
-  	}
+		return true;
+	}
+
+	public static void upgradeItem(Item sourceItem, Item newItem) {
+		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
+		newItem.setItemCreator(sourceItem.getItemCreator());
+		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
+		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
+		newItem.setAmplified(sourceItem.isAmplified());
+		if (sourceItem.isAmplified()) {
+			if (newItem.getEnchantLevel() < 20) {
+				if (sourceItem.getBuffSkill() != 0)
+					newItem.setBuffSkill(0);
+			}
+			if (newItem.getEnchantLevel() < sourceItem.getMaxEnchantLevel()) {
+				newItem.setAmplified(false);
+			}
+		}
+		newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
+		if (sourceItem.hasManaStones()) {
+			for (ManaStone manaStone : sourceItem.getItemStones()) {
+				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
+			}
+		}
+		if (sourceItem.hasFusionStones()) {
+			for (ManaStone manaStone : sourceItem.getFusionStones()) {
+				ItemSocketService.addFusionStone(newItem, manaStone.getItemId());
+			}
+		}
+		if (sourceItem.getGodStone() != null) {
+			newItem.addGodStone(sourceItem.getGodStone().getItemId());
+		}
+		if (sourceItem.getTempering() > 0) {
+			newItem.setTempering(sourceItem.getTempering());
+		}
+		if (sourceItem.isSoulBound()) {
+			newItem.setSoulBound(true);
+		}
+		newItem.setBonusNumber(newItem.getBonusNumber());
+		newItem.setRandomStats(newItem.getRandomStats());
+		newItem.setRandomCount(0);
+		newItem.setIdianStone(null);
+		newItem.setItemColor(sourceItem.getItemColor());
+		newItem.setRndBonus();
+		newItem.setItemSkinTemplate(null);
+	}
 
 }

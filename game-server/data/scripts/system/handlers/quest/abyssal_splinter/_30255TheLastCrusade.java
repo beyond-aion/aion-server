@@ -18,6 +18,7 @@ public class _30255TheLastCrusade extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(260264).addOnQuestStart(questId);
 		qe.registerQuestNpc(260264).addOnTalkEvent(questId);
@@ -38,13 +39,11 @@ public class _30255TheLastCrusade extends QuestHandler {
 			if (targetId == 260264) { // Aratus
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 700856) { // Artifact of Protection
 				switch (dialog) {
@@ -56,8 +55,7 @@ public class _30255TheLastCrusade extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278501) { // Michalis
 				switch (dialog) {
 					case QUEST_SELECT: {

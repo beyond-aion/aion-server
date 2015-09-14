@@ -50,6 +50,6 @@ public abstract class FriendListDAO implements DAO {
 	 * @return Success
 	 */
 	public abstract boolean delFriends(final int playerOid, final int friendOid);
-	
+
 	public abstract boolean setFriendMemo(final int playerOid, final int friendOid, final String memo);
 }

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
 /**
- * @author ATracer 
+ * @author ATracer
  */
 public abstract class CsClientPacket extends BaseClientPacket<ChatServerConnection> implements Cloneable {
 
@@ -16,8 +16,7 @@ public abstract class CsClientPacket extends BaseClientPacket<ChatServerConnecti
 	private static final Logger log = LoggerFactory.getLogger(CsClientPacket.class);
 
 	/**
-	 * Constructs new client packet with specified opcode. If using this constructor, user must later manually set buffer
-	 * and connection.
+	 * Constructs new client packet with specified opcode. If using this constructor, user must later manually set buffer and connection.
 	 * 
 	 * @param opcode
 	 *          packet id
@@ -33,15 +32,13 @@ public abstract class CsClientPacket extends BaseClientPacket<ChatServerConnecti
 	public final void run() {
 		try {
 			runImpl();
-		}
-		catch (Throwable e) {
+		} catch (Throwable e) {
 			log.warn("error handling ls (" + getConnection().getIP() + ") message " + this, e);
 		}
 	}
 
 	/**
-	 * Send new LsServerPacket to connection that is owner of this packet. This method is equivalent to:
-	 * getConnection().sendPacket(msg);
+	 * Send new LsServerPacket to connection that is owner of this packet. This method is equivalent to: getConnection().sendPacket(msg);
 	 * 
 	 * @param msg
 	 */
@@ -57,8 +54,7 @@ public abstract class CsClientPacket extends BaseClientPacket<ChatServerConnecti
 	public CsClientPacket clonePacket() {
 		try {
 			return (CsClientPacket) super.clone();
-		}
-		catch (CloneNotSupportedException e) {
+		} catch (CloneNotSupportedException e) {
 			return null;
 		}
 	}

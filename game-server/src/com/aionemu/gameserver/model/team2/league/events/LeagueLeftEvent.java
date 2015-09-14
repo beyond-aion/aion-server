@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.team2.league.events;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.common.events.AlwaysTrueTeamEvent;
@@ -11,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author ATracer
@@ -84,11 +85,12 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 			public boolean apply(Player member) {
 				switch (reason) {
 					case LEAVE:
-						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader().getName()));
+						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader()
+							.getName()));
 						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 						break;
 					case EXPEL:
-						//TODO may be EXPEL message only to leader
+						// TODO may be EXPEL message only to leader
 						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
 						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 						break;

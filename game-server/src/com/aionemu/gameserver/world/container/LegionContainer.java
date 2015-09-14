@@ -2,10 +2,10 @@ package com.aionemu.gameserver.world.container;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Container for storing Legions by legionId and name.

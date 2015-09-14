@@ -13,15 +13,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropNpc")
 public class GlobalDropNpc {
 
-   @XmlAttribute(name = "npc_id", required = true)
-    protected int npcId;
- 
- 	public int getNpcId() {
-        return npcId;
-    }
+	@XmlAttribute(name = "npc_id", required = true)
+	protected int npcId;
 
- 	public void setNpcId(int value) {
-    this.npcId = value;
-}
+	public int getNpcId() {
+		return npcId;
+	}
+
+	public void setNpcId(int value) {
+		this.npcId = value;
+	}
 
 }

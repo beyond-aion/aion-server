@@ -26,6 +26,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Packet for telporting by using relationship crystal
+ * 
  * @author Rolandas
  */
 public class CM_HOUSE_TELEPORT extends AionClientPacket {
@@ -54,8 +55,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 		House house = null;
 		if (actionId == 1) {
 			playerId2 = playerId1;
-		}
-		else if (actionId == 3) {
+		} else if (actionId == 3) {
 			List<Integer> relationIds = new ArrayList<Integer>();
 			Iterator<Friend> friends = player1.getFriendList().iterator();
 			int address = 0;
@@ -95,7 +95,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 
 		if (playerId2 == 0)
 			return;
-		
+
 		house = HousingService.getInstance().getPlayerStudio(playerId2);
 		HouseAddress address = null;
 		int instanceId = 0;
@@ -107,8 +107,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 			}
 			instanceId = instance.getInstanceId();
 			InstanceService.registerPlayerWithInstance(instance, player1);
-		}
-		else {
+		} else {
 			int addressId = HousingService.getInstance().getPlayerAddress(playerId2);
 			house = HousingService.getInstance().getHouseByAddress(addressId);
 			if (house == null || house.getLevelRestrict() > player1.getLevel())
@@ -120,8 +119,8 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 		if (target != null) {
 			PacketSendUtility.sendPacket(player1, new SM_DIALOG_WINDOW(target.getObjectId(), 0));
 		}
-		TeleportService2
-			.teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+		TeleportService2.teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), (byte) 0,
+			TeleportAnimation.BEAM_ANIMATION);
 	}
 
 }

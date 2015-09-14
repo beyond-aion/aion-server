@@ -11,28 +11,22 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Ritsu
- *
  */
 @AIName("berserk_anoha")
-public class BerserkAnohaAI2 extends AggressiveNpcAI2 
-{
+public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 
 	@Override
-	protected void handleDied() 
-	{
-		for (final Player player : getOwner().getKnownList().getKnownPlayers().values()) 
-		{
+	protected void handleDied() {
+		for (final Player player : getOwner().getKnownList().getKnownPlayers().values()) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402504)); // Msg Anoha has been vanquished
 		}
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() 
-			{
+		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
-			public void visit(Player player) 
-			{
+			public void visit(Player player) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402505)); // Msg Anoha died
 			}
-			});
+		});
 		super.handleDied();
 	}
 }
-

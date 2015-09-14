@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import com.aionemu.gameserver.skillengine.model.Effect;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author ATracer
@@ -12,11 +13,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "StatdownEffect")
 public class StatdownEffect extends BufEffect {
 
-   @Override
-   public void startEffect(Effect effect) {
-	  super.startEffect(effect);
-	  effect.getEffected().getLifeStats().updateCurrentStats();
-   }
-   
-	//TODO bosses are resistent to this?
+	@Override
+	public void startEffect(Effect effect) {
+		super.startEffect(effect);
+		effect.getEffected().getLifeStats().updateCurrentStats();
+	}
+
+	// TODO bosses are resistent to this?
 }

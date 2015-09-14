@@ -26,28 +26,26 @@ public class SPrison extends AdminCommand {
 		try {
 			Player playerToPrison = World.getInstance().findPlayer(Util.convertName(params[0]));
 			int delay = Integer.parseInt(params[1]);
-			
+
 			String reason = Util.convertName(params[2]);
-			for(int itr = 3; itr < params.length; itr++)
-				reason += " "+params[itr];
+			for (int itr = 3; itr < params.length; itr++)
+				reason += " " + params[itr];
 
 			if (playerToPrison != null) {
 				PunishmentService.setIsInPrison(playerToPrison, true, delay, reason);
-				PacketSendUtility.sendMessage(admin, "Player " + playerToPrison.getName() + " sent to prison for " + delay
-					+ " because " + reason + ".");
+				PacketSendUtility.sendMessage(admin, "Player " + playerToPrison.getName() + " sent to prison for " + delay + " because " + reason + ".");
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			sendInfo(admin);
 		}
-	
+
 	}
 
 	@Override
 	public void info(Player player, String message) {
 		sendInfo(player);
 	}
-	
+
 	private void sendInfo(Player player) {
 		PacketSendUtility.sendMessage(player, "syntax //sprison <player> <delay> <reason>");
 	}

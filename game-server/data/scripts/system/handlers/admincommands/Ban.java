@@ -68,14 +68,13 @@ public class Ban extends AdminCommand {
 		if (params.length > 2) {
 			try {
 				time = Integer.parseInt(params[2]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
 				return;
 			}
 		}
 		if (time == 0) {
-		   time = 60 * 24 * 365 * 10; //pseudo infinity. TODO: rework
+			time = 60 * 24 * 365 * 10; // pseudo infinity. TODO: rework
 		}
 
 		LoginServer.getInstance().sendBanPacket(type, accountId, accountIp, time, admin.getObjectId());

@@ -8,25 +8,24 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 
-
 /**
  * @author ViAl
- *
  */
 @XmlType(name = "town_level")
 public class TownLevel {
+
 	@XmlAttribute(name = "level")
 	protected int level;
 	@XmlElement(name = "spawn")
 	protected List<Spawn> spawns;
-	
+
 	/**
 	 * @return the level
 	 */
 	public int getLevel() {
 		return level;
 	}
-	
+
 	/**
 	 * @return the spawn
 	 */

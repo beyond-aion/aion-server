@@ -56,7 +56,7 @@ public class EventTemplate {
 
 	@XmlElement(name = "inventory_drop", required = false)
 	protected InventoryDrop inventoryDrop;
-	
+
 	@XmlList
 	@XmlElement(name = "surveys", required = false)
 	protected List<String> surveys;
@@ -71,13 +71,13 @@ public class EventTemplate {
 	@XmlAttribute(name = "end", required = true)
 	@XmlSchemaType(name = "dateTime")
 	protected XMLGregorianCalendar endDate;
-	
-	@XmlAttribute(name="theme", required = false)
+
+	@XmlAttribute(name = "theme", required = false)
 	private String theme;
 
 	@XmlTransient
 	protected List<VisibleObject> spawnedObjects;
-	
+
 	@XmlTransient
 	private Future<?> invDropTask = null;
 
@@ -143,8 +143,8 @@ public class EventTemplate {
 					for (Spawn spawn : map.getSpawns()) {
 						spawn.setEventTemplate(this);
 						for (SpawnSpotTemplate spot : spawn.getSpawnSpotTemplates()) {
-							SpawnTemplate t = SpawnEngine.addNewSpawn(map.getMapId(), spawn.getNpcId(), spot.getX(), spot.getY(),
-								spot.getZ(), spot.getHeading(), spawn.getRespawnTime());
+							SpawnTemplate t = SpawnEngine.addNewSpawn(map.getMapId(), spawn.getNpcId(), spot.getX(), spot.getY(), spot.getZ(), spot.getHeading(),
+								spawn.getRespawnTime());
 							t.setEventTemplate(this);
 							SpawnEngine.spawnObject(t, instanceId);
 							spawnCount++;
@@ -173,7 +173,7 @@ public class EventTemplate {
 				}
 			}, inventoryDrop.getInterval() * 60000, inventoryDrop.getInterval() * 60000);
 		}
-		
+
 		if (surveys != null) {
 			for (String survey : surveys) {
 				GuideTemplate template = DataManager.GUIDE_HTML_DATA.getTemplateByTitle(survey);

@@ -34,8 +34,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 				if (slots.length > 0) {
 					mask |= slots[0].getSlotIdMask();
 				}
-			}
-			else {
+			} else {
 				mask |= item.getEquipmentSlot();
 			}
 		}

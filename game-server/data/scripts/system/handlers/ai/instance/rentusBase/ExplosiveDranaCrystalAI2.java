@@ -16,7 +16,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("explosive_drana_crystal")
@@ -40,11 +39,9 @@ public class ExplosiveDranaCrystalAI2 extends ActionItemNpcAI2 {
 				EffectController ef = boss.getEffectController();
 				if (ef.hasAbnormalEffect(19370)) {
 					ef.removeEffect(19370);
-				}
-				else if (ef.hasAbnormalEffect(19371)) {
+				} else if (ef.hasAbnormalEffect(19371)) {
 					ef.removeEffect(19371);
-				}
-				else if (ef.hasAbnormalEffect(19372)) {
+				} else if (ef.hasAbnormalEffect(19372)) {
 					ef.removeEffect(19372);
 				}
 			}

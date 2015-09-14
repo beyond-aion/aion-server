@@ -42,10 +42,10 @@ public class HouseGateAI2 extends NpcAI2 {
 		// Uses skill but doesn't have house
 		if (house == null)
 			return;
-		
+
 		if (house.getLevelRestrict() > player.getLevel())
-		   //msg
-		   return;
+			// msg
+			return;
 		boolean returnBattle = true;
 		for (ZoneInstance zone : player.getPosition().getMapRegion().getZones(player)) {
 			if (!zone.canReturnToBattle()) {
@@ -56,15 +56,16 @@ public class HouseGateAI2 extends NpcAI2 {
 		int requestId = SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE;
 		if (!returnBattle)
 			requestId = SM_QUESTION_WINDOW.STR_HOUSE_GATE_ACCEPT_MOVE_DONT_RETURN;
-			
+
 		AI2Actions.addRequest(this, player, requestId, 0, 9, new AI2Request() {
+
 			private boolean decided = false;
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
 				if (decided)
 					return;
-				
+
 				House house = HousingService.getInstance().getPlayerStudio(creatorId);
 				if (house == null) {
 					int address = HousingService.getInstance().getPlayerAddress(creatorId);
@@ -84,8 +85,7 @@ public class HouseGateAI2 extends NpcAI2 {
 					x = house.getAddress().getExitX();
 					y = house.getAddress().getExitY();
 					z = house.getAddress().getExitZ();
-				}
-				else { // entering house
+				} else { // entering house
 					exitMapId = house.getAddress().getMapId();
 					if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // entering studio
 						WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
@@ -94,8 +94,7 @@ public class HouseGateAI2 extends NpcAI2 {
 							InstanceService.registerPlayerWithInstance(instance, responder);
 						}
 						instanceId = instance.getInstanceId();
-					}
-					else { // entering ordinary house
+					} else { // entering ordinary house
 						instanceId = house.getInstanceId();
 					}
 					x = house.getAddress().getX();
@@ -114,20 +113,17 @@ public class HouseGateAI2 extends NpcAI2 {
 				}
 				if (!canReturnToBattle) {
 					responder.setBattleReturnCoords(0, null);
-				}
-				else {
+				} else {
 					PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));
-					responder.setBattleReturnCoords(responder.getWorldId(), new float[] {responder.getX(), responder.getY(), responder.getZ()});
+					responder.setBattleReturnCoords(responder.getWorldId(), new float[] { responder.getX(), responder.getY(), responder.getZ() });
 				}
-				TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z, heading,
-					TeleportAnimation.JUMP_AIMATION_3);
+				TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.JUMP_AIMATION_3);
 				decided = true;
 			}
-			
-			
+
 			@Override
-      public void denyRequest(Creature requester, Player responder) {
-        decided = true;
+			public void denyRequest(Creature requester, Player responder) {
+				decided = true;
 			}
 
 		});

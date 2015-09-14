@@ -1,8 +1,5 @@
 package com.aionemu.commons.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,6 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains utilities that are used when we are working with classes
@@ -21,8 +21,8 @@ public class ClassUtils {
 	private static final Logger log = LoggerFactory.getLogger(ClassUtils.class);
 
 	/**
-	 * Return true if class a is either equivalent to class b, or if class a is a subclass of class b, i.e. if a either
-	 * "extends" or "implements" b. Note tht either or both "Class" objects may represent interfaces.
+	 * Return true if class a is either equivalent to class b, or if class a is a subclass of class b, i.e. if a either "extends" or "implements" b.
+	 * Note tht either or both "Class" objects may represent interfaces.
 	 *
 	 * @param a
 	 *          class
@@ -89,10 +89,13 @@ public class ClassUtils {
 	/**
 	 * Returns class names from directory.
 	 *
-	 * @param directory folder with class files
+	 * @param directory
+	 *          folder with class files
 	 * @return Set of fully qualified class names
-	 * @throws IllegalArgumentException if specified file is not directory or does not exists
-	 * @throws NullPointerException	 if directory is null
+	 * @throws IllegalArgumentException
+	 *           if specified file is not directory or does not exists
+	 * @throws NullPointerException
+	 *           if directory is null
 	 */
 	public static Set<String> getClassNamesFromDirectory(File directory) throws IllegalArgumentException {
 
@@ -106,9 +109,12 @@ public class ClassUtils {
 	/**
 	 * Recursive method used to find all classes in a given directory and subdirs.
 	 *
-	 * @param directory   The base directory
-	 * @param packageName The package name for classes found inside the base directory
-	 * @param recursive include subpackages or not
+	 * @param directory
+	 *          The base directory
+	 * @param packageName
+	 *          The package name for classes found inside the base directory
+	 * @param recursive
+	 *          include subpackages or not
 	 * @return The classes
 	 */
 	public static Set<String> getClassNamesFromPackage(File directory, String packageName, boolean recursive) {
@@ -119,8 +125,8 @@ public class ClassUtils {
 		File[] files = directory.listFiles();
 		for (File file : files) {
 			if (file.isDirectory()) {
-				
-				if(!recursive){
+
+				if (!recursive) {
 					continue;
 				}
 
@@ -143,11 +149,15 @@ public class ClassUtils {
 	/**
 	 * Method that returns all class file names from given jar file
 	 *
-	 * @param file jar file
+	 * @param file
+	 *          jar file
 	 * @return class names from jar file
-	 * @throws IOException			  if something went wrong
-	 * @throws IllegalArgumentException if file doesn't exists or is not jar file
-	 * @throws NullPointerException	 if file is null
+	 * @throws IOException
+	 *           if something went wrong
+	 * @throws IllegalArgumentException
+	 *           if file doesn't exists or is not jar file
+	 * @throws NullPointerException
+	 *           if file is null
 	 */
 	public static Set<String> getClassNamesFromJarFile(File file) throws IOException {
 

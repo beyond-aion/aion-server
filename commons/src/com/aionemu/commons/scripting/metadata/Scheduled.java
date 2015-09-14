@@ -1,6 +1,10 @@
 package com.aionemu.commons.scripting.metadata;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Annotation that can be applied on Runnable classes in scripts.<br>
@@ -30,12 +34,14 @@ public @interface Scheduled {
 
 	/**
 	 * If this scheduler should be disabled ignored
+	 * 
 	 * @return disabled or not
 	 */
 	boolean disabled() default false;
 
 	/**
 	 * Indicates if this task is long-running task or not.<br>
+	 * 
 	 * @return true if is long-running task
 	 */
 	boolean longRunningTask() default false;

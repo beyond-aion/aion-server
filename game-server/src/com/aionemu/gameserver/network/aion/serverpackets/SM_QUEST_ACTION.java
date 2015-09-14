@@ -101,8 +101,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.aionemu.commons.network.mmocore.SendablePacket#writeImpl(com.aionemu.commons.network.mmocore.MMOConnection)
+	 * @see com.aionemu.commons.network.mmocore.SendablePacket#writeImpl(com.aionemu.commons.network.mmocore.MMOConnection)
 	 */
 	@Override
 	protected void writeImpl(AionConnection con) {

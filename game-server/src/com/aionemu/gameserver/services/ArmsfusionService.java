@@ -49,8 +49,7 @@ public class ArmsfusionService {
 		int level = firstItem.getItemTemplate().getLevel();
 
 		int price = (int) (priceMod * priceRate * taxRate * rarity * level * level);
-		log.debug("Rarete: " + rarity + " Prix Ratio: " + priceRate + " Tax: " + taxRate + " Mod: " + priceMod
-			+ " NiveauDeLArme: " + level);
+		log.debug("Rarete: " + rarity + " Prix Ratio: " + priceRate + " Tax: " + taxRate + " Mod: " + priceMod + " NiveauDeLArme: " + level);
 		log.debug("Prix: " + price);
 
 		if (player.getInventory().getKinah() < price) {
@@ -94,8 +93,8 @@ public class ArmsfusionService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_MAIN_REQUIRE_HIGHER_LEVEL);
 			return;
 		}
-		
-		//You can not combine Conditioning and Augmenting
+
+		// You can not combine Conditioning and Augmenting
 		if (firstItem.getImprovement() != null && secondItem.getImprovement() != null) {
 			if (firstItem.getImprovement().getChargeWay() != secondItem.getImprovement().getChargeWay()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_COMPARABLE_ITEM);

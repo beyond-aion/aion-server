@@ -1,13 +1,21 @@
 package com.aionemu.commons.utils.concurrent;
 
+import java.io.PrintStream;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.PrintStream;
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author NB4L1
@@ -62,7 +70,7 @@ public final class RunnableStatsManager {
 
 			methodNames = Arrays.copyOf(methodNames, methodNames.length + 1);
 			methodNames[methodNames.length - 1] = methodName;
-			methodStats =  Arrays.copyOf(methodStats, methodStats.length + 1);
+			methodStats = Arrays.copyOf(methodStats, methodStats.length + 1);
 			methodStats[methodNames.length - 1] = methodStat;
 
 			return methodStat;
@@ -93,8 +101,7 @@ public final class RunnableStatsManager {
 				total += runTime;
 				min = Math.min(min, runTime);
 				max = Math.max(max, runTime);
-			}
-			finally {
+			} finally {
 				lock.unlock();
 			}
 		}
@@ -294,11 +301,9 @@ public final class RunnableStatsManager {
 
 			for (String line : lines)
 				ps.println(line);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("", e);
-		}
-		finally {
+		} finally {
 			IOUtils.closeQuietly(ps);
 		}
 	}

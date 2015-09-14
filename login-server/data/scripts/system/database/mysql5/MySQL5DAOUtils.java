@@ -13,7 +13,7 @@ public class MySQL5DAOUtils {
 	 * Constant for MySQL name ;)
 	 */
 	public static final String MYSQL_DB_NAME = "MySQL";
-	
+
 	/**
 	 * Constant for account name
 	 */

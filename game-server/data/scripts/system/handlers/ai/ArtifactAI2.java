@@ -50,7 +50,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class ArtifactAI2 extends NpcAI2 {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
-	
+
 	private Map<Integer, ItemUseObserver> observers = new HashMap<Integer, ItemUseObserver>();
 
 	@Override
@@ -73,7 +73,8 @@ public class ArtifactAI2 extends NpcAI2 {
 						onActivate(responder);
 					}
 
-				}, new DescriptionId(2 * 716570 + 1), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation().getCount());
+				}, new DescriptionId(2 * 716570 + 1), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation()
+					.getCount());
 
 			}
 
@@ -106,22 +107,23 @@ public class ArtifactAI2 extends NpcAI2 {
 
 		if (loc.getLegionId() != 0)
 			if (!player.isLegionMember() || player.getLegion().getLegionId() != loc.getLegionId()
-					|| !player.getLegionMember().hasRights(LegionPermissionsMask.ARTIFACT)) {
+				|| !player.getLegionMember().hasRights(LegionPermissionsMask.ARTIFACT)) {
 				PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ARTIFACT_HAVE_NO_AUTHORITY);
 				return;
 			}
 
 		if (player.getInventory().getItemCountByItemId(itemId) < count)
 			return;
-		
-		if(LoggingConfig.LOG_SIEGE)
-			log.info("Artifact "+getSpawnTemplate().getSiegeId()+" activated by "+player.getName()+". Activator race: "+player.getRace().toString());
+
+		if (LoggingConfig.LOG_SIEGE)
+			log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: "
+				+ player.getRace().toString());
 
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;
 		// Brodcast start activation.
-		final SM_SYSTEM_MESSAGE startMessage = STR_ARTIFACT_CASTING(player.getRace().getRaceDescriptionId(),
-				player.getName(), new DescriptionId(skillTemplate.getNameId()));
+		final SM_SYSTEM_MESSAGE startMessage = STR_ARTIFACT_CASTING(player.getRace().getRaceDescriptionId(), player.getName(), new DescriptionId(
+			skillTemplate.getNameId()));
 		loc.setStatus(ArtifactStatus.ACTIVATION);
 		final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 		player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
@@ -135,19 +137,16 @@ public class ArtifactAI2 extends NpcAI2 {
 		});
 
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 1));
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()),
-				true);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()),
-						true);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(),
-						new DescriptionId(skillTemplate.getNameId()));
+				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
 				loc.setStatus(ArtifactStatus.IDLE);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 				getOwner().getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
@@ -173,12 +172,10 @@ public class ArtifactAI2 extends NpcAI2 {
 					player.getObserveController().removeObserver(observer);
 
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()),
-						true);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				if (!player.getInventory().decreaseByItemId(itemId, count))
 					return;
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CORE_CASTING(loc.getRace().getDescriptionId(),
-						new DescriptionId(skillTemplate.getNameId()));
+				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CORE_CASTING(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
 				loc.setStatus(ArtifactStatus.CASTING);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 
@@ -196,8 +193,8 @@ public class ArtifactAI2 extends NpcAI2 {
 				if (loc.getTemplate().getRepeatCount() == 1)
 					ThreadPoolManager.getInstance().schedule(new ArtifactUseSkill(loc, player, skillTemplate), 13000);
 				else {
-					final ScheduledFuture<?> s = ThreadPoolManager.getInstance().scheduleAtFixedRate(
-							new ArtifactUseSkill(loc, player, skillTemplate), 13000, loc.getTemplate().getRepeatInterval() * 1000);
+					final ScheduledFuture<?> s = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ArtifactUseSkill(loc, player, skillTemplate), 13000,
+						loc.getTemplate().getRepeatInterval() * 1000);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -232,8 +229,7 @@ public class ArtifactAI2 extends NpcAI2 {
 			this.player = activator;
 			this.skill = skill;
 			this.pkt = new SM_ABYSS_ARTIFACT_INFO3(artifact.getLocationId());
-			this.message = STR_ARTIFACT_FIRE(activator.getRace().getRaceDescriptionId(), player.getName(),
-					new DescriptionId(skill.getNameId()));
+			this.message = STR_ARTIFACT_FIRE(activator.getRace().getRaceDescriptionId(), player.getName(), new DescriptionId(skill.getNameId()));
 		}
 
 		@Override

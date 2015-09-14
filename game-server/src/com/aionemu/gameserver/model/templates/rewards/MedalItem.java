@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author Luzien
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,11 +17,11 @@ public class MedalItem extends IdLevelReward {
 
 	@XmlAttribute(name = "chance")
 	protected float chance;
-	
+
 	public int getCount() {
 		return count;
 	}
-	
+
 	public float getChance() {
 		return chance;
 	}

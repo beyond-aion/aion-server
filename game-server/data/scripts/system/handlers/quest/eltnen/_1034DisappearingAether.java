@@ -43,13 +43,11 @@ public class _1034DisappearingAether extends QuestHandler {
 			if (targetId == 203903) { // Valerius
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203903: { // Valerius
 					switch (dialog) {
@@ -69,11 +67,9 @@ public class _1034DisappearingAether extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2034);
 							}
 						}

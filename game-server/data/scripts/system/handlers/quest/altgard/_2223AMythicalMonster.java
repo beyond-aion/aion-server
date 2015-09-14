@@ -41,13 +41,11 @@ public class _2223AMythicalMonster extends QuestHandler {
 			if (targetId == 203616) { // Gefion
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203620: { // Lamir
@@ -55,12 +53,10 @@ public class _2223AMythicalMonster extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 1) {
+							} else if (var == 1) {
 								if (player.getInventory().getItemCountByItemId(182203217) == 1) {
 									return sendQuestDialog(env, 1694);
-								}
-								else {
+								} else {
 									giveQuestItem(env, 182203217, 1);
 									return sendQuestDialog(env, 1779);
 								}
@@ -96,8 +92,7 @@ public class _2223AMythicalMonster extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203616) { // Gefion
 				switch (dialog) {
 					case USE_OBJECT: {

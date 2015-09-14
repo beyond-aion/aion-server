@@ -48,8 +48,7 @@ public class _1063BrigadierIndratu extends QuestHandler {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 2) {
+						} else if (var == 2) {
 							return sendQuestDialog(env, 1693);
 						}
 					}
@@ -63,13 +62,11 @@ public class _1063BrigadierIndratu extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) { // Fasimede
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

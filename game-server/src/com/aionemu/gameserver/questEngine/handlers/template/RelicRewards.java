@@ -60,14 +60,12 @@ public class RelicRewards extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							else
 								return sendQuestDialog(env, 3398);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 3398);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (startNpcs.contains(targetId)) {
 				int rewardId = -1;
 				switch (env.getDialog()) {
@@ -92,12 +90,10 @@ public class RelicRewards extends QuestHandler {
 					qs.setCompleteCount(0);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, rewardId + 5);
-				}
-				else
+				} else
 					return sendQuestDialog(env, 1009);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (startNpcs.contains(targetId)) {
 				int var = qs.getQuestVarById(0);
 				switch (env.getDialog()) {

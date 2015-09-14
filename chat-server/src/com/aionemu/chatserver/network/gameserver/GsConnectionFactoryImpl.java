@@ -2,6 +2,7 @@ package com.aionemu.chatserver.network.gameserver;
 
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
+
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.ConnectionFactory;
 import com.aionemu.commons.network.Dispatcher;
@@ -11,8 +12,8 @@ import com.aionemu.commons.network.Dispatcher;
  * 
  * @author -Nemesiss-
  */
-public class GsConnectionFactoryImpl implements ConnectionFactory
-{
+public class GsConnectionFactoryImpl implements ConnectionFactory {
+
 	/**
 	 * Create a new {@link com.aionlightning.commons.network.AConnection AConnection} instance.<br>
 	 * 
@@ -26,8 +27,7 @@ public class GsConnectionFactoryImpl implements ConnectionFactory
 	 * @see com.aionlightning.commons.network.Dispatcher
 	 */
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException
-	{
+	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		return new GsConnection(socket, dispatcher);
 	}
 }

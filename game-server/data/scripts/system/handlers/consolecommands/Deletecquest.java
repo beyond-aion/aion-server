@@ -42,8 +42,7 @@ public class Deletecquest extends ConsoleCommand {
 		int id;
 		try {
 			id = Integer.valueOf(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}
@@ -55,7 +54,7 @@ public class Deletecquest extends ConsoleCommand {
 
 		QuestState qs = list.getQuestState(id);
 
-		if(qs != null) {
+		if (qs != null) {
 			qs.setQuestVar(0);
 			qs.setCompleteCount(0);
 			qs.setFlags(0);

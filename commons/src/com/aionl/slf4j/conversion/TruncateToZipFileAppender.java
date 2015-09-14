@@ -10,9 +10,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.slf4j.Logger;
 import ch.qos.logback.core.FileAppender;
 
 /**
@@ -23,10 +23,10 @@ import ch.qos.logback.core.FileAppender;
  * <br>
  * 
  * @author SoulKeeper
- * @author KID 05-may-2011
- * log start time is written into file.
+ * @author KID 05-may-2011 log start time is written into file.
  */
 public class TruncateToZipFileAppender extends FileAppender<Object> {
+
 	private final static Logger log = LoggerFactory.getLogger(TruncateToZipFileAppender.class);
 	private String backupDir = "log/backup";
 
@@ -43,7 +43,7 @@ public class TruncateToZipFileAppender extends FileAppender<Object> {
 	 * This method creates archive with file instead of deleting it.
 	 * 
 	 * @param file
-	 *            file to truncate
+	 *          file to truncate
 	 */
 	protected void truncate(File file) {
 		File backupRoot = new File(backupDir);

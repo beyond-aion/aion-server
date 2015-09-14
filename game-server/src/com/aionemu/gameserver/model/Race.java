@@ -52,13 +52,13 @@ public enum Race {
 	NONE(26),
 	PC_ALL(27),
 	DEFORM(28),
-	
-	//2.6
+
+	// 2.6
 	NEUT(29),
-	//2.7 -- NOT SURE !!!
+	// 2.7 -- NOT SURE !!!
 	GHENCHMAN_LIGHT(30),
 	GHENCHMAN_DARK(31),
-	//3.0
+	// 3.0
 	EVENT_TOWER_DARK(32),
 	EVENT_TOWER_LIGHT(33),
 	GOBLIN(34),
@@ -75,8 +75,8 @@ public enum Race {
 	GCHIEF_DRAGON(43),
 	WORLD_EVENT_BONFIRE(44),
 	// 4.7.5
-	DOOR_KILLER(45)	;
-	
+	DOOR_KILLER(45);
+
 	private int raceId;
 	private DescriptionId descriptionId;
 
@@ -87,7 +87,7 @@ public enum Race {
 		this(raceId, null);
 	}
 
-	private Race(int raceId, DescriptionId descriptionId){
+	private Race(int raceId, DescriptionId descriptionId) {
 		this.raceId = raceId;
 		this.descriptionId = descriptionId;
 	}
@@ -103,13 +103,13 @@ public enum Race {
 		return raceId < 2 || raceId == 27;
 	}
 
-	public DescriptionId getRaceDescriptionId(){
-		if(descriptionId == null){
+	public DescriptionId getRaceDescriptionId() {
+		if (descriptionId == null) {
 			throw new UnsupportedOperationException("Race name DescriptionId is unknown for race" + this);
 		}
 		return descriptionId;
 	}
-	
+
 	public static Race getRaceByString(String fieldName) {
 		for (Race r : values()) {
 			if (r.toString().equals(fieldName))

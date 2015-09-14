@@ -55,8 +55,7 @@ public class _1056LepharistPoisonResearch extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203707)
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204504) {
@@ -73,8 +72,7 @@ public class _1056LepharistPoisonResearch extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204574) {
+		} else if (targetId == 204574) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -88,8 +86,7 @@ public class _1056LepharistPoisonResearch extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 203705) {
+		} else if (targetId == 203705) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -100,8 +97,7 @@ public class _1056LepharistPoisonResearch extends QuestHandler {
 					if (var == 2 && player.getInventory().getItemCountByItemId(182201614) == 1) {
 						playQuestMovie(env, 101);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO4:
 					if (var == 2) {

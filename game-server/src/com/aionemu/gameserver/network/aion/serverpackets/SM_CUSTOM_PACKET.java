@@ -19,56 +19,56 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
 		D('d') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeD(Integer.decode(value));
 			}
 		},
-		B('b') { 
-			
-			@Override 
-			public void write(SM_CUSTOM_PACKET packet,String value) { 
-			  packet.writeB(new byte[Integer.valueOf(value)]); 
-			} 
+		B('b') {
+
+			@Override
+			public void write(SM_CUSTOM_PACKET packet, String value) {
+				packet.writeB(new byte[Integer.valueOf(value)]);
+			}
 		},
 		H('h') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeH(Integer.decode(value));
 			}
 		},
 		C('c') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeC(Integer.decode(value));
 			}
 		},
 		F('f') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeF(Float.valueOf(value));
 			}
 		},
 		DF('e') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeDF(Double.valueOf(value));
 			}
 		},
 		Q('q') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeQ(Long.decode(value));
 			}
 		},
 		S('s') {
 
 			@Override
-			public void write(SM_CUSTOM_PACKET packet,String value) {
+			public void write(SM_CUSTOM_PACKET packet, String value) {
 				packet.writeS(value);
 			}
 		};

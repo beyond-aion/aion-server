@@ -27,6 +27,7 @@ public class PlumeInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, 0);
 	}
 
+	@Override
 	public int getSize() {
 		return 32;
 	}

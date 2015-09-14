@@ -35,12 +35,12 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 		}
 	}
 
-	  // self explanatory
-   private boolean AreVerteronQuestsFinished(Player player) {
-	  int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 14016 : 1020;
-	  QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Verteron state
-	  return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
-   }
+	// self explanatory
+	private boolean AreVerteronQuestsFinished(Player player) {
+		int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 14016 : 1020;
+		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Verteron state
+		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
+	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
@@ -56,9 +56,7 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVarById(0) == 0
-				|| qs.getStatus() == QuestStatus.COMPLETE) {
+			} else if (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVarById(0) == 0 || qs.getStatus() == QuestStatus.COMPLETE) {
 				if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestDialog(env, 10002);
 				else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
@@ -66,8 +64,7 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 					return sendQuestEndDialog(env);
 				}
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -78,25 +75,21 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 					}
 				}, 3000);
 			}
-		}
-		else if (targetId == 203098) {
+		} else if (targetId == 203098) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (AreVerteronQuestsFinished(player)) {
 						return sendQuestDialog(env, 1011);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1097);
-				}
-				else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
+				} else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
 					if (giveQuestItem(env, 182206022, 1)) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

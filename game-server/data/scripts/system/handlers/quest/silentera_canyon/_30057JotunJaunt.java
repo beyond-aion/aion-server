@@ -10,20 +10,17 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- * 
  */
-public class _30057JotunJaunt extends QuestHandler
-{
-	private final static int	questId	= 30057;
+public class _30057JotunJaunt extends QuestHandler {
 
-	public _30057JotunJaunt()
-	{
+	private final static int questId = 30057;
+
+	public _30057JotunJaunt() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(799381).addOnQuestStart(questId);
 		qe.registerQuestNpc(799381).addOnTalkEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("SILENTERA_WESTGATE_600010000"), questId);
@@ -42,32 +39,28 @@ public class _30057JotunJaunt extends QuestHandler
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if(targetId == 799381)
-		{
-			if(qs == null || qs.getStatus() == QuestStatus.NONE)
-			{
-				if(dialog == DialogAction.QUEST_SELECT)
+		if (targetId == 799381) {
+			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
 
-			else if(qs != null && qs.getStatus() == QuestStatus.REWARD)
-			{
-				if(dialog == DialogAction.USE_OBJECT)
+			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if(dialog == DialogAction.SELECT_QUEST_REWARD)
+				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
-				else 
+				else
 					return sendQuestEndDialog(env);
 			}
 		}

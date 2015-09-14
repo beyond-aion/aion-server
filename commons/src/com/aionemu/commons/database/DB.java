@@ -28,9 +28,8 @@ import org.slf4j.LoggerFactory;
  * Returns:(<b>boolean </b>) Returns true if the query ran successfully.<br>
  * <br>
  * Purpose:<br>
- * The select function one to grab data from the database with ease. Utilizing the ReadStT, one may set up query
- * parameters (then use ParamReadStH and set params in <code>setParams()</code>) and read the replied data from the
- * query easily.<br>
+ * The select function one to grab data from the database with ease. Utilizing the ReadStT, one may set up query parameters (then use ParamReadStH and
+ * set params in <code>setParams()</code>) and read the replied data from the query easily.<br>
  * <br>
  * Best practices is to create custom classes that implement ReadStT in order to throw the data around.<br>
  * <br>
@@ -67,12 +66,11 @@ import org.slf4j.LoggerFactory;
  * Returns:(<b>boolean</b>) Returns true if the query ran successfully.<br>
  * <br>
  * Purpose:<br>
- * The insertUpdate function allows one to insert and update database entries. One may utilize it without needing to
- * modify the query at all or provide a IUStH interface implementation to add parameters to statement and/or gather them
- * in batch.<br>
+ * The insertUpdate function allows one to insert and update database entries. One may utilize it without needing to modify the query at all or
+ * provide a IUStH interface implementation to add parameters to statement and/or gather them in batch.<br>
  * <br>
- * <b> If the IUStH util IS provided in the function's parameters - The coder MUST call the functions
- * stmt.executeBatch() OR stmt.executeUpdate() in order to successfully run the query.<br>
+ * <b> If the IUStH util IS provided in the function's parameters - The coder MUST call the functions stmt.executeBatch() OR stmt.executeUpdate() in
+ * order to successfully run the query.<br>
  * If IUSth util is NOT provided, the query will execute as it is. </b><br>
  * <br>
  * Best practices is to create custom classes that implement IUStT in order to modify the query in proficient manners.<br>
@@ -167,22 +165,19 @@ public final class DB {
 				((ParamReadStH) reader).setParams(stmt);
 			rset = stmt.executeQuery();
 			reader.handleRead(rset);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			if (errMsg == null)
 				log.warn("Error executing select query " + e, e);
 			else
 				log.warn(errMsg + " " + e, e);
 			return false;
-		}
-		finally {
+		} finally {
 			try {
 				if (con != null)
 					con.close();
 				if (stmt != null)
 					stmt.close();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("Failed to close DB connection " + e, e);
 			}
 		}
@@ -220,22 +215,19 @@ public final class DB {
 				((CallReadStH) reader).setParams(stmt);
 			rset = stmt.executeQuery();
 			reader.handleRead(rset);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			if (errMsg == null)
 				log.warn("Error calling stored procedure " + e, e);
 			else
 				log.warn(errMsg + " " + e, e);
 			return false;
-		}
-		finally {
+		} finally {
 			try {
 				if (con != null)
 					con.close();
 				if (stmt != null)
 					stmt.close();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("Failed to close DB connection " + e, e);
 			}
 		}
@@ -243,8 +235,7 @@ public final class DB {
 	}
 
 	/**
-	 * Executes Insert or Update Query not needing any further modification or batching. Recycles connection after
-	 * completion.
+	 * Executes Insert or Update Query not needing any further modification or batching. Recycles connection after completion.
 	 * 
 	 * @param query
 	 * @return boolean Success
@@ -254,8 +245,7 @@ public final class DB {
 	}
 
 	/**
-	 * Executes Insert or Update Query not needing any further modification or batching. Recycles connection after
-	 * completion.
+	 * Executes Insert or Update Query not needing any further modification or batching. Recycles connection after completion.
 	 * 
 	 * @param query
 	 * @param errMsg
@@ -266,8 +256,8 @@ public final class DB {
 	}
 
 	/**
-	 * Executes Insert / Update Query. Utilizes IUSth for Batching and Query Editing. MUST MANUALLY EXECUTE QUERY / BATACH
-	 * IN IUSth (No need to close Statement after execution)
+	 * Executes Insert / Update Query. Utilizes IUSth for Batching and Query Editing. MUST MANUALLY EXECUTE QUERY / BATACH IN IUSth (No need to close
+	 * Statement after execution)
 	 * 
 	 * @param query
 	 * @param batch
@@ -278,9 +268,8 @@ public final class DB {
 	}
 
 	/**
-	 * Executes Insert or Update Query. Utilizes IUSth for Batching and Query Editing. Defines custom error message if
-	 * error occurs. MUST MANUALLY EXECUTE QUERY / BATACH IN IUSth (No need to Statement after execution) Recycles
-	 * connection after completion
+	 * Executes Insert or Update Query. Utilizes IUSth for Batching and Query Editing. Defines custom error message if error occurs. MUST MANUALLY
+	 * EXECUTE QUERY / BATACH IN IUSth (No need to Statement after execution) Recycles connection after completion
 	 * 
 	 * @param query
 	 * @param batch
@@ -299,23 +288,20 @@ public final class DB {
 			else
 				stmt.executeUpdate();
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			if (errMsg == null)
 				log.warn("Failed to execute IU query " + e, e);
 			else
 				log.warn(errMsg + " " + e, e);
 
 			return false;
-		}
-		finally {
+		} finally {
 			try {
 				if (con != null)
 					con.close();
 				if (stmt != null)
 					stmt.close();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("Failed to close DB connection " + e, e);
 			}
 		}
@@ -336,8 +322,7 @@ public final class DB {
 
 	/**
 	 * Creates PreparedStatement with given sql string.<br>
-	 * Statemens are created with {@link java.sql.ResultSet#TYPE_FORWARD_ONLY} and
-	 * {@link java.sql.ResultSet#CONCUR_READ_ONLY}
+	 * Statemens are created with {@link java.sql.ResultSet#TYPE_FORWARD_ONLY} and {@link java.sql.ResultSet#CONCUR_READ_ONLY}
 	 * 
 	 * @param sql
 	 *          SQL querry
@@ -369,14 +354,12 @@ public final class DB {
 		try {
 			c = DatabaseFactory.getConnection();
 			ps = c.prepareStatement(sql, resultSetType, resultSetConcurrency);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't create PreparedStatement for querry: " + sql, e);
 			if (c != null) {
 				try {
 					c.close();
-				}
-				catch (SQLException e1) {
+				} catch (SQLException e1) {
 					log.error("Can't close connection after exception", e1);
 				}
 			}
@@ -395,8 +378,7 @@ public final class DB {
 	public static int executeUpdate(PreparedStatement statement) {
 		try {
 			return statement.executeUpdate();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't execute update for PreparedStatement", e);
 		}
 
@@ -425,8 +407,7 @@ public final class DB {
 		ResultSet rs = null;
 		try {
 			rs = statement.executeQuery();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while executing querry", e);
 		}
 		return rs;
@@ -450,8 +431,7 @@ public final class DB {
 			Connection c = statement.getConnection();
 			statement.close();
 			c.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while closing PreparedStatement", e);
 		}
 	}

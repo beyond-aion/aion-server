@@ -36,18 +36,15 @@ public class _11110KillingTime extends QuestHandler {
 			if (env.getTargetId() == 799075) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getTargetId() == 799075) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -64,8 +61,7 @@ public class _11110KillingTime extends QuestHandler {
 			int[] mobs = { 217039, 217040 };
 			if (var >= 0 && var < 9) {
 				return defaultOnKillEvent(env, mobs, 0, 9);
-			}
-			else if (var == 9) {
+			} else if (var == 9) {
 				return defaultOnKillEvent(env, mobs, 9, true);
 			}
 		}

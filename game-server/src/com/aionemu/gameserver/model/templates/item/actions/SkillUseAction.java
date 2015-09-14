@@ -57,8 +57,7 @@ public class SkillUseAction extends AbstractItemAction {
 		if (player.isTransformed()) {
 			for (EffectTemplate template : skill.getSkillTemplate().getEffects().getEffects()) {
 				if (template instanceof TransformEffect) {
-					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_CANT_USE_ITEM(new DescriptionId(nameId)));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_USE_ITEM(new DescriptionId(nameId)));
 					return false;
 				}
 			}

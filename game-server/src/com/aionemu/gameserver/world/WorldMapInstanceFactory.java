@@ -21,8 +21,7 @@ public class WorldMapInstanceFactory {
 		WorldMapInstance worldMapInstance = null;
 		if (parent.getMapId() == WorldMapType.RESHANTA.getId()) {
 			worldMapInstance = new WorldMap3DInstance(parent, instanceId);
-		}
-		else {
+		} else {
 			worldMapInstance = new WorldMap2DInstance(parent, instanceId, ownerId);
 		}
 		InstanceHandler instanceHandler = InstanceEngine.getInstance().getNewInstanceHandler(parent.getMapId());

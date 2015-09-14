@@ -47,8 +47,8 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 		if (player.getAccessLevel() >= 3 && HousingConfig.ENABLE_SHOW_HOUSE_DOORID) {
 			PacketSendUtility.sendMessage(player, "House door id: " + address);
 		}
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
@@ -60,10 +60,9 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 
 		if (leave) {
 			if (house.getAddress().getExitMapId() != null) {
-				TeleportService2.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(),
-					house.getAddress().getExitY(), house.getAddress().getExitZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
-			}
-			else {
+				TeleportService2.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(), house
+					.getAddress().getExitZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+			} else {
 				if (GeoDataConfig.GEO_ENABLE) {
 					Npc sign = house.getCurrentSign();
 					byte flags = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
@@ -74,8 +73,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 					float y = (float) (Math.sin(radian) * 0.1);
 					TeleportService2.teleportTo(player, house.getWorldId(), colWall.getX() + x, colWall.getY() + y, player.getZ(), (byte) 0,
 						TeleportAnimation.BEAM_ANIMATION);
-				}
-				else {
+				} else {
 					double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
 					float x = (float) (Math.cos(radian) * 6);
 					float y = (float) (Math.sin(radian) * 6);
@@ -83,8 +81,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 						TeleportAnimation.BEAM_ANIMATION);
 				}
 			}
-		}
-		else {
+		} else {
 			if (house.getOwnerId() != player.getObjectId()) {
 				boolean allowed = false;
 				if (house.getDoorState() == HousePermissions.DOOR_OPENED_FRIENDS) {

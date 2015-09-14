@@ -14,24 +14,23 @@ import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
 import com.aionemu.gameserver.skillengine.change.Func;
 
 /**
- *
  * @author Dtem
  */
 public class SerialKillerDebuff implements StatOwner {
 
 	private List<IStatFunction> functions = new ArrayList<IStatFunction>();
 	private RankRestriction rankRestriction;
-	
+
 	public void applyEffect(Player player, int rank) {
 		if (rank == 0)
 			return;
-		
+
 		rankRestriction = DataManager.SERIAL_KILLER_DATA.getRankRestriction(rank);
-		
+
 		if (hasDebuff()) {
 			endEffect(player);
 		}
-		
+
 		for (RankPenaltyAttr rankPenaltyAttr : rankRestriction.getPenaltyAttr()) {
 			if (rankPenaltyAttr.getFunc().equals(Func.PERCENT))
 				functions.add(new StatRateFunction(rankPenaltyAttr.getStat(), rankPenaltyAttr.getValue(), true));
@@ -40,12 +39,11 @@ public class SerialKillerDebuff implements StatOwner {
 		}
 		player.getGameStats().addEffect(this, functions);
 	}
-				
-	
+
 	public boolean hasDebuff() {
 		return !functions.isEmpty();
 	}
-	
+
 	public void endEffect(Player player) {
 		functions.clear();
 		player.getGameStats().endEffect(this);

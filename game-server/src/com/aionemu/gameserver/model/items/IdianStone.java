@@ -17,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class IdianStone extends ItemStone {
@@ -47,6 +46,7 @@ public class IdianStone extends ItemStone {
 	public void onEquip(final Player player, long slot) {
 		if (polishCharge > 0) {
 			actionListener = new ActionObserver(ObserverType.ALL) {
+
 				@Override
 				public void attacked(Creature creature) {
 					decreasePolishCharge(player, true);
@@ -63,11 +63,11 @@ public class IdianStone extends ItemStone {
 				rndBonusEffect.applyEffect(player);
 		}
 	}
-	
+
 	private synchronized void decreasePolishCharge(Player player, boolean isAttacked) {
 		decreasePolishCharge(player, isAttacked, 0);
 	}
-	
+
 	public synchronized void decreasePolishCharge(Player player, int skillValue) {
 		decreasePolishCharge(player, false, skillValue);
 	}
@@ -78,13 +78,12 @@ public class IdianStone extends ItemStone {
 			return;
 		}
 		if (skillValue == 0)
-		result = isAttacked ? burnDefend : burnAttack;
+			result = isAttacked ? burnDefend : burnAttack;
 		else
 			result = skillValue;
 		if (polishCharge - result < 0) {
 			polishCharge = 0;
-		}
-		else {
+		} else {
 			polishCharge -= result;
 		}
 		if (polishCharge == 0) {

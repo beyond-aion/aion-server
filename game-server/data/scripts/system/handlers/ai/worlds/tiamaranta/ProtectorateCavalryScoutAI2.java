@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("protectorate_cavalry_scout")
 public class ProtectorateCavalryScoutAI2 extends NpcAI2 {
+
 	private int size;
 
 	@Override
@@ -26,9 +27,9 @@ public class ProtectorateCavalryScoutAI2 extends NpcAI2 {
 	}
 
 	private void spawnEventNpc() {
-		size ++;
+		size++;
 		int npcId = 0;
-		switch(Rnd.get(1, 3)) {
+		switch (Rnd.get(1, 3)) {
 			case 1:
 				npcId = 799991;
 				break;
@@ -40,7 +41,7 @@ public class ProtectorateCavalryScoutAI2 extends NpcAI2 {
 				break;
 		}
 		int msg = 0;
-		switch(Rnd.get(1, 3)) {
+		switch (Rnd.get(1, 3)) {
 			case 1:
 				msg = 340937;
 				break;
@@ -71,13 +72,12 @@ public class ProtectorateCavalryScoutAI2 extends NpcAI2 {
 				int point = npc.getMoveController().getCurrentPoint();
 				if (point == 4 && size < 2) {
 					spawnEventNpc();
-				}
-				else if (point == 0) {
+				} else if (point == 0) {
 					npc.getMoveController().abortMove();
 					npc.getSpawn().setWalkerId(null);
 					WalkManager.stopWalking((NpcAI2) npc.getAi2());
 					NpcActions.delete(npc);
-					size --;
+					size--;
 				}
 			}
 		}

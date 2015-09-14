@@ -32,13 +32,11 @@ public class BossDeathListener extends OnDieEventListener {
 			Creature kill = (Creature) winner;
 			if (kill.getRace().isPlayerRace())
 				base.setRace(kill.getRace());
-		}
-		else if (winner instanceof TemporaryPlayerTeam) {
+		} else if (winner instanceof TemporaryPlayerTeam) {
 			TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
 			if (team.getRace().isPlayerRace())
 				base.setRace(team.getRace());
-		}
-		else
+		} else
 			base.setRace(Race.NPC);
 
 		BaseService.getInstance().capture(base.getId(), base.getRace());

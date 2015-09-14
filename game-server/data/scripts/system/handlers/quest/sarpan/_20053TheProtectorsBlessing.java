@@ -106,8 +106,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -125,13 +124,11 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205617) { // Aimah
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -150,13 +147,11 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					changeQuestStep(env, 1, 2, false); // 2
 					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.331f, 245.21f, 126.27f, (byte) 60);
 					return true;
-				}
-				else if (var == 5) {
+				} else if (var == 5) {
 					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
 					return true;
 				}
-			}
-			else {
+			} else {
 				if (var >= 2 && var < 4) {
 					changeQuestStep(env, var, 1, false); // 1
 					return true;
@@ -177,8 +172,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					changeQuestStep(env, 1, 2, false); // 2
 					return true;
 				}
-			}
-			else {
+			} else {
 				if (var >= 2 && var < 4) {
 					changeQuestStep(env, var, 1, false); // 1
 					return true;
@@ -216,8 +210,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 					despawnMobsAndSeal();
 					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.331f, 245.21f, 126.27f, (byte) 60);
 					return true;
-				}
-				else {
+				} else {
 					changeQuestStep(env, 3, 4, false); // 4
 					despawnMobsAndSeal();
 					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.21f, 126.27f, (byte) 60);
@@ -283,11 +276,10 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 	}
 
 	private void spawnHesibanata(Player player) {
-		Npc spawn = (Npc) QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 218890, 250.970f, 221.711f, 124.942f,
-			(byte) 0);
+		Npc spawn = (Npc) QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 218890, 250.970f, 221.711f, 124.942f, (byte) 0);
 		spawn.getAggroList().addHate(player, 1);
 	}
-	
+
 	private boolean sealHasDied() {
 		Collection<Npc> allNpcs = World.getInstance().getNpcs();
 		for (Npc npc : allNpcs) {
@@ -297,7 +289,7 @@ public class _20053TheProtectorsBlessing extends QuestHandler {
 		}
 		return true;
 	}
-	
+
 	private void despawnMobsAndSeal() {
 		Collection<Npc> allNpcs = World.getInstance().getNpcs();
 		for (Npc npc : allNpcs) {

@@ -9,7 +9,7 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.challenge.tasks.enabled", defaultValue = "false")
 	public static boolean CHALLENGE_TASKS_ENABLED;
-	
+
 	/**
 	 * Show premium account details on login
 	 */
@@ -113,13 +113,12 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.basic.cubesize.limit", defaultValue = "10")
 	public static int BASIC_CUBE_SIZE_LIMIT;
-	
-	 /**
+
+	/**
 	 * Npc Cube Expands limit size
 	 */
 	@Property(key = "gameserver.npcexpands.limit", defaultValue = "5")
 	public static int NPC_CUBE_EXPANDS_SIZE_LIMIT;
-
 
 	/**
 	 * Enable instances mob always aggro player ignore level
@@ -189,10 +188,10 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.faction.prices", defaultValue = "10000")
 	public static int FACTION_USE_PRICE;
-	
+
 	@Property(key = "gameserver.faction.cmdchannel", defaultValue = "true")
 	public static boolean FACTION_CMD_CHANNEL;
-	
+
 	@Property(key = "gameserver.faction.chatchannels", defaultValue = "false")
 	public static boolean FACTION_CHAT_CHANNEL;
 
@@ -201,7 +200,7 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.pvp.dayduration", defaultValue = "86400000")
 	public static long PVP_DAY_DURATION;
-	
+
 	/**
 	 * Allowed Kills in configuered time for full AP. Move to separate config when more pvp options.
 	 */
@@ -239,7 +238,7 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.dialog.showid", defaultValue = "true")
 	public static boolean ENABLE_SHOW_DIALOGID;
-	
+
 	/**
 	 * Enable one kisk restriction
 	 */
@@ -259,7 +258,7 @@ public class CustomConfig {
 	public static boolean RIFT_ENABLED;
 	@Property(key = "gameserver.rift.duration", defaultValue = "1")
 	public static int RIFT_DURATION;
-	
+
 	@Property(key = "gameserver.vortex.enable", defaultValue = "true")
 	public static boolean VORTEX_ENABLED;
 	@Property(key = "gameserver.vortex.brusthonin.schedule", defaultValue = "0 0 16 ? * SAT")
@@ -283,10 +282,10 @@ public class CustomConfig {
 	public static int KILLER_1ST_RANK_KILLS;
 	@Property(key = "gameserver.serialkiller.2nd.rank.kills", defaultValue = "50")
 	public static int KILLER_2ND_RANK_KILLS;
-		
+
 	@Property(key = "gameserver.reward.service.enable", defaultValue = "false")
 	public static boolean ENABLE_REWARD_SERVICE;
-	
+
 	/**
 	 * Limits Config
 	 */
@@ -304,7 +303,7 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.ride.restriction.enable", defaultValue = "true")
 	public static boolean ENABLE_RIDE_RESTRICTION;
-	
+
 	@Property(key = "gameserver.quest.questdatakills", defaultValue = "true")
 	public static boolean QUESTDATA_MONSTER_KILLS;
 
@@ -313,7 +312,7 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.selling.apitems.enabled", defaultValue = "true")
 	public static boolean SELLING_APITEMS_ENABLED;
-	
+
 	@Property(key = "character.deletion.time.minutes", defaultValue = "5")
 	public static int CHARACTER_DELETION_TIME_MINUTES;
 

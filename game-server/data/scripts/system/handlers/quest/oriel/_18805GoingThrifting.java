@@ -7,23 +7,19 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _18805GoingThrifting extends QuestHandler {
-	
+
 	private static final int questId = 18805;
 
-	public _18805GoingThrifting()
-	{
+	public _18805GoingThrifting() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(830070).addOnQuestStart(questId);
 		qe.registerQuestNpc(830070).addOnTalkEvent(questId);
 		qe.registerQuestNpc(830660).addOnTalkEvent(questId);
@@ -34,78 +30,60 @@ public class _18805GoingThrifting extends QuestHandler {
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 830070) 
-			{
-				if (dialog == DialogAction.QUEST_SELECT) 
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 830070) {
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else 
+				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START)
-		{
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			switch (targetId)
-			{
-				case 830660: 
-				case 830661: 
-				case 830520: 
-				{
-					switch (dialog)
-					{
-						case QUEST_SELECT: 
-						{
-							if (var == 0) 
+			switch (targetId) {
+				case 830660:
+				case 830661:
+				case 830520: {
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 0)
 								return sendQuestDialog(env, 1352);
-							else if (var == 2) 
+							else if (var == 2)
 								return sendQuestDialog(env, 2375);
 						}
-						case SETPRO1:
-						{
+						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
 						}
-						case SELECT_QUEST_REWARD:
-						{
+						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 2, 2, true);
 							return sendQuestDialog(env, 5);
 						}
 					}
 				}
-				case 730525: 
-				case 730522: 
-				{
-					switch (dialog)
-					{
-						case USE_OBJECT: 
-						{
-							if (var == 1) 
+				case 730525:
+				case 730522: {
+					switch (dialog) {
+						case USE_OBJECT: {
+							if (var == 1)
 								return sendQuestDialog(env, 1693);
 						}
-						case SETPRO2:
-						{
+						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) 
-		{
-			switch (targetId)
-			{
-				case 830660: 
-				case 830661: 
-				case 830520: 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			switch (targetId) {
+				case 830660:
+				case 830661:
+				case 830520:
 					return sendQuestEndDialog(env);
 			}
 		}

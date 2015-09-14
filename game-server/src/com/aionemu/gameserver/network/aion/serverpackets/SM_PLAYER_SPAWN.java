@@ -54,7 +54,7 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
 		// 9 - I never lose, boost pvp physical/magical attack/defense by 10%
 		if (player.getSKInfo().getRank() > 0) {
 			writeD(1);
-		}  else {
+		} else {
 			writeD(0);
 		}
 		if (World.getInstance().getWorldMap(player.getWorldId()).getTemplate().getBeginnerTwinCount() > 0)

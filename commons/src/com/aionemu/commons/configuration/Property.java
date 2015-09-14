@@ -7,8 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to mark field that should be processed by
- * {@link com.aionemu.commons.configuration.ConfigurableProcessor}<br>
+ * This annotation is used to mark field that should be processed by {@link com.aionemu.commons.configuration.ConfigurableProcessor}<br>
  * <br>
  * This annotation is Documented, all definitions with it will appear in javadoc
  */
@@ -18,8 +17,7 @@ import java.lang.annotation.Target;
 public @interface Property {
 
 	/**
-	 * This string shows to {@link com.aionemu.commons.configuration.ConfigurableProcessor} that init value of the object
-	 * should not be overriden.
+	 * This string shows to {@link com.aionemu.commons.configuration.ConfigurableProcessor} that init value of the object should not be overriden.
 	 */
 	public static final String DEFAULT_VALUE = "DO_NOT_OVERWRITE_INITIALIAZION_VALUE";
 
@@ -45,8 +43,7 @@ public @interface Property {
 	 * <li>{@link String} by {@link com.aionemu.commons.configuration.transformers.StringTransformer}</li>
 	 * <li>{@link Enum} and enum by {@link com.aionemu.commons.configuration.transformers.EnumTransformer}</li>
 	 * <li>{@link java.io.File} by {@link com.aionemu.commons.configuration.transformers.FileTransformer}</li>
-	 * <li>{@link java.net.InetSocketAddress} by
-	 * {@link com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer}</li>
+	 * <li>{@link java.net.InetSocketAddress} by {@link com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer}</li>
 	 * <li>{@link java.util.regex.Pattern} by {@link com.aionemu.commons.configuration.transformers.PatternTransformer}
 	 * </ul>
 	 * <p/>
@@ -58,8 +55,8 @@ public @interface Property {
 	public Class<? extends PropertyTransformer> propertyTransformer() default PropertyTransformer.class;
 
 	/**
-	 * Represents default value that will be parsed if key not found. If this key equals(default) {@link #DEFAULT_VALUE}
-	 * init value of the object won't be overriden
+	 * Represents default value that will be parsed if key not found. If this key equals(default) {@link #DEFAULT_VALUE} init value of the object won't
+	 * be overriden
 	 * 
 	 * @return default value of the property
 	 */

@@ -63,8 +63,7 @@ public class _18806HeartofRock extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830528: {
 					switch (dialog) {
@@ -82,7 +81,7 @@ public class _18806HeartofRock extends QuestHandler {
 				}
 				case 830194: {
 					switch (dialog) {
-						case QUEST_SELECT:{
+						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
 						case SELECT_QUEST_REWARD:
@@ -91,8 +90,7 @@ public class _18806HeartofRock extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830194) {
 				return sendQuestEndDialog(env);
 			}

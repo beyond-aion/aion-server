@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2436LookingForBuBuPat extends QuestHandler {
 
@@ -43,25 +41,22 @@ public class _2436LookingForBuBuPat extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204390) { 
+			if (targetId == 204390) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204401) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 204401) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1)
+				} else if (env.getDialog() == DialogAction.SETPRO1)
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 204390, 0, 1); // 1
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204390) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204390) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else
@@ -70,7 +65,7 @@ public class _2436LookingForBuBuPat extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

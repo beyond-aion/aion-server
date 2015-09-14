@@ -5,8 +5,9 @@ package com.aionemu.gameserver.network;
  * 
  * @author -Nemesiss-
  */
-@SuppressWarnings("serial")
 public class KeyAlreadySetException extends RuntimeException {
+
+	private static final long serialVersionUID = 1862999213177622108L;
 
 	/**
 	 * Constructs an <code>KeyAlreadySetException</code> with no detail message.

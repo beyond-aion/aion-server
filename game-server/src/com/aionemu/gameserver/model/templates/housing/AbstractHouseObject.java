@@ -51,7 +51,7 @@ public abstract class AbstractHouseObject extends VisibleObjectTemplate {
 	public HousingCategory getCategory() {
 		return category;
 	}
-	
+
 	public boolean getCanDye() {
 		return canDye;
 	}
@@ -60,7 +60,7 @@ public abstract class AbstractHouseObject extends VisibleObjectTemplate {
 	public int getNameId() {
 		return nameId;
 	}
-	
+
 	@Override
 	public String getName() {
 		return null;

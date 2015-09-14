@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("magical_sap")
@@ -30,7 +29,7 @@ public class MagicalSapAI2 extends NpcAI2 {
 				if (!isAlreadyDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19306, 55, getOwner()).useNoAnimationSkill();
 					if (time == 10000) {
-						AI2Actions.deleteOwner(MagicalSapAI2.this);		
+						AI2Actions.deleteOwner(MagicalSapAI2.this);
 					}
 				}
 			}

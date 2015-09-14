@@ -24,9 +24,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _10093TheKazaIdentity extends QuestHandler {
 
 	private final static int questId = 10093;
-	
-	private final static int[] mobs = {230397, 230396, 230401, 230402};
-	
+
+	private final static int[] mobs = { 230397, 230396, 230401, 230402 };
 
 	public _10093TheKazaIdentity() {
 		super(questId);
@@ -34,7 +33,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcIds = { 800832, 800836, 800843, 800844, 701558, 800845, 801327};
+		int[] npcIds = { 800832, 800836, 800843, 800844, 701558, 800845, 801327 };
 		qe.registerOnMovieEndQuest(855, questId);
 		qe.registerOnMovieEndQuest(857, questId);
 		qe.registerOnDie(questId);
@@ -47,7 +46,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -65,7 +64,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 		}
 		return defaultOnKillEvent(env, mobs, 1, 4) || defaultOnKillEvent(env, mobs, 7, 10);
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
@@ -74,16 +73,15 @@ public class _10093TheKazaIdentity extends QuestHandler {
 			if (movieId == 855) {
 				QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800843, 137.46f, 158.9f, 120.73f, (byte) 113);
 				return true;
-			}
-			else if (movieId == 857) {
-				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 107.37f, 145.05f, 125.69f, (byte) 105, TeleportAnimation.BEAM_ANIMATION);
+			} else if (movieId == 857) {
+				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 107.37f, 145.05f, 125.69f, (byte) 105,
+					TeleportAnimation.BEAM_ANIMATION);
 				return true;
 			}
 		}
 		return false;
 	}
-			
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10092);
@@ -95,7 +93,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800832) {
 				switch (dialog) {
@@ -107,12 +105,12 @@ public class _10093TheKazaIdentity extends QuestHandler {
 					case SETPRO1: {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300900000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 300900000, newInstance.getInstanceId(), 150.62f, 145.74f, 124.41f, (byte) 36, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 300900000, newInstance.getInstanceId(), 150.62f, 145.74f, 124.41f, (byte) 36,
+							TeleportAnimation.BEAM_ANIMATION);
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 800836) { 
+			} else if (targetId == 800836) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 4) {
@@ -123,11 +121,10 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						playQuestMovie(env, 855);
 						Npc npc = (Npc) env.getVisibleObject();
 						npc.getController().onDelete();
-						return defaultCloseDialog(env, 4, 5); 
+						return defaultCloseDialog(env, 4, 5);
 					}
 				}
-			}
-			else if (targetId == 800843) { 
+			} else if (targetId == 800843) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 5) {
@@ -138,20 +135,17 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						Npc npc = (Npc) env.getVisibleObject();
 						npc.getController().onDelete();
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800844, 106.22f, 141.24f, 112.17f, (byte) 0);
-						return defaultCloseDialog(env, 5, 6); 
+						return defaultCloseDialog(env, 5, 6);
 					}
 				}
-			}
-			else if (targetId == 701558) { 
+			} else if (targetId == 701558) {
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (qs.getQuestVarById(0) == 6) {
 							return sendQuestDialog(env, 2375);
-						}
-						else if (qs.getQuestVarById(0) == 11) {
+						} else if (qs.getQuestVarById(0) == 11) {
 							return sendQuestDialog(env, 3398);
-						}
-						else {
+						} else {
 							return closeDialogWindow(env);
 						}
 					}
@@ -159,12 +153,12 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.04f, 136.029f, 112.17f, (byte) 53);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230401, 120.39f, 139.96f, 111.99f, (byte) 60);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.97f, 144.26f, 112.17f, (byte) 66);
-						return defaultCloseDialog(env, 6, 7); 
+						return defaultCloseDialog(env, 6, 7);
 					}
 					case SETPRO8: {
 						playQuestMovie(env, 857);
 						removeQuestItem(env, 182215247, 1);
-						for (VisibleObject obj: player.getKnownList().getKnownObjects().values()) {
+						for (VisibleObject obj : player.getKnownList().getKnownObjects().values()) {
 							if (obj instanceof Npc && obj.getObjectTemplate().getTemplateId() == 701850) {
 								obj.getController().onDelete();
 							}
@@ -173,11 +167,10 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 801322, 121, 138.11f, 112.17f, (byte) 0);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 206330, 107.15f, 143.3f, 126.6f, (byte) 0, 28);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800845, 107.04f, 140.6f, 125.69f, (byte) 30);
-						return defaultCloseDialog(env, 11, 12); 
+						return defaultCloseDialog(env, 11, 12);
 					}
 				}
-			}
-			else if (targetId == 800844) { 
+			} else if (targetId == 800844) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 10) {
@@ -189,11 +182,10 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						Npc npc = (Npc) env.getVisibleObject();
 						npc.getController().onDelete();
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800844, 106.22f, 141.24f, 112.17f, (byte) 0);
-						return defaultCloseDialog(env, 10, 11); 
+						return defaultCloseDialog(env, 10, 11);
 					}
 				}
-			}
-			else if (targetId == 800845) { 
+			} else if (targetId == 800845) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 12) {
@@ -201,13 +193,12 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						}
 					}
 					case SETPRO9: {
-						//TeleportService2.teleportTo(player, 600050000, 1, 421, 428f, 288.49f, (byte) 13, TeleportAnimation.BEAM_ANIMATION); ASMO PoINT
+						// TeleportService2.teleportTo(player, 600050000, 1, 421, 428f, 288.49f, (byte) 13, TeleportAnimation.BEAM_ANIMATION); ASMO PoINT
 						TeleportService2.teleportTo(player, 600050000, 1, 330.62f, 2748.81f, 149.08f, (byte) 50, TeleportAnimation.BEAM_ANIMATION);
-						return defaultCloseDialog(env, 12, 13); 
+						return defaultCloseDialog(env, 12, 13);
 					}
 				}
-			}
-			else if (targetId == 800527) { 
+			} else if (targetId == 800527) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 13) {
@@ -215,43 +206,41 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						}
 					}
 					case SETPRO10: {
-						return defaultCloseDialog(env, 13, 13, true, false); 
+						return defaultCloseDialog(env, 13, 13, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801327) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-      int var = qs.getQuestVarById(0);
+			int var = qs.getQuestVarById(0);
 			if (player.getWorldId() != 300900000) {
 				if (var > 0 && var < 13) {
 					qs.setQuestVarById(0, 0);
-  				updateQuestStatus(env);
-  				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-  					DataManager.QUEST_DATA.getQuestById(questId).getName()));
-          return true;
+					updateQuestStatus(env);
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
+					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -261,8 +250,8 @@ public class _10093TheKazaIdentity extends QuestHandler {
 			if (var > 0 && var < 13) {
 				qs.setQuestVar(0);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}

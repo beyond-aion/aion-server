@@ -41,8 +41,7 @@ public class _80016EventSockHop extends QuestHandler {
 		if ((qs == null || qs.getStatus() == QuestStatus.NONE) && !onLvlUpEvent(env))
 			return false;
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-			&& qs.getCompleteCount() < 10) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < 10) {
 			if (env.getTargetId() == 799763) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -88,8 +87,7 @@ public class _80016EventSockHop extends QuestHandler {
 			// Start once
 			if (qs == null || qs.getStatus() == QuestStatus.NONE)
 				return QuestService.startEventQuest(env, QuestStatus.START);
-		}
-		else if (qs != null) {
+		} else if (qs != null) {
 			// Set as expired
 			QuestService.abandonQuest(player, questId);
 		}
@@ -100,7 +98,7 @@ public class _80016EventSockHop extends QuestHandler {
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		if (bonusType != BonusType.MOVIE || env.getQuestId() != questId)
 			return HandlerResult.UNKNOWN;
-		
+
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {

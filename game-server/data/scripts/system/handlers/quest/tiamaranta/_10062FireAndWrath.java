@@ -56,8 +56,7 @@ public class _10062FireAndWrath extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800018) { // Garnon
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -93,7 +92,7 @@ public class _10062FireAndWrath extends QuestHandler {
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, 218766, 2, 3); // 3
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

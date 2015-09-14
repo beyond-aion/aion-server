@@ -59,8 +59,7 @@ public class _1052RootoftheRot extends QuestHandler {
 				removeQuestItem(env, 182201603, 3);
 			removeQuestItem(env, 182201604, 3);
 			return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204549) {
@@ -78,8 +77,7 @@ public class _1052RootoftheRot extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO1:
 					if (var == 0) {
@@ -97,8 +95,7 @@ public class _1052RootoftheRot extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 730026) {
+		} else if (targetId == 730026) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)

@@ -23,7 +23,7 @@ public class SearchEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected CreatureSeeState state;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
@@ -46,7 +46,7 @@ public class SearchEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 
 		effected.setSeeState(state);
-		
+
 		if (SecurityConfig.INVIS && effected instanceof Player)
 			PlayerVisualStateService.seeValidate((Player) effected);
 

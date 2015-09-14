@@ -43,8 +43,7 @@ public class _80038EventMightyAspirations extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE)
 			return false;
 
-		if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.COMPLETE
-			&& QuestService.collectItemCheck(env, false)) {
+		if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.COMPLETE && QuestService.collectItemCheck(env, false)) {
 			if (targetId == 799780) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
@@ -57,8 +56,7 @@ public class _80038EventMightyAspirations extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialog() == DialogAction.USE_OBJECT)
 				return sendQuestDialog(env, 5);
 			return sendQuestEndDialog(env);

@@ -63,15 +63,13 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 730342) { // Strong Document Box
+			} else if (targetId == 730342) { // Strong Document Box
 				if (dialog == DialogAction.USE_OBJECT) {
 					if (var == 1) {
 						return true; // loot;
 					}
 				}
-			}
-			else if (targetId == 203901) { // Telemachus
+			} else if (targetId == 203901) { // Telemachus
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -86,8 +84,7 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
 				return sendQuestEndDialog(env);
 			}

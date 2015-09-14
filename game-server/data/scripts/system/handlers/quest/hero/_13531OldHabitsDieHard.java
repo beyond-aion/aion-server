@@ -22,6 +22,7 @@ public class _13531OldHabitsDieHard extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801948).addOnQuestStart(questId);
 		qe.registerQuestNpc(801541).addOnTalkEvent(questId);
@@ -51,8 +52,7 @@ public class _13531OldHabitsDieHard extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801948) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -64,8 +64,7 @@ public class _13531OldHabitsDieHard extends QuestHandler {
 						return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801541) {
 				return sendQuestEndDialog(env);
 			}

@@ -104,8 +104,7 @@ public class SkillLearnService {
 	 * @param template
 	 * @return
 	 */
-	private static boolean checkLearnIsPossible(Player player, PlayerSkillList playerSkillList,
-		SkillLearnTemplate template) {
+	private static boolean checkLearnIsPossible(Player player, PlayerSkillList playerSkillList, SkillLearnTemplate template) {
 		if (playerSkillList.isSkillPresent(template.getSkillId()))
 			return true;
 
@@ -132,17 +131,16 @@ public class SkillLearnService {
 				}
 		}
 		player.getSkillList().addSkill(player, skillId, maxLevel);
-		if(passiveSkill.isPassive())
+		if (passiveSkill.isPassive())
 			player.getController().updatePassiveStats();
 	}
 
 	public static void removeSkill(Player player, int skillId) {
 		if (player.getSkillList().isSkillPresent(skillId)) {
 			Integer skillLevel = player.getSkillList().getSkillLevel(skillId);
-			if(skillLevel == null)
+			if (skillLevel == null)
 				skillLevel = 1;
-			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel,
-				player.getSkillList().getSkillEntry(skillId).isStigma()));
+			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).isStigma()));
 			player.getSkillList().removeSkill(skillId);
 			SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 			if (skill != null && skill.isPassive()) {
@@ -150,7 +148,7 @@ public class SkillLearnService {
 			}
 		}
 	}
-	
+
 	public static void addSkill(Player player, int skillId) {
 		player.getSkillList().addSkill(player, skillId, 1);
 		SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(skillId);

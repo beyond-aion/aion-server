@@ -46,8 +46,7 @@ public class ChatProcessor implements GameEngine {
 		try {
 			log.info("Chat processor load started");
 			init(sm, this);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
@@ -74,8 +73,8 @@ public class ChatProcessor implements GameEngine {
 		acl.addClassListener(new ChatCommandsLoader(processor));
 		scriptManager.setGlobalClassListener(acl);
 
-		final File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"),
-			new File("./data/scripts/system/playerhandlers.xml"), new File("./data/scripts/system/consolehandlers.xml") };
+		final File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
+			new File("./data/scripts/system/consolehandlers.xml") };
 		final CountDownLatch loadLatch = new CountDownLatch(files.length);
 
 		for (int i = 0; i < files.length; i++) {
@@ -86,11 +85,9 @@ public class ChatProcessor implements GameEngine {
 				public void run() {
 					try {
 						scriptManager.load(files[index]);
-					}
-					catch (Exception e) {
+					} catch (Exception e) {
 						loadException = e;
-					}
-					finally {
+					} finally {
 						loadLatch.countDown();
 					}
 				}
@@ -99,8 +96,7 @@ public class ChatProcessor implements GameEngine {
 
 		try {
 			loadLatch.await();
-		}
-		catch (InterruptedException e1) {
+		} catch (InterruptedException e1) {
 		}
 		if (loadException != null) {
 			throw new GameServerError("Can't initialize chat handlers.", loadException);
@@ -125,15 +121,15 @@ public class ChatProcessor implements GameEngine {
 	public void reload() {
 		ScriptManager tmpSM;
 		final ChatProcessor adminCP;
-		Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>(commands);
+		Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>();
+		backupCommands.putAll(commands);
 		commands.clear();
 		loadException = null;
 
 		try {
 			tmpSM = new ScriptManager();
 			adminCP = new ChatProcessor(tmpSM);
-		}
-		catch (Throwable e) {
+		} catch (Throwable e) {
 			commands = backupCommands;
 			throw new GameServerError("Can't reload chat handlers.", e);
 		}
@@ -156,8 +152,7 @@ public class ChatProcessor implements GameEngine {
 				String str = (String) key;
 				accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error("Can't read commands.properties", e);
 		}
 	}

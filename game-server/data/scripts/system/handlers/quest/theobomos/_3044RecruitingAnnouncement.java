@@ -54,16 +54,14 @@ public class _3044RecruitingAnnouncement extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798206) {
 				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return defaultCloseDialog(env, 0, 1, true, true);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798206) {
 				return sendQuestEndDialog(env);
 			}

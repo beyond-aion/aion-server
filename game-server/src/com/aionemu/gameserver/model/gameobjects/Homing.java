@@ -18,9 +18,9 @@ public class Homing extends SummonedObject<Creature> {
 	 * Number of performed attacks
 	 */
 	private int attackCount;
-	
+
 	private int skillId;
-	
+
 	/**
 	 * @param objId
 	 * @param controller
@@ -32,7 +32,7 @@ public class Homing extends SummonedObject<Creature> {
 		super(objId, controller, spawnTemplate, objectTemplate, level);
 		this.skillId = skillId;
 	}
-	
+
 	@Override
 	protected void setupStatContainers(byte level) {
 		setGameStats(new HomingGameStats(this));
@@ -79,7 +79,7 @@ public class Homing extends SummonedObject<Creature> {
 			return ItemAttackType.MAGICAL_WIND;
 		return ItemAttackType.PHYSICAL;
 	}
-	
+
 	public int getSkillId() {
 		return skillId;
 	}

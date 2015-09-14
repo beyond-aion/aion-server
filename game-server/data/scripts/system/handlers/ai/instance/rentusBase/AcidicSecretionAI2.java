@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("acidic_secretion")
@@ -48,8 +47,7 @@ public class AcidicSecretionAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelEventTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19651, 60, getOwner()).useNoAnimationSkill();
 				}
 			}

@@ -14,8 +14,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestScriptData")
 @XmlSeeAlso({ ReportToData.class, RelicRewardsData.class, CraftingRewardsData.class, ReportToManyData.class, MonsterHuntData.class,
-	ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class,
-	FountainRewardsData.class, SkillUseData.class })
+	ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class, FountainRewardsData.class,
+	SkillUseData.class })
 public abstract class XMLQuest {
 
 	@XmlAttribute(name = "id", required = true)

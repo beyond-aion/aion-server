@@ -18,7 +18,7 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 
 	private final static int questId = 24013;
 	private final static int[] mobs = { 210455, 210456, 214039, 210458, 214032 };
-	
+
 	public _24013PoisonInTheWaters() {
 		super(questId);
 	}
@@ -59,17 +59,16 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 				case 203621:
-					switch (env.getDialog()){
+					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							break;
 						case SETPRO2:
-							return defaultCloseDialog(env, 1, 2, 182215359,1); // 2
+							return defaultCloseDialog(env, 1, 2, 182215359, 1); // 2
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				return sendQuestEndDialog(env);
 			}
@@ -85,11 +84,11 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	   if (defaultOnKillEvent(env, mobs, 7, true))
-		  return true;
+		if (defaultOnKillEvent(env, mobs, 7, true))
+			return true;
 		return defaultOnKillEvent(env, mobs, 3, 7); // 6
 	}
 

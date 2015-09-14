@@ -1,18 +1,19 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aionemu.gameserver.controllers.observer.RoadObserver;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.road.Road;
 import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author SheppeR
  */
 public class RoadController extends VisibleObjectController<Road> {
 
-	   ConcurrentHashMap<Integer, RoadObserver> observed = new ConcurrentHashMap<>();
+	ConcurrentHashMap<Integer, RoadObserver> observed = new ConcurrentHashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {

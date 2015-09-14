@@ -112,8 +112,7 @@ public class _20050BuildingBridges extends QuestHandler {
 						case SETPRO4: {
 							if (var == 3) {
 								changeQuestStep(env, 3, 4, false); // 4
-								TeleportService2.teleportTo(player, 600020000, 1, 1302, 1825, 500.48282f, (byte) 0,
-									TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 600020000, 1, 1302, 1825, 500.48282f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
 								return closeDialogWindow(env);
 							}
 						}
@@ -121,13 +120,11 @@ public class _20050BuildingBridges extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205585) { // Rafael
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -143,8 +140,7 @@ public class _20050BuildingBridges extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var >= 4 && var < 13) {
 				return defaultOnKillEvent(env, mephiticKlaws, var, var + 1); // 5 - 13
-			}
-			else if (var == 13) {
+			} else if (var == 13) {
 				return defaultOnKillEvent(env, mephiticKlaws, 13, true); // reward
 			}
 		}

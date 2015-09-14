@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author kecimis
- *
  */
 @XmlType(name = "TargetSpeciesAttribute")
 @XmlEnum
@@ -23,4 +22,3 @@ public enum TargetSpeciesAttribute {
 		return valueOf(v);
 	}
 }
-

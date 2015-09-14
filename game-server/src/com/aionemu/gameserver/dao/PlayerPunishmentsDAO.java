@@ -18,12 +18,12 @@ public abstract class PlayerPunishmentsDAO implements DAO {
 	public abstract void loadPlayerPunishments(final Player player, final PunishmentType punishmentType);
 
 	public abstract void storePlayerPunishments(final Player player, final PunishmentType punishmentType);
-	
+
 	public abstract void punishPlayer(final int playerId, final PunishmentType punishmentType, final long expireTime, final String reason);
 
 	public abstract void punishPlayer(final Player player, final PunishmentType punishmentType, final String reason);
 
 	public abstract void unpunishPlayer(final int playerId, final PunishmentType punishmentType);
-	
+
 	public abstract CharacterBanInfo getCharBanInfo(final int playerId);
 }

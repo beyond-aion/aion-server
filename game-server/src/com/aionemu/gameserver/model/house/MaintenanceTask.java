@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -32,16 +32,15 @@ public class MaintenanceTask extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger(MaintenanceTask.class);
 
-	private static final FastList<House> maintainedHouses;
+	private static final FastTable<House> maintainedHouses;
 
 	private static MaintenanceTask instance;
 
 	static {
-		maintainedHouses = FastList.newInstance();
+		maintainedHouses = new FastTable<>();
 		try {
 			instance = new MaintenanceTask(HousingConfig.HOUSE_MAINTENANCE_TIME);
-		}
-		catch (ParseException pe) {
+		} catch (ParseException pe) {
 		}
 	}
 
@@ -65,11 +64,11 @@ public class MaintenanceTask extends AbstractCronTask {
 	protected String getServerTimeVariable() {
 		return "houseMaintainTime";
 	}
-    
-    @Override
-    protected boolean canRunOnInit() {
-      return false;
-    }
+
+	@Override
+	protected boolean canRunOnInit() {
+		return false;
+	}
 
 	public boolean isMaintainTime() {
 		return (getRunTime() - System.currentTimeMillis() / 1000) <= 0;
@@ -79,21 +78,21 @@ public class MaintenanceTask extends AbstractCronTask {
 	protected void preInit() {
 		log.info("Initializing House maintenance task...");
 	}
-    
-    @Override
-    protected void preRun() {
-        updateMaintainedHouses();
-        log.info("Executing House maintenance. Maintained Houses: " + maintainedHouses.size());
-    }
+
+	@Override
+	protected void preRun() {
+		updateMaintainedHouses();
+		log.info("Executing House maintenance. Maintained Houses: " + maintainedHouses.size());
+	}
 
 	private void updateMaintainedHouses() {
 		maintainedHouses.clear();
-		
+
 		if (!HousingConfig.ENABLE_HOUSE_PAY)
 			return;
 
 		Date now = new Date();
-		FastList<House> houses = HousingService.getInstance().getCustomHouses();
+		FastTable<House> houses = HousingService.getInstance().getCustomHouses();
 		for (House house : houses) {
 			if (house.getStatus() == HouseStatus.INACTIVE)
 				continue;
@@ -106,8 +105,7 @@ public class MaintenanceTask extends AbstractCronTask {
 					if (house.getNextPay() == null)
 						house.setNextPay(new Timestamp((long) getRunTime() * 1000));
 					house.save();
-				}
-				else
+				} else
 					continue;
 			}
 			maintainedHouses.add(house);
@@ -153,20 +151,17 @@ public class MaintenanceTask extends AbstractCronTask {
 					impoundTime = now.getMillis();
 					warnCount = 3;
 					putHouseToAuction(house, pcd);
-				}
-				else {
-				  //impoundTime = now.plusDays(1).getMillis();
-				   impoundTime = now.plus(getPeriod()).getMillis();
+				} else {
+					// impoundTime = now.plusDays(1).getMillis();
+					impoundTime = now.plus(getPeriod()).getMillis();
 					warnCount = 2;
 				}
-			}
-			else if (payTime <= previousRun.getMillis()) {
+			} else if (payTime <= previousRun.getMillis()) {
 				// player did't pay 1 period
-				//impoundTime = now.plus(getPeriod()).plusDays(1).getMillis();
-			   impoundTime = now.plus(getPeriod()*2).getMillis();
+				// impoundTime = now.plus(getPeriod()).plusDays(1).getMillis();
+				impoundTime = now.plus(getPeriod() * 2).getMillis();
 				warnCount = 1;
-			}
-			else {
+			} else {
 				continue; // should not happen
 			}
 

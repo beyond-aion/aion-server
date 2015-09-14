@@ -44,8 +44,7 @@ public class NpcLifeStats extends CreatureLifeStats<Npc> {
 			if (lifeRestoreTask == null && !alreadyDead) {
 				this.lifeRestoreTask = LifeStatsRestoreService.getInstance().scheduleHpRestoreTask(this);
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}

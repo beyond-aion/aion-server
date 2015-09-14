@@ -67,8 +67,7 @@ public class _2052AnUndeadOccupation extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204715) {
@@ -76,52 +75,49 @@ public class _2052AnUndeadOccupation extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
-				   break;
+					break;
 				case SETPRO1:
 					changeQuestStep(env, 0, 1, false);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 			}
-		}
-		else if (targetId == 204801) {
+		} else if (targetId == 204801) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					else if (var == 7)
 						return sendQuestDialog(env, 1693);
-				   break;
+					break;
 				case SETPRO2:
-						changeQuestStep(env, 1, 2, false);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+					changeQuestStep(env, 1, 2, false);
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+					return true;
 				case SETPRO3:
-						changeQuestStep(env, 7, 8, false);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+					changeQuestStep(env, 7, 8, false);
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+					return true;
 			}
-		}
-		else if (targetId == 204805) {
+		} else if (targetId == 204805) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 8)
 						return sendQuestDialog(env, 2034);
 					if (var == 9)
 						return sendQuestDialog(env, 2375);
-				   break;
+					break;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
 						if (!giveQuestItem(env, 182204304, 1))
 							return true;
 						changeQuestStep(env, 9, 10, false);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO4:
-						changeQuestStep(env, 8, 9, false);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+					changeQuestStep(env, 8, 9, false);
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+					return true;
 			}
 		}
 		return false;

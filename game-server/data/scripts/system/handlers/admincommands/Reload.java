@@ -51,7 +51,7 @@ public class Reload extends AdminCommand {
 
 	private static final Logger log = LoggerFactory.getLogger(Reload.class);
 	private static final String SYNTAX = "syntax //reload <quest | skill | npc | items | portal | commands | drop | gameshop | events | config | ai>";
-	
+
 	public Reload() {
 		super("reload");
 	}
@@ -82,16 +82,13 @@ public class Reload extends AdminCommand {
 							questScriptsData.getQuest().addAll(data.getQuest());
 				}
 				QuestEngine.getInstance().reload(null);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Quest reload failed!");
 				log.error("quest reload fail", e);
-			}
-			finally {
+			} finally {
 				PacketSendUtility.sendMessage(admin, "Quest reload Success!");
 			}
-		}
-		else if (params[0].equals("skill")) {
+		} else if (params[0].equals("skill")) {
 			File dir = new File("./data/static_data/skills");
 			try {
 				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
@@ -105,57 +102,47 @@ public class Reload extends AdminCommand {
 				}
 				DataManager.SKILL_DATA.setSkillTemplates(newTemplates);
 				DataManager.SKILL_DATA.initializeCooldownGroups();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Skill reload failed!");
 				log.error("Skill reload failed!", e);
-			}
-			finally {
+			} finally {
 				PacketSendUtility.sendMessage(admin, "Skill reload Success!");
 			}
-		}
-		else if (params[0].equals("npc")) {
+		} else if (params[0].equals("npc")) {
 			DataManager.NPC_DATA.reload(admin);
-		}
-		else if (params[0].equals("items")) {
+		} else if (params[0].equals("items")) {
 			DataManager.ITEM_DATA.reload(admin);
-		}
-		else if (params[0].equals("ai")) {
+		} else if (params[0].equals("ai")) {
 			AI2Engine.getInstance().reload();
 			PacketSendUtility.sendMessage(admin, "Ai reload Success!");
 		}
-		
+
 		else if (params[0].equals("portal")) {
-//			File dir = new File("./data/static_data/portals");
+			// File dir = new File("./data/static_data/portals");
 			try {
 				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 				Unmarshaller un = jc.createUnmarshaller();
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-//				List<PortalTemplate> newTemplates = new ArrayList<PortalTemplate>();
-//				for (File file : listFiles(dir, true)) {
-//					PortalData data = (PortalData) un.unmarshal(file);
-//					if (data != null && data.getPortals() != null)
-//						newTemplates.addAll(data.getPortals());
-//				}
-//				DataManager.PORTAL_DATA.setPortals(newTemplates);
-			}
-			catch (Exception e) {
+				// List<PortalTemplate> newTemplates = new ArrayList<PortalTemplate>();
+				// for (File file : listFiles(dir, true)) {
+				// PortalData data = (PortalData) un.unmarshal(file);
+				// if (data != null && data.getPortals() != null)
+				// newTemplates.addAll(data.getPortals());
+				// }
+				// DataManager.PORTAL_DATA.setPortals(newTemplates);
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Portal reload failed!");
 				log.error("Portal reload failed!", e);
-			}
-			finally {
+			} finally {
 				PacketSendUtility.sendMessage(admin, "Portal reload Success!");
 			}
-		}
-		else if (params[0].equals("commands")) {
+		} else if (params[0].equals("commands")) {
 			ChatProcessor.getInstance().reload();
 			PacketSendUtility.sendMessage(admin, "Admin commands successfully reloaded!");
-		}
-		else if (params[0].equals("config")) {
+		} else if (params[0].equals("config")) {
 			Config.reload();
 			PacketSendUtility.sendMessage(admin, "Configs successfully reloaded!");
-		}
-		else if (params[0].equals("drop")) {
+		} else if (params[0].equals("drop")) {
 			File xml = new File("./data/static_data/custom_drop/custom_drop.xml");
 			CustomDrop data = null;
 			try {
@@ -164,22 +151,19 @@ public class Reload extends AdminCommand {
 				un.setEventHandler(new XmlValidationHandler());
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
 				data = (CustomDrop) un.unmarshal(xml);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "CustomDrop reload failed! Keeping the last version ...");
 				log.error("CustomDrop reload failed!", e);
 				return;
 			}
-			if(data != null)
+			if (data != null)
 				DataManager.CUSTOM_NPC_DROP = data;
 			NpcDropData.reload();
 			PacketSendUtility.sendMessage(admin, "NpcDrops successfully reloaded!");
-		}
-		else if (params[0].equals("gameshop")) {
+		} else if (params[0].equals("gameshop")) {
 			InGameShopEn.getInstance().reload();
 			PacketSendUtility.sendMessage(admin, "Gameshop successfully reloaded!");
-		}
-		else if (params[0].equals("events")) {
+		} else if (params[0].equals("events")) {
 			File eventXml = new File("./data/static_data/events_config/events_config.xml");
 			EventData data = null;
 			try {
@@ -188,8 +172,7 @@ public class Reload extends AdminCommand {
 				un.setEventHandler(new XmlValidationHandler());
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
 				data = (EventData) un.unmarshal(eventXml);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Event reload failed! Keeping the last version ...");
 				log.error("Event reload failed!", e);
 				return;
@@ -203,8 +186,7 @@ public class Reload extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "Active events: " + text);
 				EventService.getInstance().start();
 			}
-		}
-		else
+		} else
 			PacketSendUtility.sendMessage(admin, SYNTAX);
 
 	}
@@ -215,8 +197,7 @@ public class Reload extends AdminCommand {
 
 		try {
 			schema = sf.newSchema(new File(xml_schema));
-		}
-		catch (SAXException saxe) {
+		} catch (SAXException saxe) {
 			throw new Error("Error while getting schema", saxe);
 		}
 
@@ -226,8 +207,7 @@ public class Reload extends AdminCommand {
 	private Collection<File> listFiles(File root, boolean recursive) {
 		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
 
-		return FileUtils.listFiles(root,
-			and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
+		return FileUtils.listFiles(root, and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
 	}
 
 	@Override

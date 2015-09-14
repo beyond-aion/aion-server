@@ -132,8 +132,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 			int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
 			warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(descId));
 			return;
-		}
-		else if (requiredItem != null) {
+		} else if (requiredItem != null) {
 			int checkType = action.getCheckType();
 			if (checkType == 1) { // equip item needed
 				List<Item> items = player.getEquipment().getEquippedItemsByItemId(requiredItem);
@@ -142,8 +141,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 					warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(new DescriptionId(descId)));
 					return;
 				}
-			}
-			else if (player.getInventory().getItemCountByItemId(requiredItem) < action.getRemoveCount()) {
+			} else if (player.getInventory().getItemCountByItemId(requiredItem) < action.getRemoveCount()) {
 				int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
 				warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_CHECK(new DescriptionId(descId)));
 				return;
@@ -199,25 +197,21 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 							rewardId = action.getFinalRewardId();
 							ItemService.addItem(player, rewardId, 1);
 							delete = true;
-						}
-						else if (action.getRewardId() != null) {
+						} else if (action.getRewardId() != null) {
 							rewardId = action.getRewardId();
 							ItemService.addItem(player, rewardId, 1);
 							if (useCount == usedCount) {
-								PacketSendUtility.sendPacket(player,
-									SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(myself.getObjectTemplate().getNameId()));
+								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(myself.getObjectTemplate().getNameId()));
 								if (action.getFinalRewardId() == null) {
 									delete = true;
-								}
-								else {
+								} else {
 									myself.setMustGiveLastReward(true);
 									myself.setExpireTime((int) (System.currentTimeMillis() / 1000));
 									myself.setPersistentState(PersistentState.UPDATE_REQUIRED);
 								}
 							}
 						}
-					}
-					else if (action.getRewardId() != null) {
+					} else if (action.getRewardId() != null) {
 						rewardId = action.getRewardId();
 						ItemService.addItem(player, rewardId, 1);
 					}
@@ -247,8 +241,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 						}
 						player.getHouseObjectCooldownList().addHouseObjectCooldown(myself.getObjectId(), cd);
 					}
-				}
-				finally {
+				} finally {
 					player.getObserveController().removeObserver(observer);
 					warnAndRelease(player, null);
 				}

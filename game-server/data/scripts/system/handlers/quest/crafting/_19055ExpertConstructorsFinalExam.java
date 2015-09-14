@@ -12,26 +12,22 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Ritsu
  */
-public class _19055ExpertConstructorsFinalExam extends QuestHandler 
-{
+public class _19055ExpertConstructorsFinalExam extends QuestHandler {
 
 	private final static int questId = 19055;
 
-	public _19055ExpertConstructorsFinalExam() 
-	{
+	public _19055ExpertConstructorsFinalExam() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(798450).addOnQuestStart(questId);
 		qe.registerQuestNpc(798450).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env) 
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -40,10 +36,8 @@ public class _19055ExpertConstructorsFinalExam extends QuestHandler
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 798450)
-			{
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 798450) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
@@ -51,36 +45,25 @@ public class _19055ExpertConstructorsFinalExam extends QuestHandler
 			}
 		}
 
-		if (qs.getStatus() == QuestStatus.START) 
-		{
-			switch (targetId) 
-			{
-				case 798450: 
-				{
-					switch (env.getDialog())
-					{
-						case QUEST_SELECT:
-						{
+		if (qs.getStatus() == QuestStatus.START) {
+			switch (targetId) {
+				case 798450: {
+					switch (env.getDialog()) {
+						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
-						case CHECK_USER_HAS_QUEST_ITEM:
-						{
-							if (QuestService.collectItemCheck(env, true)) 
-							{
-								changeQuestStep(env, 0, 0, true);	
+						case CHECK_USER_HAS_QUEST_ITEM: {
+							if (QuestService.collectItemCheck(env, true)) {
+								changeQuestStep(env, 0, 0, true);
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 2716);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if (targetId == 798450) 
-			{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 798450) {
 				return sendQuestEndDialog(env);
 			}
 		}

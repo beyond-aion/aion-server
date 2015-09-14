@@ -10,7 +10,6 @@ import com.aionemu.gameserver.services.HousingService;
 
 /**
  * @author zhkchi
- *
  */
 public class _18802AndAHomeforEveryDaeva extends QuestHandler {
 
@@ -45,8 +44,7 @@ public class _18802AndAHomeforEveryDaeva extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830069: {
 					switch (dialog) {
@@ -60,8 +58,7 @@ public class _18802AndAHomeforEveryDaeva extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830069) {
 				if (dialog.equals(DialogAction.SELECTED_QUEST_NOREWARD)) {
 					HousingService.getInstance().registerPlayerStudio(player);

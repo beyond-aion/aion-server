@@ -39,13 +39,11 @@ public class Say extends AdminCommand {
 		String sMessage = sbMessage.toString().trim();
 
 		if (target instanceof Player) {
-			PacketSendUtility.broadcastPacket(((Player) target),
-				new SM_MESSAGE(((Player) target), sMessage, ChatType.NORMAL), true);
-		}
-		else if (target instanceof Npc) {
+			PacketSendUtility.broadcastPacket(((Player) target), new SM_MESSAGE(((Player) target), sMessage, ChatType.NORMAL), true);
+		} else if (target instanceof Npc) {
 			// admin is not right, but works
-			PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE(((Npc) target).getObjectId(), ((Npc) target).getName(),
-				sMessage, ChatType.NORMAL), true);
+			PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE(((Npc) target).getObjectId(), ((Npc) target).getName(), sMessage, ChatType.NORMAL),
+				true);
 		}
 	}
 

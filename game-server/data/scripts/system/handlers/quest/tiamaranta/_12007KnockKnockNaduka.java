@@ -45,8 +45,7 @@ public class _12007KnockKnockNaduka extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205956 && qs.getQuestVarById(0) == 0) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -54,8 +53,7 @@ public class _12007KnockKnockNaduka extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 205956 && qs.getQuestVarById(0) == 10) {
+			} else if (targetId == 205956 && qs.getQuestVarById(0) == 10) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
@@ -64,14 +62,14 @@ public class _12007KnockKnockNaduka extends QuestHandler {
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205956)
 				return sendQuestEndDialog(env);
 		}
 		return false;
 	}
 
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);

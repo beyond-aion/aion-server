@@ -18,7 +18,7 @@ public class DropConfig {
 	 */
 	@Property(key = "gameserver.unique.drop.announce.enable", defaultValue = "true")
 	public static boolean ENABLE_UNIQUE_DROP_ANNOUNCE;
-	
+
 	/**
 	 * Disable drop rate reduction based on level difference in zone
 	 */
@@ -32,16 +32,14 @@ public class DropConfig {
 	public static boolean ENABLE_GLOBAL_DROPS;
 
 	/**
-	 * Enable/Disable support for new drop category calculator
-	 * if enabled all drops from every single category will be checked 
-	 * if disabled only 1 random drop will be selected and then % will be checked on it 
-	*/
+	 * Enable/Disable support for new drop category calculator if enabled all drops from every single category will be checked if disabled only 1 random
+	 * drop will be selected and then % will be checked on it
+	 */
 	@Property(key = "gameserver.enable.support.new.drop.category.calculator", defaultValue = "false")
 	public static boolean DROP_ENABLE_SUPPORT_NEW_DROP_CATEGORY_CALCULATION;
 
 	/**
-	 * Enable/Disable support for new npc_drops.dat files
-	 * if disabled old npc_drops.dat files will be used
+	 * Enable/Disable support for new npc_drops.dat files if disabled old npc_drops.dat files will be used
 	 */
 	@Property(key = "gameserver.enable.support.new.npcdrops.files", defaultValue = "true")
 	public static boolean DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES;

@@ -20,11 +20,9 @@ public class KromedesMagasAI2 extends NpcAI2 {
 			if (player.getInventory().getItemCountByItemId(185000109) > 0) {
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 454));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			}
-			else
+			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
-		}
-		else if (dialogId == DialogAction.SELECT_ACTION_1012.id())
+		} else if (dialogId == DialogAction.SELECT_ACTION_1012.id())
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
 		return true;
 	}

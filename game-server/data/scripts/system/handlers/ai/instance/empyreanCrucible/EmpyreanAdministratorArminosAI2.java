@@ -35,8 +35,8 @@ public class EmpyreanAdministratorArminosAI2 extends NpcAI2 {
 				sendMsg(1401015, 0, false, 118000);
 				sendMsg(1500255, getObjectId(), true, 118000);
 				break;
-			//case
-				//despawn after 1min
+		// case
+		// despawn after 1min
 		}
 	}
 

@@ -20,7 +20,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  */
 public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 
-  public static int size = /*8 + Item.MAX_BASIC_STONES * 4 + 4 + 13 + 5 + 5 + (18 * 4 + 1)*/138;
+	public static int size = /* 8 + Item.MAX_BASIC_STONES * 4 + 4 + 13 + 5 + 5 + (18 * 4 + 1) */138;
 
 	ManaStoneInfoBlobEntry() {
 		super(ItemBlobType.MANA_SOCKETS);
@@ -37,10 +37,10 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		writeC(buf, item.getRandomCount() == -1 ? -1 : item.getEnchantBonus());
 
 		writeItemStones(buf);
-		
+
 		ItemStone god = item.getGodStone();
 		writeD(buf, god == null ? 0 : god.getItemId());
-		
+
 		int itemColor = item.getItemColor();
 		int dyeExpiration = item.getColorTimeLeft();
 		// expired dyed items
@@ -50,26 +50,23 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 			writeD(buf, itemColor);
 			writeD(buf, 0); // unk 1.5.1.9
 			writeD(buf, dyeExpiration); // seconds until dye expires
-		}
-		else {
+		} else {
 			writeC(buf, 0);
 			writeD(buf, 0);
 			writeD(buf, 0); // unk 1.5.1.9
 			writeD(buf, 0);
 		}
-		
+
 		IdianStone idianStone = item.getIdianStone();
 		if (idianStone != null && idianStone.getPolishNumber() > 0) {
 			writeD(buf, idianStone.getItemId()); // Idian Stone template ID
 			writeC(buf, idianStone.getPolishNumber()); // polish statset ID
-		}
-		else {
+		} else {
 			writeD(buf, 0); // Idian Stone template ID
 			writeC(buf, 0); // polish statset ID
 		}
-		
+
 		writeC(buf, item.getTempering()); // tempering level
-		
 
 		writeD(buf, 0x00);
 		writeC(buf, 0x00);
@@ -77,44 +74,41 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		writeC(buf, 0x00);
 		writeD(buf, 0x00);
 		writeD(buf, 0x00);
-		
-		
+
 		if (item.getTempering() > 0 && item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-			writeD(buf, PlumStatEnum.PLUM_HP.getId()); //1satId Plum
-			writeD(buf, PlumStatEnum.PLUM_HP.getBoostValue() * item.getTempering()); //value
-		}
-		else {
-			writeD(buf, 0x00); //1satId Plum
-			writeD(buf, 0x00); //value
+			writeD(buf, PlumStatEnum.PLUM_HP.getId()); // 1satId Plum
+			writeD(buf, PlumStatEnum.PLUM_HP.getBoostValue() * item.getTempering()); // value
+		} else {
+			writeD(buf, 0x00); // 1satId Plum
+			writeD(buf, 0x00); // value
 		}
 		if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 			if (item.getTempering() > 0) {
-				PlumStatEnum stat = item.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL") ? PlumStatEnum.PLUM_PHISICAL_ATTACK : PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL;
-				writeD(buf, stat.getId());//2satId Plum
+				PlumStatEnum stat = item.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL") ? PlumStatEnum.PLUM_PHISICAL_ATTACK
+					: PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL;
+				writeD(buf, stat.getId());// 2satId Plum
 				writeD(buf, stat.getBoostValue() * item.getTempering());
-			}
-			else {
-				writeD(buf, 0x00);//2satId Plum
+			} else {
+				writeD(buf, 0x00);// 2satId Plum
 				writeD(buf, 0x00);
 			}
-		}
-		else {
-			writeD(buf, 0x00);//2satId Plum
+		} else {
+			writeD(buf, 0x00);// 2satId Plum
 			writeD(buf, 0x00);
 		}
-		writeD(buf, 0x00);//3satId Plum
+		writeD(buf, 0x00);// 3satId Plum
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);//4satId Plum
+		writeD(buf, 0x00);// 4satId Plum
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);//5satId Plum
+		writeD(buf, 0x00);// 5satId Plum
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);//6satId Plum
+		writeD(buf, 0x00);// 6satId Plum
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);//unk 4.7.5
+		writeD(buf, 0x00);// unk 4.7.5
 		writeC(buf, item.isAmplified() ? 1 : 0);
 		writeD(buf, item.getBuffSkill());
-		writeD(buf, 0x00);//skillId
-		writeD(buf, 0x00);//skillId
+		writeD(buf, 0x00);// skillId
+		writeD(buf, 0x00);// skillId
 	}
 
 	/**
@@ -138,8 +132,7 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 				else
 					writeD(buf, stone.getItemId());
 			}
-		}
-		else {
+		} else {
 			skip(buf, Item.MAX_BASIC_STONES * 4);
 		}
 	}

@@ -15,12 +15,11 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("cadellas_hetgolem")
 public class CadellasHetgolemAI2 extends GeneralNpcAI2 {
-	
+
 	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
 
 	@Override
@@ -69,7 +68,7 @@ public class CadellasHetgolemAI2 extends GeneralNpcAI2 {
 	}
 
 	private int getHealSkill() {
-		switch(getNpcId()) {
+		switch (getNpcId()) {
 			case 282345:
 				return 19525;
 			case 282346:

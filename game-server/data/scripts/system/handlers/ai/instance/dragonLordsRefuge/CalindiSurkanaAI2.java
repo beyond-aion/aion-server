@@ -12,34 +12,33 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("calindisurkana")
 public class CalindiSurkanaAI2 extends NpcAI2 {
-	
+
 	private Future<?> skillTask;
 	Npc calindi;
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		calindi = getPosition().getWorldMapInstance().getNpc(219359);
 		reflect();
 	}
-	
+
 	private void reflect() {
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
-				 NpcShoutsService.getInstance().sendMsg(getOwner(), 1401543);
-			   SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi, 0);
+				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401543);
+				SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi, 0);
 			}
 		}, 3000, 10000);
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -47,7 +46,7 @@ public class CalindiSurkanaAI2 extends NpcAI2 {
 			skillTask.cancel(true);
 		}
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {

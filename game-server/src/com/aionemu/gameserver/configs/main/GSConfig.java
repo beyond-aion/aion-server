@@ -7,13 +7,13 @@ import com.aionemu.commons.configuration.Property;
 public class GSConfig {
 
 	/**
-	* Gameserver
-	*/
+	 * Gameserver
+	 */
 
 	/* Server Country Code */
 	@Property(key = "gameserver.country.code", defaultValue = "1")
 	public static int SERVER_COUNTRY_CODE;
-	
+
 	/* Server MOTD */
 	@Property(key = "gameserver.motd", defaultValue = "")
 	public static String SERVER_MOTD;
@@ -21,29 +21,29 @@ public class GSConfig {
 	/* Server MOTD Display revision */
 	@Property(key = "gameserver.motd.display_revision", defaultValue = "false")
 	public static boolean SERVER_MOTD_DISPLAY_REV;
-	
+
 	/* Players Max Level */
 	@Property(key = "gameserver.players.max.level", defaultValue = "65")
 	public static int PLAYER_MAX_LEVEL;
-	
-	/* Time Zone name (used for events & timed spawns) */	
+
+	/* Time Zone name (used for events & timed spawns) */
 	@Property(key = "gameserver.timezone", defaultValue = "")
 	public static String TIME_ZONE_ID = Calendar.getInstance().getTimeZone().getID();
-	
+
 	/* Enable connection with CS (ChatServer) */
 	@Property(key = "gameserver.chatserver.enable", defaultValue = "false")
 	public static boolean ENABLE_CHAT_SERVER;
-	
+
 	/**
-	* Character creation
-	*/
-	
+	 * Character creation
+	 */
+
 	@Property(key = "gameserver.character.creation.mode", defaultValue = "0")
 	public static int CHARACTER_CREATION_MODE;
-	
+
 	@Property(key = "gameserver.character.limit.count", defaultValue = "8")
 	public static int CHARACTER_LIMIT_COUNT;
-	
+
 	@Property(key = "gameserver.character.faction.limitation.mode", defaultValue = "0")
 	public static int CHARACTER_FACTION_LIMITATION_MODE;
 
@@ -61,12 +61,12 @@ public class GSConfig {
 
 	@Property(key = "gameserver.ratio.high_player_count.disabling", defaultValue = "500")
 	public static int RATIO_HIGH_PLAYER_COUNT_DISABLING;
-	
+
 	/**
-	* Misc
-	*/
+	 * Misc
+	 */
 
 	@Property(key = "gameserver.character.reentry.time", defaultValue = "20")
 	public static int CHARACTER_REENTRY_TIME;
-	
+
 }

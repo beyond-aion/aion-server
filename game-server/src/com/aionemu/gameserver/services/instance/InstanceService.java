@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +43,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
-	private static final FastList<Integer> instanceAggro = new FastList<Integer>();
-	private static final FastList<Integer> instanceCoolDownFilter = new FastList<Integer>();
+	private static final FastTable<Integer> instanceAggro = new FastTable<Integer>();
+	private static final FastTable<Integer> instanceCoolDownFilter = new FastTable<Integer>();
 	private static final int SOLO_INSTANCES_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {
@@ -55,9 +55,11 @@ public class InstanceService {
 			instanceCoolDownFilter.add(Integer.parseInt(s));
 		}
 	}
-    public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId) {
-        return getNextAvailableInstance(worldId, ownerId, (byte) 0);
-    }
+
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId) {
+		return getNextAvailableInstance(worldId, ownerId, (byte) 0);
+	}
+
 	/**
 	 * @param worldId
 	 * @param ownerId
@@ -86,7 +88,7 @@ public class InstanceService {
 		return worldMapInstance;
 	}
 
-    public synchronized static WorldMapInstance getNextAvailableInstance(int worldId) {
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId) {
 		return getNextAvailableInstance(worldId, 0, (byte) 0);
 	}
 
@@ -119,8 +121,7 @@ public class InstanceService {
 				Player player = (Player) obj;
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.LEAVE_INSTANCE_NOT_PARTY));
 				moveToExitPoint((Player) obj);
-			}
-			else {
+			} else {
 				obj.getController().onDelete();
 			}
 		}
@@ -209,17 +210,14 @@ public class InstanceService {
 		boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
 		if (player.isInGroup2()) {
 			lookupId = player.getPlayerGroup2().getTeamId();
-		}
-		else if (player.isInAlliance2()) {
+		} else if (player.isInAlliance2()) {
 			lookupId = player.getPlayerAlliance2().getTeamId();
 			if (player.isInLeague()) {
 				lookupId = player.getPlayerAlliance2().getLeague().getObjectId();
 			}
-		}
-		else if (isPersonal && player.getCommonData().getWorldOwnerId() != 0) {
+		} else if (isPersonal && player.getCommonData().getWorldOwnerId() != 0) {
 			lookupId = player.getCommonData().getWorldOwnerId();
-		}
-		else {
+		} else {
 			lookupId = player.getObjectId();
 		}
 		return lookupId;
@@ -243,7 +241,7 @@ public class InstanceService {
 		if (worldTemplate.isInstance()) {
 			boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
 			WorldMapInstance registeredInstance = isPersonal ? getPersonalInstance(worldId, lookupId) : getRegisteredInstance(worldId, lookupId);
-			
+
 			if (isPersonal) {
 				if (registeredInstance == null)
 					registeredInstance = getNextAvailableInstance(player.getWorldId(), lookupId, (byte) 0);
@@ -292,8 +290,8 @@ public class InstanceService {
 
 		int delay = 150000; // 2.5 minutes
 		int period = 60000; // 1 minute
-		worldMapInstance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(
-			new EmptyInstanceCheckerTask(worldMapInstance), delay, period));
+		worldMapInstance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay,
+			period));
 	}
 
 	private static class EmptyInstanceCheckerTask implements Runnable {
@@ -330,8 +328,7 @@ public class InstanceService {
 						map.removeWorldMapInstance(instanceId);
 						destroyInstance(worldMapInstance);
 						return;
-					}
-					else {
+					} else {
 						return;
 					}
 				}
@@ -344,8 +341,7 @@ public class InstanceService {
 				}
 				map.removeWorldMapInstance(instanceId);
 				destroyInstance(worldMapInstance);
-			}
-			else if (registeredGroup.size() == 0) {
+			} else if (registeredGroup.size() == 0) {
 				map.removeWorldMapInstance(instanceId);
 				destroyInstance(worldMapInstance);
 			}
@@ -376,15 +372,15 @@ public class InstanceService {
 			if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
 				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
 		}
-		for(Storage storage : player.getPetBag()) {
-			if(storage == null)
+		for (Storage storage : player.getPetBag()) {
+			if (storage == null)
 				continue;
 			for (Item item : storage.getItems()) {
 				if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
 					player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
 			}
 		}
-		
+
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 			AutoGroupService.getInstance().onLeaveInstance(player);
 		}

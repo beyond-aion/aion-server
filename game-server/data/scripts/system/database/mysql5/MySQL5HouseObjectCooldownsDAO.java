@@ -46,8 +46,7 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 					player.getHouseObjectCooldownList().setHouseObjectCooldowns(houseObjectCoolDowns);
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("LoadHouseObjectCooldowns", e);
 		}
 	}
@@ -77,11 +76,9 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 				stmt.setInt(2, templateId);
 				stmt.setLong(3, reuseTime);
 				stmt.execute();
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				log.error("storeHouseObjectCoolDowns", e);
-			}
-			finally {
+			} finally {
 				DatabaseFactory.close(con);
 			}
 		}
@@ -96,11 +93,9 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("deleteHouseObjectCoolDowns", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 	}

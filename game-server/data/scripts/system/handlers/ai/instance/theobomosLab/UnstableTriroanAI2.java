@@ -17,41 +17,33 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("triroan")
-public class UnstableTriroanAI2 extends AggressiveNpcAI2 
-{
+public class UnstableTriroanAI2 extends AggressiveNpcAI2 {
 
 	protected List<Integer> percents = new ArrayList<Integer>();
-	
+
 	@Override
-	protected void handleSpawned() 
-	{
+	protected void handleSpawned() {
 		addPercent();
 		super.handleSpawned();
 	}
-	
+
 	@Override
-	protected void handleAttack(Creature creature) 
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) 
-	{
+	private synchronized void checkPercentage(int hpPercentage) {
 		if (hpPercentage > 99 && percents.size() < 10)
 			addPercent();
-		
-		for (Integer percent : percents) 
-		{
-			if (hpPercentage <= percent) 
-			{
-			   percents.remove(percent);
-				switch(percent)
-				{
+
+		for (Integer percent : percents) {
+			if (hpPercentage <= percent) {
+				percents.remove(percent);
+				switch (percent) {
 					case 99:
 						SkillEngine.getInstance().getSkill(getOwner(), 16699, 1, getOwner()).useSkill();
 						break;
@@ -98,58 +90,48 @@ public class UnstableTriroanAI2 extends AggressiveNpcAI2
 		}
 	}
 
-	private void spawnFire() 
-	{
-		startWalk((Npc) spawn(280975,  601.966f,  488.853f,  196.019f,  (byte) 0), "3101100002");
+	private void spawnFire() {
+		startWalk((Npc) spawn(280975, 601.966f, 488.853f, 196.019f, (byte) 0), "3101100002");
 	}
-	
-	
-	private void spawnWater() 
-	{
-		startWalk((Npc) spawn(280976,  601.966f,  488.853f,  196.019f,  (byte) 0), "3101100003");
+
+	private void spawnWater() {
+		startWalk((Npc) spawn(280976, 601.966f, 488.853f, 196.019f, (byte) 0), "3101100003");
 	}
-	
-	private void spawnEarth() 
-	{
-		startWalk((Npc) spawn(280977,  601.966f,  488.853f,  196.019f,  (byte) 0), "3101100004");
+
+	private void spawnEarth() {
+		startWalk((Npc) spawn(280977, 601.966f, 488.853f, 196.019f, (byte) 0), "3101100004");
 	}
-	
-	private void spawnWind() 
-	{
-		startWalk((Npc) spawn(280978,  601.966f,  488.853f,  196.019f,  (byte) 0), "3101100005");
+
+	private void spawnWind() {
+		startWalk((Npc) spawn(280978, 601.966f, 488.853f, 196.019f, (byte) 0), "3101100005");
 	}
-	
-	private void startWalk(Npc npc, String walkId) 
-	{
+
+	private void startWalk(Npc npc, String walkId) {
 		npc.getSpawn().setWalkerId(walkId);
 		WalkManager.startWalking((NpcAI2) npc.getAi2());
 		npc.setState(1);
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 	}
 
-	private void addPercent() 
-	{
+	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{99, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5});
+		Collections.addAll(percents, new Integer[] { 99, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5 });
 	}
 
 	@Override
-	protected void handleBackHome() 
-	{
+	protected void handleBackHome() {
 		addPercent();
 		super.handleBackHome();
 	}
 
 	@Override
-	protected void handleDespawned() 
-	{
+	protected void handleDespawned() {
 		percents.clear();
 		super.handleDespawned();
 	}
 
 	@Override
-	protected void handleDied() 
-	{
+	protected void handleDied() {
 		percents.clear();
 		super.handleDied();
 	}

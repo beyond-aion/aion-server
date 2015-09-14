@@ -13,13 +13,13 @@ public class SM_SELL_ITEM extends AionServerPacket {
 	private int targetObjectId;
 	private TradeListTemplate plist;
 	private int sellPercentage;
-	
+
 	public SM_SELL_ITEM(int targetObjectId, TradeListTemplate plist, int sellPercentage) {
-		
+
 		this.targetObjectId = targetObjectId;
 		this.plist = plist;
 		this.sellPercentage = sellPercentage;
-	
+
 	}
 
 	/**
@@ -30,14 +30,13 @@ public class SM_SELL_ITEM extends AionServerPacket {
 		if ((plist != null) && (plist.getNpcId() != 0) && (plist.getCount() != 0)) {
 			writeD(targetObjectId);
 			writeC(plist.getTradeNpcType().index());
-			writeD(sellPercentage);//Buy Price * (sellPercentage / 100) = Display price.
+			writeD(sellPercentage);// Buy Price * (sellPercentage / 100) = Display price.
 			writeH(257); // tab type
 			writeH(plist.getCount());
 			for (TradeTab tradeTabl : plist.getTradeTablist()) {
 				writeD(tradeTabl.getId());
 			}
-		}
-		else  {
+		} else {
 			writeD(targetObjectId);
 			writeC(1);
 			writeD(sellPercentage); // Buy Price * (sellPercentage / 100) = Display price.

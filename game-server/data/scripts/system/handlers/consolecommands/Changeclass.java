@@ -40,16 +40,16 @@ public class Changeclass extends ConsoleCommand {
 		}
 
 		final Player player = (Player) target;
-		
+
 		String newClass = params[0];
 
-		if(newClass.equals("fighter"))
+		if (newClass.equals("fighter"))
 			newClass = "GLADIATOR";
-		if(newClass.equals("knight"))
+		if (newClass.equals("knight"))
 			newClass = "TEMPLAR";
-		if(newClass.equals("wizard"))
+		if (newClass.equals("wizard"))
 			newClass = "SORCERER";
-		if(newClass.equals("elementalist"))
+		if (newClass.equals("elementalist"))
 			newClass = "SPIRIT_MASTER";
 
 		setClass(player, newClass);

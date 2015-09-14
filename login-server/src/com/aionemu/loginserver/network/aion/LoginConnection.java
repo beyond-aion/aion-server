@@ -107,7 +107,7 @@ public class LoginConnection extends AConnection {
 	 * @throws IOException
 	 */
 	public LoginConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192*2, 8192*2);
+		super(sc, d, 8192 * 2, 8192 * 2);
 
 	}
 
@@ -230,9 +230,8 @@ public class LoginConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont.
-	 * Connection will be closed [by Dispatcher Thread], and onDisconnect() method will be called to clear all other
-	 * things.
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
 	 *          Packet that will be send before closing.

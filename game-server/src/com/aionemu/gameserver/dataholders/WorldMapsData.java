@@ -14,8 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 /**
- * Object of this class is containing <tt>WorldMapTemplate</tt> objects for all world maps. World maps are defined in
- * data/static_data/world_maps.xml file.
+ * Object of this class is containing <tt>WorldMapTemplate</tt> objects for all world maps. World maps are defined in data/static_data/world_maps.xml
+ * file.
  * 
  * @author Luno
  */

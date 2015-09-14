@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author cheatkiller
- *
  */
 public class _12820MaybeSeraphimGetASpecialRate extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _12820MaybeSeraphimGetASpecialRate extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801234).addOnQuestStart(questId);
 		qe.registerQuestNpc(801234).addOnTalkEvent(questId);
@@ -34,28 +33,24 @@ public class _12820MaybeSeraphimGetASpecialRate extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801234) { 
+			if (targetId == 801234) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 801248) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 801248) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					giveQuestItem(env, 182213460, 1);
 					qs.setQuestVar(1);
 					return defaultCloseDialog(env, 1, 1, true, false);
 				}
 			}
-		}	
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801234) {
 				switch (dialog) {
 					case USE_OBJECT: {

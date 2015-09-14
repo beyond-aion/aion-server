@@ -69,8 +69,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203646) {
 				switch (dialog) {
@@ -96,13 +95,13 @@ public class _2252ChasingtheLegend extends QuestHandler {
 							Npc npc = (Npc) player.getTarget();
 							if (npc == null || npc.getNpcId() != targetId)
 								return false;
-							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 210634, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // Minusha's Spirit
-              ((Npc)player.getTarget()).getController().die();
+							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 210634, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // Minusha's
+																																																																										// Spirit
+							((Npc) player.getTarget()).getController().die();
 						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
+		} else if (qs.getStatus() == QuestStatus.REWARD)
 			return sendQuestEndDialog(env);
 		return false;
 	}

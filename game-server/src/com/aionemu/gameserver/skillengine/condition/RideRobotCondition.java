@@ -7,10 +7,8 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RideRobotCondition")

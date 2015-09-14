@@ -56,8 +56,7 @@ public class Weather extends AdminCommand {
 		if (params.length == 2) {
 			try {
 				weatherType = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "weather type parameter need to be an integer [0-12].");
 				return;
 			}
@@ -85,17 +84,15 @@ public class Weather extends AdminCommand {
 					return;
 				}
 				/*
-				 * if (table.getWeatherCount() < weatherType) { PacketSendUtility.sendMessage(admin,
-				 * "Region has no such weather value; max is=" + table.getWeatherCount()); return; }
+				 * if (table.getWeatherCount() < weatherType) { PacketSendUtility.sendMessage(admin, "Region has no such weather value; max is=" +
+				 * table.getWeatherCount()); return; }
 				 */
 				WeatherService.getInstance().changeRegionWeather(region.getId(), weatherType);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(admin, "Weather type must be between 0 and 12");
 				return;
 			}
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "Region " + regionName + " not found");
 			return;
 		}

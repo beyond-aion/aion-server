@@ -23,8 +23,7 @@ public class FlyController {
 
 	private static final long FLY_REUSE_TIME = 10000;
 	private Player player;
-	
-	
+
 	public FlyController(Player player) {
 		this.player = player;
 	}
@@ -37,9 +36,8 @@ public class FlyController {
 			if (player.isInFlyState(FlyState.FLYING)) {
 				player.unsetFlyState(FlyState.GLIDING);
 				player.unsetState(CreatureState.GLIDING);
-				//PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE, 0, 0), true);
-			}
-			else {
+				// PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE, 0, 0), true);
+			} else {
 				player.unsetFlyState(FlyState.GLIDING);
 				player.unsetState(CreatureState.GLIDING);
 				player.getLifeStats().triggerFpRestore();
@@ -50,8 +48,8 @@ public class FlyController {
 	}
 
 	/**
-	 * Ends flying 1) by CM_EMOTION (pageDown or fly button press) 2) from server side during teleportation (abyss gates
-	 * should not break flying) 3) when FP is decreased to 0
+	 * Ends flying 1) by CM_EMOTION (pageDown or fly button press) 2) from server side during teleportation (abyss gates should not break flying) 3)
+	 * when FP is decreased to 0
 	 */
 	public void endFly(boolean forceEndFly) {
 		// unset flying and gliding
@@ -63,7 +61,7 @@ public class FlyController {
 			player.unsetState(CreatureState.FLOATING_CORPSE);
 			player.getGameStats().updateStatsAndSpeedVisually();
 
-			if(forceEndFly)
+			if (forceEndFly)
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.LAND, 0, 0), true);
 			player.getLifeStats().triggerFpRestore();
 		}
@@ -73,8 +71,8 @@ public class FlyController {
 	 * This method is called to start flying (called by CM_EMOTION when pageUp or pressed fly button)
 	 */
 	public void startFly() {
-		if (player.getFlyReuseTime() > System.currentTimeMillis()){
-			AuditLogger.info(player, "No Flight Cooldown Hack. Reuse time: "+((player.getFlyReuseTime()-System.currentTimeMillis())/1000));
+		if (player.getFlyReuseTime() > System.currentTimeMillis()) {
+			AuditLogger.info(player, "No Flight Cooldown Hack. Reuse time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000));
 			return;
 		}
 		if (!RestrictionsManager.canFly(player))
@@ -87,31 +85,31 @@ public class FlyController {
 		}
 		player.getLifeStats().triggerFpReduce();
 		player.getGameStats().updateStatsAndSpeedVisually();
-		
+
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.FLY, 0, 0), true);
 	}
 
 	/**
-	 * Switching to glide mode (called by CM_MOVE with VALIDATE_GLIDE movement type) 1) from standing state 2) from flying
-	 * state If from stand to glide - start fp reduce + emotions/stats if from fly to glide - only emotions/stats
+	 * Switching to glide mode (called by CM_MOVE with VALIDATE_GLIDE movement type) 1) from standing state 2) from flying state If from stand to glide
+	 * - start fp reduce + emotions/stats if from fly to glide - only emotions/stats
 	 */
 	public boolean switchToGliding() {
 		if (!player.isInGlidingState() && player.canPerformMove()) {
-			//check restrictions
+			// check restrictions
 			if (!RestrictionsManager.canGlide(player)) {
 				return false;
 			}
 			if (player.getFlyState() == 0) {
-				//fly reuse time only if gliding from walking
-				if (player.getFlyReuseTime() > System.currentTimeMillis()){
-						return false;
+				// fly reuse time only if gliding from walking
+				if (player.getFlyReuseTime() > System.currentTimeMillis()) {
+					return false;
 				}
 				player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
 				player.getLifeStats().triggerFpReduce();
 			}
 			player.setFlyState(FlyState.GLIDING);
 			player.setState(CreatureState.GLIDING);
-			
+
 			player.getGameStats().updateStatsAndSpeedVisually();
 		}
 		return true;

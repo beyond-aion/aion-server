@@ -42,7 +42,7 @@ public class RandomMoveLocEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		effect.addSucessEffect(this);
 		DashStatus ds = reserved5 == 1 ? DashStatus.RANDOMMOVELOC_NEW : DashStatus.RANDOMMOVELOC;
-		SkillMoveType mt = direction == 1 ? SkillMoveType.MOVEBEHIND: SkillMoveType.DODGE;
+		SkillMoveType mt = direction == 1 ? SkillMoveType.MOVEBEHIND : SkillMoveType.DODGE;
 		effect.setSkillMoveType(mt);
 		effect.setDashStatus(ds);
 		final Player effector = (Player) effect.getEffector();
@@ -51,12 +51,13 @@ public class RandomMoveLocEffect extends EffectTemplate {
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
 			float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 			float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-			float targetZ = GeoService.getInstance().getZ(effector.getWorldId(), effector.getX() + x1, effector.getY() + y1, effector.getZ() + 1.5f, 0.2f, effector.getInstanceId());
+			float targetZ = GeoService.getInstance().getZ(effector.getWorldId(), effector.getX() + x1, effector.getY() + y1, effector.getZ() + 1.5f, 0.2f,
+				effector.getInstanceId());
 			byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1, targetZ, false, intentions);
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1, targetZ, false,
+				intentions);
 			effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
-		}
-		else
+		} else
 			effect.getSkill().setTargetPosition(effector.getX(), effector.getY(), effector.getZ(), effector.getHeading());
 	}
 }

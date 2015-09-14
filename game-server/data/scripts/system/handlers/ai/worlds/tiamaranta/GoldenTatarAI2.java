@@ -57,14 +57,14 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(),false, 0, 0);
+		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), false, 0, 0);
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {
 		curentPercent = hpPercentage;
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				switch (percent) {
 					case 90:
 					case 70:
@@ -127,8 +127,7 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
-					}
-					else {
+					} else {
 						getMoveController().abortMove();
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
@@ -227,14 +226,14 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 	private void deleteNpcs(final int npcId) {
 		if (getKnownList() != null) {
 			getKnownList().doOnAllNpcs(new Visitor<Npc>() {
-				
+
 				@Override
 				public void visit(Npc npc) {
 					if (npc.getNpcId() == npcId) {
 						NpcActions.delete(npc);
 					}
 				}
-				
+
 			});
 		}
 	}
@@ -268,7 +267,7 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{90, 84, 79, 75, 72, 70, 67, 63, 59, 53, 47, 44, 43, 39, 35, 30, 26, 23, 21, 16, 11, 6});
+		Collections.addAll(percents, new Integer[] { 90, 84, 79, 75, 72, 70, 67, 63, 59, 53, 47, 44, 43, 39, 35, 30, 26, 23, 21, 16, 11, 6 });
 	}
 
 	@Override

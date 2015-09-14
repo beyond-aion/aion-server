@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javolution.util.FastMap;
-import javolution.util.FastMap.Entry;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -29,7 +29,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Just some part of map.
@@ -55,7 +54,7 @@ public class MapRegion {
 	/**
 	 * Objects on this map region.
 	 */
-	private final ConcurrentHashMap<Integer, VisibleObject> objects = new ConcurrentHashMap<Integer, VisibleObject>();
+	private final Map<Integer, VisibleObject> objects = new FastMap<Integer, VisibleObject>().shared();
 
 	private final AtomicInteger playerCount = new AtomicInteger(0);
 
@@ -66,7 +65,7 @@ public class MapRegion {
 	/**
 	 * Zones in this region
 	 */
-	private FastMap<Integer, TreeSet<ZoneInstance>> zoneMap;
+	private Map<Integer, TreeSet<ZoneInstance>> zoneMap;
 
 	/**
 	 * Constructor.
@@ -121,7 +120,7 @@ public class MapRegion {
 	 * 
 	 * @return objects iterator
 	 */
-	public ConcurrentHashMap<Integer, VisibleObject> getObjects() {
+	public Map<Integer, VisibleObject> getObjects() {
 		return objects;
 	}
 
@@ -149,7 +148,7 @@ public class MapRegion {
 	 * @param neighbour
 	 */
 	void addNeighbourRegion(MapRegion neighbour) {
-		neighbours = (MapRegion[]) ArrayUtils.add(neighbours, neighbour);
+		neighbours = ArrayUtils.add(neighbours, neighbour);
 	}
 
 	/**
@@ -161,8 +160,7 @@ public class MapRegion {
 		if (objects.put(object.getObjectId(), object) == null) {
 			if (object instanceof Player) {
 				checkActiveness(playerCount.incrementAndGet() > 0);
-			}
-			else if (DeveloperConfig.SPAWN_CHECK) {
+			} else if (DeveloperConfig.SPAWN_CHECK) {
 				Iterator<TreeSet<ZoneInstance>> zoneIter = zoneMap.values().iterator();
 				while (zoneIter.hasNext()) {
 					TreeSet<ZoneInstance> zones = zoneIter.next();
@@ -193,8 +191,7 @@ public class MapRegion {
 	final void checkActiveness(boolean active) {
 		if (active && regionActive.compareAndSet(false, true)) {
 			startActivation();
-		}
-		else if (!active) {
+		} else if (!active) {
 			startDeactivation();
 		}
 	}
@@ -257,8 +254,8 @@ public class MapRegion {
 	 */
 	private void deactivateObjects() {
 		for (VisibleObject visObject : objects.values()) {
-			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc)
-				&& !((Creature) visObject).isFlag() && !((Creature) visObject).isRaidMonster()) {
+			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
+				&& !((Creature) visObject).isRaidMonster()) {
 				Creature creature = (Creature) visObject;
 				creature.getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
@@ -279,7 +276,7 @@ public class MapRegion {
 	}
 
 	public void revalidateZones(Creature creature) {
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			boolean foundZone = false;
 			int category = e.getKey();
 			TreeSet<ZoneInstance> zones = e.getValue();
@@ -303,7 +300,7 @@ public class MapRegion {
 
 	public List<ZoneInstance> getZones(Creature creature) {
 		List<ZoneInstance> z = new ArrayList<ZoneInstance>();
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
 				if (zone.isInsideCreature(creature)) {
@@ -315,7 +312,7 @@ public class MapRegion {
 	}
 
 	public boolean onDie(Creature attacker, Creature target) {
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
 				if (zone.isInsideCreature(target)) {
@@ -328,7 +325,7 @@ public class MapRegion {
 	}
 
 	public boolean isInsideZone(ZoneName zoneName, float x, float y, float z) {
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
 				if (zone.getZoneTemplate().getName() != zoneName)
@@ -340,7 +337,7 @@ public class MapRegion {
 	}
 
 	public boolean isInsideZone(ZoneName zoneName, Creature creature) {
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
 				if (zone.getZoneTemplate().getName() != zoneName)
@@ -352,15 +349,14 @@ public class MapRegion {
 	}
 
 	/**
-	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item
-	 * use.
+	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item use.
 	 * 
 	 * @param zoneName
 	 * @param creature
 	 * @return
 	 */
 	public boolean isInsideItemUseZone(ZoneName zoneName, Creature creature) {
-		for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
+		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
 				if (!zone.getZoneTemplate().getXmlName().startsWith(zoneName.toString()))

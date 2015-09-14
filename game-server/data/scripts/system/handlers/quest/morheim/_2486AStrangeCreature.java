@@ -7,20 +7,18 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2486AStrangeCreature extends QuestHandler {
 
 	private final static int questId = 2486;
-	
-	
+
 	public _2486AStrangeCreature() {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204053).addOnQuestStart(questId);
 		qe.registerQuestNpc(204208).addOnTalkEvent(questId);
@@ -37,43 +35,35 @@ public class _2486AStrangeCreature extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204053) { 
+			if (targetId == 204053) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204208) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 204208) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 1352);
+					return sendQuestDialog(env, 1352);
+				} else if (dialog == DialogAction.SETPRO1) {
+					return defaultCloseDialog(env, 0, 1);
 				}
-			  else if (dialog == DialogAction.SETPRO1) {
-			  	return defaultCloseDialog(env, 0, 1);
-			}
-		}
-			else if (targetId == 204092) { 
+			} else if (targetId == 204092) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 1693);
+					return sendQuestDialog(env, 1693);
+				} else if (dialog == DialogAction.SETPRO2) {
+					return defaultCloseDialog(env, 1, 2);
 				}
-			  else if (dialog == DialogAction.SETPRO2) {
-			  	return defaultCloseDialog(env, 1, 2);
-			}
-		}
-			else if (targetId == 798063) { 
+			} else if (targetId == 798063) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 2034);
+					return sendQuestDialog(env, 2034);
+				} else if (dialog == DialogAction.SETPRO3) {
+					qs.setQuestVar(3);
+					return defaultCloseDialog(env, 3, 3, true, false);
 				}
-			  else if (dialog == DialogAction.SETPRO3) {
-			  	qs.setQuestVar(3);
-			  	return defaultCloseDialog(env, 3, 3, true, false);
 			}
-		}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204342) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);

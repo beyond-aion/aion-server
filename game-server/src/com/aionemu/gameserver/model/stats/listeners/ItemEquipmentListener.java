@@ -1,15 +1,15 @@
 package com.aionemu.gameserver.model.stats.listeners;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
 import com.aionemu.gameserver.model.enchants.TemperingStat;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.IdianStone;
@@ -30,8 +30,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import java.util.HashMap;
 
 /**
  * @author xavier modified by Wakizashi
@@ -68,7 +66,7 @@ public class ItemEquipmentListener {
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
 			long newCooldown = 0;
-			if(oldCooldown - currTime > 15000) //cd active
+			if (oldCooldown - currTime > 15000) // cd active
 				newCooldown = oldCooldown;
 			else
 				newCooldown = currTime + 15000;
@@ -91,14 +89,13 @@ public class ItemEquipmentListener {
 			ItemGroup itemGroup = itemTemplate.getItemGroup();
 			HashMap<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemGroup);
 			if (enchant != null) {
-				item.setEnchantEffect(new EnchantEffect(item, owner,enchant.get(enchantLevel)));
+				item.setEnchantEffect(new EnchantEffect(item, owner, enchant.get(enchantLevel)));
 			}
 		}
 		if (temperingLevel > 0) {
 			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 				item.setTemperingEffect(new TemperingEffect(owner, item));
-			}
-			else {
+			} else {
 				HashMap<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(itemTemplate.getItemGroup());
 				if (tempering != null) {
 					item.setTemperingEffect(new TemperingEffect(owner, tempering.get(temperingLevel)));
@@ -184,15 +181,15 @@ public class ItemEquipmentListener {
 				if (weaponStats != null) {
 					int boostMagicalSkill = Math.round(0.1f * weaponStats.getBoostMagicalSkill());
 					int attack = Math.round(0.1f * weaponStats.getMeanDamage());
-					if (weaponType == ItemGroup.ORB || weaponType == ItemGroup.STAFF || weaponType == ItemGroup.SPELLBOOK || weaponType == ItemGroup.GUN || weaponType == ItemGroup.CANNON || weaponType == ItemGroup.HARP
-							|| weaponType == ItemGroup.KEYBLADE) {
+					if (weaponType == ItemGroup.ORB || weaponType == ItemGroup.STAFF || weaponType == ItemGroup.SPELLBOOK || weaponType == ItemGroup.GUN
+						|| weaponType == ItemGroup.CANNON || weaponType == ItemGroup.HARP || weaponType == ItemGroup.KEYBLADE) {
 						allModifiers.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));
 					}
-					allModifiers.add(new StatAddFunction(item.getItemTemplate().getAttackType().isMagical() ? StatEnum.MAGICAL_ATTACK : StatEnum.PHYSICAL_ATTACK, attack, false));
+					allModifiers.add(new StatAddFunction(item.getItemTemplate().getAttackType().isMagical() ? StatEnum.MAGICAL_ATTACK
+						: StatEnum.PHYSICAL_ATTACK, attack, false));
 				}
 			}
-		}
-		else {
+		} else {
 			allModifiers = modifiers;
 		}
 		item.setCurrentModifiers(allModifiers);
@@ -213,7 +210,7 @@ public class ItemEquipmentListener {
 		List<StatFunction> allModifiers = new ArrayList<StatFunction>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
-				// why they are removed look at DuplicateStatFunction
+			// why they are removed look at DuplicateStatFunction
 				case ATTACK_SPEED:
 				case PVP_ATTACK_RATIO:
 				case BOOST_CASTING_TIME:
@@ -241,9 +238,9 @@ public class ItemEquipmentListener {
 
 		// 2.- Check Item Set Parts and add effects one by one if not done already
 		for (PartBonus itempartbonus : itemSetTemplate.getPartbonus()) {
-				if (itempartbonus.getCount() <= itemSetPartsEquipped) {
-					player.getGameStats().addEffect(itemSetTemplate, itempartbonus.getModifiers());
-				}
+			if (itempartbonus.getCount() <= itemSetPartsEquipped) {
+				player.getGameStats().addEffect(itemSetTemplate, itempartbonus.getModifiers());
+			}
 		}
 
 		// 3.- Finally check if all items are applied and set the full bonus if not already applied
@@ -278,8 +275,8 @@ public class ItemEquipmentListener {
 	 * @param cgs
 	 */
 	public static void addStoneStats(Item item, ManaStone stone, CreatureGameStats<?> cgs) {
-	   if (stone == null)
-		  return;
+		if (stone == null)
+			return;
 		List<StatFunction> modifiers = stone.getModifiers();
 		if (modifiers == null) {
 			return;

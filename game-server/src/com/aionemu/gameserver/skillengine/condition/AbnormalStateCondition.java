@@ -6,16 +6,16 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-
 /**
  * @author kecimis
- *
  */
 public class AbnormalStateCondition extends Condition {
 
 	@XmlAttribute(required = true)
 	protected AbnormalState value;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
 	 */
 	@Override
@@ -24,7 +24,7 @@ public class AbnormalStateCondition extends Condition {
 			return (env.getFirstTarget().getEffectController().isAbnormalSet(value));
 		return false;
 	}
-	
+
 	@Override
 	public boolean validate(Effect effect) {
 		if (effect.getEffected() != null)

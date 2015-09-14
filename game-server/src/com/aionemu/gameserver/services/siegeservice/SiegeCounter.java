@@ -48,8 +48,7 @@ public class SiegeCounter {
 	}
 
 	/**
-	 * Returns list of siege race counters sorted by total damage done to siege
-	 * boss. Sorted in descending order.
+	 * Returns list of siege race counters sorted by total damage done to siege boss. Sorted in descending order.
 	 *
 	 * @return all siege race damage counters sorted by descending order
 	 */

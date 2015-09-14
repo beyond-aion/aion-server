@@ -14,6 +14,7 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
 	public K key;
 	public V value;
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof CachePair) {
 			CachePair p = (CachePair) obj;
@@ -22,6 +23,7 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
 		return false;
 	}
 
+	@Override
 	public int compareTo(CachePair p) {
 		int v = key.compareTo(p.key);
 		if (v == 0 && p.value instanceof Comparable)
@@ -40,5 +42,5 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
 	public String toString() {
 		return key + ": " + value;
 	}
-	
+
 }

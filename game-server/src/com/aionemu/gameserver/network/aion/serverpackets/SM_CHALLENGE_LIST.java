@@ -26,7 +26,7 @@ public class SM_CHALLENGE_LIST extends AionServerPacket {
 		this.ownerType = ownerType;
 		this.tasks = tasks;
 	}
-	
+
 	public SM_CHALLENGE_LIST(int action, int ownerId, ChallengeType ownerType, ChallengeTask task) {
 		this.action = action;
 		this.ownerId = ownerId;
@@ -41,28 +41,28 @@ public class SM_CHALLENGE_LIST extends AionServerPacket {
 		writeD(ownerId); // legionId or townId
 		writeC(ownerType.getId()); // 1 for legion, 2 for town
 		writeD(player.getObjectId());
-		switch(action) {
-			case 2:  //send challenge tasks list
+		switch (action) {
+			case 2: // send challenge tasks list
 				writeD((int) (System.currentTimeMillis() / 1000));
 				writeH(tasks.size());
-				for(ChallengeTask task : tasks) {
-					writeD(32); //unk
+				for (ChallengeTask task : tasks) {
+					writeD(32); // unk
 					writeD(task.getTaskId());
-					writeC(1); //unk
-					writeC(21); //unk
-					writeC(0); //unk
+					writeC(1); // unk
+					writeC(21); // unk
+					writeC(0); // unk
 					writeD((int) (task.getCompleteTime().getTime() / 1000));
 				}
 				break;
-			case 7:  //send individual challenge task info
-				writeD(32); //unk
+			case 7: // send individual challenge task info
+				writeD(32); // unk
 				writeD(task.getTaskId());
 				writeH(task.getQuestsCount());
-				for(ChallengeQuest quest : task.getQuests().values()) {
+				for (ChallengeQuest quest : task.getQuests().values()) {
 					writeD(quest.getQuestId());
 					writeH(quest.getMaxRepeats());
 					writeD(quest.getScorePerQuest());
-					writeH(quest.getCompleteCount()); //unk
+					writeH(quest.getCompleteCount()); // unk
 				}
 				break;
 		}

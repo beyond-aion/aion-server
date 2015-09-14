@@ -17,15 +17,15 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("world_blesser")
 public class WorldBlesserAI2 extends GeneralNpcAI2 {
 
-  	@Override
+	@Override
 	protected void handleDialogStart(Player player) {
-        switch (getNpcId()) {
-            case 831030: //Netalion
-            case 831024: //Renniah
-            case 831025: //Erdat
-            case 831026: //Erdat
-            case 831028: //Erdat
-            case 831027: { //Karzanke
+		switch (getNpcId()) {
+			case 831030: // Netalion
+			case 831024: // Renniah
+			case 831025: // Erdat
+			case 831026: // Erdat
+			case 831028: // Erdat
+			case 831027: { // Karzanke
 				super.handleDialogStart(player);
 				break;
 			}
@@ -44,12 +44,11 @@ public class WorldBlesserAI2 extends GeneralNpcAI2 {
 			return true;
 		}
 		if (dialogId == DialogAction.SETPRO1.id()) {
-			//int chance = Rnd.get(1, 2);
-            //951: Blessing of Health I, 955: Blessing of Rock I : 3.9
-            //20950 : Blessing of Growth : 4.0
+			// int chance = Rnd.get(1, 2);
+			// 951: Blessing of Health I, 955: Blessing of Rock I : 3.9
+			// 20950 : Blessing of Growth : 4.0
 			SkillEngine.getInstance().getSkill(getOwner(), 20950, 1, player).useWithoutPropSkill();
-		}
-		else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
+		} else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
 		}
 		return true;

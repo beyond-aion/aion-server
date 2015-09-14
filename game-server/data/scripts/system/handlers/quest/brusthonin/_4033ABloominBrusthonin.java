@@ -54,11 +54,9 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1438);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
@@ -69,8 +67,7 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

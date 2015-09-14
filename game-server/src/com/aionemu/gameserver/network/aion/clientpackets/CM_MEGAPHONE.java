@@ -25,7 +25,7 @@ import com.aionemu.gameserver.world.World;
  * @author Artur, ginho1
  */
 public class CM_MEGAPHONE extends AionClientPacket {
-	
+
 	private String message;
 	private int uniqueItemId;
 
@@ -65,8 +65,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
 		if (requiredLevel > player.getLevel()) {
-			PacketSendUtility.sendPacket(player,
-				STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
 			return;
 		}
 
@@ -86,7 +85,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		ArrayList<AbstractItemAction> actions = new ArrayList<AbstractItemAction>();
 
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
-			 if (itemAction.canAct(player, item, null))
+			if (itemAction.canAct(player, item, null))
 				actions.add(itemAction);
 		}
 
@@ -104,8 +103,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 
 		int useDelay = player.getItemCooldown(item.getItemTemplate());
 		if (useDelay > 0) {
-			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay,
-				useDelay / 1000);
+			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 		}
 
 		// notify item use observer
@@ -121,4 +119,3 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		}
 	}
 }
-	

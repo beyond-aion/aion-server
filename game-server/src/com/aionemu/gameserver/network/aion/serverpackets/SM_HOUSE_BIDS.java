@@ -38,8 +38,7 @@ public class SM_HOUSE_BIDS extends AionServerPacket {
 		if (playerBid == null) {
 			writeD(0);
 			writeQ(0);
-		}
-		else {
+		} else {
 			writeD(playerBid.getEntryIndex());
 			writeQ(playerBid.getBidPrice());
 		}
@@ -58,8 +57,7 @@ public class SM_HOUSE_BIDS extends AionServerPacket {
 			sellData = HousingBidService.getInstance().getHouseBid(sellHouse.getObjectId());
 			writeD(sellData.getEntryIndex());
 			writeQ(sellData.getBidPrice());
-		}
-		else {
+		} else {
 			writeD(0);
 			writeQ(0);
 		}

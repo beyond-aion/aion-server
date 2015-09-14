@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41546JumpingToConclusions extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _41546JumpingToConclusions extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205969).addOnQuestStart(questId);
 		qe.registerQuestNpc(205969).addOnTalkEvent(questId);
@@ -34,16 +33,14 @@ public class _41546JumpingToConclusions extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205969) { 
+			if (targetId == 205969) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205915) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -54,12 +51,11 @@ public class _41546JumpingToConclusions extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 205969) {
+			} else if (targetId == 205969) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 1)
-						return sendQuestDialog(env, 2375);
+							return sendQuestDialog(env, 2375);
 					}
 					case SELECT_QUEST_REWARD: {
 						removeQuestItem(env, 182212544, 1);
@@ -67,8 +63,7 @@ public class _41546JumpingToConclusions extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205969) {
 				switch (dialog) {
 					case USE_OBJECT: {

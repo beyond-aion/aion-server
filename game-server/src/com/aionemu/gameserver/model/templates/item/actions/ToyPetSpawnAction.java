@@ -59,12 +59,12 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			return false;
 		}
 		if (KiskService.getInstance().haveKisk(player.getObjectId()) && CustomConfig.ENABLE_KISK_RESTRICTION) {
-			PacketSendUtility.sendPacket(player, new  SM_SYSTEM_MESSAGE(1390160));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390160));
 			return false;
 		}
 		if (!isPutKiskZone(player)) {
- 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION);
- 			return false;
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION);
+			return false;
 		}
 		return true;
 	}
@@ -73,25 +73,27 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	public void act(final Player player, final Item parentItem, Item targetItem) {
 		// ShowAction
 		player.getController().cancelUseItem();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(),
-				parentItem.getObjectId(), parentItem.getItemId(), 10000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
+			10000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
+					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 			}
 		};
-		
+
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
+					0, 1, 1), true);
 				player.getObserveController().removeObserver(observer);
 				// RemoveKisk
 				if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
@@ -108,6 +110,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 				final Integer objOwnerId = player.getObjectId();
 				// Schedule Despawn Action
 				Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						kisk.getController().onDelete();
@@ -117,8 +120,8 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 				kisk.getController().addTask(TaskId.DESPAWN, task);
 
 				// ShowFinalAction
-				//TODO Bad idea...
-				//player.getController().cancelUseItem();
+				// TODO Bad idea...
+				// player.getController().cancelUseItem();
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				KiskService.getInstance().regKisk(kisk, objOwnerId);
 

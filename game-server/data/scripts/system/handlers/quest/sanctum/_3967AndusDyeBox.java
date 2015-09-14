@@ -69,20 +69,17 @@ public class _3967AndusDyeBox extends QuestHandler {
 					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 798391 && qs.getStatus() == QuestStatus.REWARD)// Andu
+		} else if (targetId == 798391 && qs.getStatus() == QuestStatus.REWARD)// Andu
 		{
 			if (env.getDialog() == DialogAction.USE_OBJECT)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 				removeQuestItem(env, 182206122, 1);
 				return sendQuestEndDialog(env);
-			}
-			else
+			} else
 				return sendQuestEndDialog(env);
 		}
 		return false;

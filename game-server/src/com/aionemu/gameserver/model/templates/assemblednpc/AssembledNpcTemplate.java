@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AssembledNpcTemplate")
 public class AssembledNpcTemplate {
+
 	@XmlAttribute(name = "nr")
 	private int nr;
 	@XmlAttribute(name = "routeId")

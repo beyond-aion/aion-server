@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,7 +23,7 @@ public class Exchange {
 	private long kinahCount;
 
 	private Map<Integer, ExchangeItem> items = new HashMap<Integer, ExchangeItem>();
-	private List<Item> itemsToUpdate = FastList.newInstance();
+	private List<Item> itemsToUpdate = new FastTable<>();
 
 	public Exchange(Player activeplayer, Player targetPlayer) {
 		super();

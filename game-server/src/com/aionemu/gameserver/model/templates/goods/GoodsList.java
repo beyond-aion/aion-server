@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 
@@ -49,8 +49,8 @@ public class GoodsList {
 	/**
 	 * return the limitedItems.
 	 */
-	public FastList<LimitedItem> getLimitedItems() {
-		FastList<LimitedItem> limitedItems = new FastList<LimitedItem>();
+	public FastTable<LimitedItem> getLimitedItems() {
+		FastTable<LimitedItem> limitedItems = new FastTable<LimitedItem>();
 		if (items != null) {
 			for (Item item : items) {
 				if (item.getBuyLimit() != null && item.getSellLimit() != null) {

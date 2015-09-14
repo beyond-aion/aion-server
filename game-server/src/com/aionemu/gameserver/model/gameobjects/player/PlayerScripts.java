@@ -77,7 +77,7 @@ public class PlayerScripts {
 	}
 
 	public static int getMaxCount() {
-		return (int) SCRIPT_LIMIT;
+		return SCRIPT_LIMIT;
 	}
 
 	private String decompressAndValidate(byte[] compressedXML, int uncompressedSize) {

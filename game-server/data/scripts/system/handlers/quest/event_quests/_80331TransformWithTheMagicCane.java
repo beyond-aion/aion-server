@@ -31,7 +31,7 @@ public class _80331TransformWithTheMagicCane extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 831531) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -42,18 +42,16 @@ public class _80331TransformWithTheMagicCane extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831531)
 				switch (dialog) {
 					case QUEST_SELECT:
 					case SELECT_QUEST_REWARD: {
 						changeQuestStep(env, 0, 0, true); // reward
-						return sendQuestDialog(env, 5);	
+						return sendQuestDialog(env, 5);
 					}
 				}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831531)
 				return sendQuestEndDialog(env);
 		}

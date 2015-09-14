@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 public class IGSubCategory {
 
 	@XmlAttribute(required = true)
-    protected int id;
-    @XmlAttribute(required = true)
-    protected String name;
+	protected int id;
+	@XmlAttribute(required = true)
+	protected String name;
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
 }

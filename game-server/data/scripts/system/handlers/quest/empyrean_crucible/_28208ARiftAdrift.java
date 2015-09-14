@@ -38,18 +38,15 @@ public class _28208ARiftAdrift extends QuestHandler {
 			if (targetId == 205320) { // Inggness
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205321) { // Anja
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -68,14 +65,12 @@ public class _28208ARiftAdrift extends QuestHandler {
 				int var1 = qs.getQuestVarById(1);
 				if (var1 < 4) {
 					return defaultOnKillEvent(env, 217819, 0, 4, 1); // 1: 0 - 4
-				}
-				else if (var1 == 4 && targetId == 217819) {
+				} else if (var1 == 4 && targetId == 217819) {
 					qs.setQuestVar(1); // 1
 					updateQuestStatus(env);
 					return true;
 				}
-			}
-			else if (var == 1 && targetId == 218185) {
+			} else if (var == 1 && targetId == 218185) {
 				qs.setQuestVarById(2, 1); // 2: 1
 				qs.setStatus(QuestStatus.REWARD); // reward
 				updateQuestStatus(env);

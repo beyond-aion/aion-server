@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 
 /**
- *
  * @author Source
  */
 @XmlAccessorType(XmlAccessType.FIELD)

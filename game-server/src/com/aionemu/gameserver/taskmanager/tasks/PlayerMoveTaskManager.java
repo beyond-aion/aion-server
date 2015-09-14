@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer

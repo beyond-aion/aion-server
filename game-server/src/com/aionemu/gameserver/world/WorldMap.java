@@ -3,10 +3,11 @@ package com.aionemu.gameserver.world;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This object is representing one in-game map and can have instances.
@@ -133,8 +134,8 @@ public class WorldMap {
 	}
 
 	/**
-	 * Return a WorldMapInstance - depends on map configuration one map may have twins instances to balance player. This
-	 * method will return WorldMapInstance by server chose.
+	 * Return a WorldMapInstance - depends on map configuration one map may have twins instances to balance player. This method will return
+	 * WorldMapInstance by server chose.
 	 * 
 	 * @return WorldMapInstance.
 	 */

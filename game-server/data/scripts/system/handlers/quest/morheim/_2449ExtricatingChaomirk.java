@@ -7,20 +7,18 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2449ExtricatingChaomirk extends QuestHandler {
 
 	private final static int questId = 2449;
-	
-	
+
 	public _2449ExtricatingChaomirk() {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798080).addOnQuestStart(questId);
 		qe.registerQuestNpc(798115).addOnTalkEvent(questId);
@@ -35,26 +33,22 @@ public class _2449ExtricatingChaomirk extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798080) { 
+			if (targetId == 798080) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798115) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 798115) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 1011);
+					return sendQuestDialog(env, 1011);
+				} else if (dialog == DialogAction.SETPRO1) {
+					return defaultCloseDialog(env, 0, 1, true, false);
 				}
-			else if (dialog == DialogAction.SETPRO1) {
-				return defaultCloseDialog(env, 0, 1, true, false);
 			}
-		}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798080) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);

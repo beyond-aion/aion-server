@@ -59,7 +59,7 @@ public class _1158VillageSealFound extends QuestHandler {
 						return sendQuestDialog(env, 1352);
 					case SELECT_ACTION_1353:
 						return sendQuestDialog(env, 1353);
-					case SETPRO1:{
+					case SETPRO1: {
 						if (!giveQuestItem(env, 182200502, 1))
 							return true;
 						qs.setQuestVarById(0, 1);
@@ -69,8 +69,7 @@ public class _1158VillageSealFound extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203128) {
 				switch (dialog) {
 					case USE_OBJECT:

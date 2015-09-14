@@ -16,19 +16,18 @@ import com.aionemu.gameserver.questEngine.task.QuestTasks;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 
 	private final static int questId = 22004;
-	
+
 	public _22004OnlyAsGoodAsItsSupplyLines() {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnDie(questId);
 		qe.registerOnLogOut(questId);
@@ -48,30 +47,27 @@ public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205899) { 
+			if (targetId == 205899) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205899) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205899) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				}
 				if (dialog == DialogAction.SETPRO1) {
-					Npc brax = (Npc)QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 701367, 301.4f, 1839.4f, 292.2f, (byte) 8);
+					Npc brax = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 701367, 301.4f, 1839.4f, 292.2f, (byte) 8);
 					brax.getSpawn().setWalkerId("22004");
 					WalkManager.startWalking((NpcAI2) brax.getAi2());
 					PacketSendUtility.broadcastPacket(brax, new SM_EMOTION(brax, EmotionType.START_EMOTE2, 0, brax.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, brax, 726.15826f, 1548.5891f, 219.4855f));
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 205948) { 
+			} else if (targetId == 205948) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
 				}
@@ -80,8 +76,7 @@ public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 					return defaultCloseDialog(env, 2, 3, true, false);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205936) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -96,7 +91,7 @@ public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -111,7 +106,7 @@ public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -125,14 +120,14 @@ public class _22004OnlyAsGoodAsItsSupplyLines extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 2, false); 
+		return defaultFollowEndEvent(env, 1, 2, false);
 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 0, false); 
+		return defaultFollowEndEvent(env, 1, 0, false);
 	}
 }

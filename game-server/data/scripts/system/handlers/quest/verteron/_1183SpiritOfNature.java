@@ -42,8 +42,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 			if (targetId == 730012) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -102,8 +101,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 730012) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

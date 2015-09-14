@@ -38,19 +38,19 @@ public class Damage extends AdminCommand {
 			} else if (params[0].equalsIgnoreCase("dp")) {
 				damageType = "dp";
 			}
-			
+
 			if (damageType.equalsIgnoreCase("fp") || damageType.equalsIgnoreCase("dp")) {
 				if (!(creature instanceof Player)) {
 					info(admin, null);
 					return;
 				}
 			}
-			
+
 			if (!damageType.equalsIgnoreCase("hp") && params.length != 2) {
 				info(admin, null);
 				return;
 			}
-			
+
 			try {
 				String percent = params[0];
 				if (!damageType.equalsIgnoreCase("hp"))
@@ -65,36 +65,35 @@ public class Damage extends AdminCommand {
 					dmg = Integer.parseInt(params[0]);
 				else
 					dmg = Integer.parseInt(params[1]);
-				
+
 				if (dmg <= 100)
 					isPercent = true;
-				
+
 				switch (damageType) {
 					case "hp":
 						if (isPercent)
-							dmg = (int)(dmg / 100f * creature.getLifeStats().getMaxHp());
+							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxHp());
 						creature.getController().onAttack(creature, dmg, true);
 						break;
 					case "mp":
 						if (isPercent)
-							dmg = (int)(dmg / 100f * creature.getLifeStats().getMaxMp());
+							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxMp());
 						creature.getLifeStats().reduceMp(dmg);
 						break;
 					case "fp":
 						if (isPercent)
-							dmg = (int)(dmg / 100f * creature.getLifeStats().getMaxFp());
-						((Player)creature).getLifeStats().reduceFp(dmg);
+							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxFp());
+						((Player) creature).getLifeStats().reduceFp(dmg);
 						break;
 					case "dp":
 						if (isPercent)
-							dmg = (int)(dmg / 100f * 4000f);
-						if (dmg > ((Player)creature).getCommonData().getDp())
-							dmg = ((Player)creature).getCommonData().getDp();
-						((Player)creature).getCommonData().setDp(((Player)creature).getCommonData().getDp() - dmg);
+							dmg = (int) (dmg / 100f * 4000f);
+						if (dmg > ((Player) creature).getCommonData().getDp())
+							dmg = ((Player) creature).getCommonData().getDp();
+						((Player) creature).getCommonData().setDp(((Player) creature).getCommonData().getDp() - dmg);
 						break;
 				}
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				info(admin, null);
 			}
 		}
@@ -102,10 +101,8 @@ public class Damage extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //damage (mp/fp/dp) <dmg | dmg%>"
-				+ "\n<dmg> must be a number."
-				+ "\n(mp/fp/dp) is optional, leave out to use HP damage"
-				+ "\nin case of fp/dp, target must be player!");
+		PacketSendUtility.sendMessage(player, "syntax //damage (mp/fp/dp) <dmg | dmg%>" + "\n<dmg> must be a number."
+			+ "\n(mp/fp/dp) is optional, leave out to use HP damage" + "\nin case of fp/dp, target must be player!");
 	}
 
 }

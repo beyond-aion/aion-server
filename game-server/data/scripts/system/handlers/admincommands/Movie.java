@@ -18,8 +18,7 @@ public class Movie extends AdminCommand {
 	public void execute(Player player, String... params) {
 		if (params.length < 1) {
 			info(player, null);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(Integer.parseInt(params[0]), Integer.parseInt(params[1])));
 		}
 	}

@@ -56,8 +56,7 @@ public class Addquest extends ConsoleCommand {
 				id = Integer.parseInt(result.group(1));
 			else
 				id = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}
@@ -66,8 +65,7 @@ public class Addquest extends ConsoleCommand {
 
 		if (QuestService.startQuest(env)) {
 			PacketSendUtility.sendMessage(admin, "Quest started.");
-		}
-		else {
+		} else {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 			List<XMLStartCondition> preconditions = template.getXMLStartConditions();
 			if (preconditions != null && preconditions.size() > 0) {

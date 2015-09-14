@@ -28,8 +28,8 @@ public enum SiegeRace {
 		return this.raceId;
 	}
 
-	public static SiegeRace getByRace(Race race){
-		switch (race){
+	public static SiegeRace getByRace(Race race) {
+		switch (race) {
 			case ASMODIANS:
 				return SiegeRace.ASMODIANS;
 			case ELYOS:
@@ -39,7 +39,6 @@ public enum SiegeRace {
 		}
 	}
 
-	
 	/**
 	 * @return the descriptionId
 	 */

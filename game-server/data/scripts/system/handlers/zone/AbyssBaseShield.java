@@ -22,8 +22,7 @@ public class AbyssBaseShield implements ZoneHandler {
 			if (currZone == ZoneName.get("ASMODIANS_BASE_400010000")) {
 				if (((Player) actingCreature).getRace() == Race.ELYOS)
 					creature.getController().die();
-			}
-			else if (currZone == ZoneName.get("ELYOS_BASE_400010000")) {
+			} else if (currZone == ZoneName.get("ELYOS_BASE_400010000")) {
 				if (((Player) actingCreature).getRace() == Race.ASMODIANS)
 					creature.getController().die();
 			}

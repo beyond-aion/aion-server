@@ -1,7 +1,7 @@
 package ai.instance.kamarBf;
 
-
 import ai.portals.PortalAI2;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class KamarTeleportAI2 extends PortalAI2 {
 
 	protected int remainingUses;
-
 
 	@Override
 	protected void handleSpawned() {
@@ -34,15 +33,15 @@ public class KamarTeleportAI2 extends PortalAI2 {
 		}
 	}
 
-   private boolean checkUsageCount(Player player) {
-	  if (remainingUses <= 0) {
-		 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500906));
-		 return false;
-	  }
-	  if (--remainingUses == 0)
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500906));
-	  else
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500905, remainingUses));
-	  return true;
-   }
+	private boolean checkUsageCount(Player player) {
+		if (remainingUses <= 0) {
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500906));
+			return false;
+		}
+		if (--remainingUses == 0)
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500906));
+		else
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1500905, remainingUses));
+		return true;
+	}
 }

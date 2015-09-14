@@ -30,8 +30,7 @@ public class PoppyOnTheRunAI2 extends GeneralNpcAI2 {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		getOwner().setState(1);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0,
-				getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 	}
 
 }

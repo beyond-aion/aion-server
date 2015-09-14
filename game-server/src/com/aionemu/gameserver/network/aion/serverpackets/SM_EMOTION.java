@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -135,11 +134,11 @@ public class SM_EMOTION extends AionServerPacket {
 			case SIT: // sit
 			case STAND: // stand
 			case ATTACKMODE_IN_MOVE: // toggle attack mode
-			case NEUTRALMODE_IN_MOVE: // toggle normal mode	
+			case NEUTRALMODE_IN_MOVE: // toggle normal mode
 			case WALK: // toggle walk
 			case RUN: // toggle run
 			case OPEN_PRIVATESHOP: // private shop open
-			case CLOSE_PRIVATESHOP:	// private shop close
+			case CLOSE_PRIVATESHOP: // private shop close
 			case POWERSHARD_ON: // powershard on
 			case POWERSHARD_OFF: // powershard off
 			case ATTACKMODE_IN_STANDING: // toggle attack mode
@@ -182,11 +181,11 @@ public class SM_EMOTION extends AionServerPacket {
 			case RIDE:
 			case RIDE_END:
 				if (targetObjectId != 0) {
-					writeD(targetObjectId);//rideId
+					writeD(targetObjectId);// rideId
 				}
-				writeF(0x3F);//unk
-				writeF(0x3F);//unk
-				writeF(0x40);//unk
+				writeF(0x3F);// unk
+				writeF(0x3F);// unk
+				writeF(0x40);// unk
 				break;
 			case RESURRECT:
 				// resurrect
@@ -202,7 +201,7 @@ public class SM_EMOTION extends AionServerPacket {
 				// emote startloop
 				writeH(baseAttackSpeed);
 				writeH(currentAttackSpeed);
-				writeC(0);//new 4.0
+				writeC(0);// new 4.0
 				break;
 			default:
 				if (targetObjectId != 0) {

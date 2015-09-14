@@ -42,14 +42,12 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
 	public final void run() {
 		try {
 			runImpl();
-		}
-		catch (Throwable e) {
+		} catch (Throwable e) {
 			String name;
 			Account account = getConnection().getAccount();
 			if (account != null) {
 				name = account.getName();
-			}
-			else {
+			} else {
 				name = getConnection().getIP();
 			}
 
@@ -58,8 +56,7 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
 	}
 
 	/**
-	 * Send new AionServerPacket to connection that is owner of this packet. This method is equvalent to:
-	 * getConnection().sendPacket(msg);
+	 * Send new AionServerPacket to connection that is owner of this packet. This method is equvalent to: getConnection().sendPacket(msg);
 	 * 
 	 * @param msg
 	 */

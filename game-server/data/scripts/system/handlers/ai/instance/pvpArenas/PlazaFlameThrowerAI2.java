@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("plaza_flame_thrower")
@@ -36,7 +35,7 @@ public class PlazaFlameThrowerAI2 extends ShifterAI2 {
 		if (!isRewarded) {
 			isRewarded = true;
 			AI2Actions.handleUseItemFinish(this, player);
-			switch(getNpcId()) {
+			switch (getNpcId()) {
 				case 701169:
 					useSkill(getNpcs(701178));
 					useSkill(getNpcs(701192));

@@ -28,6 +28,6 @@ public abstract class MailDAO implements IDFactoryAwareDAO {
 	public abstract void updateOfflineMailCounter(PlayerCommonData recipientCommonData);
 
 	public abstract boolean haveUnread(int playerId);
-	
+
 	public abstract boolean cleanMail(final String recipient);
 }

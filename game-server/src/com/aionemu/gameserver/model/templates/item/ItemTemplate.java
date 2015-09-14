@@ -148,7 +148,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlTransient
 	private boolean isQuestUpdateItem;
 
-
 	/**
 	 * @param u
 	 * @param parent
@@ -259,8 +258,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		try {
 			int val = Integer.parseInt(description);
 			return val;
-		}
-		catch (NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 			return 0;
 		}
 	}
@@ -269,8 +267,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		if (isKinah()) {
 			if (CustomConfig.ENABLE_KINAH_CAP) {
 				return CustomConfig.KINAH_CAP_VALUE;
-			}
-			else {
+			} else {
 				return Long.MAX_VALUE;
 			}
 		}
@@ -430,7 +427,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	public int getTempExchangeTime() {
 		return temExchangeTime;
 	}
-	
+
 	public int getEnchantType() {
 		return enchantType;
 	}
@@ -528,12 +525,11 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isCloth() {
 		// not sure about LT_HEADS and CL_HEADS, check in retail
-		return isArmor() && (itemGroup.getArmorType() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELTS 
-												|| itemGroup == ItemGroup.HEADS);
+		return isArmor() && (itemGroup.getArmorType() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELTS || itemGroup == ItemGroup.HEADS);
 	}
-	
+
 	public boolean isPotion() {
-		return itemId >= 162000000 &&  itemId < 163000000;
+		return itemId >= 162000000 && itemId < 163000000;
 	}
 
 	public boolean isQuestUpdateItem() {
@@ -595,11 +591,11 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	public String getTemperingName() {
 		return temperingName;
 	}
-	
+
 	public boolean canExceedEnchant() {
 		return canExceedEnchant;
 	}
-	
+
 	public ExceedEnchantSkillSetType getExceedEnchantSkill() {
 		return exceedEnchantSkill;
 	}

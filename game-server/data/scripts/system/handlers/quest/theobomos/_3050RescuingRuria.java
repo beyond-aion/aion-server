@@ -9,8 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Get the antidote (182208035) from Calydon Sorcerer (214304) and bring it to Ruria (798211). Talk with Ruria. Escort
- * Ruria to the place where Melleas (798208) is. Talk with Melleas. Tell Rosina (798190) about Ruria.
+ * Get the antidote (182208035) from Calydon Sorcerer (214304) and bring it to Ruria (798211). Talk with Ruria. Escort Ruria to the place where
+ * Melleas (798208) is. Talk with Melleas. Tell Rosina (798190) about Ruria.
  * 
  * @author Balthazar
  * @reworked vlog
@@ -54,8 +54,7 @@ public class _3050RescuingRuria extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798211: { // Ruria
 					switch (env.getDialog()) {
@@ -66,8 +65,7 @@ public class _3050RescuingRuria extends QuestHandler {
 									return sendQuestDialog(env, 1011);
 								}
 								return sendQuestDialog(env, 1097);
-							}
-							else if (qs.getQuestVarById(0) == 1) {
+							} else if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1013);
 							}
 						}
@@ -96,8 +94,7 @@ public class _3050RescuingRuria extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798190) { // Rosina
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
@@ -107,7 +104,7 @@ public class _3050RescuingRuria extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

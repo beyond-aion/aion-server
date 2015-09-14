@@ -27,14 +27,13 @@ public class BanIp extends AdminCommand {
 		if (params.length > 1) {
 			try {
 				time = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				info(player, e.getMessage());
 				return;
 			}
 		}
 		if (time == 0) {
-		   time = 60 * 24 * 365 * 10;//pseudo infinity
+			time = 60 * 24 * 365 * 10;// pseudo infinity
 		}
 
 		LoginServer.getInstance().sendBanPacket((byte) 2, 0, mask, time, player.getObjectId());

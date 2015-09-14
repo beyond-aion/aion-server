@@ -1,5 +1,7 @@
 package quest.reshanta;
 
+import java.util.List;
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -15,7 +17,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import java.util.List;
 
 /**
  * @author Artur
@@ -30,7 +31,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = {278506, 279023, 278643};
+		int[] npcs = { 278506, 279023, 278643 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
@@ -91,8 +92,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -126,13 +126,11 @@ public class _14045RumorsOnWings extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279023) { // Agemonerk
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -147,7 +145,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = {14040, 14041};
+		int[] quests = { 14040, 14041 };
 		return defaultOnLvlUpEvent(env, quests, true);
 	}
 

@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 
 	@XmlAttribute
-	protected HealType type;//useless
+	protected HealType type;// useless
 	@XmlAttribute
 	protected float range;
 	@XmlAttribute
@@ -55,8 +55,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 				if (MathUtil.isIn3dRange(effect.getEffected(), player, range))
 					player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 				// Then check for party if healparty parameter is set
-				if (healparty)
-				{
+				if (healparty) {
 					if (player.getPlayerGroup2() != null) {
 						for (Player p : player.getPlayerGroup2().getMembers()) {
 							if (p == player)
@@ -64,8 +63,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 							if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
 								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 						}
-					}
-					else if (player.isInAlliance2()) {
+					} else if (player.isInAlliance2()) {
 						for (Player p : player.getPlayerAllianceGroup2().getMembers()) {
 							if (!p.isOnline())
 								continue;

@@ -7,11 +7,9 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 public class _10082AReianSecret extends QuestHandler {
 
 	private final static int questId = 10082;
-	
 
 	public _10082AReianSecret() {
 		super(questId);
@@ -26,7 +24,7 @@ public class _10082AReianSecret extends QuestHandler {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10081);
@@ -38,7 +36,7 @@ public class _10082AReianSecret extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801231) {
 				switch (dialog) {
@@ -51,8 +49,7 @@ public class _10082AReianSecret extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 800532) { 
+			} else if (targetId == 800532) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 1) {
@@ -60,11 +57,10 @@ public class _10082AReianSecret extends QuestHandler {
 						}
 					}
 					case SETPRO2: {
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 800533) { 
+			} else if (targetId == 800533) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 2) {
@@ -73,13 +69,12 @@ public class _10082AReianSecret extends QuestHandler {
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
 						return checkQuestItems(env, 2, 3, false, 10000, 10001);
-					}	
+					}
 					case SETPRO3: {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 800534) { 
+			} else if (targetId == 800534) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 4) {
@@ -87,24 +82,22 @@ public class _10082AReianSecret extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						return defaultCloseDialog(env, 4, 5, true, false); 
+						return defaultCloseDialog(env, 4, 5, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800535) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -112,10 +105,10 @@ public class _10082AReianSecret extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (qs.getQuestVarById(0) == 3) {
 				changeQuestStep(env, 3, 4, false);
-	  		playQuestMovie(env, 823);
-	  		return true;
+				playQuestMovie(env, 823);
+				return true;
 			}
-  	}
+		}
 		return false;
 	}
 }

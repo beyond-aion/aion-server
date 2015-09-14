@@ -33,20 +33,20 @@ public class _1131UndeliveredArmor extends QuestHandler {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
-		if(qs == null || qs.getStatus() == QuestStatus.NONE){
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203097) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}else if(qs != null && qs.getStatus() == QuestStatus.START){
-			if (targetId == 799093){
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 799093) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					case SETPRO1:{
+					case SETPRO1: {
 						qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -55,11 +55,11 @@ public class _1131UndeliveredArmor extends QuestHandler {
 					default:
 						return sendQuestStartDialog(env);
 				}
-			}else if(targetId == 203101){
+			} else if (targetId == 203101) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_QUEST_REWARD:{
+					case SELECT_QUEST_REWARD: {
 						qs.setQuestVar(2);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -67,8 +67,8 @@ public class _1131UndeliveredArmor extends QuestHandler {
 					}
 				}
 			}
-		}else if(qs.getStatus() == QuestStatus.REWARD){
-			if(targetId == 203101){
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 203101) {
 				return sendQuestEndDialog(env);
 			}
 		}

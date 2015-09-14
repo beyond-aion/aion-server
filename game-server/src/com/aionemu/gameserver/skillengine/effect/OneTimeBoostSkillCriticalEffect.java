@@ -41,12 +41,11 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 						effect.endEffect();
 					else
 						this.decreaseCount();
-						
+
 					this.acStatus.setResult(true);
-				}
-				else
+				} else
 					this.acStatus.setResult(false);
-				
+
 				return this.acStatus;
 			}
 		};
@@ -61,13 +60,12 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 		AttackCalcObserver observer = effect.getAttackStatusObserver(position);
 		effect.getEffected().getObserveController().removeAttackCalcObserver(observer);
 	}
-	
+
 	/**
 	 * @return the percent
 	 */
 	public boolean isPercent() {
 		return percent;
 	}
-	
-	
+
 }

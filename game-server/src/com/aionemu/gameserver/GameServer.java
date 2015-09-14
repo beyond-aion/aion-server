@@ -155,8 +155,7 @@ public class GameServer {
 					out.closeEntry();
 					logFile.delete();
 				}
-			}
-			catch (IOException | SecurityException sex) {
+			} catch (IOException | SecurityException sex) {
 			}
 		}
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -165,8 +164,7 @@ public class GameServer {
 			configurator.setContext(lc);
 			lc.reset();
 			configurator.doConfigure("config/slf4j-logback.xml");
-		}
-		catch (JoranException je) {
+		} catch (JoranException je) {
 			throw new RuntimeException("Failed to configure loggers, shutting down...", je);
 		}
 	}
@@ -174,25 +172,24 @@ public class GameServer {
 	/**
 	 * Launching method for GameServer
 	 * 
-	 * @param args arguments, not used
+	 * @param args
+	 *          arguments, not used
 	 */
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 
 		Lambda.enableJitting(true);
-		final GameEngine[] parallelEngines = new GameEngine[] {
-			QuestEngine.getInstance(), InstanceEngine.getInstance(),
-			AI2Engine.getInstance(), ChatProcessor.getInstance()
-		};
+		final GameEngine[] parallelEngines = new GameEngine[] { QuestEngine.getInstance(), InstanceEngine.getInstance(), AI2Engine.getInstance(),
+			ChatProcessor.getInstance() };
 
 		final CountDownLatch progressLatch = new CountDownLatch(parallelEngines.length);
 
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
-		
+
 		ConsoleUtil.printSection("Static Data");
 		DataManager.getInstance();
-		
+
 		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
 
@@ -231,8 +228,7 @@ public class GameServer {
 
 		try {
 			progressLatch.await();
-		}
-		catch (InterruptedException e1) {
+		} catch (InterruptedException e1) {
 		}
 
 		// This is loading only siege location data
@@ -241,7 +237,7 @@ public class GameServer {
 		BaseService.getInstance().initBaseLocations();
 		SiegeService.getInstance().initSiegeLocations();
 		MonsterRaidService.getInstance().initMonsterRaidLocations();
-		//DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
+		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
 
@@ -266,7 +262,7 @@ public class GameServer {
 
 		ConsoleUtil.printSection("World Bases initialization");
 		BaseService.getInstance().initBases();
-		
+
 		ConsoleUtil.printSection("Monster Raid initialization");
 		MonsterRaidService.getInstance().initMonsterRaids();
 
@@ -277,7 +273,7 @@ public class GameServer {
 		DisputeLandService.getInstance().init();
 
 		ConsoleUtil.printSection("TaskManagers");
-		//PacketBroadcaster.getInstance();
+		// PacketBroadcaster.getInstance();
 
 		GameTimeService.getInstance();
 		AnnouncementService.getInstance();
@@ -288,7 +284,7 @@ public class GameServer {
 		ExchangeService.getInstance();
 		PeriodicSaveService.getInstance();
 		AtreianPassportService.getInstance();
-		
+
 		if (AIConfig.SHOUTS_ENABLE)
 			NpcShoutsService.getInstance();
 		InstanceService.load();
@@ -312,16 +308,16 @@ public class GameServer {
 
 		AdminService.getInstance();
 		PlayerTransferService.getInstance();
-		
+
 		ConsoleUtil.printSection("Housing");
 		HousingBidService.getInstance().start();
 		MaintenanceTask.getInstance();
 		TownService.getInstance();
 		ChallengeTaskService.getInstance();
-		
+
 		CommandsAccessService.getInstance();
 		WebshopService.getInstance();
-		
+
 		ConsoleUtil.printSection("System Info");
 		AEVersions.printFullVersionInfo();
 		AEInfos.printAllInfos();
@@ -342,10 +338,8 @@ public class GameServer {
 						ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
 						ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
 						computeRatios();
-					}
-					catch (Exception e) {
-					}
-					finally {
+					} catch (Exception e) {
+					} finally {
 						lock.unlock();
 					}
 					displayRatios(false);
@@ -361,8 +355,8 @@ public class GameServer {
 	 */
 	private void startServers() {
 		ConsoleUtil.printSection("Starting Network");
-		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS,
-			NetworkConfig.GAME_PORT, "Game Connections", new GameConnectionFactoryImpl()));
+		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS, NetworkConfig.GAME_PORT,
+			"Game Connections", new GameConnectionFactoryImpl()));
 
 		LoginServer ls = LoginServer.getInstance();
 		ChatServer cs = ChatServer.getInstance();
@@ -456,10 +450,8 @@ public class GameServer {
 			}
 
 			computeRatios();
-		}
-		catch (Exception e) {
-		}
-		finally {
+		} catch (Exception e) {
+		} finally {
 			lock.unlock();
 		}
 
@@ -469,8 +461,7 @@ public class GameServer {
 	private static void computeRatios() {
 		if ((GameServer.ASMOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT) && (GameServer.ELYOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT)) {
 			GameServer.ASMOS_RATIO = GameServer.ELYOS_RATIO = 50.0;
-		}
-		else {
+		} else {
 			GameServer.ASMOS_RATIO = GameServer.ASMOS_COUNT * 100.0 / (GameServer.ASMOS_COUNT + GameServer.ELYOS_COUNT);
 			GameServer.ELYOS_RATIO = GameServer.ELYOS_COUNT * 100.0 / (GameServer.ASMOS_COUNT + GameServer.ELYOS_COUNT);
 		}

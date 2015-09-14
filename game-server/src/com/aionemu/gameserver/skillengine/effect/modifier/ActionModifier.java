@@ -21,6 +21,7 @@ public abstract class ActionModifier {
 	protected int value;
 	@XmlAttribute
 	protected Func mode = Func.ADD;
+
 	/**
 	 * Applies modifier to original value
 	 * 
@@ -37,8 +38,7 @@ public abstract class ActionModifier {
 	 * @return true or false
 	 */
 	public abstract boolean check(Effect effect);
-	
-	
+
 	public Func getFunc() {
 		return mode;
 	}

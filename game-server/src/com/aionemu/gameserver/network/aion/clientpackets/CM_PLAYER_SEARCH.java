@@ -24,7 +24,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 	/**
 	 * The max number of players to return as results
 	 */
-	public static final int MAX_RESULTS = 104; //3.0
+	public static final int MAX_RESULTS = 104; // 3.0
 
 	private String name;
 	private int region;
@@ -75,10 +75,9 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			else if (player.getFriendList().getStatus() == Status.OFFLINE)
 				continue;
-			else if (player.isGM() && !CustomConfig.SEARCH_GM_LIST){
+			else if (player.isGM() && !CustomConfig.SEARCH_GM_LIST) {
 				continue;
-			}
-			else if (lfgOnly == 1 && !player.isLookingForGroup())
+			} else if (lfgOnly == 1 && !player.isLookingForGroup())
 				continue;
 			else if (!name.isEmpty() && !player.getName().toLowerCase().contains(name.toLowerCase()))
 				continue;
@@ -90,8 +89,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			else if (region > 0 && player.getActiveRegion().getMapId() != region)
 				continue;
-			else if ((player.getRace() != activePlayer.getRace())
-				&& (CustomConfig.FACTIONS_SEARCH_MODE == false))
+			else if ((player.getRace() != activePlayer.getRace()) && (CustomConfig.FACTIONS_SEARCH_MODE == false))
 				continue;
 			else
 			// This player matches criteria

@@ -44,8 +44,7 @@ public class _1376AMountaineOfTrouble extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203964) // Agrips
 			{
 				if (env.getDialog() == DialogAction.USE_OBJECT)

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.templates.quest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -20,7 +21,7 @@ public class QuestKill {
 
 	@XmlAttribute(name = "npc_ids")
 	private List<Integer> npcIds;
-	
+
 	@XmlAttribute(name = "count")
 	private int kill;
 
@@ -40,7 +41,7 @@ public class QuestKill {
 	public int getKillCount() {
 		return kill;
 	}
-	
+
 	public int getQuestStep() {
 		return step;
 	}

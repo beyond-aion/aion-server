@@ -13,12 +13,12 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
- * This class allows us to read ResourceBundles with custom encodings, so we don't have write \\uxxxx symbols and use
- * utilities like native2ascii to convert files.
+ * This class allows us to read ResourceBundles with custom encodings, so we don't have write \\uxxxx symbols and use utilities like native2ascii to
+ * convert files.
  * <p/>
  * <br>
- * Usage: For instance we want to load resource bundle "test" from current deirectory and use english locale. If locale
- * not found, we will use default file (and ignore default locale).
+ * Usage: For instance we want to load resource bundle "test" from current deirectory and use english locale. If locale not found, we will use default
+ * file (and ignore default locale).
  * 
  * <pre>
  * URLClassLoader loader = new URLClassLoader(new URL[] { new File(&quot;.&quot;).toURI().toURL() });
@@ -59,13 +59,13 @@ public class ResourceBundleControl extends ResourceBundle.Control {
 	}
 
 	/**
-	 * This code is just copy-paste with usage {@link java.io.Reader} instead of {@link java.io.InputStream} to read
-	 * properties.<br>
-	 * <br> {@inheritDoc}
+	 * This code is just copy-paste with usage {@link java.io.Reader} instead of {@link java.io.InputStream} to read properties.<br>
+	 * <br>
+	 * {@inheritDoc}
 	 */
 	@Override
-	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-		throws IllegalAccessException, InstantiationException, IOException {
+	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IllegalAccessException,
+		InstantiationException, IOException {
 		String bundleName = toBundleName(baseName, locale);
 		ResourceBundle bundle = null;
 		if (format.equals("java.class")) {
@@ -77,15 +77,12 @@ public class ResourceBundleControl extends ResourceBundle.Control {
 				// ClassCastException.
 				if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
 					bundle = bundleClass.newInstance();
-				}
-				else {
+				} else {
 					throw new ClassCastException(bundleClass.getName() + " cannot be cast to ResourceBundle");
 				}
+			} catch (ClassNotFoundException ignored) {
 			}
-			catch (ClassNotFoundException ignored) {
-			}
-		}
-		else if (format.equals("java.properties")) {
+		} else if (format.equals("java.properties")) {
 			final String resourceName = toResourceName(bundleName, "properties");
 			final ClassLoader classLoader = loader;
 			final boolean reloadFlag = reload;
@@ -108,8 +105,7 @@ public class ResourceBundleControl extends ResourceBundle.Control {
 									is = connection.getInputStream();
 								}
 							}
-						}
-						else {
+						} else {
 							is = classLoader.getResourceAsStream(resourceName);
 						}
 						return is;
@@ -118,20 +114,17 @@ public class ResourceBundleControl extends ResourceBundle.Control {
 				if (stream != null) {
 					isr = new InputStreamReader(stream, encoding);
 				}
-			}
-			catch (PrivilegedActionException e) {
+			} catch (PrivilegedActionException e) {
 				throw (IOException) e.getException();
 			}
 			if (isr != null) {
 				try {
 					bundle = new PropertyResourceBundle(isr);
-				}
-				finally {
+				} finally {
 					isr.close();
 				}
 			}
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("unknown format: " + format);
 		}
 		return bundle;

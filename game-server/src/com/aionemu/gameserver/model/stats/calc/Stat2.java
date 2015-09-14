@@ -37,7 +37,7 @@ public abstract class Stat2 {
 	public final void setBase(int base) {
 		this.base = base;
 	}
-	
+
 	public final float getBaseRate() {
 		return baseRate;
 	}
@@ -70,7 +70,7 @@ public abstract class Stat2 {
 	}
 
 	public abstract void addToBonus(int bonus);
-	
+
 	public abstract float calculatePercent(int delta);
 
 	public final Creature getOwner() {

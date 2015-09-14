@@ -43,8 +43,7 @@ public class Add extends AdminCommand {
 
 				if (params.length == 3)
 					itemCount = Long.parseLong(params[2]);
-			}
-			else {
+			} else {
 				Pattern id = Pattern.compile("\\[item:(\\d{9})");
 				Matcher result = id.matcher(item);
 
@@ -57,8 +56,7 @@ public class Add extends AdminCommand {
 					itemCount = Long.parseLong(params[1]);
 			}
 			receiver = player;
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
 			if (receiver == null) {
 				PacketSendUtility.sendMessage(player, "Could not find a player by that name.");
@@ -77,8 +75,7 @@ public class Add extends AdminCommand {
 
 					if (params.length == 4)
 						itemCount = Long.parseLong(params[3]);
-				}
-				else {
+				} else {
 					Pattern id = Pattern.compile("\\[item:(\\d{9})");
 					Matcher result = id.matcher(item);
 
@@ -90,12 +87,10 @@ public class Add extends AdminCommand {
 					if (params.length == 3)
 						itemCount = Long.parseLong(params[2]);
 				}
-			}
-			catch (NumberFormatException ex) {
+			} catch (NumberFormatException ex) {
 				PacketSendUtility.sendMessage(player, "You must give number to itemid.");
 				return;
-			}
-			catch (Exception ex2) {
+			} catch (Exception ex2) {
 				PacketSendUtility.sendMessage(player, "Occurs an error.");
 				return;
 			}
@@ -113,16 +108,11 @@ public class Add extends AdminCommand {
 
 		if (count == 0) {
 			if (player != receiver) {
-				PacketSendUtility.sendMessage(player, "You successfully gave " + itemCount + " x [item:"
-						+ itemId + "] to " + receiver.getName() + ".");
-				PacketSendUtility.sendMessage(receiver, "You successfully received " + itemCount + " x [item:"
-						+ itemId + "] from " + player.getName() + ".");
-			}
-			else
-				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:"
-						+ itemId + "]");
-		}
-		else {
+				PacketSendUtility.sendMessage(player, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + receiver.getName() + ".");
+				PacketSendUtility.sendMessage(receiver, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + player.getName() + ".");
+			} else
+				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:" + itemId + "]");
+		} else {
 			PacketSendUtility.sendMessage(player, "Item couldn't be added");
 		}
 	}

@@ -24,7 +24,7 @@ public abstract class TransformEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int panelid;
-	
+
 	@XmlAttribute
 	protected int banUseSkills;
 	@XmlAttribute
@@ -39,25 +39,23 @@ public abstract class TransformEffect extends EffectTemplate {
 	protected int res5;
 	@XmlAttribute
 	protected int res6;
-	
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		/**
-		 * TODO need more info
-		 * fix for cases like use itemId: 160010206(Dignified Wyvern Form Candy)
-		 * after that use cannon skill(ex. 20365)
-		 * -> candy should be removed
+		 * TODO need more info fix for cases like use itemId: 160010206(Dignified Wyvern Form Candy) after that use cannon skill(ex. 20365) -> candy
+		 * should be removed
 		 */
 		if (type == TransformType.FORM1 && panelid > 0) {
 			if (effect.getEffected().getTransformModel().isActive()) {
 				effect.getEffected().getEffectController().removeTransformEffects();
 			}
 		}
-		
+
 		effect.addToEffectedController();
 	}
 
+	@Override
 	public void endEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 
@@ -67,39 +65,37 @@ public abstract class TransformEffect extends EffectTemplate {
 				if (template instanceof TransformEffect) {
 					if (((TransformEffect) template).getTransformId() == model)
 						continue;
-					temp = (TransformEffect)template;
+					temp = (TransformEffect) template;
 					break;
 				}
 			}
 		}
-		if (temp != null) 
-			effected.getTransformModel().apply(temp.getTransformId(), temp.getTransformType(), 
-				temp.getPanelId(), temp.getBanUseSkills(), temp.getBanMovement(), temp.getRes1(), 
-				temp.getRes2(), temp.getRes3(), temp.getRes5(), temp.getRes6());
+		if (temp != null)
+			effected.getTransformModel().apply(temp.getTransformId(), temp.getTransformType(), temp.getPanelId(), temp.getBanUseSkills(),
+				temp.getBanMovement(), temp.getRes1(), temp.getRes2(), temp.getRes3(), temp.getRes5(), temp.getRes6());
 		else
 			effected.setTransformed(false);
 	}
 
+	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
-		effected.getTransformModel().apply(this.getTransformId(), this.getTransformType(), 
-			this.getPanelId(), this.getBanUseSkills(), this.getBanMovement(), this.getRes1(), 
-			this.getRes2(), this.getRes3(), this.getRes5(), this.getRes6());
+		effected.getTransformModel().apply(this.getTransformId(), this.getTransformType(), this.getPanelId(), this.getBanUseSkills(),
+			this.getBanMovement(), this.getRes1(), this.getRes2(), this.getRes3(), this.getRes5(), this.getRes6());
 	}
 
 	public TransformType getTransformType() {
 		return type;
 	}
-	
-	public int getTransformId()	{
+
+	public int getTransformId() {
 		return model;
 	}
 
-	public int getPanelId()	{
+	public int getPanelId() {
 		return panelid;
 	}
 
-	
 	/**
 	 * @return the banUseSkills
 	 */
@@ -107,7 +103,6 @@ public abstract class TransformEffect extends EffectTemplate {
 		return banUseSkills;
 	}
 
-	
 	/**
 	 * @return the banMovement
 	 */
@@ -115,7 +110,6 @@ public abstract class TransformEffect extends EffectTemplate {
 		return banMovement;
 	}
 
-	
 	/**
 	 * @return the res1
 	 */
@@ -123,7 +117,6 @@ public abstract class TransformEffect extends EffectTemplate {
 		return res1;
 	}
 
-	
 	/**
 	 * @return the res2
 	 */
@@ -131,7 +124,6 @@ public abstract class TransformEffect extends EffectTemplate {
 		return res2;
 	}
 
-	
 	/**
 	 * @return the res3
 	 */
@@ -139,7 +131,6 @@ public abstract class TransformEffect extends EffectTemplate {
 		return res3;
 	}
 
-	
 	/**
 	 * @return the res5
 	 */
@@ -147,12 +138,11 @@ public abstract class TransformEffect extends EffectTemplate {
 		return res5;
 	}
 
-	
 	/**
 	 * @return the res6
 	 */
 	public int getRes6() {
 		return res6;
 	}
-	
+
 }

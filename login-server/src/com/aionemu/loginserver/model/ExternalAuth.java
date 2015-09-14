@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.model;
 
-
 /**
  * Holds authentication information for use with external authentication.
  * 
@@ -22,7 +21,7 @@ public class ExternalAuth {
 	 * returns account identifier to work with in LS DB (account_data.ext_auth_name)
 	 * 
 	 * @return identifier<br>
-	 *          null if not set
+	 *         null if not set
 	 */
 	public String getIdentifier() {
 		return id;
@@ -39,7 +38,7 @@ public class ExternalAuth {
 
 	/**
 	 * @return authentication state (see {@link com.aionemu.loginserver.network.aion.AionAuthResponse})<br>
-	 *          null if not set
+	 *         null if not set
 	 */
 	public Integer getAuthState() {
 		return state;

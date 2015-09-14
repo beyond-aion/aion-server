@@ -160,27 +160,25 @@ public class VortexLocation implements ZoneHandler {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		if (creature instanceof Kisk) {
 			if (creature.getRace().equals(getInvadersRace())) {
-				kisks.putEntry(creature.getObjectId(), (Kisk) creature);
+				kisks.put(creature.getObjectId(), (Kisk) creature);
 			}
-		}
-		else if (creature instanceof Player) {
+		} else if (creature instanceof Player) {
 			Player player = (Player) creature;
 
-//			if (player.isGM()) {
-//				return;
-//			}
+			// if (player.isGM()) {
+			// return;
+			// }
 
 			if (!players.containsKey(player.getObjectId())) {
-				players.putEntry(player.getObjectId(), player);
+				players.put(player.getObjectId(), player);
 
 				if (isActive()) {
 					if (player.getRace().equals(getInvadersRace())) {
 						if (getVortexController().getPassedPlayers().containsKey(player.getObjectId())
-								&& !getActiveVortex().getInvaders().containsKey(player.getObjectId())) {
+							&& !getActiveVortex().getInvaders().containsKey(player.getObjectId())) {
 							getActiveVortex().addPlayer(player, true);
 						}
-					}
-					else {
+					} else {
 						getActiveVortex().updateDefenders(player);
 					}
 				}
@@ -197,9 +195,9 @@ public class VortexLocation implements ZoneHandler {
 			if (creature instanceof Player) {
 				final Player player = (Player) creature;
 
-//			if (player.isGM()) {
-//				return;
-//			}
+				// if (player.isGM()) {
+				// return;
+				// }
 
 				players.remove(player.getObjectId());
 
@@ -211,6 +209,7 @@ public class VortexLocation implements ZoneHandler {
 
 							// start kick timer
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 								@Override
 								public void run() {
 									if (player.isOnline() && !isInsideActiveVotrex(player)) {
@@ -220,10 +219,10 @@ public class VortexLocation implements ZoneHandler {
 
 							}, 10 * 1000);
 						}
-					}
-					else {
+					} else {
 						// start kick timer
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 							@Override
 							public void run() {
 								if (player.isOnline() && !isInsideActiveVotrex(player)) {

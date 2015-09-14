@@ -42,8 +42,7 @@ public class _2514TheRedManeReport extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
@@ -51,15 +50,12 @@ public class _2514TheRedManeReport extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		}
-		else if (targetId == 204700) {
+		} else if (targetId == 204700) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -68,12 +64,10 @@ public class _2514TheRedManeReport extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204763) {
+		} else if (targetId == 204763) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
@@ -82,12 +76,10 @@ public class _2514TheRedManeReport extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204702) {
+		} else if (targetId == 204702) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
@@ -97,8 +89,7 @@ public class _2514TheRedManeReport extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

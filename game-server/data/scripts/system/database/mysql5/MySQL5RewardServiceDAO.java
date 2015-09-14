@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +29,8 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 	}
 
 	@Override
-	public FastList<RewardEntryItem> getAvailable(int playerId) {
-		FastList<RewardEntryItem> list = FastList.newInstance();
+	public FastTable<RewardEntryItem> getAvailable(int playerId) {
+		FastTable<RewardEntryItem> list = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);
@@ -44,15 +44,14 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("getAvailable() for " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return list;
 	}
 
 	@Override
-	public void uncheckAvailable(FastList<Integer> ids) {
+	public void uncheckAvailable(FastTable<Integer> ids) {
 		Connection con = null;
 		try {
 			con = DatabaseFactory.getConnection();
@@ -64,11 +63,9 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 				stmt.execute();
 				stmt.close();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("uncheckAvailable", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 	}

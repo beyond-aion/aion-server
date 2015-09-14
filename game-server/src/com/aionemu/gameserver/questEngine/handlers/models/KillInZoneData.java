@@ -12,14 +12,13 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillInZone;
 
-
 /**
  * @author Cheatkiller
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KillInZoneData")
 public class KillInZoneData extends XMLQuest {
-	
+
 	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
 	@XmlAttribute(name = "end_npc_ids", required = true)

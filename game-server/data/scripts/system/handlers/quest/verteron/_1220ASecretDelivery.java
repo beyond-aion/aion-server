@@ -41,8 +41,7 @@ public class _1220ASecretDelivery extends QuestHandler {
 			if (targetId == 203172) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env, 182200568, 1);
 			}
 		}
@@ -78,8 +77,7 @@ public class _1220ASecretDelivery extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205240) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

@@ -47,8 +47,8 @@ public class CM_CS_AUTH_RESPONSE extends CsClientPacket {
 	protected void runImpl() {
 		switch (response) {
 			case 0: // Authed
-				log.info("GameServer authed successfully IP : " + (ip[0] & 0xFF) + "." + (ip[1] & 0xFF) + "." + (ip[2] & 0xFF)
-					+ "." + (ip[3] & 0xFF) + " Port: " + port);
+				log.info("GameServer authed successfully IP : " + (ip[0] & 0xFF) + "." + (ip[1] & 0xFF) + "." + (ip[2] & 0xFF) + "." + (ip[3] & 0xFF)
+					+ " Port: " + port);
 				getConnection().setState(State.AUTHED);
 				ChatService.setIp(ip);
 				ChatService.setPort(port);

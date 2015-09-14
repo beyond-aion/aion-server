@@ -2,8 +2,10 @@ package com.aionemu.chatserver.configs;
 
 import java.net.InetSocketAddress;
 import java.util.Properties;
-import org.slf4j.LoggerFactory;
+
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
@@ -13,8 +15,8 @@ import com.aionemu.commons.utils.PropertiesUtils;
 /**
  * @author ATracer
  */
-public class Config
-{
+public class Config {
+
 	protected static final Logger log = LoggerFactory.getLogger(Config.class);
 
 	/**
@@ -52,25 +54,25 @@ public class Config
 	 */
 	@Property(key = "chatserver.log.chat", defaultValue = "false")
 	public static boolean LOG_CHAT;
-	
+
 	/**
 	 * Log Chat and Save to Database
 	 */
 	@Property(key = "chatserver.log.chat_to_db", defaultValue = "false")
 	public static boolean LOG_CHAT_TO_DB;
-	
+
 	/**
 	 * Message Delay
 	 */
 	@Property(key = "chatserver.chat.message.delay", defaultValue = "30")
 	public static int MESSAGE_DELAY;
-        
+
 	/**
 	 * Specifies the frequency the chat server will be restarted
 	 */
 	@Property(key = "chatserver.restart.frequency", defaultValue = "NEVER")
 	public static String CHATSERVER_RESTART_FREQUENCY;
-        
+
 	/**
 	 * Specifies the exact time of day the server should be restarted (of course respecting the frequency)
 	 */
@@ -80,24 +82,20 @@ public class Config
 	/**
 	 * Load configs from files.
 	 */
-	public static void load()
-	{
-		try
-		{
+	public static void load() {
+		try {
 			String network = "./config/network";
 			Properties[] props = PropertiesUtils.loadAllFromDirectory(network);
-			
+
 			log.info("Loading: " + network + "/network.properties");
 			ConfigurableProcessor.process(Config.class, props);
-			
+
 			log.info("Loading: " + network + "/commons.properties");
 			ConfigurableProcessor.process(CommonsConfig.class, props);
-			
+
 			log.info("Loading: " + network + "/database.properties");
 			ConfigurableProcessor.process(DatabaseConfig.class, props);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Can't load chatserver configuration", e);
 			throw new Error("Can't load chatserver configuration", e);
 		}

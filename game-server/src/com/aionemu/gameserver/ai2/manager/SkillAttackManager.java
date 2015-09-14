@@ -37,8 +37,7 @@ public class SkillAttackManager {
 			if (delay > 0) {
 				ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI),
 					delay + DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration());
-			}
-			else {
+			} else {
 				skillAction(npcAI);
 			}
 		}
@@ -87,8 +86,7 @@ public class SkillAttackManager {
 			if (!success) {
 				afterUseSkill(npcAI);
 			}
-		}
-		else {
+		} else {
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 		}

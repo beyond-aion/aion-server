@@ -1,10 +1,10 @@
 package instance.rakes;
 
-import com.aionemu.commons.utils.Rnd;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -20,10 +20,8 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller, Bobobear
- *
  */
 @InstanceID(301020000)
 public class IDShulackRoseSolo02Instance extends GeneralInstanceHandler {
@@ -32,19 +30,17 @@ public class IDShulackRoseSolo02Instance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 730764:
 				if (!teleportEnabled.get()) {
 					if (player.getInventory().getItemCountByItemId(185000148) != 0) {
 						player.getInventory().decreaseByItemId(185000148, 1);
 						teleportEnabled.compareAndSet(false, true);
-						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(),704.3273f, 500.8049f, 939.6262f, (byte) 0,
+						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 704.3273f, 500.8049f, 939.6262f, (byte) 0,
 							TeleportAnimation.BEAM_ANIMATION);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622801)));
-				}
-				else
+				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 704.3273f, 500.8049f, 939.6262f, (byte) 0,
 						TeleportAnimation.BEAM_ANIMATION);
 				break;
@@ -54,19 +50,19 @@ public class IDShulackRoseSolo02Instance extends GeneralInstanceHandler {
 				break;
 		}
 	}
-        
-        @Override
+
+	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		if (Rnd.get(1, 100) > 75) { 
+		if (Rnd.get(1, 100) > 75) {
 			spawn(230649, 460.9086f, 513.1888f, 952.549f, (byte) 1); // Nerukiki the Timid
 		}
 	}
-        
-        @Override
+
+	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0,
-			player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;

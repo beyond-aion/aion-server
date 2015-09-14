@@ -19,7 +19,6 @@ public abstract class AbstractQuestZoneObserver extends ActionObserver {
 	protected Vector3f oldPos;
 	protected int stepCount;
 	private AtomicBoolean isRunning = new AtomicBoolean();
-	
 
 	public AbstractQuestZoneObserver(Player player, ZoneTemplate zoneTemplate) {
 		super(ObserverType.ALL);
@@ -47,8 +46,7 @@ public abstract class AbstractQuestZoneObserver extends ActionObserver {
 							oldPos = currentPos;
 						}
 						onMoved(distance, distanceFromCenter, stepCount, System.currentTimeMillis() - startTime);
-					}
-					finally {
+					} finally {
 						isRunning.set(false);
 					}
 				}

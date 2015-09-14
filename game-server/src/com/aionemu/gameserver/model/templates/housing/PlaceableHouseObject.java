@@ -11,12 +11,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PlaceableHouseObject")
-@XmlSeeAlso(
-{ 
-	HousingJukeBox.class, HousingPicture.class, HousingPostbox.class, 
-	HousingChair.class, HousingStorage.class, HousingNpc.class, HousingMoveableItem.class, 
-	HousingUseableItem.class, HousingPassiveItem.class, HousingEmblem.class
-})
+@XmlSeeAlso({ HousingJukeBox.class, HousingPicture.class, HousingPostbox.class, HousingChair.class, HousingStorage.class, HousingNpc.class,
+	HousingMoveableItem.class, HousingUseableItem.class, HousingPassiveItem.class, HousingEmblem.class })
 public abstract class PlaceableHouseObject extends AbstractHouseObject {
 
 	@XmlAttribute(name = "use_days")
@@ -76,7 +72,7 @@ public abstract class PlaceableHouseObject extends AbstractHouseObject {
 	public PlaceArea getArea() {
 		return area;
 	}
-	
+
 	public abstract byte getTypeId();
 
 }

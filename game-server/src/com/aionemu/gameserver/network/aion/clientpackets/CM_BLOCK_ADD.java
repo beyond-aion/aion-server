@@ -46,12 +46,13 @@ public class CM_BLOCK_ADD extends AionClientPacket {
 
 		Player targetPlayer = World.getInstance().findPlayer(targetName);
 
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		// Trying to block self
 		if (activePlayer.getName().equalsIgnoreCase(targetName)) {
 			sendPacket(new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.CANT_BLOCK_SELF, targetName));
@@ -79,8 +80,7 @@ public class CM_BLOCK_ADD extends AionClientPacket {
 
 		// Try and block player
 		else if (!SocialService.addBlockedUser(activePlayer, targetPlayer, reason)) {
-			log.error("Failed to add " + targetPlayer.getName() + " to the block list for " + activePlayer.getName()
-				+ " - check database setup.");
+			log.error("Failed to add " + targetPlayer.getName() + " to the block list for " + activePlayer.getName() + " - check database setup.");
 		}
 
 	}

@@ -31,8 +31,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  * @author Ritsu
  */
 @InstanceID(301160000)
-public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler 
-{
+public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
 	private List<Integer> movies = new ArrayList<Integer>();
 	private boolean isInstanceDestroyed;
@@ -41,52 +40,42 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 	private AtomicBoolean moviePlayed = new AtomicBoolean();
 
 	@Override
-	public void onEnterInstance(final Player player) 
-	{
-		ThreadPoolManager.getInstance().schedule(new Runnable()
-		{
+	public void onEnterInstance(final Player player) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
-			public void run()	
-			{
-				SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21329 : 21332 , player, player, 0);
+			public void run() {
+				SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21329 : 21332, player, player, 0);
 
 			}
-		} , 1000);
+		}, 1000);
 	}
 
-	private void cancelSpawnTask() 
-	{
-		if (spawnTask != null && !spawnTask.isCancelled()) 
-		{
+	private void cancelSpawnTask() {
+		if (spawnTask != null && !spawnTask.isCancelled()) {
 			spawnTask.cancel(true);
 		}
 	}
 
-	private void cancelDespawnBossTask() 
-	{
-		if (despawnBossTask != null && !despawnBossTask.isCancelled()) 
-		{
+	private void cancelDespawnBossTask() {
+		if (despawnBossTask != null && !despawnBossTask.isCancelled()) {
 			despawnBossTask.cancel(true);
 		}
 	}
 
 	@Override
-	public void onPlayMovieEnd(Player player, int movieId) 
-	{
-		switch (movieId) 
-		{
+	public void onPlayMovieEnd(Player player, int movieId) {
+		switch (movieId) {
 			case 983:
-				if (moviePlayed.compareAndSet(false, true))
-				{
+				if (moviePlayed.compareAndSet(false, true)) {
 					NpcShoutsService.getInstance().sendMsg(getNpc(831747), 1500966, getNpc(831747).getObjectId(), 0, 0);
-					despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-					{
+					despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
-						public void run()	
-						{
+						public void run() {
 							getNpc(831747).getController().delete();
 						}
-					} , 3000);
+					}, 3000);
 					spawnPhase();
 					startDespawnBossTask();
 					break;
@@ -94,15 +83,12 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 		}
 	}
 
-	private void spawnPhase()
-	{
-		spawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	private void spawnPhase() {
+		spawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
-			public void run() 
-			{
-				if (!isInstanceDestroyed) 
-				{
+			public void run() {
+				if (!isInstanceDestroyed) {
 					// Left
 					// Wave 1
 					sp(233455, 524.41406f, 628.0354f, 207.97612f, (byte) 90, 0, "3011600001");
@@ -284,31 +270,27 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 					sp(233450, 521.3197f, 494.83768f, 198.40182f, (byte) 90, 140000, "3011600006");
 					sp(233450, 523.791f, 496.6259f, 198.52597f, (byte) 90, 140000, "3011600007");
 					sp(233450, 521.4548f, 496.7582f, 198.46896f, (byte) 90, 140000, "3011600008");
-					sendMsg(1501136, 0, false, 25,  160000);
+					sendMsg(1501136, 0, false, 25, 160000);
 					// Mistress Viloa
 					sp(233459, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 160000);
-					sendMsg(1501123, 0, false, 25,  180000);
-					sendMsg(1501143, 0, false, 25,  200000);
+					sendMsg(1501123, 0, false, 25, 180000);
+					sendMsg(1501143, 0, false, 25, 200000);
 					// Harlequin Lord Reshka
 					sp(233453, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 200000);
-					sendMsg(1501131, 0, false, 25,  300000);
+					sendMsg(1501131, 0, false, 25, 300000);
 					// Nightmare Lord Heiramune
 					sp(233467, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 300000);
 				}
 			}
-		} , 300);
+		}, 300);
 	}
 
-	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time)
-	{
-		ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				if (!isInstanceDestroyed) 
-				{
+			public void run() {
+				if (!isInstanceDestroyed) {
 					spawn(npcId, x, y, z, h);
 				}
 			}
@@ -316,17 +298,13 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 		}, time);
 	}
 
-	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkerId)
-	{
-		ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkerId) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				if (!isInstanceDestroyed) 
-				{
-					Npc npc = (Npc)spawn(npcId, x, y, z, h);
+			public void run() {
+				if (!isInstanceDestroyed) {
+					Npc npc = (Npc) spawn(npcId, x, y, z, h);
 					npc.getSpawn().setWalkerId(walkerId);
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
 				}
@@ -335,49 +313,40 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 		}, time);
 	}
 
-	private void startDespawnBossTask() 
-	{
-		despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	private void startDespawnBossTask() {
+		despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
-			public void run()	
-			{
+			public void run() {
 				despawnNpc(getNpc(233459));
 			}
-		} , 210000);
-		despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+		}, 210000);
+		despawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
-			public void run()	
-			{
+			public void run() {
 				despawnNpc(getNpc(233453));
 			}
-		} , 310000);
+		}, 310000);
 	}
 
-	private void despawnNpcs(List<Npc> npcs)
-	{
-		for (Npc npc : npcs)
-		{
+	private void despawnNpcs(List<Npc> npcs) {
+		for (Npc npc : npcs) {
 			npc.getController().onDelete();
 		}
 	}
 
-	private List<Npc> getNpcs(int npcId)
-	{
-		if (!isInstanceDestroyed) 
-		{
+	private List<Npc> getNpcs(int npcId) {
+		if (!isInstanceDestroyed) {
 			return instance.getNpcs(npcId);
 		}
 		return null;
 	}
 
 	@Override
-	public void onDie(Npc npc) 
-	{
+	public void onDie(Npc npc) {
 
-		switch (npc.getNpcId()) 
-		{
+		switch (npc.getNpcId()) {
 			case 831740:
 			case 831348:
 			case 831349:
@@ -396,16 +365,14 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 				despawnNpcs(getNpcs(831349));
 				break;
 			case 233467:
-				instance.doOnAllPlayers(new Visitor<Player>() 
-					{
+				instance.doOnAllPlayers(new Visitor<Player>() {
 
 					@Override
-					public void visit(Player p) 
-					{
+					public void visit(Player p) {
 						PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984));
 					}
 
-					});
+				});
 				despawnNpc(getNpc(831740));
 				despawnNpc(getNpc(831627));
 				despawnNpc(getNpc(831741));
@@ -451,17 +418,14 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 		}
 	}
 
-	protected void despawnNpc(Npc npc) 
-	{
-		if (npc != null) 
-		{
+	protected void despawnNpc(Npc npc) {
+		if (npc != null) {
 			npc.getController().onDelete();
 		}
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) 
-	{
+	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
@@ -469,8 +433,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 	}
 
 	@Override
-	public boolean onReviveEvent(Player player)
-	{
+	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
@@ -479,27 +442,23 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler
 	}
 
 	@Override
-	public void onLeaveInstance(Player player) 
-	{
+	public void onLeaveInstance(Player player) {
 		removeEffects(player);
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) 
-	{
+	public void onPlayerLogOut(Player player) {
 		removeEffects(player);
 	}
 
-	private void removeEffects(Player player) 
-	{
+	private void removeEffects(Player player) {
 		PlayerEffectController effectController = player.getEffectController();
 		effectController.removeEffect(player.getRace() == Race.ELYOS ? 21329 : 21332);
 		effectController.removeEffect(player.getRace() == Race.ELYOS ? 21331 : 21334);
 	}
 
 	@Override
-	public void onInstanceDestroy() 
-	{
+	public void onInstanceDestroy() {
 		cancelSpawnTask();
 		cancelDespawnBossTask();
 		movies.clear();

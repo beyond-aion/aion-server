@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,8 +11,6 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Sarynth, xTz
@@ -29,8 +29,8 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	private final List<AllianceInfo> leagueData = new ArrayList<>();
 	public static final int VICECAPTAIN_PROMOTE = 1300984;
 	public static final int VICECAPTAIN_DEMOTE = 1300985;
-	public static final int LEAGUE_ALLIANCE_ENTERED = 1400560; //Your alliance has joined %0's Alliance League.
-	public static final int LEAGUE_JOINED_ALLIANCE = 1400561; //%0's alliance has joined the Alliance League.
+	public static final int LEAGUE_ALLIANCE_ENTERED = 1400560; // Your alliance has joined %0's Alliance League.
+	public static final int LEAGUE_JOINED_ALLIANCE = 1400561; // %0's alliance has joined the Alliance League.
 	public static final int LEAGUE_LEFT_ME = 1400571;
 	public static final int LEAGUE_LEFT_HIM = 1400572;
 	public static final int LEAGUE_EXPEL = 1400574;
@@ -134,7 +134,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 		writeH(alliance.groupSize());
 		writeD(groupid);
 		writeD(leaderid);
-		writeD(player == null || player.getPosition() == null ? 0 : player.getWorldId());//mapId
+		writeD(player == null || player.getPosition() == null ? 0 : player.getWorldId());// mapId
 		Collection<Integer> ids = alliance.getViceCaptainIds();
 		for (Integer id : ids) {
 			writeD(id);

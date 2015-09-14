@@ -5,8 +5,7 @@ import java.nio.channels.SocketChannel;
 
 /**
  * This interface defines a factory for connection implementations.<br>
- * It is used by the class {@link com.aionemu.commons.network.Acceptor Acceptor} to create actual connection
- * implementations.<br>
+ * It is used by the class {@link com.aionemu.commons.network.Acceptor Acceptor} to create actual connection implementations.<br>
  * 
  * @author -Nemesiss-
  * @see com.aionemu.commons.network.Acceptor

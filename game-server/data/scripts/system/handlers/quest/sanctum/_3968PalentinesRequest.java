@@ -62,12 +62,10 @@ public class _3968PalentinesRequest extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					}
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204528) {
+		} else if (targetId == 204528) {
 			if (qs.getStatus() == QuestStatus.START && var == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
@@ -78,12 +76,10 @@ public class _3968PalentinesRequest extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					}
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 203927) {
+		} else if (targetId == 203927) {
 			if (qs.getStatus() == QuestStatus.START && var == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
@@ -95,12 +91,10 @@ public class _3968PalentinesRequest extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					}
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 798390) {
+		} else if (targetId == 798390) {
 			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
@@ -111,8 +105,7 @@ public class _3968PalentinesRequest extends QuestHandler {
 				removeQuestItem(env, 182206124, 1);
 				removeQuestItem(env, 182206125, 1);
 				return sendQuestEndDialog(env);
-			}
-			else
+			} else
 				return sendQuestEndDialog(env);
 		}
 		return false;

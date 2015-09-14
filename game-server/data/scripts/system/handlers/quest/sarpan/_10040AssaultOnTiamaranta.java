@@ -55,8 +55,7 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 		if (defaultOnLvlUpEvent(env)) {
 			int[] ids = { 10050, 10051, 10052, 10053 };
 			for (int id : ids) {
-				QuestEngine.getInstance().onEnterZoneMissionEnd(
-					new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+				QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 			}
 			return true;
 		}
@@ -69,25 +68,24 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-		  if (player.getWorldId() != 300410000) {
+			if (player.getWorldId() != 300410000) {
 				int var = qs.getQuestVarById(0);
 				if (var > 1) {
 					qs.setQuestVar(1);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-		   if (player.getWorldId() != 600020000) {
-		  	 qs.setStatus(QuestStatus.START);
-					qs.setQuestVar(1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
-					return true;
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (player.getWorldId() != 600020000) {
+				qs.setStatus(QuestStatus.START);
+				qs.setQuestVar(1);
+				updateQuestStatus(env);
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
+				return true;
 			}
 		}
 		return false;
@@ -104,8 +102,7 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 			if (targetId == 798926) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -123,11 +120,9 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					changeQuestStep(env, 0, 1, false);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 800084 && var == 1) {
+			} else if (targetId == 800084 && var == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
@@ -137,11 +132,9 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 					changeQuestStep(env, 1, 2, false);
 					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 18));
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 799721 && var == 2) {
+			} else if (targetId == 799721 && var == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_1694)
@@ -149,46 +142,37 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO3) {
 					changeQuestStep(env, 2, 3, false);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 730527 && var == 3) {
+			} else if (targetId == 730527 && var == 3) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
-					TeleportService2.teleportTo(player, 300410000, player.getInstanceId(), 756, 214, 1029, (byte) 116,
-						TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300410000, player.getInstanceId(), 756, 214, 1029, (byte) 116, TeleportAnimation.BEAM_ANIMATION);
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 800280) {
+			} else if (targetId == 800280) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_2717)
 					return sendQuestDialog(env, 2717);
 				/*
-				 * else if (env.getDialog() == DialogAction.SET_SUCCEED) { TeleportService2.teleportTo(player, 600020000, 1216f,
-				 * 1360f, 1358f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+				 * else if (env.getDialog() == DialogAction.SET_SUCCEED) { TeleportService2.teleportTo(player, 600020000, 1216f, 1360f, 1358f, (byte) 0,
+				 * TeleportAnimation.BEAM_ANIMATION);
 				 */
 				else if (env.getDialog() == DialogAction.SET_SUCCEED) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
-					TeleportService2.teleportTo(player, 600020000, 1, 1219, 1361, 1359, (byte) 70,
-						TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 600020000, 1, 1219, 1361, 1359, (byte) 70, TeleportAnimation.BEAM_ANIMATION);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205535) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -265,8 +249,8 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 			if (var > 1) {
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -326,8 +310,7 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 				qs.setQuestVarById(0, 1);
 				return true;
 			}
-		}
-		else if (zoneName.equals(ZoneName.get("EULOS_DECK_300410000"))) {
+		} else if (zoneName.equals(ZoneName.get("EULOS_DECK_300410000"))) {
 			qs.setQuestVarById(0, 1);
 			return true;
 		}

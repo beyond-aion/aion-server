@@ -16,7 +16,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * @author Dwarfpicker
  * @rework Imaginary
  */
-public class GoTo extends AdminCommand{
+public class GoTo extends AdminCommand {
 
 	public GoTo() {
 		super("goto");
@@ -28,13 +28,13 @@ public class GoTo extends AdminCommand{
 			PacketSendUtility.sendMessage(player, "syntax //goto <location>");
 			return;
 		}
-		
+
 		StringBuilder sbDestination = new StringBuilder();
-		for(String p : params)
+		for (String p : params)
 			sbDestination.append(p + " ");
-		
+
 		String destination = sbDestination.toString().trim();
-		
+
 		/**
 		 * Elysea
 		 */
@@ -101,13 +101,12 @@ public class GoTo extends AdminCommand{
 			goTo(player, WorldMapType.HEIRON.getId(), 1999, 1391, 118);
 		else if (destination.equalsIgnoreCase("Arbolu"))
 			goTo(player, WorldMapType.HEIRON.getId(), 170, 1662, 120);
-			
-		
+
 		/**
 		 * Asmodae
 		 */
 		// Pandaemonium
-		else if  (destination.equalsIgnoreCase("Pandaemonium"))
+		else if (destination.equalsIgnoreCase("Pandaemonium"))
 			goTo(player, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195);
 		// Marchutran
 		else if (destination.equalsIgnoreCase("Marchutan"))
@@ -169,7 +168,7 @@ public class GoTo extends AdminCommand{
 			goTo(player, WorldMapType.BELUSLAN.getId(), 1942, 513, 412);
 		else if (destination.equalsIgnoreCase("Hoarfrost"))
 			goTo(player, WorldMapType.BELUSLAN.getId(), 2431, 2063, 579);
-		
+
 		/**
 		 * Balaurea
 		 */
@@ -192,7 +191,7 @@ public class GoTo extends AdminCommand{
 		// Silentera
 		else if (destination.equalsIgnoreCase("Silentera"))
 			goTo(player, 600010000, 583, 767, 300);
-		
+
 		/**
 		 * Abyss
 		 */
@@ -206,7 +205,7 @@ public class GoTo extends AdminCommand{
 			goTo(player, WorldMapType.RESHANTA.getId(), 1596, 2952, 2943);
 		else if (destination.equalsIgnoreCase("Abyss 4"))
 			goTo(player, WorldMapType.RESHANTA.getId(), 2054, 660, 2843);
-		else if (destination.equalsIgnoreCase("Eye of Reshanta") ||destination.equalsIgnoreCase("Eye"))
+		else if (destination.equalsIgnoreCase("Eye of Reshanta") || destination.equalsIgnoreCase("Eye"))
 			goTo(player, WorldMapType.RESHANTA.getId(), 1979, 2114, 2291);
 		else if (destination.equalsIgnoreCase("Divine Fortress") || destination.equalsIgnoreCase("Divine"))
 			goTo(player, WorldMapType.RESHANTA.getId(), 2130, 1925, 2322);
@@ -220,7 +219,7 @@ public class GoTo extends AdminCommand{
 			goTo(player, 300030000, 513, 668, 331);
 		else if (destination.equalsIgnoreCase("Arcanis") || destination.equalsIgnoreCase("Sky Temple of Arcanis"))
 			goTo(player, 320050000, 177, 229, 536);
-		else if (destination.equalsIgnoreCase("Fire Temple") ||destination.equalsIgnoreCase("FT"))
+		else if (destination.equalsIgnoreCase("Fire Temple") || destination.equalsIgnoreCase("FT"))
 			goTo(player, 320100000, 144, 312, 123);
 		else if (destination.equalsIgnoreCase("Kromede") || destination.equalsIgnoreCase("Kromede Trial"))
 			goTo(player, 300230000, 248, 244, 189);
@@ -316,13 +315,13 @@ public class GoTo extends AdminCommand{
 		else if (destination.equalsIgnoreCase("Ophidan Bridge") || destination.equalsIgnoreCase("OB"))
 			goTo(player, 300590000, 755.41864f, 560.617f, 572.9637f);
 		else if (destination.equalsIgnoreCase("Idgel Research Center") || destination.equalsIgnoreCase("IRC"))
-			goTo(player, 300530000,560.5229f, 508.58438f, 102.67931f);
+			goTo(player, 300530000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Legion Idgel Research Center") || destination.equalsIgnoreCase("LIRC"))
-			goTo(player, 301170000,560.5229f, 508.58438f, 102.67931f);
+			goTo(player, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Danuar Reliquary") || destination.equalsIgnoreCase("DR"))
 			goTo(player, 301110000, 256.60f, 257.99f, 241.78f);
 		else if (destination.equalsIgnoreCase("Idgel Research Center Legion") || destination.equalsIgnoreCase("IRCL"))
-			goTo(player, 301170000,560.5229f, 508.58438f, 102.67931f);
+			goTo(player, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Nightmare Circus") || destination.equalsIgnoreCase("NC"))
 			goTo(player, 301160000, 467.64f, 568.34f, 201.67f);
 		// 4.0 instances
@@ -335,13 +334,15 @@ public class GoTo extends AdminCommand{
 			goTo(player, 301210000, 753, 532, 577);
 		else if (destination.equalsIgnoreCase("Iron Wall Warfront") || destination.equalsIgnoreCase("IWW") || destination.equalsIgnoreCase("Iron Wall"))
 			goTo(player, 301220000, 550, 477, 213);
-		else if (destination.equalsIgnoreCase("Lucky Ophidian Bridge") || destination.equalsIgnoreCase("LOB") || destination.equalsIgnoreCase("Lucky Ophidian"))
+		else if (destination.equalsIgnoreCase("Lucky Ophidian Bridge") || destination.equalsIgnoreCase("LOB")
+			|| destination.equalsIgnoreCase("Lucky Ophidian"))
 			goTo(player, 301320000, 750, 554, 574);
-		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR") || destination.equalsIgnoreCase("Lucky Danuar"))
+		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR")
+			|| destination.equalsIgnoreCase("Lucky Danuar"))
 			goTo(player, 301320000, 750, 554, 574);
 		else if (destination.equalsIgnoreCase("Illuminary Obelisk") || destination.equalsIgnoreCase("IB"))
 			goTo(player, 301230000, 322.38f, 324.47f, 405.49997f);
-		
+
 		/**
 		 * Quest Instance Maps
 		 */
@@ -369,7 +370,7 @@ public class GoTo extends AdminCommand{
 			goTo(player, 320030000, 275, 168, 205);
 		else if (destination.equalsIgnoreCase("Nidalber"))
 			goTo(player, 320040000, 275, 168, 205);
-		
+
 		/**
 		 * Arenas
 		 */
@@ -443,7 +444,7 @@ public class GoTo extends AdminCommand{
 		// GM zone
 		else if (destination.equalsIgnoreCase("gm"))
 			goTo(player, 120020000, 1442, 1133, 302);
-		
+
 		/**
 		 * 2.5 Maps
 		 */
@@ -453,7 +454,7 @@ public class GoTo extends AdminCommand{
 			goTo(player, 120080000, 577, 250, 94);
 		else if (destination.equalsIgnoreCase("Esoterrace"))
 			goTo(player, 300250000, 333, 437, 326);
-			
+
 		/**
 		 * 3.0 Maps
 		 */
@@ -483,42 +484,41 @@ public class GoTo extends AdminCommand{
 			goTo(player, 300380000, 492, 553, 106);
 		else if (destination.equalsIgnoreCase("Satra"))
 			goTo(player, 300470000, 510, 180, 159);
-		
+
 		/**
 		 * 3.5
 		 */
-		else if(destination.equalsIgnoreCase("Dragon Lords Refuge"))
+		else if (destination.equalsIgnoreCase("Dragon Lords Refuge"))
 			goTo(player, 300520000, 506, 516, 242);
-		
-		else if(destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat"))
+
+		else if (destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat"))
 			goTo(player, 300520000, 495, 528, 417);
-		
 
 		/**
-		* 4.3 
-		*/
-		
+		 * 4.3
+		 */
+
 		else if (destination.equalsIgnoreCase("Beacon"))
 			goTo(player, WorldMapType.NORHTERN_KATALAM.getId(), 400, 2717, 143);
 		else if (destination.equalsIgnoreCase("Danuar"))
-			goTo(player, WorldMapType.NORHTERN_KATALAM.getId(), 364, 385, 282);		
+			goTo(player, WorldMapType.NORHTERN_KATALAM.getId(), 364, 385, 282);
 		else if (destination.equalsIgnoreCase("Danaria"))
 			goTo(player, WorldMapType.SOUTHERN_KATALAM.getId(), 2544, 1699, 142);
 		else if (destination.equalsIgnoreCase("Idian") || destination.equalsIgnoreCase("Idian Depths"))
 			goTo(player, WorldMapType.UNDERGROUND_KATALAM.getId(), 666, 644, 515);
-			
+
 		/**
-        * 4.7 Instances
-        */	
+		 * 4.7 Instances
+		 */
 		else if (destination.equalsIgnoreCase("idgel_dome"))
 			goTo(player, 301310000, 254, 179, 83);
 		else if (destination.equalsIgnoreCase("linkgate_foundry"))
-			goTo(player, 301270000, 362, 260, 312);	
-				
+			goTo(player, 301270000, 362, 260, 312);
+
 		/**
-        * Abyss
-        */
-        // New map 4.7
+		 * Abyss
+		 */
+		// New map 4.7
 		else if (destination.equalsIgnoreCase("kaldor"))
 			goTo(player, 600090000, 397, 1380, 163);
 		else if (destination.equalsIgnoreCase("levinshor"))
@@ -532,12 +532,12 @@ public class GoTo extends AdminCommand{
 		else if (destination.equalsIgnoreCase("atanatos"))
 			goTo(player, 400050000, 1238, 1232, 1518);
 		else if (destination.equalsIgnoreCase("disillon"))
-			goTo(player, 400060000, 1238, 1232, 1518);	
-		
+			goTo(player, 400060000, 1238, 1232, 1518);
+
 		else
 			PacketSendUtility.sendMessage(player, "Could not find the specified destination !");
 	}
-	
+
 	private static void goTo(final Player player, int worldId, float x, float y, float z) {
 		WorldMap destinationMap = World.getInstance().getWorldMap(worldId);
 		if (destinationMap.isInstanceType())
@@ -545,9 +545,9 @@ public class GoTo extends AdminCommand{
 		else
 			TeleportService2.teleportTo(player, worldId, x, y, z);
 	}
-	
+
 	private static int getInstanceId(int worldId, Player player) {
-		if (player.getWorldId() == worldId)	{
+		if (player.getWorldId() == worldId) {
 			WorldMapInstance registeredInstance = InstanceService.getRegisteredInstance(worldId, player.getObjectId());
 			if (registeredInstance != null)
 				return registeredInstance.getInstanceId();
@@ -556,7 +556,7 @@ public class GoTo extends AdminCommand{
 		InstanceService.registerPlayerWithInstance(newInstance, player);
 		return newInstance.getInstanceId();
 	}
-	
+
 	@Override
 	public void info(Player player, String message) {
 		PacketSendUtility.sendMessage(player, "Syntax : //goto <location>");

@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftLearnAction")
 public class CraftLearnAction extends AbstractItemAction {
+
 	@XmlAttribute
 	protected int recipeid;
 
@@ -24,8 +25,9 @@ public class CraftLearnAction extends AbstractItemAction {
 	public void act(Player player, Item parentItem, Item targetItem) {
 		player.getController().cancelUseItem();
 		if (player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
-			if(RecipeService.addRecipe(player, recipeid, false)) {
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId()));
+			if (RecipeService.addRecipe(player, recipeid, false)) {
+				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
+					.getTemplateId()));
 			}
 		}
 	}

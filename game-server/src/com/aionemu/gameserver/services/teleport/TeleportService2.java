@@ -61,7 +61,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 public class TeleportService2 {
@@ -80,8 +79,8 @@ public class TeleportService2 {
 	public static void teleport(TeleporterTemplate template, int locId, Player player, Npc npc, TeleportAnimation animation) {
 		TribeClass tribe = npc.getTribe();
 		Race race = player.getRace();
-		if (tribe.equals(TribeClass.FIELD_OBJECT_LIGHT) && race.equals(Race.ASMODIANS) ||
-				(tribe.equals(TribeClass.FIELD_OBJECT_DARK) && race.equals(Race.ELYOS))) {
+		if (tribe.equals(TribeClass.FIELD_OBJECT_LIGHT) && race.equals(Race.ASMODIANS)
+			|| (tribe.equals(TribeClass.FIELD_OBJECT_DARK) && race.equals(Race.ELYOS))) {
 			return;
 		}
 
@@ -89,8 +88,7 @@ public class TeleportService2 {
 			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
 			if (player.isGM())
-				PacketSendUtility.sendMessage(player,
-						"Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
+				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
 			return;
 		}
 
@@ -99,8 +97,7 @@ public class TeleportService2 {
 			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
 			if (player.isGM())
-				PacketSendUtility.sendMessage(player,
-						"Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
+				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
 			return;
 		}
 
@@ -134,15 +131,14 @@ public class TeleportService2 {
 
 				double dist = MathUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
 				if (dist > 7) {
-					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " but hes too far "
-							+ dist);
+					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " but hes too far " + dist);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
 					return;
 				}
 
 				if (player.getWorldId() != flypath.getStartWorldId()) {
-					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId()
-							+ " from not native start world " + player.getWorldId() + ". expected " + flypath.getStartWorldId());
+					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " from not native start world " + player.getWorldId()
+						+ ". expected " + flypath.getStartWorldId());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
 					return;
 				}
@@ -153,17 +149,15 @@ public class TeleportService2 {
 			player.setState(CreatureState.FLIGHT_TELEPORT);
 			player.unsetState(CreatureState.ACTIVE);
 			player.setFlightTeleportId(location.getTeleportId());
-			PacketSendUtility.broadcastPacket(player,
-					new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, location.getTeleportId(), 0), true);
-		}
-		else {
+			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, location.getTeleportId(), 0), true);
+		} else {
 			int instanceId = 1;
 			int mapId = locationTemplate.getMapId();
 			if (player.getWorldId() == mapId) {
 				instanceId = player.getInstanceId();
 			}
-			sendLoc(player, mapId, instanceId, locationTemplate.getX(), locationTemplate.getY(),
-					locationTemplate.getZ(), (byte) locationTemplate.getHeading(), animation);
+			sendLoc(player, mapId, instanceId, locationTemplate.getX(), locationTemplate.getY(), locationTemplate.getZ(),
+				(byte) locationTemplate.getHeading(), animation);
 		}
 	}
 
@@ -178,11 +172,11 @@ public class TeleportService2 {
 		Storage inventory = player.getInventory();
 
 		// TODO: Price vary depending on the influence ratio
-		int basePrice = (int) (location.getPrice());
+		int basePrice = (location.getPrice());
 		// TODO check for location.getPricePvp()
 
 		long transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
-		
+
 		// If HiPassEffect is active, then all flight/teleport prices are 1 kinah
 		if (player.getController().isHiPassInEffect())
 			transportationPrice = 1;
@@ -194,8 +188,8 @@ public class TeleportService2 {
 		return true;
 	}
 
-	private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x,
-			final float y, final float z, final byte h, final TeleportAnimation animation) {
+	private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z, final byte h,
+		final TeleportAnimation animation) {
 		boolean isInstance = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).isInstance();
 		PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(isInstance, instanceId, mapId, x, y, z, h, animation.getStartAnimationId()));
 		player.unsetPlayerMode(PlayerMode.RIDE);
@@ -217,8 +211,7 @@ public class TeleportService2 {
 			player.getPosition().setXYZH(pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			Pet pet = player.getPet();
 			if (pet != null) {
-				World.getInstance().setPosition(pet, pos.getMapId(), player.getInstanceId(),
-						pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+				World.getInstance().setPosition(pet, pos.getMapId(), player.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			}
 			PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 			PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
@@ -241,11 +234,9 @@ public class TeleportService2 {
 					PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(sks.getWorldKillers(player.getWorldId()).values()));
 				}
 			}
-		}
-		else if (player.getLifeStats().isAlreadyDead()) {
+		} else if (player.getLifeStats().isAlreadyDead()) {
 			teleportDeadTo(player, pos.getMapId(), 1, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-		}
-		else {
+		} else {
 			teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		}
 	}
@@ -287,9 +278,9 @@ public class TeleportService2 {
 	public static boolean teleportTo(Player player, int worldId, int instanceId, float x, float y, float z, byte h) {
 		return teleportTo(player, worldId, instanceId, x, y, z, h, TeleportAnimation.NO_ANIMATION);
 	}
-	
+
 	public static void teleportToCapital(Player player) {
-		switch(player.getRace()) {
+		switch (player.getRace()) {
 			case ELYOS:
 				TeleportService2.teleportTo(player, WorldMapType.SANCTUM.getId(), 1, 1322, 1511, 568);
 				break;
@@ -314,21 +305,19 @@ public class TeleportService2 {
 	 * @param animation
 	 * @return
 	 */
-	public static boolean teleportTo(final Player player, final int worldId, final int instanceId,
-			final float x, final float y, final float z, final byte heading, TeleportAnimation animation) {
+	public static boolean teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
+		final byte heading, TeleportAnimation animation) {
 		if (player.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-			 PlayerReviveService.revive(player, 20, 20, true, 0);
-		}
-		else if (DuelService.getInstance().isDueling(player.getObjectId())) {
+			PlayerReviveService.revive(player, 20, 20, true, 0);
+		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
 			DuelService.getInstance().loseDuel(player);
 		}
 
 		if (animation.isNoAnimation()) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 			changePosition(player, worldId, instanceId, x, y, z, heading, animation);
-		}
-		else {
+		} else {
 			sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
 		}
 		return true;
@@ -367,7 +356,7 @@ public class TeleportService2 {
 		 * instant teleport when map is the same
 		 */
 		player.setPortAnimation(animation.getEndAnimationId());
-		//player.getController().startProtectionActiveTask();
+		// player.getController().startProtectionActiveTask();
 		if (currentWorldId == worldId && currentInstance == instanceId) {
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 			player.getController().startProtectionActiveTask();
@@ -401,7 +390,7 @@ public class TeleportService2 {
 		}
 		sendWorldSwitchMessage(player, currentWorldId, worldId, isInstance);
 	}
-	
+
 	private static void sendWorldSwitchMessage(Player player, int oldWorld, int newWorld, boolean enteredInstance) {
 		if (enteredInstance && oldWorld != newWorld) {
 			if (!WorldMapType.getWorld(newWorld).isPersonal())
@@ -435,7 +424,7 @@ public class TeleportService2 {
 	public static TeleporterTemplate getTeleporterTemplate(int npcId) {
 		return DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npcId);
 	}
-	
+
 	/**
 	 * @param player
 	 * @param b
@@ -450,7 +439,7 @@ public class TeleportService2 {
 		else if (player.getRace() == Race.ASMODIANS)
 			teleportTo(player, WorldMapType.DF_PRISON.getId(), 275, 239, 49);
 	}
-	
+
 	public static void teleportToNpc(Player player, int npcId) {
 		int worldId = player.getWorldId();
 		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(worldId, npcId);
@@ -471,8 +460,7 @@ public class TeleportService2 {
 		if (newInstance != null) {
 			InstanceService.registerPlayerWithInstance(newInstance, player);
 			teleportTo(player, searchResult.getWorldId(), newInstance.getInstanceId(), spot.getX(), spot.getY(), spot.getZ());
-		}
-		else {
+		} else {
 			teleportTo(player, searchResult.getWorldId(), spot.getX(), spot.getY(), spot.getZ());
 		}
 	}
@@ -491,8 +479,7 @@ public class TeleportService2 {
 			x = bplist.getX();
 			y = bplist.getY();
 			z = bplist.getZ();
-		}
-		else {
+		} else {
 			PlayerInitialData.LocationData locationData = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
 			worldId = locationData.getMapId();
 			x = locationData.getX();
@@ -501,8 +488,6 @@ public class TeleportService2 {
 		}
 		PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(worldId, x, y, z, player));
 	}
-
-
 
 	/**
 	 * This method will move a player to their bind location
@@ -522,8 +507,7 @@ public class TeleportService2 {
 			y = bplist.getY();
 			z = bplist.getZ();
 			h = bplist.getHeading();
-		}
-		else {
+		} else {
 			PlayerInitialData.LocationData locationData = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
 			worldId = locationData.getMapId();
 			x = locationData.getX();
@@ -532,11 +516,10 @@ public class TeleportService2 {
 		}
 
 		InstanceService.onLeaveInstance(player);
-		
+
 		if (useTeleport) {
 			teleportTo(player, worldId, x, y, z, h);
-		}
-		else {
+		} else {
 			World.getInstance().setPosition(player, worldId, 1, x, y, z, h);
 		}
 	}
@@ -569,35 +552,35 @@ public class TeleportService2 {
 		}
 		if (InstanceService.isInstanceExist(instanceExit.getExitWorld(), 1)) {
 			teleportTo(player, instanceExit.getExitWorld(), instanceExit.getX(), instanceExit.getY(), instanceExit.getZ(), instanceExit.getH());
-		}
-		else {
+		} else {
 			moveToBindLocation(player, true);
 		}
 	}
-	
+
 	public static void setEventPos(WorldPosition pos, Race race) {
-		if(race == Race.ELYOS)
-		{
-			eventPosElyos = new double[] {pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading()};
-			log.info("elyos: mapId: "+pos.getMapId()+", instanceId: "+(int) eventPosElyos[1]+", X: "+eventPosElyos[2]+", Y: "+eventPosElyos[3]+", Z: "+eventPosElyos[4]+", H: "+(byte) eventPosElyos[5]);
-		}
-		else if(race == Race.ASMODIANS)
-		{
-			eventPosAsmodians = new double[] {pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading()};
-			log.info("asmo: mapId: "+(int) pos.getMapId()+", instanceId: "+(int) eventPosAsmodians[1]+", X: "+eventPosAsmodians[2]+", Y: "+eventPosAsmodians[3]+", Z: "+eventPosAsmodians[4]+", H: "+(byte) eventPosAsmodians[5]);
+		if (race == Race.ELYOS) {
+			eventPosElyos = new double[] { pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading() };
+			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: "
+				+ eventPosElyos[3] + ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
+		} else if (race == Race.ASMODIANS) {
+			eventPosAsmodians = new double[] { pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
+				pos.getHeading() };
+			log.info("asmo: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosAsmodians[1] + ", X: " + eventPosAsmodians[2] + ", Y: "
+				+ eventPosAsmodians[3] + ", Z: " + eventPosAsmodians[4] + ", H: " + (byte) eventPosAsmodians[5]);
 		}
 	}
+
 	public static void teleportToEvent(Player player) {
 		double[] pos = null;
-		if(player.getRace() == Race.ELYOS)
+		if (player.getRace() == Race.ELYOS)
 			pos = eventPosElyos;
-		else if(player.getRace() == Race.ASMODIANS)
+		else if (player.getRace() == Race.ASMODIANS)
 			pos = eventPosAsmodians;
-			
-			if(pos == null)
-				moveToBindLocation(player, true);
-			else
-				teleportTo(player, (int) pos[0], (int) pos[1], (float) pos[2], (float) pos[3], (float) pos[4], (byte) pos[5], TeleportAnimation.BEAM_ANIMATION);
+
+		if (pos == null)
+			moveToBindLocation(player, true);
+		else
+			teleportTo(player, (int) pos[0], (int) pos[1], (float) pos[2], (float) pos[3], (float) pos[4], (byte) pos[5], TeleportAnimation.BEAM_ANIMATION);
 	}
 
 	public static InstanceExit getInstanceExit(int worldId, Race race) {
@@ -633,8 +616,7 @@ public class TeleportService2 {
 	 */
 	public static void changeChannel(Player player, int channel) {
 		World.getInstance().despawn(player);
-		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(),
-				player.getZ(), player.getHeading());
+		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));

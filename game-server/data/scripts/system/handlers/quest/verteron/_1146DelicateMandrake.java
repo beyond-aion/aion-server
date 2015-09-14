@@ -61,8 +61,7 @@ public class _1146DelicateMandrake extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203139) { // Krodis
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -78,8 +77,7 @@ public class _1146DelicateMandrake extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203139) { // Krodis
 				return sendQuestEndDialog(env);
 			}

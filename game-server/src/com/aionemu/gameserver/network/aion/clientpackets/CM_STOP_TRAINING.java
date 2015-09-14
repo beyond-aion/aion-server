@@ -5,7 +5,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 /**
- *
  * @author xTz
  */
 public class CM_STOP_TRAINING extends AionClientPacket {
@@ -22,6 +21,6 @@ public class CM_STOP_TRAINING extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		player.getPosition().getWorldMapInstance().getInstanceHandler().onStopTraining(player);	
+		player.getPosition().getWorldMapInstance().getInstanceHandler().onStopTraining(player);
 	}
 }

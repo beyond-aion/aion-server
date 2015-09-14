@@ -19,10 +19,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * Meet with Tristran (204774). Talk with Stua (204809). Infiltrate the Port through the Secret Port Entrance (700359).
- * Don't blow your cover! Find the Alquimia Entrance, break through to the Daevic Genesis Lab, and destroy the Research
- * Center Power Generator (700349) (1). Escape from the research center and send a Signal Flare signal (182204317) to
- * begin the attack. Report to Tristran.
+ * Meet with Tristran (204774). Talk with Stua (204809). Infiltrate the Port through the Secret Port Entrance (700359). Don't blow your cover! Find
+ * the Alquimia Entrance, break through to the Daevic Genesis Lab, and destroy the Research Center Power Generator (700349) (1). Escape from the
+ * research center and send a Signal Flare signal (182204317) to begin the attack. Report to Tristran.
  * 
  * @author Hellboy aion4Free MetaWind
  * @reworked vlog
@@ -80,8 +79,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204774) { // Tristran
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -93,8 +91,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 204809) { // Stua
+			} else if (targetId == 204809) { // Stua
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -104,16 +101,15 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 							if (!giveQuestItem(env, 182204317, 1))
 								return false;
 							QuestService.questTimerStart(env, 240);
-							SkillEngine.getInstance().applyEffectDirectly(1865, player, player, (350 * 1000));							
+							SkillEngine.getInstance().applyEffectDirectly(1865, player, player, (350 * 1000));
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 				}
-			}
-			else if (targetId == 700359 && var == 2) { // Secret Port Entrance
+			} else if (targetId == 700359 && var == 2) { // Secret Port Entrance
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					QuestService.questTimerEnd(env);
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 2452, 2474, 672.25f, (byte) 28);
-					return playQuestMovie(env, 250); 
+					return playQuestMovie(env, 250);
 				}
 			}
 		}
@@ -127,7 +123,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			player.getEffectController().removeEffect(1865);			
+			player.getEffectController().removeEffect(1865);
 			changeQuestStep(env, 2, 3, false); // 3
 			return true;
 		}
@@ -149,27 +145,27 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-		  if (player.getWorldId() != 320110000) {
+			if (player.getWorldId() != 320110000) {
 				int var = qs.getQuestVarById(0);
 				if (var == 3) {
 					qs.setQuestVar(1);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -185,6 +181,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		}
 		return false;
 	}
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -200,7 +197,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

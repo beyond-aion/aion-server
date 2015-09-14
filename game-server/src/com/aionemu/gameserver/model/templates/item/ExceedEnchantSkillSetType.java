@@ -3,10 +3,8 @@ package com.aionemu.gameserver.model.templates.item;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author bobobear
- *
  */
 @XmlType(name = "exceed_enchant_skill")
 @XmlEnum

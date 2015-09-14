@@ -34,13 +34,12 @@ public class Set_makeup_bonus extends ConsoleCommand {
 		}
 
 		final Player player = (Player) target;
-		
+
 		long value;
 
 		try {
 			value = Long.parseLong(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}

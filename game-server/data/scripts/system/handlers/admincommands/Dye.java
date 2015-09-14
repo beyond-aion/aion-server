@@ -25,8 +25,7 @@ public class Dye extends AdminCommand {
 		// Add a check to prevent players to dye other people
 		if (admin.getAccessLevel() > 0 && admin.getTarget() instanceof Player) {
 			target = (Player) admin.getTarget();
-		}
-		else {
+		} else {
 			target = admin;
 		}
 
@@ -50,12 +49,10 @@ public class Dye extends AdminCommand {
 		if (params.length == 2) {
 			if (params[1].equalsIgnoreCase("petal")) {
 				color = params[0];
-			}
-			else {
+			} else {
 				color = params[0] + " " + params[1];
 			}
-		}
-		else {
+		} else {
 			color = params[0];
 		}
 
@@ -168,14 +165,13 @@ public class Dye extends AdminCommand {
 		for (Item targetItem : target.getEquipment().getEquippedItemsWithoutStigma()) {
 			if (color.equals("no")) {
 				targetItem.setItemColor(0);
-			}
-			else {
+			} else {
 				targetItem.setItemColor(bgra);
 			}
 			ItemPacketService.updateItemAfterInfoChange(target, targetItem);
 		}
-		PacketSendUtility.broadcastPacket(target, new SM_UPDATE_PLAYER_APPEARANCE(target.getObjectId(), target
-			.getEquipment().getEquippedForApparence()), true);
+		PacketSendUtility.broadcastPacket(target, new SM_UPDATE_PLAYER_APPEARANCE(target.getObjectId(), target.getEquipment().getEquippedForApparence()),
+			true);
 		target.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		if (target.getObjectId() != admin.getObjectId()) {
 			PacketSendUtility.sendMessage(target, "You have been dyed by " + admin.getName() + "!");

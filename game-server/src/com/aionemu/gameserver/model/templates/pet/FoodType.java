@@ -15,7 +15,7 @@ public enum FoodType {
 	ARMOR,
 	BALAUR_SCALES,
 	BONES,
-	EXCLUDES,							// Excluded items
+	EXCLUDES, // Excluded items
 	FLUIDS,
 	HEALTHY_FOOD_ALL,
 	HEALTHY_FOOD_SPICY,
@@ -25,7 +25,7 @@ public enum FoodType {
 	POPPY_SNACK_NUTRITIOUS,
 	SOULS,
 	SHUGO_EVENT_COIN,
-	STINKY,								// Other excuded items
+	STINKY, // Other excuded items
 	THORNS;
 
 	public String value() {

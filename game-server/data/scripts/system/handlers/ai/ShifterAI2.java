@@ -8,7 +8,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author xTz
- * 
  */
 @AIName("shifter")
 public class ShifterAI2 extends ActionItemNpcAI2 {

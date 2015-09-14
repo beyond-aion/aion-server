@@ -15,7 +15,7 @@ public class Channel extends AdminCommand {
 	public Channel() {
 		super("channel");
 	}
-	
+
 	@Override
 	public void execute(Player player, String... params) {
 		Class<?> classToMofify = CustomConfig.class;
@@ -25,13 +25,11 @@ public class Channel extends AdminCommand {
 			if (params[0].equalsIgnoreCase("on") && !CustomConfig.FACTION_CMD_CHANNEL) {
 				someField.set(null, Boolean.valueOf(true));
 				PacketSendUtility.sendMessage(player, "The command .faction is ON.");
-			}
-			else if (params[0].equalsIgnoreCase("off") && CustomConfig.FACTION_CMD_CHANNEL) {
+			} else if (params[0].equalsIgnoreCase("off") && CustomConfig.FACTION_CMD_CHANNEL) {
 				someField.set(null, Boolean.valueOf(false));
 				PacketSendUtility.sendMessage(player, "The command .faction is OFF.");
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			PacketSendUtility.sendMessage(player, "Error! Wrong property or value.");
 			return;
 		}

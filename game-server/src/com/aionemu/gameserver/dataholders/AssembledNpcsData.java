@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,10 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.assemblednpc.AssembledNpcTemplate;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
  * @author xTz
  */
 @XmlRootElement(name = "assembled_npcs")
@@ -39,5 +38,5 @@ public class AssembledNpcsData {
 	public AssembledNpcTemplate getAssembledNpcTemplate(Integer i) {
 		return assembledNpcsTemplates.get(i);
 	}
-	
+
 }

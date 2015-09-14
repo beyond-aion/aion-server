@@ -42,16 +42,13 @@ public class RaksangInstance extends GeneralInstanceHandler {
 				if (killCount == 1) {
 					sendMsg(1401133);
 					doors.get(87).setOpen(true);
-				}
-				else if (killCount == 2) {
+				} else if (killCount == 2) {
 					sendMsg(1401133);
 					doors.get(167).setOpen(true);
-				}
-				else if (killCount == 3) {
+				} else if (killCount == 3) {
 					sendMsg(1401133);
 					doors.get(114).setOpen(true);
-				}
-				else if (killCount == 4) {
+				} else if (killCount == 4) {
 					sendMsg(1401134);
 					doors.get(165).setOpen(true);
 				}
@@ -97,8 +94,7 @@ public class RaksangInstance extends GeneralInstanceHandler {
 				int aKillCount = ashulagenKilled.incrementAndGet();
 				if (aKillCount == 1 || aKillCount == 2 || aKillCount == 3) {
 					sendMsg(1401160);
-				}
-				else if (aKillCount == 4) {
+				} else if (aKillCount == 4) {
 					spawn(217456, 615.081f, 640.660f, 524.195f, (byte) 0);
 					sendMsg(1401135);
 				}
@@ -109,8 +105,7 @@ public class RaksangInstance extends GeneralInstanceHandler {
 				int rKillCount = rakshaHelpersKilled.incrementAndGet();
 				if (rKillCount < 3) {
 					sendMsg(1401161);
-				}
-				else if (rKillCount == 3) {
+				} else if (rKillCount == 3) {
 					sendMsg(1401162);
 				}
 				break;
@@ -147,7 +142,7 @@ public class RaksangInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 	}
-	
+
 	private boolean isDeadKerops() {
 		Npc kerop1 = getNpc(217399);
 		Npc kerop2 = getNpc(217400);
@@ -159,15 +154,15 @@ public class RaksangInstance extends GeneralInstanceHandler {
 		}
 		return false;
 	}
-	
+
 	private boolean isDead(Npc npc) {
 		return (npc == null || npc.getLifeStats().isAlreadyDead());
 	}
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

@@ -84,7 +84,7 @@ public class Influence {
 		for (SiegeLocation sLoc : SiegeService.getInstance().getSiegeLocations().values()) {
 			if (sLoc instanceof FortressLocation) {
 				switch (sLoc.getWorldId()) {
-					case 210050000:					
+					case 210050000:
 						switch (sLoc.getRace()) {
 							case ELYOS:
 								e_inggison += sLoc.getInfluenceValue();
@@ -165,7 +165,7 @@ public class Influence {
 				}
 			}
 		}
-		//reset Values
+		// reset Values
 		abyss_e = e_abyss;
 		abyss_a = a_abyss;
 		abyss_b = b_abyss;
@@ -183,7 +183,7 @@ public class Influence {
 		danaria_b = b_danaria;
 		kaldor_e = e_kaldor;
 		kaldor_a = a_kaldor;
-		kaldor_b = b_kaldor;		
+		kaldor_b = b_kaldor;
 
 		global_e = (abyss_e + inggison_e + gelkmaros_e + katalam_e + danaria_e + kaldor_e) / 100f;
 		global_a = (abyss_a + inggison_a + gelkmaros_a + katalam_a + danaria_a + kaldor_a) / 100f;
@@ -191,8 +191,7 @@ public class Influence {
 	}
 
 	/**
-	 * Broadcast packet with influence update to all players. - Responsible for
-	 * the message "The Divine Fortress is now vulnerable."
+	 * Broadcast packet with influence update to all players. - Responsible for the message "The Divine Fortress is now vulnerable."
 	 */
 	@SuppressWarnings("unused")
 	private void broadcastInfluencePacket() {
@@ -311,7 +310,6 @@ public class Influence {
 		return this.tiamaranta_b;
 	}
 
-	
 	/**
 	 * @return elyos control
 	 */
@@ -319,7 +317,6 @@ public class Influence {
 		return this.katalam_e;
 	}
 
-	
 	/**
 	 * @return asmos control
 	 */
@@ -327,7 +324,6 @@ public class Influence {
 		return this.katalam_a;
 	}
 
-	
 	/**
 	 * @return balaur control
 	 */
@@ -335,7 +331,6 @@ public class Influence {
 		return this.katalam_b;
 	}
 
-	
 	/**
 	 * @return elyos control
 	 */
@@ -343,7 +338,6 @@ public class Influence {
 		return this.danaria_e;
 	}
 
-	
 	/**
 	 * @return asmos control
 	 */
@@ -351,7 +345,6 @@ public class Influence {
 		return this.danaria_a;
 	}
 
-	
 	/**
 	 * @return balaur control
 	 */
@@ -359,7 +352,6 @@ public class Influence {
 		return this.danaria_b;
 	}
 
-	
 	/**
 	 * @return elyos control
 	 */
@@ -367,7 +359,6 @@ public class Influence {
 		return kaldor_e;
 	}
 
-	
 	/**
 	 * @return asmos control
 	 */
@@ -375,7 +366,6 @@ public class Influence {
 		return kaldor_a;
 	}
 
-	
 	/**
 	 * @return balaur control
 	 */

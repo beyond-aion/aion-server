@@ -11,7 +11,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author Luzien
  */
 @AIName("spark_of_darkness")
@@ -36,18 +35,18 @@ public class SparkOfDarknessAI2 extends GeneralNpcAI2 {
 
 		}, 500);
 	}
-	
+
 	private void startLifeTask() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-					AI2Actions.deleteOwner(SparkOfDarknessAI2.this);
+				AI2Actions.deleteOwner(SparkOfDarknessAI2.this);
 			}
 
 		}, 6500);
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {

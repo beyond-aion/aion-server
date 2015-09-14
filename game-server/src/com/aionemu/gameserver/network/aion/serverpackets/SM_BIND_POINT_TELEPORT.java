@@ -21,7 +21,7 @@ public class SM_BIND_POINT_TELEPORT extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeC(action);
 		writeD(playerId);
-		switch(action) {
+		switch (action) {
 			case 1:
 				writeD(locId);
 				break;
@@ -30,6 +30,6 @@ public class SM_BIND_POINT_TELEPORT extends AionServerPacket {
 				writeD(cooldown);
 				break;
 		}
-		
+
 	}
 }

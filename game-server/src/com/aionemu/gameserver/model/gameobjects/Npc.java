@@ -44,8 +44,7 @@ import com.aionemu.gameserver.world.WorldType;
 import com.google.common.base.Preconditions;
 
 /**
- * This class is a base class for all in-game NPCs, what includes: monsters and npcs that player can talk to (aka
- * Citizens)
+ * This class is a base class for all in-game NPCs, what includes: monsters and npcs that player can talk to (aka Citizens)
  * 
  * @author Luno
  */
@@ -154,7 +153,7 @@ public class Npc extends Creature {
 	public NpcController getController() {
 		return (NpcController) super.getController();
 	}
-	
+
 	@Override
 	public ItemAttackType getAttackType() {
 		return ai2.modifyAttackType(attacktype);
@@ -176,12 +175,12 @@ public class Npc extends Creature {
 		}
 		return this.getObjectTemplate().getTribe();
 	}
-	
+
 	@Override
 	public TribeClass getBaseTribe() {
 		return DataManager.TRIBE_RELATIONS_DATA.getBaseTribe(getTribe());
 	}
-	
+
 	public int getAggroRange() {
 		return ai2.modifyARange(aRange);
 	}
@@ -194,27 +193,27 @@ public class Npc extends Creature {
 	public boolean isAtSpawnLocation() {
 		return getDistanceToSpawnLocation() < 3;
 	}
-	
+
 	@Override
 	public boolean isEnemy(Creature creature) {
 		return creature.isEnemyFrom(this) || this.isEnemyFrom(creature);
 	}
-	
+
 	@Override
 	public boolean isEnemyFrom(Creature creature) {
 		return TribeRelationService.isAggressive(creature, this) || TribeRelationService.isHostile(creature, this);
 	}
-	
+
 	@Override
 	public boolean isEnemyFrom(Npc npc) {
 		return TribeRelationService.isAggressive(this, npc) || TribeRelationService.isHostile(this, npc);
 	}
-	
+
 	@Override
 	public boolean isEnemyFrom(Player player) {
 		return player.isEnemyFrom(this) || type == CreatureType.AGGRESSIVE.getId() || type == CreatureType.ATTACKABLE.getId();
 	}
-	
+
 	@Override
 	public int getType(Creature creature) {
 		int typeForPlayer = -1;
@@ -259,7 +258,7 @@ public class Npc extends Creature {
 	public String getMasterName() {
 		return masterName;
 	}
-	
+
 	public void setMasterName(String masterName) {
 		this.masterName = masterName;
 	}
@@ -270,7 +269,7 @@ public class Npc extends Creature {
 	public int getCreatorId() {
 		return creatorId;
 	}
-	
+
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
 	}
@@ -343,20 +342,17 @@ public class Npc extends Creature {
 	}
 
 	public void setNpcType(int newType) {
-	   type = newType;
+		type = newType;
 	}
-	
+
 	public boolean isRewardAP() {
 		if (this instanceof SiegeNpc) {
 			return true;
-		}
-		else if (this.getWorldType() == WorldType.ABYSS) {
+		} else if (this.getWorldType() == WorldType.ABYSS) {
 			return true;
-		}
-		else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP).isPositive()) {
+		} else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP).isPositive()) {
 			return true;
-		}
-		else if (this.getWorldType() == WorldType.BALAUREA) {
+		} else if (this.getWorldType() == WorldType.BALAUREA) {
 			return getRace() == Race.DRAKAN || getRace() == Race.LIZARDMAN;
 		}
 
@@ -364,23 +360,19 @@ public class Npc extends Creature {
 	}
 
 	public boolean canBuyFrom() {
-		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null &&
-			getObjectTemplate().hasBuyList();
+		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasBuyList();
 	}
 
 	public boolean canSellTo() {
-		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null &&
-			getObjectTemplate().hasSellList();
+		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasSellList();
 	}
 
 	public boolean canTradeIn() {
-		return DataManager.TRADE_LIST_DATA.getTradeInListTemplate(this.getNpcId()) != null &&
-			getObjectTemplate().hasTradeInList();
+		return DataManager.TRADE_LIST_DATA.getTradeInListTemplate(this.getNpcId()) != null && getObjectTemplate().hasTradeInList();
 	}
 
 	public boolean canPurchase() {
-		return DataManager.TRADE_LIST_DATA.getPurchaseTemplate(this.getNpcId()) != null &&
-			getObjectTemplate().hasPurchaseList();
+		return DataManager.TRADE_LIST_DATA.getPurchaseTemplate(this.getNpcId()) != null && getObjectTemplate().hasPurchaseList();
 	}
 
 	public boolean mayShout(int delaySeconds) {
@@ -388,23 +380,21 @@ public class Npc extends Creature {
 			return false;
 		return (System.currentTimeMillis() - lastShoutedSeconds) / 1000 >= delaySeconds;
 	}
-	
+
 	public GroupDropType getGroupDrop() {
 		return getObjectTemplate().getGroupDrop();
 	}
 
 	public void shout(final NpcShout shout, final Creature target, final Object param, int delaySeconds) {
-		if (shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN
-			&& getLifeStats().isAlreadyDead() || !mayShout(delaySeconds))
+		if (shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN && getLifeStats().isAlreadyDead()
+			|| !mayShout(delaySeconds))
 			return;
 
-		if (shout.getPattern() != null
-			&& !((AITemplate) getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
+		if (shout.getPattern() != null && !((AITemplate) getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
 			return;
 
 		final int shoutRange = getObjectTemplate().getMinimumShoutRange();
-		if (shout.getShoutType() == ShoutType.SAY && !(target instanceof Player) || target != null
-			&& !MathUtil.isIn3dRange(target, this, shoutRange))
+		if (shout.getShoutType() == ShoutType.SAY && !(target instanceof Player) || target != null && !MathUtil.isIn3dRange(target, this, shoutRange))
 			return;
 
 		final Npc thisNpc = this;
@@ -415,16 +405,14 @@ public class Npc extends Creature {
 
 			@Override
 			public void run() {
-				if (thisNpc.getLifeStats().isAlreadyDead() && shout.getWhen() != ShoutEventType.DIED
-					&& shout.getWhen() != ShoutEventType.BEFORE_DESPAWN)
+				if (thisNpc.getLifeStats().isAlreadyDead() && shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN)
 					return;
 
 				// message for the specific player (when IDLE we are already broadcasting!!!)
 				if (shout.getShoutType() == ShoutType.SAY || shout.getWhen() == ShoutEventType.IDLE) {
 					// [RR] Should we have lastShoutedSeconds separated from broadcasts (??)
 					PacketSendUtility.sendPacket((Player) target, message);
-				}
-				else {
+				} else {
 					Iterator<Player> iter = thisNpc.getKnownList().getKnownPlayers().values().iterator();
 					while (iter.hasNext()) {
 						Player kObj = iter.next();
@@ -437,7 +425,5 @@ public class Npc extends Creature {
 			}
 		}, delaySeconds * 1000);
 	}
-
-
 
 }

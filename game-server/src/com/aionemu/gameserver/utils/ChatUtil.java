@@ -43,7 +43,7 @@ public class ChatUtil {
 					int nameStartIndex = nameFormat.indexOf(nameFlag);
 					String namePrefix = nameFormat.substring(0, nameStartIndex > 0 ? nameStartIndex : 0);
 					String nameSuffix = nameFormat.substring(nameStartIndex + nameFlag.length(), nameFormat.length());
-					if ((namePrefix+nameSuffix).length() > 0 && name.startsWith(namePrefix) && name.endsWith(nameSuffix)) {
+					if ((namePrefix + nameSuffix).length() > 0 && name.startsWith(namePrefix) && name.endsWith(nameSuffix)) {
 						int endIndex = name.indexOf(nameSuffix) - 1;
 						name = name.substring(namePrefix.length(), endIndex > 0 ? endIndex : name.length());
 						break;
@@ -53,7 +53,7 @@ public class ChatUtil {
 				break; // (expecting NoSuchFieldException to trigger loop break)
 			}
 		}
-		
+
 		return name;
 	}
 }

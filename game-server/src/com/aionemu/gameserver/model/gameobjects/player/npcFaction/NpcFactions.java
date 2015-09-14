@@ -57,10 +57,9 @@ public class NpcFactions {
 			activeNpcFaction[type] = faction;
 		if (faction.getTime() == -1) {
 			// used to reset from quest daily command
-			faction.setTime((int)(System.currentTimeMillis() / 1000));
+			faction.setTime((int) (System.currentTimeMillis() / 1000));
 			timeLimit[type] = faction.getTime();
-		}
-		else if (timeLimit[type] < faction.getTime() && faction.getState() == ENpcFactionQuestState.COMPLETE)
+		} else if (timeLimit[type] < faction.getTime() && faction.getState() == ENpcFactionQuestState.COMPLETE)
 			timeLimit[type] = faction.getTime();
 	}
 
@@ -75,8 +74,7 @@ public class NpcFactions {
 	public NpcFaction getActiveNpcFaction(boolean mentor) {
 		if (mentor) {
 			return activeNpcFaction[1];
-		}
-		else
+		} else
 			return activeNpcFaction[0];
 	}
 

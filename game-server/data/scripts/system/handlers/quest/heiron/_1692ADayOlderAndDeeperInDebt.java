@@ -36,24 +36,20 @@ public class _1692ADayOlderAndDeeperInDebt extends QuestHandler {
 			if (targetId == 798386) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798386) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 2375);
 					}
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
-					return checkQuestItems(env, 0, 1, true, 5, 2716); 
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+					return checkQuestItems(env, 0, 1, true, 5, 2716);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);

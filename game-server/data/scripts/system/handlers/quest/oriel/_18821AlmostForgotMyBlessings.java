@@ -66,8 +66,7 @@ public class _18821AlmostForgotMyBlessings extends QuestHandler {
 				case QUEST_ACCEPT_SIMPLE:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (dialog) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 2375);
@@ -77,8 +76,7 @@ public class _18821AlmostForgotMyBlessings extends QuestHandler {
 				case SELECTED_QUEST_NOREWARD:
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 5);

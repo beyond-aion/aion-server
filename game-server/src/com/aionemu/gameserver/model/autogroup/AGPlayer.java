@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- *
  * @author xTz
  */
 public class AGPlayer {

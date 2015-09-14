@@ -1,5 +1,10 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -12,10 +17,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ProvokeTarget;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author ATracer modified by kecimis
@@ -41,7 +42,7 @@ public class ProvokerEffect extends ShieldEffect {
 		final int prob2 = this.hitTypeProb;
 		final int radius = this.radius;
 		switch (this.hitType) {
-			case NMLATK://ATTACK
+			case NMLATK:// ATTACK
 				observer = new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
@@ -54,7 +55,7 @@ public class ProvokerEffect extends ShieldEffect {
 
 				};
 				break;
-			case EVERYHIT://ATTACKED
+			case EVERYHIT:// ATTACKED
 				observer = new ActionObserver(ObserverType.ATTACKED) {
 
 					@Override
@@ -70,7 +71,7 @@ public class ProvokerEffect extends ShieldEffect {
 					}
 				};
 				break;
-				//TODO MAHIT and PHHIT
+		// TODO MAHIT and PHHIT
 		}
 
 		if (observer == null)
@@ -88,7 +89,7 @@ public class ProvokerEffect extends ShieldEffect {
 		if (provokeTarget == ProvokeTarget.OPPONENT && target == effector) {
 			return;
 		}
-			
+
 		if (effector instanceof Player) {
 			int nameId = DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId();
 			PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(nameId));

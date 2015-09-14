@@ -42,8 +42,7 @@ public class _1537FishOnTheLine extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730189: {
 					if (env.getDialog() == DialogAction.USE_OBJECT) {

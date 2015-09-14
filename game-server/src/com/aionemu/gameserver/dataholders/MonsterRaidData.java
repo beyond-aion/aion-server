@@ -14,7 +14,6 @@ import javolution.util.FastMap;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidTemplate;
 
-
 /**
  * @author Alcapwnd
  * @modified Whoop

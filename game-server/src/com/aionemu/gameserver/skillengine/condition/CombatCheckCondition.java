@@ -16,8 +16,8 @@ public class CombatCheckCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill skill) {
-		if(skill.getEffector() instanceof Player) {
-		  return !((Player) skill.getEffector()).getController().isInCombat();
+		if (skill.getEffector() instanceof Player) {
+			return !((Player) skill.getEffector()).getController().isInCombat();
 		}
 		return true;
 	}

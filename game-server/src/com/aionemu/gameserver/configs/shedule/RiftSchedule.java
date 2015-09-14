@@ -56,8 +56,7 @@ public class RiftSchedule {
 		try {
 			String xml = FileUtils.readFileToString(new File("./config/shedule/rift_schedule.xml"));
 			rs = JAXBUtil.deserialize(xml, RiftSchedule.class);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize rifts", e);
 		}
 		return rs;

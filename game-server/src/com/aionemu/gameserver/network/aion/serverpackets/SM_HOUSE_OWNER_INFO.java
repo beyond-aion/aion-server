@@ -45,8 +45,7 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 		if (activeHouse == null) {
 			writeD(0);
 			writeD(player.isBuildingInState(PlayerHouseOwnerFlags.BUY_STUDIO_ALLOWED) ? 355000 : 0); // studio building id
-		}
-		else {
+		} else {
 			writeD(activeHouse.getAddress().getId());
 			writeD(activeHouse.getBuilding().getId());
 		}
@@ -60,8 +59,7 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 		// Maintenance bill weeks left ?, if 0 maintenance date is in red
 		if (activeHouse == null || !activeHouse.isFeePaid()) {
 			writeC(0);
-		}
-		else {
+		} else {
 			Timestamp nextPay = activeHouse.getNextPay();
 			float diff;
 			if (nextPay == null) {
@@ -69,16 +67,14 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 				// all just obtained houses have fee paid true and time is null;
 				// means they should pay next week
 				diff = MaintenanceTask.getInstance().getPeriod();
-			}
-			else {
+			} else {
 				long paytime = activeHouse.getNextPay().getTime();
 				diff = paytime - ((long) MaintenanceTask.getInstance().getRunTime() * 1000);
 			}
 			if (diff < 0) {
 				writeC(0);
-			}
-			else {
-				int weeks = (int) (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
+			} else {
+				int weeks = (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
 				if (DateTime.now().getDayOfWeek() != 7) // Hack for auction Day, client counts sunday to new week
 					weeks++;
 				writeC(weeks);
@@ -91,10 +87,9 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 			writeD(0);
 			writeD(0);
 			writeD(0);
-		}
-		else {
+		} else {
 			long timePassed = (HousingBidService.getInstance().getAuctionStartTime() - activeHouse.getSellStarted().getTime()) / 1000;
-			int timeLeft = (int)(2 * 7 * 24 * 3600 - timePassed);
+			int timeLeft = (int) (2 * 7 * 24 * 3600 - timePassed);
 			if (timeLeft < 0)
 				timeLeft = 0;
 			writeD(inactiveHouse.getAddress().getId());

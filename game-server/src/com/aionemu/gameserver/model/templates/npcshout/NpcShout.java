@@ -39,22 +39,22 @@ public class NpcShout {
 
 	@XmlAttribute(name = "string_id", required = true)
 	protected int stringId;
-	
+
 	@XmlAttribute(name = "when", required = true)
 	protected ShoutEventType when;
-	
+
 	@XmlAttribute(name = "pattern")
 	protected String pattern;
-	
+
 	@XmlAttribute(name = "param")
 	protected String param;
-	
+
 	@XmlAttribute(name = "type")
 	protected ShoutType type;
-	
+
 	@XmlAttribute(name = "skill_no")
 	protected Integer skillNo;
-	
+
 	@XmlAttribute(name = "poll_delay")
 	protected Integer pollDelay;
 
@@ -113,13 +113,13 @@ public class NpcShout {
 			return 0;
 		return skillNo;
 	}
-	
+
 	public int getPollDelay() {
 		if (pollDelay == null)
 			return 0;
 		return pollDelay;
 	}
-	
+
 	public int getShoutRange(Npc npc) {
 		return npc.getObjectTemplate().getMinimumShoutRange();
 	}

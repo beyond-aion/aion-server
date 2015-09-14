@@ -13,7 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _14054KrallIngToKralltumagna extends QuestHandler {
 
 	private final static int questId = 14054;
-	private final static int[] indratu_runaway = { 214010, 214013, 214014, 214015, 214016, 214017, 214018, 214019, 214020, 214021, 214022, 214023, 214081, 214082, 214083, 214084, 214085, 214086, 214087, 214088};
+	private final static int[] indratu_runaway = { 214010, 214013, 214014, 214015, 214016, 214017, 214018, 214019, 214020, 214021, 214022, 214023,
+		214081, 214082, 214083, 214084, 214085, 214086, 214087, 214088 };
 	private final static int baranath = 702040;
 	private final static int vitusa = 233861;
 	private final static int[] npc_ids = { 204500, 800413, 802050 };
@@ -75,10 +76,10 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 						case SELECT_ACTION_1353: {
 							changeQuestStep(env, 1, 2, false); // 2
 							return closeDialogWindow(env);
-							}
 						}
-						break;
-				
+					}
+					break;
+
 				case 802050: // Bartyn
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -96,7 +97,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204500) // Perento
-					return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}

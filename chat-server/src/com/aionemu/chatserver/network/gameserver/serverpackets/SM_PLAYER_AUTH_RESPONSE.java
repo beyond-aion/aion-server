@@ -7,20 +7,18 @@ import com.aionemu.chatserver.network.gameserver.GsServerPacket;
 /**
  * @author ATracer
  */
-public class SM_PLAYER_AUTH_RESPONSE extends GsServerPacket
-{
+public class SM_PLAYER_AUTH_RESPONSE extends GsServerPacket {
+
 	private int playerId;
 	private byte[] token;
 
-	public SM_PLAYER_AUTH_RESPONSE(ChatClient chatClient)
-	{
+	public SM_PLAYER_AUTH_RESPONSE(ChatClient chatClient) {
 		this.playerId = chatClient.getClientId();
 		token = chatClient.getToken();
 	}
 
 	@Override
-	protected void writeImpl(GsConnection con)
-	{
+	protected void writeImpl(GsConnection con) {
 		writeC(1);
 		writeD(playerId);
 		writeC(token.length);

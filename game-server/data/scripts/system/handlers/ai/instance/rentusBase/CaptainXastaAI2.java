@@ -25,7 +25,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("captain_xasta")
@@ -39,7 +38,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 	public boolean canThink() {
 		return canThink;
 	}
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -47,8 +46,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 			if (getNpcId() == 217309) {
 				sendMsg(1500388);
 				startPhaseTask(this);
-			}
-			else {
+			} else {
 				startPhase2Task();
 			}
 		}
@@ -67,8 +65,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					canThink = false;
 					EmoteManager.emoteStopAttacking(getOwner());
 					getSpawnTemplate().setWalkerId("B186C8F43FF13FDD50FA9483B7D8C2BEABAE7F5C");
@@ -97,8 +94,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19729, 60, getOwner()).useNoAnimationSkill();
 					sendMsg(1500392);
 				}
@@ -120,8 +116,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 						getMoveController().abortMove();
 						onGeneralEvent(AIEventType.ATTACK_FINISH);
 						onGeneralEvent(AIEventType.BACK_HOME);
-					}
-					else {
+					} else {
 						getMoveController().abortMove();
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
@@ -154,9 +149,9 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 					Npc npc1 = (Npc) spawn(282604, 263f, 537f, 203f, (byte) 0);
 					Npc npc2 = (Npc) spawn(282604, 186f, 555f, 203f, (byte) 0);
 					npc1.getSpawn().setWalkerId("30028000014");
-					WalkManager.startWalking((NpcAI2)npc1.getAi2());
+					WalkManager.startWalking((NpcAI2) npc1.getAi2());
 					npc2.getSpawn().setWalkerId("30028000015");
-					WalkManager.startWalking((NpcAI2)npc2.getAi2());
+					WalkManager.startWalking((NpcAI2) npc2.getAi2());
 					startRun(npc1);
 					startRun(npc2);
 				}
@@ -192,8 +187,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 			spawn(217310, 238.160f, 598.624f, 178.480f, (byte) 0);
 			deleteHelpers();
 			AI2Actions.deleteOwner(this);
-		}
-		else {
+		} else {
 			sendMsg(1500391);
 			final WorldMapInstance instance = getPosition().getWorldMapInstance();
 			if (instance != null) {

@@ -22,6 +22,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("kaluva")
 public class KaluvaAI2 extends SummonerAI2 {
+
 	private boolean canThink = true;
 
 	@Override
@@ -35,7 +36,7 @@ public class KaluvaAI2 extends SummonerAI2 {
 		AI2Actions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(281902));
 		getMoveController().moveToTargetObject();
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		if (canThink == false) {
@@ -43,18 +44,17 @@ public class KaluvaAI2 extends SummonerAI2 {
 			if (egg != null) {
 				SkillEngine.getInstance().getSkill(getOwner(), 19223, 55, egg).useNoAnimationSkill();
 			}
-			
+
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				
+
 				@Override
-				public void run(){
+				public void run() {
 					canThink = true;
 					Creature creature = getAggroList().getMostHated();
 					if (creature == null || !getOwner().canSee(creature) || NpcActions.isAlreadyDead(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
-					}
-					else {
+					} else {
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();
@@ -85,7 +85,7 @@ public class KaluvaAI2 extends SummonerAI2 {
 				break;
 		}
 	}
-	
+
 	@Override
 	public boolean canThink() {
 		return canThink;

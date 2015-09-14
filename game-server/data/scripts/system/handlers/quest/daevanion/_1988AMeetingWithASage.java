@@ -44,8 +44,7 @@ public class _1988AMeetingWithASage extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 203989)// Tumblusen
+		} else if (targetId == 203989)// Tumblusen
 		{
 
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
@@ -56,13 +55,11 @@ public class _1988AMeetingWithASage extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
-		}
-		else if (targetId == 798018)// Paorunerk
+		} else if (targetId == 798018)// Paorunerk
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -72,12 +69,10 @@ public class _1988AMeetingWithASage extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 203771)// Fermina
+		} else if (targetId == 203771)// Fermina
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -88,11 +83,9 @@ public class _1988AMeetingWithASage extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD)// Reward
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)// Reward
 			{
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4080);
@@ -102,8 +95,7 @@ public class _1988AMeetingWithASage extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

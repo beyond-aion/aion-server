@@ -35,33 +35,27 @@ public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 			if (targetId == 799015) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799015) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					long itemCount = player.getInventory().getItemCountByItemId(182206838);
 					if (player.getInventory().tryDecreaseKinah(50000) && itemCount > 29) {
 						player.getInventory().decreaseByItemId(182206838, 30);
 						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 5);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 2716);
-				}
-				else if (dialog == DialogAction.FINISH_DIALOG) {
+				} else if (dialog == DialogAction.FINISH_DIALOG) {
 					return defaultCloseDialog(env, 0, 0);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799015)
 				return sendQuestEndDialog(env);
 		}

@@ -45,11 +45,9 @@ public class InstanceEngine implements GameEngine {
 		try {
 			scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
 			log.info("Loaded " + handlers.size() + " instance handlers.");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
@@ -70,8 +68,7 @@ public class InstanceEngine implements GameEngine {
 		if (instanceClass != null) {
 			try {
 				instanceHandler = instanceClass.newInstance();
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				log.warn("Can't instantiate instance handler " + worldId, ex);
 			}
 		}

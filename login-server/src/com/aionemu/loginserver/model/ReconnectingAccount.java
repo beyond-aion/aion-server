@@ -1,8 +1,8 @@
 package com.aionemu.loginserver.model;
 
 /**
- * This object is storing Account and corresponding to it reconnectionKey for client that will be reconnecting to
- * LoginServer from GameServer using fast reconnect feature
+ * This object is storing Account and corresponding to it reconnectionKey for client that will be reconnecting to LoginServer from GameServer using
+ * fast reconnect feature
  * 
  * @author -Nemesiss-
  */

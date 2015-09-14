@@ -39,21 +39,18 @@ public class _2493BringingUpTayga extends QuestHandler {
 			if (targetId == 204325) { // Ipoderr
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204435) { // Purra?
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-				}
-				else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialog == DialogAction.SET_SUCCEED) {
 					final Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().scheduleRespawn();
 					npc.getController().onDelete();
@@ -61,13 +58,11 @@ public class _2493BringingUpTayga extends QuestHandler {
 					return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204325) { // Ipoderr
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

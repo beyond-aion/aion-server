@@ -38,13 +38,11 @@ public class _2651SpyAFriendsWhereabouts extends QuestHandler {
 			if (targetId == 204775) { // Betoni
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204764: { // Epona
@@ -74,8 +72,7 @@ public class _2651SpyAFriendsWhereabouts extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204650) { // Nesteto
 				return sendQuestEndDialog(env);
 			}

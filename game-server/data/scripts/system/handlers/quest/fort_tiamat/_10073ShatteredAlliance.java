@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _10073ShatteredAlliance extends QuestHandler {
 
@@ -28,7 +26,7 @@ public class _10073ShatteredAlliance extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 798600, 205579, 205987, 790001};
+		int[] npcs = { 798600, 205579, 205987, 790001 };
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -57,16 +55,14 @@ public class _10073ShatteredAlliance extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798600) { 
+			if (targetId == 798600) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 2) {
+						} else if (var == 2) {
 							return sendQuestDialog(env, 1693);
-						}
-						else if (var == 8)
+						} else if (var == 8)
 							return sendQuestDialog(env, 4080);
 					}
 					case SETPRO1: {
@@ -82,14 +78,12 @@ public class _10073ShatteredAlliance extends QuestHandler {
 						return defaultCloseDialog(env, 8, 9, true, false);
 					}
 				}
-			}
-			else if (targetId == 205579) { 
+			} else if (targetId == 205579) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
 							return sendQuestDialog(env, 2034);
-						}
-						else if (var == 7)
+						} else if (var == 7)
 							return sendQuestDialog(env, 3398);
 					}
 					case SETPRO5: {
@@ -101,8 +95,7 @@ public class _10073ShatteredAlliance extends QuestHandler {
 						return defaultCloseDialog(env, 7, 8);
 					}
 				}
-			}
-			else if (targetId == 205987) { 
+			} else if (targetId == 205987) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 5) {
@@ -114,20 +107,18 @@ public class _10073ShatteredAlliance extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 790001) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 790001) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -153,19 +144,19 @@ public class _10073ShatteredAlliance extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-				removeQuestItem(env, 182213245, 1);
-				changeQuestStep(env, 1, 2, false);
-				return HandlerResult.SUCCESS;
+			removeQuestItem(env, 182213245, 1);
+			changeQuestStep(env, 1, 2, false);
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10072);

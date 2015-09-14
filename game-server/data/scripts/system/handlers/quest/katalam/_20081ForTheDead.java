@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _20081ForTheDead extends QuestHandler {
 
 	private final static int questId = 20081;
-	
+
 	private final static int[] mobs = { 232479, 232480, 232481, 233194 };
 
 	public _20081ForTheDead() {
@@ -32,7 +32,7 @@ public class _20081ForTheDead extends QuestHandler {
 		}
 		qe.registerCanAct(questId, 701535);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 20080);
@@ -44,15 +44,14 @@ public class _20081ForTheDead extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800529) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (qs.getQuestVarById(0) == 1) {
+						} else if (qs.getQuestVarById(0) == 1) {
 							return sendQuestDialog(env, 1352);
 						}
 					}
@@ -63,8 +62,7 @@ public class _20081ForTheDead extends QuestHandler {
 						return checkQuestItems(env, 1, 2, false, 10000, 10001);
 					}
 				}
-			}
-			else if (targetId == 800531) { 
+			} else if (targetId == 800531) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 2) {
@@ -72,11 +70,10 @@ public class _20081ForTheDead extends QuestHandler {
 						}
 					}
 					case SETPRO3: {
-						return defaultCloseDialog(env, 2, 3); 
+						return defaultCloseDialog(env, 2, 3);
 					}
 				}
-			}
-			else if (targetId == 801239) { 
+			} else if (targetId == 801239) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 3) {
@@ -84,27 +81,24 @@ public class _20081ForTheDead extends QuestHandler {
 						}
 					}
 					case SETPRO6: {
-						return defaultCloseDialog(env, 3, 4); 
+						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 701535) { 
+			} else if (targetId == 701535) {
 				return true;
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801239) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();

@@ -42,20 +42,17 @@ public class _1725CenturionsForgetfulness extends QuestHandler {
 			if (targetId == 278520) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				} else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 					if (QuestService.startQuest(env)) {
 						if (giveQuestItem(env, 182202153, 1))
 							return sendQuestDialog(env, 1003);
 						else
 							return true;
 					}
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 278514) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -65,8 +62,7 @@ public class _1725CenturionsForgetfulness extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278590) {
+			} else if (targetId == 278590) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
@@ -78,8 +74,7 @@ public class _1725CenturionsForgetfulness extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278590) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278590) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

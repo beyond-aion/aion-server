@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.instance.instancereward.IdgelDomeReward;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerReward;
 
 /**
- *
  * @author Ritsu
  */
 public class IdgelDomeScoreInfo extends InstanceScoreInfo {
@@ -36,7 +35,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, 0);
 				writeD(buf, 0);
 				writeD(buf, idgelDomePlayerReward.getOwner()); // objectId
-				writeD(buf, idgelDomePlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1 
+				writeD(buf, idgelDomePlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
 				break;
 			case 5: // reward
 				idgelDomePlayerReward = idgelDomeReward.getPlayerReward(object);
@@ -45,21 +44,19 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, idgelDomePlayerReward.getBonusReward());
 				writeD(buf, idgelDomePlayerReward.getGloryPoints());
 				writeD(buf, 0);
-				if (idgelDomePlayerReward.getFragmentedCeramium()> 0) { // item one
-					writeD(buf,186000243);
-					writeD(buf,idgelDomePlayerReward.getFragmentedCeramium());
-				}
-				else {
-					writeD(buf ,0);
+				if (idgelDomePlayerReward.getFragmentedCeramium() > 0) { // item one
+					writeD(buf, 186000243);
+					writeD(buf, idgelDomePlayerReward.getFragmentedCeramium());
+				} else {
+					writeD(buf, 0);
 					writeD(buf, 0);
 				}
 				writeD(buf, 0);
 
-				if (idgelDomePlayerReward.getIdgelDomeBox()> 0) { // item two
-					writeD(buf,188052729);
-					writeD(buf,idgelDomePlayerReward.getIdgelDomeBox());
-				}
-				else {
+				if (idgelDomePlayerReward.getIdgelDomeBox() > 0) { // item two
+					writeD(buf, 188052729);
+					writeD(buf, idgelDomePlayerReward.getIdgelDomeBox());
+				} else {
 					writeD(buf, 0);
 					writeD(buf, 0);
 				}
@@ -76,11 +73,10 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				for (int i = 0; i < idgelDomeElyos.length; i++) {
 					IdgelDomePlayerReward reward = idgelDomeElyos[i];
 					if (reward != null) {
-						writeD(buf, 0); 
+						writeD(buf, 0);
 						writeD(buf, 0);
 						writeD(buf, reward.getOwner());
-					}
-					else {
+					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -93,8 +89,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 						writeD(buf, 0);
 						writeD(buf, 0);
 						writeD(buf, reward.getOwner());
-					}
-					else {
+					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -115,8 +110,8 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, idgelDomeReward.getKillsByRace(object == 0 ? Race.ELYOS :Race.ASMODIANS ).intValue());
-				writeD(buf, idgelDomeReward.getPointsByRace(object == 0 ? Race.ELYOS :Race.ASMODIANS ).intValue());
+				writeD(buf, idgelDomeReward.getKillsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, idgelDomeReward.getPointsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
 				writeD(buf, object); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;

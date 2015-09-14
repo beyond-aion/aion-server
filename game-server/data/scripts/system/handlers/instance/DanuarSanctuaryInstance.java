@@ -21,18 +21,17 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu, Tibald
- *
  */
 @InstanceID(301140000)
 public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private Future<?> timer4minTask; //sysmsg
-	private Future<?> timer8minTask; //sysmsg + bosses spawn
-	private Future<?> timer12minTask; //sysmsg
-	private Future<?> timer15minTask; //sysmsg + bosses despawn
-	private Future<?> timer17minTask; //sysmsg
-	private Future<?> timer20minTask; //sysmsg + keymasters despawn
+	private Future<?> timer4minTask; // sysmsg
+	private Future<?> timer8minTask; // sysmsg + bosses spawn
+	private Future<?> timer12minTask; // sysmsg
+	private Future<?> timer15minTask; // sysmsg + bosses despawn
+	private Future<?> timer17minTask; // sysmsg
+	private Future<?> timer20minTask; // sysmsg + keymasters despawn
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -43,20 +42,22 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CRYPTS_301140000")
-				|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHARNELS_301140000")
-				|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CATACOMBS_301140000")) {
+			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHARNELS_301140000")
+			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CATACOMBS_301140000")) {
 			if (timer4minTask == null) {
 				sendMsg(1401855); // The Beritran Special Research Team commanders are nearing The Chamber of Ruin.
 				timer4minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						sendMsg(1401856); // The Beritran Special Research Team commanders have discovered The Chamber of Ruin.
 					}
 
-				}, 240000); //4 min
+				}, 240000); // 4 min
 			}
 			if (timer8minTask == null) {
 				timer8minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						spawn(233089, 1056.7562f, 676.1657f, 282.385f, (byte) 30);
@@ -65,19 +66,21 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 						sendMsg(1401857); // The Beritran Special Research Team commanders have entered The Chamber of Ruin.
 					}
 
-				}, 480000); //8 min
+				}, 480000); // 8 min
 			}
 			if (timer12minTask == null) {
 				timer12minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						sendMsg(1401858); // The Beritran Special Research Team commanders are collecting Danuar relics.
 					}
 
-				}, 720000); //12 min
+				}, 720000); // 12 min
 			}
 			if (timer15minTask == null) {
 				timer15minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						deleteNpc(233089);
@@ -91,15 +94,17 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 			if (timer17minTask == null) {
 				timer17minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						sendMsg(1401860); // The Chir Grave Robbers are almost finished digging.
 					}
 
-				}, 1020000); //17 min
+				}, 1020000); // 17 min
 			}
 			if (timer20minTask == null) {
 				timer20minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						deleteNpc(233091);
@@ -108,7 +113,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 						sendMsg(1401861); // The Chir Grave Robbers have left.
 					}
 
-				}, 1200000); //20 min
+				}, 1200000); // 20 min
 			}
 		}
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHAMBER_OF_RUIN_301140000")) {
@@ -144,49 +149,49 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 			case 701859:
 				openDoor(159);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 701860:
 				openDoor(690);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 701861:
 				openDoor(350);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 701862:
 				openDoor(160);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 701863:
 				openDoor(10);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 701864:
 				openDoor(154);
 				sendMsg(1401839);
-                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10, 0));
 				break;
 			case 730864:
-				for (Npc door : instance.getNpcs(233142)){
-					if (door.getSpawn().getStaticId()== 7) {
-                                        door.getController().onDelete();
-                                        return;
-                                        }
-                                   }
+				for (Npc door : instance.getNpcs(233142)) {
+					if (door.getSpawn().getStaticId() == 7) {
+						door.getController().onDelete();
+						return;
+					}
+				}
 				sendMsg(1401937);
 				break;
 			case 730863:
-				for (Npc door : instance.getNpcs(233142)){
-					if (door.getSpawn().getStaticId()== 1820) {
-                                        door.getController().onDelete();
-                                        return;
-                                        }
-                                   }
+				for (Npc door : instance.getNpcs(233142)) {
+					if (door.getSpawn().getStaticId() == 1820) {
+						door.getController().onDelete();
+						return;
+					}
+				}
 				sendMsg(1401937);
 				break;
 		}
@@ -233,8 +238,8 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0,
-				player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

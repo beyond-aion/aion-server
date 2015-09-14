@@ -57,7 +57,7 @@ public class GameTimeManager {
 	 */
 	public static boolean saveTime() {
 		log.info("Game time saved...");
-		return DAOManager.getDAO(ServerVariablesDAO.class).store("time",getGameTime().getTime());
+		return DAOManager.getDAO(ServerVariablesDAO.class).store("time", getGameTime().getTime());
 	}
 
 	/**

@@ -12,38 +12,30 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Ritsu
- *
  */
 @AIName("nightmarelordheiramuneclone")
-public class NightmareLordHeiramuneCloneAI2 extends AggressiveNpcAI2 
-{
+public class NightmareLordHeiramuneCloneAI2 extends AggressiveNpcAI2 {
+
 	@Override
-	protected void handleSpawned() 
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
 		heal();
 	}
 
-	private void heal()
-	{
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable()
-		{
+	private void heal() {
+		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
-			public void run()
-			{
+			public void run() {
 				Npc boss = getPosition().getWorldMapInstance().getNpc(233467);
-				if (boss != null && !NpcActions.isAlreadyDead(boss))
-				{
+				if (boss != null && !NpcActions.isAlreadyDead(boss)) {
 					SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
-				}
-				else
+				} else
 					AI2Actions.deleteOwner(NightmareLordHeiramuneCloneAI2.this);
 			}
 		}, 5000, 10000);
 		getOwner().getController().addTask(TaskId.SKILL_USE, task);
 	}
 }
-

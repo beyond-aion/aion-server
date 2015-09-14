@@ -36,7 +36,7 @@ public class CarveSignetEffect extends DamageEffect {
 
 		if (Rnd.get(0, 100) > prob)
 			return;
-		
+
 		Effect placedSignet = effect.getEffected().getEffectController().getAnormalEffect(signet);
 
 		if (placedSignet != null)

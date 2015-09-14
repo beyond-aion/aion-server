@@ -41,7 +41,8 @@ public class CraftService {
 		if (recipetemplate.getMaxProductionCount() != null) {
 			player.getRecipeList().deleteRecipe(player, recipetemplate.getId());
 			if (critCount == 0) {
-				QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0, 0), recipetemplate.getComboProduct(1) == null? 0 : recipetemplate.getComboProduct(1));
+				QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0, 0),
+					recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
 			}
 		}
 
@@ -62,23 +63,22 @@ public class CraftService {
 
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
 		if (LoggingConfig.LOG_CRAFT) {
-			log.info((critCount > 0 ? "[CRAFT][Critical] ID/Count" : "[CRAFT][Normal] ID/Count") + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + productItemId + "/" + recipetemplate.getQuantity() + "/" + itemTemplate.getName() : " - " + productItemId + "/" + recipetemplate.getQuantity()) + 
-			" to player " + player.getName());
+			log.info((critCount > 0 ? "[CRAFT][Critical] ID/Count" : "[CRAFT][Normal] ID/Count")
+				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + productItemId + "/" + recipetemplate.getQuantity() + "/"
+					+ itemTemplate.getName() : " - " + productItemId + "/" + recipetemplate.getQuantity()) + " to player " + player.getName());
 		}
 
 		int gainedCraftExp = (int) RewardType.CRAFTING.calcReward(player, xpReward);
 
 		if (player.getSkillList().addSkillXp(player, recipetemplate.getSkillid(), gainedCraftExp, recipetemplate.getSkillpoint())) {
 			player.getCommonData().addExp(xpReward, RewardType.CRAFTING);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillid()).getNameId()));
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {
-			player.getCraftCooldownList().addCraftCooldown(recipetemplate.getCraftDelayId(),
-				recipetemplate.getCraftDelayTime());
+			player.getCraftCooldownList().addCraftCooldown(recipetemplate.getCraftDelayId(), recipetemplate.getCraftDelayTime());
 		}
 	}
 
@@ -106,14 +106,14 @@ public class CraftService {
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
 		player.setCraftingTask(new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0));
 
-		if(skillId == 40009)
+		if (skillId == 40009)
 			player.getCraftingTask().setInterval(200);
 
 		player.getCraftingTask().start();
 	}
 
-	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target,
-		ItemTemplate itemTemplate, int craftType) {
+	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target, ItemTemplate itemTemplate,
+		int craftType) {
 
 		if (recipeTemplate == null) {
 			return false;
@@ -142,12 +142,12 @@ public class CraftService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_INVENTORY_IS_FULL);
 			return false;
 		}
-		
+
 		if (!player.getRecipeList().isRecipePresent(recipeTemplate.getId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_CAN_NOT_FIND_RECIPE);
 			return false;
 		}
-		
+
 		if (recipeTemplate.getCraftDelayId() != null) {
 			if (!player.getCraftCooldownList().isCanCraft(recipeTemplate.getCraftDelayId())) {
 				AuditLogger.info(player, " try craft item before cooldown expire.");
@@ -155,17 +155,16 @@ public class CraftService {
 			}
 		}
 
-		if (!player.getSkillList().isSkillPresent(skillId)
-			|| player.getSkillList().getSkillLevel(skillId) < recipeTemplate.getSkillpoint()) {
+		if (!player.getSkillList().isSkillPresent(skillId) || player.getSkillList().getSkillLevel(skillId) < recipeTemplate.getSkillpoint()) {
 			AuditLogger.info(player, " tried craft without required skill.");
 			return false;
 		}
-		
+
 		if (craftType == 1 && !player.getInventory().decreaseByItemId(getBonusReqItem(skillId), 1)) {
 			AuditLogger.info(player, " tried craft without 169401079.");
 			return false;
 		}
-		
+
 		for (Component component : recipeTemplate.getComponent()) {
 			if (!player.getInventory().decreaseByItemId(component.getItemid(), component.getQuantity())) {
 				AuditLogger.info(player, " tried craft without required items.");

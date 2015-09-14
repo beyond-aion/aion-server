@@ -32,8 +32,7 @@ public class FloatTransformer implements PropertyTransformer<Float> {
 	public Float transform(String value, Field field) throws TransformationException {
 		try {
 			return Float.parseFloat(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

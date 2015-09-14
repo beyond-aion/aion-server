@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.findgroup;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.objects.filter.ObjectFilter;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Find Group Service
@@ -44,8 +44,7 @@ public class FindGroupService {
 		AionObject object = null;
 		if (player.isInTeam()) {
 			object = player.getCurrentTeam();
-		}
-		else {
+		} else {
 			object = player;
 		}
 

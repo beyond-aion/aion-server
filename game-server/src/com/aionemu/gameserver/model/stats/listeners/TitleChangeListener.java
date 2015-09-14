@@ -16,8 +16,7 @@ public class TitleChangeListener {
 		}
 		if (!isSet) {
 			cgs.endEffect(tt);
-		}
-		else {
+		} else {
 			cgs.addEffect(tt, tt.getModifiers());
 		}
 	}

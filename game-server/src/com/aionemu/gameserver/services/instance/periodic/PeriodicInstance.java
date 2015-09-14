@@ -3,7 +3,7 @@ package com.aionemu.gameserver.services.instance.periodic;
 import java.util.Iterator;
 import java.util.concurrent.Future;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +18,20 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * @author ViAl
- *
  */
 public abstract class PeriodicInstance {
 
 	protected static final Logger log = LoggerFactory.getLogger(PeriodicInstance.class);
-	//required properties
+	// required properties
 	protected boolean isEnabled;
 	protected byte[] maskIds;
 	protected byte minLevel = 45;
 	protected byte maxLevel = 66;
 	protected String startExpression;
 	protected long registrationPeriod;
-	//inner variables
+	// inner variables
 	protected boolean registerAvailable;
-	protected FastList<Integer> playersWithCooldown;
+	protected FastTable<Integer> playersWithCooldown;
 	protected Future<?> unregisterTask;
 
 	public PeriodicInstance(boolean isEnabled, String startExpression, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
@@ -43,7 +42,7 @@ public abstract class PeriodicInstance {
 		this.minLevel = minLevel;
 		this.maxLevel = maxLevel;
 		this.registerAvailable = false;
-		this.playersWithCooldown = new FastList<Integer>();
+		this.playersWithCooldown = new FastTable<Integer>();
 	}
 
 	public void initIfEnabled() {
@@ -51,12 +50,14 @@ public abstract class PeriodicInstance {
 			String[] times = this.startExpression.split("\\|");
 			for (String cron : times) {
 				CronService.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						startRegistration();
 					}
 				}, cron);
-				log.info("Scheduled " + this.getClass().getSimpleName() + ": based on cron expression: " + cron + " Duration: " + this.registrationPeriod + " in minutes");
+				log.info("Scheduled " + this.getClass().getSimpleName() + ": based on cron expression: " + cron + " Duration: " + this.registrationPeriod
+					+ " in minutes");
 			}
 		}
 	}
@@ -135,6 +136,7 @@ public abstract class PeriodicInstance {
 
 	protected void startUnregisterTask() {
 		this.unregisterTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				stopRegistration();

@@ -21,8 +21,9 @@ public abstract class AbstractArea implements Area {
 	private final float maxZ;
 
 	private ZoneName zoneName;
-	
+
 	private int worldId;
+
 	/**
 	 * Creates new AbstractArea with min and max z
 	 * 
@@ -124,11 +125,9 @@ public abstract class AbstractArea implements Area {
 
 		if (isInsideZ(z)) {
 			zCoord = z;
-		}
-		else if (z < getMinZ()) {
+		} else if (z < getMinZ()) {
 			zCoord = getMinZ();
-		}
-		else {
+		} else {
 			zCoord = getMaxZ();
 		}
 
@@ -138,6 +137,7 @@ public abstract class AbstractArea implements Area {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getMinZ() {
 		return minZ;
 	}
@@ -145,16 +145,16 @@ public abstract class AbstractArea implements Area {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getMaxZ() {
 		return maxZ;
 	}
-	
+
 	@Override
 	public int getWorldId() {
 		return worldId;
 	}
-	
-	
+
 	/**
 	 * @return the zoneName
 	 */

@@ -32,24 +32,23 @@ public class _3913ASecretSummons extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-		if (targetId == 203725) {
+			if (targetId == 203725) {
 				switch (dialog) {
 					case QUEST_SELECT:
-					return sendQuestDialog(env, 1011);
+						return sendQuestDialog(env, 1011);
 					case ASK_QUEST_ACCEPT:
 						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
-					return sendQuestStartDialog(env);
+						return sendQuestStartDialog(env);
 					case QUEST_REFUSE_1:
 						return sendQuestEndDialog(env, 1003);
 					case QUEST_REFUSE_2:
 						return sendQuestEndDialog(env, 1004);
+				}
 			}
-		}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203752) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -63,17 +62,15 @@ public class _3913ASecretSummons extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 204656) {
-			   switch (dialog) {
-				  case QUEST_SELECT:
-					return sendQuestDialog(env, 2375);
-				  case SELECT_QUEST_REWARD:
-					return defaultCloseDialog(env, 1, 2, true, true);
+			} else if (targetId == 204656) {
+				switch (dialog) {
+					case QUEST_SELECT:
+						return sendQuestDialog(env, 2375);
+					case SELECT_QUEST_REWARD:
+						return defaultCloseDialog(env, 1, 2, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204656) {
 				return sendQuestEndDialog(env);
 			}

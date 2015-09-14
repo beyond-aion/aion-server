@@ -7,7 +7,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
-	 * @author Simple, KID, xTz
+ * @author Simple, KID, xTz
  */
 public class SM_LEGION_TABS extends AionServerPacket {
 
@@ -38,7 +38,7 @@ public class SM_LEGION_TABS extends AionServerPacket {
 
 		// TODO: Formula's could use a refactor
 		int hisSize = size - (page * 8);
-		if(size > (page + 1) * 8)
+		if (size > (page + 1) * 8)
 			hisSize = 8;
 
 		writeD(size);

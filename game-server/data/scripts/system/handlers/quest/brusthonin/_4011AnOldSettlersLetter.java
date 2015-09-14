@@ -59,8 +59,7 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 205132) {
@@ -77,8 +76,7 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 203522) {
+		} else if (targetId == 203522) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

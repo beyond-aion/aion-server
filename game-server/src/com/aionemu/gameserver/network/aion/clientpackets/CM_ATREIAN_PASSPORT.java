@@ -15,8 +15,7 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	private int count;
 	private List<Integer> passportId = new ArrayList<Integer>();
-	private List<Integer> timestamps  = new ArrayList<Integer>();
-	
+	private List<Integer> timestamps = new ArrayList<Integer>();
 
 	/**
 	 * @param opcode
@@ -34,7 +33,7 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 			passportId.add(readD());
 			timestamps.add(readD());
 		}
-		
+
 	}
 
 	@Override

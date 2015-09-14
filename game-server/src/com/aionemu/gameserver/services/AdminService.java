@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class AdminService {
 
 	private final Logger log = LoggerFactory.getLogger(AdminService.class);
 	private static final Logger itemLog = LoggerFactory.getLogger("GMITEMRESTRICTION");
-	private FastList<Integer> list;
+	private FastTable<Integer> list;
 	private static AdminService instance = new AdminService();
 
 	public static AdminService getInstance() {
@@ -29,7 +29,7 @@ public class AdminService {
 	}
 
 	public AdminService() {
-		list = FastList.newInstance();
+		list = new FastTable<>();
 		if (AdminConfig.ENABLE_TRADEITEM_RESTRICTION)
 			reload();
 	}
@@ -47,8 +47,7 @@ public class AdminService {
 				String pt = line.split("#")[0].replaceAll(" ", "");
 				list.add(Integer.parseInt(pt));
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		log.info("AdminService loaded " + list.size() + " operational items.");
@@ -75,8 +74,7 @@ public class AdminService {
 				PacketSendUtility.sendMessage(player, "You cannot use " + type + " with this item.");
 
 			return value;
-		}
-		else
+		} else
 			return true;
 	}
 }

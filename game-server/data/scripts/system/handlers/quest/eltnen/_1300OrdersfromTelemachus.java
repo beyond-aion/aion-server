@@ -44,16 +44,13 @@ public class _1300OrdersfromTelemachus extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);
-			}
-			else
+			} else
 				return sendQuestStartDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 				int[] ids = { 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043 };
 				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 				}
 			}
 			return sendQuestEndDialog(env);

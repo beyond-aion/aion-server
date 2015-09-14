@@ -121,11 +121,11 @@ public class FortressSiege extends Siege<FortressLocation> {
 			giveRewardsToLegion();
 			if (getSiegeLocation().hasValidGpRewards())
 				calculateLegionGloryPointsRewards();
-			
+
 			SiegeRace winnerRace = getSiegeLocation().getRace();
 			SiegeRace looserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
 			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(winnerRace), true);
-			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looserRace), false);		
+			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looserRace), false);
 		}
 
 		// Update outpost status
@@ -166,7 +166,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		// reset occupy count
 		getSiegeLocation().setOccupiedCount(0);
-		
+
 		if (this.oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
 			if (oldLegionGeneral != 0) {
@@ -191,9 +191,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 			getArtifact().setLegionId(topLegionId != null ? topLegionId : 0);
 		}
 	}
-	
-	public void removeOldOwnersGp() {	
-		
+
+	public void removeOldOwnersGp() {
+
 	}
 
 	private void onDefended() {
@@ -384,7 +384,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			log.error("Error while calculating glory points reward for fortress siege.", e);
 		}
 	}
-	
+
 	/**
 	 * Will send rewards to players who participated in this siege.
 	 * 
@@ -396,24 +396,24 @@ public class FortressSiege extends Siege<FortressLocation> {
 			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
 			List<Integer> topPlayersIds = Lists.newArrayList(playerAbyssPoints.keySet());
 			SiegeResult result = isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER;
-			
+
 			int i = 0;
 			List<SiegeReward> playerRewards = getSiegeLocation().getReward();
-			int rewardLevel = 0;			
+			int rewardLevel = 0;
 			for (SiegeReward topGrade : playerRewards) {
 				AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
 				for (int rewardedPC = 0; i < topPlayersIds.size() && rewardedPC < topGrade.getTop(); ++i) {
 					Integer playerId = topPlayersIds.get(i);
 					PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 					++rewardedPC;
-					
+
 					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
 						topGrade.getMedalCount(), 0);
 
 					if (getSiegeLocation().hasValidGpRewards())
 						GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
 				}
-			}	
+			}
 		} catch (Exception e) {
 			log.error("Error while calculating rewards for fortress siege.", e);
 		}

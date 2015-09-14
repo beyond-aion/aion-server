@@ -7,23 +7,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 /**
  * @author LokiReborn
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StreamLocations")
-public class StreamLocations
-{
+public class StreamLocations {
+
 	@XmlElement(required = true)
-	protected List<Location2D>	location;
-	public List<Location2D> getLocation()
-	{
-		if(location == null)
-			location = FastList.newInstance();
-		
+	protected List<Location2D> location;
+
+	public List<Location2D> getLocation() {
+		if (location == null)
+			location = new FastTable<>();
+
 		return this.location;
 	}
 }

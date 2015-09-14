@@ -14,7 +14,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("zantaraz")
@@ -51,12 +50,12 @@ public class ZantarazAI2 extends AggressiveNpcAI2 {
 		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
-		spawn(npcId,  p.getX() + x1,  p.getY() + y1,  p.getZ(),  p.getHeading());
+		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 	}
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{75, 50, 25});
+		Collections.addAll(percents, new Integer[] { 75, 50, 25 });
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {

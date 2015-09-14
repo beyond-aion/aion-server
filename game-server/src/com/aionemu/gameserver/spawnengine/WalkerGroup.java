@@ -57,8 +57,8 @@ public class WalkerGroup {
 				float bounds = sum(members, on(ClusteredNpc.class).getNpc().getObjectTemplate().getBoundRadius().getSide());
 				float distance = (1 - members.size()) / 2f * (WalkerGroupShift.DISTANCE + bounds);
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate()
-					.getRouteStep(2).getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate().getRouteStep(2)
+					.getY());
 				for (int i = 0; i < members.size(); i++, distance += WalkerGroupShift.DISTANCE) {
 					WalkerGroupShift shift = new WalkerGroupShift(distance, 0);
 					Point2D loc = getLinePoint(origin, destination, shift);
@@ -69,8 +69,7 @@ public class WalkerGroup {
 					member.setWalkerGroupShift(shift);
 					// distance += npc.getObjectTemplate().getBoundRadius().getSide();
 				}
-			}
-			else if (rows.length != 0) {
+			} else if (rows.length != 0) {
 				float rowDistances[] = new float[rows.length - 1];
 				float coronalDist = 0;
 				for (int i = 0; i < rows.length - 1; i++) {
@@ -81,8 +80,8 @@ public class WalkerGroup {
 					coronalDist -= rowDistances[i];
 				}
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate()
-					.getRouteStep(2).getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate().getRouteStep(2)
+					.getY());
 				int index = 0;
 				for (int i = 0; i < rows.length; i++) {
 					float sagittalDist = (1 - rows[i]) / 2f * WalkerGroupShift.DISTANCE;
@@ -101,11 +100,9 @@ public class WalkerGroup {
 						coronalDist += rowDistances[i];
 				}
 			}
-		}
-		else if (getWalkType() == WalkerGroupType.CIRCLE) {
+		} else if (getWalkType() == WalkerGroupType.CIRCLE) {
 			// TODO: if needed
-		}
-		else if (getWalkType() == WalkerGroupType.POINT) {
+		} else if (getWalkType() == WalkerGroupType.POINT) {
 			log.warn("No formation specified for walk cluster " + members.get(0).getWalkTemplate().getRouteId());
 		}
 	}
@@ -123,9 +120,8 @@ public class WalkerGroup {
 	 * @param destination
 	 *          - point of next move
 	 * @param shift
-	 *          - distance from origin located in lines perpendicular to destination; for SagittalShift if negative then
-	 *          located to the left from origin, otherwise, to the right for CoronalShift if negative then located to
-	 *          back, otherwise to the front
+	 *          - distance from origin located in lines perpendicular to destination; for SagittalShift if negative then located to the left from
+	 *          origin, otherwise, to the right for CoronalShift if negative then located to back, otherwise to the front
 	 * @category TODO: move to MathUtil when all kinds of WalkerGroupType are implemented.
 	 */
 	public static Point2D getLinePoint(Point2D origin, Point2D destination, WalkerGroupShift shift) {
@@ -135,12 +131,10 @@ public class WalkerGroup {
 		if (origin.getY() - destination.getY() == 0) {
 			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getCoronalShift(), origin.getY() - dir.getSagittalShift()
 				* shift.getSagittalShift());
-		}
-		else if (origin.getX() - destination.getX() == 0) {
+		} else if (origin.getX() - destination.getX() == 0) {
 			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getSagittalShift(), origin.getY() + dir.getCoronalShift()
 				* shift.getCoronalShift());
-		}
-		else {
+		} else {
 			double slope = (origin.getX() - destination.getX()) / (origin.getY() - destination.getY());
 			double dx = Math.abs(shift.getSagittalShift()) / Math.sqrt(1 + slope * slope);
 			if (shift.getSagittalShift() * dir.getCoronalShift() < 0)
@@ -153,8 +147,7 @@ public class WalkerGroup {
 			if (shift.getSagittalShift() != 0) {
 				rotatedShift = getLinePoint(origin, destination,
 					new WalkerGroupShift(Math.signum(shift.getSagittalShift()) * Math.abs(shift.getCoronalShift()), 0));
-			}
-			else {
+			} else {
 				rotatedShift = getLinePoint(origin, destination, new WalkerGroupShift(Math.abs(shift.getCoronalShift()), 0));
 			}
 
@@ -164,28 +157,21 @@ public class WalkerGroup {
 			if (shift.getCoronalShift() < 0) {
 				if (dir.getSagittalShift() < 0 && dir.getCoronalShift() < 0) {
 					result = new Point2D(result.getX() + dy, result.getY() + dx);
-				}
-				else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() > 0) {
+				} else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() > 0) {
 					result = new Point2D(result.getX() - dy, result.getY() - dx);
-				}
-				else if (dir.getSagittalShift() < 0 && dir.getCoronalShift() > 0) {
+				} else if (dir.getSagittalShift() < 0 && dir.getCoronalShift() > 0) {
 					result = new Point2D(result.getX() + dy, result.getY() - dx);
-				}
-				else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() < 0) {
+				} else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() < 0) {
 					result = new Point2D(result.getX() - dy, result.getY() + dx);
 				}
-			}
-			else {
+			} else {
 				if (dir.getSagittalShift() < 0 && dir.getCoronalShift() < 0) {
 					result = new Point2D(result.getX() - dy, result.getY() - dx);
-				}
-				else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() > 0) {
+				} else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() > 0) {
 					result = new Point2D(result.getX() + dy, result.getY() + dx);
-				}
-				else if (dir.getSagittalShift() < 0 && dir.getCoronalShift() > 0) {
+				} else if (dir.getSagittalShift() < 0 && dir.getCoronalShift() > 0) {
 					result = new Point2D(result.getX() - dy, result.getY() + dx);
-				}
-				else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() < 0) {
+				} else if (dir.getSagittalShift() > 0 && dir.getCoronalShift() < 0) {
 					result = new Point2D(result.getX() + dy, result.getY() - dx);
 				}
 			}
@@ -288,8 +274,7 @@ public class WalkerGroup {
 
 	private float getHeight(float x, float y, SpawnTemplate template) {
 		/*
-		 * if (GeoService.getInstance().isGeoOn()) { return GeoService.getInstance().getZ(template.getWorldId(), x, y, z, );
-		 * }
+		 * if (GeoService.getInstance().isGeoOn()) { return GeoService.getInstance().getZ(template.getWorldId(), x, y, z, ); }
 		 */
 		return template.getZ();
 	}

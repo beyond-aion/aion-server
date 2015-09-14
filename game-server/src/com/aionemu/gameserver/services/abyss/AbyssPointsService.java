@@ -36,7 +36,8 @@ public class AbyssPointsService {
 		// Notify player of AP gained (This should happen before setAp happens.)
 		if (value > 0)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(value));
-		else //You used %num0 Abyss Points.
+		else
+			// You used %num0 Abyss Points.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300965, value * -1));
 
 		// Set the new AP value

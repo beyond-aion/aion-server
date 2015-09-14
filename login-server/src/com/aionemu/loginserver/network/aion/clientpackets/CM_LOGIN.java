@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.security.GeneralSecurityException;
 import java.sql.Timestamp;
 import java.util.Iterator;
+
 import javax.crypto.Cipher;
 
 import org.slf4j.Logger;
@@ -71,8 +72,7 @@ public class CM_LOGIN extends AionClientPacket {
 			Cipher rsaCipher = Cipher.getInstance("RSA/ECB/nopadding");
 			rsaCipher.init(Cipher.DECRYPT_MODE, getConnection().getRSAPrivateKey());
 			decrypted1 = rsaCipher.doFinal(data1, 0, 128);
-		}
-		catch (GeneralSecurityException e) {
+		} catch (GeneralSecurityException e) {
 			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR));
 			return;
 		}
@@ -81,8 +81,7 @@ public class CM_LOGIN extends AionClientPacket {
 			Cipher rsaCipher = Cipher.getInstance("RSA/ECB/nopadding");
 			rsaCipher.init(Cipher.DECRYPT_MODE, getConnection().getRSAPrivateKey());
 			decrypted2 = rsaCipher.doFinal(data2, 0, 128);
-		}
-		catch (GeneralSecurityException e) {
+		} catch (GeneralSecurityException e) {
 			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR));
 			return;
 		}
@@ -137,7 +136,7 @@ public class CM_LOGIN extends AionClientPacket {
 		StringBuilder sb = new StringBuilder();
 		while (bytes.hasNext()) {
 			char ch = (char) bytes.next().byteValue();
-			if (ch == 0 || (byte)ch == -1) {
+			if (ch == 0 || (byte) ch == -1) {
 				if (sb.length() == 0)
 					continue;
 				else

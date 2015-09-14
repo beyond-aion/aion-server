@@ -65,8 +65,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (var == 20) {
+				} else if (var == 20) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return true;
@@ -95,8 +94,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 205150) {
@@ -115,8 +113,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205188) {
+		} else if (targetId == 205188) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -129,8 +126,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205190) {
+		} else if (targetId == 205190) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -157,13 +153,11 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 10000);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 10001);
 					}
 			}
-		}
-		else if (targetId == 205208) {
+		} else if (targetId == 205208) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -177,8 +171,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205209) {
+		} else if (targetId == 205209) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -192,8 +185,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205210) {
+		} else if (targetId == 205210) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -207,8 +199,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205212) {
+		} else if (targetId == 205212) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -222,8 +213,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205213) {
+		} else if (targetId == 205213) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -237,8 +227,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 205214) {
+		} else if (targetId == 205214) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -252,8 +241,7 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 700394) {
+		} else if (targetId == 700394) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					return useQuestObject(env, 1, 2, false, 0); // 2

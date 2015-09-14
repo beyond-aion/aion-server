@@ -51,8 +51,7 @@ public class ChargeInfo extends ActionObserver {
 		int newChargePoints = chargePoints + addPoints;
 		if (newChargePoints > LEVEL2) {
 			newChargePoints = LEVEL2;
-		}
-		else if (newChargePoints < 0) {
+		} else if (newChargePoints < 0) {
 			newChargePoints = 0;
 		}
 		if (item.isEquipped() && player != null)

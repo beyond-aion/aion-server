@@ -33,9 +33,8 @@ public class XmlQuestData extends XMLQuest {
 	/**
 	 * Gets the value of the onTalkEvent property.
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
-	 * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
-	 * the onTalkEvent property.
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the onTalkEvent property.
 	 * <p>
 	 * For example, to add a new item, do as follows:
 	 * 
@@ -55,9 +54,8 @@ public class XmlQuestData extends XMLQuest {
 	/**
 	 * Gets the value of the onKillEvent property.
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
-	 * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
-	 * the onKillEvent property.
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the onKillEvent property.
 	 * <p>
 	 * For example, to add a new item, do as follows:
 	 * 
@@ -94,8 +92,7 @@ public class XmlQuestData extends XMLQuest {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.models.QuestScriptData#register(com.aionemu.gameserver.questEngine
-	 * .QuestEngine)
+	 * @see com.aionemu.gameserver.questEngine.handlers.models.QuestScriptData#register(com.aionemu.gameserver.questEngine .QuestEngine)
 	 */
 	@Override
 	public void register(QuestEngine questEngine) {

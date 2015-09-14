@@ -2,7 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Set;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.LoggerFactory;
 
@@ -20,11 +20,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_LOOT_ITEMLIST extends AionServerPacket {
 
 	private int targetObjectId;
-	private FastList<DropItem> dropItems;
+	private FastTable<DropItem> dropItems;
 
 	public SM_LOOT_ITEMLIST(int targetObjectId, Set<DropItem> setItems, Player player) {
 		this.targetObjectId = targetObjectId;
-		this.dropItems = new FastList<DropItem>();
+		this.dropItems = new FastTable<DropItem>();
 		if (setItems == null) {
 			LoggerFactory.getLogger(SM_LOOT_ITEMLIST.class).warn("null Set<DropItem>, skip");
 			return;
@@ -55,7 +55,7 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 			ItemTemplate template = drop.getItemTemplate();
 			writeC(!template.getItemGroup().equals(ItemGroup.QUEST) && !template.isTradeable() ? 1 : 0);
 		}
-		FastList.recycle(dropItems);
+
 	}
 
 }

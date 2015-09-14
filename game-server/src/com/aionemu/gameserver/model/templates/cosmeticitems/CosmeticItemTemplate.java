@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.Race;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -56,6 +55,7 @@ public class CosmeticItemTemplate {
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "Preset")
 	public static class Preset {
+
 		@XmlElement(name = "scale")
 		private float scale;
 		@XmlElement(name = "hair_type")

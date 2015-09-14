@@ -27,7 +27,7 @@ public class RegularRates extends Rates {
 	public float getApPlayerGainRate() {
 		return RateConfig.AP_PLAYER_GAIN_RATE;
 	}
-	
+
 	@Override
 	public float getGpPlayerGainRate() {
 		return RateConfig.GP_PLAYER_GAIN_RATE;
@@ -64,8 +64,7 @@ public class RegularRates extends Rates {
 	}
 
 	/*
-	 * (non-Javadoc) @see
-	 * com.aionemu.gameserver.utils.rates.Rates#getCraftingXPRate()
+	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getCraftingXPRate()
 	 */
 	@Override
 	public float getCraftingXPRate() {
@@ -73,8 +72,7 @@ public class RegularRates extends Rates {
 	}
 
 	/*
-	 * (non-Javadoc) @see
-	 * com.aionemu.gameserver.utils.rates.Rates#getGatheringXPRate()
+	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getGatheringXPRate()
 	 */
 	@Override
 	public float getGatheringXPRate() {
@@ -105,12 +103,12 @@ public class RegularRates extends Rates {
 	public int getComboCritRate() {
 		return CraftConfig.CRAFT_COMBO_RATE;
 	}
-	
+
 	@Override
 	public float getDisciplineRewardRate() {
 		return RateConfig.PVP_ARENA_DISCIPLINE_REWARD_RATE;
 	}
-	
+
 	@Override
 	public float getChaosRewardRate() {
 		return RateConfig.PVP_ARENA_CHAOS_REWARD_RATE;
@@ -135,7 +133,7 @@ public class RegularRates extends Rates {
 	public float getSellLimitRate() {
 		return RateConfig.SELL_LIMIT_RATE;
 	}
-	
+
 	@Override
 	public float getGpNpcRate() {
 		return RateConfig.GP_NPC_RATE;

@@ -1,57 +1,62 @@
 package com.aionemu.commons.callbacks.util;
 
-import com.aionemu.commons.callbacks.Callback;
-import com.aionemu.commons.callbacks.CallbackPriority;
+import java.util.List;
+
 import javassist.CtMethod;
 import javassist.bytecode.AnnotationsAttribute;
 
-import java.util.List;
+import com.aionemu.commons.callbacks.Callback;
+import com.aionemu.commons.callbacks.CallbackPriority;
 
 @SuppressWarnings("rawtypes")
 public class CallbacksUtil {
 
-    /**
-     * Checks if annotation is present on method
-     *
-     * @param method     Method to check
-     * @param annotation Annotation to look for
-     * @return result
-     */
-    public static boolean isAnnotationPresent(CtMethod method, Class<? extends java.lang.annotation.Annotation> annotation) {
-        for (Object o : method.getMethodInfo().getAttributes()) {
-            if (o instanceof AnnotationsAttribute) {
-                AnnotationsAttribute attribute = (AnnotationsAttribute) o;
-                if (attribute.getAnnotation(annotation.getName()) != null) {
-                    return true;
-                }
-            }
-        }
+	/**
+	 * Checks if annotation is present on method
+	 *
+	 * @param method
+	 *          Method to check
+	 * @param annotation
+	 *          Annotation to look for
+	 * @return result
+	 */
+	public static boolean isAnnotationPresent(CtMethod method, Class<? extends java.lang.annotation.Annotation> annotation) {
+		for (Object o : method.getMethodInfo().getAttributes()) {
+			if (o instanceof AnnotationsAttribute) {
+				AnnotationsAttribute attribute = (AnnotationsAttribute) o;
+				if (attribute.getAnnotation(annotation.getName()) != null) {
+					return true;
+				}
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Returns priority of callback.<br>
-     * Method checks if callback is instance of {@link com.aionemu.commons.callbacks.CallbackPriority}, and returns
-     * <p/>
-     * <pre>
-     * {@link com.aionemu.commons.callbacks.CallbackPriority#DEFAULT_PRIORITY} - {@link com.aionemu.commons.callbacks.CallbackPriority#getPriority()}
-     * </pre>
-     * <p/>
-     * .<br>
-     * If callback is not instance of CallbackPriority then it returns {@link com.aionemu.commons.callbacks.CallbackPriority#DEFAULT_PRIORITY}
-     *
-     * @param callback priority to get from
-     * @return priority of callback
-     */
-    public static int getCallbackPriority(Callback callback) {
-        if (callback instanceof CallbackPriority) {
-            CallbackPriority instancePriority = (CallbackPriority) callback;
-            return CallbackPriority.DEFAULT_PRIORITY - instancePriority.getPriority();
-        } else {
-            return CallbackPriority.DEFAULT_PRIORITY;
-        }
-    }
+	/**
+	 * Returns priority of callback.<br>
+	 * Method checks if callback is instance of {@link com.aionemu.commons.callbacks.CallbackPriority}, and returns
+	 * <p/>
+	 * 
+	 * <pre>
+	 * {@link com.aionemu.commons.callbacks.CallbackPriority#DEFAULT_PRIORITY} - {@link com.aionemu.commons.callbacks.CallbackPriority#getPriority()}
+	 * </pre>
+	 * <p/>
+	 * .<br>
+	 * If callback is not instance of CallbackPriority then it returns {@link com.aionemu.commons.callbacks.CallbackPriority#DEFAULT_PRIORITY}
+	 *
+	 * @param callback
+	 *          priority to get from
+	 * @return priority of callback
+	 */
+	public static int getCallbackPriority(Callback callback) {
+		if (callback instanceof CallbackPriority) {
+			CallbackPriority instancePriority = (CallbackPriority) callback;
+			return CallbackPriority.DEFAULT_PRIORITY - instancePriority.getPriority();
+		} else {
+			return CallbackPriority.DEFAULT_PRIORITY;
+		}
+	}
 
 	protected static void insertCallbackToList(Callback callback, List<Callback> list) {
 		int callbackPriority = CallbacksUtil.getCallbackPriority(callback);

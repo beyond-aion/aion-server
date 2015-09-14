@@ -15,14 +15,13 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("silikor")
 public class SilikorofMemoryAI2 extends AggressiveNpcAI2 {
 
 	protected List<Integer> percents = new ArrayList<Integer>();
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -39,19 +38,19 @@ public class SilikorofMemoryAI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
-	
+
 	private void sp(int npcId) {
 		float direction = Rnd.get(0, 199) / 100f;
 		int distance = Rnd.get(0, 2);
 		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
-		spawn(npcId,  p.getX() + x1,  p.getY() + y1,  p.getZ(),  p.getHeading());
+		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 	}
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{50, 25, 10});
+		Collections.addAll(percents, new Integer[] { 50, 25, 10 });
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
@@ -63,11 +62,9 @@ public class SilikorofMemoryAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected void handleSpawned()
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
-		switch (this.getNpcId())
-		{
+		switch (this.getNpcId()) {
 			case 214668:
 				SkillEngine.getInstance().getSkill(getOwner(), 18481, 1, getOwner()).useSkill();
 				break;

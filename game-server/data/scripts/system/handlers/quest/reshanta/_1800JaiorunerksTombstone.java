@@ -37,13 +37,11 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 			if (targetId == 279016) { // Vindachinerk
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182202163, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730141: { // Jaiorunerk's Tomb
@@ -77,8 +75,7 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279016) { // Vindachinerk
 				return sendQuestEndDialog(env);
 			}

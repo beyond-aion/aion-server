@@ -7,7 +7,6 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class AutoPvPFFAInstance extends AutoInstance {
@@ -21,8 +20,7 @@ public class AutoPvPFFAInstance extends AutoInstance {
 			}
 			players.put(player.getObjectId(), new AGPlayer(player));
 			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -54,5 +52,5 @@ public class AutoPvPFFAInstance extends AutoInstance {
 	public void onLeaveInstance(Player player) {
 		super.unregister(player);
 	}
-	
+
 }

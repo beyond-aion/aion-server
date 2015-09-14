@@ -14,7 +14,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("golden_tatar_lava")
@@ -33,8 +32,7 @@ public class GoldenTatarLavaAI2 extends AggressiveNpcAI2 {
 		super.handleSpawned();
 		if (getNpcId() == 282746) {
 			startSpawnTask();
-		}
-		else {
+		} else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
@@ -57,8 +55,7 @@ public class GoldenTatarLavaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					spawnCount++;
 					WorldPosition p = getPosition();
 					spawn(282747, p.getX(), p.getY(), p.getZ(), p.getHeading());

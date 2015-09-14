@@ -7,15 +7,13 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
-
 /**
  * @author kecimis
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MPHealEffect")
 public class MPHealEffect extends HealOverTimeEffect {
-	
+
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect, HealType.MP);
@@ -25,7 +23,7 @@ public class MPHealEffect extends HealOverTimeEffect {
 	public void onPeriodicAction(Effect effect) {
 		super.onPeriodicAction(effect, HealType.MP);
 	}
-	
+
 	@Override
 	protected int getCurrentStatValue(Effect effect) {
 		return effect.getEffected().getLifeStats().getCurrentMp();

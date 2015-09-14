@@ -45,9 +45,9 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 					final Npc padmarashka = getNpc(218756);
 					if (padmarashka != null && !padmarashka.getLifeStats().isAlreadyDead()) {
 						padmarashka.getEffectController().unsetAbnormal(AbnormalState.SLEEP.getId());
-						//padmarashka.getEffectController().broadCastEffects(0);
+						// padmarashka.getEffectController().broadCastEffects(0);
 						SkillEngine.getInstance().getSkill(padmarashka, 19187, 55, padmarashka).useNoAnimationSkill();
-						padmarashka.getEffectController().removeEffect(19186); //skill should handle this TODO: fix
+						padmarashka.getEffectController().removeEffect(19186); // skill should handle this TODO: fix
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
@@ -60,7 +60,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 				break;
 			case 282613:
 			case 282614:
-				if (killedEggs.incrementAndGet() == 20) { //TODO: find value
+				if (killedEggs.incrementAndGet() == 20) { // TODO: find value
 					final Npc padmarashka = getNpc(218756);
 					if (padmarashka != null && !padmarashka.getLifeStats().isAlreadyDead()) {
 						SkillEngine.getInstance().applyEffectDirectly(20101, padmarashka, padmarashka, 0);
@@ -80,8 +80,8 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

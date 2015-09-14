@@ -8,16 +8,16 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
 /**
- *
  * @author xTz
  */
 public class CuringObject extends VisibleObject {
 
 	private CuringTemplate template;
 	private float range;
+
 	public CuringObject(CuringTemplate template, int instanceId) {
-		super(IDFactory.getInstance().nextId(), new VisibleObjectController<CuringObject>() {}, null, null, World.getInstance().
-				createPosition(template.getMapId(), template.getX(), template.getY(), template.getZ(), (byte) 0, instanceId));
+		super(IDFactory.getInstance().nextId(), new VisibleObjectController<CuringObject>() {
+		}, null, null, World.getInstance().createPosition(template.getMapId(), template.getX(), template.getY(), template.getZ(), (byte) 0, instanceId));
 		this.template = template;
 		this.range = template.getRange();
 		setKnownlist(new NpcKnownList(this));
@@ -26,7 +26,7 @@ public class CuringObject extends VisibleObject {
 	public CuringTemplate getTemplate() {
 		return template;
 	}
-	
+
 	@Override
 	public String getName() {
 		return "";

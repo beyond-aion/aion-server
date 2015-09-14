@@ -30,29 +30,25 @@ public class _48007JoiningTheCircle extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204191) { 
+			if (targetId == 204191) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 799874) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 799874) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799874) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799874) {
 				return sendQuestEndDialog(env);
 			}
 		}

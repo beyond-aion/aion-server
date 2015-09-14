@@ -2,13 +2,15 @@ package com.aionemu.gameserver.services.craft;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.craft.*;
+import com.aionemu.gameserver.model.craft.ExpertQuestsList;
+import com.aionemu.gameserver.model.craft.MasterQuestsList;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.templates.CraftLearnTemplate;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -33,7 +35,7 @@ public class RelinquishCraftStatus {
 		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.npcBySkill.get(npc.getNpcId());
 		final int skillId = craftLearnTemplate.getSkillId();
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-		if(!canRelinquishCraftStatus(player, skill, craftLearnTemplate, expertMinValue, expertMaxValue)) {
+		if (!canRelinquishCraftStatus(player, skill, craftLearnTemplate, expertMinValue, expertMaxValue)) {
 			return;
 		}
 		if (!successDecreaseKinah(player, expertPrice)) {
@@ -49,7 +51,7 @@ public class RelinquishCraftStatus {
 		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.npcBySkill.get(npc.getNpcId());
 		final int skillId = craftLearnTemplate.getSkillId();
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-		if(!canRelinquishCraftStatus(player, skill, craftLearnTemplate, masterMinValue, masterMaxValue)) {
+		if (!canRelinquishCraftStatus(player, skill, craftLearnTemplate, masterMinValue, masterMaxValue)) {
 			return;
 		}
 		if (!successDecreaseKinah(player, masterPrice)) {
@@ -61,7 +63,8 @@ public class RelinquishCraftStatus {
 		deleteCraftStatusQuests(skillId, player, false);
 	}
 
-	private static boolean canRelinquishCraftStatus(Player player, PlayerSkillEntry skill, CraftLearnTemplate craftLearnTemplate, int minValue, int maxValue) {
+	private static boolean canRelinquishCraftStatus(Player player, PlayerSkillEntry skill, CraftLearnTemplate craftLearnTemplate, int minValue,
+		int maxValue) {
 		if (craftLearnTemplate == null || !craftLearnTemplate.isCraftSkill()) {
 			return false;
 		}
@@ -119,9 +122,8 @@ public class RelinquishCraftStatus {
 		int maxCraftStatus = isExpert ? CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
 		int countCraftStatus;
 		for (PlayerSkillEntry skill : player.getSkillList().getBasicSkills()) {
-			countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player) + 
-					CraftSkillUpdateService.getTotalExpertCraftingSkills(player) : 
-					CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
+			countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player)
+				+ CraftSkillUpdateService.getTotalExpertCraftingSkills(player) : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
 			if (countCraftStatus > maxCraftStatus) {
 				skillId = skill.getSkillId();
 				skillLevel = skill.getSkillLevel();

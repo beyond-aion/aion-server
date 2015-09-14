@@ -13,7 +13,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  */
 public class AbyssService {
 
-	private static final int[] abyssMapList = { 210050000, 220070000, 400010000, 600010000, 600020000, 600030000, 600040000, 600050000, 600060000, 600070000};
+	private static final int[] abyssMapList = { 210050000, 220070000, 400010000, 600010000, 600020000, 600030000, 600040000, 600050000, 600060000,
+		600070000 };
 
 	/**
 	 * @param player
@@ -30,8 +31,9 @@ public class AbyssService {
 	 * @param victim
 	 */
 	public static final void rankedKillAnnounce(final Player victim) {
-		
+
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player p) {
 				if (p != victim && victim.getWorldType() == p.getWorldType() && !p.isInInstance()) {
@@ -40,9 +42,10 @@ public class AbyssService {
 			}
 		});
 	}
-	
+
 	public static final void rankerSkillAnnounce(final Player player, final int nameId) {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player p) {
 				if (p != player && player.getWorldType() == p.getWorldType() && !p.isInInstance()) {

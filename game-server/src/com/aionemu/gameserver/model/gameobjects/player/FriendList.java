@@ -152,7 +152,7 @@ public class FriendList implements Iterable<Friend> {
 				if (friendPlayer == null)
 					continue;
 
-				if (friendPlayer.getClientConnection() == null){
+				if (friendPlayer.getClientConnection() == null) {
 					log.warn("[AT] friendlist connection is null");
 					continue;
 				}
@@ -162,8 +162,7 @@ public class FriendList implements Iterable<Friend> {
 				if (previousStatus == Status.OFFLINE) {
 					// Show LOGIN message
 					friendPlayer.getClientConnection().sendPacket(new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGIN, player.getName()));
-				}
-				else if (status == Status.OFFLINE) {
+				} else if (status == Status.OFFLINE) {
 					// Show LOGOUT message
 					friendPlayer.getClientConnection().sendPacket(new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGOUT, player.getName()));
 				}

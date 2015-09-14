@@ -74,8 +74,7 @@ public class ZoneLevelService {
 					if (!player.isInvul()) {
 						player.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.DROWNING, value, 0, SM_ATTACK_STATUS.LOG.REGULAR, player);
 					}
-				}
-				else
+				} else
 					stopDrowning(player);
 			}
 		}, 0, DROWN_PERIOD));

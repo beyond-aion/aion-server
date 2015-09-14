@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author Cheatkiller
- *
  */
 @InstanceID(301300000)
 public class KrotanBattleInstance extends KrotanBattleInstance_L {
@@ -18,7 +17,7 @@ public class KrotanBattleInstance extends KrotanBattleInstance_L {
 	@Override
 	protected void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			spawn(702288, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 			spawn(702288, 571.56036f, 869.93604f, 199.37367f, (byte) 69);
 			spawn(702288, 560.082f, 882.97943f, 199.37367f, (byte) 76);

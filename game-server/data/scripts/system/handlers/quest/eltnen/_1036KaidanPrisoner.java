@@ -53,12 +53,11 @@ public class _1036KaidanPrisoner extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203901){
+			if (targetId == 203901) {
 				removeQuestItem(env, 182201005, 1);
 				return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 203904) {
@@ -75,8 +74,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204045) {
+		} else if (targetId == 204045) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -94,8 +92,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204003) {
+		} else if (targetId == 204003) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -121,8 +118,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204004) {
+		} else if (targetId == 204004) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -139,8 +135,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204020) {
+		} else if (targetId == 204020) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)

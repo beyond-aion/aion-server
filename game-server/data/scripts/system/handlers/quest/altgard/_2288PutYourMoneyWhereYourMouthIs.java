@@ -49,14 +49,13 @@ public class _2288PutYourMoneyWhereYourMouthIs extends QuestHandler {
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
-		if (targetId == 210564 || targetId == 210584 || targetId == 210581 || targetId == 210436 || targetId == 201047
-			|| targetId == 210437 || targetId == 210440) {
+		if (targetId == 210564 || targetId == 210584 || targetId == 210581 || targetId == 210436 || targetId == 201047 || targetId == 210437
+			|| targetId == 210440) {
 			if (var > 0 && var < 3) {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;
-			}
-			else if (var == 3) {
+			} else if (var == 3) {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				QuestService.questTimerEnd(env);
@@ -79,28 +78,23 @@ public class _2288PutYourMoneyWhereYourMouthIs extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 4) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 1352);
-					}
-					else if (qs.getQuestVarById(0) == 0)
+					} else if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1003);
 					else
 						return sendQuestSelectionDialog(env);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					QuestService.questTimerStart(env, 600);
 					qs.setQuestVarById(0, 1);
 					return sendQuestSelectionDialog(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD)
+			} else if (qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
 		}
 		return false;

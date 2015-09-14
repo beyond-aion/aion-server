@@ -18,9 +18,9 @@ public enum SkillTargetSlot {
 	BOOST(32),
 	NOSHOW(64),
 	NONE(128);
-	
+
 	private int id;
-	
+
 	public static final int FULLSLOTS = 127;
 
 	private SkillTargetSlot(int id) {

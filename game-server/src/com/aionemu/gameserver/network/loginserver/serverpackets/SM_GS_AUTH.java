@@ -14,10 +14,11 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
  * @author -Nemesiss-
  */
 public class SM_GS_AUTH extends LsServerPacket {
+
 	public SM_GS_AUTH() {
 		super(0x00);
 	}
-	
+
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeC(NetworkConfig.GAMESERVER_ID);

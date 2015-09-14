@@ -21,7 +21,7 @@ public enum PlayerAllianceEvent {
 	RECONNECT(13),
 	ENTER(13),
 	UPDATE(13),
-	
+
 	MEMBER_GROUP_CHANGE(5),
 
 	// Extra? Unused?

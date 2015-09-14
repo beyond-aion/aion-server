@@ -28,8 +28,7 @@ public abstract class AbstractCronTask implements Runnable {
 	}
 
 	/**
-	 * The same as a milliseconds left, but any extended class may specify a
-	 * little delay. if delay is not needed then it's simple "runTime" minus "now"
+	 * The same as a milliseconds left, but any extended class may specify a little delay. if delay is not needed then it's simple "runTime" minus "now"
 	 * function
 	 */
 	abstract protected long getRunDelay();
@@ -51,8 +50,7 @@ public abstract class AbstractCronTask implements Runnable {
 	}
 
 	/**
-	 * Variable name of the task start time stored in the server_variables DB
-	 * table
+	 * Variable name of the task start time stored in the server_variables DB table
 	 */
 	abstract protected String getServerTimeVariable();
 
@@ -72,8 +70,7 @@ public abstract class AbstractCronTask implements Runnable {
 	abstract protected void executeTask();
 
 	/**
-	 * Is the task allowed to run on its initialization (if runDelay = 0) or only
-	 * at times defined by cron
+	 * Is the task allowed to run on its initialization (if runDelay = 0) or only at times defined by cron
 	 */
 	abstract protected boolean canRunOnInit();
 
@@ -122,16 +119,15 @@ public abstract class AbstractCronTask implements Runnable {
 
 	@Override
 	public final void run() {
-      if (getRunDelay() > 0) {
-        ThreadPoolManager.getInstance().schedule(this, getRunDelay());
-      }
-      else {
-		preRun();
+		if (getRunDelay() > 0) {
+			ThreadPoolManager.getInstance().schedule(this, getRunDelay());
+		} else {
+			preRun();
 
-		executeTask();
-		saveNextRunTime();
+			executeTask();
+			saveNextRunTime();
 
-		postRun();
-      }
+			postRun();
+		}
 	}
 }

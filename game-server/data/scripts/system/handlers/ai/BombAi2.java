@@ -31,6 +31,7 @@ public class BombAi2 extends AggressiveNpcAI2 {
 
 	private void doUseSkill() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				useSkill(template.getSkillId());

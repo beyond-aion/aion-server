@@ -66,8 +66,7 @@ public class _1093TheCalydonRuins extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798155) {
@@ -83,8 +82,7 @@ public class _1093TheCalydonRuins extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 203784) {
+		} else if (targetId == 203784) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -99,8 +97,7 @@ public class _1093TheCalydonRuins extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 798176) {
+		} else if (targetId == 798176) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -116,8 +113,7 @@ public class _1093TheCalydonRuins extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 798212) {
+		} else if (targetId == 798212) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 7)
@@ -142,13 +138,11 @@ public class _1093TheCalydonRuins extends QuestHandler {
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 3739);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 10001);
 					}
 			}
-		}
-		else if (targetId == 700391) {
+		} else if (targetId == 700391) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 4) {
@@ -158,19 +152,17 @@ public class _1093TheCalydonRuins extends QuestHandler {
 						updateQuestStatus(env);
 					}
 			}
-		}
-		else if (targetId == 700392) {
+		} else if (targetId == 700392) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 5) {
 						if (!giveQuestItem(env, 182208015, 1))
-							return false ;
+							return false;
 						qs.setQuestVarById(0, 6);
 						updateQuestStatus(env);
 					}
 			}
-		}
-		else if (targetId == 700393) {
+		} else if (targetId == 700393) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 6) {

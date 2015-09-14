@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
-import com.aionemu.gameserver.world.WorldDropType;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import com.aionemu.gameserver.world.WorldDropType;
 
 /**
  * @author AionCool
@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropWorld")
 public class GlobalDropWorld {
 
-    @XmlAttribute(name = "wd_type", required = true)
-    protected WorldDropType wdType;
- 
-    public WorldDropType getWorldDropType() {
-        return wdType;
-    }
+	@XmlAttribute(name = "wd_type", required = true)
+	protected WorldDropType wdType;
+
+	public WorldDropType getWorldDropType() {
+		return wdType;
+	}
 }

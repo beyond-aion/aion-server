@@ -15,13 +15,12 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.utils.MathUtil;
 
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HealCastorOnAttackedEffect")
 public class HealCastorOnAttackedEffect extends EffectTemplate {
 
 	@XmlAttribute
-	protected HealType type;//useless
+	protected HealType type;// useless
 	@XmlAttribute
 	protected float range;
 
@@ -52,16 +51,14 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
 							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 					}
-				}
-				else if (player.isInAlliance2()) {
-					for(Player p : player.getPlayerAllianceGroup2().getMembers()){
+				} else if (player.isInAlliance2()) {
+					for (Player p : player.getPlayerAllianceGroup2().getMembers()) {
 						if (!p.isOnline())
 							continue;
 						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
 							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 					}
-				}
-				else {
+				} else {
 					if (MathUtil.isIn3dRange(effect.getEffected(), player, range))
 						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 				}
@@ -71,7 +68,7 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 		effect.getEffected().getObserveController().addObserver(observer);
 		effect.setActionObserver(observer, position);
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);

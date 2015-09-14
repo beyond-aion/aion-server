@@ -11,21 +11,21 @@ import com.aionemu.gameserver.skillengine.model.TransformType;
 public class SM_TRANSFORM extends AionServerPacket {
 
 	private Creature creature;
-	
-	//testing stuff
+
+	// testing stuff
 	private boolean custom = false;
 	private int modelId;
 	private int panelId;
 	private TransformType type;
-	private int unk1,unk2,unk3,unk4,unk5,unk6, unk7; 
+	private int unk1, unk2, unk3, unk4, unk5, unk6, unk7;
 
 	public SM_TRANSFORM(Creature creature) {
 		this.creature = creature;
 	}
-	
-	//for testing
-	public SM_TRANSFORM(Creature creature, int modelId, int unk7, TransformType type,
-		int unk1, int unk2, int unk3, int unk4, int unk5, int unk6, int panelId) {
+
+	// for testing
+	public SM_TRANSFORM(Creature creature, int modelId, int unk7, TransformType type, int unk1, int unk2, int unk3, int unk4, int unk5, int unk6,
+		int panelId) {
 		this.creature = creature;
 		this.modelId = modelId;
 		this.unk7 = unk7;
@@ -41,25 +41,10 @@ public class SM_TRANSFORM extends AionServerPacket {
 	}
 
 	/**
-	 * structure SM_TRANSFORM 
-	 * D - objectId
-	 * D - modelId (res9) 100%
-	 * H - state
-	 * F - 0,25f
-	 * F - 2.0f
-	 * C - cannotuseskill(res7) 100%- not used for FORM1
-	 * D - transformTypeId (res8) 100%
-	 * C - (res6) cannot fly/glide?
-	 * C - cannot useitem  (res5)
-	 * C - attack disabled  (res3)
-	 * C - jump disabled  (res2?)
-	 * C - summon disabled? (res1?)
-	 * C - move disabled(res13) 100%
-	 * D - panelId(res4) 100%
-	 * 
-	 * cant mount - client recognises it by modelId?
-	 * 
-	 *  TODO server side checks for mounts
+	 * structure SM_TRANSFORM D - objectId D - modelId (res9) 100% H - state F - 0,25f F - 2.0f C - cannotuseskill(res7) 100%- not used for FORM1 D -
+	 * transformTypeId (res8) 100% C - (res6) cannot fly/glide? C - cannot useitem (res5) C - attack disabled (res3) C - jump disabled (res2?) C -
+	 * summon disabled? (res1?) C - move disabled(res13) 100% D - panelId(res4) 100% cant mount - client recognises it by modelId? TODO server side
+	 * checks for mounts
 	 */
 	@Override
 	protected void writeImpl(AionConnection con) {

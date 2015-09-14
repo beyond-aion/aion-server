@@ -135,7 +135,7 @@ public abstract class AITemplate extends AbstractAI {
 	@Override
 	protected void handleDropRegistered() {
 	}
-	
+
 	@Override
 	public boolean isMayShout() {
 		return false;
@@ -145,11 +145,10 @@ public abstract class AITemplate extends AbstractAI {
 	public boolean onPatternShout(ShoutEventType event, String pattern, int skillNumber) {
 		return false;
 	}
-	
+
 	@Override
 	protected void creatureNeedsHelp(Creature creature) {
 	}
-
 
 	@Override
 	public AttackIntention chooseAttackIntention() {

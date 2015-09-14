@@ -40,12 +40,12 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		if (player == null)
 			return;
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		House house = HousingService.getInstance().getPlayerStudio(player.getObjectId());
 		if (house == null) {
 			int address = HousingService.getInstance().getPlayerAddress(player.getObjectId());
@@ -58,7 +58,7 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		house.setSignNotice(signNotice.getBytes(Charset.forName("UTF-16LE")));
 
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), house.getAddress().getId(), true));
-		HouseController controller = (HouseController) house.getController();
+		HouseController controller = house.getController();
 		controller.updateAppearance();
 
 		// TODO: save signNotice
@@ -68,8 +68,7 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		else if (doorPermission == HousePermissions.DOOR_OPENED_FRIENDS) {
 			house.getController().kickVisitors(player, false, true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_WITHOUT_FRIENDS);
-		}
-		else if (doorPermission == HousePermissions.DOOR_CLOSED) {
+		} else if (doorPermission == HousePermissions.DOOR_CLOSED) {
 			house.getController().kickVisitors(player, true, true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_ALL);
 		}

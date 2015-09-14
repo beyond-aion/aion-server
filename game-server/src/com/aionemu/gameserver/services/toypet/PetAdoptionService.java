@@ -31,19 +31,19 @@ public class PetAdoptionService {
 
 		int eggId = player.getInventory().getItemByObjId(eggObjId).getItemId();
 		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(eggId);
-		
+
 		if (!validateAdoption(player, template, petId))
-		   return;
-		
-		if(!player.getInventory().decreaseByObjectId(eggObjId, 1))
-		   return;
-		
-		int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0 ? 
-				(int) ((System.currentTimeMillis() / 1000) + template.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
-		
+			return;
+
+		if (!player.getInventory().decreaseByObjectId(eggObjId, 1))
+			return;
+
+		int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0 ? (int) ((System.currentTimeMillis() / 1000) + template
+			.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
+
 		addPet(player, petId, name, decorationId, expireTime);
 	}
-	
+
 	/**
 	 * Add pet to player
 	 * 
@@ -53,27 +53,27 @@ public class PetAdoptionService {
 	 * @param decorationId
 	 */
 	public static void addPet(Player player, int petId, String name, int decorationId, int expireTime) {
-	   PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
+		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
 		if (petCommonData != null) {
 			PacketSendUtility.sendPacket(player, new SM_PET(1, petCommonData));
 			if (expireTime > 0)
-			   ExpireTimerTask.getInstance().addTask(petCommonData, player);
+				ExpireTimerTask.getInstance().addTask(petCommonData, player);
 		}
 	}
 
 	private static boolean validateAdoption(Player player, ItemTemplate template, int petId) {
-		if (template == null || template.getActions() == null || template.getActions().getAdoptPetAction() == null ||
-			template.getActions().getAdoptPetAction().getPetId() != petId) {
+		if (template == null || template.getActions() == null || template.getActions().getAdoptPetAction() == null
+			|| template.getActions().getAdoptPetAction().getPetId() != petId) {
 			return false;
 		}
 		if (player.getPetList().hasPet(petId)) {
 			log.warn("Duplicate pet adoption");
 			return false;
 		}
-        if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
-          log.warn("Trying adopt pet without template. PetId:" + petId);
-          return false;
-        }
+		if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
+			log.warn("Trying adopt pet without template. PetId:" + petId);
+			return false;
+		}
 		return true;
 	}
 

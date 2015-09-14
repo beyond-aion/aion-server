@@ -9,8 +9,8 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Sarynth Simple admin assistance command for adding kinah to self, named player or target player. Based on
- *         //add command. Kinah Item Id - 182400001 (Using ItemId.KINAH.value())
+ * @author Sarynth Simple admin assistance command for adding kinah to self, named player or target player. Based on //add command. Kinah Item Id -
+ *         182400001 (Using ItemId.KINAH.value())
  */
 public class Kinah extends AdminCommand {
 
@@ -27,13 +27,11 @@ public class Kinah extends AdminCommand {
 			receiver = admin;
 			try {
 				kinahCount = Long.parseLong(params[0]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "Kinah value must be an integer.");
 				return;
 			}
-		}
-		else {
+		} else {
 			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
@@ -43,8 +41,7 @@ public class Kinah extends AdminCommand {
 
 			try {
 				kinahCount = Long.parseLong(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "Kinah value must be an integer.");
 				return;
 			}
@@ -55,8 +52,7 @@ public class Kinah extends AdminCommand {
 		if (count == 0) {
 			PacketSendUtility.sendMessage(admin, "Kinah given successfully.");
 			PacketSendUtility.sendMessage(receiver, "An admin gives you some kinah.");
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "Kinah couldn't be given.");
 		}
 	}

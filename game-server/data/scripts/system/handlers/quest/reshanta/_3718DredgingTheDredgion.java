@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _3718DredgingTheDredgion extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _3718DredgingTheDredgion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnDredgionReward(questId);
 		qe.registerQuestNpc(279045).addOnQuestStart(questId);
@@ -33,38 +32,32 @@ public class _3718DredgingTheDredgion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 279045) { 
+			if (targetId == 279045) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var1 = qs.getQuestVarById(1);
 			int var2 = qs.getQuestVarById(2);
 			if (targetId == 279045) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
-					}
-					else if(var1 == 3 && var2 == 8) {
+					} else if (var1 == 3 && var2 == 8) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279045) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -74,7 +67,7 @@ public class _3718DredgingTheDredgion extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, 214814, 0, 8, 2);
@@ -87,7 +80,7 @@ public class _3718DredgingTheDredgion extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var1 = qs.getQuestVarById(1);
 			if (var1 < 3) {
-				changeQuestStep(env, var1, var1 + 1, false, 1); 
+				changeQuestStep(env, var1, var1 + 1, false, 1);
 				return true;
 			}
 		}

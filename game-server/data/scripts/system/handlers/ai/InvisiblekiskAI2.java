@@ -4,10 +4,8 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 /**
  * @author Cheatkiller, modified Bobobear
- *
  */
 @AIName("invisiblekisk")
 public class InvisiblekiskAI2 extends KiskAI2 {

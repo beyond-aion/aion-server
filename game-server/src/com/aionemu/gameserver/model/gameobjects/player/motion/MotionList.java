@@ -14,14 +14,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
- *
  */
 public class MotionList {
 
 	private Player owner;
 	private Map<Integer, Motion> activeMotions;
 	private Map<Integer, Motion> motions;
-	
+
 	/**
 	 * @param owner
 	 */
@@ -37,7 +36,7 @@ public class MotionList {
 			return Collections.emptyMap();
 		return activeMotions;
 	}
-	
+
 	/**
 	 * @return the motions
 	 */
@@ -46,36 +45,36 @@ public class MotionList {
 			return Collections.emptyMap();
 		return motions;
 	}
-	
-	public void add(Motion motion, boolean persist){
+
+	public void add(Motion motion, boolean persist) {
 		if (motions == null)
 			motions = new FastMap<Integer, Motion>();
-		if (motions.containsKey(motion.getId()) && motion.getExpireTime() == 0){
+		if (motions.containsKey(motion.getId()) && motion.getExpireTime() == 0) {
 			remove(motion.getId());
 		}
 		motions.put(motion.getId(), motion);
-		if (motion.isActive()){
+		if (motion.isActive()) {
 			if (activeMotions == null)
 				activeMotions = new FastMap<Integer, Motion>();
 			Motion old = activeMotions.put(Motion.motionType.get(motion.getId()), motion);
-			if (old != null){
+			if (old != null) {
 				old.setActive(false);
 				DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
 			}
 		}
-		if (persist){
+		if (persist) {
 			if (motion.getExpireTime() != 0)
 				ExpireTimerTask.getInstance().addTask(motion, owner);
 			DAOManager.getDAO(MotionDAO.class).storeMotion(owner.getObjectId(), motion);
 		}
 	}
-	
-	public boolean remove(int motionId){
+
+	public boolean remove(int motionId) {
 		Motion motion = motions.remove(motionId);
-		if (motion != null){
+		if (motion != null) {
 			PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId));
 			DAOManager.getDAO(MotionDAO.class).deleteMotion(owner.getObjectId(), motionId);
-			if (motion.isActive()){
+			if (motion.isActive()) {
 				activeMotions.remove(Motion.motionType.get(motionId));
 				return true;
 			}
@@ -83,30 +82,28 @@ public class MotionList {
 		return false;
 	}
 
-	public void setActive(int motionId, int motionType){
-		if (motionId != 0)
-		{
+	public void setActive(int motionId, int motionType) {
+		if (motionId != 0) {
 			Motion motion = motions.get(motionId);
 			if (motion == null || motion.isActive())
 				return;
 			if (activeMotions == null)
 				activeMotions = new FastMap<Integer, Motion>();
 			Motion old = activeMotions.put(motionType, motion);
-			if (old != null){
+			if (old != null) {
 				old.setActive(false);
 				DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
 			}
 			motion.setActive(true);
 			DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), motion);
-		}
-		else if (activeMotions != null){
+		} else if (activeMotions != null) {
 			Motion old = activeMotions.remove(motionType);
 			if (old == null)
-				return; //TODO packet hack??
+				return; // TODO packet hack??
 			old.setActive(false);
 			DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
 		}
-		PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId, (byte)motionType));
+		PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId, (byte) motionType));
 		PacketSendUtility.broadcastPacket(owner, new SM_MOTION(owner.getObjectId(), activeMotions), true);
 	}
 }

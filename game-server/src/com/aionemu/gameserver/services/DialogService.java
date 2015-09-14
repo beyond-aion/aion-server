@@ -150,7 +150,7 @@ public class DialogService {
 							if (!RestrictionsManager.canUseWarehouse(player))
 								return;
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 26));
-							//WarehouseService.sendWarehouseInfo(player, true);
+							// WarehouseService.sendWarehouseInfo(player, true);
 							break;
 					}
 					break;
@@ -179,8 +179,7 @@ public class DialogService {
 								player.getInventory().decreaseKinah(price, ItemUpdateType.STATS_CHANGE);
 								player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
 								player.getCommonData().setDeathCount(0);
-							}
-							else {
+							} else {
 								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
 							}
 						}
@@ -193,11 +192,10 @@ public class DialogService {
 					if (player.getCommonData().getExpRecoverable() > 0) {
 						boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, responseHandler);
 						if (result) {
-							PacketSendUtility.sendPacket(player,
-								new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
+							PacketSendUtility
+								.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
 						}
-					}
-					else {
+					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE);
 					}
 					break;
@@ -251,12 +249,10 @@ public class DialogService {
 						int level = player.getLevel();
 						if (level < 9) {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
-						}
-						else {
+						} else {
 							TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
 						}
-					}
-					else {
+					} else {
 						switch (npc.getNpcId()) {
 							case 203194: {
 								if (player.getRace() == Race.ELYOS) {
@@ -326,8 +322,7 @@ public class DialogService {
 							|| player.getInventory().getItemCountByItemId(169660002) > 0 || player.getInventory().getItemCountByItemId(169660003) > 0) {
 							check_ticket = 1;
 						}
-					}
-					else {
+					} else {
 						// Plastic Surgery
 						if (player.getInventory().getItemCountByItemId(169650000) > 0 || player.getInventory().getItemCountByItemId(169650001) > 0
 							|| player.getInventory().getItemCountByItemId(169650002) > 0 || player.getInventory().getItemCountByItemId(169650003) > 0
@@ -345,12 +340,10 @@ public class DialogService {
 						AutoGroupType agt = AutoGroupType.getAutoGroup(npc.getNpcId());
 						if (agt != null && agt.isDredgion()) {
 							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
-						}
-						else {
+						} else {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 0));
 						}
-					}
-					else {
+					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 1011));
 					}
 					break;
@@ -473,8 +466,7 @@ public class DialogService {
 					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(npc.getNpcId(), dialogId, player.getRace());
 					if (portalPath != null) {
 						PortalService.port(portalPath, player, targetObjectId);
-					}
-					else if (template != null) {
+					} else if (template != null) {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
 						if (loc != null) {
 							TeleportService2.teleport(template, loc.getLocId(), player, npc,
@@ -489,8 +481,7 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId));
 					break;
 			}
-		}
-		else {
+		} else {
 			if (QuestEngine.getInstance().onDialog(env)) {
 				return;
 			}

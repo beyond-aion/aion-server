@@ -7,21 +7,19 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
-
 /**
  * @author Luzien
- *
  */
 @AIName("virhana")
 public class VirhanaTheGreatAI2 extends AggressiveNpcAI2 {
 
 	private boolean isStart;
 	private int count;
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (!isStart){
+		if (!isStart) {
 			isStart = true;
 			scheduleRage();
 		}
@@ -65,8 +63,7 @@ public class VirhanaTheGreatAI2 extends AggressiveNpcAI2 {
 				}
 
 			}, 10000);
-		}
-		else { //restart after a douzen casts
+		} else { // restart after a douzen casts
 			count = 0;
 			scheduleRage();
 		}

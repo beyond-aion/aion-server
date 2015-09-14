@@ -66,7 +66,7 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Pet pet = player.getPet();
 
-		if(pet == null)
+		if (pet == null)
 			return;
 
 		// sometimes client is crazy enough to send -2.4457384E7 as z coordinate

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 public abstract class AutoInstance extends AbstractLockManager implements AutoInstanceHandler {
@@ -39,8 +38,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 			long l = player.getInventory().decreaseItemCount(item, count);
 			if (l == 0) {
 				break;
-			}
-			else {
+			} else {
 				count = l;
 			}
 		}

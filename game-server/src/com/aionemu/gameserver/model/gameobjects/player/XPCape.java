@@ -1,23 +1,21 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-
 /**
  * @author MrPoke
- *
  */
 public enum XPCape {
 	_0(0),
-	_1(130),	//retail
-	_2(284),	//retail
-	_3(418),	//retail
-	_4(561),	//retail
-	_5(721),	//retail
+	_1(130), // retail
+	_2(284), // retail
+	_3(418), // retail
+	_4(561), // retail
+	_5(721), // retail
 	_6(970),
 	_7(1200),
 	_8(1450),
 	_9(1750),
-	_10(2007),	//retail
-	_11(2362),	//retail
+	_10(2007), // retail
+	_11(2362), // retail
 	_12(2592),
 	_13(2909),
 	_14(3336),
@@ -28,7 +26,7 @@ public enum XPCape {
 	_19(8169),
 	_20(9947),
 	_21(12108),
-	_22(14035), //retail
+	_22(14035), // retail
 	_23(17820),
 	_24(21506),
 	_25(25847),
@@ -72,7 +70,7 @@ public enum XPCape {
 	_63(2274948),
 	_64(2452906),
 	_65(2640620);
-	
+
 	private int id;
 
 	private XPCape(int id) {

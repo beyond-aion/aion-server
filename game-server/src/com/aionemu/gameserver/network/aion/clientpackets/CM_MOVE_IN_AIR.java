@@ -39,7 +39,7 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		x = readF();
 		y = readF();
 		z = readF();
-		locationId = (byte)readC();
+		locationId = (byte) readC();
 		distance = readD();
 	}
 
@@ -52,8 +52,7 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		if (player.isInState(CreatureState.FLIGHT_TELEPORT)) {
 			if (player.isUsingFlyTeleport()) {
 				player.setFlightDistance(distance);
-			}
-			else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+			} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
 				player.windstreamPath.distance = distance;
 			}
 			World.getInstance().updatePosition(player, x, y, z, (byte) 0);

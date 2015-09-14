@@ -63,8 +63,7 @@ public class Rename extends AdminCommand {
 				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 				PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				sendPacket(admin, player, rename, recipient);
-			}
-			else
+			} else
 				PacketSendUtility.sendMessage(admin, "Player " + recipient + " has been renamed to " + rename);
 		}
 		if (params.length == 1) {
@@ -86,8 +85,7 @@ public class Rename extends AdminCommand {
 				player.getCommonData().setName(rename);
 				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 				DAOManager.getDAO(PlayerDAO.class).storePlayerName(player.getCommonData());
-			}
-			else
+			} else
 				PacketSendUtility.sendMessage(admin, "The command can be applied only on the player.");
 
 			recipient = target.getName();

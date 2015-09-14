@@ -5,14 +5,14 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author LokiReborn
- * 
  */
 public class SM_WINDSTREAM_ANNOUNCE extends AionServerPacket {
+
 	private int bidirectional;
 	private int mapId;
 	private int streamId;
 	private int state;
-	
+
 	public SM_WINDSTREAM_ANNOUNCE(int bidirectional, int mapId, int streamId, int state) {
 		this.bidirectional = bidirectional;
 		this.mapId = mapId;

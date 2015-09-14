@@ -56,8 +56,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		}
 		if (tradeActionId == 2) {
 			repurchaseList = new RepurchaseList(sellerObjId);
-		}
-		else {
+		} else {
 			tradeList = new TradeList(sellerObjId);
 		}
 
@@ -105,8 +104,8 @@ public class CM_BUY_ITEM extends AionClientPacket {
 
 		if (target == null)
 			return;
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_TRADE) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_TRADE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
@@ -115,8 +114,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		if (target instanceof Player && tradeActionId == 0) {
 			Player targetPlayer = (Player) target;
 			PrivateStoreService.sellStoreItem(targetPlayer, player, tradeList);
-		}
-		else if (target instanceof Npc) {
+		} else if (target instanceof Npc) {
 			Npc npc = (Npc) target;
 			TradeListTemplate tradeTemplate = null;
 			if (DialogService.isSubDialogRestricted(0, player, npc)) {
@@ -131,8 +129,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 							TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
 						else
 							TradeService.performSellToPurchaseShop(player, tradeList, tradeTemplate);
-					}
-					else if (npc.canSellTo()) {
+					} else if (npc.canSellTo()) {
 						TradeService.performSellToShop(player, tradeList);
 					}
 					break;
@@ -142,19 +139,19 @@ public class CM_BUY_ITEM extends AionClientPacket {
 					break;
 				case 13:// buy from shop
 				case 14:// buy from abyss shop
-				case 15: //reward shop
+				case 15: // reward shop
 				case 16:// abyss_kinah shop
 					if (npc.canBuyFrom()) {
-					   if (DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId()) != null)
-						   TradeService.performBuyFromShop(npc, player, tradeList);
+						if (DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId()) != null)
+							TradeService.performBuyFromShop(npc, player, tradeList);
 					}
 					break;
 				default:
 					log.info(String.format("Unhandle shop action unk1: %d", tradeActionId));
 					break;
 			}
-		}else if (target instanceof Pet) {
-			if(tradeActionId == 17){
+		} else if (target instanceof Pet) {
+			if (tradeActionId == 17) {
 				TradeService.performSellToShop(player, tradeList);
 			}
 		}

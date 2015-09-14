@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
 /**
- *
  * @author Source
  */
 @XmlAccessorType(XmlAccessType.FIELD)

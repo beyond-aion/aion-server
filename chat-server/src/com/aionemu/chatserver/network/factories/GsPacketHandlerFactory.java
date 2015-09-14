@@ -16,8 +16,8 @@ import com.aionemu.chatserver.network.gameserver.clientpackets.CM_PLAYER_LOGOUT;
 /**
  * @author -Nemesiss-
  */
-public class GsPacketHandlerFactory
-{
+public class GsPacketHandlerFactory {
+
 	/**
 	 * logger for this class
 	 */
@@ -30,18 +30,14 @@ public class GsPacketHandlerFactory
 	 * @param client
 	 * @return GsClientPacket object from binary data
 	 */
-	public static GsClientPacket handle(ByteBuffer data, GsConnection client)
-	{
+	public static GsClientPacket handle(ByteBuffer data, GsConnection client) {
 		GsClientPacket msg = null;
 		State state = client.getState();
 		int id = data.get() & 0xff;
 
-		switch (state)
-		{
-			case CONNECTED:
-			{
-				switch (id)
-				{
+		switch (state) {
+			case CONNECTED: {
+				switch (id) {
 					case 0x00:
 						msg = new CM_CS_AUTH(data, client);
 						break;
@@ -50,10 +46,8 @@ public class GsPacketHandlerFactory
 				}
 				break;
 			}
-			case AUTHED:
-			{
-				switch (id)
-				{
+			case AUTHED: {
+				switch (id) {
 					case 0x01:
 						msg = new CM_PLAYER_AUTH(data, client);
 						break;
@@ -69,13 +63,12 @@ public class GsPacketHandlerFactory
 				break;
 			}
 		}
-		
-		if(msg != null)
-		{
+
+		if (msg != null) {
 			msg.setConnection(client);
 			msg.setBuffer(data);
 		}
-		
+
 		return msg;
 	}
 
@@ -85,8 +78,7 @@ public class GsPacketHandlerFactory
 	 * @param state
 	 * @param id
 	 */
-	private static void unknownPacket(State state, int id)
-	{
+	private static void unknownPacket(State state, int id) {
 		log.warn(String.format("Unknown packet recived from Game Server: 0x%02X state=%s", id, state.toString()));
 	}
 }

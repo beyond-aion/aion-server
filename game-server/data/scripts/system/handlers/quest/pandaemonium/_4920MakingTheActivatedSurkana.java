@@ -14,17 +14,18 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 
 public class _4920MakingTheActivatedSurkana extends QuestHandler {
+
 	private final static int questId = 4920;
-	
+
 	public _4920MakingTheActivatedSurkana() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
-	    qe.registerQuestNpc(798358).addOnQuestStart(questId); //Chopirunerk
-		qe.registerQuestNpc(798358).addOnTalkEvent(questId); //Chopirunerk
-		qe.registerQuestNpc(730212).addOnTalkEvent(questId); //Balaur Material Converter
+		qe.registerQuestNpc(798358).addOnQuestStart(questId); // Chopirunerk
+		qe.registerQuestNpc(798358).addOnTalkEvent(questId); // Chopirunerk
+		qe.registerQuestNpc(730212).addOnTalkEvent(questId); // Balaur Material Converter
 		qe.registerQuestItem(182207100, questId);
 		qe.registerQuestItem(182207101, questId);
 	}
@@ -36,7 +37,7 @@ public class _4920MakingTheActivatedSurkana extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798358) { 
+			if (targetId == 798358) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
@@ -48,8 +49,7 @@ public class _4920MakingTheActivatedSurkana extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730212: { // Balaur Material Converter
@@ -63,8 +63,7 @@ public class _4920MakingTheActivatedSurkana extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798358) { // Chopirunerk
 				return sendQuestEndDialog(env);
 			}

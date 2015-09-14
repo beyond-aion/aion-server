@@ -5,7 +5,6 @@ import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 
 /**
- *
  * @author xTz
  */
 @AIName("summoned_pletus")

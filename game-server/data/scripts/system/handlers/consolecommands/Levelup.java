@@ -48,8 +48,7 @@ public class Levelup extends ConsoleCommand {
 		int level;
 		try {
 			level = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "You should enter valid value!");
 			return;
 		}
@@ -64,22 +63,19 @@ public class Levelup extends ConsoleCommand {
 				if (qs == null) {
 					player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
 					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
-				}
-				else if (qs.getStatus() != QuestStatus.COMPLETE) {
+				} else if (qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setStatus(QuestStatus.COMPLETE);
-					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars()
-						.getQuestVars(), qs.getFlags()));
+					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 				}
 				player.getCommonData().setDaeva(true);
-			}
-			else if (level < 10 && qs == null) {
+			} else if (level < 10 && qs == null) {
 				// don't delete ceremony quest
 				player.getCommonData().setDaeva(false);
 			}
 
 			player.getController().upgradePlayer();
 			player.getCommonData().setLevel(level);
-			
+
 		}
 		PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + level);
 	}

@@ -36,13 +36,11 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 			if (targetId == 204096) { // Latatusk
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204097: { // Relir
@@ -76,8 +74,7 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204096) {
 				return sendQuestEndDialog(env);
 			}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
 import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
@@ -55,14 +54,14 @@ public class SM_TITLE_INFO extends AionServerPacket {
 		this.action = 4;
 		this.titleId = flag ? 1 : 0;
 	}
-	
+
 	public SM_TITLE_INFO(Player player, boolean flag) {
 		this.action = 5;
 		this.playerObjId = player.getObjectId();
 		this.titleId = flag ? 1 : 0;
 	}
-	
-	public SM_TITLE_INFO(int action, int bonusTitleId){
+
+	public SM_TITLE_INFO(int action, int bonusTitleId) {
 		this.action = action;
 		this.bonusTitleId = bonusTitleId;
 	}
@@ -96,7 +95,7 @@ public class SM_TITLE_INFO extends AionServerPacket {
 				writeD(playerObjId);
 				writeH(titleId);
 				break;
-			case 6://Title wich will take BonusStats from
+			case 6:// Title wich will take BonusStats from
 				writeH(bonusTitleId);
 		}
 	}

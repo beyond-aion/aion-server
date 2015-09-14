@@ -8,8 +8,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public abstract class AbstractClientPacket extends BaseClientPacket
-{
+public abstract class AbstractClientPacket extends BaseClientPacket {
+
 	protected ClientChannelHandler clientChannelHandler;
 
 	/**
@@ -17,8 +17,7 @@ public abstract class AbstractClientPacket extends BaseClientPacket
 	 * @param clientChannelHandler
 	 * @param opCode
 	 */
-	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, int opCode)
-	{
+	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, int opCode) {
 		super(channelBuffer, opCode);
 		this.clientChannelHandler = clientChannelHandler;
 	}

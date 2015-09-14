@@ -15,8 +15,7 @@ public class PvPAreaZone extends PvPZone {
 	protected void doTeleport(Player player, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("LC1_PVP_SUB_C")) {
 			TeleportService2.teleportTo(player, 110010000, 1, 1470.3f, 1343.5f, 563.7f);
-		}
-		else if (zoneName == ZoneName.get("DC1_PVP_ZONE")) {
+		} else if (zoneName == ZoneName.get("DC1_PVP_ZONE")) {
 			TeleportService2.teleportTo(player, 120010000, 1, 1005.1f, 1528.9f, 222.1f);
 		}
 	}

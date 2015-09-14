@@ -4,12 +4,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author Rolandas
- *
  */
 public final class FeedGroups {
+
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "FeedFluidGroup")
 	public static class FeedFluidGroup extends FeedItemGroup {
@@ -89,7 +88,7 @@ public final class FeedGroups {
 	@XmlType(name = "PoppySnackNutritiousGroup")
 	public static class PoppySnackNutritiousGroup extends FeedItemGroup {
 	}
-	
+
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "ShugoEventCoinGroup")
 	public static class ShugoEventCoinGroup extends FeedItemGroup {

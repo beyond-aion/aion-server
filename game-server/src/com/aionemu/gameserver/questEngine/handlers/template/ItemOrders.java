@@ -70,38 +70,32 @@ public class ItemOrders extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					if (player.getInventory().getItemCountByItemId(startItemId) > 0) {
 						QuestService.startQuest(env);
-					}
-					else {
+					} else {
 						int requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(startItemId).getNameId();
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
 					}
 					return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if ((targetId == talkNpc1 && talkNpc1 != 0) || ( targetId == talkNpc2 && talkNpc2 != 0)) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if ((targetId == talkNpc1 && talkNpc1 != 0) || (targetId == talkNpc2 && talkNpc2 != 0)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1, true, false);
 				}
-			}
-			else	if ((talkNpc1 == 0) && (talkNpc2 == 0) && targetId == endNpcId) { 
+			} else if ((talkNpc1 == 0) && (talkNpc2 == 0) && targetId == endNpcId) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -115,7 +109,7 @@ public class ItemOrders extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();

@@ -6,8 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Rolandas
@@ -166,15 +166,14 @@ public class HousingService {
 		for (House house : customHouses.values()) {
 			if (house.getStatus() == HouseStatus.INACTIVE)
 				continue;
-			if (house.getOwnerId() == playerId
-							&& (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
+			if (house.getOwnerId() == playerId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
 				return house.getAddress().getId();
 		}
 		return 0;
 	}
 
 	public void resetAppearance(House house) {
-		FastList<HouseDecoration> customParts = house.getRegistry().getCustomParts();
+		FastTable<HouseDecoration> customParts = house.getRegistry().getCustomParts();
 		for (HouseDecoration deco : customParts) {
 			deco.setPersistentState(PersistentState.DELETED);
 		}
@@ -250,7 +249,7 @@ public class HousingService {
 	}
 
 	private void createStudio(Player player) {
-		if (getPlayerAddress(player.getObjectId()) != 0) //should not happen
+		if (getPlayerAddress(player.getObjectId()) != 0) // should not happen
 			return;
 		HousingLand land = DataManager.HOUSE_DATA.getLand(player.getRace() == Race.ELYOS ? 329001 : 339001);
 		House studio = new House(land.getDefaultBuilding(), land.getAddresses().get(0), 0);
@@ -277,13 +276,13 @@ public class HousingService {
 		currentHouse.getRegistry().save();
 		currentHouse.reloadHouseRegistry(); // load new defaults
 		DAOManager.getDAO(HousesDAO.class).storeHouse(currentHouse);
-		HouseController controller = ((HouseController) currentHouse.getController());
+		HouseController controller = (currentHouse.getController());
 		controller.broadcastAppearance();
 		controller.spawnObjects();
 	}
 
-	public FastList<House> getCustomHouses() {
-		FastList<House> houses = FastList.newInstance();
+	public FastTable<House> getCustomHouses() {
+		FastTable<House> houses = new FastTable<>();
 		for (List<House> mapHouses : housesByMapId.values())
 			houses.addAll(mapHouses);
 		return houses;
@@ -316,8 +315,7 @@ public class HousingService {
 			if (qs != null && qs.getStatus().equals(QuestStatus.COMPLETE)) {
 				buildingState |= PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId();
 			}
-		}
-		else {
+		} else {
 			if (activeHouse.getStatus() == HouseStatus.SELL_WAIT)
 				buildingState = PlayerHouseOwnerFlags.SELLING_HOUSE.getId();
 			else

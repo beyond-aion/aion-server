@@ -100,8 +100,7 @@ public class SiegeSchedule {
 		try {
 			String xml = FileUtils.readFileToString(new File("./config/shedule/siege_schedule.xml"));
 			ss = JAXBUtil.deserialize(xml, SiegeSchedule.class);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize sieges", e);
 		}
 		return ss;

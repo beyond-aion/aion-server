@@ -8,13 +8,12 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public abstract class AbstractServerPacket extends BaseServerPacket
-{
+public abstract class AbstractServerPacket extends BaseServerPacket {
+
 	/**
 	 * @param opCode
 	 */
-	public AbstractServerPacket(int opCode)
-	{
+	public AbstractServerPacket(int opCode) {
 		super(opCode);
 	}
 
@@ -22,8 +21,7 @@ public abstract class AbstractServerPacket extends BaseServerPacket
 	 * @param clientChannelHandler
 	 * @param buf
 	 */
-	public void write(ClientChannelHandler clientChannelHandler, ChannelBuffer buf)
-	{
+	public void write(ClientChannelHandler clientChannelHandler, ChannelBuffer buf) {
 		buf.writeShort((short) 0);
 		writeImpl(clientChannelHandler, buf);
 	}

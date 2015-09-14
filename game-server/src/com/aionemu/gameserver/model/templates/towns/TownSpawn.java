@@ -10,20 +10,19 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author ViAl
- *
  */
 @XmlType(name = "town_spawn")
 public class TownSpawn {
+
 	@XmlAttribute(name = "town_id")
 	private int townId;
 	@XmlElement(name = "town_level")
 	private List<TownLevel> townLevels;
-	
+
 	private TIntObjectHashMap<TownLevel> townLevelsData = new TIntObjectHashMap<TownLevel>();
-	
+
 	/**
 	 * @param u
 	 * @param parent
@@ -37,18 +36,18 @@ public class TownSpawn {
 		townLevels.clear();
 		townLevels = null;
 	}
-	
+
 	/**
 	 * @return the townId
 	 */
 	public int getTownId() {
 		return townId;
 	}
-	
+
 	public TownLevel getSpawnsForLevel(int level) {
 		return townLevelsData.get(level);
 	}
-	
+
 	public Collection<TownLevel> getTownLevels() {
 		return this.townLevelsData.valueCollection();
 	}

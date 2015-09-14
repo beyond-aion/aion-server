@@ -13,7 +13,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 /**
  * @author Cheatkiller
  * @modified Luzien
- *
  */
 @AIName("calindisummon")
 public class CalindiSummonsAI2 extends NpcAI2 {
@@ -27,6 +26,7 @@ public class CalindiSummonsAI2 extends NpcAI2 {
 		final int skill = getOwner().getNpcId() == 283132 ? 20914 : 20916;
 		int delay = getNpcId() == 283132 ? 500 : 2000;
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				AI2Actions.useSkill(CalindiSummonsAI2.this, skill);
@@ -38,6 +38,7 @@ public class CalindiSummonsAI2 extends NpcAI2 {
 
 	private void despawn() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				getOwner().getController().onDelete();

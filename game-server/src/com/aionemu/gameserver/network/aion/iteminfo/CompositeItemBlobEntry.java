@@ -46,8 +46,7 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 				else
 					writeD(buf, stone.getItemId());
 			}
-		}
-		else {
+		} else {
 			skip(buf, Item.MAX_BASIC_STONES * 4);
 		}
 	}

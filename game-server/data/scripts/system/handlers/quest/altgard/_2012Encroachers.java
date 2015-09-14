@@ -8,8 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Pyro refix by Nephis Aller tuer 4 brutes et retourner voir Meiyer Status locked de toutes les missions de
- *         Altgard
+ * @author Pyro refix by Nephis Aller tuer 4 brutes et retourner voir Meiyer Status locked de toutes les missions de Altgard
  */
 public class _2012Encroachers extends QuestHandler {
 
@@ -63,8 +62,7 @@ public class _2012Encroachers extends QuestHandler {
 						else if (var <= 5) // Rendu de la quete
 						{
 							return sendQuestDialog(env, 1352);
-						}
-						else if (var >= 5) {
+						} else if (var >= 5) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 						}
@@ -78,8 +76,7 @@ public class _2012Encroachers extends QuestHandler {
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203559) {
 				return sendQuestEndDialog(env);
 			}
@@ -110,8 +107,7 @@ public class _2012Encroachers extends QuestHandler {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (var == 4) // Au 4eme REWARD
+				} else if (var == 4) // Au 4eme REWARD
 				{
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

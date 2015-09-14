@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("recordkeeper")
@@ -40,7 +39,7 @@ public class RecordkeeperAI2 extends NpcAI2 {
 					break;
 				case 205669: // start stage 2
 					instanceHandler.onChangeStage(StageType.START_STAGE_2_ROUND_1);
-					break; 
+					break;
 				case 205675: // move to stage 3
 					TeleportService2.teleportTo(player, 300320000, instanceId, 1324.433f, 1738.2279f, 316.476f, (byte) 70);
 					spawn(205684, 1358.4021f, 1758.744f, 319.1873f, (byte) 70);

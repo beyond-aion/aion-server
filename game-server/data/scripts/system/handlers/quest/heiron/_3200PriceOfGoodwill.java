@@ -75,8 +75,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204658)// Roikinerk
 			{
 				switch (env.getDialog()) {
@@ -95,8 +94,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 						return true;
 				}
 
-			}
-			else if (targetId == 798332 && var == 1)// Haorunerk
+			} else if (targetId == 798332 && var == 1)// Haorunerk
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -110,8 +108,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 				}
-			}
-			else if (targetId == 700522 && var == 2)// Haorunerks Bag, loc: 401.24 503.19 885.76 119
+			} else if (targetId == 700522 && var == 2)// Haorunerks Bag, loc: 401.24 503.19 885.76 119
 			{
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -121,8 +118,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 					}
 				}, 3000);
 				return true;
-			}
-			else if (targetId == 279006 && var == 3)// Garkbinerk
+			} else if (targetId == 279006 && var == 3)// Garkbinerk
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -149,14 +145,12 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 		if (id != 182209082 || qs == null || qs.getQuestVarById(0) != 2)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				removeQuestItem(env, 182209082, 1);
 				// teleport location(BlackCloudIsland): 400010000 3419.16 2445.43 2766.54 57
 				TeleportService2.teleportTo(player, 400010000, 3419.16f, 2445.43f, 2766.54f, (byte) 57);

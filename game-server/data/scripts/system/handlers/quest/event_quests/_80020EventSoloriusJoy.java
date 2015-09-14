@@ -64,32 +64,26 @@ public class _80020EventSoloriusJoy extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					defaultCloseDialog(env, 0, 1, 182214013, 2, 182214012, 1);
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (env.getTargetId() == 203170 && var == 1) {
+			} else if (env.getTargetId() == 203170 && var == 1) {
 				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_1694) {
 					sendEmotion(env, (Creature) env.getVisibleObject(), EmotionId.NO, true);
 					return sendQuestDialog(env, 1694);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialog() == DialogAction.SETPRO2) {
 					defaultCloseDialog(env, 1, 2, 0, 0, 182214013, 1);
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (env.getTargetId() == 203140 && var == 2) {
+			} else if (env.getTargetId() == 203140 && var == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_2035) {
 					sendEmotion(env, (Creature) env.getVisibleObject(), EmotionId.PANIC, true);
 					return sendQuestDialog(env, 2035);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO3)
+				} else if (env.getDialog() == DialogAction.SETPRO3)
 					return defaultCloseDialog(env, 2, 3, true, false, 0, 0, 0, 182214013, 1);
 				else
 					return sendQuestStartDialog(env);
@@ -106,8 +100,7 @@ public class _80020EventSoloriusJoy extends QuestHandler {
 
 		if (EventService.getInstance().checkQuestIsActive(questId)) {
 			return QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel());
-		}
-		else if (qs != null) {
+		} else if (qs != null) {
 			// Set as expired
 			QuestService.abandonQuest(player, questId);
 		}

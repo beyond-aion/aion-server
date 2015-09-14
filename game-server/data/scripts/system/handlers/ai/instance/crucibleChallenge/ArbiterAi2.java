@@ -9,11 +9,10 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("arbiter")
-public class ArbiterAi2 extends NpcAI2{
+public class ArbiterAi2 extends NpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {

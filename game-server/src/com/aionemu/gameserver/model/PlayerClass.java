@@ -28,7 +28,6 @@ public enum PlayerClass {
 	BARD(16),
 	ALL(17);
 
-
 	/** This id is used on client side */
 	private byte classId;
 
@@ -86,14 +85,14 @@ public enum PlayerClass {
 	 * @return starting class for second class
 	 */
 	public static PlayerClass getStartingClassFor(PlayerClass pc) {
-	   PlayerClass[] vals = values();
-	   byte i = pc.getClassId();
-	   while (i >= 0) {
-		  if (vals[i].isStartingClass())
-			 return vals[i];
-		  i--;
-	   }
-	  throw new IllegalArgumentException("No Starting Class for PlayerClass: " + pc.toString());
+		PlayerClass[] vals = values();
+		byte i = pc.getClassId();
+		while (i >= 0) {
+			if (vals[i].isStartingClass())
+				return vals[i];
+			i--;
+		}
+		throw new IllegalArgumentException("No Starting Class for PlayerClass: " + pc.toString());
 	}
 
 	public static PlayerClass getPlayerClassByString(String fieldName) {

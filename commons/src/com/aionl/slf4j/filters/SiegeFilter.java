@@ -15,8 +15,7 @@ public class SiegeFilter extends Filter<ILoggingEvent> {
 	 * 
 	 * @param loggingEvent
 	 *          log event that is going to be filtred.
-	 * @return {@link org.apache.log4j.spi.Filter#ACCEPT} if admin command, {@link org.apache.log4j.spi.Filter#DENY}
-	 *         otherwise
+	 * @return {@link org.apache.log4j.spi.Filter#ACCEPT} if admin command, {@link org.apache.log4j.spi.Filter#DENY} otherwise
 	 */
 	@Override
 	public FilterReply decide(ILoggingEvent loggingEvent) {

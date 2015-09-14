@@ -21,10 +21,8 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("brigadegenerallaksyaka")
 public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
@@ -34,22 +32,23 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 	private boolean isFinalBuff;
 
 	@Override
-	protected void handleAttack(Creature creature){
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if(Rnd.get(0, 100) < 3)
+		if (Rnd.get(0, 100) < 3)
 			spawnSummon();
-		if(isHome.compareAndSet(true, false))
+		if (isHome.compareAndSet(true, false))
 			startSkillTask();
-		if(!isFinalBuff && getOwner().getLifeStats().getHpPercentage() <= 25) {
+		if (!isFinalBuff && getOwner().getLifeStats().getHpPercentage() <= 25) {
 			isFinalBuff = true;
 			AI2Actions.useSkill(this, 20731);
 		}
 	}
 
-	private void startSkillTask()	{
+	private void startSkillTask() {
 		skeletonTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
-			public void run()	{
+			public void run() {
 				if (isAlreadyDead())
 					cancelTask();
 				else {
@@ -58,15 +57,15 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 			}
 		}, 5000, 40000);
 	}
-	
+
 	private void cancelTask() {
 		if (skeletonTask != null && !skeletonTask.isCancelled()) {
 			skeletonTask.cancel(true);
 		}
 	}
-	
+
 	private void startSkeletonEvent() {
-		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);//4.0
+		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);// 4.0
 		List<Player> players = new ArrayList<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, tiamatEye, 40)) {
@@ -75,41 +74,41 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 		}
 		Player player = !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
 		SkillEngine.getInstance().applyEffectDirectly(20865, tiamatEye, player, 30000);
- }
-	
+	}
+
 	private void spawnSummon() {
-		if (getPosition().getWorldMapInstance().getNpc(283115) == null) {//4.0
-			rndSpawn(283115, 4);//4.0
+		if (getPosition().getWorldMapInstance().getNpc(283115) == null) {// 4.0
+			rndSpawn(283115, 4);// 4.0
 		}
 	}
-	
+
 	private void rndSpawn(int npcId, int count) {
 		for (int i = 0; i < count; i++) {
 			SpawnTemplate template = rndSpawnInRange(npcId, 10);
 			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
 		}
 	}
-	
+
 	private SpawnTemplate rndSpawnInRange(int npcId, int dist) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
 		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-				+ y1, getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		cancelTask();
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
-	  super.handleSpawned();
-	  getOwner().setNpcType(CreatureType.PEACE.getId());
-  }
-	
+		super.handleSpawned();
+		getOwner().setNpcType(CreatureType.PEACE.getId());
+	}
+
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();

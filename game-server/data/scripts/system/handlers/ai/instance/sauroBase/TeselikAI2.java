@@ -63,6 +63,7 @@ public class TeselikAI2 extends AggressiveNpcAI2 {
 		if (!isAlreadyDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
+				@Override
 				public void run() {
 					if (!isAlreadyDead()) {
 						spawn(284455, 472.12497f, 344.17401f, 181.625f, (byte) 0);
@@ -77,6 +78,7 @@ public class TeselikAI2 extends AggressiveNpcAI2 {
 		if (!isAlreadyDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
+				@Override
 				public void run() {
 					if (!isAlreadyDead()) {
 						spawn(284455, 472.12497f, 328.17401f, 181.625f, (byte) 0);

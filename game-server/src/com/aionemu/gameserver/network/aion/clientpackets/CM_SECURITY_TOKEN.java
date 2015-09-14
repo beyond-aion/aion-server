@@ -9,7 +9,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ginho1
- *
  */
 public class CM_SECURITY_TOKEN extends AionClientPacket {
 
@@ -18,14 +17,13 @@ public class CM_SECURITY_TOKEN extends AionClientPacket {
 	 * @param state
 	 * @param restStates
 	 */
-	public CM_SECURITY_TOKEN(int opcode, State state,
-			State... restStates) {
+	public CM_SECURITY_TOKEN(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
 	@Override
 	protected void readImpl() {
-		
+
 	}
 
 	@Override

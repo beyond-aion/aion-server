@@ -42,8 +42,7 @@ public class _28807BlessingsofaGreenThumb extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730524: {
 					switch (dialog) {
@@ -58,7 +57,7 @@ public class _28807BlessingsofaGreenThumb extends QuestHandler {
 				}
 				case 830211: {
 					switch (dialog) {
-						case QUEST_SELECT:{
+						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
 						case SELECT_QUEST_REWARD:
@@ -67,8 +66,7 @@ public class _28807BlessingsofaGreenThumb extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830211) {
 				return sendQuestEndDialog(env);
 			}

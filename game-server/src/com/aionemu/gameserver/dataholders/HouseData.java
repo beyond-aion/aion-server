@@ -33,10 +33,10 @@ public class HouseData {
 
 	@XmlTransient
 	Map<Integer, HousingLand> landsById = new HashMap<Integer, HousingLand>();
-	
+
 	@XmlTransient
-	Map<Integer, Set<HousingLand>> landsByEntryWorldId = new HashMap<Integer, Set<HousingLand>>();	
-	
+	Map<Integer, Set<HousingLand>> landsByEntryWorldId = new HashMap<Integer, Set<HousingLand>>();
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (lands == null)
 			return;
@@ -59,11 +59,11 @@ public class HouseData {
 		lands.clear();
 		lands = null;
 	}
-	
+
 	public Set<HousingLand> getLandsForWorldId(int worldId) {
 		return landsByEntryWorldId.get(worldId);
 	}
-	
+
 	public HousingLand getLandForHouse(int worldId, HouseType houseSize) {
 		Set<HousingLand> worldHouseAreas = landsByEntryWorldId.get(worldId);
 		if (worldHouseAreas == null)
@@ -76,15 +76,15 @@ public class HouseData {
 		}
 		return null;
 	}
-	
+
 	public HousingLand getLand(int landId) {
 		return landsById.get(landId);
 	}
-	
+
 	public Collection<HousingLand> getLands() {
 		return landsById.values();
 	}
-	
+
 	public int size() {
 		return landsById.size();
 	}

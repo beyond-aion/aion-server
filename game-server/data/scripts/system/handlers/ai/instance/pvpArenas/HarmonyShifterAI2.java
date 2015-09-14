@@ -13,11 +13,11 @@ import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("harmony_shifter")
 public class HarmonyShifterAI2 extends ShifterAI2 {
+
 	private AtomicBoolean isRewarded = new AtomicBoolean(false);
 
 	@Override
@@ -25,7 +25,7 @@ public class HarmonyShifterAI2 extends ShifterAI2 {
 		super.handleUseItemFinish(player);
 		if (isRewarded.compareAndSet(false, true)) {
 			AI2Actions.handleUseItemFinish(this, player);
-			switch(getNpcId()) {
+			switch (getNpcId()) {
 				case 207116:
 					useSkill(getNpcs(207118));
 					useSkill(getNpcs(207119));

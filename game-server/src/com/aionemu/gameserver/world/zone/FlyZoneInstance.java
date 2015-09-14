@@ -25,8 +25,7 @@ public class FlyZoneInstance extends ZoneInstance {
 		if (super.onEnter(creature)) {
 			creature.setInsideZoneType(ZoneType.FLY);
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -36,23 +35,21 @@ public class FlyZoneInstance extends ZoneInstance {
 		if (super.onLeave(creature)) {
 			creature.unsetInsideZoneType(ZoneType.FLY);
 			if (creature instanceof Player) {
-				Player player = (Player)creature;
-				if (player.isInFlyingState())	{
+				Player player = (Player) creature;
+				if (player.isInFlyingState()) {
 					if (player.isInGlidingState()) {
 						player.unsetFlyState(FlyState.FLYING);
 						player.unsetState(CreatureState.FLYING);
 						player.getGameStats().updateStatsAndSpeedVisually();
 						PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY, 0, 0), true);
-					}
-					else {// forcefully end fly
+					} else {// forcefully end fly
 						player.getFlyController().endFly(true);
 						AuditLogger.info(player, "On leave Fly zone in fly state!!");
 					}
 				}
 			}
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 }

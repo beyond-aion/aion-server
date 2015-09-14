@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
 /**
- *
  * @author xTz
  */
 @InstanceID(300360000)
@@ -15,7 +14,8 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 	@Override
 	protected void reward() {
 		int totalPoints = instanceReward.getTotalPoints();
-		int size = instanceReward.getInstanceRewards().size() == 1 ? (instanceReward.getRound() == 1 ? 1 : 2) : 2; //enemy left before start: low reward, else full
+		int size = instanceReward.getInstanceRewards().size() == 1 ? (instanceReward.getRound() == 1 ? 1 : 2) : 2; // enemy left before start: low reward,
+																																																								// else full
 		// 100 * (rate * size) * (playerScore / playersScore)
 		float totalAP = (3.292f * size) * 100; // to do config
 		float totalCrucible = (1.964f * size) * 100; // to do config
@@ -74,18 +74,18 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 				if (instanceReward.canRewardOpportunityToken(reward)) {
 					reward.setOpportunity(4);
 				}
-                switch(rank) {
-                    case 0:
-                        reward.setRankingGP(40);
-                        reward.setScoreGP(11);
-                        reward.setBasicGP(0);
-                        break;
-                    case 1:
-                        reward.setRankingGP(13);
-                        reward.setScoreGP(11);
-                        reward.setBasicGP(0);
-                        break;
-                }
+				switch (rank) {
+					case 0:
+						reward.setRankingGP(40);
+						reward.setScoreGP(11);
+						reward.setBasicGP(0);
+						break;
+					case 1:
+						reward.setRankingGP(13);
+						reward.setScoreGP(11);
+						reward.setBasicGP(0);
+						break;
+				}
 			}
 		}
 		super.reward();

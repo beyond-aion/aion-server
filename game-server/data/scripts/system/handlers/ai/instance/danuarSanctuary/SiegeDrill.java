@@ -22,7 +22,6 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("siege_drill")
@@ -44,6 +43,7 @@ public class SiegeDrill extends GeneralNpcAI2 {
 		final int delay = getTalkDelay();
 		if (delay > 1) {
 			final ItemUseObserver observer = new ItemUseObserver() {
+
 				@Override
 				public void abort() {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
@@ -58,6 +58,7 @@ public class SiegeDrill extends GeneralNpcAI2 {
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), startBarAnimation));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
@@ -67,8 +68,7 @@ public class SiegeDrill extends GeneralNpcAI2 {
 				}
 
 			}, delay));
-		}
-		else {
+		} else {
 			handleUseItemFinish(player);
 		}
 	}
@@ -84,6 +84,7 @@ public class SiegeDrill extends GeneralNpcAI2 {
 			getOwner().setState(1);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					Npc npc = getPosition().getWorldMapInstance().getNpc(233189);
@@ -92,6 +93,7 @@ public class SiegeDrill extends GeneralNpcAI2 {
 
 						getOwner().getController().useSkill(20778);
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 							@Override
 							public void run() {
 								getOwner().getSpawn().setWalkerId(null);

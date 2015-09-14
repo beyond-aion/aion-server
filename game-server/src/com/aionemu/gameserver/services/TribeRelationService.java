@@ -7,13 +7,11 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class TribeRelationService {
-	
+
 	public static boolean isAggressive(Creature creature1, Creature creature2) {
 		switch (creature1.getBaseTribe()) {
 			case GUARD_DARK:
@@ -32,7 +30,7 @@ public class TribeRelationService {
 					case GENERAL_DARK:
 					case GUARD_DRAGON:
 						return true;
-					
+
 				}
 				break;
 			case GUARD_DRAGON:
@@ -44,14 +42,13 @@ public class TribeRelationService {
 					case GENERAL_DARK:
 					case GENERAL:
 						return true;
-					
+
 				}
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe());
 	}
-			
-	
+
 	public static boolean isFriend(Creature creature1, Creature creature2) {
 		if (creature1.getTribe() == creature2.getTribe()) // OR BASE ????
 			return true;
@@ -71,26 +68,26 @@ public class TribeRelationService {
 					case PC:
 					case GUARD:
 						return true;
-					
+
 				}
 				break;
 			case FIELD_OBJECT_LIGHT:
 				switch (creature2.getBaseTribe()) {
 					case PC:
 						return true;
-					
+
 				}
 			case FIELD_OBJECT_DARK:
 				switch (creature2.getBaseTribe()) {
 					case PC_DARK:
 						return true;
-					
+
 				}
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
 	}
-	
+
 	public static boolean isSupport(Creature creature1, Creature creature2) {
 		switch (creature1.getBaseTribe()) {
 			case GUARD_DARK:
@@ -103,16 +100,16 @@ public class TribeRelationService {
 				switch (creature2.getBaseTribe()) {
 					case PC:
 						return true;
-					
+
 				}
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe());
 	}
-	
+
 	public static boolean isNone(Creature creature1, Creature creature2) {
-		if (DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe())
-			|| creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)
+		if (DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe()) || creature1 instanceof Npc
+			&& checkSiegeRelation((Npc) creature1, creature2)
 			|| DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), creature2.getTribe())
 			|| DataManager.TRIBE_RELATIONS_DATA.isNeutralRelation(creature1.getTribe(), creature2.getTribe())) {
 			return false;
@@ -132,17 +129,17 @@ public class TribeRelationService {
 				switch (creature2.getBaseTribe()) {
 					case PC:
 						return true;
-					
+
 				}
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isNoneRelation(creature1.getTribe(), creature2.getTribe());
 	}
-	
+
 	public static boolean isNeutral(Creature creature1, Creature creature2) {
 		return DataManager.TRIBE_RELATIONS_DATA.isNeutralRelation(creature1.getTribe(), creature2.getTribe());
 	}
-	
+
 	public static boolean isHostile(Creature creature1, Creature creature2) {
 		if (creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)) {
 			return true;
@@ -158,13 +155,13 @@ public class TribeRelationService {
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), creature2.getTribe());
 	}
-	
+
 	public static boolean checkSiegeRelation(Npc npc, Creature creature) {
-		return ((npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT
-			&& npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.NONE)
-			|| npc.getSpawn() instanceof BaseSpawnTemplate)
-			&& ((npc.getBaseTribe() == TribeClass.GENERAL && creature.getTribe() == TribeClass.PC_DARK)
-			|| (npc.getBaseTribe() == TribeClass.GENERAL_DARK && creature.getTribe() == TribeClass.PC))
-			|| npc.getBaseTribe() == TribeClass.GENERAL_DRAGON && npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT;
-		}
+		return ((npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT && npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.NONE) || npc
+			.getSpawn() instanceof BaseSpawnTemplate)
+			&& ((npc.getBaseTribe() == TribeClass.GENERAL && creature.getTribe() == TribeClass.PC_DARK) || (npc.getBaseTribe() == TribeClass.GENERAL_DARK && creature
+				.getTribe() == TribeClass.PC))
+			|| npc.getBaseTribe() == TribeClass.GENERAL_DRAGON
+			&& npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT;
+	}
 }

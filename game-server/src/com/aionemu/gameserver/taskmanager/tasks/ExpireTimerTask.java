@@ -31,8 +31,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 		writeLock();
 		try {
 			expirables.put(expirable, player);
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}
@@ -44,8 +43,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 				if (entry.getValue() == player)
 					expirables.remove(entry.getKey());
 			}
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}
@@ -55,7 +53,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 		writeLock();
 		try {
 			int timeNow = (int) (System.currentTimeMillis() / 1000);
-			for (Iterator<Map.Entry<IExpirable, Player>> i = expirables.entrySet().iterator(); i.hasNext(); ) {
+			for (Iterator<Map.Entry<IExpirable, Player>> i = expirables.entrySet().iterator(); i.hasNext();) {
 				Map.Entry<IExpirable, Player> entry = i.next();
 				IExpirable expirable = entry.getKey();
 				Player player = entry.getValue();
@@ -75,8 +73,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 						break;
 				}
 			}
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}

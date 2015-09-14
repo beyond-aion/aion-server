@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * 
  * @author Cheatkiller
  */
 public class _22504TooLittleButterOverTooMuchBread extends QuestHandler {
@@ -33,7 +32,7 @@ public class _22504TooLittleButterOverTooMuchBread extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 801314) {
 				switch (dialog) {
@@ -46,8 +45,7 @@ public class _22504TooLittleButterOverTooMuchBread extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801314) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -59,13 +57,11 @@ public class _22504TooLittleButterOverTooMuchBread extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800528) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

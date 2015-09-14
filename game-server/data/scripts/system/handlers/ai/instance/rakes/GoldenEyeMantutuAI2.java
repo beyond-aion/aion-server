@@ -70,6 +70,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 
 	private void startFeedTime(final Npc npc) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isAlreadyDead() && npc != null) {
@@ -91,8 +92,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
-					}
-					else {
+					} else {
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();
@@ -153,6 +153,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 
 	private void doSchedule() {
 		hungerTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				int rnd = Rnd.get(1, 2);

@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author mr.madison
- *
  */
 public class _41514BarrenProspects extends QuestHandler {
 
@@ -22,21 +20,21 @@ public class _41514BarrenProspects extends QuestHandler {
 	public _41514BarrenProspects() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205935).addOnQuestStart(questId);
 		qe.registerQuestNpc(205935).addOnTalkEvent(questId);
 		qe.registerQuestItem(182212521, questId);
 	}
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env){
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205935) {
 				switch (dialog) {
@@ -48,25 +46,23 @@ public class _41514BarrenProspects extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205935) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("SMALL_CRATER_1_600030000")) && item.getItemId() == 182212521) {
 				changeQuestStep(env, 0, 0, true);
@@ -74,5 +70,5 @@ public class _41514BarrenProspects extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

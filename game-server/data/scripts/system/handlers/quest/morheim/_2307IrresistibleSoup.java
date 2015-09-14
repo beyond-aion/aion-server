@@ -48,8 +48,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		}
-		else if (targetId == 204336) // Spedor
+		} else if (targetId == 204336) // Spedor
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -61,24 +60,21 @@ public class _2307IrresistibleSoup extends QuestHandler {
 					removeQuestItem(env, 182204106, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else if (env.getDialogId() == DialogAction.SELECT_ACTION_1182.id()) {
+				} else if (env.getDialogId() == DialogAction.SELECT_ACTION_1182.id()) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182204107, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else if (env.getDialogId() == DialogAction.SELECT_ACTION_1267.id()) {
+				} else if (env.getDialogId() == DialogAction.SELECT_ACTION_1267.id()) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182204108, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -90,7 +86,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 						qs.setQuestVar(1);
 						updateQuestStatus(env);
 					}
-				break;
+					break;
 			}
 		}
 		return false;

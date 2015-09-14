@@ -87,15 +87,12 @@ public class StaticDoorTemplate extends VisibleObjectTemplate {
 			int radix = 16;
 			if (statesHex.startsWith("0x")) {
 				statesHex = statesHex.replace("0x", "");
-			}
-			else
+			} else
 				radix = 10;
 			try {
 				StaticDoorState.setStates(Integer.parseInt(statesHex, radix), states);
-			}
-			catch (NumberFormatException ex) {
-			}
-			finally {
+			} catch (NumberFormatException ex) {
+			} finally {
 				statesHex = null;
 			}
 		}

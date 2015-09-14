@@ -36,24 +36,20 @@ public class _1141BelbuasTreasure extends QuestHandler {
 			if (targetId == 730001) { // Nola
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700122) { // Belbua's Wine Barrel
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 0, 0, true); // reward
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 700122) { // Belbua's Wine Barrel
 				return sendQuestEndDialog(env);
 			}

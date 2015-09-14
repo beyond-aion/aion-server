@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,9 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equiped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equiped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, rnd_bonus=?, rnd_count=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=? WHERE item_unique_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM inventory WHERE item_unique_id=?";
-	public static final String DELETE_CLEAN_QUERY = "DELETE FROM inventory WHERE item_owner=? AND item_location != 2"; // legion warehouse needs not to be excluded, since players and legions are IDAwareDAOs
+	public static final String DELETE_CLEAN_QUERY = "DELETE FROM inventory WHERE item_owner=? AND item_location != 2"; // legion warehouse needs not to
+																																																											// be excluded, since players
+																																																											// and legions are IDAwareDAOs
 	public static final String SELECT_ACCOUNT_QUERY = "SELECT `account_id` FROM `players` WHERE `id`=?";
 	public static final String SELECT_LEGION_QUERY = "SELECT `legion_id` FROM `legion_members` WHERE `player_id`=?";
 	public static final String DELETE_ACCOUNT_WH = "DELETE FROM inventory WHERE item_owner=? AND item_location=2";
@@ -93,15 +95,13 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 						item.setPersistentState(PersistentState.UPDATED);
 						if (item.getItemTemplate() == null) {
 							log.error(playerId + "loaded error item, itemUniqueId is: " + item.getObjectId());
-						}
-						else {
+						} else {
 							inventory.onLoadHandler(item);
 						}
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore storage data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return inventory;
@@ -109,7 +109,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadStorageDirect(int playerId, StorageType storageType) {
-		List<Item> list = FastList.newInstance();
+		List<Item> list = new FastTable<>();
 		final int storage = storageType.getId();
 
 		if (storageType == StorageType.ACCOUNT_WAREHOUSE) {
@@ -127,8 +127,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore loadStorageDirect data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return list;
@@ -155,8 +154,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore Equipment data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return equipment;
@@ -180,8 +178,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore Equipment data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return items;
@@ -213,9 +210,9 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		int isAmplified = rset.getInt("is_amplified");
 		int buffSkill = rset.getInt("buff_skill");
 
-		Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount,
-			isEquiped == 1, isSoulBound == 1, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge,
-			randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill);
+		Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
+			isSoulBound == 1, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus,
+			rndCount, tempering, packCount, isAmplified == 1, buffSkill);
 		return item;
 	}
 
@@ -230,8 +227,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore accountId data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return accountId;
@@ -248,8 +244,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Failed to load legion id for player id: " + playerId, e);
 		}
 		return legionId;
@@ -313,11 +308,9 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 			deleteResult = deleteItems(con, itemsToDelete);
 			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId);
 			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't open connection to save player inventory: " + playerId);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 
@@ -386,12 +379,10 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 			stmt.executeBatch();
 			con.commit();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Failed to execute insert batch", e);
 			return false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt);
 		}
 		return true;
@@ -438,12 +429,10 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 			stmt.executeBatch();
 			con.commit();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Failed to execute update batch", e);
 			return false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt);
 		}
 		return true;
@@ -465,12 +454,10 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 			stmt.executeBatch();
 			con.commit();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Failed to execute delete batch", e);
 			return false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt);
 		}
 		return true;
@@ -486,8 +473,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(1, playerId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error Player all items. PlayerObjId: " + playerId, e);
 			return false;
 		}
@@ -501,8 +487,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(1, accountId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error deleting all items from account WH. AccountId: " + accountId, e);
 		}
 	}
@@ -523,11 +508,9 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				ids[i] = rs.getInt("item_unique_id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from inventory table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 

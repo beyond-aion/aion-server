@@ -16,7 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Gigi, vlog
  */
@@ -39,30 +38,30 @@ public class SatraPortalAI2 extends NpcAI2 {
 			}
 		};
 		switch (dialogId) {
-                    case 65: { // I'm ready to enter
-                        if (!player.isInGroup2()) {
-                            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON);
-                            return true;
-                        }
-                        if (player.getPlayerGroup2().isLeader(player)) {
-                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
-                        } else if (isAGroupMemberInInstance(player)) {
-                            moveToInstance(player);
-                        } else {
-                            PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400361));
-                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10)); // Initial dialog
-                        }
-                        break;
-                    }
+			case 65: { // I'm ready to enter
+				if (!player.isInGroup2()) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON);
+					return true;
+				}
+				if (player.getPlayerGroup2().isLeader(player)) {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
+				} else if (isAGroupMemberInInstance(player)) {
+					moveToInstance(player);
+				} else {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400361));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10)); // Initial dialog
+				}
+				break;
+			}
 			case 4763: { // I'll take the safer path
-				AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM,
-					getObjectId(), request, "300470000", new DescriptionId(1804103));
+				AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
+					"300470000", new DescriptionId(1804103));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 			}
 			case 4848: { // Give me the dangerous path
-				AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM,
-					getObjectId(), request, "300470000", new DescriptionId(1804105));
+				AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
+					"300470000", new DescriptionId(1804105));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 			}
@@ -77,7 +76,7 @@ public class SatraPortalAI2 extends NpcAI2 {
 					return true;
 				}
 			}
-		} 
+		}
 		return false;
 	}
 

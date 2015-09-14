@@ -110,13 +110,15 @@ public class CM_EMOTION extends AionClientPacket {
 		if (player.getLifeStats().isAlreadyDead()) {
 			return;
 		}
-				
-		if (emotionType != EmotionType.SELECT_TARGET && emotionType != EmotionType.ATTACKMODE_IN_MOVE && emotionType != EmotionType.ATTACKMODE_IN_STANDING && emotionType != EmotionType.NEUTRALMODE_IN_MOVE && emotionType != EmotionType.NEUTRALMODE_IN_STANDING) {
+
+		if (emotionType != EmotionType.SELECT_TARGET && emotionType != EmotionType.ATTACKMODE_IN_MOVE
+			&& emotionType != EmotionType.ATTACKMODE_IN_STANDING && emotionType != EmotionType.NEUTRALMODE_IN_MOVE
+			&& emotionType != EmotionType.NEUTRALMODE_IN_STANDING) {
 			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || player.getEffectController().isUnderFear()) {
 				return;
 			}
 		}
-		
+
 		if (player.getState() == CreatureState.PRIVATE_SHOP.getId() || player.isAttackMode()
 			&& (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP))
 			return;
@@ -125,7 +127,6 @@ public class CM_EMOTION extends AionClientPacket {
 		if (emotionType != EmotionType.SELECT_TARGET)
 			player.getController().cancelCurrentSkill();
 
-		
 		// check for stance
 		if (player.getController().isUnderStance()) {
 			switch (emotionType) {
@@ -139,9 +140,9 @@ public class CM_EMOTION extends AionClientPacket {
 					return;
 			}
 		}
-		
+
 		if (emotionType == EmotionType.JUMP) {
-			 player.getMoveController().updateLastJump();
+			player.getMoveController().updateLastJump();
 		}
 
 		switch (emotionType) {
@@ -211,16 +212,15 @@ public class CM_EMOTION extends AionClientPacket {
 				player.unsetState(CreatureState.POWERSHARD);
 				break;
 			case START_SPRINT:
-				if (!player.isInPlayerMode(PlayerMode.RIDE) || player.getLifeStats().getCurrentFp() < player.ride.getStartFp()
-						|| player.isFlying() || !player.ride.canSprint()) {
+				if (!player.isInPlayerMode(PlayerMode.RIDE) || player.getLifeStats().getCurrentFp() < player.ride.getStartFp() || player.isFlying()
+					|| !player.ride.canSprint()) {
 					return;
 				}
 				player.setSprintMode(true);
 				player.getLifeStats().triggerFpReduceByCost(player.ride.getCostFp());
 				break;
 			case END_SPRINT:
-				if (!player.isInPlayerMode(PlayerMode.RIDE) || !player.ride.canSprint() ||
-					!player.isInSprintMode()) {
+				if (!player.isInPlayerMode(PlayerMode.RIDE) || !player.ride.canSprint() || !player.isInSprintMode()) {
 					return;
 				}
 				player.setSprintMode(false);

@@ -8,9 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Cornelius (203780). Talk with Sabotes (203781). Collect Tear of Luck (182206098) (20) and take them to
- * Cornelius. Take the Oath Stone (186000080) to High Priest Jucleas (203752) and ask him to perform the ritual of
- * affirmation. Talk with Lavirintos (203701).
+ * Talk with Cornelius (203780). Talk with Sabotes (203781). Collect Tear of Luck (182206098) (20) and take them to Cornelius. Take the Oath Stone
+ * (186000080) to High Priest Jucleas (203752) and ask him to perform the ritual of affirmation. Talk with Lavirintos (203701).
  * 
  * @author Nanou
  * @reworked vlog
@@ -48,12 +47,12 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203780: { // Cornelius
@@ -80,8 +79,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 						case SELECT_ACTION_1354: {
 							if (var == 1 && player.getInventory().tryDecreaseKinah(3400000)) {
 								return defaultCloseDialog(env, 1, 2, 122001274, 1, 0, 0); // 2
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 1438);
 							}
 						}
@@ -106,8 +104,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 3, 3, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 2120);
 							}
 						}
@@ -121,8 +118,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) { // Lavirintos
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);

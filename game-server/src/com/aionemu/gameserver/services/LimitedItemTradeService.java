@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +15,9 @@ import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author xTz
- * 
- * TYPE_A: BuyLimit == 0 && SellLimit != 0
- * TYPE_B: BuyLimit != 0 && SellLimit == 0
- * TYPE_C: BuyLimit != 0 && SellLimit != 0
+ * @author xTz TYPE_A: BuyLimit == 0 && SellLimit != 0 TYPE_B: BuyLimit != 0 && SellLimit == 0 TYPE_C: BuyLimit != 0 && SellLimit != 0
  */
 public class LimitedItemTradeService {
 
@@ -37,14 +34,13 @@ public class LimitedItemTradeService {
 					log.warn("No goodslist for tradelist of npc " + npcId);
 					continue;
 				}
-				FastList<LimitedItem> limitedItems = goodsList.getLimitedItems();
+				FastTable<LimitedItem> limitedItems = goodsList.getLimitedItems();
 				if (limitedItems.isEmpty()) {
 					continue;
 				}
 				if (!limitedTradeNpcs.containsKey(npcId)) {
 					limitedTradeNpcs.putIfAbsent(npcId, new LimitedTradeNpc(limitedItems));
-				}
-				else {
+				} else {
 					limitedTradeNpcs.get(npcId).putLimitedItems(limitedItems);
 				}
 			}
@@ -89,6 +85,7 @@ public class LimitedItemTradeService {
 	}
 
 	private static class SingletonHolder {
+
 		protected static final LimitedItemTradeService INSTANCE = new LimitedItemTradeService();
 	}
 

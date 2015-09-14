@@ -20,8 +20,7 @@ public class Teleportation extends AdminCommand {
 		if (isTeleportation) {
 			PacketSendUtility.sendMessage(player, "Teleported state is disabled.");
 			player.setAdminTeleportation(false);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "Teleported state.");
 			player.setAdminTeleportation(true);
 		}

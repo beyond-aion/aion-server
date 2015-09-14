@@ -11,8 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 public class CacheConfig {
 
 	/**
-	 * Says whether cache for such things like PlayerCommonData or Appereance etc is cached in {@link WeakCacheMap} or in
-	 * {@link SoftCacheMap}
+	 * Says whether cache for such things like PlayerCommonData or Appereance etc is cached in {@link WeakCacheMap} or in {@link SoftCacheMap}
 	 */
 	@Property(key = "gameserver.cache.softcache", defaultValue = "false")
 	public static boolean SOFT_CACHE_MAP;

@@ -6,12 +6,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BombTemplate")
 public class BombTemplate {
+
 	@XmlAttribute(name = "skillId")
 	private int SkillId = 0;
 	@XmlAttribute(name = "cd")

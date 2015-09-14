@@ -24,7 +24,7 @@ public class HealInstantEffect extends AbstractHealEffect {
 	public void calculate(Effect effect) {
 		super.calculate(effect, HealType.HP);
 	}
-	
+
 	@Override
 	protected int getCurrentStatValue(Effect effect) {
 		return effect.getEffected().getLifeStats().getCurrentHp();

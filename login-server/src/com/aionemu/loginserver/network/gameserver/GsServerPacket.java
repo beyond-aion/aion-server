@@ -10,6 +10,7 @@ import com.aionemu.commons.network.packet.BaseServerPacket;
  * @author -Nemesiss-
  */
 public abstract class GsServerPacket extends BaseServerPacket {
+
 	/**
 	 * Constructs a new server packet with specified id.
 	 * 

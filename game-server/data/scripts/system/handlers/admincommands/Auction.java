@@ -3,7 +3,7 @@ package admincommands;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Rolandas 
+ * @author Rolandas
  * @modified Luzien
  */
 public class Auction extends AdminCommand {
@@ -169,7 +169,7 @@ public class Auction extends AdminCommand {
 				info(admin, null);
 				return;
 			}
-			
+
 			String param = params[1].toUpperCase();
 			Race race;
 			if ("ALL".equals(param) || "PC_ALL".equals(param))
@@ -183,7 +183,6 @@ public class Auction extends AdminCommand {
 				return;
 			}
 
-
 			HouseType houseType = null;
 			try {
 				houseType = HouseType.fromValue(params[2].toUpperCase());
@@ -194,8 +193,7 @@ public class Auction extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "No such house type!");
 				return;
 			}
-			
-			
+
 			int count = 0;
 			try {
 				count = Integer.parseInt(params[3]);
@@ -220,7 +218,7 @@ public class Auction extends AdminCommand {
 			}
 
 			int counter = 0;
-			FastList<House> houses = HousingService.getInstance().getCustomHouses();
+			FastTable<House> houses = HousingService.getInstance().getCustomHouses();
 			while (!houses.isEmpty() && counter < count) {
 				House house = houses.get(Rnd.get(houses.size()));
 				houses.remove(house);
@@ -233,8 +231,7 @@ public class Auction extends AdminCommand {
 						if (mapId != 210050000 && mapId != 700010000 && mapId != 210040000) {
 							continue;
 						}
-					}
-					else if (race.equals(Race.ASMODIANS)) {
+					} else if (race.equals(Race.ASMODIANS)) {
 						if (mapId != 710010000 && mapId != 220040000 && mapId != 220070000) {
 							continue;
 						}
@@ -275,12 +272,9 @@ public class Auction extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax:\n"
-						+ " //auction add <zone_name> <house_type> [initial_bid]\n"
-						+ " //auction remove <HOUSE_id|zone_name> [nosale]\n"
-						+ " //auction addrandom <race> <house_type> <count> [initial_bid]\n"
-						+ "   zone_name = from zones xml files\n"
-						+ "   house_type = house, mansion, estate, palace\n"
-						+ "   initial_bid = initial bid price (if omitted, default is used)");
+		PacketSendUtility.sendMessage(player, "syntax:\n" + " //auction add <zone_name> <house_type> [initial_bid]\n"
+			+ " //auction remove <HOUSE_id|zone_name> [nosale]\n" + " //auction addrandom <race> <house_type> <count> [initial_bid]\n"
+			+ "   zone_name = from zones xml files\n" + "   house_type = house, mansion, estate, palace\n"
+			+ "   initial_bid = initial bid price (if omitted, default is used)");
 	}
 }

@@ -46,15 +46,14 @@ public class MonsterHunt extends QuestHandler {
 	private QuestItems workItem;
 	private final int startDistanceNpc;
 
-	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters,
-		int startDialog, int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc) {
+	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters, int startDialog,
+		int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc) {
 		super(questId);
 		this.startNpcs.addAll(startNpcIds);
 		this.startNpcs.remove(0);
 		if (endNpcIds == null) {
 			this.endNpcs.addAll(startNpcs);
-		}
-		else {
+		} else {
 			this.endNpcs.addAll(endNpcIds);
 			this.endNpcs.remove(0);
 		}
@@ -99,7 +98,7 @@ public class MonsterHunt extends QuestHandler {
 
 		if (invasionWorldId != 0)
 			qe.registerOnEnterWorld(questId);
-		
+
 		if (startDistanceNpc != 0)
 			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
 	}
@@ -113,8 +112,7 @@ public class MonsterHunt extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, startDialog != 0 ? startDialog : 1011);
-				}
-				else {
+				} else {
 					switch (env.getDialog()) {
 						case QUEST_REFUSE_1:
 						case FINISH_DIALOG:
@@ -135,13 +133,11 @@ public class MonsterHunt extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (endNpcs.contains(targetId)) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, endDialog != 0 ? endDialog : 1352);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					for (Monster mi : monsters.keySet()) {
 						int endVar = mi.getEndVar();
 						int varId = mi.getVar();
@@ -151,8 +147,7 @@ public class MonsterHunt extends QuestHandler {
 							total += currentVar << ((varId - mi.getVar()) * 6);
 							endVar >>= 6;
 							varId++;
-						}
-						while (endVar > 0);
+						} while (endVar > 0);
 						if (mi.getEndVar() > total) {
 							if (player.getAccessLevel() >= 3 && CustomConfig.ENABLE_SHOW_DIALOGID) {
 								PacketSendUtility.sendMessage(player, "varId: " + varId + "; req endVar: " + mi.getEndVar() + "; curr total: " + total);
@@ -165,8 +160,7 @@ public class MonsterHunt extends QuestHandler {
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
 				if (!aggroNpcs.isEmpty()) {
 					switch (env.getDialog()) {
@@ -184,8 +178,7 @@ public class MonsterHunt extends QuestHandler {
 						default:
 							return sendQuestEndDialog(env);
 					}
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
@@ -193,46 +186,44 @@ public class MonsterHunt extends QuestHandler {
 	}
 
 	@Override
-    public boolean onKillEvent(QuestEnv env) {
-        Player player = env.getPlayer();
-        QuestState qs = player.getQuestStateList().getQuestState(questId);
-        if (qs != null && qs.getStatus() == QuestStatus.START) {
-            for (Monster m : monsters.keySet()) {
-                if (m.getNpcIds().contains(env.getTargetId())) {
-                    int endVar = m.getEndVar();
-                    int varId = m.getVar();
-                    int total = 0;
-                    do {
-                        int currentVar = qs.getQuestVarById(varId);
-                        total += currentVar << ((varId - m.getVar()) * 6);
-                        endVar >>= 6;
-                        varId++;
-                    }
-                    while (endVar > 0);
-                    total += 1;
-                    if (total <= m.getEndVar()) {
-                        if (!aggroNpcs.isEmpty()) {
-                            qs.setStatus(QuestStatus.REWARD);
-                            updateQuestStatus(env);
+	public boolean onKillEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			for (Monster m : monsters.keySet()) {
+				if (m.getNpcIds().contains(env.getTargetId())) {
+					int endVar = m.getEndVar();
+					int varId = m.getVar();
+					int total = 0;
+					do {
+						int currentVar = qs.getQuestVarById(varId);
+						total += currentVar << ((varId - m.getVar()) * 6);
+						endVar >>= 6;
+						varId++;
+					} while (endVar > 0);
+					total += 1;
+					if (total <= m.getEndVar()) {
+						if (!aggroNpcs.isEmpty()) {
+							qs.setStatus(QuestStatus.REWARD);
+							updateQuestStatus(env);
+						} else {
+							for (int varsUsed = m.getVar(); varsUsed < varId; varsUsed++) {
+								int value = total & 0x3F;
+								total >>= 6;
+								qs.setQuestVarById(varsUsed, value);
+							}
+							if (total <= m.getEndVar() && m.getRewardVar()) {
+								qs.setStatus(QuestStatus.REWARD);
+							}
+							updateQuestStatus(env);
 						}
-						else {
-                            for (int varsUsed = m.getVar(); varsUsed < varId; varsUsed++) {
-                                int value = total & 0x3F;
-                                total >>= 6;
-                                qs.setQuestVarById(varsUsed, value);
-							}
-                            if (total <= m.getEndVar() && m.getRewardVar()) {
-                                qs.setStatus(QuestStatus.REWARD);
-							}
-                            updateQuestStatus(env);
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public boolean onAddAggroListEvent(QuestEnv env) {
@@ -267,7 +258,7 @@ public class MonsterHunt extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();

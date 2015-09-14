@@ -1,15 +1,15 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
+import java.util.Iterator;
+
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import java.util.Iterator;
 
 /**
- *
  * @author xTz
  */
 public class DredgionService2 extends PeriodicInstance {
@@ -17,7 +17,8 @@ public class DredgionService2 extends PeriodicInstance {
 	private final byte maskLvlGradeC = 1, maskLvlGradeB = 2, maskLvlGradeA = 3;
 
 	public DredgionService2() {
-		super(AutoGroupConfig.DREDGION2_ENABLE, AutoGroupConfig.DREDGION_TIMES, AutoGroupConfig.DREDGION_TIMER, new byte[] {1, 2, 3}, (byte) 45, (byte) 66);
+		super(AutoGroupConfig.DREDGION2_ENABLE, AutoGroupConfig.DREDGION_TIMES, AutoGroupConfig.DREDGION_TIMER, new byte[] { 1, 2, 3 }, (byte) 45,
+			(byte) 66);
 	}
 
 	@Override
@@ -61,11 +62,9 @@ public class DredgionService2 extends PeriodicInstance {
 		}
 		if (level < 51) {
 			return this.maskLvlGradeC;
-		}
-		else if (level < 56) {
+		} else if (level < 56) {
 			return this.maskLvlGradeB;
-		}
-		else {
+		} else {
 			return this.maskLvlGradeA;
 		}
 	}
@@ -82,6 +81,7 @@ public class DredgionService2 extends PeriodicInstance {
 	}
 
 	private static class SingletonHolder {
+
 		protected static final DredgionService2 instance = new DredgionService2();
 	}
 

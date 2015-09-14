@@ -12,8 +12,7 @@ import java.sql.SQLException;
 public interface IUStH {
 
 	/**
-	 * Enables coder to manually modify statement or batch. Must execute batch or statement manually. Automatically
-	 * recycles connection.
+	 * Enables coder to manually modify statement or batch. Must execute batch or statement manually. Automatically recycles connection.
 	 * 
 	 * @param stmt
 	 * @throws SQLException

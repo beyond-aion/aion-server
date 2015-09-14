@@ -57,7 +57,7 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 				@Override
 				public void run() {
-					client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, (byte) target.getHeading()));
+					client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, target.getHeading()));
 				}
 			}, 1200);
 

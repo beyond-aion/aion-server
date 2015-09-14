@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 
 /**
- *
  * @author Tibald
  */
 @AIName("defense_wall")
@@ -28,7 +27,7 @@ public class DefenseWallAI2 extends GeneralNpcAI2 {
 				return AIAnswers.NEGATIVE;
 		}
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {

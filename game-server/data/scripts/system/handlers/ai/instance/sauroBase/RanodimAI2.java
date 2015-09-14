@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 @AIName("ranodim")
 public class RanodimAI2 extends AggressiveNpcAI2 {
 
@@ -17,12 +16,13 @@ public class RanodimAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-			wakeUp();
+		wakeUp();
 	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-			wakeUp();
+		wakeUp();
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
@@ -60,6 +60,7 @@ public class RanodimAI2 extends AggressiveNpcAI2 {
 			}, delay);
 		}
 	}
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();

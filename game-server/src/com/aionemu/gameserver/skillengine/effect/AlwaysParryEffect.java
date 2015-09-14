@@ -32,10 +32,9 @@ public class AlwaysParryEffect extends EffectTemplate {
 						effect.endEffect();
 					else
 						value--;
-					
+
 					return true;
-				}
-				else
+				} else
 					return false;
 			}
 

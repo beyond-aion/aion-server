@@ -28,26 +28,25 @@ public class KrotanInstance extends GeneralInstanceHandler {
 	private boolean rewarded = false;
 	private AtomicBoolean isStartTimer = new AtomicBoolean();
 	private Future<?> failTask;
-	
-	
+
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		spawnTimerRing();
 		spawn(Rnd.get(215130, 215133), 527.64f, 212.0511f, 178.4134f, (byte) 90);
 	}
-	
+
 	private void spawnTimerRing() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("KROTAN_01", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52,
-			757.33, 199.42), new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("KROTAN_01", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52, 757.33, 199.42),
+			new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
 		f1.spawn();
 	}
-	
+
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("KROTAN_01")) {
 			if (isStartTimer.compareAndSet(false, true)) {
-				for (Player p: instance.getPlayersInside()) {
+				for (Player p : instance.getPlayersInside()) {
 					PacketSendUtility.sendPacket(p, STR_MSG_INSTANCE_START_IDABRE);
 					PacketSendUtility.sendPacket(p, new SM_QUEST_ACTION(0, 600));
 				}
@@ -56,7 +55,7 @@ public class KrotanInstance extends GeneralInstanceHandler {
 		}
 		return false;
 	}
-	
+
 	private void startFail() {
 		failTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -66,8 +65,7 @@ public class KrotanInstance extends GeneralInstanceHandler {
 				Npc boss2 = getNpc(215136);
 				if (boss1 != null) {
 					boss1.getController().onDelete();
-				}
-				else if(boss2 != null) {
+				} else if (boss2 != null) {
 					boss2.getController().onDelete();
 				}
 			}
@@ -76,7 +74,7 @@ public class KrotanInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 215102:
 				openDoor(10);
 				break;
@@ -116,32 +114,32 @@ public class KrotanInstance extends GeneralInstanceHandler {
 			case 215117:
 				openDoor(29);
 				break;
-			case 215136: //bosses
+			case 215136: // bosses
 			case 215135:
 				if (failTask != null && !failTask.isCancelled()) {
 					failTask.cancel(true);
 				}
 				spawnChests(npc);
 				break;
-			case 215413: //artifact spawns weak boss
+			case 215413: // artifact spawns weak boss
 				Npc boss = getNpc(215136);
 				if (boss != null && !boss.getLifeStats().isAlreadyDead()) {
 					spawn(215135, boss.getX(), boss.getY(), boss.getZ(), boss.getHeading());
 					boss.getController().onDelete();
-				}	
+				}
 		}
 	}
-	
+
 	private void openDoor(int staticId) {
 		for (Npc npc : instance.getNpcs()) {
 			if (npc.getSpawn().getStaticId() == staticId)
 				npc.getController().onDelete();
 		}
 	}
-	
+
 	private void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			if (npc.getNpcId() == 215222) {
 				spawn(700559, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 				spawn(700559, 571.56036f, 869.93604f, 199.37367f, (byte) 69);
@@ -170,7 +168,7 @@ public class KrotanInstance extends GeneralInstanceHandler {
 			}
 		}
 	}
-	
+
 	@Override
 	public void onInstanceDestroy() {
 		if (failTask != null && !failTask.isCancelled()) {

@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41527ANiceHealingBath extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205895).addOnQuestStart(questId);
 		qe.registerQuestNpc(205964).addOnTalkEvent(questId);
@@ -38,28 +37,25 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205895) { 
+			if (targetId == 205895) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-		if (targetId == 205964) {
-			switch (dialog) {
-				case QUEST_SELECT: {
-					return sendQuestDialog(env, 1011);
-				}
-				case SETPRO1: {
-					return defaultCloseDialog(env, 0, 1);
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205964) {
+				switch (dialog) {
+					case QUEST_SELECT: {
+						return sendQuestDialog(env, 1011);
+					}
+					case SETPRO1: {
+						return defaultCloseDialog(env, 0, 1);
+					}
 				}
 			}
-		}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205964) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -73,7 +69,7 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -87,7 +83,7 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("STEAM_SPRINGS_600030000")) {
@@ -107,4 +103,3 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		return false;
 	}
 }
-

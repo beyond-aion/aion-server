@@ -43,8 +43,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 			if (targetId == 203919) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -66,8 +65,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 										updateQuestStatus(env);
 										return sendQuestDialog(env, 1352);
-									}
-									else
+									} else
 										return sendQuestDialog(env, 10001);
 								}
 								case 2: {
@@ -96,8 +94,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203337) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

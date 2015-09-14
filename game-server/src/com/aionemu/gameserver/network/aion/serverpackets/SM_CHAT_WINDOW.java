@@ -49,8 +49,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 
 				for (int i = group.size(); i < 6; i++)
 					writeC(0);
-			}
-			else if (target.isInAlliance2()) {
+			} else if (target.isInAlliance2()) {
 				writeC(3); // alliance
 
 				PlayerAlliance alliance = target.getPlayerAlliance2();
@@ -84,8 +83,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 				for (int i = 0; i < counts.length; i++) {
 					writeH(counts[i]);
 				}
-			}
-			else {
+			} else {
 				writeC(4); // no group
 				writeS(target.getName());
 				writeD(0); // no group yet
@@ -93,8 +91,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 				writeC(target.getLevel());
 				writeC(0); // unk
 			}
-		}
-		else {
+		} else {
 			writeC(1);
 			writeS(target.getName());
 			writeS(target.getLegion() != null ? target.getLegion().getLegionName() : "");

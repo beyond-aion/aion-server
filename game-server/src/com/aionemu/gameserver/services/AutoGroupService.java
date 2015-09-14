@@ -8,10 +8,11 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -44,17 +45,14 @@ import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
- *
  * @author xTz
  */
 public class AutoGroupService {
 
 	private ConcurrentHashMap<Integer, LookingForParty> searchers = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
-	private Collection<Integer> penaltys = new FastList<Integer>().shared();
+	private Collection<Integer> penaltys = new FastTable<Integer>().shared();
 	private Lock lock = new ReentrantLock();
 
 	private AutoGroupService() {
@@ -164,18 +162,13 @@ public class AutoGroupService {
 			}
 			if (autoInstance.agt.isIronWarFront() && IronWallFrontService.getInstance().isRegisterAvailable()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			}
-			else if (autoInstance.agt.isDredgion() && DredgionService2.getInstance().isRegisterAvailable()) {
+			} else if (autoInstance.agt.isDredgion() && DredgionService2.getInstance().isRegisterAvailable()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
 			} else if (autoInstance.agt.isKamar() && KamarBattlefieldService.getInstance().isRegisterAvailable()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			} 
-			else if (autoInstance.agt.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) 
-			{
+			} else if (autoInstance.agt.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			}
-			else if (autoInstance.agt.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) 
-			{
+			} else if (autoInstance.agt.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
 			}
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
@@ -191,13 +184,17 @@ public class AutoGroupService {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
 		}
 		for (byte maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : EngulfedOphidianBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : IronWallFrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : IdgelDomeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
 		Integer obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
 		if (lfp != null) {
@@ -207,25 +204,20 @@ public class AutoGroupService {
 					lfp.unregisterInstance(instanceMaskId);
 					if (searchInstance.isIronWallFront() && IronWallFrontService.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					}
-					else if (searchInstance.isDredgion() && DredgionService2.getInstance().isRegisterAvailable()) {
+					} else if (searchInstance.isDredgion() && DredgionService2.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
 					} else if (searchInstance.isKamar() && KamarBattlefieldService.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					} 
-					else if (searchInstance.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) 
-					{
+					} else if (searchInstance.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					}
-					else if (searchInstance.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) 
-					{
+					} else if (searchInstance.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
 					}
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
 					continue;
 				}
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), 8,
-						searchInstance.getRemainingTime() + searchInstance.getEntryRequestType().getId(), player.getName()));
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), 8, searchInstance.getRemainingTime()
+					+ searchInstance.getEntryRequestType().getId(), player.getName()));
 				if (searchInstance.isDredgion()) {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), SM_AUTO_GROUP.wnd_EntryIcon, true));
 				}
@@ -250,13 +242,17 @@ public class AutoGroupService {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
 		}
 		for (byte maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : EngulfedOphidianBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : IronWallFrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance()
+				.isEnterAvailable(player)));
 		for (byte maskId : IdgelDomeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
 	}
 
 	public void onPlayerLogOut(Player player) {
@@ -413,22 +409,16 @@ public class AutoGroupService {
 		}
 		if (agt.isIronWarFront() && !IronWallFrontService.getInstance().isRegisterAvailable()) {
 			return false;
-		} 
-		else if (agt.isKamar() && !KamarBattlefieldService.getInstance().isRegisterAvailable()) {
+		} else if (agt.isKamar() && !KamarBattlefieldService.getInstance().isRegisterAvailable()) {
 			return false;
-		} 
-		else if (agt.isEngulfedOB() && !EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) 
-		{
+		} else if (agt.isEngulfedOB() && !EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 			return false;
-		} 
-		else if (agt.isIdgelDome() && !IdgelDomeService.getInstance().isRegisterAvailable()) 
-		{
+		} else if (agt.isIdgelDome() && !IdgelDomeService.getInstance().isRegisterAvailable()) {
 			return false;
-		} 
-		else if (agt.isDredgion() && !DredgionService2.getInstance().isRegisterAvailable()) {
+		} else if (agt.isDredgion() && !DredgionService2.getInstance().isRegisterAvailable()) {
 			return false;
 		} else if ((agt.isPvPFFAArena() || agt.isPvPSoloArena() || agt.isHarmonyArena() || agt.isGloryArena())
-				&& !PvPArenaService.isPvPArenaAvailable(player, agt)) {
+			&& !PvPArenaService.isPvPArenaAvailable(player, agt)) {
 			return false;
 		} else if (hasCoolDown(player, mapId)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME);
@@ -474,21 +464,16 @@ public class AutoGroupService {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
 					}
-					if (agt.isIronWarFront()&& IronWallFrontService.getInstance().hasCooldown(member)) {
+					if (agt.isIronWarFront() && IronWallFrontService.getInstance().hasCooldown(member)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
-					}
-					else if (agt.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().hasCooldown(member)) 
-					{
+					} else if (agt.isEngulfedOB() && EngulfedOphidianBridgeService.getInstance().hasCooldown(member)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
-					} 
-					else if (agt.isIdgelDome() && IdgelDomeService.getInstance().hasCooldown(member)) 
-					{
+					} else if (agt.isIdgelDome() && IdgelDomeService.getInstance().hasCooldown(member)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
-					} 
-					else if (agt.isKamar() && KamarBattlefieldService.getInstance().hasCooldown(member)) {
+					} else if (agt.isKamar() && KamarBattlefieldService.getInstance().hasCooldown(member)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
 					} else if (agt.isDredgion() && DredgionService2.getInstance().hasCooldown(member)) {

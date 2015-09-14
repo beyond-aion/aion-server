@@ -38,13 +38,11 @@ public class _1948WheresVindachinerk extends QuestHandler {
 			if (targetId == 798012) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798004: {
@@ -64,26 +62,24 @@ public class _1948WheresVindachinerk extends QuestHandler {
 					}
 				}
 				case 798132: {
-					switch(dialog) {
+					switch (dialog) {
 						case QUEST_SELECT:
-							if(var == 1)
+							if (var == 1)
 								return sendQuestDialog(env, 1693);
-						   break;
-						case SELECT_ACTION_1694:	
+							break;
+						case SELECT_ACTION_1694:
 							return sendQuestDialog(env, 1694);
 						case SETPRO2:
 							changeQuestStep(env, 1, 2, false);
-							return defaultCloseDialog(env, 2, 3, true, false);						
+							return defaultCloseDialog(env, 2, 3, true, false);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279006) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

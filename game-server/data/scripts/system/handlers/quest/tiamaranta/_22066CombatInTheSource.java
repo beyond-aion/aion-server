@@ -10,33 +10,31 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author madisson
- *
  */
-public class _22066CombatInTheSource extends QuestHandler  {
+public class _22066CombatInTheSource extends QuestHandler {
 
 	private final static int questId = 22066;
 
 	public _22066CombatInTheSource() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205864).addOnQuestStart(questId);
 		qe.registerQuestNpc(205864).addOnTalkEvent(questId);
 		qe.registerQuestItem(182212609, questId);
 	}
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env){
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205864) {
 				switch (dialog) {
@@ -44,14 +42,13 @@ public class _22066CombatInTheSource extends QuestHandler  {
 						return sendQuestDialog(env, 1011);
 					}
 					case QUEST_ACCEPT_SIMPLE: {
-						if(giveQuestItem(env, 182212609, 1)){
+						if (giveQuestItem(env, 182212609, 1)) {
 							return sendQuestStartDialog(env);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205864) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -63,20 +60,18 @@ public class _22066CombatInTheSource extends QuestHandler  {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205864) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();

@@ -133,12 +133,9 @@ public class GeneralNpcAI2 extends NpcAI2 {
 
 		switch (eventType) {
 			case CREATURE_MOVED:
-				return canHandle
-					|| DataManager.NPC_SHOUT_DATA.hasAnyShout(getOwner().getWorldId(), getOwner().getNpcId(), ShoutEventType.SEE);
+				return canHandle || DataManager.NPC_SHOUT_DATA.hasAnyShout(getOwner().getWorldId(), getOwner().getNpcId(), ShoutEventType.SEE);
 			case CREATURE_NEEDS_SUPPORT:
-				return canHandle
-					&& isNonFightingState()
-					&& DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
+				return canHandle && isNonFightingState() && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
 		}
 		return canHandle;
 	}
@@ -156,7 +153,7 @@ public class GeneralNpcAI2 extends NpcAI2 {
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 			return AttackIntention.SWITCH_TARGET;
 		}
-		
+
 		if (getOwner().getObjectTemplate().getAttackRange() == 0) {
 			NpcSkillEntry skill = getOwner().getSkillList().getRandomSkill();
 			if (skill != null) {
@@ -164,8 +161,7 @@ public class GeneralNpcAI2 extends NpcAI2 {
 				skillLevel = skill.getSkillLevel();
 				return AttackIntention.SKILL_ATTACK;
 			}
-		}
-		else {
+		} else {
 			NpcSkillEntry skill = SkillAttackManager.chooseNextSkill(this);
 			if (skill != null) {
 				skillId = skill.getSkillId();

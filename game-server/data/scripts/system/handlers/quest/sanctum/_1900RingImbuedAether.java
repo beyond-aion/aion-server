@@ -46,53 +46,44 @@ public class _1900RingImbuedAether extends QuestHandler {
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (env.getTargetId() == 203766) {
+		} else if (env.getTargetId() == 203766) {
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (env.getTargetId() == 203797) {
+		} else if (env.getTargetId() == 203797) {
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialog() == DialogAction.SETPRO3) {
 					return defaultCloseDialog(env, 2, 3);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (env.getTargetId() == 203795) {
+		} else if (env.getTargetId() == 203795) {
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialog() == DialogAction.SETPRO4) {
 					return defaultCloseDialog(env, 3, 0, true, false);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (env.getTargetId() == 203830) {
+		} else if (env.getTargetId() == 203830) {
 			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestDialog(env, 2716);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
 				&& qs.getStatus() != QuestStatus.NONE) {
 				removeQuestItem(env, 182206003, 1);
 				return sendQuestDialog(env, 5);
-			}
-			else
+			} else
 				return sendQuestEndDialog(env);
 		}
 		return sendQuestRewardDialog(env, 203830, 0);

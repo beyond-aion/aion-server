@@ -73,8 +73,7 @@ public class WorkOrders extends QuestHandler {
 						return sendQuestDialog(env, DialogPage.COMBINETASK_WINDOW.id());
 					}
 				}
-			}
-			else if (qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					int var = qs.getQuestVarById(0);
 					if (QuestService.collectItemCheck(env, false)) {
@@ -91,13 +90,11 @@ public class WorkOrders extends QuestHandler {
 							}
 						}
 						return sendQuestDialog(env, DialogPage.SELECT_QUEST_REWARD_WINDOW1.id());
-					}
-					else {
+					} else {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(workOrdersData.getId());
 				CollectItems collectItems = template.getCollectItems();
 				long count = 0;
@@ -111,8 +108,7 @@ public class WorkOrders extends QuestHandler {
 					QuestService.finishQuest(env, 0);
 					env.setQuestId(workOrdersData.getId());
 					return sendQuestDialog(env, 1008);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

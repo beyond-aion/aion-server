@@ -34,7 +34,7 @@ public class Collide extends AdminCommand {
 			return;
 		}
 
-		final byte intentions = (byte) (CollisionIntention.DOOR.getId());
+		final byte intentions = (CollisionIntention.DOOR.getId());
 		float x = target.getX();
 		float y = target.getY();
 		float z = target.getZ();
@@ -44,8 +44,7 @@ public class Collide extends AdminCommand {
 			targetX = x;
 			targetY = y;
 			targetZ = z - 10;
-		}
-		else {
+		} else {
 			targetX = admin.getX();
 			targetY = admin.getY();
 			targetZ = admin.getZ() + admin.getObjectTemplate().getBoundRadius().getUpper() / 2;
@@ -64,8 +63,7 @@ public class Collide extends AdminCommand {
 				return;
 			else
 				closest = null;
-		}
-		else {
+		} else {
 			Iterator<CollisionResult> iter = results.iterator();
 			int count = 0;
 			int closestId = 0;
@@ -79,10 +77,8 @@ public class Collide extends AdminCommand {
 					description += count + ". " + result.getContactPoint().toString() + "\n";
 				else {
 					if (result.getGeometry().getName() == null) {
-						description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName()
-							+ "\n";
-					}
-					else
+						description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName() + "\n";
+					} else
 						description += count + ". " + result.getContactPoint().toString() + "; name=" + result.getGeometry().getName() + "\n";
 				}
 			}
@@ -103,8 +99,7 @@ public class Collide extends AdminCommand {
 			if (results.size() == 0) {
 				PacketSendUtility.sendMessage(admin, "Hm... Nothing collidable?");
 				closestOpposite = null;
-			}
-			else {
+			} else {
 				Iterator<CollisionResult> iter2 = results.iterator();
 				int count = 0;
 				int closestId = 0;
@@ -119,10 +114,8 @@ public class Collide extends AdminCommand {
 						description += count + ". " + result.getContactPoint().toString() + "\n";
 					else {
 						if (result.getGeometry().getName() == null) {
-							description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName()
-								+ "\n";
-						}
-						else
+							description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName() + "\n";
+						} else
 							description += count + ". " + result.getContactPoint().toString() + "; name=" + result.getGeometry().getName() + "\n";
 					}
 				}
@@ -133,8 +126,7 @@ public class Collide extends AdminCommand {
 
 		if (params.length == 0 && closest.getContactPoint().z + 0.5f < target.getZ()) {
 			PacketSendUtility.sendMessage(admin, "Below actual Z!");
-		}
-		else {
+		} else {
 			if (closest != null) {
 				SpawnTemplate spawn = SpawnEngine.addNewSpawn(admin.getWorldId(), 200000, closest.getContactPoint().x, closest.getContactPoint().y,
 					closest.getContactPoint().z, (byte) 0, 0);

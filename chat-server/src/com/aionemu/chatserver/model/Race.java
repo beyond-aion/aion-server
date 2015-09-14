@@ -3,8 +3,7 @@ package com.aionemu.chatserver.model;
 /**
  * @author ATracer
  */
-public enum Race
-{
+public enum Race {
 	ELYOS(0),
 	ASMODIANS(1);
 
@@ -16,16 +15,14 @@ public enum Race
 	/**
 	 * @param raceId
 	 */
-	private Race(int raceId)
-	{
+	private Race(int raceId) {
 		this.raceId = raceId;
 	}
 
 	/**
 	 * @return the raceId
 	 */
-	public int getRaceId()
-	{
+	public int getRaceId() {
 		return raceId;
 	}
 }

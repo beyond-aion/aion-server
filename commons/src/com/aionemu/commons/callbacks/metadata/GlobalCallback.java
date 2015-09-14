@@ -1,8 +1,12 @@
 package com.aionemu.commons.callbacks.metadata;
 
-import com.aionemu.commons.callbacks.Callback;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.lang.annotation.*;
+import com.aionemu.commons.callbacks.Callback;
 
 /**
  * Annotation that is used to mark enhanceable methods or classes.<br>
@@ -16,10 +20,10 @@ import java.lang.annotation.*;
 @SuppressWarnings("rawtypes")
 public @interface GlobalCallback {
 
-    /**
-     * Returns callback class that will be used as listener
-     *
-     * @return callback class that will be used as listener
-     */
-    Class<? extends Callback> value();
+	/**
+	 * Returns callback class that will be used as listener
+	 *
+	 * @return callback class that will be used as listener
+	 */
+	Class<? extends Callback> value();
 }

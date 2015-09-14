@@ -40,7 +40,8 @@ public enum APRewardEnum {
 	}
 
 	/**
-	 * @param playerRank current Abyss Rank
+	 * @param playerRank
+	 *          current Abyss Rank
 	 * @return AP reward percentage
 	 */
 	public static float apReward(int playerRank) {

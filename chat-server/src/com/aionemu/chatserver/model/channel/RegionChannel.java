@@ -6,8 +6,8 @@ import com.aionemu.chatserver.model.Race;
 /**
  * @author ATracer
  */
-public class RegionChannel extends RaceChannel
-{
+public class RegionChannel extends RaceChannel {
+
 	protected int mapId;
 
 	/**
@@ -15,8 +15,7 @@ public class RegionChannel extends RaceChannel
 	 * @param mapId
 	 * @param race
 	 */
-	public RegionChannel(int mapId, Race race, String identifier)
-	{
+	public RegionChannel(int mapId, Race race, String identifier) {
 		super(ChannelType.PUBLIC, race, identifier);
 		this.mapId = mapId;
 	}
@@ -24,8 +23,7 @@ public class RegionChannel extends RaceChannel
 	/**
 	 * @return the mapId
 	 */
-	public int getMapId()
-	{
+	public int getMapId() {
 		return mapId;
 	}
 }

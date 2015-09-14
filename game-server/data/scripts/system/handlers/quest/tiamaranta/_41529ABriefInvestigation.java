@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41529ABriefInvestigation extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _41529ABriefInvestigation extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205911).addOnQuestStart(questId);
 		qe.registerQuestNpc(205911).addOnTalkEvent(questId);
@@ -34,16 +33,14 @@ public class _41529ABriefInvestigation extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205911) { 
+			if (targetId == 205911) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205911) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -57,13 +54,13 @@ public class _41529ABriefInvestigation extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-				return defaultOnKillEvent(env, 701236, 0, true);
+			return defaultOnKillEvent(env, 701236, 0, true);
 		}
 		return false;
 	}

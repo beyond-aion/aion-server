@@ -7,21 +7,20 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2411EarthSpiritWaterSpirit extends QuestHandler {
 
 	private final static int questId = 2411;
-	
+
 	int rewardIndex;
-	
+
 	public _2411EarthSpiritWaterSpirit() {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204369).addOnQuestStart(questId);
 		qe.registerQuestNpc(204366).addOnTalkEvent(questId);
@@ -36,54 +35,46 @@ public class _2411EarthSpiritWaterSpirit extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204369) { 
+			if (targetId == 204369) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204369) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 204369) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 1003);
+					return sendQuestDialog(env, 1003);
+				} else if (dialog == DialogAction.SELECT_ACTION_1012) {
+					return sendQuestDialog(env, 1012);
+				} else if (dialog == DialogAction.SELECT_ACTION_1097) {
+					return sendQuestDialog(env, 1097);
+				} else if (dialog == DialogAction.SETPRO10) {
+					changeQuestStep(env, 0, 1, false);
+					qs.setStatus(QuestStatus.REWARD);
+					updateQuestStatus(env);
+					return closeDialogWindow(env);
+				} else if (dialog == DialogAction.SETPRO20) {
+					rewardIndex = 1;
+					changeQuestStep(env, 0, 2, false);
+					qs.setStatus(QuestStatus.REWARD);
+					updateQuestStatus(env);
+					return closeDialogWindow(env);
 				}
-			else if (dialog == DialogAction.SELECT_ACTION_1012) {
-				return sendQuestDialog(env, 1012);
 			}
-			else if (dialog == DialogAction.SELECT_ACTION_1097) {
-				return sendQuestDialog(env, 1097);
-			}
-			else if(dialog == DialogAction.SETPRO10) {
-				changeQuestStep(env, 0, 1, false);
-				qs.setStatus(QuestStatus.REWARD);
-				updateQuestStatus(env);
-				return closeDialogWindow(env);
-			}
-			else if(dialog == DialogAction.SETPRO20) {
-				rewardIndex = 1;
-				changeQuestStep(env, 0, 2, false);
-				qs.setStatus(QuestStatus.REWARD);
-				updateQuestStatus(env);
-				return closeDialogWindow(env);
-			}
-			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204366 && qs.getQuestVarById(0) == 1) {
 				if (dialog == DialogAction.USE_OBJECT) {
-						return sendQuestDialog(env, 1352);
-					}
+					return sendQuestDialog(env, 1352);
 				}
-			else if(targetId == 204364 && qs.getQuestVarById(0) == 2) {
+			} else if (targetId == 204364 && qs.getQuestVarById(0) == 2) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				}
 			}
 			return sendQuestEndDialog(env, rewardIndex);
 		}
-	 return false;
-	}	
+		return false;
+	}
 }

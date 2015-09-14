@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -34,9 +34,9 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 public class ObserveController {
 
 	private ReentrantLock lock = new ReentrantLock();
-	protected Collection<ActionObserver> observers = new FastList<ActionObserver>(0).shared();
-	protected FastList<ActionObserver> onceUsedObservers = new FastList<ActionObserver>(0);
-	protected Collection<AttackCalcObserver> attackCalcObservers = new FastList<AttackCalcObserver>(0).shared();
+	protected Collection<ActionObserver> observers = new FastTable<ActionObserver>().shared();
+	protected FastTable<ActionObserver> onceUsedObservers = new FastTable<ActionObserver>();
+	protected Collection<AttackCalcObserver> attackCalcObservers = new FastTable<AttackCalcObserver>().shared();
 
 	/**
 	 * Once used observer add to observerController. If observer notify will be removed.
@@ -48,8 +48,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			onceUsedObservers.add(observer);
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -76,8 +75,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			onceUsedObservers.remove(observer);
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -109,8 +107,7 @@ public class ObserveController {
 					}
 				}
 			}
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 
@@ -182,7 +179,8 @@ public class ObserveController {
 	}
 
 	/**
-	 * @param notify that creature died
+	 * @param notify
+	 *          that creature died
 	 */
 	public void notifyDeathObservers(Creature creature) {
 		notifyObservers(ObserverType.DEATH, creature);
@@ -204,7 +202,8 @@ public class ObserveController {
 
 	/**
 	 * notify that creature attacking
-	 * @param damage 
+	 * 
+	 * @param damage
 	 */
 	public void notifyAttackObservers(Creature creature) {
 		notifyObservers(ObserverType.ATTACK, creature);
@@ -230,11 +229,11 @@ public class ObserveController {
 	public void notifyStartSkillCastObservers(Skill skill) {
 		notifyObservers(ObserverType.STARTSKILLCAST, skill);
 	}
-	
+
 	public void notifyEndSkillCastObservers(Skill skill) {
 		notifyObservers(ObserverType.ENDSKILLCAST, skill);
 	}
-	
+
 	public void notifyBoostSkillCostObservers(Skill skill) {
 		notifyObservers(ObserverType.BOOSTSKILLCOST, skill);
 	}
@@ -254,37 +253,35 @@ public class ObserveController {
 	public void notifyItemUnEquip(Item item, Player owner) {
 		notifyObservers(ObserverType.UNEQUIP, item, owner);
 	}
-	
+
 	/**
 	 * notify that player used an item
 	 */
 	public void notifyItemuseObservers(Item item) {
 		notifyObservers(ObserverType.ITEMUSE, item);
 	}
-	
+
 	/**
 	 * notify that player requested dialog with npc
 	 */
 	public void notifyRequestDialogObservers(Npc npc) {
 		notifyObservers(ObserverType.NPCDIALOGREQUEST, npc);
 	}
-	
+
 	/**
-	 * 
 	 * notify that abnormalstate is setted in effectcontroller
 	 */
 	public void notifyAbnormalSettedObservers(AbnormalState state) {
 		notifyObservers(ObserverType.ABNORMALSETTED, state);
 	}
-	
+
 	/**
-	 * 
 	 * notify that abnormalstate is setted in effectcontroller
 	 */
 	public void notifySummonReleaseObservers() {
 		notifyObservers(ObserverType.SUMMONRELEASE);
 	}
-	
+
 	public void notifyHPChangeObservers(int hpValue) {
 		notifyObservers(ObserverType.HP_CHANGED, hpValue);
 	}
@@ -318,7 +315,7 @@ public class ObserveController {
 		}
 		return false;
 	}
-	
+
 	public AttackerCriticalStatus checkAttackerCriticalStatus(AttackStatus status, boolean isSkill) {
 		if (attackCalcObservers.size() > 0) {
 			for (AttackCalcObserver observer : attackCalcObservers) {
@@ -333,7 +330,7 @@ public class ObserveController {
 
 	/**
 	 * @param attackList
-	 * @param effect 
+	 * @param effect
 	 */
 	public void checkShieldStatus(List<AttackResult> attackList, Effect effect, Creature attacker) {
 		if (attackCalcObservers.size() > 0) {
@@ -370,8 +367,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			onceUsedObservers.clear();
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 		observers.clear();

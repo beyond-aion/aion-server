@@ -16,22 +16,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * 
  * @author Ritsu
  */
-public class _30407CatchingtheLight extends QuestHandler 
-{
+public class _30407CatchingtheLight extends QuestHandler {
 
 	private static final int questId = 30407;
 
-	public _30407CatchingtheLight()
-	{
+	public _30407CatchingtheLight() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(799551).addOnQuestStart(questId);
 		qe.registerQuestNpc(799551).addOnTalkEvent(questId);
 		qe.registerQuestNpc(205575).addOnTalkEvent(questId);
@@ -39,12 +35,11 @@ public class _30407CatchingtheLight extends QuestHandler
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) 
-	{
+	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
-		final Npc npc = (Npc) player.getTarget();	
+		final Npc npc = (Npc) player.getTarget();
 		if (((Npc) player.getTarget()).getNpcId() != 217262)
 			return HandlerResult.UNKNOWN;
 		if (!MathUtil.isIn3dRange(player, npc, 12.5f))
@@ -54,15 +49,12 @@ public class _30407CatchingtheLight extends QuestHandler
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.FAILED;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run()
-			{
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+			public void run() {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 
 				npc.getController().scheduleRespawn();
 				npc.getController().onDelete();
@@ -74,19 +66,15 @@ public class _30407CatchingtheLight extends QuestHandler
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat())
-		{
-			if (targetId == 799551) 
-			{
-				switch (dialog)
-				{
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (targetId == 799551) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case QUEST_ACCEPT_SIMPLE:
@@ -96,38 +84,27 @@ public class _30407CatchingtheLight extends QuestHandler
 							return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START)
-		{
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			switch (targetId)
-			{
-				case 799551: 
-				{
-					switch (dialog)
-					{
-						case QUEST_SELECT: 
-						{
-							if (var == 0) 
+			switch (targetId) {
+				case 799551: {
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 0)
 								return sendQuestDialog(env, 1011);
 						}
-						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: 
-						{
-							if (QuestService.collectItemCheck(env, true)) 
-							{
-								changeQuestStep(env, 0, 0, true);	
+						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+							if (QuestService.collectItemCheck(env, true)) {
+								changeQuestStep(env, 0, 0, true);
 								return sendQuestDialog(env, 10002);
-							}
-							else
+							} else
 								return closeDialogWindow(env);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) 
-		{
-			if (targetId == 799551) 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799551)
 				return sendQuestEndDialog(env);
 		}
 		return false;

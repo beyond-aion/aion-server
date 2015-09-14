@@ -131,8 +131,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			int skillLvlDiff = player.getSkillList().getSkillLevel(template.getHarvestSkill()) - template.getSkillLevel();
 			task = new GatheringTask(player, getOwner(), curMaterial, skillLvlDiff);
 			task.start();
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER);
 			// dummy failure value, doesn't matter
 			PacketSendUtility.sendPacket(player, new SM_GATHER_UPDATE(template, curMaterial, 0, 17, 8));
@@ -151,8 +150,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		if (!player.getSkillList().isSkillPresent(harvestSkillId)) {
 			if (harvestSkillId == 30001) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INCORRECT_SKILL);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(player,
 					SM_SYSTEM_MESSAGE.STR_GATHER_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getNameId()));
 			}
@@ -179,13 +177,11 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				}
 				return (byte) (condOk ? 1 : 2);
 
-			}
-			else if (template.getCheckType() == 2) {
+			} else if (template.getCheckType() == 2) {
 				if (player.getInventory().getItemCountByItemId(template.getRequiredItemId()) < template.getEraseValue()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_GATHERING_B_ITEM_CHECK(template.getRequiredItemNameId()));
 					return 0;
-				}
-				else
+				} else
 					return 1;
 			}
 		}
@@ -212,7 +208,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		if (++gatherCount == getOwner().getObjectTemplate().getHarvestCount()) {
 			onDespawn();
 		}
-		isOcuppied.set(false);	
+		isOcuppied.set(false);
 	}
 
 	public void rewardPlayer(Player player) {
@@ -224,12 +220,9 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				(int) RewardType.GATHERING.calcReward(player, xpReward), skillLvl)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP);
 				player.getCommonData().addExp(xpReward, RewardType.GATHERING);
-			}
-			else
-				PacketSendUtility.sendPacket(
-					player,
-					SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(
-						getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));
+			} else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(
+					getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));
 		}
 	}
 

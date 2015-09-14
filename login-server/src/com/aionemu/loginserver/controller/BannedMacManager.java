@@ -10,13 +10,12 @@ import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
 
 /**
- * 
  * @author KID
- * 
  */
 public class BannedMacManager {
+
 	private static BannedMacManager manager = new BannedMacManager();
-        
+
 	private Map<String, BannedMacEntry> bannedList = new FastMap<String, BannedMacEntry>();
 
 	public static BannedMacManager getInstance() {
@@ -30,7 +29,7 @@ public class BannedMacManager {
 	}
 
 	public void unban(String address, String details) {
-		if(bannedList.containsKey(address)) {
+		if (bannedList.containsKey(address)) {
 			bannedList.remove(address);
 			dao.remove(address);
 		}

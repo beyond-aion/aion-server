@@ -32,7 +32,7 @@ public class HomingNpcAI2 extends GeneralNpcAI2 {
 		Homing owner = (Homing) getOwner();
 		if (owner.getSkillList() != null) {
 			NpcSkillEntry skill = owner.getSkillList().getRandomSkill();
-			if(skill != null) {
+			if (skill != null) {
 				skillId = skill.getSkillId();
 				skillLevel = skill.getSkillLevel();
 				SkillEngine.getInstance().applyEffectDirectly(skillId, owner, (Creature) owner.getTarget(), 0);

@@ -42,8 +42,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -62,8 +61,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798800) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

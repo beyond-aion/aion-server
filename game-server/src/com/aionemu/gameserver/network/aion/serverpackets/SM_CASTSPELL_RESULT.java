@@ -41,9 +41,8 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 		this.dashStatus = dashStatus;
 	}
 
-	public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int dashStatus,
-		int targetType) {
-		this(skill, effects, hitTime, chainSuccess,dashStatus);
+	public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int dashStatus, int targetType) {
+		this(skill, effects, hitTime, chainSuccess, dashStatus);
 		this.targetType = targetType;
 	}
 
@@ -83,11 +82,8 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 		writeC(0); // unk
 
 		/**
-		 * 0 : no chain skill
-		 * 16 : no damage to all target like dodge, resist or effect size is 0 
-		 * 32 : regular
-		 * Seen: 0xA0 for skill 2723, 0x22 for skill 1169; 
-		 * Skill id doesn't fit to this structure: 2395
+		 * 0 : no chain skill 16 : no damage to all target like dodge, resist or effect size is 0 32 : regular Seen: 0xA0 for skill 2723, 0x22 for skill
+		 * 1169; Skill id doesn't fit to this structure: 2395
 		 */
 		if (effects.isEmpty())
 			writeC(16);
@@ -101,8 +97,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			writeD(skill.getItemObjectId());
 			writeD(skill.getItemTemplate().getTemplateId());
 			writeC(0); // unk 0
-		}
-		else {
+		} else {
 			writeC(0);
 			writeC(this.dashStatus);
 			switch (this.dashStatus) {
@@ -129,8 +124,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 				writeD(effected.getObjectId());
 				writeC(effect.getEffectResult().getId());// 0 - NORMAL, 1 - ABSORBED, 2 - CONFLICT, 3 - DODGE, 4 - RESIST
 				writeC((effect.getEffectedHp() == -1 ? effected.getLifeStats().getHpPercentage() : effect.getEffectedHp())); // target %hp
-			}
-			else { // point point skills
+			} else { // point point skills
 				writeD(0);
 				writeC(0);
 				writeC(0);
@@ -139,16 +133,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			writeC(effector.getLifeStats().getHpPercentage()); // attacker %hp
 
 			/**
-			 * Spell Status 
-			 * 1 : stumble 
-			 * 2 : knockback 
-			 * 4 : open aerial 
-			 * 8 : close aerial 
-			 * 16 : spin 
-			 * 32 : block 
-			 * 64 : parry 
-			 * 128 : dodge 
-			 * 256 : resist
+			 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
 			 */
 			writeC(effect.getSpellStatus().getId());
 			writeC(effect.getSkillMoveType().getId());
@@ -182,7 +167,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 
 			writeC(effect.getReservedsToSend().size()); // it's success effect count (MP and HP heal, for example, always atleast 1)
 			for (EffectReserved er : effect.getReservedsToSend()) {
-				writeC(er.getType().getValue());//HP - 0 , MP - 1, FP - 2, DP - 3?  
+				writeC(er.getType().getValue());// HP - 0 , MP - 1, FP - 2, DP - 3?
 				writeD(er.getValueToSend());
 
 				writeC(effect.getAttackStatus().getId());
@@ -193,17 +178,12 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 				// setting counter skill from packet to have the best synchronization of time with client
 				if (effect.getEffected() instanceof Player) {
 					if (isCounter)
-						((Player) effect.getEffected()).setLastCounterSkill(effect.getSkillMoveType() == SkillMoveType.RESIST ? AttackStatus.RESIST
-							: effect.getAttackStatus());
+						((Player) effect.getEffected()).setLastCounterSkill(effect.getSkillMoveType() == SkillMoveType.RESIST ? AttackStatus.RESIST : effect
+							.getAttackStatus());
 				}
 
 				/**
-				 * shield Type: 
-				 * 1: reflector 
-				 * 2: normal shield 
-				 * 8: protect effect (ex. skillId: 417 Bodyguard)
-				 * 16: mp shield 
-				 * TODO find out 4
+				 * shield Type: 1: reflector 2: normal shield 8: protect effect (ex. skillId: 417 Bodyguard) 16: mp shield TODO find out 4
 				 */
 				writeC(effect.getShieldDefense());
 				switch (effect.getShieldDefense()) {

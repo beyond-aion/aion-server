@@ -38,13 +38,11 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 			if (targetId == 203780) { // Cornelius
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203781: { // Sabotes
@@ -77,8 +75,7 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203780) { // Cornelius
 				return sendQuestEndDialog(env);
 			}

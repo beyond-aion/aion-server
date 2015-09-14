@@ -68,13 +68,13 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 	protected void runImpl() {
 
 		name = ChatUtil.getRealAdminName(name);
-		
+
 		String formatname = Util.convertName(name);
 
 		Player sender = getConnection().getActivePlayer();
 		Player receiver = World.getInstance().findPlayer(formatname);
-		
-		if(sender.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CHATMESSAGES) {
+
+		if (sender.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CHATMESSAGES) {
 			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(sender, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
@@ -85,23 +85,17 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 
 		if (receiver == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(formatname));
-		}
-		else if (!receiver.isWispable()) {
+		} else if (!receiver.isWispable()) {
 			PacketSendUtility.sendMessage(sender, "You can't talk with this gm.");
 			return;
-		}
-		else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER) {
+		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));
-		}
-		else if (receiver.getBlockList().contains(sender.getObjectId())) {
+		} else if (receiver.getBlockList().contains(sender.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_YOU_EXCLUDED(receiver.getName()));
-		}
-		else if ((!CustomConfig.SPEAKING_BETWEEN_FACTIONS)
-			&& (sender.getRace().getRaceId() != receiver.getRace().getRaceId())
+		} else if ((!CustomConfig.SPEAKING_BETWEEN_FACTIONS) && (sender.getRace().getRaceId() != receiver.getRace().getRaceId())
 			&& (sender.getAccessLevel() < AdminConfig.GM_LEVEL) && (receiver.getAccessLevel() < AdminConfig.GM_LEVEL)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(formatname));
-		}
-		else {
+		} else {
 			if (RestrictionsManager.canChat(sender))
 				PacketSendUtility.sendPacket(receiver, new SM_MESSAGE(sender, NameRestrictionService.filterMessage(message), ChatType.WHISPER));
 		}

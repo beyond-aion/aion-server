@@ -8,8 +8,7 @@ import com.aionemu.gameserver.configs.main.CacheConfig;
 public class CacheMapFactory {
 
 	/**
-	 * Returns new instance of either {@link WeakCacheMap} or {@link SoftCacheMap} depending on
-	 * {@link CacheConfig#SOFT_CACHE_MAP} setting.
+	 * Returns new instance of either {@link WeakCacheMap} or {@link SoftCacheMap} depending on {@link CacheConfig#SOFT_CACHE_MAP} setting.
 	 * 
 	 * @param <K>
 	 *          - Type of keys

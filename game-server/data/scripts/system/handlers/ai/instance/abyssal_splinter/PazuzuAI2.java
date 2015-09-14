@@ -36,7 +36,7 @@ public class PazuzuAI2 extends AggressiveNpcAI2 {
 		cancelTask();
 		isHome.set(true);
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -56,12 +56,12 @@ public class PazuzuAI2 extends AggressiveNpcAI2 {
 					spawn(281909, 685.588989f, 342.955994f, 465.908997f, (byte) 68);
 					spawn(281909, 651.322021f, 346.554993f, 465.563995f, (byte) 111);
 					spawn(281909, 666.7373f, 314.2235f, 465.38953f, (byte) 30);
-				
+
 					SkillEngine.getInstance().getSkill(worms, 19291, 55, getOwner());
 				}
 			}
 
-		}, 0, 70000); 
+		}, 0, 70000);
 	}
 
 	private void cancelTask() {
@@ -69,5 +69,5 @@ public class PazuzuAI2 extends AggressiveNpcAI2 {
 			task.cancel(true);
 		}
 	}
-	
+
 }

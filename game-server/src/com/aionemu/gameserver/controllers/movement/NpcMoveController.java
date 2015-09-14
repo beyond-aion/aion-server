@@ -128,8 +128,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			}
 			updateLastMove();
 			return;
-		}
-		else if (started.compareAndSet(false, true)) {
+		} else if (started.compareAndSet(false, true)) {
 			movementMask = MovementMask.NPC_STARTMOVE;
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
@@ -290,8 +289,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		final Stat2 stat = owner.getGameStats().getMovementSpeed();
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			mask = stat.getBonus() < 0 ? MovementMask.NPC_RUN_FAST : MovementMask.NPC_RUN_SLOW;
-		}
-		else if (owner.isInState(CreatureState.WALKING) || owner.isInState(CreatureState.ACTIVE)) {
+		} else if (owner.isInState(CreatureState.WALKING) || owner.isInState(CreatureState.ACTIVE)) {
 			mask = stat.getBonus() < 0 ? MovementMask.NPC_WALK_FAST : MovementMask.NPC_WALK_SLOW;
 		}
 		if (owner.isFlying())
@@ -331,8 +329,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	public void setCurrentRoute(List<RouteStep> currentRoute) {
 		if (currentRoute == null) {
 			AI2Logger.info(owner.getAi2(), String.format("MC: setCurrentRoute is setting route to null (NPC id: {})!!!", owner.getNpcId()));
-		}
-		else {
+		} else {
 			this.currentRoute = currentRoute;
 		}
 		this.currentPoint = 0;
@@ -348,8 +345,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				// TODO: fix Z
 			}
 			owner.getWalkerGroup().setStep(owner, step.getRouteStep());
-		}
-		else {
+		} else {
 			this.pointZ = step.getZ();
 		}
 		this.currentPoint = step.getRouteStep() - 1;
@@ -383,8 +379,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		}
 		if (currentPoint < (currentRoute.size() - 1)) {
 			currentPoint++;
-		}
-		else {
+		} else {
 			currentPoint = 0;
 		}
 		setRouteStep(currentRoute.get(currentPoint), currentRoute.get(oldPoint));
@@ -446,8 +441,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			targetDestY = owner.getSpawn().getY();
 			targetDestZ = owner.getSpawn().getZ();
 			result = new Point3D(targetDestX, targetDestY, targetDestZ);
-		}
-		else {
+		} else {
 			if (owner.getAi2().isLogging())
 				AI2Logger.moveinfo(owner, "recall back step: X=" + result.getX() + " Y=" + result.getY() + " Z=" + result.getZ());
 			targetDestX = result.getX();

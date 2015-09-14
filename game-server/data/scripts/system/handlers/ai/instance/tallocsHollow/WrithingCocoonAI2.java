@@ -27,7 +27,7 @@ public class WrithingCocoonAI2 extends NpcAI2 {
 						npc.getController().onDelete();
 					}
 					spawn(799500, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(390510)); //Will you accompany me? Tell me if you will.
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(390510)); // Will you accompany me? Tell me if you will.
 					break;
 				case 730233:
 					Npc npc1 = getPosition().getWorldMapInstance().getNpc(730232);
@@ -35,12 +35,11 @@ public class WrithingCocoonAI2 extends NpcAI2 {
 						npc1.getController().onDelete();
 					}
 					spawn(799501, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(390511)); //Let me know if you need my help.
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(390511)); // Let me know if you need my help.
 					break;
 			}
 			AI2Actions.deleteOwner(this);
-		}
-		else if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
+		} else if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1097));
 		}
 		return true;

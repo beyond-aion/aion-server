@@ -26,8 +26,7 @@ public class FriendPortalAI2 extends NpcAI2 {
 
 		if (allowed) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getOwner().getObjectId(), DialogPage.HOUSING_FRIENDLIST.id()));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, STR_HOUSING_TELEPORT_CANT_USE);
 		}
 	}

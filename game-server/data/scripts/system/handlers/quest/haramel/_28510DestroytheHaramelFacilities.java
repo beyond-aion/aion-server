@@ -45,28 +45,24 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 			if (targetId == 203649) { // Gulkalla
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182212021, 1);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 700953: { // Processed Odella
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var >= 3 && var < 5) {
 							return useQuestObject(env, var, var + 1, false, true); // 4,5
-						}
-						else if (var == 5) {
+						} else if (var == 5) {
 							return useQuestObject(env, 5, 5, true, true); // reward
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203649) { // Gulkalla
 				switch (dialog) {
 					case USE_OBJECT: {

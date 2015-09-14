@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41545UnwittingSubjects extends QuestHandler {
 
@@ -21,6 +19,7 @@ public class _41545UnwittingSubjects extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(10380, questId);
 		qe.registerQuestNpc(205969).addOnQuestStart(questId);
@@ -35,20 +34,17 @@ public class _41545UnwittingSubjects extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205969) { 
+			if (targetId == 205969) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212543, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205969) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -63,7 +59,7 @@ public class _41545UnwittingSubjects extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onUseSkillEvent(QuestEnv env, int skillUsedId) {
 		Player player = env.getPlayer();
@@ -73,11 +69,11 @@ public class _41545UnwittingSubjects extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (npc == null || var > 2)
 				return false;
-			if(player.getTarget() == npc && npc.getName().startsWith("gurriki")) {
+			if (player.getTarget() == npc && npc.getName().startsWith("gurriki")) {
 				if (var < 2)
 					changeQuestStep(env, var, var + 1, false);
-					else
-						changeQuestStep(env, 2, 2, true);
+				else
+					changeQuestStep(env, 2, 2, true);
 				return true;
 			}
 		}

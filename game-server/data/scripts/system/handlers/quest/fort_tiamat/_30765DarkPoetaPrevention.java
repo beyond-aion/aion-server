@@ -7,15 +7,13 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30765DarkPoetaPrevention extends QuestHandler {
 
 	private final static int questId = 30765;
-	private final static int npcs [] = {800071, 205846, 205866};
+	private final static int npcs[] = { 800071, 205846, 205866 };
 
 	public _30765DarkPoetaPrevention() {
 		super(questId);
@@ -36,19 +34,17 @@ public class _30765DarkPoetaPrevention extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 800071) { 
+			if (targetId == 800071) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 1);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205846) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205846) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1352);
@@ -59,8 +55,7 @@ public class _30765DarkPoetaPrevention extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 205866) {
+			} else if (targetId == 205866) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1693);
@@ -69,25 +64,23 @@ public class _30765DarkPoetaPrevention extends QuestHandler {
 						qs.setStepGroup(0);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
-						}
 					}
 				}
-		  }
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 800071) { 
+			}
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 800071) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	  return defaultOnKillEvent(env, 219357, 0, true);
+		return defaultOnKillEvent(env, 219357, 0, true);
 	}
 }

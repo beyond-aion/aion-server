@@ -1,16 +1,17 @@
 package com.aionemu.commons.callbacks.util;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.EnhancedObject;
 import com.aionemu.commons.utils.GenericValidator;
 import com.google.common.collect.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Class that implements helper methods for callbacks.<br>
@@ -21,93 +22,100 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @SuppressWarnings("rawtypes")
 public class ObjectCallbackHelper {
 
-    /**
-     * Logger
-     */
-    private static final Logger log = LoggerFactory.getLogger(ObjectCallbackHelper.class);
+	/**
+	 * Logger
+	 */
+	private static final Logger log = LoggerFactory.getLogger(ObjectCallbackHelper.class);
 
-    /**
-     * Private empty constructor to prevent initialization
-     */
-    private ObjectCallbackHelper() {
+	/**
+	 * Private empty constructor to prevent initialization
+	 */
+	private ObjectCallbackHelper() {
 
-    }
+	}
 
-    /**
-     * Adds callback to the list.<br>
-     * Sorting is done while adding to avoid extra calls.
-     *
-     * @param callback what to add
-     * @param object   add callback to which objec
-     */
-    @SuppressWarnings({"unchecked"})
-    public static void addCallback(Callback callback, EnhancedObject object) {
-        try {
-            object.getCallbackLock().writeLock().lock();
+	/**
+	 * Adds callback to the list.<br>
+	 * Sorting is done while adding to avoid extra calls.
+	 *
+	 * @param callback
+	 *          what to add
+	 * @param object
+	 *          add callback to which objec
+	 */
+	@SuppressWarnings({ "unchecked" })
+	public static void addCallback(Callback callback, EnhancedObject object) {
+		try {
+			object.getCallbackLock().writeLock().lock();
 
-            Map<Class<? extends Callback>, List<Callback>> cbMap = object.getCallbacks();
-            if (cbMap == null) {
-                cbMap = Maps.newHashMap();
-                object.setCallbacks(cbMap);
-            }
+			Map<Class<? extends Callback>, List<Callback>> cbMap = object.getCallbacks();
+			if (cbMap == null) {
+				cbMap = Maps.newHashMap();
+				object.setCallbacks(cbMap);
+			}
 
-            List<Callback> list = cbMap.get(callback.getBaseClass());
-            if (list == null) {
-                list = new CopyOnWriteArrayList<Callback>();
-                cbMap.put(callback.getBaseClass(), list);
-            }
+			List<Callback> list = cbMap.get(callback.getBaseClass());
+			if (list == null) {
+				list = new CopyOnWriteArrayList<Callback>();
+				cbMap.put(callback.getBaseClass(), list);
+			}
 
 			CallbacksUtil.insertCallbackToList(callback, list);
-        } finally {
-            object.getCallbackLock().writeLock().unlock();
-        }
-    }
+		} finally {
+			object.getCallbackLock().writeLock().unlock();
+		}
+	}
 
-    /**
-     * Removes callback from the list
-     *
-     * @param callback what to remove
-     * @param object   remove callback from which object
-     */
-    public static void removeCallback(Callback callback, EnhancedObject object) {
-        try {
-            object.getCallbackLock().writeLock().lock();
+	/**
+	 * Removes callback from the list
+	 *
+	 * @param callback
+	 *          what to remove
+	 * @param object
+	 *          remove callback from which object
+	 */
+	public static void removeCallback(Callback callback, EnhancedObject object) {
+		try {
+			object.getCallbackLock().writeLock().lock();
 
-            Map<Class<? extends Callback>, List<Callback>> cbMap = object.getCallbacks();
-            if (GenericValidator.isBlankOrNull(cbMap)) {
-                return;
-            }
+			Map<Class<? extends Callback>, List<Callback>> cbMap = object.getCallbacks();
+			if (GenericValidator.isBlankOrNull(cbMap)) {
+				return;
+			}
 
-            List<Callback> list = cbMap.get(callback.getBaseClass());
-            if (list == null || !list.remove(callback)) {
-                // noinspection ThrowableInstanceNeverThrown
-                log.error("Attempt to remove callback that doesn't exists", new RuntimeException());
-                return;
-            }
+			List<Callback> list = cbMap.get(callback.getBaseClass());
+			if (list == null || !list.remove(callback)) {
+				// noinspection ThrowableInstanceNeverThrown
+				log.error("Attempt to remove callback that doesn't exists", new RuntimeException());
+				return;
+			}
 
-            if (list.isEmpty()) {
-                cbMap.remove(callback.getBaseClass());
-            }
+			if (list.isEmpty()) {
+				cbMap.remove(callback.getBaseClass());
+			}
 
-            if (cbMap.isEmpty()) {
-                object.setCallbacks(null);
-            }
+			if (cbMap.isEmpty()) {
+				object.setCallbacks(null);
+			}
 
-        } finally {
-            object.getCallbackLock().writeLock().unlock();
-        }
-    }
+		} finally {
+			object.getCallbackLock().writeLock().unlock();
+		}
+	}
 
-    /**
-     * This method call callbacks before actual method invocation takes place
-     *
-     * @param obj           object that callbacks are invoked for
-     * @param callbackClass base callback class
-     * @param args          args of method
-     * @return {@link Callback#beforeCall(Object, Object[])}
-     */
-    @SuppressWarnings("unchecked")
-    public static CallbackResult<?> beforeCall(EnhancedObject obj, Class callbackClass, Object... args) {
+	/**
+	 * This method call callbacks before actual method invocation takes place
+	 *
+	 * @param obj
+	 *          object that callbacks are invoked for
+	 * @param callbackClass
+	 *          base callback class
+	 * @param args
+	 *          args of method
+	 * @return {@link Callback#beforeCall(Object, Object[])}
+	 */
+	@SuppressWarnings("unchecked")
+	public static CallbackResult<?> beforeCall(EnhancedObject obj, Class callbackClass, Object... args) {
 		Map<Class<? extends Callback>, List<Callback>> cbMap = obj.getCallbacks();
 		if (GenericValidator.isBlankOrNull(cbMap)) {
 			return CallbackResult.newContinue();
@@ -138,21 +146,24 @@ public class ObjectCallbackHelper {
 			}
 		}
 
-
 		return cr == null ? CallbackResult.newContinue() : cr;
-    }
+	}
 
-    /**
-     * This method invokes callbacks after method invocation
-     *
-     * @param obj           object that invokes this method
-     * @param callbackClass superclass of callback
-     * @param args          method args
-     * @param result        method invokation result
-     * @return {@link Callback#afterCall(Object, Object[], Object)}
-     */
-    @SuppressWarnings("unchecked")
-    public static CallbackResult<?> afterCall(EnhancedObject obj, Class callbackClass, Object[] args, Object result) {
+	/**
+	 * This method invokes callbacks after method invocation
+	 *
+	 * @param obj
+	 *          object that invokes this method
+	 * @param callbackClass
+	 *          superclass of callback
+	 * @param args
+	 *          method args
+	 * @param result
+	 *          method invokation result
+	 * @return {@link Callback#afterCall(Object, Object[], Object)}
+	 */
+	@SuppressWarnings("unchecked")
+	public static CallbackResult<?> afterCall(EnhancedObject obj, Class callbackClass, Object[] args, Object result) {
 		Map<Class<? extends Callback>, List<Callback>> cbMap = obj.getCallbacks();
 		if (GenericValidator.isBlankOrNull(cbMap)) {
 			return CallbackResult.newContinue();
@@ -184,5 +195,5 @@ public class ObjectCallbackHelper {
 		}
 
 		return cr == null ? CallbackResult.newContinue() : cr;
-    }
+	}
 }

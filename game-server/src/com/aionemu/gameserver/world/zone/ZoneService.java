@@ -83,11 +83,9 @@ public final class ZoneService implements GameEngine {
 		if (zoneClass != null) {
 			try {
 				zoneHandler = zoneClass.newInstance();
-			}
-			catch (IllegalAccessException ex) {
+			} catch (IllegalAccessException ex) {
 				log.warn("Can't instantiate zone handler " + zoneName, ex);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				log.warn("Can't instantiate zone handler " + zoneName, ex);
 			}
 		}
@@ -110,8 +108,7 @@ public final class ZoneService implements GameEngine {
 					if (zoneName == ZoneName.get("NONE"))
 						throw new RuntimeException();
 					handlers.put(zoneName, handler);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					log.warn("Missing ZoneName: " + idAnnotation.value());
 				}
 			}
@@ -136,14 +133,11 @@ public final class ZoneService implements GameEngine {
 		try {
 			scriptManager.load(ZONE_DESCRIPTOR_FILE);
 			log.info("Loaded " + handlers.size() + " zone handlers.");
-		}
-		catch (IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			log.warn("Can't initialize instance handlers.", e.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null) {
 				progressLatch.countDown();
 			}
@@ -167,8 +161,7 @@ public final class ZoneService implements GameEngine {
 		Map<ZoneName, ZoneInstance> zones = new HashMap<ZoneName, ZoneInstance>();
 		int worldSize = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getWorldSize();
 		WorldZoneTemplate zone = new WorldZoneTemplate(worldSize, mapId);
-		PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints()
-			.getTop());
+		PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
 		ZoneInstance fullMap = new ZoneInstance(mapId, new ZoneInfo(fullArea, zone));
 		fullMap.addHandler(getNewZoneHandler(zone.getName()));
 		zones.put(zone.getName(), fullMap);
@@ -199,8 +192,7 @@ public final class ZoneService implements GameEngine {
 						SiegeLocation artifact = DataManager.SIEGE_LOCATION_DATA.getArtifacts().get(artifactId);
 						if (artifact == null) {
 							log.warn("Missing siege location data for zone " + area.getZoneTemplate().getName().name());
-						}
-						else {
+						} else {
 							artifact.addZone((SiegeZoneInstance) instance);
 						}
 					}
@@ -212,8 +204,7 @@ public final class ZoneService implements GameEngine {
 					InvasionZoneInstance invasionZone = getIZI(area);
 					if (invasionZone != null) {
 						instance = invasionZone;
-					}
-					else {
+					} else {
 						instance = new ZoneInstance(mapId, area);
 					}
 			}
@@ -225,17 +216,16 @@ public final class ZoneService implements GameEngine {
 
 	private InvasionZoneInstance getIZI(ZoneInfo area) {
 		if (area.getZoneTemplate().getName().name().equals("WAILING_CLIFFS_220050000")
-				|| area.getZoneTemplate().getName().name().equals("BALTASAR_CEMETERY_220050000")
-				|| area.getZoneTemplate().getName().name().equals("THE_LEGEND_SHRINE_220050000")
-				|| area.getZoneTemplate().getName().name().equals("SUDORVILLE_220050000")
-				|| area.getZoneTemplate().getName().name().equals("BALTASAR_HILL_VILLAGE_220050000")
-				|| area.getZoneTemplate().getName().name().equals("BRUSTHONIN_MITHRIL_MINE_220050000")) {
+			|| area.getZoneTemplate().getName().name().equals("BALTASAR_CEMETERY_220050000")
+			|| area.getZoneTemplate().getName().name().equals("THE_LEGEND_SHRINE_220050000")
+			|| area.getZoneTemplate().getName().name().equals("SUDORVILLE_220050000")
+			|| area.getZoneTemplate().getName().name().equals("BALTASAR_HILL_VILLAGE_220050000")
+			|| area.getZoneTemplate().getName().name().equals("BRUSTHONIN_MITHRIL_MINE_220050000")) {
 			return validateZone(area);
-		}
-		else if (area.getZoneTemplate().getName().name().equals("JAMANOK_INN_210060000")
-				|| area.getZoneTemplate().getName().name().equals("THE_STALKING_GROUNDS_210060000")
-				|| area.getZoneTemplate().getName().name().equals("BLACK_ROCK_HOT_SPRING_210060000")
-				|| area.getZoneTemplate().getName().name().equals("FREGIONS_FLAME_210060000")) {
+		} else if (area.getZoneTemplate().getName().name().equals("JAMANOK_INN_210060000")
+			|| area.getZoneTemplate().getName().name().equals("THE_STALKING_GROUNDS_210060000")
+			|| area.getZoneTemplate().getName().name().equals("BLACK_ROCK_HOT_SPRING_210060000")
+			|| area.getZoneTemplate().getName().name().equals("FREGIONS_FLAME_210060000")) {
 			return validateZone(area);
 		}
 		return null;
@@ -275,19 +265,16 @@ public final class ZoneService implements GameEngine {
 				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
 					handler = new SiegeShield(geometry);
 					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
-				}
-				else
+				} else
 					return;
-			}
-			else {
+			} else {
 				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(materialId);
 				if (template == null)
 					return;
 				handler = new MaterialZoneHandler(geometry, template);
 			}
 			collidableHandlers.put(zoneName, handler);
-		}
-		else {
+		} else {
 			log.warn("Duplicate material mesh: " + zoneName.toString());
 		}
 
@@ -308,16 +295,14 @@ public final class ZoneService implements GameEngine {
 			// maybe add to zone data if needed search ?
 			Area zoneInfoArea = null;
 			if (zoneTemplate.getSphere() != null) {
-				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate
-					.getSphere().getZ(), zoneTemplate.getSphere().getR());
-			}
-			else if (zoneTemplate.getCylinder() != null) {
-				zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(),
-					zoneTemplate.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
-			}
-			else if (zoneTemplate.getSemisphere() != null) {
-				zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(),
-					zoneTemplate.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
+				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate.getSphere()
+					.getZ(), zoneTemplate.getSphere().getR());
+			} else if (zoneTemplate.getCylinder() != null) {
+				zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(), zoneTemplate
+					.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
+			} else if (zoneTemplate.getSemisphere() != null) {
+				zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(), zoneTemplate
+					.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
 			}
 			if (zoneInfoArea != null) {
 				zoneInfo = new ZoneInfo(zoneInfoArea, zoneTemplate);

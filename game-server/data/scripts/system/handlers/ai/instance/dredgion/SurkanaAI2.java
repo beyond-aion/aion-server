@@ -9,9 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 
 /**
- * recieve only 1 dmg with each attack(handled by super)
- * 
- * Aggro the whole room on attack
+ * recieve only 1 dmg with each attack(handled by super) Aggro the whole room on attack
  * 
  * @author Luzien
  */
@@ -21,7 +19,7 @@ public class SurkanaAI2 extends OneDmgPerHitAI2 {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		//roomaggro
+		// roomaggro
 		checkForSupport(creature);
 	}
 

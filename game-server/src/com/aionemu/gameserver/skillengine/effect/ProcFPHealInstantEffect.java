@@ -18,7 +18,7 @@ public class ProcFPHealInstantEffect extends AbstractHealEffect {
 	public void calculate(Effect effect) {
 		super.calculate(effect, HealType.FP);
 	}
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect, HealType.FP);

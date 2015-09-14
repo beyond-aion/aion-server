@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.instance.InstanceCoolTimeType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InstanceCooltime")
 public class InstanceCooltime {
+
 	@XmlElement(name = "type")
 	protected InstanceCoolTimeType coolTimeType;
 	@XmlElement(name = "typevalue")
@@ -62,7 +63,7 @@ public class InstanceCooltime {
 	public Integer getEntCoolTime() {
 		return entCoolTime;
 	}
-	
+
 	public Integer getMaxCount() {
 		return maxCount;
 	}

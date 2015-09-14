@@ -37,15 +37,16 @@ public class CM_LEGION_TABS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_LEGION) {
+
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_LEGION) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
-		if(activePlayer.getLegion() != null) {
-			
+
+		if (activePlayer.getLegion() != null) {
+
 			/**
 			 * Max page is 16 for legion history
 			 */
@@ -53,9 +54,9 @@ public class CM_LEGION_TABS extends AionClientPacket {
 				return;
 
 			switch (tab) {
-				/**
-				 * History Tab
-				 */
+			/**
+			 * History Tab
+			 */
 				case 0: // legion history
 				case 2: // legion WH history
 					Collection<LegionHistory> history = activePlayer.getLegion().getLegionHistoryByTabId(tab);
@@ -71,11 +72,10 @@ public class CM_LEGION_TABS extends AionClientPacket {
 				 * Reward Tab
 				 */
 				case 1:
-					//TODO Reward Tab Page
+					// TODO Reward Tab Page
 					break;
 			}
-		}
-		else
-			log.warn("Player "+activePlayer.getName()+" was requested null legion");
+		} else
+			log.warn("Player " + activePlayer.getName() + " was requested null legion");
 	}
 }

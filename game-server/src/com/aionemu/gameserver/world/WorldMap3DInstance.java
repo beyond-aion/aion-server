@@ -21,6 +21,7 @@ public class WorldMap3DInstance extends WorldMapInstance {
 		return regions.get(regionId);
 	}
 
+	@Override
 	protected void initMapRegions() {
 		int size = this.getParent().getWorldSize();
 		float maxZ = Math.round((float) size / regionSize) * regionSize;

@@ -44,14 +44,13 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				Integer color = null;
 				if (obj != null)
 					color = obj.getColor();
-			
-				if (color != null && color > 0 ) {
+
+				if (color != null && color > 0) {
 					writeC(1); // Is dyed (True)
 					writeC((color & 0xFF0000) >> 16);
 					writeC((color & 0xFF00) >> 8);
 					writeC((color & 0xFF));
-				}
-				else {
+				} else {
 					writeC(0); // Is dyed (False)
 					writeC(0);
 					writeC(0);
@@ -64,8 +63,7 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 					((UseableItemObject) obj).writeUsageData(getBuf());
 				}
 			}
-		}
-		else if (action == 2) { // Display default and registered decoration items
+		} else if (action == 2) { // Display default and registered decoration items
 			writeH(player.getHouseRegistry().getDefaultParts().size() + player.getHouseRegistry().getCustomParts().size());
 			for (HouseDecoration deco : player.getHouseRegistry().getDefaultParts()) {
 				writeD(0);

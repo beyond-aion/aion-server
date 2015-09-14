@@ -1,8 +1,8 @@
 package com.aionemu.commons.configs;
 
-import com.aionemu.commons.configuration.Property;
-
 import java.io.File;
+
+import com.aionemu.commons.configuration.Property;
 
 /**
  * This class holds all configuration of database
@@ -49,5 +49,5 @@ public class DatabaseConfig {
 	 */
 	@Property(key = "database.scriptcontext.descriptor", defaultValue = "./data/scripts/system/database/database.xml")
 	public static File DATABASE_SCRIPTCONTEXT_DESCRIPTOR;
-	
+
 }

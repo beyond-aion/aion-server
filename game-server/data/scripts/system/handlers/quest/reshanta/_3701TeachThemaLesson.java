@@ -37,8 +37,7 @@ public class _3701TeachThemaLesson extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 278517) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
@@ -49,8 +48,7 @@ public class _3701TeachThemaLesson extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278517) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278517) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

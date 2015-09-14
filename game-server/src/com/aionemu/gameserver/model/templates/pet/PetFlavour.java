@@ -42,9 +42,10 @@ public class PetFlavour {
 		}
 		return this.food;
 	}
-	
+
 	/**
 	 * Returns a food group for the itemId. Null if doesn't match
+	 * 
 	 * @param itemId
 	 */
 	public FoodType getFoodType(int itemId) {
@@ -54,11 +55,12 @@ public class PetFlavour {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns reward details if earned, otherwise null. Updates progress automatically
+	 * 
 	 * @param progress
-	 * @param itemId 
+	 * @param itemId
 	 * @return
 	 */
 	public PetFeedResult processFeedResult(PetFeedProgress progress, FoodType foodType, int itemLevel, int playerLevel) {
@@ -71,21 +73,21 @@ public class PetFlavour {
 		}
 		if (rewardGroup == null)
 			return null;
-		
+
 		int maxFeedCount = 1;
 		if (rewardGroup.isLoved()) {
 			progress.setIsLovedFeeded();
 		} else {
 			maxFeedCount = fullCount;
 		}
-		
+
 		PetFeedCalculator.updatePetFeedProgress(progress, itemLevel, maxFeedCount);
 		if (progress.getHungryLevel() != PetHungryLevel.FULL)
 			return null;
-		
+
 		return PetFeedCalculator.getReward(maxFeedCount, rewardGroup, progress, playerLevel);
 	}
-	
+
 	public boolean isLovedFood(FoodType foodType, int itemId) {
 		PetRewards rewardGroup = null;
 		for (PetRewards rewards : getFood()) {
@@ -98,7 +100,7 @@ public class PetFlavour {
 			return false;
 		return rewardGroup.isLoved();
 	}
-	
+
 	public int getId() {
 		return id;
 	}

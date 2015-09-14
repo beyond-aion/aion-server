@@ -27,7 +27,7 @@ public class HousePart {
 
 	@XmlAttribute(required = true)
 	protected PartType type;
-	
+
 	@XmlAttribute(required = true)
 	protected ItemQuality quality;
 
@@ -50,7 +50,7 @@ public class HousePart {
 		buildingTags.clear();
 		buildingTags = null;
 	}
-	
+
 	public PartType getType() {
 		return type;
 	}
@@ -66,7 +66,7 @@ public class HousePart {
 	public int getId() {
 		return id;
 	}
-	
+
 	public Set<String> getTags() {
 		return tagsSet;
 	}

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.services.reward.RewardService;
  * @author ginho1
  */
 public class CM_PLAYER_LISTENER extends AionClientPacket {
+
 	/*
 	 * This CM is send every five minutes by client.
 	 */
@@ -31,7 +32,7 @@ public class CM_PLAYER_LISTENER extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if(CustomConfig.ENABLE_REWARD_SERVICE)
+		if (CustomConfig.ENABLE_REWARD_SERVICE)
 			RewardService.getInstance().verify(player);
 	}
 }

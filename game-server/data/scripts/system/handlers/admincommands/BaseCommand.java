@@ -31,11 +31,9 @@ public class BaseCommand extends AdminCommand {
 
 		if (COMMAND_LIST.equalsIgnoreCase(params[0])) {
 			handleList(player, params);
-		}
-		else if (COMMAND_CAPTURE.equals(params[0])) {
+		} else if (COMMAND_CAPTURE.equals(params[0])) {
 			capture(player, params);
-		}
-		else if (COMMAND_ASSAULT.equals(params[0])) {
+		} else if (COMMAND_ASSAULT.equals(params[0])) {
 			assault(player, params);
 		}
 	}
@@ -74,9 +72,8 @@ public class BaseCommand extends AdminCommand {
 		Race race = null;
 		try {
 			race = Race.valueOf(params[2].toUpperCase());
-		}
-		catch (IllegalArgumentException e) {
-			//ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
 		}
 
 		// check if can capture
@@ -108,9 +105,8 @@ public class BaseCommand extends AdminCommand {
 		Race race = null;
 		try {
 			race = Race.valueOf(params[2].toUpperCase());
-		}
-		catch (IllegalArgumentException e) {
-			//ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
 		}
 
 		// check if race is valid
@@ -125,18 +121,15 @@ public class BaseCommand extends AdminCommand {
 		if (base != null) {
 			if (base.isAttacked()) {
 				PacketSendUtility.sendMessage(player, "Assault already started!");
-			}
-			else {
+			} else {
 				base.spawnAttackers(race);
 			}
 		}
 	}
 
 	protected void showHelp(Player player) {
-		PacketSendUtility.sendMessage(player, "AdminCommand //base Help\n"
-				+ "//base list\n"
-				+ "//base capture <Id> <Race (ELYOS,ASMODIANS,NPC)>\n"
-				+ "//base assault <Id> <delaySec>");
+		PacketSendUtility.sendMessage(player, "AdminCommand //base Help\n" + "//base list\n" + "//base capture <Id> <Race (ELYOS,ASMODIANS,NPC)>\n"
+			+ "//base assault <Id> <delaySec>");
 	}
 
 }

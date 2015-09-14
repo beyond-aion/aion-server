@@ -19,7 +19,7 @@ public class ResurrectEffect extends EffectTemplate {
 
 	@XmlAttribute(name = "skill_id")
 	protected int skillId;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		if (effect.getEffected() instanceof Player) {

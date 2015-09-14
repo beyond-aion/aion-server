@@ -9,8 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Go to Draupnir Cave in Asmodae and get Blue Balaur Blood (186000035) (2) and Balaur Rainbow Scales (186000036) (5)
- * for Brosia (204601). Go to Brosia to choose your reward.
+ * Go to Draupnir Cave in Asmodae and get Blue Balaur Blood (186000035) (2) and Balaur Rainbow Scales (186000036) (5) for Brosia (204601). Go to
+ * Brosia to choose your reward.
  * 
  * @author Balthazar
  * @reworked vlog
@@ -47,8 +47,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204601) { // Brosia
 				switch (env.getDialog()) {
@@ -61,8 +60,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 							removeQuestItem(env, 186000035, 2);
 							removeQuestItem(env, 186000036, 5);
 							return sendQuestDialog(env, 1352); // choose your reward
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1097);
 					}
 					case FINISH_DIALOG:
@@ -81,8 +79,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204601) { // Brosia
 				return sendQuestEndDialog(env, rewardGroup);
 			}

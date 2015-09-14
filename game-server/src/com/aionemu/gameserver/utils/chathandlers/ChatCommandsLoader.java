@@ -23,15 +23,13 @@ public class ChatCommandsLoader implements ClassListener {
 		for (Class<?> c : classes) {
 			if (!isValidClass(c))
 				continue;
-			Class<?> tmp = (Class<?>) c;
+			Class<?> tmp = c;
 			if (tmp != null)
 				try {
 					processor.registerCommand((ChatCommand) tmp.newInstance());
-				}
-				catch (InstantiationException e) {
+				} catch (InstantiationException e) {
 					e.printStackTrace();
-				}
-				catch (IllegalAccessException e) {
+				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
 		}

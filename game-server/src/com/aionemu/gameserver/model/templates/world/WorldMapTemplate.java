@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
-import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.WorldDropType;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
 /**
@@ -124,6 +124,7 @@ public class WorldMapTemplate {
 	public WorldDropType getWorldDropType() {
 		return dropWorldType;
 	}
+
 	/* Default zone attributes for the map */
 
 	public boolean isFly() {

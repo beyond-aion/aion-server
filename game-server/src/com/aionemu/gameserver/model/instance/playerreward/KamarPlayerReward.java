@@ -5,31 +5,31 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceBuff;
 
 /**
- *
  * @author xTz
  */
 public class KamarPlayerReward extends InstancePlayerReward {
 
 	private Race race;
 	private int kamarBox, bloodMarks, baseReward, bonusReward, gloryPoints;
-        private InstanceBuff boostMorale;
+	private InstanceBuff boostMorale;
+
 	public KamarPlayerReward(Integer object, Race race) {
 		super(object);
 		this.race = race;
-                boostMorale = new InstanceBuff(10);
+		boostMorale = new InstanceBuff(10);
 	}
 
 	public Race getRace() {
 		return race;
 	}
 
-        public void setGloryPoints(int gloryPoints) {
-            this.gloryPoints = gloryPoints;
-        }
+	public void setGloryPoints(int gloryPoints) {
+		this.gloryPoints = gloryPoints;
+	}
 
-        public int getGloryPoints() {
-            return gloryPoints;
-        }
+	public int getGloryPoints() {
+		return gloryPoints;
+	}
 
 	public void setKamarBox(int kamarBox) {
 		this.kamarBox = kamarBox;
@@ -62,23 +62,24 @@ public class KamarPlayerReward extends InstancePlayerReward {
 	public int getBaseReward() {
 		return baseReward;
 	}
-        public boolean hasBoostMorale() {
-               return boostMorale.hasInstanceBuff();
-        }
 
-        public void applyBoostMoraleEffect(Player player) {
-               boostMorale.applyEffect(player, 30000);
-        }
+	public boolean hasBoostMorale() {
+		return boostMorale.hasInstanceBuff();
+	}
 
-        public void endBoostMoraleEffect(Player player) {
-               boostMorale.endEffect(player);
-        }
+	public void applyBoostMoraleEffect(Player player) {
+		boostMorale.applyEffect(player, 30000);
+	}
 
-        public int getRemaningTime() {
-               int time = boostMorale.getRemaningTime();
-               if (time >= 0 && time < 20) {
-                      return 20 - time;
-               }
-               return 0;
-        }
+	public void endBoostMoraleEffect(Player player) {
+		boostMorale.endEffect(player);
+	}
+
+	public int getRemaningTime() {
+		int time = boostMorale.getRemaningTime();
+		if (time >= 0 && time < 20) {
+			return 20 - time;
+		}
+		return 0;
+	}
 }

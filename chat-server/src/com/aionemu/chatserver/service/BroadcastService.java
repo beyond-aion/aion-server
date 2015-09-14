@@ -11,39 +11,34 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public class BroadcastService
-{
+public class BroadcastService {
+
 	private static BroadcastService instance = new BroadcastService();
 	private Map<Integer, ChatClient> clients = new HashMap<Integer, ChatClient>();
-	
-	public static BroadcastService getInstance()
-	{
+
+	public static BroadcastService getInstance() {
 		return instance;
 	}
 
 	/**
 	 * @param client
 	 */
-	public void addClient(ChatClient client)
-	{
+	public void addClient(ChatClient client) {
 		clients.put(client.getClientId(), client);
 	}
 
 	/**
 	 * @param client
 	 */
-	public void removeClient(ChatClient client)
-	{
+	public void removeClient(ChatClient client) {
 		clients.remove(client.getClientId());
 	}
 
 	/**
 	 * @param message
 	 */
-	public void broadcastMessage(Message message)
-	{
-		for (ChatClient client : clients.values())
-		{
+	public void broadcastMessage(Message message) {
+		for (ChatClient client : clients.values()) {
 			if (client.isInChannel(message.getChannel()))
 				sendMessage(client, message);
 		}
@@ -53,8 +48,7 @@ public class BroadcastService
 	 * @param chatClient
 	 * @param message
 	 */
-	public void sendMessage(ChatClient chatClient, Message message)
-	{
+	public void sendMessage(ChatClient chatClient, Message message) {
 		ClientChannelHandler cch = chatClient.getChannelHandler();
 		cch.sendPacket(new SM_CHANNEL_MESSAGE(message));
 	}

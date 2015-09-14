@@ -36,8 +36,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204108) { // Lanse
 				switch (dialog) {
@@ -50,8 +49,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 204058) { // Sif
+			} else if (targetId == 204058) { // Sif
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -64,8 +62,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204058) { // Sif
 				return sendQuestEndDialog(env);
 			}
@@ -79,7 +76,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return HandlerResult.fromBoolean(QuestService.startQuest(env));
-    }
+		}
 		return HandlerResult.FAILED;
 	}
 }

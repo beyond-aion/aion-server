@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.templates.TitleTemplate;
 /**
  * @author Mr. Poke
  */
-public class Title implements IExpirable{
+public class Title implements IExpirable {
 
 	private TitleTemplate template;
 	private int id;
@@ -44,7 +44,7 @@ public class Title implements IExpirable{
 	public int getRemainingTime() {
 		if (dispearTime == 0)
 			return 0;
-		return dispearTime - (int)(System.currentTimeMillis() / 1000);
+		return dispearTime - (int) (System.currentTimeMillis() / 1000);
 	}
 
 	@Override

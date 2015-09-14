@@ -46,8 +46,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
-		}
-		else if (targetId == 700513) {
+		} else if (targetId == 700513) {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				switch (env.getDialog()) {
 					case USE_OBJECT: {
@@ -71,8 +70,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798072) {
@@ -89,8 +87,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204571) {
+		} else if (targetId == 204571) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -104,8 +101,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798013) {
+		} else if (targetId == 798013) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -116,7 +112,8 @@ public class _1559WhatsintheBox extends QuestHandler {
 							qs.setQuestVarById(0, var + 1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							if (giveQuestItem(env, 182201824, 1));
+							if (giveQuestItem(env, 182201824, 1))
+								;
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
@@ -126,13 +123,13 @@ public class _1559WhatsintheBox extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

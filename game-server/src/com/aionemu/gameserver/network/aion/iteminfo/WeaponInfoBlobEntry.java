@@ -32,8 +32,7 @@ public class WeaponInfoBlobEntry extends ItemBlobEntry {
 			// must occupy two slots
 			writeQ(buf, slots[0].getSlotIdMask() | slots[1].getSlotIdMask());
 			writeQ(buf, 0);
-		}
-		else {
+		} else {
 			// primary and secondary slots
 			writeQ(buf, slots[0].getSlotIdMask());
 			writeQ(buf, slots[1].getSlotIdMask());

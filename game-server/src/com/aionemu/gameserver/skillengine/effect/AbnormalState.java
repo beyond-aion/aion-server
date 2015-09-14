@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-
 /**
  * @author ATracer
  */
@@ -42,16 +41,11 @@ public enum AbnormalState {
 	/**
 	 * Compound abnormal states
 	 */
-	CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id
-		| OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id),
-	STANCE_OFF(SPIN.id | STUN.id | STUMBLE.id | STAGGER.id
-		| OPENAERIAL.id | PARALYZE.id | FEAR.id | DEFORM.id | PULLED.id | SANCTUARY.id),
-	CANT_MOVE_STATE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id
-		| OPENAERIAL.id | PARALYZE.id | PULLED.id | SANCTUARY.id),
-	DISMOUT_RIDE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id
-		| OPENAERIAL.id | PARALYZE.id | PULLED.id | FEAR.id | SNARE.id),
-	AUTOMATICALLY_STANDUP(PARALYZE.id | SLEEP.id | FEAR.id | STUN.id | STAGGER.id
-		| OPENAERIAL.id | SPIN.id | DEFORM.id | PULLED.id);
+	CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id),
+	STANCE_OFF(SPIN.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | DEFORM.id | PULLED.id | SANCTUARY.id),
+	CANT_MOVE_STATE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | SANCTUARY.id),
+	DISMOUT_RIDE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | FEAR.id | SNARE.id),
+	AUTOMATICALLY_STANDUP(PARALYZE.id | SLEEP.id | FEAR.id | STUN.id | STAGGER.id | OPENAERIAL.id | SPIN.id | DEFORM.id | PULLED.id);
 
 	private int id;
 
@@ -70,7 +64,7 @@ public enum AbnormalState {
 		}
 		return null;
 	}
-	
+
 	public static AbnormalState getStateById(int id) {
 		for (AbnormalState as : values()) {
 			if (as.getId() == id)

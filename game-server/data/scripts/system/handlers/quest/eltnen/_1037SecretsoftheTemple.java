@@ -62,18 +62,16 @@ public class _1037SecretsoftheTemple extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 2) {
+							} else if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 						}
 						case SELECT_ACTION_1694: {
 							if (var == 2 && QuestService.collectItemCheck(env, true)) {
-                                                            changeQuestStep(env, 2, 3, false);
-                                                            giveQuestItem(env, 182201027, 1);
+								changeQuestStep(env, 2, 3, false);
+								giveQuestItem(env, 182201027, 1);
 								return sendQuestDialog(env, 1694);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 1779);
 							}
 						}
@@ -123,13 +121,11 @@ public class _1037SecretsoftheTemple extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203965) { // Castor
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

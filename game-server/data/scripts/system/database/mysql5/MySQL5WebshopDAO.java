@@ -15,17 +15,15 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.WebshopDAO;
 import com.aionemu.gameserver.services.webshop.WebshopRequest;
 
-
 /**
  * @author ViAl
- *
  */
 public class MySQL5WebshopDAO extends WebshopDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(WebshopDAO.class);
 	private static final String SELECT_QUERY = "SELECT * FROM ingameshop_requests WHERE delivered = 0";
 	private static final String UPDATE_QUERY = "UPDATE ingameshop_requests SET delivered = 1, delivered_at = ? WHERE request_id = ?";
-	
+
 	@Override
 	public boolean supports(String databaseName, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
@@ -35,8 +33,10 @@ public class MySQL5WebshopDAO extends WebshopDAO {
 	public List<WebshopRequest> loadRequests() {
 		List<WebshopRequest> requests = new ArrayList<WebshopRequest>();
 		try {
-			try(Connection conn = DatabaseFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(SELECT_QUERY); ResultSet rset = stmt.executeQuery()) {
-				while(rset.next()) {
+			try (Connection conn = DatabaseFactory.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(SELECT_QUERY);
+				ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
 					int requestId = rset.getInt("request_id");
 					String buyerName = rset.getString("buyer_character_name");
 					String receiverName = rset.getString("receiver_character_name");
@@ -46,8 +46,7 @@ public class MySQL5WebshopDAO extends WebshopDAO {
 					requests.add(request);
 				}
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			log.error("Error while loading webshop requests.", e);
 		}
 		return requests;
@@ -56,14 +55,13 @@ public class MySQL5WebshopDAO extends WebshopDAO {
 	@Override
 	public void updateRequest(int requestId) {
 		try {
-			try(Connection conn = DatabaseFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
+			try (Connection conn = DatabaseFactory.getConnection(); PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
 				stmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
 				stmt.setInt(2, requestId);
 				stmt.executeUpdate();
 			}
-		}
-		catch(Exception e) {
-			log.error("Error while changing webshop request status, request id "+requestId, e);
+		} catch (Exception e) {
+			log.error("Error while changing webshop request status, request id " + requestId, e);
 		}
 	}
 

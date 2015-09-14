@@ -39,14 +39,12 @@ public class ActionItemUseOperation extends QuestOperation {
 			return;
 		final int defaultUseTime = 3000;
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), npc.getObjectId(), defaultUseTime, 1));
-		PacketSendUtility.broadcastPacket(player,
-			new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, npc.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, npc.getObjectId()), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), npc.getObjectId(), defaultUseTime,
-					0));
+				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), npc.getObjectId(), defaultUseTime, 0));
 				finish.operate(env);
 			}
 		}, defaultUseTime);

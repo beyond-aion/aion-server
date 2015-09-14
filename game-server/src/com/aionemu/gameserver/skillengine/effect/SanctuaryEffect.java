@@ -2,23 +2,23 @@ package com.aionemu.gameserver.skillengine.effect;
 
 import com.aionemu.gameserver.skillengine.model.Effect;
 
-
 /**
  * @author kecimis
  * @modified Cheatkiller, add AbnormalState
  */
 public class SanctuaryEffect extends EffectTemplate {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.skillengine.effect.EffectTemplate#applyEffect(com.aionemu.gameserver.skillengine.model.Effect)
 	 */
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
 		if (effect.getEffector().equals(effect.getEffected()))
-		effect.getEffected().setTarget(effect.getEffected());
+			effect.getEffected().setTarget(effect.getEffected());
 	}
-	
+
 	@Override
 	public void startEffect(Effect effect) {
 		effect.setAbnormal(AbnormalState.SANCTUARY.getId());

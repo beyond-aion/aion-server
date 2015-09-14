@@ -1,6 +1,5 @@
 package ai.instance.elementisForest;
 
-
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -24,20 +23,20 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class TrappedTermaAI2 extends NpcAI2 {
 
 	private boolean isMove;
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (!isMove) {
 			isMove = true;
-	  moveToDead();
+			moveToDead();
 		}
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		Npc freeTerma = (Npc)spawn(205495, 455.94f, 537.06f, 132.6f,(byte) 0);
+		Npc freeTerma = (Npc) spawn(205495, 455.94f, 537.06f, 132.6f, (byte) 0);
 		spawn(701009, 451.706f, 534.313f, 131.979f, (byte) 0);
 		NpcShoutsService.getInstance().sendMsg(freeTerma, 1500444, freeTerma.getObjectId(), 0, 3000);
 	}
@@ -50,7 +49,7 @@ public class TrappedTermaAI2 extends NpcAI2 {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		dead();
 	}
-	
+
 	private void dead() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -61,12 +60,12 @@ public class TrappedTermaAI2 extends NpcAI2 {
 
 		}, 16000);
 	}
-	
+
 	@Override
 	public boolean canThink() {
 		return false;
 	}
-	
+
 	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return 1;
@@ -85,5 +84,5 @@ public class TrappedTermaAI2 extends NpcAI2 {
 				return null;
 		}
 	}
-	
+
 }

@@ -18,8 +18,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20024BattlesAtVorgaltem extends QuestHandler {
 
 	private final static int questId = 20024;
-	private final static int[] mobs = { 216104, 216101, 216109, 216112, 216107, 216033, 216034, 216448, 216450, 216451,
-		216108, 216449, 700811 };
+	private final static int[] mobs = { 216104, 216101, 216109, 216112, 216107, 216033, 216034, 216448, 216450, 216451, 216108, 216449, 700811 };
 
 	public _20024BattlesAtVorgaltem() {
 		super(questId);
@@ -70,8 +69,7 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -89,17 +87,13 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
-							}
-							else if (var == 9) {
+							} else if (var == 9) {
 								return sendQuestDialog(env, 4080);
-							}
-							else if (var == 11) {
+							} else if (var == 11) {
 								return sendQuestDialog(env, 1608);
 							}
 						}
@@ -153,13 +147,11 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799226) { // Valetta
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -177,11 +169,11 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 				int[] balaurs = { 216448, 216450, 216451, 216108, 216449, 216107, 216112, 216109, 216104, 216101 };
 
 				if (defaultOnKillEvent(env, nadukas, 0, 5, 1) || defaultOnKillEvent(env, balaurs, 0, 10, 2)) {
-				   if (qs.getQuestVarById(1) == 5 && qs.getQuestVarById(2) == 10) {
-					  qs.setQuestVar(3);
-					  updateQuestStatus(env);
-				   }
-				   return true;
+					if (qs.getQuestVarById(1) == 5 && qs.getQuestVarById(2) == 10) {
+						qs.setQuestVar(3);
+						updateQuestStatus(env);
+					}
+					return true;
 				}
 			}
 		}

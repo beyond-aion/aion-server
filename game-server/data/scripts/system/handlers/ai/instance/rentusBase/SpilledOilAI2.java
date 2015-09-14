@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("spilled_oil")
@@ -32,8 +31,7 @@ public class SpilledOilAI2 extends GeneralNpcAI2 {
 					if (count < 7) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19658, 60, getOwner()).useNoAnimationSkill();
 						startEventTask();
-					}
-					else {
+					} else {
 						delete();
 					}
 				}

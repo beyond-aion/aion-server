@@ -59,8 +59,7 @@ public class _20026WaytoInggison extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 799365) {
+			} else if (targetId == 799365) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -69,8 +68,7 @@ public class _20026WaytoInggison extends QuestHandler {
 						return defaultCloseDialog(env, 1, 1, true, true); // reward
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799365) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);

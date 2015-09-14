@@ -24,11 +24,11 @@ public class PlayerGroupUpdateEvent extends AlwaysTrueTeamEvent implements Predi
 		this.groupEvent = groupEvent;
 		this.slot = slot;
 	}
-	
+
 	public PlayerGroupUpdateEvent(PlayerGroup group, Player player, GroupEvent groupEvent) {
 		this(group, player, groupEvent, 0);
 	}
-	
+
 	@Override
 	public void handleEvent() {
 		group.applyOnMembers(this);

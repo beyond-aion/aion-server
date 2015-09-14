@@ -7,7 +7,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.google.common.base.Predicate;
 
 /**
- *
  * @author Tibald
  */
 public class LeagueShowBrandEvent implements Predicate<LeagueMember>, TeamEvent {

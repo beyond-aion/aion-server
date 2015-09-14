@@ -12,7 +12,7 @@ public class MoveableObject extends HouseObject<HousingMoveableItem> {
 	public MoveableObject(House owner, int objId, int templateId) {
 		super(owner, objId, templateId);
 	}
-	
+
 	@Override
 	public void onUse(Player player) {
 

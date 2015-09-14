@@ -75,8 +75,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	}
 
 	/**
-	 * Add connection to pendingClose list, so this connection will be closed by this <code>Dispatcher</code> as soon as
-	 * possible.
+	 * Add connection to pendingClose list, so this connection will be closed by this <code>Dispatcher</code> as soon as possible.
 	 * 
 	 * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
 	 */

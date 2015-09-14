@@ -6,14 +6,12 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.services.NpcShoutsService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("tiamateye")
 public class TiamatEyeAI2 extends NpcAI2 {
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -21,20 +19,20 @@ public class TiamatEyeAI2 extends NpcAI2 {
 		switch (owner) {
 			case 283913:
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500679, getOwner().getObjectId(), 0, 2000);
-			break;
+				break;
 			case 283914:
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500680, getOwner().getObjectId(), 0, 2000);
-			break;
+				break;
 			case 283915:
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500681, getOwner().getObjectId(), 0, 2000);
-			break;
+				break;
 			case 283916:
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500682, getOwner().getObjectId(), 0, 2000);
-			break;
+				break;
 		}
 		despawn();
 	}
-	
+
 	private void despawn() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 

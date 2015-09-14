@@ -18,7 +18,6 @@ public class SubEffect {
 	private int chance = 100;
 	@XmlAttribute(name = "addeffect")
 	private boolean addEffect = false;
-	
 
 	/**
 	 * @return the skillId
@@ -26,7 +25,7 @@ public class SubEffect {
 	public int getSkillId() {
 		return skillId;
 	}
-	
+
 	/**
 	 * @return the chance
 	 */
@@ -34,12 +33,11 @@ public class SubEffect {
 		return chance;
 	}
 
-	
 	/**
 	 * @return the addEffect
 	 */
 	public boolean isAddEffect() {
 		return addEffect;
 	}
-	
+
 }

@@ -80,15 +80,14 @@ public class CM_BAN extends GsClientPacket {
 			// 1000 is 'infinity' value
 			Timestamp newTime = null;
 			if (time >= 0)
-				newTime = new Timestamp(time == 0 ? 1000 : System.currentTimeMillis() + ((long)time * 60000));
+				newTime = new Timestamp(time == 0 ? 1000 : System.currentTimeMillis() + ((long) time * 60000));
 
 			if (account != null) {
 				AccountTime accountTime = account.getAccountTime();
 				accountTime.setPenaltyEnd(newTime);
 				account.setAccountTime(accountTime);
 				result = true;
-			}
-			else {
+			} else {
 				AccountTime accountTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(accountId);
 				accountTime.setPenaltyEnd(newTime);
 				result = DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(accountId, accountTime);

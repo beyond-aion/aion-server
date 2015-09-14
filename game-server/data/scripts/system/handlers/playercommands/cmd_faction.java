@@ -42,8 +42,7 @@ public class cmd_faction extends PlayerCommand {
 		if (player.getWorldId() == 510010000 || player.getWorldId() == 520010000) {
 			PacketSendUtility.sendMessage(player, "You can't talk in Prison.");
 			return;
-		}
-		else if (player.isGagged()) {
+		} else if (player.isGagged()) {
 			PacketSendUtility.sendMessage(player, "You are gaged, you can't talk.");
 			return;
 		}
@@ -69,22 +68,18 @@ public class cmd_faction extends PlayerCommand {
 
 			for (Player listener : World.getInstance().getAllPlayers()) {
 				if (listener.getAccessLevel() >= 1) {
-					PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(),
-							(player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + player.getName(), message, channel));
-				}
-				else if (listener.getRace() == player.getRace()) {
-					PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(),
-							player.getName(), message, channel));
+					PacketSendUtility.sendPacket(listener,
+						new SM_MESSAGE(player.getObjectId(), (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + player.getName(), message, channel));
+				} else if (listener.getRace() == player.getRace()) {
+					PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(), player.getName(), message, channel));
 				}
 			}
-		}
-		else {
+		} else {
 			message = player.getName() + ": " + message;
 			for (Player a : World.getInstance().getAllPlayers()) {
 				if (a.getAccessLevel() >= 1) {
 					PacketSendUtility.sendMessage(a, (player.getRace() == Race.ASMODIANS ? "[A] " : "[E] ") + message);
-				}
-				else if (a.getRace() == player.getRace()) {
+				} else if (a.getRace() == player.getRace()) {
 					PacketSendUtility.sendMessage(a, message);
 				}
 			}

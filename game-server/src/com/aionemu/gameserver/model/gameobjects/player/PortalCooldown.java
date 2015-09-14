@@ -14,15 +14,15 @@ public class PortalCooldown {
 		this.reuseTime = reuseTime;
 		this.enterCount = enterCount;
 	}
-	
+
 	public void increaseEnterCount() {
 		this.enterCount++;
 	}
-	
+
 	public void decreaseEnterCount() {
 		this.enterCount--;
 	}
-	
+
 	public int getWorldId() {
 		return worldId;
 	}
@@ -30,7 +30,7 @@ public class PortalCooldown {
 	public long getReuseTime() {
 		return reuseTime;
 	}
-	
+
 	public int getEnterCount() {
 		return enterCount;
 	}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -39,7 +38,7 @@ public class SM_LEGION_EDIT extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeC(type);
 		switch (type) {
-			/** Change Legion Level **/
+		/** Change Legion Level **/
 			case 0x00:
 				writeC(legion.getLegionLevel());
 				break;

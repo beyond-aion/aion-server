@@ -44,8 +44,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 					loaded.add(loc.getLocationId());
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("Error loading Siege informaiton from database: " + e.getMessage(), e);
 			success = false;
 		}
@@ -72,12 +71,10 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 			stmt.setInt(3, siegeLocation.getOccupiedCount());
 			stmt.setInt(4, siegeLocation.getLocationId());
 			stmt.execute();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error update Siege Location: " + siegeLocation.getLocationId() + " to race: " + siegeLocation.getRace().toString(), e);
 			return false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt, con);
 		}
 		return true;
@@ -98,12 +95,10 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 			stmt.setInt(3, siegeLocation.getLegionId());
 			stmt.setInt(4, siegeLocation.getOccupiedCount());
 			stmt.execute();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error insert Siege Location: " + siegeLocation.getLocationId(), e);
 			return false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt, con);
 
 		}

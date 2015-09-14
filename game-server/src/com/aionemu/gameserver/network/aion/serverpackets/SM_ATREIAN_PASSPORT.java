@@ -28,7 +28,7 @@ public class SM_ATREIAN_PASSPORT extends AionServerPacket {
 		writeH(month);
 		writeH(0);// unk //can be variable
 		writeH(passports.getAllPassports().size());
-		
+
 		for (Passport pp : passports.getAllPassports()) {
 			writeD(pp.getId());
 			writeD(stamps);

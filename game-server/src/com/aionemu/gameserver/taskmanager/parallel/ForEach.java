@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.taskmanager.parallel;
 
 import java.util.Collection;
+import java.util.concurrent.CountedCompleter;
+import java.util.concurrent.ForkJoinTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Predicate;
-import java.util.concurrent.CountedCompleter;
-import java.util.concurrent.ForkJoinTask;
 
 /**
  * @author Rolandas <br>
@@ -20,8 +20,8 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	private static final long serialVersionUID = 7902148320917998146L;
 
 	/**
-	 * Calls predicate for each element in the collection asynchronously. Utilizes Fork/Join framework to speed up
-	 * processing, by using a divide/conquer algorithm
+	 * Calls predicate for each element in the collection asynchronously. Utilizes Fork/Join framework to speed up processing, by using a divide/conquer
+	 * algorithm
 	 * 
 	 * @param list
 	 *          - element list to loop
@@ -75,8 +75,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		if (h > l) {
 			try {
 				operation.apply(list[l]);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				// we want to complete without an exception re-thrown
 				// otherwise, should call completeExceptionally(ex);
 				onExceptionalCompletion(ex, this);

@@ -20,9 +20,9 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423).
- * Protect Kargate from the Balaur: <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (280818), Crusader
- * (211624), Chandala Scaleguard (213578), Chandala Fangblade (213579). Speak to Kargate. Report back to Aegir.
+ * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423). Protect Kargate from the Balaur:
+ * <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (280818), Crusader (211624), Chandala Scaleguard (213578), Chandala Fangblade
+ * (213579). Speak to Kargate. Report back to Aegir.
  * 
  * @author Ritsu
  */
@@ -75,8 +75,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204301: { // Aegir
 					switch (env.getDialog()) {
@@ -119,15 +118,11 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							if (!areSpawned) {
 								List<Npc> mobs = new ArrayList<Npc>();
 								// Crusader (2)
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
+								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
+								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 								// Draconute Scout (2)
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
-								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-									256.9302f, 226.6418f, (byte) 93));
+								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
+								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 
 								for (Npc mob : mobs) {
 									mob.setTarget(player);
@@ -182,24 +177,19 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							qs.setQuestVarById(1, var1 + 1); // 1: 1, 2, 3
 							return true;
 					}
-				}
-				else if (var1 == 3) {
+				} else if (var1 == 3) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
 							List<Npc> mobs = new ArrayList<Npc>();
 							qs.setQuestVarById(1, 4); // 1: 4
 							// Draconute Scout (2)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Chandala Scaleguard (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 
 							for (Npc mob : mobs) {
 								mob.getAggroList().addHate(player, 1);
@@ -207,8 +197,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 >= 0 && var2 < 3) {
+				} else if (var1 == 4 && var2 >= 0 && var2 < 3) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
@@ -216,8 +205,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							qs.setQuestVarById(2, var2 + 1); // 2: 1, 2, 3
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 == 3) {
+				} else if (var1 == 4 && var2 == 3) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
@@ -225,17 +213,13 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							List<Npc> mobs = new ArrayList<Npc>();
 							qs.setQuestVarById(2, 4); // 2: 4
 							// Draconute Scout (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Chandala Scaleguard (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Chandala Fangblade (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 
 							for (Npc mob : mobs) {
 								mob.getAggroList().addHate(player, 1);
@@ -243,8 +227,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 >= 0 && var3 < 3) {
+				} else if (var1 == 4 && var2 == 4 && var3 >= 0 && var3 < 3) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
@@ -253,8 +236,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							qs.setQuestVarById(3, var3 + 1); // 3: 1, 2, 3
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 3) {
+				} else if (var1 == 4 && var2 == 4 && var3 == 3) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
@@ -263,19 +245,14 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							List<Npc> mobs = new ArrayList<Npc>();
 							qs.setQuestVarById(3, 4); // 3: 4
 							// Draconute Scout (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Crusader (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Chandala Scaleguard (2)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 							// Chandala Fangblade (1)
-							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-								226.6418f, (byte) 93));
+							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 
 							for (Npc mob : mobs) {
 								mob.getAggroList().addHate(player, 1);
@@ -283,8 +260,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 >= 0 && var4 < 4) {
+				} else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 >= 0 && var4 < 4) {
 					switch (targetId) {
 						case 211624:
 						case 280818:
@@ -293,8 +269,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							qs.setQuestVarById(4, var4 + 1); // 4: 1, 2, 3, 4
 							return true;
 					}
-				}
-				else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 == 4) {
+				} else if (var1 == 4 && var2 == 4 && var3 == 4 && var4 == 4) {
 					switch (targetId) {
 						case 211624:
 						case 280818:

@@ -29,7 +29,7 @@ public class PetDopingData {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetDopingEntry dope : list)
 			dopingsById.put(dope.getId(), dope);
-		
+
 		list.clear();
 		list = null;
 	}

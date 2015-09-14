@@ -73,7 +73,7 @@ public class GeoWorldLoader {
 				for (int c = 0; c < modelCount; c++) {
 					MeshEx m = new MeshEx();
 
-					int vectorCount = ((int) geo.getShort()) * 3;
+					int vectorCount = (geo.getShort()) * 3;
 					ByteBuffer floatBuffer = MappedByteBuffer.allocateDirect(vectorCount * 4);
 					FloatBuffer vertices = floatBuffer.asFloatBuffer();
 					for (int x = 0; x < vectorCount; x++) {

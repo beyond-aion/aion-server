@@ -52,8 +52,7 @@ public class _89999ItemGiving extends QuestHandler {
 				if (inventory.getItemCountByItemId(itemId) > 0) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetId, 1097, 0));
 					return true;
-				}
-				else {
+				} else {
 					if (giveQuestItem(env, itemId, 1))
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetId, 1012, 0));
 					return true;

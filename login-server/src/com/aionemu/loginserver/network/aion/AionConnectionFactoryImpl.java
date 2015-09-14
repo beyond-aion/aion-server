@@ -30,10 +30,10 @@ public class AionConnectionFactoryImpl implements ConnectionFactory {
 	 */
 	@Override
 	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
-		if(Config.ENABLE_FLOOD_PROTECTION)
+		if (Config.ENABLE_FLOOD_PROTECTION)
 			if (FloodProtector.getInstance().tooFast(socket.socket().getInetAddress().getHostAddress()))
 				return null;
-		
+
 		return new LoginConnection(socket, dispatcher);
 	}
 }

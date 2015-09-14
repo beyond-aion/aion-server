@@ -54,8 +54,7 @@ public class Equip extends AdminCommand {
 					player = (Player) target;
 				else
 					player = admin;
-			}
-			else
+			} else
 				i++;
 			if ("socket".startsWith(params[i])) {
 				int manastone = 167000551;
@@ -63,8 +62,7 @@ public class Equip extends AdminCommand {
 				try {
 					manastone = params[i + 1] == null ? manastone : Integer.parseInt(params[i + 1]);
 					quant = params[i + 2] == null ? quant : Integer.parseInt(params[i + 2]);
-				}
-				catch (Exception ex2) {
+				} catch (Exception ex2) {
 					showHelpSocket(admin);
 					return;
 				}
@@ -75,8 +73,7 @@ public class Equip extends AdminCommand {
 				int enchant = 0;
 				try {
 					enchant = params[i + 1] == null ? enchant : Integer.parseInt(params[i + 1]);
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					showHelpEnchant(admin);
 					return;
 				}
@@ -87,8 +84,7 @@ public class Equip extends AdminCommand {
 				int tampering = 0;
 				try {
 					tampering = params[i + 1] == null ? tampering : Integer.parseInt(params[i + 1]);
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					showHelpEnchant(admin);
 					return;
 				}
@@ -99,8 +95,7 @@ public class Equip extends AdminCommand {
 				int godstone = 100;
 				try {
 					godstone = params[i + 1] == null ? godstone : Integer.parseInt(params[i + 1]);
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					showHelpGodstone(admin);
 					return;
 				}
@@ -113,8 +108,7 @@ public class Equip extends AdminCommand {
 
 	private void socket(Player admin, Player player, int manastone, int quant) {
 		if (manastone != 0 && (manastone < 167000000 || manastone > 168000000)) {
-			PacketSendUtility.sendMessage(admin, "You are suposed to give the item id for a"
-				+ " Manastone or 0 to remove all manastones.");
+			PacketSendUtility.sendMessage(admin, "You are suposed to give the item id for a" + " Manastone or 0 to remove all manastones.");
 			return;
 		}
 		for (Item targetItem : player.getEquipment().getEquippedItemsWithoutStigma()) {
@@ -122,8 +116,7 @@ public class Equip extends AdminCommand {
 				if (manastone == 0) {
 					ItemEquipmentListener.removeStoneStats(targetItem.getItemStones(), player.getGameStats());
 					ItemSocketService.removeAllManastone(player, targetItem);
-				}
-				else {
+				} else {
 					int counter = quant <= 0 ? getMaxSlots(targetItem) : quant;
 					while (targetItem.getItemStones().size() < getMaxSlots(targetItem) && counter >= 0) {
 						ManaStone manaStone = ItemSocketService.addManaStone(targetItem, manastone);
@@ -142,19 +135,15 @@ public class Equip extends AdminCommand {
 			if (player == admin)
 				PacketSendUtility.sendMessage(player, "All Manastones removed from all equipped Items");
 			else {
-				PacketSendUtility.sendMessage(admin,
-					"All Manastones removed from all equipped Items by the Player " + player.getName());
-				PacketSendUtility.sendMessage(player, "Admin " + admin.getName()
-					+ " removed all manastones from all your equipped Items");
+				PacketSendUtility.sendMessage(admin, "All Manastones removed from all equipped Items by the Player " + player.getName());
+				PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " removed all manastones from all your equipped Items");
 			}
-		}
-		else {
+		} else {
 			if (player == admin)
-				PacketSendUtility.sendMessage(player, quant + "x [item: " + manastone
-					+ "] were added to free slots on all equipped items");
+				PacketSendUtility.sendMessage(player, quant + "x [item: " + manastone + "] were added to free slots on all equipped items");
 			else {
-				PacketSendUtility.sendMessage(admin, quant + "x [item: " + manastone
-					+ "] were added to free slots on all equipped items by the Player " + player.getName());
+				PacketSendUtility.sendMessage(admin, quant + "x [item: " + manastone + "] were added to free slots on all equipped items by the Player "
+					+ player.getName());
 				PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " added " + quant + "x [item: " + manastone
 					+ "] to free slots on all your equipped items");
 			}
@@ -175,8 +164,8 @@ public class Equip extends AdminCommand {
 			ItemPacketService.updateItemAfterInfoChange(player, targetItem);
 			targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
 			if (player == admin)
-				PacketSendUtility.sendMessage(player, "[Item: " + godstone
-					+ "] socketed to your equipped MainHandWeapon [Item: " + targetItem.getItemId() + "]");
+				PacketSendUtility.sendMessage(player, "[Item: " + godstone + "] socketed to your equipped MainHandWeapon [Item: " + targetItem.getItemId()
+					+ "]");
 			else {
 				PacketSendUtility.sendMessage(admin, "[Item: " + godstone + "] socketed to the Player " + player.getName()
 					+ "equipped MainHandWeapon [Item: " + targetItem.getItemId() + "]");
@@ -184,8 +173,7 @@ public class Equip extends AdminCommand {
 					+ "]  to you equipped MainHandWeapon [Item: " + targetItem.getItemId() + "]");
 			}
 			targetItem.getGodStone().onEquip(player);
-		}
-		else if (targetItem.getGodStone() != null) {
+		} else if (targetItem.getGodStone() != null) {
 			targetItem.getGodStone().onUnEquip(player);
 			try {
 				if (godstone <= 100)
@@ -199,21 +187,19 @@ public class Equip extends AdminCommand {
 				probabilityLeft.setAccessible(true);
 				probability.setInt(targetItem.getGodStone(), godstone);
 				probabilityLeft.setInt(targetItem.getGodStone(), godstone);
-			}
-			catch (Exception ex2) {
+			} catch (Exception ex2) {
 				PacketSendUtility.sendMessage(admin, "Occurs an error.");
 				return;
 			}
 			targetItem.getGodStone().onEquip(player);
 			if (player == admin)
-				PacketSendUtility.sendMessage(player, "Your godstone on your MainHandWeapon will now activate around "
-					+ (godstone/10) + " percent of the time.");
-			else {
-				PacketSendUtility.sendMessage(admin, "Player " + player.getName()
-					+ " godstone on MainHandWeapon will now activate around " + godstone + " percent of the time.");
-				PacketSendUtility.sendMessage(player, "Admin " + admin.getName()
-					+ " blessed your godstone on your MainHandWeapon to now activate around " + godstone
+				PacketSendUtility.sendMessage(player, "Your godstone on your MainHandWeapon will now activate around " + (godstone / 10)
 					+ " percent of the time.");
+			else {
+				PacketSendUtility.sendMessage(admin, "Player " + player.getName() + " godstone on MainHandWeapon will now activate around " + godstone
+					+ " percent of the time.");
+				PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " blessed your godstone on your MainHandWeapon to now activate around "
+					+ godstone + " percent of the time.");
 			}
 		}
 	}
@@ -238,14 +224,12 @@ public class Equip extends AdminCommand {
 		if (player == admin)
 			PacketSendUtility.sendMessage(player, "All equipped items were enchanted to level " + enchant);
 		else {
-			PacketSendUtility.sendMessage(admin, "All equipped items by the Player " + player.getName()
-				+ " were enchanted to " + enchant);
-			PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " enchanted all your equipped items to level "
-				+ enchant);
+			PacketSendUtility.sendMessage(admin, "All equipped items by the Player " + player.getName() + " were enchanted to " + enchant);
+			PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " enchanted all your equipped items to level " + enchant);
 		}
 
 	}
-	
+
 	private void tamper(Player admin, Player player, int tampering) {
 		for (Item targetItem : player.getEquipment().getEquippedItemsWithoutStigma()) {
 			if (isTampering(targetItem)) {
@@ -266,10 +250,8 @@ public class Equip extends AdminCommand {
 		if (player == admin)
 			PacketSendUtility.sendMessage(player, "All equipped items were tampering to level " + tampering);
 		else {
-			PacketSendUtility.sendMessage(admin, "All equipped items by the Player " + player.getName()
-				+ " were tampering to " + tampering);
-			PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " tampering all your equipped items to level "
-				+ tampering);
+			PacketSendUtility.sendMessage(admin, "All equipped items by the Player " + player.getName() + " were tampering to " + tampering);
+			PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " tampering all your equipped items to level " + tampering);
 		}
 
 	}
@@ -299,7 +281,7 @@ public class Equip extends AdminCommand {
 		}
 		return false;
 	}
-	
+
 	public static boolean isTampering(Item item) {
 		if (item.getItemTemplate().getItemGroup() == ItemGroup.EARRINGS)
 			return true;
@@ -364,27 +346,23 @@ public class Equip extends AdminCommand {
 
 	private void showHelpEnchant(Player admin) {
 		PacketSendUtility.sendMessage(admin, "Syntax:  //equip [playerName] enchant [EnchantLevel = 0]\n"
-			+ "  This command Enchants all items equipped up to 255.\n"
-			+ "  Notice: You can ommit parameters between [], especially playerName.\n"
+			+ "  This command Enchants all items equipped up to 255.\n" + "  Notice: You can ommit parameters between [], especially playerName.\n"
 			+ "  Target: Named player, then targeted player, only then self.\n" + "  Default Value: EnchantLevel is 0.");
 	}
 
 	private void showHelpSocket(Player admin) {
-		PacketSendUtility.sendMessage(admin,
-			"Syntax:  //equip [playerName] socket [ManastoneID = 167000551] [Quantity = 0]\n"
-				+ "  This command Sockets all free slots on equipped items, with the given manastone id.\n"
-				+ "  Use ManastoneID = 0 to remove all Manastones. Quantity = 0 means to fill all free slots.\n"
-				+ "  Notice: You can ommit parameters between [], especially playerName.\n"
-				+ "  Target: Named player, then targeted player, only then self.\n"
-				+ "  Default Value: ManastoneID is 167000551, Quantity is 0 meaning fill all slots.");
+		PacketSendUtility.sendMessage(admin, "Syntax:  //equip [playerName] socket [ManastoneID = 167000551] [Quantity = 0]\n"
+			+ "  This command Sockets all free slots on equipped items, with the given manastone id.\n"
+			+ "  Use ManastoneID = 0 to remove all Manastones. Quantity = 0 means to fill all free slots.\n"
+			+ "  Notice: You can ommit parameters between [], especially playerName.\n" + "  Target: Named player, then targeted player, only then self.\n"
+			+ "  Default Value: ManastoneID is 167000551, Quantity is 0 meaning fill all slots.");
 	}
 
 	private void showHelpGodstone(Player admin) {
 		PacketSendUtility.sendMessage(admin, "Syntax:  //equip [playerName] godstone [rate = 100|GodStoneID]\n"
 			+ "  This command changes the godstone activation rate to the given number(0-100).\n"
 			+ "  Give a GodStone ItemID and it will be socketed on you Main Hand Weapon.\n"
-			+ "  Notice: You can ommit parameters between [], especially playerName.\n"
-			+ "  Target: Named player, then targeted player, only then self.\n"
+			+ "  Notice: You can ommit parameters between [], especially playerName.\n" + "  Target: Named player, then targeted player, only then self.\n"
 			+ "  Default Value: Rate is 100 witch is the default action .");
 	}
 

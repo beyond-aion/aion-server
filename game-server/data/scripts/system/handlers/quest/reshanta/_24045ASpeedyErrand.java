@@ -65,8 +65,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278034) {
@@ -82,8 +81,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 279004) {
+		} else if (targetId == 279004) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -99,8 +97,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 279024) {
+		} else if (targetId == 279024) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -126,8 +123,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 279006) {
+		} else if (targetId == 279006) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)

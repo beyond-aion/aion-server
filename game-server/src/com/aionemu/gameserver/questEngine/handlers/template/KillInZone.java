@@ -69,7 +69,7 @@ public class KillInZone extends QuestHandler {
 			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
 		}
 		qe.registerOnKillInZone(zone, questId);
-		
+
 		if (startDistanceNpc != 0)
 			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
 	}
@@ -94,20 +94,19 @@ public class KillInZone extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
 				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean onKillInZoneEvent(QuestEnv env) {
 		return defaultOnKillInZoneEvent(env, 0, killAmount, true); // reward
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();

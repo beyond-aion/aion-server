@@ -44,7 +44,7 @@ public class _21278TestSubjectOne extends QuestHandler {
 				}
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
 
@@ -60,8 +60,7 @@ public class _21278TestSubjectOne extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799208) {
 				switch (dialog) {
 					case USE_OBJECT: {

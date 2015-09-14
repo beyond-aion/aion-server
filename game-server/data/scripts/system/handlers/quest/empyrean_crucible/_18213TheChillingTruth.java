@@ -9,15 +9,13 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _18213TheChillingTruth extends QuestHandler {
 
 	private final static int questId = 18213;
-	
+
 	public _18213TheChillingTruth() {
 		super(questId);
 	}
@@ -30,7 +28,7 @@ public class _18213TheChillingTruth extends QuestHandler {
 		qe.registerQuestNpc(205316).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798604).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -42,14 +40,12 @@ public class _18213TheChillingTruth extends QuestHandler {
 			if (targetId == 205985) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					giveQuestItem(env, 182212219, 1);
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 205316) {
 				switch (dialog) {
@@ -65,14 +61,12 @@ public class _18213TheChillingTruth extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 798604) {
+			} else if (targetId == 798604) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						if(var == 1){
-						return sendQuestDialog(env, 1693);
-						}
-						else if(var == 3){
+						if (var == 1) {
+							return sendQuestDialog(env, 1693);
+						} else if (var == 3) {
 							return sendQuestDialog(env, 2375);
 						}
 					}
@@ -85,28 +79,26 @@ public class _18213TheChillingTruth extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798604) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 798604) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 			removeQuestItem(env, 182212220, 1);
-				changeQuestStep(env, 2, 3, false);
-				return HandlerResult.SUCCESS;
+			changeQuestStep(env, 2, 3, false);
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}

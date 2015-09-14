@@ -1,24 +1,30 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.scripting.ScriptCompiler;
 import com.aionemu.commons.scripting.ScriptContext;
 import com.aionemu.commons.scripting.ScriptContextFactory;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
 import com.google.common.collect.Lists;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.*;
 
 /**
- * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may
- * be extended to support programatic manipulation of contexts, but for now it's not needed. <br />
+ * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may be extended to support
+ * programatic manipulation of contexts, but for now it's not needed. <br />
  * Example:
  * 
  * <pre>
@@ -27,6 +33,7 @@ import java.util.*;
  *      ...
  *      sm.shutdown();
  * </pre>
+ * 
  * <br>
  * 
  * @author SoulKeeper, Aquanox
@@ -86,23 +93,24 @@ public class ScriptManager {
 	 * Convenient method that is used to load all script files and libraries from specific directory.<br>
 	 * Descriptor is not required.<br>
 	 * <br>
-	 * <b>If you wish complex context hierarchy - you will have to use context descriptors</b>
-	 * <br>
+	 * <b>If you wish complex context hierarchy - you will have to use context descriptors</b> <br>
 	 * <br>
 	 * .java files are treated as sources.<br>
 	 * .jar files are treated as libraries.<br>
 	 * Both .java and .jar files will be loaded recursively
 	 *
 	 * @see #DEFAULT_COMPILER_CLASS
-	 * @param directory - directory with .java and .jar files
-	 * @throws RuntimeException if failed to load script context
+	 * @param directory
+	 *          - directory with .java and .jar files
+	 * @throws RuntimeException
+	 *           if failed to load script context
 	 */
 	public synchronized void loadDirectory(File directory) throws RuntimeException {
-		Collection<File> libraries = FileUtils.listFiles(directory, new String[]{"jar"}, true);
+		Collection<File> libraries = FileUtils.listFiles(directory, new String[] { "jar" }, true);
 		List<File> list = Lists.newArrayList(libraries);
-		try{
+		try {
 			loadDirectory(directory, list, DEFAULT_COMPILER_CLASS.getName());
-		} catch (Exception e){
+		} catch (Exception e) {
 			throw new RuntimeException("Failed to load script context from directory " + directory.getAbsolutePath(), e);
 		}
 	}
@@ -110,24 +118,28 @@ public class ScriptManager {
 	/**
 	 * Load scripts directly from<br>
 	 * <br>
-	 * <b>If you wish complex context hierarchy - you will have to use context descriptors</b>
+	 * <b>If you wish complex context hierarchy - you will have to use context descriptors</b> <br>
 	 * <br>
-	 * <br>
-	 * @param directory - directory with source files
-	 * @param libraries - collection with libraries to load
-	 * @param compilerClassName -
-	 * @throws Exception if failed to load script context
+	 * 
+	 * @param directory
+	 *          - directory with source files
+	 * @param libraries
+	 *          - collection with libraries to load
+	 * @param compilerClassName
+	 *          -
+	 * @throws Exception
+	 *           if failed to load script context
 	 */
-	public synchronized void loadDirectory(File directory, List<File> libraries, String compilerClassName) throws Exception{
+	public synchronized void loadDirectory(File directory, List<File> libraries, String compilerClassName) throws Exception {
 
-		if(!directory.isDirectory()){
+		if (!directory.isDirectory()) {
 			throw new IllegalArgumentException("File should be directory");
 		}
 
 		ScriptInfo si = new ScriptInfo();
 		si.setRoot(directory);
 		si.setCompilerClass(compilerClassName);
-		si.setScriptInfos(Collections.<ScriptInfo>emptyList());
+		si.setScriptInfos(Collections.<ScriptInfo> emptyList());
 		si.setLibraries(libraries);
 
 		ScriptContext sc = createContext(si, null);

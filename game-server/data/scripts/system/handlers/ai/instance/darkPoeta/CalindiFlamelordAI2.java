@@ -44,7 +44,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				if (percent == 60) {
 					EmoteManager.emoteStopAttacking(getOwner());
 					SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
@@ -55,8 +55,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 							sp(281267);
 						}
 					}, 3000);
-				}
-				else {
+				} else {
 					EmoteManager.emoteStopAttacking(getOwner());
 					SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -79,8 +78,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 			spawn(npcId, 1188.3695f, 1257.1322f, 139.66028f, (byte) 80);
 			spawn(npcId, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
 			spawn(npcId, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
-		}
-		else {
+		} else {
 			float direction = Rnd.get(0, 199) / 100f;
 			int distance = Rnd.get(0, 2);
 			float x1 = (float) (Math.cos(Math.PI * direction) * distance);
@@ -116,7 +114,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{60, 30});
+		Collections.addAll(percents, new Integer[] { 60, 30 });
 	}
 
 	@Override

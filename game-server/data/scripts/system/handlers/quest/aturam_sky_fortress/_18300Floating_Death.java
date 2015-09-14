@@ -42,8 +42,7 @@ public class _18300Floating_Death extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (targetId == 799531) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -55,8 +54,7 @@ public class _18300Floating_Death extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			}
-		}
-		else if ((qs.getStatus() == QuestStatus.REWARD)) {
+		} else if ((qs.getStatus() == QuestStatus.REWARD)) {
 			if (targetId == 799530) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -70,7 +68,7 @@ public class _18300Floating_Death extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("ATURAM_SKY_FORTRESS_1_300240000")) {

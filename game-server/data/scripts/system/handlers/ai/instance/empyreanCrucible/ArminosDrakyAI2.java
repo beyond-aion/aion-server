@@ -13,14 +13,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("arminos_draky")
 public class ArminosDrakyAI2 extends GeneralNpcAI2 {
 
-private String walkerId = "300300001";
-private boolean isStart = true;
+	private String walkerId = "300300001";
+	private boolean isStart = true;
 
 	@Override
 	protected void handleSpawned() {
@@ -35,17 +34,16 @@ private boolean isStart = true;
 	protected void handleMoveArrived() {
 		int point = getOwner().getMoveController().getCurrentPoint();
 		super.handleMoveArrived();
-		if (point == 15) { //circle twice
+		if (point == 15) { // circle twice
 			if (!isStart) {
 				getSpawnTemplate().setWalkerId(null);
 				WalkManager.stopWalking(this);
 				AI2Actions.deleteOwner(this);
-			}
-			else
+			} else
 				isStart = false;
 		}
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {
@@ -57,7 +55,7 @@ private boolean isStart = true;
 				return AIAnswers.NEGATIVE;
 		}
 	}
-	
+
 	@Override
 	public boolean canThink() {
 		return false;

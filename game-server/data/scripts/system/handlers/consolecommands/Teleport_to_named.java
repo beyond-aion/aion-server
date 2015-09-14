@@ -3,6 +3,8 @@ package consolecommands;
 import java.io.File;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -10,13 +12,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
  * @author ginho1
@@ -45,15 +45,14 @@ public class Teleport_to_named extends ConsoleCommand {
 
 			NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-			if(npcTemplate != null){
+			if (npcTemplate != null) {
 
 				System.out.println(npcTemplate.getName());
 				npcId = npcTemplate.getTemplateId();
 			}
 
-		}
-		catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!" );
+		} catch (Exception e) {
+			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!");
 			System.out.println(e);
 		}
 
@@ -71,6 +70,7 @@ public class Teleport_to_named extends ConsoleCommand {
 	@XmlRootElement(name = "ae_static_data")
 	@XmlAccessorType(XmlAccessType.NONE)
 	private static class StaticData {
+
 		@XmlElement(name = "npcs")
 		public NpcData npcData;
 	}
@@ -109,7 +109,7 @@ public class Teleport_to_named extends ConsoleCommand {
 
 	@XmlRootElement(name = "npcs")
 	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class NpcData{
+	private static class NpcData {
 
 		@XmlElement(name = "npc")
 		private List<NpcTemplate> its;
@@ -117,7 +117,7 @@ public class Teleport_to_named extends ConsoleCommand {
 		public NpcTemplate getNpcTemplate(String npc) {
 
 			for (NpcTemplate it : getData()) {
-				if(it.getName().toLowerCase().equals(npc.toLowerCase()))
+				if (it.getName().toLowerCase().equals(npc.toLowerCase()))
 					return it;
 			}
 			return null;

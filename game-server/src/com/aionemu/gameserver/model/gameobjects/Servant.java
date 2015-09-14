@@ -20,8 +20,7 @@ public class Servant extends SummonedObject<Creature> {
 	 * @param objectTemplate
 	 * @param level
 	 */
-	public Servant(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate,
-		byte level) {
+	public Servant(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
 		super(objId, controller, spawnTemplate, objectTemplate, level);
 	}
 

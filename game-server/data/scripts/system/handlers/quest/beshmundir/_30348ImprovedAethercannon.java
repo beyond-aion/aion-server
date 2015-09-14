@@ -42,21 +42,18 @@ public class _30348ImprovedAethercannon extends QuestHandler {
 				if (player.getInventory().getItemCountByItemId(100100716) >= 1) { // Noble Siel's Supreme Mace
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 4762);
-					}
-					else {
+					} else {
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799336) { // Tataka
 				if (dialog == DialogAction.USE_OBJECT) {
 					if (player.getInventory().getItemCountByItemId(182213289) > 0) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182213289, 1);
 					return sendQuestEndDialog(env);
 				}

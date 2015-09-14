@@ -32,8 +32,7 @@ public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF);
 			return;
 		}
-		if(!player.getKnownList().knowns(target))
+		if (!player.getKnownList().knowns(target))
 			PacketSendUtility.sendPacket(player, new SM_CHAT_WINDOW(target, false));
 	}
 }
-	

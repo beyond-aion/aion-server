@@ -27,13 +27,14 @@ public abstract class AbstractAbsoluteStatEffect extends BufEffect {
 	 * @param effect
 	 * @return
 	 */
+	@Override
 	protected List<IStatFunction> getModifiers(Effect effect) {
 		List<IStatFunction> modifiers = new ArrayList<IStatFunction>();
 		modifiers.addAll(getModifiersSet().getModifiers());
-		
+
 		return modifiers;
 	}
-	
+
 	/**
 	 * @return the statSetId
 	 */

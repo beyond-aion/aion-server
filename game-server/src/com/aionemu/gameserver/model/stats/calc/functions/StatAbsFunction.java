@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 public class StatAbsFunction extends StatFunction {
 
 	private boolean debuff = false;
-	
+
 	public StatAbsFunction() {
 	}
 
@@ -25,14 +25,14 @@ public class StatAbsFunction extends StatFunction {
 			stat.setBonus(0);
 			stat.setBaseRate(1f);
 		}
-		//what to do with bonus?
+		// what to do with bonus?
 	}
 
 	@Override
 	public final int getPriority() {
 		if (debuff)
 			return isBonus() ? 110 : 90;
-		
+
 		return isBonus() ? 100 : 80;
 	}
 

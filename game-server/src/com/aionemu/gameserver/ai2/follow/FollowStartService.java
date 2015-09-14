@@ -7,10 +7,10 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author xTz
  */
 public class FollowStartService {
+
 	/**
 	 * Schedule new following checker task
 	 * 

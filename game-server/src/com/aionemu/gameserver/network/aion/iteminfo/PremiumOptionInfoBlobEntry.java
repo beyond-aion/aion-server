@@ -18,8 +18,7 @@ public class PremiumOptionInfoBlobEntry extends ItemBlobEntry {
 		if (ownerItem.getItemTemplate().canTune() && ownerItem.getRandomCount() == -1) {
 			writeC(buf, -1);
 			writeC(buf, 0);
-		}
-		else {
+		} else {
 			writeC(buf, ownerItem.getBonusNumber());
 			writeC(buf, ownerItem.getRandomCount());
 		}

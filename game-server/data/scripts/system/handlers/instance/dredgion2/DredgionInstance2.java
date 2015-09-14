@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
-import com.aionemu.gameserver.ai2.NpcAI2;                 
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.RateConfig;
@@ -50,6 +50,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  * @author xTz
  */
 public class DredgionInstance2 extends GeneralInstanceHandler {
+
 	protected int surkanKills;
 	private Map<Integer, StaticDoor> doors;
 	protected DredgionReward dredgionReward;
@@ -132,8 +133,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			float abyssPoint = playerReward.getPoints() * RateConfig.DREDGION_REWARD_RATE; // to do finde on what depend this modifier
 			if (player.getRace().equals(dredgionReward.getWinningRace())) {
 				abyssPoint += dredgionReward.getWinnerPoints();
-			}
-			else {
+			} else {
 				abyssPoint += dredgionReward.getLooserPoints();
 			}
 			AbyssPointsService.addAp(player, (int) abyssPoint);
@@ -144,6 +144,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
@@ -171,8 +172,8 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-			: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), false, 0, 8));
 		int points = 60;
@@ -182,12 +183,11 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 				if (getPointsByRace(lastAttacker.getRace()).compareTo(getPointsByRace(player.getRace())) < 0) {
 					points *= loosingGroupMultiplier;
-				}
-				else if (loosingGroupMultiplier == 10 || playerReward.getPoints() == 0) {
+				} else if (loosingGroupMultiplier == 10 || playerReward.getPoints() == 0) {
 					points = 0;
 				}
 
-			updateScore((Player) lastAttacker, player, points, true);
+				updateScore((Player) lastAttacker, player, points, true);
 			}
 		}
 		updateScore(player, player, -points, false);
@@ -217,7 +217,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	protected void updateScore(Player player, Creature target, int points, boolean pvpKill) {
 		if (points == 0)
 			return;
-		
+
 		// group score
 		addPointsByRace(player.getRace(), points);
 
@@ -233,17 +233,16 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 					playersToGainScore.add(member);
 				}
 			}
-		}
-		else {
+		} else {
 			playersToGainScore.add(player);
 		}
 
 		for (Player playerToGainScore : playersToGainScore) {
 			addPointToPlayer(playerToGainScore, points / playersToGainScore.size());
 			if (target instanceof Npc) {
-				PacketSendUtility.sendPacket(playerToGainScore, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(((Npc) target).getObjectTemplate().getNameId() * 2 + 1), points));
-			}
-			else if (target instanceof Player) {
+				PacketSendUtility.sendPacket(playerToGainScore, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(((Npc) target).getObjectTemplate()
+					.getNameId() * 2 + 1), points));
+			} else if (target instanceof Player) {
 				PacketSendUtility.sendPacket(playerToGainScore, new SM_SYSTEM_MESSAGE(1400237, target.getName(), points));
 			}
 		}
@@ -255,19 +254,16 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		}
 		if (pointDifference >= 3000) {
 			loosingGroupMultiplier = 10;
-		}
-		else if (pointDifference >= 1000) {
+		} else if (pointDifference >= 1000) {
 			loosingGroupMultiplier = 1.5f;
-		}
-		else {
+		} else {
 			loosingGroupMultiplier = 1;
 		}
 
 		// pvpKills for pvp and balaurKills for pve
 		if (pvpKill && points > 0) {
 			addPvPKillToPlayer(player);
-		}
-		else if (target instanceof Npc && ((Npc) target).getRace().equals(Race.DRAKAN)){
+		} else if (target instanceof Npc && ((Npc) target).getRace().equals(Race.DRAKAN)) {
 			addBalaurKillToPlayer(player);
 		}
 		sendPacket();
@@ -279,11 +275,9 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
 		if (hpGauge <= 5) {
 			updateScore(mostPlayerDamage, npc, 12, false);
-		}
-		else if (hpGauge <= 9) {
+		} else if (hpGauge <= 9) {
 			updateScore(mostPlayerDamage, npc, 32, false);
-		}
-		else {
+		} else {
 			updateScore(mostPlayerDamage, npc, 42, false);
 		}
 	}
@@ -308,16 +302,16 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	private void sendPacket() {
 		instance.doOnAllPlayers((Player player) -> {
-            PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward, getTime()));
-        });
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward,
+				getTime()));
+		});
 	}
 
 	private int getTime() {
 		long result = System.currentTimeMillis() - instanceTime;
 		if (result < 120000) {
 			return (int) (120000 - result);
-		}
-		else if (result < 2520000) {
+		} else if (result < 2520000) {
 			return (int) (2400000 - (result - 120000));
 		}
 		return 0;
@@ -346,7 +340,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
-					Npc npc = (Npc)spawn(npcId, x, y, z, h);
+					Npc npc = (Npc) spawn(npcId, x, y, z, h);
 					npc.getSpawn().setWalkerId(walkerId);
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
 				}
@@ -391,10 +385,10 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	public void onExitInstance(Player player) {
 		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
 	}
-	
+
 	@Override
 	public void onLeaveInstance(Player player) {
-		if(player.isInGroup2())
+		if (player.isInGroup2())
 			PlayerGroupService.removePlayer(player);
 	}
 }

@@ -30,6 +30,7 @@ public class RiftOpenRunnable implements Runnable {
 
 		// Scheduled rifts close
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				RiftService.getInstance().closeRifts();

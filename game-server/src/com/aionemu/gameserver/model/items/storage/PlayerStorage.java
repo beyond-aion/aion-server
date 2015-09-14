@@ -26,6 +26,7 @@ public class PlayerStorage extends Storage {
 		this.actor = actor;
 	}
 
+	@Override
 	public void onLoadHandler(Item item) {
 		if (item.isEquipped())
 			actor.getEquipment().onLoadHandler(item);
@@ -98,7 +99,7 @@ public class PlayerStorage extends Storage {
 	public Item add(Item item, ItemAddType addType) {
 		return add(item, addType, actor);
 	}
-	
+
 	@Override
 	public Item put(Item item) {
 		return put(item, actor);

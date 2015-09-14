@@ -29,9 +29,7 @@ public class SM_NEARBY_QUESTS extends AionServerPacket {
 			if (nearbyQuest.getValue() > 0) {
 				writeH(nearbyQuest.getKey());
 				writeH(0x2); // To show grey icons for future quests
-			}
-			else
-			{
+			} else {
 				// Quests are displayed on map
 				writeD(nearbyQuest.getKey());
 			}

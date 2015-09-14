@@ -47,8 +47,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;
-			}
-			else if (var == 6) {
+			} else if (var == 6) {
 				changeQuestStep(env, 6, 6, true); // reward
 				return true;
 			}
@@ -77,8 +76,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 203572) {
+			} else if (targetId == 203572) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -89,8 +87,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 				}
 			}
 
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203558) {
 				return sendQuestEndDialog(env);
 			}

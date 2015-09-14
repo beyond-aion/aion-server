@@ -41,6 +41,7 @@ public class NpcStatsTemplate extends StatsTemplate {
 	public float getGroupRunSpeedFight() {
 		return speeds == null ? 0 : speeds.getGroupRunSpeedFight();
 	}
+
 	/**
 	 * @return the pdef
 	 */
@@ -54,7 +55,7 @@ public class NpcStatsTemplate extends StatsTemplate {
 	public float getMdef() {
 		return mdef;
 	}
-	
+
 	/**
 	 * @return the mresist
 	 */
@@ -82,7 +83,7 @@ public class NpcStatsTemplate extends StatsTemplate {
 	public int getPower() {
 		return power;
 	}
-	
+
 	public void setPower(int power) {
 		this.power = power;
 	}

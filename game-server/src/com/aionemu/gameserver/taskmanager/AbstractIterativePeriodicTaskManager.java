@@ -27,8 +27,7 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 				return false;
 
 			return activeTasks.contains(task) || startList.contains(task);
-		}
-		finally {
+		} finally {
 			readUnlock();
 		}
 	}
@@ -39,8 +38,7 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 			startList.add(task);
 
 			stopList.remove(task);
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}
@@ -51,8 +49,7 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 			stopList.add(task);
 
 			startList.remove(task);
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}
@@ -66,22 +63,18 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 
 			startList.clear();
 			stopList.clear();
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 
-		for (FastSet.Record r = activeTasks.head(), end = activeTasks.tail(); (r = r.getNext()) != end;) {
-			final T task = activeTasks.valueOf(r);
+		for (T task : activeTasks) {
 			final long begin = System.nanoTime();
 
 			try {
 				callTask(task);
-			}
-			catch (RuntimeException e) {
+			} catch (RuntimeException e) {
 				log.warn("", e);
-			}
-			finally {
+			} finally {
 				RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), System.nanoTime() - begin);
 			}
 		}

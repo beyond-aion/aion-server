@@ -38,8 +38,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 			passkey = new String(readB(48), "UTF-16le");
 			if (type == 2)
 				newPasskey = new String(readB(48), "UTF-16le");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 	}
 
@@ -59,23 +58,20 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 				client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
 				break;
 			case 2:
-				boolean isSuccess = DAOManager.getDAO(PlayerPasskeyDAO.class).updatePlayerPasskey(client.getAccount().getId(),
-					passkey, newPasskey);
+				boolean isSuccess = DAOManager.getDAO(PlayerPasskeyDAO.class).updatePlayerPasskey(client.getAccount().getId(), passkey, newPasskey);
 
 				chaPasskey.setIsPass(false);
 				if (isSuccess) {
 					chaPasskey.setWrongCount(0);
 					client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
-				}
-				else {
+				} else {
 					chaPasskey.setWrongCount(chaPasskey.getWrongCount() + 1);
 					checkBlock(client.getAccount().getId(), chaPasskey.getWrongCount());
 					client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
 				}
 				break;
 			case 3:
-				boolean isPass = DAOManager.getDAO(PlayerPasskeyDAO.class).checkPlayerPasskey(client.getAccount().getId(),
-					passkey);
+				boolean isPass = DAOManager.getDAO(PlayerPasskeyDAO.class).checkPlayerPasskey(client.getAccount().getId(), passkey);
 
 				if (isPass) {
 					chaPasskey.setIsPass(true);
@@ -88,11 +84,9 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 						PlayerAccountData playerAccData = client.getAccount().getPlayerAccountData(chaPasskey.getObjectId());
 
 						PlayerService.deletePlayer(playerAccData);
-						client.sendPacket(new SM_DELETE_CHARACTER(chaPasskey.getObjectId(), playerAccData
-							.getDeletionTimeInSeconds()));
+						client.sendPacket(new SM_DELETE_CHARACTER(chaPasskey.getObjectId(), playerAccData.getDeletionTimeInSeconds()));
 					}
-				}
-				else {
+				} else {
 					chaPasskey.setIsPass(false);
 					chaPasskey.setWrongCount(chaPasskey.getWrongCount() + 1);
 					checkBlock(client.getAccount().getId(), chaPasskey.getWrongCount());

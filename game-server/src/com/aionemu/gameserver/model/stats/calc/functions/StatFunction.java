@@ -66,20 +66,10 @@ public class StatFunction implements IStatFunction {
 	public final boolean isBonus() {
 		return bonus;
 	}
+
 	/**
-	 * priorities
-	 * RATE 20
-	 * ADD  30
-	 * SUB  30
-	 * SET  40
-	 * RATE bonus 50
-	 * ADD bonus 60
-	 * SUB bonus 60
-	 * SET bonus 70
-	 * ABS 80
-	 * ABS debuff 90
-	 * ABS bonus 100
-	 * ABS debuff bonus 110
+	 * priorities RATE 20 ADD 30 SUB 30 SET 40 RATE bonus 50 ADD bonus 60 SUB bonus 60 SET bonus 70 ABS 80 ABS debuff 90 ABS bonus 100 ABS debuff bonus
+	 * 110
 	 */
 	@Override
 	public int getPriority() {
@@ -114,10 +104,12 @@ public class StatFunction implements IStatFunction {
 		return this;
 	}
 
+	@Override
 	public boolean hasConditions() {
 		return conditions != null;
 	}
 
+	@Override
 	public int getRandomNumber() {
 		return rndNumber;
 	}

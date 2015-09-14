@@ -36,8 +36,8 @@ public class CM_REVIVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		
-		if(!activePlayer.getLifeStats().isAlreadyDead())
+
+		if (!activePlayer.getLifeStats().isAlreadyDead())
 			return;
 
 		ReviveType reviveType = ReviveType.getReviveTypeById(reviveId);

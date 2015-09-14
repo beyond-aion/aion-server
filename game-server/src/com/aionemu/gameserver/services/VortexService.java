@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -23,7 +24,6 @@ import com.aionemu.gameserver.services.vortexservice.Invasion;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Source
@@ -62,8 +62,7 @@ public class VortexService {
 				}
 
 			}, CustomConfig.VORTEX_THEOBOMOS_SCHEDULE);
-		}
-		else {
+		} else {
 			vortex = Collections.emptyMap();
 		}
 	}
@@ -203,11 +202,9 @@ public class VortexService {
 	public VortexLocation getLocationByWorld(int worldId) {
 		if (worldId == 210060000) {
 			return getVortexLocation(0);
-		}
-		else if (worldId == 220050000) {
+		} else if (worldId == 220050000) {
 			return getVortexLocation(1);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

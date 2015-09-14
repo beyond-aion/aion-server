@@ -29,7 +29,7 @@ public abstract class AddPlayerToAllianceCallback implements Callback {
 	}
 
 	public abstract void onBeforePlayerAddToAlliance(PlayerAlliance alliance, Player player);
-	
+
 	public abstract void onAfterPlayerAddToAlliance(PlayerAlliance alliance, Player player);
 
 }

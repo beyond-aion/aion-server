@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class TransformModel {
 
 	private Creature owner;
-	
+
 	private int modelId;
 	private int originalModelId;
 	private int eventModelId;
@@ -24,8 +24,8 @@ public class TransformModel {
 	private boolean isActive = false;
 	private TribeClass transformTribe;
 	private TribeClass overrideTribe;
-	
-	//restrictions
+
+	// restrictions
 	protected int banUseSkills;
 	protected int banMovement;
 	protected int res1;
@@ -37,21 +37,22 @@ public class TransformModel {
 	public TransformModel(Creature creature) {
 		if (creature instanceof Player) {
 			this.originalType = TransformType.PC;
-		}
-		else {
+		} else {
 			this.originalType = TransformType.NONE;
 		}
 		this.originalModelId = creature.getObjectTemplate().getTemplateId();
 		this.transformType = TransformType.NONE;
-		
+
 		this.owner = creature;
 	}
 
 	public void apply(int modelId) {
 		this.apply(modelId, originalType, 0, 0, 0, 0, 0, 0, 0, 0);
 	}
+
 	/**
 	 * Function that activates transform
+	 * 
 	 * @param modelId
 	 * @param type
 	 * @param panelId
@@ -64,7 +65,7 @@ public class TransformModel {
 	 * @param res6
 	 */
 	public void apply(int modelId, TransformType type, int panelId, int banUseSkills, int banMovement, int res1, int res2, int res3, int res5, int res6) {
-		//reset
+		// reset
 		if (modelId == 0 || modelId == originalModelId) {
 			this.modelId = originalModelId;
 			this.transformType = originalType;
@@ -77,8 +78,8 @@ public class TransformModel {
 			this.res5 = 0;
 			this.res6 = 0;
 			this.isActive = false;
-		} 
-		//set new
+		}
+		// set new
 		else {
 			this.modelId = modelId;
 			this.transformType = type;
@@ -92,31 +93,34 @@ public class TransformModel {
 			this.res6 = res6;
 			this.isActive = true;
 		}
-		
+
 		this.updateVisually();
 	}
-	
+
 	private void updateVisually() {
 		PacketSendUtility.broadcastPacketAndReceive(owner, new SM_TRANSFORM(owner));
 	}
-	
+
 	private void updateTribeVisually() {
 		if (owner instanceof Npc) {
 			owner.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
 				@Override
-				 public void visit(Player player) {
-						PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(owner.getObjectId(), 0, owner.getType(player), 0));
-				 }
-			 });
+				public void visit(Player player) {
+					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(owner.getObjectId(), 0, owner.getType(player), 0));
+				}
+			});
 		} else if (owner instanceof Player) {
 			owner.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
 				@Override
-				 public void visit(Npc npc) {
-						PacketSendUtility.sendPacket((Player)owner, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(owner), 0));
-				 }
-			 });
+				public void visit(Npc npc) {
+					PacketSendUtility.sendPacket((Player) owner, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(owner), 0));
+				}
+			});
 		}
 	}
+
 	/**
 	 * @return the modelId
 	 */
@@ -128,17 +132,19 @@ public class TransformModel {
 		else
 			return originalModelId;
 	}
+
 	/**
-	 * use this functions for events, when you want players/npcs to have such model(skin) for the
-	 * whole duration of the event, even after getting for example Feared, or after using candys etc.
-	 * You need to set it on the start of the event and then unset with setEventModelId(0)
-	 * @param eventModelId the eventModelId to set
+	 * use this functions for events, when you want players/npcs to have such model(skin) for the whole duration of the event, even after getting for
+	 * example Feared, or after using candys etc. You need to set it on the start of the event and then unset with setEventModelId(0)
+	 * 
+	 * @param eventModelId
+	 *          the eventModelId to set
 	 */
 	public void setEventModelId(int eventModelId) {
 		this.eventModelId = eventModelId;
 	}
 
-/**
+	/**
 	 * @return the type
 	 */
 	public TransformType getType() {
@@ -170,18 +176,18 @@ public class TransformModel {
 	}
 
 	/**
-	 * @param transformTribe the transformTribe to set
+	 * @param transformTribe
+	 *          the transformTribe to set
 	 */
 	public void setTribe(TribeClass transformTribe, boolean override) {
 		if (override)
 			this.overrideTribe = transformTribe;
 		else
 			this.transformTribe = transformTribe;
-			
+
 		this.updateTribeVisually();
 	}
 
-	
 	/**
 	 * @return the banUseSkills
 	 */
@@ -191,7 +197,7 @@ public class TransformModel {
 		else
 			return 0;
 	}
-	
+
 	/**
 	 * @return the banMovement
 	 */
@@ -211,7 +217,7 @@ public class TransformModel {
 		else
 			return 0;
 	}
-	
+
 	/**
 	 * @return the res2
 	 */

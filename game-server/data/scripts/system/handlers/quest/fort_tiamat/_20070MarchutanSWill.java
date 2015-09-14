@@ -17,10 +17,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _20070MarchutanSWill extends QuestHandler {
 
@@ -32,7 +30,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 205579, 798800, 205864, 730628, 730691, 800386, 800431, 800358};
+		int[] npcs = { 205579, 798800, 205864, 730628, 730691, 800386, 800431, 800358 };
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -53,13 +51,12 @@ public class _20070MarchutanSWill extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205579) { 
+			if (targetId == 205579) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 2) {
+						} else if (var == 2) {
 							return sendQuestDialog(env, 1693);
 						}
 					}
@@ -71,8 +68,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 						return defaultCloseDialog(env, 2, 3);
 					}
 				}
-			}
-			else if (targetId == 798800) { 
+			} else if (targetId == 798800) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -82,10 +78,9 @@ public class _20070MarchutanSWill extends QuestHandler {
 					case SETPRO2: {
 						giveQuestItem(env, 182213248, 1);
 						return defaultCloseDialog(env, 1, 2);
-						}
 					}
 				}
-			else if (targetId == 205864) { 
+			} else if (targetId == 205864) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
@@ -96,8 +91,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 730628) { 
+			} else if (targetId == 730628) {
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 4) {
@@ -112,8 +106,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 730691) { 
+			} else if (targetId == 730691) {
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 5) {
@@ -127,8 +120,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 800386) { 
+			} else if (targetId == 800386) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 6) {
@@ -145,8 +137,7 @@ public class _20070MarchutanSWill extends QuestHandler {
 						return defaultCloseDialog(env, 6, 7);
 					}
 				}
-			}
-			else if (targetId == 800431) { 
+			} else if (targetId == 800431) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 7) {
@@ -154,12 +145,11 @@ public class _20070MarchutanSWill extends QuestHandler {
 						}
 					}
 					case SETPRO8: {
-						//TODO
+						// TODO
 						return defaultCloseDialog(env, 7, 8);
 					}
 				}
-			}
-			else if (targetId == 800358) { 
+			} else if (targetId == 800358) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 8) {
@@ -172,40 +162,38 @@ public class _20070MarchutanSWill extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205864) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205864) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-		  if (player.getWorldId() != 300490000) {
+			if (player.getWorldId() != 300490000) {
 				int var = qs.getQuestVarById(0);
 				if (var >= 5) {
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 20064);

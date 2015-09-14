@@ -21,7 +21,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("unfinished_pletus")
@@ -78,8 +77,7 @@ public class UnfinishedPletusAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					sendMsg(1500467);
 					SkillEngine.getInstance().getSkill(getOwner(), 19304, 60, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {

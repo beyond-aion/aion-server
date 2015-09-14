@@ -34,7 +34,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
  */
 @AIName("npc")
 public class NpcAI2 extends AITemplate {
-	
+
 	@Override
 	public Npc getOwner() {
 		return (Npc) super.getOwner();
@@ -71,7 +71,7 @@ public class NpcAI2 extends AITemplate {
 	protected AggroList getAggroList() {
 		return getOwner().getAggroList();
 	}
-	
+
 	protected NpcSkillList getSkillList() {
 		return getOwner().getSkillList();
 	}
@@ -94,7 +94,7 @@ public class NpcAI2 extends AITemplate {
 	protected int getCreatorId() {
 		return getOwner().getCreatorId();
 	}
-	
+
 	protected boolean isInRange(VisibleObject object, int range) {
 		return MathUtil.isIn3dRange(getOwner(), object, range);
 	}
@@ -191,12 +191,12 @@ public class NpcAI2 extends AITemplate {
 			return getOwner().mayShout(0);
 		return false;
 	}
-	
+
 	@Override
 	protected void handleMoveValidate() {
 		MoveEventHandler.onMoveValidate(this);
 	}
-	
+
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
 		CreatureEventHandler.onCreatureMoved(this, creature);

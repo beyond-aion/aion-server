@@ -59,8 +59,7 @@ public class MacroList {
 	 *          Macro order.
 	 * @param macroXML
 	 *          Macro Xml contents.
-	 * @return <tt>true</tt> if macro addition was successful, and it can be stored into database. Otherwise
-	 *         <tt>false</tt>.
+	 * @return <tt>true</tt> if macro addition was successful, and it can be stored into database. Otherwise <tt>false</tt>.
 	 */
 	public synchronized boolean addMacro(int macroPosition, String macroXML) {
 		if (macrosses.containsKey(macroPosition)) {
@@ -77,8 +76,7 @@ public class MacroList {
 	 * Remove macro from the list.
 	 * 
 	 * @param macroPosition
-	 * @return <tt>true</tt> if macro deletion was successful, and changes can be stored into database. Otherwise
-	 *         <tt>false</tt>.
+	 * @return <tt>true</tt> if macro deletion was successful, and changes can be stored into database. Otherwise <tt>false</tt>.
 	 */
 	public synchronized boolean removeMacro(int macroPosition) {
 		String m = macrosses.remove(macroPosition);
@@ -100,8 +98,7 @@ public class MacroList {
 	}
 
 	/**
-	 * Returns an unmodifiable map of macro id to macro contents. NOTE: Retail sends only 7 macros per packet, that's why
-	 * we have to split macros
+	 * Returns an unmodifiable map of macro id to macro contents. NOTE: Retail sends only 7 macros per packet, that's why we have to split macros
 	 */
 	public Map<Integer, String> getMarcosPart(boolean secondPart) {
 		Map<Integer, String> macrosPart = new LinkedHashMap<Integer, String>();

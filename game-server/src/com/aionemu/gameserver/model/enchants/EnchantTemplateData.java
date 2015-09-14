@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.enchants;
 
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlType(name = "enchant_data")
@@ -28,5 +28,5 @@ public class EnchantTemplateData {
 	public int getLevel() {
 		return level;
 	}
-	
+
 }

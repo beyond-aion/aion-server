@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +11,7 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_RECONNECT_KEY;
 
 /**
- * This packet is sended by GameServer when player is requesting fast reconnect to login server. LoginServer in response
- * will send reconectKey.
+ * This packet is sended by GameServer when player is requesting fast reconnect to login server. LoginServer in response will send reconectKey.
  * 
  * @author -Nemesiss-
  */

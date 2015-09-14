@@ -27,9 +27,9 @@ public class MaterialZoneHandler implements ZoneHandler {
 	public MaterialZoneHandler(Spatial geometry, MaterialTemplate template) {
 		this.geometry = geometry;
 		this.template = template;
-		String name = geometry.getName(); 
-		if (name.indexOf("FIRE_BOX") != -1 || name.indexOf("FIRE_SEMISPHERE") != -1 || name.indexOf("FIREPOT") != -1 ||
-			name.indexOf("FIRE_CYLINDER") != -1 || name.indexOf("FIRE_CONE") != -1 || name.startsWith("BU_H_CENTERHALL"))
+		String name = geometry.getName();
+		if (name.indexOf("FIRE_BOX") != -1 || name.indexOf("FIRE_SEMISPHERE") != -1 || name.indexOf("FIREPOT") != -1
+			|| name.indexOf("FIRE_CYLINDER") != -1 || name.indexOf("FIRE_CONE") != -1 || name.startsWith("BU_H_CENTERHALL"))
 			actOnEnter = true;
 		if (name.startsWith("BU_AB_DARKSP"))
 			ownerRace = Race.ASMODIANS;

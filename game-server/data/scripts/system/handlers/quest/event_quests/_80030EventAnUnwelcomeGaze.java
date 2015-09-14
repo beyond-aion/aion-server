@@ -53,13 +53,11 @@ public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 						return sendQuestDialog(env, 2375);
 					else
 						return sendQuestDialog(env, 2716);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					if (qs.getQuestVarById(0) == 0)
 						defaultCloseDialog(env, 0, 1, true, true, 0, 0, 164002015, 1);
 					return sendQuestDialog(env, 5);
-				}
-				else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
+				} else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
 					return sendQuestRewardDialog(env, 799766, 5);
 				else
 					return sendQuestStartDialog(env);
@@ -119,7 +117,7 @@ public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 			status = QuestStatus.START;
 		return status;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		Player player = env.getPlayer();

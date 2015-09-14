@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _1693AreYouMyFather extends QuestHandler {
 
@@ -46,16 +44,15 @@ public class _1693AreYouMyFather extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798386) { 
+			if (targetId == 798386) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204514: { 
+				case 204514: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -67,20 +64,20 @@ public class _1693AreYouMyFather extends QuestHandler {
 						}
 					}
 				}
-				break;
-				case 798388: { 
+					break;
+				case 798388: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1)
 								return sendQuestDialog(env, 1352);
 						}
 						case SETPRO2: {
-							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 203893, 1, 2); 
+							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 203893, 1, 2);
 						}
 					}
 				}
-				break;
-				case 203893: { 
+					break;
+				case 203893: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 2)
@@ -92,9 +89,8 @@ public class _1693AreYouMyFather extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203893) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 203893) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -103,7 +99,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -111,12 +107,12 @@ public class _1693AreYouMyFather extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() == 110010000) {
 				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 798388, player.getX(), player.getY(), player.getZ(), (byte) 0);
-					return true;
+				return true;
 			}
 		}
 		return false;
 	}
-			
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

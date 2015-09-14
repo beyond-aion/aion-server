@@ -6,8 +6,8 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Transforms String to Byte. String can be in decimal or hex format.
- * {@link com.aionemu.commons.configuration.TransformationException} will be thrown if something goes wrong
+ * Transforms String to Byte. String can be in decimal or hex format. {@link com.aionemu.commons.configuration.TransformationException} will be thrown
+ * if something goes wrong
  * 
  * @author SoulKeeper
  */
@@ -33,8 +33,7 @@ public class ByteTransformer implements PropertyTransformer<Byte> {
 	public Byte transform(String value, Field field) throws TransformationException {
 		try {
 			return Byte.decode(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

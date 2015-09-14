@@ -27,8 +27,7 @@ public class Notice extends AdminCommand {
 			for (int i = 0; i < params.length; i++) {
 				message += " " + params[i];
 			}
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(player, "Parameters should be text or number !");
 			return;
 		}

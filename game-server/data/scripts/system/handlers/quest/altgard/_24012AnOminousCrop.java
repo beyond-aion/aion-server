@@ -67,8 +67,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203605) // Loriniah
 				return sendQuestEndDialog(env);
 		}

@@ -54,8 +54,7 @@ public class _20040TheGrandAssault extends QuestHandler {
 		if (defaultOnLvlUpEvent(env)) {
 			int[] ids = { 20050, 20051, 20052, 20053 };
 			for (int id : ids) {
-				QuestEngine.getInstance().onEnterZoneMissionEnd(
-					new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+				QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 			}
 			return true;
 		}
@@ -66,27 +65,26 @@ public class _20040TheGrandAssault extends QuestHandler {
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-		  if (player.getWorldId() != 300410000) {
+			if (player.getWorldId() != 300410000) {
 				int var = qs.getQuestVarById(0);
 				if (var > 1) {
 					qs.setQuestVar(1);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-		   if (player.getWorldId() != 600020000) {
-		  	 qs.setStatus(QuestStatus.START);
-					qs.setQuestVar(1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
-					return true;
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (player.getWorldId() != 600020000) {
+				qs.setStatus(QuestStatus.START);
+				qs.setQuestVar(1);
+				updateQuestStatus(env);
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
+				return true;
 			}
 		}
 		return false;
@@ -103,8 +101,7 @@ public class _20040TheGrandAssault extends QuestHandler {
 			if (targetId == 799225) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -122,26 +119,21 @@ public class _20040TheGrandAssault extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					changeQuestStep(env, 0, 1, false);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 800085 && var == 1) {
+			} else if (targetId == 800085 && var == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300410000);
 					InstanceService.registerPlayerWithInstance(newInstance, player);
-					TeleportService2.teleportTo(player, 300410000, newInstance.getInstanceId(), 791, 745, 997, (byte) 2,
-						TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300410000, newInstance.getInstanceId(), 791, 745, 997, (byte) 2, TeleportAnimation.BEAM_ANIMATION);
 					changeQuestStep(env, 1, 2, false);
 					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 19));
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 799722 && var == 2) {
+			} else if (targetId == 799722 && var == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_1694)
@@ -149,19 +141,15 @@ public class _20040TheGrandAssault extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO3) {
 					changeQuestStep(env, 2, 3, false);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 730528 && var == 3) {
+			} else if (targetId == 730528 && var == 3) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					TeleportService2.teleportTo(player, 300410000, player.getInstanceId(), 774, 743, 997);
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (targetId == 800280) {
+			} else if (targetId == 800280) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialog() == DialogAction.SELECT_ACTION_2717)
@@ -169,21 +157,17 @@ public class _20040TheGrandAssault extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SET_SUCCEED) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
-					TeleportService2.teleportTo(player, 600020000, 1, 1511, 1559, 1359, (byte) 70,
-						TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 600020000, 1, 1511, 1559, 1359, (byte) 70, TeleportAnimation.BEAM_ANIMATION);
 					return closeDialogWindow(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205617) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -260,8 +244,8 @@ public class _20040TheGrandAssault extends QuestHandler {
 			if (var > 1) {
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -322,8 +306,7 @@ public class _20040TheGrandAssault extends QuestHandler {
 				updateQuestStatus(env);
 				return true;
 			}
-		}
-		else if (zoneName.equals(ZoneName.get("SADONICS_DECK_300410000"))) {
+		} else if (zoneName.equals(ZoneName.get("SADONICS_DECK_300410000"))) {
 			qs.setQuestVarById(0, 1);
 			updateQuestStatus(env);
 			return true;

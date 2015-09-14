@@ -43,8 +43,7 @@ public class _80029EventUsingYourCharms extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					defaultCloseDialog(env, 0, 0, true, true);
 					return sendQuestDialog(env, 5);
-				}
-				else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
+				} else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
 					return sendQuestRewardDialog(env, 799766, 5);
 				else
 					return sendQuestStartDialog(env);

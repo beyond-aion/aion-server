@@ -13,63 +13,51 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("yume")
-public class YumeAI2 extends GeneralNpcAI2 
-{
+public class YumeAI2 extends GeneralNpcAI2 {
 
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 	private Future<?> skillTask;
-	
+
 	@Override
-	public boolean canThink() 
-	{
+	public boolean canThink() {
 		return false;
 	}
 
 	@Override
-	protected void handleDialogStart(Player player) 
-	{
+	protected void handleDialogStart(Player player) {
 
 	}
 
 	@Override
-	protected void handleCreatureMoved(Creature creature) 
-	{
-		if (creature instanceof Player) 
-		{
+	protected void handleCreatureMoved(Creature creature) {
+		if (creature instanceof Player) {
 			final Player p = (Player) creature;
-			if (isStart.compareAndSet(false, true))
-			{
-				skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() 
-				{
+			if (isStart.compareAndSet(false, true)) {
+				skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 					@Override
-					public void run()	
-					{
-						if (p.getLifeStats().getHpPercentage() < 100)
-						{
+					public void run() {
+						if (p.getLifeStats().getHpPercentage() < 100) {
 							NpcShoutsService.getInstance().sendMsg(getOwner(), 1501126, getObjectId(), 0, 0);
-							AI2Actions.useSkill(YumeAI2.this, 21467);		
+							AI2Actions.useSkill(YumeAI2.this, 21467);
 						}
 					}
-				}, 15000, 15000);	
+				}, 15000, 15000);
 			}
 		}
 	}
 
-	private void cancelTask() 
-	{
-		if (skillTask != null && !skillTask.isCancelled()) 
-		{
+	private void cancelTask() {
+		if (skillTask != null && !skillTask.isCancelled()) {
 			skillTask.cancel(true);
 		}
 	}
 
 	@Override
-	protected void handleDespawned()
-	{
+	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
 	}

@@ -46,8 +46,7 @@ public class _28600SuspiciousErrand extends QuestHandler {
 						qs.setQuestVarById(0, 3);
 						return defaultCloseDialog(env, 3, 3, true, false, 182213005, 1, 182213004, 1);
 				}
-			}
-			else if (env.getTargetId() == 804607) {
+			} else if (env.getTargetId() == 804607) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)

@@ -16,8 +16,7 @@ import org.slf4j.LoggerFactory;
  * This class is responsible for loading data from static .txt files.<br>
  * It's used as base class of {@link NpcData} and {@link SpawnData}.<br>
  * <br>
- * <font color="red">NOTICE: </font> This class is used temporarily and later will be removed and npc and spawn data
- * will be loaded with xml loader.<br>
+ * <font color="red">NOTICE: </font> This class is used temporarily and later will be removed and npc and spawn data will be loaded with xml loader.<br>
  * <br>
  * <font color="red"><b>Do not use this class for anything else than <tt>NpcData</tt> or <tt>SpawnData</tt></b></font>
  * 
@@ -50,25 +49,21 @@ abstract class DataLoader {
 	 * This method is using file given in the constructor to load the data and there are two possibilities:
 	 * <ul>
 	 * <li>Given file is file is in deed the <b>file</b> then it's forwarded to {@link #loadFile(File)} method</li>
-	 * <li>Given file is a <b>directory</b>, then this method is obtaining list of all visible .txt files in this
-	 * directory and subdirectiores ( except hidden ones and those named "new" ) and call {@link #loadFile(File)} for each
-	 * of these files.
+	 * <li>Given file is a <b>directory</b>, then this method is obtaining list of all visible .txt files in this directory and subdirectiores ( except
+	 * hidden ones and those named "new" ) and call {@link #loadFile(File)} for each of these files.
 	 * </ul>
 	 */
 	protected void loadData() {
 		if (dataFile.isDirectory()) {
-			Collection<?> files = FileUtils.listFiles(
-				dataFile,
-				FileFilterUtils.and(FileFilterUtils.and(
-					FileFilterUtils.notFileFilter(FileFilterUtils.nameFileFilter("new")),
-					FileFilterUtils.suffixFileFilter(".txt")), HiddenFileFilter.VISIBLE), HiddenFileFilter.VISIBLE);
+			Collection<?> files = FileUtils.listFiles(dataFile, FileFilterUtils.and(
+				FileFilterUtils.and(FileFilterUtils.notFileFilter(FileFilterUtils.nameFileFilter("new")), FileFilterUtils.suffixFileFilter(".txt")),
+				HiddenFileFilter.VISIBLE), HiddenFileFilter.VISIBLE);
 
 			for (Object file1 : files) {
 				File f = (File) file1;
 				loadFile(f);
 			}
-		}
-		else {
+		} else {
 			loadFile(dataFile);
 		}
 	}
@@ -92,18 +87,16 @@ abstract class DataLoader {
 				}
 				parse(line);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading " + getClass().getSimpleName() + ", file: " + file.getPath(), e);
-		}
-		finally {
+		} finally {
 			LineIterator.closeQuietly(it);
 		}
 	}
 
 	/**
-	 * This method must be overriden in every subclass and is responsible for parsing given <tt>dataEntry</tt> String
-	 * which represents one row from data file.
+	 * This method must be overriden in every subclass and is responsible for parsing given <tt>dataEntry</tt> String which represents one row from data
+	 * file.
 	 * 
 	 * @param dataEntry
 	 *          A String containing data about a data entry, that is to be parsed by this method.
@@ -129,17 +122,14 @@ abstract class DataLoader {
 			fr.flush();
 
 			return true;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while saving " + desc, e);
 			return false;
-		}
-		finally {
+		} finally {
 			if (fr != null) {
 				try {
 					fr.close();
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					log.error("Error while closing save data file", e);
 				}
 			}
@@ -148,16 +138,16 @@ abstract class DataLoader {
 
 	/**
 	 * Name of the file which is used to store data in.<br>
-	 * This method must be overriden in sublass if we want to be able to store its data. It's used only in
-	 * {@link SpawnData} and should not be used anywhere else.
+	 * This method must be overriden in sublass if we want to be able to store its data. It's used only in {@link SpawnData} and should not be used
+	 * anywhere else.
 	 * 
 	 * @return name of the file
 	 */
 	protected abstract String getSaveFile();
 
 	/**
-	 * This method must be overriden in subclass which we want to be able to save data. It's responsibility is basicly to
-	 * put data into given FileWriter instance.
+	 * This method must be overriden in subclass which we want to be able to save data. It's responsibility is basicly to put data into given FileWriter
+	 * instance.
 	 * 
 	 * @param fileWriter
 	 * @throws Exception

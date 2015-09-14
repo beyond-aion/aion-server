@@ -18,8 +18,7 @@ public class Kill extends AdminCommand {
 	public Kill() {
 		super("kill", "Kills the specified NPC(s) or player(s).");
 
-		setParamInfo(
-			" - kills your target (can be NPC or player)",
+		setParamInfo(" - kills your target (can be NPC or player)",
 			"<all> [neutral|enemy] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs)",
 			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)");
 	}
@@ -75,8 +74,7 @@ public class Kill extends AdminCommand {
 					// is in range
 					if (range == -1 || (range > 0 && MathUtil.isIn3dRange(player, obj, range))) {
 						// is target
-						if (params.length <= 1
-							|| (params[1].equalsIgnoreCase("neutral") && !player.isEnemy((Creature) obj))
+						if (params.length <= 1 || (params[1].equalsIgnoreCase("neutral") && !player.isEnemy((Creature) obj))
 							|| (params[1].equalsIgnoreCase("enemy") && player.isEnemy((Creature) obj))) {
 							if (kill(player, (Creature) obj))
 								count += 1;

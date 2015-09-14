@@ -23,9 +23,9 @@ import com.aionemu.gameserver.model.drop.NpcDrop;
 @XmlRootElement(name = "custom_drop")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomDrop {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(CustomDrop.class);
-	
+
 	@XmlElement(name = "npc_drop")
 	private List<NpcDrop> npcDrop;
 	@XmlTransient
@@ -34,15 +34,14 @@ public class CustomDrop {
 	public NpcDrop getNpcDrop(int npcId) {
 		return dropById.get(npcId);
 	}
-	
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if(npcDrop == null)
+		if (npcDrop == null)
 			return;
-		for(NpcDrop drop : npcDrop) {
-			if(dropById.containsKey(drop.getNpcId())) {
-				log.warn("Trying to set custom drop for npc "+drop.getNpcId()+" twice!");
-			}
-			else {
+		for (NpcDrop drop : npcDrop) {
+			if (dropById.containsKey(drop.getNpcId())) {
+				log.warn("Trying to set custom drop for npc " + drop.getNpcId() + " twice!");
+			} else {
 				dropById.put(drop.getNpcId(), drop);
 			}
 		}
@@ -53,7 +52,7 @@ public class CustomDrop {
 	public int size() {
 		return dropById.size();
 	}
-	
+
 	public Set<Integer> getNpcIds() {
 		return dropById.keySet();
 	}

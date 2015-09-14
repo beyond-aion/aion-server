@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Cheatkiller
  */
 public class _13054MyReportIsBetter extends QuestHandler {
@@ -34,18 +33,16 @@ public class _13054MyReportIsBetter extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801091) { 
+			if (targetId == 801091) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801090) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -55,8 +52,7 @@ public class _13054MyReportIsBetter extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1, 182213405, 1);
 					}
 				}
-			}
-			else if (targetId == 801091) {
+			} else if (targetId == 801091) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1693);
@@ -67,13 +63,11 @@ public class _13054MyReportIsBetter extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801092) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182213406, 1);
 					return sendQuestEndDialog(env);
 				}
@@ -81,18 +75,18 @@ public class _13054MyReportIsBetter extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if (var == 2) {
-  			changeQuestStep(env, 2, 2, true);
-    		return true;
-  		}
-  	}
+			int var = qs.getQuestVarById(0);
+			if (var == 2) {
+				changeQuestStep(env, 2, 2, true);
+				return true;
+			}
+		}
 		return false;
 	}
 }

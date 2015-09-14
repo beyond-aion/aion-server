@@ -38,8 +38,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-		}
-		else if (env.getTargetId() == 263267) {
+		} else if (env.getTargetId() == 263267) {
 			if (qs.getStatus() == QuestStatus.START && var == 1)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -47,8 +46,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2);
 				}
-		}
-		else if (env.getTargetId() == 264769) {
+		} else if (env.getTargetId() == 264769) {
 			if (qs.getStatus() == QuestStatus.START && var == 2)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -56,8 +54,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO3:
 						return defaultCloseDialog(env, 2, 3);
 				}
-		}
-		else if (env.getTargetId() == 271054) {
+		} else if (env.getTargetId() == 271054) {
 			if (qs.getStatus() == QuestStatus.START && var == 3)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -65,8 +62,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO4:
 						return defaultCloseDialog(env, 3, 4);
 				}
-		}
-		else if (env.getTargetId() == 266554) {
+		} else if (env.getTargetId() == 266554) {
 			if (qs.getStatus() == QuestStatus.START && var == 4)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -74,8 +70,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO5:
 						return defaultCloseDialog(env, 4, 5);
 				}
-		}
-		else if (env.getTargetId() == 270152) {
+		} else if (env.getTargetId() == 270152) {
 			if (qs.getStatus() == QuestStatus.START && var == 5)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -83,8 +78,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO6:
 						return defaultCloseDialog(env, 5, 6);
 				}
-		}
-		else if (env.getTargetId() == 269252) {
+		} else if (env.getTargetId() == 269252) {
 			if (qs.getStatus() == QuestStatus.START && var == 6)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -92,8 +86,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO7:
 						return defaultCloseDialog(env, 6, 7);
 				}
-		}
-		else if (env.getTargetId() == 268052) {
+		} else if (env.getTargetId() == 268052) {
 			if (qs.getStatus() == QuestStatus.START && var == 7)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -101,8 +94,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case SETPRO8:
 						return defaultCloseDialog(env, 7, 8);
 				}
-		}
-		else if (env.getTargetId() == 260236) {
+		} else if (env.getTargetId() == 260236) {
 			if (qs.getStatus() == QuestStatus.START && var == 8)
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

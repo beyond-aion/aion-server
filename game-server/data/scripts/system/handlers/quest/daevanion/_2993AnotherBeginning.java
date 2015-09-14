@@ -14,11 +14,11 @@ import com.aionemu.gameserver.services.QuestService;
 public class _2993AnotherBeginning extends QuestHandler {
 
 	private static final int questId = 2993;
-	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 5104, 1183, 1204, 1225, 1246, 5105, 1268,
-		1289, 1310, 1331, 5106, 2376, 2461, 2546, 2631, 2632 };
-	private final static int items[] = { 110600834, 113600800, 114600794, 112600785, 111600813, 110300881, 113300860, 114300893, 112300784,
-		111300834, 110100931, 113100843, 114100866, 112100790, 111100831, 110500849, 113500827, 114500837, 112500774, 111500821, 110301532,
-		113301497, 114301526, 112301412, 111301470 };
+	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 5104, 1183, 1204, 1225, 1246, 5105, 1268, 1289, 1310,
+		1331, 5106, 2376, 2461, 2546, 2631, 2632 };
+	private final static int items[] = { 110600834, 113600800, 114600794, 112600785, 111600813, 110300881, 113300860, 114300893, 112300784, 111300834,
+		110100931, 113100843, 114100866, 112100790, 111100831, 110500849, 113500827, 114500837, 112500774, 111500821, 110301532, 113301497, 114301526,
+		112301412, 111301470 };
 
 	public _2993AnotherBeginning() {
 		super(questId);
@@ -44,13 +44,11 @@ public class _2993AnotherBeginning extends QuestHandler {
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					QuestService.startQuest(env);
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204076) { // Narvi
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					return sendQuestDialog(env, 1011);
@@ -66,12 +64,10 @@ public class _2993AnotherBeginning extends QuestHandler {
 					if (itemCount > 0) {
 						qs.setReward(dialogIndex << 4);
 						return sendQuestDialog(env, 1013);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else {
+				} else {
 					int savedData = qs.getReward();
 					switch (dialogId) {
 						case 1012:
@@ -99,8 +95,7 @@ public class _2993AnotherBeginning extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204076) { // Narvi
 				int savedData = qs.getReward();
 				if (removeQuestItem(env, items[savedData >> 4], 1) && removeQuestItem(env, 186000041, 1)) {

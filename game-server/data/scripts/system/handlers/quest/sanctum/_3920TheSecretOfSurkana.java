@@ -14,17 +14,18 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 
 public class _3920TheSecretOfSurkana extends QuestHandler {
+
 	private final static int questId = 3920;
-	
+
 	public _3920TheSecretOfSurkana() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
-	    qe.registerQuestNpc(798357).addOnQuestStart(questId); //Shoshinerk
-		qe.registerQuestNpc(798357).addOnTalkEvent(questId); //Shoshinerk
-		qe.registerQuestNpc(730212).addOnTalkEvent(questId); //Balaur Material Converter
+		qe.registerQuestNpc(798357).addOnQuestStart(questId); // Shoshinerk
+		qe.registerQuestNpc(798357).addOnTalkEvent(questId); // Shoshinerk
+		qe.registerQuestNpc(730212).addOnTalkEvent(questId); // Balaur Material Converter
 		qe.registerQuestItem(182206073, questId);
 		qe.registerQuestItem(182206074, questId);
 	}
@@ -36,7 +37,7 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798357) { 
+			if (targetId == 798357) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
@@ -48,8 +49,7 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730212: { // Balaur Material Converter
@@ -63,8 +63,7 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798357) { // Shoshinerk
 				return sendQuestEndDialog(env);
 			}

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("antiaircraftgun")
@@ -32,7 +31,7 @@ public class AntiAirCraftGunAI2 extends ActionItemNpcAI2 {
 		TeleportService2.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 		player.getController().stopProtectionActiveTask();
 		int morphSkill = 0;
-		switch(getNpcId()) {
+		switch (getNpcId()) {
 			case 701185: // 46 lvl morph 218803
 			case 701321:
 				morphSkill = 0x4E502E; // 20048 46

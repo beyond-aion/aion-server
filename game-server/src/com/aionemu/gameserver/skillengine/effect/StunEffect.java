@@ -23,17 +23,17 @@ public class StunEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-	    if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED))
-		  return;
+		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED))
+			return;
 		super.calculate(effect, StatEnum.STUN_RESISTANCE, null);
 	}
-	
+
 	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill();
 		if (effected instanceof Player)
-	  	 ((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().onStopGliding();
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN.getId());
 		effect.setAbnormal(AbnormalState.STUN.getId());
 	}

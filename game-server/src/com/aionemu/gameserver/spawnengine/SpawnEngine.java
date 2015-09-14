@@ -26,8 +26,7 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the
- * future.
+ * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the future.
  * 
  * @author Luno modified by ATracer, Source, Wakizashi, xTz, nrg
  */
@@ -55,20 +54,15 @@ public class SpawnEngine {
 
 		if (objectId > 400000 && objectId < 499999) {
 			return VisibleObjectSpawner.spawnGatherable(spawn, instanceIndex);
-		}
-		else if (spawn instanceof BaseSpawnTemplate) {
+		} else if (spawn instanceof BaseSpawnTemplate) {
 			return VisibleObjectSpawner.spawnBaseNpc((BaseSpawnTemplate) spawn, instanceIndex);
-		}
-		else if (spawn instanceof RiftSpawnTemplate) {
+		} else if (spawn instanceof RiftSpawnTemplate) {
 			return VisibleObjectSpawner.spawnRiftNpc((RiftSpawnTemplate) spawn, instanceIndex);
-		}
-		else if (spawn instanceof SiegeSpawnTemplate) {
+		} else if (spawn instanceof SiegeSpawnTemplate) {
 			return VisibleObjectSpawner.spawnSiegeNpc((SiegeSpawnTemplate) spawn, instanceIndex);
-		}
-		else if (spawn instanceof VortexSpawnTemplate) {
+		} else if (spawn instanceof VortexSpawnTemplate) {
 			return VisibleObjectSpawner.spawnInvasionNpc((VortexSpawnTemplate) spawn, instanceIndex);
-		}
-		else {
+		} else {
 			return VisibleObjectSpawner.spawnNpc(spawn, instanceIndex);
 		}
 	}
@@ -94,11 +88,10 @@ public class SpawnEngine {
 	}
 
 	/**
-	 * Should be used when you need to add a siegespawn through code and not from static_data spawns (e.g.
-	 * CustomBalaurAssault)
+	 * Should be used when you need to add a siegespawn through code and not from static_data spawns (e.g. CustomBalaurAssault)
 	 */
-	public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x,
-		float y, float z, byte heading) {
+	public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
+		byte heading) {
 		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(new SpawnGroup2(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
 		spawnTemplate.setSiegeId(siegeId);
 		spawnTemplate.setSiegeRace(race);
@@ -107,8 +100,7 @@ public class SpawnEngine {
 	}
 
 	/**
-	 * Should be used when need to define whether spawn will be deleted after death Using this method spawns will not be
-	 * saved with //save_spawn command
+	 * Should be used when need to define whether spawn will be deleted after death Using this method spawns will not be saved with //save_spawn command
 	 * 
 	 * @param worldId
 	 * @param npcId
@@ -141,8 +133,7 @@ public class SpawnEngine {
 		return addNewSpawn(worldId, npcId, x, y, z, heading, 0);
 	}
 
-	public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId,
-		String masterName) {
+	public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId, String masterName) {
 		SpawnTemplate template = addNewSpawn(worldId, npcId, x, y, z, heading, 0);
 		template.setCreatorId(creatorId);
 		template.setMasterName(masterName);
@@ -203,7 +194,7 @@ public class SpawnEngine {
 		int twinSpawns = worldMapTemplate.getTwinCount();
 		if (twinSpawns == 0)
 			twinSpawns = 1;
-		twinSpawns +=  worldMapTemplate.getBeginnerTwinCount();
+		twinSpawns += worldMapTemplate.getBeginnerTwinCount();
 		final int mapId = worldMapTemplate.getMapId();
 
 		for (int instanceId = 1; instanceId <= twinSpawns; instanceId++) {
@@ -249,8 +240,7 @@ public class SpawnEngine {
 						default:
 							break;
 					}
-				}
-				else if (spawn.hasPool() && checkPool(spawn)) {
+				} else if (spawn.hasPool() && checkPool(spawn)) {
 					spawn.resetTemplates(instanceId);
 					for (int i = 0; i < spawn.getPool(); i++) {
 						SpawnTemplate template = spawn.getRndTemplate(instanceId);
@@ -259,8 +249,7 @@ public class SpawnEngine {
 						spawnObject(template, instanceId);
 						spawnedCounter++;
 					}
-				}
-				else {
+				} else {
 					for (SpawnTemplate template : spawn.getSpawnTemplates()) {
 						spawnObject(template, instanceId);
 						spawnedCounter++;
@@ -298,8 +287,7 @@ public class SpawnEngine {
 		public void visit(VisibleObject object) {
 			if (object instanceof Npc) {
 				npcCount++;
-			}
-			else if (object instanceof Gatherable) {
+			} else if (object instanceof Gatherable) {
 				gatherableCount++;
 			}
 		}

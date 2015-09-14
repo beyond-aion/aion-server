@@ -16,8 +16,8 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
- * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items,
- * statistics. Data for such NPC class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
+ * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items, statistics. Data for such NPC
+ * class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
  * 
  * @author Luno
  */
@@ -30,22 +30,22 @@ public class TradeListData {
 
 	@XmlElement(name = "trade_in_list_template")
 	private List<TradeListTemplate> tInlist;
-	
+
 	@XmlElement(name = "purchase_template")
 	private List<TradeListTemplate> plist;
-	
+
 	/** A map containing all trade list templates */
 	private TIntObjectHashMap<TradeListTemplate> npctlistData = new TIntObjectHashMap<TradeListTemplate>();
-	
+
 	private TIntObjectHashMap<TradeListTemplate> npcTradeInlistData = new TIntObjectHashMap<TradeListTemplate>();
-	
+
 	private TIntObjectHashMap<TradeListTemplate> npcPurchaseTemplateData = new TIntObjectHashMap<TradeListTemplate>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (TradeListTemplate npc : tlist) {
 			npctlistData.put(npc.getNpcId(), npc);
 		}
-		
+
 		for (TradeListTemplate npc : tInlist) {
 			npcTradeInlistData.put(npc.getNpcId(), npc);
 		}
@@ -72,7 +72,7 @@ public class TradeListData {
 	public TradeListTemplate getTradeInListTemplate(int id) {
 		return npcTradeInlistData.get(id);
 	}
-	
+
 	public TradeListTemplate getPurchaseTemplate(int id) {
 		return npcPurchaseTemplateData.get(id);
 	}

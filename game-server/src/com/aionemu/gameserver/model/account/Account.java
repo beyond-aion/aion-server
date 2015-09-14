@@ -18,8 +18,8 @@ import com.aionemu.gameserver.model.items.storage.Storage;
  * <li>account id</li>
  * <li>account name</li>
  * <li> {@link AccountTime account time info}</li>
- * <li>a list of {@link PlayerAccountData} objects each of which keeping information about player that must be available
- * on character selection screen.</li>
+ * <li>a list of {@link PlayerAccountData} objects each of which keeping information about player that must be available on character selection
+ * screen.</li>
  * </ul>
  * 
  * @author SoulKeeper
@@ -51,24 +51,24 @@ public class Account implements Iterable<PlayerAccountData> {
 	private int numberOfElyos = 0;
 
 	private CharacterPasskey characterPasskey;
-	
+
 	private String securityToken = "";
-	
+
 	private String allowedHddSerial = "";
-	
+
 	private boolean isHacked = false;
-	
+
 	private int stamps = 0;
 	private PassportsList playerPassports;
-    private Timestamp lastStamp;
-    
-    public String getSecurityToken() {
-    	return securityToken;
-    }
-    
-    public void setSecurityToken(String token) {
-    	this.securityToken = token;
-    }
+	private Timestamp lastStamp;
+
+	public String getSecurityToken() {
+		return securityToken;
+	}
+
+	public void setSecurityToken(String token) {
+		this.securityToken = token;
+	}
 
 	public Account(int id) {
 		this.id = id;
@@ -288,16 +288,14 @@ public class Account implements Iterable<PlayerAccountData> {
 		return "Account [id=" + id + ", name=" + name + "]";
 	}
 
-	
 	public boolean isHacked() {
 		return isHacked;
 	}
 
-	
 	public void setHacked(boolean isHacked) {
 		this.isHacked = isHacked;
 	}
-	
+
 	public int getPassportStamps() {
 		return stamps;
 	}
@@ -305,7 +303,7 @@ public class Account implements Iterable<PlayerAccountData> {
 	public void setPassportStamps(int value) {
 		this.stamps = value;
 	}
-	
+
 	public void increasePassportStamps() {
 		this.stamps++;
 	}
@@ -317,7 +315,7 @@ public class Account implements Iterable<PlayerAccountData> {
 	public void setPassportsList(PassportsList pp) {
 		playerPassports = pp;
 	}
-	
+
 	public Timestamp getLastStamp() {
 		return lastStamp;
 	}

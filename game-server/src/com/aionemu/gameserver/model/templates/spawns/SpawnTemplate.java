@@ -48,8 +48,7 @@ public class SpawnTemplate {
 		temporarySpawn = spot.getTemporarySpawn();
 	}
 
-	public SpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId,
-		int staticId, int fly) {
+	public SpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
 		this.spawnGroup = spawnGroup;
 		this.x = x;
 		this.y = y;
@@ -105,7 +104,7 @@ public class SpawnTemplate {
 	public int getRandomWalk() {
 		return randomWalk;
 	}
-	
+
 	public void setRandomWalk(int randomWalk) {
 		this.randomWalk = randomWalk;
 	}
@@ -134,7 +133,7 @@ public class SpawnTemplate {
 		return spawnGroup.getRespawnTime();
 	}
 
-	// FIXME: cross-WorldInstace modification!!! 
+	// FIXME: cross-WorldInstace modification!!!
 	public void setRespawnTime(int respawnTime) {
 		spawnGroup.setRespawnTime(respawnTime);
 	}
@@ -174,7 +173,7 @@ public class SpawnTemplate {
 	public void setWalkerId(String walkerId) {
 		this.walkerId = walkerId;
 	}
-	
+
 	public int getWalkerIndex() {
 		return walkerIdx;
 	}
@@ -211,7 +210,8 @@ public class SpawnTemplate {
 	}
 
 	/**
-	 * @param creatorId the creatorId to set
+	 * @param creatorId
+	 *          the creatorId to set
 	 */
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
@@ -225,7 +225,8 @@ public class SpawnTemplate {
 	}
 
 	/**
-	 * @param masterName the masterName to set
+	 * @param masterName
+	 *          the masterName to set
 	 */
 	public void setMasterName(String masterName) {
 		this.masterName = masterName;

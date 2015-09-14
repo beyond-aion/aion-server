@@ -26,7 +26,7 @@ public class HandlerSideDrop extends QuestDrop {
 		}
 		this.neededAmount = amount;
 	}
-	
+
 	public HandlerSideDrop(int questId, int npcId, int itemId, int amount, int chance, int step) {
 		this(questId, npcId, itemId, amount, chance);
 		this.collecting_step = step;

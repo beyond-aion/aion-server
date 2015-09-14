@@ -48,8 +48,7 @@ public class _1364JourneytoAgairon extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203945: { // Teos
 					switch (env.getDialog()) {
@@ -63,8 +62,7 @@ public class _1364JourneytoAgairon extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790007) { // Dellome
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -74,7 +72,7 @@ public class _1364JourneytoAgairon extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -89,10 +87,10 @@ public class _1364JourneytoAgairon extends QuestHandler {
 	}
 
 	@Override
- 	public boolean onNpcReachTargetEvent(QuestEnv env) {
+	public boolean onNpcReachTargetEvent(QuestEnv env) {
 		changeQuestStep(env, 1, 3, false);
 		return defaultFollowEndEvent(env, 3, 3, true, 47); // reward
- 	}
+	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {

@@ -80,19 +80,19 @@ public class ActionObserver {
 	 */
 	public void startSkillCast(Skill skill) {
 	};
-	
+
 	/**
 	 * @param skill
 	 */
 	public void endSkillCast(Skill skill) {
 	};
-	
+
 	/**
 	 * @param skill
 	 */
 	public void boostSkillCost(Skill skill) {
 	};
-	
+
 	/**
 	 * @param creature
 	 */
@@ -101,49 +101,43 @@ public class ActionObserver {
 
 	/**
 	 * @param creature
-	 * @param dotEffect 
+	 * @param dotEffect
 	 */
 	public void dotattacked(Creature creature, Effect dotEffect) {
 	};
-	
+
 	/**
-	 * 
 	 * @param item
 	 */
 	public void itemused(Item item) {
 	};
-	
+
 	/**
-	 * 
 	 * @param npc
 	 */
 	public void npcdialogrequested(Npc npc) {
 	};
-	
+
 	/**
-	 * 
 	 * @param state
 	 */
 	public void abnormalsetted(AbnormalState state) {
 	};
-	
+
 	/**
-	 * 
-	 * @param 
+	 * @param
 	 */
 	public void summonrelease() {
 	};
 
 	/**
-	 * 
-	 * @param 
+	 * @param
 	 */
 	public void sit() {
 	};
-	
+
 	/**
-	 * 
-	 * @param 
+	 * @param
 	 */
 	public void hpChanged(int value) {
 	};

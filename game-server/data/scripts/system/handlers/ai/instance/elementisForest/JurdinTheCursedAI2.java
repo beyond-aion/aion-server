@@ -45,7 +45,7 @@ public class JurdinTheCursedAI2 extends SummonerAI2 {
 		isStart = false;
 		cancelTask();
 	}
-	
+
 	@Override
 	public void handleDied() {
 		super.handleDied();
@@ -96,12 +96,11 @@ public class JurdinTheCursedAI2 extends SummonerAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					spawnShadows();
 				}
 			}
-		},0, 60000);
+		}, 0, 60000);
 	}
 
 	private void spawnShadows() {
@@ -127,7 +126,7 @@ public class JurdinTheCursedAI2 extends SummonerAI2 {
 			}
 		}, 5000);
 	}
-	
+
 	private void cancelTask() {
 		if (task != null && !task.isCancelled())
 			task.cancel(true);
@@ -151,7 +150,7 @@ public class JurdinTheCursedAI2 extends SummonerAI2 {
 			}
 		}
 	}
-	
+
 	private void spawnFlowers() {
 		WorldPosition p = getPosition();
 		if (p != null) {

@@ -60,5 +60,5 @@ public class GodstoneInfo {
 	public int getNonBreakCount() {
 		return nonbreakcount;
 	}
-	
+
 }

@@ -20,7 +20,7 @@ import com.google.common.base.Predicates;
 public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends GeneralTeam<Player, TM> {
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
-	
+
 	public TemporaryPlayerTeam(Integer objId) {
 		super(objId);
 	}
@@ -63,7 +63,7 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	protected final void initializeTeam(TM leader) {
 		setLeader(leader);
 	}
-	
+
 	public final LootGroupRules getLootGroupRules() {
 		return lootGroupRules;
 	}
@@ -71,11 +71,10 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	public void setLootGroupRules(LootGroupRules lootGroupRules) {
 		this.lootGroupRules = lootGroupRules;
 		if (lootGroupRules != null && lootGroupRules.getLootRule() == LootRuleType.FREEFORALL) {
-			applyOnMembers(new TeamPacketGroupSender(PlayerFilters.HAS_LOOT_PET, 
-				SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03, new SM_PET(13, false)));
+			applyOnMembers(new TeamPacketGroupSender(PlayerFilters.HAS_LOOT_PET, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03, new SM_PET(13, false)));
 		}
 	}
-	
+
 	public static final class TeamPacketGroupSender implements Predicate<Player> {
 
 		private final AionServerPacket[] packets;
@@ -95,7 +94,7 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 			return true;
 		}
 	}
-	
+
 	public static final class TeamMessageSender implements Predicate<Player> {
 
 		private final AionServerPacket packet;

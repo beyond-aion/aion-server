@@ -6,13 +6,12 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 
 /**
- *
  * @author nrg
  */
 public class AfterRestartTrigger extends TaskFromDBTrigger {
 
 	private static Logger log = LoggerFactory.getLogger(AfterRestartTrigger.class);
-	//Indicated wether this task should block or not block the starting progress
+	// Indicated wether this task should block or not block the starting progress
 	private boolean isBlocking = false;
 
 	@Override

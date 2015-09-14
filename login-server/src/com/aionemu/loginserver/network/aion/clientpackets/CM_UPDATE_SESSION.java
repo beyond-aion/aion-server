@@ -22,8 +22,7 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
 	 */
 	private int loginOk;
 	/**
-	 * reconectKey is key that server sends to client for fast reconnection to login server - we will check if this key is
-	 * valid.
+	 * reconectKey is key that server sends to client for fast reconnection to login server - we will check if this key is valid.
 	 */
 	private int reconnectKey;
 

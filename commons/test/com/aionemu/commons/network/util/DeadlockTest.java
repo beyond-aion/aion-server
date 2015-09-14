@@ -53,8 +53,7 @@ public class DeadlockTest {
 					}).start();
 					try {
 						Thread.sleep(100);
-					}
-					catch (InterruptedException e) {
+					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					synchronized (lock2) {

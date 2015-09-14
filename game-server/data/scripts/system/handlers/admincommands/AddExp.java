@@ -22,21 +22,18 @@ public class AddExp extends AdminCommand {
 
 		Player target = null;
 
-		if(player.getTarget() == null) {
+		if (player.getTarget() == null) {
 			info(player, null);
-		}
-		else if (!(player.getTarget() instanceof Player)) {
+		} else if (!(player.getTarget() instanceof Player)) {
 			info(player, null);
-		}
-		else
+		} else
 			target = (Player) player.getTarget();
 
 		String paramValue = params[0];
 		long exp;
 		try {
 			exp = Long.parseLong(paramValue);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(player, "<exp> must be an Integer");
 			return;
 		}

@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11040SquampOnTheCookingPlate extends QuestHandler {
 
@@ -43,16 +41,15 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 799036) { 
+			if (targetId == 799036) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799036: { 
+				case 799036: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -64,9 +61,8 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799035) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799035) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -75,7 +71,7 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

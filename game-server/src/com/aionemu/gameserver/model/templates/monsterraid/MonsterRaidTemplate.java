@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * @author Alcapwnd
  * @modified Whoop
@@ -41,7 +40,7 @@ public class MonsterRaidTemplate {
 	public int getWorldId() {
 		return this.world;
 	}
-	
+
 	public List<Integer> getNpcIds() {
 		if (npc_ids == null)
 			return Collections.emptyList();
@@ -59,7 +58,7 @@ public class MonsterRaidTemplate {
 	public float getZ() {
 		return this.z;
 	}
-    
+
 	public byte getH() {
 		return this.h;
 	}

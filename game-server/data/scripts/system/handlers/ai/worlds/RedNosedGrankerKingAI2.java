@@ -51,7 +51,7 @@ public class RedNosedGrankerKingAI2 extends AggressiveNpcAI2 {
 		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
-		return (Npc) spawn(npcId,p .getX() + x1, p .getY() + y1, p .getZ(), (byte) 0);
+		return (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
 	}
 
 	@Override

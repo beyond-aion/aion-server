@@ -96,10 +96,9 @@ public class VisibleObjectSpawner {
 
 		try {
 			SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
-		}
-		catch (Exception ex) {
-			log.error("Error during spawn of npc {}, world {}, x-y {}-{}",
-					new Object[]{npcTemplate.getTemplateId(), spawn.getWorldId(), spawn.getX(), spawn.getY()});
+		} catch (Exception ex) {
+			log.error("Error during spawn of npc {}, world {}, x-y {}-{}", new Object[] { npcTemplate.getTemplateId(), spawn.getWorldId(), spawn.getX(),
+				spawn.getY() });
 			log.error("Npc {} will be despawned", npcTemplate.getTemplateId(), ex);
 			World.getInstance().despawn(npc);
 		}
@@ -130,7 +129,7 @@ public class VisibleObjectSpawner {
 			return null;
 		}
 
-		//Chk owner race for non handled spawn
+		// Chk owner race for non handled spawn
 		BaseLocation base = BaseService.getInstance().getBaseLocation(spawn.getId());
 		if (spawn.getHandlerType() == null && !spawn.getBaseRace().equals(base.getRace())) {
 			return null;
@@ -165,8 +164,7 @@ public class VisibleObjectSpawner {
 		if (loc.isOpened() && spawnId == loc.getId()) {
 			npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
-		}
-		else {
+		} else {
 			return null;
 		}
 		npc.setEffectController(new EffectController(npc));
@@ -198,13 +196,11 @@ public class VisibleObjectSpawner {
 			// default: GUARD
 			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
-		}
-		else if (spawn.isAssault() && loc.isVulnerable() && spawn.getSiegeRace().equals(SiegeRace.BALAUR)) {
+		} else if (spawn.isAssault() && loc.isVulnerable() && spawn.getSiegeRace().equals(SiegeRace.BALAUR)) {
 			// attakers
 			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
-		}
-		else {
+		} else {
 			return null;
 		}
 		npc.setEffectController(new EffectController(npc));
@@ -231,12 +227,10 @@ public class VisibleObjectSpawner {
 		if (loc.isActive() && spawnId == loc.getId() && spawn.isInvasion()) {
 			npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
-		}
-		else if (!loc.isActive() && spawnId == loc.getId() && spawn.isPeace()) {
+		} else if (!loc.isActive() && spawnId == loc.getId() && spawn.isPeace()) {
 			npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
-		}
-		else {
+		} else {
 			return null;
 		}
 		npc.setEffectController(new EffectController(npc));
@@ -252,8 +246,7 @@ public class VisibleObjectSpawner {
 	protected static VisibleObject spawnGatherable(SpawnTemplate spawn, int instanceIndex) {
 		int objectId = spawn.getNpcId();
 		VisibleObjectTemplate template = DataManager.GATHERABLE_DATA.getGatherableTemplate(objectId);
-		Gatherable gatherable = new Gatherable(spawn, template, IDFactory.getInstance().nextId(),
-				new GatherableController());
+		Gatherable gatherable = new Gatherable(spawn, template, IDFactory.getInstance().nextId(), new GatherableController());
 		gatherable.setKnownlist(new PlayerAwareKnownList(gatherable));
 		SpawnEngine.bringIntoWorld(gatherable, spawn, instanceIndex);
 		return gatherable;
@@ -325,10 +318,8 @@ public class VisibleObjectSpawner {
 		int worldId = owner.getWorldId();
 		int instanceId = owner.getInstanceId();
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
-		Vector3f pos = GeoService.getInstance().getClosestCollision(owner,
-				owner.getX() + (float) (Math.cos(radian) * 5),
-				owner.getY() + (float) (Math.sin(radian) * 5),
-				owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
+		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 5),
+			owner.getY() + (float) (Math.sin(radian) * 5), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(iDFactory.nextId(), new NpcController(), spawn, template);
 		postman.setKnownlist(new PlayerAwareKnownList(postman));
@@ -346,10 +337,8 @@ public class VisibleObjectSpawner {
 		int worldId = owner.getWorldId();
 		int instanceId = owner.getInstanceId();
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
-		Vector3f pos = GeoService.getInstance().getClosestCollision(owner,
-				owner.getX() + (float) (Math.cos(radian) * 1),
-				owner.getY() + (float) (Math.sin(radian) * 1),
-				owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
+		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
+			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc functionalNpc = new Npc(iDFactory.nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
@@ -367,13 +356,11 @@ public class VisibleObjectSpawner {
 	 * @param level
 	 * @return
 	 */
-	public static Servant spawnServant(SpawnTemplate spawn, int instanceIndex, Creature creator, int level,
-			NpcObjectType objectType) {
+	public static Servant spawnServant(SpawnTemplate spawn, int instanceIndex, Creature creator, int level, NpcObjectType objectType) {
 		int objectId = spawn.getNpcId();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
-		byte servantLevel = (byte) creator.getLevel();
-		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate,
-				servantLevel);
+		byte servantLevel = creator.getLevel();
+		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLevel);
 		servant.setKnownlist(new NpcKnownList(servant));
 		servant.setEffectController(new EffectController(servant));
 		servant.setCreator(creator);
@@ -398,8 +385,7 @@ public class VisibleObjectSpawner {
 	public static Servant spawnEnemyServant(SpawnTemplate spawn, int instanceIndex, Creature creator, byte servantLvl) {
 		int objectId = spawn.getNpcId();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
-		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate,
-				servantLvl);
+		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLvl);
 		servant.setKnownlist(new NpcKnownList(servant));
 		servant.setEffectController(new EffectController(servant));
 		servant.setCreator(creator);
@@ -449,8 +435,8 @@ public class VisibleObjectSpawner {
 		skillLevel = SkillLearnService.getSkillLearnLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
 		byte level = (byte) SkillLearnService.getSkillMinLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
 		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
-		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId)
-				: new SummonController(), spawn, npcTemplate, isSiegeWeapon ? npcTemplate.getLevel() : level, time);
+		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId) : new SummonController(), spawn,
+			npcTemplate, isSiegeWeapon ? npcTemplate.getLevel() : level, time);
 		summon.setKnownlist(new CreatureAwareKnownList(summon));
 		summon.setEffectController(new EffectController(summon));
 		summon.setMaster(creator);

@@ -7,7 +7,6 @@ import com.aionemu.gameserver.services.player.SecurityTokenService;
 
 /**
  * @author Artur
- *
  */
 public class CM_SECURITY_TOKEN_REQUEST extends AionClientPacket {
 
@@ -16,14 +15,13 @@ public class CM_SECURITY_TOKEN_REQUEST extends AionClientPacket {
 	 * @param state
 	 * @param restStates
 	 */
-	public CM_SECURITY_TOKEN_REQUEST(int opcode, State state,
-			State... restStates) {
+	public CM_SECURITY_TOKEN_REQUEST(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
 	@Override
 	protected void readImpl() {
-		
+
 	}
 
 	@Override
@@ -32,12 +30,12 @@ public class CM_SECURITY_TOKEN_REQUEST extends AionClientPacket {
 		if (player == null) {
 			return;
 		}
-		
+
 		if (player.getPlayerAccount().getSecurityToken().equals("")) {
 			SecurityTokenService.getInstance().generateToken(player);
 		}
 		SecurityTokenService.getInstance().sendToken(player, player.getPlayerAccount().getSecurityToken());
-		
+
 	}
 
 }

@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author mr.madison
- *
  */
 public class _41509TryandCatchtheWind extends QuestHandler {
 
@@ -19,21 +17,21 @@ public class _41509TryandCatchtheWind extends QuestHandler {
 	public _41509TryandCatchtheWind() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205909).addOnQuestStart(questId);
 		qe.registerQuestNpc(205936).addOnTalkEvent(questId);
 		qe.registerQuestNpc(218215).addOnKillEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205909) {
 				switch (dialog) {
@@ -45,7 +43,7 @@ public class _41509TryandCatchtheWind extends QuestHandler {
 					}
 				}
 			}
-		}else if(qs.getStatus() == QuestStatus.START){
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205936) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -56,20 +54,18 @@ public class _41509TryandCatchtheWind extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205936) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -78,13 +74,13 @@ public class _41509TryandCatchtheWind extends QuestHandler {
 			return false;
 		int targetId = env.getTargetId();
 		int var = qs.getQuestVarById(0);
-		
-		if(targetId == 218215){
+
+		if (targetId == 218215) {
 			if (var >= 0 && var <= 5) {
 				qs.setQuestVarById(0, var + 1);
 				updateQuestStatus(env);
 				return true;
-			}else if(var == 6){
+			} else if (var == 6) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return true;

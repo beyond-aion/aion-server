@@ -26,7 +26,7 @@ public enum EmotionType {
 	RESURRECT(19),
 	EMOTE(21),
 	END_DUEL(22), // What? Duel? It's the end of a emote
-	ATTACKMODE_IN_MOVE(24), 
+	ATTACKMODE_IN_MOVE(24),
 	NEUTRALMODE_IN_MOVE(25),
 	WALK(26),
 	RUN(27),
@@ -50,6 +50,7 @@ public enum EmotionType {
 	WINDSTREAM_STRAFE(52),
 	START_SPRINT(53),
 	END_SPRINT(54);
+
 	private int id;
 
 	private EmotionType(int id) {

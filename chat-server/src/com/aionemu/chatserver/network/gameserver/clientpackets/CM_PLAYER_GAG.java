@@ -11,30 +11,26 @@ import com.aionemu.chatserver.service.ChatService;
 
 /**
  * @author ViAl
- *
  */
-public class CM_PLAYER_GAG extends GsClientPacket
-{
+public class CM_PLAYER_GAG extends GsClientPacket {
+
 	private static final Logger log = LoggerFactory.getLogger(CM_PLAYER_LOGOUT.class);
 	private int playerId;
 	private long gagTime;
 
-	public CM_PLAYER_GAG(ByteBuffer buf, GsConnection connection)
-	{
+	public CM_PLAYER_GAG(ByteBuffer buf, GsConnection connection) {
 		super(buf, connection, 0x03);
 	}
 
 	@Override
-	protected void readImpl()
-	{
+	protected void readImpl() {
 		playerId = readD();
 		gagTime = readQ();
 	}
 
 	@Override
-	protected void runImpl()
-	{
+	protected void runImpl() {
 		ChatService.getInstance().gagPlayer(playerId, gagTime);
-		log.info("Player was gagged " + playerId + " for "+(gagTime / 1000 / 60) + " minutes");
+		log.info("Player was gagged " + playerId + " for " + (gagTime / 1000 / 60) + " minutes");
 	}
 }

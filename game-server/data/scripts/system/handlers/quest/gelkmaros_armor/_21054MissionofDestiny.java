@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author keqi
- *
  */
 public class _21054MissionofDestiny extends QuestHandler {
 
@@ -32,8 +30,8 @@ public class _21054MissionofDestiny extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
-		if(qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()){
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 799318) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -52,8 +50,7 @@ public class _21054MissionofDestiny extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799318) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -64,8 +61,7 @@ public class _21054MissionofDestiny extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799318) {
 				return sendQuestEndDialog(env);
 			}
@@ -73,4 +69,3 @@ public class _21054MissionofDestiny extends QuestHandler {
 		return false;
 	}
 }
-

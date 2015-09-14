@@ -106,8 +106,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 				return false;
 			}
 			existingSkill.setSkillLvl(skillLevel);
-		}
-		else {
+		} else {
 			if (isStigma)
 				stigmaSkills.put(skillId, new PlayerSkillEntry(skillId, true, skillLevel, state));
 			else {

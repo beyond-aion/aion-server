@@ -23,7 +23,6 @@ public class CM_ACCOUNT_RECONNECT_KEY extends LsClientPacket {
 	 */
 	private int reconnectKey;
 
-
 	/**
 	 * {@inheritDoc}
 	 */

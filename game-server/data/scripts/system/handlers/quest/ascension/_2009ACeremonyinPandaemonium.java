@@ -60,10 +60,10 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-                                                }
-                                                if (var == 1) {
-                                                        return sendQuestDialog(env, 1013);
-                                                }
+						}
+						if (var == 1) {
+							return sendQuestDialog(env, 1013);
+						}
 					case SETPRO1:
 						if (var <= 1) {
 							qs.setQuestVar(1);
@@ -73,8 +73,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 204182) {
+			} else if (targetId == 204182) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -87,8 +86,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2); // 2
 				}
-			}
-			else if (targetId == 204075) {
+			} else if (targetId == 204075) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
@@ -116,11 +114,10 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204080 && var == 10) {
 				switch (env.getDialogId()) {
 					case -1:
@@ -139,10 +136,9 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 0)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 204081 && var == 20) {
+			} else if (targetId == 204081 && var == 20) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2375);
@@ -160,10 +156,9 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 1)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 204082 && var == 30) {
+			} else if (targetId == 204082 && var == 30) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2716);
@@ -181,10 +176,9 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 2)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 204083 && var == 40) {
+			} else if (targetId == 204083 && var == 40) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3057);
@@ -202,10 +196,9 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 3)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 801220 && var == 50) {
+			} else if (targetId == 801220 && var == 50) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3398);
@@ -223,10 +216,9 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 4)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 801221 && var == 60) {
+			} else if (targetId == 801221 && var == 60) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3739);
@@ -244,7 +236,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 5)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
 			}
 		}

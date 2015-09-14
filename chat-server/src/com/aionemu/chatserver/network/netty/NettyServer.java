@@ -26,8 +26,8 @@ import com.aionemu.commons.network.ServerCfg;
 /**
  * @author ATracer
  */
-public class NettyServer
-{
+public class NettyServer {
+
 	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 	private final ChannelGroup channelGroup = new DefaultChannelGroup(NettyServer.class.getName());
@@ -35,14 +35,12 @@ public class NettyServer
 	private ChannelFactory loginToClientChannelFactory;
 	private NioServer nioServer;
 	private static NettyServer instance = new NettyServer();
-	
-	public static NettyServer getInstance()
-	{
+
+	public static NettyServer getInstance() {
 		return instance;
 	}
-	
-	public NettyServer()
-	{
+
+	public NettyServer() {
 		this.loginToClientPipeLineFactory = new LoginToClientPipeLineFactory(new ClientPacketHandler());
 		initialize();
 	}
@@ -50,12 +48,12 @@ public class NettyServer
 	/**
 	 * Initialize listening on login port
 	 */
-	public void initialize()
-	{
+	public void initialize() {
 		loginToClientChannelFactory = initChannelFactory();
 		Channel loginToClientChannel = initChannel(loginToClientChannelFactory, Config.CHAT_ADDRESS, loginToClientPipeLineFactory);
 		channelGroup.add(loginToClientChannel);
-		ServerCfg gs = new ServerCfg(Config.GAME_ADDRESS.getAddress().getHostAddress(),  Config.GAME_ADDRESS.getPort(), "Gs Connections", new GsConnectionFactoryImpl());
+		ServerCfg gs = new ServerCfg(Config.GAME_ADDRESS.getAddress().getHostAddress(), Config.GAME_ADDRESS.getPort(), "Gs Connections",
+			new GsConnectionFactoryImpl());
 		nioServer = new NioServer(5, gs);
 		nioServer.connect();
 	}
@@ -63,9 +61,9 @@ public class NettyServer
 	/**
 	 * @return NioServerSocketChannelFactory
 	 */
-	private NioServerSocketChannelFactory initChannelFactory()
-	{
-		return new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(), Runtime.getRuntime().availableProcessors() * 2 + 1);
+	private NioServerSocketChannelFactory initChannelFactory() {
+		return new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(), Runtime.getRuntime()
+			.availableProcessors() * 2 + 1);
 	}
 
 	/**
@@ -75,8 +73,7 @@ public class NettyServer
 	 * @param channelPipelineFactory
 	 * @return Channel
 	 */
-	private Channel initChannel(ChannelFactory channelFactory, InetSocketAddress address, ChannelPipelineFactory channelPipelineFactory)
-	{
+	private Channel initChannel(ChannelFactory channelFactory, InetSocketAddress address, ChannelPipelineFactory channelPipelineFactory) {
 		ServerBootstrap bootstrap = new ServerBootstrap(channelFactory);
 		bootstrap.setPipelineFactory(channelPipelineFactory);
 		bootstrap.setOption("child.bufferFactory", HeapChannelBufferFactory.getInstance(ByteOrder.LITTLE_ENDIAN));
@@ -91,8 +88,7 @@ public class NettyServer
 	/**
 	 * Shutdown server
 	 */
-	public void shutdownAll()
-	{
+	public void shutdownAll() {
 		ChannelGroupFuture future = channelGroup.close();
 		future.awaitUninterruptibly();
 		loginToClientChannelFactory.releaseExternalResources();

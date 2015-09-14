@@ -6,10 +6,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-
 /**
  * @author MrPoke
- *
  */
 public abstract class ItemUseObserver extends ActionObserver {
 
@@ -24,12 +22,12 @@ public abstract class ItemUseObserver extends ActionObserver {
 	public final void attack(Creature creature) {
 		abort();
 	}
-	
+
 	@Override
 	public final void attacked(Creature creature) {
 		abort();
 	}
-	
+
 	@Override
 	public final void died(Creature creature) {
 		abort();

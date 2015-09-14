@@ -31,8 +31,8 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
  * @author ATracer modified by Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects", "actions",
-	"periodicActions", "motion" })
+@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions",
+	"effects", "actions", "periodicActions", "motion" })
 public class SkillTemplate {
 
 	protected Properties properties;
@@ -97,7 +97,7 @@ public class SkillTemplate {
 	@XmlAttribute(name = "avatar")
 	protected boolean isDeityAvatar;
 	@XmlAttribute(name = "ground")
-	protected boolean isGroundSkill;//TODO remove!
+	protected boolean isGroundSkill;// TODO remove!
 	@XmlAttribute(name = "ammospeed")
 	protected int ammoSpeed;
 	@XmlAttribute(name = "conflict_id")
@@ -110,9 +110,10 @@ public class SkillTemplate {
 	protected boolean noSaveOnLogout = false;
 	@XmlAttribute(name = "stigma")
 	protected StigmaType stigmaType = StigmaType.NONE;
-	
+
 	@XmlTransient
 	protected HashMap<Integer, Integer> effectIds = null;
+
 	/**
 	 * @return the Properties
 	 */
@@ -173,6 +174,7 @@ public class SkillTemplate {
 	public PeriodicActions getPeriodicActions() {
 		return periodicActions;
 	}
+
 	/**
 	 * Gets the value of the motion property.
 	 * 
@@ -181,6 +183,7 @@ public class SkillTemplate {
 	public Motion getMotion() {
 		return motion;
 	}
+
 	/**
 	 * Gets the value of the skillId property.
 	 */
@@ -275,11 +278,11 @@ public class SkillTemplate {
 	public int getDuration() {
 		return duration;
 	}
-	
+
 	public int getToggleTimer() {
 		return toggleTimer;
 	}
-	
+
 	/**
 	 * @return the stigmaType
 	 */
@@ -305,7 +308,7 @@ public class SkillTemplate {
 	public boolean isProvoked() {
 		return activationAttribute == ActivationAttribute.PROVOKED;
 	}
-	
+
 	public boolean isMaintain() {
 		return activationAttribute == ActivationAttribute.MAINTAIN;
 	}
@@ -313,7 +316,7 @@ public class SkillTemplate {
 	public boolean isActive() {
 		return activationAttribute == ActivationAttribute.ACTIVE;
 	}
-	
+
 	public boolean isCharge() {
 		return activationAttribute == ActivationAttribute.CHARGE;
 	}
@@ -383,11 +386,11 @@ public class SkillTemplate {
 	public boolean hasItemHealFpEffect() {
 		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.PROCFPHEALINSTANT);
 	}
-	
+
 	public boolean hasEvadeEffect() {
 		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.EVADE);
 	}
-	
+
 	public boolean hasRecallInstant() {
 		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.RECALLINSTANT);
 	}
@@ -395,19 +398,19 @@ public class SkillTemplate {
 	public int getCooldownId() {
 		return (cooldownId > 0) ? cooldownId : skillId;
 	}
-	
+
 	public boolean isDeityAvatar() {
 		return isDeityAvatar;
 	}
-	
+
 	public boolean isGroundSkill() {
 		return isGroundSkill;
 	}
-	
+
 	public AttackStatus getCounterSkill() {
 		return counterSkill;
 	}
-	
+
 	public int getAmmoSpeed() {
 		return ammoSpeed;
 	}
@@ -415,26 +418,26 @@ public class SkillTemplate {
 	public int getConflictId() {
 		return conflictId;
 	}
-	
+
 	public boolean isNoRemoveAtDie() {
 		return noRemoveAtDie;
 	}
-	
+
 	public boolean isNoSaveOnLogout() {
 		return noSaveOnLogout;
 	}
-	
+
 	public int getEffectsDuration(int skillLevel) {
 		int duration = 0;
 		Iterator<EffectTemplate> itr = getEffects().getEffects().iterator();
-		while(itr.hasNext() && duration == 0) {
+		while (itr.hasNext() && duration == 0) {
 			EffectTemplate et = itr.next();
 			int effectDuration = et.getDuration2() + et.getDuration1() * skillLevel;
 			if (et.getRandomTime() > 0)
 				effectDuration -= Rnd.get(et.getRandomTime());
 			duration = duration > effectDuration ? duration : effectDuration;
 		}
-		
+
 		return duration;
 	}
 
@@ -442,34 +445,34 @@ public class SkillTemplate {
 		if (startconditions != null) {
 			for (Condition cond : startconditions.getConditions()) {
 				if (cond instanceof ChainCondition)
-					return (ChainCondition)cond;
+					return (ChainCondition) cond;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public RideRobotCondition getRideRobotCondition() {
 		if (useconditions != null) {
 			for (Condition cond : useconditions.getConditions()) {
 				if (cond instanceof RideRobotCondition)
-					return (RideRobotCondition)cond;
+					return (RideRobotCondition) cond;
 			}
 		}
 		return null;
 	}
-	
+
 	public SkillChargeCondition getSkillChargeCondition() {
 		if (startconditions != null) {
 			for (Condition cond : startconditions.getConditions()) {
 				if (cond instanceof SkillChargeCondition)
-					return (SkillChargeCondition)cond;
+					return (SkillChargeCondition) cond;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public HashMap<Integer, Integer> getEffectIds() {
 		return this.effectIds;
 	}
@@ -491,16 +494,16 @@ public class SkillTemplate {
 	 * @return
 	 */
 	public HpCondition getHpCondition() {
-		for(Condition c : startconditions.getConditions())
-			if(c instanceof HpCondition){
+		for (Condition c : startconditions.getConditions())
+			if (c instanceof HpCondition) {
 				return ((HpCondition) c);
 			}
 		return null;
 	}
-	
+
 	public PlayerMovedCondition getMovedCondition() {
-		for(Condition c : startconditions.getConditions())
-			if(c instanceof PlayerMovedCondition){
+		for (Condition c : startconditions.getConditions())
+			if (c instanceof PlayerMovedCondition) {
 				return ((PlayerMovedCondition) c);
 			}
 		return null;
@@ -509,7 +512,7 @@ public class SkillTemplate {
 	public Conditions getEndConditions() {
 		return endconditions;
 	}
-	
+
 	public SkillCategory getSkillCategory() {
 		return skillCategory;
 	}

@@ -41,8 +41,7 @@ public class SM_WAREHOUSE_INFO extends AionServerPacket {
 		if (warehouseType == StorageType.REGULAR_WAREHOUSE.getId() && itemList.size() > 0) {
 			writeC(1);
 			writeC(0); // unk, seen value 0x02
-		}
-		else {
+		} else {
 			writeH(0);
 		}
 		writeH(itemList.size());

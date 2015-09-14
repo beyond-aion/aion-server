@@ -7,12 +7,10 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _28300FloatingDoom  extends QuestHandler {
+public class _28300FloatingDoom extends QuestHandler {
 
 	private final static int questId = 28300;
 
@@ -44,8 +42,7 @@ public class _28300FloatingDoom  extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (targetId == 799531) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -57,8 +54,7 @@ public class _28300FloatingDoom  extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			}
-		}
-		else if ((qs.getStatus() == QuestStatus.REWARD)) {
+		} else if ((qs.getStatus() == QuestStatus.REWARD)) {
 			if (targetId == 799530) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -72,7 +68,7 @@ public class _28300FloatingDoom  extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("ATURAM_SKY_FORTRESS_1_300240000")) {
@@ -92,4 +88,3 @@ public class _28300FloatingDoom  extends QuestHandler {
 		return false;
 	}
 }
-

@@ -18,11 +18,11 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 @AIName("queenmosqua")
 public class QueenMosquaAI2 extends SummonerAI2 {
+
 	private boolean isHome = true;
 
 	@Override

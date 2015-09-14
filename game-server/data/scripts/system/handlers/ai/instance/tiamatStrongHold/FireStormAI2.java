@@ -12,7 +12,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 
 /**
  * @author Cheatkiller
- *
  */
 @AIName("tahabatafirestorm")
 public class FireStormAI2 extends NpcAI2 {
@@ -22,21 +21,23 @@ public class FireStormAI2 extends NpcAI2 {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		final int skill = getNpcId() == 283102 ? 20753 : 20759; //4.0
+		final int skill = getNpcId() == 283102 ? 20753 : 20759; // 4.0
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				AI2Actions.useSkill(FireStormAI2.this, skill);
 			}
 		}, 0, 1000);
 
-		if (getNpcId() != 283102) {//4.0
+		if (getNpcId() != 283102) {// 4.0
 			despawn();
 		}
 	}
 
 	private void despawn() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				getOwner().getController().onDelete();

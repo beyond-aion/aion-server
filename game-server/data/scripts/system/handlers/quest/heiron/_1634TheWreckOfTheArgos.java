@@ -44,8 +44,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 			if (targetId == 204547) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -101,8 +100,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204541) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT: {

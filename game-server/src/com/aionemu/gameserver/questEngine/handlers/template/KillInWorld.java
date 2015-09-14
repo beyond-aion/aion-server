@@ -37,7 +37,9 @@ public class KillInWorld extends QuestHandler {
 	private final int startDialog;
 	private final int startDistanceNpc;
 
-	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int invasionWorld, int startDialog, int startDistanceNpc) {		super(questId);
+	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int invasionWorld,
+		int startDialog, int startDistanceNpc) {
+		super(questId);
 		if (startNpcIds != null) {
 			this.startNpcs.addAll(startNpcIds);
 			this.startNpcs.remove(0);
@@ -83,10 +85,10 @@ public class KillInWorld extends QuestHandler {
 			int worldId = iterator.next();
 			qe.registerOnKillInWorld(worldId, questId);
 		}
-		
-		if(invasionWorldId != 0)
+
+		if (invasionWorldId != 0)
 			qe.registerOnEnterWorld(questId);
-		
+
 		if (startDistanceNpc != 0)
 			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
 	}
@@ -111,15 +113,14 @@ public class KillInWorld extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
 				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -133,8 +134,7 @@ public class KillInWorld extends QuestHandler {
 		}
 		return false;
 	}
-			
-	
+
 	private boolean searchOpenRift() {
 		for (RiftLocation loc : RiftService.getInstance().getRiftLocations().values()) {
 			if (loc.getWorldId() == invasionWorldId && loc.isOpened()) {
@@ -143,12 +143,12 @@ public class KillInWorld extends QuestHandler {
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean onKillInWorldEvent(QuestEnv env) {
 		return defaultOnKillRankedEvent(env, 0, killAmount, true); // reward
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();

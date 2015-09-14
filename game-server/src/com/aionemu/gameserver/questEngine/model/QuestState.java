@@ -28,8 +28,8 @@ public class QuestState {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestState.class);
 
-	public QuestState(int questId, QuestStatus status, int questVars, int flags, int completeCount, Timestamp nextRepeatTime,
-		Integer reward, Timestamp completeTime) {
+	public QuestState(int questId, QuestStatus status, int questVars, int flags, int completeCount, Timestamp nextRepeatTime, Integer reward,
+		Timestamp completeTime) {
 		this.questId = questId;
 		this.status = status;
 		this.questVars = new QuestVars(questVars);
@@ -41,8 +41,8 @@ public class QuestState {
 		this.persistentState = PersistentState.NEW;
 	}
 
-	public QuestState(int questId, QuestStatus status, int questVars, int completeCount, Timestamp nextRepeatTime,
-		Integer reward, Timestamp completeTime) {
+	public QuestState(int questId, QuestStatus status, int questVars, int completeCount, Timestamp nextRepeatTime, Integer reward,
+		Timestamp completeTime) {
 		this(questId, status, questVars, 0, completeCount, nextRepeatTime, reward, completeTime);
 	}
 
@@ -124,8 +124,7 @@ public class QuestState {
 	public Integer getReward() {
 		if (reward == null) {
 			log.warn("No reward for the quest " + String.valueOf(questId));
-		}
-		else {
+		} else {
 			return reward;
 		}
 		return 0;
@@ -134,8 +133,7 @@ public class QuestState {
 	public boolean canRepeat() {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		if (status != QuestStatus.NONE
-			&& (status != QuestStatus.COMPLETE || (completeCount >= template.getMaxRepeatCount() && template
-				.getMaxRepeatCount() != 255))) {
+			&& (status != QuestStatus.COMPLETE || (completeCount >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255))) {
 			return false;
 		}
 		if (questVars.getQuestVars() != 0) {
@@ -173,6 +171,7 @@ public class QuestState {
 
 	/**
 	 * Possibly it is the second set of quest vars, now are named as flags
+	 * 
 	 * @return the questFlags
 	 */
 	public int getFlags() {
@@ -181,7 +180,9 @@ public class QuestState {
 
 	/**
 	 * Possibly it is the second set of quest vars, now are named as flags
-	 * @param questFlags the questFlags to set
+	 * 
+	 * @param questFlags
+	 *          the questFlags to set
 	 */
 	public void setFlags(int questFlags) {
 		this.questFlags = questFlags;

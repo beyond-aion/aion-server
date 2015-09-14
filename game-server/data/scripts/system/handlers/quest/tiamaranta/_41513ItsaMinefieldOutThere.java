@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author mr.madison
- *
  */
 public class _41513ItsaMinefieldOutThere extends QuestHandler {
 
@@ -22,21 +20,21 @@ public class _41513ItsaMinefieldOutThere extends QuestHandler {
 	public _41513ItsaMinefieldOutThere() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205947).addOnQuestStart(questId);
 		qe.registerQuestNpc(205947).addOnTalkEvent(questId);
 		qe.registerQuestItem(182212520, questId);
 	}
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env){
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205947) {
 				switch (dialog) {
@@ -48,25 +46,23 @@ public class _41513ItsaMinefieldOutThere extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205947) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q41513A")) && item.getItemId() == 182212520) {
 				changeQuestStep(env, 0, 0, true);
@@ -74,5 +70,5 @@ public class _41513ItsaMinefieldOutThere extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

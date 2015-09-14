@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,11 +112,10 @@ public class Equipment {
 		// don't allow to wear items of not allowed level
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(owner.getPlayerClass());
 		if (requiredLevel == -1 || requiredLevel > owner.getLevel()) {
-			PacketSendUtility.sendPacket(owner,
-				STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
 			return null;
 		}
-		
+
 		byte levelRestrict = itemTemplate.getMaxLevelRestrict(owner.getPlayerClass());
 		if (levelRestrict != 0 && owner.getLevel() > levelRestrict) {
 			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, itemTemplate.getNameId()));
@@ -136,8 +135,7 @@ public class Equipment {
 			}
 
 			if (!verifyRankLimits(item)) {
-				PacketSendUtility.sendPacket(owner,
-					STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankById(limits.getMinRank()).getDescriptionId()));
+				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankById(limits.getMinRank()).getDescriptionId()));
 				return null;
 			}
 		}
@@ -184,8 +182,7 @@ public class Equipment {
 				if (equipment.get(slotId) == null || markedFreeSlots.contains(slotId)) {
 					if (item.getItemTemplate().isTwoHandWeapon()) {
 						itemSlotMask &= ~slotId;
-					}
-					else {
+					} else {
 						itemSlotToEquip = slotId;
 						break;
 					}
@@ -223,7 +220,7 @@ public class Equipment {
 	 */
 	private Item equip(long itemSlotToEquip, Item item) {
 		if (item.getOptionalSocket() == -1) {
-			log.warn("item can't be equiped because hasTune"+ item.getObjectId());
+			log.warn("item can't be equiped because hasTune" + item.getObjectId());
 			return null;
 		}
 		synchronized (equipment) {
@@ -256,8 +253,7 @@ public class Equipment {
 
 			if (equipment.get(allSlots[0].getSlotIdMask()) != null) {
 				log.error("CHECKPOINT : putting item to already equiped slot. Info slot: " + itemSlotToEquip + " new item: "
-					+ item.getItemTemplate().getTemplateId() + " old item: "
-					+ equipment.get(allSlots[0].getSlotIdMask()).getItemTemplate().getTemplateId());
+					+ item.getItemTemplate().getTemplateId() + " old item: " + equipment.get(allSlots[0].getSlotIdMask()).getItemTemplate().getTemplateId());
 				return null;
 			}
 
@@ -346,7 +342,7 @@ public class Equipment {
 			return itemToUnequip;
 		}
 	}
-	
+
 	public Item unEquipItem(int itemUniqueId, long slot) {
 		return unEquipItem(itemUniqueId, slot, true);
 	}
@@ -414,14 +410,12 @@ public class Equipment {
 			leftSlot = ItemSlot.SUB_HAND.getSlotIdMask();
 			itemInRightHand = equipment.get(rightSlot);
 			itemInLeftHand = equipment.get(leftSlot);
-		}
-		else if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_OR_SUB_OFF.getSlotIdMask()) != 0) {
+		} else if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_OR_SUB_OFF.getSlotIdMask()) != 0) {
 			rightSlot = ItemSlot.MAIN_OFF_HAND.getSlotIdMask();
 			leftSlot = ItemSlot.SUB_OFF_HAND.getSlotIdMask();
 			itemInRightHand = equipment.get(rightSlot);
 			itemInLeftHand = equipment.get(leftSlot);
-		}
-		else
+		} else
 			return false;
 
 		// for dual weapons, they occupy two slots, so check if the same item
@@ -437,40 +431,34 @@ public class Equipment {
 					requiredInventorySlots++;
 					markedFreeSlots.add(rightSlot);
 					markedFreeSlots.add(leftSlot);
-				}
-				else
+				} else
 					unEquip(rightSlot | leftSlot);
-			}
-			else {
+			} else {
 				if (itemInRightHand != null) {
 					if (validateOnly) {
 						requiredInventorySlots++;
 						markedFreeSlots.add(rightSlot);
-					}
-					else
+					} else
 						unEquip(rightSlot);
 				}
 				if (itemInLeftHand != null) {
 					if (validateOnly) {
 						requiredInventorySlots++;
 						markedFreeSlots.add(leftSlot);
-					}
-					else
+					} else
 						unEquip(leftSlot);
 				}
 			}
-		}
-		else { // adding one-handed weapon
+		} else { // adding one-handed weapon
 			if (itemInRightHand != null) { // main hand is already occupied
-				boolean addingLeftHand =  (item.getEquipmentSlot() & ItemSlot.LEFT_HAND.getSlotIdMask()) != 0;
+				boolean addingLeftHand = (item.getEquipmentSlot() & ItemSlot.LEFT_HAND.getSlotIdMask()) != 0;
 				// if occupied by 2H weapon, we have to unequip both slots, skills are not required
 				if (mainIsTwoHand) {
 					if (validateOnly) {
 						requiredInventorySlots++;
 						markedFreeSlots.add(rightSlot);
 						markedFreeSlots.add(leftSlot);
-					}
-					else
+					} else
 						unEquip(rightSlot | leftSlot);
 				} // main hand is already occupied and adding unknown hand, needs skills to be checked
 				else if (hasDualWieldingSkills()) {
@@ -483,11 +471,9 @@ public class Equipment {
 					if (validateOnly) {
 						requiredInventorySlots++;
 						markedFreeSlots.add(switchSlot);
-					}
-					else
+					} else
 						unEquip(switchSlot);
-				}
-				else {
+				} else {
 					// requiredInventorySlots are 0
 					if (addingLeftHand && itemInLeftHand != null && !isShieldEquipped()) {
 						// this is not good, if inventory is full, should switch slots
@@ -495,8 +481,7 @@ public class Equipment {
 							markedFreeSlots.add(leftSlot);
 						else
 							unEquip(leftSlot);
-					}
-					else {
+					} else {
 						// replace main hand, doesn't matter which slot is equiped
 						// client sends slot 2 even for double-click
 						if (validateOnly)
@@ -543,7 +528,7 @@ public class Equipment {
 	 */
 	private boolean validateEquippedArmor(Item item, boolean validateOnly) {
 		ItemTemplate template = item.getItemTemplate();
-		if (template.getItemGroup()  == ItemGroup.ARROW)
+		if (template.getItemGroup() == ItemGroup.ARROW)
 			return false;
 		// allow wearing of jewelry etc stuff
 		if (!template.isArmor())
@@ -568,8 +553,7 @@ public class Equipment {
 					return false;
 				markedFreeSlots.add(slotToCheck1.getSlotIdMask());
 				markedFreeSlots.add(slotToCheck2.getSlotIdMask());
-			}
-			else {
+			} else {
 				// remove 2H weapon
 				unEquip(slotToCheck1.getSlotIdMask() | slotToCheck2.getSlotIdMask());
 			}
@@ -631,8 +615,8 @@ public class Equipment {
 	/**
 	 * @return List<Item>
 	 */
-	public FastList<Item> getEquippedItemsWithoutStigma() {
-		FastList<Item> equippedItems = FastList.newInstance();
+	public FastTable<Item> getEquippedItemsWithoutStigma() {
+		FastTable<Item> equippedItems = new FastTable<>();
 		List<Item> twoHanded = new ArrayList<Item>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
@@ -652,8 +636,8 @@ public class Equipment {
 	/**
 	 * @return List<Item>
 	 */
-	public FastList<Item> getEquippedForApparence() {
-		FastList<Item> equippedItems = FastList.newInstance();
+	public FastTable<Item> getEquippedForApparence() {
+		FastTable<Item> equippedItems = new FastTable<>();
 		List<Item> twoHanded = new ArrayList<Item>();
 		for (Item item : equipment.values()) {
 			long slot = item.getEquipmentSlot();
@@ -670,7 +654,7 @@ public class Equipment {
 		twoHanded = null;
 		return equippedItems;
 	}
-	
+
 	/**
 	 * @return List<Item>
 	 */
@@ -714,7 +698,7 @@ public class Equipment {
 	 */
 	public int itemSetPartsEquipped(int itemSetTemplateId) {
 		int number = 0;
-		List<Integer> counted = new ArrayList<>(); //no double counting for accessory and weapons
+		List<Integer> counted = new ArrayList<>(); // no double counting for accessory and weapons
 
 		for (Item item : equipment.values()) {
 			if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
@@ -723,8 +707,8 @@ public class Equipment {
 			}
 			ItemSetTemplate setTemplate = item.getItemTemplate().getItemSet();
 			if (setTemplate != null && setTemplate.getId() == itemSetTemplateId && !counted.contains(item.getItemId())) {
-			   counted.add(item.getItemId());
-			   ++number;
+				counted.add(item.getItemId());
+				++number;
 			}
 		}
 		counted.clear();
@@ -763,7 +747,7 @@ public class Equipment {
 					item.setEquipmentSlot(ItemSlot.MAIN_OFF_OR_SUB_OFF.getSlotIdMask());
 				if (currentSlot != item.getEquipmentSlot())
 					setPersistentState(PersistentState.UPDATE_REQUIRED);
-				 oldSlots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
+				oldSlots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
 			}
 			for (ItemSlot sl : oldSlots) {
 				if (equipment.containsKey(sl.getSlotIdMask())) {
@@ -792,8 +776,7 @@ public class Equipment {
 	}
 
 	/**
-	 * Should be called only when equipment object totally constructed on player loading. Applies every equipped item
-	 * stats modificators
+	 * Should be called only when equipment object totally constructed on player loading. Applies every equipped item stats modificators
 	 */
 	public void onLoadApplyEquipmentStats() {
 		Item twoHanded = null;
@@ -806,7 +789,7 @@ public class Equipment {
 					twoHanded = item;
 				}
 				if (item.getOptionalSocket() == -1) {
-					log.warn("on load all eqipment, item can't be equiped because hasTune"+ item.getObjectId());
+					log.warn("on load all eqipment, item can't be equiped because hasTune" + item.getObjectId());
 					continue;
 				}
 				ItemEquipmentListener.onItemEquipment(item, owner);
@@ -843,8 +826,7 @@ public class Equipment {
 				continue;
 			// TODO: Check it! Not sure for dual hand
 			if (item.getItemTemplate().isArmor()) {
-				if (item.getItemTemplate().getItemSubType() == type && item.isEquipped()
-					&& item.getEquipmentSlot() != ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
+				if (item.getItemTemplate().getItemSubType() == type && item.isEquipped() && item.getEquipmentSlot() != ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
 					return true;
 				}
 			}
@@ -916,8 +898,7 @@ public class Equipment {
 			List<Item> powerShardStacks = owner.getInventory().getItemsByItemId(powerShardItem.getItemTemplate().getTemplateId());
 			if (powerShardStacks.size() != 0) {
 				equipItem(powerShardStacks.get(0).getObjectId(), powerShardItem.getEquipmentSlot());
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(owner, STR_MSG_WEAPON_BOOST_MODE_BURN_OUT);
 				owner.unsetState(CreatureState.POWERSHARD);
 			}
@@ -953,7 +934,8 @@ public class Equipment {
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);
-		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForApparence()), true);
+		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForApparence()),
+			true);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
@@ -982,15 +964,13 @@ public class Equipment {
 				ItemSlot[] slots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
 				for (ItemSlot slot : slots)
 					equipment.remove(slot.getSlotIdMask());
-			}
-			else {
+			} else {
 				equipment.remove(item.getEquipmentSlot());
 			}
 			item.setEquipped(false);
 			PacketSendUtility.sendPacket(owner, new SM_INVENTORY_UPDATE_ITEM(owner, item, ItemUpdateType.EQUIP_UNEQUIP));
 			if (owner.getGameStats() != null) {
-				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0
-					|| (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 || (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
 					notifyItemUnequip(item);
 				}
 			}
@@ -1010,8 +990,7 @@ public class Equipment {
 				ItemSlot[] slots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
 				for (ItemSlot slot : slots)
 					equipment.put(slot.getSlotIdMask(), item);
-			}
-			else {
+			} else {
 				equipment.put(item.getEquipmentSlot(), item);
 			}
 			item.setEquipped(true);
@@ -1020,8 +999,7 @@ public class Equipment {
 
 		if (owner.getGameStats() != null) {
 			for (Item item : equippedWeapon) {
-				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0
-					|| (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 || (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
 					notifyItemEquipped(item);
 				}
 			}
@@ -1049,7 +1027,9 @@ public class Equipment {
 
 	/**
 	 * Checks if dual one-handed weapon is equiped in any slot combination
-	 * @param slot masks
+	 * 
+	 * @param slot
+	 *          masks
 	 * @return
 	 */
 	public boolean hasDualWeaponEquipped(ItemSlot slot) {
@@ -1070,7 +1050,7 @@ public class Equipment {
 	 * @param armorType
 	 */
 	public boolean isArmorEquipped(ItemSubType subType) {
-	
+
 		for (long slot : ARMOR_SLOTS) {
 			if (equipment.get(slot) != null && equipment.get(slot).getItemTemplate().getItemSubType() == subType)
 				return true;
@@ -1132,24 +1112,19 @@ public class Equipment {
 		if (PlayerActions.isAlreadyDead(player)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800119));
 			return false;
-		}
-		else if (player.isInPlayerMode(PlayerMode.RIDE)) {
+		} else if (player.isInPlayerMode(PlayerMode.RIDE)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800114));
 			return false;
-		}
-		else if (player.isInState(CreatureState.CHAIR)) {
+		} else if (player.isInState(CreatureState.CHAIR)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800117));
 			return false;
-		}
-		else if (player.isInState(CreatureState.RESTING)) {
+		} else if (player.isInState(CreatureState.RESTING)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800115));
 			return false;
-		}
-		else if (player.isInState(CreatureState.FLYING)) {
+		} else if (player.isInState(CreatureState.FLYING)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800111));
 			return false;
-		}
-		else if (player.isInState(CreatureState.WEAPON_EQUIPPED)) {
+		} else if (player.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800159));
 			return false;
 		}
@@ -1160,8 +1135,8 @@ public class Equipment {
 			public void acceptRequest(Creature requester, Player responder) {
 				player.getController().cancelUseItem();
 
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(),
-					5000, 4), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4),
+					true);
 
 				player.getController().cancelTask(TaskId.ITEM_USE);
 
@@ -1171,8 +1146,8 @@ public class Equipment {
 					public void moved() {
 						player.getController().cancelTask(TaskId.ITEM_USE);
 						PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
-						PacketSendUtility.broadcastPacket(player,
-							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
+						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8),
+							true);
 					}
 				};
 				player.getObserveController().attach(moveObserver);
@@ -1184,16 +1159,15 @@ public class Equipment {
 					public void run() {
 						player.getObserveController().removeObserver(moveObserver);
 
-						PacketSendUtility.broadcastPacket(player,
-							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6), true);
+						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6),
+							true);
 						PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_ITEM_SUCCEED(item.getNameId()));
 
 						item.setSoulBound(true);
 						ItemPacketService.updateItemAfterInfoChange(owner, item);
 
 						equip(slot, item);
-						PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getEquippedForApparence()),
-							true);
+						PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getEquippedForApparence()), true);
 					}
 				}, 5000));
 			}
@@ -1204,13 +1178,11 @@ public class Equipment {
 			}
 		};
 
-		boolean requested = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND,
-			responseHandler);
+		boolean requested = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, responseHandler);
 		if (requested) {
 			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0,
 				new DescriptionId(item.getNameId())));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_CLOSE_OTHER_MSG_BOX_AND_RETRY);
 		}
 		return false;

@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41170ReiScued extends QuestHandler {
 
@@ -43,25 +41,22 @@ public class _41170ReiScued extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205744) { 
+			if (targetId == 205744) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205761) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205761) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1)
+				} else if (env.getDialog() == DialogAction.SETPRO1)
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 205744, 0, 1);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205744) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205744) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -70,7 +65,7 @@ public class _41170ReiScued extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -91,6 +86,6 @@ public class _41170ReiScued extends QuestHandler {
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 0, false); 
+		return defaultFollowEndEvent(env, 1, 0, false);
 	}
 }

@@ -50,8 +50,7 @@ public class ItemCollecting extends QuestHandler {
 		this.nextNpcId = nextNpcId;
 		if (endNpcIds == null) {
 			endNpcs.addAll(startNpcs);
-		}
-		else {
+		} else {
 			endNpcs.addAll(endNpcIds);
 			endNpcs.remove(0);
 		}
@@ -105,8 +104,7 @@ public class ItemCollecting extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
-				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
+			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : 1011);
@@ -136,8 +134,7 @@ public class ItemCollecting extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == nextNpcId && var == 0) {
 				switch (dialog) {
@@ -148,8 +145,7 @@ public class ItemCollecting extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (endNpcs.contains(targetId)) {
+			} else if (endNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : 2375);
@@ -186,12 +182,10 @@ public class ItemCollecting extends QuestHandler {
 			else if (targetId != 0 && actionItems != null && actionItems.contains(targetId)) {
 				return true; // looting
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 			List<QuestBonuses> bonuses = template.getBonus();
-			if (!bonuses.isEmpty() && bonuses.get(0).getType() == BonusType.MEDAL
-				&& !BonusService.getInstance().checkInventory(player, template)) {
+			if (!bonuses.isEmpty() && bonuses.get(0).getType() == BonusType.MEDAL && !BonusService.getInstance().checkInventory(player, template)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
 				return closeDialogWindow(env);
 			}

@@ -15,11 +15,11 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author ginho1
  */
 public class CM_QUEST_SHARE extends AionClientPacket {
+
 	public int questId;
 
 	public CM_QUEST_SHARE(int opcode, State state, State... restStates) {
@@ -39,11 +39,11 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 	 */
 	@Override
 	protected void runImpl() {
-		Player player  = this.getConnection().getActivePlayer();
+		Player player = this.getConnection().getActivePlayer();
 
 		if (player == null)
 			return;
-		
+
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
 
 		if (questTemplate == null || questTemplate.isCannotShare())
@@ -58,33 +58,34 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
 				if (player == member)
 					continue;
-				
-					if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
-						continue;
+
+				if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
+					continue;
 				}
-				
-				if(questTemplate.getTarget().equals(QuestTarget.ALLIANCE)) {
+
+				if (questTemplate.getTarget().equals(QuestTarget.ALLIANCE)) {
 					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100005, player.getName()));
 					continue;
 				}
-				
-				if(!questTemplate.isRepeatable()) {
-					if(member.getQuestStateList().getQuestState(questId) != null)
-						if(member.getQuestStateList().getQuestState(questId).getStatus() != null && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
+
+				if (!questTemplate.isRepeatable()) {
+					if (member.getQuestStateList().getQuestState(questId) != null)
+						if (member.getQuestStateList().getQuestState(questId).getStatus() != null
+							&& member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
+							continue;
+				} else {
+					if (member.getQuestStateList().getQuestState(questId) != null)
+						if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
+							|| member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
 							continue;
 				}
-				else {
-					if(member.getQuestStateList().getQuestState(questId) != null)
-						if(member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
-							continue;
-				}
-				
-				if(member.isInFlyingState()) {
+
+				if (member.isInFlyingState()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
 					continue;
 				}
-				
+
 				if (!QuestService.checkLevelRequirement(this.questId, member.getLevel())) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
 					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100003, player.getName()));
@@ -93,31 +94,33 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(this.questId, member.getObjectId(), true));
 			}
 		}
-		
-		else if(player.isInAlliance2()) {
+
+		else if (player.isInAlliance2()) {
 			for (Player member : player.getPlayerAllianceGroup2().getOnlineMembers()) {
 				if (player == member)
 					continue;
-					if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
+				if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
+					continue;
+				}
+
+				if (!questTemplate.isRepeatable()) {
+					if (member.getQuestStateList().getQuestState(questId).getStatus() != null
+						&& member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
 						continue;
 				}
-				
-				if(!questTemplate.isRepeatable()) {
-					if(member.getQuestStateList().getQuestState(questId).getStatus() != null && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
-							continue;
-				}
-					
+
 				else {
-						if(member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
-							continue;
+					if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
+						|| member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
+						continue;
 				}
-				
-				if(member.isInFlyingState()) {
+
+				if (member.isInFlyingState()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
 					continue;
 				}
-				
+
 				if (!QuestService.checkLevelRequirement(this.questId, member.getLevel())) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
 					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100003, player.getName()));
@@ -125,10 +128,9 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 				}
 				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(this.questId, member.getObjectId(), true));
 			}
-		}
-		else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000));
-				return;
+		} else {
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000));
+			return;
 		}
 	}
 }

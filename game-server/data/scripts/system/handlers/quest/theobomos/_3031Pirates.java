@@ -116,8 +116,7 @@ public class _3031Pirates extends QuestHandler {
 					return true;
 				}
 			}
-		}
-		else if (targetId == 214222 || targetId == 214223) {
+		} else if (targetId == 214222 || targetId == 214223) {
 			switch (qs.getQuestVarById(2)) {
 				case 0:
 				case 1:

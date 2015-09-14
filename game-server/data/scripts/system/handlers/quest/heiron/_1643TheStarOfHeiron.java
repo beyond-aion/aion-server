@@ -71,8 +71,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (qs.getQuestVarById(0) == 2) {
+							} else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -81,8 +80,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 							removeQuestItem(env, 182201764, 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-							QuestService.addNewSpawn(210040000, 1, 204614, (float) 1591.4327, (float) 2774.2283, (float) 127.63001,
-								(byte) 0);
+							QuestService.addNewSpawn(210040000, 1, 204614, (float) 1591.4327, (float) 2774.2283, (float) 127.63001, (byte) 0);
 							return true;
 						}
 						case SET_SUCCEED: {
@@ -117,8 +115,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204545) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

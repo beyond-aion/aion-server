@@ -1,23 +1,24 @@
 package com.aionemu.commons.scripting.impl.javacompiler;
 
-import com.aionemu.commons.scripting.ScriptClassLoader;
-import com.aionemu.commons.utils.ClassUtils;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.tools.JavaFileObject;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.tools.JavaFileObject;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.*;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
+import com.aionemu.commons.scripting.ScriptClassLoader;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This classloader is used to load script classes. <br>
@@ -121,8 +122,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 			if (file.isDirectory()) {
 				Set<String> packageClasses = ClassUtils.getClassNamesFromPackage(file, packageName, false);
 				classNames.addAll(packageClasses);
-			}
-			else if (FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
+			} else if (FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
 				while (!FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
 					file = file.getParentFile();
 				}
@@ -143,8 +143,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 					byte[] data = getRawClassByName(cn);
 					OutputStream os = bc.openOutputStream();
 					os.write(data);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error("Error while loading class from package " + packageName, e);
 					throw e;
 				}
@@ -156,8 +155,8 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 	}
 
 	/**
-	 * Finds class with the specified name from the URL search path. Any URLs referring to JAR files are loaded and opened
-	 * as needed until the class is found.
+	 * Finds class with the specified name from the URL search path. Any URLs referring to JAR files are loaded and opened as needed until the class is
+	 * found.
 	 * 
 	 * @param name
 	 *          the name of the class
@@ -176,21 +175,17 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		try {
 			is = resource.openStream();
 			clazz = IOUtils.toByteArray(is);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading class data: " + name, e);
 			throw e;
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			log.error("Can't open input stream for resource: " + name);
 			throw new IllegalArgumentException("Failed to open input stream for resource: " + name);
-		}
-		finally {
+		} finally {
 			if (is != null) {
 				try {
 					is.close();
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error("Error while closing stream", e);
 				}
 			}

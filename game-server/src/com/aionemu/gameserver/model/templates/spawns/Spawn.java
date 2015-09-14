@@ -24,13 +24,13 @@ public class Spawn {
 
 	@XmlAttribute(name = "npc_id", required = true)
 	private int npcId;
-	
+
 	@XmlAttribute(name = "respawn_time")
 	private Integer respawnTime = 0;
-	
+
 	@XmlAttribute(name = "pool")
 	private Integer pool = 0;
-	
+
 	@XmlAttribute(name = "difficult_id")
 	private byte difficultId;
 
@@ -121,7 +121,7 @@ public class Spawn {
 	public void setEventTemplate(EventTemplate eventTemplate) {
 		this.eventTemplate = eventTemplate;
 	}
-	
+
 	public byte getDifficultId() {
 		return difficultId;
 	}

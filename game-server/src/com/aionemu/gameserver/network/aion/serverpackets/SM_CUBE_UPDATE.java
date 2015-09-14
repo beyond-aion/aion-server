@@ -22,18 +22,16 @@ public class SM_CUBE_UPDATE extends AionServerPacket {
 	private int questExpands;
 	private int itemExpands;
 
-	public static SM_CUBE_UPDATE stigmaSlots(int slots)
-	{
+	public static SM_CUBE_UPDATE stigmaSlots(int slots) {
 		return new SM_CUBE_UPDATE(6, slots);
 	}
 
-	public static SM_CUBE_UPDATE cubeSize(StorageType type, Player player)
-	{
+	public static SM_CUBE_UPDATE cubeSize(StorageType type, Player player) {
 		int itemsCount = 0;
 		int npcExpands = 0;
 		int questExpands = 0;
 		int itemExpands = 0;
-		switch(type) {
+		switch (type) {
 			case CUBE:
 				itemsCount = player.getInventory().size();
 				npcExpands = player.getNpcExpands();
@@ -50,7 +48,7 @@ public class SM_CUBE_UPDATE extends AionServerPacket {
 				npcExpands = player.getLegion().getWarehouseLevel();
 				break;
 		}
-		
+
 		return new SM_CUBE_UPDATE(0, type.ordinal(), itemsCount, npcExpands, questExpands, itemExpands);
 	}
 

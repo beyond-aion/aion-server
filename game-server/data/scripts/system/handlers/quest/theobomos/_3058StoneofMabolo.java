@@ -42,8 +42,7 @@ public class _3058StoneofMabolo extends QuestHandler {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
-			}
-			else
+			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 		}
 		if (qs == null)
@@ -59,8 +58,7 @@ public class _3058StoneofMabolo extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798189) {
@@ -77,8 +75,7 @@ public class _3058StoneofMabolo extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 203701) {
+		} else if (targetId == 203701) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

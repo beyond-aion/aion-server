@@ -25,28 +25,30 @@ public class PackAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_NO_TARGET_ITEM());
 			return false;
 		}
-		if(targetItem.getItemTemplate().getPackCount() == 0) {
+		if (targetItem.getItemTemplate().getPackCount() == 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(new DescriptionId(targetItem.getNameId())));
 			return false;
 		}
-		if(targetItem.isEquipped()) {
+		if (targetItem.isEquipped()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_EQUIPED());
 			return false;
 		}
-		if(targetItem.getItemTemplate().isTradeable()) {
+		if (targetItem.getItemTemplate().isTradeable()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_EXCHANGE());
 			return false;
 		}
-		if(targetItem.getFusionedItemId() != 0) {
+		if (targetItem.getFusionedItemId() != 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_COMPOSITION());
 			return false;
 		}
-		if(targetItem.getItemTemplate().getItemQuality() != parentItem.getItemTemplate().getItemQuality()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(new DescriptionId(targetItem.getNameId()), new DescriptionId(parentItem.getNameId())));
+		if (targetItem.getItemTemplate().getItemQuality() != parentItem.getItemTemplate().getItemQuality()) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(new DescriptionId(targetItem.getNameId()), new DescriptionId(parentItem.getNameId())));
 			return false;
 		}
-		if(targetItem.getItemTemplate().getLevel() > parentItem.getItemTemplate().getLevel()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(new DescriptionId(targetItem.getNameId()), targetItem.getItemTemplate().getLevel()));
+		if (targetItem.getItemTemplate().getLevel() > parentItem.getItemTemplate().getLevel()) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(new DescriptionId(targetItem.getNameId()), targetItem.getItemTemplate().getLevel()));
 			return false;
 		}
 		UseTarget type = null;
@@ -99,16 +101,16 @@ public class PackAction extends AbstractItemAction {
 			default:
 				return false;
 		}
-        int packCount = targetItem.getPackCount();
-        if (packCount > 0) { // only negative unpacked
-            return false;
-        }
-        if (packCount < 0) {
-            packCount *= -1;
-        }
-        if (packCount >= targetItem.getItemTemplate().getPackCount() || targetItem.isEquipped()) {
-            return false;
-        }
+		int packCount = targetItem.getPackCount();
+		if (packCount > 0) { // only negative unpacked
+			return false;
+		}
+		if (packCount < 0) {
+			packCount *= -1;
+		}
+		if (packCount >= targetItem.getItemTemplate().getPackCount() || targetItem.isEquipped()) {
+			return false;
+		}
 		return target == type;
 	}
 
@@ -116,17 +118,17 @@ public class PackAction extends AbstractItemAction {
 	public void act(Player player, Item parentItem, Item targetItem) {
 		final int parentItemId = parentItem.getItemId();
 		final int parentObjectId = parentItem.getObjectId();
-        int packCount = targetItem.getPackCount();
-        PacketSendUtility.broadcastPacket(player,new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1), true);
-        if (!player.getInventory().decreaseByObjectId(parentObjectId, 1)) {
-            return;
-        }
-        if (packCount < 0) {
-            packCount *= -1;
-        }
-        targetItem.setPackCount(++packCount);
-        targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
-        PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
+		int packCount = targetItem.getPackCount();
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1), true);
+		if (!player.getInventory().decreaseByObjectId(parentObjectId, 1)) {
+			return;
+		}
+		if (packCount < 0) {
+			packCount *= -1;
+		}
+		targetItem.setPackCount(++packCount);
+		targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
 	}
 
 	public UseTarget getTarget() {

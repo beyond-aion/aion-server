@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.model.instance;
 
 /**
- *
  * @author xTz
  */
 public enum InstanceScoreType {
-	REINFORCE_MEMBER(12 * 1024 * 1024), //12582912
+	REINFORCE_MEMBER(12 * 1024 * 1024), // 12582912
 	PREPARING(1 * 1024 * 1024), // 1048576
 	START_PROGRESS(2 * 1024 * 1024), // 2097152
 	END_PROGRESS(3 * 1024 * 1024); // 3145728

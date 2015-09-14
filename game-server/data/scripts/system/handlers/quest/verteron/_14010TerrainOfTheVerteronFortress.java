@@ -45,16 +45,13 @@ public class _14010TerrainOfTheVerteronFortress extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);
-			}
-			else
+			} else
 				return sendQuestStartDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 				int[] ids = { 14011, 14012, 14013, 14014, 14015, 14016 };
 				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 				}
 			}
 			return sendQuestEndDialog(env);

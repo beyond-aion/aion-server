@@ -55,8 +55,7 @@ public class _10026SecretOfInggison extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799053)
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 799052) {
@@ -74,8 +73,7 @@ public class _10026SecretOfInggison extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 799053) {
+		} else if (targetId == 799053) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

@@ -20,11 +20,11 @@ import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -96,6 +96,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 				break;
 			case 700739:
 				npc.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
 					@Override
 					public void visit(Player player) {
 						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400477));
@@ -169,15 +170,11 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("TALOCS_1", mapId,
-				new Point3D(253.85039, 649.23535, 1171.8772),
-				new Point3D(253.85039, 649.23535, 1177.8772),
-				new Point3D(262.84872, 649.4091, 1171.8772), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("TALOCS_1", mapId, new Point3D(253.85039, 649.23535, 1171.8772), new Point3D(253.85039, 649.23535,
+			1177.8772), new Point3D(262.84872, 649.4091, 1171.8772), 8), instanceId);
 		f1.spawn();
-		FlyRing f2 = new FlyRing(new FlyRingTemplate("TALOCS_2", mapId,
-				new Point3D(592.32275, 844.056, 1295.0966),
-				new Point3D(592.32275, 844.056, 1301.0966),
-				new Point3D(595.2305, 835.5387, 1295.0966), 8), instanceId);
+		FlyRing f2 = new FlyRing(new FlyRingTemplate("TALOCS_2", mapId, new Point3D(592.32275, 844.056, 1295.0966), new Point3D(592.32275, 844.056,
+			1301.0966), new Point3D(595.2305, 835.5387, 1295.0966), 8), instanceId);
 		f2.spawn();
 	}
 
@@ -185,22 +182,21 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("TALOCS_1")) {
 			sendMovie(player, 463);
-		}
-		else if(flyingRing.equals("TALOCS_2")) {
+		} else if (flyingRing.equals("TALOCS_2")) {
 			sendMovie(player, 464);
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}
-	
+
 	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);

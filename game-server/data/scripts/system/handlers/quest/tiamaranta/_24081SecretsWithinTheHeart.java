@@ -101,8 +101,7 @@ public class _24081SecretsWithinTheHeart extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int targetId = env.getTargetId();
 			if (targetId == 218767) { // fragmented Gapermaw
-				QuestService.addNewSpawn(600030000, player.getInstanceId(), 701233, (float) player.getX(), (float) player.getY(), (float) player.getZ(),
-					(byte) 95);// Gravity Fault
+				QuestService.addNewSpawn(600030000, player.getInstanceId(), 701233, player.getX(), player.getY(), player.getZ(), (byte) 95);// Gravity Fault
 				return defaultOnKillEvent(env, 218767, 2, 2);
 			}
 			if (targetId == 233870) {// Heart of Fissure Guardian
@@ -135,8 +134,7 @@ public class _24081SecretsWithinTheHeart extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q20062A"))) {
 				if (var == 1) {
-					QuestService.addNewSpawn(600030000, player.getInstanceId(), 702314, (float) player.getX(), (float) player.getY(), (float) player.getZ(),
-						(byte) 95);
+					QuestService.addNewSpawn(600030000, player.getInstanceId(), 702314, player.getX(), player.getY(), player.getZ(), (byte) 95);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
 				}
 			}

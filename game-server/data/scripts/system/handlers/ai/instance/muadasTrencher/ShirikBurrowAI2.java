@@ -16,11 +16,11 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("shirik_burrow")
 public class ShirikBurrowAI2 extends AggressiveNpcAI2 {
+
 	private Future<?> lifeTask;
 
 	@Override
@@ -69,7 +69,7 @@ public class ShirikBurrowAI2 extends AggressiveNpcAI2 {
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
 		Npc npc = (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
-		NpcShoutsService.getInstance().sendMsg(npc, 1500307, npc.getObjectId(), 0, 1000);				
+		NpcShoutsService.getInstance().sendMsg(npc, 1500307, npc.getObjectId(), 0, 1000);
 	}
 
 	private void cancelLifeTask() {
@@ -77,7 +77,7 @@ public class ShirikBurrowAI2 extends AggressiveNpcAI2 {
 			lifeTask.cancel(true);
 		}
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {

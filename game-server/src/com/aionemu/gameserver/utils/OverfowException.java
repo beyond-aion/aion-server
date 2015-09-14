@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.utils;
 
-
 /**
  * @author MrPoke
- *
  */
 public class OverfowException extends Error {
 

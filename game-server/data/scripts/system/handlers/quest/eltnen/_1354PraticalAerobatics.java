@@ -11,62 +11,51 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Ritsu
- *
  */
-public class _1354PraticalAerobatics extends QuestHandler
-{
-	private final static int	questId	= 1354;
-	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_2",
-		"ERACUS_TEMPLE_210020000_3", "ERACUS_TEMPLE_210020000_4", "ERACUS_TEMPLE_210020000_5",
-		"ERACUS_TEMPLE_210020000_6", "ERACUS_TEMPLE_210020000_7"};
+public class _1354PraticalAerobatics extends QuestHandler {
 
-	public _1354PraticalAerobatics()
-	{
+	private final static int questId = 1354;
+	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_2", "ERACUS_TEMPLE_210020000_3", "ERACUS_TEMPLE_210020000_4",
+		"ERACUS_TEMPLE_210020000_5", "ERACUS_TEMPLE_210020000_6", "ERACUS_TEMPLE_210020000_7" };
+
+	public _1354PraticalAerobatics() {
 		super(questId);
 	}
+
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(203983).addOnQuestStart(questId);
 		qe.registerQuestNpc(203983).addOnTalkEvent(questId);
 		qe.registerOnQuestTimerEnd(questId);
-		for (String ring : rings) 
-		{
+		for (String ring : rings) {
 			qe.registerOnPassFlyingRings(ring, questId);
 		}
 	}
 
 	@Override
-	public boolean onPassFlyingRingEvent(QuestEnv env, String flyingRing) 
-	{
+	public boolean onPassFlyingRingEvent(QuestEnv env, String flyingRing) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (rings[0].equals(flyingRing)) {
-				changeQuestStep(env, 1, 2, false); 
+				changeQuestStep(env, 1, 2, false);
 				return true;
-			}
-			else if (rings[1].equals(flyingRing)) {
+			} else if (rings[1].equals(flyingRing)) {
 				changeQuestStep(env, 2, 3, false);
 				return true;
-			}
-			else if (rings[2].equals(flyingRing)) {
-				changeQuestStep(env, 3, 4, false); 
+			} else if (rings[2].equals(flyingRing)) {
+				changeQuestStep(env, 3, 4, false);
 				return true;
-			}
-			else if (rings[3].equals(flyingRing)) {
+			} else if (rings[3].equals(flyingRing)) {
 				changeQuestStep(env, 4, 5, false);
 				return true;
-			}
-			else if (rings[4].equals(flyingRing)) {
+			} else if (rings[4].equals(flyingRing)) {
 				changeQuestStep(env, 5, 6, false);
 				return true;
-			}
-			else if (rings[5].equals(flyingRing)) {
+			} else if (rings[5].equals(flyingRing)) {
 				changeQuestStep(env, 6, 7, false);
 				return true;
-			}
-			else if (rings[6].equals(flyingRing)) {
+			} else if (rings[6].equals(flyingRing)) {
 				qs.setQuestVarById(0, 8);
 				changeQuestStep(env, 8, 8, true);
 				QuestService.questTimerEnd(env);
@@ -77,11 +66,10 @@ public class _1354PraticalAerobatics extends QuestHandler
 	}
 
 	@Override
-	public boolean onQuestTimerEndEvent(QuestEnv env)
-	{
+	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if(qs == null)
+		if (qs == null)
 			return false;
 
 		qs.setQuestVarById(0, 0);
@@ -90,33 +78,31 @@ public class _1354PraticalAerobatics extends QuestHandler
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
 		DialogAction dialog = env.getDialog();
-		if(env.getVisibleObject() instanceof Npc)
+		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE){
-			if (targetId == 203983){
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 203983) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START){
-			if (targetId == 203983){
-				switch (dialog){
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 203983) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (qs.getQuestVarById(0) == 0)
 							return sendQuestDialog(env, 1003);
 						if (qs.getQuestVarById(0) == 8)
 							return sendQuestDialog(env, 2375);
 					case SETPRO1:
-						if (qs.getQuestVarById(0) == 0){
+						if (qs.getQuestVarById(0) == 0) {
 							QuestService.questTimerStart(env, 120);
 							return defaultCloseDialog(env, 0, 1);
 						}
@@ -124,8 +110,7 @@ public class _1354PraticalAerobatics extends QuestHandler
 						return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD){
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203983)
 				return sendQuestEndDialog(env);
 		}

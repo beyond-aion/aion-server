@@ -24,7 +24,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 	 * @param ArrayList
 	 *          <LegionMemberEx> legionMembers
 	 */
-	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isSplit , boolean isFirst) {
+	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isSplit, boolean isFirst) {
 		this.legionMembers = legionMembers;
 		this.isFirst = isFirst;
 		this.isSplit = isSplit;
@@ -46,7 +46,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 			writeS(legionMember.getSelfIntro());
 			writeS(legionMember.getNickname());
 			writeD(legionMember.getLastOnline());
-			
+
 			int address = HousingService.getInstance().getPlayerAddress(legionMember.getObjectId());
 			if (address > 0) {
 				House house = HousingService.getInstance().getPlayerStudio(legionMember.getObjectId());
@@ -54,8 +54,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 					house = HousingService.getInstance().getHouseByAddress(address);
 				writeD(address);
 				writeD(house.getDoorState().getPacketValue());
-			}
-			else {
+			} else {
 				writeD(0);
 				writeD(0);
 			}

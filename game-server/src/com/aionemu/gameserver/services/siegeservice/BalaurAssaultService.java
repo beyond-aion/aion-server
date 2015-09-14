@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +31,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author synchro2
  * @reworked Luzien
- * @modified Whoop 
- * 
- * TODO: Send Peace Dredgion without assault
+ * @modified Whoop TODO: Send Peace Dredgion without assault
  */
 public class BalaurAssaultService {
 
@@ -51,12 +49,10 @@ public class BalaurAssaultService {
 		if (siege instanceof FortressSiege) {
 			if (!calculateFortressAssault(((FortressSiege) siege).getSiegeLocation()))
 				return;
-		}
-		else if (siege instanceof ArtifactSiege) {
+		} else if (siege instanceof ArtifactSiege) {
 			if (!calculateArtifactAssault(((ArtifactSiege) siege).getSiegeLocation()))
 				return;
-		}
-		else
+		} else
 			return;
 		newAssault(siege, Rnd.get(60, 600));
 		if (LoggingConfig.LOG_SIEGE)
@@ -97,7 +93,7 @@ public class BalaurAssaultService {
 
 		int count = 0; // Allow only 2 Balaur attacks per map, 1 per Balaurea map
 		for (FortressAssault fa : fortressAssaults.values()) {
-			if (fa.getWorldId() == fortress.getWorldId()) 
+			if (fa.getWorldId() == fortress.getWorldId())
 				count++;
 		}
 
@@ -109,10 +105,10 @@ public class BalaurAssaultService {
 
 	private boolean calculateArtifactAssault(ArtifactLocation artifact) {
 		int locationId = artifact.getLocationId();
-		
+
 		if (artifactAssaults.containsKey(locationId) || artifact.getRace() == SiegeRace.BALAUR)
 			return false;
-		
+
 		return true;
 	}
 
@@ -130,8 +126,7 @@ public class BalaurAssaultService {
 			FortressAssault assault = new FortressAssault((FortressSiege) siege);
 			assault.startAssault(delay);
 			fortressAssaults.put(siege.getSiegeLocationId(), assault);
-		}
-		else if (siege instanceof ArtifactSiege) {
+		} else if (siege instanceof ArtifactSiege) {
 			ArtifactAssault assault = new ArtifactAssault((ArtifactSiege) siege);
 			assault.startAssault(delay);
 			artifactAssaults.put(siege.getSiegeLocationId(), assault);
@@ -152,17 +147,16 @@ public class BalaurAssaultService {
 					ownedForts++;
 			}
 			influence = ownedForts >= 2 ? 0.25f : 0.1f;
-		}
-		else
-			influence = locationRace.equals(SiegeRace.ASMODIANS) ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence
-				.getInstance().getGlobalElyosInfluence();
+		} else
+			influence = locationRace.equals(SiegeRace.ASMODIANS) ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence.getInstance()
+				.getGlobalElyosInfluence();
 
 		return Rnd.get() < influence * SiegeConfig.BALAUR_ASSAULT_RATE;
 	}
 
 	public void spawnDredgion(int spawnId) {
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
-		FastList<AssembledNpcPart> assembledPatrs = new FastList<AssembledNpcPart>();
+		FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
 			assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}

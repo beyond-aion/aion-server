@@ -20,7 +20,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 
 	private static Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
 
-	private Collection<EventListener<T>> listeners = new FastTable<EventListener<T>>(0).shared();
+	private Collection<EventListener<T>> listeners = new FastTable<EventListener<T>>().shared();
 	protected boolean isFirstMethodFill;
 
 	public AbstractEventSource() {
@@ -98,8 +98,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 	 * 
 	 * @param event
 	 * @param callingArguments
-	 * @return false if the class should not have listeners for the event or calling fireBeforeEvent disabled it by
-	 *         setting isHandled to false
+	 * @return false if the class should not have listeners for the event or calling fireBeforeEvent disabled it by setting isHandled to false
 	 */
 	protected boolean fireAfterEvent(T event, Object[] callingArguments) {
 		if (!canHaveEventNotifications(event) || !event.isHandled())
@@ -146,8 +145,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 					return classContext[i + j];
 				}
 			}
-		}
-		else {
+		} else {
 			try {
 				StackTraceElement[] classNames = Thread.currentThread().getStackTrace();
 				for (int j = 0; j < classNames.length; j++) {
@@ -155,8 +153,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 						return Class.forName(classNames[i + j].getClassName());
 					}
 				}
-			}
-			catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException e) {
 			}
 		}
 		return null;

@@ -22,20 +22,18 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler.State;
 /**
  * @author ATracer
  */
-public class ChatService
-{
+public class ChatService {
+
 	private static ChatService instance = new ChatService();
 	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 	private Map<Integer, ChatClient> players = new HashMap<Integer, ChatClient>();
 	private BroadcastService broadcastService;
-	
-	public static ChatService getInstance()
-	{
+
+	public static ChatService getInstance() {
 		return instance;
 	}
-	
-	public ChatService()
-	{
+
+	public ChatService() {
 		broadcastService = BroadcastService.getInstance();
 	}
 
@@ -43,14 +41,13 @@ public class ChatService
 	 * Player registered from server side
 	 * 
 	 * @param playerId
-	 * @param nick 
+	 * @param nick
 	 * @param token
 	 * @param identifier
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public ChatClient registerPlayer(int playerId, String playerLogin, String nick) throws NoSuchAlgorithmException, UnsupportedEncodingException
-	{
+	public ChatClient registerPlayer(int playerId, String playerLogin, String nick) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.reset();
 		md.update(playerLogin.getBytes("UTF-8"), 0, playerLogin.length());
@@ -65,13 +62,11 @@ public class ChatService
 	 * @param playerId
 	 * @return
 	 */
-	private byte[] generateToken(byte[] accountToken)
-	{
+	private byte[] generateToken(byte[] accountToken) {
 		byte[] dynamicToken = new byte[16];
 		new Random().nextBytes(dynamicToken);
 		byte[] token = new byte[48];
-		for (int i = 0; i < token.length; i++)
-		{
+		for (int i = 0; i < token.length; i++) {
 			if (i < 16)
 				token[i] = dynamicToken[i];
 			else
@@ -86,21 +81,19 @@ public class ChatService
 	 * @param playerId
 	 * @param token
 	 * @param identifier
-	 * @param realAccount 
-	 * @param realName 
+	 * @param realAccount
+	 * @param realName
 	 * @param clientChannelHandler
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, ClientChannelHandler channelHandler, String realName) throws UnsupportedEncodingException
-	{
+	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, ClientChannelHandler channelHandler, String realName)
+		throws UnsupportedEncodingException {
 		ChatClient chatClient = players.get(playerId);
-		if (chatClient != null)
-		{
+		if (chatClient != null) {
 			byte[] regToken = chatClient.getToken();
 			chatClient.same(realName);
-			if (Arrays.equals(regToken, token))
-			{
-				String sreal = chatClient.getRealName()+"@"+new String(identifier);
+			if (Arrays.equals(regToken, token)) {
+				String sreal = chatClient.getRealName() + "@" + new String(identifier);
 				chatClient.setIdentifier(sreal.getBytes("utf-16le"));
 				chatClient.setChannelHandler(channelHandler);
 				channelHandler.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
@@ -117,16 +110,12 @@ public class ChatService
 	 * @param channelIdentifier
 	 * @return
 	 */
-	public Channel registerPlayerWithChannel(ChatClient chatClient, int channelIndex, byte[] channelIdentifier)
-	{
+	public Channel registerPlayerWithChannel(ChatClient chatClient, int channelIndex, byte[] channelIdentifier) {
 		Channel channel = ChatChannels.getChannelByIdentifier(channelIdentifier);
-		if (channel != null)
-		{
+		if (channel != null) {
 			ChannelType channelType = channel.getChannelType();
-			if (channelType == ChannelType.GROUP)
-			{
-				if (chatClient.isInChannel(channel))
-				{
+			if (channelType == ChannelType.GROUP) {
+				if (chatClient.isInChannel(channel)) {
 					return null;
 				}
 			}
@@ -138,11 +127,9 @@ public class ChatService
 	/**
 	 * @param playerId
 	 */
-	public void playerLogout(int playerId)
-	{
+	public void playerLogout(int playerId) {
 		ChatClient chatClient = players.get(playerId);
-		if (chatClient != null)
-		{
+		if (chatClient != null) {
 			players.remove(playerId);
 			broadcastService.removeClient(chatClient);
 			if (chatClient.getChannelHandler() != null)
@@ -151,16 +138,13 @@ public class ChatService
 				log.warn("Received logout event without client authentication for player " + playerId);
 		}
 	}
-	
+
 	/**
-	 * 
 	 * @param playerId
 	 * @param gagTime
 	 */
-	public void gagPlayer(int playerId, long gagTime)
-	{
-		if(players.containsKey(playerId))
-		{
+	public void gagPlayer(int playerId, long gagTime) {
+		if (players.containsKey(playerId)) {
 			ChatClient client = players.get(playerId);
 			client.setGagTime(gagTime);
 		}

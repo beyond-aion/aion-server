@@ -5,8 +5,8 @@ package mysql5;
  * 
  * @author SoulKeeper
  */
-public class MySQL5DAOUtils
-{
+public class MySQL5DAOUtils {
+
 	/**
 	 * Constant for MySQL name ;)
 	 */
@@ -23,8 +23,7 @@ public class MySQL5DAOUtils
 	 *          minor version, ignored
 	 * @return supports or not
 	 */
-	public static boolean supports(String db, int majorVersion, int minorVersion)
-	{
+	public static boolean supports(String db, int majorVersion, int minorVersion) {
 		return MYSQL_DB_NAME.equals(db) && majorVersion == 5;
 	}
 }

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Rolandas, ginho1
  */
@@ -37,7 +36,8 @@ public class MegaphoneAction extends AbstractItemAction {
 	@Override
 	public void act(Player player, Item item, Item targetItem) {
 		ItemTemplate itemTemplate = item.getItemTemplate();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemTemplate.getTemplateId()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemTemplate.getTemplateId()),
+			true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(item.getNameId())));
 		player.getInventory().decreaseByObjectId(item.getObjectId(), 1);
 	}

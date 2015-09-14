@@ -9,10 +9,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author cheatkiller
- *
  */
 @AIName("hariken_supply_chest")
 public class HarikenSupplyChestAI2 extends NpcAI2 {
@@ -30,13 +28,13 @@ public class HarikenSupplyChestAI2 extends NpcAI2 {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		return true;
 	}
-	
-	private void addItems(Player player){
+
+	private void addItems(Player player) {
 		Item BottomlessBucket = player.getInventory().getFirstItemByItemId(164000202);
 		Item TalonSummoningDevice = player.getInventory().getFirstItemByItemId(164000163);
-	  if (TalonSummoningDevice == null && BottomlessBucket == null) {
-	  	ItemService.addItem(player, 164000163, 1);
+		if (TalonSummoningDevice == null && BottomlessBucket == null) {
+			ItemService.addItem(player, 164000163, 1);
 			ItemService.addItem(player, 164000202, 1);
-	  }
+		}
 	}
 }

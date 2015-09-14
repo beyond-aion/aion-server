@@ -25,8 +25,7 @@ public class KromedesItemNpcsAI2 extends ActionItemNpcAI2 {
 						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
 																																									// now not needed!
 						ItemService.addItem(player, 164000142, 1);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 					break;
 				case 730340:
@@ -35,8 +34,7 @@ public class KromedesItemNpcsAI2 extends ActionItemNpcAI2 {
 						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
 																																									// now not needed!
 						ItemService.addItem(player, 164000140, 1);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 					break;
 				case 730341:
@@ -45,8 +43,7 @@ public class KromedesItemNpcsAI2 extends ActionItemNpcAI2 {
 						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
 																																									// now not needed!
 						ItemService.addItem(player, 164000143, 1);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 					break;
 			}

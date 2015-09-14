@@ -29,7 +29,7 @@ public class WeaponCondition extends Condition {
 	public boolean validate(Skill env) {
 		if (env.getSkillMethod() != SkillMethod.CAST)
 			return true;
-		
+
 		return isValidWeapon(env.getEffector());
 	}
 
@@ -47,7 +47,7 @@ public class WeaponCondition extends Condition {
 			Player player = (Player) creature;
 			return itemGroups.contains(player.getEquipment().getMainHandWeaponType());
 		}
-		//for npcs we don't validate weapon, though in templates they are present
+		// for npcs we don't validate weapon, though in templates they are present
 		return true;
 	}
 

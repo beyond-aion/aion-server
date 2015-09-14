@@ -9,8 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Sakmis (278502). Talk with Nereus (278517). Talk with Dactyl (278590). Locate the Captured Elyos Prisoner
- * (253623). Escort Captured Elyos Prisoners to the Magic Ward (1273, 1494, 1538). Report back to Nereus.
+ * Talk with Sakmis (278502). Talk with Nereus (278517). Talk with Dactyl (278590). Locate the Captured Elyos Prisoner (253623). Escort Captured Elyos
+ * Prisoners to the Magic Ward (1273, 1494, 1538). Report back to Nereus.
  * 
  * @author MetaWind, kale
  * @reworked vlog
@@ -96,8 +96,7 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -109,7 +108,7 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

@@ -63,8 +63,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 799247) { // Angrad
+			} else if (targetId == 799247) { // Angrad
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -75,8 +74,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2); // 2
 					}
 				}
-			}
-			else if (targetId == 799250) { // Eddas
+			} else if (targetId == 799250) { // Eddas
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2)
@@ -86,34 +84,28 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 						return defaultCloseDialog(env, 2, 3); // 3
 					}
 				}
-			}
-			else if (targetId == 799325) { // Taloc's Guardian
+			} else if (targetId == 799325) { // Taloc's Guardian
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
 							return sendQuestDialog(env, 2034);
-						}
-						else if (var == 4) {
+						} else if (var == 4) {
 							return sendQuestDialog(env, 2120);
-						}
-						else if (var == 5) {
+						} else if (var == 5) {
 							return sendQuestDialog(env, 2716);
 						}
 					}
 					case SETPRO4: {
 						if (player.isInGroup2()) {
 							return sendQuestDialog(env, 2717);
-						}
-						else {
+						} else {
 							if (giveQuestItem(env, 182207603, 1) && giveQuestItem(env, 182207604, 1)) {
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f,
-									1098.236f, (byte) 30);
+								TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 								changeQuestStep(env, 3, 4, false); // 4
 								return closeDialogWindow(env);
-							}
-							else {
+							} else {
 								PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
 								return sendQuestSelectionDialog(env);
 							}
@@ -123,8 +115,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}
-			else if (targetId == 799503) { // Taloc's Mirage
+			} else if (targetId == 799503) { // Taloc's Mirage
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 7) {
@@ -135,8 +126,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 						return defaultCloseDialog(env, 7, 8); // 8
 					}
 				}
-			}
-			else if (targetId == 799239) { // Vellun
+			} else if (targetId == 799239) { // Vellun
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 8)
@@ -147,13 +137,11 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799226) { // Valetta
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -188,14 +176,12 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 				if (itemId == 182207604) { // Taloc Fruit
 					changeQuestStep(env, 4, 5, false); // 5
 					return HandlerResult.SUCCESS; // //TODO: Should return FAILED (not removed, but skill still should be used)
-				}
-				else if (itemId == 182207603) { // Taloc's Tears
+				} else if (itemId == 182207603) { // Taloc's Tears
 					if (var == 5) {
 						if (var3 >= 0 && var3 < 19) {
 							changeQuestStep(env, var3, var3 + 1, false, 3); // 3: 19
 							return HandlerResult.SUCCESS;
-						}
-						else if (var3 == 19) {
+						} else if (var3 == 19) {
 							qs.setQuestVar(6);
 							updateQuestStatus(env);
 							return HandlerResult.SUCCESS;
@@ -220,8 +206,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 					qs.setQuestVar(3);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (var == 7) { // Final boss killed
+				} else if (var == 7) { // Final boss killed
 					removeQuestItem(env, 182207604, 1);
 					removeQuestItem(env, 182207603, 1);
 					qs.setQuestVar(10);

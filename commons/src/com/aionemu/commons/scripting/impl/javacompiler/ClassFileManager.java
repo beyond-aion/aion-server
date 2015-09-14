@@ -1,16 +1,27 @@
 package com.aionemu.commons.scripting.impl.javacompiler;
 
-import com.aionemu.commons.scripting.ScriptClassLoader;
-
-import javax.tools.*;
-import javax.tools.JavaFileObject.Kind;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.tools.DiagnosticListener;
+import javax.tools.FileObject;
+import javax.tools.ForwardingJavaFileManager;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.JavaFileObject.Kind;
+import javax.tools.StandardLocation;
+
+import com.aionemu.commons.scripting.ScriptClassLoader;
 
 /**
- * This class extends manages loaded classes. It is also responsible for tricking compiler. Unfortunally compiler doen't
- * work with classloaders, so we have to pass class data manually for each compilation.
+ * This class extends manages loaded classes. It is also responsible for tricking compiler. Unfortunally compiler doen't work with classloaders, so we
+ * have to pass class data manually for each compilation.
  *
  * @author SoulKeeper
  */
@@ -59,8 +70,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 *           never thrown
 	 */
 	@Override
-	public JavaFileObject getJavaFileForOutput(Location location, String className, Kind kind, FileObject sibling)
-		throws IOException {
+	public JavaFileObject getJavaFileForOutput(Location location, String className, Kind kind, FileObject sibling) throws IOException {
 		BinaryClass co = new BinaryClass(className);
 		compiledClasses.put(className, co);
 		return co;
@@ -78,8 +88,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 		if (loader == null) {
 			if (parentClassLoader != null) {
 				loader = new ScriptClassLoaderImpl(this, parentClassLoader);
-			}
-			else {
+			} else {
 				loader = new ScriptClassLoaderImpl(this);
 			}
 		}
@@ -133,9 +142,8 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	}
 
 	/**
-	 * This method overrides class resolving procedure for compiler. It uses classloaders to resolve classes that compiler
-	 * may need during compilation. Compiler by itself can't detect them. So we have to use this hack here. Hack is used
-	 * only if compiler requests for classes in classpath.
+	 * This method overrides class resolving procedure for compiler. It uses classloaders to resolve classes that compiler may need during compilation.
+	 * Compiler by itself can't detect them. So we have to use this hack here. Hack is used only if compiler requests for classes in classpath.
 	 *
 	 * @param location
 	 *          Location to search classes
@@ -150,8 +158,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 *           if something foes wrong
 	 */
 	@Override
-	public Iterable<JavaFileObject> list(Location location, String packageName, Set<Kind> kinds, boolean recurse)
-		throws IOException {
+	public Iterable<JavaFileObject> list(Location location, String packageName, Set<Kind> kinds, boolean recurse) throws IOException {
 		Iterable<JavaFileObject> objects = super.list(location, packageName, kinds, recurse);
 
 		if (StandardLocation.CLASS_PATH.equals(location) && kinds.contains(Kind.CLASS)) {
@@ -166,7 +173,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 
 		return objects;
 	}
-	
+
 	@Override
 	public String inferBinaryName(Location location, JavaFileObject file) {
 		if (file instanceof BinaryClass) {

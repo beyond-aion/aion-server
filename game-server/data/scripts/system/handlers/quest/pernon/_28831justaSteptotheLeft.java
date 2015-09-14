@@ -12,13 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _28831justaSteptotheLeft  extends QuestHandler {
-	
+public class _28831justaSteptotheLeft extends QuestHandler {
+
 	private static final int questId = 28831;
 	private static final Set<Integer> butlers;
 
@@ -34,7 +32,7 @@ public class _28831justaSteptotheLeft  extends QuestHandler {
 	public _28831justaSteptotheLeft() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(830651).addOnQuestStart(questId);
@@ -44,14 +42,14 @@ public class _28831justaSteptotheLeft  extends QuestHandler {
 			qe.registerQuestNpc(butlerId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 830651) {
 				switch (dialog) {
@@ -63,7 +61,7 @@ public class _28831justaSteptotheLeft  extends QuestHandler {
 				}
 			}
 		}
-		
+
 		else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId)) {
 			House house = player.getActiveHouse();
 			if (house.getButler().getNpcId() != targetId)
@@ -71,16 +69,15 @@ public class _28831justaSteptotheLeft  extends QuestHandler {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
-				case SELECT_QUEST_REWARD:{
+				case SELECT_QUEST_REWARD: {
 					changeQuestStep(env, 0, 0, true);
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && butlers.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && butlers.contains(targetId)) {
 			return sendQuestEndDialog(env);
 		}
-		
+
 		return false;
 	}
 

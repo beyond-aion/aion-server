@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbsoluteStatToPCDebuff")
 public class AbsoluteStatToPCDebuffEffect extends AbstractAbsoluteStatEffect {
-	//TODO: One skill. Removable by mental healing magic or potion.
+	// TODO: One skill. Removable by mental healing magic or potion.
 	// Relative values - what are they, kinda ADD func ?
-	
-	//TODO: set debuff for statfunctions
+
+	// TODO: set debuff for statfunctions
 }

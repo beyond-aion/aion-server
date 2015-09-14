@@ -13,8 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
  */
 
 @AIName("ativascristalline")
-public class AtivasCristallineAI2 extends AggressiveNpcAI2
-{
+public class AtivasCristallineAI2 extends AggressiveNpcAI2 {
 
 	private AtomicBoolean isStart90Event = new AtomicBoolean(false);
 	private AtomicBoolean isStart60Event = new AtomicBoolean(false);
@@ -22,15 +21,13 @@ public class AtivasCristallineAI2 extends AggressiveNpcAI2
 	private AtomicBoolean isStart10Event = new AtomicBoolean(false);
 
 	@Override
-	protected void handleAttack(Creature creature)
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
 	@Override
-	protected void handleBackHome() 
-	{
+	protected void handleBackHome() {
 		isStart90Event.set(false);
 		isStart60Event.set(false);
 		isStart30Event.set(false);
@@ -38,28 +35,20 @@ public class AtivasCristallineAI2 extends AggressiveNpcAI2
 		super.handleBackHome();
 	}
 
-	private void checkPercentage(int hpPercentage)
-	{
-		if (hpPercentage <= 90)
-		{
+	private void checkPercentage(int hpPercentage) {
+		if (hpPercentage <= 90) {
 			if (isStart90Event.compareAndSet(false, true)) {
 				topazKomad();
 			}
-		}
-		else if (hpPercentage <= 60)
-		{
+		} else if (hpPercentage <= 60) {
 			if (isStart60Event.compareAndSet(false, true)) {
 				garnetKomad();
 			}
-		}
-		else if (hpPercentage <= 30)
-		{
+		} else if (hpPercentage <= 30) {
 			if (isStart30Event.compareAndSet(false, true)) {
 				topazKomad();
 			}
-		}
-		else if (hpPercentage <= 10)
-		{
+		} else if (hpPercentage <= 10) {
 			if (isStart10Event.compareAndSet(false, true)) {
 				garnetKomad();
 			}
@@ -67,14 +56,13 @@ public class AtivasCristallineAI2 extends AggressiveNpcAI2
 	}
 
 	private void garnetKomad() {
-		if (getPosition().isSpawned() && !isAlreadyDead())
-		{
+		if (getPosition().isSpawned() && !isAlreadyDead()) {
 			for (int i = 0; i < 1; i++) {
 				int distance = Rnd.get(3, 5);
 				int nrNpc = Rnd.get(1, 0);
 				switch (nrNpc) {
 					case 1:
-						nrNpc = 282708; //Garnet Komad.
+						nrNpc = 282708; // Garnet Komad.
 						break;
 				}
 				rndSpawnInRange(nrNpc, distance);
@@ -83,14 +71,13 @@ public class AtivasCristallineAI2 extends AggressiveNpcAI2
 	}
 
 	private void topazKomad() {
-		if (getPosition().isSpawned() && !isAlreadyDead())
-		{
+		if (getPosition().isSpawned() && !isAlreadyDead()) {
 			for (int i = 0; i < 1; i++) {
 				int distance = Rnd.get(3, 5);
 				int nrNpc = Rnd.get(1, 0);
 				switch (nrNpc) {
 					case 1:
-						nrNpc = 282709; //Topaz Komad.
+						nrNpc = 282709; // Topaz Komad.
 						break;
 				}
 				rndSpawnInRange(nrNpc, distance);

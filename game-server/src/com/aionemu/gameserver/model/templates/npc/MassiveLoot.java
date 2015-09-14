@@ -41,7 +41,7 @@ public class MassiveLoot {
 	/**
 	 * @return the massiveLootMinLevel
 	 */
-	public static int getMLootMinLevel () {
+	public static int getMLootMinLevel() {
 		return massiveLootMinLevel;
 	}
 

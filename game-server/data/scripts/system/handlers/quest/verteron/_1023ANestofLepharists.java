@@ -68,8 +68,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 203183) // Khidia
+			} else if (targetId == 203183) // Khidia
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -99,11 +98,10 @@ public class _1023ANestofLepharists extends QuestHandler {
 					case FINISH_DIALOG:
 						return sendQuestDialog(env, 10);
 					case SETPRO4:
-						return defaultCloseDialog(env, 5, 5, true, false); 
+						return defaultCloseDialog(env, 5, 5, true, false);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) // Spatalos
 			{
 				if (env.getDialog() == DialogAction.USE_OBJECT)

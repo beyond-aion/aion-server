@@ -27,7 +27,6 @@ public abstract class PlayerEmotionListDAO implements DAO {
 	 * @param player
 	 */
 	public abstract void insertEmotion(Player player, Emotion emotion);
-	
-	
+
 	public abstract void deleteEmotion(int playerId, int emotionId);
 }

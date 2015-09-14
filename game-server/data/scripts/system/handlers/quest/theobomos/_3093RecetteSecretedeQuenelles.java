@@ -50,16 +50,14 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 		{
 			if (env.getDialog() == DialogAction.QUEST_SELECT)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 				removeQuestItem(env, 182208052, 1);
 				return sendQuestEndDialog(env);
-			}
-			else
+			} else
 				return sendQuestEndDialog(env);
 		}
 
@@ -74,8 +72,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
@@ -91,8 +88,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -109,8 +105,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

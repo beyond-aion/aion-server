@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-
 /**
  * @author ATracer
  * @edited kecimis
@@ -43,8 +42,7 @@ public class ChainCondition extends Condition {
 
 				if (pl.getChainSkills().chainSkillEnabled(category, time)) {
 					canUse = true;
-				}
-				else if (precategory == null) {
+				} else if (precategory == null) {
 					canUse = true;
 				}
 
@@ -53,18 +51,15 @@ public class ChainCondition extends Condition {
 
 				if (selfCount <= pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), category)) {
 					return false;
-				}
-				else {
+				} else {
 					env.setIsMultiCast(true);
 				}
-			}
-			else if (preCount > 0 && selfCount > 0) {
+			} else if (preCount > 0 && selfCount > 0) {
 				if (!pl.getChainSkills().chainSkillEnabled(precategory, time)
 					|| preCount != pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), precategory)) {
 					return false;
 				}
-			}
-			else {// basic chain skill
+			} else {// basic chain skill
 				if (!pl.getChainSkills().chainSkillEnabled(precategory, time)) {
 					return false;
 				}
@@ -75,7 +70,6 @@ public class ChainCondition extends Condition {
 		return true;
 	}
 
-	
 	/**
 	 * @return the selfCount
 	 */
@@ -83,7 +77,6 @@ public class ChainCondition extends Condition {
 		return selfCount;
 	}
 
-	
 	/**
 	 * @return the category
 	 */
@@ -91,15 +84,11 @@ public class ChainCondition extends Condition {
 		return category;
 	}
 
-
-	
 	/**
 	 * @return the time
 	 */
 	public int getTime() {
 		return time;
 	}
-	
-	
 
 }

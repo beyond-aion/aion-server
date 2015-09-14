@@ -8,61 +8,47 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Bobobear & Ritsu
  */
-public class _18832ImaginingAQuietLife extends QuestHandler 
-{
+public class _18832ImaginingAQuietLife extends QuestHandler {
 
 	private static final int questId = 18832;
 
-	public _18832ImaginingAQuietLife()
-	{
+	public _18832ImaginingAQuietLife() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(830365).addOnQuestStart(questId);
 		qe.registerQuestNpc(830365).addOnTalkEvent(questId);
 		qe.registerQuestNpc(830001).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 830365) 
-			{
-				if (dialog == DialogAction.QUEST_SELECT) 
-					return sendQuestDialog(env, 1011); 
-				else 
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 830365) {
+				if (dialog == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 1011);
+				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START)
-		{
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			switch (targetId)
-			{
-				case 830001: 
-				{
-					switch (dialog)
-					{
-						case QUEST_SELECT: 
-						{
-							if (var == 0) 
+			switch (targetId) {
+				case 830001: {
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 0)
 								return sendQuestDialog(env, 2375);
 						}
-						case SELECT_QUEST_REWARD:
-						{
+						case SELECT_QUEST_REWARD: {
 							playQuestMovie(env, 801);
 							changeQuestStep(env, 0, 0, true);
 							return sendQuestDialog(env, 5);
@@ -71,10 +57,8 @@ public class _18832ImaginingAQuietLife extends QuestHandler
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) 
-		{
-			if (targetId == 830001) 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 830001)
 				return sendQuestEndDialog(env);
 		}
 		return false;

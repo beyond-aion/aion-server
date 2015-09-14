@@ -7,15 +7,13 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30708SuramaTheBetrayer extends QuestHandler {
 
 	private final static int questId = 30708;
-	private final static int npcs [] = {800369, 800438};
+	private final static int npcs[] = { 800369, 800438 };
 
 	public _30708SuramaTheBetrayer() {
 		super(questId);
@@ -36,32 +34,29 @@ public class _30708SuramaTheBetrayer extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 800369) { 
+			if (targetId == 800369) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 800438) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 800438) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	  return defaultOnKillEvent(env, 219404, 5, true);
+		return defaultOnKillEvent(env, 219404, 5, true);
 	}
 }

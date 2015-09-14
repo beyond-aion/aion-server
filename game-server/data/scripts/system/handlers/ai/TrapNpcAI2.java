@@ -42,7 +42,7 @@ public class TrapNpcAI2 extends NpcAI2 {
 		}
 
 		if (!creature.getLifeStats().isAlreadyDead() && !creature.isInVisualState(CreatureVisualState.BLINKING)
-				&& isInRange(creature, getOwner().getGameStats().getAttackRange().getCurrent())) {
+			&& isInRange(creature, getOwner().getGameStats().getAttackRange().getCurrent())) {
 
 			Creature creator = (Creature) getCreator();
 			if (!creator.isEnemy(creature)) {
@@ -52,7 +52,6 @@ public class TrapNpcAI2 extends NpcAI2 {
 		}
 	}
 
-	
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

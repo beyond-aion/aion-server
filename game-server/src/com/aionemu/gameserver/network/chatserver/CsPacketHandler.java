@@ -20,7 +20,7 @@ public class CsPacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(CsPacketHandler.class);
 
 	private Map<State, Map<Integer, CsClientPacket>> packetPrototypes = new HashMap<State, Map<Integer, CsClientPacket>>();
- 
+
 	/**
 	 * Reads one packet from given ByteBuffer
 	 * 

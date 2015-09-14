@@ -45,8 +45,7 @@ public class _11070CraftyMessenger extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -63,8 +62,7 @@ public class _11070CraftyMessenger extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798943) {
@@ -82,8 +80,7 @@ public class _11070CraftyMessenger extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798949) {
+		} else if (targetId == 798949) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -98,8 +95,7 @@ public class _11070CraftyMessenger extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798932) {
+		} else if (targetId == 798932) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)

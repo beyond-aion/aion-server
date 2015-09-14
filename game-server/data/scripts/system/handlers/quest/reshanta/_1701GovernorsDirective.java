@@ -49,13 +49,11 @@ public class _1701GovernorsDirective extends QuestHandler {
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 				int[] ids = { 1071, 1072, 1073, 1074, 1075, 1076, 1077 };
 				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 				}
 			}
 			return sendQuestEndDialog(env);

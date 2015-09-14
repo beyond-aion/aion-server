@@ -41,8 +41,7 @@ public class TargetRelationProperty {
 						if (summon.isEnemy(source) && summon.getMaster().isEnemy(source)) {
 							continue;
 						}
-					}
-					else if (source.isEnemy(target) || isMaterialSkill)
+					} else if (source.isEnemy(target) || isMaterialSkill)
 						continue;
 
 					iter.remove();
@@ -61,8 +60,7 @@ public class TargetRelationProperty {
 				if (targetsList.isEmpty()) {
 					skill.setFirstTarget(skill.getEffector());
 					targetsList.add(skill.getEffector());
-				}
-				else {
+				} else {
 					skill.setFirstTarget(targetsList.get(0));
 				}
 				break;
@@ -76,24 +74,21 @@ public class TargetRelationProperty {
 							Player sourcePlayer;
 							if (source instanceof Servant) {
 								sourcePlayer = (Player) ((Servant) source).getMaster();
-							}
-							else {
+							} else {
 								sourcePlayer = (Player) source;
 							}
 
 							if (sourcePlayer.isInAlliance2() && targetPlayer.isInAlliance2()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-										&& sourcePlayer.getPlayerAlliance2().getObjectId().equals(targetPlayer.getPlayerAlliance2().getObjectId())) {
+									&& sourcePlayer.getPlayerAlliance2().getObjectId().equals(targetPlayer.getPlayerAlliance2().getObjectId())) {
 									continue;
 								}
-							}
-							else if (sourcePlayer.isInGroup2() && targetPlayer.isInGroup2()) {
+							} else if (sourcePlayer.isInGroup2() && targetPlayer.isInGroup2()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-										&& sourcePlayer.getPlayerGroup2().getTeamId().equals(targetPlayer.getPlayerGroup2().getTeamId())) {
+									&& sourcePlayer.getPlayerGroup2().getTeamId().equals(targetPlayer.getPlayerGroup2().getTeamId())) {
 									continue;
 								}
-							}
-							else if (targetPlayer.equals(sourcePlayer)) {
+							} else if (targetPlayer.equals(sourcePlayer)) {
 								continue;
 							}
 						}

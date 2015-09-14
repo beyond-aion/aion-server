@@ -22,15 +22,15 @@ public class Kick extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "syntax //kick <character_name> | <All>");
 			return;
 		}
-		
-		if(params[0] != null && "All".equalsIgnoreCase(params[0])){
+
+		if (params[0] != null && "All".equalsIgnoreCase(params[0])) {
 			for (final Player player : World.getInstance().getAllPlayers()) {
-				if(!player.isGM()){
+				if (!player.isGM()) {
 					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 					PacketSendUtility.sendMessage(admin, "Kicked player : " + player.getName());
 				}
 			}
-		}else{
+		} else {
 			Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
 			if (player == null) {
 				PacketSendUtility.sendMessage(admin, "The specified player is not online.");
@@ -39,7 +39,7 @@ public class Kick extends AdminCommand {
 			player.getClientConnection().close(new SM_QUIT_RESPONSE());
 			PacketSendUtility.sendMessage(admin, "Kicked player : " + player.getName());
 		}
-		
+
 	}
 
 	@Override

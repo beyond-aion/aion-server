@@ -38,13 +38,11 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 			if (targetId == 204053) { // Kvasir
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182207112, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204059: { // Freyr
@@ -139,20 +137,16 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					if (checkItemExistence(env, 182207113, 1, true)) {
 						return sendQuestEndDialog(env);
-					}
-					else {
+					} else {
 						return sendQuestSelectionDialog(env);
 					}
 				}

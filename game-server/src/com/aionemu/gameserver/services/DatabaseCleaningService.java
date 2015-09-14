@@ -23,15 +23,15 @@ public class DatabaseCleaningService {
 
 	private Logger log = LoggerFactory.getLogger(DatabaseCleaningService.class);
 	private PlayerDAO dao = DAOManager.getDAO(PlayerDAO.class);
-	//A limit of cleaning period for security reasons
+	// A limit of cleaning period for security reasons
 	private final int SECURITY_MINIMUM_PERIOD = 30;
-	//Worker execution check time
+	// Worker execution check time
 	private final int WORKER_CHECK_TIME = 10 * 1000;
-	//Singelton
+	// Singelton
 	private static DatabaseCleaningService instance = new DatabaseCleaningService();
-	//Workers
+	// Workers
 	private List<Worker> workers;
-	//Starttime of service
+	// Starttime of service
 	private long startTime;
 
 	/**
@@ -47,14 +47,14 @@ public class DatabaseCleaningService {
 	 * Cleans the databse from inactive player data
 	 */
 	private void runCleaning() {
-		//Execution time
+		// Execution time
 		log.info("DatabaseCleaningService: Executing database cleaning");
 		startTime = System.currentTimeMillis();
 
-		//getting period for deletion
+		// getting period for deletion
 		int periodInDays = CleaningConfig.CLEANING_PERIOD;
 
-		//only a security feature
+		// only a security feature
 		if (periodInDays > SECURITY_MINIMUM_PERIOD) {
 			delegateToThreads(CleaningConfig.CLEANING_THREADS, dao.getInactiveAccounts(periodInDays));
 			monitoringProcess();
@@ -67,12 +67,14 @@ public class DatabaseCleaningService {
 		while (!allWorkersReady()) {
 			try {
 				Thread.sleep(WORKER_CHECK_TIME);
-				log.info("DatabaseCleaningService: Until now " + currentlyDeletedChars() + " chars deleted in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds!");
+				log.info("DatabaseCleaningService: Until now " + currentlyDeletedChars() + " chars deleted in " + (System.currentTimeMillis() - startTime)
+					/ 1000 + " seconds!");
 			} catch (InterruptedException ex) {
 				log.error("DatabaseCleaningService: Got Interrupted!");
 			}
 		}
-		log.info("DatabaseCleaningService: Cleaning finished! Deleted " + currentlyDeletedChars() + " chars in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds!");
+		log.info("DatabaseCleaningService: Cleaning finished! Deleted " + currentlyDeletedChars() + " chars in "
+			+ (System.currentTimeMillis() - startTime) / 1000 + " seconds!");
 	}
 
 	private boolean allWorkersReady() {
@@ -96,7 +98,7 @@ public class DatabaseCleaningService {
 		workers = new ArrayList<>();
 		log.info("DatabaseCleaningService: Executing deletion over " + numberOfThreads + " longrunning threads");
 
-		//every id to another worker with maximum of n different workers
+		// every id to another worker with maximum of n different workers
 		Iterator<Integer> i = idsToDelegate.iterator();
 		int toDelete = 0;
 		int limit = CleaningConfig.CLEANING_LIMIT;
@@ -106,10 +108,10 @@ public class DatabaseCleaningService {
 			}
 			workers.get(workerNo).ids.add(i.next());
 			if (++toDelete >= limit)
-			   break;
+				break;
 		}
 
-		//get them working on our longrunning
+		// get them working on our longrunning
 		for (Worker w : workers) {
 			ThreadPoolManager.getInstance().executeLongRunning(w);
 		}

@@ -41,19 +41,17 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 			if (targetId == 798927) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				} else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 					if (giveQuestItem(env, 182206710, 1))
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
-		
-		if(qs == null)
+
+		if (qs == null)
 			return false;
 
 		if (qs.getStatus() == QuestStatus.START) {
@@ -87,8 +85,7 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798997) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

@@ -1,9 +1,12 @@
 package com.aionemu.gameserver.taskmanager;
 
+import java.util.Iterator;
+
+import javolution.util.FastSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.AEFastSet;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
@@ -13,9 +16,9 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 
 	protected static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
 
-	private final AEFastSet<T> queue = new AEFastSet<T>();
+	private final FastSet<T> queue = new FastSet<T>();
 
-	private final AEFastSet<T> activeTasks = new AEFastSet<T>();
+	private final FastSet<T> activeTasks = new FastSet<T>();
 
 	public AbstractFIFOPeriodicTaskManager(int period) {
 		super(period);
@@ -25,8 +28,7 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 		writeLock();
 		try {
 			queue.add(t);
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 	}
@@ -36,23 +38,21 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 		writeLock();
 		try {
 			activeTasks.addAll(queue);
-
 			queue.clear();
-		}
-		finally {
+		} finally {
 			writeUnlock();
 		}
 
-		for (T task; (task = activeTasks.removeFirst()) != null;) {
+		for (Iterator<T> i = activeTasks.iterator(); i.hasNext();) {
+			T task = i.next();
 			final long begin = System.nanoTime();
 
 			try {
 				callTask(task);
-			}
-			catch (RuntimeException e) {
+				i.remove();
+			} catch (RuntimeException e) {
 				log.warn("", e);
-			}
-			finally {
+			} finally {
 				RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), System.nanoTime() - begin);
 			}
 		}

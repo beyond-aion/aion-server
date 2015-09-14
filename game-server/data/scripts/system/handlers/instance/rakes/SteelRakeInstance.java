@@ -20,7 +20,7 @@ public class SteelRakeInstance extends GeneralInstanceHandler {
 			spawn(215041, 516.198f, 489.708f, 885.76f, (byte) 60);
 		}
 		int npcId = 0;
-		switch (Rnd.get(1, 6)) {  // Special Delivery
+		switch (Rnd.get(1, 6)) { // Special Delivery
 			case 1:
 				npcId = 215074;
 				break;

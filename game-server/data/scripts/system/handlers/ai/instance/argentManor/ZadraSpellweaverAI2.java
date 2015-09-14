@@ -29,7 +29,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("zadra_spellweaver")
@@ -66,8 +65,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 							if (npc != null) {
 								getOwner().getController().onAttack(npc, getLifeStats().getMaxHp() + 1, true);
 								NpcActions.delete(npc);
-							}
-							else {
+							} else {
 								AI2Actions.deleteOwner(ZadraSpellweaverAI2.this);
 							}
 							spawn(217242, 864.899f, 1234.458f, 194.979f, (byte) 30);
@@ -86,8 +84,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					sendMsg(1500482);
 					useToTargetSkill(19717);
 					if (getLifeStats().getHpPercentage() <= 90) {
@@ -160,8 +157,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		if (isHome.compareAndSet(true, false)) {
 			if (getNpcId() == 217241) {
 				getPosition().getWorldMapInstance().getDoors().get(10).setOpen(false);
-			}
-			else if (getNpcId() == 217242) {
+			} else if (getNpcId() == 217242) {
 				sendMsg(1500480);
 				startPhaseTask();
 			}
@@ -175,11 +171,9 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		if (getNpcId() == 217241) {
 			addPercent();
 			resetHelpers();
-		}
-		else if (getNpcId() == 217242) {
+		} else if (getNpcId() == 217242) {
 			NpcShoutsService.getInstance().sendMsg(getOwner(), 1500481, getObjectId(), 0, 4000);
-		}
-		else {
+		} else {
 			canThink = false;
 		}
 	}
@@ -212,14 +206,12 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 									break;
 							}
 							SkillEngine.getInstance().getSkill(npc, skill, 55, getOwner()).useNoAnimationSkill();
-						}
-						else if (npc.getNpcId() == 730393) {
+						} else if (npc.getNpcId() == 730393) {
 							AI2Actions.deleteOwner(this);
 						}
 					}
 				}
-			}
-			else if (getNpcId() == 217242) {
+			} else if (getNpcId() == 217242) {
 				if (!canThink && isInState(AIState.WALKING)) {
 					if (!isAlreadyDead()) {
 						getSpawnTemplate().setWalkerId(null);
@@ -272,7 +264,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 									if (!isAlreadyDead()) {
 										WorldMapInstance instance = getPosition().getWorldMapInstance();
 										if (instance != null) {
-											Npc door = (Npc) spawn(730393, 1007.365f, 1306.107f, 94.347f ,(byte) 90, 519);
+											Npc door = (Npc) spawn(730393, 1007.365f, 1306.107f, 94.347f, (byte) 90, 519);
 											if (door == null) {
 												return;
 											}
@@ -294,8 +286,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 					break;
 				}
 			}
-		}
-		else if (getNpcId() == 217242) {
+		} else if (getNpcId() == 217242) {
 			if (hpPercentage <= 75 && hpPercentage > 35) {
 				if (isSpawnedWings.compareAndSet(false, true)) {
 					sendMsg(1500483);
@@ -345,11 +336,10 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 				}
 				canThink = true;
 				Creature creature = getAggroList().getMostHated();
-				if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature) ) {
+				if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 					setStateIfNot(AIState.FIGHT);
 					think();
-				}
-				else {
+				} else {
 					getMoveController().abortMove();
 					getOwner().setTarget(creature);
 					getOwner().getGameStats().renewLastAttackTime();
@@ -398,7 +388,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{80, 70, 55, 40});
+		Collections.addAll(percents, new Integer[] { 80, 70, 55, 40 });
 	}
 
 	private void resetHelpers() {
@@ -429,12 +419,11 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		if (instance != null) {
 			if (getNpcId() == 217241) {
-				spawn(730393, 1007.365f, 1306.107f, 94.347f ,(byte) 90, 519);
+				spawn(730393, 1007.365f, 1306.107f, 94.347f, (byte) 90, 519);
 				instance.getDoors().get(10).setOpen(true);
 				instance.getDoors().get(210).setOpen(true);
 				percents.clear();
-			}
-			else if (getNpcId() == 217242) {
+			} else if (getNpcId() == 217242) {
 				cancelSkillTask();
 				cancelPhaseTask();
 				cancelThinkTask();
@@ -470,8 +459,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 				addPercent();
 				instance.getDoors().get(10).setOpen(true);
 				deleteNpcs(instance.getNpcs(282246));
-			}
-			else if (getNpcId() == 217242) {
+			} else if (getNpcId() == 217242) {
 				deleteNpcs(instance.getNpcs(282269));
 			}
 		}

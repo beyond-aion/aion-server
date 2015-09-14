@@ -5,14 +5,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.slf4j.Logger;
-
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Script Service class that is designed to manage all loaded contexts
@@ -54,8 +53,7 @@ public class ScriptService {
 	public void load(File file) throws RuntimeException {
 		if (file.isFile()) {
 			loadFile(file);
-		}
-		else if (file.isDirectory()) {
+		} else if (file.isDirectory()) {
 			loadDir(file);
 		}
 	}
@@ -74,8 +72,7 @@ public class ScriptService {
 		ScriptManager sm = new ScriptManager();
 		try {
 			sm.load(file);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("loadFile", e);
 			throw new RuntimeException(e);
 		}
@@ -162,8 +159,7 @@ public class ScriptService {
 		for (Iterator<Entry<File, ScriptManager>> it = this.map.entrySet().iterator(); it.hasNext();) {
 			try {
 				it.next().getValue().shutdown();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("An exception occured during shudown procedure.", e);
 			}
 

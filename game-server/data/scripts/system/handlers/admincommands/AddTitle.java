@@ -36,8 +36,7 @@ public class AddTitle extends AdminCommand {
 				PacketSendUtility.sendMessage(player, "player " + params[1] + " was not found");
 				return;
 			}
-		}
-		else {
+		} else {
 			VisibleObject creature = player.getTarget();
 			if (player.getTarget() instanceof Player) {
 				target = (Player) creature;
@@ -52,14 +51,11 @@ public class AddTitle extends AdminCommand {
 			titleId = target.getRace().getRaceId() * 272 + titleId;
 
 		if (!target.getTitleList().addTitle(titleId, false, 0)) {
-			PacketSendUtility.sendMessage(player, "you can't add title #" + titleId + " to "
-				+ (target.equals(player) ? "yourself" : target.getName()));
-		}
-		else {
+			PacketSendUtility.sendMessage(player, "you can't add title #" + titleId + " to " + (target.equals(player) ? "yourself" : target.getName()));
+		} else {
 			if (target.equals(player)) {
 				PacketSendUtility.sendMessage(player, "you added to yourself title #" + titleId);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(player, "you added to " + target.getName() + " title #" + titleId);
 				PacketSendUtility.sendMessage(target, player.getName() + " gave you title #" + titleId);
 			}

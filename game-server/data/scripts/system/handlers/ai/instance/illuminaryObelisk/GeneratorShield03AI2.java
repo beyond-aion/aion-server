@@ -169,9 +169,9 @@ public class GeneratorShield03AI2 extends GeneralNpcAI2 {
 		}, 20000);
 	}
 
-//	private void GenertorAttack() {
-//		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402222);
-//	}
+	// private void GenertorAttack() {
+	// NpcShoutsService.getInstance().sendMsg(getOwner(), 1402222);
+	// }
 
 	private void GateOpen() {
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402226);
@@ -189,9 +189,9 @@ public class GeneratorShield03AI2 extends GeneralNpcAI2 {
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402203);
 	}
 
-//	private void MsgGeneratorNoIdium() {
-//		NpcShoutsService.getInstance().sendMsg(getOwner(), 1402211);
-//	}
+	// private void MsgGeneratorNoIdium() {
+	// NpcShoutsService.getInstance().sendMsg(getOwner(), 1402211);
+	// }
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkerId,
 		final boolean isRun) {

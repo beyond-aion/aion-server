@@ -1,11 +1,11 @@
 package quest.bare_truth;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,8 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
@@ -143,9 +143,9 @@ public class _14031AHyperVention extends QuestHandler {
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
-							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, (float) 257, (float) 257, (float) 226.35, (byte) 95);// Broken
-																																																																				// Teleporter
-																																																																				// Device
+							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95);// Broken
+																																																												// Teleporter
+																																																												// Device
 						}
 					}
 					break;
@@ -215,7 +215,7 @@ public class _14031AHyperVention extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 9 && player.getWorldId() == 320040000) {
 				// Shattered Large Teleporter
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, (float) 257, (float) 257, (float) 226.35, (byte) 95);
+				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, 257, 257, (float) 226.35, (byte) 95);
 				// Captain Tarbana
 				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233878, (float) 262.9, (float) 224.5, (float) 211.348, (byte) 95);
 				// 5x Baranath Sentinel

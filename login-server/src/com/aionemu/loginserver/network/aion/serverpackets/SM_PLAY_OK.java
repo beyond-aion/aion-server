@@ -18,6 +18,7 @@ public class SM_PLAY_OK extends AionServerPacket {
 	 */
 	private final int playOk2;
 	private int serverId;
+
 	/**
 	 * Constructs new instance of <tt>SM_PLAY_OK </tt> packet.
 	 * 

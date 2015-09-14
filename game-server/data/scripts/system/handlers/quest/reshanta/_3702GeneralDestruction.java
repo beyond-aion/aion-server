@@ -8,8 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author vlog
- * TODO: siege weapons attacking event, when siege weapons done
+ * @author vlog TODO: siege weapons attacking event, when siege weapons done
  */
 public class _3702GeneralDestruction extends QuestHandler {
 
@@ -38,18 +37,15 @@ public class _3702GeneralDestruction extends QuestHandler {
 			if (targetId == 278517) { // Nereus
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182202179, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -65,8 +61,7 @@ public class _3702GeneralDestruction extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 0) {
 				return defaultOnKillEvent(env, 256694, 0, 1); // 1
-			}
-			else if (var == 1) {
+			} else if (var == 1) {
 				return defaultOnKillEvent(env, 290161, 1, true); // reward
 			}
 		}

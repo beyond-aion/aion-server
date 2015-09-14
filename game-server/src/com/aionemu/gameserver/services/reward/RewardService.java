@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services.reward;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +15,7 @@ import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 
 /**
- * 
  * @author KID
- * 
  */
 public class RewardService {
 
@@ -34,15 +32,15 @@ public class RewardService {
 	}
 
 	public void verify(Player player) {
-		FastList<RewardEntryItem> list = dao.getAvailable(player.getObjectId());
+		FastTable<RewardEntryItem> list = dao.getAvailable(player.getObjectId());
 		if (list.size() == 0 || player.getMailbox() == null)
 			return;
 
-		FastList<Integer> rewarded = FastList.newInstance();
+		FastTable<Integer> rewarded = new FastTable<>();
 
 		for (RewardEntryItem item : list) {
 			if (DataManager.ITEM_DATA.getItemTemplate(item.id) == null) {
-				log.warn("[RewardController]["+item.unique+"] null template for item " + item.id + " on player " + player.getObjectId() + ".");
+				log.warn("[RewardController][" + item.unique + "] null template for item " + item.id + " on player " + player.getObjectId() + ".");
 				continue;
 			}
 
@@ -52,8 +50,7 @@ public class RewardService {
 					itemId = 0;
 					itemCount = 0;
 					kinahCount = (int) item.count;
-				}
-				else {
+				} else {
 					itemId = item.id;
 					itemCount = (int) item.count;
 					kinahCount = 0;
@@ -64,13 +61,10 @@ public class RewardService {
 					continue;
 				}
 
-				log.info("[RewardController][" + item.unique + "] player " + player.getName() + " has received (" + item.count + ")" + item.id
-					+ ".");
+				log.info("[RewardController][" + item.unique + "] player " + player.getName() + " has received (" + item.count + ")" + item.id + ".");
 				rewarded.add(item.unique);
-			}
-			catch (Exception e) {
-				log.error(
-					"[RewardController][" + item.unique + "] failed to add item (" + item.count + ")" + item.id + " to " + player.getObjectId(), e);
+			} catch (Exception e) {
+				log.error("[RewardController][" + item.unique + "] failed to add item (" + item.count + ")" + item.id + " to " + player.getObjectId(), e);
 				continue;
 			}
 		}
@@ -78,8 +72,6 @@ public class RewardService {
 		if (rewarded.size() > 0) {
 			dao.uncheckAvailable(rewarded);
 
-			FastList.recycle(rewarded);
-			FastList.recycle(list);
 		}
 	}
 }

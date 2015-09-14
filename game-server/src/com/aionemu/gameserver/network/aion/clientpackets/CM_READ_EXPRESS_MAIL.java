@@ -35,13 +35,13 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 		final Player player = getConnection().getActivePlayer();
 		boolean haveUnreadExpress = player.getMailbox().haveUnreadByType(LetterType.EXPRESS);
 		boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MAIL) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MAIL) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		switch (this.action) {
 			case 0:
 				// window is closed
@@ -54,21 +54,19 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 				// click on icon
 				if (player.getPostman() != null) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED);
-				}
-				else if (player.isFlying()) {
+				} else if (player.isFlying()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_FLIGHT);
-				}
-				else if (haveUnreadBlackcloud) {
+				} else if (haveUnreadBlackcloud) {
 					VisibleObjectSpawner.spawnPostman(player);
-				}
-				else if (haveUnreadExpress) {
+				} else if (haveUnreadExpress) {
 					if (player.getController().hasScheduledTask(TaskId.EXPRESS_MAIL_USE)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_COOLTIME);
 						return;
 					}
-					
+
 					VisibleObjectSpawner.spawnPostman(player);
 					Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 						}

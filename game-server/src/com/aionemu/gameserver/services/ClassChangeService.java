@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class ClassChangeService {
 
-	//TODO dialog enum
+	// TODO dialog enum
 	/**
 	 * @param player
 	 */
@@ -46,8 +46,7 @@ public class ClassChangeService {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 4080, 1006));
 							break;
 					}
-				}
-				else if (playerRace == Race.ASMODIANS) {
+				} else if (playerRace == Race.ASMODIANS) {
 					switch (playerClass) {
 						case WARRIOR:
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3057, 2008));
@@ -83,39 +82,39 @@ public class ClassChangeService {
 			if (playerRace == Race.ELYOS) {
 				switch (dialogId) {
 					case 2376:
-						setClass(player, PlayerClass.getPlayerClassById((byte)1));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 1));
 						break;
 					case 2461:
-						setClass(player, PlayerClass.getPlayerClassById((byte)2));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 2));
 						break;
 					case 2717:
-						setClass(player, PlayerClass.getPlayerClassById((byte)4));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 4));
 						break;
 					case 2802:
-						setClass(player, PlayerClass.getPlayerClassById((byte)5));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 5));
 						break;
 					case 3058:
-						setClass(player, PlayerClass.getPlayerClassById((byte)7));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 7));
 						break;
 					case 3143:
-						setClass(player, PlayerClass.getPlayerClassById((byte)8));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 8));
 						break;
 					case 3399:
-						setClass(player, PlayerClass.getPlayerClassById((byte)10));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 10));
 						break;
 					case 3484:
-						setClass(player, PlayerClass.getPlayerClassById((byte)11));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 11));
 						break;
-					case 3825 :
-						setClass(player, PlayerClass.getPlayerClassById((byte)13));
+					case 3825:
+						setClass(player, PlayerClass.getPlayerClassById((byte) 13));
 						break;
-					case 3740 :
-						setClass(player, PlayerClass.getPlayerClassById((byte)14));
+					case 3740:
+						setClass(player, PlayerClass.getPlayerClassById((byte) 14));
 						break;
-					case 4081 :
-						setClass(player, PlayerClass.getPlayerClassById((byte)16));
+					case 4081:
+						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
 						break;
-						
+
 				}
 				completeQuest(player, 1006);
 				completeQuest(player, 1007);
@@ -124,44 +123,43 @@ public class ClassChangeService {
 				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
 					completeQuest(player, 1929);
 				}
-			}
-			else if (playerRace == Race.ASMODIANS) {
+			} else if (playerRace == Race.ASMODIANS) {
 				switch (dialogId) {
 					case 3058:
-						setClass(player, PlayerClass.getPlayerClassById((byte)1));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 1));
 						break;
 					case 3143:
-						setClass(player, PlayerClass.getPlayerClassById((byte)2));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 2));
 						break;
 					case 3399:
-						setClass(player, PlayerClass.getPlayerClassById((byte)4));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 4));
 						break;
 					case 3484:
-						setClass(player, PlayerClass.getPlayerClassById((byte)5));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 5));
 						break;
 					case 3740:
-						setClass(player, PlayerClass.getPlayerClassById((byte)7));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 7));
 						break;
 					case 3825:
-						setClass(player, PlayerClass.getPlayerClassById((byte)8));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 8));
 						break;
 					case 4081:
-						setClass(player, PlayerClass.getPlayerClassById((byte)10));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 10));
 						break;
 					case 4166:
-						setClass(player, PlayerClass.getPlayerClassById((byte)11));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 11));
 						break;
 					case 3591:
-						setClass(player, PlayerClass.getPlayerClassById((byte)13));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 13));
 						break;
 					case 3570:
-						setClass(player, PlayerClass.getPlayerClassById((byte)14));
+						setClass(player, PlayerClass.getPlayerClassById((byte) 14));
 						break;
-					case 3911 :
-						setClass(player, PlayerClass.getPlayerClassById((byte)16));
+					case 3911:
+						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
 						break;
 				}
-				//Optimate @Enomine
+				// Optimate @Enomine
 				completeQuest(player, 2008);
 				completeQuest(player, 2009);
 
@@ -178,11 +176,9 @@ public class ClassChangeService {
 		if (qs == null) {
 			player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
 			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
-		}
-		else {
+		} else {
 			qs.setStatus(QuestStatus.COMPLETE);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars()
-				.getQuestVars(), qs.getFlags()));
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 		}
 	}
 

@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.not;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import java.util.Iterator;
 
 /**
  * @author oslo(a00441234)
@@ -57,40 +57,38 @@ public class DecomposeAction extends AbstractItemAction {
 	private static Map<Race, int[]> chunkEarth = new HashMap<Race, int[]>();
 
 	static {
-		chunkEarth.put(Race.ASMODIANS, new int[] { 152000051, 152000052, 152000053, 152000451, 152000453, 152000551, 152000651, 152000751,
-			152000752, 152000753, 152000851, 152000852, 152000853, 152001051, 152001052, 152000201, 152000102, 152000054, 152000055, 152000455,
-			152000457, 152000552, 152000652, 152000754, 152000755, 152000854, 152000855, 152000102, 152000202, 152000056, 152000057, 152000459,
-			152000461, 152000553, 152000653, 152000756, 152000757, 152000856, 152000857, 152000104, 152000204, 152000058, 152000059, 152000463,
-			152000465, 152000554, 152000654, 152000758, 152000759, 152000760, 152000858, 152001053, 152000107, 152000207, 152003004, 152003005,
-			152003006, 152000061, 152000062, 152000063, 152000468, 152000470, 152000556, 152000656, 152000657, 152000762, 152000763, 152000860,
-			152000861, 152000862, 152001055, 152001056, 152000113, 152000117, 152000214, 152000606, 152000713, 152000811 });
+		chunkEarth.put(Race.ASMODIANS, new int[] { 152000051, 152000052, 152000053, 152000451, 152000453, 152000551, 152000651, 152000751, 152000752,
+			152000753, 152000851, 152000852, 152000853, 152001051, 152001052, 152000201, 152000102, 152000054, 152000055, 152000455, 152000457, 152000552,
+			152000652, 152000754, 152000755, 152000854, 152000855, 152000102, 152000202, 152000056, 152000057, 152000459, 152000461, 152000553, 152000653,
+			152000756, 152000757, 152000856, 152000857, 152000104, 152000204, 152000058, 152000059, 152000463, 152000465, 152000554, 152000654, 152000758,
+			152000759, 152000760, 152000858, 152001053, 152000107, 152000207, 152003004, 152003005, 152003006, 152000061, 152000062, 152000063, 152000468,
+			152000470, 152000556, 152000656, 152000657, 152000762, 152000763, 152000860, 152000861, 152000862, 152001055, 152001056, 152000113, 152000117,
+			152000214, 152000606, 152000713, 152000811 });
 
-		chunkEarth.put(Race.ELYOS, new int[] { 152000001, 152000002, 152000003, 152000401, 152000403, 152000501, 152000601, 152000701,
-			152000702, 152000703, 152000801, 152000802, 152000803, 152001001, 152001002, 152000101, 152000201, 152000004, 152000005, 152000405,
-			152000407, 152000502, 152000602, 152000704, 152000705, 152000804, 152000805, 152000102, 152000202, 152000006, 152000007, 152000409,
-			152000411, 152000503, 152000603, 152000706, 152000707, 152000806, 152000807, 152000104, 152000204, 152000008, 152000009, 152000413,
-			152000415, 152000504, 152000604, 152000708, 152000709, 152000710, 152000808, 152001003, 152000107, 152000207, 152003004, 152003005,
-			152003006, 152000010, 152000011, 152000012, 152000417, 152000419, 152000505, 152000605, 152000607, 152000711, 152000712, 152000809,
-			152000810, 152000812, 152001004, 152001005, 152000113, 152000117, 152000214, 152000606, 152000713, 152000811 });
+		chunkEarth.put(Race.ELYOS, new int[] { 152000001, 152000002, 152000003, 152000401, 152000403, 152000501, 152000601, 152000701, 152000702,
+			152000703, 152000801, 152000802, 152000803, 152001001, 152001002, 152000101, 152000201, 152000004, 152000005, 152000405, 152000407, 152000502,
+			152000602, 152000704, 152000705, 152000804, 152000805, 152000102, 152000202, 152000006, 152000007, 152000409, 152000411, 152000503, 152000603,
+			152000706, 152000707, 152000806, 152000807, 152000104, 152000204, 152000008, 152000009, 152000413, 152000415, 152000504, 152000604, 152000708,
+			152000709, 152000710, 152000808, 152001003, 152000107, 152000207, 152003004, 152003005, 152003006, 152000010, 152000011, 152000012, 152000417,
+			152000419, 152000505, 152000605, 152000607, 152000711, 152000712, 152000809, 152000810, 152000812, 152001004, 152001005, 152000113, 152000117,
+			152000214, 152000606, 152000713, 152000811 });
 	}
 
 	private static Map<Race, int[]> chunkSand = new HashMap<Race, int[]>();
 
 	static {
 
-		chunkSand.put(Race.ASMODIANS, new int[] { 152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103,
-			152000203, 152000304, 152000305, 152000306, 152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311, 152000464,
-			152000466, 152000108, 152000208, 152000313, 152000315, 152000317, 152000469, 152000471, 152000114, 152000215, 152000320, 152000322,
-			152000324 });
+		chunkSand.put(Race.ASMODIANS, new int[] { 152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103, 152000203,
+			152000304, 152000305, 152000306, 152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311, 152000464, 152000466, 152000108,
+			152000208, 152000313, 152000315, 152000317, 152000469, 152000471, 152000114, 152000215, 152000320, 152000322, 152000324 });
 
-		chunkSand.put(Race.ELYOS, new int[] { 152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103,
-			152000203, 152000304, 152000305, 152000306, 152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311, 152000414,
-			152000416, 152000108, 152000208, 152000313, 152000315, 152000317, 152000418, 152000420, 152000114, 152000215, 152000320, 152000322,
-			152000324 });
+		chunkSand.put(Race.ELYOS, new int[] { 152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103, 152000203,
+			152000304, 152000305, 152000306, 152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311, 152000414, 152000416, 152000108,
+			152000208, 152000313, 152000315, 152000317, 152000418, 152000420, 152000114, 152000215, 152000320, 152000322, 152000324 });
 	}
 
-	private static int[] chunkRock = { 152000106, 152000206, 152000308, 152000310, 152000312, 152000109, 152000209, 152000314, 152000316,
-		152000318, 152000115, 152000216, 152000219, 152000321, 152000323, 152000325 };
+	private static int[] chunkRock = { 152000106, 152000206, 152000308, 152000310, 152000312, 152000109, 152000209, 152000314, 152000316, 152000318,
+		152000115, 152000216, 152000219, 152000321, 152000323, 152000325 };
 	private static int[] chunkGemstone = { 152000112, 152000213, 152000116, 152000212, 152000217, 152000326, 152000327, 152000328 };
 
 	private static int[] scrolls = { 164000073, 164000134, 164000076, 164000079, 164000122, 164000131, 164000118 };
@@ -135,14 +133,14 @@ public class DecomposeAction extends AbstractItemAction {
 				if (!item.getPlayerClass().equals(PlayerClass.ALL)) {
 					if (!item.getPlayerClass().equals(player.getPlayerClass())) {
 						iter.remove();
-                        continue;
+						continue;
 					}
 				}
-                if (!item.getRace().equals(Race.PC_ALL)) {
-                    if (!item.getRace().equals(player.getRace())) {
-                        iter.remove();
-                    }
-                }
+				if (!item.getRace().equals(Race.PC_ALL)) {
+					if (!item.getRace().equals(player.getRace())) {
+						iter.remove();
+					}
+				}
 			}
 			PacketSendUtility.sendPacket(player, new SM_FIRST_SHOW_DECOMPOSABLE(parentItem.getObjectId(), selectable));
 			return;
@@ -152,8 +150,8 @@ public class DecomposeAction extends AbstractItemAction {
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
 		final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
 
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-			parentItem.getItemId(), USAGE_DELAY, 0, 0));
+		PacketSendUtility.broadcastPacketAndReceive(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0));
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -161,8 +159,7 @@ public class DecomposeAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
@@ -202,8 +199,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case MANASTONE:
@@ -240,15 +236,12 @@ public class DecomposeAction extends AbstractItemAction {
 											ItemQuality itemQuality = ItemQuality.COMMON;
 											if (randomType.name().contains("RARE")) {
 												itemQuality = ItemQuality.RARE;
-											}
-											else if (randomType.name().contains("LEGEND")) {
+											} else if (randomType.name().contains("LEGEND")) {
 												itemQuality = ItemQuality.LEGEND;
 											}
-											List<ItemTemplate> selectedStones = select(stones,
-												having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+											List<ItemTemplate> selectedStones = select(stones, having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
 											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
-										}
-										else {
+										} else {
 											List<ItemTemplate> selectedStones = select(stones,
 												having(on(ItemTemplate.class).getItemQuality(), not(equalTo(ItemQuality.LEGEND))));
 											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
@@ -280,10 +273,9 @@ public class DecomposeAction extends AbstractItemAction {
 											itemQuality = ItemQuality.UNIQUE;
 										else if (randomType.name().contains("EPIC"))
 											itemQuality = ItemQuality.EPIC;
-										List<ItemTemplate> selectedStones = select(ancientStones,
-											having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+										List<ItemTemplate> selectedStones = select(ancientStones, having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
 										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
-										
+
 										if (!ItemService.checkRandomTemplate(randomId)) {
 											log.warn("DecomposeAction random item id not found. " + randomId);
 											return;
@@ -355,8 +347,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case ANCIENT_CROWN: {
@@ -368,8 +359,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case ANCIENT_GOBLET: {
@@ -381,8 +371,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case ANCIENT_SEAL: {
@@ -394,8 +383,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case ANCIENT_ICON: {
@@ -407,8 +395,7 @@ public class DecomposeAction extends AbstractItemAction {
 												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 												break;
 											}
-										}
-										while (!ItemService.checkRandomTemplate(randomId));
+										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
 									}
 									case LESSER_POTIONS: {
@@ -436,8 +423,8 @@ public class DecomposeAction extends AbstractItemAction {
 					}
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getNameId()));
 				}
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-					parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
 			}
 
 			private boolean canAcquire(Player player, ResultedItem resultItem) {
@@ -535,8 +522,7 @@ public class DecomposeAction extends AbstractItemAction {
 					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
 					if (special && template.getExtraInventoryId() > 0) {
 						maxCount++;
-					}
-					else if (template.getExtraInventoryId() < 1) {
+					} else if (template.getExtraInventoryId() < 1) {
 						maxCount++;
 					}
 				}

@@ -4,10 +4,9 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- *
  * @author xTz
  */
-public class SM_MARK_FRIENDLIST extends AionServerPacket{
+public class SM_MARK_FRIENDLIST extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
@@ -15,5 +14,5 @@ public class SM_MARK_FRIENDLIST extends AionServerPacket{
 		writeC(1);
 		writeH(0);
 	}
-	
+
 }

@@ -10,14 +10,12 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("sealedakaimum")
 public class SealedAkaimumAI2 extends GeneralNpcAI2 {
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

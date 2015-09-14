@@ -39,28 +39,24 @@ public class DropDistributionService {
 		if (player.isInGroup2() || player.isInAlliance2()) {
 			if (roll == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME);
-			}
-			else {
+			} else {
 				luck = Rnd.get(1, 100);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, 100));
 			}
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? "
-						+ player.isInAlliance2());
+					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? " + player.isInAlliance2());
 					continue;
 				}
 
 				int teamId = member.getCurrentTeamId();
-				PacketSendUtility.sendPacket(member,
-					new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), luck, index));
+				PacketSendUtility
+					.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), luck, index));
 				if (!player.equals(member) && member.isOnline()) {
 					if (roll == 0) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_OTHER(player.getName()));
-					}
-					else {
-						PacketSendUtility.sendPacket(member,
-							SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), luck, 100));
+					} else {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), luck, 100));
 					}
 				}
 			}
@@ -85,26 +81,22 @@ public class DropDistributionService {
 
 			if (bid > 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME);
 			}
 
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? "
-						+ player.isInAlliance2());
+					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? " + player.isInAlliance2());
 					continue;
 				}
 
 				int teamId = member.getCurrentTeamId();
-				PacketSendUtility.sendPacket(member,
-					new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), bid, index));
+				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), bid, index));
 				if (!player.equals(member) && member.isOnline()) {
 					if (bid > 0) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_OTHER(player.getName()));
-					}
-					else {
+					} else {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_OTHER(player.getName()));
 					}
 				}
@@ -157,9 +149,8 @@ public class DropDistributionService {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ALL_GIVEUP);
 				}
 				int teamId = member.getCurrentTeamId();
-				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId,
-					requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getObjectId() : 1, itemId, npcId,
-					dropNpc.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
+				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer()
+					.getObjectId() : 1, itemId, npcId, dropNpc.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
 			}
 		}
 

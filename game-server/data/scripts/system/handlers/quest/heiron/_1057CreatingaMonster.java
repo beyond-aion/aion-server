@@ -58,14 +58,12 @@ public class _1057CreatingaMonster extends QuestHandler {
 			if (targetId == 204500) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					int[] questItems = { 182201616 };
 					return sendQuestEndDialog(env, questItems);
 				}
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204502) {
@@ -96,8 +94,7 @@ public class _1057CreatingaMonster extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204619) {
+		} else if (targetId == 204619) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -111,20 +108,17 @@ public class _1057CreatingaMonster extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 700218 && qs.getQuestVarById(0) == 2) {
+		} else if (targetId == 700218 && qs.getQuestVarById(0) == 2) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return sendQuestDialog(env, 1693);
-			}
-			else if (env.getDialog() == DialogAction.SETPRO3) {
+			} else if (env.getDialog() == DialogAction.SETPRO3) {
 				if (!giveQuestItem(env, 182201616, 1))
 					return false;
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 				changeQuestStep(env, 2, 3, false); // 3
 				return true;
 			}
-		}
-		else if (targetId == 700279 && qs.getQuestVarById(0) == 9) {
+		} else if (targetId == 700279 && qs.getQuestVarById(0) == 9) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return useQuestObject(env, 9, 9, true, false); // reward
 			}
@@ -159,8 +153,7 @@ public class _1057CreatingaMonster extends QuestHandler {
 		if (targetId == 700219 && qs.getQuestVarById(0) < 8) {
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			updateQuestStatus(env);
-		}
-		else if (targetId == 212211 && qs.getQuestVarById(0) == 8) {
+		} else if (targetId == 212211 && qs.getQuestVarById(0) == 8) {
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			updateQuestStatus(env);
 		}

@@ -19,41 +19,40 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author Luzien
  */
 @AIName("rm_1337")
 public class RM1337AI2 extends AggressiveNpcAI2 {
-	
+
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isEventStarted = new AtomicBoolean(false);
 	private Future<?> task1, task2;
-	
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500229, getObjectId(), 0, 2000);
 	}
-	
+
 	@Override
 	public void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
 	}
-	
+
 	@Override
 	public void handleDied() {
 		cancelTask();
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500231, getObjectId(), 0, 0);
 		super.handleDied();
 	}
-	
+
 	@Override
 	public void handleBackHome() {
 		cancelTask();
 		super.handleBackHome();
 	}
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -66,7 +65,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
-	
+
 	private void cancelTask() {
 		if (task1 != null && !task1.isCancelled()) {
 			task1.cancel(true);
@@ -75,78 +74,75 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 			task2.cancel(true);
 		}
 	}
-	
+
 	private void startSkillTask1() {
 		task1 = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
-					@Override
-					public void run() {
-						if (isAlreadyDead()) {
-							cancelTask();
-						}
-						else {
-							if (getOwner().getCastingSkill() != null)
-								return;
-							if (getLifeStats().getHpPercentage() <= 50) {
-								switch (Rnd.get(2)) {
-									case 0:
-										SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
-										break;
-									default:
-										final Player target = getTargetPlayer();
-										SkillEngine.getInstance().getSkill(getOwner(), 19552, 10, target).useNoAnimationSkill();
-										ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-												@Override
-												public void run() {
-													if (!isAlreadyDead()) {
-														SkillEngine.getInstance().getSkill(getOwner(), 19553, 10, target).useNoAnimationSkill();
-													}
-												}
-										}, 4000);
-								}
-							}
-							else
+
+			@Override
+			public void run() {
+				if (isAlreadyDead()) {
+					cancelTask();
+				} else {
+					if (getOwner().getCastingSkill() != null)
+						return;
+					if (getLifeStats().getHpPercentage() <= 50) {
+						switch (Rnd.get(2)) {
+							case 0:
 								SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
+								break;
+							default:
+								final Player target = getTargetPlayer();
+								SkillEngine.getInstance().getSkill(getOwner(), 19552, 10, target).useNoAnimationSkill();
+								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+									@Override
+									public void run() {
+										if (!isAlreadyDead()) {
+											SkillEngine.getInstance().getSkill(getOwner(), 19553, 10, target).useNoAnimationSkill();
+										}
+									}
+								}, 4000);
 						}
-					}
-				}, 10000, 23000);
+					} else
+						SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
+				}
+			}
+		}, 10000, 23000);
 	}
-	
+
 	private void startSkillTask2() {
 		task2 = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
-					@Override
-					public void run() {
-						if (isAlreadyDead()) {
-							cancelTask();
-						}
-						else {
-							getOwner().getController().cancelCurrentSkill();
-							NpcShoutsService.getInstance().sendMsg(getOwner(), 1500230, getObjectId(), 0, 0);
-							SkillEngine.getInstance().getSkill(getOwner(), 19551, 10, getTarget()).useNoAnimationSkill();
-							spawnSparks();
-						}
-					}
-				}, 0, 60000);
+
+			@Override
+			public void run() {
+				if (isAlreadyDead()) {
+					cancelTask();
+				} else {
+					getOwner().getController().cancelCurrentSkill();
+					NpcShoutsService.getInstance().sendMsg(getOwner(), 1500230, getObjectId(), 0, 0);
+					SkillEngine.getInstance().getSkill(getOwner(), 19551, 10, getTarget()).useNoAnimationSkill();
+					spawnSparks();
+				}
+			}
+		}, 0, 60000);
 	}
-	
+
 	private void spawnSparks() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-				@Override
-				public void run() {
-					if (!isAlreadyDead()) {
-						int count = Rnd.get(8,12);
-						for (int i=0; i < count; i++) {
-							rndSpawn(282373);
-						}
-						
+
+			@Override
+			public void run() {
+				if (!isAlreadyDead()) {
+					int count = Rnd.get(8, 12);
+					for (int i = 0; i < count; i++) {
+						rndSpawn(282373);
 					}
+
 				}
-			}, 4000);
+			}
+		}, 4000);
 	}
-	
+
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
@@ -156,7 +152,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 		}
 		return !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
 	}
-	
+
 	private void rndSpawn(int npcId) {
 		float direction = Rnd.get(0, 180) / 100f;
 		int distance = Rnd.get(3, 12);

@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 
 /**
- *
  * @author xTz
  */
 public class SiegeWeaponController extends SummonController {

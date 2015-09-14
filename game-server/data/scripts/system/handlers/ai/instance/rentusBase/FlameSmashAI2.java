@@ -7,12 +7,11 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("flame_smash")
 public class FlameSmashAI2 extends NpcAI2 {
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

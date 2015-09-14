@@ -7,12 +7,10 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Mr.Madison
- *
  */
-public class _26960FacetheCommander  extends QuestHandler {
+public class _26960FacetheCommander extends QuestHandler {
 
 	private final static int questId = 26960;
 
@@ -46,8 +44,7 @@ public class _26960FacetheCommander  extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 802054) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -60,13 +57,11 @@ public class _26960FacetheCommander  extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801280) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -47,7 +46,7 @@ public class SM_FRIEND_RESPONSE extends AionServerPacket {
 	 * The target is dead and cannot be befriended yet.
 	 */
 	public static final int TARGET_DEAD = 0x09;
-	
+
 	public static final int FRIEND_DENIED = 0x11;
 
 	private final String player;

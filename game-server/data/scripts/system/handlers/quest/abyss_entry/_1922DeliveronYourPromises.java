@@ -93,8 +93,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (qs.getQuestVarById(4) == 10) {
+							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -116,8 +115,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 3739);
@@ -141,8 +139,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 				int[] mobs = { 213580, 213581, 213582 };
 				if (var4 < 9) {
 					return defaultOnKillEvent(env, mobs, 0, 9, 4); // 4: 1 - 9
-				}
-				else if (var4 == 9) {
+				} else if (var4 == 9) {
 					defaultOnKillEvent(env, mobs, 9, 10, 4); // 4: 10
 					QuestService.questTimerEnd(env);
 					playQuestMovie(env, 166);
@@ -183,8 +180,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					qs.setQuestVar(6);
 					updateQuestStatus(env);
 					return true;
-				}
-				else {
+				} else {
 					playQuestMovie(env, 165);
 					QuestService.questTimerStart(env, 240);
 					return true;
@@ -193,7 +189,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
@@ -202,8 +198,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 			if (movieId == 166) {
 				TeleportService2.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 				return true;
-			}
-			else if (movieId == 165) {
+			} else if (movieId == 165) {
 				QuestService.questTimerStart(env, 240);
 				return true;
 			}

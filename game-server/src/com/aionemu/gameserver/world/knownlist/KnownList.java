@@ -2,7 +2,10 @@ package com.aionemu.gameserver.world.knownlist;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javolution.util.FastMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +18,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.MapRegion;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * KnownList.
@@ -35,22 +37,22 @@ public class KnownList {
 	/**
 	 * List of objects that this KnownList owner known
 	 */
-	protected final ConcurrentHashMap<Integer, VisibleObject> knownObjects = new ConcurrentHashMap<>();
+	protected final Map<Integer, VisibleObject> knownObjects = new FastMap<Integer, VisibleObject>().shared();
 
 	/**
 	 * List of player that this KnownList owner known
 	 */
-	protected volatile ConcurrentHashMap<Integer, Player> knownPlayers;
+	protected volatile Map<Integer, Player> knownPlayers;
 
 	/**
 	 * List of objects that this KnownList owner known
 	 */
-	protected final ConcurrentHashMap<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
+	protected final Map<Integer, VisibleObject> visualObjects = new FastMap<Integer, VisibleObject>().shared();
 
 	/**
 	 * List of player that this KnownList owner known
 	 */
-	protected volatile ConcurrentHashMap<Integer, Player> visualPlayers;
+	protected volatile Map<Integer, Player> visualPlayers;
 
 	private ReentrantLock lock = new ReentrantLock();
 
@@ -69,8 +71,7 @@ public class KnownList {
 		try {
 			forgetObjects();
 			findVisibleObjects();
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -146,8 +147,7 @@ public class KnownList {
 				}
 				owner.getController().see(object);
 			}
-		}
-		else if (visualObjects.put(object.getObjectId(), object) == null) {
+		} else if (visualObjects.put(object.getObjectId(), object) == null) {
 			owner.getController().see(object);
 		}
 	}
@@ -224,8 +224,8 @@ public class KnownList {
 		MapRegion[] regions = owner.getActiveRegion().getNeighbours();
 		for (int i = 0; i < regions.length; i++) {
 			MapRegion r = regions[i];
-			ConcurrentHashMap<Integer, VisibleObject> objects = r.getObjects();
-			for (ConcurrentHashMap.Entry<Integer, VisibleObject> e : objects.entrySet()) {
+			Map<Integer, VisibleObject> objects = r.getObjects();
+			for (Entry<Integer, VisibleObject> e : objects.entrySet()) {
 				VisibleObject newObject = e.getValue();
 				if (newObject == owner || newObject == null)
 					continue;
@@ -284,7 +284,7 @@ public class KnownList {
 	public int doOnAllNpcs(Visitor<Npc> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
-			for (ConcurrentHashMap.Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
+			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
 				VisibleObject newObject = e.getValue();
 				if (newObject instanceof Npc) {
 					if ((++counter) == iterationLimit)
@@ -292,8 +292,7 @@ public class KnownList {
 					visitor.visit((Npc) newObject);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all npcs", ex);
 		}
 		return counter;
@@ -306,7 +305,7 @@ public class KnownList {
 	public int doOnAllNpcsWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
-			for (ConcurrentHashMap.Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
+			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
 				VisibleObject newObject = e.getValue();
 				if (newObject instanceof Npc) {
 					if ((++counter) == iterationLimit)
@@ -314,8 +313,7 @@ public class KnownList {
 					visitor.visit((Npc) newObject, owner);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all npcs" + ex);
 		}
 		return counter;
@@ -326,28 +324,26 @@ public class KnownList {
 			return;
 		}
 		try {
-			for (ConcurrentHashMap.Entry<Integer, Player> e : knownPlayers.entrySet()) {
+			for (Entry<Integer, Player> e : knownPlayers.entrySet()) {
 				Player player = e.getValue();
 				if (player != null) {
 					visitor.visit(player);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players" + ex);
 		}
 	}
 
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			for (ConcurrentHashMap.Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
+			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
 				VisibleObject newObject = e.getValue();
 				if (newObject != null) {
 					visitor.visit(newObject);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects" + ex);
 		}
 	}
@@ -372,7 +368,7 @@ public class KnownList {
 		if (knownPlayers == null) {
 			synchronized (this) {
 				if (knownPlayers == null) {
-					knownPlayers = new ConcurrentHashMap<>();
+					knownPlayers = new FastMap<Integer, Player>().shared();
 				}
 			}
 		}
@@ -382,7 +378,7 @@ public class KnownList {
 		if (visualPlayers == null) {
 			synchronized (this) {
 				if (visualPlayers == null) {
-					visualPlayers = new ConcurrentHashMap<>();
+					visualPlayers = new FastMap<Integer, Player>().shared();
 				}
 			}
 		}
@@ -407,6 +403,6 @@ public class KnownList {
 		public int getType() {
 			return type;
 		}
-		
+
 	}
 }

@@ -15,7 +15,7 @@ public class Improvement {
 	@XmlAttribute(name = "way", required = true)
 	private int way;
 
-	@XmlAttribute(name = "price2" )
+	@XmlAttribute(name = "price2")
 	private int price2;
 
 	@XmlAttribute(name = "price1")

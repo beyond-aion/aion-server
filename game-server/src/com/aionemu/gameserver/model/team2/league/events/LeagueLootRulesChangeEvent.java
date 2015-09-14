@@ -11,7 +11,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.google.common.base.Predicate;
 
 /**
- *
  * @author Source
  */
 public class LeagueLootRulesChangeEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember>, TeamEvent {

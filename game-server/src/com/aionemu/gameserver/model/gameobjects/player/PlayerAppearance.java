@@ -13,9 +13,9 @@ public class PlayerAppearance implements Cloneable {
 	private int hair;
 	private int deco;
 	private int tattoo;
-	private int faceContour; //2.5
-	private int expression; //2.5
-	private int jawLine; //2.5
+	private int faceContour; // 2.5
+	private int expression; // 2.5
+	private int jawLine; // 2.5
 	private int skinRGB;
 	private int hairRGB;
 	private int lipRGB;
@@ -140,7 +140,6 @@ public class PlayerAppearance implements Cloneable {
 		this.tattoo = tattoo;
 	}
 
-	
 	/**
 	 * @return the faceContour
 	 */
@@ -148,15 +147,14 @@ public class PlayerAppearance implements Cloneable {
 		return faceContour;
 	}
 
-	
 	/**
-	 * @param faceContour the faceContour to set
+	 * @param faceContour
+	 *          the faceContour to set
 	 */
 	public void setFaceContour(int faceContour) {
 		this.faceContour = faceContour;
 	}
 
-	
 	/**
 	 * @return the expression
 	 */
@@ -164,15 +162,14 @@ public class PlayerAppearance implements Cloneable {
 		return expression;
 	}
 
-	
 	/**
-	 * @param expression the expression to set
+	 * @param expression
+	 *          the expression to set
 	 */
 	public void setExpression(int expression) {
 		this.expression = expression;
 	}
 
-	
 	/**
 	 * @return the jawLine
 	 */
@@ -180,9 +177,9 @@ public class PlayerAppearance implements Cloneable {
 		return jawLine;
 	}
 
-	
 	/**
-	 * @param jawLine the jawLine to set
+	 * @param jawLine
+	 *          the jawLine to set
 	 */
 	public void setJawLine(int jawLine) {
 		this.jawLine = jawLine;
@@ -1064,13 +1061,13 @@ public class PlayerAppearance implements Cloneable {
 	 * 
 	 * @author Divinity
 	 */
+	@Override
 	public Object clone() {
 		Object newObject = null;
 
 		try {
 			newObject = super.clone();
-		}
-		catch (CloneNotSupportedException e) {
+		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 

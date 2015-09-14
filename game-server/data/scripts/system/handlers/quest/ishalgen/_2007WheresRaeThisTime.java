@@ -149,14 +149,12 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					playQuestMovie(env, 58);
 					return sendQuestDialog(env, 3057);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
@@ -177,7 +175,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 
 	private void destroy(final int var, final QuestEnv env) {
 		Player player = env.getPlayer();
-		//sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
+		// sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		switch (var) {
 			case 6:

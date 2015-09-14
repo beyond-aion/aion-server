@@ -14,7 +14,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("golden_tatar_paralysis_eye")
@@ -33,8 +32,7 @@ public class GoldenTatarParalysisEyeAI2 extends AggressiveNpcAI2 {
 		super.handleSpawned();
 		if (getNpcId() == 282744) {
 			startSpawnTask();
-		}
-		else {
+		} else {
 			SkillEngine.getInstance().getSkill(getOwner(), 20213, 60, getOwner()).useNoAnimationSkill();
 			task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -57,8 +55,7 @@ public class GoldenTatarParalysisEyeAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					spawnCount++;
 					WorldPosition p = getPosition();
 					spawn(282745, p.getX(), p.getY(), p.getZ(), p.getHeading());

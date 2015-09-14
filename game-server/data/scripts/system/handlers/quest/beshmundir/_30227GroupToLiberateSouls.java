@@ -40,13 +40,12 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-			
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798946) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -64,7 +63,7 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							}
 						}
-						case SETPRO1: 
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
 				}
@@ -77,8 +76,7 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798946) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -94,7 +92,7 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		final Player player = env.getPlayer();

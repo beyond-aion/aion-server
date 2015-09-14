@@ -62,8 +62,7 @@ public class _1033SatalocasHeart extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var >= 10) {
+							} else if (var >= 10) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -73,7 +72,7 @@ public class _1033SatalocasHeart extends QuestHandler {
 						}
 						case SETPRO3: {
 							QuestService.questTimerStart(env, 180);
-							return defaultCloseDialog(env, 1, 10); 
+							return defaultCloseDialog(env, 1, 10);
 						}
 						case SELECT_ACTION_2035: {
 							if (drakeFangs < 5) {
@@ -81,16 +80,14 @@ public class _1033SatalocasHeart extends QuestHandler {
 								qs.setQuestVar(1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 2035);
-							}
-							else if (drakeFangs >= 5 && drakeFangs < 7) {
+							} else if (drakeFangs >= 5 && drakeFangs < 7) {
 								removeQuestItem(env, 182201019, drakeFangs);
 								qs.setQuestVar(12);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								QuestService.questTimerEnd(env);
 								return sendQuestDialog(env, 2120);
-							}
-							else if (drakeFangs >= 7) {
+							} else if (drakeFangs >= 7) {
 								removeQuestItem(env, 182201019, drakeFangs);
 								qs.setQuestVar(13);
 								qs.setStatus(QuestStatus.REWARD);
@@ -106,8 +103,7 @@ public class _1033SatalocasHeart extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203900) { // Diomedes
 				if (dialog == DialogAction.USE_OBJECT) {
 					switch (var) {
@@ -118,12 +114,10 @@ public class _1033SatalocasHeart extends QuestHandler {
 							return sendQuestDialog(env, 3057);
 						}
 					}
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env, var - 12);
 				}
-			}
-			else if (targetId == 203996) { // Kimeia
+			} else if (targetId == 203996) { // Kimeia
 				if (dialog == DialogAction.FINISH_DIALOG) {
 					return sendQuestSelectionDialog(env);
 				}
@@ -134,10 +128,10 @@ public class _1033SatalocasHeart extends QuestHandler {
 
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
-		changeQuestStep(env, 10, 11, false); 
+		changeQuestStep(env, 10, 11, false);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

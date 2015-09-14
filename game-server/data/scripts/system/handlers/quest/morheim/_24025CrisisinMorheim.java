@@ -75,7 +75,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 						case SET_SUCCEED:
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 3, true, false);
-								
+
 							}
 					}
 				}
@@ -96,8 +96,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 				}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204304) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

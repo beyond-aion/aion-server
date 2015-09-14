@@ -13,7 +13,7 @@ public enum AIEventType {
 	/**
 	 * Creature is being attacked (internal)
 	 */
-	ATTACK, 
+	ATTACK,
 	/**
 	 * Creature's attack part is complete (internal)
 	 */
@@ -27,7 +27,7 @@ public enum AIEventType {
 	 */
 	CREATURE_NEEDS_SUPPORT,
 	CREATURE_NEEDS_HELP,
-	
+
 	MOVE_VALIDATE,
 	MOVE_ARRIVED,
 

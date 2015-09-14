@@ -71,19 +71,18 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 		if (cooldowns != null && cooldowns.size() > 0) {
 			Map<Integer, Long> filteredCooldown = Maps.filterValues(cooldowns, cooldownPredicate);
 
-
-			if(filteredCooldown.isEmpty()){
+			if (filteredCooldown.isEmpty()) {
 				return;
 			}
 
 			Connection con = null;
 			PreparedStatement st = null;
-			try{
+			try {
 				con = DatabaseFactory.getConnection();
 				con.setAutoCommit(false);
 				st = con.prepareStatement(INSERT_QUERY);
 
-				for(Map.Entry<Integer, Long> entry : filteredCooldown.entrySet()){
+				for (Map.Entry<Integer, Long> entry : filteredCooldown.entrySet()) {
 					st.setInt(1, player.getObjectId());
 					st.setInt(2, entry.getKey());
 					st.setLong(3, entry.getValue());

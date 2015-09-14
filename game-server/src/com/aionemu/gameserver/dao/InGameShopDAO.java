@@ -16,8 +16,8 @@ public abstract class InGameShopDAO implements DAO {
 
 	public abstract FastMap<Byte, List<IGItem>> loadInGameShopItems();
 
-	public abstract void saveIngameShopItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list, int salesRanking,
-			byte itemType, byte gift, String titleDescription, String description);
+	public abstract void saveIngameShopItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list,
+		int salesRanking, byte itemType, byte gift, String titleDescription, String description);
 
 	public abstract boolean increaseSales(int object, int current);
 

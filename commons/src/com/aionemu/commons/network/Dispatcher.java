@@ -55,8 +55,7 @@ public abstract class Dispatcher extends Thread {
 	}
 
 	/**
-	 * Add connection to pendingClose list, so this connection will be closed by this <code>Dispatcher</code> as soon as
-	 * possible.
+	 * Add connection to pendingClose list, so this connection will be closed by this <code>Dispatcher</code> as soon as possible.
 	 * 
 	 * @param con
 	 * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
@@ -90,16 +89,14 @@ public abstract class Dispatcher extends Thread {
 
 				synchronized (gate) {
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.error("Dispatcher error! " + e, e);
 			}
 		}
 	}
 
 	/**
-	 * Register new client connected to this Dispatcher and set SelectionKey (result of registration) as this key of given
-	 * AConnection.
+	 * Register new client connected to this Dispatcher and set SelectionKey (result of registration) as this key of given AConnection.
 	 * 
 	 * @param ch
 	 * @param ops
@@ -137,8 +134,7 @@ public abstract class Dispatcher extends Thread {
 	final void accept(SelectionKey key) {
 		try {
 			((Acceptor) key.attachment()).accept(key);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while accepting connection: +" + e, e);
 		}
 	}
@@ -165,8 +161,7 @@ public abstract class Dispatcher extends Thread {
 		int numRead;
 		try {
 			numRead = socketChannel.read(rb);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			closeConnectionImpl(con);
 			return;
 		}
@@ -177,8 +172,7 @@ public abstract class Dispatcher extends Thread {
 			 */
 			closeConnectionImpl(con);
 			return;
-		}
-		else if (numRead == 0) {
+		} else if (numRead == 0) {
 			return;
 		}
 
@@ -199,8 +193,7 @@ public abstract class Dispatcher extends Thread {
 			if (Assertion.NetworkAssertion) {
 				assert con.readBuffer.hasRemaining();
 			}
-		}
-		else
+		} else
 			rb.clear();
 	}
 
@@ -225,18 +218,14 @@ public abstract class Dispatcher extends Thread {
 			buf.position(buf.position() + sz);
 
 			return con.processData(b);
-		}
-		catch (IllegalArgumentException e) {
-			log.warn(
-				"Error on parsing input from client - account: " + con + " packet size: " + sz + " real size:"
-					+ buf.remaining(), e);
+		} catch (IllegalArgumentException e) {
+			log.warn("Error on parsing input from client - account: " + con + " packet size: " + sz + " real size:" + buf.remaining(), e);
 			return false;
 		}
 	}
 
 	/**
-	 * Write as much as possible data to socketChannel represented by SelectionKey key. If all data were written key write
-	 * interest will be disabled.
+	 * Write as much as possible data to socketChannel represented by SelectionKey key. If all data were written key write interest will be disabled.
 	 * 
 	 * @param key
 	 */
@@ -250,8 +239,7 @@ public abstract class Dispatcher extends Thread {
 		if (wb.hasRemaining()) {
 			try {
 				numWrite = socketChannel.write(wb);
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				closeConnectionImpl(con);
 				return;
 			}
@@ -278,8 +266,7 @@ public abstract class Dispatcher extends Thread {
 			/** Attempt to write to the channel */
 			try {
 				numWrite = socketChannel.write(wb);
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				closeConnectionImpl(con);
 				return;
 			}
@@ -312,8 +299,8 @@ public abstract class Dispatcher extends Thread {
 	}
 
 	/**
-	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread
-	 * [DisconnectionThreadPool]. This method may only be called by current Dispatcher Thread.
+	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread [DisconnectionThreadPool]. This method may
+	 * only be called by current Dispatcher Thread.
 	 * 
 	 * @param con
 	 */

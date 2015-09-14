@@ -23,9 +23,9 @@ public class ChargeArmorCondition extends ChargeCondition {
 			Player effector = (Player) env.getEffector();
 			for (Item item : effector.getEquipment().getEquippedItems()) {
 				if (item.getItemTemplate().isArmor() && item.getConditioningInfo() != null) {
-				   if ((item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
-					 continue;
-				  }
+					if ((item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
+						continue;
+					}
 					item.getConditioningInfo().updateChargePoints(-value);
 				}
 			}
@@ -33,4 +33,3 @@ public class ChargeArmorCondition extends ChargeCondition {
 		return true;
 	}
 }
-

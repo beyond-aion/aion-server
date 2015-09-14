@@ -47,8 +47,7 @@ public class _20062WatchingWaiting extends QuestHandler {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 1) {
+						} else if (var == 1) {
 							return sendQuestDialog(env, 1352);
 						}
 					}
@@ -63,13 +62,11 @@ public class _20062WatchingWaiting extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800018) { // Garnon
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -86,10 +83,10 @@ public class _20062WatchingWaiting extends QuestHandler {
 			if (var == 2) {
 				if (player.isInsideZone(item.getItemTemplate().getUseArea())) {
 					removeQuestItem(questEnv, 182212559, 1);
-					Npc npc1 = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 218822, player.getPosition().getX(),
-						player.getPosition().getY(), player.getPosition().getZ(), player.getPosition().getHeading());
-					Npc npc2 = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 218822, player.getPosition().getX(),
-						player.getPosition().getY(), player.getPosition().getZ(), player.getPosition().getHeading());
+					Npc npc1 = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 218822, player.getPosition().getX(), player
+						.getPosition().getY(), player.getPosition().getZ(), player.getPosition().getHeading());
+					Npc npc2 = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 218822, player.getPosition().getX(), player
+						.getPosition().getY(), player.getPosition().getZ(), player.getPosition().getHeading());
 					npc1.getAggroList().addHate(player, 1);
 					npc2.getAggroList().addHate(player, 1);
 					changeQuestStep(questEnv, 2, 2, true); // reward

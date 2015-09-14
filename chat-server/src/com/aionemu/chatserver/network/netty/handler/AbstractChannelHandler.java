@@ -9,16 +9,16 @@ import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.common.netty.BaseServerPacket;
 
 /**
  * @author ATracer
  */
-public abstract class AbstractChannelHandler extends SimpleChannelUpstreamHandler
-{
+public abstract class AbstractChannelHandler extends SimpleChannelUpstreamHandler {
+
 	private static final Logger log = LoggerFactory.getLogger(AbstractChannelHandler.class);
 
 	/**
@@ -34,16 +34,13 @@ public abstract class AbstractChannelHandler extends SimpleChannelUpstreamHandle
 	 * Invoked when a Channel was disconnected from its remote peer
 	 */
 	@Override
-	public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception
-	{
+	public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
 		log.info("Channel disconnected IP: " + inetAddress.getHostAddress());
 	}
 
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception
-	{
-		if (!(e.getCause() instanceof IOException))
-		{
+	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
+		if (!(e.getCause() instanceof IOException)) {
 			log.error("NETTY: Exception caught: ", e.getCause());
 		}
 	}
@@ -53,24 +50,21 @@ public abstract class AbstractChannelHandler extends SimpleChannelUpstreamHandle
 	 * 
 	 * @param packet
 	 */
-	public void close(BaseServerPacket packet)
-	{
+	public void close(BaseServerPacket packet) {
 		channel.write(packet).addListener(ChannelFutureListener.CLOSE);
 	}
 
 	/**
 	 * Closes the channel
 	 */
-	public void close()
-	{
+	public void close() {
 		channel.close();
 	}
 
 	/**
 	 * @return the IP address string
 	 */
-	public String getIP()
-	{
+	public String getIP() {
 		return inetAddress.getHostAddress();
 	}
 }

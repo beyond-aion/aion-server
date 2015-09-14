@@ -17,7 +17,7 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 	protected void handleFollowMe(Creature creature) {
 		FollowEventHandler.follow(this, creature);
 	}
-	
+
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (getState()) {
@@ -30,7 +30,7 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 		}
 
 		if (eventType == AIEventType.CREATURE_MOVED) {
-				return getState() == AIState.FOLLOWING;
+			return getState() == AIState.FOLLOWING;
 		}
 		return true;
 	}
@@ -39,8 +39,7 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature == getOwner().getTarget()) {
 			FollowEventHandler.creatureMoved(this, creature);
-		}
-		else if(getOwner().getTarget() == null) {
+		} else if (getOwner().getTarget() == null) {
 			FollowEventHandler.stopFollow(this, creature);
 		}
 	}

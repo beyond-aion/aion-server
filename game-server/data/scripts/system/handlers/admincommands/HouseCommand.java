@@ -2,7 +2,6 @@ package admincommands;
 
 import java.sql.Timestamp;
 
-import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
@@ -39,15 +38,13 @@ public class HouseCommand extends AdminCommand {
 				return;
 			}
 			ChangeHouseOwner(admin, params[1].toUpperCase(), true);
-		}
-		else if (params[0].equals("revoke")) {
+		} else if (params[0].equals("revoke")) {
 			if (params.length == 1) {
 				PacketSendUtility.sendMessage(admin, "Syntax: //house revoke <name>");
 				return;
 			}
 			ChangeHouseOwner(admin, params[1].toUpperCase(), false);
-		}
-		else if (params[0].equals("tp")) {
+		} else if (params[0].equals("tp")) {
 			if (params.length == 1) {
 				PacketSendUtility.sendMessage(admin, "Syntax: //house tp <name>");
 				return;
@@ -92,8 +89,7 @@ public class HouseCommand extends AdminCommand {
 				if (current.getBuilding().getType() == BuildingType.PERSONAL_INS) {
 					target.getHouses().remove(current);
 					PacketSendUtility.sendMessage(admin, "Deleted studio.");
-				}
-				else {
+				} else {
 					current.setStatus(HouseStatus.ACTIVE);
 					current.setFeePaid(true);
 					current.setNextPay(null);
@@ -106,17 +102,15 @@ public class HouseCommand extends AdminCommand {
 			house.setStatus(HouseStatus.ACTIVE);
 			house.setFeePaid(true);
 			house.setNextPay(null); // TODO: fix it
-      house.reloadHouseRegistry();
+			house.reloadHouseRegistry();
 			house.save();
 			target.getHouses().add(house);
 			target.setHouseRegistry(house.getRegistry());
 			target.setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
 			PacketSendUtility.sendMessage(admin, "House " + house.getName() + " acquired");
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
-			PacketSendUtility
-				.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
-		}
-		else {
+			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
+		} else {
 			if (target.getHouses().size() == 0) {
 				PacketSendUtility.sendMessage(admin, "Nothing to revoke!");
 				return;
@@ -126,8 +120,7 @@ public class HouseCommand extends AdminCommand {
 				if (house.getName().equals(houseName)) {
 					revokedHouse = house;
 					house.revokeOwner();
-				}
-				else if (house.getStatus() != HouseStatus.ACTIVE) {
+				} else if (house.getStatus() != HouseStatus.ACTIVE) {
 					house.setStatus(HouseStatus.ACTIVE);
 					house.setSellStarted(null);
 					house.save();
@@ -146,9 +139,8 @@ public class HouseCommand extends AdminCommand {
 			target.setHouseRegistry(oldHouse == null ? null : oldHouse.getRegistry());
 			PacketSendUtility.sendMessage(admin, "House " + revokedHouse.getName() + " revoked");
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
-			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(),
-				revokedHouse.getAddress().getId(), false));
-			((HouseController) revokedHouse.getController()).updateAppearance();
+			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), revokedHouse.getAddress().getId(), false));
+			revokedHouse.getController().updateAppearance();
 		}
 	}
 

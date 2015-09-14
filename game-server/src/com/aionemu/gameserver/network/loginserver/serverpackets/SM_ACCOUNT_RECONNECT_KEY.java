@@ -4,8 +4,7 @@ import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
 /**
- * This packet is sended by GameServer when player is requesting fast reconnect
- * to login server. LoginServer in response will send reconectKey.
+ * This packet is sended by GameServer when player is requesting fast reconnect to login server. LoginServer in response will send reconectKey.
  * 
  * @author -Nemesiss-
  */
@@ -20,7 +19,7 @@ public class SM_ACCOUNT_RECONNECT_KEY extends LsServerPacket {
 	 * Constructs new instance of <tt>SM_ACCOUNT_RECONNECT_KEY </tt> packet.
 	 * 
 	 * @param accountId
-	 *            account identifier.
+	 *          account identifier.
 	 */
 	public SM_ACCOUNT_RECONNECT_KEY(int accountId) {
 		super(0x02);

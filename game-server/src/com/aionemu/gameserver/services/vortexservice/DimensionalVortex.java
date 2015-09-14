@@ -51,8 +51,7 @@ public abstract class DimensionalVortex<VL extends VortexLocation> {
 		synchronized (this) {
 			if (started) {
 				doubleStart = true;
-			}
-			else {
+			} else {
 				started = true;
 			}
 		}

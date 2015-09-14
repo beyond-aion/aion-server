@@ -37,8 +37,7 @@ public class _30361StrangeFragment extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 278033: { // Erik
@@ -62,15 +61,14 @@ public class _30361StrangeFragment extends QuestHandler {
 							}
 						}
 						case SETPRO2: {
-              changeQuestStep(env, 1, 2, false);
+							changeQuestStep(env, 1, 2, false);
 							return defaultCloseDialog(env, 2, 2, true, false); // reward
 						}
 					}
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 260265) { // Gwal
 				return sendQuestEndDialog(env);
 			}
@@ -84,7 +82,7 @@ public class _30361StrangeFragment extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return HandlerResult.fromBoolean(QuestService.startQuest(env));
-    }
+		}
 		return HandlerResult.FAILED;
 	}
 }

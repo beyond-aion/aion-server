@@ -7,19 +7,17 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author mr.madison
- *
  */
 public class _23030UnusualObservations extends QuestHandler {
 
-private final static int questId = 23030;
-	
+	private final static int questId = 23030;
+
 	public _23030UnusualObservations() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		int[] npcIds = { 801117, 701688, 701689, 701690 };
@@ -28,25 +26,23 @@ private final static int questId = 23030;
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801117) { 
+			if (targetId == 801117) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 701688 || targetId == 701689 || targetId == 701690) {
 				if (var < 2)
@@ -55,13 +51,11 @@ private final static int questId = 23030;
 					return useQuestObject(env, 2, 3, true, true);
 				}
 			}
-		}						
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801117) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

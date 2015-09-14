@@ -19,7 +19,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class ChangeHateOnAttackedEffect extends EffectTemplate {
 
 	@XmlAttribute
-	protected int value1;//delta
+	protected int value1;// delta
 	@XmlAttribute
 	protected int value2;
 

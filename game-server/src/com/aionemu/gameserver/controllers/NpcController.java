@@ -76,8 +76,7 @@ public class NpcController extends CreatureController<Npc> {
 			// TODO see player ai event
 			if (owner.getLifeStats().isAlreadyDead())
 				DropService.getInstance().see((Player) object, owner);
-		}
-		else if (object instanceof Summon) {
+		} else if (object instanceof Summon) {
 			// TODO see summon ai event
 		}
 	}
@@ -124,8 +123,7 @@ public class NpcController extends CreatureController<Npc> {
 		if (owner.getSpawn().hasPool()) {
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
 		}
-		PacketSendUtility.broadcastPacket(owner,
-			new SM_EMOTION(owner, EmotionType.DIE, 0, owner.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
+		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0, owner.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
 
 		boolean shouldReward = false;
 		boolean deleteImmediately = false;
@@ -137,15 +135,12 @@ public class NpcController extends CreatureController<Npc> {
 				this.doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi2().onGeneralEvent(AIEventType.DIED);
-		}
-		catch (Exception e) {
-		   log.warn("LOOT DEBUG: EXCEPTION:" +e.getMessage());
-		}
-		finally { // always make sure npc is schedulled to respawn
+		} catch (Exception e) {
+			log.warn("LOOT DEBUG: EXCEPTION:" + e.getMessage());
+		} finally { // always make sure npc is schedulled to respawn
 			if (!deleteImmediately) {
 				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
-			}
-			else if (shouldReward && owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
+			} else if (shouldReward && owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
 				log.warn("AI " + owner.getAi2().getName() + " has SHOULD_REWARD && SHOULD_LOOT but not SHOULD_DECAY, rewards will be lost!");
 			}
 			// TODO: refactor this: used for rift AI, better to use getDecayTime for AI
@@ -182,35 +177,34 @@ public class NpcController extends CreatureController<Npc> {
 			onDelete();
 		}
 	}
-	
-	@Override
-    public void onDieSilence() {
-        Npc owner = getOwner();
-        if (owner.getSpawn().hasPool()) {
-            owner.getSpawn().setUse(owner.getInstanceId(), false);
-        }
 
-        try {
-            if (owner.getAi2().poll(AIQuestion.SHOULD_REWARD))
-                this.doReward();
-            owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
-            owner.getAi2().onGeneralEvent(AIEventType.DIED);
-        } finally { // always make sure npc is schedulled to respawn
-            if (owner.getAi2().poll(AIQuestion.SHOULD_DECAY)) {
-                addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
-            }
-            if (owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN) && !owner.isDeleteDelayed()
-                    && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
-                Future<?> task = scheduleRespawn();
-                if (task != null) {
-                    addTask(TaskId.RESPAWN, task);
-                }
-            } else if (!hasScheduledTask(TaskId.DECAY)) {
-                onDelete();
-            }
-        }
-        super.onDieSilence();
-    }
+	@Override
+	public void onDieSilence() {
+		Npc owner = getOwner();
+		if (owner.getSpawn().hasPool()) {
+			owner.getSpawn().setUse(owner.getInstanceId(), false);
+		}
+
+		try {
+			if (owner.getAi2().poll(AIQuestion.SHOULD_REWARD))
+				this.doReward();
+			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
+			owner.getAi2().onGeneralEvent(AIEventType.DIED);
+		} finally { // always make sure npc is schedulled to respawn
+			if (owner.getAi2().poll(AIQuestion.SHOULD_DECAY)) {
+				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
+			}
+			if (owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN) && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
+				Future<?> task = scheduleRespawn();
+				if (task != null) {
+					addTask(TaskId.RESPAWN, task);
+				}
+			} else if (!hasScheduledTask(TaskId.DECAY)) {
+				onDelete();
+			}
+		}
+		super.onDieSilence();
+	}
 
 	@Override
 	public void doReward() {
@@ -244,17 +238,14 @@ public class NpcController extends CreatureController<Npc> {
 			float percentage = info.getDamage() / totalDmg;
 			if (percentage > 1) {
 				log.warn("WARN BIG REWARD PERCENTAGE: " + percentage + " damage: " + info.getDamage() + " total damage: " + totalDmg + " name: "
-					+ info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName()
-					+ " player was skiped");
+					+ info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName() + " player was skiped");
 				continue;
 			}
 			if (attacker instanceof TemporaryPlayerTeam<?>) {
 				PlayerTeamDistributionService.doReward((TemporaryPlayerTeam<?>) attacker, percentage, getOwner(), winner);
-			}
-			else if (attacker instanceof Player && ((Player) attacker).isInGroup2()) {
+			} else if (attacker instanceof Player && ((Player) attacker).isInGroup2()) {
 				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup2(), percentage, getOwner(), winner);
-			}
-			else if (attacker instanceof Player) {
+			} else if (attacker instanceof Player) {
 				Player player = (Player) attacker;
 				if (!player.getLifeStats().isAlreadyDead()) {
 					// Reward init
@@ -307,8 +298,7 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onDialogSelect(int dialogId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
 		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
-		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2)
-			&& !QuestEngine.getInstance().onDialog(env)) {
+		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2) && !QuestEngine.getInstance().onDialog(env)) {
 			return;
 		}
 		if (!getOwner().getAi2().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {

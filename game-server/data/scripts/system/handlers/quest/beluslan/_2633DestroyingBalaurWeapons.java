@@ -58,8 +58,7 @@ public class _2633DestroyingBalaurWeapons extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204807) {
@@ -76,8 +75,7 @@ public class _2633DestroyingBalaurWeapons extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 700296) {
+		} else if (targetId == 700296) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					return useQuestObject(env, 1, 2, false, 0); // 2

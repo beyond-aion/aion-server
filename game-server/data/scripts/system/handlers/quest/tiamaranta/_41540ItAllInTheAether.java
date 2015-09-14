@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41540ItAllInTheAether extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _41540ItAllInTheAether extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212539, questId);
 		qe.registerQuestNpc(205954).addOnQuestStart(questId);
@@ -36,28 +35,23 @@ public class _41540ItAllInTheAether extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 205954) { 
+			if (targetId == 205954) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212539, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (dialog == DialogAction.QUEST_SELECT) {
 				return sendQuestDialog(env, 2375);
-			}
-			else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+			} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 				return defaultCloseDialog(env, 1, 1, true, true);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205954) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -71,15 +65,15 @@ public class _41540ItAllInTheAether extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			  removeQuestItem(env, 182212539, 1);
-			  changeQuestStep(env, 0, 1, false);
-				return HandlerResult.SUCCESS;
+			removeQuestItem(env, 182212539, 1);
+			changeQuestStep(env, 0, 1, false);
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}

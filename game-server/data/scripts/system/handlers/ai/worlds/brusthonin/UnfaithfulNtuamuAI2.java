@@ -21,7 +21,7 @@ public class UnfaithfulNtuamuAI2 extends AggressiveNpcAI2 {
 
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 50) {
-			spawn(214583, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) getOwner().getHeading());
+			spawn(214583, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 			AI2Actions.deleteOwner(this);
 		}
 	}

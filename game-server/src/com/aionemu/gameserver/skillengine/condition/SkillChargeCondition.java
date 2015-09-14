@@ -16,7 +16,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SkillChargeCondition")
 public class SkillChargeCondition extends ChargeCondition {
-	
+
 	@Override
 	public boolean validate(Skill env) {
 		int castTime = 0;
@@ -30,7 +30,7 @@ public class SkillChargeCondition extends ChargeCondition {
 		}
 		return true;
 	}
-	
+
 	public int getValue() {
 		return value;
 	}

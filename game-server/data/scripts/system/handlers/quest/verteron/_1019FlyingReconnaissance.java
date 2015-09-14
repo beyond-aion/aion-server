@@ -13,12 +13,11 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * Talk with Estino (203146). Use the transformation potion (182200505) at the entrance of the Tursin Totem Pole
- * (210030000) and scout the base. Scouting completed! Talk with Spatalos (203098). Talk with Meteina (203147). Lure the
- * Tursin Loudmouth Boss (210158) to Meteina (203147). Talk with Meteina (203147). Destroy the flags of the Tursin Totem
- * Pole (700037) (3). Use a flint (182200023) and set fire to the Tursin Totem Pole of Tursin Totem Pole (210030000).
- * Terminate either Ziloota the Seer (210697) or High Priest Munuka (216891). Lure out Tursin Loudmouth Boss (210158)
- * again. Talk with Spatalos (203098).
+ * Talk with Estino (203146). Use the transformation potion (182200505) at the entrance of the Tursin Totem Pole (210030000) and scout the base.
+ * Scouting completed! Talk with Spatalos (203098). Talk with Meteina (203147). Lure the Tursin Loudmouth Boss (210158) to Meteina (203147). Talk with
+ * Meteina (203147). Destroy the flags of the Tursin Totem Pole (700037) (3). Use a flint (182200023) and set fire to the Tursin Totem Pole of Tursin
+ * Totem Pole (210030000). Terminate either Ziloota the Seer (210697) or High Priest Munuka (216891). Lure out Tursin Loudmouth Boss (210158) again.
+ * Talk with Spatalos (203098).
  * 
  * @author Mr. Poke
  * @modified Rice
@@ -99,8 +98,7 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2034);
@@ -131,8 +129,7 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (qs.getQuestVarById(0) == 4) {
+				} else if (qs.getQuestVarById(0) == 4) {
 					playQuestMovie(env, 13);
 					((Npc) env.getVisibleObject()).getController().onDie(player);
 					qs.setQuestVarById(0, 5); // 5

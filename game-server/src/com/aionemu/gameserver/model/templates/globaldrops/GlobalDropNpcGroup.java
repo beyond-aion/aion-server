@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.npc.GroupDropType;
 
-
 /**
  * @author Bobobear
  */
@@ -16,10 +15,10 @@ import com.aionemu.gameserver.model.templates.npc.GroupDropType;
 @XmlType(name = "GlobalDropNpcGroup")
 public class GlobalDropNpcGroup {
 
-   @XmlAttribute(name = "group", required = true)
-    protected GroupDropType group;
- 
- 	public GroupDropType getGroup() {
-       return group;
-   }
+	@XmlAttribute(name = "group", required = true)
+	protected GroupDropType group;
+
+	public GroupDropType getGroup() {
+		return group;
+	}
 }

@@ -45,8 +45,7 @@ public class MySQL5CraftCooldownsDAO extends CraftCooldownsDAO {
 					player.getCraftCooldownList().setCraftCoolDowns(craftCoolDowns);
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("LoadcraftCoolDowns", e);
 		}
 	}
@@ -76,11 +75,9 @@ public class MySQL5CraftCooldownsDAO extends CraftCooldownsDAO {
 				stmt.setInt(2, delayId);
 				stmt.setLong(3, reuseTime);
 				stmt.execute();
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				log.error("storecraftCoolDowns", e);
-			}
-			finally {
+			} finally {
 				DatabaseFactory.close(con);
 			}
 		}
@@ -95,11 +92,9 @@ public class MySQL5CraftCooldownsDAO extends CraftCooldownsDAO {
 
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("deletecraftCoolDowns", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 	}

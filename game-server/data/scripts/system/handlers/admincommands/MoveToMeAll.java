@@ -27,8 +27,7 @@ public class MoveToMeAll extends AdminCommand {
 		if (params[0].equals("all")) {
 			for (final Player p : World.getInstance().getAllPlayers()) {
 				if (!p.equals(admin)) {
-					TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
-						admin.getZ(), admin.getHeading());
+					TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
 					PacketSendUtility.sendPacket(p, new SM_PLAYER_SPAWN(p));
 
 					PacketSendUtility.sendMessage(admin, "Player " + p.getName() + " teleported.");
@@ -41,8 +40,7 @@ public class MoveToMeAll extends AdminCommand {
 			for (final Player p : World.getInstance().getAllPlayers()) {
 				if (!p.equals(admin)) {
 					if (p.getRace() == Race.ELYOS) {
-						TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
-							admin.getZ(), admin.getHeading());
+						TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
 						PacketSendUtility.sendPacket(p, new SM_PLAYER_SPAWN(p));
 
 						PacketSendUtility.sendMessage(admin, "Player " + p.getName() + " teleported.");
@@ -56,8 +54,7 @@ public class MoveToMeAll extends AdminCommand {
 			for (final Player p : World.getInstance().getAllPlayers()) {
 				if (!p.equals(admin)) {
 					if (p.getRace() == Race.ASMODIANS) {
-						TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
-							admin.getZ(), admin.getHeading());
+						TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
 						PacketSendUtility.sendPacket(p, new SM_PLAYER_SPAWN(p));
 
 						PacketSendUtility.sendMessage(admin, "Player " + p.getName() + " teleported.");

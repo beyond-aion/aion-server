@@ -9,7 +9,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author Gigi
  */
 @AIName("door3")
@@ -19,8 +18,7 @@ public class Door3AI2 extends ActionItemNpcAI2 {
 	protected void handleDialogStart(Player player) {
 		if (player.getInventory().getItemCountByItemId(185000091) > 0) {
 			super.handleDialogStart(player);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 		}
 	}

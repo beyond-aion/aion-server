@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _12999Katalam extends QuestHandler {
 
@@ -27,7 +25,7 @@ public class _12999Katalam extends QuestHandler {
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnMovieEndQuest(26, questId);
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();

@@ -8,13 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 
 /**
  * @author synchro2, bobobear
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlobalExclusion")
@@ -35,37 +34,38 @@ public class GlobalExclusion {
 	@XmlAttribute(name = "npc_abyss_types", required = false)
 	private List<AbyssNpcType> excludedAbyssTypes;
 
-  public List<Integer> getNpcIds() {
-    if (excludedNpcIds == null) {
-    	excludedNpcIds = new ArrayList<Integer>();
-    }
-    return excludedNpcIds;
-}
+	public List<Integer> getNpcIds() {
+		if (excludedNpcIds == null) {
+			excludedNpcIds = new ArrayList<Integer>();
+		}
+		return excludedNpcIds;
+	}
+
 	public List<String> getNpcNames() {
-    if (excludedNpcNames == null) {
-    	excludedNpcNames = new ArrayList<String>();
-    }
-    return excludedNpcNames;
+		if (excludedNpcNames == null) {
+			excludedNpcNames = new ArrayList<String>();
+		}
+		return excludedNpcNames;
 	}
 
 	public List<NpcTemplateType> getNpcTemplateTypes() {
-    if (excludedTypes == null) {
-    	excludedTypes = new ArrayList<NpcTemplateType>();
-    }
-    return excludedTypes;
+		if (excludedTypes == null) {
+			excludedTypes = new ArrayList<NpcTemplateType>();
+		}
+		return excludedTypes;
 	}
 
 	public List<TribeClass> getNpcTribes() {
-    if (excludedTribes == null) {
-    	excludedTribes = new ArrayList<TribeClass>();
-    }
-    return excludedTribes;
+		if (excludedTribes == null) {
+			excludedTribes = new ArrayList<TribeClass>();
+		}
+		return excludedTribes;
 	}
 
 	public List<AbyssNpcType> getNpcAbyssTypes() {
-    if (excludedAbyssTypes == null) {
-    	excludedAbyssTypes = new ArrayList<AbyssNpcType>();
-    }
+		if (excludedAbyssTypes == null) {
+			excludedAbyssTypes = new ArrayList<AbyssNpcType>();
+		}
 		return excludedAbyssTypes;
 	}
 }

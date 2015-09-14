@@ -10,7 +10,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
- *
  * @author xTz
  */
 @AIName("marbatacontroller")
@@ -47,8 +46,7 @@ public class MarbataControllerAI2 extends NpcAI2 {
 				case 700440:
 					if (remove) {
 						boss.getEffectController().removeEffect(18556);
-					}
-					else {
+					} else {
 						boss.getController().useSkill(18556);
 					}
 					break;
@@ -62,8 +60,7 @@ public class MarbataControllerAI2 extends NpcAI2 {
 				case 700439:
 					if (remove) {
 						boss.getEffectController().removeEffect(18110);
-					}
-					else {
+					} else {
 						boss.getController().useSkill(18110);
 					}
 					break;
@@ -118,7 +115,7 @@ public class MarbataControllerAI2 extends NpcAI2 {
 		}
 		AI2Actions.useSkill(this, skill);
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {

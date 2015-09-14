@@ -15,44 +15,45 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
 /**
  * @author Bobobear
- *
  */
- 
+
 @AIName("rvr_boss")
 public class RvrBossAI2 extends AggressiveNpcAI2 {
 
-   @Override
-   protected void handleAttack(Creature creature) {
+	@Override
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		//add player to event list for additional reward
-		if (creature instanceof Player && (int)getPosition().getMapId() == 600010000) {
-			SiegeService.getInstance().checkRvrPlayerOnEvent((Player)creature);
+		// add player to event list for additional reward
+		if (creature instanceof Player && getPosition().getMapId() == 600010000) {
+			SiegeService.getInstance().checkRvrPlayerOnEvent((Player) creature);
 		}
-		//TODO Spawn defensive guards (only for bosses in silentera Canyon)
+		// TODO Spawn defensive guards (only for bosses in silentera Canyon)
 	}
 
-   @Override
-   protected void handleDied() {
+	@Override
+	protected void handleDied() {
 		super.handleDied();
 		despawnEnemyBoss();
 		scheduleRespawn();
 		performPartecipationReward();
-   }
+	}
 
- 	//despawn enemy boss (only for silentera)
+	// despawn enemy boss (only for silentera)
 	private void despawnEnemyBoss() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			WorldMapInstance instance = getPosition().getWorldMapInstance();
-			deleteNpcs(instance.getNpcs(getNpcId() == 220948 ? 220949 : 220948 ));
+			deleteNpcs(instance.getNpcs(getNpcId() == 220948 ? 220949 : 220948));
 		}
 	}
-	
-	//schedule respawn of both silentera bosses (bosses in other maps must not respawn)
+
+	// schedule respawn of both silentera bosses (bosses in other maps must not respawn)
 	private void scheduleRespawn() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					spawn(220948, 658.7087f, 795.21857f, 293.14087f, (byte) 7);
@@ -70,22 +71,22 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void performPartecipationReward() {
-		if ((int)getPosition().getMapId() == 600010000) {
+		if (getPosition().getMapId() == 600010000) {
 			DateTime now = DateTime.now();
 			int hour = now.getHourOfDay();
 			if (hour >= 19 && hour <= 23) {
 				List<Player> eventPlayerList = SiegeService.getInstance().getRvrPlayersOnEvent();
-				for (Player rewardedPlayer: eventPlayerList) {
-					SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal",
-						186000147, 1, 0, LetterType.NORMAL);
+				for (Player rewardedPlayer : eventPlayerList) {
+					SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0,
+						LetterType.NORMAL);
 				}
 			}
 			SiegeService.getInstance().clearRvrPlayersOnEvent();
 		}
 	}
-	
+
 	@Override
 	protected void handleDespawned() {
-	  super.handleDespawned();
+		super.handleDespawned();
 	}
 }

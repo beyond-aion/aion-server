@@ -49,8 +49,7 @@ public class _11001KindMeira extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -115,8 +114,7 @@ public class _11001KindMeira extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Cheatkiller
  */
 public class _22500NapTimeIsOver extends QuestHandler {
@@ -34,7 +33,7 @@ public class _22500NapTimeIsOver extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 800529) {
 				switch (dialog) {
@@ -46,8 +45,7 @@ public class _22500NapTimeIsOver extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801001) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -57,8 +55,7 @@ public class _22500NapTimeIsOver extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 801007) {
+			} else if (targetId == 801007) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1693);
@@ -67,8 +64,7 @@ public class _22500NapTimeIsOver extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 801255) {
+			} else if (targetId == 801255) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 2034);
@@ -79,13 +75,11 @@ public class _22500NapTimeIsOver extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800529) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

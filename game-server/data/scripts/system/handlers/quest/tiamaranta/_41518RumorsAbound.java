@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41518RumorsAbound extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _41518RumorsAbound extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerCanAct(questId, 701260);
 		qe.registerQuestNpc(205938).addOnQuestStart(questId);
@@ -39,28 +38,24 @@ public class _41518RumorsAbound extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205938) { 
+			if (targetId == 205938) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212588, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701260) {
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218731, player.getX() + 2, player.getY() + 2, player.getZ(), (byte) 0); 
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218732, player.getX() - 2, player.getY() - 2, player.getZ(), (byte) 0); 
+				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218731, player.getX() + 2, player.getY() + 2, player.getZ(), (byte) 0);
+				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218732, player.getX() - 2, player.getY() - 2, player.getZ(), (byte) 0);
 				changeQuestStep(env, 0, 1, false);
 				return true;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205938) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -74,7 +69,7 @@ public class _41518RumorsAbound extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
@@ -83,13 +78,12 @@ public class _41518RumorsAbound extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-		if (zoneName == ZoneName.get("SUSPICIOUS_VILLAGE_ENTRANCE_600030000")) {
+			if (zoneName == ZoneName.get("SUSPICIOUS_VILLAGE_ENTRANCE_600030000")) {
 				if (var == 2) {
 					changeQuestStep(env, 2, 2, true);
 					return true;
 				}
-			}
-		else if (zoneName == ZoneName.get("ARACHI_FLOATING_ISLAND_600030000")) {
+			} else if (zoneName == ZoneName.get("ARACHI_FLOATING_ISLAND_600030000")) {
 				if (var == 1) {
 					changeQuestStep(env, 1, 2, false);
 					return true;

@@ -1,16 +1,17 @@
 package com.aionemu.loginserver.taskmanager.handler.implementations;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.loginserver.dao.AccountDAO;
-import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.loginserver.dao.AccountDAO;
+import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
+
 /**
- *
  * @author nrg
  */
 public class CleanAccountsHandler extends TaskFromDBHandler {
+
 	private static Logger log = LoggerFactory.getLogger(CleanAccountsHandler.class);
 	private int daysOfInactivity;
 

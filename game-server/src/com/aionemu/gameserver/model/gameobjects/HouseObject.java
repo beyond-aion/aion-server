@@ -132,6 +132,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		return String.valueOf(objectTemplate.getNameId());
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public T getObjectTemplate() {
 		return (T) objectTemplate;

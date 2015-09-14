@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,14 +12,13 @@ import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Source
  */
 public class ShieldController extends VisibleObjectController<Shield> {
 
-	   ConcurrentHashMap<Integer, ActionObserver> observed = new ConcurrentHashMap<>();
+	ConcurrentHashMap<Integer, ActionObserver> observed = new ConcurrentHashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {

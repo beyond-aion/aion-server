@@ -18,23 +18,23 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
 
 	@XmlAttribute(name = "id")
 	protected Integer id;
-	
+
 	@Override
 	public MailPartType getType() {
 		return MailPartType.CUSTOM;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public String getFormattedString(IMailFormatter customFormatter) {
 		String result = "";
 		IMailFormatter formatter = this;
 		if (customFormatter != null) {
 			formatter = customFormatter;
 		}
-		
+
 		result = getFormattedString(getType());
 
 		String[] paramValues = new String[getParam().size()];
@@ -47,10 +47,11 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
 			return joinedParams;
 		else if (!StringUtils.isEmpty(joinedParams))
 			result += "," + joinedParams;
-		
+
 		return result;
 	}
-	
+
+	@Override
 	public String getFormattedString(MailPartType partType) {
 		String result = "";
 		if (id > 0)

@@ -122,7 +122,7 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(pgs.getMBoost().getCurrent());// [current magic boost]
 		writeH(pgs.getMBResist().getCurrent());// [current magic suppression]
 		writeH(pgs.getStat(StatEnum.HEAL_BOOST, 0).getCurrent());// [current heal_boost]
-		writeH(0);//unk
+		writeH(0);// unk
 		writeH(pgs.getPCR().getCurrent()); // [current strike resist]
 		writeH(pgs.getMCR().getCurrent());// [current spell resist]
 		writeH(pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent());// [current strike fortitude]
@@ -140,13 +140,13 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeQ(pcd.getCurrentReposteEnergy());
 		writeQ(pcd.getMaxReposteEnergy());
 		writeQ(pcd.getCurrentSalvationPercent());
-		
-		writeH(0); //4.3 NA
-		writeH(0); //4.3 NA
-		writeH(1); //4.3 NA
-		writeH(0); //4.3 NA
-		writeD(0); //4.7
-		writeD(0); //4.7
+
+		writeH(0); // 4.3 NA
+		writeH(0); // 4.3 NA
+		writeH(1); // 4.3 NA
+		writeH(0); // 4.3 NA
+		writeD(0); // 4.7
+		writeD(0); // 4.7
 		writeH(pgs.getPower().getBase());// [base power]
 		writeH(pgs.getHealth().getBase());// [base health]
 		writeH(pgs.getAccuracy().getBase());// [base accuracy]
@@ -189,9 +189,9 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(pgs.getMBoost().getBase());// [base magic boost]
 		writeH(pgs.getMBResist().getBase()); // [base magic suppression]
 		writeH(pgs.getStat(StatEnum.HEAL_BOOST, 0).getBase());// [base healboost]
-		writeH(0);//unk
-		writeH(pgs.getPCR().getBase());//[base strike resist]
-		writeH(pgs.getMCR().getBase());//[base spell resist]	
+		writeH(0);// unk
+		writeH(pgs.getPCR().getBase());// [base strike resist]
+		writeH(pgs.getMCR().getBase());// [base spell resist]
 		writeH(pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getBase());// [base strike fortitude]
 		writeH(pgs.getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0).getBase());// [base spell fortitude]
 	}

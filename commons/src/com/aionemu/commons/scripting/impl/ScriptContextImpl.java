@@ -1,5 +1,14 @@
 package com.aionemu.commons.scripting.impl;
 
+import java.io.File;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptCompiler;
 import com.aionemu.commons.scripting.ScriptContext;
@@ -7,14 +16,6 @@ import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * This class is actual implementation of {@link com.aionemu.commons.scripting.ScriptContext}
@@ -231,8 +232,7 @@ public class ScriptContextImpl implements ScriptContext {
 			}
 
 			if (childScriptContexts.contains(context)) {
-				log.error("Double child definition, root: " + root.getAbsolutePath() + ", child: "
-					+ context.getRoot().getAbsolutePath());
+				log.error("Double child definition, root: " + root.getAbsolutePath() + ", child: " + context.getRoot().getAbsolutePath());
 				return;
 			}
 
@@ -302,8 +302,7 @@ public class ScriptContextImpl implements ScriptContext {
 		ScriptCompiler sc;
 		try {
 			sc = (ScriptCompiler) Class.forName(getCompilerClassName(), true, cl).newInstance();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't create instance of compiler");
 			throw new RuntimeException(e);
 		}

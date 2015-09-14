@@ -3,7 +3,6 @@ package com.aionemu.loginserver.network.gameserver.serverpackets;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsServerPacket;
 
-
 /**
  * @author cura
  */

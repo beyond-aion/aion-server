@@ -58,11 +58,8 @@ public class Config {
 	public static int WRONG_LOGIN_BAN_TIME;
 
 	/**
-	 * Number of threads dedicated to be doing io read & write.
-	 * There is always 1 acceptor thread.
-	 * If value is < 1 - acceptor thread will also handle read & write.
-	 * If value is > 0 - there will be given amount of read & write threads
-	 * + 1 acceptor thread.
+	 * Number of threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle
+	 * read & write. If value is > 0 - there will be given amount of read & write threads + 1 acceptor thread.
 	 */
 	@Property(key = "loginserver.network.nio.threads", defaultValue = "0")
 	public static int NIO_READ_WRITE_THREADS;
@@ -72,13 +69,13 @@ public class Config {
 	 */
 	@Property(key = "loginserver.accounts.autocreate", defaultValue = "true")
 	public static boolean ACCOUNT_AUTO_CREATION;
-	
+
 	/**
 	 * Enable\disable external authentication for accounts
 	 */
 	@Property(key = "loginserver.accounts.externalauth", defaultValue = "false")
 	public static boolean AUTH_EXTERNAL;
-	
+
 	/**
 	 * URL for external authentication, that is used to receive an JSON encoded string, holding the auth status
 	 */
@@ -95,43 +92,42 @@ public class Config {
 	 */
 	@Property(key = "loginserver.server.maintenance.gmlevel", defaultValue = "3")
 	public static int MAINTENANCE_MOD_GMLEVEL;
-	
+
 	/**
 	 * Enable\disable flood protector from 1 IP on account login
 	 */
 	@Property(key = "loginserver.server.floodprotector", defaultValue = "true")
 	public static boolean ENABLE_FLOOD_PROTECTION;
-	
+
 	/**
 	 * Legal reconnection time. if faster - ban for loginserver.network.client.bantimeforbruteforcing min
 	 */
 	@Property(key = "loginserver.server.floodprotector.fastreconnection.time", defaultValue = "10")
 	public static int FAST_RECONNECTION_TIME;
-	
+
 	/**
 	 * IP's excluded from flood protection
 	 */
 	@Property(key = "loginserver.server.floodprotector.excluded.ips", defaultValue = "")
 	public static String EXCLUDED_IP;
-	
+
 	/**
 	 * Enable\disable brute-force protector from 1 IP on account login
 	 */
 	@Property(key = "loginserver.server.bruteforceprotector", defaultValue = "true")
 	public static boolean ENABLE_BRUTEFORCE_PROTECTION;
-	
+
 	/**
 	 * Enable\disable checking GS if it is still alive
 	 */
 	@Property(key = "loginserver.server.pingpong", defaultValue = "true")
 	public static boolean ENABLE_PINGPONG;
-	
+
 	/**
 	 * Time between checks (in milliseconds)
 	 */
 	@Property(key = "loginserver.server.pingpong.delay", defaultValue = "3000")
 	public static int PINGPONG_DELAY;
-
 
 	/**
 	 * Load configs from files.
@@ -142,8 +138,7 @@ public class Config {
 			try {
 				log.info("Loading: myls.properties");
 				myProps = PropertiesUtils.load("./config/myls.properties");
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.info("No override properties found");
 			}
 
@@ -158,8 +153,7 @@ public class Config {
 			log.info("Loading: " + network + "/database.properties");
 			ConfigurableProcessor.process(DatabaseConfig.class, props);
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't load loginserver configuration", e);
 			throw new Error("Can't load loginserver configuration", e);
 		}

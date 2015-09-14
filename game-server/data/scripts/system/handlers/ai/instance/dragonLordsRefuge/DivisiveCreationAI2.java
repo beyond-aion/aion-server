@@ -16,10 +16,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("divisivecreation")
 public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
@@ -30,39 +28,38 @@ public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
 		final WorldMapInstance inastance = this.getPosition().getWorldMapInstance();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-		  @Override
-		  public void run() {
-		  	AI2Actions.targetCreature(DivisiveCreationAI2.this, inastance.getPlayersInside().get(Rnd.get(inastance.getPlayersInside().size() - 1)));
-		  	setStateIfNot(AIState.WALKING);
-		  	getOwner().setState(1);
-		  	getMoveController().moveToTargetObject();
+			@Override
+			public void run() {
+				AI2Actions.targetCreature(DivisiveCreationAI2.this, inastance.getPlayersInside().get(Rnd.get(inastance.getPlayersInside().size() - 1)));
+				setStateIfNot(AIState.WALKING);
+				getOwner().setState(1);
+				getMoveController().moveToTargetObject();
 				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
-		  }
-	  }, 5000);
+			}
+		}, 5000);
 	}
-	
+
 	@Override
 	public int modifyMaccuracy(int value) {
 		return 1200;
 	}
-	
+
 	@Override
 	public ItemAttackType modifyAttackType(ItemAttackType type) {
 		return ItemAttackType.MAGICAL_EARTH;
 	}
-	
+
 	@Override
-  protected AIAnswer pollInstance(AIQuestion question) {
-  	switch (question) {
-      case SHOULD_DECAY:
-          return AIAnswers.NEGATIVE;
-      case SHOULD_RESPAWN:
-          return AIAnswers.NEGATIVE;
-      case SHOULD_REWARD:
-          return AIAnswers.NEGATIVE;
-      default:
-          return null;
-  	}
-  }
+	protected AIAnswer pollInstance(AIQuestion question) {
+		switch (question) {
+			case SHOULD_DECAY:
+				return AIAnswers.NEGATIVE;
+			case SHOULD_RESPAWN:
+				return AIAnswers.NEGATIVE;
+			case SHOULD_REWARD:
+				return AIAnswers.NEGATIVE;
+			default:
+				return null;
+		}
+	}
 }
-	

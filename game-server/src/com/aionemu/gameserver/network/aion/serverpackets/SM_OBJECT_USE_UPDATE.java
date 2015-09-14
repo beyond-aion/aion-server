@@ -31,13 +31,11 @@ public class SM_OBJECT_USE_UPDATE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(object.getObjectTemplate().getTypeId());
-		if (object instanceof PostboxObject ||
-				object instanceof StorageObject) {
+		if (object instanceof PostboxObject || object instanceof StorageObject) {
 			writeD(usingPlayerId);
 			writeC(1); // unk
 			writeD(object.getObjectId());
-		}
-		else if (object instanceof UseableItemObject) {
+		} else if (object instanceof UseableItemObject) {
 			writeD(usingPlayerId);
 			writeD(ownerPlayerId);
 			writeD(object.getObjectId());

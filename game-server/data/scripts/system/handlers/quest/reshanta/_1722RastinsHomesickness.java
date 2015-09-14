@@ -52,8 +52,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 			if (targetId == 278547)
 				removeQuestItem(env, 182202101, 1);
 			return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278560) {
@@ -70,8 +69,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278517) {
+		} else if (targetId == 278517) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -85,8 +83,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278544) {
+		} else if (targetId == 278544) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -100,8 +97,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278532) {
+		} else if (targetId == 278532) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -115,8 +111,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278539) {
+		} else if (targetId == 278539) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -130,8 +125,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278524) {
+		} else if (targetId == 278524) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -145,8 +139,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278555) {
+		} else if (targetId == 278555) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)
@@ -160,8 +153,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278567) {
+		} else if (targetId == 278567) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 7)

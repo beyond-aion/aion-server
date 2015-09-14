@@ -36,11 +36,11 @@ public enum DialogPage {
 	COMBINETASK_WINDOW(DialogAction.CRAFT, 28),
 	COMPOUND_WEAPON(DialogAction.COMPOUND_WEAPON, 29),
 	DECOMPOUND_WEAPON(DialogAction.DECOMPOUND_WEAPON, 30),
-	HOUSING_MARKER(DialogAction.NULL, 32),							// Unknown
-	HOUSING_LIFETIME(DialogAction.NULL, 33),						// Unknown
-	CHARGE_ITEM(DialogAction.NULL, 35),									// Actually, two choices
+	HOUSING_MARKER(DialogAction.NULL, 32), // Unknown
+	HOUSING_LIFETIME(DialogAction.NULL, 33), // Unknown
+	CHARGE_ITEM(DialogAction.NULL, 35), // Actually, two choices
 	HOUSING_FRIENDLIST(DialogAction.HOUSING_FRIENDLIST, 36),
-	HOUSING_POST(DialogAction.NULL, 37),								// Unknown
+	HOUSING_POST(DialogAction.NULL, 37), // Unknown
 	HOUSING_AUCTION(DialogAction.HOUSING_PERSONAL_AUCTION, 38),
 	HOUSING_PAY_RENT(DialogAction.HOUSING_PAY_RENT, 39),
 	HOUSING_KICK(DialogAction.HOUSING_KICK, 40),
@@ -50,7 +50,7 @@ public enum DialogPage {
 
 	private int id;
 	private DialogAction action;
-	
+
 	private DialogPage(int id) {
 		this.id = id;
 	}
@@ -63,11 +63,11 @@ public enum DialogPage {
 	public int id() {
 		return id;
 	}
-	
+
 	public int actionId() {
 		return action.id();
 	}
-	
+
 	public static DialogPage getPageByAction(int dialogId) {
 		for (DialogPage page : DialogPage.values()) {
 			if (page.action == null)

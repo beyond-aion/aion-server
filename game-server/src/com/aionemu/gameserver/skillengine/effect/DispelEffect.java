@@ -39,18 +39,17 @@ public class DispelEffect extends EffectTemplate {
 		if (dispeltype == null)
 			return;
 
-		if ((dispeltype == DispelType.EFFECTID || dispeltype == DispelType.EFFECTIDRANGE) && 
-			effectids == null)
+		if ((dispeltype == DispelType.EFFECTID || dispeltype == DispelType.EFFECTIDRANGE) && effectids == null)
 			return;
 
 		if (dispeltype == DispelType.EFFECTTYPE && effecttype == null)
 			return;
-		
+
 		if (dispeltype == DispelType.SLOTTYPE && slottype == null)
 			return;
 
 		int finalPower = power + dpower * effect.getSkillLevel();
-		
+
 		switch (dispeltype) {
 			case EFFECTID:
 				for (Integer effectId : effectids) {
@@ -68,7 +67,7 @@ public class DispelEffect extends EffectTemplate {
 					try {
 						temp = EffectType.valueOf(type);
 					} catch (Exception e) {
-						log.error("wrong effecttype in dispeleffect "+type);
+						log.error("wrong effecttype in dispeleffect " + type);
 					}
 					if (temp != null)
 						effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, temp.toString(), this.count, this.dispelLevel, finalPower);
@@ -80,7 +79,7 @@ public class DispelEffect extends EffectTemplate {
 					try {
 						temp = SkillTargetSlot.valueOf(type);
 					} catch (Exception e) {
-						log.error("wrong slottype in dispeleffect "+type);
+						log.error("wrong slottype in dispeleffect " + type);
 					}
 					if (temp != null)
 						effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, temp.toString(), this.count, this.dispelLevel, finalPower);

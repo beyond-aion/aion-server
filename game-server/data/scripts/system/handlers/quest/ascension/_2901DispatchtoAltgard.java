@@ -67,8 +67,7 @@ public class _2901DispatchtoAltgard extends QuestHandler {
 							}
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203559) {
 				return sendQuestEndDialog(env);
 			}

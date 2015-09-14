@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.Bounds;
 
-
 /**
  * @author Rolandas
  */

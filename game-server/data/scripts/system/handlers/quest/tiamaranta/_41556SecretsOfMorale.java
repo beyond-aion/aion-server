@@ -9,20 +9,19 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41556SecretsOfMorale extends QuestHandler {
 
 	private final static int questId = 41556;
-	private final static int drakans [] = {218524, 218523, 218525, 218526};
+	private final static int drakans[] = { 218524, 218523, 218525, 218526 };
 
 	public _41556SecretsOfMorale() {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212554, questId);
 		qe.registerQuestNpc(205953).addOnQuestStart(questId);
@@ -40,26 +39,22 @@ public class _41556SecretsOfMorale extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205953) { 
+			if (targetId == 205953) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if(qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205953) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205953) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
-					return checkQuestItems(env, 1, 2, false, 10000, 10001, 182212554, 1); 
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+					return checkQuestItems(env, 1, 2, false, 10000, 10001, 182212554, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205953) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -73,7 +68,7 @@ public class _41556SecretsOfMorale extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -93,17 +88,16 @@ public class _41556SecretsOfMorale extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
-			  removeQuestItem(env, 182212554, 1);
-			  changeQuestStep(env, 2, 3, true);
-				return HandlerResult.SUCCESS;
+			removeQuestItem(env, 182212554, 1);
+			changeQuestStep(env, 2, 3, true);
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}
 }
-

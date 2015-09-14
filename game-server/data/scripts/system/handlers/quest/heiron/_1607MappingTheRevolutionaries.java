@@ -70,20 +70,17 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 204574) { // Finn
+			} else if (targetId == 204574) { // Finn
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 1 && var1 == 1 && var2 == 1 && var3 == 1 && var4 == 1) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 1, 1, true);
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204574) { // Finn
 				return sendQuestEndDialog(env);
 			}
@@ -109,19 +106,16 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 						changeQuestStep(env, 0, 1, false, 1); // 1: 1
 						return true;
 					}
-				}
-				else if (zoneName == ZoneName.get("ROTRON_EXPERIMENT_LAB_210040000")) {
+				} else if (zoneName == ZoneName.get("ROTRON_EXPERIMENT_LAB_210040000")) {
 					if (var2 == 0) {
 						changeQuestStep(env, 0, 1, false, 2); // 2: 1
 						return true;
-					}
-					else if (zoneName == ZoneName.get("PRETOR_EXPERIMENT_LAB_210040000")) {
+					} else if (zoneName == ZoneName.get("PRETOR_EXPERIMENT_LAB_210040000")) {
 						if (var3 == 0) {
 							changeQuestStep(env, 0, 1, false, 3); // 3: 1
 							return true;
 						}
-					}
-					else if (zoneName == ZoneName.get("POISON_EXTRACTION_LAB_210040000")) {
+					} else if (zoneName == ZoneName.get("POISON_EXTRACTION_LAB_210040000")) {
 						if (var4 == 0) {
 							changeQuestStep(env, 0, 1, false, 4); // 4: 1
 							return true;

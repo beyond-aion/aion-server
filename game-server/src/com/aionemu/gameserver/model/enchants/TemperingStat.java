@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.model.enchants;
 
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.stats.container.StatEnum;
+
 /**
- *
  * @author xTz
  */
 @XmlType(name = "tempering_stat")

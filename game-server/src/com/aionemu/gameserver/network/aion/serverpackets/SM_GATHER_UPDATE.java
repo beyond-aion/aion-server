@@ -61,8 +61,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 				writeH(0);
 				break;
 			}
-			case 5:
-			{
+			case 5: {
 				writeD(success);
 				writeD(failure);
 				writeD(700);// unk timer??

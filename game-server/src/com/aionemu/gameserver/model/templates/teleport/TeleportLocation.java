@@ -37,15 +37,15 @@ public class TeleportLocation {
 	public int getPrice() {
 		return price;
 	}
-	
+
 	public int getPricePvp() {
 		return pricePvp;
 	}
-	
+
 	public int getRequiredQuest() {
 		return required_quest;
 	}
-	
+
 	public TeleportType getType() {
 		return type;
 	}

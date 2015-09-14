@@ -50,8 +50,7 @@ public class _30308GroupSummonRespondentUtra extends QuestHandler {
 						return sendQuestDialog(env, 4762);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -72,8 +71,7 @@ public class _30308GroupSummonRespondentUtra extends QuestHandler {
 							return true;
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799322)
 				return sendQuestEndDialog(env);
 		}
@@ -94,17 +92,15 @@ public class _30308GroupSummonRespondentUtra extends QuestHandler {
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				player.getInventory().decreaseByObjectId(itemObjId, 1);
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(),
-					player.getZ(), player.getHeading());
+				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(), player.getZ(),
+					player.getHeading());
 			}
 		}, 3000);
 		return HandlerResult.SUCCESS;

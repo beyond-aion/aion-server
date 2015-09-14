@@ -8,7 +8,6 @@ import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
  * @author ginho1
- *
  */
 public class CM_GM_COMMAND_SEND extends AionClientPacket {
 
@@ -23,7 +22,8 @@ public class CM_GM_COMMAND_SEND extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
 	 */
 	@Override
@@ -32,7 +32,8 @@ public class CM_GM_COMMAND_SEND extends AionClientPacket {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
 	 */
 	@Override

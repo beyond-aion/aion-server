@@ -2,10 +2,8 @@ package com.aionemu.gameserver.services.monsterraid;
 
 import com.aionemu.gameserver.services.MonsterRaidService;
 
-
 /**
  * @author Whoop
- *
  */
 public class MonsterRaidStartRunnable implements Runnable {
 

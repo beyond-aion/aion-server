@@ -45,16 +45,13 @@ public class _24010SuthransOrders extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);
-			}
-			else
+			} else
 				return sendQuestStartDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 				int[] ids = { 24011, 24012, 24013, 24014, 24015, 24016 };
 				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 				}
 			}
 			return sendQuestEndDialog(env);

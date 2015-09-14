@@ -13,10 +13,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropMap")
 public class GlobalDropMap {
 
-   @XmlAttribute(name = "map_id", required = true)
-    protected int mapId;
- 
- 	public int getMapId() {
-        return mapId;
-    }
+	@XmlAttribute(name = "map_id", required = true)
+	protected int mapId;
+
+	public int getMapId() {
+		return mapId;
+	}
 }

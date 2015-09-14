@@ -11,13 +11,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class PlayerActions extends CreatureActions {
 
 	public static boolean isInPlayerMode(Player player, PlayerMode mode) {
-		switch(mode) {
+		switch (mode) {
 			case RIDE:
 				return player.ride != null;
 			case IN_ROLL:
@@ -29,7 +28,7 @@ public class PlayerActions extends CreatureActions {
 	}
 
 	public static void setPlayerMode(Player player, PlayerMode mode, Object obj) {
-		switch(mode) {
+		switch (mode) {
 			case RIDE:
 				player.ride = (RideInfo) obj;
 				break;
@@ -49,9 +48,9 @@ public class PlayerActions extends CreatureActions {
 				if (ride == null) {
 					return false;
 				}
-				//check for sprinting when forcefully dismounting player
+				// check for sprinting when forcefully dismounting player
 				if (player.isInSprintMode()) {
-					if (!player.isInFlyingState())//if player is flying while dismounting, do not start restore task
+					if (!player.isInFlyingState())// if player is flying while dismounting, do not start restore task
 						player.getLifeStats().triggerFpRestore();
 					player.setSprintMode(false);
 				}
@@ -61,10 +60,10 @@ public class PlayerActions extends CreatureActions {
 				player.ride = null;
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE_END), true);
-								
+
 				player.getGameStats().updateStatsAndSpeedVisually();
 
-				//remove rideObservers
+				// remove rideObservers
 				for (ActionObserver observer : player.getRideObservers()) {
 					player.getObserveController().removeObserver(observer);
 				}

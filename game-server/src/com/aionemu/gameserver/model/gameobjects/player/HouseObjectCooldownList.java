@@ -51,7 +51,7 @@ public class HouseObjectCooldownList {
 		long nextUseTime = System.currentTimeMillis() + (delay * 1000);
 		houseObjectCooldowns.put(objectId, nextUseTime);
 	}
-	
+
 	public int getReuseDelay(int objectId) {
 		if (isCanUseObject(objectId))
 			return 0;

@@ -3,10 +3,8 @@ package com.aionemu.gameserver.network.loginserver.serverpackets;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
-
 /**
  * @author ViAl
- *
  */
 public class SM_ACCOUNT_LOGIN_LOG extends LsServerPacket {
 
@@ -16,6 +14,7 @@ public class SM_ACCOUNT_LOGIN_LOG extends LsServerPacket {
 	private String ip;
 	private String mac;
 	private String hddSerial;
+
 	/**
 	 * @param opcode
 	 * @param accountId
@@ -34,7 +33,7 @@ public class SM_ACCOUNT_LOGIN_LOG extends LsServerPacket {
 		this.mac = mac;
 		this.hddSerial = hddSerial;
 	}
-	
+
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accountId);
@@ -44,6 +43,5 @@ public class SM_ACCOUNT_LOGIN_LOG extends LsServerPacket {
 		writeS(mac);
 		writeS(hddSerial);
 	}
-	
 
 }

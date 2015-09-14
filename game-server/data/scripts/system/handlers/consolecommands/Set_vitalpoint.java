@@ -34,13 +34,12 @@ public class Set_vitalpoint extends ConsoleCommand {
 		}
 
 		final Player player = (Player) target;
-		
+
 		int value;
 
 		try {
 			value = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}

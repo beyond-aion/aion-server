@@ -42,9 +42,8 @@ public class Rewards {
 	/**
 	 * Gets the value of the selectableRewardItem property.
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
-	 * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
-	 * the selectableRewardItem property.
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the selectableRewardItem property.
 	 * <p>
 	 * For example, to add a new item, do as follows:
 	 * 
@@ -64,9 +63,8 @@ public class Rewards {
 	/**
 	 * Gets the value of the rewardItem property.
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
-	 * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
-	 * the rewardItem property.
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the rewardItem property.
 	 * <p>
 	 * For example, to add a new item, do as follows:
 	 * 

@@ -13,15 +13,14 @@ public class Whisper extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 
-		if(params[0].equalsIgnoreCase("off")) {
+		if (params[0].equalsIgnoreCase("off")) {
 			admin.setUnWispable();
 			PacketSendUtility.sendMessage(admin, "Accepting Whisper : OFF");
-		}
-		else if (params[0].equalsIgnoreCase("on")) {
+		} else if (params[0].equalsIgnoreCase("on")) {
 			admin.setWispable();
 			PacketSendUtility.sendMessage(admin, "Accepting Whisper : ON");
 		}
-	}	
+	}
 
 	@Override
 	public void info(Player player, String message) {

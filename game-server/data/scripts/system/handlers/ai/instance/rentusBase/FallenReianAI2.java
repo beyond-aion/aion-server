@@ -9,13 +9,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- *
  * @author xTz
  */
 @AIName("fallen_reian")
 public class FallenReianAI2 extends NpcAI2 {
 
-private AtomicBoolean isCollapsed = new AtomicBoolean(false);
+	private AtomicBoolean isCollapsed = new AtomicBoolean(false);
 
 	private int doorId;
 

@@ -69,15 +69,13 @@ public class RepurchaseService {
 				if (inventory.tryDecreaseKinah(repurchaseItem.getRepurchasePrice())) {
 					ItemService.addItem(player, repurchaseItem);
 					removeRepurchaseItem(player, repurchaseItem);
-				}
-				else {
+				} else {
 					AuditLogger.info(player, "Player try repurchase item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount()
 						+ " whithout kinah");
 				}
-			}
-			else {
-				AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM try dupe item: " + repurchaseItem.getItemId() + " count: "
-					+ repurchaseItem.getItemCount());
+			} else {
+				AuditLogger.info(player,
+					"Player might be abusing CM_BUY_ITEM try dupe item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount());
 			}
 		}
 	}

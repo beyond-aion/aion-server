@@ -73,7 +73,7 @@ public class PlayerSettings {
 		this.shortcuts = shortcuts;
 		persistentState = PersistentState.UPDATE_REQUIRED;
 	}
-	
+
 	/**
 	 * @return the houseBuddies
 	 */

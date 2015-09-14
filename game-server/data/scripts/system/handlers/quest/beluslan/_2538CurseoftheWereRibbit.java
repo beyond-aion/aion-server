@@ -12,20 +12,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
- * 
  */
-public class _2538CurseoftheWereRibbit extends QuestHandler
-{
-	private final static int	questId	= 2538;
+public class _2538CurseoftheWereRibbit extends QuestHandler {
 
-	public _2538CurseoftheWereRibbit()
-	{
+	private final static int questId = 2538;
+
+	public _2538CurseoftheWereRibbit() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(204827).addOnQuestStart(questId);
 		qe.registerQuestNpc(204827).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790002).addOnTalkEvent(questId);
@@ -33,29 +30,27 @@ public class _2538CurseoftheWereRibbit extends QuestHandler
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
-		if(env.getVisibleObject() instanceof Npc)
+		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
-		
-		if(qs == null || qs.getStatus() == QuestStatus.NONE){
-			if (targetId == 204827){
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 204827) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START){
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 204827){
-				switch (dialog){
+			if (targetId == 204827) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if (var == 3){
+						if (var == 3) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 2375);
@@ -64,54 +59,50 @@ public class _2538CurseoftheWereRibbit extends QuestHandler
 						return sendQuestDialog(env, 5);
 				}
 			}
-			if (targetId == 790002){
-				switch (dialog){
+			if (targetId == 790002) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
 						if (var == 2)
 							return sendQuestDialog(env, 2034);
 					case SETPRO1:
-						if (var == 0){
+						if (var == 0) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
-							PacketSendUtility
-								.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
 					case SETPRO3:
-						if (var == 2){
+						if (var == 2) {
 							removeQuestItem(env, 182204517, 1);
 							if (!giveQuestItem(env, 182204518, 1))
-								return true;	
+								return true;
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
-							PacketSendUtility
-								.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
 				}
 			}
-			if (targetId == 204805){
-				switch (dialog){
+			if (targetId == 204805) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);
 					case SETPRO2:
-						if (var == 1){
+						if (var == 1) {
 							if (!giveQuestItem(env, 182204517, 1))
 								return true;
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
-							PacketSendUtility
-								.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD){
-			if (targetId == 204827){
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204827) {
 				return sendQuestEndDialog(env);
 			}
 		}

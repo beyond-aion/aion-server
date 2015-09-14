@@ -162,8 +162,8 @@ public class House extends VisibleObject {
 
 		// Studios are brought into world already, skip them
 		if (getPosition() == null || !getPosition().isSpawned()) {
-			WorldPosition position = World.getInstance().createPosition(address.getMapId(), address.getX(), address.getY(), address.getZ(),
-				(byte) 0, instanceId);
+			WorldPosition position = World.getInstance().createPosition(address.getMapId(), address.getX(), address.getY(), address.getZ(), (byte) 0,
+				instanceId);
 			this.setPosition(position);
 			SpawnEngine.bringIntoWorld(this);
 		}
@@ -195,29 +195,26 @@ public class House extends VisibleObject {
 			Map<Integer, String> playerNames = DAOManager.getDAO(PlayerDAO.class).getPlayerNames(players);
 			if (playerNames.containsKey(playerObjectId)) {
 				masterName = playerNames.get(playerObjectId);
-			}
-			else
+			} else
 				this.revokeOwner(); // Something bad happened :P
 		}
 
 		for (HouseSpawn spawn : templates) {
 			SpawnTemplate t = null;
 			if (spawn.getType() == SpawnType.MANAGER && spawns.get(SpawnType.MANAGER) == null) {
-				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
+				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
+					spawn.getH());
 				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getPosition().getInstanceId(), this, masterName);
 				spawns.put(SpawnType.MANAGER, npc);
-			}
-			else if (spawn.getType() == SpawnType.TELEPORT && spawns.get(SpawnType.TELEPORT) == null) {
-				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
+			} else if (spawn.getType() == SpawnType.TELEPORT && spawns.get(SpawnType.TELEPORT) == null) {
+				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
+					spawn.getH());
 				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getPosition().getInstanceId(), this, masterName);
 				spawns.put(SpawnType.TELEPORT, npc);
-			}
-			else if (spawn.getType() == SpawnType.SIGN && spawns.get(SpawnType.SIGN) == null) {
+			} else if (spawn.getType() == SpawnType.SIGN && spawns.get(SpawnType.SIGN) == null) {
 				// Signs do not have master name displayed, but have creatorId
-				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-					spawn.getH(), creatorId, StringUtils.EMPTY);
+				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(),
+					creatorId, StringUtils.EMPTY);
 				spawns.put(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getPosition().getInstanceId()));
 			}
 		}
@@ -250,8 +247,7 @@ public class House extends VisibleObject {
 					signNoticeStream.write(new byte[] { 0, 0 }, 0, 2);
 				}
 				this.playerObjectId = playerObjectId;
-			}
-			finally {
+			} finally {
 				writeLock.unlock();
 			}
 		}
@@ -270,8 +266,7 @@ public class House extends VisibleObject {
 		if (playerObjectId == 0) {
 			setDoorState(status == HouseStatus.SELL_WAIT ? HousePermissions.DOOR_OPENED_ALL : HousePermissions.DOOR_CLOSED);
 			setNoticeState(HousePermissions.NOT_SET);
-		}
-		else {
+		} else {
 			if (permissions == 0) {
 				setNoticeState(HousePermissions.SHOW_OWNER);
 				if (getBuilding().getType() == BuildingType.PERSONAL_FIELD) {
@@ -345,11 +340,11 @@ public class House extends VisibleObject {
 	}
 
 	public void setNextPay(Timestamp nextPay) {
-	   Timestamp result = null;
-	   if (nextPay != null) { //round to midnight
-		  result = new Timestamp(DateUtils.round(nextPay, Calendar.DAY_OF_MONTH).getTime());
-	   }
-	   this.nextPay = result;
+		Timestamp result = null;
+		if (nextPay != null) { // round to midnight
+			result = new Timestamp(DateUtils.round(nextPay, Calendar.DAY_OF_MONTH).getTime());
+		}
+		this.nextPay = result;
 	}
 
 	public Timestamp getSellStarted() {
@@ -395,8 +390,7 @@ public class House extends VisibleObject {
 			if (npc != null) {
 				npc.getController().onDelete();
 			}
-		}
-		else {
+		} else {
 			spawns.put(type, npc);
 		}
 	}
@@ -408,8 +402,7 @@ public class House extends VisibleObject {
 		else if (status == HouseStatus.SELL_WAIT) {
 			if (HousingBidService.getInstance().isBiddingAllowed())
 				npcId = getLand().getSaleSignNpcId(); // bidding open
-		}
-		else if (playerObjectId != 0) {
+		} else if (playerObjectId != 0) {
 			if (status == HouseStatus.ACTIVE)
 				npcId = getLand().getHomeSignNpcId(); // resident information
 		}
@@ -503,8 +496,7 @@ public class House extends VisibleObject {
 				houseOwnerInfoFlags |= PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId();
 				houseOwnerInfoFlags &= ~PlayerHouseOwnerFlags.SINGLE_HOUSE.getId();
 			}
-		}
-		else if (status == HouseStatus.SELL_WAIT) {
+		} else if (status == HouseStatus.SELL_WAIT) {
 			houseOwnerInfoFlags = PlayerHouseOwnerFlags.SELLING_HOUSE.getId();
 		}
 	}
@@ -527,8 +519,7 @@ public class House extends VisibleObject {
 		signNoticeStream.reset();
 		try {
 			signNoticeStream.write(noticeStream, 0, Math.min(noticeStream.length, NOTICE_LENGTH));
-		}
-		finally {
+		} finally {
 			writeLock.unlock();
 		}
 	}

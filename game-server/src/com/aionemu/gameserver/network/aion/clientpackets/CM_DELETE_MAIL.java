@@ -23,8 +23,8 @@ public class CM_DELETE_MAIL extends AionClientPacket {
 	protected void readImpl() {
 		int count = readC();
 		mailObjId = new int[count];
-		for (int i = 0; i< count; i++) {
-			readC(); //unk
+		for (int i = 0; i < count; i++) {
+			readC(); // unk
 			mailObjId[i] = readD();
 		}
 	}
@@ -32,13 +32,13 @@ public class CM_DELETE_MAIL extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MAIL) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MAIL) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		MailService.getInstance().deleteMail(player, mailObjId);
 	}
 }

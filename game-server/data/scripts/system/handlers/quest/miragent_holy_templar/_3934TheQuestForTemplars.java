@@ -51,7 +51,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Talk with Nianalo
+			// 1 - Talk with Nianalo
 				case 798359:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -149,8 +149,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 3825);
 							}
 						}
@@ -163,13 +162,11 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

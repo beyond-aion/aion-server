@@ -66,8 +66,7 @@ public class _20052TheGuidingHand extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
@@ -117,8 +116,9 @@ public class _20052TheGuidingHand extends QuestHandler {
 						}
 						case SETPRO1: {
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300390000);
-							InstanceService.registerPlayerWithInstance(newInstance, player); 
-							TeleportService2.teleportTo(player, 300390000, newInstance.getInstanceId(), 273.96478f, 217.55084f, 207.5269f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+							InstanceService.registerPlayerWithInstance(newInstance, player);
+							TeleportService2.teleportTo(player, 300390000, newInstance.getInstanceId(), 273.96478f, 217.55084f, 207.5269f, (byte) 60,
+								TeleportAnimation.BEAM_ANIMATION);
 						}
 					}
 					break;
@@ -136,13 +136,11 @@ public class _20052TheGuidingHand extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205617) { // Aimah
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -162,8 +160,7 @@ public class _20052TheGuidingHand extends QuestHandler {
 					playQuestMovie(env, 704);
 					return true;
 				}
-			}
-			else if (zoneName.equals(ZoneName.get("DEBARIM_PETRALITH_STUDIO_600020000"))) {
+			} else if (zoneName.equals(ZoneName.get("DEBARIM_PETRALITH_STUDIO_600020000"))) {
 				if (var == 5) {
 					changeQuestStep(env, 5, 6, false); // 6
 					playQuestMovie(env, 706);

@@ -13,21 +13,17 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
  */
 
 @AIName("telepathycontroller")
-public class TelepathyControllerAI2 extends AggressiveNpcAI2
-{
+public class TelepathyControllerAI2 extends AggressiveNpcAI2 {
+
 	private AtomicBoolean isStart50Event = new AtomicBoolean(false);
 	private AtomicBoolean isStart10Event = new AtomicBoolean(false);
 
-	private void checkPercentage(int hpPercentage)
-	{
-		if (hpPercentage <= 50)
-		{
+	private void checkPercentage(int hpPercentage) {
+		if (hpPercentage <= 50) {
 			if (isStart50Event.compareAndSet(false, true)) {
 				helper();
 			}
-		}
-		else if (hpPercentage <= 10)
-		{
+		} else if (hpPercentage <= 10) {
 			if (isStart10Event.compareAndSet(false, true)) {
 				helper();
 			}
@@ -35,25 +31,23 @@ public class TelepathyControllerAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleBackHome() 
-	{
+	protected void handleBackHome() {
 		isStart50Event.set(false);
 		isStart10Event.set(false);
 		super.handleBackHome();
 	}
 
 	private void helper() {
-		if (getPosition().isSpawned() && !isAlreadyDead()) 
-		{
+		if (getPosition().isSpawned() && !isAlreadyDead()) {
 			for (int i = 0; i < 1; i++) {
 				int distance = Rnd.get(7, 10);
 				int nrNpc = Rnd.get(1, 2);
 				switch (nrNpc) {
 					case 1:
-						nrNpc = 281150; //Anuhart Escort.
+						nrNpc = 281150; // Anuhart Escort.
 						break;
 					case 2:
-						nrNpc = 281334; //Bionic Clodworm.
+						nrNpc = 281334; // Bionic Clodworm.
 						break;
 				}
 				rndSpawnInRange(nrNpc, distance);
@@ -61,8 +55,7 @@ public class TelepathyControllerAI2 extends AggressiveNpcAI2
 		}
 	}
 
-	private void rndSpawnInRange(int npcId, float distance)
-	{
+	private void rndSpawnInRange(int npcId, float distance) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
@@ -70,8 +63,7 @@ public class TelepathyControllerAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleAttack(Creature creature)
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}

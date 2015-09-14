@@ -62,15 +62,13 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 		if (alliance != null && alliance.size() > 0) {
 			PlayerAllianceService.addPlayer(alliance, player);
-		}
-		else if (!list.isEmpty()) {
+		} else if (!list.isEmpty()) {
 			Player first = null;
 
 			for (Player firstOne : list.values()) {
 				if (firstOne.isInGroup2()) {
 					PlayerGroupService.removePlayer(firstOne);
-				}
-				else if (firstOne.isInAlliance2()) {
+				} else if (firstOne.isInAlliance2()) {
 					PlayerAllianceService.removePlayer(firstOne);
 				}
 				first = firstOne;
@@ -79,16 +77,14 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 			if (first.getObjectId() != player.getObjectId()) {
 				if (isInvader) {
 					invAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_OFFENCE);
-				}
-				else {
+				} else {
 					defAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_DEFENCE);
 				}
-			}
-			else {
+			} else {
 				kickPlayer(player, isInvader);
 			}
 		}
-		list.putEntry(player.getObjectId(), player);
+		list.put(player.getObjectId(), player);
 	}
 
 	@Override
@@ -106,15 +102,13 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 			if (alliance.size() == 0) {
 				if (isInvader) {
 					invAlliance = null;
-				}
-				else {
+				} else {
 					defAlliance = null;
 				}
 			}
 		}
 
-		if (isInvader && player.isOnline()
-				&& player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
+		if (isInvader && player.isOnline() && player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
 			// You will be returned to where you entered.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401474));
 			TeleportService2.teleportTo(player, getVortexLocation().getHomePoint());
@@ -132,12 +126,12 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 		if (defAlliance == null || !defAlliance.isFull()) {
 			RequestResponseHandler responseHandler = new RequestResponseHandler(defender) {
+
 				@Override
 				public void acceptRequest(Creature requester, Player responder) {
 					if (responder.isInGroup2()) {
 						PlayerGroupService.removePlayer(responder);
-					}
-					else if (responder.isInAlliance2()) {
+					} else if (responder.isInAlliance2()) {
 						PlayerAllianceService.removePlayer(responder);
 					}
 

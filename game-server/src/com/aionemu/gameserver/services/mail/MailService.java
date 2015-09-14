@@ -96,8 +96,7 @@ public class MailService {
 				PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.RECIPIENT_MAILBOX_FULL));
 				return;
 			}
-		}
-		else if (recipientCommonData.getMailboxLetters() > 99) {
+		} else if (recipientCommonData.getMailboxLetters() > 99) {
 			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.RECIPIENT_MAILBOX_FULL));
 			return;
 		}
@@ -161,8 +160,7 @@ public class MailService {
 
 				if (senderInventory.getItemCountByItemId(dispo.getId()) >= dispo.getCount()) {
 					senderInventory.decreaseByItemId(dispo.getId(), dispo.getCount());
-				}
-				else
+				} else
 					return;
 			}
 
@@ -171,8 +169,7 @@ public class MailService {
 				senderInventory.remove(senderItem);
 				PacketSendUtility.sendPacket(sender, new SM_DELETE_ITEM(attachedItemObjId));
 				attachedItem = senderItem;
-			}
-			else if (senderItem.getItemCount() > attachedItemCount) {
+			} else if (senderItem.getItemCount() > attachedItemCount) {
 				attachedItem = ItemFactory.newItem(senderItem.getItemTemplate().getTemplateId(), attachedItemCount);
 				senderInventory.decreaseItemCount(senderItem, attachedItemCount);
 			}
@@ -211,8 +208,8 @@ public class MailService {
 
 		Timestamp time = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
-		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem,
-			finalAttachedKinahCount, title, message, sender.getName(), time, true, letterType);
+		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
+			title, message, sender.getName(), time, true, letterType);
 
 		// first save attached item for FK consistency
 		if (attachedItem != null)
@@ -314,7 +311,8 @@ public class MailService {
 				long attachedKinahCount = letter.getAttachedKinah();
 				letter.removeAttachedKinah();
 				if (!DAOManager.getDAO(MailDAO.class).storeLetter(letter.getTimeStamp(), letter)) {
-					AuditLogger.info(player, "Possible player try use kinah mail exploit. Location: " + player.getWorldId() + ", kinah count: " + attachedKinahCount);
+					AuditLogger.info(player, "Possible player try use kinah mail exploit. Location: " + player.getWorldId() + ", kinah count: "
+						+ attachedKinahCount);
 					return;
 				}
 				player.getInventory().increaseKinah(attachedKinahCount);

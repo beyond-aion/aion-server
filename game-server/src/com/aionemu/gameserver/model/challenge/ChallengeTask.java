@@ -9,21 +9,20 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
 
-
 /**
  * @author ViAl
- *
  */
 public class ChallengeTask {
-	
+
 	private final int taskId;
 	private final int ownerId;
 	private Map<Integer, ChallengeQuest> quests;
 	private Timestamp completeTime;
 	private ChallengeTaskTemplate template;
-	
+
 	/**
 	 * Used for loading tasks from DAO.
+	 * 
 	 * @param header
 	 * @param quests
 	 * @param completeTime
@@ -35,9 +34,10 @@ public class ChallengeTask {
 		this.completeTime = completeTime;
 		this.template = DataManager.CHALLENGE_DATA.getTaskByTaskId(taskId);
 	}
-	
+
 	/**
 	 * Used for creating new tasks in runtime.
+	 * 
 	 * @param ownerId
 	 * @param template
 	 */
@@ -45,7 +45,7 @@ public class ChallengeTask {
 		this.taskId = template.getId();
 		this.ownerId = ownerId;
 		Map<Integer, ChallengeQuest> quests = new HashMap<Integer, ChallengeQuest>();
-		for(ChallengeQuestTemplate qt : template.getQuests()) {
+		for (ChallengeQuestTemplate qt : template.getQuests()) {
 			ChallengeQuest quest = new ChallengeQuest(qt, 0);
 			quest.setPersistentState(PersistentState.NEW);
 			quests.put(qt.getId(), quest);
@@ -58,7 +58,7 @@ public class ChallengeTask {
 	public int getTaskId() {
 		return this.taskId;
 	}
-	
+
 	public int getOwnerId() {
 		return this.ownerId;
 	}
@@ -70,7 +70,7 @@ public class ChallengeTask {
 	public Map<Integer, ChallengeQuest> getQuests() {
 		return quests;
 	}
-	
+
 	public ChallengeQuest getQuest(int questId) {
 		return quests.get(questId);
 	}
@@ -78,23 +78,23 @@ public class ChallengeTask {
 	public Timestamp getCompleteTime() {
 		return completeTime;
 	}
-	
-	public synchronized void updateCompleteTime() { 
+
+	public synchronized void updateCompleteTime() {
 		completeTime.setTime(System.currentTimeMillis());
 	}
-	
+
 	public ChallengeTaskTemplate getTemplate() {
 		return this.template;
 	}
-	
+
 	public boolean isCompleted() {
 		boolean isCompleted = true;
-		for(ChallengeQuest quest : quests.values()) {
-		  if(quest.getCompleteCount() < quest.getMaxRepeats()) {
-			  isCompleted = false;
-			  break;
-		  }
-	   }
+		for (ChallengeQuest quest : quests.values()) {
+			if (quest.getCompleteCount() < quest.getMaxRepeats()) {
+				isCompleted = false;
+				break;
+			}
+		}
 		return isCompleted;
 	}
 }

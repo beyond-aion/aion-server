@@ -2,7 +2,6 @@ package com.aionemu.commons.network.packet;
 
 import java.nio.ByteBuffer;
 
-
 /**
  * Base class for every Server Packet
  * 
@@ -40,7 +39,7 @@ public abstract class BaseServerPacket extends BasePacket {
 	public void setBuf(ByteBuffer buf) {
 		this.buf = buf;
 	}
-	
+
 	/**
 	 * Write int to buffer.
 	 * 
@@ -110,8 +109,7 @@ public abstract class BaseServerPacket extends BasePacket {
 	protected final void writeS(String text) {
 		if (text == null) {
 			buf.putChar('\000');
-		}
-		else {
+		} else {
 			final int len = text.length();
 			for (int i = 0; i < len; i++)
 				buf.putChar(text.charAt(i));

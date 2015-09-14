@@ -41,13 +41,12 @@ public class ShutdownHandler extends TaskFromDBHandler {
 	public void trigger() {
 		log.info("Task[" + taskId + "] launched : shuting down the server !");
 
-
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
 				PacketSendUtility.sendBrightYellowMessageOnCenter(player, "Automatic Task: The server will shutdown in " + warnCountDown
-						+ " seconds ! Please find a peace place and disconnect your character.");
+					+ " seconds ! Please find a peace place and disconnect your character.");
 			}
 		});
 

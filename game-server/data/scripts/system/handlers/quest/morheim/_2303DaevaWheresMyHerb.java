@@ -57,8 +57,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 							changeQuestStep(env, 0, 11, false); // 11
 							choice = 0;
 							return sendQuestDialog(env, 1012);
-						}
-						else {
+						} else {
 							return sendQuestSelectionDialog(env);
 						}
 					}
@@ -67,8 +66,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 							changeQuestStep(env, 0, 21, false); // 21
 							choice = 1;
 							return sendQuestDialog(env, 1097);
-						}
-						else {
+						} else {
 							return sendQuestSelectionDialog(env);
 						}
 					}
@@ -77,42 +75,35 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798082) { // Bicorunerk
 				if (dialog == DialogAction.FINISH_DIALOG) {
 					return sendQuestSelectionDialog(env);
-				}
-				else if (dialog == DialogAction.USE_OBJECT) {
+				} else if (dialog == DialogAction.USE_OBJECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1003);
-					}
-					else {
+					} else {
 						return sendQuestSelectionDialog(env);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO10) {
+				} else if (dialog == DialogAction.SETPRO10) {
 					changeQuestStep(env, 0, 11, false); // 11
 					choice = 0;
 					return sendQuestDialog(env, 1012);
-				}
-				else if (dialog == DialogAction.SETPRO20) {
+				} else if (dialog == DialogAction.SETPRO20) {
 					changeQuestStep(env, 0, 21, false); // 21
 					choice = 1;
 					return sendQuestDialog(env, 1097);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204378) { // Favyr
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 15) {
 							return sendQuestDialog(env, 1353);
-						}
-						else if (var == 25) {
+						} else if (var == 25) {
 							return sendQuestDialog(env, 1438);
 						}
 					}
@@ -139,8 +130,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 			int[] ettins = { 211304, 211297 };
 			if (var >= 11 && var < 15) {
 				return defaultOnKillEvent(env, daru, 10, 15); // 15
-			}
-			else if (var == 15) {
+			} else if (var == 15) {
 				switch (targetId) {
 					case 211298:
 					case 211305: {
@@ -150,11 +140,9 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 						return true;
 					}
 				}
-			}
-			else if (var >= 21 && var < 25) {
+			} else if (var >= 21 && var < 25) {
 				return defaultOnKillEvent(env, ettins, 20, 25); // 25
-			}
-			else if (var == 25) {
+			} else if (var == 25) {
 				switch (targetId) {
 					case 211304:
 					case 211297: {

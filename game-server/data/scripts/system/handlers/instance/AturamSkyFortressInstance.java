@@ -18,9 +18,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
@@ -84,8 +84,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 					doors.get(174).setOpen(true);
 					sendMsg(1401050);
 					startOfficerWalkerEvent();
-				}
-				else if (killed1 == 8) {
+				} else if (killed1 == 8) {
 					doors.get(175).setOpen(true);
 					startMarbataWalkerEvent();
 				}
@@ -95,8 +94,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				int killed2 = chiefKilled.incrementAndGet();
 				if (killed2 == 1) {
 					startOfficerWalkerEvent();
-				}
-				else if (killed2 == 2) {
+				} else if (killed2 == 2) {
 					doors.get(178).setOpen(true);
 				}
 				despawnNpc(npc);
@@ -118,18 +116,15 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				if (boss != null) {
 					if (used == 1) {
 						sendMsg(1400910);
-					}
-					else if (used == 2) {
+					} else if (used == 2) {
 						boss.getEffectController().removeEffect(19406);
 						SkillEngine.getInstance().getSkill(boss, 19407, 1, boss).useNoAnimationSkill();
 						sendMsg(1400911);
-					}
-					else if (used == 3) {
+					} else if (used == 3) {
 						boss.getEffectController().removeEffect(19407);
 						SkillEngine.getInstance().getSkill(boss, 19408, 1, boss).useNoAnimationSkill();
 						sendMsg(1400912);
-					}
-					else if (used == 4) {
+					} else if (used == 4) {
 						boss.getEffectController().removeEffect(19408);
 						SkillEngine.getInstance().getSkill(boss, 18117, 1, boss).useNoAnimationSkill();
 						sendMsg(1400913);
@@ -213,8 +208,8 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0,
-			player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;

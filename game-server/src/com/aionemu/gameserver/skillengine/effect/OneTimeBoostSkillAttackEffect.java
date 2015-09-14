@@ -104,6 +104,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 						}
 						return 1.0f;
 					}
+
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
 						if (count++ < stopCount)

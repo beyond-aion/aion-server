@@ -23,16 +23,16 @@ public class ItemCollectingData extends XMLQuest {
 
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
-	
+
 	@XmlAttribute(name = "next_npc_id", required = true)
 	protected int nextNpcId;
-	
+
 	@XmlAttribute(name = "start_dialog_id")
 	protected int startDialogId;
-	
+
 	@XmlAttribute(name = "start_dialog_id2")
 	protected int startDialogId2;
-	
+
 	@Override
 	public void register(QuestEngine questEngine) {
 		ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, endNpcIds, questMovie, startDialogId, startDialogId2);

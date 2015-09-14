@@ -26,6 +26,7 @@ public class CommandsAccessService {
 	}
 
 	private static class SingletonHolder {
+
 		protected static final CommandsAccessService instance = new CommandsAccessService();
 	}
 

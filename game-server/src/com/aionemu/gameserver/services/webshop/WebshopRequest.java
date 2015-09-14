@@ -1,16 +1,16 @@
 package com.aionemu.gameserver.services.webshop;
 
-
 /**
  * @author ViAl
- *
  */
 public class WebshopRequest {
+
 	private int requestId;
 	private String buyerName;
 	private String receiverName;
 	private int itemId;
 	private long itemCount;
+
 	/**
 	 * @param buyerName
 	 * @param receiverName
@@ -24,23 +24,23 @@ public class WebshopRequest {
 		this.itemId = itemId;
 		this.itemCount = itemCount;
 	}
-	
+
 	public int getRequestId() {
 		return requestId;
 	}
-	
+
 	public String getBuyerName() {
 		return buyerName;
 	}
-	
+
 	public String getReceiverName() {
 		return receiverName;
 	}
-	
+
 	public int getItemId() {
 		return itemId;
 	}
-	
+
 	public long getItemCount() {
 		return itemCount;
 	}

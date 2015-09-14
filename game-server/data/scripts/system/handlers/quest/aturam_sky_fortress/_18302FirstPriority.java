@@ -14,8 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _18302FirstPriority extends QuestHandler {
 
 	private final static int questId = 18302;
-	private int[] mobIds = new int[] {700981, 700982, 700983, 700984, 700985};
-	
+	private int[] mobIds = new int[] { 700981, 700982, 700983, 700984, 700985 };
+
 	public _18302FirstPriority() {
 		super(questId);
 	}
@@ -29,7 +29,7 @@ public class _18302FirstPriority extends QuestHandler {
 			qe.registerQuestNpc(id).addOnKillEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
@@ -43,19 +43,17 @@ public class _18302FirstPriority extends QuestHandler {
 			if (targetId == 799530) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1){
-					 playQuestMovie(env, 468);
-					 return sendQuestStartDialog(env);
-				}
-				else
+				} else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+					playQuestMovie(env, 468);
+					return sendQuestStartDialog(env);
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
@@ -72,20 +70,17 @@ public class _18302FirstPriority extends QuestHandler {
 							return sendQuestDialog(env, 2716);
 					}
 				}
-			}
-			else if (targetId == 799530) {
+			} else if (targetId == 799530) {
 				return sendQuestDialog(env, 1004);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799530) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) 
+				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
-					removeQuestItem(env,182212101,1);
+					removeQuestItem(env, 182212101, 1);
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -109,13 +104,13 @@ public class _18302FirstPriority extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (var > 4)
 			return false;
-		
+
 		for (int id : mobIds) {
 			if (targetId == id) {
-				qs.setQuestVarById(0, var+1);
-        updateQuestStatus(env);
-        return true;
-      }
+				qs.setQuestVarById(0, var + 1);
+				updateQuestStatus(env);
+				return true;
+			}
 		}
 		return false;
 	}

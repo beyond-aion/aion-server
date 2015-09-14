@@ -51,7 +51,7 @@ public class HideEffect extends BufEffect {
 		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE.getId());
 
 		effected.unsetVisualState(state);
-		
+
 		if (effected instanceof Player) {
 			ActionObserver observer = effect.getActionObserver(position);
 			effect.getEffected().getObserveController().removeObserver(observer);
@@ -91,11 +91,7 @@ public class HideEffect extends BufEffect {
 		}, 500);
 
 		/**
-		 * for player adding:
-		 * Remove Hide when using any item action
-		 * . when requesting dialog to any npc
-		 * . when being attacked
-		 * . when attacking
+		 * for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking
 		 */
 		if (effected instanceof Player) {
 
@@ -104,25 +100,22 @@ public class HideEffect extends BufEffect {
 
 			// Remove Hide when use skill / item skill
 			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {
+
 				int bufNumber = 1;
 
 				@Override
 				public void startSkillCast(Skill skill) {
-					
-					//TODO find better way
+
+					// TODO find better way
 					if (skill.getSkillMethod() == SkillMethod.ITEM) {
 						if (skill.getItemTemplate().isPotion() || skill.getSkillTemplate().getDuration() > 0) {
 							effect.endEffect();
-						}
-						else
+						} else
 							return;
 					}
 
-					
 					if (skill.isSelfBuff() && bufNumber++ < buffCount)
 						return;
-					
-					
 
 					effect.endEffect();
 				}
@@ -141,16 +134,15 @@ public class HideEffect extends BufEffect {
 
 				@Override
 				public void attack(Creature creature) {
-						effect.endEffect();
+					effect.endEffect();
 				}
 			});
 
-			
 			effected.getObserveController().attach(new ActionObserver(ObserverType.ITEMUSE) {
 
 				@Override
 				public void itemused(Item item) {
-				   // [4.5] Buff items do not affect Hide II. Hide I is cancelled.
+					// [4.5] Buff items do not affect Hide II. Hide I is cancelled.
 					ItemActions actions = item.getItemTemplate().getActions();
 					if (actions != null) {
 						if (buffCount == 0 || actions.getSkillUseAction() == null)
@@ -158,7 +150,7 @@ public class HideEffect extends BufEffect {
 					}
 				}
 			});
-		
+
 			effected.getObserveController().attach(new ActionObserver(ObserverType.NPCDIALOGREQUEST) {
 
 				@Override
@@ -167,8 +159,7 @@ public class HideEffect extends BufEffect {
 				}
 
 			});
-		}
-		else { // effected is npc
+		} else { // effected is npc
 			if (type == 0) { // type >= 1, hide is maintained even after damage
 				effect.setCancelOnDmg(true);
 

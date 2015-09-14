@@ -16,7 +16,6 @@ import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author xTz
  */
 public class InstanceBuff implements StatOwner {
@@ -56,7 +55,7 @@ public class InstanceBuff implements StatOwner {
 		}
 		player.getGameStats().endEffect(this);
 	}
-	
+
 	public int getRemaningTime() {
 		return (int) ((System.currentTimeMillis() - startTime) / 1000);
 	}

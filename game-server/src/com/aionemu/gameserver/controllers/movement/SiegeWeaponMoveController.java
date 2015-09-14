@@ -9,7 +9,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- *
  * @author xTz
  */
 public class SiegeWeaponMoveController extends SummonMoveController {
@@ -35,8 +34,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			}
 			updateLastMove();
 			return;
-		}
-		else if (started.compareAndSet(false, true)) {
+		} else if (started.compareAndSet(false, true)) {
 			movementMask = -32;
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
@@ -102,5 +100,5 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
 	}
-	
+
 }

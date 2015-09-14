@@ -18,35 +18,34 @@ public class StaticDoor extends StaticObject {
 
 	private EnumSet<StaticDoorState> states;
 	private String doorName;
-        private boolean isLocked = true;
-                
+	private boolean isLocked = true;
+
 	/**
 	 * @param objectId
 	 * @param controller
 	 * @param spawnTemplate
 	 * @param objectTemplate
 	 */
-	public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate,
-		int instanceId) {
+	public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
 		super(objectId, controller, spawnTemplate, objectTemplate);
 		states = EnumSet.copyOf(getObjectTemplate().getInitialStates());
 		if (objectTemplate.getMeshFile() != null) {
 			doorName = GeoService.getInstance().getDoorName(spawnTemplate.getWorldId(), objectTemplate.getMeshFile(), objectTemplate.getX(),
 				objectTemplate.getY(), objectTemplate.getZ());
 		}
-                
-                if (objectTemplate.getKeyId() < 2) {
-                    isLocked = false;
-                }
+
+		if (objectTemplate.getKeyId() < 2) {
+			isLocked = false;
+		}
 	}
 
-        public boolean isLocked() {
-            return isLocked;
-        }
+	public boolean isLocked() {
+		return isLocked;
+	}
 
-        public void setLocked(boolean isLocked) {
-            this.isLocked = isLocked;
-        }
+	public void setLocked(boolean isLocked) {
+		this.isLocked = isLocked;
+	}
 
 	/**
 	 * @return the open state from states set
@@ -71,8 +70,7 @@ public class StaticDoor extends StaticObject {
 			states.remove(StaticDoorState.CLICKABLE);
 			states.add(StaticDoorState.OPENED); // 1001
 			packetState = 0x9;
-		}
-		else {
+		} else {
 			emotion = EmotionType.CLOSE_DOOR;
 			if (getObjectTemplate().getInitialStates().contains(StaticDoorState.CLICKABLE))
 				states.add(StaticDoorState.CLICKABLE);

@@ -1,8 +1,8 @@
 package com.aionemu.commons.options;
 
 /**
- * Class with public static final booleans indicating parts of this "project" where assertion should be enabled. If
- * assertion is disabled, assertion code will be removed at compile time by javac compiler.
+ * Class with public static final booleans indicating parts of this "project" where assertion should be enabled. If assertion is disabled, assertion
+ * code will be removed at compile time by javac compiler.
  * 
  * @author -Nemesiss-
  */

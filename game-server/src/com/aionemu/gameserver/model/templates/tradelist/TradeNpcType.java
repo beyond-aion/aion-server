@@ -13,7 +13,7 @@ public enum TradeNpcType {
 	ABYSS(2),
 	LEGION_COIN(3),
 	REWARD(4),
-	ABYSS_KINAH(5);//General Shop
+	ABYSS_KINAH(5);// General Shop
 
 	private final int index;
 

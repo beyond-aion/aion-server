@@ -12,12 +12,10 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _28830InteriorDecorator  extends QuestHandler {
+public class _28830InteriorDecorator extends QuestHandler {
 
 	private static final int questId = 28830;
 	private static final Set<Integer> butlers;
@@ -56,10 +54,10 @@ public class _28830InteriorDecorator  extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		House house = player.getActiveHouse();
 
-		if(house == null){
+		if (house == null) {
 			return false;
 		}
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 830585) {
 				switch (dialog) {
@@ -70,8 +68,7 @@ public class _28830InteriorDecorator  extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
+		} else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
 			if (house.getButler().getNpcId() != targetId)
 				return false;
 			switch (dialog) {
@@ -80,8 +77,7 @@ public class _28830InteriorDecorator  extends QuestHandler {
 				case SETPRO1:
 					return defaultCloseDialog(env, 0, 1);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830651) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830651) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
@@ -99,10 +95,10 @@ public class _28830InteriorDecorator  extends QuestHandler {
 	@Override
 	public boolean onHouseItemUseEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				changeQuestStep(env, 1, 1, true);
-			}
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+			changeQuestStep(env, 1, 1, true);
+		}
 		return false;
 	}
 

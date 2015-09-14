@@ -36,8 +36,7 @@ public class GroupToMe extends AdminCommand {
 
 		for (Player target : groupToMove.getPlayerGroup2().getMembers())
 			if (target != admin) {
-				TeleportService2.teleportTo(target, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
-					admin.getZ(), admin.getHeading());
+				TeleportService2.teleportTo(target, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
 				PacketSendUtility.sendMessage(target, "You have been summoned by " + admin.getName() + ".");
 				PacketSendUtility.sendMessage(admin, "You summon " + target.getName() + ".");
 			}

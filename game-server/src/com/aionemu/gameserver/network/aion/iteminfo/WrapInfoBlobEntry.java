@@ -5,8 +5,7 @@ import java.nio.ByteBuffer;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
- * @author Rolandas
- * Written the last, after all BonusInfoBlobEntry
+ * @author Rolandas Written the last, after all BonusInfoBlobEntry
  */
 public class WrapInfoBlobEntry extends ItemBlobEntry {
 

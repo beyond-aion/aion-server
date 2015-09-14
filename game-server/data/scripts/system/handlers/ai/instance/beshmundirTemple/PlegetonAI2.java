@@ -43,7 +43,7 @@ public class PlegetonAI2 extends NpcAI2 {
 								}
 							}
 						}, 420000);
-	
+
 					}
 					TeleportService2.teleportTo(player, 300170000, 958.45233f, 430.4892f, 219.80301f);
 					break;

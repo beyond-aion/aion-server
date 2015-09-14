@@ -8,8 +8,8 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Ben, Ritsu Smart Matching Enabled //announce anon This will work. as well as //announce a This will work.
- *         Both will match the "a" or "anon" to the "anonymous" flag.
+ * @author Ben, Ritsu Smart Matching Enabled //announce anon This will work. as well as //announce a This will work. Both will match the "a" or "anon"
+ *         to the "anonymous" flag.
  */
 public class Announce extends AdminCommand {
 
@@ -23,11 +23,9 @@ public class Announce extends AdminCommand {
 
 		if (("anonymous").startsWith(params[0].toLowerCase())) {
 			message = "Announce: ";
-		}
-		else if (("name").startsWith(params[0].toLowerCase())) {
+		} else if (("name").startsWith(params[0].toLowerCase())) {
 			message = player.getName() + ": ";
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "Syntax: //announce <anonymous|name> <message>");
 			return;
 		}

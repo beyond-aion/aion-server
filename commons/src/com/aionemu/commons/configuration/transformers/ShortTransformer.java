@@ -32,8 +32,7 @@ public class ShortTransformer implements PropertyTransformer<Short> {
 	public Short transform(String value, Field field) throws TransformationException {
 		try {
 			return Short.decode(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

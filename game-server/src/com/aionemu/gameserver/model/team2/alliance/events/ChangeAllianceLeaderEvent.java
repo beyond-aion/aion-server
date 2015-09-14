@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.team2.alliance.events;
 
 import java.util.Collection;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceMember;
@@ -14,7 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author ATracer
@@ -45,8 +46,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 			if (team.isLeader(oldLeader)) {
 				team.applyOnMembers(this);
 			}
-		}
-		else {
+		} else {
 			changeLeaderTo(eventPlayer);
 		}
 		if (checkLeaderChanged(oldLeader)) {
@@ -75,7 +75,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, false));
 				}
 				if (!player.equals(member)) {
-					//eventPlayer null only when leader leave by own will and wee not must inform him about new leader
+					// eventPlayer null only when leader leave by own will and wee not must inform him about new leader
 					if (eventPlayer != null) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_HE_IS_NEW_LEADER(player.getName()));
 					}
@@ -85,14 +85,13 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 							@Override
 							public boolean apply(PlayerAlliance alliance) {
 								alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER_TIMEOUT(player.getName(), StringUtils.EMPTY, StringUtils.EMPTY),
-													new PlayerFilters.ExcludePlayerFilter(player));
+									new PlayerFilters.ExcludePlayerFilter(player));
 								return true;
 							}
 
 						});
 					}
-				}
-				else {
+				} else {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_YOU_BECOME_NEW_LEADER);
 					if (inLeague && team.getLeague().getCaptain().equals(player)) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_YOU_BECOME_NEW_LEADER_TIMEOUT);

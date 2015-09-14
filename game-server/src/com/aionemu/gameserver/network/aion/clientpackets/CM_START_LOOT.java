@@ -45,8 +45,7 @@ public class CM_START_LOOT extends AionClientPacket {
 		if (action == 0) // open
 		{
 			DropService.getInstance().requestDropList(player, targetObjectId);
-		}
-		else if (action == 1) // close
+		} else if (action == 1) // close
 		{
 			DropService.getInstance().closeDropList(player, targetObjectId);
 		}

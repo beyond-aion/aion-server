@@ -30,6 +30,7 @@ public enum TeamCommand {
 	LEAGUE_EXPEL(30),
 	LEAGUE_ALLIANCE_MOVE(31),
 	LEAGUE_SET_LEADER(32);
+
 	private static final TIntObjectHashMap<TeamCommand> teamCommands;
 
 	static {

@@ -10,7 +10,6 @@ import com.aionemu.gameserver.services.HousingService;
 
 /**
  * @author zhkchi
- *
  */
 public class _28802BeItEverSoHumble extends QuestHandler {
 
@@ -45,8 +44,7 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830153: {
 					switch (dialog) {
@@ -60,8 +58,7 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830153) {
 				if (dialog.equals(DialogAction.SELECTED_QUEST_NOREWARD)) {
 					HousingService.getInstance().registerPlayerStudio(player);

@@ -60,8 +60,7 @@ public class _2015TaketheInitiative extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				return sendQuestEndDialog(env);
 			}

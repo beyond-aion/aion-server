@@ -43,15 +43,14 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				spawnKaluvaGenesisTreasureBoxes();
 				spawnKaluvaAbyssalTreasureBox();
 				break;
-			case 216948: //rukril 
-			case 216949: //ebonsoul
+			case 216948: // rukril
+			case 216949: // ebonsoul
 				if (getNpc(npcId == 216949 ? 216948 : 216949) == null) {
 					spawnDayshadeAetherFragment();
 					spawnDayshadeGenesisTreasureBoxes();
 					spawnDayshadeAbyssalTreasureChest();
-				}
-				else {
-					sendMsg(npcId == 216948 ? 1400634 : 1400635); //Defeat Rukril/Ebonsoul in 1 min!
+				} else {
+					sendMsg(npcId == 216948 ? 1400634 : 1400635); // Defeat Rukril/Ebonsoul in 1 min!
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -100,7 +99,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				spawnYamennesGenesisTreasureBoxes();
 				spawnYamennesAbyssalTreasureBox(npcId == 216952 ? 700937 : 700938);
 				deleteNpcs(instance.getNpcs(282107));
-				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); //Exit
+				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				break;
 			case 700955: // HugeAetherFragment
 				destroyedFragments++;
@@ -134,36 +133,37 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 700862:
 				int itemId = player.getCommonData().getRace() == Race.ASMODIANS ? 182209820 : 182209800;
-			  if (player.getInventory().getFirstItemByItemId(itemId) == null)
-			  	ItemService.addItem(player, itemId, 1);
+				if (player.getInventory().getFirstItemByItemId(itemId) == null)
+					ItemService.addItem(player, itemId, 1);
 				break;
 			case 700865:
-			  if (player.getCommonData().getRace() == Race.ASMODIANS && player.getInventory().getFirstItemByItemId(182209824) == null)
-			    ItemService.addItem(player, 182209824, 1);
-			  break;
+				if (player.getCommonData().getRace() == Race.ASMODIANS && player.getInventory().getFirstItemByItemId(182209824) == null)
+					ItemService.addItem(player, 182209824, 1);
+				break;
 			case 700864:
-			  if (player.getCommonData().getRace() == Race.ELYOS && player.getInventory().getFirstItemByItemId(182209803) == null)
-			    ItemService.addItem(player, 182209803, 1);
-			  break;
+				if (player.getCommonData().getRace() == Race.ELYOS && player.getInventory().getFirstItemByItemId(182209803) == null)
+					ItemService.addItem(player, 182209803, 1);
+				break;
 			case 701593:
 				sendMsg(1400732);
-			 	spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-			  npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+				spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
+				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
 				break;
 			case 700856:
 				sendMsg(1400731);
 				spawn(216952, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-			  npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
 				break;
 		}
 	}
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}
@@ -213,7 +213,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnDayshadeAbyssalTreasureChest() {
-		sendMsg(1400636); //A Treasure Box Appeared
+		sendMsg(1400636); // A Treasure Box Appeared
 		spawn(700936, 404.891f, 650.2943f, 439.2548f, (byte) 130);
 	}
 
@@ -235,15 +235,12 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void removeSummoned()
-	{
+	private void removeSummoned() {
 		Npc gate1 = getNpc(282014);
 		Npc gate2 = getNpc(282015);
 		Npc gate3 = getNpc(282131);
-		if((gate1 == null || gate1.getLifeStats().isAlreadyDead())
-			&& (gate2 == null || gate2.getLifeStats().isAlreadyDead()) 
-			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead()))
-		{
+		if ((gate1 == null || gate1.getLifeStats().isAlreadyDead()) && (gate2 == null || gate2.getLifeStats().isAlreadyDead())
+			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead())) {
 			deleteNpcs(instance.getNpcs(281903));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(281904));// Summoned Lapilima
 		}

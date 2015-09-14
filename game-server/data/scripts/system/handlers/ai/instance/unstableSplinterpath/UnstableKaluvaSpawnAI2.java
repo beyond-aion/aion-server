@@ -17,7 +17,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class UnstableKaluvaSpawnAI2 extends NpcAI2 {
 
 	private Future<?> task;
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -25,26 +25,26 @@ public class UnstableKaluvaSpawnAI2 extends NpcAI2 {
 			task.cancel(true);
 		checkKaluva();
 	}
-	
-	@Override
-  protected void handleCreatureSee(Creature creature) {
-      checkDistance(this, creature);
-  }
-  
-  @Override
-  protected void handleCreatureMoved(Creature creature) {
-      checkDistance(this, creature);
-  }
 
-  private void checkDistance(NpcAI2 ai, Creature creature) {
-  	Npc kaluva = getPosition().getWorldMapInstance().getNpc(219553);
-     if (creature instanceof Npc) {
-    	if (MathUtil.isIn3dRange(getOwner(), kaluva, 7) && task == null) {
-    		kaluva.getEffectController().removeEffect(19152);
-    		scheduleHatch();
-    	}
-    }
-  }
+	@Override
+	protected void handleCreatureSee(Creature creature) {
+		checkDistance(this, creature);
+	}
+
+	@Override
+	protected void handleCreatureMoved(Creature creature) {
+		checkDistance(this, creature);
+	}
+
+	private void checkDistance(NpcAI2 ai, Creature creature) {
+		Npc kaluva = getPosition().getWorldMapInstance().getNpc(219553);
+		if (creature instanceof Npc) {
+			if (MathUtil.isIn3dRange(getOwner(), kaluva, 7) && task == null) {
+				kaluva.getEffectController().removeEffect(19152);
+				scheduleHatch();
+			}
+		}
+	}
 
 	@Override
 	protected void handleSpawned() {

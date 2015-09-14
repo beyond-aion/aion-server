@@ -27,7 +27,6 @@ public class BackDashEffect extends DamageEffect {
 	// backward = 1, forward = 0
 	private float direction = 1;
 
-
 	@Override
 	public void calculate(Effect effect) {
 		effect.setDashStatus(DashStatus.BACKDASH);
@@ -39,10 +38,9 @@ public class BackDashEffect extends DamageEffect {
 		float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1,
-			effector.getY() + y1, effector.getZ(), false, intentions);
-		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(),
-			effector.getHeading());
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1, effector.getZ(),
+			false, intentions);
+		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
 		World.getInstance().updatePosition(effector, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
 		super.calculate(effect);
 	}

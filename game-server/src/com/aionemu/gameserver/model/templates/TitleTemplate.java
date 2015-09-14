@@ -33,10 +33,10 @@ public class TitleTemplate implements StatOwner {
 	private Race race;
 
 	private int titleId;
-	
+
 	@XmlAttribute(name = "nameId")
 	private int nameId;
-	
+
 	@XmlAttribute(name = "desc")
 	private String description;
 
@@ -47,11 +47,11 @@ public class TitleTemplate implements StatOwner {
 	public Race getRace() {
 		return race;
 	}
-	
+
 	public int getNameId() {
 		return nameId;
 	}
-	
+
 	public String getDesc() {
 		return description;
 	}

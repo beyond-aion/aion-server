@@ -3,6 +3,8 @@ package consolecommands;
 import java.io.FileInputStream;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -10,19 +12,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.AdminService;
+import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.services.item.ItemFactory;
-import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
  * @author ginho1
@@ -60,18 +60,15 @@ public class Wish extends ConsoleCommand {
 
 		try {
 			objCount = Integer.parseInt(params[0]);
-			if(objCount > 10)
+			if (objCount > 10)
 				objCount = 10;
 			objName = params[1];
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 		}
 
-		
 		try {
 			enchant = Integer.parseInt(params[1]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 		}
 
 		try {
@@ -82,25 +79,23 @@ public class Wish extends ConsoleCommand {
 
 			ItemTemplate itemTemplate = data.getItemTemplate(objName);
 
-			if(itemTemplate != null){
+			if (itemTemplate != null) {
 				objId = itemTemplate.getTemplateId();
 			}
 
-		}
-		catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Item templates reload failed!" );
+		} catch (Exception e) {
+			PacketSendUtility.sendMessage(admin, "Item templates reload failed!");
 			System.out.println(e);
 		}
 
-		if(objId > 0) {
+		if (objId > 0) {
 
 			if (!AdminService.getInstance().canOperate(admin, player, objId, "command ///wish"))
 				return;
 
 			long count = 1;
 
-
-			if(enchant > 0){
+			if (enchant > 0) {
 				Item newItem = ItemFactory.newItem(objId);
 
 				if (newItem == null) {
@@ -108,22 +103,17 @@ public class Wish extends ConsoleCommand {
 				}
 				newItem.setEnchantLevel(enchant);
 				count = ItemService.addItem(player, newItem);
-			}else{
+			} else {
 				count = ItemService.addItem(player, objId, objCount);
 			}
 
 			if (count == 0) {
 				if (admin != player) {
-					PacketSendUtility.sendMessage(admin, "You successfully gave " + objCount + " x [item:"
-							+ objId + "] to " + player.getName() + ".");
-					PacketSendUtility.sendMessage(player, "You successfully received " + objCount + " x [item:"
-							+ objId + "] from " + admin.getName() + ".");
-				}
-				else
-					PacketSendUtility.sendMessage(admin, "You successfully received " + objCount + " x [item:"
-							+ objId + "]");
-			}
-			else {
+					PacketSendUtility.sendMessage(admin, "You successfully gave " + objCount + " x [item:" + objId + "] to " + player.getName() + ".");
+					PacketSendUtility.sendMessage(player, "You successfully received " + objCount + " x [item:" + objId + "] from " + admin.getName() + ".");
+				} else
+					PacketSendUtility.sendMessage(admin, "You successfully received " + objCount + " x [item:" + objId + "]");
+			} else {
 				PacketSendUtility.sendMessage(admin, "Item couldn't be added");
 			}
 			return;
@@ -137,19 +127,18 @@ public class Wish extends ConsoleCommand {
 
 			NpcTemplate npcTemplate = data.getNpcTemplate(objName);
 
-			if(npcTemplate != null){
+			if (npcTemplate != null) {
 
 				System.out.println(npcTemplate.getName());
 				objId = npcTemplate.getTemplateId();
 			}
 
-		}
-		catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!" );
+		} catch (Exception e) {
+			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!");
 			System.out.println(e);
 		}
 
-		if(objId > 0) {
+		if (objId > 0) {
 
 			float x = admin.getX();
 			float y = admin.getY();
@@ -171,7 +160,7 @@ public class Wish extends ConsoleCommand {
 			}
 
 			String objectName = visibleObject.getObjectTemplate().getName();
-			PacketSendUtility.sendMessage(admin, objectName + " spawned");			
+			PacketSendUtility.sendMessage(admin, objectName + " spawned");
 		}
 	}
 
@@ -214,7 +203,7 @@ public class Wish extends ConsoleCommand {
 
 	@XmlRootElement(name = "items")
 	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class ItemData{
+	private static class ItemData {
 
 		@XmlElement(name = "item")
 		private List<ItemTemplate> its;
@@ -222,7 +211,7 @@ public class Wish extends ConsoleCommand {
 		public ItemTemplate getItemTemplate(String item) {
 
 			for (ItemTemplate it : getData()) {
-				if(it.getName().equals(item))
+				if (it.getName().equals(item))
 					return it;
 			}
 			return null;
@@ -236,6 +225,7 @@ public class Wish extends ConsoleCommand {
 	@XmlRootElement(name = "ae_static_data")
 	@XmlAccessorType(XmlAccessType.NONE)
 	private static class StaticData {
+
 		@XmlElement(name = "items")
 		public ItemData itemData;
 
@@ -277,7 +267,7 @@ public class Wish extends ConsoleCommand {
 
 	@XmlRootElement(name = "npcs")
 	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class NpcData{
+	private static class NpcData {
 
 		@XmlElement(name = "npc")
 		private List<NpcTemplate> its;
@@ -285,7 +275,7 @@ public class Wish extends ConsoleCommand {
 		public NpcTemplate getNpcTemplate(String npc) {
 
 			for (NpcTemplate it : getData()) {
-				if(it.getName().toLowerCase().equals(npc.toLowerCase()))
+				if (it.getName().toLowerCase().equals(npc.toLowerCase()))
 					return it;
 			}
 			return null;

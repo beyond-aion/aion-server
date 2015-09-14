@@ -38,8 +38,7 @@ public class TalkEventHandler {
 					if (playerTownId != currentTownId) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), 44));
 						return;
-					}
-					else {
+					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), 10));
 						return;
 					}

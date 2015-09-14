@@ -14,7 +14,7 @@ public class SM_MEGAPHONE extends AionServerPacket {
 
 	public SM_MEGAPHONE(String senderName, String message, int itemId) {
 		this.senderName = senderName;
-		this.message = message; 
+		this.message = message;
 		this.itemId = itemId;
 	}
 

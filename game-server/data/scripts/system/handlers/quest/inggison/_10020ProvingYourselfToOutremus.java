@@ -8,15 +8,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Speak to Outremus (798926). Speak to Brigade General Yulia (798928). Repair the broken Obelisks near Inggison
- * Illusion Fortress: Repair the Stopped Obelisk (730223), Repair the Overheated Obelisk (730224), Repair the
- * Deteriorated Obelisk (730225). Deal with the Balaur who are damaging the Obelisks: Hikiron Farm Balaur (10): Basrasa
- * Laborer (215504, 216782, 215505), Basrasa Collector (216463, 216783, 216464), Basrasa Ambusher (216692, 215517,
- * 216648, 215519), Basrasa Assaulter (216691, 215516, 216647, 215518). Armored Spallers (215508, 215509) (2). Speak to
- * Brigade General Yulia. Speak to Brigade General Versetti (798927). Speak to Centurion Marica (798955). Install the
- * Obelisk at the Eastern Obelisk Support (700628) of the Dimaia Fountainhead. Install the Obelisk at the Western
- * Obelisk Support (700629) of the Dimaia Fountainhead. Install the Obelisk at the Northern Obelisk Support (700630) of
- * the Dimaia Fountainhead. Report to Brigade General Versetti. Report the result to Outremus.
+ * Speak to Outremus (798926). Speak to Brigade General Yulia (798928). Repair the broken Obelisks near Inggison Illusion Fortress: Repair the Stopped
+ * Obelisk (730223), Repair the Overheated Obelisk (730224), Repair the Deteriorated Obelisk (730225). Deal with the Balaur who are damaging the
+ * Obelisks: Hikiron Farm Balaur (10): Basrasa Laborer (215504, 216782, 215505), Basrasa Collector (216463, 216783, 216464), Basrasa Ambusher (216692,
+ * 215517, 216648, 215519), Basrasa Assaulter (216691, 215516, 216647, 215518). Armored Spallers (215508, 215509) (2). Speak to Brigade General Yulia.
+ * Speak to Brigade General Versetti (798927). Speak to Centurion Marica (798955). Install the Obelisk at the Eastern Obelisk Support (700628) of the
+ * Dimaia Fountainhead. Install the Obelisk at the Western Obelisk Support (700629) of the Dimaia Fountainhead. Install the Obelisk at the Northern
+ * Obelisk Support (700630) of the Dimaia Fountainhead. Report to Brigade General Versetti. Report the result to Outremus.
  * 
  * @author vlog
  */
@@ -31,8 +29,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 798926, 798928, 730223, 730224, 730225, 798927, 798955, 700628, 700629, 700630 };
-		int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516,
-			216647, 215518, 215508, 215509 };
+		int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516, 216647, 215518, 215508, 215509 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
@@ -86,8 +83,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
@@ -108,8 +104,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 									qs.setQuestVar(3); // 3
 									updateQuestStatus(env);
 									return true;
-								}
-								else {
+								} else {
 									changeQuestStep(env, 0, 1, false, 1); // 1: 1
 									return true;
 								}
@@ -126,8 +121,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 									qs.setQuestVar(3); // 3
 									updateQuestStatus(env);
 									return true;
-								}
-								else {
+								} else {
 									changeQuestStep(env, 0, 1, false, 2); // 2: 1
 									return true;
 								}
@@ -144,8 +138,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 									qs.setQuestVar(3); // 3
 									updateQuestStatus(env);
 									return true;
-								}
-								else {
+								} else {
 									changeQuestStep(env, 0, 1, false, 3); // 3: 1
 									return true;
 								}
@@ -159,8 +152,7 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 10) {
+							} else if (var == 10) {
 								return sendQuestDialog(env, 3398);
 							}
 						}
@@ -210,12 +202,11 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926) { // Outremus
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if(env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
+				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -237,35 +228,29 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 		int var2 = qs.getQuestVarById(2);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (var == 3) {
-				int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516,
-					216647, 215518 };
+				int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516, 216647, 215518 };
 				int[] spellers = { 215508, 215509 };
 				if (targetId == spellers[0] || targetId == spellers[1]) {
 					if (var2 == 0) {
 						return defaultOnKillEvent(env, spellers, var2, var2 + 1, 2); // 2: 0-1
-					}
-					else if (var2 == 1) {
+					} else if (var2 == 1) {
 						if (var1 == 10) {
 							qs.setQuestVar(4); // 4
 							updateQuestStatus(env);
 							return true;
-						}
-						else {
+						} else {
 							return defaultOnKillEvent(env, spellers, 1, 2, 2); // 2: 2
 						}
 					}
-				}
-				else {
+				} else {
 					if (var1 < 9) {
 						return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1); // 1: 0 - 9
-					}
-					else if (var1 == 9) {
+					} else if (var1 == 9) {
 						if (var2 == 2) {
 							qs.setQuestVar(4); // 4
 							updateQuestStatus(env);
 							return true;
-						}
-						else {
+						} else {
 							return defaultOnKillEvent(env, mobs, 9, 10, 1); // 1: 9
 						}
 					}

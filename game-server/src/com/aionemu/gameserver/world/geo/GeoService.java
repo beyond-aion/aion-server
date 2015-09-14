@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -72,9 +73,8 @@ public class GeoService {
 		if (!GeoDataConfig.GEO_ENABLE) {
 			newZ += defaultUp;
 		}/*
-		else {
-			newZ += 0.5f;			
-		}*/
+			 * else { newZ += 0.5f; }
+			 */
 		return newZ;
 	}
 
@@ -87,13 +87,14 @@ public class GeoService {
 	public float getZ(int worldId, float x, float y) {
 		return geoData.getMap(worldId).getZ(x, y);
 	}
-	
+
 	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
 		return geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z);
 	}
 
 	public CollisionResultsEx getCollisions(VisibleObject object, float x, float y, float z, boolean changeDirection, byte intentions) {
-		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false, object.getInstanceId(), intentions);
+		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false,
+			object.getInstanceId(), intentions);
 	}
 
 	/**
@@ -108,8 +109,8 @@ public class GeoService {
 		if (!GeoDataConfig.CANSEE_ENABLE) {
 			return true;
 		}
-		//TODO: remove this check after fixing geo doors attacking
-		if(target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
+		// TODO: remove this check after fixing geo doors attacking
+		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
 			return true;
 		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),
 			object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() / 2, target.getX(), target.getY(),

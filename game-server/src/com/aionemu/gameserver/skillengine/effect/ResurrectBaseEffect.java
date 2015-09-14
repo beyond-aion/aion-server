@@ -18,17 +18,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResurrectBaseEffect")
 public class ResurrectBaseEffect extends ResurrectEffect {
-	
+
 	@Override
 	public void calculate(Effect effect) {
 		calculate(effect, null, null);
 	}
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
 	}
-	
+
 	@Override
 	public void startEffect(final Effect effect) {
 		final Creature effected = effect.getEffected();
@@ -47,7 +47,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 						else
 							PlayerReviveService.bindRevive(effected, skillId);
 						PacketSendUtility.broadcastPacket(effected, new SM_EMOTION(effected, EmotionType.RESURRECT), true);
-				    PacketSendUtility.sendPacket(effected, new SM_PLAYER_SPAWN(effected));
+						PacketSendUtility.sendPacket(effected, new SM_PLAYER_SPAWN(effected));
 					}
 				}
 			};

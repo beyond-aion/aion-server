@@ -37,9 +37,9 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 
 	// // self explanatory //
 	private boolean AreAltgardQuestsFinished(Player player) {
-	  int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 24016 : 2022;
-	  QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Altgard state
-	  return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
+		int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 24016 : 2022;
+		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Altgard state
+		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
 	}
 
 	@Override
@@ -56,8 +56,7 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVarById(0) == 0) {
+			} else if (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestDialog(env, 10002);
 				else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
@@ -65,12 +64,10 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 					return sendQuestEndDialog(env);
 				}
-			}
-			else if (qs.getStatus() == QuestStatus.COMPLETE) {
+			} else if (qs.getStatus() == QuestStatus.COMPLETE) {
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
@@ -79,25 +76,21 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 					}
 				}, 3000);
 			}
-		}
-		else if (targetId == 203557) {
+		} else if (targetId == 203557) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (AreAltgardQuestsFinished(player)) {
 						return sendQuestDialog(env, 1011);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1097);
-				}
-				else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
+				} else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
 					if (giveQuestItem(env, 182207026, 1)) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

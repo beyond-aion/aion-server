@@ -3,10 +3,8 @@ package com.aionemu.gameserver.ai2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.events.AbstractEvent;
 
-
 /**
  * @author Rolandas
- *
  */
 public class GeneralAIEvent extends AbstractEvent<AbstractAI> {
 

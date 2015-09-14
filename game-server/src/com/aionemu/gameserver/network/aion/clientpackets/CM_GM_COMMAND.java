@@ -6,10 +6,8 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
-
 /**
  * @author ginho1
- *
  */
 public class CM_GM_COMMAND extends AionClientPacket {
 
@@ -24,7 +22,8 @@ public class CM_GM_COMMAND extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
 	 */
 	@Override
@@ -33,7 +32,8 @@ public class CM_GM_COMMAND extends AionClientPacket {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
 	 */
 	@Override

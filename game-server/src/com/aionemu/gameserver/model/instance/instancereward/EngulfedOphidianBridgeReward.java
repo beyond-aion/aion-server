@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridge
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- *
  * @author Tibald
  */
 public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidianBridgePlayerReward> {
@@ -23,8 +22,8 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 
 	static {
 		positions = new float[2][];
-		positions[1] = new float[]{294.72534f, 488.29645f, 598.5838f, 1}; // asmodians
-		positions[0] = new float[]{762.01733f, 582.25903f, 578.2209f, 86}; // elyos
+		positions[1] = new float[] { 294.72534f, 488.29645f, 598.5838f, 1 }; // asmodians
+		positions[0] = new float[] { 762.01733f, 582.25903f, 578.2209f, 86 }; // elyos
 	}
 
 	public EngulfedOphidianBridgeReward(Integer mapId, int instanceId) {
@@ -96,7 +95,7 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 	public MutableInt getElyosPoints() {
 		return elyosPoints;
 	}
-	
+
 	public int getRacePosition() {
 		return racePosition;
 	}
@@ -106,16 +105,14 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 			case ELYOS:
 				if (racePosition == 0) {
 					teleport(player, positions[0]);
-				}
-				else {
+				} else {
 					teleport(player, positions[1]);
 				}
 				break;
 			case ASMODIANS:
 				if (racePosition == 0) {
 					teleport(player, positions[1]);
-				}
-				else {
+				} else {
 					teleport(player, positions[0]);
 				}
 				break;

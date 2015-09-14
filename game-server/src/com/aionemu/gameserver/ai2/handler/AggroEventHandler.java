@@ -32,15 +32,11 @@ public class AggroEventHandler {
 	public static void onAggro(NpcAI2 npcAI, final Creature myTarget) {
 		final Npc owner = npcAI.getOwner();
 		// TODO move out?
-		if (myTarget.getAdminNeutral() == 1 || myTarget.getAdminNeutral() == 3 || myTarget.getAdminEnmity() == 1
-			|| myTarget.getAdminEnmity() == 3 || TribeRelationService.isFriend(owner, myTarget) 
-			|| myTarget.isFlag())
+		if (myTarget.getAdminNeutral() == 1 || myTarget.getAdminNeutral() == 3 || myTarget.getAdminEnmity() == 1 || myTarget.getAdminEnmity() == 3
+			|| TribeRelationService.isFriend(owner, myTarget) || myTarget.isFlag())
 			return;
-		PacketSendUtility
-			.broadcastPacket(
-				owner,
-				new SM_ATTACK(owner, myTarget, 0, 633, 0, Collections
-					.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
+		PacketSendUtility.broadcastPacket(owner,
+			new SM_ATTACK(owner, myTarget, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
 
 		ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, myTarget, true), 500);
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onAggro(owner);
@@ -53,10 +49,8 @@ public class AggroEventHandler {
 			VisibleObject myTarget = notMyTarget.getTarget();
 			if (myTarget != null && myTarget instanceof Creature) {
 				Creature targetCreature = (Creature) myTarget;
-				PacketSendUtility.broadcastPacket(
-					owner,
-					new SM_ATTACK(owner, targetCreature, 0, 633, 0, Collections.singletonList(new AttackResult(0,
-						AttackStatus.NORMALHIT))));
+				PacketSendUtility.broadcastPacket(owner,
+					new SM_ATTACK(owner, targetCreature, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
 				ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, targetCreature, false), 500);
 				return true;
 			}
@@ -73,8 +67,7 @@ public class AggroEventHandler {
 		VisibleObject target = attacker.getTarget();
 		if (target != null && target instanceof Player) {
 			Player playerTarget = (Player) target;
-			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker)
-				&& MathUtil.isInRange(owner, playerTarget, owner.getAggroRange())
+			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker) && MathUtil.isInRange(owner, playerTarget, owner.getAggroRange())
 				&& GeoService.getInstance().canSee(owner, attacker)) {
 				owner.getAggroList().startHate(attacker);
 				return true;

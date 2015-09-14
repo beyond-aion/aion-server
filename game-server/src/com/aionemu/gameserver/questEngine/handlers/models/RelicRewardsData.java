@@ -1,5 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
- 
+
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,7 +15,6 @@ import com.aionemu.gameserver.questEngine.handlers.template.RelicRewards;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelicRewardsData")
-
 public class RelicRewardsData extends XMLQuest {
 
 	@XmlAttribute(name = "start_npc_ids", required = true)

@@ -41,8 +41,7 @@ public class SM_MOVE extends AionServerPacket {
 					writeF(playermoveData.vectorX);
 					writeF(playermoveData.vectorY);
 					writeF(playermoveData.vectorZ);
-				}
-				else {
+				} else {
 					writeF(moveData.getTargetX2());
 					writeF(moveData.getTargetY2());
 					writeF(moveData.getTargetZ2());
@@ -58,8 +57,7 @@ public class SM_MOVE extends AionServerPacket {
 				writeF(playermoveData.vectorY);
 				writeF(playermoveData.vectorZ);
 			}
-		}
-		else {
+		} else {
 			if ((moveData.getMovementMask() & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
 				writeF(moveData.getTargetX2());
 				writeF(moveData.getTargetY2());

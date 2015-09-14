@@ -7,9 +7,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * @author pixfid, Rolandas
  */
 public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
-	
+
 	private boolean isGM;
-	
+
 	public SM_ACCOUNT_PROPERTIES(boolean isGM) {
 		this.isGM = isGM;
 	}
@@ -26,8 +26,7 @@ public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
 			writeC(0x00);
 			writeD(0x08);
 			writeD(0x04);
-		}
-		else {
+		} else {
 			writeH(0x00);
 			writeH(0x00);
 			writeD(0x00);

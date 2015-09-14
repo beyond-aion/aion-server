@@ -46,13 +46,11 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 			if (targetId == 000000) { // Viktor Logwin
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011); // can be different
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 111111: { // Oliver
@@ -60,11 +58,9 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -87,13 +83,11 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 000000) { // Viktor Logwin
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 20001);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -112,7 +106,7 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016"))) { // example zone
-					return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));
+				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));
 			}
 		}
 		return HandlerResult.FAILED;

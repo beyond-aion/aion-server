@@ -85,8 +85,7 @@ public class XMLStartCondition {
 		if (noacquired != null && noacquired.size() > 0) {
 			for (Integer questId : noacquired) {
 				QuestState qs = qsl.getQuestState(questId);
-				if (qs != null
-					&& (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD))
+				if (qs != null && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD))
 					return false;
 			}
 		}
@@ -112,8 +111,7 @@ public class XMLStartCondition {
 			for (int itemId : equipped) {
 				if (!player.getEquipment().getEquippedItemIds().contains(itemId)) {
 					int requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(itemId).getNameId();
-					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(new DescriptionId(requiredItemNameId)));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(new DescriptionId(requiredItemNameId)));
 					return false;
 				}
 			}
@@ -124,8 +122,8 @@ public class XMLStartCondition {
 	/** Check all conditions */
 	public boolean check(Player player, boolean warn) {
 		QuestStateList qsl = player.getQuestStateList();
-		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl)
-			&& checkNoAcquiredQuests(qsl) && checkEquippedItems(player, warn);
+		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl) && checkNoAcquiredQuests(qsl)
+			&& checkEquippedItems(player, warn);
 	}
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {

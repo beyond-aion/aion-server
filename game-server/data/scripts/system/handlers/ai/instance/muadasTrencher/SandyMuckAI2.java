@@ -11,7 +11,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("sandy_muck")
@@ -42,8 +41,7 @@ public class SandyMuckAI2 extends AggressiveNpcAI2 {
 				if (!isAlreadyDead()) {
 					if (time != 30000) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19900, 50, getOwner()).useNoAnimationSkill();
-					}
-					else {
+					} else {
 						AI2Actions.deleteOwner(SandyMuckAI2.this);
 					}
 				}

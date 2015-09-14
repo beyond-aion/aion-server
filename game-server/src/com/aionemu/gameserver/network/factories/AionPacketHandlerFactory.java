@@ -6,8 +6,7 @@ import com.aionemu.gameserver.network.aion.AionPacketHandler;
 import com.aionemu.gameserver.network.aion.clientpackets.*;
 
 /**
- * This factory is responsible for creating {@link AionPacketHandler} object. It also initializes created handler with a
- * set of packet prototypes.<br>
+ * This factory is responsible for creating {@link AionPacketHandler} object. It also initializes created handler with a set of packet prototypes.<br>
  * Object of this classes uses <tt>Injector</tt> for injecting dependencies into prototype objects.<br>
  * <br>
  * 
@@ -26,8 +25,8 @@ public class AionPacketHandlerFactory {
 	 */
 	public AionPacketHandlerFactory() {
 		handler = new AionPacketHandler();
-		
-		//////////////////////// 4.7.5.0 ///////////////////////
+
+		// ////////////////////// 4.7.5.0 ///////////////////////
 		addPacket(new CM_ABYSS_RANKING_LEGIONS(0x158, State.IN_GAME));
 		addPacket(new CM_ABYSS_RANKING_PLAYERS(0x19E, State.IN_GAME));
 		addPacket(new CM_ATTACK(0xE2, State.IN_GAME));
@@ -81,7 +80,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_USE_ITEM(0xC7, State.IN_GAME));
 		addPacket(new CM_VERSION_CHECK(0xC2, State.CONNECTED));
 		addPacket(new CM_BIND_POINT_TELEPORT(0x1D6, State.IN_GAME));
-		addPacket(new CM_RECONNECT_AUTH(0x199, State.AUTHED));	
+		addPacket(new CM_RECONNECT_AUTH(0x199, State.AUTHED));
 		addPacket(new CM_AUTO_GROUP(0x16A, State.IN_GAME));
 		addPacket(new CM_BLOCK_ADD(0x148, State.IN_GAME));
 		addPacket(new CM_BLOCK_DEL(0x149, State.IN_GAME));
@@ -202,35 +201,27 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_HOUSE_DECORATE(0x2ED, State.IN_GAME));
 		addPacket(new CM_REGISTER_HOUSE(0x1BD, State.IN_GAME));
 		addPacket(new CM_RELEASE_OBJECT(0x1A3, State.IN_GAME));
-		
+
 		/*
-		//////////////////////// Not Added /////////////////////
-		 *	addPacket(new CM_VIRTUAL_AUTH(0x14D, State.AUTHED));
-		 *	addPacket(new CM_LOGIN_OUT(0xA4, State.AUTHED, State.IN_GAME));
-		 *	addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BA, State.IN_GAME));
-		 *	addPacket(new CM_REQUEST_RETURN_SERVER(0x1BB, State.IN_GAME));
-		 *	addPacket(new CM_DIRECT_ENTER_WORLD(0x1B9, State.AUTHED));
-		 */	
-		
+		 * //////////////////////// Not Added ///////////////////// addPacket(new CM_VIRTUAL_AUTH(0x14D, State.AUTHED)); addPacket(new CM_LOGIN_OUT(0xA4,
+		 * State.AUTHED, State.IN_GAME)); addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BA, State.IN_GAME)); addPacket(new CM_REQUEST_RETURN_SERVER(0x1BB,
+		 * State.IN_GAME)); addPacket(new CM_DIRECT_ENTER_WORLD(0x1B9, State.AUTHED));
+		 */
+
 		// ////////////////////// 4.7.0.5 REMOVED????? ///////////////////////
 		/*
-		 *	addPacket(new CM_GODSTONE_SOCKET(0x13A, State.IN_GAME));
-		 *	addPacket(new CM_IN_GAME_SHOP_INFO(0x184, State.IN_GAME));
-		 *	addPacket(new CM_SECURITY_TOKEN_REQUEST(0x1B6, State.IN_GAME));
-		 *	addPacket(new CM_TIME_CHECK_QUIT(0x2A9, State.IN_GAME));
-		 *  
+		 * addPacket(new CM_GODSTONE_SOCKET(0x13A, State.IN_GAME)); addPacket(new CM_IN_GAME_SHOP_INFO(0x184, State.IN_GAME)); addPacket(new
+		 * CM_SECURITY_TOKEN_REQUEST(0x1B6, State.IN_GAME)); addPacket(new CM_TIME_CHECK_QUIT(0x2A9, State.IN_GAME));
 		 */
-		
+
 		// ////////////////////// TODO ///////////////////////
-		/*	
-		 *	addPacket(new CM_ADMIN_PANEL(0x149, State.IN_GAME));
-		 *	addPacket(new CM_UNK_4_5(0x133, State.IN_GAME));
-		 *
+		/*
+		 * addPacket(new CM_ADMIN_PANEL(0x149, State.IN_GAME)); addPacket(new CM_UNK_4_5(0x133, State.IN_GAME));
 		 */
-		
+
 		// ////////////////////// 3.0 ///////////////////////
 		/*
-		 *	addPacket(new CM_UNK(0x136, State.IN_GAME));
+		 * addPacket(new CM_UNK(0x136, State.IN_GAME));
 		 */
 	}
 

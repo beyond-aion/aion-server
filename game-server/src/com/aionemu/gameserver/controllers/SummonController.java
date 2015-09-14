@@ -26,8 +26,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author ATracer
- * @author RotO (Attack-speed hack protection)
- * modified by Sippolo
+ * @author RotO (Attack-speed hack protection) modified by Sippolo
  */
 public class SummonController extends CreatureController<Summon> {
 
@@ -124,8 +123,7 @@ public class SummonController extends CreatureController<Summon> {
 		SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED, isAttacked);
 		Summon owner = getOwner();
 		final Player master = getOwner().getMaster();
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0, lastAttacker.equals(owner) ? 0
-			: lastAttacker.getObjectId()));
+		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0, lastAttacker.equals(owner) ? 0 : lastAttacker.getObjectId()));
 
 		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.getLifeStats().isAlreadyDead()
 			&& !lastAttacker.getLifeStats().isAlreadyDead()) {
@@ -150,8 +148,6 @@ public class SummonController extends CreatureController<Summon> {
 			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED, isAttacked);
 		}
 	}
- 
-
 
 	@Override
 	public void onStartMove() {

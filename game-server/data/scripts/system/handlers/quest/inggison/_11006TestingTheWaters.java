@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11006TestingTheWaters extends QuestHandler {
 
@@ -22,6 +20,7 @@ public class _11006TestingTheWaters extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206704, questId);
 		qe.registerQuestItem(182206705, questId);
@@ -35,31 +34,27 @@ public class _11006TestingTheWaters extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798940) { 
+			if (targetId == 798940) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182206704, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798940) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 1)
+					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					giveQuestItem(env, 182206705, 1);
 					removeQuestItem(env, 182206706, 1);
 					return defaultCloseDialog(env, 1, 2);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798940) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -70,16 +65,15 @@ public class _11006TestingTheWaters extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if(qs != null && qs.getStatus() == QuestStatus.START) {
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (item.getItemId() == 182206704) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false, 182206706, 1));
-			}
-			else if (item.getItemId() == 182206705) {
+			} else if (item.getItemId() == 182206705) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 2, 2, true, 182206707, 1));
 			}
 		}

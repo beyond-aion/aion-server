@@ -16,22 +16,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Ritsu
  */
 @AIName("nightmareharlequin")
-public class NightmareHarlequinAI2 extends GeneralNpcAI2 
-{
+public class NightmareHarlequinAI2 extends GeneralNpcAI2 {
 
 	@Override
-	protected void handleDialogStart(Player player) 
-	{
-		switch (getNpcId()) 
-		{
+	protected void handleDialogStart(Player player) {
+		switch (getNpcId()) {
 			case 831599:
-			case 831600:
-			{
+			case 831600: {
 				super.handleDialogStart(player);
 				break;
 			}
-			default:
-			{
+			default: {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 				break;
 			}
@@ -39,21 +34,16 @@ public class NightmareHarlequinAI2 extends GeneralNpcAI2
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) 
-	{
+	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
-		if (QuestEngine.getInstance().onDialog(env) && dialogId != DialogAction.SETPRO1.id()) 
-		{
+		if (QuestEngine.getInstance().onDialog(env) && dialogId != DialogAction.SETPRO1.id()) {
 			return true;
 		}
-		if (dialogId == DialogAction.SETPRO1.id()) 
-		{
-			SkillEngine.getInstance().getSkill(getOwner(), player.getRace() == Race.ELYOS ? 21331 : 21334 , 1, player).useWithoutPropSkill();
+		if (dialogId == DialogAction.SETPRO1.id()) {
+			SkillEngine.getInstance().getSkill(getOwner(), player.getRace() == Race.ELYOS ? 21331 : 21334, 1, player).useWithoutPropSkill();
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-		}
-		else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) 
-		{
+		} else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
 		}
 		return true;

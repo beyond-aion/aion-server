@@ -11,11 +11,10 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- * Talk with Gaia (203917). Talk with Ophelos (203992). Retrieve a Life Bead (182201014) and put it into the Laquepin
- * Life Stone (700158). Talk with Ophelos. Talk with Castor (203965). Talk with Corybantes (203968). Talk with Heratos
- * (203987). Go to the Desert Life Stone (700160) and insert the Life Bead (182201024) within three minutes. Talk with
- * Heratos. Talk with Sirink (203934). Restore the Mystic Spring by putting the Bead (182201025) into the Temple Life
- * Stone (700159). Talk with Sirink. Talk with Gaia.
+ * Talk with Gaia (203917). Talk with Ophelos (203992). Retrieve a Life Bead (182201014) and put it into the Laquepin Life Stone (700158). Talk with
+ * Ophelos. Talk with Castor (203965). Talk with Corybantes (203968). Talk with Heratos (203987). Go to the Desert Life Stone (700160) and insert the
+ * Life Bead (182201024) within three minutes. Talk with Heratos. Talk with Sirink (203934). Restore the Mystic Spring by putting the Bead (182201025)
+ * into the Temple Life Stone (700159). Talk with Sirink. Talk with Gaia.
  * 
  * @author Rhys2002
  * @reworked vlog
@@ -53,13 +52,11 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 			if (targetId == 203917) { // Gaia
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 4080);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203917: { // Gaia
 					switch (dialog) {
@@ -82,8 +79,7 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -91,11 +87,11 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 						case SETPRO3: {
-							if (defaultCloseDialog(env, 3, 4)){ // 4
-                                                        TeleportService2.teleportTo(player, 210020000, 1, 641.88605f, 440.1764f, 331.875f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
-                                                        return true;
-                                                        }
-                                                        return false;
+							if (defaultCloseDialog(env, 3, 4)) { // 4
+								TeleportService2.teleportTo(player, 210020000, 1, 641.88605f, 440.1764f, 331.875f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
+								return true;
+							}
+							return false;
 						}
 					}
 					break;
@@ -129,12 +125,12 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 							}
 						}
 						case SETPRO5: {
-							if (defaultCloseDialog(env, 5, 6)){
-                                                                TeleportService2.teleportTo(player, 210020000, 1, 1059.5428f, 342.35223f, 306.9911f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
-                                                        return true;
-                                                        }
-                                                        return false; // 6
-                                                }
+							if (defaultCloseDialog(env, 5, 6)) {
+								TeleportService2.teleportTo(player, 210020000, 1, 1059.5428f, 342.35223f, 306.9911f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
+								return true;
+							}
+							return false; // 6
+						}
 					}
 					break;
 				}
@@ -143,11 +139,9 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 6) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 2887);
-							}
-							else if (var == 8) {
+							} else if (var == 8) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -160,11 +154,11 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 							return sendQuestSelectionDialog(env);
 						}
 						case SETPRO7: {
-                                                        if (defaultCloseDialog(env, 8, 9, 182201025, 1, 0, 0)){ // 9
-                                                        TeleportService2.teleportTo(player, 210020000, 1, 1527.835f, 520.4294f, 356.45963f, (byte) 117, TeleportAnimation.BEAM_ANIMATION);
-                                                        return true;
-                                                        }
-                                                        return false;
+							if (defaultCloseDialog(env, 8, 9, 182201025, 1, 0, 0)) { // 9
+								TeleportService2.teleportTo(player, 210020000, 1, 1527.835f, 520.4294f, 356.45963f, (byte) 117, TeleportAnimation.BEAM_ANIMATION);
+								return true;
+							}
+							return false;
 						}
 					}
 					break;
@@ -182,16 +176,14 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 9) {
 								return sendQuestDialog(env, 3398);
-							}
-							else if (var == 11) {
+							} else if (var == 11) {
 								return sendQuestDialog(env, 3739);
 							}
 						}
 						case SETPRO8: {
 							if (var == 9) {
 								return defaultCloseDialog(env, 9, 10); // 10
-							}
-							else if (var == 11) {
+							} else if (var == 11) {
 								return defaultCloseDialog(env, 11, 11, true, false); // reward
 							}
 						}
@@ -216,8 +208,7 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 			int var = env.getPlayer().getQuestStateList().getQuestState(questId).getQuestVarById(0);
 			if (var == 7) {
 				changeQuestStep(env, 7, 8, false); // 8
-			}
-			else if (var == 6) { // If timer stopped before movie ends
+			} else if (var == 6) { // If timer stopped before movie ends
 				changeQuestStep(env, 6, 8, false); // 8
 			}
 			removeQuestItem(env, 182201024, 1);

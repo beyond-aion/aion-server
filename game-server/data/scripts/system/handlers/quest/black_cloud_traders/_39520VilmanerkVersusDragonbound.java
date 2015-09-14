@@ -10,15 +10,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 
 	private final static int questId = 39520;
-	private int[] mobs = {218387, 218389, 218391, 218393, 218395, 218397, 218399, 218401};
+	private int[] mobs = { 218387, 218389, 218391, 218393, 218395, 218397, 218399, 218401 };
 
 	public _39520VilmanerkVersusDragonbound() {
 		super(questId);
@@ -39,18 +37,17 @@ public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		
+
 		if (targetId == 0) {
 			switch (dialog) {
 				case QUEST_ACCEPT_1:
-				QuestService.startQuest(env);
-				return closeDialogWindow(env);
+					QuestService.startQuest(env);
+					return closeDialogWindow(env);
 				default:
 					return closeDialogWindow(env);
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
 
@@ -58,8 +55,8 @@ public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 			if (targetId == 205984) {
 				switch (dialog) {
 					case USE_OBJECT: {
-							return sendQuestDialog(env, 1352);
-						}
+						return sendQuestDialog(env, 1352);
+					}
 					case SETPRO1: {
 						if (env.getVisibleObject() instanceof Npc) {
 							targetId = ((Npc) env.getVisibleObject()).getNpcId();
@@ -69,25 +66,22 @@ public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 205885) {
+			} else if (targetId == 205885) {
 				switch (dialog) {
 					case USE_OBJECT: {
-							return sendQuestDialog(env, 2375);
+						return sendQuestDialog(env, 2375);
 					}
 					case SELECT_QUEST_REWARD: {
-						 changeQuestStep(env, 1, 1, true);
-							return sendQuestDialog(env, 5);
+						changeQuestStep(env, 1, 1, true);
+						return sendQuestDialog(env, 5);
 					}
 				}
 			}
-		}		
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205885) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -103,12 +97,10 @@ public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 			if (Rnd.get(1, 100) < 20) {
 				Npc npc = (Npc) env.getVisibleObject();
 				npc.getController().onDelete();
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 205984, npc.getX(), npc.getY(),
-					npc.getZ(), (byte) 0);
+				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 205984, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 				return true;
 			}
 		}
 		return false;
 	}
 }
-		

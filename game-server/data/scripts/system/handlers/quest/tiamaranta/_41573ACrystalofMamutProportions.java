@@ -25,6 +25,7 @@ public class _41573ACrystalofMamutProportions extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213170, questId);
 		qe.registerQuestNpc(205972).addOnTalkEvent(questId);
@@ -46,25 +47,23 @@ public class _41573ACrystalofMamutProportions extends QuestHandler {
 		}
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START){
-			if(targetId == 205972){
-				switch (dialog){
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205972) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_QUEST_REWARD:{
+					case SELECT_QUEST_REWARD: {
 						removeQuestItem(env, 182213170, 1);
 						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 5);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205972) {
 				return sendQuestEndDialog(env);
 			}
-			
+
 		}
 		return false;
 	}
@@ -74,17 +73,15 @@ public class _41573ACrystalofMamutProportions extends QuestHandler {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
-		
+
 		if (id != 182213170)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

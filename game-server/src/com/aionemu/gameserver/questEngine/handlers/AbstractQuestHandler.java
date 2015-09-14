@@ -105,7 +105,7 @@ public abstract class AbstractQuestHandler {
 	public boolean onKillInWorldEvent(QuestEnv env) {
 		return false;
 	}
-	
+
 	public boolean onKillInZoneEvent(QuestEnv env) {
 		return false;
 	}
@@ -121,19 +121,19 @@ public abstract class AbstractQuestHandler {
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		return false;
 	}
-	
+
 	public boolean onAddAggroListEvent(QuestEnv questEnv) {
 		return false;
 	}
-	
+
 	public boolean onAtDistanceEvent(QuestEnv questEnv) {
 		return false;
 	}
-	
+
 	public boolean onEnterWindStreamEvent(QuestEnv questEnv, int worldId) {
 		return false;
 	}
-	
+
 	public boolean rideAction(QuestEnv questEnv, int rideItemId) {
 		return false;
 	}
@@ -145,11 +145,11 @@ public abstract class AbstractQuestHandler {
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		return HandlerResult.UNKNOWN;
 	}
-	
+
 	public boolean onProtectEndEvent(QuestEnv env) {
 		return false;
 	}
-	
+
 	public boolean onProtectFailEvent(QuestEnv env) {
 		return false;
 	}

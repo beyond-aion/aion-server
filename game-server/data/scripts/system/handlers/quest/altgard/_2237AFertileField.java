@@ -37,13 +37,11 @@ public class _2237AFertileField extends QuestHandler {
 			if (targetId == 203629) { // Daike
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700145: { // Fertilizer Sack
 					if (dialog == DialogAction.USE_OBJECT) {
@@ -65,8 +63,7 @@ public class _2237AFertileField extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203629) { // Daike
 				return sendQuestEndDialog(env);
 			}

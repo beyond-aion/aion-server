@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.services.player;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.SellLimit;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Source
@@ -29,8 +30,7 @@ public class PlayerLimitService {
 		if (limit < reward) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DAY_CANNOT_SELL_NPC(limit));
 			return false;
-		}
-		else {
+		} else {
 			limit -= reward;
 			sellLimit.put(accoutnId, limit);
 			return true;

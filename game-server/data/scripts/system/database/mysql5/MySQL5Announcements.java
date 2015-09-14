@@ -29,8 +29,8 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next())
-					result.add(new Announcement(resultSet.getInt("id"), resultSet.getString("announce"), resultSet
-						.getString("faction"), resultSet.getString("type"), resultSet.getInt("delay")));
+					result.add(new Announcement(resultSet.getInt("id"), resultSet.getString("announce"), resultSet.getString("faction"), resultSet
+						.getString("type"), resultSet.getInt("delay")));
 			}
 		});
 		return result;

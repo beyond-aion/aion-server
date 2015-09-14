@@ -14,10 +14,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 
-
 /**
  * @author kecimis
- *
  */
 @XmlRootElement(name = "motion_times")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -41,7 +39,7 @@ public class MotionData {
 	public List<MotionTime> getMotionTimes() {
 		if (motionTimes == null)
 			motionTimes = new ArrayList<MotionTime>();
-		
+
 		return motionTimes;
 	}
 
@@ -52,7 +50,7 @@ public class MotionData {
 	public int size() {
 		if (motionTimes == null)
 			return 0;
-		
+
 		return motionTimes.size();
 	}
 }

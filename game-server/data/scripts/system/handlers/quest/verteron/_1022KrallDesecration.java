@@ -69,8 +69,7 @@ public class _1022KrallDesecration extends QuestHandler {
 						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203178)
 				return sendQuestEndDialog(env);
 		}
@@ -94,8 +93,7 @@ public class _1022KrallDesecration extends QuestHandler {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (var == 5) {
+				} else if (var == 5) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return true;

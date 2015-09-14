@@ -30,7 +30,7 @@ public class SummonHomingEffect extends SummonEffect {
 	protected int npcCount;
 	@XmlAttribute(name = "attack_count", required = true)
 	protected int attackCount;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		Creature effector = effect.getEffector();

@@ -3,23 +3,21 @@ package instance.abyss;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @InstanceID(301280000)
 public class KysisBattleInstance extends KysisBattleInstance_L {
-	
-	 @Override
-   public void onDie(Npc npc) {
-   	super.onDie(npc);
-   }
-   
+
+	@Override
+	public void onDie(Npc npc) {
+		super.onDie(npc);
+	}
+
 	@Override
 	protected void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			spawn(702292, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 			spawn(702292, 571.56036f, 869.93604f, 199.37367f, (byte) 69);
 			spawn(702292, 560.082f, 882.97943f, 199.37367f, (byte) 76);
@@ -34,10 +32,10 @@ public class KysisBattleInstance extends KysisBattleInstance_L {
 			spawn(702295, 576.4634f, 837.3374f, 199.7f, (byte) 56); // Treasure Room Chest
 		}
 	}
-   
-   @Override
-   protected void artifactSpawns(Npc npc) {
-   // Only for legion instance
-   }
+
+	@Override
+	protected void artifactSpawns(Npc npc) {
+		// Only for legion instance
+	}
 
 }

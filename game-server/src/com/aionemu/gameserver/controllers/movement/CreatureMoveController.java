@@ -86,7 +86,7 @@ public abstract class CreatureMoveController<T extends VisibleObject> implements
 	public byte getMovementMask() {
 		return movementMask;
 	}
-	
+
 	@Override
 	public boolean isJumping() {
 		return false;

@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Bobobear & Ritsu
  */
 public class _18808FoolproofPackaging extends QuestHandler {
@@ -33,27 +32,25 @@ public class _18808FoolproofPackaging extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 830193) {
-				if (dialog == DialogAction.QUEST_SELECT) 
-					return sendQuestDialog(env, 1011); 
+				if (dialog == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 1011);
 				if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE || dialog == DialogAction.QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182213215, 1))
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else 
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730534: {
 					switch (dialog) {
 						case USE_OBJECT: {
-							if (var == 0) 
+							if (var == 0)
 								return sendQuestDialog(env, 2375);
 						}
 						case SELECT_QUEST_REWARD: {
@@ -64,9 +61,8 @@ public class _18808FoolproofPackaging extends QuestHandler {
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 730534) 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 730534)
 				return sendQuestEndDialog(env);
 		}
 		return false;

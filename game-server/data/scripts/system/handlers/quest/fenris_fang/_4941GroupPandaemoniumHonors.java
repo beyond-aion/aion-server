@@ -42,7 +42,7 @@ public class _4941GroupPandaemoniumHonors extends QuestHandler {
 
 		if (qs == null)
 			return false;
-			
+
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
@@ -62,16 +62,14 @@ public class _4941GroupPandaemoniumHonors extends QuestHandler {
 								removeQuestItem(env, 182207121, 1);
 								changeQuestStep(env, 1, 1, true);
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 					}
 					break;
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204060)
 				return sendQuestEndDialog(env);
 		}

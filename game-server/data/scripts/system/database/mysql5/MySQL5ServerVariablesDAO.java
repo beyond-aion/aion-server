@@ -29,11 +29,9 @@ public class MySQL5ServerVariablesDAO extends ServerVariablesDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 				return Integer.parseInt(rs.getString("value"));
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error loading last saved server time", e);
-		}
-		finally {
+		} finally {
 			DB.close(ps);
 		}
 
@@ -51,11 +49,9 @@ public class MySQL5ServerVariablesDAO extends ServerVariablesDAO {
 			ps.setString(1, var);
 			ps.setString(2, String.valueOf(time));
 			success = ps.executeUpdate() > 0;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error storing server time", e);
-		}
-		finally {
+		} finally {
 			DB.close(ps);
 		}
 

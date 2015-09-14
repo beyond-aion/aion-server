@@ -27,8 +27,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	protected int currentHp;
 	protected int currentMp;
 	protected boolean alreadyDead = false;
-	protected boolean isAboutToDie = false;//for long animation skills that will kill
-	protected int killingBlow;//for long animation skills that will kill - last damage
+	protected boolean isAboutToDie = false;// for long animation skills that will kill
+	protected int killingBlow;// for long animation skills that will kill - last damage
 	protected T owner;
 	private final Lock hpLock = new ReentrantLock();
 	private final Lock mpLock = new ReentrantLock();
@@ -82,22 +82,26 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public void setIsAboutToDie(boolean value) {
 		this.isAboutToDie = value;
 	}
+
 	public boolean isAboutToDie() {
 		return this.isAboutToDie;
 	}
+
 	/**
 	 * @return the killingBlow
 	 */
 	public int getKillingBlow() {
 		return killingBlow;
 	}
+
 	/**
-	 * @param killingBlow the killingBlow to set
+	 * @param killingBlow
+	 *          the killingBlow to set
 	 */
 	public void setKillingBlow(int killingBlow) {
 		this.killingBlow = killingBlow;
 	}
-	
+
 	private void unsetIsAboutToDie() {
 		this.isAboutToDie = false;
 		this.killingBlow = 0;
@@ -112,9 +116,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return currentHp
 	 */
 	public int reduceHp(int value, @Nonnull Creature attacker) {
-		//this method doesnt send sm_attack_status packet
+		// this method doesnt send sm_attack_status packet
 		return reduceHp(null, value, 0, null, attacker);
 	}
+
 	public int reduceHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log, @Nonnull Creature attacker) {
 		Objects.requireNonNull(attacker, "attacker");
 
@@ -134,8 +139,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				}
 				this.currentHp = newHp;
 			}
-		}
-		finally {
+		} finally {
 			hpLock.unlock();
 		}
 		if (value != 0) {
@@ -155,9 +159,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return currentMp
 	 */
 	public int reduceMp(int value) {
-		//this method doesnt send sm_attack_status packet
+		// this method doesnt send sm_attack_status packet
 		return reduceMp(null, value, 0, null);
 	}
+
 	public int reduceMp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log) {
 		mpLock.lock();
 		try {
@@ -169,8 +174,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			}
 
 			this.currentMp = newMp;
-		}
-		finally {
+		} finally {
 			mpLock.unlock();
 		}
 		if (value != 0) {
@@ -192,7 +196,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return currentHp
 	 */
 	public int increaseHp(int value) {
-		return this.increaseHp(null, value, 0,  null);
+		return this.increaseHp(null, value, 0, null);
 	}
 
 	public int increaseHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log) {
@@ -215,17 +219,16 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				this.currentHp = newHp;
 				hpIncreased = true;
 			}
-		}
-		finally {
+		} finally {
 			hpLock.unlock();
 		}
 
 		if (hpIncreased) {
-			if (type == null)//just update packet
+			if (type == null)// just update packet
 				onIncreaseHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
 			else
 				onIncreaseHp(type, value, skillId, log);
-			
+
 			if (this.killingBlow != 0 && this.currentHp > this.killingBlow)
 				this.unsetIsAboutToDie();
 		}
@@ -259,8 +262,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				this.currentMp = newMp;
 				mpIncreased = true;
 			}
-		}
-		finally {
+		} finally {
 			mpLock.unlock();
 		}
 
@@ -293,8 +295,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			if (lifeRestoreTask == null && !isAlreadyDead()) {
 				lifeRestoreTask = LifeStatsRestoreService.getInstance().scheduleRestoreTask(this);
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 
@@ -310,8 +311,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				lifeRestoreTask.cancel(false);
 				lifeRestoreTask = null;
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}
@@ -335,8 +335,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * The purpose of this method is synchronize current HP and MP with updated MAXHP and MAXMP stats This method should
-	 * be called only on creature load to game or player level up
+	 * The purpose of this method is synchronize current HP and MP with updated MAXHP and MAXMP stats This method should be called only on creature load
+	 * to game or player level up
 	 */
 	public void synchronizeWithMaxStats() {
 		int maxHp = getMaxHp();
@@ -348,8 +348,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * The purpose of this method is synchronize current HP and MP with MAXHP and MAXMP when max stats were decreased
-	 * below current level
+	 * The purpose of this method is synchronize current HP and MP with MAXHP and MAXMP when max stats were decreased below current level
 	 */
 	public void updateCurrentStats() {
 		int maxHp = getMaxHp();
@@ -360,7 +359,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (maxMp < currentMp)
 			currentMp = maxMp;
 	}
-	
+
 	/**
 	 * @return HP percentage 0 - 100
 	 */
@@ -423,11 +422,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 			if (this.currentHp > 0) {
 				this.alreadyDead = false;
-				//just to be sure
+				// just to be sure
 				this.unsetIsAboutToDie();
 			}
-		}
-		finally {
+		} finally {
 			hpLock.unlock();
 		}
 	}
@@ -443,14 +441,13 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 			if (this.currentHp > 0) {
 				this.alreadyDead = false;
-				//just to be sure
+				// just to be sure
 				this.unsetIsAboutToDie();
 			}
 
 			if (this.currentHp < getMaxHp())
 				hpNotAtMaxValue = true;
-		}
-		finally {
+		} finally {
 			hpLock.unlock();
 		}
 		if (hpNotAtMaxValue) {
@@ -467,8 +464,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				newMp = 0;
 
 			this.currentMp = newMp;
-		}
-		finally {
+		} finally {
 			mpLock.unlock();
 		}
 		onReduceMp(SM_ATTACK_STATUS.TYPE.MP, 0, 0, SM_ATTACK_STATUS.LOG.REGULAR);
@@ -484,8 +480,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		mpLock.lock();
 		try {
 			this.currentMp = (int) (mpPercent / 100f * getMaxMp());
-		}
-		finally {
+		} finally {
 			mpLock.unlock();
 		}
 	}

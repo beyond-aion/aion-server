@@ -16,25 +16,24 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("scalding_executor")
 public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
-	
+
 	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
-	
+
 	@Override
 	public boolean canThink() {
 		return false;
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		setStateIfNot(AIState.FOLLOWING);
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
@@ -47,7 +46,7 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 					final int targetId = npc.getNpcId();
 					SkillEngine.getInstance().getSkill(getOwner(), 19928, 44, npc).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							if (!isAlreadyDead()) {
@@ -191,14 +190,14 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 								AI2Actions.deleteOwner(ScaldingExecutorAI2.this);
 							}
 						}
-						
+
 					}, 5300);
 				}
-				
+
 			}
 		}
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {
@@ -208,7 +207,7 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 				return AIAnswers.NEGATIVE;
 		}
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
@@ -222,7 +221,7 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 				return null;
 		}
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

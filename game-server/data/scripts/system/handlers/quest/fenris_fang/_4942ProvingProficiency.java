@@ -51,7 +51,7 @@ public class _4942ProvingProficiency extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Talk with Kvasir to choose the crafting skill
+			// 1 - Talk with Kvasir to choose the crafting skill
 				case 204053:
 					if (var == 0) {
 						switch (dialog) {
@@ -161,8 +161,7 @@ public class _4942ProvingProficiency extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								removeQuestItem(env, 186000085, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 3825);
 							}
 						}
@@ -175,13 +174,11 @@ public class _4942ProvingProficiency extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

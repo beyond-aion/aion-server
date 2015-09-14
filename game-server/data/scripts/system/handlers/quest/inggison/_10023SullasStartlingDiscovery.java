@@ -39,7 +39,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
 		return defaultOnZoneMissionEndEvent(env);
@@ -61,14 +61,12 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 					qs.setQuestVar(13);
 					updateQuestStatus(env);
 					return true;
-				}
-				else {
+				} else {
 					if (player.getInventory().getItemCountByItemId(182206613) == 0) {
 						return giveQuestItem(env, 182206613, 1);
 					}
 				}
-			}
-			else if (var >= 13 && var < 16) {
+			} else if (var >= 13 && var < 16) {
 				if (player.getWorldId() != 300160000) {
 					changeQuestStep(env, var, 12, false);
 					if (player.getInventory().getItemCountByItemId(182206613) == 0) {
@@ -111,11 +109,9 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 6) {
+							} else if (var == 6) {
 								return sendQuestDialog(env, 3057);
-							}
-							else if (var == 9) {
+							} else if (var == 9) {
 								return sendQuestDialog(env, 4080);
 							}
 						}
@@ -124,8 +120,8 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO7: {
 							if (defaultCloseDialog(env, 6, 7)) { // 7
-							  TeleportService2.teleportToNpc(player, 798513);
-							  return true;
+								TeleportService2.teleportToNpc(player, 798513);
+								return true;
 							}
 						}
 						case SETPRO10: {
@@ -155,9 +151,9 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 							}
 						}
 						case SETPRO8: {
-							if( defaultCloseDialog(env, 7, 8)) { // 8
-							  TeleportService2.teleportToNpc(player, 798225);
-							  return true;
+							if (defaultCloseDialog(env, 7, 8)) { // 8
+								TeleportService2.teleportToNpc(player, 798225);
+								return true;
 							}
 						}
 					}
@@ -172,8 +168,8 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO9: {
 							if (defaultCloseDialog(env, 8, 9)) { // 9
-							  TeleportService2.teleportToNpc(player, 798975);
-							  return true;
+								TeleportService2.teleportToNpc(player, 798975);
+								return true;
 							}
 						}
 					}
@@ -218,11 +214,9 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 									removeQuestItem(env, 182206613, 1);
 									WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300160000);
 									InstanceService.registerPlayerWithInstance(newInstance, player);
-									TeleportService2.teleportTo(player, 300160000, newInstance.getInstanceId(), 744.761f, 940.3738f,
-										149.28333f, (byte) 91);
+									TeleportService2.teleportTo(player, 300160000, newInstance.getInstanceId(), 744.761f, 940.3738f, 149.28333f, (byte) 91);
 									return true;
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 						}
@@ -257,7 +251,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 				}
 				case 700604: { // Hidden Switch
 					if (var == 13 && dialog == DialogAction.USE_OBJECT) {
-						QuestService.addNewSpawn(300160000, player.getInstanceId(), 216531, (float) 744.752, (float) 885.824,(float) 152.78523, (byte) 30);
+						QuestService.addNewSpawn(300160000, player.getInstanceId(), 216531, (float) 744.752, (float) 885.824, (float) 152.78523, (byte) 30);
 						return useQuestObject(env, 13, 14, false, 0); // 14
 					}
 					break;
@@ -270,13 +264,11 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798928) { // Yulia
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -291,7 +283,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
-		return  HandlerResult.fromBoolean(useQuestItem(env, item, 16, 16, true)); // reward
+		return HandlerResult.fromBoolean(useQuestItem(env, item, 16, 16, true)); // reward
 	}
 
 	@Override

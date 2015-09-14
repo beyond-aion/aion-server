@@ -37,7 +37,7 @@ import com.google.common.collect.Lists;
 public class SourceSiege extends Siege<SourceLocation> {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
-	
+
 	private final AbyssPointsListener addAPListener = new AbyssPointsListener(this);
 
 	public SourceSiege(SourceLocation siegeLocation) {
@@ -46,8 +46,9 @@ public class SourceSiege extends Siege<SourceLocation> {
 
 	@Override
 	protected void onSiegeStart() {
-		if(LoggingConfig.LOG_SIEGE)
-			log.info("[SIEGE] > Siege started. [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"+ getSiegeLocation().getLegionId()+"]");
+		if (LoggingConfig.LOG_SIEGE)
+			log.info("[SIEGE] > Siege started. [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"
+				+ getSiegeLocation().getLegionId() + "]");
 		getSiegeLocation().setPreparation(false);
 		getSiegeLocation().setVulnerable(true);
 		getSiegeLocation().setUnderShield(true);
@@ -60,12 +61,15 @@ public class SourceSiege extends Siege<SourceLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		if(LoggingConfig.LOG_SIEGE) {
+		if (LoggingConfig.LOG_SIEGE) {
 			SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
-			if(winner != null)
-				log.info("[SIEGE] > Siege finished. [SOURCE:" + getSiegeLocationId() + "] [OLD RACE: " + getSiegeLocation().getRace() + "] [OLD LegionId:"+ getSiegeLocation().getLegionId()+"] [NEW RACE: "+winner.getSiegeRace()+"] [NEW LegionId:"+(winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId())+"]");
+			if (winner != null)
+				log.info("[SIEGE] > Siege finished. [SOURCE:" + getSiegeLocationId() + "] [OLD RACE: " + getSiegeLocation().getRace() + "] [OLD LegionId:"
+					+ getSiegeLocation().getLegionId() + "] [NEW RACE: " + winner.getSiegeRace() + "] [NEW LegionId:"
+					+ (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
 			else
-				log.info("[SIEGE] > Siege finished. No winner found [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"+ getSiegeLocation().getLegionId()+"]");
+				log.info("[SIEGE] > Siege finished. No winner found [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace()
+					+ "] [LegionId:" + getSiegeLocation().getLegionId() + "]");
 		}
 		GlobalCallbackHelper.removeCallback(addAPListener);
 		unregisterSiegeBossListeners();
@@ -75,8 +79,7 @@ public class SourceSiege extends Siege<SourceLocation> {
 		if (isBossKilled()) {
 			onCapture();
 			broadcastUpdate(getSiegeLocation(), getSiegeLocation().getTemplate().getNameId());
-		}
-		else
+		} else
 			broadcastState(getSiegeLocation());
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.PEACE);
 		if (SiegeRace.BALAUR != getSiegeLocation().getRace())
@@ -84,7 +87,7 @@ public class SourceSiege extends Siege<SourceLocation> {
 		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
 		updateTiamarantaRiftsStatus(false, false);
 	}
-	
+
 	@Override
 	protected void initSiegeBoss() {
 
@@ -105,7 +108,7 @@ public class SourceSiege extends Siege<SourceLocation> {
 		if (boss == null) {
 			throw new SiegeException("Siege Boss not found for siege " + getSiegeLocationId());
 		}
-		
+
 		if (SiegeConfig.SOURCE_HEALTH_MOD_ENABLED) {
 			NpcTemplate templ = boss.getObjectTemplate();
 			if (templ.getRating().equals(NpcRating.LEGENDARY)) {
@@ -115,7 +118,7 @@ public class SourceSiege extends Siege<SourceLocation> {
 				life.setCurrentHpPercent(100);
 			}
 		}
-		
+
 		setBoss(boss);
 		registerSiegeBossListeners();
 	}
@@ -136,8 +139,7 @@ public class SourceSiege extends Siege<SourceLocation> {
 		// If new race is balaur
 		if (SiegeRace.BALAUR == winner.getSiegeRace()) {
 			getSiegeLocation().setLegionId(0);
-		}
-		else {
+		} else {
 			Integer topLegionId = winner.getWinnerLegionId();
 			getSiegeLocation().setLegionId(topLegionId != null ? topLegionId : 0);
 		}
@@ -160,13 +162,12 @@ public class SourceSiege extends Siege<SourceLocation> {
 				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 				++rewardedPC;
 				if (LoggingConfig.LOG_SIEGE) {
-					log.info("[SIEGE]  > [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Player Reward to: " +  playerNames.get(playerId) + "] ITEM RETURN "
-						+ topGrade.getItemId() + " ITEM COUNT " + topGrade.getMedalCount());
+					log.info("[SIEGE]  > [SOURCE:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Player Reward to: "
+						+ playerNames.get(playerId) + "] ITEM RETURN " + topGrade.getItemId() + " ITEM COUNT " + topGrade.getMedalCount());
 				}
-				MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level
-									, SiegeResult.OCCUPY, System.currentTimeMillis(), topGrade.getItemId()
-									,	topGrade.getMedalCount(), 0);
-				
+				MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, SiegeResult.OCCUPY, System.currentTimeMillis(), topGrade.getItemId(),
+					topGrade.getMedalCount(), 0);
+
 			}
 		}
 	}

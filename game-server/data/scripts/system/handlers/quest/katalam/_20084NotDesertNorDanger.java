@@ -16,9 +16,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20084NotDesertNorDanger extends QuestHandler {
 
 	private final static int questId = 20084;
-	
-	private final static int[] mobs = {230405, 230406};
-	
+
+	private final static int[] mobs = { 230405, 230406 };
 
 	public _20084NotDesertNorDanger() {
 		super(questId);
@@ -30,15 +29,15 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 		qe.registerQuestItem(182215234, questId);
 		qe.registerQuestNpc(206285).addOnAtDistanceEvent(questId);
 		qe.registerOnLevelUp(questId);
-        qe.registerOnEnterZone(ZoneName.get("LDF5A_SENSORYAREA_Q20084_206285_3_600050000"),questId);
-        for (int npcId : npcIds) {
+		qe.registerOnEnterZone(ZoneName.get("LDF5A_SENSORYAREA_Q20084_206285_3_600050000"), questId);
+		for (int npcId : npcIds) {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 20083);
@@ -50,18 +49,16 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800553) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (qs.getQuestVarById(0) == 1) {
+						} else if (qs.getQuestVarById(0) == 1) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (qs.getQuestVarById(0) == 6) {
+						} else if (qs.getQuestVarById(0) == 6) {
 							return sendQuestDialog(env, 2034);
 						}
 					}
@@ -75,8 +72,7 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 						return checkQuestItems(env, 1, 2, false, 10000, 10001);
 					}
 				}
-			}
-			else if (targetId == 800554) { 
+			} else if (targetId == 800554) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 7) {
@@ -85,11 +81,10 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 					}
 					case SETPRO5: {
 						giveQuestItem(env, 182215234, 1);
-						return defaultCloseDialog(env, 7, 8); 
+						return defaultCloseDialog(env, 7, 8);
 					}
 				}
-			}
-			else if (targetId == 801153) { 
+			} else if (targetId == 801153) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 9) {
@@ -97,11 +92,10 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 						}
 					}
 					case SETPRO7: {
-						return defaultCloseDialog(env, 9, 10); 
+						return defaultCloseDialog(env, 9, 10);
 					}
 				}
-			}
-			else if (targetId == 800555) { 
+			} else if (targetId == 800555) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 10) {
@@ -110,11 +104,10 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 					}
 					case SETPRO8: {
 						giveQuestItem(env, 182215238, 1);
-						return defaultCloseDialog(env, 10, 11); 
+						return defaultCloseDialog(env, 10, 11);
 					}
 				}
-			}
-			else if (targetId == 800565) { 
+			} else if (targetId == 800565) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 12) {
@@ -122,11 +115,10 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 						}
 					}
 					case SETPRO10: {
-						return defaultCloseDialog(env, 12, 13); 
+						return defaultCloseDialog(env, 12, 13);
 					}
 				}
-			}
-			else if (targetId == 701538) { 
+			} else if (targetId == 701538) {
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (qs.getQuestVarById(0) == 13) {
@@ -135,17 +127,15 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 					}
 					case SETPRO11: {
 						giveQuestItem(env, 182215239, 1);
-						return defaultCloseDialog(env, 13, 14, true, false); 
+						return defaultCloseDialog(env, 13, 14, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800545) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182215239, 1);
 					removeQuestItem(env, 182215238, 1);
 					return sendQuestEndDialog(env);
@@ -154,12 +144,12 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, mobs, 2, 6, 0);
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
@@ -167,11 +157,11 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 		if (qs != null && qs.getQuestVarById(0) == 8) {
 			changeQuestStep(env, 8, 9, false);
 			removeQuestItem(env, 182215234, 1);
-		  return HandlerResult.SUCCESS;
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -179,26 +169,27 @@ public class _20084NotDesertNorDanger extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (qs.getQuestVarById(0) == 11) {
 				changeQuestStep(env, 11, 12, false);
-	  		return true;
+				return true;
 			}
-  	}
+		}
 		return false;
 	}
-    @Override
-    public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-        if (zoneName == ZoneName.get("LDF5A_SENSORYAREA_Q20084_206285_3_600050000")) {
-            Player player = env.getPlayer();
-            if (player == null)
-                return false;
-            QuestState qs = player.getQuestStateList().getQuestState(questId);
-            if (qs != null && qs.getStatus() == QuestStatus.START) {
-                int var = qs.getQuestVarById(0);
-                if (var == 11) {
-                    changeQuestStep(env, 11, 12, false);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		if (zoneName == ZoneName.get("LDF5A_SENSORYAREA_Q20084_206285_3_600050000")) {
+			Player player = env.getPlayer();
+			if (player == null)
+				return false;
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs != null && qs.getStatus() == QuestStatus.START) {
+				int var = qs.getQuestVarById(0);
+				if (var == 11) {
+					changeQuestStep(env, 11, 12, false);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

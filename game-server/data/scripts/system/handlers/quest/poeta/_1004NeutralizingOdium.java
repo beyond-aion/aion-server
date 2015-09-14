@@ -64,15 +64,13 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 700030 && var == 1 || var == 4) {
+			} else if (targetId == 700030 && var == 1 || var == 4) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
 						if (qs.getQuestVarById(0) == 1) {
 							if (giveQuestItem(env, 182200005, 1))
 								qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-						}
-						else if (qs.getQuestVarById(0) == 4) {
+						} else if (qs.getQuestVarById(0) == 4) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							removeQuestItem(env, 182200005, 1);
 						}
@@ -80,8 +78,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 						sendEmotion(env, player, EmotionId.STAND, true);
 						return false;
 				}
-			}
-			else if (targetId == 790001) {
+			} else if (targetId == 790001) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
@@ -112,14 +109,12 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							qs.setQuestVarById(0, 11);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 1694);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1779);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067)
 				return sendQuestEndDialog(env);
 		}

@@ -21,7 +21,6 @@ public enum ACCURACY {
 	RIDER(100),
 	ARTIST(100),
 	BARD(100);
-	
 
 	private int value;
 

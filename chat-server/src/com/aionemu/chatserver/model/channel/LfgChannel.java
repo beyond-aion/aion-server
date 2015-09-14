@@ -6,10 +6,9 @@ import com.aionemu.chatserver.model.Race;
 /**
  * @author ATracer
  */
-public class LfgChannel extends RaceChannel
-{
-	public LfgChannel(Race race, String identifier)
-	{
+public class LfgChannel extends RaceChannel {
+
+	public LfgChannel(Race race, String identifier) {
 		super(ChannelType.GROUP, race, identifier);
 	}
 }

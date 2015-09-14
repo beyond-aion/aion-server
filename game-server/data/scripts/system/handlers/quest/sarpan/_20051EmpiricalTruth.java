@@ -87,8 +87,7 @@ public class _20051EmpiricalTruth extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -109,7 +108,7 @@ public class _20051EmpiricalTruth extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300390000);
-								InstanceService.registerPlayerWithInstance(newInstance, player); 
+								InstanceService.registerPlayerWithInstance(newInstance, player);
 								TeleportService2.teleportTo(player, 300390000, newInstance.getInstanceId(), 273.96478f, 217.55084f, 207.5269f, (byte) 60,
 									TeleportAnimation.BEAM_ANIMATION);
 								return true;
@@ -132,13 +131,11 @@ public class _20051EmpiricalTruth extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205617) { // Aimah
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

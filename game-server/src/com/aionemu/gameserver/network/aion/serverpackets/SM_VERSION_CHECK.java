@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
@@ -20,6 +19,7 @@ import com.aionemu.gameserver.services.EventService;
  * @modified by Novo, cura
  */
 public class SM_VERSION_CHECK extends AionServerPacket {
+
 	/**
 	 * Aion Client version
 	 */
@@ -43,11 +43,10 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 
 		if (MembershipConfig.CHARACTER_ADDITIONAL_ENABLE != 10 && MembershipConfig.CHARACTER_ADDITIONAL_COUNT > GSConfig.CHARACTER_LIMIT_COUNT) {
 			characterLimitCount = MembershipConfig.CHARACTER_ADDITIONAL_COUNT;
-		}
-		else {
+		} else {
 			characterLimitCount = GSConfig.CHARACTER_LIMIT_COUNT;
-		} 
-		
+		}
+
 		characterLimitCount *= NetworkController.getInstance().getServerCount();
 
 		if (GSConfig.CHARACTER_CREATION_MODE < 0 || GSConfig.CHARACTER_CREATION_MODE > 2)
@@ -66,16 +65,16 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		//aion 3.0.0.0 = 194
-		//aion 3.1.0.0 = 195
-		//aion 3.5.0.0 = 196
-		//aion 4.0.0.0 = 201
-		//aion 4.5.0.0 = 203
-		//aion 4.5.0.15 = 204
-		//aion 4.7.0.5 = 205
-		//aion 4.7.5.0 = 206
-		if(version < 206) {
-			//Send wrong client version
+		// aion 3.0.0.0 = 194
+		// aion 3.1.0.0 = 195
+		// aion 3.5.0.0 = 196
+		// aion 4.0.0.0 = 201
+		// aion 4.5.0.0 = 203
+		// aion 4.5.0.15 = 204
+		// aion 4.7.0.5 = 205
+		// aion 4.7.5.0 = 206
+		if (version < 206) {
+			// Send wrong client version
 			writeC(0x02);
 			return;
 		}
@@ -101,43 +100,42 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 				writeC(serverMode | 0x08);
 			else
 				writeC(serverMode);
-		}
-		else {
+		} else {
 			writeC(serverMode | characterCreateMode);
 		}
 		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond());// server time
-		writeH(350);//unk
-		writeH(2561);//unk
-		writeH(2561);//unk
-		writeH(5140);//unk
-		writeH(276);//unk
+		writeH(350);// unk
+		writeH(2561);// unk
+		writeH(2561);// unk
+		writeH(5140);// unk
+		writeH(276);// unk
 		writeH(2); // unk
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
 		writeC(EventService.getInstance().getEventType().getId());
-		writeC(0);//unk
-		writeC(0);//unk
+		writeC(0);// unk
+		writeC(0);// unk
 		writeD(0 * 65536); // negative server time offset (timeInSeconds * 2^16, accepts only positive numbers)
 		writeC(0x00);// unk (server time related)
 		writeC(0x00);// unk (server time related)
-		writeC(0x04);//unk
-		writeC(120);//unk
-		writeH(25233);//unk
+		writeC(0x04);// unk
+		writeC(120);// unk
+		writeH(25233);// unk
 		writeC(2);// 4.0
-		writeC(0x01);//unk
+		writeC(0x01);// unk
 		writeD(0);// 4.0
 		writeD(0);// 4.5
 		writeD(68536);// 4.5
-		writeC(0);//4.7
-		writeC(0);//4.7
-		writeC(1);//4.7
-		writeC(0);//4.7
-		writeC(0);//4.7
-		writeH(0);//4.7
-		writeC(0);//4.7
-		writeH(0x01);//its loop size
-		//for... chat servers?
+		writeC(0);// 4.7
+		writeC(0);// 4.7
+		writeC(1);// 4.7
+		writeC(0);// 4.7
+		writeC(0);// 4.7
+		writeH(0);// 4.7
+		writeC(0);// 4.7
+		writeH(0x01);// its loop size
+		// for... chat servers?
 		{
-			writeC(0x00);//spacer
+			writeC(0x00);// spacer
 			// if the correct ip is not sent it will not work
 			writeB(ChatService.getIp());
 			writeH(ChatService.getPort());

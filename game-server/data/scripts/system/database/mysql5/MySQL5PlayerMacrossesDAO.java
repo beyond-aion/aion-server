@@ -97,8 +97,7 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore MacroList data for player " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return new MacroList(macrosses);

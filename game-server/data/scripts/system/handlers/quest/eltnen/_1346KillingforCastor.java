@@ -21,7 +21,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _1346KillingforCastor extends QuestHandler {
 
 	private final static int questId = 1346;
-	private static Set<Integer> mob_ids =  new HashSet<Integer>();
+	private static Set<Integer> mob_ids = new HashSet<Integer>();
 
 	static {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
@@ -82,20 +82,17 @@ public class _1346KillingforCastor extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203965) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 9) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 1352);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203965) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 5);

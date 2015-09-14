@@ -10,16 +10,14 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 /**
  * @author Luzien
- * 
  */
 @AIName("templeSoul")
 public class SacrificialSoulAI2 extends GeneralNpcAI2 {
-	
+
 	private Npc boss;
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -31,7 +29,7 @@ public class SacrificialSoulAI2 extends GeneralNpcAI2 {
 			getMoveController().moveToTargetObject();
 		}
 	}
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -40,7 +38,7 @@ public class SacrificialSoulAI2 extends GeneralNpcAI2 {
 			AI2Actions.deleteOwner(this);
 		}
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
@@ -48,7 +46,7 @@ public class SacrificialSoulAI2 extends GeneralNpcAI2 {
 			AI2Actions.deleteOwner(this);
 		}
 	}
-	
+
 	@Override
 	public boolean canThink() {
 		return false;

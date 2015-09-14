@@ -1,8 +1,8 @@
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -61,8 +61,7 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 2) {
+							} else if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -71,8 +70,7 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 								changeQuestStep(env, 2, 3, true);
 								giveQuestItem(env, 182201027, 1);
 								return super.closeDialogWindow(env);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 10001);
 							}
 						}
@@ -122,13 +120,11 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203965) { // Castor
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

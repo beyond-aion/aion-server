@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,15 +11,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.cosmeticitems.CosmeticItemTemplate;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
  * @author xTz
  */
 @XmlRootElement(name = "cosmetic_items")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CosmeticItemsData {
+
 	@XmlElement(name = "cosmetic_item", type = CosmeticItemTemplate.class)
 	private List<CosmeticItemTemplate> templates;
 	private final Map<String, CosmeticItemTemplate> cosmeticItemTemplates = new ConcurrentHashMap<>();

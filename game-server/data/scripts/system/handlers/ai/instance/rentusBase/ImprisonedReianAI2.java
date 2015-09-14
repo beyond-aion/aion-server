@@ -19,16 +19,15 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("imprisoned_reian")
 public class ImprisonedReianAI2 extends GeneralNpcAI2 {
 
-private AtomicBoolean isSaved = new AtomicBoolean(false);
-private AtomicBoolean isAsked = new AtomicBoolean(false);
-private String walkerId;
-private WalkerTemplate template;
+	private AtomicBoolean isSaved = new AtomicBoolean(false);
+	private AtomicBoolean isAsked = new AtomicBoolean(false);
+	private String walkerId;
+	private WalkerTemplate template;
 
 	@Override
 	protected void handleSpawned() {

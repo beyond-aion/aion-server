@@ -52,11 +52,9 @@ public class CM_WINDSTREAM extends AionClientPacket {
 			case 8:
 				if (state == 0) {
 					player.unsetPlayerMode(PlayerMode.RIDE);
-				}
-				else if (state == 7) { // start boost
+				} else if (state == 7) { // start boost
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM_START_BOOST, 0, 0), true);
-				}
-				else if (state == 8) { // end boost
+				} else if (state == 8) { // end boost
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM_END_BOOST, 0, 0), true);
 				}
 				PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
@@ -78,7 +76,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				}
 				break;
 			case 2:
-			case 3: //leaving windstream
+			case 3: // leaving windstream
 				if (!player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
 					return;
 				}
@@ -88,12 +86,12 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.unsetFlyState(FlyState.GLIDING);
 				if (state == 2) {
 					player.getFlyController().switchToGliding();
-				} else 
+				} else
 					player.getGameStats().updateStatsAndSpeedVisually();
 				player.unsetPlayerMode(PlayerMode.WINDSTREAM);
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END
-						: EmotionType.WINDSTREAM_EXIT, 0, 0), true);
-				if (player.isTransformed()) //send sm_transform if player is transformed
+				PacketSendUtility.broadcastPacket(player,
+					new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT, 0, 0), true);
+				if (player.isTransformed()) // send sm_transform if player is transformed
 					PacketSendUtility.broadcastPacketAndReceive(player, new SM_TRANSFORM(player));
 				PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
 				break;

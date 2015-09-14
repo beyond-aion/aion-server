@@ -21,7 +21,7 @@ public class RandomBonus {
 	@XmlAttribute(required = true)
 	protected int id;
 
-	@XmlAttribute(name="type", required = true)
+	@XmlAttribute(name = "type", required = true)
 	private StatBonusType bonusType;
 
 	public List<ModifiersTemplate> getModifiers() {

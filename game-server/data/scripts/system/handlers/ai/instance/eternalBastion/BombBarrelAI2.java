@@ -15,10 +15,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class BombBarrelAI2 extends NpcAI2 {
 
 	private AtomicBoolean exploded = new AtomicBoolean(false);
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
-		if(exploded.compareAndSet(false, true)) {
+		if (exploded.compareAndSet(false, true)) {
 			AI2Actions.useSkill(this, 18407);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 

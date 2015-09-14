@@ -3,17 +3,15 @@ package com.aionemu.gameserver.model.challenge;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 
-
 /**
  * @author ViAl
- *
  */
 public class ChallengeQuest {
-	
+
 	private final ChallengeQuestTemplate template;
 	private int completeCount;
 	private PersistentState persistentState;
-	
+
 	/**
 	 * @param template
 	 * @param completeCount
@@ -26,7 +24,7 @@ public class ChallengeQuest {
 	public int getQuestId() {
 		return template.getId();
 	}
-	
+
 	public ChallengeQuestTemplate getQuestTemplate() {
 		return template;
 	}
@@ -42,7 +40,7 @@ public class ChallengeQuest {
 	public int getCompleteCount() {
 		return completeCount;
 	}
-	
+
 	public synchronized void increaseCompleteCount() {
 		this.completeCount++;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
@@ -53,7 +51,7 @@ public class ChallengeQuest {
 	}
 
 	public void setPersistentState(PersistentState persistentState) {
-		if(this.persistentState == PersistentState.NEW && persistentState == PersistentState.UPDATE_REQUIRED)
+		if (this.persistentState == PersistentState.NEW && persistentState == PersistentState.UPDATE_REQUIRED)
 			return;
 		this.persistentState = persistentState;
 	}

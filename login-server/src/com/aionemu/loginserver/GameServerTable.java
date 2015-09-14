@@ -70,8 +70,8 @@ public class GameServerTable {
 	 *          server password that is specified configs, used to check if gs can auth on ls
 	 * @return GsAuthResponse
 	 */
-	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] defaultAddress,
-		List<IPRange> ipRanges, int port, int maxPlayers, String password) {
+	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] defaultAddress, List<IPRange> ipRanges,
+		int port, int maxPlayers, String password) {
 		GameServerInfo gsi = gameservers.get(requestedId);
 
 		/**
@@ -92,8 +92,8 @@ public class GameServerTable {
 		 * Check if password and ip are ok.
 		 */
 		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIp(), gsConnection.getIP())) {
-			
-			log.info(gsi.getPassword() + " "+password);
+
+			log.info(gsi.getPassword() + " " + password);
 			log.info(gsConnection + " wrong ip or password!");
 			return GsAuthResponse.NOT_AUTHED;
 		}
@@ -157,7 +157,7 @@ public class GameServerTable {
 	private static GameServersDAO getDAO() {
 		return DAOManager.getDAO(GameServersDAO.class);
 	}
-	
+
 	public static void pong(byte serverId, int pid) {
 		for (GameServerInfo gsi : getGameServers()) {
 			if (gsi.getId() == serverId) {

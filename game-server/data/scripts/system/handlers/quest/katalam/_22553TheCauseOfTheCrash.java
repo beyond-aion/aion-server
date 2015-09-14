@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _22553TheCauseOfTheCrash extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _22553TheCauseOfTheCrash extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801005).addOnQuestStart(questId);
 		qe.registerQuestNpc(801005).addOnTalkEvent(questId);
@@ -35,26 +34,22 @@ public class _22553TheCauseOfTheCrash extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801005) { 
+			if (targetId == 801005) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 730778) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 730778) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialog == DialogAction.SET_SUCCEED) {
 					return defaultCloseDialog(env, 1, 2, true, false);
 				}
 			}
-		}	
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801005) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -68,19 +63,18 @@ public class _22553TheCauseOfTheCrash extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if(var == 0)
-  			changeQuestStep(env, 0, 1, false);
-  		return true;
-  		
-  	}
+			int var = qs.getQuestVarById(0);
+			if (var == 0)
+				changeQuestStep(env, 0, 1, false);
+			return true;
+
+		}
 		return false;
 	}
 }
-

@@ -70,7 +70,7 @@ public class MySQL5HouseScriptsDAO extends HouseScriptsDAO {
 			log.error("Could not delete script for houseId: " + houseId + " from DB: " + e.getMessage(), e);
 		}
 	}
-	
+
 	private boolean addScript(PlayerScripts scripts, int id, String scriptXML) throws Exception {
 		if (scriptXML == null || scriptXML.length() == 0) {
 			return scripts.set(id, new byte[0], 0, false);

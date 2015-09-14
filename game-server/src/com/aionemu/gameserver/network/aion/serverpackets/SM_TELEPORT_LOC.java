@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -35,7 +34,7 @@ public class SM_TELEPORT_LOC extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(portAnimation); // portAnimation
-		writeD(mapId);//new 4.3 NA    -->old //writeH(mapId & 0xFFFF);
+		writeD(mapId);// new 4.3 NA -->old //writeH(mapId & 0xFFFF);
 		writeD(isInstance ? instanceId : mapId); // mapId | instanceId
 		writeF(x); // x
 		writeF(y); // y

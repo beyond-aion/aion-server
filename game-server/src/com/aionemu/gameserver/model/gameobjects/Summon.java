@@ -35,12 +35,12 @@ public class Summon extends Creature {
 	private int liveTime;
 	private Queue<SkillOrder> skillOrders = new LinkedList<>();
 	private Future<?> releaseTask;
-	
+
 	/**
 	 * summoned by skill id
 	 */
 	private int summonedBySkillId;
-	
+
 	/**
 	 * @param objId
 	 * @param controller
@@ -49,8 +49,8 @@ public class Summon extends Creature {
 	 * @param position
 	 * @param level
 	 */
-	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate,
-			NpcTemplate objectTemplate, byte level, int time) {
+	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level,
+		int time) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
 		String ai = objectTemplate.getAi();
@@ -58,8 +58,7 @@ public class Summon extends Creature {
 		moveController = ai.equals("siege_weapon") ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
 		this.level = level;
 		this.liveTime = time;
-		SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(),
-			level);
+		SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(), level);
 		setGameStats(new SummonGameStats(this, statsTemplate));
 		setLifeStats(new SummonLifeStats(this));
 	}
@@ -161,7 +160,7 @@ public class Summon extends Creature {
 	@Override
 	public TribeClass getTribe() {
 		if (master == null)
-			return ((NpcTemplate)objectTemplate).getTribe();
+			return ((NpcTemplate) objectTemplate).getTribe();
 		return master.getTribe();
 	}
 
@@ -188,12 +187,13 @@ public class Summon extends Creature {
 	}
 
 	/**
-	 * @param liveTime in sec.
+	 * @param liveTime
+	 *          in sec.
 	 */
 	public void setLiveTime(int liveTime) {
 		this.liveTime = liveTime;
 	}
-	
+
 	/**
 	 * @return the summonedBySkillId
 	 */
@@ -201,9 +201,9 @@ public class Summon extends Creature {
 		return summonedBySkillId;
 	}
 
-	
 	/**
-	 * @param summonedBySkillId the summonedBySkillId to set
+	 * @param summonedBySkillId
+	 *          the summonedBySkillId to set
 	 */
 	public void setSummonedBySkillId(int summonedBySkillId) {
 		this.summonedBySkillId = summonedBySkillId;

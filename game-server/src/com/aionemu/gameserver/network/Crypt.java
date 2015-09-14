@@ -31,8 +31,8 @@ public class Crypt {
 	private EncryptionKeyPair packetKey = null;
 
 	/**
-	 * Enable crypt key - generate random key that will be used to encrypt second server packet [first one is unencrypted]
-	 * and decrypt client packets. This method is called from SM_KEY server packet, that packet sends key to aion client.
+	 * Enable crypt key - generate random key that will be used to encrypt second server packet [first one is unencrypted] and decrypt client packets.
+	 * This method is called from SM_KEY server packet, that packet sends key to aion client.
 	 * 
 	 * @return "false key" that should by used by aion client to encrypt/decrypt packets.
 	 */

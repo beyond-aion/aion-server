@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author -Nemesiss-
  */
 public abstract class AionServerPacket extends BaseServerPacket {
+
 	/**
 	 * Constructs new server packet
 	 */
@@ -29,7 +30,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	private final void writeOP(int value) {
 		/** obfuscate packet id */
 		int op = Crypt.encodeOpcodec(value);
-		buf.putShort((short)(op));
+		buf.putShort((short) (op));
 		/** put static server packet code */
 		buf.put(Crypt.staticServerPacketCode);
 
@@ -50,7 +51,8 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	public final void write(AionConnection con, ByteBuffer buffer) {
 		if (con.getState().equals(AionConnection.State.IN_GAME) && con.getActivePlayer().getPlayerAccount().getMembership() == 10) {
 			if (!this.getPacketName().equals("SM_MESSAGE")) {
-				PacketSendUtility.sendMessage(con.getActivePlayer(), "0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());
+				PacketSendUtility.sendMessage(con.getActivePlayer(),
+					"0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());
 			}
 		}
 
@@ -74,12 +76,11 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	protected void writeImpl(AionConnection con) {
 
 	}
-	
-	public final ByteBuffer getBuf()
-	{
+
+	public final ByteBuffer getBuf() {
 		return this.buf;
 	}
-	
+
 	/**
 	 * Write String to buffer
 	 * 
@@ -89,17 +90,15 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	protected final void writeS(String text, int size) {
 		if (text == null) {
 			buf.put(new byte[size]);
-		}
-		else {
+		} else {
 			final int len = text.length();
 			for (int i = 0; i < len; i++)
 				buf.putChar(text.charAt(i));
-			buf.put(new byte[size-(len*2)]);
+			buf.put(new byte[size - (len * 2)]);
 		}
 	}
 
-	protected void writeNameId(int nameId)
-	{
+	protected void writeNameId(int nameId) {
 		writeH(0x24);
 		writeD(nameId);
 		writeH(0x00);

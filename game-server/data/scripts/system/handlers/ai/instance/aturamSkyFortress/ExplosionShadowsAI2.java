@@ -14,7 +14,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 @AIName("explosion_shadows")
@@ -42,27 +41,27 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
 	private void doSchedule() {
 		if (!isAlreadyDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					if (!isAlreadyDead()) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19425, 49, getOwner()).useNoAnimationSkill();
 
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
-							
+
 							@Override
 							public void run() {
 								if (!isAlreadyDead()) {
 									check();
 								}
 							}
-							
+
 						}, 1500);
 					}
 				}
-				
+
 			}, 3000);
-			
+
 		}
 	}
 

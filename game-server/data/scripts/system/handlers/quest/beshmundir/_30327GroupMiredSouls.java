@@ -39,13 +39,12 @@ public class _30327GroupMiredSouls extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-			
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 799244) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -63,7 +62,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							}
 						}
-						case SETPRO1: 
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
 				}
@@ -76,8 +75,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799244) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -93,7 +91,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		final Player player = env.getPlayer();

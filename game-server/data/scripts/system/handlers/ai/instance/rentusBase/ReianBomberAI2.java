@@ -18,7 +18,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("reian_bomber")
@@ -42,8 +41,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 		super.handleMoveArrived();
 		if (hasArrivedBoss.get()) {
 			startHelpEvent();
-		}
-		else if (point == 7 && hasArrivedBoss.compareAndSet(false, true)) {
+		} else if (point == 7 && hasArrivedBoss.compareAndSet(false, true)) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			startHelpEvent();
@@ -62,16 +60,16 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 				if (!isAlreadyDead()) {
 					setSubStateIfNot(AISubState.WALK_RANDOM);
 					setStateIfNot(AIState.WALKING);
-					switch(position) {
+					switch (position) {
 						case 1:
 							help(359.763f, 585.597f, 145.525f);
 							getMoveController().moveToPoint(346.47787f, 604.0337f, 145.8766f);
-							position ++;
+							position++;
 							break;
 						case 2:
 							help(346.086f, 597.062f, 146.119f);
 							getMoveController().moveToPoint(370.93597f, 607.6427f, 145.41916f);
-							position ++;
+							position++;
 							break;
 						case 3:
 							help(362.143f, 604.723f, 146.125f);
@@ -82,7 +80,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 				}
 			}
 		}, 8000);
-		
+
 	}
 
 	private void deleteNpc(Npc npc) {

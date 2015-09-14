@@ -45,12 +45,10 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 790001) {
+		} else if (targetId == 790001) {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				long itemCount;
 				switch (env.getDialog()) {
@@ -65,8 +63,7 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 							removeQuestItem(env, 182200218, 1);
 							removeQuestItem(env, 182200216, 1);
 							return sendQuestDialog(env, 1523);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1608);
 
 					case SETPRO2:
@@ -78,8 +75,7 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 							removeQuestItem(env, 182200219, 1);
 							removeQuestItem(env, 182200216, 1);
 							return sendQuestDialog(env, 1438);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1608);
 					case SETPRO3:
 						itemCount = player.getInventory().getItemCountByItemId(182200220);
@@ -90,18 +86,15 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 							removeQuestItem(env, 182200220, 1);
 							removeQuestItem(env, 182200216, 1);
 							return sendQuestDialog(env, 1353);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1608);
 					default:
 						return sendQuestStartDialog(env);
 				}
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 					return sendQuestDialog(env, 4 + qs.getQuestVars().getQuestVars());
-				}
-				else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+				} else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 					QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;

@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.model.items;
 
-import com.aionemu.commons.database.dao.DAOManager;
+import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -23,8 +24,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import java.util.Collections;
 
 /**
  * @author ATracer
@@ -53,8 +52,7 @@ public class GodStone extends ItemStone {
 			probabilityLeft = godstoneInfo.getProbabilityleft();
 			breakProb = godstoneInfo.getBreakProb();
 			nonBreakCount = godstoneInfo.getNonBreakCount();
-		}
-		else {
+		} else {
 			probability = 0;
 			probabilityLeft = 0;
 			breakProb = 0;
@@ -79,20 +77,21 @@ public class GodStone extends ItemStone {
 			@Override
 			public void attack(Creature creature) {
 				if (handProbability > Rnd.get(0, 1000)) {
-					Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(),
-						godstoneInfo.getSkilllvl(), player.getTarget(), godItem);
+					Skill skill = SkillEngine.getInstance()
+						.getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), player.getTarget(), godItem);
 					skill.setFirstTargetRangeCheck(false);
 					if (skill.canUseSkill(CastState.CAST_START)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
 						Effect effect = new Effect(player, creature, skill.getSkillTemplate(), 1, 0, godItem);
-						effect.initialize();			
+						effect.initialize();
 						effect.applyEffect();
 						effect = null;
-						//Illusion Godstones TODO: implement nonBreakCount check and procc counter in DB
-						if (breakProb > 0 && Rnd.get(0,1000) < breakProb) {
-						   //TODO: Delay 10 Minutes, send messages etc
-						   //PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(), godItem.getNameId()));
-						   breakGodstone(player, equippedItem);
+						// Illusion Godstones TODO: implement nonBreakCount check and procc counter in DB
+						if (breakProb > 0 && Rnd.get(0, 1000) < breakProb) {
+							// TODO: Delay 10 Minutes, send messages etc
+							// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
+							// godItem.getNameId()));
+							breakGodstone(player, equippedItem);
 						}
 					}
 				}
@@ -110,13 +109,13 @@ public class GodStone extends ItemStone {
 			player.getObserveController().removeObserver(actionListener);
 
 	}
-	
+
 	private void breakGodstone(Player player, Item item) {
-	   PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(item.getNameId(), godItem.getNameId()));
-	   this.setPersistentState(PersistentState.DELETED);
-	   onUnEquip(player);
-	   item.setGodStone(null);
-	   DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(item));
-	   ItemPacketService.updateItemAfterInfoChange(player, item);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(item.getNameId(), godItem.getNameId()));
+		this.setPersistentState(PersistentState.DELETED);
+		onUnEquip(player);
+		item.setGodStone(null);
+		DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(item));
+		ItemPacketService.updateItemAfterInfoChange(player, item);
 	}
 }

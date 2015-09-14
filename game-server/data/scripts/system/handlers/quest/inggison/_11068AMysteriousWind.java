@@ -52,8 +52,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 			if (targetId == 799025) {
 				return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 799026) {
@@ -71,8 +70,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 799025) {
+		} else if (targetId == 799025) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

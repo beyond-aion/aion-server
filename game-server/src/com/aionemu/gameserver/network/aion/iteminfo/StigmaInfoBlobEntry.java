@@ -23,19 +23,19 @@ public class StigmaInfoBlobEntry extends ItemBlobEntry {
 		Item item = ownerItem;
 		Stigma stigma = item.getItemTemplate().getStigma();
 
-		writeD(buf, stigma.getSkills().get(0).getSkillId());		// skill id 1
+		writeD(buf, stigma.getSkills().get(0).getSkillId()); // skill id 1
 		if (stigma.getSkills().size() >= 2)
-			writeD(buf, stigma.getSkills().get(1).getSkillId());	// skill id 2
+			writeD(buf, stigma.getSkills().get(1).getSkillId()); // skill id 2
 		else
 			writeD(buf, 0);
 
 		writeD(buf, stigma.getShard());
 
 		skip(buf, 192);
-		writeH(buf, 0x1);	// unk
+		writeH(buf, 0x1); // unk
 		writeH(buf, 0);
 		skip(buf, 96);
-		writeH(buf, 0);		// unk
+		writeH(buf, 0); // unk
 	}
 
 	@Override

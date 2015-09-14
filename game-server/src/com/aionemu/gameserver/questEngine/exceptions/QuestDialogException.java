@@ -16,10 +16,10 @@ public class QuestDialogException extends RuntimeException {
 
 	public QuestDialogException(QuestEnv env) {
 		super(new String("Info: QuestID: " + env.getQuestId() + ", DialogID: " + env.getDialogId()
-			+ env.getVisibleObject().getObjectTemplate().getTemplateId() == null ? "0" : ", TargetID: "
-			+ env.getVisibleObject().getObjectTemplate().getTemplateId() + "."
-			+ env.getPlayer().getQuestStateList().getQuestState(env.getQuestId()) == null ? " QuestState not initialized."
-			: " QuestState: " + env.getPlayer().getQuestStateList().getQuestState(env.getQuestId()).getStatus().toString()
+			+ env.getVisibleObject().getObjectTemplate().getTemplateId() == null ? "0"
+			: ", TargetID: " + env.getVisibleObject().getObjectTemplate().getTemplateId() + "."
+				+ env.getPlayer().getQuestStateList().getQuestState(env.getQuestId()) == null ? " QuestState not initialized." : " QuestState: "
+				+ env.getPlayer().getQuestStateList().getQuestState(env.getQuestId()).getStatus().toString()
 				+ env.getPlayer().getQuestStateList().getQuestState(env.getQuestId()).getQuestVarById(0)));
 	}
 }

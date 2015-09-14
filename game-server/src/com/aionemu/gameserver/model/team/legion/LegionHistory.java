@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.team.legion;
 
 import java.sql.Timestamp;
 
-
 /**
  * @author Simple, xTz
  */

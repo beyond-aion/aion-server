@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _3036LetSeeWhatItDoes extends QuestHandler {
 
@@ -20,6 +18,7 @@ public class _3036LetSeeWhatItDoes extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798155).addOnQuestStart(questId);
 		qe.registerQuestNpc(798155).addOnTalkEvent(questId);
@@ -34,22 +33,19 @@ public class _3036LetSeeWhatItDoes extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798155) { 
+			if (targetId == 798155) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182208026, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700398) {
 				removeQuestItem(env, 182208026, 1);
 				return useQuestObject(env, 0, 1, true, false);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798155) {
 				switch (dialog) {
 					case USE_OBJECT: {

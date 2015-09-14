@@ -40,7 +40,7 @@ public class _30210WritteninBlood extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
 
@@ -54,14 +54,12 @@ public class _30210WritteninBlood extends QuestHandler {
 						removeQuestItem(env, 182209613, 30);
 						changeQuestStep(env, 0, 0, true, 0);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				}
 				return false;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798941) {
 				switch (dialog) {
 					case USE_OBJECT:

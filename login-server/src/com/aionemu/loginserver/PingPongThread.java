@@ -21,51 +21,47 @@ public class PingPongThread implements Runnable {
 	private byte requests = 0;
 	private int serverPID = -1;
 	private boolean killProcess = false;
-	
-	public PingPongThread(GsConnection connection)
-	{
-		this.uptime = true;	
+
+	public PingPongThread(GsConnection connection) {
+		this.uptime = true;
 		this.connection = connection;
 		this.ping = new SM_PING();
 	}
-	
+
 	@Override
-	public void run()
-	{
-		log.info("PingPong for gameserver #"+this.connection.getGameServerInfo().getId()+" has started.");
-		while(uptime)
-		{
+	public void run() {
+		log.info("PingPong for gameserver #" + this.connection.getGameServerInfo().getId() + " has started.");
+		while (uptime) {
 			try {
 				Thread.sleep(Config.PINGPONG_DELAY);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			if(!uptime || validateResponse())
+
+			if (!uptime || validateResponse())
 				return;
-			
+
 			try {
 				connection.sendPacket(ping);
 				requests++;
-			}
-			catch(Exception ex) {
-				log.error("PingThread#"+connection.getGameServerInfo().getId(), ex);
+			} catch (Exception ex) {
+				log.error("PingThread#" + connection.getGameServerInfo().getId(), ex);
 			}
 		}
 	}
-	
+
 	public void onResponse(int pid) {
 		requests--;
 		this.serverPID = pid;
 	}
-	
+
 	public boolean validateResponse() {
-		if(requests >= 2) {
+		if (requests >= 2) {
 			uptime = false;
-			log.info("Gameserver #"+connection.getGameServerInfo().getId()+" [PID="+this.serverPID+"] died, closing.");
+			log.info("Gameserver #" + connection.getGameServerInfo().getId() + " [PID=" + this.serverPID + "] died, closing.");
 			connection.close();
-			if(killProcess && serverPID != -1) {
-				if(System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
+			if (killProcess && serverPID != -1) {
+				if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
 					try {
 						Runtime.getRuntime().exec("taskkill /pid " + serverPID + " /f");
 					} catch (IOException e) {
@@ -74,11 +70,10 @@ public class PingPongThread implements Runnable {
 				}
 			}
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
-	
+
 	public void closeMe() {
 		uptime = false;
 	}

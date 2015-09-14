@@ -30,7 +30,7 @@ public class FpAttackEffect extends AbstractOverTimeEffect {
 		int newValue = value;
 		// Support for values in percentage
 		if (percent)
-			newValue = (int) ((maxFP * value) / 100);
+			newValue = (maxFP * value) / 100;
 		effected.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.REGULAR);
 	}
 }

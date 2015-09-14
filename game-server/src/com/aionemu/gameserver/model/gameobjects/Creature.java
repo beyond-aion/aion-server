@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastMap;
 
@@ -38,8 +39,6 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * This class is representing movable objects, its base class for all in game objects that may move
  * 
@@ -47,7 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class Creature extends VisibleObject {
 
-	//private static final Logger log = LoggerFactory.getLogger(Creature.class);
+	// private static final Logger log = LoggerFactory.getLogger(Creature.class);
 
 	protected AI2 ai2;
 	private boolean isDespawnDelayed = false;
@@ -89,8 +88,8 @@ public abstract class Creature extends VisibleObject {
 	 * @param objectTemplate
 	 * @param position
 	 */
-	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate,
-		VisibleObjectTemplate objectTemplate, WorldPosition position) {
+	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
+		WorldPosition position) {
 		super(objId, controller, spawnTemplate, objectTemplate, position);
 		this.observeController = new ObserveController();
 		this.setTransformModel(new TransformModel(this));
@@ -415,7 +414,7 @@ public abstract class Creature extends VisibleObject {
 	public final void setTransformModel(TransformModel model) {
 		this.transformModel = model;
 	}
-	
+
 	public void setTransformed(boolean value) {
 		this.getTransformModel().apply(0);
 	}
@@ -432,39 +431,13 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * PacketBroadcasterMask
-	 
-	private volatile byte packetBroadcastMask;
-
-	 * This is adding broadcast to player.
-	 *
-	public final void addPacketBroadcastMask(BroadcastMode mode) {
-		packetBroadcastMask |= mode.mask();
-
-		PacketBroadcaster.getInstance().add(this);
-
-		// Debug
-		if (log.isDebugEnabled())
-			log.debug("PacketBroadcaster: Packet " + mode.name() + " added to player " + this.getName());
-	}
-	
-
-	 * This is removing broadcast from player.
-	public final void removePacketBroadcastMask(BroadcastMode mode) {
-		packetBroadcastMask &= ~mode.mask();
-
-		// Debug
-		if (log.isDebugEnabled())
-			log.debug("PacketBroadcaster: Packet " + mode.name() + " removed from player " + this.getName()); // fix
-																																																				// ClassCastException
-	}
-
-	 * Broadcast getter.
-	 
-	public final byte getPacketBroadcastMask() {
-		return packetBroadcastMask;
-	}
-	*/
+	 * PacketBroadcasterMask private volatile byte packetBroadcastMask; This is adding broadcast to player. public final void
+	 * addPacketBroadcastMask(BroadcastMode mode) { packetBroadcastMask |= mode.mask(); PacketBroadcaster.getInstance().add(this); // Debug if
+	 * (log.isDebugEnabled()) log.debug("PacketBroadcaster: Packet " + mode.name() + " added to player " + this.getName()); } This is removing broadcast
+	 * from player. public final void removePacketBroadcastMask(BroadcastMode mode) { packetBroadcastMask &= ~mode.mask(); // Debug if
+	 * (log.isDebugEnabled()) log.debug("PacketBroadcaster: Packet " + mode.name() + " removed from player " + this.getName()); // fix //
+	 * ClassCastException } Broadcast getter. public final byte getPacketBroadcastMask() { return packetBroadcastMask; }
+	 */
 
 	/**
 	 * @return the observeController
@@ -659,14 +632,15 @@ public abstract class Creature extends VisibleObject {
 			skillCoolDownsBase = new ConcurrentHashMap<>();
 		skillCoolDownsBase.put(cooldownId, baseTime);
 	}
-	
+
 	/**
 	 * completly sets cooldown for given skillId, used for summon skills
+	 * 
 	 * @param skillId
 	 */
 	public void resetSkillCoolDown(int skillId) {
-		SkillTemplate st =  DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		
+		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+
 		if (st != null && st.getCooldown() > 0) {
 			setSkillCoolDown(st.getCooldownId(), st.getCooldown() * 100 + System.currentTimeMillis());
 			setSkillCoolDownBase(st.getCooldownId(), System.currentTimeMillis());
@@ -793,16 +767,15 @@ public abstract class Creature extends VisibleObject {
 
 	private boolean isCurrentZonePvp(int pvpValue) {
 		boolean isPvpAllowed = World.getInstance().getWorldMap(getWorldId()).isPvpAllowed();
-		if(isPvpAllowed && pvpValue == 0){
+		if (isPvpAllowed && pvpValue == 0) {
 			return true;
-		}
-		else if (pvpValue != 1) {
+		} else if (pvpValue != 1) {
 			return false;
-		}
-		else {
+		} else {
 			List<ZoneInstance> zones = getPosition().getMapRegion().getZones(this);
 			for (ZoneInstance zone : zones) {
-				if (zone.getZoneTemplate().getZoneType().equals(ZoneClassName.PVP) && !((zone.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0)) {
+				if (zone.getZoneTemplate().getZoneType().equals(ZoneClassName.PVP)
+					&& !((zone.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0)) {
 					return false;
 				}
 			}
@@ -831,8 +804,8 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	* @return
-	*/
+	 * @return
+	 */
 	public boolean isRaidMonster() {
 		return false;
 	}

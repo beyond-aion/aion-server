@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.siege;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javolution.util.FastMap;
 
@@ -127,18 +128,18 @@ public class SiegeLocation implements ZoneHandler {
 	public boolean isUnderShield() {
 		return this.isUnderShield;
 	}
-	
-	public int getOccupiedCount() {
-	  return occupiedCount;
-   }
-	
-   public void increaseOccupiedCount() {
-	  this.occupiedCount += 1;
-   }
 
-   public void setOccupiedCount(int occupiedCount) {
-	  this.occupiedCount = occupiedCount;
-   }
+	public int getOccupiedCount() {
+		return occupiedCount;
+	}
+
+	public void increaseOccupiedCount() {
+		this.occupiedCount += 1;
+	}
+
+	public void setOccupiedCount(int occupiedCount) {
+		this.occupiedCount = occupiedCount;
+	}
 
 	/**
 	 * @param value
@@ -167,9 +168,10 @@ public class SiegeLocation implements ZoneHandler {
 			return canTeleport;
 		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
 	}
-	
+
 	/**
 	 * Validates Gp Rewards for location. Will return false, if some gp attributes are missing.
+	 * 
 	 * @return default true
 	 */
 	public boolean hasValidGpRewards() {
@@ -255,14 +257,13 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (FastMap.Entry<Integer, Player> e = players.head(), mapEnd = players.tail(); (e = e.getNext()) != mapEnd;) {
+			for (Entry<Integer, Player> e : players.entrySet()) {
 				Player player = e.getValue();
 				if (player != null) {
 					visitor.visit(player);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players" + ex);
 		}
 	}

@@ -33,13 +33,13 @@ public class EventsConfig {
 	 */
 	@Property(key = "gameserver.event.item.elyos", defaultValue = "141000001")
 	public static int EVENT_ITEM_ELYOS;
-	
+
 	@Property(key = "gameserver.event.item.asmo", defaultValue = "141000001")
 	public static int EVENT_ITEM_ASMO;
 
 	@Property(key = "gameserver.events.givejuice", defaultValue = "160009017")
 	public static int EVENT_GIVEJUICE;
-	
+
 	@Property(key = "gameserver.events.givecake", defaultValue = "160010073")
 	public static int EVENT_GIVECAKE;
 
@@ -48,7 +48,7 @@ public class EventsConfig {
 
 	@Property(key = "gameserver.event.service.enable", defaultValue = "false")
 	public static boolean ENABLE_EVENT_SERVICE;
-	
+
 	/**
 	 * Event Arcade Upgrade
 	 */
@@ -57,7 +57,7 @@ public class EventsConfig {
 
 	@Property(key = "gameserver.event.arcade.chance", defaultValue = "50")
 	public static int EVENT_ARCADE_CHANCE;
-	
+
 	/**
 	 * Monster Raid
 	 */

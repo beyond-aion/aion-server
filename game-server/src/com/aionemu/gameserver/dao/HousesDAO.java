@@ -16,12 +16,13 @@ public abstract class HousesDAO implements IDFactoryAwareDAO {
 		return HousesDAO.class.getName();
 	}
 
+	@Override
 	public abstract boolean supports(String databaseName, int majorVersion, int minorVersion);
 
 	public abstract boolean isIdUsed(int houseObjectId);
 
 	public abstract void storeHouse(House house);
-	
+
 	public abstract Map<Integer, House> loadHouses(Collection<HousingLand> lands, boolean studios);
 
 	public abstract void deleteHouse(int playerId);

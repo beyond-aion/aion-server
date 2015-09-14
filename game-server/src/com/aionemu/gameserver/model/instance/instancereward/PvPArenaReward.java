@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,20 +25,19 @@ import com.aionemu.gameserver.model.instance.instanceposition.HarmonyInstancePos
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreInfo;
 import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
 import com.aionemu.gameserver.network.aion.instanceinfo.DisciplineScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	private Map<Integer, Boolean> positions = new HashMap<Integer, Boolean>();
-	private FastList<Integer> zones = new FastList<Integer>();
+	private FastTable<Integer> zones = new FastTable<Integer>();
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;
@@ -54,25 +53,21 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		boolean isSolo = isSoloArena();
 		capPoints = isSolo ? 14400 : 50000;
 		bonusTime = isSolo ? 8100 : 12000;
-		Collections.addAll(zones, isSolo ? new Integer[]{1, 2, 3, 4}
-				: new Integer[]{1, 2, 3, 4, 5, 6});
+		Collections.addAll(zones, isSolo ? new Integer[] { 1, 2, 3, 4 } : new Integer[] { 1, 2, 3, 4, 5, 6 });
 		int positionSize;
 		if (isSolo) {
 			positionSize = 4;
 			buffId = 8;
 			instancePosition = new DisciplineInstancePosition();
-		}
-		else if (isGlory()) {
+		} else if (isGlory()) {
 			buffId = 7;
 			positionSize = 8;
 			instancePosition = new GloryInstancePosition();
-		}
-		else if (mapId == 300450000 || mapId == 300570000) {
+		} else if (mapId == 300450000 || mapId == 300570000) {
 			buffId = 7;
 			positionSize = 12;
 			instancePosition = new HarmonyInstancePosition();
-		}
-		else {
+		} else {
 			buffId = 7;
 			positionSize = 12;
 			instancePosition = new ChaosInstancePosition();
@@ -159,7 +154,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		playerReward.applyBoostMoraleEffect(player);
 		instancePosition.port(player, zone, playerReward.getPosition());
 	}
-	
+
 	public List<PvPArenaPlayerReward> sortPoints() {
 		return sort(getInstanceRewards(), on(PvPArenaPlayerReward.class).getScorePoints(), new Comparator<Integer>() {
 
@@ -222,7 +217,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 			case 701319: // Illusion of Hope level 56
 				return 0x4f853C; // 20357 60
 			case 701220: // Blesed Relic
-				return 0x4E5537; //20053 55 //20068, 20072
+				return 0x4E5537; // 20053 55 //20068, 20072
 			case 207118:
 			case 207119:
 				return 0x50C101; // 20673 1
@@ -240,8 +235,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		}
 		if (result < 120000) {
 			return (int) (120000 - result);
-		}
-		else {
+		} else {
 			return (int) (180000 * getRound() - (result - 120000));
 		}
 	}
@@ -250,26 +244,26 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		this.instanceTime = System.currentTimeMillis();
 	}
 
-	public void sendPacket() {	
+	public void sendPacket() {
 		instance.doOnAllPlayers((Player player) -> {
-            PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), getInstanceReward(), getTime()));
-        });
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), getInstanceReward(), getTime()));
+		});
 	}
 
-    public InstanceScoreInfo getInstanceScoreInfo(Integer owner) {
-        final List<Player> players = instance.getPlayersInside();
-        switch (mapId) {
-            case 300360000:
-            case 300430000:
-                return new DisciplineScoreInfo(this, owner, players);
-            case 300350000:
+	public InstanceScoreInfo getInstanceScoreInfo(Integer owner) {
+		final List<Player> players = instance.getPlayersInside();
+		switch (mapId) {
+			case 300360000:
+			case 300430000:
+				return new DisciplineScoreInfo(this, owner, players);
+			case 300350000:
 			case 300420000:
-                return new ChaosScoreInfo(this, owner, players);
+				return new ChaosScoreInfo(this, owner, players);
 			case 300550000:
-                return new ArenaOfGloryScoreInfo(this, owner, players);
-        }
-        return null;
-    }
+				return new ArenaOfGloryScoreInfo(this, owner, players);
+		}
+		return null;
+	}
 
 	public byte getBuffId() {
 		return buffId;

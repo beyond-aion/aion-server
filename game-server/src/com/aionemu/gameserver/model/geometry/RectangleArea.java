@@ -19,7 +19,6 @@ public class RectangleArea extends AbstractArea {
 	 */
 	private final float minX;
 
-	
 	/**
 	 * @return the minX
 	 */
@@ -27,7 +26,6 @@ public class RectangleArea extends AbstractArea {
 		return minX;
 	}
 
-	
 	/**
 	 * @return the maxX
 	 */
@@ -35,7 +33,6 @@ public class RectangleArea extends AbstractArea {
 		return maxX;
 	}
 
-	
 	/**
 	 * @return the minY
 	 */
@@ -43,7 +40,6 @@ public class RectangleArea extends AbstractArea {
 		return minY;
 	}
 
-	
 	/**
 	 * @return the maxY
 	 */
@@ -135,6 +131,7 @@ public class RectangleArea extends AbstractArea {
 			return false;
 		return super.isInside3D(x, y, z);
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -142,8 +139,7 @@ public class RectangleArea extends AbstractArea {
 	public double getDistance2D(float x, float y) {
 		if (isInside2D(x, y)) {
 			return 0;
-		}
-		else {
+		} else {
 			Point2D cp = getClosestPoint(x, y);
 			return MathUtil.getDistance(x, y, cp.getX(), cp.getY());
 		}
@@ -156,11 +152,9 @@ public class RectangleArea extends AbstractArea {
 	public double getDistance3D(float x, float y, float z) {
 		if (isInside3D(x, y, z)) {
 			return 0;
-		}
-		else if (isInsideZ(z)) {
+		} else if (isInsideZ(z)) {
 			return getDistance2D(x, y);
-		}
-		else {
+		} else {
 			Point3D cp = getClosestPoint(x, y, z);
 			return MathUtil.getDistance(x, y, z, cp.getX(), cp.getY(), cp.getZ());
 		}
@@ -174,8 +168,7 @@ public class RectangleArea extends AbstractArea {
 
 		if (isInside2D(x, y)) {
 			return new Point2D(x, y);
-		}
-		else {
+		} else {
 			// bottom edge
 			Point2D closestPoint = MathUtil.getClosestPointOnSegment(minX, minY, maxX, minY, x, y);
 			double distance = MathUtil.getDistance(x, y, closestPoint.getX(), closestPoint.getY());
@@ -208,7 +201,8 @@ public class RectangleArea extends AbstractArea {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.model.geometry.Area#intersectsRectangle(com.aionemu.gameserver.model.geometry.RectangleArea)
 	 */
 	@Override

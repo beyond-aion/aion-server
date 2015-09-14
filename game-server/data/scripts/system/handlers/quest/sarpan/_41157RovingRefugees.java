@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _41157RovingRefugees extends QuestHandler {
 
@@ -47,31 +45,29 @@ public class _41157RovingRefugees extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205990) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1); 
+						return defaultCloseDialog(env, 0, 1);
 				}
-			}else if (targetId == 205991) {
+			} else if (targetId == 205991) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SETPRO2:
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 				}
-			}else if (targetId == 205992) {
+			} else if (targetId == 205992) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SETPRO3:
-						return defaultCloseDialog(env, 2, 3); 
+						return defaultCloseDialog(env, 2, 3);
 				}
-			}
-			else if (targetId == 205583) {
+			} else if (targetId == 205583) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
@@ -80,8 +76,7 @@ public class _41157RovingRefugees extends QuestHandler {
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205583)
 				return sendQuestEndDialog(env);
 		}

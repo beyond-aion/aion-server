@@ -94,8 +94,7 @@ public class _11005TheLimitsofGenius extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798942) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

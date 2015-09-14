@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +29,8 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 	}
 
 	@Override
-	public FastList<SurveyItem> getAllNew() {
-		FastList<SurveyItem> list = FastList.newInstance();
+	public FastTable<SurveyItem> getAllNew() {
+		FastTable<SurveyItem> list = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, 0);
@@ -47,8 +47,7 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("getAllNew() from DB: " + e.getMessage(), e);
 		}
 		return list;
@@ -62,8 +61,7 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 				stmt.setInt(2, id);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("useItem", e);
 			return false;
 		}

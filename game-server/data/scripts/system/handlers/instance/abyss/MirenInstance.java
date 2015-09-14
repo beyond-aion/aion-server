@@ -37,8 +37,8 @@ public class MirenInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnTimerRing() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("MIREN_01", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52,
-				757.33, 199.42), new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("MIREN_01", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52, 757.33, 199.42),
+			new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
 		f1.spawn();
 	}
 
@@ -140,7 +140,7 @@ public class MirenInstance extends GeneralInstanceHandler {
 
 	private void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			if (npc.getNpcId() == 215222) {
 				spawn(700561, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 				spawn(700561, 571.56036f, 869.93604f, 199.37367f, (byte) 69);

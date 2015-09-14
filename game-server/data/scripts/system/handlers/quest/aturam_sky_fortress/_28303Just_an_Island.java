@@ -8,12 +8,10 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _28303Just_an_Island  extends QuestHandler {
+public class _28303Just_an_Island extends QuestHandler {
 
 	private final static int questId = 28303;
 
@@ -38,19 +36,17 @@ public class _28303Just_an_Island  extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE){
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 799530) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
-						return sendQuestDialog(env, 4762);
-					else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1){
-						playQuestMovie(env, 470);
-					  return sendQuestStartDialog(env);
-					}
-					else
-						return sendQuestStartDialog(env);
-				}
+				if (env.getDialog() == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 4762);
+				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+					playQuestMovie(env, 470);
+					return sendQuestStartDialog(env);
+				} else
+					return sendQuestStartDialog(env);
 			}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730390) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -63,12 +59,10 @@ public class _28303Just_an_Island  extends QuestHandler {
 					default:
 						return sendQuestStartDialog(env);
 				}
-			}
-			else if (targetId == 700980) {
+			} else if (targetId == 700980) {
 				return useQuestObject(env, 2, 3, true, true);
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799531) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

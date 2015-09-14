@@ -31,8 +31,7 @@ public class BindEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effect.setAbnormal(AbnormalState.BIND.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.BIND.getId());
-		if (effected.getCastingSkill() != null
-			&& effected.getCastingSkill().getSkillTemplate().getType() == SkillType.PHYSICAL)
+		if (effected.getCastingSkill() != null && effected.getCastingSkill().getSkillTemplate().getType() == SkillType.PHYSICAL)
 			effected.getController().cancelCurrentSkill();
 	}
 

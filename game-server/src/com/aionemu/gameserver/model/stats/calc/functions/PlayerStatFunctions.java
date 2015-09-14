@@ -111,7 +111,7 @@ class MaxMpFunction extends StatFunction {
 	public void apply(Stat2 stat) {
 		float will = stat.getOwner().getGameStats().getWill().getCurrent();
 		stat.setBaseRate(will * 0.01f);
-		
+
 	}
 
 	@Override
@@ -211,8 +211,7 @@ class DuplicateStatFunction extends StatFunction {
 						functions.addAll(f2);
 					}
 				}
-			}
-			else if (offWeapon != null) {
+			} else if (offWeapon != null) {
 				List<StatFunction> functions2 = offWeapon.getItemTemplate().getModifiers();
 				if (functions2 != null) {
 					functions.addAll(getFunctions(functions2, stat, offWeapon));
@@ -228,8 +227,7 @@ class DuplicateStatFunction extends StatFunction {
 			if (!functions.isEmpty()) {
 				if (getName() == StatEnum.PVP_ATTACK_RATIO) {
 					forEach(functions).apply(stat);
-				}
-				else {
+				} else {
 					((StatFunction) selectMax(functions, on(StatFunction.class).getValue())).apply(stat);
 				}
 				functions.clear();

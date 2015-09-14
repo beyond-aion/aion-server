@@ -95,8 +95,7 @@ public class ReportTo extends QuestHandler {
 								return sendQuestStartDialog(env);
 							}
 							return false;
-						}
-						else {
+						} else {
 							return sendQuestStartDialog(env);
 						}
 					}
@@ -105,14 +104,12 @@ public class ReportTo extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (startNpcs.contains(targetId)) {
 				if (dialog == DialogAction.FINISH_DIALOG) {
 					return sendQuestSelectionDialog(env);
 				}
-			}
-			else if (endNpcs.contains(targetId)) {
+			} else if (endNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 2375);
@@ -132,8 +129,7 @@ public class ReportTo extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
 				return sendQuestEndDialog(env);
 			}

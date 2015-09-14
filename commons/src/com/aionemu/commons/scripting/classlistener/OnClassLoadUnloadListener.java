@@ -1,14 +1,15 @@
 package com.aionemu.commons.scripting.classlistener;
 
-import com.aionemu.commons.scripting.metadata.OnClassLoad;
-import com.aionemu.commons.scripting.metadata.OnClassUnload;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.scripting.metadata.OnClassLoad;
+import com.aionemu.commons.scripting.metadata.OnClassUnload;
 
 /**
  * @author SoulKeeper
@@ -53,11 +54,9 @@ public class OnClassLoadUnloadListener implements ClassListener {
 			if (m.getAnnotation(annotationClass) != null) {
 				try {
 					m.invoke(null);
-				}
-				catch (IllegalAccessException e) {
+				} catch (IllegalAccessException e) {
 					log.error("Can't access method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
-				}
-				catch (InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
 					log.error("Can't invoke method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
 				}
 			}

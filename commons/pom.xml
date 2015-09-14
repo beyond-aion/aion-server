@@ -249,9 +249,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.aionlightning</groupId>
-			<artifactId>javolution</artifactId>
-			<version>5.5.1</version>
+			<groupId>org.javolution</groupId>
+			<artifactId>javolution-core-java</artifactId>
+			<version>6.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>

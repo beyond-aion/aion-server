@@ -18,10 +18,8 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("pashidassaultpod")
 public class AssaultsPodAI2 extends NpcAI2 {
@@ -38,7 +36,7 @@ public class AssaultsPodAI2 extends NpcAI2 {
 		super.handleSpawned();
 		schedule();
 	}
-	
+
 	@Override
 	public void handleDespawned() {
 		super.handleDespawned();
@@ -55,6 +53,7 @@ public class AssaultsPodAI2 extends NpcAI2 {
 
 	private void schedule() {
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
@@ -63,9 +62,9 @@ public class AssaultsPodAI2 extends NpcAI2 {
 			}
 		}, 5000, 120000);
 	}
-	
+
 	private void spawnSummons() {
-		switch(this.getNpcId()) {
+		switch (this.getNpcId()) {
 			case 231162:
 				rndSpawn(231106, 1, "");
 				rndSpawn(231108, 2, "");
@@ -150,25 +149,25 @@ public class AssaultsPodAI2 extends NpcAI2 {
 				break;
 		}
 	}
-	
+
 	private void spawnAndMove(int npcId, Npc owner, final String walker) {
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree((byte) owner.getHeading()));
+		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
 		int dist = Rnd.get(2, 10);
 		float x = (float) (Math.cos(radian) * dist);
 		float y = (float) (Math.sin(radian) * dist);
-		final Npc npc = (Npc)spawn(npcId, owner.getX() + x, owner.getY() + y, owner.getZ() + 10, (byte) 0);
+		final Npc npc = (Npc) spawn(npcId, owner.getX() + x, owner.getY() + y, owner.getZ() + 10, (byte) 0);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-					npc.getSpawn().setWalkerId(walker);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
-					npc.setState(1);
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-				}
-		 }, 3000);
+				npc.getSpawn().setWalkerId(walker);
+				WalkManager.startWalking((NpcAI2) npc.getAi2());
+				npc.setState(1);
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+			}
+		}, 3000);
 	}
-	
+
 	private void rndSpawn(int npcId, int count, final String walker) {
 		for (int i = 0; i < count; i++) {
 			SpawnTemplate template = rndSpawnInRange(npcId);
@@ -188,14 +187,15 @@ public class AssaultsPodAI2 extends NpcAI2 {
 		}
 	}
 
-  private SpawnTemplate rndSpawnInRange(int npcId) {
-  	float direction = Rnd.get(0, 199) / 100f;
-  	float x1 = (float) (Math.cos(Math.PI * direction) * 5);
-  	float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-  	return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(), getPosition().getHeading());
-  }
-  
-  @Override
+	private SpawnTemplate rndSpawnInRange(int npcId) {
+		float direction = Rnd.get(0, 199) / 100f;
+		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
+		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
+	}
+
+	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
@@ -209,4 +209,3 @@ public class AssaultsPodAI2 extends NpcAI2 {
 		}
 	}
 }
-	

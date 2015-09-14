@@ -78,7 +78,7 @@ public enum BrokerItemMask {
 	ACCESSORY_RING(1220, new BrokerContainsFilter(1220), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_BELT(1230, new BrokerContainsFilter(1230), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_HEADGEAR(7030, new BrokerMinMaxFilter(1250, 1270), BrokerItemMask.ACCESSORY, false),
-        ACCESSORY_PLUME(1871, new BrokerContainsFilter(1871), BrokerItemMask.ACCESSORY, false),
+	ACCESSORY_PLUME(1871, new BrokerContainsFilter(1871), BrokerItemMask.ACCESSORY, false),
 	/**
 	 * Skill related Section + sub categories
 	 */
@@ -94,7 +94,7 @@ public enum BrokerItemMask {
 	SKILL_RELATED_STIGMA_CHANTER(6017, new BrokerPlayerClassExtraFilter(1400, PlayerClass.CHANTER), BrokerItemMask.SKILL_RELATED_STIGMA, false),
 	SKILL_RELATED_STIGMA_GUNSLINGER(6018, new BrokerPlayerClassExtraFilter(1400, PlayerClass.GUNNER), BrokerItemMask.SKILL_RELATED_STIGMA, false),
 	SKILL_RELATED_STIGMA_SONGWEAVER(6019, new BrokerPlayerClassExtraFilter(1400, PlayerClass.BARD), BrokerItemMask.SKILL_RELATED_STIGMA, false),
-        SKILL_RELATED_STIGMA_RIDER(6048, new BrokerPlayerClassExtraFilter(1400, PlayerClass.RIDER), BrokerItemMask.SKILL_RELATED_STIGMA, false),
+	SKILL_RELATED_STIGMA_RIDER(6048, new BrokerPlayerClassExtraFilter(1400, PlayerClass.RIDER), BrokerItemMask.SKILL_RELATED_STIGMA, false),
 	SKILL_RELATED_SKILL_MANUAL(1695, new BrokerContainsFilter(1695), BrokerItemMask.SKILL_RELATED, true),
 	SKILL_RELATED_SKILL_MANUAL_GLADIATOR(6020, new BrokerPlayerClassExtraFilter(1695, PlayerClass.GLADIATOR), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
 	SKILL_RELATED_SKILL_MANUAL_TEMPLAR(6021, new BrokerPlayerClassExtraFilter(1695, PlayerClass.TEMPLAR), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
@@ -106,7 +106,7 @@ public enum BrokerItemMask {
 	SKILL_RELATED_SKILL_MANUAL_CHANTER(6027, new BrokerPlayerClassExtraFilter(1695, PlayerClass.CHANTER), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
 	SKILL_RELATED_SKILL_MANUAL_GUNSLINGER(6028, new BrokerPlayerClassExtraFilter(1695, PlayerClass.GUNNER), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
 	SKILL_RELATED_SKILL_MANUAL_SONGWEAVER(6029, new BrokerPlayerClassExtraFilter(1695, PlayerClass.BARD), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
-        SKILL_RELATED_SKILL_MANUAL_RIDER(6049, new BrokerPlayerClassExtraFilter(1695, PlayerClass.RIDER), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
+	SKILL_RELATED_SKILL_MANUAL_RIDER(6049, new BrokerPlayerClassExtraFilter(1695, PlayerClass.RIDER), BrokerItemMask.SKILL_RELATED_SKILL_MANUAL, false),
 
 	/**
 	 * Home Decor Section + sub categories

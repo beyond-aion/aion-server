@@ -45,13 +45,12 @@ public class AnnounceFaction extends AdminCommand {
 
 			Player target = null;
 			Iterator<Player> iter = World.getInstance().getPlayersIterator();
-			
+
 			while (iter.hasNext()) {
 				target = iter.next();
 
-				if (ChatProcessor.getInstance().isCommandAllowed(target, this.getAlias()) ||
-					(params[0].equals("ely") && target.getRace() == Race.ELYOS) ||
-					(params[0].equals("asmo") && target.getRace() == Race.ASMODIANS))
+				if (ChatProcessor.getInstance().isCommandAllowed(target, this.getAlias()) || (params[0].equals("ely") && target.getRace() == Race.ELYOS)
+					|| (params[0].equals("asmo") && target.getRace() == Race.ASMODIANS))
 					PacketSendUtility.sendBrightYellowMessageOnCenter(target, message);
 			}
 		}

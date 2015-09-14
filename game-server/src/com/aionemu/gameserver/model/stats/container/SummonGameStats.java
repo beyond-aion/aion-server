@@ -47,10 +47,10 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 		}
 		cachedSpeed = current;
 	}
-	
+
 	@Override
 	public Stat2 getAllSpeed() {
-		int base = 7500; //TODO current value
+		int base = 7500; // TODO current value
 		return getStat(StatEnum.ALLSPEED, base);
 	}
 
@@ -92,12 +92,12 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	public Stat2 getMaxHp() {
 		return getStat(StatEnum.MAXHP, statsTemplate.getMaxHp());
 	}
-	
+
 	@Override
 	public Stat2 getPCR() {
 		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, 0);
 	}
-	
+
 	@Override
 	public Stat2 getMCR() {
 		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, 0);

@@ -3,8 +3,7 @@ package com.aionemu.loginserver.model;
 import java.sql.Timestamp;
 
 /**
- * Class for storing account time data (last login time, last session duration time, accumulated online time today,
- * accumulated rest time today)
+ * Class for storing account time data (last login time, last session duration time, accumulated online time today, accumulated rest time today)
  * 
  * @author EvilSpirit
  */

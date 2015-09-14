@@ -49,7 +49,7 @@ public class GameServerInfo {
 	/**
 	 * gsConnection - if GameServer is connected to LoginServer.
 	 */
-	private GsConnection	gscHandler;
+	private GsConnection gscHandler;
 
 	/**
 	 * Max players count that may play on this GameServer.
@@ -162,8 +162,7 @@ public class GameServerInfo {
 	 * 
 	 * @return GsConnection
 	 */
-	public final GsConnection getConnection()
-	{
+	public final GsConnection getConnection() {
 		return gscHandler;
 	}
 
@@ -172,8 +171,7 @@ public class GameServerInfo {
 	 * 
 	 * @param gsConnection
 	 */
-	public final void setConnection(GsConnection gscHandler)
-	{
+	public final void setConnection(GsConnection gscHandler) {
 		this.gscHandler = gscHandler;
 	}
 
@@ -200,10 +198,10 @@ public class GameServerInfo {
 	 * 
 	 * @return true if GameServer is Online.
 	 */
-	public final boolean isOnline()
-	{
+	public final boolean isOnline() {
 		return gscHandler != null && gscHandler.getState() == State.AUTHED;
 	}
+
 	/**
 	 * Check if given account is already on This GameServer
 	 * 

@@ -7,25 +7,25 @@ import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
- *
  * @author xTz
  */
 public class HarmonyGroupReward extends PvPArenaPlayerReward {
 
 	private List<AGPlayer> players;
 	private int id;
-        private AutoGroupType agt;
-	public HarmonyGroupReward(Integer object, int timeBonus, byte buffId, List<AGPlayer> players,AutoGroupType agt) {
+	private AutoGroupType agt;
+
+	public HarmonyGroupReward(Integer object, int timeBonus, byte buffId, List<AGPlayer> players, AutoGroupType agt) {
 		super(object, timeBonus, buffId);
 		this.players = players;
 		id = IDFactory.getInstance().nextId();
-                this.agt = agt;
+		this.agt = agt;
 	}
 
-    public AutoGroupType getAgt() {
-        return agt;
-    }
-        
+	public AutoGroupType getAgt() {
+		return agt;
+	}
+
 	public List<AGPlayer> getAGPlayers() {
 		return players;
 	}

@@ -48,8 +48,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Cannot read house bids", e);
 		}
 		return results;
@@ -65,8 +64,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 				stmt.setTimestamp(4, time);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Cannot insert house bid", e);
 			return false;
 		}
@@ -83,8 +81,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 				stmt.setInt(4, houseId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Cannot update house bid", e);
 		}
 	}
@@ -96,8 +93,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 				stmt.setInt(1, houseId);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Cannot delete house bids", e);
 		}
 	}

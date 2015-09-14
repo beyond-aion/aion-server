@@ -28,7 +28,7 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 		float x = effect.getX();
 		float y = effect.getY();
 		float z = effect.getZ();
-		if(x == 0 && y == 0){
+		if (x == 0 && y == 0) {
 			Creature effected = effect.getEffected();
 			x = effected.getX();
 			y = effected.getY();
@@ -49,14 +49,16 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 				useTime = 10;
 				break;
 		}
-		
+
 		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
 
 		int delay = 3000;
 		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equalsIgnoreCase("KN_THREATENINGWAVE"))
 			delay = 2000;
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			int position = 1;
+
 			@Override
 			public void run() {
 				servant.getController().useSkill(servant.getSkillList().getSkillOnPosition(position).getSkillId());

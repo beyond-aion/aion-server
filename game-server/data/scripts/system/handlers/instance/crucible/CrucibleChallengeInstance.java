@@ -291,8 +291,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				if (player != null) {
 					if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
 						sp(217820, 1251.1598f, 237.97736f, 405.3968f, (byte) 0, 0);
-					}
-					else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
+					} else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
 						sp(217820, 1266.9661f, 791.5348f, 436.64014f, (byte) 0, 0);
 					}
 				}
@@ -411,7 +410,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			playerReward.setRewarded();
 			ItemService.addItem(player, 186000130, (int) reward);
 			playerReward.setInsignia((int) reward);
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);	
+			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		}
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
 	}
@@ -441,7 +440,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			}
 
 		}, 8000);
-		
+
 		bonusTimer = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
@@ -509,23 +508,17 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		int place = 0;
 		if (isInZone(ZoneName.get("ILLUSION_STADIUM_4_300320000"), player)) { // stage 1
 			place = 1;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_8_300320000"), player)) { // stage 2
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_8_300320000"), player)) { // stage 2
 			place = 2;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_5_300320000"), player)) { // stage 3
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_5_300320000"), player)) { // stage 3
 			place = 3;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"), player)) { // stage 4
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"), player)) { // stage 4
 			place = 4;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"), player)) { // stage 4
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"), player)) { // stage 4
 			place = 5;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_2_300320000"), player)) { // stage 5
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_2_300320000"), player)) { // stage 5
 			place = 6;
-		}
-		else if (isInZone(ZoneName.get("ILLUSION_STADIUM_300320000"), player)) { // stage 6
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_300320000"), player)) { // stage 6
 			place = 7;
 		}
 		getPlayerReward(player.getObjectId()).setSpawnPosition(place);
@@ -564,8 +557,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 		if (player.getInventory().getFirstItemByItemId(186000134) == null) {
 			doReward(player);
-		}
-		else {
+		} else {
 			player.getInventory().decreaseByItemId(186000134, 1);
 		}
 		return true;
@@ -759,7 +751,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 217758:
 				spawn(205674, 345.52954f, 1662.6697f, 95.25f, (byte) 0);
 				break;
@@ -857,10 +849,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				}
 				if (count == 0) {
 					if (rewardCount == 0) {
-						sp(217837, npc.getX(), npc.getY(), npc.getZ(), (byte) 0 ,0);
-					}
-					else if (rewardCount == 1) {
-						sp(217838, npc.getX(), npc.getY(), npc.getZ(), (byte) 0 ,0);
+						sp(217837, npc.getX(), npc.getY(), npc.getZ(), (byte) 0, 0);
+					} else if (rewardCount == 1) {
+						sp(217838, npc.getX(), npc.getY(), npc.getZ(), (byte) 0, 0);
 					}
 					despawnNpc(npc);
 					rewardCount++;
@@ -873,10 +864,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				}
 				if (player != null) {
 					if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
-						sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0 ,0);
-					}
-					else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
-						sp(205677, 1271.5472f, 791.36145f, 436.64017f, (byte) 0 ,0);
+						sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0, 0);
+					} else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
+						sp(205677, 1271.5472f, 791.36145f, 436.64017f, (byte) 0, 0);
 					}
 				}
 				dropItems.clear();

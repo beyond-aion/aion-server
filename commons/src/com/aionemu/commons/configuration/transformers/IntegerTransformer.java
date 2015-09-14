@@ -32,8 +32,7 @@ public class IntegerTransformer implements PropertyTransformer<Integer> {
 	public Integer transform(String value, Field field) throws TransformationException {
 		try {
 			return Integer.decode(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

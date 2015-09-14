@@ -46,8 +46,7 @@ public class _2096TwiceasBright extends QuestHandler {
 				case 204206: { // Cavalorn
 					if (dialog == DialogAction.QUEST_SELECT && var == 0) {
 						return sendQuestDialog(env, 1011);
-					}
-					else if (dialog == DialogAction.SETPRO1) {
+					} else if (dialog == DialogAction.SETPRO1) {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
@@ -55,8 +54,7 @@ public class _2096TwiceasBright extends QuestHandler {
 				case 204207: { // Kasir
 					if (dialog == DialogAction.QUEST_SELECT && var == 1) {
 						return sendQuestDialog(env, 1352);
-					}
-					else if (dialog == DialogAction.SETPRO2) {
+					} else if (dialog == DialogAction.SETPRO2) {
 						return defaultCloseDialog(env, 1, 2); // 2
 					}
 					break;
@@ -68,8 +66,7 @@ public class _2096TwiceasBright extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin
 				return sendQuestEndDialog(env);
 			}

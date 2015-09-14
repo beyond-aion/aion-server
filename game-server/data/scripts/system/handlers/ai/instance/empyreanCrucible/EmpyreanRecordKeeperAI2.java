@@ -17,41 +17,41 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("empyreanrecordkeeper")
 public class EmpyreanRecordKeeperAI2 extends NpcAI2 {
-	
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
 		int msg = 0;
-		switch(getNpcId()) {
-				case 799568:
-					msg = 1111460;
-					break;
-				case 799569:
-					msg = 1111461;
-					break;
-				case 205331:
-					msg = 1111462;
-					break;
-				case 205338:
-					msg = 1111463;
-					break;
-				case 205339:
-					msg = 1111464;
-					break;
-				case 205340:
-					msg = 1111465;
-					break;
-				case 205341:
-					msg = 1111466;
-					break;
-				case 205342:
-					msg = 1111467;
-					break;
-				case 205343:
-					msg = 1111468;
-					break;
-				case 205344:
-					msg = 1111469;
+		switch (getNpcId()) {
+			case 799568:
+				msg = 1111460;
+				break;
+			case 799569:
+				msg = 1111461;
+				break;
+			case 205331:
+				msg = 1111462;
+				break;
+			case 205338:
+				msg = 1111463;
+				break;
+			case 205339:
+				msg = 1111464;
+				break;
+			case 205340:
+				msg = 1111465;
+				break;
+			case 205341:
+				msg = 1111466;
+				break;
+			case 205342:
+				msg = 1111467;
+				break;
+			case 205343:
+				msg = 1111468;
+				break;
+			case 205344:
+				msg = 1111469;
 		}
 		if (msg != 0) {
 			NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 25, 1000);
@@ -118,12 +118,11 @@ public class EmpyreanRecordKeeperAI2 extends NpcAI2 {
 					instanceHandler.onChangeStage(StageType.START_STAGE_10_ROUND_1);
 					break;
 				case 205344: // get score
- 					getPosition().getWorldMapInstance().getInstanceHandler().doReward(player);
+					getPosition().getWorldMapInstance().getInstanceHandler().doReward(player);
 					break;
 			}
 			AI2Actions.deleteOwner(this);
-		}
-		else if (dialogId == 10001 && getNpcId() == 799567) { //start with stage 7
+		} else if (dialogId == 10001 && getNpcId() == 799567) { // start with stage 7
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			instanceHandler.onChangeStage(StageType.START_STAGE_7);
 			AI2Actions.deleteOwner(this);

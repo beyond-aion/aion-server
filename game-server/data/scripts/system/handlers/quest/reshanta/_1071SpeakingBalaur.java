@@ -67,8 +67,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278532) {
@@ -85,8 +84,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798026) {
+		} else if (targetId == 798026) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -122,8 +120,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1355);
 				case SETPRO12:
 					if (var == 1) {
@@ -134,8 +131,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798025) {
+		} else if (targetId == 798025) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -149,8 +145,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 279019) {
+		} else if (targetId == 279019) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -184,8 +179,7 @@ public class _1071SpeakingBalaur extends QuestHandler {
 		if (qs == null)
 			return HandlerResult.FAILED;
 
-		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1, 1, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1, 1, 0), true);
 		removeQuestItem(env, 182202001, 1);
 		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 		updateQuestStatus(env);

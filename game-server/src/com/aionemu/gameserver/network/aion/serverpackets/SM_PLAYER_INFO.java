@@ -32,7 +32,8 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 	/**
 	 * Constructs new <tt>SM_PLAYER_INFO </tt> packet
 	 *
-	 * @param player actual player.
+	 * @param player
+	 *          actual player.
 	 * @param enemy
 	 */
 	public SM_PLAYER_INFO(Player player, boolean enemy) {
@@ -53,11 +54,9 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		final int raceId;
 		if (player.getAdminNeutral() > 1 || activePlayer.getAdminNeutral() > 1) {
 			raceId = activePlayer.getRace().getRaceId();
-		}
-		else if (activePlayer.isEnemy(player)) {
+		} else if (activePlayer.isEnemy(player)) {
 			raceId = (activePlayer.getRace().getRaceId() == 0 ? 1 : 0);
-		}
-		else
+		} else
 			raceId = player.getRace().getRaceId();
 
 		final int genderId = pcd.getGender().getGenderId();
@@ -71,7 +70,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		 * A3 female asmodian A2 male asmodian A1 female elyos A0 male elyos
 		 */
 		writeD(pcd.getTemplateId());
-		writeD(player.getRobotId());//RobotId
+		writeD(player.getRobotId());// RobotId
 		/**
 		 * Transformed state - send transformed model id Regular state - send player model id (from common data)
 		 */
@@ -107,8 +106,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			writeC(player.getLegion().getLegionEmblem().getColor_g());
 			writeC(player.getLegion().getLegionEmblem().getColor_b());
 			writeS(player.getLegion().getLegionName());
-		}
-		else {
+		} else {
 			writeB(new byte[12]);
 		}
 		int maxHp = player.getLifeStats().getMaxHp();
@@ -123,12 +121,11 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			if (item.getItemTemplate().isTwoHandWeapon()) {
 				ItemSlot[] slots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
 				mask |= slots[0].getSlotIdMask();
-			}
-			else {
+			} else {
 				mask |= item.getEquipmentSlot();
 			}
 		}
-		
+
 		writeD(mask); // Wrong !!! It's item count, but doesn't work
 
 		for (Item item : items) {
@@ -236,8 +233,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		if (player.isUsingFlyTeleport()) {
 			writeD(player.getFlightTeleportId());
 			writeD(player.getFlightDistance());
-		}
-		else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+		} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
 			writeD(player.windstreamPath.teleportId);
 			writeD(player.windstreamPath.distance);
 		}
@@ -259,7 +255,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			writeD(0x03 + player.getPlayerAccount().getMembership());// 1 = normal, 2 = new player(ascension boost), 3 = returning player, 4 = vip 1
 		else
 			writeD(0x01);
-		writeD(0x01); //unk 4.7
+		writeD(0x01); // unk 4.7
 		writeC(raceId == 0 ? 3 : 5); // Game language Asmo 3 Yly 5
 	}
 

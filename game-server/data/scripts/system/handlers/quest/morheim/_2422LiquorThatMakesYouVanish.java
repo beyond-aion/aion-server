@@ -40,13 +40,11 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 			if (targetId == 204326) { // Hapenill
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204327: { // Sveinn
@@ -73,8 +71,7 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 							qs.setQuestVar(2);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 210020000, player.getInstanceId(), (float) 535.46, (float) 2555.62,
-								(float) 326.63605, (byte) 112);
+							TeleportService2.teleportTo(player, 210020000, player.getInstanceId(), (float) 535.46, (float) 2555.62, (float) 326.63605, (byte) 112);
 							return true;
 						}
 						case FINISH_DIALOG: {
@@ -83,13 +80,11 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204326) { // Hapenill
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

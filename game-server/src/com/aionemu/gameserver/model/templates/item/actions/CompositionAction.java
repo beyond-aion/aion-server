@@ -15,14 +15,12 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Created with IntelliJ IDEA.
- * User: pixfid
- * Date: 7/14/13
- * Time: 5:18 PM
+ * Created with IntelliJ IDEA. User: pixfid Date: 7/14/13 Time: 5:18 PM
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CompositionAction")
 public class CompositionAction extends AbstractItemAction {
+
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		return false;
@@ -55,7 +53,8 @@ public class CompositionAction extends AbstractItemAction {
 
 	public void act(final Player player, final Item tools, final Item first, final Item second) {
 
-		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 5000, 0, 0));
+		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate()
+			.getTemplateId(), 5000, 0, 0));
 		player.getController().cancelTask(TaskId.ITEM_USE);
 
 		final ItemUseObserver observer = new ItemUseObserver() {
@@ -63,7 +62,8 @@ public class CompositionAction extends AbstractItemAction {
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 2, 0));
+				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate()
+					.getTemplateId(), 0, 2, 0));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -79,7 +79,8 @@ public class CompositionAction extends AbstractItemAction {
 				if (result && result1 && result2) {
 					ItemService.addItem(player, getItemId(calcLevel(first.getItemTemplate().getLevel(), second.getItemTemplate().getLevel())), 1);
 				}
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 1, 0));
+				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate()
+					.getTemplateId(), 0, 1, 0));
 			}
 		}, 5000));
 

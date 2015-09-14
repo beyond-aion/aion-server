@@ -40,8 +40,7 @@ public class _30365ARayOfHope extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204241: { // Annemari
@@ -62,8 +61,7 @@ public class _30365ARayOfHope extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
@@ -91,8 +89,7 @@ public class _30365ARayOfHope extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203574) { // Arekedil
 				return sendQuestEndDialog(env);
 			}
@@ -106,7 +103,7 @@ public class _30365ARayOfHope extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return HandlerResult.fromBoolean(QuestService.startQuest(env));
-    }
+		}
 		return HandlerResult.FAILED;
 	}
 }

@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author mr.madison
- *
  */
 public class _41511SludgersintheSupplyLines extends QuestHandler {
 
@@ -19,21 +17,21 @@ public class _41511SludgersintheSupplyLines extends QuestHandler {
 	public _41511SludgersintheSupplyLines() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205890).addOnQuestStart(questId);
 		qe.registerQuestNpc(205948).addOnTalkEvent(questId);
 		qe.registerQuestNpc(218216).addOnKillEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205890) {
 				switch (dialog) {
@@ -45,7 +43,7 @@ public class _41511SludgersintheSupplyLines extends QuestHandler {
 					}
 				}
 			}
-		}else if(qs.getStatus() == QuestStatus.START){
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205948) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -56,20 +54,18 @@ public class _41511SludgersintheSupplyLines extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205948) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, 218216, 0, 9);

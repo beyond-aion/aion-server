@@ -4,13 +4,11 @@ import com.aionemu.gameserver.ai2.GeneralAIEvent;
 import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.services.MonsterRaidService;
 
-
 /**
  * @author Whoop
- *
  */
 public class MonsterRaidBossDeathListener extends OnDieEventListener {
-	
+
 	private final MonsterRaid monsterRaid;
 
 	public MonsterRaidBossDeathListener(MonsterRaid monsterRaid) {

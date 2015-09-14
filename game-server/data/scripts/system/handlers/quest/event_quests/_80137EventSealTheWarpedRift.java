@@ -58,7 +58,7 @@ public class _80137EventSealTheWarpedRift extends QuestHandler {
 		}
 		return sendQuestRewardDialog(env, 830245, 0);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -67,7 +67,7 @@ public class _80137EventSealTheWarpedRift extends QuestHandler {
 			QuestService.abandonQuest(player, questId);
 		return true;
 	}
-	
+
 	@Override
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		if (bonusType != BonusType.RIFT || env.getQuestId() != questId)
@@ -82,4 +82,3 @@ public class _80137EventSealTheWarpedRift extends QuestHandler {
 	}
 
 }
-

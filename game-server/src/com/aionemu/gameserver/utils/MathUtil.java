@@ -89,6 +89,7 @@ import com.aionemu.gameserver.skillengine.properties.AreaDirections;
  * 
  * 
  * 
+ * 
  * </pre>
  * 
  * @author Disturbing
@@ -239,11 +240,9 @@ public class MathUtil {
 		final Point2D closestPoint;
 		if (u < 0) {
 			closestPoint = new Point2D(sx1, sy1);
-		}
-		else if (u > 1) {
+		} else if (u > 1) {
 			closestPoint = new Point2D(sx2, sy2);
-		}
-		else {
+		} else {
 			closestPoint = new Point2D((float) (sx1 + u * xDelta), (float) (sy1 + u * yDelta));
 		}
 
@@ -321,7 +320,7 @@ public class MathUtil {
 		float dz = (object2.getZ() - object1.getZ());
 		return dx * dx + dy * dy + dz * dz < range * range;
 	}
-	
+
 	public static boolean isIn3dRangeLimited(VisibleObject object1, VisibleObject object2, float minRange, float maxRange) {
 		if (object1.getWorldId() != object2.getWorldId() || object1.getInstanceId() != object2.getInstanceId())
 			return false;
@@ -342,8 +341,8 @@ public class MathUtil {
 	 * @param range
 	 * @return boolean
 	 */
-	public static boolean isIn3dRange(final float obj1X, final float obj1Y, final float obj1Z, final float obj2X,
-		final float obj2Y, final float obj2Z, float range) {
+	public static boolean isIn3dRange(final float obj1X, final float obj1Y, final float obj1Z, final float obj2X, final float obj2Y, final float obj2Z,
+		float range) {
 		float dx = (obj2X - obj1X);
 		float dy = (obj2Y - obj1Y);
 		float dz = (obj2Z - obj1Z);
@@ -360,8 +359,7 @@ public class MathUtil {
 	 * @param radius
 	 * @return true if the object is in the sphere
 	 */
-	public static boolean isInSphere(final VisibleObject obj, final float centerX, final float centerY,
-		final float centerZ, final float radius) {
+	public static boolean isInSphere(final VisibleObject obj, final float centerX, final float centerY, final float centerZ, final float radius) {
 		float dx = (obj.getX() - centerX);
 		float dy = (obj.getY() - centerY);
 		float dz = (obj.getZ() - centerZ);
@@ -423,8 +421,7 @@ public class MathUtil {
 	 * @return
 	 */
 	public final static boolean isNearCoordinates(VisibleObject obj, VisibleObject obj2, int offset) {
-		return getDistance(obj.getX(), obj.getY(), obj.getZ(), obj2.getX(), obj2.getY(), obj2.getZ()) < offset
-			+ NpcMoveController.MOVE_CHECK_OFFSET;
+		return getDistance(obj.getX(), obj.getY(), obj.getZ(), obj2.getX(), obj2.getY(), obj2.getZ()) < offset + NpcMoveController.MOVE_CHECK_OFFSET;
 	}
 
 	public final static boolean isInAttackRange(Creature object1, Creature object2, float range) {
@@ -433,8 +430,7 @@ public class MathUtil {
 		if (object1.getWorldId() != object2.getWorldId() || object1.getInstanceId() != object2.getInstanceId()) {
 			return false;
 		}
-		float offset = object1.getObjectTemplate().getBoundRadius().getCollision()
-			+ object2.getObjectTemplate().getBoundRadius().getCollision();
+		float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
 		if (object1.getMoveController().isInMove())
 			offset = +3f;
 		if (object2.getMoveController().isInMove())
@@ -442,8 +438,7 @@ public class MathUtil {
 		return ((getDistance(object1, object2) - offset) <= range);
 	}
 
-	public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius,
-		AreaDirections directions) {
+	public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius, AreaDirections directions) {
 		double radian = Math.toRadians(convertHeadingToDegree(obj1.getHeading()));
 		int direction = directions == AreaDirections.FRONT ? 0 : 1;
 		float dx = (float) (Math.cos(Math.PI * direction + radian) * length);
@@ -463,9 +458,9 @@ public class MathUtil {
 	}
 
 	/**
-	 * Returns the correctly rounded square root of a positive BigDecimal. The algorithm for taking the square root of a
-	 * BigDecimal is most critical for the speed of your application. This method performs the fast Square Root by Coupled
-	 * Newton Iteration algorithm by Timm Ahrendt, from the book "Pi, unleashed" by Jörg Arndt in a neat loop.
+	 * Returns the correctly rounded square root of a positive BigDecimal. The algorithm for taking the square root of a BigDecimal is most critical for
+	 * the speed of your application. This method performs the fast Square Root by Coupled Newton Iteration algorithm by Timm Ahrendt, from the book
+	 * "Pi, unleashed" by Jörg Arndt in a neat loop.
 	 * 
 	 * @param squarD
 	 *          number to get the root from (called "d" in the book)

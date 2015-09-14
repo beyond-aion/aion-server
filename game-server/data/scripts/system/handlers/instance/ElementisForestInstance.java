@@ -44,8 +44,7 @@ public class ElementisForestInstance extends GeneralInstanceHandler {
 			if (spawned.compareAndSet(0, 1)) {
 				spawn(217233, 301.77118f, 765.36951f, 193.03818f, (byte) 90);
 			}
-		}
-		else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("JURDINS_DOMAIN_300260000")) {
+		} else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("JURDINS_DOMAIN_300260000")) {
 			if (spawned.compareAndSet(1, 2)) {
 				sendMsg(1500242);
 			}

@@ -103,14 +103,11 @@ public class QuestEnv {
 	public int getTargetId() {
 		if (visibleObject == null) {
 			return 0;
-		}
-		else if (visibleObject instanceof Npc) {
+		} else if (visibleObject instanceof Npc) {
 			return ((Npc) visibleObject).getNpcId();
-		}
-		else if (visibleObject instanceof Gatherable) {
+		} else if (visibleObject instanceof Gatherable) {
 			return ((Gatherable) visibleObject).getObjectTemplate().getTemplateId();
-		}
-		else if (visibleObject instanceof StaticObject) {
+		} else if (visibleObject instanceof StaticObject) {
 			return ((StaticObject) visibleObject).getObjectTemplate().getTemplateId();
 		}
 		return 0;

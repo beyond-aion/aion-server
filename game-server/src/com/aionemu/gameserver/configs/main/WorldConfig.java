@@ -24,7 +24,7 @@ public class WorldConfig {
 
 	@Property(key = "gameserver.world.max.twincount.beginner", defaultValue = "-1")
 	public static int WORLD_MAX_TWINS_BEGINNER;
-	
+
 	@Property(key = "gameserver.world.emulate.fasttrack", defaultValue = "true")
 	public static boolean WORLD_EMULATE_FASTTRACK;
 
