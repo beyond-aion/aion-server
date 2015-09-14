@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.taskmanager;
 
+import java.util.Iterator;
+
 import javolution.util.FastSet;
 
 import org.slf4j.Logger;
@@ -41,12 +43,13 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 			writeUnlock();
 		}
 
-		for (T task : activeTasks) {
+		for (Iterator<T> i = activeTasks.iterator(); i.hasNext();) {
+			T task = i.next();
 			final long begin = System.nanoTime();
 
 			try {
 				callTask(task);
-				activeTasks.remove(task);
+				i.remove();
 			} catch (RuntimeException e) {
 				log.warn("", e);
 			} finally {
