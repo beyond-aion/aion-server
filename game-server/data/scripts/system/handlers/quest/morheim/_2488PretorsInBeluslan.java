@@ -21,6 +21,7 @@ public class _2488PretorsInBeluslan extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204053).addOnQuestStart(questId);
 		qe.registerQuestNpc(204208).addOnTalkEvent(questId);

@@ -21,6 +21,7 @@ public class _21080MessageInAWindstream extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799231).addOnQuestStart(questId);
 		qe.registerQuestNpc(799231).addOnTalkEvent(questId);

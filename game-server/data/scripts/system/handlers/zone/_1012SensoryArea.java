@@ -16,6 +16,7 @@ import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 	questId = 1012)
 public class _1012SensoryArea extends QuestZoneHandler {
 
+	@Override
 	public AbstractQuestZoneObserver createObserver(Player player, ZoneTemplate zoneTemplate) {
 		return new AbstractQuestZoneObserver(player, zoneTemplate) {
 

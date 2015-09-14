@@ -23,6 +23,7 @@ public class _2409Propaganda extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182204169, questId);
 		qe.registerQuestNpc(204301).addOnTalkEvent(questId);

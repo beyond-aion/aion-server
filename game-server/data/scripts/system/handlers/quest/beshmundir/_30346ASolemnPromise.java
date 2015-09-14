@@ -21,6 +21,7 @@ public class _30346ASolemnPromise extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799225).addOnQuestStart(questId);
 		qe.registerQuestNpc(799225).addOnTalkEvent(questId);

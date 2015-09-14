@@ -20,6 +20,7 @@ public class _1918AnAxForNamus extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(203835).addOnQuestStart(questId);
 		qe.registerQuestNpc(203835).addOnTalkEvent(questId);

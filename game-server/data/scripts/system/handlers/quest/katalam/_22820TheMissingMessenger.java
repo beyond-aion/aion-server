@@ -20,6 +20,7 @@ public class _22820TheMissingMessenger extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801243).addOnQuestStart(questId);
 		qe.registerQuestNpc(801243).addOnTalkEvent(questId);

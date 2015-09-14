@@ -20,6 +20,7 @@ public class _4970TheFashionistas extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799315).addOnQuestStart(questId);
 		qe.registerQuestNpc(798392).addOnTalkEvent(questId);

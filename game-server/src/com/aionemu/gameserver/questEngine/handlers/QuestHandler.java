@@ -109,6 +109,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 
 	}
 
+	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
@@ -1106,6 +1107,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		return false;
 	}
 
+	@Override
 	public int getQuestId() {
 		return questId;
 	}
@@ -1141,6 +1143,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	@Override
 	public abstract void register();
 
+	@Override
 	public HashSet<Integer> getNpcIds() {
 		return null;
 	}

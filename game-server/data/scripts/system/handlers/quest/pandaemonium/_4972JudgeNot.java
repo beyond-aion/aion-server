@@ -20,6 +20,7 @@ public class _4972JudgeNot extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798393).addOnQuestStart(questId);
 		qe.registerQuestNpc(798393).addOnTalkEvent(questId);

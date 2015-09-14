@@ -20,6 +20,7 @@ public class _3036LetSeeWhatItDoes extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798155).addOnQuestStart(questId);
 		qe.registerQuestNpc(798155).addOnTalkEvent(questId);

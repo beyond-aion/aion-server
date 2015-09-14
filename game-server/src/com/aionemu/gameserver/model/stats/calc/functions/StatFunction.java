@@ -114,10 +114,12 @@ public class StatFunction implements IStatFunction {
 		return this;
 	}
 
+	@Override
 	public boolean hasConditions() {
 		return conditions != null;
 	}
 
+	@Override
 	public int getRandomNumber() {
 		return rndNumber;
 	}

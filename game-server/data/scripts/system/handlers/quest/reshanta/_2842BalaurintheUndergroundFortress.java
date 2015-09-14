@@ -59,6 +59,7 @@ public class _2842BalaurintheUndergroundFortress extends QuestHandler {
 		return false;
 	}
 
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);

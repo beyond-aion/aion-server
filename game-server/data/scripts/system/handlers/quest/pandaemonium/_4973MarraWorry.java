@@ -20,6 +20,7 @@ public class _4973MarraWorry extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798392).addOnQuestStart(questId);
 		qe.registerQuestNpc(798392).addOnTalkEvent(questId);

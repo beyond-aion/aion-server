@@ -73,7 +73,8 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 	private void skill() {
 			SkillEngine.getInstance().getSkill(getOwner(), 18158, 56, getOwner()).useNoAnimationSkill();
 		    ThreadPoolManager.getInstance().schedule(new Runnable() {
-			    public void run() {
+			    @Override
+					public void run() {
                     SkillEngine.getInstance().getSkill(getOwner(), 18160, 56, getOwner()).useNoAnimationSkill();
 				}
 			}, 4000);

@@ -22,6 +22,7 @@ public class _41540ItAllInTheAether extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212539, questId);
 		qe.registerQuestNpc(205954).addOnQuestStart(questId);

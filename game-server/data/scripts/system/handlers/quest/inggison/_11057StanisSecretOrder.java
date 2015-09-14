@@ -23,6 +23,7 @@ public class _11057StanisSecretOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206843, questId);
 		qe.registerQuestNpc(799043).addOnTalkEvent(questId);

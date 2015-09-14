@@ -23,6 +23,7 @@ public class _11061TwilightOfRagnarok extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206847, questId);
 		qe.registerQuestNpc(799043).addOnTalkEvent(questId);

@@ -21,6 +21,7 @@ public class _3712DredgionPrisonBreak extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(279045).addOnQuestStart(questId);
 		qe.registerQuestNpc(279045).addOnTalkEvent(questId);

@@ -83,6 +83,7 @@ class AnnotatedMethodImpl implements AnnotatedMethod {
 		}
 	}
 
+	@Override
 	public Annotation[] getAllAnnotations() {
 		if (annotations == null)
 			annotations = getAllAnnotationsCalculated();
@@ -95,14 +96,17 @@ class AnnotatedMethodImpl implements AnnotatedMethod {
 	}
 	
 	
+	@Override
 	public AnnotatedClass getAnnotatedClass() {
 		return annotatedClass;
 	}
 
+	@Override
 	public Annotation getAnnotation(Class<?> annotationClass) {
 		return getAllAnnotationMap().get(annotationClass);
 	}
 
+	@Override
 	public Method getMethod() {
 		return method;
 	}

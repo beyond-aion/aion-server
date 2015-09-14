@@ -23,6 +23,7 @@ public class _21125MysteryBlueprint extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207865, questId);
 		qe.registerQuestNpc(799295).addOnTalkEvent(questId);

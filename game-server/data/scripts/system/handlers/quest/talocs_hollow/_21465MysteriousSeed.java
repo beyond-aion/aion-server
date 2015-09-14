@@ -27,6 +27,7 @@ public class _21465MysteriousSeed extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182209527, questId);
 		qe.registerQuestNpc(279000).addOnTalkEvent(questId);

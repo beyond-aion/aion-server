@@ -28,6 +28,7 @@ public class _37003CamouflageKillers extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700968).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799836).addOnTalkEvent(questId);

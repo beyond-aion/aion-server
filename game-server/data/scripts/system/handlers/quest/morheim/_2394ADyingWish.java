@@ -33,6 +33,7 @@ public class _2394ADyingWish extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204343).addOnQuestStart(questId);
 		qe.registerQuestNpc(204343).addOnTalkEvent(questId);

@@ -57,6 +57,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 		return false;
 	}
 
+	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		// Allow to use body even when quest was completed
 		return env.getTargetId() == 700961 && questEventType == QuestActionType.ACTION_ITEM_USE;

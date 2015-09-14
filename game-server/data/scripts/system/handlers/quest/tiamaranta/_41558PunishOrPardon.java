@@ -22,6 +22,7 @@ public class _41558PunishOrPardon extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212527, questId);
 		qe.registerGetingItem(182212528, questId);

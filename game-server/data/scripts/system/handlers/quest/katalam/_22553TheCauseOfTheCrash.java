@@ -20,6 +20,7 @@ public class _22553TheCauseOfTheCrash extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801005).addOnQuestStart(questId);
 		qe.registerQuestNpc(801005).addOnTalkEvent(questId);

@@ -33,6 +33,7 @@ public class _18405MemoriesInTheCornerOfHisMind extends QuestHandler {
 		qe.registerQuestItem(182215002, questId);
 	}
 
+	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 

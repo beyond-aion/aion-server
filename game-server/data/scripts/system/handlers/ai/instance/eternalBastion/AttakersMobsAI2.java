@@ -21,6 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class AttakersMobsAI2 extends AggressiveNpcAI2 {
 	
 		
+	@Override
 	protected void handleMoveValidate() {
 		super.handleMoveValidate();
 		if (getOwner().getAi2().getState() == AIState.WALKING && getOwner().getState() != 1) {

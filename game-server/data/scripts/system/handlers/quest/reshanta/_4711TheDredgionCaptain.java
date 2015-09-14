@@ -20,6 +20,7 @@ public class _4711TheDredgionCaptain extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(278001).addOnQuestStart(questId);
 		qe.registerQuestNpc(278001).addOnTalkEvent(questId);

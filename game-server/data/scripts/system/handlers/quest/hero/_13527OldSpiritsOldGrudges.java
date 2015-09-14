@@ -19,6 +19,7 @@ public class _13527OldSpiritsOldGrudges extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801948).addOnQuestStart(questId);
 		qe.registerQuestNpc(801541).addOnTalkEvent(questId);

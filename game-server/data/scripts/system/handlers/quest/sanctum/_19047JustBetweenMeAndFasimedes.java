@@ -20,6 +20,7 @@ public class _19047JustBetweenMeAndFasimedes extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(203700).addOnQuestStart(questId);
 		qe.registerQuestNpc(203700).addOnTalkEvent(questId);

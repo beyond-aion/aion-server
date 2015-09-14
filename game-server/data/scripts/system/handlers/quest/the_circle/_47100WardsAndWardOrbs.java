@@ -27,6 +27,7 @@ public class _47100WardsAndWardOrbs extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.addHandlerSideQuestDrop(questId, 700970, 182211036, 5, 100);
 		qe.registerQuestNpc(700970).addOnTalkEvent(questId);

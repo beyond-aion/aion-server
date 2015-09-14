@@ -22,6 +22,7 @@ public class _3057CursedZirius extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798213).addOnQuestStart(questId);
 		qe.registerQuestNpc(798213).addOnTalkEvent(questId);

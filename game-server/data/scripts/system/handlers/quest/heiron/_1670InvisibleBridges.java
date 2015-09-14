@@ -24,6 +24,7 @@ public class _1670InvisibleBridges extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182201770, questId);
 		qe.registerQuestNpc(203837).addOnTalkEvent(questId);

@@ -27,6 +27,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 	@XmlAttribute
 	protected boolean shared;
 
+	@Override
 	public int getValue() {
 		return value;
 	}

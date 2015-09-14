@@ -23,6 +23,7 @@ public class _11233SuleionTreasure extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206875, questId);
 		qe.registerQuestNpc(799075).addOnTalkEvent(questId);

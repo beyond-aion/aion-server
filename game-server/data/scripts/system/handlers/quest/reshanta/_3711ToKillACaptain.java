@@ -20,6 +20,7 @@ public class _3711ToKillACaptain extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(278501).addOnQuestStart(questId);
 		qe.registerQuestNpc(278501).addOnTalkEvent(questId);

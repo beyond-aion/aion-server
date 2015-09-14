@@ -20,6 +20,7 @@ public class _21296PadmarashkaLegacy extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799444).addOnQuestStart(questId);
 		qe.registerQuestNpc(799318).addOnTalkEvent(questId);

@@ -22,6 +22,7 @@ public class _11512LoversLost extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205989).addOnQuestStart(questId);
 		qe.registerQuestNpc(205746).addOnTalkEvent(questId);

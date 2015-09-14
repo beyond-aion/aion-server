@@ -20,6 +20,7 @@ public class _21135VellunRequest extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799239).addOnQuestStart(questId);
 		qe.registerQuestNpc(799270).addOnTalkEvent(questId);

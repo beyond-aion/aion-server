@@ -19,6 +19,7 @@ public class SM_TOWNS_LIST extends AionServerPacket {
 		this.towns = towns;
 	}
 	
+	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(towns.size());
 		for(Town town : towns.values()) {

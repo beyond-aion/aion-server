@@ -333,6 +333,7 @@ public class BIHTreeEx implements CollisionData {
 		return rootEx.intersectWhere(bv, bbox, worldMatrix, this, results);
 	}
 
+	@Override
 	public int collideWith(Collidable other, Matrix4f worldMatrix, BoundingVolume worldBound, CollisionResults results) {
 
 		if (other instanceof Ray) {
@@ -346,9 +347,11 @@ public class BIHTreeEx implements CollisionData {
 		}
 	}
 
+	@Override
 	public void write(JmeExporter ex) throws IOException {
 	}
 
+	@Override
 	public void read(JmeImporter im) throws IOException {
 	}
 }

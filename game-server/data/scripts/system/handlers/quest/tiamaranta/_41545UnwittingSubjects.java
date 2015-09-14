@@ -21,6 +21,7 @@ public class _41545UnwittingSubjects extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(10380, questId);
 		qe.registerQuestNpc(205969).addOnQuestStart(questId);

@@ -20,6 +20,7 @@ public class _41161MeatMarket extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205583).addOnQuestStart(questId);
 		qe.registerQuestNpc(205567).addOnTalkEvent(questId);

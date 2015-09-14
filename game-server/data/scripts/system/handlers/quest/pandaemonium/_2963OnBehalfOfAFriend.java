@@ -20,6 +20,7 @@ public class _2963OnBehalfOfAFriend extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204253).addOnQuestStart(questId);
 		qe.registerQuestNpc(204253).addOnTalkEvent(questId);

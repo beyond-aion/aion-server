@@ -13,6 +13,7 @@ public class SM_FORTRESS_INFO extends AionServerPacket {
 		this.teleportStatus = teleportStatus;
 	}
 
+	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(locationId);
 		writeC(teleportStatus ? 1 : 0);

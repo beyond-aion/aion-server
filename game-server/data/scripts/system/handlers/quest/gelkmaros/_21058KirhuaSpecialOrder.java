@@ -23,6 +23,7 @@ public class _21058KirhuaSpecialOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207847, questId);
 		qe.registerQuestNpc(799360).addOnTalkEvent(questId);

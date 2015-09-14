@@ -17,6 +17,7 @@ public abstract class AbstractEvent<SourceType> extends EventObject {
 		super(source);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public SourceType getSource() {
 		return (SourceType) super.getSource();

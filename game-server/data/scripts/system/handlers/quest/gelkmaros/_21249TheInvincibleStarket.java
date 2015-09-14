@@ -22,6 +22,7 @@ public class _21249TheInvincibleStarket extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799416).addOnQuestStart(questId);
 		qe.registerQuestNpc(799529).addOnTalkEvent(questId);

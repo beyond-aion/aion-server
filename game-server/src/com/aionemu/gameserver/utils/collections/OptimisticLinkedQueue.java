@@ -98,6 +98,7 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
 	/**
 	 * Enqueues the specified element at the tail of this queue.
 	 */
+	@Override
 	public boolean offer(E e) {
 		if (e == null)
 			throw new NullPointerException();
@@ -117,6 +118,7 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
 	 * Dequeues an element from the queue. After a successful casHead, the prev and next pointers of the dequeued node are
 	 * set to null to allow garbage collection.
 	 */
+	@Override
 	public E poll() {
 		for (;;) {
 			Node<E> h = head;
@@ -155,6 +157,7 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
 		}
 	}
 	
+	@Override
 	public void clear() {
 		while (poll() != null);
 	}

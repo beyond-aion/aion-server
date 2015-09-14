@@ -26,6 +26,7 @@ public class _41519KillTheShepherd extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205938).addOnQuestStart(questId);
 		qe.registerQuestNpc(701316).addOnTalkEvent(questId);

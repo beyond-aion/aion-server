@@ -28,6 +28,7 @@ public class _37110MyYoungApprentice extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700968).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799906).addOnTalkEvent(questId);

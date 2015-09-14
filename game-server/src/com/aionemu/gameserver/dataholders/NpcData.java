@@ -118,10 +118,12 @@ public class NpcData extends ReloadableData {
 		}
 	}
 
+	@Override
 	protected List<NpcTemplate> getData() {
 		return npcs;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	protected void setData(List<?> templates) {
 		this.npcs = (List<NpcTemplate>) templates;

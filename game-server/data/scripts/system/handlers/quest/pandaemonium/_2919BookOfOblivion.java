@@ -20,6 +20,7 @@ public class _2919BookOfOblivion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204206).addOnQuestStart(questId);
 		qe.registerQuestNpc(204206).addOnTalkEvent(questId);

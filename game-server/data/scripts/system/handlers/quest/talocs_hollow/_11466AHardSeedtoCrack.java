@@ -27,6 +27,7 @@ public class _11466AHardSeedtoCrack extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182209524, questId);
 		qe.registerQuestNpc(279000).addOnTalkEvent(questId);

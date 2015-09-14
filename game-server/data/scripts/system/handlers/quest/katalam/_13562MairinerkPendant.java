@@ -23,6 +23,7 @@ public class _13562MairinerkPendant extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213370, questId);
 		qe.registerQuestNpc(800966).addOnTalkEvent(questId);

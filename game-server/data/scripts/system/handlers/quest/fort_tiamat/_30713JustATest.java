@@ -20,6 +20,7 @@ public class _30713JustATest extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205892).addOnQuestStart(questId);
 		qe.registerQuestNpc(730701).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _4905InterviewingTheVeterans extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204211).addOnQuestStart(questId);
 		qe.registerQuestNpc(204211).addOnTalkEvent(questId);

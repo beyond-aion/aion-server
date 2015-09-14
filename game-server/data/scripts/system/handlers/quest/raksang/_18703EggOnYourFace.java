@@ -23,6 +23,7 @@ public class _18703EggOnYourFace extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212202, questId);
 		qe.registerQuestItem(182212203, questId);

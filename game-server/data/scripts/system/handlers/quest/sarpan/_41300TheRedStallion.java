@@ -20,6 +20,7 @@ public class _41300TheRedStallion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205763).addOnQuestStart(questId);
 		qe.registerQuestNpc(205794).addOnTalkEvent(questId);

@@ -94,6 +94,7 @@ public class CronServiceTest extends Assert {
 				cronService.cancel(this);
 			}
 
+			@Override
 			public void finalize() throws Throwable {
 				collected.set(true);
 				super.finalize();

@@ -28,6 +28,7 @@ public class _4212MissingSidrunerk extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204283).addOnQuestStart(questId);
 		qe.registerQuestNpc(798065).addOnTalkEvent(questId);

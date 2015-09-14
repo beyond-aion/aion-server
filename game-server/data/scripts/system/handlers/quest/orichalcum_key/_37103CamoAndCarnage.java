@@ -28,6 +28,7 @@ public class _37103CamoAndCarnage extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700968).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799906).addOnTalkEvent(questId);

@@ -28,6 +28,7 @@ public class _30551OnToRentusOutpost extends QuestHandler
 		qe.registerQuestNpc(799666).addOnTalkEvent(questId); //ariana
 		qe.registerOnEnterZone(ZoneName.get("RENTUS_BASE_300280000"), questId);
 	}
+	@Override
 	public boolean onDialogEvent(QuestEnv env)
 	{
 		Player player=env.getPlayer();

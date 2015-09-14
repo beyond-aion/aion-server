@@ -89,10 +89,12 @@ class AnnotatedClassImpl implements AnnotatedClass {
 		}
 	}
 	
+	@Override
 	public Class<?> getTheClass() {
 		return theClass;
 	}
 	
+	@Override
 	public Annotation[] getAllAnnotations() {
 		if (annotations == null)
 			annotations = getAllAnnotationsCalculated();
@@ -103,6 +105,7 @@ class AnnotatedClassImpl implements AnnotatedClass {
 		return getAllAnnotationMap().values().toArray(new Annotation[0]);
 	}
 	
+	@Override
 	public Annotation getAnnotation(Class<?> annotationClass) {
 		return getAllAnnotationMap().get(annotationClass);
 	}
@@ -142,10 +145,12 @@ class AnnotatedClassImpl implements AnnotatedClass {
 			getAllMethods(clazz.getSuperclass(), methods);
 	}
 
+	@Override
 	public AnnotatedMethod getAnnotatedMethod(Method method) {
 		return getMethodMap().get(method);
 	}
 
+	@Override
 	public AnnotatedMethod[] getAnnotatedMethods() {
 		if (annotatedMethods == null)
 			annotatedMethods = getAnnotatedMethodsCalculated();
@@ -157,6 +162,7 @@ class AnnotatedClassImpl implements AnnotatedClass {
 		return values.toArray(new AnnotatedMethod[0]);
 	}
 
+	@Override
 	public AnnotatedMethod getAnnotatedMethod(String name, Class<?>[] parameterType) {
 		try {
 			return getAnnotatedMethod(getTheClass().getMethod(name, parameterType));

@@ -23,6 +23,7 @@ public class _11123SuspiciousBook extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206798, questId);
 		qe.registerQuestNpc(798991).addOnTalkEvent(questId);

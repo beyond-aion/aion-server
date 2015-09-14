@@ -21,6 +21,7 @@ public class _2449ExtricatingChaomirk extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798080).addOnQuestStart(questId);
 		qe.registerQuestNpc(798115).addOnTalkEvent(questId);

@@ -26,6 +26,7 @@ public class _16982UnexpectedGain extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(188100111, questId);
 		qe.registerQuestNpc(801543).addOnTalkEvent(questId);

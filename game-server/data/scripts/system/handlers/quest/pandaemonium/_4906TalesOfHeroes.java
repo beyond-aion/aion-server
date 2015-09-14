@@ -20,6 +20,7 @@ public class _4906TalesOfHeroes extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204211).addOnQuestStart(questId);
 		qe.registerQuestNpc(204211).addOnTalkEvent(questId);

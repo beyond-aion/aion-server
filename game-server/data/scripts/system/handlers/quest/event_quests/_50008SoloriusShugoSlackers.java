@@ -24,6 +24,7 @@ public class _50008SoloriusShugoSlackers extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(831038).addOnQuestStart(questId);
 		qe.registerQuestNpc(831038).addOnTalkEvent(questId);

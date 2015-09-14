@@ -20,6 +20,7 @@ public class _23056TheStoneLegion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801130).addOnQuestStart(questId);
 		qe.registerQuestNpc(801130).addOnTalkEvent(questId);

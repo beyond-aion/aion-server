@@ -23,6 +23,7 @@ public class _21137BerokinImageMarble extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207920, questId);
 		qe.registerQuestNpc(799270).addOnTalkEvent(questId);

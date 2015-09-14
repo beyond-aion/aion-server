@@ -20,6 +20,7 @@ public class _21106TheRealRhonnam extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799271).addOnQuestStart(questId);
 		qe.registerQuestNpc(799271).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _4718PressingTheAttack extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnDredgionReward(questId);
 		qe.registerQuestNpc(278001).addOnQuestStart(questId);

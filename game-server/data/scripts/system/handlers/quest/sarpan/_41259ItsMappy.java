@@ -24,6 +24,7 @@ public class _41259ItsMappy extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213151, questId);
 		qe.registerQuestItem(182213108, questId);

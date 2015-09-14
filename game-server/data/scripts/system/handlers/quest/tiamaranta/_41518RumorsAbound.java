@@ -22,6 +22,7 @@ public class _41518RumorsAbound extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerCanAct(questId, 701260);
 		qe.registerQuestNpc(205938).addOnQuestStart(questId);

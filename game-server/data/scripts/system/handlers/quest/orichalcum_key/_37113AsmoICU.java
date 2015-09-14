@@ -28,6 +28,7 @@ public class _37113AsmoICU extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700969).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799906).addOnTalkEvent(questId);

@@ -22,6 +22,7 @@ public class _41577TheDangersOfSolitude extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213173, questId);
 		qe.registerQuestNpc(205962).addOnQuestStart(questId);

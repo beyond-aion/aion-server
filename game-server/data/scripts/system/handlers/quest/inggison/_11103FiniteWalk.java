@@ -20,6 +20,7 @@ public class _11103FiniteWalk extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798983).addOnQuestStart(questId);
 		qe.registerQuestNpc(798983).addOnTalkEvent(questId);

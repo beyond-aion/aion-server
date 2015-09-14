@@ -20,6 +20,7 @@ public class _30763ExtractApsuGrudge extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205891).addOnQuestStart(questId);
 		qe.registerQuestNpc(730701).addOnTalkEvent(questId);

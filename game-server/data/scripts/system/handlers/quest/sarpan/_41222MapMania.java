@@ -24,6 +24,7 @@ public class _41222MapMania extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213150, questId);
 		qe.registerQuestItem(182213105, questId);

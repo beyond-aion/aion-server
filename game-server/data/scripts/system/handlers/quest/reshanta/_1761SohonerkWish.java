@@ -22,6 +22,7 @@ public class _1761SohonerkWish extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(279014).addOnQuestStart(questId);
 		qe.registerQuestNpc(279014).addOnTalkEvent(questId);

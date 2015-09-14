@@ -20,6 +20,7 @@ public class _21458PracticalResearch extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799249).addOnQuestStart(questId);
 		qe.registerQuestNpc(204052).addOnTalkEvent(questId);

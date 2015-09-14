@@ -20,6 +20,7 @@ public class _21138OddStrigik extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799415).addOnQuestStart(questId);
 		qe.registerQuestNpc(799415).addOnTalkEvent(questId);

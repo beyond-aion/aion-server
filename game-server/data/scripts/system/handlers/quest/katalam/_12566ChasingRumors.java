@@ -20,6 +20,7 @@ public class _12566ChasingRumors extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(800967).addOnQuestStart(questId);
 		qe.registerQuestNpc(800551).addOnTalkEvent(questId);

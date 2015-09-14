@@ -20,6 +20,7 @@ public class _1908UlaguruSpeaks extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(203864).addOnQuestStart(questId);
 		qe.registerQuestNpc(203864).addOnTalkEvent(questId);

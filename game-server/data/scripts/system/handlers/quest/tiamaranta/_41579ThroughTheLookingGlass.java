@@ -23,6 +23,7 @@ public class _41579ThroughTheLookingGlass extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213174, questId);
 		qe.registerQuestNpc(205940).addOnTalkEvent(questId);

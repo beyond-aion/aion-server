@@ -20,6 +20,7 @@ public class _21070TheSummation extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799406).addOnQuestStart(questId);
 		qe.registerQuestNpc(799406).addOnTalkEvent(questId);

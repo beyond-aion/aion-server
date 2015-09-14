@@ -23,6 +23,7 @@ public class _11062PadmarashkaWrath extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206848, questId);
 		qe.registerQuestNpc(799049).addOnTalkEvent(questId);

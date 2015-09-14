@@ -21,6 +21,7 @@ public class _23048HeadstrongAndLost extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnLogOut(questId);
 		qe.registerQuestNpc(801063).addOnQuestStart(questId);

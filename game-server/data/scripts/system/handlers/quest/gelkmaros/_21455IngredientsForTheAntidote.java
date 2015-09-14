@@ -20,6 +20,7 @@ public class _21455IngredientsForTheAntidote extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799404).addOnQuestStart(questId);
 		qe.registerQuestNpc(799240).addOnTalkEvent(questId);

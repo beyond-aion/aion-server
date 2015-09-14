@@ -21,6 +21,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798085).addOnQuestStart(questId);
 		qe.registerQuestNpc(798085).addOnTalkEvent(questId);

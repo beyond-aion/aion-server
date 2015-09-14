@@ -188,6 +188,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 		}
 	}
 	
+	@Override
 	public void dailyUpdateGp(AbyssRankEnum rank) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DECREASE_GP_DAILY)) {
@@ -201,6 +202,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 		}
 	}
 	
+	@Override
 	public void increaseGp(int playerObjId, int additionalGp) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INCREASE_GP_QUERY)) {
@@ -214,6 +216,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 		}
 	}
 	
+	@Override
 	public void decreaseGp(int playerObjId, int gpToRemove) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DECREASE_GP_QUERY)) {

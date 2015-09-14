@@ -18,6 +18,7 @@ public class _30355TheProtectorsMadness extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(260265).addOnQuestStart(questId);
 		qe.registerQuestNpc(260265).addOnTalkEvent(questId);

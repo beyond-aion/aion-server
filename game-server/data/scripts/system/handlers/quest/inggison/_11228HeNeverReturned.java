@@ -20,6 +20,7 @@ public class _11228HeNeverReturned extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799077).addOnQuestStart(questId);
 		qe.registerQuestNpc(799077).addOnTalkEvent(questId);

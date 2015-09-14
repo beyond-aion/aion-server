@@ -27,6 +27,7 @@ public class _37100MutantNinjaIninas extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.addHandlerSideQuestDrop(questId, 700967, 182210038, 5, 100);
 		qe.registerQuestNpc(700967).addOnTalkEvent(questId);

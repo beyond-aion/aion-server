@@ -24,6 +24,7 @@ public class _2343AncientGinseng extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182204134, questId);
 		qe.registerQuestNpc(700243).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _2958LastMinuteWorries extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204129).addOnQuestStart(questId);
 		qe.registerQuestNpc(204127).addOnTalkEvent(questId);

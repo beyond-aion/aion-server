@@ -29,6 +29,7 @@ public class _12004CanFlyOnHungryWings extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnDie(questId);
 		qe.registerOnLogOut(questId);

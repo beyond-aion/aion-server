@@ -23,6 +23,7 @@ public class _21061NewOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207850, questId);
 		qe.registerQuestNpc(799360).addOnTalkEvent(questId);

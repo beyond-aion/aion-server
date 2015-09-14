@@ -22,6 +22,7 @@ public class _13616KillTheDead extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801543).addOnQuestStart(questId);
 		qe.registerQuestNpc(801543).addOnTalkEvent(questId);

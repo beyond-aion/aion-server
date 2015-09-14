@@ -23,6 +23,7 @@ public class _21057FundinOldGrudge extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207846, questId);
 		qe.registerQuestNpc(799354).addOnTalkEvent(questId);

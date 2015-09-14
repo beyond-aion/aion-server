@@ -21,6 +21,7 @@ public class _11149TheLadyLayout extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(296491).addOnQuestStart(questId);
 		qe.registerQuestNpc(296491).addOnTalkEvent(questId);

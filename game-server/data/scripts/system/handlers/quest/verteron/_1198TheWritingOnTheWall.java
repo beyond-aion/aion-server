@@ -23,6 +23,7 @@ public class _1198TheWritingOnTheWall extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182200559, questId);
 		qe.registerQuestNpc(700009).addOnTalkEvent(questId);

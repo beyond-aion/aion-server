@@ -20,6 +20,7 @@ public class _41546JumpingToConclusions extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205969).addOnQuestStart(questId);
 		qe.registerQuestNpc(205969).addOnTalkEvent(questId);

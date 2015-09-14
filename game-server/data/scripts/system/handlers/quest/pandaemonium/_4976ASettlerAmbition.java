@@ -20,6 +20,7 @@ public class _4976ASettlerAmbition extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204181).addOnQuestStart(questId);
 		qe.registerQuestNpc(204181).addOnTalkEvent(questId);

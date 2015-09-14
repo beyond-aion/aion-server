@@ -23,6 +23,7 @@ public class _11212BalaurRecords extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206823, questId);
 		qe.registerQuestNpc(799010).addOnTalkEvent(questId);

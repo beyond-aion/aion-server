@@ -20,6 +20,7 @@ public class _4205SmackTheShulack extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(279010).addOnQuestStart(questId);
 		qe.registerQuestNpc(279010).addOnTalkEvent(questId);

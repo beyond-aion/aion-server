@@ -22,6 +22,7 @@ public class _21511TheStinkOfVictory extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205782).addOnQuestStart(questId);
 		qe.registerQuestNpc(730469).addOnTalkEvent(questId);

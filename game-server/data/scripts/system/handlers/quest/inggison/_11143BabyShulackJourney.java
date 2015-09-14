@@ -23,6 +23,7 @@ public class _11143BabyShulackJourney extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206866, questId);
 		qe.registerQuestNpc(700909).addOnTalkEvent(questId);

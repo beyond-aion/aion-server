@@ -23,6 +23,7 @@ public class _21221RustyRelic extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207878, questId);
 		qe.registerQuestNpc(799239).addOnTalkEvent(questId);

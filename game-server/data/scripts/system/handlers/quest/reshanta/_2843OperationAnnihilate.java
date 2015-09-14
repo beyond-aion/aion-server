@@ -107,6 +107,7 @@ public class _2843OperationAnnihilate extends QuestHandler {
 		return false;
 	}
 
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);

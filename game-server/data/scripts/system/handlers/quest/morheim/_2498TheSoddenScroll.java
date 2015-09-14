@@ -25,6 +25,7 @@ public class _2498TheSoddenScroll extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182204232, questId);
 		qe.registerQuestNpc(798125).addOnTalkEvent(questId);

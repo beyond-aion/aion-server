@@ -228,6 +228,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		return true;
 	}
 	
+	@Override
 	public boolean canInviteToAlliance(Player player, Player target) {
 		if (target == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_NO_USER_TO_INVITE);

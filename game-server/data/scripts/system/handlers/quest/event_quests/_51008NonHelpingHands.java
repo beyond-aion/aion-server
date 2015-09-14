@@ -24,6 +24,7 @@ public class _51008NonHelpingHands extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(831039).addOnQuestStart(questId);
 		qe.registerQuestNpc(831039).addOnTalkEvent(questId);

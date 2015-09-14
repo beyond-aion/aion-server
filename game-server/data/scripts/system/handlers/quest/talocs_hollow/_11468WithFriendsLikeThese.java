@@ -20,6 +20,7 @@ public class _11468WithFriendsLikeThese extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(9832, questId);
 		qe.registerQuestSkill(9833, questId);

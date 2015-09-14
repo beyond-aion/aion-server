@@ -20,6 +20,7 @@ public class _3970KinahDiggingDaughter extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(203893).addOnQuestStart(questId);
 		qe.registerQuestNpc(798072).addOnTalkEvent(questId);

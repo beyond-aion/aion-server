@@ -43,6 +43,7 @@ public class QuestTimer {
 		// TODO Send Packet that timer start
 		TimerTask task = new TimerTask() {
 
+			@Override
 			public void run() {
 				PacketSendUtility.sendMessage(player, "Timer is over");
 				onEnd();
@@ -74,6 +75,6 @@ public class QuestTimer {
 	 * @return
 	 */
 	public int getTimeSeconds() {
-		return (int) this.Time / 1000;
+		return this.Time / 1000;
 	}
 }

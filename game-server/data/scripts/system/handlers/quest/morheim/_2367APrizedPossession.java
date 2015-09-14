@@ -22,6 +22,7 @@ public class _2367APrizedPossession extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204339).addOnQuestStart(questId);
 		qe.registerQuestNpc(798080).addOnTalkEvent(questId);

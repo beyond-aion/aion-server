@@ -22,6 +22,7 @@ public class _3082DousingTheFlame extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798116).addOnQuestStart(questId);
 		qe.registerQuestNpc(204030).addOnTalkEvent(questId);

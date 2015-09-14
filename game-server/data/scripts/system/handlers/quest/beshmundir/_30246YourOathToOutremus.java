@@ -21,6 +21,7 @@ public class _30246YourOathToOutremus extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798926).addOnQuestStart(questId);
 		qe.registerQuestNpc(798926).addOnTalkEvent(questId);

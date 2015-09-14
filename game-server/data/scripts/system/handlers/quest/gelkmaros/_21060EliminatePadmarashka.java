@@ -23,6 +23,7 @@ public class _21060EliminatePadmarashka extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207849, questId);
 		qe.registerQuestNpc(799318).addOnTalkEvent(questId);

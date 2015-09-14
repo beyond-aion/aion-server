@@ -51,6 +51,7 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
 		return result;
 	}
 	
+	@Override
 	public String getFormattedString(MailPartType partType) {
 		String result = "";
 		if (id > 0)

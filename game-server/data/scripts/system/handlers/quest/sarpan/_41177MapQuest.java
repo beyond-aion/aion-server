@@ -24,6 +24,7 @@ public class _41177MapQuest extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213149, questId);
 		qe.registerQuestItem(182213104, questId);

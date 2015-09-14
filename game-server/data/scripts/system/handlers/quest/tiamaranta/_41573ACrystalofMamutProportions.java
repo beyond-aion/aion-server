@@ -25,6 +25,7 @@ public class _41573ACrystalofMamutProportions extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213170, questId);
 		qe.registerQuestNpc(205972).addOnTalkEvent(questId);

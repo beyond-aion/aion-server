@@ -20,6 +20,7 @@ public class _3088InCiderTrading extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798202).addOnQuestStart(questId);
 		qe.registerQuestNpc(798202).addOnTalkEvent(questId);

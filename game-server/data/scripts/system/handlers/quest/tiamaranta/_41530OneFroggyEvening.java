@@ -24,6 +24,7 @@ public class _41530OneFroggyEvening extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212531, questId);
 		qe.registerQuestNpc(205911).addOnQuestStart(questId);

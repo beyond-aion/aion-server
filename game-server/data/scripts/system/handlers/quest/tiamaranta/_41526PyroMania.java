@@ -22,6 +22,7 @@ public class _41526PyroMania extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(10379, questId);
 		qe.registerQuestNpc(205941).addOnQuestStart(questId);

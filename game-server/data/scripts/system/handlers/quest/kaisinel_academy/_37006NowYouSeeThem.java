@@ -28,6 +28,7 @@ public class _37006NowYouSeeThem extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700969).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799836).addOnTalkEvent(questId);

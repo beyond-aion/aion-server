@@ -20,6 +20,7 @@ public class _1851UnchartedIslands extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(278533).addOnQuestStart(questId);
 		qe.registerQuestNpc(278533).addOnTalkEvent(questId);

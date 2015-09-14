@@ -23,6 +23,7 @@ public class _11060TheOrbsOrders extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206846, questId);
 		qe.registerQuestNpc(799010).addOnTalkEvent(questId);

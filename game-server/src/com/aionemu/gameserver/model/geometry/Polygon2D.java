@@ -198,6 +198,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 		closedPath = null;
 	}
 
+	@Override
 	public Object clone() {
 		Polygon2D pol = new Polygon2D();
 		for (int i = 0; i < npoints; i++) {
@@ -327,10 +328,12 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @return a {@link Rectangle2D} that precisely bounds the <code>Shape</code>.
 	 */
+	@Override
 	public Rectangle2D getBounds2D() {
 		return bounds;
 	}
 
+	@Override
 	public Rectangle getBounds() {
 		if (bounds == null)
 			return null;
@@ -349,6 +352,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if the <code>Polygon</code> contains the specified coordinates; <code>false</code>
 	 *         otherwise.
 	 */
+	@Override
 	public boolean contains(double x, double y) {
 		if (npoints <= 2 || !bounds.contains(x, y)) {
 			return false;
@@ -376,6 +380,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *         <code>false</code> otherwise.
 	 * @see #contains(double, double)
 	 */
+	@Override
 	public boolean contains(Point2D p) {
 		return contains(p.getX(), p.getY());
 	}
@@ -395,6 +400,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of
 	 *         rectangular coordinates intersect each other; <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean intersects(double x, double y, double w, double h) {
 		if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
 			return false;
@@ -411,6 +417,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code>
 	 *         intersect each other; <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean intersects(Rectangle2D r) {
 		return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 	}
@@ -429,6 +436,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if this <code>Polygon</code> entirely contains the specified set of rectangular
 	 *         coordinates; <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean contains(double x, double y, double w, double h) {
 		if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
 			return false;
@@ -447,6 +455,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *         <code>false</code> otherwise.
 	 * @see #contains(double, double, double, double)
 	 */
+	@Override
 	public boolean contains(Rectangle2D r) {
 		return contains(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 	}
@@ -461,6 +470,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *          iteration, or <code>null</code> if untransformed coordinates are desired
 	 * @return a {@link PathIterator} object that provides access to the geometry of this <code>Polygon</code>.
 	 */
+	@Override
 	public PathIterator getPathIterator(AffineTransform at) {
 		updateComputingPath();
 		if (closedPath == null)
@@ -483,6 +493,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *          <code>flatness</code> parameter is ignored.
 	 * @return a <code>PathIterator</code> object that provides access to the <code>Shape</code> objects geometry.
 	 */
+	@Override
 	public PathIterator getPathIterator(AffineTransform at, double flatness) {
 		return getPathIterator(at);
 	}
@@ -633,6 +644,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 		closedPath = null;
 	}
 
+	@Override
 	public Object clone() {
 		Polyline2D pol = new Polyline2D();
 		for (int i = 0; i < npoints; i++) {
@@ -718,6 +730,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @return a <code>Rectangle</code> that defines the bounds of this <code>Polyline2D</code>.
 	 */
+	@Override
 	public Rectangle getBounds() {
 		if (bounds == null)
 			return null;
@@ -748,6 +761,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no
 	 * area.
 	 */
+	@Override
 	public boolean contains(double x, double y) {
 		return false;
 	}
@@ -766,6 +780,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @return a {@link Rectangle2D} that precisely bounds the <code>Shape</code>.
 	 */
+	@Override
 	public Rectangle2D getBounds2D() {
 		return bounds;
 	}
@@ -775,6 +790,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * required to implement the Shape interface, but in the case of Line2D objects it always returns false since a line
 	 * contains no area.
 	 */
+	@Override
 	public boolean contains(Point2D p) {
 		return false;
 	}
@@ -794,6 +810,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of
 	 *         rectangular coordinates intersect each other; <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean intersects(double x, double y, double w, double h) {
 		if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
 			return false;
@@ -810,6 +827,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code>
 	 *         intersect each other; <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean intersects(Rectangle2D r) {
 		return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 	}
@@ -819,6 +837,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * coordinates. This method is required to implement the Shape interface, but in the case of Line2D objects it always
 	 * returns false since a line contains no area.
 	 */
+	@Override
 	public boolean contains(double x, double y, double w, double h) {
 		return false;
 	}
@@ -828,6 +847,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * This method is required to implement the Shape interface, but in the case of Line2D objects it always returns false
 	 * since a line contains no area.
 	 */
+	@Override
 	public boolean contains(Rectangle2D r) {
 		return false;
 	}
@@ -842,6 +862,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 *          iteration, or <code>null</code> if untransformed coordinates are desired
 	 * @return a {@link PathIterator} object that provides access to the geometry of this <code>Polygon</code>.
 	 */
+	@Override
 	public PathIterator getPathIterator(AffineTransform at) {
 		if (path == null)
 			return null;
@@ -881,6 +902,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 *          <code>flatness</code> parameter is ignored.
 	 * @return a <code>PathIterator</code> object that provides access to the <code>Shape</code> objects geometry.
 	 */
+	@Override
 	public PathIterator getPathIterator(AffineTransform at, double flatness) {
 		return path.getPathIterator(at);
 	}

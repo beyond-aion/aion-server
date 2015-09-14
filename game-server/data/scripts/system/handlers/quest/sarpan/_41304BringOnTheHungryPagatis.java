@@ -22,6 +22,7 @@ public class _41304BringOnTheHungryPagatis extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(10390, questId);
 		qe.registerQuestNpc(205794).addOnQuestStart(questId);

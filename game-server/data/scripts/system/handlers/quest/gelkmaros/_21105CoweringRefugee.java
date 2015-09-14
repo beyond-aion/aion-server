@@ -23,6 +23,7 @@ public class _21105CoweringRefugee extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799276).addOnQuestStart(questId);
 		qe.registerQuestNpc(799276).addOnTalkEvent(questId);

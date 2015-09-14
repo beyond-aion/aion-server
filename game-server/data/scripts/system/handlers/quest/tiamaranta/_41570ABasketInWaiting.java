@@ -23,6 +23,7 @@ public class _41570ABasketInWaiting extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213168, questId);
 		qe.registerQuestNpc(701379).addOnTalkEvent(questId);

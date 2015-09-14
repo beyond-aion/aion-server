@@ -23,6 +23,7 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798182).addOnQuestStart(questId);
 		qe.registerQuestNpc(798182).addOnTalkEvent(questId);

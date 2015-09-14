@@ -23,6 +23,7 @@ public class _41191PreciousResources extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213219, questId);
 		qe.registerQuestNpc(800194).addOnTalkEvent(questId);

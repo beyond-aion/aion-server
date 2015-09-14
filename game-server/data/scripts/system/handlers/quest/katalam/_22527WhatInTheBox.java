@@ -23,6 +23,7 @@ public class _22527WhatInTheBox extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213345, questId);
 		qe.registerQuestNpc(801000).addOnTalkEvent(questId);

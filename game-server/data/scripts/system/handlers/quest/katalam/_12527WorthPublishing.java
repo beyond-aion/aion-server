@@ -23,6 +23,7 @@ public class _12527WorthPublishing extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213314, questId);
 		qe.registerQuestNpc(801010).addOnTalkEvent(questId);

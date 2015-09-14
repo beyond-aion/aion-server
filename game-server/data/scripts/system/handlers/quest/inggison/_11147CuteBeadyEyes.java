@@ -23,6 +23,7 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798997).addOnQuestStart(questId);
 		qe.registerQuestNpc(798997).addOnTalkEvent(questId);

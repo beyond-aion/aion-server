@@ -18,7 +18,8 @@ public class _13618SeekandInterpret extends QuestHandler {
         super(questId);
     }
 
-    public void register() {
+    @Override
+		public void register() {
         qe.registerQuestNpc(801543).addOnQuestStart(questId);
         qe.registerQuestNpc(801543).addOnTalkEvent(questId);
         qe.registerQuestNpc(730823).addOnTalkEvent(questId);

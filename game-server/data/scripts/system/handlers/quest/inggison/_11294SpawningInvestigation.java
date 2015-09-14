@@ -20,6 +20,7 @@ public class _11294SpawningInvestigation extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799092).addOnQuestStart(questId);
 		qe.registerQuestNpc(799010).addOnTalkEvent(questId);

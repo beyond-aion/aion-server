@@ -23,6 +23,7 @@ public class _41556SecretsOfMorale extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212554, questId);
 		qe.registerQuestNpc(205953).addOnQuestStart(questId);

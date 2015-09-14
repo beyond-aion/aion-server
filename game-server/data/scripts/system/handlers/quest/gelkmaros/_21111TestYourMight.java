@@ -20,6 +20,7 @@ public class _21111TestYourMight extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799261).addOnQuestStart(questId);
 		qe.registerQuestNpc(799261).addOnTalkEvent(questId);

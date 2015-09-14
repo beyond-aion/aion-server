@@ -26,6 +26,7 @@ public class _41521IntoTheWhirlwind extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212525, questId);
 		qe.registerQuestNpc(205962).addOnQuestStart(questId);

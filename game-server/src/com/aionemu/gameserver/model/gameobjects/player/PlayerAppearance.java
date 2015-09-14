@@ -1064,6 +1064,7 @@ public class PlayerAppearance implements Cloneable {
 	 * 
 	 * @author Divinity
 	 */
+	@Override
 	public Object clone() {
 		Object newObject = null;
 

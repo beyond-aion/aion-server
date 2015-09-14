@@ -22,6 +22,7 @@ public class _2411EarthSpiritWaterSpirit extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204369).addOnQuestStart(questId);
 		qe.registerQuestNpc(204366).addOnTalkEvent(questId);

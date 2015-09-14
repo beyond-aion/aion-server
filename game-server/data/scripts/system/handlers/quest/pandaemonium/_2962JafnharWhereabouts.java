@@ -22,6 +22,7 @@ public class _2962JafnharWhereabouts extends QuestHandler {
 	
 	int rewIdex;
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204253).addOnQuestStart(questId);
 		qe.registerQuestNpc(204253).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _12820MaybeSeraphimGetASpecialRate extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801234).addOnQuestStart(questId);
 		qe.registerQuestNpc(801234).addOnTalkEvent(questId);

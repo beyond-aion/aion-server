@@ -27,6 +27,7 @@ public class _37000ToxicInstruction extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.addHandlerSideQuestDrop(questId, 700967, 182210034, 5, 100);
 		qe.registerQuestNpc(700967).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _21217NewResearchPlan extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799316).addOnQuestStart(questId);
 		qe.registerQuestNpc(799239).addOnTalkEvent(questId);

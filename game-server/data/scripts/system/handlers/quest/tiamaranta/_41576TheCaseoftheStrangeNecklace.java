@@ -27,6 +27,7 @@ public class _41576TheCaseoftheStrangeNecklace extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213172, questId);
 		qe.registerQuestNpc(205962).addOnTalkEvent(questId);

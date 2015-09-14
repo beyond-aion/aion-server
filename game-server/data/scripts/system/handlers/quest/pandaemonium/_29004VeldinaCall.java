@@ -20,6 +20,7 @@ public class _29004VeldinaCall extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204071).addOnQuestStart(questId);
 		qe.registerQuestNpc(204075).addOnTalkEvent(questId);

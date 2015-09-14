@@ -23,6 +23,7 @@ public class _41583SignificantFind extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213178, questId);
 		qe.registerQuestNpc(205948).addOnTalkEvent(questId);

@@ -22,6 +22,7 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798084).addOnQuestStart(questId);
 		qe.registerQuestNpc(798084).addOnTalkEvent(questId);

@@ -72,6 +72,7 @@ public class _12007KnockKnockNaduka extends QuestHandler {
 		return false;
 	}
 
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);

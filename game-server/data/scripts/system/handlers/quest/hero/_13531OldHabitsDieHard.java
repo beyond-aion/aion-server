@@ -22,6 +22,7 @@ public class _13531OldHabitsDieHard extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801948).addOnQuestStart(questId);
 		qe.registerQuestNpc(801541).addOnTalkEvent(questId);

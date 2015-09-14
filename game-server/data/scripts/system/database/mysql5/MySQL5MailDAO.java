@@ -297,6 +297,7 @@ public class MySQL5MailDAO extends MailDAO {
 		return new int[0];
 	}
 	
+	@Override
 	public boolean cleanMail(final String recipient) {
 		return DB.insertUpdate(
 				"DELETE FROM mail WHERE mail_recipient_id=(SELECT id FROM players WHERE name=?) AND attached_item_id=0 AND attached_kinah_count=0",

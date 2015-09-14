@@ -58,6 +58,7 @@ public abstract class TransformEffect extends EffectTemplate {
 		effect.addToEffectedController();
 	}
 
+	@Override
 	public void endEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 
@@ -80,6 +81,7 @@ public abstract class TransformEffect extends EffectTemplate {
 			effected.setTransformed(false);
 	}
 
+	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getTransformModel().apply(this.getTransformId(), this.getTransformType(), 

@@ -23,6 +23,7 @@ public class _21062TheDramataWrath extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207851, questId);
 		qe.registerQuestNpc(799354).addOnTalkEvent(questId);

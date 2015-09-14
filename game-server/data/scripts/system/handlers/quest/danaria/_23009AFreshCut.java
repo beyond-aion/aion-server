@@ -20,6 +20,7 @@ public class _23009AFreshCut extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801108).addOnQuestStart(questId);
 		qe.registerQuestNpc(801108).addOnTalkEvent(questId);

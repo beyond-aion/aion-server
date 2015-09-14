@@ -32,6 +32,7 @@ public class PlayerSkillEntry extends SkillEntry {
 		return this.isStigma;
 	}
 
+	@Override
 	public void setSkillLvl(int skillLevel) {
 		super.setSkillLvl(skillLevel);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);

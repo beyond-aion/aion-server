@@ -33,6 +33,7 @@ public class _28405KexkrasPast extends QuestHandler {
 		qe.registerQuestItem(182215014, questId);
 	}
 
+	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 

@@ -21,6 +21,7 @@ public class _4712EscapeFromTheDredgion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(279042).addOnQuestStart(questId);
 		qe.registerQuestNpc(279042).addOnTalkEvent(questId);

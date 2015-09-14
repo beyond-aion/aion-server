@@ -39,6 +39,7 @@ public class NodeEx extends Node implements SpatialEx {
 		}
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResultsEx results) {
 		if ((getIntentions() & results.getIntentions()) == 0)
 			return 0;

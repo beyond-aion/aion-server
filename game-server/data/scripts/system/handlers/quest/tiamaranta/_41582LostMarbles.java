@@ -23,6 +23,7 @@ public class _41582LostMarbles extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213177, questId);
 		qe.registerQuestNpc(800073).addOnTalkEvent(questId);

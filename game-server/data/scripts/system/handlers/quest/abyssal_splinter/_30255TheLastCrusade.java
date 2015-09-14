@@ -18,6 +18,7 @@ public class _30255TheLastCrusade extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(260264).addOnQuestStart(questId);
 		qe.registerQuestNpc(260264).addOnTalkEvent(questId);

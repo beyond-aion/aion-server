@@ -21,6 +21,7 @@ public class _2477ADishForDukar extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204355).addOnQuestStart(questId);
 		qe.registerQuestNpc(204355).addOnTalkEvent(questId);

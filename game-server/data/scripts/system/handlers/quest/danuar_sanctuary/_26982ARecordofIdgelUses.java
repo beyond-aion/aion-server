@@ -26,6 +26,7 @@ public class _26982ARecordofIdgelUses extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(188100112, questId);
 		qe.registerQuestNpc(801547).addOnTalkEvent(questId);

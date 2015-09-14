@@ -23,6 +23,7 @@ public class _11056EliminationOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206842, questId);
 		qe.registerQuestNpc(799043).addOnTalkEvent(questId);

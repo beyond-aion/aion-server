@@ -27,6 +27,7 @@ public class _47000AltgardOrbIt extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.addHandlerSideQuestDrop(questId, 700970, 182211033, 5, 100, 0);
 		qe.registerQuestNpc(700970).addOnTalkEvent(questId);

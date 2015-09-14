@@ -23,6 +23,7 @@ public class _11058TemenosSecretOrder extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206844, questId);
 		qe.registerQuestNpc(799049).addOnTalkEvent(questId);

@@ -21,6 +21,7 @@ public class _41551AnInnocentPlan extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnLogOut(questId);
 		qe.registerQuestNpc(205966).addOnQuestStart(questId);

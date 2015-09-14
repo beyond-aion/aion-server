@@ -23,6 +23,7 @@ public class _11063QuellMastarius extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206849, questId);
 		qe.registerQuestNpc(799049).addOnTalkEvent(questId);

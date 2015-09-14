@@ -41,6 +41,7 @@ public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
 	 * @throws Exception
 	 *           is something went wrong
 	 */
+	@Override
 	protected byte[] transformClass(ClassLoader loader, byte[] clazzBytes) throws Exception {
 		ClassPool cp = new ClassPool();
 		cp.appendClassPath(new LoaderClassPath(loader));

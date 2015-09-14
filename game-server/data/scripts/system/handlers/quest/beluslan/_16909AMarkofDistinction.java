@@ -26,6 +26,7 @@ public class _16909AMarkofDistinction extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213274, questId);
 		qe.registerQuestNpc(801203).addOnTalkEvent(questId);

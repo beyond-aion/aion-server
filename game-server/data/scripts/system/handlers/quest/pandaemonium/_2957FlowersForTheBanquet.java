@@ -20,6 +20,7 @@ public class _2957FlowersForTheBanquet extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204127).addOnQuestStart(questId);
 		qe.registerQuestNpc(204129).addOnTalkEvent(questId);

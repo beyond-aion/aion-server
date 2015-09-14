@@ -20,6 +20,7 @@ public class _12565ForgottenKnowledge extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801019).addOnQuestStart(questId);
 		qe.registerQuestNpc(801016).addOnTalkEvent(questId);

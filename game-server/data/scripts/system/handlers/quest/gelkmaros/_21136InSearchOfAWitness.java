@@ -20,6 +20,7 @@ public class _21136InSearchOfAWitness extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799271).addOnQuestStart(questId);
 		qe.registerQuestNpc(799413).addOnTalkEvent(questId);

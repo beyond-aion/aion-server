@@ -22,6 +22,7 @@ public class _11006TestingTheWaters extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206704, questId);
 		qe.registerQuestItem(182206705, questId);

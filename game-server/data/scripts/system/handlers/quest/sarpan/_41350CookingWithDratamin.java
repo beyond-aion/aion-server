@@ -23,6 +23,7 @@ public class _41350CookingWithDratamin extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213112, questId);
 		qe.registerQuestNpc(701440).addOnTalkEvent(questId);

@@ -20,6 +20,7 @@ public class _2921LoveAtFirstSight extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204261).addOnQuestStart(questId);
 		qe.registerQuestNpc(204261).addOnTalkEvent(questId);

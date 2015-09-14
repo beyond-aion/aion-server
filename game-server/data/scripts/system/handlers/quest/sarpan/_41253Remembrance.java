@@ -21,6 +21,7 @@ public class _41253Remembrance extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205787).addOnQuestStart(questId);
 		qe.registerQuestNpc(205787).addOnTalkEvent(questId);

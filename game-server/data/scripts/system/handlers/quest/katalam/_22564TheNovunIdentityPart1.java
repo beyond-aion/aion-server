@@ -20,6 +20,7 @@ public class _22564TheNovunIdentityPart1 extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801004).addOnQuestStart(questId);
 		qe.registerQuestNpc(801004).addOnTalkEvent(questId);

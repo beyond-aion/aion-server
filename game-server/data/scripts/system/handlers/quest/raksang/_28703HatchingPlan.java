@@ -23,6 +23,7 @@ public class _28703HatchingPlan extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212209, questId);
 		qe.registerQuestItem(182212210, questId);

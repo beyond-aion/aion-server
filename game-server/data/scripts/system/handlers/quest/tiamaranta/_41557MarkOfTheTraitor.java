@@ -22,6 +22,7 @@ public class _41557MarkOfTheTraitor extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182212526, questId);
 		qe.registerQuestNpc(205914).addOnQuestStart(questId);

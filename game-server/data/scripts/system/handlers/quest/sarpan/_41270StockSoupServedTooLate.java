@@ -20,6 +20,7 @@ public class _41270StockSoupServedTooLate extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205762).addOnQuestStart(questId);
 		qe.registerQuestNpc(205762).addOnTalkEvent(questId);

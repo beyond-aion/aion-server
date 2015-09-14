@@ -21,6 +21,7 @@ public class _21075FatedHeartbreak extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799409).addOnQuestStart(questId);
 		qe.registerQuestNpc(799409).addOnTalkEvent(questId);

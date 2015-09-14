@@ -20,6 +20,7 @@ public class _21068TheGameIsAfoot extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799405).addOnQuestStart(questId);
 		qe.registerQuestNpc(799405).addOnTalkEvent(questId);

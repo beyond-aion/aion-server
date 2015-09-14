@@ -20,6 +20,7 @@ public class _41529ABriefInvestigation extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205911).addOnQuestStart(questId);
 		qe.registerQuestNpc(205911).addOnTalkEvent(questId);

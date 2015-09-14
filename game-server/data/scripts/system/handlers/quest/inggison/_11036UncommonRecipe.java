@@ -24,6 +24,7 @@ public class _11036UncommonRecipe extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182206731, questId);
 		qe.registerQuestNpc(798955).addOnTalkEvent(questId);

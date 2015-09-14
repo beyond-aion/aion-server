@@ -22,6 +22,7 @@ public class _11076ProofOfTalent extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799025).addOnQuestStart(questId);
 		qe.registerQuestNpc(799084).addOnTalkEvent(questId);

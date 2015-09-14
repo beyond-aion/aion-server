@@ -20,6 +20,7 @@ public class _41537StonyHeartedAncestors extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205916).addOnQuestStart(questId);
 		qe.registerQuestNpc(205954).addOnTalkEvent(questId);

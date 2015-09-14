@@ -22,6 +22,7 @@ public class _41593ChargedDefenses extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213181, questId);
 		qe.registerQuestNpc(205945).addOnQuestStart(questId);

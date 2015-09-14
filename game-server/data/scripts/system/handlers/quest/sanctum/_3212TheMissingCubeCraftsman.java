@@ -28,6 +28,7 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798321).addOnQuestStart(questId);
 		qe.registerQuestNpc(203838).addOnTalkEvent(questId);

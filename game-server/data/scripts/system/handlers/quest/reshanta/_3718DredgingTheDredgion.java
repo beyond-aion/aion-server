@@ -20,6 +20,7 @@ public class _3718DredgingTheDredgion extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnDredgionReward(questId);
 		qe.registerQuestNpc(279045).addOnQuestStart(questId);

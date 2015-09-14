@@ -28,6 +28,7 @@ public class _47006AmplifiersWithIssues extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700972).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799872).addOnTalkEvent(questId);

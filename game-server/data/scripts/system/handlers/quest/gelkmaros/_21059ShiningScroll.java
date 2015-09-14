@@ -23,6 +23,7 @@ public class _21059ShiningScroll extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182207848, questId);
 		qe.registerQuestNpc(799305).addOnTalkEvent(questId);

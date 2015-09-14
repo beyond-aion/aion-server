@@ -20,6 +20,7 @@ public class _41525VolcanicVolunteerism extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205909).addOnQuestStart(questId);
 		qe.registerQuestNpc(205911).addOnTalkEvent(questId);

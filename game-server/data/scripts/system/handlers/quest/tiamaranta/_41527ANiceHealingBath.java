@@ -22,6 +22,7 @@ public class _41527ANiceHealingBath extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(205895).addOnQuestStart(questId);
 		qe.registerQuestNpc(205964).addOnTalkEvent(questId);

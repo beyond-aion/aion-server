@@ -20,6 +20,7 @@ public class _30111CenterOfTheWeb extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799335).addOnQuestStart(questId);
 		qe.registerQuestNpc(799335).addOnTalkEvent(questId);

@@ -26,6 +26,7 @@ public class _26909TribalEmblems extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestItem(182213276, questId);
 		qe.registerQuestNpc(801207).addOnTalkEvent(questId);

@@ -44,6 +44,7 @@ public class GeometryEx extends Geometry implements SpatialEx {
 		}
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResultsEx results) {
 		// not used materialIds do not have collision intention for materials set
 		// not all material meshes have physical collisions set

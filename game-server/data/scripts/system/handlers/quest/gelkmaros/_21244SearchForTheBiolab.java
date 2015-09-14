@@ -20,6 +20,7 @@ public class _21244SearchForTheBiolab extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799317).addOnQuestStart(questId);
 		qe.registerQuestNpc(799318).addOnTalkEvent(questId);

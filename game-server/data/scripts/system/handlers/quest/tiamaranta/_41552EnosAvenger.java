@@ -35,6 +35,7 @@ public class _41552EnosAvenger extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestSkill(10377, questId);
 		qe.registerOnQuestTimerEnd(questId);

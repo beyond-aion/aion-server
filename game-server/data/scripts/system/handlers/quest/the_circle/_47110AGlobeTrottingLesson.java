@@ -28,6 +28,7 @@ public class _47110AGlobeTrottingLesson extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(700971).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799921).addOnTalkEvent(questId);

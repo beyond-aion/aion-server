@@ -22,6 +22,7 @@ public class _29048SeriphimTeachings extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798304).addOnQuestStart(questId);
 		qe.registerQuestNpc(798304).addOnTalkEvent(questId);

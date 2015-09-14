@@ -631,10 +631,12 @@ public class LegionService {
 	private void startBrigadeGeneralChangeProcess(final Player legionLeader, final Player newLegionLeader) {
 		RequestResponseHandler responseHandler = new RequestResponseHandler(legionLeader) {
 
+			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				appointBrigadeGeneral(legionLeader, newLegionLeader);
 			}
 
+			@Override
 			public void denyRequest(Creature requester, Player responder) {
 				return;
 			}

@@ -20,6 +20,7 @@ public class _21114PoisonedFungi extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(799282).addOnQuestStart(questId);
 		qe.registerQuestNpc(700727).addOnTalkEvent(questId);

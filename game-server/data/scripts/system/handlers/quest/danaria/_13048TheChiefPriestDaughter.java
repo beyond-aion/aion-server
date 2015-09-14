@@ -21,6 +21,7 @@ public class _13048TheChiefPriestDaughter extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerOnLogOut(questId);
 		qe.registerQuestNpc(801058).addOnQuestStart(questId);

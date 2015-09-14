@@ -20,6 +20,7 @@ public class _12829WhatSixSidedAndKillsDredgions extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(801235).addOnQuestStart(questId);
 		qe.registerQuestNpc(801235).addOnTalkEvent(questId);

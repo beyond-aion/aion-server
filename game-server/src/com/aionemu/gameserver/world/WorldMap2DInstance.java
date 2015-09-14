@@ -24,6 +24,7 @@ public class WorldMap2DInstance extends WorldMapInstance {
 		return new MapRegion(regionId, this, zones);
 	}
 
+	@Override
 	protected void initMapRegions() {
 		int size = this.getParent().getWorldSize();
 		// Create all mapRegion
@@ -62,6 +63,7 @@ public class WorldMap2DInstance extends WorldMapInstance {
 	/**
 	 * @return the ownerId
 	 */
+	@Override
 	public int getOwnerId() {
 		return ownerId;
 	}

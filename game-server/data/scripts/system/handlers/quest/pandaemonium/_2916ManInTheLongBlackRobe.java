@@ -20,6 +20,7 @@ public class _2916ManInTheLongBlackRobe extends QuestHandler {
 		super(questId);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(204141).addOnQuestStart(questId);
 		qe.registerQuestNpc(204141).addOnTalkEvent(questId);
