@@ -2,6 +2,7 @@ package com.aionemu.chatserver.network.gameserver;
 
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
+
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.ConnectionFactory;
 import com.aionemu.commons.network.Dispatcher;

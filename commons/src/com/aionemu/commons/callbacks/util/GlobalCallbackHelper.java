@@ -1,12 +1,13 @@
 package com.aionemu.commons.callbacks.util;
 
-import com.aionemu.commons.callbacks.Callback;
-import com.aionemu.commons.callbacks.CallbackResult;
-import com.aionemu.commons.utils.ClassUtils;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import com.aionemu.commons.callbacks.Callback;
+import com.aionemu.commons.callbacks.CallbackResult;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This class is used to manage global callbacks.<br>

@@ -1,9 +1,9 @@
 package com.aionemu.commons.database.dao;
 
+import java.lang.reflect.Modifier;
+
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.utils.ClassUtils;
-
-import java.lang.reflect.Modifier;
 
 /**
  * Utility class that loads all DAO's after script context initialization.<br>

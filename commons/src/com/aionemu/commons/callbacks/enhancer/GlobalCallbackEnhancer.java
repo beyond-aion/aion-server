@@ -1,16 +1,25 @@
 package com.aionemu.commons.callbacks.enhancer;
 
+import java.io.ByteArrayInputStream;
+import java.util.HashSet;
+import java.util.Set;
+
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtField;
+import javassist.CtMethod;
+import javassist.LoaderClassPath;
+import javassist.Modifier;
+import javassist.NotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.commons.callbacks.util.CallbacksUtil;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
-import javassist.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.ByteArrayInputStream;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author SoulKeeper

@@ -1,9 +1,9 @@
 package com.aionemu.commons.scripting;
 
-import com.aionemu.commons.scripting.classlistener.ClassListener;
-
 import java.io.File;
 import java.util.Collection;
+
+import com.aionemu.commons.scripting.classlistener.ClassListener;
 
 /**
  * This class represents script context that can be loaded, unloaded, etc...<br>

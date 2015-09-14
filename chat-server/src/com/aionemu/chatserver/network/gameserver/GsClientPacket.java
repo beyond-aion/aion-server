@@ -1,8 +1,10 @@
 package com.aionemu.chatserver.network.gameserver;
 
 import java.nio.ByteBuffer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
 /**

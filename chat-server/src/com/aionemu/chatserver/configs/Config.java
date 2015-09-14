@@ -2,8 +2,10 @@ package com.aionemu.chatserver.configs;
 
 import java.net.InetSocketAddress;
 import java.util.Properties;
-import org.slf4j.LoggerFactory;
+
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;

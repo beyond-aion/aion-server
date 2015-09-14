@@ -1,12 +1,23 @@
 package com.aionemu.commons.scripting.impl.javacompiler;
 
-import com.aionemu.commons.scripting.ScriptClassLoader;
-
-import javax.tools.*;
-import javax.tools.JavaFileObject.Kind;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.tools.DiagnosticListener;
+import javax.tools.FileObject;
+import javax.tools.ForwardingJavaFileManager;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.JavaFileObject.Kind;
+import javax.tools.StandardLocation;
+
+import com.aionemu.commons.scripting.ScriptClassLoader;
 
 /**
  * This class extends manages loaded classes. It is also responsible for tricking compiler. Unfortunally compiler doen't

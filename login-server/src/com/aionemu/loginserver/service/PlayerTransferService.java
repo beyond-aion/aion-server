@@ -3,8 +3,8 @@ package com.aionemu.loginserver.service;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

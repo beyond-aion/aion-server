@@ -1,12 +1,13 @@
 package com.aionemu.commons.callbacks.enhancer;
 
-import com.aionemu.commons.utils.ExitCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.utils.ExitCode;
 
 /**
  * Basic class that checks if class can be transformed. JDK classes are not a subject of transformation.

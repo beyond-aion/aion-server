@@ -1,6 +1,10 @@
 package com.aionemu.commons.services;
 
-import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
+import java.lang.reflect.Constructor;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
@@ -9,11 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Constructor;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
+import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
 
 /**
  * @author SoulKeeper

@@ -1,12 +1,13 @@
 package com.aionemu.commons.scripting.classlistener;
 
+import java.lang.reflect.Modifier;
+import java.util.Map;
+
+import org.quartz.JobDetail;
+
 import com.aionemu.commons.scripting.metadata.Scheduled;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ClassUtils;
-import org.quartz.JobDetail;
-
-import java.lang.reflect.Modifier;
-import java.util.Map;
 
 public class ScheduledTaskClassListener implements ClassListener {
 

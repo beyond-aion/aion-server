@@ -1,19 +1,23 @@
 package com.aionemu.commons.database.dao;
 
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMajorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMinorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseName;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.bind.JAXBException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.aionemu.commons.database.DatabaseFactory.*;
-import java.io.FileNotFoundException;
-import javax.xml.bind.JAXBException;
 
 /**
  * This class manages {@link DAO} implementations, it resolves valid implementation for current database

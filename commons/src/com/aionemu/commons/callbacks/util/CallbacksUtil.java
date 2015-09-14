@@ -1,11 +1,12 @@
 package com.aionemu.commons.callbacks.util;
 
-import com.aionemu.commons.callbacks.Callback;
-import com.aionemu.commons.callbacks.CallbackPriority;
+import java.util.List;
+
 import javassist.CtMethod;
 import javassist.bytecode.AnnotationsAttribute;
 
-import java.util.List;
+import com.aionemu.commons.callbacks.Callback;
+import com.aionemu.commons.callbacks.CallbackPriority;
 
 @SuppressWarnings("rawtypes")
 public class CallbacksUtil {

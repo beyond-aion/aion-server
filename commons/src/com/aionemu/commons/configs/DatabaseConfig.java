@@ -1,8 +1,8 @@
 package com.aionemu.commons.configs;
 
-import com.aionemu.commons.configuration.Property;
-
 import java.io.File;
+
+import com.aionemu.commons.configuration.Property;
 
 /**
  * This class holds all configuration of database

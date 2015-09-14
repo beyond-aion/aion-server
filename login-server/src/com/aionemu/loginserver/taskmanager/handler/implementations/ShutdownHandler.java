@@ -1,9 +1,10 @@
 package com.aionemu.loginserver.taskmanager.handler.implementations;
 
-import com.aionemu.loginserver.Shutdown;
-import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aionemu.loginserver.Shutdown;
+import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
 
 /**
  * @author Divinity, nrg

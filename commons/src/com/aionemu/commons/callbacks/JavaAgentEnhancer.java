@@ -1,9 +1,9 @@
 package com.aionemu.commons.callbacks;
 
+import java.lang.instrument.Instrumentation;
+
 import com.aionemu.commons.callbacks.enhancer.GlobalCallbackEnhancer;
 import com.aionemu.commons.callbacks.enhancer.ObjectCallbackEnhancer;
-
-import java.lang.instrument.Instrumentation;
 
 /**
  * This class is used as javaagent to do on-class-load transformations with objects whose methods are marked by

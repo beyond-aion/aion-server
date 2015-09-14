@@ -1,15 +1,15 @@
 package com.aionemu.chatserver.service;
 
-import com.aionemu.chatserver.ShutdownHook;
-import com.aionemu.chatserver.configs.Config;
-import com.aionemu.chatserver.model.RestartFrequency;
-
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aionemu.chatserver.ShutdownHook;
+import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.model.RestartFrequency;
 
 /**
  *

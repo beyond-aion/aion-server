@@ -2,6 +2,7 @@ package com.aionemu.gameserver.geoEngine.scene;
 
 import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.jme3.collision.Collidable;
+import com.jme3.scene.Spatial;
 
 /**
  * @author Neon (based on MrPoke & Rolandas' work)

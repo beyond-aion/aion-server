@@ -1,10 +1,5 @@
 package com.aionemu.commons.scripting;
 
-import com.aionemu.commons.scripting.url.VirtualClassURLStreamHandler;
-import com.aionemu.commons.utils.ClassUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,6 +9,12 @@ import java.net.URLStreamHandlerFactory;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.scripting.url.VirtualClassURLStreamHandler;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * Abstract class loader that should be extended by child classloaders. If needed, this class should wrap another

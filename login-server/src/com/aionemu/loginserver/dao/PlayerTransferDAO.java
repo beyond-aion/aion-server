@@ -1,6 +1,7 @@
 package com.aionemu.loginserver.dao;
 
 import javolution.util.FastTable;
+
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
 

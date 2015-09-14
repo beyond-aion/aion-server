@@ -1,10 +1,11 @@
 package com.aionemu.commons.utils.xml;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
-import java.io.IOException;
-import java.io.StringWriter;
 
 public class StringSchemaOutputResolver extends SchemaOutputResolver {
 

@@ -1,8 +1,8 @@
 package com.aionemu.chatserver.common.netty;
 
 import org.jboss.netty.buffer.ChannelBuffer;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class BaseClientPacket extends AbstractPacket
 {

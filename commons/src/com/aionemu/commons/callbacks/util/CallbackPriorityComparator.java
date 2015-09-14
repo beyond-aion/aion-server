@@ -1,8 +1,8 @@
 package com.aionemu.commons.callbacks.util;
 
-import com.aionemu.commons.callbacks.Callback;
-
 import java.util.Comparator;
+
+import com.aionemu.commons.callbacks.Callback;
 
 /**
  * Compares priority of two callbacks.<br>

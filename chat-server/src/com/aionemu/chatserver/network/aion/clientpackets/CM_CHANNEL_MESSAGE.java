@@ -3,8 +3,8 @@ package com.aionemu.chatserver.network.aion.clientpackets;
 import java.util.Arrays;
 
 import org.jboss.netty.buffer.ChannelBuffer;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.dao.ChatLogDAO;
