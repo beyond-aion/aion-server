@@ -19885,8 +19885,88 @@
             <item id="186000056" name="Greater Ancient Goblet" count="6"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052430" decomposable_name="Guardian Tribunus' Weapon Box"/>
-    <decomposable item_id="188052431" decomposable_name="Archon Tribunus' Weapon Box"/>
+    <decomposable item_id="188052430" decomposable_name="Guardian Tribunus' Weapon Box">
+    	<items>
+    		<item id="100000617" name="Guardian Tribunus' Sword"/>
+    	</items>
+    	<items>
+    		<item id="100100481" name="Guardian Tribunus' Warhammer"/>
+    	</items>
+    	<items>
+    		<item id="100200588" name="Guardian Tribunus' Dagger"/>
+    	</items>
+    	<items>
+    		<item id="100500478" name="Guardian Tribunus' Jewel"/>
+    	</items>
+    	<items>
+    		<item id="100600511" name="Guardian Tribunus' Tome"/>
+    	</items>
+    	<items>
+    		<item id="100900474" name="Guardian Tribunus' Greatsword"/>
+    	</items>
+    	<items>
+    		<item id="101300463" name="Guardian Tribunus' Spear"/>
+    	</items>
+    	<items>
+    		<item id="101500480" name="Guardian Tribunus' Staff"/>
+    	</items>
+    	<items>
+    		<item id="101700493" name="Guardian Tribunus' Longbow"/>
+    	</items>
+    	<items>
+    		<item id="101800503" name="Guardian Tribunus' Pistol"/>
+    	</items>
+    	<items>
+    		<item id="101900490" name="Guardian Tribunus' Aethercannon"/>
+    	</items>
+    	<items>
+    		<item id="102000520" name="Guardian Tribunus' Harp"/>
+    	</items>
+    	<items>
+    		<item id="102100486" name="Guardian Tribunus' Cipher-Blade"/>
+    	</items>
+    </decomposable>
+    <decomposable item_id="188052431" decomposable_name="Archon Tribunus' Weapon Box">
+    	<items>
+    		<item id="100000618" name="Archon Tribunus' Sword"/>
+    	</items>
+    	<items>
+    		<item id="100100482" name="Archon Tribunus' Warhammer"/>
+    	</items>
+    	<items>
+    		<item id="100200589" name="Archon Tribunus' Dagger"/>
+    	</items>
+    	<items>
+    		<item id="100500479" name="Archon Tribunus' Jewel"/>
+    	</items>
+    	<items>
+    		<item id="100600512" name="Archon Tribunus' Tome"/>
+    	</items>
+    	<items>
+    		<item id="100900475" name="Archon Tribunus' Greatsword"/>
+    	</items>
+    	<items>
+    		<item id="101300464" name="Archon Tribunus' Spear"/>
+    	</items>
+    	<items>
+    		<item id="101500481" name="Archon Tribunus' Staff"/>
+    	</items>
+    	<items>
+    		<item id="101700494" name="Archon Tribunus' Longbow"/>
+    	</items>
+    	<items>
+    		<item id="101800504" name="Archon Tribunus' Pistol"/>
+    	</items>
+    	<items>
+    		<item id="101900491" name="Archon Tribunus' Aethercannon"/>
+    	</items>
+    	<items>
+    		<item id="102000521" name="Archon Tribunus' Harp"/>
+    	</items>
+    	<items>
+    		<item id="102100487" name="Archon Tribunus' Cipher-Blade"/>
+    	</items>
+    </decomposable>
     <decomposable item_id="188052432" decomposable_name="Greater Platinum Coin Reward Box">
         <items chance="28.0">
             <random_item type="SCROLLS" count="30"/>
