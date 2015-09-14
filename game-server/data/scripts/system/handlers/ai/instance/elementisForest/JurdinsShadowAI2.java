@@ -10,7 +10,7 @@ import com.aionemu.gameserver.ai2.AIName;
  */
 @AIName("jurdinshadow")
 public class JurdinsShadowAI2 extends AggressiveNpcAI2 {
-	
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

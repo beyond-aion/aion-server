@@ -79,9 +79,9 @@ public class _14030RetrievedMemory extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							}
 						}
-							if(var == 3){
+							if (var == 3) {
 								return sendQuestDialog(env, 2034);
-						}
+							}
 						case SETPRO2: {
 							TeleportService2.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.BEAM_ANIMATION);
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -90,8 +90,8 @@ public class _14030RetrievedMemory extends QuestHandler {
 							if ((!giveQuestItem(env, 182215387, 1)))
 								return false;
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
+				}
 					break;
 				case 700551: { // Fissure of Destiny
 					if (env.getDialog() == DialogAction.USE_OBJECT && var == 4) {
@@ -115,7 +115,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
-								changeQuestStep(env, 4, 5, false); 
+								changeQuestStep(env, 4, 5, false);
 								return true;
 							}
 						}
@@ -131,24 +131,24 @@ public class _14030RetrievedMemory extends QuestHandler {
 					}
 					break;
 				}
-				
-				}
+
 			}
-		
+		}
+
 		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) { // Fasimedes
-				switch(env.getDialog()){
-				case USE_OBJECT:{
-					return sendQuestDialog(env, 3739);
+				switch (env.getDialog()) {
+					case USE_OBJECT: {
+						return sendQuestDialog(env, 3739);
+					}
+					case SELECT_QUEST_REWARD: {
+						return sendQuestDialog(env, 5);
+					}
+					default: {
+						return sendQuestEndDialog(env);
+					}
 				}
-				case SELECT_QUEST_REWARD:{
-					return sendQuestDialog(env, 5);	
-				}
-				default: {
-					return sendQuestEndDialog(env);
-				}
-				}
-				
+
 			}
 		}
 		return false;
@@ -168,8 +168,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 				if (var == 54)
 					QuestService.addNewSpawn(310120000, player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
 				return defaultOnKillEvent(env, npcIds, 2, 55); // 2 - 55
-			}
-			else if (var == 55) {
+			} else if (var == 55) {
 				return defaultOnKillEvent(env, 215400, 55, 56); // 56
 			}
 		}
@@ -184,8 +183,8 @@ public class _14030RetrievedMemory extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var > 4) {
 				changeQuestStep(env, var, 4, false); // 4
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -201,8 +200,8 @@ public class _14030RetrievedMemory extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				if (var > 4) {
 					changeQuestStep(env, var, 5, false); // 5
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
@@ -214,4 +213,4 @@ public class _14030RetrievedMemory extends QuestHandler {
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env);
 	}
-}	
+}

@@ -18,7 +18,6 @@ import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- *
  * @author xTz
  */
 public class AutoGeneralInstance extends AutoInstance {
@@ -37,13 +36,11 @@ public class AutoGeneralInstance extends AutoInstance {
 				if (clericSize > 0) {
 					return AGQuestion.FAILED;
 				}
-			}
-			else if (playerClass.equals(PlayerClass.TEMPLAR)) {
+			} else if (playerClass.equals(PlayerClass.TEMPLAR)) {
 				if (templarSize > 0) {
 					return AGQuestion.FAILED;
 				}
-			}
-			else {
+			} else {
 				int size = players.size();
 				size -= clericSize;
 				size -= templarSize;
@@ -53,8 +50,7 @@ public class AutoGeneralInstance extends AutoInstance {
 			}
 			players.put(player.getObjectId(), new AGPlayer(player));
 			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -69,8 +65,7 @@ public class AutoGeneralInstance extends AutoInstance {
 			if (!instance.isRegistered(groupId)) {
 				instance.register(groupId);
 			}
-		}
-		else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup2()) {
+		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup2()) {
 			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup2(), player);
 		}
 		Integer object = player.getObjectId();

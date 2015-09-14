@@ -31,7 +31,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 		this.objectId = member.getObjectId();
 		this.slot = slot;
 	}
-	
+
 	public SM_ALLIANCE_MEMBER_INFO(PlayerAllianceMember member, PlayerAllianceEvent event) {
 		this(member, event, 0);
 	}
@@ -42,8 +42,8 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 		WorldPosition wp = player.getPosition();
 
 		/**
-		 * Required so that when member is disconnected, and his playerAllianceGroup slot is changed, he will continue to
-		 * appear as disconnected to the alliance.
+		 * Required so that when member is disconnected, and his playerAllianceGroup slot is changed, he will continue to appear as disconnected to the
+		 * alliance.
 		 */
 		if (event == PlayerAllianceEvent.ENTER && !player.isOnline())
 			event = PlayerAllianceEvent.ENTER_OFFLINE;
@@ -58,8 +58,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 			writeD(pls.getCurrentMp());
 			writeD(pls.getMaxFp());
 			writeD(pls.getCurrentFp());
-		}
-		else {
+		} else {
 			writeD(0);
 			writeD(0);
 			writeD(0);
@@ -68,7 +67,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 			writeD(0);
 		}
 
-		writeD(0);//unk 3.5
+		writeD(0);// unk 3.5
 		writeD(wp.getMapId());
 		writeD(wp.getMapId() + wp.getInstanceId() - 1);
 		writeF(wp.getX());
@@ -92,7 +91,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 				writeD(0x00); // unk
 				writeD(0x00); // unk
 				writeC(slot);
-				Collection<Effect>_abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);		
+				Collection<Effect> _abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);
 				writeH(_abnormalEffects.size()); // Abnormal effects
 				for (Effect effect : _abnormalEffects) {
 					writeD(effect.getEffectorId()); // casterid
@@ -101,7 +100,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 					writeC(effect.getTargetSlot()); // unk ?
 					writeD(effect.getRemainingTime()); // estimatedtime
 				}
-				
+
 				writeD(0x00);
 				writeD(0x00);
 				writeD(0x00);
@@ -124,7 +123,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 				writeD(0x00); // unk
 				if (player.isOnline()) {
 					writeC(SkillTargetSlot.FULLSLOTS);
-					Collection<Effect>abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
+					Collection<Effect> abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
 					writeH(abnormalEffects.size()); // Abnormal effects
 					for (Effect effect : abnormalEffects) {
 						writeD(effect.getEffectorId()); // casterid
@@ -141,8 +140,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 					writeD(0x00);
 					writeD(0x00);
 					writeD(0x00);
-				}
-				else {
+				} else {
 					writeH(0);
 				}
 				break;

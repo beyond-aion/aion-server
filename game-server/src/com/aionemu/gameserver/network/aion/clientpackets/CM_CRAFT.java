@@ -41,32 +41,32 @@ public class CM_CRAFT extends AionClientPacket {
 		targetObjId = readD();
 		materialsCount = readH();
 		craftType = readC();
-//		un used
-//		for (int i = 0; i < materialsCount; i++) {
-//			readD(); // materialId
-//			readQ(); // materialCount
-//		}
+		// un used
+		// for (int i = 0; i < materialsCount; i++) {
+		// readD(); // materialId
+		// readQ(); // materialCount
+		// }
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if(player == null || !player.isSpawned())
+		if (player == null || !player.isSpawned())
 			return;
 		// disallow crafting in shutdown progress..
-		if(player.getController().isInShutdownProgress())
+		if (player.getController().isInShutdownProgress())
 			return;
 
-		//129 = Morph Substances
-		if(unk != 129) {
+		// 129 = Morph Substances
+		if (unk != 129) {
 			VisibleObject staticObject = player.getKnownList().getKnownObjects().get(targetObjId);
-			if(staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10)
-					|| staticObject.getObjectTemplate().getTemplateId() != targetTemplateId)
+			if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10)
+				|| staticObject.getObjectTemplate().getTemplateId() != targetTemplateId)
 				return;
 		}
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CRAFT_ITEMS) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CRAFT_ITEMS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;

@@ -561,7 +561,7 @@ public enum TribeClass {
 	ZAIF_ADARU,
 	ZAIF_AMINX,
 	ZAIF_ATOG,
-	//Start new 4.7 NA Tribes
+	// Start new 4.7 NA Tribes
 	GCHIEF_DARK,
 	GCHIEF_LIGHT,
 	GCHIEF_DRAGON,
@@ -657,7 +657,7 @@ public enum TribeClass {
 	GAB1_TURRET,
 	DRAKAN,
 	WORLDRAID_NPC,
-	//Start new 4.7.5 NA Tribes
+	// Start new 4.7.5 NA Tribes
 	AB1_DOORKILLER,
 	AB1_DOOR_DA,
 	AB1_DOOR_LI,
@@ -677,7 +677,7 @@ public enum TribeClass {
 	IDSWEEP_POLYMORPHD,
 	IDSWEEP_POLYMORPHL,
 	SIEGEWEAPON_PC,
-	SIEGEWEAPON_PC_DARK;		
+	SIEGEWEAPON_PC_DARK;
 
 	private Race guardRace;
 	private boolean isBasic;

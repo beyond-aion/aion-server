@@ -31,7 +31,7 @@ public class SM_QUEST_COMPLETED_LIST extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeH(unk); // 2.1
 		writeH((negative ? -1 : 1) * (questState.size() & 0xFFFF));
-		//QuestsData QUEST_DATA = DataManager.QUEST_DATA;
+		// QuestsData QUEST_DATA = DataManager.QUEST_DATA;
 		for (QuestState qs : questState) {
 			writeD(qs.getQuestId());
 			writeC(qs.getCompleteCount());

@@ -30,8 +30,7 @@ public class LongTransformer implements PropertyTransformer<Long> {
 	public Long transform(String value, Field field) throws TransformationException {
 		try {
 			return Long.decode(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

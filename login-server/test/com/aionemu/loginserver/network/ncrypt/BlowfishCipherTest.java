@@ -14,9 +14,8 @@ public class BlowfishCipherTest {
 	/**
 	 * Initial key
 	 */
-	private static final byte[] INITIAL_KEY = { (byte) 0x6b, (byte) 0x60, (byte) 0xcb, (byte) 0x5b, (byte) 0x82,
-		(byte) 0xce, (byte) 0x90, (byte) 0xb1, (byte) 0xcc, (byte) 0x2b, (byte) 0x6c, (byte) 0x55, (byte) 0x6c,
-		(byte) 0x6c, (byte) 0x6c, (byte) 0x6c };
+	private static final byte[] INITIAL_KEY = { (byte) 0x6b, (byte) 0x60, (byte) 0xcb, (byte) 0x5b, (byte) 0x82, (byte) 0xce, (byte) 0x90, (byte) 0xb1,
+		(byte) 0xcc, (byte) 0x2b, (byte) 0x6c, (byte) 0x55, (byte) 0x6c, (byte) 0x6c, (byte) 0x6c, (byte) 0x6c };
 
 	/**
 	 * A test for a new blowfish cipher
@@ -49,8 +48,7 @@ public class BlowfishCipherTest {
 	public void testBlowfishKeygenPerformance() {
 		try {
 			KeyGen.init();
-		}
-		catch (GeneralSecurityException e) {
+		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
 		}
 

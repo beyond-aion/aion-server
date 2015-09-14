@@ -67,14 +67,14 @@ public class TradeListTemplate {
 	public int getSellPriceRate() {
 		return sellPriceRate;
 	}
-	
+
 	/**
 	 * @return the sellPriceRate2 //new 4.7
 	 */
 	public int getSellPriceRate2() {
 		return sellPriceRate2;
 	}
-	
+
 	/**
 	 * @return the apSellPriceRate2 //new 4.7
 	 */

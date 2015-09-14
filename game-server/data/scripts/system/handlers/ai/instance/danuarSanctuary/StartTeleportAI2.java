@@ -9,14 +9,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("dsiportal")
 public class StartTeleportAI2 extends NpcAI2 {
-	
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
@@ -27,7 +25,7 @@ public class StartTeleportAI2 extends NpcAI2 {
 		switchWay(player);
 		return true;
 	}
-	
+
 	private void switchWay(Player player) {
 		Item key = null;
 		float x = 0;
@@ -57,12 +55,11 @@ public class StartTeleportAI2 extends NpcAI2 {
 				h = 0;
 				break;
 		}
-		
+
 		if (key != null) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), x, y, z, h, TeleportAnimation.BEAM_ANIMATION);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 		}
 	}

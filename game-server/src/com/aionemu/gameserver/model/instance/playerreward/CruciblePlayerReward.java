@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.instance.playerreward;
 
 /**
- *
  * @author xTz
  */
 public class CruciblePlayerReward extends InstancePlayerReward {
@@ -47,11 +46,11 @@ public class CruciblePlayerReward extends InstancePlayerReward {
 	public void setPlayerLeave() {
 		isPlayerLeave = true;
 	}
-	
+
 	public void setPlayerDefeated(boolean value) {
 		isPlayerDefeated = value;
 	}
-	
+
 	public boolean isPlayerDefeated() {
 		return isPlayerDefeated;
 	}

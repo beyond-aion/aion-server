@@ -88,14 +88,14 @@ public enum WorldMapType {
 
 	// Map 2.6
 	CRUCIBLE_CHALLENGE(300320000),
-	
+
 	// Maps 2.7
 	ARENA_OF_CHAOS(300350000),
 	ARENA_OF_DISCIPLINE(300360000),
 	CHAOS_TRAINING_GROUNDS(300420000),
 	DISCIPLINE_TRAINING_GROUNDS(300430000),
 	PADMARASHKA_CAVE(320150000),
-	
+
 	// Test Map
 	TEST_BASIC(900020000),
 	TEST_SERVER(900030000),
@@ -103,9 +103,9 @@ public enum WorldMapType {
 	HOUSING_BARRACK(900110000),
 	Region_housing(900130000),
 	Advanced_Personal_Housing(900140000),
-	
+
 	// Maps 3.0
-	
+
 	// Instances
 	RAKSANG(300310000),
 	RENTUS_BASE(300280000),
@@ -115,20 +115,20 @@ public enum WorldMapType {
 	MUADA_TRENCHER(300380000),
 	STEEL_RAKE_CABIN(300460000),
 	TERATH_DREDGION(300440000),
-	
+
 	// Map 3.5
 	ARENA_OF_HARMONY(300450000),
 	SATRA_TREASURE_HOARD(300470000),
 	IDTiamat_Solo(300490000),
-	IDTiamat_Israphel(300500000), //Israphel's Space
+	IDTiamat_Israphel(300500000), // Israphel's Space
 	TIAMAT_STRONGHOLD(300510000),
-	DRAGON_LORDS_REFUGE(300520000), //Dragon Lord's Refuge instance
+	DRAGON_LORDS_REFUGE(300520000), // Dragon Lord's Refuge instance
 	IDArena_Glory(300550000),
-	IDDF2Flying_Event01(300560000), //Sky Temple of Arkanis
+	IDDF2Flying_Event01(300560000), // Sky Temple of Arkanis
 	IDArena_Team01_T(300570000),
-	UNSTABLE_SPLINTER(300600000), //Unstable Abyssal Splinter
+	UNSTABLE_SPLINTER(300600000), // Unstable Abyssal Splinter
 	HEXWAY(300700000),
-	
+
 	// Instances 4.3 NA
 	IDLDF5RE_solo(300480000),
 	IDLDF5Re_02(300530000),
@@ -158,7 +158,7 @@ public enum WorldMapType {
 	SOUTHERN_KATALAM(600060000),
 	UNDERGROUND_KATALAM(600070000),
 	IDIU(600080000),
-	
+
 	// Maps 4.5 NA + Instances
 	IDLDF5_Under_01_War(301210000),
 	IDF5_TD_War(301220000),
@@ -174,8 +174,8 @@ public enum WorldMapType {
 	IDLDF5_Under_01_PC(301320000),
 	IDLDF5_Under_Rune_PC(301330000),
 	Test_TagMatch(900190000),
-	
-	// Maps 4.7 NA  + Instances
+
+	// Maps 4.7 NA + Instances
 	IDLDF4Re_01_Q(301340000),
 	IDLDF5_Under_Rune_H(301360000),
 	IDLDF5_Under_03_H(301370000),
@@ -186,22 +186,22 @@ public enum WorldMapType {
 	Gab1_04(400060000),
 	LDF5_Fortress(600090000),
 	LDF4_Advance(600100000),
-	
+
 	// Housing
 	ORIEL(700010000),
 	PERNON(710010000),
-	
+
 	// Maps
 	SARPAN(600020000),
 	SARPAN_SKY(300410000),
 	TIAMARANTA(600030000),
 	TIAMARANTA_EYE(300400000),
 	TIAMARANTA_EYE_2(600040000),
-	
+
 	// Others
 	PROTECTOR_REALM(300330000),
 	ISRAPHEL_TRACT(300390000),
-	
+
 	// Test Maps 4.7
 	Test_MRT_IDZone(300290000),
 	System_Basic(900220000),
@@ -211,19 +211,19 @@ public enum WorldMapType {
 	WISPLIGHT_ABBEY(130090000),
 	FATEBOUND_ABBEY(140010000),
 
-	// Housing	
+	// Housing
 	HOUSING_LC_LEGION(700020000, true),
 	HOUSING_DC_LEGION(710020000, true),
 	HOUSING_IDLF_PERSONAL(720010000, true),
 	HOUSING_IDDF_PERSONAL(730010000, true);
-	
+
 	private final int worldId;
 	private final boolean isPersonal;
 
 	WorldMapType(int worldId) {
 		this(worldId, false);
 	}
-	
+
 	WorldMapType(int worldId, boolean personal) {
 		this.worldId = worldId;
 		this.isPersonal = personal;
@@ -232,7 +232,7 @@ public enum WorldMapType {
 	public int getId() {
 		return worldId;
 	}
-	
+
 	public boolean isPersonal() {
 		return isPersonal;
 	}

@@ -26,7 +26,7 @@ public class SM_ABYSS_RANKING_PLAYERS extends AionServerPacket {
 		this.page = page;
 		this.isEndPacket = isEndPacket;
 	}
-	
+
 	public SM_ABYSS_RANKING_PLAYERS(int lastUpdate, Race race) {
 		this.lastUpdate = lastUpdate;
 		this.data = Collections.emptyList();
@@ -36,7 +36,7 @@ public class SM_ABYSS_RANKING_PLAYERS extends AionServerPacket {
 	}
 
 	@Override
-	protected void writeImpl(AionConnection con){
+	protected void writeImpl(AionConnection con) {
 		writeD(race);// 0:Elyos 1:Asmo
 		writeD(lastUpdate);// Date
 		writeD(page);

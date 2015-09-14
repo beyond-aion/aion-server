@@ -90,13 +90,13 @@ public abstract class AbstractRestrictions implements Restrictions {
 	public boolean canUseItem(Player player, Item item) {
 		throw new AbstractMethodError();
 	}
-	
+
 	@Override
 	@DisabledRestriction
 	public boolean canFly(Player player) {
 		throw new AbstractMethodError();
 	}
-	
+
 	@Override
 	@DisabledRestriction
 	public boolean canGlide(Player player) {

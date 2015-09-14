@@ -75,13 +75,11 @@ public class _1020SealingTheAbyssGate extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -116,11 +114,9 @@ public class _1020SealingTheAbyssGate extends QuestHandler {
 				changeQuestStep(env, 2, 1, false);
 				removeQuestItem(env, 182200024, 1);
 				return true;
-			}
-			else if (var == 1 && player.getWorldId() == 310030000) {
+			} else if (var == 1 && player.getWorldId() == 310030000) {
 				changeQuestStep(env, 1, 2, false); // 2
-				QuestService.addNewSpawn(310030000, player.getInstanceId(), 210753, (float) 258.89917, (float) 237.20166,
-					(float) 217.06035, (byte) 0);
+				QuestService.addNewSpawn(310030000, player.getInstanceId(), 210753, (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
 				return true;
 			}
 		}
@@ -143,7 +139,7 @@ public class _1020SealingTheAbyssGate extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();

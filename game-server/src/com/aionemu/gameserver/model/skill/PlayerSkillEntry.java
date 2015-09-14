@@ -87,9 +87,9 @@ public class PlayerSkillEntry extends SkillEntry {
 		this.currentXp += xp;
 		int requiredExp = (int) (0.23 * (skillLevel + 17.2) * (skillLevel + 17.2));
 		StatEnum boostStat = StatEnum.getModifier(skillId);
-		if(boostStat != null) {
+		if (boostStat != null) {
 			float statRate = player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
-			if(statRate > 0)
+			if (statRate > 0)
 				requiredExp /= statRate;
 		}
 		if (currentXp > requiredExp) {
@@ -100,36 +100,29 @@ public class PlayerSkillEntry extends SkillEntry {
 				if (skillLevel > 0 && skillLevel < 99) {
 					if (skillUp > 99)
 						skillUp = 99;
-				}
-				else if (skillLevel > 99 && skillLevel < 199) {
+				} else if (skillLevel > 99 && skillLevel < 199) {
 					if (skillUp > 199)
 						skillUp = 199;
-				}
-				else if (skillLevel > 199 && skillLevel < 299) {
+				} else if (skillLevel > 199 && skillLevel < 299) {
 					if (skillUp > 299)
 						skillUp = 299;
-				}
-				else if (skillLevel > 299 && skillLevel < 399) {
+				} else if (skillLevel > 299 && skillLevel < 399) {
 					if (skillUp > 399)
 						skillUp = 399;
-				}
-				else if (skillLevel > 399 && skillLevel < 449) {
+				} else if (skillLevel > 399 && skillLevel < 449) {
 					if (skillUp > 449)
 						skillUp = 449;
-				}
-				else if (skillLevel > 449 && skillLevel < 499) {
+				} else if (skillLevel > 449 && skillLevel < 499) {
 					if (skillUp > 499)
 						skillUp = 499;
-				}
-				else if (skillLevel > 499 && skillLevel < 549) {
+				} else if (skillLevel > 499 && skillLevel < 549) {
 					if (skillUp > 549)
 						skillUp = 549;
 				}
 
 				setSkillLvl(skillUp);
 				currentXp = 0;
-			}
-			else {
+			} else {
 				setSkillLvl(skillLevel + 1);
 				currentXp = 0;
 			}

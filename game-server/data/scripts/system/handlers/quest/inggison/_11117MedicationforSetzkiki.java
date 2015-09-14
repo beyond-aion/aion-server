@@ -57,8 +57,7 @@ public class _11117MedicationforSetzkiki extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798963) {
@@ -75,8 +74,7 @@ public class _11117MedicationforSetzkiki extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798984) {
+		} else if (targetId == 798984) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

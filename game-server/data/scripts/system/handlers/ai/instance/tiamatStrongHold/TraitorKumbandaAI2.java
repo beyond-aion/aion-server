@@ -14,16 +14,14 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("traitorkumbanda")
 public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 
 	private boolean isFinalBuff;
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -31,7 +29,7 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 			spawnTimeAccelerator();
 			spawnKumbandaGhost();
 		}
-		if(!isFinalBuff && getOwner().getLifeStats().getHpPercentage() <= 5) {
+		if (!isFinalBuff && getOwner().getLifeStats().getHpPercentage() <= 5) {
 			isFinalBuff = true;
 			AI2Actions.useSkill(this, 20942);
 		}
@@ -44,13 +42,13 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 			rndSpawn(283086, 6);
 		}
 	}
-	
+
 	private void spawnKumbandaGhost() {
 		if (getPosition().getWorldMapInstance().getNpc(283085) == null && getOwner().getLifeStats().getHpPercentage() <= 50) {
 			spawn(283085, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
 		}
 	}
-	
+
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
@@ -58,7 +56,7 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -66,25 +64,25 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 		deleteNpcs(instance.getNpcs(283086));
 		deleteNpcs(instance.getNpcs(283088));
 	}
-	
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
 		isFinalBuff = false;
 	}
-	
+
 	private void rndSpawn(int npcId, int count) {
 		for (int i = 0; i < count; i++) {
 			SpawnTemplate template = rndSpawnInRange(npcId, Rnd.get(10, 20));
 			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
 		}
 	}
-	
+
 	private SpawnTemplate rndSpawnInRange(int npcId, int dist) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
 		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-				+ y1, getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
 	}
 }

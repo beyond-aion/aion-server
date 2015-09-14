@@ -41,14 +41,12 @@ public class _3074DangerousProbability extends QuestHandler {
 					if (QuestService.startQuest(env)) {
 						qs.setReward(-1);
 						return sendQuestDialog(env, 1011);
-					}
-					else {
+					} else {
 						return sendQuestSelectionDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798193) { // Nagrunerk
 				long kinahAmount = player.getInventory().getKinah();
 				long angelsEye = player.getInventory().getItemCountByItemId(186000037);
@@ -61,8 +59,7 @@ public class _3074DangerousProbability extends QuestHandler {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(0);
 							return sendQuestDialog(env, 5);
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1009);
 						}
 					}
@@ -71,8 +68,7 @@ public class _3074DangerousProbability extends QuestHandler {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(1);
 							return sendQuestDialog(env, 6);
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1009);
 						}
 					}
@@ -81,8 +77,7 @@ public class _3074DangerousProbability extends QuestHandler {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(2);
 							return sendQuestDialog(env, 7);
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1009);
 						}
 					}
@@ -91,8 +86,7 @@ public class _3074DangerousProbability extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798193) { // Nagrunerk
 				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
 					switch (qs.getReward()) {
@@ -122,8 +116,7 @@ public class _3074DangerousProbability extends QuestHandler {
 						}
 					}
 					return closeDialogWindow(env);
-				}
-				else {
+				} else {
 					QuestService.abandonQuest(player, questId);
 				}
 			}

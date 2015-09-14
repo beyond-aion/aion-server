@@ -33,13 +33,12 @@ public class _30313GroupOpeningthePrison extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-			
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 799322) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -61,8 +60,7 @@ public class _30313GroupOpeningthePrison extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225) {
 				switch (dialog) {
 					case USE_OBJECT: {

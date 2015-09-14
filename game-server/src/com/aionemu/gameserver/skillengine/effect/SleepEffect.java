@@ -24,7 +24,7 @@ public class SleepEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		super.calculate(effect, StatEnum.SLEEP_RESISTANCE, null);
-		
+
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class SleepEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill();
 		if (effected instanceof Player)
-	  	 ((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().onStopGliding();
 		effect.setAbnormal(AbnormalState.SLEEP.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.SLEEP.getId());
 		effect.setCancelOnDmg(true);

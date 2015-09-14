@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.properties;
 
-
 import java.util.Iterator;
 import java.util.List;
 

@@ -40,8 +40,7 @@ public class PortalAI2 extends ActionItemNpcAI2 {
 		AI2Actions.selectDialog(this, player, 0, -1);
 		if (getTalkDelay() != 0) {
 			super.handleDialogStart(player);
-		}
-		else {
+		} else {
 			handleUseItemFinish(player);
 		}
 	}
@@ -53,8 +52,7 @@ public class PortalAI2 extends ActionItemNpcAI2 {
 			if (portalPath != null) {
 				PortalService.port(portalPath, player, getObjectId());
 			}
-		}
-		else if (teleportTemplate != null) {
+		} else if (teleportTemplate != null) {
 			TeleportLocation loc = teleportTemplate.getTeleLocIdData().getTelelocations().get(0);
 			if (loc != null) {
 				TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.BEAM_ANIMATION);

@@ -36,8 +36,7 @@ public class AttackManager {
 		AISubState subState = npcAI.getSubState();
 		if (subState == AISubState.NONE) {
 			chooseAttack(npcAI, npcAI.getOwner().getGameStats().getNextAttackInterval());
-		}
-		else {
+		} else {
 			if (npcAI.isLogging()) {
 				AI2Logger.info(npcAI, "Will not choose attack in substate" + subState);
 			}
@@ -111,15 +110,13 @@ public class AttackManager {
 			AI2Logger.info(npcAI, "AttackManager: distanceToTarget " + distanceToTarget);
 		}
 		// TODO may be ask AI too
-		int chaseTarget = npc.isBoss() ? 50 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo()
-			.getChaseTarget();
+		int chaseTarget = npc.isBoss() ? 50 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo().getChaseTarget();
 		if (distanceToTarget > chaseTarget) {
 			return true;
 		}
 		double distanceToHome = npc.getDistanceToSpawnLocation();
 		// if npc is far away from home
-		int chaseHome = npc.isBoss() ? 150 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo()
-			.getChaseHome();
+		int chaseHome = npc.isBoss() ? 150 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo().getChaseHome();
 		if (distanceToHome > chaseHome) {
 			return true;
 		}

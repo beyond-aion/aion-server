@@ -49,7 +49,7 @@ public class _80009TheCakeIsTheTruth extends QuestHandler {
 		}
 		return sendQuestRewardDialog(env, 798417, 0);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		Player player = env.getPlayer();

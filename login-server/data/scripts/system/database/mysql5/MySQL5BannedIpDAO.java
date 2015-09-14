@@ -33,7 +33,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
 		result.setMask(mask);
 		result.setTimeEnd(expireTime);
 
-		if (insert(result)){
+		if (insert(result)) {
 			return result;
 		}
 		return null;

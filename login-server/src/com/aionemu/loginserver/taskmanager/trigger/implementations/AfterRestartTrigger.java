@@ -7,13 +7,12 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 
 /**
- *
  * @author nrg
  */
 public class AfterRestartTrigger extends TaskFromDBTrigger {
-	
-	private static Logger log = LoggerFactory.getLogger(AfterRestartTrigger.class);	
-	//Indicated wether this task should block or not block the starting progress
+
+	private static Logger log = LoggerFactory.getLogger(AfterRestartTrigger.class);
+	// Indicated wether this task should block or not block the starting progress
 	private boolean isBlocking = false;
 
 	@Override
@@ -34,10 +33,9 @@ public class AfterRestartTrigger extends TaskFromDBTrigger {
 	public void initTrigger() {
 		if (!isBlocking) {
 			ThreadPoolManager.getInstance().schedule(this, 5000);
-		}
-		else {
+		} else {
 			this.run();
 		}
 	}
-	
+
 }

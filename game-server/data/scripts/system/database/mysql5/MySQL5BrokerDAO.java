@@ -63,8 +63,8 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 							}
 						}
 
-					brokerItems.add(new BrokerItem(item, itemId, itemPointer, itemCount, itemCreator, price, seller, sellerId,
-						itemBrokerRace, isSold, isSettled, expireTime, settleTime, splittingAvailable));
+					brokerItems.add(new BrokerItem(item, itemId, itemPointer, itemCount, itemCreator, price, seller, sellerId, itemBrokerRace, isSold,
+						isSettled, expireTime, settleTime, splittingAvailable));
 				}
 			}
 		});
@@ -104,9 +104,9 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
 
-					brokerItems.add(new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime,
-						activationCount, false, false, slot, location, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket,
-						optionalFusionSocket, charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill));
+					brokerItems.add(new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, false,
+						false, slot, location, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus,
+						rndCount, tempering, packCount, isAmplified == 1, buffSkill));
 				}
 			}
 		});
@@ -173,17 +173,16 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 	}
 
 	private boolean deleteBrokerItem(final BrokerItem item) {
-		boolean result = DB.insertUpdate(
-			"DELETE FROM `broker` WHERE `item_pointer` = ? AND `seller_id` = ? AND `expire_time` = ?", new IUStH() {
+		boolean result = DB.insertUpdate("DELETE FROM `broker` WHERE `item_pointer` = ? AND `seller_id` = ? AND `expire_time` = ?", new IUStH() {
 
-				@Override
-				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-					stmt.setInt(1, item.getItemUniqueId());
-					stmt.setInt(2, item.getSellerId());
-					stmt.setTimestamp(3, item.getExpireTime());
-					stmt.execute();
-				}
-			});
+			@Override
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+				stmt.setInt(1, item.getItemUniqueId());
+				stmt.setInt(2, item.getSellerId());
+				stmt.setTimestamp(3, item.getExpireTime());
+				stmt.execute();
+			}
+		});
 
 		return result;
 	}
@@ -199,11 +198,9 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 
 			if (rs.next())
 				return true;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't to prebuy broker check: ", e);
-		}
-		finally {
+		} finally {
 			DB.close(st);
 		}
 		return false;
@@ -233,8 +230,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -247,11 +243,9 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 				ids[i] = rs.getInt("id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from players table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 

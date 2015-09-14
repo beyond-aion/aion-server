@@ -14,9 +14,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * Client Sends this packet when /Select NAME is typed.<br> I believe it's the
- * same as mouse click on a character.<br> If client want's to select target - d
- * is object id.<br> If client unselects target - d is 0;
+ * Client Sends this packet when /Select NAME is typed.<br>
+ * I believe it's the same as mouse click on a character.<br>
+ * If client want's to select target - d is object id.<br>
+ * If client unselects target - d is 0;
  *
  * @author SoulKeeper, Sweetkr, KID
  */
@@ -38,7 +39,8 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 	}
 
 	/**
-	 * Read packet.<br> d - object id; c - selection type;
+	 * Read packet.<br>
+	 * d - object id; c - selection type;
 	 */
 	@Override
 	protected void readImpl() {
@@ -74,38 +76,34 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 				if (obj.getTarget() == null)
 					return;
 				player.setTarget(obj.getTarget());
-			}
-			else
+			} else
 				player.setTarget(obj);
 
 			if (obj instanceof Player) {
 				Player target = (Player) obj;
 				if (player != obj && !player.canSee(target))
-					AuditLogger.info(player, "Possible radar hacker detected, targeting on invisible Player name: "
-							+ target.getName() + " objectId: " + target.getObjectId() + " by");
-			}
-			else if (obj instanceof Trap) {
+					AuditLogger.info(player,
+						"Possible radar hacker detected, targeting on invisible Player name: " + target.getName() + " objectId: " + target.getObjectId() + " by");
+			} else if (obj instanceof Trap) {
 				Trap target = (Trap) obj;
 				boolean isSameTeamTrap = false;
 				if (target.getMaster() instanceof Player)
 					isSameTeamTrap = ((Player) target.getMaster()).isInSameTeam(player);
 				if (player != obj && !player.canSee(target) && !isSameTeamTrap)
-					AuditLogger.info(player, "Possible radar hacker detected, targeting on invisible Trap name: "
-							+ target.getName() + " objectId: " + target.getObjectId() + " by");
+					AuditLogger.info(player,
+						"Possible radar hacker detected, targeting on invisible Trap name: " + target.getName() + " objectId: " + target.getObjectId() + " by");
 
-			}
-			else if (obj instanceof Creature) {
+			} else if (obj instanceof Creature) {
 				Creature target = (Creature) obj;
 				if (player != obj && !player.canSee(target))
-					AuditLogger.info(player, "Possible radar hacker detected, targeting on invisible Npc name: "
-							+ target.getName() + " objectId: " + target.getObjectId() + " by");
+					AuditLogger.info(player,
+						"Possible radar hacker detected, targeting on invisible Npc name: " + target.getName() + " objectId: " + target.getObjectId() + " by");
 			}
-		}
-		else
+		} else
 			player.setTarget(null);
 
 		if (oldTarget instanceof Npc) {
-			Npc npc = (Npc)oldTarget;
+			Npc npc = (Npc) oldTarget;
 			if (npc.getObjectTemplate().isDialogNpc()) {
 				npc.getAi2().think();
 			}

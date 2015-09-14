@@ -13,6 +13,7 @@ public enum GroupEvent {
 	ENTER(13),
 	UPDATE(13),
 	UPDATE_EFFECTS(65); // to do
+
 	private int id;
 
 	private GroupEvent(int id) {

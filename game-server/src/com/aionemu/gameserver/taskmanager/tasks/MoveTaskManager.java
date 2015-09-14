@@ -34,8 +34,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 				movingCreatures.remove(creature.getObjectId());
 				creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
 				ZoneUpdateService.getInstance().add(creature);
-			}
-			else {
+			} else {
 				creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
 			}
 			return true;

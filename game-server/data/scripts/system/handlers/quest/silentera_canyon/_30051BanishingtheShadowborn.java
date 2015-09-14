@@ -7,15 +7,13 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _30051BanishingtheShadowborn extends QuestHandler {
 
 	private final static int questId = 30051;
-	
+
 	public _30051BanishingtheShadowborn() {
 		super(questId);
 	}
@@ -26,18 +24,18 @@ public class _30051BanishingtheShadowborn extends QuestHandler {
 		qe.registerQuestNpc(799381).addOnTalkEvent(questId);
 		qe.registerOnKillInWorld(600010000, questId);
 	}
-	
+
 	@Override
 	public boolean onKillInWorldEvent(QuestEnv env) {
-		if(env.getVisibleObject() instanceof Player){
+		if (env.getVisibleObject() instanceof Player) {
 			Player killed = ((Player) env.getVisibleObject());
-			if((killed.getLevel() + 9) >= env.getPlayer().getLevel() || (killed.getLevel() -5 ) <= env.getPlayer().getLevel()){
+			if ((killed.getLevel() + 9) >= env.getPlayer().getLevel() || (killed.getLevel() - 5) <= env.getPlayer().getLevel()) {
 				return defaultOnKillRankedEvent(env, 0, 7, true);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -48,8 +46,7 @@ public class _30051BanishingtheShadowborn extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else

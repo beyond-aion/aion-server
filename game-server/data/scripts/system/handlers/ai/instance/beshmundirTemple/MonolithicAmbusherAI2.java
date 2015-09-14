@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 
 /**
- *
  * @author xTz
  */
 @AIName("monolithicambusher")

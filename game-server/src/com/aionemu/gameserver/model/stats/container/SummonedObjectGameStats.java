@@ -35,7 +35,7 @@ public class SummonedObjectGameStats extends NpcGameStats {
 		}
 		return stat;
 	}
-	
+
 	@Override
 	public Stat2 getMBoost() {
 		return getStat(StatEnum.BOOST_MAGICAL_SKILL, (int) (owner.getMaster().getGameStats().getMBoost().getCurrent() * 0.6f));

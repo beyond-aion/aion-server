@@ -12,8 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author ATracer
- * modified by Sippolo, kecimis
+ * @author ATracer modified by Sippolo, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetRaceDamageModifier")
@@ -39,8 +38,7 @@ public class TargetRaceDamageModifier extends ActionModifier {
 					if (player.getRace() == Race.ELYOS)
 						return newValue;
 			}
-		}
-		else if (effected instanceof Npc) {
+		} else if (effected instanceof Npc) {
 			Npc npc = (Npc) effected;
 			if (npc.getObjectTemplate().getRace().toString().equals(skillTargetRace.toString()))
 				return newValue;
@@ -58,10 +56,8 @@ public class TargetRaceDamageModifier extends ActionModifier {
 
 			Player player = (Player) effected;
 			Race race = player.getRace();
-			return (race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS)
-				|| (race == Race.ELYOS && skillTargetRace == Race.ELYOS);
-		}
-		else if (effected instanceof Npc) {
+			return (race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS) || (race == Race.ELYOS && skillTargetRace == Race.ELYOS);
+		} else if (effected instanceof Npc) {
 			Npc npc = (Npc) effected;
 
 			Race race = npc.getObjectTemplate().getRace();

@@ -46,8 +46,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700272) { // Suspicious Stone Statue
 				if (dialog == DialogAction.USE_OBJECT) {
 					// Wearing Stenon Blouse and Stenon Skirt
@@ -61,8 +60,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790019) { // Zetus
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -76,7 +74,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
@@ -84,7 +82,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (movieId == 199) {
 				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX(), player.getY(), player.getZ(), (byte) 0);
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() + 2 , player.getY() - 2, player.getZ(), (byte) 0);
+				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
 				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
 				return true;
 			}

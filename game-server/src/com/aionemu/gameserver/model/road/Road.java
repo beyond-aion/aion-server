@@ -22,9 +22,8 @@ public class Road extends VisibleObject {
 	private Point3D p2 = null;
 
 	public Road(RoadTemplate template, Integer instanceId) {
-		super(IDFactory.getInstance().nextId(), new RoadController(), null, null, World.getInstance().createPosition(
-			template.getMap(), template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(),
-			(byte) 0, instanceId));
+		super(IDFactory.getInstance().nextId(), new RoadController(), null, null, World.getInstance().createPosition(template.getMap(),
+			template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(), (byte) 0, instanceId));
 
 		((RoadController) getController()).setOwner(this);
 		this.template = template;

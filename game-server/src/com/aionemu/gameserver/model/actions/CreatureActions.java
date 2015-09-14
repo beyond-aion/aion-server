@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.actions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
- *
  * @author xTz
  */
 public class CreatureActions {

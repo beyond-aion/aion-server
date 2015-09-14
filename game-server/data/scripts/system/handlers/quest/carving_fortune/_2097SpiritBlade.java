@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2097SpiritBlade extends QuestHandler {
 
 	private final static int questId = 2097;
-	private final static int[] npc_ids = { 203550,700509,700510,203546,279034 };
+	private final static int[] npc_ids = { 203550, 700509, 700510, 203546, 279034 };
 
 	public _2097SpiritBlade() {
 		super(questId);
@@ -87,18 +87,16 @@ public class _2097SpiritBlade extends QuestHandler {
 									updateQuestStatus(env);
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 					}
 					break;
-				case 700509: 
+				case 700509:
 				case 700510:
 					return true; // looting
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 203550)
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 203550)
 			return sendQuestEndDialog(env);
 		return false;
 	}

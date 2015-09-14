@@ -12,16 +12,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30700RaceForTheRelics extends QuestHandler {
 
 	private final static int questId = 30700;
-	private final static int npcs [] = {205842, 800368, 800338};
-	private final static int mobs [] = {219352, 219358};
+	private final static int npcs[] = { 205842, 800368, 800338 };
+	private final static int mobs[] = { 219352, 219358 };
 
 	public _30700RaceForTheRelics() {
 		super(questId);
@@ -46,13 +44,12 @@ public class _30700RaceForTheRelics extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205842) { 
+			if (targetId == 205842) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -64,7 +61,7 @@ public class _30700RaceForTheRelics extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 800368) { 
+			if (targetId == 800368) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
@@ -75,32 +72,29 @@ public class _30700RaceForTheRelics extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 800338) {
+			} else if (targetId == 800338) {
 				switch (dialog) {
 					case USE_OBJECT: {
-						if(var == 5)
+						if (var == 5)
 							return sendQuestDialog(env, 2716);
 					}
 					case SET_SUCCEED: {
-						  return defaultCloseDialog(env, 5, 6, true, false);
-						}
+						return defaultCloseDialog(env, 5, 6, true, false);
 					}
 				}
-		  }
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205842) { 
+			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205842) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -109,14 +103,13 @@ public class _30700RaceForTheRelics extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 1) {
 				return defaultOnKillEvent(env, 219352, 1, 2);
-			}
-			else if (var == 4) {
+			} else if (var == 4) {
 				return defaultOnKillEvent(env, 219358, 4, 5);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
@@ -125,14 +118,14 @@ public class _30700RaceForTheRelics extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (zoneName.equals(ZoneName.get("DREDGION_CONTROL_CENTER_300510000"))) {
 				if (var == 2) {
-					changeQuestStep(env, 2, 3, false); 
+					changeQuestStep(env, 2, 3, false);
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -140,22 +133,21 @@ public class _30700RaceForTheRelics extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-		  if (player.getWorldId() != 300510000) {
+			if (player.getWorldId() != 300510000) {
 				if (var >= 1) {
 					qs.setQuestVar(1);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
+					return true;
+				}
+			} else {
+				if (var == 0) {
+					qs.setQuestVar(1);
+					updateQuestStatus(env);
 					return true;
 				}
 			}
-		  else {
-		  	if(var == 0) {
-		  		qs.setQuestVar(1);
-					updateQuestStatus(env);
-					return true;
-		  	}
-		  }
 		}
 		return false;
 	}

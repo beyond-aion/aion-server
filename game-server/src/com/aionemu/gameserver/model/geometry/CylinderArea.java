@@ -78,8 +78,7 @@ public class CylinderArea extends AbstractArea {
 	public double getDistance2D(float x, float y) {
 		if (isInside2D(x, y)) {
 			return 0;
-		}
-		else {
+		} else {
 			return Math.abs(MathUtil.getDistance(centerX, centerY, x, y) - radius);
 		}
 	}
@@ -91,15 +90,12 @@ public class CylinderArea extends AbstractArea {
 	public double getDistance3D(float x, float y, float z) {
 		if (isInside3D(x, y, z)) {
 			return 0;
-		}
-		else if (isInsideZ(z)) {
+		} else if (isInsideZ(z)) {
 			return getDistance2D(x, y);
-		}
-		else {
+		} else {
 			if (z < getMinZ()) {
 				return MathUtil.getDistance(centerX, centerY, getMinZ(), x, y, z);
-			}
-			else {
+			} else {
 				return MathUtil.getDistance(centerX, centerY, getMaxZ(), x, y, z);
 			}
 		}
@@ -112,14 +108,13 @@ public class CylinderArea extends AbstractArea {
 	public Point2D getClosestPoint(float x, float y) {
 		if (isInside2D(x, y)) {
 			return new Point2D(x, y);
-		}
-		else {
+		} else {
 			float vX = x - this.centerX;
 			float vY = y - this.centerY;
 			double magV = MathUtil.getDistance(centerX, centerY, x, y);
 			double pointX = centerX + vX / magV * radius;
 			double pointY = centerY + vY / magV * radius;
-			return new Point2D((float)pointX, (float)pointY);
+			return new Point2D((float) pointX, (float) pointY);
 		}
 	}
 

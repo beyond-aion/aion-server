@@ -16,7 +16,7 @@ public class ChainSkills {
 	private Map<String, ChainSkill> multiSkills = new FastMap<String, ChainSkill>();
 	private ChainSkill chainSkill = new ChainSkill("", 0, 0);
 
-	//private Logger log = LoggerFactory.getLogger(ChainSkills.class);
+	// private Logger log = LoggerFactory.getLogger(ChainSkills.class);
 	public int getChainCount(Player player, SkillTemplate template, String category) {
 		if (category == null) {
 			return 0;
@@ -36,8 +36,7 @@ public class ChainSkills {
 	public long getLastChainUseTime(String category) {
 		if (this.multiSkills.get(category) != null) {
 			return this.multiSkills.get(category).getUseTime();
-		}
-		else if (chainSkill.getCategory().equals(category))
+		} else if (chainSkill.getCategory().equals(category))
 			return this.chainSkill.getUseTime();
 		else
 			return 0;
@@ -58,8 +57,7 @@ public class ChainSkills {
 
 		if (this.multiSkills.get(category) != null) {
 			useTime = this.multiSkills.get(category).getUseTime();
-		}
-		else if (chainSkill.getCategory().equals(category)) {
+		} else if (chainSkill.getCategory().equals(category)) {
 			useTime = chainSkill.getUseTime();
 		}
 
@@ -73,11 +71,9 @@ public class ChainSkills {
 					this.multiSkills.get(category).increaseChainCount();
 				}
 				this.multiSkills.get(category).setUseTime(System.currentTimeMillis());
-			}
-			else
+			} else
 				this.multiSkills.put(category, new ChainSkill(category, (multiCast ? 1 : 0), System.currentTimeMillis()));
-		}
-		else
+		} else
 			chainSkill.updateChainSkill(category);
 	}
 

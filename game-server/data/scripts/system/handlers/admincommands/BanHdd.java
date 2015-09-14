@@ -13,7 +13,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class BanHdd extends AdminCommand {
 
 	private static String SYNTAX = "Syntax: //banhdd <hdd_serial> <time_in_minutes|0 - infinite>";
-	
+
 	public BanHdd() {
 		super("banhdd");
 	}
@@ -23,12 +23,11 @@ public class BanHdd extends AdminCommand {
 		try {
 			String hddSerial = params[0];
 			Integer timeMins = Integer.parseInt(params[1]);
-			if(timeMins == 0)
+			if (timeMins == 0)
 				timeMins = 10 * 365 * 24 * 60;
 			Timestamp banTime = new Timestamp(System.currentTimeMillis() + timeMins * 60 * 1000);
 			HDDBanService.getInstance().addBan(hddSerial, banTime);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			PacketSendUtility.sendMessage(player, SYNTAX);
 		}
 	}

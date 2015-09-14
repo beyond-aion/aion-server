@@ -44,23 +44,22 @@ public class CreatureEventHandler {
 		}
 	}
 
-
 	/**
 	 * @param ai
 	 * @param creature
 	 */
 	protected static void checkAggro(NpcAI2 ai, Creature creature) {
 		Npc owner = ai.getOwner();
-		
+
 		if (ai.isInState(AIState.FIGHT))
 			return;
-		
+
 		if (creature.getLifeStats().isAlreadyDead())
 			return;
 
 		if (!owner.canSee(creature))
 			return;
-		
+
 		if (owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY))
 			return;
 
@@ -78,8 +77,7 @@ public class CreatureEventHandler {
 			}
 		}
 
-		if (!ai.isInState(AIState.FIGHT)
-				&& (isInAggroRange || MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
+		if (!ai.isInState(AIState.FIGHT) && (isInAggroRange || MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
 			if (checkAggroRelation(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
 				if (!ai.isInState(AIState.RETURNING))
 					ai.getOwner().getMoveController().storeStep();
@@ -88,7 +86,7 @@ public class CreatureEventHandler {
 			}
 		}
 	}
-	
+
 	private static boolean checkAggroRelation(Npc owner, Creature creature) {
 		if (TribeRelationService.isAggressive(owner, creature) && owner.isEnemy(creature)) {
 			if (creature.getLevel() - owner.getLevel() < 10 || owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.ABYSS_GUARD) {

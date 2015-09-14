@@ -45,15 +45,13 @@ public class Gameshop extends AdminCommand {
 				category = Byte.parseByte(params[2]);
 				subCategory = Byte.parseByte(params[3]);
 				list = Integer.parseInt(params[4]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "<itemId, category, subCategory, list> values must be int, byte, byte, int.");
 				return;
 			}
 			DAOManager.getDAO(InGameShopDAO.class).deleteIngameShopItem(itemId, category, subCategory, list - 1);
 			PacketSendUtility.sendMessage(admin, "You remove [item:" + itemId + "]");
-		}
-		else if ("add".startsWith(params[0])) {
+		} else if ("add".startsWith(params[0])) {
 			try {
 				itemId = Integer.parseInt(params[1]);
 				count = Long.parseLong(params[2]);
@@ -64,12 +62,14 @@ public class Gameshop extends AdminCommand {
 				gift = Byte.parseByte(params[7]);
 				list = Integer.parseInt(params[8]);
 				titleDescription = Util.convertName(params[9]);
-			}
-			catch (NumberFormatException e) {
-				PacketSendUtility.sendMessage(admin, "<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
+			} catch (NumberFormatException e) {
+				PacketSendUtility
+					.sendMessage(
+						admin,
+						"<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
 				return;
 			}
-			
+
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 			if (itemTemplate == null) {
 				PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
@@ -106,31 +106,28 @@ public class Gameshop extends AdminCommand {
 			if (titleDescription.equals("empty")) {
 				titleDescription = StringUtils.EMPTY;
 			}
-			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price,
-				category, subCategory, list - 1, 1, itemType, gift, titleDescription, description);
+			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, category, subCategory,
+				list - 1, 1, itemType, gift, titleDescription, description);
 			PacketSendUtility.sendMessage(admin, "You add [item:" + itemId + "]");
-		}
-		else if ("deleteranking".startsWith(params[0])) {
+		} else if ("deleteranking".startsWith(params[0])) {
 			try {
 				itemId = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "<itemId> value must be an integer.");
 			}
 			DAOManager.getDAO(InGameShopDAO.class).deleteIngameShopItem(itemId, (byte) -1, (byte) -1, -1);
 			PacketSendUtility.sendMessage(admin, "You remove from Ranking Sales [item:" + itemId + "]");
-		}
-		else if ("addranking".startsWith(params[0])) {
+		} else if ("addranking".startsWith(params[0])) {
 			try {
 				itemId = Integer.parseInt(params[1]);
 				count = Long.parseLong(params[2]);
 				price = Long.parseLong(params[3]);
 				itemType = Byte.parseByte(params[4]);
 				gift = Byte.parseByte(params[5]);
-				titleDescription =  Util.convertName(params[6]);
-			}
-			catch (NumberFormatException e) {
-				PacketSendUtility.sendMessage(admin, "<itemId, count, price, itemType, gift, description> value must be int, long, long, byte, byte, string, Object... .");
+				titleDescription = Util.convertName(params[6]);
+			} catch (NumberFormatException e) {
+				PacketSendUtility.sendMessage(admin,
+					"<itemId, count, price, itemType, gift, description> value must be int, long, long, byte, byte, string, Object... .");
 				return;
 			}
 			String description = "";
@@ -148,16 +145,14 @@ public class Gameshop extends AdminCommand {
 			if (titleDescription.equals("empty")) {
 				titleDescription = StringUtils.EMPTY;
 			}
-			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price,
-				(byte) -1, (byte) -1, -1, 0, itemType, gift, titleDescription, description);
+			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, (byte) -1, (byte) -1, -1, 0,
+				itemType, gift, titleDescription, description);
 			PacketSendUtility.sendMessage(admin, "You remove from Ranking Sales [item:" + itemId + "]");
-		}
-		else if ("settoll".startsWith(params[0])) {
+		} else if ("settoll".startsWith(params[0])) {
 			if (params.length == 3) {
 				try {
 					toll = Integer.parseInt(params[2]);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					PacketSendUtility.sendMessage(admin, "<toll> value must be an integer.");
 					return;
 				}
@@ -174,15 +169,13 @@ public class Gameshop extends AdminCommand {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					PacketSendUtility.sendMessage(admin, "Tolls setted to " + toll + ".");
-				}
-				else
+				} else
 					PacketSendUtility.sendMessage(admin, "ls communication error.");
 			}
 			if (params.length == 2) {
 				try {
 					toll = Integer.parseInt(params[1]);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					PacketSendUtility.sendMessage(admin, "<toll> value must be an integer.");
 					return;
 				}
@@ -206,21 +199,18 @@ public class Gameshop extends AdminCommand {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					PacketSendUtility.sendMessage(admin, "Tolls setted to " + toll + ".");
-				}
-				else
+				} else
 					PacketSendUtility.sendMessage(admin, "ls communication error.");
 			}
-		}
-		else if ("addtoll".startsWith(params[0])) {
+		} else if ("addtoll".startsWith(params[0])) {
 			if (params.length == 3) {
 				try {
 					toll = Integer.parseInt(params[2]);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					PacketSendUtility.sendMessage(admin, "<toll> value must be an integer.");
 					return;
 				}
-				
+
 				if (toll < 0) {
 					PacketSendUtility.sendMessage(admin, "<toll> must > 0.");
 					return;
@@ -240,8 +230,7 @@ public class Gameshop extends AdminCommand {
 			if (params.length == 2) {
 				try {
 					toll = Integer.parseInt(params[1]);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					PacketSendUtility.sendMessage(admin, "<toll> value must be an integer.");
 					return;
 				}
@@ -259,19 +248,20 @@ public class Gameshop extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "You added " + toll + " tolls to Player: " + player.getName());
 				InGameShopEn.getInstance().addToll(player, toll);
 			}
-		}
-		else {
-			PacketSendUtility.sendMessage(admin,
-				"You can use only, addtoll, settoll, deleteranking, addranking, delete or add.");
+		} else {
+			PacketSendUtility.sendMessage(admin, "You can use only, addtoll, settoll, deleteranking, addranking, delete or add.");
 		}
 	}
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "No parameters detected please use:\n"
-			+ "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
-			+ "//gameshop delete <itemId> <category> <subCategory> <list>\n"
-			+ "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n" + "//gameshop deleteranking <itemId>\n"
-			+ "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
+		PacketSendUtility
+			.sendMessage(
+				player,
+				"No parameters detected please use:\n"
+					+ "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
+					+ "//gameshop delete <itemId> <category> <subCategory> <list>\n"
+					+ "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n"
+					+ "//gameshop deleteranking <itemId>\n" + "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
 	}
 }

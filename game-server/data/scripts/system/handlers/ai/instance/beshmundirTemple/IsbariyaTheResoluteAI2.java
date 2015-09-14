@@ -23,7 +23,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 
 /**
  * @author Luzien
- *
  */
 @AIName("isbariya")
 public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
@@ -33,7 +32,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	private List<Point3D> soulLocations = new ArrayList<Point3D>();
 	private Future<?> basicSkillTask;
 	private Future<?> shedule;
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -44,7 +43,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -66,7 +65,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 			shedule.cancel(true);
 		}
 	}
-	
+
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
@@ -103,18 +102,18 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
 	private void startBasicSkillTask() {
 		basicSkillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (isAlreadyDead())
-						cancelSkillTask();
-					else
-						SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
-				}
-				
-		},0 , 24000);
+
+			@Override
+			public void run() {
+				if (isAlreadyDead())
+					cancelSkillTask();
+				else
+					SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
+			}
+
+		}, 0, 24000);
 	}
-	
+
 	private void cancelSkillTask() {
 		if (basicSkillTask != null && !basicSkillTask.isCancelled()) {
 			basicSkillTask.cancel(true);
@@ -153,18 +152,17 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	
-	 private void spawnSouls() {
+	private void spawnSouls() {
 		List<Point3D> points = new ArrayList<Point3D>();
 		points.addAll(soulLocations);
 		int count = Rnd.get(3, 6);
-		for(int i = 0; i < count; i++) {
+		for (int i = 0; i < count; i++) {
 			if (!points.isEmpty()) {
 				Point3D spawn = points.remove(Rnd.get(points.size()));
 				spawn(281645, spawn.getX(), spawn.getY(), spawn.getZ(), (byte) 18);
-			} 
-		 } 
-	 }
+			}
+		}
+	}
 
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<Player>();
@@ -177,11 +175,12 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void scheduleSpecial(int delay) {
-		if(getOwner().getPosition().getWorldMapInstance() == null) {
+		if (getOwner().getPosition().getWorldMapInstance() == null) {
 			cancelSkillTask();
 			return;
 		}
 		shedule = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				launchSpecial();
@@ -194,8 +193,8 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-				+ y1, getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+			.getZ(), getPosition().getHeading());
 	}
 
 }

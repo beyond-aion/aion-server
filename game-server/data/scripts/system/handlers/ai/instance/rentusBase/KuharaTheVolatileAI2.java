@@ -20,7 +20,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("kuhara_the_volatile")
@@ -42,7 +41,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 	public boolean canThink() {
 		return canThink;
 	}
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -80,9 +79,8 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelBarrelEventTask();
-				}
-				else {
-					switch(Rnd.get(1, 4)) {
+				} else {
+					switch (Rnd.get(1, 4)) {
 						case 1:
 							rndSpawnInRange(282394, Rnd.get(1, 4), new Point3D(126.528755f, 274.48883f, 209.81859f));
 							rndSpawnInRange(282394, Rnd.get(1, 4), new Point3D(126.528755f, 274.48883f, 209.81859f));
@@ -132,8 +130,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 								if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 									setStateIfNot(AIState.FIGHT);
 									think();
-								}
-								else {
+								} else {
 									getMoveController().abortMove();
 									getOwner().setTarget(creature);
 									getOwner().getGameStats().renewLastAttackTime();
@@ -176,7 +173,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void MoveBombToBoss(final Npc npc) {
-		if (!isAlreadyDead() && !isHome.get() ) {
+		if (!isAlreadyDead() && !isHome.get()) {
 			npc.setTarget(getOwner());
 			npc.getMoveController().moveToTargetObject();
 		}
@@ -196,8 +193,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelActiveEventTask();
-				}
-				else {
+				} else {
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1500395, getObjectId(), 0, 0);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 

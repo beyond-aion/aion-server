@@ -82,13 +82,13 @@ public class CM_FIND_GROUP extends AionClientPacket {
 			case 0x07: // apply update
 				// TODO need packet check
 				break;
-			case 0x08: //register InstanceGroup
+			case 0x08: // register InstanceGroup
 				instanceId = readD();
-				groupType = readC();//need to be tested
-				message = readS();//text
-				minMembers = readC();//minMembers chosen by writer
+				groupType = readC();// need to be tested
+				message = readS();// text
+				minMembers = readC();// minMembers chosen by writer
 				break;
-			case 0x0A: //New 4.0 Group Recruitment
+			case 0x0A: // New 4.0 Group Recruitment
 				break;
 			default:
 				log.error("Unknown find group packet? 0x" + Integer.toHexString(action).toUpperCase());
@@ -118,7 +118,7 @@ public class CM_FIND_GROUP extends AionClientPacket {
 			case 0x08:
 				FindGroupService.getInstance().registerInstanceGroup(player, 0x0E, instanceId, message, minMembers, groupType);
 				break;
-			case 0x0A: //search
+			case 0x0A: // search
 				FindGroupService.getInstance().sendFindGroups(player, action);
 				break;
 			default:

@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 public class CuringZoneService {

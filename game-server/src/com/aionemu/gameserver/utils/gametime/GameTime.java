@@ -145,12 +145,10 @@ public class GameTime implements Cloneable {
 			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
 				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
 				answer = answer + 1;
-			}
-			else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
+			} else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
 				answer = answer + 1;
 				break;
-			}
-			else {
+			} else {
 				break;
 			}
 		}
@@ -168,11 +166,9 @@ public class GameTime implements Cloneable {
 		for (Monthes m : Monthes.values()) {
 			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
 				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
-			}
-			else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
+			} else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
 				break;
-			}
-			else {
+			} else {
 				answer = minutesInYear / MINUTES_IN_DAY + 1;
 				break;
 			}

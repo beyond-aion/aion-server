@@ -8,17 +8,16 @@ import com.aionemu.chatserver.model.Race;
 /**
  * @author ATracer
  */
-public class JobChannel extends RaceChannel
-{
+public class JobChannel extends RaceChannel {
+
 	private PlayerClass playerClass;
 	private Gender gender;
-	
+
 	/**
 	 * @param playerClass
 	 * @param race
 	 */
-	public JobChannel(Gender gender, PlayerClass playerClass, Race race, String identifier)
-	{
+	public JobChannel(Gender gender, PlayerClass playerClass, Race race, String identifier) {
 		super(ChannelType.JOB, race, identifier);
 		this.playerClass = playerClass;
 		this.gender = gender;
@@ -27,13 +26,11 @@ public class JobChannel extends RaceChannel
 	/**
 	 * @return the playerClass
 	 */
-	public PlayerClass getPlayerClass()
-	{
+	public PlayerClass getPlayerClass() {
 		return playerClass;
 	}
-	
-	public Gender getGender()
-	{
+
+	public Gender getGender() {
 		return gender;
 	}
 }

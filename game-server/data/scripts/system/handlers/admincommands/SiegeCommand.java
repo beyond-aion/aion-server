@@ -48,17 +48,13 @@ public class SiegeCommand extends AdminCommand {
 
 		if (COMMAND_STOP.equalsIgnoreCase(params[0]) || COMMAND_START.equalsIgnoreCase(params[0])) {
 			handleStartStopSiege(player, params);
-		}
-		else if (COMMAND_LIST.equalsIgnoreCase(params[0])) {
+		} else if (COMMAND_LIST.equalsIgnoreCase(params[0])) {
 			handleList(player, params);
-		}
-		else if (COMMAND_LIST_SIEGES.equals(params[0])) {
+		} else if (COMMAND_LIST_SIEGES.equals(params[0])) {
 			listLocations(player);
-		}
-		else if (COMMAND_CAPTURE.equals(params[0])) {
+		} else if (COMMAND_CAPTURE.equals(params[0])) {
 			capture(player, params);
-		}
-		else if (COMMAND_ASSAULT.equals(params[0])) {
+		} else if (COMMAND_ASSAULT.equals(params[0])) {
 			assault(player, params);
 		}
 	}
@@ -78,17 +74,14 @@ public class SiegeCommand extends AdminCommand {
 		if (COMMAND_START.equalsIgnoreCase(params[0])) {
 			if (SiegeService.getInstance().isSiegeInProgress(siegeLocId)) {
 				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " is already under siege");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " - starting siege!");
 				SiegeService.getInstance().startSiege(siegeLocId);
 			}
-		}
-		else if (COMMAND_STOP.equalsIgnoreCase(params[0])) {
+		} else if (COMMAND_STOP.equalsIgnoreCase(params[0])) {
 			if (!SiegeService.getInstance().isSiegeInProgress(siegeLocId)) {
 				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " is not under siege");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " - stopping siege!");
 				SiegeService.getInstance().stopSiege(siegeLocId);
 			}
@@ -113,11 +106,9 @@ public class SiegeCommand extends AdminCommand {
 
 		if (COMMAND_LIST_LOCATIONS.equalsIgnoreCase(params[1])) {
 			listLocations(player);
-		}
-		else if (COMMAND_LIST_SIEGES.equalsIgnoreCase(params[1])) {
+		} else if (COMMAND_LIST_SIEGES.equalsIgnoreCase(params[1])) {
 			listSieges(player);
-		}
-		else {
+		} else {
 			showHelp(player);
 		}
 	}
@@ -165,9 +156,8 @@ public class SiegeCommand extends AdminCommand {
 		SiegeRace sr = null;
 		try {
 			sr = SiegeRace.valueOf(params[2].toUpperCase());
-		}
-		catch (IllegalArgumentException e) {
-			//ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
 		}
 
 		// try to find legion by name
@@ -177,8 +167,7 @@ public class SiegeCommand extends AdminCommand {
 			try {
 				int legionId = Integer.valueOf(params[2]);
 				legion = LegionService.getInstance().getLegion(legionId);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				String legionName = "";
 				for (int i = 2; i < params.length; i++)
 					legionName += " " + params[i];
@@ -208,8 +197,7 @@ public class SiegeCommand extends AdminCommand {
 			s.setBossKilled(true);
 			SiegeService.getInstance().stopSiege(siegeLocationId);
 			loc.setLegionId(legion != null ? legion.getLegionId() : 0);
-		}
-		else {
+		} else {
 			SiegeService.getInstance().deSpawnNpcs(siegeLocationId);
 			loc.setVulnerable(false);
 			loc.setUnderShield(false);
@@ -252,11 +240,8 @@ public class SiegeCommand extends AdminCommand {
 	}
 
 	protected void showHelp(Player player) {
-		PacketSendUtility.sendMessage(player, "AdminCommand //siege Help\n"
-				+ "//siege start|stop <LocationId>\n"
-				+ "//siege list locations|sieges\n"
-				+ "//siege capture <LocationId> <siegeRaceName(ELYOS,ASMODIANS,BALAUR)|legionName|legionId>\n"
-				+ "//siege assault <LocationId> <delaySec>");
+		PacketSendUtility.sendMessage(player, "AdminCommand //siege Help\n" + "//siege start|stop <LocationId>\n" + "//siege list locations|sieges\n"
+			+ "//siege capture <LocationId> <siegeRaceName(ELYOS,ASMODIANS,BALAUR)|legionName|legionId>\n" + "//siege assault <LocationId> <delaySec>");
 
 		java.util.Set<Integer> fortressIds = SiegeService.getInstance().getFortresses().keySet();
 		java.util.Set<Integer> artifactIds = SiegeService.getInstance().getStandaloneArtifacts().keySet();

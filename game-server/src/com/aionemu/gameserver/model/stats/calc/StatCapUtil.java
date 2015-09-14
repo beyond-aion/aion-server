@@ -58,8 +58,7 @@ public class StatCapUtil {
 				stat.setBonus(base);
 			else if (stat.getBonus() < 0 && base < -stat.getBonus())
 				stat.setBonus(-base);
-		}
-		else if (stat.getStat() == StatEnum.SPEED || stat.getStat() == StatEnum.FLY_SPEED) {
+		} else if (stat.getStat() == StatEnum.SPEED || stat.getStat() == StatEnum.FLY_SPEED) {
 			if (isPlayer == 2)
 				upperCap = Integer.MAX_VALUE;
 		}
@@ -130,13 +129,12 @@ public class StatCapUtil {
 	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
 		if (stat2.getCurrent() > upperCap) {
 			stat2.setBonus(upperCap - stat2.getBase());
-		}
-		else if (stat2.getCurrent() < lowerCap) {
+		} else if (stat2.getCurrent() < lowerCap) {
 			stat2.setBonus(lowerCap - stat2.getBase());
 		}
 	}
 
-	public static void dumpWrongStats(String ownerInfo, Stat2 ... stats) {
+	public static void dumpWrongStats(String ownerInfo, Stat2... stats) {
 		List<Stat2> wrongStats = null;
 		for (Stat2 stat : stats) {
 			Stat2 wrongStat = null;

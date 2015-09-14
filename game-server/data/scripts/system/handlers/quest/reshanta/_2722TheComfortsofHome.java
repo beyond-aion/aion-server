@@ -47,8 +47,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 278056) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -59,8 +58,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278126) {
+			} else if (targetId == 278126) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
@@ -69,8 +67,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278043) {
+			} else if (targetId == 278043) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO3) {
@@ -79,8 +76,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278032) {
+			} else if (targetId == 278032) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialog() == DialogAction.SETPRO4) {
@@ -89,8 +85,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278037) {
+			} else if (targetId == 278037) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SETPRO5.id()) {
@@ -99,8 +94,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278040) {
+			} else if (targetId == 278040) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialogId() == DialogAction.SETPRO6.id()) {
@@ -109,8 +103,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278068) {
+			} else if (targetId == 278068) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3057);
 				else if (env.getDialogId() == DialogAction.SETPRO7.id()) {
@@ -119,8 +112,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278066) {
+			} else if (targetId == 278066) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
 
@@ -133,8 +125,7 @@ public class _2722TheComfortsofHome extends QuestHandler {
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278047) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278047) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

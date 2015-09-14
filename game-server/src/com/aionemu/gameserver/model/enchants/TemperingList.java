@@ -11,13 +11,12 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
- *
  * @author xTz
  */
 @XmlType(name = "tempering_list")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TemperingList {
-	
+
 	@XmlElement(name = "tempering_data", required = true)
 	protected List<TemperingTemplateData> temperingDatas;
 
@@ -31,5 +30,5 @@ public class TemperingList {
 	public List<TemperingTemplateData> getTemperingDatas() {
 		return temperingDatas;
 	}
-	
+
 }

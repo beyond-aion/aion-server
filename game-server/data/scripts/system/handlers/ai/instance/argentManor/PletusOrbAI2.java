@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("pletus_orb")
@@ -34,14 +33,14 @@ public class PletusOrbAI2 extends GeneralNpcAI2 {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 		if (!isInRangeMagicalSap()) {
 			if (Rnd.get(1, 100) >= 70) {
-				WorldPosition p =  getPosition();
+				WorldPosition p = getPosition();
 				spawn(282148, p.getX(), p.getY(), p.getZ(), (byte) 0);
 			}
 		}
 	}
 
 	private boolean isInRangeMagicalSap() {
-		for (VisibleObject obj :getKnownList().getKnownObjects().values()) {
+		for (VisibleObject obj : getKnownList().getKnownObjects().values()) {
 			if (obj instanceof Npc) {
 				Npc npc = (Npc) obj;
 				if (isInRange(obj, 1) && npc.getNpcId() == 282148) {

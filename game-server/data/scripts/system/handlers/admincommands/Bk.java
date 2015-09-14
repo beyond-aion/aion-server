@@ -56,26 +56,24 @@ public class Bk extends AdminCommand {
 				final int char_id = player.getObjectId();
 				final int world_id = player.getWorldId();
 
-				DB.insertUpdate("INSERT INTO bookmark (" + "`name`,`char_id`, `x`, `y`, `z`,`world_id` )" + " VALUES " + "(?, ?, ?, ?, ?, ?)",
-					new IUStH() {
+				DB.insertUpdate("INSERT INTO bookmark (" + "`name`,`char_id`, `x`, `y`, `z`,`world_id` )" + " VALUES " + "(?, ?, ?, ?, ?, ?)", new IUStH() {
 
-						@Override
-						public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
-							ps.setString(1, bookmark_name);
-							ps.setInt(2, char_id);
-							ps.setFloat(3, x);
-							ps.setFloat(4, y);
-							ps.setFloat(5, z);
-							ps.setInt(6, world_id);
-							ps.execute();
-						}
-					});
+					@Override
+					public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
+						ps.setString(1, bookmark_name);
+						ps.setInt(2, char_id);
+						ps.setFloat(3, x);
+						ps.setFloat(4, y);
+						ps.setFloat(5, z);
+						ps.setInt(6, world_id);
+						ps.execute();
+					}
+				});
 
 				PacketSendUtility.sendMessage(player, "Bookmark " + bookmark_name + " sucessfully added to your bookmark list!");
 
 				updateInfo(player.getObjectId());
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(player, "syntax //bk <add|del|tele> <bookmark name>");
 				return;
 			}
@@ -86,17 +84,14 @@ public class Bk extends AdminCommand {
 					statement.setString(1, params[1].toLowerCase());
 					statement.executeUpdate();
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(player, "syntax //bk <add|del|tele> <bookmark name>");
 				return;
-			}
-			finally {
+			} finally {
 				PacketSendUtility.sendMessage(player, "Bookmark " + bookmark_name + " sucessfully removed from your bookmark list!");
 				updateInfo(player.getObjectId());
 			}
-		}
-		else if (params[0].equals("tele"))
+		} else if (params[0].equals("tele"))
 			try {
 
 				if (params[1].equals("") || params[1] == null) {
@@ -110,15 +105,13 @@ public class Bk extends AdminCommand {
 				Bookmark tele_bk = null;
 				try {
 					tele_bk = selectByName(bookmark_name);
-				}
-				finally {
+				} finally {
 					if (tele_bk != null) {
 						TeleportService2.teleportTo(player, tele_bk.getWorld_id(), tele_bk.getX(), tele_bk.getY(), tele_bk.getZ());
 						PacketSendUtility.sendMessage(player, "Teleported to bookmark " + tele_bk.getName() + " location");
 					}
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(player, "syntax //bk <add|del|tele> <bookmark name>");
 				return;
 			}
@@ -127,8 +120,8 @@ public class Bk extends AdminCommand {
 			PacketSendUtility.sendMessage(player, "=====Bookmark list begin=====");
 			for (Bookmark b : bookmarks) {
 				String chatLink = ChatUtil.position(b.getName(), b.getWorld_id(), b.getX(), b.getY(), b.getZ());
-				PacketSendUtility.sendMessage(player, " = " + chatLink + " =  " + WorldMapType.getWorld(b.getWorld_id()) + "  ( " + b.getX() + " ,"
-					+ b.getY() + " ," + b.getZ() + " )");
+				PacketSendUtility.sendMessage(player,
+					" = " + chatLink + " =  " + WorldMapType.getWorld(b.getWorld_id()) + "  ( " + b.getX() + " ," + b.getY() + " ," + b.getZ() + " )");
 			}
 			PacketSendUtility.sendMessage(player, "=====Bookmark list end=======");
 		}
@@ -190,8 +183,7 @@ public class Bk extends AdminCommand {
 						bkcount = rset.getInt("bkcount");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error in reading db", e);
 		}
 		return bkcount > 0;

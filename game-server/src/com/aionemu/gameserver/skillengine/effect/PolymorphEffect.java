@@ -16,7 +16,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolymorphEffect")
 public class PolymorphEffect extends TransformEffect {
-		
+
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect);
@@ -27,7 +27,7 @@ public class PolymorphEffect extends TransformEffect {
 				effected.getTransformModel().setTribe(template.getTribe(), false);
 		}
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);

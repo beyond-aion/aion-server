@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Bobobear, Cheatkiller
- *
  */
 public class _23048HeadstrongAndLost extends QuestHandler {
 
@@ -39,26 +37,22 @@ public class _23048HeadstrongAndLost extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801063) { 
+			if (targetId == 801063) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 801278) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 801278) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 206322, 0, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801063) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -72,7 +66,7 @@ public class _23048HeadstrongAndLost extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -85,7 +79,7 @@ public class _23048HeadstrongAndLost extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
 		return defaultFollowEndEvent(env, 1, 2, true); // reward

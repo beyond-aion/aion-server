@@ -62,12 +62,10 @@ public class ThreadPoolManager implements Executor {
 	private ThreadPoolManager() {
 		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 
-		scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(4, new PriorityThreadFactory("ScheduledThreadPool",
-			Thread.NORM_PRIORITY));
+		scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(4, new PriorityThreadFactory("ScheduledThreadPool", Thread.NORM_PRIORITY));
 		scheduledThreadPool = MoreExecutors.listeningDecorator(scheduledThreadPoolExecutor);
 
-		generalPacketsThreadPoolExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-			new SynchronousQueue<Runnable>());
+		generalPacketsThreadPoolExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 		generalPacketsThreadPool = MoreExecutors.listeningDecorator(generalPacketsThreadPoolExecutor);
 	}
 
@@ -102,10 +100,8 @@ public class ThreadPoolManager implements Executor {
 		try {
 			if (delay < 0)
 				delay = 0;
-			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.schedule(r, delay,
-				TimeUnit.MILLISECONDS));
-		}
-		catch (RejectedExecutionException e) {
+			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.schedule(r, delay, TimeUnit.MILLISECONDS));
+		} catch (RejectedExecutionException e) {
 			return null; /* shutdown, ignore */
 		}
 	}
@@ -126,10 +122,9 @@ public class ThreadPoolManager implements Executor {
 				delay = 0;
 			if (initial < 0)
 				initial = 0;
-			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r,
-				initial, delay, TimeUnit.MILLISECONDS));
-		}
-		catch (RejectedExecutionException e) {
+			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r, initial, delay,
+				TimeUnit.MILLISECONDS));
+		} catch (RejectedExecutionException e) {
 			return null;
 		}
 	}
@@ -144,8 +139,7 @@ public class ThreadPoolManager implements Executor {
 			scheduledThreadPool.awaitTermination(2, TimeUnit.SECONDS);
 			generalPacketsThreadPool.awaitTermination(2, TimeUnit.SECONDS);
 			log.info("All ThreadPools are now stopped.");
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			log.error("Can't shutdown ThreadPoolManager", e);
 		}
 	}

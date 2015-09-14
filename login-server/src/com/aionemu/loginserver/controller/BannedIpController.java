@@ -37,6 +37,7 @@ public class BannedIpController {
 	private static void clean() {
 		getDAO().cleanExpiredBans();
 	}
+
 	/**
 	 * Loads list of banned ips
 	 */
@@ -93,14 +94,11 @@ public class BannedIpController {
 		ipBan.setMask(ip);
 		ipBan.setTimeEnd(expireTime);
 		banList.add(ipBan);
-		try
-		{
+		try {
 			getDAO().insert(ipBan);
 			return true;
-		}
-		catch(Exception e)
-		{
-			log.warn("Ip "+ip+" is already banned.");
+		} catch (Exception e) {
+			log.warn("Ip " + ip + " is already banned.");
 			return false;
 		}
 	}

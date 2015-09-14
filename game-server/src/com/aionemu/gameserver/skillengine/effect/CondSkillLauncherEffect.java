@@ -22,10 +22,10 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 	protected int skillId;
 	@XmlAttribute
 	protected HealType type;
-	
+
 	protected Effect launcherEffect;
 
-	//TODO what if you fall? effect is not applied? what if you use skill that consume hp?
+	// TODO what if you fall? effect is not applied? what if you use skill that consume hp?
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
@@ -44,15 +44,14 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 
 			@Override
 			public void hpChanged(int hpValue) {
-					if (hpValue <= (int) (value / 100f * effect.getEffected().getLifeStats().getMaxHp())) {
-						if (!effect.getEffected().getEffectController().hasAbnormalEffect(skillId)) {
-							SkillEngine.getInstance().applyEffectDirectly(skillId, effect.getEffected(), effect.getEffected(), 86400000);
-						}
+				if (hpValue <= (int) (value / 100f * effect.getEffected().getLifeStats().getMaxHp())) {
+					if (!effect.getEffected().getEffectController().hasAbnormalEffect(skillId)) {
+						SkillEngine.getInstance().applyEffectDirectly(skillId, effect.getEffected(), effect.getEffected(), 86400000);
 					}
-					else {
-						effect.getEffected().getEffectController().removeEffect(skillId);
-					}
-			 }
+				} else {
+					effect.getEffected().getEffectController().removeEffect(skillId);
+				}
+			}
 		};
 		effect.getEffected().getObserveController().addObserver(observer);
 		effect.setActionObserver(observer, position);

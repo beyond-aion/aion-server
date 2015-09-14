@@ -8,24 +8,23 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
-
 /**
  * @author nrg
  */
 public class _22050PreemptiveTrucebreaking extends QuestHandler {
-	
-    private static final int questId = 22050, start_npc = 205865;
 
-    public _22050PreemptiveTrucebreaking() {
-        super(questId);
-    }
+	private static final int questId = 22050, start_npc = 205865;
 
-    @Override
-    public void register() {
-        qe.registerQuestNpc(start_npc).addOnQuestStart(questId);
-        qe.registerQuestNpc(start_npc).addOnTalkEvent(questId);
+	public _22050PreemptiveTrucebreaking() {
+		super(questId);
+	}
+
+	@Override
+	public void register() {
+		qe.registerQuestNpc(start_npc).addOnQuestStart(questId);
+		qe.registerQuestNpc(start_npc).addOnTalkEvent(questId);
 		qe.registerOnKillRanked(AbyssRankEnum.GRADE5_SOLDIER, questId);
-    }
+	}
 
 	@Override
 	public boolean onKillRankedEvent(QuestEnv env) {
@@ -42,8 +41,7 @@ public class _22050PreemptiveTrucebreaking extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else

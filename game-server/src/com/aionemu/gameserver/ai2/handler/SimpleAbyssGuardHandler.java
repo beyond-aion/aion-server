@@ -10,7 +10,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Rolandas
- *
  */
 public class SimpleAbyssGuardHandler {
 
@@ -37,8 +36,7 @@ public class SimpleAbyssGuardHandler {
 			return;
 
 		Npc npc = ((Npc) creature);
-		if (!npc.isEnemy(creature)
-				|| npc.getLevel() < 2)
+		if (!npc.isEnemy(creature) || npc.getLevel() < 2)
 			return;
 
 		// Creatures which are under attack not handled
@@ -48,8 +46,7 @@ public class SimpleAbyssGuardHandler {
 		if (!owner.getActiveRegion().isMapRegionActive())
 			return;
 
-		if (!ai.isInState(AIState.FIGHT)
-				&& (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
+		if (!ai.isInState(AIState.FIGHT) && (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
 			if (GeoService.getInstance().canSee(owner, creature)) {
 				if (!ai.isInState(AIState.RETURNING))
 					ai.getOwner().getMoveController().storeStep();

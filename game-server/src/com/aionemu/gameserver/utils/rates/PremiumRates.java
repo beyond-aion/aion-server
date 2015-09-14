@@ -22,7 +22,7 @@ public class PremiumRates extends Rates {
 	public float getApPlayerGainRate() {
 		return RateConfig.PREMIUM_AP_PLAYER_GAIN_RATE;
 	}
-	
+
 	@Override
 	public float getGpPlayerGainRate() {
 		return RateConfig.PREMIUM_GP_PLAYER_GAIN_RATE;
@@ -64,8 +64,7 @@ public class PremiumRates extends Rates {
 	}
 
 	/*
-	 * (non-Javadoc) @see
-	 * com.aionemu.gameserver.utils.rates.Rates#getCraftingXPRate()
+	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getCraftingXPRate()
 	 */
 	@Override
 	public float getCraftingXPRate() {
@@ -73,8 +72,7 @@ public class PremiumRates extends Rates {
 	}
 
 	/*
-	 * (non-Javadoc) @see
-	 * com.aionemu.gameserver.utils.rates.Rates#getGatheringXPRate()
+	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getGatheringXPRate()
 	 */
 	@Override
 	public float getGatheringXPRate() {
@@ -105,12 +103,12 @@ public class PremiumRates extends Rates {
 	public int getComboCritRate() {
 		return CraftConfig.PREMIUM_CRAFT_COMBO_RATE;
 	}
-	
+
 	@Override
 	public float getDisciplineRewardRate() {
 		return RateConfig.PREMIUM_PVP_ARENA_DISCIPLINE_REWARD_RATE;
 	}
-	
+
 	@Override
 	public float getChaosRewardRate() {
 		return RateConfig.PREMIUM_PVP_ARENA_CHAOS_REWARD_RATE;

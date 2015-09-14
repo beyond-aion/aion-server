@@ -31,14 +31,14 @@ public class CM_RELEASE_OBJECT extends AionClientPacket {
 		if (player == null)
 			return;
 		if (player.getController().hasTask(TaskId.HOUSE_OBJECT_USE)) {
-				VisibleObject object = World.getInstance().findVisibleObject(targetObjectId);
-				if (object instanceof UseableItemObject && !player.getController().hasScheduledTask(TaskId.HOUSE_OBJECT_USE)) {
-					// not cancelled
-				} else {
-					// mailboxes always show this message even if not cancelled
-					player.getController().cancelTask(TaskId.HOUSE_OBJECT_USE);
-					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANCEL_USE);
-				}
+			VisibleObject object = World.getInstance().findVisibleObject(targetObjectId);
+			if (object instanceof UseableItemObject && !player.getController().hasScheduledTask(TaskId.HOUSE_OBJECT_USE)) {
+				// not cancelled
+			} else {
+				// mailboxes always show this message even if not cancelled
+				player.getController().cancelTask(TaskId.HOUSE_OBJECT_USE);
+				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANCEL_USE);
+			}
 		}
 	}
 

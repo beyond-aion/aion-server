@@ -22,7 +22,7 @@ public class RootEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int resistchance = 100;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
@@ -38,9 +38,9 @@ public class RootEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effected.getEffectController().setAbnormal(AbnormalState.ROOT.getId());
 		effect.setAbnormal(AbnormalState.ROOT.getId());
-		//PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
+		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		if (effected instanceof Player)
-	  	 ((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().onStopGliding();
 
 		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 

@@ -40,12 +40,11 @@ public class Wishid extends ConsoleCommand {
 
 		long itemCount;
 		int itemId;
-		
+
 		try {
 			itemCount = Long.parseLong(params[0]);
 			itemId = Integer.parseInt(params[1]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			info(admin, null);
 			return;
 		}
@@ -62,16 +61,11 @@ public class Wishid extends ConsoleCommand {
 
 		if (count == 0) {
 			if (admin != player) {
-				PacketSendUtility.sendMessage(admin, "You successfully gave " + itemCount + " x [item:"
-						+ itemId + "] to " + player.getName() + ".");
-				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:"
-						+ itemId + "] from " + admin.getName() + ".");
-			}
-			else
-				PacketSendUtility.sendMessage(admin, "You successfully received " + itemCount + " x [item:"
-						+ itemId + "]");
-		}
-		else {
+				PacketSendUtility.sendMessage(admin, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + player.getName() + ".");
+				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + admin.getName() + ".");
+			} else
+				PacketSendUtility.sendMessage(admin, "You successfully received " + itemCount + " x [item:" + itemId + "]");
+		} else {
 			PacketSendUtility.sendMessage(admin, "Item couldn't be added");
 		}
 	}

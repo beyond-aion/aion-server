@@ -69,8 +69,7 @@ public class _1021TrandilasEggs extends QuestHandler {
 						}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203129)
 				return sendQuestEndDialog(env);
 		}

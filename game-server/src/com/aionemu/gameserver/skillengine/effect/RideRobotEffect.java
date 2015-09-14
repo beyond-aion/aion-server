@@ -20,7 +20,7 @@ public class RideRobotEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
 	}
-	
+
 	@Override
 	public void startEffect(final Effect effect) {
 		Player player = (Player) effect.getEffected();
@@ -28,7 +28,7 @@ public class RideRobotEffect extends EffectTemplate {
 		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(key.getItemSkinTemplate().getTemplateId());
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player.getObjectId(), template.getRobotId()));
 		player.setRobotId(template.getRobotId());
-		
+
 		ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
 
 			@Override

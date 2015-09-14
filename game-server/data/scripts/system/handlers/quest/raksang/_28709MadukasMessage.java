@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _28709MadukasMessage extends QuestHandler {
 
@@ -38,16 +36,15 @@ public class _28709MadukasMessage extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 799429) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT:{
+					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
 					}
-					case QUEST_ACCEPT_SIMPLE:{
+					case QUEST_ACCEPT_SIMPLE: {
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798445) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -57,7 +54,7 @@ public class _28709MadukasMessage extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}else if(targetId == 798358){
+			} else if (targetId == 798358) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
@@ -66,8 +63,7 @@ public class _28709MadukasMessage extends QuestHandler {
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798358) {
 				return sendQuestEndDialog(env);
 			}

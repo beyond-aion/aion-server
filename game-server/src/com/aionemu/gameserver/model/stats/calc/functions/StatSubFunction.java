@@ -11,8 +11,7 @@ public class StatSubFunction extends StatFunction {
 	public void apply(Stat2 stat) {
 		if (isBonus()) {
 			stat.addToBonus(-getValue());
-		}
-		else {
+		} else {
 			stat.addToBase(-getValue());
 		}
 	}

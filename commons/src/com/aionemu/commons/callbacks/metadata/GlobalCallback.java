@@ -20,10 +20,10 @@ import com.aionemu.commons.callbacks.Callback;
 @SuppressWarnings("rawtypes")
 public @interface GlobalCallback {
 
-    /**
-     * Returns callback class that will be used as listener
-     *
-     * @return callback class that will be used as listener
-     */
-    Class<? extends Callback> value();
+	/**
+	 * Returns callback class that will be used as listener
+	 *
+	 * @return callback class that will be used as listener
+	 */
+	Class<? extends Callback> value();
 }

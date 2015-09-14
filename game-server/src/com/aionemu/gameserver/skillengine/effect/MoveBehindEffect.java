@@ -21,7 +21,7 @@ import com.jme3.math.Vector3f;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveBehindEffect")
 public class MoveBehindEffect extends DamageEffect {
-	
+
 	@Override
 	public void calculate(Effect effect) {
 		effect.setDashStatus(DashStatus.MOVEBEHIND);
@@ -31,13 +31,13 @@ public class MoveBehindEffect extends DamageEffect {
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effected.getHeading()));
 		float x1 = (float) (Math.cos(Math.PI + radian) * 1.3F);
 		float y1 = (float) (Math.sin(Math.PI + radian) * 1.3F);
-		float z = GeoService.getInstance().getZAfterMoveBehind(effected.getWorldId(), effected.getX() + x1,
-				effected.getY() + y1, effected.getZ(), effected.getInstanceId());
+		float z = GeoService.getInstance().getZAfterMoveBehind(effected.getWorldId(), effected.getX() + x1, effected.getY() + y1, effected.getZ(),
+			effected.getInstanceId());
 		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effected.getX() + x1,
-				effected.getY() + y1, z, false, intentions);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effected.getX() + x1, effected.getY() + y1, z, false,
+			intentions);
 		World.getInstance().updatePosition(effector, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effected.getHeading());
-		//set target position for SM_CASTSPELL_RESULT
+		// set target position for SM_CASTSPELL_RESULT
 		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effected.getHeading());
 		super.calculate(effect);
 	}

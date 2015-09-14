@@ -19,6 +19,7 @@ import com.aionemu.commons.utils.Rnd;
  * @author -Nemesiss-
  */
 public class KeyGen {
+
 	/**
 	 * Logger for this class.
 	 */
@@ -51,8 +52,7 @@ public class KeyGen {
 		encryptedRSAKeyPairs = new EncryptedRSAKeyPair[10];
 
 		for (int i = 0; i < 10; i++) {
-			encryptedRSAKeyPairs[i] = new EncryptedRSAKeyPair(
-					rsaKeyPairGenerator.generateKeyPair());
+			encryptedRSAKeyPairs[i] = new EncryptedRSAKeyPair(rsaKeyPairGenerator.generateKeyPair());
 		}
 
 		// Pre-init RSA cipher.. saving about 300ms

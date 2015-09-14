@@ -55,8 +55,7 @@ public class PlayerGroupService {
 		if (canInvite(inviter, invited)) {
 			PlayerGroupInvite invite = new PlayerGroupInvite(inviter, invited);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, invite)) {
-				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0,
-					inviter.getName()));
+				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0, inviter.getName()));
 			}
 		}
 	}
@@ -141,7 +140,7 @@ public class PlayerGroupService {
 			group.onEvent(new PlayerGroupUpdateEvent(group, player, groupEvent));
 		}
 	}
-	
+
 	public static final void updateGroupEffects(Player player, int slot) {
 		PlayerGroup group = player.getPlayerGroup2();
 		if (group != null) {
@@ -177,8 +176,7 @@ public class PlayerGroupService {
 		if (group != null) {
 			if (group.hasMember(bannedPlayer.getObjectId())) {
 				group.onEvent(new PlayerGroupLeavedEvent(group, bannedPlayer, LeaveReson.BAN, banGiver.getName()));
-			}
-			else {
+			} else {
 				log.warn("TEAM2: banning player not in group {}", group.onlineMembers());
 			}
 		}

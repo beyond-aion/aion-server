@@ -24,15 +24,11 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatSubFunction;
 @XmlRootElement(name = "modifiers")
 public class ModifiersTemplate {
 
-	@XmlElements({ 
-		@XmlElement(name = "sub", type = StatSubFunction.class),
-		@XmlElement(name = "add", type = StatAddFunction.class), 
-		@XmlElement(name = "rate", type = StatRateFunction.class),
-		@XmlElement(name = "set", type = StatSetFunction.class),
-		@XmlElement(name = "abs", type = StatAbsFunction.class)
-	})
+	@XmlElements({ @XmlElement(name = "sub", type = StatSubFunction.class), @XmlElement(name = "add", type = StatAddFunction.class),
+		@XmlElement(name = "rate", type = StatRateFunction.class), @XmlElement(name = "set", type = StatSetFunction.class),
+		@XmlElement(name = "abs", type = StatAbsFunction.class) })
 	private List<StatFunction> modifiers;
-	
+
 	@XmlAttribute
 	private float chance = 100f;
 

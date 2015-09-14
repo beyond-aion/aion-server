@@ -11,23 +11,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Ritsu
  */
 @AIName("tombghost")
-public class TombGhostAI2 extends AggressiveNpcAI2 
-{
+public class TombGhostAI2 extends AggressiveNpcAI2 {
 
 	@Override
-	public boolean canThink() 
-	{
+	public boolean canThink() {
 		return false;
 	}
 
-
 	@Override
-	protected void handleSpawned()
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
 		getOwner().setState(1);
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0,
-			getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 	}
 
 }

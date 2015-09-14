@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SurveyTemplate")
 public class SurveyTemplate {
+
 	@XmlAttribute(name = "itemId")
 	private int itemId;
 	@XmlAttribute(name = "count")

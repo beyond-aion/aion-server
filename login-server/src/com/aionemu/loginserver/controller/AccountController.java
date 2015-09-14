@@ -92,8 +92,7 @@ public class AccountController {
 			 * Send response to GameServer
 			 */
 			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getAccessLevel(), acc.getMembership(), toll));
-		}
-		else {
+		} else {
 			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, (byte) 0, (byte) 0, 0));
 		}
 	}
@@ -130,8 +129,7 @@ public class AccountController {
 			client.setState(State.AUTHED_LOGIN);
 			client.setSessionKey(new SessionKey(client.getAccount()));
 			client.sendPacket(new SM_UPDATE_SESSION(client.getSessionKey()));
-		}
-		else {
+		} else {
 			client.close();
 		}
 	}
@@ -170,14 +168,14 @@ public class AccountController {
 			if (auth.getAuthState() == null) {
 				return AionAuthResponse.AUTHORIZATION_ERROR4;
 			}
-			
+
 			AionAuthResponse response = AionAuthResponse.getResponseById(auth.getAuthState());
-			
+
 			// if received invalid auth state
 			if (response == null) {
 				return AionAuthResponse.AUTHORIZATION_ERROR4;
 			}
-			
+
 			switch (response) {
 				case AUTHED:
 					// name for this account as sent by external auth server
@@ -193,7 +191,7 @@ public class AccountController {
 		if (StringUtils.isNullOrEmpty(accountName)) {
 			return AionAuthResponse.FAILED_ACCOUNT_INFO;
 		}
-		
+
 		Account account = loadAccount(accountName);
 
 		// Try to create new account
@@ -434,8 +432,7 @@ public class AccountController {
 	 * @param accountId
 	 */
 	public static void sendServerListFor(int accountId) {
-		if (accountsOnLS.containsKey(accountId))
-		{
+		if (accountsOnLS.containsKey(accountId)) {
 			accountsOnLS.get(accountId).sendPacket(new SM_SERVER_LIST());
 		}
 	}

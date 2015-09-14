@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11076ProofOfTalent extends QuestHandler {
 
@@ -36,30 +34,26 @@ public class _11076ProofOfTalent extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 799025) { 
+			if (targetId == 799025) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799084) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 3)
+					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2034);
-				}
-				else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialog == DialogAction.SETPRO4) {
 					TeleportService2.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.BEAM_ANIMATION);
 					return defaultCloseDialog(env, 3, 4, true, false);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799025) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -69,18 +63,18 @@ public class _11076ProofOfTalent extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWindStreamEvent(QuestEnv env, int teleportId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if(player.getWorldId() == 210050000) {
-				if(teleportId == 152001)
+			if (player.getWorldId() == 210050000) {
+				if (teleportId == 152001)
 					changeQuestStep(env, 0, 1, false);
-				else if(teleportId == 153001)
+				else if (teleportId == 153001)
 					changeQuestStep(env, 1, 2, false);
-				else if(teleportId == 154001)
+				else if (teleportId == 154001)
 					changeQuestStep(env, 2, 3, false);
 				return true;
 			}
@@ -88,5 +82,3 @@ public class _11076ProofOfTalent extends QuestHandler {
 		return false;
 	}
 }
-	
-		

@@ -25,9 +25,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Gigi, nrg, oslo0322, xTz
- * @version TODO: Hard-/normal mode TODO: AI for each boss see
- *         http://raouooble.com/Beshmundir_Temple_Guide.html see
- *         http://gameguide.na.aiononline.com/aion/Beshmundir+Temple+Walkthrough%3A+Hard+Mode
+ * @version TODO: Hard-/normal mode TODO: AI for each boss see http://raouooble.com/Beshmundir_Temple_Guide.html see
+ *          http://gameguide.na.aiononline.com/aion/Beshmundir+Temple+Walkthrough%3A+Hard+Mode
  */
 @InstanceID(300170000)
 public class BeshmundirInstance extends GeneralInstanceHandler {

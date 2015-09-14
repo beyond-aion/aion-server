@@ -14,6 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author synchro2
  */
 public class _3210RescueHaorunerk extends QuestHandler {
+
 	private final static int questId = 3210;
 
 	public _3210RescueHaorunerk() {
@@ -30,7 +31,6 @@ public class _3210RescueHaorunerk extends QuestHandler {
 		qe.registerQuestNpc(215080).addOnKillEvent(questId);
 	}
 
-
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
@@ -38,7 +38,8 @@ public class _3210RescueHaorunerk extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		if (env.getVisibleObject() instanceof Npc)
+			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798318) {
@@ -62,7 +63,7 @@ public class _3210RescueHaorunerk extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					case SELECT_ACTION_1012:
 						return sendQuestDialog(env, 1012);
-					case SETPRO1: 
+					case SETPRO1:
 						qs.setQuestVarById(0, 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

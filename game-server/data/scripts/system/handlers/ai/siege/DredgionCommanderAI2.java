@@ -11,13 +11,13 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("dredgionCommander")
 public class DredgionCommanderAI2 extends SiegeNpcAI2 {
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		scheduleOneShot();
 	}
-	
+
 	private int getSkill() {
 		switch (getNpcId()) {
 			case 276649:
@@ -32,12 +32,13 @@ public class DredgionCommanderAI2 extends SiegeNpcAI2 {
 				return 0;
 		}
 	}
+
 	private void scheduleOneShot() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if(getSkill() != 0) {
+				if (getSkill() != 0) {
 					if (getTarget() instanceof Npc) {
 						Npc target = (Npc) getTarget();
 						Race race = target.getRace();

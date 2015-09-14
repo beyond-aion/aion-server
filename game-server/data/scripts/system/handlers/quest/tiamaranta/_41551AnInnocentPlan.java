@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41551AnInnocentPlan extends QuestHandler {
 
@@ -39,30 +37,25 @@ public class _41551AnInnocentPlan extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205966) { 
+			if (targetId == 205966) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212545, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 218499) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 218499) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 205966, 0, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205966) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -77,7 +70,7 @@ public class _41551AnInnocentPlan extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -91,7 +84,7 @@ public class _41551AnInnocentPlan extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
 		return defaultFollowEndEvent(env, 1, 2, true); // reward

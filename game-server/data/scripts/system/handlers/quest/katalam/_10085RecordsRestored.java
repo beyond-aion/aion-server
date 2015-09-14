@@ -9,11 +9,9 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 public class _10085RecordsRestored extends QuestHandler {
 
 	private final static int questId = 10085;
-		
 
 	public _10085RecordsRestored() {
 		super(questId);
@@ -21,14 +19,14 @@ public class _10085RecordsRestored extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcIds = { 800541, 800560, 800566};
+		int[] npcIds = { 800541, 800560, 800566 };
 		qe.registerQuestItem(182215230, questId);
 		qe.registerOnLevelUp(questId);
 		for (int npcId : npcIds) {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10084);
@@ -40,15 +38,14 @@ public class _10085RecordsRestored extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800541) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (qs.getQuestVarById(0) == 2) {
+						} else if (qs.getQuestVarById(0) == 2) {
 							return sendQuestDialog(env, 1693);
 						}
 					}
@@ -62,8 +59,7 @@ public class _10085RecordsRestored extends QuestHandler {
 						return defaultCloseDialog(env, 2, 3);
 					}
 				}
-			}
-			else if (targetId == 800560) { 
+			} else if (targetId == 800560) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 3) {
@@ -71,18 +67,16 @@ public class _10085RecordsRestored extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						return defaultCloseDialog(env, 3, 4, true, false); 
+						return defaultCloseDialog(env, 3, 4, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800566) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					removeQuestItem(env, 182215231, 1);
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -96,7 +90,7 @@ public class _10085RecordsRestored extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getQuestVarById(0) == 1) {
 			changeQuestStep(env, 1, 2, false);
-		  return HandlerResult.SUCCESS;
+			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
 	}

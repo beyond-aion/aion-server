@@ -8,11 +8,10 @@ import org.jboss.netty.handler.codec.oneone.OneToOneDecoder;
 /**
  * @author ATracer
  */
-public class GameServerPacketDecoder extends OneToOneDecoder
-{
+public class GameServerPacketDecoder extends OneToOneDecoder {
+
 	@Override
-	protected Object decode(ChannelHandlerContext ctx, Channel arg1, Object arg2) throws Exception
-	{
+	protected Object decode(ChannelHandlerContext ctx, Channel arg1, Object arg2) throws Exception {
 		ChannelBuffer message = (ChannelBuffer) arg2;
 		return message;
 	}

@@ -1,10 +1,7 @@
 package com.aionemu.gameserver.model.siege;
 
-
-
 /**
  * @author Whoop
- *
  */
 public enum AssaultType {
 	TELEPORT,

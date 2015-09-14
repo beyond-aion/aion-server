@@ -13,22 +13,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * 
  * @author Ritsu
  */
-public class _12509AMilitaryConspiracy extends QuestHandler 
-{
+public class _12509AMilitaryConspiracy extends QuestHandler {
 
 	private static final int questId = 12509;
 
-	public _12509AMilitaryConspiracy() 
-	{
+	public _12509AMilitaryConspiracy() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(801028).addOnQuestStart(questId);
 		qe.registerQuestNpc(801018).addOnTalkEvent(questId);
 		qe.registerQuestNpc(701735).addOnKillEvent(questId);
@@ -36,31 +32,25 @@ public class _12509AMilitaryConspiracy extends QuestHandler
 	}
 
 	@Override
-	public boolean onKillEvent(QuestEnv env) 
-	{
+	public boolean onKillEvent(QuestEnv env) {
 		giveQuestItem(env, 182213307, 1);
 		return defaultOnKillEvent(env, 701735, 0, 1);
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(final QuestEnv env, Item item)
-	{
+	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
 
 		if (id != 182213307)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+			public void run() {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				changeQuestStep(env, 1, 1, true);
 			}
 		}, 3000);
@@ -74,12 +64,9 @@ public class _12509AMilitaryConspiracy extends QuestHandler
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 801028) 
-			{
-				switch (dialog)
-				{
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 801028) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case QUEST_ACCEPT_SIMPLE:
@@ -91,13 +78,11 @@ public class _12509AMilitaryConspiracy extends QuestHandler
 		if (qs == null)
 			return false;
 
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if (targetId == 801018)
-			{
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 801018) {
 				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else 
+				else
 					return sendQuestEndDialog(env);
 			}
 		}

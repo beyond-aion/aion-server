@@ -39,8 +39,8 @@ public class LootGroupRules {
 		mythic_item_above = 2;
 	}
 
-	public LootGroupRules(LootRuleType lootRule, int misc, int commonItemAbove,
-						  int superiorItemAbove, int heroicItemAbove, int fabledItemAbove, int ethernalItemAbove, int mythicItemAbove) {
+	public LootGroupRules(LootRuleType lootRule, int misc, int commonItemAbove, int superiorItemAbove, int heroicItemAbove, int fabledItemAbove,
+		int ethernalItemAbove, int mythicItemAbove) {
 		super();
 		this.lootRule = lootRule;
 		this.misc = misc;
@@ -148,7 +148,8 @@ public class LootGroupRules {
 	}
 
 	/**
-	 * @param nrMisc .
+	 * @param nrMisc
+	 *          .
 	 */
 	public void setNrMisc(int nrMisc) {
 		this.nrMisc = nrMisc;
@@ -165,13 +166,11 @@ public class LootGroupRules {
 						switch (inRoll.getRollType()) {
 							case 2:
 								if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-									DropDistributionService.getInstance().handleRoll(player, 0, inRoll.getItemId(), inRoll.getNpcId(),
-																					 inRoll.getIndex());
+									DropDistributionService.getInstance().handleRoll(player, 0, inRoll.getItemId(), inRoll.getNpcId(), inRoll.getIndex());
 								break;
 							case 3:
 								if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-									DropDistributionService.getInstance().handleBid(player, 0, inRoll.getItemId(), inRoll.getNpcId(),
-																					inRoll.getIndex());
+									DropDistributionService.getInstance().handleBid(player, 0, inRoll.getItemId(), inRoll.getNpcId(), inRoll.getIndex());
 								break;
 						}
 					}
@@ -189,7 +188,8 @@ public class LootGroupRules {
 	}
 
 	/**
-	 * @param nrRoundRobin .
+	 * @param nrRoundRobin
+	 *          .
 	 */
 	public void setNrRoundRobin(int nrRoundRobin) {
 		this.nrRoundRobin = nrRoundRobin;

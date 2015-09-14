@@ -37,8 +37,8 @@ public class KrotanBattleInstance_L extends GeneralInstanceHandler {
 	}
 
 	private void spawnTimerRing() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("KROTAN_02", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52,
-				757.33, 199.42), new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("KROTAN_02", mapId, new Point3D(530.15, 757.56, 199.42), new Point3D(526.52, 757.33, 199.42),
+			new Point3D(528.156, 757.53, 205.10771), 8), instanceId);
 		f1.spawn();
 	}
 
@@ -157,7 +157,7 @@ public class KrotanBattleInstance_L extends GeneralInstanceHandler {
 
 	protected void artifactSpawns(Npc npc) {
 		switch (npc.getNpcId()) {
-			case 215413: //artifact spawns weak boss
+			case 215413: // artifact spawns weak boss
 				Npc boss = getNpc(233633);
 				if (boss != null && !boss.getLifeStats().isAlreadyDead()) {
 					spawn(233632, boss.getX(), boss.getY(), boss.getZ(), boss.getHeading());
@@ -169,7 +169,7 @@ public class KrotanBattleInstance_L extends GeneralInstanceHandler {
 
 	protected void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			if (npc.getNpcId() == 233632) {
 				spawn(702290, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 				spawn(702290, 571.56036f, 869.93604f, 199.37367f, (byte) 69);

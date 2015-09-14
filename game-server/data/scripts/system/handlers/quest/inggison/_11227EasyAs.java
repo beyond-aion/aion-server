@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11227EasyAs extends QuestHandler {
 
@@ -36,32 +34,30 @@ public class _11227EasyAs extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 799076) { 
+			if (targetId == 799076) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799076) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799076) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	  return defaultOnKillEvent(env, 217071, 0, false) || defaultOnKillEvent(env, 217070, 1, false) || defaultOnKillEvent(env, 217069, 2, false) || defaultOnKillEvent(env, 217068, 3, true);
+		return defaultOnKillEvent(env, 217071, 0, false) || defaultOnKillEvent(env, 217070, 1, false) || defaultOnKillEvent(env, 217069, 2, false)
+			|| defaultOnKillEvent(env, 217068, 3, true);
 	}
 }

@@ -65,8 +65,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204702) {
@@ -77,8 +76,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 				case SETPRO1:
 					return defaultCloseDialog(env, 0, 1);
 			}
-		}
-		else if (targetId == 204733) {
+		} else if (targetId == 204733) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -91,12 +89,11 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 					return defaultCloseDialog(env, 1, 11);
 				case SETPRO3:
 					defaultCloseDialog(env, 2, 3);
-					return TeleportService2.teleportTo(player, 120010000, 1368.81f, 1054.69f, 206.53f, (byte)89, TeleportAnimation.BEAM_ANIMATION);
+					return TeleportService2.teleportTo(player, 120010000, 1368.81f, 1054.69f, 206.53f, (byte) 89, TeleportAnimation.BEAM_ANIMATION);
 				case SETPRO7:
 					return defaultCloseDialog(env, 6, 7);
 			}
-		}
-		else if (targetId == 204206) {
+		} else if (targetId == 204206) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -104,8 +101,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 				case SETPRO4:
 					return defaultCloseDialog(env, 3, 4);
 			}
-		}
-		else if (targetId == 278040) {
+		} else if (targetId == 278040) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -119,26 +115,23 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO5:
 					return defaultCloseDialog(env, 4, 5);
 			}
-		}
-		else if (targetId == 700285) {
+		} else if (targetId == 700285) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 7)
 						return useQuestObject(env, 7, 7, true, 0, 0, 0, 182204302, 1, 0, false); // reward
 			}
-		}
-		else if (targetId == 700284) {
+		} else if (targetId == 700284) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 11)
-						TeleportService2.teleportTo(player, 220040000, 370.05f, 427.5f, 222.11f, (byte)109, TeleportAnimation.BEAM_ANIMATION);
-						return useQuestObject(env, 11, 2, false, 0);
+						TeleportService2.teleportTo(player, 220040000, 370.05f, 427.5f, 222.11f, (byte) 109, TeleportAnimation.BEAM_ANIMATION);
+					return useQuestObject(env, 11, 2, false, 0);
 			}
 		}
 		return false;

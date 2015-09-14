@@ -16,10 +16,9 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
- *
  * @author xTz
  */
-public class SpawnAssembledNpc  extends AdminCommand {
+public class SpawnAssembledNpc extends AdminCommand {
 
 	public SpawnAssembledNpc() {
 		super("spawnAssembledNpc");
@@ -34,8 +33,7 @@ public class SpawnAssembledNpc  extends AdminCommand {
 		int spawnId = 0;
 		try {
 			spawnId = Integer.parseInt(params[0]);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			info(player, null);
 			return;
 		}

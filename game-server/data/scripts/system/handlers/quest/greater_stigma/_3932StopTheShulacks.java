@@ -37,7 +37,7 @@ public class _3932StopTheShulacks extends QuestHandler {
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onUseSkillEvent(QuestEnv env, int skillUsedId) {
 		Player player = env.getPlayer();
@@ -84,8 +84,7 @@ public class _3932StopTheShulacks extends QuestHandler {
 				return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 
 			if (targetId == 203711 && var == 1)// Miriya
 			{
@@ -97,13 +96,11 @@ public class _3932StopTheShulacks extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 5);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 2716);
 				}
 
-			}
-			else if (targetId == 204656 && var == 0)// Maloren
+			} else if (targetId == 204656 && var == 0)// Maloren
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

@@ -291,7 +291,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	@AIListenable(enabled = false, type = AIEventType.ATTACK)
 	protected abstract void handleAttack(Creature creature);
-	
+
 	@AIListenable(enabled = false, type = AIEventType.CREATURE_NEEDS_HELP)
 	protected abstract void creatureNeedsHelp(Creature creature);
 
@@ -550,8 +550,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		AIState state = currentState;
 		switch (state) {
 			case FEAR:
-				return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(),
-					owner.getMoveController().getTargetZ2(), 1);
+				return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(), owner
+					.getMoveController().getTargetZ2(), 1);
 			case FIGHT:
 				return SimpleAttackManager.isTargetInAttackRange((Npc) owner);
 			case RETURNING:
@@ -607,7 +607,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	public int modifyDamage(Skill skill, Creature creature, int damage) {
 		return damage;
 	}
-	
+
 	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return damage;
@@ -627,12 +627,12 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	public int modifyMaccuracy(int value) {
 		return value;
 	}
-	
+
 	@Override
 	public int modifyMattack(int value) {
 		return value;
 	}
-	
+
 	@Override
 	public int modifyPdef(int value) {
 		return value;

@@ -126,8 +126,7 @@ public class _2093TheSecretPassage extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
 						}
@@ -157,13 +156,11 @@ public class _2093TheSecretPassage extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205150) { // Surt
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182209012, 1);
 					return sendQuestEndDialog(env);
 				}
@@ -180,8 +177,7 @@ public class _2093TheSecretPassage extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 6) {
 				return defaultOnGetItemEvent(env, 6, 7, false); // 7
-			}
-			else if (var == 8) {
+			} else if (var == 8) {
 				return defaultOnGetItemEvent(env, 8, 8, true); // reward
 			}
 		}

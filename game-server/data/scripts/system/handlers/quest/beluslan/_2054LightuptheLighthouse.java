@@ -70,8 +70,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204768) {
@@ -87,8 +86,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204739) {
+		} else if (targetId == 204739) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -104,8 +102,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 730109) {
+		} else if (targetId == 730109) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -119,8 +116,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 730140) {
+		} else if (targetId == 730140) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -137,8 +133,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 700287 && qs.getStatus() == QuestStatus.START) {
+		} else if (targetId == 700287 && qs.getStatus() == QuestStatus.START) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return useQuestObject(env, 4, 4, true, 0, 0, 0, 182204309, 1, 238, false); // movie + reward
 			}
@@ -158,14 +153,12 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getQuestVarById(0) != 2)
 			return HandlerResult.FAILED;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				removeQuestItem(env, 182204308, 1);
 				qs.setQuestVarById(0, 3);
 				updateQuestStatus(env);

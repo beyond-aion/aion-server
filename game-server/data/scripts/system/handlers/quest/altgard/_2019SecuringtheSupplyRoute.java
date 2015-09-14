@@ -69,8 +69,7 @@ public class _2019SecuringtheSupplyRoute extends QuestHandler {
 					}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203673)
 				return sendQuestEndDialog(env);
 		}

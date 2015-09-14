@@ -35,7 +35,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		qe.registerQuestNpc(700939).addOnAtDistanceEvent(questId);
 		qe.registerOnMovieEndQuest(454, questId);
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -66,7 +66,6 @@ public class _28602IntotheUnknown extends QuestHandler {
 		return false;
 	}
 
-	
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -76,7 +75,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId != 454)
@@ -98,49 +97,43 @@ public class _28602IntotheUnknown extends QuestHandler {
 			if (targetId == 205234) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 205234) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					if (!player.getPortalCooldownList().isPortalUseDisabled(300230000)) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f,
-							189.52058f, (byte) 30);
-						player.getPortalCooldownList().addPortalCooldown(300230000, DataManager.INSTANCE_COOLTIME_DATA.getInstanceEntranceCooltime(player, newInstance.getMapId()));
+						TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30);
+						player.getPortalCooldownList().addPortalCooldown(300230000,
+							DataManager.INSTANCE_COOLTIME_DATA.getInstanceEntranceCooltime(player, newInstance.getMapId()));
 						changeQuestStep(env, 0, 1, false); // 1
 					}
 					return closeDialogWindow(env);
 				}
-			}
-			else if (targetId == 700939) {
+			} else if (targetId == 700939) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					if (var == 2) {
 						return sendQuestDialog(env, 1693);
 					}
-				}
-				else if (env.getDialog() == DialogAction.SETPRO3) {
+				} else if (env.getDialog() == DialogAction.SETPRO3) {
 					return defaultCloseDialog(env, 2, 3);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205234) {
 				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();

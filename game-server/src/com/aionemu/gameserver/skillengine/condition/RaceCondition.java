@@ -12,10 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-
 /**
  * @author kecimis
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RaceCondition")
@@ -23,7 +21,9 @@ public class RaceCondition extends Condition {
 
 	@XmlAttribute(name = "race")
 	private List<Race> races;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
 	 */
 	@Override
@@ -32,29 +32,29 @@ public class RaceCondition extends Condition {
 			return false;
 		if (!(env.getFirstTarget() instanceof Creature))
 			return false;
-		
+
 		boolean result = false;
 		for (Race race : races) {
 			if (race == env.getFirstTarget().getRace())
 				result = true;
 		}
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public boolean validate(Effect effect) {
 		if (effect.getEffected() == null || effect.getEffector() == null)
 			return false;
 		if (!(effect.getEffected() instanceof Creature))
 			return false;
-		
+
 		boolean result = false;
 		for (Race race : races) {
 			if (race == effect.getEffected().getRace())
 				result = true;
 		}
-		
+
 		return result;
 	}
 

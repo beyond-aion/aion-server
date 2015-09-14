@@ -18,7 +18,6 @@ import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class AutoKamarInstance extends AutoInstance {
@@ -41,16 +40,14 @@ public class AutoKamarInstance extends AutoInstance {
 						players.put(member.getObjectId(), new AGPlayer(player));
 					}
 				}
-			}
-			else {
+			} else {
 				if (playersByRace.size() >= 12) {
 					return AGQuestion.FAILED;
 				}
 				players.put(player.getObjectId(), new AGPlayer(player));
 			}
 			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -67,8 +64,7 @@ public class AutoKamarInstance extends AutoInstance {
 			if (!instance.isRegistered(allianceId)) {
 				instance.register(allianceId);
 			}
-		}
-		else if (!playersByRace.isEmpty() && playersByRace.get(0).isInAlliance2()) {
+		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInAlliance2()) {
 			PlayerAllianceService.addPlayer(playersByRace.get(0).getPlayerAlliance2(), player);
 		}
 		Integer object = player.getObjectId();

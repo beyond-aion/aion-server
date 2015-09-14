@@ -15,13 +15,14 @@ import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 @XmlRootElement(name = "item_restriction_cleanups")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ItemRestrictionCleanupData {
+
 	@XmlElement(name = "cleanup")
 	private List<ItemCleanupTemplate> bplist;
 
 	public int size() {
 		return bplist.size();
 	}
-	
+
 	public List<ItemCleanupTemplate> getList() {
 		return this.bplist;
 	}

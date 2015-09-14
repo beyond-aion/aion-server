@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 /**
  * This class is a simple map implementation for cache usage.<br>
  * <br>
- * Value may be stored in map really long, but it for sure will be removed if there is low memory (and of course there
- * isn't any strong reference to value object)
+ * Value may be stored in map really long, but it for sure will be removed if there is low memory (and of course there isn't any strong reference to
+ * value object)
  * 
  * @author Luno
  */

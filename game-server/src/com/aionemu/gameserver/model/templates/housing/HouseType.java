@@ -18,16 +18,16 @@ public enum HouseType {
 
 	private String abbrev;
 	private int limitTypeIndex;
-	private int id; 
+	private int id;
 
 	public String getAbbreviation() {
 		return abbrev;
 	}
-	
+
 	public int getLimitTypeIndex() {
 		return limitTypeIndex;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

@@ -6,8 +6,8 @@ package com.aionemu.gameserver.model.templates.mail;
 public interface IMailFormatter {
 
 	MailPartType getType();
-	
+
 	String getFormattedString(MailPartType partType);
-	
+
 	String getParamValue(String name);
 }

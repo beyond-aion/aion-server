@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.instance.playerreward.IronWallFrontPlayerRew
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- *
  * @author Tibald
  */
 public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerReward> {
@@ -23,10 +22,10 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 
 	static {
 		positions = new float[4][];
-		positions[0] = new float[]{1535.6466f, 1573.8773f, 612.4217f};
-		positions[1] = new float[]{1099.0986f, 1541.5055f, 585.0f};
-		positions[2] = new float[]{1204.9689f, 1350.8196f, 612.91205f};
-		positions[3] = new float[]{1446.6449f, 1232.9314f, 585.0623f};
+		positions[0] = new float[] { 1535.6466f, 1573.8773f, 612.4217f };
+		positions[1] = new float[] { 1099.0986f, 1541.5055f, 585.0f };
+		positions[2] = new float[] { 1204.9689f, 1350.8196f, 612.91205f };
+		positions[3] = new float[] { 1446.6449f, 1232.9314f, 585.0623f };
 	}
 
 	public IronWallFrontReward(Integer mapId, int instanceId) {
@@ -104,16 +103,14 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 			case ELYOS:
 				if (elyosPosition == 0) {
 					teleport(player, positions[0]);
-				}
-				else {
+				} else {
 					teleport(player, positions[1]);
 				}
 				break;
 			case ASMODIANS:
 				if (elyosPosition == 0) {
 					teleport(player, positions[1]);
-				}
-				else {
+				} else {
 					teleport(player, positions[0]);
 				}
 				break;

@@ -71,8 +71,7 @@ public class _4935ABookletOnStigma extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204285)// Teirunerk
 			{
 				switch (env.getDialog()) {
@@ -89,8 +88,7 @@ public class _4935ABookletOnStigma extends QuestHandler {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 						}
 					case SETPRO1:
@@ -101,8 +99,7 @@ public class _4935ABookletOnStigma extends QuestHandler {
 						return true;
 				}
 				return false;
-			}
-			else if (targetId == 279005 && player.getInventory().getItemCountByItemId(182207107) == 1)// Kohrunerk
+			} else if (targetId == 279005 && player.getInventory().getItemCountByItemId(182207107) == 1)// Kohrunerk
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

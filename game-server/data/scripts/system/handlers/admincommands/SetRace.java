@@ -34,17 +34,15 @@ public class SetRace extends AdminCommand {
 		Player target = (Player) visibleobject;
 		if (params[0].equalsIgnoreCase("elyos")) {
 			target.getCommonData().setRace(Race.ELYOS);
-			TeleportService2.teleportTo(target, WorldMapType.SANCTUM.getId(), 1322f, 1511f, 568f, (byte)0);
+			TeleportService2.teleportTo(target, WorldMapType.SANCTUM.getId(), 1322f, 1511f, 568f, (byte) 0);
 			PacketSendUtility.sendMessage(target, "Has been moved to Sanctum.");
-		}
-		else if (params[0].equalsIgnoreCase("asmodians")) {
+		} else if (params[0].equalsIgnoreCase("asmodians")) {
 			target.getCommonData().setRace(Race.ASMODIANS);
-			TeleportService2.teleportTo(target, WorldMapType.PANDAEMONIUM.getId(), 1679f, 1400f, 195f, (byte)0);
+			TeleportService2.teleportTo(target, WorldMapType.PANDAEMONIUM.getId(), 1679f, 1400f, 195f, (byte) 0);
 			PacketSendUtility.sendMessage(target, "Has been moved to Pandaemonium");
 		}
-		PacketSendUtility.sendMessage(admin,
-			target.getName() + " race has been changed to " + params[0] + ".\n" + target.getName()
-				+ " has been moved to town.");
+		PacketSendUtility.sendMessage(admin, target.getName() + " race has been changed to " + params[0] + ".\n" + target.getName()
+			+ " has been moved to town.");
 	}
 
 	@Override

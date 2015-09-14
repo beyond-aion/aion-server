@@ -39,8 +39,7 @@ public class _30201SuppliesParty extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				long itemCount;
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 0)
 					return sendQuestDialog(env, 2375);
@@ -51,14 +50,11 @@ public class _30201SuppliesParty extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 2716);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
-			}
-			else
+			} else
 				return sendQuestEndDialog(env);
 		}
 		return false;

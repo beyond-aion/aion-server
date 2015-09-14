@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- *
  * @author xTz
  */
 public class FollowSummonTaskAI implements Runnable {
@@ -57,8 +56,7 @@ public class FollowSummonTaskAI implements Runnable {
 				setLeadingCoordinates();
 				onOutOfTargetRange();
 			}
-		}
-		else if (!master.equals(target)) {
+		} else if (!master.equals(target)) {
 			onDestination();
 		}
 	}

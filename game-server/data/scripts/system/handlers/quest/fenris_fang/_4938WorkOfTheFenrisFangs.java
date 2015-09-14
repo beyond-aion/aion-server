@@ -39,13 +39,11 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798367: { // Riikaard
@@ -163,8 +161,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 3825);
 							}
 						}
@@ -175,13 +172,11 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

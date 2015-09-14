@@ -15,7 +15,7 @@ public class MaxCountProperty {
 	public static final boolean set(final Skill skill, Properties properties) {
 		TargetRangeAttribute value = properties.getTargetType();
 		int maxcount = properties.getTargetMaxCount();
-		
+
 		switch (value) {
 			case AREA:
 				int areaCounter = 0;

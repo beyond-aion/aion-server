@@ -43,24 +43,22 @@ public class _11524FieldRepairs extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205536) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1); 
+						return defaultCloseDialog(env, 0, 1);
 				}
-			}else if (targetId == 205562) {
+			} else if (targetId == 205562) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SETPRO2:
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 				}
-			}
-			else if (targetId == 205533) {
+			} else if (targetId == 205533) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
@@ -69,8 +67,7 @@ public class _11524FieldRepairs extends QuestHandler {
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205533)
 				return sendQuestEndDialog(env);
 		}

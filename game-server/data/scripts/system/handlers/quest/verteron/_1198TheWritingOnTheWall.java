@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _1198TheWritingOnTheWall extends QuestHandler {
 
@@ -38,41 +36,37 @@ public class _1198TheWritingOnTheWall extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
-			}
-			else if (targetId == 700009) {
+			} else if (targetId == 700009) {
 				return giveQuestItem(env, 182200559, 1);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203098) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 203098) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 182213168, 1);
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}	
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) {
 				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

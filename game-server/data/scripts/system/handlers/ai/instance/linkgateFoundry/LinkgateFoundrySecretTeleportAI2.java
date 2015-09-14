@@ -10,14 +10,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Сheatkiller
- *
  */
 @AIName("linkgateFoundrySecretRoomTeleport")
 public class LinkgateFoundrySecretTeleportAI2 extends ActionItemNpcAI2 {
-
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
@@ -29,7 +26,7 @@ public class LinkgateFoundrySecretTeleportAI2 extends ActionItemNpcAI2 {
 		switchFloor(player, dialogId);
 		return true;
 	}
-	
+
 	private void switchFloor(Player player, int dialogId) {
 		switch (DialogAction.getActionByDialogId(dialogId)) {
 			case SETPRO1:

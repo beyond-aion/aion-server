@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Ritsu
- *
  */
 public class _16982UnexpectedGain extends QuestHandler {
 
@@ -38,13 +36,10 @@ public class _16982UnexpectedGain extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 0)
-			{ 
-				if (dialog == DialogAction.QUEST_ACCEPT_1)
-				{
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 0) {
+				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -53,28 +48,23 @@ public class _16982UnexpectedGain extends QuestHandler {
 
 		if (qs == null)
 			return false;
-			
-			if (qs.getStatus() == QuestStatus.START)
-			{
-			if (targetId == 801543)
-			{ 
+
+		if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 801543) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
-				{
+				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 188100111, 1);
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}	
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801543)
-						return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
@@ -83,14 +73,12 @@ public class _16982UnexpectedGain extends QuestHandler {
 
 		if (id != 188100111)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

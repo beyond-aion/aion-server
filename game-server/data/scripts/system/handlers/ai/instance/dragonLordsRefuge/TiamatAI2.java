@@ -42,8 +42,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
-	
-	
+
 	@Override
 	protected void handleAttackComplete() {
 		super.handleAttackComplete();
@@ -58,9 +57,10 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
-	
+
 	private void startSlickTask() {
 		sinkingTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -74,6 +74,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
 	private void startPainTask() {
 		painTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -87,6 +88,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
 	private void startSkillTask() {
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -116,7 +118,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 			skillTask.cancel(true);
 		}
 	}
-	
+
 	private void cancelSinkTask() {
 		if (sinkingTask != null && !sinkingTask.isCancelled()) {
 			sinkingTask.cancel(true);
@@ -126,7 +128,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				switch (percent) {
 					case 50:
 						cancelSkillTask();
@@ -141,21 +143,22 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 						spawnGravityCrusher();
 						break;
 				}
-				
+
 				break;
 			}
 		}
 	}
-/*
- * sinking sand 283330 skill -> 20965 TODO
- */
+
+	/*
+	 * sinking sand 283330 skill -> 20965 TODO
+	 */
 	private void atrocityEvent() {
 		int var = Rnd.get(3);
-		int skill = 20922 + (var * 2); //20922/20924/20926, left,central,right
+		int skill = 20922 + (var * 2); // 20922/20924/20926, left,central,right
 		spawnAtrocityNPCs(var);
-		SkillEngine.getInstance().getSkill(getOwner(), skill, 60, getOwner()).useNoAnimationSkill(); //Animation without damage
+		SkillEngine.getInstance().getSkill(getOwner(), skill, 60, getOwner()).useNoAnimationSkill(); // Animation without damage
 	}
-	
+
 	private void spawnAtrocityNPCs(int var) {
 		switch (var) {
 			case 0:
@@ -179,8 +182,8 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 				break;
 		}
 	}
-	
-  //105, 110, 115, 120, 125, 5, 10, 20
+
+	// 105, 110, 115, 120, 125, 5, 10, 20
 	private void spawnSinkingSand(float heading) {
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree((byte) heading));
 		int dist = 5;
@@ -195,6 +198,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
 	private void spawnDivisiveCreation() {
 		addTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -223,7 +227,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{50, 25, 15, 5});
+		Collections.addAll(percents, new Integer[] { 50, 25, 15, 5 });
 	}
 
 	@Override

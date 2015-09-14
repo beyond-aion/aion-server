@@ -12,15 +12,14 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * @author -Nemesiss-
  * @modified Rolandas
  */
-public class ShieldInfoBlobEntry extends ItemBlobEntry{
+public class ShieldInfoBlobEntry extends ItemBlobEntry {
 
 	ShieldInfoBlobEntry() {
 		super(ItemBlobType.SLOTS_SHIELD);
 	}
 
 	@Override
-	public
-	void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuffer buf) {
 		Item item = ownerItem;
 
 		writeQ(buf, ItemSlot.getSlotFor(item.getItemTemplate().getItemSlot()).getSlotIdMask());

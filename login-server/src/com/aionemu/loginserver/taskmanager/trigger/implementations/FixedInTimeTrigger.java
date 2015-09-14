@@ -9,7 +9,6 @@ import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author nrg
  */
 public class FixedInTimeTrigger extends TaskFromDBTrigger {

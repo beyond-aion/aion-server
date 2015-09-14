@@ -13,17 +13,15 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Cheatkiller
  * @modified Luzien
- *
  */
 @AIName("ideresonator")
 public class IdeResonatorAI2 extends NpcAI2 {
-   
-   private Future<?> task1, task2;
-		
+
+	private Future<?> task1, task2;
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -47,7 +45,7 @@ public class IdeResonatorAI2 extends NpcAI2 {
 					case 231094:
 						firstBuff = 21383;
 						break;
-						
+
 				}
 				AI2Actions.useSkill(IdeResonatorAI2.this, firstBuff);
 			}
@@ -63,18 +61,15 @@ public class IdeResonatorAI2 extends NpcAI2 {
 				if (!hyperion.getEffectController().hasAbnormalEffect(21258)) {
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401791);
 					secondBuff = 21258;
-				}
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21382)) {
+				} else if (!hyperion.getEffectController().hasAbnormalEffect(21382)) {
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401792);
 					secondBuff = 21382;
-				}
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21384)) {
+				} else if (!hyperion.getEffectController().hasAbnormalEffect(21384)) {
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401793);
 					secondBuff = 21384;
-				}
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21416)) {
+				} else if (!hyperion.getEffectController().hasAbnormalEffect(21416)) {
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401794);
-					secondBuff = 21416;	
+					secondBuff = 21416;
 				}
 				if (secondBuff != 0) {
 					SkillEngine.getInstance().applyEffectDirectly(secondBuff, getOwner(), hyperion, 0);
@@ -83,25 +78,25 @@ public class IdeResonatorAI2 extends NpcAI2 {
 			}
 		}, 30000);
 	}
-	
+
 	@Override
 	public void handleDespawned() {
-	   super.handleDespawned();
-	   if (task1 != null && !task1.isDone())
-		  task1.cancel(true);
-	   if (task2 != null && !task2.isDone())
-		  task2.cancel(true);
+		super.handleDespawned();
+		if (task1 != null && !task1.isDone())
+			task1.cancel(true);
+		if (task2 != null && !task2.isDone())
+			task2.cancel(true);
 	}
-	
+
 	@Override
 	public void handleDied() {
-	   super.handleDied();
-	   if (task1 != null && !task1.isDone())
-		  task1.cancel(true);
-	   if (task2 != null && !task2.isDone())
-		  task2.cancel(true);
+		super.handleDied();
+		if (task1 != null && !task1.isDone())
+			task1.cancel(true);
+		if (task2 != null && !task2.isDone())
+			task2.cancel(true);
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {

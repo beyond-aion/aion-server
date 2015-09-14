@@ -23,28 +23,25 @@ import org.xml.sax.SAXException;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
-
 /**
  * @author ViAl
- *
  */
 public abstract class ReloadableData {
 
 	protected static final Logger log = LoggerFactory.getLogger(ReloadableData.class);
-	
+
 	public abstract void reload(Player admin);
-	
+
 	protected abstract List<?> getData();
-	
+
 	protected abstract void setData(List<?> data);
-	
+
 	protected Schema getSchema(String xml_schema) {
 		Schema schema = null;
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = sf.newSchema(new File(xml_schema));
-		}
-		catch (SAXException saxe) {
+		} catch (SAXException saxe) {
 			throw new Error("Error while getting schema", saxe);
 		}
 		return schema;
@@ -52,7 +49,6 @@ public abstract class ReloadableData {
 
 	protected Collection<File> listFiles(File root, boolean recursive) {
 		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
-		return FileUtils.listFiles(root,
-			and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
+		return FileUtils.listFiles(root, and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
 	}
 }

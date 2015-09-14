@@ -40,7 +40,7 @@ public class AdminConfig {
 	public static boolean VISION_GM_CONNECTION;
 	@Property(key = "gameserver.administration.whisper.gm.connection", defaultValue = "false")
 	public static boolean WHISPER_GM_CONNECTION;
-	
+
 	/**
 	 * GM announce options
 	 */
@@ -50,7 +50,7 @@ public class AdminConfig {
 	public static boolean ANNOUNCE_LOGIN_TO_ALL_PLAYERS;
 	@Property(key = "gameserver.administration.announce.logout_to_all_players", defaultValue = "true")
 	public static boolean ANNOUNCE_LOGOUT_TO_ALL_PLAYERS;
-	
+
 	@Property(key = "gameserver.administration.trade.item.restriction", defaultValue = "false")
 	public static boolean ENABLE_TRADEITEM_RESTRICTION;
 

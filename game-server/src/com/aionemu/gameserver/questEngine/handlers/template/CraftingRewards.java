@@ -31,8 +31,7 @@ public class CraftingRewards extends QuestHandler {
 		this.levelReward = levelReward;
 		if (endNpcId != 0) {
 			this.endNpcId = endNpcId;
-		}
-		else {
+		} else {
 			this.endNpcId = startNpcId;
 		}
 		this.questMovie = questMovie;
@@ -76,8 +75,7 @@ public class CraftingRewards extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -89,16 +87,14 @@ public class CraftingRewards extends QuestHandler {
 						updateQuestStatus(env);
 						if (questMovie != 0) {
 							playQuestMovie(env, questMovie);
-						}
-						else {
+						} else {
 							player.getSkillList().addSkill(player, skillId, levelReward);
 						}
 						return sendQuestEndDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -114,8 +110,8 @@ public class CraftingRewards extends QuestHandler {
 	}
 
 	private boolean canLearn(Player player) {
-		return levelReward == 400 ? CraftSkillUpdateService.canLearnMoreExpertCraftingSkill(player)
-			: levelReward == 500 ? CraftSkillUpdateService.canLearnMoreMasterCraftingSkill(player) : true;
+		return levelReward == 400 ? CraftSkillUpdateService.canLearnMoreExpertCraftingSkill(player) : levelReward == 500 ? CraftSkillUpdateService
+			.canLearnMoreMasterCraftingSkill(player) : true;
 	}
 
 	@Override

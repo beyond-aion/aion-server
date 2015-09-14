@@ -28,8 +28,7 @@ public class InventoryItem {
 	}
 
 	/**
-	 * @return the count, or null if scripts should handle that
-	 * the counts probably may depend on scenario
+	 * @return the count, or null if scripts should handle that the counts probably may depend on scenario
 	 */
 	public Integer getCount() {
 		return count;

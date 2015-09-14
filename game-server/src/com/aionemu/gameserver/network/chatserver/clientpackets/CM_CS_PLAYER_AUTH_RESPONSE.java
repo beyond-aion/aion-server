@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.ChatService;
 public class CM_CS_PLAYER_AUTH_RESPONSE extends CsClientPacket {
 
 	protected static final Logger log = LoggerFactory.getLogger(CM_CS_PLAYER_AUTH_RESPONSE.class);
- 
+
 	/**
 	 * Player for which authentication was performed
 	 */

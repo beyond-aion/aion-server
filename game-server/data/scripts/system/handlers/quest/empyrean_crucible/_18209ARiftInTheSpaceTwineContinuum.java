@@ -40,8 +40,7 @@ public class _18209ARiftInTheSpaceTwineContinuum extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205309) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD:
@@ -61,17 +60,17 @@ public class _18209ARiftInTheSpaceTwineContinuum extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			int var1 = qs.getQuestVarById(1);
-			
+
 			if (var == 0 && var1 < 4)
 				return defaultOnKillEvent(env, 217819, 0, 4, 1);
 			else if (var == 0 && var1 == 4)
 				return defaultOnKillEvent(env, 217819, 0, 1, 0);
-			else if (var == 1 && env.getTargetId() == 218185){
+			else if (var == 1 && env.getTargetId() == 218185) {
 				qs.setQuestVarById(2, 1);
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return true;
-			}				
+			}
 		}
 		return false;
 	}

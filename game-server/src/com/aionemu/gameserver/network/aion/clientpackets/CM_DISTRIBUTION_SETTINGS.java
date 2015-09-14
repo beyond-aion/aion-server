@@ -68,14 +68,17 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
 		PlayerGroup group = leader.getPlayerGroup2();
 		if (group != null) {
-			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
+			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above,
+				fabled_item_above, ethernal_item_above, mythic_item_above));
 		}
 		PlayerAlliance alliance = leader.getPlayerAlliance2();
 		if (alliance != null) {
 			if (alliance.isInLeague())
-				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
+				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootrules, misc, common_item_above, superior_item_above,
+					heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
 			else
-				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
+				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above,
+					heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
 		}
 	}
 

@@ -40,10 +40,8 @@ public class Version {
 				this.branch = getAttribute("Branch", attrs);
 				this.commitTime = getAttribute("CommitTime", attrs);
 			}
-		}
-		catch (IOException e) {
-			log.error("Unable to get Soft information\nFile name '" + (jarName == null ? "null" : jarName.getAbsolutePath())
-				+ "' isn't a valid jar", e);
+		} catch (IOException e) {
+			log.error("Unable to get Soft information\nFile name '" + (jarName == null ? "null" : jarName.getAbsolutePath()) + "' isn't a valid jar", e);
 		}
 
 	}
@@ -63,8 +61,7 @@ public class Version {
 				manifest.write(fos);
 				fos.close();
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error("Error, " + e);
 		}
 	}

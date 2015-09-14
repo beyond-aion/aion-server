@@ -9,6 +9,6 @@ public enum AISubState {
 	CAST,
 	WALK_PATH,
 	WALK_RANDOM,
-	WALK_WAIT_GROUP, 
+	WALK_WAIT_GROUP,
 	FREEZE
 }

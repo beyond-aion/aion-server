@@ -40,8 +40,7 @@ public class _1548KlawControl extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		}
@@ -65,8 +64,7 @@ public class _1548KlawControl extends QuestHandler {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				}
-				else if (var == 4) {
+				} else if (var == 4) {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					qs.setStatus(QuestStatus.REWARD);

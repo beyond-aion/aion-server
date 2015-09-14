@@ -43,8 +43,7 @@ public class _21004VillageStatusReport extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (env.getTargetId() == 799269) {
+			} else if (env.getTargetId() == 799269) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -52,8 +51,7 @@ public class _21004VillageStatusReport extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2, false, false);
 				}
-			}
-			else if (env.getTargetId() == 799227) {
+			} else if (env.getTargetId() == 799227) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
@@ -62,8 +60,7 @@ public class _21004VillageStatusReport extends QuestHandler {
 						return defaultCloseDialog(env, 2, 2, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getTargetId() == 799227)
 				return sendQuestEndDialog(env);
 		}

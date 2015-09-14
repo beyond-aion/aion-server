@@ -7,22 +7,17 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
- * @author bobobear
- *
- * Talk to Pilomenes.
- * Kill Isbariya the Resolute at Beshmundir Temple and find the Balaur orders. Afterwards, take it to Outremus.
- *
+ * @author bobobear Talk to Pilomenes. Kill Isbariya the Resolute at Beshmundir Temple and find the Balaur orders. Afterwards, take it to Outremus.
  */
 public class _11304TheRemainingFaithful extends QuestHandler {
 
 	private final static int questId = 11304;
-	
+
 	public _11304TheRemainingFaithful() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798927).addOnQuestStart(questId);
@@ -31,7 +26,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 		qe.registerQuestNpc(798941).addOnTalkEvent(questId);
 		qe.registerGetingItem(182215336, questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -39,10 +34,10 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if(targetId == 798927){ 
-			switch (dialog) {
+			if (targetId == 798927) {
+				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
 					}
@@ -51,8 +46,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798941: {
 					switch (dialog) {
@@ -65,14 +59,13 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926)
 				return sendQuestEndDialog(env);
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		Player player = env.getPlayer();

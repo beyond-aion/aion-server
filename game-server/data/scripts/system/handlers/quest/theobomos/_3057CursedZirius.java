@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.MathUtil;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _3057CursedZirius extends QuestHandler {
 
@@ -37,16 +35,14 @@ public class _3057CursedZirius extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798213) { 
+			if (targetId == 798213) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798213) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -60,7 +56,7 @@ public class _3057CursedZirius extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAttackEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -78,4 +74,3 @@ public class _3057CursedZirius extends QuestHandler {
 		return false;
 	}
 }
-		

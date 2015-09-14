@@ -109,8 +109,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798927) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

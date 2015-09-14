@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.templates.assemblednpc.AssembledNpcTemplate;
 
 /**
- *
  * @author xTz
  */
 @XmlRootElement(name = "assembled_npcs")
@@ -39,5 +38,5 @@ public class AssembledNpcsData {
 	public AssembledNpcTemplate getAssembledNpcTemplate(Integer i) {
 		return assembledNpcsTemplates.get(i);
 	}
-	
+
 }

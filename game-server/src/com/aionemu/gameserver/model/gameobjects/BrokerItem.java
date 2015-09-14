@@ -28,7 +28,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	private Timestamp settleTime;
 	private boolean splittingAvailable;
 	private long averagePrice;
-	
+
 	PersistentState state;
 
 	/**
@@ -70,9 +70,8 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	 * @param sellerId
 	 * @param itemBrokerRace
 	 */
-	public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price,
-		String seller, int sellerId, BrokerRace itemBrokerRace, boolean isSold, boolean isSettled, Timestamp expireTime,
-		Timestamp settleTime, boolean splittingAvailable) {
+	public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price, String seller, int sellerId,
+		BrokerRace itemBrokerRace, boolean isSold, boolean isSettled, Timestamp expireTime, Timestamp settleTime, boolean splittingAvailable) {
 		this.item = item;
 		this.itemId = itemId;
 		this.itemUniqueId = itemUniqueId;
@@ -87,8 +86,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 			this.isSold = true;
 			this.isSettled = true;
 
-		}
-		else {
+		} else {
 			this.isSold = isSold;
 			this.isSettled = isSettled;
 		}
@@ -96,7 +94,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 		this.expireTime = expireTime;
 		this.settleTime = settleTime;
 		this.splittingAvailable = splittingAvailable;
-		
+
 		this.state = PersistentState.NOACTION;
 	}
 
@@ -133,7 +131,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	}
 
 	public void removeItem() {
-		//this.item = null;
+		// this.item = null;
 		this.isSold = true;
 		this.isSettled = true;
 		this.settleTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
@@ -220,7 +218,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	public long getItemCount() {
 		return itemCount;
 	}
-	
+
 	public void decreaseItemCount(long value) {
 		this.itemCount -= value;
 		this.item.decreaseItemCount(value);
@@ -247,17 +245,14 @@ public class BrokerItem implements Comparable<BrokerItem> {
 		return item.getItemName();
 	}
 
-	
 	public boolean isSplittingAvailable() {
 		return splittingAvailable;
 	}
 
-	
 	public long getAveragePrice() {
 		return averagePrice;
 	}
 
-	
 	public void setAveragePrice(long averagePrice) {
 		this.averagePrice = averagePrice;
 	}
@@ -378,8 +373,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 		int result = 0;
 		if (aThis == null && aThat != null) {
 			result = -1;
-		}
-		else if (aThis != null && aThat == null) {
+		} else if (aThis != null && aThat == null) {
 			result = 1;
 		}
 		return result;

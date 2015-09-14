@@ -24,8 +24,7 @@ public class AllianceDisbandListener extends PlayerAllianceDisbandCallback {
 					}
 				}
 			}
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			log.error("Error during alliance disband listen", t);
 		}
 	}
@@ -40,8 +39,7 @@ public class AllianceDisbandListener extends PlayerAllianceDisbandCallback {
 					}
 				}
 			}
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			log.error("Error during alliance disband listen", t);
 		}
 	}

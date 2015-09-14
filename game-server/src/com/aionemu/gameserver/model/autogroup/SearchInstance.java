@@ -9,7 +9,6 @@ import java.util.List;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- *
  * @author xTz
  */
 public class SearchInstance {
@@ -54,11 +53,11 @@ public class SearchInstance {
 	public boolean isEngulfedOB() {
 		return instanceMaskId == 108;
 	}
-	
+
 	public boolean isIronWallFront() {
 		return instanceMaskId == 109;
 	}
-	
+
 	public boolean isIdgelDome() {
 		return instanceMaskId == 111;
 	}

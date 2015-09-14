@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- *
  * @author xTz, Rolandas
  */
 public class ListSplitter<T> {
@@ -26,7 +25,7 @@ public class ListSplitter<T> {
 		if (collection != null && collection.size() > 0) {
 			this.splitCount = splitCount;
 			length = collection.size();
-			this.objects = collection.toArray((T[]) new Object[length]); 
+			this.objects = collection.toArray((T[]) new Object[length]);
 			componentType = objects.getClass().getComponentType();
 		}
 		this.emptyIsOk = emptyIsOk;
@@ -62,8 +61,8 @@ public class ListSplitter<T> {
 	}
 
 	/**
-	 * Always return true even the array is empty until it was fetched with {@link #getNext()}.
-	 * Allows to send empty collections as packets using while loop
+	 * Always return true even the array is empty until it was fetched with {@link #getNext()}. Allows to send empty collections as packets using while
+	 * loop
 	 */
 	public boolean hasMore() {
 		if (!emptyIsOk && length == 0)

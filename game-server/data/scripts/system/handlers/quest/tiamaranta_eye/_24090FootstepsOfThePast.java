@@ -19,14 +19,14 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 
 public class _24090FootstepsOfThePast extends QuestHandler {
-	
+
 	private final static int questId = 24090;
 	private final static int[] npc_ids = { 802059, 730889, 802178, 205988, 730890 };
-	
+
 	public _24090FootstepsOfThePast() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerOnLevelUp(questId);
@@ -34,7 +34,7 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -45,16 +45,16 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 		Npc npc = (Npc) env.getVisibleObject();
 		int var = qs.getQuestVarById(0);
 		DialogAction dialog = env.getDialog();
-		if (qs.getStatus() == QuestStatus.START) {			
+		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 802059:// Protector Oriata  
+				case 802059:// Protector Oriata
 					switch (dialog) {
 						case QUEST_SELECT: {
-							if(var == 0){
-							return sendQuestDialog(env, 1011);
+							if (var == 0) {
+								return sendQuestDialog(env, 1011);
 							}
 						}
-						case SETPRO1:{
+						case SETPRO1: {
 							if (!giveQuestItem(env, 182215412, 1))
 								return true;
 							qs.setQuestVar(1);
@@ -63,118 +63,118 @@ public class _24090FootstepsOfThePast extends QuestHandler {
 						}
 					}
 					break;
-				case 730889://tiamats Body
-					switch(dialog){
-					case QUEST_SELECT:{
-						if(var == 2)
-						return sendQuestDialog(env, 1693);
-					}
-					case SETPRO3:{
-						if (targetId == 730889) 
-							NpcActions.delete(npc);
-						QuestService.addNewSpawn(300490000, player.getInstanceId(), 802178, (float) 461.54, (float) 514.5, 417, (byte) 119);
-						qs.setQuestVar(3);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}						
-					}
-					break;
-				case 802178://Oriata of the Past
-					switch(dialog){
-					case USE_OBJECT:{
-						if(var == 3){
-							return sendQuestDialog(env, 2034);
-						}						
-					}
-					case SETPRO4:{
-						if (targetId == 802178) 
-							NpcActions.delete(npc);
-						TeleportService2.teleportTo(player, 300500000, player.getInstanceId(), 247, 239, 124, (byte) 10);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 205988, (float) 247.54, (float) 239.5, 124, (byte) 95);
-						qs.setQuestVar(4);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
-					
+				case 730889:// tiamats Body
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 2)
+								return sendQuestDialog(env, 1693);
+						}
+						case SETPRO3: {
+							if (targetId == 730889)
+								NpcActions.delete(npc);
+							QuestService.addNewSpawn(300490000, player.getInstanceId(), 802178, (float) 461.54, (float) 514.5, 417, (byte) 119);
+							qs.setQuestVar(3);
+							updateQuestStatus(env);
+							return closeDialogWindow(env);
+						}
 					}
 					break;
-				case 205988: //Israphel
-					switch(dialog){
-					case USE_OBJECT:{
-						if(var == 4)
-						return sendQuestDialog(env, 2375);
-					}
-					case SETPRO5:{
-						if (targetId == 205988) 
-							NpcActions.delete(npc);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 730890, player.getX(), player.getY(), player.getZ(), (byte) 95);
-						qs.setQuestVar(5);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
+				case 802178:// Oriata of the Past
+					switch (dialog) {
+						case USE_OBJECT: {
+							if (var == 3) {
+								return sendQuestDialog(env, 2034);
+							}
+						}
+						case SETPRO4: {
+							if (targetId == 802178)
+								NpcActions.delete(npc);
+							TeleportService2.teleportTo(player, 300500000, player.getInstanceId(), 247, 239, 124, (byte) 10);
+							QuestService.addNewSpawn(300500000, player.getInstanceId(), 205988, (float) 247.54, (float) 239.5, 124, (byte) 95);
+							qs.setQuestVar(4);
+							updateQuestStatus(env);
+							return closeDialogWindow(env);
+						}
+
 					}
 					break;
-				case 730890://concentrated ide crystal 
-					switch(dialog){
-					case QUEST_SELECT:{
-						if(var == 5)
-						return sendQuestDialog(env, 2716);
+				case 205988: // Israphel
+					switch (dialog) {
+						case USE_OBJECT: {
+							if (var == 4)
+								return sendQuestDialog(env, 2375);
+						}
+						case SETPRO5: {
+							if (targetId == 205988)
+								NpcActions.delete(npc);
+							QuestService.addNewSpawn(300500000, player.getInstanceId(), 730890, player.getX(), player.getY(), player.getZ(), (byte) 95);
+							qs.setQuestVar(5);
+							updateQuestStatus(env);
+							return closeDialogWindow(env);
+						}
 					}
-					case SETPRO6:{						
-						if (targetId == 730890) 
-							NpcActions.delete(npc);
-						qs.setQuestVar(6);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						QuestService.addNewSpawn(300500000, player.getInstanceId(), 802178, player.getX(), player.getY(), player.getZ(), (byte) 95);
-						return closeDialogWindow(env);
-					}
+					break;
+				case 730890:// concentrated ide crystal
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 5)
+								return sendQuestDialog(env, 2716);
+						}
+						case SETPRO6: {
+							if (targetId == 730890)
+								NpcActions.delete(npc);
+							qs.setQuestVar(6);
+							qs.setStatus(QuestStatus.REWARD);
+							updateQuestStatus(env);
+							QuestService.addNewSpawn(300500000, player.getInstanceId(), 802178, player.getX(), player.getY(), player.getZ(), (byte) 95);
+							return closeDialogWindow(env);
+						}
 					}
 			}
 		}
-		if(qs != null && qs.getStatus() == QuestStatus.REWARD){
-			if(targetId == 802178){//Oriata of the Past
-				switch(dialog){
-				case USE_OBJECT:{
-					if(var == 6){
-						return sendQuestDialog(env, 10002);
+		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 802178) {// Oriata of the Past
+				switch (dialog) {
+					case USE_OBJECT: {
+						if (var == 6) {
+							return sendQuestDialog(env, 10002);
+						}
+					}
+					case SELECT_QUEST_REWARD: {
+
+						return sendQuestDialog(env, 5);
+					}
+					case SELECTED_QUEST_REWARD1: {
+						return sendQuestEndDialog(env);
+					}
+					case SELECTED_QUEST_REWARD2: {
+						return sendQuestEndDialog(env);
 					}
 				}
-				case SELECT_QUEST_REWARD:{
-					
-					return sendQuestDialog(env, 5);
-				}
-				case SELECTED_QUEST_REWARD1:{					
-					return sendQuestEndDialog(env);
-				}				
-				case SELECTED_QUEST_REWARD2:{
-					return sendQuestEndDialog(env);
-				}			
-				}
-								
+
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int var = qs.getQuestVarById(0);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q14090"))) {				
+			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q14090"))) {
 				if (var == 1) {
 					TeleportService2.teleportTo(player, 300490000, player.getInstanceId(), 504, 515, 417, (byte) 10);
 					QuestService.addNewSpawn(300490000, player.getInstanceId(), 730889, (float) 504.54, (float) 515.5, 417, (byte) 95);
-					//maybe video?!
+					// maybe video?!
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
 				}
 			}
 		}
 		return HandlerResult.SUCCESS;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 24081 };

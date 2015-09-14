@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.templates.item.enums;
 import javax.xml.bind.annotation.XmlEnum;
 
 /**
- *
  * @author xTz
  */
 @XmlEnum

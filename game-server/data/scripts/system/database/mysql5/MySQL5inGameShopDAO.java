@@ -51,13 +51,12 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 							items.put(category, new ArrayList<IGItem>());
 						}
 						items.get(category).add(
-							new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift,
-								titleDescription, description));
+							new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift, titleDescription,
+								description));
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore inGameShop data for all from DB: " + e.getMessage(), e);
 		}
 		return items;
@@ -73,8 +72,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 				stmt.setInt(4, list);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error delete ingameshopItem: " + itemId, e);
 			return false;
 		}
@@ -103,8 +101,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 				stmt.setString(12, description);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving Item: " + objectId, e);
 		}
 	}
@@ -117,8 +114,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 				stmt.setInt(2, object);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error increaseSales Item: " + object, e);
 			return false;
 		}

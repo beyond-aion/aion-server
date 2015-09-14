@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer, Wakizashi
- *
  */
 public class CM_MANASTONE extends AionClientPacket {
 
@@ -62,12 +61,12 @@ public class CM_MANASTONE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		VisibleObject obj = player.getKnownList().getObject(npcObjId);
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANASTONE_SOCKETING) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANASTONE_SOCKETING) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		switch (actionType) {
 			case 1: // enchant stone
 			case 2: // add manastone
@@ -95,7 +94,7 @@ public class CM_MANASTONE extends AionClientPacket {
 						ItemSocketService.removeFusionstone(player, targetItemUniqueId, slotNum);
 				}
 				break;
-			case 4: //add godstone
+			case 4: // add godstone
 				ItemSocketService.socketGodstone(player, targetItemUniqueId, stoneUniqueId);
 				break;
 			case 8: // amplification

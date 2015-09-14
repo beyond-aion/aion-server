@@ -71,8 +71,7 @@ public class KnownList {
 		try {
 			forgetObjects();
 			findVisibleObjects();
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -148,8 +147,7 @@ public class KnownList {
 				}
 				owner.getController().see(object);
 			}
-		}
-		else if (visualObjects.put(object.getObjectId(), object) == null) {
+		} else if (visualObjects.put(object.getObjectId(), object) == null) {
 			owner.getController().see(object);
 		}
 	}
@@ -294,8 +292,7 @@ public class KnownList {
 					visitor.visit((Npc) newObject);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all npcs", ex);
 		}
 		return counter;
@@ -316,8 +313,7 @@ public class KnownList {
 					visitor.visit((Npc) newObject, owner);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all npcs" + ex);
 		}
 		return counter;
@@ -334,8 +330,7 @@ public class KnownList {
 					visitor.visit(player);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players" + ex);
 		}
 	}
@@ -348,8 +343,7 @@ public class KnownList {
 					visitor.visit(newObject);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects" + ex);
 		}
 	}
@@ -409,6 +403,6 @@ public class KnownList {
 		public int getType() {
 			return type;
 		}
-		
+
 	}
 }

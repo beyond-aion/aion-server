@@ -6,6 +6,7 @@ import com.aionemu.loginserver.model.Account;
  * @author KID
  */
 public class PlayerTransferRequest {
+
 	public PlayerTransferStatus status;
 	public byte serverId;
 	public byte targetServerId;

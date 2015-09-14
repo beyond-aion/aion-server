@@ -45,8 +45,7 @@ public class _1917ALingeringMystery extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1352);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1, true, false);
 				}
 			}

@@ -10,10 +10,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("saurohiddenpassage")
 public class SauroFinalTeleportAI2 extends NpcAI2 {
@@ -28,7 +26,7 @@ public class SauroFinalTeleportAI2 extends NpcAI2 {
 		switchWay(player, dialogId);
 		return true;
 	}
-	
+
 	private void switchWay(Player player, int dialogId) {
 		switch (DialogAction.getActionByDialogId(dialogId)) {
 			case SETPRO1:
@@ -39,7 +37,7 @@ public class SauroFinalTeleportAI2 extends NpcAI2 {
 				break;
 		}
 	}
-	
+
 	private void checkKeys(Player player, long keyCount) {
 		Item keys = player.getInventory().getFirstItemByItemId(185000179);
 		int portal = (int) (730875 + keyCount);
@@ -49,8 +47,7 @@ public class SauroFinalTeleportAI2 extends NpcAI2 {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			AI2Actions.deleteOwner(this);
 			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401922, getObjectId(), 0, 0);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352));
 		}
 	}

@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.world.exceptions;
 
 /**
- * This Exception will be thrown when some AionObject will be stored more then one time. This Exception indicating
- * serious error.
+ * This Exception will be thrown when some AionObject will be stored more then one time. This Exception indicating serious error.
  * 
  * @author -Nemesiss-
  */

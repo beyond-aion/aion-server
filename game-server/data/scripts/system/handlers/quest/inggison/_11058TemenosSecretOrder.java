@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11058TemenosSecretOrder extends QuestHandler {
 
@@ -40,38 +38,32 @@ public class _11058TemenosSecretOrder extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					removeQuestItem(env, 182206844, 1);
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799049) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else if (dialog == DialogAction.SELECT_ACTION_2034) {
+				} else if (dialog == DialogAction.SELECT_ACTION_2034) {
 					return sendQuestDialog(env, 2034);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
-					if(player.getInventory().getKinah() >= 20000000) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					if (player.getInventory().getKinah() >= 20000000) {
 						player.getInventory().decreaseKinah(20000000);
 						return sendQuestDialog(env, 5);
-					}
-					else 
+					} else
 						return sendQuestDialog(env, 3739);
-				}
-				else 
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-					
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -80,20 +72,20 @@ public class _11058TemenosSecretOrder extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 0)
 				return defaultOnKillEvent(env, 296493, 0, 1);
-			else if(var == 1)
+			else if (var == 1)
 				return defaultOnKillEvent(env, 296494, 1, 2);
-			else if(var == 2)
+			else if (var == 2)
 				return defaultOnKillEvent(env, 296495, 2, true);
 		}
 		return false;
 	}
-						
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

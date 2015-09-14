@@ -44,8 +44,7 @@ public class _16960FacetheCommander extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 802055) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -58,13 +57,11 @@ public class _16960FacetheCommander extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801281) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

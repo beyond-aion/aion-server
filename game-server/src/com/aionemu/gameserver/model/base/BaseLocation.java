@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
 /**
- *
  * @author Source
  */
 public class BaseLocation {

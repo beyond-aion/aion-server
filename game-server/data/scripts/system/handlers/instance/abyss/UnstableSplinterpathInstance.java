@@ -16,7 +16,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author zhkchi
  * @reworked vlog, Luzien
@@ -32,26 +31,25 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
-			case 219554: //(ex 219942) Pazuzu the Life Current
+			case 219554: // (ex 219942) Pazuzu the Life Current
 				spawnPazuzuHugeAetherFragment();
 				spawnPazuzuGenesisTreasureBoxes();
 				spawnPazuzuAbyssalTreasureBox();
 				spawnPazuzusTreasureBox();
 				break;
-			case 219553: //(ex 219941) Kaluva the Fourth Fragment
+			case 219553: // (ex 219941) Kaluva the Fourth Fragment
 				spawnKaluvaHugeAetherFragment();
 				spawnKaluvaGenesisTreasureBoxes();
 				spawnKaluvaAbyssalTreasureBox();
 				break;
-			case 219551: //(ex 219939) Unstable rukril 
-			case 219552: //(ex 219940) Unstable ebonsoul
+			case 219551: // (ex 219939) Unstable rukril
+			case 219552: // (ex 219940) Unstable ebonsoul
 				if (getNpc(npcId == 219552 ? 219551 : 219552) == null) {
 					spawnDayshadeAetherFragment();
 					spawnDayshadeGenesisTreasureBoxes();
 					spawnDayshadeAbyssalTreasureChest();
-				}
-				else {
-					sendMsg(npcId == 219551 ? 1400634 : 1400635); //Defeat Rukril/Ebonsoul in 1 min!
+				} else {
+					sendMsg(npcId == 219551 ? 1400634 : 1400635); // Defeat Rukril/Ebonsoul in 1 min!
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -73,7 +71,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				}
 				npc.getController().onDelete();
 				break;
-			case 283204: //ex 284022
+			case 283204: // ex 284022
 				Npc ebonsoul = getNpc(219552);
 				if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
 					if (MathUtil.isIn3dRange(npc, ebonsoul, 5)) {
@@ -84,7 +82,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				}
 				npc.getController().onDelete();
 				break;
-			case 283205: //ex 284023:
+			case 283205: // ex 284023:
 				Npc rukril = getNpc(219551);
 				if (rukril != null && !rukril.getLifeStats().isAlreadyDead()) {
 					if (MathUtil.isIn3dRange(npc, rukril, 5)) {
@@ -95,12 +93,12 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				}
 				npc.getController().onDelete();
 				break;
-			case 219563: //ex 219951 unstable Yamennes Painflare
-			case 219555: //ex 219943 strengthened Yamennes Blindsight
+			case 219563: // ex 219951 unstable Yamennes Painflare
+			case 219555: // ex 219943 strengthened Yamennes Blindsight
 				spawnYamennesGenesisTreasureBoxes();
 				spawnYamennesAbyssalTreasureBox(npcId == 219563 ? 701579 : 701580);
-				deleteNpcs(instance.getNpcs(219586)); //Ex 219974
-				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); //Exit
+				deleteNpcs(instance.getNpcs(219586)); // Ex 219974
+				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				for (Player p : instance.getPlayersInside())
 					SkillEngine.getInstance().applyEffectDirectly(19283, p, p, 0);
 				break;
@@ -110,7 +108,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				npc.getController().onDelete();
 				break;
 
-			case 283206: //ex 284024:
+			case 283206: // ex 284024:
 				if (++killedPazuzuWorms == 4) {
 					killedPazuzuWorms = 0;
 					Npc pazuzu = getNpc(219554);
@@ -121,9 +119,9 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				}
 				npc.getController().onDelete();
 				break;
-			case 219567: //ex 219955
-			case 219579: //ex 219967
-			case 219580: //ex 219968 Spawn Gate
+			case 219567: // ex 219955
+			case 219579: // ex 219967
+			case 219580: // ex 219968 Spawn Gate
 				removeSummoned();
 				npc.getController().onDelete();
 				break;
@@ -137,23 +135,24 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 700957:
 				sendMsg(1400732);
 				spawn(219563, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-        npc.getController().onDelete();
+				npc.getController().onDelete();
 				break;
 			case 701589:
 				sendMsg(1400731);
 				spawn(219555, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-        npc.getController().onDelete();
-				break;				
+				npc.getController().onDelete();
+				break;
 		}
 	}
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}
@@ -203,7 +202,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnDayshadeAbyssalTreasureChest() {
-		sendMsg(1400636); //A Treasure Box Appeared
+		sendMsg(1400636); // A Treasure Box Appeared
 		spawn(701578, 404.891f, 650.2943f, 439.2548f, (byte) 130);
 	}
 
@@ -225,13 +224,12 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void removeSummoned(){
+	private void removeSummoned() {
 		Npc gate1 = getNpc(219567);
 		Npc gate2 = getNpc(219579);
 		Npc gate3 = getNpc(219580);
-		if((gate1 == null || gate1.getLifeStats().isAlreadyDead())
-			&& (gate2 == null || gate2.getLifeStats().isAlreadyDead()) 
-			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead())){
+		if ((gate1 == null || gate1.getLifeStats().isAlreadyDead()) && (gate2 == null || gate2.getLifeStats().isAlreadyDead())
+			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead())) {
 			deleteNpcs(instance.getNpcs(219565));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(219566));// Summoned Lapilima
 		}

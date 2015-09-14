@@ -43,8 +43,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203550: { // Munin
 					switch (dialog) {
@@ -58,8 +57,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203121, 1);
 								return sendQuestDialog(env, 5);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -70,8 +68,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203122, 1);
 								return sendQuestDialog(env, 6);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -82,8 +79,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203123, 1);
 								return sendQuestDialog(env, 7);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -97,8 +93,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin
 				return sendQuestEndDialog(env, qs.getQuestVarById(0) - 5);
 			}

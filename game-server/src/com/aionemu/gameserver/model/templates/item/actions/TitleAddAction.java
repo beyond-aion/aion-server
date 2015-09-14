@@ -21,14 +21,13 @@ public class TitleAddAction extends AbstractItemAction {
 
 	@XmlAttribute
 	protected int titleid;
-  @XmlAttribute
-  protected Integer minutes;
+	@XmlAttribute
+	protected Integer minutes;
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.aionemu.gameserver.itemengine.actions.AbstractItemAction#canAct(com.aionemu.gameserver.model.gameobjects.player
-	 * .Player, com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
+	 * @see com.aionemu.gameserver.itemengine.actions.AbstractItemAction#canAct(com.aionemu.gameserver.model.gameobjects.player .Player,
+	 * com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
 	 */
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
@@ -45,16 +44,16 @@ public class TitleAddAction extends AbstractItemAction {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.aionemu.gameserver.itemengine.actions.AbstractItemAction#act(com.aionemu.gameserver.model.gameobjects.player
-	 * .Player, com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
+	 * @see com.aionemu.gameserver.itemengine.actions.AbstractItemAction#act(com.aionemu.gameserver.model.gameobjects.player .Player,
+	 * com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
 	 */
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
 		ItemTemplate itemTemplate = parentItem.getItemTemplate();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
-		if (player.getTitleList().addTitle(titleid, false, minutes == null ? 0 : ((int)(System.currentTimeMillis()/1000))+minutes*60)) {
+		if (player.getTitleList().addTitle(titleid, false, minutes == null ? 0 : ((int) (System.currentTimeMillis() / 1000)) + minutes * 60)) {
 			Item item = player.getInventory().getItemByObjId(parentItem.getObjectId());
 			player.getInventory().delete(item);
 		}

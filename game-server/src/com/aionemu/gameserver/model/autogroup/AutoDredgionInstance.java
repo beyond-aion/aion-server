@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.services.instance.periodic.DredgionService2;
 
 /**
- *
  * @author xTz
  */
 public class AutoDredgionInstance extends AutoInstance {
@@ -39,16 +38,14 @@ public class AutoDredgionInstance extends AutoInstance {
 						players.put(member.getObjectId(), new AGPlayer(player));
 					}
 				}
-			}
-			else {
+			} else {
 				if (playersByRace.size() >= 6) {
 					return AGQuestion.FAILED;
 				}
 				players.put(player.getObjectId(), new AGPlayer(player));
 			}
 			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -64,8 +61,7 @@ public class AutoDredgionInstance extends AutoInstance {
 			if (!instance.isRegistered(groupId)) {
 				instance.register(groupId);
 			}
-		}
-		else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup2()) {
+		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup2()) {
 			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup2(), player);
 		}
 		Integer object = player.getObjectId();

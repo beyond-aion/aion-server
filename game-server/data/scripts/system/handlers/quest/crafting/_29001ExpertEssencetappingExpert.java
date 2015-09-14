@@ -42,8 +42,7 @@ public class _29001ExpertEssencetappingExpert extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -62,8 +61,7 @@ public class _29001ExpertEssencetappingExpert extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798800) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

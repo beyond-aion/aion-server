@@ -134,8 +134,8 @@ public class WorldMap {
 	}
 
 	/**
-	 * Return a WorldMapInstance - depends on map configuration one map may have twins instances to balance player. This
-	 * method will return WorldMapInstance by server chose.
+	 * Return a WorldMapInstance - depends on map configuration one map may have twins instances to balance player. This method will return
+	 * WorldMapInstance by server chose.
 	 * 
 	 * @return WorldMapInstance.
 	 */

@@ -51,14 +51,11 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 				if (znpc.getNpcId() == 798100 || znpc.getNpcId() == 798101) {
 					player.getMailbox().mailBoxState = PlayerMailboxState.EXPRESS;
 					writeH(2);
-				}
-				else
+				} else
 					player.getMailbox().mailBoxState = PlayerMailboxState.REGULAR;
-			}
-			else
+			} else
 				writeH(0);
-		}
-		else if (this.dialogID == DialogPage.TOWN_CHALLENGE_TASK.id()) {
+		} else if (this.dialogID == DialogPage.TOWN_CHALLENGE_TASK.id()) {
 			AionObject object = World.getInstance().findVisibleObject(targetObjectId);
 			if (object != null && object instanceof Npc) {
 				Npc npc = (Npc) object;
@@ -67,8 +64,7 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 					MapRegion region = npc.getPosition().getMapRegion();
 					if (region == null) {
 						// some npc without region !!!
-					}
-					else {
+					} else {
 						List<ZoneInstance> zones = region.getZones(npc);
 						for (ZoneInstance zone : zones) {
 							townId = zone.getTownId();
@@ -79,8 +75,7 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 					}
 				}
 			}
-		}
-		else
+		} else
 			writeH(0);
 	}
 

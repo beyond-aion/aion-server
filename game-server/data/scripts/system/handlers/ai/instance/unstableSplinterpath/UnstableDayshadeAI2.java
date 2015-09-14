@@ -18,7 +18,7 @@ public class UnstableDayshadeAI2 extends AggressiveNpcAI2 {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 
 	@Override
-	protected void handleAttack(Creature creature){
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
 			AI2Actions.dieSilently(this, creature);
@@ -29,7 +29,7 @@ public class UnstableDayshadeAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected void handleBackHome(){
+	protected void handleBackHome() {
 		super.handleBackHome();
 		isHome.set(true);
 	}

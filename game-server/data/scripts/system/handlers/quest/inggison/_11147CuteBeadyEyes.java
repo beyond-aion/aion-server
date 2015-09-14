@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _11147CuteBeadyEyes extends QuestHandler {
 
@@ -40,54 +38,46 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798997) { 
+			if (targetId == 798997) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798997) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 798997) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0)
+					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1011);
-					else if(qs.getQuestVarById(0) == 1)
+					else if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799079, player.getX(), player.getY(), player.getZ(), (byte) 0);
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799081, player.getX() - 1, player.getY() + 2, player.getZ(), (byte) 0);
+					QuestService
+						.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799081, player.getX() - 1, player.getY() + 2, player.getZ(), (byte) 0);
 					return defaultCloseDialog(env, 0, 1);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);
 				}
-			}
-			else if (targetId == 799079) { 
+			} else if (targetId == 799079) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
-				}
-				else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialog == DialogAction.SETPRO3) {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().onDelete();
 					return defaultCloseDialog(env, 2, 3);
 				}
-			}
-			else if (targetId == 799081) { 
+			} else if (targetId == 799081) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialog == DialogAction.SETPRO4) {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().onDelete();
 					return defaultCloseDialog(env, 3, 4);
 				}
 			}
-		}	
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798997) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -101,7 +91,7 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("KLAWNICKTS_CAVE_210050000")) {

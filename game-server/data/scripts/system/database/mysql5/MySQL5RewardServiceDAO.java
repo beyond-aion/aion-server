@@ -44,8 +44,7 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("getAvailable() for " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return list;
@@ -64,11 +63,9 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 				stmt.execute();
 				stmt.close();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("uncheckAvailable", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 	}

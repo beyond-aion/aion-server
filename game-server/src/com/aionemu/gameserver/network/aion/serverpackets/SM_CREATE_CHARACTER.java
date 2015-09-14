@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.PlayerInfo;
@@ -68,8 +67,7 @@ public class SM_CREATE_CHARACTER extends PlayerInfo {
 		if (responseCode == RESPONSE_OK) {
 			writePlayerInfo(player); // if everything is fine, all the character's data should be sent
 			writeB(new byte[156]);
-		}
-		else {
+		} else {
 			writeB(new byte[616]); // if something is wrong, only return code should be sent in the packet
 		}
 	}

@@ -134,8 +134,6 @@ public class AI2Actions {
 				request.denyRequest(requester, responder);
 			}
 
-
-
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				request.acceptRequest(requester, responder, requestId);
@@ -159,8 +157,7 @@ public class AI2Actions {
 	/**
 	 * Add RequestResponseHandler to player
 	 */
-	public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, final AI2Request request,
-		Object... requestParams) {
+	public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, final AI2Request request, Object... requestParams) {
 		addRequest(ai2, player, requestId, senderId, 0, request, requestParams);
 	}
 }

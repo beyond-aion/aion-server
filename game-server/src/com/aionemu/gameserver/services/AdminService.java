@@ -47,8 +47,7 @@ public class AdminService {
 				String pt = line.split("#")[0].replaceAll(" ", "");
 				list.add(Integer.parseInt(pt));
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		log.info("AdminService loaded " + list.size() + " operational items.");
@@ -75,8 +74,7 @@ public class AdminService {
 				PacketSendUtility.sendMessage(player, "You cannot use " + type + " with this item.");
 
 			return value;
-		}
-		else
+		} else
 			return true;
 	}
 }

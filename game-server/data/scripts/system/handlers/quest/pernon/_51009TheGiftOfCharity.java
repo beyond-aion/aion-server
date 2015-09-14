@@ -33,7 +33,7 @@ public class _51009TheGiftOfCharity extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 831033 || targetId == 831039) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -44,14 +44,12 @@ public class _51009TheGiftOfCharity extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831033 || targetId == 831039) {
 				changeQuestStep(env, 0, 0, true); // reward
 				return sendQuestDialog(env, 2375);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831033 || targetId == 831039)
 				return sendQuestEndDialog(env);
 		}

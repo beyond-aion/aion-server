@@ -6,10 +6,8 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 
-
 /**
  * @author Luzien
- *
  */
 @AIName("omegaclone")
 public class CloneOfBarrierAI2 extends AggressiveNpcAI2 {

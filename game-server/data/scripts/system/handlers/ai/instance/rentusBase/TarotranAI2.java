@@ -20,7 +20,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("tarotran")
@@ -73,7 +72,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 					public void run() {
 						int count = Rnd.get(4, 8);
 						while (count > 0) {
-							count --;
+							count--;
 							sp(282385);
 						}
 						canThink = true;
@@ -81,8 +80,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 						if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 							setStateIfNot(AIState.FIGHT);
 							think();
-						}
-						else {
+						} else {
 							getMoveController().abortMove();
 							getOwner().setTarget(creature);
 							getOwner().getGameStats().renewLastAttackTime();
@@ -106,7 +104,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
-		final Npc npc = (Npc) spawn(npcId,  p.getX() + x1,  p.getY() + y1,  p.getZ(),  p.getHeading());
+		final Npc npc = (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -127,18 +125,17 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelEventTask();
-				}
-				else {
+				} else {
 					int skill = 0;
 					switch (buffNr) {
 						case 1:
-							buffNr ++;
+							buffNr++;
 							skill = 19370;
 							break;
 						case 2:
-							buffNr ++;
+							buffNr++;
 							skill = 19371;
-							break;		
+							break;
 						case 3:
 							buffNr = 1;
 							skill = 19372;
@@ -153,7 +150,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{85, 65, 55, 45, 30, 15});
+		Collections.addAll(percents, new Integer[] { 85, 65, 55, 45, 30, 15 });
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {

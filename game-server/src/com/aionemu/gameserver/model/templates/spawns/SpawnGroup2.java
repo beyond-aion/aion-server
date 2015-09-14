@@ -116,8 +116,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 		super.writeLock();
 		try {
 			spots.add(spawnTemplate);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -172,8 +171,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 				log.warn("Pool size more then spots, npcId: " + npcId + ", worldId: " + worldId);
 				return null;
 			}
-		}
-		finally {
+		} finally {
 			super.readUnlock();
 		}
 		SpawnTemplate spawnTemplate = templates.get(Rnd.get(0, templates.size() - 1));
@@ -190,8 +188,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 				poolUsedTemplates.put(instanceId, states);
 			}
 			states.put(template, isUsed);
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -206,8 +203,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 			if (state == null)
 				return false;
 			return state;
-		}
-		finally {
+		} finally {
 			super.readUnlock();
 		}
 	}
@@ -226,8 +222,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 			for (SpawnTemplate template : states.keySet()) {
 				states.put(template, false);
 			}
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}

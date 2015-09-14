@@ -9,33 +9,31 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _22525CleanUpOnIdeSeven extends QuestHandler {
 
 	private final static int questId = 22525;
-	
+
 	public _22525CleanUpOnIdeSeven() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestItem(182213344, questId);
 		qe.registerQuestNpc(800996).addOnQuestStart(questId);
 		qe.registerQuestNpc(800996).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 800996) {
 				switch (dialog) {
@@ -47,20 +45,18 @@ public class _22525CleanUpOnIdeSeven extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800996) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();

@@ -12,52 +12,45 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
- *
  */
-public class _30056DirvisiasSorrow extends QuestHandler 
-{
+public class _30056DirvisiasSorrow extends QuestHandler {
 
-	private final static int	questId	= 30056;
+	private final static int questId = 30056;
 
-	public _30056DirvisiasSorrow()
-	{
+	public _30056DirvisiasSorrow() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
-		qe.registerQuestNpc(798929).addOnQuestStart(questId); //Gellius
-		qe.registerQuestNpc(798929).addOnTalkEvent(questId); //Gellius
-		qe.registerQuestNpc(203901).addOnTalkEvent(questId); //Telemachus
-		qe.registerQuestNpc(700569).addOnTalkEvent(questId); //Statue Dirvisia
-		qe.registerQuestNpc(799034).addOnTalkEvent(questId); //Dirvisia
+	public void register() {
+		qe.registerQuestNpc(798929).addOnQuestStart(questId); // Gellius
+		qe.registerQuestNpc(798929).addOnTalkEvent(questId); // Gellius
+		qe.registerQuestNpc(203901).addOnTalkEvent(questId); // Telemachus
+		qe.registerQuestNpc(700569).addOnTalkEvent(questId); // Statue Dirvisia
+		qe.registerQuestNpc(799034).addOnTalkEvent(questId); // Dirvisia
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE){
-			if(targetId == 798929){
-				if(dialog == DialogAction.QUEST_SELECT)
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 798929) {
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (dialog == DialogAction.QUEST_ACCEPT_1){
+				else if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					if (!giveQuestItem(env, 182209223, 1))
 						return true;
 					return sendQuestStartDialog(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203901){
-				switch (dialog){
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 203901) {
+				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
@@ -67,35 +60,34 @@ public class _30056DirvisiasSorrow extends QuestHandler
 						return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 700569){
-				switch (dialog){
+			if (targetId == 700569) {
+				switch (dialog) {
 					case USE_OBJECT:
-						if (var == 0){
+						if (var == 0) {
 							QuestService.addNewSpawn(600010000, 1, 799034, 555.8842f, 307.8092f, 310.24997f, (byte) 0);
 							return useQuestObject(env, 0, 0, false, 0, 0, 0, 182209223, 1);
 						}
 				}
 			}
-			if (targetId == 799034){
-				switch (dialog){
+			if (targetId == 799034) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if (var == 0){
+						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						}
 					case SETPRO1:
-						if (var == 0){
+						if (var == 0) {
 							defaultCloseDialog(env, 0, 0, true, false);
-							final Npc npc = (Npc)env.getVisibleObject();
-							ThreadPoolManager.getInstance().schedule(new Runnable(){
+							final Npc npc = (Npc) env.getVisibleObject();
+							ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 								@Override
-								public void run()
-								{
-									npc.getController().onDelete();	
+								public void run() {
+									npc.getController().onDelete();
 								}
-							}, 400);	
+							}, 400);
 							return true;
 						}
 				}

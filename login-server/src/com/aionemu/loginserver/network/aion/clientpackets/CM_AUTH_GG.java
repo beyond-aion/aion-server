@@ -53,8 +53,7 @@ public class CM_AUTH_GG extends AionClientPacket {
 		if (con.getSessionId() == sessionId) {
 			con.setState(State.AUTHED_GG);
 			con.sendPacket(new SM_AUTH_GG(sessionId));
-		}
-		else {
+		} else {
 			/**
 			 * Session id is not ok - inform client that smth went wrong - dc client
 			 */

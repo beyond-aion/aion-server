@@ -48,16 +48,14 @@ public class Stat extends AdminCommand {
 					for (IStatFunction stat : stats) {
 						PacketSendUtility.sendMessage(admin, stat.toString());
 					}
-				}
-				else if (params.length == 2 && "details".equals(params[1])) {
+				} else if (params.length == 2 && "details".equals(params[1])) {
 					TreeSet<IStatFunction> stats = creature.getGameStats().getStatsByStatEnum(StatEnum.valueOf(params[0]));
 					for (IStatFunction stat : stats) {
 						String details = collectDetails(stat);
 						PacketSendUtility.sendMessage(admin, details);
 						log.info(details);
 					}
-				}
-				else if (params.length > 0 && "abs".equals(params[0])) {
+				} else if (params.length > 0 && "abs".equals(params[0])) {
 					if (!(target instanceof Player)) {
 						PacketSendUtility.sendMessage(admin, "Only players can be selected");
 						return;
@@ -73,12 +71,10 @@ public class Stat extends AdminCommand {
 						absStats.apply();
 						if (absStats.isActive()) {
 							PacketSendUtility.sendMessage(admin, "Successfully applied absolute stats");
-						}
-						else {
+						} else {
 							PacketSendUtility.sendMessage(admin, "No such template exists!");
 						}
-					}
-					catch (NumberFormatException ex) {
+					} catch (NumberFormatException ex) {
 						if (!"cancel".equalsIgnoreCase(params[1])) {
 							PacketSendUtility.sendMessage(admin, "Not a number");
 							return;

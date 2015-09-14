@@ -42,8 +42,7 @@ public class _1371FlowersForIsson extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203949) {
 				switch (env.getDialog()) {
@@ -57,8 +56,7 @@ public class _1371FlowersForIsson extends QuestHandler {
 							itemCount = player.getInventory().getItemCountByItemId(152000601);
 						if (itemCount > 4) {
 							return sendQuestDialog(env, 1353);
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1438);
 						}
 					case SETPRO1: {
@@ -68,14 +66,12 @@ public class _1371FlowersForIsson extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}
-			else if (targetId == 730039) {
+			} else if (targetId == 730039) {
 				if (qs != null && qs.getStatus() == QuestStatus.START) {
 					return useQuestObject(env, 2, 2, true, false); // reward
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203949) {
 				return sendQuestEndDialog(env);
 			}

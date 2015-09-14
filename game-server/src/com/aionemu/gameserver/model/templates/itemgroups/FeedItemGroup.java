@@ -18,7 +18,7 @@ public abstract class FeedItemGroup {
 
 	@XmlAttribute(name = "group", required = true)
 	protected ItemGroupIndex index = ItemGroupIndex.NONE;
-	
+
 	@XmlElement(name = "item")
 	private List<ItemRaceEntry> items;
 
@@ -28,7 +28,7 @@ public abstract class FeedItemGroup {
 	public ItemGroupIndex getIndex() {
 		return index;
 	}
-	
+
 	public List<ItemRaceEntry> getItems() {
 		if (items == null) {
 			items = new ArrayList<ItemRaceEntry>();

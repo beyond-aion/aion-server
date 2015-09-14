@@ -22,7 +22,7 @@ public abstract class HousesDAO implements IDFactoryAwareDAO {
 	public abstract boolean isIdUsed(int houseObjectId);
 
 	public abstract void storeHouse(House house);
-	
+
 	public abstract Map<Integer, House> loadHouses(Collection<HousingLand> lands, boolean studios);
 
 	public abstract void deleteHouse(int playerId);

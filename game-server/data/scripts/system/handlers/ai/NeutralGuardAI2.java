@@ -12,36 +12,36 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Cheatkiller
- *
  */
 @AIName("neutralguard")
 public class NeutralGuardAI2 extends AggressiveNpcAI2 {
 
-   @Override
-   protected void handleBackHome() {
-	  super.handleBackHome();
-	  changeType(CreatureType.SUPPORT);
-   }
+	@Override
+	protected void handleBackHome() {
+		super.handleBackHome();
+		changeType(CreatureType.SUPPORT);
+	}
 
-   @Override
-   public void creatureNeedsHelp(Creature attacker) {
-  	 if (MathUtil.isIn3dRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE.getId() && attacker.getTarget() instanceof Player) {
-  		 changeType(CreatureType.AGGRESSIVE);
-  		 getOwner().getAggroList().addHate(attacker, 1000);
-  		// getOwner().setTarget(attacker);
-  		 SkillEngine.getInstance().getSkill(getOwner(), 21263, 1, attacker).useNoAnimationSkill();
-  		 //SkillEngine.getInstance().getSkill(getOwner(), 20672, 65, attacker).useSkill();
-  	 }
-   }
+	@Override
+	public void creatureNeedsHelp(Creature attacker) {
+		if (MathUtil.isIn3dRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE.getId()
+			&& attacker.getTarget() instanceof Player) {
+			changeType(CreatureType.AGGRESSIVE);
+			getOwner().getAggroList().addHate(attacker, 1000);
+			// getOwner().setTarget(attacker);
+			SkillEngine.getInstance().getSkill(getOwner(), 21263, 1, attacker).useNoAnimationSkill();
+			// SkillEngine.getInstance().getSkill(getOwner(), 20672, 65, attacker).useSkill();
+		}
+	}
 
-   private void changeType(final CreatureType type) {
-	  getOwner().setNpcType(type.getId());
-	  getKnownList().doOnAllPlayers(new Visitor<Player>() {
+	private void changeType(final CreatureType type) {
+		getOwner().setNpcType(type.getId());
+		getKnownList().doOnAllPlayers(new Visitor<Player>() {
 
-		 @Override
-		 public void visit(Player player) {
-			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, type.getId(), 0));
-		 }
-	  });
-   }
+			@Override
+			public void visit(Player player) {
+				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, type.getId(), 0));
+			}
+		});
+	}
 }

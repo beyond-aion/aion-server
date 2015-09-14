@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("summonsgargoyle")
@@ -35,21 +34,16 @@ public class tahabatasummonsgargoyleAI2 extends GeneralNpcAI2 {
 		super.handleDespawned();
 	}
 
-	private void startTimer()
-	{
-		eventTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	private void startTimer() {
+		eventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
+			public void run() {
 				SkillEngine.getInstance().getSkill(getOwner(), 18219, 50, getTarget()).useSkill();
-				ThreadPoolManager.getInstance().schedule(new Runnable() 
-				{
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
-					public void run() 
-					{
+					public void run() {
 						getOwner().getController().onDelete();
 					}
 				}, 5000);
@@ -57,10 +51,8 @@ public class tahabatasummonsgargoyleAI2 extends GeneralNpcAI2 {
 		}, 10000);
 	}
 
-	private void cancelEventTask()
-	{
-		if (eventTask != null && !eventTask.isDone())
-		{
+	private void cancelEventTask() {
+		if (eventTask != null && !eventTask.isDone()) {
 			eventTask.cancel(true);
 		}
 	}

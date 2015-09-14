@@ -32,28 +32,24 @@ public class _3103KyprosDesire extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798225) { 
+			if (targetId == 798225) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798226) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					return sendQuestDialog(env, 2375);
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798226) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);

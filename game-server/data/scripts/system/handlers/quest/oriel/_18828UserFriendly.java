@@ -69,8 +69,7 @@ public class _18828UserFriendly extends QuestHandler {
 				case QUEST_ACCEPT_SIMPLE:
 					return sendQuestStartDialog(env, 182213191, 1);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);

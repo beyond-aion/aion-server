@@ -17,7 +17,6 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("the_flamelord")
@@ -36,8 +35,8 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
-				switch(percent) {
+				percents.remove(percent);
+				switch (percent) {
 					case 90:
 						startPhaseTask();
 						break;
@@ -99,7 +98,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead()) {
 					int targetId = 0;
-					switch(executorId) {
+					switch (executorId) {
 						case 282451:
 							targetId = 701062;
 							break;
@@ -126,7 +125,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{90, 40, 30, 20, 10});
+		Collections.addAll(percents, new Integer[] { 90, 40, 30, 20, 10 });
 	}
 
 	private void startPhaseTask() {
@@ -136,8 +135,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19925, 44, getOwner()).useNoAnimationSkill();
 					sendMsg(1401119);
 				}

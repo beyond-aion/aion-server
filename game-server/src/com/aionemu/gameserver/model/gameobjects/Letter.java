@@ -30,11 +30,11 @@ public class Letter extends AionObject {
 	 * @param timeStamp
 	 *          new letter constructor
 	 */
-	public Letter(int objId, int recipientId, Item attachedItem, long attachedKinahCount, String title, String message,
-		String senderName, Timestamp timeStamp, boolean unread, LetterType letterType) {
+	public Letter(int objId, int recipientId, Item attachedItem, long attachedKinahCount, String title, String message, String senderName,
+		Timestamp timeStamp, boolean unread, LetterType letterType) {
 		super(objId);
 
-		if(letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD)
+		if (letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD)
 			this.express = true;
 		else
 			this.express = false;
@@ -104,7 +104,7 @@ public class Letter extends AionObject {
 
 	public void setLetterType(LetterType letterType) {
 		this.letterType = letterType;
-		if(letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD)
+		if (letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD)
 			this.express = true;
 		else
 			this.express = false;

@@ -60,8 +60,8 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
-							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(),
-								player.getY(), player.getZ(), player.getHeading());
+							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(), player.getZ(),
+								player.getHeading());
 							qs.setQuestVarById(0, 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -80,8 +80,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 1693);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 					}
@@ -97,8 +96,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 							return true;
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799208) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

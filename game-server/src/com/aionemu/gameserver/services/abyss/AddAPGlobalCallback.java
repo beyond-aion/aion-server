@@ -26,8 +26,7 @@ public abstract class AddAPGlobalCallback implements Callback {
 		// Only Players or SiegeNpc(from SiegeModType.SIEGE or .ASSAULT) can add points
 		if (creature instanceof Player) {
 			onAbyssPointsAdded(player, abyssPoints);
-		}
-		else if (creature instanceof SiegeNpc) {
+		} else if (creature instanceof SiegeNpc) {
 			if (!((SiegeNpc) creature).getSpawn().isPeace())
 				onAbyssPointsAdded(player, abyssPoints);
 		}

@@ -146,35 +146,25 @@ public class LegionMemberEx extends LegionMember {
 	public boolean isValidLegionMemberEx() {
 		if (getObjectId() < 1) {
 			log.error("[LegionMemberEx] Player Object ID is empty.");
-		}
-		else if (getName() == null) {
+		} else if (getName() == null) {
 			log.error("[LegionMemberEx] Player Name is empty." + getObjectId());
-		}
-		else if (getPlayerClass() == null) {
+		} else if (getPlayerClass() == null) {
 			log.error("[LegionMemberEx] Player Class is empty." + getObjectId());
-		}
-		else if (getLevel() < 1) {
+		} else if (getLevel() < 1) {
 			log.error("[LegionMemberEx] Player Level is empty." + getObjectId());
-		}
-		else if (getLastOnline() == 0) {
+		} else if (getLastOnline() == 0) {
 			log.error("[LegionMemberEx] Last Online is empty." + getObjectId());
-		}
-		else if (getWorldId() < 1) {
+		} else if (getWorldId() < 1) {
 			log.error("[LegionMemberEx] World Id is empty." + getObjectId());
-		}
-		else if (getLegion() == null) {
+		} else if (getLegion() == null) {
 			log.error("[LegionMemberEx] Legion is empty." + getObjectId());
-		}
-		else if (getRank() == null) {
+		} else if (getRank() == null) {
 			log.error("[LegionMemberEx] Rank is empty." + getObjectId());
-		}
-		else if (getNickname() == null) {
+		} else if (getNickname() == null) {
 			log.error("[LegionMemberEx] Nickname is empty." + getObjectId());
-		}
-		else if (getSelfIntro() == null) {
+		} else if (getSelfIntro() == null) {
 			log.error("[LegionMemberEx] Self Intro is empty." + getObjectId());
-		}
-		else {
+		} else {
 			return true;
 		}
 		return false;

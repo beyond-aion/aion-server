@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _22564TheNovunIdentityPart1 extends QuestHandler {
 
@@ -36,37 +34,30 @@ public class _22564TheNovunIdentityPart1 extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801004) { 
+			if (targetId == 801004) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 730802) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 730802) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);
 				}
-			}
-			else if (targetId == 801004) { 
+			} else if (targetId == 801004) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 2, 3, true, 10000, 10001);
-				}
-				else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialog == DialogAction.SET_SUCCEED) {
 					return sendQuestDialog(env, 10002);
 				}
 			}
-		}	
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801004) {
 				switch (dialog) {
 					case SET_SUCCEED:
@@ -81,19 +72,18 @@ public class _22564TheNovunIdentityPart1 extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if(var == 0)
-  			changeQuestStep(env, 0, 1, false);
-  		return true;
-  		
-  	}
+			int var = qs.getQuestVarById(0);
+			if (var == 0)
+				changeQuestStep(env, 0, 1, false);
+			return true;
+
+		}
 		return false;
 	}
 }
-

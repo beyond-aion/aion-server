@@ -24,7 +24,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 		this.effected = effected;
 		this.filtered = effects;
 		this.slot = slot;
-		
+
 		if (effected instanceof Player)
 			effectType = 2;
 	}
@@ -32,7 +32,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(effected.getObjectId());
-		writeC(effectType); //unk
+		writeC(effectType); // unk
 		writeD(0); // TODO time
 		writeD(abnormals); // unk
 		writeD(0); // unk
@@ -40,7 +40,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 		writeH(filtered.size()); // effects size
 
 		for (Effect effect : filtered) {
-			switch(effectType) {
+			switch (effectType) {
 				case 2:
 					writeD(effect.getEffectorId());
 				case 1:

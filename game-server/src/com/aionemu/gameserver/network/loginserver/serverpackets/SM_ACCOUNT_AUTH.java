@@ -4,8 +4,8 @@ import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
 /**
- * In this packet Gameserver is asking if given account sessionKey is valid at Loginserver side. [if user that is
- * authenticating on Gameserver is already authenticated on Loginserver]
+ * In this packet Gameserver is asking if given account sessionKey is valid at Loginserver side. [if user that is authenticating on Gameserver is
+ * already authenticated on Loginserver]
  * 
  * @author -Nemesiss-
  */

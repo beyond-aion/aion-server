@@ -22,7 +22,7 @@ public class _14016AGateAgape extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = {203098, 700142};
+		int[] npcs = { 203098, 700142 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnEnterWorld(questId);
@@ -69,13 +69,11 @@ public class _14016AGateAgape extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -110,11 +108,9 @@ public class _14016AGateAgape extends QuestHandler {
 				changeQuestStep(env, 2, 1, false);
 				removeQuestItem(env, 182215317, 1);
 				return true;
-			}
-			else if (var == 1 && player.getWorldId() == 310030000) {
+			} else if (var == 1 && player.getWorldId() == 310030000) {
 				changeQuestStep(env, 1, 2, false); // 2
-				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166,
-										 (float) 217.06035, (byte) 0);
+				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
 				return true;
 			}
 		}
@@ -159,7 +155,7 @@ public class _14016AGateAgape extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] verteronQuests = {14010, 14011, 14015};
+		int[] verteronQuests = { 14010, 14011, 14015 };
 		return defaultOnLvlUpEvent(env, verteronQuests, true);
 	}
 

@@ -65,12 +65,12 @@ public class CM_USE_ITEM extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_USE_ITEMS) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_USE_ITEMS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		if (player.isProtectionActive()) {
 			player.getController().stopProtectionActiveTask();
 		}
@@ -92,7 +92,6 @@ public class CM_USE_ITEM extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, STR_ITEM_COLOR_ERROR);
 			return;
 		}
-		
 
 		// check use item multicast delay exploit cast (spam)
 		if (player.isCasting()) {
@@ -110,19 +109,18 @@ public class CM_USE_ITEM extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_RACE);
 			return;
 		}
-		
+
 		if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
 			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_CLASS);
 			return;
 		}
-		
+
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
 		if (requiredLevel > player.getLevel()) {
-			PacketSendUtility.sendPacket(player,
-				STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
 			return;
 		}
-		
+
 		byte levelRestrict = item.getItemTemplate().getMaxLevelRestrict(player.getPlayerClass());
 		if (levelRestrict != 0 && player.getLevel() > levelRestrict) {
 			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, item.getNameId()));
@@ -135,7 +133,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 				PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
 				return;
 			}
-			Npc targetNpc = (Npc)player.getTarget();
+			Npc targetNpc = (Npc) player.getTarget();
 			if (targetNpc.getRace() != item.getItemTemplate().getActivationRace()) {
 				PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST_TO_CURRENT_TARGET);
 				return;
@@ -152,7 +150,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
 			return;
 		}
-		//for multi-return scrolls
+		// for multi-return scrolls
 		item.setIndexReturn(indexReturn);
 
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
@@ -161,8 +159,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 				IHouseObjectDyeAction action = (IHouseObjectDyeAction) itemAction;
 				if (action != null && action.canAct(player, item, targetHouseObject))
 					actions.add(itemAction);
-			}
-			else if (itemAction.canAct(player, item, targetItem))
+			} else if (itemAction.canAct(player, item, targetItem))
 				actions.add(itemAction);
 		}
 
@@ -180,8 +177,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 
 		int useDelay = player.getItemCooldown(item.getItemTemplate());
 		if (useDelay > 0) {
-			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay,
-				useDelay / 1000);
+			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 		}
 
 		// notify item use observer
@@ -191,8 +187,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 			if (targetHouseObject != null && itemAction instanceof IHouseObjectDyeAction) {
 				IHouseObjectDyeAction action = (IHouseObjectDyeAction) itemAction;
 				action.act(player, item, targetHouseObject);
-			}
-			else {
+			} else {
 				itemAction.act(player, item, targetItem);
 			}
 		}

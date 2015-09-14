@@ -72,7 +72,7 @@ public class SM_ATTACK extends AionServerPacket {
 				writeH(0);
 				break;
 		}
-		//setting counter skill from packet to have the best synchronization of time with client
+		// setting counter skill from packet to have the best synchronization of time with client
 		if (target instanceof Player) {
 			if (attackList.get(0).getAttackStatus().isCounterSkill())
 				((Player) target).setLastCounterSkill(attackList.get(0).getAttackStatus());
@@ -80,23 +80,12 @@ public class SM_ATTACK extends AionServerPacket {
 
 		writeH(0);
 
-		//TODO! those 2h (== d) up is some kind of very weird flag...
-		//writeD(attackFlag);
-		/*if(attackFlag & 0x10A0F != 0)
-		{
-			writeF(0);
-			writeF(0);
-			writeF(0);
-		}
-		if(attackFlag & 0x10010 != 0)
-		{
-			writeC(0);
-		}
-		if(attackFlag & 0x10000 != 0)
-		{
-			writeD(0);
-			writeD(0);
-		}*/
+		// TODO! those 2h (== d) up is some kind of very weird flag...
+		// writeD(attackFlag);
+		/*
+		 * if(attackFlag & 0x10A0F != 0) { writeF(0); writeF(0); writeF(0); } if(attackFlag & 0x10010 != 0) { writeC(0); } if(attackFlag & 0x10000 != 0) {
+		 * writeD(0); writeD(0); }
+		 */
 
 		writeC(attackList.size());
 		for (AttackResult attack : attackList) {
@@ -107,11 +96,7 @@ public class SM_ATTACK extends AionServerPacket {
 			writeC(shieldType);
 
 			/**
-			 * shield Type:
-			 * 1: reflector
-			 * 2: normal shield
-			 * 8: protect effect (ex. skillId: 417 Bodyguard)
-			 * TODO find out 4
+			 * shield Type: 1: reflector 2: normal shield 8: protect effect (ex. skillId: 417 Bodyguard) TODO find out 4
 			 */
 			switch (shieldType) {
 				case 0:
@@ -124,7 +109,7 @@ public class SM_ATTACK extends AionServerPacket {
 					writeD(attack.getProtectedSkillId()); // skillId
 					break;
 				case 16:
-					writeD(0); 
+					writeD(0);
 					writeD(0);
 					writeD(0);
 					writeD(0);

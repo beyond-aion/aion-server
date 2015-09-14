@@ -30,17 +30,16 @@ public class Online extends AdminCommand {
 
 		while (iter.hasNext()) {
 			Player player = iter.next();
-			if(player.getRace() == Race.ELYOS){
+			if (player.getRace() == Race.ELYOS) {
 				elyosCount++;
-			}else if(player.getRace() == Race.ASMODIANS){
+			} else if (player.getRace() == Race.ASMODIANS) {
 				asmoCount++;
 			}
 		}
-		
+
 		if (playerCount == 1) {
 			PacketSendUtility.sendMessage(admin, "There is " + (playerCount) + " player online !");
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "There are " + (playerCount) + " players online !");
 			PacketSendUtility.sendMessage(admin, "There are " + (elyosCount) + " elyos players online !");
 			PacketSendUtility.sendMessage(admin, "There are " + (asmoCount) + " asmo players online !");

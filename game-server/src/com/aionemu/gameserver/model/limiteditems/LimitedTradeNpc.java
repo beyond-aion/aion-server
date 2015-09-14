@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.limiteditems;
 import javolution.util.FastTable;
 
 /**
- *
  * @author xTz
  */
 public class LimitedTradeNpc {
@@ -12,7 +11,7 @@ public class LimitedTradeNpc {
 
 	public LimitedTradeNpc(FastTable<LimitedItem> limitedItems) {
 		this.limitedItems = limitedItems;
-		
+
 	}
 
 	public void putLimitedItems(FastTable<LimitedItem> limitedItems) {

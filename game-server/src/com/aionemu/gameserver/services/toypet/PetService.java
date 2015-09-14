@@ -38,7 +38,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author M@xx, IlBuono, xTz, Rolandas
  */
 public class PetService {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(PetService.class);
 
 	public static final PetService getInstance() {
@@ -102,14 +102,12 @@ public class PetService {
 
 			if (foodType != null) {
 				player.getInventory().decreaseItemCount(item, 1, ItemUpdateType.DEC_PET_FOOD);
-				reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player
-					.getCommonData().getLevel());
+				reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
 				if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null)
 					PacketSendUtility.sendPacket(player, new SM_PET(2, action, item.getObjectId(), 0, pet));
 				else
 					PacketSendUtility.sendPacket(player, new SM_PET(2, action, item.getObjectId(), --count, pet));
-			}
-			else {
+			} else {
 				// non eatable item
 				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
@@ -130,8 +128,7 @@ public class PetService {
 				commonData.setRefeedTime(refeedTime);
 				DAOManager.getDAO(PlayerPetsDAO.class).setTime(player, pet.getPetId(), refeedTime);
 				progress.reset();
-			}
-			else if (count > 0)
+			} else if (count > 0)
 				schedule(pet, player, item, count, action);
 			else {
 				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
@@ -158,8 +155,7 @@ public class PetService {
 			PacketSendUtility.sendPacket(player, new SM_PET(0, targetItem, destinationSlot));
 			pet.getCommonData().getDopingBag().setItem(0, targetSlot);
 			PacketSendUtility.sendPacket(player, new SM_PET(0, 0, targetSlot));
-		}
-		else {
+		} else {
 			pet.getCommonData().getDopingBag().setItem(scrollBag[destinationSlot - 2], targetSlot);
 			PacketSendUtility.sendPacket(player, new SM_PET(0, scrollBag[destinationSlot - 2], targetSlot));
 			pet.getCommonData().getDopingBag().setItem(targetItem, destinationSlot);
@@ -175,8 +171,7 @@ public class PetService {
 		if (action < 2) { // add, replace or delete item
 			pet.getCommonData().getDopingBag().setItem(itemId, slot);
 			action = 0;
-		}
-		else if (action == 3) { // use item
+		} else if (action == 3) { // use item
 			List<Item> items = player.getInventory().getItemsByItemId(itemId);
 			for (;;) {
 				Item useItem = items.get(0);
@@ -202,15 +197,17 @@ public class PetService {
 					}, useDelay);
 					return;
 				}
-				
+
 				for (AbstractItemAction itemAction : itemActions.getItemActions()) {
-					if (itemAction instanceof SkillUseAction ) {
-						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360), true);
-						SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillid(), ((SkillUseAction) itemAction).getLevel(), player, player, 0);
-						player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()), player.getItemCooldown(useItem.getItemTemplate()) / 1000);
+					if (itemAction instanceof SkillUseAction) {
+						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(),
+							useItem.getItemId(), 0, 1, 1, 1, 0, 15360), true);
+						SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillid(), ((SkillUseAction) itemAction).getLevel(),
+							player, player, 0);
+						player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
+							player.getItemCooldown(useItem.getItemTemplate()) / 1000);
 						player.getInventory().decreaseByItemId(itemId, 1);
-					}
-					else
+					} else
 						log.warn("Pet attempt to use not skill use item");
 				}
 				break;

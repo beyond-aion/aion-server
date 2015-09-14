@@ -38,18 +38,15 @@ public class _4722NewWeaponTest extends QuestHandler {
 			if (targetId == 799403) { // Yorgen
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182205692, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799403) { // Yorgen
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -62,7 +59,7 @@ public class _4722NewWeaponTest extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 0, true)); // reward
+			return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 0, true)); // reward
 		}
 		return HandlerResult.FAILED;
 	}

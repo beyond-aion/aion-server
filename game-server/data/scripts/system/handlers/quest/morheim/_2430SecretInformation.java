@@ -61,8 +61,7 @@ public class _2430SecretInformation extends QuestHandler {
 								changeQuestStep(env, 0, 1, false); // 1
 								return sendQuestDialog(env, 1352);
 							}
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1267);
 						}
 					}
@@ -73,8 +72,7 @@ public class _2430SecretInformation extends QuestHandler {
 								changeQuestStep(env, 0, 3, false); // 3
 								return sendQuestDialog(env, 2034);
 							}
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1267);
 						}
 					}
@@ -85,15 +83,13 @@ public class _2430SecretInformation extends QuestHandler {
 								changeQuestStep(env, 0, 7, false); // 7
 								return sendQuestDialog(env, 3398);
 							}
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 1267);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204327: { // Sveinn
@@ -184,8 +180,7 @@ public class _2430SecretInformation extends QuestHandler {
 							if (var == 8) {
 								if (player.getInventory().getItemCountByItemId(182204222) > 0) {
 									return sendQuestDialog(env, 3739);
-								}
-								else {
+								} else {
 									return sendQuestDialog(env, 3825);
 								}
 							}
@@ -201,8 +196,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204377: { // Grall

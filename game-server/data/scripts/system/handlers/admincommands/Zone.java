@@ -30,8 +30,7 @@ public class Zone extends AdminCommand {
 			List<ZoneInstance> zones = target.getPosition().getMapRegion().getZones(target);
 			if (zones.isEmpty()) {
 				PacketSendUtility.sendMessage(admin, target.getName() + " are out of any zone");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(admin, target.getName() + " are in zone: ");
 				PacketSendUtility.sendMessage(admin, "Registered zones:");
 				if (admin.isInsideZoneType(ZoneType.DAMAGE))
@@ -49,24 +48,21 @@ public class Zone extends AdminCommand {
 					PacketSendUtility.sendMessage(admin, "Fly: " + zone.canFly() + "; Glide: " + zone.canGlide());
 					PacketSendUtility.sendMessage(admin, "Ride: " + zone.canRide() + "; Fly-ride: " + zone.canFlyRide());
 					PacketSendUtility.sendMessage(admin, "Kisk: " + zone.canPutKisk() + "; Recall: " + zone.canRecall());
-					PacketSendUtility.sendMessage(admin, "Same race duels: " + zone.isSameRaceDuelsAllowed() + "; Other race duels: " + zone.isOtherRaceDuelsAllowed());
+					PacketSendUtility.sendMessage(admin,
+						"Same race duels: " + zone.isSameRaceDuelsAllowed() + "; Other race duels: " + zone.isOtherRaceDuelsAllowed());
 					PacketSendUtility.sendMessage(admin, "PvP: " + zone.isPvpAllowed());
 					PacketSendUtility.sendMessage(admin, "canReturnBattle: " + zone.canReturnToBattle());
 				}
 			}
-		}
-		else if ("?".equalsIgnoreCase(params[0])) {
+		} else if ("?".equalsIgnoreCase(params[0])) {
 			info(admin, null);
-		}
-		else if ("refresh".equalsIgnoreCase(params[0])) {
+		} else if ("refresh".equalsIgnoreCase(params[0])) {
 			admin.revalidateZones();
-		}
-		else if ("inside".equalsIgnoreCase(params[0])) {
+		} else if ("inside".equalsIgnoreCase(params[0])) {
 			try {
 				ZoneName name = ZoneName.get(params[1]);
 				PacketSendUtility.sendMessage(admin, "isInsideZone: " + admin.isInsideZone(name));
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Zone name missing!");
 				PacketSendUtility.sendMessage(admin, "Syntax: //zone inside <zone name> ");
 			}

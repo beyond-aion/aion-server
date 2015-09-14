@@ -159,16 +159,14 @@ public final class PlayerEnterWorldService {
 			if (cbi.getEnd() > System.currentTimeMillis() / 1000) {
 				client.close(new SM_QUIT_RESPONSE());
 				return;
-			}
-			else {
+			} else {
 				DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(objectId, PunishmentType.CHARBAN);
 			}
 		}
 		// passkey check
 		if (SecurityConfig.PASSKEY_ENABLE && !client.getAccount().getCharacterPasskey().isPass()) {
 			showPasskey(objectId, client);
-		}
-		else {
+		} else {
 			validateAndEnterWorld(objectId, client);
 		}
 	}
@@ -207,6 +205,7 @@ public final class PlayerEnterWorldService {
 			log.warn("Postponed enter world " + objectId);
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				try {
@@ -217,11 +216,9 @@ public final class PlayerEnterWorldService {
 						return;
 					}
 					enterWorld(client, objectId);
-				}
-				catch (Throwable ex) {
+				} catch (Throwable ex) {
 					log.error("Error during enter world " + objectId, ex);
-				}
-				finally {
+				} finally {
 					synchronized (pendingEnterWorld) {
 						pendingEnterWorld.remove(objectId);
 					}
@@ -243,43 +240,46 @@ public final class PlayerEnterWorldService {
 			// Somebody wanted to login on character that is not at his account
 			return;
 		}
-		
+
 		final Player player = PlayerService.getPlayer(objectId, account);
 
 		if (player != null && client.setActivePlayer(player)) {
 			player.setClientConnection(client);
 
-			log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with "
-					+ client.getMacAddress() + " MAC, and "+client.getHddSerial()+" HDD serial.");
+			log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress()
+				+ " MAC, and " + client.getHddSerial() + " HDD serial.");
 			World.getInstance().storeObject(player);
 
 			if (SecurityConfig.DUALBOXING) {
 				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 					@Override
 					public void visit(Player visitors) {
 						final AionConnection connection = visitors.getClientConnection();
-						if (connection != null && connection.getMacAddress() != null && player.getClientConnection().getMacAddress() != null && visitors != player 
-						&& (connection.getMacAddress()).equals(player.getClientConnection().getMacAddress())) {
-							if (connection.getIP() != null && player.getClientConnection().getIP() != null && (connection.getIP()).equals(player.getClientConnection().getIP())) {
+						if (connection != null && connection.getMacAddress() != null && player.getClientConnection().getMacAddress() != null
+							&& visitors != player && (connection.getMacAddress()).equals(player.getClientConnection().getMacAddress())) {
+							if (connection.getIP() != null && player.getClientConnection().getIP() != null
+								&& (connection.getIP()).equals(player.getClientConnection().getIP())) {
 								if (SecurityConfig.KICK_DUALBOXING && !player.isGM() && !visitors.isGM()) {
-									//kick player already in game (visitor)
-									visitors.getClientConnection().close(new SM_QUIT_RESPONSE());	
-									AuditLogger.info(player, "Dual Boxing detected: Player / Account :" + player.getName() + " / " +  player.getClientConnection().getAccount().getName()
-									+ " with MAC / IP: "  + player.getClientConnection().getMacAddress() + " / " + player.getClientConnection().getIP()
-									+ " has entered in world with same MAC as Player / Account : "  + visitors.getName() + " / " + visitors.getClientConnection().getAccount().getName()
-									+ " - Kicked Player / Account :" + visitors.getName() + " / " + visitors.getClientConnection().getAccount().getName());					
+									// kick player already in game (visitor)
+									visitors.getClientConnection().close(new SM_QUIT_RESPONSE());
+									AuditLogger.info(player, "Dual Boxing detected: Player / Account :" + player.getName() + " / "
+										+ player.getClientConnection().getAccount().getName() + " with MAC / IP: " + player.getClientConnection().getMacAddress() + " / "
+										+ player.getClientConnection().getIP() + " has entered in world with same MAC as Player / Account : " + visitors.getName()
+										+ " / " + visitors.getClientConnection().getAccount().getName() + " - Kicked Player / Account :" + visitors.getName() + " / "
+										+ visitors.getClientConnection().getAccount().getName());
+								} else {
+									AuditLogger.info(player, "Dual Boxing detected: Player / Account :" + player.getName() + " / "
+										+ player.getClientConnection().getAccount().getName() + " with MAC / IP: " + player.getClientConnection().getMacAddress() + " / "
+										+ player.getClientConnection().getIP() + " has entered in world with same MAC as Player / Account : " + visitors.getName()
+										+ " / " + visitors.getClientConnection().getAccount().getName());
 								}
-								else {
-									AuditLogger.info(player, "Dual Boxing detected: Player / Account :" + player.getName() + " / " +  player.getClientConnection().getAccount().getName()
-									+ " with MAC / IP: "  + player.getClientConnection().getMacAddress() + " / " + player.getClientConnection().getIP()
-									+ " has entered in world with same MAC as Player / Account : "  + visitors.getName() + " / " + visitors.getClientConnection().getAccount().getName());					
-								}	
-							}
-							else {
-								AuditLogger.info(player, "Invalid MAC Address : Player / Account :" + player.getName() + " / " +  player.getClientConnection().getAccount().getName()
-								+ " with MAC / IP: "  + player.getClientConnection().getMacAddress() + " / " + player.getClientConnection().getIP()
-								+ " has entered in world with same MAC (but different IP) as Player / Account : "  + visitors.getName() + " / " + connection.getAccount().getName()
-								+ " with MAC / IP: " + connection.getMacAddress() + " / " + connection.getIP());
+							} else {
+								AuditLogger.info(player,
+									"Invalid MAC Address : Player / Account :" + player.getName() + " / " + player.getClientConnection().getAccount().getName()
+										+ " with MAC / IP: " + player.getClientConnection().getMacAddress() + " / " + player.getClientConnection().getIP()
+										+ " has entered in world with same MAC (but different IP) as Player / Account : " + visitors.getName() + " / "
+										+ connection.getAccount().getName() + " with MAC / IP: " + connection.getMacAddress() + " / " + connection.getIP());
 							}
 						}
 					}
@@ -337,9 +337,10 @@ public final class PlayerEnterWorldService {
 				player.getSkillList().addSkill(player, 3512, 129);
 			}
 			// check for missing skill/recipes after ascension
-			//TODO Remove in future. Temp fix for those player who still have missing skills
-			if (player.getCommonData().isDaeva() && (player.getSkillList().getSkillEntry(30001) != null 
-				|| !(player.getSkillList().getSkillEntry(40009) != null) || !(player.getSkillList().getSkillEntry(30002) != null))) {
+			// TODO Remove in future. Temp fix for those player who still have missing skills
+			if (player.getCommonData().isDaeva()
+				&& (player.getSkillList().getSkillEntry(30001) != null || !(player.getSkillList().getSkillEntry(40009) != null) || !(player.getSkillList()
+					.getSkillEntry(30002) != null))) {
 				SkillLearnService.addNewSkills(player);
 				CraftSkillUpdateService.getInstance().setMorphRecipe(player);
 			}
@@ -366,7 +367,7 @@ public final class PlayerEnterWorldService {
 			}
 			client.sendPacket(new SM_MOTION(player.getMotions().getMotions().values()));
 			client.sendPacket(new SM_ENTER_WORLD_CHECK());
-			client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());//it is also send after enter world check
+			client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());// it is also send after enter world check
 
 			byte[] uiSettings = player.getPlayerSettings().getUiSettings();
 			byte[] shortcuts = player.getPlayerSettings().getShortcuts();
@@ -424,10 +425,10 @@ public final class PlayerEnterWorldService {
 			ChatBanService.onLogin(player);
 
 			// Intro message
-			if (welcomeInfo != null && !welcomeInfo.isEmpty()) 
+			if (welcomeInfo != null && !welcomeInfo.isEmpty())
 				PacketSendUtility.sendWhiteMessage(player, welcomeInfo);
-			
-			if (GSConfig.SERVER_MOTD_DISPLAY_REV && versionInfo != null && !versionInfo.isEmpty()) 
+
+			if (GSConfig.SERVER_MOTD_DISPLAY_REV && versionInfo != null && !versionInfo.isEmpty())
 				PacketSendUtility.sendWhiteMessage(player, versionInfo);
 
 			player.setRates(Rates.getRatesFor(client.getAccount().getMembership()));
@@ -462,12 +463,13 @@ public final class PlayerEnterWorldService {
 			ClassChangeService.showClassChangeDialog(player);
 
 			GMService.getInstance().onPlayerLogin(player);
-			
-			if(player.getAbyssRank().getRank().getId() > AbyssRankEnum.STAR1_OFFICER.getId()) {
+
+			if (player.getAbyssRank().getRank().getId() > AbyssRankEnum.STAR1_OFFICER.getId()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), player.getAbyssRank().getRank().getGpLossPerDay()));
+				PacketSendUtility.sendPacket(player,
+					SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), player.getAbyssRank().getRank().getGpLossPerDay()));
 			}
-				
+
 			/**
 			 * Trigger restore services on login.
 			 */
@@ -527,13 +529,13 @@ public final class PlayerEnterWorldService {
 			}
 			// scheduler periodic update
 			player.getController().addTask(
-					TaskId.PLAYER_UPDATE,
-					ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()),
-					PeriodicSaveConfig.PLAYER_GENERAL * 1000, PeriodicSaveConfig.PLAYER_GENERAL * 1000));
+				TaskId.PLAYER_UPDATE,
+				ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000,
+					PeriodicSaveConfig.PLAYER_GENERAL * 1000));
 			player.getController().addTask(
-					TaskId.INVENTORY_UPDATE,
-					ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()),
-					PeriodicSaveConfig.PLAYER_ITEMS * 1000, PeriodicSaveConfig.PLAYER_ITEMS * 1000));
+				TaskId.INVENTORY_UPDATE,
+				ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000,
+					PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
 			SurveyService.getInstance().showAvailable(player);
 
@@ -544,8 +546,7 @@ public final class PlayerEnterWorldService {
 				RelinquishCraftStatus.removeExcessCraftStatus(player, false);
 
 			PlayerTransferService.getInstance().onEnterWorld(player);
-		}
-		else {
+		} else {
 			log.info("[DEBUG] enter world" + objectId + ", Player: " + player);
 		}
 	}
@@ -557,7 +558,7 @@ public final class PlayerEnterWorldService {
 	// TODO! this method code is really odd [Nemesiss]
 	private static void sendItemInfos(AionConnection client, Player player) {
 		// Cubesize limit set in inventory.
-	    int questExpands = player.getQuestExpands();
+		int questExpands = player.getQuestExpands();
 		int npcExpands = player.getNpcExpands();
 		int itemExpands = player.getItemExpands();
 		player.setCubeLimit();
@@ -584,7 +585,7 @@ public final class PlayerEnterWorldService {
 
 	private static void sendWarehouseItemInfos(AionConnection client, Player player) {
 		WarehouseService.sendWarehouseInfo(player, true);
-		// from 30 to 49, from 60 to 79 
+		// from 30 to 49, from 60 to 79
 		for (int i = StorageType.PET_BAG_MIN - 2; i <= StorageType.HOUSE_WH_MAX; i++) {
 			if (i >= 50 && i < StorageType.HOUSE_WH_MIN)
 				continue;
@@ -655,8 +656,7 @@ class GeneralUpdateTask implements Runnable {
 				DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
 				for (House house : player.getHouses())
 					house.save();
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				log.error("Exception during periodic saving of player " + player.getName(), ex);
 			}
 		}
@@ -681,8 +681,7 @@ class ItemUpdateTask implements Runnable {
 			try {
 				DAOManager.getDAO(InventoryDAO.class).store(player);
 				DAOManager.getDAO(ItemStoneListDAO.class).save(player);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				log.error("Exception during periodic saving of player items " + player.getName(), ex);
 			}
 		}

@@ -8,15 +8,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30710PetrifiedHeroOfTheElyos extends QuestHandler {
 
 	private final static int questId = 30710;
-	private final static int npcs [] = {800066, 701498};
+	private final static int npcs[] = { 800066, 701498 };
 
 	public _30710PetrifiedHeroOfTheElyos() {
 		super(questId);
@@ -36,29 +34,25 @@ public class _30710PetrifiedHeroOfTheElyos extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 800066) { 
+			if (targetId == 800066) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if(qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701498) {
 				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 800382, player.getX(), player.getY(), player.getZ(), (byte) 0);
 				return useQuestObject(env, 0, 1, true, false);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 800066) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 800066) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

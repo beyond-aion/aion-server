@@ -39,8 +39,7 @@ public class _2952WinningVindachinerksFavor extends QuestHandler {
 			if (targetId == 279006) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -69,8 +68,7 @@ public class _2952WinningVindachinerksFavor extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 279016) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 279016) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

@@ -8,8 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Quest starter: Nemia (203132). Give the Odella (182200526) (1) to Eradis (203130) and ask him to cook it. Buy some
- * Verteron Pepper (169400112) for Eradis.
+ * Quest starter: Nemia (203132). Give the Odella (182200526) (1) to Eradis (203130) and ask him to cook it. Buy some Verteron Pepper (169400112) for
+ * Eradis.
  * 
  * @author vlog
  */
@@ -39,21 +39,18 @@ public class _1152OdellaRecipe extends QuestHandler {
 			if (targetId == 203132) { // Nemia
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182200526, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203130) { // Eradis
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (var == 1) {
+						} else if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
 					}
@@ -68,8 +65,7 @@ public class _1152OdellaRecipe extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203130) { // Eradis
 				return sendQuestEndDialog(env);
 			}

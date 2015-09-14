@@ -32,7 +32,7 @@ public class ArgentManorInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 701001:
 				SkillEngine.getInstance().getSkill(npc, 19316, 60, player).useNoAnimationSkill();
 				break;

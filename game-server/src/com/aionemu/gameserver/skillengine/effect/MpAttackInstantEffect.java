@@ -25,12 +25,12 @@ public class MpAttackInstantEffect extends EffectTemplate {
 		// Support for values in percentage
 		if (percent)
 			newValue = ((maxMP * value) / 100);
-		
+
 		effect.setReserveds(new EffectReserved(position, newValue, "MP", true), false);
-		
+
 		this.calculate(effect, null, null, element);
 	}
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.getEffected().getLifeStats().reduceMp(effect.getReserveds(position).getValue());

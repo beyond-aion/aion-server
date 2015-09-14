@@ -39,13 +39,11 @@ public class _3725MyLuckyNumber extends QuestHandler {
 			if (targetId == 799069) { // Yannis
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var1 = qs.getQuestVarById(1);
 			int var2 = qs.getQuestVarById(2);
 			if (targetId == 798928) { // Yulia
@@ -53,15 +51,13 @@ public class _3725MyLuckyNumber extends QuestHandler {
 					if (var1 == 6 && var2 == 15) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798928) { // Yulia
 				return sendQuestEndDialog(env);
 			}

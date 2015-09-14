@@ -55,7 +55,7 @@ public class _80008PieceOfCake extends QuestHandler {
 		}
 		return sendQuestRewardDialog(env, 798415, 0);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		Player player = env.getPlayer();

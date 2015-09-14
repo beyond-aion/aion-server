@@ -78,7 +78,7 @@ public class RateConfig {
 
 	@Property(key = "gameserver.rate.vip.crafting.xp", defaultValue = "3.0")
 	public static float VIP_CRAFTING_XP_RATE;
-	
+
 	/**
 	 * Quest Kinah Rates - Regular (1), Premium (2), VIP (3)
 	 */
@@ -126,7 +126,7 @@ public class RateConfig {
 
 	@Property(key = "gameserver.rate.vip.ap.player.gain", defaultValue = "3.0")
 	public static float VIP_AP_PLAYER_GAIN_RATE;
-	
+
 	/**
 	 * Player Glory Points Rates (Gain) - Regular (1), Premium (2), VIP (3)
 	 */
@@ -150,7 +150,7 @@ public class RateConfig {
 
 	@Property(key = "gameserver.rate.vip.xp.player.gain", defaultValue = "3.0")
 	public static float VIP_XP_PLAYER_GAIN_RATE;
-	
+
 	/**
 	 * Player Abyss Points Rates - Regular (1), Premium (2), VIP (3)
 	 */
@@ -198,55 +198,55 @@ public class RateConfig {
 
 	@Property(key = "gameserver.rate.vip.dp.player", defaultValue = "3.0")
 	public static float VIP_DP_PLAYER_RATE;
-	
+
 	/**
 	 * PVP Arena and Dredgion reward rates
 	 */
 	@Property(key = "gameserver.rate.dredgion", defaultValue = "1.6")
 	public static float DREDGION_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.regular.pvparena.discipline", defaultValue = "1")
 	public static float PVP_ARENA_DISCIPLINE_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.premium.pvparena.discipline", defaultValue = "1")
 	public static float PREMIUM_PVP_ARENA_DISCIPLINE_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.vip.pvparena.discipline", defaultValue = "1")
 	public static float VIP_PVP_ARENA_DISCIPLINE_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.regular.pvparena.chaos", defaultValue = "1")
 	public static float PVP_ARENA_CHAOS_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.premium.pvparena.chaos", defaultValue = "1")
 	public static float PREMIUM_PVP_ARENA_CHAOS_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.vip.pvparena.chaos", defaultValue = "1")
 	public static float VIP_PVP_ARENA_CHAOS_REWARD_RATE;
 
 	@Property(key = "gameserver.rate.regular.pvparena.harmony", defaultValue = "1")
 	public static float PVP_ARENA_HARMONY_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.premium.pvparena.harmony", defaultValue = "1")
 	public static float PREMIUM_PVP_ARENA_HARMONY_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.vip.pvparena.harmony", defaultValue = "1")
 	public static float VIP_PVP_ARENA_HARMONY_REWARD_RATE;
 
 	@Property(key = "gameserver.rate.regular.pvparena.glory", defaultValue = "1")
 	public static float PVP_ARENA_GLORY_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.premium.pvparena.glory", defaultValue = "1")
 	public static float PREMIUM_PVP_ARENA_GLORY_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.vip.pvparena.glory", defaultValue = "1")
 	public static float VIP_PVP_ARENA_GLORY_REWARD_RATE;
 
 	@Property(key = "gameserver.rate.regular.idgelresearchcenter.instance", defaultValue = "1")
 	public static float IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.rate.premium.idgelresearchcenter.instance", defaultValue = "1")
 	public static float PREMIUM_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-	
+
 	@Property(key = "gameserver.vip.premium.idgelresearchcenter.instance", defaultValue = "1")
 	public static float VIP_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
 
@@ -268,8 +268,8 @@ public class RateConfig {
 	public static float VIP_SELL_LIMIT_RATE;
 
 	/**
-	* NPC Glory Points Rates - Regular (1), Premium (2), VIP (3)
-	*/
+	 * NPC Glory Points Rates - Regular (1), Premium (2), VIP (3)
+	 */
 	@Property(key = "gameserver.rate.regular.gp.npc", defaultValue = "1.0")
 	public static float GP_NPC_RATE;
 	@Property(key = "gameserver.rate.premium.gp.npc", defaultValue = "2.0")

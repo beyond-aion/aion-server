@@ -61,19 +61,17 @@ public class _1920TestingYourMettle extends QuestHandler {
 							}
 						}
 						case SET_SUCCEED: {
-							return defaultCloseDialog(env, 1, 1, true, false);  // reward
+							return defaultCloseDialog(env, 1, 1, true, false); // reward
 						}
 					}
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203752) { // Jucleas
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

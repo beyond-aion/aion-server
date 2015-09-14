@@ -8,33 +8,33 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("eb_wallsattacker")
 public class PashidSiegeVolatileAI2 extends AggressiveNpcAI2 {
-	
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
 		attackWall();
 		detonation();
 	}
-	
+
 	private void attackWall() {
 		final Npc wall = getPosition().getWorldMapInstance().getNpc(831333);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				getOwner().getAggroList().addDamage(wall, 1000);
 			}
 		}, 3000);
 	}
-	
+
 	private void detonation() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (getOwner() == null || isAlreadyDead())

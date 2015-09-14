@@ -26,8 +26,7 @@ public class JavaSourceFromString extends SimpleJavaFileObject {
 	 *          source code of class
 	 */
 	public JavaSourceFromString(String className, String code) {
-		super(URI.create("string:///" + className.replace('.', '/') + JavaFileObject.Kind.SOURCE.extension),
-			JavaFileObject.Kind.SOURCE);
+		super(URI.create("string:///" + className.replace('.', '/') + JavaFileObject.Kind.SOURCE.extension), JavaFileObject.Kind.SOURCE);
 		this.code = code;
 	}
 

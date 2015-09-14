@@ -37,24 +37,21 @@ public class PlayerEventService {
 		@Override
 		public void visit(Player player) {
 			int membership = player.getClientConnection().getAccount().getMembership();
-			int rate = EventsConfig.EVENT_REWARD_MEMBERSHIP_RATE ? membership + 1 : 1; 
+			int rate = EventsConfig.EVENT_REWARD_MEMBERSHIP_RATE ? membership + 1 : 1;
 			long count = EventsConfig.EVENT_ITEM_COUNT * rate;
 			if (membership >= EventsConfig.EVENT_REWARD_MEMBERSHIP) {
 				try {
 					int itemToReward = player.getRace() == Race.ELYOS ? EventsConfig.EVENT_ITEM_ELYOS : EventsConfig.EVENT_ITEM_ASMO;
 					if (itemToReward == ItemId.KINAH.value()) {
 						player.getInventory().increaseKinah(count);
-					}
-					else {
+					} else {
 						if (player.getInventory().isFull()) {
 							log.warn("[EventReward] player " + player.getName() + " tried to receive item with full inventory.");
-						}
-						else {
+						} else {
 							ItemService.addItem(player, itemToReward, count);
 						}
 					}
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					log.error("Exception during event rewarding of player " + player.getName(), ex);
 				}
 			}

@@ -32,7 +32,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		writeD(house.getOwnerId()); // player which owns house
 		writeD(houseObject.getObjectId()); // <outlet[X]> data in house scripts
 		writeD(houseObject.getObjectId()); // <outDB[X]> data in house scripts (probably DB id), where [X] is number
-		
+
 		writeD(templateId);
 		writeF(houseObject.getX());
 		writeF(houseObject.getY());
@@ -44,23 +44,22 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 			writeD(houseObject.getUseSecondsLeft());
 		else
 			writeD(0);
-		
+
 		Integer color = null;
 		if (houseObject != null)
 			color = houseObject.getColor();
-			
-		if (color != null && color > 0 ) {
+
+		if (color != null && color > 0) {
 			writeC(1); // Is dyed (True)
 			writeC((color & 0xFF0000) >> 16);
 			writeC((color & 0xFF00) >> 8);
 			writeC((color & 0xFF));
-		}
-		else {
+		} else {
 			writeC(0); // Is dyed (False)
- 			writeC(0);
- 			writeC(0);
- 			writeC(0);
- 		}
+			writeC(0);
+			writeC(0);
+			writeC(0);
+		}
 		writeD(0); // expiration as for armor ?
 
 		byte typeId = houseObject.getObjectTemplate().getTypeId();

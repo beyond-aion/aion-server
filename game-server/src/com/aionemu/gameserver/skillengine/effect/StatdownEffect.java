@@ -13,11 +13,11 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 @XmlType(name = "StatdownEffect")
 public class StatdownEffect extends BufEffect {
 
-   @Override
-   public void startEffect(Effect effect) {
-	  super.startEffect(effect);
-	  effect.getEffected().getLifeStats().updateCurrentStats();
-   }
-   
-	//TODO bosses are resistent to this?
+	@Override
+	public void startEffect(Effect effect) {
+		super.startEffect(effect);
+		effect.getEffected().getLifeStats().updateCurrentStats();
+	}
+
+	// TODO bosses are resistent to this?
 }

@@ -26,7 +26,7 @@ public class PlayerEffectController extends EffectController {
 	public PlayerEffectController(Creature owner) {
 		super(owner);
 	}
-	
+
 	@Override
 	public void addEffect(Effect effect) {
 		if (checkDuelCondition(effect) && !effect.getIsForcedEffect())
@@ -60,8 +60,7 @@ public class PlayerEffectController extends EffectController {
 					PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
 					PlayerGroupService.updateGroupEffects(getOwner(), effect.getTargetSlotEnum().getId());
 					PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
-				}
-				else if (getOwner().isInAlliance2()) {
+				} else if (getOwner().isInAlliance2()) {
 					PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
 					PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
 					PlayerAllianceService.updateAllianceEffects(getOwner(), effect.getTargetSlotEnum().getId());
@@ -70,14 +69,14 @@ public class PlayerEffectController extends EffectController {
 			}
 		}
 	}
-	
+
 	@Override
 	public void updatePlayerEffectIcons(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlotEnum().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();
 		PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(effects, abnormals, slot));
 	}
-	
+
 	/**
 	 * Effect of DEBUFF should not be added if duel ended (friendly unit)
 	 * 
@@ -106,15 +105,14 @@ public class PlayerEffectController extends EffectController {
 
 		if (remainingTime <= 0)
 			return;
-		if (CustomConfig.ABYSSXFORM_LOGOUT
-			&& template.isDeityAvatar()) {
-			
+		if (CustomConfig.ABYSSXFORM_LOGOUT && template.isDeityAvatar()) {
+
 			if (System.currentTimeMillis() >= endTime)
 				return;
 			else
-				remainingTime = (int)(endTime - System.currentTimeMillis());
-		} 
-		
+				remainingTime = (int) (endTime - System.currentTimeMillis());
+		}
+
 		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime);
 		abnormalEffectMap.put(effect.getStack(), effect);
 		effect.addAllEffectToSucess();

@@ -39,28 +39,23 @@ public class _30301TrackingSupplies extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				long itemCount;
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 0) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id() && qs.getQuestVarById(0) == 0) {
+				} else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id() && qs.getQuestVarById(0) == 0) {
 					itemCount = player.getInventory().getItemCountByItemId(182209701);
 					if (itemCount > 0) {
 						removeQuestItem(env, 182209701, 1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 2716);
 					}
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
-			}
-			else {
+			} else {
 				return sendQuestEndDialog(env);
 			}
 		}

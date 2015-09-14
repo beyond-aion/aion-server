@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 
 /**
- *
  * @author xTz
  */
 @AIName("davlins_apprentice")

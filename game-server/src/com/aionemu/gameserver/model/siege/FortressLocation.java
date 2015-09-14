@@ -27,7 +27,7 @@ public class FortressLocation extends SiegeLocation {
 	/**
 	 * Zone ID - List of mercenaries
 	 */
-	protected Map<Integer,List<VisibleObject>> mercenaries;
+	protected Map<Integer, List<VisibleObject>> mercenaries;
 
 	public FortressLocation() {
 	}
@@ -36,7 +36,7 @@ public class FortressLocation extends SiegeLocation {
 		super(template);
 		this.siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
 		this.siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
-		this.mercenaries = new HashMap<Integer,List<VisibleObject>>();
+		this.mercenaries = new HashMap<Integer, List<VisibleObject>>();
 	}
 
 	public List<SiegeReward> getReward() {
@@ -89,18 +89,18 @@ public class FortressLocation extends SiegeLocation {
 			if (isEnemy(player))
 				TeleportService2.moveToBindLocation(player, true);
 	}
-	
+
 	public void despawnMercenaries(int zoneId) {
-		if(this.mercenaries.containsKey(zoneId)) {
+		if (this.mercenaries.containsKey(zoneId)) {
 			List<VisibleObject> mercs = this.mercenaries.get(zoneId);
-			for(VisibleObject merc : mercs)
+			for (VisibleObject merc : mercs)
 				merc.getController().onDelete();
 			mercs.clear();
 			mercs = null;
 			this.mercenaries.remove(zoneId);
 		}
 	}
-	
+
 	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {
 		this.mercenaries.put(zoneId, mercs);
 	}

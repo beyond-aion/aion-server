@@ -18,7 +18,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("tamer_anikiki")
@@ -89,6 +88,6 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
 		if (getNpcId() == 219037)
 			return damage;
 		else
-		return 1;
+			return 1;
 	}
 }

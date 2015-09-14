@@ -39,7 +39,7 @@ public class HouseSpawns implements Comparable<HouseSpawns> {
 	public void setAddress(int value) {
 		this.address = value;
 	}
-	
+
 	@Override
 	public int compareTo(HouseSpawns o) {
 		return o.address - address;

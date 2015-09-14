@@ -13,16 +13,16 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-public class _18708Sealed_With_The_Truth extends QuestHandler
-{
+public class _18708Sealed_With_The_Truth extends QuestHandler {
+
 	private final static int questId = 18708;
-	
+
 	public _18708Sealed_With_The_Truth() {
 		super(questId);
 	}
-	
+
 	@Override
-    public boolean onDialogEvent(QuestEnv env) {
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
@@ -31,31 +31,29 @@ public class _18708Sealed_With_The_Truth extends QuestHandler
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
-			}
-			else
+			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 		}
 
 		if (qs == null)
 			return false;
 
+		int var = qs.getQuestVarById(0);
+		if (qs.getStatus() == QuestStatus.START) {
+			if (env.getTargetId() == 799435) {// Ein.
+				switch (env.getDialogId()) {
+					case 26:
+						if (var == 0)
+							return sendQuestDialog(env, 2375);
+					case 1009:
+						player.getInventory().decreaseByItemId(182212206, 1); // Sealing Stone.
+						return defaultCloseDialog(env, 0, 1, true, true);
+				}
+			}
+		}
+		return defaultCloseDialog(env, 799435, 2375); // Ein.
+	}
 
-        int var = qs.getQuestVarById(0);
-        if (qs.getStatus() == QuestStatus.START) {
-            if (env.getTargetId() == 799435) {//Ein.
-                switch (env.getDialogId()) {
-                    case 26:
-                        if (var == 0)
-                            return sendQuestDialog(env, 2375);
-                    case 1009:
-                    	player.getInventory().decreaseByItemId(182212206, 1); //Sealing Stone.
-                        return defaultCloseDialog(env, 0, 1, true, true);
-                }
-            }
-        }
-        return defaultCloseDialog(env, 799435, 2375); //Ein.
-    }
-	
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
@@ -65,17 +63,15 @@ public class _18708Sealed_With_The_Truth extends QuestHandler
 
 		if (id != 182212206)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE)
 			sendQuestDialog(env, 4);
 		return HandlerResult.SUCCESS;
 	}
 
-
 	@Override
 	public void register() {
-		qe.registerQuestNpc(799435).addOnTalkEvent(questId); //Ein.
+		qe.registerQuestNpc(799435).addOnTalkEvent(questId); // Ein.
 		qe.registerQuestItem(182212206, questId);
 	}
 }

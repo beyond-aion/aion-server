@@ -26,8 +26,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
- * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items,
- * statistics. Data for such NPC class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
+ * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items, statistics. Data for such NPC
+ * class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
  * 
  * @author Luno
  */
@@ -108,12 +108,10 @@ public class NpcData extends ReloadableData {
 					newTemplates.addAll(data.getData());
 			}
 			DataManager.NPC_DATA.setData(newTemplates);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			PacketSendUtility.sendMessage(admin, "Npc reload failed!");
 			log.error("Npc reload failed!", e);
-		}
-		finally {
+		} finally {
 			PacketSendUtility.sendMessage(admin, "Npc reload Success! Total loaded: " + DataManager.NPC_DATA.size());
 		}
 	}

@@ -38,13 +38,11 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 				if (house == null) {
 					house = HousingService.getInstance().getHouseByAddress(address);
 					writeD(house.getAddress().getId());
-				}
-				else {
+				} else {
 					writeD(address);
 				}
 				writeC(house.getDoorState().getPacketValue());
-			}
-			else {
+			} else {
 				writeD(0);
 				writeC(0);
 			}

@@ -87,9 +87,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 											}
 											continue;
 										}
-										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() 
-												== ItemGroup.SPECIAL_MANASTONE && slot >= item.getItemTemplate().getSpecialSlots()) {
-										   log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
+										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
+											&& slot >= item.getItemTemplate().getSpecialSlots()) {
+											log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
 											if (EnchantsConfig.CLEAN_STONE) {
 												deleteItemStone(con, item.getObjectId(), slot, stoneType);
 											}
@@ -108,9 +108,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 											}
 											continue;
 										}
-										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() 
-												== ItemGroup.SPECIAL_MANASTONE && slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
-										   log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
+										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
+											&& slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
+											log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
 											if (EnchantsConfig.CLEAN_STONE) {
 												deleteItemStone(con, item.getObjectId(), slot, stoneType);
 											}
@@ -128,8 +128,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore ItemStoneList data from DB: " + e.getMessage(), e);
 		}
 	}
@@ -202,11 +201,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			addItemStones(con, stonesToAdd, ist);
 			updateItemStones(con, stonesToUpdate, ist);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't save stones", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 
@@ -234,8 +231,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					IdianStone stone = (IdianStone) is;
 					st.setInt(5, stone.getPolishNumber());
 					st.setInt(6, stone.getPolishCharge());
-				}
-				else {
+				} else {
 					st.setInt(5, 0);
 					st.setInt(6, 0);
 				}
@@ -245,11 +241,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 			st.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(st);
 		}
 	}
@@ -270,8 +264,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					IdianStone stone = (IdianStone) is;
 					st.setInt(3, stone.getPolishNumber());
 					st.setInt(4, stone.getPolishCharge());
-				}
-				else {
+				} else {
 					st.setInt(3, 0);
 					st.setInt(4, 0);
 				}
@@ -282,11 +275,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 			st.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(st);
 		}
 	}
@@ -311,11 +302,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 			st.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(st);
 		}
 	}
@@ -329,11 +318,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			st.setInt(2, slot);
 			st.setInt(3, category);
 			st.execute();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(st);
 		}
 	}

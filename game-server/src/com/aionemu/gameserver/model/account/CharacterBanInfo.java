@@ -9,7 +9,7 @@ public class CharacterBanInfo {
 	private long start;
 	private long end;
 	private String reason;
-	
+
 	public CharacterBanInfo(int playerId, long start, long duration, String reason) {
 		this.playerId = playerId;
 		this.start = start;
@@ -30,7 +30,7 @@ public class CharacterBanInfo {
 	public long getStart() {
 		return start;
 	}
-	
+
 	/**
 	 * @return the end
 	 */

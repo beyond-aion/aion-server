@@ -19,13 +19,12 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("merops")
 public class MeropsAI2 extends GeneralNpcAI2 {
 
-private AtomicBoolean startedEvent = new AtomicBoolean(false);
+	private AtomicBoolean startedEvent = new AtomicBoolean(false);
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
@@ -65,7 +64,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 
 				@Override
 				public void run() {
-					if ( !isAlreadyDead()) {
+					if (!isAlreadyDead()) {
 						if (getNpcId() != 799674) {
 							SkillEngine.getInstance().getSkill(getOwner(), 19358, 60, getOwner()).useNoAnimationSkill();
 						}
@@ -85,8 +84,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 								}
 
 							}, 1500);
-						}
-						else if (getNpcId() == 799672) {
+						} else if (getNpcId() == 799672) {
 							sendMsg(1500429, 1500);
 							spawn(282547, 255.980f, 684.432f, 170f, (byte) 7);
 							spawn(282547, 270.590f, 672.190f, 170f, (byte) 22);
@@ -103,8 +101,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 								}
 
 							}, 1500);
-						}
-						else if (getNpcId() == 799673) {
+						} else if (getNpcId() == 799673) {
 							spawn(282548, 160.981f, 310.663f, 252.031f, (byte) 85);
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -127,7 +124,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 											public void run() {
 												if (!isAlreadyDead()) {
 													getOwner().setState(1);
-													PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0,getObjectId()));
+													PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 													ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 														@Override
@@ -139,7 +136,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 														}
 
 													}, 11000);
-													
+
 												}
 											}
 
@@ -148,8 +145,7 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 								}
 
 							}, 1500);
-						}
-						else {
+						} else {
 							final Npc vasharti = getPosition().getWorldMapInstance().getNpc(218614);
 							if (vasharti != null) {
 								final int obj = vasharti.getObjectId();

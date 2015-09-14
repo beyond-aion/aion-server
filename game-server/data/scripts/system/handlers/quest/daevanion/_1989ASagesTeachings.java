@@ -150,8 +150,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 									return sendQuestDialog(env, 3484);
 								else
 									return sendQuestDialog(env, 3398);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								if (player.getCommonData().getDp() < 4000)
 									return sendQuestDialog(env, 3825);
 								else
@@ -164,15 +163,13 @@ public class _1989ASagesTeachings extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 5);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								playQuestMovie(env, 105);
 								player.getCommonData().setDp(0);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return this.sendQuestEndDialog(env);
 						case SETPRO2:
 							qs.setQuestVarById(0, var + 1);
@@ -190,8 +187,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 							return true;
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203771)
 				return sendQuestEndDialog(env);
 		}

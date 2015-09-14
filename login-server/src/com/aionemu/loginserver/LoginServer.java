@@ -99,7 +99,7 @@ public class LoginServer {
 		initalizeLoggger();
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 
-		//write a timestamp that can be used by TruncateToZipFileAppender
+		// write a timestamp that can be used by TruncateToZipFileAppender
 		log.info("\f" + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date(System.currentTimeMillis())) + "\f");
 		Config.load();
 		DatabaseFactory.init();

@@ -35,14 +35,15 @@ public class CM_GODSTONE_SOCKET extends AionClientPacket {
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_GODSTONE_SOCKETING) {
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_GODSTONE_SOCKETING) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		VisibleObject obj = activePlayer.getKnownList().getObject(npcObjectId);
-		if(obj != null && obj instanceof Npc && MathUtil.isInRange(activePlayer, obj, 7)) {
+		if (obj != null && obj instanceof Npc && MathUtil.isInRange(activePlayer, obj, 7)) {
 			ItemSocketService.socketGodstone(activePlayer, weaponId, stoneId);
 		}
 	}

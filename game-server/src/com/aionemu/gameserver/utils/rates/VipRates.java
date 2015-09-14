@@ -57,12 +57,11 @@ public class VipRates extends Rates {
 	public float getApPlayerGainRate() {
 		return RateConfig.VIP_AP_PLAYER_GAIN_RATE;
 	}
-	
+
 	@Override
 	public float getGpPlayerGainRate() {
 		return RateConfig.VIP_GP_PLAYER_GAIN_RATE;
 	}
-
 
 	@Override
 	public float getXpPlayerGainRate() {
@@ -98,12 +97,12 @@ public class VipRates extends Rates {
 	public int getComboCritRate() {
 		return CraftConfig.VIP_CRAFT_COMBO_RATE;
 	}
-	
+
 	@Override
 	public float getDisciplineRewardRate() {
 		return RateConfig.VIP_PVP_ARENA_DISCIPLINE_REWARD_RATE;
 	}
-	
+
 	@Override
 	public float getChaosRewardRate() {
 		return RateConfig.VIP_PVP_ARENA_CHAOS_REWARD_RATE;

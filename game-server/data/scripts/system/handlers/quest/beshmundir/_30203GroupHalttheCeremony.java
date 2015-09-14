@@ -61,8 +61,7 @@ public class _30203GroupHalttheCeremony extends QuestHandler {
 				}
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926)
 				return sendQuestEndDialog(env);
 			return false;

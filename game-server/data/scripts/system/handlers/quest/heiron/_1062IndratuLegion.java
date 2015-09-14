@@ -67,8 +67,7 @@ public class _1062IndratuLegion extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204500) {
@@ -84,8 +83,7 @@ public class _1062IndratuLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204600) {
+		} else if (targetId == 204600) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -102,8 +100,7 @@ public class _1062IndratuLegion extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204610) {
+		} else if (targetId == 204610) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -139,8 +136,7 @@ public class _1062IndratuLegion extends QuestHandler {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;
-			}
-			else if (qs.getQuestVarById(0) == 7) {
+			} else if (qs.getQuestVarById(0) == 7) {
 				changeQuestStep(env, 7, 13, false);
 				return true;
 			}

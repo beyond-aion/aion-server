@@ -68,14 +68,12 @@ public class _2017TrespassersattheObservatory extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 1694);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 1779);
 							}
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203558) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2034);

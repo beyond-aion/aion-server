@@ -48,10 +48,10 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 		}
 
 		switch (npc.getNpcId()) {
-			 case 217312:
-			  doors.get(98).setOpen(true);
-			  break;
-			 case 282543:
+			case 217312:
+				doors.get(98).setOpen(true);
+				break;
+			case 282543:
 				if (umahtasEchoKilled.incrementAndGet() == 2) {
 					spawn(217315, 759.46f, 636.45f, 157f, (byte) 7);
 					sendMsg(1500424, instance.getNpc(799671).getObjectId(), false, 0);
@@ -263,20 +263,20 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
-			switch(Rnd.get(1, 4)) {
-				case 1:
-					spawn(218572, 538.6639f, 477.2887f, 145.82251f, (byte) 90);
-					break;
-				case 2:
-					spawn(218572, 377.38275f, 461.9165f, 138.54454f, (byte) 60);
-					break;
-				case 3:
-					spawn(218572, 317.74368f, 623.0686f, 150.33286f, (byte) 45);
-					break;
-				case 4:
-					spawn(218572, 316.23618f, 726.1624f, 163.5f, (byte) 40);
-					break;
-			}
+		switch (Rnd.get(1, 4)) {
+			case 1:
+				spawn(218572, 538.6639f, 477.2887f, 145.82251f, (byte) 90);
+				break;
+			case 2:
+				spawn(218572, 377.38275f, 461.9165f, 138.54454f, (byte) 60);
+				break;
+			case 3:
+				spawn(218572, 317.74368f, 623.0686f, 150.33286f, (byte) 45);
+				break;
+			case 4:
+				spawn(218572, 316.23618f, 726.1624f, 163.5f, (byte) 40);
+				break;
+		}
 	}
 
 	@Override
@@ -352,8 +352,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time,
-		final String walkern) {
+	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkern) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -412,8 +411,8 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

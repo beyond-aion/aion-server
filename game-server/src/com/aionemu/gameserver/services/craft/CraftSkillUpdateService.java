@@ -129,8 +129,7 @@ public class CraftSkillUpdateService {
 					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000001);
 					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000001));
 				}
-			}
-			else if (race == Race.ASMODIANS) {
+			} else if (race == Race.ASMODIANS) {
 				if (!recipelist.isRecipePresent(155005005)) {
 					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005005);
 					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005005));
@@ -222,8 +221,7 @@ public class CraftSkillUpdateService {
 					skillList.addSkill(responder, skillId, skillLevel + 1);
 					responder.getRecipeList().autoLearnRecipe(responder, skillId, skillLevel + 1);
 					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, false));
-				}
-				else {
+				} else {
 					PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1300388));
 				}
 			}

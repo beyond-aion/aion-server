@@ -16,7 +16,7 @@ public class RebirthEffect extends EffectTemplate {
 
 	@XmlAttribute(name = "resurrect_percent", required = true)
 	protected int resurrectPercent;
-	
+
 	@XmlAttribute(name = "skill_id")
 	protected int skillId;
 
@@ -28,7 +28,7 @@ public class RebirthEffect extends EffectTemplate {
 	public int getResurrectPercent() {
 		return resurrectPercent;
 	}
-	
+
 	public int getSkillId() {
 		return skillId;
 	}

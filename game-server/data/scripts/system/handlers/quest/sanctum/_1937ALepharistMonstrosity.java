@@ -49,8 +49,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203837: {
 					if (qs.getQuestVarById(0) == 0) {
@@ -99,14 +98,12 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestEndDialog(env);
-						}
-						else
+						} else
 							return sendQuestEndDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204573)
 				return sendQuestEndDialog(env);
 		}

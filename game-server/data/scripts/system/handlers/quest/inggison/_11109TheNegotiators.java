@@ -58,8 +58,7 @@ public class _11109TheNegotiators extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798979) {

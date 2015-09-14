@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
- *
  */
 @AIName("spectral_tree")
 public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
@@ -41,7 +40,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				switch (percent) {
 					case 30:
 						AI2Actions.useSkill(this, 18529);
@@ -78,7 +77,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{30});
+		Collections.addAll(percents, new Integer[] { 30 });
 	}
 
 	private void cancelTask() {

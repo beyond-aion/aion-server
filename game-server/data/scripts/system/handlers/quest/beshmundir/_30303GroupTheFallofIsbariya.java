@@ -61,8 +61,7 @@ public class _30303GroupTheFallofIsbariya extends QuestHandler {
 				}
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225)
 				return sendQuestEndDialog(env);
 			return false;

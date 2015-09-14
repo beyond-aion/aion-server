@@ -26,7 +26,7 @@ public class DeveloperConfig {
 	public static int ITEM_STAT_ID;
 
 	/**
-	 * Display random number of item bonus for devs 
+	 * Display random number of item bonus for devs
 	 */
 	@Property(key = "gameserver.developer.itemstat.rnd", defaultValue = "false")
 	public static boolean SHOW_ITEM_STAT_RND;

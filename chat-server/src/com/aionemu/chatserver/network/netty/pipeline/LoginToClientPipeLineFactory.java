@@ -18,8 +18,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public class LoginToClientPipeLineFactory implements ChannelPipelineFactory
-{
+public class LoginToClientPipeLineFactory implements ChannelPipelineFactory {
+
 	private static final int THREADS_MAX = 10;
 	private static final int MEMORY_PER_CHANNEL = 1048576;
 	private static final int TOTAL_MEMORY = 134217728;
@@ -27,19 +27,18 @@ public class LoginToClientPipeLineFactory implements ChannelPipelineFactory
 	private ExecutionHandler executionHandler;
 	private final ClientPacketHandler clientPacketHandler;
 
-	public LoginToClientPipeLineFactory(ClientPacketHandler clientPacketHandler)
-	{
+	public LoginToClientPipeLineFactory(ClientPacketHandler clientPacketHandler) {
 		this.clientPacketHandler = clientPacketHandler;
-		this.executionHandler = new ExecutionHandler(new OrderedMemoryAwareThreadPoolExecutor(THREADS_MAX, MEMORY_PER_CHANNEL, TOTAL_MEMORY, TIMEOUT, TimeUnit.MILLISECONDS, Executors.defaultThreadFactory()));
+		this.executionHandler = new ExecutionHandler(new OrderedMemoryAwareThreadPoolExecutor(THREADS_MAX, MEMORY_PER_CHANNEL, TOTAL_MEMORY, TIMEOUT,
+			TimeUnit.MILLISECONDS, Executors.defaultThreadFactory()));
 	}
 
 	/**
-	 * Decoding process will include the following handlers: - framedecoder - packetdecoder - handler Encoding process: -
-	 * packetencoder Please note the sequence of handlers
+	 * Decoding process will include the following handlers: - framedecoder - packetdecoder - handler Encoding process: - packetencoder Please note the
+	 * sequence of handlers
 	 */
 	@Override
-	public ChannelPipeline getPipeline() throws Exception
-	{
+	public ChannelPipeline getPipeline() throws Exception {
 		ChannelPipeline pipeline = Channels.pipeline();
 		pipeline.addLast("framedecoder", new PacketFrameDecoder());
 		pipeline.addLast("packetdecoder", new LoginPacketDecoder());

@@ -26,7 +26,7 @@ public class SkillOrder {
 	public Creature getTarget() {
 		return target;
 	}
-	
+
 	public boolean isRelease() {
 		return release;
 	}

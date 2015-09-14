@@ -18,7 +18,7 @@ public abstract class AccountDAO implements DAO {
 	 * @return account object or null
 	 */
 	public abstract Account getAccount(String name);
-	
+
 	public abstract Account getAccount(int id);
 
 	/**
@@ -76,7 +76,7 @@ public abstract class AccountDAO implements DAO {
 	 * @return was update successful or not
 	 */
 	public abstract boolean updateLastIp(int accountId, String ip);
-	
+
 	/**
 	 * Get last ip that was used to access an account
 	 * 
@@ -85,7 +85,7 @@ public abstract class AccountDAO implements DAO {
 	 * @return ip address
 	 */
 	public abstract String getLastIp(int accountId);
-	
+
 	/**
 	 * Updates last mac that was used to access an account
 	 * 
@@ -96,9 +96,10 @@ public abstract class AccountDAO implements DAO {
 	 * @return was update successful or not
 	 */
 	public abstract boolean updateLastMac(int accountId, String mac);
-	
+
 	/**
 	 * Updates last hdd serial that was used to access an account
+	 * 
 	 * @param accountId
 	 * @param mac
 	 * @return was update successful or not
@@ -113,9 +114,10 @@ public abstract class AccountDAO implements DAO {
 	 * @return was update successful or not
 	 */
 	public abstract boolean updateMembership(int accountId);
-	
+
 	/**
 	 * Deletion of all accounts, inactive for more than dayOfInactivity days
+	 * 
 	 * @param daysOfInactivity
 	 */
 	public abstract void deleteInactiveAccounts(int daysOfInactivity);

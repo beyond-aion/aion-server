@@ -51,48 +51,40 @@ public class LeagueService {
 
 			LeagueInviteEvent invite = new LeagueInviteEvent(inviter, invited);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, invite)) {
-				PacketSendUtility.sendPacket(inviter,
-											 SM_SYSTEM_MESSAGE.STR_UNION_INVITE_HIM(invited.getName(), invited.getPlayerAlliance2().size()));
-				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, 0, 0,
-																			 inviter.getName()));
+				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_INVITE_HIM(invited.getName(), invited.getPlayerAlliance2().size()));
+				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, 0, 0, inviter.getName()));
 			}
 		}
 	}
 
 	public static final boolean canInvite(Player inviter, Player invited) {
 		if (inviter.getLifeStats().isAlreadyDead()) {
-			//You cannot use the Alliance League invitation function while you are dead.
+			// You cannot use the Alliance League invitation function while you are dead.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_DEAD);
 			return false;
-		}
-		else if (!invited.isOnline()) {
-			//The player you invited to the Alliance League is currently offline.
+		} else if (!invited.isOnline()) {
+			// The player you invited to the Alliance League is currently offline.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_OFFLINE_MEMBER);
 			return false;
-		}
-		else if (invited.getPlayerAlliance2() == null) {
-			//Currently, %0 cannot accept your invitation to join the alliance.
+		} else if (invited.getPlayerAlliance2() == null) {
+			// Currently, %0 cannot accept your invitation to join the alliance.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(invited.getName()));
 			return false;
-		}
-		else if (inviter.getPlayerAlliance2().hasMember(invited.getObjectId())) {
-			//You cannot invite your own alliance.
+		} else if (inviter.getPlayerAlliance2().hasMember(invited.getObjectId())) {
+			// You cannot invite your own alliance.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_SELF);
 			return false;
-		}
-		else if (invited.getPlayerAlliance2().isInLeague()) {
-			//The selected target is already a member of another force league.
+		} else if (invited.getPlayerAlliance2().isInLeague()) {
+			// The selected target is already a member of another force league.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_ALREADY_MY_UNION);
 			return false;
-		}
-		else if (inviter.getPlayerAlliance2().isInLeague() && inviter.getPlayerAlliance2().getLeague().isFull()) {
-			//You cannot invite anymore as the Alliance League is full.
+		} else if (inviter.getPlayerAlliance2().isInLeague() && inviter.getPlayerAlliance2().getLeague().isFull()) {
+			// You cannot invite anymore as the Alliance League is full.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_ADD_NEW_MEMBER);
 			return false;
-		}
-		else if (inviter.getPlayerAlliance2().isInLeague() && invited.getPlayerAlliance2().isInLeague()
-				 && inviter.getPlayerAlliance2().getLeague().getObjectId() != invited.getPlayerAlliance2().getLeague().getObjectId()) {
-			//%0 is already a member of another Alliance League.
+		} else if (inviter.getPlayerAlliance2().isInLeague() && invited.getPlayerAlliance2().isInLeague()
+			&& inviter.getPlayerAlliance2().getLeague().getObjectId() != invited.getPlayerAlliance2().getLeague().getObjectId()) {
+			// %0 is already a member of another Alliance League.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_ALREADY_OTHER_UNION(invited.getName()));
 			return false;
 		}
@@ -139,9 +131,8 @@ public class LeagueService {
 		Preconditions.checkArgument(expelGiver.isInLeague(), "Expelled player should be in league");
 		Preconditions.checkArgument(expelledPlayer.isInLeague(), "ExpelGiver should be in league");
 		Preconditions.checkArgument(expelGiver.getPlayerAlliance2().getLeague().isLeader(expelGiver.getPlayerAlliance2()),
-									"ExpelGiver alliance should be the leader of league");
-		Preconditions.checkArgument(expelGiver.getPlayerAlliance2().isLeader(expelGiver),
-									"ExpelGiver should be the leader of alliance");
+			"ExpelGiver alliance should be the leader of league");
+		Preconditions.checkArgument(expelGiver.getPlayerAlliance2().isLeader(expelGiver), "ExpelGiver should be the leader of alliance");
 		PlayerAlliance alliance = expelGiver.getPlayerAlliance2();
 		League league = alliance.getLeague();
 		league.onEvent(new LeagueLeftEvent(league, expelledPlayer.getPlayerAlliance2(), LeaveReson.EXPEL));

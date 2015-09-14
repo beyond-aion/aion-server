@@ -2,10 +2,8 @@ package com.aionemu.gameserver.skillengine.model;
 
 /**
  * @author kecimis
- *
  */
-public enum DispelCategoryType
-{
+public enum DispelCategoryType {
 	NONE,
 	ALL,
 	BUFF,

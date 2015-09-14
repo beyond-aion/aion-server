@@ -16,14 +16,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropTribes")
 public class GlobalDropTribes {
 
-    @XmlElement(name = "gd_tribe")
-    protected List<GlobalDropTribe> gdTribes;
+	@XmlElement(name = "gd_tribe")
+	protected List<GlobalDropTribe> gdTribes;
 
-    public List<GlobalDropTribe> getGlobalDropTribes() {
-        if (gdTribes == null) {
-            gdTribes = new ArrayList<GlobalDropTribe>();
-        }
-        return this.gdTribes;
-    }
+	public List<GlobalDropTribe> getGlobalDropTribes() {
+		if (gdTribes == null) {
+			gdTribes = new ArrayList<GlobalDropTribe>();
+		}
+		return this.gdTribes;
+	}
 
 }

@@ -13,11 +13,10 @@ import com.google.inject.Scopes;
 /**
  * @author ATracer
  */
-public class ServiceInjectionModule extends AbstractModule
-{
+public class ServiceInjectionModule extends AbstractModule {
+
 	@Override
-	protected void configure()
-	{
+	protected void configure() {
 		bind(IdFactory.class).asEagerSingleton();
 		bind(ClientPacketHandler.class).in(Scopes.SINGLETON);
 		bind(LoginToClientPipeLineFactory.class).in(Scopes.SINGLETON);

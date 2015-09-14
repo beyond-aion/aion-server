@@ -71,7 +71,7 @@ public class SurveyService {
 			return;
 		}
 		if (DAOManager.getDAO(SurveyControllerDAO.class).useItem(item.uniqueId)) {
-			
+
 			ItemService.addItem(player, item.itemId, item.count);
 			if (item.itemId == ItemId.KINAH.value()) // You received %num0 Kinah as reward for the survey.
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300945, item.count));
@@ -79,8 +79,7 @@ public class SurveyService {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300945, new DescriptionId(template.getNameId())));
 			else
 				// You received %num1 %0 items as reward for the survey.
-				PacketSendUtility.sendPacket(player,
-					new SM_SYSTEM_MESSAGE(1300946, item.count, new DescriptionId(template.getNameId())));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300946, item.count, new DescriptionId(template.getNameId())));
 
 			template = null;
 			activeItems.remove(survId);

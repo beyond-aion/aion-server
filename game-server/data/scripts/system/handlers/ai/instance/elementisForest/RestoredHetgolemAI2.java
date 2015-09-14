@@ -50,7 +50,7 @@ public class RestoredHetgolemAI2 extends AggressiveNpcAI2 {
 					float x1 = (float) (Math.cos(Math.PI * direction) * 8);
 					float y1 = (float) (Math.sin(Math.PI * direction) * 8);
 					WorldPosition p = getPosition();
-					if ( p != null && p.getWorldMapInstance() != null) {
+					if (p != null && p.getWorldMapInstance() != null) {
 						getMoveController().moveToPoint(p.getX() + x1, p.getY() + y1, p.getZ());
 						getOwner().setState(1);
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
@@ -86,7 +86,7 @@ public class RestoredHetgolemAI2 extends AggressiveNpcAI2 {
 			WorldPosition p = getPosition();
 			if (p != null && p.getWorldMapInstance() != null) {
 				spawn(282308, p.getX(), p.getY(), p.getZ(), p.getHeading());
-				Npc npc = (Npc)spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
+				Npc npc = (Npc) spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
 				NpcActions.delete(npc);
 			}
 			AI2Actions.deleteOwner(this);

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.instance;
 
 /**
- *
  * @author xTz
  */
 
@@ -10,7 +9,7 @@ public enum StageType {
 	START_STAGE_1_ELEVATOR(35464, 1),
 	START_STAGE_1_ROUND_1(35465, 1),
 	START_STAGE_1_ROUND_2(35466, 1),
-	START_STAGE_1_ROUND_3(35467 ,1),
+	START_STAGE_1_ROUND_3(35467, 1),
 	START_STAGE_1_ROUND_4(35468, 1),
 	START_STAGE_1_ROUND_5(35469, 1),
 	START_STAGE_2_ELEVATOR(36464, 1),
@@ -80,20 +79,20 @@ public enum StageType {
 	PASS_GROUP_STAGE_5(8497, 3),
 	PASS_GROUP_STAGE_6(43961, 4),
 	PASS_GROUP_STAGE_7(13789, 6),
-        PASS_GROUP_STAGE_8(49253, 7),
-        PASS_GROUP_STAGE_9(19181, 9),
-        PASS_GROUP_STAGE_10(54645, 10),
+	PASS_GROUP_STAGE_8(49253, 7),
+	PASS_GROUP_STAGE_9(19181, 9),
+	PASS_GROUP_STAGE_10(54645, 10),
 	START_BONUS_STAGE_2(36470, 1),
 	START_BONUS_STAGE_3(37470, 1),
 	START_BONUS_STAGE_6(43862, 4),
 	START_BONUS_STAGE_4(38470, 1),
-        PVP_STAGE_1(1, 0),
-        PVP_STAGE_2(2, 0),
-        PVP_STAGE_3(3, 0),
-        PVP_STAGE_4(4, 0),
-        PVP_STAGE_5(5, 0),
-        PVP_STAGE_6(6, 0),
-        PVP_STAGE_OVER(0, 0);
+	PVP_STAGE_1(1, 0),
+	PVP_STAGE_2(2, 0),
+	PVP_STAGE_3(3, 0),
+	PVP_STAGE_4(4, 0),
+	PVP_STAGE_5(5, 0),
+	PVP_STAGE_6(6, 0),
+	PVP_STAGE_OVER(0, 0);
 
 	private int id;
 	private int type;
@@ -111,4 +110,3 @@ public enum StageType {
 		return type;
 	}
 }
-

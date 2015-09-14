@@ -18,7 +18,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.jme3.math.Vector3f;
 
 /**
- * @author VladimirZ, @modified Cheatkiller 
+ * @author VladimirZ, @modified Cheatkiller
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SimpleRootEffect")
@@ -32,7 +32,7 @@ public class SimpleRootEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE))
-			 return;
+			return;
 		super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null);
 	}
 
@@ -49,18 +49,18 @@ public class SimpleRootEffect extends EffectTemplate {
 		float y1 = (float) (Math.sin(radian) * 0.7f);
 		float z = effected.getZ();
 		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1,
-			effected.getY() + y1, z, false, intentions);
-		  float zAfterColl = closestCollision.z;
-		  x1 = closestCollision.x;
-		  y1 = closestCollision.y;
-		  if (Math.abs(z - zAfterColl) > 0.1f && !effected.getMoveController().isJumping()) {
-		  	x1 = effected.getX();
-		  	y1 = effected.getY();
-		  	zAfterColl = z;
-		  }
-		  World.getInstance().updatePosition(effected, x1, y1, zAfterColl, heading, false);
-			PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), x1, y1, zAfterColl));
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, z, false,
+			intentions);
+		float zAfterColl = closestCollision.z;
+		x1 = closestCollision.x;
+		y1 = closestCollision.y;
+		if (Math.abs(z - zAfterColl) > 0.1f && !effected.getMoveController().isJumping()) {
+			x1 = effected.getX();
+			y1 = effected.getY();
+			zAfterColl = z;
+		}
+		World.getInstance().updatePosition(effected, x1, y1, zAfterColl, heading, false);
+		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), x1, y1, zAfterColl));
 	}
 
 	@Override

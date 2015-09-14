@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _14070ClueAfterClue extends QuestHandler {
 
@@ -53,14 +51,12 @@ public class _14070ClueAfterClue extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 205581) {
+			} else if (targetId == 205581) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (var == 3) {
+						} else if (var == 3) {
 							return sendQuestDialog(env, 2375);
 						}
 					}
@@ -71,8 +67,7 @@ public class _14070ClueAfterClue extends QuestHandler {
 						return checkQuestItems(env, 3, 4, true, 10000, 10001);
 					}
 				}
-			}
-			else if (targetId == 205764) {
+			} else if (targetId == 205764) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -84,13 +79,11 @@ public class _14070ClueAfterClue extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205581) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

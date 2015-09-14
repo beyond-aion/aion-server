@@ -72,8 +72,7 @@ public class DeadLockDetector extends Thread {
 						ThreadInfo dl = ti;
 						info += "Java-level deadlock:\n";
 						info += createShortLockInfo(dl);
-						while ((dl = tmx.getThreadInfo(new long[] { dl.getLockOwnerId() }, true, true)[0]).getThreadId() != ti
-							.getThreadId())
+						while ((dl = tmx.getThreadInfo(new long[] { dl.getLockOwnerId() }, true, true)[0]).getThreadId() != ti.getThreadId())
 							info += createShortLockInfo(dl);
 
 						info += "\nDumping all threads:\n";
@@ -87,8 +86,7 @@ public class DeadLockDetector extends Thread {
 						System.exit(ExitCode.CODE_RESTART);
 				}
 				Thread.sleep(sleepTime);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("DeadLockDetector: " + e, e);
 			}
 	}
@@ -128,8 +126,7 @@ public class DeadLockDetector extends Thread {
 	 */
 	private String printDumpedThreadInfo(ThreadInfo threadInfo) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\"" + threadInfo.getThreadName() + "\"" + " Id=" + threadInfo.getThreadId() + " "
-			+ threadInfo.getThreadState() + "\n");
+		sb.append("\n\"" + threadInfo.getThreadName() + "\"" + " Id=" + threadInfo.getThreadId() + " " + threadInfo.getThreadState() + "\n");
 		StackTraceElement[] stacktrace = threadInfo.getStackTrace();
 		for (int i = 0; i < stacktrace.length; i++) {
 			StackTraceElement ste = stacktrace[i];

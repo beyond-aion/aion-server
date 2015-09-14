@@ -24,7 +24,7 @@ public class BanChar extends AdminCommand {
 			sendInfo(admin, true);
 			return;
 		}
-		
+
 		int playerId = 0;
 		String playerName = Util.convertName(params[0]);
 
@@ -47,25 +47,24 @@ public class BanChar extends AdminCommand {
 		int dayCount = -1;
 		try {
 			dayCount = Integer.parseInt(params[1]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Second parameter is not an int");
 			sendInfo(admin, true);
 			return;
 		}
-		
-		if(dayCount < 0) {
+
+		if (dayCount < 0) {
 			PacketSendUtility.sendMessage(admin, "Second parameter has to be a positive daycount or 0 for infinity");
 			sendInfo(admin, true);;
 			return;
 		}
 
 		String reason = Util.convertName(params[2]);
-		for(int itr = 3; itr < params.length; itr++)
-			reason += " "+params[itr];
+		for (int itr = 3; itr < params.length; itr++)
+			reason += " " + params[itr];
 
-		PacketSendUtility.sendMessage(admin, "Char " + playerName + " is now banned for the next "+dayCount+" days!");
-		
+		PacketSendUtility.sendMessage(admin, "Char " + playerName + " is now banned for the next " + dayCount + " days!");
+
 		PunishmentService.banChar(playerId, dayCount, reason);
 	}
 
@@ -73,10 +72,10 @@ public class BanChar extends AdminCommand {
 	public void info(Player player, String message) {
 		sendInfo(player, false);
 	}
-	
+
 	private void sendInfo(Player player, boolean withNote) {
 		PacketSendUtility.sendMessage(player, "Syntax: //banChar <playername> <days>/0 (for permanent) <reason>");
-		if(withNote)
-		  PacketSendUtility.sendMessage(player, "Note: the current day is defined as a whole day even if it has just a few hours left!");
+		if (withNote)
+			PacketSendUtility.sendMessage(player, "Note: the current day is defined as a whole day even if it has just a few hours left!");
 	}
 }

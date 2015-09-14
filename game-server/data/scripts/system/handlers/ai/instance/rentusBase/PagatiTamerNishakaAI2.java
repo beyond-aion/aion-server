@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("pagati_tamer_nishaka")
@@ -21,7 +20,7 @@ public class PagatiTamerNishakaAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> hideTask;
 	private AtomicBoolean isHome = new AtomicBoolean(true);
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -44,8 +43,7 @@ public class PagatiTamerNishakaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19660, 60, getOwner()).useNoAnimationSkill();
 					sendMsg(1500398);
 					startEvent(2000, 1500399, 19661);

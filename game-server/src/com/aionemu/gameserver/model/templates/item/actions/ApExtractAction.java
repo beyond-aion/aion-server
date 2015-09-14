@@ -101,8 +101,7 @@ public class ApExtractAction extends AbstractItemAction {
 		if (inventory.delete(targetItem) != null) {
 			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1))
 				AbyssPointsService.addAp(player, ap);
-		}
-		else
+		} else
 			AuditLogger.info(player, "Possible extract item hack, do not remove item.");
 	}
 

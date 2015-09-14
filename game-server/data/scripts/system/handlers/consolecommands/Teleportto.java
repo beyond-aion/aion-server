@@ -28,11 +28,11 @@ public class Teleportto extends ConsoleCommand {
 		}
 
 		StringBuilder sbDestination = new StringBuilder();
-		for(String p : params)
+		for (String p : params)
 			sbDestination.append(p + " ");
-		
+
 		String destination = sbDestination.toString().trim();
-		
+
 		/**
 		 * Elysea
 		 */
@@ -99,13 +99,12 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, WorldMapType.HEIRON.getId(), 1999, 1391, 118);
 		else if (destination.equalsIgnoreCase("Arbolu"))
 			goTo(admin, WorldMapType.HEIRON.getId(), 170, 1662, 120);
-			
-		
+
 		/**
 		 * Asmodae
 		 */
 		// Pandaemonium
-		else if  (destination.equalsIgnoreCase("Pandaemonium"))
+		else if (destination.equalsIgnoreCase("Pandaemonium"))
 			goTo(admin, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195);
 		// Marchutran
 		else if (destination.equalsIgnoreCase("Marchutan"))
@@ -167,7 +166,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, WorldMapType.BELUSLAN.getId(), 1942, 513, 412);
 		else if (destination.equalsIgnoreCase("Hoarfrost"))
 			goTo(admin, WorldMapType.BELUSLAN.getId(), 2431, 2063, 579);
-		
+
 		/**
 		 * Balaurea
 		 */
@@ -190,7 +189,7 @@ public class Teleportto extends ConsoleCommand {
 		// Silentera
 		else if (destination.equalsIgnoreCase("Silentera"))
 			goTo(admin, 600010000, 583, 767, 300);
-		
+
 		/**
 		 * Abyss
 		 */
@@ -204,7 +203,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, WorldMapType.RESHANTA.getId(), 1596, 2952, 2943);
 		else if (destination.equalsIgnoreCase("Abyss 4"))
 			goTo(admin, WorldMapType.RESHANTA.getId(), 2054, 660, 2843);
-		else if (destination.equalsIgnoreCase("Eye of Reshanta") ||destination.equalsIgnoreCase("Eye"))
+		else if (destination.equalsIgnoreCase("Eye of Reshanta") || destination.equalsIgnoreCase("Eye"))
 			goTo(admin, WorldMapType.RESHANTA.getId(), 1979, 2114, 2291);
 		else if (destination.equalsIgnoreCase("Divine Fortress") || destination.equalsIgnoreCase("Divine"))
 			goTo(admin, WorldMapType.RESHANTA.getId(), 2130, 1925, 2322);
@@ -218,7 +217,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 300030000, 513, 668, 331);
 		else if (destination.equalsIgnoreCase("Arcanis") || destination.equalsIgnoreCase("Sky Temple of Arcanis"))
 			goTo(admin, 320050000, 177, 229, 536);
-		else if (destination.equalsIgnoreCase("Fire Temple") ||destination.equalsIgnoreCase("FT"))
+		else if (destination.equalsIgnoreCase("Fire Temple") || destination.equalsIgnoreCase("FT"))
 			goTo(admin, 320100000, 144, 312, 123);
 		else if (destination.equalsIgnoreCase("Kromede") || destination.equalsIgnoreCase("Kromede Trial"))
 			goTo(admin, 300230000, 248, 244, 189);
@@ -312,13 +311,13 @@ public class Teleportto extends ConsoleCommand {
 		else if (destination.equalsIgnoreCase("Ophidan Bridge") || destination.equalsIgnoreCase("OB"))
 			goTo(admin, 300590000, 755.41864f, 560.617f, 572.9637f);
 		else if (destination.equalsIgnoreCase("Idgel Research Center") || destination.equalsIgnoreCase("IRC"))
-			goTo(admin, 300530000,560.5229f, 508.58438f, 102.67931f);
+			goTo(admin, 300530000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Legion Idgel Research Center") || destination.equalsIgnoreCase("LIRC"))
-			goTo(admin, 301170000,560.5229f, 508.58438f, 102.67931f);
+			goTo(admin, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Danuar Reliquary") || destination.equalsIgnoreCase("DR"))
 			goTo(admin, 301110000, 256.60f, 257.99f, 241.78f);
 		else if (destination.equalsIgnoreCase("Idgel Research Center Legion") || destination.equalsIgnoreCase("IRCL"))
-			goTo(admin, 301170000,560.5229f, 508.58438f, 102.67931f);
+			goTo(admin, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Nightmare Circus") || destination.equalsIgnoreCase("NC"))
 			goTo(admin, 301160000, 467.64f, 568.34f, 201.67f);
 		// 4.0 instances
@@ -329,11 +328,13 @@ public class Teleportto extends ConsoleCommand {
 		// 4.5 instances
 		else if (destination.equalsIgnoreCase("Iron Wall Warfront") || destination.equalsIgnoreCase("IWW") || destination.equalsIgnoreCase("Iron Wall"))
 			goTo(admin, 301220000, 550, 477, 213);
-		else if (destination.equalsIgnoreCase("Lucky Ophidian Bridge") || destination.equalsIgnoreCase("LOB") || destination.equalsIgnoreCase("Lucky Ophidian"))
+		else if (destination.equalsIgnoreCase("Lucky Ophidian Bridge") || destination.equalsIgnoreCase("LOB")
+			|| destination.equalsIgnoreCase("Lucky Ophidian"))
 			goTo(admin, 301320000, 750, 554, 574);
-		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR") || destination.equalsIgnoreCase("Lucky Danuar"))
+		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR")
+			|| destination.equalsIgnoreCase("Lucky Danuar"))
 			goTo(admin, 301330000, 256, 246, 242);
-		
+
 		/**
 		 * Quest Instance Maps
 		 */
@@ -361,7 +362,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 320030000, 275, 168, 205);
 		else if (destination.equalsIgnoreCase("Nidalber"))
 			goTo(admin, 320040000, 275, 168, 205);
-		
+
 		/**
 		 * Arenas
 		 */
@@ -435,7 +436,7 @@ public class Teleportto extends ConsoleCommand {
 		// GM zone
 		else if (destination.equalsIgnoreCase("gm"))
 			goTo(admin, 120020000, 1442, 1133, 302);
-		
+
 		/**
 		 * 2.5 Maps
 		 */
@@ -445,7 +446,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 120080000, 577, 250, 94);
 		else if (destination.equalsIgnoreCase("Esoterrace"))
 			goTo(admin, 300250000, 333, 437, 326);
-			
+
 		/**
 		 * 3.0 Maps
 		 */
@@ -475,25 +476,24 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 300380000, 492, 553, 106);
 		else if (destination.equalsIgnoreCase("Satra"))
 			goTo(admin, 300470000, 510, 180, 159);
-		
+
 		/**
 		 * 3.5
 		 */
-		else if(destination.equalsIgnoreCase("Dragon Lords Refuge"))
+		else if (destination.equalsIgnoreCase("Dragon Lords Refuge"))
 			goTo(admin, 300520000, 506, 516, 242);
-		
-		else if(destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat"))
+
+		else if (destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat"))
 			goTo(admin, 300520000, 495, 528, 417);
-		
 
 		/**
-		* 4.3 
-		*/
-		
+		 * 4.3
+		 */
+
 		else if (destination.equalsIgnoreCase("Beacon"))
 			goTo(admin, WorldMapType.NORHTERN_KATALAM.getId(), 400, 2717, 143);
 		else if (destination.equalsIgnoreCase("Danuar"))
-			goTo(admin, WorldMapType.NORHTERN_KATALAM.getId(), 364, 385, 282);		
+			goTo(admin, WorldMapType.NORHTERN_KATALAM.getId(), 364, 385, 282);
 		else if (destination.equalsIgnoreCase("Danaria"))
 			goTo(admin, WorldMapType.SOUTHERN_KATALAM.getId(), 2544, 1699, 142);
 		else if (destination.equalsIgnoreCase("Idian") || destination.equalsIgnoreCase("Idian Depths"))
@@ -501,7 +501,7 @@ public class Teleportto extends ConsoleCommand {
 		else
 			PacketSendUtility.sendMessage(admin, "Could not find the specified destination !");
 	}
-	
+
 	private static void goTo(final Player admin, int worldId, float x, float y, float z) {
 		WorldMap destinationMap = World.getInstance().getWorldMap(worldId);
 		if (destinationMap.isInstanceType())
@@ -509,9 +509,9 @@ public class Teleportto extends ConsoleCommand {
 		else
 			TeleportService2.teleportTo(admin, worldId, x, y, z);
 	}
-	
+
 	private static int getInstanceId(int worldId, Player admin) {
-		if (admin.getWorldId() == worldId)	{
+		if (admin.getWorldId() == worldId) {
 			WorldMapInstance registeredInstance = InstanceService.getRegisteredInstance(worldId, admin.getObjectId());
 			if (registeredInstance != null)
 				return registeredInstance.getInstanceId();
@@ -520,6 +520,7 @@ public class Teleportto extends ConsoleCommand {
 		InstanceService.registerPlayerWithInstance(newInstance, admin);
 		return newInstance.getInstanceId();
 	}
+
 	@Override
 	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "syntax ///teleportto <MapName>");

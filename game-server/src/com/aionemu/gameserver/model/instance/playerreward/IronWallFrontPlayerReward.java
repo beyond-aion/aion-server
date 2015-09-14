@@ -3,19 +3,18 @@ package com.aionemu.gameserver.model.instance.playerreward;
 import com.aionemu.gameserver.model.Race;
 
 /**
- *
  * @author Tibald
  */
 public class IronWallFrontPlayerReward extends InstancePlayerReward {
-	
+
 	private Race race;
 	private int fragmentedCeramium, ironWarFrontBox, baseReward, bonusReward, gloryPoints;
-	
+
 	public IronWallFrontPlayerReward(Integer object, Race race) {
 		super(object);
 		this.race = race;
 	}
-	
+
 	public Race getRace() {
 		return race;
 	}
@@ -35,7 +34,7 @@ public class IronWallFrontPlayerReward extends InstancePlayerReward {
 	public int getFragmentedCeramium() {
 		return fragmentedCeramium;
 	}
-	
+
 	public void setIronWarFrontBox(int ironWarFrontBox) {
 		this.ironWarFrontBox = ironWarFrontBox;
 	}
@@ -59,5 +58,5 @@ public class IronWallFrontPlayerReward extends InstancePlayerReward {
 	public int getBaseReward() {
 		return baseReward;
 	}
- 
+
 }

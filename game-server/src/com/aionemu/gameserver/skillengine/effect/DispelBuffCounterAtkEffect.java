@@ -25,8 +25,7 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	protected int dispelLevel;
 	private int i;
 	private int finalPower;
-	
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
@@ -38,10 +37,10 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 		Creature effected = effect.getEffected();
 		int count = value + delta * effect.getSkillLevel();
 		finalPower = power + dpower * effect.getSkillLevel();
-		
+
 		i = effected.getEffectController().calculateNumberOfEffects(dispelLevel);
 		i = (i < count ? i : count);
-		
+
 		int newValue = 0;
 		if (i == 1)
 			newValue = hitvalue;

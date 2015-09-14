@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _37107CoolBlueWater extends QuestHandler {
 
@@ -40,9 +38,9 @@ public class _37107CoolBlueWater extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
@@ -52,33 +50,30 @@ public class _37107CoolBlueWater extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700967) {
-				if (player.isInGroup2()){
+				if (player.isInGroup2()) {
 					PlayerGroup group = player.getPlayerGroup2();
 					for (Player member : group.getMembers()) {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
 							return true;
 						else
-							 PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
 					}
 				}
-		  }
+			}
 			if (targetId == 799901) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 2375);
 					}
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 0, 1, true, 5, 2716);
-			  }
+				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799901) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799901) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

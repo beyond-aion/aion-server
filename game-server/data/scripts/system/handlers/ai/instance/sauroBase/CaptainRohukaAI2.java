@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-
 @AIName("rohuka")
 public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 
@@ -24,13 +23,14 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-			wakeUp();
+		wakeUp();
 	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
-			wakeUp();
+		wakeUp();
 	}
 
 	private void wakeUp() {
@@ -59,27 +59,28 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 			SkillEngine.getInstance().getSkill(getOwner(), 21135, 56, getOwner()).useNoAnimationSkill();
 		}
 	}
-	
+
 	private void stage2() {
 		int delay = 35000;
 		if (isAlreadyDead() || !isStart)
 			return;
 		else {
-		    skill();
+			skill();
 			scheduleDelayStage2(delay);
 		}
-	}	
-	
-	private void skill() {
-			SkillEngine.getInstance().getSkill(getOwner(), 18158, 56, getOwner()).useNoAnimationSkill();
-		    ThreadPoolManager.getInstance().schedule(new Runnable() {
-			    @Override
-					public void run() {
-                    SkillEngine.getInstance().getSkill(getOwner(), 18160, 56, getOwner()).useNoAnimationSkill();
-				}
-			}, 4000);
 	}
-	
+
+	private void skill() {
+		SkillEngine.getInstance().getSkill(getOwner(), 18158, 56, getOwner()).useNoAnimationSkill();
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				SkillEngine.getInstance().getSkill(getOwner(), 18160, 56, getOwner()).useNoAnimationSkill();
+			}
+		}, 4000);
+	}
+
 	private void scheduleDelayStage2(int delay) {
 		if (!isStart && !isAlreadyDead())
 			return;
@@ -93,9 +94,7 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 			}, delay);
 		}
 	}
-	
 
-	
 	private void stage3() {
 		int delay = 15000;
 		if (isAlreadyDead() || !isStart)
@@ -103,7 +102,7 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 		else
 			scheduleDelayStage3(delay);
 	}
-	
+
 	private void scheduleDelayStage3(int delay) {
 		if (!isStart && !isAlreadyDead())
 			return;
@@ -119,23 +118,23 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 			}, delay);
 		}
 	}
-	
-    private void getRandomTarget()  {
-        List<Player> players = new ArrayList<Player>();
-        for (Player player : getKnownList().getKnownPlayers().values()) {
-            if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 16))
-                players.add(player);
-        }
-        if (players.isEmpty())
-            return;
 
-        getAggroList().clear();
-        getAggroList().startHate(players.get(Rnd.get(0, players.size() - 1)));
-    }
+	private void getRandomTarget() {
+		List<Player> players = new ArrayList<Player>();
+		for (Player player : getKnownList().getKnownPlayers().values()) {
+			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 16))
+				players.add(player);
+		}
+		if (players.isEmpty())
+			return;
+
+		getAggroList().clear();
+		getAggroList().startHate(players.get(Rnd.get(0, players.size() - 1)));
+	}
 
 	@Override
 	protected void handleBackHome() {
-        super.handleBackHome();
+		super.handleBackHome();
 		isStart = false;
 		stage = 0;
 	}
@@ -146,6 +145,5 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 		isStart = false;
 		stage = 0;
 	}
-
 
 }

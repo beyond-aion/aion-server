@@ -43,8 +43,7 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700057: {
 					if (env.getDialog() == DialogAction.USE_OBJECT) {
@@ -60,14 +59,12 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestEndDialog(env);
-						}
-						else
+						} else
 							return sendQuestEndDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203604)
 				return sendQuestEndDialog(env);
 		}

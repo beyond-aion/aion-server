@@ -9,42 +9,34 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Ritsu
- *
  */
 public class _13064EmployeeAppreciationDay extends QuestHandler {
 
 	private static final int questId = 13064;
 
-	public _13064EmployeeAppreciationDay()
-	{
+	public _13064EmployeeAppreciationDay() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(801139).addOnQuestStart(questId);
 		qe.registerQuestNpc(801139).addOnTalkEvent(questId);
 		qe.registerQuestItem(182213409, questId);
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat())
-		{
-			if(targetId == 801139)
-			{
-				switch (dialog)
-				{
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (targetId == 801139) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_SIMPLE:
@@ -57,25 +49,20 @@ public class _13064EmployeeAppreciationDay extends QuestHandler {
 		if (qs == null)
 			return false;
 
-		if(qs.getStatus() == QuestStatus.START)
-		{
+		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(targetId == 801139)
-			{
-				switch (dialog)
-				{
+			if (targetId == 801139) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if(var == 1)
+						if (var == 1)
 							return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 1, 1, true);
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if(targetId == 801139)
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 801139)
 				return sendQuestEndDialog(env);
 		}
 

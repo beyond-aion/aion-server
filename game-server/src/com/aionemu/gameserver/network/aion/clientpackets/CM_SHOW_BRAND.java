@@ -48,18 +48,17 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 				PlayerGroupService.showBrand(player, targetObjectId, brandId);
 			}
 		}
-		//to better times (on retail still not implemented) but we have ;)
-		//else if (player.isInLeague()) {
-		//	if (player.getPlayerAlliance2().getLeague().getLeader().getObject().isLeader(player)) {
-		//		LeagueService.showBrand(player, targetObjectId, brandId);
-		//	}
-		//}
+		// to better times (on retail still not implemented) but we have ;)
+		// else if (player.isInLeague()) {
+		// if (player.getPlayerAlliance2().getLeague().getLeader().getObject().isLeader(player)) {
+		// LeagueService.showBrand(player, targetObjectId, brandId);
+		// }
+		// }
 		else if (player.isInAlliance2()) {
 			if (player.getPlayerAlliance2().isSomeCaptain(player)) {
 				PlayerAllianceService.showBrand(player, targetObjectId, brandId);
 			}
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(brandId, targetObjectId));
 		}
 	}

@@ -16,13 +16,13 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 
 @AIName("gods")
 public class GodsAI2 extends AggressiveNpcAI2 {
-   
-   Npc tiamat;
-	
+
+	Npc tiamat;
+
 	@Override
-	protected  void handleDeactivate() {
+	protected void handleDeactivate() {
 	}
-	
+
 	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return 6000;
@@ -32,28 +32,31 @@ public class GodsAI2 extends AggressiveNpcAI2 {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		tiamat = getPosition().getWorldMapInstance().getNpc(219361);
-		if (getNpcId() == 219488 || getNpcId() == 219491) {  
-			//empyrean lord (god) debuff all players before start attack Tiamat
+		if (getNpcId() == 219488 || getNpcId() == 219491) {
+			// empyrean lord (god) debuff all players before start attack Tiamat
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					SkillEngine.getInstance().getSkill(getOwner(), (getOwner().getNpcId() == 219488 ? 20932 : 20936), 100, getOwner()).useSkill();
 				}
 			}, 8000);
-			//empyrean lord (god) start attack Tiamat Dragon
+			// empyrean lord (god) start attack Tiamat Dragon
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					AI2Actions.targetCreature(GodsAI2.this, tiamat);
 					getAggroList().addHate(tiamat, 100000);
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401550);
-					SkillEngine.getInstance().getSkill(getOwner(), (getNpcId() == 219488 ? 20931 : 20935), 60, tiamat).useNoAnimationSkill(); //adds 1mio hate
+					SkillEngine.getInstance().getSkill(getOwner(), (getNpcId() == 219488 ? 20931 : 20935), 60, tiamat).useNoAnimationSkill(); // adds 1mio hate
 				}
 			}, 12000);
 		} else if (getNpcId() == 219489 || getNpcId() == 219492) {
-			//empyrean lord (god) start final attack to Tiamat Dragon before became exausted
+			// empyrean lord (god) start final attack to Tiamat Dragon before became exausted
 			NpcShoutsService.getInstance().sendMsg(getOwner(), (getNpcId() == 219489 ? 1401538 : 1401539));
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					SkillEngine.getInstance().getSkill(getOwner(), (getNpcId() == 219489 ? 20929 : 20933), 100, tiamat).useNoAnimationSkill();
@@ -61,7 +64,7 @@ public class GodsAI2 extends AggressiveNpcAI2 {
 			}, 2000);
 		}
 	}
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

@@ -44,28 +44,23 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 		action = readC();
 		if (action == 3) {
 			itemObjectId = readD();
-		}
-		else if (action == 4) {
+		} else if (action == 4) {
 			itemObjectId = readD();
-		}
-		else if (action == 5) {
+		} else if (action == 5) {
 			itemObjectId = readD();
 			x = readF();
 			y = readF();
 			z = readF();
 			rotation = readH();
-		}
-		else if (action == 6) {
+		} else if (action == 6) {
 			itemObjectId = readD();
 			x = readF();
 			y = readF();
 			z = readF();
 			rotation = readH();
-		}
-		else if (action == 7) {
+		} else if (action == 7) {
 			itemObjectId = readD();
-		}
-		else if (action == 16) {
+		} else if (action == 16) {
 			buildingId = readD();
 		}
 	}
@@ -76,21 +71,19 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 		if (player == null)
 			return;
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		if (action == 1) { // Enter Decoration mode
 			sendPacket(new SM_HOUSE_EDIT(action));
 			sendPacket(new SM_HOUSE_REGISTRY(action));
 			sendPacket(new SM_HOUSE_REGISTRY(action + 1));
-		}
-		else if (action == 2) { // Exit Decoration mode
+		} else if (action == 2) { // Exit Decoration mode
 			sendPacket(new SM_HOUSE_EDIT(action));
-		}
-		else if (action == 3) { // Add item
+		} else if (action == 3) { // Add item
 			Item item = player.getInventory().getItemByObjId(itemObjectId);
 			if (item == null)
 				return;
@@ -103,25 +96,21 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 				HouseDecoration decor = new HouseDecoration(IDFactory.getInstance().nextId(), decorateAction.getTemplateId());
 				player.getHouseRegistry().putCustomPart(decor);
 				sendPacket(new SM_HOUSE_EDIT(action, 2, decor.getObjectId()));
-			}
-			else {
+			} else {
 				House house = player.getHouseRegistry().getOwner();
 				HouseObject<?> obj = HouseObjectFactory.createNew(house, template);
 				player.getHouseRegistry().putObject(obj);
 				sendPacket(new SM_HOUSE_EDIT(action, 1, obj.getObjectId()));
 			}
-		}
-		else if (action == 4) { // Delete item
+		} else if (action == 4) { // Delete item
 			player.getHouseRegistry().removeObject(itemObjectId);
 			sendPacket(new SM_HOUSE_EDIT(action, 1, itemObjectId));
 			sendPacket(new SM_HOUSE_EDIT(4, 1, itemObjectId));
-		}
-		else if (action == 5) { // spawn object
+		} else if (action == 5) { // spawn object
 			HouseObject<?> obj = player.getHouseRegistry().getObjectByObjId(itemObjectId);
 			if (obj == null) {
 				return;
-			}
-			else {
+			} else {
 				obj.setX(x);
 				obj.setY(y);
 				obj.setZ(z);
@@ -132,8 +121,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 				sendPacket(new SM_HOUSE_EDIT(4, 1, itemObjectId));
 				QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0, 0));
 			}
-		}
-		else if (action == 6) { // move object
+		} else if (action == 6) { // move object
 			HouseObject<?> obj = player.getHouseRegistry().getObjectByObjId(itemObjectId);
 			if (obj == null)
 				return;
@@ -147,8 +135,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 				player.getHouseRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
 			sendPacket(new SM_HOUSE_EDIT(action - 1, itemObjectId, x, y, z, rotation));
 			obj.spawn();
-		}
-		else if (action == 7) { // despawn object
+		} else if (action == 7) { // despawn object
 			HouseObject<?> obj = player.getHouseRegistry().getObjectByObjId(itemObjectId);
 			if (obj == null)
 				return;
@@ -158,14 +145,11 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			obj.clearKnownlist();
 			player.getHouseRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
 			sendPacket(new SM_HOUSE_EDIT(3, 1, itemObjectId)); // place it back
-		}
-		else if (action == 14) { // enter renovation mode
+		} else if (action == 14) { // enter renovation mode
 			sendPacket(new SM_HOUSE_EDIT(14));
-		}
-		else if (action == 15) { // exit renovation mode
+		} else if (action == 15) { // exit renovation mode
 			sendPacket(new SM_HOUSE_EDIT(15));
-		}
-		else if (action == 16) {
+		} else if (action == 16) {
 			House house = player.getHouseRegistry().getOwner();
 			if (!removeRenovationCoupon(player, house)) {
 				AuditLogger.info(player, "Try house renovation without coupon");

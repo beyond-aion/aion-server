@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _41154DancingintheShadows extends QuestHandler {
 
@@ -46,24 +44,22 @@ public class _41154DancingintheShadows extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205569) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1); 
+						return defaultCloseDialog(env, 0, 1);
 				}
-			}else if (targetId == 205571) {
+			} else if (targetId == 205571) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SETPRO2:
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 				}
-			}
-			else if (targetId == 205592) {
+			} else if (targetId == 205592) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
@@ -72,12 +68,10 @@ public class _41154DancingintheShadows extends QuestHandler {
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205592)
 				return sendQuestEndDialog(env);
 		}
 		return false;
 	}
 }
-

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Cheatkiller
- *
  */
 @AIName("engulfedophidiangenerals")
 public class RaceGeneralsAI2 extends NpcAI2 {
@@ -28,7 +27,7 @@ public class RaceGeneralsAI2 extends NpcAI2 {
 	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		switch (getOwner().getNpcId()) {
-			case 701989: //asmo
+			case 701989: // asmo
 				switch (dialogId) {
 					case 10000:
 						deleteNpcs(instance.getNpcs(701987));
@@ -68,7 +67,7 @@ public class RaceGeneralsAI2 extends NpcAI2 {
 						break;
 				}
 				break;
-			default: //elyos
+			default: // elyos
 				switch (dialogId) {
 					case 10000:
 						deleteNpcs(instance.getNpcs(701986));

@@ -44,8 +44,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 		writeH(players.size());
 		for (Player player : players) {
 			if (player.getActiveRegion() == null) {
-				log.warn("CHECKPOINT: null active region for " + player.getObjectId() + "-" + player.getX() + "-"
-					+ player.getY() + "-" + player.getZ());
+				log.warn("CHECKPOINT: null active region for " + player.getObjectId() + "-" + player.getX() + "-" + player.getY() + "-" + player.getZ());
 			}
 			writeD(player.getActiveRegion() == null ? region : player.getActiveRegion().getMapId());
 			writeF(player.getPosition().getX());
@@ -54,9 +53,9 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 			writeC(player.getPlayerClass().getClassId());
 			writeC(player.getGender().getGenderId());
 			writeC(player.getLevel());
-			 if(player.isInGroup2() || player.isInAlliance2())
+			if (player.isInGroup2() || player.isInAlliance2())
 				writeC(3);
-			else if(player.isLookingForGroup())
+			else if (player.isLookingForGroup())
 				writeC(2);
 			else
 				writeC(0);

@@ -39,32 +39,27 @@ public class _2435TheBlueVineNecklace extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204387) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 204390) {
+			} else if (targetId == 204390) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
-						return defaultCloseDialog(env, 1, 1, true, true);
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204390) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
@@ -84,14 +79,12 @@ public class _2435TheBlueVineNecklace extends QuestHandler {
 
 		if (id != 182204181)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

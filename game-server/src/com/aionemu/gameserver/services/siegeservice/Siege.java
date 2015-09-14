@@ -50,8 +50,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		synchronized (this) {
 			if (started) {
 				doubleStart = true;
-			}
-			else {
+			} else {
 				startTime = new Date();
 				started = true;
 			}
@@ -63,7 +62,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		}
 
 		onSiegeStart();
-		//Check for Balaur Assault
+		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT) {
 			BalaurAssaultService.getInstance().onSiegeStart(this);
 		}
@@ -80,8 +79,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 			if (SiegeConfig.BALAUR_AUTO_ASSAULT) {
 				BalaurAssaultService.getInstance().onSiegeFinish(this);
 			}
-		}
-		else {
+		} else {
 			log.error("Attempt to stop siege of SiegeLocation#" + siegeLocation.getLocationId() + " for 2 times");
 		}
 	}

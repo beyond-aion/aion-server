@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -11,6 +10,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * @author SheppeR, Guapo, nrg
  */
 public class SM_AUTO_GROUP extends AionServerPacket {
+
 	private byte windowId;
 	private int instanceMaskId;
 	private int mapId;
@@ -19,15 +19,15 @@ public class SM_AUTO_GROUP extends AionServerPacket {
 	private int waitTime;
 	private boolean close;
 	String name = StringUtils.EMPTY;
-	
-	public static final byte wnd_EntryIcon = 6; 
-	
+
+	public static final byte wnd_EntryIcon = 6;
+
 	public SM_AUTO_GROUP(int instanceMaskId) {
 		AutoGroupType agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
 		if (agt == null) {
 			throw new IllegalArgumentException("Auto Groups Type no found for Instance MaskId: " + instanceMaskId);
 		}
-		
+
 		this.instanceMaskId = instanceMaskId;
 		this.messageId = agt.getNameId();
 		this.titleId = agt.getTittleId();

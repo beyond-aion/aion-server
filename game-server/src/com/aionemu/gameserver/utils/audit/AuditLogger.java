@@ -27,10 +27,10 @@ public class AuditLogger {
 	}
 
 	public static final void info(String playerName, int objectId, String message) {
-			message += " Player name: " + playerName + " objectId: " + objectId;
-			log.info(message);
+		message += " Player name: " + playerName + " objectId: " + objectId;
+		log.info(message);
 
-			if (SecurityConfig.GM_AUDIT_MESSAGE_BROADCAST)
-				GMService.getInstance().broadcastMessageToGMs(message);
+		if (SecurityConfig.GM_AUDIT_MESSAGE_BROADCAST)
+			GMService.getInstance().broadcastMessageToGMs(message);
 	}
 }

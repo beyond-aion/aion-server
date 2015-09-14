@@ -36,8 +36,7 @@ public class KillList {
 		for (Iterator<Long> i = killTimes.iterator(); i.hasNext();) {
 			if (now - i.next().longValue() > CustomConfig.PVP_DAY_DURATION) {
 				i.remove();
-			}
-			else {
+			} else {
 				killCount++;
 			}
 		}

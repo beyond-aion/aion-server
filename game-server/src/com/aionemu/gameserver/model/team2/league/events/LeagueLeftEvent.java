@@ -85,11 +85,12 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 			public boolean apply(Player member) {
 				switch (reason) {
 					case LEAVE:
-						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader().getName()));
+						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader()
+							.getName()));
 						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 						break;
 					case EXPEL:
-						//TODO may be EXPEL message only to leader
+						// TODO may be EXPEL message only to leader
 						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
 						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 						break;

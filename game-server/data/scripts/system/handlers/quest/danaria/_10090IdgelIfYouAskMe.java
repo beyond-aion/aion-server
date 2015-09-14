@@ -32,7 +32,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _10090IdgelIfYouAskMe extends QuestHandler {
 
 	private final static int questId = 10090;
-	
+
 	private final static List<Integer> mobs = Arrays.asList(231069, 231067, 231068);
 
 	public _10090IdgelIfYouAskMe() {
@@ -55,7 +55,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10085);
@@ -67,7 +67,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800566) {
 				switch (dialog) {
@@ -80,8 +80,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 800816) { 
+			} else if (targetId == 800816) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 1) {
@@ -89,11 +88,10 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						}
 					}
 					case SETPRO2: {
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 730734) { 
+			} else if (targetId == 730734) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 2) {
@@ -103,12 +101,12 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 					case SETPRO3: {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(301000000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 301000000, newInstance.getInstanceId(), 211.75f, 510.34f, 153.22f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
-						return defaultCloseDialog(env, 2, 3, 182215242, 1); 
+						TeleportService2.teleportTo(player, 301000000, newInstance.getInstanceId(), 211.75f, 510.34f, 153.22f, (byte) 0,
+							TeleportAnimation.BEAM_ANIMATION);
+						return defaultCloseDialog(env, 2, 3, 182215242, 1);
 					}
 				}
-			}
-			else if (targetId == 800817) { 
+			} else if (targetId == 800817) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 3) {
@@ -116,11 +114,10 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						}
 					}
 					case SETPRO4: {
-						return defaultCloseDialog(env, 3, 4); 
+						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 730735) { 
+			} else if (targetId == 730735) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 6) {
@@ -134,11 +131,10 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701547, npc.getX(), npc.getY(), npc.getZ(), (byte) 42);
 						npc.getController().onDelete();
 						spawnAttackers(player);
-						return defaultCloseDialog(env, 6, 7); 
+						return defaultCloseDialog(env, 6, 7);
 					}
 				}
-			}
-			else if (targetId == 800818) { 
+			} else if (targetId == 800818) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 8) {
@@ -147,24 +143,22 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 					}
 					case SET_SUCCEED: {
 						TeleportService2.teleportTo(player, 600060000, 1, 292.5209f, 2371.7844f, 521.131f, (byte) 119, TeleportAnimation.BEAM_ANIMATION);
-						return defaultCloseDialog(env, 8, 8, true, false); 
+						return defaultCloseDialog(env, 8, 8, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800820) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	private void spawnAttackers(final Player player) {
 		final int mobToSpawn = mobs.get(Rnd.get(0, 2));
 		Npc spawn = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), mobToSpawn, 510.5f, 485.28f, 97.38f, (byte) 100);
@@ -174,7 +168,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		spawn.getMoveController().moveToPoint(542, 435, 94);
 		PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.START_EMOTE2, 0, spawn.getObjectId()));
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -186,8 +180,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 					playQuestMovie(env, 851);
 					return true;
 				}
-			}
-			else if (var > 3) {
+			} else if (var > 3) {
 				if (player.getWorldId() != 301000000) {
 					changeQuestStep(env, var, 2, false);
 					return true;
@@ -196,7 +189,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
@@ -205,11 +198,11 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 			final int var = qs.getQuestVarById(0);
 			if (var == 4) {
 				return defaultOnKillEvent(env, 701545, 4, 5);
-			}
-			else if (var == 7) {
+			} else if (var == 7) {
 				int targetId = env.getTargetId();
 				if (mobs.contains(targetId)) {
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							if (var == 8) {
@@ -224,7 +217,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -241,8 +234,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 				if (!isDeadGen) {
 					changeQuestStep(env, 7, 8, false);
 					return true;
-				}
-				else {
+				} else {
 					changeQuestStep(env, 7, 2, false);
 					return true;
 				}
@@ -250,7 +242,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
@@ -262,7 +254,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();

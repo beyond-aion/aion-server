@@ -26,8 +26,8 @@ public class ItemSplitService {
 	/**
 	 * Move part of stack into different slot
 	 */
-	public static final void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum,
-		byte sourceStorageType, byte destinationStorageType) {
+	public static final void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum, byte sourceStorageType,
+		byte destinationStorageType) {
 		if (splitAmount <= 0) {
 			return;
 		}
@@ -56,8 +56,8 @@ public class ItemSplitService {
 		}
 
 		if (sourceStorageType != destinationStorageType
-			&& (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destinationStorageType) || ItemRestrictionService
-				.isItemRestrictedFrom(player, sourceItem, sourceStorageType))) {
+			&& (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destinationStorageType) || ItemRestrictionService.isItemRestrictedFrom(
+				player, sourceItem, sourceStorageType))) {
 			sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), sourceItem);
 			return;
 		}
@@ -79,15 +79,14 @@ public class ItemSplitService {
 			Item newItem = ItemFactory.newItem(sourceItem.getItemTemplate().getTemplateId(), splitAmount);
 			if (sourceStorageType == destinationStorageType)
 				newItem.setEquipmentSlot(slotNum);
-			sourceStorage.decreaseItemCount(sourceItem, splitAmount, 
-				sourceStorageType == destinationStorageType ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
+			sourceStorage.decreaseItemCount(sourceItem, splitAmount, sourceStorageType == destinationStorageType ? ItemUpdateType.DEC_ITEM_SPLIT
+				: ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
 			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(sourceStorage.getStorageType(), player));
 			if (destStorage.add(newItem) == null) {
 				// if item was not added - we can release its id
 				ItemService.releaseItemId(newItem);
 			}
-		}
-		else if (targetItem.getItemId() == sourceItem.getItemId()) {
+		} else if (targetItem.getItemId() == sourceItem.getItemId()) {
 			if (sourceStorageType != destinationStorageType) {
 				LegionService.getInstance().addWHItemHistory(player, sourceItem.getItemId(), splitAmount, sourceStorage, destStorage);
 			}
@@ -102,9 +101,9 @@ public class ItemSplitService {
 		if (sourceItem.getItemCount() >= count) {
 			long freeCount = targetItem.getFreeCount();
 			count = count > freeCount ? freeCount : count;
-			long leftCount = destStorage.increaseItemCount(targetItem, count, 
+			long leftCount = destStorage.increaseItemCount(targetItem, count,
 				sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.INC_ITEM_MERGE : ItemUpdateType.INC_ITEM_COLLECT);
-			sourceStorage.decreaseItemCount(sourceItem, count - leftCount, 
+			sourceStorage.decreaseItemCount(sourceItem, count - leftCount,
 				sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
 		}
 

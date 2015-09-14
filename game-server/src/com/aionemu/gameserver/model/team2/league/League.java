@@ -65,7 +65,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	public void sendPacket(AionServerPacket packet, Predicate<PlayerAlliance> predicate) {
 		for (PlayerAlliance alliance : getMembers()) {
 			if (predicate.apply(alliance)) {
-				alliance.sendPacket(packet, Predicates.<Player>alwaysTrue());
+				alliance.sendPacket(packet, Predicates.<Player> alwaysTrue());
 			}
 		}
 	}
@@ -168,8 +168,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 					targetAlliance.sendPacket(new SM_SHOW_BRAND(0, 0, true), predicate);
 				}
 			}
-		}
-		finally {
+		} finally {
 			unlock();
 		}
 	}

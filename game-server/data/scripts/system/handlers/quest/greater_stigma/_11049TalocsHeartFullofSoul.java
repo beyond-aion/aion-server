@@ -49,20 +49,18 @@ public class _11049TalocsHeartFullofSoul extends QuestHandler {
 				case 798909: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
-								
+
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 2375);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 2716);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798909) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

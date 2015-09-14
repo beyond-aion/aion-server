@@ -5,9 +5,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Nemesiss
- *
  */
 public class SM_HEADING_UPDATE extends AionServerPacket {
+
 	private final int objectId;
 	private final byte heading;
 

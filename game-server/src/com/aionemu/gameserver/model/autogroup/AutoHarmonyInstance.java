@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 public class AutoHarmonyInstance extends AutoInstance {
@@ -51,8 +50,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 				result = canAddPlayer(group2, player);
 			}
 			return result;
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -93,8 +91,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 				if (!instance.isRegistered(groupId)) {
 					instance.register(groupId);
 				}
-			}
-			else if (!_players.isEmpty() && _players.get(0).isInGroup2()) {
+			} else if (!_players.isEmpty() && _players.get(0).isInGroup2()) {
 				PlayerGroupService.addPlayer(_players.get(0).getPlayerGroup2(), player);
 			}
 			if (!instance.isRegistered(object)) {
@@ -115,8 +112,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (agp != null) {
 			if (group1.contains(agp)) {
 				group1.remove(agp);
-			}
-			else if (group2.contains(agp)) {
+			} else if (group2.contains(agp)) {
 				group2.remove(agp);
 			}
 		}
@@ -148,8 +144,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (agp != null) {
 			if (group1.contains(agp)) {
 				return group1;
-			}
-			else if (group2.contains(agp)) {
+			} else if (group2.contains(agp)) {
 				return group2;
 			}
 		}
@@ -184,8 +179,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 				group.add(agp);
 				players.put(obj, agp);
 				return AGQuestion.ADDED;
-			}
-			else if (getAGPlayerByIndex(group, 0).getRace().equals(player.getRace())) {
+			} else if (getAGPlayerByIndex(group, 0).getRace().equals(player.getRace())) {
 				group.add(agp);
 				players.put(obj, agp);
 				return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);

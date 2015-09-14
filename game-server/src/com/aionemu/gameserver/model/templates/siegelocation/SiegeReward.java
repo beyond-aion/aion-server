@@ -34,11 +34,11 @@ public class SiegeReward {
 	public int getMedalCount() {
 		return mCount;
 	}
-	
+
 	public int getGpForWin() {
 		return gpWin;
 	}
-	
+
 	public int getGpForDefeat() {
 		return gpDefeat;
 	}

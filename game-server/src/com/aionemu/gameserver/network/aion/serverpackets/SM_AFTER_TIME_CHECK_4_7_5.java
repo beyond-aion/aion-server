@@ -8,6 +8,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 
 public class SM_AFTER_TIME_CHECK_4_7_5 extends AionServerPacket {
+
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(1);

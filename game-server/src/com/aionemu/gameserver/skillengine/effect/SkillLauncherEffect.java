@@ -22,17 +22,16 @@ public class SkillLauncherEffect extends EffectTemplate {
 	@Override
 	public void applyEffect(Effect effect) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		Effect e = new Effect(effect.getEffector(), effect.getEffected(), template, template.getLvl(),
-			0);
+		Effect e = new Effect(effect.getEffector(), effect.getEffected(), template, template.getLvl(), 0);
 		e.initialize();
 		e.applyEffect();
 	}
-	
+
 	@Override
 	public void calculate(Effect effect) {
 		effect.addSucessEffect(this);
 	}
-	
+
 	public int getLaunchSkillId() {
 		return skillId;
 	}

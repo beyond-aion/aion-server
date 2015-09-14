@@ -30,21 +30,20 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 	@Override
 	public boolean updateAccountTime(final int accountId, final AccountTime accountTime) {
 		return DB.insertUpdate("REPLACE INTO account_time (account_id, last_active, expiration_time, "
-			+ "session_duration, accumulated_online, accumulated_rest, penalty_end) values " + "(?,?,?,?,?,?,?)",
-			new IUStH() {
+			+ "session_duration, accumulated_online, accumulated_rest, penalty_end) values " + "(?,?,?,?,?,?,?)", new IUStH() {
 
-				@Override
-				public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-					preparedStatement.setLong(1, accountId);
-					preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
-					preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
-					preparedStatement.setLong(4, accountTime.getSessionDuration());
-					preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
-					preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
-					preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
-					preparedStatement.execute();
-				}
-			});
+			@Override
+			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+				preparedStatement.setLong(1, accountId);
+				preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
+				preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
+				preparedStatement.setLong(4, accountTime.getSessionDuration());
+				preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
+				preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
+				preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
+				preparedStatement.execute();
+			}
+		});
 	}
 
 	/**
@@ -70,11 +69,9 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 				accountTime.setPenaltyEnd(rs.getTimestamp("penalty_end"));
 				accountTime.setExpirationTime(rs.getTimestamp("expiration_time"));
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't get account time for account with id: " + accountId, e);
-		}
-		finally {
+		} finally {
 			DB.close(st);
 		}
 

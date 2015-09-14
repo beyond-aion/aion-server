@@ -43,7 +43,7 @@ public class HouseNpcsData {
 			houseSpawnsByAddressId.put(houseSpawns.getAddress(), houseSpawns.getSpawns());
 		}
 	}
-	
+
 	public List<HouseSpawn> getSpawnsByAddress(int address) {
 		return houseSpawnsByAddressId.get(address);
 	}

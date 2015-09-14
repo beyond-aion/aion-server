@@ -45,8 +45,7 @@ public class _1936WhatNerisonSaw extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204573) {
+		} else if (targetId == 204573) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
@@ -56,8 +55,7 @@ public class _1936WhatNerisonSaw extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

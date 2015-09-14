@@ -43,8 +43,7 @@ public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 					player.getPortalCooldownList().setPortalCoolDowns(portalCoolDowns);
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("LoadPortalCooldowns", e);
 		}
 	}
@@ -77,11 +76,9 @@ public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 				stmt.setLong(3, reuseTime);
 				stmt.setInt(4, entryCount);
 				stmt.execute();
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				log.error("storePortalCooldowns", e);
-			}
-			finally {
+			} finally {
 				DatabaseFactory.close(stmt, con);
 			}
 		}
@@ -97,11 +94,9 @@ public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("deletePortalCooldowns", e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(stmt, con);
 		}
 	}

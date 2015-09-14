@@ -36,6 +36,7 @@ public class PostboxObject extends HouseObject<HousingPostbox> {
 		}
 
 		final ItemUseObserver observer = new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				player.getObserveController().removeObserver(this);
@@ -48,14 +49,14 @@ public class PostboxObject extends HouseObject<HousingPostbox> {
 
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getNameId()));
 		player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				try {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.MAIL.id()));
-					//player.getMailbox().sendMailList(false);
+					// player.getMailbox().sendMailList(false);
 					PacketSendUtility.sendPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), 0, 0, PostboxObject.this));
-				}
-				finally {
+				} finally {
 					player.getObserveController().removeObserver(observer);
 					usingPlayer.set(null);
 				}

@@ -34,12 +34,14 @@ public @interface Scheduled {
 
 	/**
 	 * If this scheduler should be disabled ignored
+	 * 
 	 * @return disabled or not
 	 */
 	boolean disabled() default false;
 
 	/**
 	 * Indicates if this task is long-running task or not.<br>
+	 * 
 	 * @return true if is long-running task
 	 */
 	boolean longRunningTask() default false;

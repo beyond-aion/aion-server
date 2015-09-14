@@ -29,7 +29,7 @@ public class CM_PLAY extends AionClientPacket {
 	 * Id of game server that this client is trying to play on.
 	 */
 	private byte servId;
-	
+
 	public CM_PLAY(ByteBuffer buf, LoginConnection client) {
 		super(buf, client, 0x02);
 	}
@@ -63,8 +63,7 @@ public class CM_PLAY extends AionClientPacket {
 				con.setJoinedGs();
 				sendPacket(new SM_PLAY_OK(key, servId));
 			}
-		}
-		else
+		} else
 			con.close(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR), false);
 	}
 }

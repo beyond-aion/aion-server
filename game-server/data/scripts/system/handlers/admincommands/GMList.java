@@ -37,11 +37,9 @@ public class GMList extends AdminCommand {
 
 		if (GMCount == 0) {
 			PacketSendUtility.sendMessage(admin, "There is no GM online.");
-		}
-		else if (GMCount == 1) {
+		} else if (GMCount == 1) {
 			PacketSendUtility.sendMessage(admin, "There is " + GMCount + " GM online.");
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "There are " + GMCount + " GMs online.");
 		}
 		if (GMCount != 0)

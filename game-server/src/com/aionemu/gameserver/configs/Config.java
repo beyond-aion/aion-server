@@ -62,8 +62,7 @@ public class Config {
 			try {
 				log.info("Loading: mygs.properties");
 				myProps = PropertiesUtils.load("./config/mygs.properties");
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.info("No override properties found");
 			}
 
@@ -96,7 +95,7 @@ public class Config {
 
 			ConfigurableProcessor.process(CacheConfig.class, mainProps);
 			log.info("Loading: " + main + "/cache.properties");
-                        
+
 			ConfigurableProcessor.process(CleaningConfig.class, mainProps);
 			log.info("Loading: " + main + "/cleaning.properties");
 
@@ -165,7 +164,7 @@ public class Config {
 
 			ConfigurableProcessor.process(RateConfig.class, mainProps);
 			log.info("Loading: " + main + "/rates.properties");
-			
+
 			ConfigurableProcessor.process(SecurityConfig.class, mainProps);
 			log.info("Loading: " + main + "/security.properties");
 
@@ -180,7 +179,7 @@ public class Config {
 
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
 			log.info("Loading: " + main + "/world.properties");
-			
+
 			ConfigurableProcessor.process(AntiHackConfig.class, mainProps);
 			log.info("Loading: " + main + "/antihack.properties");
 
@@ -196,15 +195,14 @@ public class Config {
 			log.info("Loading: " + network + "/network.properties");
 			ConfigurableProcessor.process(NetworkConfig.class, networkProps);
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't load gameserver configuration: ", e);
 			throw new Error("Can't load gameserver configuration: ", e);
 		}
 
 		IPConfig.load();
 	}
-	
+
 	/**
 	 * Reload all configs in com.aionemu.gameserver.configs package
 	 */
@@ -214,8 +212,7 @@ public class Config {
 			try {
 				log.info("Loading: mygs.properties");
 				myProps = PropertiesUtils.load("./config/mygs.properties");
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.info("No override properties found");
 			}
 
@@ -239,7 +236,7 @@ public class Config {
 
 			ConfigurableProcessor.process(AIConfig.class, mainProps);
 			log.info("Reload: " + main + "/ai.properties");
-			
+
 			ConfigurableProcessor.process(AutoGroupConfig.class, mainProps);
 			log.info("Loading: " + main + "/autogroup.properties");
 
@@ -314,7 +311,7 @@ public class Config {
 
 			ConfigurableProcessor.process(RateConfig.class, mainProps);
 			log.info("Reload: " + main + "/rates.properties");
-			
+
 			ConfigurableProcessor.process(SecurityConfig.class, mainProps);
 			log.info("Reload: " + main + "/security.properties");
 
@@ -329,12 +326,11 @@ public class Config {
 
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
 			log.info("Reload: " + main + "/world.properties");
-			
+
 			ConfigurableProcessor.process(AntiHackConfig.class, mainProps);
 			log.info("Loading: " + main + "/antihack.properties");
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't reload configuration: ", e);
 			throw new Error("Can't reload configuration: ", e);
 		}

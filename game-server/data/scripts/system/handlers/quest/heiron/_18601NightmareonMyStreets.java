@@ -35,23 +35,19 @@ public class _18601NightmareonMyStreets extends QuestHandler {
 			if (targetId == 204500) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182213002, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205229) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 0, true, true, 0, 0, 182213002, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205229) {
 				return sendQuestEndDialog(env);
 			}

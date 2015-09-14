@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -53,6 +52,7 @@ public class SiegeSpawn {
 		@XmlAccessorType(XmlAccessType.FIELD)
 		@XmlType(name = "SiegeModTemplate")
 		public static class SiegeModTemplate {
+
 			@XmlElement(name = "spawn")
 			private List<Spawn> spawns;
 			@XmlAttribute(name = "mod")

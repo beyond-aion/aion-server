@@ -41,19 +41,16 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 	 */
 	@Override
 	public boolean isIdUsed(final int playerObjId) {
-		PreparedStatement s = DB
-			.prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
+		PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
 		try {
 			s.setInt(1, playerObjId);
 			ResultSet rs = s.executeQuery();
 			rs.next();
 			return rs.getInt("cnt") > 0;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't check if name " + playerObjId + ", is used, returning possitive result", e);
 			return true;
-		}
-		finally {
+		} finally {
 			DB.close(s);
 		}
 	}
@@ -122,8 +119,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 					legionMember.setSelfIntro(resultSet.getString("selfintro"));
 					legionMember.setChallengeScore(resultSet.getInt("challenge_score"));
 					legionMember.setLegion(LegionService.getInstance().getLegion(legionId));
-				}
-				catch (SQLException sqlE) {
+				} catch (SQLException sqlE) {
 					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
 				}
 			}
@@ -165,8 +161,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 					legionMemberEx.setSelfIntro(resultSet.getString("legion_members.selfintro"));
 
 					legionMemberEx.setLegion(LegionService.getInstance().getLegion(legionId));
-				}
-				catch (SQLException sqlE) {
+				} catch (SQLException sqlE) {
 					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
 				}
 			}
@@ -208,8 +203,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 					legionMember.setSelfIntro(resultSet.getString("selfintro"));
 
 					legionMember.setLegion(LegionService.getInstance().getLegion(legionId));
-				}
-				catch (SQLException sqlE) {
+				} catch (SQLException sqlE) {
 					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
 				}
 			}
@@ -242,8 +236,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 						int playerObjId = resultSet.getInt("player_id");
 						legionMembers.add(playerObjId);
 					}
-				}
-				catch (SQLException sqlE) {
+				} catch (SQLException sqlE) {
 					log.error("[DAO: MySQL5LegionMemberDAO] No players in Legion. DELETE Legion Id: " + legionId);
 				}
 			}
@@ -271,8 +264,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		PreparedStatement statement = DB.prepareStatement(DELETE_LEGIONMEMBER_QUERY);
 		try {
 			statement.setInt(1, playerObjId);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Some crap, can't set int parameter to PreparedStatement", e);
 		}
 		DB.executeUpdateAndClose(statement);

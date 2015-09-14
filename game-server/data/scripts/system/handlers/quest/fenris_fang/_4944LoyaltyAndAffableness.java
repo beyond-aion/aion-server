@@ -8,11 +8,10 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Quest starter: Kvasir (204053). Collect the amulets (600) from Brohum Warriors and Brohum Hunters and take them to
- * Kvasir. Defeat Great Protectors in the Eye of Reshanta (300): Aether's Defender (251002), Fire's Defender (251021),
- * Ancient Defender (251018), Nature's Defender (251039), Light's Defender (251033), Shadow's Defender (251036). Talk
- * with Kvasir. Go to the Dredgion and kill a Dredgion Captains (1): Captain Adhati (214823), Captain Mituna (216850).
- * Talk with Kvasir. Fill yourself with Divine Power and take Mysterious Holy Water (186000086) to High Priest Balder
+ * Quest starter: Kvasir (204053). Collect the amulets (600) from Brohum Warriors and Brohum Hunters and take them to Kvasir. Defeat Great Protectors
+ * in the Eye of Reshanta (300): Aether's Defender (251002), Fire's Defender (251021), Ancient Defender (251018), Nature's Defender (251039), Light's
+ * Defender (251033), Shadow's Defender (251036). Talk with Kvasir. Go to the Dredgion and kill a Dredgion Captains (1): Captain Adhati (214823),
+ * Captain Mituna (216850). Talk with Kvasir. Fill yourself with Divine Power and take Mysterious Holy Water (186000086) to High Priest Balder
  * (204075) for the final blessing ritual. Talk with Kvasir.
  * 
  * @author vlog
@@ -48,13 +47,11 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			switch (targetId) {
 				case 204053: { // Kvasir
@@ -62,11 +59,9 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 306) {
+							} else if (var == 306) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
@@ -97,8 +92,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 						case SELECT_ACTION_2718: {
 							if (player.getCommonData().getDp() >= 4000) {
 								return checkItemExistence(env, 5, 5, false, 186000087, 1, true, 2718, 2887, 0, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 2802);
 							}
 						}
@@ -113,13 +107,11 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -143,8 +135,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 						return true;
 					}
 				}
-			}
-			else if (var == 3) {
+			} else if (var == 3) {
 				int[] npcids = { 214823, 216850 };
 				return defaultOnKillEvent(env, npcids, 3, 4); // 4
 			}

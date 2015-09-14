@@ -27,7 +27,7 @@ public enum SellLimit {
 
 	public static long getSellLimit(int playerLevel) {
 		for (SellLimit sellLimit : values()) {
-			if (sellLimit.playerMinLevel <= playerLevel && sellLimit.playerMaxLevel >= playerLevel ) {
+			if (sellLimit.playerMinLevel <= playerLevel && sellLimit.playerMaxLevel >= playerLevel) {
 				return sellLimit.limit;
 			}
 		}

@@ -40,8 +40,7 @@ public class DainatumHealersAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					HealDainatum(21535);
 				}
 			}

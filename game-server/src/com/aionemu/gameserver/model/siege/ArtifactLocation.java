@@ -75,7 +75,8 @@ public class ArtifactLocation extends SiegeLocation {
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *          the status to set
 	 */
 	public void setStatus(ArtifactStatus status) {
 		this.status = status;

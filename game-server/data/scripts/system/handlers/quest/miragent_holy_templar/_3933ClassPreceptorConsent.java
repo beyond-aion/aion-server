@@ -50,7 +50,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Receive the signature of Boreas on the recommendation letter.
+			// 1 - Receive the signature of Boreas on the recommendation letter.
 				case 203704:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -89,7 +89,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 						}
 					}
 					// 5 - Receive the signature of Oakley on the recommendation letter.
-				case 801214: 
+				case 801214:
 					if (var == 4) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -107,7 +107,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 							case SETPRO6:
 								return defaultCloseDialog(env, 5, 6);
 						}
-					}			
+					}
 					// 7 - Report the result to Lavirintos with the Oath Stone
 				case 203752:
 					switch (dialog) {
@@ -120,8 +120,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 6, 6, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 3143);
 							}
 						}
@@ -130,17 +129,15 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 						}
 					}
 					break;
-					// No match
+				// No match
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

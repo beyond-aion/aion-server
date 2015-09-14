@@ -59,7 +59,7 @@ public class QuestDrop {
 	public boolean isDropEachMemberGroup() {
 		return dropEachMember == 1;
 	}
-	
+
 	public boolean isDropEachMemberAlliance() {
 		return dropEachMember == 1 || dropEachMember == 2;
 	}
@@ -70,7 +70,7 @@ public class QuestDrop {
 	public Integer getQuestId() {
 		return questId;
 	}
-	
+
 	public int getCollectingStep() {
 		return collecting_step;
 	}

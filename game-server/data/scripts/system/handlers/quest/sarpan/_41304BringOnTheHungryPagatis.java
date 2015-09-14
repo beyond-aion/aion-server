@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41304BringOnTheHungryPagatis extends QuestHandler {
 
@@ -39,16 +37,14 @@ public class _41304BringOnTheHungryPagatis extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205794) { 
+			if (targetId == 205794) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182213111, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205794) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -63,7 +59,7 @@ public class _41304BringOnTheHungryPagatis extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -71,14 +67,14 @@ public class _41304BringOnTheHungryPagatis extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			Npc npc = (Npc) env.getVisibleObject();
 			int targetId = env.getTargetId();
-			if(targetId == 218157 || targetId == 218156) {
+			if (targetId == 218157 || targetId == 218156) {
 				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701168, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-			  return true;
+				return true;
 			}
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean onUseSkillEvent(QuestEnv env, int skillUsedId) {
 		Player player = env.getPlayer();
@@ -86,8 +82,8 @@ public class _41304BringOnTheHungryPagatis extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(player.getTarget() == npc && npc.getObjectTemplate().getTemplateId() == 701168) {
-				if(var < 9)
+			if (player.getTarget() == npc && npc.getObjectTemplate().getTemplateId() == 701168) {
+				if (var < 9)
 					changeQuestStep(env, var, var + 1, false);
 				else
 					changeQuestStep(env, 9, 10, true);

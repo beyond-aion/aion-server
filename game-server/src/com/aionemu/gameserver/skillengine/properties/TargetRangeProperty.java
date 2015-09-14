@@ -35,7 +35,8 @@ public class TargetRangeProperty {
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
 		int maxcount = properties.getTargetMaxCount();
-		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent() : properties.getEffectiveRange();
+		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent() : properties
+			.getEffectiveRange();
 		int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
 
 		final List<Creature> effectedList = skill.getEffectedList();
@@ -50,7 +51,7 @@ public class TargetRangeProperty {
 					log.warn("CHECKPOINT: first target is null for skillid " + skill.getSkillTemplate().getSkillId());
 					return false;
 				}
-				
+
 				// Create a sorted map of the objects in knownlist
 				// and filter them properly
 				for (VisibleObject nextCreature : firstTarget.getKnownList().getKnownObjects().values()) {
@@ -60,31 +61,30 @@ public class TargetRangeProperty {
 						continue;
 					if (((Creature) nextCreature).getLifeStats().isAlreadyDead())
 						continue;
-					
-					//if (nextCreature instanceof Kisk && isInsideDisablePvpZone((Creature) nextCreature))
-					//	continue;
-	
+
+					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone((Creature) nextCreature))
+					// continue;
+
 					if (Math.abs(firstTarget.getZ() - nextCreature.getZ()) > altitude
 						|| ((nextCreature instanceof Player) && ((Player) nextCreature).isInPlayerMode(PlayerMode.WINDSTREAM))) {
 						continue;
 					}
-					
 
 					// TODO this is a temporary hack for traps
 					if (skill.getEffector() instanceof Trap && ((Trap) skill.getEffector()).getCreator() == nextCreature)
 						continue;
 
 					// Players in blinking state must not be counted
-					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player) && (((Player) nextCreature).isProtectionActive()))
+					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player)
+						&& (((Player) nextCreature).isProtectionActive()))
 						continue;
 
 					if (skill.isPointSkill()) {
-						if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(),
-							nextCreature.getY(), nextCreature.getZ(), effectiveRange)) {
+						if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
+							effectiveRange)) {
 							skill.getEffectedList().add((Creature) nextCreature);
 						}
-					}
-					else if (properties.getEffectiveAngle() > 0) {
+					} else if (properties.getEffectiveAngle() > 0) {
 						// Fire Storm; only positive angles
 						float angle = properties.getEffectiveAngle() / 2f;
 						Range<Float> range = Range.between(angle, -angle);
@@ -93,8 +93,7 @@ public class TargetRangeProperty {
 						if (properties.getDirection() != AreaDirections.BACK) {
 							if (!range.contains(angleToTarget))
 								continue;
-						}
-						else {
+						} else {
 							if (range.contains(PositionUtil.getAngleToTarget(skill.getEffector(), nextCreature)))
 								continue;
 						}
@@ -104,19 +103,17 @@ public class TargetRangeProperty {
 							continue;
 						}
 						skill.getEffectedList().add((Creature) nextCreature);
-					}
-					else if (properties.getEffectiveDist() > 0) {
+					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
 						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature, distanceToTarget, properties.getEffectiveDist(),
-							properties.getDirection()) || MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange
-								+ firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+							properties.getDirection())
+							|| MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
 							skill.getEffectedList().add((Creature) nextCreature);
 						}
-					}
-					else if (MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange
-						+ firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+					} else if (MathUtil
+						.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
 						skill.getEffectedList().add((Creature) nextCreature);
@@ -144,8 +141,7 @@ public class TargetRangeProperty {
 								partyCount++;
 							}
 						}
-					}
-					else if (effector.isInGroup2()) {
+					} else if (effector.isInGroup2()) {
 						effectedList.clear();
 						for (Player member : effector.getPlayerGroup2().getMembers()) {
 							if (partyCount >= maxcount)
@@ -177,8 +173,7 @@ public class TargetRangeProperty {
 									effectedList.add(aMemberSummon);
 							}
 						}
-					}
-					else if (effector.isInGroup2()) {
+					} else if (effector.isInGroup2()) {
 						effectedList.clear();
 						for (Player member : effector.getPlayerGroup2().getMembers()) {
 							if (!member.isOnline())
@@ -202,16 +197,16 @@ public class TargetRangeProperty {
 					if (((Creature) nextCreature).getLifeStats().isAlreadyDead())
 						continue;
 
-					if (nextCreature instanceof Trap && !((Trap)nextCreature).getMaster().isEnemy(skill.getEffector())) {
+					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skill.getEffector())) {
 						continue;
 					}
 
 					// Players in blinking state must not be counted
-					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player) && (((Player) nextCreature).isProtectionActive()))
+					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player)
+						&& (((Player) nextCreature).isProtectionActive()))
 						continue;
 
-					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
-											 nextCreature.getZ()) <= distanceToTarget + 1) {
+					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ()) <= distanceToTarget + 1) {
 						effectedList.add((Creature) nextCreature);
 					}
 				}
@@ -222,7 +217,7 @@ public class TargetRangeProperty {
 		}
 		return true;
 	}
-	
+
 	@SuppressWarnings("unused")
 	private static final boolean isInsideDisablePvpZone(Creature creature) {
 		for (ZoneInstance zone : creature.getPosition().getMapRegion().getZones(creature)) {

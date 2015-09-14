@@ -15,10 +15,10 @@ import com.aionemu.gameserver.world.WorldDropType;
 @XmlType(name = "GlobalDropWorld")
 public class GlobalDropWorld {
 
-    @XmlAttribute(name = "wd_type", required = true)
-    protected WorldDropType wdType;
- 
-    public WorldDropType getWorldDropType() {
-        return wdType;
-    }
+	@XmlAttribute(name = "wd_type", required = true)
+	protected WorldDropType wdType;
+
+	public WorldDropType getWorldDropType() {
+		return wdType;
+	}
 }

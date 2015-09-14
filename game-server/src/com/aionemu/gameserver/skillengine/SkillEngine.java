@@ -40,7 +40,7 @@ public class SkillEngine {
 
 		return getSkillFor(player, template, firstTarget);
 	}
-	
+
 	/**
 	 * This method is used for skills that were learned by player
 	 * 
@@ -59,7 +59,7 @@ public class SkillEngine {
 		Creature target = null;
 		if (firstTarget instanceof Creature)
 			target = (Creature) firstTarget;
-		
+
 		return new Skill(template, player, target);
 	}
 
@@ -67,7 +67,7 @@ public class SkillEngine {
 		Creature target = null;
 		if (firstTarget instanceof Creature)
 			target = (Creature) firstTarget;
-		
+
 		return new Skill(template, player, target, skillLevel);
 	}
 
@@ -83,8 +83,7 @@ public class SkillEngine {
 		return getSkill(creature, skillId, skillLevel, firstTarget, null);
 	}
 
-	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget,
-		ItemTemplate itemTemplate) {
+	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (template == null)
@@ -95,14 +94,12 @@ public class SkillEngine {
 			target = (Creature) firstTarget;
 		return new Skill(template, creature, skillLevel, target, itemTemplate);
 	}
-	
-	
+
 	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget) {
 		return getChargeSkill(creature, skillId, skillLevel, firstTarget, null);
 	}
 
-	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget,
-		ItemTemplate itemTemplate) {
+	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (template == null)
@@ -117,14 +114,16 @@ public class SkillEngine {
 	public static SkillEngine getInstance() {
 		return skillEngine;
 	}
+
 	/**
-	 * This method is used to apply directly effect of given skill without checking properties, sending packets, etc
-	 * Should be only used from quest scripts, or when you are sure about it
+	 * This method is used to apply directly effect of given skill without checking properties, sending packets, etc Should be only used from quest
+	 * scripts, or when you are sure about it
 	 * 
 	 * @param skillId
 	 * @param effector
 	 * @param effected
-	 * @param duration => 0 takes duration from skill_templates, >0 forced duration
+	 * @param duration
+	 *          => 0 takes duration from skill_templates, >0 forced duration
 	 */
 	public void applyEffectDirectly(int skillId, Creature effector, Creature effected, int duration) {
 		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
@@ -134,11 +133,11 @@ public class SkillEngine {
 		final Effect ef = new Effect(effector, effected, st, st.getLvl(), duration);
 		ef.setIsForcedEffect(true);
 		ef.initialize();
-		if(duration > 0)
+		if (duration > 0)
 			ef.setForcedDuration(true);
 		ef.applyEffect();
 	}
-	
+
 	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected, int duration) {
 		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		if (st == null)
@@ -147,14 +146,14 @@ public class SkillEngine {
 		final Effect ef = new Effect(effector, effected, st, lvl, duration);
 		ef.setIsForcedEffect(true);
 		ef.initialize();
-		if(duration > 0)
+		if (duration > 0)
 			ef.setForcedDuration(true);
 		ef.applyEffect();
 	}
 
 	/**
-	 * similar function to applyeffectdirectly, but effect is not forced
-	 * that means it checks for resists etc
+	 * similar function to applyeffectdirectly, but effect is not forced that means it checks for resists etc
+	 * 
 	 * @param skillId
 	 * @param effector
 	 * @param effected

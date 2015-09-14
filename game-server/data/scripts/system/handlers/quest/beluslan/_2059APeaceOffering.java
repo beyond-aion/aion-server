@@ -36,17 +36,17 @@ public class _2059APeaceOffering extends QuestHandler {
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 3, 4, false, 253); 
+		return defaultFollowEndEvent(env, 3, 4, false, 253);
 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 3, 2, false); 
+		return defaultFollowEndEvent(env, 3, 2, false);
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -91,8 +91,7 @@ public class _2059APeaceOffering extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204787) {
@@ -120,8 +119,7 @@ public class _2059APeaceOffering extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204795) {
+		} else if (targetId == 204795) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -134,8 +132,7 @@ public class _2059APeaceOffering extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204796) {
+		} else if (targetId == 204796) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -145,7 +142,8 @@ public class _2059APeaceOffering extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(), player.getZ(), (byte) 0);
+						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),
+							player.getZ(), (byte) 0);
 						survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 						player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
 						return true;

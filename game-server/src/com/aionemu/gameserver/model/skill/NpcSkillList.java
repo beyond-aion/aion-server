@@ -30,7 +30,7 @@ public class NpcSkillList implements SkillList<Npc> {
 		NpcSkillTemplates npcSkillList = DataManager.NPC_SKILL_DATA.getNpcSkillList(npcId);
 		if (npcSkillList != null) {
 			initSkills();
-			for (int index = npcSkillList.getNpcSkills().size() - 1; index >= 0 ; index--) {
+			for (int index = npcSkillList.getNpcSkills().size() - 1; index >= 0; index--) {
 				NpcSkillTemplate template = npcSkillList.getNpcSkills().get(index);
 				if (DataManager.SKILL_DATA.getSkillTemplate(template.getSkillid()) == null) {
 					log.warn("Missing skill " + template.getSkillid() + " for npc " + npcId);
@@ -91,13 +91,13 @@ public class NpcSkillList implements SkillList<Npc> {
 			return null;
 		return skills.get(Rnd.get(0, skills.size() - 1));
 	}
-	
+
 	public NpcSkillEntry getSkillOnPosition(int position) {
 		if (skills == null || skills.size() == 0)
 			return null;
 		if (position >= skills.size())
 			position = skills.size() - 1;
-		
+
 		return skills.get(position);
 	}
 
@@ -109,9 +109,9 @@ public class NpcSkillList implements SkillList<Npc> {
 		}
 		return null;
 	}
-	
+
 	public NpcSkillEntry getUseInSpawnedSkill() {
-		if(this.skills == null)
+		if (this.skills == null)
 			return null;
 		Iterator<NpcSkillEntry> iter = skills.iterator();
 		while (iter.hasNext()) {

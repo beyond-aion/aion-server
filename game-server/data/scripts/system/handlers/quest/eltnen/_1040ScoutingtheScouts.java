@@ -9,9 +9,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- * Talk to Tumblusen (203989). Get rid of the Kaidan Scouts (212010) to the southeast of the Observatory (3). Talk to
- * Tumblusen. Report to Telemachus (203901). Talk to Mabangtah (204020). Talk to Targatu (204024). Kill the Guard at the
- * Watchtower (204046) and scout the Kaidan Headquarters (1). Return to Targatu. Talk to Mabangtah. Report to Tumblusen.
+ * Talk to Tumblusen (203989). Get rid of the Kaidan Scouts (212010) to the southeast of the Observatory (3). Talk to Tumblusen. Report to Telemachus
+ * (203901). Talk to Mabangtah (204020). Talk to Targatu (204024). Kill the Guard at the Watchtower (204046) and scout the Kaidan Headquarters (1).
+ * Return to Targatu. Talk to Mabangtah. Report to Tumblusen.
  * 
  * @author Rhys2002
  * @reworked vlog
@@ -80,8 +80,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203989) // Tumblusen
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203989) // Tumblusen
 			{
 				switch (env.getDialog()) {
@@ -98,21 +97,19 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 4, 5); // 5
 				}
-			}
-			else if (targetId == 203901) // Telemachus
+			} else if (targetId == 203901) // Telemachus
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 5)
 							return sendQuestDialog(env, 1693);
 					case SETPRO3:
-						if(defaultCloseDialog(env, 5, 6)) { // 6 
-						   TeleportService2.teleportToNpc(player, 204020);
-						   return true;
+						if (defaultCloseDialog(env, 5, 6)) { // 6
+							TeleportService2.teleportToNpc(player, 204020);
+							return true;
 						}
 				}
-			}
-			else if (targetId == 204020) // Mabangtah
+			} else if (targetId == 204020) // Mabangtah
 			{
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -133,8 +130,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 					case SETPRO7:
 						return defaultCloseDialog(env, 10, 10, true, false); // reward
 				}
-			}
-			else if (targetId == 204024) // Targatu
+			} else if (targetId == 204024) // Targatu
 			{
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

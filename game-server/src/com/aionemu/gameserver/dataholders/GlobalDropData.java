@@ -24,7 +24,6 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.globaldrops.StringFunction;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
-
 /**
  * @author AionCool, modified Bobobear
  */
@@ -51,7 +50,7 @@ public class GlobalDropData {
 		List<NpcTemplate> npcList = new ArrayList<NpcTemplate>();
 		npcList.addAll(npcs.valueCollection());
 		for (GlobalRule gr : gdRules) {
-			if (gr.getGlobalRuleNpcNames()!= null) {
+			if (gr.getGlobalRuleNpcNames() != null) {
 				List<GlobalDropNpc> allowedNpcs = getAllowedNpcs(gr, npcList);
 				if (!allowedNpcs.isEmpty()) {
 					gr.setNpcs(new GlobalDropNpcs());
@@ -61,10 +60,10 @@ public class GlobalDropData {
 			}
 		}
 	}
-	
-	private List<GlobalDropNpc> getAllowedNpcs (GlobalRule rule , List<NpcTemplate> npcs) {
+
+	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {
 		List<GlobalDropNpc> allowedNpcs = new ArrayList<GlobalDropNpc>();
-		if (rule.getGlobalRuleNpcs()!= null) {
+		if (rule.getGlobalRuleNpcs() != null) {
 			allowedNpcs = rule.getGlobalRuleNpcs().getGlobalDropNpcs();
 		}
 		if (rule.getGlobalRuleNpcNames() != null) {
@@ -77,9 +76,9 @@ public class GlobalDropData {
 				else if (gdNpcName.getFunction().equals(StringFunction.START_WITH))
 					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.startsWith(gdNpcName.getValue().toLowerCase())));
 				else if (gdNpcName.getFunction().equals(StringFunction.EQUALS)) {
-						matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.equalToIgnoringCase(gdNpcName.getValue().toLowerCase())));
+					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.equalToIgnoringCase(gdNpcName.getValue().toLowerCase())));
 				}
-			for (NpcTemplate npc : matchesNpcs) {
+				for (NpcTemplate npc : matchesNpcs) {
 					GlobalDropNpc gdNpc = new GlobalDropNpc();
 					gdNpc.setNpcId(npc.getTemplateId());
 					if (!allowedNpcs.contains(gdNpc)) {
@@ -87,7 +86,7 @@ public class GlobalDropData {
 					}
 				}
 			}
-		}		
+		}
 		return allowedNpcs;
 	}
 

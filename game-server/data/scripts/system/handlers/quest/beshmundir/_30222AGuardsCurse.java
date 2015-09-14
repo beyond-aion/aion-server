@@ -37,13 +37,11 @@ public class _30222AGuardsCurse extends QuestHandler {
 			if (targetId == 798979) { // Gelon
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798979) { // Gelon
 				switch (dialog) {
@@ -58,8 +56,7 @@ public class _30222AGuardsCurse extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798979) { // Gelon
 				return sendQuestEndDialog(env);
 			}

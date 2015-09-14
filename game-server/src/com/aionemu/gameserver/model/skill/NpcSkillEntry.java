@@ -7,28 +7,29 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
  * @author ATracer, nrg
  */
 public abstract class NpcSkillEntry extends SkillEntry {
+
 	protected long lastTimeUsed = 0;
-	
+
 	public NpcSkillEntry(int skillId, int skillLevel) {
 		super(skillId, skillLevel);
 	}
-        
+
 	public abstract boolean isReady(int hpPercentage, long fightingTimeInMSec);
 
 	public abstract boolean chanceReady();
 
 	public abstract boolean hpReady(int hpPercentage);
-        
+
 	public abstract boolean timeReady(long fightingTimeInMSec);
-        
+
 	public abstract boolean hasCooldown();
-	
+
 	public abstract boolean UseInSpawned();
-        
+
 	public long getLastTimeUsed() {
 		return lastTimeUsed;
 	}
-        
+
 	public void setLastTimeUsed() {
 		this.lastTimeUsed = System.currentTimeMillis();
 	}
@@ -45,13 +46,13 @@ class NpcSkillTemplateEntry extends NpcSkillEntry {
 		super(template.getSkillid(), template.getSkillLevel());
 		this.template = template;
 	}
-        
+
 	@Override
 	public boolean isReady(int hpPercentage, long fightingTimeInMSec) {
-		if(hasCooldown() || !chanceReady())
+		if (hasCooldown() || !chanceReady())
 			return false;
-            
-		switch(template.getConjunctionType()) {
+
+		switch (template.getConjunctionType()) {
 			case XOR:
 				return (hpReady(hpPercentage) && !timeReady(fightingTimeInMSec)) || (!hpReady(hpPercentage) && timeReady(fightingTimeInMSec));
 			case OR:
@@ -60,8 +61,8 @@ class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return hpReady(hpPercentage) && timeReady(fightingTimeInMSec);
 			default:
 				return false;
-            }
-        }
+		}
+	}
 
 	@Override
 	public boolean chanceReady() {
@@ -70,9 +71,9 @@ class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean hpReady(int hpPercentage) {
-		if (template.getMaxhp() == 0 && template.getMinhp() == 0) //it's not about hp
+		if (template.getMaxhp() == 0 && template.getMinhp() == 0) // it's not about hp
 			return true;
-		else if (template.getMaxhp() >= hpPercentage && template.getMinhp() <= hpPercentage) //in hp range
+		else if (template.getMaxhp() >= hpPercentage && template.getMinhp() <= hpPercentage) // in hp range
 			return true;
 		else
 			return false;
@@ -80,19 +81,19 @@ class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean timeReady(long fightingTimeInMSec) {
-		if (template.getMaxTime() == 0 && template.getMinTime() == 0) //it's not about time
+		if (template.getMaxTime() == 0 && template.getMinTime() == 0) // it's not about time
 			return true;
-		else if (template.getMaxTime() >= fightingTimeInMSec && template.getMinTime() <= fightingTimeInMSec) //in time range
+		else if (template.getMaxTime() >= fightingTimeInMSec && template.getMinTime() <= fightingTimeInMSec) // in time range
 			return true;
 		else
 			return false;
 	}
-        
+
 	@Override
 	public boolean hasCooldown() {
 		return template.getCooldown() > (System.currentTimeMillis() - lastTimeUsed);
 	}
-	
+
 	@Override
 	public boolean UseInSpawned() {
 		return template.getUseInSpawned();
@@ -107,7 +108,7 @@ class NpcSkillParameterEntry extends NpcSkillEntry {
 	public NpcSkillParameterEntry(int skillId, int skillLevel) {
 		super(skillId, skillLevel);
 	}
-        
+
 	@Override
 	public boolean isReady(int hpPercentage, long fightingTimeInMSec) {
 		return true;
@@ -126,13 +127,13 @@ class NpcSkillParameterEntry extends NpcSkillEntry {
 	@Override
 	public boolean timeReady(long fightingTimeInMSec) {
 		return true;
-	} 
-        
+	}
+
 	@Override
 	public boolean hasCooldown() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean UseInSpawned() {
 		return true;

@@ -29,11 +29,9 @@ public class Revoke extends AdminCommand {
 		int type = 0;
 		if (params[1].toLowerCase().equals("acceslevel")) {
 			type = 1;
-		}
-		else if (params[1].toLowerCase().equals("membership")) {
+		} else if (params[1].toLowerCase().equals("membership")) {
 			type = 2;
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "syntax //revoke <characterName> <acceslevel | membership>");
 			return;
 		}

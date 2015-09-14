@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Rolandas
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Serializable {
 
 	private static final long serialVersionUID = 3674312987828041877L;
@@ -26,6 +26,7 @@ public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Ser
 
 		public Item() {
 		}
+
 		public Comparable key;
 		public Object value;
 		public Item previous;

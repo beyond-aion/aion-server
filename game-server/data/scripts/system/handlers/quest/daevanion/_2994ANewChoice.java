@@ -18,8 +18,8 @@ public class _2994ANewChoice extends QuestHandler {
 	// SELECT1_2_1, SELECT1_2_2, SELECT1_2_3, SELECT1_2_4
 	// SELECT1_3_1, SELECT1_3_2, SELECT1_3_3, SELECT1_3_4
 	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1183, 1204, 1225, 1246 };
-	private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572,
-		115000826, 101800569, 101900562, 102000592 };
+	private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572, 115000826,
+		101800569, 101900562, 102000592 };
 
 	public _2994ANewChoice() {
 		super(questId);
@@ -45,13 +45,11 @@ public class _2994ANewChoice extends QuestHandler {
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					QuestService.startQuest(env);
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204077) { // Bor
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					return sendQuestDialog(env, 1011);
@@ -67,12 +65,10 @@ public class _2994ANewChoice extends QuestHandler {
 					if (itemCount > 0) {
 						qs.setReward(dialogIndex << 4);
 						return sendQuestDialog(env, 1013);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else {
+				} else {
 					int savedData = qs.getReward();
 					switch (env.getDialogId()) {
 						case 1012: // SELECT1_1
@@ -101,8 +97,7 @@ public class _2994ANewChoice extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204077) { // Bor
 				int savedData = qs.getReward();
 				if (removeQuestItem(env, items[savedData >> 4], 1) && removeQuestItem(env, 186000041, 1)) {

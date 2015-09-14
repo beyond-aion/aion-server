@@ -6,12 +6,11 @@ import com.aionemu.chatserver.model.Race;
 /**
  * @author ATracer
  */
-public abstract class RaceChannel extends Channel
-{
+public abstract class RaceChannel extends Channel {
+
 	protected Race race;
 
-	public RaceChannel(ChannelType channelType, Race race, String identifier)
-	{
+	public RaceChannel(ChannelType channelType, Race race, String identifier) {
 		super(channelType, identifier);
 		this.race = race;
 	}
@@ -19,8 +18,7 @@ public abstract class RaceChannel extends Channel
 	/**
 	 * @return the race
 	 */
-	public Race getRace()
-	{
+	public Race getRace() {
 		return race;
 	}
 }

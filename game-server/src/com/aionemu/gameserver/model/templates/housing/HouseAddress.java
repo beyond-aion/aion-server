@@ -35,7 +35,7 @@ public class HouseAddress {
 	@XmlAttribute(required = true)
 	protected float x;
 
-	@XmlAttribute(name="town", required = true)
+	@XmlAttribute(name = "town", required = true)
 	private int townId;
 
 	@XmlAttribute(required = true)

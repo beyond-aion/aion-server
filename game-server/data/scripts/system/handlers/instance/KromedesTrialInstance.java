@@ -78,8 +78,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	public void onEnterZone(Player player, ZoneInstance zone) {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("MANOR_ENTRANCE_300230000")) {
 			sendMovie(player, 462);
-		}
-		else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("KALIGA_TREASURY_300230000")) {
+		} else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("KALIGA_TREASURY_300230000")) {
 			{
 				if (!isSpawned) {
 					isSpawned = true;
@@ -91,8 +90,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 						spawn(217001, 663.8805f, 779.1967f, 216.26213f, (byte) 60);
 						spawn(217003, 663.0468f, 774.6116f, 216.26215f, (byte) 60);
 						spawn(217004, 663.0468f, 770.03815f, 216.26212f, (byte) 60);
-					}
-					else {
+					} else {
 						spawn(217006, 669.214f, 774.387f, 216.88f, (byte) 60);
 					}
 				}
@@ -118,8 +116,8 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0,
-			player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

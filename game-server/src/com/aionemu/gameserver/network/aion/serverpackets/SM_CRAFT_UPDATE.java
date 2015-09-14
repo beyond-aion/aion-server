@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -33,10 +32,9 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 		this.failure = failure;
 		this.nameId = item.getNameId();
 
-		if(skillId == 40009) {
+		if (skillId == 40009) {
 			this.executionSpeed = 1500;
-		}
-		else {
+		} else {
 			this.executionSpeed = 700;
 		}
 	}
@@ -72,19 +70,19 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 				writeH(0);
 				break;
 			}
-			case 3: //crit
+			case 3: // crit
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(0);
 				writeD(1200);
-				writeD(1330048); //message
+				writeD(1330048); // message
 				writeH(0x24);
 				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 4: //cancel
+			case 4: // cancel
 			{
 				writeD(success);
 				writeD(failure);

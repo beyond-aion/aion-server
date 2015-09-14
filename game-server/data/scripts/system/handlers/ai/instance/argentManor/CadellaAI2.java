@@ -23,7 +23,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("cadella")
@@ -38,7 +37,7 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 	public boolean canThink() {
 		return canThink;
 	}
-	
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -66,8 +65,7 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					startHealPhase();
 				}
 			}
@@ -106,19 +104,18 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead()) {
 					canThink = true;
-					eventSkillId ++;
+					eventSkillId++;
 					Creature creature = getAggroList().getMostHated();
 					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
-					}
-					else {
+					} else {
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();
 						getOwner().getGameStats().renewLastChangeTargetTime();
 						getOwner().getGameStats().renewLastSkillTime();
-						//setStateIfNot(AIState.FIGHT);
+						// setStateIfNot(AIState.FIGHT);
 						handleCreatureAggro(creature);
 						SkillEngine.getInstance().getSkill(getOwner(), eventSkillId, 60, getOwner()).useNoAnimationSkill();
 					}

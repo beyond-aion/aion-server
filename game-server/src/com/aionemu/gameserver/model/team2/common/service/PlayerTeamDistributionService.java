@@ -25,130 +25,129 @@ import com.google.common.base.Predicate;
  */
 public class PlayerTeamDistributionService {
 
-   /**
-    * This method will send a reward if a player is in a team
-    */
-   public static void doReward(TemporaryPlayerTeam<?> team, float damagePercent, Npc owner, AionObject winner) {
-	  if (team == null || owner == null) {
-		 return;
-	  }
-
-	  // Find team's members and determine highest level
-	  PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner);
-	  team.applyOnMembers(filteredStats);
-
-	  // All are dead or not nearby
-	  if (filteredStats.players.isEmpty() || !filteredStats.hasLivingPlayer) {
-		 return;
-	  }
-
-	  // Reward mode
-	  long expReward;
-	  if (filteredStats.players.size() + filteredStats.mentorCount == 1) {
-			expReward = StatFunctions.calculateSoloExperienceReward(filteredStats.players.get(0), owner);
+	/**
+	 * This method will send a reward if a player is in a team
+	 */
+	public static void doReward(TemporaryPlayerTeam<?> team, float damagePercent, Npc owner, AionObject winner) {
+		if (team == null || owner == null) {
+			return;
 		}
-		else {
+
+		// Find team's members and determine highest level
+		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner);
+		team.applyOnMembers(filteredStats);
+
+		// All are dead or not nearby
+		if (filteredStats.players.isEmpty() || !filteredStats.hasLivingPlayer) {
+			return;
+		}
+
+		// Reward mode
+		long expReward;
+		if (filteredStats.players.size() + filteredStats.mentorCount == 1) {
+			expReward = StatFunctions.calculateSoloExperienceReward(filteredStats.players.get(0), owner);
+		} else {
 			expReward = StatFunctions.calculateGroupExperienceReward(filteredStats.highestLevel, owner);
 		}
 
-	  // Party Bonus 2 members 10%, 3 members 20% ... 6 members 50%
-	  int size = filteredStats.players.size();
-	  int bonus = 100;
-	  if (size > 1) {
-		 bonus = 150 + (size - 2) * 10;
-	  }
+		// Party Bonus 2 members 10%, 3 members 20% ... 6 members 50%
+		int size = filteredStats.players.size();
+		int bonus = 100;
+		if (size > 1) {
+			bonus = 150 + (size - 2) * 10;
+		}
 
-	  for (Player member : filteredStats.players) {
-		 //mentor and dead players shouldn't receive AP/EP/DP
-		 if (member.isMentor() || member.getLifeStats().isAlreadyDead()) {
-			continue;
-		 }
+		for (Player member : filteredStats.players) {
+			// mentor and dead players shouldn't receive AP/EP/DP
+			if (member.isMentor() || member.getLifeStats().isAlreadyDead()) {
+				continue;
+			}
 
-		 // Reward init
+			// Reward init
 			long rewardXp = expReward * bonus * member.getLevel() / (filteredStats.partyLvlSum * 100);
 			int rewardDp = StatFunctions.calculateGroupDPReward(member, owner);
 			float rewardAp = 1;
 
-		 // Players 10 levels below highest member get 0 reward.
-		 if (filteredStats.highestLevel - member.getLevel() >= 10) {
-			rewardXp = 0;
-			rewardDp = 0;
-		 }
-		 if (member.getWorldId() == 301160000)
-			rewardXp = 0;
-		 else if (filteredStats.mentorCount > 0) {
-			int cape = XPCape.values()[member.getLevel()].value();
-			if (cape < rewardXp) {
-			   rewardXp = cape;
+			// Players 10 levels below highest member get 0 reward.
+			if (filteredStats.highestLevel - member.getLevel() >= 10) {
+				rewardXp = 0;
+				rewardDp = 0;
 			}
-		 }
-
-		 // Dmg percent correction
-		 rewardXp *= damagePercent;
-		 rewardDp *= damagePercent;
-		 rewardAp *= damagePercent;
-
-		 member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
-
-		 // DP reward
-		 member.getCommonData().addDp(rewardDp);
-
-		 // AP reward
-		 if (owner.isRewardAP() && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
-			rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
-			int ap = (int) rewardAp / filteredStats.players.size();
-			if (ap >= 1) {
-			   AbyssPointsService.addAp(member, owner, ap);
+			if (member.getWorldId() == 301160000)
+				rewardXp = 0;
+			else if (filteredStats.mentorCount > 0) {
+				int cape = XPCape.values()[member.getLevel()].value();
+				if (cape < rewardXp) {
+					rewardXp = cape;
+				}
 			}
-		 }
-	  }
-	  if (owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
-		 // Give Drop
-		 Player mostDamagePlayer = owner.getAggroList().getMostPlayerDamageOfMembers(team.getMembers(), filteredStats.highestLevel);
-		 if (mostDamagePlayer == null) {
-			return;
-		 }
 
-		 if (winner.equals(team) && (!owner.getAi2().getName().equals("chest") || filteredStats.mentorCount == 0)) {
-			DropRegistrationService.getInstance().registerDrop(owner, mostDamagePlayer, filteredStats.highestLevel, filteredStats.players);
-		 }
-	  }
-   }
+			// Dmg percent correction
+			rewardXp *= damagePercent;
+			rewardDp *= damagePercent;
+			rewardAp *= damagePercent;
 
-   private static class PlayerTeamRewardStats implements Predicate<Player> {
+			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
 
-	  final List<Player> players = new ArrayList<Player>();
-	  int partyLvlSum = 0;
-	  int highestLevel = 0;
-	  int mentorCount = 0;
-	  boolean hasLivingPlayer = false;
-	  Npc owner;
+			// DP reward
+			member.getCommonData().addDp(rewardDp);
 
-	  public PlayerTeamRewardStats(Npc owner) {
-		 this.owner = owner;
-	  }
-
-	  @Override
-	  public boolean apply(Player member) {
-		 if (member.isOnline()) {
-			if (MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
-			   QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0, 0));
-
-			   if (member.isMentor()) {
-				  mentorCount++;
-				  return true;
-			   }
-
-			   if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
-				  hasLivingPlayer = true;
-
-			   players.add(member);
-			   partyLvlSum += member.getLevel();
-			   if (member.getLevel() > highestLevel)
-				  highestLevel = member.getLevel();
+			// AP reward
+			if (owner.isRewardAP() && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
+				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
+				int ap = (int) rewardAp / filteredStats.players.size();
+				if (ap >= 1) {
+					AbyssPointsService.addAp(member, owner, ap);
+				}
 			}
-		 }
-		 return true;
-	  }
-   }
+		}
+		if (owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
+			// Give Drop
+			Player mostDamagePlayer = owner.getAggroList().getMostPlayerDamageOfMembers(team.getMembers(), filteredStats.highestLevel);
+			if (mostDamagePlayer == null) {
+				return;
+			}
+
+			if (winner.equals(team) && (!owner.getAi2().getName().equals("chest") || filteredStats.mentorCount == 0)) {
+				DropRegistrationService.getInstance().registerDrop(owner, mostDamagePlayer, filteredStats.highestLevel, filteredStats.players);
+			}
+		}
+	}
+
+	private static class PlayerTeamRewardStats implements Predicate<Player> {
+
+		final List<Player> players = new ArrayList<Player>();
+		int partyLvlSum = 0;
+		int highestLevel = 0;
+		int mentorCount = 0;
+		boolean hasLivingPlayer = false;
+		Npc owner;
+
+		public PlayerTeamRewardStats(Npc owner) {
+			this.owner = owner;
+		}
+
+		@Override
+		public boolean apply(Player member) {
+			if (member.isOnline()) {
+				if (MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
+					QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0, 0));
+
+					if (member.isMentor()) {
+						mentorCount++;
+						return true;
+					}
+
+					if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
+						hasLivingPlayer = true;
+
+					players.add(member);
+					partyLvlSum += member.getLevel();
+					if (member.getLevel() > highestLevel)
+						highestLevel = member.getLevel();
+				}
+			}
+			return true;
+		}
+	}
 }

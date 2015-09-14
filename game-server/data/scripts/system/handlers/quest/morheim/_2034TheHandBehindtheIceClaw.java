@@ -55,8 +55,7 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -74,24 +73,20 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 2) {
+							} else if (var == 2) {
 								if (player.getInventory().getItemCountByItemId(182204008) == 0) {
 									return sendQuestDialog(env, 1694);
-								}
-								else {
+								} else {
 									return sendQuestDialog(env, 1693);
 								}
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
 						case SETPRO2: {
 							if (var == 1) {
 								return defaultCloseDialog(env, 1, 2, 182204008, 1, 0, 0); // 2
-							}
-							else if (var == 2) {
+							} else if (var == 2) {
 								return defaultCloseDialog(env, 2, 2, 182204008, 1, 0, 0); // 2
 							}
 						}
@@ -115,13 +110,11 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

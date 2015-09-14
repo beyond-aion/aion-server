@@ -52,8 +52,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 																							// quest
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 					return true;
-				}
-				else
+				} else
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 			}
 		}
@@ -72,11 +71,9 @@ public class _1114TheNymphsGown extends QuestHandler {
 					return sendQuestDialog(env, 6);
 				else
 					return sendQuestEndDialog(env);
-			}
-			else if (targetId == 203058 && var == 3) // Asteros
+			} else if (targetId == 203058 && var == 3) // Asteros
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START)
+		} else if (qs.getStatus() != QuestStatus.START)
 			return false;
 
 		if (targetId == 203075) // Namus
@@ -121,8 +118,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 700008) { // Seirenia's clothes
+		} else if (targetId == 700008) { // Seirenia's clothes
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 1) {
@@ -171,7 +167,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (id != 182200214)
 			return HandlerResult.UNKNOWN;
 

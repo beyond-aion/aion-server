@@ -11,37 +11,30 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("solidironchain")
-public class SolidIronChainAI2 extends AggressiveNpcAI2 
-{
+public class SolidIronChainAI2 extends AggressiveNpcAI2 {
 
 	@Override
-	public boolean canThink() 
-	{
+	public boolean canThink() {
 		return false;
 	}
 
 	private AtomicBoolean moviePlayed = new AtomicBoolean();
 
 	@Override
-	protected void handleDespawned() 
-	{
+	protected void handleDespawned() {
 		super.handleDespawned();
-		if (moviePlayed.compareAndSet(false, true))
-		{
-			getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() 
-				{
+		if (moviePlayed.compareAndSet(false, true)) {
+			getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
 
 				@Override
-				public void visit(Player p) 
-				{
+				public void visit(Player p) {
 					PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 983));
 				}
 
-				});
+			});
 		}
 	}
 

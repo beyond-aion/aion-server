@@ -53,7 +53,7 @@ public class CM_LEGION extends AionClientPacket {
 		exOpcode = readC();
 
 		switch (exOpcode) {
-			/** Create a legion **/
+		/** Create a legion **/
 			case 0x00:
 				readD(); // 00 78 19 00 40
 				legionName = readS();
@@ -132,9 +132,10 @@ public class CM_LEGION extends AionClientPacket {
 	protected void runImpl() {
 		final Player activePlayer = getConnection().getActivePlayer();
 
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_LEGION) {
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_LEGION) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
 		if (activePlayer.isLegionMember()) {
@@ -142,10 +143,9 @@ public class CM_LEGION extends AionClientPacket {
 
 			if (charName != null) {
 				LegionService.getInstance().handleCharNameRequest(exOpcode, activePlayer, charName, newNickname, rank);
-			}
-			else {
+			} else {
 				switch (exOpcode) {
-					/** Refresh legion info **/
+				/** Refresh legion info **/
 					case 0x08:
 						sendPacket(new SM_LEGION_INFO(legion));
 						break;
@@ -168,15 +168,13 @@ public class CM_LEGION extends AionClientPacket {
 						break;
 				}
 			}
-		}
-		else {
+		} else {
 			switch (exOpcode) {
-				/** Create a legion **/
+			/** Create a legion **/
 				case 0x00:
 					if (NameRestrictionService.isForbiddenWord(legionName)) {
 						PacketSendUtility.sendMessage(activePlayer, "You are trying to use a forbidden name. Choose another one!");
-					}
-					else {
+					} else {
 						LegionService.getInstance().createLegion(activePlayer, legionName);
 					}
 					break;

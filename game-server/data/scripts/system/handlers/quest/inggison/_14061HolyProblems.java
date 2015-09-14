@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _14061HolyProblems extends QuestHandler {
 
@@ -71,8 +69,7 @@ public class _14061HolyProblems extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 25) {
+							} else if (var == 25) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -90,11 +87,9 @@ public class _14061HolyProblems extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 24) {
+							} else if (var == 24) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -102,17 +97,14 @@ public class _14061HolyProblems extends QuestHandler {
 							if (var == 2) {
 								if (player.isInGroup2()) {
 									return sendQuestDialog(env, 2546);
-								}
-								else {
+								} else {
 									if (giveQuestItem(env, 182206627, 1) && giveQuestItem(env, 182206628, 1)) {
 										WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 										InstanceService.registerPlayerWithInstance(newInstance, player);
-										TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f,
-											1098.236f, (byte) 30);
+										TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 										changeQuestStep(env, 2, 3, false);
 										return closeDialogWindow(env);
-									}
-									else {
+									} else {
 										PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
 										return sendQuestSelectionDialog(env);
 									}
@@ -129,13 +121,11 @@ public class _14061HolyProblems extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798927) { // Versetti
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -156,8 +146,7 @@ public class _14061HolyProblems extends QuestHandler {
 						changeQuestStep(env, 3, 4, false);
 						return HandlerResult.SUCCESS;
 					}
-				}
-				else if (itemId == 182206628) {
+				} else if (itemId == 182206628) {
 					if (var >= 4 && var < 24) {
 						changeQuestStep(env, var, var + 1, false);
 						return HandlerResult.SUCCESS;

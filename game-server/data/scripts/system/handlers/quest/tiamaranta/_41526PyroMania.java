@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41526PyroMania extends QuestHandler {
 
@@ -38,27 +36,23 @@ public class _41526PyroMania extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205941) { 
+			if (targetId == 205941) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212587, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701235) {
-				return true; //loot
-			}
-			else if (targetId == 205941) {
+				return true; // loot
+			} else if (targetId == 205941) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						if(player.getInventory().getItemCountByItemId(182212529) >= 5)
+						if (player.getInventory().getItemCountByItemId(182212529) >= 5)
 							return sendQuestDialog(env, 1011);
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
@@ -66,8 +60,7 @@ public class _41526PyroMania extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205941) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -82,7 +75,7 @@ public class _41526PyroMania extends QuestHandler {
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean onUseSkillEvent(QuestEnv env, int skillUsedId) {
 		Player player = env.getPlayer();
@@ -91,7 +84,7 @@ public class _41526PyroMania extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START && skillUsedId == 10379) {
 			if (npc == null && player.getInventory().getItemCountByItemId(182212529) >= 5)
 				return false;
-			if(player.getTarget() == npc && npc.getName().equals("pyroclast")) {
+			if (player.getTarget() == npc && npc.getName().equals("pyroclast")) {
 				npc.getController().die();
 				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701235, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 				return true;

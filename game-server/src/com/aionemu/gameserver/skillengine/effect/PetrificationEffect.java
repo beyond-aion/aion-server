@@ -25,20 +25,20 @@ public class PetrificationEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		super.calculate(effect, StatEnum.PERIFICATION_RESISTANCE, null);
 	}
-	
+
 	@Override
 	public void startEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getController().stopMoving();
 		effected.getController().cancelCurrentSkill();
-		//removes glide
-		if (effected instanceof Player && ((Player)effected).isInGlidingState()) {
+		// removes glide
+		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PETRIFICATION.getId());
 		effect.setAbnormal(AbnormalState.PETRIFICATION.getId());
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PETRIFICATION.getId());

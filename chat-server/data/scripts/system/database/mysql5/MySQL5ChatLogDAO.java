@@ -9,18 +9,16 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.chatserver.dao.ChatLogDAO;
 import com.aionemu.commons.database.DatabaseFactory;
 
-public class MySQL5ChatLogDAO extends ChatLogDAO
-{
+public class MySQL5ChatLogDAO extends ChatLogDAO {
+
 	private static final Logger log = LoggerFactory.getLogger(MySQL5ChatLogDAO.class);
-	
+
 	public static final String INSERT_QUERY = "INSERT INTO `chatlog` (`sender`,`message`, `receiver`, `type`) VALUES (?, ?, ?, ?)";
-	
+
 	@Override
-	public void add_ChannelChat(String sender, String message, String receiver, String type)
-	{
+	public void add_ChannelChat(String sender, String message, String receiver, String type) {
 		Connection con = null;
-		try
-		{
+		try {
 			con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con.prepareStatement(INSERT_QUERY);
 			stmt.setString(1, sender);
@@ -29,21 +27,16 @@ public class MySQL5ChatLogDAO extends ChatLogDAO
 			stmt.setString(4, type);
 			stmt.execute();
 			stmt.close();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Cannot insert Channel Chat", e);
-		}
-		finally
-		{
+		} finally {
 			DatabaseFactory.close(con);
 		}
 
 	}
 
 	@Override
-	public boolean supports(String database, int majorVersion, int minorVersion)
-	{
+	public boolean supports(String database, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(database, majorVersion, minorVersion);
 	}
 }

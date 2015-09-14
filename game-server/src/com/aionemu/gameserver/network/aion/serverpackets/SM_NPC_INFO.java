@@ -42,7 +42,8 @@ public class SM_NPC_INFO extends AionServerPacket {
 	 * Constructs new <tt>SM_NPC_INFO </tt> packet
 	 *
 	 * @param player
-	 * @param kisk - the visible npc.
+	 * @param kisk
+	 *          - the visible npc.
 	 */
 	public SM_NPC_INFO(Npc npc, Player player) {
 		this._npc = npc;
@@ -68,8 +69,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 			creatorId = owner.getObjectId();
 			masterName = owner.getName();
 			speed = owner.getGameStats().getMovementSpeedFloat();
-		}
-		else {
+		} else {
 			masterName = "LOST";
 		}
 	}
@@ -125,8 +125,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		if (gear == null) {
 			writeD(0x00);
 			writeF(boundRadius.getFront());
-		}
-		else {
+		} else {
 			writeD(gear.getItemsMask());
 			for (Entry<ItemSlot, ItemTemplate> item : gear) // getting it from template ( later if we make sure that npcs
 			// actually use items, we'll make Item from it )
@@ -180,7 +179,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeC(0x00); // unk
 		writeD(_npc.getTarget() == null ? 0 : _npc.getTarget().getObjectId());
 		writeD(TownService.getInstance().getTownIdByPosition(_npc));
-		writeD(0);//unk 4.7.5
+		writeD(0);// unk 4.7.5
 	}
 
 }

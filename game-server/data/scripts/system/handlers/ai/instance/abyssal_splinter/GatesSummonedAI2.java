@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("gatessummoned")
@@ -52,8 +51,7 @@ public class GatesSummonedAI2 extends GeneralNpcAI2 {
 		startEventTask();
 	}
 
-	private void startMove()
-	{
+	private void startMove() {
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
 		setStateIfNot(AIState.FOLLOWING);
@@ -76,8 +74,8 @@ public class GatesSummonedAI2 extends GeneralNpcAI2 {
 				Npc boss = getPosition().getWorldMapInstance().getNpc(216960);
 				if (isAlreadyDead() && getOwner() == null)
 					cancelEventTask();
-				else{
-					if(Rnd.get(1) == 0)
+				else {
+					if (Rnd.get(1) == 0)
 						SkillEngine.getInstance().getSkill(getOwner(), 19257, 55, boss).useNoAnimationSkill();
 					else
 						SkillEngine.getInstance().getSkill(getOwner(), 19281, 55, boss).useNoAnimationSkill();

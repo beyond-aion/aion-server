@@ -20,12 +20,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
-public class HarmonyArenaReward extends PvPArenaReward{
+public class HarmonyArenaReward extends PvPArenaReward {
 
 	private FastTable<HarmonyGroupReward> groups = new FastTable<>();
+
 	public HarmonyArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
 		super(mapId, instanceId, instance);
 	}
@@ -73,8 +73,10 @@ public class HarmonyArenaReward extends PvPArenaReward{
 
 	public void sendPacket(final int type, final Integer object) {
 		instance.doOnAllPlayers((Player player) -> {
-            PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, object == null ? player.getObjectId() : object), getInstanceReward(), getTime()));
-        });
+			PacketSendUtility.sendPacket(player,
+				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, object == null ? player.getObjectId() : object),
+					getInstanceReward(), getTime()));
+		});
 	}
 
 	@Override

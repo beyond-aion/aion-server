@@ -151,8 +151,7 @@ public class WeatherService {
 		if (chosenWeather.size() == 0) {
 			// no weather, code = 0
 			newWeather = new WeatherEntry();
-		}
-		else {
+		} else {
 			// almost all weather types have after and before weathers, so chances
 			// to pick up are almost equal
 			newWeather = chosenWeather.get(Rnd.get(chosenWeather.size()));
@@ -235,8 +234,7 @@ public class WeatherService {
 	}
 
 	/**
-	 * Allows server to reinitialize Weathers for all regions
-	 * TODO: not thread safe if run by admin
+	 * Allows server to reinitialize Weathers for all regions TODO: not thread safe if run by admin
 	 */
 	public synchronized void resetWeather() {
 		Set<WeatherKey> loadedWeathers = new HashSet<WeatherKey>(worldZoneWeathers.keySet());
@@ -282,8 +280,7 @@ public class WeatherService {
 					PacketSendUtility.sendPacket(currentPlayer, new SM_WEATHER(weatherEntries));
 				}
 			}
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_WEATHER(weatherEntries));
 		}
 		for (WeatherEntry entry : weatherEntries)

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.rift;
 import com.aionemu.gameserver.model.Race;
 
 /**
- *
  * @author Source
  */
 public enum RiftEnum {
@@ -46,6 +45,7 @@ public enum RiftEnum {
 	GELKMAROS_BM(2271, "GELKMAROS_BM", "INGGISON_BS", 150, 20, 65, Race.ELYOS),
 	GELKMAROS_CM(2272, "GELKMAROS_CM", "INGGISON_CS", 150, 20, 65, Race.ELYOS),
 	GELKMAROS_DM(2273, "GELKMAROS_DM", "INGGISON_DS", 150, 20, 65, Race.ELYOS);
+
 	private int id;
 	private String master;
 	private String slave;

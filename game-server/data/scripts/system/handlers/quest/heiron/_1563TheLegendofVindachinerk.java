@@ -71,7 +71,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 					}
 			}
 		}
-		if(sendQuestRewardDialog(env, 798096, 0, 0) || sendQuestRewardDialog(env, 279005, 0, 1))
+		if (sendQuestRewardDialog(env, 798096, 0, 0) || sendQuestRewardDialog(env, 279005, 0, 1))
 			return true;
 		else
 			return false;
@@ -88,14 +88,12 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
 			}

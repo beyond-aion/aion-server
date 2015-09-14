@@ -38,9 +38,8 @@ public class ShieldObserver extends ActionObserver {
 
 		if (SiegeService.getInstance().getFortress(shield.getId()).isUnderShield())
 			if (!(creature.getZ() < shield.getZ() && oldPosition.getZ() < shield.getZ()))
-				if (MathUtil.isInSphere(shield, (float) oldPosition.getX(), (float) oldPosition.getY(),
-						(float) oldPosition.getZ(), shield.getTemplate().getRadius()) != MathUtil.isIn3dRange(shield, creature,
-						shield.getTemplate().getRadius()))
+				if (MathUtil.isInSphere(shield, (float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(), shield.getTemplate()
+					.getRadius()) != MathUtil.isIn3dRange(shield, creature, shield.getTemplate().getRadius()))
 					passedThrough = true;
 
 		if (passedThrough) {

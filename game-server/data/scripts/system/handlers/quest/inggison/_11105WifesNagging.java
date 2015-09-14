@@ -45,8 +45,7 @@ public class _11105WifesNagging extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -63,8 +62,7 @@ public class _11105WifesNagging extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798984) {
@@ -83,8 +81,7 @@ public class _11105WifesNagging extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 798980) {
+		} else if (targetId == 798980) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

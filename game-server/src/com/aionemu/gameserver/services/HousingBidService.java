@@ -71,8 +71,7 @@ public class HousingBidService extends AbstractCronTask {
 		bidsByIndex = new FastMap<>();
 		try {
 			instance = new HousingBidService(HousingConfig.HOUSE_AUCTION_TIME);
-		}
-		catch (ParseException pe) {
+		} catch (ParseException pe) {
 		}
 	}
 
@@ -103,8 +102,7 @@ public class HousingBidService extends AbstractCronTask {
 	protected void postInit() {
 		try {
 			registerDateExpr = new CronExpression(registerEndExpression);
-		}
-		catch (ParseException e) {
+		} catch (ParseException e) {
 		}
 
 		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
@@ -137,7 +135,8 @@ public class HousingBidService extends AbstractCronTask {
 				continue;
 			if (!checkAutoFillingLimits(house.getPlayerRace(), house.getHouseType()))
 				continue;
-			if (addHouseToAuction(house, house.getDefaultAuctionPrice()));
+			if (addHouseToAuction(house, house.getDefaultAuctionPrice()))
+				;
 			count++;
 		}
 		return count;
@@ -170,8 +169,7 @@ public class HousingBidService extends AbstractCronTask {
 		int count = 0;
 		for (HouseBidEntry entry : houseBids.values()) {
 			HousingLand land = DataManager.HOUSE_DATA.getLand(entry.getLandId());
-			Race entryRace = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL ? Race.ELYOS
-				: Race.ASMODIANS;
+			Race entryRace = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL ? Race.ELYOS : Race.ASMODIANS;
 			if (entryRace == race && entry.getHouseType() == type)
 				count++;
 		}
@@ -202,8 +200,7 @@ public class HousingBidService extends AbstractCronTask {
 				entry = new HouseBidEntry(house, entryIndex, playerBid.getBidOffer());
 				houseBids.put(house.getObjectId(), entry);
 				bidsByIndex.put(entryIndex++, entry);
-			}
-			else if (entry.getBidPrice() < playerBid.getBidOffer()) {
+			} else if (entry.getBidPrice() < playerBid.getBidOffer()) {
 				// find max price
 				entry.setBidPrice(playerBid.getBidOffer());
 			}
@@ -240,8 +237,7 @@ public class HousingBidService extends AbstractCronTask {
 		while (!isDataLoaded) {
 			try {
 				Thread.sleep(500);
-			}
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				return;
 			}
 		}
@@ -311,8 +307,7 @@ public class HousingBidService extends AbstractCronTask {
 			}
 
 			if (sellerPcd.isOnline()) {
-				PacketSendUtility.sendPacket(sellerPcd.getPlayer(),
-					SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_SUCCESS(sellData.getKey().getAddress()));
+				PacketSendUtility.sendPacket(sellerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_SUCCESS(sellData.getKey().getAddress()));
 			}
 			if (buyerPcd.isOnline()) {
 				PacketSendUtility.sendPacket(buyerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(sellData.getKey().getAddress()));
@@ -325,14 +320,12 @@ public class HousingBidService extends AbstractCronTask {
 				House newHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
 				if (sellerPcd.isOnline()) {
 					sellerPcd.getPlayer().resetHouses();
-					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), newHouse.getAddress()
-						.getId(), true));
+					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), newHouse.getAddress().getId(), true));
 					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer()));
 					sellerPcd.getPlayer().setHouseRegistry(newHouse.getRegistry());
 				}
 				MailFormatter.sendHouseAuctionMail(newHouse, sellerPcd, AuctionResult.GRACE_SUCCESS, time, returnKinah);
-			}
-			else {
+			} else {
 				MailFormatter.sendHouseAuctionMail(soldHouse, sellerPcd, AuctionResult.SUCCESS_SALE, time, returnKinah);
 				soldHouse.revokeOwner();
 				if (sellerPcd.isOnline())
@@ -369,8 +362,8 @@ public class HousingBidService extends AbstractCronTask {
 					if (sellerPcd.isOnline()) {
 						if (activatedHouse != null) {
 							sellerPcd.getPlayer().resetHouses();
-							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse
-								.getAddress().getId(), true));
+							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse.getAddress()
+								.getId(), true));
 							sellerPcd.getPlayer().setHouseRegistry(activatedHouse.getRegistry());
 							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer()));
 						}
@@ -380,8 +373,7 @@ public class HousingBidService extends AbstractCronTask {
 					time = System.currentTimeMillis();
 					compensation = bidHouse.getDefaultAuctionPrice();
 				}
-			}
-			else {
+			} else {
 				bidHouse.setStatus(HouseStatus.ACTIVE);
 				time = bidHouse.getSellStarted().getTime();
 			}
@@ -389,8 +381,8 @@ public class HousingBidService extends AbstractCronTask {
 			bidHouse.save();
 			MailFormatter.sendHouseAuctionMail(bidHouse, sellerPcd, result, time, compensation);
 			if (LoggingConfig.LOG_HOUSE_AUCTION) {
-				log.info("Address " + bidHouse.getAddress().getId() + " not sold for price " + bidEntry.getBidPrice() + " (result: " + result
-					+ "; return: " + compensation + " kinah) by player " + sellerPcd.getPlayerObjId());
+				log.info("Address " + bidHouse.getAddress().getId() + " not sold for price " + bidEntry.getBidPrice() + " (result: " + result + "; return: "
+					+ compensation + " kinah) by player " + sellerPcd.getPlayerObjId());
 			}
 		}
 
@@ -482,8 +474,7 @@ public class HousingBidService extends AbstractCronTask {
 		long time = System.currentTimeMillis();
 		if (winnerHouse != null) {
 			winnerHouse.revokeOwner();
-		}
-		else {
+		} else {
 			int address = HousingService.getInstance().getPlayerAddress(winner.getPlayerObjId());
 			if (address > 0) { // old house exists
 				winnerHouse = HousingService.getInstance().getHouseByAddress(address);
@@ -510,8 +501,7 @@ public class HousingBidService extends AbstractCronTask {
 			if (result == AuctionResult.WIN_BID) {
 				winner.getPlayer().setHouseRegistry(obtainedHouse.getRegistry());
 				winner.getPlayer().setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
-				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_ACQUIRE(winner.getPlayerObjId(), obtainedHouse.getAddress().getId(),
-					true));
+				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_ACQUIRE(winner.getPlayerObjId(), obtainedHouse.getAddress().getId(), true));
 				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_OWNER_INFO(winner.getPlayer()));
 			}
 			PacketSendUtility.sendPacket(winner.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(obtainedHouse.getAddress().getId()));
@@ -554,8 +544,8 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	/**
-	 * Remove house from auction. Currently from admin command, both for player and non-player houses. Returns kinah for
-	 * the selling player and the last bidder if such exist
+	 * Remove house from auction. Currently from admin command, both for player and non-player houses. Returns kinah for the selling player and the last
+	 * bidder if such exist
 	 */
 	public boolean removeHouseFromAuction(House house, boolean noSale) {
 		if (house.getStatus() != HouseStatus.SELL_WAIT)
@@ -583,11 +573,10 @@ public class HousingBidService extends AbstractCronTask {
 			if (house.isInGracePeriod())
 				house.setSellStarted(null);
 			pcd = getPlayerData(house.getOwnerId());
-			MailFormatter.sendHouseAuctionMail(house, pcd, AuctionResult.CANCELED_BID, System.currentTimeMillis(), bidEntry.getBidPrice()
-				+ bidEntry.getRefundKinah());
+			MailFormatter.sendHouseAuctionMail(house, pcd, AuctionResult.CANCELED_BID, System.currentTimeMillis(),
+				bidEntry.getBidPrice() + bidEntry.getRefundKinah());
 			house.setStatus(HouseStatus.ACTIVE);
-		}
-		else {
+		} else {
 			house.setStatus(noSale ? HouseStatus.NOSALE : HouseStatus.ACTIVE);
 		}
 		if (lastPlayer != null) {
@@ -677,8 +666,7 @@ public class HousingBidService extends AbstractCronTask {
 					DAOManager.getDAO(ServerVariablesDAO.class).store("auctionProlonged", timeProlonged);
 				}
 			});
-		}
-		else if (!isBiddingAllowed()) {
+		} else if (!isBiddingAllowed()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT);
 			return;
 		}
@@ -731,18 +719,15 @@ public class HousingBidService extends AbstractCronTask {
 			if (result == AuctionResult.FAILED_BID) {
 				needsRefresh = true;
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_CANCEL);
-			}
-			else if (result == AuctionResult.WIN_BID || result == AuctionResult.GRACE_START) {
+			} else if (result == AuctionResult.WIN_BID || result == AuctionResult.GRACE_START) {
 				needsRefresh = true;
 				int address = Integer.parseInt(bodyParts[1]);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(address));
-			}
-			else if (result == AuctionResult.FAILED_SALE) {
+			} else if (result == AuctionResult.FAILED_SALE) {
 				needsRefresh = true;
 				int address = Integer.parseInt(bodyParts[1]);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL(address));
-			}
-			else if (result == AuctionResult.SUCCESS_SALE || result == AuctionResult.GRACE_SUCCESS) {
+			} else if (result == AuctionResult.SUCCESS_SALE || result == AuctionResult.GRACE_SUCCESS) {
 				needsRefresh = true;
 				int address = Integer.parseInt(bodyParts[1]);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_SUCCESS(address));
@@ -801,8 +786,7 @@ public class HousingBidService extends AbstractCronTask {
 		if (player.getRace() == Race.ELYOS) {
 			if (mapId == WorldMapType.HEIRON.getId() || mapId == WorldMapType.INGGISON.getId())
 				return saleOptions.getMinLevel();
-		}
-		else if (mapId == WorldMapType.BELUSLAN.getId() || mapId == WorldMapType.GELKMAROS.getId())
+		} else if (mapId == WorldMapType.BELUSLAN.getId() || mapId == WorldMapType.GELKMAROS.getId())
 			return saleOptions.getMinLevel();
 
 		switch (houseType) {

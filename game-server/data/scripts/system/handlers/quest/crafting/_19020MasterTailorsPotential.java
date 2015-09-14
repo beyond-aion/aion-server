@@ -79,13 +79,11 @@ public class _19020MasterTailorsPotential extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 1352);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203793) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

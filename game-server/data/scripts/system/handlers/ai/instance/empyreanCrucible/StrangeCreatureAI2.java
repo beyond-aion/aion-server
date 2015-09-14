@@ -9,7 +9,6 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author Luzien
  */
 @AIName("strange_creature")
@@ -35,16 +34,16 @@ public class StrangeCreatureAI2 extends GeneralNpcAI2 {
 
 		}, 500);
 	}
-	
+
 	private void startLifeTask() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-					AI2Actions.deleteOwner(StrangeCreatureAI2.this);
+				AI2Actions.deleteOwner(StrangeCreatureAI2.this);
 			}
 
 		}, 6500);
 	}
-	
+
 }

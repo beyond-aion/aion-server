@@ -1,9 +1,8 @@
 package com.aionemu.commons.configuration;
 
 /**
- * This exception is internal for configuration process. Thrown by
- * {@link com.aionemu.commons.configuration.PropertyTransformer} when transformaton error occurs and is catched by
- * {@link com.aionemu.commons.configuration.ConfigurableProcessor}
+ * This exception is internal for configuration process. Thrown by {@link com.aionemu.commons.configuration.PropertyTransformer} when transformaton
+ * error occurs and is catched by {@link com.aionemu.commons.configuration.ConfigurableProcessor}
  * 
  * @author SoulKeeper
  */

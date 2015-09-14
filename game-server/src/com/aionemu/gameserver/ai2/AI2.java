@@ -20,7 +20,7 @@ public interface AI2 {
 	void onGeneralEvent(AIEventType event);
 
 	/**
-	 *  If already handled dialog return true.
+	 * If already handled dialog return true.
 	 */
 	boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex);
 
@@ -43,19 +43,19 @@ public interface AI2 {
 	long getRemainigTime();
 
 	int modifyDamage(Skill skill, Creature creature, int damage);
-	
+
 	int modifyDamage(Creature creature, int damage);
 
 	int modifyOwnerDamage(int damage);
-	
+
 	int modifyHealValue(int value);
-	
+
 	int modifyMaccuracy(int value);
-	
+
 	int modifyMattack(int value);
-	
+
 	int modifyPdef(int value);
-	
+
 	ItemAttackType modifyAttackType(ItemAttackType type);
 
 	int modifyARange(int value);

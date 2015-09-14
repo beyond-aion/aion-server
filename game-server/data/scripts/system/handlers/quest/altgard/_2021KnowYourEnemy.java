@@ -53,8 +53,7 @@ public class _2021KnowYourEnemy extends QuestHandler {
 							else if (var == 2) {
 								player.getEffectController().removeEffect(1868);
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 6)
+							} else if (var == 6)
 								return sendQuestDialog(env, 1693);
 							break;
 						case SETPRO1:
@@ -69,8 +68,7 @@ public class _2021KnowYourEnemy extends QuestHandler {
 							return defaultCloseDialog(env, 6, 6, true, false); // reward
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2034);

@@ -10,8 +10,8 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 
 /**
- * This class is holding information about player, that is displayed on char selection screen, such as: player
- * commondata, player's appearance and creation/deletion time.
+ * This class is holding information about player, that is displayed on char selection screen, such as: player commondata, player's appearance and
+ * creation/deletion time.
  * 
  * @see PlayerCommonData
  * @see PlayerAppearance
@@ -35,7 +35,7 @@ public class PlayerAccountData {
 		this.equipment = equipment;
 		this.legionMember = legionMember;
 	}
-	
+
 	public CharacterBanInfo getCharBanInfo() {
 		return cbi;
 	}

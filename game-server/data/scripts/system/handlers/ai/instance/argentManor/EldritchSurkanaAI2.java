@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 
 /**
- *
  * @author xTz
  */
 @AIName("eldritch_surkana")

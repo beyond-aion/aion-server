@@ -34,8 +34,7 @@ public class StigmaService {
 		int newAdvancedSlotSize = player.getCommonData().getAdvancedStigmaSlotSize() + 1;
 		if (newAdvancedSlotSize <= 6) { // maximum
 			player.getCommonData().setAdvancedStigmaSlotSize(newAdvancedSlotSize);
-			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.stigmaSlots(player.getCommonData()
-					.getAdvancedStigmaSlotSize()));
+			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.stigmaSlots(player.getCommonData().getAdvancedStigmaSlotSize()));
 			return true;
 		}
 		return false;
@@ -85,8 +84,7 @@ public class StigmaService {
 					return false;
 				}
 
-			}
-			else if (ItemSlot.isAdvancedStigma(slot)) {
+			} else if (ItemSlot.isAdvancedStigma(slot)) {
 				boolean replace = false;
 				for (Item i : player.getEquipment().getEquippedItemsAdvencedStigma()) {
 					if (i.getEquipmentSlot() == slot) {
@@ -155,28 +153,28 @@ public class StigmaService {
 				}
 			}
 			if (!replace) {
-			   for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
-				Stigma si = item.getItemTemplate().getStigma();
-				if (resultItem == item || si == null)
-					continue;
+				for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
+					Stigma si = item.getItemTemplate().getStigma();
+					if (resultItem == item || si == null)
+						continue;
 
-				for (StigmaSkill sSkill : stigmaInfo.getSkills()) {
-					for (RequireSkill rs : si.getRequireSkill()) {
-						if (rs.getSkillIds().contains(sSkill.getSkillId())) {
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_CANNT_UNEQUIP_STONE_OTHER_STONE_NEED_ITS_SKILL(item.getNameId(), 
-									resultItem.getNameId()));
-							return false;
+					for (StigmaSkill sSkill : stigmaInfo.getSkills()) {
+						for (RequireSkill rs : si.getRequireSkill()) {
+							if (rs.getSkillIds().contains(sSkill.getSkillId())) {
+								PacketSendUtility.sendPacket(player,
+									SM_SYSTEM_MESSAGE.STR_STIGMA_CANNT_UNEQUIP_STONE_OTHER_STONE_NEED_ITS_SKILL(item.getNameId(), resultItem.getNameId()));
+								return false;
+							}
 						}
 					}
 				}
-			}
 			}
 			for (StigmaSkill sSkill : stigmaInfo.getSkills()) {
 				int nameId = DataManager.SKILL_DATA.getSkillTemplate(sSkill.getSkillId()).getNameId();
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 
 				SkillLearnService.removeSkill(player, sSkill.getSkillId());
-				//remove effect
+				// remove effect
 				player.getEffectController().removeEffect(sSkill.getSkillId());
 			}
 		}
@@ -260,14 +258,13 @@ public class StigmaService {
 
 		if (player.getRace() == Race.ELYOS) {
 			QuestState qs = player.getQuestStateList().getQuestState(1929);
-			if(qs != null)
+			if (qs != null)
 				isCompleteQuest = player.isCompleteQuest(1929) || (qs.getStatus() == QuestStatus.START && qs.getQuestVars().getQuestVars() == 98);
 			else
 				isCompleteQuest = player.isCompleteQuest(1929);
-		}
-		else {
+		} else {
 			QuestState qs = player.getQuestStateList().getQuestState(2900);
-			if(qs != null)
+			if (qs != null)
 				isCompleteQuest = player.isCompleteQuest(2900) || (qs.getStatus() == QuestStatus.START && qs.getQuestVars().getQuestVars() == 99);
 			else
 				isCompleteQuest = player.isCompleteQuest(2900);
@@ -305,8 +302,8 @@ public class StigmaService {
 		}
 
 		/*
-		 * Advenced Stigma Quest 1st - Elyos: 3930, Asmodians: 4934 2nd - Elyos: 3931, Asmodians: 4935 3rd- Elyos: 3932,
-		 * Asmodians: 4936 4th - Elyos: 11049, Asmodians: 21049 5th - Elyos: 30217, Asmodians: 30317
+		 * Advenced Stigma Quest 1st - Elyos: 3930, Asmodians: 4934 2nd - Elyos: 3931, Asmodians: 4935 3rd- Elyos: 3932, Asmodians: 4936 4th - Elyos:
+		 * 11049, Asmodians: 21049 5th - Elyos: 30217, Asmodians: 30317
 		 */
 		if (player.getRace() == Race.ELYOS) {
 			// Check whether Stigma Quests
@@ -324,8 +321,7 @@ public class StigmaService {
 				return 2;
 			else if (player.isCompleteQuest(3930))
 				return 1;
-		}
-		else {
+		} else {
 			// Check whether Stigma Quests
 			if (!player.isCompleteQuest(2900))
 				return 0;
@@ -366,34 +362,23 @@ public class StigmaService {
 				if (stigmaCount == 1) {
 					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask())
 						return true;
-				}
-				else if (stigmaCount == 2) {
-					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask())
+				} else if (stigmaCount == 2) {
+					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask())
 						return true;
-				}
-				else if (stigmaCount == 3) {
-					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask())
+				} else if (stigmaCount == 3) {
+					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask())
 						return true;
-				}
-				else if (stigmaCount == 4) {
-					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA4.getSlotIdMask())
+				} else if (stigmaCount == 4) {
+					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA4.getSlotIdMask())
 						return true;
-				}
-				else if (stigmaCount == 5) {
-					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA4.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.STIGMA5.getSlotIdMask())
+				} else if (stigmaCount == 5) {
+					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.STIGMA3.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA4.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.STIGMA5.getSlotIdMask())
 						return true;
-				}
-				else if (stigmaCount == 6) {
+				} else if (stigmaCount == 6) {
 					return true;
 				}
 			}
@@ -406,34 +391,23 @@ public class StigmaService {
 				if (advStigmaCount == 1) {
 					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask())
 						return true;
-				}
-				else if (advStigmaCount == 2) {
-					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask())
+				} else if (advStigmaCount == 2) {
+					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask())
 						return true;
-				}
-				else if (advStigmaCount == 3) {
-					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask())
+				} else if (advStigmaCount == 3) {
+					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask())
 						return true;
-				}
-				else if (advStigmaCount == 4) {
-					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA4.getSlotIdMask())
+				} else if (advStigmaCount == 4) {
+					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA4.getSlotIdMask())
 						return true;
-				}
-				else if (advStigmaCount == 5) {
-					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA4.getSlotIdMask()
-							|| itemSlotToEquip == ItemSlot.ADV_STIGMA5.getSlotIdMask())
+				} else if (advStigmaCount == 5) {
+					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.ADV_STIGMA3.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA4.getSlotIdMask()
+						|| itemSlotToEquip == ItemSlot.ADV_STIGMA5.getSlotIdMask())
 						return true;
-				}
-				else if (advStigmaCount == 6) {
+				} else if (advStigmaCount == 6) {
 					return true;
 				}
 			}

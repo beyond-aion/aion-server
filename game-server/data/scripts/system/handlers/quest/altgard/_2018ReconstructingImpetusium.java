@@ -9,9 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * Talk with Gulkalla (203649). Destroy Hero Spirits (210588, 210722) (3). Go back to Gulkalla. Bring Umkata's Three
- * Tokens (700097) to Umkata's Grave (700098), summon the spirit of Umkata (210752, spawn), and destroy it. Report back
- * to Gulkalla.
+ * Talk with Gulkalla (203649). Destroy Hero Spirits (210588, 210722) (3). Go back to Gulkalla. Bring Umkata's Three Tokens (700097) to Umkata's Grave
+ * (700098), summon the spirit of Umkata (210752, spawn), and destroy it. Report back to Gulkalla.
  * 
  * @author Mr. Poke
  * @modified Gigi
@@ -53,11 +52,9 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 1693);
 							}
 						}
@@ -89,11 +86,9 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							if (QuestService.collectItemCheck(env, false)) { // don't remove yet
-								QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f,
-									(byte) 0);
+								QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f, (byte) 0);
 								return closeDialogWindow(env);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 2120);
 							}
 						}
@@ -103,8 +98,7 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203649) { // Gulkalla
 				return sendQuestEndDialog(env);
 			}
@@ -122,8 +116,7 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
 		if (var >= 1 && var < 4) {
 			int[] npcs = { 210588, 210722 };
 			return defaultOnKillEvent(env, npcs, var, var + 1); // 2 - 4
-		}
-		else if (var == 5) {
+		} else if (var == 5) {
 			if (env.getTargetId() == 210752) {
 				qs.setQuestVar(7); // 7
 				updateQuestStatus(env);

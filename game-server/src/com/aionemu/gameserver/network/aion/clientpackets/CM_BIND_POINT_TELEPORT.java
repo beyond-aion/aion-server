@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -20,10 +19,10 @@ public class CM_BIND_POINT_TELEPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readC();//1 casting, 2 cancel, 3 done
-		if(action == 1){
+		action = readC();// 1 casting, 2 cancel, 3 done
+		if (action == 1) {
 			locId = readD();
-			kinah = readQ();//kinah
+			kinah = readQ();// kinah
 		}
 	}
 

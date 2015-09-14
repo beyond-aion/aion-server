@@ -33,11 +33,11 @@ public class ItemChargeService {
 			return Collections.singletonList(selectedItem);
 		}
 		return Collections2.filter(player.getEquipment().getEquippedItems(), new Predicate<Item>() {
+
 			@Override
 			public boolean apply(Item item) {
-				return item.getAvailableChargeLevel(player) != 0 && item.getImprovement() != null
-						&& item.getImprovement().getChargeWay() == chargeWay
-						&& item.getChargePoints() < ChargeInfo.LEVEL2;
+				return item.getAvailableChargeLevel(player) != 0 && item.getImprovement() != null && item.getImprovement().getChargeWay() == chargeWay
+					&& item.getChargePoints() < ChargeInfo.LEVEL2;
 			}
 
 		});
@@ -54,6 +54,7 @@ public class ItemChargeService {
 		final long payAmount = calculatePrice(filteredItems, player);
 
 		RequestResponseHandler request = new RequestResponseHandler(player) {
+
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				if (processPayment(player, chargeWay, payAmount)) {
@@ -69,11 +70,9 @@ public class ItemChargeService {
 			}
 
 		};
-		int msg = chargeWay == 1 ? SM_QUESTION_WINDOW.STR_ITEM_CHARGE_ALL_CONFIRM
-				: SM_QUESTION_WINDOW.STR_ITEM_CHARGE2_ALL_CONFIRM;
+		int msg = chargeWay == 1 ? SM_QUESTION_WINDOW.STR_ITEM_CHARGE_ALL_CONFIRM : SM_QUESTION_WINDOW.STR_ITEM_CHARGE2_ALL_CONFIRM;
 		if (player.getResponseRequester().putRequest(msg, request))
-			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(msg,
-					senderObj, 0, String.valueOf(payAmount)));
+			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(msg, senderObj, 0, String.valueOf(payAmount)));
 	}
 
 	private static long calculatePrice(Collection<Item> items, Player player) {
@@ -109,12 +108,9 @@ public class ItemChargeService {
 		player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		if (chargeWay == 1) {
-			PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_SUCCESS(new DescriptionId(item.getNameId()), level));
-		}
-		else {
-			PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE2_SUCCESS(new DescriptionId(item.getNameId()), level));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_SUCCESS(new DescriptionId(item.getNameId()), level));
+		} else {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE2_SUCCESS(new DescriptionId(item.getNameId()), level));
 		}
 		player.getGameStats().updateStatsVisually();
 	}
@@ -166,7 +162,7 @@ public class ItemChargeService {
 			case 2:
 				switch (getNextChargeLevel(item)) {
 					case 1: // full
-						currentChargeRatio -= ( ((float) item.getChargePoints() / (float) ChargeInfo.LEVEL1) );
+						currentChargeRatio -= (((float) item.getChargePoints() / (float) ChargeInfo.LEVEL1));
 						money = Math.ceil(firstLevel * currentChargeRatio) + updateLevel;
 						break;
 					case 2: // update

@@ -59,8 +59,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (qs.getQuestVarById(0) == 2) {
+							} else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -84,8 +83,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204546) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT: {
@@ -118,14 +116,12 @@ public class _1644AVeryOldLetter extends QuestHandler {
 			}
 		}
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

@@ -70,8 +70,7 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 799282) {
+			} else if (targetId == 799282) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -81,8 +80,7 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 							else
 								return sendQuestDialog(env, 10001);
-						}
-						else if (var == 3)
+						} else if (var == 3)
 							return sendQuestDialog(env, 10000);
 						else if (var == 4 || var == 260)
 							return sendQuestDialog(env, 2375);
@@ -93,13 +91,12 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2); // 2
 					case CHECK_USER_HAS_QUEST_ITEM:
-					   if (QuestService.collectItemCheck(env, true)) {
-						   changeQuestStep(env, 2, 3, false);
-						   PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						   return true;
-					   }
-					   else
-						  return sendQuestDialog(env, 10001);
+						if (QuestService.collectItemCheck(env, true)) {
+							changeQuestStep(env, 2, 3, false);
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							return true;
+						} else
+							return sendQuestDialog(env, 10001);
 					case SETPRO5:
 						return defaultCloseDialog(env, 4, 5, 182207608, 2, 0, 0); // 5
 					case SETPRO8:
@@ -107,24 +104,20 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 					case SET_SUCCEED:
 						return defaultCloseDialog(env, 9, 9, true, false); // reward
 				}
-			}
-			else if (targetId == 700703 || targetId == 700704) {
+			} else if (targetId == 700703 || targetId == 700704) {
 				if (qs.getQuestVarById(0) == 2 && env.getDialog() == DialogAction.USE_OBJECT) {
 					return true; // loot
 				}
-			}
-			else if (targetId == 700701) {
+			} else if (targetId == 700701) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return useQuestObject(env, 5, 6, false, 0, 0, 0, 182207608, 1); // 6
 				}
-			}
-			else if (targetId == 700702) {
+			} else if (targetId == 700702) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return useQuestObject(env, 6, 7, false, 0, 0, 0, 182207608, 1); // 7
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799226) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -142,14 +135,14 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVarById(0) != 3)
 			return false;
 
-		int[] targets = {216102, 216103};
-		
+		int[] targets = { 216102, 216103 };
+
 		if (defaultOnKillEvent(env, targets, 0, 5, 1)) {
-		   if (qs.getQuestVarById(1) == 5) {
-			  qs.setQuestVar(4);
-			  updateQuestStatus(env);
-		   }
-		   return true;
+			if (qs.getQuestVarById(1) == 5) {
+				qs.setQuestVar(4);
+				updateQuestStatus(env);
+			}
+			return true;
 		}
 		return false;
 	}
@@ -169,8 +162,7 @@ public class _20022SpreadingAsmodaesReach extends QuestHandler {
 		if (id == 182207609 && var == 8) {
 			if (MathUtil.isInSphere(player, 285.17746f, 1534.7837f, 356.52f, 10)) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 8, 9, false, 553)); // 9
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300426));
 				return HandlerResult.SUCCESS;
 			}

@@ -33,7 +33,8 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204182, 203550, 790003, 790002, 203546, 204264, 204061 };
-		int[] stigmas = { 140000008, 140000027, 140000047, 140000076, 140000131, 140000147, 140000098, 140000112, 140000859, 140000859, 140000943, 140001002 };
+		int[] stigmas = { 140000008, 140000027, 140000047, 140000076, 140000131, 140000147, 140000098, 140000112, 140000859, 140000859, 140000943,
+			140001002 };
 		qe.registerOnLevelUp(questId);
 		qe.registerOnMovieEndQuest(156, questId);
 		qe.registerQuestNpc(204263).addOnKillEvent(questId);
@@ -69,8 +70,8 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						}
 						case SETPRO1: {
 							if (defaultCloseDialog(env, 0, 1)) { // 1
-							   TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f);
-							   return true;
+								TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f);
+								return true;
 							}
 						}
 					}
@@ -81,8 +82,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 10) {
+							} else if (var == 10) {
 								return sendQuestDialog(env, 4080);
 							}
 						}
@@ -126,8 +126,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 9) {
+							} else if (var == 9) {
 								return sendQuestDialog(env, 3739);
 							}
 						}
@@ -136,8 +135,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								changeQuestStep(env, 4, 95, false); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 268.47397f, 251.80275f,
-									125.8369f);
+								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 268.47397f, 251.80275f, 125.8369f);
 								return closeDialogWindow(env);
 							}
 						}
@@ -159,11 +157,9 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 95) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 96) {
+							} else if (var == 96) {
 								return sendQuestDialog(env, 3057);
-							}
-							else if (var == 97) {
+							} else if (var == 97) {
 								return sendQuestDialog(env, 3398);
 							}
 						}
@@ -182,21 +178,17 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 											ItemService.addItem(player, 141000001, 300 - existendStigmaShards);
 											changeQuestStep(env, 96, 99, false); // 99
 											return sendQuestDialog(env, 3058);
-										}
-										else {
+										} else {
 											return closeDialogWindow(env);
 										}
-									}
-									else {
+									} else {
 										changeQuestStep(env, 96, 99, false); // 99
 										return sendQuestDialog(env, 3058);
 									}
-								}
-								else {
+								} else {
 									return closeDialogWindow(env);
 								}
-							}
-							else if (var == 99) {
+							} else if (var == 99) {
 								return sendQuestDialog(env, 3058);
 							}
 						}
@@ -217,8 +209,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204061) { // Aud
 				return sendQuestEndDialog(env);
 			}
@@ -267,8 +258,8 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					removeStigma(env);
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}
@@ -287,11 +278,10 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					removeStigma(env);
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
-				}
-				else if (var == 9) {
+				} else if (var == 9) {
 					removeStigma(env);
 					return true;
 				}

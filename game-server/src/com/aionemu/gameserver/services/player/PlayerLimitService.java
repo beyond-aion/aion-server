@@ -30,8 +30,7 @@ public class PlayerLimitService {
 		if (limit < reward) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DAY_CANNOT_SELL_NPC(limit));
 			return false;
-		}
-		else {
+		} else {
 			limit -= reward;
 			sellLimit.put(accoutnId, limit);
 			return true;

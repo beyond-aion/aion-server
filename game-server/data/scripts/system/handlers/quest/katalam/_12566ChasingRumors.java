@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author cheatkiller
- *
  */
 public class _12566ChasingRumors extends QuestHandler {
 
@@ -35,26 +33,22 @@ public class _12566ChasingRumors extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 800967) { 
+			if (targetId == 800967) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 800551) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 800551) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}
 			}
-		}	
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800551) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -68,19 +62,18 @@ public class _12566ChasingRumors extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if (var == 1) {
-  			changeQuestStep(env, 1, 2, true);
-    		return true;
-  		}
-  	}
+			int var = qs.getQuestVarById(0);
+			if (var == 1) {
+				changeQuestStep(env, 1, 2, true);
+				return true;
+			}
+		}
 		return false;
 	}
 }
-

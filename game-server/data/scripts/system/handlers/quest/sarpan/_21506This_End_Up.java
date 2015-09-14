@@ -14,21 +14,21 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _21506This_End_Up extends QuestHandler {
+
 	private final static int questId = 21506;
-	
+
 	public _21506This_End_Up() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205711).addOnQuestStart(questId);
 		qe.registerQuestNpc(205715).addOnTalkEvent(questId);
-	}	
-	
+	}
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -36,34 +36,29 @@ public class _21506This_End_Up extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205711) { 
+			if (targetId == 205711) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					QuestService.questTimerStart(env, 600);
 					return sendQuestStartDialog(env, 182213103, 1);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205715) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 2375);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					QuestService.questTimerEnd(env);
 					removeQuestItem(env, 182213103, 1);
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205715) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
@@ -73,19 +68,18 @@ public class _21506This_End_Up extends QuestHandler {
 		}
 		return false;
 	}
-		
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-				qs.setStatus(QuestStatus.NONE);
-				qs.setQuestVar(0);
-				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-				DataManager.QUEST_DATA.getQuestById(questId).getName()));
-				return true;
+			qs.setStatus(QuestStatus.NONE);
+			qs.setQuestVar(0);
+			updateQuestStatus(env);
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+				.getName()));
+			return true;
 		}
 		return false;
 	}

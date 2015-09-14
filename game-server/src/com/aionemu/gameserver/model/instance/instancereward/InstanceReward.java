@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
- *
  * @author xTz
  */
 public class InstanceReward<T extends InstancePlayerReward> {
@@ -89,7 +88,7 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		instanceRewards.clear();
 	}
 
-	protected InstanceReward<?> getInstanceReward()  {
+	protected InstanceReward<?> getInstanceReward() {
 		return this;
 	}
 }

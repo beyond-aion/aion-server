@@ -3,17 +3,14 @@ package com.aionemu.gameserver.model.instance.playerreward;
 import com.aionemu.gameserver.model.Race;
 
 /**
- *
  * @author Ritsu
  */
-public class IdgelDomePlayerReward extends InstancePlayerReward 
-{
+public class IdgelDomePlayerReward extends InstancePlayerReward {
 
 	private Race race;
 	private int fragmentedCeramium, idgelDomeBox, baseReward, bonusReward, gloryPoints;
 
-	public IdgelDomePlayerReward(Integer object, Race race) 
-	{
+	public IdgelDomePlayerReward(Integer object, Race race) {
 		super(object);
 		this.race = race;
 	}

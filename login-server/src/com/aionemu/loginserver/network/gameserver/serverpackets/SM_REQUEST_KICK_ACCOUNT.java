@@ -3,7 +3,6 @@ package com.aionemu.loginserver.network.gameserver.serverpackets;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsServerPacket;
 
-
 /**
  * In this packet LoginSerer is requesting kicking account from GameServer.
  * 

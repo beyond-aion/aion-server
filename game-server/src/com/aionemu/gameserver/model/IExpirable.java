@@ -10,7 +10,7 @@ public interface IExpirable {
 	public int getExpireTime();
 
 	public void expireEnd(Player player);
-	
+
 	public boolean canExpireNow();
 
 	public void expireMessage(Player player, int time);

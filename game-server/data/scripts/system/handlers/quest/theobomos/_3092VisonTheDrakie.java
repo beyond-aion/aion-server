@@ -50,8 +50,7 @@ public class _3092VisonTheDrakie extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798214: { // Vison
 					switch (env.getDialog()) {
@@ -71,20 +70,18 @@ public class _3092VisonTheDrakie extends QuestHandler {
 				case 798191: {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
-					if(env.getDialog() == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
-							return checkQuestItems(env, 1, 2, true, 5, 2716); // reward
+					if (env.getDialog() == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						return checkQuestItems(env, 1, 2, true, 5, 2716); // reward
 					}
 					if (env.getDialogId() == DialogAction.FINISH_DIALOG.id())
 						return defaultCloseDialog(env, 1, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798191) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 798191) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

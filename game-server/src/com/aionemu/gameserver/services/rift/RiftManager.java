@@ -34,8 +34,7 @@ public class RiftManager {
 		if (spawn.hasPool()) {
 			SpawnTemplate template = spawn.getSpawnTemplates().get(0);
 			riftGroups.put(template.getAnchor(), template);
-		}
-		else {
+		} else {
 			for (SpawnTemplate template : spawn.getSpawnTemplates()) {
 				riftGroups.put(template.getAnchor(), template);
 			}
@@ -75,8 +74,7 @@ public class RiftManager {
 				spawned = vl.getSpawned().size();
 				vl.getSpawned().add(master);
 				vl.getSpawned().add(slave);
-			}
-			else {
+			} else {
 				spawned = rl.getSpawned().size();
 				rl.getSpawned().add(master);
 				rl.getSpawned().add(slave);
@@ -95,8 +93,7 @@ public class RiftManager {
 
 		World world = World.getInstance();
 		world.storeObject(npc);
-		world.setPosition(npc, template.getWorldId(), instance, template.getX(),
-				template.getY(), template.getZ(), template.getHeading());
+		world.setPosition(npc, template.getWorldId(), instance, template.getX(), template.getY(), template.getZ(), template.getHeading());
 		world.spawn(npc);
 		rifts.add(npc);
 

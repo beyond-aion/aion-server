@@ -61,20 +61,11 @@ public class XmlDataLoader {
 			return (StaticData) un.unmarshal(new FileReader(CACHE_XML_FILE));
 		}
 		/*
-		catch (IllegalAnnotationsException e) {
-			for (IllegalAnnotationException detail : e.getErrors())
-				log.error(detail.getMessage());
-			throw new Error("Error while loading static data", e);
-		}
-		catch (FileNotFoundException e) {
-			log.error("Error while loading static data", e);
-			throw new Error("Error while loading static data", e);
-		}
-		catch (JAXBException e) {
-			log.error("Error while loading static data", e);
-			throw new Error("Error while loading static data", e);
-		}
-		*/
+		 * catch (IllegalAnnotationsException e) { for (IllegalAnnotationException detail : e.getErrors()) log.error(detail.getMessage()); throw new
+		 * Error("Error while loading static data", e); } catch (FileNotFoundException e) { log.error("Error while loading static data", e); throw new
+		 * Error("Error while loading static data", e); } catch (JAXBException e) { log.error("Error while loading static data", e); throw new
+		 * Error("Error while loading static data", e); }
+		 */
 		catch (Exception e) {
 			log.error("Error while loading static data", e);
 			return null;
@@ -92,8 +83,7 @@ public class XmlDataLoader {
 
 		try {
 			schema = sf.newSchema(new File(XML_SCHEMA_FILE));
-		}
-		catch (SAXException saxe) {
+		} catch (SAXException saxe) {
 			log.error("Error while getting schema", saxe);
 			throw new Error("Error while getting schema", saxe);
 		}
@@ -121,8 +111,7 @@ public class XmlDataLoader {
 		XmlMerger merger = new XmlMerger(cleanMainXml, cachedXml);
 		try {
 			merger.process();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while merging xml files", e);
 			throw new Error("Error while merging xml files", e);
 		}

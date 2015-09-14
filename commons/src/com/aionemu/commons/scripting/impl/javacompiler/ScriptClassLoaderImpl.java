@@ -122,8 +122,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 			if (file.isDirectory()) {
 				Set<String> packageClasses = ClassUtils.getClassNamesFromPackage(file, packageName, false);
 				classNames.addAll(packageClasses);
-			}
-			else if (FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
+			} else if (FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
 				while (!FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
 					file = file.getParentFile();
 				}
@@ -144,8 +143,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 					byte[] data = getRawClassByName(cn);
 					OutputStream os = bc.openOutputStream();
 					os.write(data);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error("Error while loading class from package " + packageName, e);
 					throw e;
 				}
@@ -157,8 +155,8 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 	}
 
 	/**
-	 * Finds class with the specified name from the URL search path. Any URLs referring to JAR files are loaded and opened
-	 * as needed until the class is found.
+	 * Finds class with the specified name from the URL search path. Any URLs referring to JAR files are loaded and opened as needed until the class is
+	 * found.
 	 * 
 	 * @param name
 	 *          the name of the class
@@ -177,21 +175,17 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		try {
 			is = resource.openStream();
 			clazz = IOUtils.toByteArray(is);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading class data: " + name, e);
 			throw e;
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			log.error("Can't open input stream for resource: " + name);
 			throw new IllegalArgumentException("Failed to open input stream for resource: " + name);
-		}
-		finally {
+		} finally {
 			if (is != null) {
 				try {
 					is.close();
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error("Error while closing stream", e);
 				}
 			}

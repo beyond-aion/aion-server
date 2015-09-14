@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("kinquid")
@@ -67,8 +66,7 @@ public class KinquidAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelSkillTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19233, 60, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 

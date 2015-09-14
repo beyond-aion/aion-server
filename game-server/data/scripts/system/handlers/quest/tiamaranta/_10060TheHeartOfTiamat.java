@@ -32,14 +32,14 @@ public class _10060TheHeartOfTiamat extends QuestHandler {
 		qe.registerQuestNpc(205842).addOnTalkEvent(questId);
 		qe.registerQuestNpc(800018).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env);
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env){
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
@@ -47,7 +47,7 @@ public class _10060TheHeartOfTiamat extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205842) {
 				switch (dialog) {
@@ -60,14 +60,12 @@ public class _10060TheHeartOfTiamat extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 800018) { 
+			} else if (targetId == 800018) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (player.getInventory().getItemCountByItemId(182212591) == 1)
+						} else if (player.getInventory().getItemCountByItemId(182212591) == 1)
 							return sendQuestDialog(env, 1693);
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
@@ -80,24 +78,22 @@ public class _10060TheHeartOfTiamat extends QuestHandler {
 						}
 					}
 					case SETPRO2: {
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800018) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
@@ -105,22 +101,26 @@ public class _10060TheHeartOfTiamat extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q10060A")) && item.getItemId() == 182212555) {
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 701119, player.getX(), player.getY(), player.getZ(), (byte) 100);
-						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218822, player.getX() + 3, player.getY() - 3, player.getZ(), (byte) 100);
-						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218822, player.getX() - 3, player.getY() + 3, player.getZ(), (byte) 100);
+						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218822, player.getX() + 3, player.getY() - 3, player.getZ(),
+							(byte) 100);
+						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 218822, player.getX() - 3, player.getY() + 3, player.getZ(),
+							(byte) 100);
 					}
-				}, 3000);	
+				}, 3000);
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
-						 for (Npc npc : World.getInstance().getNpcs()) {
-							 if (npc.getNpcId() == 701119)
-								 npc.getController().onDelete();
-						 }
+						for (Npc npc : World.getInstance().getNpcs()) {
+							if (npc.getNpcId() == 701119)
+								npc.getController().onDelete();
+						}
 					}
-				}, 30000);	
+				}, 30000);
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, true));
 			}
 		}

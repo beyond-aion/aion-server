@@ -75,8 +75,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore SkillList data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return new PlayerSkillList(skills);
@@ -105,11 +104,9 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 			addSkills(con, player, skills);
 			updateSkills(con, player, skills);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Failed to open connection to database while saving SkillList for player " + player.getObjectId());
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 
@@ -138,11 +135,9 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 			ps.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't add skills for player: " + player.getObjectId(), e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(ps);
 		}
 	}
@@ -167,11 +162,9 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 			ps.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't update skills for player: " + player.getObjectId());
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(ps);
 		}
 	}
@@ -195,11 +188,9 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 			ps.executeBatch();
 			con.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't delete skills for player: " + player.getObjectId());
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(ps);
 		}
 	}

@@ -16,14 +16,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropExcludedNpcs")
 public class GlobalDropExcludedNpcs {
 
-    @XmlElement(name = "gd_excluded_npc")
-    protected List<GlobalDropExcludedNpc> gdExcludedNpcs;
+	@XmlElement(name = "gd_excluded_npc")
+	protected List<GlobalDropExcludedNpc> gdExcludedNpcs;
 
-    public List<GlobalDropExcludedNpc> getGlobalDropExcludedNpcs() {
-        if (gdExcludedNpcs == null) {
-            gdExcludedNpcs = new ArrayList<GlobalDropExcludedNpc>();
-        }
-        return this.gdExcludedNpcs;
-    }
+	public List<GlobalDropExcludedNpc> getGlobalDropExcludedNpcs() {
+		if (gdExcludedNpcs == null) {
+			gdExcludedNpcs = new ArrayList<GlobalDropExcludedNpc>();
+		}
+		return this.gdExcludedNpcs;
+	}
 
 }

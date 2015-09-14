@@ -10,7 +10,6 @@ import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
 
-
 /**
  * @author ATracer modified by Wakizashi, Sippolo, kecimis
  */
@@ -29,10 +28,9 @@ public class ShieldEffect extends EffectTemplate {
 	@XmlAttribute
 	protected int minradius = 0;
 
-	
 	@Override
 	public void applyEffect(Effect effect) {
-		//check for condition race, skillId: 10317,10318, implemented as RaceCondition
+		// check for condition race, skillId: 10317,10318, implemented as RaceCondition
 		effect.addToEffectedController();
 	}
 
@@ -42,8 +40,8 @@ public class ShieldEffect extends EffectTemplate {
 		int valueWithDelta = value + delta * skillLvl;
 		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
 
-		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent,
-			effect, hitType, this.getType(), this.hitTypeProb);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, this.getType(),
+			this.hitTypeProb);
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
 		effect.setAttackShieldObserver(asObserver, position);
@@ -61,5 +59,5 @@ public class ShieldEffect extends EffectTemplate {
 	public ShieldType getType() {
 		return ShieldType.NORMAL;
 	}
-	
+
 }

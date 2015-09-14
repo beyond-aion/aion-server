@@ -50,8 +50,7 @@ public final class Locator {
 		URL url = null;
 		if (c == null) {
 			url = ClassLoader.getSystemResource(resource);
-		}
-		else {
+		} else {
 			url = c.getResource(resource);
 		}
 		if (url != null) {
@@ -60,8 +59,7 @@ public final class Locator {
 				int pling = u.indexOf("!");
 				String jarName = u.substring(4, pling);
 				return new File(fromURI(jarName));
-			}
-			else if (u.startsWith("file:")) {
+			} else if (u.startsWith("file:")) {
 				int tail = u.indexOf(resource);
 				String dirName = u.substring(0, tail);
 				return new File(fromURI(dirName));
@@ -88,8 +86,7 @@ public final class Locator {
 		URL url = null;
 		try {
 			url = new URL(uri);
-		}
-		catch (MalformedURLException emYouEarlEx) {
+		} catch (MalformedURLException emYouEarlEx) {
 			// Ignore malformed exception
 		}
 		if (url == null || !("file".equals(url.getProtocol()))) {
@@ -105,8 +102,7 @@ public final class Locator {
 
 		uri = buf.toString().replace('/', File.separatorChar);
 
-		if (File.pathSeparatorChar == ';' && uri.startsWith("\\") && uri.length() > 2 && Character.isLetter(uri.charAt(1))
-			&& uri.lastIndexOf(':') > -1) {
+		if (File.pathSeparatorChar == ';' && uri.startsWith("\\") && uri.length() > 2 && Character.isLetter(uri.charAt(1)) && uri.lastIndexOf(':') > -1) {
 			uri = uri.substring(1);
 		}
 		String path = decodeUri(uri);
@@ -137,8 +133,7 @@ public final class Locator {
 						sb.append((char) ((i1 << 4) + i2));
 					}
 				}
-			}
-			else {
+			} else {
 				sb.append(c);
 			}
 		}
@@ -147,8 +142,8 @@ public final class Locator {
 	}
 
 	/**
-	 * Get an array of URLs representing all of the jar files in the given location. If the location is a file, it is
-	 * returned as the only element of the array. If the location is a directory, it is scanned for jar files.
+	 * Get an array of URLs representing all of the jar files in the given location. If the location is a file, it is returned as the only element of
+	 * the array. If the location is a directory, it is scanned for jar files.
 	 * 
 	 * @param location
 	 *          the location to scan for Jars.
@@ -161,9 +156,8 @@ public final class Locator {
 	}
 
 	/**
-	 * Get an array of URLs representing all of the files of a given set of extensions in the given location. If the
-	 * location is a file, it is returned as the only element of the array. If the location is a directory, it is scanned
-	 * for matching files.
+	 * Get an array of URLs representing all of the files of a given set of extensions in the given location. If the location is a file, it is returned
+	 * as the only element of the array. If the location is a directory, it is scanned for matching files.
 	 * 
 	 * @param location
 	 *          the location to scan for files.

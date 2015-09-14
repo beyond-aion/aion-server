@@ -20,67 +20,54 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Ritsu
- * 
  */
 @AIName("enragednightmare")
-public class EnragedNightmareAI2 extends AggressiveNpcAI2
-{
+public class EnragedNightmareAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> skillTask;
 	private Npc boss;
 
 	@Override
-	protected void handleCreatureSee(Creature creature) 
-	{
+	protected void handleCreatureSee(Creature creature) {
 		useSkill(this, boss);
 	}
 
 	@Override
-	protected void handleCreatureMoved(Creature creature) 
-	{
+	protected void handleCreatureMoved(Creature creature) {
 		useSkill(this, boss);
 	}
 
-	private void cancelTask() 
-	{
-		if (skillTask != null && !skillTask.isCancelled()) 
-		{
+	private void cancelTask() {
+		if (skillTask != null && !skillTask.isCancelled()) {
 			skillTask.cancel(true);
 		}
 	}
 
 	@Override
-	protected void handleDied() 
-	{
+	protected void handleDied() {
 		cancelTask();
 		super.handleDied();
 	}
 
 	@Override
-	protected void handleDespawned() 
-	{
+	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
 	}
 
 	@Override
-	protected void handleSpawned()
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
 
-		if (getOwner().getPosition().getX() == 521.585f && getOwner().getPosition().getY() == 510.16528f)
-		{
+		if (getOwner().getPosition().getX() == 521.585f && getOwner().getPosition().getY() == 510.16528f) {
 			((AbstractAI) getOwner().getAi2()).setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI2) getOwner().getAi2());
 			getOwner().setState(1);
 			getOwner().getMoveController().moveToPoint(521.60913f, 551.00684f, 198.75f);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
-		}
-		else
-		{
+		} else {
 			((AbstractAI) getOwner().getAi2()).setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI2) getOwner().getAi2());
 			getOwner().setState(1);
@@ -90,22 +77,17 @@ public class EnragedNightmareAI2 extends AggressiveNpcAI2
 
 	}
 
-	private void useSkill(NpcAI2 ai, Creature creature)
-	{
+	private void useSkill(NpcAI2 ai, Creature creature) {
 		boss = getPosition().getWorldMapInstance().getNpc(233467);
-		if (boss != null && !NpcActions.isAlreadyDead(boss))
-		{
-			if (boss.getLifeStats().getHpPercentage() < 100)
-			{
+		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+			if (boss.getLifeStats().getHpPercentage() < 100) {
 				EmoteManager.emoteStopAttacking(getOwner());
 				SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
-				if (getOwner().getController().useSkill(21342))
-				{
-					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-					{
+				if (getOwner().getController().useSkill(21342)) {
+					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
-						public void run()	
-						{
+						public void run() {
 							AI2Actions.deleteOwner(EnragedNightmareAI2.this);
 						}
 					}, 3000);
@@ -115,8 +97,7 @@ public class EnragedNightmareAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleBackHome() 
-	{
+	protected void handleBackHome() {
 
 	}
 }

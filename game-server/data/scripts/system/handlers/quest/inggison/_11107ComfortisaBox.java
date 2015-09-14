@@ -45,8 +45,7 @@ public class _11107ComfortisaBox extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -63,8 +62,7 @@ public class _11107ComfortisaBox extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 296489) {
@@ -82,8 +80,7 @@ public class _11107ComfortisaBox extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 296490) {
+		} else if (targetId == 296490) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -98,8 +95,7 @@ public class _11107ComfortisaBox extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 296491) {
+		} else if (targetId == 296491) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)

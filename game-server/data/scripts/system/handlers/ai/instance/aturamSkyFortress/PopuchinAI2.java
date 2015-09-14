@@ -17,7 +17,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("popuchin")
@@ -55,8 +54,7 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
 														spawn(217374, p.getX(), p.getY(), p.getZ(), p.getHeading());
 														startBombTask();
 													}
-												}
-												else {
+												} else {
 													spawnRndBombs();
 													startBombTask();
 												}
@@ -133,5 +131,5 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
 		super.handleDied();
 		getPosition().getWorldMapInstance().getDoors().get(68).setOpen(true);
 	}
-	
+
 }

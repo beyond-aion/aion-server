@@ -27,4 +27,4 @@ public enum WorldDropType {
 	STEEL_RAKE_INSTANCE,
 	OTHER_INSTANCES,
 	NONE
- }
+}

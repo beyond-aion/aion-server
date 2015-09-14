@@ -10,27 +10,21 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("shugoadmirer")
-public class ShugoAdmirerAI2 extends NpcAI2 
-{
+public class ShugoAdmirerAI2 extends NpcAI2 {
 
 	@Override
-	protected void handleDialogStart(Player player)
-	{
+	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex)
-	{
+	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		InstanceHandler instanceHandler = getPosition().getWorldMapInstance().getInstanceHandler();
-		if (dialogId == 10000)
-		{
-			switch (getNpcId())
-			{
+		if (dialogId == 10000) {
+			switch (getNpcId()) {
 				case 831110: // start stage 1
 					instanceHandler.onChangeStageList(StageList.START_STAGE_1_PHASE_1);
 					break;

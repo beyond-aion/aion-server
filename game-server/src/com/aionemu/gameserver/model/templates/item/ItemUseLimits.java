@@ -74,8 +74,7 @@ public class ItemUseLimits {
 
 		try {
 			return ZoneName.get(this.usearea);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -105,7 +104,7 @@ public class ItemUseLimits {
 	public int getMinRankPurchable() {
 		return minRankPuchable;
 	}
-	
+
 	public int getRecommendRank() {
 		return recommendRank;
 	}

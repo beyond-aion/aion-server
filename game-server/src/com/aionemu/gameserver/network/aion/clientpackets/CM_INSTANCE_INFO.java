@@ -35,7 +35,7 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 	 */
 	@Override
 	protected void runImpl() {
-		if(unk2 == 1 && !getConnection().getActivePlayer().isInTeam())
+		if (unk2 == 1 && !getConnection().getActivePlayer().isInTeam())
 			log.debug("Received CM_INSTANCE_INFO with teamdata request but player has no team!");
 		sendPacket(new SM_INSTANCE_INFO(getConnection().getActivePlayer(), true, getConnection().getActivePlayer().getCurrentTeam()));
 	}

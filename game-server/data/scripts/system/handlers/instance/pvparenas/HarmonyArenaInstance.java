@@ -40,7 +40,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 public class HarmonyArenaInstance extends GeneralInstanceHandler {
@@ -62,8 +61,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			instanceReward.regPlayerReward(object);
 			instanceReward.getPlayerReward(object).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(object);
-		}
-		else {
+		} else {
 			instanceReward.portToPosition(player);
 		}
 		sendEnterPacket(player);
@@ -77,19 +75,24 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		}
 
 		instance.doOnAllPlayers((Player opponent) -> {
-            if (!group.containPlayer(opponent.getObjectId())) {
-                PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, object), getInstanceReward(), getTime()));
-                PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()), getInstanceReward(), getTime()));
-                PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(), getTime()));
-            }
-            else {
-                PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()), getInstanceReward(), getTime()));
-                if (!Objects.equals(object, opponent.getObjectId())) {
-                    PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(), getTime()));
-                }
-            }
-        });
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 6, player.getObjectId()), getInstanceReward(), getTime()));
+			if (!group.containPlayer(opponent.getObjectId())) {
+				PacketSendUtility.sendPacket(opponent,
+					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, object), getInstanceReward(), getTime()));
+				PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()),
+					getInstanceReward(), getTime()));
+				PacketSendUtility
+					.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(), getTime()));
+			} else {
+				PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()),
+					getInstanceReward(), getTime()));
+				if (!Objects.equals(object, opponent.getObjectId())) {
+					PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(),
+						getTime()));
+				}
+			}
+		});
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 6, player.getObjectId()), getInstanceReward(),
+			getTime()));
 		instanceReward.sendPacket(4, object);
 	}
 
@@ -109,8 +112,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			bonus = killBonus;
 			rank = instanceReward.getRank(victimGroup.getPoints());
 			instanceReward.sendPacket(10, victim.getObjectId());
-		}
-		else
+		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
 		if (bonus == 0) {
@@ -128,8 +130,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			}
 			if (master instanceof Player) {
 				Player attaker = (Player) master;
-				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus)
-						* damager.getDamage() / victim.getAggroList().getTotalDamage();
+				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus) * damager.getDamage()
+					/ victim.getAggroList().getTotalDamage();
 				instanceReward.getHarmonyGroupReward(attaker.getObjectId()).addPoints(rewardPoints);
 				sendSystemMsg(attaker, victim, rewardPoints);
 				instanceReward.sendPacket(10, attaker.getObjectId());
@@ -153,8 +155,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	protected void sendSystemMsg(Player player, Creature creature, int rewardPoints) {
 		int nameId = creature.getObjectTemplate().getNameId();
 		DescriptionId name = new DescriptionId(nameId * 2 + 1);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0
-				? creature.getName() : name, rewardPoints));
+		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0 ? creature.getName() : name, rewardPoints));
 	}
 
 	private int getNpcBonus(int npcId) {
@@ -189,6 +190,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		instanceReward.setInstanceStartTime();
 		spawnRings();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				// start round 1
@@ -203,6 +205,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 					instanceReward.sendPacket(10, null);
 					instanceReward.sendPacket(2, null);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							// start round 2
@@ -213,6 +216,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 								instanceReward.sendPacket(2, null);
 								changeZone();
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 									@Override
 									public void run() {
 										// start round 3
@@ -224,6 +228,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 											instanceReward.sendPacket(2, null);
 											changeZone();
 											ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 												@Override
 												public void run() {
 													// end
@@ -266,6 +271,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	private void changeZone() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				for (Player player : instance.getPlayersInside()) {
@@ -279,6 +285,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	private void sendPacket(final AionServerPacket packet) {
 		instance.doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
@@ -306,10 +313,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	private void clearDebuffs(Player player) {
 		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
 			DispelCategoryType category = ef.getSkillTemplate().getDispelCategory();
-			if (category == DispelCategoryType.DEBUFF
-					|| category == DispelCategoryType.DEBUFF_MENTAL
-					|| category == DispelCategoryType.DEBUFF_PHYSICAL
-					|| category == DispelCategoryType.ALL) {
+			if (category == DispelCategoryType.DEBUFF || category == DispelCategoryType.DEBUFF_MENTAL || category == DispelCategoryType.DEBUFF_PHYSICAL
+				|| category == DispelCategoryType.ALL) {
 				ef.endEffect();
 				player.getEffectController().clearEffect(ef);
 			}
@@ -322,8 +327,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(player.getObjectId());
 				float playerRate = player.getRates().getHarmonyRewardRate();
 				AbyssPointsService.addAp(player, group.getBasicAP() + group.getRankingAP() + (int) (group.getScoreAP() * playerRate));
-                                GloryPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + group.getScoreGP());
-				int courage = group.getBasicCourage() + group.getRankingCourage() + (int) (group.getScoreCourage()* playerRate);
+				GloryPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + group.getScoreGP());
+				int courage = group.getBasicCourage() + group.getRankingCourage() + (int) (group.getScoreCourage() * playerRate);
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);
 				}
@@ -337,11 +342,11 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				}
 				int arenaSupply = group.getArenaSupply();
 				if (arenaSupply != 0) {
-				   ItemService.addItem(player, 188052181, arenaSupply);
+					ItemService.addItem(player, 188052181, arenaSupply);
 				}
-                                int arenaSuperiorSupply = group.getArenaSuperiorSupply();
+				int arenaSuperiorSupply = group.getArenaSuperiorSupply();
 				if (arenaSuperiorSupply != 0) {
-				   ItemService.addItem(player, 188052482, arenaSuperiorSupply);
+					ItemService.addItem(player, 188052482, arenaSuperiorSupply);
 				}
 			}
 		}
@@ -349,6 +354,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
@@ -371,8 +377,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		ownerReward.endBoostMoraleEffect(player);
 		ownerReward.applyBoostMoraleEffect(player);
 		instanceReward.sendPacket(4, player.getObjectId());
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 
@@ -381,7 +387,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				Player winner = (Player) lastAttacker;
 				Integer winnerObj = winner.getObjectId();
 				instanceReward.getHarmonyGroupReward(winnerObj).addPvPKillToPlayer();
-				//notify Kill-Quests
+				// notify Kill-Quests
 				int worldId = winner.getWorldId();
 				QuestEngine.getInstance().onKillInWorld(new QuestEnv(player, winner, 0, 0), worldId);
 			}
@@ -400,7 +406,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		int rewardetPoints = getNpcBonus(npc.getNpcId());
 		int skill = instanceReward.getNpcBonusSkill(npc.getNpcId());
 		if (skill != 0) {
-			//useSkill(npc, player, skill >> 8, skill & 0xFF);
+			// useSkill(npc, player, skill >> 8, skill & 0xFF);
 		}
 		group.addPoints(rewardetPoints);
 		sendSystemMsg(player, npc, rewardetPoints);

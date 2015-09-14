@@ -12,9 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * Talk with Chieftain Akagitan (204787). Talk with Delris (204784). Find Glaciont the Hardy (213730). Kill all the Ice
- * Petrahulks: Glaciont the Hardy (213730) (1), Frostfist (213788) (1), Iceback (213789) (1), Chillblow (213790) (1),
- * Snowfury (213791) (1). Talk with Chieftain Akagitan.
+ * Talk with Chieftain Akagitan (204787). Talk with Delris (204784). Find Glaciont the Hardy (213730). Kill all the Ice Petrahulks: Glaciont the Hardy
+ * (213730) (1), Frostfist (213788) (1), Iceback (213789) (1), Chillblow (213790) (1), Snowfury (213791) (1). Talk with Chieftain Akagitan.
  * 
  * @author VladimirZ
  * @reworked vlog
@@ -72,8 +71,7 @@ public class _2057GlacionttheHardy extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204787) { // Chieftain Akagitan
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
@@ -88,8 +86,7 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 204784) { // Delris
+			} else if (targetId == 204784) { // Delris
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -131,13 +128,11 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD); // reward
 						updateQuestStatus(env);
 						return true;
-					}
-					else {
+					} else {
 						changeQuestStep(env, 0, 1, false, 1); // 1: 1
 						return true;
 					}
-				}
-				else if (targetId == 213788 && var2 == 0) { // Frostfist
+				} else if (targetId == 213788 && var2 == 0) { // Frostfist
 					for (int var0 : vars) {
 						if (var0 == 1) {
 							allDead++;
@@ -148,13 +143,11 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD); // reward
 						updateQuestStatus(env);
 						return true;
-					}
-					else {
+					} else {
 						changeQuestStep(env, 0, 1, false, 2); // 2: 1
 						return true;
 					}
-				}
-				else if (targetId == 213789 && var3 == 0) { // Iceback
+				} else if (targetId == 213789 && var3 == 0) { // Iceback
 					for (int var0 : vars) {
 						if (var0 == 1) {
 							allDead++;
@@ -165,13 +158,11 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD); // reward
 						updateQuestStatus(env);
 						return true;
-					}
-					else {
+					} else {
 						changeQuestStep(env, 0, 1, false, 3); // 3: 1
 						return true;
 					}
-				}
-				else if (targetId == 213790 && var4 == 0) { // Chillblow
+				} else if (targetId == 213790 && var4 == 0) { // Chillblow
 					for (int var0 : vars) {
 						if (var0 == 1) {
 							allDead++;
@@ -182,13 +173,11 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD); // reward
 						updateQuestStatus(env);
 						return true;
-					}
-					else {
+					} else {
 						changeQuestStep(env, 0, 1, false, 4); // 4: 1
 						return true;
 					}
-				}
-				else if (targetId == 213791 && var5 == 0) { // Snowfury
+				} else if (targetId == 213791 && var5 == 0) { // Snowfury
 					for (int var0 : vars) {
 						if (var0 == 1) {
 							allDead++;
@@ -199,8 +188,7 @@ public class _2057GlacionttheHardy extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD); // reward
 						updateQuestStatus(env);
 						return true;
-					}
-					else {
+					} else {
 						changeQuestStep(env, 0, 1, false, 5); // 5: 1
 						return true;
 					}

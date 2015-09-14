@@ -50,8 +50,7 @@ public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllia
 
 		if (alliance.onlineMembers() <= 1) {
 			PlayerAllianceService.disband(alliance, false);
-		}
-		else if (alliance.isInLeague()) {
+		} else if (alliance.isInLeague()) {
 			alliance.getLeague().broadcast(disconnected);
 		}
 	}

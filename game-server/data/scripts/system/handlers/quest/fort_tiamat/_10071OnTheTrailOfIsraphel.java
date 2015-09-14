@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 
@@ -24,7 +22,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 205579, 205535, 730465, 295987, 730465};
+		int[] npcs = { 205579, 205535, 730465, 295987, 730465 };
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -47,7 +45,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205579) { 
+			if (targetId == 205579) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
@@ -58,8 +56,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 205535) { 
+			} else if (targetId == 205535) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -68,17 +65,15 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 					}
 					case SETPRO2: {
 						if (giveQuestItem(env, 182213242, 1))
-						return defaultCloseDialog(env, 1, 2);
+							return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 205987) { 
+			} else if (targetId == 205987) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
-						}
-						else if (var == 4)
+						} else if (var == 4)
 							return sendQuestDialog(env, 2375);
 						else if (var == 5)
 							return sendQuestDialog(env, 2716);
@@ -86,19 +81,18 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 					case SETPRO3: {
 						removeQuestItem(env, 182213242, 1);
 						return defaultCloseDialog(env, 2, 3);
-						}
+					}
 					case SETPRO5: {
 						player.getEffectController().removeEffect(2785);
 						QuestService.questTimerEnd(env);
 						return defaultCloseDialog(env, 4, 5);
-						}
+					}
 					case SET_SUCCEED: {
 						giveQuestItem(env, 182213243, 1);
 						return defaultCloseDialog(env, 5, 6, true, false);
 					}
 				}
-			}
-			else if (targetId == 730465) { // Mysterious Orb
+			} else if (targetId == 730465) { // Mysterious Orb
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 3) {
@@ -110,20 +104,18 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205535) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205535) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -139,7 +131,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -155,7 +147,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10070);

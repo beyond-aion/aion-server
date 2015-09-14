@@ -21,7 +21,7 @@ public class _1005BarringtheGate extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] talkNpcs = {203067, 203081, 790001, 203085, 203086, 700080, 700081, 700082, 700083};
+		int[] talkNpcs = { 203067, 203081, 790001, 203085, 203086, 700080, 700081, 700082, 700083 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int id : talkNpcs)
@@ -54,8 +54,7 @@ public class _1005BarringtheGate extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 203081) {
+			} else if (targetId == 203081) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -68,8 +67,7 @@ public class _1005BarringtheGate extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 790001) {
+			} else if (targetId == 790001) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
@@ -82,8 +80,7 @@ public class _1005BarringtheGate extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 203085) {
+			} else if (targetId == 203085) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 3)
@@ -96,8 +93,7 @@ public class _1005BarringtheGate extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 203086) {
+			} else if (targetId == 203086) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 4)
@@ -110,40 +106,34 @@ public class _1005BarringtheGate extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 700081) {
+			} else if (targetId == 700081) {
 				if (var == 5) {
 					destroy(6, env);
 					return false;
 				}
-			}
-			else if (targetId == 700082) {
+			} else if (targetId == 700082) {
 				if (var == 6) {
 					destroy(7, env);
 					return false;
 				}
-			}
-			else if (targetId == 700083) {
+			} else if (targetId == 700083) {
 				if (var == 7) {
 					destroy(8, env);
 					return false;
 				}
-			}
-			else if (targetId == 700080) {
+			} else if (targetId == 700080) {
 				if (var == 8) {
 					destroy(-1, env);
 					return false;
 				}
 			}
 
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					playQuestMovie(env, 171);
 					return sendQuestDialog(env, 2716);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 
 			}
@@ -153,19 +143,19 @@ public class _1005BarringtheGate extends QuestHandler {
 
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = {1100, 1001, 1002, 1003, 1004};
+		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
 		return defaultOnZoneMissionEndEvent(env, quests);
 	}
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = {1100, 1001, 1002, 1003, 1004};
+		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
 		return defaultOnLvlUpEvent(env, quests, true);
 	}
 
 	private void destroy(final int var, final QuestEnv env) {
 		final Player player = env.getPlayer();
-		//sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
+		// sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (var != -1)
 			qs.setQuestVarById(0, var);

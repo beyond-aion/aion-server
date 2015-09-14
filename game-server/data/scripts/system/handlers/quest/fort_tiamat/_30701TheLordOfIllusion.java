@@ -7,15 +7,13 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30701TheLordOfIllusion extends QuestHandler {
 
 	private final static int questId = 30701;
-	private final static int npcs [] = {205842, 800430, 800350};
+	private final static int npcs[] = { 205842, 800430, 800350 };
 
 	public _30701TheLordOfIllusion() {
 		super(questId);
@@ -36,13 +34,12 @@ public class _30701TheLordOfIllusion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205842) { 
+			if (targetId == 205842) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -54,7 +51,7 @@ public class _30701TheLordOfIllusion extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 800430) { 
+			if (targetId == 800430) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -65,34 +62,31 @@ public class _30701TheLordOfIllusion extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 800350) {
+			} else if (targetId == 800350) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						if(var == 2)
+						if (var == 2)
 							return sendQuestDialog(env, 1693);
 					}
 					case SET_SUCCEED: {
-						  return defaultCloseDialog(env, 2, 3, true, false);
-						}
+						return defaultCloseDialog(env, 2, 3, true, false);
 					}
 				}
-		  }
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205842) { 
+			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205842) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	  return defaultOnKillEvent(env, 219360, 0, 1);
+		return defaultOnKillEvent(env, 219360, 0, 1);
 	}
 }

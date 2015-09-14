@@ -29,7 +29,7 @@ public abstract class Condition implements StatCondition {
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
 		return true;
 	}
-	
+
 	public boolean validate(Effect effect) {
 		return true;
 	}

@@ -38,7 +38,7 @@ public class FollowingNpcCheckTask implements Runnable {
 		if (!MathUtil.isIn3dRange(player, npc, 50)) {
 			onFail(env);
 		}
-		
+
 		if (destinationChecker.check()) {
 			onSuccess(env);
 		}
@@ -65,13 +65,15 @@ public class FollowingNpcCheckTask implements Runnable {
 		Npc npc = (Npc) destinationChecker.follower;
 		player.getController().cancelTask(TaskId.QUEST_FOLLOW);
 		npc.getAi2().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, player);
-		if(!npc.getAi2().getName().equals("following"))
+		if (!npc.getAi2().getName().equals("following"))
 			npc.getController().onDelete();
 	}
 }
 
 abstract class DestinationChecker {
+
 	protected Creature follower;
+
 	abstract boolean check();
 }
 
@@ -121,7 +123,7 @@ final class CoordinateDestinationChecker extends DestinationChecker {
 }
 
 final class ZoneChecker extends DestinationChecker {
-	
+
 	private final ZoneName zoneName;
 
 	ZoneChecker(Creature follower, ZoneName zoneName) {
@@ -134,6 +136,3 @@ final class ZoneChecker extends DestinationChecker {
 		return follower.isInsideZone(zoneName);
 	}
 }
-
-	
-	

@@ -86,8 +86,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204702) {
@@ -109,8 +108,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 						return defaultCloseDialog(env, 6, 6, true, false); // reward
 					}
 			}
-		}
-		else if (targetId == 802053) { // farner
+		} else if (targetId == 802053) { // farner
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

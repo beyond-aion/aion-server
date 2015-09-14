@@ -40,40 +40,39 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("LF4_SENSORYAREA_Q10025_206106_1_600010000")) {
-		final Player player = env.getPlayer();
-		if (player == null) {
-			return false;
+			final Player player = env.getPlayer();
+			if (player == null) {
+				return false;
 			}
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getQuestVars().getQuestVars() != 12 ) {
-			return false;
+			final QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs == null || qs.getQuestVars().getQuestVars() != 12) {
+				return false;
 			}
-		env.setQuestId(questId);
-		qs.setQuestVar(13);
-		updateQuestStatus(env);
+			env.setQuestId(questId);
+			qs.setQuestVar(13);
+			updateQuestStatus(env);
 			return true;
-		}
-		else if (zoneName == ZoneName.get("AETHERIC_FIELD_ROOM_300170000")) {
-		final Player player = env.getPlayer();
-		if (player == null) {
-			return false;
+		} else if (zoneName == ZoneName.get("AETHERIC_FIELD_ROOM_300170000")) {
+			final Player player = env.getPlayer();
+			if (player == null) {
+				return false;
 			}
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getQuestVars().getQuestVars() != 13 ) {
-			return false;
+			final QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs == null || qs.getQuestVars().getQuestVars() != 13) {
+				return false;
 			}
-		WorldMapInstance instance = player.getPosition().getWorldMapInstance();
-                        if (instance != null) {
-                            Npc aethicFieldGenerator = instance.getNpc(700608);
-                            if (aethicFieldGenerator != null) {
-                                aethicFieldGenerator.getEffectController().removeEffect(19127);
-                            }
-                        }
+			WorldMapInstance instance = player.getPosition().getWorldMapInstance();
+			if (instance != null) {
+				Npc aethicFieldGenerator = instance.getNpc(700608);
+				if (aethicFieldGenerator != null) {
+					aethicFieldGenerator.getEffectController().removeEffect(19127);
+				}
+			}
 			return true;
 		}
 		return false;
 	}
-        
+
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
 		return defaultOnZoneMissionEndEvent(env);
@@ -127,8 +126,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START)
+		} else if (qs.getStatus() != QuestStatus.START)
 			return false;
 		if (targetId == 799225) {
 			switch (env.getDialog()) {
@@ -138,8 +136,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO1:
 					return defaultCloseDialog(env, 0, 1); // 1
 			}
-		}
-		else if (targetId == 799226) {
+		} else if (targetId == 799226) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -155,8 +152,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO10:
 					return defaultCloseDialog(env, 9, 10); // 10
 			}
-		}
-		else if (targetId == 799341) {
+		} else if (targetId == 799341) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -168,8 +164,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO4:
 					return defaultCloseDialog(env, 3, 4); // 4
 			}
-		}
-		else if (targetId == 798800) {
+		} else if (targetId == 798800) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -177,8 +172,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO6:
 					return defaultCloseDialog(env, 5, 6); // 6
 			}
-		}
-		else if (targetId == 204182) {
+		} else if (targetId == 204182) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)
@@ -186,8 +180,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO7:
 					return defaultCloseDialog(env, 6, 7); // 7
 			}
-		}
-		else if (targetId == 799239) {
+		} else if (targetId == 799239) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 7)
@@ -195,8 +188,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO8:
 					return defaultCloseDialog(env, 7, 8); // 8
 			}
-		}
-		else if (targetId == 204837) {
+		} else if (targetId == 204837) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 8)
@@ -207,13 +199,11 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 
 			}
-		}
-		else if (targetId == 799327) {
+		} else if (targetId == 799327) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 10)
@@ -221,8 +211,7 @@ public class _20025QuestForSielsRelics extends QuestHandler {
 				case SETPRO11:
 					return defaultCloseDialog(env, 10, 11); // 11
 			}
-		}
-		else if (targetId == 799328) {
+		} else if (targetId == 799328) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 11)

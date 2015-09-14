@@ -153,19 +153,18 @@ public class Legion {
 	public void deleteLegionMember(int playerObjId) {
 		legionMembers.remove(new Integer(playerObjId));
 	}
-	
+
 	public int getOnlineMembersCount() {
 		return this.onlineMembersCount;
 	}
-	
+
 	public void decreaseOnlineMembersCount() {
 		this.onlineMembersCount--;
 	}
-	
+
 	public void increaseOnlineMembersCount() {
 		this.onlineMembersCount++;
 	}
-	
 
 	/**
 	 * This method will set the permissions
@@ -175,12 +174,12 @@ public class Legion {
 	 * @param centurionPermission2
 	 * @return true or false
 	 */
-	public boolean setLegionPermissions(short deputyPermission,	short centurionPermission,	short legionaryPermission,	short volunteerPermission) {
-			this.deputyPermission = deputyPermission;
-			this.centurionPermission = centurionPermission;
-			this.legionaryPermission = legionaryPermission;
-			this.volunteerPermission = volunteerPermission;
-			return true;
+	public boolean setLegionPermissions(short deputyPermission, short centurionPermission, short legionaryPermission, short volunteerPermission) {
+		this.deputyPermission = deputyPermission;
+		this.centurionPermission = centurionPermission;
+		this.legionaryPermission = legionaryPermission;
+		this.volunteerPermission = volunteerPermission;
+		return true;
 	}
 
 	/**
@@ -197,14 +196,12 @@ public class Legion {
 		return centurionPermission;
 	}
 
-
 	/**
 	 * @return the legionarPermission
 	 */
 	public short getLegionaryPermission() {
 		return legionaryPermission;
 	}
-
 
 	/**
 	 * @return the volunteerPermission
@@ -271,16 +268,16 @@ public class Legion {
 	public void setSiegeGloryPoints(int siegeGloryPoints) {
 		this.siegeGloryPoints = siegeGloryPoints;
 	}
-	
+
 	public void increaseSiegeGloryPoints(int value) {
 		this.siegeGloryPoints += value;
-		if(this.siegeGloryPoints < 0)
+		if (this.siegeGloryPoints < 0)
 			this.siegeGloryPoints = 0;
 	}
-	
+
 	public void decreaseSiegeGloryPoints(int value) {
 		this.siegeGloryPoints -= value;
-		if(this.siegeGloryPoints < 0)
+		if (this.siegeGloryPoints < 0)
 			this.siegeGloryPoints = 0;
 	}
 
@@ -290,7 +287,7 @@ public class Legion {
 	 * @return true or false
 	 */
 	public boolean hasRequiredMembers() {
-		int memberSize = getLegionMembers().size(); 
+		int memberSize = getLegionMembers().size();
 		switch (getLegionLevel()) {
 			case 1:
 				return memberSize >= LegionConfig.LEGION_LEVEL2_REQUIRED_MEMBERS;
@@ -366,7 +363,7 @@ public class Legion {
 	 * @return
 	 */
 	private boolean canAddMember() {
-		int memberSize = getLegionMembers().size(); 
+		int memberSize = getLegionMembers().size();
 		switch (getLegionLevel()) {
 			case 1:
 				return memberSize < LegionConfig.LEGION_LEVEL1_MAX_MEMBERS;
@@ -532,7 +529,7 @@ public class Legion {
 		}
 		return select(legionHistory, having(on(LegionHistory.class).getTabId(), equalTo(tabType)));
 	}
-	
+
 	/**
 	 * @param history
 	 */
@@ -562,14 +559,16 @@ public class Legion {
 		}
 	}
 
-  public boolean hasBonus() {
+	public boolean hasBonus() {
 		return hasBonus.get();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		Legion legion = (Legion) o;
 		return legionId == legion.legionId;

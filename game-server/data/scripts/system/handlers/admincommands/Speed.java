@@ -33,8 +33,7 @@ public class Speed extends AdminCommand implements StatOwner {
 		int parameter = 0;
 		try {
 			parameter = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Parameter should number");
 			return;
 		}

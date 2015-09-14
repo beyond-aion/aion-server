@@ -31,5 +31,4 @@ public class AdditionStat extends Stat2 {
 		return (100 + delta) / 100f;
 	}
 
-	
 }

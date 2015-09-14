@@ -15,7 +15,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("sand_squall")
@@ -95,7 +94,7 @@ public class SandSquallAI2 extends AggressiveNpcAI2 {
 			lifeTask.cancel(true);
 		}
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {

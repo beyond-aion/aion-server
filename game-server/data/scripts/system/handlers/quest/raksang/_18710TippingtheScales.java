@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _18710TippingtheScales extends QuestHandler {
 
@@ -39,14 +37,13 @@ public class _18710TippingtheScales extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 799436) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT:{
+					case QUEST_SELECT: {
 						QuestService.startQuest(env);
 						return sendQuestDialog(env, 1011);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (targetId == 799436) {
 				switch (dialog) {
 					case USE_OBJECT:
@@ -59,8 +56,7 @@ public class _18710TippingtheScales extends QuestHandler {
 							qs.setCompleteCount(0);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 5);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1009);
 					case SELECT_ACTION_1352:
 						if (player.getInventory().getItemCountByItemId(182006427) >= 7) {
@@ -70,8 +66,7 @@ public class _18710TippingtheScales extends QuestHandler {
 							qs.setCompleteCount(0);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 6);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1009);
 					case SELECT_ACTION_1693:
 						if (player.getInventory().getItemCountByItemId(182006427) >= 10) {
@@ -81,13 +76,11 @@ public class _18710TippingtheScales extends QuestHandler {
 							qs.setCompleteCount(0);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 7);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1009);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799436) {
 				int var = qs.getQuestVarById(0);
 				switch (dialog) {

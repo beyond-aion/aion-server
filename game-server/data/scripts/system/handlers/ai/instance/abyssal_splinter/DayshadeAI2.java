@@ -12,14 +12,12 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
  * @author Luzien, Ritsu
  */
 @AIName("dayshade")
-public class DayshadeAI2 extends AggressiveNpcAI2 
-{
+public class DayshadeAI2 extends AggressiveNpcAI2 {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 
 	@Override
-	protected void handleAttack(Creature creature)
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
 			AI2Actions.dieSilently(this, creature);
@@ -30,8 +28,7 @@ public class DayshadeAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleBackHome()
-	{
+	protected void handleBackHome() {
 		super.handleBackHome();
 		isHome.set(true);
 	}

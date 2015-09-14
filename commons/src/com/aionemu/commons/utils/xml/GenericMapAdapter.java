@@ -15,13 +15,11 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * 
  * @author Oleh_Faizulin
- * 
  * @param <K>
- *            Map Key
+ *          Map Key
  * @param <V>
- *            Map Value
+ *          Map Value
  */
 public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyValuePairContainer<K, V>, Map<K, V>> {
 
@@ -79,6 +77,7 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyVal
 	@XmlRootElement
 	@XmlAccessorType(XmlAccessType.NONE)
 	public static class KeyValuePair<K, V> {
+
 		public KeyValuePair() {
 
 		}

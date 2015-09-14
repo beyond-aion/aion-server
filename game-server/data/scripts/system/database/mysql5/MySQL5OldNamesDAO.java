@@ -24,19 +24,16 @@ public class MySQL5OldNamesDAO extends OldNamesDAO {
 
 	@Override
 	public boolean isOldName(final String name) {
-		PreparedStatement s = DB
-			.prepareStatement("SELECT count(player_id) as cnt FROM old_names WHERE ? = old_names.old_name");
+		PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM old_names WHERE ? = old_names.old_name");
 		try {
 			s.setString(1, name);
 			ResultSet rs = s.executeQuery();
 			rs.next();
 			return rs.getInt("cnt") > 0;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't check if name " + name + ", is used, returning possitive result", e);
 			return true;
-		}
-		finally {
+		} finally {
 			DB.close(s);
 		}
 	}

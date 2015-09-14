@@ -34,14 +34,13 @@ public class CM_CHALLENGE_LIST extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if(ownerType == 1) {
-			if(player.getLegion() == null) {
+		if (ownerType == 1) {
+			if (player.getLegion() == null) {
 				AuditLogger.info(player, "Trying to receive legion challenge task without legion.");
 				return;
 			}
 			ChallengeTaskService.getInstance().showTaskList(player, ChallengeType.LEGION, taskOwner);
-		}
-		else {
+		} else {
 			ChallengeTaskService.getInstance().showTaskList(player, ChallengeType.TOWN, taskOwner);
 		}
 	}

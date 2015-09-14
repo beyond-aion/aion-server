@@ -54,8 +54,7 @@ public class CM_MOVE extends AionClientPacket {
 				x2 = vectorX + x;
 				y2 = vectorY + y;
 				z2 = vectorZ + z;
-			}
-			else {
+			} else {
 				x2 = readF();
 				y2 = readF();
 				z2 = readF();
@@ -79,17 +78,17 @@ public class CM_MOVE extends AionClientPacket {
 		// packet was not read correctly
 		if (player.getLifeStats().isAlreadyDead())
 			return;
-		
+
 		if (player.getEffectController().isUnderFear()) {
 			return;
 		}
 
 		PlayerMoveController m = player.getMoveController();
 		m.movementMask = type;
-		
+
 		// Admin Teleportation
 		if (player.getAdminTeleportation() && ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE)
-				&& ((type & MovementMask.MOUSE) == MovementMask.MOUSE)) {
+			&& ((type & MovementMask.MOUSE) == MovementMask.MOUSE)) {
 			m.setNewDirection(x2, y2, z2);
 			World.getInstance().updatePosition(player, x2, y2, z2, heading);
 			PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
@@ -103,26 +102,22 @@ public class CM_MOVE extends AionClientPacket {
 		if (type == 0) {
 			player.getController().onStopMove();
 			player.getFlyController().onStopGliding();
-		}
-		else if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
+		} else if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
 			if ((type & MovementMask.MOUSE) == 0) {
 				speed = player.getGameStats().getMovementSpeedFloat();
 				m.vectorX = vectorX;
 				m.vectorY = vectorY;
 				m.vectorZ = vectorZ;
 				player.getMoveController().setNewDirection(x, y, z, heading);
-			}
-			else {
+			} else {
 				player.getMoveController().setNewDirection(x2, y2, z2, heading);
 			}
 			player.getController().onStartMove();
-		}
-		else {
+		} else {
 			player.getController().onMove();
 			if ((type & MovementMask.MOUSE) == 0) {
 				speed = player.getGameStats().getMovementSpeedFloat();
-				player.getMoveController().setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f,
-						z + m.vectorZ * speed * 1.5f, heading);
+				player.getMoveController().setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f, z + m.vectorZ * speed * 1.5f, heading);
 			}
 		}
 
@@ -146,6 +141,7 @@ public class CM_MOVE extends AionClientPacket {
 
 		if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE || type == 0) {
 			player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
 				@Override
 				public void visit(Player observer) {
 					if (observer.isOnline()) {
@@ -162,18 +158,16 @@ public class CM_MOVE extends AionClientPacket {
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
 			m.updateFalling(z);
-		}
-		else {
+		} else {
 			m.stopFalling(z);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "CM_MOVE [type=" + type + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2
-				+ ", y2=" + y2 + ", z2=" + z2 + ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ
-				+ ", vectorX=" + vectorX + ", vectorY=" + vectorY + ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag
-				+ ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
+		return "CM_MOVE [type=" + type + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2 + ", y2=" + y2 + ", z2=" + z2
+			+ ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ + ", vectorX=" + vectorX + ", vectorY=" + vectorY
+			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
 	}
 
 }

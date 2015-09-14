@@ -32,10 +32,9 @@ public class AlwaysResistEffect extends EffectTemplate {
 						effect.endEffect();
 					else
 						value--;
-					
+
 					return true;
-				}
-				else
+				} else
 					return false;
 			}
 

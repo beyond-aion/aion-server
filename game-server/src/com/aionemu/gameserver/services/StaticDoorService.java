@@ -32,8 +32,8 @@ public class StaticDoorService {
 			PacketSendUtility.sendMessage(player, "door id : " + doorId);
 
 		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
-		if (door == null){
-			log.warn("Not spawned door worldId: "+ player.getWorldId()+" doorId: "+doorId);
+		if (door == null) {
+			log.warn("Not spawned door worldId: " + player.getWorldId() + " doorId: " + doorId);
 			return;
 		}
 		int keyId = door.getObjectTemplate().getKeyId();
@@ -44,14 +44,13 @@ public class StaticDoorService {
 		if (checkStaticDoorKey(player, door, keyId)) {
 			player.getPosition().getWorldMapInstance().getInstanceHandler().onOpenDoor(doorId);
 			door.setOpen(true);
-		}
-		else
+		} else
 			log.info("Opening door without key ...");
 	}
-	
+
 	public void changeStaticDoorState(final Player player, int doorId, boolean open, int state) {
 		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
-		if (door == null){
+		if (door == null) {
 			PacketSendUtility.sendMessage(player, "Door is not spawned!");
 			return;
 		}
@@ -76,21 +75,21 @@ public class StaticDoorService {
 
 		if (keyId == 0)
 			return true;
-			
+
 		if (keyId == 1)
 			return false;
-                
-                if (!door.isLocked()) {
-			return true;                    
-                }
-                
+
+		if (!door.isLocked()) {
+			return true;
+		}
+
 		if (!player.getInventory().decreaseByItemId(keyId, 1)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_OPEN_DOOR_NEED_KEY_ITEM);
 			return false;
 		}
-                
-                door.setLocked(false);
-                
+
+		door.setLocked(false);
+
 		return true;
 	}
 }

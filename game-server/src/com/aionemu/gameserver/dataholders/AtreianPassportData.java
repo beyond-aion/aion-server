@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
-
 /**
  * @author Alcapwnd
  * @author ViAl

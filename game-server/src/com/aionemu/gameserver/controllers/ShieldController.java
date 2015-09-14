@@ -18,7 +18,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
  */
 public class ShieldController extends VisibleObjectController<Shield> {
 
-	   ConcurrentHashMap<Integer, ActionObserver> observed = new ConcurrentHashMap<>();
+	ConcurrentHashMap<Integer, ActionObserver> observed = new ConcurrentHashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {

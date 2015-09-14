@@ -51,8 +51,8 @@ public class TuningAction extends AbstractItemAction {
 		final int parentItemId = parentItem.getItemId();
 		final int parntObjectId = parentItem.getObjectId();
 		final int parentNameId = parentItem.getNameId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId,
-			5000, 9, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 9, 0),
+			true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -60,8 +60,7 @@ public class TuningAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 11, 0),
-					true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 11, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
@@ -72,8 +71,7 @@ public class TuningAction extends AbstractItemAction {
 			@Override
 			public void run() {
 				player.getObserveController().removeObserver(observer);
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 10, 0),
-					true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 10, 0), true);
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
 					return;
 				}

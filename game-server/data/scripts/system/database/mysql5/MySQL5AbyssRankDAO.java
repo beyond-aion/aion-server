@@ -49,9 +49,15 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 	public static final String SELECT_GP_PLAYER_ACTIVE_ONLY = "SELECT player_id, abyss_rank.gp, abyss_rank.ap FROM abyss_rank, players WHERE abyss_rank.player_id = players.id AND players.race = ? AND (abyss_rank.gp >= ? OR abyss_rank.rank >= ?) AND UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(players.last_online) <= ? * 24 * 60 * 60 ORDER BY gp DESC";
 	public static final String UPDATE_RANK = "UPDATE abyss_rank SET  rank = ?, top_ranking = ? WHERE player_id = ?";
 	public static final String SELECT_LEGION_COUNT = "SELECT COUNT(player_id) as players FROM legion_members WHERE legion_id = ?";
-	public static final String UPDATE_PLAYER_RANK_LIST = "UPDATE abyss_rank SET abyss_rank.old_rank_pos = abyss_rank.rank_pos, abyss_rank.rank_pos = @a:=@a+1 where player_id in (SELECT id FROM players where race = ?) order by gp desc" + (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 500" : "");  //only 300 positions are relevant later, so we update them + some extra positions that can get into the toprankings
-	public static final String UPDATE_PLAYER_RANK_LIST_ACTIVE_ONLY = "UPDATE abyss_rank SET abyss_rank.old_rank_pos = abyss_rank.rank_pos, abyss_rank.rank_pos = @a:=@a+1 where player_id in (SELECT id FROM players where race = ? AND UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(players.last_online) <= ? * 24 * 60 * 60) order by gp desc" + (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 500" : "");  //only 300 positions are relevant later, so we update them + some extra positions that can get into the toprankings
-	public static final String UPDATE_LEGION_RANK_LIST = "UPDATE legions SET legions.old_rank_pos = legions.rank_pos, legions.rank_pos = @a:=@a+1 where id in (SELECT legion_id FROM legion_members, players where rank = 'BRIGADE_GENERAL' AND players.id = legion_members.player_id and players.race = ?) order by legions.contribution_points DESC" + (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 75" : ""); //only 50 positions are relevant later, so we update them + some extra positions that can get into the toprankings
+	public static final String UPDATE_PLAYER_RANK_LIST = "UPDATE abyss_rank SET abyss_rank.old_rank_pos = abyss_rank.rank_pos, abyss_rank.rank_pos = @a:=@a+1 where player_id in (SELECT id FROM players where race = ?) order by gp desc"
+		+ (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 500" : ""); // only 300 positions are relevant later, so we update them + some extra positions
+																																		// that can get into the toprankings
+	public static final String UPDATE_PLAYER_RANK_LIST_ACTIVE_ONLY = "UPDATE abyss_rank SET abyss_rank.old_rank_pos = abyss_rank.rank_pos, abyss_rank.rank_pos = @a:=@a+1 where player_id in (SELECT id FROM players where race = ? AND UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(players.last_online) <= ? * 24 * 60 * 60) order by gp desc"
+		+ (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 500" : ""); // only 300 positions are relevant later, so we update them + some extra positions
+																																		// that can get into the toprankings
+	public static final String UPDATE_LEGION_RANK_LIST = "UPDATE legions SET legions.old_rank_pos = legions.rank_pos, legions.rank_pos = @a:=@a+1 where id in (SELECT legion_id FROM legion_members, players where rank = 'BRIGADE_GENERAL' AND players.id = legion_members.player_id and players.race = ?) order by legions.contribution_points DESC"
+		+ (RankingConfig.TOP_RANKING_SMALL_CACHE ? " limit 75" : ""); // only 50 positions are relevant later, so we update them + some extra positions
+																																	// that can get into the toprankings
 
 	@Override
 	public AbyssRank loadAbyssRank(int playerId) {
@@ -79,18 +85,16 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 						int gp = resultSet.getInt("gp");
 						int last_gp = resultSet.getInt("last_gp");
 
-						abyssRank = new AbyssRank(daily_ap, weekly_ap, ap, rank, top_ranking, daily_kill, weekly_kill, all_kill, max_rank, last_kill,
-							last_ap, last_update, daily_gp,	weekly_gp, gp, last_gp);
+						abyssRank = new AbyssRank(daily_ap, weekly_ap, ap, rank, top_ranking, daily_kill, weekly_kill, all_kill, max_rank, last_kill, last_ap,
+							last_update, daily_gp, weekly_gp, gp, last_gp);
 						abyssRank.setPersistentState(PersistentState.UPDATED);
-					}
-					else {
+					} else {
 						abyssRank = new AbyssRank(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, System.currentTimeMillis(), 0, 0, 0, 0);
 						abyssRank.setPersistentState(PersistentState.NEW);
 					}
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("loadAbyssRank", e);
 		}
 		return abyssRank;
@@ -146,8 +150,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.execute();
 				return true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("addRank", e);
 			return false;
 		}
@@ -181,13 +184,12 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.execute();
 				return true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("updateRank", e);
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void dailyUpdateGp(AbyssRankEnum rank) {
 		try {
@@ -196,12 +198,11 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.setInt(2, rank.getId());
 				stmt.execute();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("dailyUpdateGp", e);
 		}
 	}
-	
+
 	@Override
 	public void increaseGp(int playerObjId, int additionalGp) {
 		try {
@@ -210,12 +211,11 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.setInt(2, playerObjId);
 				stmt.execute();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("increaseGp", e);
 		}
 	}
-	
+
 	@Override
 	public void decreaseGp(int playerObjId, int gpToRemove) {
 		try {
@@ -224,8 +224,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.setInt(2, playerObjId);
 				stmt.execute();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("decreaseGp", e);
 		}
 	}
@@ -265,8 +264,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 					}
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("getAbyssRankingPlayers", e);
 		}
 		return results;
@@ -330,7 +328,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 					int playerId = rs.getInt("player_id");
 					int gp = rs.getInt("gp");
 					int ap = rs.getInt("ap");
-					Integer[] result = {gp, ap};
+					Integer[] result = { gp, ap };
 					results.put(playerId, result);
 				}
 			}
@@ -358,8 +356,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 				stmt.setInt(3, playerId);
 				stmt.execute();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("updateAbyssRank", e);
 		}
 	}
@@ -377,8 +374,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 	public void updateRankList(final int maxOfflineDays) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection()) {
-				try (PreparedStatement stmt = con.prepareStatement(maxOfflineDays > 0 ? UPDATE_PLAYER_RANK_LIST_ACTIVE_ONLY
-					: UPDATE_PLAYER_RANK_LIST)) {
+				try (PreparedStatement stmt = con.prepareStatement(maxOfflineDays > 0 ? UPDATE_PLAYER_RANK_LIST_ACTIVE_ONLY : UPDATE_PLAYER_RANK_LIST)) {
 					stmt.addBatch("SET @a:=0;");
 					stmt.setString(1, "ELYOS");
 					if (maxOfflineDays > 0) {
@@ -403,8 +399,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 					stmt.executeBatch();
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("updateRank", e);
 		}
 	}

@@ -62,8 +62,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	protected void setAttackCounter(int attackCounter) {
 		if (attackCounter <= 0) {
 			this.attackCounter = 1;
-		}
-		else {
+		} else {
 			this.attackCounter = attackCounter;
 		}
 	}
@@ -71,8 +70,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	public void increaseAttackCounter() {
 		if (attackCounter == ATTACK_MAX_COUNTER) {
 			this.attackCounter = 1;
-		}
-		else {
+		} else {
 			this.attackCounter++;
 		}
 	}
@@ -90,15 +88,12 @@ public abstract class CreatureGameStats<T extends Creature> {
 				// If already contains old stat, it won't add anyway, so next check will be false positive
 				// Useless Warning!!!
 				/*
-				TreeSet<IStatFunction> mods = getStatsByStatEnum(function.getName());
-				if (mods.contains(func)) {
-					log.warn("Effect " + statOwner + " already active" + func);
-				}
-				*/
+				 * TreeSet<IStatFunction> mods = getStatsByStatEnum(function.getName()); if (mods.contains(func)) { log.warn("Effect " + statOwner +
+				 * " already active" + func); }
+				 */
 				addFunction(function.getName(), func);
 			}
-		}
-		finally {
+		} finally {
 			lock.writeLock().unlock();
 		}
 	}
@@ -120,8 +115,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 					}
 				}
 			}
-		}
-		finally {
+		} finally {
 			lock.writeLock().unlock();
 		}
 		onStatsChange();
@@ -173,8 +167,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 			}
 			StatCapUtil.calculateBaseValue(stat, ((Creature) owner).isPlayer());
 			return stat;
-		}
-		finally {
+		} finally {
 			lock.readLock().unlock();
 		}
 	}
@@ -189,8 +182,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 				if (func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone))
 					func.apply(stat);
 			}
-		}
-		finally {
+		} finally {
 			lock.readLock().unlock();
 		}
 		return stat;
@@ -302,8 +294,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 				if (setFuncs == null)
 					setFuncs = new ArrayList<IStatFunction>();
 				setFuncs.add(func);
-			}
-			else if (setFuncs != null) {
+			} else if (setFuncs != null) {
 				// all StatSetFunctions added
 				break;
 			}
@@ -356,7 +347,6 @@ public abstract class CreatureGameStats<T extends Creature> {
 			}
 		}
 	}
-	
 
 	private void checkMPStats() {
 		synchronized (this) {

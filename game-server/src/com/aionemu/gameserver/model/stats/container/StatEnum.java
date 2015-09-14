@@ -78,7 +78,7 @@ public enum StatEnum {
 	FLY_SPEED(37),
 
 	DAMAGE_REDUCE, // how much damage you block
-	DAMAGE_REDUCE_MAX, //whats max damage to block, TODO: implement
+	DAMAGE_REDUCE_MAX, // whats max damage to block, TODO: implement
 
 	// resistances
 	BLEED_RESISTANCE(44), // Bleed Resist
@@ -106,7 +106,7 @@ public enum StatEnum {
 	STUMBLE_RESISTANCE(57), // Stumble Resist
 	STUN_RESISTANCE(55), // Stun Resist
 
-	//penetrations
+	// penetrations
 	BLEED_RESISTANCE_PENETRATION(70), // Bleeding Penetration
 	BLIND_RESISTANCE_PENETRATION(74), // Blindness Penetration
 	BIND_RESISTANCE_PENETRATION(89), // Bind Penetration
@@ -157,8 +157,8 @@ public enum StatEnum {
 
 	MAGICAL_DEFEND(125), // Magical Defense
 	MAGIC_SKILL_BOOST_RESIST(126), // Magic Supression
-	
-  //Effects stats (bossts, deboosts)
+
+	// Effects stats (bossts, deboosts)
 	HEAL_SKILL_BOOST,
 	HEAL_SKILL_DEBOOST,
 	BOOST_HUNTING_XP_RATE,
@@ -190,7 +190,7 @@ public enum StatEnum {
 	PVP_PHYSICAL_ATTACK(111),
 	PVP_PHYSICAL_DEFEND(112),
 	PVP_MAGICAL_ATTACK(113),
-	PVP_MAGICAL_DEFEND(114), 
+	PVP_MAGICAL_DEFEND(114),
 
 	PVP_ATTACK_RATIO(106),
 	PVP_ATTACK_RATIO_MAGICAL,
@@ -208,11 +208,11 @@ public enum StatEnum {
 
 	AP_BOOST,
 	DR_BOOST,
-	
+
 	// 4.3
 	PROC_REDUCE_RATE,
 	BOOST_CHARGE_TIME,
-	
+
 	// 4.7
 	PVP_DODGE,
 	PVP_BLOCK,
@@ -306,30 +306,30 @@ public enum StatEnum {
 	public boolean isReplace() {
 		return replace;
 	}
-	
+
 	public static StatEnum getModifier(int skillId) {
-	  switch (skillId) {
-	   case 30001:
-	   case 30002:
-	    return BOOST_ESSENCETAPPING_XP_RATE;
-	   case 30003:
-	    return BOOST_AETHERTAPPING_XP_RATE;
-	   case 40001:
-	    return BOOST_COOKING_XP_RATE;
-	   case 40002:
-	    return BOOST_WEAPONSMITHING_XP_RATE;
-	   case 40003:
-	    return BOOST_ARMORSMITHING_XP_RATE;
-	   case 40004:
-	    return BOOST_TAILORING_XP_RATE;
-	   case 40007:
-	    return BOOST_ALCHEMY_XP_RATE;
-	   case 40008:
-	    return BOOST_HANDICRAFTING_XP_RATE;
-	   case 40010:
-	    return BOOST_MENUISIER_XP_RATE;
-	   default:
-	    return null;
-	  }
-	 }
+		switch (skillId) {
+			case 30001:
+			case 30002:
+				return BOOST_ESSENCETAPPING_XP_RATE;
+			case 30003:
+				return BOOST_AETHERTAPPING_XP_RATE;
+			case 40001:
+				return BOOST_COOKING_XP_RATE;
+			case 40002:
+				return BOOST_WEAPONSMITHING_XP_RATE;
+			case 40003:
+				return BOOST_ARMORSMITHING_XP_RATE;
+			case 40004:
+				return BOOST_TAILORING_XP_RATE;
+			case 40007:
+				return BOOST_ALCHEMY_XP_RATE;
+			case 40008:
+				return BOOST_HANDICRAFTING_XP_RATE;
+			case 40010:
+				return BOOST_MENUISIER_XP_RATE;
+			default:
+				return null;
+		}
+	}
 }

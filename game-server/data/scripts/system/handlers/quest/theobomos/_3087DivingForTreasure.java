@@ -79,8 +79,7 @@ public class _3087DivingForTreasure extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798144) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

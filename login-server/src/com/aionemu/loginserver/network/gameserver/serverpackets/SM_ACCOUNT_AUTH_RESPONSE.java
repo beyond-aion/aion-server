@@ -5,8 +5,8 @@ import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsServerPacket;
 
 /**
- * In this packet LoginServer is answering on GameServer request about valid authentication data and also sends account
- * name of user that is authenticating on GameServer.
+ * In this packet LoginServer is answering on GameServer request about valid authentication data and also sends account name of user that is
+ * authenticating on GameServer.
  * 
  * @author -Nemesiss-
  */

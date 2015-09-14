@@ -39,7 +39,7 @@ public class QuestNpc {
 		onAtDistanceEvent = new ArrayList<Integer>(0);
 		allQuestIds = new HashSet<Integer>(0);
 	}
-	
+
 	public QuestNpc(int npcId) {
 		this(npcId, 20);
 	}
@@ -48,7 +48,7 @@ public class QuestNpc {
 		allQuestIds.add(questId);
 		QuestEngine.getInstance().registerCanAct(questId, npcId);
 	}
-	
+
 	public void addOnQuestStart(int questId) {
 		if (!onQuestStart.contains(questId)) {
 			onQuestStart.add(questId);
@@ -92,7 +92,7 @@ public class QuestNpc {
 	public List<Integer> getOnTalkEvent() {
 		return onTalkEvent;
 	}
-	
+
 	public void addOnAddAggroListEvent(int questId) {
 		if (!onAddAggroListEvent.contains(questId)) {
 			onAddAggroListEvent.add(questId);
@@ -103,7 +103,7 @@ public class QuestNpc {
 	public List<Integer> getOnAddAggroListEvent() {
 		return onAddAggroListEvent;
 	}
-	
+
 	public void addOnAtDistanceEvent(int questId) {
 		if (!onAtDistanceEvent.contains(questId)) {
 			onAtDistanceEvent.add(questId);
@@ -114,14 +114,14 @@ public class QuestNpc {
 	public List<Integer> getOnDistanceEvent() {
 		return onAtDistanceEvent;
 	}
-	
+
 	public int getNpcId() {
 		return npcId;
 	}
 
 	/**
-	 * The method returns quest ids which handlers must be asked for constant spawn requirements.
-	 * Is cleaned once SpawnEngine spawns them.
+	 * The method returns quest ids which handlers must be asked for constant spawn requirements. Is cleaned once SpawnEngine spawns them.
+	 * 
 	 * @return
 	 */
 	public HashSet<Integer> getNotCheckedQuestIds() {

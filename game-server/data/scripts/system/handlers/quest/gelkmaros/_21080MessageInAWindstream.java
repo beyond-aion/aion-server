@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _21080MessageInAWindstream extends QuestHandler {
 
@@ -36,30 +34,26 @@ public class _21080MessageInAWindstream extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 799231) { 
+			if (targetId == 799231) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182207939, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799427) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 3)
+					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2034);
-				}
-				else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialog == DialogAction.SETPRO4) {
 					removeQuestItem(env, 182207939, 1);
 					return defaultCloseDialog(env, 3, 4);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799231) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -69,7 +63,7 @@ public class _21080MessageInAWindstream extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
@@ -77,13 +71,12 @@ public class _21080MessageInAWindstream extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (zoneName == ZoneName.get("ANTAGOR_CANYON_220070000")) {
-				if(var < 3) {
-				changeQuestStep(env, var, var + 1, false);
-				return true;
+				if (var < 3) {
+					changeQuestStep(env, var, var + 1, false);
+					return true;
 				}
-			}
-			else if (zoneName == ZoneName.get("GELKMAROS_FORTRESS_220070000") && var == 4) {
-				changeQuestStep(env, 4, 4, true); 
+			} else if (zoneName == ZoneName.get("GELKMAROS_FORTRESS_220070000") && var == 4) {
+				changeQuestStep(env, 4, 4, true);
 				return true;
 			}
 		}

@@ -10,9 +10,9 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
  */
 
 public class CM_BONUS_TITLE extends AionClientPacket {
-	
+
 	private int bonusTitleId;
-	
+
 	/**
 	 * Constructs new instance of <tt>CM_TITLE_BONUS </tt> packet
 	 * 
@@ -21,7 +21,7 @@ public class CM_BONUS_TITLE extends AionClientPacket {
 	public CM_BONUS_TITLE(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -29,7 +29,7 @@ public class CM_BONUS_TITLE extends AionClientPacket {
 	protected void readImpl() {
 		bonusTitleId = readH();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

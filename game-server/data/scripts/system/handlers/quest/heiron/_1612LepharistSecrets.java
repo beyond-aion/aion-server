@@ -41,8 +41,7 @@ public class _1612LepharistSecrets extends QuestHandler {
 			if (targetId == 204530) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -70,8 +69,7 @@ public class _1612LepharistSecrets extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204530) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

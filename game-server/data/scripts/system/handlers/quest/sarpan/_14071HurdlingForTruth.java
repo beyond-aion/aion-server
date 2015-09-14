@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller, Ritsu
- *
  */
 public class _14071HurdlingForTruth extends QuestHandler {
 
@@ -76,15 +74,13 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 205987) {
+			} else if (targetId == 205987) {
 				int var3 = qs.getQuestVarById(3);
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (var == 7 && var3 == 6) {
+						} else if (var == 7 && var3 == 6) {
 							return sendQuestDialog(env, 3398);
 						}
 					}
@@ -96,14 +92,12 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 802058) {
+			} else if (targetId == 802058) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
-						}
-						else if (var == 8) {
+						} else if (var == 8) {
 							return sendQuestDialog(env, 3739);
 						}
 					}
@@ -117,8 +111,7 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return defaultCloseDialog(env, 8, 9); // 9
 					}
 				}
-			}
-			else if (targetId == 205753) {
+			} else if (targetId == 205753) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
@@ -129,8 +122,7 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4); // 4
 					}
 				}
-			}
-			else if (targetId == 205743) {
+			} else if (targetId == 205743) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 4) {
@@ -147,8 +139,7 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return defaultCloseDialog(env, 5, 6);
 					}
 				}
-			}
-			else if (targetId == 205756) {
+			} else if (targetId == 205756) {
 				int var1 = qs.getQuestVarById(1);
 				int var2 = qs.getQuestVarById(2);
 				switch (dialog) {
@@ -161,23 +152,17 @@ public class _14071HurdlingForTruth extends QuestHandler {
 						return defaultCloseDialog(env, 6, 7);
 					}
 				}
-			}
-			else if (targetId == 702088){
+			} else if (targetId == 702088) {
 				return true; // looting
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if (targetId == 802058) 
-			{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 802058) {
 				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 4080);
-				else if (dialog == DialogAction.SELECT_ACTION_4081)
-				{
+				else if (dialog == DialogAction.SELECT_ACTION_4081) {
 					playQuestMovie(env, 889);
 					return sendQuestDialog(env, 4081);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
@@ -200,8 +185,7 @@ public class _14071HurdlingForTruth extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (qs.getQuestVarById(0) == 6) {
 				return defaultOnKillEvent(env, shulMobs, 0, 5, 1) || defaultOnKillEvent(env, marbataMobs, 0, 3, 2);
-			}
-			else if (qs.getQuestVarById(0) == 7) {
+			} else if (qs.getQuestVarById(0) == 7) {
 				return defaultOnKillEvent(env, drakanMobs, 0, 6, 3);
 			}
 		}
@@ -218,10 +202,8 @@ public class _14071HurdlingForTruth extends QuestHandler {
 			changeQuestStep(env, 1, 2, false); // 2
 		if (var == 7)
 			changeQuestStep(env, 7, 8, false); // 8
-		QuestService.addNewSpawn(300330000, player.getInstanceId(), 802058, 248.84947f, 249.30412f,
-			125.063126f, (byte) 60);
+		QuestService.addNewSpawn(300330000, player.getInstanceId(), 802058, 248.84947f, 249.30412f, 125.063126f, (byte) 60);
 	}
-
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {

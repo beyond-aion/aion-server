@@ -6,21 +6,21 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 public class KamarBattlefieldService extends PeriodicInstance {
-	
+
 	private KamarBattlefieldService() {
-		super(AutoGroupConfig.KAMAR_ENABLE, AutoGroupConfig.KAMAR_TIMES, AutoGroupConfig.KAMAR_TIMER, new byte[] {107}, (byte) 60, (byte) 66);
+		super(AutoGroupConfig.KAMAR_ENABLE, AutoGroupConfig.KAMAR_TIMES, AutoGroupConfig.KAMAR_TIMER, new byte[] { 107 }, (byte) 60, (byte) 66);
 	}
 
-    @Override
+	@Override
 	protected void onSendEntry(Player player, byte maskId) {
-        PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401730));
-    }
- 
+		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401730));
+	}
+
 	private static class SingletonHolder {
+
 		protected static final KamarBattlefieldService instance = new KamarBattlefieldService();
 	}
 

@@ -22,8 +22,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 		super(alliance, player);
 	}
 
-	public PlayerGroupLeavedEvent(PlayerGroup team, Player player, PlayerLeavedEvent.LeaveReson reason,
-		String banPersonName) {
+	public PlayerGroupLeavedEvent(PlayerGroup team, Player player, PlayerLeavedEvent.LeaveReson reason, String banPersonName) {
 		super(team, player, reason, banPersonName);
 	}
 
@@ -48,8 +47,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 				// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_SECEDE); // client side?
 				if (team.size() <= 1) {
 					PlayerGroupService.disband(team);
-				}
-				else {
+				} else {
 					if (leavedPlayer.equals(team.getLeader().getObject())) {
 						team.onEvent(new ChangeGroupLeaderEvent(team));
 					}

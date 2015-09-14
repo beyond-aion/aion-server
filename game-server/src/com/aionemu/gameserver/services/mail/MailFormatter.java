@@ -15,8 +15,7 @@ import com.aionemu.gameserver.model.templates.mail.MailTemplate;
 public final class MailFormatter {
 
 	public static void sendBlackCloudMail(String recipientName, final int itemObjectId, final int itemCount) {
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES
-			.getMailTemplate("$$CASH_ITEM_MAIL", "", Race.PC_ALL);
+		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$CASH_ITEM_MAIL", "", Race.PC_ALL);
 
 		MailPart formatter = new MailPart() {
 
@@ -38,8 +37,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String body = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount,
-			0, LetterType.BLACKCLOUD);
+		SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
 	}
 
 	public static void sendHouseMaintenanceMail(final House ownedHouse, int warnCount, final long impoundTime) {
@@ -58,8 +56,7 @@ public final class MailFormatter {
 				return;
 		}
 
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "",
-			ownedHouse.getPlayerRace());
+		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", ownedHouse.getPlayerRace());
 
 		MailPart formatter = new MailPart() {
 
@@ -77,16 +74,14 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(null);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0,
-			0, 0, LetterType.NORMAL);
+		SystemMailService.getInstance().sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, 0, LetterType.NORMAL);
 	}
 
-	public static void sendHouseAuctionMail(final House ownedHouse, final PlayerCommonData playerData,
-		final AuctionResult result, final long time, long returnKinah) {
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$HS_AUCTION_MAIL", "",
-			playerData.getRace());
+	public static void sendHouseAuctionMail(final House ownedHouse, final PlayerCommonData playerData, final AuctionResult result, final long time,
+		long returnKinah) {
+		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$HS_AUCTION_MAIL", "", playerData.getRace());
 		if (ownedHouse == null || playerData == null || result == null)
-		   return;
+			return;
 
 		MailPart formatter = new MailPart() {
 
@@ -107,16 +102,13 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$HS_AUCTION_MAIL", playerData.getName(), title, message, 0, 0,
-			returnKinah, LetterType.NORMAL);
+		SystemMailService.getInstance().sendMail("$$HS_AUCTION_MAIL", playerData.getName(), title, message, 0, 0, returnKinah, LetterType.NORMAL);
 	}
 
-	public static void sendAbyssRewardMail(final SiegeLocation siegeLocation, final PlayerCommonData playerData,
-		final AbyssSiegeLevel level, final SiegeResult result, final long time, int attachedItemObjId,
-		long attachedItemCount, long attachedKinahCount) {
+	public static void sendAbyssRewardMail(final SiegeLocation siegeLocation, final PlayerCommonData playerData, final AbyssSiegeLevel level,
+		final SiegeResult result, final long time, int attachedItemObjId, long attachedItemCount, long attachedKinahCount) {
 
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$ABYSS_REWARD_MAIL", "",
-			playerData.getRace());
+		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$ABYSS_REWARD_MAIL", "", playerData.getRace());
 
 		MailPart formatter = new MailPart() {
 
@@ -139,7 +131,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$ABYSS_REWARD_MAIL", playerData.getName(), title, message,
-			attachedItemObjId, attachedItemCount, attachedKinahCount, LetterType.NORMAL);
+		SystemMailService.getInstance().sendMail("$$ABYSS_REWARD_MAIL", playerData.getName(), title, message, attachedItemObjId, attachedItemCount,
+			attachedKinahCount, LetterType.NORMAL);
 	}
 }

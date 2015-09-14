@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("unstablerukril")
 public class UnstableRukrilAI2 extends AggressiveNpcAI2 {
-	
+
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
@@ -37,11 +37,12 @@ public class UnstableRukrilAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void startSkillTask()	{
+	private void startSkillTask() {
 		final Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
-			public void run()	{
+			public void run() {
 				if (isAlreadyDead())
 					cancelTask();
 				else {
@@ -57,7 +58,7 @@ public class UnstableRukrilAI2 extends AggressiveNpcAI2 {
 			}
 		}, 5000, 70000);
 	}
-	
+
 	private void cancelTask() {
 		if (skillTask != null && !skillTask.isCancelled()) {
 			skillTask.cancel(true);
@@ -66,19 +67,18 @@ public class UnstableRukrilAI2 extends AggressiveNpcAI2 {
 
 	private void regen() {
 		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
-		if(ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead() && MathUtil.isIn3dRange(getOwner(), ebonsoul, 5))
-			if(!getOwner().getLifeStats().isFullyRestoredHp())
+		if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead() && MathUtil.isIn3dRange(getOwner(), ebonsoul, 5))
+			if (!getOwner().getLifeStats().isFullyRestoredHp())
 				getOwner().getLifeStats().increaseHp(TYPE.HP, 10000, 0, LOG.REGULAR);
-			
+
 	}
-	
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		cancelTask();
 	}
-	
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();

@@ -33,10 +33,9 @@ public class WalkManager {
 		Npc owner = npcAI.getOwner();
 		WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId());
 		if (template != null) {
-				npcAI.setSubStateIfNot(AISubState.WALK_PATH);
-				startRouteWalking(npcAI, owner, template);
-		}
-		else {
+			npcAI.setSubStateIfNot(AISubState.WALK_PATH);
+			startRouteWalking(npcAI, owner, template);
+		} else {
 			return startRandomWalking(npcAI, owner);
 		}
 		return true;
@@ -89,8 +88,7 @@ public class WalkManager {
 		RouteStep nextStep = null;
 		if (currentPoint != 0) {
 			nextStep = findNextRouteStepAfterPause(owner, route, currentPoint);
-		}
-		else {
+		} else {
 			nextStep = findClosestRouteStep(owner, route, nextStep);
 		}
 		return nextStep;
@@ -114,8 +112,7 @@ public class WalkManager {
 				nextStep = route.get(0);
 			else
 				nextStep = route.get(owner.getWalkerGroup().getGroupStep() - 1);
-		}
-		else {
+		} else {
 			for (RouteStep step : route) {
 				double stepDist = MathUtil.getDistance(x, y, z, step.getX(), step.getY(), step.getZ());
 				if (closestDist == 0 || stepDist < closestDist) {
@@ -135,8 +132,7 @@ public class WalkManager {
 	 */
 	protected static RouteStep findNextRouteStepAfterPause(Npc owner, List<RouteStep> route, int currentPoint) {
 		RouteStep nextStep = route.get(currentPoint);
-		double stepDist = MathUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), nextStep.getX(), nextStep.getY(),
-			nextStep.getZ());
+		double stepDist = MathUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), nextStep.getX(), nextStep.getY(), nextStep.getZ());
 		if (stepDist < 1) {
 			nextStep = nextStep.getNextStep();
 		}
@@ -171,8 +167,7 @@ public class WalkManager {
 					npcAI.getOwner().updateKnownlist();
 					if (npcAI.getOwner().getWalkerGroup() != null) {
 						npcAI.getOwner().getWalkerGroup().targetReached(npcAI);
-					}
-					else {
+					} else {
 						chooseNextRouteStep(npcAI);
 					}
 					break;
@@ -199,8 +194,7 @@ public class WalkManager {
 			npcAI.getOwner().getMoveController().resetMove();
 			npcAI.getOwner().getMoveController().chooseNextStep();
 			npcAI.getOwner().getMoveController().moveToNextPoint();
-		}
-		else {
+		} else {
 			npcAI.getOwner().getMoveController().abortMove();
 			npcAI.getOwner().getMoveController().chooseNextStep();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -232,19 +226,16 @@ public class WalkManager {
 			public void run() {
 				if (npcAI.isInState(AIState.WALKING)) {
 					if (distToSpawn > walkRange) {
-						owner.getMoveController().moveToPoint(owner.getSpawn().getX(), owner.getSpawn().getY(),
-							owner.getSpawn().getZ());
-					}
-					else {
+						owner.getMoveController().moveToPoint(owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
+					} else {
 						int nextX = Rnd.nextInt(walkRange * 2) - walkRange;
 						int nextY = Rnd.nextInt(walkRange * 2) - walkRange;
 						if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
 							byte flags = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId() | CollisionIntention.WALK.getId());
-							Vector3f loc = GeoService.getInstance().getClosestCollision(owner, owner.getX() + nextX,
-								owner.getY() + nextY, owner.getZ(), true, flags);
+							Vector3f loc = GeoService.getInstance().getClosestCollision(owner, owner.getX() + nextX, owner.getY() + nextY, owner.getZ(), true,
+								flags);
 							owner.getMoveController().moveToPoint(loc.x, loc.y, loc.z);
-						}
-						else {
+						} else {
 							owner.getMoveController().moveToPoint(owner.getX() + nextX, owner.getY() + nextY, owner.getZ());
 						}
 					}

@@ -6,8 +6,8 @@ import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 
 /**
- * Format: dd b dddd s d: session id d: protocol revision b: 0x90 bytes : 0x80 bytes for the scrambled RSA public key
- * 0x10 bytes at 0x00 d: unknow d: unknow d: unknow d: unknow s: blowfish key
+ * Format: dd b dddd s d: session id d: protocol revision b: 0x90 bytes : 0x80 bytes for the scrambled RSA public key 0x10 bytes at 0x00 d: unknow d:
+ * unknow d: unknow d: unknow s: blowfish key
  */
 public final class SM_INIT extends AionServerPacket {
 
@@ -17,8 +17,7 @@ public final class SM_INIT extends AionServerPacket {
 	private final int sessionId;
 
 	/**
-	 * public Rsa key that client will use to encrypt login and password that will be send in RequestAuthLogin client
-	 * packet.
+	 * public Rsa key that client will use to encrypt login and password that will be send in RequestAuthLogin client packet.
 	 */
 	private final byte[] publicRsaKey;
 	/**

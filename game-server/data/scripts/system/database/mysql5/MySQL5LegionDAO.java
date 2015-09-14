@@ -53,6 +53,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String INSERT_HISTORY_QUERY = "INSERT INTO legion_history(`legion_id`, `date`, `history_type`, `name`, `tab_id`, `description`) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
 	private static final String CLEAR_LEGION_SIEGE = "UPDATE siege_locations SET legion_id=0 WHERE legion_id=?";
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -64,12 +65,10 @@ public class MySQL5LegionDAO extends LegionDAO {
 			ResultSet rs = s.executeQuery();
 			rs.next();
 			return rs.getInt("cnt") > 0;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't check if name " + name + ", is used, returning possitive result", e);
 			return true;
-		}
-		finally {
+		} finally {
 			DB.close(s);
 		}
 	}
@@ -142,11 +141,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 					legion.addContributionPoints(resultSet.getLong("contribution_points"));
 					legion.setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
-					legion.setLegionPermissions(
-						resultSet.getShort("deputy_permission"),
-						resultSet.getShort("centurion_permission"),
-						resultSet.getShort("legionary_permission"),
-						resultSet.getShort("volunteer_permission"));
+					legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
 				}
@@ -181,11 +177,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 					legion.addContributionPoints(resultSet.getLong("contribution_points"));
 					legion.setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
-					legion.setLegionPermissions(
-						resultSet.getShort("deputy_permission"),
-						resultSet.getShort("centurion_permission"),
-						resultSet.getShort("legionary_permission"),
-						resultSet.getShort("volunteer_permission"));
+					legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
 				}
@@ -205,17 +198,15 @@ public class MySQL5LegionDAO extends LegionDAO {
 		PreparedStatement statement = DB.prepareStatement(DELETE_LEGION_QUERY);
 		try {
 			statement.setInt(1, legionId);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("deleteLegion #1", e);
 		}
 		DB.executeUpdateAndClose(statement);
-		
+
 		statement = DB.prepareStatement(CLEAR_LEGION_SIEGE);
 		try {
 			statement.setInt(1, legionId);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("deleteLegion #2", e);
 		}
 		DB.executeUpdateAndClose(statement);
@@ -226,8 +217,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	 */
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -240,11 +230,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 				ids[i] = rs.getInt("id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from legions table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 
@@ -318,8 +306,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 		try {
 			statement.setInt(1, legionId);
 			statement.setTimestamp(2, unixTime);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Some crap, can't set int parameter to PreparedStatement", e);
 		}
 		DB.executeUpdateAndClose(statement);
@@ -363,11 +350,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 			if (rs.next())
 				return true;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't check " + legionid + " legion emblem: ", e);
-		}
-		finally {
+		} finally {
 			DB.close(st);
 		}
 		return false;
@@ -433,9 +418,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
-					legionEmblem.setEmblem(resultSet.getInt("emblem_id"), resultSet.getInt("color_r"),
-						resultSet.getInt("color_g"), resultSet.getInt("color_b"),
-						LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
+					legionEmblem.setEmblem(resultSet.getInt("emblem_id"), resultSet.getInt("color_r"), resultSet.getInt("color_g"),
+						resultSet.getInt("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
 				}
 			}
 		});
@@ -490,9 +474,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
 
-					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount,
-						isEquiped == 1, false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket,
-						optionalFusionSocket, charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill);
+					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
+						false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount,
+						tempering, packCount, isAmplified == 1, buffSkill);
 					item.setPersistentState(PersistentState.UPDATED);
 					inventory.onLoadHandler(item);
 				}
@@ -519,8 +503,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
-					history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet
-						.getString("name"), resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
+					history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"), resultSet
+						.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
 				}
 			}
 		});

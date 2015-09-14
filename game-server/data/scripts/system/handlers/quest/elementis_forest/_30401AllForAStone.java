@@ -7,12 +7,10 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _30401AllForAStone  extends QuestHandler {
+public class _30401AllForAStone extends QuestHandler {
 
 	private final static int questId = 30401;
 
@@ -26,14 +24,14 @@ public class _30401AllForAStone  extends QuestHandler {
 		qe.registerQuestNpc(799535).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799582).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 799535) {
 				switch (dialog) {
@@ -48,8 +46,7 @@ public class _30401AllForAStone  extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 799535) {
 				switch (dialog) {
@@ -66,7 +63,7 @@ public class _30401AllForAStone  extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}else if(targetId == 799582){
+			} else if (targetId == 799582) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1352);
@@ -82,15 +79,13 @@ public class _30401AllForAStone  extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799535) {
 				return sendQuestEndDialog(env);
 			}
 		}
-		
-		
+
 		return false;
 	}
-	
+
 }

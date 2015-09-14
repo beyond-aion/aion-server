@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 public class SkillAttackInstantEffect extends DamageEffect {
 
 	@XmlAttribute
-	protected int rnddmg;//TODO should be enum and different types of random damage behaviour
+	protected int rnddmg;// TODO should be enum and different types of random damage behaviour
 	@XmlAttribute
 	protected boolean cannotmiss;
 
@@ -30,6 +30,5 @@ public class SkillAttackInstantEffect extends DamageEffect {
 	public boolean isCannotmiss() {
 		return cannotmiss;
 	}
-	
-	
+
 }

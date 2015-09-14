@@ -8,7 +8,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
-
 /**
  * @author ginho1
  */
@@ -43,13 +42,12 @@ public class Delete_items extends ConsoleCommand {
 
 		try {
 			quality = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Parameters need to be an integer.");
 			return;
 		}
 
-		 if (quality < 0 || quality >= ItemQuality.values().length) {
+		if (quality < 0 || quality >= ItemQuality.values().length) {
 			PacketSendUtility.sendMessage(admin, "Invalid QualityId.");
 			return;
 		}

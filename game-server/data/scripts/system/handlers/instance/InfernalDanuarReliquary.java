@@ -7,5 +7,5 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
  */
 @InstanceID(301360000)
 public class InfernalDanuarReliquary extends DanuarReliquaryInstance {
-//TODO : Add infernal features if missing.
+	// TODO : Add infernal features if missing.
 }

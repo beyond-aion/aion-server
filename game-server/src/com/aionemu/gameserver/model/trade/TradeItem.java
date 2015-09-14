@@ -50,7 +50,7 @@ public class TradeItem {
 	 * This method will decrease the current count
 	 */
 	public void decreaseCount(long decreaseCount) {
-		//TODO probably <= count ?
+		// TODO probably <= count ?
 		if (decreaseCount < count)
 			this.count = count - decreaseCount;
 	}

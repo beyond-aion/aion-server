@@ -31,7 +31,7 @@ public class SM_GROUP_INFO extends AionServerPacket {
 		Player player = con.getActivePlayer();
 		writeD(groupId);
 		writeD(leaderId);
-		writeD(player == null || player.getPosition() == null ? 0 : player.getWorldId());//mapId
+		writeD(player == null || player.getPosition() == null ? 0 : player.getWorldId());// mapId
 		writeD(lootRules.getLootRule().getId());
 		writeD(lootRules.getMisc());
 		writeD(lootRules.getCommonItemAbove());

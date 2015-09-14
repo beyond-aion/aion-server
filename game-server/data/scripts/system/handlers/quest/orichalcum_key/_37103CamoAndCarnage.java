@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _37103CamoAndCarnage extends QuestHandler {
 
@@ -34,7 +32,7 @@ public class _37103CamoAndCarnage extends QuestHandler {
 		qe.registerQuestNpc(799906).addOnTalkEvent(questId);
 		qe.registerQuestNpc(217169).addOnKillEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, 217169, 0, 5);
@@ -46,9 +44,9 @@ public class _37103CamoAndCarnage extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
@@ -57,7 +55,7 @@ public class _37103CamoAndCarnage extends QuestHandler {
 		}
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700968) {
-				if (player.isInGroup2()){
+				if (player.isInGroup2()) {
 					PlayerGroup group = player.getPlayerGroup2();
 					for (Player member : group.getMembers()) {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
@@ -66,29 +64,25 @@ public class _37103CamoAndCarnage extends QuestHandler {
 							npc.getController().onDelete();
 							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 217169, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 							return true;
-						}
-						else
-							 PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
+						} else
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
 					}
 				}
-		  }
+			}
 			if (targetId == 799906) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 5) {
+					if (qs.getQuestVarById(0) == 5) {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 5, 5, true, true);
-			  }
+				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799906) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799906) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

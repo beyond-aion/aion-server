@@ -141,8 +141,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
 				}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204388) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

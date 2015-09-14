@@ -18,7 +18,7 @@ public abstract class Rates {
 	public abstract float getGpPlayerGainRate();
 
 	public abstract float getXpPlayerGainRate();
-	
+
 	public abstract float getApPlayerLossRate();
 
 	public abstract float getGatheringXPRate();
@@ -40,7 +40,7 @@ public abstract class Rates {
 	public abstract float getDpPlayerRate();
 
 	public abstract int getCraftCritRate();
-	
+
 	public abstract int getComboCritRate();
 
 	public abstract float getDisciplineRewardRate();

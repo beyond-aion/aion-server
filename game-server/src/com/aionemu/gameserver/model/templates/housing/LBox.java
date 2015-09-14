@@ -12,7 +12,7 @@ public class LBox implements Cloneable {
 
 	@XmlElement(required = true)
 	protected int id;
-	
+
 	@XmlElement(required = true)
 	protected String name;
 
@@ -28,7 +28,7 @@ public class LBox implements Cloneable {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int position) {
 		id = 100 + position;
 	}
@@ -48,11 +48,11 @@ public class LBox implements Cloneable {
 	public int getIcon() {
 		return icon;
 	}
-	
+
 	public void setIcon(int id) {
 		icon = id;
 	}
-	
+
 	@Override
 	public Object clone() {
 		LBox result = new LBox();
@@ -61,7 +61,7 @@ public class LBox implements Cloneable {
 		result.desc = this.desc;
 		result.script = this.script;
 		result.icon = this.icon;
-		
+
 		return result;
 	}
 

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.instance.playerreward;
 
 /**
- *
  * @author xTz
  */
 public class InstancePlayerReward {
@@ -39,10 +38,10 @@ public class InstancePlayerReward {
 	}
 
 	public void addPvPKillToPlayer() {
-		playerPvPKills ++;
+		playerPvPKills++;
 	}
 
 	public void addMonsterKillToPlayer() {
-		playerMonsterKills ++;
+		playerMonsterKills++;
 	}
 }

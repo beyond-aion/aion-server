@@ -62,7 +62,7 @@ public class SummonServantEffect extends SummonEffect {
 
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, effect.getSkillLevel(), npcObjectType);
-		
+
 		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -72,7 +72,7 @@ public class SummonServantEffect extends SummonEffect {
 		}, time * 1000);
 		servant.getController().addTask(TaskId.DESPAWN, task);
 		if (servant.getNpcObjectType() != NpcObjectType.TOTEM)
-			servant.getAi2().onCreatureEvent(AIEventType.ATTACK, (target != null ? target: effected));
+			servant.getAi2().onCreatureEvent(AIEventType.ATTACK, (target != null ? target : effected));
 		return servant;
 	}
 }

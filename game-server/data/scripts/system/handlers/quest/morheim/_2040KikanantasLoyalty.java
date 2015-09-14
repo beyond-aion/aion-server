@@ -122,16 +122,14 @@ public class _2040KikanantasLoyalty extends QuestHandler {
 							if (var == 2) {
 								if (QuestService.collectItemCheck(env, false)) {
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 					}
 				}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204304) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

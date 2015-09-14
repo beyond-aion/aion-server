@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author mr.maddison
- *
  */
 public class _41502HiddenConnections extends QuestHandler {
 
@@ -24,7 +22,7 @@ public class _41502HiddenConnections extends QuestHandler {
 	public _41502HiddenConnections() {
 		super(questId);
 	}
-	
+
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205935).addOnQuestStart(questId);
@@ -32,15 +30,14 @@ public class _41502HiddenConnections extends QuestHandler {
 		qe.registerQuestNpc(701129).addOnTalkEvent(questId);
 		qe.registerQuestItem(182212514, questId);
 	}
-	
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env){
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205935) {
 				switch (dialog) {
@@ -52,35 +49,32 @@ public class _41502HiddenConnections extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701129) {
-				TeleportService2.teleportTo(player, 600030000, 329, 541, 362, (byte)100, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 600030000, 329, 541, 362, (byte) 100, TeleportAnimation.BEAM_ANIMATION);
 				changeQuestStep(env, 1, 2, true);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205935) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
-		
+
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("SMALL_CRATER_1_600030000")) && item.getItemId() == 182212514) {
-				TeleportService2.teleportTo(player, 600030000, 604, 1018, 210, (byte)30, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 600030000, 604, 1018, 210, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
 				changeQuestStep(env, 0, 1, false);
 			}
 		}

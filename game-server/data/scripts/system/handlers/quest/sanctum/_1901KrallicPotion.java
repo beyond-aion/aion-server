@@ -47,8 +47,7 @@ public class _1901KrallicPotion extends QuestHandler {
 				return sendQuestDialog(env, 1011);
 			else
 				return sendQuestStartDialog(env);
-		}
-		else {
+		} else {
 			if (targetId == 203864) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
@@ -58,14 +57,12 @@ public class _1901KrallicPotion extends QuestHandler {
 					updateQuestStatus(env);
 					qs.setStatus(QuestStatus.REWARD);
 					return sendQuestEndDialog(env);
-				}
-				else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 3398);
 					return sendQuestEndDialog(env);
 				}
-			}
-			else if (qs != null) {
+			} else if (qs != null) {
 				if (qs.getStatus() == QuestStatus.START) {
 					int var = qs.getQuestVarById(0);
 					switch (targetId) {
@@ -81,11 +78,9 @@ public class _1901KrallicPotion extends QuestHandler {
 									if (inventory.tryDecreaseKinah(10000)) {
 										qs.setQuestVarById(0, var + 1);
 										updateQuestStatus(env);
-										PacketSendUtility
-											.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 										return true;
-									}
-									else
+									} else
 										return sendQuestDialog(env, 1523);
 								case SETPRO1:// oui 10000
 									qs.setQuestVarById(0, var + 1);// var==1

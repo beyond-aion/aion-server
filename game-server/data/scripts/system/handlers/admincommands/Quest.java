@@ -64,8 +64,7 @@ public class Quest extends AdminCommand {
 					id = Integer.parseInt(result.group(1));
 				else
 					id = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest start <questId>");
 				return;
 			}
@@ -74,8 +73,7 @@ public class Quest extends AdminCommand {
 
 			if (QuestService.startQuest(env)) {
 				PacketSendUtility.sendMessage(admin, "Quest started.");
-			}
-			else {
+			} else {
 				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 				List<XMLStartCondition> preconditions = template.getXMLStartConditions();
 				if (preconditions != null && preconditions.size() > 0) {
@@ -93,8 +91,7 @@ public class Quest extends AdminCommand {
 				}
 				PacketSendUtility.sendMessage(admin, "Quest not started. Some preconditions failed");
 			}
-		}
-		else if (params[0].equals("set")) {
+		} else if (params[0].equals("set")) {
 			int questId, var;
 			int varNum = 0;
 			QuestStatus questStatus;
@@ -109,43 +106,41 @@ public class Quest extends AdminCommand {
 
 				String statusValue = params[2];
 				switch (statusValue) {
-			   	  case "START":
-					 questStatus = QuestStatus.START;
-					 break;
-			   	  case "NONE":
-					 questStatus = QuestStatus.NONE;
-					 break;
-			   	  case "COMPLETE":
-					 questStatus = QuestStatus.COMPLETE;
-					 break;
-			   	  case "REWARD":
-					 questStatus = QuestStatus.REWARD;
-					 break;
-			   	  default:
-					 PacketSendUtility.sendMessage(admin, "<status is one of START, NONE, REWARD, COMPLETE>");
-					 return;
-			   }
+					case "START":
+						questStatus = QuestStatus.START;
+						break;
+					case "NONE":
+						questStatus = QuestStatus.NONE;
+						break;
+					case "COMPLETE":
+						questStatus = QuestStatus.COMPLETE;
+						break;
+					case "REWARD":
+						questStatus = QuestStatus.REWARD;
+						break;
+					default:
+						PacketSendUtility.sendMessage(admin, "<status is one of START, NONE, REWARD, COMPLETE>");
+						return;
+				}
 				var = Integer.valueOf(params[3]);
 				if (params.length == 5 && params[4] != null && !"".equals(params[4])) {
 					varNum = Integer.valueOf(params[4]);
 				}
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest set <questId status var [varNum]>");
 				return;
 			}
 			QuestState qs = target.getQuestStateList().getQuestState(questId);
 			if (qs == null) {
 				qs = new QuestState(questId, questStatus, 0, 0, new Timestamp(0), 0, new Timestamp(0));
-				target.getQuestStateList().addQuest(questId, qs);				
+				target.getQuestStateList().addQuest(questId, qs);
 				PacketSendUtility.sendMessage(admin, "<QuestState has been newly initialized.>");
 				return;
 			}
 			qs.setStatus(questStatus);
 			if (varNum != 0) {
 				qs.setQuestVarById(varNum, var);
-			}
-			else {
+			} else {
 				qs.setQuestVar(var);
 			}
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
@@ -153,8 +148,7 @@ public class Quest extends AdminCommand {
 				qs.setCompleteCount(qs.getCompleteCount() + 1);
 				target.getController().updateNearbyQuests();
 			}
-		}
-		else if (params[0].equals("delete")) {
+		} else if (params[0].equals("delete")) {
 			if (params.length != 2) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest delete <quest id>");
 				return;
@@ -162,8 +156,7 @@ public class Quest extends AdminCommand {
 			int id;
 			try {
 				id = Integer.valueOf(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest delete <quest id>");
 				return;
 			}
@@ -171,8 +164,7 @@ public class Quest extends AdminCommand {
 			QuestStateList list = admin.getQuestStateList();
 			if (list == null || list.getQuestState(id) == null) {
 				PacketSendUtility.sendMessage(admin, "Quest not deleted.");
-			}
-			else {
+			} else {
 				QuestState qs = list.getQuestState(id);
 				qs.setQuestVar(0);
 				qs.setCompleteCount(0);
@@ -183,8 +175,7 @@ public class Quest extends AdminCommand {
 				QuestEngine.getInstance().sendCompletedQuests(admin);
 				admin.getController().updateNearbyQuests();
 			}
-		}
-		else if (params[0].equals("setflags")) {
+		} else if (params[0].equals("setflags")) {
 			int flags, questId;
 			QuestState qs;
 			if (params.length != 3) {
@@ -193,8 +184,7 @@ public class Quest extends AdminCommand {
 			}
 			try {
 				questId = Integer.valueOf(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "quest id is not a number!");
 				return;
 			}
@@ -202,8 +192,7 @@ public class Quest extends AdminCommand {
 			if (list == null || list.getQuestState(questId) == null) {
 				PacketSendUtility.sendMessage(admin, "No such quest!");
 				return;
-			}
-			else {
+			} else {
 				qs = list.getQuestState(questId);
 			}
 			if (qs.getStatus() != QuestStatus.START) {
@@ -212,22 +201,19 @@ public class Quest extends AdminCommand {
 			}
 			try {
 				flags = Integer.valueOf(params[2]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "flags is not a number!");
 				return;
 			}
 			qs.setFlags(flags);
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus().value(), 0, flags));
-		}
-		else if (params[0].equals("show")) {
+		} else if (params[0].equals("show")) {
 			if (params.length != 2) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest show <quest id>");
 				return;
 			}
 			ShowQuestInfo(target, admin, params[1]);
-		}
-		else if (params[0].equals("daily")) {
+		} else if (params[0].equals("daily")) {
 			if (params.length != 2) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest daily <quest id>");
 				return;
@@ -235,8 +221,7 @@ public class Quest extends AdminCommand {
 			int id;
 			try {
 				id = Integer.valueOf(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "syntax //quest daily <quest id>");
 				return;
 			}
@@ -253,7 +238,7 @@ public class Quest extends AdminCommand {
 			boolean found = false;
 			for (QuestTemplate template : quests) {
 				if (template.getId() == id) {
-					found = true; 
+					found = true;
 					break;
 				}
 			}
@@ -269,8 +254,7 @@ public class Quest extends AdminCommand {
 			faction.setTime(faction.getTime() + 10);
 			faction.setQuestId(id);
 			target.getNpcFactions().sendDailyQuest();
-		}
-		else
+		} else
 			info(admin, null);
 	}
 
@@ -278,21 +262,18 @@ public class Quest extends AdminCommand {
 		int id;
 		try {
 			id = Integer.valueOf(param);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "syntax //quest show <quest id>");
 			return;
 		}
 		QuestState qs = player.getQuestStateList().getQuestState(id);
 		if (qs == null) {
 			PacketSendUtility.sendMessage(admin, "Quest state: NULL");
-		}
-		else {
+		} else {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < 5; i++)
 				sb.append(Integer.toString(qs.getQuestVarById(i)) + " ");
-			PacketSendUtility.sendMessage(admin, "Quest state: " + qs.getStatus().toString() + "; vars: " + sb.toString()
-					+ qs.getQuestVarById(5));
+			PacketSendUtility.sendMessage(admin, "Quest state: " + qs.getStatus().toString() + "; vars: " + sb.toString() + qs.getQuestVarById(5));
 			sb.setLength(0);
 			sb = null;
 		}

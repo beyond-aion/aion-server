@@ -30,7 +30,8 @@ public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 				break;
 			time -= skill.getTime();
 		}
-		player.getController().useChargeSkill(chargeCastingSkill.getChargeSkillList().get(i).getId(), chargeCastingSkill.getSkillLevel(), chargeCastingSkill.getHitTime(), chargeCastingSkill.getFirstTarget());
+		player.getController().useChargeSkill(chargeCastingSkill.getChargeSkillList().get(i).getId(), chargeCastingSkill.getSkillLevel(),
+			chargeCastingSkill.getHitTime(), chargeCastingSkill.getFirstTarget());
 		chargeCastingSkill.cancelCast();
 		chargeCastingSkill.getChargeSkillList().clear();
 	}

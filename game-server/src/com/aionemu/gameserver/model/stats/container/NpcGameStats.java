@@ -34,7 +34,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	protected void onStatsChange() {
-            super.onStatsChange();
+		super.onStatsChange();
 		checkSpeedStats();
 	}
 
@@ -75,7 +75,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getAllSpeed() {
-		int base = 7500; //TODO current value
+		int base = 7500; // TODO current value
 		return getStat(StatEnum.ALLSPEED, base);
 	}
 
@@ -95,19 +95,16 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			else
 				speed = owner.getObjectTemplate().getStatsTemplate().getRunSpeedFight();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
-		}
-		else if (owner.isInState(CreatureState.WALKING)) {
+		} else if (owner.isInState(CreatureState.WALKING)) {
 			float speed = 0;
 			if (owner.getWalkerGroup() != null && owner.getAi2().getSubState() == AISubState.WALK_PATH)
 				speed = owner.getObjectTemplate().getStatsTemplate().getGroupWalkSpeed();
 			else
 				speed = owner.getObjectTemplate().getStatsTemplate().getWalkSpeed();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
-		}
-		else {
+		} else {
 			float multiplier = owner.isFlying() ? 1.3f : 1.0f;
-			newSpeedStat = getStat(StatEnum.SPEED,
-				Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * multiplier * 1000));
+			newSpeedStat = getStat(StatEnum.SPEED, Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * multiplier * 1000));
 		}
 		cachedState = currentState;
 		cachedSpeedStat = newSpeedStat;
@@ -213,8 +210,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMAccuracy() {
-	   int base = owner.getAi2().modifyMaccuracy(Math.round(owner.getObjectTemplate().getStatsTemplate().getAccuracy()));
-	   return getStat(StatEnum.MAGICAL_ACCURACY, base);
+		int base = owner.getAi2().modifyMaccuracy(Math.round(owner.getObjectTemplate().getStatsTemplate().getAccuracy()));
+		return getStat(StatEnum.MAGICAL_ACCURACY, base);
 	}
 
 	@Override
@@ -253,13 +250,13 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		return nextAttackTime - System.currentTimeMillis() > 50;
 	}
 
-        public void setFightStartingTime() {
-                this.fightStartingTime = System.currentTimeMillis();
-        }
+	public void setFightStartingTime() {
+		this.fightStartingTime = System.currentTimeMillis();
+	}
 
-        public long getFightStartingTime() {
-                return this.fightStartingTime;
-        }
+	public long getFightStartingTime() {
+		return this.fightStartingTime;
+	}
 
 	public void setNextAttackTime(long nextAttackTime) {
 		this.nextAttackTime = nextAttackTime;
@@ -288,10 +285,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		this.lastSkillTime = System.currentTimeMillis();
 	}
 
-        //not used at the moment
-	/*public void renewLastSkilledTime() {
-		this.lastSkilledTime = System.currentTimeMillis();
-	}*/
+	// not used at the moment
+	/*
+	 * public void renewLastSkilledTime() { this.lastSkilledTime = System.currentTimeMillis(); }
+	 */
 
 	public void renewLastChangeTargetTime() {
 		this.lastChangeTarget = System.currentTimeMillis();
@@ -301,19 +298,19 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		return Math.round((System.currentTimeMillis() - lastSkillTime) / 1000f);
 	}
 
-        //not used at the moment
-	/*public int getLastSkilledTimeDelta() {
-		return Math.round((System.currentTimeMillis() - lastSkilledTime) / 1000f);
-	}*/
+	// not used at the moment
+	/*
+	 * public int getLastSkilledTimeDelta() { return Math.round((System.currentTimeMillis() - lastSkilledTime) / 1000f); }
+	 */
 
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
 	}
 
-        //only use skills after a minimum cooldown of 3 to 9 seconds
-        //TODO: Check wether this is a suitable time or not
+	// only use skills after a minimum cooldown of 3 to 9 seconds
+	// TODO: Check wether this is a suitable time or not
 	public boolean canUseNextSkill() {
-		if (getLastSkillTimeDelta() >= 6 + Rnd.get(-3,3))
+		if (getLastSkillTimeDelta() >= 6 + Rnd.get(-3, 3))
 			return true;
 		else
 			return false;
@@ -329,7 +326,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	/**
-	 * @param lastGeoZUpdate the lastGeoZUpdate to set
+	 * @param lastGeoZUpdate
+	 *          the lastGeoZUpdate to set
 	 */
 	public void setLastGeoZUpdate(long lastGeoZUpdate) {
 		this.lastGeoZUpdate = lastGeoZUpdate;

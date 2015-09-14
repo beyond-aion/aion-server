@@ -46,7 +46,7 @@ public class Account {
 	 * Last ip of user -1 if none
 	 */
 	private String lastIp;
-	
+
 	/**
 	 * Last mac of user xx-xx-xx-xx-xx-xx if none
 	 */
@@ -209,7 +209,7 @@ public class Account {
 	public void setLastIp(String lastIp) {
 		this.lastIp = lastIp;
 	}
-	
+
 	/**
 	 * Returns last mac that player played from
 	 * 

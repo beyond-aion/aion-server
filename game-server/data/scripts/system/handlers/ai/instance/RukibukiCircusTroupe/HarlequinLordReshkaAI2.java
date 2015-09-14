@@ -10,19 +10,16 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("harlequinlordreshka")
-public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2
-{
+public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> openBoxesTask;
 	private Future<?> spawnBoxesTask;
 
 	@Override
-	protected void handleSpawned() 
-	{
+	protected void handleSpawned() {
 		super.handleSpawned();
 		spawnTerrorsBox();
 		spawnNightmaresBox();
@@ -30,26 +27,21 @@ public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleDied() 
-	{
+	protected void handleDied() {
 		super.handleDied();
 		cancelTasks();
 	}
 
-	private void cancelTasks()
-	{
-		if (openBoxesTask != null && !openBoxesTask.isDone())
-		{
+	private void cancelTasks() {
+		if (openBoxesTask != null && !openBoxesTask.isDone()) {
 			openBoxesTask.cancel(true);
 		}
-		if (spawnBoxesTask != null && !spawnBoxesTask.isDone())
-		{
+		if (spawnBoxesTask != null && !spawnBoxesTask.isDone()) {
 			spawnBoxesTask.cancel(true);
 		}
 	}
 
-	private void spawnTerrorsBox()
-	{
+	private void spawnTerrorsBox() {
 		spawn(831348, 507.42712f, 570.53394f, 199.50775f, (byte) 30);
 		spawn(831348, 507.6568f, 560.18787f, 199.50775f, (byte) 30);
 		spawn(831348, 512.9201f, 552.13983f, 199.50775f, (byte) 30);
@@ -64,16 +56,12 @@ public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2
 		spawn(831348, 543.323f, 572.56665f, 199.50775f, (byte) 30);
 	}
 
-	private void spawnNightmaresBox()
-	{
-		spawnBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	private void spawnNightmaresBox() {
+		spawnBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				if (!isAlreadyDead()) 
-				{
+			public void run() {
+				if (!isAlreadyDead()) {
 					spawn(831349, 507.42712f, 570.53394f, 199.50775f, (byte) 30);
 					spawn(831349, 507.6568f, 560.18787f, 199.50775f, (byte) 30);
 					spawn(831349, 512.9201f, 552.13983f, 199.50775f, (byte) 30);
@@ -92,30 +80,23 @@ public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2
 		}, 36000);
 	}
 
-	private void openBoxes()
-	{
-		openBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+	private void openBoxes() {
+		openBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				if (!isAlreadyDead()) 
-				{
+			public void run() {
+				if (!isAlreadyDead()) {
 					AI2Actions.useSkill(HarlequinLordReshkaAI2.this, 21477);
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1501146, getObjectId(), 0, 0);
 				}
 			}
 
 		}, 30000);
-		openBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+		openBoxesTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run() 
-			{
-				if (!isAlreadyDead()) 
-				{
+			public void run() {
+				if (!isAlreadyDead()) {
 					AI2Actions.useSkill(HarlequinLordReshkaAI2.this, 21477);
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1501147, getObjectId(), 0, 0);
 				}

@@ -15,7 +15,7 @@ import com.aionemu.gameserver.network.factories.LsPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_GS_AUTH;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-/** 
+/**
  * Object representing connection between LoginServer and GameServer.
  * 
  * @author -Nemesiss-
@@ -61,7 +61,7 @@ public class LoginServerConnection extends AConnection {
 	 */
 
 	public LoginServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192*8, 8192*8);
+		super(sc, d, 8192 * 8, 8192 * 8);
 		LsPacketHandlerFactory lsPacketHandlerFactory = LsPacketHandlerFactory.getInstance();
 		this.lsPacketHandler = lsPacketHandlerFactory.getPacketHandler();
 
@@ -76,7 +76,6 @@ public class LoginServerConnection extends AConnection {
 		 */
 		this.sendPacket(new SM_GS_AUTH());
 	}
-
 
 	/**
 	 * Called by Dispatcher. ByteBuffer data contains one packet that should be processed.
@@ -155,9 +154,8 @@ public class LoginServerConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont.
-	 * Connection will be closed [by Dispatcher Thread], and onDisconnect() method will be called to clear all other
-	 * things.
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
 	 *          Packet that will be send before closing.

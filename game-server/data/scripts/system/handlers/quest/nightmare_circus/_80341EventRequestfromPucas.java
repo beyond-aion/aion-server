@@ -8,22 +8,18 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Ritsu
  */
-public class _80341EventRequestfromPucas extends QuestHandler 
-{
+public class _80341EventRequestfromPucas extends QuestHandler {
 
 	private static final int questId = 80341;
 
-	public _80341EventRequestfromPucas() 
-	{
+	public _80341EventRequestfromPucas() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(831717).addOnQuestStart(questId);
 		qe.registerQuestNpc(831716).addOnQuestStart(questId);
 		qe.registerQuestNpc(831715).addOnQuestStart(questId);
@@ -51,26 +47,21 @@ public class _80341EventRequestfromPucas extends QuestHandler
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 ||
-				targetId == 831713 || targetId == 831712 || targetId == 831711 || targetId == 831710 ||
-				targetId == 831709)  
-			{
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 || targetId == 831713 || targetId == 831712
+				|| targetId == 831711 || targetId == 831710 || targetId == 831709) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else 
+				else
 					return sendQuestStartDialog(env);
 			}
 		}
 
 		if (qs == null)
 			return false;
-		else if (qs.getStatus() == QuestStatus.START) 
-		{
+		else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			switch (targetId) 
-			{
+			switch (targetId) {
 				case 831717:
 				case 831716:
 				case 831715:
@@ -79,32 +70,23 @@ public class _80341EventRequestfromPucas extends QuestHandler
 				case 831712:
 				case 831711:
 				case 831710:
-				case 831709:
-				{
-					switch (dialog) 
-					{
-						case QUEST_SELECT: 
-						{
-							if (var == 0) 
-							{
+				case 831709: {
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 0) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
-						case SELECT_QUEST_REWARD: 
-						{
+						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 0, 0, true);
 							return sendQuestDialog(env, 5);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 ||
-				targetId == 831713 || targetId == 831712 || targetId == 831711 || targetId == 831710 ||
-				targetId == 831709)  
-			{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 || targetId == 831713 || targetId == 831712
+				|| targetId == 831711 || targetId == 831710 || targetId == 831709) {
 				return sendQuestEndDialog(env);
 			}
 		}

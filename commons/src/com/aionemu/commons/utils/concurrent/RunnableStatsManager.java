@@ -70,7 +70,7 @@ public final class RunnableStatsManager {
 
 			methodNames = Arrays.copyOf(methodNames, methodNames.length + 1);
 			methodNames[methodNames.length - 1] = methodName;
-			methodStats =  Arrays.copyOf(methodStats, methodStats.length + 1);
+			methodStats = Arrays.copyOf(methodStats, methodStats.length + 1);
 			methodStats[methodNames.length - 1] = methodStat;
 
 			return methodStat;
@@ -101,8 +101,7 @@ public final class RunnableStatsManager {
 				total += runTime;
 				min = Math.min(min, runTime);
 				max = Math.max(max, runTime);
-			}
-			finally {
+			} finally {
 				lock.unlock();
 			}
 		}
@@ -302,11 +301,9 @@ public final class RunnableStatsManager {
 
 			for (String line : lines)
 				ps.println(line);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("", e);
-		}
-		finally {
+		} finally {
 			IOUtils.closeQuietly(ps);
 		}
 	}

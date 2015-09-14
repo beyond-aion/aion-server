@@ -8,19 +8,16 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Ritsu
- *
  */
-public class _28901MuzzleTussle extends QuestHandler{
+public class _28901MuzzleTussle extends QuestHandler {
 
 	private static final int questId = 28901;
 
 	public _28901MuzzleTussle() {
 		super(questId);
 	}
-
 
 	@Override
 	public void register() {
@@ -38,7 +35,7 @@ public class _28901MuzzleTussle extends QuestHandler{
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		switch (targetId) {
 			case 219299:
 				qs.setQuestVarById(0, var + 1);
@@ -58,25 +55,22 @@ public class _28901MuzzleTussle extends QuestHandler{
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 800332) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
-						return sendQuestDialog(env, 1011);
-					else
-						return sendQuestStartDialog(env);
-				}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+				if (env.getDialog() == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 1011);
+				else
+					return sendQuestStartDialog(env);
+			}
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205864) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 1352);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205864) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 5);

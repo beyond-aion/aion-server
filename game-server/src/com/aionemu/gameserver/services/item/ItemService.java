@@ -38,7 +38,8 @@ public class ItemService {
 
 	private static final Logger log = LoggerFactory.getLogger("ITEM_LOG");
 
-	public static final ItemUpdatePredicate DEFAULT_UPDATE_PREDICATE = new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_ITEM_COLLECT);
+	public static final ItemUpdatePredicate DEFAULT_UPDATE_PREDICATE = new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
+		ItemUpdateType.INC_ITEM_COLLECT);
 
 	public static void loadItemStones(Collection<Item> itemList) {
 		if (itemList != null && itemList.size() > 0) {
@@ -82,8 +83,8 @@ public class ItemService {
 
 		if (LoggingConfig.LOG_ITEM) {
 			log.info("[ITEM] ID/Count"
-				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/"
-					+ itemTemplate.getName() : " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
+				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/" + itemTemplate.getName()
+					: " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
 		}
 
 		Storage inventory = player.getInventory();
@@ -95,8 +96,7 @@ public class ItemService {
 
 		if (itemTemplate.isStackable()) {
 			count = addStackableItem(player, itemTemplate, count, predicate);
-		}
-		else {
+		} else {
 			count = addNonStackableItem(player, itemTemplate, count, sourceItem, predicate);
 		}
 
@@ -144,7 +144,7 @@ public class ItemService {
 		if (sourceItem.getEnchantLevel() > 0) {
 			newItem.setEnchantLevel(sourceItem.getEnchantLevel());
 		}
-		if(sourceItem.getTempering() > 0) {
+		if (sourceItem.getTempering() > 0) {
 			newItem.setTempering(sourceItem.getTempering());
 		}
 		if (sourceItem.isSoulBound()) {
@@ -163,9 +163,9 @@ public class ItemService {
 	 * Add stackable item to inventory
 	 */
 	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, ItemUpdatePredicate predicate) {
-		 Collection<Item> items;
-		 // dirty & hacky check for arrows and shards...
-		 if (itemTemplate.getItemGroup() == ItemGroup.POWER_SHARDS ) {
+		Collection<Item> items;
+		// dirty & hacky check for arrows and shards...
+		if (itemTemplate.getItemGroup() == ItemGroup.POWER_SHARDS) {
 			Equipment equipment = player.getEquipment();
 			items = equipment.getEquippedItemsByItemId(itemTemplate.getTemplateId());
 			for (Item item : items) {
@@ -175,8 +175,7 @@ public class ItemService {
 				count = equipment.increaseEquippedItemCount(item, count);
 			}
 		}
-	   
-	   
+
 		Storage inventory = player.getInventory();
 		items = inventory.getItemsByItemId(itemTemplate.getTemplateId());
 		for (Item item : items) {
@@ -200,7 +199,7 @@ public class ItemService {
 
 	public static boolean addQuestItems(Player player, List<QuestItems> questItems, ItemUpdatePredicate predicate) {
 		int slotReq = 0, specialSlot = 0;
-	
+
 		for (QuestItems qi : questItems) {
 			if (qi.getItemId() != ItemId.KINAH.value() && qi.getCount() != 0) {
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(qi.getItemId());
@@ -210,8 +209,7 @@ public class ItemService {
 					count++;
 				if (template.getExtraInventoryId() > 0) {
 					specialSlot += count;
-				}
-				else {
+				} else {
 					slotReq += count;
 				}
 			}
@@ -298,23 +296,23 @@ public class ItemService {
 		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(randomItemId);
 		return template != null;
 	}
-	
-  /**
-   * @param object
-   * @param unk
-   * @param unk1
-   * @param unk2
-   */
-  public static Item newItem(int resultItemId, int count, Object object, int unk, int unk1, int unk2) {
-      ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(resultItemId);
-      if (count <= 0 || itemTemplate == null) {
-          return null;
-      }
-      Preconditions.checkNotNull(itemTemplate, "No item with id " + resultItemId);
 
-      Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
+	/**
+	 * @param object
+	 * @param unk
+	 * @param unk1
+	 * @param unk2
+	 */
+	public static Item newItem(int resultItemId, int count, Object object, int unk, int unk1, int unk2) {
+		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(resultItemId);
+		if (count <= 0 || itemTemplate == null) {
+			return null;
+		}
+		Preconditions.checkNotNull(itemTemplate, "No item with id " + resultItemId);
 
-      return newItem;
-  }
+		Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
+
+		return newItem;
+	}
 
 }

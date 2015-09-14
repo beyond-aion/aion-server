@@ -97,11 +97,11 @@ public class QuestStateList {
 	public void changeQuestStatus(Integer key, QuestStatus newStatus) {
 		_quests.get(key).setStatus(newStatus);
 	}
-	
+
 	public int size() {
 		return this._quests.size();
 	}
-	
+
 	public SortedMap<Integer, QuestState> getQuests() {
 		return this._quests;
 	}

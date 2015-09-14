@@ -45,7 +45,7 @@ public class _20020CrashoftheDredgion extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799225: { // Richelle
@@ -61,7 +61,7 @@ public class _20020CrashoftheDredgion extends QuestHandler {
 					}
 					break;
 				}
-				case 700977: { 
+				case 700977: {
 					return true;
 				}
 				case 799226: { // Valetta
@@ -126,13 +126,11 @@ public class _20020CrashoftheDredgion extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799226) { // Valetta
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

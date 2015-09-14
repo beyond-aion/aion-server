@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -27,18 +26,18 @@ public class SkillPanel {
 	public List<Integer> getSkills() {
 		return null;
 	}
-	
+
 	public boolean canUseSkill(int skillId, int level) {
-		for (Integer skill : skills){
+		for (Integer skill : skills) {
 			if ((skill >> 8) == skillId && (skill & 0xFF) == level) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isSkillPresent(int skillId) {
-		for (Integer skill : skills){
+		for (Integer skill : skills) {
 			if ((skill >> 8) == skillId) {
 				return true;
 			}

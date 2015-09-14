@@ -37,28 +37,28 @@ public class Properties {
 
 	@XmlAttribute(name = "target_maxcount")
 	protected int targetMaxCount;
-	
+
 	@XmlAttribute(name = "target_status")
 	private List<String> targetStatus;
-	
+
 	@XmlAttribute(name = "revision_distance")
 	protected int revisionDistance;
-	
+
 	@XmlAttribute(name = "effective_range")
 	private int effectiveRange;
-	
+
 	@XmlAttribute(name = "effective_altitude")
 	private int effectiveAltitude;
-	
+
 	@XmlAttribute(name = "effective_angle")
 	private int effectiveAngle;
-	
+
 	@XmlAttribute(name = "effective_dist")
 	private int effectiveDist;
-	
+
 	@XmlAttribute(name = "direction")
 	protected AreaDirections direction = AreaDirections.NONE;
-	
+
 	@XmlAttribute(name = "target_species")
 	protected TargetSpeciesAttribute targetSpecies = TargetSpeciesAttribute.ALL;
 
@@ -172,11 +172,11 @@ public class Properties {
 	public int getTargetMaxCount() {
 		return targetMaxCount;
 	}
-	
+
 	public List<String> getTargetStatus() {
 		return targetStatus;
 	}
-	
+
 	public int getRevisionDistance() {
 		return revisionDistance;
 	}
@@ -184,11 +184,11 @@ public class Properties {
 	public int getEffectiveRange() {
 		return effectiveRange;
 	}
-	
+
 	public int getEffectiveAltitude() {
 		return effectiveAltitude;
 	}
-	
+
 	public int getEffectiveDist() {
 		return effectiveDist;
 	}
@@ -196,11 +196,11 @@ public class Properties {
 	public int getEffectiveAngle() {
 		return effectiveAngle;
 	}
-	
+
 	public AreaDirections getDirection() {
 		return direction;
 	}
-	
+
 	public TargetSpeciesAttribute getTargetSpecies() {
 		return targetSpecies;
 	}

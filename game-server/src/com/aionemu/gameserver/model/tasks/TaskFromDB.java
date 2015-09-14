@@ -33,8 +33,7 @@ public class TaskFromDB {
 	 * @param param
 	 *          : String
 	 */
-	public TaskFromDB(int id, String name, String type, Timestamp lastActivation, String startTime, int delay,
-		String param) {
+	public TaskFromDB(int id, String name, String type, Timestamp lastActivation, String startTime, int delay, String param) {
 		this.id = id;
 		this.name = name;
 		this.type = type;

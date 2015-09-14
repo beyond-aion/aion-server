@@ -29,8 +29,7 @@ public class SM_CHANNEL_INFO extends AionServerPacket {
 			if (WorldConfig.WORLD_EMULATE_FASTTRACK)
 				this.instanceCount += template.getTwinCount();
 			this.currentChannel = position.getInstanceId() - 1;
-		}
-		else {
+		} else {
 			this.instanceCount = template.getTwinCount();
 			if (WorldConfig.WORLD_EMULATE_FASTTRACK)
 				this.instanceCount += template.getBeginnerTwinCount();

@@ -68,8 +68,8 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 		if (var == 8) {
 			qs.setQuestVar(7);
 			updateQuestStatus(env);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-				DataManager.QUEST_DATA.getQuestById(questId).getName()));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+				.getName()));
 		}
 
 		return false;
@@ -118,8 +118,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 8)
 			return false;
-		QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128,
-			(float) 135.88919, (byte) 30);
+		QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
 		return true;
 	}
 
@@ -147,8 +146,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START)
+		} else if (qs.getStatus() != QuestStatus.START)
 			return false;
 		if (targetId == 799226) {
 			switch (env.getDialog()) {
@@ -161,16 +159,14 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1); // 1
 				case SETPRO4:
 					if (defaultCloseDialog(env, 3, 4)) { // 4
-					 TeleportService2.teleportToNpc(player, 204057);
-					 return true;
+						TeleportService2.teleportToNpc(player, 204057);
+						return true;
 					}
 			}
-		}
-		else if (targetId == 700810) {
+		} else if (targetId == 700810) {
 			if (env.getDialog() == DialogAction.USE_OBJECT)
 				return true; // loot
-		}
-		else if (targetId == 799292) {
+		} else if (targetId == 799292) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -188,8 +184,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO2:
 					return defaultCloseDialog(env, 1, 2); // 2
@@ -198,8 +193,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 				case SET_SUCCEED:
 					return defaultCloseDialog(env, 11, 11, true, false); // reward
 			}
-		}
-		else if (targetId == 204057) {
+		} else if (targetId == 204057) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -207,12 +201,11 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 					break;
 				case SETPRO5:
 					if (defaultCloseDialog(env, 4, 5, 182207611, 1, 0, 0)) { // 5
-					 TeleportService2.teleportToNpc(player, 799292);
-					 return true;
+						TeleportService2.teleportToNpc(player, 799292);
+						return true;
 					}
 			}
-		}
-		else if (targetId == 799341) {
+		} else if (targetId == 799341) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 9)
@@ -220,8 +213,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 				case SETPRO10:
 					return defaultCloseDialog(env, 9, 10, 182207613, 1, 0, 0); // 10
 			}
-		}
-		else if (targetId == 799513 || targetId == 799514 || targetId == 799515 || targetId == 799516) {
+		} else if (targetId == 799513 || targetId == 799514 || targetId == 799515 || targetId == 799516) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 7)
@@ -234,8 +226,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						npc.getController().onDie(player);
 						return true;
-					}
-					else if (var == 7 && var1 < 3) {
+					} else if (var == 7 && var1 < 3) {
 						qs.setQuestVarById(1, var1 + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -243,8 +234,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 730243) {
+		} else if (targetId == 730243) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var >= 6)
@@ -258,14 +248,12 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 					if (var > 5) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300150000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f,
-							134.53333f, (byte) 90);
+						TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f, 134.53333f, (byte) 90);
 						return true;
 					}
 					break;
 			}
-		}
-		else if (targetId == 700706) {
+		} else if (targetId == 700706) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 10) {

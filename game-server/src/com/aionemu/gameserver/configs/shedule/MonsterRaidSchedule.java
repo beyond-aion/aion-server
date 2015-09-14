@@ -13,15 +13,13 @@ import org.apache.commons.io.FileUtils;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 
-
 /**
  * @author Whoop
- *
  */
 @XmlRootElement(name = "raid_schedule")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MonsterRaidSchedule {
-	
+
 	@XmlElement(name = "raid", required = true)
 	private List<Raid> monsterRaidsList;
 
@@ -52,8 +50,7 @@ public class MonsterRaidSchedule {
 		try {
 			String xml = FileUtils.readFileToString(new File("./config/shedule/monster_raid_schedule.xml"));
 			mrs = JAXBUtil.deserialize(xml, MonsterRaidSchedule.class);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize worldraids", e);
 		}
 		return mrs;

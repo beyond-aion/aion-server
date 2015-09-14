@@ -27,10 +27,11 @@ public class OpenAerialEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-	   if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED) 
-			  || effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE) || effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
-			  || effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER))
-		 return;
+		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER))
+			return;
 		super.calculate(effect, StatEnum.OPENAREIAL_RESISTANCE, SpellStatus.OPENAERIAL);
 	}
 
@@ -40,10 +41,12 @@ public class OpenAerialEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill();
 		effect.getEffected().getEffectController().removeParalyzeEffects();
 		if (effected instanceof Player)
-			 ((Player) effected).getFlyController().onStopGliding();
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ()));
-		World.getInstance().updatePosition(effect.getEffected(), effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ(), effect.getEffected().getHeading());
-		//effected.getMoveController().abortMove();
+			((Player) effected).getFlyController().onStopGliding();
+		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
+			effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ()));
+		World.getInstance().updatePosition(effect.getEffected(), effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ(),
+			effect.getEffected().getHeading());
+		// effected.getMoveController().abortMove();
 		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL.getId());
 		effect.setAbnormal(AbnormalState.OPENAERIAL.getId());
 	}

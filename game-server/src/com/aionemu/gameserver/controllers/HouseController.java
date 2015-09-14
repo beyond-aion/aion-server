@@ -124,8 +124,7 @@ public class HouseController extends VisibleObjectController<House> {
 		if (kicker != null) {
 			if (!kickFriends) {
 				PacketSendUtility.sendPacket(kicker, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OUT_WITHOUT_FRIENDS);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(kicker, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OUT_ALL);
 			}
 		}
@@ -137,14 +136,12 @@ public class HouseController extends VisibleObjectController<House> {
 			float y = getOwner().getAddress().getExitY();
 			float z = getOwner().getAddress().getExitZ();
 			TeleportService2.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
-		}
-		else {
+		} else {
 			Npc sign = getOwner().getCurrentSign();
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(sign.getHeading()));
 			float x = (float) (sign.getX() + (8 * Math.cos(radian)));
 			float y = (float) (sign.getY() + (8 * Math.sin(radian)));
-			TeleportService2.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(),
-							TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
 		}
 		if (onSettingsChange)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER);

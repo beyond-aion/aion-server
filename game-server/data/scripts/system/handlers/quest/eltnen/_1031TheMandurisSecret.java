@@ -9,9 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Aurelius (203902). Hunt Manduri (6): 210771, 210758, 210763, 210764, 210759, 210770 Report to Aurelius.
- * Talk with Archelaos (203936). Find Paper Glider (700179). Find Melginie (204043). Escort Melginie to Celestine
- * (204030). Talk with Celestine. Report to Aurelius.
+ * Talk with Aurelius (203902). Hunt Manduri (6): 210771, 210758, 210763, 210764, 210759, 210770 Report to Aurelius. Talk with Archelaos (203936).
+ * Find Paper Glider (700179). Find Melginie (204043). Escort Melginie to Celestine (204030). Talk with Celestine. Report to Aurelius.
  * 
  * @author Xitanium
  * @reworked vlog
@@ -155,7 +154,7 @@ public class _1031TheMandurisSecret extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

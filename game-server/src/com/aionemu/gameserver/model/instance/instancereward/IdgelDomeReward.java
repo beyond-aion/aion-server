@@ -8,11 +8,9 @@ import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- *
  * @author Ritsu
  */
-public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> 
-{
+public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 
 	private MutableInt asmodiansPoints = new MutableInt(0), elyosPoints = new MutableInt(0);
 	private MutableInt asmodiansKills = new MutableInt(0), elyosKills = new MutableInt(0);
@@ -21,15 +19,13 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward>
 	public final static int winningPoints = 5600;
 	public final static int looserPoints = 1120;
 
-	static 
-	{
+	static {
 		positions = new float[2][];
-		positions[1] = new float[]{259.3971f, 169.18243f, 79.430855f, 45}; // asmodians
-		positions[0] = new float[]{269.76874f, 348.35953f, 79.44365f, 105}; // elyos
+		positions[1] = new float[] { 259.3971f, 169.18243f, 79.430855f, 45 }; // asmodians
+		positions[0] = new float[] { 269.76874f, 348.35953f, 79.44365f, 105 }; // elyos
 	}
 
-	public IdgelDomeReward(Integer mapId, int instanceId) 
-	{
+	public IdgelDomeReward(Integer mapId, int instanceId) {
 		super(mapId, instanceId);
 	}
 
@@ -102,10 +98,8 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward>
 		return racePosition;
 	}
 
-	public void portToPosition(Player player) 
-	{
-		switch (player.getRace()) 
-		{
+	public void portToPosition(Player player) {
+		switch (player.getRace()) {
 			case ELYOS:
 				teleport(player, positions[0]);
 				break;

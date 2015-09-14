@@ -12,7 +12,7 @@ import com.aionemu.commons.utils.ClassUtils;
 public class ScheduledTaskClassListener implements ClassListener {
 
 	@Override
-	@SuppressWarnings({"unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	public void postLoad(Class<?>[] classes) {
 		for (Class<?> clazz : classes) {
 			if (isValidClass(clazz)) {
@@ -22,7 +22,7 @@ public class ScheduledTaskClassListener implements ClassListener {
 	}
 
 	@Override
-	@SuppressWarnings({"unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	public void preUnload(Class<?>[] classes) {
 		for (Class<?> clazz : classes) {
 			if (isValidClass(clazz)) {
@@ -65,13 +65,13 @@ public class ScheduledTaskClassListener implements ClassListener {
 		Scheduled metadata = clazz.getAnnotation(Scheduled.class);
 
 		try {
-			if(metadata.instancePerCronExpression()){
-				for(String s : metadata.value()){
+			if (metadata.instancePerCronExpression()) {
+				for (String s : metadata.value()) {
 					getCronService().schedule(clazz.newInstance(), s, metadata.longRunningTask());
 				}
 			} else {
 				Runnable r = clazz.newInstance();
-				for(String s : metadata.value()){
+				for (String s : metadata.value()) {
 					getCronService().schedule(r, s, metadata.longRunningTask());
 				}
 			}
@@ -89,7 +89,7 @@ public class ScheduledTaskClassListener implements ClassListener {
 		}
 	}
 
-	protected CronService getCronService(){
+	protected CronService getCronService() {
 		if (CronService.getInstance() == null) {
 			throw new RuntimeException("CronService is not initialized");
 		}

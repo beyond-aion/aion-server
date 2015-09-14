@@ -8,10 +8,11 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
- * @author  xTz
+ * @author xTz
  */
 @AIName("manadar")
 public class ManadarAI2 extends AggressiveNpcAI2 {
+
 	private boolean isStart = false;
 
 	@Override
@@ -33,7 +34,7 @@ public class ManadarAI2 extends AggressiveNpcAI2 {
 		super.handleBackHome();
 	}
 
-	private void check () {
+	private void check() {
 		if (getPosition().isSpawned() && !isAlreadyDead() && isStart) {
 			for (int i = 0; i < 5; i++) {
 				int distance = Rnd.get(4, 11);

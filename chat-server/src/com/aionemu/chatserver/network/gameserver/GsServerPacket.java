@@ -9,16 +9,15 @@ import com.aionemu.commons.network.packet.BaseServerPacket;
  * 
  * @author -Nemesiss-
  */
-public abstract class GsServerPacket extends BaseServerPacket
-{
+public abstract class GsServerPacket extends BaseServerPacket {
+
 	/**
 	 * Constructs a new server packet with specified id.
 	 * 
 	 * @param opcode
 	 *          packet opcode.
 	 */
-	protected GsServerPacket()
-	{
+	protected GsServerPacket() {
 		super(0);
 	}
 
@@ -28,8 +27,7 @@ public abstract class GsServerPacket extends BaseServerPacket
 	 * @param con
 	 * @param buf
 	 */
-	public final void write(GsConnection con, ByteBuffer buffer)
-	{
+	public final void write(GsConnection con, ByteBuffer buffer) {
 		setBuf(buffer);
 		buf.putShort((short) 0);
 		writeImpl(con);

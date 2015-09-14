@@ -11,16 +11,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2498TheSoddenScroll extends QuestHandler {
 
 	private final static int questId = 2498;
-	
-	
+
 	public _2498TheSoddenScroll() {
 		super(questId);
 	}
@@ -40,32 +37,28 @@ public class _2498TheSoddenScroll extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
-			}
-			else if (targetId == 700302) {
+			} else if (targetId == 700302) {
 				Npc npc = (Npc) env.getVisibleObject();
 				giveQuestItem(env, 182204232, 1);
 				npc.getController().scheduleRespawn();
 				npc.getController().onDelete();
 				return true;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798125) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 798125) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 2375);
+					return sendQuestDialog(env, 2375);
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					removeQuestItem(env, 182204232, 1);
+					return defaultCloseDialog(env, 0, 1, true, true);
 				}
-			  else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
-			  	removeQuestItem(env, 182204232, 1);
-			  	return defaultCloseDialog(env, 0, 1, true, true);
 			}
-		}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798125) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
@@ -75,13 +68,13 @@ public class _2498TheSoddenScroll extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

@@ -15,9 +15,7 @@ import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
 
 /**
- * 
  * @author ViAl
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "task" })
@@ -25,7 +23,7 @@ import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
 public class ChallengeData {
 
 	protected List<ChallengeTaskTemplate> task;
-	
+
 	@XmlTransient
 	protected Map<Integer, ChallengeTaskTemplate> tasksById = new HashMap<Integer, ChallengeTaskTemplate>();
 
@@ -40,7 +38,7 @@ public class ChallengeData {
 	public Map<Integer, ChallengeTaskTemplate> getTasks() {
 		return this.tasksById;
 	}
-	
+
 	public ChallengeTaskTemplate getTaskByTaskId(int taskId) {
 		return tasksById.get(taskId);
 	}
@@ -53,7 +51,7 @@ public class ChallengeData {
 		}
 		return null;
 	}
-	
+
 	public ChallengeQuestTemplate getQuestByQuestId(int questId) {
 		for (ChallengeTaskTemplate ct : tasksById.values()) {
 			for (ChallengeQuestTemplate cq : ct.getQuests())

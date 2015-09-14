@@ -2,8 +2,8 @@ package com.aionemu.gameserver.model.templates;
 
 public class CraftLearnTemplate {
 
-		private int skillId;
-		private boolean isCraftSkill;
+	private int skillId;
+	private boolean isCraftSkill;
 
 	/**
 	 * @return the isCraftSkill

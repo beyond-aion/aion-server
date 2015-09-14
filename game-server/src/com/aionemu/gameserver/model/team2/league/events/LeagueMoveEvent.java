@@ -11,7 +11,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.google.common.base.Predicate;
 
 /**
- *
  * @author Source
  */
 public class LeagueMoveEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember>, TeamEvent {
@@ -51,15 +50,13 @@ public class LeagueMoveEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 
 		if (member.getObjectId() == selectedAllianceId) {
 			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(targetCurrentPosition));
-		}
-		else {
+		} else {
 			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(selectedName, targetCurrentPosition));
 		}
 
 		if (member.getObjectId() == targetAllianceId) {
 			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(selectedCurrentPosition));
-		}
-		else {
+		} else {
 			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(targetName, selectedCurrentPosition));
 		}
 		return true;

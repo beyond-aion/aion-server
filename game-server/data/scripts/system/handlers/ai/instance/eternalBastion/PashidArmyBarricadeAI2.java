@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 
 /**
- *
  * @author Tibald
  */
 @AIName("pashid_army_barricade")
@@ -27,5 +26,5 @@ public class PashidArmyBarricadeAI2 extends GeneralNpcAI2 {
 			default:
 				return AIAnswers.NEGATIVE;
 		}
-	}	
+	}
 }

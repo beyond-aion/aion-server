@@ -39,7 +39,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	private long startTime;
 	private DarkPoetaReward instanceReward;
 	private boolean isInstanceDestroyed;
-	
+
 	@Override
 	public void onDie(Npc npc) {
 		Creature master = npc.getMaster();
@@ -95,8 +95,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		long result = System.currentTimeMillis() - startTime;
 		if (result < 120000) {
 			return (int) (120000 - result);
-		}
-		else if (result < 14520000) {
+		} else if (result < 14520000) {
 			return (int) (14400000 - (result - 120000));
 		}
 		return 0;
@@ -104,11 +103,11 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private void sendPacket(final int nameId, final int point) {
 		instance.doOnAllPlayers((Player player) -> {
-            if (nameId != 0) {
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
-            }
-            PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
-        });
+			if (nameId != 0) {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
+			}
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
+		});
 	}
 
 	private int checkRank(int totalPoints) {
@@ -117,24 +116,19 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		if (timeRemain > 7200000 && totalPoints >= 17817) {
 			spawn(215280, 1189f, 1244f, 141f, (byte) 76);
 			rank = 1;
-		}
-		else if (timeRemain > 5400000 && totalPoints >= 15219) {
+		} else if (timeRemain > 5400000 && totalPoints >= 15219) {
 			spawn(215281, 1189f, 1244f, 141f, (byte) 76);
 			rank = 2;
-		}
-		else if (timeRemain > 3600000 && totalPoints > 10913) {
+		} else if (timeRemain > 3600000 && totalPoints > 10913) {
 			spawn(215282, 1189f, 1244f, 141f, (byte) 76);
 			rank = 3;
-		}
-		else if (timeRemain > 1800000 && totalPoints > 6656) {
+		} else if (timeRemain > 1800000 && totalPoints > 6656) {
 			spawn(215283, 1189f, 1244f, 141f, (byte) 76);
 			rank = 4;
-		}
-		else if (timeRemain > 1) {
+		} else if (timeRemain > 1) {
 			spawn(215284, 1189f, 1244f, 141f, (byte) 76);
 			rank = 5;
-		}
-		else {
+		} else {
 			rank = 8;
 		}
 		spawn(700478, 298.24423f, 316.21954f, 133.29759f, (byte) 56);
@@ -142,15 +136,13 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 		return rank;
 	}
-	
-	private void deletePortal(){
-		ThreadPoolManager.getInstance().schedule(new Runnable() 
-		{
+
+	private void deletePortal() {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
-			public void run()
-			{
-				if(!isInstanceDestroyed && getNpc(700478) != null)
+			public void run() {
+				if (!isInstanceDestroyed && getNpc(700478) != null)
 					getNpc(700478).getController().onDelete();
 			}
 		}, 300000);
@@ -199,7 +191,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 		// Special npcs
 		switch (npc.getObjectTemplate().getTemplateId()) {
-			// Drana
+		// Drana
 			case 700520:
 				pointsReward = 48;
 				break;
@@ -300,8 +292,8 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		instanceReward = new DarkPoetaReward(mapId, instanceId);
 		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
 		doors = instance.getDoors();
-		
-		//spawn Anuhart Scalewatch Captain(pool=1)
+
+		// spawn Anuhart Scalewatch Captain(pool=1)
 		switch (Rnd.get(1, 2)) {
 			case 1:
 				spawn(215429, 565.488f, 256.224f, 108.999f, (byte) 52);
@@ -310,8 +302,8 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				spawn(215429, 660.261f, 224.124f, 103.751f, (byte) 20);
 				break;
 		}
-		
-		//spawn Anuhart Drakeblade Captain (pool=1)
+
+		// spawn Anuhart Drakeblade Captain (pool=1)
 		switch (Rnd.get(1, 2)) {
 			case 1:
 				spawn(215430, 610.018f, 213.538f, 103.249f, (byte) 108);
@@ -320,7 +312,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				spawn(215430, 470.792f, 378.285f, 118.125f, (byte) 117);
 				break;
 		}
-		
+
 	}
 
 	private void openDoors() {
@@ -337,8 +329,8 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;

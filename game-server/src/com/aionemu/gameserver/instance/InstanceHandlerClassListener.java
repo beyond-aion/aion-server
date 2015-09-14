@@ -12,7 +12,7 @@ import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 /**
  * @author ATracer
  */
-public class InstanceHandlerClassListener implements ClassListener{
+public class InstanceHandlerClassListener implements ClassListener {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceHandlerClassListener.class);
 

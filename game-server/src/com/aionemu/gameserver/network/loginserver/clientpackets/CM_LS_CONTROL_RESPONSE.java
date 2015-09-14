@@ -46,11 +46,9 @@ public class CM_LS_CONTROL_RESPONSE extends LsClientPacket {
 					if (admin != null)
 						PacketSendUtility.sendMessage(admin, playerName + " has been promoted Administrator with role " + param);
 					if (player != null) {
-						PacketSendUtility.sendMessage(player, "You have been promoted Administrator with role " + param + " by "
-							+ adminName);
+						PacketSendUtility.sendMessage(player, "You have been promoted Administrator with role " + param + " by " + adminName);
 					}
-				}
-				else {
+				} else {
 					if (admin != null)
 						PacketSendUtility.sendMessage(admin, " Abnormal, the operation failed! ");
 				}
@@ -61,11 +59,9 @@ public class CM_LS_CONTROL_RESPONSE extends LsClientPacket {
 						PacketSendUtility.sendMessage(admin, playerName + " has been promoted membership with level " + param);
 					if (player != null) {
 						player.setRates(Rates.getRatesFor(param));
-						PacketSendUtility.sendMessage(player, "You have been promoted membership with level " + param + " by "
-							+ adminName);
+						PacketSendUtility.sendMessage(player, "You have been promoted membership with level " + param + " by " + adminName);
 					}
-				}
-				else {
+				} else {
 					if (admin != null)
 						PacketSendUtility.sendMessage(admin, " Abnormal, the operation failed! ");
 				}

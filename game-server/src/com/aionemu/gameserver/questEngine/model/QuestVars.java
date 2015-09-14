@@ -32,8 +32,7 @@ public class QuestVars {
 	}
 
 	/**
-	 * @return int value of all values, stored in the array.
-	 * Representation: Sum(value_on_index_i * 64^i)
+	 * @return int value of all values, stored in the array. Representation: Sum(value_on_index_i * 64^i)
 	 */
 	public int getQuestVars() {
 		int var = 0;
@@ -46,6 +45,7 @@ public class QuestVars {
 
 	/**
 	 * Fill the array with values, based on
+	 * 
 	 * @param int value, represented like above
 	 */
 	public void setVar(int var) {

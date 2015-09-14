@@ -45,8 +45,7 @@ public class _11139TheBadNews extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -63,8 +62,7 @@ public class _11139TheBadNews extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798971) {

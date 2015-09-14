@@ -26,12 +26,12 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 	public void calculate(Effect effect) {
 		if (!super.calculate(effect, null, null))
 			return;
-		
+
 		effect.addSucessEffect(this);
 	}
-	
+
 	public void startEffect(Effect effect, HealType healType) {
-		//calculate value of heals
+		// calculate value of heals
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		if (effect.getEffected() instanceof Npc) {
@@ -44,9 +44,9 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 			possibleHealValue = maxCurValue * valueWithDelta / 100;
 		else
 			possibleHealValue = valueWithDelta;
-		
+
 		int finalHeal = possibleHealValue;
-		
+
 		if (healType == HealType.HP) {
 			int baseHeal = possibleHealValue;
 			if (effect.getItemTemplate() == null) {
@@ -61,7 +61,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
 		}
 		effect.setReserveds(new EffectReserved(position, finalHeal, healType.toString(), false, false), true);
-		
+
 		super.startEffect(effect, null);
 	}
 
@@ -71,12 +71,12 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 		int currentValue = getCurrentStatValue(effect);
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = effect.getReserveds(position).getValue();
-		
+
 		int healValue = maxCurValue - currentValue < possibleHealValue ? (maxCurValue - currentValue) : possibleHealValue;
-		
+
 		if (healValue <= 0)
 			return;
-		
+
 		switch (healType) {
 			case HP:
 				effected.getLifeStats().increaseHp(TYPE.HP, healValue, effect.getSkillId(), LOG.HEAL);
@@ -85,15 +85,16 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 				effected.getLifeStats().increaseMp(TYPE.MP, healValue, effect.getSkillId(), LOG.MPHEAL);
 				break;
 			case FP:
-				((Player)effected).getLifeStats().increaseFp(TYPE.FP, healValue, effect.getSkillId(), LOG.FPHEAL);
+				((Player) effected).getLifeStats().increaseFp(TYPE.FP, healValue, effect.getSkillId(), LOG.FPHEAL);
 				break;
 			case DP:
-				((Player)effected).getCommonData().addDp(healValue);
+				((Player) effected).getCommonData().addDp(healValue);
 				break;
 		}
 
 	}
-	
+
 	protected abstract int getCurrentStatValue(Effect effect);
+
 	protected abstract int getMaxStatValue(Effect effect);
 }

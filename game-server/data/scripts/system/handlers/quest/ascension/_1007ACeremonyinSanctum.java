@@ -54,23 +54,23 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 			switch (targetId) {
 				case 790001: { // Pernos
 					switch (dialog) {
-                                                case QUEST_SELECT:
-                                                        if (var == 0) {
-                                                                return sendQuestDialog(env, 1011);
-                                                        }
-                                                        if (var == 1) {
-                                                                return sendQuestDialog(env, 1013);
-                                                        }
-                                                case SETPRO1:
-                                                        if (var <= 1) {
-                                                                qs.setQuestVar(1);
-                                                                updateQuestStatus(env);
-                                                                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-                                                                TeleportService2.teleportTo(player, 110010000, 1313f, 1512f, 568f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
-                                                                return true;
-                                                        }
-                                        }
-                                        break;
+						case QUEST_SELECT:
+							if (var == 0) {
+								return sendQuestDialog(env, 1011);
+							}
+							if (var == 1) {
+								return sendQuestDialog(env, 1013);
+							}
+						case SETPRO1:
+							if (var <= 1) {
+								qs.setQuestVar(1);
+								updateQuestStatus(env);
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+								TeleportService2.teleportTo(player, 110010000, 1313f, 1512f, 568f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+								return true;
+							}
+					}
+					break;
 				}
 				case 203725: { // Leah
 					switch (dialog) {
@@ -132,13 +132,12 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 								return sendQuestSelectionDialog(env);
 							}
 						}
-						break;
+							break;
 					}
 				}
-				break;
+					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203758 && var == 10) {
 				switch (env.getDialogId()) {
 					case -1:
@@ -157,10 +156,9 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 0)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 203759 && var == 20) {
+			} else if (targetId == 203759 && var == 20) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2375);
@@ -178,10 +176,9 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 1)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 203760 && var == 30) {
+			} else if (targetId == 203760 && var == 30) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2716);
@@ -199,10 +196,9 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 2)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 203761 && var == 40) {
+			} else if (targetId == 203761 && var == 40) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3057);
@@ -220,10 +216,9 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 3)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 801212 && var == 50) {
+			} else if (targetId == 801212 && var == 50) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3398);
@@ -241,10 +236,9 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 4)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
-			}
-			else if (targetId == 801213 && var == 60) {
+			} else if (targetId == 801213 && var == 60) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3739);
@@ -262,7 +256,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					case 18:
 						if (QuestService.finishQuest(env, 5)) {
 							return sendQuestSelectionDialog(env);
-					}
+						}
 				}
 			}
 		}

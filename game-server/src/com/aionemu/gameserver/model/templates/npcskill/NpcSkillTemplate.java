@@ -24,15 +24,15 @@ public class NpcSkillTemplate {
 	protected int minhp = 0;
 	@XmlAttribute(name = "maxhp")
 	protected int maxhp = 0;
-	@XmlAttribute(name="maxtime")
+	@XmlAttribute(name = "maxtime")
 	protected int maxtime = 0;
-	@XmlAttribute(name="mintime")
+	@XmlAttribute(name = "mintime")
 	protected int mintime = 0;
-	@XmlAttribute(name="conjunction")
+	@XmlAttribute(name = "conjunction")
 	protected ConjunctionType conjunction = ConjunctionType.AND;
-	@XmlAttribute(name="cooldown")
+	@XmlAttribute(name = "cooldown")
 	protected int cooldown = 0;
-	@XmlAttribute(name="useinspawned")
+	@XmlAttribute(name = "useinspawned")
 	protected boolean useinspawned = false;
 
 	/**

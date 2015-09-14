@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Material")
-public class Material implements Comparable<Material>{
+public class Material implements Comparable<Material> {
 
 	@XmlAttribute
 	protected String name;
@@ -57,7 +57,7 @@ public class Material implements Comparable<Material>{
 
 	@Override
 	public int compareTo(Material o) {
-		return o.rate-rate;
+		return o.rate - rate;
 	}
-	
+
 }

@@ -36,9 +36,9 @@ public class ItemData extends ReloadableData {
 	@XmlTransient
 	private TIntObjectHashMap<ItemTemplate> items;
 
-	//@XmlTransient
-	//private TIntObjectHashMap<ItemTemplate> petEggs = new TIntObjectHashMap<ItemTemplate>();
-	
+	// @XmlTransient
+	// private TIntObjectHashMap<ItemTemplate> petEggs = new TIntObjectHashMap<ItemTemplate>();
+
 	@XmlTransient
 	Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
 	@XmlTransient
@@ -65,28 +65,22 @@ public class ItemData extends ReloadableData {
 				}
 				if (it.getName().toLowerCase().startsWith("[stamp]"))
 					stampManastones.get(level).add(it);
-				else
-					if (it.getName().toLowerCase().startsWith("[event]"))
-						eventManastones.get(level).add(it);
-					else
-						if (!it.getName().toLowerCase().startsWith("[legion]"))
-							manastones.get(level).add(it);
+				else if (it.getName().toLowerCase().startsWith("[event]"))
+					eventManastones.get(level).add(it);
+				else if (!it.getName().toLowerCase().startsWith("[legion]"))
+					manastones.get(level).add(it);
 			} else if (it.getItemGroup().equals(ItemGroup.SPECIAL_MANASTONE)) {
 				int level = it.getLevel();
 				if (!specialManastones.containsKey(level))
-					specialManastones.put(level,  new ArrayList<ItemTemplate>());
-				
+					specialManastones.put(level, new ArrayList<ItemTemplate>());
+
 				if (!it.getName().toLowerCase().startsWith("[stamp]"))
 					specialManastones.get(level).add(it);
 			}
-			/** NOT USED
-			if (it.getActions() == null)
-				continue;
-			AdoptPetAction adoptAction = it.getActions().getAdoptPetAction();
-			if (adoptAction != null) {
-				petEggs.put(adoptAction.getPetId(), it);
-			}
-			*/
+			/**
+			 * NOT USED if (it.getActions() == null) continue; AdoptPetAction adoptAction = it.getActions().getAdoptPetAction(); if (adoptAction != null) {
+			 * petEggs.put(adoptAction.getPetId(), it); }
+			 */
 		}
 		its = null;
 	}
@@ -129,22 +123,22 @@ public class ItemData extends ReloadableData {
 	public Map<Integer, List<ItemTemplate>> getManastones() {
 		return manastones;
 	}
-	
+
 	public Map<Integer, List<ItemTemplate>> getEventManastones() {
 		return eventManastones;
 	}
-	
+
 	public Map<Integer, List<ItemTemplate>> getStampManastones() {
 		return stampManastones;
 	}
-	
+
 	public Map<Integer, List<ItemTemplate>> getSpecialManastones() {
 		return specialManastones;
 	}
-	//public ItemTemplate getPetEggTemplate(int petId) {
-	//	return petEggs.get(petId);
-	//}
 
+	// public ItemTemplate getPetEggTemplate(int petId) {
+	// return petEggs.get(petId);
+	// }
 
 	@Override
 	public void reload(Player admin) {
@@ -155,15 +149,13 @@ public class ItemData extends ReloadableData {
 			List<ItemTemplate> newTemplates = new ArrayList<ItemTemplate>();
 			ItemData data = (ItemData) un.unmarshal(new File("./data/static_data/items/item_templates.xml"));
 			if (data != null && data.getData() != null)
-					newTemplates.addAll(data.getData());
+				newTemplates.addAll(data.getData());
 			DataManager.ITEM_DATA.setData(newTemplates);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			PacketSendUtility.sendMessage(admin, "Item templates reload failed!");
 			log.error("Item templates reload failed!", e);
-		}
-		finally {
-			PacketSendUtility.sendMessage(admin, "Item templates reload Success! Total loaded: "+DataManager.ITEM_DATA.size());
+		} finally {
+			PacketSendUtility.sendMessage(admin, "Item templates reload Success! Total loaded: " + DataManager.ITEM_DATA.size());
 		}
 	}
 

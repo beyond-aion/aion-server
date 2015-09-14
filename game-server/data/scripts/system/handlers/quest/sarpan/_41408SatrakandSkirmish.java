@@ -7,17 +7,15 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41408SatrakandSkirmish extends QuestHandler {
 
 	private final static int questId = 41408;
-	
+
 	private final static int mob = 282919;
-	
+
 	public _41408SatrakandSkirmish() {
 		super(questId);
 	}
@@ -27,21 +25,21 @@ public class _41408SatrakandSkirmish extends QuestHandler {
 		qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		qe.registerQuestNpc(mob).addOnAddAggroListEvent(getQuestId());
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == mob) {
-				 qs.setStatus(QuestStatus.REWARD);
-				 updateQuestStatus(env);
-				 return QuestService.finishQuest(env);
+				qs.setStatus(QuestStatus.REWARD);
+				updateQuestStatus(env);
+				return QuestService.finishQuest(env);
 			}
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean onAddAggroListEvent(QuestEnv env) {
 		Player player = env.getPlayer();

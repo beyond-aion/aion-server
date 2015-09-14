@@ -9,10 +9,9 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Quest Starter: Hresvelgr (204837). Go to Dark Poeta and find the Balaur Operation Order (730192). Destroy the
- * Telepathy Controller (214894) (1). Destroy power generators to close the Balaur Abyss Gate: Main Power Generator
- * (214895) (1), Auxiliary Power Generator (214896) (1), Emergency Generator (214897) (1). Get rid of Brigade General
- * Anuhart (214904), and take the Concentrated Vitality (182204534) to Heimdall (204182).
+ * Quest Starter: Hresvelgr (204837). Go to Dark Poeta and find the Balaur Operation Order (730192). Destroy the Telepathy Controller (214894) (1).
+ * Destroy power generators to close the Balaur Abyss Gate: Main Power Generator (214895) (1), Auxiliary Power Generator (214896) (1), Emergency
+ * Generator (214897) (1). Get rid of Brigade General Anuhart (214904), and take the Concentrated Vitality (182204534) to Heimdall (204182).
  * 
  * @author vlog
  */
@@ -49,21 +48,18 @@ public class _4502EssenceOfFate extends QuestHandler {
 			if (targetId == 204837) { // Hresvelgr
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730192: { // Balaur Operation Orders
 					if (var == 0) {
 						if (dialog == DialogAction.USE_OBJECT) {
 							return sendQuestDialog(env, 1011);
-						}
-						else {
+						} else {
 							changeQuestStep(env, 0, 1, false); // 1
 							return sendQuestDialog(env, 0);
 						}
@@ -86,8 +82,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204182) {
 				return sendQuestEndDialog(env);
 			}

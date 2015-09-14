@@ -41,15 +41,13 @@ public class _2207ConversingWithaSkurv extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 203591) {
+		} else if (targetId == 203591) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 			if (qs != null && (qs.getQuestVarById(0) == 2 || qs.getQuestVarById(0) == 3)) {
@@ -61,19 +59,16 @@ public class _2207ConversingWithaSkurv extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (targetId == 203557) {
+		} else if (targetId == 203557) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2); // 2
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

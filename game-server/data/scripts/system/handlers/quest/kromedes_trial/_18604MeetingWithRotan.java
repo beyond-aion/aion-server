@@ -45,8 +45,7 @@ public class _18604MeetingWithRotan extends QuestHandler {
 				if (this.checkItemExistence(env, 164000141, 1, false)) {
 					env.setQuestId(0);
 					return sendQuestDialog(env, 27);
-				}
-				else {
+				} else {
 					env.setQuestId(0);
 					giveQuestItem(env, 164000141, 1);
 					return sendQuestDialog(env, 1012);
@@ -56,7 +55,7 @@ public class _18604MeetingWithRotan extends QuestHandler {
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		// Allow to use body even when quest was completed

@@ -13,13 +13,13 @@ public class IGItem {
 	private byte subCategory;
 	private int list;
 	private int salesRanking;
-	private	byte itemType;
-	private	byte gift;
+	private byte itemType;
+	private byte gift;
 	private String titleDescription;
 	private String itemDescription;
 
-	public IGItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list, int salesRanking,
-		byte itemType, byte gift, String titleDescription, String itemDescription) {
+	public IGItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list, int salesRanking, byte itemType,
+		byte gift, String titleDescription, String itemDescription) {
 		this.objectId = objectId;
 		this.itemId = itemId;
 		this.itemCount = itemCount;

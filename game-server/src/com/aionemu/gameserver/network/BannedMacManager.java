@@ -12,13 +12,13 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_MACBAN_CONTROL;
 
 /**
- * 
  * @author KID
- * 
  */
 public class BannedMacManager {
+
 	private static BannedMacManager manager = new BannedMacManager();
 	private final Logger log = LoggerFactory.getLogger(BannedMacManager.class);
+
 	public static BannedMacManager getInstance() {
 		return manager;
 	}
@@ -38,21 +38,20 @@ public class BannedMacManager {
 			entry = new BannedMacEntry(address, newTime);
 
 		entry.setDetails(details);
-		
+
 		bannedList.put(address, entry);
-		
-		log.info("banned "+address+" to "+entry.getTime().toString()+" for "+details);
-		LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte)1, address, newTime, details));
+
+		log.info("banned " + address + " to " + entry.getTime().toString() + " for " + details);
+		LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte) 1, address, newTime, details));
 	}
 
 	public final boolean unbanAddress(String address, String details) {
 		if (bannedList.containsKey(address)) {
 			bannedList.remove(address);
-			log.info("unbanned "+address+" for "+details);
-			LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte)0, address, 0, details));
+			log.info("unbanned " + address + " for " + details);
+			LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte) 0, address, 0, details));
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
@@ -68,6 +67,6 @@ public class BannedMacManager {
 	}
 
 	public void onEnd() {
-		log.info("Loaded "+this.bannedList.size()+" banned mac addesses");
+		log.info("Loaded " + this.bannedList.size() + " banned mac addesses");
 	}
 }

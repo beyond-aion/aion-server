@@ -57,8 +57,7 @@ public class ShieldService {
 	public void spawnAll() {
 		for (Shield shield : sphereShields.values()) {
 			shield.spawn();
-			log.debug("Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z="
-				+ shield.getZ());
+			log.debug("Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z=" + shield.getZ());
 		}
 		// TODO: check this list of not bound meshes (would remain inactive)
 		for (List<SiegeShield> otherShields : registeredShields.values()) {
@@ -98,8 +97,7 @@ public class ShieldService {
 	}
 
 	/**
-	 * Attaches geo shield and removes obsolete sphere shield if such exists. Should be called when geo shields and
-	 * SiegeZoneInstance were created.
+	 * Attaches geo shield and removes obsolete sphere shield if such exists. Should be called when geo shields and SiegeZoneInstance were created.
 	 * 
 	 * @param location
 	 *          - siege location id
@@ -127,8 +125,7 @@ public class ShieldService {
 		}
 		if (shields.size() == 0) {
 			log.warn("Could not find a shield for locId: " + location.getLocationId());
-		}
-		else {
+		} else {
 			location.setShields(shields);
 		}
 	}

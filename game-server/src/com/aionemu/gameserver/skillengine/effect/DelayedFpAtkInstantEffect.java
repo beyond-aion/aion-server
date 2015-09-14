@@ -8,10 +8,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author kecimis
- *
  */
 public class DelayedFpAtkInstantEffect extends EffectTemplate {
 
@@ -19,38 +17,37 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 	protected int delay;
 	@XmlAttribute
 	protected boolean percent;
-	
-	
+
 	@Override
 	public void calculate(Effect effect) {
 		// Only players have FP
 		if (effect.getEffected() instanceof Player)
 			super.calculate(effect, null, null);
 	}
-	
+
 	@Override
 	public void applyEffect(final Effect effect) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-					calculateAndApplyDamage(effect);
+				calculateAndApplyDamage(effect);
 			}
 		}, delay);
 	}
-	
+
 	private void calculateAndApplyDamage(Effect effect) {
 		if (!effect.getEffector().isEnemy(effect.getEffected()))
 			return;
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		Player player = (Player) effect.getEffected();
 		int maxFP = player.getLifeStats().getMaxFp();
-		
+
 		int newValue = valueWithDelta;
 		// Support for values in percentage
 		if (percent)
 			newValue = (maxFP * valueWithDelta) / 100;
-		
+
 		player.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.REGULAR);
 	}
 

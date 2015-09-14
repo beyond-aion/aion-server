@@ -54,15 +54,13 @@ public class _2975ExpertArmorsmithsFinalExam extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 2375);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 2716);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204106) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);

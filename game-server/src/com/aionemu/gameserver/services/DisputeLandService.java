@@ -42,6 +42,7 @@ public class DisputeLandService {
 		worlds.add(600030000);
 
 		CronService.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				setActive(chance > Rnd.get(100));
@@ -49,6 +50,7 @@ public class DisputeLandService {
 				if (isActive()) {
 					// Disable after 30 mins
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							setActive(false);
@@ -61,12 +63,14 @@ public class DisputeLandService {
 		}, rnd);
 
 		CronService.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				// Disable after 5 hours
 				setActive(true);
 
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						setActive(false);
@@ -100,8 +104,7 @@ public class DisputeLandService {
 
 			if (active) {
 				World.getInstance().getWorldMap(world).setWorldOption(ZoneAttributes.PVP_ENABLED);
-			}
-			else {
+			} else {
 				World.getInstance().getWorldMap(world).removeWorldOption(ZoneAttributes.PVP_ENABLED);
 			}
 		}
@@ -113,6 +116,7 @@ public class DisputeLandService {
 
 	private void broadcast() {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				broadcast(player);

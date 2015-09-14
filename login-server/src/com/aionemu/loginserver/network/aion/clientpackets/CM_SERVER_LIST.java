@@ -54,8 +54,7 @@ public class CM_SERVER_LIST extends AionClientPacket {
 				con.close(new SM_LOGIN_FAIL(AionAuthResponse.NO_GS_REGISTERED), false);
 			else
 				AccountController.loadGSCharactersCount(accountId);
-		}
-		else {
+		} else {
 			/**
 			 * Session key is not ok - inform client that smth went wrong - dc client
 			 */

@@ -8,9 +8,9 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Sleipnir (204768). Talk with Rubelik (204743). Talk with Sleipnir. Find Esnu (204808) and make a deal with
- * her. Remove Aika Deathsong (213741) and bring the key (182204312) to Esnu. Talk again with Esnu and get the key to
- * Golden Trumpet Temple (730135). Report the results to Sleipnir.
+ * Talk with Sleipnir (204768). Talk with Rubelik (204743). Talk with Sleipnir. Find Esnu (204808) and make a deal with her. Remove Aika Deathsong
+ * (213741) and bring the key (182204312) to Esnu. Talk again with Esnu and get the key to Golden Trumpet Temple (730135). Report the results to
+ * Sleipnir.
  * 
  * @author Hellboy aion4Free
  * @reworked vlog
@@ -120,8 +120,7 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 							return defaultCloseDialog(env, 5, 6, false, false, 182204321, 1, 0, 0); // 6
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204768) { // Sleipnir
 				return sendQuestEndDialog(env);
 			}

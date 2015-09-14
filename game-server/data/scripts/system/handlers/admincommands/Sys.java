@@ -12,9 +12,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author lord_rex //sys info - System Informations //sys memory - Memory Informations //sys gc - Garbage Collector
- *         //sys shutdown <seconds> <announceInterval> - Call shutdown //sys restart <seconds> <announceInterval> - Call
- *         restart //sys threadpool - Thread pools info
+ * @author lord_rex //sys info - System Informations //sys memory - Memory Informations //sys gc - Garbage Collector //sys shutdown <seconds>
+ *         <announceInterval> - Call shutdown //sys restart <seconds> <announceInterval> - Call restart //sys threadpool - Thread pools info
  */
 public class Sys extends AdminCommand {
 
@@ -26,8 +25,7 @@ public class Sys extends AdminCommand {
 	public void execute(Player player, String... params) {
 		if (params == null || params.length < 1) {
 			PacketSendUtility
-				.sendMessage(
-					player,
+				.sendMessage(player,
 					"Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
 			return;
 		}
@@ -73,38 +71,31 @@ public class Sys extends AdminCommand {
 			System.runFinalization();
 			PacketSendUtility.sendMessage(player, "RAM Used (Final): "
 				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
-			PacketSendUtility.sendMessage(player,
-				"Garbage Collection and Finalization finished in: " + (System.currentTimeMillis() - time) + " milliseconds...");
-		}
-		else if (params[0].equals("shutdown")) {
+			PacketSendUtility.sendMessage(player, "Garbage Collection and Finalization finished in: " + (System.currentTimeMillis() - time)
+				+ " milliseconds...");
+		} else if (params[0].equals("shutdown")) {
 			try {
 				int val = Integer.parseInt(params[1]);
 				int announceInterval = Integer.parseInt(params[2]);
 				ShutdownHook.getInstance().doShutdown(val, announceInterval, ShutdownMode.SHUTDOWN);
 				PacketSendUtility.sendMessage(player, "Server will shutdown in " + val + " seconds.");
-			}
-			catch (ArrayIndexOutOfBoundsException e) {
+			} catch (ArrayIndexOutOfBoundsException e) {
+				PacketSendUtility.sendMessage(player, "Numbers only!");
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
-			catch (NumberFormatException e) {
-				PacketSendUtility.sendMessage(player, "Numbers only!");
-			}
-		}
-		else if (params[0].equals("restart")) {
+		} else if (params[0].equals("restart")) {
 			try {
 				int val = Integer.parseInt(params[1]);
 				int announceInterval = Integer.parseInt(params[2]);
 				ShutdownHook.getInstance().doShutdown(val, announceInterval, ShutdownMode.RESTART);
 				PacketSendUtility.sendMessage(player, "Server will restart in " + val + " seconds.");
-			}
-			catch (ArrayIndexOutOfBoundsException e) {
+			} catch (ArrayIndexOutOfBoundsException e) {
+				PacketSendUtility.sendMessage(player, "Numbers only!");
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
-			catch (NumberFormatException e) {
-				PacketSendUtility.sendMessage(player, "Numbers only!");
-			}
-		}
-		else if (params[0].equals("threadpool")) {
+		} else if (params[0].equals("threadpool")) {
 			List<String> stats = ThreadPoolManager.getInstance().getStats();
 			for (String stat : stats) {
 				PacketSendUtility.sendMessage(player, stat.replaceAll("\t", ""));
@@ -115,8 +106,7 @@ public class Sys extends AdminCommand {
 	@Override
 	public void info(Player player, String message) {
 		PacketSendUtility
-			.sendMessage(
-				player,
+			.sendMessage(player,
 				"Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
 	}
 

@@ -38,11 +38,9 @@ public class MySQL5PlayerTransferDAO extends PlayerTransferDAO {
 				task.playerId = rs.getInt("player_id");
 				list.add(task);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't select getNew: ", e);
-		}
-		finally {
+		} finally {
 			DB.close(st);
 		}
 

@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "item_restriction_cleanups")
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemCleanupTemplate {
+
 	@XmlAttribute(name = "id", required = true)
 	private int id;
 
@@ -28,19 +29,19 @@ public class ItemCleanupTemplate {
 	public byte resultTrade() {
 		return trade;
 	}
-	
+
 	public byte resultSell() {
 		return sell;
 	}
-	
+
 	public byte resultWH() {
 		return wh;
 	}
-	
+
 	public byte resultAccountWH() {
 		return awh;
 	}
-	
+
 	public byte resultLegionWH() {
 		return lwh;
 	}

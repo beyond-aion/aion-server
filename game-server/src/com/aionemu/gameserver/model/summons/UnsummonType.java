@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.summons;
 
 /**
- *
  * @author xTz
  */
 public enum UnsummonType {
@@ -10,4 +9,3 @@ public enum UnsummonType {
 	COMMAND,
 	UNSPECIFIED
 }
-

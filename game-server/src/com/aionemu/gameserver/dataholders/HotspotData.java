@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class HotspotData {
 
 	public HotspotTemplate getHotspotTemplateById(int id) {
 		for (HotspotTemplate t : hotspotTemplates) {
-			if(t.getId() == id)
+			if (t.getId() == id)
 				return t;
 		}
 		return null;

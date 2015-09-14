@@ -40,8 +40,7 @@ public class CM_GROUP_DISTRIBUTION extends AionClientPacket {
 			case 1:
 				if (player.isInAlliance2()) {
 					PlayerAllianceService.distributeKinahInGroup(player, amount);
-				}
-				else {
+				} else {
 					PlayerGroupService.distributeKinah(player, amount);
 				}
 				break;

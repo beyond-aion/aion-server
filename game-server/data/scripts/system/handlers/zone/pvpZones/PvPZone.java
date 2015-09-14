@@ -16,10 +16,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 
-
 /**
  * @author MrPoke
- *
  */
 public abstract class PvPZone implements AdvancedZoneHandler {
 
@@ -39,8 +37,8 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 
 		final Player player = (Player) target;
 
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-			: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		if (zone instanceof SiegeZoneInstance) {
 			((SiegeZoneInstance) zone).doOnAllPlayers(new Visitor<Player>() {
 

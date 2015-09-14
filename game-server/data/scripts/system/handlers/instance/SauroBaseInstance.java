@@ -15,14 +15,12 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @InstanceID(301130000)
 public class SauroBaseInstance extends GeneralInstanceHandler {
-	
+
 	private Map<Integer, StaticDoor> doors;
 	private static List<WorldPosition> chestPoints = new ArrayList<>();
 	static {
@@ -48,10 +46,9 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 		chestPoints.add(new WorldPosition(301130000, 599.65344f, 361.96112f, 204.74123f, (byte) 0));
 		chestPoints.add(new WorldPosition(301130000, 656.28381f, 398.28476f, 204.74123f, (byte) 90));
 		chestPoints.add(new WorldPosition(301130000, 666.01855f, 363.71048f, 204.74123f, (byte) 90));
-		chestPoints.add(new WorldPosition(301130000, 666.21979f, 345.6026f, 204.63773f, (byte) 30));	 
+		chestPoints.add(new WorldPosition(301130000, 666.21979f, 345.6026f, 204.63773f, (byte) 30));
 	}
-	
-	
+
 	@Override
 	public void onInstanceDestroy() {
 		doors.clear();
@@ -61,7 +58,7 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
-		//spawn Sauro Base Grave Robber (pool=1)
+		// spawn Sauro Base Grave Robber (pool=1)
 		switch (Rnd.get(1, 5)) {
 			case 1:
 				spawn(230846, 460.69705f, 390.10602f, 182.75943f, (byte) 0);
@@ -76,22 +73,22 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 				spawn(230846, 497.27997f, 361.05948f, 182.45613f, (byte) 0);
 				break;
 			case 5:
-				spawn(230846, 497.55908f,389.86649f, 182.8175f, (byte) 0);
+				spawn(230846, 497.55908f, 389.86649f, 182.8175f, (byte) 0);
 				break;
 		}
-		
+
 		List<WorldPosition> temp = new ArrayList<>(chestPoints);
 		for (int i = 0; i < 8; i++) {
-		    int index = Rnd.get(0, temp.size() - 1);
-		    WorldPosition pos = temp.get(index);
-		    spawn(230847, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-		    temp.remove(index);
+			int index = Rnd.get(0, temp.size() - 1);
+			WorldPosition pos = temp.get(index);
+			spawn(230847, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			temp.remove(index);
 		}
 		for (int i = 0; i < temp.size(); i++) {
 			spawn(230848, temp.get(i).getX(), temp.get(i).getY(), temp.get(i).getZ(), temp.get(i).getHeading());
 		}
 	}
-	
+
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
@@ -144,17 +141,18 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 730876:
-				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60,
+					TeleportAnimation.BEAM_ANIMATION);
 				break;
 			case 730877:
-				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120,
+					TeleportAnimation.BEAM_ANIMATION);
 				break;
 		}
 	}
 }
-				

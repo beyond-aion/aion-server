@@ -20,8 +20,8 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	private static final long serialVersionUID = 7902148320917998146L;
 
 	/**
-	 * Calls predicate for each element in the collection asynchronously. Utilizes Fork/Join framework to speed up
-	 * processing, by using a divide/conquer algorithm
+	 * Calls predicate for each element in the collection asynchronously. Utilizes Fork/Join framework to speed up processing, by using a divide/conquer
+	 * algorithm
 	 * 
 	 * @param list
 	 *          - element list to loop
@@ -75,8 +75,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		if (h > l) {
 			try {
 				operation.apply(list[l]);
-			}
-			catch (Throwable ex) {
+			} catch (Throwable ex) {
 				// we want to complete without an exception re-thrown
 				// otherwise, should call completeExceptionally(ex);
 				onExceptionalCompletion(ex, this);

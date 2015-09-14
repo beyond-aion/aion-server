@@ -15,8 +15,8 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 @AIName("gale_cyclone")
 public class GaleCycloneAI2 extends NpcAI2 {
 
-private ConcurrentHashMap<Integer, GaleCycloneObserver> observed = new ConcurrentHashMap<>();
-private boolean blocked;
+	private ConcurrentHashMap<Integer, GaleCycloneObserver> observed = new ConcurrentHashMap<>();
+	private boolean blocked;
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {

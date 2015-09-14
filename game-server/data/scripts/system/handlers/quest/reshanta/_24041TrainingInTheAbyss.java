@@ -62,8 +62,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278126) {
@@ -83,8 +82,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278127) {
+		} else if (targetId == 278127) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -101,8 +99,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278128) {
+		} else if (targetId == 278128) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -119,8 +116,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278129) {
+		} else if (targetId == 278129) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -137,8 +133,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278130) {
+		} else if (targetId == 278130) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -155,8 +150,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278131) {
+		} else if (targetId == 278131) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -173,8 +167,7 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278136) {
+		} else if (targetId == 278136) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)

@@ -23,7 +23,7 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		// Always 1, maybe for neutral zones 0 ? 
+		// Always 1, maybe for neutral zones 0 ?
 		unk = readC();
 	}
 
@@ -35,12 +35,11 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 			List<ZoneInstance> zones = player.getPosition().getMapRegion().getZones(player);
 			int foundZones = 0;
 			for (ZoneInstance zone : zones) {
-				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY ||
-					zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
+				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY || zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
 					continue;
 				foundZones++;
-				PacketSendUtility.sendMessage(player, "Passed zone: unk=" + unk + "; " + zone.getZoneTemplate().getZoneType() 
-					+ " " + zone.getAreaTemplate().getZoneName().name());
+				PacketSendUtility.sendMessage(player, "Passed zone: unk=" + unk + "; " + zone.getZoneTemplate().getZoneType() + " "
+					+ zone.getAreaTemplate().getZoneName().name());
 			}
 			if (foundZones == 0) {
 				PacketSendUtility.sendMessage(player, "Passed unknown zone, unk=" + unk);

@@ -39,37 +39,31 @@ public class _21073ListentoMySongStrigiks extends QuestHandler {
 			if (targetId == 799407) { // Skilving
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 799408) { // Svasuth
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 799407) { // Skilving
+			} else if (targetId == 799407) { // Skilving
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 1) {
 						return sendQuestDialog(env, 2375);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 1, 1, true); // reward
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799407) { // Skilving
 				return sendQuestEndDialog(env);
 			}

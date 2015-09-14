@@ -30,7 +30,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 		writeD(0);
 		writeD(house.getAddress().getId());
 
-		boolean isInactive = house.getStatus() == HouseStatus.INACTIVE; 
+		boolean isInactive = house.getStatus() == HouseStatus.INACTIVE;
 		int playerObjectId = isInactive ? 0 : house.getOwnerId();
 		writeD(playerObjectId);
 		writeD(BuildingType.PERSONAL_FIELD.getId());
@@ -93,8 +93,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 			writeC(0);
 			writeC(0);
 			writeD(0);
-		}
-		else {
+		} else {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
 			writeC(emblem.getEmblemType().getValue());

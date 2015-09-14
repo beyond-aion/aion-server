@@ -40,15 +40,14 @@ public class _4042MessageinaBottle extends QuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
-			}
-			else if (targetId == 730150) {
+			} else if (targetId == 730150) {
 				return giveQuestItem(env, 182209024, 1);
 			}
 		}
@@ -66,8 +65,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestStartDialog(env);
 				}
 
@@ -78,8 +76,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					}
-					else
+					} else
 						return sendQuestStartDialog(env);
 				}
 
@@ -98,21 +95,20 @@ public class _4042MessageinaBottle extends QuestHandler {
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
-					else
+					} else
 						return sendQuestStartDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

@@ -29,8 +29,7 @@ public class Promote extends AdminCommand {
 		int mask = 0;
 		try {
 			mask = Integer.parseInt(params[2]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Only number!");
 			return;
 		}
@@ -42,15 +41,13 @@ public class Promote extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "accesslevel can be 0 - 3");
 				return;
 			}
-		}
-		else if (params[1].toLowerCase().equals("membership")) {
+		} else if (params[1].toLowerCase().equals("membership")) {
 			type = 2;
 			if (mask > 10 || mask < 0) {
 				PacketSendUtility.sendMessage(admin, "membership can be 0 - 10");
 				return;
 			}
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "syntax //promote <characterName> <accesslevel | membership> <mask>");
 			return;
 		}
@@ -60,8 +57,7 @@ public class Promote extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "The specified player is not online.");
 			return;
 		}
-		LoginServer.getInstance()
-			.sendLsControlPacket(player.getAcountName(), player.getName(), admin.getName(), mask, type);
+		LoginServer.getInstance().sendLsControlPacket(player.getAcountName(), player.getName(), admin.getName(), mask, type);
 
 	}
 

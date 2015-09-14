@@ -49,8 +49,8 @@ public class OnKillEvent extends QuestEvent {
 				int var = qs.getQuestVarById(m.getVar());
 				if (var >= (m.getStartVar() == null ? 0 : m.getStartVar()) && var < m.getEndVar()) {
 					qs.setQuestVarById(m.getVar(), var + 1);
-					PacketSendUtility.sendPacket(env.getPlayer(), new SM_QUEST_ACTION(env.getQuestId(), qs.getStatus(), qs
-						.getQuestVars().getQuestVars(), qs.getFlags()));
+					PacketSendUtility.sendPacket(env.getPlayer(),
+						new SM_QUEST_ACTION(env.getQuestId(), qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 				}
 			}
 		}

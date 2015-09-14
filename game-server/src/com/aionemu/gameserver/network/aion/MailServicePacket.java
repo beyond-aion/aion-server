@@ -29,7 +29,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 		writeH(isPostman ? -showCount : -letters.size()); // -loop cnt [stupid nc shit!]
 		int counter = 0;
 		for (Letter letter : letters) {
-			if(counter > 99)
+			if (counter > 99)
 				break;
 			if (isPostman) {
 				if (!letter.isExpress())
@@ -45,8 +45,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 			if (letter.getAttachedItem() != null) {
 				writeD(letter.getAttachedItem().getObjectId());
 				writeD(letter.getAttachedItem().getItemTemplate().getTemplateId());
-			}
-			else {
+			} else {
 				writeD(0);
 				writeD(0);
 			}
@@ -89,8 +88,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 
 			ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 			itemInfoBlob.writeMe(getBuf());
-		}
-		else {
+		} else {
 			writeQ(0);
 			writeQ(0);
 			writeD(0);

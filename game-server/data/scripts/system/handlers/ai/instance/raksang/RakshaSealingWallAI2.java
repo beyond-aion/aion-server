@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("raksha_sealing_wall")
@@ -38,12 +37,10 @@ public class RakshaSealingWallAI2 extends GeneralNpcAI2 {
 					Npc flamelord = instance.getNpc(217451);
 					Npc sealguard = instance.getNpc(217456);
 					int bossId;
-					if ((sharik == null || NpcActions.isAlreadyDead(sharik))
-							&& (flamelord == null || NpcActions.isAlreadyDead(flamelord))
-							&& (sealguard == null || NpcActions.isAlreadyDead(sealguard))) {
+					if ((sharik == null || NpcActions.isAlreadyDead(sharik)) && (flamelord == null || NpcActions.isAlreadyDead(flamelord))
+						&& (sealguard == null || NpcActions.isAlreadyDead(sealguard))) {
 						bossId = 217475;
-					}
-					else {
+					} else {
 						bossId = 217647;
 					}
 					spawn(bossId, 1063.08f, 903.13f, 138.744f, (byte) 29);

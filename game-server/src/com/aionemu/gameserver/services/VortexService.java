@@ -62,8 +62,7 @@ public class VortexService {
 				}
 
 			}, CustomConfig.VORTEX_THEOBOMOS_SCHEDULE);
-		}
-		else {
+		} else {
 			vortex = Collections.emptyMap();
 		}
 	}
@@ -203,11 +202,9 @@ public class VortexService {
 	public VortexLocation getLocationByWorld(int worldId) {
 		if (worldId == 210060000) {
 			return getVortexLocation(0);
-		}
-		else if (worldId == 220050000) {
+		} else if (worldId == 220050000) {
 			return getVortexLocation(1);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

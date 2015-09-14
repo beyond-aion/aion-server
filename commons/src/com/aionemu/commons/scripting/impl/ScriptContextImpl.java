@@ -232,8 +232,7 @@ public class ScriptContextImpl implements ScriptContext {
 			}
 
 			if (childScriptContexts.contains(context)) {
-				log.error("Double child definition, root: " + root.getAbsolutePath() + ", child: "
-					+ context.getRoot().getAbsolutePath());
+				log.error("Double child definition, root: " + root.getAbsolutePath() + ", child: " + context.getRoot().getAbsolutePath());
 				return;
 			}
 
@@ -303,8 +302,7 @@ public class ScriptContextImpl implements ScriptContext {
 		ScriptCompiler sc;
 		try {
 			sc = (ScriptCompiler) Class.forName(getCompilerClassName(), true, cl).newInstance();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Can't create instance of compiler");
 			throw new RuntimeException(e);
 		}

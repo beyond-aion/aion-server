@@ -125,8 +125,7 @@ public class QuestEngine implements GameEngine {
 						if (qt != null && qt.getCategory() == QuestCategory.CHALLENGE_TASK)
 							PacketSendUtility.sendPacket(env.getPlayer(), new SM_SYSTEM_MESSAGE(1400855, 9));
 					}
-			}
-			else {
+			} else {
 				Npc npc = (Npc) env.getVisibleObject();
 				for (int questId : getQuestNpc(npc == null ? 0 : npc.getNpcId()).getOnTalkEvent()) {
 					questHandler = getQuestHandlerByQuestId(questId);
@@ -138,8 +137,7 @@ public class QuestEngine implements GameEngine {
 				}
 				env.setQuestId(0);
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onDialog", ex);
 			return false;
 		}
@@ -156,8 +154,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onKillEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onKill", ex);
 			return false;
 		}
@@ -174,8 +171,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onAttackEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onAttack", ex);
 			return false;
 		}
@@ -194,7 +190,7 @@ public class QuestEngine implements GameEngine {
 		}
 		return questList;
 	}
-	
+
 	public void sendCompletedQuests(Player player) {
 		try {
 			boolean over1345 = false;
@@ -270,8 +266,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onLvlUpEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onLvlUp", ex);
 		}
 	}
@@ -287,8 +282,7 @@ public class QuestEngine implements GameEngine {
 				env.setQuestId(questOnEnterZoneMissionEnd.get(result));
 				questHandler.onZoneMissionEndEvent(env);
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onLvlUp", ex);
 		}
 	}
@@ -302,8 +296,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onDieEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onDie", ex);
 		}
 	}
@@ -317,8 +310,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onLogOutEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onLogOut", ex);
 		}
 	}
@@ -332,8 +324,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onNpcReachTargetEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onProtectEndEvent", ex);
 		}
 	}
@@ -347,8 +338,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onNpcLostTargetEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onProtectFailEvent", ex);
 		}
 	}
@@ -363,8 +353,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onPassFlyingRingEvent(env, FlyRing);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onFlyRingPassEvent", ex);
 		}
 	}
@@ -378,8 +367,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onEnterWorldEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onEnterWorld", ex);
 		}
 	}
@@ -398,8 +386,7 @@ public class QuestEngine implements GameEngine {
 				}
 			}
 			return HandlerResult.UNKNOWN;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onItemUseEvent", ex);
 			return HandlerResult.FAILED;
 		}
@@ -414,8 +401,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onHouseItemUseEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onHouseItemUseEvent", ex);
 		}
 	}
@@ -446,8 +432,7 @@ public class QuestEngine implements GameEngine {
 					}
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onKillRanked", ex);
 			return false;
 		}
@@ -466,8 +451,7 @@ public class QuestEngine implements GameEngine {
 					}
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onKillInWorld", ex);
 			return false;
 		}
@@ -486,8 +470,7 @@ public class QuestEngine implements GameEngine {
 					}
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onKillInZone", ex);
 			return false;
 		}
@@ -504,8 +487,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onEnterZoneEvent(env, zoneName);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onEnterZone", ex);
 			return false;
 		}
@@ -524,8 +506,7 @@ public class QuestEngine implements GameEngine {
 					}
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onLeaveZone", ex);
 			return false;
 		}
@@ -542,8 +523,7 @@ public class QuestEngine implements GameEngine {
 					if (questHandler.onMovieEndEvent(env, movieId))
 						return true;
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onMovieEnd", ex);
 		}
 		return false;
@@ -581,8 +561,7 @@ public class QuestEngine implements GameEngine {
 					}
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onUseSkill", ex);
 			return false;
 		}
@@ -656,8 +635,7 @@ public class QuestEngine implements GameEngine {
 				}
 			}
 			return HandlerResult.UNKNOWN;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onBonusApply", ex);
 			return HandlerResult.FAILED;
 		}
@@ -673,8 +651,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onAddAggroListEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onAddAggroList", ex);
 			return false;
 		}
@@ -701,8 +678,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onAtDistanceEvent(env);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onAtDistance", ex);
 			return false;
 		}
@@ -718,8 +694,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.onEnterWindStreamEvent(env, loc);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in onWindStream", ex);
 		}
 	}
@@ -733,8 +708,7 @@ public class QuestEngine implements GameEngine {
 					questHandler.rideAction(env, itemId);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("QE: exception in rideAction", ex);
 		}
 	}
@@ -758,8 +732,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList itemRelatedQuests = new TIntArrayList();
 			itemRelatedQuests.add(questId);
 			questItemRelated.put(itemId, itemRelatedQuests);
-		}
-		else {
+		} else {
 			questItemRelated.get(itemId).add(questId);
 		}
 	}
@@ -774,8 +747,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList questItemsToReg = new TIntArrayList();
 			questItemsToReg.add(questId);
 			questItems.put(itemId, questItemsToReg);
-		}
-		else {
+		} else {
 			questItems.get(itemId).add(questId);
 		}
 	}
@@ -791,8 +763,7 @@ public class QuestEngine implements GameEngine {
 			quests = getOrCreateOnLevelUpForRace(Race.ELYOS);
 			if (!quests.contains(questId))
 				quests.add(questId);
-		}
-		else {
+		} else {
 			quests = getOrCreateOnLevelUpForRace(racePermitted);
 			if (!quests.contains(questId))
 				quests.add(questId);
@@ -833,8 +804,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onEnterZoneQuests = new TIntArrayList();
 			onEnterZoneQuests.add(questId);
 			questOnEnterZone.put(zoneName, onEnterZoneQuests);
-		}
-		else {
+		} else {
 			questOnEnterZone.get(zoneName).add(questId);
 		}
 	}
@@ -844,8 +814,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onKillInZoneQuests = new TIntArrayList();
 			onKillInZoneQuests.add(questId);
 			questOnKillInZone.put(zone, onKillInZoneQuests);
-		}
-		else {
+		} else {
 			questOnKillInZone.get(zone).add(questId);
 		}
 	}
@@ -855,8 +824,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onLeaveZoneQuests = new TIntArrayList();
 			onLeaveZoneQuests.add(questId);
 			questOnLeaveZone.put(zoneName, onLeaveZoneQuests);
-		}
-		else {
+		} else {
 			questOnLeaveZone.get(zoneName).add(questId);
 		}
 	}
@@ -867,8 +835,7 @@ public class QuestEngine implements GameEngine {
 				TIntArrayList onKillRankedQuests = new TIntArrayList();
 				onKillRankedQuests.add(questId);
 				questOnKillRanked.put(AbyssRankEnum.getRankById(rank), onKillRankedQuests);
-			}
-			else {
+			} else {
 				questOnKillRanked.get(AbyssRankEnum.getRankById(rank)).add(questId);
 			}
 		}
@@ -879,8 +846,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList killInWorldQuests = new TIntArrayList();
 			killInWorldQuests.add(questId);
 			questOnKillInWorld.put(worldId, killInWorldQuests);
-		}
-		else {
+		} else {
 			questOnKillInWorld.get(worldId).add(questId);
 		}
 	}
@@ -890,8 +856,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onPassFlyingRingsQuests = new TIntArrayList();
 			onPassFlyingRingsQuests.add(questId);
 			questOnPassFlyingRings.put(flyingRing, onPassFlyingRingsQuests);
-		}
-		else {
+		} else {
 			questOnPassFlyingRings.get(flyingRing).add(questId);
 		}
 	}
@@ -901,8 +866,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onMovieEndQuests = new TIntArrayList();
 			onMovieEndQuests.add(questId);
 			questOnMovieEnd.put(moveId, onMovieEndQuests);
-		}
-		else {
+		} else {
 			questOnMovieEnd.get(moveId).add(questId);
 		}
 	}
@@ -922,8 +886,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList questSkills = new TIntArrayList();
 			questSkills.add(questId);
 			questOnUseSkill.put(skillId, questSkills);
-		}
-		else {
+		} else {
 			questOnUseSkill.get(skillId).add(questId);
 		}
 	}
@@ -939,8 +902,7 @@ public class QuestEngine implements GameEngine {
 			Set<Integer> questIds = new HashSet<Integer>();
 			questIds.add(questId);
 			questOnEquipItem.put(itemId, questIds);
-		}
-		else {
+		} else {
 			questOnEquipItem.get(itemId).add(questId);
 		}
 	}
@@ -963,8 +925,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList questNpcs = new TIntArrayList();
 			questNpcs.add(questId);
 			questCanAct.put(template.getTemplateId(), questNpcs);
-		}
-		else {
+		} else {
 			questCanAct.get(template.getTemplateId()).add(questId);
 		}
 	}
@@ -980,8 +941,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList onBonusApplyQuests = new TIntArrayList();
 			onBonusApplyQuests.add(questId);
 			questOnBonusApply.put(bonusType, onBonusApplyQuests);
-		}
-		else {
+		} else {
 			questOnBonusApply.get(bonusType).add(questId);
 		}
 	}
@@ -1165,11 +1125,9 @@ public class QuestEngine implements GameEngine {
 			for (XMLQuest xmlQuest : xmlQuests.getQuest())
 				xmlQuest.register(this);
 			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Can't initialize quest handlers.", e);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
@@ -1199,11 +1157,9 @@ public class QuestEngine implements GameEngine {
 			for (XMLQuest xmlQuest : xmlQuests.getQuest())
 				xmlQuest.register(this);
 			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Can't initialize quest handlers.", e);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
@@ -1236,8 +1192,7 @@ public class QuestEngine implements GameEngine {
 							if (template.isDaily()) {
 								player.getController().updateNearbyQuests();
 								PacketSendUtility.sendPacket(player, dailyMessage);
-							}
-							else if (template.isWeekly()) {
+							} else if (template.isWeekly()) {
 								player.getController().updateNearbyQuests();
 								PacketSendUtility.sendPacket(player, weeklyMessage);
 							}

@@ -42,8 +42,7 @@ public class DainatumBombAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					DainatumBomb(21275);
 				}
 			}
@@ -55,8 +54,7 @@ public class DainatumBombAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					Npc npc = getOwner();
 					NpcActions.delete(npc);
 				}

@@ -11,10 +11,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 
-
 /**
  * @author ViAl
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MercenaryZone")
@@ -28,11 +26,11 @@ public class MercenaryZone {
 	private int worldId;
 	@XmlTransient
 	private int siegeId;
-	
+
 	public int getZoneId() {
 		return zone;
 	}
-	
+
 	public List<Spawn> getSpawns() {
 		return spawns;
 	}
@@ -45,14 +43,12 @@ public class MercenaryZone {
 		this.worldId = worldId;
 	}
 
-	
 	public int getSiegeId() {
 		return siegeId;
 	}
 
-	
 	public void setSiegeId(int siegeId) {
 		this.siegeId = siegeId;
 	}
-	
+
 }

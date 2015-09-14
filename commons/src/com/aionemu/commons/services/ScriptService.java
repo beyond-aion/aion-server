@@ -53,8 +53,7 @@ public class ScriptService {
 	public void load(File file) throws RuntimeException {
 		if (file.isFile()) {
 			loadFile(file);
-		}
-		else if (file.isDirectory()) {
+		} else if (file.isDirectory()) {
 			loadDir(file);
 		}
 	}
@@ -73,8 +72,7 @@ public class ScriptService {
 		ScriptManager sm = new ScriptManager();
 		try {
 			sm.load(file);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("loadFile", e);
 			throw new RuntimeException(e);
 		}
@@ -161,8 +159,7 @@ public class ScriptService {
 		for (Iterator<Entry<File, ScriptManager>> it = this.map.entrySet().iterator(); it.hasNext();) {
 			try {
 				it.next().getValue().shutdown();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.warn("An exception occured during shudown procedure.", e);
 			}
 

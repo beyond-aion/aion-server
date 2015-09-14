@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41525VolcanicVolunteerism extends QuestHandler {
 
@@ -35,36 +33,32 @@ public class _41525VolcanicVolunteerism extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205909) { 
+			if (targetId == 205909) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-		  if (targetId == 205911) {
-			switch (dialog) {
-				case QUEST_SELECT: {
-					return sendQuestDialog(env, 1352);
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205911) {
+				switch (dialog) {
+					case QUEST_SELECT: {
+						return sendQuestDialog(env, 1352);
+					}
+					case SETPRO1: {
+						return defaultCloseDialog(env, 0, 1);
+					}
 				}
-				case SETPRO1:{
-					return defaultCloseDialog(env, 0, 1);
+			} else if (targetId == 205941) {
+				switch (dialog) {
+					case QUEST_SELECT:
+						return sendQuestDialog(env, 2375);
+					case SELECT_QUEST_REWARD:
+						return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}
-		else if (targetId == 205941) {
-			switch (dialog) {
-				case QUEST_SELECT:
-					return sendQuestDialog(env, 2375);
-				case SELECT_QUEST_REWARD:
-					return defaultCloseDialog(env, 1, 1, true, true);
-			}
-		}
-	}
-	  else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205941) {
 				switch (dialog) {
 					case USE_OBJECT: {

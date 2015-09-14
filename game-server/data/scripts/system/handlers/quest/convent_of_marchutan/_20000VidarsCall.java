@@ -72,18 +72,16 @@ public class _20000VidarsCall extends QuestHandler {
 						return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798800) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
-				else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD){
+				else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD) {
 					int[] quests = { 20001, 20026, 20020, 20021, 20022, 20023, 20024, 20025 };
 					for (int quest : quests) {
-						QuestEngine.getInstance().onEnterZoneMissionEnd(
-							new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
+						QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
 					}
 					return sendQuestEndDialog(env);
 				}

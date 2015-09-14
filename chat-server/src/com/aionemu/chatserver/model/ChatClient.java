@@ -13,8 +13,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 /**
  * @author ATracer
  */
-public class ChatClient
-{
+public class ChatClient {
+
 	private final Logger log = LoggerFactory.getLogger(ChatClient.class);
 
 	/**
@@ -46,18 +46,17 @@ public class ChatClient
 	private long lastMessage;
 
 	private String realName;
-	
+
 	private long gagTime;
 
 	/**
 	 * @param clientId
 	 * @param token
-	 * @param playerLogin 
-	 * @param nick 
+	 * @param playerLogin
+	 * @param nick
 	 * @param identifier
 	 */
-	public ChatClient(int clientId, byte[] token, String nick)
-	{
+	public ChatClient(int clientId, byte[] token, String nick) {
 		this.clientId = clientId;
 		this.token = token;
 		this.realName = nick;
@@ -66,53 +65,46 @@ public class ChatClient
 	/**
 	 * @param channel
 	 */
-	public void addChannel(Channel channel)
-	{
+	public void addChannel(Channel channel) {
 		channelsList.put(channel.getChannelType(), channel);
 	}
 
 	/**
 	 * @return the channelHandler
 	 */
-	public ClientChannelHandler getChannelHandler()
-	{
+	public ClientChannelHandler getChannelHandler() {
 		return channelHandler;
 	}
 
 	/**
 	 * @return the clientId
 	 */
-	public int getClientId()
-	{
+	public int getClientId() {
 		return clientId;
 	}
 
 	/**
 	 * @return the identifier
 	 */
-	public byte[] getIdentifier()
-	{
+	public byte[] getIdentifier() {
 		return identifier;
 	}
 
-	public String getRealName()
-	{
+	public String getRealName() {
 		return realName;
 	}
 
 	/**
 	 * @return the token
 	 */
-	public byte[] getToken()
-	{
+	public byte[] getToken() {
 		return token;
 	}
 
 	/**
 	 * @param channel
 	 */
-	public boolean isInChannel(Channel channel)
-	{
+	public boolean isInChannel(Channel channel) {
 		return channelsList.containsKey(channel.getChannelType());
 	}
 
@@ -120,72 +112,58 @@ public class ChatClient
 	 * @param channelHandler
 	 *          the channelHandler to set
 	 */
-	public void setChannelHandler(ClientChannelHandler channelHandler)
-	{
+	public void setChannelHandler(ClientChannelHandler channelHandler) {
 		this.channelHandler = channelHandler;
 	}
 
 	/**
 	 * @param identifier
 	 *          the identifier to set
-	 * @param realAccount 
-	 * @param realName 
+	 * @param realAccount
+	 * @param realName
 	 */
-	public void setIdentifier(byte[] identifier)
-	{
+	public void setIdentifier(byte[] identifier) {
 		this.identifier = identifier;
 	}
 
-	public boolean verifyLastMessage()
-	{
-		if(Config.MESSAGE_DELAY == 0)
+	public boolean verifyLastMessage() {
+		if (Config.MESSAGE_DELAY == 0)
 			return true;
-		
-		if (this.lastMessage == 0)
-		{
+
+		if (this.lastMessage == 0) {
 			this.lastMessage = System.currentTimeMillis();
 			return true;
-		}
-		else
-		{
+		} else {
 			long diff = System.currentTimeMillis() - this.lastMessage;
-			if (Config.MESSAGE_DELAY * 1000 > diff)
-			{
-				log.warn("player " + this.getClientId()+" tried to flood ("+diff+"ms) traffic. skipped");
+			if (Config.MESSAGE_DELAY * 1000 > diff) {
+				log.warn("player " + this.getClientId() + " tried to flood (" + diff + "ms) traffic. skipped");
 				return false;
-			}
-			else
-			{
+			} else {
 				this.lastMessage = System.currentTimeMillis();
 				return true;
 			}
 		}
 	}
-	
-	public boolean isGagged()
-	{
-		if(this.gagTime == 0)
+
+	public boolean isGagged() {
+		if (this.gagTime == 0)
 			return false;
-		if(System.currentTimeMillis() > this.gagTime)
+		if (System.currentTimeMillis() > this.gagTime)
 			return false;
 		return true;
 	}
-	
-	public void setGagTime(long gagTime)
-	{
+
+	public void setGagTime(long gagTime) {
 		this.gagTime = gagTime;
 	}
-	
-	public long getGagTime()
-	{
+
+	public long getGagTime() {
 		return this.gagTime;
 	}
 
-	public boolean same(String nick)
-	{
-		if(!this.realName.equals(nick))
-		{
-			log.warn("chat hack! different name "+nick+". expected "+this.realName);
+	public boolean same(String nick) {
+		if (!this.realName.equals(nick)) {
+			log.warn("chat hack! different name " + nick + ". expected " + this.realName);
 			return true;
 		}
 		return true;

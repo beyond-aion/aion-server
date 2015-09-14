@@ -7,13 +7,13 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- *
  * @author xTz
  */
 public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
 
 	private Collection<ResultedItem> itemsCollections;
 	private int objectId;
+
 	public SM_SECONDARY_SHOW_DECOMPOSABLE(int objectId, Collection<ResultedItem> itemsCollections) {
 		this.itemsCollections = itemsCollections;
 		this.objectId = objectId;
@@ -33,7 +33,7 @@ public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
 			writeC(0);
 			writeC(0);
 			writeC(1);
-			index ++;
+			index++;
 		}
 	}
 

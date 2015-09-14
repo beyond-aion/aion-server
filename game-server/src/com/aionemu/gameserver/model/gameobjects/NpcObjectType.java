@@ -9,10 +9,10 @@ public enum NpcObjectType {
 	HOMING(16),
 	TRAP(32),
 	SKILLAREA(64),
-	TOTEM(128),//TODO not implemented
+	TOTEM(128), // TODO not implemented
 	GROUPGATE(256),
 	SERVANT(1024),
-	PET(2048);//TODO not used
+	PET(2048);// TODO not used
 
 	private NpcObjectType(int id) {
 		this.id = id;

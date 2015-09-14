@@ -49,8 +49,7 @@ public class _2948HuronsLetter extends QuestHandler {
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

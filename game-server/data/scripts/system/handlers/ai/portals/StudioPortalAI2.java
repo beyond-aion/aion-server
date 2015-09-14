@@ -47,11 +47,9 @@ public class StudioPortalAI2 extends ActionItemNpcAI2 {
 			x = studio.getAddress().getExitX();
 			y = studio.getAddress().getExitY();
 			z = studio.getAddress().getExitZ();
-		}
-		else if (studio == null) {
+		} else if (studio == null) {
 			return; // doesn't own studio
-		}
-		else { // entering own studio
+		} else { // entering own studio
 			exitMapId = studio.getAddress().getMapId();
 			WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, player.getObjectId());
 			if (instance == null) {

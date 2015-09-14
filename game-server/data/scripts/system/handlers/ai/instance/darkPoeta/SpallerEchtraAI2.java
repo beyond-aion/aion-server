@@ -22,48 +22,38 @@ import com.aionemu.gameserver.utils.MathUtil;
  */
 
 @AIName("spaller_echtra")
-public class SpallerEchtraAI2 extends AggressiveNpcAI2
-{
+public class SpallerEchtraAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> skillTask;
 	private Future<?> skill2Task;
-	
+
 	@Override
-	protected void handleAttack(Creature creature)
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkDirection();
 	}
 
-	private void checkDirection()
-	{
+	private void checkDirection() {
 		List<Npc> npcs = getPosition().getWorldMapInstance().getNpcs(281178);
 		SkillTemplate paralyze = DataManager.SKILL_DATA.getSkillTemplate(8256);
-		if(npcs != null)
-		{
-			for (Npc npc : npcs) 
-			{
-				if(MathUtil.getDistance(getOwner(), npc) <= 2)
-				{
+		if (npcs != null) {
+			for (Npc npc : npcs) {
+				if (MathUtil.getDistance(getOwner(), npc) <= 2) {
 					TalkEventHandler.onTalk(this, npc);
 					AI2Actions.applyEffect(this, paralyze, getOwner());
 					getOwner().getEffectController().setAbnormal(4);
 					getOwner().getController().cancelCurrentSkill();
 					getOwner().getMoveController().abortMove();
 					getOwner().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
-					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable()
-					{
+					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
-						public void run() 
-						{
+						public void run() {
 							SkillEngine.getInstance().getSkill(getOwner(), 18534, 50, getOwner()).useSkill();
-							skillTask = ThreadPoolManager.getInstance().schedule(new Runnable()
-							{
+							skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 								@Override
-								public void run() 
-								{
+								public void run() {
 									SkillEngine.getInstance().getSkill(getOwner(), 18574, 50, getOwner()).useSkill();
 								}
 							}, 3000);
@@ -74,31 +64,27 @@ public class SpallerEchtraAI2 extends AggressiveNpcAI2
 		}
 	}
 
-	private void cancelTask()
-	{
-		if(skillTask != null && !skillTask.isDone())
+	private void cancelTask() {
+		if (skillTask != null && !skillTask.isDone())
 			skillTask.cancel(true);
-		else if(skill2Task != null && !skill2Task.isDone())
+		else if (skill2Task != null && !skill2Task.isDone())
 			skill2Task.cancel(true);
 	}
 
 	@Override
-	protected void handleBackHome()
-	{
+	protected void handleBackHome() {
 		cancelTask();
 		super.handleBackHome();
 	}
 
 	@Override
-	protected void handleDespawned()
-	{
+	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
 	}
 
 	@Override
-	protected void handleDied() 
-	{
+	protected void handleDied() {
 		cancelTask();
 		super.handleDied();
 	}

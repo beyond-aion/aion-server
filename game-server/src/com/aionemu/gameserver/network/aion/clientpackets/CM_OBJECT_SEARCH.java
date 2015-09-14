@@ -38,8 +38,8 @@ public class CM_OBJECT_SEARCH extends AionClientPacket {
 	protected void runImpl() {
 		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(0, npcId);
 		if (searchResult != null) {
-			sendPacket(new SM_SHOW_NPC_ON_MAP(npcId, searchResult.getWorldId(), searchResult.getSpot().getX(),
-				searchResult.getSpot().getY(), searchResult.getSpot().getZ()));
+			sendPacket(new SM_SHOW_NPC_ON_MAP(npcId, searchResult.getWorldId(), searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult
+				.getSpot().getZ()));
 		}
 	}
 }

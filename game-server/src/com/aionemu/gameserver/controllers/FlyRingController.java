@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
  */
 public class FlyRingController extends VisibleObjectController<FlyRing> {
 
-	   ConcurrentHashMap<Integer, FlyRingObserver> observed = new ConcurrentHashMap<>();
+	ConcurrentHashMap<Integer, FlyRingObserver> observed = new ConcurrentHashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {

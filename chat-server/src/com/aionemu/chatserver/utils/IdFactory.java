@@ -9,31 +9,26 @@ import java.util.concurrent.locks.ReentrantLock;
  * 
  * @author ATracer
  */
-public class IdFactory
-{
+public class IdFactory {
+
 	private final BitSet idList = new BitSet();
 	private final ReentrantLock lock = new ReentrantLock();
 	private AtomicInteger nextMinId = new AtomicInteger(1);
 	protected static IdFactory instance = new IdFactory();
-	
-	public int nextId()
-	{
-		try
-		{
+
+	public int nextId() {
+		try {
 			lock.lock();
 			int id = idList.nextClearBit(nextMinId.intValue());
 			idList.set(id);
 			nextMinId.incrementAndGet();
 			return id;
-		}
-		finally
-		{
+		} finally {
 			lock.unlock();
 		}
 	}
-	
-	public static IdFactory getInstance()
-	{
+
+	public static IdFactory getInstance() {
 		return instance;
 	}
 }

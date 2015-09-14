@@ -33,8 +33,8 @@ public class Kisk extends SummonedObject<Player> {
 
 	private int remainingResurrections;
 	private long kiskSpawnTime;
-	
-	public final int KISK_LIFETIME_IN_SEC = 2 * 60 * 60; //2 hours
+
+	public final int KISK_LIFETIME_IN_SEC = 2 * 60 * 60; // 2 hours
 
 	private final Set<Integer> kiskMemberIds;
 
@@ -48,10 +48,10 @@ public class Kisk extends SummonedObject<Player> {
 		super(objId, controller, spawnTemplate, npcTemplate, npcTemplate.getLevel());
 
 		this.kiskStatsTemplate = npcTemplate.getKiskStatsTemplate();
-		
+
 		if (this.kiskStatsTemplate == null)
 			this.kiskStatsTemplate = new KiskStatsTemplate();
-		
+
 		this.kiskMemberIds = new FastSet<Integer>();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
@@ -63,6 +63,7 @@ public class Kisk extends SummonedObject<Player> {
 	public boolean isEnemy(Creature creature) {
 		return creature.isEnemyFrom(this);
 	}
+
 	/**
 	 * Required so that the enemy race can attack the Kisk!
 	 */
@@ -70,12 +71,12 @@ public class Kisk extends SummonedObject<Player> {
 	public boolean isEnemyFrom(Player player) {
 		return !player.getRace().equals(this.ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
 	}
-	
+
 	@Override
 	public int getType(Creature creature) {
-	   if (creature instanceof Player)
-	  	 return isEnemyFrom((Player) creature) ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
-	   return super.getType(creature);
+		if (creature instanceof Player)
+			return isEnemyFrom((Player) creature) ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
+		return super.getType(creature);
 	}
 
 	/**
@@ -97,13 +98,13 @@ public class Kisk extends SummonedObject<Player> {
 
 	public List<Player> getCurrentMemberList() {
 		List<Player> currentMemberList = new FastTable<Player>();
-		
-		for(int memberId : this.kiskMemberIds) {
+
+		for (int memberId : this.kiskMemberIds) {
 			Player member = World.getInstance().findPlayer(memberId);
-			if(member != null)
+			if (member != null)
 				currentMemberList.add(member);
 		}
-		
+
 		return currentMemberList;
 	}
 
@@ -113,7 +114,7 @@ public class Kisk extends SummonedObject<Player> {
 	public int getCurrentMemberCount() {
 		return this.kiskMemberIds.size();
 	}
-	
+
 	public Set<Integer> getCurrentMemberIds() {
 		return this.kiskMemberIds;
 	}
@@ -170,20 +171,20 @@ public class Kisk extends SummonedObject<Player> {
 					return false; // Already Checked Name
 
 				case 4: // Group (PlayerGroup or PlayerAllianceGroup)
-					if(!player.isInTeam() || !player.getCurrentGroup().hasMember(getCreatorId()))
+					if (!player.isInTeam() || !player.getCurrentGroup().hasMember(getCreatorId()))
 						return false;
 					break;
 				case 5: // Alliance
-						if (!player.isInTeam() || (player.isInAlliance2() && !player.getPlayerAlliance2().hasMember(getCreatorId())) 
-							|| (player.isInGroup2() && !player.getPlayerGroup2().hasMember(getCreatorId())))
-							return false;
+					if (!player.isInTeam() || (player.isInAlliance2() && !player.getPlayerAlliance2().hasMember(getCreatorId()))
+						|| (player.isInGroup2() && !player.getPlayerGroup2().hasMember(getCreatorId())))
+						return false;
 					break;
 
 				default:
 					return false;
 			}
 		}
-		
+
 		if (SerialKillerService.getInstance().isRestrictDynamicBindstone(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_NOT_BINDSTONE);
 			return false;
@@ -199,10 +200,9 @@ public class Kisk extends SummonedObject<Player> {
 	 * @param player
 	 */
 	public synchronized void addPlayer(Player player) {
-		if(kiskMemberIds.add(player.getObjectId())) {
-		  this.broadcastKiskUpdate();
-		}
-		else {
+		if (kiskMemberIds.add(player.getObjectId())) {
+			this.broadcastKiskUpdate();
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_KISK_UPDATE(this));
 		}
 		player.setKisk(this);
@@ -213,27 +213,27 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	public synchronized void removePlayer(Player player) {
 		player.setKisk(null);
-		if(kiskMemberIds.remove(player.getObjectId()))
-		  this.broadcastKiskUpdate();
+		if (kiskMemberIds.remove(player.getObjectId()))
+			this.broadcastKiskUpdate();
 	}
 
 	/**
 	 * Sends SM_KISK_UPDATE to each member
 	 */
 	private void broadcastKiskUpdate() {
-		//on all members, but not the ones in knownlist, they will receive the update in the next step
+		// on all members, but not the ones in knownlist, they will receive the update in the next step
 		for (Player member : this.getCurrentMemberList()) {
 			if (!this.getKnownList().knowns(member))
 				PacketSendUtility.sendPacket(member, new SM_KISK_UPDATE(this));
 		}
 
 		final Kisk kisk = this;
-		//all players having the same race in knownlist
+		// all players having the same race in knownlist
 		getKnownList().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player object) {
-			  // Logic to prevent enemy race from knowing kisk information.
+				// Logic to prevent enemy race from knowing kisk information.
 				if (object.getRace() == ownerRace)
 					PacketSendUtility.sendPacket(object, new SM_KISK_UPDATE(kisk));
 			}

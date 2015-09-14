@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class allows easy manipulations with transactions, it should be used when critical or synchronized data should
- * be commited to two or more tables. This class allows us to avoid data synchronization problems in db.
+ * This class allows easy manipulations with transactions, it should be used when critical or synchronized data should be commited to two or more
+ * tables. This class allows us to avoid data synchronization problems in db.
  * <p/>
  * Class is not designed to be thread-safe, should be synchronized externally.<br>
  * Class is not fail-safe, if error happens - exception will be thrown.
@@ -30,8 +30,7 @@ public class Transaction {
 	private Connection connection;
 
 	/**
-	 * Package private constructor, should be instantiated via {@link com.aionemu.commons.database.DB#beginTransaction()}
-	 * class
+	 * Package private constructor, should be instantiated via {@link com.aionemu.commons.database.DB#beginTransaction()} class
 	 * 
 	 * @param con
 	 *          Connection that will be used for this transaction
@@ -56,8 +55,8 @@ public class Transaction {
 	}
 
 	/**
-	 * Adds Insert / Update Query to this transaction. Utilizes IUSth for Batching and Query Editing. MUST MANUALLY
-	 * EXECUTE QUERY / BATACH IN IUSth (No need to close Statement after execution)
+	 * Adds Insert / Update Query to this transaction. Utilizes IUSth for Batching and Query Editing. MUST MANUALLY EXECUTE QUERY / BATACH IN IUSth (No
+	 * need to close Statement after execution)
 	 * 
 	 * @param sql
 	 *          Sql query
@@ -70,8 +69,7 @@ public class Transaction {
 		PreparedStatement statement = connection.prepareStatement(sql);
 		if (iusth != null) {
 			iusth.handleInsertUpdate(statement);
-		}
-		else {
+		} else {
 			statement.executeUpdate();
 		}
 	}
@@ -123,19 +121,16 @@ public class Transaction {
 
 		try {
 			connection.commit();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.warn("Error while commiting transaction", e);
 
 			try {
 				if (rollBackToOnError != null) {
 					connection.rollback(rollBackToOnError);
-				}
-				else {
+				} else {
 					connection.rollback();
 				}
-			}
-			catch (SQLException e1) {
+			} catch (SQLException e1) {
 				log.error("Can't rollback transaction", e1);
 			}
 		}

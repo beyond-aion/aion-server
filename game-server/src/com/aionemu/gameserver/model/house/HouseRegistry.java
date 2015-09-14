@@ -178,6 +178,7 @@ public class HouseRegistry {
 
 	/**
 	 * Returns default decoration for the part type<br>
+	 * 
 	 * @param partType
 	 * @return
 	 */
@@ -244,8 +245,7 @@ public class HouseRegistry {
 					decor.setUsed(true);
 					decor.setRoom(room);
 					defaultDecor.setUsed(false);
-				}
-				else {
+				} else {
 					if (decor.isUsed() && !decorationUse.equals(decor) && decor.getRoom() == room) {
 						decor.setUsed(false);
 						decor.setRoom(-1);

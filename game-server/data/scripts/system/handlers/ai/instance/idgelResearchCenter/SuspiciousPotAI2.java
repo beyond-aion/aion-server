@@ -10,18 +10,15 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 
 /**
- *
  * @author Ritsu
  */
 @AIName("suspiciouspot")
-public class SuspiciousPotAI2 extends ActionItemNpcAI2 
-{
+public class SuspiciousPotAI2 extends ActionItemNpcAI2 {
 
 	private boolean isSpawned;
 
 	@Override
-	protected void handleDialogStart(Player player)
-	{
+	protected void handleDialogStart(Player player) {
 		InstanceReward<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();
 		if (instance != null && !instance.isStartProgress()) {
 			return;
@@ -30,10 +27,8 @@ public class SuspiciousPotAI2 extends ActionItemNpcAI2
 	}
 
 	@Override
-	protected void handleUseItemFinish(Player player) 
-	{
-		if (!isSpawned) 
-		{
+	protected void handleUseItemFinish(Player player) {
+		if (!isSpawned) {
 			isSpawned = true;
 			AI2Actions.handleUseItemFinish(this, player);
 			getOwner().getController().die();
@@ -42,9 +37,8 @@ public class SuspiciousPotAI2 extends ActionItemNpcAI2
 			int distance = Rnd.get(1, 2);
 			float x1 = (float) (Math.cos(Math.PI * direction) * distance);
 			float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-			for (int i = 0; i < 5; i++)
-			{
-				spawn(230118,  npc.getX() + x1,  npc.getY() + y1,  npc.getZ(),  (byte) 0);
+			for (int i = 0; i < 5; i++) {
+				spawn(230118, npc.getX() + x1, npc.getY() + y1, npc.getZ(), (byte) 0);
 			}
 
 		}

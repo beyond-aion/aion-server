@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 @AIName("derakanak")
 public class DerakanakAI2 extends AggressiveNpcAI2 {
 
@@ -18,12 +17,13 @@ public class DerakanakAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-			wakeUp();
+		wakeUp();
 	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-			wakeUp();
+		wakeUp();
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
@@ -51,7 +51,7 @@ public class DerakanakAI2 extends AggressiveNpcAI2 {
 			scheduleDelayStage1(delay);
 		}
 	}
-	
+
 	private void stage2() {
 		int delay = 15000;
 		if (isAlreadyDead() || !isStart)
@@ -61,7 +61,7 @@ public class DerakanakAI2 extends AggressiveNpcAI2 {
 			scheduleDelayStage2(delay);
 		}
 	}
-	
+
 	private void scheduleDelayStage2(int delay) {
 		if (!isStart && !isAlreadyDead())
 			return;
@@ -89,6 +89,7 @@ public class DerakanakAI2 extends AggressiveNpcAI2 {
 			}, delay);
 		}
 	}
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();

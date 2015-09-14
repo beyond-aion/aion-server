@@ -93,7 +93,7 @@ public class Friend {
 	public boolean isOnline() {
 		return pcd.isOnline();
 	}
-	
+
 	public String getFriendMemo() {
 		return memo;
 	}

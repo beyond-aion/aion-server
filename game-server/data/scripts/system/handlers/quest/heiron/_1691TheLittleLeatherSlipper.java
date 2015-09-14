@@ -43,8 +43,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 			if (targetId == 798386) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -100,8 +99,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

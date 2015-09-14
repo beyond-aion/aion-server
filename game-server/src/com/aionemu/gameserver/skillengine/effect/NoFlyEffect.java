@@ -30,7 +30,7 @@ public class NoFlyEffect extends EffectTemplate {
 	@Override
 	public void startEffect(Effect effect) {
 		((Player) effect.getEffected()).getFlyController().endFly(true);
-		
+
 		effect.setAbnormal(AbnormalState.NOFLY.getId());
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY.getId());
 	}

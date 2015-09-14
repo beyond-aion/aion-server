@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
  */
 public class RoadController extends VisibleObjectController<Road> {
 
-	   ConcurrentHashMap<Integer, RoadObserver> observed = new ConcurrentHashMap<>();
+	ConcurrentHashMap<Integer, RoadObserver> observed = new ConcurrentHashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {

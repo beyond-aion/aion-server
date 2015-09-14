@@ -12,25 +12,22 @@ import com.aionemu.chatserver.service.ChatService;
 /**
  * @author ATracer
  */
-public class CM_PLAYER_LOGOUT extends GsClientPacket
-{
+public class CM_PLAYER_LOGOUT extends GsClientPacket {
+
 	private static final Logger log = LoggerFactory.getLogger(CM_PLAYER_LOGOUT.class);
 	private int playerId;
 
-	public CM_PLAYER_LOGOUT(ByteBuffer buf, GsConnection connection)
-	{
+	public CM_PLAYER_LOGOUT(ByteBuffer buf, GsConnection connection) {
 		super(buf, connection, 0x02);
 	}
 
 	@Override
-	protected void readImpl()
-	{
+	protected void readImpl() {
 		playerId = readD();
 	}
 
 	@Override
-	protected void runImpl()
-	{
+	protected void runImpl() {
 		ChatService.getInstance().playerLogout(playerId);
 		log.info("Player logout " + playerId);
 	}

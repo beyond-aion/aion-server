@@ -74,8 +74,7 @@ public class NpcShoutData {
 					List<NpcShout> shouts = new ArrayList<NpcShout>(shoutList.getNpcShouts());
 					if (worldShouts.get(npcId) == null) {
 						worldShouts.put(npcId, shouts);
-					}
-					else {
+					} else {
 						worldShouts.get(npcId).addAll(shouts);
 					}
 					shoutList.getNpcIds().remove(j);
@@ -133,7 +132,8 @@ public class NpcShoutData {
 	}
 
 	/**
-	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo)})
+	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo)}
+	 * )
 	 */
 	public boolean hasAnyShout(int worldId, int npcId, ShoutEventType type) {
 		List<NpcShout> shouts = getNpcShouts(worldId, npcId);

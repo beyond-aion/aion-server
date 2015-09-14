@@ -31,12 +31,12 @@ public class AbyssRankingCache {
 	 * Player ranking list that will show up in the abyss ranking window
 	 */
 	private FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>> playerRankListPackets;
-	
+
 	/**
 	 * Legion ranking list that will show up in the abyss ranking window
 	 */
 	private FastMap<Race, SM_ABYSS_RANKING_LEGIONS> legionRankListPackets;
-	
+
 	/**
 	 * Legion ranking map for legion initialization
 	 */
@@ -96,7 +96,6 @@ public class AbyssRankingCache {
 		updateAbyssRankList();
 		updateLegionRankingList();
 	}
-
 
 	/**
 	 * Updates the ranking list for all online players

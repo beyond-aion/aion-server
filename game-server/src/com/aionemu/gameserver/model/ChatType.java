@@ -37,11 +37,11 @@ public enum ChatType {
 	WHITE(0x1F, true), // System message (White), visible in "All" chat thumbnail only !
 	YELLOW(0x20, true), // System message (Yellow), visible in "All" chat thumbnail only !
 	BRIGHT_YELLOW(0x21, true), // System message (Light Yellow), visible in "All" chat thumbnail only !
-	
+
 	WHITE_CENTER(0x22, true), // Periodic Notice (White && Box on screen center)
 	YELLOW_CENTER(0x23, true), // Periodic Announcement(Yellow && Box on screen center)
 	BRIGHT_YELLOW_CENTER(0x24, true); // System Notice (Light Yellow && Box on screen center)
-	
+
 	private final int intValue;
 	private boolean sysMsg;
 
@@ -64,9 +64,11 @@ public enum ChatType {
 	/**
 	 * Returns ChatType by it's integer representation
 	 *
-	 * @param integerValue integer value of chat type
+	 * @param integerValue
+	 *          integer value of chat type
 	 * @return ChatType
-	 * @throws IllegalArgumentException if can't find suitable chat type
+	 * @throws IllegalArgumentException
+	 *           if can't find suitable chat type
 	 */
 	public static ChatType getChatTypeByInt(int integerValue) throws IllegalArgumentException {
 		for (ChatType ct : ChatType.values()) {

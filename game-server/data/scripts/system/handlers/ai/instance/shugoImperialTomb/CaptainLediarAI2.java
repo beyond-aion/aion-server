@@ -1,6 +1,5 @@
 package ai.instance.shugoImperialTomb;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -22,8 +21,8 @@ import com.aionemu.gameserver.world.World;
  * @author Ritsu
  */
 @AIName("captain_lediar")
-public class CaptainLediarAI2 extends AggressiveNpcAI2
-{
+public class CaptainLediarAI2 extends AggressiveNpcAI2 {
+
 	private WalkerTemplate template;
 	private boolean canThink = true;
 	private final List<Integer> spawnedNpc = new ArrayList<Integer>();
@@ -31,38 +30,30 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 
 	@Override
-	protected void handleAttack(Creature creature) 
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
-	private void checkPercentage(int hpPercentage)
-	{
-		if (hpPercentage == 75)
-		{
-			if (isSpawnedHelpers.compareAndSet(false, true)) 
-			{
+	private void checkPercentage(int hpPercentage) {
+		if (hpPercentage == 75) {
+			if (isSpawnedHelpers.compareAndSet(false, true)) {
 				spawnHelpers();
 			}
 		}
 	}
 
-	private void spawnHelpers()
-	{
-		if (!isAlreadyDead()) 
-		{
+	private void spawnHelpers() {
+		if (!isAlreadyDead()) {
 			int count = 4;
 			int npcId = 219509;
-			for (int i = 0; i < count; i++) 
-			{
+			for (int i = 0; i < count; i++) {
 				rndSpawnInRange(npcId, 2);
 			}
 		}
 	}
 
-	private void rndSpawnInRange(int npcId, float distance)
-	{
+	private void rndSpawnInRange(int npcId, float distance) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x = (float) (Math.cos(Math.PI * direction) * distance);
 		float y = (float) (Math.sin(Math.PI * direction) * distance);
@@ -70,16 +61,13 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	protected void handleDied()
-	{
+	protected void handleDied() {
 		super.handleDied();
 		removeHelpersSpawn();
 	}
 
-	private void removeHelpersSpawn() 
-	{
-		for (Integer object : spawnedNpc) 
-		{
+	private void removeHelpersSpawn() {
+		for (Integer object : spawnedNpc) {
 			VisibleObject npc = World.getInstance().findVisibleObject(object);
 			if (npc != null && npc.isSpawned()) {
 				npc.getController().onDelete();
@@ -88,36 +76,30 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage) 
-	{
+	public int modifyOwnerDamage(int damage) {
 		return damage = 1;
 	}
 
 	@Override
-	public boolean canThink()
-	{
+	public boolean canThink() {
 		return canThink;
 	}
 
 	@Override
-	protected void handleSpawned() 
-	{
+	protected void handleSpawned() {
 		canThink = false;
 		super.handleSpawned();
 	}
 
 	@Override
-	protected void handleMoveArrived()
-	{
+	protected void handleMoveArrived() {
 		super.handleMoveArrived();
 		String walkerId = getOwner().getSpawn().getWalkerId();
-		if (walkerId != null)
-		{
+		if (walkerId != null) {
 			template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
 		}
 		int point = getOwner().getMoveController().getCurrentPoint();
-		if (template.getRouteSteps().size() - 1 ==  point)
-		{
+		if (template.getRouteSteps().size() - 1 == point) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			canThink = true;
@@ -125,16 +107,12 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2
 		}
 	}
 
-	private void addHate()
-	{
+	private void addHate() {
 		EmoteManager.emoteStopAttacking(getOwner());
-		for (int npc_id : npc_ids)
-		{
+		for (int npc_id : npc_ids) {
 			Npc tower = getOwner().getPosition().getWorldMapInstance().getNpc(npc_id);
-			if (tower != null && !tower.getLifeStats().isAlreadyDead())
-			{
-				switch (npc_id)
-				{
+			if (tower != null && !tower.getLifeStats().isAlreadyDead()) {
+				switch (npc_id) {
 					case 831251:
 						getOwner().getAggroList().addHate(tower, 100);
 					case 831250:

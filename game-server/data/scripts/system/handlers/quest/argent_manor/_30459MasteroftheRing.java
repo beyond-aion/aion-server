@@ -9,82 +9,63 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * 
  * @author Ritsu
  */
-public class _30459MasteroftheRing extends QuestHandler 
-{
+public class _30459MasteroftheRing extends QuestHandler {
 
 	private static final int questId = 30459;
 
-	public _30459MasteroftheRing()
-	{
+	public _30459MasteroftheRing() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(799546).addOnQuestStart(questId);
 		qe.registerQuestNpc(799546).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204108).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 799546) 
-			{
-				if (dialog == DialogAction.QUEST_SELECT) 
-					return sendQuestDialog(env, 1011); 
-				else 
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 799546) {
+				if (dialog == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 1011);
+				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START)
-		{
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			switch (targetId)
-			{
-				case 204108: 
-				{
-					switch (dialog)
-					{
-						case QUEST_SELECT: 
-						{
-							if (var == 0) 
+			switch (targetId) {
+				case 204108: {
+					switch (dialog) {
+						case QUEST_SELECT: {
+							if (var == 0)
 								return sendQuestDialog(env, 1352);
-							else if (var == 1) 
+							else if (var == 1)
 								return sendQuestDialog(env, 2375);
 						}
-						case SETPRO1:
-						{
+						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
 						}
-						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
-						{
-							if (QuestService.collectItemCheck(env, true)) 
-							{
-								changeQuestStep(env, 1, 1, true);	
+						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+							if (QuestService.collectItemCheck(env, true)) {
+								changeQuestStep(env, 1, 1, true);
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return closeDialogWindow(env);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) 
-		{
-			if (targetId == 204108) 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204108)
 				return sendQuestEndDialog(env);
 		}
 		return false;

@@ -47,8 +47,7 @@ public class _20063TheSerpentOfFear extends QuestHandler {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 3) {
+						} else if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
 					}
@@ -62,8 +61,7 @@ public class _20063TheSerpentOfFear extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 				}
-			}
-			else if (targetId == 800069) { // Benjal
+			} else if (targetId == 800069) { // Benjal
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -74,8 +72,7 @@ public class _20063TheSerpentOfFear extends QuestHandler {
 						return defaultCloseDialog(env, 2, 3); // 3
 					}
 				}
-			}
-			else if (targetId == 701237) { 
+			} else if (targetId == 701237) {
 				switch (dialog) {
 					case USE_OBJECT: {
 						if (var == 3) {
@@ -85,13 +82,11 @@ public class _20063TheSerpentOfFear extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205886) { // Adella
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

@@ -27,11 +27,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("brigade_general_vasharti")
 public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
+
 	private List<Integer> percents = new ArrayList<Integer>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private boolean canThink = true;
@@ -143,8 +143,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 							if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 								setStateIfNot(AIState.FIGHT);
 								think();
-							}
-							else {
+							} else {
 								getMoveController().abortMove();
 								getOwner().setTarget(creature);
 								getOwner().getGameStats().renewLastAttackTime();
@@ -177,8 +176,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelFlameSmashTask();
-				}
-				else {
+				} else {
 					List<Point3D> redFlameSmashs = getRedFlameSmashs(283008);
 					List<Point3D> blueFlameSmashs = getRedFlameSmashs(283009);
 					WorldMapInstance instance = getPosition().getWorldMapInstance();
@@ -187,35 +185,30 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 							flameSmashCount++;
 							spawnFlameSmash(redFlameSmashs, 283008);
 							spawnFlameSmash(blueFlameSmashs, 283009);
-						}
-						else {
+						} else {
 							if (instance.getNpc(283010) != null) {
 								flameSmashCount = 1;
 								spawnFlameSmash(redFlameSmashs, 283008);
 								spawnFlameSmash(redFlameSmashs, 283008);
 								spawnFlameSmash(redFlameSmashs, 283008);
-							}
-							else if (instance.getNpc(283011) != null) {
+							} else if (instance.getNpc(283011) != null) {
 								flameSmashCount = 1;
 								spawnFlameSmash(blueFlameSmashs, 283009);
 								spawnFlameSmash(blueFlameSmashs, 283009);
 								spawnFlameSmash(blueFlameSmashs, 283009);
-							}
-							else if (instance.getNpc(283012) != null) {
+							} else if (instance.getNpc(283012) != null) {
 								if (flameSmashCount == 1) {
 									flameSmashCount++;
 									spawnFlameSmash(redFlameSmashs, 283008);
 									spawnFlameSmash(redFlameSmashs, 283008);
 									spawnFlameSmash(blueFlameSmashs, 283009);
 									spawnFlameSmash(blueFlameSmashs, 283009);
-								}
-								else if (flameSmashCount == 2) {
+								} else if (flameSmashCount == 2) {
 									flameSmashCount++;
 									spawnFlameSmash(redFlameSmashs, 283008);
 									spawnFlameSmash(redFlameSmashs, 283008);
 									spawnFlameSmash(redFlameSmashs, 283008);
-								}
-								else {
+								} else {
 									flameSmashCount = 1;
 									spawnFlameSmash(blueFlameSmashs, 283009);
 									spawnFlameSmash(blueFlameSmashs, 283009);
@@ -239,7 +232,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private boolean isSpawned(int npcId, Point3D position ) {
+	private boolean isSpawned(int npcId, Point3D position) {
 		for (Npc npc : getPosition().getWorldMapInstance().getNpcs(npcId)) {
 			if (npc.getX() == position.getX() && npc.getY() == position.getY()) {
 				return true;
@@ -302,8 +295,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() || !getOwner().isSpawned()) {
 					cancelFlameBuffEvent();
-				}
-				else {
+				} else {
 					WorldMapInstance instance = getPosition().getWorldMapInstance();
 					if (instance != null) {
 						SkillEngine.getInstance().getSkill(getOwner(), Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, getOwner()).useNoAnimationSkill();
@@ -338,7 +330,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{80, 70, 50, 40, 25});
+		Collections.addAll(percents, new Integer[] { 80, 70, 50, 40, 25 });
 	}
 
 	@Override

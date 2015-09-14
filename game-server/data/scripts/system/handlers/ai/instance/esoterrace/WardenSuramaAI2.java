@@ -35,12 +35,12 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
-	
+
 	private void checkPercentage(int hpPercentage) {
 
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
-			   percents.remove(percent);
+				percents.remove(percent);
 				switch (percent) {
 					case 50:
 					case 25:
@@ -48,7 +48,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 						spawnGeysers();
 						break;
 				}
-				
+
 				break;
 			}
 		}
@@ -56,7 +56,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{50, 25, 5});
+		Collections.addAll(percents, new Integer[] { 50, 25, 5 });
 	}
 
 	private void spawnGeysers() {

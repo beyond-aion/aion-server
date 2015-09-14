@@ -128,18 +128,18 @@ public class SiegeLocation implements ZoneHandler {
 	public boolean isUnderShield() {
 		return this.isUnderShield;
 	}
-	
-	public int getOccupiedCount() {
-	  return occupiedCount;
-   }
-	
-   public void increaseOccupiedCount() {
-	  this.occupiedCount += 1;
-   }
 
-   public void setOccupiedCount(int occupiedCount) {
-	  this.occupiedCount = occupiedCount;
-   }
+	public int getOccupiedCount() {
+		return occupiedCount;
+	}
+
+	public void increaseOccupiedCount() {
+		this.occupiedCount += 1;
+	}
+
+	public void setOccupiedCount(int occupiedCount) {
+		this.occupiedCount = occupiedCount;
+	}
 
 	/**
 	 * @param value
@@ -168,9 +168,10 @@ public class SiegeLocation implements ZoneHandler {
 			return canTeleport;
 		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
 	}
-	
+
 	/**
 	 * Validates Gp Rewards for location. Will return false, if some gp attributes are missing.
+	 * 
 	 * @return default true
 	 */
 	public boolean hasValidGpRewards() {
@@ -262,8 +263,7 @@ public class SiegeLocation implements ZoneHandler {
 					visitor.visit(player);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players" + ex);
 		}
 	}

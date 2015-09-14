@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
- *
  * @author xTz
  */
 @XmlType(name = "enchant_list")

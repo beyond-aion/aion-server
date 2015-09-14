@@ -90,8 +90,7 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore PlayerAppearance data for player " + playerId + " from DB: " + e.getMessage(), e);
 			return null;
 		}

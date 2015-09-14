@@ -12,7 +12,7 @@ public class PictureObject extends HouseObject<HousingPicture> {
 	public PictureObject(House owner, int objId, int templateId) {
 		super(owner, objId, templateId);
 	}
-	
+
 	@Override
 	public void onUse(Player player) {
 
@@ -22,5 +22,5 @@ public class PictureObject extends HouseObject<HousingPicture> {
 	public boolean canExpireNow() {
 		return true;
 	}
-	
+
 }

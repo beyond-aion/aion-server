@@ -32,8 +32,7 @@ import com.aionemu.gameserver.world.exceptions.WorldMapNotExistException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- * World object for storing and spawning, despawning etc players and other in-game objects. It also manage WorldMaps and
- * instances.
+ * World object for storing and spawning, despawning etc players and other in-game objects. It also manage WorldMaps and instances.
  * 
  * @author -Nemesiss-, Source, Wakizashi
  */
@@ -118,8 +117,7 @@ public class World {
 				synchronized (localSiegeNpcs) {
 					if (localSiegeNpcs.containsKey(siegeNpc.getSiegeId())) {
 						npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
-					}
-					else {
+					} else {
 						// We now have multi-threaded siege timers
 						// This should be thread-safe
 						npcs = new FastTable<SiegeNpc>().shared();
@@ -260,8 +258,7 @@ public class World {
 	}
 
 	/**
-	 * Update position of VisibleObject [used when object is moving on one map instance]. Check if active map region
-	 * changed and do all needed updates.
+	 * Update position of VisibleObject [used when object is moving on one map instance]. Check if active map region changed and do all needed updates.
 	 * 
 	 * @param object
 	 * @param newX
@@ -300,8 +297,7 @@ public class World {
 
 		MapRegion newRegion = oldRegion.getParent().getRegion(newX, newY, newZ);
 		if (newRegion == null) {
-			log.warn(
-				String.format("CHECKPOINT: newRegion is null, map - %d, object coordinates - %f %f %f", object.getWorldId(), newX, newY, newZ),
+			log.warn(String.format("CHECKPOINT: newRegion is null, map - %d, object coordinates - %f %f %f", object.getWorldId(), newX, newY, newZ),
 				new Throwable());
 			if (object instanceof Creature)
 				((Creature) object).getMoveController().abortMove();
@@ -318,8 +314,7 @@ public class World {
 					y = bplist.getY();
 					z = bplist.getZ();
 					h = bplist.getHeading();
-				}
-				else {
+				} else {
 					LocationData locationData = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getCommonData().getRace());
 					worldId = locationData.getMapId();
 					x = locationData.getX();
@@ -348,8 +343,7 @@ public class World {
 	}
 
 	/**
-	 * Set position of VisibleObject without spawning [object will be invisible]. If object is spawned it will be
-	 * despawned first.
+	 * Set position of VisibleObject without spawning [object will be invisible]. If object is spawned it will be despawned first.
 	 * 
 	 * @param object
 	 * @param mapId
@@ -417,8 +411,7 @@ public class World {
 	}
 
 	/**
-	 * Spawn VisibleObject at current position [use setPosition ]. Object will be visible by others and will see other
-	 * objects.
+	 * Spawn VisibleObject at current position [use setPosition ]. Object will be visible by others and will see other objects.
 	 * 
 	 * @param object
 	 * @throws AlreadySpawnedException
@@ -439,8 +432,8 @@ public class World {
 	}
 
 	/**
-	 * Despawn VisibleObject, object will become invisible and object position will become invalid. All others objects
-	 * will be noticed that this object is no longer visible.
+	 * Despawn VisibleObject, object will become invisible and object position will become invalid. All others objects will be noticed that this object
+	 * is no longer visible.
 	 * 
 	 * @throws NullPointerException
 	 *           if object is already despawned
@@ -489,8 +482,7 @@ public class World {
 					visitor.visit(object);
 				}
 			}
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);
 		}
 	}

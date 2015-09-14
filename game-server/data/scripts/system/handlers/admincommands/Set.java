@@ -51,34 +51,29 @@ public class Set extends AdminCommand {
 			byte newClass;
 			try {
 				newClass = Byte.parseByte(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
 
 			PlayerClass oldClass = target.getPlayerClass();
 			setClass(target, oldClass, newClass);
-		}
-		else if (params[0].equals("exp")) {
+		} else if (params[0].equals("exp")) {
 			long exp;
 			try {
 				exp = Long.parseLong(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
 
 			target.getCommonData().setExp(exp);
 			PacketSendUtility.sendMessage(admin, "Set exp of target to " + paramValue);
-		}
-		else if (params[0].equals("ap")) {
+		} else if (params[0].equals("ap")) {
 			int ap;
 			try {
 				ap = Integer.parseInt(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
@@ -86,18 +81,15 @@ public class Set extends AdminCommand {
 			AbyssPointsService.setAp(target, ap);
 			if (target == admin) {
 				PacketSendUtility.sendMessage(admin, "Set your Abyss Points to " + ap + ".");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(admin, "Set " + target.getName() + " Abyss Points to " + ap + ".");
 				PacketSendUtility.sendMessage(target, "Admin set your Abyss Points to " + ap + ".");
 			}
-		}
-		else if (params[0].equals("gp")) {
+		} else if (params[0].equals("gp")) {
 			int gp;
 			try {
 				gp = Integer.parseInt(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
@@ -105,18 +97,15 @@ public class Set extends AdminCommand {
 			GloryPointsService.addGp(target, gp, false);
 			if (target == admin) {
 				PacketSendUtility.sendMessage(admin, "Set your Glory Points to " + gp + ".");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(admin, "Set " + target.getName() + " Glory Points to " + gp + ".");
 				PacketSendUtility.sendMessage(target, "Admin set your Glory Points to " + gp + ".");
 			}
-		}
-		else if (params[0].equals("level")) {
+		} else if (params[0].equals("level")) {
 			int level;
 			try {
 				level = Integer.parseInt(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
@@ -131,30 +120,25 @@ public class Set extends AdminCommand {
 					if (qs == null) {
 						player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
 						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
-					}
-					else if (qs.getStatus() != QuestStatus.COMPLETE) {
+					} else if (qs.getStatus() != QuestStatus.COMPLETE) {
 						qs.setStatus(QuestStatus.COMPLETE);
-						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars()
-							.getQuestVars(), qs.getFlags()));
+						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 					}
 					player.getCommonData().setDaeva(true);
 					player.getController().upgradePlayer();
-				}
-				else if (level < 10 && qs == null) {
+				} else if (level < 10 && qs == null) {
 					// don't delete ceremony quest
 					player.getCommonData().setDaeva(false);
 				}
 				player.getCommonData().setLevel(level);
 			}
-			
+
 			PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + level);
-		}
-		else if (params[0].equals("title")) {
+		} else if (params[0].equals("title")) {
 			int titleId;
 			try {
 				titleId = Integer.parseInt(paramValue);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}

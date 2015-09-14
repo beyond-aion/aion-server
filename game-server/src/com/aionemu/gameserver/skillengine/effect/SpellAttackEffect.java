@@ -13,21 +13,21 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved;
 
 /**
  * @author kecimis
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpellAttackEffect")
 public class SpellAttackEffect extends AbstractOverTimeEffect {
-	
+
 	@Override
 	public void startEffect(Effect effect) {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
-		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, true, this.critProbMod2, critAddDmg);
+		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, true, this.critProbMod2,
+			critAddDmg);
 		effect.setReserveds(new EffectReserved(position, finalDamage, "HP", true, false), true);
 		super.startEffect(effect);
 	}
-	
+
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();

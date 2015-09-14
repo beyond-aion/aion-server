@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _21221RustyRelic extends QuestHandler {
 
@@ -38,25 +36,22 @@ public class _21221RustyRelic extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799239) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					qs.setQuestVar(1);
 					return defaultCloseDialog(env, 1, 1, true, false);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799320) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
@@ -67,14 +62,13 @@ public class _21221RustyRelic extends QuestHandler {
 		}
 		return false;
 	}
-					
-						
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

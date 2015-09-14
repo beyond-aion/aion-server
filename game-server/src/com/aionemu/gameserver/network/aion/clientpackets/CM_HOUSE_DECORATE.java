@@ -40,12 +40,12 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 		if (player == null)
 			return;
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		House house = player.getHouseRegistry().getOwner();
 
 		PartType partType = PartType.getForLineNr(lineNr);
@@ -58,8 +58,7 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 				return;
 			}
 			house.getRegistry().setPartInUse(decor, room);
-		}
-		else {
+		} else {
 			// remove from inventory
 			HouseDecoration decor = house.getRegistry().getCustomPartByObjId(objectId);
 			house.getRegistry().setPartInUse(decor, room);

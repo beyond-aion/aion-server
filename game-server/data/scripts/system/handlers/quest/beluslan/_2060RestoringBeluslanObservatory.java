@@ -84,12 +84,10 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								if (QuestService.collectItemCheck(env, false)) {
 									return sendQuestDialog(env, 2375);
-								}
-								else {
+								} else {
 									giveQuestItem(env, 182204318, 1); // give another bottle
 									return sendQuestDialog(env, 2461);
 								}
@@ -143,13 +141,11 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204701) { // Hod
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

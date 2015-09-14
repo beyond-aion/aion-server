@@ -25,7 +25,6 @@ public interface InstanceHandler {
 	 *          created
 	 */
 	void onInstanceCreate(WorldMapInstance instance);
-	
 
 	/**
 	 * Executed during instance destroy.<br>
@@ -33,7 +32,7 @@ public interface InstanceHandler {
 	 * All class-shared objects should be cleaned in handler
 	 */
 	void onStartInstanceDestroy();
-	
+
 	void onInstanceDestroy();
 
 	void onPlayerLogin(Player player);
@@ -47,7 +46,7 @@ public interface InstanceHandler {
 	void onOpenDoor(int door);
 
 	void onEnterZone(Player player, ZoneInstance zone);
-	
+
 	void onEnterZone(Npc npc, ZoneInstance zone);
 
 	void onLeaveZone(Player player, ZoneInstance zone);
@@ -67,7 +66,7 @@ public interface InstanceHandler {
 	void onDie(Npc npc);
 
 	void onChangeStage(StageType type);
-	
+
 	void onChangeStageList(StageList list);
 
 	StageType getStage();
@@ -81,19 +80,19 @@ public interface InstanceHandler {
 	boolean onPassFlyingRing(Player player, String flyingRing);
 
 	void handleUseItemFinish(Player player, Npc npc);
-	
+
 	void onLeaveTeam(Player player);
 
 	void onHealMember(Player effector, Player effected, int value);
-	
+
 	void onBaseCapture(Player player);
-	
+
 	void onAddLegionMember(Legion legion, Player player);
-	
+
 	void onAddAp(Player player, int value);
-	
+
 	boolean canUseSkill(Player player, Skill skill);
-	
+
 	void onAttack(Creature attacked, Creature attacker, int damage);
 
 	void onAggro(Npc npc);
@@ -101,5 +100,5 @@ public interface InstanceHandler {
 	void onApplyEffect(Creature effector, Creature effected, int skillId);
 
 	void onEndEffect(Creature effector, Creature effected, int skillId);
-	
+
 }

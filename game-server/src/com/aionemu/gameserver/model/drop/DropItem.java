@@ -23,8 +23,7 @@ public class DropItem {
 	private boolean isDistributeItem = false;
 	private int npcObj;
 	private int optionalSocket = 0;
-	
-	
+
 	public DropItem(Drop dropTemplate) {
 		this.dropTemplate = dropTemplate;
 		ItemTemplate template = dropTemplate.getItemTemplate();
@@ -36,8 +35,7 @@ public class DropItem {
 	}
 
 	/**
-	 * Regenerates item count upon each call // TODO input parameters - based on attacker stats // TODO more precise
-	 * calculations (non-linear)
+	 * Regenerates item count upon each call // TODO input parameters - based on attacker stats // TODO more precise calculations (non-linear)
 	 */
 	public void calculateCount() {
 		long rndCount = Rnd.get(dropTemplate.getMinAmount(), dropTemplate.getMaxAmount());
@@ -86,9 +84,9 @@ public class DropItem {
 	public ArrayList<Integer> getPlayerObjIds() {
 		return playerObjIds;
 	}
-	
+
 	public boolean canViewDropItem(int objId) {
-	   return playerObjIds.isEmpty() || playerObjIds.contains(objId);
+		return playerObjIds.isEmpty() || playerObjIds.contains(objId);
 	}
 
 	/**
@@ -96,8 +94,8 @@ public class DropItem {
 	 *          the playerObjId to set
 	 */
 	public void setPlayerObjId(int playerObjId) {
-	   if (playerObjId > 0 && !playerObjIds.contains(playerObjId))
-		this.playerObjIds.add(playerObjId);
+		if (playerObjId > 0 && !playerObjIds.contains(playerObjId))
+			this.playerObjIds.add(playerObjId);
 	}
 
 	/**
@@ -146,13 +144,11 @@ public class DropItem {
 		if (winningPlayer != null) {
 			if (winningPlayer.isOnline()) {
 				return winningPlayer;
-			}
-			else {
+			} else {
 				Player player = World.getInstance().findPlayer(winningPlayer.getObjectId());
 				if (player != null) {
 					return player;
-				}
-				else {
+				} else {
 					return winningPlayer;
 				}
 			}

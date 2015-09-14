@@ -15,8 +15,8 @@ import com.aionemu.chatserver.service.ChatService;
 /**
  * @author ATracer
  */
-public class ClientPacketHandler extends AbstractPacketHandler
-{
+public class ClientPacketHandler extends AbstractPacketHandler {
+
 	private BroadcastService broadcastService = BroadcastService.getInstance();
 	private ChatService chatService = ChatService.getInstance();
 
@@ -27,17 +27,14 @@ public class ClientPacketHandler extends AbstractPacketHandler
 	 * @param channelHandler
 	 * @return AbstractClientPacket
 	 */
-	public AbstractClientPacket handle(ChannelBuffer buf, ClientChannelHandler channelHandler)
-	{
+	public AbstractClientPacket handle(ChannelBuffer buf, ClientChannelHandler channelHandler) {
 		byte opCode = buf.readByte();
 		State state = channelHandler.getState();
 		AbstractClientPacket clientPacket = null;
 
-		switch (state)
-		{
+		switch (state) {
 			case CONNECTED:
-				switch (opCode)
-				{
+				switch (opCode) {
 					case 0x30:
 						clientPacket = new CM_CHAT_INI(buf, channelHandler, chatService);
 						break;
@@ -49,8 +46,7 @@ public class ClientPacketHandler extends AbstractPacketHandler
 				}
 				break;
 			case AUTHED:
-				switch (opCode)
-				{
+				switch (opCode) {
 					case 0x10:
 						clientPacket = new CM_CHANNEL_REQUEST(buf, channelHandler, chatService);
 						break;

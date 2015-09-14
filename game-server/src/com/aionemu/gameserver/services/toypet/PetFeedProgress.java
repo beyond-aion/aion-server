@@ -33,7 +33,7 @@ public final class PetFeedProgress {
 	public PetHungryLevel getHungryLevel() {
 		return hungryLevel;
 	}
-	
+
 	public void setHungryLevel(PetHungryLevel level) {
 		hungryLevel = level;
 	}
@@ -44,23 +44,23 @@ public final class PetFeedProgress {
 	public int getRegularCount() {
 		return regularConsumed & 0xFF;
 	}
-	
+
 	public void setRegularCount(short count) {
 		regularConsumed = count;
 	}
-	
+
 	public int getLovedFoodRemaining() {
 		return lovedFoodMax - lovedConsumed;
 	}
-	
+
 	public boolean isLovedFeeded() {
 		return lovedFeeded;
 	}
-	
+
 	public void setIsLovedFeeded() {
 		lovedFeeded = true;
 	}
-	
+
 	public void incrementCount(boolean lovedFood) {
 		if (lovedFood) {
 			lovedConsumed++;
@@ -68,7 +68,7 @@ public final class PetFeedProgress {
 			regularConsumed++;
 		}
 	}
-	
+
 	public void reset() {
 		if (lovedFeeded)
 			lovedFeeded = false;
@@ -87,7 +87,7 @@ public final class PetFeedProgress {
 		value <<= 4; // unk
 		return value;
 	}
-	
+
 	public void setData(int savedData) {
 		savedData >>= 4; // drop unk
 		lovedConsumed = (short) (savedData & 0x3F);

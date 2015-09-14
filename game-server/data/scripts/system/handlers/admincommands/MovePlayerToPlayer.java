@@ -21,8 +21,7 @@ public class MovePlayerToPlayer extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 2) {
-			PacketSendUtility.sendMessage(admin,
-				"syntax //moveplayertoplayer <characterNameToMove> <characterNameDestination>");
+			PacketSendUtility.sendMessage(admin, "syntax //moveplayertoplayer <characterNameToMove> <characterNameDestination>");
 			return;
 		}
 
@@ -43,17 +42,16 @@ public class MovePlayerToPlayer extends AdminCommand {
 			return;
 		}
 
-		TeleportService2.teleportTo(playerToMove, playerDestination.getWorldId(), playerDestination.getInstanceId(),
-			playerDestination.getX(), playerDestination.getY(), playerDestination.getZ(), playerDestination.getHeading());
+		TeleportService2.teleportTo(playerToMove, playerDestination.getWorldId(), playerDestination.getInstanceId(), playerDestination.getX(),
+			playerDestination.getY(), playerDestination.getZ(), playerDestination.getHeading());
 
-		PacketSendUtility.sendMessage(admin, "Teleported player " + playerToMove.getName() + " to the location of player "
-			+ playerDestination.getName() + ".");
+		PacketSendUtility.sendMessage(admin, "Teleported player " + playerToMove.getName() + " to the location of player " + playerDestination.getName()
+			+ ".");
 		PacketSendUtility.sendMessage(playerToMove, "You have been teleported by an administrator.");
 	}
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player,
-			"syntax //moveplayertoplayer <characterNameToMove> <characterNameDestination>");
+		PacketSendUtility.sendMessage(player, "syntax //moveplayertoplayer <characterNameToMove> <characterNameDestination>");
 	}
 }

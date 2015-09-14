@@ -42,8 +42,7 @@ public class SimpleAttackManager {
 		npcAI.getOwner().getGameStats().setNextAttackTime(System.currentTimeMillis() + delay);
 		if (delay > 0) {
 			ThreadPoolManager.getInstance().schedule(new SimpleAttackAction(npcAI), delay);
-		}
-		else {
+		} else {
 			attackAction(npcAI);
 		}
 	}
@@ -70,7 +69,7 @@ public class SimpleAttackManager {
 		if (npc.getTarget() == null || !(npc.getTarget() instanceof Creature))
 			return false;
 		return MathUtil.isInAttackRange(npc, (Creature) npc.getTarget(), npc.getGameStats().getAttackRange().getCurrent() / 1000f);
-		//return distance <= npc.getController().getAttackDistanceToTarget() + NpcMoveController.MOVE_CHECK_OFFSET;
+		// return distance <= npc.getController().getAttackDistanceToTarget() + NpcMoveController.MOVE_CHECK_OFFSET;
 	}
 
 	/**
@@ -86,7 +85,7 @@ public class SimpleAttackManager {
 		Npc npc = npcAI.getOwner();
 		Creature target = (Creature) npc.getTarget();
 		if (target != null && !target.getLifeStats().isAlreadyDead()) {
-			if (!npc.canSee(target) || !GeoService.getInstance().canSee(npc, target)) { //delete check geo when the Path Finding
+			if (!npc.canSee(target) || !GeoService.getInstance().canSee(npc, target)) { // delete check geo when the Path Finding
 				npc.getController().cancelCurrentSkill();
 				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 				return;
@@ -97,8 +96,7 @@ public class SimpleAttackManager {
 				return;
 			}
 			npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
-		}
-		else {
+		} else {
 			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 		}
 	}
@@ -131,8 +129,7 @@ public class SimpleAttackManager {
 		public void run() {
 			if (!npcAI.getOwner().getGameStats().isNextAttackScheduled()) {
 				attackAction(npcAI);
-			}
-			else {
+			} else {
 				if (npcAI.isLogging()) {
 					AI2Logger.info(npcAI, "Scheduled checked attacked confirmed");
 				}

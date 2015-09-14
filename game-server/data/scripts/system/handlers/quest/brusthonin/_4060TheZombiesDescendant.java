@@ -49,8 +49,7 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
-		}
-		else if (targetId == 205156) {
+		} else if (targetId == 205156) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -59,12 +58,10 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204143) {
+		} else if (targetId == 204143) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
@@ -73,12 +70,10 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204731) {
+		} else if (targetId == 204731) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
@@ -87,25 +82,21 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 205204) {
+		} else if (targetId == 205204) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
+				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
 					&& qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, 182209037, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
@@ -120,14 +111,12 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 
 		if (id != 182209037)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				sendQuestDialog(env, 4);
 			}
 		}, 3000);

@@ -42,7 +42,7 @@ public class ScriptManagerTest extends Assert {
 	}
 
 	@Test
-	public void testScheduledAnnotation() throws Exception{
+	public void testScheduledAnnotation() throws Exception {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new ScheduledTaskClassListenerTestAdapter(cronService));
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));

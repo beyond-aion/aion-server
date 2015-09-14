@@ -13,26 +13,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "IGCategory")
 public class IGCategory {
 
-    @XmlElement(name = "sub_category")
+	@XmlElement(name = "sub_category")
 	protected List<IGSubCategory> subCategories;
-    @XmlAttribute(required = true)
-    protected int id;
-    @XmlAttribute(required = true)
-    protected String name;
+	@XmlAttribute(required = true)
+	protected int id;
+	@XmlAttribute(required = true)
+	protected String name;
 
-    public List<IGSubCategory> getSubCategories() {
-        if (subCategories == null) {
-            subCategories = new ArrayList<IGSubCategory>();
-        }
-        return this.subCategories;
-    }
+	public List<IGSubCategory> getSubCategories() {
+		if (subCategories == null) {
+			subCategories = new ArrayList<IGSubCategory>();
+		}
+		return this.subCategories;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
 }

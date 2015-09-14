@@ -18,6 +18,7 @@ public class SM_FORCED_MOVE extends AionServerPacket {
 	public SM_FORCED_MOVE(Creature creature, Creature target) {
 		this(creature, target.getObjectId(), target.getX(), target.getY(), target.getZ());
 	}
+
 	public SM_FORCED_MOVE(Creature creature, int objectId, float x, float y, float z) {
 		this.creature = creature;
 		this.objectId = objectId;
@@ -32,7 +33,7 @@ public class SM_FORCED_MOVE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(creature.getObjectId());
-		writeD(objectId);//targets objectId
+		writeD(objectId);// targets objectId
 		writeC(16); // unk
 		writeF(x);
 		writeF(y);

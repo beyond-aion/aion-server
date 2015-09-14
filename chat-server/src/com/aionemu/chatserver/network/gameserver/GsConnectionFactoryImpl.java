@@ -12,8 +12,8 @@ import com.aionemu.commons.network.Dispatcher;
  * 
  * @author -Nemesiss-
  */
-public class GsConnectionFactoryImpl implements ConnectionFactory
-{
+public class GsConnectionFactoryImpl implements ConnectionFactory {
+
 	/**
 	 * Create a new {@link com.aionlightning.commons.network.AConnection AConnection} instance.<br>
 	 * 
@@ -27,8 +27,7 @@ public class GsConnectionFactoryImpl implements ConnectionFactory
 	 * @see com.aionlightning.commons.network.Dispatcher
 	 */
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException
-	{
+	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		return new GsConnection(socket, dispatcher);
 	}
 }

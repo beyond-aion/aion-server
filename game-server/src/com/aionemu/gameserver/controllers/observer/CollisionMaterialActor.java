@@ -89,8 +89,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 		if (gameTime.getDayTime() == DayTime.NIGHT) {
 			if (foundSkill.getTime() == MaterialActTime.NIGHT)
 				return foundSkill;
-		}
-		else
+		} else
 			return foundSkill;
 
 		return null;
@@ -102,8 +101,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 			return;
 		if (collisionResults.size() == 0) {
 			return;
-		}
-		else {
+		} else {
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 				Player player = (Player) creature;
 				if (player.isGM()) {
@@ -160,7 +158,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 
 	@Override
 	public void setEnabled(boolean enable) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 	};
 
 }

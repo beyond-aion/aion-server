@@ -23,8 +23,7 @@ public class DAOLoader implements ClassListener {
 
 			try {
 				DAOManager.registerDAO((Class<? extends DAO>) clazz);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				throw new Error("Can't register DAO class", e);
 			}
 		}
@@ -40,8 +39,7 @@ public class DAOLoader implements ClassListener {
 
 			try {
 				DAOManager.unregisterDAO((Class<? extends DAO>) clazz);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				throw new Error("Can't unregister DAO class", e);
 			}
 		}

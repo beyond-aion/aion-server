@@ -45,8 +45,7 @@ public class _2564WiththePowerofFlame extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -63,8 +62,7 @@ public class _2564WiththePowerofFlame extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204821) {
@@ -81,8 +79,7 @@ public class _2564WiththePowerofFlame extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204822) {
+		} else if (targetId == 204822) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -96,8 +93,7 @@ public class _2564WiththePowerofFlame extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204823) {
+		} else if (targetId == 204823) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)

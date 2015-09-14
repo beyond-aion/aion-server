@@ -42,21 +42,18 @@ public class _30339ImprovedSpellbook extends QuestHandler {
 				if (player.getInventory().getItemCountByItemId(100600792) >= 1) { // Noble Siel's Supreme Spellbook
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 4762);
-					}
-					else {
+					} else {
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799336) { // Tataka
 				if (dialog == DialogAction.USE_OBJECT) {
 					if (player.getInventory().getItemCountByItemId(182209737) > 0) {
 						return sendQuestDialog(env, 10002);
 					}
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182209737, 1);
 					return sendQuestEndDialog(env);
 				}

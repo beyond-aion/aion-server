@@ -9,7 +9,6 @@ import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- *
  * @author xTz
  */
 public class LookingForParty extends AbstractLockManager {
@@ -21,8 +20,7 @@ public class LookingForParty extends AbstractLockManager {
 
 	public LookingForParty(Player player, int instanceMaskId, EntryRequestType ert) {
 		this.player = player;
-		searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry()
-				? player.getPlayerGroup2().getOnlineMembers() : null));
+		searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup2().getOnlineMembers() : null));
 	}
 
 	public int unregisterInstance(int instanceMaskId) {
@@ -35,8 +33,7 @@ public class LookingForParty extends AbstractLockManager {
 				}
 			}
 			return searchInstances.size();
-		}
-		finally {
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -52,10 +49,8 @@ public class LookingForParty extends AbstractLockManager {
 	public void addInstanceMaskId(int instanceMaskId, EntryRequestType ert) {
 		super.writeLock();
 		try {
-			searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry()
-					? player.getPlayerGroup2().getOnlineMembers() : null));
-		}
-		finally {
+			searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup2().getOnlineMembers() : null));
+		} finally {
 			super.writeUnlock();
 		}
 	}
@@ -69,8 +64,7 @@ public class LookingForParty extends AbstractLockManager {
 				}
 			}
 			return null;
-		}
-		finally {
+		} finally {
 			super.readUnlock();
 		}
 	}

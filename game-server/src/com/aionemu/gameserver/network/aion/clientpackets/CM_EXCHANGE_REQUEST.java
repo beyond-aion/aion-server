@@ -44,15 +44,16 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			log.warn("CM_EXCHANGE_REQUEST null target from {} to {}", activePlayer.getObjectId(), targetObjectId);
 			return;
 		}
-		
-		if(activePlayer.getLifeStats().isAlreadyDead() || targetPlayer.getLifeStats().isAlreadyDead()) {
+
+		if (activePlayer.getLifeStats().isAlreadyDead() || targetPlayer.getLifeStats().isAlreadyDead()) {
 			log.warn("CM_EXCHANGE_REQUEST dead players target from {} to {}", activePlayer.getObjectId(), targetObjectId);
 			return;
 		}
-		
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EXCHANGE) {
+
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EXCHANGE) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
 		/**
@@ -63,13 +64,11 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			 * check distance between players.
 			 */
 			if (activePlayer.getKnownList().getObject(targetPlayer.getObjectId()) == null) {
-				log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName()
-					+ ") not from knownlist.");
+				log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName() + ") not from knownlist.");
 				return;
 			}
 			if (!activePlayer.getRace().equals(targetPlayer.getRace())) {
-				log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName()
-					+ ") another race.");
+				log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName() + ") another race.");
 				return;
 			}
 			/**
@@ -90,20 +89,17 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 
 					@Override
 					public void denyRequest(Creature requester, Player responder) {
-						PacketSendUtility.sendPacket(activePlayer, new SM_SYSTEM_MESSAGE(
-							SystemMessageId.EXCHANGE_HE_REJECTED_EXCHANGE, targetPlayer.getName()));
+						PacketSendUtility.sendPacket(activePlayer, new SM_SYSTEM_MESSAGE(SystemMessageId.EXCHANGE_HE_REJECTED_EXCHANGE, targetPlayer.getName()));
 					}
 				};
 
-				boolean requested = targetPlayer.getResponseRequester().putRequest(
-					SM_QUESTION_WINDOW.STR_EXCHANGE_DO_YOU_ACCEPT_EXCHANGE, responseHandler);
+				boolean requested = targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_EXCHANGE_DO_YOU_ACCEPT_EXCHANGE, responseHandler);
 				if (requested) {
-					PacketSendUtility.sendPacket(targetPlayer, new SM_QUESTION_WINDOW(
-						SM_QUESTION_WINDOW.STR_EXCHANGE_DO_YOU_ACCEPT_EXCHANGE, 0, 0, activePlayer.getName()));
+					PacketSendUtility.sendPacket(targetPlayer, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_EXCHANGE_DO_YOU_ACCEPT_EXCHANGE, 0, 0,
+						activePlayer.getName()));
 				}
 			}
-		}
-		else {
+		} else {
 			// TODO: send message, cannot trade with yourself.
 		}
 	}

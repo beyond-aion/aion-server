@@ -34,360 +34,354 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class PvpService {
 
-   private static Logger log = LoggerFactory.getLogger("KILL_LOG");
+	private static Logger log = LoggerFactory.getLogger("KILL_LOG");
 
-   public static final PvpService getInstance() {
-	  return SingletonHolder.instance;
-   }
-   private FastMap<Integer, KillList> pvpKillLists;
+	public static final PvpService getInstance() {
+		return SingletonHolder.instance;
+	}
 
-   private PvpService() {
-	  pvpKillLists = new FastMap<Integer, KillList>();
-   }
+	private FastMap<Integer, KillList> pvpKillLists;
 
-   /**
-    * @param winnerId
-    * @param victimId
-    * @return
-    */
-   private int getKillsFor(int winnerId, int victimId) {
-	  KillList winnerKillList = pvpKillLists.get(winnerId);
+	private PvpService() {
+		pvpKillLists = new FastMap<Integer, KillList>();
+	}
 
-	  if (winnerKillList == null)
-		 return 0;
-	  return winnerKillList.getKillsFor(victimId);
-   }
+	/**
+	 * @param winnerId
+	 * @param victimId
+	 * @return
+	 */
+	private int getKillsFor(int winnerId, int victimId) {
+		KillList winnerKillList = pvpKillLists.get(winnerId);
 
-   /**
-    * @param winnerId
-    * @param victimId
-    */
-   private void addKillFor(int winnerId, int victimId) {
-	  KillList winnerKillList = pvpKillLists.get(winnerId);
-	  if (winnerKillList == null) {
-		 winnerKillList = new KillList();
-		 pvpKillLists.put(winnerId, winnerKillList);
-	  }
-	  winnerKillList.addKillFor(victimId);
-   }
+		if (winnerKillList == null)
+			return 0;
+		return winnerKillList.getKillsFor(victimId);
+	}
 
-   /**
-    * @param victim
-    */
-   public void doReward(Player victim) {
-	  // winner is the player that receives the kill count
-	  final Player winner = victim.getAggroList().getMostPlayerDamage();
+	/**
+	 * @param winnerId
+	 * @param victimId
+	 */
+	private void addKillFor(int winnerId, int victimId) {
+		KillList winnerKillList = pvpKillLists.get(winnerId);
+		if (winnerKillList == null) {
+			winnerKillList = new KillList();
+			pvpKillLists.put(winnerId, winnerKillList);
+		}
+		winnerKillList.addKillFor(victimId);
+	}
 
-	  int totalDamage = victim.getAggroList().getTotalDamage();
+	/**
+	 * @param victim
+	 */
+	public void doReward(Player victim) {
+		// winner is the player that receives the kill count
+		final Player winner = victim.getAggroList().getMostPlayerDamage();
 
-	  if (totalDamage == 0 || winner == null) {
-		 return;
-	  }
+		int totalDamage = victim.getAggroList().getTotalDamage();
 
-	  // Add Player Kill to record.
-	  if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-		 winner.getAbyssRank().setAllKill();
-		 int kills = winner.getAbyssRank().getAllKill();
-		 // Pvp Kill Reward.
-		 if (CustomConfig.ENABLE_KILL_REWARD) {
-			if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
-			   ItemService.addItem(winner, CustomConfig.REWARD1, 1);
-			   PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1
-					   + "] for having killed " + CustomConfig.KILLS_NEEDED1 + " players !");
-			   log.info("[REWARD] Player [" + winner.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
+		if (totalDamage == 0 || winner == null) {
+			return;
+		}
+
+		// Add Player Kill to record.
+		if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
+			winner.getAbyssRank().setAllKill();
+			int kills = winner.getAbyssRank().getAllKill();
+			// Pvp Kill Reward.
+			if (CustomConfig.ENABLE_KILL_REWARD) {
+				if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
+					ItemService.addItem(winner, CustomConfig.REWARD1, 1);
+					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1 + "] for having killed "
+						+ CustomConfig.KILLS_NEEDED1 + " players !");
+					log.info("[REWARD] Player [" + winner.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
+				}
+				if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
+					ItemService.addItem(winner, CustomConfig.REWARD2, 1);
+					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2 + "] for having killed "
+						+ CustomConfig.KILLS_NEEDED2 + " players !");
+					log.info("[REWARD] Player [" + winner.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
+				}
+				if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
+					ItemService.addItem(winner, CustomConfig.REWARD3, 1);
+					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3 + "] for having killed "
+						+ CustomConfig.KILLS_NEEDED3 + " players !");
+					log.info("[REWARD] Player [" + winner.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
+				}
 			}
-			if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
-			   ItemService.addItem(winner, CustomConfig.REWARD2, 1);
-			   PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2
-					   + "] for having killed " + CustomConfig.KILLS_NEEDED2 + " players !");
-			   log.info("[REWARD] Player [" + winner.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
+		}
+
+		// Announce that player has died.
+		PacketSendUtility.broadcastPacketAndReceive(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()));
+
+		// Kill-log
+		if (LoggingConfig.LOG_KILL)
+			log.info("[KILL] Player [" + winner.getName() + "] killed [" + victim.getName() + "]");
+
+		if (LoggingConfig.LOG_PL) {
+			String ip1 = winner.getClientConnection().getIP();
+			String mac1 = winner.getClientConnection().getMacAddress();
+			String ip2 = victim.getClientConnection().getIP();
+			String mac2 = victim.getClientConnection().getMacAddress();
+			if (mac1 != null && mac2 != null) {
+				if (ip1.equalsIgnoreCase(ip2) && mac1.equalsIgnoreCase(mac2)) {
+					AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same ip=" + ip1 + " and mac="
+						+ mac1 + ".");
+				} else if (mac1.equalsIgnoreCase(mac2)) {
+					AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same mac=" + mac1 + ".");
+				}
 			}
-			if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
-			   ItemService.addItem(winner, CustomConfig.REWARD3, 1);
-			   PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3
-					   + "] for having killed " + CustomConfig.KILLS_NEEDED3 + " players !");
-			   log.info("[REWARD] Player [" + winner.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
+		}
+
+		// Keep track of how much damage was dealt by players
+		// so we can remove AP based on player damage...
+		int playerDamage = 0;
+		boolean success;
+
+		// Distribute AP to groups and players that had damage.
+		for (AggroInfo aggro : victim.getAggroList().getFinalDamageList(true)) {
+			success = false;
+			if (aggro.getAttacker() instanceof Player) {
+				success = rewardPlayer(victim, totalDamage, aggro);
+			} else if (aggro.getAttacker() instanceof PlayerGroup) {
+				success = rewardPlayerGroup(victim, totalDamage, aggro);
+			} else if (aggro.getAttacker() instanceof PlayerAlliance) {
+				success = rewardPlayerAlliance(victim, totalDamage, aggro);
 			}
-		 }
-	  }
 
-	  // Announce that player has died.
-	  PacketSendUtility.broadcastPacketAndReceive(victim,
-			  SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()));
+			// Add damage last, so we don't include damage from same race. (Duels, Arena)
+			if (success)
+				playerDamage += aggro.getDamage();
+		}
 
-	  //Kill-log
-	  if (LoggingConfig.LOG_KILL)
-		 log.info("[KILL] Player [" + winner.getName() + "] killed [" + victim.getName() + "]");
+		SerialKillerService.getInstance().updateRank(winner, victim);
 
-	  if (LoggingConfig.LOG_PL) {
-		 String ip1 = winner.getClientConnection().getIP();
-		 String mac1 = winner.getClientConnection().getMacAddress();
-		 String ip2 = victim.getClientConnection().getIP();
-		 String mac2 = victim.getClientConnection().getMacAddress();
-		 if (mac1 != null && mac2 != null) {
-			if (ip1.equalsIgnoreCase(ip2) && mac1.equalsIgnoreCase(mac2)) {
-			   AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same ip=" + ip1 + " and mac=" + mac1 + ".");
+		SerialKillerService.getInstance().onKillSerialKiller(winner, victim);
+
+		// notify Quest engine for winner + his group
+		notifyKillQuests(winner, victim);
+
+		// Apply lost AP to defeated player
+		final int apLost = StatFunctions.calculatePvPApLost(victim, winner);
+		final int apActuallyLost = apLost * playerDamage / totalDamage;
+
+		if (apActuallyLost > 0)
+			AbyssPointsService.addAp(victim, -apActuallyLost);
+
+	}
+
+	/**
+	 * @param victim
+	 * @param totalDamage
+	 * @param aggro
+	 * @return true if group is not same race
+	 */
+	private boolean rewardPlayerGroup(Player victim, int totalDamage, AggroInfo aggro) {
+		// Reward Group
+		PlayerGroup group = ((PlayerGroup) aggro.getAttacker());
+
+		// Don't Reward Player of Same Faction.
+		if (group.getRace() == victim.getRace())
+			return false;
+
+		// Find group members in range
+		List<Player> players = new ArrayList<Player>();
+
+		// Find highest rank and level in local group
+		int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
+		int maxLevel = 0;
+
+		for (Player member : group.getMembers()) {
+			if (!member.isOnline())
+				continue;
+			if (MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
+				// Don't distribute AP to a dead player!
+				if (!member.getLifeStats().isAlreadyDead()) {
+					players.add(member);
+					if (member.getLevel() > maxLevel)
+						maxLevel = member.getLevel();
+					if (member.getAbyssRank().getRank().getId() > maxRank)
+						maxRank = member.getAbyssRank().getRank().getId();
+				}
 			}
-			else if (mac1.equalsIgnoreCase(mac2)) {
-			   AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same mac=" + mac1 + ".");
+		}
+
+		// They are all dead or out of range.
+		if (players.isEmpty())
+			return false;
+
+		int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
+		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
+		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
+		float groupPercentage = (float) aggro.getDamage() / totalDamage;
+		int apRewardPerMember = Math.round(baseApReward * groupPercentage / players.size());
+		int xpRewardPerMember = Math.round(baseXpReward * groupPercentage / players.size());
+		int dpRewardPerMember = Math.round(baseDpReward * groupPercentage / players.size());
+
+		for (Player member : players) {
+			int memberApGain = 1;
+			int memberXpGain = 1;
+			int memberDpGain = 1;
+			if (this.getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
+				if (apRewardPerMember > 0)
+					memberApGain = Math.round(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
+				if (xpRewardPerMember > 0)
+					memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
+				if (dpRewardPerMember > 0)
+					memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel())
+						* member.getRates().getDpPlayerRate());
+
 			}
-		 }
-	  }
+			AbyssPointsService.addAp(member, victim, memberApGain);
+			member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
+			member.getCommonData().addDp(memberDpGain);
+			this.addKillFor(member.getObjectId(), victim.getObjectId());
+		}
 
-	  // Keep track of how much damage was dealt by players
-	  // so we can remove AP based on player damage...
-	  int playerDamage = 0;
-	  boolean success;
+		return true;
+	}
 
-	  // Distribute AP to groups and players that had damage.
-	  for (AggroInfo aggro : victim.getAggroList().getFinalDamageList(true)) {
-		 success = false;
-		 if (aggro.getAttacker() instanceof Player) {
-			success = rewardPlayer(victim, totalDamage, aggro);
-		 }
-		 else if (aggro.getAttacker() instanceof PlayerGroup) {
-			success = rewardPlayerGroup(victim, totalDamage, aggro);
-		 }
-		 else if (aggro.getAttacker() instanceof PlayerAlliance) {
-			success = rewardPlayerAlliance(victim, totalDamage, aggro);
-		 }
+	/**
+	 * @param victim
+	 * @param totalDamage
+	 * @param aggro
+	 * @return true if group is not same race
+	 */
+	private boolean rewardPlayerAlliance(Player victim, int totalDamage, AggroInfo aggro) {
+		// Reward Alliance
+		PlayerAlliance alliance = ((PlayerAlliance) aggro.getAttacker());
 
-		 // Add damage last, so we don't include damage from same race. (Duels, Arena)
-		 if (success)
-			playerDamage += aggro.getDamage();
-	  }
+		// Don't Reward Player of Same Faction.
+		if (alliance.getLeaderObject().getRace() == victim.getRace())
+			return false;
 
-	  SerialKillerService.getInstance().updateRank(winner, victim);
-	  
-	  SerialKillerService.getInstance().onKillSerialKiller(winner, victim);
+		// Find group members in range
+		List<Player> players = new ArrayList<Player>();
 
-	  //notify Quest engine for winner + his group
-	  notifyKillQuests(winner, victim);
+		// Find highest rank and level in local group
+		int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
+		int maxLevel = 0;
 
-	  // Apply lost AP to defeated player
-	  final int apLost = StatFunctions.calculatePvPApLost(victim, winner);
-	  final int apActuallyLost = apLost * playerDamage / totalDamage;
-
-	  if (apActuallyLost > 0)
-		 AbyssPointsService.addAp(victim, -apActuallyLost);
-
-   }
-
-   /**
-    * @param victim
-    * @param totalDamage
-    * @param aggro
-    * @return true if group is not same race
-    */
-   private boolean rewardPlayerGroup(Player victim, int totalDamage, AggroInfo aggro) {
-	  // Reward Group
-	  PlayerGroup group = ((PlayerGroup) aggro.getAttacker());
-
-	  // Don't Reward Player of Same Faction.
-	  if (group.getRace() == victim.getRace())
-		 return false;
-
-	  // Find group members in range
-	  List<Player> players = new ArrayList<Player>();
-
-	  // Find highest rank and level in local group
-	  int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
-	  int maxLevel = 0;
-
-	  for (Player member : group.getMembers()) {
-		 if (!member.isOnline())
-			continue;
-		 if (MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
-			// Don't distribute AP to a dead player!
-			if (!member.getLifeStats().isAlreadyDead()) {
-			   players.add(member);
-			   if (member.getLevel() > maxLevel)
-				  maxLevel = member.getLevel();
-			   if (member.getAbyssRank().getRank().getId() > maxRank)
-				  maxRank = member.getAbyssRank().getRank().getId();
+		for (Player member : alliance.getMembers()) {
+			if (!member.isOnline())
+				continue;
+			if (MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
+				// Don't distribute AP to a dead player!
+				if (!member.getLifeStats().isAlreadyDead()) {
+					players.add(member);
+					if (member.getLevel() > maxLevel)
+						maxLevel = member.getLevel();
+					if (member.getAbyssRank().getRank().getId() > maxRank)
+						maxRank = member.getAbyssRank().getRank().getId();
+				}
 			}
-		 }
-	  }
+		}
 
-	  // They are all dead or out of range.
-	  if (players.isEmpty())
-		 return false;
+		// They are all dead or out of range.
+		if (players.isEmpty())
+			return false;
 
-	  int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
-	  int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
-	  int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
-	  float groupPercentage = (float) aggro.getDamage() / totalDamage;
-	  int apRewardPerMember = Math.round(baseApReward * groupPercentage / players.size());
-	  int xpRewardPerMember = Math.round(baseXpReward * groupPercentage / players.size());
-	  int dpRewardPerMember = Math.round(baseDpReward * groupPercentage / players.size());
+		int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
+		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
+		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
+		float groupPercentage = (float) aggro.getDamage() / totalDamage;
+		int apRewardPerMember = Math.round(baseApReward * groupPercentage / players.size());
+		int xpRewardPerMember = Math.round(baseXpReward * groupPercentage / players.size());
+		int dpRewardPerMember = Math.round(baseDpReward * groupPercentage / players.size());
 
-	  for (Player member : players) {
-		 int memberApGain = 1;
-		 int memberXpGain = 1;
-		 int memberDpGain = 1;
-		 if (this.getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-			if (apRewardPerMember > 0)
-			   memberApGain = Math.round(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
-			if (xpRewardPerMember > 0)
-			   memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
-			if (dpRewardPerMember > 0)
-			   memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
-
-		 }
-		 AbyssPointsService.addAp(member, victim, memberApGain);
-		 member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
-		 member.getCommonData().addDp(memberDpGain);
-		 this.addKillFor(member.getObjectId(), victim.getObjectId());
-	  }
-
-	  return true;
-   }
-
-   /**
-    * @param victim
-    * @param totalDamage
-    * @param aggro
-    * @return true if group is not same race
-    */
-   private boolean rewardPlayerAlliance(Player victim, int totalDamage, AggroInfo aggro) {
-	  // Reward Alliance
-	  PlayerAlliance alliance = ((PlayerAlliance) aggro.getAttacker());
-
-	  // Don't Reward Player of Same Faction.
-	  if (alliance.getLeaderObject().getRace() == victim.getRace())
-		 return false;
-
-	  // Find group members in range
-	  List<Player> players = new ArrayList<Player>();
-
-	  // Find highest rank and level in local group
-	  int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
-	  int maxLevel = 0;
-
-	  for (Player member : alliance.getMembers()) {
-		 if (!member.isOnline())
-			continue;
-		 if (MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
-			// Don't distribute AP to a dead player!
-			if (!member.getLifeStats().isAlreadyDead()) {
-			   players.add(member);
-			   if (member.getLevel() > maxLevel)
-				  maxLevel = member.getLevel();
-			   if (member.getAbyssRank().getRank().getId() > maxRank)
-				  maxRank = member.getAbyssRank().getRank().getId();
+		for (Player member : players) {
+			int memberApGain = 1;
+			int memberXpGain = 1;
+			int memberDpGain = 1;
+			if (this.getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
+				if (apRewardPerMember > 0)
+					memberApGain = Math.round(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
+				if (xpRewardPerMember > 0)
+					memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
+				if (dpRewardPerMember > 0)
+					memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel())
+						* member.getRates().getDpPlayerRate());
 			}
-		 }
-	  }
+			AbyssPointsService.addAp(member, victim, memberApGain);
+			member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
+			member.getCommonData().addDp(memberDpGain);
 
-	  // They are all dead or out of range.
-	  if (players.isEmpty())
-		 return false;
+			this.addKillFor(member.getObjectId(), victim.getObjectId());
+		}
 
-	  int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
-	  int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
-	  int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
-	  float groupPercentage = (float) aggro.getDamage() / totalDamage;
-	  int apRewardPerMember = Math.round(baseApReward * groupPercentage / players.size());
-	  int xpRewardPerMember = Math.round(baseXpReward * groupPercentage / players.size());
-	  int dpRewardPerMember = Math.round(baseDpReward * groupPercentage / players.size());
+		return true;
+	}
 
-	  for (Player member : players) {
-		 int memberApGain = 1;
-		 int memberXpGain = 1;
-		 int memberDpGain = 1;
-		 if (this.getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-			if (apRewardPerMember > 0)
-			   memberApGain = Math.round(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
-			if (xpRewardPerMember > 0)
-			   memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
-			if (dpRewardPerMember > 0)
-			   memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
-		 }
-		 AbyssPointsService.addAp(member, victim, memberApGain);
-		 member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
-		 member.getCommonData().addDp(memberDpGain);
+	/**
+	 * @param victim
+	 * @param totalDamage
+	 * @param aggro
+	 * @return true if player is not same race
+	 */
+	private boolean rewardPlayer(Player victim, int totalDamage, AggroInfo aggro) {
+		// Reward Player
+		Player winner = ((Player) aggro.getAttacker());
 
-		 this.addKillFor(member.getObjectId(), victim.getObjectId());
-	  }
+		// Don't Reward Player out of range/dead/same faction
+		if (winner.getRace() == victim.getRace() || !winner.isOnline() || !MathUtil.isIn3dRange(winner, victim, GroupConfig.GROUP_MAX_DISTANCE)
+			|| winner.getLifeStats().isAlreadyDead())
+			return false;
 
-	  return true;
-   }
+		int baseApReward = 1;
+		int baseXpReward = 1;
+		int baseDpReward = 1;
 
-   /**
-    * @param victim
-    * @param totalDamage
-    * @param aggro
-    * @return true if player is not same race
-    */
-   private boolean rewardPlayer(Player victim, int totalDamage, AggroInfo aggro) {
-	  // Reward Player
-	  Player winner = ((Player) aggro.getAttacker());
+		if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
+			baseApReward = StatFunctions.calculatePvpApGained(victim, winner.getAbyssRank().getRank().getId(), winner.getLevel());
+			baseXpReward = StatFunctions.calculatePvpXpGained(victim, winner.getAbyssRank().getRank().getId(), winner.getLevel());
+			baseDpReward = StatFunctions.calculatePvpDpGained(victim, winner.getAbyssRank().getRank().getId(), winner.getLevel());
+		}
 
-	  // Don't Reward Player out of range/dead/same faction
-	  if (winner.getRace() == victim.getRace() || !winner.isOnline() || !MathUtil.isIn3dRange(winner, victim, GroupConfig.GROUP_MAX_DISTANCE) || winner.getLifeStats().isAlreadyDead())
-		 return false;
+		int apPlayerReward = Math.round(baseApReward * aggro.getDamage() / totalDamage);
+		apPlayerReward = (int) RewardType.AP_PLAYER.calcReward(winner, apPlayerReward);
+		int xpPlayerReward = Math.round(baseXpReward * winner.getRates().getXpPlayerGainRate() * aggro.getDamage() / totalDamage);
+		int dpPlayerReward = Math.round(baseDpReward * winner.getRates().getDpPlayerRate() * aggro.getDamage() / totalDamage);
 
-	  int baseApReward = 1;
-	  int baseXpReward = 1;
-	  int baseDpReward = 1;
+		AbyssPointsService.addAp(winner, victim, apPlayerReward);
+		winner.getCommonData().addExp(xpPlayerReward, RewardType.PVP_KILL, victim.getName());
+		winner.getCommonData().addDp(dpPlayerReward);
+		this.addKillFor(winner.getObjectId(), victim.getObjectId());
+		return true;
+	}
 
-	  if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-		 baseApReward = StatFunctions.calculatePvpApGained(victim, winner.getAbyssRank().getRank().getId(),
-				 winner.getLevel());
-		 baseXpReward = StatFunctions.calculatePvpXpGained(victim, winner.getAbyssRank().getRank().getId(),
-				 winner.getLevel());
-		 baseDpReward = StatFunctions.calculatePvpDpGained(victim, winner.getAbyssRank().getRank().getId(),
-				 winner.getLevel());
-	  }
+	private void notifyKillQuests(Player winner, Player victim) {
+		if (winner.getRace() == victim.getRace())
+			return;
 
-	  int apPlayerReward = Math.round(baseApReward * aggro.getDamage() / totalDamage);
-	  apPlayerReward = (int) RewardType.AP_PLAYER.calcReward(winner, apPlayerReward);
-	  int xpPlayerReward = Math.round(baseXpReward * winner.getRates().getXpPlayerGainRate() * aggro.getDamage()
-			  / totalDamage);
-	  int dpPlayerReward = Math.round(baseDpReward * winner.getRates().getDpPlayerRate() * aggro.getDamage()
-			  / totalDamage);
+		List<Player> rewarded = new ArrayList<Player>();
+		int worldId = victim.getWorldId();
+		List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
 
-	  AbyssPointsService.addAp(winner, victim, apPlayerReward);
-	  winner.getCommonData().addExp(xpPlayerReward, RewardType.PVP_KILL, victim.getName());
-	  winner.getCommonData().addDp(dpPlayerReward);
-	  this.addKillFor(winner.getObjectId(), victim.getObjectId());
-	  return true;
-   }
+		if (winner.isInGroup2()) {
+			rewarded.addAll(winner.getPlayerGroup2().getOnlineMembers());
+		} else if (winner.isInAlliance2()) {
+			rewarded.addAll(winner.getPlayerAllianceGroup2().getOnlineMembers());
+		} else
+			rewarded.add(winner);
 
-   private void notifyKillQuests(Player winner, Player victim) {
-	  if (winner.getRace() == victim.getRace())
-		 return;
+		for (Player p : rewarded) {
+			if (!MathUtil.isIn3dRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
+				continue;
 
-	  List<Player> rewarded = new ArrayList<Player>();
-	  int worldId = victim.getWorldId();
-	  List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
+			for (ZoneInstance zone : zones) {
+				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0, 0), zone.getAreaTemplate().getZoneName().name());
+			}
 
-	  if (winner.isInGroup2()) {
-		 rewarded.addAll(winner.getPlayerGroup2().getOnlineMembers());
-	  }
-	  else if (winner.isInAlliance2()) {
-		 rewarded.addAll(winner.getPlayerAllianceGroup2().getOnlineMembers());
-	  }
-	  else
-		 rewarded.add(winner);
+			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0, 0), worldId);
+			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0, 0), victim.getAbyssRank().getRank());
+		}
+		rewarded.clear();
+	}
 
-	  for (Player p : rewarded) {
-		 if (!MathUtil.isIn3dRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
-			continue;
-		 
-		 for (ZoneInstance zone : zones) {
-			 QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0, 0), zone.getAreaTemplate().getZoneName().name());
-		 }
+	@SuppressWarnings("synthetic-access")
+	private static class SingletonHolder {
 
-		 QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0, 0), worldId);
-		 QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0, 0), victim.getAbyssRank().getRank());
-	  }
-	  rewarded.clear();
-   }
-
-   @SuppressWarnings("synthetic-access")
-   private static class SingletonHolder {
-
-	  protected static final PvpService instance = new PvpService();
-   }
+		protected static final PvpService instance = new PvpService();
+	}
 }

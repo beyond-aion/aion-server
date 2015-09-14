@@ -38,8 +38,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203830: { // Fuchsia
@@ -82,8 +81,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790001) { // Aratus
 				return sendQuestEndDialog(env);
 			}
@@ -97,7 +95,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return HandlerResult.fromBoolean(QuestService.startQuest(env));
-    }
+		}
 		return HandlerResult.FAILED;
 	}
 }

@@ -20,7 +20,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- *
  * @author xTz
  */
 public class SummonsService {
@@ -87,9 +86,9 @@ public class SummonsService {
 
 		@Override
 		public void run() {
-			
+
 			int summonedBySkillId = owner.getSummonedBySkillId();
-			
+
 			owner.getController().onDelete();
 			owner.setMaster(null);
 			master.setSummon(null);
@@ -102,9 +101,9 @@ public class SummonsService {
 					PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summonedBySkillId));
 					PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(owner.getObjectId()));
 
-					//reset cooldown for summoning skill
+					// reset cooldown for summoning skill
 					master.resetSkillCoolDown(summonedBySkillId);
-					
+
 					// TODO temp till found on retail
 					if (target instanceof Creature) {
 						final Creature lastAttacker = (Creature) target;

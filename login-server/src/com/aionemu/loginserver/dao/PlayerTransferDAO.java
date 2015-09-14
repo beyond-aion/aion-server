@@ -9,8 +9,9 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
  * @author KID
  */
 public abstract class PlayerTransferDAO implements DAO {
+
 	public abstract FastTable<PlayerTransferTask> getNew();
-	
+
 	public abstract boolean update(PlayerTransferTask task);
 
 	@Override

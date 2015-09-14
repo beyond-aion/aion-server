@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
-
 /**
  * @author Luzien
  */
@@ -28,7 +27,7 @@ public class SwitchHostileEffect extends EffectTemplate {
 			Creature summon = ((Player) effector).getSummon();
 			int playerHate = aggroList.getAggroInfo(effector).getHate();
 			int summonHate = aggroList.getAggroInfo(((Player) effector).getSummon()).getHate();
-			
+
 			aggroList.stopHating(summon);
 			aggroList.stopHating(effector);
 			aggroList.addHate(effector, summonHate);

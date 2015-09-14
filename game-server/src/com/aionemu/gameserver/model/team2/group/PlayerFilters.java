@@ -47,12 +47,12 @@ public class PlayerFilters {
 		}
 
 	}
-	
+
 	public static final Predicate<Player> HAS_LOOT_PET = new Predicate<Player>() {
 
 		@Override
 		public boolean apply(Player member) {
-			Pet pet =  member.getPet();
+			Pet pet = member.getPet();
 			if (pet == null)
 				return false;
 			return pet.getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null;

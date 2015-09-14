@@ -106,8 +106,7 @@ public class ChallengeTaskService {
 							DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
 							availableTasks.add(task);
 							continue;
-						}
-						else {
+						} else {
 							int prevTaskId = template.getPrevTask();
 							if (taskMap.get(ownerId).containsKey(prevTaskId)) {
 								ChallengeTask prevTask = taskMap.get(ownerId).get(prevTaskId);
@@ -148,8 +147,9 @@ public class ChallengeTaskService {
 			}
 		}
 		ChallengeTask task = cityTasks.get(townId).get(taskTemplate.getId());
-		if(task == null || task.getQuests().get(questId) == null) {
-			log.warn("Player "+player.getName()+" trying to finish city task in the city which haven't task with this id. Town id:"+townId+", task id:"+taskTemplate.getId()+", quest id:"+questId);
+		if (task == null || task.getQuests().get(questId) == null) {
+			log.warn("Player " + player.getName() + " trying to finish city task in the city which haven't task with this id. Town id:" + townId
+				+ ", task id:" + taskTemplate.getId() + ", quest id:" + questId);
 			return;
 		}
 		ChallengeQuest quest = task.getQuests().get(questId);
@@ -189,14 +189,12 @@ public class ChallengeTaskService {
 			return;
 		int legionId = player.getLegion().getLegionId();
 		/**
-		 * If player took challenge task in one legion, then leave that legion and
-		 * enter another.
+		 * If player took challenge task in one legion, then leave that legion and enter another.
 		 */
 		if (!legionTasks.containsKey(legionId))
 			return;
 		/**
-		 * If player took challenge task in one legion, then leave that legion and
-		 * enter another, and after that completed this task in new legion.
+		 * If player took challenge task in one legion, then leave that legion and enter another, and after that completed this task in new legion.
 		 */
 		if (legionTasks.get(legionId).get(taskTemplate.getId()) == null)
 			return;
@@ -220,8 +218,7 @@ public class ChallengeTaskService {
 						winnersByPoints.get(score).add(member.getObjectId());
 						member.getLegionMember().setChallengeScore(0);
 						continue;
-					}
-					else {
+					} else {
 						LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(memberObjId);
 						int score = legionMember.getChallengeScore();
 						if (winnersByPoints.get(score) == null)
@@ -257,8 +254,7 @@ public class ChallengeTaskService {
 		Map<Integer, ChallengeTask> tasks;
 		if (legionTasks.containsKey(legionId)) {
 			tasks = legionTasks.get(legionId);
-		}
-		else {
+		} else {
 			tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(legionId, ChallengeType.LEGION);
 		}
 		for (ChallengeTask task : tasks.values()) {

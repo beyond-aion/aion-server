@@ -55,39 +55,33 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		if (player == null) {
 			return;
 		}
-		
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EDIT_CHARACTERS) {
+
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EDIT_CHARACTERS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		PlayerCommonData playerCommonData = player.getCommonData();
 		PlayerAppearance playerAppearance = player.getPlayerAppearance();
 		// Before modify appearance, we do a check of ticket
 		int gender = readD();
 		gender_change = playerCommonData.getGender().getGenderId() == gender ? false : true;
 		if (!gender_change) {
-        	if (player.getInventory().getItemCountByItemId(169650000) == 0 
-        		&& player.getInventory().getItemCountByItemId(169650001) == 0 
-			    && player.getInventory().getItemCountByItemId(169650002) == 0 
-				&& player.getInventory().getItemCountByItemId(169650003) == 0 
-				&& player.getInventory().getItemCountByItemId(169650004) == 0 
-				&& player.getInventory().getItemCountByItemId(169650005) == 0 
-				&& player.getInventory().getItemCountByItemId(169650006) == 0
-				&& player.getInventory().getItemCountByItemId(169650007) == 0) {
-                check_ticket = false;
-                return;
-            }
-        } else {
-        	if (player.getInventory().getItemCountByItemId(169660000) == 0 
-        		&& player.getInventory().getItemCountByItemId(169660001) == 0 
-			    && player.getInventory().getItemCountByItemId(169660002) == 0 
-				&& player.getInventory().getItemCountByItemId(169660003) == 0) {
-                check_ticket = false;
-                return;
-            }
-        }
+			if (player.getInventory().getItemCountByItemId(169650000) == 0 && player.getInventory().getItemCountByItemId(169650001) == 0
+				&& player.getInventory().getItemCountByItemId(169650002) == 0 && player.getInventory().getItemCountByItemId(169650003) == 0
+				&& player.getInventory().getItemCountByItemId(169650004) == 0 && player.getInventory().getItemCountByItemId(169650005) == 0
+				&& player.getInventory().getItemCountByItemId(169650006) == 0 && player.getInventory().getItemCountByItemId(169650007) == 0) {
+				check_ticket = false;
+				return;
+			}
+		} else {
+			if (player.getInventory().getItemCountByItemId(169660000) == 0 && player.getInventory().getItemCountByItemId(169660001) == 0
+				&& player.getInventory().getItemCountByItemId(169660002) == 0 && player.getInventory().getItemCountByItemId(169660003) == 0) {
+				check_ticket = false;
+				return;
+			}
+		}
 		playerCommonData.setGender(gender == 0 ? Gender.MALE : Gender.FEMALE);
 		readD(); // race
 		readD(); // player class
@@ -143,7 +137,7 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		playerAppearance.setChest(readC()); // only woman
 		playerAppearance.setWaist(readC());
 		playerAppearance.setHips(readC());
-		
+
 		playerAppearance.setArmThickness(readC());
 
 		playerAppearance.setHandSize(readC());
@@ -172,44 +166,43 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		PlayerEnterWorldService.enterWorld(client, objectId);
 		Player player = client.getActivePlayer();
 		if (!check_ticket) {
-			if(!gender_change)
+			if (!gender_change)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_ALL_CANT_NO_ITEM);
 			else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM);
-		}
-		else {
+		} else {
 			// Remove ticket and save appearance
-            if (!gender_change) {
-            	if (player.getInventory().getItemCountByItemId(169650000) > 0) { //Plastic Surgery Ticket
+			if (!gender_change) {
+				if (player.getInventory().getItemCountByItemId(169650000) > 0) { // Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650000, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650001) > 0) { //[Event] Plastic Surgery Ticket
+				} else if (player.getInventory().getItemCountByItemId(169650001) > 0) { // [Event] Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650001, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650002) > 0) { //[Special] Plastic Surgery Ticket
+				} else if (player.getInventory().getItemCountByItemId(169650002) > 0) { // [Special] Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650002, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650003) > 0) { //[Special] Plastic Surgery Ticket
+				} else if (player.getInventory().getItemCountByItemId(169650003) > 0) { // [Special] Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650003, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650004) > 0) { //Plastic Surgery Ticket (60 mins)
-					player.getInventory().decreaseByItemId(169650004, 1);	
-				} else if (player.getInventory().getItemCountByItemId(169650005) > 0) { //Plastic Surgery Ticket (60 mins)
-					player.getInventory().decreaseByItemId(169650005, 1);	
-				} else if (player.getInventory().getItemCountByItemId(169650006) > 0) { //[Event] Plastic Surgery Ticket
+				} else if (player.getInventory().getItemCountByItemId(169650004) > 0) { // Plastic Surgery Ticket (60 mins)
+					player.getInventory().decreaseByItemId(169650004, 1);
+				} else if (player.getInventory().getItemCountByItemId(169650005) > 0) { // Plastic Surgery Ticket (60 mins)
+					player.getInventory().decreaseByItemId(169650005, 1);
+				} else if (player.getInventory().getItemCountByItemId(169650006) > 0) { // [Event] Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650006, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650007) > 0) { //[Event] Plastic Surgery Ticket
+				} else if (player.getInventory().getItemCountByItemId(169650007) > 0) { // [Event] Plastic Surgery Ticket
 					player.getInventory().decreaseByItemId(169650007, 1);
 				}
-            } else {
-            	if (player.getInventory().getItemCountByItemId(169660000) > 0) { //Gender Switch Ticket
+			} else {
+				if (player.getInventory().getItemCountByItemId(169660000) > 0) { // Gender Switch Ticket
 					player.getInventory().decreaseByItemId(169660000, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660001) > 0) { //[Event] Gender Switch Ticket
+				} else if (player.getInventory().getItemCountByItemId(169660001) > 0) { // [Event] Gender Switch Ticket
 					player.getInventory().decreaseByItemId(169660001, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660002) > 0) { //Gender Switch Ticket (60 min)
+				} else if (player.getInventory().getItemCountByItemId(169660002) > 0) { // Gender Switch Ticket (60 min)
 					player.getInventory().decreaseByItemId(169660002, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660003) > 0) { //[Event] Gender Switch Ticket
+				} else if (player.getInventory().getItemCountByItemId(169660003) > 0) { // [Event] Gender Switch Ticket
 					player.getInventory().decreaseByItemId(169660003, 1);
 				}
-                DAOManager.getDAO(PlayerDAO.class).storePlayer(player); // save new gender
-            }
-            DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
-        }
-    }
+				DAOManager.getDAO(PlayerDAO.class).storePlayer(player); // save new gender
+			}
+			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
+		}
+	}
 }

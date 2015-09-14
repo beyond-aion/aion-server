@@ -37,11 +37,11 @@ public class Setinventorygrowth extends ConsoleCommand {
 
 		if (CubeExpandService.canExpand(player)) {
 			CubeExpandService.npcExpand(player);
-			PacketSendUtility.sendMessage(admin, "9 cube slots successfully added to player "+player.getName()+"!");
-			PacketSendUtility.sendMessage(player, "Admin "+admin.getName()+" gave you a cube expansion!");
-		}
-		else {
-			PacketSendUtility.sendMessage(admin, "Cube expansion cannot be added to "+player.getName()+"!\nReason: player cube already fully expanded.");
+			PacketSendUtility.sendMessage(admin, "9 cube slots successfully added to player " + player.getName() + "!");
+			PacketSendUtility.sendMessage(player, "Admin " + admin.getName() + " gave you a cube expansion!");
+		} else {
+			PacketSendUtility
+				.sendMessage(admin, "Cube expansion cannot be added to " + player.getName() + "!\nReason: player cube already fully expanded.");
 			return;
 		}
 	}

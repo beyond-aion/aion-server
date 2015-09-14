@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model;
 
 /**
- *
  * @author xTz
  */
 public enum TeleportAnimation {

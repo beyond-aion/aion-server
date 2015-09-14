@@ -43,17 +43,16 @@ public class MySQL5PlayerVarsDAO extends PlayerVarsDAO {
 
 	@Override
 	public boolean set(final int playerId, final String key, final Object value) {
-		boolean result = DB.insertUpdate(
-			"INSERT INTO player_vars (`player_id`, `param`, `value`, `time`) VALUES (?,?,?,NOW())", new IUStH() {
+		boolean result = DB.insertUpdate("INSERT INTO player_vars (`player_id`, `param`, `value`, `time`) VALUES (?,?,?,NOW())", new IUStH() {
 
-				@Override
-				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-					stmt.setInt(1, playerId);
-					stmt.setString(2, key);
-					stmt.setString(3, value.toString());
-					stmt.execute();
-				}
-			});
+			@Override
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+				stmt.setInt(1, playerId);
+				stmt.setString(2, key);
+				stmt.setString(3, value.toString());
+				stmt.execute();
+			}
+		});
 
 		return result;
 	}

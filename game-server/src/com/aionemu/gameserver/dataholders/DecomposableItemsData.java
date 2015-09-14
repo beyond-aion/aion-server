@@ -32,8 +32,7 @@ public class DecomposableItemsData {
 		for (DecomposableItemInfo template : decomposableItemsTemplates)
 			if (template.isIsSelectable()) {
 				selectableDecomposables.put(template.getItemId(), template.getItemsCollections().get(0).getItems());
-			}
-			else {
+			} else {
 				decomposableItemsInfo.put(template.getItemId(), template.getItemsCollections());
 			}
 	}
@@ -44,7 +43,7 @@ public class DecomposableItemsData {
 
 	public List<ResultedItem> getSelectableItems(int itemId) {
 		List<ResultedItem> result = selectableDecomposables.get(itemId);
-		if(result != null)
+		if (result != null)
 			return new ArrayList<ResultedItem>(result);
 		else
 			return null;

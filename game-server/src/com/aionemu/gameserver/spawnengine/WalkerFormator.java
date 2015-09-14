@@ -23,9 +23,9 @@ public class WalkerFormator {
 	private static final Logger log = LoggerFactory.getLogger(WalkerFormator.class);
 
 	/**
-	 * If it's the instance first spawn, WalkerFormator verifies and creates groups; {@link #organizeAndSpawn()} must be
-	 * called after to speed up spawning. If it's a respawn, nothing to verify, then the method places NPC to the first
-	 * step and resets data to the saved, no organizing is needed.
+	 * If it's the instance first spawn, WalkerFormator verifies and creates groups; {@link #organizeAndSpawn()} must be called after to speed up
+	 * spawning. If it's a respawn, nothing to verify, then the method places NPC to the first step and resets data to the saved, no organizing is
+	 * needed.
 	 * 
 	 * @param npc
 	 * @param instance
@@ -56,8 +56,7 @@ public class WalkerFormator {
 	}
 
 	/**
-	 * Organizes spawns in all processed walker groups. Must be called only when spawning all npcs for the instance of
-	 * world.
+	 * Organizes spawns in all processed walker groups. Must be called only when spawning all npcs for the instance of world.
 	 */
 	public static void organizeAndSpawn(int worldId, int instanceId) {
 		InstanceWalkerFormations formations = WalkerFormationsCache.getInstanceFormations(worldId, instanceId);

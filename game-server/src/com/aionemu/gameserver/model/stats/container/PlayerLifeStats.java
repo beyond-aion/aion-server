@@ -88,7 +88,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	@Override
 	public void updateCurrentStats() {
 		super.updateCurrentStats();
-		
+
 		if (!isFullyRestoredHpMp())
 			triggerRestoreTask();
 
@@ -137,6 +137,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	public int increaseFp(int value) {
 		return this.increaseFp(null, value, 0, null);
 	}
+
 	public int increaseFp(TYPE type, int value, int skillId, LOG log) {
 		fpLock.lock();
 
@@ -147,14 +148,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			int newFp = this.currentFp + value;
 			if (newFp > getMaxFp()) {
 				newFp = getMaxFp();
-				value = getMaxFp() - this.currentFp; 
+				value = getMaxFp() - this.currentFp;
 			}
 			if (currentFp != newFp) {
 				onIncreaseFp(type, value, skillId, log);
 				this.currentFp = newFp;
 			}
-		}
-		finally {
+		} finally {
 			fpLock.unlock();
 		}
 
@@ -171,6 +171,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	public int reduceFp(int value) {
 		return reduceFp(null, value, 0, null);
 	}
+
 	public int reduceFp(TYPE type, int value, int skillId, LOG log) {
 		fpLock.lock();
 		try {
@@ -182,8 +183,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			}
 
 			this.currentFp = newFp;
-		}
-		finally {
+		} finally {
 			fpLock.unlock();
 		}
 
@@ -201,8 +201,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				newFp = 0;
 
 			this.currentFp = newFp;
-		}
-		finally {
+		} finally {
 			fpLock.unlock();
 		}
 
@@ -219,8 +218,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	protected void onReduceFp(TYPE type, int value, int skillId, LOG log) {
-			sendAttackStatusPacketUpdate(type, value, skillId, log);
-			sendFpPacketUpdate();
+		sendAttackStatusPacketUpdate(type, value, skillId, log);
+		sendFpPacketUpdate();
 	}
 
 	public void sendFpPacketUpdate() {
@@ -238,10 +237,10 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		increaseFp(TYPE.NATURAL_FP, 1, 0, LOG.REGULAR);
 	}
 
-    public void specialrestoreFp() {
-        if (owner.getGameStats().getStat(StatEnum.REGEN_FP, 0).getCurrent() != 0)
-            increaseFp(TYPE.NATURAL_FP, owner.getGameStats().getStat(StatEnum.REGEN_FP, 0).getCurrent() / 3, 0, LOG.REGULAR);
-    }
+	public void specialrestoreFp() {
+		if (owner.getGameStats().getStat(StatEnum.REGEN_FP, 0).getCurrent() != 0)
+			increaseFp(TYPE.NATURAL_FP, owner.getGameStats().getStat(StatEnum.REGEN_FP, 0).getCurrent() / 3, 0, LOG.REGULAR);
+	}
 
 	public void triggerFpRestore() {
 		cancelFpReduce();
@@ -251,8 +250,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			if (flyRestoreTask == null && !alreadyDead && !isFlyTimeFullyRestored()) {
 				this.flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}
@@ -264,8 +262,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				flyRestoreTask.cancel(false);
 				this.flyRestoreTask = null;
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}
@@ -282,12 +279,10 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		cancelFpRestore();
 		restoreLock.lock();
 		try {
-			if (flyReduceTask == null && !alreadyDead && owner.getAccessLevel() < AdminConfig.GM_FLIGHT_UNLIMITED
-				&& !owner.isUnderNoFPConsum()) {
+			if (flyReduceTask == null && !alreadyDead && owner.getAccessLevel() < AdminConfig.GM_FLIGHT_UNLIMITED && !owner.isUnderNoFPConsum()) {
 				this.flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}
@@ -299,8 +294,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				flyReduceTask.cancel(false);
 				this.flyReduceTask = null;
 			}
-		}
-		finally {
+		} finally {
 			restoreLock.unlock();
 		}
 	}

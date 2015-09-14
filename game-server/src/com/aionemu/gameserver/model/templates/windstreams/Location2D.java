@@ -9,12 +9,11 @@ import com.aionemu.gameserver.model.flypath.FlyPathType;
 
 /**
  * @author LokiReborn
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Location2D")
-public class Location2D
-{
+public class Location2D {
+
 	@XmlAttribute(name = "id")
 	protected int id;
 	@XmlAttribute(name = "state")
@@ -42,6 +41,5 @@ public class Location2D
 	 */
 	public FlyPathType getFlyPathType() {
 		return flyPath;
-	}	
+	}
 }
-

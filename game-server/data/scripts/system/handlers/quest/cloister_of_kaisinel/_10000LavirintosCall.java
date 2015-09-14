@@ -81,16 +81,14 @@ public class _10000LavirintosCall extends QuestHandler {
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798600) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else {
 					int[] quests = { 10001, 10026, 10020, 10021, 10022, 10023, 10024, 10025 };
 					for (int quest : quests) {
-						QuestEngine.getInstance().onEnterZoneMissionEnd(
-							new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
+						QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
 					}
 					int[] questItems = { 182206300 };
 					return sendQuestEndDialog(env, questItems);

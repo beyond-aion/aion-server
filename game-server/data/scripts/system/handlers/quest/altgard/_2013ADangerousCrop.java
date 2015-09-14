@@ -9,9 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * Talk with Loriniah (203605). Scout the MuMu Farmland (MUMU_FARMLAND_220030000). Scouting completed! Talk with
- * Loriniah. Burn the MuMu Carts (700096) in the MuMu Farmland (3). Talk with Loriniah. Defeat the Skurvs and Mau and
- * bring the evidence to Loriniah.
+ * Talk with Loriniah (203605). Scout the MuMu Farmland (MUMU_FARMLAND_220030000). Scouting completed! Talk with Loriniah. Burn the MuMu Carts
+ * (700096) in the MuMu Farmland (3). Talk with Loriniah. Defeat the Skurvs and Mau and bring the evidence to Loriniah.
  * 
  * @author Mr. Poke
  * @reworked vlog, Gigi
@@ -77,16 +76,14 @@ public class _2013ADangerousCrop extends QuestHandler {
 						case USE_OBJECT: {
 							if (var >= 3 && var < 5) {
 								return useQuestObject(env, var, var + 1, false, true); // 4,5
-							}
-							else if (var == 5) {
+							} else if (var == 5) {
 								return useQuestObject(env, 5, 8, false, true); // 8
 							}
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203605) // Loriniah
 				return sendQuestEndDialog(env);
 		}

@@ -23,7 +23,7 @@ public class ItemRestrictionService {
 		StorageType type = StorageType.getStorageTypeById(storage);
 		switch (type) {
 			case LEGION_WAREHOUSE:
-				if (!LegionService.getInstance().getLegionMember(player.getObjectId()).hasRights(LegionPermissionsMask.WH_WITHDRAWAL) 
+				if (!LegionService.getInstance().getLegionMember(player.getObjectId()).hasRights(LegionPermissionsMask.WH_WITHDRAWAL)
 					|| !LegionConfig.LEGION_WAREHOUSE || !player.isLegionMember()) {
 					// You do not have the authority to use the Legion warehouse.
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300322));
@@ -59,9 +59,9 @@ public class ItemRestrictionService {
 					// You cannot store this item in the Legion warehouse.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WAREHOUSE_CANT_LEGION_DEPOSIT);
 					return true;
-				}
-				else if (!player.isLegionMember() || (!player.getLegionMember().hasRights(LegionPermissionsMask.WH_DEPOSIT)
-						&& !player.getLegionMember().hasRights(LegionPermissionsMask.WH_WITHDRAWAL))) {
+				} else if (!player.isLegionMember()
+					|| (!player.getLegionMember().hasRights(LegionPermissionsMask.WH_DEPOSIT) && !player.getLegionMember().hasRights(
+						LegionPermissionsMask.WH_WITHDRAWAL))) {
 					// You do not have the authority to use the Legion warehouse.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT);
 					return true;
@@ -71,7 +71,7 @@ public class ItemRestrictionService {
 
 		return false;
 	}
-	
+
 	/** Check, whether the item can be removed */
 	public static boolean canRemoveItem(Player player, Item item) {
 		ItemTemplate it = item.getItemTemplate();

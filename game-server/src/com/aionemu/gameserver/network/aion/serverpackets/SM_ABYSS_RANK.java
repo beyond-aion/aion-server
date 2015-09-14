@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -24,8 +23,8 @@ public class SM_ABYSS_RANK extends AionServerPacket {
 		writeD(rank.getCurrentGP());// curGP
 		writeD(currentRankId); // curRank
 		writeD(rank.getTopRanking()); // curRating
-                
-                writeD(0); // exp % removed with 4.5?
+
+		writeD(0); // exp % removed with 4.5?
 		writeD(rank.getAllKill()); // allKill
 		writeD(rank.getMaxRank()); // maxRank
 

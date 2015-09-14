@@ -7,9 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
 /**
- * 
  * @author ViAl
- *
  */
 public class Passport {
 
@@ -40,14 +38,14 @@ public class Passport {
 	public void setRewarded(boolean rewarded) {
 		this.rewarded = rewarded;
 	}
-	
+
 	public int getRewardStatus() {
-		if(this.isFakeStamp())
+		if (this.isFakeStamp())
 			return this.rewarded ? 2 : 0;
 		else
-			return this.rewarded  ? 3 : 1;
+			return this.rewarded ? 3 : 1;
 	}
-	
+
 	public Timestamp getArriveDate() {
 		return arriveDate;
 	}
@@ -61,23 +59,21 @@ public class Passport {
 	}
 
 	public void setState(PersistentState state) {
-		if(this.state == PersistentState.NEW) {
-		   if (state == PersistentState.UPDATE_REQUIRED)
-			   return;
-		   else if (state == PersistentState.DELETED) {
-			  this.state = PersistentState.NOACTION;
-			  return;
-		   }
+		if (this.state == PersistentState.NEW) {
+			if (state == PersistentState.UPDATE_REQUIRED)
+				return;
+			else if (state == PersistentState.DELETED) {
+				this.state = PersistentState.NOACTION;
+				return;
+			}
 		}
 		this.state = state;
 	}
-	
-	
+
 	public boolean isFakeStamp() {
 		return fakeStamp;
 	}
 
-	
 	public void setFakeStamp(boolean fakeStamp) {
 		this.fakeStamp = fakeStamp;
 	}

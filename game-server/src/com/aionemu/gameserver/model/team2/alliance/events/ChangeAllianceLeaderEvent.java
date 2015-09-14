@@ -46,8 +46,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 			if (team.isLeader(oldLeader)) {
 				team.applyOnMembers(this);
 			}
-		}
-		else {
+		} else {
 			changeLeaderTo(eventPlayer);
 		}
 		if (checkLeaderChanged(oldLeader)) {
@@ -76,7 +75,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, false));
 				}
 				if (!player.equals(member)) {
-					//eventPlayer null only when leader leave by own will and wee not must inform him about new leader
+					// eventPlayer null only when leader leave by own will and wee not must inform him about new leader
 					if (eventPlayer != null) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_HE_IS_NEW_LEADER(player.getName()));
 					}
@@ -86,14 +85,13 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 							@Override
 							public boolean apply(PlayerAlliance alliance) {
 								alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER_TIMEOUT(player.getName(), StringUtils.EMPTY, StringUtils.EMPTY),
-													new PlayerFilters.ExcludePlayerFilter(player));
+									new PlayerFilters.ExcludePlayerFilter(player));
 								return true;
 							}
 
 						});
 					}
-				}
-				else {
+				} else {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_YOU_BECOME_NEW_LEADER);
 					if (inLeague && team.getLeague().getCaptain().equals(player)) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_YOU_BECOME_NEW_LEADER_TIMEOUT);

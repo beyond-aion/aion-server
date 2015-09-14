@@ -38,7 +38,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 public class PvPArenaInstance extends GeneralInstanceHandler {
@@ -54,8 +53,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		ownerReward.endBoostMoraleEffect(player);
 		ownerReward.applyBoostMoraleEffect(player);
 		sendPacket();
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0
-				: lastAttacker.getObjectId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 
@@ -65,7 +64,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				PvPArenaPlayerReward reward = getPlayerReward(winner.getObjectId());
 				reward.addPvPKillToPlayer();
 
-				//notify Kill-Quests
+				// notify Kill-Quests
 				int worldId = winner.getWorldId();
 				QuestEngine.getInstance().onKillInWorld(new QuestEnv(player, winner, 0, 0), worldId);
 			}
@@ -91,8 +90,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			victimFine.addPoints(deathFine);
 			bonus = killBonus;
 			rank = instanceReward.getRank(victimFine.getPoints());
-		}
-		else
+		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
 		if (bonus == 0) {
@@ -110,8 +108,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			}
 			if (master instanceof Player) {
 				Player attaker = (Player) master;
-				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus)
-						* damager.getDamage() / victim.getAggroList().getTotalDamage();
+				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus) * damager.getDamage()
+					/ victim.getAggroList().getTotalDamage();
 				getPlayerReward(attaker.getObjectId()).addPoints(rewardPoints);
 				sendSystemMsg(attaker, victim, rewardPoints);
 			}
@@ -126,8 +124,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	protected void sendSystemMsg(Player player, Creature creature, int rewardPoints) {
 		int nameId = creature.getObjectTemplate().getNameId();
 		DescriptionId name = new DescriptionId(nameId * 2 + 1);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0
-				? creature.getName() : name, rewardPoints));
+		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0 ? creature.getName() : name, rewardPoints));
 	}
 
 	@Override
@@ -149,8 +146,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			instanceReward.regPlayerReward(object);
 			getPlayerReward(object).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(object);
-		}
-		else {
+		} else {
 			instanceReward.portToPosition(player);
 		}
 		sendPacket();
@@ -158,6 +154,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	private void sendPacket(final AionServerPacket packet) {
 		instance.doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
@@ -168,6 +165,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	private void spawnRndRelics(int time) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
@@ -273,6 +271,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		}
 		instanceReward.setInstanceStartTime();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				// start round 1
@@ -282,6 +281,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
 					sendPacket();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							// start round 2
@@ -291,6 +291,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 								sendPacket();
 								changeZone();
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 									@Override
 									public void run() {
 										// start round 3
@@ -301,6 +302,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 											sendPacket();
 											changeZone();
 											ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 												@Override
 												public void run() {
 													// end
@@ -384,10 +386,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	private void clearDebuffs(Player player) {
 		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
 			DispelCategoryType category = ef.getSkillTemplate().getDispelCategory();
-			if (category == DispelCategoryType.DEBUFF
-					|| category == DispelCategoryType.DEBUFF_MENTAL
-					|| category == DispelCategoryType.DEBUFF_PHYSICAL
-					|| category == DispelCategoryType.ALL) {
+			if (category == DispelCategoryType.DEBUFF || category == DispelCategoryType.DEBUFF_MENTAL || category == DispelCategoryType.DEBUFF_PHYSICAL
+				|| category == DispelCategoryType.ALL) {
 				ef.endEffect();
 				player.getEffectController().clearEffect(ef);
 			}
@@ -406,6 +406,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	private void changeZone() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				for (Player player : instance.getPlayersInside()) {
@@ -427,7 +428,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
 				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
 				if (gpToAdd > 0)
-				   GloryPointsService.addGp(player, gpToAdd, false); // already added arena rates
+					GloryPointsService.addGp(player, gpToAdd, false); // already added arena rates
 				int courage = reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage();
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);
@@ -450,13 +451,13 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				}
 				int mithrilMedal = reward.getMithrilMedal();
 				if (mithrilMedal != 0) {
-					ItemService.addItem(player, 186000147, mithrilMedal); 
+					ItemService.addItem(player, 186000147, mithrilMedal);
 				}
 				int platinumMedal = reward.getPlatinumMedal();
 				if (platinumMedal != 0) {
 					ItemService.addItem(player, 186000096, platinumMedal);
 				}
-                                
+
 				int gloriousInsignia = reward.getGloriousInsignia();
 				if (gloriousInsignia != 0) {
 					ItemService.addItem(player, 182213259, gloriousInsignia);
@@ -465,18 +466,19 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				if (lifeSerum != 0) {
 					ItemService.addItem(player, 162000077, lifeSerum);
 				}
-			} 
+			}
 		}
 		for (Npc npc : instance.getNpcs()) {
 			npc.getController().onDelete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
 					for (Player player : instance.getPlayersInside()) {
 						onExitInstance(player);
-						
+
 					}
 					AutoGroupService.getInstance().unRegisterInstance(instanceId);
 				}

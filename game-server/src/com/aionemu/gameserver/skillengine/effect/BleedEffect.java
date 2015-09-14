@@ -19,8 +19,7 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BleedEffect")
 public class BleedEffect extends AbstractOverTimeEffect {
-	
-	
+
 	@Override
 	public void calculate(Effect effect) {
 		super.calculate(effect, StatEnum.BLEED_RESISTANCE, null);
@@ -30,11 +29,12 @@ public class BleedEffect extends AbstractOverTimeEffect {
 	public void startEffect(final Effect effect) {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
-		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2, critAddDmg);
+		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2,
+			critAddDmg);
 		effect.setReserveds(new EffectReserved(position, finalDamage, "HP", true, false), true);
 		super.startEffect(effect, AbnormalState.BLEED);
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect, AbnormalState.BLEED);

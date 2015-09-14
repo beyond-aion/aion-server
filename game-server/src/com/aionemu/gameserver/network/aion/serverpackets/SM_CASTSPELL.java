@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -36,8 +35,7 @@ public class SM_CASTSPELL extends AionServerPacket {
 		this.castSpeed = castSpeed;
 	}
 
-	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z,
-		int duration, float castSpeed) {
+	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z, int duration, float castSpeed) {
 		this(effector, spellId, level, targetType, 0, duration, castSpeed);
 		this.x = x;
 		this.y = y;
@@ -49,7 +47,7 @@ public class SM_CASTSPELL extends AionServerPacket {
 	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		
+
 		writeD(effector.getObjectId());
 		writeH(spellId);
 		writeC(level);
@@ -70,19 +68,19 @@ public class SM_CASTSPELL extends AionServerPacket {
 				writeF(x);
 				writeF(y);
 				writeF(z);
-				writeD(0);//unk1
-				writeD(0);//unk2
-				writeD(0);//unk3
-				writeD(0);//unk4
-				writeD(0);//unk5
-				writeD(0);//unk6
-				writeD(0);//unk7
-				writeD(0);//unk8
+				writeD(0);// unk1
+				writeD(0);// unk2
+				writeD(0);// unk3
+				writeD(0);// unk4
+				writeD(0);// unk5
+				writeD(0);// unk6
+				writeD(0);// unk7
+				writeD(0);// unk8
 		}
 
 		writeH(duration);
-		writeC(0x00);//unk
-		writeF(castSpeed); //cast speed
-		writeC(0x00);//phys or magical?
+		writeC(0x00);// unk
+		writeF(castSpeed); // cast speed
+		writeC(0x00);// phys or magical?
 	}
 }

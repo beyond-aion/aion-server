@@ -30,8 +30,7 @@ public class _24015TotemPlowed extends QuestHandler {
 		qe.registerQuestNpc(700099).addOnKillEvent(questId);
 		qe.registerQuestNpc(203557).addOnTalkEvent(questId);
 	}
-	
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -51,8 +50,7 @@ public class _24015TotemPlowed extends QuestHandler {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;
-			}
-			else if (var >= 4) {
+			} else if (var >= 4) {
 				changeQuestStep(env, 4, 5, true); // reward
 				return true;
 			}
@@ -87,8 +85,7 @@ public class _24015TotemPlowed extends QuestHandler {
 							break;
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 1352);

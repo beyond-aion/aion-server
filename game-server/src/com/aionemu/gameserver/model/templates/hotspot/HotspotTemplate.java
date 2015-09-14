@@ -7,13 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
 
-
 /**
  * @author ginho1
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Hotspot")
-public class HotspotTemplate  {
+public class HotspotTemplate {
 
 	@XmlAttribute(name = "id")
 	protected int id;

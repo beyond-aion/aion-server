@@ -80,8 +80,7 @@ public class IDFactory {
 				// Error will be thrown few lines later, we have no more free id's.
 				// BitSet will throw IllegalArgumentException if nextMinId is negative
 				id = Integer.MIN_VALUE;
-			}
-			else {
+			} else {
 				id = idList.nextClearBit(nextMinId);
 			}
 
@@ -95,8 +94,7 @@ public class IDFactory {
 			// It ok to have Integer OverFlow here, on next ID request IDFactory will throw error
 			nextMinId = id + 1;
 			return id;
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -119,8 +117,7 @@ public class IDFactory {
 				}
 				idList.set(id);
 			}
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -143,8 +140,7 @@ public class IDFactory {
 				}
 				idList.set(id);
 			}
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -168,20 +164,19 @@ public class IDFactory {
 			if (id < nextMinId || nextMinId == Integer.MIN_VALUE) {
 				nextMinId = id;
 			}
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}
 
-	public void releaseIds(Collection<Integer> ids){
-		if(GenericValidator.isBlankOrNull(ids)){
+	public void releaseIds(Collection<Integer> ids) {
+		if (GenericValidator.isBlankOrNull(ids)) {
 			return;
 		}
 
 		try {
 			lock.lock();
-			for(Integer id : ids){
+			for (Integer id : ids) {
 				boolean status = idList.get(id);
 				if (!status) {
 					throw new IDFactoryError("ID " + id + " is not taken, can't release it.");
@@ -205,8 +200,7 @@ public class IDFactory {
 		try {
 			lock.lock();
 			return idList.cardinality();
-		}
-		finally {
+		} finally {
 			lock.unlock();
 		}
 	}

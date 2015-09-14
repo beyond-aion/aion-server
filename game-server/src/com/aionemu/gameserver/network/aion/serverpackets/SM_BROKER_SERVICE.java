@@ -46,8 +46,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 	private long settled_kinah, currentLow, currentHigh;
 	private int itemId;
 	private byte unk;
- 
-	public SM_BROKER_SERVICE(BrokerItem brokerItem, int message , int itemsCount) {
+
+	public SM_BROKER_SERVICE(BrokerItem brokerItem, int message, int itemsCount) {
 		this.type = BrokerPacketType.REGISTER_ITEM;
 		this.brokerItems = new BrokerItem[] { brokerItem };
 		this.message = message;
@@ -85,9 +85,9 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 	public SM_BROKER_SERVICE(byte unk, int itemId) {
 		this.type = BrokerPacketType.CANCEL_REGISTRED_ITEM;
 		this.itemId = itemId;
-		this.unk = unk; 
+		this.unk = unk;
 	}
-	
+
 	public SM_BROKER_SERVICE(byte unk, int itemId, long currentLow, long currentHigh) {
 		this.type = BrokerPacketType.SHOW_SELL_WINDOW;
 		this.unk = unk;
@@ -95,7 +95,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		this.currentLow = currentLow;
 		this.currentHigh = currentHigh;
 	}
- 
+
 	@Override
 	protected void writeImpl(AionConnection con) {
 		switch (type) {
@@ -127,7 +127,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 
 	}
 
-	private void  writeCancelRegistredItem() {
+	private void writeCancelRegistredItem() {
 		writeC(type.getId());
 		writeC(unk);
 		writeD(itemId);
@@ -142,8 +142,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		int counter = 0;
 		for (BrokerItem item : brokerItems) {
 			if (counter < 36) {
-				 writeItemInfo(item);
-				 counter++;
+				writeItemInfo(item);
+				counter++;
 			}
 		}
 	}
@@ -164,8 +164,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 			writeC(itemsCount + 1);
 			BrokerItem itemForRegistration = brokerItems[0];
 			writeRegisteredItemInfo(itemForRegistration);
-		}
-		else {
+		} else {
 			writeB(new byte[107]);
 		}
 	}
@@ -198,35 +197,34 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 				writeQ(0);
 			writeQ(settledItem.getItemCount());
 			writeQ(settledItem.getItemCount());
-			int time = (int)(settledItem.getSettleTime().getTime() / 60000);
+			int time = (int) (settledItem.getSettleTime().getTime() / 60000);
 			writeD(time);
 
-			//TODO! thats really odd - looks like getItem() may return null...
+			// TODO! thats really odd - looks like getItem() may return null...
 			Item item = settledItem.getItem();
-			if(item != null)
+			if (item != null)
 				ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
 			else
 				writeB(new byte[ManaStoneInfoBlobEntry.size]);
 
 			writeS(settledItem.getItemCreator());
-			/*writeH(0);
-			writeC(0);
-			if (item != null)
-				ItemInfoBlob.newBlobEntry(ItemBlobType.POLISH_INFO, null, item).writeThisBlob(getBuf());
-			ItemInfoBlob.newBlobEntry(ItemBlobType.WRAP_INFO, null, item).writeThisBlob(getBuf());*/
-				
+			/*
+			 * writeH(0); writeC(0); if (item != null) ItemInfoBlob.newBlobEntry(ItemBlobType.POLISH_INFO, null, item).writeThisBlob(getBuf());
+			 * ItemInfoBlob.newBlobEntry(ItemBlobType.WRAP_INFO, null, item).writeThisBlob(getBuf());
+			 */
+
 		}
 	}
-	
+
 	private void writeShowSellWindow() {
 		writeC(type.getId());
 		writeC(unk);
 		writeD(itemId);
 		writeD(0);
 		writeD(0);
-		writeC(3);//7dayAverage
-		writeQ(currentLow);//currentLow
-		writeQ(currentHigh);//currentHigh
+		writeC(3);// 7dayAverage
+		writeQ(currentLow);// currentLow
+		writeQ(currentHigh);// currentHigh
 	}
 
 	private void writeRegisteredItemInfo(BrokerItem brokerItem) {
@@ -242,7 +240,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeC(daysLeft);
 
 		ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
-		//ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
+		// ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
 
 		writeS(brokerItem.getItemCreator());
 		writeH(0);
@@ -258,11 +256,11 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeD(item.getObjectId());
 		writeD(item.getItemTemplate().getTemplateId());
 		writeQ(brokerItem.getPrice() * brokerItem.getItemCount());
-		writeQ(brokerItem.getAveragePrice()); //AWR price
+		writeQ(brokerItem.getAveragePrice()); // AWR price
 		writeQ(item.getItemCount());
 
 		ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
-		//ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
+		// ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
 
 		writeS(brokerItem.getSeller());
 		writeS(brokerItem.getItemCreator()); // creator

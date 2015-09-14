@@ -48,10 +48,8 @@ public class SiegeNpc extends Npc {
 	public boolean isEnemyFrom(Creature creature) {
 		if (creature instanceof SiegeNpc && this.getSiegeRace() != ((SiegeNpc) creature).getSiegeRace()) {
 			return true;
-		}
-		else 
+		} else
 			return super.isEnemyFrom(creature);
 	}
-	
 
 }

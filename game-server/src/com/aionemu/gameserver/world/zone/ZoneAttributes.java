@@ -25,7 +25,7 @@ public enum ZoneAttributes {
 	DUEL_SAME_RACE_ENABLED(1 << 7), // Only for Duel type zones
 	@XmlEnumValue("DUEL_OTHER_RACE")
 	DUEL_OTHER_RACE_ENABLED(1 << 8), // Only for Duel type zones
-	
+
 	NO_RETURN_BATTLE(1 << 9); // in client XML it's no_return_battlefield attribute
 
 	private int id;

@@ -44,8 +44,7 @@ public class _1726ScoutingtheLake extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 278515) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -55,8 +54,7 @@ public class _1726ScoutingtheLake extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 278516) {
+			} else if (targetId == 278516) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
@@ -67,8 +65,7 @@ public class _1726ScoutingtheLake extends QuestHandler {
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278606) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 278606) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

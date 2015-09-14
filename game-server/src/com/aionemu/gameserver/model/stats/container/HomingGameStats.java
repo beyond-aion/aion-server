@@ -6,18 +6,15 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class HomingGameStats extends SummonedObjectGameStats {
 
 	public HomingGameStats(Npc owner) {
 		super(owner);
 	}
-	
-	
+
 	@Override
 	public Stat2 getStat(StatEnum statEnum, int base) {
 		Stat2 stat = super.getStat(statEnum, base);
@@ -38,48 +35,48 @@ public class HomingGameStats extends SummonedObjectGameStats {
 		int power = homing.getObjectTemplate().getStatsTemplate().getPower();
 		SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(homing.getSkillId());
 		int skillLvl = skill.getLvl();
-		if(homing.getName().equals("gryphu"))
+		if (homing.getName().equals("gryphu"))
 			power = 324;
 		switch (skillLvl) {
 			case 3:
-				if(homing.getName().equals("stone energy"))
+				if (homing.getName().equals("stone energy"))
 					power = 316;
-				if(homing.getName().equals("water energy"))
+				if (homing.getName().equals("water energy"))
 					power = 362;
 				break;
 			case 4:
-				if(homing.getName().equals("cyclone servant"))
+				if (homing.getName().equals("cyclone servant"))
 					power = 1166;
-				if(homing.getName().equals("fire energy"))
+				if (homing.getName().equals("fire energy"))
 					power = 313;
-				if(homing.getName().equals("wind servant"))
+				if (homing.getName().equals("wind servant"))
 					power = 373;
-				if(homing.getName().equals("stone energy"))
+				if (homing.getName().equals("stone energy"))
 					power = 384;
 				break;
 			case 5:
-				if(homing.getName().equals("cyclone servant"))
+				if (homing.getName().equals("cyclone servant"))
 					power = 1221;
 				break;
 			case 6:
-				if(homing.getName().equals("cyclone servant"))
+				if (homing.getName().equals("cyclone servant"))
 					power = 1283;
 				break;
 			case 7:
-				if(homing.getName().equals("cyclone servant"))
+				if (homing.getName().equals("cyclone servant"))
 					power = 1342;
 				break;
 		}
-		
+
 		switch (homing.getLevel()) {
 			case 65:
-				if(homing.getName().equals("elemental energy")) {
+				if (homing.getName().equals("elemental energy")) {
 					power = 1100;
 				}
 				break;
-			
+
 		}
-		
+
 		return getStat(StatEnum.MAGICAL_ATTACK, power);
 	}
 

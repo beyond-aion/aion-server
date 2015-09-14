@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 @AIName("kurmata")
 public class KurmataAI2 extends AggressiveNpcAI2 {
 
@@ -17,12 +16,13 @@ public class KurmataAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-			wakeUp();
+		wakeUp();
 	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-			wakeUp();
+		wakeUp();
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
@@ -48,7 +48,7 @@ public class KurmataAI2 extends AggressiveNpcAI2 {
 			SkillEngine.getInstance().getSkill(getOwner(), 20701, 45, getOwner()).useNoAnimationSkill();
 		}
 	}
-	
+
 	private void stage2() {
 		int delay = 20000;
 		if (isAlreadyDead() || !isStart)
@@ -58,7 +58,7 @@ public class KurmataAI2 extends AggressiveNpcAI2 {
 			scheduleDelayStage2(delay);
 		}
 	}
-	
+
 	private void scheduleDelayStage2(int delay) {
 		if (!isStart && !isAlreadyDead())
 			return;
@@ -75,7 +75,7 @@ public class KurmataAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	protected void handleBackHome() {
-        super.handleBackHome();
+		super.handleBackHome();
 		isStart = false;
 		stage = 0;
 	}

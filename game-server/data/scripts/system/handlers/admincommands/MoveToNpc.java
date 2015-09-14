@@ -23,11 +23,9 @@ public class MoveToNpc extends AdminCommand {
 		String message = "";
 		try {
 			npcId = Integer.valueOf(params[0]);
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
+		} catch (ArrayIndexOutOfBoundsException e) {
 			info(player, e.getMessage());
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			String npcName = "";
 
 			for (int i = 0; i < params.length; i++)
@@ -43,8 +41,7 @@ public class MoveToNpc extends AdminCommand {
 								break;
 							}
 						}
-					}
-					else {
+					} else {
 						if (message.equals(""))
 							message += "Found others (" + npcName + "): \n";
 						message += "Id: " + template.getTemplateId() + "\n";

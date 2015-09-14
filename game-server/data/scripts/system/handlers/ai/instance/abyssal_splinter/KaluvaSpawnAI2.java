@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class KaluvaSpawnAI2 extends NpcAI2 {
 
 	private Future<?> task;
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

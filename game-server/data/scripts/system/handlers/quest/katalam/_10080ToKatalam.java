@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
-
 public class _10080ToKatalam extends QuestHandler {
 
 	private final static int questId = 10080;
@@ -27,7 +26,7 @@ public class _10080ToKatalam extends QuestHandler {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env);
@@ -39,7 +38,7 @@ public class _10080ToKatalam extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800165) {
 				switch (dialog) {
@@ -52,8 +51,7 @@ public class _10080ToKatalam extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 205543) { 
+			} else if (targetId == 205543) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 1) {
@@ -62,11 +60,10 @@ public class _10080ToKatalam extends QuestHandler {
 					}
 					case SETPRO2: {
 						TeleportService2.teleportTo(player, 600050000, player.getInstanceId(), 275, 2414, 167.52f, (byte) 23, TeleportAnimation.BEAM_ANIMATION);
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 800526) { 
+			} else if (targetId == 800526) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 3) {
@@ -74,31 +71,29 @@ public class _10080ToKatalam extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						return defaultCloseDialog(env, 3, 3, true, false); 
+						return defaultCloseDialog(env, 3, 3, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800527) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-		  if (player.getWorldId() == 600050000) {
+			if (player.getWorldId() == 600050000) {
 				int var = qs.getQuestVarById(0);
 				if (var == 2) {
 					playQuestMovie(env, 821);

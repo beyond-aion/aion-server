@@ -34,7 +34,7 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 public class WalkerData {
 
 	private static final Logger log = LoggerFactory.getLogger(WalkerData.class);
-	
+
 	@XmlElement(name = "walker_template")
 	private List<WalkerTemplate> walkerlist;
 
@@ -75,8 +75,7 @@ public class WalkerData {
 
 		try {
 			schema = sf.newSchema(new File("./data/static_data/npc_walker/npc_walker.xsd"));
-		}
-		catch (SAXException e1) {
+		} catch (SAXException e1) {
 			log.error("Error while saving data: " + e1.getMessage(), e1.getCause());
 			return;
 		}
@@ -90,12 +89,10 @@ public class WalkerData {
 			marshaller.setSchema(schema);
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(this, xml);
-		}
-		catch (JAXBException e) {
+		} catch (JAXBException e) {
 			log.error("Error while saving data: " + e.getMessage(), e.getCause());
 			return;
-		}
-		finally {
+		} finally {
 			if (walkerlist != null) {
 				walkerlist.clear();
 				walkerlist = null;

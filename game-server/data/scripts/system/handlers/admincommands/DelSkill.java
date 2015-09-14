@@ -22,8 +22,8 @@ public class DelSkill extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1 || params.length > 2) {
-			PacketSendUtility.sendMessage(admin, "No parameters detected.\n"
-				+ "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
+			PacketSendUtility.sendMessage(admin, "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n"
+				+ "or use //delskill [target] <all | skillId>");
 			return;
 		}
 
@@ -44,8 +44,7 @@ public class DelSkill extends AdminCommand {
 			else {
 				try {
 					skillId = Integer.parseInt(params[1]);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					PacketSendUtility.sendMessage(admin, "Param 1 must be an integer or <all>.");
 					return;
 				}
@@ -71,8 +70,7 @@ public class DelSkill extends AdminCommand {
 				else {
 					try {
 						skillId = Integer.parseInt(params[0]);
-					}
-					catch (NumberFormatException e) {
+					} catch (NumberFormatException e) {
 						PacketSendUtility.sendMessage(admin, "Param 0 must be an integer or <all>.");
 						return;
 					}
@@ -82,8 +80,7 @@ public class DelSkill extends AdminCommand {
 				}
 				if (target instanceof Player)
 					apply(admin, player, skillId, playerSkillList);
-			}
-			else
+			} else
 				PacketSendUtility.sendMessage(admin, "This command can only be used on a player !");
 		}
 	}
@@ -104,8 +101,7 @@ public class DelSkill extends AdminCommand {
 		if (skillId != 0) {
 			SkillLearnService.removeSkill(player, skillId);
 			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
-		}
-		else {
+		} else {
 			for (PlayerSkillEntry skillEntry : playerSkillList.getAllSkills()) {
 				if (!skillEntry.isStigma()) {
 					SkillLearnService.removeSkill(player, skillEntry.getSkillId());
@@ -119,7 +115,7 @@ public class DelSkill extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "No parameters detected.\n"
-			+ "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
+		PacketSendUtility.sendMessage(player, "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n"
+			+ "or use //delskill [target] <all | skillId>");
 	}
 }

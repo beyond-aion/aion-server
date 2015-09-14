@@ -11,18 +11,15 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LeftHandCondition")
 public class LeftHandCondition extends Condition {
-	
+
 	@XmlAttribute(name = "type")
 	private LeftHandSlot type;
-
 
 	@Override
 	public boolean validate(Skill env) {

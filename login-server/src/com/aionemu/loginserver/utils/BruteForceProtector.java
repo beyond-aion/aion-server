@@ -6,12 +6,13 @@ import com.aionemu.loginserver.configs.Config;
 
 /**
  * @author Mr. Poke
- * 
  */
 public class BruteForceProtector {
+
 	private FastMap<String, FailedLoginInfo> failedConnections = new FastMap<String, FailedLoginInfo>();
 
 	class FailedLoginInfo {
+
 		private int count;
 
 		private long time;
@@ -65,6 +66,7 @@ public class BruteForceProtector {
 
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
+
 		protected static final BruteForceProtector instance = new BruteForceProtector();
 	}
 }

@@ -45,17 +45,14 @@ public class Invasion extends AdminCommand {
 		if (COMMAND_START.equalsIgnoreCase(params[0])) {
 			if (VortexService.getInstance().isInvasionInProgress(vortexId)) {
 				PacketSendUtility.sendMessage(player, locationName + " is already under siege");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(player, locationName + " invasion started!");
 				VortexService.getInstance().startInvasion(vortexId);
 			}
-		}
-		else if (COMMAND_STOP.equalsIgnoreCase(params[0])) {
+		} else if (COMMAND_STOP.equalsIgnoreCase(params[0])) {
 			if (!VortexService.getInstance().isInvasionInProgress(vortexId)) {
 				PacketSendUtility.sendMessage(player, locationName + " is not under siege");
-			}
-			else {
+			} else {
 				PacketSendUtility.sendMessage(player, locationName + " invasion stopped!");
 				VortexService.getInstance().stopInvasion(vortexId);
 			}

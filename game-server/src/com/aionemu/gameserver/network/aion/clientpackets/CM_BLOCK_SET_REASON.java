@@ -37,13 +37,14 @@ public class CM_BLOCK_SET_REASON extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
+
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		BlockedPlayer target = activePlayer.getBlockList().getBlockedPlayer(targetName);
 
 		if (target == null)

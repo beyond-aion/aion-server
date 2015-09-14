@@ -55,17 +55,14 @@ public class ResultedItem {
 	public final int getResultCount() {
 		if (count == 0 && rndMin == 0 && rndMax == 0) {
 			return 1;
-		}
-		else if (rndMin > 0 || rndMax > 0) {
+		} else if (rndMin > 0 || rndMax > 0) {
 			if (rndMax < rndMin) {
 				LoggerFactory.getLogger(ResultedItem.class).warn("Wronte rnd result item definition {} {}", rndMin, rndMax);
 				return 1;
-			}
-			else {
+			} else {
 				return Rnd.get(rndMin, rndMax);
 			}
-		}
-		else {
+		} else {
 			return count;
 		}
 	}

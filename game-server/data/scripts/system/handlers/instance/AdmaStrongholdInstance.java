@@ -10,12 +10,12 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 @InstanceID(320130000)
 public class AdmaStrongholdInstance extends GeneralInstanceHandler {
-    
-        @Override
+
+	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		if (Rnd.get(1, 100) > 50) {
-			switch(Rnd.get(1, 3)) {
+			switch (Rnd.get(1, 3)) {
 				case 1:
 					spawn(205224, 477.5849f, 398.20898f, 187.49918f, (byte) 50);
 					break;

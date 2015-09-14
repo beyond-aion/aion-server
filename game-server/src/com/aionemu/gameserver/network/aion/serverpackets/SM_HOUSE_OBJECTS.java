@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_HOUSE_OBJECTS extends AionServerPacket {
 
 	Player player;
-	
+
 	public SM_HOUSE_OBJECTS(Player player) {
 		this.player = player;
 	}

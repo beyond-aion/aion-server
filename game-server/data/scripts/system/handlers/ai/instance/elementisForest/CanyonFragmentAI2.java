@@ -36,6 +36,7 @@ public class CanyonFragmentAI2 extends AggressiveNpcAI2 {
 
 	private void schedule() {
 		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {

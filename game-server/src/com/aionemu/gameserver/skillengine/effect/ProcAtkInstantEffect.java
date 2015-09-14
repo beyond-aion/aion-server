@@ -17,6 +17,7 @@ public class ProcAtkInstantEffect extends DamageEffect {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		effect.getEffected().getController().onAttack(effect.getEffector(), effect.getSkillId(), TYPE.DAMAGE, effect.getReserveds(this.position).getValue(), false, LOG.PROCATKINSTANT);
+		effect.getEffected().getController()
+			.onAttack(effect.getEffector(), effect.getSkillId(), TYPE.DAMAGE, effect.getReserveds(this.position).getValue(), false, LOG.PROCATKINSTANT);
 	}
 }

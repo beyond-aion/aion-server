@@ -17,40 +17,40 @@ import javax.xml.bind.annotation.XmlType;
 public class HousingLand {
 
 	@XmlElementWrapper(name = "addresses", required = true)
-	@XmlElement(name ="address")
+	@XmlElement(name = "address")
 	protected List<HouseAddress> addresses;
-	
+
 	@XmlElementWrapper(name = "buildings", required = true)
-	@XmlElement(name ="building")
+	@XmlElement(name = "building")
 	protected List<Building> buildings;
-	
+
 	@XmlElement(required = true)
 	protected Sale sale;
-	
+
 	@XmlElement(required = true)
 	protected long fee;
-	
+
 	@XmlElement(required = true)
 	protected BuildingCapabilities caps;
-	
+
 	@XmlAttribute(name = "sign_nosale", required = true)
 	protected int signNosale;
-	
+
 	@XmlAttribute(name = "sign_sale", required = true)
 	protected int signSale;
-	
+
 	@XmlAttribute(name = "sign_waiting", required = true)
 	protected int signWaiting;
-	
+
 	@XmlAttribute(name = "sign_home", required = true)
 	protected int signHome;
-	
+
 	@XmlAttribute(name = "manager_npc", required = true)
 	protected int managerNpc;
-	
+
 	@XmlAttribute(name = "teleport_npc", required = true)
 	protected int teleportNpc;
-	
+
 	@XmlAttribute(required = true)
 	protected int id;
 
@@ -61,7 +61,7 @@ public class HousingLand {
 	public List<Building> getBuildings() {
 		return buildings;
 	}
-	
+
 	public Building getDefaultBuilding() {
 		for (Building building : buildings) {
 			if (building.isDefault())
@@ -113,7 +113,7 @@ public class HousingLand {
 	public int getId() {
 		return id;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return id;

@@ -85,21 +85,17 @@ public class CM_PET extends AionClientPacket {
 					if (dopingAction == 0) { // add item
 						dopingItemId = readD();
 						dopingSlot1 = readD();
-					}
-					else if (dopingAction == 1) { // remove item
+					} else if (dopingAction == 1) { // remove item
 						dopingSlot1 = readD();
 						dopingItemId = readD();
-					}
-					else if (dopingAction == 2) { // move item
+					} else if (dopingAction == 2) { // move item
 						dopingSlot1 = readD();
 						dopingSlot2 = readD();
-					}
-					else if (dopingAction == 3) { // use doping
+					} else if (dopingAction == 3) { // use doping
 						dopingItemId = readD();
 						dopingSlot1 = readD();
 					}
-				}
-				else {
+				} else {
 					objectId = readD();
 					count = readD();
 					unk2 = readD();
@@ -129,8 +125,7 @@ public class CM_PET extends AionClientPacket {
 			case ADOPT:
 				if (NameRestrictionService.isForbiddenWord(petName)) {
 					PacketSendUtility.sendMessage(player, "You are trying to use a forbidden name. Choose another one!");
-				}
-				else {
+				} else {
 					PetAdoptionService.adoptPet(player, eggObjId, petId, petName, decorationId);
 				}
 				break;
@@ -150,36 +145,30 @@ public class CM_PET extends AionClientPacket {
 						PetService.getInstance().relocateDoping(player, dopingSlot1, dopingSlot2);
 					else
 						PetService.getInstance().useDoping(player, dopingAction, dopingItemId, dopingSlot1);
-				}
-				else if (actionType == 3) {
+				} else if (actionType == 3) {
 					// Pet looting
 					PetService.getInstance().activateLoot(player, activateLoot != 0);
-				}
-				else if (pet != null) {
+				} else if (pet != null) {
 					if (objectId == 0) {
 						pet.getCommonData().setCancelFeed(true);
 						PacketSendUtility.sendPacket(player, new SM_PET(4, actionId, 0, 0, player.getPet()));
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-					}
-					else if (!pet.getCommonData().isFeedingTime()) {
+					} else if (!pet.getCommonData().isFeedingTime()) {
 						PacketSendUtility.sendPacket(player, new SM_PET(8, actionId, objectId, count, player.getPet()));
-					}
-					else
+					} else
 						PetService.getInstance().removeObject(objectId, count, actionId, player);
 				}
 				break;
 			case RENAME:
 				if (NameRestrictionService.isForbiddenWord(petName)) {
 					PacketSendUtility.sendMessage(player, "You are trying to use a forbidden name. Choose another one!");
-				}
-				else {
+				} else {
 					PetService.getInstance().renamePet(player, petName);
 				}
 				break;
 			case MOOD:
 				if (pet != null
-					&& (subType == 0 && pet.getCommonData().getMoodRemainingTime() == 0
-						|| (subType == 3 && pet.getCommonData().getGiftRemainingTime() == 0) || emotionId != 0)) {
+					&& (subType == 0 && pet.getCommonData().getMoodRemainingTime() == 0 || (subType == 3 && pet.getCommonData().getGiftRemainingTime() == 0) || emotionId != 0)) {
 					PetMoodService.checkMood(pet, subType, emotionId);
 				}
 			default:

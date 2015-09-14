@@ -8,7 +8,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author Gigi
  */
 @AIName("bigorb")
@@ -16,10 +15,9 @@ public class BigOrbAI2 extends NpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (!isSpawned(730276)) { //Portal isn't spawned
+		if (!isSpawned(730276)) { // Portal isn't spawned
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-		}
-		else { //Portal is already spawned
+		} else { // Portal is already spawned
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 		}
 	}
@@ -32,7 +30,7 @@ public class BigOrbAI2 extends NpcAI2 {
 		}
 		return true;
 	}
-	
+
 	private boolean isSpawned(int npcId) {
 		return !getPosition().getWorldMapInstance().getNpcs(npcId).isEmpty();
 	}

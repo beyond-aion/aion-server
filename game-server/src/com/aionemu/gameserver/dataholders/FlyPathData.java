@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 @XmlRootElement(name = "flypath_template")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FlyPathData {
+
 	@XmlElement(name = "flypath_location")
 	private List<FlyPathEntry> list;
 

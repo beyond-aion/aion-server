@@ -13,7 +13,6 @@ import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author ATracer, kecimis
  */
@@ -39,13 +38,12 @@ public class TargetCondition extends Condition {
 			return true;
 		if (skill.getSkillTemplate().getProperties().getTargetType().equals(TargetRangeAttribute.AREA))
 			return true;
-		if (skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGET &&
-			skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGETORME)
+		if (skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGET
+			&& skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGETORME)
 			return true;
-		if (skill.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.TARGETORME &&
-			skill.getEffector() == skill.getFirstTarget())
+		if (skill.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.TARGETORME && skill.getEffector() == skill.getFirstTarget())
 			return true;
-		
+
 		boolean result = false;
 		switch (value) {
 			case NPC:
@@ -55,10 +53,10 @@ public class TargetCondition extends Condition {
 				result = (skill.getFirstTarget() instanceof Player);
 				break;
 		}
-		
+
 		if (!result && skill.getEffector() instanceof Player)
-			PacketSendUtility.sendPacket((Player)skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
-		
+			PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+
 		return result;
 	}
 }

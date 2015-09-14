@@ -29,7 +29,8 @@ public class _11522FurbackHunting extends QuestHandler {
 	public boolean onKillInWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("HEROS_DISCUS_600020000"))) {
-			if ((env.getPlayer().getLevel() >= (((Player)env.getVisibleObject()).getLevel() - 5)) && (env.getPlayer().getLevel() <= (((Player)env.getVisibleObject()).getLevel() + 9))) {
+			if ((env.getPlayer().getLevel() >= (((Player) env.getVisibleObject()).getLevel() - 5))
+				&& (env.getPlayer().getLevel() <= (((Player) env.getVisibleObject()).getLevel() + 9))) {
 				return defaultOnKillRankedEvent(env, 0, 5, true); // reward
 			}
 		}
@@ -51,8 +52,7 @@ public class _11522FurbackHunting extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799532) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:

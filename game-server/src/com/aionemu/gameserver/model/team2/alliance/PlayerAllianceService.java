@@ -64,18 +64,17 @@ public class PlayerAllianceService {
 					PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_PARTY_HIM(invited.getName(), leader.getName()));
 					PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_PARTY(leader.getName(), playerGroup.getMembers().size()));
 					invited = leader;
-				}
-				else {
+				} else {
 					PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_INVITED_HIS_PARTY(invited.getName()));
 				}
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_FORCE_INVITED_HIM(invited.getName()));
 			}
 
 			PlayerAllianceInvite invite = new PlayerAllianceInvite(inviter, invited);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, invite)) {
-				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0, inviter.getName()));
+				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0,
+					inviter.getName()));
 			}
 		}
 	}
@@ -101,15 +100,13 @@ public class PlayerAllianceService {
 						// You cannot invite the player to the force as the group leader of the player is in an Instanced Zone.
 						PacketSendUtility.sendPacket(inviter, new SM_SYSTEM_MESSAGE(1400128));
 						return false;
-					}
-					else if (!VortexService.getInstance().isInsideVortexZone(tm)) {
+					} else if (!VortexService.getInstance().isInsideVortexZone(tm)) {
 						// TODO: chk on retail
 						PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(tm.getName()));
 						return false;
 					}
 				}
-			}
-			else if (!VortexService.getInstance().isInsideVortexZone(invited)) {
+			} else if (!VortexService.getInstance().isInsideVortexZone(invited)) {
 				// You cannot invite someone in a different area.
 				PacketSendUtility.sendPacket(inviter, new SM_SYSTEM_MESSAGE(1401527));
 				return false;
@@ -136,7 +133,7 @@ public class PlayerAllianceService {
 
 	@GlobalCallback(AddPlayerToAllianceCallback.class)
 	public static final void addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
-		//TODO leader member is already set
+		// TODO leader member is already set
 		alliance.addMember(new PlayerAllianceMember(invited));
 	}
 
@@ -218,18 +215,16 @@ public class PlayerAllianceService {
 		PlayerAlliance alliance = banGiver.getPlayerAlliance2();
 		if (alliance != null) {
 			if (!alliance.isLeader(banGiver)) {
-			   PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_ONLY_LEADER_CAN_BANISH);
-			   return;
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_ONLY_LEADER_CAN_BANISH);
+				return;
 			}
 			if (alliance.getTeamType().isDefence()) {
 				VortexService.getInstance().removeDefenderPlayer(bannedPlayer);
 			}
 			PlayerAllianceMember bannedMember = alliance.getMember(bannedPlayer.getObjectId());
 			if (bannedMember != null) {
-				alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedMember.getObject(), LeaveReson.BAN, banGiver
-						.getName()));
-			}
-			else {
+				alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedMember.getObject(), LeaveReson.BAN, banGiver.getName()));
+			} else {
 				log.warn("TEAM2: banning player not in alliance {}", alliance.onlineMembers());
 			}
 		}
@@ -279,8 +274,7 @@ public class PlayerAllianceService {
 		Preconditions.checkNotNull(alliance, "Alliance should not be null for group change");
 		if (alliance.isLeader(player) || alliance.isViceCaptain(player)) {
 			alliance.onEvent(new ChangeMemberGroupEvent(alliance, firstPlayer, secondPlayer, allianceGroupId));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "You do not have the authority for that.");
 		}
 	}
@@ -346,8 +340,7 @@ public class PlayerAllianceService {
 				if (currentAlliance.getTeamType().isOffence()) {
 					VortexService.getInstance().removeInvaderPlayer(member.getObject());
 				}
-				currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(),
-																	  LeaveReson.LEAVE_TIMEOUT));
+				currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
 			}
 			return true;
 		}

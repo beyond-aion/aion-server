@@ -47,8 +47,7 @@ public class Send extends AdminCommand {
 		// init unmrshaller once.
 		try {
 			unmarshaller = JAXBContext.newInstance(Packets.class, Packet.class, Part.class).createUnmarshaller();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Failed to initialize unmarshaller.", e);
 		}
 	}
@@ -83,8 +82,7 @@ public class Send extends AdminCommand {
 
 		try {
 			packetsTemplate = (Packets) unmarshaller.unmarshal(packetsData);
-		}
-		catch (JAXBException e) {
+		} catch (JAXBException e) {
 			logger.error("Unmarshalling error", e);
 			return;
 		}
@@ -122,8 +120,7 @@ public class Send extends AdminCommand {
 				if (part.getRepeatCount() == 1) // skip loop
 				{
 					packet.addElement(byCode, value);
-				}
-				else {
+				} else {
 					for (int i = 0; i < part.getRepeatCount(); i++)
 						packet.addElement(byCode, value);
 				}

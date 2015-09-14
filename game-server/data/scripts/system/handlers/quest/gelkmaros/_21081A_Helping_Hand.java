@@ -44,8 +44,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799332: // Brontes
 				{
@@ -87,8 +86,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799202) // Drenia
 			{
 				switch (env.getDialogId()) {

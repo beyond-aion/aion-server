@@ -23,8 +23,7 @@ public class KeyGenTest {
 	public void testKeyGenInit() {
 		try {
 			KeyGen.init();
-		}
-		catch (GeneralSecurityException e) {
+		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
 		}
 	}

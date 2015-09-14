@@ -43,7 +43,7 @@ public class WalkerVersionsData {
 			return null;
 		return walkParents.get(routeId);
 	}
-	
+
 	public int size() {
 		return walkParents.size();
 	}

@@ -57,7 +57,7 @@ public class _1074FragmentofMemory extends QuestHandler {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(player, 210010000, 243.12f, 1638.48f, 100.38f, (byte)51, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 210010000, 243.12f, 1638.48f, 100.38f, (byte) 51, TeleportAnimation.BEAM_ANIMATION);
 								return true;
 							}
 					}
@@ -87,15 +87,14 @@ public class _1074FragmentofMemory extends QuestHandler {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(player, 400010000, 2137.53f, 1947.27f, 1595.16f, (byte)18, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 400010000, 2137.53f, 1947.27f, 1595.16f, (byte) 18, TeleportAnimation.BEAM_ANIMATION);
 								return true;
 							}
 					}
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279029) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

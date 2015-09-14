@@ -11,6 +11,7 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
  * @author KID
  */
 public class SM_PTRANSFER_RESPONSE extends GsServerPacket {
+
 	private PlayerTransferResultStatus result;
 	private Account account;
 	private PlayerTransferRequest request;
@@ -29,7 +30,7 @@ public class SM_PTRANSFER_RESPONSE extends GsServerPacket {
 		this.account = request.targetAccount;
 		this.taskId = request.taskId;
 	}
-	
+
 	public SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus result, int taskId, String reason) {
 		this.result = result;
 		this.taskId = taskId;
@@ -45,7 +46,7 @@ public class SM_PTRANSFER_RESPONSE extends GsServerPacket {
 	protected void writeImpl(GsConnection con) {
 		writeC(12);
 		writeD(result.getId());
-		switch(result) {
+		switch (result) {
 			case SEND_INFO:
 				writeD(request.targetAccountId);
 				writeD(taskId);

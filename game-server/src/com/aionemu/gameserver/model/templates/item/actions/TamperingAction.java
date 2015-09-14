@@ -52,21 +52,22 @@ public class TamperingAction extends AbstractItemAction {
 	public void act(final Player player, final Item parentItem, final Item targetItem) {
 		final int parentItemId = parentItem.getItemId();
 		final int parntObjectId = parentItem.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(),
-			parentItem.getObjectId(), parentItemId, 5000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0),
+			true);
 		final ItemUseObserver observer = new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402147, new DescriptionId(targetItem.getNameId())));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(),
-						parntObjectId, parentItemId, 0, 3, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 3, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 		};
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				player.getObserveController().removeObserver(observer);
@@ -78,7 +79,8 @@ public class TamperingAction extends AbstractItemAction {
 				}
 
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
-					PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+					PacketSendUtility
+						.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 					return;
 				}
 
@@ -95,16 +97,18 @@ public class TamperingAction extends AbstractItemAction {
 						if (targetItem.isEquipped()) {
 							if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 								targetItem.setTemperingEffect(new TemperingEffect(player, targetItem));
-							}
-							else {
-								HashMap<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(targetItem.getItemTemplate().getItemGroup());
+							} else {
+								HashMap<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA
+									.getTemplates(targetItem.getItemTemplate().getItemGroup());
 								if (tempering != null) {
 									targetItem.setTemperingEffect(new TemperingEffect(player, tempering.get(targetItem.getTempering())));
 								}
 							}
 						}
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402148, new DescriptionId(targetItem.getNameId()), targetItem.getTempering()));
-						PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
+						PacketSendUtility
+							.sendPacket(player, new SM_SYSTEM_MESSAGE(1402148, new DescriptionId(targetItem.getNameId()), targetItem.getTempering()));
+						PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1,
+							0));
 
 						if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE && targetItem.getTempering() == 10) {
 							Iterator<Player> iter = World.getInstance().getPlayersIterator();
@@ -118,27 +122,26 @@ public class TamperingAction extends AbstractItemAction {
 						}
 
 						if (LoggingConfig.LOG_TAMPERING)
-							log.info("Player " + player.getName() + " successfully tampered item " + targetItem.getItemId() + "(" + targetItem.getObjectId() + ") to level " + targetItem.getTempering());
-					}
-					else {
+							log.info("Player " + player.getName() + " successfully tampered item " + targetItem.getItemId() + "(" + targetItem.getObjectId()
+								+ ") to level " + targetItem.getTempering());
+					} else {
 						targetItem.setTempering(0);
 						if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402447, new DescriptionId(targetItem.getNameId())));
-							PacketSendUtility.broadcastPacketAndReceive(player,
-									 new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+							PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0,
+								2, 0));
 							if (targetItem.isEquipped())
 								player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
 							else
 								player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
-						}
-						else {
-							 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402149, new DescriptionId(targetItem.getNameId())));
-							 PacketSendUtility.broadcastPacketAndReceive(player,
-									 new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+						} else {
+							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402149, new DescriptionId(targetItem.getNameId())));
+							PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0,
+								2, 0));
 						}
 
 						if (LoggingConfig.LOG_TAMPERING)
-							 log.info("Player " + player.getName() + " failed to tamper item " + targetItem.getItemId() + "(" + targetItem.getObjectId() + ").");
+							log.info("Player " + player.getName() + " failed to tamper item " + targetItem.getItemId() + "(" + targetItem.getObjectId() + ").");
 					}
 					if (targetItem.getPersistentState() != PersistentState.DELETED) {
 						targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
@@ -162,8 +165,7 @@ public class TamperingAction extends AbstractItemAction {
 		if (target.getItemTemplate().getItemGroup().equals(ItemGroup.PLUME)) {
 			if (curTemp < 10) {
 				chance = 100 - (curTemp * 10);
-			}
-			else {
+			} else {
 				chance = 10 * Math.pow(0.5, curTemp - 10);
 			}
 		}

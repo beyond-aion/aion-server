@@ -29,8 +29,7 @@ public class Help extends PlayerCommand {
 			}
 			sb.append("\nType in [color:<command> help;1 1 1] to get further information about a command.");
 			sendInfo(player, sb.toString());
-		}
-		else {
+		} else {
 			sendInfo(player, "You are not allowed to use any chat commands other than [color:" + getAliasWithPrefix() + ";1 1 1].");
 		}
 	}
@@ -44,7 +43,7 @@ public class Help extends PlayerCommand {
 				cmds.add(cmd);
 		}
 		cmds.sort(null);
-		
+
 		return cmds;
 	}
 }

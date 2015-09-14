@@ -38,20 +38,17 @@ public class _1640TeleporterRepairs extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 730033) { 
+			if (targetId == 730033) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730033) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -62,10 +59,10 @@ public class _1640TeleporterRepairs extends QuestHandler {
 							removeQuestItem(env, 182201790, 1);
 							qs.setStatus(QuestStatus.REWARD);
 							QuestService.finishQuest(env);
-							TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 187.71689f, 2712.14870f, 141.91672f, (byte) 195, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 187.71689f, 2712.14870f, 141.91672f, (byte) 195,
+								TeleportAnimation.BEAM_ANIMATION);
 							return closeDialogWindow(env);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1353);
 					}
 				}
@@ -74,4 +71,3 @@ public class _1640TeleporterRepairs extends QuestHandler {
 		return false;
 	}
 }
-			

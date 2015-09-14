@@ -54,17 +54,14 @@ public class MySQL5TaskFromDBDAO extends TaskFromDBDAO {
 							trigger.setParams(rset.getString("trigger_param").split(" "));
 						}
 						result.add(trigger);
-					}
-					catch (InstantiationException ex) {
+					} catch (InstantiationException ex) {
 						log.error(ex.getMessage(), ex);
-					}
-					catch (IllegalAccessException ex) {
+					} catch (IllegalAccessException ex) {
 						log.error(ex.getMessage(), ex);
 					}
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Loading tasks failed: ", e);
 		}
 		return result;

@@ -101,8 +101,8 @@ public enum AionAuthResponse {
 	CHANGE_PASSWORD(17),
 
 	/**
-	 * Either the usage period has expired or we are experiencing a temporary connection difficulty. For
-	 * more information, please contact the administrators or our customer center.
+	 * Either the usage period has expired or we are experiencing a temporary connection difficulty. For more information, please contact the
+	 * administrators or our customer center.
 	 */
 	TIME_EXPIRED(18),
 
@@ -197,8 +197,7 @@ public enum AionAuthResponse {
 	DORMANT_ACCOUNT(36),
 
 	/**
-	 * Your account has not been verified. Please identify yourself on the Aion Free-to-Play website
-	 * (www.aionfreetoplay.com) and start again.
+	 * Your account has not been verified. Please identify yourself on the Aion Free-to-Play website (www.aionfreetoplay.com) and start again.
 	 */
 	NOT_VERIFIED(37),
 
@@ -258,8 +257,8 @@ public enum AionAuthResponse {
 	ARS_NUMBER(48),
 
 	/**
-	 * The telephone authentication service is unavailable as there is no phone connection or the line is busy.
-	 * Please try again after moving to where there is phone connection or hanging up the phone.
+	 * The telephone authentication service is unavailable as there is no phone connection or the line is busy. Please try again after moving to where
+	 * there is phone connection or hanging up the phone.
 	 */
 	PHONE_AUTH_UNAVAILABLE(49),
 

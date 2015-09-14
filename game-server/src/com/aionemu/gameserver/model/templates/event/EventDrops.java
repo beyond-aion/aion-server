@@ -18,15 +18,14 @@ public class EventDrops {
 	protected List<GlobalRule> globalDropRules;
 
 	/**
-     * 
-     * Gets the value of the globalDrop property.
-     */
-    public List<GlobalRule> getAllRules() {
-        if (globalDropRules == null) {
-        	globalDropRules = new ArrayList<GlobalRule>();
-        }
-        return this.globalDropRules;
-    }
+	 * Gets the value of the globalDrop property.
+	 */
+	public List<GlobalRule> getAllRules() {
+		if (globalDropRules == null) {
+			globalDropRules = new ArrayList<GlobalRule>();
+		}
+		return this.globalDropRules;
+	}
 
 	public int size() {
 		return globalDropRules.size();

@@ -63,25 +63,22 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 			if (SecurityConfig.PASSKEY_ENABLE && !client.getAccount().getCharacterPasskey().isPass()) {
 				client.getAccount().getCharacterPasskey().setConnectType(ConnectType.DELETE);
 				client.getAccount().getCharacterPasskey().setObjectId(chaOid);
-				boolean isExistPasskey = DAOManager.getDAO(PlayerPasskeyDAO.class).existCheckPlayerPasskey(
-					client.getAccount().getId());
+				boolean isExistPasskey = DAOManager.getDAO(PlayerPasskeyDAO.class).existCheckPlayerPasskey(client.getAccount().getId());
 
 				if (!isExistPasskey)
 					client.sendPacket(new SM_CHARACTER_SELECT(0));
 				else
 					client.sendPacket(new SM_CHARACTER_SELECT(1));
-			}
-			else if(getConnection().getAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_CHARACTERS) {
+			} else if (getConnection().getAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_CHARACTERS) {
 				client.sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-				client.sendPacket(new SM_MESSAGE(0, null, "Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
+				client.sendPacket(new SM_MESSAGE(0, null,
+					"Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
 				return;
-			}
-			else {
+			} else {
 				PlayerService.deletePlayer(playerAccData);
 				client.sendPacket(new SM_DELETE_CHARACTER(chaOid, playerAccData.getDeletionTimeInSeconds()));
 			}
-		}
-		else {
+		} else {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_STAYMODE_CANCEL_1);
 		}
 	}

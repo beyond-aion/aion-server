@@ -15,7 +15,7 @@ public class PostboxAI2 extends NpcAI2 {
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 18));
-		//player.getMailbox().sendMailList(false);
+		// player.getMailbox().sendMailList(false);
 	}
 
 	@Override

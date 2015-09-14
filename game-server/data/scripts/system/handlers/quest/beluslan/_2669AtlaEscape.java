@@ -8,10 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2669AtlaEscape extends QuestHandler {
 
@@ -43,16 +41,15 @@ public class _2669AtlaEscape extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204815) { 
+			if (targetId == 204815) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204815: { 
+				case 204815: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -64,9 +61,8 @@ public class _2669AtlaEscape extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204777) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204777) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -75,7 +71,7 @@ public class _2669AtlaEscape extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

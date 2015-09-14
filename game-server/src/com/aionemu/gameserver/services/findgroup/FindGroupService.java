@@ -44,8 +44,7 @@ public class FindGroupService {
 		AionObject object = null;
 		if (player.isInTeam()) {
 			object = player.getCurrentTeam();
-		}
-		else {
+		} else {
 			object = player;
 		}
 

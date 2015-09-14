@@ -69,8 +69,8 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		switch (actionId) {
-			case 0: //announce
-				writeH(0x19);//4.0 // old -->writeH(0x11); // 0x11
+			case 0: // announce
+				writeH(0x19);// 4.0 // old -->writeH(0x11); // 0x11
 				writeC(actionId);
 				for (int value : rifts.values()) {
 					writeD(value);
@@ -83,7 +83,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeD(inggison);
 				break;
 			case 2:
-				writeH(0x23); // 0x23 
+				writeH(0x23); // 0x23
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getMaxEntries());
@@ -118,7 +118,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeC(tl);
 				writeC(tr);
 				break;
-				
+
 		}
 	}
 

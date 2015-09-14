@@ -11,10 +11,8 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _10072TheTruthRevealed extends QuestHandler {
 
@@ -26,7 +24,7 @@ public class _10072TheTruthRevealed extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 800365, 205535, 205579};
+		int[] npcs = { 800365, 205535, 205579 };
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -46,18 +44,17 @@ public class _10072TheTruthRevealed extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 205535) { 
+			if (targetId == 205535) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if(player.getInventory().getItemCountByItemId(182213244) >= 3)
+						} else if (player.getInventory().getItemCountByItemId(182213244) >= 3)
 							return sendQuestDialog(env, 1352);
-						else if(var == 2)
+						else if (var == 2)
 							return sendQuestDialog(env, 1693);
 					}
-					case CHECK_USER_HAS_QUEST_ITEM:{
+					case CHECK_USER_HAS_QUEST_ITEM: {
 						return checkQuestItems(env, 1, 2, false, 10000, 10001);
 					}
 					case SETPRO1: {
@@ -67,16 +64,16 @@ public class _10072TheTruthRevealed extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					}
 					case SETPRO3: {
-						//teleport to israphel 800365
+						// teleport to israphel 800365
 						removeQuestItem(env, 182213243, 1);
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300500000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 260.61f, 248.51f, 124.95f, (byte) 102, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 260.61f, 248.51f, 124.95f, (byte) 102,
+							TeleportAnimation.BEAM_ANIMATION);
 						return defaultCloseDialog(env, 2, 3);
 					}
 				}
-			}
-			else if (targetId == 800365) { 
+			} else if (targetId == 800365) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
@@ -88,8 +85,7 @@ public class _10072TheTruthRevealed extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 205579) { 
+			} else if (targetId == 205579) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 4) {
@@ -101,20 +97,18 @@ public class _10072TheTruthRevealed extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205535) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205535) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10071);

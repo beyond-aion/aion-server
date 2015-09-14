@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 /**
  * @author ATracer
  */
-public abstract class AbstractPacketHandler
-{
+public abstract class AbstractPacketHandler {
+
 	private static final Logger log = LoggerFactory.getLogger(AbstractPacketHandler.class);
 
 	/**
@@ -16,8 +16,7 @@ public abstract class AbstractPacketHandler
 	 * @param id
 	 * @param state
 	 */
-	protected void unknownPacket(int id, String state)
-	{
+	protected void unknownPacket(int id, String state) {
 		log.warn(String.format("Unknown packet received from Game server: 0x%02X state=%s", id, state));
 	}
 }

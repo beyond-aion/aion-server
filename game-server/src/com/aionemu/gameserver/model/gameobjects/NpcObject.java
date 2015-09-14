@@ -27,8 +27,8 @@ public class NpcObject extends HouseObject<HousingNpc> {
 		super.spawn();
 		if (npc == null) {
 			HousingNpc template = getObjectTemplate();
-			SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(getOwnerHouse().getWorldId(), template.getNpcId(),
-				getX(), getY(), getZ(), getHeading());
+			SpawnTemplate spawn = SpawnEngine
+				.addNewSingleTimeSpawn(getOwnerHouse().getWorldId(), template.getNpcId(), getX(), getY(), getZ(), getHeading());
 			npc = (Npc) SpawnEngine.spawnObject(spawn, getOwnerHouse().getInstanceId());
 		}
 	}

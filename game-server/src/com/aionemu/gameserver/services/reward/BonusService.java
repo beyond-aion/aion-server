@@ -37,7 +37,7 @@ public class BonusService {
 
 	private BonusService() {
 	}
-	
+
 	public static BonusService getInstance() {
 		return instance;
 	}
@@ -73,9 +73,9 @@ public class BonusService {
 
 	public BonusItemGroup getRandomGroup(BonusItemGroup[] groups) {
 		float total = 0;
-		if (groups == null) 
+		if (groups == null)
 			return null;
-		
+
 		for (BonusItemGroup gr : groups)
 			total += gr.getChance();
 		if (total == 0)
@@ -89,8 +89,7 @@ public class BonusService {
 				if (Rnd.get(0, percent) <= chance) {
 					chosenGroup = gr;
 					break;
-				}
-				else
+				} else
 					percent -= chance;
 			}
 		}
@@ -176,12 +175,12 @@ public class BonusService {
 
 		return new QuestItems(reward.getId(), itemCount);
 	}
-	
+
 	QuestItems getMedalBonus(Player player, QuestTemplate template) {
 		BonusItemGroup[] groups = itemGroups.getMedalGroups();
 		MedalGroup group = (MedalGroup) getRandomGroup(groups);
 		int bonusLevel = template.getBonus().get(0).getLevel();
-		
+
 		MedalItem finalReward = null;
 
 		float total = 0;
@@ -189,22 +188,22 @@ public class BonusService {
 			if (medal.getLevel() == bonusLevel)
 				total += medal.getChance();
 		}
-			
+
 		if (total == 0)
 			return null;
-		
+
 		float rnd = (Rnd.get() * total);
 		float luck = 0;
 		for (MedalItem medal : group.getItems()) {
-			
-			if(medal.getLevel() != bonusLevel)
+
+			if (medal.getLevel() != bonusLevel)
 				continue;
 			luck += medal.getChance();
-			
-				if (rnd <= luck) {
-					finalReward = medal;
-					break;
-				}
+
+			if (rnd <= luck) {
+				finalReward = medal;
+				break;
+			}
 		}
 		return finalReward != null ? new QuestItems(finalReward.getId(), finalReward.getCount()) : null;
 	}
@@ -251,8 +250,7 @@ public class BonusService {
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
 				if (special && template.getExtraInventoryId() > 0) {
 					groupMaxCount++;
-				}
-				else if (template.getExtraInventoryId() < 1) {
+				} else if (template.getExtraInventoryId() < 1) {
 					groupMaxCount++;
 				}
 			}

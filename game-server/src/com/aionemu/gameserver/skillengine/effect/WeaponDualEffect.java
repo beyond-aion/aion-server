@@ -20,10 +20,10 @@ public class WeaponDualEffect extends BufEffect {
 	public void startEffect(Effect effect) {
 		if (change == null)
 			return;
-		
+
 		if (effect.getEffected() instanceof Player)
-			((Player)effect.getEffected()).setDualEffectValue(value);
-		
+			((Player) effect.getEffected()).setDualEffectValue(value);
+
 		List<IStatFunction> modifiers = getModifiers(effect);
 		List<IStatFunction> masteryModifiers = new ArrayList<IStatFunction>(modifiers.size());
 		for (IStatFunction modifier : modifiers) {
@@ -33,13 +33,13 @@ public class WeaponDualEffect extends BufEffect {
 			effect.getEffected().getGameStats().addEffect(effect, masteryModifiers);
 		}
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		if (effect.getEffected() instanceof Player)
-			((Player)effect.getEffected()).setDualEffectValue(0);
-		
+			((Player) effect.getEffected()).setDualEffectValue(0);
+
 		super.endEffect(effect);
 	}
-	
+
 }

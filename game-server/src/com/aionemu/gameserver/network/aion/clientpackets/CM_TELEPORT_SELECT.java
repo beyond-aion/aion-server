@@ -46,7 +46,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		if (player.getLifeStats().isAlreadyDead())
 			return;
-		
+
 		AionObject obj = player.getKnownList().getObject(targetObjectId);
 		if (obj != null && obj instanceof Npc) {
 			Npc npc = (Npc) obj;
@@ -56,12 +56,12 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 			}
 			TeleporterTemplate teleport = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npcId);
 			if (teleport != null) {
-				TeleportService2.teleport(teleport, locId, player,  npc, TeleportAnimation.JUMP_AIMATION);
-			}
-			else
-				LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).warn("teleportation id "+locId+" was not found on npc "+npcId);
-		}
-		else
-			LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).debug("player "+player.getName()+" requested npc "+targetObjectId+" for teleportation "+locId+", but he doesnt have such npc in knownlist");
+				TeleportService2.teleport(teleport, locId, player, npc, TeleportAnimation.JUMP_AIMATION);
+			} else
+				LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).warn("teleportation id " + locId + " was not found on npc " + npcId);
+		} else
+			LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).debug(
+				"player " + player.getName() + " requested npc " + targetObjectId + " for teleportation " + locId
+					+ ", but he doesnt have such npc in knownlist");
 	}
 }

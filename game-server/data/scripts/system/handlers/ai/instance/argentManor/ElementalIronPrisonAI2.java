@@ -19,7 +19,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- *
  * @author xTz
  */
 @AIName("elemental_iron_prison")
@@ -68,8 +67,7 @@ public class ElementalIronPrisonAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelAggroTask();
-				}
-				else {
+				} else {
 					if (!isInRangePlayer()) {
 						handleBackHome();
 					}
@@ -95,8 +93,7 @@ public class ElementalIronPrisonAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					int skill = 0;
 					switch (Rnd.get(1, 4)) {
 						case 1:
@@ -158,7 +155,7 @@ public class ElementalIronPrisonAI2 extends GeneralNpcAI2 {
 		cancelPhaseTask();
 		super.handleDied();
 	}
-	
+
 	@Override
 	public int modifyHealValue(int value) {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();

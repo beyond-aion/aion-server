@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.summons;
 
 /**
- *
  * @author xTz
  */
 public enum SummonMode {
@@ -11,6 +10,7 @@ public enum SummonMode {
 	REST(2),
 	RELEASE(3),
 	UNK(5);
+
 	private int id;
 
 	private SummonMode(int id) {

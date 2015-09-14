@@ -131,8 +131,7 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
 				if (!letters.isEmpty()) {
 					ListSplitter<Letter> splittedLetters = new ListSplitter<>(letters, 100, false);
 					_letters = splittedLetters.getNext();
-				}
-				else {
+				} else {
 					_letters = letters;
 				}
 				writeLettersList(_letters, isExpress, unreadExpressCount + unreadBlackCloudCount);

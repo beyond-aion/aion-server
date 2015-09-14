@@ -138,9 +138,10 @@ public class ExchangeService {
 			PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_ADD_KINAH(countToAdd, 0));
 			PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_KINAH(countToAdd, 1));
 			currentExchange.addKinah(countToAdd);
-			if(LoggingConfig.LOG_PLAYER_EXCHANGE)
-				log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: 182400001" + 
-				(LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: Kinah]" : "]")  + " [Count: " + countToAdd + "] with [Partner: " + partner.getName() + "]");
+			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
+				log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: 182400001"
+					+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: Kinah]" : "]") + " [Count: " + countToAdd + "] with [Partner: "
+					+ partner.getName() + "]");
 		}
 	}
 
@@ -177,8 +178,8 @@ public class ExchangeService {
 
 		if (currentExchange.isExchangeListFull())
 			return;
-		
-		if(!AdminService.getInstance().canOperate(activePlayer, partner, item, "trade"))
+
+		if (!AdminService.getInstance().canOperate(activePlayer, partner, item, "trade"))
 			return;
 
 		ExchangeItem exchangeItem = currentExchange.getItems().get(item.getObjectId());
@@ -189,8 +190,7 @@ public class ExchangeService {
 			Item newItem = null;
 			if (itemCount < item.getItemCount()) {
 				newItem = ItemFactory.newItem(item.getItemId(), itemCount);
-			}
-			else {
+			} else {
 				newItem = item;
 			}
 			exchangeItem = new ExchangeItem(itemObjId, itemCount, newItem);
@@ -211,22 +211,22 @@ public class ExchangeService {
 
 		if (!item.getItemTemplate().isStackable() || item.getItemCount() == exchangeItem.getItemCount()) {
 			PacketSendUtility.sendPacket(activePlayer, new SM_DELETE_ITEM(itemObjId, ItemPacketService.ItemDeleteType.PUT_TO_EXCHANGE));
-		}
-		else {
+		} else {
 			Item fakeItem = new Item(itemObjId, item.getItemTemplate());
 			fakeItem.setItemCount(item.getItemCount() - exchangeItem.getItemCount());
-			PacketSendUtility.sendPacket(activePlayer, new SM_INVENTORY_UPDATE_ITEM(activePlayer, fakeItem, ItemPacketService.ItemUpdateType.PUT_TO_EXCHANGE));
+			PacketSendUtility.sendPacket(activePlayer, new SM_INVENTORY_UPDATE_ITEM(activePlayer, fakeItem,
+				ItemPacketService.ItemUpdateType.PUT_TO_EXCHANGE));
 		}
 
 		PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_ADD_ITEM(0, exchangeItem.getItem(), activePlayer));
 		PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_ITEM(1, exchangeItem.getItem(), partner));
-		
 
 		Item exchangedItem = exchangeItem.getItem();
-		
-		if(LoggingConfig.LOG_PLAYER_EXCHANGE)
-			log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: " + exchangedItem.getItemId() +
-			(LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + exchangedItem.getItemName() + "]" : "]") + " [Count: " + exchangeItem.getItemCount() + " with [Partner: " + partner.getName() + "]");
+
+		if (LoggingConfig.LOG_PLAYER_EXCHANGE)
+			log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: " + exchangedItem.getItemId()
+				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + exchangedItem.getItemName() + "]" : "]") + " [Count: "
+				+ exchangeItem.getItemCount() + " with [Partner: " + partner.getName() + "]");
 	}
 
 	/**
@@ -272,9 +272,9 @@ public class ExchangeService {
 					List<Item> items = new ArrayList<>();
 					items.add(exItem.getItem());
 					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(items, player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_ITEMS_RETURN));
-				}
-				else {
-					PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, realItem, ItemPacketService.ItemUpdateType.GET_BACK_FROM_EXCHANGE));
+				} else {
+					PacketSendUtility.sendPacket(player,
+						new SM_INVENTORY_UPDATE_ITEM(player, realItem, ItemPacketService.ItemUpdateType.GET_BACK_FROM_EXCHANGE));
 				}
 			}
 			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(StorageType.CUBE, player));
@@ -321,8 +321,7 @@ public class ExchangeService {
 		cleanupExchanges(activePlayer, currentPartner);
 
 		if (!removeItemsFromInventory(activePlayer, exchange1) || !removeItemsFromInventory(currentPartner, exchange2)) {
-			AuditLogger.info(activePlayer, "Exchange kinah exploit partner: "
-				+ currentPartner.getName());
+			AuditLogger.info(activePlayer, "Exchange kinah exploit partner: " + currentPartner.getName());
 			return;
 		}
 
@@ -332,8 +331,8 @@ public class ExchangeService {
 		putItemToInventory(currentPartner, exchange1, exchange2);
 		putItemToInventory(activePlayer, exchange2, exchange1);
 
-		saveManager.add(new ExchangeOpSaveTask(exchange1.getActiveplayer().getObjectId(), exchange2.getActiveplayer()
-			.getObjectId(), exchange1.getItemsToUpdate(), exchange2.getItemsToUpdate()));
+		saveManager.add(new ExchangeOpSaveTask(exchange1.getActiveplayer().getObjectId(), exchange2.getActiveplayer().getObjectId(), exchange1
+			.getItemsToUpdate(), exchange2.getItemsToUpdate()));
 	}
 
 	/**
@@ -362,23 +361,22 @@ public class ExchangeService {
 		for (ExchangeItem exchangeItem : exchange.getItems().values()) {
 			Item item = exchangeItem.getItem();
 			Item itemInInventory = inventory.getItemByObjId(exchangeItem.getItemObjId());
-			if(itemInInventory == null) {
+			if (itemInInventory == null) {
 				AuditLogger.info(player, "Try to trade unexisting item.");
 				return false;
 			}
-			
+
 			long itemCount = exchangeItem.getItemCount();
 
 			if (itemCount < itemInInventory.getItemCount()) {
 				inventory.decreaseItemCount(itemInInventory, itemCount);
 				exchange.addItemToUpdate(itemInInventory);
-			}
-			else {
-				//remove from source inventory only
+			} else {
+				// remove from source inventory only
 				inventory.remove(itemInInventory);
 				exchangeItem.setItem(itemInInventory);
 				// release when only part stack was added in the beginning -> full stack in the end
-				if (item.getObjectId() != exchangeItem.getItemObjId()){
+				if (item.getObjectId() != exchangeItem.getItemObjId()) {
 					ItemService.releaseItemId(item);
 				}
 				PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemInInventory.getObjectId()));
@@ -416,10 +414,10 @@ public class ExchangeService {
 		for (ExchangeItem exchangeItem : exchange1.getItems().values()) {
 			Item itemToPut = exchangeItem.getItem();
 			itemToPut.setEquipmentSlot(0);
-                        // unpack
-                        if (itemToPut.getPackCount() > 0) {
-                            itemToPut.setPackCount(itemToPut.getPackCount() * -1);
-                        }
+			// unpack
+			if (itemToPut.getPackCount() > 0) {
+				itemToPut.setPackCount(itemToPut.getPackCount() * -1);
+			}
 			player.getInventory().add(itemToPut, ItemPacketService.ItemAddType.PLAYER_EXCHANGE);
 			exchange2.addItemToUpdate(itemToPut);
 		}

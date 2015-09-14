@@ -23,7 +23,7 @@ public enum SkillElement {
 	public int getElementId() {
 		return element;
 	}
-	
+
 	public static StatEnum getResistanceForElement(SkillElement element) {
 		switch (element) {
 			case FIRE:
@@ -40,6 +40,6 @@ public enum SkillElement {
 				return StatEnum.ELEMENTAL_RESISTANCE_DARK;
 		}
 		return null;
-		
+
 	}
 }

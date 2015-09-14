@@ -14,13 +14,12 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- *
  * @author xTz
  */
 @AIName("seal_generator")
 public class SealGeneratorAI2 extends AggressiveNpcAI2 {
 
-private AtomicBoolean startedEvent = new AtomicBoolean(false);
+	private AtomicBoolean startedEvent = new AtomicBoolean(false);
 
 	@Override
 	public boolean canThink() {
@@ -47,8 +46,8 @@ private AtomicBoolean startedEvent = new AtomicBoolean(false);
 			default:
 				return AIAnswers.NEGATIVE;
 		}
-	}	
-	
+	}
+
 	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return 1;

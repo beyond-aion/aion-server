@@ -33,7 +33,8 @@ public class ExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem) {
-		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, 0, 0));
+		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
+			.getTemplateId(), 5000, 0, 0));
 		player.getController().cancelTask(TaskId.ITEM_USE);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -41,7 +42,8 @@ public class ExtractAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
+				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
+					.getTemplateId(), 0, 2, 0));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -52,7 +54,8 @@ public class ExtractAction extends AbstractItemAction {
 			public void run() {
 				player.getObserveController().removeObserver(observer);
 				boolean result = EnchantService.breakItem(player, targetItem, parentItem);
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, result ? 1 : 2, 0));
+				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
+					.getTemplateId(), 0, result ? 1 : 2, 0));
 			}
 		}, 5000));
 

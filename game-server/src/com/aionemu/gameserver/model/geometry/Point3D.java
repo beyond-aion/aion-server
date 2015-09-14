@@ -166,7 +166,7 @@ public class Point3D implements Cloneable, Serializable {
 		float result = x;
 		result = 31 * result + y;
 		result = 31 * result + z;
-		return (int)(result*100);
+		return (int) (result * 100);
 	}
 
 	/**

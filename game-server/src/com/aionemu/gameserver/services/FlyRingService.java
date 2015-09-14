@@ -27,8 +27,7 @@ public class FlyRingService {
 		for (FlyRingTemplate t : DataManager.FLY_RING_DATA.getFlyRingTemplates()) {
 			FlyRing f = new FlyRing(t, 0);
 			f.spawn();
-			log.debug("Added " + f.getName() + " at m=" + f.getWorldId() + ",x=" + f.getX() + ",y=" + f.getY() + ",z="
-				+ f.getZ());
+			log.debug("Added " + f.getName() + " at m=" + f.getWorldId() + ",x=" + f.getX() + ",y=" + f.getY() + ",z=" + f.getZ());
 		}
 	}
 }

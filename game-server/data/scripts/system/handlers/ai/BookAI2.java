@@ -15,7 +15,6 @@ public class BookAI2 extends NpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		PacketSendUtility.sendPacket(player, 
-			new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id(), 0));
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id(), 0));
 	}
 }

@@ -50,8 +50,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
 		}
 

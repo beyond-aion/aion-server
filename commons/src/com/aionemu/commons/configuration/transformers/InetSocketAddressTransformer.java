@@ -49,8 +49,7 @@ public class InetSocketAddressTransformer implements PropertyTransformer<InetSoc
 			InetAddress address = InetAddress.getByName(parts[0]);
 			int port = Integer.parseInt(parts[1]);
 			return new InetSocketAddress(address, port);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
 	}

@@ -83,7 +83,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 			SpawnRace();
 		}
 	}
-	
+
 	@Override
 	public void onAggro(Npc npc) {
 		switch (npc.getNpcId()) {
@@ -95,20 +95,20 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 		}
 	}
-	
+
 	private void startFailTask() {
 		failTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				timeInMin++;
-				switch(timeInMin) {
+				switch (timeInMin) {
 					case 1:
 						sendMsg(1402144);
 						break;
 					case 5:
 						sendMsg(1402145);
-					  break;
+						break;
 					case 6:
 						sendMsg(1402146);
 						Npc boss = instance.getNpc(233740);
@@ -116,8 +116,8 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 						spawn(730905, 267.64062f, 267.84793f, 276.65512f, (byte) 75); // exit
 						if (failTask != null && !failTask.isDone()) {
 							failTask.cancel(true);
-						} 
-					  break;
+						}
+						break;
 				}
 			}
 		}, 0, 60000);
@@ -151,7 +151,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 			case 233740:
 				if (failTask != null && !failTask.isDone()) {
 					failTask.cancel(true);
-				} 
+				}
 				spawn(730905, 267.64062f, 267.84793f, 276.65512f, (byte) 75); // exit
 				break;
 
@@ -250,16 +250,17 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 			}
 		}, 1810000);
 	}
-	
+
 	private void generatorTaskStart() {
 		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				checkGenerators();
 			}
 		}, 1000, 30000);
 	}
-	
+
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
@@ -267,26 +268,27 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 				TeleportService2.teleportTo(player, mapId, instanceId, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
 				break;
 			case 702009:
-				TeleportService2.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2
+					.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.BEAM_ANIMATION);
 				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
 				npc.getController().onDelete();
 				break;
 			case 730905:
 				TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
 				break;
-				
-		}	
+
+		}
 	}
-	
+
 	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
-		switch(skillId) {
+		switch (skillId) {
 			case 21511:
 				spawn(702009, effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
 				break;
 		}
 	}
-	
+
 	private boolean checkGenerators() {
 		Npc gen1 = instance.getNpc(702220);
 		Npc gen2 = instance.getNpc(702223);
@@ -354,8 +356,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
 					if (isRun) {
 						npc.setState(1);
-					}
-					else {
+					} else {
 						npc.setState(CreatureState.WALKING);
 					}
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
@@ -363,7 +364,6 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 			}
 		}, time);
 	}
-
 
 	private void phaseAttack01() {
 
@@ -622,17 +622,17 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 			npc.getController().onDelete();
 		}
 	}
-	
+
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));	
-		
+		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
@@ -641,7 +641,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 		TeleportService2.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
 		return true;
 	}
-	
+
 	@Override
 	public void onInstanceDestroy() {
 		cancelTask();
@@ -650,11 +650,11 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 		doors.clear();
 		if (failTask != null && !failTask.isDone()) {
 			failTask.cancel(true);
-		} 
+		}
 		if (timeCheckTask != null && !timeCheckTask.isCancelled())
 			timeCheckTask.cancel(true);
 	}
-	
+
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());

@@ -13,7 +13,7 @@ import com.aionemu.commons.configs.CommonsConfig;
 /**
  * @author NB4L1
  */
-public class ExecuteWrapper implements Executor{
+public class ExecuteWrapper implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ExecuteWrapper.class);
 
@@ -27,11 +27,9 @@ public class ExecuteWrapper implements Executor{
 
 		try {
 			runnable.run();
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			log.warn("Exception in a Runnable execution:", t);
-		}
-		finally {
+		} finally {
 
 			long runtimeInNanosec = System.nanoTime() - begin;
 			Class<? extends Runnable> clazz = runnable.getClass();

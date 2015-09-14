@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41300TheRedStallion extends QuestHandler {
 
@@ -33,29 +31,25 @@ public class _41300TheRedStallion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205763) { 
+			if (targetId == 205763) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 190100014, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205794) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 1)
+					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205794) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
@@ -65,13 +59,13 @@ public class _41300TheRedStallion extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean rideAction(QuestEnv env, int rideItemId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if(rideItemId == 190100014) {
+			if (rideItemId == 190100014) {
 				changeQuestStep(env, 0, 1, false);
 				return true;
 			}
@@ -79,7 +73,3 @@ public class _41300TheRedStallion extends QuestHandler {
 		return false;
 	}
 }
-				
-			
-			
-		

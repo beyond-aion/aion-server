@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlType(name = "tempering_data")
@@ -29,5 +28,5 @@ public class TemperingTemplateData {
 	public List<TemperingStat> getTemperingStats() {
 		return temperingStats;
 	}
-	
+
 }

@@ -54,11 +54,9 @@ public class OnClassLoadUnloadListener implements ClassListener {
 			if (m.getAnnotation(annotationClass) != null) {
 				try {
 					m.invoke(null);
-				}
-				catch (IllegalAccessException e) {
+				} catch (IllegalAccessException e) {
 					log.error("Can't access method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
-				}
-				catch (InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
 					log.error("Can't invoke method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
 				}
 			}

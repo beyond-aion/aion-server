@@ -144,8 +144,8 @@ public class _14031AHyperVention extends QuestHandler {
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
 							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95);// Broken
-																																																																				// Teleporter
-																																																																				// Device
+																																																												// Teleporter
+																																																												// Device
 						}
 					}
 					break;

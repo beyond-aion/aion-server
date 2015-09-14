@@ -66,8 +66,7 @@ public class TemporarySpawnEngine {
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				for (SpawnTemplate template : spawn.getSpawnTemplates()) {
 					TemporarySpawn temporarySpawn = template.getTemporarySpawn();
 					if (temporarySpawn.canSpawn() || (startCheck && !template.isNoRespawn() && temporarySpawn.isInSpawnTime())) {

@@ -166,8 +166,7 @@ public class HousingService {
 		for (House house : customHouses.values()) {
 			if (house.getStatus() == HouseStatus.INACTIVE)
 				continue;
-			if (house.getOwnerId() == playerId
-							&& (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
+			if (house.getOwnerId() == playerId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
 				return house.getAddress().getId();
 		}
 		return 0;
@@ -250,7 +249,7 @@ public class HousingService {
 	}
 
 	private void createStudio(Player player) {
-		if (getPlayerAddress(player.getObjectId()) != 0) //should not happen
+		if (getPlayerAddress(player.getObjectId()) != 0) // should not happen
 			return;
 		HousingLand land = DataManager.HOUSE_DATA.getLand(player.getRace() == Race.ELYOS ? 329001 : 339001);
 		House studio = new House(land.getDefaultBuilding(), land.getAddresses().get(0), 0);
@@ -316,8 +315,7 @@ public class HousingService {
 			if (qs != null && qs.getStatus().equals(QuestStatus.COMPLETE)) {
 				buildingState |= PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId();
 			}
-		}
-		else {
+		} else {
 			if (activeHouse.getStatus() == HouseStatus.SELL_WAIT)
 				buildingState = PlayerHouseOwnerFlags.SELLING_HOUSE.getId();
 			else

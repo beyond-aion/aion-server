@@ -56,7 +56,7 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 		}
 
 		DateTime nextRun = new DateTime((long) MaintenanceTask.getInstance().getRunTime() * 1000);
-		if (nextRun.plusWeeks(4).isBefore(payTime)) { //client cap
+		if (nextRun.plusWeeks(4).isBefore(payTime)) { // client cap
 			return;
 		}
 

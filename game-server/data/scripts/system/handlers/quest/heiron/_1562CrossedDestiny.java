@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * Find Litonos (204616) (bring him the Berone's Necklace (182201780)). Talk with Litonos. Take Litonos to Berone
- * (204589). Talk with Berone.
+ * Find Litonos (204616) (bring him the Berone's Necklace (182201780)). Talk with Litonos. Take Litonos to Berone (204589). Talk with Berone.
  * 
  * @author Balthazar
  * @reworked vlog
@@ -57,8 +56,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1, false, false, 182201780, 1, 0, 0);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204616: { // Litonos
 					switch (env.getDialog()) {
@@ -81,8 +79,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204589) { // Berone
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 10002);
@@ -92,7 +89,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

@@ -44,8 +44,7 @@ public class Givetitle extends ConsoleCommand {
 		int titleId;
 		try {
 			titleId = Integer.parseInt(params[0]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 			return;
 		}

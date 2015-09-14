@@ -38,7 +38,6 @@ public class Deleteskill extends ConsoleCommand {
 		String skillName = params[0];
 		int skillId = 0;
 
-
 		final VisibleObject target = admin.getTarget();
 		if (target == null) {
 			PacketSendUtility.sendMessage(admin, "No target selected.");
@@ -52,7 +51,6 @@ public class Deleteskill extends ConsoleCommand {
 
 		final Player player = (Player) target;
 
-
 		try {
 
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
@@ -61,13 +59,12 @@ public class Deleteskill extends ConsoleCommand {
 
 			SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 
-			if(skillTemplate != null){
+			if (skillTemplate != null) {
 				skillId = skillTemplate.getTemplateId();
 			}
 
-		}
-		catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!" );
+		} catch (Exception e) {
+			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!");
 			System.out.println(e);
 		}
 
@@ -106,6 +103,7 @@ public class Deleteskill extends ConsoleCommand {
 	@XmlRootElement(name = "ae_static_data")
 	@XmlAccessorType(XmlAccessType.NONE)
 	private static class StaticData {
+
 		@XmlElement(name = "skills")
 		public SkillData skillData;
 	}
@@ -144,7 +142,7 @@ public class Deleteskill extends ConsoleCommand {
 
 	@XmlRootElement(name = "skills")
 	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class SkillData{
+	private static class SkillData {
 
 		@XmlElement(name = "skill")
 		private List<SkillTemplate> its;
@@ -152,7 +150,7 @@ public class Deleteskill extends ConsoleCommand {
 		public SkillTemplate getSkillTemplate(String skill) {
 
 			for (SkillTemplate it : getData()) {
-				if(it.getName().toLowerCase().equals(skill.toLowerCase()))
+				if (it.getName().toLowerCase().equals(skill.toLowerCase()))
 					return it;
 			}
 			return null;

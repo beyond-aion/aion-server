@@ -4,8 +4,9 @@ package com.aionemu.loginserver.taskmanager.handler;
  * @author nrg
  */
 public abstract class TaskFromDBHandler {
+
 	protected int taskId;
-	protected String[] params = {""};
+	protected String[] params = { "" };
 
 	/**
 	 * Task's id
@@ -37,7 +38,8 @@ public abstract class TaskFromDBHandler {
 	/**
 	 * Task's execution param(s)
 	 *
-	 * @param params String[]
+	 * @param params
+	 *          String[]
 	 */
 	public void setParams(String params[]) {
 		this.params = params;

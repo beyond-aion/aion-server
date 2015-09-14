@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1097SwordofTranscendence extends QuestHandler {
 
 	private final static int questId = 1097;
-	private final static int[] npc_ids = { 790001,700509,700510,798316,279034 };
+	private final static int[] npc_ids = { 790001, 700509, 700510, 798316, 279034 };
 
 	public _1097SwordofTranscendence() {
 		super(questId);
@@ -91,19 +91,17 @@ public class _1097SwordofTranscendence extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 					}
 				}
 					break;
-				case 700509: 
-				case 700510: 
+				case 700509:
+				case 700510:
 					return true; // looting
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790001) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

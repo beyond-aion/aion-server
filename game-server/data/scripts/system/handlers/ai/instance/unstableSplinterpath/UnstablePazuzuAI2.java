@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 /**
  * @author Luzien
  * @edit Cheatkiller
@@ -37,7 +36,7 @@ public class UnstablePazuzuAI2 extends AggressiveNpcAI2 {
 		cancelTask();
 		isHome.set(true);
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
@@ -59,7 +58,7 @@ public class UnstablePazuzuAI2 extends AggressiveNpcAI2 {
 				}
 			}
 
-		}, 5000, 70000); 
+		}, 5000, 70000);
 	}
 
 	private void cancelTask() {
@@ -67,5 +66,5 @@ public class UnstablePazuzuAI2 extends AggressiveNpcAI2 {
 			task.cancel(true);
 		}
 	}
-	
+
 }

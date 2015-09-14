@@ -71,8 +71,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 				writeC(emblem.getColor_r());
 				writeC(emblem.getColor_g());
 				writeC(emblem.getColor_b());
-			}
-			else {
+			} else {
 				writeD(emblem.getCustomEmblemData().length);
 				writeC(255);
 				writeC(emblem.getColor_r());
@@ -86,7 +85,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeC(loc.isVulnerable() ? 2 : 0);
 
 			// faction can teleport (0 - no, 1 - yes)
-			writeC(loc.isCanTeleport(player)? 1 : 0);
+			writeC(loc.isCanTeleport(player) ? 1 : 0);
 
 			// Next State (0 - invulnerable, 1 - vulnerable)
 			writeC(loc.getNextState());
@@ -102,9 +101,9 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 					writeD(10000);
 					break;
 			}
-			writeD(0); //unk 4.7
-			writeD(0); //unk 4.7 (maybe Capture Date? )
-			writeD(0); //unk 4.7
+			writeD(0); // unk 4.7
+			writeD(0); // unk 4.7 (maybe Capture Date? )
+			writeD(0); // unk 4.7
 		}
 	}
 

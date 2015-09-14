@@ -65,14 +65,12 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 			if (targetId == 204753) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					int[] questItems = { 182204313, 182204314, 182204315 };
 					return sendQuestEndDialog(env, questItems);
 				}
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204753) {
@@ -105,8 +103,7 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 790016) {
+		} else if (targetId == 790016) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -117,12 +114,10 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 2035);
 						else
 							return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 2120);
 			}
-		}
-		else if (targetId == 730036) {
+		} else if (targetId == 730036) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -133,12 +128,10 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 1353);
 						else
 							return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1438);
 			}
-		}
-		else if (targetId == 279000) {
+		} else if (targetId == 279000) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -149,8 +142,7 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 1694);
 						else
 							return true;
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1779);
 			}
 		}
@@ -167,32 +159,27 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 		if (!player.isInsideZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
 			return HandlerResult.FAILED;
 
-		if (id != 182204313 && qs.getQuestVarById(0) == 2 || id != 182204314 && qs.getQuestVarById(0) == 3
-			|| id != 182204315 && qs.getQuestVarById(0) == 4)
+		if (id != 182204313 && qs.getQuestVarById(0) == 2 || id != 182204314 && qs.getQuestVarById(0) == 3 || id != 182204315
+			&& qs.getQuestVarById(0) == 4)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				if (qs.getQuestVarById(0) == 2) {
 					playQuestMovie(env, 243);
 					removeQuestItem(env, id, 1);
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
-				}
-				else if (qs.getQuestVarById(0) == 3) {
+				} else if (qs.getQuestVarById(0) == 3) {
 					playQuestMovie(env, 244);
 					removeQuestItem(env, id, 1);
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
-				}
-				else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				} else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, id, 1);
 					playQuestMovie(env, 245);
 					qs.setStatus(QuestStatus.REWARD);

@@ -4,8 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This class is representing an iterator, that is used to iterate through the collection that has format
- * Iterable&lt;Iterable&lt;V&gt;&gt;.<br>
+ * This class is representing an iterator, that is used to iterate through the collection that has format Iterable&lt;Iterable&lt;V&gt;&gt;.<br>
  * 
  * <pre>
  * &lt;code&gt;

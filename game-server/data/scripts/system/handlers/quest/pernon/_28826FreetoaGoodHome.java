@@ -7,13 +7,11 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _28826FreetoaGoodHome extends QuestHandler {
-	
+
 	private static final int questId = 28826;
 
 	public _28826FreetoaGoodHome() {
@@ -40,26 +38,24 @@ public class _28826FreetoaGoodHome extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 830662 || targetId == 830663 || targetId == 830521) {
-				if (dialog == DialogAction.QUEST_SELECT) 
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else 
+				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730525) {
-				switch (dialog)	{
+				switch (dialog) {
 					case USE_OBJECT: {
 						return sendQuestDialog(env, 2375);
 					}
-					case SELECT_QUEST_REWARD:	{
+					case SELECT_QUEST_REWARD: {
 						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 5);
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 730525) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 730525) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

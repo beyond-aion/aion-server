@@ -44,7 +44,7 @@ public class CM_TIME_CHECK extends AionClientPacket {
 		int timeNow = (int) (System.nanoTime() / 1000000);
 		@SuppressWarnings("unused")
 		int diff = timeNow - nanoTime;
-		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5()); //don't know what is this doing it is send after this on retail
+		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5()); // don't know what is this doing it is send after this on retail
 		client.sendPacket(new SM_TIME_CHECK(nanoTime));
 
 		// log.info("CM_TIME_CHECK: " + nanoTime + " =?= " + timeNow + " dif: " + diff);

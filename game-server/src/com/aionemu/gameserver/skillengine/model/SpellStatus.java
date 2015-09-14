@@ -5,8 +5,7 @@ package com.aionemu.gameserver.skillengine.model;
  */
 public enum SpellStatus {
 	/**
-	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge
-	 * 256 : resist
+	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
 	 */
 
 	NONE(0),
@@ -18,7 +17,7 @@ public enum SpellStatus {
 	BLOCK(32),
 	PARRY(64),
 	DODGE(128),
-	DODGE2(-128),//TEMP
+	DODGE2(-128), // TEMP
 	RESIST(256);
 
 	private int id;

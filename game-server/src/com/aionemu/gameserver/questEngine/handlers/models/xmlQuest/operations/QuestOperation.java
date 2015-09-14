@@ -12,8 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestOperation")
-@XmlSeeAlso({ TakeItemOperation.class, StartQuestOperation.class, SetQuestVarOperation.class, NpcDialogOperation.class,
-	GiveItemOperation.class, SetQuestStatusOperation.class })
+@XmlSeeAlso({ TakeItemOperation.class, StartQuestOperation.class, SetQuestVarOperation.class, NpcDialogOperation.class, GiveItemOperation.class,
+	SetQuestStatusOperation.class })
 public abstract class QuestOperation {
 
 	public abstract void doOperate(QuestEnv env);

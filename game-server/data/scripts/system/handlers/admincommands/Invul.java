@@ -19,8 +19,7 @@ public class Invul extends AdminCommand {
 		if (player.isInvul()) {
 			player.setInvul(false);
 			PacketSendUtility.sendMessage(player, "You are now mortal.");
-		}
-		else {
+		} else {
 			player.setInvul(true);
 			PacketSendUtility.sendMessage(player, "You are now immortal.");
 		}

@@ -62,11 +62,10 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
  * @author Rolandas
  */
 @XmlRootElement(name = "item_groups")
-@XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon",
-	"manastonesRare", "medals", "foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary",
-	"oresRare", "oresLegendary", "oresUnique", "oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary",
-	"feedFluids", "feedArmor", "feedThorns", "feedBones", "feedBalaurScales", "feedSouls", "feedExcludes",
-	"stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit", "aetherCrystalBiscuit",
+@XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare", "medals",
+	"foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary", "oresUnique",
+	"oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns", "feedBones", "feedBalaurScales",
+	"feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit", "aetherCrystalBiscuit",
 	"aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins" })
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemGroupsData {
@@ -93,7 +92,7 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "medals")
 	protected MedalGroup medals;
-	
+
 	@XmlElement(name = "food_common")
 	protected FoodGroup foodCommon;
 
@@ -183,7 +182,7 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "nutritious_poppy_snack")
 	protected PoppySnackNutritiousGroup poppySnackNutritious;
-	
+
 	@XmlElement(name = "feed_shugo_event_coin")
 	protected ShugoEventCoinGroup shugoCoins;
 
@@ -273,8 +272,7 @@ public class ItemGroupsData {
 			upperBound = lowerBound + RECIPE_UPPER;
 			if (upperBound / 100 != lowerBound / 100)
 				upperBound = lowerBound / 100 + 99;
-		}
-		else {
+		} else {
 			CraftItem item = (CraftItem) reward;
 			lowerBound = item.getMinLevel();
 			upperBound = item.getMaxLevel();
@@ -502,7 +500,7 @@ public class ItemGroupsData {
 	public BonusItemGroup[] getManastoneGroups() {
 		return manastoneGroups;
 	}
-	
+
 	public BonusItemGroup[] getMedalGroups() {
 		return medalGroups;
 	}
@@ -566,7 +564,7 @@ public class ItemGroupsData {
 
 	private List<ItemRaceEntry> getPetFood(FoodType foodType) {
 		switch (foodType) {
-			// Biscuits bought from shop
+		// Biscuits bought from shop
 			case AETHER_CRYSTAL_BISCUIT:
 				return aetherCrystalBiscuit.getItems();
 			case AETHER_GEM_BISCUIT:
@@ -574,7 +572,7 @@ public class ItemGroupsData {
 			case AETHER_POWDER_BISCUIT:
 				return aetherPowderBiscuit.getItems();
 
-			// Specific Junk
+				// Specific Junk
 			case ARMOR:
 				return feedArmor.getItems();
 			case BALAUR_SCALES:
@@ -588,25 +586,25 @@ public class ItemGroupsData {
 			case THORNS:
 				return feedThorns.getItems();
 
-			// Healthy Pet Food bought from vendors
+				// Healthy Pet Food bought from vendors
 			case HEALTHY_FOOD_ALL:
 				return healthyFoodAll.getItems();
 			case HEALTHY_FOOD_SPICY:
 				return healthyFoodSpicy.getItems();
 
-			// Runaway Poppy's Food
+				// Runaway Poppy's Food
 			case POPPY_SNACK:
 				return poppySnack.getItems();
 			case POPPY_SNACK_TASTY:
 				return poppySnackTasty.getItems();
 			case POPPY_SNACK_NUTRITIOUS:
 				return poppySnackNutritious.getItems();
-			   
-			//Shugo Tomb Event pet food
-			case SHUGO_EVENT_COIN:
-			   return shugoCoins.getItems();
 
-			// Exclusions
+				// Shugo Tomb Event pet food
+			case SHUGO_EVENT_COIN:
+				return shugoCoins.getItems();
+
+				// Exclusions
 			case STINKY:
 				return stinkingJunk.getItems();
 			case EXCLUDES:
@@ -617,12 +615,10 @@ public class ItemGroupsData {
 	}
 
 	public int bonusSize() {
-		return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size()
-			+ foodRare.getItems().size() + foodLegendary.getItems().size() + medicineCommon.getItems().size()
-			+ medicineRare.getItems().size() + medicineLegendary.getItems().size() + oresRare.getItems().size()
-			+ oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
-			+ gatherRare.getItems().size() + enchants.getItems().size() + bossRare.getItems().size()
-			+ bossLegendary.getItems().size();
+		return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size() + foodRare.getItems().size()
+			+ foodLegendary.getItems().size() + medicineCommon.getItems().size() + medicineRare.getItems().size() + medicineLegendary.getItems().size()
+			+ oresRare.getItems().size() + oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
+			+ gatherRare.getItems().size() + enchants.getItems().size() + bossRare.getItems().size() + bossLegendary.getItems().size();
 	}
 
 	public int petFoodSize() {

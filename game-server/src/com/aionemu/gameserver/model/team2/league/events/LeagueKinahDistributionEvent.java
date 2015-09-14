@@ -11,7 +11,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 
 /**
- *
  * @author Source
  */
 public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember>, TeamEvent {
@@ -56,12 +55,9 @@ public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent implements
 				if (member.isOnline()) {
 					member.getInventory().increaseKinah(rewardPerPlayer);
 					if (member.equals(eventPlayer)) {
-						PacketSendUtility.sendPacket(member,
-													 new SM_SYSTEM_MESSAGE(1390247, amount, membersOnline, rewardPerPlayer));
-					}
-					else {
-						PacketSendUtility.sendPacket(member,
-													 new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, membersOnline, rewardPerPlayer));
+						PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390247, amount, membersOnline, rewardPerPlayer));
+					} else {
+						PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, membersOnline, rewardPerPlayer));
 					}
 				}
 				return true;

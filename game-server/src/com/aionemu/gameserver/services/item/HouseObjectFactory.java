@@ -61,7 +61,7 @@ public final class HouseObjectFactory {
 			return new EmblemObject(house, objectId, template.getTemplateId());
 		return new PassiveObject(house, objectId, template.getTemplateId());
 	}
-	
+
 	/**
 	 * For transferring item from inventory to house registry
 	 */
@@ -72,7 +72,7 @@ public final class HouseObjectFactory {
 		Objects.requireNonNull(action, "template actions miss SummonHouseObjectAction");
 
 		int objectTemplateId = action.getTemplateId();
-		HouseObject<?> obj = createNew(house, IDFactory.getInstance().nextId() , objectTemplateId);
+		HouseObject<?> obj = createNew(house, IDFactory.getInstance().nextId(), objectTemplateId);
 		if (obj.getObjectTemplate().getUseDays() > 0) {
 			int expireEnd = (int) (DateTime.now().plusDays(obj.getObjectTemplate().getUseDays()).getMillis() / 1000);
 			obj.setExpireTime(expireEnd);

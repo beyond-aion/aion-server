@@ -29,13 +29,13 @@ public class FpAttackInstantEffect extends EffectTemplate {
 			// Support for values in percentage
 			if (percent)
 				newValue = (maxFP * value) / 100;
-			
+
 			effect.setReserveds(new EffectReserved(position, newValue, "FP", true), false);
-			
+
 			super.calculate(effect, null, null);
 		}
 	}
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		// Restriction to players because lack of FP on other Creatures

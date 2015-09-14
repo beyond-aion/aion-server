@@ -44,11 +44,10 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	@XmlAttribute(name = "group_drop")
 	private GroupDropType groupDrop;
-	
 
 	@XmlAttribute(name = "height")
 	private float height = 1;
-	
+
 	@XmlElement(name = "stats")
 	private NpcStatsTemplate statsTemplate;
 
@@ -78,18 +77,19 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	@XmlAttribute(name = "adelay")
 	private int attackDelay;
-	
+
 	@XmlAttribute(name = "mevent")
 	private int mobileEvent;
-	
+
 	@XmlAttribute(name = "flag_type")
 	private int flagType;
-	
+
 	@XmlAttribute(name = "war_flag")
 	private int warFlagGroupId;
-	
-	/*	@XmlAttribute(name = "item_upgrade")
-	private int itemUpgrade;*/
+
+	/*
+	 * @XmlAttribute(name = "item_upgrade") private int itemUpgrade;
+	 */
 
 	@XmlAttribute(name = "hpgauge")
 	private int hpGauge;
@@ -110,7 +110,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	private boolean floatcorpse;
 
 	@XmlAttribute(name = "on_mist")
-	private Boolean onMist;	
+	private Boolean onMist;
 
 	@XmlElement(name = "bound_radius")
 	private BoundRadius boundRadius;
@@ -126,7 +126,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	@XmlElement(name = "massive_loot")
 	private MassiveLoot massiveLoot;
-	
+
 	@XmlTransient
 	private NpcDrop npcDrop;
 
@@ -229,22 +229,22 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	public int getAttackDelay() {
 		return attackDelay;
 	}
-	
+
 	public int getMobileEvent() {
 		return mobileEvent;
 	}
-	
+
 	public int getFlagType() {
 		return flagType;
 	}
-	
+
 	public int getWarFlag() {
 		return warFlagGroupId;
 	}
+
 	/*
-	public int getItemUpgrade() {
-		return itemUpgrade;
-	}*/
+	 * public int getItemUpgrade() { return itemUpgrade; }
+	 */
 
 	public int getHpGauge() {
 		return hpGauge;
@@ -320,7 +320,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 			return 0;
 		return MassiveLoot.getMLootCount();
 	}
- 
+
 	public int getMassiveLootItem() {
 		if (massiveLoot == null)
 			return 0;
@@ -332,13 +332,13 @@ public class NpcTemplate extends VisibleObjectTemplate {
 			return 0;
 		return MassiveLoot.getMLootMinLevel();
 	}
-	
+
 	public int getMassiveLootMaxLevel() {
 		if (massiveLoot == null)
 			return 0;
 		return MassiveLoot.getMLootMaxLevel();
 	}
-	
+
 	/**
 	 * @return the npcDrop
 	 */
@@ -373,7 +373,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	public TalkInfo getTalkInfo() {
 		return talkInfo;
 	}
-	
+
 	public MassiveLoot getMassiveLoot() {
 		return massiveLoot;
 	}
@@ -388,10 +388,9 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	public Boolean getMistSpawnCondition() {
 		return onMist;
 	}
-	
+
 	public GroupDropType getGroupDrop() {
-			return groupDrop;
-		}
-	
+		return groupDrop;
+	}
 
 }

@@ -16,11 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * Talk with Brigade General Versetti (798927). Talk with Tialla (798954). Talk with Lothas (799022). Destroy Ruthless
- * Brohums (34): Woodland Brohum (215522), Woodland Brohie (215520), Thicket Brohum (215523), Thicket Brohie (215521).
- * Talk with Lothas. Use a Taloc Fruit (182206627) to maximize your power. Use Taloc's Tears (182206628) to purify the
- * inside of Taloc (20) Vanquish Celestius (215488) to obtain its heart then take it to Lothas. Report back to Tialla.
- * Report back to Brigade General Versetti. Talk with Daminu (730008). Talk with Lodas (730019). Talk with Trajanus
+ * Talk with Brigade General Versetti (798927). Talk with Tialla (798954). Talk with Lothas (799022). Destroy Ruthless Brohums (34): Woodland Brohum
+ * (215522), Woodland Brohie (215520), Thicket Brohum (215523), Thicket Brohie (215521). Talk with Lothas. Use a Taloc Fruit (182206627) to maximize
+ * your power. Use Taloc's Tears (182206628) to purify the inside of Taloc (20) Vanquish Celestius (215488) to obtain its heart then take it to
+ * Lothas. Report back to Tialla. Report back to Brigade General Versetti. Talk with Daminu (730008). Talk with Lodas (730019). Talk with Trajanus
  * (730024). Talk with Lothas.
  * 
  * @author vlog
@@ -81,8 +80,7 @@ public class _10021FriendsForLife extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 8) {
+							} else if (var == 8) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -100,11 +98,9 @@ public class _10021FriendsForLife extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -115,17 +111,14 @@ public class _10021FriendsForLife extends QuestHandler {
 							if (var == 4) {
 								if (player.isInGroup2()) {
 									return sendQuestDialog(env, 2546);
-								}
-								else {
+								} else {
 									if (giveQuestItem(env, 182206627, 1) && giveQuestItem(env, 182206628, 1)) {
 										WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 										InstanceService.registerPlayerWithInstance(newInstance, player);
-										TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f,
-											1098.236f, (byte) 30);
+										TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 										changeQuestStep(env, 4, 5, false); // 5
 										return closeDialogWindow(env);
-									}
-									else {
+									} else {
 										PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
 										return sendQuestSelectionDialog(env);
 									}
@@ -142,13 +135,11 @@ public class _10021FriendsForLife extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798927) { // Versetti
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -169,8 +160,7 @@ public class _10021FriendsForLife extends QuestHandler {
 				int var1 = qs.getQuestVarById(1);
 				if (var1 >= 0 && var1 < 9) {
 					return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1); // 1: 1 - 8
-				}
-				else if (var1 == 9) {
+				} else if (var1 == 9) {
 					qs.setQuestVar(4); // 4
 					updateQuestStatus(env);
 					return true;
@@ -193,18 +183,16 @@ public class _10021FriendsForLife extends QuestHandler {
 						changeQuestStep(env, 5, 6, false); // 6
 						return HandlerResult.SUCCESS; // TODO: Should not remove, but use the skill
 					}
-				}
-				else if (itemId == 182206628) {
+				} else if (itemId == 182206628) {
 					if (var == 6) {
 						int var2 = qs.getQuestVarById(2);
 						if (var2 >= 0 && var2 < 19) {
 							changeQuestStep(env, var2, var2 + 1, false, 2); // 2: 1 - 19
-							return  HandlerResult.SUCCESS;
-						}
-						else if (var2 == 19) {
+							return HandlerResult.SUCCESS;
+						} else if (var2 == 19) {
 							qs.setQuestVar(7); // 7
 							updateQuestStatus(env);
-							return  HandlerResult.SUCCESS;
+							return HandlerResult.SUCCESS;
 						}
 					}
 				}

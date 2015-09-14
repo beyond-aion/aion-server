@@ -77,8 +77,7 @@ public class TradeList {
 		requiredKinah = 0;
 
 		for (TradeItem tradeItem : tradeItems) {
-			requiredKinah += PricesService.getKinahForBuy(tradeItem.getItemTemplate().getPrice(), player.getRace())
-				* tradeItem.getCount() * modifier / 100;
+			requiredKinah += PricesService.getKinahForBuy(tradeItem.getItemTemplate().getPrice(), player.getRace()) * tradeItem.getCount() * modifier / 100;
 		}
 
 		return availableKinah >= requiredKinah;
@@ -97,14 +96,14 @@ public class TradeList {
 			Acquisition aquisition = tradeItem.getItemTemplate().getAcquisition();
 			if (aquisition == null)
 				continue;
-			
+
 			if (aquisition.getType().equals(AcquisitionType.AP) || aquisition.getType().equals(AcquisitionType.ABYSS))
-			   requiredAp += (int)((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
+				requiredAp += (int) ((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
 
 			int rewardItemId = aquisition.getItemId();
 			if (rewardItemId == 0) // no required item (medals, etc))
 				continue;
-			
+
 			long alreadyAddedCount = 0;
 			if (requiredItems.containsKey(rewardItemId))
 				alreadyAddedCount = requiredItems.get(rewardItemId);

@@ -42,14 +42,12 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 			if (qs == null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				} else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 					if (giveQuestItem(env, 182206711, 2))
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -104,13 +102,11 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

@@ -60,7 +60,8 @@ public class _29064FangOfConstruction extends QuestHandler {
 				case 204075:
 					switch (dialog) {
 						case QUEST_SELECT: {
-							if (var == 1 && player.getInventory().getItemCountByItemId(182213239) >= 1 && player.getInventory().getItemCountByItemId(186000085) >= 1) {
+							if (var == 1 && player.getInventory().getItemCountByItemId(182213239) >= 1
+								&& player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								return sendQuestDialog(env, 2375);
 							}
 						}
@@ -71,16 +72,14 @@ public class _29064FangOfConstruction extends QuestHandler {
 								return defaultCloseDialog(env, 1, 1, true, false);
 							}
 						}
-				  }
+					}
 					break;
-			 }
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204075) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

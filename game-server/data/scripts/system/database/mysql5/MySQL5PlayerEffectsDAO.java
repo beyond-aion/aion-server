@@ -34,6 +34,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `current_time`, `end_time` FROM `player_effects` WHERE `player_id`=?";
 
 	private static final Predicate<Effect> insertableEffectsPredicate = new Predicate<Effect>() {
+
 		@Override
 		public boolean apply(@Nullable Effect input) {
 			return input != null && input.getRemainingTime() > 28000 && !input.getSkillTemplate().isNoSaveOnLogout();
@@ -55,7 +56,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 					int skillId = rset.getInt("skill_id");
 					int skillLvl = rset.getInt("skill_lvl");
 					int remainingTime = rset.getInt("current_time");
-					long endTime = rset.getLong("end_time"); 
+					long endTime = rset.getLong("end_time");
 
 					if (remainingTime > 0)
 						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime);
@@ -72,7 +73,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 		Iterator<Effect> iterator = player.getEffectController().iterator();
 		iterator = Iterators.filter(iterator, insertableEffectsPredicate);
 
-		if(!iterator.hasNext()) {
+		if (!iterator.hasNext()) {
 			return;
 		}
 

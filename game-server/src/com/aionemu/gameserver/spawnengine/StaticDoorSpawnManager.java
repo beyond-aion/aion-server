@@ -67,8 +67,7 @@ public class StaticDoorSpawnManager {
 	private static void bringIntoWorld(VisibleObject visibleObject, SpawnTemplate spawn, int instanceIndex) {
 		World world = World.getInstance();
 		world.storeObject(visibleObject);
-		world.setPosition(visibleObject, spawn.getWorldId(), instanceIndex, spawn.getX(), spawn.getY(), spawn.getZ(),
-			spawn.getHeading());
+		world.setPosition(visibleObject, spawn.getWorldId(), instanceIndex, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
 		world.spawn(visibleObject);
 	}
 }

@@ -140,10 +140,8 @@ public class IdgelResearchCenterInstance extends GeneralInstanceHandler {
 		for (Player player : instance.getPlayersInside()) {
 			// TODO if needed
 			/*
-			float playerRate = player.getRates().getIdgelResearchCenterRewardRate();
-			switch (rank) {
-			}
-			*/
+			 * float playerRate = player.getRates().getIdgelResearchCenterRewardRate(); switch (rank) { }
+			 */
 			AbyssPointsService.addAp(player, instanceReward.getFinalAp());
 			ItemService.addItem(player, instanceReward.getRewardItem1(), instanceReward.getRewardItem1Count());
 			ItemService.addItem(player, instanceReward.getRewardItem2(), instanceReward.getRewardItem2Count());

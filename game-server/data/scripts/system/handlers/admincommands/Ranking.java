@@ -18,8 +18,7 @@ public class Ranking extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		if (params.length == 0) {
 			info(admin, null);
-		}
-		else if ("update".equalsIgnoreCase(params[0])) {
+		} else if ("update".equalsIgnoreCase(params[0])) {
 			AbyssRankUpdateService.getInstance().performUpdate();
 		}
 	}

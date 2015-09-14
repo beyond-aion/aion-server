@@ -21,11 +21,11 @@ public class ThinkEventHandler {
 		if (npcAI.isLogging()) {
 			AI2Logger.info(npcAI, "think");
 		}
-		if(npcAI.isAlreadyDead()){
+		if (npcAI.isAlreadyDead()) {
 			AI2Logger.info(npcAI, "can't think in dead state");
 			return;
 		}
-		if(!npcAI.tryLockThink()){
+		if (!npcAI.tryLockThink()) {
 			AI2Logger.info(npcAI, "can't acquire lock");
 			return;
 		}
@@ -48,8 +48,7 @@ public class ThinkEventHandler {
 					thinkIdle(npcAI);
 					break;
 			}
-		}
-		finally {
+		} finally {
 			npcAI.unlockThink();
 		}
 	}
@@ -86,8 +85,7 @@ public class ThinkEventHandler {
 		Creature mostHated = npc.getAggroList().getMostHated();
 		if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead()) {
 			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
-		}
-		else {
+		} else {
 			npc.getMoveController().recallPreviousStep();
 			npcAI.onGeneralEvent(AIEventType.ATTACK_FINISH);
 			npcAI.onGeneralEvent(npc.isAtSpawnLocation() ? AIEventType.BACK_HOME : AIEventType.NOT_AT_HOME);

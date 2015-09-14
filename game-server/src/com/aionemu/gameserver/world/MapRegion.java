@@ -160,8 +160,7 @@ public class MapRegion {
 		if (objects.put(object.getObjectId(), object) == null) {
 			if (object instanceof Player) {
 				checkActiveness(playerCount.incrementAndGet() > 0);
-			}
-			else if (DeveloperConfig.SPAWN_CHECK) {
+			} else if (DeveloperConfig.SPAWN_CHECK) {
 				Iterator<TreeSet<ZoneInstance>> zoneIter = zoneMap.values().iterator();
 				while (zoneIter.hasNext()) {
 					TreeSet<ZoneInstance> zones = zoneIter.next();
@@ -192,8 +191,7 @@ public class MapRegion {
 	final void checkActiveness(boolean active) {
 		if (active && regionActive.compareAndSet(false, true)) {
 			startActivation();
-		}
-		else if (!active) {
+		} else if (!active) {
 			startDeactivation();
 		}
 	}
@@ -256,8 +254,8 @@ public class MapRegion {
 	 */
 	private void deactivateObjects() {
 		for (VisibleObject visObject : objects.values()) {
-			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc)
-				&& !((Creature) visObject).isFlag() && !((Creature) visObject).isRaidMonster()) {
+			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
+				&& !((Creature) visObject).isRaidMonster()) {
 				Creature creature = (Creature) visObject;
 				creature.getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
@@ -351,8 +349,7 @@ public class MapRegion {
 	}
 
 	/**
-	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item
-	 * use.
+	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item use.
 	 * 
 	 * @param zoneName
 	 * @param creature

@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * @author lord_rex, Cura, nrg
  */
 public class PunishmentService {
-	
+
 	/**
 	 * This method will handle unbanning a character
 	 * 
@@ -34,7 +34,7 @@ public class PunishmentService {
 	public static void unbanChar(int playerId) {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(playerId, PunishmentType.CHARBAN);
 	}
-	
+
 	/**
 	 * This method will handle banning a character
 	 * 
@@ -44,13 +44,13 @@ public class PunishmentService {
 	 */
 	public static void banChar(int playerId, int dayCount, String reason) {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
-		
-		//if player is online - kick him
+
+		// if player is online - kick him
 		Player player = World.getInstance().findPlayer(playerId);
-		if(player != null)
-		  player.getClientConnection().close(new SM_QUIT_RESPONSE());
+		if (player != null)
+			player.getClientConnection().close(new SM_QUIT_RESPONSE());
 	}
-	
+
 	/**
 	 * Calculates the timestamp when a given number of days is over
 	 * 
@@ -58,9 +58,9 @@ public class PunishmentService {
 	 * @return timeStamp
 	 */
 	public static long calculateDuration(int dayCount) {
-		if(dayCount == 0)
-			return Integer.MAX_VALUE; //int because client handles this with seconds timestamp in int
-		
+		if (dayCount == 0)
+			return Integer.MAX_VALUE; // int because client handles this with seconds timestamp in int
+
 		DateTime dateTime = new DateTime().plusDays(dayCount);
 		return (dateTime.getMillis() - System.currentTimeMillis()) / 1000;
 	}
@@ -82,20 +82,19 @@ public class PunishmentService {
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
 			}
-			
+
 			if (GSConfig.ENABLE_CHAT_SERVER)
 				ChatServer.getInstance().sendPlayerLogout(player);
 
 			player.setStartPrison(System.currentTimeMillis());
 			TeleportService2.teleportToPrison(player);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "You come out of prison.");
-			
+
 			if (GSConfig.ENABLE_CHAT_SERVER)
 				PacketSendUtility.sendMessage(player, "To use global chats again relog!");
-				
+
 			player.setPrisonTimer(0);
 
 			TeleportService2.moveToBindLocation(player, true);
@@ -137,12 +136,11 @@ public class PunishmentService {
 				if (timeInPrison <= 0)
 					timeInPrison = 1;
 
-				PacketSendUtility.sendMessage(player, "You are still in prison for " + timeInPrison + " minute"
-					+ (timeInPrison > 1 ? "s" : "") + ".");
+				PacketSendUtility.sendMessage(player, "You are still in prison for " + timeInPrison + " minute" + (timeInPrison > 1 ? "s" : "") + ".");
 
 				player.setStartPrison(System.currentTimeMillis());
 			}
-			
+
 			if (player.getWorldId() != WorldMapType.DF_PRISON.getId() && player.getWorldId() != WorldMapType.DE_PRISON.getId()) {
 				PacketSendUtility.sendMessage(player, "You will be teleported to prison in one minute!");
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -152,7 +150,7 @@ public class PunishmentService {
 						TeleportService2.teleportToPrison(player);
 					}
 				}, 60000);
-			}				
+			}
 		}
 	}
 
@@ -188,8 +186,7 @@ public class PunishmentService {
 		if (state) {
 			if (captchaCount < 3) {
 				PacketSendUtility.sendPacket(player, new SM_CAPTCHA(captchaCount + 1, player.getCaptchaImage()));
-			}
-			else {
+			} else {
 				player.setCaptchaWord(null);
 				player.setCaptchaImage(null);
 			}
@@ -198,8 +195,7 @@ public class PunishmentService {
 			player.setStopGatherable(System.currentTimeMillis());
 			scheduleGatherableTask(player, delay);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400269));
 			player.setCaptchaWord(null);
 			player.setCaptchaImage(null);

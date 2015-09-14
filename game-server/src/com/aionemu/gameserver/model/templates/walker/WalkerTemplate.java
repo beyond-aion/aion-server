@@ -86,15 +86,13 @@ public class WalkerTemplate {
 			formation = WalkerGroupType.SQUARE;
 			rows = new int[1];
 			rows[0] = 2;
-		}
-		else if (formation == WalkerGroupType.SQUARE) {
+		} else if (formation == WalkerGroupType.SQUARE) {
 			if (rowValues != null) {
 				String[] values = rowValues.split(",");
 				rows = new int[values.length];
 				for (int i = 0; i < values.length; i++)
 					rows[i] = Integer.parseInt(values[i]);
-			}
-			else {
+			} else {
 				formation = WalkerGroupType.POINT;
 			}
 		}

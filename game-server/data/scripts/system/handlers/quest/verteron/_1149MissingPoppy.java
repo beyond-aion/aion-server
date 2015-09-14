@@ -45,38 +45,31 @@ public class _1149MissingPoppy extends QuestHandler {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else if (targetId == 203191) { // Poppy
+		} else if (targetId == 203191) { // Poppy
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
 				if (env.getDialog() == DialogAction.QUEST_SELECT && var == 0) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 203145, 0, 1); // 1
 				}
 			}
 		}
 		return false;
 	}
-	
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

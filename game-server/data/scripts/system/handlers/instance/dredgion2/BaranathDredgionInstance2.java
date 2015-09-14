@@ -12,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @InstanceID(300110000)
@@ -22,7 +21,7 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 	public void onEnterInstance(Player player) {
 		if (isInstanceStarted.compareAndSet(false, true)) {
 			if (Rnd.get(1, 100) < 51) {
-				switch(Rnd.get(2)) {
+				switch (Rnd.get(2)) {
 					case 0:
 						spawn(215093, 416.3429f, 282.32785f, 409.7311f, (byte) 80);
 						break;
@@ -35,12 +34,13 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 		}
 		super.onEnterInstance(player);
 	}
-	
+
 	private void onDieSurkan(Npc npc, Player mostPlayerDamage, int points) {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 700498);
 		for (Player player : instance.getPlayersInside()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481), new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481),
+				new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
 		}
 		if (++surkanKills == 5) {
 			spawn(214823, 485.423f, 808.826f, 416.868f, (byte) 30);
@@ -89,8 +89,7 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 				stopInstance(race);
 				if (race == Race.ELYOS) {
 					sendMsgByRace(1400230, Race.ELYOS, 0);
-				}
-				else {
+				} else {
 					sendMsgByRace(1400231, Race.ASMODIANS, 0);
 				}
 				return;

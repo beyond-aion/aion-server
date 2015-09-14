@@ -11,24 +11,23 @@ import com.aionemu.gameserver.services.MercenariesService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author ViAl
  * @modified Whoop
  */
 @AIName("mercenary")
 public class MercenaryAI2 extends NpcAI2 {
-	
+
 	@Override
 	protected void handleDialogStart(Player player) {
-		if(!player.isLegionMember()) {
+		if (!player.isLegionMember()) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
 		SiegeNpc owner = (SiegeNpc) getOwner();
 		int siegeId = owner.getSiegeId();
 		FortressLocation location = SiegeService.getInstance().getFortress(siegeId);
-		if(location.getLegionId() != player.getLegion().getLegionId()) {
+		if (location.getLegionId() != player.getLegion().getLegionId()) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
@@ -202,5 +201,5 @@ public class MercenaryAI2 extends NpcAI2 {
 				break;
 		}
 		return true;
-	}	
+	}
 }

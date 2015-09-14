@@ -71,8 +71,7 @@ public class _20060TheFourHearts extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			}
-			else if (targetId == 800020) { // Garnon 800081
+			} else if (targetId == 800020) { // Garnon 800081
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -85,8 +84,8 @@ public class _20060TheFourHearts extends QuestHandler {
 					}
 					case SETPRO3: {
 						closeDialogWindow(env);
-						Npc garnonGray = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800081,
-							442.279f, 464.349f, 341.520f, (byte) 20);
+						Npc garnonGray = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800081, 442.279f, 464.349f, 341.520f,
+							(byte) 20);
 						QuestService.questTimerStart(env, 30);
 						spawnAndAttack(player, garnonGray);
 						changeQuestStep(env, 2, 3, false); // 3
@@ -100,13 +99,11 @@ public class _20060TheFourHearts extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800020) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -140,16 +137,11 @@ public class _20060TheFourHearts extends QuestHandler {
 	}
 
 	private void spawnAndAttack(Player player, Npc target) {
-		Npc spawn1 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.845f, 471.380f,
-			341.728f, (byte) 0);
-		Npc spawn2 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218765, 455.157f, 470.027f,
-			341.647f, (byte) 0);
-		Npc spawn3 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.616f, 470.859f,
-			341.647f, (byte) 0);
-		Npc spawn4 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.415f, 471.770f,
-			341.686f, (byte) 0);
-		Npc spawn5 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.273f, 470.475f,
-			341.568f, (byte) 0);
+		Npc spawn1 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.845f, 471.380f, 341.728f, (byte) 0);
+		Npc spawn2 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218765, 455.157f, 470.027f, 341.647f, (byte) 0);
+		Npc spawn3 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.616f, 470.859f, 341.647f, (byte) 0);
+		Npc spawn4 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.415f, 471.770f, 341.686f, (byte) 0);
+		Npc spawn5 = (Npc) QuestService.spawnQuestNpc(600030000, player.getInstanceId(), 218825, 454.273f, 470.475f, 341.568f, (byte) 0);
 		spawn1.getAggroList().addHate(target, 1);
 		spawn2.getAggroList().addHate(target, 1);
 		spawn3.getAggroList().addHate(target, 1);
@@ -170,8 +162,7 @@ public class _20060TheFourHearts extends QuestHandler {
 				for (Npc npc : npcs) {
 					if (npc.getNpcId() == 800081) {
 						target1 = npc;
-					}
-					else if (npc.getNpcId() == 800020) {
+					} else if (npc.getNpcId() == 800020) {
 						target2 = npc;
 					}
 					if (target1 != null && target2 != null) {
@@ -196,8 +187,7 @@ public class _20060TheFourHearts extends QuestHandler {
 		if (defaultOnLvlUpEvent(env)) {
 			int[] ids = { 20061, 20062, 20063, 20064, 20065 };
 			for (int id : ids) {
-				QuestEngine.getInstance().onEnterZoneMissionEnd(
-					new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+				QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
 			}
 			return true;
 		}

@@ -45,8 +45,7 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203740: { // Erdos
@@ -69,15 +68,13 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 							if (var == 1 && player.getInventory().tryDecreaseKinah(40000)) {
 								changeQuestStep(env, 1, 1, true); // reward
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 2716);
 						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 1, 1);
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798384) { // Flora
 				return sendQuestEndDialog(env);
 			}

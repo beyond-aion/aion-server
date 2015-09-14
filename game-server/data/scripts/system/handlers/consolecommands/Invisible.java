@@ -30,8 +30,7 @@ public class Invisible extends ConsoleCommand {
 			if (SecurityConfig.INVIS) {
 				PlayerVisualStateService.hideValidate(admin);
 			}
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(admin, "You are invisible.");
 		}
 	}

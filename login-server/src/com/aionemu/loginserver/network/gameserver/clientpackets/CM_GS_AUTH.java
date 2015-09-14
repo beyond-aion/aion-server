@@ -85,15 +85,17 @@ public class CM_GS_AUTH extends GsClientPacket {
 		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, defaultAddress, ipRanges, port, maxPlayers, password);
 		switch (resp) {
 			case AUTHED:
-				log.info("Gameserver #"+gameServerId+" is now online.");
+				log.info("Gameserver #" + gameServerId + " is now online.");
 				client.setState(State.AUTHED);
 				client.sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 					@Override
 					public void run() {
 						client.sendPacket(new SM_MACBAN_LIST());
 						client.sendPacket(new SM_HDDBAN_LIST());
-					}}, 500);
+					}
+				}, 500);
 				break;
 			default:
 				client.close(new SM_GS_AUTH_RESPONSE(resp));

@@ -22,8 +22,7 @@ public enum CreatureState {
 	GLIDING(1 << 9); // 512
 
 	/**
-	 * Standing, path flying, free flying, riding, sitting, sitting on chair, dead, fly dead, private shop, looting, fly
-	 * looting, default
+	 * Standing, path flying, free flying, riding, sitting, sitting on chair, dead, fly dead, private shop, looting, fly looting, default
 	 */
 
 	private int id;

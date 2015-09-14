@@ -13,12 +13,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.templates.cosmeticitems.CosmeticItemTemplate;
 
 /**
- *
  * @author xTz
  */
 @XmlRootElement(name = "cosmetic_items")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CosmeticItemsData {
+
 	@XmlElement(name = "cosmetic_item", type = CosmeticItemTemplate.class)
 	private List<CosmeticItemTemplate> templates;
 	private final Map<String, CosmeticItemTemplate> cosmeticItemTemplates = new ConcurrentHashMap<>();

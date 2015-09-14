@@ -57,6 +57,7 @@ public abstract class StatsTemplate {
 	public void setMaxMp(int maxMp) {
 		this.maxMp = maxMp;
 	}
+
 	/* ======================================= */
 
 	public float getWalkSpeed() {

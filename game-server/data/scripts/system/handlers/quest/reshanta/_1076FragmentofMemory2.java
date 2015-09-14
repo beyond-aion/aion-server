@@ -16,7 +16,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 public class _1076FragmentofMemory2 extends QuestHandler {
 
 	private final static int questId = 1076;
-	private final static int[] npc_ids = {278500, 203834, 203786, 203754, 203704};
+	private final static int[] npc_ids = { 278500, 203834, 203786, 203754, 203704 };
 
 	public _1076FragmentofMemory2() {
 		super(questId);
@@ -62,8 +62,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278500) {
@@ -78,8 +77,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 203834) {
+		} else if (targetId == 203834) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -108,8 +106,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 			}
-		}
-		else if (targetId == 203786) {
+		} else if (targetId == 203786) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -117,8 +114,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 				case CHECK_USER_HAS_QUEST_ITEM:
 					return checkQuestItems(env, 2, 3, false, 10000, 10001, 182202006, 1);
 			}
-		}
-		else if (targetId == 203754) {
+		} else if (targetId == 203754) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)

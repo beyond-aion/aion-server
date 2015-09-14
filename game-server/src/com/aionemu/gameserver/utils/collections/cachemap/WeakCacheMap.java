@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This class is a simple map implementation for cache usage.<br>
  * <br>
- * Values from the map will be removed after the first garbage collector run if there isn't any strong reference to the
- * value object.
+ * Values from the map will be removed after the first garbage collector run if there isn't any strong reference to the value object.
  * 
  * @author Luno
  */

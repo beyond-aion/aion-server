@@ -8,6 +8,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
  * @author -Nemesiss-
  */
 public class CM_VERSION_CHECK extends AionClientPacket {
+
 	/**
 	 * Aion Client version
 	 */
@@ -20,6 +21,7 @@ public class CM_VERSION_CHECK extends AionClientPacket {
 	private int windowsVersion;
 	@SuppressWarnings("unused")
 	private int windowsSubVersion;
+
 	/**
 	 * Constructs new instance of <tt>CM_VERSION_CHECK </tt> packet
 	 * 
@@ -39,7 +41,7 @@ public class CM_VERSION_CHECK extends AionClientPacket {
 		windowsEncoding = readD();
 		windowsVersion = readD();
 		windowsSubVersion = readD();
-		readC();//always 2?
+		readC();// always 2?
 	}
 
 	/**

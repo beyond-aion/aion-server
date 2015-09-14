@@ -3,9 +3,8 @@ package com.aionemu.commons.scripting;
 import java.io.File;
 
 /**
- * This interface reperesents common functionality list that should be available for any commpiler that is going to be
- * used with scripting engine. For instance, groovy can be used, hoever it produces by far not the best bytecode so by
- * default javac from sun is used.
+ * This interface reperesents common functionality list that should be available for any commpiler that is going to be used with scripting engine. For
+ * instance, groovy can be used, hoever it produces by far not the best bytecode so by default javac from sun is used.
  * 
  * @author SoulKeeper
  */

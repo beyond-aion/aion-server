@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30713JustATest extends QuestHandler {
 
@@ -35,41 +33,34 @@ public class _30713JustATest extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205892) { 
+			if (targetId == 205892) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182213264, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 730701) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 730701) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					giveQuestItem(env, 182213265, 1);
 					removeQuestItem(env, 182213264, 1);
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 205987) { 
+			} else if (targetId == 205987) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 182213265, 1);
 					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
-		}	
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205987) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -84,4 +75,3 @@ public class _30713JustATest extends QuestHandler {
 		return false;
 	}
 }
-

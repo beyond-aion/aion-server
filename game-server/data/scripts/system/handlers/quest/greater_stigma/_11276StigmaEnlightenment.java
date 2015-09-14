@@ -42,8 +42,7 @@ public class _11276StigmaEnlightenment extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798909) { // Reemul
 				switch (dialog) {
@@ -57,8 +56,7 @@ public class _11276StigmaEnlightenment extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798909) { // Reemul
 				switch (dialog) {
 					case SELECT_QUEST_REWARD: {

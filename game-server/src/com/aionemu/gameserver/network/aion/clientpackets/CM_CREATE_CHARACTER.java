@@ -44,6 +44,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 	private PlayerCommonData playerCommonData;
 	private int type;
 	private String characterName;
+
 	/**
 	 * Constructs new instance of <tt>CM_CREATE_CHARACTER </tt> packet
 	 * 
@@ -63,7 +64,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 
 		characterName = Util.convertName(readS(52));
 
-		if(characterName.equals("B")){
+		if (characterName.equals("B")) {
 			return;
 		}
 
@@ -160,14 +161,15 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 		AionConnection client = getConnection();
 		Account account = client.getAccount();
 
-		if(characterName.equals("B")){
+		if (characterName.equals("B")) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_OPEN_CREATION_WINDOW));
 			return;
 		}
 
-		if(account.isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CREATE_CHARACTERS) {
+		if (account.isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CREATE_CHARACTERS) {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			client.sendPacket(new SM_MESSAGE(0, null, "Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
+			client.sendPacket(new SM_MESSAGE(0, null,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
 			return;
 		}
 
@@ -185,8 +187,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 				IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 				return;
 			}
-		}
-		else if (GSConfig.CHARACTER_LIMIT_COUNT <= account.size()) {
+		} else if (GSConfig.CHARACTER_LIMIT_COUNT <= account.size()) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_SERVER_LIMIT_EXCEEDED));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 			return;
@@ -234,8 +235,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 		if (!PlayerService.storeNewPlayer(player, account.getName(), account.getId())) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
-		}
-		else {
+		} else {
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player.getObjectId());
 			PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, null, playerAppearance, equipment, null);
 

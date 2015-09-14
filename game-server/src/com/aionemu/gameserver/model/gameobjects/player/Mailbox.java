@@ -172,8 +172,7 @@ public class Mailbox {
 				if (haveFreeSlots()) {
 					mails.put(letter.getObjectId(), letter);
 					reserveMail.remove(letter.getObjectId());
-				}
-				else
+				} else
 					break;
 			}
 			MailService.getInstance().refreshMail(getOwner());

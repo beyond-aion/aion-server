@@ -9,7 +9,7 @@ import com.aionemu.commons.network.packet.BaseClientPacket;
  * Base class for every GameServer -> LS Client Packet
  * 
  * @author -Nemesiss-
- */ 
+ */
 public abstract class GsClientPacket extends BaseClientPacket<GsConnection> {
 
 	public GsClientPacket() {
@@ -28,15 +28,13 @@ public abstract class GsClientPacket extends BaseClientPacket<GsConnection> {
 	public final void run() {
 		try {
 			runImpl();
-		}
-		catch (Throwable e) {
+		} catch (Throwable e) {
 			log.warn("error handling gs (" + getConnection().getIP() + ") message " + this, e);
 		}
 	}
 
 	/**
-	 * Send new GsServerPacket to connection that is owner of this packet. This method is equivalent to:
-	 * getConnection().sendPacket(msg);
+	 * Send new GsServerPacket to connection that is owner of this packet. This method is equivalent to: getConnection().sendPacket(msg);
 	 * 
 	 * @param msg
 	 */

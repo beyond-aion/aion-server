@@ -15,22 +15,22 @@ public class HouseSpawn {
 
 	@XmlAttribute(name = "x", required = true)
 	protected float x;
-	
+
 	@XmlAttribute(name = "y", required = true)
 	protected float y;
-	
+
 	@XmlAttribute(name = "z", required = true)
 	protected float z;
 
 	@XmlAttribute(name = "h")
 	protected Byte h;
-	
+
 	@XmlAttribute(name = "static_id")
 	private int staticId;
-	
+
 	@XmlAttribute(name = "type", required = true)
 	protected SpawnType type;
-	
+
 	public float getX() {
 		return x;
 	}

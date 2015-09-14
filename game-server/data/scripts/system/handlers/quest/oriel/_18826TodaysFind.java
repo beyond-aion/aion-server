@@ -7,13 +7,11 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _18826TodaysFind extends QuestHandler {
-	
+
 	private static final int questId = 18826;
 
 	public _18826TodaysFind() {
@@ -40,13 +38,12 @@ public class _18826TodaysFind extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 830520 || targetId == 830660 || targetId == 830661) {
-				if (dialog == DialogAction.QUEST_SELECT) 
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else 
+				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730522) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -58,9 +55,8 @@ public class _18826TodaysFind extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 730522) {
-				return sendQuestEndDialog(env);
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 730522) {
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

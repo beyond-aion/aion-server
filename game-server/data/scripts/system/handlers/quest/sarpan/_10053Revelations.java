@@ -91,10 +91,8 @@ public class _10053Revelations extends QuestHandler {
 				}
 				case 730493: { // Protector's Seal
 					switch (dialog) {
-						case USE_OBJECT: 
-						{
-							if (var == 2) 
-							{
+						case USE_OBJECT: {
+							if (var == 2) {
 								changeQuestStep(env, 2, 3, false); // 3
 								QuestService.questTimerStart(env, 180); // 3 minutes
 								spawn(player);
@@ -109,21 +107,16 @@ public class _10053Revelations extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 5) 
-							{
+							} else if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
-						case CHECK_USER_HAS_QUEST_ITEM: 
-						{
-							if (QuestService.collectItemCheck(env, true))
-							{
-								changeQuestStep(env, 5,5, true);
+						case CHECK_USER_HAS_QUEST_ITEM: {
+							if (QuestService.collectItemCheck(env, true)) {
+								changeQuestStep(env, 5, 5, true);
 								playQuestMovie(env, 709);
 								return sendQuestDialog(env, 10000);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 						}
 						case SETPRO5: {
@@ -136,13 +129,11 @@ public class _10053Revelations extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205535) { // Killios
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -157,19 +148,15 @@ public class _10053Revelations extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (player.getWorldId() == 300330000) {
-				if (var == 1)
-				{
+				if (var == 1) {
 					changeQuestStep(env, 1, 2, false); // 2
-					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.348f, 245.210f, 126.270f, (byte) 60); //Protector's seal
+					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 730493, 250.348f, 245.210f, 126.270f, (byte) 60); // Protector's seal
 					return true;
-				}
-				else if (var == 5)
-				{
+				} else if (var == 5) {
 					QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.210f, 126.270f, (byte) 60);
 					return true;
 				}
-			}
-			else {
+			} else {
 				if (var >= 2 && var < 5) {
 					changeQuestStep(env, var, 1, false); // 1
 					return true;
@@ -180,19 +167,15 @@ public class _10053Revelations extends QuestHandler {
 	}
 
 	@Override
-	public boolean onAttackEvent(QuestEnv env) 
-	{
+	public boolean onAttackEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START)
-		{
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			int targetId = env.getTargetId();
-			if (targetId == 218890 && var == 3) 
-			{
+			if (targetId == 218890 && var == 3) {
 				changeQuestStep(env, 3, 4, false); // 4
-				for (Npc npcInside : player.getPosition().getWorldMapInstance().getNpcs()) 
-				{
+				for (Npc npcInside : player.getPosition().getWorldMapInstance().getNpcs()) {
 					NpcActions.delete(npcInside);
 				}
 				QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 205795, 250.331f, 245.210f, 126.270f, (byte) 60);
@@ -214,8 +197,7 @@ public class _10053Revelations extends QuestHandler {
 					changeQuestStep(env, 1, 2, false); // 2
 					return true;
 				}
-			}
-			else {
+			} else {
 				if (var >= 2 && var < 4) {
 					changeQuestStep(env, var, 1, false); // 1
 					return true;
@@ -233,8 +215,7 @@ public class _10053Revelations extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
 				int targetId = env.getTargetId();
-				if (mobs.contains(targetId))
-				{
+				if (mobs.contains(targetId)) {
 					spawn(player);
 					return true;
 				}
@@ -244,15 +225,12 @@ public class _10053Revelations extends QuestHandler {
 	}
 
 	@Override
-	public boolean onQuestTimerEndEvent(QuestEnv env)
-	{
+	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) 
-		{
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (var == 3) 
-			{
+			if (var == 3) {
 				spawnHesibanata(player);
 			}
 		}
@@ -300,8 +278,7 @@ public class _10053Revelations extends QuestHandler {
 	}
 
 	private void spawnHesibanata(Player player) {
-		Npc spawn = (Npc) QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 218890, 250.970f, 221.711f, 124.942f,
-			(byte) 0);
+		Npc spawn = (Npc) QuestService.spawnQuestNpc(300330000, player.getInstanceId(), 218890, 250.970f, 221.711f, 124.942f, (byte) 0);
 		spawn.getAggroList().addHate(player, 1);
 	}
 }

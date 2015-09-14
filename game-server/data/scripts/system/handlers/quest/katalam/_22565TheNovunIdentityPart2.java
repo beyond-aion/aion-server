@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author cheatkiller
- *
  */
 public class _22565TheNovunIdentityPart2 extends QuestHandler {
 
@@ -35,36 +33,30 @@ public class _22565TheNovunIdentityPart2 extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 801004) { 
+			if (targetId == 801004) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 800988) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 800988) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 730784) { 
+			} else if (targetId == 730784) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					giveQuestItem(env, 182213364, 1);
 					qs.setQuestVar(2);
 					return defaultCloseDialog(env, 2, 2, true, false);
 				}
 			}
-		}	
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800988) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -80,4 +72,3 @@ public class _22565TheNovunIdentityPart2 extends QuestHandler {
 		return false;
 	}
 }
-

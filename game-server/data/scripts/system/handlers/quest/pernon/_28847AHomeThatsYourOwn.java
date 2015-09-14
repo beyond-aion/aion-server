@@ -7,39 +7,32 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
-public class _28847AHomeThatsYourOwn extends QuestHandler  {
+public class _28847AHomeThatsYourOwn extends QuestHandler {
 
 	private static final int questId = 28847;
 
-	public _28847AHomeThatsYourOwn()
-	{
+	public _28847AHomeThatsYourOwn() {
 		super(questId);
 	}
 
 	@Override
-	public void register() 
-	{
+	public void register() {
 		qe.registerQuestNpc(830390).addOnQuestStart(questId);
 		qe.registerQuestNpc(830390).addOnTalkEvent(questId);
 	}
-	
+
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
-		if(qs == null || qs.getStatus() == QuestStatus.NONE)
-		{
-			if (targetId == 830390) 
-			{
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 830390) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
@@ -49,10 +42,8 @@ public class _28847AHomeThatsYourOwn extends QuestHandler  {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START)
-		{
-			if(targetId == 830390){
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 830390) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1003);
@@ -63,11 +54,8 @@ public class _28847AHomeThatsYourOwn extends QuestHandler  {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) 
-		{
-			if (targetId == 830390)
-			{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 830390) {
 				return sendQuestEndDialog(env);
 			}
 		}

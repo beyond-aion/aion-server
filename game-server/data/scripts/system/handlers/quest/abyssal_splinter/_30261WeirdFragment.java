@@ -37,8 +37,7 @@ public class _30261WeirdFragment extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 278533: { // Rentia
@@ -69,8 +68,7 @@ public class _30261WeirdFragment extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 260264) { // Aratus
 				return sendQuestEndDialog(env);
 			}
@@ -84,7 +82,7 @@ public class _30261WeirdFragment extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			return HandlerResult.fromBoolean(QuestService.startQuest(env));
-    }
+		}
 		return HandlerResult.FAILED;
 	}
 }

@@ -148,8 +148,7 @@ public class SM_PET extends AionServerPacket {
 							writeQ(0);
 							writeQ(0);
 							writeQ(0);
-						}
-						else {
+						} else {
 							writeD(scrollBag[0]); // Scroll 1
 							writeD(scrollBag.length > 1 ? scrollBag[1] : 0); // Scroll 2
 							writeD(scrollBag.length > 2 ? scrollBag[2] : 0); // Scroll 3 - no pet supports it yet
@@ -170,8 +169,7 @@ public class SM_PET extends AionServerPacket {
 					if (specialtyCount == 0) {
 						writeH(PetFunctionType.NONE.getId());
 						writeH(PetFunctionType.NONE.getId());
-					}
-					else if (specialtyCount == 1) {
+					} else if (specialtyCount == 1) {
 						writeH(PetFunctionType.NONE.getId());
 					}
 
@@ -224,8 +222,7 @@ public class SM_PET extends AionServerPacket {
 				if (specialtyCount == 0) {
 					writeH(PetFunctionType.NONE.getId());
 					writeH(PetFunctionType.NONE.getId());
-				}
-				else if (specialtyCount == 1) {
+				} else if (specialtyCount == 1) {
 					writeH(PetFunctionType.NONE.getId());
 				}
 
@@ -262,8 +259,7 @@ public class SM_PET extends AionServerPacket {
 					writeF(pet.getMaster().getZ());
 
 					writeC(pet.getMaster().getHeading());
-				}
-				else {
+				} else {
 					writeF(pet.getPosition().getX());
 					writeF(pet.getPosition().getY());
 					writeF(pet.getPosition().getZ());
@@ -387,14 +383,12 @@ public class SM_PET extends AionServerPacket {
 							writeD(itemObjectId);
 							break;
 					}
-				}
-				else if (subType == 3) {
+				} else if (subType == 3) {
 					// looting NPC
 					if (lootNpcObjId > 0) {
 						writeC(isActing ? 1 : 2); // 0x02 display looted msg.
 						writeD(lootNpcObjId);
-					}
-					else {
+					} else {
 						// loot function activation
 						writeC(0);
 						writeC(isActing ? 1 : 0);

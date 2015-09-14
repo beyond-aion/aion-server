@@ -66,8 +66,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 			if (inAllItems != null)
 				for (IGItem item : inAllItems)
 					writeD(item.getObjectId());
-		}
-		else {
+		} else {
 			FastTable<Integer> salesRankingItems = InGameShopEn.getInstance().getTopSales(subCategory, category);
 			writeD(salesRanking);
 			writeD(nrList);
@@ -75,7 +74,6 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 			writeH(salesRankingItems.size());
 			for (int id : salesRankingItems)
 				writeD(id);
-
 
 		}
 	}

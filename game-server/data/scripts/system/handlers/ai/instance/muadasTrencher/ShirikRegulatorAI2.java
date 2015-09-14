@@ -10,7 +10,6 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("shirik_regulator")

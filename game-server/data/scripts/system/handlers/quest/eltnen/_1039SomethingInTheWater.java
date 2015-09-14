@@ -55,11 +55,9 @@ public class _1039SomethingInTheWater extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 4 && var1 == 3 && var2 == 3) {
+							} else if (var == 4 && var1 == 3 && var2 == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -86,15 +84,14 @@ public class _1039SomethingInTheWater extends QuestHandler {
 						}
 						case SETPRO2: {
 							defaultCloseDialog(env, 2, 3, 0, 0, 182201010, 1); // 3
-							TeleportService2.teleportTo(player, 210020000, 1910.61f, 2020.29f, 361.48f, (byte)85, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210020000, 1910.61f, 2020.29f, 361.48f, (byte) 85, TeleportAnimation.BEAM_ANIMATION);
 							return true;
 						}
 					}
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203946) { // Asclepius
 				return sendQuestEndDialog(env);
 			}

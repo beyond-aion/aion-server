@@ -124,14 +124,12 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			if (owner.isInState(CreatureState.FLYING)) {
 				movementSpeed = new AdditionStat(StatEnum.FLY_SPEED, runSpeed, owner);
 				movementSpeed.addToBonus((int) (ride.getFlySpeed() * 1000) - runSpeed);
-			}
-			else {
+			} else {
 				float speed = owner.isInSprintMode() ? ride.getSprintSpeed() : ride.getMoveSpeed();
 				movementSpeed = new AdditionStat(StatEnum.SPEED, runSpeed, owner);
 				movementSpeed.addToBonus((int) (speed * 1000) - runSpeed);
 			}
-		}
-		else if (owner.isInFlyingState())
+		} else if (owner.isInFlyingState())
 			movementSpeed = getStat(StatEnum.FLY_SPEED, Math.round(pst.getFlySpeed() * 1000));
 		else if (owner.isInState(CreatureState.FLIGHT_TELEPORT) && !owner.isInState(CreatureState.RESTING))
 			movementSpeed = getStat(StatEnum.SPEED, 12000);
@@ -139,8 +137,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			movementSpeed = getStat(StatEnum.SPEED, Math.round(pst.getWalkSpeed() * 1000));
 		else if (getAllSpeed().getBonus() != 0) {
 			movementSpeed = getStat(StatEnum.SPEED, getAllSpeed().getCurrent());
-		}
-		else
+		} else
 			movementSpeed = getStat(StatEnum.SPEED, Math.round(pst.getRunSpeed() * 1000));
 		return movementSpeed;
 	}

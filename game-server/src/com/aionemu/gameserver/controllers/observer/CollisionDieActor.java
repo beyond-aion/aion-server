@@ -15,11 +15,11 @@ import com.jme3.scene.Spatial;
 public class CollisionDieActor extends AbstractCollisionObserver implements IActor {
 
 	private boolean isEnabled = true;
-	
+
 	public CollisionDieActor(Creature creature, Spatial geometry) {
 		super(creature, geometry, CollisionIntention.MATERIAL.getId());
 	}
-	
+
 	@Override
 	public void setEnabled(boolean enable) {
 		isEnabled = enable;

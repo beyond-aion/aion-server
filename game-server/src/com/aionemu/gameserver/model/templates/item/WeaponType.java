@@ -13,7 +13,7 @@ public enum WeaponType {
 	MACE_1H(new int[] { 3, 10 }, 1),
 	SWORD_1H(new int[] { 1, 8 }, 1),
 	TOOLHOE_1H(new int[] {}, 1),
-	GUN_1H(new int[] {83, 76}, 1),
+	GUN_1H(new int[] { 83, 76 }, 1),
 	BOOK_2H(new int[] { 64 }, 2),
 	ORB_2H(new int[] { 64 }, 2),
 	POLEARM_2H(new int[] { 16 }, 2),
@@ -22,10 +22,10 @@ public enum WeaponType {
 	TOOLPICK_2H(new int[] {}, 2),
 	TOOLROD_2H(new int[] {}, 2),
 	BOW(new int[] { 17 }, 2),
-	CANNON_2H(new int[] {77}, 2),
-	HARP_2H(new int[] {92, 78}, 2),
+	CANNON_2H(new int[] { 77 }, 2),
+	HARP_2H(new int[] { 92, 78 }, 2),
 	GUN_2H(new int[] {}, 2),
-	KEYBLADE_2H(new int[] {76, 79}, 2),
+	KEYBLADE_2H(new int[] { 76, 79 }, 2),
 	KEYHAMMER_2H(new int[] {}, 2);
 
 	private int[] requiredSkill;

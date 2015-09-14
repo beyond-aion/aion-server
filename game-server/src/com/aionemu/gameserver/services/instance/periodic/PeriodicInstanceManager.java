@@ -48,8 +48,7 @@ public class PeriodicInstanceManager {
 		if (this.services.containsKey(maskId)) {
 			PeriodicInstance instance = this.services.get(maskId);
 			instance.showWindow(player);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
 		}
 	}

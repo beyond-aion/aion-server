@@ -6,8 +6,8 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
- * This blob entry is sent with ALL items. (unless partial blob is constructed, ie: sending equip slot only) It is the
- * first and only block for non-equipable items, and the last blob for EquipableItems
+ * This blob entry is sent with ALL items. (unless partial blob is constructed, ie: sending equip slot only) It is the first and only block for
+ * non-equipable items, and the last blob for EquipableItems
  * 
  * @author -Nemesiss-
  * @modified Rolandas
@@ -30,7 +30,7 @@ public class GeneralInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, item.getTemporaryExchangeTimeRemaining());
 		writeH(buf, 0);// TODO sealed
 		writeD(buf, 0);
-		writeH(buf, 18);//unk 4.7.5
+		writeH(buf, 18);// unk 4.7.5
 	}
 
 	@Override

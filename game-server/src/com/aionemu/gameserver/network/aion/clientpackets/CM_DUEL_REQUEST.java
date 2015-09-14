@@ -41,13 +41,13 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 		AionObject target = activePlayer.getKnownList().getObject(objectId);
 
-		if(!CustomConfig.INSTANCE_DUEL_ENABLE && activePlayer.isInInstance())
+		if (!CustomConfig.INSTANCE_DUEL_ENABLE && activePlayer.isInInstance())
 			return;
 
 		if (target == null)
 			return;
-		
-		if(activePlayer.getLifeStats().isAlreadyDead()) {
+
+		if (activePlayer.getLifeStats().isAlreadyDead()) {
 			return;
 		}
 
@@ -55,7 +55,7 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 			DuelService duelService = DuelService.getInstance();
 
 			Player targetPlayer = (Player) target;
-			
+
 			if (duelService.isDueling(activePlayer.getObjectId())) {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_YOU_ARE_IN_DUEL_ALREADY);
 				return;
@@ -68,14 +68,13 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_DUEL(targetPlayer.getName()));
 				return;
 			}
-			if(targetPlayer.getLifeStats().isAlreadyDead()) {
+			if (targetPlayer.getLifeStats().isAlreadyDead()) {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(target.getName()));
 				return;
 			}
 			duelService.onDuelRequest(activePlayer, targetPlayer);
 			duelService.confirmDuelWith(activePlayer, targetPlayer);
-		}
-		else {
+		} else {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(target.getName()));
 		}
 	}

@@ -16,14 +16,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropRaces")
 public class GlobalDropRaces {
 
-    @XmlElement(name = "gd_race")
-    protected List<GlobalDropRace> gdRaces;
+	@XmlElement(name = "gd_race")
+	protected List<GlobalDropRace> gdRaces;
 
-    public List<GlobalDropRace> getGlobalDropRaces() {
-        if (gdRaces == null) {
-            gdRaces = new ArrayList<GlobalDropRace>();
-        }
-        return this.gdRaces;
-    }
+	public List<GlobalDropRace> getGlobalDropRaces() {
+		if (gdRaces == null) {
+			gdRaces = new ArrayList<GlobalDropRace>();
+		}
+		return this.gdRaces;
+	}
 
 }

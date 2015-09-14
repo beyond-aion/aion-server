@@ -52,7 +52,7 @@ public class _4939ProvingGround extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Talk with Njord
+			// 1 - Talk with Njord
 				case 204055:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -91,8 +91,7 @@ public class _4939ProvingGround extends QuestHandler {
 								if (QuestService.collectItemCheck(env, true)) {
 									changeQuestStep(env, 3, 4, false);
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 						}
 					}
@@ -109,8 +108,7 @@ public class _4939ProvingGround extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
 								return defaultCloseDialog(env, 4, 4, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 2461);
 							}
 						}
@@ -122,14 +120,12 @@ public class _4939ProvingGround extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			// 6 - Take the Mark of Contribution to Kvasir
 			if (targetId == 204053) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

@@ -13,13 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NeedKinah {
 
-    @XmlAttribute(name = "count")
-    private int count;
+	@XmlAttribute(name = "count")
+	private int count;
 
-    /**
-     * @return the count
-     */
-    public int getCount() {
-        return count;
-    }
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		return count;
+	}
 }

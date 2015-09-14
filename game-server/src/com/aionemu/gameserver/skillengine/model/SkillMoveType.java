@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.skillengine.model;
 
-
 /**
  * @author MrPoke
- *
  */
 public enum SkillMoveType {
-	
+
 	DODGE(0),
 	RESIST(1),
 	DEFAULT(16),
@@ -16,7 +14,7 @@ public enum SkillMoveType {
 	MOVEBEHIND(48),
 	STAGGER(112),
 	UNK(54);
-	
+
 	private int id;
 
 	private SkillMoveType(int id) {

@@ -21,10 +21,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * Talk with Munin (790001). Find Fissure of Destiny (700551) that connects to Ataxiar (320140000)
- * and talk with Hagen (205020) (spawn). Proceed to Ataxiar aand annihilate the Guardian Legionarys (50): Legionary 
- * (798342, 798343, 798344, 798345), Vanquish Brigade General Hellion (1), Talk with Lephar (205118) (spawn). Report the
- * result to Vidar (204052).
+ * Talk with Munin (790001). Find Fissure of Destiny (700551) that connects to Ataxiar (320140000) and talk with Hagen (205020) (spawn). Proceed to
+ * Ataxiar aand annihilate the Guardian Legionarys (50): Legionary (798342, 798343, 798344, 798345), Vanquish Brigade General Hellion (1), Talk with
+ * Lephar (205118) (spawn). Report the result to Vidar (204052).
  * 
  * @author Bobobear
  */
@@ -102,9 +101,10 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 									@Override
 									public void run() {
-										changeQuestStep(env, 1, 2, false); 
+										changeQuestStep(env, 1, 2, false);
 									}
 								}, 43000);
 								return true;
@@ -120,14 +120,13 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							}
 						}
-						case SETPRO2: 
-						case SETPRO3: 
+						case SETPRO2:
+						case SETPRO3:
 							return defaultCloseDialog(env, 53, 53, true, false); // reward
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204052) { // Vidar
 				removeQuestItem(env, 182207093, 1);
 				removeQuestItem(env, 182207094, 1);
@@ -148,8 +147,7 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 				if (var == 51)
 					QuestService.addNewSpawn(320140000, player.getInstanceId(), 798346, 240f, 257f, 208.53946f, (byte) 68);
 				return defaultOnKillEvent(env, npcIds, 2, 52); // 2 - 52
-			}
-			else if (var == 52) {
+			} else if (var == 52) {
 				return defaultOnKillEvent(env, 798346, 52, 53); // 53
 			}
 		}
@@ -164,8 +162,8 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var > 1) {
 				changeQuestStep(env, var, 1, false); // 1
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -181,8 +179,8 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				if (var > 1) {
 					changeQuestStep(env, var, 1, false); // 1
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
 				}
 			}

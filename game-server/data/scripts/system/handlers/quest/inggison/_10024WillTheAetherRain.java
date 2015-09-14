@@ -53,14 +53,11 @@ public class _10024WillTheAetherRain extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
-							}
-							else if (var == 11) {
+							} else if (var == 11) {
 								return sendQuestDialog(env, 3654);
 							}
 						}
@@ -84,8 +81,7 @@ public class _10024WillTheAetherRain extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 3) {
+							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -116,8 +112,7 @@ public class _10024WillTheAetherRain extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
-							}
-							else if (var == 6) {
+							} else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -161,13 +156,11 @@ public class _10024WillTheAetherRain extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798970) { // Pomponia
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -184,9 +177,9 @@ public class _10024WillTheAetherRain extends QuestHandler {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 8, 9, false)); // 9
 			}
 		}
-		return  HandlerResult.FAILED;
+		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

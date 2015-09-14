@@ -7,14 +7,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Ritsu
- *
  */
-public class _28903KnockinOnSatrasGates extends QuestHandler{
+public class _28903KnockinOnSatrasGates extends QuestHandler {
 
-	private static final int questId=28903;
+	private static final int questId = 28903;
 
 	public _28903KnockinOnSatrasGates() {
 		super(questId);
@@ -29,30 +27,25 @@ public class _28903KnockinOnSatrasGates extends QuestHandler{
 	}
 
 	@Override
-	public boolean onKillEvent(QuestEnv env) 
-	{
+	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			switch (targetId)
-			{
-				case 219297:
-				{
+			switch (targetId) {
+				case 219297: {
 					int var = qs.getQuestVarById(0);
-					if (var == 0) 
-					{
+					if (var == 0) {
 						return defaultOnKillEvent(env, 219297, 0, 1, 0);
 					}
 				}
-				break;
-				case 219298:
-				{
+					break;
+				case 219298: {
 					int var = qs.getQuestVarById(1);
 					if (var == 0)
 						return defaultOnKillEvent(env, 219298, 0, 1, 1); // 2: 3
 				}
-				break;
+					break;
 			}
 		}
 		return false;
@@ -71,20 +64,17 @@ public class _28903KnockinOnSatrasGates extends QuestHandler{
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205865) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 1352);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205865) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 5);

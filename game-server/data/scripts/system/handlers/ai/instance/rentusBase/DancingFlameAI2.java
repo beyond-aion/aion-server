@@ -15,7 +15,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("dancing_flame")
@@ -30,14 +29,12 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					if (isPlayerInRange()) {
 						WorldPosition p = getPosition();
 						if (getNpcId() == 282996) {
 							spawn(282998, p.getX(), p.getY(), p.getZ(), p.getHeading());
-						}
-						else {
+						} else {
 							spawn(282999, p.getX(), p.getY(), p.getZ(), p.getHeading());
 						}
 					}
@@ -57,7 +54,7 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
 	}
 
 	private void cancelTask() {
-		if (task != null && !task.isDone())  {
+		if (task != null && !task.isDone()) {
 			task.cancel(true);
 		}
 	}
@@ -67,8 +64,7 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
 		super.handleSpawned();
 		if (getNpcId() == 282996 || getNpcId() == 282997) {
 			startTask();
-		}
-		else {
+		} else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override

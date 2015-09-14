@@ -39,9 +39,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- *
  * @author KID, xTz
- *
  */
 public class InGameShopEn {
 
@@ -126,8 +124,7 @@ public class InGameShopEn {
 			if (cnt <= max) {
 				top.add(objId);
 				cnt++;
-			}
-			else
+			} else
 				break;
 		}
 		map.clear();
@@ -172,7 +169,8 @@ public class InGameShopEn {
 		if (LoginServer.getInstance().sendPacket(new SM_PREMIUM_CONTROL(request, item.getItemPrice())))
 			activeRequests.put(request.requestId, request);
 		if (LoggingConfig.LOG_INGAMESHOP)
-			log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " is watching item:" + item.getItemId() + " cost " + item.getItemPrice() + " toll.");
+			log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " is watching item:"
+				+ item.getItemId() + " cost " + item.getItemPrice() + " toll.");
 	}
 
 	public void giftItemRequest(Player player, String receiver, String message, int itemObjId) {
@@ -217,12 +215,11 @@ public class InGameShopEn {
 			PacketSendUtility.sendMessage(player, "You received " + cnt + " Toll");
 			if (LoginServer.getInstance().sendPacket(new SM_PREMIUM_CONTROL(request, cnt * -1)))
 				activeRequests.put(request.requestId, request);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendMessage(player, "You can't add toll if ingameshop is disabled!");
 		}
 	}
-	
+
 	public void addToll(int playerId, long cnt) {
 		if (InGameShopConfig.ENABLE_IN_GAME_SHOP) {
 			IGRequest request = new IGRequest(lastRequestId.incrementAndGet(), playerId, 0);
@@ -231,18 +228,18 @@ public class InGameShopEn {
 				activeRequests.put(request.requestId, request);
 		}
 	}
-	
+
 	public boolean decreaseToll(Player player, long price) {
-	   if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(player.getClientConnection().getAccount().getToll() - price, player.getAcountName()))) {
-	    player.getClientConnection().getAccount().setToll(player.getClientConnection().getAccount().getToll() - price);
-	    PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(player.getClientConnection().getAccount().getToll()));
-	    return true;
-	   }
-	   else {
-	    PacketSendUtility.sendMessage(player, "ls communication error.");
-	    return false;
-	   }
-	 }
+		if (LoginServer.getInstance().sendPacket(
+			new SM_ACCOUNT_TOLL_INFO(player.getClientConnection().getAccount().getToll() - price, player.getAcountName()))) {
+			player.getClientConnection().getAccount().setToll(player.getClientConnection().getAccount().getToll() - price);
+			PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(player.getClientConnection().getAccount().getToll()));
+			return true;
+		} else {
+			PacketSendUtility.sendMessage(player, "ls communication error.");
+			return false;
+		}
+	}
 
 	public void finishRequest(int requestId, int result, long toll) {
 		IGRequest request = this.activeRequests.get(requestId);
@@ -251,8 +248,7 @@ public class InGameShopEn {
 			if (player != null) {
 				if (result == 1) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_ERROR);
-				}
-				else if (result == 2) {
+				} else if (result == 2) {
 					IGItem item = getIGItem(request.itemObjId);
 					if (item == null) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_ERROR);
@@ -262,17 +258,16 @@ public class InGameShopEn {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INGAMESHOP_NOT_ENOUGH_CASH("Toll"));
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					if (LoggingConfig.LOG_INGAMESHOP)
-						log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName()
-							+ " has not bought item: " + item.getItemId() + " count: " + item.getItemCount() + " Cause: NOT ENOUGH TOLLS");
-				}
-				else if (result == 3) {
-					//uses for lottery
-					if(request.itemObjId == 0) {
+						log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " has not bought item: "
+							+ item.getItemId() + " count: " + item.getItemCount() + " Cause: NOT ENOUGH TOLLS");
+				} else if (result == 3) {
+					// uses for lottery
+					if (request.itemObjId == 0) {
 						PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 						player.getClientConnection().getAccount().setToll(toll);
 						return;
 					}
-					
+
 					IGItem item = getIGItem(request.itemObjId);
 					if (item == null) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_ERROR);
@@ -290,8 +285,7 @@ public class InGameShopEn {
 						if (LoggingConfig.LOG_INGAMESHOP_SQL)
 							DAOManager.getDAO(InGameShopLogDAO.class).log("GIFT", new Timestamp(System.currentTimeMillis()), player.getName(),
 								player.getAcountName(), request.receiver, item.getItemId(), item.getItemCount(), item.getItemPrice());
-					}
-					else {
+					} else {
 						ItemService.addItem(player, item.getItemId(), item.getItemCount());
 						if (LoggingConfig.LOG_INGAMESHOP)
 							log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " BUY ITEM: "
@@ -305,8 +299,7 @@ public class InGameShopEn {
 					dao.increaseSales(item.getObjectId(), item.getSalesRanking());
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					player.getClientConnection().getAccount().setToll(toll);
-				}
-				else if (result == 4) {
+				} else if (result == 4) {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 				}

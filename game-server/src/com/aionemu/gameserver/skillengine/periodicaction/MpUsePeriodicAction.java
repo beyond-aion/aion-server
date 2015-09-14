@@ -13,7 +13,7 @@ public class MpUsePeriodicAction extends PeriodicAction {
 
 	@XmlAttribute(name = "value")
 	protected int value;
-	
+
 	@XmlAttribute
 	protected boolean ratio;
 

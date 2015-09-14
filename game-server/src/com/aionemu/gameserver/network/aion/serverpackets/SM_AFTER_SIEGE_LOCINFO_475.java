@@ -8,6 +8,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 
 public class SM_AFTER_SIEGE_LOCINFO_475 extends AionServerPacket {
+
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(0);

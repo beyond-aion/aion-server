@@ -63,22 +63,21 @@ public class ZoneData {
 			Area area = null;
 			switch (zone.getAreaType()) {
 				case POLYGON:
-					area = new PolyArea(zone.getName(), zone.getMapid(), zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints()
-						.getTop());
+					area = new PolyArea(zone.getName(), zone.getMapid(), zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
 					break;
 				case CYLINDER:
-					area = new CylinderArea(zone.getName(), zone.getMapid(), zone.getCylinder().getX(), zone.getCylinder().getY(), zone.getCylinder()
-						.getR(), zone.getCylinder().getBottom(), zone.getCylinder().getTop());
+					area = new CylinderArea(zone.getName(), zone.getMapid(), zone.getCylinder().getX(), zone.getCylinder().getY(), zone.getCylinder().getR(),
+						zone.getCylinder().getBottom(), zone.getCylinder().getTop());
 					break;
 				case SPHERE:
 					if (zone.getSphere().getR() <= 0)
 						break;
-					area = new SphereArea(zone.getName(), zone.getMapid(), zone.getSphere().getX(), zone.getSphere().getY(), zone.getSphere().getZ(),
-						zone.getSphere().getR());
+					area = new SphereArea(zone.getName(), zone.getMapid(), zone.getSphere().getX(), zone.getSphere().getY(), zone.getSphere().getZ(), zone
+						.getSphere().getR());
 					break;
 				case SEMISPHERE:
-					area = new SemisphereArea(zone.getName(), zone.getMapid(), zone.getSemisphere().getX(), zone.getSemisphere().getY(), zone.getSemisphere().getZ(),
-						zone.getSemisphere().getR());
+					area = new SemisphereArea(zone.getName(), zone.getMapid(), zone.getSemisphere().getX(), zone.getSemisphere().getY(), zone.getSemisphere()
+						.getZ(), zone.getSemisphere().getR());
 			}
 			if (area != null) {
 				List<ZoneInfo> zones = zoneNameMap.get(zone.getMapid());
@@ -108,7 +107,7 @@ public class ZoneData {
 	public int size() {
 		return count;
 	}
-	
+
 	/**
 	 * Weather zone ID it's an order number (starts from 1)
 	 */
@@ -125,8 +124,7 @@ public class ZoneData {
 
 		try {
 			schema = sf.newSchema(new File("./data/static_data/zones/zones.xsd"));
-		}
-		catch (SAXException e1) {
+		} catch (SAXException e1) {
 			log.error("Error while saving data: " + e1.getMessage(), e1.getCause());
 			return;
 		}
@@ -140,8 +138,7 @@ public class ZoneData {
 			marshaller.setSchema(schema);
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(this, xml);
-		}
-		catch (JAXBException e) {
+		} catch (JAXBException e) {
 			log.error("Error while saving data: " + e.getMessage(), e.getCause());
 			return;
 		}

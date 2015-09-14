@@ -38,13 +38,14 @@ public class CM_PRIVATE_STORE_NAME extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		
-		if(activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_PRIVATESTORE) {
+
+		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_PRIVATESTORE) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
+			PacketSendUtility.sendMessage(activePlayer,
+				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		PrivateStoreService.openPrivateStore(activePlayer, name);
 	}
 }

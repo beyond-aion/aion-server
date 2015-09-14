@@ -22,15 +22,13 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41552EnosAvenger extends QuestHandler {
 
 	private final static int questId = 41552;
-	
+
 	public _41552EnosAvenger() {
 		super(questId);
 	}
@@ -52,40 +50,34 @@ public class _41552EnosAvenger extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205968) { 
+			if (targetId == 205968) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if(dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					giveQuestItem(env, 182212546, 1);
 					return sendQuestStartDialog(env);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			Npc npc = (Npc) env.getVisibleObject();
 			if (targetId == 205968) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					if (player.getInventory().getItemCountByItemId(182212547) >= 1) {
 						sendMsg(1111515, npc.getObjectId(), true, 1000);
-					  QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 218781, 2790.97f, 1015.23f, 159.87f, (byte) 0);
+						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 218781, 2790.97f, 1015.23f, 159.87f, (byte) 0);
 					}
 					return checkQuestItems(env, 0, 1, false, 0, 10001);
 				}
-			}
-			else if(targetId == 701144) {
+			} else if (targetId == 701144) {
 				ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(182212586, 1)));
 				npc.getController().onDelete();
 				return true;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int itemCount = (int) player.getInventory().getItemCountByItemId(182212586);
 			int choise = 0;
 			if (itemCount > 0 && itemCount < 2)
@@ -108,7 +100,7 @@ public class _41552EnosAvenger extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -125,20 +117,20 @@ public class _41552EnosAvenger extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
-			  Npc npc = (Npc) env.getVisibleObject();
-			  QuestService.questTimerStart(env, 10);
-			  rndSpawn(npc, 701144, 8);
-		    return defaultOnKillEvent(env, 218781, 1, 2);
+			Npc npc = (Npc) env.getVisibleObject();
+			QuestService.questTimerStart(env, 10);
+			rndSpawn(npc, 701144, 8);
+			return defaultOnKillEvent(env, 218781, 1, 2);
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -155,7 +147,7 @@ public class _41552EnosAvenger extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onUseSkillEvent(QuestEnv env, int skillUsedId) {
 		Player player = env.getPlayer();
@@ -164,7 +156,7 @@ public class _41552EnosAvenger extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START && skillUsedId == 10377) {
 			if (npc == null && player.getInventory().getItemCountByItemId(182212547) >= 1)
 				return false;
-			if(player.getTarget() == npc && npc.getNpcId() == 218497) {
+			if (player.getTarget() == npc && npc.getNpcId() == 218497) {
 				removeQuestItem(env, 182212546, 1);
 				giveQuestItem(env, 182212547, 1);
 				npc.getController().onDelete();
@@ -173,34 +165,34 @@ public class _41552EnosAvenger extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	private void despawnCristal(QuestEnv env) {
 		Player player = env.getPlayer();
 		WorldMapInstance instance = player.getPosition().getWorldMapInstance();
-		for (Npc npc: instance.getNpcs()) {
+		for (Npc npc : instance.getNpcs()) {
 			if (npc.getNpcId() == 701144) {
 				npc.getController().onDelete();
 			}
 		}
 	}
-	
+
 	private void rndSpawn(Npc npc, int npcId, int count) {
 		for (int i = 0; i < count; i++) {
 			SpawnTemplate template = rndSpawnInRange(npc, npcId);
 			SpawnEngine.spawnObject(template, npc.getInstanceId());
 		}
 	}
-	
+
 	private SpawnTemplate rndSpawnInRange(Npc npc, int npcId) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 10);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 10);
-		return SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), npcId, npc.getX() + x1, npc.getY()
-				+ y1, npc.getZ(), npc.getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), npcId, npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
 	}
-	
+
 	private void sendMsg(final int msg, final int Obj, final boolean isShout, int time) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				World.getInstance().doOnAllPlayers(new Visitor<Player>() {

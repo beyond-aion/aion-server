@@ -67,10 +67,10 @@ public class PositionUtil {
 
 	/**
 	 * <pre>
- 	 *       0 (head view)
+	 *       0 (head view)
 	 *  270     90
-   *      180  (back)
-   * </pre>
+	 *      180  (back)
+	 * </pre>
 	 */
 	public static float getAngleToTarget(VisibleObject object1, VisibleObject object2) {
 		float angleObject1 = MathUtil.convertHeadingToDegree(object1.getHeading()) - 180;
@@ -82,9 +82,8 @@ public class PositionUtil {
 			angleDiff += 360;
 		return angleDiff;
 	}
-	
-	public static float getDirectionalBound(VisibleObject object1, VisibleObject object2, boolean inverseTarget)
-	{
+
+	public static float getDirectionalBound(VisibleObject object1, VisibleObject object2, boolean inverseTarget) {
 		float angle = 90 - (inverseTarget ? getAngleToTarget(object2, object1) : getAngleToTarget(object1, object2));
 		if (angle < 0)
 			angle += 360;
@@ -97,9 +96,8 @@ public class PositionUtil {
 		float bound2 = (float) MathUtil.getDistance(object2.getX(), object2.getY(), x2, y2);
 		return bound1 - bound2;
 	}
-	
-	public static float getDirectionalBound(VisibleObject object1, VisibleObject object2)
-	{
+
+	public static float getDirectionalBound(VisibleObject object1, VisibleObject object2) {
 		return getDirectionalBound(object1, object2, false);
 	}
 

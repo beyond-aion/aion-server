@@ -85,8 +85,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 	}
 
 	/**
-	 * Returns "playerId to damage" map.
-	 * Map is ordered by damage in "descending" order
+	 * Returns "playerId to damage" map. Map is ordered by damage in "descending" order
 	 *
 	 * @return map with player damages
 	 */
@@ -95,8 +94,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 	}
 
 	/**
-	 * Returns "player to abyss points" map.
-	 * Map is ordered by abyssPoints in descending order
+	 * Returns "player to abyss points" map. Map is ordered by abyssPoints in descending order
 	 *
 	 * @return map with player abyss points
 	 */
@@ -111,6 +109,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 
 		LinkedList<Map.Entry<K, AtomicLong>> tempList = Lists.newLinkedList(unorderedMap.entrySet());
 		Collections.sort(tempList, new Comparator<Map.Entry<K, AtomicLong>>() {
+
 			@Override
 			public int compare(Map.Entry<K, AtomicLong> o1, Map.Entry<K, AtomicLong> o2) {
 				return new Long(o2.getValue().get()).compareTo(o1.getValue().get());
@@ -144,9 +143,9 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 		Map<Player, AtomicLong> teamDamageMap = new HashMap<Player, AtomicLong>();
 		for (Integer id : playerDamageCounter.keySet()) {
 			Player player = World.getInstance().findPlayer(id);
-			
+
 			if (player != null) {
-				if (player.getCurrentTeam() != null ) {
+				if (player.getCurrentTeam() != null) {
 					if (!player.isInLeague()) {
 						Player teamLeader = player.getCurrentTeam().getLeaderObject();
 						long damage = playerDamageCounter.get(id).get();
@@ -156,8 +155,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 							}
 							teamDamageMap.get(teamLeader).addAndGet(damage);
 						}
-					}
-					else {
+					} else {
 						Player teamLeader = player.getPlayerAlliance2().getLeague().getLeaderObject().getLeaderObject();
 						long damage = playerDamageCounter.get(id).get();
 						if (teamLeader != null) {
@@ -165,22 +163,21 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 								teamDamageMap.put(teamLeader, new AtomicLong());
 							}
 							teamDamageMap.get(teamLeader).addAndGet(damage);
-				   }
+						}
+					}
+				} else { // solo
+					long damage = playerDamageCounter.get(id).get();
+					if (!teamDamageMap.containsKey(player)) {
+						teamDamageMap.put(player, new AtomicLong());
+					}
+					teamDamageMap.get(player).addAndGet(damage);
 				}
-			 }
-			 else { //solo
-				long damage = playerDamageCounter.get(id).get();
-				if (!teamDamageMap.containsKey(player)) {
-				   teamDamageMap.put(player, new AtomicLong());
-				}
-				teamDamageMap.get(player).addAndGet(damage);
-			 }
-		  }
-	   }
-	   if (teamDamageMap.isEmpty()) {
+			}
+		}
+		if (teamDamageMap.isEmpty()) {
 			return null;
 		}
-		
+
 		Player topTeamLeader = getOrderedCounterMap(teamDamageMap).keySet().iterator().next();
 		Legion legion = topTeamLeader.getLegion();
 

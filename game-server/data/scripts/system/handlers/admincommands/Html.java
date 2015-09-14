@@ -25,8 +25,7 @@ public class Html extends AdminCommand {
 		if (params[0].equals("reload")) {
 			HTMLCache.getInstance().reload(true);
 			PacketSendUtility.sendMessage(player, HTMLCache.getInstance().toString());
-		}
-		else if (params[0].equals("show"))
+		} else if (params[0].equals("show"))
 			if (params.length >= 2)
 				HTMLService.showHTML(player, HTMLCache.getInstance().getHTML(params[1] + ".xhtml"));
 			else

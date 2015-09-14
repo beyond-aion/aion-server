@@ -19,7 +19,7 @@ public class DashEffect extends DamageEffect {
 	@Override
 	public void calculate(Effect effect) {
 		Creature effected = effect.getEffected();
-		if (effected.equals(effect.getSkill().getFirstTarget())) { //move only once for Dash-AoE (e.g 2705)
+		if (effected.equals(effect.getSkill().getFirstTarget())) { // move only once for Dash-AoE (e.g 2705)
 			effect.setDashStatus(DashStatus.DASH);
 			effect.getSkill().setTargetPosition(effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
 			World.getInstance().updatePosition(effect.getEffector(), effected.getX(), effected.getY(), effected.getZ(), effect.getEffector().getHeading());

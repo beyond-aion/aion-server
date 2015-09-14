@@ -22,6 +22,6 @@ public class ArrowCheckCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill skill) {
-			return true;
+		return true;
 	}
 }

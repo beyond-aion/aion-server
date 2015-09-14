@@ -65,8 +65,7 @@ public class TitleList {
 				if (time != 0)
 					ExpireTimerTask.getInstance().addTask(entry, owner);
 				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(owner, entry);
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE);
 				return false;
 			}
@@ -86,7 +85,7 @@ public class TitleList {
 		PacketSendUtility.broadcastPacketAndReceive(owner, (new SM_TITLE_INFO(owner, titleId)));
 		owner.getCommonData().setTitleId(titleId);
 	}
-	
+
 	public void setBonusTitle(int bonusTitleId) {
 		PacketSendUtility.sendPacket(owner, new SM_TITLE_INFO(6, bonusTitleId));
 		if (owner.getCommonData().getBonusTitleId() > 0) {
@@ -106,7 +105,7 @@ public class TitleList {
 		if (owner.getCommonData().getTitleId() == titleId)
 			setDisplayTitle(-1);
 		if (owner.getCommonData().getBonusTitleId() == titleId)
-		   setBonusTitle(-1);
+			setBonusTitle(-1);
 		titles.remove(titleId);
 		PacketSendUtility.sendPacket(owner, new SM_TITLE_INFO(owner));
 		DAOManager.getDAO(PlayerTitleListDAO.class).removeTitle(owner.getObjectId(), titleId);

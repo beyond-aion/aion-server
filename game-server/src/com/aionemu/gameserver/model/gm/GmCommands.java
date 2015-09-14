@@ -34,8 +34,7 @@ public enum GmCommands {
 	SETINVENTORYGROWTH,
 	SKILLPOINT,
 	COMBINESKILL,
-	TELEPORT_TO_NAMED
-	;
+	TELEPORT_TO_NAMED;
 
 	public static GmCommands getValue(String command) {
 		for (GmCommands value : values()) {

@@ -62,12 +62,11 @@ public class Effect implements StatOwner {
 	private float targetZ = 0;
 
 	private int effectedHp = -1;
-	
+
 	private HashSet<EffectReserved> reserveds = new HashSet<EffectReserved>();
 
 	/**
-	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge
-	 * 256 : resist
+	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
 	 */
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
@@ -144,7 +143,7 @@ public class Effect implements StatOwner {
 	private int accModBoost = 0;
 
 	private EffectResult effectResult = EffectResult.NORMAL;
-	
+
 	boolean endedByTime = false;
 
 	public final Skill getSkill() {
@@ -338,7 +337,7 @@ public class Effect implements StatOwner {
 			this.attackShieldObserver = new AttackCalcObserver[4];
 		this.attackShieldObserver[i - 1] = attackShieldObserver;
 	}
-	
+
 	/**
 	 * @return the effectedHp
 	 */
@@ -356,11 +355,11 @@ public class Effect implements StatOwner {
 
 	public void setReserveds(EffectReserved er, boolean overTimeEffect) {
 		// set effected hp
-		//TODO RI_ChargeAttack_G, RI_ChargingFlight_G
+		// TODO RI_ChargeAttack_G, RI_ChargingFlight_G
 		boolean instantSkill = false;
 		if (this.getSkill() != null && this.getSkill().isInstantSkill())
 			instantSkill = true;
-		if (er.getType() == ResourceType.HP	&& er.getValue() != 0 && !overTimeEffect && !instantSkill) {
+		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill) {
 			int value = (er.isDamage() ? -er.getValue() : er.getValue());
 			value += effected.getLifeStats().getCurrentHp();
 			if (value <= 0) {
@@ -374,18 +373,18 @@ public class Effect implements StatOwner {
 
 		this.reserveds.add(er);
 	}
-	
+
 	public TreeSet<EffectReserved> getReservedsToSend() {
 		TreeSet<EffectReserved> toSend = new TreeSet<EffectReserved>();
-		
+
 		for (EffectReserved er : this.reserveds) {
 			if (er.isSend() && er.getValue() != 0)
 				toSend.add(er);
 		}
-		
+
 		if (toSend.isEmpty())
 			toSend.add(new EffectReserved(0, 0, "HP", true, true));
-		
+
 		return toSend;
 	}
 
@@ -571,11 +570,11 @@ public class Effect implements StatOwner {
 		for (EffectTemplate template : getEffectTemplates()) {
 			template.calculateHate(this);
 		}
-		
+
 		if (!isInSuccessEffects(1)) {
 			successEffects.clear();
 		}
-		
+
 		if (this.isLaunchSubEffect()) {
 			for (EffectTemplate template : successEffects.values()) {
 				template.calculateSubEffect(this);
@@ -591,8 +590,7 @@ public class Effect implements StatOwner {
 				setSpellStatus(SpellStatus.DODGE2);
 				skillMoveType = SkillMoveType.DODGE;
 				effectResult = EffectResult.DODGE;
-			}
-			else {
+			} else {
 				if (getAttackStatus() == AttackStatus.CRITICAL)
 					setAttackStatus(AttackStatus.CRITICAL_RESIST);// TODO recheck
 				else
@@ -653,8 +651,8 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * Start effect which includes: - start effect defined in template - start subeffect if possible - activate toogle
-	 * skill if needed - schedule end of effect
+	 * Start effect which includes: - start effect defined in template - start subeffect if possible - activate toogle skill if needed - schedule end of
+	 * effect
 	 */
 	public void startEffect(boolean restored) {
 		if (successEffects.isEmpty())
@@ -703,8 +701,7 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * End effect and all effect actions This method is synchronized and prevented to be called several times which could
-	 * cause unexpected behavior
+	 * End effect and all effect actions This method is synchronized and prevented to be called several times which could cause unexpected behavior
 	 */
 	public synchronized void endEffect(boolean broadcast, boolean endedByTime) {
 		if (isStopped)
@@ -712,7 +709,7 @@ public class Effect implements StatOwner {
 
 		if (endedByTime)
 			this.setEndedByTime(true);
-		
+
 		for (EffectTemplate template : successEffects.values()) {
 			template.endEffect(this);
 		}
@@ -741,7 +738,7 @@ public class Effect implements StatOwner {
 		if (getEffected() != null)
 			getEffected().getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), getEffected(), this.getSkillId());
 	}
-	
+
 	public void endEffect() {
 		endEffect(true, false);
 	}
@@ -864,7 +861,7 @@ public class Effect implements StatOwner {
 
 		return false;
 	}
-	
+
 	public EffectTemplate effectInPos(int pos) {
 		return successEffects.get(pos);
 	}
@@ -875,7 +872,7 @@ public class Effect implements StatOwner {
 	public Collection<EffectTemplate> getSuccessEffect() {
 		return successEffects.values();
 	}
-	
+
 	public void addAllEffectToSucess() {
 		successEffects.clear();
 		for (EffectTemplate template : getEffectTemplates()) {
@@ -1037,8 +1034,7 @@ public class Effect implements StatOwner {
 	private void checkUseEquipmentConditions() {
 		// If skill has use equipment conditions
 		// Observe for unequip event and remove effect if event occurs
-		if ((getSkillTemplate().getUseEquipmentconditions() != null)
-			&& (getSkillTemplate().getUseEquipmentconditions().getConditions().size() > 0)) {
+		if ((getSkillTemplate().getUseEquipmentconditions() != null) && (getSkillTemplate().getUseEquipmentconditions().getConditions().size() > 0)) {
 			ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
 
 				@Override
@@ -1095,8 +1091,7 @@ public class Effect implements StatOwner {
 		// tweak for pet order spirit substitution and bodyguard
 		if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.MAINTAIN)) {
 			return 30;
-		}
-		else if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.TOGGLE)) {
+		} else if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.TOGGLE)) {
 			return 100;
 		}
 		switch (skillTemplate.getName()) {
@@ -1115,7 +1110,7 @@ public class Effect implements StatOwner {
 			case "Weaken":
 			case "Canyonguard's Target":
 			case "Relic Explosion":
-			case "Ide Shielding" :
+			case "Ide Shielding":
 				return 255;
 
 		}
@@ -1182,6 +1177,7 @@ public class Effect implements StatOwner {
 	public int getAccModBoost() {
 		return this.accModBoost;
 	}
+
 	/**
 	 * functions that check for given effecttype
 	 */
@@ -1192,7 +1188,7 @@ public class Effect implements StatOwner {
 	public boolean isParalyzeEffect() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PARALYZE);
 	}
-	
+
 	public boolean isStunEffect() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.STUN);
 	}
@@ -1220,9 +1216,10 @@ public class Effect implements StatOwner {
 	public boolean isHiPass() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIPASS);
 	}
-	
+
 	public boolean isDelayedDamage() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT);
+		return this.getSkillTemplate().getEffects() != null
+			&& this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT);
 	}
 
 	public boolean isPetOrder() {
@@ -1255,6 +1252,7 @@ public class Effect implements StatOwner {
 	public final void setEffectResult(EffectResult effectResult) {
 		this.effectResult = effectResult;
 	}
+
 	/**
 	 * @return the endedByTime
 	 */
@@ -1262,9 +1260,9 @@ public class Effect implements StatOwner {
 		return endedByTime;
 	}
 
-	
 	/**
-	 * @param endedByTime the endedByTime to set
+	 * @param endedByTime
+	 *          the endedByTime to set
 	 */
 	public void setEndedByTime(boolean endedByTime) {
 		this.endedByTime = endedByTime;
@@ -1286,7 +1284,6 @@ public class Effect implements StatOwner {
 		this.mpAbsorbed = mpAbsorbed;
 	}
 
-	
 	/**
 	 * @return the mpShieldSkillId
 	 */
@@ -1294,19 +1291,19 @@ public class Effect implements StatOwner {
 		return mpShieldSkillId;
 	}
 
-	
 	/**
-	 * @param mpShieldSkillId the mpShieldSkillId to set
+	 * @param mpShieldSkillId
+	 *          the mpShieldSkillId to set
 	 */
 	public void setMpShieldSkillId(int mpShieldSkillId) {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}
-	
+
 	public EffectTemplate getFirstSuccessEffect() {
 		for (EffectTemplate et : getSuccessEffect()) {
 			return et;
 		}
-		
+
 		return null;
 	}
 }

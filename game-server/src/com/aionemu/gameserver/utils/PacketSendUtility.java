@@ -66,8 +66,10 @@ public class PacketSendUtility {
 	 * Broadcast packet to all visible players.
 	 *
 	 * @param player
-	 * @param packet ServerPacket that will be broadcast
-	 * @param toSelf true if packet should also be sent to this player
+	 * @param packet
+	 *          ServerPacket that will be broadcast
+	 * @param toSelf
+	 *          true if packet should also be sent to this player
 	 */
 	public static void broadcastPacket(Player player, AionServerPacket packet, boolean toSelf) {
 		if (toSelf)
@@ -80,9 +82,12 @@ public class PacketSendUtility {
 	 * Broadcast packet to players.
 	 *
 	 * @param player
-	 * @param packet ServerPacket that will be broadcast
-	 * @param toSelf true if packet should also be sent to this player
-	 * @param toTeam true if packet should be sent to this player team or all others w/o team members
+	 * @param packet
+	 *          ServerPacket that will be broadcast
+	 * @param toSelf
+	 *          true if packet should also be sent to this player
+	 * @param toTeam
+	 *          true if packet should be sent to this player team or all others w/o team members
 	 */
 	public static void broadcastPacketTeam(Player player, AionServerPacket packet, boolean toSelf, boolean toTeam) {
 		if (toSelf)
@@ -108,8 +113,7 @@ public class PacketSendUtility {
 						if (player.isInTeam() && player.getCurrentTeamId() == visibleObject.getCurrentTeamId()) {
 							sendPacket(player, packet);
 						}
-					}
-					else if ((!player.isInTeam() || player.getCurrentTeamId() != visibleObject.getCurrentTeamId())) {
+					} else if ((!player.isInTeam() || player.getCurrentTeamId() != visibleObject.getCurrentTeamId())) {
 						sendPacket(player, packet);
 					}
 				}
@@ -167,8 +171,7 @@ public class PacketSendUtility {
 					if (p.isOnline()) {
 						sendPacket(p, packet);
 					}
-				}
-				else if (et != null && object instanceof Npc) {
+				} else if (et != null && object instanceof Npc) {
 					Npc npc = ((Npc) object);
 					npc.getAi2().onCreatureEvent(et, creature);
 				}
@@ -181,12 +184,14 @@ public class PacketSendUtility {
 	 * Broadcasts packet to all visible players matching a filter
 	 *
 	 * @param player
-	 * @param packet ServerPacket to be broadcast
-	 * @param toSelf true if packet should also be sent to this player
-	 * @param filter filter determining who should be messaged
+	 * @param packet
+	 *          ServerPacket to be broadcast
+	 * @param toSelf
+	 *          true if packet should also be sent to this player
+	 * @param filter
+	 *          filter determining who should be messaged
 	 */
-	public static void broadcastPacket(Player player, final AionServerPacket packet, boolean toSelf,
-									   final ObjectFilter<Player> filter) {
+	public static void broadcastPacket(Player player, final AionServerPacket packet, boolean toSelf, final ObjectFilter<Player> filter) {
 		if (toSelf) {
 			sendPacket(player, packet);
 		}
@@ -225,11 +230,12 @@ public class PacketSendUtility {
 	 * Broadcasts packet to ALL players matching a filter
 	 *
 	 * @param player
-	 * @param packet ServerPacket to be broadcast
-	 * @param filter filter determining who should be messaged
+	 * @param packet
+	 *          ServerPacket to be broadcast
+	 * @param filter
+	 *          filter determining who should be messaged
 	 */
-	public static void broadcastFilteredPacket(final AionServerPacket packet,
-											   final ObjectFilter<Player> filter) {
+	public static void broadcastFilteredPacket(final AionServerPacket packet, final ObjectFilter<Player> filter) {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
@@ -244,8 +250,10 @@ public class PacketSendUtility {
 	/**
 	 * Broadcasts packet to all legion members of a legion
 	 *
-	 * @param legion Legion to broadcast packet to
-	 * @param packet ServerPacket to be broadcast
+	 * @param legion
+	 *          Legion to broadcast packet to
+	 * @param packet
+	 *          ServerPacket to be broadcast
 	 */
 	public static void broadcastPacketToLegion(Legion legion, AionServerPacket packet) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {

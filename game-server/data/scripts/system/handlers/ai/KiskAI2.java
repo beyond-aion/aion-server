@@ -29,8 +29,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("kisk")
 public class KiskAI2 extends NpcAI2 {
 
-        private final int CANCEL_DIALOG_METERS = 5;
-    
+	private final int CANCEL_DIALOG_METERS = 5;
+
 	@Override
 	public Kisk getOwner() {
 		return (Kisk) super.getOwner();
@@ -70,30 +70,30 @@ public class KiskAI2 extends NpcAI2 {
 		}
 
 		if (getOwner().canBind(player)) {
-			AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_REGISTER_BINDSTONE, getOwner().getObjectId(), CANCEL_DIALOG_METERS, new AI2Request() {
+			AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_REGISTER_BINDSTONE, getOwner().getObjectId(), CANCEL_DIALOG_METERS,
+				new AI2Request() {
 
-                                private boolean decisionTaken = false;
-                            
-				@Override
-				public void acceptRequest(Creature requester, Player responder, int requestId) {
-                                        if(!decisionTaken) {
-                                                // Check again if it's full (If they waited to press OK)
-                                                if (!getOwner().canBind(responder)) {
-                                                        PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY);
-                                                        return;
-                                                }
-                                                KiskService.getInstance().onBind(getOwner(), responder);
-                                        }
-                                }
-                                
-                                @Override
-                                public void denyRequest(Creature requester, Player responder) {
-                                        decisionTaken = true;
-                                }
-			});
+					private boolean decisionTaken = false;
 
-		}
-		else if (getOwner().getCurrentMemberCount() >= getOwner().getMaxMembers())
+					@Override
+					public void acceptRequest(Creature requester, Player responder, int requestId) {
+						if (!decisionTaken) {
+							// Check again if it's full (If they waited to press OK)
+							if (!getOwner().canBind(responder)) {
+								PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY);
+								return;
+							}
+							KiskService.getInstance().onBind(getOwner(), responder);
+						}
+					}
+
+					@Override
+					public void denyRequest(Creature requester, Player responder) {
+						decisionTaken = true;
+					}
+				});
+
+		} else if (getOwner().getCurrentMemberCount() >= getOwner().getMaxMembers())
 			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_FULL);
 		else
 			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY);

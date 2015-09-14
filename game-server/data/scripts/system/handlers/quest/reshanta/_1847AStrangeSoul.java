@@ -42,8 +42,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
-			}
-			else
+			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 		}
 
@@ -57,8 +56,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-			else if (targetId == 203933) {
+			} else if (targetId == 203933) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO2) {

@@ -47,8 +47,7 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.warn("getAllNew() from DB: " + e.getMessage(), e);
 		}
 		return list;
@@ -62,8 +61,7 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 				stmt.setInt(2, id);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("useItem", e);
 			return false;
 		}

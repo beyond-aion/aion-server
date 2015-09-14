@@ -17,7 +17,6 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("raksha")
@@ -69,8 +68,7 @@ public class RakshaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19938, 46, getOwner()).useNoAnimationSkill();
 					List<Player> players = getLifedPlayers();
 					if (!players.isEmpty()) {
@@ -79,8 +77,7 @@ public class RakshaAI2 extends AggressiveNpcAI2 {
 							for (Player p : players) {
 								spawnRubble(p);
 							}
-						}
-						else {
+						} else {
 							int count = Rnd.get(3, size);
 							for (int i = 0; i < count; i++) {
 								if (players.isEmpty()) {

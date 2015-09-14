@@ -37,13 +37,11 @@ public class _2937UnexpectedReward extends QuestHandler {
 			if (targetId == 204092) { // Talon
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798059) { // Nekorunuerk
 				switch (dialog) {
@@ -60,8 +58,7 @@ public class _2937UnexpectedReward extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798059) { // Nekorunuerk
 				return sendQuestEndDialog(env);
 			}

@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.enchants.TemperingTemplateData;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
- *
  * @author xTz
  */
 @XmlRootElement(name = "tempering_templates")

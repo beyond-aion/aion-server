@@ -20,8 +20,8 @@ public class ReflectorEffect extends ShieldEffect {
 	public void startEffect(final Effect effect) {
 		int hit = hitvalue + hitdelta * effect.getSkillLevel();
 
-		AttackShieldObserver asObserver = new AttackShieldObserver(hit, value, percent, false, effect, hitType,
-			this.getType(), this.hitTypeProb, minradius, radius, null, 0, 0);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hit, value, percent, false, effect, hitType, this.getType(), this.hitTypeProb,
+			minradius, radius, null, 0, 0);
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
 		effect.setAttackShieldObserver(asObserver, position);
@@ -33,7 +33,7 @@ public class ReflectorEffect extends ShieldEffect {
 		if (acObserver != null)
 			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
 	}
-	
+
 	@Override
 	public ShieldType getType() {
 		return ShieldType.REFLECTOR;

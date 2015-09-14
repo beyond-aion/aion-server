@@ -108,7 +108,7 @@ public interface IStorage {
 	Item add(Item item);
 
 	Item add(Item item, ItemAddType addType);
-	
+
 	/**
 	 * Put operation is used in some operations like unequip
 	 */

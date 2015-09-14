@@ -68,8 +68,7 @@ public class GatheringTask extends AbstractCraftTask {
 		PacketSendUtility.sendPacket(requestor, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_SUCCESS_1_BASIC(new DescriptionId(material.getNameid())));
 		if (template.getEraseValue() > 0)
 			requestor.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
-		ItemService
-			.addItem(requestor, material.getItemid(), requestor.getRates().getGatheringCountRate(), ItemService.DEFAULT_UPDATE_PREDICATE);
+		ItemService.addItem(requestor, material.getItemid(), requestor.getRates().getGatheringCountRate(), ItemService.DEFAULT_UPDATE_PREDICATE);
 		if (requestor.isInInstance()) {
 			requestor.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requestor, (Gatherable) responder);
 		}
@@ -78,8 +77,8 @@ public class GatheringTask extends AbstractCraftTask {
 	}
 
 	/**
-	 * Explanation of formulas are in the following graph:
-	 * <img src="doc-files/gathering_bounds.png" />
+	 * Explanation of formulas are in the following graph: <img src="doc-files/gathering_bounds.png" />
+	 * 
 	 * @see com.aionemu.gameserver.skillengine.task.AbstractCraftTask#analyzeInteraction()
 	 */
 	@Override
@@ -108,8 +107,7 @@ public class GatheringTask extends AbstractCraftTask {
 			if (lowerBound > 0) {
 				// skillLvlDiff > 30; lowerBound is always positive
 				failValue = Rnd.get(1, 2); // Always constant (1.6667 if exactly)
-			}
-			else {
+			} else {
 				failValue = Rnd.get(1, -lowerBound);
 			}
 			// There's 0.57% chance to recover from failure (display as purple bar)
@@ -118,8 +116,7 @@ public class GatheringTask extends AbstractCraftTask {
 				failValue = 0;
 				barType = 3;
 			}
-		}
-		else {
+		} else {
 			// There's 6% chance to boost value
 			// boost values decrease and the chance to go through 100% increases with the level diff
 			// i.e. randomness disappears, constant boost becomes the main boost type
@@ -129,8 +126,7 @@ public class GatheringTask extends AbstractCraftTask {
 				if (boostFullBarChance > 60 || Rnd.get(0, 100) <= boostFullBarChance) {
 					boostFullBarChance = 100; // becomes constant
 					successValue = 100;
-				}
-				else {
+				} else {
 					successValue = Rnd.get(1, 100 - easeLevel * 10);
 				}
 				barType = 2;
@@ -138,8 +134,7 @@ public class GatheringTask extends AbstractCraftTask {
 					// display as purple bar (no idea when it should be displayed)
 					barType = 3;
 				}
-			}
-			else {
+			} else {
 				successValue = Rnd.get(Math.max(1, lowerBound), upperBound);
 				barType = 1;
 			}
@@ -150,8 +145,7 @@ public class GatheringTask extends AbstractCraftTask {
 
 		if (currentSuccessValue >= completeValue) {
 			currentSuccessValue = completeValue;
-		}
-		else if (currentFailureValue >= completeValue) {
+		} else if (currentFailureValue >= completeValue) {
 			currentFailureValue = completeValue;
 		}
 	}

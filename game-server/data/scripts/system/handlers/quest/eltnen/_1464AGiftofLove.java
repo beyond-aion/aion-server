@@ -40,8 +40,7 @@ public class _1464AGiftofLove extends QuestHandler {
 			if (targetId == 204424) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -58,15 +57,13 @@ public class _1464AGiftofLove extends QuestHandler {
 								removeQuestItem(env, 152000455, 1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 						}
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203755) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

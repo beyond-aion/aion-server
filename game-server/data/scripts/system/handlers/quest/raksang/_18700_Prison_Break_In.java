@@ -47,17 +47,16 @@ public class _18700_Prison_Break_In extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				switch (dialog) {
 					case USE_OBJECT:
-					return sendQuestDialog(env, 10002);
-					case SELECT_QUEST_REWARD: 
+						return sendQuestDialog(env, 10002);
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-				default:
-					return sendQuestEndDialog(env);
+					default:
+						return sendQuestEndDialog(env);
+				}
 			}
-		}
 		}
 
 		if (qs == null)
@@ -73,8 +72,7 @@ public class _18700_Prison_Break_In extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			}
-			else if (targetId == 799429) {
+			} else if (targetId == 799429) {
 				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
@@ -83,8 +81,7 @@ public class _18700_Prison_Break_In extends QuestHandler {
 						return defaultCloseDialog(env, 4, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 
@@ -119,27 +116,23 @@ public class _18700_Prison_Break_In extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(var == 2) {
-			checkAndUpdateVarGen(qs, env, targetId);
-			}
-			else if (var == 3) {
+			if (var == 2) {
+				checkAndUpdateVarGen(qs, env, targetId);
+			} else if (var == 3) {
 				return defaultOnKillEvent(env, 217392, 3, 4); // 4
-			}
-			else if (var == 5) {
+			} else if (var == 5) {
 				checkAndUpdateVarBosses(qs, env, targetId);
-			}
-			else if (var == 7) {
+			} else if (var == 7) {
 				return defaultOnKillEvent(env, 217764, 7, 8); // 8
-			}
-			else if (var == 8) {
-				return defaultOnKillEvent(env, 217475, 8, 9) ||  defaultOnKillEvent(env, 217647, 8, 9); // 8
+			} else if (var == 8) {
+				return defaultOnKillEvent(env, 217475, 8, 9) || defaultOnKillEvent(env, 217647, 8, 9); // 8
 			}
 		}
 		return false;
 	}
-	
-	private void checkAndUpdateVarGen(QuestState qs, QuestEnv env, int targetId){
-		switch(targetId){
+
+	private void checkAndUpdateVarGen(QuestState qs, QuestEnv env, int targetId) {
+		switch (targetId) {
 			case 730453:
 				qs.setQuestVarById(1, 1);
 				updateQuestStatus(env);
@@ -162,9 +155,9 @@ public class _18700_Prison_Break_In extends QuestHandler {
 				break;
 		}
 	}
-	
-	private void isAllKilledGenerator(QuestState qs, QuestEnv env){
-		if(qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1 && qs.getQuestVarById(3) == 1 && qs.getQuestVarById(4) == 1){
+
+	private void isAllKilledGenerator(QuestState qs, QuestEnv env) {
+		if (qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1 && qs.getQuestVarById(3) == 1 && qs.getQuestVarById(4) == 1) {
 			qs.setQuestVarById(1, 0);
 			qs.setQuestVarById(2, 0);
 			qs.setQuestVarById(3, 0);
@@ -172,9 +165,9 @@ public class _18700_Prison_Break_In extends QuestHandler {
 			changeQuestStep(env, 2, 3, false);
 		}
 	}
-	
-	private void checkAndUpdateVarBosses(QuestState qs, QuestEnv env, int targetId){
-		switch(targetId){
+
+	private void checkAndUpdateVarBosses(QuestState qs, QuestEnv env, int targetId) {
+		switch (targetId) {
 			case 217425:
 				qs.setQuestVarById(1, 1);
 				updateQuestStatus(env);
@@ -187,15 +180,15 @@ public class _18700_Prison_Break_In extends QuestHandler {
 				break;
 		}
 	}
-	
-	private void isAllKilledBosses(QuestState qs, QuestEnv env){
-		if(qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1){
+
+	private void isAllKilledBosses(QuestState qs, QuestEnv env) {
+		if (qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1) {
 			qs.setQuestVarById(1, 0);
 			qs.setQuestVarById(2, 0);
 			changeQuestStep(env, 5, 6, false);
 		}
-		}
-	
+	}
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName != ZoneName.get("RAKSANG_DUNGEON_CHASM_300310000"))
@@ -215,4 +208,3 @@ public class _18700_Prison_Break_In extends QuestHandler {
 		return false;
 	}
 }
-

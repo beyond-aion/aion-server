@@ -82,8 +82,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205158)
 				return sendQuestEndDialog(env);
 		}

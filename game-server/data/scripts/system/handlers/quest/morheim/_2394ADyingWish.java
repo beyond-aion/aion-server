@@ -20,15 +20,13 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2394ADyingWish extends QuestHandler {
 
 	private final static int questId = 2394;
-	
+
 	public _2394ADyingWish() {
 		super(questId);
 	}
@@ -54,53 +52,50 @@ public class _2394ADyingWish extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204343) { 
+			if (targetId == 204343) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204381) { 
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 204381) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
-					Npc orlan = (Npc)QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(), player.getZ(), (byte) 8);
+					return sendQuestDialog(env, 1011);
+				} else if (dialog == DialogAction.SETPRO1) {
+					Npc orlan = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(),
+						player.getZ(), (byte) 8);
 					WalkManager.startWalking((NpcAI2) orlan.getAi2());
 					orlan.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.START_EMOTE2, 0, orlan.getObjectId()));
-					player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
+					player.getController().addTask(TaskId.QUEST_FOLLOW,
+						QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
 					return defaultCloseDialog(env, 0, 1);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204343) { 
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204343) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
-	 return false;
+		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 0, false, 182204131, 1, 0, 0)); 
+			return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 0, false, 182204131, 1, 0, 0));
 		}
-	 return HandlerResult.FAILED;
+		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -115,7 +110,7 @@ public class _2394ADyingWish extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -129,12 +124,12 @@ public class _2394ADyingWish extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 1, true); 
+		return defaultFollowEndEvent(env, 1, 1, true);
 	}
-	
+
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
 		return defaultFollowEndEvent(env, 1, 0, false); // 0

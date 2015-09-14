@@ -54,14 +54,11 @@ public class CM_CHECK_NICKNAME extends AionClientPacket {
 				client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_NAME_RESERVED));
 			else
 				client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_NAME_ALREADY_USED));
-		}
-		else if (!NameRestrictionService.isValidName(nick)) {
+		} else if (!NameRestrictionService.isValidName(nick)) {
 			client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_INVALID_NAME));
-		}
-		else if (NameRestrictionService.isForbiddenWord(nick)) {
+		} else if (NameRestrictionService.isForbiddenWord(nick)) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_FORBIDDEN_CHAR_NAME));
-		}
-		else {
+		} else {
 			client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_OK));
 		}
 	}

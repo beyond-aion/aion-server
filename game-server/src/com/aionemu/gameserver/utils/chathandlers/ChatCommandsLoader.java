@@ -27,11 +27,9 @@ public class ChatCommandsLoader implements ClassListener {
 			if (tmp != null)
 				try {
 					processor.registerCommand((ChatCommand) tmp.newInstance());
-				}
-				catch (InstantiationException e) {
+				} catch (InstantiationException e) {
 					e.printStackTrace();
-				}
-				catch (IllegalAccessException e) {
+				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
 		}

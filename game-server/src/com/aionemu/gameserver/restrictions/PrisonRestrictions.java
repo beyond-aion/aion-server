@@ -97,11 +97,11 @@ public class PrisonRestrictions extends AbstractRestrictions {
 	}
 
 	private boolean isInPrison(Player player) {
-		return player.isInPrison() || player.getWorldId() == WorldMapType.DE_PRISON.getId()
-			|| player.getWorldId() == WorldMapType.DF_PRISON.getId();
+		return player.isInPrison() || player.getWorldId() == WorldMapType.DE_PRISON.getId() || player.getWorldId() == WorldMapType.DF_PRISON.getId();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.restrictions.Restrictions#canPrivateStore(com.aionemu.gameserver.model.gameobjects.player.Player)
 	 */
 	@Override
@@ -109,7 +109,7 @@ public class PrisonRestrictions extends AbstractRestrictions {
 		if (isInPrison(player)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 }

@@ -66,8 +66,7 @@ public class _28821YourButlerGift extends QuestHandler {
 				case QUEST_ACCEPT_SIMPLE:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (dialog) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 2375);
@@ -78,8 +77,7 @@ public class _28821YourButlerGift extends QuestHandler {
 					sendQuestEndDialog(env);
 					return true;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 5);

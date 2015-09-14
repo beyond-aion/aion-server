@@ -1,16 +1,15 @@
 package com.aionemu.gameserver.controllers.observer;
 
-
 /**
  * @author kecimis
- *
  */
 public class AttackerCriticalStatus {
+
 	private boolean result = false;
 	private int count;
 	private int value;
 	private boolean isPercent;
-	
+
 	public AttackerCriticalStatus(boolean result) {
 		this.result = result;
 	}
@@ -21,16 +20,16 @@ public class AttackerCriticalStatus {
 		this.isPercent = isPercent;
 	}
 
-	
 	/**
 	 * @return the count
 	 */
 	public int getCount() {
 		return count;
 	}
-	
+
 	/**
-	 * @param count the count to set
+	 * @param count
+	 *          the count to set
 	 */
 	public void setCount(int count) {
 		this.count = count;
@@ -43,7 +42,6 @@ public class AttackerCriticalStatus {
 		return value;
 	}
 
-	
 	/**
 	 * @return the isPercent
 	 */
@@ -51,8 +49,6 @@ public class AttackerCriticalStatus {
 		return isPercent;
 	}
 
-
-	
 	/**
 	 * @return the result
 	 */
@@ -60,15 +56,12 @@ public class AttackerCriticalStatus {
 		return result;
 	}
 
-
-	
 	/**
-	 * @param result the result to set
+	 * @param result
+	 *          the result to set
 	 */
 	public void setResult(boolean result) {
 		this.result = result;
 	}
-	
-	
-	
+
 }

@@ -38,9 +38,9 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 			possibleHealValue = maxCurValue * valueWithDelta / 100;
 		else
 			possibleHealValue = valueWithDelta;
-		
+
 		int finalHeal = possibleHealValue;
-		
+
 		if (healType == HealType.HP) {
 			int baseHeal = possibleHealValue;
 			if (!(this instanceof ProcHealInstantEffect)) {
@@ -53,33 +53,32 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 			}
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
 		}
-		
+
 		if (finalHeal < 0 || (healType == HealType.HP && effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE))) {
 			finalHeal = 0;
-		} 
-		else {
+		} else {
 			finalHeal = maxCurValue - currentValue < finalHeal ? (maxCurValue - currentValue) : finalHeal;
 		}
-		
+
 		effect.setReserveds(new EffectReserved(position, finalHeal, healType.toString(), false), false);
 	}
-	
+
 	public void applyEffect(Effect effect, HealType healType) {
 		Creature effected = effect.getEffected();
 		int healValue = effect.getReserveds(position).getValue();
-		
+
 		if (healValue == 0)
 			return;
-		
+
 		switch (healType) {
 			case HP:
-				if (this instanceof ProcHealInstantEffect)//item heal, eg potions
+				if (this instanceof ProcHealInstantEffect)// item heal, eg potions
 					effected.getLifeStats().increaseHp(TYPE.HP, healValue, 0, LOG.REGULAR);
 				else
 					effected.getLifeStats().increaseHp(healValue);
 				break;
 			case MP:
-				if (this instanceof ProcMPHealInstantEffect)//item heal, eg potions
+				if (this instanceof ProcMPHealInstantEffect)// item heal, eg potions
 					effected.getLifeStats().increaseMp(TYPE.MP, healValue, 0, LOG.REGULAR);
 				else
 					effected.getLifeStats().increaseMp(TYPE.HEAL_MP, healValue, 0, LOG.REGULAR);
@@ -87,14 +86,15 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 			case FP:
 				if (!(effected instanceof Player))
 					return;
-				((Player)effected).getLifeStats().increaseFp(TYPE.FP_RINGS, healValue, 0, LOG.REGULAR);
+				((Player) effected).getLifeStats().increaseFp(TYPE.FP_RINGS, healValue, 0, LOG.REGULAR);
 				break;
 			case DP:
-				((Player)effected).getCommonData().addDp(healValue);
+				((Player) effected).getCommonData().addDp(healValue);
 				break;
 		}
 	}
 
 	protected abstract int getCurrentStatValue(Effect effect);
+
 	protected abstract int getMaxStatValue(Effect effect);
 }

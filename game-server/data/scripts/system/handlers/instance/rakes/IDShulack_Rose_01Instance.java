@@ -17,45 +17,43 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Cheatkiller, Bobobear
- *
  */
 @InstanceID(301030000)
 public class IDShulack_Rose_01Instance extends GeneralInstanceHandler {
+
 	private AtomicBoolean teleportEnabled = new AtomicBoolean();
 	private AtomicBoolean teleportEnabled2 = new AtomicBoolean();
 
-    @Override
-    public void onInstanceCreate(WorldMapInstance instance) {
-        super.onInstanceCreate(instance);
-        int rnd = Rnd.get(1, 3);
-        switch (rnd) {
-            case 1:
-                spawn(230733, 462.325f, 512.27454f, 877.6181f, (byte) 90); //Badu The Lunatic.
-                break;
-            case 2:
-                spawn(230734, 462.325f, 512.27454f, 877.6181f, (byte) 90); //Captain Mumu Kang.
-                break;
-            case 3:
-                spawn(230735, 462.325f, 512.27454f, 877.6181f, (byte) 90); //Lampsprung Raon.
-                break;
-        }
-    }
+	@Override
+	public void onInstanceCreate(WorldMapInstance instance) {
+		super.onInstanceCreate(instance);
+		int rnd = Rnd.get(1, 3);
+		switch (rnd) {
+			case 1:
+				spawn(230733, 462.325f, 512.27454f, 877.6181f, (byte) 90); // Badu The Lunatic.
+				break;
+			case 2:
+				spawn(230734, 462.325f, 512.27454f, 877.6181f, (byte) 90); // Captain Mumu Kang.
+				break;
+			case 3:
+				spawn(230735, 462.325f, 512.27454f, 877.6181f, (byte) 90); // Lampsprung Raon.
+				break;
+		}
+	}
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch(npc.getNpcId()) {
+		switch (npc.getNpcId()) {
 			case 730767:
 				if (!teleportEnabled.get()) {
 					if (player.getInventory().getItemCountByItemId(185000155) != 0) {
 						player.getInventory().decreaseByItemId(185000155, 1);
 						teleportEnabled.compareAndSet(false, true);
-						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(),461.66025f, 496.11496f, 877.6181f, (byte) 30,
+						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 461.66025f, 496.11496f, 877.6181f, (byte) 30,
 							TeleportAnimation.BEAM_ANIMATION);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622787)));
-				}
-				else
+				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 461.66025f, 496.11496f, 877.6181f, (byte) 30,
 						TeleportAnimation.BEAM_ANIMATION);
 				break;
@@ -64,13 +62,11 @@ public class IDShulack_Rose_01Instance extends GeneralInstanceHandler {
 					if (player.getInventory().getItemCountByItemId(185000156) != 0) {
 						player.getInventory().decreaseByItemId(185000156, 1);
 						teleportEnabled2.compareAndSet(false, true);
-						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(),659.8103f, 509.08694f, 867.7978f, (byte) 0,
+						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 659.8103f, 509.08694f, 867.7978f, (byte) 0,
 							TeleportAnimation.BEAM_ANIMATION);
-					}
-					else
+					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622789)));
-				}
-				else
+				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 659.8103f, 509.08694f, 867.7978f, (byte) 0,
 						TeleportAnimation.BEAM_ANIMATION);
 				break;

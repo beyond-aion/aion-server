@@ -45,8 +45,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 				if (this.checkItemExistence(env, 164000141, 1, false)) {
 					env.setQuestId(0);
 					return sendQuestDialog(env, 27);
-				}
-				else {
+				} else {
 					env.setQuestId(0);
 					giveQuestItem(env, 164000141, 1);
 					return sendQuestDialog(env, 1012);

@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- *
  * @author xTz
  */
 @AIName("kinquid_debuff")

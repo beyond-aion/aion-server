@@ -16,18 +16,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropNpcs")
 public class GlobalDropNpcs {
 
-    @XmlElement(name = "gd_npc")
-    protected List<GlobalDropNpc> gdNpcs;
+	@XmlElement(name = "gd_npc")
+	protected List<GlobalDropNpc> gdNpcs;
 
-    public List<GlobalDropNpc> getGlobalDropNpcs() {
-        if (gdNpcs == null) {
-            gdNpcs = new ArrayList<GlobalDropNpc>();
-        }
-        return this.gdNpcs;
-    }
-    
-    public void addNpcs(List<GlobalDropNpc> value) {
-    	this.gdNpcs = value;
-    }
+	public List<GlobalDropNpc> getGlobalDropNpcs() {
+		if (gdNpcs == null) {
+			gdNpcs = new ArrayList<GlobalDropNpc>();
+		}
+		return this.gdNpcs;
+	}
+
+	public void addNpcs(List<GlobalDropNpc> value) {
+		this.gdNpcs = value;
+	}
 
 }

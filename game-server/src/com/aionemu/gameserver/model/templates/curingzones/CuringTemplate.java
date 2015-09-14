@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -27,9 +26,7 @@ public class CuringTemplate {
 	/**
 	 * Gets the value of the mapId property.
 	 *
-	 * @return possible object is
-	 *     {@link Integer }
-	 *
+	 * @return possible object is {@link Integer }
 	 */
 	public int getMapId() {
 		return mapId;
@@ -38,9 +35,8 @@ public class CuringTemplate {
 	/**
 	 * Sets the value of the mapId property.
 	 *
-	 * @param value allowed object is
-	 *     {@link Integer }
-	 *
+	 * @param value
+	 *          allowed object is {@link Integer }
 	 */
 	public void setMapId(int value) {
 		this.mapId = value;
@@ -49,9 +45,7 @@ public class CuringTemplate {
 	/**
 	 * Gets the value of the x property.
 	 *
-	 * @return possible object is
-	 *     {@link Float }
-	 *
+	 * @return possible object is {@link Float }
 	 */
 	public float getX() {
 		return x;
@@ -60,9 +54,8 @@ public class CuringTemplate {
 	/**
 	 * Sets the value of the x property.
 	 *
-	 * @param value allowed object is
-	 *     {@link Float }
-	 *
+	 * @param value
+	 *          allowed object is {@link Float }
 	 */
 	public void setX(float value) {
 		this.x = value;
@@ -71,9 +64,7 @@ public class CuringTemplate {
 	/**
 	 * Gets the value of the y property.
 	 *
-	 * @return possible object is
-	 *     {@link Float }
-	 *
+	 * @return possible object is {@link Float }
 	 */
 	public float getY() {
 		return y;
@@ -82,9 +73,8 @@ public class CuringTemplate {
 	/**
 	 * Sets the value of the y property.
 	 *
-	 * @param value allowed object is
-	 *     {@link Float }
-	 *
+	 * @param value
+	 *          allowed object is {@link Float }
 	 */
 	public void setY(float value) {
 		this.y = value;
@@ -93,9 +83,7 @@ public class CuringTemplate {
 	/**
 	 * Gets the value of the z property.
 	 *
-	 * @return possible object is
-	 *     {@link Float }
-	 *
+	 * @return possible object is {@link Float }
 	 */
 	public float getZ() {
 		return z;
@@ -104,9 +92,8 @@ public class CuringTemplate {
 	/**
 	 * Sets the value of the z property.
 	 *
-	 * @param value allowed object is
-	 *     {@link Float }
-	 *
+	 * @param value
+	 *          allowed object is {@link Float }
 	 */
 	public void setZ(float value) {
 		this.z = value;

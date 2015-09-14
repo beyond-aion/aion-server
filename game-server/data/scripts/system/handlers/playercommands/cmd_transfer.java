@@ -26,8 +26,7 @@ public class cmd_transfer extends PlayerCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params == null || params.length != 1) {
-			PacketSendUtility.sendMessage(player, ".transfer <player name>"
-					+ "\nTransfer your character to player account");
+			PacketSendUtility.sendMessage(player, ".transfer <player name>" + "\nTransfer your character to player account");
 			return;
 		}
 
@@ -87,8 +86,9 @@ public class cmd_transfer extends PlayerCommand {
 
 		if (owner != null) {
 			PacketSendUtility.sendMessage(owner, "Player: " + player.getName() + " was transferd to yours account."
-					+ "\nYou will be disconnected in 5 seconds");
+				+ "\nYou will be disconnected in 5 seconds");
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					if (owner.isOnline()) {

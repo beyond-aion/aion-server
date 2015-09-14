@@ -3,8 +3,7 @@ package com.aionemu.chatserver.model;
 /**
  * @author ATracer
  */
-public enum PlayerClass
-{
+public enum PlayerClass {
 	WARRIOR(0),
 	GLADIATOR(1),
 	TEMPLAR(2),
@@ -29,16 +28,14 @@ public enum PlayerClass
 	/**
 	 * @param classId
 	 */
-	private PlayerClass(int classId)
-	{
+	private PlayerClass(int classId) {
 		this.classId = (byte) classId;
 	}
 
 	/**
 	 * @return classId
 	 */
-	public byte getClassId()
-	{
+	public byte getClassId() {
 		return classId;
 	}
 }

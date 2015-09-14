@@ -45,20 +45,17 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * The total number of points. The value of <code>npoints</code> represents the number of valid points in this
-	 * <code>Polygon</code>.
+	 * The total number of points. The value of <code>npoints</code> represents the number of valid points in this <code>Polygon</code>.
 	 */
 	public int npoints;
 
 	/**
-	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this
-	 * <code>Polygon2D</code>.
+	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this <code>Polygon2D</code>.
 	 */
 	public float[] xpoints;
 
 	/**
-	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this
-	 * <code>Polygon2D</code>.
+	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this <code>Polygon2D</code>.
 	 */
 	public float[] ypoints;
 
@@ -140,8 +137,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @exception NegativeArraySizeException
 	 *              if the value of <code>npoints</code> is negative.
 	 * @exception IndexOutOfBoundsException
-	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of
-	 *              <code>ypoints</code>.
+	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of <code>ypoints</code>.
 	 * @exception NullPointerException
 	 *              if <code>xpoints</code> or <code>ypoints</code> is <code>null</code>.
 	 */
@@ -169,8 +165,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * @exception NegativeArraySizeException
 	 *              if the value of <code>npoints</code> is negative.
 	 * @exception IndexOutOfBoundsException
-	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of
-	 *              <code>ypoints</code>.
+	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of <code>ypoints</code>.
 	 * @exception NullPointerException
 	 *              if <code>xpoints</code> or <code>ypoints</code> is <code>null</code>.
 	 */
@@ -223,8 +218,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 			path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
 			path.moveTo(x, y);
 			bounds = new Rectangle2D.Float(x, y, 0, 0);
-		}
-		else {
+		} else {
 			path.lineTo(x, y);
 			float _xmax = (float) bounds.getMaxX();
 			float _ymax = (float) bounds.getMaxY();
@@ -300,8 +294,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @param p
 	 *          the specified <code>Point</code> to be tested
-	 * @return <code>true</code> if the <code>Polygon</code> contains the <code>Point</code>; <code>false</code>
-	 *         otherwise.
+	 * @return <code>true</code> if the <code>Polygon</code> contains the <code>Point</code>; <code>false</code> otherwise.
 	 * @see #contains(double, double)
 	 */
 	public boolean contains(Point p) {
@@ -316,8 +309,8 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *          the specified x coordinate to be tested
 	 * @param y
 	 *          the specified y coordinate to be tested
-	 * @return <code>true</code> if this <code>Polygon</code> contains the specified coordinates,
-	 *         (<i>x</i>,&amp;nbsp;<i>y</i>); <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> contains the specified coordinates, (<i>x</i>,&amp;nbsp;<i>y</i>); <code>false</code>
+	 *         otherwise.
 	 */
 	public boolean contains(int x, int y) {
 		return contains((double) x, (double) y);
@@ -342,15 +335,14 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Determines if the specified coordinates are inside this <code>Polygon</code>. For the definition of
-	 * <i>insideness</i>, see the class comments of {@link Shape}.
+	 * Determines if the specified coordinates are inside this <code>Polygon</code>. For the definition of <i>insideness</i>, see the class comments of
+	 * {@link Shape}.
 	 * 
 	 * @param x
 	 *          the specified x coordinate
 	 * @param y
 	 *          the specified y coordinate
-	 * @return <code>true</code> if the <code>Polygon</code> contains the specified coordinates; <code>false</code>
-	 *         otherwise.
+	 * @return <code>true</code> if the <code>Polygon</code> contains the specified coordinates; <code>false</code> otherwise.
 	 */
 	@Override
 	public boolean contains(double x, double y) {
@@ -376,8 +368,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @param p
 	 *          a specified <code>Point2D</code>
-	 * @return <code>true</code> if this <code>Polygon</code> contains the specified <code>Point2D</code>;
-	 *         <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> contains the specified <code>Point2D</code>; <code>false</code> otherwise.
 	 * @see #contains(double, double)
 	 */
 	@Override
@@ -386,8 +377,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Tests if the interior of this <code>Polygon</code> intersects the interior of a specified set of rectangular
-	 * coordinates.
+	 * Tests if the interior of this <code>Polygon</code> intersects the interior of a specified set of rectangular coordinates.
 	 * 
 	 * @param x
 	 *          the x coordinate of the specified rectangular shapes top-left corner
@@ -397,8 +387,8 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *          the width of the specified rectangular shape
 	 * @param h
 	 *          the height of the specified rectangular shape
-	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of
-	 *         rectangular coordinates intersect each other; <code>false</code> otherwise.
+	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of rectangular coordinates intersect
+	 *         each other; <code>false</code> otherwise.
 	 */
 	@Override
 	public boolean intersects(double x, double y, double w, double h) {
@@ -414,8 +404,8 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @param r
 	 *          a specified <code>Rectangle2D</code>
-	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code>
-	 *         intersect each other; <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code> intersect each other;
+	 *         <code>false</code> otherwise.
 	 */
 	@Override
 	public boolean intersects(Rectangle2D r) {
@@ -433,8 +423,8 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 *          the width of the set of rectangular coordinates
 	 * @param h
 	 *          the height of the set of rectangular coordinates
-	 * @return <code>true</code> if this <code>Polygon</code> entirely contains the specified set of rectangular
-	 *         coordinates; <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> entirely contains the specified set of rectangular coordinates; <code>false</code>
+	 *         otherwise.
 	 */
 	@Override
 	public boolean contains(double x, double y, double w, double h) {
@@ -451,8 +441,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @param r
 	 *          the specified <code>Rectangle2D</code>
-	 * @return <code>true</code> if this <code>Polygon</code> entirely contains the specified <code>Rectangle2D</code>;
-	 *         <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> entirely contains the specified <code>Rectangle2D</code>; <code>false</code> otherwise.
 	 * @see #contains(double, double, double, double)
 	 */
 	@Override
@@ -461,13 +450,13 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns an iterator object that iterates along the boundary of this <code>Polygon</code> and provides access to the
-	 * geometry of the outline of this <code>Polygon</code>. An optional {@link AffineTransform} can be specified so that
-	 * the coordinates returned in the iteration are transformed accordingly.
+	 * Returns an iterator object that iterates along the boundary of this <code>Polygon</code> and provides access to the geometry of the outline of
+	 * this <code>Polygon</code>. An optional {@link AffineTransform} can be specified so that the coordinates returned in the iteration are transformed
+	 * accordingly.
 	 * 
 	 * @param at
-	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the
-	 *          iteration, or <code>null</code> if untransformed coordinates are desired
+	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the iteration, or <code>null</code> if
+	 *          untransformed coordinates are desired
 	 * @return a {@link PathIterator} object that provides access to the geometry of this <code>Polygon</code>.
 	 */
 	@Override
@@ -480,17 +469,16 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns an iterator object that iterates along the boundary of the <code>Polygon2D</code> and provides access to
-	 * the geometry of the outline of the <code>Shape</code>. Only SEG_MOVETO, SEG_LINETO, and SEG_CLOSE point types are
-	 * returned by the iterator. Since polygons are already flat, the <code>flatness</code> parameter is ignored.
+	 * Returns an iterator object that iterates along the boundary of the <code>Polygon2D</code> and provides access to the geometry of the outline of
+	 * the <code>Shape</code>. Only SEG_MOVETO, SEG_LINETO, and SEG_CLOSE point types are returned by the iterator. Since polygons are already flat, the
+	 * <code>flatness</code> parameter is ignored.
 	 * 
 	 * @param at
-	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the
-	 *          iteration, or <code>null</code> if untransformed coordinates are desired
+	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the iteration, or <code>null</code> if
+	 *          untransformed coordinates are desired
 	 * @param flatness
-	 *          the maximum amount that the control points for a given curve can vary from colinear before a subdivided
-	 *          curve is replaced by a straight line connecting the endpoints. Since polygons are already flat the
-	 *          <code>flatness</code> parameter is ignored.
+	 *          the maximum amount that the control points for a given curve can vary from colinear before a subdivided curve is replaced by a straight
+	 *          line connecting the endpoints. Since polygons are already flat the <code>flatness</code> parameter is ignored.
 	 * @return a <code>PathIterator</code> object that provides access to the <code>Shape</code> objects geometry.
 	 */
 	@Override
@@ -500,15 +488,13 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
 }
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE
- * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
- * to You under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at <a href="http://www.apache.org/licenses/LICENSE-2.0</p>
- * <p>Unless" title="http://www.apache.org/licenses/LICENSE-2.0</p>
- * <p>Unless">http://www.apache.org/licenses/LICENSE-2.0</p> <p>Unless</p></a> required by applicable law or agreed to
- * in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work
+ * for additional information regarding copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy of the License at <a
+ * href="http://www.apache.org/licenses/LICENSE-2.0</p> <p>Unless" title="http://www.apache.org/licenses/LICENSE-2.0</p>
+ * <p>Unless">http://www.apache.org/licenses/LICENSE-2.0</p> <p>Unless</p></a> required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under the License.
  */
 
 /**
@@ -523,20 +509,17 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	private static final float ASSUME_ZERO = 0.001f;
 
 	/**
-	 * The total number of points. The value of <code>npoints</code> represents the number of points in this
-	 * <code>Polyline2D</code>.
+	 * The total number of points. The value of <code>npoints</code> represents the number of points in this <code>Polyline2D</code>.
 	 */
 	public int npoints;
 
 	/**
-	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this
-	 * <code>Polyline2D</code>.
+	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this <code>Polyline2D</code>.
 	 */
 	public float[] xpoints;
 
 	/**
-	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this
-	 * <code>Polyline2D</code>.
+	 * The array of <i>x</i> coordinates. The value of {@link #npoints npoints} is equal to the number of points in this <code>Polyline2D</code>.
 	 */
 	public float[] ypoints;
 
@@ -570,8 +553,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * @exception NegativeArraySizeException
 	 *              if the value of <code>npoints</code> is negative.
 	 * @exception IndexOutOfBoundsException
-	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of
-	 *              <code>ypoints</code>.
+	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of <code>ypoints</code>.
 	 * @exception NullPointerException
 	 *              if <code>xpoints</code> or <code>ypoints</code> is <code>null</code>.
 	 */
@@ -599,8 +581,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * @exception NegativeArraySizeException
 	 *              if the value of <code>npoints</code> is negative.
 	 * @exception IndexOutOfBoundsException
-	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of
-	 *              <code>ypoints</code>.
+	 *              if <code>npoints</code> is greater than the length of <code>xpoints</code> or the length of <code>ypoints</code>.
 	 * @exception NullPointerException
 	 *              if <code>xpoints</code> or <code>ypoints</code> is <code>null</code>.
 	 */
@@ -630,12 +611,11 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Resets this <code>Polyline2D</code> object to an empty polygon. The coordinate arrays and the data in them are left
-	 * untouched but the number of points is reset to zero to mark the old vertex data as invalid and to start
-	 * accumulating new vertex data at the beginning. All internally-cached data relating to the old vertices are
-	 * discarded. Note that since the coordinate arrays from before the reset are reused, creating a new empty
-	 * <code>Polyline2D</code> might be more memory efficient than resetting the current one if the number of vertices in
-	 * the new polyline data is significantly smaller than the number of vertices in the data from before the reset.
+	 * Resets this <code>Polyline2D</code> object to an empty polygon. The coordinate arrays and the data in them are left untouched but the number of
+	 * points is reset to zero to mark the old vertex data as invalid and to start accumulating new vertex data at the beginning. All internally-cached
+	 * data relating to the old vertices are discarded. Note that since the coordinate arrays from before the reset are reused, creating a new empty
+	 * <code>Polyline2D</code> might be more memory efficient than resetting the current one if the number of vertices in the new polyline data is
+	 * significantly smaller than the number of vertices in the data from before the reset.
 	 */
 	public void reset() {
 		npoints = 0;
@@ -669,8 +649,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 			path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
 			path.moveTo(x, y);
 			bounds = new Rectangle2D.Float(x, y, 0, 0);
-		}
-		else {
+		} else {
 			path.lineTo(x, y);
 			float _xmax = (float) bounds.getMaxX();
 			float _ymax = (float) bounds.getMaxY();
@@ -695,8 +674,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	/**
 	 * Appends the specified coordinates to this <code>Polyline2D</code>.
 	 * <p>
-	 * If an operation that calculates the bounding box of this <code>Polyline2D</code> has already been performed, such
-	 * as <code>getBounds</code> or <code>contains</code>, then this method updates the bounding box.
+	 * If an operation that calculates the bounding box of this <code>Polyline2D</code> has already been performed, such as <code>getBounds</code> or
+	 * <code>contains</code>, then this method updates the bounding box.
 	 * 
 	 * @param x
 	 *          the specified x coordinate
@@ -724,9 +703,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Gets the bounding box of this <code>Polyline2D</code>. The bounding box is the smallest {@link Rectangle} whose
-	 * sides are parallel to the x and y axes of the coordinate space, and can completely contain the
-	 * <code>Polyline2D</code>.
+	 * Gets the bounding box of this <code>Polyline2D</code>. The bounding box is the smallest {@link Rectangle} whose sides are parallel to the x and y
+	 * axes of the coordinate space, and can completely contain the <code>Polyline2D</code>.
 	 * 
 	 * @return a <code>Rectangle</code> that defines the bounds of this <code>Polyline2D</code>.
 	 */
@@ -748,18 +726,16 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Determines whether the specified {@link Point} is inside this <code>Polyline2D</code>. This method is required to
-	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no
-	 * area.
+	 * Determines whether the specified {@link Point} is inside this <code>Polyline2D</code>. This method is required to implement the Shape interface,
+	 * but in the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	public boolean contains(Point p) {
 		return false;
 	}
 
 	/**
-	 * Determines if the specified coordinates are inside this <code>Polyline2D</code>. This method is required to
-	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no
-	 * area.
+	 * Determines if the specified coordinates are inside this <code>Polyline2D</code>. This method is required to implement the Shape interface, but in
+	 * the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	@Override
 	public boolean contains(double x, double y) {
@@ -767,9 +743,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Determines whether the specified coordinates are inside this <code>Polyline2D</code>. This method is required to
-	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no
-	 * area.
+	 * Determines whether the specified coordinates are inside this <code>Polyline2D</code>. This method is required to implement the Shape interface,
+	 * but in the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	public boolean contains(int x, int y) {
 		return false;
@@ -786,9 +761,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Tests if a specified {@link Point2D} is inside the boundary of this <code>Polyline2D</code>. This method is
-	 * required to implement the Shape interface, but in the case of Line2D objects it always returns false since a line
-	 * contains no area.
+	 * Tests if a specified {@link Point2D} is inside the boundary of this <code>Polyline2D</code>. This method is required to implement the Shape
+	 * interface, but in the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	@Override
 	public boolean contains(Point2D p) {
@@ -796,8 +770,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Tests if the interior of this <code>Polygon</code> intersects the interior of a specified set of rectangular
-	 * coordinates.
+	 * Tests if the interior of this <code>Polygon</code> intersects the interior of a specified set of rectangular coordinates.
 	 * 
 	 * @param x
 	 *          the x coordinate of the specified rectangular shapes top-left corner
@@ -807,8 +780,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 *          the width of the specified rectangular shape
 	 * @param h
 	 *          the height of the specified rectangular shape
-	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of
-	 *         rectangular coordinates intersect each other; <code>false</code> otherwise.
+	 * @return <code>true</code> if the interior of this <code>Polygon</code> and the interior of the specified set of rectangular coordinates intersect
+	 *         each other; <code>false</code> otherwise.
 	 */
 	@Override
 	public boolean intersects(double x, double y, double w, double h) {
@@ -824,8 +797,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	 * 
 	 * @param r
 	 *          a specified <code>Rectangle2D</code>
-	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code>
-	 *         intersect each other; <code>false</code> otherwise.
+	 * @return <code>true</code> if this <code>Polygon</code> and the interior of the specified <code>Rectangle2D</code> intersect each other;
+	 *         <code>false</code> otherwise.
 	 */
 	@Override
 	public boolean intersects(Rectangle2D r) {
@@ -833,9 +806,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Tests if the interior of this <code>Polyline2D</code> entirely contains the specified set of rectangular
-	 * coordinates. This method is required to implement the Shape interface, but in the case of Line2D objects it always
-	 * returns false since a line contains no area.
+	 * Tests if the interior of this <code>Polyline2D</code> entirely contains the specified set of rectangular coordinates. This method is required to
+	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	@Override
 	public boolean contains(double x, double y, double w, double h) {
@@ -843,9 +815,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Tests if the interior of this <code>Polyline2D</code> entirely contains the specified <code>Rectangle2D</code>.
-	 * This method is required to implement the Shape interface, but in the case of Line2D objects it always returns false
-	 * since a line contains no area.
+	 * Tests if the interior of this <code>Polyline2D</code> entirely contains the specified <code>Rectangle2D</code>. This method is required to
+	 * implement the Shape interface, but in the case of Line2D objects it always returns false since a line contains no area.
 	 */
 	@Override
 	public boolean contains(Rectangle2D r) {
@@ -853,13 +824,13 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns an iterator object that iterates along the boundary of this <code>Polygon</code> and provides access to the
-	 * geometry of the outline of this <code>Polygon</code>. An optional {@link AffineTransform} can be specified so that
-	 * the coordinates returned in the iteration are transformed accordingly.
+	 * Returns an iterator object that iterates along the boundary of this <code>Polygon</code> and provides access to the geometry of the outline of
+	 * this <code>Polygon</code>. An optional {@link AffineTransform} can be specified so that the coordinates returned in the iteration are transformed
+	 * accordingly.
 	 * 
 	 * @param at
-	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the
-	 *          iteration, or <code>null</code> if untransformed coordinates are desired
+	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the iteration, or <code>null</code> if
+	 *          untransformed coordinates are desired
 	 * @return a {@link PathIterator} object that provides access to the geometry of this <code>Polygon</code>.
 	 */
 	@Override
@@ -871,8 +842,8 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/*
-	 * get the associated {@link Polygon2D}. This method take care that may be the last point can be equal to the first.
-	 * In that case it must not be included in the Polygon, as polygons declare their first point only once.
+	 * get the associated {@link Polygon2D}. This method take care that may be the last point can be equal to the first. In that case it must not be
+	 * included in the Polygon, as polygons declare their first point only once.
 	 */
 	public Polygon2D getPolygon2D() {
 		Polygon2D pol = new Polygon2D();
@@ -889,17 +860,16 @@ class Polyline2D implements Shape, Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns an iterator object that iterates along the boundary of the <code>Shape</code> and provides access to the
-	 * geometry of the outline of the <code>Shape</code>. Only SEG_MOVETO and SEG_LINETO, point types are returned by the
-	 * iterator. Since polylines are already flat, the <code>flatness</code> parameter is ignored.
+	 * Returns an iterator object that iterates along the boundary of the <code>Shape</code> and provides access to the geometry of the outline of the
+	 * <code>Shape</code>. Only SEG_MOVETO and SEG_LINETO, point types are returned by the iterator. Since polylines are already flat, the
+	 * <code>flatness</code> parameter is ignored.
 	 * 
 	 * @param at
-	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the
-	 *          iteration, or <code>null</code> if untransformed coordinates are desired
+	 *          an optional <code>AffineTransform</code> to be applied to the coordinates as they are returned in the iteration, or <code>null</code> if
+	 *          untransformed coordinates are desired
 	 * @param flatness
-	 *          the maximum amount that the control points for a given curve can vary from colinear before a subdivided
-	 *          curve is replaced by a straight line connecting the endpoints. Since polygons are already flat the
-	 *          <code>flatness</code> parameter is ignored.
+	 *          the maximum amount that the control points for a given curve can vary from colinear before a subdivided curve is replaced by a straight
+	 *          line connecting the endpoints. Since polygons are already flat the <code>flatness</code> parameter is ignored.
 	 * @return a <code>PathIterator</code> object that provides access to the <code>Shape</code> objects geometry.
 	 */
 	@Override

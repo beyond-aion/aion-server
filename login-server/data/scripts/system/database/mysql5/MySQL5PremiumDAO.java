@@ -17,6 +17,7 @@ import com.aionemu.loginserver.dao.PremiumDAO;
  * @author KID
  */
 public class MySQL5PremiumDAO extends PremiumDAO {
+
 	private final Logger log = LoggerFactory.getLogger("PREMIUM_CTRL");
 
 	@Override
@@ -29,14 +30,12 @@ public class MySQL5PremiumDAO extends PremiumDAO {
 			if (rs.next()) {
 				points = rs.getLong("toll");
 			}
-		}
-		catch (Exception e) {
-			log.error("getPoints [select points] "+accountId, e);
-		}
-		finally {
+		} catch (Exception e) {
+			log.error("getPoints [select points] " + accountId, e);
+		} finally {
 			DB.close(st);
 		}
-		
+
 		FastTable<Integer> rewarded = new FastTable<>();
 		st = DB.prepareStatement("SELECT uniqId,points FROM account_rewards WHERE accountId=? AND rewarded=0");
 		try {
@@ -45,37 +44,33 @@ public class MySQL5PremiumDAO extends PremiumDAO {
 			if (rs.next()) {
 				int uniqId = rs.getInt("uniqId");
 				points += rs.getLong("points");
-				log.info("Account "+accountId+" has received uniqId #"+uniqId);
+				log.info("Account " + accountId + " has received uniqId #" + uniqId);
 				rewarded.add(uniqId);
 			}
-		}
-		catch (Exception e) {
-			log.error("getPoints [get rewards] "+accountId, e);
-		}
-		finally {
+		} catch (Exception e) {
+			log.error("getPoints [get rewards] " + accountId, e);
+		} finally {
 			DB.close(st);
 		}
-		
-		if(rewarded.size() > 0) {
+
+		if (rewarded.size() > 0) {
 			Connection con = null;
 			try {
 				con = DatabaseFactory.getConnection();
 				PreparedStatement stmt;
-				for(int uniqid : rewarded) {
+				for (int uniqid : rewarded) {
 					stmt = con.prepareStatement("UPDATE account_rewards SET rewarded=1,received=NOW() WHERE uniqId=?");
 					stmt.setInt(1, uniqid);
 					stmt.execute();
 					stmt.close();
 				}
-			}
-			catch (Exception e) {
-				log.error("getPoints [update uniq] "+accountId, e);
-			}
-			finally {
+			} catch (Exception e) {
+				log.error("getPoints [update uniq] " + accountId, e);
+			} finally {
 				DatabaseFactory.close(con);
 			}
 		}
-		
+
 		return points;
 	}
 
@@ -90,15 +85,13 @@ public class MySQL5PremiumDAO extends PremiumDAO {
 			stmt.setInt(2, accountId);
 			stmt.execute();
 			stmt.close();
-		}
-		catch (Exception e) {
-			log.error("updatePoints "+accountId, e);
+		} catch (Exception e) {
+			log.error("updatePoints " + accountId, e);
 			s = false;
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
-		
+
 		return s;
 	}
 

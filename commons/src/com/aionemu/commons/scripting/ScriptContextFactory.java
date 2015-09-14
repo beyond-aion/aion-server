@@ -5,8 +5,7 @@ import java.io.File;
 import com.aionemu.commons.scripting.impl.ScriptContextImpl;
 
 /**
- * This class is script context provider. We can switch to any other ScriptContext implementation later, so it's good to
- * have factory class
+ * This class is script context provider. We can switch to any other ScriptContext implementation later, so it's good to have factory class
  * 
  * @author SoulKeeper
  */
@@ -27,8 +26,7 @@ public final class ScriptContextFactory {
 		ScriptContextImpl ctx;
 		if (parent == null) {
 			ctx = new ScriptContextImpl(root);
-		}
-		else {
+		} else {
 			ctx = new ScriptContextImpl(root, parent);
 			parent.addChildScriptContext(ctx);
 		}

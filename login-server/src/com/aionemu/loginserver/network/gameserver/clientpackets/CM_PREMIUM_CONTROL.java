@@ -18,9 +18,9 @@ public class CM_PREMIUM_CONTROL extends GsClientPacket {
 		accountId = readD();
 		requestId = readD();
 		requiredCost = readQ();
-		serverId = (byte)readC();
+		serverId = (byte) readC();
 	}
-	
+
 	@Override
 	protected void runImpl() {
 		PremiumController.getController().requestBuy(accountId, requestId, requiredCost, serverId);

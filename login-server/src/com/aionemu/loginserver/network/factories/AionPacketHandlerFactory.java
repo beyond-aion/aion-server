@@ -19,7 +19,7 @@ import com.aionemu.loginserver.network.aion.clientpackets.CM_UPDATE_SESSION;
  */
 public class AionPacketHandlerFactory {
 
-	/** 
+	/**
 	 * logger for this class
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AionPacketHandlerFactory.class);
@@ -74,7 +74,7 @@ public class AionPacketHandlerFactory {
 				break;
 			}
 		}
-		
+
 		return msg;
 	}
 

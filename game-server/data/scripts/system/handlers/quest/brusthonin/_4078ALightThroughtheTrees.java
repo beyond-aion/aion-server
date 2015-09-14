@@ -33,7 +33,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (targetId == 205157) {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -42,12 +42,12 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		}
-		
+
 		if (qs == null)
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		
+
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205157) {
 				switch (dialog) {
@@ -59,11 +59,10 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
-		
+
 		if (targetId == 205157) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
@@ -77,12 +76,10 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 			}
-		}
-		else if (targetId == 700428) {
+		} else if (targetId == 700428) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 1) {
@@ -92,8 +89,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 700427) {
+		} else if (targetId == 700427) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 2) {
@@ -103,8 +99,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 700429) {
+		} else if (targetId == 700429) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 3) {

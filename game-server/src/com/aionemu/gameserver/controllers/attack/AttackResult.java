@@ -10,7 +10,7 @@ public class AttackResult {
 	private int damage;
 
 	private AttackStatus attackStatus;
-	
+
 	private HitType hitType = HitType.EVERYHIT;
 
 	/**
@@ -24,7 +24,7 @@ public class AttackResult {
 	private int protectorId = 0;
 	private int mpAbsorbed = 0;
 	private int mpShieldSkillId = 0;
-	
+
 	private boolean launchSubEffect = true;
 
 	public AttackResult(int damage, AttackStatus attackStatus) {
@@ -73,12 +73,11 @@ public class AttackResult {
 	public void setDamageType(HitType type) {
 		this.hitType = type;
 	}
-	
+
 	/**
 	 * shield effects related
-	 * 
 	 */
-	
+
 	/**
 	 * @return the shieldType
 	 */
@@ -109,7 +108,7 @@ public class AttackResult {
 	public void setReflectedSkillId(int skillId) {
 		this.reflectedSkillId = skillId;
 	}
-	
+
 	public int getProtectedSkillId() {
 		return this.protectedSkillId;
 	}
@@ -117,7 +116,7 @@ public class AttackResult {
 	public void setProtectedSkillId(int skillId) {
 		this.protectedSkillId = skillId;
 	}
-	
+
 	public int getProtectedDamage() {
 		return this.protectedDamage;
 	}
@@ -125,7 +124,7 @@ public class AttackResult {
 	public void setProtectedDamage(int protectedDamage) {
 		this.protectedDamage = protectedDamage;
 	}
-	
+
 	public int getProtectorId() {
 		return this.protectorId;
 	}
@@ -133,11 +132,11 @@ public class AttackResult {
 	public void setProtectorId(int protectorId) {
 		this.protectorId = protectorId;
 	}
-	
+
 	public boolean isLaunchSubEffect() {
 		return launchSubEffect;
 	}
-	
+
 	public void setLaunchSubEffect(boolean launchSubEffect) {
 		this.launchSubEffect = launchSubEffect;
 	}
@@ -150,7 +149,6 @@ public class AttackResult {
 		this.mpAbsorbed = mpAbsorbed;
 	}
 
-	
 	/**
 	 * @return the mpShieldSkillId
 	 */
@@ -158,12 +156,12 @@ public class AttackResult {
 		return mpShieldSkillId;
 	}
 
-	
 	/**
-	 * @param mpShieldSkillId the mpShieldSkillId to set
+	 * @param mpShieldSkillId
+	 *          the mpShieldSkillId to set
 	 */
 	public void setMpShieldSkillId(int mpShieldSkillId) {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}
-	
+
 }

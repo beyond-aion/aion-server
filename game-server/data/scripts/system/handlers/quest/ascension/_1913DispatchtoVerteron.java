@@ -67,8 +67,7 @@ public class _1913DispatchtoVerteron extends QuestHandler {
 							}
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203097) {
 				return sendQuestEndDialog(env);
 			}

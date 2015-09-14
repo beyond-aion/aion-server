@@ -4,7 +4,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- *
  * @author xTz
  */
 public class SM_ICON_INFO extends AionServerPacket {
@@ -20,8 +19,8 @@ public class SM_ICON_INFO extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(buffId);
-		writeC(0x00);//unk
-		writeH(0x00);//unk
+		writeC(0x00);// unk
+		writeH(0x00);// unk
 		writeC(display ? 1 : 0);
 	}
 

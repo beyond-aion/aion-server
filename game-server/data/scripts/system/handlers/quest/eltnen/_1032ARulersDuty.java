@@ -49,14 +49,12 @@ public class _1032ARulersDuty extends QuestHandler {
 		if (!player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1032")))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-			0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-					1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				qs.setQuestVar(4);
 				updateQuestStatus(env);
 			}
@@ -95,8 +93,7 @@ public class _1032ARulersDuty extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
@@ -105,8 +102,7 @@ public class _1032ARulersDuty extends QuestHandler {
 					return sendQuestDialog(env, 2716);
 				return sendQuestEndDialog(env);
 			}
-		}
-		else if (targetId == 730020) // Demro
+		} else if (targetId == 730020) // Demro
 		{
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -116,8 +112,7 @@ public class _1032ARulersDuty extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
@@ -129,8 +124,7 @@ public class _1032ARulersDuty extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -145,23 +139,20 @@ public class _1032ARulersDuty extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
 			else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SETPRO4) 
-				{
+				else if (env.getDialog() == DialogAction.SETPRO4) {
 					removeQuestItem(env, 182201001, 1);
 					qs.setQuestVar(5);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

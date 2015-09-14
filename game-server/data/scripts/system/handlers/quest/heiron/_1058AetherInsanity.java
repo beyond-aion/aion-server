@@ -56,8 +56,7 @@ public class _1058AetherInsanity extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204501)
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204020) {
@@ -70,12 +69,11 @@ public class _1058AetherInsanity extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						TeleportService2.teleportTo(player, 210040000, 2453.54f, 239.8f, 421.9f, (byte)113, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 210040000, 2453.54f, 239.8f, 421.9f, (byte) 113, TeleportAnimation.BEAM_ANIMATION);
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204501) {
+		} else if (targetId == 204501) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -87,8 +85,7 @@ public class _1058AetherInsanity extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 10001);
 				case SELECT_ACTION_1353:
 					playQuestMovie(env, 191);

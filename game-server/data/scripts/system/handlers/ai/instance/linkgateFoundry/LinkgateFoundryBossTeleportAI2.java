@@ -14,14 +14,11 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 @AIName("linkgateFoundryBossTeleport")
 public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
-
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
@@ -33,7 +30,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 		switchWay(player, dialogId);
 		return true;
 	}
-	
+
 	private void switchWay(Player player, int dialogId) {
 		switch (DialogAction.getActionByDialogId(dialogId)) {
 			case SELECT_BOSS_LEVEL2:
@@ -47,7 +44,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 				break;
 		}
 	}
-	
+
 	private void checkKeys(Player player, long keyCount) {
 		Item keys = player.getInventory().getFirstItemByItemId(185000196);
 		int bossId = 0;
@@ -57,13 +54,11 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 				bossId = 234990;
 				msg = 1402440;
 				spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);
-			}
-			else if (keyCount == 5) {
+			} else if (keyCount == 5) {
 				bossId = 234542;
 				msg = 1402441;
 				spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);
-			}
-			else if (keyCount == 7) {
+			} else if (keyCount == 7) {
 				bossId = 234991;
 				msg = 1402442;
 			}
@@ -75,8 +70,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 			AI2Actions.deleteOwner(this);
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 		}
 	}

@@ -20,8 +20,8 @@ import com.aionemu.commons.database.dao.DAOManager;
 /**
  * @author ATracer
  */
-public class CM_CHANNEL_MESSAGE extends AbstractClientPacket
-{
+public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
+
 	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_MESSAGE.class);
 	private int channelId;
 	private byte[] content;
@@ -32,15 +32,13 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket
 	 * @param gameChannelHandler
 	 * @param opCode
 	 */
-	public CM_CHANNEL_MESSAGE(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler, BroadcastService broadcastService)
-	{
+	public CM_CHANNEL_MESSAGE(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler, BroadcastService broadcastService) {
 		super(channelBuffer, gameChannelHandler, 0x18);
 		this.broadcastService = broadcastService;
 	}
 
 	@Override
-	protected void readImpl()
-	{
+	protected void readImpl() {
 		readH();
 		readC();
 		readD();
@@ -54,18 +52,15 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket
 	}
 
 	@Override
-	protected void runImpl()
-	{
+	protected void runImpl() {
 		Channel channel = ChatChannels.getChannelById(channelId);
 		Message message = new Message(channel, content, clientChannelHandler.getChatClient());
-		if(!clientChannelHandler.getChatClient().verifyLastMessage())
-		{
+		if (!clientChannelHandler.getChatClient().verifyLastMessage()) {
 			message.setText("You can use chat only once every 30 second.");
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
 			return;
 		}
-		if(clientChannelHandler.getChatClient().isGagged())
-		{
+		if (clientChannelHandler.getChatClient().isGagged()) {
 			long endTime = (clientChannelHandler.getChatClient().getGagTime() - System.currentTimeMillis()) / 1000 / 60;
 			message.setText("You have been gagged for " + endTime + " minutes");
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
@@ -73,15 +68,13 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket
 		}
 		broadcastService.broadcastMessage(message);
 
-		if(Config.LOG_CHAT)
-		{
-			LoggerFactory.getLogger("CHAT_LOG").info(String.format("[MESSAGE] <%s>: [%s]> %s", message.getChannelString(), message.getSenderString(), message.getTextString()));
+		if (Config.LOG_CHAT) {
+			LoggerFactory.getLogger("CHAT_LOG").info(
+				String.format("[MESSAGE] <%s>: [%s]> %s", message.getChannelString(), message.getSenderString(), message.getTextString()));
 		}
-		
-		if(Config.LOG_CHAT_TO_DB)
-		{
-			switch(channel.getChannelType())
-			{
+
+		if (Config.LOG_CHAT_TO_DB) {
+			switch (channel.getChannelType()) {
 				case PUBLIC:
 					DAOManager.getDAO(ChatLogDAO.class).add_ChannelChat(message.getSenderString(), message.getTextString(), "", "PUBLIC");
 					break;
@@ -105,8 +98,7 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "CM_CHANNEL_MESSAGE [channelId=" + channelId + ", content=" + Arrays.toString(content) + "]";
 	}
 }

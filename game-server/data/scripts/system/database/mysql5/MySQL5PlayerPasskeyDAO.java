@@ -32,8 +32,7 @@ public class MySQL5PlayerPasskeyDAO extends PlayerPasskeyDAO {
 				stmt.setString(2, passkey);
 				stmt.execute();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error saving PlayerPasskey. accountId: " + accountId, e);
 		}
 	}
@@ -49,8 +48,7 @@ public class MySQL5PlayerPasskeyDAO extends PlayerPasskeyDAO {
 				if (stmt.executeUpdate() > 0)
 					result = true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error updating PlayerPasskey. accountId: " + accountId, e);
 		}
 		return result;
@@ -66,8 +64,7 @@ public class MySQL5PlayerPasskeyDAO extends PlayerPasskeyDAO {
 				if (stmt.executeUpdate() > 0)
 					result = true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error updaing PlayerPasskey. accountId: " + accountId, e);
 		}
 		return result;
@@ -87,8 +84,7 @@ public class MySQL5PlayerPasskeyDAO extends PlayerPasskeyDAO {
 					}
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error loading PlayerPasskey. accountId: " + accountId, e);
 			return false;
 		}
@@ -108,8 +104,7 @@ public class MySQL5PlayerPasskeyDAO extends PlayerPasskeyDAO {
 					}
 				}
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Error loading PlayerPasskey. accountId: " + accountId, e);
 			return false;
 		}

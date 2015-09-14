@@ -38,8 +38,8 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 	private Future<?> enrageTask;
 	private Future<?> rayThornTask;
 	private Future<?> addSpawnTask;
-	private Future<?> swipingBlowTask;	
-	private Future<?> neuroToxinTask;	
+	private Future<?> swipingBlowTask;
+	private Future<?> neuroToxinTask;
 	protected List<Integer> percents = new ArrayList<Integer>();
 
 	@Override
@@ -85,6 +85,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 			}
 		}
 	}
+
 	private void sandSquallNeuroToxinEvent() {
 		think = false;
 		EmoteManager.emoteStopAttacking(getOwner());
@@ -98,7 +99,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 					spawn(282533, 523.1f, 541.1f, 106.7f, (byte) 0);
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401300);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
-								
+
 						@Override
 						public void run() {
 							if (!isAlreadyDead()) {
@@ -107,8 +108,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 								if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 									setStateIfNot(AIState.FIGHT);
 									think();
-								}
-								else {
+								} else {
 									getMoveController().abortMove();
 									getOwner().setTarget(creature);
 									getOwner().getGameStats().renewLastAttackTime();
@@ -138,21 +138,22 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 				if (!isAlreadyDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19859, 2, getOwner()).useNoAnimationSkill();
 					enrageTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							if (!isAlreadyDead()) {
 								SkillEngine.getInstance().getSkill(getOwner(), 20089, 2, getOwner()).useNoAnimationSkill();
 							}
 						}
-					}, 15000);					
+					}, 15000);
 				}
-			}			
+			}
 		}, 1200000); // 20 minutes
 	}
 
 	private void startRayThornEvent() {
 		rayThornTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -160,18 +161,19 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 				else {
 					projectileVomit();
 					if (!isAlreadyDead()) {
-						ThreadPoolManager.getInstance().schedule(new Runnable() {						
+						ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 							@Override
 							public void run() {
 								SkillEngine.getInstance().getSkill(getOwner(), 19891, 2, getOwner()).useSkill();
 							}
-						}, 8000);					
+						}, 8000);
 					}
-				}					
+				}
 			}
-		}, 1000, 25000);		
+		}, 1000, 25000);
 	}
-	
+
 	private void startAddSpawnEvent() {
 		addSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -180,44 +182,45 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelAddSpawn();
 				} else {
-					for (int i= 0; i < 3; i++) {
+					for (int i = 0; i < 3; i++) {
 						NpcShoutsService.getInstance().sendMsg(getOwner(), 1401299);
 						Point3D p = getRndPos();
 						spawn(282556, p.getX(), p.getY(), p.getZ(), (byte) 0);
-						Npc npc1 = (Npc) spawn(282535,  p.getX(),  p.getY(),  p.getZ(), (byte) 0);
-						Npc npc2 = (Npc) spawn(282535,  p.getX(),  p.getY(),  p.getZ(), (byte) 0);
+						Npc npc1 = (Npc) spawn(282535, p.getX(), p.getY(), p.getZ(), (byte) 0);
+						Npc npc2 = (Npc) spawn(282535, p.getX(), p.getY(), p.getZ(), (byte) 0);
 						NpcShoutsService.getInstance().sendMsg(npc1, 1500307, npc1.getObjectId(), 0, 1000);
 						NpcShoutsService.getInstance().sendMsg(npc2, 1500307, npc2.getObjectId(), 0, 1000);
 					}
 				}
 			}
-		}, 6000, 45000);		
+		}, 6000, 45000);
 	}
-	
+
 	private void startSwipingBlowEvent() {
 		swipingBlowTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
 					cancelSwipingBlow();
 				else {
 					swipingBlow();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {						
+					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							if (!isAlreadyDead())
 								SkillEngine.getInstance().getSkill(getOwner(), 19891, 2, getOwner()).useSkill();
 						}
 					}, 6000);
-				}					
+				}
 			}
-		}, 8000, 30000);		
+		}, 8000, 30000);
 	}
-	
+
 	private void startNeuroToxinEvent() {
 		neuroToxinTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (isAlreadyDead())
@@ -225,7 +228,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 				else {
 					neurotoxin();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							if (isAlreadyDead())
@@ -233,7 +236,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 							else {
 								neurotoxin();
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
-									
+
 									@Override
 									public void run() {
 										if (isAlreadyDead())
@@ -241,7 +244,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 										else {
 											projectileVomit();
 											ThreadPoolManager.getInstance().schedule(new Runnable() {
-												
+
 												@Override
 												public void run() {
 													if (isAlreadyDead())
@@ -257,34 +260,34 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 							}
 						}
 					}, 3000);
-				}		
+				}
 			}
 		}, 8000, 30000);
 	}
-	
+
 	private void projectileVomit() {
 		if (!isAlreadyDead())
 			SkillEngine.getInstance().getSkill(getOwner(), 19890, 2, getOwner()).useSkill();
 	}
-	
+
 	private void swipingBlow() {
 		if (!isAlreadyDead()) {
 			AI2Actions.targetSelf(this);
 			SkillEngine.getInstance().getSkill(getOwner(), 19889, 2, getOwner()).useSkill();
 		}
 	}
-	
+
 	private void neurotoxin() {
 		Player target = getRandomTarget();
 		if (!isAlreadyDead()) {
 			AI2Actions.targetCreature(this, target);
-			if (target == null) 
-				return; 
-			else 
-				SkillEngine.getInstance().getSkill(getOwner(), 19892, 2, getOwner()).useSkill(); 
+			if (target == null)
+				return;
+			else
+				SkillEngine.getInstance().getSkill(getOwner(), 19892, 2, getOwner()).useSkill();
 		}
 	}
-	
+
 	private Player getRandomTarget() {
 		List<Player> players = new ArrayList<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
@@ -296,7 +299,6 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 			return null;
 		return players.get(Rnd.get(players.size()));
 	}
-	
 
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
@@ -306,13 +308,13 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void deleteAdds() {	
+	private void deleteAdds() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
-					
+
 			@Override
 			public void run() {
 				WorldPosition p = getPosition();
-				if(p != null) {
+				if (p != null) {
 					WorldMapInstance instance = p.getWorldMapInstance();
 					if (instance != null) {
 						deleteNpcs(instance.getNpcs(282556));
@@ -338,19 +340,19 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 			rayThornTask.cancel(true);
 		}
 	}
-		
+
 	private void cancelAddSpawn() {
 		if (addSpawnTask != null && !addSpawnTask.isCancelled()) {
 			addSpawnTask.cancel(true);
 		}
 	}
-	
+
 	private void cancelSwipingBlow() {
 		if (swipingBlowTask != null && !swipingBlowTask.isCancelled()) {
 			swipingBlowTask.cancel(true);
 		}
 	}
-	
+
 	private void cancelNeuroToxin() {
 		if (neuroToxinTask != null && !neuroToxinTask.isCancelled()) {
 			neuroToxinTask.cancel(true);
@@ -362,12 +364,12 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 			enrageTask.cancel(true);
 		}
 	}
-	
+
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{100, 75, 50, 25});
+		Collections.addAll(percents, new Integer[] { 100, 75, 50, 25 });
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -385,7 +387,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 		cancelAddSpawn();
 		cancelSwipingBlow();
 		cancelNeuroToxin();
-		getEffectController().removeEffect(19859);		
+		getEffectController().removeEffect(19859);
 		think = true;
 		neuroToxin.set(false);
 	}
@@ -399,7 +401,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 		cancelAddSpawn();
 		cancelSwipingBlow();
 		cancelNeuroToxin();
-		
+
 	}
 
 	@Override

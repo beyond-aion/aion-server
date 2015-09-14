@@ -27,12 +27,13 @@ public class _22844WatchingtheWatch extends QuestHandler {
 		qe.registerOnEnterZone(ZoneName.get("HADRADIMS_WATCH_600050000"), questId);
 		qe.registerOnKillInWorld(600050000, questId);
 	}
-	
+
 	@Override
 	public boolean onKillInWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("HADRADIMS_WATCH_600050000"))) {
-			if ((env.getPlayer().getLevel() >= (((Player)env.getVisibleObject()).getLevel() - 5)) && (env.getPlayer().getLevel() <= (((Player)env.getVisibleObject()).getLevel() + 9))) {
+			if ((env.getPlayer().getLevel() >= (((Player) env.getVisibleObject()).getLevel() - 5))
+				&& (env.getPlayer().getLevel() <= (((Player) env.getVisibleObject()).getLevel() + 9))) {
 				return defaultOnKillRankedEvent(env, 0, 1, true);
 			}
 		}
@@ -60,7 +61,7 @@ public class _22844WatchingtheWatch extends QuestHandler {
 		return false;
 	}
 
-    @Override
+	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		if (zoneName == ZoneName.get("HADRADIMS_WATCH_600050000")) {
 			Player player = env.getPlayer();

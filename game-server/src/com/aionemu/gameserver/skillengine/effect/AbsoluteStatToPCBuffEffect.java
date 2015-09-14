@@ -10,5 +10,5 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbsoluteStatToPCBuff")
 public class AbsoluteStatToPCBuffEffect extends AbstractAbsoluteStatEffect {
-	//TODO: Not removable by potions and healing
+	// TODO: Not removable by potions and healing
 }

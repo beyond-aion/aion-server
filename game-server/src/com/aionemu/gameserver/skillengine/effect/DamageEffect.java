@@ -17,21 +17,21 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public abstract class DamageEffect extends EffectTemplate {
 
 	@XmlAttribute
-  protected Func mode = Func.ADD;
+	protected Func mode = Func.ADD;
 	@XmlAttribute
 	protected boolean shared;
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.getEffected().getController().onAttack(effect.getEffector(), effect.getSkillId(), effect.getReserveds(this.position).getValue(), true);
-	  effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
+		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 	}
 
 	@Override
 	public void calculateDamage(Effect effect) {
 		int skillLvl = effect.getSkillLevel();
 		int valueWithDelta = value + delta * skillLvl;
-		
+
 		switch (element) {
 			case NONE:
 				valueWithDelta *= effect.getEffector().getGameStats().getPower().getCurrent() * 0.01f;
@@ -40,14 +40,14 @@ public abstract class DamageEffect extends EffectTemplate {
 				valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() * 0.01f;
 				break;
 		}
-		
+
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
 
 	public Func getMode() {
 		return mode;
 	}
-	
+
 	/**
 	 * @return the shared
 	 */

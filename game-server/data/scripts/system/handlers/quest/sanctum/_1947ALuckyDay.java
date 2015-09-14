@@ -69,8 +69,7 @@ public class _1947ALuckyDay extends QuestHandler {
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 798012)
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 798012)
 			return sendQuestEndDialog(env);
 		return false;
 	}

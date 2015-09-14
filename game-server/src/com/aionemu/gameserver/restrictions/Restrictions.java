@@ -31,10 +31,10 @@ public interface Restrictions {
 	public boolean canTrade(Player player);
 
 	public boolean canUseItem(Player player, Item item);
-	
+
 	public boolean canFly(Player player);
-	
+
 	public boolean canGlide(Player player);
-	
+
 	public boolean canPrivateStore(Player player);
 }

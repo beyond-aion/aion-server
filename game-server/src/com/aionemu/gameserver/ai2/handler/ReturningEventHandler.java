@@ -30,8 +30,7 @@ public class ReturningEventHandler {
 			Npc npc = npcAI.getOwner();
 			if (npc.hasWalkRoutes()) {
 				WalkManager.startWalking(npcAI);
-			}
-			else {
+			} else {
 				Point3D prevStep = npcAI.getOwner().getMoveController().recallPreviousStep();
 				npcAI.getOwner().getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
 			}

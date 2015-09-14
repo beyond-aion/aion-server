@@ -41,7 +41,7 @@ public class _1846PaperTrail extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
@@ -61,8 +61,7 @@ public class _1846PaperTrail extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 279015) {
@@ -79,8 +78,7 @@ public class _1846PaperTrail extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 279005) {
+		} else if (targetId == 279005) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -98,13 +96,13 @@ public class _1846PaperTrail extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;
 	}

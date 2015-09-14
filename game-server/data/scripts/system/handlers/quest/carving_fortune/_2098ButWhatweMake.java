@@ -66,11 +66,9 @@ public class _2098ButWhatweMake extends QuestHandler {
 					if (giveQuestItem(env, 182207089, 1))
 						;
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
+			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 			{
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -79,12 +77,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (targetId == 204361) // Hreidmar
+		} else if (targetId == 204361) // Hreidmar
 		{
 
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
@@ -95,13 +91,11 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 
-		}
-		else if (targetId == 204408) // Bulagan
+		} else if (targetId == 204408) // Bulagan
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -111,12 +105,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 205198) // Cayron
+		} else if (targetId == 205198) // Cayron
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -126,12 +118,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204805) // Vanargand
+		} else if (targetId == 204805) // Vanargand
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -141,12 +131,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204808) // Esnu
+		} else if (targetId == 204808) // Esnu
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -159,12 +147,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					if (giveQuestItem(env, 182207090, 1))
 						;
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 203546) // Skuld
+		} else if (targetId == 203546) // Skuld
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -174,12 +160,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204387) // Ananta
+		} else if (targetId == 204387) // Ananta
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -189,12 +173,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 205190) // Seznec
+		} else if (targetId == 205190) // Seznec
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 8) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -204,12 +186,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204207) // Kasir
+		} else if (targetId == 204207) // Kasir
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 9) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -222,12 +202,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					if (giveQuestItem(env, 182207091, 1))
 						;
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204301) // Aegir
+		} else if (targetId == 204301) // Aegir
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 10) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -237,12 +215,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 205155) // Heintz
+		} else if (targetId == 205155) // Heintz
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 11) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -252,12 +228,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204784) // Delris
+		} else if (targetId == 204784) // Delris
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 12) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -267,12 +241,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 278001) // Votan
+		} else if (targetId == 278001) // Votan
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 13) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -282,12 +254,10 @@ public class _2098ButWhatweMake extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 204053) // Kvasir
+		} else if (targetId == 204053) // Kvasir
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 14) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -300,8 +270,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 					if (giveQuestItem(env, 182207092, 1))
 						;
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}

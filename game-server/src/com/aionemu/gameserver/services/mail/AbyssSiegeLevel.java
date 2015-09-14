@@ -19,7 +19,7 @@ public enum AbyssSiegeLevel {
 	public int getId() {
 		return this.value;
 	}
-	
+
 	public static AbyssSiegeLevel getLevelById(int id) {
 		for (AbyssSiegeLevel al : values()) {
 			if (al.getId() == id) {

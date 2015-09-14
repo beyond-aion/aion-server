@@ -22,8 +22,9 @@ public class RecipeList {
 	public RecipeList(HashSet<Integer> recipeList) {
 		this.recipeList = recipeList;
 	}
-	
-	public RecipeList() {}
+
+	public RecipeList() {
+	}
 
 	public Set<Integer> getRecipeList() {
 		return recipeList;
@@ -32,23 +33,23 @@ public class RecipeList {
 	public void addRecipe(Player player, RecipeTemplate recipeTemplate) {
 		int recipeId = recipeTemplate.getId();
 		if (!player.getRecipeList().isRecipePresent(recipeId)) {
-			if(DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(player.getObjectId(), recipeId)) {
+			if (DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(player.getObjectId(), recipeId)) {
 				recipeList.add(recipeId);
 				PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARN(recipeId, player.getName()));
 			}
 		}
 	}
-	
+
 	public void addRecipe(int playerId, int recipeId) {
-		if(DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(playerId, recipeId)) {
+		if (DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(playerId, recipeId)) {
 			recipeList.add(recipeId);
 		}
 	}
 
 	public void deleteRecipe(Player player, int recipeId) {
 		if (recipeList.contains(recipeId)) {
-			if(DAOManager.getDAO(PlayerRecipesDAO.class).delRecipe(player.getObjectId(), recipeId)) {
+			if (DAOManager.getDAO(PlayerRecipesDAO.class).delRecipe(player.getObjectId(), recipeId)) {
 				recipeList.remove(recipeId);
 				PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
 			}

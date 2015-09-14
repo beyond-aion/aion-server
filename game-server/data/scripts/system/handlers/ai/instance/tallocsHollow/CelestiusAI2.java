@@ -21,7 +21,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("celestius")
@@ -35,7 +34,7 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
 			startHelpersCall();
-			
+
 		}
 	}
 
@@ -53,8 +52,7 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead() && getLifeStats().getHpPercentage() < 90) {
 					deleteHelpers();
 					cancelHelpersTask();
-				}
-				else {
+				} else {
 					deleteHelpers();
 					SkillEngine.getInstance().getSkill(getOwner(), 18981, 44, getOwner()).useNoAnimationSkill();
 					startRun((Npc) spawn(281514, 518, 813, 1378, (byte) 0), "3001900001");
@@ -80,7 +78,7 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 			if (instance != null) {
 				List<Npc> npcs = instance.getNpcs(281514);
 				for (Npc npc : npcs) {
-					SpawnTemplate template =  npc.getSpawn();
+					SpawnTemplate template = npc.getSpawn();
 					if (npc != null && (template.getX() == 518 || template.getX() == 551 || template.getX() == 574)) {
 						npc.getController().onDelete();
 					}

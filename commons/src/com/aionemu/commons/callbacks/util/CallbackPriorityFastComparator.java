@@ -4,7 +4,7 @@ import javolution.util.function.Equality;
 
 import com.aionemu.commons.callbacks.Callback;
 
-public class CallbackPriorityFastComparator implements Equality<Callback<?>>{
+public class CallbackPriorityFastComparator implements Equality<Callback<?>> {
 
 	private static final long serialVersionUID = 5346780764438744817L;
 	private final CallbackPriorityComparator cpc = new CallbackPriorityComparator();

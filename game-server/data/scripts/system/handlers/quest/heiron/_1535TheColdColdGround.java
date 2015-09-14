@@ -86,34 +86,29 @@ public class _1535TheColdColdGround extends QuestHandler {
 					break;
 			}
 			return sendQuestDialog(env, 1693);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 			if (var == 1) {
 				removeQuestItem(env, 182201818, 5);
 				return sendQuestEndDialog(env);
-			}
-			else if (var == 2) {
+			} else if (var == 2) {
 				// add Greater Mana Potion x 5
 				if (!giveQuestItem(env, 162000010, 5)) {
 					// check later
 					qs.setStatus(QuestStatus.START);
 					updateQuestStatus(env);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182201819, 3);
 				}
 				sendQuestEndDialog(env);
 				return true;
-			}
-			else if (var == 3) {
+			} else if (var == 3) {
 				// add Greater Life Serum x 5
 				if (!giveQuestItem(env, 162000015, 5)) {
 					// check later
 					qs.setStatus(QuestStatus.START);
 					updateQuestStatus(env);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182201820, 1);
 				}
 				sendQuestEndDialog(env);

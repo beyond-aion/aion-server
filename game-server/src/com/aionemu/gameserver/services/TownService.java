@@ -86,17 +86,16 @@ public class TownService {
 	}
 
 	public int getTownIdByPosition(Creature creature) {
-		if(creature instanceof Npc) {
-			if(((Npc)creature).getTownId() != 0)
-				return ((Npc)creature).getTownId();
+		if (creature instanceof Npc) {
+			if (((Npc) creature).getTownId() != 0)
+				return ((Npc) creature).getTownId();
 		}
 		int townId = 0;
 		MapRegion region = creature.getPosition().getMapRegion();
 		if (region == null) {
 			log.warn("TownService: npc " + creature.getName() + " haven't any map region!");
 			return 0;
-		}
-		else {
+		} else {
 			List<ZoneInstance> zones = region.getZones(creature);
 			for (ZoneInstance zone : zones) {
 				townId = zone.getTownId();
@@ -110,11 +109,11 @@ public class TownService {
 	public void onEnterWorld(Player player) {
 		switch (player.getRace()) {
 			case ELYOS:
-				if(player.getWorldId() == 700010000)
+				if (player.getWorldId() == 700010000)
 					PacketSendUtility.sendPacket(player, new SM_TOWNS_LIST(elyosTowns));
 				break;
 			case ASMODIANS:
-				if(player.getWorldId() == 710010000)
+				if (player.getWorldId() == 710010000)
 					PacketSendUtility.sendPacket(player, new SM_TOWNS_LIST(asmosTowns));
 				break;
 		}

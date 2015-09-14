@@ -12,21 +12,19 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * @author -Nemesiss-
  * @modified Rolandas
  */
-public class WingInfoBlobEntry extends ItemBlobEntry{
+public class WingInfoBlobEntry extends ItemBlobEntry {
 
 	WingInfoBlobEntry() {
 		super(ItemBlobType.SLOTS_WING);
 	}
 
 	@Override
-	public
-	void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuffer buf) {
 		Item item = ownerItem;
 
 		writeQ(buf, ItemSlot.getSlotFor(item.getItemTemplate().getItemSlot()).getSlotIdMask());
 		writeQ(buf, 0); // no secondary slot
 	}
-
 
 	@Override
 	public int getSize() {

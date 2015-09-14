@@ -22,7 +22,7 @@ public class AttackCalcObserver {
 
 	/**
 	 * @param attackList
-	 * @param effect 
+	 * @param effect
 	 * @return value
 	 */
 	public void checkShield(List<AttackResult> attackList, Effect effect, Creature attacker) {
@@ -36,7 +36,7 @@ public class AttackCalcObserver {
 	public boolean checkAttackerStatus(AttackStatus status) {
 		return false;
 	}
-	
+
 	/**
 	 * @param status
 	 * @param isSkill

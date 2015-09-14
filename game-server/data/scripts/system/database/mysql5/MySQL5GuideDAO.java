@@ -39,8 +39,7 @@ public class MySQL5GuideDAO extends GuideDAO {
 				stmt.setInt(1, guide_id);
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error delete guide_id: " + guide_id, e);
 			return false;
 		}
@@ -63,8 +62,7 @@ public class MySQL5GuideDAO extends GuideDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore Guide data for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return guides;
@@ -84,8 +82,7 @@ public class MySQL5GuideDAO extends GuideDAO {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not restore Survey data for player: " + player_id + " from DB: " + e.getMessage(), e);
 		}
 		return guide;
@@ -101,16 +98,14 @@ public class MySQL5GuideDAO extends GuideDAO {
 				stmt.setInt(3, player.getObjectId());
 				stmt.execute();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error saving playerName: " + player, e);
 		}
 	}
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT guide_id FROM guides", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT guide_id FROM guides", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -123,11 +118,9 @@ public class MySQL5GuideDAO extends GuideDAO {
 				ids[i] = rs.getInt("guide_id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from guides table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 		return new int[0];

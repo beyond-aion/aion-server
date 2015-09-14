@@ -36,16 +36,15 @@ public class SpringAI2 extends NpcAI2 {
 			for (VisibleObject object : getKnownList().getKnownObjects().values()) {
 				Creature creature = (Creature) object;
 				CreatureLifeStats<?> lifeStats = creature.getLifeStats();
-				if (isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116)
-					&& !lifeStats.isAlreadyDead() && (lifeStats.getCurrentHp() < lifeStats.getMaxHp()))
+				if (isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116) && !lifeStats.isAlreadyDead()
+					&& (lifeStats.getCurrentHp() < lifeStats.getMaxHp()))
 					if (creature instanceof SiegeNpc) {
 						SiegeNpc npc = (SiegeNpc) creature;
 						if (getObjectTemplate().getRace() == npc.getObjectTemplate().getRace()) {
 							doHeal();
 							break;
 						}
-					}
-					else if (creature instanceof Player) {
+					} else if (creature instanceof Player) {
 						Player player = (Player) creature;
 						if (getObjectTemplate().getRace() == player.getRace() && player.isOnline()) {
 							doHeal();

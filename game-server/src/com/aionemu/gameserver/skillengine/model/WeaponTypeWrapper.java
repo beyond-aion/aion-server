@@ -3,10 +3,8 @@ package com.aionemu.gameserver.skillengine.model;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.services.MotionLoggingService;
 
-
 /**
  * @author kecimis
- *
  */
 public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 
@@ -24,20 +22,19 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 					this.mainHand = ItemGroup.SWORD;
 					this.offHand = ItemGroup.SWORD;
 					break;
-			  case TOOLHOES:
+				case TOOLHOES:
 					this.mainHand = ItemGroup.TOOLHOES;
 					this.offHand = ItemGroup.TOOLHOES;
 					break;
-			   case GUN:
+				case GUN:
 					this.mainHand = ItemGroup.GUN;
 					this.offHand = ItemGroup.GUN;
 					break;
-			   default:
+				default:
 					this.mainHand = mainHand;
 					this.offHand = null;
-			}	
-		}	
-		else {
+			}
+		} else {
 			this.mainHand = mainHand;
 			this.offHand = offHand;
 		}

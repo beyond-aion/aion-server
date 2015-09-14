@@ -29,8 +29,7 @@ public final class SystemPropertyUtil {
 	}
 
 	/**
-	 * Returns the value of the Java system property with the specified {@code key}, while falling back to {@code null} if the property access
-	 * fails.
+	 * Returns the value of the Java system property with the specified {@code key}, while falling back to {@code null} if the property access fails.
 	 *
 	 * @return the property value or {@code null}
 	 */
@@ -39,8 +38,8 @@ public final class SystemPropertyUtil {
 	}
 
 	/**
-	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the
-	 * property access fails.
+	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the property
+	 * access fails.
 	 *
 	 * @return the property value. {@code def} if there's no such property or if an access to the specified property is not allowed.
 	 */
@@ -55,8 +54,7 @@ public final class SystemPropertyUtil {
 		String value = null;
 		try {
 			value = System.getProperty(key);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			if (!loggedException) {
 				log("Unable to retrieve a system property '" + key + "'; default values will be used.", e);
 				loggedException = true;
@@ -71,8 +69,8 @@ public final class SystemPropertyUtil {
 	}
 
 	/**
-	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the
-	 * property access fails.
+	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the property
+	 * access fails.
 	 *
 	 * @return the property value. {@code def} if there's no such property or if an access to the specified property is not allowed.
 	 */
@@ -95,16 +93,16 @@ public final class SystemPropertyUtil {
 			return false;
 		}
 
-		log("Unable to parse the boolean system property '" + key + "':" + value + " - "
-						+ "using the default value: " + def);
+		log("Unable to parse the boolean system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
 		return def;
 	}
+
 	private static final Pattern INTEGER_PATTERN = Pattern.compile("-?[0-9]+");
 
 	/**
-	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the
-	 * property access fails.
+	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the property
+	 * access fails.
 	 *
 	 * @return the property value. {@code def} if there's no such property or if an access to the specified property is not allowed.
 	 */
@@ -118,21 +116,19 @@ public final class SystemPropertyUtil {
 		if (INTEGER_PATTERN.matcher(value).matches()) {
 			try {
 				return Integer.parseInt(value);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				// Ignore
 			}
 		}
 
-		log("Unable to parse the integer system property '" + key + "':" + value + " - "
-						+ "using the default value: " + def);
+		log("Unable to parse the integer system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
 		return def;
 	}
 
 	/**
-	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the
-	 * property access fails.
+	 * Returns the value of the Java system property with the specified {@code key}, while falling back to the specified default value if the property
+	 * access fails.
 	 *
 	 * @return the property value. {@code def} if there's no such property or if an access to the specified property is not allowed.
 	 */
@@ -146,14 +142,12 @@ public final class SystemPropertyUtil {
 		if (INTEGER_PATTERN.matcher(value).matches()) {
 			try {
 				return Long.parseLong(value);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				// Ignore
 			}
 		}
 
-		log("Unable to parse the long integer system property '" + key + "':" + value + " - "
-						+ "using the default value: " + def);
+		log("Unable to parse the long integer system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
 		return def;
 	}
@@ -161,8 +155,7 @@ public final class SystemPropertyUtil {
 	private static void log(String msg) {
 		if (initializedLogger) {
 			logger.warn(msg);
-		}
-		else {
+		} else {
 			// Use JDK logging if logger was not initialized yet.
 			java.util.logging.Logger.getLogger(SystemPropertyUtil.class.getName()).log(Level.WARNING, msg);
 		}
@@ -171,8 +164,7 @@ public final class SystemPropertyUtil {
 	private static void log(String msg, Exception e) {
 		if (initializedLogger) {
 			logger.warn(msg, e);
-		}
-		else {
+		} else {
 			// Use JDK logging if logger was not initialized yet.
 			java.util.logging.Logger.getLogger(SystemPropertyUtil.class.getName()).log(Level.WARNING, msg, e);
 		}

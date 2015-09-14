@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Cheatkiller
  */
 public class _22509TheGuysWithClawsDidIt extends QuestHandler {
@@ -36,7 +35,7 @@ public class _22509TheGuysWithClawsDidIt extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 800989) {
 				switch (dialog) {
@@ -48,25 +47,23 @@ public class _22509TheGuysWithClawsDidIt extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801003) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		return defaultOnKillEvent(env, 701743, 0, 1);
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();

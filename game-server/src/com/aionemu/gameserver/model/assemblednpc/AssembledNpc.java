@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.assemblednpc;
 import javolution.util.FastTable;
 
 /**
- *
  * @author xTz
  */
 public class AssembledNpc {
@@ -32,6 +31,6 @@ public class AssembledNpc {
 	}
 
 	public long getTimeOnMap() {
-		return  System.currentTimeMillis() - spawnTime;
+		return System.currentTimeMillis() - spawnTime;
 	}
 }

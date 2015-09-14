@@ -15,9 +15,7 @@ import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 
 /**
- * 
  * @author KID
- * 
  */
 public class RewardService {
 
@@ -42,7 +40,7 @@ public class RewardService {
 
 		for (RewardEntryItem item : list) {
 			if (DataManager.ITEM_DATA.getItemTemplate(item.id) == null) {
-				log.warn("[RewardController]["+item.unique+"] null template for item " + item.id + " on player " + player.getObjectId() + ".");
+				log.warn("[RewardController][" + item.unique + "] null template for item " + item.id + " on player " + player.getObjectId() + ".");
 				continue;
 			}
 
@@ -52,8 +50,7 @@ public class RewardService {
 					itemId = 0;
 					itemCount = 0;
 					kinahCount = (int) item.count;
-				}
-				else {
+				} else {
 					itemId = item.id;
 					itemCount = (int) item.count;
 					kinahCount = 0;
@@ -64,21 +61,16 @@ public class RewardService {
 					continue;
 				}
 
-				log.info("[RewardController][" + item.unique + "] player " + player.getName() + " has received (" + item.count + ")" + item.id
-					+ ".");
+				log.info("[RewardController][" + item.unique + "] player " + player.getName() + " has received (" + item.count + ")" + item.id + ".");
 				rewarded.add(item.unique);
-			}
-			catch (Exception e) {
-				log.error(
-					"[RewardController][" + item.unique + "] failed to add item (" + item.count + ")" + item.id + " to " + player.getObjectId(), e);
+			} catch (Exception e) {
+				log.error("[RewardController][" + item.unique + "] failed to add item (" + item.count + ")" + item.id + " to " + player.getObjectId(), e);
 				continue;
 			}
 		}
 
 		if (rewarded.size() > 0) {
 			dao.uncheckAvailable(rewarded);
-
-
 
 		}
 	}

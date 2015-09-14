@@ -27,20 +27,19 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-
 /**
  * @author Whoop
  */
 public class MonsterRaidService {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(MonsterRaidService.class);
-	
+
 	private static final MonsterRaidService instance = new MonsterRaidService();
-	
+
 	private MonsterRaidSchedule schedule;
 	private final Map<Integer, MonsterRaid> activeRaids = new ConcurrentHashMap<>();
 	private Map<Integer, MonsterRaidLocation> monsterRaids;
-	
+
 	public void initMonsterRaidLocations() {
 		if (EventsConfig.ENABLE_MONSTER_RAID) {
 			log.info("Initializing monster raids...");
@@ -52,19 +51,18 @@ public class MonsterRaidService {
 
 			// initialize current raid locations
 			monsterRaids = DataManager.RAID_DATA.getRaidLocations();
-		}
-		else {
+		} else {
 			monsterRaids = Collections.emptyMap();
 			log.info("Monster Raids are disabled in config.");
 		}
 	}
-	
+
 	public void initMonsterRaids() {
 		if (!EventsConfig.ENABLE_MONSTER_RAID)
 			return;
-		//Initialize Raid Schedules
+		// Initialize Raid Schedules
 		schedule = MonsterRaidSchedule.load();
-		
+
 		for (final MonsterRaidSchedule.Raid r : schedule.getMonsterRaidsList()) {
 			for (String raidTime : r.getRaidTimes()) {
 				CronService.getInstance().schedule(new MonsterRaidStartRunnable(r.getRaidId()), raidTime);
@@ -72,12 +70,12 @@ public class MonsterRaidService {
 			}
 		}
 	}
-	
+
 	public void checkRaidStart(final int locationId) {
-		if(getMonsterRaidLocation(locationId) != null)
+		if (getMonsterRaidLocation(locationId) != null)
 			startRaid(locationId);
 	}
-	
+
 	public void startRaid(final int monsterRaidLocationId) {
 		log.debug("Starting monster raid of raid location: " + monsterRaidLocationId);
 
@@ -93,7 +91,7 @@ public class MonsterRaidService {
 		broadcastUpdate(raid.getMonsterRaidLocationId(), 1402383);
 		raid.startMonsterRaid();
 	}
-			
+
 	public void scheduleStop(int locId) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -102,17 +100,17 @@ public class MonsterRaidService {
 				stopRaid(locId);
 			}
 
-		}, 60 * 60000); //invasion ends after 1hour
+		}, 60 * 60000); // invasion ends after 1hour
 	}
-	
+
 	public void stopRaid(final int monsterRaidLocationId) {
 		log.debug("Stopping monster raid of raid location: " + monsterRaidLocationId);
-		
+
 		if (!isRaidInProgress(monsterRaidLocationId)) {
 			log.debug("Monster Raid of raid location " + monsterRaidLocationId + " is not in progress, it was cleared earlier?");
 			return;
 		}
-		
+
 		MonsterRaid raid;
 		synchronized (this) {
 			raid = activeRaids.remove(monsterRaidLocationId);
@@ -121,12 +119,12 @@ public class MonsterRaidService {
 			return;
 
 		raid.stopMonsterRaid();
-	}	
-	
+	}
+
 	public Map<Integer, MonsterRaidLocation> getMonsterRaidLocations() {
 		return monsterRaids;
 	}
-	
+
 	public MonsterRaidLocation getMonsterRaidLocation(int id) {
 		return monsterRaids.get(id);
 	}
@@ -139,11 +137,11 @@ public class MonsterRaidService {
 			return null;
 		}
 	}
-	
+
 	public boolean isRaidInProgress(int raidLocationId) {
 		return activeRaids.containsKey(raidLocationId);
 	}
-	
+
 	public List<Npc> spawnLocation(MonsterRaidLocation mrl) {
 		List<Npc> location = new ArrayList<>();
 		SpawnTemplate flagTemp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 832819, mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
@@ -152,17 +150,18 @@ public class MonsterRaidService {
 		location.add((Npc) SpawnEngine.spawnObject(vortexTemp, 1));
 		return location;
 	}
-	
+
 	public Npc spawnBoss(MonsterRaidLocation mrl) {
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), mrl.getNpcIds().get(Rnd.get(0, mrl.getNpcIds().size() - 1)), mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), mrl.getNpcIds().get(Rnd.get(0, mrl.getNpcIds().size() - 1)), mrl.getX(),
+			mrl.getY(), mrl.getZ(), mrl.getH());
 		return (Npc) SpawnEngine.spawnObject(temp, 1);
 	}
-	
+
 	public void despawnLocation(MonsterRaid mr) {
 		Npc boss = mr.getBoss();
 		Npc flag = mr.getFlag();
 		Npc vortex = mr.getVortex();
-		
+
 		if (boss != null && !boss.getLifeStats().isAlreadyDead())
 			boss.getController().onDelete();
 		if (vortex != null && vortex.isSpawned())
@@ -170,9 +169,10 @@ public class MonsterRaidService {
 		if (flag != null && flag.isSpawned())
 			flag.getController().onDelete();
 	}
-	
+
 	public void broadcastUpdate(final int locId, int msg) {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				if (activeRaids.containsKey(locId)) {
@@ -180,9 +180,9 @@ public class MonsterRaidService {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msg));
 				}
 			}
-    });
+		});
 	}
-	
+
 	public static MonsterRaidService getInstance() {
 		return instance;
 	}

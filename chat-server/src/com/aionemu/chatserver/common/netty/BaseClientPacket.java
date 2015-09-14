@@ -4,8 +4,8 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BaseClientPacket extends AbstractPacket
-{
+public abstract class BaseClientPacket extends AbstractPacket {
+
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
 
 	private ChannelBuffer buf;
@@ -14,14 +14,12 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * @param channelBuffer
 	 * @param opCode
 	 */
-	public BaseClientPacket(ChannelBuffer channelBuffer, int opCode)
-	{
+	public BaseClientPacket(ChannelBuffer channelBuffer, int opCode) {
 		super(opCode);
 		this.buf = channelBuffer;
 	}
 
-	public int getRemainingBytes()
-	{
+	public int getRemainingBytes() {
 		return buf.readableBytes();
 	}
 
@@ -30,17 +28,13 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return boolean
 	 */
-	public boolean read()
-	{
-		try
-		{
+	public boolean read() {
+		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
 				log.debug("Packet " + this + " not fully readed!");
 			return true;
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 			log.error("Reading failed for packet " + this, ex);
 			return false;
 		}
@@ -49,14 +43,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	/**
 	 * Perform packet action
 	 */
-	public void run()
-	{
-		try
-		{
+	public void run() {
+		try {
 			runImpl();
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 			log.error("Running failed for packet " + this, ex);
 		}
 	}
@@ -70,14 +60,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return int
 	 */
-	protected final int readD()
-	{
-		try
-		{
+	protected final int readD() {
+		try {
 			return buf.readInt();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing D for: " + this);
 		}
 		return 0;
@@ -88,14 +74,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return int
 	 */
-	protected final int readC()
-	{
-		try
-		{
+	protected final int readC() {
+		try {
 			return buf.readByte() & 0xFF;
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing C for: " + this);
 		}
 		return 0;
@@ -106,14 +88,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return int
 	 */
-	protected final int readH()
-	{
-		try
-		{
+	protected final int readH() {
+		try {
 			return buf.readShort() & 0xFFFF;
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing H for: " + this);
 		}
 		return 0;
@@ -124,14 +102,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return double
 	 */
-	protected final double readDF()
-	{
-		try
-		{
+	protected final double readDF() {
+		try {
 			return buf.readDouble();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing DF for: " + this);
 		}
 		return 0;
@@ -142,14 +116,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return double
 	 */
-	protected final float readF()
-	{
-		try
-		{
+	protected final float readF() {
+		try {
 			return buf.readFloat();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing F for: " + this);
 		}
 		return 0;
@@ -160,14 +130,10 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return long
 	 */
-	protected final long readQ()
-	{
-		try
-		{
+	protected final long readQ() {
+		try {
 			return buf.readLong();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing Q for: " + this);
 		}
 		return 0;
@@ -178,17 +144,13 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * 
 	 * @return String
 	 */
-	protected final String readS()
-	{
+	protected final String readS() {
 		StringBuffer sb = new StringBuffer();
 		char ch;
-		try
-		{
+		try {
 			while ((ch = buf.readChar()) != 0)
 				sb.append(ch);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing S for: " + this);
 		}
 		return sb.toString();
@@ -200,15 +162,11 @@ public abstract class BaseClientPacket extends AbstractPacket
 	 * @param length
 	 * @return byte[]
 	 */
-	protected final byte[] readB(int length)
-	{
+	protected final byte[] readB(int length) {
 		byte[] result = new byte[length];
-		try
-		{
+		try {
 			buf.readBytes(result);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("Missing byte[] for: " + this);
 		}
 		return result;

@@ -60,7 +60,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		}
 		sendPacket(new SM_PLAYER_INFO(activePlayer, false));
 		activePlayer.getController().startProtectionActiveTask();
-		if (getConnection().getAccount().getAccessLevel() >= AdminConfig.GM_PANEL) 
+		if (getConnection().getAccount().getAccessLevel() >= AdminConfig.GM_PANEL)
 			sendPacket(new SM_ACCOUNT_PROPERTIES(true));
 		else
 			sendPacket(new SM_ACCOUNT_PROPERTIES(false));
@@ -71,8 +71,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		if (template != null)
 			for (int i = 0; i < template.getLocations().getLocation().size(); i++) {
 				location = template.getLocations().getLocation().get(i);
-				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapid(), location.getId(),
-						location.getState()));
+				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapid(), location.getId(), location.getState()));
 			}
 		location = null;
 		template = null;
@@ -94,7 +93,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		// SM_SERIAL_KILLER
 		SerialKillerService.getInstance().onEnterMap(activePlayer);
-		
+
 		// SM_RIFT_ANNOUNCE
 		RiftInformer.sendRiftsInfo(activePlayer);
 		InstanceRiftSpawnManager.sendInstanceRiftStatus(activePlayer);
@@ -104,8 +103,8 @@ public class CM_LEVEL_READY extends AionClientPacket {
 			AutoGroupService.getInstance().onEnterWorld(activePlayer);
 		}
 
-		//SM_UPGRADE_ARCADE
-		if(EventsConfig.ENABLE_EVENT_ARCADE)
+		// SM_UPGRADE_ARCADE
+		if (EventsConfig.ENABLE_EVENT_ARCADE)
 			sendPacket(new SM_UPGRADE_ARCADE(true));
 
 		// SM_NEARBY_QUESTS
@@ -129,7 +128,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		if (pet != null && !pet.isSpawned())
 			World.getInstance().spawn(pet);
 		activePlayer.setPortAnimation(0);
-		
+
 		TownService.getInstance().onEnterWorld(activePlayer);
 	}
 

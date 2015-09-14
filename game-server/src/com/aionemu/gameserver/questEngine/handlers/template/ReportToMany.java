@@ -104,13 +104,11 @@ public class ReportToMany extends QuestHandler {
 						return sendQuestDialog(env, startDialog);
 					else
 						return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			NpcInfos targetNpcInfo = npcInfos.get(targetId);
 			if (var <= maxVar) {
@@ -118,19 +116,16 @@ public class ReportToMany extends QuestHandler {
 					int closeDialog;
 					if (targetNpcInfo.getCloseDialog() == 0) {
 						closeDialog = 10000 + targetNpcInfo.getVar();
-					}
-					else {
+					} else {
 						closeDialog = targetNpcInfo.getCloseDialog();
 					}
 
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, targetNpcInfo.getQuestDialog());
-					}
-					else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
+					} else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
 						sendQuestDialog(env, targetNpcInfo.getQuestDialog() + 1);
 						return playQuestMovie(env, targetNpcInfo.getMovie());
-					}
-					else if (dialog.id() == closeDialog) {
+					} else if (dialog.id() == closeDialog) {
 						if ((dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)
 							|| QuestService.collectItemCheck(env, true)) {
 							if (var == maxVar) {
@@ -139,8 +134,7 @@ public class ReportToMany extends QuestHandler {
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 5);
 								}
-							}
-							else {
+							} else {
 								qs.setQuestVarById(0, var + 1);
 							}
 							updateQuestStatus(env);
@@ -148,13 +142,11 @@ public class ReportToMany extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}
-			else if (var > maxVar) {
+			} else if (var > maxVar) {
 				if (endNpcs.contains(targetId)) {
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, endDialog);
-					}
-					else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 						if (startItem != 0) {
 							if (!removeQuestItem(env, startItem, 1)) {
 								return false;
@@ -166,8 +158,7 @@ public class ReportToMany extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD && endNpcs.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && endNpcs.contains(targetId)) {
 			NpcInfos targetNpcInfo = npcInfos.get(targetId);
 			if (dialog == DialogAction.USE_OBJECT && targetNpcInfo != null && targetNpcInfo.getQuestDialog() != 0) {
 				return sendQuestDialog(env, targetNpcInfo.getQuestDialog());

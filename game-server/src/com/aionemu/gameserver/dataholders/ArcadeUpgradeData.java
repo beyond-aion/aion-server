@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.List;

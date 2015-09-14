@@ -88,7 +88,7 @@ public class ShutdownRestrictions extends AbstractRestrictions {
 	}
 
 	@Override
-	public boolean 	canUseWarehouse(Player player) {
+	public boolean canUseWarehouse(Player player) {
 		if (isInShutdownProgress(player)) {
 			PacketSendUtility.sendMessage(player, "You cannot use warehouse in Shutdown progress!");
 			return false;
@@ -100,7 +100,8 @@ public class ShutdownRestrictions extends AbstractRestrictions {
 		return player.getController().isInShutdownProgress();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.gameserver.restrictions.Restrictions#canPrivateStore(com.aionemu.gameserver.model.gameobjects.player.Player)
 	 */
 	@Override

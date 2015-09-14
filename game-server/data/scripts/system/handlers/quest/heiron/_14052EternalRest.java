@@ -55,8 +55,7 @@ public class _14052EternalRest extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204629)
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204629) {
@@ -71,8 +70,7 @@ public class _14052EternalRest extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 			}
-		}
-		else if (targetId == 204625) {
+		} else if (targetId == 204625) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -93,8 +91,7 @@ public class _14052EternalRest extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204628) {
+		} else if (targetId == 204628) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -110,8 +107,7 @@ public class _14052EternalRest extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204627) {
+		} else if (targetId == 204627) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -127,8 +123,7 @@ public class _14052EternalRest extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204626) {
+		} else if (targetId == 204626) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -144,8 +139,7 @@ public class _14052EternalRest extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 204622) {
+		} else if (targetId == 204622) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -161,8 +155,7 @@ public class _14052EternalRest extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 700270) {
+		} else if (targetId == 700270) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return useQuestObject(env, 3, 4, false, 0, 0, 1, 182215344, 1); // 4
 			}

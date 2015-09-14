@@ -34,11 +34,9 @@ public class InstanceTimerAI2 extends AggressiveNpcAI2 {
 		Player player;
 		if (creature instanceof Player) {
 			player = (Player) creature;
-		}
-		else if (creature instanceof Summon){
+		} else if (creature instanceof Summon) {
 			player = (Player) creature.getMaster();
-		}
-		else {
+		} else {
 			return;
 		}
 		isInTimer = true;
@@ -46,11 +44,10 @@ public class InstanceTimerAI2 extends AggressiveNpcAI2 {
 		sendTime(player, time);
 	}
 
-	private void sendTime(Player player, int time) {		
+	private void sendTime(Player player, int time) {
 		if (player.isInTeam()) {
 			player.getCurrentTeam().sendPacket(new SM_QUEST_ACTION(0, time / 1000), new SameInstanceFilter(player));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, time / 1000));
 		}
 	}
@@ -58,7 +55,7 @@ public class InstanceTimerAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if(!isInTimer)
+		if (!isInTimer)
 			setInstanceTimer(creature);
 	}
 

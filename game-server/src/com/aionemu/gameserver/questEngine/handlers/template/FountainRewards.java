@@ -53,8 +53,7 @@ public class FountainRewards extends QuestHandler {
 					case USE_OBJECT: {
 						if (!QuestService.inventoryItemCheck(env, true)) {
 							return true;
-						}
-						else
+						} else
 							return sendQuestSelectionDialog(env);
 					}
 					case SETPRO1: {
@@ -64,27 +63,23 @@ public class FountainRewards extends QuestHandler {
 									changeQuestStep(env, 0, 0, true);
 									return sendQuestDialog(env, 5);
 								}
-							}
-							else {
+							} else {
 								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
 								return sendQuestSelectionDialog(env);
 							}
-						}
-						else {
+						} else {
 							return sendQuestSelectionDialog(env);
 						}
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			// Coin Fountain
 			if (startNpcs.contains(targetId)) { // Coin Fountain
 				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
 					if (QuestService.collectItemCheck(env, true))
 						return sendQuestEndDialog(env);
-				}
-				else {
+				} else {
 					return QuestService.abandonQuest(player, questId);
 				}
 			}

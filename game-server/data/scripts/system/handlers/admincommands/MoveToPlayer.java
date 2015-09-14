@@ -36,8 +36,7 @@ public class MoveToPlayer extends AdminCommand {
 			return;
 		}
 
-		TeleportService2.teleportTo(admin, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(),
-			player.getZ(), player.getHeading());
+		TeleportService2.teleportTo(admin, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading());
 		PacketSendUtility.sendMessage(admin, "Teleported to player " + player.getName() + ".");
 	}
 

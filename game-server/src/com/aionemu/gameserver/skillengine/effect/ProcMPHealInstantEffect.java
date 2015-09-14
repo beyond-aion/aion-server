@@ -18,7 +18,7 @@ public class ProcMPHealInstantEffect extends AbstractHealEffect {
 	public void calculate(Effect effect) {
 		super.calculate(effect, HealType.MP);
 	}
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect, HealType.MP);

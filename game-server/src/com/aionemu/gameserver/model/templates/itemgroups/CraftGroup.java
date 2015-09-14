@@ -16,16 +16,16 @@ import com.aionemu.gameserver.model.templates.rewards.CraftReward;
 public abstract class CraftGroup extends BonusItemGroup {
 
 	private FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder;
-	
+
 	public ItemRaceEntry[] getRewards(Integer skillId) {
 		if (!dataHolder.containsKey(skillId))
 			return new ItemRaceEntry[0];
 		List<ItemRaceEntry> result = new ArrayList<ItemRaceEntry>();
 		for (List<CraftReward> items : dataHolder.get(skillId).values())
 			result.addAll(items);
-		return result.toArray(new ItemRaceEntry[0]);		
+		return result.toArray(new ItemRaceEntry[0]);
 	}
-	
+
 	public ItemRaceEntry[] getRewards(Integer skillId, Integer skillPoints) {
 		if (!dataHolder.containsKey(skillId))
 			return new ItemRaceEntry[0];
@@ -35,7 +35,7 @@ public abstract class CraftGroup extends BonusItemGroup {
 				continue;
 			result.addAll(entry.getValue());
 		}
-		return result.toArray(new ItemRaceEntry[0]);			
+		return result.toArray(new ItemRaceEntry[0]);
 	}
 
 	/**
@@ -46,7 +46,8 @@ public abstract class CraftGroup extends BonusItemGroup {
 	}
 
 	/**
-	 * @param dataHolder the dataHolder to set
+	 * @param dataHolder
+	 *          the dataHolder to set
 	 */
 	public void setDataHolder(FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder) {
 		this.dataHolder = dataHolder;

@@ -39,9 +39,9 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 	 */
 	@Override
 	protected void runImpl() {
-		
+
 		name = ChatUtil.getRealAdminName(name);
-		
+
 		final String playerName = Util.convertName(name);
 
 		final Player inviter = getConnection().getActivePlayer();
@@ -71,8 +71,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 					PacketSendUtility.sendMessage(inviter, "You used an unknown invite type: " + inviteType);
 					break;
 			}
-		}
-		else
+		} else
 			inviter.getClientConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(name));
 	}
 }

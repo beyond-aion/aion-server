@@ -72,8 +72,8 @@ public class MySQL5MailDAO extends MailDAO {
 								attachedItem = item;
 							}
 
-					Letter letter = new Letter(mailUniqueId, recipientId, attachedItem, attachedKinahCount, mailTitle,
-						mailMessage, senderName, recievedTime, unread == 1, letterType);
+					Letter letter = new Letter(mailUniqueId, recipientId, attachedItem, attachedKinahCount, mailTitle, mailMessage, senderName, recievedTime,
+						unread == 1, letterType);
 					letter.setPersistState(PersistentState.UPDATED);
 					mailbox.putLetterToMailbox(letter);
 				}
@@ -100,11 +100,9 @@ public class MySQL5MailDAO extends MailDAO {
 			}
 			rset.close();
 			stmt.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Could not read mail for player: " + playerId + " from DB: " + e.getMessage(), e);
-		}
-		finally {
+		} finally {
 			DatabaseFactory.close(con);
 		}
 		return false;
@@ -148,9 +146,9 @@ public class MySQL5MailDAO extends MailDAO {
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
 
-					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount,
-						isEquiped == 1, isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, enchantBonus, itemSkin, fusionedItem,
-						optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill);
+					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
+						isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket,
+						charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill);
 					item.setPersistentState(PersistentState.UPDATED);
 					mailboxItems.add(item);
 				}
@@ -182,9 +180,9 @@ public class MySQL5MailDAO extends MailDAO {
 			case UPDATE_REQUIRED:
 				result = updateLetter(time, letter);
 				break;
-			/*
-			 * case DELETED: return deleteLetter(letter);
-			 */
+		/*
+		 * case DELETED: return deleteLetter(letter);
+		 */
 		}
 		letter.setPersistState(PersistentState.UPDATED);
 
@@ -227,22 +225,20 @@ public class MySQL5MailDAO extends MailDAO {
 
 		final int fAttachedItemId = attachedItemId;
 
-		return DB
-			.insertUpdate(
-				"UPDATE mail SET  unread=?, attached_item_id=?, attached_kinah_count=?, `express`=?, recieved_time=? WHERE mail_unique_id=?",
-				new IUStH() {
+		return DB.insertUpdate(
+			"UPDATE mail SET  unread=?, attached_item_id=?, attached_kinah_count=?, `express`=?, recieved_time=? WHERE mail_unique_id=?", new IUStH() {
 
-					@Override
-					public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-						stmt.setBoolean(1, letter.isUnread());
-						stmt.setInt(2, fAttachedItemId);
-						stmt.setLong(3, letter.getAttachedKinah());
-						stmt.setInt(4, letter.getLetterType().getId());
-						stmt.setTimestamp(5, time);
-						stmt.setInt(6, letter.getObjectId());
-						stmt.execute();
-					}
-				});
+				@Override
+				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+					stmt.setBoolean(1, letter.isUnread());
+					stmt.setInt(2, fAttachedItemId);
+					stmt.setLong(3, letter.getAttachedKinah());
+					stmt.setInt(4, letter.getLetterType().getId());
+					stmt.setTimestamp(5, time);
+					stmt.setInt(6, letter.getObjectId());
+					stmt.execute();
+				}
+			});
 	}
 
 	@Override
@@ -272,8 +268,8 @@ public class MySQL5MailDAO extends MailDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT mail_unique_id FROM mail",
-			ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT mail_unique_id FROM mail", ResultSet.TYPE_SCROLL_INSENSITIVE,
+			ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -286,29 +282,27 @@ public class MySQL5MailDAO extends MailDAO {
 				ids[i] = rs.getInt("mail_unique_id");
 			}
 			return ids;
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't get list of id's from mail table", e);
-		}
-		finally {
+		} finally {
 			DB.close(statement);
 		}
 
 		return new int[0];
 	}
-	
+
 	@Override
 	public boolean cleanMail(final String recipient) {
 		return DB.insertUpdate(
-				"DELETE FROM mail WHERE mail_recipient_id=(SELECT id FROM players WHERE name=?) AND attached_item_id=0 AND attached_kinah_count=0",
-				new IUStH() {
+			"DELETE FROM mail WHERE mail_recipient_id=(SELECT id FROM players WHERE name=?) AND attached_item_id=0 AND attached_kinah_count=0",
+			new IUStH() {
 
-					@Override
-					public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-						stmt.setString(1, recipient);
-						stmt.execute();
-					}
-				});
+				@Override
+				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+					stmt.setString(1, recipient);
+					stmt.execute();
+				}
+			});
 	}
 
 	@Override

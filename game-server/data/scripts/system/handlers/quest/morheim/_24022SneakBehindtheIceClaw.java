@@ -54,8 +54,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
 						}
@@ -76,7 +75,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 							}
 						}
 						case SETPRO2: {
-								return defaultCloseDialog(env, 1, 2); // 2
+							return defaultCloseDialog(env, 1, 2); // 2
 						}
 					}
 					break;
@@ -99,14 +98,12 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 2) {
-									return sendQuestDialog(env, 1693);
-								}
-							else if (var == 3) {
+								return sendQuestDialog(env, 1693);
+							} else if (var == 3) {
 								if (player.getInventory().getItemCountByItemId(182215364) == 0) {
 									return sendQuestDialog(env, 2376);
-								}
-								else
-									return sendQuestDialog(env, 2375); 
+								} else
+									return sendQuestDialog(env, 2375);
 							}
 						}
 						case SETPRO3: {
@@ -131,13 +128,11 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

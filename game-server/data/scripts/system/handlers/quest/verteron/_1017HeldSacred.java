@@ -74,13 +74,11 @@ public class _1017HeldSacred extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 5);
-						}
-						else
+						} else
 							return sendQuestDialog(env, 1353);
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203178)
 				return sendQuestEndDialog(env);
 		}

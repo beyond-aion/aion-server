@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41537StonyHeartedAncestors extends QuestHandler {
 
@@ -35,35 +33,30 @@ public class _41537StonyHeartedAncestors extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205916) { 
+			if (targetId == 205916) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 205954) { 
+			if (targetId == 205954) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if(dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					giveQuestItem(env, 182212537, 1);
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 701147) {
-				//spawn?
+			} else if (targetId == 701147) {
+				// spawn?
 				if (var > 0 && var < 3)
 					return useQuestObject(env, var, var + 1, false, true);
 				else if (var == 3)
 					return useQuestObject(env, 3, 3, true, true);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205954) {
 				switch (dialog) {
 					case USE_OBJECT: {

@@ -95,8 +95,7 @@ public class _2032GuardianSpirit extends QuestHandler {
 						case SETPRO4: {
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 3, 4, 182204005, 1, 0, 0); // 4
-							}
-							else {
+							} else {
 								return sendQuestSelectionDialog(env);
 							}
 						}
@@ -106,13 +105,11 @@ public class _2032GuardianSpirit extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204329) {  // Tofa
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204329) { // Tofa
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

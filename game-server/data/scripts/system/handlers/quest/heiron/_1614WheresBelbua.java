@@ -9,8 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Go to the Mudthorn Experiment Lab and find Belbua (204645). When you're ready to leave, talk to Belbua. Escort Belbua
- * outside the Mudthorn Experiment Lab. Let Phuthollo (204519) know Belbua is free.
+ * Go to the Mudthorn Experiment Lab and find Belbua (204645). When you're ready to leave, talk to Belbua. Escort Belbua outside the Mudthorn
+ * Experiment Lab. Let Phuthollo (204519) know Belbua is free.
  * 
  * @author Rhys2002
  * @reworked vlog
@@ -49,8 +49,7 @@ public class _1614WheresBelbua extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204645: { // Belbua
 					switch (env.getDialog()) {
@@ -65,8 +64,7 @@ public class _1614WheresBelbua extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204519) { // Phuthollo
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -76,7 +74,7 @@ public class _1614WheresBelbua extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

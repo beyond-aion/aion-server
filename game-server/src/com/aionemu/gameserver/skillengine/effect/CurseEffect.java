@@ -25,7 +25,7 @@ public class CurseEffect extends BufEffect {
 		effect.setAbnormal(AbnormalState.CURSE.getId());
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CURSE.getId());
 	}
-	
+
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);

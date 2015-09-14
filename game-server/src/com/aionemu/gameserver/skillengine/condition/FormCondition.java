@@ -11,11 +11,8 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
-
 /**
  * @author kecimis
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FormCondition")
@@ -23,11 +20,11 @@ public class FormCondition extends Condition {
 
 	@XmlAttribute(required = true)
 	protected TransformType value;
-	
-	/* (non-Javadoc)
-	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
-	 * 
-	 * defines tranformtype in which player can cast given skill
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill) defines tranformtype in
+	 * which player can cast given skill
 	 */
 	@Override
 	public boolean validate(Skill env) {
@@ -35,11 +32,10 @@ public class FormCondition extends Condition {
 			if (env.getEffector().getTransformModel().isActive() && env.getEffector().getTransformModel().getType() == value)
 				return true;
 			else {
-				PacketSendUtility.sendPacket((Player)env.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_THIS_FORM);
+				PacketSendUtility.sendPacket((Player) env.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_THIS_FORM);
 				return false;
 			}
-		}
-		else
+		} else
 			return true;
 	}
 }

@@ -23,9 +23,11 @@ public class ReturnPointEffect extends EffectTemplate {
 	@Override
 	public void applyEffect(Effect effect) {
 		Player player = (Player) effect.getEffector();
-		if(player.isInState(CreatureState.RESTING)) {
+		if (player.isInState(CreatureState.RESTING)) {
 			player.unsetState(CreatureState.RESTING);
-			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STAND, 0, player.getX(), player.getY(), player.getZ(), player.getHeading(), getTargetObjectId(player)), true);
+			PacketSendUtility.broadcastPacket(player,
+				new SM_EMOTION(player, EmotionType.STAND, 0, player.getX(), player.getY(), player.getZ(), player.getHeading(), getTargetObjectId(player)),
+				true);
 		}
 		ItemTemplate itemTemplate = effect.getItemTemplate();
 		int worldId = itemTemplate.getReturnWorldId();
@@ -39,7 +41,7 @@ public class ReturnPointEffect extends EffectTemplate {
 		if (itemTemplate != null)
 			effect.addSucessEffect(this);
 	}
-	
+
 	private final int getTargetObjectId(Player player) {
 		return player.getTarget() == null ? 0 : player.getTarget().getObjectId();
 	}

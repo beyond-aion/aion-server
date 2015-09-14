@@ -70,8 +70,7 @@ public class _14047ChainingMemories extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 203704) {
@@ -87,8 +86,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 798154) {
+		} else if (targetId == 798154) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -101,8 +99,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204574) {
+		} else if (targetId == 204574) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -118,8 +115,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204652) {
+		} else if (targetId == 204652) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 3)
@@ -147,8 +143,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						return true;
 					}
 			}
-		}
-		else if (targetId == 204653) {
+		} else if (targetId == 204653) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 4)
@@ -178,8 +173,7 @@ public class _14047ChainingMemories extends QuestHandler {
 		if (defaultOnKillEvent(env, 214598, 5, 6)) {
 			playQuestMovie(env, 422);
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 }

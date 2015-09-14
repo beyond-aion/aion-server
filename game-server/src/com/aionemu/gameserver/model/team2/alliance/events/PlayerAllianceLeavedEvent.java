@@ -40,7 +40,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		Preconditions.checkNotNull(leader, "Alliance leader should not be null");
 
 		if (!reason.equals(PlayerLeavedEvent.LeaveReson.DISBAND)) {
-			//here we already must have a leader of the team
+			// here we already must have a leader of the team
 			if (leavedPlayer.equals(leader)) {
 				team.onEvent(new ChangeAllianceLeaderEvent(team));
 			}
@@ -58,7 +58,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 			case BAN:
 			case LEAVE:
 				if (team.isInLeague()) {
-					//broadcast to all in league (some alliance has -1 member count)
+					// broadcast to all in league (some alliance has -1 member count)
 					team.getLeague().broadcast();
 				}
 				if (team.size() <= 1) {
@@ -101,7 +101,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		switch (reason) {
 			case BAN:
 			case LEAVE:
-				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE)); //LEAVE & BANNED have same id
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE)); // LEAVE & BANNED have same id
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName()));
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
 				PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));

@@ -16,14 +16,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropWorlds")
 public class GlobalDropWorlds {
 
-    @XmlElement(name = "gd_world")
-    protected List<GlobalDropWorld> gdWorlds;
+	@XmlElement(name = "gd_world")
+	protected List<GlobalDropWorld> gdWorlds;
 
-    public List<GlobalDropWorld> getGlobalDropWorlds() {
-        if (gdWorlds == null) {
-            gdWorlds = new ArrayList<GlobalDropWorld>();
-        }
-        return this.gdWorlds;
-    }
+	public List<GlobalDropWorld> getGlobalDropWorlds() {
+		if (gdWorlds == null) {
+			gdWorlds = new ArrayList<GlobalDropWorld>();
+		}
+		return this.gdWorlds;
+	}
 
 }

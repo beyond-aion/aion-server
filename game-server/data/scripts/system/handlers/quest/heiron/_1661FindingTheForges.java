@@ -10,11 +10,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- * 
  */
 public class _1661FindingTheForges extends QuestHandler {
 
-	private final static int	questId	= 1661;
+	private final static int questId = 1661;
 
 	public _1661FindingTheForges() {
 		super(questId);
@@ -28,63 +27,57 @@ public class _1661FindingTheForges extends QuestHandler {
 		qe.registerQuestNpc(206046).addOnAtDistanceEvent(questId);
 		qe.registerQuestNpc(206047).addOnAtDistanceEvent(questId);
 	}
-		
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		int targetId = 0;
-		if(env.getVisibleObject() instanceof Npc)
+		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
-		
-		if(qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204600) { 
+
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (targetId == 204600) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					playQuestMovie(env, 200);
 					return sendQuestStartDialog(env);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204600) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		int targetId = 0;
-		if(env.getVisibleObject() instanceof Npc)
-			 targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		if (env.getVisibleObject() instanceof Npc)
+			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if(targetId == 206045 && var == 0) {
-  			changeQuestStep(env, 0, 16, false);
-  			return true;
-  		}
-  		else if(targetId == 206046 && var == 16) {
-  			changeQuestStep(env, 16, 48, false);
-  			return true;
-    	}
-  		else if(targetId == 206047 && var == 48) {
-  			changeQuestStep(env, 48, 48, true);
-  			return true;
-    	}
-  	}
+			int var = qs.getQuestVarById(0);
+			if (targetId == 206045 && var == 0) {
+				changeQuestStep(env, 0, 16, false);
+				return true;
+			} else if (targetId == 206046 && var == 16) {
+				changeQuestStep(env, 16, 48, false);
+				return true;
+			} else if (targetId == 206047 && var == 48) {
+				changeQuestStep(env, 48, 48, true);
+				return true;
+			}
+		}
 		return false;
 	}
 }

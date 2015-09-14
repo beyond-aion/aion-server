@@ -106,8 +106,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 							}
 
@@ -115,8 +114,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 				}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204407) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

@@ -44,8 +44,7 @@ public class _3326TheShugoMenace extends QuestHandler {
 			if (targetId == 798053) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -70,8 +69,7 @@ public class _3326TheShugoMenace extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798053) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

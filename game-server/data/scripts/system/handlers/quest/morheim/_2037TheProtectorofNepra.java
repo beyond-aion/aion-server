@@ -122,16 +122,15 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
 						case SETPRO3:
-						   if (defaultCloseDialog(env, 2, 3, 182204015, 1, 0, 0)) { // 5
-							  TeleportService2.teleportToNpc(player, 204361);
-							  return true;
-						   }
+							if (defaultCloseDialog(env, 2, 3, 182204015, 1, 0, 0)) { // 5
+								TeleportService2.teleportToNpc(player, 204361);
+								return true;
+							}
 					}
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204369) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

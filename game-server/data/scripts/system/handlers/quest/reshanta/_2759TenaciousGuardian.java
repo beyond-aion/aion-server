@@ -42,28 +42,24 @@ public class _2759TenaciousGuardian extends QuestHandler {
 			if (targetId == 264769) { // Gudharten
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 264769) { // Gudharten
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 3) {
 						return sendQuestDialog(env, 1352);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 3, 3, true); // reward
 					killedMobs.clear();
 					return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 264769) { // Gudharten
 				return sendQuestEndDialog(env);
 			}

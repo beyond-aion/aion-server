@@ -53,24 +53,20 @@ public class PlayerChatService {
 	public static void chatLogging(Player player, ChatType type, String message) {
 		switch (type) {
 			case GROUP:
-				log.info(String.format("[MESSAGE] - GROUP <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(),
-						message));
+				log.info(String.format("[MESSAGE] - GROUP <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
 				break;
 			case ALLIANCE:
-				log.info(String.format("[MESSAGE] - ALLIANCE <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(),
-						message));
+				log.info(String.format("[MESSAGE] - ALLIANCE <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
 				break;
 			case GROUP_LEADER:
 				log.info(String.format("[MESSAGE] - LEADER_ALERT: [%s]> %s", player.getName(), message));
 				break;
 			case LEGION:
-				log.info(String.format("[MESSAGE] - LEGION <%s>: [%s]> %s", player.getLegion().getLegionName(),
-						player.getName(), message));
+				log.info(String.format("[MESSAGE] - LEGION <%s>: [%s]> %s", player.getLegion().getLegionName(), player.getName(), message));
 				break;
 			case LEAGUE:
 			case LEAGUE_ALERT:
-				log.info(String.format("[MESSAGE] - LEAGUE <%s>: [%s]> %s", player.getCurrentTeamId(), player.getName(),
-						message));
+				log.info(String.format("[MESSAGE] - LEAGUE <%s>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
 				break;
 			case NORMAL:
 			case SHOUT:

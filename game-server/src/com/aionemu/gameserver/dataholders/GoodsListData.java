@@ -24,10 +24,10 @@ public class GoodsListData {
 
 	@XmlElement(name = "in_list")
 	protected List<GoodsList> inList;
-	
+
 	@XmlElement(name = "purchase_list")
 	protected List<GoodsList> purchaseList;
-	
+
 	/** A map containing all goodslist templates */
 	private TIntObjectHashMap<GoodsList> goodsListData;
 	private TIntObjectHashMap<GoodsList> goodsInListData;
@@ -58,14 +58,15 @@ public class GoodsListData {
 	public GoodsList getGoodsInListById(int id) {
 		return goodsInListData.get(id);
 	}
-	
+
 	public GoodsList getGoodsPurchaseListById(int id) {
 		return goodsPurchaseListData.get(id);
 	}
+
 	/**
 	 * @return goodListData.size()
 	 */
 	public int size() {
-		return goodsListData.size()+goodsInListData.size()+goodsPurchaseListData.size();
+		return goodsListData.size() + goodsInListData.size() + goodsPurchaseListData.size();
 	}
 }

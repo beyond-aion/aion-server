@@ -6,11 +6,10 @@ import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
 
 /**
- * 
  * @author KID
- *
  */
 public abstract class BannedMacDAO implements DAO {
+
 	public abstract boolean update(BannedMacEntry entry);
 
 	public abstract boolean remove(String address);

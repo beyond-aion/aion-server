@@ -47,8 +47,7 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 						geometry.collideWith(r, results);
 						onMoved(results);
 						oldPos = pos;
-					}
-					finally {
+					} finally {
 						isRunning.set(false);
 					}
 				}

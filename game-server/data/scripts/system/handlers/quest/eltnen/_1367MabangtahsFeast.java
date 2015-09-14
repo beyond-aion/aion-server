@@ -39,8 +39,7 @@ public class _1367MabangtahsFeast extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				long itemCount;
 				long itemCount1;
 				long itemCount2;
@@ -50,34 +49,28 @@ public class _1367MabangtahsFeast extends QuestHandler {
 					itemCount2 = player.getInventory().getItemCountByItemId(182201331); // 1
 					if (itemCount > 1 || itemCount1 > 5 || itemCount2 > 0) {
 						return sendQuestDialog(env, 1352);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 1693);
 					}
-				}
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					itemCount2 = player.getInventory().getItemCountByItemId(182201331); // 1
 					if (itemCount2 > 0) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						qs.setQuestVarById(0, 1);
 						return sendQuestDialog(env, 5);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1352);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialog() == DialogAction.SETPRO2) {
 					itemCount1 = player.getInventory().getItemCountByItemId(182201332); // 5
 					if (itemCount1 > 4) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						qs.setQuestVarById(0, 2);
 						return sendQuestDialog(env, 6);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1352);
-				}
-				else if (env.getDialog() == DialogAction.SETPRO3) {
+				} else if (env.getDialog() == DialogAction.SETPRO3) {
 					itemCount = player.getInventory().getItemCountByItemId(182201333); // 2
 					if (itemCount > 1) {
 						qs.setStatus(QuestStatus.REWARD);
@@ -85,14 +78,11 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setQuestVarById(0, 3);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 7);
-					}
-					else
+					} else
 						return sendQuestDialog(env, 1352);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
-			}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		}

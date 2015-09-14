@@ -26,7 +26,7 @@ public class AncientWindStreamActivatorAI2 extends NpcAI2 {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		StaticDoor door = getPosition().getMapRegion().getDoors().get(146);
-				door.setOpen(false);
+		door.setOpen(false);
 		windStreamAnnounce(getOwner(), 0);
 		PacketSendUtility.broadcastPacket(door, new SM_SYSTEM_MESSAGE(1401332));
 		despawnNpc(207089);

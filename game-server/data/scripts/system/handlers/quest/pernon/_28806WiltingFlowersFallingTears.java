@@ -11,10 +11,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _28806WiltingFlowersFallingTears extends QuestHandler {
 
@@ -65,8 +63,7 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830530: {
 					switch (dialog) {
@@ -84,7 +81,7 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 				}
 				case 830211: {
 					switch (dialog) {
-						case QUEST_SELECT:{
+						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
 						case SELECT_QUEST_REWARD:
@@ -93,8 +90,7 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830211) {
 				return sendQuestEndDialog(env);
 			}
@@ -102,4 +98,3 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 		return false;
 	}
 }
-

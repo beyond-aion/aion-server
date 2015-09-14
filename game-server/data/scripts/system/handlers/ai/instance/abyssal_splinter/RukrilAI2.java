@@ -15,13 +15,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("rukril")
 public class RukrilAI2 extends AggressiveNpcAI2 {
-	
+
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
 	@Override
-	protected void handleAttack(Creature creature)
-	{
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
@@ -32,10 +31,11 @@ public class RukrilAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void startSkillTask()	{
+	private void startSkillTask() {
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
-			public void run()	{
+			public void run() {
 				if (isAlreadyDead())
 					cancelTask();
 				else {
@@ -48,21 +48,19 @@ public class RukrilAI2 extends AggressiveNpcAI2 {
 			}
 		}, 5000, 70000);
 	}
-	
+
 	private void cancelTask() {
 		if (skillTask != null && !skillTask.isCancelled()) {
 			skillTask.cancel(true);
 		}
 	}
 
-	
-	
-	
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		cancelTask();
 	}
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();

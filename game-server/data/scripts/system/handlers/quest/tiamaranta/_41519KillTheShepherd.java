@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _41519KillTheShepherd extends QuestHandler {
 
@@ -42,25 +40,25 @@ public class _41519KillTheShepherd extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 205938) { 
+			if (targetId == 205938) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701316) {
 				Npc npc = (Npc) env.getVisibleObject();
-				junes.add((Npc)QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() + 2, npc.getY() + 2, npc.getZ(), npc.getHeading()));
-				junes.add((Npc)QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() - 2, npc.getY() + 2, npc.getZ(), npc.getHeading()));
-				junes.add((Npc)QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() - 2, npc.getY() - 2, npc.getZ(), npc.getHeading()));
+				junes.add((Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() + 2, npc.getY() + 2, npc.getZ(),
+					npc.getHeading()));
+				junes.add((Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() - 2, npc.getY() + 2, npc.getZ(),
+					npc.getHeading()));
+				junes.add((Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 701261, npc.getX() - 2, npc.getY() - 2, npc.getZ(),
+					npc.getHeading()));
 				return useQuestObject(env, 0, 1, false, false);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205914) {
 				switch (dialog) {
 					case USE_OBJECT: {
@@ -74,7 +72,7 @@ public class _41519KillTheShepherd extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -84,11 +82,10 @@ public class _41519KillTheShepherd extends QuestHandler {
 			if (var == 1) {
 				for (Npc june : junes) {
 					june.getController().onDelete();
-		    }
+				}
 				return defaultOnKillEvent(env, 218333, 1, true);
 			}
 		}
 		return false;
 	}
 }
-

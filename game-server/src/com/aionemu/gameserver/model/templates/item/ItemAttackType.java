@@ -26,7 +26,7 @@ public enum ItemAttackType {
 	public boolean isMagical() {
 		return magic;
 	}
-	
+
 	public SkillElement getMagicalElement() {
 		return elem;
 	}

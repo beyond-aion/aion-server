@@ -9,6 +9,7 @@ import com.aionemu.gameserver.services.transfers.PlayerTransferService;
  * @author KID
  */
 public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
+
 	public CM_PTRANSFER_RESPONSE(int opCode) {
 		super(opCode);
 	}
@@ -25,54 +26,54 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 				String account = readS();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = new PlayerTransfer(taskId, targetAccount, account, name);
-                transfer.setCommonData(db);
-                PlayerTransferService.getInstance().putTransfer(taskId, transfer);
+				PlayerTransfer transfer = new PlayerTransfer(taskId, targetAccount, account, name);
+				transfer.setCommonData(db);
+				PlayerTransferService.getInstance().putTransfer(taskId, transfer);
 				//
 			}
-            case 24: // send items
+			case 24: // send items
 			{
 				int taskId = readD();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
-                transfer.setItemsData(db);
+				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
+				transfer.setItemsData(db);
 			}
 				break;
-            case 25: // send data
+			case 25: // send data
 			{
 				int taskId = readD();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
-                transfer.setData(db);
+				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
+				transfer.setData(db);
 			}
 				break;
-             case 26: // send skill
+			case 26: // send skill
 			{
 				int taskId = readD();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
-                transfer.setSkillData(db);
+				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
+				transfer.setSkillData(db);
 			}
-             case 27: // send recipe
+			case 27: // send recipe
 			{
 				int taskId = readD();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
-                transfer.setRecipeData(db);
+				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
+				transfer.setRecipeData(db);
 			}
 				break;
-             case 28: // send quest
+			case 28: // send quest
 			{
 				int taskId = readD();
 				int len = readD();
 				byte[] db = this.readB(len);
-                PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
-                transfer.setQuestData(db);
-                PlayerTransferService.getInstance().cloneCharacter(taskId, transfer);
+				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
+				transfer.setQuestData(db);
+				PlayerTransferService.getInstance().cloneCharacter(taskId, transfer);
 			}
 				break;
 			case 21:// ok

@@ -13,16 +13,15 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BoostSkillCastingTimeEffect")
 public class BoostSkillCastingTimeEffect extends BufEffect {
-   
-   @Override
-   public void calculate(Effect effect) {
-	  if (effect.getEffected().isEnemy(effect.getEffector()) && value < 0) {
-		 super.calculate(effect, StatEnum.SLOW_RESISTANCE, null); 
-	  }
-	  else {
-		 super.calculate(effect);
-	  }
-	  
-   }
+
+	@Override
+	public void calculate(Effect effect) {
+		if (effect.getEffected().isEnemy(effect.getEffector()) && value < 0) {
+			super.calculate(effect, StatEnum.SLOW_RESISTANCE, null);
+		} else {
+			super.calculate(effect);
+		}
+
+	}
 
 }

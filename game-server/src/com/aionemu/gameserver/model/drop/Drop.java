@@ -18,11 +18,11 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author MrPoke
- *
  */
 @XmlRootElement(name = "drop")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Drop implements DropCalculator {
+
 	@XmlAttribute(name = "item_id")
 	private int itemId;
 	@XmlAttribute(name = "min_amount")
@@ -59,7 +59,6 @@ public class Drop implements DropCalculator {
 
 	/**
 	 * Gets the value of the itemId property.
-	 *
 	 */
 	public int getItemId() {
 		return itemId;
@@ -67,7 +66,6 @@ public class Drop implements DropCalculator {
 
 	/**
 	 * Gets the value of the minAmount property.
-	 *
 	 */
 	public int getMinAmount() {
 		return minAmount;
@@ -75,7 +73,6 @@ public class Drop implements DropCalculator {
 
 	/**
 	 * Gets the value of the maxAmount property.
-	 *
 	 */
 	public int getMaxAmount() {
 		return maxAmount;
@@ -83,7 +80,6 @@ public class Drop implements DropCalculator {
 
 	/**
 	 * Gets the value of the chance property.
-	 *
 	 */
 	public float getChance() {
 		return chance;
@@ -114,8 +110,7 @@ public class Drop implements DropCalculator {
 					dropitem.isDistributeItem(true);
 					result.add(dropitem);
 				}
-			}
-			else {
+			} else {
 				DropItem dropitem = new DropItem(this);
 				dropitem.calculateCount();
 				dropitem.setIndex(index++);
@@ -125,22 +120,21 @@ public class Drop implements DropCalculator {
 		return index;
 	}
 
-	public static Drop load(ByteBuffer buffer){
+	public static Drop load(ByteBuffer buffer) {
 		Drop drop = new Drop();
 		drop.itemId = buffer.getInt();
 		drop.chance = buffer.getFloat();
 		drop.minAmount = buffer.getInt();
 		drop.maxAmount = buffer.getInt();
-		drop.noReduce = buffer.get() == 1? true : false;
-		drop.eachMember = buffer.get() == 1? true : false;
+		drop.noReduce = buffer.get() == 1 ? true : false;
+		drop.eachMember = buffer.get() == 1 ? true : false;
 		return drop;
 	}
 
 	@Override
 	public String toString() {
-		return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance
-			+ ", noReduce=" + noReduce + ", eachMember=" + eachMember + "]";
+		return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance + ", noReduce=" + noReduce
+			+ ", eachMember=" + eachMember + "]";
 	}
-	
-	
+
 }

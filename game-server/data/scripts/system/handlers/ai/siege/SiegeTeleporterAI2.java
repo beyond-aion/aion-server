@@ -21,7 +21,7 @@ public class SiegeTeleporterAI2 extends GeneralNpcAI2 {
 		canTeleport(false);
 		super.handleDespawned();
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		canTeleport(false);
@@ -36,7 +36,7 @@ public class SiegeTeleporterAI2 extends GeneralNpcAI2 {
 
 	private void canTeleport(final boolean status) {
 		final int id = ((SiegeNpc) getOwner()).getSiegeId();
-		
+
 		SiegeService.getInstance().getSiegeLocation(id).setCanTeleport(status);
 
 		getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {

@@ -41,8 +41,7 @@ public class _80018EventSockItToEm extends QuestHandler {
 		if ((qs == null || qs.getStatus() == QuestStatus.NONE) && !onLvlUpEvent(env))
 			return false;
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-			&& qs.getCompleteCount() < 10) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < 10) {
 			if (env.getTargetId() == 799778) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -88,8 +87,7 @@ public class _80018EventSockItToEm extends QuestHandler {
 			// Start once
 			if (qs == null || qs.getStatus() == QuestStatus.NONE)
 				return QuestService.startEventQuest(env, QuestStatus.START);
-		}
-		else if (qs != null) {
+		} else if (qs != null) {
 			// Set as expired
 			QuestService.abandonQuest(player, questId);
 		}

@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Ritsu
- *
  */
 public class _23060PlausibleDeniablity extends QuestHandler {
 
@@ -29,14 +27,12 @@ public class _23060PlausibleDeniablity extends QuestHandler {
 		npcs.add(800938);
 	}
 
-	public _23060PlausibleDeniablity()
-	{
+	public _23060PlausibleDeniablity() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(801104).addOnTalkEvent(questId);
 		qe.registerQuestNpc(801131).addOnTalkEvent(questId);
 		for (int npc : npcs) {
@@ -46,36 +42,32 @@ public class _23060PlausibleDeniablity extends QuestHandler {
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 0) { 
+			if (targetId == 0) {
 				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
 			}
 		}
-		
-		if(qs == null)
+
+		if (qs == null)
 			return false;
-		
-		if(qs.getStatus() == QuestStatus.START)
-		{
+
+		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(targetId == 801104)
-			{
-				switch (dialog)
-				{
+			if (targetId == 801104) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if(var == 0)
+						if (var == 0)
 							return sendQuestDialog(env, 1352);
-						if(var == 2)
+						if (var == 2)
 							return sendQuestDialog(env, 2034);
 					case SETPRO1:
 						changeQuestStep(env, 0, 1, false);
@@ -84,35 +76,27 @@ public class _23060PlausibleDeniablity extends QuestHandler {
 						changeQuestStep(env, 2, 3, false);
 						return closeDialogWindow(env);
 				}
-			}
-			else if(targetId == 801131)
-			{
-				switch (dialog)
-				{
+			} else if (targetId == 801131) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if(var == 1)
+						if (var == 1)
 							return sendQuestDialog(env, 1693);
 					case SETPRO2:
 						changeQuestStep(env, 1, 2, false);
 						return closeDialogWindow(env);
 				}
-			}
-			else if(npcs.contains(targetId))
-			{
-				switch (dialog)
-				{
+			} else if (npcs.contains(targetId)) {
+				switch (dialog) {
 					case QUEST_SELECT:
-						if(var == 3)
+						if (var == 3)
 							return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 3, 3, true);
 						return sendQuestDialog(env, 5);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
-			if(npcs.contains(targetId))
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (npcs.contains(targetId))
 				return sendQuestEndDialog(env);
 		}
 

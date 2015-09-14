@@ -30,20 +30,19 @@ public class SM_MACRO_LIST extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(player.getObjectId());// player id
-		
+
 		Map<Integer, String> macrosToSend = player.getMacroList().getMarcosPart(secondPart);
 		int size = macrosToSend.size();
 		size = -size;
-		
-		if(secondPart) {
+
+		if (secondPart) {
 			writeC(0x00);
-		}
-		else {
+		} else {
 			writeC(0x01);
 		}
-		
+
 		writeH(size);
-		
+
 		if (size != 0) {
 			for (Map.Entry<Integer, String> entry : macrosToSend.entrySet()) {
 				writeC(entry.getKey());// order

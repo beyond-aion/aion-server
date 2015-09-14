@@ -8,15 +8,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _30709WhereIsTheDragonLordGarden extends QuestHandler {
 
 	private final static int questId = 30709;
-	private final static int npcs [] = {800423, 800066};
+	private final static int npcs[] = { 800423, 800066 };
 
 	public _30709WhereIsTheDragonLordGarden() {
 		super(questId);
@@ -37,30 +35,27 @@ public class _30709WhereIsTheDragonLordGarden extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 800423) { 
+			if (targetId == 800423) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 800066) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 800066) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
@@ -69,7 +64,7 @@ public class _30709WhereIsTheDragonLordGarden extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (zoneName.equals(ZoneName.get("NOBLES_GARDEN_300510000"))) {
 				if (var == 0) {
-					changeQuestStep(env, 0, 1, true); 
+					changeQuestStep(env, 0, 1, true);
 					return true;
 				}
 			}

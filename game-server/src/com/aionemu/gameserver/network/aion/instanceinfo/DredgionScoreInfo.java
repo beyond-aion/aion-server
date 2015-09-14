@@ -11,34 +11,36 @@ import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
- *
  * @author xTz
  */
-public class DredgionScoreInfo extends InstanceScoreInfo{
-    private final DredgionReward dredgionReward;
-    private final List<Player> players;
-    private final InstanceScoreType instanceScoreType;
-    public DredgionScoreInfo(DredgionReward dredgionReward, List<Player> players) {
-        this.dredgionReward = dredgionReward;
-        this.players = players;
-        this.instanceScoreType = dredgionReward.getInstanceScoreType();
-    }
+public class DredgionScoreInfo extends InstanceScoreInfo {
 
-    @Override
-    public void writeMe(ByteBuffer buf) {
-        fillTableWithGroup(buf, Race.ELYOS);
-        fillTableWithGroup(buf, Race.ASMODIANS);
-        int elyosScore = dredgionReward.getPointsByRace(Race.ELYOS).intValue();
-        int asmosScore = dredgionReward.getPointsByRace(Race.ASMODIANS).intValue();
-        writeD(buf, instanceScoreType.isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
-        writeD(buf, elyosScore);
-        writeD(buf, asmosScore);
-        writeH(buf, 0); // [3.5]
-        for (DredgionReward.DredgionRooms dredgionRoom : dredgionReward.getDredgionRooms()) {
-            writeC(buf, dredgionRoom.getState());
-        }
-    }
-    private void fillTableWithGroup(ByteBuffer buf, Race race) {
+	private final DredgionReward dredgionReward;
+	private final List<Player> players;
+	private final InstanceScoreType instanceScoreType;
+
+	public DredgionScoreInfo(DredgionReward dredgionReward, List<Player> players) {
+		this.dredgionReward = dredgionReward;
+		this.players = players;
+		this.instanceScoreType = dredgionReward.getInstanceScoreType();
+	}
+
+	@Override
+	public void writeMe(ByteBuffer buf) {
+		fillTableWithGroup(buf, Race.ELYOS);
+		fillTableWithGroup(buf, Race.ASMODIANS);
+		int elyosScore = dredgionReward.getPointsByRace(Race.ELYOS).intValue();
+		int asmosScore = dredgionReward.getPointsByRace(Race.ASMODIANS).intValue();
+		writeD(buf, instanceScoreType.isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
+		writeD(buf, elyosScore);
+		writeD(buf, asmosScore);
+		writeH(buf, 0); // [3.5]
+		for (DredgionReward.DredgionRooms dredgionRoom : dredgionReward.getDredgionRooms()) {
+			writeC(buf, dredgionRoom.getState());
+		}
+	}
+
+	private void fillTableWithGroup(ByteBuffer buf, Race race) {
 		int count = 0;
 		for (Player player : players) {
 			if (!race.equals(player.getRace())) {
@@ -57,8 +59,7 @@ public class DredgionScoreInfo extends InstanceScoreInfo{
 				boolean winner = race.equals(dredgionReward.getWinningRace());
 				writeD(buf, (winner ? dredgionReward.getWinnerPoints() : dredgionReward.getLooserPoints()) + (int) (dpr.getPoints() * 1.6f)); // apBonus1
 				writeD(buf, (winner ? dredgionReward.getWinnerPoints() : dredgionReward.getLooserPoints())); // apBonus2
-			}
-			else {
+			} else {
 				writeB(buf, new byte[8]);
 			}
 
@@ -71,5 +72,5 @@ public class DredgionScoreInfo extends InstanceScoreInfo{
 			writeB(buf, new byte[88 * (6 - count)]); // spaces
 		}
 	}
-    
+
 }

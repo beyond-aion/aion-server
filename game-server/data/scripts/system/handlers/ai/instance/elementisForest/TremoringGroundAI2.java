@@ -20,10 +20,9 @@ import com.aionemu.gameserver.utils.MathUtil;
  */
 @AIName("tremorground")
 public class TremoringGroundAI2 extends GeneralNpcAI2 {
-	
+
 	private AtomicBoolean isUsed = new AtomicBoolean(false);
-	
-	
+
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
@@ -43,7 +42,7 @@ public class TremoringGroundAI2 extends GeneralNpcAI2 {
 			}
 		}
 	}
-	
+
 	@Override
 	public AIAnswer ask(AIQuestion question) {
 		switch (question) {

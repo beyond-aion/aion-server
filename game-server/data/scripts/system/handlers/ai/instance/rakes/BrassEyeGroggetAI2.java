@@ -29,11 +29,9 @@ public class BrassEyeGroggetAI2 extends SummonerAI2 {
 		int i = 0;
 		if (percent < 81 && percent > 60) {
 			i = 1;
-		}
-		else if (percent < 61 && percent > 30) {
+		} else if (percent < 61 && percent > 30) {
 			i = 2;
-		}
-		else if (percent < 31) {
+		} else if (percent < 31) {
 			i = 3;
 		}
 		final int nrSpawn = i;

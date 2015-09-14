@@ -52,9 +52,8 @@ public class RVController extends NpcController {
 		this.maxEntries = riftTemplate.getEntries();
 		this.minLevel = riftTemplate.getMinLevel();
 		this.maxLevel = riftTemplate.getMaxLevel();
-		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000)) + (isVortex
-				? VortexService.getInstance().getDuration() * 3600
-				: RiftService.getInstance().getDuration() * 3600);
+		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
+			+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
 
 		if (slave != null)// master rift should be created
 		{
@@ -82,14 +81,14 @@ public class RVController extends NpcController {
 	private void onRequest(Player player) {
 		if (isVortex) {
 			RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+
 				@Override
 				public void acceptRequest(Creature requester, Player responder) {
 					if (onAccept(responder)) {
 						if (responder.isInTeam()) {
 							if (responder.getCurrentTeam() instanceof PlayerGroup) {
 								PlayerGroupService.removePlayer(responder);
-							}
-							else {
+							} else {
 								PlayerAllianceService.removePlayer(responder);
 							}
 						}
@@ -117,9 +116,9 @@ public class RVController extends NpcController {
 			if (requested) {
 				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(904304, getOwner().getObjectId(), 5));
 			}
-		}
-		else {
+		} else {
 			RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+
 				@Override
 				public void acceptRequest(Creature requester, Player responder) {
 					if (onAccept(responder)) {
@@ -246,9 +245,9 @@ public class RVController extends NpcController {
 	private int[] getWorldsList(RVController controller) {
 		int first = controller.getOwner().getWorldId();
 		if (controller.isMaster()) {
-			return new int[]{first, controller.slaveSpawnTemplate.getWorldId()};
+			return new int[] { first, controller.slaveSpawnTemplate.getWorldId() };
 		}
-		return new int[]{first};
+		return new int[] { first };
 	}
 
 }

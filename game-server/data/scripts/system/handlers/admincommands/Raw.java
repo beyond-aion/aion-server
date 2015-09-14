@@ -47,31 +47,29 @@ public class Raw extends AdminCommand {
 			List<String> lines = FileUtils.readLines(file);
 
 			SM_CUSTOM_PACKET packet = null;
-			PacketSendUtility.sendMessage(admin, "lines "+lines.size());
+			PacketSendUtility.sendMessage(admin, "lines " + lines.size());
 			boolean init = false;
-			for (int r = 0 ; r< lines.size(); r++){
+			for (int r = 0; r < lines.size(); r++) {
 				String row = lines.get(r);
 				String[] tokens = row.substring(0, 48).trim().split(" ");
 				int len = tokens.length;
-				
+
 				for (int i = 0; i < len; i++) {
 					if (!init) {
-						if (i == 1){
-						packet = new SM_CUSTOM_PACKET(Integer.decode("0x"+tokens[i]+tokens[i-1]));
-						init = true;
+						if (i == 1) {
+							packet = new SM_CUSTOM_PACKET(Integer.decode("0x" + tokens[i] + tokens[i - 1]));
+							init = true;
 						}
-					}
-					else if ( r > 0 || i > 4){
+					} else if (r > 0 || i > 4) {
 						packet.addElement(PacketElementType.C, "0x" + tokens[i]);
 					}
 				}
 			}
-			if (packet != null){
+			if (packet != null) {
 				PacketSendUtility.sendMessage(admin, "Packet send..");
 				PacketSendUtility.sendPacket(admin, packet);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			PacketSendUtility.sendMessage(admin, "An error has occurred.");
 			logger.warn("IO Error.", e);
 		}

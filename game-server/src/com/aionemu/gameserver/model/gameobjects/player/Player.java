@@ -318,15 +318,14 @@ public class Player extends Creature {
 			try {
 				String tagID = "CUSTOMTAG_ACCESS" + getAccessLevel();
 				nameFormat = AdminConfig.class.getField(tagID).get(null).toString();
-			}
-			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 				// should never happen
 			}
 		}
-		
+
 		return String.format(nameFormat, getName());
 	}
-	
+
 	public PlayerAppearance getPlayerAppearance() {
 		return playerAppearance;
 	}
@@ -506,15 +505,15 @@ public class Player extends Creature {
 	public int getQuestExpands() {
 		return this.playerCommonData.getQuestExpands();
 	}
-	
+
 	public int getNpcExpands() {
 		return this.playerCommonData.getNpcExpands();
 	}
-	
+
 	public int getItemExpands() {
 		return this.playerCommonData.getItemExpands();
 	}
-	
+
 	public void setCubeLimit() {
 		getInventory().setLimit(StorageType.CUBE.getLimit() + (getNpcExpands() + getQuestExpands() + getItemExpands()) * getInventory().getRowLength());
 	}
@@ -667,7 +666,7 @@ public class Player extends Creature {
 			return inventory;
 		return null;
 	}
-	
+
 	public Storage[] getPetBag() {
 		return this.petBag;
 	}
@@ -937,17 +936,16 @@ public class Player extends Creature {
 	}
 
 	public int getWarehouseSize() {
-	  return this.playerCommonData.getWhNpcExpands() + this.playerCommonData.getWhBonusExpands();
-	}
-	
-	public int getWhNpcExpands() {
-	   return this.playerCommonData.getWhNpcExpands();
-	}
-	
-	public int getWhBonusExpands() {
-	   return this.playerCommonData.getWhBonusExpands();
+		return this.playerCommonData.getWhNpcExpands() + this.playerCommonData.getWhBonusExpands();
 	}
 
+	public int getWhNpcExpands() {
+		return this.playerCommonData.getWhNpcExpands();
+	}
+
+	public int getWhBonusExpands() {
+		return this.playerCommonData.getWhBonusExpands();
+	}
 
 	public void setWarehouseLimit() {
 		getWarehouse().setLimit(StorageType.REGULAR_WAREHOUSE.getLimit() + (getWarehouseSize() * getWarehouse().getRowLength()));
@@ -970,7 +968,7 @@ public class Player extends Creature {
 	public void setFlyState(FlyState flyState) {
 		this.flyState |= flyState.getId();
 	}
-	
+
 	public void unsetFlyState(FlyState flyState) {
 		this.flyState &= ~flyState.getId();
 	}
@@ -985,24 +983,25 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * CreatureState is unreliable for players
-	 * returns true if player is flying or gliding
+	 * CreatureState is unreliable for players returns true if player is flying or gliding
+	 * 
 	 * @return boolean
 	 */
 	@Override
 	public boolean isFlying() {
 		return (flyState >= 1);
 	}
+
 	/**
-	 * CreatureState is unreliable for players
-	 * returns true if player is flying
+	 * CreatureState is unreliable for players returns true if player is flying
+	 * 
 	 * @return boolean
 	 */
 	@Override
 	public boolean isInFlyingState() {
 		return this.isInFlyState(FlyState.FLYING);
 	}
-	
+
 	public boolean isInGlidingState() {
 		return this.isInFlyState(FlyState.GLIDING);
 	}
@@ -1014,7 +1013,7 @@ public class Player extends Creature {
 	public void setArcadeUpgradeFrenzy(int arcadeUpgradeFrenzy) {
 		this.arcadeUpgradeFrenzy = arcadeUpgradeFrenzy;
 	}
-	
+
 	public int getArcadeUpgradeLevel() {
 		return this.arcadeUpgradeLevel;
 	}
@@ -1238,7 +1237,8 @@ public class Player extends Creature {
 			return false;
 		else if ((this.getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1))
 			return false;
-		else return canPvP(enemy) || this.getController().isDueling(enemy);
+		else
+			return canPvP(enemy) || this.getController().isDueling(enemy);
 	}
 
 	public boolean isAggroIconTo(Player player) {
@@ -1251,8 +1251,7 @@ public class Player extends Creature {
 		int worldId = enemy.getWorldId();
 		if (!enemy.getRace().equals(getRace())) {
 			return isInsidePvPZone() && enemy.isInsidePvPZone();
-		}
-		else if (worldId == 110010000 || worldId == 120010000 || isInInstance()) {
+		} else if (worldId == 110010000 || worldId == 120010000 || isInInstance()) {
 			return isInsideZoneType(ZoneType.PVP) && enemy.isInsideZoneType(ZoneType.PVP) && !isInSameTeam(enemy);
 		}
 		return false;
@@ -1261,11 +1260,9 @@ public class Player extends Creature {
 	public boolean isInSameTeam(Player player) {
 		if (isInGroup2() && player.isInGroup2()) {
 			return getPlayerGroup2().getTeamId().equals(player.getPlayerGroup2().getTeamId());
-		}
-		else if (isInAlliance2() && player.isInAlliance2()) {
+		} else if (isInAlliance2() && player.isInAlliance2()) {
 			return getPlayerAlliance2().getObjectId().equals(player.getPlayerAlliance2().getObjectId());
-		}
-		else if (isInLeague() && player.isInLeague()) {
+		} else if (isInLeague() && player.isInLeague()) {
 			return getPlayerAllianceGroup2().getObjectId().equals(player.getPlayerAllianceGroup2().getObjectId());
 		}
 		return false;
@@ -1600,7 +1597,7 @@ public class Player extends Creature {
 	public void setLastCounterSkill(AttackStatus status) {
 		long time = System.currentTimeMillis();
 		AttackStatus result = AttackStatus.getBaseStatus(status);
-		
+
 		switch (result) {
 			case DODGE:
 				this.lastCounterSkill.put(AttackStatus.DODGE, time);
@@ -2087,8 +2084,8 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Put up supplements to subtraction queue, so that when moving they would not decrease, need update as confirmation
-	 * To update use updateSupplements()
+	 * Put up supplements to subtraction queue, so that when moving they would not decrease, need update as confirmation To update use
+	 * updateSupplements()
 	 */
 	public void subtractSupplements(int count, int supplementId) {
 		subtractedSupplementsCount = count;
@@ -2258,17 +2255,17 @@ public class Player extends Creature {
 	public void setRobotId(int robotId) {
 		this.robotId = robotId;
 	}
-	
+
 	public boolean isInRobotMode() {
 		return this.robotId != 0;
 	}
-	
+
 	@Override
 	public boolean canPerformMove() {
-		//player cannot move is transformed
+		// player cannot move is transformed
 		if (this.getTransformModel().getBanMovement() == 1)
 			return false;
-		
+
 		return super.canPerformMove();
 	}
 

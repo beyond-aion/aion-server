@@ -49,17 +49,14 @@ public class FixPath extends AdminCommand {
 					canceled = true;
 				}
 				return;
-			}
-			else if (params.length < 2) {
+			} else if (params.length < 2) {
 				PacketSendUtility.sendMessage(admin, "Syntax : //fixpath <route id> <jump height> | <cancel>");
 				return;
-			}
-			else {
+			} else {
 				routeId = params[0];
 				jumpHeight = Float.parseFloat(params[1]);
 			}
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Only numbers please!!!");
 		}
 
@@ -116,8 +113,7 @@ public class FixPath extends AdminCommand {
 					i = 1;
 					ArrayList<RouteStep> newSteps = new ArrayList<RouteStep>();
 
-					int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 
-																							 : template.getRouteSteps().size();
+					int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 : template.getRouteSteps().size();
 					for (int s = 0; s < lastStep; s++) {
 						RouteStep step = template.getRouteSteps().get(s);
 						RouteStep fixedStep = new RouteStep(step.getX(), step.getY(), corrections.get(i), 0);
@@ -133,10 +129,8 @@ public class FixPath extends AdminCommand {
 					data.saveData(template.getRouteId());
 
 					PacketSendUtility.sendMessage(admin, "Done.");
-				}
-				catch (Exception e) {
-				}
-				finally {
+				} catch (Exception e) {
+				} finally {
 					runner = null;
 					isRunning = false;
 					canceled = false;

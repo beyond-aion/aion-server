@@ -9,9 +9,8 @@ import java.nio.channels.SocketChannel;
 import com.aionemu.commons.options.Assertion;
 
 /**
- * Class that represent Connection with server socket. Connection is created by <code>ConnectionFactory</code> and
- * attached to <code>SelectionKey</code> key. Selection key is registered to one of Dispatchers <code>Selector</code> to
- * handle io read and write.
+ * Class that represent Connection with server socket. Connection is created by <code>ConnectionFactory</code> and attached to
+ * <code>SelectionKey</code> key. Selection key is registered to one of Dispatchers <code>Selector</code> to handle io read and write.
  * 
  * @author -Nemesiss-
  */
@@ -113,8 +112,7 @@ public abstract class AConnection {
 	}
 
 	/**
-	 * Connection will be closed at some time [by Dispatcher Thread], after that onDisconnect() method will be called to
-	 * clear all other things.
+	 * Connection will be closed at some time [by Dispatcher Thread], after that onDisconnect() method will be called to clear all other things.
 	 */
 	public final void close() {
 		synchronized (guard) {
@@ -126,8 +124,8 @@ public abstract class AConnection {
 	}
 
 	/**
-	 * This will only close the connection without taking care of the rest. May be called only by Dispatcher Thread.
-	 * Returns true if connection was not closed before.
+	 * This will only close the connection without taking care of the rest. May be called only by Dispatcher Thread. Returns true if connection was not
+	 * closed before.
 	 * 
 	 * @return true if connection was not closed before.
 	 */
@@ -150,8 +148,7 @@ public abstract class AConnection {
 					socketChannel.close();
 				}
 				closed = true;
-			}
-			catch (IOException ignored) {
+			} catch (IOException ignored) {
 			}
 		}
 		return true;
@@ -211,14 +208,12 @@ public abstract class AConnection {
 	abstract protected boolean writeData(ByteBuffer data);
 
 	/**
-	 * Called when AConnection object is fully initialized and ready to process and send packets. It may be used as hook
-	 * for sending first packet etc.
+	 * Called when AConnection object is fully initialized and ready to process and send packets. It may be used as hook for sending first packet etc.
 	 */
 	abstract protected void initialized();
 
 	/**
-	 * This method is called by Dispatcher to inform that this connection was closed and should be cleared. This method is
-	 * called only once.
+	 * This method is called by Dispatcher to inform that this connection was closed and should be cleared. This method is called only once.
 	 */
 	abstract protected void onDisconnect();
 

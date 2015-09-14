@@ -15,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.questEngine.task.QuestTasks;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _3212TheMissingCubeCraftsman extends QuestHandler {
 
@@ -47,43 +45,36 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798321) { 
+			if (targetId == 798321) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203838) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 798011) {
+			} else if (targetId == 798011) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 1)
+					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);
 				}
-			}
-			else if (targetId == 798337) {
+			} else if (targetId == 798337) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 2)
+					if (qs.getQuestVarById(0) == 2)
 						return sendQuestDialog(env, 1693);
-				}
-				else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialog == DialogAction.SETPRO3) {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getSpawn().setWalkerId("4212");
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
@@ -91,14 +82,12 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 					player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, npc, 505.69427f, 437.69382f, 885.1844f));
 					return defaultCloseDialog(env, 2, 3);
 				}
-			}
-			else if (targetId == 730208) {
+			} else if (targetId == 730208) {
 				Npc npc = (Npc) env.getVisibleObject();
 				npc.getController().onDelete();
 				return true;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798011) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -108,6 +97,7 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 		}
 		return false;
 	}
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -122,7 +112,7 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -136,7 +126,7 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
 		return defaultFollowEndEvent(env, 3, 4, true); // reward
@@ -144,6 +134,6 @@ public class _3212TheMissingCubeCraftsman extends QuestHandler {
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 3, 2, false); 
+		return defaultFollowEndEvent(env, 3, 2, false);
 	}
 }

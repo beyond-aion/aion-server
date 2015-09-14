@@ -28,37 +28,36 @@ public class Attrbonus extends ConsoleCommand implements StatOwner {
 			info(admin, null);
 			return;
 		}
-		
+
 		StatEnum stat = StatEnum.valueOf(StatEnum.class, String.valueOf(params[0]));
-		
-		if(stat == null){
+
+		if (stat == null) {
 			PacketSendUtility.sendMessage(admin, "Invalid params.");
 			return;
 		}
-		
+
 		int value;
-		
+
 		try {
 			value = Integer.parseInt(params[1]);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Invalid params.");
 			return;
-		}		
-		
+		}
+
 		Creature effected = admin;
 		CreatureGameStats<? extends Creature> cgs = effected.getGameStats();
-		
+
 		List<IStatFunction> modifiers = new ArrayList<IStatFunction>();
 
 		modifiers.add(new StatSetFunction(stat, value));
 
 		if (modifiers.size() > 0)
 			cgs.addEffect(this, modifiers);
-		
-		PacketSendUtility.sendMessage(admin, "Character stat "+stat.name()+" increased.");
+
+		PacketSendUtility.sendMessage(admin, "Character stat " + stat.name() + " increased.");
 	}
-	
+
 	@Override
 	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "syntax ///attrbonus <stat> <value>");

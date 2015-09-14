@@ -8,10 +8,10 @@ import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
 
 /**
- *
  * @author nrg
  */
 public class CleanAccountsHandler extends TaskFromDBHandler {
+
 	private static Logger log = LoggerFactory.getLogger(CleanAccountsHandler.class);
 	private int daysOfInactivity;
 

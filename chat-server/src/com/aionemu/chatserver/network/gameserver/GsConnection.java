@@ -18,26 +18,23 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 /**
  * @author KID
  */
-public class GsConnection extends AConnection
-{
+public class GsConnection extends AConnection {
+
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
 	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<GsServerPacket>();
 	private State state;
-	
-	public static enum State
-	{
+
+	public static enum State {
 		CONNECTED,
 		AUTHED
 	}
-	
-	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException
-	{
-		super(sc, d, 8192*8, 8192*8);
+
+	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
+		super(sc, d, 8192 * 8, 8192 * 8);
 	}
 
 	@Override
-	public boolean processData(ByteBuffer data)
-	{
+	public boolean processData(ByteBuffer data) {
 		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
 		if (pck != null && pck.read())
 			ThreadPoolManager.getInstance().execute(pck);
@@ -45,10 +42,8 @@ public class GsConnection extends AConnection
 	}
 
 	@Override
-	protected final boolean writeData(ByteBuffer data)
-	{
-		synchronized (guard)
-		{
+	protected final boolean writeData(ByteBuffer data) {
+		synchronized (guard) {
 			GsServerPacket packet = sendMsgQueue.pollFirst();
 			if (packet == null)
 				return false;
@@ -58,21 +53,17 @@ public class GsConnection extends AConnection
 	}
 
 	@Override
-	protected final void onDisconnect()
-	{
+	protected final void onDisconnect() {
 		GameServerService.getInstance().setOffline();
 	}
 
 	@Override
-	protected final void onServerClose()
-	{
+	protected final void onServerClose() {
 		close();
 	}
 
-	public final void sendPacket(GsServerPacket bp)
-	{
-		synchronized (guard)
-		{
+	public final void sendPacket(GsServerPacket bp) {
+		synchronized (guard) {
 			if (isWriteDisabled())
 				return;
 			sendMsgQueue.addLast(bp);
@@ -80,10 +71,8 @@ public class GsConnection extends AConnection
 		}
 	}
 
-	public final void close(GsServerPacket closePacket)
-	{
-		synchronized (guard)
-		{
+	public final void close(GsServerPacket closePacket) {
+		synchronized (guard) {
 			if (isWriteDisabled())
 				return;
 			pendingClose = true;
@@ -93,19 +82,16 @@ public class GsConnection extends AConnection
 		}
 	}
 
-	public State getState()
-	{
+	public State getState() {
 		return state;
 	}
 
-	public void setState(State state)
-	{
+	public void setState(State state) {
 		this.state = state;
 	}
 
 	@Override
-	protected void initialized()
-	{
+	protected void initialized() {
 		state = State.CONNECTED;
 		log.info("Gameserver connection attemp from: " + getIP());
 	}

@@ -15,10 +15,10 @@ import com.aionemu.gameserver.model.Race;
 @XmlType(name = "GlobalDropRace")
 public class GlobalDropRace {
 
-    @XmlAttribute(name = "race", required = true)
-    protected Race race;
- 
- 	public Race getRace() {
-        return race;
-    }
+	@XmlAttribute(name = "race", required = true)
+	protected Race race;
+
+	public Race getRace() {
+		return race;
+	}
 }

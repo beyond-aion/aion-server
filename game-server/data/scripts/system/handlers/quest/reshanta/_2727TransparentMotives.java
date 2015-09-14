@@ -41,8 +41,7 @@ public class _2727TransparentMotives extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 278000) {
+		} else if (targetId == 278000) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -51,12 +50,10 @@ public class _2727TransparentMotives extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 278013) {
+		} else if (targetId == 278013) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -65,12 +62,10 @@ public class _2727TransparentMotives extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (targetId == 278102) {
+		} else if (targetId == 278102) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
@@ -79,8 +74,7 @@ public class _2727TransparentMotives extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				}
-				else
+				} else
 					return sendQuestEndDialog(env);
 			}
 		}

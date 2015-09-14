@@ -7,8 +7,10 @@ import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
 import com.aionemu.gameserver.model.templates.mail.Mails;
 
 /**
- * This class is holding whole static data, that is loaded from /data/static_data directory.<br> The data is loaded by XMLDataLoader using JAXB.<br> <br> This class temporarily
- * also contains data loaded from txt files by DataLoaders. It'll be changed later.
+ * This class is holding whole static data, that is loaded from /data/static_data directory.<br>
+ * The data is loaded by XMLDataLoader using JAXB.<br>
+ * <br>
+ * This class temporarily also contains data loaded from txt files by DataLoaders. It'll be changed later.
  *
  * @author Luno , orz
  * @modified Wakizashi, Neon
@@ -105,7 +107,7 @@ public final class DataManager {
 	public static ArcadeUpgradeData ARCADE_UPGRADE_DATA;
 	public static AtreianPassportData ATREIAN_PASSPORT_DATA;
 	public static MonsterRaidData RAID_DATA;
-	
+
 	private XmlDataLoader loader;
 
 	/**
@@ -124,7 +126,7 @@ public final class DataManager {
 		StaticData data = loader.loadStaticData();
 		long time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
-		
+
 		start = System.currentTimeMillis();
 		NPC_DATA = data.npcData;
 		CUSTOM_NPC_DROP = data.customNpcDrop;
@@ -215,12 +217,12 @@ public final class DataManager {
 		ARCADE_UPGRADE_DATA = data.arcadeUpgradeData;
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
 		RAID_DATA = data.raidData;
-		
+
 		// subsequent data processing and modifications (order is important)
 		ITEM_DATA.cleanup();
 		NpcDropData.load();
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData());
-		
+
 		time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data processed in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
 	}

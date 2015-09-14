@@ -15,7 +15,7 @@ public abstract class HouseScriptsDAO implements DAO {
 	}
 
 	public abstract PlayerScripts getPlayerScripts(int houseId);
-	
+
 	public abstract void storeScript(int houseId, int position, String script);
 
 	public abstract void deleteScript(int houseId, int position);

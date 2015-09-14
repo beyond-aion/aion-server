@@ -9,12 +9,12 @@ import com.aionemu.commons.configuration.Property;
  */
 public class NameConfig {
 
-  /**
-   * Enables custom names usage.
-   */
-  @Property(key = "gameserver.name.allow.custom", defaultValue = "false")
-  public static boolean ALLOW_CUSTOM_NAMES;
-  
+	/**
+	 * Enables custom names usage.
+	 */
+	@Property(key = "gameserver.name.allow.custom", defaultValue = "false")
+	public static boolean ALLOW_CUSTOM_NAMES;
+
 	/**
 	 * Character name pattern (checked when character is being created)
 	 */

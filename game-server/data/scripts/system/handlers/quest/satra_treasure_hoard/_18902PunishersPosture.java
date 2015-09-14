@@ -7,19 +7,16 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Ritsu
- *
  */
-public class _18902PunishersPosture extends QuestHandler{
+public class _18902PunishersPosture extends QuestHandler {
 
-	private static final int questId=18902;
+	private static final int questId = 18902;
 
 	public _18902PunishersPosture() {
 		super(questId);
 	}
-
 
 	@Override
 	public void register() {
@@ -61,26 +58,19 @@ public class _18902PunishersPosture extends QuestHandler{
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs != null &&qs.getStatus() == QuestStatus.START)
-		{
-			if (targetId == 205842)
-			{
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (targetId == 205842) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 1)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
-				{
+				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD)
-		{
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205842)
 				return sendQuestEndDialog(env);
 		}

@@ -16,8 +16,8 @@ import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
- * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items,
- * statistics. Data for such NPC class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
+ * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items, statistics. Data for such NPC
+ * class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
  * 
  * @author orz
  */

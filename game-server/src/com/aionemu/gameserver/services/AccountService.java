@@ -55,8 +55,8 @@ public class AccountService {
 	 * @param membership
 	 * @return Account
 	 */
-	public static Account getAccount(int accountId, String accountName, AccountTime accountTime, byte accessLevel,
-		byte membership, long toll, String allowedHddSerial) {
+	public static Account getAccount(int accountId, String accountName, AccountTime accountTime, byte accessLevel, byte membership, long toll,
+		String allowedHddSerial) {
 		log.debug("[AS] request for account: " + accountId);
 
 		Account account = accountsMap.get(accountId);
@@ -107,6 +107,7 @@ public class AccountService {
 	private static void removeAccountWH(int accountId) {
 		DAOManager.getDAO(InventoryDAO.class).deleteAccountWH(accountId);
 	}
+
 	/**
 	 * Loads account data and returns.
 	 * 
@@ -125,12 +126,12 @@ public class AccountService {
 		for (int playerId : playerIdList) {
 			PlayerCommonData playerCommonData = playerDAO.loadPlayerCommonData(playerId);
 			CharacterBanInfo cbi = DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(playerId);
-			if(playerCommonData.isOnline())  {
-				if(World.getInstance().findPlayer(playerId) == null) {
+			if (playerCommonData.isOnline()) {
+				if (World.getInstance().findPlayer(playerId) == null) {
 					playerCommonData.setOnline(false);
-					log.warn(playerCommonData.getName()+" has online status, but I cant find it in World. Skip online status");
+					log.warn(playerCommonData.getName() + " has online status, but I cant find it in World. Skip online status");
 				}
-			}			
+			}
 			PlayerAppearance appereance = appereanceDAO.load(playerId);
 
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerId);

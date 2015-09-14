@@ -42,8 +42,7 @@ public class _1194ReducingTursinStrength extends QuestHandler {
 			if (targetId == 203098) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -54,8 +53,7 @@ public class _1194ReducingTursinStrength extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) {
 				switch (env.getDialog()) {
 					case USE_OBJECT: {
@@ -109,15 +107,15 @@ public class _1194ReducingTursinStrength extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (targetId == 210185 || targetId == 210186) {
-      if(questVar >= 1 && questVar < 10) {
+			if (questVar >= 1 && questVar < 10) {
 				if (questVar == 9)
 					qs.setStatus(QuestStatus.REWARD);
 				else
-					qs.setQuestVarById(0, questVar+1);
-        updateQuestStatus(env);
-        return true;
-        }
+					qs.setQuestVarById(0, questVar + 1);
+				updateQuestStatus(env);
+				return true;
 			}
+		}
 		return false;
 	}
 }

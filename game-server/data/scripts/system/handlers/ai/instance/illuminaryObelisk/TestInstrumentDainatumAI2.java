@@ -117,8 +117,7 @@ public class TestInstrumentDainatumAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					Boss_Timer_01();
 				}
 			}
@@ -130,8 +129,7 @@ public class TestInstrumentDainatumAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					Boss_Timer_02();
 				}
 			}
@@ -152,8 +150,7 @@ public class TestInstrumentDainatumAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead() && isCancelled == true) {
 					CancelTask();
-				}
-				else {
+				} else {
 					DespawnDainatum();
 				}
 			}
@@ -203,7 +200,7 @@ public class TestInstrumentDainatumAI2 extends AggressiveNpcAI2 {
 		spawn(284861, 255.59f, 264.44f, 455.12f, (byte) 89);
 		spawn(284861, 248.42f, 247.52f, 455.12f, (byte) 15);
 	}
-	
+
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {

@@ -105,8 +105,8 @@ public class Skill {
 	private int hitTime;// from CM_CASTSPELL
 	private int serverTime;// time when effect is applied
 	private long castStartTime;
-	private boolean instantSkill = false; 
-	
+	private boolean instantSkill = false;
+
 	private String chainCategory = null;
 	private volatile boolean isMultiCast = false;
 	private List<ChargedSkill> chargeSkillList = new ArrayList<ChargedSkill>();
@@ -188,16 +188,16 @@ public class Skill {
 					return false;
 				}
 			}
-			
+
 			if (skillMethod == SkillMethod.ITEM && duration > 0 && player.getMoveController().isInMove()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(getItemTemplate().getNameId())));
 				return false;
 			}
 		}
-		
+
 		return validateEffectedList();
 	}
-	
+
 	protected boolean validateEffectedList() {
 		Iterator<Creature> effectedIter = effectedList.iterator();
 		while (effectedIter.hasNext()) {
@@ -208,8 +208,7 @@ public class Skill {
 			if (effector instanceof Player) {
 				if (!RestrictionsManager.canAffectBySkill((Player) effector, effected, this))
 					effectedIter.remove();
-			}
-			else {
+			} else {
 				if (effector.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
 					effectedIter.remove();
 			}
@@ -224,8 +223,8 @@ public class Skill {
 			}
 			return false;
 		}
-		
-		return true;	
+
+		return true;
 	}
 
 	/**
@@ -248,12 +247,12 @@ public class Skill {
 	private boolean useSkill(boolean checkAnimation, boolean checkproperties) {
 		boostSkillCost = 0;
 		effector.getObserveController().notifyBoostSkillCostObservers(this);
-		
+
 		if (checkproperties && !canUseSkill(CastState.CAST_START))
 			return false;
-		
+
 		if (skillMethod != SkillMethod.CHARGE)
-		calculateSkillDuration();
+			calculateSkillDuration();
 
 		if (SecurityConfig.MOTION_TIME) {
 			// must be after calculateskillduration
@@ -281,15 +280,14 @@ public class Skill {
 			castStartTime = System.currentTimeMillis();
 			startCast();
 			if (effector instanceof Npc)
-			   ((NpcAI2) ((Npc) effector).getAi2()).setSubStateIfNot(AISubState.CAST);
+				((NpcAI2) ((Npc) effector).getAi2()).setSubStateIfNot(AISubState.CAST);
 		}
 
 		effector.getObserveController().attach(conditionChangeListener);
-		
+
 		if (this.duration > 0) {
 			schedule(this.duration);
-		}
-		else {
+		} else {
 			endCast();
 		}
 		return true;
@@ -344,8 +342,7 @@ public class Skill {
 					break;
 			}
 			duration -= skillTemplate.getDuration() - boostValue;
-		}
-		else
+		} else
 			duration = skillTemplate.getDuration();
 
 		// 70% of base skill duration cap
@@ -425,8 +422,7 @@ public class Skill {
 		if (motion.getInstantSkill() && hitTime != 0) {
 			log.warn("Instant and hitTime not 0! modified client_skills? player objectid: " + player.getObjectId());
 			return false;
-		}
-		else if (!motion.getInstantSkill() && hitTime == 0) {
+		} else if (!motion.getInstantSkill() && hitTime == 0) {
 			log.warn("modified client_skills! player objectid: " + player.getObjectId());
 			return false;
 		}
@@ -438,14 +434,13 @@ public class Skill {
 			return true;
 		}
 
-		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment()
-			.getOffHandWeaponType());
+		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		float serverTime = motionTime.getTimeForWeapon(player.getRace(), player.getGender(), weapons);
 		int clientTime = hitTime;
 
 		if (serverTime == 0) {
-			log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() 
-			+ " Race: " + player.getRace() + " Gender: " + player.getGender()  + " skillId: " + this.getSkillId());
+			log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " Race: " + player.getRace()
+				+ " Gender: " + player.getGender() + " skillId: " + this.getSkillId());
 			return true;
 		}
 
@@ -470,15 +465,14 @@ public class Skill {
 
 		// tolerance
 		if (duration == 0)
-		 serverTime *= 0.9f;
+			serverTime *= 0.9f;
 		else
-		 serverTime *= 0.5f;
+			serverTime *= 0.5f;
 
 		int finalTime = Math.round(serverTime);
 		if (motion.getInstantSkill() && hitTime == 0) {
 			this.serverTime = (int) ammoTime;
-		}
-		else {
+		} else {
 			if (clientTime < finalTime) {
 				// check for no animation Hacks
 				if (SecurityConfig.NO_ANIMATION) {
@@ -489,12 +483,11 @@ public class Skill {
 					if (clientTime < 0 || checkTme < SecurityConfig.NO_ANIMATION_VALUE) {
 						if (SecurityConfig.NO_ANIMATION_KICK) {
 							player.getClientConnection().close(new SM_QUIT_RESPONSE());
-							AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/"
-								+ finalTime + ") Kicking Player: " + player.getName());
-						}
-						else {
-							AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/"
-								+ finalTime + ")");
+							AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime
+								+ ") Kicking Player: " + player.getName());
+						} else {
+							AuditLogger
+								.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime + ")");
 						}
 						return false;
 					}
@@ -525,14 +518,15 @@ public class Skill {
 	protected void startCast() {
 		int targetObjId = firstTarget != null ? firstTarget.getObjectId() : 0;
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
-		float castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration() : effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
-		if (skillMethod == SkillMethod.CHARGE) 
+		float castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration() : effector.getGameStats()
+			.getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
+		if (skillMethod == SkillMethod.CHARGE)
 			castSpeed = 1.0f;
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(),
-						skillLevel, targetType, targetObjId, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType,
+						targetObjId, this.duration, castSpeed));
 					if (effector instanceof Npc && firstTarget instanceof Player) {
 						NpcAI2 ai = (NpcAI2) effector.getAi2();
 						if (ai.poll(AIQuestion.CAN_SHOUT))
@@ -541,17 +535,16 @@ public class Skill {
 					break;
 
 				case 3: // Target not in sight?
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(),
-						skillLevel, targetType, targetObjId, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType,
+						targetObjId, this.duration, castSpeed));
 					break;
 
 				case 1: // XYZ as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(),
-						skillLevel, targetType, x, y, z, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y,
+						z, this.duration, castSpeed));
 					break;
 			}
-		}
-		else if (skillMethod == SkillMethod.ITEM && duration > 0) {
+		} else if (skillMethod == SkillMethod.ITEM && duration > 0) {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
 				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), this.duration, 0, 0));
 		}
@@ -570,9 +563,9 @@ public class Skill {
 	protected void endCast() {
 		if (!effector.isCasting() || isCancelled)
 			return;
-		
+
 		// if target out of range
-		if (skillTemplate == null) 
+		if (skillTemplate == null)
 			return;
 
 		// Check if target is out of skill range
@@ -581,7 +574,7 @@ public class Skill {
 			effector.getController().cancelCurrentSkill();
 			return;
 		}
-		
+
 		if (!validateEffectedList()) {
 			effector.getController().cancelCurrentSkill();
 			return;
@@ -592,7 +585,7 @@ public class Skill {
 		}
 
 		effector.setCasting(null);
-		
+
 		/**
 		 * try removing item, if its not possible return to prevent exploits
 		 */
@@ -602,13 +595,12 @@ public class Skill {
 				return;
 			if (item.getActivationCount() > 1) {
 				item.setActivationCount(item.getActivationCount() - 1);
-			}
-			else {
+			} else {
 				if (!((Player) effector).getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
 					return;
 			}
 		}
-		
+
 		/**
 		 * set instantSkill, must be before calculate effect
 		 */
@@ -619,7 +611,7 @@ public class Skill {
 			instantSkill = true;
 		else if (hitTime == 0)
 			instantSkill = true;
-				
+
 		/**
 		 * Perform necessary actions (use mp,dp items etc)
 		 */
@@ -642,7 +634,7 @@ public class Skill {
 		if (skillTemplate.getEffects() != null) {
 			boolean blockAOESpread = false;
 			for (Creature effected : effectedList) {
-			  // Find logic. Skill Steam Rushe Twice dmg
+				// Find logic. Skill Steam Rushe Twice dmg
 				String skillGroup = getSkillTemplate().getGroup();
 				int count = 1;
 				if (skillGroup != null && skillGroup.equalsIgnoreCase("RI_CHARGEATTACK"))
@@ -663,7 +655,7 @@ public class Skill {
 
 					effects.add(effect);
 					dashStatus = effect.getDashStatus().getId();
-				  // Block AOE propagation if firstTarget resists the spell
+					// Block AOE propagation if firstTarget resists the spell
 					if ((!blockAOESpread) && (effect.getAttackStatus() == AttackStatus.RESIST) && (isTargetAOE()))
 						blockAOESpread = true;
 
@@ -677,7 +669,7 @@ public class Skill {
 					}
 				}
 			}
-			
+
 			if (resistCount == effectedList.size()) {
 				blockedChain = true;
 				blockedPenaltySkill = true;
@@ -691,7 +683,7 @@ public class Skill {
 				final int instanceId = effector.getInstanceId();
 				effect.setWorldPosition(worldId, instanceId, x, y, z);
 				effects.add(effect);
-				//spellStatus = effect.getSpellStatus().getId();
+				// spellStatus = effect.getSpellStatus().getId();
 			}
 		}
 
@@ -704,7 +696,7 @@ public class Skill {
 				playerEffector.getController().startStance(skillTemplate.getSkillId());
 			}
 		}
-		
+
 		boolean setCooldowns = true;
 		if (effector instanceof Player) {
 			if (this.isMulticast()
@@ -721,12 +713,12 @@ public class Skill {
 				int chainProb = skillTemplate.getChainSkillProb();
 				if (!CustomConfig.SKILL_CHAIN_TRIGGERRATE)
 					chainProb = 100;
-				
+
 				if (chainProb < 100)
 					this.chainSuccess = Rnd.get(90) < chainProb;
 			}
 		}
-	
+
 		/**
 		 * set variables for chaincondition check
 		 */
@@ -738,10 +730,10 @@ public class Skill {
 			QuestEnv env = new QuestEnv(effector.getTarget(), (Player) effector, 0, 0);
 			QuestEngine.getInstance().onUseSkill(env, skillTemplate.getSkillId());
 		}
-		
+
 		if (setCooldowns)
 			this.setCooldowns();
-				
+
 		if (instantSkill)
 			applyEffect(effects);
 		else {
@@ -755,19 +747,19 @@ public class Skill {
 		}
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			sendCastspellEnd(dashStatus, effects);
-		
+
 		endCondCheck();
-		
+
 		if (this.getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
 			AbyssService.rankerSkillAnnounce((Player) effector, this.getSkillTemplate().getNameId());
 		}
-		
+
 		if (effector instanceof Npc)
-		 SkillAttackManager.afterUseSkill((NpcAI2) ((Npc) effector).getAi2());
-		
+			SkillAttackManager.afterUseSkill((NpcAI2) ((Npc) effector).getAi2());
+
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
 			if (effector instanceof Player)
-			effector.getObserveController().notifyEndSkillCastObservers(this);
+				effector.getObserveController().notifyEndSkillCastObservers(this);
 		}
 	}
 
@@ -807,15 +799,15 @@ public class Skill {
 					break;
 
 				case 1: // XYZ as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus, targetType), et);
+					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus,
+						targetType), et);
 					break;
 			}
 			if (skillMethod == SkillMethod.ITEM && effector instanceof Player) {
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(getItemTemplate().getNameId())));
 			}
-		}
-		else if (skillMethod == SkillMethod.ITEM) {
-			
+		} else if (skillMethod == SkillMethod.ITEM) {
+
 			// TODO: Find out when SM_CASTSPELL_RESULT should be sent with dashStatus = 2, and no SM_ITEM_USAGE_ANIMATION
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
 				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), 0, 1, 0));
@@ -858,7 +850,7 @@ public class Skill {
 		Conditions skillConditions = skillTemplate.getUseconditions();
 		return skillConditions != null ? skillConditions.validate(this) : true;
 	}
-	
+
 	/**
 	 * Check all conditions after using skill
 	 */
@@ -866,7 +858,6 @@ public class Skill {
 		Conditions skillConditions = skillTemplate.getEndConditions();
 		return skillConditions != null ? skillConditions.validate(this) : true;
 	}
-
 
 	/**
 	 * @param value
@@ -1105,9 +1096,8 @@ public class Skill {
 	}
 
 	/**
-	 * @return true if skill must not be affected by boost casting time this comes from old 1.5.0.5 patch notes and still
-	 *         applies on 2.5 (confirmed) TODO: maybe another implementation? At the moment this doesnt seem to be handled
-	 *         on client infos, so it's hard coded
+	 * @return true if skill must not be affected by boost casting time this comes from old 1.5.0.5 patch notes and still applies on 2.5 (confirmed)
+	 *         TODO: maybe another implementation? At the moment this doesnt seem to be handled on client infos, so it's hard coded
 	 */
 	private boolean isCastTimeFixed() {
 		if (skillMethod != SkillMethod.CAST) // only casted skills are affected
@@ -1164,8 +1154,7 @@ public class Skill {
 		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
 		if (GeoDataConfig.GEO_ENABLE) {
 			if (isGroundSkill()) {
-				if ((object.getZ() - GeoService.getInstance().getZ(object) > 1.0f)
-					|| (object.getZ() - GeoService.getInstance().getZ(object) < -2.0f))
+				if ((object.getZ() - GeoService.getInstance().getZ(object) > 1.0f) || (object.getZ() - GeoService.getInstance().getZ(object) < -2.0f))
 					return false;
 			}
 			return GeoService.getInstance().canSee(getFirstTarget(), object);
@@ -1200,7 +1189,7 @@ public class Skill {
 	public long getCastStartTime() {
 		return castStartTime;
 	}
-	
+
 	public List<ChargedSkill> getChargeSkillList() {
 		return chargeSkillList;
 	}

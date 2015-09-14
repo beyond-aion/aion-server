@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResurrectPositionalEffect")
 public class ResurrectPositionalEffect extends ResurrectEffect {
-	
+
 	@Override
 	public void applyEffect(Effect effect) {
 		Player effector = (Player) effect.getEffector();
@@ -32,8 +32,7 @@ public class ResurrectPositionalEffect extends ResurrectEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		if ((effect.getEffector() instanceof Player) && (effect.getEffected() instanceof Player)
-			&& (effect.getEffected().getLifeStats().isAlreadyDead()))
+		if ((effect.getEffector() instanceof Player) && (effect.getEffected() instanceof Player) && (effect.getEffected().getLifeStats().isAlreadyDead()))
 			super.calculate(effect, null, null);
 	}
 }

@@ -17,32 +17,32 @@ import com.aionemu.gameserver.skillengine.model.SpellStatus;
 @XmlType(name = "SpinEffect")
 public class SpinEffect extends EffectTemplate {
 
-   @Override
-   public void applyEffect(Effect effect) {
-		 effect.addToEffectedController();
-   }
+	@Override
+	public void applyEffect(Effect effect) {
+		effect.addToEffectedController();
+	}
 
-   @Override
-   public void calculate(Effect effect) {
-	  if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED) 
-			  || effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.SPIN))
-		 return;
-	  super.calculate(effect, StatEnum.SPIN_RESISTANCE, SpellStatus.SPIN);
-   }
+	@Override
+	public void calculate(Effect effect) {
+		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.SPIN))
+			return;
+		super.calculate(effect, StatEnum.SPIN_RESISTANCE, SpellStatus.SPIN);
+	}
 
 	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill();
 		if (effected instanceof Player)
-	  	 ((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().onStopGliding();
 		effect.getEffected().getEffectController().removeParalyzeEffects();
 		effected.getEffectController().setAbnormal(AbnormalState.SPIN.getId());
 		effect.setAbnormal(AbnormalState.SPIN.getId());
 	}
 
-   @Override
-   public void endEffect(Effect effect) {
-	  effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SPIN.getId());
-   }
+	@Override
+	public void endEffect(Effect effect) {
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SPIN.getId());
+	}
 }

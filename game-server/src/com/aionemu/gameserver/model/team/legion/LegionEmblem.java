@@ -56,8 +56,7 @@ public class LegionEmblem {
 	 *          the emblemType to set
 	 * @param emblem_data
 	 */
-	public void setEmblem(int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType,
-		byte[] emblem_data) {
+	public void setEmblem(int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType, byte[] emblem_data) {
 		this.emblemId = emblemId;
 		this.color_r = color_r;
 		this.color_g = color_g;
@@ -68,7 +67,7 @@ public class LegionEmblem {
 			this.emblemId = 0;
 			this.emblemType = LegionEmblemType.DEFAULT;
 		}
-		
+
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		this.defaultEmblem = false;
 	}

@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
-
 /**
  * @author ATracer (based on Mr.Poke WeaponMasteryModifier)
  */

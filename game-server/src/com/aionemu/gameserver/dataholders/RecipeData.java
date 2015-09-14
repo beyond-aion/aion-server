@@ -21,11 +21,12 @@ import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 @XmlRootElement(name = "recipe_templates")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RecipeData {
+
 	@XmlElement(name = "recipe_template")
 	protected List<RecipeTemplate> list;
 	private TIntObjectHashMap<RecipeTemplate> recipeData;
 	private FastTable<RecipeTemplate> elyos, asmos, any;
-	
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		recipeData = new TIntObjectHashMap<RecipeTemplate>();
 		elyos = new FastTable<>();
@@ -35,8 +36,8 @@ public class RecipeData {
 			recipeData.put(it.getId(), it);
 			if (it.getAutoLearn() == 0)
 				continue;
-			
-			switch(it.getRace()) {
+
+			switch (it.getRace()) {
 				case ASMODIANS:
 					asmos.add(it);
 					break;
@@ -50,26 +51,26 @@ public class RecipeData {
 		}
 		list = null;
 	}
-	
+
 	public FastTable<RecipeTemplate> getAutolearnRecipes(Race race, int skillId, int maxLevel) {
 		FastTable<RecipeTemplate> list = new FastTable<>();
-		switch(race) {
+		switch (race) {
 			case ASMODIANS:
-				for(RecipeTemplate recipe : asmos)
-					if(recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+				for (RecipeTemplate recipe : asmos)
+					if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
 						list.add(recipe);
 				break;
 			case ELYOS:
-				for(RecipeTemplate recipe : elyos)
-					if(recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+				for (RecipeTemplate recipe : elyos)
+					if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
 						list.add(recipe);
 				break;
 		}
-		
-		for(RecipeTemplate recipe : any)
-			if(recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+
+		for (RecipeTemplate recipe : any)
+			if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
 				list.add(recipe);
-		
+
 		return list;
 	}
 

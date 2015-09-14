@@ -14,10 +14,8 @@ import com.aionemu.gameserver.questEngine.task.QuestTasks;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _2634TheDraupnirRedemption extends QuestHandler {
 
@@ -49,25 +47,25 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204828) { 
+			if (targetId == 204828) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700350: { 
+				case 700350: {
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
-							if(qs.getQuestVarById(0) == 0)
+							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
 						}
 						case SETPRO1: {
 							Npc npc = (Npc) env.getVisibleObject();
 							npc.getController().onDelete();
-							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(), player.getZ(), (byte) 0);
+							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(),
+								player.getZ(), (byte) 0);
 							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor, player));
 							survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 							player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204828));
@@ -76,9 +74,8 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204828) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204828) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -87,7 +84,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
 		return defaultFollowEndEvent(env, 1, 2, true); // reward
@@ -95,9 +92,9 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 0, false); 
+		return defaultFollowEndEvent(env, 1, 0, false);
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

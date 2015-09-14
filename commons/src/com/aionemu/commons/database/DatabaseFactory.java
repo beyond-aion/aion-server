@@ -64,8 +64,7 @@ public class DatabaseFactory {
 
 		try {
 			DatabaseConfig.DATABASE_DRIVER.newInstance();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error obtaining DB driver", e);
 			throw new Error("DB Driver doesnt exist!");
 		}
@@ -90,8 +89,7 @@ public class DatabaseFactory {
 			databaseMajorVersion = dmd.getDatabaseMajorVersion();
 			databaseMinorVersion = dmd.getDatabaseMinorVersion();
 			c.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error with connection string: " + DatabaseConfig.DATABASE_URL, e);
 			throw new Error("DatabaseFactory not initialized!");
 		}
@@ -100,10 +98,9 @@ public class DatabaseFactory {
 	}
 
 	/**
-	 * Returns an active connection from pool. This function utilizes the dataSource which grabs an object from the
-	 * ObjectPool within its limits. The GenericObjectPool.borrowObject()' function utilized in
-	 * 'DataSource.getConnection()' does not allow any connections to be returned as null, thus a null check is not
-	 * needed. Throws SQLException in case of a Failed Connection
+	 * Returns an active connection from pool. This function utilizes the dataSource which grabs an object from the ObjectPool within its limits. The
+	 * GenericObjectPool.borrowObject()' function utilized in 'DataSource.getConnection()' does not allow any connections to be returned as null, thus a
+	 * null check is not needed. Throws SQLException in case of a Failed Connection
 	 * 
 	 * @return Connection pooled connection
 	 * @throws java.sql.SQLException
@@ -150,8 +147,7 @@ public class DatabaseFactory {
 			if (!st.isClosed()) {
 				st.close();
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Can't close Prepared Statement", e);
 		}
 	}
@@ -173,15 +169,13 @@ public class DatabaseFactory {
 			if (!con.getAutoCommit()) {
 				con.setAutoCommit(true);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("Failed to set autocommit to true while closing connection: ", e);
 		}
 
 		try {
 			con.close();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			log.error("DatabaseFactory: Failed to close database connection!", e);
 		}
 	}

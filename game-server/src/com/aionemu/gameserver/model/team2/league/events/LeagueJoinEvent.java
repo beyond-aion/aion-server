@@ -9,7 +9,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.google.common.base.Predicate;
 
 /**
- *
  * @author Tibald
  */
 public class LeagueJoinEvent implements Predicate<LeagueMember>, TeamEvent {
@@ -41,8 +40,7 @@ public class LeagueJoinEvent implements Predicate<LeagueMember>, TeamEvent {
 		PlayerAlliance alliance = member.getObject();
 		if (alliance.equals(invitedAlliance)) {
 			alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_ALLIANCE_ENTERED, league.getCaptain().getName()));
-		}
-		else {
+		} else {
 			alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_JOINED_ALLIANCE, invitedAlliance.getLeaderObject().getName()));
 		}
 		alliance.sendPacket(new SM_SHOW_BRAND(0, 0, true));

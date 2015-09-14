@@ -31,8 +31,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	 * @param objectTemplate
 	 * @param level
 	 */
-	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate,
-		byte level) {
+	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
 		super(objId, controller, spawnTemplate, objectTemplate, level);
 		this.level = level;
 	}
@@ -82,12 +81,12 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 			return (Creature) getCreator();
 		return this;
 	}
-	
+
 	@Override
 	public int getType(Creature creature) {
 		return creature.isEnemy(getMaster()) ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
 	}
-	
+
 	@Override
 	public boolean isEnemy(Creature creature) {
 		return getMaster() != null ? getMaster().isEnemy(creature) : false;
@@ -102,11 +101,11 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	public boolean isEnemyFrom(Player player) {
 		return getMaster() != null ? getMaster().isEnemyFrom(player) : false;
 	}
-	
+
 	@Override
 	public TribeClass getTribe() {
 		if (getMaster() == null)
-			return ((NpcTemplate)objectTemplate).getTribe();
+			return ((NpcTemplate) objectTemplate).getTribe();
 		return getMaster().getTribe();
 	}
 

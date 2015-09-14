@@ -55,11 +55,10 @@ public class Delete extends AdminCommand {
 			npc.getController().onDelete();
 		else
 			gather.getController().onDelete();
-		
+
 		try {
 			DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), true);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			PacketSendUtility.sendMessage(admin, "Could not remove spawn");
 			return;

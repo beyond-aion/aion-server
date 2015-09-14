@@ -40,7 +40,7 @@ public class HouseBuildingData {
 	public Building getBuilding(int buildingId) {
 		return buildingById.get(buildingId);
 	}
-	
+
 	public int size() {
 		return buildingById.size();
 	}

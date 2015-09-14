@@ -45,8 +45,7 @@ public class _11026SolidEvidence extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -60,8 +59,7 @@ public class _11026SolidEvidence extends QuestHandler {
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -75,8 +73,7 @@ public class _11026SolidEvidence extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 2375);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 

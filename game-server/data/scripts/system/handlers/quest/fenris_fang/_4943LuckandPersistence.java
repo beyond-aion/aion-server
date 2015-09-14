@@ -52,7 +52,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Talk with Latatusk
+			// 1 - Talk with Latatusk
 				case 204096:
 					if (var == 0) {
 						switch (dialog) {
@@ -71,8 +71,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 									removeQuestItem(env, 182207123, 1);
 									changeQuestStep(env, 2, 3, false);
 									return sendQuestDialog(env, 10000);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 10001);
 						}
 					}
@@ -91,8 +90,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 									}
 									changeQuestStep(env, 1, 2, false);
 									return sendQuestDialog(env, 1354);
-								}
-								else {
+								} else {
 									return sendQuestDialog(env, 1438);
 								}
 						}
@@ -115,8 +113,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
 								return defaultCloseDialog(env, 3, 3, true, false, 0);
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 2120);
 							}
 						}
@@ -129,14 +126,12 @@ public class _4943LuckandPersistence extends QuestHandler {
 				default:
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			// 5 - Talk with Kvasir
 			if (targetId == 204053) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

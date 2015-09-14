@@ -33,8 +33,7 @@ public class NetworkUtils {
 				byte ip = Byte.parseByte(ip_address[i]);
 				if (ip < min || ip > max)
 					return false;
-			}
-			else
+			} else
 				return false;
 		}
 		return true;

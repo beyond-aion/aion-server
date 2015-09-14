@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Cheatkiller
  */
 public class _22506DarkWingsDarkerTidings extends QuestHandler {
@@ -32,7 +31,7 @@ public class _22506DarkWingsDarkerTidings extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 801007) {
 				switch (dialog) {
@@ -44,8 +43,7 @@ public class _22506DarkWingsDarkerTidings extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801761) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -55,8 +53,7 @@ public class _22506DarkWingsDarkerTidings extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 801007) {
+			} else if (targetId == 801007) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 2375);
@@ -66,13 +63,11 @@ public class _22506DarkWingsDarkerTidings extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 801007) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

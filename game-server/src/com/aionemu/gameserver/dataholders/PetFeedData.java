@@ -47,7 +47,7 @@ public class PetFeedData {
 	public int size() {
 		return petFlavoursById.size();
 	}
-	
+
 	public PetFlavour[] getPetFlavours() {
 		return petFlavoursById.values().toArray(new PetFlavour[0]);
 	}

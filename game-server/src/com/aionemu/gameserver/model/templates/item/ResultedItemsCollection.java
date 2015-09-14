@@ -25,8 +25,7 @@ public class ResultedItemsCollection {
 	public List<RandomItem> getRandomItems() {
 		if (randomItems != null) {
 			return randomItems;
-		}
-		else {
+		} else {
 			return new ArrayList<RandomItem>();
 		}
 	}

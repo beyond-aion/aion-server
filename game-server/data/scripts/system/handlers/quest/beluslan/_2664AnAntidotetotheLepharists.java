@@ -55,8 +55,7 @@ public class _2664AnAntidotetotheLepharists extends QuestHandler {
 				else
 					return sendQuestEndDialog(env);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 700324) {
@@ -68,8 +67,7 @@ public class _2664AnAntidotetotheLepharists extends QuestHandler {
 							updateQuestStatus(env);
 							return true;
 						}
-					}
-					else if (var == 4) {
+					} else if (var == 4) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return true;

@@ -75,16 +75,14 @@ public class _2008Ascension extends QuestHandler {
 				qs.setQuestVar(qs.getQuestVars().getQuestVars() + 1);
 				updateQuestStatus(env);
 				return true;
-			}
-			else if (var == 54) {
+			} else if (var == 54) {
 				qs.setQuestVar(5);
 				updateQuestStatus(env);
 				Npc mob = (Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205041, 301f, 259f, 205.5f, (byte) 0);
 				mob.getAggroList().addDamage(player, 1000);
 				return true;
 			}
-		}
-		else if (targetId == 205041 && var == 5) {
+		} else if (targetId == 205041 && var == 5) {
 			playQuestMovie(env, 152);
 			for (Npc npcInside : player.getPosition().getWorldMapInstance().getNpcs()) {
 				NpcActions.delete(npcInside);
@@ -194,8 +192,7 @@ public class _2008Ascension extends QuestHandler {
 						if (var == 6)
 							return setPlayerClass(env, qs, PlayerClass.RIDER);
 				}
-			}
-			else if (targetId == 790003) {
+			} else if (targetId == 790003) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
@@ -211,8 +208,7 @@ public class _2008Ascension extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 790002) {
+			} else if (targetId == 790002) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
@@ -228,8 +224,7 @@ public class _2008Ascension extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 203546) {
+			} else if (targetId == 203546) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 3)
@@ -245,8 +240,7 @@ public class _2008Ascension extends QuestHandler {
 							return true;
 						}
 				}
-			}
-			else if (targetId == 205020) {
+			} else if (targetId == 205020) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 99) {
@@ -280,8 +274,7 @@ public class _2008Ascension extends QuestHandler {
 						return false;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) {
 				switch (env.getDialog()) {
 					case SELECTED_QUEST_NOREWARD:
@@ -311,10 +304,9 @@ public class _2008Ascension extends QuestHandler {
 				if (player.getWorldId() != 320020000) {
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
-				}
-				else {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
+				} else {
 					PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
 					return true;
 				}
@@ -346,8 +338,8 @@ public class _2008Ascension extends QuestHandler {
 		if (var == 5 || (var == 6 && player.getPlayerClass().isStartingClass()) || (var >= 51 && var <= 53)) {
 			qs.setQuestVar(4);
 			updateQuestStatus(env);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-				DataManager.QUEST_DATA.getQuestById(questId).getName()));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+				.getName()));
 		}
 		return false;
 	}

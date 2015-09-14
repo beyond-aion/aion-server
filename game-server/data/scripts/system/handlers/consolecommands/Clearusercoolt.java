@@ -23,12 +23,12 @@ public class Clearusercoolt extends ConsoleCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		
+
 		if ((params.length < 0) || (params.length < 1)) {
 			info(admin, null);
 			return;
 		}
-		
+
 		Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
 
 		if (player == null) {
@@ -51,12 +51,10 @@ public class Clearusercoolt extends ConsoleCommand {
 			if (player.equals(admin))
 				PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed.");
 			else {
-				PacketSendUtility
-					.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
+				PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
 				PacketSendUtility.sendMessage(player, "Your instance cooldowns were removed by admin.");
 			}
-		}
-		else
+		} else
 			PacketSendUtility.sendMessage(admin, "Only players are allowed as target.");
 	}
 }

@@ -21,7 +21,7 @@ public enum PetHungryLevel {
 	public byte getValue() {
 		return value;
 	}
-	
+
 	public PetHungryLevel getNextValue() {
 		byte levelValue = value;
 		switch (levelValue) {
@@ -37,7 +37,7 @@ public enum PetHungryLevel {
 				return HUNGRY;
 		}
 	}
-	
+
 	public static PetHungryLevel fromId(int value) {
 		return PetHungryLevel.values()[value];
 	}

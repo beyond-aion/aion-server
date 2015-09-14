@@ -16,31 +16,29 @@ import com.aionemu.chatserver.service.GameServerService;
 /**
  * @author ATracer
  */
-public class ChatChannels
-{
+public class ChatChannels {
+
 	/**
 	 * Logger
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ChatChannels.class);
-	
+
 	/**
 	 * Channel List
 	 */
 	private static final List<Channel> channels = new ArrayList<Channel>();
-	
+
 	/**
 	 * LFG Channel
 	 */
-	static
-	{
+	static {
 		addGroupChannel("partyFind_PF");
 	}
 
 	/**
 	 * Trade Channels
 	 */
-	static
-	{
+	static {
 		addTradeChannel("trade_LC1");
 		addTradeChannel("trade_LC2");
 		addTradeChannel("trade_DC1");
@@ -136,19 +134,19 @@ public class ChatChannels
 		addTradeChannel("trade_IDLDF5Re_03_L");
 		addTradeChannel("trade_IDLDF5RE_Solo_L");
 		addTradeChannel("trade_IDAsteria_IU_World");
-		//addTradeChannel("trade_IDLDF5_Under_01_War"); // New 4.5
-		//addTradeChannel("trade_IDF5_TD_War"); // New 4.5
-		//addTradeChannel("trade_IDLDF5_Under_03"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Dkisas_02"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Lamiren_02"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Crotan_02"); // New 4.5
-		//addTradeChannel("trade_IDLDF4Re_01"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Dkisas_02_N"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Lamiren_02_N"); // New 4.5
-		//addTradeChannel("trade_IDAbRe_Up3_Crotan_02_N"); // New 4.5
-		//addTradeChannel("trade_IDLDF5_Fortress_Re"); // New 4.5
-		//addTradeChannel("trade_IDLDF5_Under_01_PC"); // New 4.5
-		//addTradeChannel("trade_IDLDF5_Under_Rune_PC"); // New 4.5
+		// addTradeChannel("trade_IDLDF5_Under_01_War"); // New 4.5
+		// addTradeChannel("trade_IDF5_TD_War"); // New 4.5
+		// addTradeChannel("trade_IDLDF5_Under_03"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Dkisas_02"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Lamiren_02"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Crotan_02"); // New 4.5
+		// addTradeChannel("trade_IDLDF4Re_01"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Dkisas_02_N"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Lamiren_02_N"); // New 4.5
+		// addTradeChannel("trade_IDAbRe_Up3_Crotan_02_N"); // New 4.5
+		// addTradeChannel("trade_IDLDF5_Fortress_Re"); // New 4.5
+		// addTradeChannel("trade_IDLDF5_Under_01_PC"); // New 4.5
+		// addTradeChannel("trade_IDLDF5_Under_Rune_PC"); // New 4.5
 		addTradeChannel("trade_IDAbProL1");
 		addTradeChannel("trade_IDAbProL2");
 		addTradeChannel("trade_IDAbGateL1");
@@ -177,11 +175,11 @@ public class ChatChannels
 		addTradeChannel("trade_IDAbProD3");
 		addTradeChannel("trade_IDDramata_01");
 		addTradeChannel("trade_Ab1");
-		//addTradeChannel("trade_Gab1_01"); // New 4.5
-		//addTradeChannel("trade_GAb1_Sub"); // New 4.5
-		//addTradeChannel("trade_Gab1_02"); // New 4.5
-		//addTradeChannel("trade_Gab1_03"); // New 4.5
-		//addTradeChannel("trade_Gab1_04"); // New 4.5
+		// addTradeChannel("trade_Gab1_01"); // New 4.5
+		// addTradeChannel("trade_GAb1_Sub"); // New 4.5
+		// addTradeChannel("trade_Gab1_02"); // New 4.5
+		// addTradeChannel("trade_Gab1_03"); // New 4.5
+		// addTradeChannel("trade_Gab1_04"); // New 4.5
 		addTradeChannel("trade_LF_Prison");
 		addTradeChannel("trade_DF_Prison");
 		addTradeChannel("trade_Underpass");
@@ -192,8 +190,8 @@ public class ChatChannels
 		addTradeChannel("trade_LDF5b");
 		addTradeChannel("trade_LDF5_Under");
 		addTradeChannel("trade_IDIU");
-		//addTradeChannel("trade_LDF5_Fortress"); // New 4.5
-		//addTradeChannel("trade_LDF4_Advance"); // New 4.5
+		// addTradeChannel("trade_LDF5_Fortress"); // New 4.5
+		// addTradeChannel("trade_LDF4_Advance"); // New 4.5
 		addTradeChannel("trade_Housing_LF_personal");
 		addTradeChannel("trade_Housing_LC_legion");
 		addTradeChannel("trade_Housing_DF_personal");
@@ -209,15 +207,14 @@ public class ChatChannels
 		addTradeChannel("trade_Test_Kgw");
 		addTradeChannel("trade_Test_Basic_Mj");
 		addTradeChannel("trade_test_intro");
-		//addTradeChannel("trade_Test_server_art"); // New 4.5
-		//addTradeChannel("trade_Test_TagMatch"); // New 4.5
+		// addTradeChannel("trade_Test_server_art"); // New 4.5
+		// addTradeChannel("trade_Test_TagMatch"); // New 4.5
 	}
-	
+
 	/**
 	 * Region Channels
 	 */
-	static
-	{
+	static {
 		addRegionChannel(110010000, "public_LC1");
 		addRegionChannel(110020000, "public_LC2");
 		addRegionChannel(120010000, "public_DC1");
@@ -313,19 +310,19 @@ public class ChatChannels
 		addRegionChannel(301180000, "public_IDLDF5Re_03_L");
 		addRegionChannel(301190000, "public_IDLDF5RE_Solo_L");
 		addRegionChannel(301200000, "public_IDAsteria_IU_World");
-		//addRegionChannel(301210000, "public_IDLDF5_Under_01_War"); // New 4.5
-		//addRegionChannel(301220000, "public_IDF5_TD_War"); // New 4.5
-		//addRegionChannel(301230000, "public_IDLDF5_Under_03"); // New 4.5
-		//addRegionChannel(301240000, "public_IDAbRe_Up3_Dkisas_02"); // New 4.5
-		//addRegionChannel(301250000, "public_IDAbRe_Up3_Lamiren_02"); // New 4.5
-		//addRegionChannel(301260000, "public_IDAbRe_Up3_Crotan_02"); // New 4.5
-		//addRegionChannel(301270000, "public_IDLDF4Re_01"); // New 4.5
-		//addRegionChannel(301280000, "public_IDAbRe_Up3_Dkisas_02_N"); // New 4.5
-		//addRegionChannel(301290000, "public_IDAbRe_Up3_Lamiren_02_N"); // New 4.5
-		//addRegionChannel(301300000, "public_IDAbRe_Up3_Crotan_02_N"); // New 4.5
-		//addRegionChannel(301310000, "public_IDLDF5_Fortress_Re"); // New 4.5
-		//addRegionChannel(301320000, "public_IDLDF5_Under_01_PC"); // New 4.5
-		//addRegionChannel(301330000, "public_IDLDF5_Under_Rune_PC"); // New 4.5
+		// addRegionChannel(301210000, "public_IDLDF5_Under_01_War"); // New 4.5
+		// addRegionChannel(301220000, "public_IDF5_TD_War"); // New 4.5
+		// addRegionChannel(301230000, "public_IDLDF5_Under_03"); // New 4.5
+		// addRegionChannel(301240000, "public_IDAbRe_Up3_Dkisas_02"); // New 4.5
+		// addRegionChannel(301250000, "public_IDAbRe_Up3_Lamiren_02"); // New 4.5
+		// addRegionChannel(301260000, "public_IDAbRe_Up3_Crotan_02"); // New 4.5
+		// addRegionChannel(301270000, "public_IDLDF4Re_01"); // New 4.5
+		// addRegionChannel(301280000, "public_IDAbRe_Up3_Dkisas_02_N"); // New 4.5
+		// addRegionChannel(301290000, "public_IDAbRe_Up3_Lamiren_02_N"); // New 4.5
+		// addRegionChannel(301300000, "public_IDAbRe_Up3_Crotan_02_N"); // New 4.5
+		// addRegionChannel(301310000, "public_IDLDF5_Fortress_Re"); // New 4.5
+		// addRegionChannel(301320000, "public_IDLDF5_Under_01_PC"); // New 4.5
+		// addRegionChannel(301330000, "public_IDLDF5_Under_Rune_PC"); // New 4.5
 		addRegionChannel(310010000, "public_IDAbProL1");
 		addRegionChannel(310020000, "public_IDAbProL2");
 		addRegionChannel(310030000, "public_IDAbGateL1");
@@ -354,11 +351,11 @@ public class ChatChannels
 		addRegionChannel(320140000, "public_IDAbProD3");
 		addRegionChannel(320150000, "public_IDDramata_01");
 		addRegionChannel(400010000, "public_Ab1");
-		//addRegionChannel(400020000, "public_Gab1_01"); // New 4.5
-		//addRegionChannel(400030000, "public_GAb1_Sub"); // New 4.5
-		//addRegionChannel(400040000, "public_Gab1_02"); // New 4.5
-		//addRegionChannel(400050000, "public_Gab1_03"); // New 4.5
-		//addRegionChannel(400060000, "public_Gab1_04"); // New 4.5
+		// addRegionChannel(400020000, "public_Gab1_01"); // New 4.5
+		// addRegionChannel(400030000, "public_GAb1_Sub"); // New 4.5
+		// addRegionChannel(400040000, "public_Gab1_02"); // New 4.5
+		// addRegionChannel(400050000, "public_Gab1_03"); // New 4.5
+		// addRegionChannel(400060000, "public_Gab1_04"); // New 4.5
 		addRegionChannel(510010000, "public_LF_Prison");
 		addRegionChannel(520010000, "public_DF_Prison");
 		addRegionChannel(600010000, "public_Underpass");
@@ -369,8 +366,8 @@ public class ChatChannels
 		addRegionChannel(600060000, "public_LDF5b");
 		addRegionChannel(600070000, "public_LDF5_Under");
 		addRegionChannel(600080000, "public_IDIU");
-		//addRegionChannel(600090000, "public_LDF5_Fortress"); // New 4.5
-		//addRegionChannel(600100000, "public_LDF4_Advance"); // New 4.5
+		// addRegionChannel(600090000, "public_LDF5_Fortress"); // New 4.5
+		// addRegionChannel(600100000, "public_LDF4_Advance"); // New 4.5
 		addRegionChannel(700010000, "public_Housing_LF_personal");
 		addRegionChannel(700020000, "public_Housing_LC_legion");
 		addRegionChannel(710010000, "public_Housing_DF_personal");
@@ -386,15 +383,14 @@ public class ChatChannels
 		addRegionChannel(900140000, "public_Test_Kgw");
 		addRegionChannel(900150000, "public_Test_Basic_Mj");
 		addRegionChannel(900170000, "public_test_intro");
-		//addRegionChannel(900180000, "public_Test_server_art"); // New 4.5
-		//addRegionChannel(900190000, "public_Test_TagMatch"); // New 4.5
+		// addRegionChannel(900180000, "public_Test_server_art"); // New 4.5
+		// addRegionChannel(900190000, "public_Test_TagMatch"); // New 4.5
 	}
-	
+
 	/**
 	 * Language Channels
 	 */
-	static
-	{	
+	static {
 		/**
 		 * English
 		 */
@@ -409,83 +405,82 @@ public class ChatChannels
 		addLangChannel("User_Finnish");
 		addLangChannel("User_Norwegian");
 		addLangChannel("User_Greek");
-		
+
 		/**
 		 * French
 		 */
-		
+
 		// TODO
 		addLangChannel("User_Anglais");
 		addLangChannel("User_Fran�ais");
 		addLangChannel("User_Allemand");
-		
+
 		/**
 		 * German
 		 */
-		
+
 		// TODO
 		addLangChannel("User_Englisch");
 		addLangChannel("User_Franz�sisch");
 		addLangChannel("User_Deutsch");
-		
+
 		/**
 		 * Italian
 		 */
-		
+
 		// TODO
 		addLangChannel("User_Inglese");
 		addLangChannel("User_Francese");
 		addLangChannel("User_Tedesco");
-		
+
 		/**
 		 * Spanish
 		 */
-			
+
 		// TODO
 		addLangChannel("User_Ingl�s");
 		addLangChannel("User_Franc�s");
 		addLangChannel("User_Alem�n");
-		
+
 		/**
 		 * Danish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Swedish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Finnish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Norwegian
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Greek
 		 */
-		
+
 		// TODO
 	}
-	
+
 	/**
 	 * Class Channels
 	 */
-	static
-	{		
+	static {
 		/**
 		 * English
 		 */
-			
+
 		// Male
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Gladiator");
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Templar");
@@ -508,7 +503,7 @@ public class ChatChannels
 		addJobChannel(Gender.MALE, PlayerClass.MUSE, "job_Songweaver");
 		addJobChannel(Gender.MALE, PlayerClass.SONGWEAVER, "job_Songweaver");
 		addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Rider");
-			
+
 		// Female
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Gladiator");
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Templar");
@@ -531,11 +526,11 @@ public class ChatChannels
 		addJobChannel(Gender.FEMALE, PlayerClass.MUSE, "job_Songweaver");
 		addJobChannel(Gender.FEMALE, PlayerClass.SONGWEAVER, "job_Songweaver");
 		addJobChannel(Gender.FEMALE, PlayerClass.RIDER, "job_Rider");
-		
+
 		/**
 		 * French
 		 */
-		
+
 		// Male
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Gladiateur");
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Templier");
@@ -558,7 +553,7 @@ public class ChatChannels
 		addJobChannel(Gender.MALE, PlayerClass.MUSE, "job_Barde");
 		addJobChannel(Gender.MALE, PlayerClass.SONGWEAVER, "job_Barde");
 		addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Cavalier");
-								
+
 		// Female
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Gladiateur[f:" + '"' + "Gladiatrice" + '"' + "]");
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Templier[f:" + '"' + "Templi�re" + '"' + "]");
@@ -581,11 +576,11 @@ public class ChatChannels
 		addJobChannel(Gender.FEMALE, PlayerClass.MUSE, "job_Barde");
 		addJobChannel(Gender.FEMALE, PlayerClass.SONGWEAVER, "job_Barde");
 		addJobChannel(Gender.FEMALE, PlayerClass.RIDER, "job_Cavalier");
-		
+
 		/**
 		 * German
 		 */
-		
+
 		// Male
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Gladiator");
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Templer");
@@ -608,7 +603,7 @@ public class ChatChannels
 		addJobChannel(Gender.MALE, PlayerClass.MUSE, "job_Barde");
 		addJobChannel(Gender.MALE, PlayerClass.SONGWEAVER, "job_Barde");
 		addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Reiter");
-					
+
 		// Female
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Gladiator[f:" + '"' + "Gladiatorin" + '"' + "]");
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Templer[f:" + '"' + "Templerin" + '"' + "]");
@@ -631,11 +626,11 @@ public class ChatChannels
 		addJobChannel(Gender.FEMALE, PlayerClass.MUSE, "job_Barde");
 		addJobChannel(Gender.FEMALE, PlayerClass.SONGWEAVER, "job_Barde");
 		addJobChannel(Gender.FEMALE, PlayerClass.RIDER, "job_Reiter");
-		
+
 		/**
 		 * Italian
 		 */
-		
+
 		// Male
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Gladiatore");
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Templare");
@@ -658,7 +653,7 @@ public class ChatChannels
 		addJobChannel(Gender.MALE, PlayerClass.MUSE, "job_Bardo");
 		addJobChannel(Gender.MALE, PlayerClass.SONGWEAVER, "job_Bardo");
 		addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Scheda");
-								
+
 		// Female
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Gladiatore[f:" + '"' + "Gladiatrice" + '"' + "]");
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Templare[f:" + '"' + "Templare" + '"' + "]");
@@ -681,11 +676,11 @@ public class ChatChannels
 		addJobChannel(Gender.FEMALE, PlayerClass.MUSE, "job_Bardo");
 		addJobChannel(Gender.FEMALE, PlayerClass.SONGWEAVER, "job_Bardo");
 		addJobChannel(Gender.FEMALE, PlayerClass.RIDER, "job_Scheda");
-		
+
 		/**
 		 * Spanish
 		 */
-			
+
 		// Male
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Gladiador");
 		addJobChannel(Gender.MALE, PlayerClass.WARRIOR, "job_Templario");
@@ -708,7 +703,7 @@ public class ChatChannels
 		addJobChannel(Gender.MALE, PlayerClass.MUSE, "job_Bardo");
 		addJobChannel(Gender.MALE, PlayerClass.SONGWEAVER, "job_Bardo");
 		addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Pesta�as");
-								
+
 		// Female
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Gladiador[f:" + '"' + "Gladiadora" + '"' + "]");
 		addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Templario[f:" + '"' + "Templaria" + '"' + "]");
@@ -731,43 +726,42 @@ public class ChatChannels
 		addJobChannel(Gender.FEMALE, PlayerClass.MUSE, "job_Bardo");
 		addJobChannel(Gender.FEMALE, PlayerClass.SONGWEAVER, "job_Bardo");
 		addJobChannel(Gender.FEMALE, PlayerClass.RIDER, "job_Pesta�as");
-		
+
 		/**
 		 * Danish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Swedish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Finnish
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Norwegian
 		 */
-		
+
 		// TODO
-		
+
 		/**
 		 * Greek
 		 */
-		
+
 		// TODO
 	}
 
 	/**
 	 * @param Channel
 	 */
-	private static void addChannel(Channel Channel)
-	{
+	private static void addChannel(Channel Channel) {
 		channels.add(Channel);
 	}
 
@@ -775,15 +769,12 @@ public class ChatChannels
 	 * @param channelId
 	 * @return
 	 */
-	public static Channel getChannelById(int channelId)
-	{
-		for (Channel channel : channels)
-		{
+	public static Channel getChannelById(int channelId) {
+		for (Channel channel : channels) {
 			if (channel.getChannelId() == channelId)
 				return channel;
 		}
-		if (Config.LOG_CHANNEL_INVALID)
-		{
+		if (Config.LOG_CHANNEL_INVALID) {
 			log.warn("No registered channel with id " + channelId);
 		}
 		throw new IllegalArgumentException("no channel provided for id " + channelId);
@@ -793,65 +784,58 @@ public class ChatChannels
 	 * @param identifier
 	 * @return
 	 */
-	public static Channel getChannelByIdentifier(byte[] identifier)
-	{
-		for (Channel channel : channels)
-		{
+	public static Channel getChannelByIdentifier(byte[] identifier) {
+		for (Channel channel : channels) {
 			if (Arrays.equals(channel.getIdentifierBytes(), identifier))
 				return channel;
 		}
-		if (Config.LOG_CHANNEL_INVALID)
-		{
+		if (Config.LOG_CHANNEL_INVALID) {
 			log.warn("No registered channel with identifier " + identifier);
 		}
 		// we can't throw runtime exceptions before support of i18n channel names
 		return null;
 	}
-	
+
 	/**
 	 * @param channelName
 	 */
-	private static void addGroupChannel(String channelName)
-	{
+	private static void addGroupChannel(String channelName) {
 		addChannel(new LfgChannel(Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
 		addChannel(new LfgChannel(Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
 	}
-	
+
 	/**
 	 * @param channelName
 	 */
-	private static void addTradeChannel(String channelName)
-	{
+	private static void addTradeChannel(String channelName) {
 		addChannel(new TradeChannel(Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
 		addChannel(new TradeChannel(Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
 	}
-	
+
 	/**
 	 * @param mapId
 	 * @param channelName
 	 */
-	private static void addRegionChannel(int mapId, String channelName)
-	{
+	private static void addRegionChannel(int mapId, String channelName) {
 		addChannel(new RegionChannel(mapId, Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
 		addChannel(new RegionChannel(mapId, Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
 	}
-	
+
 	/**
 	 * @param gender
 	 * @param playerClass
 	 * @param channelName
 	 */
-	private static void addJobChannel(Gender gender, PlayerClass playerClass, String channelName)
-	{
+	private static void addJobChannel(Gender gender, PlayerClass playerClass, String channelName) {
 		addChannel(new JobChannel(gender, playerClass, Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
-		addChannel(new JobChannel(gender, playerClass, Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));;
+		addChannel(new JobChannel(gender, playerClass, Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID
+			+ ".1.AION.KOR"));;
 	}
-	
+
 	/**
 	 * @param channelName
 	 */
-	private static void addLangChannel(String channelName)
-	{
+	private static void addLangChannel(String channelName) {
 		addChannel(new LangChannel(Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
 		addChannel(new LangChannel(Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));;
 	}

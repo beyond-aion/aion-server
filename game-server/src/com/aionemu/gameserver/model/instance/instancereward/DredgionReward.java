@@ -45,8 +45,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		if (Rnd.get(2) == 0) {
 			asmodiansStartPosition = a;
 			elyosStartPosition = b;
-		}
-		else {
+		} else {
 			asmodiansStartPosition = b;
 			elyosStartPosition = a;
 		}
@@ -54,28 +53,16 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 
 	public void portToPosition(Player player) {
 		if (player.getRace() == Race.ASMODIANS) {
-			TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(), asmodiansStartPosition.getZ());
-		}
-		else {
+			TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(),
+				asmodiansStartPosition.getZ());
+		} else {
 			TeleportService2.teleportTo(player, mapId, instanceId, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
 		}
 	}
 
 	/**
-	 * 1 Primary Armory
-	 * 2 Backup Armory
-	 * 3 Gravity Control
-	 * 4 Engine Room
-	 * 5 Auxiliary Power
-	 * 6 Weapons Deck
-	 * 7 Lower Weapons Deck
-	 * 8 Ready Room 1
-	 * 9 Ready Room 2
-	 * 10 Barracks
-	 * 11 Logistics Managment
-	 * 12 Logistics Storage
-	 * 13 The Bridge
-	 * 14 Captain's Room
+	 * 1 Primary Armory 2 Backup Armory 3 Gravity Control 4 Engine Room 5 Auxiliary Power 6 Weapons Deck 7 Lower Weapons Deck 8 Ready Room 1 9 Ready
+	 * Room 2 10 Barracks 11 Logistics Managment 12 Logistics Storage 13 The Bridge 14 Captain's Room
 	 */
 	public class DredgionRooms {
 

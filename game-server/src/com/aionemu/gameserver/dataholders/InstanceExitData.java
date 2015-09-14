@@ -15,17 +15,14 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "instanceExit"
-})
+@XmlType(name = "", propOrder = { "instanceExit" })
 @XmlRootElement(name = "instance_exits")
 public class InstanceExitData {
 
-    @XmlElement(name = "instance_exit")
+	@XmlElement(name = "instance_exit")
 	protected List<InstanceExit> instanceExit;
 
 	@XmlTransient
@@ -39,14 +36,14 @@ public class InstanceExitData {
 		instanceExit = null;
 	}
 
-    public InstanceExit getInstanceExit(int worldId, Race race) {
+	public InstanceExit getInstanceExit(int worldId, Race race) {
 		for (InstanceExit exit : instanceExits) {
 			if (exit.getInstanceId() == worldId && (race.equals(exit.getRace()) || exit.getRace().equals(Race.PC_ALL))) {
 				return exit;
 			}
 		}
-        return null;
-    }
+		return null;
+	}
 
 	public int size() {
 		return instanceExits.size();

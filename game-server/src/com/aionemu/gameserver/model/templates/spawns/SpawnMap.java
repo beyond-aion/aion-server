@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -73,13 +72,13 @@ public class SpawnMap {
 		}
 		return baseSpawns;
 	}
-	
+
 	public List<MercenarySpawn> getMercenarySpawns() {
-		if(mercenarySpawns == null)
+		if (mercenarySpawns == null)
 			mercenarySpawns = new ArrayList<MercenarySpawn>(0);
 		return mercenarySpawns;
 	}
-	
+
 	public List<AssaultSpawn> getAssaultSpawns() {
 		if (assaultSpawns == null)
 			assaultSpawns = new ArrayList<AssaultSpawn>(0);

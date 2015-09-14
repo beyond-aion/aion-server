@@ -14,18 +14,15 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.item.AssemblyItem;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "item"
-})
+@XmlType(name = "", propOrder = { "item" })
 @XmlRootElement(name = "assembly_items")
 public class AssemblyItemsData {
 
-    @XmlElement(required = true)
-    protected List<AssemblyItem> item;
+	@XmlElement(required = true)
+	protected List<AssemblyItem> item;
 
 	@XmlTransient
 	private List<AssemblyItem> items = new ArrayList<AssemblyItem>();
@@ -39,7 +36,7 @@ public class AssemblyItemsData {
 	public int size() {
 		return items.size();
 	}
-	
+
 	public AssemblyItem getAssemblyItem(int itemId) {
 		for (AssemblyItem assemblyItem : items) {
 			if (assemblyItem.getId() == itemId) {

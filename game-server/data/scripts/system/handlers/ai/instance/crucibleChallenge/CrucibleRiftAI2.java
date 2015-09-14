@@ -13,7 +13,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
- *
  * @author xTz
  */
 @AIName("cruciblerift")
@@ -63,7 +62,7 @@ public class CrucibleRiftAI2 extends ActionItemNpcAI2 {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(false, 1111482, player.getObjectId(), 2));
 				}
 			}
-	
+
 		});
 	}
 

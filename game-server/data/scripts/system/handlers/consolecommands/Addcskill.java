@@ -58,13 +58,12 @@ public class Addcskill extends ConsoleCommand {
 
 			SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 
-			if(skillTemplate != null){
+			if (skillTemplate != null) {
 				skillId = skillTemplate.getTemplateId();
 			}
 
-		}
-		catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!" );
+		} catch (Exception e) {
+			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!");
 			System.out.println(e);
 		}
 
@@ -82,6 +81,7 @@ public class Addcskill extends ConsoleCommand {
 	@XmlRootElement(name = "ae_static_data")
 	@XmlAccessorType(XmlAccessType.NONE)
 	private static class StaticData {
+
 		@XmlElement(name = "skills")
 		public SkillData skillData;
 	}
@@ -120,7 +120,7 @@ public class Addcskill extends ConsoleCommand {
 
 	@XmlRootElement(name = "skills")
 	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class SkillData{
+	private static class SkillData {
 
 		@XmlElement(name = "skill")
 		private List<SkillTemplate> its;
@@ -128,7 +128,7 @@ public class Addcskill extends ConsoleCommand {
 		public SkillTemplate getSkillTemplate(String skill) {
 
 			for (SkillTemplate it : getData()) {
-				if(it.getName().toLowerCase().equals(skill.toLowerCase()))
+				if (it.getName().toLowerCase().equals(skill.toLowerCase()))
 					return it;
 			}
 			return null;

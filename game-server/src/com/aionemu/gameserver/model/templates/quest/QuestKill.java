@@ -21,7 +21,7 @@ public class QuestKill {
 
 	@XmlAttribute(name = "npc_ids")
 	private List<Integer> npcIds;
-	
+
 	@XmlAttribute(name = "count")
 	private int kill;
 
@@ -41,7 +41,7 @@ public class QuestKill {
 	public int getKillCount() {
 		return kill;
 	}
-	
+
 	public int getQuestStep() {
 		return step;
 	}

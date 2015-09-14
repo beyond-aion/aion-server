@@ -178,10 +178,10 @@ public interface Area {
 	 * @return maximal z of this area
 	 */
 	public float getMaxZ();
-	
+
 	public boolean intersectsRectangle(RectangleArea area);
-	
+
 	public int getWorldId();
-	
+
 	public ZoneName getZoneName();
 }

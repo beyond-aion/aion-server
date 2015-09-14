@@ -21,7 +21,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu, Luzien
- *
  */
 @AIName("padmarashka")
 public class PadmarashkaAI2 extends AggressiveNpcAI2 {
@@ -82,7 +81,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 		}
 		if (hpPercentage <= 25 && stage < 3) {
 			stage3();
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401215); //Cave crumble
+			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401215); // Cave crumble
 			stage = 3;
 		}
 	}
@@ -158,8 +157,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 			scheduleDelayStage1(delay);
 			if (getPosition().getWorldMapInstance().getNpc(218675) == null) {
 				spawn(218675, 573.413f, 179.518f, 66.220f, (byte) 30);
-			}
-			else if (getPosition().getWorldMapInstance().getNpc(218676) == null) {
+			} else if (getPosition().getWorldMapInstance().getNpc(218676) == null) {
 				spawn(218676, 581.827f, 179.587f, 66.250f, (byte) 30);
 			}
 		}
@@ -170,7 +168,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 		if (isAlreadyDead() || !isStart)
 			return;
 		else {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401214); //Huge egg is revealed
+			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401214); // Huge egg is revealed
 			switch (Rnd.get(1, 4)) {
 				case 1:
 					spawn(282614, 510.12497f, 250.17401f, 66.625f, (byte) 0);

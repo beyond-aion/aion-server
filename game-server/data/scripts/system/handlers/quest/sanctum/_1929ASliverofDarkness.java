@@ -87,8 +87,8 @@ public class _1929ASliverofDarkness extends QuestHandler {
 						}
 						case SETPRO2: {
 							if (defaultCloseDialog(env, 1, 2)) { // 2
-							  TeleportService2.teleportToNpc(player, 203164);
-							  return true;
+								TeleportService2.teleportToNpc(player, 203164);
+								return true;
 							}
 						}
 					}
@@ -99,8 +99,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (var == 8) {
+							} else if (var == 8) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -115,8 +114,8 @@ public class _1929ASliverofDarkness extends QuestHandler {
 						}
 						case SETPRO7: {
 							if (defaultCloseDialog(env, 8, 9)) { // 9
-							  TeleportService2.teleportToNpc(player, 203701);
-							  return true;
+								TeleportService2.teleportToNpc(player, 203701);
+								return true;
 							}
 						}
 					}
@@ -156,8 +155,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 96) {
 								if (isStigmaEquipped(env)) {
 									return sendQuestDialog(env, 2716);
-								}
-								else {
+								} else {
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 									return closeDialogWindow(env);
 								}
@@ -175,12 +173,10 @@ public class _1929ASliverofDarkness extends QuestHandler {
 									if (existendStigmaShards < 300) {
 										if (!player.getInventory().isFull()) {
 											ItemService.addItem(player, 141000001, 300 - existendStigmaShards);
-											PacketSendUtility.sendPacket(player,
-												new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
+											PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 											return true;
 										}
-									}
-									else {
+									} else {
 										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 										return true;
 									}
@@ -191,8 +187,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 96) {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().onDelete();
-								QuestService.addNewSpawn(310070000, player.getInstanceId(), 212992, (float) 191.9, (float) 267.68,
-									1374, (byte) 0);
+								QuestService.addNewSpawn(310070000, player.getInstanceId(), 212992, (float) 191.9, (float) 267.68, 1374, (byte) 0);
 								changeQuestStep(env, 96, 97, false); // 97
 								return closeDialogWindow(env);
 							}
@@ -213,13 +208,11 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203711) { // Miriya
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -231,8 +224,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		final Player player = env.getPlayer();
 		if (movieId == 155) {
-			QuestService.addNewSpawn(310070000, player.getInstanceId(), 205111, (float) 197.6, (float) 265.9, (float) 1374.0,
-				(byte) 0);
+			QuestService.addNewSpawn(310070000, player.getInstanceId(), 205111, (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
 			changeQuestStep(env, 94, 98, false); // 98
 			return true;
 		}
@@ -270,8 +262,8 @@ public class _1929ASliverofDarkness extends QuestHandler {
 				removeStigma(env);
 				qs.setQuestVar(2);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-					DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					.getName()));
 				return true;
 			}
 		}
@@ -289,11 +281,10 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					removeStigma(env);
 					qs.setQuestVar(2);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-						DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+						.getName()));
 					return true;
-				}
-				else if (var == 8) {
+				} else if (var == 8) {
 					removeStigma(env);
 					return true;
 				}

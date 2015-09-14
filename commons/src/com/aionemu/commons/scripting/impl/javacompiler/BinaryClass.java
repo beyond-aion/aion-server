@@ -11,8 +11,7 @@ import java.net.URI;
 import javax.tools.SimpleJavaFileObject;
 
 /**
- * This class is just a hack to make javac compiler work with classes loaded by prevoius classloader. Also it's used as
- * container for loaded class
+ * This class is just a hack to make javac compiler work with classes loaded by prevoius classloader. Also it's used as container for loaded class
  * 
  * @author SoulKeeper
  */

@@ -10,35 +10,31 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- * 
  */
-public class _30158JotunJunket extends QuestHandler
-{
-	private final static int	questId	= 30158;
+public class _30158JotunJunket extends QuestHandler {
 
-	public _30158JotunJunket()
-	{
+	private final static int questId = 30158;
+
+	public _30158JotunJunket() {
 		super(questId);
 	}
 
 	@Override
-	public void register()
-	{
+	public void register() {
 		qe.registerQuestNpc(799383).addOnQuestStart(questId);
 		qe.registerQuestNpc(799383).addOnTalkEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("UNKNOWN_LANDS_600010000"), questId);
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName)
-	{
-		if(zoneName != ZoneName.get("UNKNOWN_LANDS_600010000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		if (zoneName != ZoneName.get("UNKNOWN_LANDS_600010000"))
 			return false;
 		final Player player = env.getPlayer();
 		if (player == null)
 			return false;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if(qs == null || qs.getQuestVars().getQuestVars() != 0)
+		if (qs == null || qs.getQuestVars().getQuestVars() != 0)
 			return false;
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
@@ -49,30 +45,26 @@ public class _30158JotunJunket extends QuestHandler
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env)
-	{
+	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if(targetId == 799383)
-		{
-			if(qs == null || qs.getStatus() == QuestStatus.NONE)
-			{
-				if(dialog == DialogAction.QUEST_SELECT)
+		if (targetId == 799383) {
+			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
 
-			else if(qs != null && qs.getStatus() == QuestStatus.REWARD)
-			{
-				if(dialog == DialogAction.USE_OBJECT)
+			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if(dialog == DialogAction.SELECT_QUEST_REWARD)
+				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
-				else 
+				else
 					return sendQuestEndDialog(env);
 			}
 		}

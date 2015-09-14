@@ -60,8 +60,7 @@ public class ItemRaceEntry {
 	}
 
 	/**
-	 * Method is used to check item race; Some items having PC_ALL really are not for both races, like some foods and
-	 * weapons
+	 * Method is used to check item race; Some items having PC_ALL really are not for both races, like some foods and weapons
 	 * 
 	 * @param playerRace
 	 *          player's race

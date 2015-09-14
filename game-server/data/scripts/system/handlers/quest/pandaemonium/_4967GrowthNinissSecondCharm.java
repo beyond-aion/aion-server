@@ -45,8 +45,7 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798068: { // Maochinicherk
@@ -68,20 +67,18 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 							}
 						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemAmount = player.getInventory().getItemCountByItemId(186000091);
-							if (var == 1 && itemAmount >= 1 && player.getInventory().tryDecreaseKinah(50000) ) {
+							if (var == 1 && itemAmount >= 1 && player.getInventory().tryDecreaseKinah(50000)) {
 								removeQuestItem(env, 186000091, 1);
 								changeQuestStep(env, 1, 1, true); // reward
 								return sendQuestDialog(env, 5);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 2716);
 						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 1, 1);
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798385) { // Ninis
 				return sendQuestEndDialog(env);
 			}

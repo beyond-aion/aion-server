@@ -26,8 +26,7 @@ public class See extends AdminCommand {
 			if (SecurityConfig.INVIS) {
 				PlayerVisualStateService.seeValidate(admin);
 			}
-		}
-		else {
+		} else {
 			admin.unsetSeeState(CreatureSeeState.SEARCH10);
 			PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);
 			PacketSendUtility.sendMessage(admin, "You lost vision.");

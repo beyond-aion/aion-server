@@ -15,22 +15,19 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @AIName("steam_tachysphere")
 public class SteamTachysphereAI2 extends ActionItemNpcAI2 {
-	
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		final QuestState qs = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18302 : 28302);
 		if (qs == null) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
-		}
-		else if (qs != null && qs.getStatus() != QuestStatus.COMPLETE) {
+		} else if (qs != null && qs.getStatus() != QuestStatus.COMPLETE) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 		}
 	}

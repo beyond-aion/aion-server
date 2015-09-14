@@ -61,7 +61,7 @@ public abstract class BufEffect extends EffectTemplate {
 
 		if (modifiers.size() > 0)
 			cgs.addEffect(effect, modifiers);
-			
+
 		if (maxstat) {
 			effected.getLifeStats().increaseHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
 			effected.getLifeStats().increaseMp(TYPE.MP, effected.getGameStats().getMaxMp().getCurrent(), 0, LOG.REGULAR);
@@ -80,7 +80,7 @@ public abstract class BufEffect extends EffectTemplate {
 
 		if (change == null)
 			return modifiers;
-		
+
 		for (Change changeItem : change) {
 			if (changeItem.getStat() == null) {
 				log.warn("Skill stat has wrong name for skillid: " + skillId);
@@ -88,7 +88,7 @@ public abstract class BufEffect extends EffectTemplate {
 			}
 
 			int valueWithDelta = changeItem.getValue() + changeItem.getDelta() * skillLvl;
-			
+
 			Conditions conditions = changeItem.getConditions();
 			switch (changeItem.getFunc()) {
 				case ADD:

@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceGroup;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
- *
  * @author xTz
  */
 public class KamarReward extends InstanceReward<KamarPlayerReward> {
@@ -24,10 +23,10 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 
 	static {
 		positions = new float[4][];
-		positions[0] = new float[]{1535.6466f, 1573.8773f, 612.4217f};
-		positions[1] = new float[]{1099.0986f, 1541.5055f, 585.0f};
-		positions[2] = new float[]{1204.9689f, 1350.8196f, 612.91205f};
-		positions[3] = new float[]{1446.6449f, 1232.9314f, 585.0623f};
+		positions[0] = new float[] { 1535.6466f, 1573.8773f, 612.4217f };
+		positions[1] = new float[] { 1099.0986f, 1541.5055f, 585.0f };
+		positions[2] = new float[] { 1204.9689f, 1350.8196f, 612.91205f };
+		positions[3] = new float[] { 1446.6449f, 1232.9314f, 585.0623f };
 	}
 
 	public KamarReward(Integer mapId, int instanceId) {
@@ -111,16 +110,13 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 				if (elyosPosition == 0) {
 					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
 						teleport(player, positions[1]);
-					}
-					else {
+					} else {
 						teleport(player, positions[0]);
 					}
-				}
-				else {
+				} else {
 					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
 						teleport(player, positions[3]);
-					}
-					else {
+					} else {
 						teleport(player, positions[2]);
 					}
 				}
@@ -129,16 +125,13 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 				if (elyosPosition == 0) {
 					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
 						teleport(player, positions[3]);
-					}
-					else {
+					} else {
 						teleport(player, positions[2]);
 					}
-				}
-				else {
+				} else {
 					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
 						teleport(player, positions[1]);
-					}
-					else {
+					} else {
 						teleport(player, positions[0]);
 					}
 				}

@@ -27,7 +27,7 @@ public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent implements Pr
 		this.updateMember = alliance.getMember(player.getObjectId());
 		this.slot = slot;
 	}
-	
+
 	public PlayerAllianceUpdateEvent(PlayerAlliance alliance, Player player, PlayerAllianceEvent allianceEvent) {
 		this(alliance, player, allianceEvent, 0);
 	}

@@ -36,13 +36,11 @@ public class _21277OutoftheirColdDeadHands extends QuestHandler {
 			if (targetId == 799208) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799208: {
 					switch (dialog) {
@@ -58,8 +56,7 @@ public class _21277OutoftheirColdDeadHands extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799208) {
 				return sendQuestEndDialog(env);
 			}

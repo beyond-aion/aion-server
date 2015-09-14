@@ -135,35 +135,29 @@ public class PlayerController extends CreatureController<Player> {
 				PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
 			}
 			if (player.getPet() != null) {
-				LoggerFactory.getLogger(PlayerController.class).debug(
-					"Player " + getOwner().getName() + " sees " + object.getName() + " that has toypet");
+				LoggerFactory.getLogger(PlayerController.class).debug("Player " + getOwner().getName() + " sees " + object.getName() + " that has toypet");
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET(3, player.getPet()));
 			}
 			player.getEffectController().sendEffectIconsTo(getOwner());
-		}
-		else if (object instanceof Kisk) {
+		} else if (object instanceof Kisk) {
 			Kisk kisk = ((Kisk) object);
 			PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(kisk, getOwner()));
 			if (getOwner().getRace() == kisk.getOwnerRace())
 				PacketSendUtility.sendPacket(getOwner(), new SM_KISK_UPDATE(kisk));
-		}
-		else if (object instanceof Npc) {
+		} else if (object instanceof Npc) {
 			Npc npc = ((Npc) object);
 			PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
 			if (!npc.getEffectController().isEmpty())
 				npc.getEffectController().sendEffectIconsTo(getOwner());
 			QuestEngine.getInstance().onAtDistance(new QuestEnv(object, getOwner(), 0, 0));
-		}
-		else if (object instanceof Summon) {
+		} else if (object instanceof Summon) {
 			Summon npc = ((Summon) object);
 			PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
 			if (!npc.getEffectController().isEmpty())
 				npc.getEffectController().sendEffectIconsTo(getOwner());
-		}
-		else if (object instanceof Gatherable || object instanceof StaticObject) {
+		} else if (object instanceof Gatherable || object instanceof StaticObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_GATHERABLE_INFO(object));
-		}
-		else if (object instanceof Pet) {
+		} else if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(3, (Pet) object));
 		}
 	}
@@ -173,8 +167,7 @@ public class PlayerController extends CreatureController<Player> {
 		super.notSee(object, deleteType);
 		if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(4, (Pet) object));
-		}
-		else {
+		} else {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, deleteType));
 		}
 	}
@@ -184,7 +177,7 @@ public class PlayerController extends CreatureController<Player> {
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			// if (template.isTimeBased())
-			//	continue;
+			// continue;
 			int diff = 0;
 			if (questId <= 0xFFFF)
 				diff = QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel());
@@ -215,15 +208,14 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onEnterZone(ZoneInstance zone) {
 		Player player = getOwner();
-		//TODO move?
+		// TODO move?
 		if (!zone.canRide() && player.isInPlayerMode(PlayerMode.RIDE)) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 		}
 		InstanceService.onEnterZone(player, zone);
 		if (zone.getAreaTemplate().getZoneName() == null) {
 			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
-		}
-		else if (!zone.hasQuestZoneHandlers()) {
+		} else if (!zone.hasQuestZoneHandlers()) {
 			// Zone handlers should notify QuestEngine directly
 			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0, 0), zone.getAreaTemplate().getZoneName());
 		}
@@ -259,8 +251,7 @@ public class PlayerController extends CreatureController<Player> {
 					ef.endEffect();
 					getOwner().getEffectController().clearEffect(ef);
 				}
-			}
-			else if (ef.getSkillTemplate().getDispelCategory() == DispelCategoryType.NPC_BUFF) {
+			} else if (ef.getSkillTemplate().getDispelCategory() == DispelCategoryType.NPC_BUFF) {
 				ef.endEffect();
 				getOwner().getEffectController().clearEffect(ef);
 			}
@@ -287,8 +278,7 @@ public class PlayerController extends CreatureController<Player> {
 			y = bind.getY();
 			z = bind.getZ();
 			h = bind.getHeading();
-		}
-		else {
+		} else {
 			PlayerInitialData.LocationData start = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(getOwner().getRace());
 
 			mapId = start.getMapId();
@@ -299,14 +289,13 @@ public class PlayerController extends CreatureController<Player> {
 		}
 		if (!SiegeService.getInstance().validateLoginZone(getOwner())) {
 			moveToBind = true;
-		}
-		else if (getOwner().getCommonData().getLastOnline() != null) {
+		} else if (getOwner().getCommonData().getLastOnline() != null) {
 			long lastOnline = getOwner().getCommonData().getLastOnline().getTime();
 			long secondsOffline = (System.currentTimeMillis() / 1000) - lastOnline / 1000;
 			if (secondsOffline > 10 * 60) { // Logout in no-recall zone sends you to bindpoint after 10 (??) minutes
 				for (ZoneInstance zone : getOwner().getPosition().getMapRegion().getZones(getOwner())) {
 					if (!zone.canRecall()) {
-					//	moveToBind = true; //Temporary fix untill zones will be reparsed with right Rcall perameter
+						// moveToBind = true; //Temporary fix untill zones will be reparsed with right Rcall perameter
 						break;
 					}
 				}
@@ -395,8 +384,7 @@ public class PlayerController extends CreatureController<Player> {
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
 
 		if (player.isInGroup2()) {
-			player.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()),
-				new ExcludePlayerFilter(player));
+			player.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
 		}
 	}
 
@@ -419,8 +407,8 @@ public class PlayerController extends CreatureController<Player> {
 			int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
 			if (player.getSKInfo().getRank() > 1)
 				kiskTimeRemaining = 0;
-			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0,
-				isInvader(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
 		}
 
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH);
@@ -429,8 +417,7 @@ public class PlayerController extends CreatureController<Player> {
 	private boolean isInvader(Player player) {
 		if (player.getRace().equals(Race.ASMODIANS)) {
 			return player.getWorldId() == 210060000;
-		}
-		else {
+		} else {
 			return player.getWorldId() == 220050000;
 		}
 	}
@@ -600,13 +587,11 @@ public class PlayerController extends CreatureController<Player> {
 		if (castingSkill.getSkillMethod() == SkillMethod.CAST || castingSkill.getSkillMethod() == SkillMethod.CHARGE) {
 			PacketSendUtility.broadcastPacket(player, new SM_SKILL_CANCEL(player, castingSkill.getSkillTemplate().getSkillId()), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED);
-		}
-		else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(castingSkill.getItemTemplate().getNameId())));
+		} else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(castingSkill.getItemTemplate().getNameId())));
 			player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget()
-				.getObjectId(), castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
+				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
 	}
 
@@ -617,9 +602,8 @@ public class PlayerController extends CreatureController<Player> {
 		player.setUsingItem(null);
 		if (hasTask(TaskId.ITEM_USE)) {
 			cancelTask(TaskId.ITEM_USE);
-			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(), usingItem == null ? 0
-					: usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(),
+				usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
 	}
 
@@ -715,8 +699,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 * After entering game player char is "blinking" which means that it's in under some protection, after making an
-	 * action char stops blinking. - Starts protection active - Schedules task to end protection
+	 * After entering game player char is "blinking" which means that it's in under some protection, after making an action char stops blinking. -
+	 * Starts protection active - Schedules task to end protection
 	 */
 	public void startProtectionActiveTask() {
 		if (!getOwner().isProtectionActive()) {
@@ -763,8 +747,7 @@ public class PlayerController extends CreatureController<Player> {
 			player.setState(CreatureState.ACTIVE);
 			player.setState(CreatureState.GLIDING);
 			player.getGameStats().updateStatsAndSpeedVisually();
-		}
-		else {
+		} else {
 			player.unsetState(CreatureState.FLIGHT_TELEPORT);
 			player.setFlightTeleportId(0);
 

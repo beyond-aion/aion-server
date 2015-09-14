@@ -13,4 +13,4 @@ public class SummonMoveController extends PlayableMoveController<Summon> {
 
 	public void moveToTargetObject() {
 	}
-}	
+}

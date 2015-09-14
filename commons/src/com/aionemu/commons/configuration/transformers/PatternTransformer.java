@@ -33,8 +33,7 @@ public class PatternTransformer implements PropertyTransformer<Pattern> {
 	public Pattern transform(String value, Field field) throws TransformationException {
 		try {
 			return Pattern.compile(value);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new TransformationException("Not valid RegExp: " + value, e);
 		}
 	}

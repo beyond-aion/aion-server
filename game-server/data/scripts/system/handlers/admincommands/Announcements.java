@@ -30,10 +30,9 @@ public class Announcements extends AdminCommand {
 			for (Announcement announce : announces)
 				PacketSendUtility.sendMessage(
 					player,
-					announce.getId() + "  |  " + announce.getFaction() + "  |  " + announce.getType() + "  |  "
-						+ announce.getDelay() + "  |  " + announce.getAnnounce());
-		}
-		else if (params[0].equals("add")) {
+					announce.getId() + "  |  " + announce.getFaction() + "  |  " + announce.getType() + "  |  " + announce.getDelay() + "  |  "
+						+ announce.getAnnounce());
+		} else if (params[0].equals("add")) {
 			if ((params.length < 5)) {
 				info(player, null);
 				return;
@@ -43,8 +42,7 @@ public class Announcements extends AdminCommand {
 
 			try {
 				delay = Integer.parseInt(params[3]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				// 15 minutes, default
 				delay = 900;
 			}
@@ -68,8 +66,7 @@ public class Announcements extends AdminCommand {
 			announceService.reload();
 
 			PacketSendUtility.sendMessage(player, "The announcement has been created with successful !");
-		}
-		else if (params[0].equals("delete")) {
+		} else if (params[0].equals("delete")) {
 			if ((params.length < 2)) {
 				info(player, null);
 				return;
@@ -79,8 +76,7 @@ public class Announcements extends AdminCommand {
 
 			try {
 				id = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "The announcement's ID is wrong !");
 				info(player, e.getMessage());
 				return;
@@ -93,8 +89,7 @@ public class Announcements extends AdminCommand {
 			announceService.reload();
 
 			PacketSendUtility.sendMessage(player, "The announcement has been deleted with successful !");
-		}
-		else {
+		} else {
 			info(player, null);
 		}
 	}

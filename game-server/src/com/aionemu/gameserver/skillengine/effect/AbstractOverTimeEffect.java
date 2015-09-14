@@ -11,10 +11,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author kecimis
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractOverTimeEffect")
@@ -49,24 +47,24 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 			effect.setAbnormal(abnormal.getId());
 			effected.getEffectController().setAbnormal(abnormal.getId());
 		}
-		//TODO figure out what to do with such cases
+		// TODO figure out what to do with such cases
 		if (checktime == 0)
 			return;
 		try {
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+			Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-			@Override
-			public void run() {
-				onPeriodicAction(effect);
-			}
-		}, checktime > this.getDuration2() ? checktime - this.getDuration2() : checktime, checktime);
-		effect.setPeriodicTask(task, position);
+				@Override
+				public void run() {
+					onPeriodicAction(effect);
+				}
+			}, checktime > this.getDuration2() ? checktime - this.getDuration2() : checktime, checktime);
+			effect.setPeriodicTask(task, position);
 		} catch (Exception e) {
-			log.warn("Exception in skillId: "+effect.getSkillId());
+			log.warn("Exception in skillId: " + effect.getSkillId());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void endEffect(Effect effect, AbnormalState abnormal) {
 		if (abnormal != null)
 			effect.getEffected().getEffectController().unsetAbnormal(abnormal.getId());

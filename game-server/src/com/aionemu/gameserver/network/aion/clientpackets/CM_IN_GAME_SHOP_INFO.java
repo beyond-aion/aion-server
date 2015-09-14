@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author xTz, KID
  */
 public class CM_IN_GAME_SHOP_INFO extends AionClientPacket {
+
 	private int actionId;
 	private int categoryId;
 	private int listInCategory;
@@ -40,13 +41,13 @@ public class CM_IN_GAME_SHOP_INFO extends AionClientPacket {
 	protected void runImpl() {
 		if (InGameShopConfig.ENABLE_IN_GAME_SHOP) {
 			Player player = getConnection().getActivePlayer();
-			
-			if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_INGAMESHOP) {
+
+			if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_INGAMESHOP) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 				PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 				return;
 			}
-			
+
 			switch (actionId) {
 				case 0x01: // item info
 					PacketSendUtility.sendPacket(player, new SM_IN_GAME_SHOP_ITEM(player, categoryId));

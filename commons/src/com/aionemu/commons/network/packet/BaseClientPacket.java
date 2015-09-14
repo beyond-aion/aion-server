@@ -83,8 +83,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 				log.debug("Packet " + this + " not fully readed!");
 
 			return true;
-		}
-		catch (Exception re) {
+		} catch (Exception re) {
 			log.error("Reading failed for packet " + this, re);
 			return false;
 		}
@@ -110,8 +109,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final int readD() {
 		try {
 			return buf.getInt();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing D for: " + this);
 		}
 		return 0;
@@ -125,8 +123,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final int readC() {
 		try {
 			return buf.get() & 0xFF;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing C for: " + this);
 		}
 		return 0;
@@ -140,8 +137,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final byte readSC() {
 		try {
 			return buf.get();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing C for: " + this);
 		}
 		return 0;
@@ -155,8 +151,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final short readSH() {
 		try {
 			return buf.getShort();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing H for: " + this);
 		}
 		return 0;
@@ -170,8 +165,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final int readH() {
 		try {
 			return buf.getShort() & 0xFFFF;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing H for: " + this);
 		}
 		return 0;
@@ -185,8 +179,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final double readDF() {
 		try {
 			return buf.getDouble();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing DF for: " + this);
 		}
 		return 0;
@@ -200,8 +193,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final float readF() {
 		try {
 			return buf.getFloat();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing F for: " + this);
 		}
 		return 0;
@@ -215,8 +207,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	protected final long readQ() {
 		try {
 			return buf.getLong();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing Q for: " + this);
 		}
 		return 0;
@@ -233,8 +224,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 		try {
 			while ((ch = buf.getChar()) != 0)
 				sb.append(ch);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing S for: " + this);
 		}
 		return sb.toString();
@@ -250,8 +240,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 		byte[] result = new byte[length];
 		try {
 			buf.get(result);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Missing byte[] for: " + this);
 		}
 		return result;

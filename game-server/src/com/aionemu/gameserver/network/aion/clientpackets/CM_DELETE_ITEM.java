@@ -34,18 +34,16 @@ public class CM_DELETE_ITEM extends AionClientPacket {
 		Storage inventory = player.getInventory();
 		Item item = inventory.getItemByObjId(itemObjectId);
 
-		if(player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_ITEMS) {
+		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_ITEMS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
 			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-		
+
 		if (item != null) {
 			if (!item.getItemTemplate().isBreakable()) {
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(new DescriptionId(item.getNameId())));
-			}
-			else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(new DescriptionId(item.getNameId())));
+			} else {
 				inventory.delete(item, ItemDeleteType.DISCARD);
 			}
 		}

@@ -16,14 +16,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalDropZones")
 public class GlobalDropZones {
 
-    @XmlElement(name = "gd_zone")
-    protected List<GlobalDropZone> gdZones;
+	@XmlElement(name = "gd_zone")
+	protected List<GlobalDropZone> gdZones;
 
-    public List<GlobalDropZone> getGlobalDropZones() {
-        if (gdZones == null) {
-            gdZones = new ArrayList<GlobalDropZone>();
-        }
-        return this.gdZones;
-    }
+	public List<GlobalDropZone> getGlobalDropZones() {
+		if (gdZones == null) {
+			gdZones = new ArrayList<GlobalDropZone>();
+		}
+		return this.gdZones;
+	}
 
 }

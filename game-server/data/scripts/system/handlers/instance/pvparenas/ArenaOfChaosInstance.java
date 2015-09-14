@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
 /**
- *
  * @author xTz
  */
 @InstanceID(300350000)

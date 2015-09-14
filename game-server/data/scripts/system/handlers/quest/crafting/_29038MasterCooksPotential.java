@@ -41,13 +41,11 @@ public class _29038MasterCooksPotential extends QuestHandler {
 			if (targetId == 204100) { // Lainita
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204101: { // Daraia
@@ -89,8 +87,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 										}
 									}
 								}
-							}
-							else {
+							} else {
 								return sendQuestDialog(env, 4400);
 							}
 						}
@@ -98,8 +95,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							player.getInventory().decreaseKinah(6500);
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 2, 152207202, 1, 0, 0); // 2
-							}
-							else if (var == 1) {
+							} else if (var == 1) {
 								return defaultCloseDialog(env, 1, 2, 152207202, 1, 0, 0); // 2
 							}
 						}
@@ -107,8 +103,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							player.getInventory().decreaseKinah(6500);
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 5, 152207203, 1, 0, 0); // 5
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return defaultCloseDialog(env, 4, 5, 152207203, 1, 0, 0); // 5
 							}
 						}
@@ -116,8 +111,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							player.getInventory().decreaseKinah(6500);
 							if (var == 6) {
 								return defaultCloseDialog(env, 6, 8, 152207204, 1, 0, 0); // 8
-							}
-							else if (var == 7) {
+							} else if (var == 7) {
 								return defaultCloseDialog(env, 7, 8, 152207204, 1, 0, 0); // 8
 							}
 						}
@@ -125,8 +119,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							player.getInventory().decreaseKinah(6500);
 							if (var == 9) {
 								return defaultCloseDialog(env, 9, 11, 152207205, 1, 0, 0); // 11
-							}
-							else if (var == 10) {
+							} else if (var == 10) {
 								return defaultCloseDialog(env, 10, 11, 152207205, 1, 0, 0); // 11
 							}
 						}
@@ -172,8 +165,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204100) { // Lainita
 				return sendQuestEndDialog(env);
 			}

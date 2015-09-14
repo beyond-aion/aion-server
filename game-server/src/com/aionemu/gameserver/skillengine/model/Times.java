@@ -13,32 +13,32 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
  * @author kecims
- *
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Times")
 public class Times {
-	
+
 	@XmlAttribute(required = true)
 	protected String times;
-	
+
 	@XmlTransient
 	private HashMap<WeaponTypeWrapper, Integer> timeForWeaponType = new HashMap<>();
-	
+
 	public String getTimes() {
 		return times;
 	}
-	
+
 	/**
-	 * @param times the times to set
+	 * @param times
+	 *          the times to set
 	 */
 	public void setTimes(String times) {
 		this.times = times;
 	}
 
 	public int getTimeForWeapon(WeaponTypeWrapper weapon) {
-			return timeForWeaponType.get(weapon);
+		return timeForWeaponType.get(weapon);
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {

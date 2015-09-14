@@ -64,10 +64,10 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
 	}
-	
+
 	@Override
 	public void onEnterZone(Npc npc, ZoneInstance zone) {
-		
+
 	}
 
 	@Override
@@ -93,12 +93,12 @@ public class GeneralInstanceHandler implements InstanceHandler {
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
-	
+
 	protected VisibleObject spawnAndSetReaspawn(int npcId, float x, float y, float z, byte heading, int respawnTime) {
 		SpawnTemplate template = SpawnEngine.addNewSpawn(mapId, npcId, x, y, z, heading, respawnTime);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
-	
+
 	protected Npc getNpc(int npcId) {
 		return instance.getNpc(npcId);
 	}
@@ -114,7 +114,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	protected void sendMsg(int msg) {
 		sendMsg(msg, 0, false, 25);
 	}
-	
+
 	@Override
 	public void onExitInstance(Player player) {
 	}
@@ -135,7 +135,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 	}
-	
+
 	@Override
 	public void onAggro(Npc npc) {
 	}
@@ -143,10 +143,9 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public void onChangeStage(StageType type) {
 	}
-	
+
 	@Override
-	public void onChangeStageList(StageList list)
-	{
+	public void onChangeStageList(StageList list) {
 	}
 
 	@Override
@@ -178,22 +177,22 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public void onLeaveTeam(Player player) {
-		
+
 	}
-	
+
 	@Override
 	public void onHealMember(Player effector, Player effected, int value) {
-		
+
 	}
-	
+
 	@Override
 	public void onBaseCapture(Player player) {
-		
+
 	}
-	
+
 	@Override
 	public void onAddLegionMember(Legion legion, Player player) {
-		
+
 	}
 
 	@Override
@@ -203,26 +202,26 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public void onStartInstanceDestroy() {
-		
+
 	}
 
 	@Override
 	public boolean canUseSkill(Player player, Skill skill) {
 		return true;
 	}
-	
+
 	@Override
 	public void onAttack(Creature attacked, Creature attacker, int damage) {
-		
+
 	}
-	
+
 	@Override
 	public void onApplyEffect(Creature effector, Creature effected, int skillId) {
-		
+
 	}
-	
+
 	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
-		
+
 	}
 }

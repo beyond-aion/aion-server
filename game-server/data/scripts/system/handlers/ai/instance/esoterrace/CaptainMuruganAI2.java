@@ -42,8 +42,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelTask();
-				}
-				else {
+				} else {
 					sendMsg(1500194);
 					SkillEngine.getInstance().getSkill(getOwner(), 19325, 5, getOwner()).useNoAnimationSkill();
 					if (getLifeStats().getHpPercentage() < 50) {

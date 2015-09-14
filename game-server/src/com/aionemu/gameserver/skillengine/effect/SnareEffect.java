@@ -16,7 +16,7 @@ public class SnareEffect extends BufEffect {
 
 	@Override
 	public void applyEffect(Effect effect) {
-			effect.addToEffectedController();
+		effect.addToEffectedController();
 	}
 
 	@Override

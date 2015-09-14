@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-
 import java.util.Collection;
 
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -30,15 +29,13 @@ public class SM_EMOTION_LIST extends AionServerPacket {
 				writeD(64 + i);
 				writeH(0x00);
 			}
-		}
-		else if (emotions == null || emotions.isEmpty()) {
+		} else if (emotions == null || emotions.isEmpty()) {
 			writeH(0);
-		}
-		else {
+		} else {
 			writeH(emotions.size());
 			for (Emotion emotion : emotions) {
 				writeD(emotion.getId());
-				writeH(emotion.getRemainingTime());//remaining time
+				writeH(emotion.getRemainingTime());// remaining time
 			}
 		}
 	}

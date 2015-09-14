@@ -48,17 +48,14 @@ public class _1990ASagesGift extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (isDaevanionArmorEquipped(player)) {
 						return sendQuestDialog(env, 4762);
-					}
-					else {
+					} else {
 						return sendQuestDialog(env, 4848);
 					}
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			int var1 = qs.getQuestVarById(1);
 			if (targetId == 203771) { // Fermina
@@ -66,14 +63,11 @@ public class _1990ASagesGift extends QuestHandler {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 1) {
+						} else if (var == 1) {
 							return sendQuestDialog(env, 10000);
-						}
-						else if (var == 2 && var1 == 60) {
+						} else if (var == 2 && var1 == 60) {
 							return sendQuestDialog(env, 1693);
-						}
-						else if (var == 3) {
+						} else if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
 					}
@@ -89,8 +83,7 @@ public class _1990ASagesGift extends QuestHandler {
 							player.getCommonData().setDp(0);
 							changeQuestStep(env, 3, 3, true); // reward
 							return sendQuestDialog(env, 5);
-						}
-						else {
+						} else {
 							return sendQuestDialog(env, 2120);
 						}
 					}
@@ -107,8 +100,7 @@ public class _1990ASagesGift extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203771) { // Fermina
 				return sendQuestEndDialog(env);
 			}

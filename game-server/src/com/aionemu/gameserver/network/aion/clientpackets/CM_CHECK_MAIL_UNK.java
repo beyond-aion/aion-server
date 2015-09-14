@@ -5,7 +5,6 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 /**
  * @author ginho1
- *
  */
 public class CM_CHECK_MAIL_UNK extends AionClientPacket {
 
@@ -18,7 +17,8 @@ public class CM_CHECK_MAIL_UNK extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
 	 */
 	@Override
@@ -26,11 +26,12 @@ public class CM_CHECK_MAIL_UNK extends AionClientPacket {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
 	 */
 	@Override
 	protected void runImpl() {
-		//TODO???
+		// TODO???
 	}
 }

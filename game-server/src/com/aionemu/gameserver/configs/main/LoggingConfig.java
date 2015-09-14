@@ -30,16 +30,16 @@ public class LoggingConfig {
 
 	@Property(key = "gameserver.log.ingameshop", defaultValue = "false")
 	public static boolean LOG_INGAMESHOP;
-	
+
 	@Property(key = "gameserver.log.ingameshop.sql", defaultValue = "false")
 	public static boolean LOG_INGAMESHOP_SQL;
-	
+
 	@Property(key = "gameserver.log.item", defaultValue = "true")
 	public static boolean LOG_ITEM;
 
 	@Property(key = "gameserver.log.kill", defaultValue = "false")
 	public static boolean LOG_KILL;
-	
+
 	@Property(key = "gameserver.log.pl", defaultValue = "false")
 	public static boolean LOG_PL;
 
@@ -57,13 +57,13 @@ public class LoggingConfig {
 
 	@Property(key = "gameserver.log.sysmail", defaultValue = "false")
 	public static boolean LOG_SYSMAIL;
-	
+
 	@Property(key = "gameserver.log.auction", defaultValue = "true")
 	public static boolean LOG_HOUSE_AUCTION;
-	
+
 	@Property(key = "gameserver.log.tampering", defaultValue = "false")
 	public static boolean LOG_TAMPERING;
-	
+
 	@Property(key = "log.accounts.login", defaultValue = "false")
 	public static boolean LOG_ACCOUNTS_LOGIN;
 }

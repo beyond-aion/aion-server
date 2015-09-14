@@ -19,7 +19,7 @@ public enum AttackStatus {
 	CRITICAL_DODGE(-64, -64, true, true),
 	CRITICAL_PARRY(-62, -62, true, true),
 	CRITICAL_BLOCK(-60, -60, true, true),
-	CRITICAL_RESIST(-58, -58,  true, true),
+	CRITICAL_RESIST(-58, -58, true, true),
 	CRITICAL(-54, -54, false, true),
 	OFFHAND_CRITICAL_DODGE(-474, -471, true, true),
 	OFFHAND_CRITICAL_PARRY(-454, -454, true, true),
@@ -35,7 +35,7 @@ public enum AttackStatus {
 	private AttackStatus(int type) {
 		this(type, type, false, false);
 	}
-	
+
 	private AttackStatus(int type, int resultType, boolean counterSkill, boolean isCritical) {
 		this.type = type;
 		this.resultType = resultType;
@@ -46,14 +46,15 @@ public enum AttackStatus {
 	public final int getId() {
 		return type;
 	}
-	
+
 	public final int getResultId() {
 		return resultType;
 	}
-	
+
 	public final boolean isCounterSkill() {
 		return counterSkill;
 	}
+
 	public final boolean isCritical() {
 		return isCritical;
 	}
@@ -85,7 +86,7 @@ public enum AttackStatus {
 		}
 		throw new IllegalArgumentException("Invalid mainHandStatus " + mainHandStatus);
 	}
-	
+
 	public static final AttackStatus getBaseStatus(AttackStatus status) {
 		switch (status) {
 			case DODGE:
@@ -112,9 +113,9 @@ public enum AttackStatus {
 				return status;
 		}
 	}
-	
+
 	public static final AttackStatus getCriticalStatusFor(AttackStatus status) {
-		switch(status) {
+		switch (status) {
 			case DODGE:
 				return AttackStatus.CRITICAL_DODGE;
 			case OFFHAND_DODGE:
@@ -131,8 +132,8 @@ public enum AttackStatus {
 				return AttackStatus.CRITICAL;
 			case OFFHAND_NORMALHIT:
 				return AttackStatus.OFFHAND_CRITICAL;
-		default:
-			return status;
+			default:
+				return status;
 		}
 	}
 }

@@ -31,8 +31,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  * 
  * @author Hellboy aion4Free
  * @modified Gigi
- * @reworked vlog Please don't touch commented code. There is no more dialog to choose a mission. But maybe there will
- *           be one.
+ * @reworked vlog Please don't touch commented code. There is no more dialog to choose a mission. But maybe there will be one.
  */
 public class _2947FollowingThrough extends QuestHandler {
 
@@ -75,16 +74,14 @@ public class _2947FollowingThrough extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return sendQuestDialog(env, 1019);
 							}
 						}
 						case SETPRO12: {
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 4); // 4
-							}
-							else if (var == 4) {
+							} else if (var == 4) {
 								return defaultCloseDialog(env, 4, 4);
 							}
 						}
@@ -120,8 +117,7 @@ public class _2947FollowingThrough extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 1693);
-							}
-							else if (qs.getQuestVarById(4) == 10) {
+							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -144,8 +140,7 @@ public class _2947FollowingThrough extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 3739);
@@ -196,14 +191,12 @@ public class _2947FollowingThrough extends QuestHandler {
 						changeQuestStep(env, var3, var3 + 1, false, 3); // 3: 1 - 3
 					}
 				}
-			}
-			else if (var == 5) {
+			} else if (var == 5) {
 				int var4 = qs.getQuestVarById(4);
 				int[] mobs = { 213583, 290048, 211987, 290047, 290050, 211986, 290049, 213584, 211982 };
 				if (var4 < 9) {
 					return defaultOnKillEvent(env, mobs, 0, 9, 4); // 4: 1 - 9
-				}
-				else if (var4 == 9) {
+				} else if (var4 == 9) {
 					defaultOnKillEvent(env, mobs, 9, 10, 4); // 4: 10
 					QuestService.questTimerEnd(env);
 					playQuestMovie(env, 168);
@@ -243,8 +236,7 @@ public class _2947FollowingThrough extends QuestHandler {
 					qs.setQuestVar(6);
 					updateQuestStatus(env);
 					return true;
-				}
-				else {
+				} else {
 					playQuestMovie(env, 167);
 					QuestService.questTimerStart(env, 240);
 					return true;
@@ -262,8 +254,7 @@ public class _2947FollowingThrough extends QuestHandler {
 			if (movieId == 168) {
 				TeleportService2.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
 				return true;
-			}
-			else if (movieId == 167) {
+			} else if (movieId == 167) {
 				QuestService.questTimerStart(env, 240);
 				return true;
 			}

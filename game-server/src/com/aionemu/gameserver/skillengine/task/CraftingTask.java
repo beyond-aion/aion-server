@@ -40,25 +40,21 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected void onFailureFinish() {
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate,
-				currentSuccessValue, currentFailureValue, 6));
-		PacketSendUtility.broadcastPacket(requestor,
-				new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 3), true);
+		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue,
+			6));
+		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 3), true);
 	}
 
 	@Override
 	protected boolean onSuccessFinish() {
 		if (crit && recipeTemplate.getComboProduct(critCount) != null) {
-			PacketSendUtility.sendPacket(requestor,
-					new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 3));
+			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 3));
 			onInteractionStart();
 			return false;
-		}
-		else {
-			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate,
-					currentSuccessValue, currentFailureValue, 5));
-			PacketSendUtility.broadcastPacket(requestor,
-					new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
+		} else {
+			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue,
+				currentFailureValue, 5));
+			PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
 			CraftService.finishCrafting(requestor, recipeTemplate, critCount, bonus);
 			return true;
 		}
@@ -66,15 +62,14 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate,
-				currentSuccessValue, currentFailureValue, 1));
+		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue,
+			1));
 	}
 
 	@Override
 	protected void onInteractionAbort() {
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 4));
-		PacketSendUtility.broadcastPacket(requestor,
-				new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
 		requestor.setCraftingTask(null);
 	}
 
@@ -109,21 +104,19 @@ public class CraftingTask extends AbstractCraftTask {
 			}
 		}
 
-		PacketSendUtility.sendPacket(requestor,
-				new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, completeValue, completeValue, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, completeValue, completeValue, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 1));
-		PacketSendUtility.broadcastPacket(requestor,
-				new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillid(), 0), true);
-		PacketSendUtility.broadcastPacket(requestor,
-				new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillid(), 1), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(),
+			recipeTemplate.getSkillid(), 0), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(),
+			recipeTemplate.getSkillid(), 1), true);
 	}
 
 	protected void checkCrit() {
 		if (crit) {
 			crit = false;
 			this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getComboProduct(critCount));
-		}
-		else
+		} else
 			this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductid());
 	}
 
@@ -136,22 +129,19 @@ public class CraftingTask extends AbstractCraftTask {
 		int maxFailureChance = CraftConfig.MAX_CRAFT_FAILURE_CHANCE;
 		while (easeLevel > 1)
 			maxFailureChance /= easeLevel--;
-		
-		
 
 		int multi = Math.max(1, maxFailureChance);
 		if (recipeTemplate.getSkillid() == 40009)
 			multi = 0;
-		
+
 		if (Rnd.get(100) > multi)
-			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi/5, 1)));
+			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 5, 1)));
 		else
-			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi/5, 1)));
+			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 5, 1)));
 
 		if (currentSuccessValue >= completeValue) {
 			currentSuccessValue = completeValue;
-		}
-		else if (currentFailureValue >= completeValue) {
+		} else if (currentFailureValue >= completeValue) {
 			currentFailureValue = completeValue;
 		}
 	}

@@ -43,16 +43,16 @@ public class DeliveryManAI2 extends FollowingNpcAI2 {
 	protected void handleDialogStart(Player player) {
 		if (player.equals(owner)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 18));
-			//player.getMailbox().sendMailList(true);
+			// player.getMailbox().sendMailList(true);
 		}
 	}
-	
+
 	@Override
 	protected void handleDialogFinish(Player player) {
 		super.handleDialogFinish(player);
-		if(player.getObjectId() == owner.getObjectId()) {
+		if (player.getObjectId() == owner.getObjectId()) {
 			AI2Actions.deleteOwner(DeliveryManAI2.this);
-			if(despawnTask != null) {
+			if (despawnTask != null) {
 				despawnTask.cancel(false);
 			}
 		}

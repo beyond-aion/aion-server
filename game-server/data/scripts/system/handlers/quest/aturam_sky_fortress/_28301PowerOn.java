@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemService;
 
-
 /**
  * @author zhkchi
- *
  */
 public class _28301PowerOn extends QuestHandler {
 
@@ -44,12 +42,10 @@ public class _28301PowerOn extends QuestHandler {
 			if (targetId == 799530) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1){
-					 playQuestMovie(env, 469);
-					 return sendQuestStartDialog(env);
-				}
-				else
+				} else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+					playQuestMovie(env, 469);
+					return sendQuestStartDialog(env);
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -69,8 +65,7 @@ public class _28301PowerOn extends QuestHandler {
 							targetId = ((Npc) env.getVisibleObject()).getNpcId();
 							Npc npc = (Npc) env.getVisibleObject();
 							npc.getController().onDelete();
-							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700978, npc.getX(), npc.getY(),
-								npc.getZ(), (byte) 0);
+							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700978, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 							qs.setQuestVarById(0, var + 1);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
@@ -78,8 +73,7 @@ public class _28301PowerOn extends QuestHandler {
 					default:
 						return sendQuestEndDialog(env);
 				}
-			}
-			else if (targetId == 730374 && var == 7) {
+			} else if (targetId == 730374 && var == 7) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
@@ -92,8 +86,7 @@ public class _28301PowerOn extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799530) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -108,4 +101,3 @@ public class _28301PowerOn extends QuestHandler {
 		return false;
 	}
 }
-

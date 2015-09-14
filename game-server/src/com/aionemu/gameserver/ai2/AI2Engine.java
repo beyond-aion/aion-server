@@ -52,11 +52,9 @@ public class AI2Engine implements GameEngine {
 			scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
 			log.info("Loaded " + aiMap.size() + " ai handlers.");
 			validateScripts();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new GameServerError("Can't initialize ai handlers.", e);
-		}
-		finally {
+		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
@@ -76,12 +74,10 @@ public class AI2Engine implements GameEngine {
 				scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
 				log.info("Loaded " + aiMap.size() + " ai handlers.");
 				validateScripts();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				throw new GameServerError("Can't initialize AI2 handlers.", e);
 			}
-		}
-		catch (Exception e1) {
+		} catch (Exception e1) {
 			throw new GameServerError("Can't reload AI2 engine.", e1);
 		}
 		if (scriptManager != null) {
@@ -115,8 +111,7 @@ public class AI2Engine implements GameEngine {
 			if (AIConfig.ONCREATE_DEBUG) {
 				aiInstance.setLogging(true);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("[AI2] AI factory error: " + name, e);
 		}
 		return aiInstance;
@@ -135,8 +130,7 @@ public class AI2Engine implements GameEngine {
 		for (String name : npcAINames) {
 			try {
 				aiMap.get(name).newInstance();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.error("[AI2] AI factory error: " + name, e);
 			}
 		}

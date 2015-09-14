@@ -8,8 +8,7 @@ import java.util.Set;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 
 /**
- * This class is holding opcodes for all server packets. It's used only to have
- * all opcodes in one place
+ * This class is holding opcodes for all server packets. It's used only to have all opcodes in one place
  *
  * @author Luno, alexa026, ATracer, avol, orz, cura
  */
@@ -69,7 +68,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_QUESTION_WINDOW.class, 0x34, idSet);
 		addPacketOpcode(SM_ATTACK.class, 0x36, idSet);
 		addPacketOpcode(SM_MOVE.class, 0x37, idSet);
-		addPacketOpcode(SM_HEADING_UPDATE.class, 0x39, idSet);//TODO! not used
+		addPacketOpcode(SM_HEADING_UPDATE.class, 0x39, idSet);// TODO! not used
 		addPacketOpcode(SM_TRANSFORM.class, 0x3A, idSet);
 		addPacketOpcode(SM_DIALOG_WINDOW.class, 0x3C, idSet);
 		addPacketOpcode(SM_SELL_ITEM.class, 0x3E, idSet);
@@ -98,11 +97,11 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_GROUP_MEMBER_INFO.class, 0x5B, idSet);
 		addPacketOpcode(SM_QUIT_RESPONSE.class, 0x62, idSet);
 		addPacketOpcode(SM_CHAT_WINDOW.class, 0x63, idSet);// 2.1
-		addPacketOpcode(SM_PET.class, 0x65, idSet); //2.7
-		addPacketOpcode(SM_ITEM_COOLDOWN.class, 0x67, idSet); //2.7
+		addPacketOpcode(SM_PET.class, 0x65, idSet); // 2.7
+		addPacketOpcode(SM_ITEM_COOLDOWN.class, 0x67, idSet); // 2.7
 		addPacketOpcode(SM_UPDATE_NOTE.class, 0x68, idSet);
 		addPacketOpcode(SM_PLAY_MOVIE.class, 0x69, idSet);
-		addPacketOpcode(SM_LEGION_INFO.class, 0x6E, idSet); //2.7
+		addPacketOpcode(SM_LEGION_INFO.class, 0x6E, idSet); // 2.7
 		addPacketOpcode(SM_LEGION_ADD_MEMBER.class, 0x6F, idSet);
 		addPacketOpcode(SM_LEGION_LEAVE_MEMBER.class, 0x70, idSet);
 		addPacketOpcode(SM_LEGION_UPDATE_MEMBER.class, 0x71, idSet);
@@ -110,7 +109,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_HOUSE_REGISTRY.class, 0x74, idSet);
 		addPacketOpcode(SM_LEGION_UPDATE_SELF_INTRO.class, 0x77, idSet);
 		addPacketOpcode(SM_INSTANCE_SCORE.class, 0x79, idSet);
-		//addPacketOpcode(SM_RIFT_STATUS.class, 0x8C, idSet);
+		// addPacketOpcode(SM_RIFT_STATUS.class, 0x8C, idSet);
 		addPacketOpcode(SM_AUTO_GROUP.class, 0x7A, idSet);
 		addPacketOpcode(SM_QUEST_COMPLETED_LIST.class, 0x7B, idSet);
 		addPacketOpcode(SM_QUEST_ACTION.class, 0x7C, idSet);
@@ -173,7 +172,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_FORCED_MOVE.class, 0xC3, idSet);
 		addPacketOpcode(SM_TELEPORT_MAP.class, 0xC4, idSet);
 		addPacketOpcode(SM_USE_OBJECT.class, 0xC5, idSet);
-		//TODO! 0xC6 format: d - oid, cdd - smth related to SM_NPC_INFO
+		// TODO! 0xC6 format: d - oid, cdd - smth related to SM_NPC_INFO
 		addPacketOpcode(SM_L2AUTH_LOGIN_CHECK.class, 0xC7, idSet);
 		addPacketOpcode(SM_CHARACTER_LIST.class, 0xC8, idSet);
 		addPacketOpcode(SM_CREATE_CHARACTER.class, 0xC9, idSet);
@@ -190,7 +189,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_LEGION_SEND_EMBLEM.class, 0xD5, idSet);
 		addPacketOpcode(SM_LEGION_SEND_EMBLEM_DATA.class, 0xD6, idSet);
 		addPacketOpcode(SM_LEGION_UPDATE_EMBLEM.class, 0xD7, idSet);
-		//TODO! 0xD8 format: ccc time milis: d time milis: d
+		// TODO! 0xD8 format: ccc time milis: d time milis: d
 		addPacketOpcode(SM_SHIELD_EFFECT.class, 0xDA, idSet);
 		addPacketOpcode(SM_ABYSS_ARTIFACT_INFO3.class, 0xDC, idSet);
 		addPacketOpcode(SM_FRIEND_RESPONSE.class, 0xDE, idSet);
@@ -253,14 +252,14 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet);
 		addPacketOpcode(SM_ATREIAN_PASSPORT.class, 0x12B, idSet);
 		addPacketOpcode(SM_CUSTOM_PACKET.class, 99999, idSet); // fake packet
-		
-		//Unknow packet
+
+		// Unknow packet
 		addPacketOpcode(SM_AFTER_TIME_CHECK_4_7_5.class, 0x124, idSet);
 		addPacketOpcode(SM_AFTER_SIEGE_LOCINFO_475.class, 0x125, idSet);
-		
+
 		// ////////////////////// TODO ///////////////////////
 		/*
-		 *	addPacketOpcode(SM_UNK_4_5.class, 0x123, idSet);
+		 * addPacketOpcode(SM_UNK_4_5.class, 0x123, idSet);
 		 */
 
 		// Unrecognized Opcodes from 1.5.4:

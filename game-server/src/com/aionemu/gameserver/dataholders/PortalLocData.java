@@ -15,26 +15,23 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
 
 /**
- *
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "portalLoc"
-})
+@XmlType(name = "", propOrder = { "portalLoc" })
 @XmlRootElement(name = "portal_locs")
 public class PortalLocData {
 
-    @XmlElement(name = "portal_loc")
-    protected List<PortalLoc> portalLoc;
+	@XmlElement(name = "portal_loc")
+	protected List<PortalLoc> portalLoc;
 
 	@XmlTransient
 	private TIntObjectHashMap<PortalLoc> portalLocs = new TIntObjectHashMap<PortalLoc>();
-	
+
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (PortalLoc loc : portalLoc) {
 			portalLocs.put(loc.getLocId(), loc);
-			
+
 		}
 		portalLoc.clear();
 		portalLoc = null;
@@ -44,8 +41,8 @@ public class PortalLocData {
 		return portalLocs.size();
 	}
 
-    public PortalLoc getPortalLoc(int locId) {
-        return portalLocs.get(locId);
-    }
+	public PortalLoc getPortalLoc(int locId) {
+		return portalLocs.get(locId);
+	}
 
 }

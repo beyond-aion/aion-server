@@ -32,13 +32,14 @@ public class QuestStartAction extends AbstractItemAction {
 		QuestState qs = player.getQuestStateList().getQuestState(questid);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat())
 			return true;
-		
+
 		else if (qs.getStatus() != QuestStatus.COMPLETE)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST);
-		
+
 		else if (!qs.canRepeat())
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(DataManager.QUEST_DATA.getQuestById(questid).getName()));
-		
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(DataManager.QUEST_DATA.getQuestById(questid).getName()));
+
 		return false;
 	}
 

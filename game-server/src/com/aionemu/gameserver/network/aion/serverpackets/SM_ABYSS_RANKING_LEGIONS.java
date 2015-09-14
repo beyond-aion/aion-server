@@ -18,7 +18,7 @@ public class SM_ABYSS_RANKING_LEGIONS extends AionServerPacket {
 	private Race race;
 	private int updateTime;
 	private int sendData = 0;
-	
+
 	public SM_ABYSS_RANKING_LEGIONS(int updateTime, ArrayList<AbyssRankingResult> data, Race race) {
 		this.updateTime = updateTime;
 		this.data = data;

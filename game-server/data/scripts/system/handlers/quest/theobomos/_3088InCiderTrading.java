@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _3088InCiderTrading extends QuestHandler {
 
@@ -36,130 +34,110 @@ public class _3088InCiderTrading extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 798202) { 
+			if (targetId == 798202) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798202) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 0) {
+					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_ACTION_1012) {
-					if(player.getInventory().getItemCountByItemId(160003020) >= 1)
+				} else if (dialog == DialogAction.SELECT_ACTION_1012) {
+					if (player.getInventory().getItemCountByItemId(160003020) >= 1)
 						return sendQuestDialog(env, 1012);
 					else
 						return sendQuestDialog(env, 1267);
-				}
-				else if (dialog == DialogAction.SELECT_ACTION_1097) {
-					if(player.getInventory().getItemCountByItemId(160003020) >= 10)
+				} else if (dialog == DialogAction.SELECT_ACTION_1097) {
+					if (player.getInventory().getItemCountByItemId(160003020) >= 10)
 						return sendQuestDialog(env, 1097);
 					else
 						return sendQuestDialog(env, 1267);
-				}
-				else if (dialog == DialogAction.SELECT_ACTION_1182) {
-					if(player.getInventory().getItemCountByItemId(160003020) >= 100)
+				} else if (dialog == DialogAction.SELECT_ACTION_1182) {
+					if (player.getInventory().getItemCountByItemId(160003020) >= 100)
 						return sendQuestDialog(env, 1182);
 					else
 						return sendQuestDialog(env, 1267);
-				}
-				else if (dialog == DialogAction.SELECT_ACTION_1011) {
+				} else if (dialog == DialogAction.SELECT_ACTION_1011) {
 					return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialog == DialogAction.SETPRO1) {
 					player.getInventory().decreaseByItemId(160003020, 1);
 					return sendQuestDialog(env, 1352);
-				}
-				else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialog == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 0, 2);
-				}
-				else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialog == DialogAction.SETPRO3) {
 					player.getInventory().decreaseByItemId(160003020, 10);
 					return sendQuestDialog(env, 2034);
-				}
-				else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialog == DialogAction.SETPRO4) {
 					return defaultCloseDialog(env, 0, 4);
-				}
-				else if (dialog == DialogAction.SETPRO7) {
+				} else if (dialog == DialogAction.SETPRO7) {
 					player.getInventory().decreaseByItemId(160003020, 100);
 					return sendQuestDialog(env, 3398);
-				}
-				else if (dialog == DialogAction.SETPRO8) {
+				} else if (dialog == DialogAction.SETPRO8) {
 					return defaultCloseDialog(env, 0, 8);
 				}
 			}
 			if (targetId == 798201) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 2) {
+					if (qs.getQuestVarById(0) == 2) {
 						return sendQuestDialog(env, 1693);
 					}
-					if(qs.getQuestVarById(0) == 5) {
+					if (qs.getQuestVarById(0) == 5) {
 						return sendQuestDialog(env, 2716);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO6) {
+				} else if (dialog == DialogAction.SETPRO6) {
 					return defaultCloseDialog(env, 5, 6);
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 2, 2, true, true);
 				}
 			}
 			if (targetId == 798204) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 4) {
+					if (qs.getQuestVarById(0) == 4) {
 						return sendQuestDialog(env, 2375);
 					}
-				}
-				else if (dialog == DialogAction.SETPRO5) {
+				} else if (dialog == DialogAction.SETPRO5) {
 					return defaultCloseDialog(env, 4, 5);
 				}
 			}
 			if (targetId == 798132) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 6) {
+					if (qs.getQuestVarById(0) == 6) {
 						return sendQuestDialog(env, 3057);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 6, 6, true, true);
 				}
 			}
 			if (targetId == 798166) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if(qs.getQuestVarById(0) == 8) {
-						if(player.getInventory().getItemCountByItemId(182208064) >= 1)
+					if (qs.getQuestVarById(0) == 8) {
+						if (player.getInventory().getItemCountByItemId(182208064) >= 1)
 							return sendQuestDialog(env, 3739);
 					}
-				}
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					player.getInventory().decreaseByItemId(182208064, 1);
 					return defaultCloseDialog(env, 8, 8, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798201 && qs.getQuestVarById(0) == 2) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				}
 				return sendQuestEndDialog(env);
-			}
-			else if (targetId == 798132 && qs.getQuestVarById(0) == 6) {
+			} else if (targetId == 798132 && qs.getQuestVarById(0) == 6) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				}
 				return sendQuestEndDialog(env, 1);
-			}
-			else if (targetId == 798166 && qs.getQuestVarById(0) == 8) {
+			} else if (targetId == 798166 && qs.getQuestVarById(0) == 8) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.house;
 
-
 /**
  * @author Rolandas
  * @modified Neon

@@ -6,38 +6,34 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="ContributionReward")
-public class ContributionReward
-{
-  @XmlAttribute(name="item_count", required=true)
-  protected int itemCount;
+@XmlType(name = "ContributionReward")
+public class ContributionReward {
 
-  @XmlAttribute(name="reward_id", required=true)
-  protected int rewardId;
+	@XmlAttribute(name = "item_count", required = true)
+	protected int itemCount;
 
-  @XmlAttribute(required=true)
-  protected int number;
+	@XmlAttribute(name = "reward_id", required = true)
+	protected int rewardId;
 
-  @XmlAttribute(required=true)
-  protected int rank;
+	@XmlAttribute(required = true)
+	protected int number;
 
-  public int getItemCount()
-  {
-    return this.itemCount;
-  }
+	@XmlAttribute(required = true)
+	protected int rank;
 
-  public int getRewardId()
-  {
-    return this.rewardId;
-  }
+	public int getItemCount() {
+		return this.itemCount;
+	}
 
-  public int getNumber()
-  {
-    return this.number;
-  }
+	public int getRewardId() {
+		return this.rewardId;
+	}
 
-  public int getRank()
-  {
-    return this.rank;
-  }
+	public int getNumber() {
+		return this.number;
+	}
+
+	public int getRank() {
+		return this.rank;
+	}
 }

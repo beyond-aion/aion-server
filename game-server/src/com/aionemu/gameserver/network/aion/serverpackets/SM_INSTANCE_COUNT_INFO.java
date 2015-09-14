@@ -4,7 +4,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- *
  * @author xTz
  */
 public class SM_INSTANCE_COUNT_INFO extends AionServerPacket {

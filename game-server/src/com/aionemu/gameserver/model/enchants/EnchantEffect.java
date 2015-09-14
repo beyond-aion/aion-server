@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
 /**
- *
  * @author xTz
  */
 public class EnchantEffect implements StatOwner {
@@ -22,7 +21,7 @@ public class EnchantEffect implements StatOwner {
 	public EnchantEffect(Item item, Player player, List<EnchantStat> enchantStats) {
 		Long itemSlot = item.getEquipmentSlot();
 		for (EnchantStat enchantStat : enchantStats) {
-			switch(enchantStat.getStat()) {
+			switch (enchantStat.getStat()) {
 				case PHYSICAL_ATTACK:
 				case MAGICAL_ATTACK:
 					StatEnum stat = null;
@@ -36,7 +35,7 @@ public class EnchantEffect implements StatOwner {
 					if (itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() || itemSlot == ItemSlot.MAIN_OR_SUB.getSlotIdMask())
 						functions.add(new StatAddFunction(enchantStat.getStat(), enchantStat.getValue(), false));
 					break;
-				default :
+				default:
 					functions.add(new StatAddFunction(enchantStat.getStat(), enchantStat.getValue(), false));
 					break;
 			}

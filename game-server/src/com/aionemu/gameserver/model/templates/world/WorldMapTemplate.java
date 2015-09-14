@@ -124,6 +124,7 @@ public class WorldMapTemplate {
 	public WorldDropType getWorldDropType() {
 		return dropWorldType;
 	}
+
 	/* Default zone attributes for the map */
 
 	public boolean isFly() {

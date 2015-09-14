@@ -19,7 +19,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- *
  * @author xTz
  */
 @AIName("illusion_maseter_sharik")
@@ -37,8 +36,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 		WorldPosition p = getPosition();
 		if (p.getX() == 738.065f && p.getY() == 311.606f) {
 			position = 1;
-		}
-		else {
+		} else {
 			position = 2;
 		}
 	}
@@ -68,8 +66,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401136);
 				if (position == 1) {
 					spawn(730446, 738.766f, 317.482f, 911.897f, (byte) 0, 5);
-				}
-				else {
+				} else {
 					spawn(730447, 735.909f, 265.696f, 911.897f, (byte) 0, 278);
 				}
 				startPhaseTask();
@@ -84,8 +81,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
-				}
-				else {
+				} else {
 					sendMsg(1401114);
 					SkillEngine.getInstance().getSkill(getOwner(), 19981, 46, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -134,8 +130,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 		NpcShoutsService.getInstance().sendMsg(getOwner(), 1401137);
 		if (position == 1) {
 			spawn(217425, 736.21704f, 270.8546f, 910.678f, (byte) 53);
-		}
-		else {
+		} else {
 			spawn(217425, 738.065f, 311.606f, 910.678f, (byte) 53);
 		}
 		AI2Actions.deleteOwner(this);

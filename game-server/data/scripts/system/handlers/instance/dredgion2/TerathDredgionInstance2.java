@@ -12,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- *
  * @author xTz
  */
 @InstanceID(300440000)
@@ -24,8 +23,8 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 			sp(730558, 415.034f, 174.004f, 433.940f, (byte) 0, 34, 720000);
 			sp(730559, 572.038f, 185.252f, 433.940f, (byte) 0, 10, 720000);
 			sendMsgByRace(1401424, Race.PC_ALL, 720000);
-		if (Rnd.get(1, 100) < 21) {
-			sp(219265, 476.63f, 312.16f, 402.89807f, (byte) 97, 720000, "5540A84BAD08498B96C315281F6418D0BD825175");
+			if (Rnd.get(1, 100) < 21) {
+				sp(219265, 476.63f, 312.16f, 402.89807f, (byte) 97, 720000, "5540A84BAD08498B96C315281F6418D0BD825175");
 			}
 			if (Rnd.get(1, 100) < 21) {
 				sp(219266, 485.403f, 596.602f, 390.944f, (byte) 90, 720000);
@@ -34,7 +33,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				sp(219333, 486.26382f, 906.011f, 405.24463f, (byte) 90, 720000);
 			}
 			if (Rnd.get(1, 100) < 51) {
-				switch(Rnd.get(2)) {
+				switch (Rnd.get(2)) {
 					case 0:
 						spawn(219255, 421.89111f, 285.20471f, 409.7311f, (byte) 80);
 						break;
@@ -43,7 +42,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 						break;
 				}
 			}
-			int spawnTime = Rnd.get(10,15) * 60 * 1000 + 120000;
+			int spawnTime = Rnd.get(10, 15) * 60 * 1000 + 120000;
 			sendMsgByRace(1401417, Race.PC_ALL, spawnTime);
 			sp(219270, 484.664f, 314.207f, 403.715f, (byte) 30, spawnTime);
 			startInstanceTask();
@@ -55,7 +54,8 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 701454);
 		for (Player player : instance.getPlayersInside()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481), new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481),
+				new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
 		}
 		if (++surkanKills == 5) {
 			spawn(219264, 485.423f, 808.826f, 416.868f, (byte) 30);
@@ -120,8 +120,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				sendMsgByRace(1401419, Race.PC_ALL, 0);
 				if (race.equals(Race.ASMODIANS)) {
 					spawn(730563, 496.178f, 761.770f, 390.805f, (byte) 0, 186);
-				}
-				else {
+				} else {
 					spawn(730562, 473.759f, 761.864f, 390.805f, (byte) 0, 33);
 				}
 				return;

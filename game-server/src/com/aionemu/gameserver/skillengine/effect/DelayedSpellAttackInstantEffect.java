@@ -20,26 +20,30 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 
 	@XmlAttribute
 	protected int delay;
-	
+
 	@Override
 	public void applyEffect(final Effect effect) {
 		int skillLvl = effect.getSkillLevel();
 		int valueWithDelta = value + delta * skillLvl;
 
-		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true);//ignores shields on retail
+		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true);// ignores shields on retail
 		final int finalPosition = this.position;
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				effect.getEffected().getController().onAttack(effect.getEffector(), effect.getSkillId(), TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true, LOG.DELAYEDSPELLATKINSTANT);
+				effect
+					.getEffected()
+					.getController()
+					.onAttack(effect.getEffector(), effect.getSkillId(), TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
+						LOG.DELAYEDSPELLATKINSTANT);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 			}
 		}, delay);
 	}
-	
+
 	@Override
 	public void calculateDamage(Effect effect) {
-		
+
 	}
 }

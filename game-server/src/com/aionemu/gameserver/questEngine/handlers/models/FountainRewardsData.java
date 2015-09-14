@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.FountainRewards;
+
 /**
  * @author Bobobear
  */
@@ -21,7 +22,7 @@ public class FountainRewardsData extends XMLQuest {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-	FountainRewards template = new FountainRewards(id, startNpcIds);
-	questEngine.addQuestHandler(template);
+		FountainRewards template = new FountainRewards(id, startNpcIds);
+		questEngine.addQuestHandler(template);
 	}
 }

@@ -43,8 +43,7 @@ public final class ThreadPoolManager {
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		instantPool.prestartAllCoreThreads();
 
-		scheduledPool = new ScheduledThreadPoolExecutor(Math.max(1, ThreadConfig.EXTRA_THREAD_PER_CORE)
-			* Runtime.getRuntime().availableProcessors());
+		scheduledPool = new ScheduledThreadPoolExecutor(Math.max(1, ThreadConfig.EXTRA_THREAD_PER_CORE) * Runtime.getRuntime().availableProcessors());
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
 
@@ -53,8 +52,7 @@ public final class ThreadPoolManager {
 		longRunningPool.prestartAllCoreThreads();
 
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
-		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory,
-			new ThreadUncaughtExceptionHandler(), true);
+		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, new ThreadUncaughtExceptionHandler(), true);
 		forkJoinThreadFactory.setDefaultPool(workStealingPool);
 
 		Thread maintainThread = new Thread(new Runnable() {
@@ -68,8 +66,8 @@ public final class ThreadPoolManager {
 		maintainThread.setDaemon(true);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
 
-		log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize()
-			+ " instant, " + longRunningPool.getPoolSize() + " long running, and forking " + workStealingPool.getPoolSize() + " thread(s).");
+		log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize() + " instant, "
+			+ longRunningPool.getPoolSize() + " long running, and forking " + workStealingPool.getPoolSize() + " thread(s).");
 	}
 
 	private long validate(long delay) {
@@ -165,8 +163,7 @@ public final class ThreadPoolManager {
 			scheduledPool.setContinueExistingPeriodicTasksAfterShutdownPolicy(false);
 
 			success |= awaitTermination(10000);
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 

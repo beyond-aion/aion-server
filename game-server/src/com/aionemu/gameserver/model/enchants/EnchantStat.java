@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
 /**
- *
  * @author xTz
  */
 @XmlType(name = "enchant_stat")
@@ -27,6 +26,5 @@ public class EnchantStat {
 	public int getValue() {
 		return value;
 	}
-	
-	
+
 }

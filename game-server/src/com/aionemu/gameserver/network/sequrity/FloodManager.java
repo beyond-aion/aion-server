@@ -14,11 +14,17 @@ import org.slf4j.LoggerFactory;
  * @author NB4L1
  */
 public final class FloodManager {
+
 	public static enum ErrorMode {
-		INVALID_OPCODE, BUFFER_UNDER_FLOW, BUFFER_OVER_FLOW, FAILED_READING, FAILED_RUNNING;
+		INVALID_OPCODE,
+		BUFFER_UNDER_FLOW,
+		BUFFER_OVER_FLOW,
+		FAILED_READING,
+		FAILED_RUNNING;
 	}
 
 	public static final class FloodFilter {
+
 		private final int _warnLimit;
 		private final int _rejectLimit;
 		private final int _tickLimit;
@@ -43,6 +49,7 @@ public final class FloodManager {
 	}
 
 	private final class LogEntry {
+
 		private final short[] _ticks = new short[_tickAmount];
 
 		private int _lastTick = getCurrentTick();
@@ -99,7 +106,9 @@ public final class FloodManager {
 	}
 
 	public static enum Result {
-		ACCEPTED, WARNED, REJECTED;
+		ACCEPTED,
+		WARNED,
+		REJECTED;
 
 		public static Result max(final Result r1, final Result r2) {
 			if (r1.ordinal() > r2.ordinal())
@@ -134,6 +143,7 @@ public final class FloodManager {
 		_tickAmount = max;
 
 		NetFlusher.add(new Runnable() {
+
 			@Override
 			public void run() {
 				flush();

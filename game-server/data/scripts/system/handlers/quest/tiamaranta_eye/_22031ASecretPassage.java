@@ -10,15 +10,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 /**
  * @author Cheatkiller
- *
  */
 public class _22031ASecretPassage extends QuestHandler {
 
 	private final static int questId = 22031;
-	
+
 	public _22031ASecretPassage() {
 		super(questId);
 	}
@@ -30,7 +28,7 @@ public class _22031ASecretPassage extends QuestHandler {
 		qe.registerQuestNpc(205959).addOnTalkEvent(questId);
 		qe.registerQuestNpc(206233).addOnAtDistanceEvent(questId);
 	}
-	
+
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -42,25 +40,22 @@ public class _22031ASecretPassage extends QuestHandler {
 			if (targetId == 205959) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env, 182212601, 1);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205959) { 
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 205959) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
@@ -78,18 +73,18 @@ public class _22031ASecretPassage extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-  		int var = qs.getQuestVarById(0);
-  		if(var == 1)
-  			changeQuestStep(env, 1, 1, true);
-  		return true;
-  		
-  	}
+			int var = qs.getQuestVarById(0);
+			if (var == 1)
+				changeQuestStep(env, 1, 1, true);
+			return true;
+
+		}
 		return false;
 	}
 }

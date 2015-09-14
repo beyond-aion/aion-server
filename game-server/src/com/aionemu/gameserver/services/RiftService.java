@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +38,7 @@ public class RiftService {
 	public void initRiftLocations() {
 		if (CustomConfig.RIFT_ENABLED) {
 			locations = DataManager.RIFT_DATA.getRiftLocations();
-		}
-		else {
+		} else {
 			locations = Collections.emptyMap();
 		}
 	}
@@ -59,8 +57,7 @@ public class RiftService {
 	public boolean isValidId(int id) {
 		if (isRift(id)) {
 			return RiftService.getInstance().getRiftLocations().keySet().contains(id);
-		}
-		else {
+		} else {
 			for (RiftLocation loc : RiftService.getInstance().getRiftLocations().values()) {
 				if (loc.getWorldId() == id) {
 					return true;
@@ -86,8 +83,7 @@ public class RiftService {
 					RiftInformer.sendRiftsInfo(rift.getWorldId());
 					return true;
 				}
-			}
-			else {
+			} else {
 				boolean opened = false;
 				for (RiftLocation rift : getRiftLocations().values()) {
 					if (rift.getWorldId() == id && rift.getSpawned().isEmpty()) {
@@ -112,8 +108,7 @@ public class RiftService {
 					closeRift(rift);
 					return true;
 				}
-			}
-			else {
+			} else {
 				boolean opened = false;
 				for (RiftLocation rift : getRiftLocations().values()) {
 					if (rift.getWorldId() == id && !rift.getSpawned().isEmpty()) {
@@ -152,7 +147,8 @@ public class RiftService {
 		// Despawn NPC
 		for (VisibleObject obj : location.getSpawned()) {
 			Npc spawned = (Npc) obj;
-            if(spawned == null) continue;
+			if (spawned == null)
+				continue;
 			spawned.setDespawnDelayed(true);
 			if (spawned.getAggroList().getList().isEmpty()) {
 				spawned.getController().cancelTask(TaskId.RESPAWN);
@@ -173,8 +169,7 @@ public class RiftService {
 			}
 
 			activeRifts.clear();
-		}
-		finally {
+		} finally {
 			closing.unlock();
 		}
 	}

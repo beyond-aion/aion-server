@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.world.exceptions;
 
 /**
- * This Exception will be thrown when some object is referencing to World map that do not exist. This Exception
- * indicating serious error.
+ * This Exception will be thrown when some object is referencing to World map that do not exist. This Exception indicating serious error.
  * 
  * @author -Nemesiss-
  */

@@ -48,8 +48,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			if (!tPlayer.getRace().equals(player.getRace())) {
 				if (!tPlayer.isEnemyFrom(player))
 					return false;
-			}
-			else if (tPlayer.getController().isDueling(player)) {
+			} else if (tPlayer.getController().isDueling(player)) {
 				if (skill.getSkillTemplate().getProperties().getTargetRelation() != TargetRelationAttribute.ENEMY) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
 					return false;
@@ -62,16 +61,14 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.checkNonTargetAOE())
 			return false;
-		
-		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect()
-			&& !skill.checkNonTargetAOE()) {
+
+		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.checkNonTargetAOE()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
 			return false;
 		}
-		
-		//cant resurrect non players and non dead
-		if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || 
-			!((Creature)target).getLifeStats().isAlreadyDead()))
+
+		// cant resurrect non players and non dead
+		if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || !((Creature) target).getLifeStats().isAlreadyDead()))
 			return false;
 
 		if (!skill.getSkillTemplate().hasEvadeEffect()) {
@@ -119,7 +116,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if ((!player.canAttack()) && !template.hasEvadeEffect())
 			return false;
 
-		//in 3.0 players can use remove shock even when silenced
+		// in 3.0 players can use remove shock even when silenced
 		if (template.getType() == SkillType.MAGICAL && player.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && !template.hasEvadeEffect()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_MAGIC_SKILL_WHILE_SILENCED);
 			return false;
@@ -129,18 +126,17 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_PHYSICAL_SKILL_IN_FEAR);
 			return false;
 		}
-			
 
 		if (player.isSkillDisabled(template))
 			return false;
 
-		//cannot use skills while transformed
+		// cannot use skills while transformed
 		if (player.getTransformModel().isActive()) {
 			if (player.getTransformModel().getBanUseSkills() == 1) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE);
 				return false;
 			}
-			//can use only panel skills in FORM1
+			// can use only panel skills in FORM1
 			if (player.getTransformModel().getType() == TransformType.FORM1) {
 				SkillPanel panel = DataManager.PANEL_SKILL_DATA.getSkillPanel(player.getTransformModel().getPanelId());
 				if (panel == null || !panel.isSkillPresent(skill.getSkillId())) {
@@ -149,21 +145,20 @@ public class PlayerRestrictions extends AbstractRestrictions {
 				}
 			}
 		}
-		
+
 		// Fix for Summon Group Member, cannot be used while either caster or summoned is actively in combat
-		//example skillId: 1606
+		// example skillId: 1606
 		if (skill.getSkillTemplate().hasRecallInstant()) {
 			if (!(target instanceof Player))
 				return false;
-			if (player.getController().isInCombat() || 
-				((Player) target).getController().isInCombat() ||
-				((Player) target).getTransformModel().getRes1() == 1)//cannot be summoned while transformed
+			if (player.getController().isInCombat() || ((Player) target).getController().isInCombat()
+				|| ((Player) target).getTransformModel().getRes1() == 1)// cannot be summoned while transformed
 			{
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANNOT_ACCEPT_EFFECT(target.getName()));
 				return false;
 			}
 		}
-		
+
 		if (template.hasResurrectEffect()) {
 			if (!(target instanceof Player)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
@@ -186,48 +181,37 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (group != null && group.isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER);
 			return false;
-		}
-		else if (group != null && !player.getObjectId().equals(group.getLeader().getObjectId())) {
+		} else if (group != null && !player.getObjectId().equals(group.getLeader().getObjectId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ONLY_LEADER_CAN_INVITE);
 			return false;
-		}
-		else if (target == null) {
+		} else if (target == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_NO_USER_TO_INVITE);
 			return false;
-		}
-		else if (target.getRace() != player.getRace() && !GroupConfig.GROUP_INVITEOTHERFACTION) {
+		} else if (target.getRace() != player.getRace() && !GroupConfig.GROUP_INVITEOTHERFACTION) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE);
 			return false;
-		}
-		else if (target.sameObjectId(player.getObjectId())) {
+		} else if (target.sameObjectId(player.getObjectId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CAN_NOT_INVITE_SELF);
 			return false;
-		}
-		else if (target.getLifeStats().isAlreadyDead()) {
+		} else if (target.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD);
 			return false;
-		}
-		else if (player.getLifeStats().isAlreadyDead()) {
+		} else if (player.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD);
 			return false;
-		}
-		else if (player.isInGroup2() && target.isInGroup2()
-			&& player.getPlayerGroup2().getTeamId() == target.getPlayerGroup2().getTeamId()) {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
-		}
-		else if (target.isInGroup2()) {
+		} else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId() == target.getPlayerGroup2().getTeamId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
+		} else if (target.isInGroup2()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OTHER_PARTY(target.getName()));
 			return false;
-		}
-		else if (target.isInAlliance2()) {
+		} else if (target.isInAlliance2()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ALREADY_OTHER_FORCE(target.getName()));
 			return false;
 		}
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean canInviteToAlliance(Player player, Player target) {
 		if (target == null) {
@@ -235,8 +219,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		if (target.getRace() != player.getRace()
-			&& !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
+		if (target.getRace() != player.getRace() && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE);
 			return false;
 		}
@@ -245,11 +228,9 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (target.isInAlliance2()) {
 			if (target.getPlayerAlliance2() == alliance) {
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_IS_ALREADY_MEMBER_OF_OUR_ALLIANCE(target.getName()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_IS_ALREADY_MEMBER_OF_OUR_ALLIANCE(target.getName()));
 				return false;
-			}
-			else {
+			} else {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ALREADY_OTHER_FORCE(target.getName()));
 				return false;
 			}
@@ -308,11 +289,11 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie())
 			return false;
 
-		//cannot attack while transformed
+		// cannot attack while transformed
 		if (player.getTransformModel().getRes3() == 1) {
 			return false;
 		}
-		
+
 		return player.isEnemy(creature);
 	}
 
@@ -356,23 +337,23 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (player.getLifeStats().isAboutToDie())
 			return false;
-		
+
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_WHILE_IN_ABNORMAL_STATE);
 			return false;
 		}
-		
-		//cannot use item while transformed
+
+		// cannot use item while transformed
 		if (player.getTransformModel().getRes5() == 1) {
-			//client sends message by itself
+			// client sends message by itself
 			return false;
 		}
-		
+
 		if (player.getStore() != null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE);
 			return false;
 		}
-		
+
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
 			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_GENDER);
@@ -393,8 +374,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
 					return false;
 				}
-			}
-			else if (restriction != null && !player.isInsideItemUseZone(restriction)) {
+			} else if (restriction != null && !player.isInsideItemUseZone(restriction)) {
 				// You cannot use that item here.
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
 				return false;
@@ -402,7 +382,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canChangeEquip(Player player) {
 		if (player.getController().isUnderStance()) {
@@ -415,7 +395,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canFly(Player player) {
 		if (player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
@@ -429,32 +409,32 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY);
 			return false;
 		}
-		//cannot fly in transform
+		// cannot fly in transform
 		if (player.getTransformModel().getRes6() == 1) {
-			//client sends message itself?
+			// client sends message itself?
 			return false;
 		}
-		//cannot fly while private store is active
+		// cannot fly while private store is active
 		if (player.getStore() != null)
 			return false;
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean canGlide(Player player) {
-		//cannot glide in transform
+		// cannot glide in transform
 		if (player.getTransformModel().getRes6() == 1) {
-			//client sends message itself?
+			// client sends message itself?
 			return false;
 		}
-		//cannot glide while private store is active
+		// cannot glide while private store is active
 		if (player.getStore() != null)
-				return false;
-		
+			return false;
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean canPrivateStore(Player player) {
 		if (player.isFlying())
@@ -464,8 +444,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player.isInState(CreatureState.RESTING)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 }

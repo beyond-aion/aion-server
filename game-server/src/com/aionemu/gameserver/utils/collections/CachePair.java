@@ -42,5 +42,5 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
 	public String toString() {
 		return key + ": " + value;
 	}
-	
+
 }

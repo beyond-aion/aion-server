@@ -14,24 +14,19 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Ritsu
  */
 @AIName("shugodelightedadmirer")
-public class ShugoDelightedAdmirerAI2 extends NpcAI2 
-{
+public class ShugoDelightedAdmirerAI2 extends NpcAI2 {
 
 	@Override
-	protected void handleDialogStart(Player player)
-	{
+	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex)
-	{
+	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		int instanceId = player.getInstanceId();
-		
-		if (dialogId == 10001) 
-		{
-			switch (getNpcId()) 
-			{
+
+		if (dialogId == 10001) {
+			switch (getNpcId()) {
 				case 831114:
 				case 831306:
 					skillId = player.getRace() == Race.ASMODIANS ? 21104 : 21095;
@@ -44,12 +39,9 @@ public class ShugoDelightedAdmirerAI2 extends NpcAI2
 					break;
 			}
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
-		}
-		else if (dialogId == 10000) 
-		{
+		} else if (dialogId == 10000) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			switch (getNpcId()) 
-			{
+			switch (getNpcId()) {
 				case 831114:
 				case 831306:
 					TeleportService2.teleportTo(player, 300560000, instanceId, 346.27332f, 424.07101f, 294.75793f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);

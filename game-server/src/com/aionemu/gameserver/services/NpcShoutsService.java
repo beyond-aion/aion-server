@@ -48,7 +48,7 @@ public class NpcShoutsService {
 			final List<NpcShout> shouts = shoutsCache.getNpcShouts(worldId, npcId, ShoutEventType.IDLE, null, 0);
 			if (shouts.size() == 0)
 				continue;
-			
+
 			int defaultPollDelay = Rnd.get(180, 360) * 1000;
 			for (NpcShout shout : shouts) {
 				if (shout.getPollDelay() != 0 && shout.getPollDelay() < defaultPollDelay)
@@ -56,6 +56,7 @@ public class NpcShoutsService {
 			}
 
 			ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 				@Override
 				public void run() {
 					AionObject npcObj = World.getInstance().findVisibleObject(objectId);
@@ -66,8 +67,7 @@ public class NpcShoutsService {
 							return;
 						int randomShout = Rnd.get(shouts.size());
 						NpcShout shout = shouts.get(randomShout);
-						if (shout.getPattern() != null && 
-							!((AITemplate)npc2.getAi2()).onPatternShout(ShoutEventType.IDLE, shout.getPattern(), 0)) {
+						if (shout.getPattern() != null && !((AITemplate) npc2.getAi2()).onPatternShout(ShoutEventType.IDLE, shout.getPattern(), 0)) {
 							return;
 						}
 						Iterator<Player> iter = npc2.getKnownList().getKnownPlayers().values().iterator();
@@ -93,19 +93,16 @@ public class NpcShoutsService {
 					if (delaySeconds == -1) {
 						shout(owner, target, shout, nextDelay);
 						nextDelay += 5;
-					}
-					else {
+					} else {
 						shout(owner, target, shout, delaySeconds);
 						delaySeconds = -1;
 					}
 				}
-			}
-			else {
+			} else {
 				int randomShout = Rnd.get(shouts.size());
 				shout(owner, target, shouts.get(randomShout), delaySeconds);
 			}
-		}
-		else if (shouts.size() == 1)
+		} else if (shouts.size() == 1)
 			shout(owner, target, shouts.get(0), delaySeconds);
 	}
 
@@ -124,16 +121,14 @@ public class NpcShoutsService {
 			else if ("usernation".equals(param)) {
 				log.warn("Shout with param 'usernation' is not supported");
 				return;
-			}
-			else if ("usergender".equals(param))
+			} else if ("usergender".equals(param))
 				param = (902012 + player.getCommonData().getGender().getGenderId()) * 2 + 1;
 			else if ("mainslotitem".equals(param)) {
 				Item weapon = player.getEquipment().getMainHandWeapon();
 				if (weapon == null)
 					return;
 				param = weapon.getItemTemplate().getNameId();
-			}
-			else if ("quest".equals(shout.getPattern())) {
+			} else if ("quest".equals(shout.getPattern())) {
 				delaySeconds = 0;
 			}
 		}
@@ -148,7 +143,7 @@ public class NpcShoutsService {
 	public void sendMsg(Npc npc, int msg, int Obj, int color, int delay) {
 		sendMsg(npc, null, msg, Obj, false, color, delay);
 	}
-	
+
 	public void sendMsg(Npc npc, int msg, int Obj, boolean isShout, int color, int delay) {
 		sendMsg(npc, null, msg, Obj, isShout, color, delay);
 	}
@@ -183,13 +178,12 @@ public class NpcShoutsService {
 						}
 
 					});
-				}
-				else if (instance != null) {
+				} else if (instance != null) {
 					instance.doOnAllPlayers(new Visitor<Player>() {
 
 						@Override
 						public void visit(Player player) {
-							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(isShout, msg, Obj, color));	
+							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(isShout, msg, Obj, color));
 						}
 
 					});

@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author Cheatkiller
- *
  */
 @InstanceID(301290000)
 public class MirenBattleInstance extends MirenBattleInstance_L {
@@ -18,7 +17,7 @@ public class MirenBattleInstance extends MirenBattleInstance_L {
 	@Override
 	protected void spawnChests(Npc npc) {
 		if (!rewarded) {
-			rewarded = true; //safety mechanism
+			rewarded = true; // safety mechanism
 			spawn(702296, 575.6636f, 853.2475f, 199.37367f, (byte) 63);
 			spawn(702296, 571.56036f, 869.93604f, 199.37367f, (byte) 69);
 			spawn(702296, 560.082f, 882.97943f, 199.37367f, (byte) 76);

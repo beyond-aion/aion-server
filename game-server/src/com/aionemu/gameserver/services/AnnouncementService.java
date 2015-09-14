@@ -78,21 +78,20 @@ public class AnnouncementService {
 
 						if (announce.getFaction().equalsIgnoreCase("ALL"))
 							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", announce.getAnnounce(),
-									announce.getChatType()));
+								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", announce.getAnnounce(), announce.getChatType()));
 							else
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", "Announcement: "
-									+ announce.getAnnounce(), announce.getChatType()));
+								PacketSendUtility.sendPacket(player,
+									new SM_MESSAGE(1, "Announcement", "Announcement: " + announce.getAnnounce(), announce.getChatType()));
 						else if (announce.getFactionEnum() == player.getRace())
 							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1,
-									(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
-									announce.getAnnounce(), announce.getChatType()));
+								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian")
+									+ " Announcement", announce.getAnnounce(), announce.getChatType()));
 							else
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1,
-									(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
-									(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: "
-										+ announce.getAnnounce(), announce.getChatType()));
+								PacketSendUtility.sendPacket(
+									player,
+									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement", (announce
+										.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: " + announce.getAnnounce(), announce
+										.getChatType()));
 					}
 				}
 			}, announce.getDelay() * 1000, announce.getDelay() * 1000));

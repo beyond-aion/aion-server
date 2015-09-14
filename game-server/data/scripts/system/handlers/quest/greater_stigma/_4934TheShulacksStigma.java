@@ -67,7 +67,7 @@ public class _4934TheShulacksStigma extends QuestHandler {
 				case 204211: // Moreinen
 					if (var == 0) {
 						switch (env.getDialog()) {
-							// Get QUEST_SELECT in the eddit-HyperLinks.xml
+						// Get QUEST_SELECT in the eddit-HyperLinks.xml
 							case QUEST_SELECT:
 								// Send select1 to eddit-HtmlPages.xml
 								return sendQuestDialog(env, 1011);
@@ -83,7 +83,7 @@ public class _4934TheShulacksStigma extends QuestHandler {
 				case 204285:
 					if (var == 1) {
 						switch (env.getDialog()) {
-							// Get QUEST_SELECT in the eddit-HyperLinks.xml
+						// Get QUEST_SELECT in the eddit-HyperLinks.xml
 							case QUEST_SELECT:
 								// Send select1 to eddit-HtmlPages.xml
 								return sendQuestDialog(env, 1352);
@@ -94,10 +94,9 @@ public class _4934TheShulacksStigma extends QuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 								return true;
 						}
-					}
-					else if (var == 2) {
+					} else if (var == 2) {
 						switch (env.getDialog()) {
-							// Get QUEST_SELECT in the eddit-HyperLinks.xml
+						// Get QUEST_SELECT in the eddit-HyperLinks.xml
 							case QUEST_SELECT:
 								// Send select1 to eddit-HtmlPages.xml
 								return sendQuestDialog(env, 1693);
@@ -127,8 +126,7 @@ public class _4934TheShulacksStigma extends QuestHandler {
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204051) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

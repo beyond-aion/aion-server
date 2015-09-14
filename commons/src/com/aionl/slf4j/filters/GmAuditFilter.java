@@ -4,12 +4,10 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
 
-
 /**
  * @author zhkchi
- *
  */
-public class GmAuditFilter extends Filter<ILoggingEvent>{
+public class GmAuditFilter extends Filter<ILoggingEvent> {
 
 	/**
 	 * Decides what to do with logging event.<br>
@@ -17,8 +15,7 @@ public class GmAuditFilter extends Filter<ILoggingEvent>{
 	 * 
 	 * @param loggingEvent
 	 *          log event that is going to be filtred.
-	 * @return {@link org.apache.log4j.spi.Filter#ACCEPT} if admin command, {@link org.apache.log4j.spi.Filter#DENY}
-	 *         otherwise
+	 * @return {@link org.apache.log4j.spi.Filter#ACCEPT} if admin command, {@link org.apache.log4j.spi.Filter#DENY} otherwise
 	 */
 	@Override
 	public FilterReply decide(ILoggingEvent loggingEvent) {

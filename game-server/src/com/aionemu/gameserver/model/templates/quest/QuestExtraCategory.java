@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum QuestExtraCategory {
 	NONE,
 	COIN_QUEST,
-	DRACONIC_RECIPE_QUEST, //not use 3.9
+	DRACONIC_RECIPE_QUEST, // not use 3.9
 	DEVANION_QUEST,
 	GOLD_QUEST;
 

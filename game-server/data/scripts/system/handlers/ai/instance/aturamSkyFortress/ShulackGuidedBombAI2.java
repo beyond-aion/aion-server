@@ -15,11 +15,11 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- *
  * @author xTz
  */
 @AIName("shulack_guided_bomb")
 public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
+
 	private boolean isDestroyed;
 	private boolean isHome = true;
 	Future<?> task;
@@ -28,8 +28,8 @@ public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (task != null) {
-			task.cancel(true);				
-		}	
+			task.cancel(true);
+		}
 	}
 
 	@Override
@@ -68,11 +68,10 @@ public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead() && !isDestroyed) {
 					destroy(creature);
-				}
-				else {
+				} else {
 					if (task != null) {
 						task.cancel(true);
-					}	
+					}
 				}
 			}
 

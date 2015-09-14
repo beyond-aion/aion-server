@@ -18,6 +18,7 @@ public class GroupGate extends SummonedObject<Creature> {
 	public GroupGate(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(objId, controller, spawnTemplate, objectTemplate, (byte) 1);
 	}
+
 	/**
 	 * @return NpcObjectType.GROUPGATE
 	 */

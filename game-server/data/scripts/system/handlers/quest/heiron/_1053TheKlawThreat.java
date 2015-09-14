@@ -56,8 +56,7 @@ public class _1053TheKlawThreat extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204502)
 				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204583) {
@@ -106,16 +105,14 @@ public class _1053TheKlawThreat extends QuestHandler {
 
 		Npc npc = (Npc) env.getVisibleObject();
 		final int targetId = env.getTargetId();
-		
+
 		if (targetId == 700169 || targetId == 700209) {
 			int spawn = Rnd.get(5);
 			if (spawn == 1) {
-				QuestService.addNewSpawn(210040000, 1, 212120, npc.getX(), npc.getY(), npc.getZ(),
-					(byte) 0);
+				QuestService.addNewSpawn(210040000, 1, 212120, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 				return true;
 			}
-		}
-		else if (targetId == 212120 && qs.getQuestVarById(0) == 3) {
+		} else if (targetId == 212120 && qs.getQuestVarById(0) == 3) {
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
 		}

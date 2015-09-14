@@ -8,11 +8,10 @@ import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
 /**
  * @author ATracer
  */
-public class LoginPacketEncoder extends OneToOneEncoder
-{
+public class LoginPacketEncoder extends OneToOneEncoder {
+
 	@Override
-	protected Object encode(ChannelHandlerContext ctx, Channel arg1, Object arg2) throws Exception
-	{
+	protected Object encode(ChannelHandlerContext ctx, Channel arg1, Object arg2) throws Exception {
 		ChannelBuffer message = (ChannelBuffer) arg2;
 		int size = message.readableBytes();
 		message.setShort(0, (short) (size));

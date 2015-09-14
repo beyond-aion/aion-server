@@ -68,7 +68,7 @@ public class GsConnection extends AConnection {
 	 * @throws IOException
 	 */
 	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192*8, 8192*8);
+		super(sc, d, 8192 * 8, 8192 * 8);
 
 	}
 
@@ -111,7 +111,7 @@ public class GsConnection extends AConnection {
 	 */
 	@Override
 	protected final void onDisconnect() {
-		if(Config.ENABLE_PINGPONG)
+		if (Config.ENABLE_PINGPONG)
 			this.pingThread.closeMe();
 		log.info(this + " disconnected");
 		if (gameServerInfo != null) {
@@ -150,9 +150,8 @@ public class GsConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranted that closePacket will be sent before closing connection, but all past and future packets wont.
-	 * Connection will be closed [by Dispatcher Thread], and onDisconnect() method will be called to clear all other
-	 * things.
+	 * Its guaranted that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
 	 *          Packet that will be send before closing.
@@ -182,8 +181,8 @@ public class GsConnection extends AConnection {
 	 */
 	public void setState(State state) {
 		this.state = state;
-		if(state == State.AUTHED) {
-			if(Config.ENABLE_PINGPONG) {
+		if (state == State.AUTHED) {
+			if (Config.ENABLE_PINGPONG) {
 				ThreadPoolManager.getInstance().schedule(pingThread, 5000);
 			}
 		}
@@ -213,16 +212,15 @@ public class GsConnection extends AConnection {
 		sb.append("GameServer [ID:");
 		if (gameServerInfo != null) {
 			sb.append(gameServerInfo.getId());
-		}
-		else {
+		} else {
 			sb.append("null");
 		}
 		sb.append("] ").append(getIP());
 		return sb.toString();
 	}
-	
+
 	public void pong(int pid) {
-		if(Config.ENABLE_PINGPONG)
+		if (Config.ENABLE_PINGPONG)
 			this.pingThread.onResponse(pid);
 	}
 
@@ -232,7 +230,7 @@ public class GsConnection extends AConnection {
 		state = State.CONNECTED;
 		String ip = getIP();
 
-		if(Config.ENABLE_PINGPONG)
+		if (Config.ENABLE_PINGPONG)
 			pingThread = new PingPongThread(this);
 
 		log.info("Gameserver connection attemp from: " + ip);

@@ -29,6 +29,7 @@ public class InstanceCooltimeData {
 
 	private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<Integer, InstanceCooltime>();
 	private HashMap<Integer, Integer> syncIdToMapId = new HashMap<Integer, Integer>();
+
 	/**
 	 * @param u
 	 * @param parent
@@ -48,18 +49,17 @@ public class InstanceCooltimeData {
 	public InstanceCooltime getInstanceCooltimeByWorldId(int worldId) {
 		return instanceCooltimes.get(worldId);
 	}
-	
+
 	public int getInstanceMaxCountByWorldId(int worldId) {
 		return instanceCooltimes.get(worldId).getMaxCount() != 0 ? instanceCooltimes.get(worldId).getMaxCount() : 0;
 	}
-	
-	public int getWorldId(int syncId)
-	{
+
+	public int getWorldId(int syncId) {
 		if (!syncIdToMapId.containsKey(syncId))
 			return 0;
 		return syncIdToMapId.get(syncId);
 	}
-	
+
 	public long getInstanceEntranceCooltimeById(Player player, int syncId) {
 		if (!syncIdToMapId.containsKey(syncId))
 			return 0;
@@ -71,7 +71,7 @@ public class InstanceCooltimeData {
 		long instanceCoolTime = 0;
 		InstanceCooltime clt = getInstanceCooltimeByWorldId(worldId);
 		if (clt.getMaxCount() == 0)
-		   return 0;
+			return 0;
 		if (clt != null) {
 			instanceCoolTime = clt.getEntCoolTime();
 			if (clt.getCoolTimeType().isDaily()) {
@@ -80,18 +80,15 @@ public class InstanceCooltimeData {
 				if (now.isAfter(repeatDate)) {
 					repeatDate = repeatDate.plusHours(24);
 					instanceCoolTime = repeatDate.getMillis();
-				}
-				else {
+				} else {
 					instanceCoolTime = repeatDate.getMillis();
 				}
-			}
-			else if (clt.getCoolTimeType().isWeekly()) {
+			} else if (clt.getCoolTimeType().isWeekly()) {
 				String[] days = clt.getTypeValue().split(",");
 				instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
-			}
-			else {
-			   if (instanceCoolTime == 0) //unlimited entrance, no need to store
-				  return 0;
+			} else {
+				if (instanceCoolTime == 0) // unlimited entrance, no need to store
+					return 0;
 				instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
 			}
 		}
@@ -114,8 +111,7 @@ public class InstanceCooltimeData {
 				if (now.isBefore(repeatDate)) {
 					return repeatDate.getMillis();
 				}
-			}
-			else {
+			} else {
 				repeatDate = repeatDate.plusDays(day - curentDay);
 				return repeatDate.getMillis();
 			}
@@ -126,23 +122,17 @@ public class InstanceCooltimeData {
 	private int getDay(String day) {
 		if (day.equals("Mon")) {
 			return 1;
-		}
-		else if (day.equals("Tue")) {
+		} else if (day.equals("Tue")) {
 			return 2;
-		}
-		else if (day.equals("Wed")) {
+		} else if (day.equals("Wed")) {
 			return 3;
-		}
-		else if (day.equals("Thu")) {
+		} else if (day.equals("Thu")) {
 			return 4;
-		}
-		else if (day.equals("Fri")) {
+		} else if (day.equals("Fri")) {
 			return 5;
-		}
-		else if (day.equals("Sat")) {
+		} else if (day.equals("Sat")) {
 			return 6;
-		}
-		else if (day.equals("Sun")) {
+		} else if (day.equals("Sun")) {
 			return 7;
 		}
 		throw new IllegalArgumentException("Invalid Day: " + day);

@@ -9,11 +9,9 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-
 public class _10083AReianRecord extends QuestHandler {
 
 	private final static int questId = 10083;
-	
 
 	public _10083AReianRecord() {
 		super(questId);
@@ -27,7 +25,7 @@ public class _10083AReianRecord extends QuestHandler {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
 	}
-	
+
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 10082);
@@ -39,7 +37,7 @@ public class _10083AReianRecord extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 800535) {
 				switch (dialog) {
@@ -52,8 +50,7 @@ public class _10083AReianRecord extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			}
-			else if (targetId == 800538) { 
+			} else if (targetId == 800538) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 1) {
@@ -61,11 +58,10 @@ public class _10083AReianRecord extends QuestHandler {
 						}
 					}
 					case SETPRO2: {
-						return defaultCloseDialog(env, 1, 2); 
+						return defaultCloseDialog(env, 1, 2);
 					}
 				}
-			}
-			else if (targetId == 800540) { 
+			} else if (targetId == 800540) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 2) {
@@ -73,11 +69,10 @@ public class _10083AReianRecord extends QuestHandler {
 						}
 					}
 					case SETPRO3: {
-						return defaultCloseDialog(env, 2, 3); 
+						return defaultCloseDialog(env, 2, 3);
 					}
 				}
-			}
-			else if (targetId == 730709) { 
+			} else if (targetId == 730709) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 3) {
@@ -88,11 +83,10 @@ public class _10083AReianRecord extends QuestHandler {
 						Npc npc = (Npc) env.getVisibleObject();
 						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 230392, npc.getX() + 2, npc.getY() - 2, npc.getZ(), (byte) 0);
 						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 230391, npc.getX() - 2, npc.getY() + 2, npc.getZ(), (byte) 0);
-						return defaultCloseDialog(env, 3, 4); 
+						return defaultCloseDialog(env, 3, 4);
 					}
 				}
-			}
-			else if (targetId == 730710) { 
+			} else if (targetId == 730710) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (qs.getQuestVarById(0) == 4) {
@@ -101,17 +95,15 @@ public class _10083AReianRecord extends QuestHandler {
 					}
 					case SETPRO4: {
 						giveQuestItem(env, 182215236, 1);
-						return defaultCloseDialog(env, 4, 4, true, false); 
+						return defaultCloseDialog(env, 4, 4, true, false);
 					}
 				}
 			}
-		}
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800540) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					removeQuestItem(env, 182215236, 1);
 					return sendQuestEndDialog(env);
 				}

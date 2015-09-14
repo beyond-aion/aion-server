@@ -32,8 +32,7 @@ public class AddSet extends AdminCommand {
 		try {
 			itemSetId = Integer.parseInt(params[0]);
 			receiver = player;
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
@@ -43,13 +42,11 @@ public class AddSet extends AdminCommand {
 
 			try {
 				itemSetId = Integer.parseInt(params[1]);
-			}
-			catch (NumberFormatException ex) {
+			} catch (NumberFormatException ex) {
 
 				PacketSendUtility.sendMessage(player, "You must give number to itemset ID.");
 				return;
-			}
-			catch (Exception ex2) {
+			} catch (Exception ex2) {
 				PacketSendUtility.sendMessage(player, "Occurs an error.");
 				return;
 			}
@@ -62,8 +59,7 @@ public class AddSet extends AdminCommand {
 		}
 
 		if (receiver.getInventory().getFreeSlots() < itemSet.getItempart().size()) {
-			PacketSendUtility
-				.sendMessage(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
+			PacketSendUtility.sendMessage(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
 			return;
 		}
 

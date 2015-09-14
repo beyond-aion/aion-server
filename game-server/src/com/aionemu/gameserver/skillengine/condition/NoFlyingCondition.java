@@ -18,7 +18,7 @@ public class NoFlyingCondition extends Condition {
 	public boolean validate(Skill env) {
 		return (!env.getEffector().isFlying());
 	}
-	
+
 	@Override
 	public boolean validate(Effect effect) {
 		return (!effect.getEffected().isFlying());
