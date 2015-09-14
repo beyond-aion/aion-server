@@ -64,7 +64,7 @@ public class NpcShoutData {
 
 				FastMap<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(worldId);
 				if (worldShouts == null) {
-					worldShouts = FastMap.newInstance();
+					worldShouts = new FastMap<>();
 					this.shoutsByWorldNpcs.put(worldId, worldShouts);
 				}
 

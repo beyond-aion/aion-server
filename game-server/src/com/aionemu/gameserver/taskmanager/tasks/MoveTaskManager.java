@@ -1,7 +1,11 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
 import static com.aionemu.gameserver.taskmanager.parallel.ForEach.forEach;
-import javolution.util.FastList;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ForkJoinTask;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
@@ -10,8 +14,6 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 import com.google.common.base.Predicate;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ForkJoinTask;
 
 /**
  * @author ATracer
@@ -55,7 +57,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 
 	@Override
 	public void run() {
-		final FastList<Creature> copy = new FastList<>();
+		final FastTable<Creature> copy = new FastTable<>();
 		for (ConcurrentHashMap.Entry<Integer, Creature> e : movingCreatures.entrySet()) {
 			copy.add(e.getValue());
 		}

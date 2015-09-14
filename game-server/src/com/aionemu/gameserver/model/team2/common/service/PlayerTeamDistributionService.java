@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.team2.common.service;
 
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.AionObject;

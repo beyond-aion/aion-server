@@ -28,7 +28,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 
 	@Override
 	public FastMap<Byte, List<IGItem>> loadInGameShopItems() {
-		FastMap<Byte, List<IGItem>> items = FastMap.newInstance();
+		FastMap<Byte, List<IGItem>> items = new FastMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				try (ResultSet rset = stmt.executeQuery()) {

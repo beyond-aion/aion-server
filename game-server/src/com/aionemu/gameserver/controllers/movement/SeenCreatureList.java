@@ -14,7 +14,7 @@ public class SeenCreatureList {
 	
 	public boolean add(Creature creature) {
 		if (seenCreatures == null)
-			seenCreatures = FastMap.newInstance();
+			seenCreatures = new FastMap<>();
 		return seenCreatures.putIfAbsent(creature.getObjectId(), creature) == null;
 	}
 	

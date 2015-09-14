@@ -6,7 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +66,7 @@ public class AionConnection extends AConnection {
 	/**
 	 * Server Packet "to send" Queue
 	 */
-	private final FastList<AionServerPacket> sendMsgQueue = new FastList<AionServerPacket>();
+	private final FastTable<AionServerPacket> sendMsgQueue = new FastTable<AionServerPacket>();
 
 	/**
 	 * Current state of this connection

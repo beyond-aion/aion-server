@@ -3,7 +3,7 @@ package com.aionemu.gameserver.services.transfers;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 
@@ -158,7 +158,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		}
         // read items data
 		int cnt = readD();
-		FastList<String> itemOut = FastList.newInstance();
+		FastTable<String> itemOut = new FastTable<>();
 		for (int a = 0; a < cnt; a++) { // inventory
 			int objIdOld = readD();
 			int itemId = readD();
@@ -182,7 +182,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int optFusion = readD();
 
 			int charge = readD();
-			FastList<int[]> manastones = FastList.newInstance(), fusions = FastList.newInstance();
+			FastTable<int[]> manastones = new FastTable<>(), fusions = new FastTable<>();
 			byte len = readSC();
 			for (byte b = 0; b < len; b++) {
 				manastones.add(new int[] { readD(), readD() });
@@ -222,13 +222,13 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
 					}
-					FastList.recycle(manastones);
+		
 				}
 				if (fusions.size() > 0) {
 					for (int[] stone : fusions) {
 						ItemSocketService.addFusionStone(item, stone[0], stone[1]);
 					}
-					FastList.recycle(fusions);
+		
 				}
 				if (godstone != 0) {
 					item.addGodStone(godstone);
@@ -268,7 +268,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int optFusion = readD();
 
 			int charge = readD();
-			FastList<int[]> manastones = FastList.newInstance(), fusions = FastList.newInstance();
+			FastTable<int[]> manastones = new FastTable<>(), fusions = new FastTable<>();
 			byte len = readSC();
 			for (byte b = 0; b < len; b++) {
 				manastones.add(new int[] { readD(), readD() });
@@ -310,13 +310,13 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
 					}
-					FastList.recycle(manastones);
+		
 				}
 				if (fusions.size() > 0) {
 					for (int[] stone : fusions) {
 						ItemSocketService.addFusionStone(item, stone[0], stone[1]);
 					}
-					FastList.recycle(fusions);
+		
 				}
 				if (godstone != 0) {
 					item.addGodStone(godstone);
@@ -336,7 +336,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		for (String s : itemOut)
 			textLog.info(s);
 
-		FastList.recycle(itemOut);
+
         // read data
 		cnt = readD();
 		textLog.info("EmotionList:" + cnt);

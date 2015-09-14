@@ -1,10 +1,10 @@
 package instance.rakes;
 
-import com.aionemu.commons.utils.Rnd;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;

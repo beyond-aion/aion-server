@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -398,7 +398,7 @@ public abstract class EffectTemplate {
 		EffectTemplate firstEffect = effect.effectInPos(1);
 		if (this.getPosition() > 1) {
 			if (Rnd.get(0, 100) < this.getPreEffectProb()) {
-				FastList<Integer> positions = getPreEffects();
+				FastTable<Integer> positions = getPreEffects();
 				int successCount = 0;
 				for (int pos : positions) {
 					if (effect.isInSuccessEffects(pos)) {
@@ -459,8 +459,8 @@ public abstract class EffectTemplate {
 		return effectConditions != null ? effectConditions.validate(effect) : true;
 	}
 
-	private FastList<Integer> getPreEffects() {
-		FastList<Integer> preEffects = new FastList<Integer>();
+	private FastTable<Integer> getPreEffects() {
+		FastTable<Integer> preEffects = new FastTable<Integer>();
 		
 		if (this.getPreEffect() == null)
 			return preEffects;

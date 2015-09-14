@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.model.drop;
 
-import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.DropConfig;
-import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +11,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.DropConfig;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author MrPoke

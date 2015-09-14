@@ -1,18 +1,22 @@
 package com.aionemu.gameserver.dataholders;
 
-import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
-import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+
+import javolution.util.FastMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
+import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 
 /**
  * @author Ranastic

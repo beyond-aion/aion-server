@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -19,7 +19,7 @@ public class ExMaterials {
 
 	public List<Material> getMaterial() {
 		if (material == null) {
-			material = FastList.newInstance();
+			material = new FastTable<>();
 		}
 		return this.material;
 	}

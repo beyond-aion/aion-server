@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,8 +25,8 @@ import com.aionemu.gameserver.model.instance.instanceposition.HarmonyInstancePos
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreInfo;
 import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
 import com.aionemu.gameserver.network.aion.instanceinfo.DisciplineScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -38,7 +38,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	private Map<Integer, Boolean> positions = new HashMap<Integer, Boolean>();
-	private FastList<Integer> zones = new FastList<Integer>();
+	private FastTable<Integer> zones = new FastTable<Integer>();
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;

@@ -4,10 +4,11 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.sort;
 import static ch.lambdaj.Lambda.sum;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import java.util.ArrayList;
 
 /**
  *
@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class HarmonyArenaReward extends PvPArenaReward{
 
-	private FastList<HarmonyGroupReward> groups = new FastList<>();
+	private FastTable<HarmonyGroupReward> groups = new FastTable<>();
 	public HarmonyArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
 		super(mapId, instanceId, instance);
 	}
@@ -53,8 +53,8 @@ public class HarmonyArenaReward extends PvPArenaReward{
 		return harmonyGroups;
 	}
 
-	public FastList<Player> getPlayersInside(HarmonyGroupReward group) {
-		FastList<Player> players = new FastList<>();
+	public FastTable<Player> getPlayersInside(HarmonyGroupReward group) {
+		FastTable<Player> players = new FastTable<>();
 		for (Player playerInside : instance.getPlayersInside()) {
 			if (group.containPlayer(playerInside.getObjectId())) {
 				players.add(playerInside);
@@ -67,7 +67,7 @@ public class HarmonyArenaReward extends PvPArenaReward{
 		groups.add(reward);
 	}
 
-	public FastList<HarmonyGroupReward> getGroups() {
+	public FastTable<HarmonyGroupReward> getGroups() {
 		return groups;
 	}
 

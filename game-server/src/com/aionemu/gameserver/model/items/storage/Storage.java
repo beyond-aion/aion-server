@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -255,7 +255,7 @@ public abstract class Storage implements IStorage {
 	}
 
 	boolean decreaseByItemId(int itemId, long count, QuestStatus questStatus, Player actor) {
-		FastList<Item> items = itemStorage.getItemsById(itemId);
+		FastTable<Item> items = itemStorage.getItemsById(itemId);
 		if (items.size() == 0)
 			return false;
 
@@ -266,7 +266,7 @@ public abstract class Storage implements IStorage {
 			count = decreaseItemCount(item, count, ItemUpdateType.DEC_ITEM_USE, questStatus, actor);
 		}
 
-		FastList.recycle(items);
+
 		return count == 0;
 	}
 
@@ -296,8 +296,8 @@ public abstract class Storage implements IStorage {
 	}
 
 	@Override
-	public FastList<Item> getItemsWithKinah() {
-		FastList<Item> items = this.itemStorage.getItems();
+	public FastTable<Item> getItemsWithKinah() {
+		FastTable<Item> items = this.itemStorage.getItems();
 		if (this.kinahItem != null) {
 			items.add(this.kinahItem);
 		}
@@ -326,7 +326,7 @@ public abstract class Storage implements IStorage {
 
 	@Override
 	public long getItemCountByItemId(int itemId) {
-		FastList<Item> temp = this.itemStorage.getItemsById(itemId);
+		FastTable<Item> temp = this.itemStorage.getItemsById(itemId);
 		if (temp.size() == 0)
 			return 0;
 

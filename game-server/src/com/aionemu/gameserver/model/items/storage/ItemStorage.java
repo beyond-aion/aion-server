@@ -8,8 +8,8 @@ import static org.hamcrest.Matchers.lessThan;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 
@@ -29,11 +29,11 @@ public class ItemStorage {
 		this.limit = storageType.getLimit();
 		this.specialLimit = storageType.getSpecialLimit();
 		this.storageType = storageType;
-		this.items = FastMap.newInstance();
+		this.items = new FastMap<>();
 	}
 
-	public FastList<Item> getItems() {
-		FastList<Item> temp = FastList.newInstance();
+	public FastTable<Item> getItems() {
+		FastTable<Item> temp = new FastTable<>();
 		temp.addAll(items.values());
 		return temp;
 	}
@@ -64,8 +64,8 @@ public class ItemStorage {
 		return null;
 	}
 
-	public FastList<Item> getItemsById(int itemId) {
-		FastList<Item> temp = FastList.newInstance();
+	public FastTable<Item> getItemsById(int itemId) {
+		FastTable<Item> temp = new FastTable<>();
 		for (Item item : items.values()) {
 			if (item.getItemTemplate().getTemplateId() == itemId) {
 				temp.add(item);

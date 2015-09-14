@@ -160,7 +160,7 @@ public class VortexLocation implements ZoneHandler {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		if (creature instanceof Kisk) {
 			if (creature.getRace().equals(getInvadersRace())) {
-				kisks.putEntry(creature.getObjectId(), (Kisk) creature);
+				kisks.put(creature.getObjectId(), (Kisk) creature);
 			}
 		}
 		else if (creature instanceof Player) {
@@ -171,7 +171,7 @@ public class VortexLocation implements ZoneHandler {
 //			}
 
 			if (!players.containsKey(player.getObjectId())) {
-				players.putEntry(player.getObjectId(), player);
+				players.put(player.getObjectId(), player);
 
 				if (isActive()) {
 					if (player.getRace().equals(getInvadersRace())) {

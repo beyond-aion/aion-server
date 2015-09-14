@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
@@ -24,13 +24,13 @@ public class RecipeData {
 	@XmlElement(name = "recipe_template")
 	protected List<RecipeTemplate> list;
 	private TIntObjectHashMap<RecipeTemplate> recipeData;
-	private FastList<RecipeTemplate> elyos, asmos, any;
+	private FastTable<RecipeTemplate> elyos, asmos, any;
 	
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		recipeData = new TIntObjectHashMap<RecipeTemplate>();
-		elyos = FastList.newInstance();
-		asmos = FastList.newInstance();
-		any = FastList.newInstance();
+		elyos = new FastTable<>();
+		asmos = new FastTable<>();
+		any = new FastTable<>();
 		for (RecipeTemplate it : list) {
 			recipeData.put(it.getId(), it);
 			if (it.getAutoLearn() == 0)
@@ -51,8 +51,8 @@ public class RecipeData {
 		list = null;
 	}
 	
-	public FastList<RecipeTemplate> getAutolearnRecipes(Race race, int skillId, int maxLevel) {
-		FastList<RecipeTemplate> list = FastList.newInstance();
+	public FastTable<RecipeTemplate> getAutolearnRecipes(Race race, int skillId, int maxLevel) {
+		FastTable<RecipeTemplate> list = new FastTable<>();
 		switch(race) {
 			case ASMODIANS:
 				for(RecipeTemplate recipe : asmos)

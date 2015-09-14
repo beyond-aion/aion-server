@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -21,7 +22,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer, KKnD

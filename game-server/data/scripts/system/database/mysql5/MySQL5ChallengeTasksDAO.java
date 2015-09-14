@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import com.aionemu.gameserver.model.challenge.ChallengeTask;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeType;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ViAl

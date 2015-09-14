@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import org.apache.commons.lang3.mutable.MutableInt;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.IronWallFrontPlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import org.apache.commons.lang3.mutable.MutableInt;
 
 /**
  *

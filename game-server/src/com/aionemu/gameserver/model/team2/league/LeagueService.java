@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.team2.league;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,7 +25,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Preconditions;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer

@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.team2.alliance.events;
 
 import java.util.Collection;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceMember;
@@ -14,7 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author ATracer

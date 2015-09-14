@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -1020,7 +1020,7 @@ public class LegionService {
 		if (legion == null)
 			return;
 
-		FastList<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
+		FastTable<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 		allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 		try {
 			/**

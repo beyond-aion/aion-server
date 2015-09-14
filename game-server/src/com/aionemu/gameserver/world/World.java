@@ -5,8 +5,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,6 @@ import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 import com.aionemu.gameserver.world.exceptions.NotSetPositionException;
 import com.aionemu.gameserver.world.exceptions.WorldMapNotExistException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * World object for storing and spawning, despawning etc players and other in-game objects. It also manage WorldMaps and
@@ -62,7 +62,7 @@ public class World {
 	/**
 	 * Container with all Npcs related to base spawns
 	 */
-	private final ConcurrentHashMap<Integer, FastList<Npc>> baseNpc;
+	private final ConcurrentHashMap<Integer, FastTable<Npc>> baseNpc;
 
 	/**
 	 * Container with all Npcs in the world
@@ -122,7 +122,7 @@ public class World {
 					else {
 						// We now have multi-threaded siege timers
 						// This should be thread-safe
-						npcs = new FastList<SiegeNpc>().shared();
+						npcs = new FastTable<SiegeNpc>().shared();
 						localSiegeNpcs.put(siegeNpc.getSiegeId(), npcs);
 					}
 				}
@@ -135,7 +135,7 @@ public class World {
 			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
 			int baseId = bst.getId();
 			if (!baseNpc.containsKey(baseId)) {
-				baseNpc.put(baseId, new FastList<Npc>());
+				baseNpc.put(baseId, new FastTable<Npc>());
 			}
 			baseNpc.get(baseId).add((Npc) object);
 		}
@@ -191,7 +191,7 @@ public class World {
 		return result != null ? result : Collections.<SiegeNpc> emptySet();
 	}
 
-	public FastList<Npc> getBaseSpawns(int baseId) {
+	public FastTable<Npc> getBaseSpawns(int baseId) {
 		return baseNpc.get(baseId);
 	}
 

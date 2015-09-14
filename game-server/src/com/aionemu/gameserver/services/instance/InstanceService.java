@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +43,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
-	private static final FastList<Integer> instanceAggro = new FastList<Integer>();
-	private static final FastList<Integer> instanceCoolDownFilter = new FastList<Integer>();
+	private static final FastTable<Integer> instanceAggro = new FastTable<Integer>();
+	private static final FastTable<Integer> instanceCoolDownFilter = new FastTable<Integer>();
 	private static final int SOLO_INSTANCES_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {

@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,8 +11,6 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Sarynth, xTz

@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import javolution.util.FastSet;
@@ -38,7 +39,6 @@ import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * World map instance object.

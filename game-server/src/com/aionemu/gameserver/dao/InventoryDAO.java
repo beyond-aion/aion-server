@@ -3,7 +3,7 @@ package com.aionemu.gameserver.dao;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -49,7 +49,7 @@ public abstract class InventoryDAO implements IDFactoryAwareDAO {
 	 * @param item
 	 */
 	public boolean store(Item item, Integer playerId, Integer accountId, Integer legionId){
-		FastList<Item> temp = FastList.newInstance();
+		FastTable<Item> temp = new FastTable<>();
 		temp.add(item);
 		return store(temp, playerId, accountId, legionId);
 	}

@@ -3,6 +3,9 @@ package com.aionemu.gameserver.model.autogroup;
 import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
+import static org.hamcrest.Matchers.equalTo;
+
+import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,10 +14,6 @@ import com.aionemu.gameserver.model.team2.TeamType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
-
-import java.util.List;
-
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  *

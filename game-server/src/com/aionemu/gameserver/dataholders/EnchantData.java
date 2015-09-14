@@ -1,18 +1,20 @@
 package com.aionemu.gameserver.dataholders;
 
-import com.aionemu.gameserver.model.enchants.EnchantTemplateData;
-import com.aionemu.gameserver.model.enchants.EnchantList;
-import com.aionemu.gameserver.model.enchants.EnchantStat;
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.aionemu.gameserver.model.enchants.EnchantList;
+import com.aionemu.gameserver.model.enchants.EnchantStat;
+import com.aionemu.gameserver.model.enchants.EnchantTemplateData;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
  *

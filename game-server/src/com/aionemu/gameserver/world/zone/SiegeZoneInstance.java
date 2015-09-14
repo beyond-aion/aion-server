@@ -50,7 +50,7 @@ public class SiegeZoneInstance extends ZoneInstance {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (FastMap.Entry<Integer, Player> e = players.head(), mapEnd = players.tail(); (e = e.getNext()) != mapEnd;) {
+			for (FastMap.Entry<Integer, Player> e : players.entrySet()) {
 				Player player = e.getValue();
 				if (player != null) {
 					visitor.visit(player);

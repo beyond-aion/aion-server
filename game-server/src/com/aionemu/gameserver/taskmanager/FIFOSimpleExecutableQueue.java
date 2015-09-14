@@ -2,14 +2,14 @@ package com.aionemu.gameserver.taskmanager;
 
 import java.util.Collection;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 /**
  * @author NB4L1
  */
 public abstract class FIFOSimpleExecutableQueue<T> extends FIFOExecutableQueue {
 
-	private final FastList<T> queue = new FastList<T>();
+	private final FastTable<T> queue = new FastTable<T>();
 
 	public final void execute(T t) {
 		synchronized (queue) {

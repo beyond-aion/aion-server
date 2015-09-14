@@ -34,27 +34,16 @@ public class RemoveCd extends AdminCommand {
 		if (target instanceof Player) {
 			Player player = (Player) target;
 			if (params.length == 0) {
-				List<Integer> delayIds = new ArrayList<Integer>();
 				if (player.getSkillCoolDowns() != null) {
 					long currentTime = System.currentTimeMillis();
 					for (Entry<Integer, Long> en : player.getSkillCoolDowns().entrySet())
-						delayIds.add(en.getKey());
-
-					for (Integer delayId : delayIds)
-						player.setSkillCoolDown(delayId, currentTime);
-
-					delayIds.clear();
+						player.setSkillCoolDown(en.getKey(), currentTime);
 					PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player.getSkillCoolDowns()));
 				}
 
 				if (player.getItemCoolDowns() != null) {
 					for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet())
-						delayIds.add(en.getKey());
-
-					for (Integer delayId : delayIds)
-						player.addItemCoolDown(delayId, 0, 0);
-
-					delayIds.clear();
+						player.addItemCoolDown(en.getKey(), 0, 0);
 					PacketSendUtility.sendPacket(player, new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
 				}
 
@@ -75,8 +64,7 @@ public class RemoveCd extends AdminCommand {
 					PacketSendUtility.sendMessage(admin, "You have removed cooldowns of player: " + player.getName());
 					PacketSendUtility.sendMessage(player, "Your cooldowns were removed by admin");
 				}
-			}
-			else if (params[0].contains("instance")) {
+			} else if (params[0].contains("instance")) {
 				if (player.getPortalCooldownList() == null || player.getPortalCooldownList().getPortalCoolDowns() == null)
 					return;
 				if (params.length >= 2) {
@@ -92,17 +80,14 @@ public class RemoveCd extends AdminCommand {
 						if (player.equals(admin))
 							PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed");
 						else {
-							PacketSendUtility
-								.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
+							PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
 							PacketSendUtility.sendMessage(player, "Your instance cooldowns were removed by admin");
 						}
-					}
-					else {
+					} else {
 						int worldId = 0;
 						try {
 							worldId = Integer.parseInt(params[1]);
-						}
-						catch (NumberFormatException e) {
+						} catch (NumberFormatException e) {
 							PacketSendUtility.sendMessage(admin, "WorldId has to be integer or use \"all\"");
 							return;
 						}
@@ -113,22 +98,17 @@ public class RemoveCd extends AdminCommand {
 							if (player.equals(admin))
 								PacketSendUtility.sendMessage(admin, "Your instance cooldown worldId: " + worldId + " was removed");
 							else {
-								PacketSendUtility.sendMessage(admin, "You have removed instance cooldown worldId: " + worldId
-									+ " of player: " + player.getName());
-								PacketSendUtility.sendMessage(player, "Your instance cooldown worldId: " + worldId
-									+ " was removed by admin");
+								PacketSendUtility.sendMessage(admin, "You have removed instance cooldown worldId: " + worldId + " of player: " + player.getName());
+								PacketSendUtility.sendMessage(player, "Your instance cooldown worldId: " + worldId + " was removed by admin");
 							}
-						}
-						else
+						} else
 							PacketSendUtility.sendMessage(admin, "You or your target can enter given instance");
 
 					}
-				}
-				else
+				} else
 					PacketSendUtility.sendMessage(admin, "syntax: //removecd instance <all|worldId>");
 			}
-		}
-		else
+		} else
 			PacketSendUtility.sendMessage(admin, "Only players are allowed as target");
 	}
 }

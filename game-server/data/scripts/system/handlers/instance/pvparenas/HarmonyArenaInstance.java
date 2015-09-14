@@ -2,6 +2,8 @@ package instance.pvparenas;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.Objects;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -36,7 +38,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import java.util.Objects;
 
 /**
  *

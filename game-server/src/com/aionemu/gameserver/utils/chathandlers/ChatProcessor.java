@@ -125,7 +125,8 @@ public class ChatProcessor implements GameEngine {
 	public void reload() {
 		ScriptManager tmpSM;
 		final ChatProcessor adminCP;
-		Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>(commands);
+		Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>();
+		backupCommands.putAll(commands);
 		commands.clear();
 		loadException = null;
 

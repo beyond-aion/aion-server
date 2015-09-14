@@ -2,8 +2,8 @@ package com.aionemu.gameserver.spawnengine;
 
 import java.util.HashSet;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
  */
 public class TemporarySpawnEngine {
 
-	private static final FastList<SpawnGroup2> temporarySpawns = new FastList<SpawnGroup2>();
+	private static final FastTable<SpawnGroup2> temporarySpawns = new FastTable<SpawnGroup2>();
 	private static final FastMap<SpawnGroup2, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<SpawnGroup2, HashSet<Integer>>();
 
 	public static void spawnAll() {

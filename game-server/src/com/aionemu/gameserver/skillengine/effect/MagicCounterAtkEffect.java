@@ -14,8 +14,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 
 /**
  * @author ViAl

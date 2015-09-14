@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.services.base.Base;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Source

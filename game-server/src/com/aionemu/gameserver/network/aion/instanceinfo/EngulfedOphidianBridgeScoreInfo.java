@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
+import java.nio.ByteBuffer;
+
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
 import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridgePlayerReward;
-import java.nio.ByteBuffer;
 
 /**
  *

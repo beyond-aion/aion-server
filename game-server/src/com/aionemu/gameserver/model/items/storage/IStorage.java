@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.items.storage;
 import java.util.List;
 import java.util.Queue;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -168,7 +168,7 @@ public interface IStorage {
 	/**
 	 * @return
 	 */
-	FastList<Item> getItemsWithKinah();
+	FastTable<Item> getItemsWithKinah();
 
 	/**
 	 * @return

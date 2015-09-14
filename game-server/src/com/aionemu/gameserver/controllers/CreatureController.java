@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
@@ -42,8 +43,6 @@ import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class is for controlling Creatures [npc's, players etc]

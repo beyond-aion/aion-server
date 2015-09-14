@@ -2,6 +2,7 @@ package com.aionemu.gameserver.world.container;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Container for storing Players by objectId and name.

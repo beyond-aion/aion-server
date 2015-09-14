@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +33,7 @@ public class AnnouncementService {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
 
-	private Collection<Announcement> announcements;
+	private FastSet<Announcement> announcements = new FastSet<Announcement>().shared();
 	private List<Future<?>> delays = new ArrayList<Future<?>>();
 
 	private AnnouncementService() {
@@ -65,7 +64,8 @@ public class AnnouncementService {
 	 * Load the announcements system
 	 */
 	private void load() {
-		announcements = new FastSet<Announcement>(getDAO().getAnnouncements()).shared();
+		announcements.clear();
+		announcements.addAll(getDAO().getAnnouncements());
 
 		for (final Announcement announce : announcements) {
 			delays.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {

@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -235,8 +235,8 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 	@Override
 	public boolean store(HouseRegistry registry, int playerId) {
-		FastList<HouseObject<?>> objects = registry.getObjects();
-		FastList<HouseDecoration> decors = registry.getAllParts();
+		FastTable<HouseObject<?>> objects = registry.getObjects();
+		FastTable<HouseDecoration> decors = registry.getAllParts();
 		Collection<HouseObject<?>> objectsToAdd = Collections2.filter(objects, objectsToAddPredicate);
 		Collection<HouseObject<?>> objectsToUpdate = Collections2.filter(objects, objectsToUpdatePredicate);
 		Collection<HouseObject<?>> objectsToDelete = Collections2.filter(objects, objectsToDeletePredicate);

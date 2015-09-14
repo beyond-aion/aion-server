@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
 public class DisputeLandService {
 
 	private boolean active;
-	private FastList<Integer> worlds = new FastList<Integer>();
+	private FastTable<Integer> worlds = new FastTable<Integer>();
 	private static final int chance = CustomConfig.DISPUTE_RND_CHANCE;
 	private static final String rnd = CustomConfig.DISPUTE_RND_SCHEDULE;
 	private static final String fxd = CustomConfig.DISPUTE_FXD_SCHEDULE;

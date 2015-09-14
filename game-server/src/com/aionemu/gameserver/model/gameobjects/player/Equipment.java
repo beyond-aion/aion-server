@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -631,8 +631,8 @@ public class Equipment {
 	/**
 	 * @return List<Item>
 	 */
-	public FastList<Item> getEquippedItemsWithoutStigma() {
-		FastList<Item> equippedItems = FastList.newInstance();
+	public FastTable<Item> getEquippedItemsWithoutStigma() {
+		FastTable<Item> equippedItems = new FastTable<>();
 		List<Item> twoHanded = new ArrayList<Item>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
@@ -652,8 +652,8 @@ public class Equipment {
 	/**
 	 * @return List<Item>
 	 */
-	public FastList<Item> getEquippedForApparence() {
-		FastList<Item> equippedItems = FastList.newInstance();
+	public FastTable<Item> getEquippedForApparence() {
+		FastTable<Item> equippedItems = new FastTable<>();
 		List<Item> twoHanded = new ArrayList<Item>();
 		for (Item item : equipment.values()) {
 			long slot = item.getEquipmentSlot();

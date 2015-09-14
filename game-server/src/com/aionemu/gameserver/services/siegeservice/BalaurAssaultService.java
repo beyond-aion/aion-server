@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -162,7 +162,7 @@ public class BalaurAssaultService {
 
 	public void spawnDredgion(int spawnId) {
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
-		FastList<AssembledNpcPart> assembledPatrs = new FastList<AssembledNpcPart>();
+		FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
 			assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}

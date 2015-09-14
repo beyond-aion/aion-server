@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastMap;
+import java.util.Map.Entry;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -53,7 +53,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                     writeD(p.getObjectId());
                     writeH(cooldownList.size());
 
-                    for (FastMap.Entry<Integer, PortalCooldown> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end;) {
+                    for (Entry<Integer, PortalCooldown> e : cooldownList.getPortalCoolDowns().entrySet()) {
                         writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                         writeD(0x00);
                         writeD((int) (e.getValue().getReuseTime() - System.currentTimeMillis()) / 1000);
@@ -68,7 +68,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                 writeD(player.getObjectId());
                 writeH(cooldownList.size());
 
-                for (FastMap.Entry<Integer, PortalCooldown> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end;) {
+                for (Entry<Integer, PortalCooldown> e : cooldownList.getPortalCoolDowns().entrySet()) {
                     writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                     writeD(0x00);
                     writeD((int) (e.getValue().getReuseTime() - System.currentTimeMillis()) / 1000);
@@ -84,7 +84,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                 writeD(player.getObjectId());
                 writeH(cooldownList.size());
 
-                for (FastMap.Entry<Integer, PortalCooldown> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end;) {
+                for (Entry<Integer, PortalCooldown> e : cooldownList.getPortalCoolDowns().entrySet()) {
                     writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                     writeD(0x00);
                     writeD((int) (e.getValue().getReuseTime() - System.currentTimeMillis()) / 1000);

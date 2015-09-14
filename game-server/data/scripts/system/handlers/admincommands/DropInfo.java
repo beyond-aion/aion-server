@@ -3,7 +3,7 @@ package admincommands;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
@@ -18,7 +18,18 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
-import com.aionemu.gameserver.model.templates.globaldrops.*;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropExcludedNpc;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropMap;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcGroup;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRace;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRating;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropTribe;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropWorld;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropZone;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalExclusion;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
@@ -106,7 +117,7 @@ public class DropInfo extends AdminCommand {
 			
 			boostDropRate += player.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 		
-			FastList<Integer> noReductionMaps = new FastList<Integer>();
+			FastTable<Integer> noReductionMaps = new FastTable<Integer>();
 			for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 				noReductionMaps.add(Integer.parseInt(zone));
 			}
@@ -216,7 +227,7 @@ public class DropInfo extends AdminCommand {
 			
 			boostDropRate += player.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 		
-			FastList<Integer> noReductionMaps = new FastList<Integer>();
+			FastTable<Integer> noReductionMaps = new FastTable<Integer>();
 			for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 				noReductionMaps.add(Integer.parseInt(zone));
 			}

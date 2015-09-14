@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import com.aionemu.gameserver.network.PacketWriteHelper;
 import java.nio.ByteBuffer;
+
+import com.aionemu.gameserver.network.PacketWriteHelper;
 
 /**
  *

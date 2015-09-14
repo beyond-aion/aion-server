@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -97,8 +98,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class is representing Player object, it contains all needed data.
@@ -743,8 +742,8 @@ public class Player extends Creature {
 	 * 
 	 * @return
 	 */
-	public FastList<Item> getAllItems() {
-		FastList<Item> items = FastList.newInstance();
+	public FastTable<Item> getAllItems() {
+		FastTable<Item> items = new FastTable<>();
 		items.addAll(this.inventory.getItemsWithKinah());
 		if (this.regularWarehouse != null)
 			items.addAll(this.regularWarehouse.getItemsWithKinah());
@@ -2009,7 +2008,7 @@ public class Player extends Creature {
 	}
 
 	private PlayerVarsDAO daoVars;
-	private Map<String, Object> vars = FastMap.newInstance();
+	private Map<String, Object> vars = new FastMap<>();
 
 	public boolean hasVar(String key) {
 		return vars.containsKey(key);

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class MySQL5PremiumDAO extends PremiumDAO {
 			DB.close(st);
 		}
 		
-		FastList<Integer> rewarded = FastList.newInstance();
+		FastTable<Integer> rewarded = new FastTable<>();
 		st = DB.prepareStatement("SELECT uniqId,points FROM account_rewards WHERE accountId=? AND rewarded=0");
 		try {
 			st.setInt(1, accountId);

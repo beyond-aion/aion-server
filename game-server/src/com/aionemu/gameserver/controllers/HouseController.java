@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -24,7 +25,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Rolandas

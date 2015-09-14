@@ -1,5 +1,8 @@
 package ai.instance.sauroBase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -10,9 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @AIName("rohuka")

@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,7 +109,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadStorageDirect(int playerId, StorageType storageType) {
-		List<Item> list = FastList.newInstance();
+		List<Item> list = new FastTable<>();
 		final int storage = storageType.getId();
 
 		if (storageType == StorageType.ACCOUNT_WAREHOUSE) {

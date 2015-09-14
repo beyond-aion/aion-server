@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -32,12 +32,12 @@ public class MaintenanceTask extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger(MaintenanceTask.class);
 
-	private static final FastList<House> maintainedHouses;
+	private static final FastTable<House> maintainedHouses;
 
 	private static MaintenanceTask instance;
 
 	static {
-		maintainedHouses = FastList.newInstance();
+		maintainedHouses = new FastTable<>();
 		try {
 			instance = new MaintenanceTask(HousingConfig.HOUSE_MAINTENANCE_TIME);
 		}
@@ -93,7 +93,7 @@ public class MaintenanceTask extends AbstractCronTask {
 			return;
 
 		Date now = new Date();
-		FastList<House> houses = HousingService.getInstance().getCustomHouses();
+		FastTable<House> houses = HousingService.getInstance().getCustomHouses();
 		for (House house : houses) {
 			if (house.getStatus() == HouseStatus.INACTIVE)
 				continue;

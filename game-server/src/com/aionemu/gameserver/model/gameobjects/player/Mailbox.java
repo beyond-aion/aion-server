@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author kosyachok

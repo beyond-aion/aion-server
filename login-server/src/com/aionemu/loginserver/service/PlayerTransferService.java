@@ -3,7 +3,7 @@ package com.aionemu.loginserver.service;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 import javolution.util.FastMap;
 
 import org.slf4j.Logger;
@@ -34,8 +34,8 @@ public class PlayerTransferService {
 		return instance;
 	}
 	
-	private Map<Integer, PlayerTransferRequest> transfers = FastMap.newInstance();
-	private Map<Integer, PlayerTransferTask> tasks = FastMap.newInstance();
+	private Map<Integer, PlayerTransferRequest> transfers = new FastMap<>();
+	private Map<Integer, PlayerTransferTask> tasks = new FastMap<>();
 	private Future<?> veryfyTask;
 	private PlayerTransferDAO dao;
 	
@@ -53,7 +53,7 @@ public class PlayerTransferService {
 	 * first init. getting values from sql
 	 */
 	protected void verifyNewTasks() {
-		FastList<PlayerTransferTask> tasksNew = this.dao.getNew();
+		FastTable<PlayerTransferTask> tasksNew = this.dao.getNew();
 		log.info("PlayerTransfer perform task init. "+tasks.size()+" new tasks.");
 		for(PlayerTransferTask task : tasksNew) {
 			GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);

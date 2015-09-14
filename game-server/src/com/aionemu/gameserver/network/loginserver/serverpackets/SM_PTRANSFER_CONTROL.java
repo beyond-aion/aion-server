@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -349,7 +349,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
                 PlayerSkillList skillList = this.player.getSkillList();
 
                 // discard stigma skills
-                FastList<PlayerSkillEntry> skills = FastList.newInstance();
+                FastTable<PlayerSkillEntry> skills = new FastTable<>();
                 for (PlayerSkillEntry sk : skillList.getAllSkills()) {
                     if (!sk.isStigma()) {
                         skills.add(sk);
@@ -362,7 +362,6 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
                     writeD(sk.getSkillLevel());
                 }
 
-                FastList.recycle(skills);
             }
             break;
             case RECIPE_INFORMATION: {
@@ -377,7 +376,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
             case QUEST_INFORMATION: {
                 writeD(this.taskId);
                 QuestStateList qsl = this.player.getQuestStateList();
-                FastList<QuestState> quests = FastList.newInstance();
+                FastTable<QuestState> quests = new FastTable<>();
                 for (QuestState qs : qsl.getQuests().values()) {
                     if (qs == null) {
                         log.warn("there are null quest on player " + this.player.getName() + ". taskId #" + this.taskId + ". transfer skip that");
@@ -396,8 +395,6 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
                     writeQ(qs.getNextRepeatTime().getTime());
                     writeD(qs.getFlags());
                 }
-
-                FastList.recycle(quests);
             }
             break;
         }

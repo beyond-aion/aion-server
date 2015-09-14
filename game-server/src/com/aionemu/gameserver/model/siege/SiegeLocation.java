@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.siege;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javolution.util.FastMap;
 
@@ -255,7 +256,7 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (FastMap.Entry<Integer, Player> e = players.head(), mapEnd = players.tail(); (e = e.getNext()) != mapEnd;) {
+			for (Entry<Integer, Player> e : players.entrySet()) {
 				Player player = e.getValue();
 				if (player != null) {
 					visitor.visit(player);

@@ -3,8 +3,8 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastList;
 import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
@@ -52,7 +52,7 @@ public class Kisk extends SummonedObject<Player> {
 		if (this.kiskStatsTemplate == null)
 			this.kiskStatsTemplate = new KiskStatsTemplate();
 		
-		this.kiskMemberIds = new FastSet<Integer>(kiskStatsTemplate.getMaxMembers());
+		this.kiskMemberIds = new FastSet<Integer>();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
 		this.ownerLegion = owner.getLegion();
@@ -96,7 +96,7 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	public List<Player> getCurrentMemberList() {
-		List<Player> currentMemberList = new FastList<Player>();
+		List<Player> currentMemberList = new FastTable<Player>();
 		
 		for(int memberId : this.kiskMemberIds) {
 			Player member = World.getInstance().findPlayer(memberId);

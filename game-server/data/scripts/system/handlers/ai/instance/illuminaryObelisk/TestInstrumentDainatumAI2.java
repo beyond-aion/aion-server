@@ -4,6 +4,11 @@
  */
 package ai.instance.illuminaryObelisk;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -17,10 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * @author M.O.G. Dision

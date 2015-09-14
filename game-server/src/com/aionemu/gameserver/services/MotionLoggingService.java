@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -32,7 +34,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Times;
 import com.aionemu.gameserver.skillengine.model.WeaponTypeWrapper;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author kecimis

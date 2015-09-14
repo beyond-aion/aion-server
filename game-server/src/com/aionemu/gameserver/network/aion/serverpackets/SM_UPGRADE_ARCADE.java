@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.List;
+
 import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeTab;
 import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeTabItemList;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.ArcadeUpgradeService;
-import java.util.List;
 
 /**
  * @author ginho1

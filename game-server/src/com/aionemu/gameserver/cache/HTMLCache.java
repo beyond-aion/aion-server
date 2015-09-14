@@ -47,7 +47,7 @@ public final class HTMLCache {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private FastMap<String, String> cache = new FastMap<String, String>(16000);
+	private FastMap<String, String> cache = new FastMap<String, String>();
 
 	private int loadedFiles;
 	private int size;

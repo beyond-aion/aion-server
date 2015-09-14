@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
@@ -33,8 +34,6 @@ import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer

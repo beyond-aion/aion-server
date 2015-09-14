@@ -71,8 +71,7 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 			writeUnlock();
 		}
 
-		for (FastSet.Record r = activeTasks.head(), end = activeTasks.tail(); (r = r.getNext()) != end;) {
-			final T task = activeTasks.valueOf(r);
+		for (T task : activeTasks) {
 			final long begin = System.nanoTime();
 
 			try {

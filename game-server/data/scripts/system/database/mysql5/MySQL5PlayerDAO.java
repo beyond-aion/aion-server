@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastMap;
 
@@ -43,7 +44,6 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.google.common.collect.Maps;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author SoulKeeper, Saelya
@@ -694,7 +694,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
 
-		final Map<Integer, Integer> inactiveAccounts = FastMap.newInstance();
+		final Map<Integer, Integer> inactiveAccounts = new FastMap<>();
 
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 

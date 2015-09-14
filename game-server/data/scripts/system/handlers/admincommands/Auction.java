@@ -3,7 +3,7 @@ package admincommands;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
@@ -220,7 +220,7 @@ public class Auction extends AdminCommand {
 			}
 
 			int counter = 0;
-			FastList<House> houses = HousingService.getInstance().getCustomHouses();
+			FastTable<House> houses = HousingService.getInstance().getCustomHouses();
 			while (!houses.isEmpty() && counter < count) {
 				House house = houses.get(Rnd.get(houses.size()));
 				houses.remove(house);

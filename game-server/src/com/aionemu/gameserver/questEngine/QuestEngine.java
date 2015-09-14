@@ -17,6 +17,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.annotation.Nonnull;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
-import javolution.util.FastList;
 
 /**
  * @author MrPoke, Hilgert
@@ -80,7 +80,7 @@ public class QuestEngine implements GameEngine {
 	private TIntArrayList questHouseItems = new TIntArrayList();
 	private TIntObjectHashMap<TIntArrayList> questItems = new TIntObjectHashMap<TIntArrayList>();
 	private TIntArrayList questOnEnterZoneMissionEnd = new TIntArrayList();
-	private FastMap<Race, TIntArrayList> questOnLevelUp = FastMap.newInstance();
+	private FastMap<Race, TIntArrayList> questOnLevelUp = new FastMap<>();
 	private TIntArrayList questOnDie = new TIntArrayList();
 	private TIntArrayList questOnLogOut = new TIntArrayList();
 	private TIntArrayList questOnEnterWorld = new TIntArrayList();
@@ -93,7 +93,7 @@ public class QuestEngine implements GameEngine {
 	private FastMap<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<AbyssRankEnum, TIntArrayList>();
 	private FastMap<Integer, TIntArrayList> questOnKillInWorld = new FastMap<Integer, TIntArrayList>();
 	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<TIntArrayList>();
-	private FastMap<Integer, DialogAction> dialogMap = FastMap.newInstance();
+	private FastMap<Integer, DialogAction> dialogMap = new FastMap<>();
 	private Map<Integer, Integer> questOnFailCraft = new HashMap<Integer, Integer>();
 	private Map<Integer, Set<Integer>> questOnEquipItem = new HashMap<Integer, Set<Integer>>();
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<TIntArrayList>();
@@ -182,8 +182,8 @@ public class QuestEngine implements GameEngine {
 		return true;
 	}
 
-	public FastList<QuestState> getQuestList(Player player) {
-		FastList<QuestState> questList = FastList.newInstance();
+	public FastTable<QuestState> getQuestList(Player player) {
+		FastTable<QuestState> questList = new FastTable<>();
 		for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
 			if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
 				continue;
@@ -198,7 +198,7 @@ public class QuestEngine implements GameEngine {
 	public void sendCompletedQuests(Player player) {
 		try {
 			boolean over1345 = false;
-			FastList<QuestState> completeQuestList = FastList.newInstance();
+			FastTable<QuestState> completeQuestList = new FastTable<>();
 			for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
 				if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
 					continue;
@@ -209,7 +209,7 @@ public class QuestEngine implements GameEngine {
 				if (completeQuestList.size() < 1345) {
 					continue;
 				}
-				FastList<QuestState> completedList = FastList.newInstance();
+				FastTable<QuestState> completedList = new FastTable<>();
 				completedList.addAll(completeQuestList);
 				PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(0x01, false, completedList));
 				completeQuestList.clear();
@@ -222,10 +222,10 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	public void completeQuestSeparator(Player player, FastList<QuestState> questState) {
+	public void completeQuestSeparator(Player player, FastTable<QuestState> questState) {
 		try {
-			FastList<QuestState> questList = FastList.newInstance();
-			FastList<QuestState> completeQuestList = FastList.newInstance();
+			FastTable<QuestState> questList = new FastTable<>();
+			FastTable<QuestState> completeQuestList = new FastTable<>();
 			boolean over1345 = false;
 			for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
 				if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
@@ -242,7 +242,7 @@ public class QuestEngine implements GameEngine {
 					continue;
 				}
 
-				FastList<QuestState> completeList = FastList.newInstance();
+				FastTable<QuestState> completeList = new FastTable<>();
 				completeList.addAll(completeQuestList);
 				PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(0x01, false, completeList));
 				completeQuestList.clear();

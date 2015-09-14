@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -84,7 +84,7 @@ public class SerialKillerService {
 		}
 		else {
 			FastMap<Integer, Player> killers = new FastMap<>();
-			worldKillers.putEntry(worldId, killers);
+			worldKillers.put(worldId, killers);
 			return killers;
 		}
 	}
@@ -133,7 +133,7 @@ public class SerialKillerService {
 			
 
 			if (!world.containsKey(objId)) {
-				world.putEntry(objId, player);
+				world.put(objId, player);
 			}
 			
 			debuff.applyEffect(player, info.getRank());
@@ -166,7 +166,7 @@ public class SerialKillerService {
 
 		if (isEnemyWorld(player)) {
 			SerialKiller info = player.getSKInfo();
-			FastList<Player> kill = new FastList<>();
+			FastTable<Player> kill = new FastTable<>();
 			FastMap<Integer, Player> killers = getWorldKillers(worldId);
 			kill.addAll(killers.values());
 			killers.remove(player.getObjectId());

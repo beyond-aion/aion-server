@@ -88,7 +88,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 				kickPlayer(player, isInvader);
 			}
 		}
-		list.putEntry(player.getObjectId(), player);
+		list.put(player.getObjectId(), player);
 	}
 
 	@Override

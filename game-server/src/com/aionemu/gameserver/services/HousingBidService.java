@@ -66,9 +66,9 @@ public class HousingBidService extends AbstractCronTask {
 	private static HousingBidService instance;
 
 	static {
-		houseBids = FastMap.newInstance();
-		playerBids = FastMap.newInstance();
-		bidsByIndex = FastMap.newInstance();
+		houseBids = new FastMap<>();
+		playerBids = new FastMap<>();
+		bidsByIndex = new FastMap<>();
 		try {
 			instance = new HousingBidService(HousingConfig.HOUSE_AUCTION_TIME);
 		}
@@ -184,7 +184,7 @@ public class HousingBidService extends AbstractCronTask {
 		List<PlayerHouseBid> sortedBids = new ArrayList<PlayerHouseBid>(playerBidData);
 		Collections.sort(sortedBids);
 
-		FastMap<Integer, House> housesById = FastMap.newInstance();
+		FastMap<Integer, House> housesById = new FastMap<>();
 		for (House house : HousingService.getInstance().getCustomHouses()) {
 			housesById.put(house.getObjectId(), house);
 		}
@@ -538,7 +538,7 @@ public class HousingBidService extends AbstractCronTask {
 					maxIndex = index;
 			}
 			bidEntry = new HouseBidEntry(house, ++maxIndex, initialPrice);
-			bidsByIndex.putEntry(maxIndex, bidEntry);
+			bidsByIndex.put(maxIndex, bidEntry);
 		}
 
 		synchronized (houseBids) {

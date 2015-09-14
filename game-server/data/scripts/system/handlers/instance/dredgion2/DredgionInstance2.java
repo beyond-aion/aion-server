@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
-import com.aionemu.gameserver.ai2.NpcAI2;                 
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.RateConfig;

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.commons.utils.GenericValidator;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.world.World;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A class that contains all the counters for the siege. One SiegeCounter per race should be used.

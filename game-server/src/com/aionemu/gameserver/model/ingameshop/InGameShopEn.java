@@ -9,8 +9,8 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ public class InGameShopEn {
 		}
 		iGProperty = InGameShopProperty.load();
 		dao = DAOManager.getDAO(InGameShopDAO.class);
-		items = FastMap.newInstance();
+		items = new FastMap<>();
 		activeRequests = new ConcurrentHashMap<Integer, IGRequest>();
 		items = dao.loadInGameShopItems();
 		log.info("Loaded with " + items.size() + " items.");
@@ -105,11 +105,11 @@ public class InGameShopEn {
 	}
 
 	@SuppressWarnings("unchecked")
-	public FastList<Integer> getTopSales(int subCategory, byte category) {
+	public FastTable<Integer> getTopSales(int subCategory, byte category) {
 		byte max = 6;
 		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>(new DescFilter());
 		if (!items.containsKey(category)) {
-			return FastList.newInstance();
+			return new FastTable<>();
 		}
 		for (IGItem item : this.items.get(category)) {
 			if (item.getSalesRanking() == 0)
@@ -120,7 +120,7 @@ public class InGameShopEn {
 
 			map.put(item.getSalesRanking(), item.getObjectId());
 		}
-		FastList<Integer> top = FastList.newInstance();
+		FastTable<Integer> top = new FastTable<>();
 		byte cnt = 0;
 		for (int objId : map.values()) {
 			if (cnt <= max) {

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team2;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,7 +15,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer

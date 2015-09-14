@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team2.alliance;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -43,7 +44,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author ATracer

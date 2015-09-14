@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.items.storage;
 import java.util.List;
 import java.util.Queue;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -162,7 +162,7 @@ public class LegionStorageProxy extends Storage {
 	}
 
 	@Override
-	public FastList<Item> getItemsWithKinah() {
+	public FastTable<Item> getItemsWithKinah() {
 		return storage.getItemsWithKinah();
 	}
 

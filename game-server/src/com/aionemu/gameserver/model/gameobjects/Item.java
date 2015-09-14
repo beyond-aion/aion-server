@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import com.aionemu.commons.utils.Rnd;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;

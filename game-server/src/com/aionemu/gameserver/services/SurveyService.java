@@ -2,8 +2,8 @@ package com.aionemu.gameserver.services;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class SurveyService {
 	}
 
 	public SurveyService() {
-		activeItems = FastMap.newInstance();
+		activeItems = new FastMap<>();
 		this.htmlTemplate = HTMLCache.getInstance().getHTML("surveyTemplate.xhtml");
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(new TaskUpdate(), 2000, SecurityConfig.SURVEY_DELAY * 60000);
 	}
@@ -92,7 +92,7 @@ public class SurveyService {
 		if (newList.size() == 0)
 			return;
 
-		List<Integer> players = FastList.newInstance();
+		List<Integer> players = new FastTable<>();
 		int cnt = 0;
 		for (SurveyItem item : newList) {
 			activeItems.put(item.uniqueId, item);

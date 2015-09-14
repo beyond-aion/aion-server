@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.model.drop;
 
+import java.util.ArrayList;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.world.World;
-import java.util.ArrayList;
 
 /**
  * @author ATracer

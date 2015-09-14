@@ -134,17 +134,17 @@ public class RiftInformer {
 
 	private static FastMap<Integer, Integer> calcRiftsData(RVController rift, FastMap<Integer, Integer> local) {
 		if (rift.isMaster()) {
-			local.putEntry(0, local.get(0) + 1);
+			local.put(0, local.get(0) + 1);
 			if (rift.isVortex()) {
-				local.putEntry(1, local.get(1) + 1);
+				local.put(1, local.get(1) + 1);
 			}
 			//live party concert hall
-			//local.putEntry(2, local.get(2) + 1);
+			//local.put(2, local.get(2) + 1);
 		}
 		else {
-			local.putEntry(3, local.get(3) + 1);
+			local.put(3, local.get(3) + 1);
 			if (rift.isVortex()) {
-				local.putEntry(4, local.get(4) + 1);
+				local.put(4, local.get(4) + 1);
 			}
 		}
 		return local;

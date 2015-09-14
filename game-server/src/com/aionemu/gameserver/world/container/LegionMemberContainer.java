@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.world.container;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Container for storing Legion members by Id and name.

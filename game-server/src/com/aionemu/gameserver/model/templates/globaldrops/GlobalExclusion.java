@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 
 /**
  * @author synchro2, bobobear

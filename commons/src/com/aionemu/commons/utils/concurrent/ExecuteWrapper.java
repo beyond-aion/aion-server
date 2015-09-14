@@ -43,7 +43,7 @@ public class ExecuteWrapper implements Executor{
 
 			long runtimeInMillisec = TimeUnit.NANOSECONDS.toMillis(runtimeInNanosec);
 			if (runtimeInMillisec > maximumRuntimeInMillisecWithoutWarning) {
-				TextBuilder tb = TextBuilder.newInstance();
+				TextBuilder tb = new TextBuilder();
 				tb.append(clazz);
 				tb.append(" - execution time: ");
 				tb.append(runtimeInMillisec);

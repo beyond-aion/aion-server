@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services.transfers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import java.util.HashMap;
 
 /**
  * @author KID
@@ -39,9 +39,9 @@ public class PlayerTransferService {
 	}
 
 	private PlayerDAO dao;
-	private Map<Integer, TransferablePlayer> transfers = FastMap.newInstance();
+	private Map<Integer, TransferablePlayer> transfers = new FastMap<>();
     private HashMap<Integer, PlayerTransfer> playerTransfers = new HashMap<>();
-	private List<Integer> rsList = FastList.newInstance();
+	private List<Integer> rsList = new FastTable<>();
 	
 	public PlayerTransferService() {
 		this.dao = DAOManager.getDAO(PlayerDAO.class);

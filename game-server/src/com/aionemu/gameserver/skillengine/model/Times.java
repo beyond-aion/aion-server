@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import java.util.HashMap;
 
 import javax.xml.bind.Unmarshaller;
@@ -9,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 /**
  * @author kecims

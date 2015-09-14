@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -42,7 +42,7 @@ public class LookingForParty extends AbstractLockManager {
 	}
 
 	public List<SearchInstance> getSearchInstances() {
-		FastList<SearchInstance> tempList = FastList.newInstance();
+		FastTable<SearchInstance> tempList = new FastTable<>();
 		for (SearchInstance si : searchInstances) {
 			tempList.add(si);
 		}

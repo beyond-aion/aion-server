@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services.reward;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +34,11 @@ public class RewardService {
 	}
 
 	public void verify(Player player) {
-		FastList<RewardEntryItem> list = dao.getAvailable(player.getObjectId());
+		FastTable<RewardEntryItem> list = dao.getAvailable(player.getObjectId());
 		if (list.size() == 0 || player.getMailbox() == null)
 			return;
 
-		FastList<Integer> rewarded = FastList.newInstance();
+		FastTable<Integer> rewarded = new FastTable<>();
 
 		for (RewardEntryItem item : list) {
 			if (DataManager.ITEM_DATA.getItemTemplate(item.id) == null) {
@@ -78,8 +78,8 @@ public class RewardService {
 		if (rewarded.size() > 0) {
 			dao.uncheckAvailable(rewarded);
 
-			FastList.recycle(rewarded);
-			FastList.recycle(list);
+
+
 		}
 	}
 }

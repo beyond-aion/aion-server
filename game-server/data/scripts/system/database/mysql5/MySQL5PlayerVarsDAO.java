@@ -20,7 +20,7 @@ public class MySQL5PlayerVarsDAO extends PlayerVarsDAO {
 
 	@Override
 	public Map<String, Object> load(final int playerId) {
-		final Map<String, Object> map = FastMap.newInstance();
+		final Map<String, Object> map = new FastMap<>();
 		DB.select("SELECT param,value FROM player_vars WHERE player_id=?", new ParamReadStH() {
 
 			@Override

@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
+import java.nio.ByteBuffer;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import java.nio.ByteBuffer;
-import java.util.List;
 
 /**
  *

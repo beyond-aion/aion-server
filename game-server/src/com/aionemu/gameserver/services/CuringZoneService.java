@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class CuringZoneService {
 
 	Logger log = LoggerFactory.getLogger(CuringZoneService.class);
-	private FastList<CuringObject> curingObjects = new FastList<CuringObject>();
+	private FastTable<CuringObject> curingObjects = new FastTable<CuringObject>();
 
 	private CuringZoneService() {
 		for (CuringTemplate t : DataManager.CURING_OBJECTS_DATA.getCuringObject()) {

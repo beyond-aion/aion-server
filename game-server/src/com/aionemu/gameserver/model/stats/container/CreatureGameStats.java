@@ -3,11 +3,11 @@ package com.aionemu.gameserver.model.stats.container;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javolution.util.FastMap;
-import javolution.util.FastMap.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,7 +111,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	public final void endEffect(StatOwner statOwner) {
 		lock.writeLock().lock();
 		try {
-			for (Entry<StatEnum, TreeSet<IStatFunction>> e = stats.head(), end = stats.tail(); (e = e.getNext()) != end;) {
+			for (Entry<StatEnum, TreeSet<IStatFunction>> e : stats.entrySet()) {
 				TreeSet<IStatFunction> value = e.getValue();
 				for (Iterator<IStatFunction> iter = value.iterator(); iter.hasNext();) {
 					IStatFunction ownedMod = iter.next();

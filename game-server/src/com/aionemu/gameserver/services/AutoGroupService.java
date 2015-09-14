@@ -8,10 +8,11 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -44,8 +45,6 @@ import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  *
  * @author xTz
@@ -54,7 +53,7 @@ public class AutoGroupService {
 
 	private ConcurrentHashMap<Integer, LookingForParty> searchers = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
-	private Collection<Integer> penaltys = new FastList<Integer>().shared();
+	private Collection<Integer> penaltys = new FastTable<Integer>().shared();
 	private Lock lock = new ReentrantLock();
 
 	private AutoGroupService() {

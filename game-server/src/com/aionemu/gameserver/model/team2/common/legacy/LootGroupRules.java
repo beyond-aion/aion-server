@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.team2.common.legacy;
 
 import java.util.Collection;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -27,7 +27,7 @@ public class LootGroupRules {
 	private final int mythic_item_above;
 	private int nrMisc;
 	private int nrRoundRobin;
-	private final FastList<DropItem> itemsToBeDistributed = new FastList<>();
+	private final FastTable<DropItem> itemsToBeDistributed = new FastTable<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
@@ -211,7 +211,7 @@ public class LootGroupRules {
 		itemsToBeDistributed.remove(dropItem);
 	}
 
-	public FastList<DropItem> getItemsToBeDistributed() {
+	public FastTable<DropItem> getItemsToBeDistributed() {
 		return itemsToBeDistributed;
 	}
 

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -26,7 +26,18 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
-import com.aionemu.gameserver.model.templates.globaldrops.*;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropExcludedNpc;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropMap;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcGroup;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRace;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRating;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropTribe;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropWorld;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropZone;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalExclusion;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
@@ -51,7 +62,7 @@ public class DropRegistrationService {
 
 	private Map<Integer, Set<DropItem>> currentDropMap = new ConcurrentHashMap<>();
 	private Map<Integer, DropNpc> dropRegistrationMap = new ConcurrentHashMap<>();
-	private FastList<Integer> noReductionMaps;
+	private FastTable<Integer> noReductionMaps;
 
 	public void registerDrop(Npc npc, Player player, Collection<Player> groupMembers) {
 		registerDrop(npc, player, player.getLevel(), groupMembers);
@@ -59,7 +70,7 @@ public class DropRegistrationService {
 
 	private DropRegistrationService() {
 		init();
-		noReductionMaps = new FastList<Integer>();
+		noReductionMaps = new FastTable<Integer>();
 		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 			noReductionMaps.add(Integer.parseInt(zone));
 		}

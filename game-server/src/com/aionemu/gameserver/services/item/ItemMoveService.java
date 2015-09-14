@@ -5,6 +5,9 @@ import static com.aionemu.gameserver.services.item.ItemPacketService.sendStorage
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,8 +18,6 @@ import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author ATracer

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +29,8 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 	}
 
 	@Override
-	public FastList<RewardEntryItem> getAvailable(int playerId) {
-		FastList<RewardEntryItem> list = FastList.newInstance();
+	public FastTable<RewardEntryItem> getAvailable(int playerId) {
+		FastTable<RewardEntryItem> list = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);
@@ -52,7 +52,7 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 	}
 
 	@Override
-	public void uncheckAvailable(FastList<Integer> ids) {
+	public void uncheckAvailable(FastTable<Integer> ids) {
 		Connection con = null;
 		try {
 			con = DatabaseFactory.getConnection();

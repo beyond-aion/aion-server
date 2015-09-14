@@ -1,5 +1,7 @@
 package ai.instance.sauroBase;
 
+import java.util.List;
+
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -9,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import java.util.List;
 
 
 @AIName("sheba")

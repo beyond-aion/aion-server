@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 
@@ -23,7 +23,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 	private MutableInt asmodiansPoints = new MutableInt(0);
 	private MutableInt elyosPoins = new MutableInt(0);
 	private Race race;
-	private FastList<DredgionRooms> dredgionRooms = new FastList<DredgionRooms>();
+	private FastTable<DredgionRooms> dredgionRooms = new FastTable<DredgionRooms>();
 	private Point3D asmodiansStartPosition;
 	private Point3D elyosStartPosition;
 
@@ -99,7 +99,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		}
 	}
 
-	public FastList<DredgionRooms> getDredgionRooms() {
+	public FastTable<DredgionRooms> getDredgionRooms() {
 		return dredgionRooms;
 	}
 

@@ -2,7 +2,7 @@ package admincommands;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpc;
@@ -45,7 +45,7 @@ public class SpawnAssembledNpc  extends AdminCommand {
 			PacketSendUtility.sendMessage(player, "This spawnId is Wrong.");
 			return;
 		}
-		FastList<AssembledNpcPart> assembledPatrs = new FastList<AssembledNpcPart>();
+		FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
 			assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}

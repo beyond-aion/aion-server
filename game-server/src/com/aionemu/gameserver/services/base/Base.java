@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastList;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -300,7 +300,7 @@ public class Base<BL extends BaseLocation> {
 	protected void despawn() {
 		setFlag(null);
 
-		FastList<Npc> spawned = World.getInstance().getBaseSpawns(getId());
+		FastTable<Npc> spawned = World.getInstance().getBaseSpawns(getId());
 		if (spawned != null) {
 			for (Npc npc : spawned) {
 				if (npc != null) {

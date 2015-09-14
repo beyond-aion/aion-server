@@ -20,7 +20,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 
 	private static Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
 
-	private Collection<EventListener<T>> listeners = new FastTable<EventListener<T>>(0).shared();
+	private Collection<EventListener<T>> listeners = new FastTable<EventListener<T>>().shared();
 	protected boolean isFirstMethodFill;
 
 	public AbstractEventSource() {
