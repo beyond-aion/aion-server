@@ -6,8 +6,9 @@ package com.aionemu.gameserver.world.exceptions;
  * 
  * @author -Nemesiss-
  */
-@SuppressWarnings("serial")
 public class DuplicateAionObjectException extends RuntimeException {
+
+	private static final long serialVersionUID = -2031489557355197834L;
 
 	/**
 	 * Constructs an <code>DuplicateAionObjectException</code> with no detail message.

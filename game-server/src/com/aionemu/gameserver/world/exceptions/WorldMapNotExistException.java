@@ -6,8 +6,9 @@ package com.aionemu.gameserver.world.exceptions;
  * 
  * @author -Nemesiss-
  */
-@SuppressWarnings("serial")
 public class WorldMapNotExistException extends RuntimeException {
+
+	private static final long serialVersionUID = -5307696903813839948L;
 
 	/**
 	 * Constructs an <code>WorldMapNotExistException</code> with no detail message.

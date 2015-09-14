@@ -10,8 +10,9 @@ import com.aionemu.gameserver.model.templates.zone.Point2D;
  * 
  * @author SoulKeeper
  */
-@SuppressWarnings("serial")
 public class Point3D implements Cloneable, Serializable {
+
+	private static final long serialVersionUID = -7928321632833852610L;
 
 	/**
 	 * X coord of the point

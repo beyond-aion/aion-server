@@ -5,8 +5,9 @@ package com.aionemu.gameserver.world.exceptions;
  * 
  * @author -Nemesiss-
  */
-@SuppressWarnings("serial")
 public class InstanceNotExistException extends RuntimeException {
+
+	private static final long serialVersionUID = -2025054197701447122L;
 
 	/**
 	 * Constructs an <code>InstanceNotExistException</code> with no detail message.

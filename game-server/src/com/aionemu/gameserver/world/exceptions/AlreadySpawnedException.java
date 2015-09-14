@@ -5,8 +5,9 @@ package com.aionemu.gameserver.world.exceptions;
  * 
  * @author -Nemesiss-
  */
-@SuppressWarnings("serial")
 public class AlreadySpawnedException extends RuntimeException {
+
+	private static final long serialVersionUID = -3065200842198146682L;
 
 	/**
 	 * Constructs an <code>AlreadySpawnedException</code> with no detail message.
