@@ -1,6 +1,5 @@
 package com.aionemu.commons.utils.xml;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,6 +12,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javolution.util.FastTable;
 
 /**
  * @author Oleh_Faizulin
@@ -61,7 +62,7 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyVal
 
 		public void addElement(Map.Entry<K, V> entry) {
 			if (values == null) {
-				values = new ArrayList<KeyValuePair<K, V>>();
+				values = new FastTable<KeyValuePair<K, V>>();
 			}
 			values.add(new KeyValuePair<K, V>(entry));
 		}

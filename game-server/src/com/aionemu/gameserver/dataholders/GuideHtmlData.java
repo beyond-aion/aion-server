@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -24,7 +25,7 @@ public class GuideHtmlData {
 
 	@XmlElement(name = "guide", type = GuideTemplate.class)
 	private List<GuideTemplate> guideTemplates;
-	private final TIntObjectHashMap<ArrayList<GuideTemplate>> templates = new TIntObjectHashMap<ArrayList<GuideTemplate>>();
+	private final TIntObjectHashMap<List<GuideTemplate>> templates = new TIntObjectHashMap<List<GuideTemplate>>();
 	private final int CLASS_ALL = 255;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
@@ -41,9 +42,9 @@ public class GuideHtmlData {
 		int classId = template.getPlayerClass() == null ? CLASS_ALL : template.getPlayerClass().ordinal();
 
 		int hash = makeHash(classId, race.ordinal(), template.getLevel());
-		ArrayList<GuideTemplate> value = templates.get(hash);
+		List<GuideTemplate> value = templates.get(hash);
 		if (value == null) {
-			value = new ArrayList<GuideTemplate>();
+			value = new FastTable<GuideTemplate>();
 			templates.put(hash, value);
 		}
 		value.add(template);
@@ -53,7 +54,7 @@ public class GuideHtmlData {
 		return templates.size();
 	}
 
-	public TIntObjectHashMap<ArrayList<GuideTemplate>> getTemplates() {
+	public TIntObjectHashMap<List<GuideTemplate>> getTemplates() {
 		return templates;
 	}
 
@@ -69,7 +70,7 @@ public class GuideHtmlData {
 	}
 
 	public GuideTemplate[] getTemplatesFor(PlayerClass playerClass, Race race, int level) {
-		List<GuideTemplate> guideTemplate = new ArrayList<GuideTemplate>();
+		List<GuideTemplate> guideTemplate = new FastTable<GuideTemplate>();
 
 		List<GuideTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<GuideTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));

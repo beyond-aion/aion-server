@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -347,9 +348,9 @@ public final class PlayerEnterWorldService {
 			// Update player skills first!!!
 			AbyssSkillService.onEnterWorld(player);
 			// TODO: check the split size
-			client.sendPacket(new SM_SKILL_LIST(player, player.getSkillList().getBasicSkills()));
+			client.sendPacket(new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
 			for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
-				client.sendPacket(new SM_SKILL_LIST(player, stigmaSkill));
+				client.sendPacket(new SM_SKILL_LIST(stigmaSkill));
 
 			if (player.getSkillCoolDowns() != null)
 				client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
@@ -565,7 +566,7 @@ public final class PlayerEnterWorldService {
 		player.setWarehouseLimit();
 		// items
 		Storage inventory = player.getInventory();
-		List<Item> allItems = new ArrayList<Item>();
+		List<Item> allItems = new FastTable<Item>();
 		if (inventory.getKinah() == 0) {
 			inventory.increaseKinah(0); // create an empty object with value 0
 		}
@@ -578,7 +579,7 @@ public final class PlayerEnterWorldService {
 			client.sendPacket(new SM_INVENTORY_INFO(splitter.isFirst(), splitter.getNext(), npcExpands, questExpands, itemExpands, player));
 		}
 
-		client.sendPacket(new SM_INVENTORY_INFO(false, new ArrayList<Item>(0), npcExpands, questExpands, itemExpands, player));
+		client.sendPacket(new SM_INVENTORY_INFO(false, new FastTable<>(), npcExpands, questExpands, itemExpands, player));
 		client.sendPacket(new SM_STATS_INFO(player));
 		client.sendPacket(SM_CUBE_UPDATE.stigmaSlots(player.getCommonData().getAdvancedStigmaSlotSize()));
 	}

@@ -4,7 +4,6 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.selectDistinct;
 import static ch.lambdaj.collection.LambdaCollections.with;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import javolution.util.FastMap;
 import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.Range;
 
@@ -291,7 +291,7 @@ public class ItemGroupsData {
 		if (ranges.containsKey(range))
 			items = ranges.get(range);
 		else {
-			items = new ArrayList<CraftReward>();
+			items = new FastTable<CraftReward>();
 			ranges.put(range, items);
 		}
 		items.add(reward);
@@ -300,7 +300,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftMaterials(int skillId) {
 		if (craftMaterialsBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new ArrayList<CraftReward>();
+		List<CraftReward> result = new FastTable<CraftReward>();
 		for (List<CraftReward> items : craftMaterialsBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -313,7 +313,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftShopItems(int skillId) {
 		if (craftShopBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new ArrayList<CraftReward>();
+		List<CraftReward> result = new FastTable<CraftReward>();
 		for (List<CraftReward> items : craftShopBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -326,7 +326,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftBundles(int skillId) {
 		if (craftBundlesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new ArrayList<CraftReward>();
+		List<CraftReward> result = new FastTable<CraftReward>();
 		for (List<CraftReward> items : craftBundlesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -339,7 +339,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftRecipes(int skillId) {
 		if (craftRecipesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new ArrayList<CraftReward>();
+		List<CraftReward> result = new FastTable<CraftReward>();
 		for (List<CraftReward> items : craftRecipesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;

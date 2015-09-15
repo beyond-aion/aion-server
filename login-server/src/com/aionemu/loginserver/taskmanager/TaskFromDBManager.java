@@ -1,6 +1,6 @@
 package com.aionemu.loginserver.taskmanager;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 public class TaskFromDBManager {
 
 	private static final Logger log = LoggerFactory.getLogger(TaskFromDBManager.class);
-	private ArrayList<TaskFromDBTrigger> tasksList;
+	private List<TaskFromDBTrigger> tasksList;
 
 	private TaskFromDBManager() {
 		tasksList = getDAO().getAllTasks();

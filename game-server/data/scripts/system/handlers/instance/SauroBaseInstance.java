@@ -1,8 +1,9 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -22,7 +23,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class SauroBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private static List<WorldPosition> chestPoints = new ArrayList<>();
+	private static List<WorldPosition> chestPoints = new FastTable<>();
 	static {
 		chestPoints.add(new WorldPosition(301130000, 253.97533f, 363.97156f, 159.64023f, (byte) 0));
 		chestPoints.add(new WorldPosition(301130000, 262.36151f, 393.78619f, 156.83209f, (byte) 30));
@@ -77,7 +78,8 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 				break;
 		}
 
-		List<WorldPosition> temp = new ArrayList<>(chestPoints);
+		List<WorldPosition> temp = new FastTable<>();
+		temp.addAll(chestPoints);
 		for (int i = 0; i < 8; i++) {
 			int index = Rnd.get(0, temp.size() - 1);
 			WorldPosition pos = temp.get(index);

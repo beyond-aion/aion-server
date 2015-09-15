@@ -1,8 +1,8 @@
 package ai.instance.illuminaryObelisk;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.GeneralNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -31,7 +31,7 @@ public class GeneratorShield02AI2 extends GeneralNpcAI2 {
 
 	protected boolean isInstanceDestroyed = false;
 	private boolean isCancelled;
-	private List<Npc> npcs = new ArrayList<Npc>();
+	private List<Npc> npcs = new FastTable<Npc>();
 	private int fazeTask = 0;
 	private Npc gate;
 	private int attackCount;

@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services.siegeservice;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +37,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import com.google.common.collect.Lists;
 
 /**
  * Object that controls siege of certain fortress. Siege object is not reusable. New siege = new instance.
@@ -394,7 +395,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 	protected void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
 		try {
 			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-			List<Integer> topPlayersIds = Lists.newArrayList(playerAbyssPoints.keySet());
+			List<Integer> topPlayersIds = new FastTable<>();
+			topPlayersIds.addAll(playerAbyssPoints.keySet());
 			SiegeResult result = isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER;
 
 			int i = 0;

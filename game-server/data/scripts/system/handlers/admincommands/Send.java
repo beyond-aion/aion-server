@@ -1,7 +1,6 @@
 package admincommands;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -153,7 +154,7 @@ public class Send extends AdminCommand {
 	private static class Packets implements Iterable<Packet> {
 
 		@XmlElement(name = "packet")
-		private List<Packet> packets = new ArrayList<Packet>();
+		private List<Packet> packets = new FastTable<Packet>();
 
 		@XmlAttribute(name = "delay")
 		private long delay = -1;
@@ -192,7 +193,7 @@ public class Send extends AdminCommand {
 	private static class Packet {
 
 		@XmlElement(name = "part")
-		private Collection<Part> parts = new ArrayList<Part>();
+		private Collection<Part> parts = new FastTable<Part>();
 
 		@XmlAttribute(name = "opcode")
 		private String opcode = "-1";

@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -33,7 +34,7 @@ public class SM_TRADELIST extends AionServerPacket {
 		int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
 		if (tlist != null && tlist.getNpcId() == npc.getNpcId()) {
 			this.npcId = npc.getNpcId();
-			this.tradeTablist = new ArrayList<>();
+			this.tradeTablist = new FastTable<>();
 			for (TradeTab tab : tlist.getTradeTablist()) {
 				GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(tab.getId());
 				if (goodsList == null || goodsList.getLegionLevel() > legionLevel)

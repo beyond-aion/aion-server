@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +90,7 @@ public class ShieldService {
 	public void registerShield(int worldId, SiegeShield shield) {
 		List<SiegeShield> mapShields = registeredShields.get(worldId);
 		if (mapShields == null) {
-			mapShields = new ArrayList<SiegeShield>();
+			mapShields = new FastTable<SiegeShield>();
 			registeredShields.put(worldId, mapShields);
 		}
 		mapShields.add(shield);
@@ -108,7 +108,7 @@ public class ShieldService {
 			return;
 
 		ZoneInstance zone = location.getZone().get(0);
-		List<SiegeShield> shields = new ArrayList<SiegeShield>();
+		List<SiegeShield> shields = new FastTable<SiegeShield>();
 
 		for (int index = mapShields.size() - 1; index >= 0; index--) {
 			SiegeShield shield = mapShields.get(index);

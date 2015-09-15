@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.stats.calc;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,7 +145,7 @@ public class StatCapUtil {
 				wrongStat = stat;
 			if (wrongStat != null) {
 				if (wrongStats == null)
-					wrongStats = new ArrayList<Stat2>();
+					wrongStats = new FastTable<Stat2>();
 				wrongStats.add(wrongStat);
 			}
 		}

@@ -7,8 +7,10 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_ITEM_CANT_USE_UNTIL_DELAY_TIME;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -82,7 +84,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 			return;
 		}
 
-		ArrayList<AbstractItemAction> actions = new ArrayList<AbstractItemAction>();
+		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
 
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
 			if (itemAction.canAct(player, item, null))

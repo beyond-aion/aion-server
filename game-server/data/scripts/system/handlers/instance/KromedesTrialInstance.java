@@ -2,8 +2,9 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -35,7 +36,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	private int skillId;
-	private List<Integer> movies = new ArrayList<Integer>();
+	private List<Integer> movies = new FastTable<Integer>();
 	private boolean isSpawned = false;
 
 	@Override

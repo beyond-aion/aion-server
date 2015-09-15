@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,6 @@ import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.world.World;
-import com.google.common.collect.Lists;
 
 /**
  * @author Source
@@ -148,7 +149,8 @@ public class SourceSiege extends Siege<SourceLocation> {
 	protected void giveRewardsToPlayers(SiegeRaceCounter winnerDamage) {
 		// Get the map with playerId to siege reward
 		Map<Integer, Long> playerAbyssPoints = winnerDamage.getPlayerAbyssPoints();
-		List<Integer> topPlayersIds = Lists.newArrayList(playerAbyssPoints.keySet());
+		List<Integer> topPlayersIds = new FastTable<>();
+		topPlayersIds.addAll(playerAbyssPoints.keySet());
 		Map<Integer, String> playerNames = PlayerService.getPlayerNames(playerAbyssPoints.keySet());
 
 		// Black Magic Here :)

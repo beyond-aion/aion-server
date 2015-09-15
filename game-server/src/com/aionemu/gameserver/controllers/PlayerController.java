@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,6 +7,8 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -189,7 +190,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateRepeatableQuests() {
-		List<Integer> reapeatQuestList = new ArrayList<>();
+		List<Integer> reapeatQuestList = new FastTable<>();
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			if (!template.isTimeBased())

@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
@@ -113,7 +114,7 @@ public class ArcadeUpgradeService {
 
 		int rewardTab = getRewardTabForLevel(player.getArcadeUpgradeLevel());
 
-		List<ArcadeTabItemList> rewardList = new ArrayList<ArcadeTabItemList>();
+		List<ArcadeTabItemList> rewardList = new FastTable<ArcadeTabItemList>();
 
 		for (ArcadeTab arcadetab : getTabs()) {
 			if (rewardTab == arcadetab.getId()) {

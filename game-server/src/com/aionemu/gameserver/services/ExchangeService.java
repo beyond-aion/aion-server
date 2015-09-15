@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -269,7 +270,7 @@ public class ExchangeService {
 					return;
 				}
 				if (realItem.getItemCount() == exItem.getItemCount()) {
-					List<Item> items = new ArrayList<>();
+					List<Item> items = new FastTable<>();
 					items.add(exItem.getItem());
 					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(items, player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_ITEMS_RETURN));
 				} else {

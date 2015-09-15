@@ -1,13 +1,14 @@
 package com.aionemu.gameserver.configs.ingameshop;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.io.FileUtils;
 
@@ -26,7 +27,7 @@ public class InGameShopProperty {
 
 	public List<IGCategory> getCategories() {
 		if (categories == null) {
-			categories = new ArrayList<IGCategory>();
+			categories = new FastTable<IGCategory>();
 		}
 		return this.categories;
 	}

@@ -1,7 +1,8 @@
 package quest.danaria;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -19,7 +20,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _23060PlausibleDeniablity extends QuestHandler {
 
 	private static final int questId = 23060;
-	private static List<Integer> npcs = new ArrayList<Integer>();
+	private static List<Integer> npcs = new FastTable<Integer>();
 
 	static {
 		npcs.add(800936);

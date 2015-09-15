@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastTable;
@@ -41,7 +40,7 @@ public class Auction extends AdminCommand {
 				return;
 			}
 			String param = params[1].toUpperCase();
-			List<House> housesToRemove = new ArrayList<House>();
+			List<House> housesToRemove = new FastTable<House>();
 
 			if ("HOUSE".equals(param.split("_")[0])) {
 				House house = HousingService.getInstance().getHouseByName(params[1].toUpperCase());

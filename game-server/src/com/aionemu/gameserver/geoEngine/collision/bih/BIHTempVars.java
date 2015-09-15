@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.geoEngine.collision.bih;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.geoEngine.collision.bih.BIHNodeEx.BIHStackData;
 import com.jme3.math.Matrix4f;
@@ -39,7 +41,7 @@ class BIHTempVars {
 	protected final Vector3f vect5 = new Vector3f();
 	protected final Matrix4f tempMat4 = new Matrix4f();
 	protected final float[] bihSwapTmp = new float[9];
-	protected final ArrayList<BIHStackData> bihStack = new ArrayList<BIHStackData>();
+	protected final List<BIHStackData> bihStack = new FastTable<BIHStackData>();
 
 	private BIHTempVars() {
 	}

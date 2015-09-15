@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +30,8 @@ public class MySQL5TaskFromDBDAO extends TaskFromDBDAO {
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM tasks ORDER BY id";
 
 	@Override
-	public ArrayList<TaskFromDBTrigger> getAllTasks() {
-		final ArrayList<TaskFromDBTrigger> result = new ArrayList<TaskFromDBTrigger>();
+	public List<TaskFromDBTrigger> getAllTasks() {
+		final List<TaskFromDBTrigger> result = new FastTable<TaskFromDBTrigger>();
 
 		Connection con = null;
 

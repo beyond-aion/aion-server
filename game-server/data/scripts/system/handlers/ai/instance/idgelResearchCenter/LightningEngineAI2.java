@@ -1,10 +1,10 @@
 package ai.instance.idgelResearchCenter;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.NoActionAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -24,7 +24,7 @@ public class LightningEngineAI2 extends NoActionAI2 {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isSpawned = new AtomicBoolean(false);
-	private List<Integer> percents = new ArrayList<>();
+	private List<Integer> percents = new FastTable<>();
 
 	@Override
 	protected void handleBackHome() {

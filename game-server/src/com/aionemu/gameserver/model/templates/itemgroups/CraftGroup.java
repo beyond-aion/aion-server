@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.Range;
 
@@ -20,7 +20,7 @@ public abstract class CraftGroup extends BonusItemGroup {
 	public ItemRaceEntry[] getRewards(Integer skillId) {
 		if (!dataHolder.containsKey(skillId))
 			return new ItemRaceEntry[0];
-		List<ItemRaceEntry> result = new ArrayList<ItemRaceEntry>();
+		List<ItemRaceEntry> result = new FastTable<ItemRaceEntry>();
 		for (List<CraftReward> items : dataHolder.get(skillId).values())
 			result.addAll(items);
 		return result.toArray(new ItemRaceEntry[0]);
@@ -29,7 +29,7 @@ public abstract class CraftGroup extends BonusItemGroup {
 	public ItemRaceEntry[] getRewards(Integer skillId, Integer skillPoints) {
 		if (!dataHolder.containsKey(skillId))
 			return new ItemRaceEntry[0];
-		List<ItemRaceEntry> result = new ArrayList<ItemRaceEntry>();
+		List<ItemRaceEntry> result = new FastTable<ItemRaceEntry>();
 		for (Entry<Range<Integer>, List<CraftReward>> entry : dataHolder.get(skillId).entrySet()) {
 			if (!entry.getKey().contains(skillPoints))
 				continue;

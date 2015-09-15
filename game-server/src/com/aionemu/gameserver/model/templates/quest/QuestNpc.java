@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +33,11 @@ public class QuestNpc {
 		this.npcId = npcId;
 		this.questRange = questRange;
 		onQuestStart = new HashSet<Integer>(0);
-		onKillEvent = new ArrayList<Integer>(0);
-		onTalkEvent = new ArrayList<Integer>(0);
-		onAttackEvent = new ArrayList<Integer>(0);
-		onAddAggroListEvent = new ArrayList<Integer>(0);
-		onAtDistanceEvent = new ArrayList<Integer>(0);
+		onKillEvent = new FastTable<>();
+		onTalkEvent = new FastTable<>();
+		onAttackEvent = new FastTable<>();
+		onAddAggroListEvent = new FastTable<>();
+		onAtDistanceEvent = new FastTable<>();
 		allQuestIds = new HashSet<Integer>(0);
 	}
 

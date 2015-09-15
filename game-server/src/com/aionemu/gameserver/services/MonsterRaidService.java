@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -143,7 +144,7 @@ public class MonsterRaidService {
 	}
 
 	public List<Npc> spawnLocation(MonsterRaidLocation mrl) {
-		List<Npc> location = new ArrayList<>();
+		List<Npc> location = new FastTable<>();
 		SpawnTemplate flagTemp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 832819, mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
 		SpawnTemplate vortexTemp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 702550, mrl.getX(), mrl.getY(), mrl.getZ() + 40f, mrl.getH());
 		location.add((Npc) SpawnEngine.spawnObject(flagTemp, 1));

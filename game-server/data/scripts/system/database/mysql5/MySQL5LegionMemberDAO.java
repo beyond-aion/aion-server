@@ -3,7 +3,9 @@ package mysql5;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -219,8 +221,8 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ArrayList<Integer> loadLegionMembers(final int legionId) {
-		final ArrayList<Integer> legionMembers = new ArrayList<Integer>();
+	public List<Integer> loadLegionMembers(final int legionId) {
+		final List<Integer> legionMembers = new FastTable<Integer>();
 
 		boolean success = DB.select(SELECT_LEGIONMEMBERS_QUERY, new ParamReadStH() {
 

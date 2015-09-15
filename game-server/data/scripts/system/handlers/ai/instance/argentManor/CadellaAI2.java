@@ -1,10 +1,10 @@
 package ai.instance.argentManor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -126,7 +126,7 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private List<Npc> getHelpers() {
-		List<Npc> helpers = new ArrayList<Npc>();
+		List<Npc> helpers = new FastTable<Npc>();
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		Npc npc1 = instance.getNpc(282345);
 		if (npc1 != null && !NpcActions.isAlreadyDead(npc1)) {

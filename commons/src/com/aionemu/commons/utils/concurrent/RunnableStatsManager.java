@@ -2,7 +2,6 @@ package com.aionemu.commons.utils.concurrent;
 
 import java.io.PrintStream;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +11,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -219,7 +220,7 @@ public final class RunnableStatsManager {
 	}
 
 	public static void dumpClassStats(final SortBy sortBy) {
-		final List<MethodStat> methodStats = new ArrayList<MethodStat>();
+		final List<MethodStat> methodStats = new FastTable<MethodStat>();
 
 		synchronized (RunnableStatsManager.class) {
 			for (ClassStat classStat : classStats.values())
@@ -231,7 +232,7 @@ public final class RunnableStatsManager {
 		if (sortBy != null)
 			Collections.sort(methodStats, sortBy.comparator);
 
-		final List<String> lines = new ArrayList<String>();
+		final List<String> lines = new FastTable<String>();
 
 		lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 		lines.add("<entries>");

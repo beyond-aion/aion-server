@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
@@ -29,7 +30,7 @@ public class OnKillEvent extends QuestEvent {
 
 	public List<Monster> getMonsters() {
 		if (monster == null) {
-			monster = new ArrayList<Monster>();
+			monster = new FastTable<Monster>();
 		}
 		return this.monster;
 	}

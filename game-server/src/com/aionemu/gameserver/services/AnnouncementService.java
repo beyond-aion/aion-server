@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
 import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class AnnouncementService {
 	private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
 
 	private FastSet<Announcement> announcements = new FastSet<Announcement>().shared();
-	private List<Future<?>> delays = new ArrayList<Future<?>>();
+	private List<Future<?>> delays = new FastTable<Future<?>>();
 
 	private AnnouncementService() {
 		this.load();

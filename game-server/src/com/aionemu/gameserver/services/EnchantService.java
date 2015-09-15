@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.EnchantsConfig;
@@ -533,7 +534,7 @@ public class EnchantService {
 	}
 
 	public static int getEquipBuff(Item item) {
-		List<Integer> skillsSet = new ArrayList<Integer>();
+		List<Integer> skillsSet = new FastTable<Integer>();
 		switch (item.getItemTemplate().getExceedEnchantSkill()) {
 			case RANK1_SET1_MAGICAL_GLOVES:
 				skillsSet = (Arrays.asList(13046, 13042, 13055));

@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +83,7 @@ public class NpcSkillList implements SkillList<Npc> {
 
 	private void initSkills() {
 		if (skills == null) {
-			skills = new ArrayList<NpcSkillEntry>();
+			skills = new FastTable<NpcSkillEntry>();
 		}
 	}
 

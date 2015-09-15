@@ -6,7 +6,6 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.sort;
 import static ch.lambdaj.Lambda.sum;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -98,7 +97,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	private List<Integer> getFreePositions() {
-		List<Integer> p = new ArrayList<Integer>();
+		List<Integer> p = new FastTable<Integer>();
 		for (Integer key : positions.keySet()) {
 			if (!positions.get(key)) {
 				p.add(key);

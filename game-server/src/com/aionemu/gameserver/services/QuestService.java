@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
+
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -112,7 +113,7 @@ public final class QuestService {
 		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0) {
 			return false; // prevent repeatable reward because of wrong quest handling
 		}
-		List<QuestItems> questItems = new ArrayList<QuestItems>();
+		List<QuestItems> questItems = new FastTable<QuestItems>();
 		if (!template.getExtendedRewards().isEmpty()) {
 			if (qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
 				questItems.addAll(getRewardItems(env, template, true, reward));
@@ -137,7 +138,7 @@ public final class QuestService {
 	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, int reward) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
-		List<QuestItems> questItems = new ArrayList<>();
+		List<QuestItems> questItems = new FastTable<>();
 		Rewards rewards;
 		if (extended) {
 			rewards = template.getExtendedRewards().get(0);
@@ -411,7 +412,7 @@ public final class QuestService {
 			return false;
 
 		if (template.getCombineSkill() != null) {
-			List<Integer> skills = new ArrayList<Integer>(); // skills to check
+			List<Integer> skills = new FastTable<Integer>(); // skills to check
 			if (template.getCombineSkill() == -1) // any skill
 			{
 				skills.add(30002);
@@ -572,7 +573,7 @@ public final class QuestService {
 
 		// Check required skills
 		if (template.getCombineSkill() != null) {
-			List<Integer> skills = new ArrayList<Integer>(); // skills to check
+			List<Integer> skills = new FastTable<Integer>(); // skills to check
 			if (template.getCombineSkill() == -1) // any skill
 			{
 				skills.add(30002);
@@ -765,7 +766,7 @@ public final class QuestService {
 			toCheck = reward.getCollectItemChecks();
 
 			if (reward.getCollectItemChecks().size() == 0) { // all items are required
-				toCheck = new ArrayList<>();
+				toCheck = new FastTable<>();
 				for (int index = 0; index < collectItems.getCollectItem().size(); index++)
 					toCheck.add(index);
 			}
@@ -872,7 +873,7 @@ public final class QuestService {
 				continue;
 			}
 			if (players != null && player.isInGroup2()) {
-				List<Player> pls = new ArrayList<Player>();
+				List<Player> pls = new FastTable<Player>();
 				if (drop.isDropEachMemberGroup()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -906,7 +907,7 @@ public final class QuestService {
 					pls.clear();
 				}
 			} else if (players != null && player.isInAlliance2()) {
-				List<Player> pls = new ArrayList<Player>();
+				List<Player> pls = new FastTable<Player>();
 				if (drop.isDropEachMemberAlliance()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -1163,7 +1164,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersGroup(PlayerGroup group, int npcId, int questId) {
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : group.getMembers()) {
@@ -1179,7 +1180,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersAlliance(PlayerAlliance alliance, int npcId, int questId) {
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : alliance.getMembers()) {

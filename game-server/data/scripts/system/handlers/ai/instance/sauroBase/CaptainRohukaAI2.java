@@ -1,8 +1,8 @@
 package ai.instance.sauroBase;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -120,7 +120,7 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void getRandomTarget() {
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 16))
 				players.add(player);

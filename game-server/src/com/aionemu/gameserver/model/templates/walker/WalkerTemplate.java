@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.walker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Marshaller;
@@ -123,7 +122,7 @@ public class WalkerTemplate {
 		this.pool = pool;
 	}
 
-	public void setRouteSteps(ArrayList<RouteStep> newSteps) {
+	public void setRouteSteps(List<RouteStep> newSteps) {
 		routeStepList = newSteps;
 	}
 

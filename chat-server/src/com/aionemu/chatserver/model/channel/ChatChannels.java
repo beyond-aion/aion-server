@@ -1,8 +1,9 @@
 package com.aionemu.chatserver.model.channel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class ChatChannels {
 	/**
 	 * Channel List
 	 */
-	private static final List<Channel> channels = new ArrayList<Channel>();
+	private static final List<Channel> channels = new FastTable<Channel>();
 
 	/**
 	 * LFG Channel

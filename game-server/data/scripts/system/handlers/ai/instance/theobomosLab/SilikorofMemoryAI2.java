@@ -1,9 +1,9 @@
 package ai.instance.theobomosLab;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @AIName("silikor")
 public class SilikorofMemoryAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new ArrayList<Integer>();
+	protected List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	protected void handleAttack(Creature creature) {

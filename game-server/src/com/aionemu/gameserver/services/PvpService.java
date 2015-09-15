@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,7 +186,7 @@ public class PvpService {
 			return false;
 
 		// Find group members in range
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 
 		// Find highest rank and level in local group
 		int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
@@ -257,7 +257,7 @@ public class PvpService {
 			return false;
 
 		// Find group members in range
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 
 		// Find highest rank and level in local group
 		int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
@@ -354,7 +354,7 @@ public class PvpService {
 		if (winner.getRace() == victim.getRace())
 			return;
 
-		List<Player> rewarded = new ArrayList<Player>();
+		List<Player> rewarded = new FastTable<Player>();
 		int worldId = victim.getWorldId();
 		List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
 

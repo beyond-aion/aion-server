@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.services.abyss;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,8 +105,9 @@ public class AbyssRankUpdateService {
 	 */
 	private void updateQuotaRanksForRace(Race race, AbyssRankEnum limitRank, int maxOfflineDays) {
 		Map<Integer, Integer[]> playerGpApMap = DAOManager.getDAO(AbyssRankDAO.class).loadPlayersGpAp(race, limitRank, maxOfflineDays);
-		List<Entry<Integer, Integer[]>> playerGpApEntries = new ArrayList<>(playerGpApMap.entrySet());
-		Collections.sort(playerGpApEntries, new PlayerGpComparator());
+		List<Entry<Integer, Integer[]>> playerGpApEntries = new FastTable<>();
+		playerGpApEntries.addAll(playerGpApMap.entrySet());
+		playerGpApEntries.sort(new PlayerGpComparator());
 
 		// calculate and set new GP ranks
 		for (int i = AbyssRankEnum.SUPREME_COMMANDER.getId(); i >= limitRank.getId(); i--)

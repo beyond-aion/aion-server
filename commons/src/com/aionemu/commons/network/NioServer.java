@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class NioServer {
 	/**
 	 * The channels on which we'll accept connections
 	 */
-	private final List<SelectionKey> serverChannelKeys = new ArrayList<SelectionKey>();
+	private final List<SelectionKey> serverChannelKeys = new FastTable<SelectionKey>();
 
 	/**
 	 * Dispatcher that will accept connections

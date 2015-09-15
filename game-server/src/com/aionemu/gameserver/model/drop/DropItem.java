@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.drop;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,7 +17,7 @@ public class DropItem {
 	private int index = 0;
 	private long count = 0;
 	private final Drop dropTemplate;
-	private ArrayList<Integer> playerObjIds;
+	private List<Integer> playerObjIds;
 	private boolean isFreeForAll = false;
 	private long highestValue = 0;
 	private Player winningPlayer = null;
@@ -28,7 +30,7 @@ public class DropItem {
 		this.dropTemplate = dropTemplate;
 		ItemTemplate template = dropTemplate.getItemTemplate();
 		int optionalBonus = template.getOptionSlotBonus();
-		this.playerObjIds = new ArrayList<>();
+		this.playerObjIds = new FastTable<>();
 		if (optionalBonus != 0) {
 			optionalSocket = -1;
 		}
@@ -81,7 +83,7 @@ public class DropItem {
 	/**
 	 * @return the playerObjId
 	 */
-	public ArrayList<Integer> getPlayerObjIds() {
+	public List<Integer> getPlayerObjIds() {
 		return playerObjIds;
 	}
 

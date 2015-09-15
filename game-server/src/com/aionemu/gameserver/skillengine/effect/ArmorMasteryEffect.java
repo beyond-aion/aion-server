@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatArmorMasteryFunction;
@@ -29,7 +30,7 @@ public class ArmorMasteryEffect extends BufEffect {
 			return;
 
 		List<IStatFunction> modifiers = getModifiers(effect);
-		List<IStatFunction> masteryModifiers = new ArrayList<>(modifiers.size());
+		List<IStatFunction> masteryModifiers = new FastTable<>();
 		for (IStatFunction modifier : modifiers) {
 			masteryModifiers.add(new StatArmorMasteryFunction(subGroup, modifier.getName(), modifier.getValue(), modifier.isBonus()));
 		}

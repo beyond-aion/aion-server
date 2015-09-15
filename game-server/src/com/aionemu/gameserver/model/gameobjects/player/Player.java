@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -677,7 +676,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public List<Item> getDirtyItemsToUpdate() {
-		List<Item> dirtyItems = new ArrayList<Item>();
+		List<Item> dirtyItems = new FastTable<Item>();
 
 		IStorage cubeStorage = getStorage(StorageType.CUBE.getId());
 		if (cubeStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
@@ -2215,7 +2214,7 @@ public class Player extends Creature {
 
 	public void setRideObservers(ActionObserver observer) {
 		if (rideObservers == null)
-			rideObservers = new ArrayList<ActionObserver>(3);
+			rideObservers = new FastTable<>();
 
 		rideObservers.add(observer);
 	}

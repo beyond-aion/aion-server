@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.services.rift;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -21,7 +21,7 @@ public class RiftInformer {
 
 	public static List<Npc> getSpawned(int worldId) {
 		List<Npc> rifts = RiftManager.getSpawned();
-		List<Npc> worldRifts = new ArrayList<Npc>();
+		List<Npc> worldRifts = new FastTable<Npc>();
 		for (Npc rift : rifts) {
 			if (rift.getWorldId() == worldId) {
 				worldRifts.add(rift);
@@ -62,7 +62,7 @@ public class RiftInformer {
 	}
 
 	private static List<AionServerPacket> getPackets(int worldId, int objId) {
-		List<AionServerPacket> packets = new ArrayList<AionServerPacket>();
+		List<AionServerPacket> packets = new FastTable<AionServerPacket>();
 		if (objId == -1) {
 			for (Npc rift : getSpawned(worldId)) {
 				RVController controller = (RVController) rift.getController();

@@ -2,9 +2,10 @@ package com.aionemu.gameserver.world.geo;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,7 @@ public class RealGeoData implements GeoData {
 
 		log.info("Loading geo maps...");
 		ConsoleUtil.printProgressBarHeader(DataManager.WORLD_MAPS_DATA.size());
-		List<Integer> mapsWithErrors = new ArrayList<Integer>();
+		List<Integer> mapsWithErrors = new FastTable<Integer>();
 
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			GeoMap geoMap = new GeoMap(Integer.toString(map.getMapId()), map.getWorldSize());

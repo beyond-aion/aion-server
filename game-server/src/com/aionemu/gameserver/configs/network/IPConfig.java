@@ -3,11 +3,12 @@ package com.aionemu.gameserver.configs.network;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class IPConfig {
 	/**
 	 * List of all ip ranges
 	 */
-	private static final List<IPRange> ranges = new ArrayList<IPRange>();
+	private static final List<IPRange> ranges = new FastTable<IPRange>();
 	/**
 	 * Default address
 	 */

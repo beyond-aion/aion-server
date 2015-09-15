@@ -2,11 +2,12 @@ package com.aionemu.gameserver.services;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.Future;
+
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -65,8 +66,8 @@ public class EventService {
 	 * <b><font color='red'>NOTICE: </font>This method must not be called from anywhere else.</b>
 	 */
 	public void onPlayerLogin(Player player) {
-		List<Integer> activeStartQuests = new ArrayList<Integer>();
-		List<Integer> activeMaintainQuests = new ArrayList<Integer>();
+		List<Integer> activeStartQuests = new FastTable<Integer>();
+		List<Integer> activeMaintainQuests = new FastTable<Integer>();
 		TIntObjectHashMap<List<EventTemplate>> map1 = null;
 		TIntObjectHashMap<List<EventTemplate>> map2 = null;
 
@@ -187,7 +188,7 @@ public class EventService {
 	}
 
 	private void checkEvents() {
-		List<EventTemplate> newEvents = new ArrayList<EventTemplate>();
+		List<EventTemplate> newEvents = new FastTable<EventTemplate>();
 		List<EventTemplate> allEvents = DataManager.EVENT_DATA.getActiveEvents();
 
 		for (EventTemplate et : allEvents) {
@@ -219,12 +220,12 @@ public class EventService {
 		for (EventTemplate et : activeEvents) {
 			for (int qId : et.getStartableQuests()) {
 				if (!eventsForStartQuest.containsKey(qId))
-					eventsForStartQuest.put(qId, new ArrayList<EventTemplate>());
+					eventsForStartQuest.put(qId, new FastTable<EventTemplate>());
 				eventsForStartQuest.get(qId).add(et);
 			}
 			for (int qId : et.getMaintainableQuests()) {
 				if (!eventsForMaintainQuest.containsKey(qId))
-					eventsForMaintainQuest.put(qId, new ArrayList<EventTemplate>());
+					eventsForMaintainQuest.put(qId, new FastTable<EventTemplate>());
 				eventsForMaintainQuest.get(qId).add(et);
 			}
 		}

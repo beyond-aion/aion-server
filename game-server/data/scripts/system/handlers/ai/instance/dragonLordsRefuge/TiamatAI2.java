@@ -1,11 +1,11 @@
 package ai.instance.dragonLordsRefuge;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @AIName("tiamat")
 public class TiamatAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new ArrayList<Integer>();
+	protected List<Integer> percents = new FastTable<Integer>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isSinkingFlag = new AtomicBoolean(false);
 	private Future<?> skillTask;

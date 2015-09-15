@@ -1,7 +1,8 @@
 package quest.tiamaranta;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,7 +19,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _41519KillTheShepherd extends QuestHandler {
 
 	private final static int questId = 41519;
-	private final List<Npc> junes = new ArrayList<Npc>();
+	private final List<Npc> junes = new FastTable<Npc>();
 
 	public _41519KillTheShepherd() {
 		super(questId);

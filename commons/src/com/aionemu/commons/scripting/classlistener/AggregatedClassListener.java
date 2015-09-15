@@ -2,6 +2,8 @@ package com.aionemu.commons.scripting.classlistener;
 
 import java.util.List;
 
+import javolution.util.FastTable;
+
 import com.google.common.collect.Lists;
 
 /**
@@ -15,7 +17,7 @@ public class AggregatedClassListener implements ClassListener {
 	private final List<ClassListener> classListeners;
 
 	public AggregatedClassListener() {
-		classListeners = Lists.newArrayList();
+		classListeners = new FastTable<>();
 	}
 
 	public AggregatedClassListener(List<ClassListener> classListeners) {

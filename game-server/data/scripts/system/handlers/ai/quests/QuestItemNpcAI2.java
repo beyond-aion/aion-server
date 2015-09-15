@@ -1,8 +1,8 @@
 package ai.quests;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.ActionItemNpcAI2;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -26,7 +26,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("quest_use_item")
 public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 
-	private List<Player> registeredPlayers = new ArrayList<Player>();
+	private List<Player> registeredPlayers = new FastTable<Player>();
 
 	@Override
 	protected void handleDialogStart(Player player) {

@@ -1,14 +1,10 @@
-/*
- * Test Instrumen Dainatum
- * The Illuminary Obelisk 4.5
- */
 package ai.instance.illuminaryObelisk;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -30,7 +26,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @AIName("dainatum")
 public class TestInstrumentDainatumAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new ArrayList<Integer>();
+	private List<Integer> percents = new FastTable<Integer>();
 	private Future<?> TimerTasks;
 	protected NpcAI2 ai2;
 	private boolean isCancelled;

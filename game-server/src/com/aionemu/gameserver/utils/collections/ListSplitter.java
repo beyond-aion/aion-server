@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.utils.collections;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz, Rolandas
@@ -36,7 +37,7 @@ public class ListSplitter<T> {
 		calledNext = true;
 
 		if (length == 0)
-			return new ArrayList<>();
+			return new FastTable<>();
 		@SuppressWarnings("unchecked")
 		T[] subArray = (T[]) Array.newInstance(componentType, Math.min(splitCount, length - nextStartIndex));
 		if (subArray.length > 0) {

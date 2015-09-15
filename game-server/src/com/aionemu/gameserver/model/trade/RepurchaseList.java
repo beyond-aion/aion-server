@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.trade;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,7 +14,7 @@ import com.aionemu.gameserver.services.RepurchaseService;
 public class RepurchaseList {
 
 	private final int sellerObjId;
-	private List<Item> repurchases = new ArrayList<Item>();
+	private List<Item> repurchases = new FastTable<Item>();
 
 	public RepurchaseList(int sellerObjId) {
 		this.sellerObjId = sellerObjId;

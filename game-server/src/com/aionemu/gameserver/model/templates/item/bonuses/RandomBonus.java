@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.bonuses;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 
@@ -26,7 +27,7 @@ public class RandomBonus {
 
 	public List<ModifiersTemplate> getModifiers() {
 		if (modifiers == null) {
-			modifiers = new ArrayList<ModifiersTemplate>();
+			modifiers = new FastTable<ModifiersTemplate>();
 		}
 		return this.modifiers;
 	}

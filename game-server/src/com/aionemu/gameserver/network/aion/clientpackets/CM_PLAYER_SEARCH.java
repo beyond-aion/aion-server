@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
@@ -63,7 +64,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 
 		Iterator<Player> it = World.getInstance().getPlayersIterator();
 
-		List<Player> matches = new ArrayList<Player>(MAX_RESULTS);
+		List<Player> matches = new FastTable<Player>();
 
 		if (activePlayer.getLevel() < CustomConfig.LEVEL_TO_SEARCH) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_SEARCH)));

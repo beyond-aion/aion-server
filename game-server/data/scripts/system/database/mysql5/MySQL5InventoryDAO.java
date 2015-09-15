@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -162,7 +161,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadEquipment(int playerId) {
-		final List<Item> items = new ArrayList<Item>();
+		final List<Item> items = new FastTable<Item>();
 		final int storage = 0;
 		final int equipped = 1;
 

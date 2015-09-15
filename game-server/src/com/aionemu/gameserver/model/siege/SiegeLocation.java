@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.model.siege;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class SiegeLocation implements ZoneHandler {
 		this.worldId = template.getWorldId();
 		this.type = template.getType();
 		this.siegeDuration = template.getSiegeDuration();
-		this.zone = new ArrayList<SiegeZoneInstance>();
+		this.zone = new FastTable<SiegeZoneInstance>();
 		this.influenceValue = template.getInfluenceValue();
 	}
 

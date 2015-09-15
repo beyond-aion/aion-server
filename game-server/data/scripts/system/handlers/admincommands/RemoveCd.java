@@ -1,9 +1,10 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
@@ -69,7 +70,7 @@ public class RemoveCd extends AdminCommand {
 					return;
 				if (params.length >= 2) {
 					if (params[1].equalsIgnoreCase("all")) {
-						List<Integer> mapIds = new ArrayList<Integer>();
+						List<Integer> mapIds = new FastTable<Integer>();
 						for (Entry<Integer, PortalCooldown> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet())
 							mapIds.add(mapId.getKey());
 

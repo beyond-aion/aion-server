@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.enchants.EnchantList;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
@@ -36,7 +37,7 @@ public class EnchantData {
 			templates.put(group, map);
 			for (EnchantTemplateData data : enchant.getEnchantDatas()) {
 				int level = data.getLevel();
-				List<EnchantStat> stats = new ArrayList<>();
+				List<EnchantStat> stats = new FastTable<>();
 				for (EnchantStat stat : data.getEnchantStats()) {
 					stats.add(stat);
 				}

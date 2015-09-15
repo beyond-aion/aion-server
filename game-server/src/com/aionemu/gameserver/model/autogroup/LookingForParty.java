@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastTable;
@@ -13,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class LookingForParty extends AbstractLockManager {
 
-	private List<SearchInstance> searchInstances = new ArrayList<SearchInstance>();
+	private List<SearchInstance> searchInstances = new FastTable<SearchInstance>();
 	private Player player;
 	private long startEnterTime;
 	private long penaltyTime;

@@ -2,7 +2,6 @@
 // Use is subject to license terms.
 package com.aionemu.gameserver.utils.annotations;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * base classes and interfaces.
  * <p>
  * By now only public methods can inherit annotations with the mechanism. (Comment: [RR] reworked that, now it fetches all methods, but sure it's a
- * workaround. (See: {@link com.aionemu.gameserver.utils.annotations.AnnotatedClassImpl#getAllMethods(Class, ArrayList)
+ * workaround. (See: {@link com.aionemu.gameserver.utils.annotations.AnnotatedClassImpl#getAllMethods(Class, List)
  * AnnotatedClassImpl.getAllMethods()})
  * 
  * @author Vladimir Ovchinnikov

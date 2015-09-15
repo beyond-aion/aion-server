@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
@@ -19,8 +20,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class AutoHarmonyInstance extends AutoInstance {
 
-	private List<AGPlayer> group1 = new ArrayList<AGPlayer>();
-	private List<AGPlayer> group2 = new ArrayList<AGPlayer>();
+	private List<AGPlayer> group1 = new FastTable<AGPlayer>();
+	private List<AGPlayer> group2 = new FastTable<AGPlayer>();
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -127,7 +128,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	private List<Player> getPlayerFromGroup(List<AGPlayer> group) {
-		List<Player> _players = new ArrayList<Player>();
+		List<Player> _players = new FastTable<Player>();
 		for (AGPlayer agp : group) {
 			for (Player p : instance.getPlayersInside()) {
 				if (p.getObjectId().equals(agp.getObjectId())) {

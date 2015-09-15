@@ -1,11 +1,11 @@
 package ai.instance.argentManor;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -38,7 +38,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean startedEvent = new AtomicBoolean(false);
 	private AtomicBoolean isSpawnedWings = new AtomicBoolean(false);
-	private List<Integer> percents = new ArrayList<Integer>();
+	private List<Integer> percents = new FastTable<Integer>();
 	private Future<?> phaseTask;
 	private Future<?> skillTask;
 	private Future<?> thinkTask;

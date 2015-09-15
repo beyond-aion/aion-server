@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.world;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -299,7 +299,7 @@ public class MapRegion {
 	}
 
 	public List<ZoneInstance> getZones(Creature creature) {
-		List<ZoneInstance> z = new ArrayList<ZoneInstance>();
+		List<ZoneInstance> z = new FastTable<ZoneInstance>();
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {

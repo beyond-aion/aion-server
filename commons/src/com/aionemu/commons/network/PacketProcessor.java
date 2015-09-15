@@ -1,6 +1,5 @@
 package com.aionemu.commons.network;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -8,6 +7,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ public class PacketProcessor<T extends AConnection> {
 	/**
 	 * Working threads.
 	 */
-	private final List<Thread> threads = new ArrayList<Thread>();
+	private final List<Thread> threads = new FastTable<Thread>();
 
 	/**
 	 * minimum number of working Threads

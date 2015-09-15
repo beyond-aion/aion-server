@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -35,7 +36,7 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 		this.page = readH();
 		this.mask = readH();
 		this.itemCount = readH();
-		this.itemList = new ArrayList<Integer>();
+		this.itemList = new FastTable<Integer>();
 
 		for (int index = 0; index < this.itemCount; index++)
 			this.itemList.add(readD());

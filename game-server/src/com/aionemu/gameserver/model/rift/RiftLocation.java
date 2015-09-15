@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.rift;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
@@ -13,7 +14,7 @@ public class RiftLocation {
 
 	private boolean opened;
 	protected RiftTemplate template;
-	private List<VisibleObject> spawned = new ArrayList<VisibleObject>();
+	private List<VisibleObject> spawned = new FastTable<VisibleObject>();
 
 	public RiftLocation() {
 	}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -130,7 +131,7 @@ public class Effects {
 	 */
 	public List<EffectTemplate> getEffects() {
 		if (effects == null) {
-			effects = new ArrayList<EffectTemplate>();
+			effects = new FastTable<EffectTemplate>();
 		}
 		return this.effects;
 	}
@@ -141,7 +142,7 @@ public class Effects {
 
 	public void addEffectType(EffectType effectType) {
 		if (effectTypes == null)
-			effectTypes = new ArrayList<EffectType>();
+			effectTypes = new FastTable<EffectType>();
 
 		this.effectTypes.add(effectType);
 	}

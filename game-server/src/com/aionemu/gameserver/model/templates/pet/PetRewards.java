@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.pet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -27,7 +28,7 @@ public class PetRewards {
 
 	public List<PetFeedResult> getResults() {
 		if (results == null) {
-			results = new ArrayList<PetFeedResult>();
+			results = new FastTable<PetFeedResult>();
 		}
 		return this.results;
 	}

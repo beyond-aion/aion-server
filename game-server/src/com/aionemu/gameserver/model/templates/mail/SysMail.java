@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.mail;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 
@@ -36,7 +37,7 @@ public class SysMail {
 			String caseName = template.getName().toLowerCase();
 			List<MailTemplate> sysTemplates = mailCaseTemplates.get(caseName);
 			if (sysTemplates == null) {
-				sysTemplates = new ArrayList<MailTemplate>();
+				sysTemplates = new FastTable<MailTemplate>();
 				mailCaseTemplates.put(caseName, sysTemplates);
 			}
 			sysTemplates.add(template);

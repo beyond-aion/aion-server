@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,6 +11,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -43,10 +44,10 @@ public class EventQuestList {
 	List<Integer> getQuestsFromData(String data) {
 		Set<String> q = new HashSet<String>();
 		Collections.addAll(q, data.split(";"));
-		List<Integer> result = new ArrayList<Integer>();
+		List<Integer> result = new FastTable<Integer>();
 
 		if (q.size() > 0) {
-			result = new ArrayList<Integer>();
+			result = new FastTable<Integer>();
 			Iterator<String> it = q.iterator();
 			while (it.hasNext())
 				result.add(Integer.parseInt(it.next()));
@@ -60,7 +61,7 @@ public class EventQuestList {
 	 */
 	public List<Integer> getStartableQuests() {
 		if (startQuests == null)
-			startQuests = new ArrayList<Integer>();
+			startQuests = new FastTable<Integer>();
 		return startQuests;
 	}
 
@@ -69,7 +70,7 @@ public class EventQuestList {
 	 */
 	public List<Integer> getMaintainQuests() {
 		if (maintainQuests == null)
-			maintainQuests = new ArrayList<Integer>();
+			maintainQuests = new FastTable<Integer>();
 		return maintainQuests;
 	}
 

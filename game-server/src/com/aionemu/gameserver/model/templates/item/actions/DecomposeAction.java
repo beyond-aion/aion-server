@@ -6,7 +6,6 @@ import static ch.lambdaj.Lambda.select;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,6 +15,8 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -480,7 +481,7 @@ public class DecomposeAction extends AbstractItemAction {
 			return null;
 		}
 		int playerLevel = player.getLevel();
-		Collection<ExtractedItemsCollection> result = new ArrayList<ExtractedItemsCollection>();
+		Collection<ExtractedItemsCollection> result = new FastTable<ExtractedItemsCollection>();
 		for (ExtractedItemsCollection collection : itemsCollections) {
 			if (collection.getMinLevel() > playerLevel) {
 				continue;

@@ -4,8 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 
 	@Override
 	public List<BrokerItem> loadBroker() {
-		final List<BrokerItem> brokerItems = new ArrayList<BrokerItem>();
+		final List<BrokerItem> brokerItems = new FastTable<BrokerItem>();
 
 		final List<Item> items = getBrokerItems();
 
@@ -73,7 +74,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 	}
 
 	private List<Item> getBrokerItems() {
-		final List<Item> brokerItems = new ArrayList<Item>();
+		final List<Item> brokerItems = new FastTable<Item>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_location` = 126", new ReadStH() {
 

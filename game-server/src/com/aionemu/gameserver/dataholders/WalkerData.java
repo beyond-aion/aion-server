@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,6 +18,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ public class WalkerData {
 
 	public void AddTemplate(WalkerTemplate newTemplate) {
 		if (walkerlist == null)
-			walkerlist = new ArrayList<WalkerTemplate>();
+			walkerlist = new FastTable<WalkerTemplate>();
 		walkerlist.add(newTemplate);
 	}
 

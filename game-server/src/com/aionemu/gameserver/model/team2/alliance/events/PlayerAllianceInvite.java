@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.team2.alliance.events;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,7 +50,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler {
 				}
 			}
 
-			List<Player> playersToAdd = new ArrayList<Player>();
+			List<Player> playersToAdd = new FastTable<Player>();
 			collectPlayersToAdd(playersToAdd, alliance);
 
 			if (alliance == null) {

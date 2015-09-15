@@ -1,8 +1,9 @@
 package consolecommands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
@@ -40,7 +41,7 @@ public class Clearusercoolt extends ConsoleCommand {
 			if (player.getPortalCooldownList() == null || player.getPortalCooldownList().getPortalCoolDowns() == null)
 				return;
 
-			List<Integer> mapIds = new ArrayList<Integer>();
+			List<Integer> mapIds = new FastTable<Integer>();
 			for (Entry<Integer, PortalCooldown> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet())
 				mapIds.add(mapId.getKey());
 

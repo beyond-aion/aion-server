@@ -5,7 +5,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntProcedure;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -88,8 +87,8 @@ public class QuestEngine implements GameEngine {
 	private FastMap<ZoneName, TIntArrayList> questOnLeaveZone = new FastMap<ZoneName, TIntArrayList>();
 	private FastMap<String, TIntArrayList> questOnPassFlyingRings = new FastMap<String, TIntArrayList>();
 	private TIntObjectHashMap<TIntArrayList> questOnMovieEnd = new TIntObjectHashMap<TIntArrayList>();
-	private List<Integer> questOnTimerEnd = new ArrayList<Integer>();
-	private List<Integer> onInvisibleTimerEnd = new ArrayList<Integer>();
+	private List<Integer> questOnTimerEnd = new FastTable<Integer>();
+	private List<Integer> onInvisibleTimerEnd = new FastTable<Integer>();
 	private FastMap<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<AbyssRankEnum, TIntArrayList>();
 	private FastMap<Integer, TIntArrayList> questOnKillInWorld = new FastMap<Integer, TIntArrayList>();
 	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<TIntArrayList>();
@@ -97,7 +96,7 @@ public class QuestEngine implements GameEngine {
 	private Map<Integer, Integer> questOnFailCraft = new HashMap<Integer, Integer>();
 	private Map<Integer, Set<Integer>> questOnEquipItem = new HashMap<Integer, Set<Integer>>();
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<TIntArrayList>();
-	private List<Integer> questOnDredgionReward = new ArrayList<Integer>();
+	private List<Integer> questOnDredgionReward = new FastTable<Integer>();
 	private FastMap<BonusType, TIntArrayList> questOnBonusApply = new FastMap<BonusType, TIntArrayList>();
 	private TIntArrayList reachTarget = new TIntArrayList();
 	private TIntArrayList lostTarget = new TIntArrayList();

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -25,8 +26,8 @@ public class SkillTreeData {
 	@XmlElement(name = "skill")
 	private List<SkillLearnTemplate> skillTemplates;
 
-	private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templates = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
-	private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
+	private final TIntObjectHashMap<List<SkillLearnTemplate>> templates = new TIntObjectHashMap<>();
+	private final TIntObjectHashMap<List<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SkillLearnTemplate template : skillTemplates) {
@@ -41,9 +42,9 @@ public class SkillTreeData {
 			race = Race.PC_ALL;
 
 		int hash = makeHash(template.getClassId().ordinal(), race.ordinal(), template.getMinLevel());
-		ArrayList<SkillLearnTemplate> value = templates.get(hash);
+		List<SkillLearnTemplate> value = templates.get(hash);
 		if (value == null) {
-			value = new ArrayList<SkillLearnTemplate>();
+			value = new FastTable<SkillLearnTemplate>();
 			templates.put(hash, value);
 		}
 
@@ -51,7 +52,7 @@ public class SkillTreeData {
 
 		value = templatesById.get(template.getSkillId());
 		if (value == null) {
-			value = new ArrayList<SkillLearnTemplate>();
+			value = new FastTable<SkillLearnTemplate>();
 			templatesById.put(template.getSkillId(), value);
 		}
 
@@ -61,7 +62,7 @@ public class SkillTreeData {
 	/**
 	 * @return the templates
 	 */
-	public TIntObjectHashMap<ArrayList<SkillLearnTemplate>> getTemplates() {
+	public TIntObjectHashMap<List<SkillLearnTemplate>> getTemplates() {
 		return templates;
 	}
 
@@ -74,7 +75,7 @@ public class SkillTreeData {
 	 * @return SkillLearnTemplate[]
 	 */
 	public SkillLearnTemplate[] getTemplatesFor(PlayerClass playerClass, int level, Race race) {
-		List<SkillLearnTemplate> newSkills = new ArrayList<SkillLearnTemplate>();
+		List<SkillLearnTemplate> newSkills = new FastTable<SkillLearnTemplate>();
 
 		List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<SkillLearnTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));
@@ -91,7 +92,7 @@ public class SkillTreeData {
 	}
 
 	public SkillLearnTemplate[] getTemplatesForSkill(int skillId) {
-		List<SkillLearnTemplate> searchSkills = new ArrayList<SkillLearnTemplate>();
+		List<SkillLearnTemplate> searchSkills = new FastTable<SkillLearnTemplate>();
 
 		List<SkillLearnTemplate> byId = templatesById.get(skillId);
 		if (byId != null)

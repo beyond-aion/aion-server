@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +130,7 @@ public class HousingService {
 
 				List<House> housesForMap = housesByMapId.get(worldId);
 				if (housesForMap == null) {
-					housesForMap = new ArrayList<House>();
+					housesForMap = new FastTable<House>();
 					housesByMapId.put(worldId, housesForMap);
 				}
 				housesForMap.add(customHouse);
@@ -143,7 +142,7 @@ public class HousingService {
 	}
 
 	public List<House> searchPlayerHouses(int playerObjId) {
-		List<House> houses = new ArrayList<House>();
+		List<House> houses = new FastTable<House>();
 		synchronized (studios) {
 			if (studios.containsKey(playerObjId)) {
 				houses.add(studios.get(playerObjId));

@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +96,7 @@ public class DatabaseCleaningService {
 	}
 
 	private void delegateToThreads(int numberOfThreads, Set<Integer> idsToDelegate) {
-		workers = new ArrayList<>();
+		workers = new FastTable<>();
 		log.info("DatabaseCleaningService: Executing deletion over " + numberOfThreads + " longrunning threads");
 
 		// every id to another worker with maximum of n different workers
@@ -128,7 +129,7 @@ public class DatabaseCleaningService {
 
 	private class Worker implements Runnable {
 
-		private List<Integer> ids = new ArrayList<Integer>();
+		private List<Integer> ids = new FastTable<Integer>();
 		private int deletedChars = 0;
 		private boolean _READY = false;
 

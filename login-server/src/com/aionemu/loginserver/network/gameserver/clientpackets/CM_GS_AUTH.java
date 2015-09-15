@@ -1,7 +1,8 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +66,7 @@ public class CM_GS_AUTH extends GsClientPacket {
 		byte len1 = (byte) readC();
 		defaultAddress = readB(len1);
 		int size = readD();
-		ipRanges = new ArrayList<IPRange>(size);
+		ipRanges = new FastTable<IPRange>();
 		for (int i = 0; i < size; i++) {
 			ipRanges.add(new IPRange(readB(readC()), readB(readC()), readB(readC())));
 		}

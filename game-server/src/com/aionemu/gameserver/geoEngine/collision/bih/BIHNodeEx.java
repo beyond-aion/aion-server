@@ -3,7 +3,7 @@ package com.aionemu.gameserver.geoEngine.collision.bih;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.jme3.bounding.BoundingBox;
@@ -72,7 +72,7 @@ class BIHNodeEx {
 	protected final int intersectWhere(Collidable col, BoundingBox box, Matrix4f worldMatrix, BIHTreeEx tree, CollisionResults results) {
 
 		BIHTempVars vars = BIHTempVars.get();
-		ArrayList<BIHStackData> stack = vars.bihStack;
+		List<BIHStackData> stack = vars.bihStack;
 		stack.clear();
 
 		float[] minExts = { box.getCenter().x - box.getXExtent(), box.getCenter().y - box.getYExtent(), box.getCenter().z - box.getZExtent() };
@@ -144,7 +144,7 @@ class BIHNodeEx {
 	protected final int intersectWhere(Ray r, Matrix4f worldMatrix, BIHTreeEx tree, float sceneMin, float sceneMax, CollisionResults results) {
 
 		BIHTempVars vars = BIHTempVars.get();
-		ArrayList<BIHStackData> stack = vars.bihStack;
+		List<BIHStackData> stack = vars.bihStack;
 		stack.clear();
 
 		// float tHit = Float.POSITIVE_INFINITY;

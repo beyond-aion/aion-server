@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.taskmanager.fromdb.trigger.TaskFromDBTrigger;
@@ -15,7 +15,7 @@ public abstract class TaskFromDBDAO implements DAO {
 	 * 
 	 * @return all tasks
 	 */
-	public abstract ArrayList<TaskFromDBTrigger> getAllTasks();
+	public abstract List<TaskFromDBTrigger> getAllTasks();
 
 	/**
 	 * Returns class name that will be uses as unique identifier for all DAO classes

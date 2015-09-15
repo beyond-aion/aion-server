@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.enchants;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,7 +17,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public class EnchantEffect implements StatOwner {
 
-	private List<IStatFunction> functions = new ArrayList<>();
+	private List<IStatFunction> functions = new FastTable<>();
 
 	public EnchantEffect(Item item, Player player, List<EnchantStat> enchantStats) {
 		Long itemSlot = item.getEquipmentSlot();

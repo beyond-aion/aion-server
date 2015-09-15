@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -122,7 +123,7 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
 		}
 	}
 
-	private List<PacketElement> elements = new ArrayList<PacketElement>();
+	private List<PacketElement> elements = new FastTable<PacketElement>();
 
 	public SM_CUSTOM_PACKET(int opcode) {
 		super();

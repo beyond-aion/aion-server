@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
@@ -10,6 +9,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -180,7 +181,7 @@ public final class ThreadPoolManager {
 	}
 
 	public List<String> getStats() {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new FastTable<String>();
 
 		list.add("");
 		list.add("Scheduled pool:");

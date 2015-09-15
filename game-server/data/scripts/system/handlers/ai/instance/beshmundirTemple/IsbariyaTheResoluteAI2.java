@@ -1,10 +1,10 @@
 package ai.instance.beshmundirTemple;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -29,7 +29,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
 	private int stage = 0;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
-	private List<Point3D> soulLocations = new ArrayList<Point3D>();
+	private List<Point3D> soulLocations = new FastTable<Point3D>();
 	private Future<?> basicSkillTask;
 	private Future<?> shedule;
 
@@ -153,7 +153,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void spawnSouls() {
-		List<Point3D> points = new ArrayList<Point3D>();
+		List<Point3D> points = new FastTable<Point3D>();
 		points.addAll(soulLocations);
 		int count = Rnd.get(3, 6);
 		for (int i = 0; i < count; i++) {
@@ -165,7 +165,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);

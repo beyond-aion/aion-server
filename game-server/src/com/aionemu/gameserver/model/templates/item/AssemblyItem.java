@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -22,7 +23,7 @@ public class AssemblyItem {
 
 	public List<Integer> getParts() {
 		if (parts == null) {
-			parts = new ArrayList<Integer>();
+			parts = new FastTable<Integer>();
 		}
 		return this.parts;
 	}

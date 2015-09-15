@@ -1,7 +1,8 @@
 package quest.morheim;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -116,7 +117,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 								}
 							}
 							if (!areSpawned) {
-								List<Npc> mobs = new ArrayList<Npc>();
+								List<Npc> mobs = new FastTable<Npc>();
 								// Crusader (2)
 								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
 								mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
@@ -181,7 +182,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 					switch (targetId) {
 						case 211624:
 						case 280818:
-							List<Npc> mobs = new ArrayList<Npc>();
+							List<Npc> mobs = new FastTable<Npc>();
 							qs.setQuestVarById(1, 4); // 1: 4
 							// Draconute Scout (2)
 							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
@@ -210,7 +211,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case 211624:
 						case 280818:
 						case 213578:
-							List<Npc> mobs = new ArrayList<Npc>();
+							List<Npc> mobs = new FastTable<Npc>();
 							qs.setQuestVarById(2, 4); // 2: 4
 							// Draconute Scout (1)
 							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));
@@ -242,7 +243,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case 280818:
 						case 213578:
 						case 213579:
-							List<Npc> mobs = new ArrayList<Npc>();
+							List<Npc> mobs = new FastTable<Npc>();
 							qs.setQuestVarById(3, 4); // 3: 4
 							// Draconute Scout (1)
 							mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f, (byte) 93));

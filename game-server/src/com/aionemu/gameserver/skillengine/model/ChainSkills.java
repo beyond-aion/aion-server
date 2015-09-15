@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
@@ -78,7 +78,7 @@ public class ChainSkills {
 	}
 
 	public Collection<ChainSkill> getChainSkills() {
-		Collection<ChainSkill> collection = new ArrayList<ChainSkill>();
+		Collection<ChainSkill> collection = new FastTable<ChainSkill>();
 		collection.add(this.chainSkill);
 		collection.addAll(this.multiSkills.values());
 

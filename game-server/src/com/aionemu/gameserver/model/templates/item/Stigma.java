@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -27,7 +28,7 @@ public class Stigma {
 	 * @return list
 	 */
 	public List<StigmaSkill> getSkills() {
-		List<StigmaSkill> list = new ArrayList<StigmaSkill>();
+		List<StigmaSkill> list = new FastTable<StigmaSkill>();
 		for (String st : skill) {
 			String[] array = st.split(":");
 			list.add(new StigmaSkill(Integer.parseInt(array[0]), Integer.parseInt(array[1])));
@@ -45,7 +46,7 @@ public class Stigma {
 
 	public List<RequireSkill> getRequireSkill() {
 		if (requireSkill == null) {
-			requireSkill = new ArrayList<RequireSkill>();
+			requireSkill = new FastTable<RequireSkill>();
 		}
 		return this.requireSkill;
 	}

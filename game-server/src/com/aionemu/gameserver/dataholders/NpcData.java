@@ -3,7 +3,6 @@ package com.aionemu.gameserver.dataholders;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,6 +15,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TribeClass;
@@ -101,7 +102,7 @@ public class NpcData extends ReloadableData {
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 			Unmarshaller un = jc.createUnmarshaller();
 			un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-			List<NpcTemplate> newTemplates = new ArrayList<NpcTemplate>();
+			List<NpcTemplate> newTemplates = new FastTable<NpcTemplate>();
 			for (File file : listFiles(dir, true)) {
 				NpcData data = (NpcData) un.unmarshal(file);
 				if (data != null && data.getData() != null)

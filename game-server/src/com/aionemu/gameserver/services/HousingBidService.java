@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.quartz.CronExpression;
@@ -179,8 +178,9 @@ public class HousingBidService extends AbstractCronTask {
 	private void loadBidData() {
 		Set<PlayerHouseBid> playerBidData = DAOManager.getDAO(HouseBidsDAO.class).loadBids();
 
-		List<PlayerHouseBid> sortedBids = new ArrayList<PlayerHouseBid>(playerBidData);
-		Collections.sort(sortedBids);
+		FastTable<PlayerHouseBid> sortedBids = new FastTable<PlayerHouseBid>();
+		sortedBids.addAll(playerBidData);
+		sortedBids.sort();
 
 		FastMap<Integer, House> housesById = new FastMap<>();
 		for (House house : HousingService.getInstance().getCustomHouses()) {
@@ -386,7 +386,7 @@ public class HousingBidService extends AbstractCronTask {
 			}
 		}
 
-		List<HouseBidEntry> copy = new ArrayList<HouseBidEntry>();
+		List<HouseBidEntry> copy = new FastTable<HouseBidEntry>();
 		copy.addAll(houseBids.values());
 
 		houseBids.clear();
@@ -754,7 +754,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	public List<HouseBidEntry> getHouseBidEntries(Race playerRace) {
 		synchronized (houseBids) {
-			List<HouseBidEntry> bids = new ArrayList<HouseBidEntry>();
+			List<HouseBidEntry> bids = new FastTable<HouseBidEntry>();
 			for (HouseBidEntry bid : houseBids.values()) {
 				HousingLand land = DataManager.HOUSE_DATA.getLand(bid.getLandId());
 				boolean isEly = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL;

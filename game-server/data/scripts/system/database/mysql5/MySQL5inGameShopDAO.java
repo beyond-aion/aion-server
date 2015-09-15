@@ -3,10 +3,10 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 						String titleDescription = rset.getString("title_description");
 						String description = rset.getString("description");
 						if (!items.containsKey(category)) {
-							items.put(category, new ArrayList<IGItem>());
+							items.put(category, new FastTable<IGItem>());
 						}
 						items.get(category).add(
 							new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift, titleDescription,

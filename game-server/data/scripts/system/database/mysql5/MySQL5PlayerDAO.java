@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -16,6 +15,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -361,7 +361,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	 */
 	@Override
 	public List<Integer> getPlayerOidsOnAccount(final int accountId) {
-		final List<Integer> result = new ArrayList<Integer>();
+		final List<Integer> result = new FastTable<Integer>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ?", new ParamReadStH() {
 
 			@Override

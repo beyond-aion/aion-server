@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author antness
@@ -14,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ResultedItemsCollection {
 
 	@XmlElement(name = "item")
-	protected ArrayList<ResultedItem> items;
+	protected List<ResultedItem> items;
 	@XmlElement(name = "random_item")
-	protected ArrayList<RandomItem> randomItems;
+	protected List<RandomItem> randomItems;
 
 	public List<ResultedItem> getItems() {
 		return items != null ? items : Collections.<ResultedItem> emptyList();
@@ -26,7 +27,7 @@ public class ResultedItemsCollection {
 		if (randomItems != null) {
 			return randomItems;
 		} else {
-			return new ArrayList<RandomItem>();
+			return new FastTable<RandomItem>();
 		}
 	}
 }

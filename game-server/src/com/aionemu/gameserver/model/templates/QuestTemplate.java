@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,6 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.model.Gender;
@@ -135,24 +136,24 @@ public class QuestTemplate {
 	private boolean restricted = false;
 
 	public QuestTemplate() {
-		rewards = new ArrayList<>(0);
-		bonus = new ArrayList<>(0);
-		extendedRewards = new ArrayList<>(0);
-		questDrop = new ArrayList<>(0);
-		questKill = new ArrayList<>(0);
-		startConds = new ArrayList<>(0);
-		classPermitted = new ArrayList<>(0);
-		fighterSelectableReward = new ArrayList<>(0);
-		knightSelectableReward = new ArrayList<>(0);
-		rangerSelectableReward = new ArrayList<>(0);
-		assassinSelectableReward = new ArrayList<>(0);
-		wizardSelectableReward = new ArrayList<>(0);
-		elementalistSelectableReward = new ArrayList<>(0);
-		priestSelectableReward = new ArrayList<>(0);
-		chanterSelectableReward = new ArrayList<>(0);
-		gunnerSelectableReward = new ArrayList<>(0);
-		bardSelectableReward = new ArrayList<>(0);
-		riderSelectableReward = new ArrayList<>(0);
+		rewards = new FastTable<>();
+		bonus = new FastTable<>();
+		extendedRewards = new FastTable<>();
+		questDrop = new FastTable<>();
+		questKill = new FastTable<>();
+		startConds = new FastTable<>();
+		classPermitted = new FastTable<>();
+		fighterSelectableReward = new FastTable<>();
+		knightSelectableReward = new FastTable<>();
+		rangerSelectableReward = new FastTable<>();
+		assassinSelectableReward = new FastTable<>();
+		wizardSelectableReward = new FastTable<>();
+		elementalistSelectableReward = new FastTable<>();
+		priestSelectableReward = new FastTable<>();
+		chanterSelectableReward = new FastTable<>();
+		gunnerSelectableReward = new FastTable<>();
+		bardSelectableReward = new FastTable<>();
+		riderSelectableReward = new FastTable<>();
 	}
 
 	/**

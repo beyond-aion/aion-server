@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author AionCool
@@ -21,7 +22,7 @@ public class GlobalDropZones {
 
 	public List<GlobalDropZone> getGlobalDropZones() {
 		if (gdZones == null) {
-			gdZones = new ArrayList<GlobalDropZone>();
+			gdZones = new FastTable<GlobalDropZone>();
 		}
 		return this.gdZones;
 	}

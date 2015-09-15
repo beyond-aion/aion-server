@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class MySQL5FriendListDAO extends FriendListDAO {
 
 	@Override
 	public FriendList load(final Player player) {
-		final List<Friend> friends = new ArrayList<Friend>();
+		final List<Friend> friends = new FastTable<Friend>();
 		Connection con = null;
 		try {
 			con = DatabaseFactory.getConnection();

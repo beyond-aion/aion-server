@@ -1,9 +1,9 @@
 package ai.instance.esoterrace;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.gameserver.ai2.AIName;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("dalia_charlands")
 public class DaliaCharlandsAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new ArrayList<Integer>();
+	private List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	protected void handleSpawned() {

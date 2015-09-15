@@ -1,10 +1,11 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -35,7 +36,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 	private AtomicInteger stage = new AtomicInteger();
 	private AtomicInteger destroyedTowers = new AtomicInteger();
 	private AtomicBoolean isCancelled = new AtomicBoolean();
-	private List<Npc> npcs = new ArrayList<Npc>();
+	private List<Npc> npcs = new FastTable<Npc>();
 	protected boolean isInstanceDestroyed = false;
 	private Future<?> cancelSpawnTask;
 	private Future<?> cancelMessageTask;

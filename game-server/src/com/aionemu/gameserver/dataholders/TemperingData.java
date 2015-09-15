@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.enchants.TemperingList;
 import com.aionemu.gameserver.model.enchants.TemperingStat;
@@ -35,7 +36,7 @@ public class TemperingData {
 			templates.put(group, map);
 			for (TemperingTemplateData data : tempering.getTemperingDatas()) {
 				int level = data.getLevel();
-				List<TemperingStat> stats = new ArrayList<>();
+				List<TemperingStat> stats = new FastTable<>();
 				for (TemperingStat stat : data.getTemperingStats()) {
 					stats.add(stat);
 				}

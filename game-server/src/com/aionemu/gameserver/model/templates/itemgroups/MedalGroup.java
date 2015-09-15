@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.rewards.MedalItem;
 
@@ -22,7 +23,7 @@ public class MedalGroup extends BonusItemGroup {
 
 	public List<MedalItem> getItems() {
 		if (items == null) {
-			items = new ArrayList<MedalItem>();
+			items = new FastTable<MedalItem>();
 		}
 		return this.items;
 	}

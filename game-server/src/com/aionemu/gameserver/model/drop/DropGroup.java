@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.drop;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +10,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -88,7 +89,8 @@ public class DropGroup implements DropCalculator {
 		if (DropConfig.DROP_ENABLE_SUPPORT_NEW_DROP_CATEGORY_CALCULATION && DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES) {
 			int maxDropsFromCategory = 0;
 
-			List<Drop> copy = new ArrayList<>(drop); // create shallow copy of drops to shuffle
+			List<Drop> copy = new FastTable<>(); // create shallow copy of drops to shuffle
+			copy.addAll(drop);
 			Collections.shuffle(copy); // List needs to be shuffled so drops with higher indexes are not more likely excluded due to max_drop_group
 
 			for (int i = 0; i < copy.size(); i++) {

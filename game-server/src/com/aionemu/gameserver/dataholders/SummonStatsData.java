@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,6 +10,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 
@@ -22,7 +23,7 @@ import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 public class SummonStatsData {
 
 	@XmlElement(name = "summon_stats", required = true)
-	private List<SummonStatsType> summonTemplatesList = new ArrayList<SummonStatsType>();
+	private List<SummonStatsType> summonTemplatesList = new FastTable<SummonStatsType>();
 
 	private final TIntObjectHashMap<SummonStatsTemplate> summonTemplates = new TIntObjectHashMap<SummonStatsTemplate>();
 

@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 	private TemporarySpawn temporarySpawn;
 	private int respawnTime;
 	private SpawnHandlerType handlerType;
-	private List<SpawnTemplate> spots = new ArrayList<SpawnTemplate>();
+	private List<SpawnTemplate> spots = new FastTable<SpawnTemplate>();
 	private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
 
 	public SpawnGroup2(int worldId, Spawn spawn) {
@@ -159,7 +160,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 
 	public SpawnTemplate getRndTemplate(int instanceId) {
 		final List<SpawnTemplate> allTemplates = spots;
-		List<SpawnTemplate> templates = new ArrayList<SpawnTemplate>();
+		List<SpawnTemplate> templates = new FastTable<SpawnTemplate>();
 		super.readLock();
 		try {
 			for (SpawnTemplate template : allTemplates) {

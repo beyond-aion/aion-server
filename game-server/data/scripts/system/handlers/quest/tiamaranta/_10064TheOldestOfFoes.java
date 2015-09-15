@@ -1,8 +1,9 @@
 package quest.tiamaranta;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -232,7 +233,7 @@ public class _10064TheOldestOfFoes extends QuestHandler {
 	}
 
 	private void spawnDrakans(Player player) {
-		final List<Npc> drakans = new ArrayList<Npc>();
+		final List<Npc> drakans = new FastTable<Npc>();
 		drakans.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 218773, 550.057f, 666.941f, 183.301f, (byte) 40));
 		drakans.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 218773, 542.284f, 662.375f, 183.301f, (byte) 40));
 		drakans.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 218773, 540.240f, 665.980f, 183.301f, (byte) 40));
@@ -247,7 +248,7 @@ public class _10064TheOldestOfFoes extends QuestHandler {
 	}
 
 	private void spawnLegioners(Player player) {
-		final List<Npc> enemylegioners = new ArrayList<Npc>();
+		final List<Npc> enemylegioners = new FastTable<Npc>();
 		enemylegioners.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 800037, 437.11f, 679.46f, 183.3f, (byte) 10));
 		enemylegioners.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 800037, 434.35f, 676.1f, 183.3f, (byte) 10));
 		enemylegioners.add((Npc) QuestService.spawnQuestNpc(300400000, player.getInstanceId(), 800037, 431.36f, 672.6f, 183.3f, (byte) 10));

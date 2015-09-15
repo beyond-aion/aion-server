@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.team2.league;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
 
 /**
  * @author ATracer
@@ -101,9 +101,10 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	 * @return sorted alliances by position
 	 */
 	public Collection<LeagueMember> getSortedMembers() {
-		ArrayList<LeagueMember> newArrayList = Lists.newArrayList(members.values());
-		Collections.sort(newArrayList, MEMBER_COMPARATOR);
-		return newArrayList;
+		List<LeagueMember> memberList = new FastTable<>();
+		memberList.addAll(members.values());
+		memberList.sort(MEMBER_COMPARATOR);
+		return memberList;
 	}
 
 	/**
@@ -183,14 +184,14 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	public Collection<Player> getCaptains() {
-		ArrayList<Player> newArrayList = Lists.newArrayList();
+		List<Player> captains = new FastTable<>();
 		for (LeagueMember member : getSortedMembers()) {
 			Player leader = member.getObject().getLeaderObject();
-			if (!newArrayList.contains(leader)) {
-				newArrayList.add(leader);
+			if (!captains.contains(leader)) {
+				captains.add(leader);
 			}
 		}
-		return newArrayList;
+		return captains;
 	}
 
 }

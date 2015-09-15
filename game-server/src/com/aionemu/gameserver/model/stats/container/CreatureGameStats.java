@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -8,6 +7,7 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -292,7 +292,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 		for (IStatFunction func : allStats) {
 			if (func.getPriority() >= Integer.MAX_VALUE - 10) {
 				if (setFuncs == null)
-					setFuncs = new ArrayList<IStatFunction>();
+					setFuncs = new FastTable<IStatFunction>();
 				setFuncs.add(func);
 			} else if (setFuncs != null) {
 				// all StatSetFunctions added

@@ -5,7 +5,6 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import javolution.util.FastTable;
 
 import org.hamcrest.Matchers;
 
@@ -36,7 +37,7 @@ public class GlobalDropData {
 	protected List<GlobalRule> globalDropRules;
 
 	@XmlTransient
-	private List<GlobalRule> gdRules = new ArrayList<GlobalRule>();
+	private List<GlobalRule> gdRules = new FastTable<GlobalRule>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (GlobalRule gr : globalDropRules) {
@@ -47,7 +48,7 @@ public class GlobalDropData {
 	}
 
 	public void processRules(TIntObjectHashMap<NpcTemplate> npcs) {
-		List<NpcTemplate> npcList = new ArrayList<NpcTemplate>();
+		List<NpcTemplate> npcList = new FastTable<NpcTemplate>();
 		npcList.addAll(npcs.valueCollection());
 		for (GlobalRule gr : gdRules) {
 			if (gr.getGlobalRuleNpcNames() != null) {
@@ -62,13 +63,13 @@ public class GlobalDropData {
 	}
 
 	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {
-		List<GlobalDropNpc> allowedNpcs = new ArrayList<GlobalDropNpc>();
+		List<GlobalDropNpc> allowedNpcs = new FastTable<GlobalDropNpc>();
 		if (rule.getGlobalRuleNpcs() != null) {
 			allowedNpcs = rule.getGlobalRuleNpcs().getGlobalDropNpcs();
 		}
 		if (rule.getGlobalRuleNpcNames() != null) {
 			for (GlobalDropNpcName gdNpcName : rule.getGlobalRuleNpcNames().getGlobalDropNpcNames()) {
-				List<NpcTemplate> matchesNpcs = new ArrayList<NpcTemplate>();
+				List<NpcTemplate> matchesNpcs = new FastTable<NpcTemplate>();
 				if (gdNpcName.getFunction().equals(StringFunction.CONTAINS))
 					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.containsString(gdNpcName.getValue().toLowerCase())));
 				else if (gdNpcName.getFunction().equals(StringFunction.END_WITH))

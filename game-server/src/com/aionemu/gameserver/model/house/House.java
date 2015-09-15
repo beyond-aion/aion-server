@@ -2,13 +2,14 @@ package com.aionemu.gameserver.model.house;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -190,7 +191,7 @@ public class House extends VisibleObject {
 		int creatorId = getAddress().getId();
 		String masterName = StringUtils.EMPTY;
 		if (playerObjectId != 0) {
-			ArrayList<Integer> players = new ArrayList<Integer>(1);
+			List<Integer> players = new FastTable<Integer>();
 			players.add(playerObjectId);
 			Map<Integer, String> playerNames = DAOManager.getDAO(PlayerDAO.class).getPlayerNames(players);
 			if (playerNames.containsKey(playerObjectId)) {

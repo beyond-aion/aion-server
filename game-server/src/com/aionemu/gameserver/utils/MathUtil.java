@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -524,7 +526,7 @@ public class MathUtil {
 		v = BigDecimal.ONE.divide(TWO.multiply(x), nMC); // v0 = 1/(2*x)
 
 		// Collect iteration precisions beforehand
-		ArrayList<Integer> nPrecs = new ArrayList<Integer>();
+		List<Integer> nPrecs = new FastTable<Integer>();
 
 		assert nInit > 3 : "Never ending loop!"; // assume nInit = 16 <= prec
 

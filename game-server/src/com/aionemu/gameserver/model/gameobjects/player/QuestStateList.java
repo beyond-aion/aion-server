@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +70,7 @@ public class QuestStateList {
 	 * @author vlog
 	 */
 	public Collection<QuestState> getNormalQuests() {
-		Collection<QuestState> l = new ArrayList<QuestState>();
+		Collection<QuestState> l = new FastTable<QuestState>();
 
 		for (QuestState qs : this.getAllQuestState()) {
 			QuestCategory qc = _questData.getQuestById(qs.getQuestId()).getCategory();

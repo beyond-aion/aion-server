@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.geoEngine.models;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class GeoMap extends NodeEx {
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
 
 	private short[] terrainData;
-	private List<BoundingBox> tmpBox = new ArrayList<BoundingBox>();
+	private List<BoundingBox> tmpBox = new FastTable<BoundingBox>();
 	private Map<String, DoorGeometry> doors = new FastMap<String, DoorGeometry>();
 
 	public GeoMap(String name, int worldSize) {

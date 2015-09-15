@@ -2,11 +2,12 @@ package instance.dredgion2;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 
@@ -222,7 +223,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		addPointsByRace(player.getRace(), points);
 
 		// player score
-		List<Player> playersToGainScore = new ArrayList<>();
+		List<Player> playersToGainScore = new FastTable<>();
 
 		if (target != null && player.isInGroup2()) {
 			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {

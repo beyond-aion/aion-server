@@ -1,9 +1,9 @@
 package ai.instance.theobomosLab;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.gameserver.ai2.AIName;
@@ -22,7 +22,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("triroan")
 public class UnstableTriroanAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new ArrayList<Integer>();
+	protected List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	protected void handleSpawned() {

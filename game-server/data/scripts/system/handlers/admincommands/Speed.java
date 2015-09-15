@@ -1,7 +1,8 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,7 +45,7 @@ public class Speed extends AdminCommand implements StatOwner {
 		}
 
 		admin.getGameStats().endEffect(this);
-		List<IStatFunction> functions = new ArrayList<IStatFunction>();
+		List<IStatFunction> functions = new FastTable<IStatFunction>();
 		functions.add(new SpeedFunction(StatEnum.SPEED, parameter));
 		functions.add(new SpeedFunction(StatEnum.FLY_SPEED, parameter));
 		admin.getGameStats().addEffect(this, functions);

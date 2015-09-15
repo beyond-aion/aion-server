@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,6 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
@@ -71,7 +71,8 @@ public class NpcShoutData {
 				this.count += shoutList.getNpcShouts().size();
 				for (int j = shoutList.getNpcIds().size() - 1; j >= 0; j--) {
 					int npcId = shoutList.getNpcIds().get(j);
-					List<NpcShout> shouts = new ArrayList<NpcShout>(shoutList.getNpcShouts());
+					List<NpcShout> shouts = new FastTable<>();
+					shouts.addAll(shoutList.getNpcShouts());
 					if (worldShouts.get(npcId) == null) {
 						worldShouts.put(npcId, shouts);
 					} else {
@@ -99,26 +100,22 @@ public class NpcShoutData {
 	 * @return null if not found
 	 */
 	public List<NpcShout> getNpcShouts(int worldId, int npcId) {
-		FastMap<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(0);
+		List<NpcShout> npcShouts = new FastTable<NpcShout>();
+		FastMap<Integer, List<NpcShout>> worldShouts;
 
-		if (worldShouts == null || worldShouts.get(npcId) == null) {
-			worldShouts = shoutsByWorldNpcs.get(worldId);
-			if (worldShouts == null || worldShouts.get(npcId) == null)
-				return null;
-			return new ArrayList<NpcShout>(worldShouts.get(npcId));
-		}
+		worldShouts = shoutsByWorldNpcs.get(0);
+		if (worldShouts != null && worldShouts.get(npcId) != null)
+			npcShouts.addAll(worldShouts.get(npcId));
 
-		List<NpcShout> npcShouts = new ArrayList<NpcShout>(worldShouts.get(npcId));
 		worldShouts = shoutsByWorldNpcs.get(worldId);
-		if (worldShouts == null || worldShouts.get(npcId) == null)
-			return npcShouts;
-		npcShouts.addAll(worldShouts.get(npcId));
+		if (worldShouts != null && worldShouts.get(npcId) != null)
+			npcShouts.addAll(worldShouts.get(npcId));
 
-		return npcShouts;
+		return npcShouts.size() > 0 ? npcShouts : null;
 	}
 
 	/**
-	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId)})
+	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId)}
 	 */
 	public boolean hasAnyShout(int worldId, int npcId) {
 		FastMap<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(0);
@@ -133,7 +130,6 @@ public class NpcShoutData {
 
 	/**
 	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo)}
-	 * )
 	 */
 	public boolean hasAnyShout(int worldId, int npcId, ShoutEventType type) {
 		List<NpcShout> shouts = getNpcShouts(worldId, npcId);
@@ -166,7 +162,7 @@ public class NpcShoutData {
 		if (shouts == null)
 			return null;
 
-		List<NpcShout> result = new ArrayList<NpcShout>();
+		List<NpcShout> result = new FastTable<NpcShout>();
 		for (NpcShout s : shouts) {
 			if (s.getWhen() == type) {
 				if (pattern != null && !pattern.equals(s.getPattern()))

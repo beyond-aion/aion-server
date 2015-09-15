@@ -3,7 +3,6 @@ package com.aionemu.gameserver.dataholders;
 import gnu.trove.map.hash.THashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -26,18 +25,16 @@ public class ChestData {
 
 	/** A map containing all npc templates */
 	private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<ChestTemplate>();
-	private TIntObjectHashMap<ArrayList<ChestTemplate>> instancesMap = new TIntObjectHashMap<ArrayList<ChestTemplate>>();
 	private THashMap<String, ChestTemplate> namedChests = new THashMap<String, ChestTemplate>();
 
 	/**
-	 * - Inititialize all maps for subsequent use - Don't nullify initial chest list as it will be used during reload
+	 * Initializes all maps for subsequent use - Don't nullify initial chest list as it will be used during reload
 	 * 
 	 * @param u
 	 * @param parent
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		chestData.clear();
-		instancesMap.clear();
 		namedChests.clear();
 
 		for (ChestTemplate chest : chests) {

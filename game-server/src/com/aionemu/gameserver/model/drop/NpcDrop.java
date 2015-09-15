@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.drop;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,7 +40,7 @@ public class NpcDrop implements DropCalculator {
 	}
 
 	public NpcDrop(int npcId) {
-		this(new ArrayList<DropGroup>(0), npcId);
+		this(new FastTable<>(), npcId);
 	}
 
 	public NpcDrop() {

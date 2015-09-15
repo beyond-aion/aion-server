@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.vortex;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.Race;
@@ -39,7 +39,7 @@ public class VortexLocation implements ZoneHandler {
 	protected List<InvasionZoneInstance> zones;
 	protected FastMap<Integer, Player> players = new FastMap<Integer, Player>();
 	protected FastMap<Integer, Kisk> kisks = new FastMap<Integer, Kisk>();
-	private final List<VisibleObject> spawned = new ArrayList<VisibleObject>();
+	private final List<VisibleObject> spawned = new FastTable<VisibleObject>();
 	protected HomePoint home;
 	protected ResurrectionPoint resurrection;
 	protected StartPoint start;
@@ -52,7 +52,7 @@ public class VortexLocation implements ZoneHandler {
 		this.id = template.getId();
 		this.offenceRace = template.getInvadersRace();
 		this.defendsRace = template.getDefendersRace();
-		this.zones = new ArrayList<InvasionZoneInstance>();
+		this.zones = new FastTable<InvasionZoneInstance>();
 		this.home = template.getHomePoint();
 		this.resurrection = template.getResurrectionPoint();
 		this.start = template.getStartPoint();

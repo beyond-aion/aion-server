@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -38,7 +39,7 @@ public class CollectItems {
 	 */
 	public List<CollectItem> getCollectItem() {
 		if (collectItem == null) {
-			collectItem = new ArrayList<CollectItem>();
+			collectItem = new FastTable<CollectItem>();
 		}
 		return this.collectItem;
 	}

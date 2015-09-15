@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
@@ -67,9 +67,9 @@ public abstract class LegionMemberDAO implements IDFactoryAwareDAO {
 	 * Loads all legion members of a legion
 	 * 
 	 * @param legionId
-	 * @return ArrayList<Integer>
+	 * @return List<Integer>
 	 */
-	public abstract ArrayList<Integer> loadLegionMembers(int legionId);
+	public abstract List<Integer> loadLegionMembers(int legionId);
 
 	/**
 	 * Removes legion member and all related data (Done by CASCADE DELETION)

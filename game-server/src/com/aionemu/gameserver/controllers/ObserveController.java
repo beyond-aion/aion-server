@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -95,7 +94,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			if (onceUsedObservers.size() > 0) {
-				tempOnceused = new ArrayList<ActionObserver>();
+				tempOnceused = new FastTable<ActionObserver>();
 				Iterator<ActionObserver> iterator = onceUsedObservers.iterator();
 				while (iterator.hasNext()) {
 					ActionObserver observer = iterator.next();

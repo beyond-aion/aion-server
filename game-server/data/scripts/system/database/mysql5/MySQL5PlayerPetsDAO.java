@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,7 +112,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 
 	@Override
 	public List<PetCommonData> getPlayerPets(Player player) {
-		List<PetCommonData> pets = new ArrayList<PetCommonData>();
+		List<PetCommonData> pets = new FastTable<PetCommonData>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_pets WHERE player_id = ?")) {

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nullable;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
@@ -77,7 +77,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -130,7 +129,7 @@ public class SiegeService {
 	private FastMap<Integer, VisibleObject> moltenusAbyssBoss = new FastMap<Integer, VisibleObject>();
 
 	// Player list on RVR Event.
-	private List<Player> rvrPlayersOnEvent = new ArrayList<Player>();
+	private List<Player> rvrPlayersOnEvent = new FastTable<Player>();
 
 	/**
 	 * Returns the single instance of siege service
@@ -637,7 +636,7 @@ public class SiegeService {
 
 			List<Trigger> storage = siegeIdToStartTriggers.get(fssr.getLocationId());
 			if (storage == null) {
-				storage = Lists.newArrayList();
+				storage = new FastTable<>();
 				siegeIdToStartTriggers.put(fssr.getLocationId(), storage);
 			}
 			storage.addAll(CronService.getInstance().getJobTriggers(entry.getValue()));
@@ -645,7 +644,7 @@ public class SiegeService {
 
 		// update each fortress next state
 		for (Map.Entry<Integer, List<Trigger>> entry : siegeIdToStartTriggers.entrySet()) {
-			List<Date> nextFireDates = Lists.newArrayListWithCapacity(entry.getValue().size());
+			List<Date> nextFireDates = new FastTable<>();
 			for (Trigger trigger : entry.getValue()) {
 				nextFireDates.add(trigger.getNextFireTime());
 			}
@@ -1273,6 +1272,6 @@ public class SiegeService {
 
 	// clear RVR event players list
 	public void clearRvrPlayersOnEvent() {
-		rvrPlayersOnEvent = new ArrayList<Player>();
+		rvrPlayersOnEvent = new FastTable<Player>();
 	}
 }

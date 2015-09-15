@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services.craft;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,7 @@ public class CraftSkillUpdateService {
 
 	protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new HashMap<Integer, CraftLearnTemplate>();
 	private static final Map<Integer, Integer> cost = new HashMap<Integer, Integer>();
-	private static final List<Integer> craftingSkillIds = new ArrayList<Integer>();
+	private static final List<Integer> craftingSkillIds = new FastTable<Integer>();
 
 	public static final CraftSkillUpdateService getInstance() {
 		return SingletonHolder.instance;

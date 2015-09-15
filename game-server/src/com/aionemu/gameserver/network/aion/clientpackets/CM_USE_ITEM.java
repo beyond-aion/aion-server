@@ -9,7 +9,9 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_TO_CURRENT_TARGET;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.Race;
@@ -144,7 +146,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 			return; // don't remove item
 
 		ItemActions itemActions = item.getItemTemplate().getActions();
-		ArrayList<AbstractItemAction> actions = new ArrayList<AbstractItemAction>();
+		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
 
 		if (itemActions == null) {
 			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);

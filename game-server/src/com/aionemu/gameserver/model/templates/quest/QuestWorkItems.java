@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestWorkItems", propOrder = { "questWorkItem" })
@@ -27,12 +28,11 @@ public class QuestWorkItems {
 	 * getQuestWorkItem().add(newItem);
 	 * </pre>
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link QuestItems }
+	 * Objects of the following type(s) are allowed in the list {@link QuestItems}
 	 */
 	public List<QuestItems> getQuestWorkItem() {
-		if (questWorkItem == null) {
-			questWorkItem = new ArrayList<QuestItems>(1);
-		}
+		if (questWorkItem == null)
+			questWorkItem = new FastTable<QuestItems>();
 		return this.questWorkItem;
 	}
 

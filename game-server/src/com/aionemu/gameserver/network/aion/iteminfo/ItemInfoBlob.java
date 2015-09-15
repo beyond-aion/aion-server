@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,7 +25,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 	protected final Player player;
 	protected final Item item;
 
-	private List<ItemBlobEntry> itemBlobEntries = new ArrayList<ItemBlobEntry>();
+	private List<ItemBlobEntry> itemBlobEntries = new FastTable<ItemBlobEntry>();
 
 	public ItemInfoBlob(Player player, Item item) {
 		this.player = player;

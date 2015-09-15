@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -154,7 +153,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 									dec.setRoom(0);
 								List<HouseDecoration> usedForType = usedParts.get(dec.getTemplate().getType());
 								if (usedForType == null) {
-									usedForType = new ArrayList<HouseDecoration>();
+									usedForType = new FastTable<HouseDecoration>();
 									usedParts.put(dec.getTemplate().getType(), usedForType);
 								}
 								usedForType.add(dec);

@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.utils.audit;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -31,7 +31,7 @@ public class GMService {
 	private List<Byte> announceList;
 
 	private GMService() {
-		announceList = new ArrayList<Byte>();
+		announceList = new FastTable<Byte>();
 		announceAny = AdminConfig.ANNOUNCE_LEVEL_LIST.equals("*");
 		if (!announceAny) {
 			try {

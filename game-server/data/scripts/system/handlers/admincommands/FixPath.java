@@ -1,7 +1,9 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -111,7 +113,7 @@ public class FixPath extends AdminCommand {
 					WalkerTemplate newTemplate = new WalkerTemplate(template.getRouteId());
 
 					i = 1;
-					ArrayList<RouteStep> newSteps = new ArrayList<RouteStep>();
+					List<RouteStep> newSteps = new FastTable<RouteStep>();
 
 					int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 : template.getRouteSteps().size();
 					for (int s = 0; s < lastStep; s++) {

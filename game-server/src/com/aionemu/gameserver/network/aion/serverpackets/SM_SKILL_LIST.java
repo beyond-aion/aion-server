@@ -1,40 +1,43 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.List;
+
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * In this packet Server is sending Skill Info?
- * 
- * @author modified by ATracer,MrPoke
+ * @author MrPoke
+ * @modified ATracer, Neon
  */
 public class SM_SKILL_LIST extends AionServerPacket {
 
-	private PlayerSkillEntry[] skillList;
+	private List<PlayerSkillEntry> skillList;
 	private int messageId;
 	private int skillNameId;
 	private String skillLvl;
-	public static final int YOU_LEARNED_SKILL = 1300050;
 	boolean isNew = false;
 
 	/**
-	 * This constructor is used on player entering the world Constructs new <tt>SM_SKILL_LIST </tt> packet
+	 * This constructor is used on player entering the world Constructs new <tt>SM_SKILL_LIST</tt> packet
 	 */
-	public SM_SKILL_LIST(Player player, PlayerSkillEntry[] basicSkills) {
-		this.skillList = player.getSkillList().getBasicSkills();
+	public SM_SKILL_LIST(PlayerSkillEntry skill) {
+		this.skillList = new FastTable<>();
+		this.skillList.add(skill);
 		this.messageId = 0;
 	}
 
-	public SM_SKILL_LIST(Player player, PlayerSkillEntry stigmaSkill) {
-		this.skillList = new PlayerSkillEntry[] { stigmaSkill };
+	public SM_SKILL_LIST(List<PlayerSkillEntry> skillList) {
+		this.skillList = skillList;
 		this.messageId = 0;
 	}
 
 	public SM_SKILL_LIST(PlayerSkillEntry skillListEntry, int messageId, boolean isNew) {
-		this.skillList = new PlayerSkillEntry[] { skillListEntry };
+		this.skillList = new FastTable<>();
+		this.skillList.add(skillListEntry);
 		this.messageId = messageId;
 		this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skillListEntry.getSkillId()).getNameId();
 		this.skillLvl = String.valueOf(skillListEntry.getSkillLevel());
@@ -44,7 +47,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 
-		final int size = skillList.length;
+		final int size = skillList.size();
 		writeH(size); // skills list size
 		writeC(isNew ? 0 : 1); // 1 all learned skills, 0 skills can be learned ?
 

@@ -1,8 +1,9 @@
 package ai;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -25,7 +26,7 @@ public class ActionItemNpcAI2 extends NpcAI2 {
 
 	protected int startBarAnimation = 1;
 	protected int cancelBarAnimation = 2;
-	private List<ItemUseObserver> observers = new ArrayList<>();
+	private List<ItemUseObserver> observers = new FastTable<>();
 
 	@Override
 	protected void handleDialogStart(Player player) {

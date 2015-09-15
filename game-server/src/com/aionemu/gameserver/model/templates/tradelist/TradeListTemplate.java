@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.tradelist;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,6 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author orz
@@ -42,7 +43,7 @@ public class TradeListTemplate {
 	 */
 	public List<TradeTab> getTradeTablist() {
 		if (tradeTablist == null)
-			tradeTablist = new ArrayList<TradeTab>();
+			tradeTablist = new FastTable<TradeTab>();
 		return this.tradeTablist;
 	}
 

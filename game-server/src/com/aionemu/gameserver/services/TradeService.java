@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -237,7 +238,7 @@ public class TradeService {
 	public static boolean performSellToShop(Player player, TradeList tradeList) {
 		Storage inventory = player.getInventory();
 		long kinahReward = 0;
-		List<Item> items = new ArrayList<>();
+		List<Item> items = new FastTable<>();
 
 		if (!RestrictionsManager.canTrade(player)) {
 			return false;
@@ -439,7 +440,7 @@ public class TradeService {
 		Storage inventory = player.getInventory();
 		int tradeModifier = purchaseTemplate.getBuyPriceRate();
 		long kinahReward = 0;
-		List<Item> items = new ArrayList<>();
+		List<Item> items = new FastTable<>();
 
 		if (!RestrictionsManager.canTrade(player)) {
 			return false;

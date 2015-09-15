@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.stats.listeners;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
@@ -207,7 +208,7 @@ public class ItemEquipmentListener {
 	 * @return
 	 */
 	private static List<StatFunction> wrapModifiers(Item item, List<StatFunction> modifiers) {
-		List<StatFunction> allModifiers = new ArrayList<StatFunction>();
+		List<StatFunction> allModifiers = new FastTable<StatFunction>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
 			// why they are removed look at DuplicateStatFunction

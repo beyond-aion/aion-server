@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.trade;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,7 +22,7 @@ public class TradeList {
 
 	private int sellerObjId;
 
-	private List<TradeItem> tradeItems = new ArrayList<TradeItem>();
+	private List<TradeItem> tradeItems = new FastTable<TradeItem>();
 
 	private long requiredKinah;
 

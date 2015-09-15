@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import javolution.util.FastTable;
+
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +22,6 @@ import com.aionemu.commons.scripting.ScriptContext;
 import com.aionemu.commons.scripting.ScriptContextFactory;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
-import com.google.common.collect.Lists;
 
 /**
  * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may be extended to support
@@ -107,7 +108,8 @@ public class ScriptManager {
 	 */
 	public synchronized void loadDirectory(File directory) throws RuntimeException {
 		Collection<File> libraries = FileUtils.listFiles(directory, new String[] { "jar" }, true);
-		List<File> list = Lists.newArrayList(libraries);
+		List<File> list = new FastTable<>();
+		list.addAll(libraries);
 		try {
 			loadDirectory(directory, list, DEFAULT_COMPILER_CLASS.getName());
 		} catch (Exception e) {

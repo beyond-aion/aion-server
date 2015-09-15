@@ -1,8 +1,8 @@
 package ai.instance.engulfedOphidianBridgeInstance;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javolution.util.FastTable;
 import ai.ActionItemNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 @AIName("engulfedophidianexplosiondevice")
 public class ExplosionDeviceAI2 extends ActionItemNpcAI2 {
 
-	private List<Npc> bomb = new ArrayList<Npc>();
+	private List<Npc> bomb = new FastTable<Npc>();
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

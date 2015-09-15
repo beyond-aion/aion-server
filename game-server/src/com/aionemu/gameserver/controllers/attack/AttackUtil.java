@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -43,7 +44,7 @@ public class AttackUtil {
 	public static List<AttackResult> calculatePhysicalAttackResult(Creature attacker, Creature attacked) {
 		AttackStatus attackerStatus = null;
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, SkillElement.NONE);
-		List<AttackResult> attackList = new ArrayList<AttackResult>();
+		List<AttackResult> attackList = new FastTable<AttackResult>();
 		AttackStatus mainHandStatus = calculateMainHandResult(attacker, attacked, attackerStatus, damage, attackList, SkillElement.NONE);
 
 		if (attacker instanceof Player && ((Player) attacker).getEquipment().getOffHandWeaponType() != null) {
@@ -536,7 +537,7 @@ public class AttackUtil {
 
 		AttackStatus attackerStatus = null;
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, elem);
-		List<AttackResult> attackList = new ArrayList<AttackResult>();
+		List<AttackResult> attackList = new FastTable<AttackResult>();
 		AttackStatus mainHandStatus = calculateMainHandResult(attacker, attacked, attackerStatus, damage, attackList, elem);
 
 		if (attacker instanceof Player && ((Player) attacker).getEquipment().getOffHandWeaponType() != null) {
@@ -551,7 +552,7 @@ public class AttackUtil {
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, elem);
 
 		AttackStatus status = calculateHomingAttackStatus(attacker, attacked);
-		List<AttackResult> attackList = new ArrayList<AttackResult>();
+		List<AttackResult> attackList = new FastTable<AttackResult>();
 		switch (status) {
 			case RESIST:
 			case DODGE:

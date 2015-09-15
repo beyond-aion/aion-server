@@ -1,10 +1,10 @@
 package ai.instance.tiamatStrongHold;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -66,7 +66,7 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 
 	private void startSkeletonEvent() {
 		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);// 4.0
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new FastTable<Player>();
 		for (Player player : getKnownList().getKnownPlayers().values()) {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, tiamatEye, 40)) {
 				players.add(player);

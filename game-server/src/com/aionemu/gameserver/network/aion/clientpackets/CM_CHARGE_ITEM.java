@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.ArrayList;
 import java.util.Collection;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -27,7 +28,7 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 		targetNpcObjectId = readD();
 		chargeLevel = readC();
 		int itemsSize = readH();
-		itemIds = new ArrayList<Integer>();
+		itemIds = new FastTable<Integer>();
 		for (int i = 0; i < itemsSize; i++) {
 			itemIds.add(readD());
 		}

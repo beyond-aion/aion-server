@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnKillEvent;
@@ -46,7 +47,7 @@ public class XmlQuestData extends XMLQuest {
 	 */
 	public List<OnTalkEvent> getOnTalkEvent() {
 		if (onTalkEvent == null) {
-			onTalkEvent = new ArrayList<OnTalkEvent>();
+			onTalkEvent = new FastTable<OnTalkEvent>();
 		}
 		return this.onTalkEvent;
 	}
@@ -67,7 +68,7 @@ public class XmlQuestData extends XMLQuest {
 	 */
 	public List<OnKillEvent> getOnKillEvent() {
 		if (onKillEvent == null) {
-			onKillEvent = new ArrayList<OnKillEvent>();
+			onKillEvent = new FastTable<OnKillEvent>();
 		}
 		return this.onKillEvent;
 	}

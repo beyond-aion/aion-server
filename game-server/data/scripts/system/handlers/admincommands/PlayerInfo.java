@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -113,10 +112,8 @@ public class PlayerInfo extends AdminCommand {
 		} else if (params[1].equals("skill")) {
 			StringBuilder strbld = new StringBuilder("-list of skills:\n");
 
-			PlayerSkillEntry sle[] = target.getSkillList().getAllSkills();
-
-			for (int i = 0; i < sle.length; i++)
-				strbld.append("    level " + sle[i].getSkillLevel() + " of " + sle[i].getSkillName() + "\n");
+			for (PlayerSkillEntry skill : target.getSkillList().getAllSkills())
+				strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillName() + "\n");
 			showAllLines(admin, strbld.toString());
 		} else if (params[1].equals("loc")) {
 			String chatLink = ChatUtil.position(target.getName(), target.getPosition());
@@ -129,7 +126,7 @@ public class PlayerInfo extends AdminCommand {
 			if (legion == null)
 				PacketSendUtility.sendMessage(admin, "-legion info: no legion");
 			else {
-				ArrayList<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
+				List<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
 				Iterator<LegionMemberEx> it = legionmemblist.iterator();
 
 				strbld.append("-legion info:\n  name: " + legion.getLegionName() + ", level: " + legion.getLegionLevel() + "\n  members(online):\n");

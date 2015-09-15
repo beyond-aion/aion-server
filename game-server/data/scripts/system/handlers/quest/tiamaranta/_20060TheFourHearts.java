@@ -1,8 +1,9 @@
 package quest.tiamaranta;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.actions.NpcActions;
@@ -24,7 +25,7 @@ import com.aionemu.gameserver.world.World;
 public class _20060TheFourHearts extends QuestHandler {
 
 	private final static int questId = 20060;
-	private static List<Integer> beasts = new ArrayList<Integer>();
+	private static List<Integer> beasts = new FastTable<Integer>();
 
 	public _20060TheFourHearts() {
 		super(questId);

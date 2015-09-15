@@ -1,7 +1,8 @@
 package quest.tiamaranta;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
@@ -23,7 +24,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _10061HeaviestOfHearts extends QuestHandler {
 
 	private final static int questId = 10061;
-	final List<Npc> balaur = new ArrayList<Npc>();
+	final List<Npc> balaur = new FastTable<Npc>();
 
 	private final static int[] mobs = { 218826, 218827, 218828 };
 

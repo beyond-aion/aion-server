@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,7 +110,7 @@ public class Skill {
 
 	private String chainCategory = null;
 	private volatile boolean isMultiCast = false;
-	private List<ChargedSkill> chargeSkillList = new ArrayList<ChargedSkill>();
+	private List<ChargedSkill> chargeSkillList = new FastTable<ChargedSkill>();
 
 	public enum SkillMethod {
 		CAST,
@@ -143,7 +144,7 @@ public class Skill {
 	 * @param firstTarget
 	 */
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
-		this.effectedList = new ArrayList<Creature>();
+		this.effectedList = new FastTable<Creature>();
 		this.conditionChangeListener = new StartMovingListener();
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
@@ -630,7 +631,7 @@ public class Skill {
 		int resistCount = 0;
 		boolean blockedChain = false;
 		boolean blockedStance = false;
-		final List<Effect> effects = new ArrayList<Effect>();
+		final List<Effect> effects = new FastTable<Effect>();
 		if (skillTemplate.getEffects() != null) {
 			boolean blockAOESpread = false;
 			for (Creature effected : effectedList) {

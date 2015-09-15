@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
@@ -11,9 +12,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class DropNpc {
 
-	private Collection<Integer> allowedList = new ArrayList<Integer>();
-	private Collection<Player> inRangePlayers = new ArrayList<Player>();
-	private Collection<Player> playerStatus = new ArrayList<Player>();
+	private Collection<Integer> allowedList = new FastTable<Integer>();
+	private Collection<Player> inRangePlayers = new FastTable<Player>();
+	private Collection<Player> playerStatus = new FastTable<Player>();
 	private Player lootingPlayer = null;
 	private int distributionId = 0;
 	private boolean distributionType;

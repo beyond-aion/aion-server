@@ -9,11 +9,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -149,7 +149,7 @@ public final class HTMLCache {
 		// TODO: is there any other tag that should be replaced?
 		final String[] tagsToCompact = { "html", "title", "body", "br", "br1", "p", "table", "tr", "td" };
 
-		final List<String> list = new ArrayList<String>();
+		final List<String> list = new FastTable<String>();
 
 		for (String tag : tagsToCompact) {
 			list.add("<" + tag + ">");
@@ -158,7 +158,7 @@ public final class HTMLCache {
 			list.add("<" + tag + " />");
 		}
 
-		final List<String> list2 = new ArrayList<String>();
+		final List<String> list2 = new FastTable<String>();
 
 		for (String tag : list) {
 			list2.add(tag);

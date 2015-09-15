@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author Bobobear
@@ -21,7 +22,7 @@ public class GlobalDropExcludedNpcs {
 
 	public List<GlobalDropExcludedNpc> getGlobalDropExcludedNpcs() {
 		if (gdExcludedNpcs == null) {
-			gdExcludedNpcs = new ArrayList<GlobalDropExcludedNpc>();
+			gdExcludedNpcs = new FastTable<GlobalDropExcludedNpc>();
 		}
 		return this.gdExcludedNpcs;
 	}

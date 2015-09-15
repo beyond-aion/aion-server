@@ -7,7 +7,6 @@ import static org.apache.commons.io.filefilter.FileFilterUtils.prefixFileFilter;
 import static org.apache.commons.io.filefilter.FileFilterUtils.suffixFileFilter;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,6 +15,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
@@ -94,14 +95,13 @@ public class Reload extends AdminCommand {
 				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 				Unmarshaller un = jc.createUnmarshaller();
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-				List<SkillTemplate> newTemplates = new ArrayList<SkillTemplate>();
+				List<SkillTemplate> newTemplates = new FastTable<SkillTemplate>();
 				for (File file : listFiles(dir, true)) {
 					SkillData data = (SkillData) un.unmarshal(file);
 					if (data != null)
 						newTemplates.addAll(data.getSkillTemplates());
 				}
 				DataManager.SKILL_DATA.setSkillTemplates(newTemplates);
-				DataManager.SKILL_DATA.initializeCooldownGroups();
 			} catch (Exception e) {
 				PacketSendUtility.sendMessage(admin, "Skill reload failed!");
 				log.error("Skill reload failed!", e);
@@ -123,7 +123,7 @@ public class Reload extends AdminCommand {
 				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 				Unmarshaller un = jc.createUnmarshaller();
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-				// List<PortalTemplate> newTemplates = new ArrayList<PortalTemplate>();
+				// List<PortalTemplate> newTemplates = new FastTable<PortalTemplate>();
 				// for (File file : listFiles(dir, true)) {
 				// PortalData data = (PortalData) un.unmarshal(file);
 				// if (data != null && data.getPortals() != null)

@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services.rift;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 public class RiftManager {
 
 	private static Logger log = LoggerFactory.getLogger(RiftManager.class);
-	private static List<Npc> rifts = new ArrayList<Npc>();
+	private static List<Npc> rifts = new FastTable<Npc>();
 	private static Map<String, SpawnTemplate> riftGroups = new HashMap<String, SpawnTemplate>();
 
 	public static void addRiftSpawnTemplate(SpawnGroup2 spawn) {

@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -54,7 +55,7 @@ public class OreGroup extends BonusItemGroup {
 	 */
 	public List<ItemRaceEntry> getItems() {
 		if (items == null) {
-			items = new ArrayList<ItemRaceEntry>();
+			items = new FastTable<ItemRaceEntry>();
 		}
 		return this.items;
 	}

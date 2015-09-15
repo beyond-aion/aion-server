@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -35,7 +35,7 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket {
 		long currentTime = System.currentTimeMillis();
 		for (Map.Entry<Integer, Long> entry : cooldowns.entrySet()) {
 			int left = (int) ((entry.getValue() - currentTime) / 1000);
-			ArrayList<Integer> skillsWithCooldown = DataManager.SKILL_DATA.getSkillsForCooldownId(entry.getKey());
+			List<Integer> skillsWithCooldown = DataManager.SKILL_DATA.getSkillsForCooldownId(entry.getKey());
 
 			for (int index = 0; index < skillsWithCooldown.size(); index++) {
 				int skillId = skillsWithCooldown.get(index);

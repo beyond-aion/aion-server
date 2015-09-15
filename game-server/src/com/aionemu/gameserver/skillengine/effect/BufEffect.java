@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +77,7 @@ public abstract class BufEffect extends EffectTemplate {
 		int skillId = effect.getSkillId();
 		int skillLvl = effect.getSkillLevel();
 
-		List<IStatFunction> modifiers = new ArrayList<IStatFunction>();
+		List<IStatFunction> modifiers = new FastTable<IStatFunction>();
 
 		if (change == null)
 			return modifiers;

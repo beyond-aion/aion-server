@@ -1,7 +1,8 @@
 package quest.fort_tiamat;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -18,7 +19,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _10073ShatteredAlliance extends QuestHandler {
 
 	private final static int questId = 10073;
-	private static List<Integer> beasts = new ArrayList<Integer>();
+	private static List<Integer> beasts = new FastTable<Integer>();
 
 	public _10073ShatteredAlliance() {
 		super(questId);

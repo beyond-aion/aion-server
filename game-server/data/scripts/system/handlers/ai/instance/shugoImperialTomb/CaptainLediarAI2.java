@@ -1,9 +1,9 @@
 package ai.instance.shugoImperialTomb;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -25,7 +25,7 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2 {
 
 	private WalkerTemplate template;
 	private boolean canThink = true;
-	private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+	private final List<Integer> spawnedNpc = new FastTable<Integer>();
 	private AtomicBoolean isSpawnedHelpers = new AtomicBoolean(false);
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 

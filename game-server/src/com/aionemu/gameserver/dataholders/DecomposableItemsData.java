@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.item.DecomposableItemInfo;
 import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
@@ -24,8 +25,8 @@ public class DecomposableItemsData {
 
 	@XmlElement(name = "decomposable")
 	private List<DecomposableItemInfo> decomposableItemsTemplates;
-	private TIntObjectHashMap<List<ExtractedItemsCollection>> decomposableItemsInfo = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<ResultedItem>> selectableDecomposables = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<ExtractedItemsCollection>> decomposableItemsInfo = new TIntObjectHashMap<List<ExtractedItemsCollection>>();
+	private TIntObjectHashMap<List<ResultedItem>> selectableDecomposables = new TIntObjectHashMap<List<ResultedItem>>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		decomposableItemsInfo.clear();
@@ -42,10 +43,11 @@ public class DecomposableItemsData {
 	}
 
 	public List<ResultedItem> getSelectableItems(int itemId) {
-		List<ResultedItem> result = selectableDecomposables.get(itemId);
-		if (result != null)
-			return new ArrayList<ResultedItem>(result);
-		else
+		if (selectableDecomposables.contains(itemId)) {
+			List<ResultedItem> result = new FastTable<ResultedItem>();
+			result.addAll(selectableDecomposables.get(itemId));
+			return result;
+		} else
 			return null;
 	}
 

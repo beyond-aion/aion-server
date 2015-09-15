@@ -5,10 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,7 +110,7 @@ public class MySQL5MailDAO extends MailDAO {
 	}
 
 	private List<Item> loadMailboxItems(final int playerId) {
-		final List<Item> mailboxItems = new ArrayList<Item>();
+		final List<Item> mailboxItems = new FastTable<Item>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
 

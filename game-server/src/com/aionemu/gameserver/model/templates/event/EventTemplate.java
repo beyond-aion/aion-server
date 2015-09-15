@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -14,6 +13,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -99,13 +100,13 @@ public class EventTemplate {
 
 	public List<Integer> getStartableQuests() {
 		if (quests == null)
-			return new ArrayList<Integer>();
+			return new FastTable<Integer>();
 		return quests.getStartableQuests();
 	}
 
 	public List<Integer> getMaintainableQuests() {
 		if (quests == null)
-			return new ArrayList<Integer>();
+			return new FastTable<Integer>();
 		return quests.getMaintainQuests();
 	}
 
@@ -134,7 +135,7 @@ public class EventTemplate {
 
 		if (spawns != null && spawns.size() > 0) {
 			if (spawnedObjects == null)
-				spawnedObjects = new ArrayList<VisibleObject>();
+				spawnedObjects = new FastTable<VisibleObject>();
 			for (SpawnMap map : spawns.getTemplates()) {
 				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
@@ -218,7 +219,7 @@ public class EventTemplate {
 
 	public void addSpawnedObject(VisibleObject object) {
 		if (spawnedObjects == null)
-			spawnedObjects = new ArrayList<VisibleObject>();
+			spawnedObjects = new FastTable<VisibleObject>();
 		spawnedObjects.add(object);
 	}
 

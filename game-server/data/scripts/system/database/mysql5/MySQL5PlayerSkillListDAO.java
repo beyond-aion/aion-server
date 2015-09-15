@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nullable;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,6 @@ import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 
 /**
  * @author SoulKeeper
@@ -63,7 +63,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 	@Override
 	public PlayerSkillList loadSkillList(int playerId) {
-		List<PlayerSkillEntry> skills = new ArrayList<PlayerSkillEntry>();
+		List<PlayerSkillEntry> skills = new FastTable<PlayerSkillEntry>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);
@@ -86,10 +86,8 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	 */
 	@Override
 	public boolean storeSkills(Player player) {
-		List<PlayerSkillEntry> skillsDeleted = Lists.newArrayList(player.getSkillList().getDeletedSkills());
-		List<PlayerSkillEntry> skillsActive = Lists.newArrayList(player.getSkillList().getAllSkills());
-		store(player, skillsDeleted);
-		store(player, skillsActive);
+		store(player, player.getSkillList().getDeletedSkills());
+		store(player, player.getSkillList().getAllSkills());
 
 		return true;
 	}

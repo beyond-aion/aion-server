@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,6 +26,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -106,7 +106,7 @@ public class SpawnsData2 {
 				for (BaseSpawn BaseSpawn : spawnMap.getBaseSpawns()) {
 					int baseId = BaseSpawn.getId();
 					if (!baseSpawnMaps.containsKey(baseId)) {
-						baseSpawnMaps.put(baseId, new ArrayList<SpawnGroup2>());
+						baseSpawnMaps.put(baseId, new FastTable<SpawnGroup2>());
 					}
 					for (BaseSpawn.SimpleRaceTemplate simpleRace : BaseSpawn.getBaseRaceTemplates()) {
 						for (Spawn spawn : simpleRace.getSpawns()) {
@@ -125,7 +125,7 @@ public class SpawnsData2 {
 				for (RiftSpawn rift : spawnMap.getRiftSpawns()) {
 					int id = rift.getId();
 					if (!riftSpawnMaps.containsKey(id)) {
-						riftSpawnMaps.put(id, new ArrayList<SpawnGroup2>());
+						riftSpawnMaps.put(id, new FastTable<SpawnGroup2>());
 					}
 					for (Spawn spawn : rift.getSpawns()) {
 						if (spawn.isCustom()) {
@@ -143,7 +143,7 @@ public class SpawnsData2 {
 				for (SiegeSpawn SiegeSpawn : spawnMap.getSiegeSpawns()) {
 					int siegeId = SiegeSpawn.getSiegeId();
 					if (!siegeSpawnMaps.containsKey(siegeId)) {
-						siegeSpawnMaps.put(siegeId, new ArrayList<SpawnGroup2>());
+						siegeSpawnMaps.put(siegeId, new FastTable<SpawnGroup2>());
 					}
 					for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
 						for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
@@ -167,7 +167,7 @@ public class SpawnsData2 {
 				for (VortexSpawn VortexSpawn : spawnMap.getVortexSpawns()) {
 					int id = VortexSpawn.getId();
 					if (!vortexSpawnMaps.containsKey(id)) {
-						vortexSpawnMaps.put(id, new ArrayList<SpawnGroup2>());
+						vortexSpawnMaps.put(id, new FastTable<SpawnGroup2>());
 					}
 					for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
 						if (type == null || type.getSpawns() == null) {
@@ -342,7 +342,7 @@ public class SpawnsData2 {
 
 		SpawnMap map = null;
 		if (data.templates == null) {
-			data.templates = new ArrayList<SpawnMap>();
+			data.templates = new FastTable<SpawnMap>();
 			map = new SpawnMap(spawn.getWorldId());
 			data.templates.add(map);
 		} else {
@@ -421,7 +421,7 @@ public class SpawnsData2 {
 	 */
 	public void addNewSpawnMap(SpawnMap spawnMap) {
 		if (templates == null)
-			templates = new ArrayList<SpawnMap>();
+			templates = new FastTable<SpawnMap>();
 		templates.add(spawnMap);
 	}
 

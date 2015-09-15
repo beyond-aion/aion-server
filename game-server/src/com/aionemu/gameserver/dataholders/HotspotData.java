@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.hotspot.HotspotTemplate;
 
@@ -22,7 +23,7 @@ public class HotspotData {
 
 	public int size() {
 		if (hotspotTemplates == null) {
-			hotspotTemplates = new ArrayList<HotspotTemplate>();
+			hotspotTemplates = new FastTable<HotspotTemplate>();
 			return 0;
 		}
 		return hotspotTemplates.size();
@@ -30,7 +31,7 @@ public class HotspotData {
 
 	public List<HotspotTemplate> getHotspotTemplates() {
 		if (hotspotTemplates == null) {
-			return new ArrayList<HotspotTemplate>();
+			return new FastTable<HotspotTemplate>();
 		}
 		return hotspotTemplates;
 	}

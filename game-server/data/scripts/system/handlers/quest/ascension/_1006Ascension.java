@@ -1,7 +1,8 @@
 package quest.ascension;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -201,7 +202,7 @@ public class _1006Ascension extends QuestHandler {
 									public void run() {
 										qs.setQuestVar(51);
 										updateQuestStatus(env);
-										List<Npc> mobs = new ArrayList<Npc>();
+										List<Npc> mobs = new FastTable<Npc>();
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 224.073, (float) 239.1, (float) 206.7, (byte) 0));
 										mobs.add((Npc) QuestService
 											.spawnQuestNpc(310020000, instanceId, 211042, (float) 233.5, (float) 241.04, (float) 206.365, (byte) 0));

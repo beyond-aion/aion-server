@@ -1,9 +1,10 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -33,7 +34,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 @InstanceID(301160000)
 public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
-	private List<Integer> movies = new ArrayList<Integer>();
+	private List<Integer> movies = new FastTable<Integer>();
 	private boolean isInstanceDestroyed;
 	private Future<?> spawnTask;
 	private Future<?> despawnBossTask;

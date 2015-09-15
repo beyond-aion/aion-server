@@ -2,10 +2,11 @@ package com.aionemu.commons.network;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
+
+import javolution.util.FastTable;
 
 /**
  * This is implementation of <code>Dispatcher</code> that may accept connections, read and write data.
@@ -19,7 +20,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	/**
 	 * List of connections that should be closed by this <code>Dispatcher</code> as soon as possible.
 	 */
-	private final List<AConnection> pendingClose = new ArrayList<AConnection>();
+	private final List<AConnection> pendingClose = new FastTable<AConnection>();
 
 	/**
 	 * Constructor that accept <code>String</code> name and <code>DisconnectionThreadPool</code> dcPool as parameter.

@@ -9,8 +9,9 @@ import java.io.RandomAccessFile;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,8 @@ public class NpcDropData {
 
 	public static void load() {
 
-		List<Drop> drops = new ArrayList<Drop>();
-		List<String> names = new ArrayList<String>();
+		List<Drop> drops = new FastTable<Drop>();
+		List<String> names = new FastTable<String>();
 		FileChannel roChannel = null;
 		MappedByteBuffer buffer;
 		int npcCount = 0;
@@ -68,7 +69,7 @@ public class NpcDropData {
 				NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				if (npcTemplate != null) {
 					int groupCount = buffer.getInt();
-					List<DropGroup> dropGroupList = new ArrayList<DropGroup>(groupCount);
+					List<DropGroup> dropGroupList = new FastTable<>();
 					for (int groupIndex = 0; groupIndex < groupCount; groupIndex++) {
 						Race race;
 						byte raceId = buffer.get();
@@ -87,7 +88,7 @@ public class NpcDropData {
 						String groupName = names.get(buffer.getShort());
 						int maxItems = DropConfig.DROP_ENABLE_SUPPORT_NEW_NPCDROPS_FILES ? buffer.getInt() : 1;
 						int dropCount = buffer.getInt();
-						List<Drop> dropList = new ArrayList<Drop>(dropCount);
+						List<Drop> dropList = new FastTable<>();
 
 						for (int dropIndex = 0; dropIndex < dropCount; dropIndex++) {
 							dropList.add(drops.get(buffer.getInt()));
@@ -161,7 +162,7 @@ public class NpcDropData {
 			originalDrop.getDropGroup().clear();
 			originalDrop.getDropGroup().addAll(customDrop.getDropGroup());
 		} else if (customDrop.getReplaceType() == ReplaceType.PARTIAL) {
-			List<DropGroup> toDel = new ArrayList<DropGroup>();
+			List<DropGroup> toDel = new FastTable<DropGroup>();
 			for (DropGroup customDg : customDrop.getDropGroup()) {
 				for (DropGroup originalDg : originalDrop.getDropGroup()) {
 					if (originalDg.getGroupName().equals(customDg.getGroupName())) {

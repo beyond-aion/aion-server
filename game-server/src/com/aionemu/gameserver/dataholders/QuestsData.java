@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
@@ -38,7 +39,7 @@ public class QuestsData {
 			if (npcFactionId == 0 || quest.isTimeBased())
 				continue;
 			if (!sortedByFactionId.containsKey(npcFactionId)) {
-				List<QuestTemplate> factionQuests = new ArrayList<QuestTemplate>();
+				List<QuestTemplate> factionQuests = new FastTable<QuestTemplate>();
 				factionQuests.add(quest);
 				sortedByFactionId.put(npcFactionId, factionQuests);
 			} else {
@@ -53,7 +54,7 @@ public class QuestsData {
 
 	public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
 		List<QuestTemplate> factionQuests = sortedByFactionId.get(npcFactionId);
-		List<QuestTemplate> quests = new ArrayList<QuestTemplate>();
+		List<QuestTemplate> quests = new FastTable<QuestTemplate>();
 		QuestEnv questEnv = new QuestEnv(null, player, 0, 0);
 		for (QuestTemplate questTemplate : factionQuests) {
 			if (!QuestEngine.getInstance().isHaveHandler(questTemplate.getId()))

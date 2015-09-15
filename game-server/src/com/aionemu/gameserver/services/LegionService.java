@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -379,7 +378,7 @@ public class LegionService {
 
 	public List<Integer> getMembersByRank(int legionId, LegionRank rank) {
 		Legion legion = LegionService.getInstance().getLegion(legionId);
-		List<Integer> members = new ArrayList<Integer>();
+		List<Integer> members = new FastTable<Integer>();
 		for (int memberObjId : legion.getLegionMembers()) {
 			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
 			if (legionMember.getRank() == rank)
@@ -948,8 +947,8 @@ public class LegionService {
 	/**
 	 * @param legion
 	 */
-	public ArrayList<LegionMemberEx> loadLegionMemberExList(Legion legion, Integer objExcluded) {
-		ArrayList<LegionMemberEx> legionMembers = new ArrayList<LegionMemberEx>();
+	public List<LegionMemberEx> loadLegionMemberExList(Legion legion, Integer objExcluded) {
+		List<LegionMemberEx> legionMembers = new FastTable<LegionMemberEx>();
 		for (Integer memberObjId : legion.getLegionMembers()) {
 			LegionMemberEx legionMemberEx;
 			if (objExcluded != null && objExcluded.equals(memberObjId)) {
@@ -1261,7 +1260,7 @@ public class LegionService {
 
 		// Send the new legion member the required legion packets
 		PacketSendUtility.sendPacket(player, new SM_LEGION_INFO(legion));
-		ArrayList<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, player.getObjectId());
+		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, player.getObjectId());
 		ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
 		// Send the member list to the new legion member
 		while (splits.hasMore()) {
@@ -1496,7 +1495,7 @@ public class LegionService {
 
 		// Send legion info packets
 		PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_INFO(legion));
-		ArrayList<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
+		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
 		// Send member list to player
 		ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
 		// Send the member list to the new legion member

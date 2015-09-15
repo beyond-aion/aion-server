@@ -21,7 +21,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 	/**
 	 * This constructor will handle legion member info when a List of members is given
 	 * 
-	 * @param ArrayList
+	 * @param List
 	 *          <LegionMemberEx> legionMembers
 	 */
 	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isSplit, boolean isFirst) {

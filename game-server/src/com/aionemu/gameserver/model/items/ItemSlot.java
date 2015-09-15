@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.items;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 /**
  * This enum is defining inventory slots, to which items can be equipped.
@@ -97,7 +98,7 @@ public enum ItemSlot {
 	}
 
 	public static ItemSlot[] getSlotsFor(long slot) {
-		List<ItemSlot> slots = new ArrayList<ItemSlot>();
+		List<ItemSlot> slots = new FastTable<ItemSlot>();
 		for (ItemSlot itemSlot : values()) {
 			if (slot != 0 && itemSlot.slotIdMask != 0 && !itemSlot.isCombo() && (slot & itemSlot.slotIdMask) == itemSlot.slotIdMask) {
 				slots.add(itemSlot);

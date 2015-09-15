@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,7 +161,7 @@ public class HTMLService {
 	}
 
 	private static List<SurveyTemplate> getSurveyTemplates(List<SurveyTemplate> surveys, List<Integer> items) {
-		List<SurveyTemplate> templates = new ArrayList<SurveyTemplate>();
+		List<SurveyTemplate> templates = new FastTable<SurveyTemplate>();
 		for (SurveyTemplate survey : surveys) {
 			if (items.contains(survey.getItemId())) {
 				templates.add(survey);

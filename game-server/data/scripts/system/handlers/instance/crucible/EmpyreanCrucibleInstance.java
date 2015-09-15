@@ -1,8 +1,9 @@
 package instance.crucible;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
@@ -36,8 +37,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 @InstanceID(300300000)
 public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
-	private List<Npc> npcs = new ArrayList<Npc>();
-	private List<EmpyreanStage> emperyanStage = new ArrayList<EmpyreanStage>();
+	private List<Npc> npcs = new FastTable<Npc>();
+	private List<EmpyreanStage> emperyanStage = new FastTable<EmpyreanStage>();
 	private byte stage;
 	private boolean isDoneStage4 = false;
 	private boolean isDoneStage6Round2 = false;
@@ -45,7 +46,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private class EmpyreanStage {
 
-		private List<Npc> npcs = new ArrayList<Npc>();
+		private List<Npc> npcs = new FastTable<Npc>();
 
 		public EmpyreanStage(List<Npc> npcs) {
 			this.npcs = npcs;
@@ -580,7 +581,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 								@Override
 								public void run() {
-									List<Npc> round = new ArrayList<Npc>();
+									List<Npc> round = new FastTable<Npc>();
 									round.add(sp(217557, 357.24625f, 338.30093f, 96.09104f, (byte) 65));
 									round.add(sp(217558, 357.20663f, 359.28714f, 96.091064f, (byte) 75));
 									round.add(sp(217561, 365.109f, 349.1218f, 96.09114f, (byte) 60));
@@ -953,14 +954,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void startStage4Round4_1() {
-		List<Npc> round = new ArrayList<Npc>();
+		List<Npc> round = new FastTable<Npc>();
 		round.add(sp(217508, 334.06754f, 339.84393f, 96.09091f, (byte) 0));
 		emperyanStage.add(new EmpyreanStage(round));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				List<Npc> round1 = new ArrayList<Npc>();
+				List<Npc> round1 = new FastTable<Npc>();
 				round1.add(sp(217506, 342.12405f, 364.4922f, 96.09093f, (byte) 0));
 				round1.add(sp(217507, 344.4953f, 365.14444f, 96.09092f, (byte) 0));
 				emperyanStage.add(new EmpyreanStage(round1));
@@ -978,7 +979,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 			@Override
 			public void run() {
-				List<Npc> round = new ArrayList<Npc>();
+				List<Npc> round = new FastTable<Npc>();
 				round.add(sp(217566, 362.87164f, 357.87164f, 96.091125f, (byte) 73));
 				round.add(sp(217563, 359.1135f, 359.6953f, 96.091125f, (byte) 80));
 				emperyanStage.add(new EmpyreanStage(round));
@@ -1099,7 +1100,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sendEventPacket(type, 0);
 				sendEventPacket(StageType.START_STAGE_1_ROUND_1, 5000);
 				stage = 1;
-				final List<Integer> round = new ArrayList<Integer>();
+				final List<Integer> round = new FastTable<Integer>();
 				round.add(217486);
 				round.add(217489);
 				sp(217486, 327.73657f, 347.96228f, 96.09092f, (byte) 0, 9000);
@@ -1241,7 +1242,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round2() {
 		sendEventPacket(StageType.START_STAGE_1_ROUND_2, 2000);
-		final List<Integer> round = new ArrayList<Integer>();
+		final List<Integer> round = new FastTable<Integer>();
 		round.add(217492);
 		sp(217492, 332.7714f, 358.48206f, 96.09092f, (byte) 106, 6000);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -1259,7 +1260,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round3() {
 		sendEventPacket(StageType.START_STAGE_1_ROUND_3, 2000);
-		final List<Integer> round = new ArrayList<Integer>();
+		final List<Integer> round = new FastTable<Integer>();
 		round.add(217487);
 		sp(217487, 334.844f, 339.92618f, 96.09094f, (byte) 18, 6000);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -1277,7 +1278,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round4() {
 		sendEventPacket(StageType.START_STAGE_1_ROUND_4, 2000);
-		final List<Integer> round = new ArrayList<Integer>();
+		final List<Integer> round = new FastTable<Integer>();
 		round.add(217491);
 		sp(217491, 341.03156f, 361.04315f, 96.09093f, (byte) 90, 6000);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {

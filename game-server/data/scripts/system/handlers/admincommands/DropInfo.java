@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javolution.util.FastTable;
@@ -480,7 +479,7 @@ public class DropInfo extends AdminCommand {
 	}
 
 	private List<Integer> getAllowedItems(GlobalRule rule, Npc npc) {
-		List<Integer> alloweditems = new ArrayList<Integer>();
+		List<Integer> alloweditems = new FastTable<Integer>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
 			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff()) {

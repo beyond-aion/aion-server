@@ -6,11 +6,12 @@ import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class InstanceWalkerFormations {
 		String walkerId = npcWalker.getWalkTemplate().getRouteId();
 		List<ClusteredNpc> candidateList = groupedSpawnObjects.get(walkerId);
 		if (candidateList == null) {
-			candidateList = new ArrayList<ClusteredNpc>();
+			candidateList = new FastTable<ClusteredNpc>();
 			groupedSpawnObjects.put(walkerId, candidateList);
 		}
 		return candidateList.add(npcWalker);
@@ -79,7 +80,7 @@ public class InstanceWalkerFormations {
 					if (singleNpc.getWalkTemplate().getVersionId() != null) {
 						List<ClusteredNpc> variants = walkerVariants.get(singleNpc.getWalkTemplate().getVersionId());
 						if (variants == null) {
-							variants = new ArrayList<>();
+							variants = new FastTable<>();
 							walkerVariants.put(singleNpc.getWalkTemplate().getVersionId(), variants);
 						}
 						variants.add(singleNpc);
@@ -103,7 +104,7 @@ public class InstanceWalkerFormations {
 				} else {
 					List<WalkerGroup> variants = formationVariants.get(wg.getVersionId());
 					if (variants == null) {
-						variants = new ArrayList<>();
+						variants = new FastTable<>();
 						formationVariants.put(wg.getVersionId(), variants);
 					}
 					variants.add(wg);

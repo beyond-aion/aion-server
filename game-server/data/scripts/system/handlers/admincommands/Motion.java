@@ -1,7 +1,8 @@
 package admincommands;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -74,7 +75,7 @@ public class Motion extends AdminCommand implements StatOwner {
 		if (i == 0) {
 			player.getGameStats().endEffect(this);
 		} else {
-			List<IStatFunction> modifiers = new ArrayList<IStatFunction>();
+			List<IStatFunction> modifiers = new FastTable<IStatFunction>();
 			modifiers.add(new StatAddFunction(StatEnum.ATTACK_SPEED, i, true));
 			player.getGameStats().endEffect(this);
 			player.getGameStats().addEffect(this, modifiers);

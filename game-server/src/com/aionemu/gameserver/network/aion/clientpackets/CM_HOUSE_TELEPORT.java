@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.TeleportAnimation;
@@ -56,7 +57,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 		if (actionId == 1) {
 			playerId2 = playerId1;
 		} else if (actionId == 3) {
-			List<Integer> relationIds = new ArrayList<Integer>();
+			List<Integer> relationIds = new FastTable<Integer>();
 			Iterator<Friend> friends = player1.getFriendList().iterator();
 			int address = 0;
 

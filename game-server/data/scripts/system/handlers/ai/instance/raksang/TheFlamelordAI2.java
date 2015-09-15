@@ -1,11 +1,11 @@
 package ai.instance.raksang;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
-	private List<Integer> percents = new ArrayList<Integer>();
+	private List<Integer> percents = new FastTable<Integer>();
 	private Future<?> phaseTask;
 
 	@Override

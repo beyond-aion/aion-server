@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +91,7 @@ public class MercenariesService {
 	}
 
 	private static List<VisibleObject> spawn(MercenaryZone zone) {
-		List<VisibleObject> mercs = new ArrayList<VisibleObject>();
+		List<VisibleObject> mercs = new FastTable<VisibleObject>();
 		for (Spawn spawn : zone.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
 				SpawnTemplate spawnTemplate = SpawnEngine.addNewSingleTimeSpawn(zone.getWorldId(), spawn.getNpcId(), sst.getX(), sst.getY(), sst.getZ(),

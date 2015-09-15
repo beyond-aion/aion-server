@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(SM_PLAYER_SEARCH.class);
 
-	private List<Player> players;
+	private List<Player> players = new FastTable<Player>();
 	private int region;
 
 	/**
@@ -32,7 +33,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 	 *          of search - should be passed as parameter to prevent null in player.getActiveRegion()
 	 */
 	public SM_PLAYER_SEARCH(List<Player> players, int region) {
-		this.players = new ArrayList<Player>(players);
+		this.players.addAll(players);
 		this.region = region;
 	}
 

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.world;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -226,7 +226,7 @@ public abstract class WorldMapInstance {
 	}
 
 	public List<Player> getPlayersInside() {
-		List<Player> playersInside = new ArrayList<Player>();
+		List<Player> playersInside = new FastTable<Player>();
 		Iterator<Player> players = playerIterator();
 		while (players.hasNext()) {
 			playersInside.add(players.next());
@@ -239,7 +239,7 @@ public abstract class WorldMapInstance {
 	 * @return List<npc>
 	 */
 	public List<Npc> getNpcs(int npcId) {
-		List<Npc> npcs = new ArrayList<Npc>();
+		List<Npc> npcs = new FastTable<Npc>();
 		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
 			VisibleObject obj = iter.next();
 			if (obj instanceof Npc) {
@@ -256,7 +256,7 @@ public abstract class WorldMapInstance {
 	 * @return List<npcs>
 	 */
 	public List<Npc> getNpcs() {
-		List<Npc> npcs = new ArrayList<Npc>();
+		List<Npc> npcs = new FastTable<Npc>();
 		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
 			VisibleObject obj = iter.next();
 			if (obj instanceof Npc) {
@@ -446,7 +446,7 @@ public abstract class WorldMapInstance {
 	}
 
 	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-		List<ZoneInstance> regionZones = new ArrayList<ZoneInstance>();
+		List<ZoneInstance> regionZones = new FastTable<ZoneInstance>();
 		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
 
 		for (ZoneInstance zoneInstance : zones.values()) {

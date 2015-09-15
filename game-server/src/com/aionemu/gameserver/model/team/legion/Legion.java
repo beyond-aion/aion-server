@@ -6,7 +6,6 @@ import static ch.lambdaj.Lambda.select;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +14,8 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -34,7 +35,7 @@ public class Legion {
 	private int legionRank = 0;
 	private long contributionPoints = 0;
 	private int siegeGloryPoints = 0;
-	private List<Integer> legionMembers = new ArrayList<Integer>();
+	private List<Integer> legionMembers = new FastTable<Integer>();
 	private int onlineMembersCount = 0;
 	private short deputyPermission = 0x1E0C;
 	private short centurionPermission = 0x1C08;
@@ -108,7 +109,7 @@ public class Legion {
 	 * @param legionMembers
 	 *          the legionMembers to set
 	 */
-	public void setLegionMembers(ArrayList<Integer> legionMembers) {
+	public void setLegionMembers(List<Integer> legionMembers) {
 		this.legionMembers = legionMembers;
 	}
 
@@ -122,8 +123,8 @@ public class Legion {
 	/**
 	 * @return the online legionMembers
 	 */
-	public ArrayList<Player> getOnlineLegionMembers() {
-		ArrayList<Player> onlineLegionMembers = new ArrayList<Player>();
+	public List<Player> getOnlineLegionMembers() {
+		List<Player> onlineLegionMembers = new FastTable<Player>();
 		for (int legionMemberObjId : legionMembers) {
 			Player onlineLegionMember = World.getInstance().findPlayer(legionMemberObjId);
 			if (onlineLegionMember != null)
@@ -538,7 +539,7 @@ public class Legion {
 	}
 
 	public void addBonus() {
-		ArrayList<Player> members = getOnlineLegionMembers();
+		List<Player> members = getOnlineLegionMembers();
 		if (members.size() >= 10) {
 			if (hasBonus.compareAndSet(false, true)) {
 				for (Player member : members) {
@@ -549,7 +550,7 @@ public class Legion {
 	}
 
 	public void removeBonus() {
-		ArrayList<Player> members = getOnlineLegionMembers();
+		List<Player> members = getOnlineLegionMembers();
 		if (members.size() < 10) {
 			if (hasBonus.compareAndSet(true, false)) {
 				for (Player member : members) {

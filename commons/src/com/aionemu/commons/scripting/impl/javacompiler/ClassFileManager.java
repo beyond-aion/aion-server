@@ -2,7 +2,6 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,8 @@ import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.JavaFileObject.Kind;
 import javax.tools.StandardLocation;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.scripting.ScriptClassLoader;
 
@@ -162,7 +163,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 		Iterable<JavaFileObject> objects = super.list(location, packageName, kinds, recurse);
 
 		if (StandardLocation.CLASS_PATH.equals(location) && kinds.contains(Kind.CLASS)) {
-			List<JavaFileObject> temp = new ArrayList<JavaFileObject>();
+			List<JavaFileObject> temp = new FastTable<JavaFileObject>();
 			for (JavaFileObject object : objects) {
 				temp.add(object);
 			}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.condition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
@@ -53,7 +54,7 @@ public class Conditions {
 	 */
 	public List<Condition> getConditions() {
 		if (conditions == null) {
-			conditions = new ArrayList<Condition>();
+			conditions = new FastTable<Condition>();
 		}
 		return this.conditions;
 	}

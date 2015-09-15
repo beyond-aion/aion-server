@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.siegeservice;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.world.World;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * A class that contains all the counters for the siege. One SiegeCounter per race should be used.
@@ -116,7 +116,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 			}
 		});
 
-		Map<K, Long> result = Maps.newLinkedHashMap();
+		Map<K, Long> result = new LinkedHashMap<>();
 		for (Map.Entry<K, AtomicLong> entry : tempList) {
 			if (entry.getValue().get() > 0) {
 				result.put(entry.getKey(), entry.getValue().get());

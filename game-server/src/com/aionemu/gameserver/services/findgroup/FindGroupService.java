@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services.findgroup;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.objects.filter.ObjectFilter;
@@ -77,7 +78,7 @@ public class FindGroupService {
 				break;
 		}
 
-		Collection<FindGroup> findGroupList = new ArrayList<FindGroup>();
+		Collection<FindGroup> findGroupList = new FastTable<FindGroup>();
 		findGroupList.add(findGroup);
 
 		PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, ((int) (System.currentTimeMillis() / 1000)), findGroupList));

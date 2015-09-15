@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.services.abyss;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.RankingConfig;
@@ -63,7 +63,7 @@ public class AbyssRankingCache {
 		FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>>();
 		FastMap<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new FastMap<Race, SM_ABYSS_RANKING_LEGIONS>();
 		FastMap<Integer, Integer> newLegionRanking = new FastMap<Integer, Integer>();
-		ArrayList<AbyssRankingResult> rankList;
+		List<AbyssRankingResult> rankList;
 
 		int updateTime = (int) (System.currentTimeMillis() / 1000);
 
@@ -122,8 +122,8 @@ public class AbyssRankingCache {
 		}
 	}
 
-	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, ArrayList<AbyssRankingResult> list) {
-		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new ArrayList<SM_ABYSS_RANKING_PLAYERS>();
+	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, List<AbyssRankingResult> list) {
+		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new FastTable<SM_ABYSS_RANKING_PLAYERS>();
 		int page = 1;
 
 		for (int i = 0; i < list.size(); i += 44) {
@@ -138,7 +138,7 @@ public class AbyssRankingCache {
 		return playerPackets;
 	}
 
-	private FastMap<Integer, Integer> getLegionRanking(ArrayList<AbyssRankingResult> rankList) {
+	private FastMap<Integer, Integer> getLegionRanking(List<AbyssRankingResult> rankList) {
 		FastMap<Integer, Integer> rankMap = new FastMap<Integer, Integer>();
 
 		for (AbyssRankingResult rank : rankList) {

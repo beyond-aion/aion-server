@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -8,6 +7,8 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -79,7 +80,7 @@ public class Mailbox {
 	 * @return new list of letters
 	 */
 	public List<Letter> getNewSystemLetters(String substring) {
-		List<Letter> letters = new ArrayList<Letter>();
+		List<Letter> letters = new FastTable<Letter>();
 		for (Letter letter : mails.values()) {
 			if (letter.getSenderName() == null || !letter.isUnread())
 				continue;

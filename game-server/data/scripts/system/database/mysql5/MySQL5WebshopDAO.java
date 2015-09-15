@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class MySQL5WebshopDAO extends WebshopDAO {
 
 	@Override
 	public List<WebshopRequest> loadRequests() {
-		List<WebshopRequest> requests = new ArrayList<WebshopRequest>();
+		List<WebshopRequest> requests = new FastTable<WebshopRequest>();
 		try {
 			try (Connection conn = DatabaseFactory.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(SELECT_QUERY);

@@ -3,9 +3,10 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 	@Override
 	public boolean loadSiegeLocations(final Map<Integer, SiegeLocation> locations) {
 		boolean success = true;
-		List<Integer> loaded = new ArrayList<Integer>();
+		List<Integer> loaded = new FastTable<Integer>();
 
 		try {
 			try (Connection con = DatabaseFactory.getConnection();

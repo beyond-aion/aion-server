@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.THashMap;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +15,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 
@@ -99,7 +100,7 @@ public class EventData {
 	}
 
 	public List<EventTemplate> getAllEvents() {
-		List<EventTemplate> result = new ArrayList<EventTemplate>();
+		List<EventTemplate> result = new FastTable<EventTemplate>();
 		synchronized (allEvents) {
 			result.addAll(allEvents.values());
 		}
@@ -109,7 +110,7 @@ public class EventData {
 
 	public void setAllEvents(List<EventTemplate> events, String active) {
 		if (events == null)
-			events = new ArrayList<EventTemplate>();
+			events = new FastTable<EventTemplate>();
 		this.events = events;
 		this.active = active;
 
@@ -124,7 +125,7 @@ public class EventData {
 	}
 
 	public List<EventTemplate> getActiveEvents() {
-		List<EventTemplate> result = new ArrayList<EventTemplate>();
+		List<EventTemplate> result = new FastTable<EventTemplate>();
 		synchronized (activeEvents) {
 			result.addAll(activeEvents.values());
 		}

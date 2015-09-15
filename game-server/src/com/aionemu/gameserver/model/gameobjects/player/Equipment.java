@@ -13,7 +13,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_CANCELED;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_SUCCEED;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -583,7 +582,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsByItemId(int value) {
-		List<Item> equippedItemsById = new ArrayList<Item>();
+		List<Item> equippedItemsById = new FastTable<Item>();
 		synchronized (equipment) {
 			for (Item item : equipment.values()) {
 				if (item.getItemTemplate().getTemplateId() == value)
@@ -617,7 +616,7 @@ public class Equipment {
 	 */
 	public FastTable<Item> getEquippedItemsWithoutStigma() {
 		FastTable<Item> equippedItems = new FastTable<>();
-		List<Item> twoHanded = new ArrayList<Item>();
+		List<Item> twoHanded = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
 				if (item.getItemTemplate().isTwoHandWeapon()) {
@@ -638,7 +637,7 @@ public class Equipment {
 	 */
 	public FastTable<Item> getEquippedForApparence() {
 		FastTable<Item> equippedItems = new FastTable<>();
-		List<Item> twoHanded = new ArrayList<Item>();
+		List<Item> twoHanded = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			long slot = item.getEquipmentSlot();
 			if (!ItemSlot.isStigma(slot)) {
@@ -659,7 +658,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAllStigma() {
-		List<Item> equippedItems = new ArrayList<Item>();
+		List<Item> equippedItems = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -672,7 +671,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsRegularStigma() {
-		List<Item> equippedItems = new ArrayList<Item>();
+		List<Item> equippedItems = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isRegularStigma(item.getEquipmentSlot()))
 				equippedItems.add(item);
@@ -684,7 +683,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAdvencedStigma() {
-		List<Item> equippedItems = new ArrayList<Item>();
+		List<Item> equippedItems = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -698,7 +697,7 @@ public class Equipment {
 	 */
 	public int itemSetPartsEquipped(int itemSetTemplateId) {
 		int number = 0;
-		List<Integer> counted = new ArrayList<>(); // no double counting for accessory and weapons
+		List<Integer> counted = new FastTable<>(); // no double counting for accessory and weapons
 
 		for (Item item : equipment.values()) {
 			if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
@@ -948,7 +947,7 @@ public class Equipment {
 		Item mainOffHandItem = equipment.get(ItemSlot.MAIN_OFF_HAND.getSlotIdMask());
 		Item subOffHandItem = equipment.get(ItemSlot.SUB_OFF_HAND.getSlotIdMask());
 
-		List<Item> equippedWeapon = new ArrayList<Item>();
+		List<Item> equippedWeapon = new FastTable<Item>();
 
 		if (mainHandItem != null)
 			equippedWeapon.add(mainHandItem);

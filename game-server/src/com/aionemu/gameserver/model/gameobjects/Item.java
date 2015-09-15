@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javolution.util.FastTable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -899,7 +900,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public List<StatFunction> getCurrentModifiers() {
 		if (currentModifiers == null)
-			currentModifiers = new ArrayList<StatFunction>();
+			currentModifiers = new FastTable<StatFunction>();
 		return currentModifiers;
 	}
 

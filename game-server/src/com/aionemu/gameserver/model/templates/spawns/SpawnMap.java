@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultSpawn;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
@@ -53,7 +54,7 @@ public class SpawnMap {
 
 	public List<Spawn> getSpawns() {
 		if (spawns == null) {
-			spawns = new ArrayList<Spawn>();
+			spawns = new FastTable<Spawn>();
 		}
 		return spawns;
 	}
@@ -68,20 +69,20 @@ public class SpawnMap {
 
 	public List<BaseSpawn> getBaseSpawns() {
 		if (baseSpawns == null) {
-			baseSpawns = new ArrayList<BaseSpawn>();
+			baseSpawns = new FastTable<BaseSpawn>();
 		}
 		return baseSpawns;
 	}
 
 	public List<MercenarySpawn> getMercenarySpawns() {
 		if (mercenarySpawns == null)
-			mercenarySpawns = new ArrayList<MercenarySpawn>(0);
+			mercenarySpawns = new FastTable<MercenarySpawn>();
 		return mercenarySpawns;
 	}
 
 	public List<AssaultSpawn> getAssaultSpawns() {
 		if (assaultSpawns == null)
-			assaultSpawns = new ArrayList<AssaultSpawn>(0);
+			assaultSpawns = new FastTable<AssaultSpawn>();
 		return assaultSpawns;
 	}
 
@@ -91,7 +92,7 @@ public class SpawnMap {
 
 	public List<RiftSpawn> getRiftSpawns() {
 		if (riftSpawns == null) {
-			riftSpawns = new ArrayList<RiftSpawn>();
+			riftSpawns = new FastTable<RiftSpawn>();
 		}
 		return riftSpawns;
 	}
@@ -102,7 +103,7 @@ public class SpawnMap {
 
 	public List<SiegeSpawn> getSiegeSpawns() {
 		if (siegeSpawns == null) {
-			siegeSpawns = new ArrayList<SiegeSpawn>();
+			siegeSpawns = new FastTable<SiegeSpawn>();
 		}
 		return siegeSpawns;
 	}
@@ -113,7 +114,7 @@ public class SpawnMap {
 
 	public List<VortexSpawn> getVortexSpawns() {
 		if (vortexSpawns == null) {
-			vortexSpawns = new ArrayList<VortexSpawn>();
+			vortexSpawns = new FastTable<VortexSpawn>();
 		}
 		return vortexSpawns;
 	}

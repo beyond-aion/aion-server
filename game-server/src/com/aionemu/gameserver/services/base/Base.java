@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.base;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,9 +33,9 @@ public class Base<BL extends BaseLocation> {
 
 	private Future<?> startAssault, stopAssault;
 	private final BL baseLocation;
-	private List<Race> list = new ArrayList<>();
+	private List<Race> list = new FastTable<>();
 	private final BossDeathListener bossDeathListener = new BossDeathListener(this);
-	private List<Npc> attackers = new ArrayList<>();
+	private List<Npc> attackers = new FastTable<>();
 	private final AtomicBoolean finished = new AtomicBoolean();
 	private boolean started, is_new_map;
 	private Npc boss, flag;

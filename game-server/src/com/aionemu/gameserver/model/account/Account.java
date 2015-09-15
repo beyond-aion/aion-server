@@ -1,12 +1,14 @@
 package com.aionemu.gameserver.model.account;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
@@ -203,8 +205,8 @@ public class Account implements Iterable<PlayerAccountData> {
 	/**
 	 * Sorts the accounts on last online.
 	 */
-	public ArrayList<PlayerAccountData> getSortedAccountsList() {
-		ArrayList<PlayerAccountData> list = new ArrayList<PlayerAccountData>();
+	public List<PlayerAccountData> getSortedAccountsList() {
+		List<PlayerAccountData> list = new FastTable<PlayerAccountData>();
 		list.addAll(players.values());
 		Collections.sort(list, new Comparator<PlayerAccountData>() {
 

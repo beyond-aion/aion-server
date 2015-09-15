@@ -30,7 +30,7 @@ public class SkillLearnService {
 		if (player.getCommonData().isDaeva() && player.getSkillList().getSkillEntry(30001) != null) {
 			int skillLevel = player.getSkillList().getSkillLevel(30001);
 			removeSkill(player, 30001);
-			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player, player.getSkillList().getBasicSkills()));
+			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
 			// Why adding after the packet ?
 			player.getSkillList().addSkill(player, 30002, skillLevel);
 		}
@@ -65,9 +65,9 @@ public class SkillLearnService {
 				int skillLevel = player.getSkillList().getSkillLevel(30001);
 				player.getSkillList().removeSkill(30001);
 				// Not sure about that, mysterious code
-				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player, player.getSkillList().getBasicSkills()));
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
 				for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
-					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player, stigmaSkill));
+					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(stigmaSkill));
 				// Why adding after the packet ?
 				player.getSkillList().addSkill(player, 30002, skillLevel);
 			}

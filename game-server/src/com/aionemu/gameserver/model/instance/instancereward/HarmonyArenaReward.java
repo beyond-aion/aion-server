@@ -4,7 +4,6 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.sort;
 import static ch.lambdaj.Lambda.sum;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 	}
 
 	public List<HarmonyGroupReward> getHarmonyGroupInside() {
-		List<HarmonyGroupReward> harmonyGroups = new ArrayList<>();
+		List<HarmonyGroupReward> harmonyGroups = new FastTable<>();
 		for (HarmonyGroupReward group : groups) {
 			for (AGPlayer agp : group.getAGPlayers()) {
 				if (agp.isInInstance()) {

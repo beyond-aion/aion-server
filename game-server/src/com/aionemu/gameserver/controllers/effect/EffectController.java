@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers.effect;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -742,7 +742,7 @@ public class EffectController {
 	 * @return copy of anbornals list
 	 */
 	public List<Effect> getAbnormalEffects() {
-		List<Effect> effects = new ArrayList<Effect>();
+		List<Effect> effects = new FastTable<Effect>();
 		Iterator<Effect> iterator = iterator();
 		while (iterator.hasNext()) {
 			Effect effect = iterator.next();

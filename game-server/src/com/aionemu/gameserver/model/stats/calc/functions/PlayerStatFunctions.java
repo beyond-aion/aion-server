@@ -4,8 +4,9 @@ import static ch.lambdaj.Lambda.forEach;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.selectMax;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,7 +19,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
  */
 public class PlayerStatFunctions {
 
-	private static final List<IStatFunction> FUNCTIONS = new ArrayList<IStatFunction>();
+	private static final List<IStatFunction> FUNCTIONS = new FastTable<IStatFunction>();
 
 	static {
 		FUNCTIONS.add(new PhysicalAttackFunction());
@@ -190,7 +191,7 @@ class DuplicateStatFunction extends StatFunction {
 		if (mainWeapon != null) {
 			StatFunction func1 = null;
 			StatFunction func2 = null;
-			List<StatFunction> functions = new ArrayList<StatFunction>();
+			List<StatFunction> functions = new FastTable<StatFunction>();
 			List<StatFunction> functions1 = mainWeapon.getItemTemplate().getModifiers();
 
 			if (functions1 != null) {
@@ -236,7 +237,7 @@ class DuplicateStatFunction extends StatFunction {
 	}
 
 	private List<StatFunction> getFunctions(List<StatFunction> list, Stat2 stat, Item item) {
-		List<StatFunction> functions = new ArrayList<StatFunction>();
+		List<StatFunction> functions = new FastTable<StatFunction>();
 		for (StatFunction func : list) {
 			if (func.getName() == getName()) {
 				StatFunctionProxy func2 = new StatFunctionProxy(item, func);

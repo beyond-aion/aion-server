@@ -3,7 +3,6 @@ package com.aionemu.gameserver.dataholders;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemMask;
@@ -55,13 +56,13 @@ public class ItemData extends ReloadableData {
 			if (it.getItemGroup().equals(ItemGroup.MANASTONE)) {
 				int level = it.getLevel();
 				if (!manastones.containsKey(level)) {
-					manastones.put(level, new ArrayList<ItemTemplate>());
+					manastones.put(level, new FastTable<ItemTemplate>());
 				}
 				if (!eventManastones.containsKey(level)) {
-					eventManastones.put(level, new ArrayList<ItemTemplate>());
+					eventManastones.put(level, new FastTable<ItemTemplate>());
 				}
 				if (!stampManastones.containsKey(level)) {
-					stampManastones.put(level, new ArrayList<ItemTemplate>());
+					stampManastones.put(level, new FastTable<ItemTemplate>());
 				}
 				if (it.getName().toLowerCase().startsWith("[stamp]"))
 					stampManastones.get(level).add(it);
@@ -72,7 +73,7 @@ public class ItemData extends ReloadableData {
 			} else if (it.getItemGroup().equals(ItemGroup.SPECIAL_MANASTONE)) {
 				int level = it.getLevel();
 				if (!specialManastones.containsKey(level))
-					specialManastones.put(level, new ArrayList<ItemTemplate>());
+					specialManastones.put(level, new FastTable<ItemTemplate>());
 
 				if (!it.getName().toLowerCase().startsWith("[stamp]"))
 					specialManastones.get(level).add(it);
@@ -146,7 +147,7 @@ public class ItemData extends ReloadableData {
 			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
 			Unmarshaller un = jc.createUnmarshaller();
 			un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-			List<ItemTemplate> newTemplates = new ArrayList<ItemTemplate>();
+			List<ItemTemplate> newTemplates = new FastTable<ItemTemplate>();
 			ItemData data = (ItemData) un.unmarshal(new File("./data/static_data/items/item_templates.xml"));
 			if (data != null && data.getData() != null)
 				newTemplates.addAll(data.getData());

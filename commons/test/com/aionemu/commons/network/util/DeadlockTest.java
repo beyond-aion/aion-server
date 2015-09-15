@@ -1,7 +1,8 @@
 package com.aionemu.commons.network.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
+
+import javolution.util.FastTable;
 
 import org.testng.annotations.Test;
 
@@ -30,7 +31,7 @@ public class DeadlockTest {
 	 * This "smart" logic is for generating long stacktrace
 	 */
 	private void createDeadlock() {
-		final Collection<String> coll = new ArrayList<String>();
+		final Collection<String> coll = new FastTable<String>();
 		coll.add("1");
 		synchronized (lock1) {
 			Collection<Integer> filtered = Collections2.filter(Collections2.transform(coll, new Function<String, Integer>() {

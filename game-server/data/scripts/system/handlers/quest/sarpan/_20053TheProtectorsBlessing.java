@@ -1,8 +1,9 @@
 package quest.sarpan;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.DialogAction;
@@ -21,7 +22,7 @@ import com.aionemu.gameserver.world.World;
 public class _20053TheProtectorsBlessing extends QuestHandler {
 
 	private static final int questId = 20053;
-	private static List<Integer> mobs = new ArrayList<Integer>();
+	private static List<Integer> mobs = new FastTable<Integer>();
 
 	static {
 		mobs.add(218760);

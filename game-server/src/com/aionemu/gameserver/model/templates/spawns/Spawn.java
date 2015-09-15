@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Marshaller;
@@ -10,6 +9,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -94,7 +95,7 @@ public class Spawn {
 
 	public List<SpawnSpotTemplate> getSpawnSpotTemplates() {
 		if (spawnTemplates == null)
-			spawnTemplates = new ArrayList<SpawnSpotTemplate>();
+			spawnTemplates = new FastTable<SpawnSpotTemplate>();
 		return spawnTemplates;
 	}
 

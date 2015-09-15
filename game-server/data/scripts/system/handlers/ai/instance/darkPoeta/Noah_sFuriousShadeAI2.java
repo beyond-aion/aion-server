@@ -1,10 +1,10 @@
 package ai.instance.darkPoeta;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -22,7 +22,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> skillTask;
 	private Future<?> skill2Task;
-	protected List<Integer> percents = new ArrayList<Integer>();
+	protected List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	public void handleSpawned() {

@@ -2,7 +2,6 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +10,8 @@ import javax.tools.DiagnosticListener;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,7 +118,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 			throw new IllegalArgumentException("Amount of classes is not equal to amount of sources");
 		}
 
-		List<JavaFileObject> compilationUnits = new ArrayList<JavaFileObject>();
+		List<JavaFileObject> compilationUnits = new FastTable<JavaFileObject>();
 
 		for (int i = 0; i < classNames.length; i++) {
 			JavaFileObject compilationUnit = new JavaSourceFromString(classNames[i], sourceCode[i]);
@@ -138,7 +139,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 */
 	@Override
 	public CompilationResult compile(Iterable<File> compilationUnits) {
-		List<JavaFileObject> list = new ArrayList<JavaFileObject>();
+		List<JavaFileObject> list = new FastTable<JavaFileObject>();
 
 		for (File f : compilationUnits) {
 			list.add(new JavaSourceFromFile(f, JavaFileObject.Kind.SOURCE));

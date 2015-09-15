@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.goods;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -37,7 +36,7 @@ public class GoodsList {
 	private List<Integer> itemIdList;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		itemIdList = new ArrayList<Integer>();
+		itemIdList = new FastTable<Integer>();
 		if (items == null)
 			return;
 

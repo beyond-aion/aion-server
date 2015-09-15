@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.ai2.handler;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -128,7 +129,7 @@ public final class ShoutEventHandler {
 
 		List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACKED, null, 0);
 
-		List<NpcShout> finalShouts = new ArrayList<NpcShout>();
+		List<NpcShout> finalShouts = new FastTable<NpcShout>();
 		for (NpcShout s : shouts) {
 			if (s.getShoutType() == ShoutType.SAY)
 				finalShouts.add(s);
@@ -177,8 +178,8 @@ public final class ShoutEventHandler {
 		if (shouts == null)
 			return;
 
-		List<NpcShout> validShouts = new ArrayList<NpcShout>();
-		List<NpcShout> nonNumberedShouts = new ArrayList<NpcShout>();
+		List<NpcShout> validShouts = new FastTable<NpcShout>();
+		List<NpcShout> nonNumberedShouts = new FastTable<NpcShout>();
 		for (NpcShout shout : shouts) {
 			if (shout.getSkillNo() == 0)
 				nonNumberedShouts.add(shout);

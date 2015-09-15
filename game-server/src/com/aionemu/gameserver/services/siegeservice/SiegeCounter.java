@@ -4,11 +4,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class SiegeCounter {
@@ -53,7 +54,8 @@ public class SiegeCounter {
 	 * @return all siege race damage counters sorted by descending order
 	 */
 	public SiegeRaceCounter getWinnerRaceCounter() {
-		List<SiegeRaceCounter> list = Lists.newArrayList(siegeRaceCounters.values());
+		List<SiegeRaceCounter> list = new FastTable<>();
+		list.addAll(siegeRaceCounters.values());
 		Collections.sort(list);
 		return list.get(0);
 	}

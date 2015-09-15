@@ -1,8 +1,9 @@
 package ai;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
@@ -23,7 +24,7 @@ import com.aionemu.gameserver.world.World;
 @AIName("summoner")
 public class SummonerAI2 extends AggressiveNpcAI2 {
 
-	private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+	private final List<Integer> spawnedNpc = new FastTable<Integer>();
 
 	private List<Percentage> percentage = Collections.emptyList();
 

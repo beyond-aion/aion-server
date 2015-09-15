@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,6 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author IceReaper, orfeo087, Avol, AEJTester
+ * @modified Neon
  */
 public final class PlayerSkillList implements SkillList<Player> {
 
@@ -24,7 +26,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 	public PlayerSkillList() {
 		this.basicSkills = new HashMap<Integer, PlayerSkillEntry>(0);
 		this.stigmaSkills = new HashMap<Integer, PlayerSkillEntry>(0);
-		this.deletedSkills = new ArrayList<PlayerSkillEntry>(0);
+		this.deletedSkills = new FastTable<PlayerSkillEntry>();
 	}
 
 	public PlayerSkillList(List<PlayerSkillEntry> skills) {
@@ -40,23 +42,29 @@ public final class PlayerSkillList implements SkillList<Player> {
 	/**
 	 * Returns array with all skills
 	 */
-	public PlayerSkillEntry[] getAllSkills() {
-		List<PlayerSkillEntry> allSkills = new ArrayList<PlayerSkillEntry>();
-		allSkills.addAll(basicSkills.values());
-		allSkills.addAll(stigmaSkills.values());
-		return allSkills.toArray(new PlayerSkillEntry[allSkills.size()]);
+	public List<PlayerSkillEntry> getAllSkills() {
+		List<PlayerSkillEntry> skills = new FastTable<>();
+		skills.addAll(basicSkills.values());
+		skills.addAll(stigmaSkills.values());
+		return skills;
 	}
 
-	public PlayerSkillEntry[] getBasicSkills() {
-		return basicSkills.values().toArray(new PlayerSkillEntry[basicSkills.size()]);
+	public List<PlayerSkillEntry> getBasicSkills() {
+		List<PlayerSkillEntry> skills = new FastTable<>();
+		skills.addAll(basicSkills.values());
+		return skills;
 	}
 
-	public PlayerSkillEntry[] getStigmaSkills() {
-		return stigmaSkills.values().toArray(new PlayerSkillEntry[stigmaSkills.size()]);
+	public List<PlayerSkillEntry> getStigmaSkills() {
+		List<PlayerSkillEntry> skills = new FastTable<>();
+		skills.addAll(stigmaSkills.values());
+		return skills;
 	}
 
-	public PlayerSkillEntry[] getDeletedSkills() {
-		return deletedSkills.toArray(new PlayerSkillEntry[deletedSkills.size()]);
+	public List<PlayerSkillEntry> getDeletedSkills() {
+		List<PlayerSkillEntry> skills = new FastTable<>();
+		skills.addAll(deletedSkills);
+		return skills;
 	}
 
 	public PlayerSkillEntry getSkillEntry(int skillId) {

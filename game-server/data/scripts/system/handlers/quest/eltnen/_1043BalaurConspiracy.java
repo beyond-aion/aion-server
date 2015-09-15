@@ -1,8 +1,9 @@
 package quest.eltnen;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIState;
@@ -34,7 +35,7 @@ public class _1043BalaurConspiracy extends QuestHandler {
 
 	private final static int questId = 1043;
 
-	private static List<Integer> mobs = new ArrayList<Integer>();
+	private static List<Integer> mobs = new FastTable<Integer>();
 
 	static {
 		mobs.add(211628);

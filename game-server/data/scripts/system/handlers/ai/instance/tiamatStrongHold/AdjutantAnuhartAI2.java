@@ -1,11 +1,11 @@
 package ai.instance.tiamatStrongHold;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -22,7 +22,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> bladeStormTask;
-	protected List<Integer> percents = new ArrayList<Integer>();
+	protected List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	protected void handleAttack(Creature creature) {

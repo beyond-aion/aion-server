@@ -1,11 +1,11 @@
 package ai.instance.beshmundirTemple;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
 import ai.GeneralNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
@@ -25,7 +25,7 @@ public class AethicFieldGeneratorAI2 extends GeneralNpcAI2 {
 
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
 	private Future<?> aggroTask;
-	private List<Integer> percents = new ArrayList<Integer>();
+	private List<Integer> percents = new FastTable<Integer>();
 
 	@Override
 	public boolean canThink() {

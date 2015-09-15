@@ -3,7 +3,6 @@ package com.aionemu.gameserver.world.zone;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -280,7 +280,7 @@ public final class ZoneService implements GameEngine {
 
 		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(worldId);
 		if (areas == null) {
-			this.zoneByMapIdMap.put(worldId, new ArrayList<ZoneInfo>());
+			this.zoneByMapIdMap.put(worldId, new FastTable<ZoneInfo>());
 			areas = this.zoneByMapIdMap.get(worldId);
 		}
 		ZoneInfo zoneInfo = null;
@@ -326,7 +326,7 @@ public final class ZoneService implements GameEngine {
 	}
 
 	public void saveMaterialZones() {
-		List<ZoneTemplate> templates = new ArrayList<ZoneTemplate>();
+		List<ZoneTemplate> templates = new FastTable<ZoneTemplate>();
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(map.getMapId());
 			if (areas == null)

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAO;
@@ -26,9 +26,9 @@ public abstract class AbyssRankDAO implements DAO {
 
 	public abstract boolean storeAbyssRank(Player player);
 
-	public abstract ArrayList<AbyssRankingResult> getAbyssRankingPlayers(Race race, final int maxOfflineDays);
+	public abstract List<AbyssRankingResult> getAbyssRankingPlayers(Race race, final int maxOfflineDays);
 
-	public abstract ArrayList<AbyssRankingResult> getAbyssRankingLegions(Race race);
+	public abstract List<AbyssRankingResult> getAbyssRankingLegions(Race race);
 
 	public abstract Map<Integer, Integer[]> loadPlayersGpAp(Race race, final AbyssRankEnum limitRank, final int maxOfflineDays);
 
