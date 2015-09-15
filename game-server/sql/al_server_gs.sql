@@ -887,7 +887,7 @@ CREATE TABLE `account_passports` (
   `passport_id` int(11) NOT NULL,
   `rewarded` int(11) NOT NULL,
   `arrive_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`player_id`,`passport_id`,`arrive_date`)
+  PRIMARY KEY (`account_id`,`passport_id`,`arrive_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
