@@ -404,6 +404,73 @@
 			<drop item_id="166500002" name="Amplification Stone" min_amount="1" max_amount="1" chance="5" each_member="true"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Elementis Forest -->
+	<npc_drop npc_id="700999" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Epic)">
+			<drop item_id="112101198" name="Primal Spirit Pauldrons" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="112601186" name="Primal Spirit Shoulderplates" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Unique)">
+			<drop item_id="100001261" name="Primal Spirit Assassin Sword" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="100500981" name="Primal Spirit Jewel" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123001213" name="Cursed Forest Leather Belt" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="123001214" name="Cursed Forest Sash" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120001239" name="Cursed Forest Corundum Earrings" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="120001240" name="Cursed Forest Turquoise Earrings" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="114101283" name="Fallen Spirit Shoes" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="114301289" name="Fallen Spirit Boots" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="114501247" name="Fallen Spirit Brogans" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="114601189" name="Fallen Spirit Sabatons" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="112101195" name="Fallen Spirit Pauldrons" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="112301178" name="Fallen Spirit Shoulderguards" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="112501171" name="Fallen Spirit Spaulders" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="112601183" name="Fallen Spirit Shoulderplates" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="111101237" name="Fallen Spirit Gloves" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="111301232" name="Fallen Spirit Vambrace" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="111501226" name="Fallen Spirit Handguards" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="111601205" name="Fallen Spirit Gauntlets" min_amount="1" max_amount="1" chance="40"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701009" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Epic)">
+			<drop item_id="114301292" name="Primal Spirit Boots" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="114301586" name="Ancient Spirit's Magic Boots" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="114501250" name="Primal Spirit Brogans" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="114501588" name="Ancient Spirit's Magic Brogans" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Unique)">
+			<drop item_id="100001258" name="Primal Spirit Sword" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="101500989" name="Primal Spirit Staff" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123001213" name="Cursed Forest Leather Belt" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="123001214" name="Cursed Forest Sash" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120001239" name="Cursed Forest Corundum Earrings" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="120001240" name="Cursed Forest Turquoise Earrings" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="114101283" name="Fallen Spirit Shoes" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114301289" name="Fallen Spirit Boots" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501247" name="Fallen Spirit Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114601189" name="Fallen Spirit Sabatons" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112101195" name="Fallen Spirit Pauldrons" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112301178" name="Fallen Spirit Shoulderguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501171" name="Fallen Spirit Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112601183" name="Fallen Spirit Shoulderplates" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111101237" name="Fallen Spirit Gloves" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111301232" name="Fallen Spirit Vambrace" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501226" name="Fallen Spirit Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111601205" name="Fallen Spirit Gauntlets" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Esoterrace -->
 	<npc_drop npc_id="701022" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
