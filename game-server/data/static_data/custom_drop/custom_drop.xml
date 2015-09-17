@@ -1223,4 +1223,25 @@
 			<drop item_id="115001463" name="Unstable Abyssal Shield" min_amount="1" max_amount="1" chance="15"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Void Cube -->
+	<npc_drop npc_id="701585" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Instance Item">
+			<drop item_id="164000252" name="Blue Aetheric Field Bomb" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701586" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Instance Item">
+			<drop item_id="164000252" name="Blue Aetheric Field Bomb" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701661" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Instance Item">
+			<drop item_id="164000251" name="Red Aetheric Field Bomb" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701936" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Bundle">
+			<drop item_id="188052724" name="Beritran Hoard" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
 </custom_drop>
