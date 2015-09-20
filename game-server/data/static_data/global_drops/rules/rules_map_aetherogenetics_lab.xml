@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212174" name="Librarian Selima"/>
+			<gd_npc npc_id="212175" name="Expert Lab Scholar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000002" name="Lepharist Research Center Key 2"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212174" name="Librarian Selima"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100676" name="Researcher's Pauldrons"/>
+			<gd_item id="112500664" name="Researcher's Spaulders"/>
+			<gd_item id="114100745" name="Researcher's Shoes"/>
+			<gd_item id="114300758" name="Researcher's Boots"/>
+			<gd_item id="114500724" name="Researcher's Brogans"/>
+			<gd_item id="114600684" name="Researcher's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212181" name="Head Chef Pamsey"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112300676" name="Researcher's Shoulderguards"/>
+			<gd_item id="112600672" name="Researcher's Shoulderplates"/>
+			<gd_item id="111100716" name="Researcher's Gloves"/>
+			<gd_item id="111300718" name="Researcher's Vambrace"/>
+			<gd_item id="111500705" name="Researcher's Handguards"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Head (Rare)" base_chance="70">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212181" name="Head Chef Pamsey"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001564" name="Pamsey's Cooking Hat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212193" name="Pretor Key Keeper"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000004" name="Lepharist Research Center Key 4"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212196" name="Hungry Mudthorn"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000003" name="Lepharist Research Center Key 3"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212211" name="RM-78c"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000580" name="Dominating Sword"/>
+			<gd_item id="100200554" name="Dominating Dagger"/>
+			<gd_item id="100900439" name="Dominating Greatsword"/>
+			<gd_item id="100500442" name="Dominating Jewel"/>
+			<gd_item id="101700458" name="Dominating Longbow"/>
+			<gd_item id="101300429" name="Dominating Spear"/>
+			<gd_item id="101500444" name="Dominating Staff"/>
+			<gd_item id="100600475" name="Dominating Tome"/>
+			<gd_item id="100100445" name="Dominating Warhammer"/>
+			<gd_item id="101900813" name="Complete Subject's Aethercannon"/>
+			<gd_item id="101800809" name="Complete Subject's Pistol"/>
+			<gd_item id="102100708" name="Complete Subject's Cipher-Blade"/>
+			<gd_item id="102000847" name="Complete Subject's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212211" name="RM-78c"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100725" name="Researcher's Leggings"/>
+			<gd_item id="113300741" name="Researcher's Breeches"/>
+			<gd_item id="113500715" name="Researcher's Chausses"/>
+			<gd_item id="113600689" name="Researcher's Greaves"/>
+			<gd_item id="110100802" name="Researcher's Tunic"/>
+			<gd_item id="110300758" name="Researcher's Jerkin"/>
+			<gd_item id="110500735" name="Researcher's Hauberk"/>
+			<gd_item id="110600723" name="Researcher's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212341" name="The Keykeeper"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000001" name="Lepharist Research Center Key 1"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="310050000" name="Aetherogenetics_Lab"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212342" name="Key Eater"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000005" name="Lepharist Research Center Key 5"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

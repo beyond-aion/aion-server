@@ -18,6 +18,12 @@
 	</npc_drop>
 	-->
 	<!-- Chests -->
+	<!-- Aetherogenetics Lab -->
+	<npc_drop npc_id="212335" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Rare)">
+			<drop item_id="125001568" name="Researcher's Hat" min_amount="1" max_amount="1" chance="70"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Argent Manor -->
 	<npc_drop npc_id="701011" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Epic)">
