@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.geoEngine.scene;
 
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.jme3.bounding.BoundingVolume;
 import com.jme3.collision.Collidable;
@@ -14,7 +15,7 @@ import com.jme3.scene.Spatial;
  */
 public class NodeEx extends Node implements SpatialEx {
 
-	protected short collisionFlags;
+	protected short collisionFlags = (short) CollisionIntention.ALL.getId();
 
 	public NodeEx(String name) {
 		super(name);

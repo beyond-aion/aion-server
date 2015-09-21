@@ -2,10 +2,10 @@ package com.aionemu.gameserver.world.geo;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import javolution.util.FastTable;
+import javolution.util.FastSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,8 @@ import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.GeoWorldLoader;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
+import com.aionemu.gameserver.geoEngine.scene.SpatialEx;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.jme3.scene.Spatial;
 
 /**
  * @author ATracer
@@ -29,31 +29,29 @@ public class RealGeoData implements GeoData {
 	@Override
 	public void loadGeoMaps() {
 		log.info("Loading meshes...");
-		Map<String, Spatial> models = GeoWorldLoader.loadMeshes("models/geo.mesh");
+		Map<String, SpatialEx> models = GeoWorldLoader.loadMeshes("models/geo.mesh");
 
 		log.info("Loading geo maps...");
-		ConsoleUtil.printProgressBarHeader(DataManager.WORLD_MAPS_DATA.size());
-		List<Integer> mapsWithErrors = new FastTable<Integer>();
+		ConsoleUtil c = ConsoleUtil.newInstance();
+		c.printProgressBar(DataManager.WORLD_MAPS_DATA.size());
+		Set<String> missingMeshes = new FastSet<>();
+		Set<String> mapsWithErrors = new FastSet<>();
 
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			GeoMap geoMap = new GeoMap(Integer.toString(map.getMapId()), map.getWorldSize());
-			try {
-				if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap)) {
-					geoMaps.put(map.getMapId(), geoMap);
-				}
-			} catch (Throwable t) {
-				mapsWithErrors.add(map.getMapId());
-				geoMaps.put(map.getMapId(), DummyGeoData.DUMMY_MAP);
+			if (!GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap, missingMeshes)) {
+				mapsWithErrors.add(map.getMapId() + " (" + map.getName() + ")");
+				geoMap = DummyGeoData.DUMMY_MAP;
 			}
-			ConsoleUtil.printCurrentProgress();
+			geoMaps.put(map.getMapId(), geoMap);
+			c.printCurrentProgress();
 		}
-		ConsoleUtil.printEndProgress();
-		models.clear();
-		models = null;
 
 		log.info("Geodata: " + geoMaps.size() + " geo maps loaded!");
+		if (missingMeshes.size() > 0)
+			log.warn(missingMeshes.size() + " mesh(es) were not found and therefore not loaded:\n" + missingMeshes.toString());
 		if (mapsWithErrors.size() > 0)
-			log.warn("Some maps were not loaded correctly and reverted to dummy implementation:\n" + mapsWithErrors.toString());
+			log.warn(mapsWithErrors.size() + " map(s) were not loaded correctly and reverted to dummy implementation:\n" + mapsWithErrors.toString());
 	}
 
 	@Override

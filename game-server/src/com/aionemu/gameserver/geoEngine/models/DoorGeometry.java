@@ -4,7 +4,7 @@ import java.util.BitSet;
 
 import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.aionemu.gameserver.geoEngine.scene.GeometryEx;
-import com.jme3.bounding.BoundingBox;
+import com.aionemu.gameserver.geoEngine.scene.MeshEx;
 import com.jme3.collision.Collidable;
 import com.jme3.math.Ray;
 
@@ -19,8 +19,8 @@ public class DoorGeometry extends GeometryEx {
 	BitSet instances = new BitSet();
 	private boolean foundTemplate = false;
 
-	public DoorGeometry(String name) {
-		super(name);
+	public DoorGeometry(String name, MeshEx mesh) {
+		super(name, mesh);
 	}
 
 	public boolean isFoundTemplate() {
@@ -45,12 +45,5 @@ public class DoorGeometry extends GeometryEx {
 			return getWorldBound().collideWith(other, results);
 
 		return super.collideWith(other, results);
-	}
-
-	@Override
-	public void updateModelBound() {
-		super.updateModelBound();
-		if (getWorldBound() == null)
-			worldBound = new BoundingBox((BoundingBox) mesh.getBound());
 	}
 }
