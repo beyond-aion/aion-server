@@ -305,12 +305,6 @@ public class GeoMap extends NodeEx {
 	}
 
 	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, float limit, int instanceId) {
-		targetZ += 1;
-		z += 1;
-		// Another fix can see in instances
-		// if (getZ(targetX, targetY) > targetZ)
-		// return false;
-
 		float x2 = x - targetX;
 		float y2 = y - targetY;
 		float distance = (float) Math.sqrt(x2 * x2 + y2 * y2);
@@ -333,20 +327,19 @@ public class GeoMap extends NodeEx {
 		CollisionResultsEx results = new CollisionResultsEx((byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId()), false,
 			instanceId);
 		int collisions = this.collideWith(r, results);
+
 		return (results.size() == 0 && collisions == 0);
 	}
 
 	@Override
-	public void updateModelBound() {
-		if (getChildren() != null) {
-			Iterator<Spatial> i = getChildren().iterator();
-			while (i.hasNext()) {
-				Spatial s = i.next();
-				if (s instanceof Node && ((Node) s).getChildren().isEmpty()) {
-					i.remove();
-				}
+	protected void updateWorldBound() {
+		Iterator<Spatial> i = getChildren().iterator();
+		while (i.hasNext()) {
+			Spatial s = i.next();
+			if (s instanceof NodeEx && ((NodeEx) s).getChildren().isEmpty()) {
+				i.remove();
 			}
 		}
-		super.updateModelBound();
+		super.updateWorldBound();
 	}
 }
