@@ -23,6 +23,7 @@ public class GeoService {
 	 * Initialize geodata based on configuration, load necessary structures
 	 */
 	public void initializeGeo() {
+		ClassLoader.getSystemClassLoader().setPackageAssertionStatus("com.jme3", false); // disables unwanted assertion errors and optimizes runtime
 		switch (getConfiguredGeoType()) {
 			case GEO_MESHES:
 				geoData = new RealGeoData();
@@ -45,17 +46,6 @@ public class GeoService {
 	 * @param object
 	 * @return
 	 */
-	public float getZAfterMoveBehind(int worldId, float x, float y, float z, int instanceId) {
-		if (GeoDataConfig.GEO_ENABLE) {
-			return getZ(worldId, x, y, z, 0, instanceId);
-		}
-		return getZ(worldId, x, y, z, 0.5f, instanceId);
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 */
 	public float getZ(VisibleObject object) {
 		return geoData.getMap(object.getWorldId()).getZ(object.getX(), object.getY(), object.getZ(), object.getInstanceId());
 	}
@@ -70,12 +60,7 @@ public class GeoService {
 	 */
 	public float getZ(int worldId, float x, float y, float z, float defaultUp, int instanceId) {
 		float newZ = geoData.getMap(worldId).getZ(x, y, z, instanceId);
-		if (!GeoDataConfig.GEO_ENABLE) {
-			newZ += defaultUp;
-		}/*
-			 * else { newZ += 0.5f; }
-			 */
-		return newZ;
+		return GeoDataConfig.GEO_ENABLE ? newZ : newZ + defaultUp;
 	}
 
 	/**
@@ -103,22 +88,24 @@ public class GeoService {
 	 * @return
 	 */
 	public boolean canSee(VisibleObject object, VisibleObject target) {
-		float limit = (float) (MathUtil.getDistance(object, target) - target.getObjectTemplate().getBoundRadius().getCollision());
-		if (limit <= 0)
+		if (!GeoDataConfig.CANSEE_ENABLE)
 			return true;
-		if (!GeoDataConfig.CANSEE_ENABLE) {
-			return true;
-		}
+
 		// TODO: remove this check after fixing geo doors attacking
 		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
 			return true;
+
+		float limit = (float) (MathUtil.getDistance(object, target) - target.getObjectTemplate().getBoundRadius().getCollision());
+		if (limit <= 0)
+			return true;
+
 		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),
-			object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() / 2, target.getX(), target.getY(),
-			target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, limit, object.getInstanceId());
+			object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() * 0.95f, target.getX(), target.getY(),
+			target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() * 0.75f, limit, object.getInstanceId());
 	}
 
 	public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, float limit, int instanceId) {
-		return geoData.getMap(worldId).canSee(x, y, z, x1, y1, z1, limit, instanceId);
+		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, limit, instanceId);
 	}
 
 	public boolean isGeoOn() {

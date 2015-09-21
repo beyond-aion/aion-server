@@ -16,12 +16,17 @@ import com.jme3.scene.Spatial;
  */
 public class GeometryEx extends Geometry implements SpatialEx {
 
-	public GeometryEx(String name) {
-		super(name);
-	}
-
 	public GeometryEx(String name, MeshEx mesh) {
 		super(name, mesh);
+	}
+
+	public String getMeshFileName() {
+		return getMeshFileName(true);
+	}
+
+	public String getMeshFileName(boolean withFileExtension) {
+		int index = name.contains("/") ? name.lastIndexOf("/") : name.lastIndexOf("\\");
+		return name.substring(index + 1, !withFileExtension && name.contains(".") ? name.lastIndexOf(".") : name.length());
 	}
 
 	@Override
@@ -65,8 +70,8 @@ public class GeometryEx extends Geometry implements SpatialEx {
 	}
 
 	@Override
-	public GeometryEx clone(boolean cloneMaterials) {
-		return (GeometryEx) super.clone(cloneMaterials);
+	public GeometryEx clone(boolean cloneMaterial) {
+		return (GeometryEx) super.clone(cloneMaterial);
 	}
 
 	@Override
@@ -96,5 +101,13 @@ public class GeometryEx extends Geometry implements SpatialEx {
 	 */
 	public void setMesh(MeshEx mesh) {
 		super.setMesh(mesh);
+	}
+
+	/**
+	 * @see Geometry#getMesh(Mesh)
+	 */
+	@Override
+	public MeshEx getMesh() {
+		return (MeshEx) mesh;
 	}
 }

@@ -41,7 +41,7 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 
 	@Override
 	public void act() {
-		if (isEnabled)
+		if (isEnabled && !((Player) creature).isGM())
 			creature.getController().die();
 	}
 
