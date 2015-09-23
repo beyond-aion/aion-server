@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
@@ -29,6 +30,11 @@ public class SM_DELETE extends AionServerPacket {
 		this.type = type.getType();
 	}
 
+	public SM_DELETE(Player player, int animationId) {
+		this.objectId = player.getObjectId();
+		this.type = animationId;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

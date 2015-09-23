@@ -100,11 +100,21 @@ public class ArcadeUpgradeService {
 		if (Rnd.get(1, 100) <= EventsConfig.EVENT_ARCADE_CHANCE) {
 			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(3, true, player.getArcadeUpgradeFrenzy()));
 			player.setArcadeUpgradeLevel(player.getArcadeUpgradeLevel() + 1);
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, player.getArcadeUpgradeLevel()));
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+				@Override
+				public void run() {
+					PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, player.getArcadeUpgradeLevel()));
+				}
+			}, 3000);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(3, false, player.getArcadeUpgradeFrenzy()));
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(5));
 			player.setArcadeUpgradeLevel(1);
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+				@Override
+				public void run () {
+					PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(5));
+				}
+			}, 3000);
 		}
 	}
 
