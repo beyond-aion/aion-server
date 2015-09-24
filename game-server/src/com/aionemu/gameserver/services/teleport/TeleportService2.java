@@ -33,6 +33,7 @@ import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHANNEL_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
@@ -191,6 +192,7 @@ public class TeleportService2 {
 	private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z, final byte h,
 		final TeleportAnimation animation) {
 		boolean isInstance = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).isInstance();
+		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player, animation.getStartAnimationId() <= 1 ? 3 : 11));
 		PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(isInstance, instanceId, mapId, x, y, z, h, animation.getStartAnimationId()));
 		player.unsetPlayerMode(PlayerMode.RIDE);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -316,6 +318,7 @@ public class TeleportService2 {
 
 		if (animation.isNoAnimation()) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
+			PacketSendUtility.broadcastPacket(player, new SM_DELETE(player, 3));
 			changePosition(player, worldId, instanceId, x, y, z, heading, animation);
 		} else {
 			sendLoc(player, worldId, instanceId, x, y, z, heading, animation);

@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_QUIT;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AutoGroupService;
@@ -41,6 +42,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
 
@@ -129,7 +131,8 @@ public class PlayerLeaveWorldService {
 			LegionService.getInstance().onLogout(player);
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
-
+		if (!player.getController().isInShutdownProgress())
+			PacketSendUtility.broadcastPacketAndReceive(player, new SM_DELETE(player, 3));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
