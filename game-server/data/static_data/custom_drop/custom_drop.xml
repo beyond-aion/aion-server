@@ -1049,6 +1049,46 @@
 			<drop item_id="111300435" name="Lost Mine Vambrace" min_amount="1" max_amount="1" chance="15"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Rentus Base -->
+	<npc_drop npc_id="218572" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125002896" name="Rebel Sorcerer's Headband" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002897" name="Rebel Spiritmaster's Headband" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125003321" name="Rebel Songweaver's Headband" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002898" name="Rebel Assassin's Hat" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002899" name="Rebel Ranger's Hat" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125003320" name="Rebel Gunslinger's Hat" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002900" name="Rebel Cleric's Chain Hood" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002901" name="Rebel Chanter's Chain Hood" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125003902" name="Rebel Aethertech's Magic Helm" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002902" name="Rebel Gladiator's Helm" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="125002903" name="Rebel Templar's Helm" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Guestbloom (Unique)">
+			<drop item_id="170195085" name="Resistance Army's Guestbloom" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="219215" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="112101196" name="Rebel Sorcerer's Pauldrons" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112101197" name="Rebel Spiritmaster's Pauldrons" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112101341" name="Rebel Songweaver's Pauldrons" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112301179" name="Rebel Assassin's Shoulderguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112301180" name="Rebel Ranger's Shoulderguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112301323" name="Rebel Gunslinger's Shoulderguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112501172" name="Rebel Cleric's Spaulders" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112501173" name="Rebel Chanter's Spaulders" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112501558" name="Rebel Aethertech's Magic Spaulder" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112601184" name="Rebel Gladiator's Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112601185" name="Rebel Templar's Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="114101282" name="Defeated Reian's Shoes" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114301288" name="Defeated Reian's Boots" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501246" name="Defeated Reian's Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114601188" name="Defeated Reian's Sabatons" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- The Hexway -->
 	<npc_drop npc_id="701662" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Coin">
