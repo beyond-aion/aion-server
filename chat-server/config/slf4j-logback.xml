@@ -1,31 +1,57 @@
 <?xml version="1.0"?>
 <configuration>
-	<property name="logFolder" value="log/"/>
-	<appender name="app_console" class="ch.qos.logback.core.FileAppender">
-		<file>${logFolder}/console.log</file>
+	<property name="logFolder" value="log/" />
+	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
+		<withJansi>true</withJansi>
 		<encoder>
-			<Pattern>%date{HH:mm:ss.SSS} %-5level[%thread]: %logger [%file:%line] - %message%n</Pattern>
+			<charset>850</charset>
+			<Pattern>%date{HH:mm:ss} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
+			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
-	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="app_console" class="ch.qos.logback.core.FileAppender">
+		<file>${logFolder}/server_console.log</file>
 		<encoder>
-			<Pattern>%date{HH:mm:ss.SSS} %-5level[%thread]: - %message%n</Pattern>
+			<charset>UTF-8</charset>
+			<Pattern>%date %-5level [%thread] %logger - %message%n</Pattern>
+			<immediateFlush>false</immediateFlush>
+		</encoder>
+	</appender>
+	<appender name="app_warn" class="ch.qos.logback.core.FileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${logFolder}/server_warnings.log</file>
+		<encoder>
+			<Pattern>%date %logger - %message%n</Pattern>
+		</encoder>
+	</appender>
+	<appender name="app_error" class="ch.qos.logback.core.FileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${logFolder}/server_errors.log</file>
+		<encoder>
+			<Pattern>%date %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_chat" class="ch.qos.logback.core.FileAppender">
-		<filter class="com.aionl.slf4j.filters.ChatLogFilter"></filter>
 		<file>${logFolder}/chat.log</file>
-		<append>true</append>
 		<encoder>
 			<Pattern>%date %message%n</Pattern>
 		</encoder>
 	</appender>
 	<logger name="CHAT_LOG" additivity="false">
-		<appender-ref ref="app_chat"/>
+		<appender-ref ref="app_chat" />
 	</logger>
-	<root>
-		<level value="info"/>
-		<appender-ref ref="app_console"/>
-		<appender-ref ref="out_console"/>
+	<root level="INFO">
+		<appender-ref ref="out_console" />
+		<appender-ref ref="app_console" />
+		<appender-ref ref="app_error" />
+		<appender-ref ref="app_warn" />
 	</root>
 </configuration>
