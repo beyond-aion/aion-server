@@ -57,7 +57,13 @@ public class BindPointTeleportService {
 				}
 				addCooldown(player, locId);
 				PacketSendUtility.broadcastPacket(player, new SM_BIND_POINT_TELEPORT(3, player.getObjectId(), locId, COOLDOWN_IN_SECONDS), true);
-				TeleportService2.teleportTo(player, hotspot.getWorldId(), hotspot.getX(), hotspot.getY(), hotspot.getZ());
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
+					@Override
+					public void run() {
+						if (player != null && !player.getLifeStats().isAboutToDie() && !player.getLifeStats().isAlreadyDead())
+							TeleportService2.teleportTo(player, hotspot.getWorldId(), hotspot.getX(), hotspot.getY(), hotspot.getZ());
+					}
+				}, 1000);
 			}
 		}, 10000));
 	}
