@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -976,9 +975,9 @@ public class SiegeService {
 	}
 
 	public void deSpawnNpcs(int siegeLocationId) {
-		Collection<SiegeNpc> siegeNpcs = World.getInstance().getLocalSiegeNpcs(siegeLocationId);
-		for (SiegeNpc npc : siegeNpcs)
-			npc.getController().onDelete();
+		// iterate over an array copy, since onDelete directly modifies the underlying collection
+		for (Object siegeNpc : World.getInstance().getLocalSiegeNpcs(siegeLocationId).toArray())
+			((SiegeNpc) siegeNpc).getController().onDelete();
 	}
 
 	public boolean isSiegeNpcInActiveSiege(Npc npc) {
