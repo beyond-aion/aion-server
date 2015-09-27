@@ -1,12 +1,15 @@
 package admincommands;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.aionemu.commons.utils.AEInfos;
+import com.aionemu.commons.utils.info.SystemInfoUtil;
+import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ShutdownHook;
 import com.aionemu.gameserver.ShutdownHook.ShutdownMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.AEVersions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -32,32 +35,32 @@ public class Sys extends AdminCommand {
 
 		if (params[0].equals("info")) {
 			// Time
-			PacketSendUtility.sendMessage(player, "System Information at: " + AEInfos.getRealTime().toString());
+			PacketSendUtility.sendMessage(player, "System Information at: " + LocalTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
 
 			// Version Infos
-			for (String line : AEVersions.getFullVersionInfo())
+			for (String line : VersionInfoUtil.getVersionInfo(GameServer.class).getAllInfo())
 				PacketSendUtility.sendMessage(player, line);
 
 			// OS Infos
-			for (String line : AEInfos.getOSInfo())
+			for (String line : SystemInfoUtil.getOsInfo())
 				PacketSendUtility.sendMessage(player, line);
 
 			// CPU Infos
-			for (String line : AEInfos.getCPUInfo())
+			for (String line : SystemInfoUtil.getJvmCpuInfo())
 				PacketSendUtility.sendMessage(player, line);
 
 			// JRE Infos
-			for (String line : AEInfos.getJREInfo())
+			for (String line : SystemInfoUtil.getJreInfo())
 				PacketSendUtility.sendMessage(player, line);
 
 			// JVM Infos
-			for (String line : AEInfos.getJVMInfo())
+			for (String line : SystemInfoUtil.getJvmInfo())
 				PacketSendUtility.sendMessage(player, line);
 		}
 
 		else if (params[0].equals("memory")) {
 			// Memory Infos
-			for (String line : AEInfos.getMemoryInfo())
+			for (String line : SystemInfoUtil.getMemoryInfo())
 				PacketSendUtility.sendMessage(player, line);
 		}
 

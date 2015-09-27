@@ -28,8 +28,9 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.commons.utils.AEInfos;
 import com.aionemu.commons.utils.ConsoleUtil;
+import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
@@ -95,7 +96,6 @@ import com.aionemu.gameserver.spawnengine.InstanceRiftSpawnManager;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.taskmanager.fromdb.TaskFromDBManager;
-import com.aionemu.gameserver.utils.AEVersions;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.ThreadUncaughtExceptionHandler;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
@@ -151,8 +151,8 @@ public class GameServer {
 						while ((len = in.read(buf)) > 0) {
 							out.write(buf, 0, len);
 						}
+						out.closeEntry();
 					}
-					out.closeEntry();
 					logFile.delete();
 				}
 			} catch (IOException | SecurityException sex) {
@@ -319,8 +319,8 @@ public class GameServer {
 		WebshopService.getInstance();
 
 		ConsoleUtil.printSection("System Info");
-		AEVersions.printFullVersionInfo();
-		AEInfos.printAllInfos();
+		VersionInfoUtil.printAllInfo(GameServer.class);
+		SystemInfoUtil.printAllInfo();
 		log.info("AL Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
 		System.gc();

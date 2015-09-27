@@ -8,7 +8,6 @@
 	<packaging>jar</packaging>
 	<scm>
 		<developerConnection>scm:git:https://none</developerConnection>
-		<url>http://aion-lightning.org/</url>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,16 +16,6 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
-		<resources>
-			<resource>
-				<directory>data/scripts/system/database</directory>
-				<excludes>
-					<exclude> **/*.java </exclude>
-					<exclude> **/*.properties </exclude>
-					<exclude> **/*.xml </exclude>
-				</excludes>
-			</resource>
-		</resources>
 		<finalName>AL-Login</finalName>
 		<plugins>
 			<plugin>
@@ -66,9 +55,6 @@
 				<artifactId>buildnumber-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
-					<providerImplementations>
-						<svn>javasvn</svn>
-					</providerImplementations>
 					<revisionOnScmFailure>undefined</revisionOnScmFailure>
 					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
 					<shortRevisionLength>7</shortRevisionLength>
@@ -92,7 +78,6 @@
 							<POMVersion>${project.version}</POMVersion>
 							<Revision>${buildNumber}</Revision>
 							<Branch>${scmBranch}</Branch>
-							<CommitTime>undefined</CommitTime>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>

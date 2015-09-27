@@ -21,8 +21,8 @@ import ch.qos.logback.core.joran.spi.JoranException;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.commons.utils.AEInfos;
 import com.aionemu.commons.utils.ExitCode;
+import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.controller.PremiumController;
@@ -58,24 +58,22 @@ public class LoginServer {
 
 		if (files != null && files.length > 0) {
 			byte[] buf = new byte[1024];
-			try {
-				String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
-				ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename));
+			String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
+			try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename))) {
 				out.setMethod(ZipOutputStream.DEFLATED);
 				out.setLevel(Deflater.BEST_COMPRESSION);
 
 				for (File logFile : files) {
-					FileInputStream in = new FileInputStream(logFile);
-					out.putNextEntry(new ZipEntry(logFile.getName()));
-					int len;
-					while ((len = in.read(buf)) > 0) {
-						out.write(buf, 0, len);
+					try (FileInputStream in = new FileInputStream(logFile)) {
+						out.putNextEntry(new ZipEntry(logFile.getName()));
+						int len;
+						while ((len = in.read(buf)) > 0) {
+							out.write(buf, 0, len);
+						}
+						out.closeEntry();
 					}
-					out.closeEntry();
-					in.close();
 					logFile.delete();
 				}
-				out.close();
 			} catch (IOException e) {
 			}
 		}
@@ -99,8 +97,6 @@ public class LoginServer {
 		initalizeLoggger();
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 
-		// write a timestamp that can be used by TruncateToZipFileAppender
-		log.info("\f" + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date(System.currentTimeMillis())) + "\f");
 		Config.load();
 		DatabaseFactory.init();
 		DAOManager.init();
@@ -132,7 +128,7 @@ public class LoginServer {
 
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 
-		AEInfos.printAllInfos();
+		SystemInfoUtil.printAllInfo();
 
 		PremiumController.getController();
 		log.info("AL Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");

@@ -11,7 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.versionning.Version;
+import com.aionemu.commons.utils.info.VersionInfo;
+import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -128,7 +129,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public final class PlayerEnterWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
-	private static final Version gsVer = new Version(GameServer.class);
+	private static final VersionInfo gsVer = VersionInfoUtil.getVersionInfo(GameServer.class);
 	private static final String welcomeInfo = GSConfig.SERVER_MOTD;
 	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + gsVer.getDate();
 	private static final Set<Integer> pendingEnterWorld = new HashSet<Integer>();

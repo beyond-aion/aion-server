@@ -27,7 +27,7 @@ import com.aionemu.chatserver.service.RestartService;
 import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.utils.AEInfos;
+import com.aionemu.commons.utils.info.SystemInfoUtil;
 
 /**
  * @author ATracer, KID, nrg
@@ -51,23 +51,22 @@ public class ChatServer {
 
 		if (files != null && files.length > 0) {
 			byte[] buf = new byte[1024];
-			try {
-				String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
-				ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename));
+			String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
+			try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename))) {
 				out.setMethod(ZipOutputStream.DEFLATED);
 				out.setLevel(Deflater.BEST_COMPRESSION);
+
 				for (File logFile : files) {
-					FileInputStream in = new FileInputStream(logFile);
-					out.putNextEntry(new ZipEntry(logFile.getName()));
-					int len;
-					while ((len = in.read(buf)) > 0) {
-						out.write(buf, 0, len);
+					try (FileInputStream in = new FileInputStream(logFile)) {
+						out.putNextEntry(new ZipEntry(logFile.getName()));
+						int len;
+						while ((len = in.read(buf)) > 0) {
+							out.write(buf, 0, len);
+						}
+						out.closeEntry();
 					}
-					out.closeEntry();
-					in.close();
 					logFile.delete();
 				}
-				out.close();
 			} catch (IOException e) {
 			}
 		}
@@ -102,7 +101,7 @@ public class ChatServer {
 		RestartService.getInstance();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 
-		AEInfos.printAllInfos();
+		SystemInfoUtil.printAllInfo();
 		log.info("AL Chat Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}
 }

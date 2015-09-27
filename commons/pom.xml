@@ -8,7 +8,6 @@
 	<packaging>jar</packaging>
 	<scm>
 		<developerConnection>scm:git:https://none</developerConnection>
-		<url>http://aion-lightning.org/</url>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,9 +79,6 @@
 				<artifactId>buildnumber-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
-					<providerImplementations>
-						<svn>javasvn</svn>
-					</providerImplementations>
 					<revisionOnScmFailure>undefined</revisionOnScmFailure>
 					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
 					<shortRevisionLength>7</shortRevisionLength>
@@ -108,7 +104,6 @@
 							<POMVersion>${project.version}</POMVersion>
 							<Revision>${buildNumber}</Revision>
 							<Branch>${scmBranch}</Branch>
-							<CommitTime>undefined</CommitTime>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>
@@ -175,11 +170,6 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.1.3</version>
-		</dependency>
-		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>2.3.8</version>
@@ -229,6 +219,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-launcher</artifactId>
+			<version>1.9.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
