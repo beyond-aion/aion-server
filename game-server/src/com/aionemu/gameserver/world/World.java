@@ -86,7 +86,7 @@ public class World {
 		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
 			worldMaps.put(template.getMapId(), new WorldMap(template, this));
 		}
-		log.info("World: " + worldMaps.size() + " worlds map created.");
+		log.info("World: " + worldMaps.size() + " world maps created.");
 	}
 
 	public static World getInstance() {

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.configs.main;
 
-import java.util.Calendar;
+import java.util.TimeZone;
 
 import com.aionemu.commons.configuration.Property;
 
@@ -28,7 +28,7 @@ public class GSConfig {
 
 	/* Time Zone name (used for events & timed spawns) */
 	@Property(key = "gameserver.timezone", defaultValue = "")
-	public static String TIME_ZONE_ID = Calendar.getInstance().getTimeZone().getID();
+	public static String TIME_ZONE_ID = TimeZone.getDefault().getID();
 
 	/* Enable connection with CS (ChatServer) */
 	@Property(key = "gameserver.chatserver.enable", defaultValue = "false")

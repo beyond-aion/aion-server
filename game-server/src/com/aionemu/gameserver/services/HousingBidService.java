@@ -118,7 +118,7 @@ public class HousingBidService extends AbstractCronTask {
 		if (HousingConfig.FILL_HOUSE_BIDS_AUTO) {
 			log.info("HousingBidService: auction auto filling enabled.");
 			int added = fillBidData();
-			log.info("HousingBidService: added " + added + " new house bids.");
+			log.info("HousingBidService: added " + added + " new house auctions.");
 		}
 		log.info("HousingBidService loaded. Minutes till start: " + getMinutesTillAuction());
 		isDataLoaded = true;
@@ -135,8 +135,7 @@ public class HousingBidService extends AbstractCronTask {
 			if (!checkAutoFillingLimits(house.getPlayerRace(), house.getHouseType()))
 				continue;
 			if (addHouseToAuction(house, house.getDefaultAuctionPrice()))
-				;
-			count++;
+				count++;
 		}
 		return count;
 	}
