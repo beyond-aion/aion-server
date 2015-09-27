@@ -88,7 +88,7 @@ public class ChatServer {
 		long start = System.currentTimeMillis();
 
 		initalizeLoggger();
-		log.info("\f" + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date(System.currentTimeMillis())) + "\f");
+
 		(new ServerCommandProcessor()).start(); // Launch the server command processor thread
 		Config.load();
 		DatabaseFactory.init();
