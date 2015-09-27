@@ -7,51 +7,57 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ConsoleUtil {
 
-	private static final int MAX_PROGRESS = 68;
+	public static final int DEFAULT_CONSOLE_WIDTH = 80;
 
-	private int position = 0;
-	private int currentProgress = 0;
-	private double maxProgress = 0;
+	/**
+	 * Prevent instantiation
+	 */
+	private ConsoleUtil() {
+	}
 
-	public static ConsoleUtil newInstance() {
-		return new ConsoleUtil();
+	/**
+	 * Initializes and prints a progress bar with the given capacity to the console.<br>
+	 * Only one progress bar can be used at a time.
+	 * 
+	 * @param maxProgress
+	 *          The capacity of the progress
+	 * @see ConsoleProgressBar#init(int maxProgress)
+	 */
+	public static void initAndPrintProgressBar(int maxProgress) {
+		ConsoleProgressBar.getInstance().init(maxProgress);
+	}
+
+	/**
+	 * Increases the progress by one and prints it to the progress bar.<br>
+	 * Note that {@link #initAndPrintProgressBar(int maxProgress)} must be called prior to calling this method for the first time.
+	 * 
+	 * @see ConsoleProgressBar#increaseAndPrintProgress()
+	 */
+	public static void increaseAndPrintProgress() {
+		ConsoleProgressBar.getInstance().increaseAndPrintProgress();
 	}
 
 	public static void printSection(String s) {
-		System.out.println("\n " + StringUtils.center(" [ " + s + " ] ", 78, "="));
+		System.out.println("\n " + StringUtils.center(" [ " + s + " ] ", DEFAULT_CONSOLE_WIDTH - 2, "="));
 	}
 
-	public void printProgressBar(int size) {
-		maxProgress = size;
-		if (size > MAX_PROGRESS)
-			size = MAX_PROGRESS;
-		StringBuilder header = new StringBuilder(" 0% [");
-		for (int i = 0; i < size; i++) {
-			header.append("·");
-		}
-		header.append("] 100%");
-		System.out.print(header + "\r 0% [");
+	public static String getSeparator() {
+		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1);
 	}
 
-	public void printCurrentProgress() {
-		double pos = ((++currentProgress / maxProgress) * (maxProgress < MAX_PROGRESS ? maxProgress : MAX_PROGRESS));
-		if (position < pos || currentProgress == maxProgress) {
-			for (;position < pos; position++)
-				System.out.print("#");
-			if (currentProgress == maxProgress)
-				System.out.println("] 100%");
-		} else if (currentProgress < maxProgress && maxProgress > MAX_PROGRESS*2) {
-			switch (currentProgress % 3) {
-				case 0:
-					System.out.print("/\b");
-					break;
-				case 1:
-					System.out.print("-\b");
-					break;
-				case 2:
-					System.out.print("\\\b");
-					break;
-			}
-		}
+	public static String getSeparator(int length) {
+		return StringUtils.leftPad("", length, "·");
+	}
+
+	public static String getSeparatorForLogger() {
+		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1 - (20 + Thread.currentThread().getName().length()));
+	}
+
+	public static void printSeparator() {
+		printSeparator(DEFAULT_CONSOLE_WIDTH - 1);
+	}
+
+	public static void printSeparator(int length) {
+		System.out.println(getSeparator(length));
 	}
 }

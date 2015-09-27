@@ -32,8 +32,7 @@ public class RealGeoData implements GeoData {
 		Map<String, SpatialEx> models = GeoWorldLoader.loadMeshes("models/geo.mesh");
 
 		log.info("Loading geo maps...");
-		ConsoleUtil c = ConsoleUtil.newInstance();
-		c.printProgressBar(DataManager.WORLD_MAPS_DATA.size());
+		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
 		Set<String> missingMeshes = new FastSet<>();
 		Set<String> mapsWithErrors = new FastSet<>();
 
@@ -44,7 +43,7 @@ public class RealGeoData implements GeoData {
 				geoMap = DummyGeoData.DUMMY_MAP;
 			}
 			geoMaps.put(map.getMapId(), geoMap);
-			c.printCurrentProgress();
+			ConsoleUtil.increaseAndPrintProgress();
 		}
 
 		log.info("Geodata: " + geoMaps.size() + " geo maps loaded!");
