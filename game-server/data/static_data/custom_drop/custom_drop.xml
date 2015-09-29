@@ -1413,6 +1413,8 @@
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Nightmare Circus -->
+		<!-- Custom-Drops für 831745 & 831575 -->
 	<!-- Poeta -->
 	<npc_drop npc_id="211822" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Common)">
