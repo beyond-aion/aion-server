@@ -10,8 +10,8 @@ import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.actions.NpcActions;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
@@ -87,7 +87,7 @@ public class _20064Nemesis extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300400000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 300400000, newInstance.getInstanceId(), 433.27f, 685.31f, 183.4f, (byte) 10,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 0, 1, false);
 						return closeDialogWindow(env);
 					}
@@ -174,7 +174,7 @@ public class _20064Nemesis extends QuestHandler {
 				return true;
 			}
 		} else if (movieId == 756 && qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			TeleportService2.teleportTo(player, 600030000, 305.75726f, 1736.2083f, 295.90472f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, 600030000, 305.75726f, 1736.2083f, 295.90472f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			return true;
 		}
 		return false;

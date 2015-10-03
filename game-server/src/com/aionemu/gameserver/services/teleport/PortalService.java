@@ -10,7 +10,7 @@ import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.siege.FortressLocation;
@@ -439,7 +439,7 @@ public class PortalService {
 			instance.setStartPos(loc.getX(), loc.getY(), loc.getZ());
 		InstanceService.registerPlayerWithInstance(instance, player);
 		TeleportService2.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
-			TeleportAnimation.BEAM_ANIMATION);
+			TeleportAnimation.FADE_OUT_BEAM);
 		long useDelay = DataManager.INSTANCE_COOLTIME_DATA.getInstanceEntranceCooltime(player, instance.getMapId());
 		if (useDelay > 0 && !reenter) {
 			player.getPortalCooldownList().addPortalCooldown(loc.getWorldId(), useDelay);
@@ -447,6 +447,6 @@ public class PortalService {
 	}
 
 	private static void easyTransfer(Player player, PortalLoc loc) {
-		TeleportService2.teleportTo(player, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.BEAM_ANIMATION);
+		TeleportService2.teleportTo(player, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

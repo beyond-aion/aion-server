@@ -22,7 +22,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHERABLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author KID
@@ -67,12 +66,12 @@ public class SpawnUpdate extends AdminCommand {
 
 				if (npc != null) {
 					npc.getPosition().setXYZH(x, null, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 					PacketSendUtility.sendMessage(admin, "updated npcs x to " + x + ".");
 				} else {
 					gather.getPosition().setXYZH(x, null, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
 					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
 					PacketSendUtility.sendMessage(admin, "updated gatherable x to " + x + ".");
 				}
@@ -95,12 +94,12 @@ public class SpawnUpdate extends AdminCommand {
 
 				if (npc != null) {
 					npc.getPosition().setXYZH(null, y, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 					PacketSendUtility.sendMessage(admin, "updated npcs y to " + y + ".");
 				} else {
 					gather.getPosition().setXYZH(null, y, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
 					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
 					PacketSendUtility.sendMessage(admin, "updated gatherable Y to " + y + ".");
 				}
@@ -123,12 +122,12 @@ public class SpawnUpdate extends AdminCommand {
 
 				if (npc != null) {
 					npc.getPosition().setZ(z);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 					PacketSendUtility.sendMessage(admin, "updated npcs z to " + z + ".");
 				} else {
 					gather.getPosition().setZ(z);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
 					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
 					PacketSendUtility.sendMessage(admin, "updated gatherable z to " + z + ".");
 				}
@@ -156,12 +155,12 @@ public class SpawnUpdate extends AdminCommand {
 
 				if (npc != null) {
 					npc.getPosition().setH(h);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 					PacketSendUtility.sendMessage(admin, "updated npcs heading to " + h + ".");
 				} else {
 					gather.getPosition().setH(h);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
 					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
 					PacketSendUtility.sendMessage(admin, "updated gatherable h to " + h + ".");
 				}
@@ -177,7 +176,7 @@ public class SpawnUpdate extends AdminCommand {
 
 			if (params[1].equalsIgnoreCase("xyz")) {
 				if (npc != null) {
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 					npc.getPosition().setXYZH(admin.getX(), null, null, null);
 					try {
 						DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
@@ -194,7 +193,7 @@ public class SpawnUpdate extends AdminCommand {
 						PacketSendUtility.sendMessage(admin, "Could not save spawn");
 					}
 				} else {
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather, DeleteType.IN_RANGE));
+					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
 					gather.getPosition().setXYZH(admin.getX(), null, null, null);
 					try {
 						DataManager.SPAWNS_DATA2.saveSpawn(admin, gather, false);
@@ -234,7 +233,7 @@ public class SpawnUpdate extends AdminCommand {
 					}
 				}
 				spawn.setWalkerId(walkerId);
-				PacketSendUtility.sendPacket(admin, new SM_DELETE(npc, DeleteType.IN_RANGE));
+				PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
 				PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 				if (walkerId == null)
 					PacketSendUtility.sendMessage(admin, "removed npcs walker_id for " + npc.getNpcId() + ".");

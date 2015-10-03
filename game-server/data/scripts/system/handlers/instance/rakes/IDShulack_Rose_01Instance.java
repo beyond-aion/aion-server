@@ -8,7 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -50,12 +50,12 @@ public class IDShulack_Rose_01Instance extends GeneralInstanceHandler {
 						player.getInventory().decreaseByItemId(185000155, 1);
 						teleportEnabled.compareAndSet(false, true);
 						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 461.66025f, 496.11496f, 877.6181f, (byte) 30,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622787)));
 				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 461.66025f, 496.11496f, 877.6181f, (byte) 30,
-						TeleportAnimation.BEAM_ANIMATION);
+						TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730763:
 				if (!teleportEnabled2.get()) {
@@ -63,16 +63,16 @@ public class IDShulack_Rose_01Instance extends GeneralInstanceHandler {
 						player.getInventory().decreaseByItemId(185000156, 1);
 						teleportEnabled2.compareAndSet(false, true);
 						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 659.8103f, 509.08694f, 867.7978f, (byte) 0,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622789)));
 				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 659.8103f, 509.08694f, 867.7978f, (byte) 0,
-						TeleportAnimation.BEAM_ANIMATION);
+						TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730768:
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 461.5f, 485f, 877.8f, (byte) 90,
-					TeleportAnimation.BEAM_ANIMATION);
+					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 		}
 	}

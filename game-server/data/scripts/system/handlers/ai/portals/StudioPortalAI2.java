@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import ai.ActionItemNpcAI2;
 
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.services.HousingService;
@@ -64,6 +64,6 @@ public class StudioPortalAI2 extends ActionItemNpcAI2 {
 				heading = 36;
 			}
 		}
-		TeleportService2.teleportTo(player, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.BEAM_ANIMATION);
+		TeleportService2.teleportTo(player, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

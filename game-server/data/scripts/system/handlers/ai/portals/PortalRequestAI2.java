@@ -3,7 +3,7 @@ package ai.portals;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -30,7 +30,7 @@ public class PortalRequestAI2 extends PortalAI2 {
 
 					@Override
 					public void acceptRequest(Creature requester, Player responder) {
-						TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.JUMP_AIMATION);
+						TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.JUMP_IN);
 					}
 
 					@Override

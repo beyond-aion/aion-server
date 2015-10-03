@@ -1,15 +1,15 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * This packet is informing client that some AionObject is no longer visible.
  *
  * @author -Nemesiss-
+ * @modified Neon
  */
 public class SM_DELETE extends AionServerPacket {
 
@@ -17,34 +17,32 @@ public class SM_DELETE extends AionServerPacket {
 	 * Object that is no longer visible.
 	 */
 	private final int objectId;
-	private final int type;
 
 	/**
-	 * Constructor.
-	 *
-	 * @param object
-	 * @param type
+	 * Animation that will be seen before the object disappears.
 	 */
-	public SM_DELETE(AionObject object, DeleteType type) {
+	private final int animationId;
+
+	public SM_DELETE(VisibleObject object) {
+		this(object, ObjectDeleteAnimation.FADE_OUT, true);
+	}
+
+	public SM_DELETE(VisibleObject object, boolean inRange) {
+		this(object, ObjectDeleteAnimation.FADE_OUT, inRange);
+	}
+
+	public SM_DELETE(VisibleObject object, ObjectDeleteAnimation animation) {
+		this(object, animation, true);
+	}
+
+	private SM_DELETE(VisibleObject object, ObjectDeleteAnimation animation, boolean inRange) {
 		this.objectId = object.getObjectId();
-		this.type = type.getType();
+		this.animationId = inRange ? animation.getId() : ObjectDeleteAnimation.NONE.getId();
 	}
 
-	public SM_DELETE(Player player, int animationId) {
-		this.objectId = player.getObjectId();
-		this.type = animationId;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		int action = 0;
-		if (action != 1) {
-			writeD(objectId);
-			writeC(type);
-		}
+		writeD(objectId);
+		writeC(animationId);
 	}
-
 }

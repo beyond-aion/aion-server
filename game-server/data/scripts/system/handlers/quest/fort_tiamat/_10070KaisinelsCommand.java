@@ -2,7 +2,7 @@ package quest.fort_tiamat;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
@@ -157,7 +157,7 @@ public class _10070KaisinelsCommand extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						TeleportService2.teleportTo(player, 600030000, 101.47f, 1612.36f, 295.989f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 600030000, 101.47f, 1612.36f, 295.989f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 8, 9, true, false);
 					}
 				}

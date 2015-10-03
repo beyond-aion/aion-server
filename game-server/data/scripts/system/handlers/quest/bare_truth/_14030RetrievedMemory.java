@@ -3,7 +3,7 @@ package quest.bare_truth;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -83,7 +83,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							}
 						case SETPRO2: {
-							TeleportService2.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 						case SETPRO4:
@@ -126,7 +126,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					if (env.getDialog() == DialogAction.USE_OBJECT && var == 56) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						return useQuestObject(env, 56, 56, false, 0, 0, 0, 182215387, 1, 0, false); // 56
 					}
 					break;

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.road.Road;
 import com.aionemu.gameserver.model.templates.road.RoadExit;
@@ -59,14 +59,14 @@ public class RoadObserver extends ActionObserver {
 			WorldType type = road.getWorldType();
 			if (type == WorldType.ELYSEA) {
 				if (player.getRace() == Race.ELYOS) {
-					TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				}
 			} else if (type == WorldType.ASMODAE) {
 				if (player.getRace() == Race.ASMODIANS) {
-					TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				}
 			} else {
-				TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, exit.getMap(), exit.getX(), exit.getY(), exit.getZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			}
 		}
 		oldPosition = newPosition;

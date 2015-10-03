@@ -1,7 +1,7 @@
 package quest.sarpan;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -118,7 +118,7 @@ public class _20052TheGuidingHand extends QuestHandler {
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300390000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 300390000, newInstance.getInstanceId(), 273.96478f, 217.55084f, 207.5269f, (byte) 60,
-								TeleportAnimation.BEAM_ANIMATION);
+								TeleportAnimation.FADE_OUT_BEAM);
 						}
 					}
 					break;

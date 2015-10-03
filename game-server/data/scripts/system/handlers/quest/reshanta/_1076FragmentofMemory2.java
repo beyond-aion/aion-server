@@ -1,7 +1,7 @@
 package quest.reshanta;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -72,7 +72,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 				case SETPRO1:
 					if (var == 0) {
-						TeleportService2.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 0, 1, false);
 						return true;
 					}
@@ -96,7 +96,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 					}
 				case SETPRO4:
 					if (var == 3) {
-						TeleportService2.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 3, 4, false);
 						return true;
 					}
@@ -140,7 +140,7 @@ public class _1076FragmentofMemory2 extends QuestHandler {
 
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		TeleportService2.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.BEAM_ANIMATION);
+		TeleportService2.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.FADE_OUT_BEAM);
 		final QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;

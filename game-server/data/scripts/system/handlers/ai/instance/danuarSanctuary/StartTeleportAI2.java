@@ -2,7 +2,7 @@ package ai.instance.danuarSanctuary;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -58,7 +58,7 @@ public class StartTeleportAI2 extends NpcAI2 {
 
 		if (key != null) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), x, y, z, h, TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), x, y, z, h, TeleportAnimation.FADE_OUT_BEAM);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
 		}

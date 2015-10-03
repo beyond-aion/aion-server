@@ -6,7 +6,7 @@ import java.util.List;
 import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -121,7 +121,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 			PacketSendUtility.sendPacket(player1, new SM_DIALOG_WINDOW(target.getObjectId(), 0));
 		}
 		TeleportService2.teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), (byte) 0,
-			TeleportAnimation.BEAM_ANIMATION);
+			TeleportAnimation.FADE_OUT_BEAM);
 	}
 
 }

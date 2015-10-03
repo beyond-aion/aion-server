@@ -2,7 +2,7 @@ package quest.ascension;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -69,7 +69,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-							TeleportService2.teleportTo(player, 120010000, 1685f, 1400f, 195f, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 120010000, 1685f, 1400f, 195f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 				}

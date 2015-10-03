@@ -42,7 +42,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -55,8 +54,8 @@ public class NpcController extends CreatureController<Npc> {
 	private static final Logger log = LoggerFactory.getLogger(NpcController.class);
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
-		super.notSee(object, deleteType);
+	public void notSee(VisibleObject object, boolean inRange) {
+		super.notSee(object, inRange);
 		if (object instanceof Creature) {
 			getOwner().getAi2().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, (Creature) object);
 			getOwner().getAggroList().remove((Creature) object);

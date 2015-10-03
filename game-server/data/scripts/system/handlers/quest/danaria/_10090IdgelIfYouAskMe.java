@@ -8,7 +8,7 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -102,7 +102,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(301000000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 301000000, newInstance.getInstanceId(), 211.75f, 510.34f, 153.22f, (byte) 0,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 2, 3, 182215242, 1);
 					}
 				}
@@ -142,7 +142,7 @@ public class _10090IdgelIfYouAskMe extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						TeleportService2.teleportTo(player, 600060000, 1, 292.5209f, 2371.7844f, 521.131f, (byte) 119, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 600060000, 1, 292.5209f, 2371.7844f, 521.131f, (byte) 119, TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 8, 8, true, false);
 					}
 				}

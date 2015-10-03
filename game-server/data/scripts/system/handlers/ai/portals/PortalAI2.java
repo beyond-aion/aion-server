@@ -5,7 +5,7 @@ import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
@@ -55,7 +55,7 @@ public class PortalAI2 extends ActionItemNpcAI2 {
 		} else if (teleportTemplate != null) {
 			TeleportLocation loc = teleportTemplate.getTeleLocIdData().getTelelocations().get(0);
 			if (loc != null) {
-				TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.FADE_OUT_BEAM);
 			}
 		}
 	}

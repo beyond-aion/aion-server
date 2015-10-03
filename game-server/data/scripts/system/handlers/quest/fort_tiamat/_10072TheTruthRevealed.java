@@ -1,7 +1,7 @@
 package quest.fort_tiamat;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -69,7 +69,7 @@ public class _10072TheTruthRevealed extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300500000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 260.61f, 248.51f, 124.95f, (byte) 102,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 2, 3);
 					}
 				}

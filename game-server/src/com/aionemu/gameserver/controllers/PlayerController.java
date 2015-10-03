@@ -108,7 +108,6 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -164,12 +163,12 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
-		super.notSee(object, deleteType);
+	public void notSee(VisibleObject object, boolean inRange) {
+		super.notSee(object, inRange);
 		if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(4, (Pet) object));
 		} else {
-			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, deleteType));
+			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, inRange));
 		}
 	}
 

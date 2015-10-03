@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -69,7 +69,7 @@ public class _1058AetherInsanity extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						TeleportService2.teleportTo(player, 210040000, 2453.54f, 239.8f, 421.9f, (byte) 113, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 210040000, 2453.54f, 239.8f, 421.9f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}

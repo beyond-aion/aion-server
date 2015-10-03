@@ -1,7 +1,7 @@
 package quest.eltnen;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -88,7 +88,7 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						}
 						case SETPRO3: {
 							if (defaultCloseDialog(env, 3, 4)) { // 4
-								TeleportService2.teleportTo(player, 210020000, 1, 641.88605f, 440.1764f, 331.875f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 210020000, 1, 641.88605f, 440.1764f, 331.875f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 							return false;
@@ -126,7 +126,7 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						}
 						case SETPRO5: {
 							if (defaultCloseDialog(env, 5, 6)) {
-								TeleportService2.teleportTo(player, 210020000, 1, 1059.5428f, 342.35223f, 306.9911f, (byte) 64, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 210020000, 1, 1059.5428f, 342.35223f, 306.9911f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 							return false; // 6
@@ -155,7 +155,7 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 						}
 						case SETPRO7: {
 							if (defaultCloseDialog(env, 8, 9, 182201025, 1, 0, 0)) { // 9
-								TeleportService2.teleportTo(player, 210020000, 1, 1527.835f, 520.4294f, 356.45963f, (byte) 117, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 210020000, 1, 1527.835f, 520.4294f, 356.45963f, (byte) 117, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 							return false;

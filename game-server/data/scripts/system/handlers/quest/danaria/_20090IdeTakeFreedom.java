@@ -8,7 +8,7 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -102,7 +102,7 @@ public class _20090IdeTakeFreedom extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(301000000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 301000000, newInstance.getInstanceId(), 211.75f, 510.34f, 153.22f, (byte) 0,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 2, 3, 182215248, 1);
 					}
 				}
@@ -142,7 +142,7 @@ public class _20090IdeTakeFreedom extends QuestHandler {
 						}
 					}
 					case SET_SUCCEED: {
-						TeleportService2.teleportTo(player, 600060000, 1, 158.7789f, 944.99554f, 547.9603f, (byte) 88, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 600060000, 1, 158.7789f, 944.99554f, 547.9603f, (byte) 88, TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 8, 8, true, false);
 					}
 				}

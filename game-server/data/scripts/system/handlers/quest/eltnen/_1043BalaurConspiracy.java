@@ -10,7 +10,7 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
@@ -89,7 +89,7 @@ public class _1043BalaurConspiracy extends QuestHandler {
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
-								TeleportAnimation.BEAM_ANIMATION);
+								TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}
@@ -106,7 +106,7 @@ public class _1043BalaurConspiracy extends QuestHandler {
 							updateQuestStatus(env);
 							giveQuestItem(env, 182201013, 1);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}
@@ -135,7 +135,7 @@ public class _1043BalaurConspiracy extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50,
-								TeleportAnimation.BEAM_ANIMATION);
+								TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}

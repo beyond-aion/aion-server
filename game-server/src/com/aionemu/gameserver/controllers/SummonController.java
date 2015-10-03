@@ -22,7 +22,6 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author ATracer
@@ -34,8 +33,8 @@ public class SummonController extends CreatureController<Summon> {
 	private boolean isAttacked = false;
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
-		super.notSee(object, deleteType);
+	public void notSee(VisibleObject object, boolean inRange) {
+		super.notSee(object, inRange);
 		if (getOwner().getMaster() == null)
 			return;
 

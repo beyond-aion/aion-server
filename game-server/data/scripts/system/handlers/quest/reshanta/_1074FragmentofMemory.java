@@ -1,7 +1,7 @@
 package quest.reshanta;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -57,7 +57,7 @@ public class _1074FragmentofMemory extends QuestHandler {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(player, 210010000, 243.12f, 1638.48f, 100.38f, (byte) 51, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 210010000, 243.12f, 1638.48f, 100.38f, (byte) 51, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}
@@ -87,7 +87,7 @@ public class _1074FragmentofMemory extends QuestHandler {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(player, 400010000, 2137.53f, 1947.27f, 1595.16f, (byte) 18, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 400010000, 2137.53f, 1947.27f, 1595.16f, (byte) 18, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}

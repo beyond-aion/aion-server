@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -24,7 +24,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author Rolandas
@@ -50,10 +49,10 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 		Player p = (Player) object;
 		ActionObserver observer = observed.remove(p.getObjectId());
-		if (deleteType.equals(DeleteType.OUT_RANGE)) {
+		if (!inRange) {
 			observer.moved();
 			if (!getOwner().isInInstance())
 				PacketSendUtility.sendPacket(p, new SM_DELETE_HOUSE(getOwner().getAddress().getId()));
@@ -135,13 +134,13 @@ public class HouseController extends VisibleObjectController<House> {
 			float x = getOwner().getAddress().getExitX();
 			float y = getOwner().getAddress().getExitY();
 			float z = getOwner().getAddress().getExitZ();
-			TeleportService2.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 		} else {
 			Npc sign = getOwner().getCurrentSign();
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(sign.getHeading()));
 			float x = (float) (sign.getX() + (8 * Math.cos(radian)));
 			float y = (float) (sign.getY() + (8 * Math.sin(radian)));
-			TeleportService2.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 		}
 		if (onSettingsChange)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER);

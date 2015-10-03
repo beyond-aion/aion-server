@@ -11,7 +11,7 @@ import com.aionemu.gameserver.configs.main.PricesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -470,7 +470,7 @@ public class DialogService {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
 						if (loc != null) {
 							TeleportService2.teleport(template, loc.getLocId(), player, npc,
-								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_AIMATION : TeleportAnimation.BEAM_ANIMATION);
+								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
 						}
 					}
 					break;

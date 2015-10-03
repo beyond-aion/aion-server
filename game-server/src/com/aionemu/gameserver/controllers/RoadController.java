@@ -6,7 +6,6 @@ import com.aionemu.gameserver.controllers.observer.RoadObserver;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.road.Road;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author SheppeR
@@ -24,12 +23,12 @@ public class RoadController extends VisibleObjectController<Road> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 		Player p = (Player) object;
 		RoadObserver observer = observed.remove(p.getObjectId());
-		if (deleteType.equals(DeleteType.OUT_RANGE)) {
+		if (!inRange)
 			observer.moved();
-		}
+
 		p.getObserveController().removeObserver(observer);
 	}
 }

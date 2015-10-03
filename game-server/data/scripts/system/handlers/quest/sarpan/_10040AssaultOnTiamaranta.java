@@ -3,7 +3,7 @@ package quest.sarpan;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
@@ -146,7 +146,7 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 					return sendQuestStartDialog(env);
 			} else if (targetId == 730527 && var == 3) {
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
-					TeleportService2.teleportTo(player, 300410000, player.getInstanceId(), 756, 214, 1029, (byte) 116, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300410000, player.getInstanceId(), 756, 214, 1029, (byte) 116, TeleportAnimation.FADE_OUT_BEAM);
 					return true;
 				} else
 					return sendQuestStartDialog(env);
@@ -157,12 +157,12 @@ public class _10040AssaultOnTiamaranta extends QuestHandler {
 					return sendQuestDialog(env, 2717);
 				/*
 				 * else if (env.getDialog() == DialogAction.SET_SUCCEED) { TeleportService2.teleportTo(player, 600020000, 1216f, 1360f, 1358f, (byte) 0,
-				 * TeleportAnimation.BEAM_ANIMATION);
+				 * TeleportAnimation.FADE_OUT_BEAM);
 				 */
 				else if (env.getDialog() == DialogAction.SET_SUCCEED) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
-					TeleportService2.teleportTo(player, 600020000, 1, 1219, 1361, 1359, (byte) 70, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 600020000, 1, 1219, 1361, 1359, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
 					return closeDialogWindow(env);
 				} else
 					return sendQuestStartDialog(env);

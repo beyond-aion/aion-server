@@ -39,7 +39,6 @@ import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
@@ -56,8 +55,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	private ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
-		super.notSee(object, deleteType);
+	public void notSee(VisibleObject object, boolean inRange) {
+		super.notSee(object, inRange);
 		if (object == getOwner().getTarget()) {
 			getOwner().setTarget(null);
 		}

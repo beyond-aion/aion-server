@@ -3,7 +3,7 @@ package ai.instance.shugoImperialTomb;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -44,11 +44,11 @@ public class ShugoDelightedAdmirerAI2 extends NpcAI2 {
 			switch (getNpcId()) {
 				case 831114:
 				case 831306:
-					TeleportService2.teleportTo(player, 300560000, instanceId, 346.27332f, 424.07101f, 294.75793f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300560000, instanceId, 346.27332f, 424.07101f, 294.75793f, (byte) 90, TeleportAnimation.FADE_OUT_BEAM);
 					break;
 				case 831115:
 				case 831195:
-					TeleportService2.teleportTo(player, 300560000, instanceId, 450.8527f, 105.94637f, 212.20023f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300560000, instanceId, 450.8527f, 105.94637f, 212.20023f, (byte) 90, TeleportAnimation.FADE_OUT_BEAM);
 					break;
 			}
 		}

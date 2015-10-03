@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author ATracer
@@ -21,7 +20,7 @@ public class PetController extends VisibleObjectController<Pet> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 	}
 
 	public static class PetUpdateTask implements Runnable {

@@ -1,7 +1,7 @@
 package quest.ishalgen;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -62,7 +62,7 @@ public class _2106VanarsFlattery extends QuestHandler {
 						return sendQuestDialog(env, 1003);
 					}
 					case SETPRO1:
-						TeleportService2.teleportTo(player, 220010000, 576, 2538, 272, (byte) 9, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 220010000, 576, 2538, 272, (byte) 9, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 0, 1, true);
 						return closeDialogWindow(env);
 				}

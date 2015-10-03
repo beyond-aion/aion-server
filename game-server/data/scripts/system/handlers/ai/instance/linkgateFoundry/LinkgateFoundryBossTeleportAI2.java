@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -66,7 +66,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 			spawn(bossId, 252.2439f, 259.3866f, 312.3536f, (byte) 41);
 			spawn(702592, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0, 51);
 			getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().onDelete();
-			TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 			AI2Actions.deleteOwner(this);

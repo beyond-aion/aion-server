@@ -18,8 +18,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * This packet is displaying visible players.
  *
- * @author -Nemesiss-, Avol, srx47 modified cura
- * @modified -Enomine- -Artur-
+ * @author -Nemesiss-, Avol, srx47
+ * @modified cura, -Enomine-, -Artur-
  */
 public class SM_PLAYER_INFO extends AionServerPacket {
 
@@ -30,7 +30,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 	private boolean enemy;
 
 	/**
-	 * Constructs new <tt>SM_PLAYER_INFO </tt> packet
+	 * Constructs new <tt>SM_PLAYER_INFO</tt> packet
 	 *
 	 * @param player
 	 *          actual player.
@@ -214,9 +214,9 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		Stat2 attackSpeed = player.getGameStats().getAttackSpeed();
 		writeH(attackSpeed.getBase());
 		writeH(attackSpeed.getCurrent());
-		writeC(player.getPortAnimation());
+		writeC(player.getPortAnimationId()); // not visible to other players (they always see a simple fade in animation)
 
-		writeS(player.hasStore() ? player.getStore().getStoreMessage() : "");// private store message
+		writeS(player.hasStore() ? player.getStore().getStoreMessage() : ""); // private store message
 
 		/**
 		 * Movement

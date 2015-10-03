@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -36,7 +36,7 @@ public class CM_HOUSE_TELEPORT_BACK extends AionClientPacket {
 		float[] coords = player.getBattleReturnCoords();
 		if (coords != null && player.getBattleReturnMap() != 0) {
 			TeleportService2
-				.teleportTo(player, player.getBattleReturnMap(), 1, coords[0], coords[1], coords[2], (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+				.teleportTo(player, player.getBattleReturnMap(), 1, coords[0], coords[1], coords[2], (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 
 			player.setBattleReturnCoords(0, null);
 		}

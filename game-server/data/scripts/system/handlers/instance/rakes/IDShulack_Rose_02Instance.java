@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -31,12 +31,12 @@ public class IDShulack_Rose_02Instance extends GeneralInstanceHandler {
 						player.getInventory().decreaseByItemId(185000162, 1);
 						teleportEnabled.compareAndSet(false, true);
 						TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 704.3273f, 500.8049f, 939.6262f, (byte) 0,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 					} else
 						PacketSendUtility.sendPacket(player, STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(new DescriptionId(1622801)));
 				} else
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 704.3273f, 500.8049f, 939.6262f, (byte) 0,
-						TeleportAnimation.BEAM_ANIMATION);
+						TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730770:
 				SkillEngine.getInstance().applyEffectDirectly(19272, player, player, 0);

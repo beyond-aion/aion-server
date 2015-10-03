@@ -17,7 +17,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.google.common.base.Predicate;
 
 /**
@@ -183,7 +182,7 @@ public class PlayerInfo extends AdminCommand {
 			} else if (params[2].equals("notsee")) {
 				int objId = Integer.parseInt(params[3]);
 				Player player = World.getInstance().findPlayer(objId);
-				target.getController().notSee(player, DeleteType.IN_RANGE);
+				target.getController().notSee(player, true);
 			}
 		} else {
 			PacketSendUtility.sendMessage(admin, "bad switch!");

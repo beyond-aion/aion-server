@@ -7,7 +7,7 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -57,10 +57,10 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				TeleportService2.teleportTo(player, 301270000, 228.37f, 262.7f, 313, (byte) 120);
 				break;
 			case 702592:
-				TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 702590:
-				TeleportService2.teleportTo(player, 301270000, 257.11f, 323, 271, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 301270000, 257.11f, 323, 271, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().onDelete();
 				secretLabEntranceCount++;
 				if (secretLabEntranceCount < 3) {

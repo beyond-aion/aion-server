@@ -16,7 +16,7 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -266,7 +266,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 			case 702009:
 				TeleportService2
-					.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+					.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
 				npc.getController().onDelete();
 				break;

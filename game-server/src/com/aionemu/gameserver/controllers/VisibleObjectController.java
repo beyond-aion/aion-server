@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * This class is for controlling VisibleObjects [players, npc's etc]. Its controlling movement, visibility etc.
@@ -47,7 +46,7 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * @param object
 	 * @param deleteType
 	 */
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 
 	}
 

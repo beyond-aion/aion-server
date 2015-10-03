@@ -1,7 +1,7 @@
 package quest.beluslan;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -89,7 +89,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 					return defaultCloseDialog(env, 1, 11);
 				case SETPRO3:
 					defaultCloseDialog(env, 2, 3);
-					return TeleportService2.teleportTo(player, 120010000, 1368.81f, 1054.69f, 206.53f, (byte) 89, TeleportAnimation.BEAM_ANIMATION);
+					return TeleportService2.teleportTo(player, 120010000, 1368.81f, 1054.69f, 206.53f, (byte) 89, TeleportAnimation.FADE_OUT_BEAM);
 				case SETPRO7:
 					return defaultCloseDialog(env, 6, 7);
 			}
@@ -130,7 +130,7 @@ public class _2051SavingBeluslanFortress extends QuestHandler {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 11)
-						TeleportService2.teleportTo(player, 220040000, 370.05f, 427.5f, 222.11f, (byte) 109, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 220040000, 370.05f, 427.5f, 222.11f, (byte) 109, TeleportAnimation.FADE_OUT_BEAM);
 					return useQuestObject(env, 11, 2, false, 0);
 			}
 		}

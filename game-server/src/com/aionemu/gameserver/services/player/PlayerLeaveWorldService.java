@@ -67,6 +67,7 @@ public class PlayerLeaveWorldService {
 
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
+		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
 		player.onLoggedOut();
 		BrokerService.getInstance().removePlayerCache(player);
 		ExchangeService.getInstance().cancelExchange(player);
@@ -77,7 +78,7 @@ public class PlayerLeaveWorldService {
 		SerialKillerService.getInstance().onLogout(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
-		KiskService.getInstance().onLogout(player);
+		KiskService.getInstance().onLogout(player);	
 		player.getMoveController().abortMove();
 
 		if (player.isLooting())
@@ -131,8 +132,6 @@ public class PlayerLeaveWorldService {
 			LegionService.getInstance().onLogout(player);
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
-		if (!player.getController().isInShutdownProgress())
-			PacketSendUtility.broadcastPacketAndReceive(player, new SM_DELETE(player, 3));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);

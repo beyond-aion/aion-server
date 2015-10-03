@@ -80,13 +80,9 @@ public class KnownList {
 	 * Clear known list. Used when object is despawned.
 	 */
 	public void clear() {
-		for (VisibleObject object : knownObjects.values()) {
-			DeleteType deleteType = DeleteType.IN_RANGE;
-			if (owner instanceof Npc && ((Creature) owner).isFlag()) {
-				deleteType = DeleteType.FLAG;
-			}
-			object.getKnownList().del(owner, deleteType);
-		}
+		for (VisibleObject object : knownObjects.values())
+			object.getKnownList().del(owner, true);
+
 		knownObjects.clear();
 		if (knownPlayers != null) {
 			knownPlayers.clear();
@@ -157,22 +153,22 @@ public class KnownList {
 	 * 
 	 * @param object
 	 */
-	private void del(VisibleObject object, DeleteType deleteType) {
+	private void del(VisibleObject object, boolean inRange) {
 		/**
 		 * object was known.
 		 */
 		if (knownObjects.remove(object.getObjectId()) != null) {
 			if (knownPlayers != null)
 				knownPlayers.remove(object.getObjectId());
-			delVisualObject(object, deleteType);
+			delVisualObject(object, inRange);
 		}
 	}
 
-	public void delVisualObject(VisibleObject object, DeleteType deleteType) {
+	public void delVisualObject(VisibleObject object, boolean inRange) {
 		if (visualObjects.remove(object.getObjectId()) != null) {
 			if (visualPlayers != null)
 				visualPlayers.remove(object.getObjectId());
-			owner.getController().notSee(object, deleteType);
+			owner.getController().notSee(object, inRange);
 		}
 	}
 
@@ -182,12 +178,8 @@ public class KnownList {
 	private void forgetObjects() {
 		for (VisibleObject object : knownObjects.values()) {
 			if (!checkObjectInRange(object) && !object.getKnownList().checkReversedObjectInRange(owner)) {
-				DeleteType deleteType = DeleteType.OUT_RANGE;
-				if (owner instanceof Npc && ((Creature) owner).isFlag()) {
-					deleteType = DeleteType.FLAG;
-				}
-				del(object, deleteType);
-				object.getKnownList().del(owner, deleteType);
+				del(object, false);
+				object.getKnownList().del(owner, false);
 			}
 		}
 	}
@@ -386,23 +378,5 @@ public class KnownList {
 
 	public VisibleObject getObject(int targetObjectId) {
 		return this.knownObjects.get(targetObjectId);
-	}
-
-	public enum DeleteType {
-
-		IN_RANGE(0x0F),
-		OUT_RANGE(0x00),
-		FLAG(0x13);
-
-		int type;
-
-		private DeleteType(int type) {
-			this.type = type;
-		}
-
-		public int getType() {
-			return type;
-		}
-
 	}
 }

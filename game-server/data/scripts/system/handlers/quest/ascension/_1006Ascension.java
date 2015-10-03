@@ -9,8 +9,8 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.actions.NpcActions;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -101,7 +101,7 @@ public class _1006Ascension extends QuestHandler {
 									return true;
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 						case SETPRO3: {
@@ -224,7 +224,7 @@ public class _1006Ascension extends QuestHandler {
 				switch (env.getDialog()) {
 					case SELECTED_QUEST_NOREWARD:
 						if (player.getWorldId() == 310020000) {
-							TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						}
 						break;
 				}
@@ -348,7 +348,7 @@ public class _1006Ascension extends QuestHandler {
 			giveQuestItem(env, 182200009, 1);
 			qs.setQuestVar(3);
 			updateQuestStatus(env);
-			TeleportService2.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.BEAM_ANIMATION);
+			TeleportService2.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.FADE_OUT_BEAM);
 			return true;
 		}
 		return false;

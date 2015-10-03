@@ -1,7 +1,7 @@
 package quest.tiamaranta;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -51,7 +51,7 @@ public class _41502HiddenConnections extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701129) {
-				TeleportService2.teleportTo(player, 600030000, 329, 541, 362, (byte) 100, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 600030000, 329, 541, 362, (byte) 100, TeleportAnimation.FADE_OUT_BEAM);
 				changeQuestStep(env, 1, 2, true);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -74,7 +74,7 @@ public class _41502HiddenConnections extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("SMALL_CRATER_1_600030000")) && item.getItemId() == 182212514) {
-				TeleportService2.teleportTo(player, 600030000, 604, 1018, 210, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
+				TeleportService2.teleportTo(player, 600030000, 604, 1018, 210, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 				changeQuestStep(env, 0, 1, false);
 			}
 		}

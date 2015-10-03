@@ -1,7 +1,7 @@
 package quest.heiron;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -60,7 +60,7 @@ public class _1640TeleporterRepairs extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							QuestService.finishQuest(env);
 							TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 187.71689f, 2712.14870f, 141.91672f, (byte) 195,
-								TeleportAnimation.BEAM_ANIMATION);
+								TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else
 							return sendQuestDialog(env, 1353);

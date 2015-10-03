@@ -2,7 +2,7 @@ package quest.reshanta;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -111,7 +111,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310100000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 310100000, newInstance.getInstanceId(), 310, 337, 1019, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 310100000, newInstance.getInstanceId(), 310, 337, 1019, (byte) 90, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}

@@ -31,6 +31,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -232,7 +233,7 @@ public class Player extends Creature {
 	// Needed to remove supplements queue
 	private int subtractedSupplementsCount;
 	private int subtractedSupplementId;
-	private int portAnimation;
+	private byte portAnimation;
 	private boolean isInSprintMode;
 	private List<ActionObserver> rideObservers;
 	private SerialKiller skList;
@@ -2102,12 +2103,12 @@ public class Player extends Creature {
 		subtractedSupplementId = 0;
 	}
 
-	public int getPortAnimation() {
+	public byte getPortAnimationId() {
 		return portAnimation;
 	}
 
-	public void setPortAnimation(int portAnimation) {
-		this.portAnimation = portAnimation;
+	public void setPortAnimation(ArrivalAnimation portAnimation) {
+		this.portAnimation = portAnimation.getId();
 	}
 
 	@Override

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author Source
@@ -36,7 +35,7 @@ public class ShieldController extends VisibleObjectController<Shield> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 		FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
 		Player player = (Player) object;
 
@@ -44,7 +43,7 @@ public class ShieldController extends VisibleObjectController<Shield> {
 			if (loc.getRace() != SiegeRace.getByRace(player.getRace())) {
 				ActionObserver observer = observed.remove(player.getObjectId());
 				if (observer != null) {
-					if (deleteType.equals(DeleteType.OUT_RANGE))
+					if (!inRange)
 						observer.moved();
 
 					player.getObserveController().removeObserver(observer);

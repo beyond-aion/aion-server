@@ -2,7 +2,7 @@ package quest.danaria;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -75,7 +75,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 				return true;
 			} else if (movieId == 857) {
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 107.37f, 145.05f, 125.69f, (byte) 105,
-					TeleportAnimation.BEAM_ANIMATION);
+					TeleportAnimation.FADE_OUT_BEAM);
 				return true;
 			}
 		}
@@ -106,7 +106,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300900000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 300900000, newInstance.getInstanceId(), 150.62f, 145.74f, 124.41f, (byte) 36,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
@@ -193,8 +193,8 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						}
 					}
 					case SETPRO9: {
-						// TeleportService2.teleportTo(player, 600050000, 1, 421, 428f, 288.49f, (byte) 13, TeleportAnimation.BEAM_ANIMATION); ASMO PoINT
-						TeleportService2.teleportTo(player, 600050000, 1, 330.62f, 2748.81f, 149.08f, (byte) 50, TeleportAnimation.BEAM_ANIMATION);
+						// TeleportService2.teleportTo(player, 600050000, 1, 421, 428f, 288.49f, (byte) 13, TeleportAnimation.FADE_OUT_BEAM); ASMO PoINT
+						TeleportService2.teleportTo(player, 600050000, 1, 330.62f, 2748.81f, 149.08f, (byte) 50, TeleportAnimation.FADE_OUT_BEAM);
 						return defaultCloseDialog(env, 12, 13);
 					}
 				}

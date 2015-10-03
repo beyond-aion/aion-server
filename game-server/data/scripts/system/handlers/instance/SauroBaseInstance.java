@@ -8,7 +8,7 @@ import javolution.util.FastTable;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -149,11 +149,11 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 730876:
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60,
-					TeleportAnimation.BEAM_ANIMATION);
+					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730877:
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120,
-					TeleportAnimation.BEAM_ANIMATION);
+					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 		}
 	}

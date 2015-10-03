@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -87,7 +87,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					if (var == 1) {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 210020000, 1357f, 2566f, 279.6f, (byte) 89, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 210020000, 1357f, 2566f, 279.6f, (byte) 89, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;

@@ -8,8 +8,8 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.actions.NpcActions;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -128,7 +128,7 @@ public class _2008Ascension extends QuestHandler {
 					case SETPRO1:
 						qs.setQuestVar(1);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.BEAM_ANIMATION);
+						TeleportService2.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					case SETPRO5:
 						if (var == 4) {
@@ -205,7 +205,7 @@ public class _2008Ascension extends QuestHandler {
 									return true;
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 				}
@@ -221,7 +221,7 @@ public class _2008Ascension extends QuestHandler {
 									return true;
 							qs.setQuestVar(3);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 				}
@@ -237,7 +237,7 @@ public class _2008Ascension extends QuestHandler {
 									return true;
 							qs.setQuestVar(4);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220010000, 383.10248f, 1895.3093f, 327.625f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220010000, 383.10248f, 1895.3093f, 327.625f, (byte) 59, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 				}
@@ -280,7 +280,7 @@ public class _2008Ascension extends QuestHandler {
 				switch (env.getDialog()) {
 					case SELECTED_QUEST_NOREWARD:
 						if (player.getWorldId() == 320020000) {
-							TeleportService2.teleportTo(player, 220010000, 386.03476f, 1893.9309f, 327.62283f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220010000, 386.03476f, 1893.9309f, 327.62283f, (byte) 59, TeleportAnimation.FADE_OUT_BEAM);
 						}
 						break;
 				}

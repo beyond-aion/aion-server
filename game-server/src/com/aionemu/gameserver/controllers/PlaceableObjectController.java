@@ -14,7 +14,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 
 /**
  * @author Rolandas
@@ -33,10 +32,10 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 	}
 
 	@Override
-	public void notSee(VisibleObject object, DeleteType deleteType) {
+	public void notSee(VisibleObject object, boolean inRange) {
 		Player p = (Player) object;
 		ActionObserver observer = observed.remove(p.getObjectId());
-		if (deleteType.equals(DeleteType.OUT_RANGE)) {
+		if (!inRange) {
 			observer.moved();
 			PacketSendUtility.sendPacket(p, new SM_DELETE_HOUSE_OBJECT(getOwner().getObjectId()));
 		}

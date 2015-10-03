@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.player;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.world.knownlist.KnownList.DeleteType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
@@ -20,7 +19,7 @@ public class PlayerVisualStateService {
 				if (canSee && !isSee)
 					observer.getKnownList().addVisualObject(hidden);
 				else if (!canSee && isSee)
-					observer.getKnownList().delVisualObject(hidden, DeleteType.OUT_RANGE);
+					observer.getKnownList().delVisualObject(hidden, false);
 			}
 
 		});
@@ -37,7 +36,7 @@ public class PlayerVisualStateService {
 				if (canSee && !isSee)
 					search.getKnownList().addVisualObject(hide);
 				else if (!canSee && isSee)
-					search.getKnownList().delVisualObject(hide, DeleteType.OUT_RANGE);
+					search.getKnownList().delVisualObject(hide, false);
 			}
 
 		});

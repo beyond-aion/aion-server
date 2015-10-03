@@ -1,8 +1,8 @@
 package quest.bare_truth;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.actions.NpcActions;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -157,7 +157,7 @@ public class _14031AHyperVention extends QuestHandler {
 								NpcActions.delete(npc);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						}
 					}
 					break;

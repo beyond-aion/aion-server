@@ -4,7 +4,7 @@ import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -61,7 +61,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 		if (leave) {
 			if (house.getAddress().getExitMapId() != null) {
 				TeleportService2.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(), house
-					.getAddress().getExitZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+					.getAddress().getExitZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			} else {
 				if (GeoDataConfig.GEO_ENABLE) {
 					Npc sign = house.getCurrentSign();
@@ -72,13 +72,13 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 					float x = (float) (Math.cos(radian) * 0.1);
 					float y = (float) (Math.sin(radian) * 0.1);
 					TeleportService2.teleportTo(player, house.getWorldId(), colWall.getX() + x, colWall.getY() + y, player.getZ(), (byte) 0,
-						TeleportAnimation.BEAM_ANIMATION);
+						TeleportAnimation.FADE_OUT_BEAM);
 				} else {
 					double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
 					float x = (float) (Math.cos(radian) * 6);
 					float y = (float) (Math.sin(radian) * 6);
 					TeleportService2.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, player.getZ(), (byte) 0,
-						TeleportAnimation.BEAM_ANIMATION);
+						TeleportAnimation.FADE_OUT_BEAM);
 				}
 			}
 		} else {
@@ -99,7 +99,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 			float x = (float) (Math.cos(radian) * 6);
 			float y = (float) (Math.sin(radian) * 6);
 			TeleportService2.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, house.getAddress().getZ(), (byte) 0,
-				TeleportAnimation.BEAM_ANIMATION);
+				TeleportAnimation.FADE_OUT_BEAM);
 		}
 	}
 

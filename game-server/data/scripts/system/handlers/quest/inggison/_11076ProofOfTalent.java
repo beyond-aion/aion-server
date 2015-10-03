@@ -1,7 +1,7 @@
 package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -49,7 +49,7 @@ public class _11076ProofOfTalent extends QuestHandler {
 					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2034);
 				} else if (dialog == DialogAction.SETPRO4) {
-					TeleportService2.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.FADE_OUT_BEAM);
 					return defaultCloseDialog(env, 3, 4, true, false);
 				}
 			}

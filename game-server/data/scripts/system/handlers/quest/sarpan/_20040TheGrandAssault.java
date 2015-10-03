@@ -3,7 +3,7 @@ package quest.sarpan;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
@@ -127,7 +127,7 @@ public class _20040TheGrandAssault extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SETPRO2) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300410000);
 					InstanceService.registerPlayerWithInstance(newInstance, player);
-					TeleportService2.teleportTo(player, 300410000, newInstance.getInstanceId(), 791, 745, 997, (byte) 2, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 300410000, newInstance.getInstanceId(), 791, 745, 997, (byte) 2, TeleportAnimation.FADE_OUT_BEAM);
 					changeQuestStep(env, 1, 2, false);
 					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 19));
 					return closeDialogWindow(env);
@@ -157,7 +157,7 @@ public class _20040TheGrandAssault extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SET_SUCCEED) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
-					TeleportService2.teleportTo(player, 600020000, 1, 1511, 1559, 1359, (byte) 70, TeleportAnimation.BEAM_ANIMATION);
+					TeleportService2.teleportTo(player, 600020000, 1, 1511, 1559, 1359, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
 					return closeDialogWindow(env);
 				} else
 					return sendQuestStartDialog(env);

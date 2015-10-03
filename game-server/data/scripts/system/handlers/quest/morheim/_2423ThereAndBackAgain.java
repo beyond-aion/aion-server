@@ -1,7 +1,7 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -57,7 +57,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							return checkQuestItems(env, 1, 2, false, 10000, 10001);
 						}
 						case SETPRO3: {
-							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(3);
 							return defaultCloseDialog(env, 3, 3, true, false);
 						}
@@ -65,7 +65,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							return sendQuestDialog(env, 1779);
 						}
 						case SETPRO1: {
-							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}

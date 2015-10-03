@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -70,7 +70,7 @@ public class _14053DangerCubed extends QuestHandler {
 					if (var == 1) {
 						changeQuestStep(env, 1, 2, false); // 2
 						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2455.827f, 243.22636f, 421.75235f, (byte) 92,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
 			}
@@ -92,7 +92,7 @@ public class _14053DangerCubed extends QuestHandler {
 					if (var == 0) {
 						changeQuestStep(env, 0, 1, false); // 1
 						TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
-							TeleportAnimation.BEAM_ANIMATION);
+							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
 				case SETPRO3:

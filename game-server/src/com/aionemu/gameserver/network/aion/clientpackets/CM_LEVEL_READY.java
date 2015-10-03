@@ -4,6 +4,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -127,7 +128,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		Pet pet = activePlayer.getPet();
 		if (pet != null && !pet.isSpawned())
 			World.getInstance().spawn(pet);
-		activePlayer.setPortAnimation(0);
+		activePlayer.setPortAnimation(ArrivalAnimation.NONE);
 
 		TownService.getInstance().onEnterWorld(activePlayer);
 	}

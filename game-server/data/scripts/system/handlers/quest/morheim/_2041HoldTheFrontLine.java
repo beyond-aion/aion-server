@@ -3,7 +3,7 @@ package quest.morheim;
 import java.util.List;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
@@ -81,7 +81,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 						case SETPRO1:
 							defaultCloseDialog(env, 0, 1); // 1
-							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 					}
 					break;
@@ -93,7 +93,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 						case SETPRO2:
 							defaultCloseDialog(env, 1, 2); // 2
-							TeleportService2.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.BEAM_ANIMATION);
+							TeleportService2.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 					}
 					break;
@@ -115,7 +115,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 						case SETPRO4:
 							if (var == 4) {
 								defaultCloseDialog(env, 4, 4, true, false); // reward
-								TeleportService2.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.BEAM_ANIMATION);
+								TeleportService2.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}
