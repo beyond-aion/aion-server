@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Key" base_chance="100" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300470000" name="Satra_Treasure_Hoard"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219299" name="Muzzled Punisher"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000118" name="Heavy War Chest Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300470000" name="Satra_Treasure_Hoard"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219300" name="Punisher Unleashed"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000119" name="Shining War Chest Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>
