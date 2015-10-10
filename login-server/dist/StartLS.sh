@@ -7,28 +7,29 @@
 #=====================================================================================
 
 run_ls() {
-  if [ ! -f ./libs/AL-Login.jar ]; then
-    echo "Exiting script: LoginServer not found. Please check your working directory."
+  if [ ! -f libs/AL-Login.jar ]; then
+    echo "Exiting script: LoginServer not found."
     exit 1
   elif [ -f loginserver.pid ] && ps -p `cat loginserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: LoginServer is already running."
     exit 2
   fi
-  java -Xms32m -Xmx32m -server -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Login.jar com.aionemu.loginserver.LoginServer > /dev/null 2>&1 &
-  lspid=$!
-  echo ${lspid} > loginserver.pid
+
   echo "LoginServer is starting now."
-  if [ $# -gt 0 ] && [ $1 = "exitcode" ]; then
-    # wait for LS termination and return exit code
-    wait ${lspid}
-    return $?
-  fi
+  # activate job control in this script
+  set -m
+  # run server as a background job to instantly write PID file
+  java -Xms32m -Xmx32m -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
+  echo $! > loginserver.pid
+  # put job in foreground again (wait for LS termination) and return exit code
+  fg %+
+  return $?
 }
 
 loop() {
   echo "LoginServer restart loop is active."
   while true; do
-    run_ls "exitcode"
+    run_ls
     err=$?
     case ${err} in
       0) # LS exit code: shutdown
@@ -42,6 +43,10 @@ loop() {
       2) # LS exit code: restart
         echo "Restarting LoginServer..."
         ;;
+      137) # LS process was killed
+        echo "LoginServer process was killed."
+        break
+        ;;
       *) # other
         echo "LoginServer has terminated abnormally, restarting in 5 seconds."
         sleep 5
@@ -51,9 +56,9 @@ loop() {
   echo "LoginServer restart loop has ended."
 }
 
+cd `dirname $(readlink -f $0)`
 if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
   run_ls
 else
-  # init restart loop as background process
-  loop &
+  loop
 fi

@@ -7,28 +7,29 @@
 #=====================================================================================
 
 run_cs() {
-  if [ ! -f ./libs/AL-Chat.jar ]; then
-    echo "Exiting script: ChatServer not found. Please check your working directory."
+  if [ ! -f libs/AL-Chat.jar ]; then
+    echo "Exiting script: ChatServer not found."
     exit 1
   elif [ -f chatserver.pid ] && ps -p `cat chatserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: ChatServer is already running."
     exit 2
   fi
-  java -Xms128m -Xmx128m -server -ea -Xbootclasspath/p:./libs/jsr166.jar -cp ./libs/*:AL-Chat.jar com.aionemu.chatserver.ChatServer > /dev/null 2>&1 &
-  cspid=$!
-  echo ${cspid} > chatserver.pid
+
   echo "ChatServer is starting now."
-  if [ $# -gt 0 ] && [ $1 = "exitcode" ]; then
-    # wait for CS termination and return exit code
-    wait ${cspid}
-    return $?
-  fi
+  # activate job control in this script
+  set -m
+  # run server as a background job to instantly write PID file
+  java -Xms128m -Xmx128m -server -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
+  echo $! > chatserver.pid
+  # put job in foreground again (wait for LS termination) and return exit code
+  fg %+
+  return $?
 }
 
 loop() {
   echo "ChatServer restart loop is active."
   while true; do
-    run_cs "exitcode"
+    run_cs
     err=$?
     case ${err} in
       0) # CS exit code: shutdown
@@ -42,6 +43,10 @@ loop() {
       2) # CS exit code: restart
         echo "Restarting ChatServer..."
         ;;
+      137) # CS process was killed
+        echo "ChatServer process was killed."
+        break
+        ;;
       *) # other
         echo "ChatServer has terminated abnormally, restarting in 5 seconds."
         sleep 5
@@ -51,9 +56,9 @@ loop() {
   echo "ChatServer restart loop has ended."
 }
 
+cd `dirname $(readlink -f $0)`
 if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
   run_cs
 else
-  # init restart loop as background process
-  loop &
+  loop
 fi

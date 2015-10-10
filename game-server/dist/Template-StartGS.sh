@@ -7,28 +7,29 @@
 #=====================================================================================
 
 run_gs() {
-  if [ ! -f ./libs/AL-Game.jar ]; then
-    echo "Exiting script: GameServer not found. Please check your working directory."
+  if [ ! -f libs/AL-Game.jar ]; then
+    echo "Exiting script: GameServer not found."
     exit 1
   elif [ -f gameserver.pid ] && ps -p `cat gameserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: GameServer is already running."
     exit 2
   fi
-  java -Xms128m -Xmx1536m -server -ea -javaagent:./libs/{javaagentlib} -cp ./libs/*:AL-Game.jar com.aionemu.gameserver.GameServer > /dev/null 2>&1 &
-  gspid=$!
-  echo ${gspid} > gameserver.pid
+
   echo "GameServer is starting now."
-  if [ $# -gt 0 ] && [ $1 = "exitcode" ]; then
-    # wait for GS termination and return exit code
-    wait ${gspid}
-    return $?
-  fi
+  # activate job control in this script
+  set -m
+  # run server as a background job to instantly write PID file
+  java -Xms128m -Xmx1536m -server -ea -cp "libs/*" -javaagent:libs/{javaagentlib} com.aionemu.gameserver.GameServer &
+  echo $! > gameserver.pid
+  # put job in foreground again (wait for LS termination) and return exit code
+  fg %+
+  return $?
 }
 
 loop() {
   echo "GameServer restart loop is active."
   while true; do
-    run_gs "exitcode"
+    run_gs
     err=$?
     case ${err} in
       0) # GS exit code: shutdown
@@ -42,6 +43,10 @@ loop() {
       2) # GS exit code: restart
         echo "Restarting GameServer..."
         ;;
+      137) # GS process was killed
+        echo "GameServer process was killed."
+        break
+        ;;
       *) # other
         echo "GameServer has terminated abnormally, restarting in 5 seconds."
         sleep 5
@@ -51,9 +56,9 @@ loop() {
   echo "GameServer restart loop has ended."
 }
 
+cd `dirname $(readlink -f $0)`
 if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
   run_gs
 else
-  # init restart loop as background process
-  loop &
+  loop
 fi
