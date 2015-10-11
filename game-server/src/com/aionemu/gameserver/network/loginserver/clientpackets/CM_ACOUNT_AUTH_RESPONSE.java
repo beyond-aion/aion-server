@@ -50,7 +50,7 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 	/**
 	 * Allowed HDD serial
 	 */
-	private String allowedHddSerial;
+	private String allowedHddSerial = "";
 
 	/**
 	 * {@inheritDoc}
@@ -70,7 +70,8 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 			accessLevel = (byte) readC();
 			membership = (byte) readC();
 			toll = readQ();
-			allowedHddSerial = readS();
+
+//			allowedHddSerial = readS();
 		}
 	}
 
