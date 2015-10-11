@@ -627,7 +627,7 @@
 		</spawn>
 		<!-- Kane -->
 		<spawn npc_id="203729" respawn_time="295">
-			<spot x="1620.08" y="1521.54" z="573.629" h="60"/>
+			<spot x="1618.86" y="1469.71" z="573.345" h="57"/>
 		</spawn>
 		<!-- Kareinus -->
 		<spawn npc_id="203827" respawn_time="295">
