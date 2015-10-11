@@ -1,3 +1,13 @@
+<!--
+	File that is responsible for network address mapping.
+	We can have any number of ip ranges mapped to various network interfaces
+	Useful for those who run server in local areas with two (or more) networks
+
+	For ipconfig's "default" attribute both DNS and ip address is supported.
+	Example: <ipconfig default="216.239.59.104">
+	Examples: <ipconfig default="yourserveraddress.com">
+-->
+
 <ipconfig default="127.0.0.1">
 	<iprange min="10.0.0.0" max="10.255.255.255" address="10.0.0.0"/>
 	<iprange min="172.16.0.0" max="172.31.255.255" address="172.16.0.0"/>
