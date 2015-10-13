@@ -106,7 +106,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void changePlayerId(final Player player, final int accountId) {
+	public void changePlayerAccountId(final Player player, final int accountId) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement("UPDATE players SET account_id=? WHERE id=?")) {
