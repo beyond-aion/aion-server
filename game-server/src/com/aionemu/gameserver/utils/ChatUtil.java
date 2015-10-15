@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -88,18 +90,33 @@ public class ChatUtil {
 	}
 
 	/**
-	 * @param itemLink
-	 * @return The item ID or 0 if itemLink did not contain a valid ID.
+	 * @param itemStr
+	 *          can be ID string or Aion link like "{@code [item: 100000094]}"
+	 * @return The item ID or 0 if {@code itemStr} did not contain a valid ID.
 	 */
-	public static int getItemId(String itemLink) {
-		if (itemLink == null)
+	public static int getItemId(String itemStr) {
+		return getIdFromString(itemStr, "item", "1[0-9]{8}");
+	}
+
+	/**
+	 * @param questStr
+	 *          can be ID string or Aion link like "{@code [quest: 1006]}"
+	 * @return The quest ID or 0 if {@code questStr} did not contain a valid ID.
+	 */
+	public static int getQuestId(String questStr) {
+		return getIdFromString(questStr, "quest", "[1-9][0-9]{3,4}");
+	}
+
+	private static int getIdFromString(String input, String linkAccessor, String validationPattern) {
+		if (input == null)
 			return 0;
 
-		if (itemLink.startsWith("[item:"))
-			itemLink = itemLink.substring("[item:".length()).trim();
+		if (input.startsWith("[" + linkAccessor + ":"))
+			input = input.substring(linkAccessor.length() + 2).trim();
 
-		if (itemLink.matches("^1[0-9]{8}.*$"))
-			return NumberUtils.toInt(itemLink.substring(0, 9));
+		Matcher m = Pattern.compile("^(" + validationPattern + ")(?:[^\\d].*$|$)").matcher(input);
+		if (m.find())
+			return NumberUtils.toInt(m.group(1));
 
 		return 0;
 	}
