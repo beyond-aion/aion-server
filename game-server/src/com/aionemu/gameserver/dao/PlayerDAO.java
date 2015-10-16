@@ -37,7 +37,7 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	 */
 	public abstract Map<Integer, String> getPlayerNames(Collection<Integer> playerObjectIds);
 
-	public abstract void changePlayerId(Player player, int accountId);
+	public abstract void changePlayerAccountId(Player player, int accountId);
 
 	/**
 	 * Stores player to db

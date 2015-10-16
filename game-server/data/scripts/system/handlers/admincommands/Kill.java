@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -18,9 +19,11 @@ public class Kill extends AdminCommand {
 	public Kill() {
 		super("kill", "Kills the specified NPC(s) or player(s).");
 
-		setParamInfo(" - kills your target (can be NPC or player)",
+		setParamInfo(
+			" - kills your target (can be NPC or player)",
 			"<all> [neutral|enemy] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs)",
-			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)");
+			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)"
+		);
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class Kill extends AdminCommand {
 			if (target instanceof Creature && target.getObjectId() != player.getObjectId()) {
 				String targetInfo = target.getClass().getSimpleName().toLowerCase() + ": ";
 				if (target instanceof Npc)
-					targetInfo += "[where:" + StringUtils.capitalize(target.getName()) + ";" + target.getObjectTemplate().getTemplateId() + "]";
+					targetInfo += ChatUtil.path((Npc) target);
 				else
 					targetInfo += StringUtils.capitalize(target.getName());
 				if (kill(player, (Creature) target))

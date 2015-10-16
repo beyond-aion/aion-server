@@ -205,7 +205,7 @@ public class TeleportService2 {
 				changePosition(player, mapId, instanceId, x, y, z, h, animation);
 			}
 
-		}, 2200);
+		}, 2500);
 
 	}
 

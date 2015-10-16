@@ -183,10 +183,7 @@ public class CustomConfig {
 	/**
 	 * .faction cfg
 	 */
-	@Property(key = "gameserver.faction.free", defaultValue = "true")
-	public static boolean FACTION_FREE_USE;
-
-	@Property(key = "gameserver.faction.prices", defaultValue = "10000")
+	@Property(key = "gameserver.faction.price", defaultValue = "10000")
 	public static int FACTION_USE_PRICE;
 
 	@Property(key = "gameserver.faction.cmdchannel", defaultValue = "true")

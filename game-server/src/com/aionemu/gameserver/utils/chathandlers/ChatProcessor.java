@@ -165,11 +165,10 @@ public class ChatProcessor implements GameEngine {
 			return false;
 
 		String cmdName = text.split(" ")[0];
-		String cmdParams = text.substring(cmdName.length()).trim();
-		String[] params = cmdParams.isEmpty() ? new String[] {} : cmdParams.split(" ");
+		String cmdParams = text.substring(cmdName.length());
 		for (ChatCommand cmd : getCommandList()) {
 			if (!(cmd instanceof ConsoleCommand) && cmdName.equals(cmd.getAliasWithPrefix()))
-				return cmd.process(player, params);
+				return cmd.process(player, getParamsFromString(cmdParams));
 		}
 
 		return false;
@@ -179,17 +178,28 @@ public class ChatProcessor implements GameEngine {
 		if (text == null || text.isEmpty())
 			return;
 
-		// split string to { "commandAlias", "sequence of arguments" }
-		String[] cmdItems = text.substring(ConsoleCommand.PREFIX.length()).split(" ", 2);
-		String cmdAlias = cmdItems[0];
-		String[] cmdParams = (cmdItems.length <= 1 ? new String[] {} : cmdItems[1].trim().split(" "));
-		// temporary fix because AdminCommand is already called addskill
-		if (cmdAlias.equals("addskill"))
-			cmdAlias = "addcskill";
-		ChatCommand cmd = getCommand(cmdAlias);
+		if (!text.startsWith(ConsoleCommand.PREFIX))
+			return;
 
-		if (cmd != null && cmd instanceof ConsoleCommand)
-			cmd.process(player, cmdParams);
+		String cmdName = text.split(" ")[0];
+		String cmdParams = text.substring(cmdName.length());
+
+		// TODO remove this temporary fix (AdminCommand is already called addskill)
+		if (cmdName.endsWith("addskill"))
+			cmdName = cmdName.replace("addskill", "addcskill");
+
+		ChatCommand cmd = getCommand(cmdName.substring(ConsoleCommand.PREFIX.length()));
+
+		if (cmd instanceof ConsoleCommand)
+			cmd.process(player, getParamsFromString(cmdParams));
+	}
+
+	private String[] getParamsFromString(String params) {
+		if (params == null || params.trim().isEmpty())
+			return new String[] {};
+
+		// advanced split to keep item links etc. in one piece (splitting on spaces, but only outside of square brackets)
+		return params.trim().split(" +(?=[^\\]]*(\\[|$))");
 	}
 
 	private ChatCommand getCommand(String alias) {
