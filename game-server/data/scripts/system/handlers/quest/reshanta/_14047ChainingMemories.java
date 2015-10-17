@@ -80,9 +80,8 @@ public class _14047ChainingMemories extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 				case SETPRO1:
 					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						changeQuestStep(env, 0, 1, false);
+						TeleportService2.teleportTo(player, 210060000, 2278.23f, 2217.8f, 59.27f, (byte)12, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}
@@ -93,9 +92,8 @@ public class _14047ChainingMemories extends QuestHandler {
 						return sendQuestDialog(env, 1352);
 				case SETPRO2:
 					if (var == 1) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						changeQuestStep(env, 1, 2, false);
+						TeleportService2.teleportTo(player, 210040000, 713.6f, 625.36f, 129.75f, (byte)0, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}
