@@ -1,54 +1,39 @@
 package admincommands;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Divinity
+ * @modified Neon
  */
 public class Say extends AdminCommand {
 
 	public Say() {
-		super("say");
+		super("say", "Let's your target say a message.");
+
+		setParamInfo("<message> - Sends the message as your target (npc only).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1) {
-			info(admin, null);
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		VisibleObject target = admin.getTarget();
-
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "You must select a target !");
+		if (!(admin.getTarget() instanceof Npc)) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
 			return;
 		}
 
-		StringBuilder sbMessage = new StringBuilder();
-
-		for (String p : params)
-			sbMessage.append(p + " ");
-
-		String sMessage = sbMessage.toString().trim();
-
-		if (target instanceof Player) {
-			PacketSendUtility.broadcastPacket(((Player) target), new SM_MESSAGE(((Player) target), sMessage, ChatType.NORMAL), true);
-		} else if (target instanceof Npc) {
-			// admin is not right, but works
-			PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE(((Npc) target).getObjectId(), ((Npc) target).getName(), sMessage, ChatType.NORMAL),
-				true);
-		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //say <Text>");
+		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), StringUtils.join(params, " "), ChatType.NORMAL), true);
 	}
 }
