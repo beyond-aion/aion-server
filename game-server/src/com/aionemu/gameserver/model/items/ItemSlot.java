@@ -40,6 +40,22 @@ public enum ItemSlot {
 	RIGHT_HAND(MAIN_HAND.slotIdMask | MAIN_OFF_HAND.slotIdMask, true),
 	LEFT_HAND(SUB_HAND.slotIdMask | SUB_OFF_HAND.slotIdMask, true),
 	// TORSO_GLOVE_FOOT_SHOULDER_LEG(0, true), // TODO
+	VISIBLE(MAIN_HAND.slotIdMask
+					| SUB_HAND.slotIdMask
+					| HELMET.slotIdMask
+					| TORSO.slotIdMask
+					| GLOVES.slotIdMask
+					| BOOTS.slotIdMask
+					| EARRINGS_LEFT.slotIdMask
+					| EARRINGS_RIGHT.slotIdMask
+					| NECKLACE.slotIdMask
+					| SHOULDER.slotIdMask
+					| PANTS.slotIdMask
+					| POWER_SHARD_RIGHT.slotIdMask
+					| POWER_SHARD_LEFT.slotIdMask
+					| WINGS.slotIdMask
+					| PLUME.slotIdMask,
+					true),
 
 	// STIGMA slots
 	STIGMA1(1L << 30),
@@ -95,6 +111,10 @@ public enum ItemSlot {
 
 	public static boolean isStigma(long slot) {
 		return (ALL_STIGMA.slotIdMask & slot) == slot;
+	}
+
+	public static boolean isVisible(long slot) {
+		return (VISIBLE.slotIdMask & slot) == slot;
 	}
 
 	public static ItemSlot[] getSlotsFor(long slot) {
