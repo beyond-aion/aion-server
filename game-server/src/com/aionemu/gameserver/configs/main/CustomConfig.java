@@ -77,12 +77,6 @@ public class CustomConfig {
 	public static int UNSTUCK_DELAY;
 
 	/**
-	 * The price for using dye command
-	 */
-	@Property(key = "gameserver.admin.dye.price", defaultValue = "1000000")
-	public static int DYE_PRICE;
-
-	/**
 	 * Base Fly Time
 	 */
 	@Property(key = "gameserver.base.flytime", defaultValue = "60")
