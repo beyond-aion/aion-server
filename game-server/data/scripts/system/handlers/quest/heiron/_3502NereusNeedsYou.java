@@ -65,7 +65,7 @@ public class _3502NereusNeedsYou extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203752) {
+			if (targetId == 204656) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
