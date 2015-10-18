@@ -5,11 +5,13 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHAT_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
  * @author prix
+ * @modified Neon
  */
 public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 
@@ -21,13 +23,13 @@ public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		playerName = readS();
+		playerName = ChatUtil.getRealAdminName(readS());
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		Player target = World.getInstance().findPlayer(playerName);
+		Player target = World.getInstance().findPlayer(ChatUtil.getRealAdminName(playerName));
 		if (target == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF);
 			return;
