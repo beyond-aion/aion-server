@@ -44,8 +44,7 @@ public class ChatUtil {
 	/**
 	 * This creates a colored text message.<br>
 	 * Does not work in public chats. The valid message length is limited. In fact the message limit depends on the length of the internal link
-	 * parameters, the whole
-	 * link becomes invalid when exceeding x characters.
+	 * parameters, the whole link becomes invalid when exceeding x characters.
 	 * 
 	 * @param message
 	 * @param r
@@ -58,6 +57,14 @@ public class ChatUtil {
 	 */
 	public static String color(String message, int r, int g, int b) {
 		return String.format("[color:%s;%s %s %s]", message, DF.format(r / 255f), DF.format(g / 255f), DF.format(b / 255f));
+	}
+
+	/**
+	 * This creates a click-able character name.<br>
+	 * Does not work in public chats.
+	 */
+	public static String name(String name) {
+		return String.format("[charname:%s;1 1 1]", name); // the 3 parameters are color values, but client doesn't render them anyways
 	}
 
 	/**
