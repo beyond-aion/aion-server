@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,12 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class ChatUtil {
 
+	private static final DecimalFormat DF = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
+
+	static {
+		DF.applyPattern(".##");
+	}
+
 	/**
 	 * @see #color(String, int, int, int)
 	 */
@@ -24,6 +32,13 @@ public class ChatUtil {
 			color = Color.WHITE;
 
 		return color(message, color.getRed(), color.getGreen(), color.getBlue());
+	}
+
+	/**
+	 * @see #color(String, int, int, int)
+	 */
+	public static String color(String message, int rgb) {
+		return color(message, (rgb & 0xFF0000) >> 16, (rgb & 0xFF00) >> 8, rgb & 0xFF);
 	}
 
 	/**
@@ -42,7 +57,7 @@ public class ChatUtil {
 	 * @return The color encoded message.
 	 */
 	public static String color(String message, int r, int g, int b) {
-		return String.format("[color:%s;%.2g %.2g %.2g]", message, r / 255d, g / 255d, b / 255d);
+		return String.format("[color:%s;%s %s %s]", message, DF.format(r / 255f), DF.format(g / 255f), DF.format(b / 255f));
 	}
 
 	/**
@@ -73,8 +88,16 @@ public class ChatUtil {
 	}
 
 	public static String position(String label, long worldId, float x, float y, float z) {
-		// TODO: need rework for abyss map
-		return String.format("[pos:%s;%d %f %f %f -1]", label, worldId, x, y, z);
+		byte subId = 0;
+		if (worldId == 400010000) { // abyss map
+			if (z > 1800 && z < 2800 && x > 1600 && x < 2700 && y > 1400 && y < 2500)
+				subId = 2; // core
+			else if (z > 2250)
+				subId = 3; // upper
+			else
+				subId = 1; // lower
+		}
+		return String.format("[pos:%s;%d %s %s %s %d]", label, worldId, DF.format(x), DF.format(y), DF.format(z), subId);
 	}
 
 	public static String item(int itemId) {
@@ -114,7 +137,7 @@ public class ChatUtil {
 		if (input.startsWith("[" + linkAccessor + ":"))
 			input = input.substring(linkAccessor.length() + 2).trim();
 
-		Matcher m = Pattern.compile("^(" + validationPattern + ")(?:[^\\d].*$|$)").matcher(input);
+		Matcher m = Pattern.compile("^(" + validationPattern + ")(?:[^\\d][^\\[]*\\]?$|$)").matcher(input);
 		if (m.find())
 			return NumberUtils.toInt(m.group(1));
 
