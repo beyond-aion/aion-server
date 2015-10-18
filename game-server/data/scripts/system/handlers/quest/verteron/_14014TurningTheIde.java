@@ -18,7 +18,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _14014TurningTheIde extends QuestHandler {
 
-	private final static int questId = 14014;
+	private final static int questId = 14014;	
+	
+	private final int[] questNpcs = { 203146, 203147, 802045, 203098 };
+	private final int[] mobs = { 210178, 216892 };
 
 	public _14014TurningTheIde() {
 		super(questId);
@@ -29,12 +32,10 @@ public class _14014TurningTheIde extends QuestHandler {
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182215314, questId);
-		qe.registerQuestNpc(203146).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203147).addOnTalkEvent(questId);
-		qe.registerQuestNpc(802045).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203164).addOnTalkEvent(questId);
-		qe.registerQuestNpc(210178).addOnKillEvent(questId);
-		qe.registerQuestNpc(216892).addOnKillEvent(questId);
+		for (int questNpc : questNpcs)
+			qe.registerQuestNpc(questNpc).addOnTalkEvent(questId);
+		for (int mob : mobs)
+			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class _14014TurningTheIde extends QuestHandler {
 								return checkQuestItems(env, 3, 5, false, 2375, 2120);
 					}
 					break;
-				case 203164:
+				case 203098:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 8)
@@ -94,7 +95,7 @@ public class _14014TurningTheIde extends QuestHandler {
 		}
 
 		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203164)
+			if (targetId == 203098)
 				return sendQuestEndDialog(env);
 		}
 		return false;
@@ -102,7 +103,6 @@ public class _14014TurningTheIde extends QuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		int[] mobs = { 210178, 216892 };
 		return defaultOnKillEvent(env, mobs, 5, 7) || defaultOnKillEvent(env, mobs, 7, true);
 	}
 

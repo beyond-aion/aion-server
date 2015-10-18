@@ -27,7 +27,7 @@ public class _14053DangerCubed extends QuestHandler {
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(204020).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204501).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204602).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class _14053DangerCubed extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204501)
+			if (targetId == 204602)
 				return sendQuestEndDialog(env);
 		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
@@ -69,12 +69,12 @@ public class _14053DangerCubed extends QuestHandler {
 				case SETPRO2:
 					if (var == 1) {
 						changeQuestStep(env, 1, 2, false); // 2
-						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2455.827f, 243.22636f, 421.75235f, (byte) 92,
+						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2011.4f, 1395.23f, 118.13f, (byte)60,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
 			}
-		} else if (targetId == 204501) {
+		} else if (targetId == 204602) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 0)

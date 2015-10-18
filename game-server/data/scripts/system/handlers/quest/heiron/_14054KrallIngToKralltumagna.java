@@ -17,7 +17,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 		214081, 214082, 214083, 214084, 214085, 214086, 214087, 214088 };
 	private final static int baranath = 702040;
 	private final static int vitusa = 233861;
-	private final static int[] npc_ids = { 204500, 800413, 802050 };
+	private final static int[] npc_ids = { 204602, 800413, 802050 };
 
 	public _14054KrallIngToKralltumagna() {
 		super(questId);
@@ -59,7 +59,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204500: // Perento
+				case 204602: // Atalante
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -96,7 +96,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 			}
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204500) // Perento
+			if (targetId == 800413) // Javlantia
 				return sendQuestEndDialog(env);
 		}
 		return false;

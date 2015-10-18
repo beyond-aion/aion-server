@@ -8,6 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -53,7 +54,8 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204020) {
-				removeQuestItem(env, 182201005, 1);
+				removeQuestItem(env, 182201004, 1);
+				giveQuestItem(env, 182201005, 1);
 				return sendQuestEndDialog(env);
 			}
 		} else if (qs.getStatus() != QuestStatus.START) {
@@ -66,12 +68,8 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 				case SETPRO1:
 					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+						return defaultCloseDialog(env, 0, 1);
 					}
-					return false;
 			}
 		} else if (targetId == 204045) {
 			switch (env.getDialog()) {
@@ -121,39 +119,21 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
-						return sendQuestDialog(env, 2120);
+						return sendQuestDialog(env, 2034);
+					break;
+				case CHECK_USER_HAS_QUEST_ITEM:
+					if (var == 2)
+						return checkQuestItems(env, 2, 2, false, 2802, 2717);
 				case SETPRO4:
 					if (var == 2) {
 						if (!giveQuestItem(env, 182201004, 1))
 							return true;
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						changeQuestStep(env, 2, 2, true);
+						TeleportService2.teleportTo(player, 210020000, 1608.11f, 1528.7f, 318.07f, (byte)118, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
-					return false;
 			}
-		} else if (targetId == 204020) {
-			switch (env.getDialog()) {
-				case QUEST_SELECT:
-					if (var == 5)
-						return sendQuestDialog(env, 2716);
-				case SELECT_ACTION_2717:
-					removeQuestItem(env, 182201004, 1);
-				case SETPRO5:
-					if (var == 5) {
-						if (!giveQuestItem(env, 182201005, 1))
-							return true;
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
-					return false;
-			}
-		}
+		} 
 		return false;
 	}
 }

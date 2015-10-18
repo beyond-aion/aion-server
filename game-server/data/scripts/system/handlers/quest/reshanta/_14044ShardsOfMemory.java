@@ -1,6 +1,7 @@
 package quest.reshanta;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -8,6 +9,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -52,9 +54,8 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 						case SETPRO1:
 							if (var == 0) {
-								qs.setQuestVarById(0, var + 1);
-								updateQuestStatus(env);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+								changeQuestStep(env, 0, 1, false);
+								TeleportService2.teleportTo(player, 210010000, 244.09f, 1638.28f, 100.38f, (byte)52, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}
@@ -67,16 +68,13 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 						case SETPRO3:
 							if (var == 2) {
-								qs.setQuestVarById(0, var + 1);
-								updateQuestStatus(env);
-								playQuestMovie(env, 271);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-								return true;
+								return defaultCloseDialog(env, 2, 3);
 							}
 					}
 				}
 					break;
 				case 700355:
+					playQuestMovie(env, 271);
 					return useQuestObject(env, 3, 3, true, false);
 				case 790001: {
 					switch (env.getDialog()) {
@@ -85,9 +83,8 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 						case SETPRO2:
 							if (var == 1) {
-								qs.setQuestVarById(0, var + 1);
-								updateQuestStatus(env);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+								changeQuestStep(env, 1, 2, false);
+								TeleportService2.teleportTo(player, 400010000, 2929.65f, 964.836f, 1538.17f, (byte)43, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}

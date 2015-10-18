@@ -1028,6 +1028,17 @@
 			<drop item_id="188052724" name="Beritran Hoard" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Illuminary Obelisk -->
+	<npc_drop npc_id="730884" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Instance Item">
+			<drop item_id="164000289" name="Crystalline Idium Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="730885" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Cannonball">
+			<drop item_id="164000290" name="Danuar Cannonball" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Krotan Barracks -->
 	<npc_drop npc_id="702288" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
@@ -1561,6 +1572,8 @@
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Shugo Imperial Tomb -->
+		<!-- Custom Drops for 831122, 831123, 831124, 831373 -->
 	<!-- The Hexway -->
 	<npc_drop npc_id="701662" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Coin">
