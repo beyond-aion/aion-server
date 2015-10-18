@@ -17,7 +17,7 @@ public class Questrestart extends PlayerCommand {
 	public Questrestart() {
 		super("questrestart", "Restarts a bugged Quest.");
 
-		setParamInfo("<quest link|ID> - restarts the specified quest.");
+		setParamInfo("<quest link|ID> - Restarts the specified quest.");
 	}
 
 	@Override
