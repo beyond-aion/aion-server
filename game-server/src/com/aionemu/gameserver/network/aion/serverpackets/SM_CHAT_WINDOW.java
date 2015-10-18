@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.Collection;
 import java.util.Iterator;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
@@ -12,7 +13,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author ginho1
- * @edit Cheatkiller
+ * @modified Cheatkiller, Neon
  */
 public class SM_CHAT_WINDOW extends AionServerPacket {
 
@@ -32,7 +33,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 		if (isGroup) {
 			if (target.isInGroup2()) {
 				writeC(2); // group
-				writeS(target.getName());
+				writeS(target.getName(AdminConfig.CUSTOMTAG_ENABLE));
 				PlayerGroup group = target.getPlayerGroup2();
 				writeD(group.getTeamId());
 				writeS(group.getLeader().getName());
@@ -85,7 +86,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 				}
 			} else {
 				writeC(4); // no group
-				writeS(target.getName());
+				writeS(target.getName(AdminConfig.CUSTOMTAG_ENABLE));
 				writeD(0); // no group yet
 				writeC(target.getPlayerClass().getClassId());
 				writeC(target.getLevel());
@@ -93,7 +94,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 			}
 		} else {
 			writeC(1);
-			writeS(target.getName());
+			writeS(target.getName(AdminConfig.CUSTOMTAG_ENABLE));
 			writeS(target.getLegion() != null ? target.getLegion().getLegionName() : "");
 			writeC(target.getLevel());
 			writeH(target.getPlayerClass().getClassId());

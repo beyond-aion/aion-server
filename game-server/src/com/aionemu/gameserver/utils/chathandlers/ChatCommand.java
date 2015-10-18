@@ -1,11 +1,14 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
+import java.awt.Color;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -18,7 +21,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	private String alias;
 	private String description;
 	private String[] paramInfo = {};
-	private Byte level;
+	private byte level;
 	static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
 
 	/**
@@ -40,7 +43,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	public final boolean run(Player player, String... params) {
 		if (params.length == 1 && "help".equalsIgnoreCase(params[0])) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Command: [color:" + getAliasWithPrefix() + ";1 1 1]\n");
+			sb.append("Command: " + ChatUtil.color(getAliasWithPrefix(), Color.WHITE) + "\n");
 			sb.append("\t" + (getDescription().isEmpty() ? "No description available." : getDescription()) + "\n");
 			sb.append(getFormattedSyntaxInfo());
 			sendMessagePackets(player, sb.toString());
@@ -74,14 +77,14 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 
 	/**
 	 * Sets the command parameter info.<br>
-	 * This parameter info is needed to generate the syntax info in {@link ChatCommand#sendInfo(Player, String...)}.<br>
+	 * This parameter info is needed to generate the syntax info in {@link #sendInfo(Player, String...)}.<br>
 	 * You can pass multiple comma separated <b>paramInfo</b> strings. Each string will result in a line of text output.
 	 * 
 	 * @param paramInfo
 	 *          strings should look like this:<br>
-	 *          &nbsp;&nbsp;" - Short description for no parameter",<br>
-	 *          &nbsp;&nbsp;"&lt;param1a|param1b&gt; - Short parameter description",<br>
-	 *          &nbsp;&nbsp;"&lt;param1&gt; &lt;param2&gt; [optional param3] - Short parameter description"
+	 *          &nbsp;&nbsp;" - Short description for no parameter.",<br>
+	 *          &nbsp;&nbsp;"&lt;param1a|param1b&gt; - Short parameter description.",<br>
+	 *          &nbsp;&nbsp;"&lt;param1&gt; &lt;param2&gt; [optional param3] - Short parameter description."
 	 */
 	protected final void setParamInfo(String... paramInfo) {
 		this.paramInfo = paramInfo;
@@ -97,7 +100,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 		if (getParamInfo().length > 0) {
 			for (String info : getParamInfo()) {
 				if (StringUtils.startsWithAny(info, " ", "<", "[", "-"))
-					sb.append("\n\t" + this.getAliasWithPrefix() + " " + info.trim());
+					sb.append("\n\t" + getAliasWithPrefix() + " " + info.trim());
 				else
 					sb.append("\n" + info);
 			}
@@ -107,11 +110,11 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 		return sb.toString();
 	}
 
-	public final void setAccessLevel(Byte level) {
+	public final void setAccessLevel(byte level) {
 		this.level = level;
 	}
 
-	public final Byte getLevel() {
+	public final byte getLevel() {
 		return level;
 	}
 
@@ -141,14 +144,14 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	/**
 	 * Sends an info message to the player.<br>
 	 * If no (or <tt>null</tt>) message parameter is specified, the default syntax info will be sent.<br>
-	 * You can set syntax info via {@link ChatCommand#setParamInfo(String...)}
+	 * You can set syntax info via {@link #setParamInfo(String...)}
 	 * 
 	 * @param player
 	 *          player who will receive the message
 	 * @param message
 	 *          message text (insert newlines with \n or by passing comma separated strings)
 	 */
-	public final void sendInfo(Player player, String... message) {
+	protected final void sendInfo(Player player, String... message) {
 		StringBuilder sb = new StringBuilder();
 		if (message != null && message.length >= 1) {
 			for (int i = 0; i < message.length; i++) {

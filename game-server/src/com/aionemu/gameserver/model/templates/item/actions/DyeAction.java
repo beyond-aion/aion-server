@@ -14,6 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author IceReaper
@@ -38,21 +39,12 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 		return true;
 	}
 
-	private int getColorBGRA() {
-		if (color.equals("no")) {
-			return 0;
-		} else {
-			int rgb = Integer.parseInt(color, 16);
-			return 0xFF | ((rgb & 0xFF) << 24) | ((rgb & 0xFF00) << 8) | ((rgb & 0xFF0000) >>> 8);
-		}
-	}
-
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		if (targetItem.getItemSkinTemplate().isItemDyePermitted()) {
-			if (getColorBGRA() == 0) {
+			if (color.equals("no")) {
 				targetItem.setItemColor(0);
 				targetItem.setColorExpireTime(0);
 			} else {
@@ -66,18 +58,19 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 				PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment()
 					.getEquippedForApparence()), true);
 				player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			}
-
-			// item is not equipped
-			else
+			} else { // item is not equipped
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
+			}
 
 			ItemPacketService.updateItemAfterInfoChange(player, targetItem);
 		}
 	}
 
 	public int getColor() {
-		return getColorBGRA();
+		if (color.equals("no"))
+			return 0;
+
+		return Util.toColorBGRA(Integer.parseInt(color, 16));
 	}
 
 	@Override

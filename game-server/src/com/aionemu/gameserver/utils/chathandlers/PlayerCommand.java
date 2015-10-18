@@ -11,11 +11,6 @@ public abstract class PlayerCommand extends ChatCommand {
 
 	public final static String PREFIX = ".";
 
-	// only for backwards compatibility TODO: remove when all commands are updated
-	public PlayerCommand(String alias) {
-		this(alias, "");
-	}
-
 	/**
 	 * Registers a new player command.
 	 * 
