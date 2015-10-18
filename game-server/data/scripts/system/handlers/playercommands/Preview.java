@@ -126,7 +126,7 @@ public class Preview extends PlayerCommand {
 	private static List<Item> getPreviewItems(Player player, Item previewItem) {
 		long previewSlot = previewItem.getEquipmentSlot();
 		List<Item> previewItems = new FastTable<>();
-		previewItems.addAll(player.getEquipment().getEquippedForApparence());
+		previewItems.addAll(player.getEquipment().getEquippedForAppearence());
 
 		// put item in the new appearance list (at the correct position)
 		for (int i = 0; i < previewItems.size(); i++) {
@@ -160,7 +160,7 @@ public class Preview extends PlayerCommand {
 			@Override
 			public void run() {
 				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(objId, player.getEquipment().getEquippedForApparence()));
+					PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(objId, player.getEquipment().getEquippedForAppearence()));
 					PacketSendUtility.sendMessage(player, "Preview time ended.");
 				}
 				PREVIEW_RESETS.remove(objId);

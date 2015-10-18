@@ -67,7 +67,7 @@ public class Dye extends AdminCommand {
 			}
 		}
 
-		List<Item> appearanceItems = target.getEquipment().getEquippedForApparence();
+		List<Item> appearanceItems = target.getEquipment().getEquippedForAppearence();
 		for (Item item : appearanceItems) {
 			if (item.getItemSkinTemplate().isItemDyePermitted())
 				item.setItemColor(itemColor);

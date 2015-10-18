@@ -13,6 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 
@@ -47,16 +48,19 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 			if (color.equals("no")) {
 				targetItem.setItemColor(0);
 				targetItem.setColorExpireTime(0);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_REMOVE_SUCCEED(ChatUtil.item(targetItem.getItemId())));
 			} else {
-				targetItem.setItemColor(parentItem.getItemTemplate().getTemplateId());
+				int colorItemId = parentItem.getItemId();
+				targetItem.setItemColor(colorItemId);
 				if (minutes != null)
 					targetItem.setColorExpireTime((int) (System.currentTimeMillis() / 1000 + minutes * 60));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_SUCCEED(ChatUtil.item(targetItem.getItemId()), ChatUtil.item(colorItemId)));
 			}
 
 			// item is equipped, so need broadcast packet
 			if (player.getEquipment().getEquippedItemByObjId(targetItem.getObjectId()) != null) {
 				PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment()
-					.getEquippedForApparence()), true);
+					.getEquippedForAppearence()), true);
 				player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 			} else { // item is not equipped
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);

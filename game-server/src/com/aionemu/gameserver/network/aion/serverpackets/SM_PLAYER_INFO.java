@@ -115,7 +115,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeH(pcd.getDp());// current dp
 		writeC(0x00);// unk (0x00)
 
-		List<Item> items = player.getEquipment().getEquippedForApparence();
+		List<Item> items = player.getEquipment().getEquippedForAppearence();
 		int mask = 0;
 		for (Item item : items) {
 			if (item.getItemTemplate().isTwoHandWeapon()) {

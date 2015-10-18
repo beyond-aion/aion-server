@@ -632,8 +632,8 @@ public class Equipment {
 		return equippedItems;
 	}
 
-	public FastTable<Item> getEquippedForApparence() {
-		FastTable<Item> equippedItems = new FastTable<>();
+	public List<Item> getEquippedForAppearence() {
+		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
 				equippedItems.add(item);
@@ -920,7 +920,7 @@ public class Equipment {
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);
-		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForApparence()),
+		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForAppearence()),
 			true);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
@@ -1153,7 +1153,7 @@ public class Equipment {
 						ItemPacketService.updateItemAfterInfoChange(owner, item);
 
 						equip(slot, item);
-						PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getEquippedForApparence()), true);
+						PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getEquippedForAppearence()), true);
 					}
 				}, 5000));
 			}
