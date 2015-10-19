@@ -1296,6 +1296,196 @@
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Left Wing Chamber -->
+	<npc_drop npc_id="700466" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701481" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000861" name="Guardian Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000787" name="Guardian Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000907" name="Guardian Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000860" name="Guardian Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000786" name="Guardian Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000906" name="Guardian Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000811" name="Guardian Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000895" name="Guardian Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000896" name="Guardian Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001891" name="Guardian Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001892" name="Guardian Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001893" name="Guardian Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001894" name="Guardian Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100911" name="Guardian Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300866" name="Guardian Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500836" name="Guardian Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600821" name="Guardian Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100823" name="Guardian Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300841" name="Guardian Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500812" name="Guardian Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600785" name="Guardian Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100773" name="Guardian Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300770" name="Guardian Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500758" name="Guardian Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600769" name="Guardian Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100815" name="Guardian Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300819" name="Guardian Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500802" name="Guardian Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600794" name="Guardian Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100851" name="Guardian Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300877" name="Guardian Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500823" name="Guardian Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600780" name="Guardian Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701486" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000865" name="Archon Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000791" name="Archon Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000911" name="Archon Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000864" name="Archon Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000790" name="Archon Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000910" name="Archon Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000813" name="Archon Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000899" name="Archon Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000900" name="Archon Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001899" name="Archon Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001900" name="Archon Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001901" name="Archon Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001902" name="Archon Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100913" name="Archon Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300868" name="Archon Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500838" name="Archon Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600823" name="Archon Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100825" name="Archon Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300843" name="Archon Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500814" name="Archon Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600787" name="Archon Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100775" name="Archon Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300772" name="Archon Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500760" name="Archon Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600771" name="Archon Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100817" name="Archon Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300821" name="Archon Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500804" name="Archon Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600796" name="Archon Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100853" name="Archon Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300879" name="Archon Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500825" name="Archon Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600782" name="Archon Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Linkgate Foundry -->
 	<npc_drop npc_id="234992" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Instance Item">
@@ -1480,6 +1670,196 @@
 			<drop item_id="114601188" name="Defeated Reian's Sabatons" min_amount="1" max_amount="1" chance="30"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Right Wing Chamber -->
+	<npc_drop npc_id="700471" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701482" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000861" name="Guardian Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000787" name="Guardian Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000907" name="Guardian Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000860" name="Guardian Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000786" name="Guardian Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000906" name="Guardian Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000811" name="Guardian Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000895" name="Guardian Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000896" name="Guardian Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001891" name="Guardian Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001892" name="Guardian Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001893" name="Guardian Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001894" name="Guardian Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100911" name="Guardian Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300866" name="Guardian Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500836" name="Guardian Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600821" name="Guardian Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100823" name="Guardian Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300841" name="Guardian Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500812" name="Guardian Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600785" name="Guardian Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100773" name="Guardian Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300770" name="Guardian Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500758" name="Guardian Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600769" name="Guardian Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100815" name="Guardian Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300819" name="Guardian Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500802" name="Guardian Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600794" name="Guardian Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100851" name="Guardian Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300877" name="Guardian Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500823" name="Guardian Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600780" name="Guardian Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701487" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000865" name="Archon Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000791" name="Archon Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000911" name="Archon Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000864" name="Archon Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000790" name="Archon Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000910" name="Archon Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000813" name="Archon Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000899" name="Archon Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000900" name="Archon Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001899" name="Archon Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001900" name="Archon Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001901" name="Archon Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001902" name="Archon Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100913" name="Archon Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300868" name="Archon Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500838" name="Archon Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600823" name="Archon Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100825" name="Archon Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300843" name="Archon Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500814" name="Archon Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600787" name="Archon Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100775" name="Archon Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300772" name="Archon Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500760" name="Archon Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600771" name="Archon Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100817" name="Archon Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300821" name="Archon Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500804" name="Archon Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600796" name="Archon Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100853" name="Archon Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300879" name="Archon Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500825" name="Archon Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600782" name="Archon Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Satra Treasure Hoard -->
 	<npc_drop npc_id="701460" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
@@ -1572,6 +1952,7 @@
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
 		</drop_group>
 	</npc_drop>
+<<<<<<< HEAD
 	<!-- Steel Rake -->
 	<npc_drop npc_id="700553" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Treasure Key">
@@ -1582,6 +1963,393 @@
 		<drop_group race="PC_ALL" use_category="true" name="Named Box (Unique)">
 			<drop item_id="188051413" name="Koakoa's Fabled Pants Chest" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="188051415" name="Lahulahu's Fabled Jacket Chest" min_amount="1" max_amount="1" chance="10"/>
+=======
+	<!-- Shugo Imperial Tomb -->
+		<!-- Custom Drops for 831122, 831123, 831124, 831373 -->
+	<!-- Sulfur Tree Nest -->
+	<npc_drop npc_id="214804" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="2" max_amount="2" chance="5"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="2" max_amount="2" chance="3"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="2" max_amount="2" chance="2"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="2" max_amount="2" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700462" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700463" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700464" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000031" name="Silver Medal" min_amount="1" max_amount="1" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Legend)">
+			<drop item_id="101700616" name="Reshanta Bow" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100200697" name="Reshanta Dagger" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100900587" name="Reshanta Greatsword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100100577" name="Reshanta Mace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100500598" name="Reshanta Orb" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101300560" name="Reshanta Polearm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101500601" name="Reshanta Staff" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100600632" name="Reshanta Spellbook" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="100000762" name="Reshanta Sword" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101800572" name="Reshanta Pistol" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="101900567" name="Reshanta Aethercannon" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102000597" name="Reshanta Harp" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="102100520" name="Reshanta Cipher-Blade" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Legend)">
+			<drop item_id="115000855" name="Reshanta Shield" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Legend)">
+			<drop item_id="110100968" name="Reshanta Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110300913" name="Reshanta Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110500881" name="Reshanta Hauberk" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110600865" name="Reshanta Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113100872" name="Reshanta Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113300889" name="Reshanta Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113500855" name="Reshanta Chausses" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113600830" name="Reshanta Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112100819" name="Reshanta Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112300813" name="Reshanta Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112500804" name="Reshanta Spaulders" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112600815" name="Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111100862" name="Reshanta Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111300863" name="Reshanta Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111500853" name="Reshanta Handguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111600841" name="Reshanta Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114100897" name="Reshanta Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114300922" name="Reshanta Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114500865" name="Reshanta Brogans" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701480" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000861" name="Guardian Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000787" name="Guardian Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000907" name="Guardian Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000860" name="Guardian Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000786" name="Guardian Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000906" name="Guardian Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000811" name="Guardian Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000895" name="Guardian Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000896" name="Guardian Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001891" name="Guardian Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001892" name="Guardian Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001893" name="Guardian Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001894" name="Guardian Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100911" name="Guardian Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300866" name="Guardian Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500836" name="Guardian Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600821" name="Guardian Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100823" name="Guardian Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300841" name="Guardian Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500812" name="Guardian Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600785" name="Guardian Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100773" name="Guardian Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300770" name="Guardian Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500758" name="Guardian Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600769" name="Guardian Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100815" name="Guardian Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300819" name="Guardian Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500802" name="Guardian Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600794" name="Guardian Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100851" name="Guardian Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300877" name="Guardian Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500823" name="Guardian Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600780" name="Guardian Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701485" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="120000861" name="Guardian Squad Leader's Aquamarine Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000787" name="Guardian Squad Leader's Aquamarine Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000907" name="Guardian Squad Leader's Aquamarine Ring" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="120000860" name="Guardian Squad Leader's Topaz Earrings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="121000786" name="Guardian Squad Leader's Topaz Necklace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="122000906" name="Guardian Squad Leader's Topaz Ring" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115000811" name="Guardian Squad Leader's Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Unique)">
+			<drop item_id="123000895" name="Guardian Squad Leader's Leather Belt" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="123000896" name="Guardian Squad Leader's Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125001891" name="Guardian Squad Leader's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001892" name="Guardian Squad Leader's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001893" name="Guardian Squad Leader's Chain Helm" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125001894" name="Guardian Squad Leader's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110100911" name="Guardian Squad Leader's Tunic" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110300866" name="Guardian Squad Leader's Jerkin" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110500836" name="Guardian Squad Leader's Hauberk" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="110600821" name="Guardian Squad Leader's Breastplate" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113100823" name="Guardian Squad Leader's Leggings" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113300841" name="Guardian Squad Leader's Breeches" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113500812" name="Guardian Squad Leader's Chausses" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="113600785" name="Guardian Squad Leader's Greaves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112100773" name="Guardian Squad Leader's Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112300770" name="Guardian Squad Leader's Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112500758" name="Guardian Squad Leader's Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112600769" name="Guardian Squad Leader's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111100815" name="Guardian Squad Leader's Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111300819" name="Guardian Squad Leader's Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111500802" name="Guardian Squad Leader's Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111600794" name="Guardian Squad Leader's Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114100851" name="Guardian Squad Leader's Shoes" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114300877" name="Guardian Squad Leader's Boots" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114500823" name="Guardian Squad Leader's Brogans" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="114600780" name="Guardian Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+>>>>>>> 8fcddccf32951e5895feb221c95e0e587c228167
 		</drop_group>
 	</npc_drop>
 	<!-- The Hexway -->
