@@ -1952,7 +1952,6 @@
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
 		</drop_group>
 	</npc_drop>
-<<<<<<< HEAD
 	<!-- Steel Rake -->
 	<npc_drop npc_id="700553" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Treasure Key">
@@ -1963,7 +1962,8 @@
 		<drop_group race="PC_ALL" use_category="true" name="Named Box (Unique)">
 			<drop item_id="188051413" name="Koakoa's Fabled Pants Chest" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="188051415" name="Lahulahu's Fabled Jacket Chest" min_amount="1" max_amount="1" chance="10"/>
-=======
+		</drop_group>
+	</npc_drop>
 	<!-- Shugo Imperial Tomb -->
 		<!-- Custom Drops for 831122, 831123, 831124, 831373 -->
 	<!-- Sulfur Tree Nest -->
@@ -2349,7 +2349,6 @@
 			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
->>>>>>> 8fcddccf32951e5895feb221c95e0e587c228167
 		</drop_group>
 	</npc_drop>
 	<!-- The Hexway -->
