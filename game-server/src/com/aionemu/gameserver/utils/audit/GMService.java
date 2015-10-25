@@ -7,14 +7,16 @@ import java.util.Set;
 import javolution.util.FastMap;
 import javolution.util.FastSet;
 
+import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author MrPoke
@@ -27,16 +29,15 @@ public class GMService {
 	}
 
 	private Map<Integer, Player> gms = new FastMap<Integer, Player>().shared();
-	private boolean announceAny = false;
 	private Set<Byte> announceList;
 
 	private GMService() {
-		announceList = new FastSet<>();
-		announceAny = AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*");
-		if (!announceAny) {
+		if (AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*")) {
+			announceList = null;
+		} else {
+			announceList = new FastSet<>();
 			for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
-				if (!level.equals("0"))
-					announceList.add(Byte.parseByte(level));
+				announceList.add(Byte.parseByte(level));
 		}
 	}
 
@@ -47,7 +48,7 @@ public class GMService {
 	public void onPlayerLogin(Player player) {
 		if (player.isGM()) {
 			gms.put(player.getObjectId(), player);
-			broadcastGMConnectionMessage(player, "login", "%s logged in.");
+			broadcastGMConnectionMessage(player, true);
 
 			String delimiter = "=============================";
 			StringBuilder sb = new StringBuilder(delimiter);
@@ -87,7 +88,11 @@ public class GMService {
 
 	public void onPlayerLogout(Player player) {
 		if (gms.remove(player.getObjectId()) != null)
-			broadcastGMConnectionMessage(player, "logout", "%s went offline.");
+			broadcastGMConnectionMessage(player, false);
+	}
+
+	public boolean isAnnounceable(Player gm) {
+		return gm.isGM() && gm.isWispable() && (announceList == null || announceList.contains(gm.getAccessLevel()));
 	}
 
 	public void broadcastMessageToGMs(String message) {
@@ -96,21 +101,29 @@ public class GMService {
 		}
 	}
 
-	private void broadcastMessageToAllPlayers(String message) {
-		for (Player player : World.getInstance().getAllPlayers()) {
-			PacketSendUtility.sendYellowMessage(player, message);
-		}
-	}
+	private void broadcastGMConnectionMessage(Player gm, boolean connected) {
+		if (!isAnnounceable(gm))
+			return;
 
-	private void broadcastGMConnectionMessage(Player gm, String event, String format) {
-		if (announceAny || announceList.contains(gm.getAccessLevel())) {
-			String message = String.format(format, AdminConfig.CUSTOMTAG_ENABLE ? gm.getName(true) : "GM: " + gm.getName());
+		String name = AdminConfig.CUSTOMTAG_ENABLE ? ChatUtil.name(gm.getName(true)) : "GM: " + ChatUtil.name(gm.getName());
+		SM_SYSTEM_MESSAGE sysMsg = connected ? SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGIN_BUDDY(name) : SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGOFF_BUDDY(name);
 
-			if (("logout".equals(event) && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)
-				|| ("login".equals(event) && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS))
-				broadcastMessageToAllPlayers(message);
-			else
-				broadcastMessageToGMs(message);
+		if ((connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS)) {
+			PacketSendUtility.broadcastFilteredPacket(sysMsg, new ObjectFilter<Player>() {
+
+				@Override
+				public boolean acceptObject(Player player) {
+					return player.getObjectId() != gm.getObjectId();
+				}
+			});
+		} else {
+			PacketSendUtility.broadcastFilteredPacket(sysMsg, new ObjectFilter<Player>() {
+
+				@Override
+				public boolean acceptObject(Player player) {
+					return player.isGM() && player.getObjectId() != gm.getObjectId();
+				}
+			});
 		}
 	}
 
