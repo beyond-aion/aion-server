@@ -86,7 +86,7 @@ public class Decompose extends PlayerCommand {
 
 					@Override
 					public void abort() {
-						cancelTask(player, observer, "Decomposing aborted: Processed " + (totalCount - 1) + "x " + ChatUtil.item(itemId) + ".");
+						cancelTask(player, observer, "Decomposing aborted: Processed " + Math.max(0, totalCount - 1) + "x " + ChatUtil.item(itemId) + ".");
 					}
 				};
 
@@ -115,7 +115,7 @@ public class Decompose extends PlayerCommand {
 				remainingCount--;
 				totalCount++;
 			}
-		}, 0, DecomposeAction.USAGE_DELAY + 100));
+		}, 10, DecomposeAction.USAGE_DELAY + 100));
 	}
 
 	private void cancelTask(Player player, ItemUseObserver observer, String message) {
