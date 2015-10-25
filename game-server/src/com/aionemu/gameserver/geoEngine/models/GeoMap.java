@@ -49,7 +49,7 @@ public class GeoMap extends NodeEx {
 	}
 
 	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
-		if (!GeoDataConfig.GEO_DOORS_ENABLE)
+		if (!GeoDataConfig.GEO_DOORS_ENABLE || !GeoDataConfig.GEO_ENABLE)
 			return null;
 		String mesh = meshFile.toUpperCase();
 		Vector3f templatePoint = new Vector3f(x, y, z);
