@@ -11,21 +11,21 @@ public class AdminConfig {
 	 * Admin properties
 	 */
 	@Property(key = "gameserver.administration.gmlevel", defaultValue = "3")
-	public static int GM_LEVEL;
+	public static byte GM_LEVEL;
 	@Property(key = "gameserver.administration.gmpanel", defaultValue = "3")
-	public static int GM_PANEL;
+	public static byte GM_PANEL;
 	@Property(key = "gameserver.administration.flight.freefly", defaultValue = "3")
-	public static int GM_FLIGHT_FREE;
+	public static byte GM_FLIGHT_FREE;
 	@Property(key = "gameserver.administration.flight.unlimited", defaultValue = "3")
-	public static int GM_FLIGHT_UNLIMITED;
+	public static byte GM_FLIGHT_UNLIMITED;
 	@Property(key = "gameserver.administration.doors.opening", defaultValue = "3")
-	public static int DOORS_OPEN;
+	public static byte DOORS_OPEN;
 	@Property(key = "gameserver.administration.auto.res", defaultValue = "3")
-	public static int ADMIN_AUTO_RES;
+	public static byte ADMIN_AUTO_RES;
 	@Property(key = "gameserver.administration.instancereq", defaultValue = "3")
-	public static int INSTANCE_REQ;
+	public static byte INSTANCE_REQ;
 	@Property(key = "gameserver.administration.view.player", defaultValue = "3")
-	public static int ADMIN_VIEW_DETAILS;
+	public static byte ADMIN_VIEW_DETAILS;
 
 	/**
 	 * Admin options
@@ -77,4 +77,10 @@ public class AdminConfig {
 	public static String CUSTOMTAG_ACCESS8;
 	@Property(key = "gameserver.customtag.access9", defaultValue = "<TAG_HERE> %s")
 	public static String CUSTOMTAG_ACCESS9;
+	
+	/**
+	 * Special command permissions 
+	 */
+	@Property(key = "gameserver.administration.command.quest.advanced_parameters", defaultValue = "3")
+	public static byte CMD_QUEST_ADV_PARAMS;
 }

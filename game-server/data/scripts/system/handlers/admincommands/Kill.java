@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Kill extends AdminCommand {
 
 	public Kill() {
-		super("kill", "Kills the specified NPC(s) or player(s).");
+		super("kill", "Kills the specified NPC(s) or player.");
 
 		setParamInfo(
 			" - kills your target (can be NPC or player)",

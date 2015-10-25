@@ -39,7 +39,7 @@ public class Questrestart extends PlayerCommand {
 			return;
 		}
 
-		if (id == 1006 || id == 2008 || id == 10021 || id == 20021 || id == 18602 || id == 28602) {
+		if (id == 1006 || id == 2008 || (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVars().getQuestVars() == 1)) {
 			sendInfo(player, "Quest " + ChatUtil.quest(id) + " can't be restarted.");
 			return;
 		}
