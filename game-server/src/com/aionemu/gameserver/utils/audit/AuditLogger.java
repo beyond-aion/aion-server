@@ -7,28 +7,28 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.PunishmentConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.google.common.base.Preconditions;
 
 /**
  * @author MrPoke
+ * @modified Neon
  */
 public class AuditLogger {
 
 	private static final Logger log = LoggerFactory.getLogger("AUDIT_LOG");
 
+	/**
+	 * Logs message, if audit log is enabled.<br>
+	 * Sends message to GMs, if audit broadcast is enabled.<br>
+	 * Automatically punishes player, if punishments are enabled.
+	 */
 	public static final void info(Player player, String message) {
-		Preconditions.checkNotNull(player, "Player should not be null or use different info method");
-		if (LoggingConfig.LOG_AUDIT) {
-			info(player.getName(), player.getObjectId(), message);
-		}
-		if (PunishmentConfig.PUNISHMENT_ENABLE) {
+		if (PunishmentConfig.PUNISHMENT_ENABLE)
 			AutoBan.punishment(player, message);
-		}
-	}
 
-	public static final void info(String playerName, int objectId, String message) {
-		message += " Player name: " + playerName + " objectId: " + objectId;
-		log.info(message);
+		message += " Player name: " + player.getName() + " objectId: " + player.getObjectId();
+
+		if (LoggingConfig.LOG_AUDIT)
+			log.info(message);
 
 		if (SecurityConfig.GM_AUDIT_MESSAGE_BROADCAST)
 			GMService.getInstance().broadcastMessageToGMs(message);
