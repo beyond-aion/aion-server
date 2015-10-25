@@ -9,18 +9,17 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Avol modified by ATracer
+ * @author Avol
+ * @modified ATracer, Neon
  */
 public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 
-	public int playerId;
-	public int size;
-	public List<Item> items;
+	private int playerId;
+	private List<Item> items;
 
 	public SM_UPDATE_PLAYER_APPEARANCE(int playerId, List<Item> items) {
 		this.playerId = playerId;
 		this.items = items;
-		this.size = items.size();
 	}
 
 	@Override
@@ -38,8 +37,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 				mask |= item.getEquipmentSlot();
 			}
 		}
-
-		writeD(mask); // Wrong !!! It's item count, but doesn't work
+		writeD(mask);
 
 		for (Item item : items) {
 			writeD(item.getItemSkinTemplate().getTemplateId());

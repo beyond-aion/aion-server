@@ -632,25 +632,12 @@ public class Equipment {
 		return equippedItems;
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public FastTable<Item> getEquippedForApparence() {
 		FastTable<Item> equippedItems = new FastTable<>();
-		List<Item> twoHanded = new FastTable<Item>();
 		for (Item item : equipment.values()) {
-			long slot = item.getEquipmentSlot();
-			if (!ItemSlot.isStigma(slot)) {
-				if (item.getItemTemplate().isTwoHandWeapon()) {
-					if (twoHanded.contains(item))
-						continue;
-					twoHanded.add(item);
-				}
+			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
 				equippedItems.add(item);
-			}
 		}
-		twoHanded.clear();
-		twoHanded = null;
 		return equippedItems;
 	}
 

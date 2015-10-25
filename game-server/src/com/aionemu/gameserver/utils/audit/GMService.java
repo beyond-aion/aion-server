@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.utils.audit;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javolution.util.FastMap;
-import javolution.util.FastTable;
+import javolution.util.FastSet;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -26,24 +26,21 @@ public class GMService {
 		return SingletonHolder.instance;
 	}
 
-	private Map<Integer, Player> gms = new FastMap<Integer, Player>();
+	private Map<Integer, Player> gms = new FastMap<Integer, Player>().shared();
 	private boolean announceAny = false;
-	private List<Byte> announceList;
+	private Set<Byte> announceList;
 
 	private GMService() {
-		announceList = new FastTable<Byte>();
-		announceAny = AdminConfig.ANNOUNCE_LEVEL_LIST.equals("*");
+		announceList = new FastSet<>();
+		announceAny = AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*");
 		if (!announceAny) {
-			try {
-				for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
-					if (!level.equals("0"))
-						announceList.add(Byte.parseByte(level));
-			} catch (Exception e) {
-			}
+			for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
+				if (!level.equals("0"))
+					announceList.add(Byte.parseByte(level));
 		}
 	}
 
-	public Collection<Player> getAnnounceGMs() {
+	public Collection<Player> getGms() {
 		return gms.values();
 	}
 
@@ -94,7 +91,7 @@ public class GMService {
 	}
 
 	public void broadcastMessageToGMs(String message) {
-		for (Player gm : getAnnounceGMs()) {
+		for (Player gm : getGms()) {
 			PacketSendUtility.sendYellowMessage(gm, message);
 		}
 	}

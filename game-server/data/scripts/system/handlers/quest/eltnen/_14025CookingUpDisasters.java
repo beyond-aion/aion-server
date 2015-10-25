@@ -16,7 +16,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 
 	private final static int questId = 14025;
 	private final static int[] npcs = { 203989, 203901, 204020, 204024 };
-	private final static int[] mobs = { 212010, 204046, 212025, 212029, 211862, 217018, 212033, 212351 };
+	private final static int[] mobs = { 212010, 211017, 217090 };
 
 	public _14025CookingUpDisasters() {
 		super(questId);
@@ -54,19 +54,14 @@ public class _14025CookingUpDisasters extends QuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		switch (targetId) {
-			case 211862:
-			case 212025:
-			case 212029:
-			case 212033:
+		if (targetId == 211017) {
 				if (qs.getQuestVarById(0) == 5 && qs.getQuestVarById(1) < 4) {
 					qs.setQuestVarById(1, qs.getQuestVarById(1) + 1);
 					updateQuestStatus(env);
 					return true;
 				}
-
 		}
-		if (targetId == 212351)
+		else if (targetId == 217090)
 			if (qs.getQuestVarById(0) == 5 && qs.getQuestVarById(2) < 1) {
 				qs.setQuestVarById(2, qs.getQuestVarById(2) + 1);
 				updateQuestStatus(env);
