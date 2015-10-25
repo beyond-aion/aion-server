@@ -11,6 +11,7 @@ import com.aionemu.gameserver.services.HousingService;
  * Sends a friend list to the client
  * 
  * @author Ben
+ * @modified Neon
  */
 public class SM_FRIEND_LIST extends AionServerPacket {
 
@@ -26,7 +27,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 			writeS(friend.getName());
 			writeD(friend.getLevel());
 			writeD(friend.getPlayerClass().getClassId());
-			writeC(friend.isOnline() ? 1 : 0);
+			writeC(friend.getPlayer().getGender().getGenderId());
 			writeD(friend.getMapId());
 			writeD(friend.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
 			writeS(friend.getNote()); // Friend note

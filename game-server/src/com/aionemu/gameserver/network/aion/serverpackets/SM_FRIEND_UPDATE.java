@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * Sent to update a player's status in a friendlist
  * 
  * @author Ben
+ * @modified Neon
  */
 public class SM_FRIEND_UPDATE extends AionServerPacket {
 
@@ -22,9 +23,6 @@ public class SM_FRIEND_UPDATE extends AionServerPacket {
 		this.friendObjId = friendObjId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Friend f = con.getActivePlayer().getFriendList().getFriend(friendObjId);
@@ -35,7 +33,7 @@ public class SM_FRIEND_UPDATE extends AionServerPacket {
 			writeS(f.getName());
 			writeD(f.getLevel());
 			writeD(f.getPlayerClass().getClassId());
-			writeC(f.isOnline() ? 1 : 0); // Online status - No idea why this and f.getStatus are used
+			writeC(f.getPlayer().getGender().getGenderId());
 			writeD(f.getMapId());
 			writeD(f.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
 			writeS(f.getNote());
