@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,26 +15,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class CM_FRIEND_DEL extends AionClientPacket {
 
 	private String targetName;
-	private static Logger log = LoggerFactory.getLogger(CM_FRIEND_DEL.class);
 
 	public CM_FRIEND_DEL(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		targetName = readS();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
-
 		Player activePlayer = getConnection().getActivePlayer();
 
 		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
@@ -47,12 +36,11 @@ public class CM_FRIEND_DEL extends AionClientPacket {
 			return;
 		}
 
-		Friend target = activePlayer.getFriendList().getFriend(targetName);
-		if (target == null) {
-			log.warn(activePlayer.getName() + " tried to delete friend " + targetName + " who is not his friend");
+		Friend friend = activePlayer.getFriendList().getFriend(targetName);
+		if (friend == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST);
 		} else {
-			SocialService.deleteFriend(activePlayer, target.getOid());
+			SocialService.deleteFriend(activePlayer, friend);
 		}
 	}
 }

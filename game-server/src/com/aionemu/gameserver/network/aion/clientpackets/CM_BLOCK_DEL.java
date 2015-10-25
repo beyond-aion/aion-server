@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,8 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_BLOCK_DEL extends AionClientPacket {
 
-	private static Logger log = LoggerFactory.getLogger(CM_BLOCK_DEL.class);
-
 	private String targetName;
 
 	/**
@@ -28,17 +23,11 @@ public class CM_BLOCK_DEL extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		targetName = readS();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
@@ -54,9 +43,7 @@ public class CM_BLOCK_DEL extends AionClientPacket {
 		if (target == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST);
 		} else {
-			if (!SocialService.deleteBlockedUser(activePlayer, target.getObjId())) {
-				log.debug("Could not unblock " + targetName + " from " + activePlayer.getName() + " blocklist. Check database setup.");
-			}
+			SocialService.deleteBlockedUser(activePlayer, target);
 		}
 	}
 }
