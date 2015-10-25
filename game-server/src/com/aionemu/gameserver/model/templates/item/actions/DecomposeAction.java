@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -41,6 +40,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FIRST_SHOW_DECOMPOSA
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -52,7 +52,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class DecomposeAction extends AbstractItemAction {
 
 	private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
-	private static final int USAGE_DELAY = 3000;
+	public static final int USAGE_DELAY = 3000;
 	private static Map<Integer, List<ItemTemplate>> specialManastones;
 	private static Map<Integer, List<ItemTemplate>> manastones;
 	private static Map<Race, int[]> chunkEarth = new HashMap<Race, int[]>();
@@ -105,9 +105,8 @@ public class DecomposeAction extends AbstractItemAction {
 		List<ExtractedItemsCollection> itemsCollections = null;
 		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		if (itemsCollections == null) {
-			Collection<ResultedItem> selectable = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId());
-			if (selectable == null) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVALID_STANCE(parentItem.getNameId()));
+			if (DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId()) == null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(ChatUtil.item(parentItem.getItemId())));
 				return false;
 			}
 			return true;
@@ -117,7 +116,7 @@ public class DecomposeAction extends AbstractItemAction {
 			return false;
 		}
 		if (player.getInventory().isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
 			return false;
 		}
 		return true;
@@ -160,7 +159,7 @@ public class DecomposeAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
@@ -449,11 +448,11 @@ public class DecomposeAction extends AbstractItemAction {
 				int slotReq = calcMaxCountOfSlots(selectedCollection, player, false);
 				int specialSlotreq = calcMaxCountOfSlots(selectedCollection, player, true);
 				if (slotReq > 0 && inventory.getFreeSlots() < slotReq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
 					return false;
 				}
 				if (specialSlotreq > 0 && inventory.getSpecialCubeFreeSlots() < specialSlotreq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
 					return false;
 				}
 				if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
