@@ -33,7 +33,7 @@ public class SM_FRIEND_UPDATE extends AionServerPacket {
 			writeS(f.getName());
 			writeD(f.getLevel());
 			writeD(f.getPlayerClass().getClassId());
-			writeC(f.getPlayer().getGender().getGenderId());
+			writeC(f.getGender().getGenderId());
 			writeD(f.getMapId());
 			writeD(f.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
 			writeS(f.getNote());

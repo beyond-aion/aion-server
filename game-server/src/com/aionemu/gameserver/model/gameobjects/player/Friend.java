@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -57,6 +58,10 @@ public class Friend {
 
 	public PlayerClass getPlayerClass() {
 		return pcd.getPlayerClass();
+	}
+
+	public Gender getGender() {
+		return pcd.getGender();
 	}
 
 	public int getMapId() {

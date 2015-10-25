@@ -27,7 +27,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 			writeS(friend.getName());
 			writeD(friend.getLevel());
 			writeD(friend.getPlayerClass().getClassId());
-			writeC(friend.getPlayer().getGender().getGenderId());
+			writeC(friend.getGender().getGenderId());
 			writeD(friend.getMapId());
 			writeD(friend.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
 			writeS(friend.getNote()); // Friend note
