@@ -44,6 +44,11 @@ public abstract class ItemUseObserver extends ActionObserver {
 	}
 
 	@Override
+	public final void unequip(Item item, Player owner) {
+		abort();
+	}
+
+	@Override
 	public final void moved() {
 		abort();
 	}

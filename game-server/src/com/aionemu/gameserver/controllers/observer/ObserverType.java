@@ -23,9 +23,9 @@ public enum ObserverType {
 	EQUIP_UNEQUIP(EQUIP.observerMask | UNEQUIP.observerMask),
 	ATTACK_DEFEND(ATTACK.observerMask | ATTACKED.observerMask),
 	MOVE_OR_DIE(MOVE.observerMask | DEATH.observerMask),
-	ALL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | STARTSKILLCAST.observerMask | DEATH.observerMask | DOT_ATTACKED.observerMask
-		| ITEMUSE.observerMask | NPCDIALOGREQUEST.observerMask | ABNORMALSETTED.observerMask | SUMMONRELEASE.observerMask | SIT.observerMask
-		| ENDSKILLCAST.observerMask | HP_CHANGED.observerMask | BOOSTSKILLCOST.observerMask);
+	ALL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | EQUIP.observerMask | UNEQUIP.observerMask | STARTSKILLCAST.observerMask
+		| DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask | NPCDIALOGREQUEST.observerMask | ABNORMALSETTED.observerMask
+		| SUMMONRELEASE.observerMask | SIT.observerMask | HP_CHANGED.observerMask | ENDSKILLCAST.observerMask | BOOSTSKILLCOST.observerMask);
 
 	private int observerMask;
 
