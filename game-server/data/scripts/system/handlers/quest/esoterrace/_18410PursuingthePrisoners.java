@@ -23,8 +23,8 @@ public class _18410PursuingthePrisoners extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(799584).addOnQuestStart(questId);
-		qe.registerQuestNpc(799584).addOnTalkEvent(questId);
+		qe.registerQuestNpc(799585).addOnQuestStart(questId);
+		qe.registerQuestNpc(799585).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799563).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799553).addOnTalkEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("DRANA_PRODUCTION_LAB_300250000"), questId);
@@ -53,7 +53,7 @@ public class _18410PursuingthePrisoners extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (targetId == 799584) {
+		if (targetId == 799585) {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
 					return sendQuestDialog(env, 4762);
