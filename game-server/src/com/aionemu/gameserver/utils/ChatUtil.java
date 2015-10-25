@@ -154,7 +154,7 @@ public class ChatUtil {
 	public static String getRealAdminName(String name) {
 		// don't perform expensive checks if name is already qualified
 		if (name.matches("^[A-Za-z]+$"))
-			return name;
+			return Util.convertName(name);
 
 		String nameFormat;
 		String nameFlag = "%s";
@@ -176,6 +176,6 @@ public class ChatUtil {
 			}
 		}
 
-		return name;
+		return Util.convertName(name);
 	}
 }
