@@ -74,6 +74,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.reward.BonusService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -308,7 +309,7 @@ public final class QuestService {
 		if (template.isDaily()) {
 			if (now.isAfter(repeatDate))
 				repeatDate = repeatDate.plusHours(24);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400855, "9"));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_DAILY("9"));
 		} else {
 			int daysToAdd = 7;
 			int startDay = 7;
@@ -347,23 +348,41 @@ public final class QuestService {
 	private static boolean checkStartConditionsImpl(QuestEnv env, boolean warn) {
 		Player player = env.getPlayer();
 		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
+
+		if (qs != null && qs.getStatus() != QuestStatus.NONE) {
+			if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST);
+				return false;
+			} else if (!qs.canRepeat()) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(env.getQuestId())));
+				return false;
+			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount()) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()+""));
+				return false;
+			}
+		}
 
 		if (template == null)
 			return false;
 
-		if (template.getRacePermitted() != null)
-			if (template.getRacePermitted() != player.getRace() && template.getRacePermitted() != Race.PC_ALL) {
-				return false;
-			}
-
+		if (template.getRacePermitted() != null && template.getRacePermitted() != player.getRace() && template.getRacePermitted() != Race.PC_ALL) {
+			if (warn)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE);
+			return false;
+		}
 		// min level - 2 so that the gray quest arrow shows when quest is almost available
 		// quest level will be checked again in QuestService.startQuest() when attempting to start
 		int levelDiff = template.getMinlevelPermitted() - player.getLevel();
 		if (levelDiff > 2 && template.getMinlevelPermitted() != 99)
 			return false;
 
-		if (warn && levelDiff > 0 && template.getMinlevelPermitted() != 99) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
+		if (levelDiff > 0 && template.getMinlevelPermitted() != 99) {
+			if (warn)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
 			return false;
 		}
 
@@ -373,28 +392,23 @@ public final class QuestService {
 			return false;
 		}
 
-		if (!template.getClassPermitted().isEmpty())
-			if (!template.getClassPermitted().contains(player.getCommonData().getPlayerClass())) {
-				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS);
-				return false;
-			}
+		if (!template.getClassPermitted().isEmpty() && !template.getClassPermitted().contains(player.getPlayerClass())) {
+			if (warn)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS);
+			return false;
+		}
 
-		if (template.getGenderPermitted() != null)
-			if (template.getGenderPermitted() != player.getGender()) {
-				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER);
-				return false;
-			}
+		if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender()) {
+			if (warn)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER);
+			return false;
+		}
 
-		if (template.getRequiredRank() != 0) {
-			if (player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
-				if (warn) {
-					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
-				}
-				return false;
-			}
+		if (template.getRequiredRank() != 0 && player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
+			if (warn)
+				PacketSendUtility.sendPacket(player,
+					SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
+			return false;
 		}
 
 		int requiredStartConditions = template.getRequiredConditionCount();
@@ -444,20 +458,19 @@ public final class QuestService {
 			}
 		}
 
-		if (warn && template.getNpcFactionId() != 0 && !template.isTimeBased()) {
-			if (!player.getNpcFactions().canStartQuest(template)) {
-				AuditLogger.info(player, "try start guild daily quest before time");
+		// check if NpcFaction daily quest
+		if (template.getNpcFactionId() != 0) {
+			// check if the NpcFaction daily time limit has passed
+			if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
+				return false;
+
+			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+			if (!faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId())) {
+				AuditLogger.info(player, "Possible packet hack to start NpcFaction quest " + ChatUtil.quest(env.getQuestId()) + ".");
 				return false;
 			}
 		}
 
-		// Check for updating nearby quests
-		QuestState qs = player.getQuestStateList().getQuestState(template.getId());
-		if (qs != null && qs.getStatus() != QuestStatus.NONE) {
-			if (!qs.canRepeat()) {
-				return false;
-			}
-		}
 		return true;
 	}
 
@@ -491,9 +504,6 @@ public final class QuestService {
 		}
 
 		if (qs != null) {
-			if (!qs.canRepeat()) {
-				return false;
-			}
 			qs.setStatus(status);
 			qs.setStepGroup(stepGroup);
 		} else {

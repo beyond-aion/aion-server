@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -12,9 +12,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 public class SM_NEARBY_QUESTS extends AionServerPacket {
 
-	private HashMap<Integer, Integer> nearbyQuestList;
+	private Map<Integer, Integer> nearbyQuestList;
 
-	public SM_NEARBY_QUESTS(HashMap<Integer, Integer> nearbyQuestList) {
+	public SM_NEARBY_QUESTS(Map<Integer, Integer> nearbyQuestList) {
 		this.nearbyQuestList = nearbyQuestList;
 	}
 

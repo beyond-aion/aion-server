@@ -1,13 +1,14 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import org.slf4j.Logger;
@@ -173,7 +174,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
-		HashMap<Integer, Integer> nearbyQuestList = new HashMap<>();
+		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			// if (template.isTimeBased())
