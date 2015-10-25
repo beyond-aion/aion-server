@@ -71,12 +71,6 @@ public class CustomConfig {
 	public static boolean SKILL_CHAIN_TRIGGERRATE;
 
 	/**
-	 * Unstuck delay
-	 */
-	@Property(key = "gameserver.unstuck.delay", defaultValue = "3600")
-	public static int UNSTUCK_DELAY;
-
-	/**
 	 * Base Fly Time
 	 */
 	@Property(key = "gameserver.base.flytime", defaultValue = "60")
@@ -90,6 +84,9 @@ public class CustomConfig {
 	@Property(key = "gameserver.oldnames.command.disable", defaultValue = "true")
 	public static boolean OLD_NAMES_COMMAND_DISABLED;
 
+	@Property(key = "gameserver.friendlist.gm_restrict", defaultValue = "false")
+	public static boolean FRIENDLIST_GM_RESTRICT;
+	
 	/**
 	 * Friendlist size
 	 */
