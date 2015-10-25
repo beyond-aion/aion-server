@@ -7,6 +7,8 @@ import java.util.Iterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.LoggerContext;
+
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
@@ -131,13 +133,15 @@ public class ShutdownHook extends Thread {
 		// ThreadPoolManager shutdown
 		ThreadPoolManager.getInstance().shutdown();
 
+		log.info("Runtime is " + mode.getText() + " now...");
+		// shut down logger factory to flush all pending log messages
+		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
+
 		// Do system exit.
 		if (mode == ShutdownMode.RESTART)
 			Runtime.getRuntime().halt(ExitCode.CODE_RESTART);
 		else
 			Runtime.getRuntime().halt(ExitCode.CODE_NORMAL);
-
-		log.info("Runtime is " + mode.getText() + " now...");
 	}
 
 	/**
