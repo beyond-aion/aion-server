@@ -1630,6 +1630,33 @@
 			<drop item_id="111300435" name="Lost Mine Vambrace" min_amount="1" max_amount="1" chance="15"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Raksang -->
+	<npc_drop npc_id="701369" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100028" name="Corridor Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701370" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100029" name="Fear Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701371" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100030" name="Fire Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701372" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Unique)">
+			<drop item_id="125002604" name="Raksha Legionary's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002605" name="Raksha Legionary's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002606" name="Raksha Legionary's Chain Hood" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002607" name="Raksha Legionary's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Guestbloom (Unique)">
+			<drop item_id="170195108" name="Raksha Legionary's Guestbloom" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Rentus Base -->
 	<npc_drop npc_id="218572" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
