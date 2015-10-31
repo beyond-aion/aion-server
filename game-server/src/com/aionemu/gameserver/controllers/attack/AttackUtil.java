@@ -324,7 +324,10 @@ public class AttackUtil {
 					break;
 				default:
 					ht = HitType.MAHIT;
-					baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
+					if (effector instanceof Npc)
+						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+					else
+						baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
 					break;
 			}
 		}
