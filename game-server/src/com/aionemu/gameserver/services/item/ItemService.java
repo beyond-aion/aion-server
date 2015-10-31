@@ -297,22 +297,4 @@ public class ItemService {
 		return template != null;
 	}
 
-	/**
-	 * @param object
-	 * @param unk
-	 * @param unk1
-	 * @param unk2
-	 */
-	public static Item newItem(int resultItemId, int count, Object object, int unk, int unk1, int unk2) {
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(resultItemId);
-		if (count <= 0 || itemTemplate == null) {
-			return null;
-		}
-		Preconditions.checkNotNull(itemTemplate, "No item with id " + resultItemId);
-
-		Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
-
-		return newItem;
-	}
-
 }

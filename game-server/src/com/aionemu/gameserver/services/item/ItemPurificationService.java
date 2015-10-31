@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ManaStone;
+import com.aionemu.gameserver.model.items.RandomStats;
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 import com.aionemu.gameserver.model.templates.item.purification.SubMaterialItem;
@@ -40,7 +41,6 @@ public class ItemPurificationService {
 		}
 
 		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
-		Item resultItemName = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
 
 		if (baseItem.getEnchantLevel() < resultItem.getCheck_enchant_count()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(new DescriptionId(baseItem.getNameId())));
@@ -67,9 +67,9 @@ public class ItemPurificationService {
 				return false;
 			}
 		}
-		PacketSendUtility.sendPacket(player,
-			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(resultItemName.getNameId())));
-		ItemService.releaseItemId(resultItemName);
+		int nameId = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getNameId();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), 
+			new DescriptionId(nameId)));
 		return true;
 	}
 
@@ -85,57 +85,58 @@ public class ItemPurificationService {
 			}
 		}
 
-		if (resultItem.getNeed_abyss_point() != null) {
+		if (resultItem.getNeed_abyss_point() != null)
 			AbyssPointsService.setAp(player, -resultItem.getNeed_abyss_point().getCount());
-		}
 
-		if (resultItem.getNeed_kinah() != null) {
+		if (resultItem.getNeed_kinah() != null)
 			player.getInventory().decreaseKinah(-resultItem.getNeed_kinah().getCount());
-		}
 
 		player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
 
 		return true;
 	}
 
-	public static void upgradeItem(Item sourceItem, Item newItem) {
+	public static void upgradeItem(Player player, Item sourceItem, int targetItemId) {
+		Item newItem = ItemFactory.newItem(targetItemId, 1);
 		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
-		newItem.setAmplified(sourceItem.isAmplified());
+		
 		if (sourceItem.isAmplified()) {
-			if (newItem.getEnchantLevel() < 20) {
-				if (sourceItem.getBuffSkill() != 0)
-					newItem.setBuffSkill(0);
+			if (newItem.getEnchantLevel() < newItem.getMaxEnchantLevel()) {
+			   newItem.setAmplified(false);
+			} else {
+			   newItem.setAmplified(true);
+			   if (newItem.getEnchantLevel() < 20)
+				  newItem.setBuffSkill(0);
+			   else
+				  newItem.setBuffSkill(sourceItem.getBuffSkill());
 			}
-			if (newItem.getEnchantLevel() < sourceItem.getMaxEnchantLevel()) {
-				newItem.setAmplified(false);
-			}
+ 		}
+		if (sourceItem.hasFusionedItem()) {
+			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
+			newItem.setOptionalFusionSocket(sourceItem.getOptionalFusionSocket());
 		}
-		newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
 		if (sourceItem.hasManaStones()) {
-			for (ManaStone manaStone : sourceItem.getItemStones()) {
+			for (ManaStone manaStone : sourceItem.getItemStones())
 				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
-			}
 		}
 		if (sourceItem.hasFusionStones()) {
-			for (ManaStone manaStone : sourceItem.getFusionStones()) {
+			for (ManaStone manaStone : sourceItem.getFusionStones())
 				ItemSocketService.addFusionStone(newItem, manaStone.getItemId());
-			}
 		}
-		if (sourceItem.getGodStone() != null) {
+		if (sourceItem.getGodStone() != null)
 			newItem.addGodStone(sourceItem.getGodStone().getItemId());
-		}
-		if (sourceItem.getTempering() > 0) {
+		if (sourceItem.getTempering() > 0)
 			newItem.setTempering(sourceItem.getTempering());
-		}
-		if (sourceItem.isSoulBound()) {
+		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
+		if (sourceItem.getItemTemplate().getRandomBonusId() != 0 && newItem.getItemTemplate().getRandomBonusId() != 0) {
+			newItem.setBonusNumber(sourceItem.getBonusNumber());
+			newItem.setRandomStats(new RandomStats(newItem.getItemTemplate().getRandomBonusId(), newItem.getBonusNumber()));
+			newItem.setRandomCount(1);
 		}
-		newItem.setBonusNumber(newItem.getBonusNumber());
-		newItem.setRandomStats(newItem.getRandomStats());
-		newItem.setRandomCount(0);
 		newItem.setIdianStone(null);
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setRndBonus();
