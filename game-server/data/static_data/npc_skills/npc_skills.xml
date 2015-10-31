@@ -64093,6 +64093,15 @@
     <npcskills npcid="831757">
         <npcskill skillid="21472" skilllevel="1" probability="25" minhp="95" maxhp="100"/>
     </npcskills>
+	<npcskills npcid="855263">
+		<npcskill skillid="21761" skilllevel="1" probability="25"/>
+		<npcskill skillid="21762" skilllevel="1" probability="25"/>
+		<npcskill skillid="21763" skilllevel="1" probability="25"/>
+		<npcskill skillid="21764" skilllevel="1" probability="25"/>
+		<npcskill skillid="21765" skilllevel="1" probability="25"/>
+		<npcskill skillid="21766" skilllevel="1" probability="25"/>
+		<npcskill skillid="21767" skilllevel="1" probability="25"/>
+	</npcskills>
 	<npcskills npcid="701900">
         <npcskill skillid="21414" skilllevel="1" probability="100"/>
     </npcskills>
