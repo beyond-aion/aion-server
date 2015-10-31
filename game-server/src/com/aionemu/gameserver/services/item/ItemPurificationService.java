@@ -127,7 +127,7 @@ public class ItemPurificationService {
 				ItemSocketService.addFusionStone(newItem, manaStone.getItemId());
 		}
 		if (sourceItem.getGodStone() != null)
-			newItem.addGodStone(sourceItem.getGodStone().getItemId());
+			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());
 		if (sourceItem.getTempering() > 0)
 			newItem.setTempering(sourceItem.getTempering());
 		if (sourceItem.isSoulBound())

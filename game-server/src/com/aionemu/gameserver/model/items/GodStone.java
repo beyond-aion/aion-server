@@ -37,11 +37,11 @@ public class GodStone extends ItemStone {
 	private final int probability;
 	private final int probabilityLeft;
 	private final int breakProb;
-	@SuppressWarnings("unused")
 	private final int nonBreakCount;
 	private final ItemTemplate godItem;
+	private int activatedCount;
 
-	public GodStone(int itemObjId, int itemId, PersistentState persistentState) {
+	public GodStone(int itemObjId, int activatedCount, int itemId, PersistentState persistentState) {
 		super(itemObjId, itemId, 0, persistentState);
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 		godItem = itemTemplate;
@@ -52,6 +52,7 @@ public class GodStone extends ItemStone {
 			probabilityLeft = godstoneInfo.getProbabilityleft();
 			breakProb = godstoneInfo.getBreakProb();
 			nonBreakCount = godstoneInfo.getNonBreakCount();
+			this.activatedCount = activatedCount;
 		} else {
 			probability = 0;
 			probabilityLeft = 0;
@@ -86,12 +87,14 @@ public class GodStone extends ItemStone {
 						effect.initialize();
 						effect.applyEffect();
 						effect = null;
-						// Illusion Godstones TODO: implement nonBreakCount check and procc counter in DB
-						if (breakProb > 0 && Rnd.get(0, 1000) < breakProb) {
-							// TODO: Delay 10 Minutes, send messages etc
-							// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
-							// godItem.getNameId()));
-							breakGodstone(player, equippedItem);
+						//Illusion Godstones
+						if (breakProb > 0) {
+							increaseActivatedCount();
+							if (activatedCount > nonBreakCount && Rnd.get(0, 1000) < breakProb) {
+							  //TODO: Delay 10 Minutes, send messages etc
+							  //PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(), godItem.getNameId()));
+								breakGodstone(player, equippedItem);
+							}
 						}
 					}
 				}
@@ -107,7 +110,15 @@ public class GodStone extends ItemStone {
 	public void onUnEquip(Player player) {
 		if (actionListener != null)
 			player.getObserveController().removeObserver(actionListener);
-
+	}
+	
+	private void increaseActivatedCount() {
+	   this.activatedCount++;
+	   this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+	
+	public int getActivatedCount() {
+	   return this.activatedCount;
 	}
 
 	private void breakGodstone(Player player, Item item) {

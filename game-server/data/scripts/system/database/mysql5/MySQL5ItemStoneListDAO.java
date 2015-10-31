@@ -37,10 +37,10 @@ import com.google.common.collect.Sets;
 public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5ItemStoneListDAO.class);
-	public static final String INSERT_QUERY = "INSERT INTO `item_stones` (`item_unique_id`, `item_id`, `slot`, `category`, `polishNumber`, `polishCharge`) VALUES (?,?,?,?,?,?)";
-	public static final String UPDATE_QUERY = "UPDATE `item_stones` SET `item_id`=?, `slot`=?, `polishNumber`=?, `polishCharge`=? where `item_unique_id`=? AND `category`=?";
+	public static final String INSERT_QUERY = "INSERT INTO `item_stones` (`item_unique_id`, `item_id`, `slot`, `category`, `polishNumber`, `polishCharge`, `proc_count`) VALUES (?,?,?,?,?,?,?)";
+	public static final String UPDATE_QUERY = "UPDATE `item_stones` SET `item_id`=?, `slot`=?, `polishNumber`=?, `polishCharge`=?, `proc_count`=? where `item_unique_id`=? AND `category`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `item_stones` WHERE `item_unique_id`=? AND slot=? AND category=?";
-	public static final String SELECT_QUERY = "SELECT `item_id`, `slot`, `category`, `polishNumber`, `polishCharge` FROM `item_stones` WHERE `item_unique_id`=?";
+	public static final String SELECT_QUERY = "SELECT `item_id`, `slot`, `category`, `polishNumber`, `polishCharge`, `proc_count` FROM `item_stones` WHERE `item_unique_id`=?";
 	private static final Predicate<ItemStone> itemStoneAddPredicate = new Predicate<ItemStone>() {
 
 		@Override
@@ -78,6 +78,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 								int itemId = rset.getInt("item_id");
 								int slot = rset.getInt("slot");
 								int stoneType = rset.getInt("category");
+								int activatedCount = rset.getInt("proc_count");
 								switch (stoneType) {
 									case 0:
 										if (item.getSockets(false) <= item.getItemStonesSize()) {
@@ -98,7 +99,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 										item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
 										break;
 									case 1:
-										item.setGodStone(new GodStone(item.getObjectId(), itemId, PersistentState.UPDATED));
+										item.setGodStone(new GodStone(item.getObjectId(), itemId, activatedCount, PersistentState.UPDATED));
 										break;
 									case 2:
 										if (item.getSockets(true) <= item.getFusionStonesSize()) {
@@ -235,6 +236,13 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					st.setInt(5, 0);
 					st.setInt(6, 0);
 				}
+				if (is instanceof GodStone) {
+				   GodStone gs = (GodStone) is;
+				   st.setInt(7, gs.getActivatedCount());
+				}
+				else {
+				   st.setInt(7, 0);
+				}
 
 				st.addBatch();
 			}
@@ -268,8 +276,15 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					st.setInt(3, 0);
 					st.setInt(4, 0);
 				}
-				st.setInt(5, is.getItemObjId());
-				st.setInt(6, ist.ordinal());
+				if (is instanceof GodStone) {
+				   GodStone gs = (GodStone) is;
+				   st.setInt(5, gs.getActivatedCount());
+				}
+				else {
+				   st.setInt(5, 0);
+				}
+				st.setInt(6, is.getItemObjId());
+				st.setInt(7, ist.ordinal());
 				st.addBatch();
 			}
 

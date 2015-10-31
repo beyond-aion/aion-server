@@ -134,22 +134,18 @@ public class ItemService {
 		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		if (sourceItem.hasManaStones()) {
-			for (ManaStone manaStone : sourceItem.getItemStones()) {
+			for (ManaStone manaStone : sourceItem.getItemStones())
 				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
-			}
 		}
-		if (sourceItem.getGodStone() != null) {
-			newItem.addGodStone(sourceItem.getGodStone().getItemId());
-		}
-		if (sourceItem.getEnchantLevel() > 0) {
+		if (sourceItem.getGodStone() != null)
+			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());
+		if (sourceItem.getEnchantLevel() > 0)
 			newItem.setEnchantLevel(sourceItem.getEnchantLevel());
-		}
-		if (sourceItem.getTempering() > 0) {
+		if (sourceItem.getTempering() > 0)
 			newItem.setTempering(sourceItem.getTempering());
-		}
-		if (sourceItem.isSoulBound()) {
+		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
-		}
+		
 		newItem.setBonusNumber(sourceItem.getBonusNumber());
 		newItem.setRandomStats(sourceItem.getRandomStats());
 		newItem.setRandomCount(sourceItem.getRandomCount());

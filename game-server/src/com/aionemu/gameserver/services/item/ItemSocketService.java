@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -343,26 +342,19 @@ public class ItemSocketService {
 			public void run() {
 				player.getObserveController().removeObserver(move);
 
-				boolean isSuccess = true;
-
-				// small change to fail???
-				// if (Rnd.get(1, 100) > 20)
-				// isSuccess = false;
-
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(),
-					0, isSuccess ? 1 : 2, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, 
+					itemTemplate.getTemplateId(), 0, 1, 0));
 
 				if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 					return;
 
-				if (isSuccess) {
-					weaponItem.addGodStone(godStoneItemId);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weaponItem.getNameId())));
-
-					ItemPacketService.updateItemAfterInfoChange(player, weaponItem);
-					PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), 
-						player.getEquipment().getEquippedForAppearence()), true);
-				}
+				weaponItem.addGodStone(godStoneItemId);
+				if (weaponItem.isEquipped())
+					weaponItem.getGodStone().onEquip(player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new 
+					DescriptionId(weaponItem.getNameId())));
+				
+				ItemPacketService.updateItemAfterInfoChange(player, weaponItem);
 			}
 		}, 2000));
 	}
