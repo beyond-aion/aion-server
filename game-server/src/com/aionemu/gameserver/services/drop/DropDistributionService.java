@@ -32,16 +32,18 @@ public class DropDistributionService {
 	 */
 	public void handleRoll(Player player, int roll, int itemId, int npcId, int index) {
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
-		if (player == null || dropNpc == null) {
+		if (player == null || dropNpc == null)
 			return;
-		}
+		int maxRoll = 0;
 		int luck = 0;
 		if (player.isInGroup2() || player.isInAlliance2()) {
 			if (roll == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME);
 			} else {
-				luck = Rnd.get(1, 100);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, 100));
+				maxRoll = player.isInGroup2() ? 100 : 1000;
+				luck = Rnd.get(1, maxRoll);
+				
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
 			}
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
