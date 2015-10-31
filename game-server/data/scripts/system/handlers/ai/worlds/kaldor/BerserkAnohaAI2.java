@@ -71,7 +71,7 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 		PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(brigadeId);
 		//TODO: Refactore this!
 		sendMail(pcd, 188053308, 10); //Illusion Godstone Bundle				
-		sendMail(pcd, 188053309, 75); //Ceramium Medal Bundle
+		sendMail(pcd, 188053309, 100); //Ceramium Medal Bundle
 		sendMail(pcd, 188053310, 10); //Eternal Ancient Manastone Bundle
 		sendMail(pcd, 188053311, 15); //Fabled Ancient Manastone Bundle
 		sendMail(pcd, 188053312, 20); //Heroic Ancient Manastone Bundle
