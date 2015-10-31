@@ -2757,6 +2757,16 @@
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Talocs Hollow -->
+	<npc_drop npc_id="700742" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Egg Shell">
+			<drop item_id="182005918" name="Glossy Green Egg Shell" min_amount="1" max_amount="5" chance="43"/>
+			<drop item_id="182005919" name="Glossy Yellow Egg Shell" min_amount="1" max_amount="5" chance="23"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Enchantment Stone">
+			<drop item_id="166000192" name="Beta Enchantment Stone" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
 	<!-- The Hexway -->
 	<npc_drop npc_id="701662" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Coin">
