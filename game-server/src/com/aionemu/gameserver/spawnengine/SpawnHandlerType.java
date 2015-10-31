@@ -6,6 +6,12 @@ package com.aionemu.gameserver.spawnengine;
 public enum SpawnHandlerType {
 	ATTACKER,
 	BOSS,
+	FLAG,
+	GUARDIAN,
+	MERCHANT,
+	OUTRIDER,
+	OUTRIDER_ENHANCED,
 	RIFT,
+	SENTINEL,
 	STATIC
 }

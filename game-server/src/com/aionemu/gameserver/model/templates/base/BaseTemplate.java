@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.base.BaseColorType;
+import com.aionemu.gameserver.model.base.BaseType;
+
 /**
  * @author Source
  */
@@ -16,19 +19,25 @@ public class BaseTemplate {
 	protected int id;
 	@XmlAttribute(name = "world")
 	protected int world;
+	@XmlAttribute(name = "type")
+	protected BaseType type;
+	@XmlAttribute(name = "color")
+	protected BaseColorType color;
 
-	/**
-	 * @return the location id
-	 */
+
 	public int getId() {
 		return this.id;
 	}
 
-	/**
-	 * @return the world id
-	 */
 	public int getWorldId() {
 		return this.world;
 	}
+	
+	public BaseType getType() {
+		return type;
+	}
 
+	public BaseColorType getColor() {
+		return color;
+	}
 }
