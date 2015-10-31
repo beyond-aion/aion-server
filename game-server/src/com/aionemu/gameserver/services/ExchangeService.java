@@ -160,8 +160,10 @@ public class ExchangeService {
 		if (partner == null)
 			return;
 		if (!TemporaryTradeTimeTask.getInstance().canTrade(item, partner.getObjectId()))
-			if (item.getPackCount() <= 0 && !item.isTradeable(activePlayer))
-				return;
+			if (item.getPackCount() <= 0 && !item.isTradeable(activePlayer)) {
+				if (!item.isLegionTradeable(activePlayer, partner))
+					return;
+			}
 
 		if (itemCount < 1)
 			return;

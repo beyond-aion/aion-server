@@ -22,4 +22,5 @@ public class ItemMask {
 	public static final int DYEABLE = (1 << 15);
 	public static final int CAN_AP_EXTRACT = (1 << 16); // not sure
 	public static final int CAN_POLISH = (1 << 17); // not sure
+	public static final int LEGION_TRADEABLE = (1 << 18);
 }

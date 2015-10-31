@@ -169,6 +169,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 			if (this.enchantBonus == 0 && itemTemplate.getMaxEnchantBonus() > 0)
 				this.enchantBonus = Rnd.get(0, itemTemplate.getMaxEnchantBonus());
 			this.enchantLevel = Math.min(itemTemplate.getMaxEnchantLevel() + this.enchantBonus, this.enchantLevel);
+			this.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}
 		updateChargeInfo(charge);
 	}
@@ -733,6 +734,14 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public boolean isTradeable(Player player) {
 		return (getItemMask(player) & ItemMask.TRADEABLE) == ItemMask.TRADEABLE && !isSoulBound(player);
+	}
+	
+	public boolean isLegionTradeable(Player player, Player partner) {
+		if ((getItemMask(player) & ItemMask.LEGION_TRADEABLE) != ItemMask.LEGION_TRADEABLE || isSoulBound(player))
+			return false;
+		if (player.getLegion() == null || partner.getLegion() == null)
+			return false;
+		return player.getLegion().getLegionId() == partner.getLegion().getLegionId();
 	}
 
 	public boolean isRemodelable(Player player) {
