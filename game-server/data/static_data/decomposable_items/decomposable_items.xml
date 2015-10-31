@@ -19580,6 +19580,8 @@
         <items>
 			<item id="100101186" name="Modor's Warhammer"/>
             <item id="100001551" name="Modor's Sword"/>
+			<item id="100201354" name="Modor's Dagger"/>
+            <item id="101701236" name="Modor's Bow"/>
             <item id="100901206" name="Modor's Greatsword"/>
             <item id="101301134" name="Modor's Polearm"/>
             <item id="115001592" name="Modor's Shield"/>
@@ -19588,8 +19590,10 @@
     <decomposable item_id="188052390" decomposable_name="Modor's Mythic Weapon Box" selectable="true">
         <items>
             <item id="100101188" name="Lunatic Modor's Warhammer"/>
+            <item id="100201355" name="Lunatic Modor's Dagger"/>
             <item id="100001552" name="Lunatic Modor's Sword"/>
             <item id="100901207" name="Lunatic Modor's Greatsword"/>
+			<item id="101701237" name="Lunatic Modor's Bow"/>
             <item id="101301135" name="Lunatic Modor's Polearm"/>
             <item id="115001594" name="Lunatic Modor's Shield"/>
         </items>
@@ -19599,14 +19603,12 @@
             <item id="100101186" name="Modor's Warhammer"/>
             <item id="100001551" name="Modor's Sword"/>
             <item id="100901206" name="Modor's Greatsword"/>
-            <item id="101301134" name="Modor's Polearm"/>
             <item id="115001592" name="Modor's Shield"/>
         </items>
     </decomposable>
     <decomposable item_id="188052392" decomposable_name="Modor's Mythic Weapon Box" selectable="true">
         <items>
             <item id="100901207" name="Lunatic Modor's Greatsword"/>
-            <item id="101301135" name="Lunatic Modor's Polearm"/>
             <item id="100101188" name="Lunatic Modor's Warhammer"/>
             <item id="100001552" name="Lunatic Modor's Sword"/>
             <item id="115001594" name="Lunatic Modor's Shield"/>
@@ -20380,6 +20382,7 @@
         <items>
             <item id="100001558" name="Infinity Shard's Sword"/>
             <item id="100901210" name="Infinity Shard's Greatsword"/>
+			<item id="115001598" name="Infinity Shard's Shield"/>
             <item id="110601450" name="Infinity Shard's Breastplate"/>
             <item id="113601396" name="Infinity Shard's Greaves"/>
             <item id="111601412" name="Infinity Shard's Gauntlets"/>
@@ -23637,7 +23640,14 @@
             <item id="152014025" name="Gleaming Balaur Meat" count="5"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052599" decomposable_name="Defender's Supply Box"/>
+    <decomposable item_id="188052599" decomposable_name="Defender's Supply Box">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052600" decomposable_name="Beritran Supply Box">
         <items>
             <item id="167000646" name="Manastone: Attack +5 / HP +42"/>
@@ -23834,58 +23844,58 @@
         </items>
     </decomposable>
     <decomposable item_id="188052607" decomposable_name="Major Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000051" name="Major Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000055" name="Major Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000063" name="Major Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000059" name="Major Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052608" decomposable_name="Greater Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000052" name="Greater Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000056" name="Greater Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000064" name="Greater Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000060" name="Greater Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052609" decomposable_name="Standard Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000065" name="Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000053" name="Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000057" name="Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000061" name="Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052610" decomposable_name="Lesser Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000066" name="Lesser Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000054" name="Lesser Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000058" name="Lesser Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000062" name="Lesser Ancient Seal" count="2"/>
         </items>
     </decomposable>
@@ -23969,7 +23979,8 @@
 	</decomposable>
     <decomposable item_id="188052619" decomposable_name="Pashid's Claw Bundle">
         <items>
-            <item id="182213518" name="Pashid's Claw"/>
+            <item id="182213518" name="Pashid's Claw" race="ELYOS"/>
+			<item id="182213526" name="Pashid's Horn" race="ASMODIANS"/>
         </items>
     </decomposable>
     <decomposable item_id="188052620" decomposable_name="Cursed Circus Box">
@@ -28470,22 +28481,66 @@
     <decomposable item_id="188053306" decomposable_name="Ancient Crown Bundle"/>
     <decomposable item_id="188053307" decomposable_name="Legion's Honorable Reward Box"/>
     <decomposable item_id="188053308" decomposable_name="Legion's Illusion Godstone Bundle"/>
-    <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box"/>
+    <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053310" decomposable_name="Legion's Fine Ancient Manastone Bundle">
 		<items>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053311" decomposable_name="Legion's Greater Ancient Manastone Bundle"/>
-    <decomposable item_id="188053312" decomposable_name="Legion's Ancient Manastone Bundle"/>
-    <decomposable item_id="188053313" decomposable_name="Legion's Lesser Ancient Manastone Bundle"/>
-    <decomposable item_id="188053314" decomposable_name="Legion's Greater Composite Manastone Bundle"/>
-    <decomposable item_id="188053315" decomposable_name="Legion's Composite Manastone Bundle"/>
-    <decomposable item_id="188053316" decomposable_name="Legion's Lesser Composite Manastone Bundle"/>
-    <decomposable item_id="188053317" decomposable_name="Legion's Fine Crown Bundle"/>
-    <decomposable item_id="188053318" decomposable_name="Legion's Greater Crown Bundle"/>
-    <decomposable item_id="188053319" decomposable_name="Legion's Crown Bundle"/>
-    <decomposable item_id="188053320" decomposable_name="Legion's Lesser Crown Bundle"/>
+    <decomposable item_id="188053311" decomposable_name="Legion's Greater Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053312" decomposable_name="Legion's Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053313" decomposable_name="Legion's Lesser Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053314" decomposable_name="Legion's Greater Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053315" decomposable_name="Legion's Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053316" decomposable_name="Legion's Lesser Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_40"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053317" decomposable_name="Legion's Fine Crown Bundle">
+		<items>
+			<item id="186000051" name="Major Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053318" decomposable_name="Legion's Greater Crown Bundle">
+		<items>
+			<item id="186000052" name="Greater Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053319" decomposable_name="Legion's Crown Bundle">
+		<items>
+			<item id="186000053" name="Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053320" decomposable_name="Legion's Lesser Crown Bundle">
+		<items>
+			<item id="186000054" name="Lesser Ancient Crown"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053321" decomposable_name="[Event] Empyrean Plume Chest" selectable="true">
         <items>
             <item id="187100015" name="Kaisinel's Plume: Attack" race="ELYOS"/>
@@ -28639,8 +28694,112 @@
         </items>
     </decomposable>
     <decomposable item_id="188053413" decomposable_name="[Stamp] Noble Coin Pouch"/>
-    <decomposable item_id="188053414" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
-    <decomposable item_id="188053415" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
+    <decomposable item_id="188053414" decomposable_name="[Stamp] Noble Illusion Godstone Box">
+		<items>
+			<item id="168000178" name="[Stamp] Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000179" name="[Stamp] Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000180" name="[Stamp] Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000181" name="[Stamp] Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000182" name="[Stamp] Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000183" name="[Stamp] Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000184" name="[Stamp] Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000185" name="[Stamp] Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000186" name="[Stamp] Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+		<items>
+			<item id="168000187" name="[Stamp] Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000188" name="[Stamp] Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000189" name="[Stamp] Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000190" name="[Stamp] Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000191" name="[Stamp] Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000192" name="[Stamp] Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000193" name="[Stamp] Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000194" name="[Stamp] Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053415" decomposable_name="[Stamp] Noble Illusion Godstone Box">
+		<items>
+			<item id="168000178" name="[Stamp] Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000179" name="[Stamp] Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000180" name="[Stamp] Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000181" name="[Stamp] Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000182" name="[Stamp] Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000183" name="[Stamp] Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000184" name="[Stamp] Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000185" name="[Stamp] Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000186" name="[Stamp] Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+		<items>
+			<item id="168000187" name="[Stamp] Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000188" name="[Stamp] Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000189" name="[Stamp] Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000190" name="[Stamp] Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000191" name="[Stamp] Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000192" name="[Stamp] Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000193" name="[Stamp] Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000194" name="[Stamp] Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053416" decomposable_name="[Stamp] Noble Ancient Manastone Box">
         <items>
             <item id="167020084" name="[Stamp] Ancient Manastone: Accuracy +35"/>
@@ -29094,16 +29253,16 @@
     <decomposable item_id="188053617" decomposable_name="Noble Tidal Idian Bundle"/>
     <decomposable item_id="188053618" decomposable_name="Honorable Elim's Idian Bundle">
 		<items>
-			<item id="169405338" name="Pallasite Ore"/>
+			<item id="166050137" name="Honorable Elim's Idian: Physical Attack"/>
 		</items>
 		<items>
-			<item id="169405339" name="Pallasite Crystal"/>
+			<item id="166050138" name="Honorable Elim's Idian: Magical Attack"/>
 		</items>
 		<items>
-			<item id="169405340" name="Pallasite Powder"/>
+			<item id="166050139" name="Honorable Elim's Idian: Physical Defense"/>
 		</items>
 		<items>
-			<item id="169405341" name="Pallasite Refined Water"/>
+			<item id="166050140" name="Honorable Elim's Idian: Magical Defense"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053619" decomposable_name="Ancient Manastone Bundle"/>
@@ -29158,7 +29317,20 @@
     <decomposable item_id="188053625" decomposable_name="Empyrean Plume Bundle"/>
     <decomposable item_id="188053626" decomposable_name="Strong Wyvern Form Candy Bundle"/>
     <decomposable item_id="188053627" decomposable_name="Sleek Hovercycle Chest"/>
-    <decomposable item_id="188053628" decomposable_name="Pallasite Bundle"/>
+    <decomposable item_id="188053628" decomposable_name="Pallasite Bundle">
+		<items>
+			<item id="169405338" name="Pallasite Ore"/>
+		</items>
+		<items>
+			<item id="169405339" name="Pallasite Crystal"/>
+		</items>
+		<items>
+			<item id="169405340" name="Pallasite Powder"/>
+		</items>
+		<items>
+			<item id="169405341" name="Pallasite Refined Water"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053629" decomposable_name="Police Force Box"/>
     <decomposable item_id="188053630" decomposable_name="Greater Scroll Bundle"/>
     <decomposable item_id="188053631" decomposable_name="[Stamp] Noble Potion Bundle">
