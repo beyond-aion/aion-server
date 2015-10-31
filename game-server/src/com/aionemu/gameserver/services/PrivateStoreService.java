@@ -165,7 +165,7 @@ public class PrivateStoreService {
 						store.removeItem(storeItem.getItemObjId());
 
 					// Log the trade
-					log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + item.getItemCount()
+					log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + tradeItem.getCount()
 						+ "] to [Buyer: " + buyer.getName() + "] for [Price: " + price + "]");
 				}
 			}
