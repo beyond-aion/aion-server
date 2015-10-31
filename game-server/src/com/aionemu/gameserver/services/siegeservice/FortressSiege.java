@@ -166,7 +166,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		getArtifact().setRace(winner.getSiegeRace());
 
 		// reset occupy count
-		getSiegeLocation().setOccupiedCount(0);
+		getSiegeLocation().setOccupiedCount(1);
 
 		if (this.oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
