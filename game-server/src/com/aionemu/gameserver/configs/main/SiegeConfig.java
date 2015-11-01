@@ -48,21 +48,6 @@ public class SiegeConfig {
 	/**
 	 * Legendary npc's health multiplier
 	 */
-	@Property(key = "gameserver.source.health.multiplier", defaultValue = "1.0")
-	public static double SOURCE_HEALTH_MULTIPLIER = 1.0;
-	/**
-	 * Legendary npc's health mod
-	 */
-	@Property(key = "gameserver.source.health.mod", defaultValue = "false")
-	public static boolean SOURCE_HEALTH_MOD_ENABLED;
-	/**
-	 * Legendary npc's health multiplier
-	 */
 	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1.0")
 	public static double SIEGE_HEALTH_MULTIPLIER = 1.0;
-	/**
-	 * Tiamat's Incarnation dispell avatars
-	 */
-	@Property(key = "gameserver.siege.ida", defaultValue = "false")
-	public static boolean SIEGE_IDA_ENABLED;
 }
