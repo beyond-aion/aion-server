@@ -1,7 +1,6 @@
 package ai.worlds.kaldor;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import ai.AggressiveNpcAI2;
 
@@ -32,14 +31,12 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 @AIName("berserk_anoha")
 public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	
-	private Future<?> despawnTask;
-	private AtomicBoolean isSpawned = new AtomicBoolean(false);
+	private Future<?> despawnTask;	
 	
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		scheduleDespawn();
-		if (isSpawned.compareAndSet(false, true));
 	}
 	
 	private void scheduleDespawn() {
@@ -70,19 +67,19 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 		int brigadeId = LegionService.getInstance().getLegionBGeneral(legionId);
 		PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(brigadeId);
 		//TODO: Refactore this!
-		sendMail(pcd, 188053308, 10); //Illusion Godstone Bundle				
+		sendMail(pcd, 188053308, 20); //Illusion Godstone Bundle				
 		sendMail(pcd, 188053309, 100); //Ceramium Medal Bundle
-		sendMail(pcd, 188053310, 10); //Eternal Ancient Manastone Bundle
-		sendMail(pcd, 188053311, 15); //Fabled Ancient Manastone Bundle
-		sendMail(pcd, 188053312, 20); //Heroic Ancient Manastone Bundle
-		sendMail(pcd, 188053313, 25); //Superior Ancient Manastone Bundle
+		sendMail(pcd, 188053310, 20); //Eternal Ancient Manastone Bundle
+		sendMail(pcd, 188053311, 25); //Fabled Ancient Manastone Bundle
+		sendMail(pcd, 188053312, 30); //Heroic Ancient Manastone Bundle
+		sendMail(pcd, 188053313, 35); //Superior Ancient Manastone Bundle
 		sendMail(pcd, 188053314, 10); //L60 Composit Manastone Bundle
 		sendMail(pcd, 188053315, 15); //L50 Composit Manastone Bundle
 		sendMail(pcd, 188053316, 20); //L40 Composit Manastone Bundle
-		sendMail(pcd, 188053317, 5);  //Major Crown Bundle
-		sendMail(pcd, 188053318, 10); //Greater Crown Bundle
-		sendMail(pcd, 188053319, 15); //Crown Bundle
-		sendMail(pcd, 188053320, 20); //Lesser Crown Bundle
+		sendMail(pcd, 188053317, 15); //Major Crown Bundle
+		sendMail(pcd, 188053318, 20); //Greater Crown Bundle
+		sendMail(pcd, 188053319, 25); //Crown Bundle
+		sendMail(pcd, 188053320, 30); //Lesser Crown Bundle
 	}
 	
 	private void sendMail(PlayerCommonData receiver, int itemId, int count) { //TODO: Find Retail Mail

@@ -91,7 +91,7 @@ public class AnohasSwordAI2 extends NpcAI2 {
 							}
 						});
 					}
-				}, 60 * 60000);
+				}, 30 * 60000);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2375));
 			}
 			else
