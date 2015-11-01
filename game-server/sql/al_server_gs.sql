@@ -235,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `item_stones` (
   `category` int(2) NOT NULL default 0,
   `polishNumber` int(11) NOT NULL,
   `polishCharge` int(11) NOT NULL,
+  `proc_count` int(11) NOT NULL default 0,
   PRIMARY KEY (`item_unique_id`, `slot`, `category`),
   FOREIGN KEY (`item_unique_id`) references inventory (`item_unique_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -503,18 +504,6 @@ CREATE TABLE IF NOT EXISTS `siege_locations` (
   `legion_id` int (11) NOT NULL,
   `occupy_count` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for `siege_mercenaries`
--- ----------------------------
-
-CREATE TABLE IF NOT EXISTS `siege_mercenaries` (
-  `location_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL,
-  `race` enum('ELYOS','ASMODIANS') NOT NULL,
-  PRIMARY KEY (`location_id`,`zone_id`),
-  CONSTRAINT `siege_mercenaries_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `siege_locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

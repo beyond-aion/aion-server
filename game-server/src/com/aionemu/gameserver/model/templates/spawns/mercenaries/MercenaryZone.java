@@ -20,6 +20,14 @@ public class MercenaryZone {
 
 	@XmlAttribute(name = "zone")
 	private int zone;
+	@XmlAttribute(name = "costs")
+  private int costs;
+  @XmlAttribute(name = "cooldown")
+  private int cooldown;
+  @XmlAttribute(name = "msg_id")
+  private int msgId;
+  @XmlAttribute(name = "announce_id")
+  private int announceId;
 	@XmlElement(name = "spawn")
 	private List<Spawn> spawns;
 	@XmlTransient
@@ -30,6 +38,22 @@ public class MercenaryZone {
 	public int getZoneId() {
 		return zone;
 	}
+	
+	public int getCosts() {
+		return costs;
+  }
+
+  public int getCooldown() {
+  	return cooldown;
+  }
+
+  public int getMsgId() {
+  	return msgId;
+  }
+
+  public int getAnnounceId() {
+  	return announceId;
+  }
 
 	public List<Spawn> getSpawns() {
 		return spawns;

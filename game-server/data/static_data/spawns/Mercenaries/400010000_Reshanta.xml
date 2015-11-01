@@ -5,7 +5,7 @@
 			<mercenary_race race="ASMODIANS">
 				<mercenary_zone zone="1">
 					<!-- Divine Fortress Hired Aggressor -->
-					<spawn npc_id="881543" respawn_time="295">
+					<spawn npc_id="881543">
 						<spot x="2123.732" y="2008.996" z="2320.160" h="30"/>
 						<spot x="2125.959" y="2008.680" z="2320.161" h="90"/>
 						<spot x="2136.299" y="1847.520" z="2316.173" h="90"/>
@@ -14,7 +14,7 @@
 						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>
 					</spawn>
 					<!-- Divine Fortress Hired Assailant -->
-					<spawn npc_id="881545" respawn_time="295">
+					<spawn npc_id="881545">
 						<spot x="2125.854" y="2005.387" z="2319.545"/>
 						<spot x="2131.592" y="1857.717" z="2331.131"/>
 						<spot x="2131.675" y="1854.524" z="2330.342"/>
@@ -25,7 +25,7 @@
 				</mercenary_zone>
 				<mercenary_zone zone="2">
 					<!-- Divine Fortress Hired Aggressor -->
-					<spawn npc_id="881543" respawn_time="295">
+					<spawn npc_id="881543">
 						<spot x="2126.451" y="1950.818" z="2322.073" h="30"/>
 						<spot x="2126.793" y="1908.413" z="2322.073" h="90"/>
 						<spot x="2129.175" y="1950.926" z="2322.073" h="30"/>
@@ -36,7 +36,7 @@
 						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>	
 					</spawn>
 					<!-- Divine Fortress Hired Assailant -->
-					<spawn npc_id="881545" respawn_time="295">
+					<spawn npc_id="881545">
 						<spot x="2125.278" y="1948.829" z="2322.073" h="30"/>
 						<spot x="2125.290" y="1911.243" z="2322.073" h="90"/>
 						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>
@@ -47,7 +47,7 @@
 			<mercenary_race race="ELYOS">
 				<mercenary_zone zone="1">
 					<!-- Divine Fortress Hired Warrior -->
-					<spawn npc_id="881540" respawn_time="295">
+					<spawn npc_id="881540">
 						<spot x="2123.732" y="2008.996" z="2320.160" h="30"/>
 						<spot x="2125.959" y="2008.680" z="2320.161" h="90"/>
 						<spot x="2136.299" y="1847.520" z="2316.173" h="90"/>
@@ -56,7 +56,7 @@
 						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>						
 					</spawn>
 					<!-- Divine Fortress Hired Challenger -->
-					<spawn npc_id="881542" respawn_time="295">
+					<spawn npc_id="881542">
 						<spot x="2125.854" y="2005.387" z="2319.545"/>
 						<spot x="2131.592" y="1857.717" z="2331.131"/>
 						<spot x="2131.675" y="1854.524" z="2330.342"/>
@@ -67,7 +67,7 @@
 				</mercenary_zone>
 				<mercenary_zone zone="2">
 					<!-- Divine Fortress Hired Warrior -->
-					<spawn npc_id="881540" respawn_time="295">
+					<spawn npc_id="881540">
 						<spot x="2126.451" y="1950.818" z="2322.073" h="30"/>
 						<spot x="2126.793" y="1908.413" z="2322.073" h="90"/>
 						<spot x="2129.175" y="1950.926" z="2322.073" h="30"/>
@@ -78,7 +78,7 @@
 						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>						
 					</spawn>
 					<!-- Divine Fortress Hired Challenger -->
-					<spawn npc_id="881542" respawn_time="295">
+					<spawn npc_id="881542">
 						<spot x="2125.278" y="1948.829" z="2322.073" h="30"/>
 						<spot x="2125.290" y="1911.243" z="2322.073" h="90"/>
 						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>

@@ -105,6 +105,13 @@ public class SiegeCannonAI2 extends NpcAI2 {
 			case 272349:
 			case 272350:
 			case 272351:
+			case 252164: //Wealhtheow Elyos
+      case 252165:
+      case 252166:
+      case 252167:
+      case 252168:
+      case 252169:
+      case 252170:
 				return 0x538941; // 21385 65
 			case 251735: // Krotan Asmo - Sky Cannon
 			case 251736:
@@ -168,9 +175,17 @@ public class SiegeCannonAI2 extends NpcAI2 {
 			case 272359:
 			case 272360:
 			case 272361:
+			case 252171: //Wealhtheow Asmo
+      case 252172:
+      case 252173:
+      case 252174:
+      case 252175:
+      case 252176:
+      case 252177:
 				return 0x538A41; // 21386 65
+			default:
+				return 0;
 		}
-		return 0;
 	}
 
 	@Override

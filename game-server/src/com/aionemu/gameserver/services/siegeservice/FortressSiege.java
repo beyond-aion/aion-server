@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.siegeservice;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastTable;
 
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -47,6 +49,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class FortressSiege extends Siege<FortressLocation> {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
+	private final Map<Integer, MercenaryLocation> activeMercenaryLocs = new ConcurrentHashMap<>();
 	private final AbyssPointsListener addAPListener = new AbyssPointsListener(this);
 	private int oldLegionId;
 
@@ -77,6 +80,18 @@ public class FortressSiege extends Siege<FortressLocation> {
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
+		initMercenaryZones();
+	}
+	
+	private final void initMercenaryZones() {
+		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); //can be null if not implemented
+		if (mercs == null)
+			return;
+		for (SiegeMercenaryZone zone : mercs) {
+			MercenaryLocation mLoc = new MercenaryLocation(zone, getSiegeLocation().getRace(), getSiegeLocationId());
+			if (mLoc != null)
+				activeMercenaryLocs.put(zone.getId(), mLoc);
+		}
 	}
 
 	@Override
@@ -155,11 +170,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 		try {
 			// Players gain buffs on capture of some fortresses
 			applyWorldBuffs(winner.getSiegeRace(), getSiegeLocation().getRace());
-			for (int i = 1; i <= 4; i++) {
-				getSiegeLocation().despawnMercenaries(i);
-			}
 		} catch (Exception e) {
-			log.error("Error while despawning mercenaries/applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
+			log.error("Error while applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
 		}
 		// Set new fortress and artifact owner race
 		getSiegeLocation().setRace(winner.getSiegeRace());
@@ -439,4 +451,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		return getArtifact() != null;
 	}
 
+	public MercenaryLocation getMercenaryLocationByZoneId(int zoneId) {
+		return activeMercenaryLocs.get(zoneId);
+	}
 }
