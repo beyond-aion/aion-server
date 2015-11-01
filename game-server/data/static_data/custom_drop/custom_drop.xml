@@ -2807,6 +2807,15 @@
 			<drop item_id="188052163" name="Golden Treasure Box" min_amount="1" max_amount="1" chance="100" each_member="true"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Theobomos Lab -->
+	<npc_drop npc_id="700826" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="110900040" name="Gentlewoman's Dress" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="125002031" name="Gentlewoman's Tiara" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Tiamat Stronghold -->
 	<npc_drop npc_id="701541" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Tempering Solution (Shared)">
