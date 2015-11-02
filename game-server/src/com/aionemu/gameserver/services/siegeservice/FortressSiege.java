@@ -89,7 +89,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 			return;
 		for (SiegeMercenaryZone zone : mercs) {
 			MercenaryLocation mLoc = new MercenaryLocation(zone, getSiegeLocation().getRace(), getSiegeLocationId());
-			if (mLoc != null)
 				activeMercenaryLocs.put(zone.getId(), mLoc);
 		}
 	}
@@ -329,14 +328,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	protected void giveRewardsToLegion() {
 		try {
-			// We do not give rewards if fortress was captured for first time
-			if (isBossKilled()) {
-				if (LoggingConfig.LOG_SIEGE)
-					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :"
-						+ getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress was captured(siege boss killed).");
-				return;
-			}
-
 			// Legion with id 0 = not exists?
 			if (getSiegeLocation().getLegionId() == 0) {
 				if (LoggingConfig.LOG_SIEGE)
@@ -409,7 +400,11 @@ public class FortressSiege extends Siege<FortressLocation> {
 			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
 			List<Integer> topPlayersIds = new FastTable<>();
 			topPlayersIds.addAll(playerAbyssPoints.keySet());
-			SiegeResult result = isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER;
+			SiegeResult result;
+			if (isBossKilled())
+				result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
+			else
+				result = isWinner ? SiegeResult.DEFENDER : SiegeResult.EMPTY;
 
 			int i = 0;
 			List<SiegeReward> playerRewards = getSiegeLocation().getReward();
@@ -420,16 +415,16 @@ public class FortressSiege extends Siege<FortressLocation> {
 					Integer playerId = topPlayersIds.get(i);
 					PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 					++rewardedPC;
-
-					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
-						topGrade.getMedalCount(), 0);
+					if (result.equals(SiegeResult.OCCUPY) || result.equals(SiegeResult.DEFENDER))
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), 
+							topGrade.getItemId(), topGrade.getMedalCount(), 0);
 
 					if (getSiegeLocation().hasValidGpRewards())
 						GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while calculating rewards for fortress siege.", e);
+			log.error("[SIEGE] Error while calculating rewards for fortress siege.", e);
 		}
 	}
 
