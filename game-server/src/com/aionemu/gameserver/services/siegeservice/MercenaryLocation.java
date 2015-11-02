@@ -31,7 +31,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  */
 public class MercenaryLocation {
 
-	private final static Logger log = LoggerFactory.getLogger("[MERC]");
+	private final static Logger log = LoggerFactory.getLogger(MercenaryLocation.class);
 	private List<VisibleObject> spawnedMercs = new ArrayList<>();
 	private MercenaryZone spawns; // TODO: Change this to SpawnGroup2
 	private SiegeMercenaryZone smz;
@@ -43,12 +43,15 @@ public class MercenaryLocation {
 		this.smz = template;
 		this.siegeId = siegeId;
 		this.race = Race.getRaceByString(race.name());
-		spawns = getSpawnZone();
+		if (this.race != null)
+			spawns = getSpawnZone();
 	}
 
 	public void spawn() {
 		despawnCurrentMercs();
-		List<VisibleObject> mercs = new ArrayList<VisibleObject>();
+		if (spawns == null)
+			return;
+		List<VisibleObject> mercs = new ArrayList<>();
 		for (Spawn spawn : spawns.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
 				SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(spawns.getWorldId(), spawn.getNpcId(), siegeId, SiegeRace.getByRace(race),
@@ -114,7 +117,7 @@ public class MercenaryLocation {
 		MercenaryZone tempZone = null;
 		MercenarySpawn spawn = DataManager.SPAWNS_DATA2.getMercenarySpawnBySiegeId(siegeId);
 		if (spawn == null) {
-			log.error("There is no mercenaries spawns for siege " + siegeId + " and zone" + smz.getId());
+			log.error("[MERC] There is no mercenaries spawns for siege " + siegeId + " and zone" + smz.getId());
 			return tempZone;
 		}
 		MercenaryRace targetRace = null;
@@ -125,7 +128,7 @@ public class MercenaryLocation {
 			}
 		}
 		if (targetRace == null) {
-			log.error("There is no mercenary race for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
+			log.error("[MERC] There is no mercenary race for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
 			return tempZone;
 		}
 		for (MercenaryZone mzone : targetRace.getMercenaryZones()) {
@@ -135,7 +138,7 @@ public class MercenaryLocation {
 			}
 		}
 		if (tempZone == null) {
-			log.error("There is no mercenary zone for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
+			log.error("[MERC] There is no mercenary zone for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
 			return tempZone;
 		}
 		return tempZone;

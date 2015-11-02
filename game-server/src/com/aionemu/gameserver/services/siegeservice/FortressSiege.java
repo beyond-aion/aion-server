@@ -84,6 +84,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 	
 	private final void initMercenaryZones() {
+		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
+			return;
 		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); //can be null if not implemented
 		if (mercs == null)
 			return;
