@@ -787,6 +787,9 @@
 		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
 			<drop item_id="166500002" name="Amplification Stone" min_amount="1" max_amount="1" chance="5" each_member="true"/>
 		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188052084" name="Dragon Lord Tiamat Treasure Chest" min_amount="1" max_amount="1" chance="100" each_member="true"/>
+		</drop_group>
 	</npc_drop>
 	<!-- Elementis Forest -->
 	<npc_drop npc_id="700999" replace_type="FULL">
