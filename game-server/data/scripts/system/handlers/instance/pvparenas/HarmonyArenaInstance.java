@@ -29,7 +29,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -327,7 +326,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(player.getObjectId());
 				float playerRate = player.getRates().getHarmonyRewardRate();
 				AbyssPointsService.addAp(player, group.getBasicAP() + group.getRankingAP() + (int) (group.getScoreAP() * playerRate));
-				GloryPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + group.getScoreGP());
+				//GloryPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + group.getScoreGP());
 				int courage = group.getBasicCourage() + group.getRankingCourage() + (int) (group.getScoreCourage() * playerRate);
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);
