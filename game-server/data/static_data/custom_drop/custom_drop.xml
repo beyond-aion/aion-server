@@ -1495,6 +1495,22 @@
 			<drop item_id="188053238" name="Scroll Bundle (Linkgate Foundry)" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Lower Udas Temple -->
+	<npc_drop npc_id="216150" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Legend)">
+			<drop item_id="125002258" name="Forsaken Temple Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002259" name="Forsaken Temple Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002260" name="Forsaken Temple Chain Hood" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002261" name="Forsaken Temple Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125002263" name="Jotun Worthy Hat" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Epic)">
+			<drop item_id="123001030" name="Jotun Blacksmith's Leather Belt" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="123001031" name="Jotun Blacksmith's Sash" min_amount="1" max_amount="1" chance="3"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Miren Barracks -->
 	<npc_drop npc_id="702296" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
