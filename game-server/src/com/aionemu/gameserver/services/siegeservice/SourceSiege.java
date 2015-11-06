@@ -110,11 +110,11 @@ public class SourceSiege extends Siege<SourceLocation> {
 			throw new SiegeException("Siege Boss not found for siege " + getSiegeLocationId());
 		}
 
-		if (SiegeConfig.SOURCE_HEALTH_MOD_ENABLED) {
+		if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
 			NpcTemplate templ = boss.getObjectTemplate();
 			if (templ.getRating().equals(NpcRating.LEGENDARY)) {
 				NpcLifeStats life = boss.getLifeStats();
-				int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SOURCE_HEALTH_MULTIPLIER);
+				int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 				templ.getStatsTemplate().setMaxHp(maxHpPercent);
 				life.setCurrentHpPercent(100);
 			}

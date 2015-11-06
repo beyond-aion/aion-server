@@ -16508,34 +16508,22 @@
 	</decomposable>
     <decomposable item_id="188052118" decomposable_name="Altar of Avarice Fortress Siege Defense Reward Box">
 		<items>
-            <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
-            <item id="164000076" name="Greater Running Scroll" count="50"/>
-            <item id="186000247" name="Major Danuar Relic"/>
+            <item id="122001654" name="Altar of Avarice Fortress Seal Ring (7 days)"/>
         </items>
 	</decomposable>
     <decomposable item_id="188052119" decomposable_name="Temple of Scales Fortress Siege Defense Reward Box">
 		<items>
-            <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
-            <item id="164000076" name="Greater Running Scroll" count="50"/>
-            <item id="186000247" name="Major Danuar Relic"/>
+            <item id="122001655" name="Temple of Scales Fortress Seal Ring (7 days)"/>
         </items>
 	</decomposable>
     <decomposable item_id="188052120" decomposable_name="Vorgaltem Citadel Fortress Siege Defense Reward Box">
 		<items>
-            <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
-            <item id="164000076" name="Greater Running Scroll" count="50"/>
-            <item id="186000247" name="Major Danuar Relic"/>
+            <item id="122001656" name="Vorgaltem Citadel Fortress Seal Ring (7 days)"/>
         </items>
 	</decomposable>
     <decomposable item_id="188052121" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box">
 		<items>
-            <item id="162000143" name="Brigade General's Liquid Courage"/>
-            <item id="164000134" name="Greater Awakening Scroll" count="50"/>
-            <item id="164000076" name="Greater Running Scroll" count="50"/>
-            <item id="186000247" name="Major Danuar Relic"/>
+            <item id="122001657" name="Crimson Temple Fortress Seal Ring (7 days)"/>
         </items>
 	</decomposable>
     <decomposable item_id="188052122" decomposable_name="[Event] Jacket Costume Box"/>
@@ -19580,6 +19568,8 @@
         <items>
 			<item id="100101186" name="Modor's Warhammer"/>
             <item id="100001551" name="Modor's Sword"/>
+			<item id="100201354" name="Modor's Dagger"/>
+            <item id="101701236" name="Modor's Bow"/>
             <item id="100901206" name="Modor's Greatsword"/>
             <item id="101301134" name="Modor's Polearm"/>
             <item id="115001592" name="Modor's Shield"/>
@@ -19588,8 +19578,10 @@
     <decomposable item_id="188052390" decomposable_name="Modor's Mythic Weapon Box" selectable="true">
         <items>
             <item id="100101188" name="Lunatic Modor's Warhammer"/>
+            <item id="100201355" name="Lunatic Modor's Dagger"/>
             <item id="100001552" name="Lunatic Modor's Sword"/>
             <item id="100901207" name="Lunatic Modor's Greatsword"/>
+			<item id="101701237" name="Lunatic Modor's Bow"/>
             <item id="101301135" name="Lunatic Modor's Polearm"/>
             <item id="115001594" name="Lunatic Modor's Shield"/>
         </items>
@@ -19599,14 +19591,12 @@
             <item id="100101186" name="Modor's Warhammer"/>
             <item id="100001551" name="Modor's Sword"/>
             <item id="100901206" name="Modor's Greatsword"/>
-            <item id="101301134" name="Modor's Polearm"/>
             <item id="115001592" name="Modor's Shield"/>
         </items>
     </decomposable>
     <decomposable item_id="188052392" decomposable_name="Modor's Mythic Weapon Box" selectable="true">
         <items>
             <item id="100901207" name="Lunatic Modor's Greatsword"/>
-            <item id="101301135" name="Lunatic Modor's Polearm"/>
             <item id="100101188" name="Lunatic Modor's Warhammer"/>
             <item id="100001552" name="Lunatic Modor's Sword"/>
             <item id="115001594" name="Lunatic Modor's Shield"/>
@@ -20380,6 +20370,7 @@
         <items>
             <item id="100001558" name="Infinity Shard's Sword"/>
             <item id="100901210" name="Infinity Shard's Greatsword"/>
+			<item id="115001598" name="Infinity Shard's Shield"/>
             <item id="110601450" name="Infinity Shard's Breastplate"/>
             <item id="113601396" name="Infinity Shard's Greaves"/>
             <item id="111601412" name="Infinity Shard's Gauntlets"/>
@@ -23637,7 +23628,14 @@
             <item id="152014025" name="Gleaming Balaur Meat" count="5"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052599" decomposable_name="Defender's Supply Box"/>
+    <decomposable item_id="188052599" decomposable_name="Defender's Supply Box">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052600" decomposable_name="Beritran Supply Box">
         <items>
             <item id="167000646" name="Manastone: Attack +5 / HP +42"/>
@@ -23834,58 +23832,58 @@
         </items>
     </decomposable>
     <decomposable item_id="188052607" decomposable_name="Major Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000051" name="Major Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000055" name="Major Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000063" name="Major Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000059" name="Major Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052608" decomposable_name="Greater Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000052" name="Greater Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000056" name="Greater Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000064" name="Greater Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000060" name="Greater Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052609" decomposable_name="Standard Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000065" name="Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000053" name="Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000057" name="Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000061" name="Ancient Seal" count="2"/>
         </items>
     </decomposable>
     <decomposable item_id="188052610" decomposable_name="Lesser Relic Box">
-        <items chance="50.0">
+        <items>
             <item id="186000066" name="Lesser Ancient Icon" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000054" name="Lesser Ancient Crown" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000058" name="Lesser Ancient Goblet" count="2"/>
         </items>
-        <items chance="50.0">
+        <items>
             <item id="186000062" name="Lesser Ancient Seal" count="2"/>
         </items>
     </decomposable>
@@ -23969,7 +23967,8 @@
 	</decomposable>
     <decomposable item_id="188052619" decomposable_name="Pashid's Claw Bundle">
         <items>
-            <item id="182213518" name="Pashid's Claw"/>
+            <item id="182213518" name="Pashid's Claw" race="ELYOS"/>
+			<item id="182213526" name="Pashid's Horn" race="ASMODIANS"/>
         </items>
     </decomposable>
     <decomposable item_id="188052620" decomposable_name="Cursed Circus Box">
@@ -27688,25 +27687,973 @@
     <decomposable item_id="188053115" decomposable_name="Ahserion's Flight Godstone Bundle"/>
     <decomposable item_id="188053116" decomposable_name="Ahserion's Flight Recharger Bundle"/>
     <decomposable item_id="188053117" decomposable_name="Ahserion's Glory Reward Box"/>
-    <decomposable item_id="188053118" decomposable_name="Lesser Betrayer's Equipment Box"/>
-    <decomposable item_id="188053119" decomposable_name="Greater Betrayer's Equipment Box"/>
-    <decomposable item_id="188053120" decomposable_name="Danuar Reliquary Loot [Weapon]"/>
-    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]"/>
-    <decomposable item_id="188053122" decomposable_name="Illuminary Obelisk Loot [Weapon]"/>
-    <decomposable item_id="188053123" decomposable_name="Illuminary Obelisk Loot [Armor]"/>
-    <decomposable item_id="188053124" decomposable_name="Infinity Shard Equipment Loot"/>
-    <decomposable item_id="188053125" decomposable_name="Level 7 Invader Reward Box (Level 45 or lower)"/>
-    <decomposable item_id="188053126" decomposable_name="Level 6 Invader Reward Box (Level 45 or lower)"/>
-    <decomposable item_id="188053127" decomposable_name="Level 5 Invader Reward Box (Level 60 or lower)"/>
-    <decomposable item_id="188053128" decomposable_name="Level 4 Invader Reward Box (Level 60 or lower)"/>
-    <decomposable item_id="188053129" decomposable_name="Level 3 Invader Reward Box"/>
-    <decomposable item_id="188053130" decomposable_name="Level 2 Invader Reward Box"/>
-    <decomposable item_id="188053131" decomposable_name="Level 1 Invader Reward Box"/>
-    <decomposable item_id="188053132" decomposable_name="Altar of Avarice Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188053133" decomposable_name="Temple of Scales Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188053134" decomposable_name="Vorgaltem Citadel Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188053135" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box"/>
-    <decomposable item_id="188053136" decomposable_name="Balaurea Fortress Siege Defense Consumables Box"/>
+    <decomposable item_id="188053118" decomposable_name="Lesser Betrayer's Equipment Box">
+		<items>
+			<item id="100901326" name="Lesser Betrayer's Greatsword" player_class="TEMPLAR"/>
+			<item id="101301231" name="Lesser Betrayer's Polearm" player_class="GLADIATOR"/>
+			<item id="100001700" name="Lesser Betrayer's Sword" player_class="ASSASSIN"/>
+			<item id="101701336" name="Lesser Betrayer's Bow" player_class="RANGER"/>
+			<item id="100101299" name="Lesser Betrayer's Mace" player_class="CLERIC"/>
+			<item id="101501322" name="Lesser Betrayer's Staff" player_class="CHANTER"/>
+			<item id="100501285" name="Lesser Betrayer's Orb" player_class="SORCERER"/>
+			<item id="100501285" name="Lesser Betrayer's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="101801186" name="Lesser Betrayer's Pistol" player_class="GUNNER"/>
+			<item id="102001214" name="Lesser Betrayer's Harp" player_class="BARD"/>
+			<item id="102101020" name="Lesser Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="100001700" name="Lesser Betrayer's Sword" player_class="TEMPLAR"/>
+			<item id="100001700" name="Lesser Betrayer's Sword" player_class="GLADIATOR"/>
+			<item id="100201471" name="Lesser Betrayer's Dagger" player_class="ASSASSIN"/>
+			<item id="101701336" name="Lesser Betrayer's Bow" player_class="RANGER"/>
+			<item id="115001722" name="Lesser Betrayer's Shield" player_class="CLERIC"/>
+			<item id="101501322" name="Lesser Betrayer's Staff" player_class="CHANTER"/>
+			<item id="100601395" name="Lesser Betrayer's Spellbook" player_class="SORCERER"/>
+			<item id="100601395" name="Lesser Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="101901097" name="Lesser Betrayer's Aethercannon" player_class="GUNNER"/>
+			<item id="102001214" name="Lesser Betrayer's Harp" player_class="BARD"/>
+			<item id="102101020" name="Lesser Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="110101799" name="Lesser Betrayer's Tunic" player_class="SORCERER"/>
+			<item id="110101799" name="Lesser Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110101799" name="Lesser Betrayer's Tunic" player_class="BARD"/>
+			<item id="110301782" name="Lesser Betrayer's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301782" name="Lesser Betrayer's Jerkin" player_class="RANGER"/>
+			<item id="110301782" name="Lesser Betrayer's Jerkin" player_class="GUNNER"/>
+			<item id="110551118" name="Lesser Betrayer's Hauberk" player_class="CLERIC"/>
+			<item id="110551118" name="Lesser Betrayer's Hauberk" player_class="CHANTER"/>
+			<item id="110551118" name="Lesser Betrayer's Hauberk" player_class="RIDER"/>
+			<item id="110601585" name="Lesser Betrayer's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601585" name="Lesser Betrayer's Breastplate" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="111101619" name="Lesser Betrayer's Gloves" player_class="SORCERER"/>
+			<item id="111101619" name="Lesser Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101619" name="Lesser Betrayer's Gloves" player_class="BARD"/>
+			<item id="111301720" name="Lesser Betrayer's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301720" name="Lesser Betrayer's Vambrace" player_class="RANGER"/>
+			<item id="111301720" name="Lesser Betrayer's Vambrace" player_class="GUNNER"/>
+			<item id="111501677" name="Lesser Betrayer's Handguards" player_class="CLERIC"/>
+			<item id="111501677" name="Lesser Betrayer's Handguards" player_class="CHANTER"/>
+			<item id="111501677" name="Lesser Betrayer's Handguards" player_class="RIDER"/>
+			<item id="111601548" name="Lesser Betrayer's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601548" name="Lesser Betrayer's Gauntlets" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="112101569" name="Lesser Betrayer's Pauldrons" player_class="SORCERER"/>
+			<item id="112101569" name="Lesser Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101569" name="Lesser Betrayer's Pauldrons" player_class="BARD"/>
+			<item id="112301659" name="Lesser Betrayer's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301659" name="Lesser Betrayer's Shoulderguards" player_class="RANGER"/>
+			<item id="112301659" name="Lesser Betrayer's Shoulderguards" player_class="GUNNER"/>
+			<item id="112501616" name="Lesser Betrayer's Spaulders" player_class="CLERIC"/>
+			<item id="112501616" name="Lesser Betrayer's Spaulders" player_class="CHANTER"/>
+			<item id="112501616" name="Lesser Betrayer's Spaulders" player_class="RIDER"/>
+			<item id="112601530" name="Lesser Betrayer's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601530" name="Lesser Betrayer's Shoulderplates" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="113101631" name="Lesser Betrayer's Leggings" player_class="SORCERER"/>
+			<item id="113101631" name="Lesser Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101631" name="Lesser Betrayer's Leggings" player_class="BARD"/>
+			<item id="113301751" name="Lesser Betrayer's Breeches" player_class="ASSASSIN"/>
+			<item id="113301751" name="Lesser Betrayer's Breeches" player_class="RANGER"/>
+			<item id="113301751" name="Lesser Betrayer's Breeches" player_class="GUNNER"/>
+			<item id="113501695" name="Lesser Betrayer's Chausses" player_class="CLERIC"/>
+			<item id="113501695" name="Lesser Betrayer's Chausses" player_class="CHANTER"/>
+			<item id="113501695" name="Lesser Betrayer's Chausses" player_class="RIDER"/>
+			<item id="113601531" name="Lesser Betrayer's Greaves" player_class="TEMPLAR"/>
+			<item id="113601531" name="Lesser Betrayer's Greaves" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="114101665" name="Lesser Betrayer's Shoes" player_class="SORCERER"/>
+			<item id="114101665" name="Lesser Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101665" name="Lesser Betrayer's Shoes" player_class="BARD"/>
+			<item id="114301788" name="Lesser Betrayer's Boots" player_class="ASSASSIN"/>
+			<item id="114301788" name="Lesser Betrayer's Boots" player_class="RANGER"/>
+			<item id="114301788" name="Lesser Betrayer's Boots" player_class="GUNNER"/>
+			<item id="114501705" name="Lesser Betrayer's Brogans" player_class="CLERIC"/>
+			<item id="114501705" name="Lesser Betrayer's Brogans" player_class="CHANTER"/>
+			<item id="114501705" name="Lesser Betrayer's Brogans" player_class="RIDER"/>
+			<item id="114601538" name="Lesser Betrayer's Sabatons" player_class="TEMPLAR"/>
+			<item id="114601538" name="Lesser Betrayer's Sabatons" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="125004066" name="Lesser Betrayer's Headband" player_class="SORCERER"/>
+			<item id="125004066" name="Lesser Betrayer's Headband" player_class="SPIRIT_MASTER"/>
+			<item id="125004066" name="Lesser Betrayer's Headband" player_class="BARD"/>
+			<item id="125004067" name="Lesser Betrayer's Hat" player_class="ASSASSIN"/>
+			<item id="125004067" name="Lesser Betrayer's Hat" player_class="RANGER"/>
+			<item id="125004067" name="Lesser Betrayer's Hat" player_class="GUNNER"/>
+			<item id="125004068" name="Lesser Betrayer's Chain Helm" player_class="CLERIC"/>
+			<item id="125004068" name="Lesser Betrayer's Chain Helm" player_class="CHANTER"/>
+			<item id="125004068" name="Lesser Betrayer's Chain Helm" player_class="RIDER"/>
+			<item id="125004069" name="Lesser Betrayer's Helm" player_class="TEMPLAR"/>
+			<item id="125004069" name="Lesser Betrayer's Helm" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="120001505" name="Lesser Betrayer's Ruby Earrings" player_class="TEMPLAR"/>
+			<item id="120001505" name="Lesser Betrayer's Ruby Earrings" player_class="GLADIATOR"/>
+			<item id="120001505" name="Lesser Betrayer's Ruby Earrings" player_class="ASSASSIN"/>
+			<item id="120001505" name="Lesser Betrayer's Ruby Earrings" player_class="RANGER"/>
+			<item id="120001505" name="Lesser Betrayer's Ruby Earrings" player_class="CHANTER"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="SORCERER"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="SPIRIT_MASTER"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="GUNNER"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="CLERIC"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="BARD"/>
+			<item id="120001506" name="Lesser Betrayer's Sapphire Earrings" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="121001377" name="Lesser Betrayer's Ruby Necklace" player_class="TEMPLAR"/>
+			<item id="121001377" name="Lesser Betrayer's Ruby Necklace" player_class="GLADIATOR"/>
+			<item id="121001377" name="Lesser Betrayer's Ruby Necklace" player_class="ASSASSIN"/>
+			<item id="121001377" name="Lesser Betrayer's Ruby Necklace" player_class="RANGER"/>
+			<item id="121001377" name="Lesser Betrayer's Ruby Necklace" player_class="CHANTER"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="SORCERER"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="SPIRIT_MASTER"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="GUNNER"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="CLERIC"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="BARD"/>
+			<item id="121001378" name="Lesser Betrayer's Sapphire Necklace" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="122001646" name="Lesser Betrayer's Ruby Ring" player_class="TEMPLAR"/>
+			<item id="122001646" name="Lesser Betrayer's Ruby Ring" player_class="GLADIATOR"/>
+			<item id="122001646" name="Lesser Betrayer's Ruby Ring" player_class="ASSASSIN"/>
+			<item id="122001646" name="Lesser Betrayer's Ruby Ring" player_class="RANGER"/>
+			<item id="122001646" name="Lesser Betrayer's Ruby Ring" player_class="CHANTER"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="SORCERER"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="SPIRIT_MASTER"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="GUNNER"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="CLERIC"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="BARD"/>
+			<item id="122001647" name="Lesser Betrayer's Sapphire Ring" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="123001423" name="Lesser Betrayer's Belt" player_class="TEMPLAR"/>
+			<item id="123001423" name="Lesser Betrayer's Belt" player_class="GLADIATOR"/>
+			<item id="123001423" name="Lesser Betrayer's Belt" player_class="ASSASSIN"/>
+			<item id="123001423" name="Lesser Betrayer's Belt" player_class="RANGER"/>
+			<item id="123001423" name="Lesser Betrayer's Belt" player_class="CHANTER"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="SORCERER"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="SPIRIT_MASTER"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="GUNNER"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="CLERIC"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="BARD"/>
+			<item id="123001424" name="Lesser Betrayer's Sash" player_class="RIDER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053119" decomposable_name="Greater Betrayer's Equipment Box">
+		<items>
+			<item id="100901327" name="Greater Betrayer's Greatsword" player_class="TEMPLAR"/>
+			<item id="101301232" name="Greater Betrayer's Polearm" player_class="GLADIATOR"/>
+			<item id="100001701" name="Greater Betrayer's Sword" player_class="ASSASSIN"/>
+			<item id="101701337" name="Greater Betrayer's Bow" player_class="RANGER"/>
+			<item id="100101300" name="Greater Betrayer's Mace" player_class="CLERIC"/>
+			<item id="101501323" name="Greater Betrayer's Staff" player_class="CHANTER"/>
+			<item id="100501286" name="Greater Betrayer's Orb" player_class="SORCERER"/>
+			<item id="100501286" name="Greater Betrayer's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="101801187" name="Greater Betrayer's Pistol" player_class="GUNNER"/>
+			<item id="102001215" name="Greater Betrayer's Harp" player_class="BARD"/>
+			<item id="102101021" name="Greater Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="100001701" name="Greater Betrayer's Sword" player_class="TEMPLAR"/>
+			<item id="100001701" name="Greater Betrayer's Sword" player_class="GLADIATOR"/>
+			<item id="100201472" name="Greater Betrayer's Dagger" player_class="ASSASSIN"/>
+			<item id="101701337" name="Greater Betrayer's Bow" player_class="RANGER"/>
+			<item id="115001723" name="Greater Betrayer's Shield" player_class="CLERIC"/>
+			<item id="101501323" name="Greater Betrayer's Staff" player_class="CHANTER"/>
+			<item id="100601396" name="Greater Betrayer's Spellbook" player_class="SORCERER"/>
+			<item id="100601396" name="Greater Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="101901098" name="Greater Betrayer's Aethercannon" player_class="GUNNER"/>
+			<item id="102001215" name="Greater Betrayer's Harp" player_class="BARD"/>
+			<item id="102101021" name="Greater Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="110101800" name="Greater Betrayer's Tunic" player_class="SORCERER"/>
+			<item id="110101800" name="Greater Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110101800" name="Greater Betrayer's Tunic" player_class="BARD"/>
+			<item id="110301783" name="Greater Betrayer's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301783" name="Greater Betrayer's Jerkin" player_class="RANGER"/>
+			<item id="110301783" name="Greater Betrayer's Jerkin" player_class="GUNNER"/>
+			<item id="110551119" name="Greater Betrayer's Hauberk" player_class="CLERIC"/>
+			<item id="110551119" name="Greater Betrayer's Hauberk" player_class="CHANTER"/>
+			<item id="110551119" name="Greater Betrayer's Hauberk" player_class="RIDER"/>
+			<item id="110601586" name="Greater Betrayer's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601586" name="Greater Betrayer's Breastplate" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="111101620" name="Greater Betrayer's Gloves" player_class="SORCERER"/>
+			<item id="111101620" name="Greater Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101620" name="Greater Betrayer's Gloves" player_class="BARD"/>
+			<item id="111301721" name="Greater Betrayer's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301721" name="Greater Betrayer's Vambrace" player_class="RANGER"/>
+			<item id="111301721" name="Greater Betrayer's Vambrace" player_class="GUNNER"/>
+			<item id="111501678" name="Greater Betrayer's Handguards" player_class="CLERIC"/>
+			<item id="111501678" name="Greater Betrayer's Handguards" player_class="CHANTER"/>
+			<item id="111501678" name="Greater Betrayer's Handguards" player_class="RIDER"/>
+			<item id="111601549" name="Greater Betrayer's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601549" name="Greater Betrayer's Gauntlets" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="112101570" name="Greater Betrayer's Pauldrons" player_class="SORCERER"/>
+			<item id="112101570" name="Greater Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101570" name="Greater Betrayer's Pauldrons" player_class="BARD"/>
+			<item id="112301660" name="Greater Betrayer's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301660" name="Greater Betrayer's Shoulderguards" player_class="RANGER"/>
+			<item id="112301660" name="Greater Betrayer's Shoulderguards" player_class="GUNNER"/>
+			<item id="112501617" name="Greater Betrayer's Spaulders" player_class="CLERIC"/>
+			<item id="112501617" name="Greater Betrayer's Spaulders" player_class="CHANTER"/>
+			<item id="112501617" name="Greater Betrayer's Spaulders" player_class="RIDER"/>
+			<item id="112601531" name="Greater Betrayer's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601531" name="Greater Betrayer's Shoulderplates" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="113101632" name="Greater Betrayer's Leggings" player_class="SORCERER"/>
+			<item id="113101632" name="Greater Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101632" name="Greater Betrayer's Leggings" player_class="BARD"/>
+			<item id="113301752" name="Greater Betrayer's Breeches" player_class="ASSASSIN"/>
+			<item id="113301752" name="Greater Betrayer's Breeches" player_class="RANGER"/>
+			<item id="113301752" name="Greater Betrayer's Breeches" player_class="GUNNER"/>
+			<item id="113501696" name="Greater Betrayer's Chausses" player_class="CLERIC"/>
+			<item id="113501696" name="Greater Betrayer's Chausses" player_class="CHANTER"/>
+			<item id="113501696" name="Greater Betrayer's Chausses" player_class="RIDER"/>
+			<item id="113601532" name="Greater Betrayer's Greaves" player_class="TEMPLAR"/>
+			<item id="113601532" name="Greater Betrayer's Greaves" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="114101666" name="Greater Betrayer's Shoes" player_class="SORCERER"/>
+			<item id="114101666" name="Greater Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101666" name="Greater Betrayer's Shoes" player_class="BARD"/>
+			<item id="114301789" name="Greater Betrayer's Boots" player_class="ASSASSIN"/>
+			<item id="114301789" name="Greater Betrayer's Boots" player_class="RANGER"/>
+			<item id="114301789" name="Greater Betrayer's Boots" player_class="GUNNER"/>
+			<item id="114501706" name="Greater Betrayer's Brogans" player_class="CLERIC"/>
+			<item id="114501706" name="Greater Betrayer's Brogans" player_class="CHANTER"/>
+			<item id="114501706" name="Greater Betrayer's Brogans" player_class="RIDER"/>
+			<item id="114601539" name="Greater Betrayer's Sabatons" player_class="TEMPLAR"/>
+			<item id="114601539" name="Greater Betrayer's Sabatons" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="125004067" name="Greater Betrayer's Headband" player_class="SORCERER"/>
+			<item id="125004067" name="Greater Betrayer's Headband" player_class="SPIRIT_MASTER"/>
+			<item id="125004067" name="Greater Betrayer's Headband" player_class="BARD"/>
+			<item id="125004068" name="Greater Betrayer's Hat" player_class="ASSASSIN"/>
+			<item id="125004068" name="Greater Betrayer's Hat" player_class="RANGER"/>
+			<item id="125004068" name="Greater Betrayer's Hat" player_class="GUNNER"/>
+			<item id="125004069" name="Greater Betrayer's Chain Helm" player_class="CLERIC"/>
+			<item id="125004069" name="Greater Betrayer's Chain Helm" player_class="CHANTER"/>
+			<item id="125004069" name="Greater Betrayer's Chain Helm" player_class="RIDER"/>
+			<item id="125004070" name="Greater Betrayer's Helm" player_class="TEMPLAR"/>
+			<item id="125004070" name="Greater Betrayer's Helm" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="120001506" name="Greater Betrayer's Ruby Earrings" player_class="TEMPLAR"/>
+			<item id="120001506" name="Greater Betrayer's Ruby Earrings" player_class="GLADIATOR"/>
+			<item id="120001506" name="Greater Betrayer's Ruby Earrings" player_class="ASSASSIN"/>
+			<item id="120001506" name="Greater Betrayer's Ruby Earrings" player_class="RANGER"/>
+			<item id="120001506" name="Greater Betrayer's Ruby Earrings" player_class="CHANTER"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="SORCERER"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="SPIRIT_MASTER"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="GUNNER"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="CLERIC"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="BARD"/>
+			<item id="120001507" name="Greater Betrayer's Sapphire Earrings" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="121001378" name="Greater Betrayer's Ruby Necklace" player_class="TEMPLAR"/>
+			<item id="121001378" name="Greater Betrayer's Ruby Necklace" player_class="GLADIATOR"/>
+			<item id="121001378" name="Greater Betrayer's Ruby Necklace" player_class="ASSASSIN"/>
+			<item id="121001378" name="Greater Betrayer's Ruby Necklace" player_class="RANGER"/>
+			<item id="121001378" name="Greater Betrayer's Ruby Necklace" player_class="CHANTER"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="SORCERER"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="SPIRIT_MASTER"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="GUNNER"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="CLERIC"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="BARD"/>
+			<item id="121001379" name="Greater Betrayer's Sapphire Necklace" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="122001647" name="Greater Betrayer's Ruby Ring" player_class="TEMPLAR"/>
+			<item id="122001647" name="Greater Betrayer's Ruby Ring" player_class="GLADIATOR"/>
+			<item id="122001647" name="Greater Betrayer's Ruby Ring" player_class="ASSASSIN"/>
+			<item id="122001647" name="Greater Betrayer's Ruby Ring" player_class="RANGER"/>
+			<item id="122001647" name="Greater Betrayer's Ruby Ring" player_class="CHANTER"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="SORCERER"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="SPIRIT_MASTER"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="GUNNER"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="CLERIC"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="BARD"/>
+			<item id="122001648" name="Greater Betrayer's Sapphire Ring" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="123001424" name="Greater Betrayer's Belt" player_class="TEMPLAR"/>
+			<item id="123001424" name="Greater Betrayer's Belt" player_class="GLADIATOR"/>
+			<item id="123001424" name="Greater Betrayer's Belt" player_class="ASSASSIN"/>
+			<item id="123001424" name="Greater Betrayer's Belt" player_class="RANGER"/>
+			<item id="123001424" name="Greater Betrayer's Belt" player_class="CHANTER"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="SORCERER"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="SPIRIT_MASTER"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="GUNNER"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="CLERIC"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="BARD"/>
+			<item id="123001425" name="Greater Betrayer's Sash" player_class="RIDER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053120" decomposable_name="Danuar Reliquary Loot [Weapon]" selectable="true">
+		<items>
+			<item id="100001552" name="Lunatic Modor's Sword" player_class="ASSASSIN"/>
+			<item id="100001552" name="Lunatic Modor's Sword" player_class="RANGER"/>
+			<item id="100001552" name="Lunatic Modor's Sword" player_class="GLADIATOR"/>
+			<item id="100101187" name="Lunatic Modor's Mace" player_class="CLERIC"/>
+			<item id="100101188" name="Lunatic Modor's Warhammer" player_class="GLADIATOR"/>
+			<item id="100101188" name="Lunatic Modor's Warhammer" player_class="TEMPLAR"/>
+			<item id="100101188" name="Lunatic Modor's Warhammer" player_class="CHANTER"/>
+			<item id="100201355" name="Lunatic Modor's Dagger" player_class="ASSASSIN"/>
+			<item id="100201355" name="Lunatic Modor's Dagger" player_class="RANGER"/>
+			<item id="100501187" name="Lunatic Modor's Orb" player_class="SORCERER"/>
+			<item id="100501187" name="Lunatic Modor's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601276" name="Lunatic Modor's Spellbook" player_class="SORCERER"/>
+			<item id="100601276" name="Lunatic Modor's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="100901207" name="Lunatic Modor's Greatsword" player_class="TEMPLAR"/>
+			<item id="100901207" name="Lunatic Modor's Greatsword" player_class="GLADIATOR"/>
+			<item id="101301135" name="Lunatic Modor's Polearm" player_class="GLADIATOR"/>
+			<item id="101501217" name="Lunatic Modor's Staff" player_class="CHANTER"/>
+			<item id="101501232" name="Lunatic Modor's Cane" player_class="CLERIC"/>
+			<item id="101701237" name="Lunatic Modor's Bow" player_class="RANGER"/>
+			<item id="101701237" name="Lunatic Modor's Bow" player_class="ASSASSIN"/>
+			<item id="101701237" name="Lunatic Modor's Bow" player_class="GLADIATOR"/>
+			<item id="101801018" name="Lunatic Modor's Pistol" player_class="GUNNER"/>
+			<item id="101801018" name="Lunatic Modor's Pistol" player_class="RIDER"/>
+			<item id="101900981" name="Lunatic Modor's Aethercannon" player_class="GUNNER"/>
+			<item id="102001044" name="Lunatic Modor's Harp" player_class="BARD"/>
+			<item id="102100820" name="Lunatic Modor's Cipher-Blade" player_class="RIDER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]">
+		<items>
+			<item id="110101618" name="Lunatic Modor's Tunic" player_class="SORCERER"/>
+			<item id="111101459" name="Lunatic Modor's Gloves" player_class="SORCERER"/>
+			<item id="112101413" name="Lunatic Modor's Pauldrons" player_class="SORCERER"/>
+			<item id="113101469" name="Lunatic Modor's Leggings" player_class="SORCERER"/>
+			<item id="114101506" name="Lunatic Modor's Shoes" player_class="SORCERER"/>
+			<item id="125003514" name="Lunatic Modor's Headband" player_class="SORCERER"/>
+			<item id="110101618" name="Lunatic Modor's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="111101459" name="Lunatic Modor's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="112101413" name="Lunatic Modor's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="113101469" name="Lunatic Modor's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="114101506" name="Lunatic Modor's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="125003514" name="Lunatic Modor's Headband" player_class="SPIRIT_MASTER"/>
+			<item id="110101619" name="Lunatic Modor's Songweaver Tunic" player_class="BARD"/>
+			<item id="111101460" name="Lunatic Modor's Songweaver Gloves" player_class="BARD"/>
+			<item id="112101414" name="Lunatic Modor's Songweaver Pauldrons" player_class="BARD"/>
+			<item id="113101470" name="Lunatic Modor's Songweaver Leggings" player_class="BARD"/>
+			<item id="114101506" name="Lunatic Modor's Songweaver Shoes" player_class="BARD"/>
+			<item id="125003514" name="Lunatic Modor's Songweaver Headband" player_class="BARD"/>
+			<item id="110301508" name="Lunatic Modor's Jerkin" player_class="ASSASSIN"/>
+			<item id="111301448" name="Lunatic Modor's Vambrace" player_class="ASSASSIN"/>
+			<item id="112301392" name="Lunatic Modor's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="113301472" name="Lunatic Modor's Breeches" player_class="ASSASSIN"/>
+			<item id="114301509" name="Lunatic Modor's Boots" player_class="ASSASSIN"/>
+			<item id="125003510" name="Lunatic Modor's Hat" player_class="ASSASSIN"/>
+			<item id="110301508" name="Lunatic Modor's Jerkin" player_class="RANGER"/>
+			<item id="111301448" name="Lunatic Modor's Vambrace" player_class="RANGER"/>
+			<item id="112301392" name="Lunatic Modor's Shoulderguards" player_class="RANGER"/>
+			<item id="113301472" name="Lunatic Modor's Breeches" player_class="RANGER"/>
+			<item id="114301509" name="Lunatic Modor's Boots" player_class="RANGER"/>
+			<item id="125003510" name="Lunatic Modor's Hat" player_class="RANGER"/>
+			<item id="110301509" name="Lunatic Modor's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+			<item id="111301449" name="Lunatic Modor's Gunslinger Magic Vambrace" player_class="GUNNER"/>
+			<item id="112301394" name="Lunatic Modor's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+			<item id="113301472" name="Lunatic Modor's Gunslinger Magic Breeches" player_class="GUNNER"/>
+			<item id="114301509" name="Lunatic Modor's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="125003511" name="Lunatic Modor's Gunslinger Hat" player_class="GUNNER"/>
+			<item id="110501464" name="Lunatic Modor's Chanter Hauberk" player_class="CHANTER"/>
+			<item id="111501421" name="Lunatic Modor's Chanter Handguards" player_class="CHANTER"/>
+			<item id="112501363" name="Lunatic Modor's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="113501437" name="Lunatic Modor's Chanter Chausses" player_class="CHANTER"/>
+			<item id="114501446" name="Lunatic Modor's Chanter Brogans" player_class="CHANTER"/>
+			<item id="125003506" name="Lunatic Modor's Chanter Chain Hood" player_class="CHANTER"/>
+			<item id="110501465" name="Lunatic Modor's Cleric Hauberk" player_class="CLERIC"/>
+			<item id="111501422" name="Lunatic Modor's Cleric Handguards" player_class="CLERIC"/>
+			<item id="112501364" name="Lunatic Modor's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="113501438" name="Lunatic Modor's Cleric Chausses" player_class="CLERIC"/>
+			<item id="114501447" name="Lunatic Modor's Cleric Brogans" player_class="CLERIC"/>
+			<item id="125003507" name="Lunatic Modor's Cleric Chain Hood" player_class="CLERIC"/>
+			<item id="110550940" name="Lunatic Modor's Aethertech Magic Hauberk" player_class="RIDER"/>
+			<item id="111501498" name="Lunatic Modor's Aethertech Magic Handguards" player_class="RIDER"/>
+			<item id="112501440" name="Lunatic Modor's Aethertech Magic Spaulders" player_class="RIDER"/>
+			<item id="113501516" name="Lunatic Modor's Aethertech Magic Chausses" player_class="RIDER"/>
+			<item id="114501525" name="Lunatic Modor's Aethertech Magic Brogans" player_class="RIDER"/>
+			<item id="125003791" name="Lunatic Modor's Aethertech Magic Helm" player_class="RIDER"/>
+			<item id="110601443" name="Lunatic Modor's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="111601405" name="Lunatic Modor's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="112601387" name="Lunatic Modor's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="113601389" name="Lunatic Modor's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="114601393" name="Lunatic Modor's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="125003503" name="Lunatic Modor's Templar Helm" player_class="TEMPLAR"/>
+			<item id="110601476" name="Lunatic Modor's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="111601439" name="Lunatic Modor's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="112601420" name="Lunatic Modor's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="113601422" name="Lunatic Modor's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="114601427" name="Lunatic Modor's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="125003650" name="Lunatic Modor's Gladiator Helm" player_class="GLADIATOR"/>
+			<item id="115001594" name="Lunatic Modor's Shield" player_class="TEMPLAR"/>
+			<item id="115001594" name="Lunatic Modor's Shield" player_class="GLADIATOR"/>
+			<item id="115001594" name="Lunatic Modor's Shield" player_class="CHANTER"/>
+			<item id="115001594" name="Lunatic Modor's Scale Shield" player_class="CLERIC"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053122" decomposable_name="Illuminary Obelisk Loot [Weapon]" selectable="true">
+		<items>
+			<item id="100001627" name="Brazen Aegis Sword" player_class="ASSASSIN"/>
+			<item id="100001627" name="Brazen Aegis Sword" player_class="RANGER"/>
+			<item id="100001627" name="Brazen Aegis Sword" player_class="GLADIATOR"/>
+			<item id="100001627" name="Brazen Aegis Sword" player_class="TEMPLAR"/>
+			<item id="100101252" name="Brazen Aegis Mace" player_class="CLERIC"/>
+			<item id="100101252" name="Brazen Aegis Mace" player_class="CHANTER"/>
+			<item id="100201427" name="Brazen Aegis Dagger" player_class="ASSASSIN"/>
+			<item id="100201427" name="Brazen Aegis Dagger" player_class="RANGER"/>
+			<item id="100201427" name="Brazen Aegis Dagger" player_class="GLADIATOR"/>
+			<item id="100501244" name="Brazen Aegis Orb" player_class="SORCERER"/>
+			<item id="100501244" name="Brazen Aegis Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601344" name="Brazen Aegis Spellbook" player_class="SORCERER"/>
+			<item id="100601344" name="Brazen Aegis Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="100901265" name="Brazen Aegis Greatsword" player_class="TEMPLAR"/>
+			<item id="100901265" name="Brazen Aegis Greatsword" player_class="GLADIATOR"/>
+			<item id="101301187" name="Brazen Aegis Polearm" player_class="GLADIATOR"/>
+			<item id="101501275" name="Brazen Aegis Staff" player_class="CHANTER"/>
+			<item id="101701290" name="Brazen Aegis Bow" player_class="RANGER"/>
+			<item id="101701290" name="Brazen Aegis Bow" player_class="ASSASSIN"/>
+			<item id="101701290" name="Brazen Aegis Bow" player_class="GLADIATOR"/>
+			<item id="101801141" name="Brazen Aegis Pistol" player_class="GUNNER"/>
+			<item id="101801141" name="Brazen Aegis Pistol" player_class="RIDER"/>
+			<item id="101901051" name="Brazen Aegis Aethercannon" player_class="GUNNER"/>
+			<item id="102001167" name="Brazen Aegis Harp" player_class="BARD"/>
+			<item id="102100923" name="Brazen Aegis Cipher-Blade" player_class="RIDER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053123" decomposable_name="Illuminary Obelisk Loot [Armor]" selectable="true">
+		<items>
+			<item id="110101710" name="Brazen Aegis Tunic" player_class="SORCERER"/>
+			<item id="111101540" name="Brazen Aegis Gloves" player_class="SORCERER"/>
+			<item id="112101492" name="Brazen Aegis Pauldrons" player_class="SORCERER"/>
+			<item id="113101554" name="Brazen Aegis Leggings" player_class="SORCERER"/>
+			<item id="114101588" name="Brazen Aegis Shoes" player_class="SORCERER"/>
+			<item id="125003884" name="Brazen Aegis Bandana" player_class="SORCERER"/>
+			<item id="110101710" name="Brazen Aegis Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="111101540" name="Brazen Aegis Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="112101492" name="Brazen Aegis Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="113101554" name="Brazen Aegis Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="114101588" name="Brazen Aegis Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="125003884" name="Brazen Aegis Bandana" player_class="SPIRIT_MASTER"/>
+			<item id="110101712" name="Brazen Bulwark Tunic" player_class="BARD"/>
+			<item id="111101542" name="Brazen Bulwark Gloves" player_class="BARD"/>
+			<item id="112101494" name="Brazen Bulwark Pauldrons" player_class="BARD"/>
+			<item id="113101556" name="Brazen Bulwark Leggings" player_class="BARD"/>
+			<item id="114101590" name="Brazen Bulwark Shoes" player_class="BARD"/>
+			<item id="125003886" name="Brazen Bulwark Bandana" player_class="BARD"/>
+			<item id="110301713" name="Brazen Aegis Jerkin" player_class="ASSASSIN"/>
+			<item id="111301651" name="Brazen Aegis Vambrace" player_class="ASSASSIN"/>
+			<item id="112301590" name="Brazen Aegis Shoulderguards" player_class="ASSASSIN"/>
+			<item id="113301682" name="Brazen Aegis Breeches" player_class="ASSASSIN"/>
+			<item id="114301719" name="Brazen Aegis Boots" player_class="ASSASSIN"/>
+			<item id="125003876" name="Brazen Aegis Hat" player_class="ASSASSIN"/>
+			<item id="110301713" name="Brazen Aegis Jerkin" player_class="RANGER"/>
+			<item id="111301651" name="Brazen Aegis Vambrace" player_class="RANGER"/>
+			<item id="112301590" name="Brazen Aegis Shoulderguards" player_class="RANGER"/>
+			<item id="113301682" name="Brazen Aegis Breeches" player_class="RANGER"/>
+			<item id="114301719" name="Brazen Aegis Boots" player_class="RANGER"/>
+			<item id="125003876" name="Brazen Aegis Hat" player_class="RANGER"/>
+			<item id="110301715" name="Brazen Bulwark Jerkin" player_class="GUNNER"/>
+			<item id="111301653" name="Brazen Bulwark Vambrace" player_class="GUNNER"/>
+			<item id="112301592" name="Brazen Bulwark Shoulderguards" player_class="GUNNER"/>
+			<item id="113301684" name="Brazen Bulwark Breeches" player_class="GUNNER"/>
+			<item id="114301721" name="Brazen Bulwark Boots" player_class="GUNNER"/>
+			<item id="125003878" name="Brazen Bulwark Hat" player_class="GUNNER"/>
+			<item id="110551054" name="Brazen Aegis Hauberk" player_class="CHANTER"/>
+			<item id="111501611" name="Brazen Aegis Handguards" player_class="CHANTER"/>
+			<item id="112501552" name="Brazen Aegis Spaulders" player_class="CHANTER"/>
+			<item id="113501631" name="Brazen Aegis Chausses" player_class="CHANTER"/>
+			<item id="114501640" name="Brazen Aegis Brogans" player_class="CHANTER"/>
+			<item id="125003880" name="Brazen Aegis Chainmail" player_class="CHANTER"/>
+			<item id="110551054" name="Brazen Aegis Hauberk" player_class="CLERIC"/>
+			<item id="111501611" name="Brazen Aegis Handguards" player_class="CLERIC"/>
+			<item id="112501552" name="Brazen Aegis Spaulders" player_class="CLERIC"/>
+			<item id="113501631" name="Brazen Aegis Chausses" player_class="CLERIC"/>
+			<item id="114501640" name="Brazen Aegis Brogans" player_class="CLERIC"/>
+			<item id="125003880" name="Brazen Aegis Chainmail" player_class="CLERIC"/>
+			<item id="110551056" name="Brazen Bulwark Hauberk" player_class="RIDER"/>
+			<item id="111501613" name="Brazen Bulwark Handguards" player_class="RIDER"/>
+			<item id="112501554" name="Brazen Bulwark Spaulders" player_class="RIDER"/>
+			<item id="113501633" name="Brazen Bulwark Chausses" player_class="RIDER"/>
+			<item id="114501642" name="Brazen Bulwark Brogans" player_class="RIDER"/>
+			<item id="125003882" name="Brazen Bulwark Chainmail" player_class="RIDER"/>
+			<item id="110601517" name="Brazen Aegis Breastplate" player_class="TEMPLAR"/>
+			<item id="111601480" name="Brazen Aegis Gauntlets" player_class="TEMPLAR"/>
+			<item id="112601461" name="Brazen Aegis Shoulderplates" player_class="TEMPLAR"/>
+			<item id="113601463" name="Brazen Aegis Greaves" player_class="TEMPLAR"/>
+			<item id="114601470" name="Brazen Aegis Sabatons" player_class="TEMPLAR"/>
+			<item id="125003872" name="Brazen Aegis Helm" player_class="TEMPLAR"/>
+			<item id="110601519" name="Brazen Bulwark Breastplate" player_class="GLADIATOR"/>
+			<item id="111601482" name="Brazen Bulwark Gauntlets" player_class="GLADIATOR"/>
+			<item id="112601463" name="Brazen Bulwark Shoulderplates" player_class="GLADIATOR"/>
+			<item id="113601465" name="Brazen Bulwark Greaves" player_class="GLADIATOR"/>
+			<item id="114601472" name="Brazen Bulwark Sabatons" player_class="GLADIATOR"/>
+			<item id="125003874" name="Brazen Bulwark Helm" player_class="GLADIATOR"/>
+			<item id="115001671" name="Brazen Aegis Shield" player_class="TEMPLAR"/>
+			<item id="115001671" name="Brazen Aegis Shield" player_class="GLADIATOR"/>
+			<item id="115001671" name="Brazen Aegis Shield" player_class="CLERIC"/>
+			<item id="115001671" name="Brazen Aegis Shield" player_class="CHANTER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053124" decomposable_name="Infinity Shard Equipment Loot">
+		<items>
+			<item id="101701240" name="Enraged Hyperion's Bow" player_class="RANGER"/>
+			<item id="100201358" name="Enraged Hyperion's Dagger" player_class="ASSASSIN"/>
+			<item id="102001047" name="Enraged Hyperion's Harp" player_class="BARD"/>
+			<item id="100101192" name="Enraged Hyperion's Mace" player_class="CLERIC"/>
+			<item id="100501190" name="Enraged Hyperion's Orb" player_class="SORCERER"/>
+			<item id="101801021" name="Enraged Hyperion's Pistol" player_class="GUNNER"/>
+			<item id="100601280" name="Enraged Hyperion's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="101501221" name="Enraged Hyperion's Staff" player_class="CHANTER"/>
+			<item id="100001555" name="Enraged Hyperion's Sword" player_class="TEMPLAR"/>
+			<item id="100001556" name="Enraged Hyperion's Sword" player_class="GLADIATOR"/>
+			<item id="102100823" name="Enraged Hyperion's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="100001557" name="Incensed Hyperion's Sword" player_class="ASSASSIN"/>
+            <item id="100101193" name="Incensed Hyperion's Mace" player_class="CHANTER"/>
+            <item id="101501220" name="Incensed Hyperion's Staff" player_class="CLERIC"/>
+            <item id="101301138" name="Incensed Hyperion's Polearm" player_class="GLADIATOR"/>
+            <item id="101900983" name="Incensed Hyperion's Aethercannon" player_class="GUNNER"/>
+            <item id="101701241" name="Incensed Hyperion's Bow" player_class="RANGER"/>
+            <item id="102001048" name="Incensed Hyperion's Harp" player_class="BARD"/>
+            <item id="100601279" name="Incensed Hyperion's Spellbook" player_class="SORCERER"/>
+            <item id="100501191" name="Incensed Hyperion's Orb" player_class="SPIRIT_MASTER"/>
+            <item id="100901209" name="Incensed Hyperion's Greatsword" player_class="TEMPLAR"/>
+            <item id="102100919" name="Incensed Hyperion's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="110301513" name="Enraged Hyperion's Assassin Jerkin" player_class="ASSASSIN"/>
+			<item id="110501470" name="Enraged Hyperion's Chanter Chain Armor" player_class="CHANTER"/>
+			<item id="110501468" name="Enraged Hyperion's Cleric Chain Armor" player_class="CLERIC"/>
+			<item id="110601448" name="Enraged Hyperion's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="110301517" name="Enraged Hyperion's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+			<item id="110301515" name="Enraged Hyperion's Ranger Jerkin" player_class="RANGER"/>
+			<item id="110101627" name="Enraged Hyperion's Songweaver Tunic" player_class="BARD"/>
+			<item id="110101623" name="Enraged Hyperion's Sorcerer Tunic" player_class="SORCERER"/>
+			<item id="110101625" name="Enraged Hyperion's Spiritmaster Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110601446" name="Enraged Hyperion's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="110550936" name="Enraged Hyperion's Magic Hauberk" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="110301514" name="Incensed Hyperion's Assassin Jerkin" player_class="ASSASSIN"/>
+            <item id="110501471" name="Incensed Hyperion's Chanter Chain Armor" player_class="CHANTER"/>
+            <item id="110501469" name="Incensed Hyperion's Cleric Chain Armor" player_class="CLERIC"/>
+            <item id="110601449" name="Incensed Hyperion's Gladiator Breastplate" player_class="GLADIATOR"/>
+            <item id="110301518" name="Incensed Hyperion's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+            <item id="110301516" name="Incensed Hyperion's Ranger Jerkin" player_class="RANGER"/>
+            <item id="110101628" name="Incensed Hyperion's Songweaver Tunic" player_class="BARD"/>
+            <item id="110101624" name="Incensed Hyperion's Sorcerer Tunic" player_class="SORCERER"/>
+            <item id="110101626" name="Incensed Hyperion's Spiritmaster Tunic" player_class="SPIRIT_MASTER"/>
+            <item id="110601447" name="Incensed Hyperion's Templar Breastplate" player_class="TEMPLAR"/>
+            <item id="110550937" name="Incensed Hyperion's Magic Hauberk" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="111301453" name="Enraged Hyperion's Assassin Vambrace" player_class="ASSASSIN"/>
+			<item id="111501427" name="Enraged Hyperion's Chanter Handguards" player_class="CHANTER"/>
+			<item id="111501425" name="Enraged Hyperion's Cleric Handguards" player_class="CLERIC"/>
+			<item id="111601410" name="Enraged Hyperion's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301457" name="Enraged Hyperion's Gunslinger Magic Vambrace" player_class="GUNNER"/>
+			<item id="111301455" name="Enraged Hyperion's Ranger Vambrace" player_class="RANGER"/>
+			<item id="111101468" name="Enraged Hyperion's Songweaver Gloves" player_class="BARD"/>
+			<item id="111101464" name="Enraged Hyperion's Sorcerer Gloves" player_class="SORCERER"/>
+			<item id="111101466" name="Enraged Hyperion's Spiritmaster Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111601408" name="Enraged Hyperion's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="111501494" name="Enraged Hyperion's Aethertech Magic Handguards" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="111301454" name="Incensed Hyperion's Assassin Vambrace" player_class="ASSASSIN"/>
+            <item id="111501428" name="Incensed Hyperion's Chanter Handguards" player_class="CHANTER"/>
+            <item id="111501426" name="Incensed Hyperion's Cleric Handguards" player_class="CLERIC"/>
+            <item id="111601411" name="Incensed Hyperion's Gladiator Gauntlets" player_class="GLADIATOR"/>
+            <item id="111301458" name="Incensed Hyperion's Gunslinger Magic Vambrace" player_class="GUNNER"/>
+            <item id="111301456" name="Incensed Hyperion's Ranger Vambrace" player_class="RANGER"/>
+            <item id="111101469" name="Incensed Hyperion's Songweaver Gloves" player_class="BARD"/>
+            <item id="111101465" name="Incensed Hyperion's Sorcerer Gloves" player_class="SORCERER"/>
+            <item id="111101467" name="Incensed Hyperion's Spiritmaster Gloves" player_class="SPIRIT_MASTER"/>
+            <item id="111601409" name="Incensed Hyperion's Templar Gauntlets" player_class="TEMPLAR"/>
+            <item id="111501495" name="Incensed Hyperion's Aethertech Magic Handguards" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="112301397" name="Enraged Hyperion's Assassin Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112501369" name="Enraged Hyperion's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="112501367" name="Enraged Hyperion's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="112601392" name="Enraged Hyperion's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301401" name="Enraged Hyperion's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+			<item id="112301399" name="Enraged Hyperion's Ranger Shoulderguards" player_class="RANGER"/>
+			<item id="112101422" name="Enraged Hyperion's Songweaver Pauldrons" player_class="BARD"/>
+			<item id="112101418" name="Enraged Hyperion's Sorcerer Pauldrons" player_class="SORCERER"/>
+			<item id="112101420" name="Enraged Hyperion's Spiritmaster Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112601390" name="Enraged Hyperion's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112501436" name="Enraged Hyperion's Aethertech Magic Spaulders" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="112301398" name="Incensed Hyperion's Assassin Shoulderguards" player_class="ASSASSIN"/>
+            <item id="112501370" name="Incensed Hyperion's Chanter Spaulders" player_class="CHANTER"/>
+            <item id="112501368" name="Incensed Hyperion's Cleric Spaulders" player_class="CLERIC"/>
+            <item id="112601393" name="Incensed Hyperion's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+            <item id="112301402" name="Incensed Hyperion's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+            <item id="112301400" name="Incensed Hyperion's Ranger Shoulderguards" player_class="RANGER"/>
+            <item id="112101423" name="Incensed Hyperion's Songweaver Pauldrons" player_class="BARD"/>
+            <item id="112101419" name="Incensed Hyperion's Sorcerer Pauldrons" player_class="SORCERER"/>
+            <item id="112101421" name="Incensed Hyperion's Spiritmaster Pauldrons" player_class="SPIRIT_MASTER"/>
+            <item id="112601391" name="Incensed Hyperion's Templar Shoulderplates" player_class="TEMPLAR"/>
+            <item id="112501437" name="Incensed Hyperion's Aethertech Magic Spaulders" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="113301477" name="Enraged Hyperion's Assassin Breeches" player_class="ASSASSIN"/>
+			<item id="113501443" name="Enraged Hyperion's Chanter Chain Leg Armor" player_class="CHANTER"/>
+			<item id="113501441" name="Enraged Hyperion's Cleric Chain Leg Armor" player_class="CLERIC"/>
+			<item id="113601394" name="Enraged Hyperion's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="113301481" name="Enraged Hyperion's Gunslinger Magic Breeches" player_class="GUNNER"/>
+			<item id="113301479" name="Enraged Hyperion's Ranger Breeches" player_class="RANGER"/>
+			<item id="113101478" name="Enraged Hyperion's Songweaver Leggings" player_class="BARD"/>
+			<item id="113101474" name="Enraged Hyperion's Sorcerer Leggings" player_class="SORCERER"/>
+			<item id="113101476" name="Enraged Hyperion's Spiritmaster Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113601392" name="Enraged Hyperion's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="113501512" name="Enraged Hyperion's Aethertech Magic Chausses" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="113301478" name="Incensed Hyperion's Assassin Breeches" player_class="ASSASSIN"/>
+			<item id="113501444" name="Incensed Hyperion's Chanter Chain Leg Armor" player_class="CHANTER"/>
+			<item id="113501442" name="Incensed Hyperion's Cleric Chain Leg Armor" player_class="CLERIC"/>
+			<item id="113601395" name="Incensed Hyperion's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="113301482" name="Incensed Hyperion's Gunslinger Magic Breeches" player_class="GUNNER"/>
+			<item id="113301480" name="Incensed Hyperion's Ranger Breeches" player_class="RANGER"/>
+			<item id="113101479" name="Incensed Hyperion's Songweaver Leggings" player_class="BARD"/>
+			<item id="113101475" name="Incensed Hyperion's Sorcerer Leggings" player_class="SORCERER"/>
+			<item id="113101477" name="Incensed Hyperion's Spiritmaster Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113601393" name="Incensed Hyperion's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="113501513" name="Incensed Hyperion's Aethertech Magic Chausses" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="114301514" name="Enraged Hyperion's Assassin Boots" player_class="ASSASSIN"/>
+			<item id="114501452" name="Enraged Hyperion's Chanter Chain Boots" player_class="CHANTER"/>
+			<item id="114501450" name="Enraged Hyperion's Cleric Chain Boots" player_class="CLERIC"/>
+			<item id="114601398" name="Enraged Hyperion's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="114301518" name="Enraged Hyperion's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="114301516" name="Enraged Hyperion's Ranger Boots" player_class="RANGER"/>
+			<item id="114101515" name="Enraged Hyperion's Songweaver Shoes" player_class="BARD"/>
+			<item id="114101511" name="Enraged Hyperion's Sorcerer Shoes" player_class="SORCERER"/>
+			<item id="114101513" name="Enraged Hyperion's Spiritmaster Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114601396" name="Enraged Hyperion's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="114501521" name="Enraged Hyperion's Aethertech Brogans" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="114301515" name="Incensed Hyperion's Assassin Boots" player_class="ASSASSIN"/>
+			<item id="114501453" name="Incensed Hyperion's Chanter Chain Boots" player_class="CHANTER"/>
+			<item id="114501451" name="Incensed Hyperion's Cleric Chain Boots" player_class="CLERIC"/>
+			<item id="114601399" name="Incensed Hyperion's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="114301519" name="Incensed Hyperion's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="114301517" name="Incensed Hyperion's Ranger Boots" player_class="RANGER"/>
+			<item id="114101516" name="Incensed Hyperion's Songweaver Shoes" player_class="BARD"/>
+			<item id="114101512" name="Incensed Hyperion's Sorcerer Shoes" player_class="SORCERER"/>
+			<item id="114101514" name="Incensed Hyperion's Spiritmaster Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114601397" name="Incensed Hyperion's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="114501522" name="Incensed Hyperion's Aethertech Brogans" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="121001323" name="Enraged Hyperion's Opal Necklace" player_class="CHANTER"/>
+            <item id="121001336" name="Enraged Hyperion's Ceramium Necklace" player_class="CLERIC"/>
+            <item id="121001323" name="Enraged Hyperion's Opal Necklace" player_class="GLADIATOR"/>
+            <item id="121001323" name="Enraged Hyperion's Opal Necklace" player_class="TEMPLAR"/>
+            <item id="121001323" name="Enraged Hyperion's Opal Necklace" player_class="RANGER"/>
+            <item id="121001323" name="Enraged Hyperion's Opal Necklace" player_class="ASSASSIN"/>
+            <item id="121001336" name="Enraged Hyperion's Ceramium Necklace" player_class="RIDER"/>
+            <item id="121001325" name="Enraged Hyperion's Nolan Necklace" player_class="GUNNER"/>
+            <item id="121001325" name="Enraged Hyperion's Nolan Necklace" player_class="BARD"/>
+            <item id="121001325" name="Enraged Hyperion's Nolan Necklace" player_class="SORCERER"/>
+            <item id="121001325" name="Enraged Hyperion's Nolan Necklace" player_class="SPIRIT_MASTER"/>
+		</items>
+		<items>
+			<item id="122001592" name="Enraged Hyperion's Opal Ring" player_class="CHANTER"/>
+            <item id="122001605" name="Enraged Hyperion's Ceramium Ring" player_class="CLERIC"/>
+            <item id="122001592" name="Enraged Hyperion's Opal Ring" player_class="GLADIATOR"/>
+            <item id="122001592" name="Enraged Hyperion's Opal Ring" player_class="TEMPLAR"/>
+            <item id="122001605" name="Enraged Hyperion's Ceramium Ring" player_class="RIDER"/>
+            <item id="122001592" name="Enraged Hyperion's Opal Ring" player_class="RANGER"/>
+            <item id="122001592" name="Enraged Hyperion's Opal Ring" player_class="ASSASSIN"/>
+            <item id="122001594" name="Enraged Hyperion's Nolan Ring" player_class="GUNNER"/>
+            <item id="122001594" name="Enraged Hyperion's Nolan Ring" player_class="BARD"/>
+            <item id="122001594" name="Enraged Hyperion's Nolan Ring" player_class="SORCERER"/>
+            <item id="122001594" name="Enraged Hyperion's Nolan Ring" player_class="SPIRIT_MASTER"/>
+		</items>
+		<items>
+			<item id="120001449" name="Enraged Hyperion's Opal Earrings" player_class="CHANTER"/>
+            <item id="120001462" name="Enraged Hyperion's Ceramium Earrings" player_class="CLERIC"/>
+            <item id="120001449" name="Enraged Hyperion's Opal Earrings" player_class="GLADIATOR"/>
+            <item id="120001449" name="Enraged Hyperion's Opal Earrings" player_class="TEMPLAR"/>
+            <item id="120001462" name="Enraged Hyperion's Ceramium Earrings" player_class="RIDER"/>
+            <item id="120001449" name="Enraged Hyperion's Opal Earrings" player_class="RANGER"/>
+            <item id="120001449" name="Enraged Hyperion's Opal Earrings" player_class="ASSASSIN"/>
+            <item id="120001451" name="Enraged Hyperion's Nolan Earrings" player_class="GUNNER"/>
+            <item id="120001451" name="Enraged Hyperion's Nolan Earrings" player_class="BARD"/>
+            <item id="120001451" name="Enraged Hyperion's Nolan Earrings" player_class="SORCERER"/>
+            <item id="120001451" name="Enraged Hyperion's Nolan Earrings" player_class="SPIRIT_MASTER"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053125" decomposable_name="Level 7 Invader Reward Box (Level 45 or lower)">
+		<items>
+			<item id="188053118" name="Lesser Betrayer's Equipment Box"/>
+			<item id="186000003" name="Silver Coin" race="ELYOS" rnd_min="5" rnd_max="10"/>
+			<item id="186000008" name="Silver Coin" race="ASMODIANS" rnd_min="5" rnd_max="10"/>
+			<item id="162000044" name="Greater Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+		<items>
+			<item id="188053118" name="Lesser Betrayer's Equipment Box"/>
+			<item id="186000004" name="Gold Coin" race="ELYOS" rnd_min="5" rnd_max="10"/>
+			<item id="186000009" name="Gold Coin" race="ASMODIANS" rnd_min="5" rnd_max="10"/>
+			<item id="162000044" name="Greater Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053126" decomposable_name="Level 6 Invader Reward Box (Level 45 or lower)">
+		<items>
+			<item id="188053118" name="Lesser Betrayer's Equipment Box"/>
+			<item id="186000003" name="Silver Coin" race="ELYOS" rnd_min="10" rnd_max="20"/>
+			<item id="186000008" name="Silver Coin" race="ASMODIANS" rnd_min="10" rnd_max="20"/>
+			<item id="162000044" name="Greater Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+		<items>
+			<item id="188053118" name="Lesser Betrayer's Equipment Box"/>
+			<item id="186000004" name="Gold Coin" race="ELYOS" rnd_min="10" rnd_max="20"/>
+			<item id="186000009" name="Gold Coin" race="ASMODIANS" rnd_min="10" rnd_max="20"/>
+			<item id="162000044" name="Greater Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053127" decomposable_name="Level 5 Invader Reward Box (Level 60 or lower)">
+		<items>
+			<item id="188053119" name="Greater Betrayer's Equipment Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="186000018" name="Mithril Coin" race="ELYOS" rnd_min="5" rnd_max="10"/>
+			<item id="186000019" name="Mithril Coin" race="ASMODIANS" rnd_min="5" rnd_max="10"/>
+			<item id="162000045" name="Major Recovery Potion" count="30"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+		<items>
+			<item id="188053119" name="Greater Betrayer's Equipment Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="186000005" name="Platinum Coin" race="ELYOS" rnd_min="5" rnd_max="10"/>
+			<item id="186000010" name="Platinum Coin" race="ASMODIANS" rnd_min="5" rnd_max="10"/>
+			<item id="162000045" name="Major Recovery Potion" count="30"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053128" decomposable_name="Level 4 Invader Reward Box (Level 60 or lower)">
+		<items>
+			<item id="188053119" name="Greater Betrayer's Equipment Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="186000018" name="Mithril Coin" race="ELYOS" rnd_min="10" rnd_max="20"/>
+			<item id="186000019" name="Mithril Coin" race="ASMODIANS" rnd_min="10" rnd_max="20"/>
+			<item id="162000045" name="Major Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_60" count="5"/>
+		</items>
+		<items>
+			<item id="188053119" name="Greater Betrayer's Equipment Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="186000005" name="Platinum Coin" race="ELYOS" rnd_min="10" rnd_max="20"/>
+			<item id="186000010" name="Platinum Coin" race="ASMODIANS" rnd_min="10" rnd_max="20"/>
+			<item id="162000045" name="Major Recovery Potion" count="50"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053129" decomposable_name="Level 3 Invader Reward Box">
+		<items chance="80.0">
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
+		</items>
+		<items chance="15.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
+		</items>
+		<items chance="1.0">
+			<item id="188053124" name="Infinity Shard Equipment Loot"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1.0">
+			<item id="188053120" name="Danuar Reliquary Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="1.0">
+			<item id="188053121" name="Danuar Reliquary Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1.0">
+			<item id="188053122" name="Illuminary Obelisk Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="1.0">
+			<item id="188053179" name="Level 3 Grand Invasion Reward Box"/>
+			<item id="188053123" name="Illuminary Obelisk Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="10"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053130" decomposable_name="Level 2 Invader Reward Box">
+		<items chance="60.0">
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
+		</items>
+		<items chance="30.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
+		</items>
+		<items chance="2.0">
+			<item id="188053124" name="Infinity Shard Equipment Loot"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="2.0">
+			<item id="188053120" name="Danuar Reliquary Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="2.0">
+			<item id="188053121" name="Danuar Reliquary Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="2.0">
+			<item id="188053122" name="Illuminary Obelisk Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="2.0">
+			<item id="188053123" name="Illuminary Obelisk Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="30"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053131" decomposable_name="Level 1 Invader Reward Box">
+		<items chance="70.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
+		</items>
+		<items chance="6.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053124" name="Infinity Shard Equipment Loot"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="6.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053120" name="Danuar Reliquary Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="6.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053121" name="Danuar Reliquary Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+		<items chance="6.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053122" name="Illuminary Obelisk Loot [Weapon]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items chance="6.0">
+			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
+			<item id="188053123" name="Illuminary Obelisk Loot [Armor]"/>
+			<item id="188053628" name="Pallasite Bundle"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<item id="162000124" name="Superior Recovery Serum" count="50"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053132" decomposable_name="Altar of Avarice Fortress Siege Defense Reward Box">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053133" decomposable_name="Temple of Scales Fortress Siege Defense Reward Box">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053134" decomposable_name="Vorgaltem Citadel Fortress Siege Defense Reward Box">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053135" decomposable_name="Crimson Temple Fortress Siege Defense Reward Box">
+		<items>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
+        </items>
+	</decomposable>
+    <decomposable item_id="188053136" decomposable_name="Balaurea Fortress Siege Defense Consumables Box">
+		<items>
+			<item id="162000143" name="Brigade General's Liquid Courage"/>
+			<item id="164000134" name="Greater Awakening Scroll" count="50"/>
+            <item id="164000076" name="Greater Running Scroll" count="50"/>
+			<item id="188053137" name="Balaurea Buffet Bundle" count="20"/>
+            <item id="186000247" name="Major Danuar Relic"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle"/>
     <decomposable item_id="188053138" decomposable_name="Wealhtheow's Keep Siege Defense Reward Box">
 		<items>
@@ -27735,13 +28682,13 @@
 	</decomposable>
     <decomposable item_id="188053141" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 2">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="2"/>
+            <item id="186000242" name="Ceramium Medal" count="3"/>
             <random_item type="ANCIENT_GOBLET"/>
         </items>
 	</decomposable>
     <decomposable item_id="188053142" decomposable_name="Wealhtheow's Keep Assault Reward Box: Grade 3">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <item id="186000242" name="Ceramium Medal" count="2"/>
             <random_item type="ANCIENT_SEAL"/>
         </items>
 	</decomposable>
@@ -27795,7 +28742,7 @@
 	</decomposable>
     <decomposable item_id="188053162" decomposable_name="Altar of Avarice Assault Reward Box: Grade 4">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <item id="186000147" name="Mithril Medal" count="2"/>
             <random_item type="ANCIENT_ICON"/>
         </items>
 	</decomposable>
@@ -27820,7 +28767,7 @@
 	</decomposable>
     <decomposable item_id="188053166" decomposable_name="Temple of Scales Assault Reward Box: Grade 4">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <item id="186000147" name="Mithril Medal" count="2"/>
             <random_item type="ANCIENT_ICON"/>
         </items>
 	</decomposable>
@@ -27845,7 +28792,7 @@
 	</decomposable>
     <decomposable item_id="188053170" decomposable_name="Crimson Temple Assault Reward Box: Grade 4">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <item id="186000147" name="Mithril Medal" count="2"/>
             <random_item type="ANCIENT_ICON"/>
         </items>
 	</decomposable>
@@ -27870,7 +28817,7 @@
 	</decomposable>
     <decomposable item_id="188053174" decomposable_name="Vorgaltem Citadel Assault Reward Box: Grade 4">
 		<items>
-            <item id="186000242" name="Ceramium Medal" count="1"/>
+            <item id="186000147" name="Mithril Medal" count="2"/>
             <random_item type="ANCIENT_ICON"/>
         </items>
 	</decomposable>
@@ -27882,7 +28829,190 @@
     <decomposable item_id="188053180" decomposable_name="Level 2 Grand Invasion Reward Box"/>
     <decomposable item_id="188053181" decomposable_name="Level 1 Grand Invasion Reward Box"/>
     <decomposable item_id="188053182" decomposable_name="Level 2 Grand Invasion Reward Box"/>
-    <decomposable item_id="188053183" decomposable_name="Level 1 Grand Invasion Reward Box"/>
+    <decomposable item_id="188053183" decomposable_name="Level 1 Grand Invasion Reward Box">
+		<items>
+			<item id="100901318" name="Fine Betrayer's Greatsword" player_class="TEMPLAR"/>
+			<item id="101301223" name="Fine Betrayer's Polearm" player_class="GLADIATOR"/>
+			<item id="100001692" name="Fine Betrayer's Sword" player_class="ASSASSIN"/>
+			<item id="101701328" name="Fine Betrayer's Bow" player_class="RANGER"/>
+			<item id="100101291" name="Fine Betrayer's Mace" player_class="CLERIC"/>
+			<item id="101501314" name="Fine Betrayer's Staff" player_class="CHANTER"/>
+			<item id="100501277" name="Fine Betrayer's Orb" player_class="SORCERER"/>
+			<item id="100501277" name="Fine Betrayer's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="101801178" name="Fine Betrayer's Pistol" player_class="GUNNER"/>
+			<item id="102101012" name="Fine Betrayer's Harp" player_class="BARD"/>
+			<item id="102101021" name="Fine Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="100101292" name="Superb Betrayer's Mace" player_class="TEMPLAR"/>
+			<item id="100001693" name="Superb Betrayer's Sword" player_class="GLADIATOR"/>
+			<item id="100201463" name="Fine Betrayer's Dagger" player_class="ASSASSIN"/>
+			<item id="100201464" name="Superb Betrayer's Dagger" player_class="RANGER"/>
+			<item id="101501315" name="Superb Betrayer's Staff" player_class="CLERIC"/>
+			<item id="100101292" name="Superb Betrayer's Mace" player_class="CHANTER"/>
+			<item id="100601387" name="Fine Betrayer's Spellbook" player_class="SORCERER"/>
+			<item id="100601387" name="Fine Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="101901089" name="Fine Betrayer's Aethercannon" player_class="GUNNER"/>
+			<item id="102101013" name="Superb Betrayer's Harp" player_class="BARD"/>
+			<item id="102101021" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="100001701" name="Superb Betrayer's Shield" player_class="TEMPLAR"/>
+			<item id="101701328" name="Fine Betrayer's Bow" player_class="GLADIATOR"/>
+			<item id="101701328" name="Fine Betrayer's Bow" player_class="ASSASSIN"/>
+			<item id="101701329" name="Superb Betrayer's Bow" player_class="RANGER"/>
+			<item id="115001723" name="Superb Betrayer's Shield" player_class="CLERIC"/>
+			<item id="101501323" name="Superb Betrayer's Shield" player_class="CHANTER"/>
+			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SORCERER"/>
+			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="101901090" name="Superb Betrayer's Aethercannon" player_class="GUNNER"/>
+			<item id="102101013" name="Superb Betrayer's Harp" player_class="BARD"/>
+			<item id="102101021" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
+		</items>
+		<items>
+			<item id="110101783" name="Fine Betrayer's Tunic" player_class="SORCERER"/>
+			<item id="110101783" name="Fine Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110101783" name="Fine Betrayer's Tunic" player_class="BARD"/>
+			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="RANGER"/>
+			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="GUNNER"/>
+			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="CLERIC"/>
+			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="CHANTER"/>
+			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="RIDER"/>
+			<item id="110601571" name="Fine Betrayer's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601571" name="Fine Betrayer's Breastplate" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="111101603" name="Fine Betrayer's Gloves" player_class="SORCERER"/>
+			<item id="111101603" name="Fine Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101603" name="Fine Betrayer's Gloves" player_class="BARD"/>
+			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="RANGER"/>
+			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="GUNNER"/>
+			<item id="111501661" name="Fine Betrayer's Handguards" player_class="CLERIC"/>
+			<item id="111501661" name="Fine Betrayer's Handguards" player_class="CHANTER"/>
+			<item id="111501661" name="Fine Betrayer's Handguards" player_class="RIDER"/>
+			<item id="111601534" name="Fine Betrayer's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601534" name="Fine Betrayer's Gauntlets" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="SORCERER"/>
+			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="BARD"/>
+			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="RANGER"/>
+			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="GUNNER"/>
+			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="CLERIC"/>
+			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="CHANTER"/>
+			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="RIDER"/>
+			<item id="112601516" name="Fine Betrayer's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601516" name="Fine Betrayer's Shoulderplates" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="113101615" name="Fine Betrayer's Leggings" player_class="SORCERER"/>
+			<item id="113101615" name="Fine Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101615" name="Fine Betrayer's Leggings" player_class="BARD"/>
+			<item id="113301737" name="Fine Betrayer's Breeches" player_class="ASSASSIN"/>
+			<item id="113301737" name="Fine Betrayer's Breeches" player_class="RANGER"/>
+			<item id="113301737" name="Fine Betrayer's Breeches" player_class="GUNNER"/>
+			<item id="113501679" name="Fine Betrayer's Chausses" player_class="CLERIC"/>
+			<item id="113501679" name="Fine Betrayer's Chausses" player_class="CHANTER"/>
+			<item id="113501679" name="Fine Betrayer's Chausses" player_class="RIDER"/>
+			<item id="113601517" name="Fine Betrayer's Greaves" player_class="TEMPLAR"/>
+			<item id="113601517" name="Fine Betrayer's Greaves" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="114101649" name="Fine Betrayer's Shoes" player_class="SORCERER"/>
+			<item id="114101649" name="Fine Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101649" name="Fine Betrayer's Shoes" player_class="BARD"/>
+			<item id="114301774" name="Fine Betrayer's Boots" player_class="ASSASSIN"/>
+			<item id="114301774" name="Fine Betrayer's Boots" player_class="RANGER"/>
+			<item id="114301774" name="Fine Betrayer's Boots" player_class="GUNNER"/>
+			<item id="114501689" name="Fine Betrayer's Brogans" player_class="CLERIC"/>
+			<item id="114501689" name="Fine Betrayer's Brogans" player_class="CHANTER"/>
+			<item id="114501689" name="Fine Betrayer's Brogans" player_class="RIDER"/>
+			<item id="114601524" name="Fine Betrayer's Sabatons" player_class="TEMPLAR"/>
+			<item id="114601524" name="Fine Betrayer's Sabatons" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="125004013" name="Fine Betrayer's Headband" player_class="SORCERER"/>
+			<item id="125004013" name="Fine Betrayer's Headband" player_class="SPIRIT_MASTER"/>
+			<item id="125004013" name="Fine Betrayer's Headband" player_class="BARD"/>
+			<item id="125004015" name="Fine Betrayer's Hat" player_class="ASSASSIN"/>
+			<item id="125004015" name="Fine Betrayer's Hat" player_class="RANGER"/>
+			<item id="125004015" name="Fine Betrayer's Hat" player_class="GUNNER"/>
+			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="CLERIC"/>
+			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="CHANTER"/>
+			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="RIDER"/>
+			<item id="125004019" name="Fine Betrayer's Helm" player_class="TEMPLAR"/>
+			<item id="125004019" name="Fine Betrayer's Helm" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="110101784" name="Superb Betrayer's Tunic" player_class="SORCERER"/>
+			<item id="110101784" name="Superb Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110101784" name="Superb Betrayer's Tunic" player_class="BARD"/>
+			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="RANGER"/>
+			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="GUNNER"/>
+			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="CLERIC"/>
+			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="CHANTER"/>
+			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="RIDER"/>
+			<item id="110601572" name="Superb Betrayer's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601572" name="Superb Betrayer's Breastplate" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="111101604" name="Superb Betrayer's Gloves" player_class="SORCERER"/>
+			<item id="111101604" name="Superb Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101604" name="Superb Betrayer's Gloves" player_class="BARD"/>
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="RANGER"/>
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="GUNNER"/>
+			<item id="111501662" name="Superb Betrayer's Handguards" player_class="CLERIC"/>
+			<item id="111501662" name="Superb Betrayer's Handguards" player_class="CHANTER"/>
+			<item id="111501662" name="Superb Betrayer's Handguards" player_class="RIDER"/>
+			<item id="111601535" name="Superb Betrayer's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601535" name="Superb Betrayer's Gauntlets" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="SORCERER"/>
+			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="BARD"/>
+			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="RANGER"/>
+			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="GUNNER"/>
+			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="CLERIC"/>
+			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="CHANTER"/>
+			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="RIDER"/>
+			<item id="112601517" name="Superb Betrayer's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601517" name="Superb Betrayer's Shoulderplates" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="113101616" name="Superb Betrayer's Leggings" player_class="SORCERER"/>
+			<item id="113101616" name="Superb Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101616" name="Superb Betrayer's Leggings" player_class="BARD"/>
+			<item id="113301738" name="Superb Betrayer's Breeches" player_class="ASSASSIN"/>
+			<item id="113301738" name="Superb Betrayer's Breeches" player_class="RANGER"/>
+			<item id="113301738" name="Superb Betrayer's Breeches" player_class="GUNNER"/>
+			<item id="113501680" name="Superb Betrayer's Chausses" player_class="CLERIC"/>
+			<item id="113501680" name="Superb Betrayer's Chausses" player_class="CHANTER"/>
+			<item id="113501680" name="Superb Betrayer's Chausses" player_class="RIDER"/>
+			<item id="113601518" name="Superb Betrayer's Greaves" player_class="TEMPLAR"/>
+			<item id="113601518" name="Superb Betrayer's Greaves" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="114101650" name="Superb Betrayer's Shoes" player_class="SORCERER"/>
+			<item id="114101650" name="Superb Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101650" name="Superb Betrayer's Shoes" player_class="BARD"/>
+			<item id="114301775" name="Superb Betrayer's Boots" player_class="ASSASSIN"/>
+			<item id="114301775" name="Superb Betrayer's Boots" player_class="RANGER"/>
+			<item id="114301775" name="Superb Betrayer's Boots" player_class="GUNNER"/>
+			<item id="114501690" name="Superb Betrayer's Brogans" player_class="CLERIC"/>
+			<item id="114501690" name="Superb Betrayer's Brogans" player_class="CHANTER"/>
+			<item id="114501690" name="Superb Betrayer's Brogans" player_class="RIDER"/>
+			<item id="114601525" name="Superb Betrayer's Sabatons" player_class="TEMPLAR"/>
+			<item id="114601525" name="Superb Betrayer's Sabatons" player_class="GLADIATOR"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053184" decomposable_name="[Event] Golden Rice Cake Soup Ingredients Bundle"/>
     <decomposable item_id="188053185" decomposable_name="[Event] Wishing Soup">
         <items chance="20.0">
@@ -28470,22 +29600,66 @@
     <decomposable item_id="188053306" decomposable_name="Ancient Crown Bundle"/>
     <decomposable item_id="188053307" decomposable_name="Legion's Honorable Reward Box"/>
     <decomposable item_id="188053308" decomposable_name="Legion's Illusion Godstone Bundle"/>
-    <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box"/>
+    <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053310" decomposable_name="Legion's Fine Ancient Manastone Bundle">
 		<items>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053311" decomposable_name="Legion's Greater Ancient Manastone Bundle"/>
-    <decomposable item_id="188053312" decomposable_name="Legion's Ancient Manastone Bundle"/>
-    <decomposable item_id="188053313" decomposable_name="Legion's Lesser Ancient Manastone Bundle"/>
-    <decomposable item_id="188053314" decomposable_name="Legion's Greater Composite Manastone Bundle"/>
-    <decomposable item_id="188053315" decomposable_name="Legion's Composite Manastone Bundle"/>
-    <decomposable item_id="188053316" decomposable_name="Legion's Lesser Composite Manastone Bundle"/>
-    <decomposable item_id="188053317" decomposable_name="Legion's Fine Crown Bundle"/>
-    <decomposable item_id="188053318" decomposable_name="Legion's Greater Crown Bundle"/>
-    <decomposable item_id="188053319" decomposable_name="Legion's Crown Bundle"/>
-    <decomposable item_id="188053320" decomposable_name="Legion's Lesser Crown Bundle"/>
+    <decomposable item_id="188053311" decomposable_name="Legion's Greater Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053312" decomposable_name="Legion's Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053313" decomposable_name="Legion's Lesser Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053314" decomposable_name="Legion's Greater Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053315" decomposable_name="Legion's Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053316" decomposable_name="Legion's Lesser Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_40"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053317" decomposable_name="Legion's Fine Crown Bundle">
+		<items>
+			<item id="186000051" name="Major Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053318" decomposable_name="Legion's Greater Crown Bundle">
+		<items>
+			<item id="186000052" name="Greater Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053319" decomposable_name="Legion's Crown Bundle">
+		<items>
+			<item id="186000053" name="Ancient Crown"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053320" decomposable_name="Legion's Lesser Crown Bundle">
+		<items>
+			<item id="186000054" name="Lesser Ancient Crown"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053321" decomposable_name="[Event] Empyrean Plume Chest" selectable="true">
         <items>
             <item id="187100015" name="Kaisinel's Plume: Attack" race="ELYOS"/>
@@ -28639,8 +29813,112 @@
         </items>
     </decomposable>
     <decomposable item_id="188053413" decomposable_name="[Stamp] Noble Coin Pouch"/>
-    <decomposable item_id="188053414" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
-    <decomposable item_id="188053415" decomposable_name="[Stamp] Noble Illusion Godstone Box"/>
+    <decomposable item_id="188053414" decomposable_name="[Stamp] Noble Illusion Godstone Box">
+		<items>
+			<item id="168000178" name="[Stamp] Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000179" name="[Stamp] Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000180" name="[Stamp] Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000181" name="[Stamp] Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000182" name="[Stamp] Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000183" name="[Stamp] Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000184" name="[Stamp] Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000185" name="[Stamp] Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000186" name="[Stamp] Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+		<items>
+			<item id="168000187" name="[Stamp] Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000188" name="[Stamp] Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000189" name="[Stamp] Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000190" name="[Stamp] Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000191" name="[Stamp] Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000192" name="[Stamp] Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000193" name="[Stamp] Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000194" name="[Stamp] Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053415" decomposable_name="[Stamp] Noble Illusion Godstone Box">
+		<items>
+			<item id="168000178" name="[Stamp] Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000179" name="[Stamp] Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000180" name="[Stamp] Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000181" name="[Stamp] Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000182" name="[Stamp] Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000183" name="[Stamp] Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000184" name="[Stamp] Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000185" name="[Stamp] Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000186" name="[Stamp] Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+		<items>
+			<item id="168000187" name="[Stamp] Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000188" name="[Stamp] Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000189" name="[Stamp] Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000190" name="[Stamp] Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000191" name="[Stamp] Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000192" name="[Stamp] Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000193" name="[Stamp] Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000194" name="[Stamp] Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053416" decomposable_name="[Stamp] Noble Ancient Manastone Box">
         <items>
             <item id="167020084" name="[Stamp] Ancient Manastone: Accuracy +35"/>
@@ -29094,16 +30372,16 @@
     <decomposable item_id="188053617" decomposable_name="Noble Tidal Idian Bundle"/>
     <decomposable item_id="188053618" decomposable_name="Honorable Elim's Idian Bundle">
 		<items>
-			<item id="169405338" name="Pallasite Ore"/>
+			<item id="166050137" name="Honorable Elim's Idian: Physical Attack"/>
 		</items>
 		<items>
-			<item id="169405339" name="Pallasite Crystal"/>
+			<item id="166050138" name="Honorable Elim's Idian: Magical Attack"/>
 		</items>
 		<items>
-			<item id="169405340" name="Pallasite Powder"/>
+			<item id="166050139" name="Honorable Elim's Idian: Physical Defense"/>
 		</items>
 		<items>
-			<item id="169405341" name="Pallasite Refined Water"/>
+			<item id="166050140" name="Honorable Elim's Idian: Magical Defense"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053619" decomposable_name="Ancient Manastone Bundle"/>
@@ -29158,7 +30436,20 @@
     <decomposable item_id="188053625" decomposable_name="Empyrean Plume Bundle"/>
     <decomposable item_id="188053626" decomposable_name="Strong Wyvern Form Candy Bundle"/>
     <decomposable item_id="188053627" decomposable_name="Sleek Hovercycle Chest"/>
-    <decomposable item_id="188053628" decomposable_name="Pallasite Bundle"/>
+    <decomposable item_id="188053628" decomposable_name="Pallasite Bundle">
+		<items>
+			<item id="169405338" name="Pallasite Ore"/>
+		</items>
+		<items>
+			<item id="169405339" name="Pallasite Crystal"/>
+		</items>
+		<items>
+			<item id="169405340" name="Pallasite Powder"/>
+		</items>
+		<items>
+			<item id="169405341" name="Pallasite Refined Water"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053629" decomposable_name="Police Force Box"/>
     <decomposable item_id="188053630" decomposable_name="Greater Scroll Bundle"/>
     <decomposable item_id="188053631" decomposable_name="[Stamp] Noble Potion Bundle">

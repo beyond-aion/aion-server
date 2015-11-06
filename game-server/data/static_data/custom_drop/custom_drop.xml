@@ -787,6 +787,9 @@
 		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
 			<drop item_id="166500002" name="Amplification Stone" min_amount="1" max_amount="1" chance="5" each_member="true"/>
 		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188052084" name="Dragon Lord Tiamat Treasure Chest" min_amount="1" max_amount="1" chance="100" each_member="true"/>
+		</drop_group>
 	</npc_drop>
 	<!-- Elementis Forest -->
 	<npc_drop npc_id="700999" replace_type="FULL">
@@ -1492,6 +1495,22 @@
 			<drop item_id="188053238" name="Scroll Bundle (Linkgate Foundry)" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Lower Udas Temple -->
+	<npc_drop npc_id="216150" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Legend)">
+			<drop item_id="125002258" name="Forsaken Temple Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002259" name="Forsaken Temple Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002260" name="Forsaken Temple Chain Hood" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002261" name="Forsaken Temple Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Head (Unique)">
+			<drop item_id="125002263" name="Jotun Worthy Hat" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Epic)">
+			<drop item_id="123001030" name="Jotun Blacksmith's Leather Belt" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="123001031" name="Jotun Blacksmith's Sash" min_amount="1" max_amount="1" chance="3"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Miren Barracks -->
 	<npc_drop npc_id="702296" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
@@ -1628,6 +1647,33 @@
 			<drop item_id="111500472" name="Lost Mine Handguards" min_amount="1" max_amount="1" chance="15"/>
 			<drop item_id="111100433" name="Lost Mine Gloves" min_amount="1" max_amount="1" chance="15"/>
 			<drop item_id="111300435" name="Lost Mine Vambrace" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Raksang -->
+	<npc_drop npc_id="701369" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100028" name="Corridor Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701370" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100029" name="Fear Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701371" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="188100030" name="Fire Key Piece" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701372" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Unique)">
+			<drop item_id="125002604" name="Raksha Legionary's Headband" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002605" name="Raksha Legionary's Hat" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002606" name="Raksha Legionary's Chain Hood" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="125002607" name="Raksha Legionary's Helm" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Guestbloom (Unique)">
+			<drop item_id="170195108" name="Raksha Legionary's Guestbloom" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Rentus Base -->
@@ -2215,6 +2261,136 @@
 			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="30"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Steel Rose Deck -->
+	<npc_drop npc_id="701818" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Idian (Rare)">
+			<drop item_id="166050009" name="Steel Rose Idian: Physical Attack" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="166050010" name="Steel Rose Idian: Magical Attack" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="166050011" name="Steel Rose Idian: Physical Defense" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="166050012" name="Steel Rose Idian: Magical Defense" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Consumables">
+			<drop item_id="160002416" name="Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002417" name="Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002418" name="Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002419" name="Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002420" name="Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002421" name="Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002422" name="Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002423" name="Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002437" name="Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002438" name="Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002439" name="Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002440" name="Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002441" name="Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002442" name="Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002443" name="Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002444" name="Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002460" name="Fresh Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002461" name="Fresh Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002462" name="Fresh Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002463" name="Fresh Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002464" name="Fresh Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002465" name="Juicy Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002466" name="Fresh Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002467" name="Fresh Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002481" name="Fresh Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002482" name="Fresh Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002483" name="Fresh Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002484" name="Succulent Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002485" name="Fresh Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002486" name="Fresh Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002487" name="Fresh Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002488" name="Fresh Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701819" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Idian (Legend)">
+			<drop item_id="166050013" name="Glossy Steel Rose Idian: Physical Attack" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050014" name="Glossy Steel Rose Idian: Magical Attack" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050015" name="Glossy Steel Rose Idian: Physical Defense" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050016" name="Glossy Steel Rose Idian: Magical Defense" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Consumables">
+			<drop item_id="160002416" name="Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002417" name="Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002418" name="Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002419" name="Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002420" name="Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002421" name="Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002422" name="Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002423" name="Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002437" name="Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002438" name="Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002439" name="Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002440" name="Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002441" name="Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002442" name="Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002443" name="Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002444" name="Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002460" name="Fresh Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002461" name="Fresh Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002462" name="Fresh Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002463" name="Fresh Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002464" name="Fresh Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002465" name="Juicy Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002466" name="Fresh Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002467" name="Fresh Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002481" name="Fresh Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002482" name="Fresh Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002483" name="Fresh Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002484" name="Succulent Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002485" name="Fresh Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002486" name="Fresh Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002487" name="Fresh Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002488" name="Fresh Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701831" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Idian (Legend)">
+			<drop item_id="166050013" name="Glossy Steel Rose Idian: Physical Attack" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050014" name="Glossy Steel Rose Idian: Magical Attack" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050015" name="Glossy Steel Rose Idian: Physical Defense" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="166050016" name="Glossy Steel Rose Idian: Magical Defense" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Consumables">
+			<drop item_id="160002416" name="Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002417" name="Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002418" name="Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002419" name="Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002420" name="Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002421" name="Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002422" name="Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002423" name="Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002437" name="Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002438" name="Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002439" name="Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002440" name="Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002441" name="Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002442" name="Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002443" name="Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002444" name="Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002460" name="Fresh Pepento Juice" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002461" name="Fresh Spicy Seasoned Abex" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002462" name="Fresh Fried Kucien" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002463" name="Fresh Boiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002464" name="Fresh Broiled Plucar" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002465" name="Juicy Pepento Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002466" name="Fresh Boiled Pepento" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002467" name="Fresh Menthcrem Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002481" name="Fresh Plucar Dragon Salad" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002482" name="Fresh Boiled Plucar Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002483" name="Fresh Plucar Dragon Soup" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002484" name="Succulent Rava Dragon Omelette" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002485" name="Fresh Spicy Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002486" name="Fresh Fried Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002487" name="Fresh Roast Pepento Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160002488" name="Fresh Broiled Rava Dragon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="160003586" name="Refreshing Rava Juice" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Sulfur Tree Nest -->
 	<npc_drop npc_id="214804" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
@@ -2600,6 +2776,16 @@
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Talocs Hollow -->
+	<npc_drop npc_id="700742" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Egg Shell">
+			<drop item_id="182005918" name="Glossy Green Egg Shell" min_amount="1" max_amount="5" chance="43"/>
+			<drop item_id="182005919" name="Glossy Yellow Egg Shell" min_amount="1" max_amount="5" chance="23"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Enchantment Stone">
+			<drop item_id="166000192" name="Beta Enchantment Stone" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
 	<!-- The Hexway -->
 	<npc_drop npc_id="701662" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Coin">
@@ -2638,6 +2824,15 @@
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Box">
 			<drop item_id="188052163" name="Golden Treasure Box" min_amount="1" max_amount="1" chance="100" each_member="true"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Theobomos Lab -->
+	<npc_drop npc_id="700826" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="110900040" name="Gentlewoman's Dress" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="125002031" name="Gentlewoman's Tiara" min_amount="1" max_amount="1" chance="30"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Tiamat Stronghold -->

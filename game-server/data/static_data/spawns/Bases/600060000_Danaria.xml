@@ -5,7 +5,7 @@
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801627">
+				<spawn npc_id="801627" handler="FLAG">
 					<spot x="968.3525" y="1168.8684" z="373.52203" h="60"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -22,75 +22,75 @@
 					<spot x="973.78839" y="1170.6727" z="373.75" h="90"/>
 				</spawn>
 				<!-- Desolation Garrison Combatant -->
-				<spawn npc_id="232239" respawn_time="295">
+				<spawn npc_id="232239" handler="SENTINEL" respawn_time="295">
 					<spot x="940.64441" y="1160.5269" z="375.47562" h="60"/>
 					<spot x="940.80859" y="1164.2007" z="375.47562" h="60"/>
 					<spot x="954.34521" y="1174.6194" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Garrison Protector -->
-				<spawn npc_id="232240" respawn_time="295">
+				<spawn npc_id="232240" handler="SENTINEL" respawn_time="295">
 					<spot x="970.91278" y="1167.5977" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Garrison Healer -->
-				<spawn npc_id="232241" respawn_time="295">
+				<spawn npc_id="232241" handler="SENTINEL" respawn_time="295">
 					<spot x="921.14966" y="1169.7473" z="376.29526" h="60"/>
 				</spawn>
 				<!-- Desolation Garrison Sentry -->
-				<spawn npc_id="232242" respawn_time="295">
+				<spawn npc_id="232242" handler="SENTINEL" respawn_time="295">
 					<spot x="955.07349" y="1161.2261" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Karkinos -->
-				<spawn npc_id="800736" respawn_time="295">
+				<spawn npc_id="800736" handler="MERCHANT" respawn_time="295">
 					<spot x="971.9111" y="1159.4863" z="373.7556" h="30"/>
 				</spawn>
 				<!-- Bellmarinerk -->
-				<spawn npc_id="800735" respawn_time="295">
+				<spawn npc_id="800735" handler="MERCHANT" respawn_time="295">
 					<spot x="964.9733" y="1176.6300" z="373.5000" h="90"/>
 				</spawn>
 				<!-- Hiponax -->
-				<spawn npc_id="800737" respawn_time="295">
+				<spawn npc_id="800737" handler="MERCHANT" respawn_time="295">
 					<spot x="965.0933" y="1159.4810" z="373.8750" h="30"/>
 				</spawn>
 				<!-- Meton -->
-				<spawn npc_id="800738" respawn_time="295">
+				<spawn npc_id="800738" handler="MERCHANT" respawn_time="295">
 					<spot x="970.9850" y="1178.4034" z="373.5000" h="90"/>
 				</spawn>
 				<!-- Teronas -->
-				<spawn npc_id="801036" respawn_time="295">
+				<spawn npc_id="801036" handler="MERCHANT" respawn_time="295">
 					<spot x="974.7160" y="1158.5861" z="373.7947" h="60"/>
 				</spawn>
 				<!-- Hipasia -->
-				<spawn npc_id="801472" respawn_time="295">
+				<spawn npc_id="801472" handler="MERCHANT" respawn_time="295">
 					<spot x="968.6761" y="1159.4497" z="373.8750" h="30"/>
 				</spawn>
 				<!-- Klenoth -->
-				<spawn npc_id="800734" respawn_time="295">
+				<spawn npc_id="800734" handler="MERCHANT" respawn_time="295">
 					<spot x="982.4421" y="1159.6975" z="373.8750" h="60"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801705" respawn_time="295">
+				<spawn npc_id="801705" handler="MERCHANT" respawn_time="295">
 					<spot x="982.6664" y="1156.594" z="375.7825" h="110" static_id="2773"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Desolation Vanguard Combatant -->
-				<spawn npc_id="232752" respawn_time="295">
+				<spawn npc_id="232752" handler="OUTRIDER" respawn_time="295">
 					<spot x="757.7526" y="1068.2964" z="382.26547" h="30"/>
 					<spot x="769.1757" y="1076.6221" z="382.25" h="30"/>
 					<spot x="782.5182" y="1075.7812" z="382.25" h="30"/>
 					<spot x="788.37836" y="1060.7483" z="382.25" h="30"/>
 				</spawn>
 				<!-- Desolation Vanguard Sentry -->
-				<spawn npc_id="232753" respawn_time="295">
+				<spawn npc_id="232753" handler="OUTRIDER" respawn_time="295">
 					<spot x="767.171" y="1062.0215" z="382.25" h="15"/>
 				</spawn>
 				<!-- Desolation Vanguard Supervisor -->
-				<spawn npc_id="232754" respawn_time="295">
+				<spawn npc_id="232754" handler="OUTRIDER" respawn_time="295">
 					<spot x="778.9075" y="1061.0079" z="382.25" h="33"/>
 				</spawn>
 				<!-- Desolation Vanguard Rider -->
-				<spawn npc_id="233241" respawn_time="295">
+				<spawn npc_id="233241" handler="OUTRIDER" respawn_time="295">
 					<spot x="730.2958" y="1142.4244" z="383.088" h="6"/>
 					<spot x="747.3009" y="1112.636" z="381.87714" h="15"/>
 					<spot x="779.6386" y="1131.4645" z="375.67017" h="23"/>
@@ -100,22 +100,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Desolation Recon Combatant -->
-				<spawn npc_id="232569" respawn_time="295">
+				<spawn npc_id="232569" handler="OUTRIDER" respawn_time="295">
 					<spot x="943.42786" y="1255.2578" z="383.25" h="90"/>
 					<spot x="951.95197" y="1268.9156" z="383.25" h="90"/>
 					<spot x="955.0734" y="1252.9022" z="383.25" h="90"/>
 					<spot x="964.58044" y="1258.6417" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Recon Sentry -->
-				<spawn npc_id="232570" respawn_time="295">
+				<spawn npc_id="232570" handler="OUTRIDER" respawn_time="295">
 					<spot x="960.8783" y="1264.5375" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Recon Supervisor -->
-				<spawn npc_id="232571" respawn_time="295">
+				<spawn npc_id="232571" handler="OUTRIDER" respawn_time="295">
 					<spot x="945.52844" y="1261.8505" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Recon Messenger -->
-				<spawn npc_id="233222" respawn_time="295">
+				<spawn npc_id="233222" handler="OUTRIDER" respawn_time="295">
 					<spot x="919.3434" y="1245.2028" z="376.20984" h="75"/>
 					<spot x="938.6941" y="1234.7401" z="375.8123" h="90"/>
 					<spot x="954.75964" y="1226.9678" z="377.2975" h="75"/>
@@ -127,7 +127,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801628">
+				<spawn npc_id="801628" handler="FLAG">
 					<spot x="968.3525" y="1168.8684" z="373.52203" h="60"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -144,75 +144,75 @@
 					<spot x="973.78839" y="1170.6727" z="373.75" h="90"/>
 				</spawn>
 				<!-- Desolation Combatant -->
-				<spawn npc_id="232334" respawn_time="295">
+				<spawn npc_id="232334" handler="SENTINEL" respawn_time="295">
 					<spot x="940.64441" y="1160.5269" z="375.47562" h="60"/>
 					<spot x="940.80859" y="1164.2007" z="375.47562" h="60"/>
 					<spot x="954.34521" y="1174.6194" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Protector -->
-				<spawn npc_id="232335" respawn_time="295">
+				<spawn npc_id="232335" handler="SENTINEL" respawn_time="295">
 					<spot x="970.91278" y="1167.5977" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Healer -->
-				<spawn npc_id="232336" respawn_time="295">
+				<spawn npc_id="232336" handler="SENTINEL" respawn_time="295">
 					<spot x="921.14966" y="1169.7473" z="376.29526" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Sentry -->
-				<spawn npc_id="232337" respawn_time="295">
+				<spawn npc_id="232337" handler="SENTINEL" respawn_time="295">
 					<spot x="955.07349" y="1161.2261" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Ponirinerk -->
-				<spawn npc_id="800740" respawn_time="295">
+				<spawn npc_id="800740" handler="MERCHANT" respawn_time="295">
 					<spot x="964.97327" y="1176.63" z="375.13138" h="90"/>
 				</spawn>
 				<!-- Manaz Food -->
-				<spawn npc_id="800742" respawn_time="295">
+				<spawn npc_id="800742" handler="MERCHANT" respawn_time="295">
 					<spot x="965.09326" y="1159.481" z="375.13138" h="30"/>
 				</spawn>
 				<!-- Dagas -->
-				<spawn npc_id="800743" respawn_time="295">
+				<spawn npc_id="800743" handler="MERCHANT" respawn_time="295">
 					<spot x="970.9850" y="1178.4034" z="373.5000" h="90"/>
 				</spawn>
 				<!-- Lagu -->
-				<spawn npc_id="800741" respawn_time="295">
+				<spawn npc_id="800741" handler="MERCHANT" respawn_time="295">
 					<spot x="971.9111" y="1159.4863" z="373.7556" h="30"/>
 				</spawn>
 				<!-- Hervo -->
-				<spawn npc_id="801046" respawn_time="295">
+				<spawn npc_id="801046" handler="MERCHANT" respawn_time="295">
 					<spot x="974.11676" y="1176.0431" z="373.54883" h="60"/>
 				</spawn>
 				<!-- Edghar -->
-				<spawn npc_id="801471" respawn_time="295">
+				<spawn npc_id="801471" handler="MERCHANT" respawn_time="295">
 					<spot x="968.67609" y="1159.4497" z="375.13138" h="30"/>
 				</spawn>
 				<!-- Rongar -->
-				<spawn npc_id="800739" respawn_time="295">
+				<spawn npc_id="800739" handler="MERCHANT" respawn_time="295">
 					<spot x="982.4421" y="1159.6975" z="373.8750" h="60"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801704" respawn_time="295">
+				<spawn npc_id="801704" handler="MERCHANT" respawn_time="295">
 					<spot x="982.6664" y="1156.5938" z="375.7825" h="110" static_id="2773"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Desolation Vanguard Combatant -->
-				<spawn npc_id="232752" respawn_time="295">
+				<spawn npc_id="232752" handler="OUTRIDER" respawn_time="295">
 					<spot x="757.7526" y="1068.2964" z="382.26547" h="30"/>
 					<spot x="769.1757" y="1076.6221" z="382.25" h="30"/>
 					<spot x="782.5182" y="1075.7812" z="382.25" h="30"/>
 					<spot x="788.37836" y="1060.7483" z="382.25" h="30"/>
 				</spawn>
 				<!-- Desolation Vanguard Sentry -->
-				<spawn npc_id="232753" respawn_time="295">
+				<spawn npc_id="232753" handler="OUTRIDER" respawn_time="295">
 					<spot x="767.171" y="1062.0215" z="382.25" h="15"/>
 				</spawn>
 				<!-- Desolation Vanguard Supervisor -->
-				<spawn npc_id="232754" respawn_time="295">
+				<spawn npc_id="232754" handler="OUTRIDER" respawn_time="295">
 					<spot x="778.9075" y="1061.0079" z="382.25" h="33"/>
 				</spawn>
 				<!-- Desolation Vanguard Rider -->
-				<spawn npc_id="233241" respawn_time="295">
+				<spawn npc_id="233241" handler="OUTRIDER" respawn_time="295">
 					<spot x="730.2958" y="1142.4244" z="383.088" h="6"/>
 					<spot x="747.3009" y="1112.636" z="381.87714" h="15"/>
 					<spot x="779.6386" y="1131.4645" z="375.67017" h="23"/>
@@ -222,22 +222,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Desolation Scout Combatant -->
-				<spawn npc_id="232508" respawn_time="295">
+				<spawn npc_id="232508" handler="OUTRIDER" respawn_time="295">
 					<spot x="943.42786" y="1255.2578" z="383.25" h="90"/>
 					<spot x="951.95197" y="1268.9156" z="383.25" h="90"/>
 					<spot x="955.0734" y="1252.9022" z="383.25" h="90"/>
 					<spot x="964.58044" y="1258.6417" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Scout Sentry -->
-				<spawn npc_id="232509" respawn_time="295">
+				<spawn npc_id="232509" handler="OUTRIDER" respawn_time="295">
 					<spot x="960.8783" y="1264.5375" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Scout Supervisor -->
-				<spawn npc_id="232510" respawn_time="295">
+				<spawn npc_id="232510" handler="OUTRIDER" respawn_time="295">
 					<spot x="945.52844" y="1261.8505" z="383.25" h="90"/>
 				</spawn>
 				<!-- Desolation Scout Envoy -->
-				<spawn npc_id="233203" respawn_time="295">
+				<spawn npc_id="233203" handler="OUTRIDER" respawn_time="295">
 					<spot x="919.3434" y="1245.2028" z="376.20984" h="75"/>
 					<spot x="938.6941" y="1234.7401" z="375.8123" h="90"/>
 					<spot x="954.75964" y="1226.9678" z="377.2975" h="75"/>
@@ -249,7 +249,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801629">
+				<spawn npc_id="801629" handler="FLAG">
 					<spot x="968.3525" y="1168.8684" z="373.52203" h="60"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -266,7 +266,7 @@
 					<spot x="973.78839" y="1170.6727" z="373.75" h="90"/>
 				</spawn>
 				<!-- Desolation Combatant -->
-				<spawn npc_id="232429" respawn_time="295">
+				<spawn npc_id="232429" handler="SENTINEL" respawn_time="295">
 					<spot x="940.64441" y="1160.5269" z="375.47562" h="60"/>
 					<spot x="940.80859" y="1164.2007" z="375.47562" h="60"/>
 					<spot x="954.34521" y="1174.6194" z="375.13138" h="60"/>
@@ -274,76 +274,25 @@
 					<spot x="982.44208" y="1159.6975" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Protector -->
-				<spawn npc_id="232430" respawn_time="295">
+				<spawn npc_id="232430" handler="SENTINEL" respawn_time="295">
 					<spot x="970.91278" y="1167.5977" z="375.13138" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Healer -->
-				<spawn npc_id="232431" respawn_time="295">
+				<spawn npc_id="232431" handler="SENTINEL" respawn_time="295">
 					<spot x="921.14966" y="1169.7473" z="376.29526" h="60"/>
 				</spawn>
 				<!-- Desolation Subjugator Sentry -->
-				<spawn npc_id="232432" respawn_time="295">
+				<spawn npc_id="232432" handler="SENTINEL" respawn_time="295">
 					<spot x="955.07349" y="1161.2261" z="375.13138" h="60"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Desolation Vanguard Combatant -->
-				<spawn npc_id="232752" respawn_time="295">
-					<spot x="757.7526" y="1068.2964" z="382.26547" h="30"/>
-					<spot x="769.1757" y="1076.6221" z="382.25" h="30"/>
-					<spot x="782.5182" y="1075.7812" z="382.25" h="30"/>
-					<spot x="788.37836" y="1060.7483" z="382.25" h="30"/>
-				</spawn>
-				<!-- Desolation Vanguard Sentry -->
-				<spawn npc_id="232753" respawn_time="295">
-					<spot x="767.171" y="1062.0215" z="382.25" h="15"/>
-				</spawn>
-				<!-- Desolation Vanguard Supervisor -->
-				<spawn npc_id="232754" respawn_time="295">
-					<spot x="778.9075" y="1061.0079" z="382.25" h="33"/>
-				</spawn>
-				<!-- Desolation Vanguard Rider -->
-				<spawn npc_id="233241" respawn_time="295">
-					<spot x="730.2958" y="1142.4244" z="383.088" h="6"/>
-					<spot x="747.3009" y="1112.636" z="381.87714" h="15"/>
-					<spot x="779.6386" y="1131.4645" z="375.67017" h="23"/>
-					<spot x="800.39294" y="1111.7523" z="376.5604" h="15"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Desolation Scout Combatant -->
-				<spawn npc_id="232508" respawn_time="295">
-					<spot x="943.42786" y="1255.2578" z="383.25" h="90"/>
-					<spot x="951.95197" y="1268.9156" z="383.25" h="90"/>
-					<spot x="955.0734" y="1252.9022" z="383.25" h="90"/>
-					<spot x="964.58044" y="1258.6417" z="383.25" h="90"/>
-				</spawn>
-				<!-- Desolation Scout Sentry -->
-				<spawn npc_id="232509" respawn_time="295">
-					<spot x="960.8783" y="1264.5375" z="383.25" h="90"/>
-				</spawn>
-				<!-- Desolation Scout Supervisor -->
-				<spawn npc_id="232510" respawn_time="295">
-					<spot x="945.52844" y="1261.8505" z="383.25" h="90"/>
-				</spawn>
-				<!-- Desolation Scout Envoy -->
-				<spawn npc_id="233203" respawn_time="295">
-					<spot x="919.3434" y="1245.2028" z="376.20984" h="75"/>
-					<spot x="938.6941" y="1234.7401" z="375.8123" h="90"/>
-					<spot x="954.75964" y="1226.9678" z="377.2975" h="75"/>
-					<spot x="976.2026" y="1220.795" z="376.68735" h="90"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6061"> <!-- Icethorn Frontier Post 81. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801630">
+				<spawn npc_id="801630" handler="FLAG">
 					<spot x="1043.9757" y="1811.7323" z="362.625" h="71"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -360,75 +309,75 @@
 					<spot x="1053.4426" y="1809.2997" z="362.625" h="45"/>
 				</spawn>
 				<!-- Icethorn Garrison Combatant -->
-				<spawn npc_id="232244" respawn_time="295">
+				<spawn npc_id="232244" handler="SENTINEL" respawn_time="295">
 					<spot x="1023.0003" y="1781.1449" z="361.03564" h="72"/>
 					<spot x="1007.3199" y="1797.1903" z="361.04053" h="72"/>
 					<spot x="1035.9386" y="1796.7981" z="362.375" h="72"/>
 				</spawn>
 				<!-- Icethorn Garrison Protector -->
-				<spawn npc_id="232245" respawn_time="295">
+				<spawn npc_id="232245" handler="SENTINEL" respawn_time="295">
 					<spot x="1048.7755" y="1812.4141" z="362.625" h="72"/>
 				</spawn>
 				<!-- Icethorn Garrison Healer -->
-				<spawn npc_id="232246" respawn_time="295">
+				<spawn npc_id="232246" handler="SENTINEL" respawn_time="295">
 					<spot x="1014.4248" y="1803.5825" z="361.04053" h="72"/>
 				</spawn>
 				<!-- Icethorn Garrison Sentry -->
-				<spawn npc_id="232247" respawn_time="295">
+				<spawn npc_id="232247" handler="SENTINEL" respawn_time="295">
 					<spot x="1027.7183" y="1808.0311" z="362.375" h="72"/>
 				</spawn>
 				<!-- Stifas -->
-				<spawn npc_id="801037" respawn_time="295">
+				<spawn npc_id="801037" handler="MERCHANT" respawn_time="295">
 					<spot x="1055.3455" y="1806.7864" z="363.94662" h="60"/>
 				</spawn>
 				<!-- Aristeus -->
-				<spawn npc_id="800744" respawn_time="295">
+				<spawn npc_id="800744" handler="MERCHANT" respawn_time="295">
 					<spot x="1048.8524" y="1802.031" z="362.625" h="45"/>
 				</spawn>
 				<!-- Mindarus -->
-				<spawn npc_id="800745" respawn_time="295">
+				<spawn npc_id="800745" handler="MERCHANT" respawn_time="295">
 					<spot x="1044.0972" y="1800.4258" z="362.5" h="45"/>
 				</spawn>
 				<!-- Amage -->
-				<spawn npc_id="801970" respawn_time="295">
+				<spawn npc_id="801970" handler="MERCHANT" respawn_time="295">
 					<spot x="1053.316" y="1801.8745" z="362.625" h="45"/>
 				</spawn>
 				<!-- Nearukus -->
-				<spawn npc_id="800746" respawn_time="295">
+				<spawn npc_id="800746" handler="MERCHANT" respawn_time="295">
 					<spot x="1040.6074" y="1818.9858" z="362.6250" h="85"/>
 				</spawn>
 				<!-- Owullus-->
-				<spawn npc_id="802009" respawn_time="295">
+				<spawn npc_id="802009" handler="MERCHANT" respawn_time="295">
 					<spot x="1033.9543" y="1821.9236" z="363.01205" h="105"/>
 				</spawn>
 				<!-- Kvash -->
-				<spawn npc_id="802008" respawn_time="295">
+				<spawn npc_id="802008" handler="MERCHANT" respawn_time="295">
 					<spot x="1030.9231" y="1820.1572" z="362.5000" h="105"/>
 				</spawn>
 				<!-- Daidalos -->
-				<spawn npc_id="730869" respawn_time="295">
+				<spawn npc_id="730869" handler="MERCHANT" respawn_time="295">
 					<spot x="1050.9517" y="1844.5052" z="366.7099" h="85"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Icethorn Vanguard Combatant -->
-				<spawn npc_id="232755" respawn_time="295">
+				<spawn npc_id="232755" handler="OUTRIDER" respawn_time="295">
 					<spot x="749.2362" y="1795.7026" z="366.8936" h="90"/>
 					<spot x="760.39923" y="1815.6271" z="366.875" h="90"/>
 					<spot x="770.02454" y="1792.3625" z="365.11328" h="90"/>
 					<spot x="783.17084" y="1808.3057" z="366.75" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Sentry -->
-				<spawn npc_id="232756" respawn_time="295">
+				<spawn npc_id="232756" handler="OUTRIDER" respawn_time="295">
 					<spot x="760.76373" y="1802.6833" z="366.875" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Supervisor -->
-				<spawn npc_id="232757" respawn_time="295">
+				<spawn npc_id="232757" handler="OUTRIDER" respawn_time="295">
 					<spot x="771.7125" y="1812.0616" z="366.875" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Rider -->
-				<spawn npc_id="233242" respawn_time="295">
+				<spawn npc_id="233242" handler="OUTRIDER" respawn_time="295">
 					<spot x="721.937" y="1801.8378" z="371.06415" h="100"/>
 					<spot x="759.71423" y="1767.9221" z="361.03564" h="90"/>
 					<spot x="800.2845" y="1768.6862" z="361.03564" h="113"/>
@@ -438,22 +387,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Icethorn Recon Combatant -->
-				<spawn npc_id="232572" respawn_time="295">
+				<spawn npc_id="232572" handler="OUTRIDER" respawn_time="295">
 					<spot x="921.0907" y="1628.7854" z="363.45093" h="30"/>
 					<spot x="930.82544" y="1616.0411" z="363.5" h="30"/>
 					<spot x="932.03644" y="1632.1829" z="363.2386" h="30"/>
 					<spot x="940.45703" y="1627.734" z="363.375" h="30"/>
 				</spawn>
 				<!-- Icethorn Recon Sentry -->
-				<spawn npc_id="232573" respawn_time="295">
+				<spawn npc_id="232573" handler="OUTRIDER" respawn_time="295">
 					<spot x="934.8618" y="1622.6095" z="363.5" h="30"/>
 				</spawn>
 				<!-- Icethorn Recon Supervisor -->
-				<spawn npc_id="232574" respawn_time="295">
+				<spawn npc_id="232574" handler="OUTRIDER" respawn_time="295">
 					<spot x="926.50366" y="1624.4208" z="363.5" h="30"/>
 				</spawn>
 				<!-- Icethorn Recon Messenger -->
-				<spawn npc_id="233223" respawn_time="295">
+				<spawn npc_id="233223" handler="OUTRIDER" respawn_time="295">
 					<spot x="897.1207" y="1634.4423" z="361.7112" h="30"/>
 					<spot x="907.90784" y="1609.5262" z="364.83884" h="53"/>
 					<spot x="951.12256" y="1592.4077" z="366.1621" h="110"/>
@@ -465,7 +414,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801631">
+				<spawn npc_id="801631" handler="FLAG">
 					<spot x="1043.9757" y="1811.7323" z="362.625" h="71"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -482,75 +431,75 @@
 					<spot x="1053.4426" y="1809.2997" z="362.625" h="45"/>
 				</spawn>
 				<!-- Icethorn Combatant -->
-				<spawn npc_id="232339" respawn_time="295">
+				<spawn npc_id="232339" handler="SENTINEL" respawn_time="295">
 					<spot x="1023.0003" y="1781.1449" z="361.03564" h="72"/>
 					<spot x="1007.3199" y="1797.1903" z="361.04053" h="72"/>
 					<spot x="1035.9386" y="1796.7981" z="362.375" h="72"/>
 				</spawn>
 				<!-- Icethorn Protector -->
-				<spawn npc_id="232340" respawn_time="295">
+				<spawn npc_id="232340" handler="SENTINEL" respawn_time="295">
 					<spot x="1048.7755" y="1812.4141" z="362.625" h="72"/>
 				</spawn>
 				<!-- Icethorn Healer -->
-				<spawn npc_id="232341" respawn_time="295">
+				<spawn npc_id="232341" handler="SENTINEL" respawn_time="295">
 					<spot x="1014.4248" y="1803.5825" z="361.04053" h="72"/>
 				</spawn>
 				<!-- Icethorn Sentry -->
-				<spawn npc_id="232342" respawn_time="295">
+				<spawn npc_id="232342" handler="SENTINEL" respawn_time="295">
 					<spot x="1027.7183" y="1808.0311" z="362.375" h="72"/>
 				</spawn>
 				<!-- Hagal Warehouse Manager -->
-				<spawn npc_id="800747" respawn_time="295">
+				<spawn npc_id="800747" handler="MERCHANT" respawn_time="295">
 					<spot x="1048.8524" y="1802.031" z="362.625" h="45"/>
 				</spawn>
 				<!-- Jarf Legion Warehouse Manager -->
-				<spawn npc_id="800748" respawn_time="295">
+				<spawn npc_id="800748" handler="MERCHANT" respawn_time="295">
 					<spot x="1044.0972" y="1800.4258" z="362.5" h="45"/>
 				</spawn>
 				<!-- Haunvig Special Morph Distributor -->
-				<spawn npc_id="801971" respawn_time="295">
+				<spawn npc_id="801971" handler="MERCHANT" respawn_time="295">
 					<spot x="1053.316" y="1801.8745" z="362.625" h="45"/>
 				</spawn>
 				<!-- Serghed Surveillance Officer -->
-				<spawn npc_id="802010" respawn_time="295">
+				<spawn npc_id="802010" handler="MERCHANT" respawn_time="295">
 					<spot x="1033.9543" y="1821.9236" z="363.01205" h="105"/>
 				</spawn>
 				<!-- Captive Kvash -->
-				<spawn npc_id="802015" respawn_time="295">
+				<spawn npc_id="802015" handler="MERCHANT" respawn_time="295">
 					<spot x="1030.9231" y="1820.1572" z="363.01205" h="105"/>
 				</spawn>
 				<!-- Ull -->
-				<spawn npc_id="800749" respawn_time="295">
+				<spawn npc_id="800749" handler="MERCHANT" respawn_time="295">
 					<spot x="1040.6074" y="1818.9858" z="362.6250" h="85"/>
 				</spawn>
 				<!-- Tobald -->
-				<spawn npc_id="801047" respawn_time="295">
+				<spawn npc_id="801047" handler="MERCHANT" respawn_time="295">
 					<spot x="1049.4674" y="1818.2025" z="363.94662" h="70"/>
 				</spawn>
 				<!-- Shuvanhilt -->
-				<spawn npc_id="730870" respawn_time="295">
+				<spawn npc_id="730870" handler="MERCHANT" respawn_time="295">
 					<spot x="1050.9517" y="1844.5052" z="366.70993" h="85"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Icethorn Vanguard Combatant -->
-				<spawn npc_id="232755" respawn_time="295">
+				<spawn npc_id="232755" handler="OUTRIDER" respawn_time="295">
 					<spot x="749.2362" y="1795.7026" z="366.8936" h="90"/>
 					<spot x="760.39923" y="1815.6271" z="366.875" h="90"/>
 					<spot x="770.02454" y="1792.3625" z="365.11328" h="90"/>
 					<spot x="783.17084" y="1808.3057" z="366.75" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Sentry -->
-				<spawn npc_id="232756" respawn_time="295">
+				<spawn npc_id="232756" handler="OUTRIDER" respawn_time="295">
 					<spot x="760.76373" y="1802.6833" z="366.875" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Supervisor -->
-				<spawn npc_id="232757" respawn_time="295">
+				<spawn npc_id="232757" handler="OUTRIDER" respawn_time="295">
 					<spot x="771.7125" y="1812.0616" z="366.875" h="90"/>
 				</spawn>
 				<!-- Icethorn Vanguard Rider -->
-				<spawn npc_id="233242" respawn_time="295">
+				<spawn npc_id="233242" handler="OUTRIDER" respawn_time="295">
 					<spot x="721.937" y="1801.8378" z="371.06415" h="100"/>
 					<spot x="759.71423" y="1767.9221" z="361.03564" h="90"/>
 					<spot x="800.2845" y="1768.6862" z="361.03564" h="113"/>
@@ -560,22 +509,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Icethorn Scout Combatant -->
-				<spawn npc_id="232511" respawn_time="295">
+				<spawn npc_id="232511" handler="OUTRIDER" respawn_time="295">
 					<spot x="921.0907" y="1628.7854" z="363.45093" h="30"/>
 					<spot x="930.82544" y="1616.0411" z="363.5" h="30"/>
 					<spot x="932.03644" y="1632.1829" z="363.2386" h="30"/>
 					<spot x="940.45703" y="1627.734" z="363.375" h="30"/>
 				</spawn>
 				<!-- Icethorn Scout Sentry -->
-				<spawn npc_id="232512" respawn_time="295">
+				<spawn npc_id="232512" handler="OUTRIDER" respawn_time="295">
 					<spot x="934.8618" y="1622.6095" z="363.5" h="30"/>
 				</spawn>
 				<!-- Icethorn Scout Supervisor -->
-				<spawn npc_id="232513" respawn_time="295">
+				<spawn npc_id="232513" handler="OUTRIDER" respawn_time="295">
 					<spot x="926.50366" y="1624.4208" z="363.5" h="30"/>
 				</spawn>
 				<!-- Icethorn Scout Envoy -->
-				<spawn npc_id="233204" respawn_time="295">
+				<spawn npc_id="233204" handler="OUTRIDER" respawn_time="295">
 					<spot x="897.1207" y="1634.4423" z="361.7112" h="30"/>
 					<spot x="907.90784" y="1609.5262" z="364.83884" h="53"/>
 					<spot x="951.12256" y="1592.4077" z="366.1621" h="110"/>
@@ -587,7 +536,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801632">
+				<spawn npc_id="801632" handler="FLAG">
 					<spot x="1043.9757" y="1811.7323" z="362.625" h="71"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -604,83 +553,32 @@
 					<spot x="1053.4426" y="1809.2997" z="362.625" h="45"/>
 				</spawn>
 				<!-- Icethorn Subjugator Combatant -->
-				<spawn npc_id="232434" respawn_time="295">
+				<spawn npc_id="232434" handler="SENTINEL" respawn_time="295">
 					<spot x="1035.9386" y="1796.7981" z="365.34348" h="72"/>
 					<spot x="1007.3199" y="1797.1903" z="361.04053" h="72"/>
 					<spot x="1023.0003" y="1781.1449" z="361.03564" h="72"/>
 				</spawn>
 				<!-- Icethorn Subjugator Protector -->
-				<spawn npc_id="232435" respawn_time="295">
+				<spawn npc_id="232435" handler="SENTINEL" respawn_time="295">
 					<spot x="1040.6074" y="1818.9858" z="365.34348" h="85"/>
 					<spot x="1048.7755" y="1812.4141" z="365.34348" h="72"/>
 				</spawn>
 				<!-- Icethorn Subjugator Healer -->
-				<spawn npc_id="232436" respawn_time="295">
+				<spawn npc_id="232436" handler="SENTINEL" respawn_time="295">
 					<spot x="1014.4248" y="1803.5825" z="361.04053" h="72"/>
 				</spawn>
 				<!-- Icethorn Subjugator Sentry -->
-				<spawn npc_id="232437" respawn_time="295">
+				<spawn npc_id="232437" handler="SENTINEL" respawn_time="295">
 					<spot x="1027.7183" y="1808.0311" z="362.375" h="72"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Icethorn Vanguard Combatant -->
-				<spawn npc_id="232755" respawn_time="295">
-					<spot x="749.2362" y="1795.7026" z="366.8936" h="90"/>
-					<spot x="760.39923" y="1815.6271" z="366.875" h="90"/>
-					<spot x="770.02454" y="1792.3625" z="365.11328" h="90"/>
-					<spot x="783.17084" y="1808.3057" z="366.75" h="90"/>
-				</spawn>
-				<!-- Icethorn Vanguard Sentry -->
-				<spawn npc_id="232756" respawn_time="295">
-					<spot x="760.76373" y="1802.6833" z="366.875" h="90"/>
-				</spawn>
-				<!-- Icethorn Vanguard Supervisor -->
-				<spawn npc_id="232757" respawn_time="295">
-					<spot x="771.7125" y="1812.0616" z="366.875" h="90"/>
-				</spawn>
-				<!-- Icethorn Vanguard Rider -->
-				<spawn npc_id="233242" respawn_time="295">
-					<spot x="721.937" y="1801.8378" z="371.06415" h="100"/>
-					<spot x="759.71423" y="1767.9221" z="361.03564" h="90"/>
-					<spot x="800.2845" y="1768.6862" z="361.03564" h="113"/>
-					<spot x="802.93066" y="1828.8201" z="372.5167" h="105"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Icethorn Scout Combatant -->
-				<spawn npc_id="232511" respawn_time="295">
-					<spot x="921.0907" y="1628.7854" z="363.45093" h="30"/>
-					<spot x="930.82544" y="1616.0411" z="363.5" h="30"/>
-					<spot x="932.03644" y="1632.1829" z="363.2386" h="30"/>
-					<spot x="940.45703" y="1627.734" z="363.375" h="30"/>
-				</spawn>
-				<!-- Icethorn Scout Sentry -->
-				<spawn npc_id="232512" respawn_time="295">
-					<spot x="934.8618" y="1622.6095" z="363.5" h="30"/>
-				</spawn>
-				<!-- Icethorn Scout Supervisor -->
-				<spawn npc_id="232513" respawn_time="295">
-					<spot x="926.50366" y="1624.4208" z="363.5" h="30"/>
-				</spawn>
-				<!-- Icethorn Scout Envoy -->
-				<spawn npc_id="233204" respawn_time="295">
-					<spot x="897.1207" y="1634.4423" z="361.7112" h="30"/>
-					<spot x="907.90784" y="1609.5262" z="364.83884" h="53"/>
-					<spot x="951.12256" y="1592.4077" z="366.1621" h="110"/>
-					<spot x="980.59" y="1615.606" z="364.18704" h="30"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6062"> <!-- Starlit Grove 82. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801633">
+				<spawn npc_id="801633" handler="FLAG">
 					<spot x="1046.2488" y="2248.4668" z="276.5" h="45"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -697,75 +595,75 @@
 					<spot x="1051.1542" y="2245.5051" z="276.5" h="75"/>
 				</spawn>
 				<!-- Starlit Garrison Combatant -->
-				<spawn npc_id="232249" respawn_time="295">
+				<spawn npc_id="232249" handler="SENTINEL" respawn_time="295">
 					<spot x="1002.0188" y="2273.1194" z="272.42218" h="0"/>
 					<spot x="1036.0269" y="2245.4277" z="276.0274" h="45"/>
 					<spot x="1037.986" y="2261.4614" z="275.64362" h="45"/>
 				</spawn>
 				<!-- Starlit Garrison Protector -->
-				<spawn npc_id="232250" respawn_time="295">
+				<spawn npc_id="232250" handler="SENTINEL" respawn_time="295">
 					<spot x="1047.9452" y="2246.0623" z="278.86914" h="45"/>
 				</spawn>
 				<!-- Starlit Garrison Healer -->
-				<spawn npc_id="232251" respawn_time="295">
+				<spawn npc_id="232251" handler="SENTINEL" respawn_time="295">
 					<spot x="1028.8872" y="2254.9353" z="277.38699" h="45"/>
 				</spawn>
 				<!-- Starlit Garrison Sentry -->
-				<spawn npc_id="232252" respawn_time="295">
+				<spawn npc_id="232252" handler="SENTINEL" respawn_time="295">
 					<spot x="1040.0205" y="2255.9492" z="278.86914" h="45"/>
 				</spawn>
 				<!-- Berkaus -->
-				<spawn npc_id="800750" respawn_time="295">
+				<spawn npc_id="800750" handler="MERCHANT" respawn_time="295">
 				<spot x="1063.344" y="2246.79" z="276.0274" h="45"/>
 				</spawn>
 				<!-- Ararunerk -->
-				<spawn npc_id="800751" respawn_time="295">
+				<spawn npc_id="800751" handler="MERCHANT" respawn_time="295">
 					<spot x="1050.9691" y="2252.5732" z="276.5" h="75"/>
 				</spawn>
 				<!-- Sogenitas -->
-				<spawn npc_id="800752" respawn_time="295">
+				<spawn npc_id="800752" handler="MERCHANT" respawn_time="295">
 					<spot x="1041.776" y="2236.788" z="276.5" h="15"/>
 				</spawn>
 				<!-- Higarius -->
-				<spawn npc_id="800753" respawn_time="295">
+				<spawn npc_id="800753" handler="MERCHANT" respawn_time="295">
 					<spot x="1037.4586" y="2242.3582" z="276.5" h="15"/>
 				</spawn>
 				<!-- Urusias -->
-				<spawn npc_id="800754" respawn_time="295">
+				<spawn npc_id="800754" handler="MERCHANT" respawn_time="295">
 					<spot x="1049.0654" y="2255.8518" z="276.5" h="75"/>
 				</spawn>
 				<!-- Laidos -->
-				<spawn npc_id="801474" respawn_time="295">
+				<spawn npc_id="801474" handler="MERCHANT" respawn_time="295">
 					<spot x="1040.8568" y="2240.5688" z="276.5" h="15"/>
 				</spawn>
 				<!-- Ceron -->
-				<spawn npc_id="801038" respawn_time="295">
+				<spawn npc_id="801038" handler="MERCHANT" respawn_time="295">
 					<spot x="1057.0177" y="2246.654" z="276.5" h="60"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801707" respawn_time="295">
+				<spawn npc_id="801707" handler="MERCHANT" respawn_time="295">
 					<spot x="1063.133" y="2243.708" z="278.631" h="51" static_id="2771"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Starlit Vanguard Combatant -->
-				<spawn npc_id="232758" respawn_time="295">
+				<spawn npc_id="232758" handler="OUTRIDER" respawn_time="295">
 					<spot x="894.76715" y="2366.3564" z="268.0" h="30"/>
 					<spot x="905.2972" y="2387.191" z="267.67557" h="30"/>
 					<spot x="911.5036" y="2363.8274" z="268.0" h="30"/>
 					<spot x="916.63403" y="2378.2378" z="268.1189" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Sentry -->
-				<spawn npc_id="232759" respawn_time="295">
+				<spawn npc_id="232759" handler="OUTRIDER" respawn_time="295">
 					<spot x="906.4784" y="2373.6772" z="268.0" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Supervisor -->
-				<spawn npc_id="232760" respawn_time="295">
+				<spawn npc_id="232760" handler="OUTRIDER" respawn_time="295">
 					<spot x="896.3342" y="2377.9517" z="268.0" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Rider -->
-				<spawn npc_id="233243" respawn_time="295">
+				<spawn npc_id="233243" handler="OUTRIDER" respawn_time="295">
 					<spot x="877.7883" y="2461.6704" z="278.36026"/>
 					<spot x="908.2231" y="2461.7524" z="260.5" h="26"/>
 					<spot x="918.13086" y="2420.9048" z="263.32217" h="21"/>
@@ -775,22 +673,22 @@
 				
 				<!-- Sub Camp Asmodians Spawns -->
 				<!-- Starlit Recon Combatant -->
-				<spawn npc_id="232575" respawn_time="295">
+				<spawn npc_id="232575" handler="OUTRIDER" respawn_time="295">
 					<spot x="711.7379" y="2251.4412" z="290.0164" h="110"/>
 					<spot x="717.28564" y="2234.338" z="289.77353" h="110"/>
 					<spot x="727.78735" y="2244.7542" z="289.42212" h="110"/>
 					<spot x="727.9773" y="2255.2798" z="289.955" h="110"/>
 				</spawn>
 				<!-- Starlit Recon Sentry -->
-				<spawn npc_id="232576" respawn_time="295">
+				<spawn npc_id="232576" handler="OUTRIDER" respawn_time="295">
 					<spot x="714.69586" y="2243.4773" z="289.75" h="110"/>
 				</spawn>
 				<!-- Starlit Recon Supervisor -->
-				<spawn npc_id="232577" respawn_time="295">
+				<spawn npc_id="232577" handler="OUTRIDER" respawn_time="295">
 					<spot x="719.6244" y="2252.8538" z="289.92834" h="110"/>
 				</spawn>
 				<!-- Starlit Recon Messenger -->
-				<spawn npc_id="233224" respawn_time="295">
+				<spawn npc_id="233224" handler="OUTRIDER" respawn_time="295">
 					<spot x="749.5" y="2253.6575" z="290.15454" h="105"/>
 					<spot x="773.0298" y="2230.4016" z="291.76837" h="113"/>
 					<spot x="785.33356" y="2173.4495" z="282.07602" h="110"/>
@@ -802,7 +700,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801634">
+				<spawn npc_id="801634" handler="FLAG">
 					<spot x="1046.2488" y="2248.4668" z="276.5" h="45"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -819,76 +717,76 @@
 					<spot x="1051.1542" y="2245.5051" z="276.5" h="75"/>
 				</spawn>
 				<!-- Starlit Combatant -->
-				<spawn npc_id="232344" respawn_time="295">
+				<spawn npc_id="232344" handler="SENTINEL" respawn_time="295">
 					<spot x="1002.0188" y="2273.1194" z="272.42218" h="0"/>
 					<spot x="1036.0269" y="2245.4277" z="276.0274" h="45"/>
 					<spot x="1041.776" y="2236.7876" z="276.0274" h="15"/>			
 					<spot x="1037.986" y="2261.4614" z="275.64362" h="45"/>
 				</spawn>
 				<!-- Starlit Protector -->
-				<spawn npc_id="232345" respawn_time="295">
+				<spawn npc_id="232345" handler="SENTINEL" respawn_time="295">
 					<spot x="1047.9452" y="2246.0623" z="278.86914" h="45"/>
 				</spawn>
 				<!-- Starlit Healer -->
-				<spawn npc_id="232346" respawn_time="295">
+				<spawn npc_id="232346" handler="SENTINEL" respawn_time="295">
 					<spot x="1028.8872" y="2254.9353" z="277.38699" h="45"/>
 				</spawn>
 				<!-- Starlit Sentry -->
-				<spawn npc_id="232347" respawn_time="295">
+				<spawn npc_id="232347" handler="SENTINEL" respawn_time="295">
 					<spot x="1040.0205" y="2255.9492" z="278.86914" h="45"/>
 				</spawn>
 				<!-- Eor -->
-				<spawn npc_id="800755" respawn_time="295">
+				<spawn npc_id="800755" handler="MERCHANT" respawn_time="295">
 					<spot x="1063.344" y="2246.79" z="276.0274" h="45"/>
 				</spawn>
 				<!-- Berurinrinerk Aether Trader -->
-				<spawn npc_id="800756" respawn_time="295">
+				<spawn npc_id="800756" handler="MERCHANT" respawn_time="295">
 					<spot x="1050.9691" y="2252.5732" z="276.5" h="75"/>
 				</spawn>
 				<!-- Beok Kisk Merchant -->
-				<spawn npc_id="800757" respawn_time="295">
+				<spawn npc_id="800757" handler="MERCHANT" respawn_time="295">
 					<spot x="1056.9808" y="2250.2214" z="276.5" h="61"/>
 				</spawn>
 				<!-- Peos Food -->
-				<spawn npc_id="800758" respawn_time="295">
+				<spawn npc_id="800758" handler="MERCHANT" respawn_time="295">
 					<spot x="1037.4586" y="2242.3582" z="276.5" h="15"/>
 				</spawn>
 				<!-- Markoman Special Vendor -->
-				<spawn npc_id="800759" respawn_time="295">
+				<spawn npc_id="800759" handler="MERCHANT" respawn_time="295">
 					<spot x="1049.0654" y="2255.8518" z="276.5" h="75"/>
 				</spawn>
 				<!-- Sigel -->
-				<spawn npc_id="801473" respawn_time="295">
+				<spawn npc_id="801473" handler="MERCHANT" respawn_time="295">
 					<spot x="1040.8568" y="2240.5688" z="276.5" h="15"/>
 				</spawn>
 				<!-- Preydis -->
-				<spawn npc_id="801048" respawn_time="295">
+				<spawn npc_id="801048" handler="MERCHANT" respawn_time="295">
 					<spot x="1057.0177" y="2246.654" z="276.5" h="60"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801706" respawn_time="295">
+				<spawn npc_id="801706" handler="MERCHANT" respawn_time="295">
 					<spot x="1063.133" y="2243.708" z="278.631" h="51" static_id="2771"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Starlit Vanguard Combatant -->
-				<spawn npc_id="232758" respawn_time="295">
+				<spawn npc_id="232758" handler="OUTRIDER" respawn_time="295">
 					<spot x="894.76715" y="2366.3564" z="268.0" h="30"/>
 					<spot x="905.2972" y="2387.191" z="267.67557" h="30"/>
 					<spot x="911.5036" y="2363.8274" z="268.0" h="30"/>
 					<spot x="916.63403" y="2378.2378" z="268.1189" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Sentry -->
-				<spawn npc_id="232759" respawn_time="295">
+				<spawn npc_id="232759" handler="OUTRIDER" respawn_time="295">
 					<spot x="906.4784" y="2373.6772" z="268.0" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Supervisor -->
-				<spawn npc_id="232760" respawn_time="295">
+				<spawn npc_id="232760" handler="OUTRIDER" respawn_time="295">
 					<spot x="896.3342" y="2377.9517" z="268.0" h="30"/>
 				</spawn>
 				<!-- Starlit Vanguard Rider -->
-				<spawn npc_id="233243" respawn_time="295">
+				<spawn npc_id="233243" handler="OUTRIDER" respawn_time="295">
 					<spot x="877.7883" y="2461.6704" z="278.36026"/>
 					<spot x="908.2231" y="2461.7524" z="260.5" h="26"/>
 					<spot x="918.13086" y="2420.9048" z="263.32217" h="21"/>
@@ -898,22 +796,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Starlit Scout Combatant -->
-				<spawn npc_id="232514" respawn_time="295">
+				<spawn npc_id="232514" handler="OUTRIDER" respawn_time="295">
 					<spot x="711.7379" y="2251.4412" z="290.0164" h="110"/>
 					<spot x="717.28564" y="2234.338" z="289.77353" h="110"/>
 					<spot x="727.78735" y="2244.7542" z="289.42212" h="110"/>
 					<spot x="727.9773" y="2255.2798" z="289.955" h="110"/>
 				</spawn>
 				<!-- Starlit Scout Sentry -->
-				<spawn npc_id="232515" respawn_time="295">
+				<spawn npc_id="232515" handler="OUTRIDER" respawn_time="295">
 					<spot x="714.69586" y="2243.4773" z="289.75" h="110"/>
 				</spawn>
 				<!-- Starlit Scout Supervisor -->
-				<spawn npc_id="232516" respawn_time="295">
+				<spawn npc_id="232516" handler="OUTRIDER" respawn_time="295">
 					<spot x="719.6244" y="2252.8538" z="289.92834" h="110"/>
 				</spawn>
 				<!-- Starlit Scout Envoy -->
-				<spawn npc_id="233205" respawn_time="295">
+				<spawn npc_id="233205" handler="OUTRIDER" respawn_time="295">
 					<spot x="749.5" y="2253.6575" z="290.15454" h="105"/>
 					<spot x="773.0298" y="2230.4016" z="291.76837" h="113"/>
 					<spot x="785.33356" y="2173.4495" z="282.07602" h="110"/>
@@ -925,7 +823,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801635">
+				<spawn npc_id="801635" handler="FLAG">
 					<spot x="1046.2488" y="2248.4668" z="276.5" h="45"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -942,7 +840,7 @@
 					<spot x="1051.1542" y="2245.5051" z="276.5" h="75"/>
 				</spawn>
 				<!-- Starlit Subjugator Combatant -->
-				<spawn npc_id="232439" respawn_time="295">
+				<spawn npc_id="232439" handler="SENTINEL" respawn_time="295">
 					<spot x="1002.0188" y="2273.1194" z="272.42218"/>
 					<spot x="1036.0269" y="2245.4277" z="276.02740" h="45"/>
 					<spot x="1037.986" y="2261.4614" z="274.54525" h="45"/>
@@ -950,76 +848,25 @@
 					<spot x="1063.344" y="2246.79" z="276.02740" h="45"/>
 				</spawn>
 				<!-- Starlit Subjugator Protector -->
-				<spawn npc_id="232440" respawn_time="295">
+				<spawn npc_id="232440" handler="SENTINEL" respawn_time="295">
 					<spot x="1047.9452" y="2246.0623" z="278.86914" h="45"/>
 				</spawn>
 				<!-- Starlit Subjugator Healer -->
-				<spawn npc_id="232441" respawn_time="295">
+				<spawn npc_id="232441" handler="SENTINEL" respawn_time="295">
 					<spot x="1028.8872" y="2254.9353" z="277.38699" h="45"/>
 				</spawn>
 				<!-- Starlit Subjugator Sentry -->
-				<spawn npc_id="232442" respawn_time="295">
+				<spawn npc_id="232442" handler="SENTINEL" respawn_time="295">
 					<spot x="1040.0205" y="2255.9492" z="278.86914" h="45"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Starlit Vanguard Combatant -->
-				<spawn npc_id="232758" respawn_time="295">
-					<spot x="894.76715" y="2366.3564" z="268.0" h="30"/>
-					<spot x="905.2972" y="2387.191" z="267.67557" h="30"/>
-					<spot x="911.5036" y="2363.8274" z="268.0" h="30"/>
-					<spot x="916.63403" y="2378.2378" z="268.1189" h="30"/>
-				</spawn>
-				<!-- Starlit Vanguard Sentry -->
-				<spawn npc_id="232759" respawn_time="295">
-					<spot x="906.4784" y="2373.6772" z="268.0" h="30"/>
-				</spawn>
-				<!-- Starlit Vanguard Supervisor -->
-				<spawn npc_id="232760" respawn_time="295">
-					<spot x="896.3342" y="2377.9517" z="268.0" h="30"/>
-				</spawn>
-				<!-- Starlit Vanguard Rider -->
-				<spawn npc_id="233243" respawn_time="295">
-					<spot x="877.7883" y="2461.6704" z="278.36026"/>
-					<spot x="908.2231" y="2461.7524" z="260.5" h="26"/>
-					<spot x="918.13086" y="2420.9048" z="263.32217" h="21"/>
-					<spot x="948.5931" y="2402.7334" z="263.1596"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Starlit Scout Combatant -->
-				<spawn npc_id="232514" respawn_time="295">
-					<spot x="711.7379" y="2251.4412" z="290.0164" h="110"/>
-					<spot x="717.28564" y="2234.338" z="289.77353" h="110"/>
-					<spot x="727.78735" y="2244.7542" z="289.42212" h="110"/>
-					<spot x="727.9773" y="2255.2798" z="289.955" h="110"/>
-				</spawn>
-				<!-- Starlit Scout Sentry -->
-				<spawn npc_id="232515" respawn_time="295">
-					<spot x="714.69586" y="2243.4773" z="289.75" h="110"/>
-				</spawn>
-				<!-- Starlit Scout Supervisor -->
-				<spawn npc_id="232516" respawn_time="295">
-					<spot x="719.6244" y="2252.8538" z="289.92834" h="110"/>
-				</spawn>
-				<!-- Starlit Scout Envoy -->
-				<spawn npc_id="233205" respawn_time="295">
-					<spot x="749.5" y="2253.6575" z="290.15454" h="105"/>
-					<spot x="773.0298" y="2230.4016" z="291.76837" h="113"/>
-					<spot x="785.33356" y="2173.4495" z="282.07602" h="110"/>
-					<spot x="815.4654" y="2251.825" z="289.05588" h="105"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6063"> <!-- Soaring Archways Rampart 83. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801636">
+				<spawn npc_id="801636" handler="FLAG">
 					<spot x="2803.1924" y="598.5173" z="275.4661" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1036,7 +883,7 @@
 					<spot x="2805.4229" y="609.11133" z="275.875" h="75"/>
 				</spawn>
 				<!-- Archways Garrison Prefectus -->
-				<spawn npc_id="232254" respawn_time="295">
+				<spawn npc_id="232254" handler="SENTINEL" respawn_time="295">
 					<spot x="2800.2305" y="586.01874" z="276.26657" h="107"/>
 					<spot x="2818.9358" y="589.22723" z="277.2204" h="102"/>
 					<spot x="2834.6113" y="545.6097" z="271.98688" h="102"/>
@@ -1045,73 +892,73 @@
 					<spot x="2820.48" y="569.1866" z="274.77606" h="105"/>
 				</spawn>
 				<!-- Archways Garrison Tesserari -->
-				<spawn npc_id="232255" respawn_time="295">
+				<spawn npc_id="232255" handler="SENTINEL" respawn_time="295">
 					<spot x="2803.6436" y="603.19135" z="277.2204" h="102"/>
 					<spot x="2807.0105" y="608.47357" z="277.2204" h="15"/>
 				</spawn>
 				<!-- Archways Garrison Priest -->
-				<spawn npc_id="232256" respawn_time="295">
+				<spawn npc_id="232256" handler="SENTINEL" respawn_time="295">
 					<spot x="2835.2292" y="550.2490" z="270.6004" h="42"/>
 					<spot x="2825.2817" y="631.0656" z="275.8458" h="60"/>
 				</spawn>
 				<!-- Archways Garrison Veteran Sentry -->
-				<spawn npc_id="232257" respawn_time="295">
+				<spawn npc_id="232257" handler="SENTINEL" respawn_time="295">
 					<spot x="2807.9783" y="572.21509" z="278.41196" h="102"/>
 					<spot x="2829.0256" y="594.54468" z="277.47217" h="100"/>
 				</spawn>
 				<!-- Kenasis -->
-				<spawn npc_id="800760" respawn_time="295">
+				<spawn npc_id="800760" handler="MERCHANT" respawn_time="295">
 					<spot x="2827.6504" y="600.0629" z="274.8750" h="75"/>
 				</spawn>
 				<!-- Isia -->
-				<spawn npc_id="800761" respawn_time="295">
+				<spawn npc_id="800761" handler="MERCHANT" respawn_time="295">
 					<spot x="2814.8083" y="608.7780" z="274.8750" h="75"/>
 				</spawn>
 				<!-- Trias -->
-				<spawn npc_id="800762" respawn_time="295">
+				<spawn npc_id="800762" handler="MERCHANT" respawn_time="295">
 					<spot x="2820.5635" y="603.4520" z="274.8750" h="75"/>
 				</spawn>
 				<!-- Natisia -->
-				<spawn npc_id="800763" respawn_time="295">
+				<spawn npc_id="800763" handler="MERCHANT" respawn_time="295">
 					<spot x="2786.6921" y="588.1365" z="276.0000" h="5"/>
 				</spawn>
 				<!-- Gipus -->
-				<spawn npc_id="800764" respawn_time="295">
+				<spawn npc_id="800764" handler="MERCHANT" respawn_time="295">
 					<spot x="2793.1802" y="574.7310" z="274.8750" h="15"/>
 				</spawn>
 				<!-- Periander -->
-				<spawn npc_id="801039" respawn_time="295">
+				<spawn npc_id="801039" handler="MERCHANT" respawn_time="295">
 					<spot x="2790.1475" y="600.5737" z="275.6635" h="106"/>
 				</spawn>
 				<!-- Unia -->
-				<spawn npc_id="801478" respawn_time="295">
+				<spawn npc_id="801478" handler="MERCHANT" respawn_time="295">
 					<spot x="2790.1958" y="577.8884" z="275.1058" h="15"/>
 				</spawn>
 				<!-- Aborunerk -->
-				<spawn npc_id="801476" respawn_time="295">
+				<spawn npc_id="801476" handler="MERCHANT" respawn_time="295">
 					<spot x="2786.9023" y="592.1946" z="276.0000" h="5"/>
 				</spawn>
 				<!-- Idian Depths Teleport Device -->
-				<spawn npc_id="801797" respawn_time="295">
+				<spawn npc_id="801797" handler="MERCHANT" respawn_time="295">
 					<spot x="2814.5901" y="624.15607" z="277.2204" h="105"/>
 				</spawn>
 				<!-- Mailbox -->
-				<spawn npc_id="700000" respawn_time="295">
+				<spawn npc_id="700000" handler="MERCHANT" respawn_time="295">
 					<spot x="2823.4548" y="593.7516" z="274.8750" h="43"/>
 				</spawn>
 				<!-- Tenesia -->
-				<spawn npc_id="802230" respawn_time="295">
+				<spawn npc_id="802230" handler="MERCHANT" respawn_time="295">
 					<spot x="2783.05" y="597.7541" z="276"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801709" respawn_time="295">
+				<spawn npc_id="801709" handler="MERCHANT" respawn_time="295">
 					<spot x="2785.103" y="606.4118" z="277.622" h="110" static_id="2779"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Archways Vanguard Veteran Combatant -->
-				<spawn npc_id="232761" respawn_time="295">
+				<spawn npc_id="232761" handler="OUTRIDER" respawn_time="295">
 					<spot x="2890.9451" y="432.41342" z="269.17316" h="72"/>
 					<spot x="2893.5476" y="474.177" z="272.38171" h="45"/>
 					<spot x="2896.6621" y="460.17636" z="272.38171" h="45"/>
@@ -1121,15 +968,15 @@
 					<spot x="2915.7041" y="441.83411" z="272.38171" h="90"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Sentry -->
-				<spawn npc_id="232762" respawn_time="295">
+				<spawn npc_id="232762" handler="OUTRIDER" respawn_time="295">
 					<spot x="2916.1499" y="450.40463" z="272.38171" h="60"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Supervisor -->
-				<spawn npc_id="232763" respawn_time="295">
+				<spawn npc_id="232763" handler="OUTRIDER" respawn_time="295">
 					<spot x="2906.7817" y="458.54709" z="272.38171" h="75"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232764" respawn_time="295">
+				<spawn npc_id="232764" handler="OUTRIDER" respawn_time="295">
 					<spot x="2888.15" y="463.55716" z="272.3817" h="45"/>
 					<spot x="2904.036" y="443.89682" z="272.3817" h="83"/>
 					<spot x="2888.5508" y="435.51938" z="266.02686" h="75"/>
@@ -1138,7 +985,7 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Archways Recon Veteran Combatant -->
-				<spawn npc_id="232578" respawn_time="295">
+				<spawn npc_id="232578" handler="OUTRIDER" respawn_time="295">
 					<spot x="2912.5488" y="632.6659" z="290.97775" h="75"/>
 					<spot x="2920.166" y="635.6257" z="291.8516" h="78"/>
 					<spot x="2922.3445" y="625.42377" z="291.34604" h="75"/>
@@ -1148,21 +995,21 @@
 					<spot x="2940.8093" y="634.33215" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Recon Veteran Sentry -->
-				<spawn npc_id="232579" respawn_time="295">
+				<spawn npc_id="232579" handler="OUTRIDER" respawn_time="295">
 					<spot x="2929.471" y="635.04626" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Recon Veteran Supervisor -->
-				<spawn npc_id="232580" respawn_time="295">
+				<spawn npc_id="232580" handler="OUTRIDER" respawn_time="295">
 					<spot x="2937.5088" y="634.3495" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Recon Veteran Gunslinger -->
-				<spawn npc_id="232581" respawn_time="295">
+				<spawn npc_id="232581" handler="OUTRIDER" respawn_time="295">
 					<spot x="2918.5117" y="613.5893" z="289.76263" h="75"/>
 					<spot x="2918.5117" y="613.58929" z="290.81882" h="75"/>
 					<spot x="2937.6785" y="626.1562" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Recon Messenger -->
-				<spawn npc_id="233225" respawn_time="295">
+				<spawn npc_id="233225" handler="OUTRIDER" respawn_time="295">
 					<spot x="2882.4458" y="586.6429" z="283.75" h="75"/>
 					<spot x="2887.6445" y="620.59717" z="290.02222" h="60"/>
 					<spot x="2905.2307" y="560.2068" z="283.96484" h="6"/>
@@ -1174,7 +1021,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801637">
+				<spawn npc_id="801637" handler="FLAG">
 					<spot x="2803.1924" y="598.5173" z="275.4661" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1191,7 +1038,7 @@
 					<spot x="2805.4229" y="609.11133" z="275.875" h="75"/>
 				</spawn>
 				<!-- Archways Prefectus -->
-				<spawn npc_id="232349" respawn_time="295">
+				<spawn npc_id="232349" handler="SENTINEL" respawn_time="295">
 					<spot x="2800.2305" y="586.01874" z="276.26657" h="107"/>
 					<spot x="2818.9358" y="589.22723" z="277.2204" h="102"/>
 					<spot x="2834.6113" y="545.6097" z="271.98688" h="102"/>
@@ -1200,73 +1047,73 @@
 					<spot x="2820.48" y="569.1866" z="274.75665" h="105"/>
 				</spawn>
 				<!-- Archways Tesserari -->
-				<spawn npc_id="232350" respawn_time="295">
+				<spawn npc_id="232350" handler="SENTINEL" respawn_time="295">
 					<spot x="2803.6436" y="603.19135" z="277.2204" h="102"/>
 					<spot x="2807.0105" y="608.47357" z="277.2204" h="15"/>
 				</spawn>
 				<!-- Archways Medic -->
-				<spawn npc_id="232351" respawn_time="295">
+				<spawn npc_id="232351" handler="SENTINEL" respawn_time="295">
 					<spot x="2825.2817" y="631.06561" z="279.18433" h="60"/>
 					<spot x="2836.3164" y="548.64941" z="271.98688" h="102"/>
 				</spawn>
 				<!-- Archways Veteran Sentry -->
-				<spawn npc_id="232352" respawn_time="295">
+				<spawn npc_id="232352" handler="SENTINEL" respawn_time="295">
 					<spot x="2807.9783" y="572.21509" z="278.41196" h="102"/>
 					<spot x="2829.0256" y="594.54468" z="277.47217" h="100"/>
 				</spawn>
 				<!-- Purf Stigma Master -->
-				<spawn npc_id="800765" respawn_time="295">
+				<spawn npc_id="800765" handler="MERCHANT" respawn_time="295">
 					<spot x="2827.4648" y="599.7733" z="274.875" h="62"/>
 				</spawn>
 				<!-- Auntra Warehouse Manager -->
-				<spawn npc_id="800766" respawn_time="295">
+				<spawn npc_id="800766" handler="MERCHANT" respawn_time="295">
 					<spot x="2814.8083" y="608.77795" z="274.875" h="75"/>
 				</spawn>
 				<!-- Etrun Legion Warehouse Manager -->
-				<spawn npc_id="800767" respawn_time="295">
+				<spawn npc_id="800767" handler="MERCHANT" respawn_time="295">
 					<spot x="2820.5635" y="603.45197" z="274.875" h="75"/>
 				</spawn>
 				<!-- Auntir -->
-				<spawn npc_id="800768" respawn_time="295">
+				<spawn npc_id="800768" handler="MERCHANT" respawn_time="295">
 					<spot x="2786.6921" y="588.1365" z="276.0000" h="5"/>
 				</spawn>
 				<!-- Poltruf Food -->
-				<spawn npc_id="800769" respawn_time="295">
+				<spawn npc_id="800769" handler="MERCHANT" respawn_time="295">
 					<spot x="2793.1802" y="574.73096" z="274.875" h="15"/>
 				</spawn>
 				<!-- Torpin -->
-				<spawn npc_id="801049" respawn_time="295">
+				<spawn npc_id="801049" handler="MERCHANT" respawn_time="295">
 					<spot x="2806.6082" y="617.7058" z="275.875" h="107"/>
 				</spawn>
 				<!-- Dalrinerk -->
-				<spawn npc_id="801475" respawn_time="295">
+				<spawn npc_id="801475" handler="MERCHANT" respawn_time="295">
 					<spot x="2786.9023" y="592.19464" z="276.0" h="5"/>
 				</spawn>
 				<!-- Gafidyr -->
-				<spawn npc_id="802229" respawn_time="295">
+				<spawn npc_id="802229" handler="MERCHANT" respawn_time="295">
 					<spot x="2783.05" y="597.7541" z="276"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801708" respawn_time="295">
+				<spawn npc_id="801708" handler="MERCHANT" respawn_time="295">
 					<spot x="2785.1025" y="606.4118" z="277.6220" h="110" static_id="2779"/>
 				</spawn>
 				<!-- Pusk -->
-				<spawn npc_id="801477" respawn_time="295">
+				<spawn npc_id="801477" handler="MERCHANT" respawn_time="295">
 					<spot x="2790.1958" y="577.88837" z="275.10883" h="15"/>
 				</spawn>
 				<!-- Idian Depths Teleport Device -->
-				<spawn npc_id="801798" respawn_time="295">
+				<spawn npc_id="801798" handler="MERCHANT" respawn_time="295">
 					<spot x="2814.5901" y="624.15607" z="277.2204" h="105"/>
 				</spawn>
 				<!-- Mailbox -->
-				<spawn npc_id="700079" respawn_time="295">
+				<spawn npc_id="700079" handler="MERCHANT" respawn_time="295">
 					<spot x="2823.4548" y="593.7516" z="274.875" h="43"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Archways Vanguard Veteran Combatant -->
-				<spawn npc_id="232761" respawn_time="295">
+				<spawn npc_id="232761" handler="OUTRIDER" respawn_time="295">
 					<spot x="2890.9451" y="432.41342" z="269.17316" h="72"/>
 					<spot x="2893.5476" y="474.177" z="272.38171" h="45"/>
 					<spot x="2896.6621" y="460.17636" z="272.38171" h="45"/>
@@ -1276,15 +1123,15 @@
 					<spot x="2915.7041" y="441.83411" z="272.38171" h="90"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Sentry -->
-				<spawn npc_id="232762" respawn_time="295">
+				<spawn npc_id="232762"  handler="OUTRIDER" respawn_time="295">
 					<spot x="2916.1499" y="450.40463" z="272.38171" h="60"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Supervisor -->
-				<spawn npc_id="232763" respawn_time="295">
+				<spawn npc_id="232763" handler="OUTRIDER" respawn_time="295">
 					<spot x="2906.7817" y="458.54709" z="272.38171" h="75"/>
 				</spawn>
 				<!-- Archways Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232764" respawn_time="295">
+				<spawn npc_id="232764" handler="OUTRIDER" respawn_time="295">
 					<spot x="2888.15" y="463.55716" z="272.3817" h="45"/>
 					<spot x="2904.036" y="443.89682" z="272.3817" h="83"/>
 					<spot x="2888.5508" y="435.51938" z="266.02686" h="75"/>
@@ -1293,7 +1140,7 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Archways Scout Veteran Combatant -->
-				<spawn npc_id="232517" respawn_time="295">
+				<spawn npc_id="232517" handler="OUTRIDER" respawn_time="295">
 					<spot x="2912.5488" y="632.6659" z="290.97775" h="75"/>
 					<spot x="2920.166" y="635.6257" z="291.8516" h="78"/>
 					<spot x="2922.3445" y="625.42377" z="291.34604" h="75"/>
@@ -1303,21 +1150,21 @@
 					<spot x="2940.8093" y="634.33215" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Scout Veteran Sentry -->
-				<spawn npc_id="232518" respawn_time="295">
+				<spawn npc_id="232518" handler="OUTRIDER" respawn_time="295">
 					<spot x="2929.471" y="635.04626" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Scout Veteran Supervisor -->
-				<spawn npc_id="232519" respawn_time="295">
+				<spawn npc_id="232519" handler="OUTRIDER" respawn_time="295">
 					<spot x="2937.5088" y="634.3495" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Scout Veteran Gunslinger -->
-				<spawn npc_id="232520" respawn_time="295">
+				<spawn npc_id="232520" handler="OUTRIDER" respawn_time="295">
 					<spot x="2918.5117" y="613.5893" z="289.76263" h="75"/>
 					<spot x="2918.5117" y="613.58929" z="290.81882" h="75"/>
 					<spot x="2937.6785" y="626.1562" z="291.875" h="75"/>
 				</spawn>
 				<!-- Archways Scout Envoy -->
-				<spawn npc_id="233206" respawn_time="295">
+				<spawn npc_id="233206" handler="OUTRIDER" respawn_time="295">
 					<spot x="2882.4458" y="586.6429" z="283.75" h="75"/>
 					<spot x="2887.6445" y="620.59717" z="290.02222" h="60"/>
 					<spot x="2905.2307" y="560.2068" z="283.96484" h="6"/>
@@ -1329,7 +1176,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801638">
+				<spawn npc_id="801638" handler="FLAG">
 					<spot x="2803.1924" y="598.5173" z="275.4661" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1346,7 +1193,7 @@
 					<spot x="2805.4229" y="609.11133" z="275.875" h="75"/>
 				</spawn>
 				<!-- Archways Subjugator Prefectus -->
-				<spawn npc_id="232444" respawn_time="295">
+				<spawn npc_id="232444" handler="SENTINEL" respawn_time="295">
 					<spot x="2786.6921" y="588.13647" z="277.2204" h="5"/>
 					<spot x="2800.2305" y="586.01874" z="276.26657" h="107"/>
 					<spot x="2818.9358" y="589.22723" z="277.2204" h="102"/>
@@ -1356,90 +1203,28 @@
 					<spot x="2838.3418" y="544.65375" z="271.98688" h="102"/>
 				</spawn>
 				<!-- Archways Subjugator Tesserari -->
-				<spawn npc_id="232445" respawn_time="295">
+				<spawn npc_id="232445" handler="SENTINEL" respawn_time="295">
 					<spot x="2803.6436" y="603.19135" z="277.2204" h="102"/>
 					<spot x="2807.0105" y="608.47357" z="277.2204" h="15"/>
 				</spawn>
 				<!-- Archways Subjugator Medic -->
-				<spawn npc_id="232446" respawn_time="295">
+				<spawn npc_id="232446" handler="SENTINEL" respawn_time="295">
 					<spot x="2836.3164" y="548.6494" z="271.98688" h="102"/>
 					<spot x="2825.2817" y="631.0656" z="275.83456" h="60"/>
 				</spawn>
 				<!-- Archways Subjugator Veteran Sentry -->
-				<spawn npc_id="232447" respawn_time="295">
+				<spawn npc_id="232447" handler="SENTINEL" respawn_time="295">
 					<spot x="2807.9783" y="572.21509" z="278.41196" h="102"/>
 					<spot x="2829.0256" y="594.54468" z="277.47217" h="100"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Archways Vanguard Veteran Combatant -->
-				<spawn npc_id="232761" respawn_time="295">
-					<spot x="2890.9451" y="432.41342" z="269.17316" h="72"/>
-					<spot x="2893.5476" y="474.177" z="272.38171" h="45"/>
-					<spot x="2896.6621" y="460.17636" z="272.38171" h="45"/>
-					<spot x="2899.5132" y="449.04611" z="272.38171" h="60"/>
-					<spot x="2906.5723" y="472.97574" z="272.38171" h="75"/>
-					<spot x="2914.1609" y="461.74167" z="272.38171" h="75"/>
-					<spot x="2915.7041" y="441.83411" z="272.38171" h="90"/>
-				</spawn>
-				<!-- Archways Vanguard Veteran Sentry -->
-				<spawn npc_id="232762" respawn_time="295">
-					<spot x="2916.1499" y="450.40463" z="272.38171" h="60"/>
-				</spawn>
-				<!-- Archways Vanguard Veteran Supervisor -->
-				<spawn npc_id="232763" respawn_time="295">
-					<spot x="2906.7817" y="458.54709" z="272.38171" h="75"/>
-				</spawn>
-				<!-- Archways Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232764" respawn_time="295">
-					<spot x="2888.15" y="463.55716" z="272.3817" h="45"/>
-					<spot x="2904.036" y="443.89682" z="272.3817" h="83"/>
-					<spot x="2888.5508" y="435.51938" z="266.02686" h="75"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Archways Scout Veteran Combatant -->
-				<spawn npc_id="232517" respawn_time="295">
-					<spot x="2912.5488" y="632.6659" z="290.97775" h="75"/>
-					<spot x="2920.166" y="635.6257" z="291.8516" h="78"/>
-					<spot x="2922.3445" y="625.42377" z="291.34604" h="75"/>
-					<spot x="2924.5923" y="644.2815" z="291.875" h="78"/>
-					<spot x="2931.1177" y="620.0489" z="291.69485" h="75"/>
-					<spot x="2934.894" y="643.14465" z="291.875" h="75"/>
-					<spot x="2940.8093" y="634.33215" z="291.875" h="75"/>
-				</spawn>
-				<!-- Archways Scout Veteran Sentry -->
-				<spawn npc_id="232518" respawn_time="295">
-					<spot x="2929.471" y="635.04626" z="291.875" h="75"/>
-				</spawn>
-				<!-- Archways Scout Veteran Supervisor -->
-				<spawn npc_id="232519" respawn_time="295">
-					<spot x="2937.5088" y="634.3495" z="291.875" h="75"/>
-				</spawn>
-				<!-- Archways Scout Veteran Gunslinger -->
-				<spawn npc_id="232520" respawn_time="295">
-					<spot x="2918.5117" y="613.5893" z="289.76263" h="75"/>
-					<spot x="2918.5117" y="613.58929" z="290.81882" h="75"/>
-					<spot x="2937.6785" y="626.1562" z="291.875" h="75"/>
-				</spawn>
-				<!-- Archways Scout Envoy -->
-				<spawn npc_id="233206" respawn_time="295">
-					<spot x="2882.4458" y="586.6429" z="283.75" h="75"/>
-					<spot x="2887.6445" y="620.59717" z="290.02222" h="60"/>
-					<spot x="2905.2307" y="560.2068" z="283.96484" h="6"/>
-					<spot x="2918.905" y="588.2076" z="286.32285" h="75"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6064"> <!-- Eldris Valley Campsite 84. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801639">
+				<spawn npc_id="801639" handler="FLAG">
 					<spot x="2658.326" y="489.43933" z="234.75" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1456,66 +1241,66 @@
 					<spot x="2660.7725" y="496.73029" z="234.75" h="75"/>
 				</spawn>
 				<!-- Eldris Garrison Combatant -->
-				<spawn npc_id="232259" respawn_time="295">
+				<spawn npc_id="232259" handler="SENTINEL" respawn_time="295">
 					<spot x="2672.3953" y="483.0351" z="236.07442" h="102"/>
 					<spot x="2683.2097" y="452.1676" z="233.0635" h="102"/>
 				</spawn>
 				<!-- Bekasis -->
-				<spawn npc_id="801538" respawn_time="295">
+				<spawn npc_id="801538" handler="MERCHANT" respawn_time="295">
 					<spot x="2652.6069" y="486.3016" z="234.7500" h="15"/>
 				</spawn>
 				<!-- Eldris Garrison Healer -->
-				<spawn npc_id="232261" respawn_time="295">
+				<spawn npc_id="232261" handler="SENTINEL" respawn_time="295">
 					<spot x="2667.769" y="471.12479" z="236.07442" h="102"/>
 				</spawn>
 				<!-- Eldris Garrison Sentry -->
-				<spawn npc_id="232262" respawn_time="295">
+				<spawn npc_id="232262" handler="SENTINEL" respawn_time="295">
 					<spot x="2659.6743" y="474.52246" z="236.07442" h="102"/>
 				</spawn>
 				<!-- Teius -->
-				<spawn npc_id="800770" respawn_time="295">
+				<spawn npc_id="800770" handler="MERCHANT" respawn_time="295">
 					<spot x="2643.7104" y="488.5071" z="234.7500" h="105"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="832804" respawn_time="295">
+				<spawn npc_id="832804" handler="MERCHANT" respawn_time="295">
 					<spot x="2646.139" y="486.4849" z="236.1766" h="110" static_id="2788"/>
 				</spawn>
 				<!-- Arirus General Goods Merchant -->
-				<spawn npc_id="800771" respawn_time="295">
+				<spawn npc_id="800771" handler="MERCHANT" respawn_time="295">
 					<spot x="2666.0088" y="495.40973" z="234.75" h="75"/>
 				</spawn>
 				<!-- Pertous Food -->
-				<spawn npc_id="800772" respawn_time="295">
+				<spawn npc_id="800772" handler="MERCHANT" respawn_time="295">
 					<spot x="2667.7786" y="492.12531" z="236.07442" h="75"/>
 				</spawn>
 				<!-- Thukletas -->
-				<spawn npc_id="801040" respawn_time="295">
+				<spawn npc_id="801040" handler="MERCHANT" respawn_time="295">
 					<spot x="2645.1975" y="491.0954" z="234.7500" h="106"/>
 				</spawn>
 				<!-- Tinantea -->
-				<spawn npc_id="801563" respawn_time="295">
+				<spawn npc_id="801563" handler="MERCHANT" respawn_time="295">
 					<spot x="2653.8376" y="483.14407" z="234.75" h="15"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Eldris Vanguard Combatant -->
-				<spawn npc_id="232765" respawn_time="295">
+				<spawn npc_id="232765" handler="OUTRIDER" respawn_time="295">
 					<spot x="2603.9287" y="289.00824" z="249.50446" h="60"/>
 					<spot x="2610.0784" y="303.26627" z="249.0049" h="60"/>
 					<spot x="2612.3496" y="273.25528" z="249.5" h="60"/>
 					<spot x="2626.574" y="285.98203" z="249.5" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Sentry -->
-				<spawn npc_id="232766" respawn_time="295">
+				<spawn npc_id="232766" handler="OUTRIDER" respawn_time="295">
 					<spot x="2614.3481" y="286.2441" z="249.5" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Supervisor -->
-				<spawn npc_id="232767" respawn_time="295">
+				<spawn npc_id="232767" handler="OUTRIDER" respawn_time="295">
 					<spot x="2619.9321" y="297.999" z="249.37506" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Rider -->
-				<spawn npc_id="233245" respawn_time="295">
+				<spawn npc_id="233245" handler="OUTRIDER" respawn_time="295">
 					<spot x="2576.9453" y="281.7418" z="251.40727" h="60"/>
 					<spot x="2587.4258" y="254.45088" z="259.90005" h="60"/>
 					<spot x="2589.0056" y="301.76135" z="249.31215" h="33"/>
@@ -1525,22 +1310,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Eldris Recon Combatant -->
-				<spawn npc_id="232582" respawn_time="295">
+				<spawn npc_id="232582" handler="OUTRIDER" respawn_time="295">
 					<spot x="2541.0815" y="380.2866" z="231.5"/>
 					<spot x="2551.3247" y="391.77744" z="231.38892"/>
 					<spot x="2556.3542" y="375.7626" z="231.5"/>
 					<spot x="2557.8079" y="384.16055" z="231.5"/>
 				</spawn>
 				<!-- Eldris Recon Sentry -->
-				<spawn npc_id="232583" respawn_time="295">
+				<spawn npc_id="232583" handler="OUTRIDER" respawn_time="295">
 					<spot x="2548.5906" y="377.8509" z="231.5"/>
 				</spawn>
 				<!-- Eldris Recon Supervisor -->
-				<spawn npc_id="232584" respawn_time="295">
+				<spawn npc_id="232584" handler="OUTRIDER" respawn_time="295">
 					<spot x="2545.0925" y="388.2389" z="231.5"/>
 				</spawn>
 				<!-- Eldris Recon Messenger -->
-				<spawn npc_id="233226" respawn_time="295">
+				<spawn npc_id="233226" handler="OUTRIDER" respawn_time="295">
 					<spot x="2569.9717" y="392.2845" z="231.5" h="15"/>
 					<spot x="2576.3987" y="363.7152" z="231.625" h="96"/>
 					<spot x="2581.875" y="410.89172" z="214.7156" h="15"/>
@@ -1552,7 +1337,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801640">
+				<spawn npc_id="801640" handler="FLAG">
 					<spot x="2658.326" y="489.43933" z="234.75" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1569,66 +1354,66 @@
 					<spot x="2660.7725" y="496.73029" z="234.75" h="75"/>
 				</spawn>
 				<!-- Eldris Combatant -->
-				<spawn npc_id="232354" respawn_time="295">
+				<spawn npc_id="232354" handler="SENTINEL" respawn_time="295">
 					<spot x="2672.3953" y="483.0351" z="236.07442" h="102"/>
 					<spot x="2683.2097" y="452.1676" z="233.0635" h="102"/>
 				</spawn>
 				<!-- Eldris Healer -->
-				<spawn npc_id="232356" respawn_time="295">
+				<spawn npc_id="232356" handler="SENTINEL" respawn_time="295">
 					<spot x="2667.769" y="471.12479" z="236.07442" h="102"/>
 				</spawn>
 				<!-- Eldris Sentry -->
-				<spawn npc_id="232357" respawn_time="295">
+				<spawn npc_id="232357" handler="SENTINEL" respawn_time="295">
 					<spot x="2659.6743" y="474.52246" z="236.07442" h="102"/>
 				</spawn>
 				<!-- Sharamuns -->
-				<spawn npc_id="800773" respawn_time="295">
+				<spawn npc_id="800773" handler="MERCHANT" respawn_time="295">
 					<spot x="2643.7104" y="488.5071" z="234.7500" h="105"/>
 				</spawn>
 				<!-- Karaira -->
-				<spawn npc_id="800774" respawn_time="295">
+				<spawn npc_id="800774" handler="MERCHANT" respawn_time="295">
 					<spot x="2666.0088" y="495.40973" z="234.75" h="75"/>
 				</spawn>
 				<!-- Tamatara -->
-				<spawn npc_id="800775" respawn_time="295">
+				<spawn npc_id="800775" handler="MERCHANT" respawn_time="295">
 					<spot x="2667.7786" y="492.12531" z="236.07442" h="75"/>
 				</spawn>
 				<!-- Inharet -->
-				<spawn npc_id="801537" respawn_time="295">
+				<spawn npc_id="801537" handler="MERCHANT" respawn_time="295">
 					<spot x="2652.6069" y="486.3016" z="234.7500" h="15"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="832803" respawn_time="295">
+				<spawn npc_id="832803" handler="MERCHANT" respawn_time="295">
 					<spot x="2646.139" y="486.4849" z="236.1766" h="110" static_id="2788"/>
 				</spawn>
 				<!-- Olaf -->
-				<spawn npc_id="801050" respawn_time="295">
+				<spawn npc_id="801050" handler="MERCHANT" respawn_time="295">
 					<spot x="2662.9175" y="502.53073" z="234.7500" h="97"/>
 				</spawn>
 				<!-- Eith Field Weapons Distributor -->
-				<spawn npc_id="801562" respawn_time="295">
+				<spawn npc_id="801562" handler="MERCHANT" respawn_time="295">
 					<spot x="2653.8376" y="483.14407" z="234.75" h="15"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Eldris Vanguard Combatant -->
-				<spawn npc_id="232765" respawn_time="295">
+				<spawn npc_id="232765" handler="OUTRIDER" respawn_time="295">
 					<spot x="2603.9287" y="289.00824" z="249.50446" h="60"/>
 					<spot x="2610.0784" y="303.26627" z="249.0049" h="60"/>
 					<spot x="2612.3496" y="273.25528" z="249.5" h="60"/>
 					<spot x="2626.574" y="285.98203" z="249.5" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Sentry -->
-				<spawn npc_id="232766" respawn_time="295">
+				<spawn npc_id="232766" handler="OUTRIDER" respawn_time="295">
 					<spot x="2614.3481" y="286.2441" z="249.5" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Supervisor -->
-				<spawn npc_id="232767" respawn_time="295">
+				<spawn npc_id="232767" handler="OUTRIDER" respawn_time="295">
 					<spot x="2619.9321" y="297.999" z="249.37506" h="60"/>
 				</spawn>
 				<!-- Eldris Vanguard Rider -->
-				<spawn npc_id="233245" respawn_time="295">
+				<spawn npc_id="233245" handler="OUTRIDER" respawn_time="295">
 					<spot x="2576.9453" y="281.7418" z="251.40727" h="60"/>
 					<spot x="2587.4258" y="254.45088" z="259.90005" h="60"/>
 					<spot x="2589.0056" y="301.76135" z="249.31215" h="33"/>
@@ -1638,22 +1423,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Eldris Scout Combatant -->
-				<spawn npc_id="232521" respawn_time="295">
+				<spawn npc_id="232521" handler="OUTRIDER" respawn_time="295">
 					<spot x="2541.0815" y="380.2866" z="231.5"/>
 					<spot x="2551.3247" y="391.77744" z="231.38892"/>
 					<spot x="2556.3542" y="375.7626" z="231.5"/>
 					<spot x="2557.8079" y="384.16055" z="231.5"/>
 				</spawn>
 				<!-- Eldris Scout Sentry -->
-				<spawn npc_id="232522" respawn_time="295">
+				<spawn npc_id="232522" handler="OUTRIDER" respawn_time="295">
 					<spot x="2548.5906" y="377.8509" z="231.5"/>
 				</spawn>
 				<!-- Eldris Scout Supervisor -->
-				<spawn npc_id="232523" respawn_time="295">
+				<spawn npc_id="232523" handler="OUTRIDER" respawn_time="295">
 					<spot x="2545.0925" y="388.2389" z="231.5"/>
 				</spawn>
 				<!-- Eldris Scout Envoy -->
-				<spawn npc_id="233207" respawn_time="295">
+				<spawn npc_id="233207" handler="OUTRIDER" respawn_time="295">
 					<spot x="2569.9717" y="392.2845" z="231.5" h="15"/>
 					<spot x="2576.3987" y="363.7152" z="231.625" h="96"/>
 					<spot x="2581.875" y="410.89172" z="214.7156" h="15"/>
@@ -1665,7 +1450,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801641">
+				<spawn npc_id="801641" handler="FLAG">
 					<spot x="2658.326" y="489.43933" z="234.75" h="101"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1682,79 +1467,28 @@
 					<spot x="2660.7725" y="496.73029" z="234.75" h="75"/>
 				</spawn>
 				<!-- Eldris Subjugator Combatant -->
-				<spawn npc_id="232449" respawn_time="295">
+				<spawn npc_id="232449" handler="SENTINEL" respawn_time="295">
 					<spot x="2643.7104" y="488.50708" z="236.07442" h="105"/>
 					<spot x="2652.607" y="486.30164" z="236.07442" h="15"/>
 					<spot x="2672.3953" y="483.0351" z="236.07442" h="102"/>
 					<spot x="2683.2097" y="452.1676" z="233.0635" h="102"/>
 				</spawn>
 				<!-- Eldris Subjugator Healer -->
-				<spawn npc_id="232451" respawn_time="295">
+				<spawn npc_id="232451" handler="SENTINEL" respawn_time="295">
 					<spot x="2667.769" y="471.12479" z="236.07442" h="102"/>
 				</spawn>
 				<!-- Eldris Subjugator Sentry -->
-				<spawn npc_id="232452" respawn_time="295">
+				<spawn npc_id="232452" handler="SENTINEL" respawn_time="295">
 					<spot x="2659.6743" y="474.52246" z="236.07442" h="102"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Eldris Vanguard Combatant -->
-				<spawn npc_id="232765" respawn_time="295">
-					<spot x="2603.9287" y="289.00824" z="249.50446" h="60"/>
-					<spot x="2610.0784" y="303.26627" z="249.0049" h="60"/>
-					<spot x="2612.3496" y="273.25528" z="249.5" h="60"/>
-					<spot x="2626.574" y="285.98203" z="249.5" h="60"/>
-				</spawn>
-				<!-- Eldris Vanguard Sentry -->
-				<spawn npc_id="232766" respawn_time="295">
-					<spot x="2614.3481" y="286.2441" z="249.5" h="60"/>
-				</spawn>
-				<!-- Eldris Vanguard Supervisor -->
-				<spawn npc_id="232767" respawn_time="295">
-					<spot x="2619.9321" y="297.999" z="249.37506" h="60"/>
-				</spawn>
-				<!-- Eldris Vanguard Rider -->
-				<spawn npc_id="233245" respawn_time="295">
-					<spot x="2576.9453" y="281.7418" z="251.40727" h="60"/>
-					<spot x="2587.4258" y="254.45088" z="259.90005" h="60"/>
-					<spot x="2589.0056" y="301.76135" z="249.31215" h="33"/>
-					<spot x="2601.44" y="323.1799" z="239.51375" h="50"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Eldris Scout Combatant -->
-				<spawn npc_id="232521" respawn_time="295">
-					<spot x="2541.0815" y="380.2866" z="231.5"/>
-					<spot x="2551.3247" y="391.77744" z="231.38892"/>
-					<spot x="2556.3542" y="375.7626" z="231.5"/>
-					<spot x="2557.8079" y="384.16055" z="231.5"/>
-				</spawn>
-				<!-- Eldris Scout Sentry -->
-				<spawn npc_id="232522" respawn_time="295">
-					<spot x="2548.5906" y="377.8509" z="231.5"/>
-				</spawn>
-				<!-- Eldris Scout Supervisor -->
-				<spawn npc_id="232523" respawn_time="295">
-					<spot x="2545.0925" y="388.2389" z="231.5"/>
-				</spawn>
-				<!-- Eldris Scout Envoy -->
-				<spawn npc_id="233207" respawn_time="295">
-					<spot x="2569.9717" y="392.2845" z="231.5" h="15"/>
-					<spot x="2576.3987" y="363.7152" z="231.625" h="96"/>
-					<spot x="2581.875" y="410.89172" z="214.7156" h="15"/>
-					<spot x="2602.8606" y="385.871" z="224.58734"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6065"> <!-- Earthshaped Promontory 85. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801642">
+				<spawn npc_id="801642" handler="FLAG">
 					<spot x="1814.7731" y="803.96063" z="153.75322" h="58"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1771,71 +1505,71 @@
 					<spot x="1820.6678" y="806.8773" z="153.7411" h="90"/>
 				</spawn>
 				<!-- Promontory Garrison Combatant -->
-				<spawn npc_id="232264" respawn_time="295">
+				<spawn npc_id="232264" handler="SENTINEL" respawn_time="295">
 					<spot x="1803.4674" y="803.65283" z="155.35464" h="67"/>
 					<spot x="1812.6157" y="786.3056" z="155.35464" h="87"/>
 					<spot x="1820.3411" y="813.34937" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Promontory Garrison Healer -->
-				<spawn npc_id="232266" respawn_time="295">
+				<spawn npc_id="232266" handler="SENTINEL" respawn_time="295">
 					<spot x="1805.0817" y="816.01556" z="155.35464" h="45"/>
 				</spawn>
 				<!-- Promontory Garrison Sentry -->
-				<spawn npc_id="232267" respawn_time="295">
+				<spawn npc_id="232267" handler="SENTINEL" respawn_time="295">
 					<spot x="1823.2709" y="778.95831" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Ronius -->
-				<spawn npc_id="800776" respawn_time="295">
+				<spawn npc_id="800776" handler="MERCHANT" respawn_time="295">
 					<spot x="1829.0145" y="812.83191" z="154.511" h="60"/>
 				</spawn>
 				<!-- Ortella -->
-				<spawn npc_id="800777" respawn_time="295">
+				<spawn npc_id="800777" handler="MERCHANT" respawn_time="295">
 					<spot x="1813.6688" y="789.2796" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Lagisis -->
-				<spawn npc_id="800778" respawn_time="295">
+				<spawn npc_id="800778" handler="MERCHANT" respawn_time="295">
 					<spot x="1820.5942" y="789.24744" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Eklektos -->
-				<spawn npc_id="800779" respawn_time="295">
+				<spawn npc_id="800779" handler="MERCHANT" respawn_time="295">
 					<spot x="1817.087" y="789.20465" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Kalennos -->
-				<spawn npc_id="801041" respawn_time="295">
+				<spawn npc_id="801041" handler="MERCHANT" respawn_time="295">
 					<spot x="1817.8" y="792.86993" z="154.26164" h="60"/>
 				</spawn>
 				<!-- Ararinerk -->
-				<spawn npc_id="801480" respawn_time="295">
+				<spawn npc_id="801480" handler="MERCHANT" respawn_time="295">
 					<spot x="1815.9598" y="812.78766" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Dagaus -->
-				<spawn npc_id="801482" respawn_time="295">
+				<spawn npc_id="801482" handler="MERCHANT" respawn_time="295">
 					<spot x="1812.0558" y="813.58081" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801711" respawn_time="295">
+				<spawn npc_id="801711" handler="MERCHANT" respawn_time="295">
 					<spot x="1829.313" y="816.1178" z="155.0085" h="110" static_id="2781"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Promontory Vanguard Combatant -->
-				<spawn npc_id="232768" respawn_time="295">
+				<spawn npc_id="232768" handler="OUTRIDER" respawn_time="295">
 					<spot x="1913.3934" y="741.71393" z="107.61514" h="45"/>
 					<spot x="1918.2411" y="754.57001" z="107.61514" h="45"/>
 					<spot x="1923.4246" y="744.0343" z="107.61514" h="45"/>
 					<spot x="1933.5908" y="754.36829" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Sentry -->
-				<spawn npc_id="232769" respawn_time="295">
+				<spawn npc_id="232769" handler="OUTRIDER" respawn_time="295">
 					<spot x="1929.7646" y="739.40814" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Supervisor -->
-				<spawn npc_id="232770" respawn_time="295">
+				<spawn npc_id="232770" handler="OUTRIDER" respawn_time="295">
 					<spot x="1920.4866" y="729.19354" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Rider -->
-				<spawn npc_id="233246" respawn_time="295">
+				<spawn npc_id="233246" handler="OUTRIDER" respawn_time="295">
 					<spot x="1915.4266" y="814.71368" z="107.61514" h="30"/>
 					<spot x="1915.9174" y="787.10876" z="109.19753" h="30"/>
 					<spot x="1951.819" y="699.47235" z="113.33057" h="75"/>
@@ -1845,22 +1579,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Promontory Recon Combatant -->
-				<spawn npc_id="232585" respawn_time="295">
+				<spawn npc_id="232585" handler="OUTRIDER" respawn_time="295">
 					<spot x="1840.7599" y="927.72412" z="114.9312" h="45"/>
 					<spot x="1843.5859" y="903.32202" z="114.9312" h="83"/>
 					<spot x="1850.3479" y="921.54694" z="114.9312" h="67"/>
 					<spot x="1851.5546" y="907.90552" z="114.9312" h="77"/>
 				</spawn>
 				<!-- Promontory Recon Sentry -->
-				<spawn npc_id="232586" respawn_time="295">
+				<spawn npc_id="232586" handler="OUTRIDER" respawn_time="295">
 					<spot x="1837.2941" y="916.62714" z="114.9312" h="60"/>
 				</spawn>
 				<!-- Promontory Recon Supervisor -->
-				<spawn npc_id="232587" respawn_time="295">
+				<spawn npc_id="232587" handler="OUTRIDER" respawn_time="295">
 					<spot x="1845.2094" y="913.95032" z="114.9312" h="58"/>
 				</spawn>
 				<!-- Promontory Recon Messenger -->
-				<spawn npc_id="233227" respawn_time="295">
+				<spawn npc_id="233227" handler="OUTRIDER" respawn_time="295">
 					<spot x="1816.6945" y="901.06488" z="114.9312" h="83"/>
 					<spot x="1820.5483" y="940.64899" z="117.44383" h="30"/>
 					<spot x="1850.0024" y="879.7525" z="115.50703" h="93"/>
@@ -1872,7 +1606,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801643">
+				<spawn npc_id="801643" handler="FLAG">
 					<spot x="1814.7731" y="803.96063" z="153.75322" h="58"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -1889,71 +1623,71 @@
 					<spot x="1820.6678" y="806.8773" z="153.7411" h="90"/>
 				</spawn>
 				<!-- Promontory Combatant -->
-				<spawn npc_id="232359" respawn_time="295">
+				<spawn npc_id="232359" handler="SENTINEL" respawn_time="295">
 					<spot x="1803.4674" y="803.65283" z="155.35464" h="67"/>
 					<spot x="1812.6157" y="786.3056" z="155.35464" h="87"/>
 					<spot x="1820.3411" y="813.34937" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Promontory Healer -->
-				<spawn npc_id="232361" respawn_time="295">
+				<spawn npc_id="232361" handler="SENTINEL" respawn_time="295">
 					<spot x="1805.0817" y="816.01556" z="155.35464" h="45"/>
 				</spawn>
 				<!-- Promontory Sentry -->
-				<spawn npc_id="232362" respawn_time="295">
+				<spawn npc_id="232362" handler="SENTINEL" respawn_time="295">
 					<spot x="1823.2709" y="778.95831" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Neiruns -->
-				<spawn npc_id="800780" respawn_time="295">
+				<spawn npc_id="800780" handler="MERCHANT" respawn_time="295">
 					<spot x="1829.0145" y="812.83191" z="154.511" h="60"/>
 				</spawn>
 				<!-- Plethgar -->
-				<spawn npc_id="800781" respawn_time="295">
+				<spawn npc_id="800781" handler="MERCHANT" respawn_time="295">
 					<spot x="1813.6688" y="789.2796" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Haruan -->
-				<spawn npc_id="800782" respawn_time="295">
+				<spawn npc_id="800782" handler="MERCHANT" respawn_time="295">
 					<spot x="1820.5942" y="789.24744" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Harmar -->
-				<spawn npc_id="800783" respawn_time="295">
+				<spawn npc_id="800783" handler="MERCHANT" respawn_time="295">
 					<spot x="1817.087" y="789.20465" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Ube -->
-				<spawn npc_id="801051" respawn_time="295">
+				<spawn npc_id="801051" handler="MERCHANT" respawn_time="295">
 					<spot x="1817.8132" y="810.4469" z="154.82216" h="60"/>
 				</spawn>
 				<!-- Glorifikinerk -->
-				<spawn npc_id="801479" respawn_time="295">
+				<spawn npc_id="801479" handler="MERCHANT" respawn_time="295">
 					<spot x="1815.9598" y="812.78766" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Baund -->
-				<spawn npc_id="801481" respawn_time="295">
+				<spawn npc_id="801481" handler="MERCHANT" respawn_time="295">
 					<spot x="1812.0558" y="813.58081" z="155.35464" h="90"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801710" respawn_time="295">
+				<spawn npc_id="801710" handler="MERCHANT" respawn_time="295">
 					<spot x="1829.313" y="816.1178" z="155.0085" h="110" static_id="2781"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Promontory Vanguard Combatant -->
-				<spawn npc_id="232768" respawn_time="295">
+				<spawn npc_id="232768" handler="OUTRIDER" respawn_time="295">
 					<spot x="1913.3934" y="741.71393" z="107.61514" h="45"/>
 					<spot x="1918.2411" y="754.57001" z="107.61514" h="45"/>
 					<spot x="1923.4246" y="744.0343" z="107.61514" h="45"/>
 					<spot x="1933.5908" y="754.36829" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Sentry -->
-				<spawn npc_id="232769" respawn_time="295">
+				<spawn npc_id="232769" handler="OUTRIDER" respawn_time="295">
 					<spot x="1929.7646" y="739.40814" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Supervisor -->
-				<spawn npc_id="232770" respawn_time="295">
+				<spawn npc_id="232770" handler="OUTRIDER" respawn_time="295">
 					<spot x="1920.4866" y="729.19354" z="107.61514" h="45"/>
 				</spawn>
 				<!-- Promontory Vanguard Rider -->
-				<spawn npc_id="233246" respawn_time="295">
+				<spawn npc_id="233246" handler="OUTRIDER" respawn_time="295">
 					<spot x="1915.4266" y="814.71368" z="107.61514" h="30"/>
 					<spot x="1915.9174" y="787.10876" z="109.19753" h="30"/>
 					<spot x="1951.819" y="699.47235" z="113.33057" h="75"/>
@@ -1963,22 +1697,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Promontory Scout Combatant -->
-				<spawn npc_id="232524" respawn_time="295">
+				<spawn npc_id="232524" handler="OUTRIDER" respawn_time="295">
 					<spot x="1840.7599" y="927.72412" z="114.9312" h="45"/>
 					<spot x="1843.5859" y="903.32202" z="114.9312" h="83"/>
 					<spot x="1850.3479" y="921.54694" z="114.9312" h="67"/>
 					<spot x="1851.5546" y="907.90552" z="114.9312" h="77"/>
 				</spawn>
 				<!-- Promontory Scout Sentry -->
-				<spawn npc_id="232525" respawn_time="295">
+				<spawn npc_id="232525" handler="OUTRIDER" respawn_time="295">
 					<spot x="1837.2941" y="916.62714" z="114.9312" h="60"/>
 				</spawn>
 				<!-- Promontory Scout Supervisor -->
-				<spawn npc_id="232526" respawn_time="295">
+				<spawn npc_id="232526" handler="OUTRIDER" respawn_time="295">
 					<spot x="1845.2094" y="913.95032" z="114.9312" h="58"/>
 				</spawn>
 				<!-- Promontory Scout Envoy -->
-				<spawn npc_id="233208" respawn_time="295">
+				<spawn npc_id="233208" handler="OUTRIDER" respawn_time="295">
 					<spot x="1816.6945" y="901.06488" z="114.9312" h="83"/>
 					<spot x="1820.5483" y="940.64899" z="117.44383" h="30"/>
 					<spot x="1850.0024" y="879.7525" z="115.50703" h="93"/>
@@ -1990,7 +1724,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801644">
+				<spawn npc_id="801644" handler="FLAG">
 					<spot x="1814.7731" y="803.96063" z="153.75322" h="58"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2007,78 +1741,27 @@
 					<spot x="1820.6678" y="806.8773" z="153.7411" h="90"/>
 				</spawn>
 				<!-- Promontory Subjugator Combatant -->
-				<spawn npc_id="232454" respawn_time="295">
+				<spawn npc_id="232454" handler="SENTINEL" respawn_time="295">
 					<spot x="1803.4674" y="803.65283" z="155.35464" h="67"/>
 					<spot x="1812.6157" y="786.3056" z="155.35464" h="87"/>
 					<spot x="1820.3411" y="813.34937" z="155.35464" h="30"/>
 				</spawn>
 				<!-- Promontory Subjugator Healer -->
-				<spawn npc_id="232456" respawn_time="295">
+				<spawn npc_id="232456" handler="SENTINEL" respawn_time="295">
 					<spot x="1805.0817" y="816.01556" z="155.35464" h="45"/>
 				</spawn>
 				<!-- Promontory Subjugator Sentry -->
-				<spawn npc_id="232457" respawn_time="295">
+				<spawn npc_id="232457" handler="SENTINEL" respawn_time="295">
 					<spot x="1823.2709" y="778.95831" z="155.35464" h="90"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Promontory Vanguard Combatant -->
-				<spawn npc_id="232768" respawn_time="295">
-					<spot x="1913.3934" y="741.71393" z="107.61514" h="45"/>
-					<spot x="1918.2411" y="754.57001" z="107.61514" h="45"/>
-					<spot x="1923.4246" y="744.0343" z="107.61514" h="45"/>
-					<spot x="1933.5908" y="754.36829" z="107.61514" h="45"/>
-				</spawn>
-				<!-- Promontory Vanguard Sentry -->
-				<spawn npc_id="232769" respawn_time="295">
-					<spot x="1929.7646" y="739.40814" z="107.61514" h="45"/>
-				</spawn>
-				<!-- Promontory Vanguard Supervisor -->
-				<spawn npc_id="232770" respawn_time="295">
-					<spot x="1920.4866" y="729.19354" z="107.61514" h="45"/>
-				</spawn>
-				<!-- Promontory Vanguard Rider -->
-				<spawn npc_id="233246" respawn_time="295">
-					<spot x="1915.4266" y="814.71368" z="107.61514" h="30"/>
-					<spot x="1915.9174" y="787.10876" z="109.19753" h="30"/>
-					<spot x="1951.819" y="699.47235" z="113.33057" h="75"/>
-					<spot x="1957.9463" y="725.67615" z="116.44426" h="45"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Promontory Scout Combatant -->
-				<spawn npc_id="232524" respawn_time="295">
-					<spot x="1840.7599" y="927.72412" z="114.9312" h="45"/>
-					<spot x="1843.5859" y="903.32202" z="114.9312" h="83"/>
-					<spot x="1850.3479" y="921.54694" z="114.9312" h="67"/>
-					<spot x="1851.5546" y="907.90552" z="114.9312" h="77"/>
-				</spawn>
-				<!-- Promontory Scout Sentry -->
-				<spawn npc_id="232525" respawn_time="295">
-					<spot x="1837.2941" y="916.62714" z="114.9312" h="60"/>
-				</spawn>
-				<!-- Promontory Scout Supervisor -->
-				<spawn npc_id="232526" respawn_time="295">
-					<spot x="1845.2094" y="913.95032" z="114.9312" h="58"/>
-				</spawn>
-				<!-- Promontory Scout Envoy -->
-				<spawn npc_id="233208" respawn_time="295">
-					<spot x="1816.6945" y="901.06488" z="114.9312" h="83"/>
-					<spot x="1820.5483" y="940.64899" z="117.44383" h="30"/>
-					<spot x="1850.0024" y="879.7525" z="115.50703" h="93"/>
-					<spot x="1871.8322" y="893.12305" z="115.43971" h="90"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6066"> <!-- Silona Cascade Overlook 86. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801645">
+				<spawn npc_id="801645" handler="FLAG">
 					<spot x="1517.179" y="1129.934" z="92.25844" h="95"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2095,71 +1778,71 @@
 					<spot x="1519.931" y="1135.3979" z="92.25254" h="72"/>
 				</spawn>
 				<!-- Filious -->
-				<spawn npc_id="800784" respawn_time="295">
+				<spawn npc_id="800784" handler="MERCHANT" respawn_time="295">
 					<spot x="1500.2848" y="1136.4565" z="92.4433" h="105"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801713" respawn_time="295">
+				<spawn npc_id="801713" handler="MERCHANT" respawn_time="295">
 					<spot x="1501.223" y="1138.919" z="93.46228" h="110" static_id="2780"/>
 				</spawn>
 				<!-- Silona Garrison Combatant -->
-				<spawn npc_id="232269" respawn_time="295">
+				<spawn npc_id="232269" handler="SENTINEL" respawn_time="295">
 					<spot x="1519.9614" y="1111.908" z="94.390556" h="95"/>
 					<spot x="1533.028" y="1143.0844" z="94.390556" h="15"/>
 					<spot x="1536.983" y="1126.7405" z="94.390556" h="2"/>
 				</spawn>
 				<!-- Silona Garrison Protector -->
-				<spawn npc_id="232270" respawn_time="295">
+				<spawn npc_id="232270" handler="SENTINEL" respawn_time="295">
 					<spot x="1518.5988" y="1131.135" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Garrison Healer -->
-				<spawn npc_id="232271" respawn_time="295">
+				<spawn npc_id="232271" handler="SENTINEL" respawn_time="295">
 					<spot x="1509.2" y="1117.0505" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Garrison Sentry -->
-				<spawn npc_id="232272" respawn_time="295">
+				<spawn npc_id="232272" handler="SENTINEL" respawn_time="295">
 					<spot x="1495.7478" y="1128.6492" z="94.390556" h="63"/>
 				</spawn>
 				<!-- Hesiodus -->
-				<spawn npc_id="800786" respawn_time="295">
+				<spawn npc_id="800786" handler="MERCHANT" respawn_time="295">
 					<spot x="1510.2108" y="1123.4214" z="94.390556" h="12"/>
 				</spawn>
 				<!-- Homerus -->
-				<spawn npc_id="801042" respawn_time="295">
+				<spawn npc_id="801042" handler="MERCHANT" respawn_time="295">
 					<spot x="1509.9047" y="1134.2719" z="92.24819" h="90"/>
 				</spawn>
 				<!-- Mneseus -->
-				<spawn npc_id="801484" respawn_time="295">
+				<spawn npc_id="801484" handler="MERCHANT" respawn_time="295">
 					<spot x="1524.5186" y="1137.0227" z="94.390556" h="90"/>
 				</spawn>
 				<!-- Hipallus -->
-				<spawn npc_id="801486" respawn_time="295">
+				<spawn npc_id="801486" handler="MERCHANT" respawn_time="295">
 					<spot x="1509.2964" y="1126.6229" z="94.390556" h="12"/>
 				</spawn>
 				<!-- Makirinerk -->
-				<spawn npc_id="801749" respawn_time="295">
+				<spawn npc_id="801749" handler="MERCHANT" respawn_time="295">
 					<spot x="1528.1306" y="1137.087" z="92.15529" h="90"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Silona Vanguard Combatant -->
-				<spawn npc_id="232771" respawn_time="295">
+				<spawn npc_id="232771" handler="OUTRIDER" respawn_time="295">
 					<spot x="1696.0032" y="1048.1638" z="58.445709" h="72"/>
 					<spot x="1700.7455" y="1036.5944" z="58.445709" h="72"/>
 					<spot x="1710.9232" y="1053.7932" z="58.445709" h="72"/>
 					<spot x="1717.8987" y="1032.5131" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Sentry -->
-				<spawn npc_id="232772" respawn_time="295">
+				<spawn npc_id="232772" handler="OUTRIDER" respawn_time="295">
 					<spot x="1701.6459" y="1055.6255" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Supervisor -->
-				<spawn npc_id="232773" respawn_time="295">
+				<spawn npc_id="232773" handler="OUTRIDER" respawn_time="295">
 					<spot x="1708.5978" y="1042.9766" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Rider -->
-				<spawn npc_id="233247" respawn_time="295">
+				<spawn npc_id="233247" handler="OUTRIDER" respawn_time="295">
 					<spot x="1664.402" y="1020.8458" z="53.189236" h="50"/>
 					<spot x="1687.3761" y="993.6474" z="59.345154" h="60"/>
 					<spot x="1687.7739" y="1018.48" z="52.725262" h="75"/>
@@ -2169,22 +1852,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Silona Recon Combatant -->
-				<spawn npc_id="232588" respawn_time="295">
+				<spawn npc_id="232588" handler="OUTRIDER" respawn_time="295">
 					<spot x="1389.2136" y="1077.705" z="62.988842" h="95"/>
 					<spot x="1389.3868" y="1093.6411" z="62.988842" h="103"/>
 					<spot x="1400.6641" y="1080.7174" z="62.988842" h="102"/>
 					<spot x="1405.3076" y="1091.3184" z="62.988842" h="95"/>
 				</spawn>
 				<!-- Silona Recon Sentry -->
-				<spawn npc_id="232589" respawn_time="295">
+				<spawn npc_id="232589" handler="OUTRIDER" respawn_time="295">
 					<spot x="1387.7224" y="1084.0396" z="62.988842" h="102"/>
 				</spawn>
 				<!-- Silona Recon Supervisor -->
-				<spawn npc_id="232590" respawn_time="295">
+				<spawn npc_id="232590" handler="OUTRIDER" respawn_time="295">
 					<spot x="1397.3269" y="1091.6862" z="62.988842" h="102"/>
 				</spawn>
 				<!-- Silona Recon Messenger -->
-				<spawn npc_id="233228" respawn_time="295">
+				<spawn npc_id="233228" handler="OUTRIDER" respawn_time="295">
 					<spot x="1418.2203" y="1069.186" z="57.452" h="105"/>
 					<spot x="1421.0969" y="1027.404" z="53.6448" h="15"/>
 					<spot x="1432.5143" y="1082.7213" z="57.588455" h="7"/>
@@ -2196,7 +1879,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801646">
+				<spawn npc_id="801646" handler="FLAG">
 					<spot x="1517.179" y="1129.934" z="92.25844" h="95"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2213,75 +1896,75 @@
 					<spot x="1519.931" y="1135.3979" z="92.25254" h="72"/>
 				</spawn>
 				<!-- Brimans -->
-				<spawn npc_id="800787" respawn_time="295">
+				<spawn npc_id="800787" handler="MERCHANT" respawn_time="295">
 					<spot x="1500.2848" y="1136.4565" z="92.4433" h="105"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801712" respawn_time="295">
+				<spawn npc_id="801712" handler="MERCHANT" respawn_time="295">
 					<spot x="1501.223" y="1138.919" z="93.46228" h="110" static_id="2780"/>
 				</spawn>
 				<!-- Silona Combatant -->
-				<spawn npc_id="232364" respawn_time="295">
+				<spawn npc_id="232364" handler="SENTINEL" respawn_time="295">
 					<spot x="1519.9614" y="1111.908" z="94.390556" h="95"/>
 					<spot x="1533.028" y="1143.0844" z="94.390556" h="15"/>
 					<spot x="1536.983" y="1126.7405" z="94.390556" h="2"/>
 				</spawn>
 				<!-- Silona Protector -->
-				<spawn npc_id="232365" respawn_time="295">
+				<spawn npc_id="232365" handler="SENTINEL" respawn_time="295">
 					<spot x="1518.5988" y="1131.135" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Healer -->
-				<spawn npc_id="232366" respawn_time="295">
+				<spawn npc_id="232366" handler="SENTINEL" respawn_time="295">
 					<spot x="1509.2" y="1117.0505" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Sentry -->
-				<spawn npc_id="232367" respawn_time="295">
+				<spawn npc_id="232367" handler="SENTINEL" respawn_time="295">
 					<spot x="1495.7478" y="1128.6492" z="94.390556" h="63"/>
 				</spawn>
 				<!-- Aunsta Food -->
-				<spawn npc_id="800789" respawn_time="295">
+				<spawn npc_id="800789" handler="MERCHANT" respawn_time="295">
 					<spot x="1510.2108" y="1123.4214" z="92.27166" h="12"/>
 				</spawn>
 				<!-- Igrit -->
-				<spawn npc_id="801052" respawn_time="295">
+				<spawn npc_id="801052" handler="MERCHANT" respawn_time="295">
 					<spot x="1528.9701" y="1140.2415" z="92.1285" h="67"/>
 				</spawn>
 				<!-- Franda -->
-				<spawn npc_id="801483" respawn_time="295">
+				<spawn npc_id="801483" handler="MERCHANT" respawn_time="295">
 					<spot x="1524.5186" y="1137.0227" z="92.1285" h="90"/>
 				</spawn>
 				<!-- Lamat -->
-				<spawn npc_id="801485" respawn_time="295">
+				<spawn npc_id="801485" handler="MERCHANT" respawn_time="295">
 					<spot x="1509.2964" y="1126.6229" z="92.27209" h="12"/>
 				</spawn>
 				<!-- Monterinrinerk -->
-				<spawn npc_id="801750" respawn_time="295">
+				<spawn npc_id="801750" handler="MERCHANT" respawn_time="295">
 					<spot x="1528.1306" y="1137.087" z="92.1285" h="90"/>
 				</spawn>
 				<!-- Mailbox -->
-				<spawn npc_id="700079" respawn_time="295">
+				<spawn npc_id="700079" handler="MERCHANT" respawn_time="295">
 					<spot x="1505.3453" y="1129.2592" z="92.27716" h="8"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Silona Vanguard Combatant -->
-				<spawn npc_id="232771" respawn_time="295">
+				<spawn npc_id="232771" handler="OUTRIDER" respawn_time="295">
 					<spot x="1696.0032" y="1048.1638" z="58.445709" h="72"/>
 					<spot x="1700.7455" y="1036.5944" z="58.445709" h="72"/>
 					<spot x="1710.9232" y="1053.7932" z="58.445709" h="72"/>
 					<spot x="1717.8987" y="1032.5131" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Sentry -->
-				<spawn npc_id="232772" respawn_time="295">
+				<spawn npc_id="232772" handler="OUTRIDER" respawn_time="295">
 					<spot x="1701.6459" y="1055.6255" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Supervisor -->
-				<spawn npc_id="232773" respawn_time="295">
+				<spawn npc_id="232773" handler="OUTRIDER" respawn_time="295">
 					<spot x="1708.5978" y="1042.9766" z="58.445709" h="72"/>
 				</spawn>
 				<!-- Silona Vanguard Rider -->
-				<spawn npc_id="233247" respawn_time="295">
+				<spawn npc_id="233247" handler="OUTRIDER" respawn_time="295">
 					<spot x="1664.402" y="1020.8458" z="53.189236" h="50"/>
 					<spot x="1687.3761" y="993.6474" z="59.345154" h="60"/>
 					<spot x="1687.7739" y="1018.48" z="52.725262" h="75"/>
@@ -2291,22 +1974,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Silona Scout Combatant -->
-				<spawn npc_id="232527" respawn_time="295">
+				<spawn npc_id="232527" handler="OUTRIDER" respawn_time="295">
 					<spot x="1389.2136" y="1077.705" z="62.988842" h="95"/>
 					<spot x="1389.3868" y="1093.6411" z="62.988842" h="103"/>
 					<spot x="1400.6641" y="1080.7174" z="62.988842" h="102"/>
 					<spot x="1405.3076" y="1091.3184" z="62.988842" h="95"/>
 				</spawn>
 				<!-- Silona Scout Sentry -->
-				<spawn npc_id="232528" respawn_time="295">
+				<spawn npc_id="232528" handler="OUTRIDER" respawn_time="295">
 					<spot x="1387.7224" y="1084.0396" z="62.988842" h="102"/>
 				</spawn>
 				<!-- Silona Scout Supervisor -->
-				<spawn npc_id="232529" respawn_time="295">
+				<spawn npc_id="232529" handler="OUTRIDER" respawn_time="295">
 					<spot x="1397.3269" y="1091.6862" z="62.988842" h="102"/>
 				</spawn>
 				<!-- Silona Scout Envoy -->
-				<spawn npc_id="233209" respawn_time="295">
+				<spawn npc_id="233209" handler="OUTRIDER" respawn_time="295">
 					<spot x="1421.0969" y="1027.404" z="53.6448" h="15"/>
 					<spot x="1432.5143" y="1082.7213" z="57.588455" h="7"/>
 					<spot x="1406.8683" y="1048.3219" z="53.29934"/>
@@ -2318,7 +2001,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801647">
+				<spawn npc_id="801647" handler="FLAG">
 					<spot x="1517.179" y="1129.934" z="92.25844" h="95"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2335,83 +2018,32 @@
 					<spot x="1519.931" y="1135.3979" z="92.25254" h="72"/>
 				</spawn>
 				<!-- Silona Subjugator Combatant -->
-				<spawn npc_id="232459" respawn_time="295">
+				<spawn npc_id="232459" handler="SENTINEL" respawn_time="295">
 					<spot x="1500.2848" y="1136.4565" z="93.614304" h="105"/>
 					<spot x="1519.9614" y="1111.908" z="94.390556" h="95"/>
 					<spot x="1533.028" y="1143.0844" z="94.390556" h="15"/>
 					<spot x="1536.983" y="1126.7405" z="94.390556" h="2"/>
 				</spawn>
 				<!-- Silona Subjugator Protector -->
-				<spawn npc_id="232460" respawn_time="295">
+				<spawn npc_id="232460" handler="SENTINEL" respawn_time="295">
 					<spot x="1518.5988" y="1131.135" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Subjugator Healer -->
-				<spawn npc_id="232461" respawn_time="295">
+				<spawn npc_id="232461" handler="SENTINEL" respawn_time="295">
 					<spot x="1509.2" y="1117.0505" z="94.390556" h="95"/>
 				</spawn>
 				<!-- Silona Subjugator Sentry -->
-				<spawn npc_id="232462" respawn_time="295">
+				<spawn npc_id="232462" handler="SENTINEL" respawn_time="295">
 					<spot x="1495.7478" y="1128.6492" z="94.390556" h="63"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Silona Vanguard Combatant -->
-				<spawn npc_id="232771" respawn_time="295">
-					<spot x="1696.0032" y="1048.1638" z="58.445709" h="72"/>
-					<spot x="1700.7455" y="1036.5944" z="58.445709" h="72"/>
-					<spot x="1710.9232" y="1053.7932" z="58.445709" h="72"/>
-					<spot x="1717.8987" y="1032.5131" z="58.445709" h="72"/>
-				</spawn>
-				<!-- Silona Vanguard Sentry -->
-				<spawn npc_id="232772" respawn_time="295">
-					<spot x="1701.6459" y="1055.6255" z="58.445709" h="72"/>
-				</spawn>
-				<!-- Silona Vanguard Supervisor -->
-				<spawn npc_id="232773" respawn_time="295">
-					<spot x="1708.5978" y="1042.9766" z="58.445709" h="72"/>
-				</spawn>
-				<!-- Silona Vanguard Rider -->
-				<spawn npc_id="233247" respawn_time="295">
-					<spot x="1664.402" y="1020.8458" z="53.189236" h="50"/>
-					<spot x="1687.3761" y="993.6474" z="59.345154" h="60"/>
-					<spot x="1687.7739" y="1018.48" z="52.725262" h="75"/>
-					<spot x="1707.1943" y="1001.8777" z="56.947865" h="57"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Silona Scout Combatant -->
-				<spawn npc_id="232527" respawn_time="295">
-					<spot x="1389.2136" y="1077.705" z="62.988842" h="95"/>
-					<spot x="1389.3868" y="1093.6411" z="62.988842" h="103"/>
-					<spot x="1400.6641" y="1080.7174" z="62.988842" h="102"/>
-					<spot x="1405.3076" y="1091.3184" z="62.988842" h="95"/>
-				</spawn>
-				<!-- Silona Scout Sentry -->
-				<spawn npc_id="232528" respawn_time="295">
-					<spot x="1387.7224" y="1084.0396" z="62.988842" h="102"/>
-				</spawn>
-				<!-- Silona Scout Supervisor -->
-				<spawn npc_id="232529" respawn_time="295">
-					<spot x="1397.3269" y="1091.6862" z="62.988842" h="102"/>
-				</spawn>
-				<!-- Silona Scout Envoy -->
-				<spawn npc_id="233209" respawn_time="295">
-					<spot x="1421.0969" y="1027.404" z="53.6448" h="15"/>
-					<spot x="1432.5143" y="1082.7213" z="57.588455" h="7"/>
-					<spot x="1406.8683" y="1048.3219" z="53.29934"/>
-					<spot x="1418.2203" y="1069.186" z="58.51861" h="105"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6067"> <!-- Stonewatch Rampart 87. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801648">
+				<spawn npc_id="801648" handler="FLAG">
 					<spot x="1333.086" y="2330.3486" z="183.45392" h="91"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2428,7 +2060,7 @@
 					<spot x="1346.5033" y="2337.554" z="184.375" h="60"/>
 				</spawn>
 				<!-- Stonewatch Garrison Warmarshal -->
-				<spawn npc_id="232274" respawn_time="295">
+				<spawn npc_id="232274" handler="SENTINEL" respawn_time="295">
 					<spot x="1328.3865" y="2326.3086" z="185.63243" h="97"/>
 					<spot x="1343.2223" y="2277.3591" z="181.88037" h="92"/>
 					<spot x="1350.4995" y="2292.2466" z="181.13107" h="92"/>
@@ -2437,73 +2069,73 @@
 					<spot x="1338.585" y="2303.3074" z="183.31535" h="92"/>
 				</spawn>
 				<!-- Benzarinrinerk -->
-				<spawn npc_id="801491" respawn_time="295">
+				<spawn npc_id="801491" handler="MERCHANT" respawn_time="295">
 					<spot x="1317.3549" y="2332.7212" z="184.5000" h="5"/>
 				</spawn>
 				<!-- Stonewatch Garrison Shieldcaptain -->
-				<spawn npc_id="232275" respawn_time="295">
+				<spawn npc_id="232275" handler="SENTINEL" respawn_time="295">
 					<spot x="1343.2657" y="2333.9509" z="185.63243" h="92"/>
 					<spot x="1359.8728" y="2341.002" z="185.63243"/>
 				</spawn>
 				<!-- Stonewatch Garrison Priest -->
-				<spawn npc_id="232276" respawn_time="295">
+				<spawn npc_id="232276" handler="SENTINEL" respawn_time="295">
 					<spot x="1375.0383" y="2335.564" z="185.63243"/>
 					<spot x="1317.996" y="2291.814" z="183.18335" h="92"/>
 				</spawn>
 				<!-- Stonewatch Garrison Veteran Sentry -->
-				<spawn npc_id="232277" respawn_time="295">
+				<spawn npc_id="232277" handler="SENTINEL" respawn_time="295">
 					<spot x="1324.7261" y="2306.2139" z="186.8015" h="92"/>
 					<spot x="1354.2755" y="2310.1946" z="187.48499" h="90"/>
 				</spawn>
 				<!-- Allipius Consumable Item Distributor -->
-				<spawn npc_id="800791" respawn_time="295">
+				<spawn npc_id="800791" handler="MERCHANT" respawn_time="295">
 					<spot x="1356.1029" y="2315.9395" z="183.5" h="30"/>
 				</spawn>
 				<!-- Dexipus Kisk Merchant -->
-				<spawn npc_id="800792" respawn_time="295">
+				<spawn npc_id="800792" handler="MERCHANT" respawn_time="295">
 					<spot x="1353.4484" y="2331.2012" z="185.63243" h="60"/>
 				</spawn>
 				<!-- Amelius Food -->
-				<spawn npc_id="800793" respawn_time="295">
+				<spawn npc_id="800793" handler="MERCHANT" respawn_time="295">
 					<spot x="1355.0981" y="2321.8105" z="183.5" h="60"/>
 				</spawn>
 				<!-- Timolleon -->
-				<spawn npc_id="801043" respawn_time="295">
+				<spawn npc_id="801043" handler="MERCHANT" respawn_time="295">
 					<spot x="1319.5344" y="2339.3738" z="184.5" h="90"/>
 				</spawn>
 				<!-- Zelsia Conditioning Officer -->
-				<spawn npc_id="801488" respawn_time="295">
+				<spawn npc_id="801488" handler="MERCHANT" respawn_time="295">
 					<spot x="1315.4847" y="2325.749" z="183.93073" h="5"/>
 				</spawn>
 				<!-- Halios General Goods Merchant -->
-				<spawn npc_id="801539" respawn_time="295">
+				<spawn npc_id="801539" handler="MERCHANT" respawn_time="295">
 					<spot x="1355.2502" y="2325.9846" z="183.5" h="60"/>
 				</spawn>
 				<!-- Rinna Augmenting Officer -->
-				<spawn npc_id="801493" respawn_time="295">
+				<spawn npc_id="801493" handler="MERCHANT" respawn_time="295">
 					<spot x="1315.4783" y="2328.9531" z="183.93073" h="5"/>
 				</spawn>
 				<!-- Zeoteron Field Armor Distributor -->
-				<spawn npc_id="801567" respawn_time="295">
+				<spawn npc_id="801567" handler="MERCHANT" respawn_time="295">
 					<spot x="1352.2638" y="2315.7903" z="183.5" h="30"/>
 				</spawn>
 				<!-- Idian Depths Teleport Device -->
-				<spawn npc_id="801799" respawn_time="295">
+				<spawn npc_id="801799" handler="MERCHANT" respawn_time="295">
 					<spot x="1358.948" y="2346.2317" z="185.63243" h="93"/>
 				</spawn>
 				<!-- Diktis -->
-				<spawn npc_id="800790" respawn_time="295">
+				<spawn npc_id="800790" handler="MERCHANT" respawn_time="295">
 					<spot x="1327.985" y="2346.916" z="184.5" h="90"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801715" respawn_time="295">
+				<spawn npc_id="801715" handler="MERCHANT" respawn_time="295">
 					<spot x="1324.91" y="2346.394" z="186.7451" h="110" static_id="2770"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Stonewatch Vanguard Veteran Combatant -->
-				<spawn npc_id="232774" respawn_time="295">
+				<spawn npc_id="232774" handler="OUTRIDER" respawn_time="295">
 					<spot x="1257.7139" y="2283.4761" z="196.00558" h="15"/>
 					<spot x="1261.4728" y="2265.0471" z="196.00558" h="15"/>
 					<spot x="1273.5356" y="2254.2302" z="196.00558" h="15"/>
@@ -2513,21 +2145,21 @@
 					<spot x="1297.6267" y="2261.0046" z="198.31796" h="113"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Sentry -->
-				<spawn npc_id="232775" respawn_time="295">
+				<spawn npc_id="232775" handler="OUTRIDER" respawn_time="295">
 					<spot x="1274.3541" y="2265.421" z="194.90727" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Supervisor -->
-				<spawn npc_id="232776" respawn_time="295">
+				<spawn npc_id="232776" handler="OUTRIDER" respawn_time="295">
 					<spot x="1266.2671" y="2274.0334" z="194.875" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232777" respawn_time="295">
+				<spawn npc_id="232777" handler="OUTRIDER" respawn_time="295">
 					<spot x="1287.5934" y="2278.9758" z="193.96777" h="15"/>
 					<spot x="1288.1775" y="2256.1477" z="195.94856" h="113"/>
 					<spot x="1267.1754" y="2290.2715" z="194.97368" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Rider -->
-				<spawn npc_id="233248" respawn_time="295">
+				<spawn npc_id="233248" handler="OUTRIDER" respawn_time="295">
 					<spot x="1286.5472" y="2310.6855" z="191.40593"/>
 					<spot x="1302.1929" y="2216.6887" z="210.2394" h="107"/>
 					<spot x="1306.8414" y="2239.4661" z="204.53813" h="105"/>
@@ -2537,7 +2169,7 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Stonewatch Recon Veteran Combatant -->
-				<spawn npc_id="232591" respawn_time="295">
+				<spawn npc_id="232591" handler="OUTRIDER" respawn_time="295">
 					<spot x="1426.2819" y="2319.1909" z="174.81451" h="75"/>
 					<spot x="1427.0626" y="2328.0686" z="174.81451" h="75"/>
 					<spot x="1431.12" y="2311.1963" z="174.81451" h="75"/>
@@ -2547,21 +2179,21 @@
 					<spot x="1455.6598" y="2325.0779" z="176.36519"/>
 				</spawn>
 				<!-- Stonewatch Recon Veteran Sentry -->
-				<spawn npc_id="232592" respawn_time="295">
+				<spawn npc_id="232592" handler="OUTRIDER" respawn_time="295">
 					<spot x="1435.531" y="2327.2964" z="174.81451" h="92"/>
 				</spawn>
 				<!-- Stonewatch Recon Veteran Supervisor -->
-				<spawn npc_id="232593" respawn_time="295">
+				<spawn npc_id="232593" handler="OUTRIDER" respawn_time="295">
 					<spot x="1432.441" y="2336.6201" z="174.81451" h="100"/>
 				</spawn>
 				<!-- Stonewatch Recon Veteran Gunslinger -->
-				<spawn npc_id="232594" respawn_time="295">
+				<spawn npc_id="232594" handler="OUTRIDER" respawn_time="295">
 					<spot x="1447.6255" y="2303.865" z="171.88904" h="90"/>
 					<spot x="1453.2161" y="2323.3003" z="174.81451" h="83"/>
 					<spot x="1434.5588" y="2311.229" z="171.6776" h="97"/>
 				</spawn>
 				<!-- Stonewatch Recon Messenger -->
-				<spawn npc_id="233229" respawn_time="295">
+				<spawn npc_id="233229" handler="OUTRIDER" respawn_time="295">
 					<spot x="1406.4514" y="2238.0513" z="176.29019" h="53"/>
 					<spot x="1451.4149" y="2280.5625" z="166.98392" h="75"/>
 					<spot x="1467.7885" y="2315.5366" z="177.22995" h="60"/>
@@ -2573,7 +2205,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801649">
+				<spawn npc_id="801649" handler="FLAG">
 					<spot x="1333.086" y="2330.3486" z="183.45392" h="91"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2590,7 +2222,7 @@
 					<spot x="1346.5033" y="2337.554" z="184.375" h="60"/>
 				</spawn>
 				<!-- Stonewatch Warmarshal -->
-				<spawn npc_id="232369" respawn_time="295">
+				<spawn npc_id="232369" handler="SENTINEL" respawn_time="295">
 					<spot x="1328.3865" y="2326.3086" z="185.63243" h="97"/>
 					<spot x="1343.2223" y="2277.3591" z="181.88037" h="92"/>
 					<spot x="1350.4995" y="2292.2466" z="181.13107" h="92"/>
@@ -2599,73 +2231,73 @@
 					<spot x="1338.585" y="2303.3074" z="182.68225" h="92"/>
 				</spawn>
 				<!-- Dentirunerk -->
-				<spawn npc_id="801490" respawn_time="295">
+				<spawn npc_id="801490" handler="MERCHANT" respawn_time="295">
 					<spot x="1317.3549" y="2332.7212" z="184.5000" h="5"/>
 				</spawn>
 				<!-- Stonewatch Shieldcaptain -->
-				<spawn npc_id="232370" respawn_time="295">
+				<spawn npc_id="232370" handler="SENTINEL" respawn_time="295">
 					<spot x="1343.2657" y="2333.9509" z="185.63243" h="92"/>
 					<spot x="1359.8728" y="2341.002" z="185.63243"/>
 				</spawn>
 				<!-- Stonewatch Priest -->
-				<spawn npc_id="232371" respawn_time="295">
+				<spawn npc_id="232371" handler="SENTINEL" respawn_time="295">
 					<spot x="1375.0383" y="2335.564" z="185.63243"/>
 					<spot x="1317.996" y="2291.814" z="183.22101" h="92"/>
 				</spawn>
 				<!-- Stonewatch Veteran Sentry -->
-				<spawn npc_id="232372" respawn_time="295">
+				<spawn npc_id="232372" handler="SENTINEL" respawn_time="295">
 					<spot x="1324.7261" y="2306.2139" z="186.8015" h="92"/>
 					<spot x="1354.2755" y="2310.1946" z="187.48499" h="90"/>
 				</spawn>
 				<!-- Lavias -->
-				<spawn npc_id="800795" respawn_time="295">
+				<spawn npc_id="800795" handler="MERCHANT" respawn_time="295">
 					<spot x="1356.1029" y="2315.9395" z="183.5" h="30"/>
 				</spawn>
 				<!-- Karamant -->
-				<spawn npc_id="800796" respawn_time="295">
+				<spawn npc_id="800796" handler="MERCHANT" respawn_time="295">
 					<spot x="1353.4484" y="2331.2012" z="185.63243" h="60"/>
 				</spawn>
 				<!-- Ivasta -->
-				<spawn npc_id="800797" respawn_time="295">
+				<spawn npc_id="800797" handler="MERCHANT" respawn_time="295">
 					<spot x="1355.0981" y="2321.8105" z="183.5" h="60"/>
 				</spawn>
 				<!-- Helga -->
-				<spawn npc_id="801053" respawn_time="295">
+				<spawn npc_id="801053" handler="MERCHANT" respawn_time="295">
 					<spot x="1352.8727" y="2342.5654" z="184.375" h="90"/>
 				</spawn>
 				<!-- Kara -->
-				<spawn npc_id="801487" respawn_time="295">
+				<spawn npc_id="801487" handler="MERCHANT" respawn_time="295">
 					<spot x="1315.4847" y="2325.749" z="183.93073" h="5"/>
 				</spawn>
 				<!-- Novasan -->
-				<spawn npc_id="801489" respawn_time="295">
+				<spawn npc_id="801489" handler="MERCHANT" respawn_time="295">
 					<spot x="1355.2502" y="2325.9846" z="183.5" h="60"/>
 				</spawn>
 				<!-- Sartdin -->
-				<spawn npc_id="801492" respawn_time="295">
+				<spawn npc_id="801492" handler="MERCHANT" respawn_time="295">
 					<spot x="1315.4783" y="2328.9531" z="183.93073" h="5"/>
 				</spawn>
 				<!-- Herja -->
-				<spawn npc_id="801566" respawn_time="295">
+				<spawn npc_id="801566" handler="MERCHANT" respawn_time="295">
 					<spot x="1352.2638" y="2315.7903" z="183.5" h="30"/>
 				</spawn>
 				<!-- Idian Depths Teleport Device -->
-				<spawn npc_id="801800" respawn_time="295">
+				<spawn npc_id="801800" handler="MERCHANT" respawn_time="295">
 					<spot x="1358.948" y="2346.2317" z="185.63243" h="93"/>
 				</spawn>
 				<!-- Karas -->
-				<spawn npc_id="800794" respawn_time="295">
+				<spawn npc_id="800794" handler="MERCHANT" respawn_time="295">
 					<spot x="1327.985" y="2346.916" z="184.5" h="90"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801714" respawn_time="295">
+				<spawn npc_id="801714" handler="MERCHANT" respawn_time="295">
 					<spot x="1324.91" y="2346.394" z="186.7451" h="110" static_id="2770"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Stonewatch Vanguard Veteran Combatant -->
-				<spawn npc_id="232774" respawn_time="295">
+				<spawn npc_id="232774" handler="OUTRIDER" respawn_time="295">
 					<spot x="1257.7139" y="2283.4761" z="196.00558" h="15"/>
 					<spot x="1261.4728" y="2265.0471" z="196.00558" h="15"/>
 					<spot x="1273.5356" y="2254.2302" z="196.00558" h="15"/>
@@ -2675,21 +2307,21 @@
 					<spot x="1297.6267" y="2261.0046" z="198.31796" h="113"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Sentry -->
-				<spawn npc_id="232775" respawn_time="295">
+				<spawn npc_id="232775" handler="OUTRIDER" respawn_time="295">
 					<spot x="1274.3541" y="2265.421" z="194.90727" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Supervisor -->
-				<spawn npc_id="232776" respawn_time="295">
+				<spawn npc_id="232776" handler="OUTRIDER" respawn_time="295">
 					<spot x="1266.2671" y="2274.0334" z="194.875" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232777" respawn_time="295">
+				<spawn npc_id="232777" handler="OUTRIDER" respawn_time="295">
 					<spot x="1287.5934" y="2278.9758" z="193.96777" h="15"/>
 					<spot x="1288.1775" y="2256.1477" z="195.94856" h="113"/>
 					<spot x="1267.1754" y="2290.2715" z="194.97368" h="15"/>
 				</spawn>
 				<!-- Stonewatch Vanguard Rider -->
-				<spawn npc_id="233248" respawn_time="295">
+				<spawn npc_id="233248" handler="OUTRIDER" respawn_time="295">
 					<spot x="1286.5472" y="2310.6855" z="191.40593"/>
 					<spot x="1302.1929" y="2216.6887" z="210.2394" h="107"/>
 					<spot x="1306.8414" y="2239.4661" z="204.53813" h="105"/>
@@ -2699,7 +2331,7 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Stonewatch Scout Veteran Combatant -->
-				<spawn npc_id="232530" respawn_time="295">
+				<spawn npc_id="232530" handler="OUTRIDER" respawn_time="295">
 					<spot x="1426.2819" y="2319.1909" z="174.81451" h="75"/>
 					<spot x="1427.0626" y="2328.0686" z="174.81451" h="75"/>
 					<spot x="1431.12" y="2311.1963" z="174.81451" h="75"/>
@@ -2709,21 +2341,21 @@
 					<spot x="1455.6598" y="2325.0779" z="176.36519"/>
 				</spawn>
 				<!-- Stonewatch Scout Veteran Sentry -->
-				<spawn npc_id="232531" respawn_time="295">
+				<spawn npc_id="232531" handler="OUTRIDER" respawn_time="295">
 					<spot x="1435.531" y="2327.2964" z="174.81451" h="92"/>
 				</spawn>
 				<!-- Stonewatch Scout Veteran Supervisor -->
-				<spawn npc_id="232532" respawn_time="295">
+				<spawn npc_id="232532" handler="OUTRIDER" respawn_time="295">
 					<spot x="1432.441" y="2336.6201" z="174.81451" h="100"/>
 				</spawn>
 				<!-- Stonewatch Scout Veteran Gunslinger -->
-				<spawn npc_id="232533" respawn_time="295">
+				<spawn npc_id="232533" handler="OUTRIDER" respawn_time="295">
 					<spot x="1447.6255" y="2303.865" z="171.88904" h="90"/>
 					<spot x="1453.2161" y="2323.3003" z="174.81451" h="83"/>
 					<spot x="1434.5588" y="2311.229" z="172.21301" h="97"/>
 				</spawn>
 				<!-- Stonewatch Scout Envoy -->
-				<spawn npc_id="233210" respawn_time="295">
+				<spawn npc_id="233210" handler="OUTRIDER" respawn_time="295">
 					<spot x="1406.4514" y="2238.0513" z="176.29019" h="53"/>
 					<spot x="1451.4149" y="2280.5625" z="166.98392" h="75"/>
 					<spot x="1467.7885" y="2315.5366" z="177.22995" h="60"/>
@@ -2735,7 +2367,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801650">
+				<spawn npc_id="801650" handler="FLAG">
 					<spot x="1333.086" y="2330.3486" z="183.45392" h="91"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2752,7 +2384,7 @@
 					<spot x="1346.5033" y="2337.554" z="184.375" h="60"/>
 				</spawn>
 				<!-- Stonewatch Subjugator Prefectus -->
-				<spawn npc_id="232464" respawn_time="295">
+				<spawn npc_id="232464" handler="SENTINEL" respawn_time="295">
 					<spot x="1317.3549" y="2332.7212" z="185.63243" h="5"/>
 					<spot x="1327.985" y="2346.9158" z="185.63243" h="90"/>
 					<spot x="1328.3865" y="2326.3086" z="185.63243" h="97"/>
@@ -2763,97 +2395,28 @@
 					<spot x="1395.0945" y="2342.7627" z="185.63243" h="92"/>
 				</spawn>
 				<!-- Stonewatch Subjugator Tesserari -->
-				<spawn npc_id="232465" respawn_time="295">
+				<spawn npc_id="232465" handler="SENTINEL" respawn_time="295">
 					<spot x="1343.2657" y="2333.9509" z="185.63243" h="92"/>
 					<spot x="1359.8728" y="2341.002" z="185.63243"/>
 				</spawn>
 				<!-- Stonewatch Subjugator Medic -->
-				<spawn npc_id="232466" respawn_time="295">
+				<spawn npc_id="232466" handler="SENTINEL" respawn_time="295">
 					<spot x="1317.996" y="2291.814" z="185.63243" h="92"/>
 					<spot x="1375.0383" y="2335.564" z="185.63243"/>
 				</spawn>
 				<!-- Stonewatch Subjugator Veteran Sentry -->
-				<spawn npc_id="232467" respawn_time="295">
+				<spawn npc_id="232467" handler="SENTINEL" respawn_time="295">
 					<spot x="1324.7261" y="2306.2139" z="186.8015" h="92"/>
 					<spot x="1354.2755" y="2310.1946" z="187.48499" h="90"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Stonewatch Vanguard Veteran Combatant -->
-				<spawn npc_id="232774" respawn_time="295">
-					<spot x="1257.7139" y="2283.4761" z="196.00558" h="15"/>
-					<spot x="1261.4728" y="2265.0471" z="196.00558" h="15"/>
-					<spot x="1273.5356" y="2254.2302" z="196.00558" h="15"/>
-					<spot x="1274.9434" y="2279.3577" z="196.00558" h="15"/>
-					<spot x="1281.1503" y="2291.4353" z="194.98193" h="15"/>
-					<spot x="1284.6199" y="2268.3499" z="196.00558" h="110"/>
-					<spot x="1297.6267" y="2261.0046" z="198.31796" h="113"/>
-				</spawn>
-				<!-- Stonewatch Vanguard Veteran Sentry -->
-				<spawn npc_id="232775" respawn_time="295">
-					<spot x="1274.3541" y="2265.421" z="194.90727" h="15"/>
-				</spawn>
-				<!-- Stonewatch Vanguard Veteran Supervisor -->
-				<spawn npc_id="232776" respawn_time="295">
-					<spot x="1266.2671" y="2274.0334" z="194.875" h="15"/>
-				</spawn>
-				<!-- Stonewatch Vanguard Veteran Gunslinger -->
-				<spawn npc_id="232777" respawn_time="295">
-					<spot x="1287.5934" y="2278.9758" z="193.96777" h="15"/>
-					<spot x="1288.1775" y="2256.1477" z="195.94856" h="113"/>
-					<spot x="1267.1754" y="2290.2715" z="194.97368" h="15"/>
-				</spawn>
-				<!-- Stonewatch Vanguard Rider -->
-				<spawn npc_id="233248" respawn_time="295">
-					<spot x="1286.5472" y="2310.6855" z="191.40593"/>
-					<spot x="1302.1929" y="2216.6887" z="210.2394" h="107"/>
-					<spot x="1306.8414" y="2239.4661" z="204.53813" h="105"/>
-					<spot x="1338.9508" y="2217.1919" z="207.2858" h="75"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Stonewatch Scout Veteran Combatant -->
-				<spawn npc_id="232530" respawn_time="295">
-					<spot x="1426.2819" y="2319.1909" z="174.81451" h="75"/>
-					<spot x="1427.0626" y="2328.0686" z="174.81451" h="75"/>
-					<spot x="1431.12" y="2311.1963" z="174.81451" h="75"/>
-					<spot x="1442.3837" y="2318.9268" z="174.81451" h="97"/>
-					<spot x="1442.9275" y="2335.8804" z="174.81451" h="110"/>
-					<spot x="1445.3046" y="2327.3682" z="174.81451" h="15"/>
-					<spot x="1455.6598" y="2325.0779" z="176.36519"/>
-				</spawn>
-				<!-- Stonewatch Scout Veteran Sentry -->
-				<spawn npc_id="232531" respawn_time="295">
-					<spot x="1435.531" y="2327.2964" z="174.81451" h="92"/>
-				</spawn>
-				<!-- Stonewatch Scout Veteran Supervisor -->
-				<spawn npc_id="232532" respawn_time="295">
-					<spot x="1432.441" y="2336.6201" z="174.81451" h="100"/>
-				</spawn>
-				<!-- Stonewatch Scout Veteran Gunslinger -->
-				<spawn npc_id="232533" respawn_time="295">
-					<spot x="1447.6255" y="2303.865" z="171.88904" h="90"/>
-					<spot x="1453.2161" y="2323.3003" z="174.81451" h="83"/>
-					<spot x="1434.5588" y="2311.229" z="172.21301" h="97"/>
-				</spawn>
-				<!-- Stonewatch Scout Envoy -->
-				<spawn npc_id="233210" respawn_time="295">
-					<spot x="1406.4514" y="2238.0513" z="176.29019" h="53"/>
-					<spot x="1451.4149" y="2280.5625" z="166.98392" h="75"/>
-					<spot x="1467.7885" y="2315.5366" z="177.22995" h="60"/>
-					<spot x="1422.1897" y="2291.3652" z="167.194" h="60"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6068"> <!-- Two Vigils Outpost 88. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801651">
+				<spawn npc_id="801651" handler="FLAG">
 					<spot x="2130.2258" y="2473.3813" z="268.875" h="113"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -2870,76 +2433,76 @@
 					<spot x="2124.335" y="2476.2051" z="268.875" h="90"/>
 				</spawn>
 				<!-- Vigils Garrison Combatant -->
-				<spawn npc_id="232279" respawn_time="295">
+				<spawn npc_id="232279" handler="SENTINEL" respawn_time="295">
 					<spot x="2117.6763" y="2483.776" z="269.8968" h="0"/>
 					<spot x="2142.097" y="2462.4236" z="269.8968" h="113"/>
 					<spot x="2157.1162" y="2452.5168" z="266.9558" h="100"/>
 					<spot x="2141.9807" y="2431.7646" z="265.52133" h="100"/>
 				</spawn>
 				<!-- Vigils Garrison Protector -->
-				<spawn npc_id="232280" respawn_time="295">
+				<spawn npc_id="232280" handler="SENTINEL" respawn_time="295">
 					<spot x="2127.0896" y="2473.3108" z="269.89679" h="113"/>
 				</spawn>
 				<!-- Vigils Garrison Healer -->
-				<spawn npc_id="232281" respawn_time="295">
+				<spawn npc_id="232281" handler="SENTINEL" respawn_time="295">
 					<spot x="2145.528" y="2435.8298" z="265.52133" h="100"/>
 				</spawn>
 				<!-- Vigils Garrison Sentry -->
-				<spawn npc_id="232282" respawn_time="295">
+				<spawn npc_id="232282" handler="SENTINEL" respawn_time="295">
 					<spot x="2143.7883" y="2476.0823" z="269.89679" h="113"/>
 				</spawn>
 				<!-- Snarlus -->
-				<spawn npc_id="800799" respawn_time="295">
+				<spawn npc_id="800799" handler="MERCHANT" respawn_time="295">
 					<spot x="2133.564" y="2463.927" z="269.89679" h="30"/>
 				</spawn>
 				<!-- Soltia -->
-				<spawn npc_id="800800" respawn_time="295">
+				<spawn npc_id="800800" handler="MERCHANT" respawn_time="295">
 					<spot x="2126.2051" y="2463.9404" z="269.89679" h="30"/>
 				</spawn>
 				<!-- Emeltia -->
-				<spawn npc_id="800801" respawn_time="295">
+				<spawn npc_id="800801" handler="MERCHANT" respawn_time="295">
 					<spot x="2126.0225" y="2485.1221" z="269.89679" h="90"/>
 				</spawn>
 				<!-- Halia Food -->
-				<spawn npc_id="800802" respawn_time="295">
+				<spawn npc_id="800802" handler="MERCHANT" respawn_time="295">
 					<spot x="2129.3555" y="2485.1836" z="269.89679" h="90"/>
 				</spawn>
 				<!-- Knemus -->
-				<spawn npc_id="801044" respawn_time="295">
+				<spawn npc_id="801044" handler="MERCHANT" respawn_time="295">
 					<spot x="2122.1309" y="2462.808" z="268.875"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801717" respawn_time="295">
+				<spawn npc_id="801717" handler="MERCHANT" respawn_time="295">
 					<spot x="2118.087" y="2486.749" z="270.2188" h="110" static_id="2772"/>
 				</spawn>
 				<!-- Beliotine -->
-				<spawn npc_id="800798" respawn_time="295">
+				<spawn npc_id="800798" handler="MERCHANT" respawn_time="295">
 					<spot x="2117.6763" y="2483.776" z="268.875" h="0"/>
 				</spawn>
 				<!-- Caerpinerk -->
-				<spawn npc_id="801571" respawn_time="295">
+				<spawn npc_id="801571" handler="MERCHANT" respawn_time="295">
 					<spot x="2130.2297" y="2463.8545" z="269.89679" h="30"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Vigils Vanguard Combatant -->
-				<spawn npc_id="232778" respawn_time="295">
+				<spawn npc_id="232778" handler="OUTRIDER" respawn_time="295">
 					<spot x="2205.5593" y="2278.771" z="268.78098" h="113"/>
 					<spot x="2210.5569" y="2268.2593" z="268.78098" h="113"/>
 					<spot x="2219.7314" y="2287.5146" z="268.78098" h="113"/>
 					<spot x="2226.3694" y="2274.147" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Sentry -->
-				<spawn npc_id="232779" respawn_time="295">
+				<spawn npc_id="232779" handler="OUTRIDER" respawn_time="295">
 					<spot x="2217.6643" y="2271.1814" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Supervisor -->
-				<spawn npc_id="232780" respawn_time="295">
+				<spawn npc_id="232780" handler="OUTRIDER" respawn_time="295">
 					<spot x="2202.8596" y="2289.5095" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Rider -->
-				<spawn npc_id="233249" respawn_time="295">
+				<spawn npc_id="233249" handler="OUTRIDER" respawn_time="295">
 					<spot x="2229.4045" y="2308.8442" z="267.95697" h="20"/>
 					<spot x="2241.7517" y="2286.2322" z="269.4555" h="10"/>
 					<spot x="2252.875" y="2340.9717" z="257.42206" h="45"/>
@@ -2949,22 +2512,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Vigils Recon Combatant -->
-				<spawn npc_id="232595" respawn_time="295">
+				<spawn npc_id="232595" handler="OUTRIDER" respawn_time="295">
 					<spot x="2227.0432" y="2494.4624" z="248.70558" h="78"/>
 					<spot x="2230.8916" y="2481.1233" z="248.70558" h="90"/>
 					<spot x="2235.8972" y="2496.2078" z="248.70558" h="100"/>
 					<spot x="2244.5515" y="2487.1067" z="248.70558" h="100"/>
 				</spawn>
 				<!-- Vigils Recon Sentry -->
-				<spawn npc_id="232596" respawn_time="295">
+				<spawn npc_id="232596" handler="OUTRIDER" respawn_time="295">
 					<spot x="2219.3997" y="2489.8577" z="248.70558" h="60"/>
 				</spawn>
 				<!-- Vigils Recon Supervisor -->
-				<spawn npc_id="232597" respawn_time="295">
+				<spawn npc_id="232597" handler="OUTRIDER" respawn_time="295">
 					<spot x="2235.8853" y="2488.7534" z="248.70558" h="90"/>
 				</spawn>
 				<!-- Vigils Recon Messenger -->
-				<spawn npc_id="233230" respawn_time="295">
+				<spawn npc_id="233230" handler="OUTRIDER" respawn_time="295">
 					<spot x="2194.9182" y="2475.473" z="258.77475" h="75"/>
 					<spot x="2234.329" y="2519.4478" z="246.1022" h="30"/>
 					<spot x="2263.0286" y="2480.4897" z="243.86731" h="105"/>
@@ -2976,16 +2539,12 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801652">
+				<spawn npc_id="801652" handler="FLAG">
 					<spot x="2130.2258" y="2473.3813" z="268.875" h="113"/>
 				</spawn>
 				<!-- Territory Boss -->
 				<spawn npc_id="231682" handler="BOSS">
 					<spot x="2124.3457" y="2473.3235" z="268.875" h="113"/>
-				</spawn>
-				<!-- Teleport Device -->
-				<spawn npc_id="801716" respawn_time="295">
-					<spot x="2118.087" y="2486.749" z="270.2188" h="110" static_id="2772"/>
 				</spawn>
 				<!-- Vigils Garrison Shieldcaptain -->
 				<spawn npc_id="231919" handler="ATTACKER">
@@ -2997,71 +2556,75 @@
 					<spot x="2124.335" y="2476.2051" z="268.875" h="90"/>
 				</spawn>
 				<!-- Vigils Combatant -->
-				<spawn npc_id="232374" respawn_time="295">
+				<spawn npc_id="232374" handler="SENTINEL" respawn_time="295">
 					<spot x="2142.097" y="2462.4236" z="269.8968" h="113"/>
 					<spot x="2141.9807" y="2431.7646" z="265.28845" h="100"/>
 					<spot x="2157.1162" y="2452.5168" z="267.12384" h="100"/>
 				</spawn>
 				<!-- Vigils Protector -->
-				<spawn npc_id="232375" respawn_time="295">
+				<spawn npc_id="232375" handler="SENTINEL" respawn_time="295">
 					<spot x="2127.0896" y="2473.3108" z="269.89679" h="113"/>
 				</spawn>
 				<!-- Vigils Healer -->
-				<spawn npc_id="232376" respawn_time="295">
+				<spawn npc_id="232376" handler="SENTINEL" respawn_time="295">
 					<spot x="2145.528" y="2435.8298" z="265.28845" h="100"/>
 				</spawn>
 				<!-- Vigils Sentry -->
-				<spawn npc_id="232377" respawn_time="295">
+				<spawn npc_id="232377" handler="SENTINEL" respawn_time="295">
 					<spot x="2143.7883" y="2476.0823" z="268.75055" h="113"/>
 				</spawn>
 				<!-- Harmaget -->
-				<spawn npc_id="800803" respawn_time="295">
+				<spawn npc_id="800803" handler="MERCHANT" respawn_time="295">
 					<spot x="2117.6763" y="2483.776" z="268.875" h="0"/>
 				</spawn>
 				<!-- Harnein -->
-				<spawn npc_id="800804" respawn_time="295">
+				<spawn npc_id="800804" handler="MERCHANT" respawn_time="295">
 					<spot x="2133.564" y="2463.927" z="269.89679" h="30"/>
 				</spawn>
 				<!-- Larshagen -->
-				<spawn npc_id="800805" respawn_time="295">
+				<spawn npc_id="800805" handler="MERCHANT" respawn_time="295">
 					<spot x="2126.2051" y="2463.9404" z="269.89679" h="30"/>
 				</spawn>
 				<!-- Baska -->
-				<spawn npc_id="800806" respawn_time="295">
+				<spawn npc_id="800806" handler="MERCHANT" respawn_time="295">
 					<spot x="2126.0225" y="2485.1221" z="269.89679" h="90"/>
 				</spawn>
 				<!-- Eldifa -->
-				<spawn npc_id="800807" respawn_time="295">
+				<spawn npc_id="800807" handler="MERCHANT" respawn_time="295">
 					<spot x="2129.3555" y="2485.1836" z="269.89679" h="90"/>
 				</spawn>
 				<!-- Rorik -->
-				<spawn npc_id="801054" respawn_time="295">
+				<spawn npc_id="801054" handler="MERCHANT" respawn_time="295">
 					<spot x="2123.3506" y="2483.0981" z="268.875" h="113"/>
 				</spawn>
 				<!-- Rajarunerk -->
-				<spawn npc_id="801569" respawn_time="295">
+				<spawn npc_id="801569" handler="MERCHANT" respawn_time="295">
 					<spot x="2130.2297" y="2463.8545" z="269.89679" h="30"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="801716" handler="MERCHANT" respawn_time="295">
+					<spot x="2118.087" y="2486.749" z="270.2188" h="110" static_id="2772"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Vigils Vanguard Combatant -->
-				<spawn npc_id="232778" respawn_time="295">
+				<spawn npc_id="232778" handler="OUTRIDER" respawn_time="295">
 					<spot x="2205.5593" y="2278.771" z="268.78098" h="113"/>
 					<spot x="2210.5569" y="2268.2593" z="268.78098" h="113"/>
 					<spot x="2219.7314" y="2287.5146" z="268.78098" h="113"/>
 					<spot x="2226.3694" y="2274.147" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Sentry -->
-				<spawn npc_id="232779" respawn_time="295">
+				<spawn npc_id="232779" handler="OUTRIDER" respawn_time="295">
 					<spot x="2217.6643" y="2271.1814" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Supervisor -->
-				<spawn npc_id="232780" respawn_time="295">
+				<spawn npc_id="232780" handler="OUTRIDER" respawn_time="295">
 					<spot x="2202.8596" y="2289.5095" z="268.78098" h="113"/>
 				</spawn>
 				<!-- Vigils Vanguard Rider -->
-				<spawn npc_id="233249" respawn_time="295">
+				<spawn npc_id="233249" handler="OUTRIDER" respawn_time="295">
 					<spot x="2229.4045" y="2308.8442" z="267.95697" h="20"/>
 					<spot x="2241.7517" y="2286.2322" z="269.4555" h="10"/>
 					<spot x="2252.875" y="2340.9717" z="257.42206" h="45"/>
@@ -3071,22 +2634,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Vigils Scout Combatant -->
-				<spawn npc_id="232534" respawn_time="295">
+				<spawn npc_id="232534" handler="OUTRIDER" respawn_time="295">
 					<spot x="2227.0432" y="2494.4624" z="248.70558" h="78"/>
 					<spot x="2230.8916" y="2481.1233" z="248.70558" h="90"/>
 					<spot x="2235.8972" y="2496.2078" z="248.70558" h="100"/>
 					<spot x="2244.5515" y="2487.1067" z="248.70558" h="100"/>
 				</spawn>
 				<!-- Vigils Scout Sentry -->
-				<spawn npc_id="232535" respawn_time="295">
+				<spawn npc_id="232535" handler="OUTRIDER" respawn_time="295">
 					<spot x="2219.3997" y="2489.8577" z="248.70558" h="60"/>
 				</spawn>
 				<!-- Vigils Scout Supervisor -->
-				<spawn npc_id="232536" respawn_time="295">
+				<spawn npc_id="232536" handler="OUTRIDER" respawn_time="295">
 					<spot x="2235.8853" y="2488.7534" z="248.70558" h="90"/>
 				</spawn>
 				<!-- Vigils Scout Envoy -->
-				<spawn npc_id="233211" respawn_time="295">
+				<spawn npc_id="233211" handler="OUTRIDER" respawn_time="295">
 					<spot x="2214.675" y="2460.8628" z="248.47006" h="87"/>
 					<spot x="2234.329" y="2519.4478" z="246.46472" h="30"/>
 					<spot x="2194.9182" y="2475.473" z="259.77222" h="75"/>
@@ -3098,7 +2661,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801653">
+				<spawn npc_id="801653" handler="FLAG">
 					<spot x="2130.2258" y="2473.3813" z="268.875" h="113"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -3115,116 +2678,37 @@
 					<spot x="2124.335" y="2476.2051" z="268.875" h="90"/>
 				</spawn>
 				<!-- Vigils Subjugator Combatant -->
-				<spawn npc_id="232469" respawn_time="295">
+				<spawn npc_id="232469" handler="SENTINEL" respawn_time="295">
 					<spot x="2117.6763" y="2483.776" z="269.8968"/>
 					<spot x="2142.097" y="2462.4236" z="269.8968" h="113"/>
 					<spot x="2157.1162" y="2452.5168" z="269.8968" h="100"/>
 					<spot x="2141.9807" y="2431.7646" z="265.34692" h="100"/>
 				</spawn>
 				<!-- Vigils Subjugator Protector -->
-				<spawn npc_id="232470" respawn_time="295">
+				<spawn npc_id="232470" handler="SENTINEL" respawn_time="295">
 					<spot x="2127.0896" y="2473.3108" z="269.89679" h="113"/>
 				</spawn>
 				<!-- Vigils Subjugator Healer -->
-				<spawn npc_id="232471" respawn_time="295">
+				<spawn npc_id="232471" handler="SENTINEL" respawn_time="295">
 					<spot x="2145.528" y="2435.8298" z="265.34692" h="100"/>
 				</spawn>
 				<!-- Vigils Subjugator Sentry -->
-				<spawn npc_id="232472" respawn_time="295">
+				<spawn npc_id="232472" handler="SENTINEL" respawn_time="295">
 					<spot x="2143.7883" y="2476.0823" z="269.89679" h="113"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Vigils Vanguard Combatant -->
-				<spawn npc_id="232778" respawn_time="295">
-					<spot x="2205.5593" y="2278.771" z="268.78098" h="113"/>
-					<spot x="2210.5569" y="2268.2593" z="268.78098" h="113"/>
-					<spot x="2219.7314" y="2287.5146" z="268.78098" h="113"/>
-					<spot x="2226.3694" y="2274.147" z="268.78098" h="113"/>
-				</spawn>
-				<!-- Vigils Vanguard Sentry -->
-				<spawn npc_id="232779" respawn_time="295">
-					<spot x="2217.6643" y="2271.1814" z="268.78098" h="113"/>
-				</spawn>
-				<!-- Vigils Vanguard Supervisor -->
-				<spawn npc_id="232780" respawn_time="295">
-					<spot x="2202.8596" y="2289.5095" z="268.78098" h="113"/>
-				</spawn>
-				<!-- Vigils Vanguard Rider -->
-				<spawn npc_id="233249" respawn_time="295">
-					<spot x="2229.4045" y="2308.8442" z="267.95697" h="20"/>
-					<spot x="2241.7517" y="2286.2322" z="269.4555" h="10"/>
-					<spot x="2252.875" y="2340.9717" z="257.42206" h="45"/>
-					<spot x="2284.575" y="2340.1965" z="256.23483" h="45"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Vigils Scout Combatant -->
-				<spawn npc_id="232534" respawn_time="295">
-					<spot x="2227.0432" y="2494.4624" z="248.70558" h="78"/>
-					<spot x="2230.8916" y="2481.1233" z="248.70558" h="90"/>
-					<spot x="2235.8972" y="2496.2078" z="248.70558" h="100"/>
-					<spot x="2244.5515" y="2487.1067" z="248.70558" h="100"/>
-				</spawn>
-				<!-- Vigils Scout Sentry -->
-				<spawn npc_id="232535" respawn_time="295">
-					<spot x="2219.3997" y="2489.8577" z="248.70558" h="60"/>
-				</spawn>
-				<!-- Vigils Scout Supervisor -->
-				<spawn npc_id="232536" respawn_time="295">
-					<spot x="2235.8853" y="2488.7534" z="248.70558" h="90"/>
-				</spawn>
-				<!-- Vigils Scout Envoy -->
-				<spawn npc_id="233211" respawn_time="295">
-					<spot x="2214.675" y="2460.8628" z="248.47006" h="87"/>
-					<spot x="2234.329" y="2519.4478" z="246.46472" h="30"/>
-					<spot x="2194.9182" y="2475.473" z="259.77222" h="75"/>
-					<spot x="2263.0286" y="2480.4897" z="243.30884" h="105"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 		<base_spawn id="6069"> <!-- Emerald Meadow 89. -->
 			<simple_race race="ELYOS">
 				<!-- Base Spawns -->
 				<!-- Elyos Territory -->
-				<spawn npc_id="801654">
+				<spawn npc_id="801654" handler="FLAG">
 					<spot x="2609.5544" y="2209.1594" z="249.375" h="40"/>
 				</spawn>
 				<!-- Territory Boss -->
 				<spawn npc_id="231684" handler="BOSS">
 					<spot x="2611.935" y="2201.7822" z="249.375" h="40"/>
-				</spawn>
-				<!-- Mailbox -->
-				<spawn npc_id="700000" respawn_time="295">
-					<spot x="2597.97" y="2205.842" z="249.375" h="75" />
-				</spawn>
-				<!-- Golda -->
-				<spawn npc_id="800808" respawn_time="295">
-					<spot x="2604.3147" y="2187.2964" z="249.3750" h="15"/>
-				</spawn>
-				<!-- Demotelles -->
-				<spawn npc_id="206346" respawn_time="295">
-					<spot x="2600.6267" y="2205.2939" z="249.3750" h="15"/>
-				</spawn>
-				<!-- Dillis -->
-				<spawn npc_id="800809" respawn_time="295">
-					<spot x="2603.387" y="2202.4004" z="249.375" h="15"/>
-				</spawn>
-				<!-- Bomelis -->
-				<spawn npc_id="800810" respawn_time="295">
-					<spot x="2616.9761" y="2213.0791" z="249.3750" h="75"/>
-				</spawn>
-				<!-- Vacinus -->
-				<spawn npc_id="800811" respawn_time="295">
-					<spot x="2614.9326" y="2216.0405" z="249.3750" h="75"/>
-				</spawn>
-				<!-- Pormeo -->
-				<spawn npc_id="801045" respawn_time="295">
-					<spot x="2606.5176" y="2200.0813" z="249.3750" h="30"/>
 				</spawn>
 				<!-- Meadow Scout Shieldcaptain -->
 				<spawn npc_id="231921" handler="ATTACKER">
@@ -3235,48 +2719,76 @@
 					<spot x="2608.9644" y="2199.1636" z="249.375" h="15"/>
 					<spot x="2614.8967" y="2204.3843" z="249.375" h="75"/>
 				</spawn>
+				<!-- Mailbox -->
+				<spawn npc_id="700000" handler="MERCHANT" respawn_time="295">
+					<spot x="2597.97" y="2205.842" z="249.375" h="75" />
+				</spawn>
+				<!-- Golda -->
+				<spawn npc_id="800808" handler="MERCHANT" respawn_time="295">
+					<spot x="2604.3147" y="2187.2964" z="249.3750" h="15"/>
+				</spawn>
+				<!-- Demotelles -->
+				<spawn npc_id="206346" handler="MERCHANT" respawn_time="295">
+					<spot x="2600.6267" y="2205.2939" z="249.3750" h="15"/>
+				</spawn>
+				<!-- Dillis -->
+				<spawn npc_id="800809" handler="MERCHANT" respawn_time="295">
+					<spot x="2603.387" y="2202.4004" z="249.375" h="15"/>
+				</spawn>
+				<!-- Bomelis -->
+				<spawn npc_id="800810" handler="MERCHANT" respawn_time="295">
+					<spot x="2616.9761" y="2213.0791" z="249.3750" h="75"/>
+				</spawn>
+				<!-- Vacinus -->
+				<spawn npc_id="800811" handler="MERCHANT" respawn_time="295">
+					<spot x="2614.9326" y="2216.0405" z="249.3750" h="75"/>
+				</spawn>
+				<!-- Pormeo -->
+				<spawn npc_id="801045" handler="MERCHANT" respawn_time="295">
+					<spot x="2606.5176" y="2200.0813" z="249.3750" h="30"/>
+				</spawn>
 				<!-- Meadow Garrison Combatant -->
-				<spawn npc_id="232284" respawn_time="295">
+				<spawn npc_id="232284" handler="SENTINEL" respawn_time="295">
 					<spot x="2569.0081" y="2233.7126" z="243.93423" h="40"/>
 					<spot x="2590.5864" y="2232.0183" z="250.4462" h="40"/>
 					<spot x="2595.1592" y="2213.9319" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Meadow Garrison Protector -->
-				<spawn npc_id="232285" respawn_time="295">
+				<spawn npc_id="232285" handler="SENTINEL" respawn_time="295">
 					<spot x="2609.6738" y="2204.0447" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Meadow Garrison Healer -->
-				<spawn npc_id="232286" respawn_time="295">
+				<spawn npc_id="232286" handler="SENTINEL" respawn_time="295">
 					<spot x="2575.5686" y="2220.5908" z="250.4462" h="40"/>
 				</spawn>
 				<!-- Meadow Garrison Sentry -->
-				<spawn npc_id="232287" respawn_time="295">
+				<spawn npc_id="232287" handler="SENTINEL" respawn_time="295">
 					<spot x="2605.7075" y="2224.3357" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801719" respawn_time="295">
+				<spawn npc_id="801719" handler="MERCHANT" respawn_time="295">
 					<spot x="2607.532" y="2187.979" z="251.3452" h="110" static_id="2783"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Meadow Vanguard Combatant -->
-				<spawn npc_id="232781" respawn_time="295">
+				<spawn npc_id="232781" handler="OUTRIDER" respawn_time="295">
 					<spot x="2780.4717" y="2193.0325" z="250.95059" h="30"/>
 					<spot x="2782.5293" y="2178.9629" z="250.95059" h="30"/>
 					<spot x="2793.4915" y="2179.2979" z="250.95059" h="30"/>
 					<spot x="2795.5125" y="2197.355" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Sentry -->
-				<spawn npc_id="232782" respawn_time="295">
+				<spawn npc_id="232782" handler="OUTRIDER" respawn_time="295">
 					<spot x="2795.3428" y="2187.5757" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Supervisor -->
-				<spawn npc_id="232783" respawn_time="295">
+				<spawn npc_id="232783" handler="OUTRIDER" respawn_time="295">
 					<spot x="2772.2927" y="2180.781" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Rider -->
-				<spawn npc_id="233250" respawn_time="295">
+				<spawn npc_id="233250" handler="OUTRIDER" respawn_time="295">
 					<spot x="2732.9211" y="2238.3936" z="246.1444" h="43"/>
 					<spot x="2768.2205" y="2271.9082" z="239.36508" h="45"/>
 					<spot x="2791.6814" y="2234.4133" z="248.34328" h="20"/>
@@ -3286,22 +2798,22 @@
 				
 				<!-- Sub Camp Asmodian Spawns -->
 				<!-- Meadow Recon Combatant -->
-				<spawn npc_id="232598" respawn_time="295">
+				<spawn npc_id="232598" handler="OUTRIDER" respawn_time="295">
 					<spot x="2468.0286" y="2046.9956" z="249.47015" h="40"/>
 					<spot x="2477.5227" y="2057.9375" z="249.47015" h="40"/>
 					<spot x="2481.0896" y="2043.651" z="249.47015" h="40"/>
 					<spot x="2485.8" y="2052.7119" z="249.47015" h="45"/>
 				</spawn>
 				<!-- Meadow Recon Sentry -->
-				<spawn npc_id="232599" respawn_time="295">
+				<spawn npc_id="232599" handler="OUTRIDER" respawn_time="295">
 					<spot x="2477.1814" y="2050.1843" z="249.47015" h="40"/>
 				</spawn>
 				<!-- Meadow Recon Supervisor -->
-				<spawn npc_id="232600" respawn_time="295">
+				<spawn npc_id="232600" handler="OUTRIDER" respawn_time="295">
 					<spot x="2471.4946" y="2039.842" z="249.47015" h="40"/>
 				</spawn>
 				<!-- Meadow Recon Messenger -->
-				<spawn npc_id="233231" respawn_time="295">
+				<spawn npc_id="233231" handler="OUTRIDER" respawn_time="295">
 					<spot x="2490.3708" y="2124.4731" z="238.15938" h="15"/>
 					<spot x="2455.0522" y="2068.64" z="247.64824" h="27"/>
 					<spot x="2442.4958" y="2101.6438" z="245.13893" h="7"/>
@@ -3313,7 +2825,7 @@
 			<simple_race race="ASMODIANS">
 				<!-- Base Spawns -->
 				<!-- Asmodians Territory -->
-				<spawn npc_id="801655">
+				<spawn npc_id="801655" handler="FLAG">
 					<spot x="2609.5544" y="2209.1594" z="249.375" h="40"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -3330,75 +2842,75 @@
 					<spot x="2614.8967" y="2204.3843" z="249.375" h="75"/>
 				</spawn>
 				<!-- Meadow Combatant -->
-				<spawn npc_id="232379" respawn_time="295">
+				<spawn npc_id="232379" handler="SENTINEL" respawn_time="295">
 					<spot x="2569.0081" y="2233.7126" z="243.93423" h="40"/>
 					<spot x="2590.5864" y="2232.0183" z="250.4462" h="40"/>
 					<spot x="2595.1592" y="2213.9319" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Meadow Protector -->
-				<spawn npc_id="232380" respawn_time="295">
+				<spawn npc_id="232380" handler="SENTINEL" respawn_time="295">
 					<spot x="2609.6738" y="2204.0447" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Meadow Healer -->
-				<spawn npc_id="232381" respawn_time="295">
+				<spawn npc_id="232381" handler="SENTINEL" respawn_time="295">
 					<spot x="2575.5686" y="2220.5908" z="250.4462" h="40"/>
 				</spawn>
 				<!-- Meadow Sentry -->
-				<spawn npc_id="232382" respawn_time="295">
+				<spawn npc_id="232382" handler="SENTINEL" respawn_time="295">
 					<spot x="2605.7075" y="2224.3357" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Kaserlein -->
-				<spawn npc_id="800813" respawn_time="295">
+				<spawn npc_id="800813" handler="MERCHANT" respawn_time="295">
 					<spot x="2603.3870" y="2202.4004" z="249.3750" h="15"/>
 				</spawn>
 				<!-- Penya -->
-				<spawn npc_id="206348" respawn_time="295">
+				<spawn npc_id="206348" handler="MERCHANT" respawn_time="295">
 					<spot x="2600.6267" y="2205.2939" z="249.3750" h="15"/>
 				</spawn>
 				<!-- Seigharg -->
-				<spawn npc_id="800812" respawn_time="295">
+				<spawn npc_id="800812" handler="MERCHANT" respawn_time="295">
 					<spot x="2604.3147" y="2187.2964" z="249.3750" h="15"/>
 				</spawn>
 				<!-- Harvant -->
-				<spawn npc_id="800814" respawn_time="295">
+				<spawn npc_id="800814" handler="MERCHANT" respawn_time="295">
 					<spot x="2616.9761" y="2213.0791" z="249.3750" h="75"/>
 				</spawn>
 				<!-- Roserint -->
-				<spawn npc_id="800815" respawn_time="295">
+				<spawn npc_id="800815" handler="MERCHANT" respawn_time="295">
 					<spot x="2614.9326" y="2216.0405" z="249.3750" h="75"/>
 				</spawn>
 				<!-- Rolf -->
-				<spawn npc_id="801055" respawn_time="295">
+				<spawn npc_id="801055" handler="MERCHANT" respawn_time="295">
 					<spot x="2615.5469" y="2207.2708" z="249.3750" h="30"/>
 				</spawn>
 				<!-- Mailbox -->
-				<spawn npc_id="700079" respawn_time="295">
+				<spawn npc_id="700079" handler="MERCHANT" respawn_time="295">
 					<spot x="2597.97" y="2205.842" z="249.375" h="75" />
 				</spawn>
 				<!-- Teleport Device -->
-				<spawn npc_id="801718" respawn_time="295">
+				<spawn npc_id="801718" handler="MERCHANT" respawn_time="295">
 					<spot x="2607.5325" y="2187.9792" z="251.3452" h="110" static_id="2783"/>
 				</spawn>
 				<!-- End Base Spawns -->
 				
 				<!-- Sub Camp Balaur Spawns -->
 				<!-- Meadow Vanguard Combatant -->
-				<spawn npc_id="232781" respawn_time="295">
+				<spawn npc_id="232781" handler="OUTRIDER" respawn_time="295">
 					<spot x="2780.4717" y="2193.0325" z="250.95059" h="30"/>
 					<spot x="2782.5293" y="2178.9629" z="250.95059" h="30"/>
 					<spot x="2793.4915" y="2179.2979" z="250.95059" h="30"/>
 					<spot x="2795.5125" y="2197.355" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Sentry -->
-				<spawn npc_id="232782" respawn_time="295">
+				<spawn npc_id="232782" handler="OUTRIDER" respawn_time="295">
 					<spot x="2795.3428" y="2187.5757" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Supervisor -->
-				<spawn npc_id="232783" respawn_time="295">
+				<spawn npc_id="232783" handler="OUTRIDER" respawn_time="295">
 					<spot x="2772.2927" y="2180.781" z="250.95059" h="30"/>
 				</spawn>
 				<!-- Meadow Vanguard Rider -->
-				<spawn npc_id="233250" respawn_time="295">
+				<spawn npc_id="233250" handler="OUTRIDER" respawn_time="295">
 					<spot x="2732.9211" y="2238.3936" z="246.1444" h="43"/>
 					<spot x="2768.2205" y="2271.9082" z="239.36508" h="45"/>
 					<spot x="2791.6814" y="2234.4133" z="248.34328" h="20"/>
@@ -3408,22 +2920,22 @@
 				
 				<!-- Sub Camp Elyos Spawns -->
 				<!-- Meadow Scout Combatant -->
-				<spawn npc_id="232537" respawn_time="295">
+				<spawn npc_id="232537" handler="OUTRIDER" respawn_time="295">
 					<spot x="2468.0286" y="2046.9956" z="249.47015" h="40"/>
 					<spot x="2477.5227" y="2057.9375" z="249.47015" h="40"/>
 					<spot x="2481.0896" y="2043.651" z="249.47015" h="40"/>
 					<spot x="2485.8" y="2052.7119" z="249.47015" h="45"/>
 				</spawn>
 				<!-- Meadow Scout Sentry -->
-				<spawn npc_id="232538" respawn_time="295">
+				<spawn npc_id="232538" handler="OUTRIDER" respawn_time="295">
 					<spot x="2477.1814" y="2050.1843" z="249.47015" h="40"/>
 				</spawn>
 				<!-- Meadow Scout Supervisor -->
-				<spawn npc_id="232539" respawn_time="295">
+				<spawn npc_id="232539" handler="OUTRIDER" respawn_time="295">
 					<spot x="2471.4946" y="2039.842" z="249.47015" h="40"/>
 				</spawn>
 				<!-- Meadow Scout Envoy -->
-				<spawn npc_id="233212" respawn_time="295">
+				<spawn npc_id="233212" handler="OUTRIDER" respawn_time="295">
 					<spot x="2490.3708" y="2124.4731" z="238.15938" h="15"/>
 					<spot x="2455.0522" y="2068.64" z="247.62909" h="27"/>
 					<spot x="2442.4958" y="2101.6438" z="244.53001" h="7"/>
@@ -3435,7 +2947,7 @@
 			<simple_race race="NPC">
 				<!-- Base Spawns -->
 				<!-- Balaur Territory -->
-				<spawn npc_id="801656">
+				<spawn npc_id="801656" handler="FLAG">
 					<spot x="2609.5544" y="2209.1594" z="249.375" h="40"/>
 				</spawn>
 				<!-- Territory Boss -->
@@ -3452,76 +2964,25 @@
 					<spot x="2614.8967" y="2204.3843" z="249.375" h="75"/>
 				</spawn>
 				<!-- Meadow Subjugator Combatant -->
-				<spawn npc_id="232474" respawn_time="295">
+				<spawn npc_id="232474" handler="SENTINEL" respawn_time="295">
 					<spot x="2569.0081" y="2233.7126" z="243.93423" h="40"/>
 					<spot x="2590.5864" y="2232.0183" z="250.4462" h="40"/>
 					<spot x="2595.1592" y="2213.9319" z="250.6884" h="40"/>
 					<spot x="2604.3147" y="2187.2964" z="250.6884" h="15"/>
 				</spawn>
 				<!-- Meadow Subjugator Protector -->
-				<spawn npc_id="232475" respawn_time="295">
+				<spawn npc_id="232475" handler="SENTINEL" respawn_time="295">
 					<spot x="2609.6738" y="2204.0447" z="250.6884" h="40"/>
 				</spawn>
 				<!-- Meadow Subjugator Healer -->
-				<spawn npc_id="232476" respawn_time="295">
+				<spawn npc_id="232476" handler="SENTINEL" respawn_time="295">
 					<spot x="2575.5686" y="2220.5908" z="250.4462" h="40"/>
 				</spawn>
 				<!-- Meadow Subjugator Sentry -->
-				<spawn npc_id="232477" respawn_time="295">
+				<spawn npc_id="232477" handler="SENTINEL" respawn_time="295">
 					<spot x="2605.7075" y="2224.3357" z="250.6884" h="40"/>
 				</spawn>
 				<!-- End Base Spawns -->
-				
-				<!-- Sub Camp Balaur Spawns -->
-				<!-- Meadow Vanguard Combatant -->
-				<spawn npc_id="232781" respawn_time="295">
-					<spot x="2780.4717" y="2193.0325" z="250.95059" h="30"/>
-					<spot x="2782.5293" y="2178.9629" z="250.95059" h="30"/>
-					<spot x="2793.4915" y="2179.2979" z="250.95059" h="30"/>
-					<spot x="2795.5125" y="2197.355" z="250.95059" h="30"/>
-				</spawn>
-				<!-- Meadow Vanguard Sentry -->
-				<spawn npc_id="232782" respawn_time="295">
-					<spot x="2795.3428" y="2187.5757" z="250.95059" h="30"/>
-				</spawn>
-				<!-- Meadow Vanguard Supervisor -->
-				<spawn npc_id="232783" respawn_time="295">
-					<spot x="2772.2927" y="2180.781" z="250.95059" h="30"/>
-				</spawn>
-				<!-- Meadow Vanguard Rider -->
-				<spawn npc_id="233250" respawn_time="295">
-					<spot x="2732.9211" y="2238.3936" z="246.1444" h="43"/>
-					<spot x="2768.2205" y="2271.9082" z="239.36508" h="45"/>
-					<spot x="2791.6814" y="2234.4133" z="248.34328" h="20"/>
-					<spot x="2757.7278" y="2227.8955" z="238.59152" h="30"/>
-				</spawn>
-				<!-- End Sub Camp Balaur Spawns -->
-				
-				<!-- Sub Camp Elyos Spawns -->
-				<!-- Meadow Scout Combatant -->
-				<spawn npc_id="232537" respawn_time="295">
-					<spot x="2468.0286" y="2046.9956" z="249.47015" h="40"/>
-					<spot x="2477.5227" y="2057.9375" z="249.47015" h="40"/>
-					<spot x="2481.0896" y="2043.651" z="249.47015" h="40"/>
-					<spot x="2485.8" y="2052.7119" z="249.47015" h="45"/>
-				</spawn>
-				<!-- Meadow Scout Sentry -->
-				<spawn npc_id="232538" respawn_time="295">
-					<spot x="2477.1814" y="2050.1843" z="249.47015" h="40"/>
-				</spawn>
-				<!-- Meadow Scout Supervisor -->
-				<spawn npc_id="232539" respawn_time="295">
-					<spot x="2471.4946" y="2039.842" z="249.47015" h="40"/>
-				</spawn>
-				<!-- Meadow Scout Envoy -->
-				<spawn npc_id="233212" respawn_time="295">
-					<spot x="2490.3708" y="2124.4731" z="238.15938" h="15"/>
-					<spot x="2455.0522" y="2068.64" z="247.62909" h="27"/>
-					<spot x="2442.4958" y="2101.6438" z="244.53001" h="7"/>
-					<spot x="2494.8914" y="2086.1924" z="245.28888" h="23"/>
-				</spawn>
-				<!-- End Sub Camp Elyos Spawns -->
-				
 			</simple_race>
 		</base_spawn>
 	</spawn_map>

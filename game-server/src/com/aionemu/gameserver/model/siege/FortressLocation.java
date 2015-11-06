@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -23,6 +24,7 @@ public class FortressLocation extends SiegeLocation {
 
 	protected List<SiegeReward> siegeRewards;
 	protected List<SiegeLegionReward> siegeLegionRewards;
+	protected List<SiegeMercenaryZone> siegeMercenaryZones;
 	protected boolean isUnderAssault;
 	/**
 	 * Zone ID - List of mercenaries
@@ -36,6 +38,7 @@ public class FortressLocation extends SiegeLocation {
 		super(template);
 		this.siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
 		this.siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
+		this.siegeMercenaryZones = template.getSiegeMercenaryZones() != null ? template.getSiegeMercenaryZones() : null;
 		this.mercenaries = new HashMap<Integer, List<VisibleObject>>();
 	}
 
@@ -45,6 +48,10 @@ public class FortressLocation extends SiegeLocation {
 
 	public List<SiegeLegionReward> getLegionReward() {
 		return this.siegeLegionRewards;
+	}
+	
+	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
+		return this.siegeMercenaryZones;
 	}
 
 	/**
@@ -88,17 +95,6 @@ public class FortressLocation extends SiegeLocation {
 		for (Player player : getPlayers().values())
 			if (isEnemy(player))
 				TeleportService2.moveToBindLocation(player, true);
-	}
-
-	public void despawnMercenaries(int zoneId) {
-		if (this.mercenaries.containsKey(zoneId)) {
-			List<VisibleObject> mercs = this.mercenaries.get(zoneId);
-			for (VisibleObject merc : mercs)
-				merc.getController().onDelete();
-			mercs.clear();
-			mercs = null;
-			this.mercenaries.remove(zoneId);
-		}
 	}
 
 	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {

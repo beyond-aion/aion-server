@@ -7,10 +7,10 @@ import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.base.Base;
+import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-@SuppressWarnings("rawtypes")
 public class BaseCommand extends AdminCommand {
 
 	private static final String COMMAND_LIST = "list";
@@ -29,13 +29,12 @@ public class BaseCommand extends AdminCommand {
 			return;
 		}
 
-		if (COMMAND_LIST.equalsIgnoreCase(params[0])) {
+		if (COMMAND_LIST.equalsIgnoreCase(params[0]))
 			handleList(player, params);
-		} else if (COMMAND_CAPTURE.equals(params[0])) {
+		else if (COMMAND_CAPTURE.equals(params[0]))
 			capture(player, params);
-		} else if (COMMAND_ASSAULT.equals(params[0])) {
+		else if (COMMAND_ASSAULT.equals(params[0]))
 			assault(player, params);
-		}
 	}
 
 	protected boolean isValidBaseLocationId(Player player, int baseId) {
@@ -64,15 +63,15 @@ public class BaseCommand extends AdminCommand {
 		}
 
 		int baseId = NumberUtils.toInt(params[1]);
-		if (!isValidBaseLocationId(player, baseId)) {
+		if (!isValidBaseLocationId(player, baseId))
 			return;
-		}
 
 		// check if params2 is race
 		Race race = null;
 		try {
 			race = Race.valueOf(params[2].toUpperCase());
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			// ignore
 		}
 
@@ -84,10 +83,11 @@ public class BaseCommand extends AdminCommand {
 		}
 
 		// capture
-		Base base = BaseService.getInstance().getActiveBase(baseId);
+		Base<?> base = BaseService.getInstance().getActiveBase(baseId);
 		if (base != null) {
-			BaseService.getInstance().capture(baseId, race);
-		}
+			base.setLocRace(race);
+			BaseService.getInstance().capture(baseId);
+		}		
 	}
 
 	protected void assault(Player player, String[] params) {
@@ -97,15 +97,15 @@ public class BaseCommand extends AdminCommand {
 		}
 
 		int baseId = NumberUtils.toInt(params[1]);
-		if (!isValidBaseLocationId(player, baseId)) {
+		if (!isValidBaseLocationId(player, baseId))
 			return;
-		}
 
 		// check if params2 is race
 		Race race = null;
 		try {
 			race = Race.valueOf(params[2].toUpperCase());
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			// ignore
 		}
 
@@ -117,19 +117,18 @@ public class BaseCommand extends AdminCommand {
 		}
 
 		// assault
-		Base base = BaseService.getInstance().getActiveBase(baseId);
+		Base<?> base = BaseService.getInstance().getActiveBase(baseId);
 		if (base != null) {
-			if (base.isAttacked()) {
+			if (base.isUnderAssault())
 				PacketSendUtility.sendMessage(player, "Assault already started!");
-			} else {
-				base.spawnAttackers(race);
-			}
+			else
+				base.spawnBySpawnHandler(SpawnHandlerType.ATTACKER, race);
 		}
 	}
 
 	protected void showHelp(Player player) {
-		PacketSendUtility.sendMessage(player, "AdminCommand //base Help\n" + "//base list\n" + "//base capture <Id> <Race (ELYOS,ASMODIANS,NPC)>\n"
-			+ "//base assault <Id> <delaySec>");
+		PacketSendUtility.sendMessage(player, "AdminCommand //base Help\n" + "//base list\n"
+			+ "//base capture <Id> <Race (ELYOS,ASMODIANS,NPC)>\n" + "//base assault <Id> <delaySec>");
 	}
 
 }

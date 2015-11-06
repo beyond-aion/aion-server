@@ -1,187 +1,191 @@
 package com.aionemu.gameserver.services.monsterraid;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
-import com.aionemu.gameserver.services.MonsterRaidService;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Whoop
  */
-public class MonsterRaid extends MonsterRaidLocation {
-
-	private static final Logger log = LoggerFactory.getLogger("[MONSTER_RAID]");
-	private final MonsterRaidBossDeathListener monsterRaidBossDeathListener = new MonsterRaidBossDeathListener(this);
-	private final AtomicBoolean finished = new AtomicBoolean();
+public class MonsterRaid {
+	
+	private final MonsterRaidDeathListener deathListener = new MonsterRaidDeathListener(this);
+	private final AtomicBoolean isFinished = new AtomicBoolean(false);
+	private final AtomicBoolean isStarted = new AtomicBoolean(false);
 	private final MonsterRaidLocation mrl;
-	private boolean bossKilled;
-	private boolean started;
-	private Npc boss;
-	private Npc vortex;
-	private Npc flag;
+	private boolean isBossKilled;
+	private Npc boss, flag, vortex;
 
 	public MonsterRaid(MonsterRaidLocation mrl) {
 		this.mrl = mrl;
 	}
 
-	public final void startMonsterRaid() {
-
-		boolean doubleStart = false;
-
-		synchronized (this) {
-			if (started) {
-				doubleStart = true;
-			} else {
-				started = true;
-			}
-		}
-
-		if (doubleStart) {
-			log.error("Attempt to start monster raid of raid location" + mrl.getLocationId() + " for 2 times!");
-			return;
-		}
-		onMonsterRaidStart();
+	public final void startMonsterRaid() throws RuntimeException {
+		if (isStarted.compareAndSet(false, true))
+			onMonsterRaidStart();
+		else
+			throw new RuntimeException("Attempt to start monster raid twice! ID:" + getLocationId());
 	}
-
-	public final void startMonsterRaid(int locationId) {
-		MonsterRaidService.getInstance().startRaid(locationId);
-	}
-
-	private void onMonsterRaidStart() {
-		log.info("Monster Raid Location with ID#" + mrl.getLocationId() + " was activated!");
-		// Mark Location on Map and spawn vortex
-		spawnLocation();
-
-		ThreadPoolManager.getInstance().schedule(new Runnable() { // TODO: Better Implementation for this latency period
-
-				@Override
-				public void run() {
-					spawnBoss();
-					broadcastUpdate(1402386);
-					MonsterRaidService.getInstance().scheduleStop(mrl.getLocationId());
-				}
-			}, Rnd.get(10, 240) * 60000); // latency period for boss spawn
-	}
-
-	public final void stopMonsterRaid() {
-		if (finished.compareAndSet(false, true))
+	
+	public final void stopMonsterRaid() throws RuntimeException {
+		if (isFinished.compareAndSet(false, true))
 			onMonsterRaidFinish();
 		else
-			log.error("Attempt to stop monster raid of raid location#" + mrl.getLocationId() + " for 2 times!");
+			throw new RuntimeException("Attempt to stop monster raid twice! ID:" + getLocationId());
 	}
 
-	private void onMonsterRaidFinish() {
-		if (isBossKilled())
-			log.info("Monster Raid finished with ID#" + mrl.getLocationId());
-		else
-			log.info("Monster Raid finished without killing boss ID#" + mrl.getLocationId());
+	private final void onMonsterRaidStart() {
+		spawnFlag();
+		broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_01());
+		// TODO: Better Implementation for this latency period
+		ThreadPoolManager.getInstance().schedule(new Runnable() { 
 
-		unregisterMonsterRaidBossListeners();
-		despawnLocation();
-
-		if (isBossKilled())
-			broadcastUpdate(1402387);
+			@Override
+			public void run() {
+				spawnVortex();
+				broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_02());
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
+						
+					@Override
+					public void run() {
+						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
+						ThreadPoolManager.getInstance().schedule(new Runnable() {
+								
+							@Override
+							public void run() {
+								spawnBoss();
+								regDeathListener();
+								broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
+							}
+						}, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce 
+					}
+				}, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
+			}
+		}, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
+	}
+	
+	private final void onMonsterRaidFinish() {
+		rmvDeathListener();
+		despawnVisiualNpcs();
+		if (isBossKilled()) //TODO: Switch for different NPCs
+			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_DIE_03());
+	}
+	
+	private void despawnVisiualNpcs() {
+		if (flag != null)
+			flag.getController().onDelete();
+		if (vortex != null)
+			vortex.getController().onDelete();
+	}
+	
+	private void regDeathListener() {
+		AbstractAI ai = (AbstractAI) getBoss().getAi2();
+		ai.addEventListener(deathListener);
 	}
 
-	public MonsterRaidLocation getMonsterRaidLocation() {
+	private void rmvDeathListener() {
+		AbstractAI ai = (AbstractAI) getBoss().getAi2();
+		ai.removeEventListener(deathListener);
+	}
+	
+	private void spawnBoss() {
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), mrl.getNpcIds().get(Rnd.get(0, mrl.getNpcIds().size() - 1)), 
+			mrl.getX(),	mrl.getY(), mrl.getZ(), mrl.getH());
+		initBoss((Npc) SpawnEngine.spawnObject(temp, 1));
+	}
+	
+	private void spawnFlag() {
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 832819, mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
+		initFlag((Npc) SpawnEngine.spawnObject(temp, 1));
+	}
+	
+	private void spawnVortex() {
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 702550, mrl.getX(), mrl.getY(), mrl.getZ() + 40f, mrl.getH());
+		initVortex((Npc) SpawnEngine.spawnObject(temp, 1));
+	}
+	
+	private void initBoss(Npc npc) throws RuntimeException, NullPointerException {
+		if (npc == null)
+			throw new NullPointerException("No boss found for Monster Raid! ID:" + getLocationId());
+		if (boss != null)
+			throw new RuntimeException("Tried to initialize boss twice for Monster Raid! ID:" + getLocationId());
+		
+		boss = npc;
+	}
+	
+	private void initFlag(Npc npc) throws RuntimeException, NullPointerException {
+		if (npc == null)
+			throw new NullPointerException("No flag found for Monster Raid! ID:" + getLocationId());
+		if (flag != null)
+			throw new RuntimeException("Tried to initialize flag twice for Monster Raid! ID:" + getLocationId());
+		
+		flag = npc;
+	}
+
+	private void initVortex(Npc npc) throws RuntimeException, NullPointerException {
+		if (npc == null)
+			throw new NullPointerException("No vortex found for Monster Raid! ID:" + getLocationId());
+		if (vortex != null)
+			throw new RuntimeException("Tried to initialize vortex twice for Monster Raid! ID:" + getLocationId());
+		
+		vortex = npc;
+	}
+	
+	private void broadcastMessage(SM_SYSTEM_MESSAGE msg) {
+		if (msg != null) {
+			World.getInstance().getWorldMap(mrl.getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+				@Override
+				public void visit(Player player) {
+					PacketSendUtility.sendPacket(player, msg);
+				}
+			});
+		}
+	}
+	
+	public MonsterRaidLocation getLocation() {
 		return mrl;
 	}
-
-	public int getMonsterRaidLocationId() {
+	
+	public int getLocationId() {
 		return mrl.getLocationId();
 	}
 
 	public boolean isBossKilled() {
-		return bossKilled;
+		return isBossKilled;
 	}
 
 	public void setBossKilled(boolean bossKilled) {
-		this.bossKilled = bossKilled;
+		this.isBossKilled = bossKilled;
+	}
+	
+	public boolean isStarted() {
+		return isStarted.get();
+	}
+	
+	public boolean isFinished() {
+		return isFinished.get();
 	}
 
 	public Npc getBoss() {
 		return boss;
 	}
 
-	public void setBoss(Npc boss) {
-		this.boss = boss;
-	}
-
 	public Npc getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Npc flag) {
-		this.flag = flag;
-	}
-
 	public Npc getVortex() {
 		return vortex;
-	}
-
-	public void setVortex(Npc vortex) {
-		this.vortex = vortex;
-	}
-
-	public boolean isStarted() {
-		return started;
-	}
-
-	public boolean isFinished() {
-		return finished.get();
-	}
-
-	public void initVisiualNpcs(Npc flagNpc, Npc vortexNpc) {
-		if (flagNpc == null || vortexNpc == null) {
-			log.error("No flag or vortex available for ID#" + mrl.getLocationId());
-			return;
-		}
-		setVortex(vortexNpc);
-		setFlag(flagNpc);
-	}
-
-	public void initBoss(Npc raidBoss) {
-		if (raidBoss == null) {
-			log.error("No Raid Boss available for ID#" + mrl.getLocationId());
-			return;
-		}
-		setBoss(raidBoss);
-		registerMonsterRaidBossListeners();
-	}
-
-	protected void registerMonsterRaidBossListeners() {
-		AbstractAI ai = (AbstractAI) getBoss().getAi2();
-		ai.addEventListener(monsterRaidBossDeathListener);
-	}
-
-	protected void unregisterMonsterRaidBossListeners() {
-		AbstractAI ai = (AbstractAI) getBoss().getAi2();
-		ai.removeEventListener(monsterRaidBossDeathListener);
-	}
-
-	protected void spawnLocation() {
-		List<Npc> location = MonsterRaidService.getInstance().spawnLocation(mrl);
-		initVisiualNpcs(location.get(0), location.get(1));
-	}
-
-	protected void spawnBoss() {
-		Npc raidBoss = MonsterRaidService.getInstance().spawnBoss(mrl);
-		initBoss(raidBoss);
-	}
-
-	protected void despawnLocation() {
-		MonsterRaidService.getInstance().despawnLocation(this);
-	}
-
-	protected void broadcastUpdate(int msg) {
-		MonsterRaidService.getInstance().broadcastUpdate(mrl.getLocationId(), msg);
 	}
 }

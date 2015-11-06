@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.item.ItemPurificationService;
-import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author FinalNovas
@@ -71,11 +70,6 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
 		if (!ItemPurificationService.decreaseMaterial(player, baseItem, resultItemId))
 			return;
 
-		Item resultItem = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
-
-		ItemPurificationService.upgradeItem(baseItem, resultItem);
-
-		player.getInventory().add(resultItem);
-
+		ItemPurificationService.upgradeItem(player, baseItem, resultItemId);
 	}
 }

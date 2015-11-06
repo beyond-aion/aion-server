@@ -374,10 +374,10 @@
 			<spot x="743.4891" y="251.6112" z="155.7058"/>
 			<spot x="830.3011" y="251.3314" z="155.7058" h="30"/> -->
 		</spawn>
-		<!-- Enchanted Book -->
+		<!-- Enchanted Book
 		<spawn npc_id="702617" respawn_time="295">
 			<spot x="791.3753" y="488.7251" z="143.4752" h="30"/>
-		</spawn>
+		</spawn> -->
 		<!-- Enchanted Book => Dont know function
 		<spawn npc_id="297547" respawn_time="295">
 			<spot x="794.2374" y="274.9965" z="143.1793" h="30"/>

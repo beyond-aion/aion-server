@@ -560,9 +560,6 @@ public class SiegeService {
 		loc.setLegionId(0);
 
 		if (loc instanceof FortressLocation) {
-			for (int i = 1; i <= 4; i++) {
-				((FortressLocation) loc).despawnMercenaries(i);
-			}
 			ArtifactLocation artifact = getFortressArtifacts().get(loc.getLocationId());
 			if (artifact != null) {
 				artifact.setRace(SiegeRace.BALAUR);
@@ -1220,9 +1217,25 @@ public class SiegeService {
 			case 297:
 			case 298:
 				return 6021; // Pradeth Fortress
-				// TODO: Artifacts
+			case 322:
+			case 323:
+			case 358:
+			case 359:
+				return 7011; // Wealhtheow Fortress
+			case 316:
+			case 317:
+			case 368:
+			case 369:
+				return 7012; // Hero's Fall Artifact
+			case 370:
+			case 371:
+				return 7013; // Ashen Glade Artifact
+			case 372:
+			case 373:
+				return 7014; // Molten Cliffs Artifact
+			default:
+				return 0;
 		}
-		return 0;
 	}
 
 	// return RVR Event players list

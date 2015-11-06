@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="600090000">
+		<mercenary_spawn siege_id="7011">
+			<mercenary_race race="ASMODIANS">
+				<mercenary_zone zone="1">
+					<!-- Asmodian Gate -->
+					<spawn npc_id="881576">
+						<spot x="743.0222" y="987.5625" z="151.6663" h="30" static_id="282" />
+					</spawn>
+					<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="882294">
+						<spot x="742.7634" y="992.4141" z="151.6349" h="29" />
+					</spawn>
+					<!-- Squad Sellsword Elite Wizard -->
+					<spawn npc_id="252162">
+						<spot x="745.1368" y="995.6818" z="151.8097" h="27" />
+					</spawn>
+					<!-- Squad Sellsword Elite Knight -->
+					<spawn npc_id="252159">
+						<spot x="740.6548" y="995.5944" z="151.7417" h="26" />
+					</spawn>
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="252096">
+						<spot x="731.2973" y="1001.402" z="161.7245" h="22" />
+						<spot x="732.9233" y="999.7792" z="161.6824" h="23" />
+						<spot x="754.2887" y="1001.440" z="161.6758" h="36" />
+						<spot x="752.7372" y="999.8868" z="161.6934" h="35" />
+					</spawn>
+					<!-- Squad Sellsword Elite Guard -->
+					<spawn npc_id="252160">
+						<spot x="737.5734" y="1002.0289" z="151.8999" h="30"/>
+						<spot x="741.2268" y="1002.1408" z="151.7412" h="30"/>
+						<spot x="745.0297" y="1002.3253" z="151.7297" h="30"/>
+						<spot x="748.3886" y="1002.4016" z="151.9236" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+				<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="882294">
+						<spot x="786.532" y="568.876" z="149.4571" h="30" />
+					</spawn>
+					<!-- Squad Sellsword Elite Knight -->
+					<spawn npc_id="252159">
+						<spot x="790.2296" y="571.7972" z="149.7641" h="30" />
+					</spawn>
+					<!-- Squad Sellsword Elite Wizard -->
+					<spawn npc_id="252162">
+						<spot x="782.7935" y="571.8304" z="149.7676" h="30" />
+					</spawn>
+					<!-- Squad Sellsword Elite Guard -->
+					<spawn npc_id="252160">
+						<spot x="794.5931" y="571.9236" z="149.7774" h="30" />
+						<spot x="777.5931" y="571.9236" z="149.7774" h="30" />
+						<spot x="792.5931" y="574.9236" z="150.0927" h="30" />
+						<spot x="780.5931" y="574.9236" z="150.0927" h="30" />
+					</spawn>					
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="252096">
+						<spot x="776.9061" y="568.2294" z="155.9911" h="30" />
+						<spot x="795.0663" y="567.9197" z="156.1335" h="30" />
+						<spot x="796.1222" y="569.0156" z="156.1622" h="30" />
+						<spot x="777.9111" y="567.1400" z="155.9623" h="30" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="881597">
+						<spot x="792.0927" y="345.2665" z="153.7063" h="30" />
+						<spot x="781.5910" y="345.1367" z="153.7063" h="30" />
+						<spot x="846.1000" y="310.0027" z="150.945" />
+						<spot x="846.1000" y="306.0027" z="150.945" />
+						<spot x="835.0270" y="334.4040" z="150.9452" h="30" />
+						<spot x="839.1000" y="332.0027" z="150.9451" h="15" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="252429">
+						<spot x="710.8726" y="336.4831" z="141.9427" h="30" />
+						<spot x="734.7295" y="353.7129" z="142.2000" h="30" />
+						<spot x="863.1551" y="336.2787" z="141.9427" h="30" />
+						<spot x="839.7415" y="353.7909" z="142.2000" h="30" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="5">
+					<!-- Asmodian Gate -->
+					<spawn npc_id="252314">
+						<spot x="557.7072" y="672.1194" z="155.1548" h="30" static_id="258" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702594">
+						<spot x="561.6317" y="678.7725" z="154.7683" h="33" static_id="95" />
+						<spot x="551.3811" y="677.4409" z="154.7683" h="33" static_id="339" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702596">
+						<spot x="563.1490" y="668.2875" z="153.6732" h="33" static_id="132" />
+						<spot x="553.0129" y="666.8915" z="154.7683" h="33" static_id="368" />
+					</spawn>
+					<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="882294">
+						<spot x="556.7574" y="677.0147" z="152.899" h="40" />
+					</spawn>
+					<!-- Squad Sellsword Elite Wizard -->
+					<spawn npc_id="252162">
+						<spot x="558.7602" y="680.1813" z="153.2384" h="42" />
+					</spawn>
+					<!-- Squad Sellsword Elite Knight -->
+					<spawn npc_id="252159">
+						<spot x="554.0403" y="679.6777" z="153.2467" h="40" />
+					</spawn>
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="252096">
+						<spot x="565.6049" y="677.0205" z="159.7440" h="44" />
+						<spot x="566.5676" y="678.3794" z="159.7727" h="45" />
+						<spot x="548.7882" y="674.0416" z="159.5728" h="36" />
+						<spot x="547.4217" y="675.2021" z="159.6016" h="35" />
+					</spawn>
+					<!-- Squad Sellsword Elite Guard -->
+					<spawn npc_id="252160">
+						<spot x="563.4042" y="684.8525" z="154.2821" h="33" />
+						<spot x="561.2513" y="682.7953" z="153.8029" h="33" />
+						<spot x="550.0325" y="681.0508" z="153.5574" h="33" />
+						<spot x="547.1648" y="682.6011" z="153.5438" h="33" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="6">
+					<!-- Asmodian Gate -->
+					<spawn npc_id="252311">
+						<spot x="1074.875" y="707.1246" z="186.1949" h="30" static_id="540" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702600">
+						<spot x="1071.165" y="704.1262" z="186.8796" h="25" static_id="508" />
+						<spot x="1080.466" y="702.2718" z="186.8796" h="25" static_id="92" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702598">
+						<spot x="1072.753" y="711.3151" z="186.8796" h="25" static_id="544" />
+						<spot x="1082.035" y="709.353" z="186.8796" h="25" static_id="506" />
+					</spawn>				
+					<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="882294">
+						<spot x="1077.710" y="711.2315" z="185.132" h="26" />
+					</spawn>
+					<!-- Squad Sellsword Elite Wizard -->
+					<spawn npc_id="252162">
+						<spot x="1080.475" y="713.1005" z="185.125" h="28" />
+					</spawn>
+					<!-- Squad Sellsword Elite Knight -->
+					<spawn npc_id="252159">
+						<spot x="1075.688" y="713.9315" z="185.1257" h="26" />
+					</spawn>
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="252096">
+						<spot x="1068.065" y="712.3135" z="192.0457" h="25" />
+						<spot x="1068.761" y="711.0140" z="192.0169" h="25" />
+						<spot x="1086.853" y="708.8810" z="192.2168" h="36" />
+						<spot x="1085.635" y="707.8438" z="192.1880" h="36" />
+					</spawn>
+					<!-- Squad Sellsword Elite Guard -->
+					<spawn npc_id="252160">
+						<spot x="1071.6477" y="713.1342" z="185.2500" h="26"/>
+						<spot x="1083.8339" y="710.6494" z="185.2396" h="25"/>
+						<spot x="1075.9670" y="712.1632" z="185.1250" h="26"/>
+						<spot x="1079.7019" y="711.4377" z="185.1250" h="27"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="7">
+					<!-- Asmodian Satchel Charge -->
+					<spawn npc_id="882294">
+						<spot x="1164.5757" y="474.18225" z="173.25" h="42"/>
+					</spawn>
+					<!-- Squad Sellsword Elite Wizard -->
+					<spawn npc_id="252162">
+						<spot x="1168.5667" y="469.22586" z="173.25" h="43"/>
+					</spawn>
+					<!-- Squad Sellsword Elite Knight -->
+					<spawn npc_id="252159">
+						<spot x="1159.2097" y="470.03497" z="173.29721" h="43"/>
+						<spot x="1169.4458" y="477.74832" z="173.25" h="44"/>
+					</spawn>
+					<!-- Asmodian Sellsword Elite Ranger -->
+					<spawn npc_id="252096">
+						<spot x="1172.6761" y="472.28436" z="173.20773" h="43"/>
+						<spot x="1164.4886" y="465.24167" z="173.2026" h="44"/>
+					</spawn>
+					<!-- Squad Sellsword Elite Guard -->
+					<spawn npc_id="252160">
+						<spot x="1158.9540" y="475.65082" z="173.25" h="44"/>
+						<spot x="1163.6431" y="479.67297" z="173.25" h="43"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+			<mercenary_race race="ELYOS">
+				<mercenary_zone zone="1">
+					<!-- Elyos Gate -->
+					<spawn npc_id="881575">
+						<spot x="743.0222" y="987.5625" z="151.6663" h="30" static_id="282" />
+					</spawn>
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="882293">
+						<spot x="742.7634" y="992.4141" z="151.6349" h="29" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Magus -->
+					<spawn npc_id="252157">
+						<spot x="745.1368" y="995.6818" z="151.8097" h="27" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Templar -->
+					<spawn npc_id="252154">
+						<spot x="740.6548" y="995.5944" z="151.7417" h="26" />
+					</spawn>
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="252095">
+						<spot x="731.2973" y="1001.402" z="161.7245" h="22" />
+						<spot x="732.9233" y="999.7792" z="161.6824" h="23" />
+						<spot x="754.2887" y="1001.440" z="161.6758" h="36" />
+						<spot x="752.7372" y="999.8868" z="161.6934" h="35" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Cavalier -->
+					<spawn npc_id="252155">
+						<spot x="737.5734" y="1002.0289" z="151.8999" h="30"/>
+						<spot x="741.2268" y="1002.1408" z="151.7412" h="30"/>
+						<spot x="745.0297" y="1002.3253" z="151.7297" h="30"/>
+						<spot x="748.3886" y="1002.4016" z="151.9236" h="30"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="2">
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="882293">
+						<spot x="786.532" y="568.876" z="149.4571" h="30" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Templar -->
+					<spawn npc_id="252154">
+						<spot x="790.2296" y="571.7972" z="149.7641" h="30" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Magus -->
+					<spawn npc_id="252157">
+						<spot x="782.7935" y="571.8304" z="149.7676" h="30" />
+					</spawn>									
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="252095">
+						<spot x="776.9061" y="568.2294" z="155.9911" h="30" />
+						<spot x="795.0663" y="567.9197" z="156.1335" h="30" />
+						<spot x="796.1222" y="569.0156" z="156.1622" h="30" />
+						<spot x="777.9111" y="567.1400" z="155.9623" h="30" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Cavalier -->
+					<spawn npc_id="252155">
+						<spot x="794.5931" y="571.9236" z="149.7774" h="30" />
+						<spot x="777.5931" y="571.9236" z="149.7774" h="30" />
+						<spot x="792.5931" y="574.9236" z="150.0927" h="30" />
+						<spot x="780.5931" y="574.9236" z="150.0927" h="30" />
+					</spawn>	
+				</mercenary_zone>
+				<mercenary_zone zone="3">
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="881596">
+						<spot x="792.0927" y="345.2665" z="153.7063" h="30" />
+						<spot x="781.5910" y="345.1367" z="153.7063" h="30" />
+						<spot x="846.1000" y="310.0027" z="150.945" />
+						<spot x="846.1000" y="306.0027" z="150.945" />
+						<spot x="835.0270" y="334.4040" z="150.9452" h="30" />
+						<spot x="839.1000" y="332.0027" z="150.9451" h="15" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="4">
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="252428">
+						<spot x="710.8726" y="336.4831" z="141.9427" h="30" />
+						<spot x="734.7295" y="353.7129" z="142.2000" h="30" />
+						<spot x="863.1551" y="336.2787" z="141.9427" h="30" />
+						<spot x="839.7415" y="353.7909" z="142.2000" h="30" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="5">
+					<!-- Elyos Gate -->
+					<spawn npc_id="252313">
+						<spot x="557.7072" y="672.1194" z="155.1548" h="30" static_id="258" />
+					</spawn> 
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702593">
+						<spot x="561.6317" y="678.7725" z="154.7683" h="33" static_id="95" />
+						<spot x="551.3811" y="677.4409" z="154.7683" h="33" static_id="339" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702595">
+						<spot x="563.1490" y="668.2875" z="153.6732" h="33" static_id="132" />
+						<spot x="553.0129" y="666.8915" z="154.7683" h="33" static_id="368" />
+					</spawn>
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="882293">
+						<spot x="556.7574" y="677.0147" z="152.899" h="40" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Magus -->
+					<spawn npc_id="252157">
+						<spot x="558.7602" y="680.1813" z="153.2384" h="42" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Templar -->
+					<spawn npc_id="252154">
+						<spot x="554.0403" y="679.6777" z="153.2467" h="40" />
+					</spawn>
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="252095">
+						<spot x="565.6049" y="677.0205" z="159.7440" h="44" />
+						<spot x="566.5676" y="678.3794" z="159.7727" h="45" />
+						<spot x="548.7882" y="674.0416" z="159.5728" h="36" />
+						<spot x="547.4217" y="675.2021" z="159.6016" h="35" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Cavalier -->
+					<spawn npc_id="252155">
+						<spot x="563.4042" y="684.8525" z="154.2821" h="33" />
+						<spot x="561.2513" y="682.7953" z="153.8029" h="33" />
+						<spot x="550.0325" y="681.0508" z="153.5574" h="33" />
+						<spot x="547.1648" y="682.6011" z="153.5438" h="33" />
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="6">
+					<!-- Elyos Gate -->
+					<spawn npc_id="252310">
+						<spot x="1074.875" y="707.1246" z="186.1949" h="30" static_id="540" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702599">
+						<spot x="1071.165" y="704.1262" z="186.8796" h="25" static_id="508" />
+						<spot x="1080.466" y="702.2718" z="186.8796" h="25" static_id="92" />
+					</spawn>
+					<!-- Gate Teleport Device -->
+					<spawn npc_id="702597">
+						<spot x="1072.753" y="711.3151" z="186.8796" h="25" static_id="544" />
+						<spot x="1082.035" y="709.353" z="186.8796" h="25" static_id="506" />
+					</spawn>				
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="882293">
+						<spot x="1077.710" y="711.2315" z="185.132" h="26" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Magus -->
+					<spawn npc_id="252157">
+						<spot x="1080.475" y="713.1005" z="185.125" h="28" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Templar -->
+					<spawn npc_id="252154">
+						<spot x="1075.688" y="713.9315" z="185.1257" h="26" />
+					</spawn>
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="252095">
+						<spot x="1068.065" y="712.3135" z="192.0457" h="25" />
+						<spot x="1068.761" y="711.0140" z="192.0169" h="25" />
+						<spot x="1086.853" y="708.8810" z="192.2168" h="36" />
+						<spot x="1085.635" y="707.8438" z="192.1880" h="36" />
+					</spawn>
+					<!-- Garrison Sellsword Elite Cavalier -->
+					<spawn npc_id="252155">
+						<spot x="1071.6477" y="713.1342" z="185.2500" h="26"/>
+						<spot x="1083.8339" y="710.6494" z="185.2396" h="25"/>
+						<spot x="1075.9670" y="712.1632" z="185.1250" h="26"/>
+						<spot x="1079.7019" y="711.4377" z="185.1250" h="27"/>
+					</spawn>
+				</mercenary_zone>
+				<mercenary_zone zone="7">
+					<!-- Elyos Satchel Charge -->
+					<spawn npc_id="882293">
+						<spot x="1164.5757" y="474.18225" z="173.25" h="42"/>
+					</spawn>
+					<!-- Garrison Sellsword Elite Magus -->
+					<spawn npc_id="252157">
+						<spot x="1168.5667" y="469.22586" z="173.25" h="43"/>
+					</spawn>
+					<!-- Garrison Sellsword Elite Templar -->
+					<spawn npc_id="252154">
+						<spot x="1159.2097" y="470.03497" z="173.29721" h="43"/>
+						<spot x="1169.4458" y="477.74832" z="173.25" h="44"/>
+					</spawn>
+					<!-- Elyos Sellsword Elite Archer -->
+					<spawn npc_id="252095">
+						<spot x="1172.6761" y="472.28436" z="173.20773" h="43"/>
+						<spot x="1164.4886" y="465.24167" z="173.2026" h="44"/>
+					</spawn>
+					<!-- Garrison Sellsword Elite Cavalier -->
+					<spawn npc_id="252155">
+						<spot x="1158.9540" y="475.65082" z="173.25" h="44"/>
+						<spot x="1163.6431" y="479.67297" z="173.25" h="43"/>
+					</spawn>
+				</mercenary_zone>
+			</mercenary_race>
+		</mercenary_spawn>
+	</spawn_map>
+</spawns>

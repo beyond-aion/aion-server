@@ -646,15 +646,15 @@
 	<!-- SHUGO IMPERIAL TOMB -->
 	<!-- Shugo Imperial Tomb Exit -->
 	<portal_use npc_id="831118">
-		<portal_path loc_id="3005601" race="ELYOS"/>
-		<portal_path loc_id="3005602" race="ASMODIANS"/>
+		<portal_path loc_id="1100105" race="ELYOS"/>
+		<portal_path loc_id="1200107" race="ASMODIANS"/>
 	</portal_use>
 	<!-- END SHUGO IMPERIAL TOMB -->
 
 	<!-- RUKIBUKI CIRCUS TROUPE -->
 	<portal_use npc_id="831576">
-		<portal_path loc_id="3011601" race="ELYOS"/>
-		<portal_path loc_id="3011602" race="ASMODIANS"/>
+		<portal_path loc_id="1100105" race="ELYOS"/>
+		<portal_path loc_id="1200107" race="ASMODIANS"/>
 	</portal_use>
 	<!-- END RUKIBUKI CIRCUS TROUPE -->
 	<!-- OTHER INSTANCES -->
@@ -741,8 +741,8 @@
 	</portal_use>
 	<!-- Adma Stronghold Exit Asmodians / Elyos -->
 	<portal_use npc_id="730166">
-		<portal_path loc_id="3201304" race="ELYOS"/>
-		<portal_path loc_id="3201305" race="ASMODIANS"/>
+		<portal_path loc_id="2100609" race="ELYOS"/>
+		<portal_path loc_id="2200503" race="ASMODIANS"/>
 	</portal_use>
 	<!-- Adma Stronghold (Wreck Of Unstable Entrance) -->
 	<portal_use npc_id="730175">
@@ -750,8 +750,8 @@
 	</portal_use>
 	<!-- Adma Stronghold (Wreck Of Unstable Exit) -->
 	<portal_use npc_id="730176">
-		<portal_path loc_id="3201304" race="ELYOS"/>
-		<portal_path loc_id="3201307" race="ASMODIANS"/>
+		<portal_path loc_id="2100609" race="ELYOS"/>
+		<portal_path loc_id="2200503" race="ASMODIANS"/>
 	</portal_use>
 	<!-- Alquimia Entrance -->
 	<portal_use npc_id="730110">
@@ -818,15 +818,15 @@
 	</portal_use>
 	<!-- Sauro Supply base Exit -->
 	<portal_use npc_id="801967">
-		<portal_path loc_id="3011301" race="ELYOS"/>
-		<portal_path loc_id="3011302" race="ASMODIANS"/>
+		<portal_path loc_id="6001011" race="ELYOS"/>
+		<portal_path loc_id="6001012" race="ASMODIANS"/>
 	</portal_use>
 	<!-- DANUAR MYSTICARIUM -->
-	<!-- Danuar mysticarium entrance -->
+	<!-- Ide Mine Beta Entrance -->
 	<portal_use npc_id="701572">
 		<portal_path loc_id="6000710"/>
 	</portal_use>
-	<!-- Danuar mysticarium entrance -->
+	<!-- Ide Mine Beta Entrance -->
 	<portal_use npc_id="701573">
 		<portal_path loc_id="6000710"/>
 	</portal_use>
@@ -1431,22 +1431,23 @@
 	<!-- DANUAR RELIQUARY -->
 	<!-- Danuar Reliquary Exit -->
 	<portal_use npc_id="730843">
-		<portal_path loc_id="3011101"/>
+		<portal_path loc_id="6000909"/>
 	</portal_use>
 	<!-- DANUAR SANCTUARY -->
 	<!-- Danuar Sanctuary Exit  -->
 	<portal_use npc_id="701876">
-		<portal_path loc_id="3011404"/>
+		<portal_path loc_id="6000607" race="ELYOS"/>
+		<portal_path loc_id="6000608" race="ASMODIANS"/>
 	</portal_use>
 	<!-- IDGEL RESEARCH CENTER -->
 	<!-- Idgel Research Center exit -->
 	<portal_use npc_id="730730">
-		<portal_path loc_id="3005301"/>
+		<portal_path loc_id="6000714"/>
 	</portal_use>
 	<!-- VOID CUBE -->
 	<!-- Void Cube Exit -->
 	<portal_use npc_id="730729">
-		<portal_path loc_id="3005801"/>
+		<portal_path loc_id="6000713"/>
 	</portal_use>
 	<!-- NIGHTMARE CIRCUS -->
 	<!-- Nightmare Circus Exit -->
@@ -1457,13 +1458,14 @@
 	<!-- OPHIDIAN BRIDGE -->
 	<!-- Ophidian Bridge Exit -->
 	<portal_use npc_id="730868">
-		<portal_path loc_id="6000711"/>
+		<portal_path loc_id="6000605" race="ELYOS"/>
+		<portal_path loc_id="6000606" race="ASMODIANS"/>
 	</portal_use>
 	<!-- END OPHIDIAN BRIDGE-->
 	<!-- INFINITY SHARD -->
 	<!-- Infinity Shard Exit -->
 	<portal_use npc_id="730842">
-		<portal_path loc_id="3008001"/>
+		<portal_path loc_id="6001010"/>
 	</portal_use>
 	<!-- END INFINITY SHARD -->
 	<!-- KAMAR BATTLE -->
@@ -1482,13 +1484,100 @@
 	<!-- END KAMAR BATTLE -->
 	<!-- Linkgate Foundry Exit Elyos -->
 	<portal_use npc_id="702338">
-        <portal_path loc_id="6001009" race="ELYOS"/>
+        <portal_path loc_id="6001002" race="ELYOS"/>
     </portal_use>	
 	<!-- Linkgate Foundry Exit Asmodians -->
 	<portal_use npc_id="702389">
-        <portal_path loc_id="6001010" race="ASMODIANS"/>
+        <portal_path loc_id="6001003" race="ASMODIANS"/>
     </portal_use>
-
+	<!-- New 4.7 Wealhtheow Keep -->
+	<portal_use npc_id="250188">
+		<portal_path loc_id="6000919"/>
+	</portal_use>
+	<portal_use npc_id="250189">
+		<portal_path loc_id="6000919"/>
+	</portal_use>
+	<portal_use npc_id="250190">
+		<portal_path loc_id="6000918"/>
+	</portal_use>
+	<portal_use npc_id="250191">
+		<portal_path loc_id="6000918"/>
+	</portal_use>
+	<portal_use npc_id="250192">
+		<portal_path loc_id="6000917"/>
+	</portal_use>
+	<portal_use npc_id="250193">
+		<portal_path loc_id="6000917"/>
+	</portal_use>
+	<portal_use npc_id="250194">
+		<portal_path loc_id="6000916"/>
+	</portal_use>
+	<portal_use npc_id="250195">
+		<portal_path loc_id="6000916"/>
+	</portal_use>
+	<portal_use npc_id="250196">
+		<portal_path loc_id="6000915"/>
+	</portal_use>
+	<portal_use npc_id="250197">
+		<portal_path loc_id="6000915"/>
+	</portal_use>
+	<portal_use npc_id="250198">
+		<portal_path loc_id="6000914"/>
+	</portal_use>
+	<portal_use npc_id="250199">
+		<portal_path loc_id="6000914"/>
+	</portal_use>
+	<portal_use npc_id="250200">
+		<portal_path loc_id="6000913"/>
+	</portal_use>
+	<portal_use npc_id="250201">
+		<portal_path loc_id="6000913"/>
+	</portal_use>
+	<portal_use npc_id="250202">
+		<portal_path loc_id="6000912"/>
+	</portal_use>
+	<portal_use npc_id="250203">
+		<portal_path loc_id="6000912"/>
+	</portal_use>
+	<portal_use npc_id="250204">
+		<portal_path loc_id="6000911"/>
+	</portal_use>
+	<portal_use npc_id="250205">
+		<portal_path loc_id="6000911"/>
+	</portal_use>
+	<portal_use npc_id="250206">
+		<portal_path loc_id="6000910"/>
+	</portal_use>
+	<portal_use npc_id="250207">
+		<portal_path loc_id="6000910"/>
+	</portal_use>
+	<!-- Kaldor North Gate Teleport Devices -->
+	<portal_use npc_id="702593">
+		<portal_path loc_id="6000922"/>
+	</portal_use>
+	<portal_use npc_id="702594">
+		<portal_path loc_id="6000922"/>
+	</portal_use>
+	<portal_use npc_id="702595">
+		<portal_path loc_id="6000923"/>
+	</portal_use>
+	<portal_use npc_id="702596">
+		<portal_path loc_id="6000923"/>
+	</portal_use>
+	<!-- Kaldor South Gate Teleport Devices -->
+	<portal_use npc_id="702597">
+		<portal_path loc_id="6000924"/>
+	</portal_use>
+	<portal_use npc_id="702598">
+		<portal_path loc_id="6000924"/>
+	</portal_use>
+	<portal_use npc_id="702599">
+		<portal_path loc_id="6000925"/>
+	</portal_use>
+	<portal_use npc_id="702600">
+		<portal_path loc_id="6000925"/>
+	</portal_use>
+	
 	<!-- **************** PORTAL DIALOG **************** -->
 	<!-- ************ INSTANCES ************ -->
 	
@@ -1685,11 +1774,19 @@
 	<!-- 4.7 Port NPCs -->	
 	<!-- Wisplight Abbey Teleport Statue -->
 	<portal_dialog npc_id="209676">
-        <portal_path dialog="10000" loc_id="1300900" race="ELYOS"/>
+		<portal_path dialog="10000" loc_id="1300900" race="ELYOS">
+			<portal_req min_level="10">
+				<item_req item_id="164000335" item_count="1"/>
+			</portal_req>
+		</portal_path>
     </portal_dialog>
 	<!-- Fatebound Abbey Teleport Statue -->
     <portal_dialog npc_id="209677">
-        <portal_path dialog="10000" loc_id="1400100" race="ASMODIANS"/>
+        <portal_path dialog="10000" loc_id="1400100" race="ASMODIANS">
+			<portal_req min_level="10">
+				<item_req item_id="164000336" item_count="1"/>
+			</portal_req>
+		</portal_path>
     </portal_dialog>
 	<!-- Sanctum Teleport Statue -->
     <portal_dialog npc_id="804687">
@@ -1826,7 +1923,7 @@
 	<!-- 4.0 INSTANCES -->
 	<!-- INFINITY SHARD -->
 	<!-- Infinity Shard Entrance -->
-	<portal_dialog npc_id="730840">
+	<portal_dialog npc_id="730840" teleport_dialog_id="4762">
 		<portal_path dialog="10000" loc_id="3008000" player_count="12" instance="true">
 			<portal_req min_level="65"/>
 		</portal_path>
@@ -2658,6 +2755,70 @@
 	</portal_dialog>
 	<!-- END SARPAN TELEPORTER -->
 	
+	<!-- WISPLIGHT ABBEY -->
+	<!-- Atreia Defense Portal -->
+	<portal_dialog npc_id="804677" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="2100410"/> <!-- Draupnir Cave -->
+		<portal_path dialog="10001" loc_id="2100607"/> <!-- Theobomos Lab -->
+		<portal_path dialog="10002" loc_id="2100608"/> <!-- Adma Stronghold -->
+		<portal_path dialog="10003" loc_id="2100411"/> <!-- Dark Poeta -->
+	</portal_dialog>
+	<!-- Balaurea Advance Portal -->
+	<portal_dialog npc_id="804678" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="2100516"/> <!-- Taloc's Hollow -->
+		<portal_path dialog="10001" loc_id="2100517"/> <!-- Udas Temple -->
+		<portal_path dialog="10002" loc_id="2100518"/> <!-- Lower Udas Temple -->
+		<portal_path dialog="10003" loc_id="6000103"/> <!-- Beshmundir Temple -->
+	</portal_dialog>
+	<!-- Balaurea Invasion Portal -->
+	<portal_dialog npc_id="804679" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="6000219"/> <!-- Aturam Sky Fortress -->
+		<portal_path dialog="10001" loc_id="6000352"/> <!-- Rentus Base -->
+		<portal_path dialog="10002" loc_id="6000353"/> <!-- Tiamat Stronghold -->
+		<portal_path dialog="10003" loc_id="6000353"/> <!-- Dragon Lord's Refuge -->
+	</portal_dialog>
+	<!-- Balaurea Frontier Portal -->
+	<portal_dialog npc_id="804680" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="6001004"/> <!-- Sauro Supply Base -->
+		<portal_path dialog="10001" loc_id="6001006"/> <!-- Illuminary Obelisk -->
+		<portal_path dialog="10002" loc_id="6001008"/> <!-- Linkgate Foundry -->
+		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
+		<portal_path dialog="10004" loc_id="6000717"/> <!-- Danuar Sanctuary -->
+	</portal_dialog>
+	<!-- END WISPLIGHT ABBEY -->
+	
+	<!-- FATEBOUND ABBEY -->
+	<!-- Atreia Defense Portal -->
+	<portal_dialog npc_id="804682" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="2200409"/> <!-- Draupnir Cave -->
+		<portal_path dialog="10001" loc_id="2200501"/> <!-- Theobomos Lab -->
+		<portal_path dialog="10002" loc_id="2200502"/> <!-- Adma Stronghold -->
+		<portal_path dialog="10003" loc_id="2200410"/> <!-- Dark Poeta -->
+	</portal_dialog>
+	<!-- Balaurea Advance Portal -->
+	<portal_dialog npc_id="804683" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="2200716"/> <!-- Taloc's Hollow -->
+		<portal_path dialog="10001" loc_id="2200717"/> <!-- Udas Temple -->
+		<portal_path dialog="10002" loc_id="2200718"/> <!-- Lower Udas Temple -->
+		<portal_path dialog="10003" loc_id="6000103"/> <!-- Beshmundir Temple -->
+	</portal_dialog>
+	<!-- Balaurea Invasion Portal -->
+	<portal_dialog npc_id="804684" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="6000219"/> <!-- Aturam Sky Fortress -->
+		<portal_path dialog="10001" loc_id="6000352"/> <!-- Rentus Base -->
+		<portal_path dialog="10002" loc_id="6000354"/> <!-- Tiamat Stronghold -->
+		<portal_path dialog="10003" loc_id="6000354"/> <!-- Dragon Lord's Refuge -->
+	</portal_dialog>
+	<!-- Balaurea Frontier Portal -->
+	<portal_dialog npc_id="804685" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="6001005"/> <!-- Sauro Supply Base -->
+		<portal_path dialog="10001" loc_id="6001007"/> <!-- Illuminary Obelisk -->
+		<portal_path dialog="10002" loc_id="6001009"/> <!-- Linkgate Foundry -->
+		<portal_path dialog="10003" loc_id="6000718"/> <!-- Ophidan Bridge -->
+		<portal_path dialog="10004" loc_id="6000718"/> <!-- Danuar Sanctuary -->
+	</portal_dialog>
+	<!-- END FATEBOUND ABBEY -->
+	
 	<!-- Poeta Teleporter -->
 	<portal_dialog npc_id="730531">
 		<portal_path dialog="10000" loc_id="2100100"/>
@@ -2747,7 +2908,7 @@
 	</portal_scroll>
 	<!-- New 4.3 Scroll -->
 	<portal_scroll name="LDF5A_L_RETURN_AREA_1">
-		<portal_path loc_id="6005001" race="ELYOS"/>
+		<portal_path loc_id="6005026" race="ELYOS"/>
 	</portal_scroll>
 	<!-- End 4.3 Scroll -->
 	<!-- SCROLL TELEPORTS ASMODIANS -->
@@ -2761,7 +2922,7 @@
 		<portal_path loc_id="2200300" race="ASMODIANS"/>
 	</portal_scroll>
 	<portal_scroll name="DF2A_RETURN_AREA">
-		<portal_path loc_id="2200500" race="ASMODIANS"/>
+		<portal_path loc_id="2200504" race="ASMODIANS"/>
 	</portal_scroll>
 	<portal_scroll name="DF2_RETURN_AREA_1">
 		<portal_path loc_id="2200200" race="ASMODIANS"/>
@@ -2780,19 +2941,19 @@
 	</portal_scroll>
 	<!-- New 4.3 Scroll -->
 	<portal_scroll name="LDF5A_D_RETURN_AREA_1">
-		<portal_path loc_id="6005002" race="ASMODIANS"/>
+		<portal_path loc_id="6005027" race="ASMODIANS"/>
 	</portal_scroll>
 	<portal_scroll name="LDF5_UNDER_RETURN_AREA_1">
-		<portal_path loc_id="6007000" race="ELYOS"/>
+		<portal_path loc_id="6000700" race="ELYOS"/>
 	</portal_scroll>
 	<portal_scroll name="LDF5_UNDER_RETURN_AREA_2">
-		<portal_path loc_id="6007000" race="ASMODIANS"/>
+		<portal_path loc_id="6000700" race="ASMODIANS"/>
 	</portal_scroll>
 	<portal_scroll name="LDF5B_RETURN_AREA_1">
-		<portal_path loc_id="6006000" race="ELYOS"/>
+		<portal_path loc_id="6000600" race="ELYOS"/>
 	</portal_scroll>
 	<portal_scroll name="LDF5B_RETURN_AREA_2">
-		<portal_path loc_id="6006000" race="ASMODIANS"/>
+		<portal_path loc_id="6000600" race="ASMODIANS"/>
 	</portal_scroll>
 	<!-- End 4.3 Scroll -->
 	<!-- SCROLL TELEPORTS ALL -->
@@ -2808,5 +2969,11 @@
 	</portal_scroll>
 	<portal_scroll name="LDF4_ADVANCE_RETURN_AREA_D">
 		<portal_path loc_id="6001001"/>
+	</portal_scroll>
+	<portal_scroll name="ARENA_L_CLOBBY_RETURN01">
+		<portal_path loc_id="1300900"/>
+	</portal_scroll>
+	<portal_scroll name="ARENA_D_CLOBBY_RETURN01">
+		<portal_path loc_id="1400100"/>
 	</portal_scroll>
 </portal_templates2>

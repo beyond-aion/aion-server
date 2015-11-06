@@ -169,7 +169,13 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="ATTACKER"/>
 			<xs:enumeration value="BOSS"/>
+			<xs:enumeration value="FLAG"/>
+			<xs:enumeration value="GUARDIAN"/>
+			<xs:enumeration value="MERCHANT"/>			
+			<xs:enumeration value="OUTRIDER"/>
+			<xs:enumeration value="OUTRIDER_ENHANCED"/>
 			<xs:enumeration value="RIFT"/>
+			<xs:enumeration value="SENTINEL"/>
 			<xs:enumeration value="STATIC"/>
 		</xs:restriction>
 	</xs:simpleType>

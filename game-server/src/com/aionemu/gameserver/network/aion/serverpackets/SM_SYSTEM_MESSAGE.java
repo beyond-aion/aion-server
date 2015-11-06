@@ -22177,6 +22177,76 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
 		return new SM_SYSTEM_MESSAGE(1402031, itemName1);
 	}
+	
+	/**
+	 * The Beritra Legion's Invasion Corridor has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_01() {
+		return new SM_SYSTEM_MESSAGE(1402383);
+	}
+	
+	/**
+	 * The Devil Unit has infiltrated through the Invasion Corridor.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_02() {
+		return new SM_SYSTEM_MESSAGE(1402384);
+	}
+	
+	/**
+	 * The Devil Unit is preparing for its return.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402385);
+	}
+	
+	/**
+	 * The Devil Unit has returned through the Invasion Corridor.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_04() {
+		return new SM_SYSTEM_MESSAGE(1402386);
+	}
+	
+	/**
+	 * The Devil Unit's Magno has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_01() {
+		return new SM_SYSTEM_MESSAGE(1402387);
+	}
+	
+	/**
+	 * The Devil Unit's Tarmat Beta has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_02() {
+		return new SM_SYSTEM_MESSAGE(1402388);
+	}
+	
+	/**
+	 * The Devil Unit's Initiator has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_03() {
+		return new SM_SYSTEM_MESSAGE(1402389);
+	}
+	
+	/**
+	 * The Devil Unit's Tumon has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_04() {
+		return new SM_SYSTEM_MESSAGE(1402390);
+	}
+	
+	/**
+	 * The Devil Unit's Raedon Beta has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_05() {
+		return new SM_SYSTEM_MESSAGE(1402391);
+	}
+	
+	/**
+	 * The Devil Unit's Benoid has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_06() {
+		return new SM_SYSTEM_MESSAGE(1402392);
+	}
 
 	/**
 	 * A battle is raging in the West Picket.

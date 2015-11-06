@@ -9,13 +9,13 @@ import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 public class BaseLocation {
 
 	protected BaseTemplate template;
-	protected Race race = Race.NPC;
-
-	public BaseLocation() {
-	}
+	protected BaseType type;
+	protected Race race;
 
 	public BaseLocation(BaseTemplate template) {
 		this.template = template;
+		this.type = template.getType();
+		this.race = Race.NPC;
 	}
 
 	public int getId() {
@@ -24,6 +24,10 @@ public class BaseLocation {
 
 	public int getWorldId() {
 		return template.getWorldId();
+	}
+	
+	public BaseType getType() {
+		return type;
 	}
 
 	public Race getRace() {

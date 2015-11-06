@@ -30,13 +30,15 @@
 	<siege_location id="46" type="INDUN" world="210030000" name_id="0"/>
 	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="801821" occupy_count="2" siege_duration="3000" influence="9">
 		<artifact_activation itemid="188020000" count="1" skill="12078" cd="7200"/>
-		<siege_reward top="12" itemid="186000242" m_count="3" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
+		<siege_reward top="11" itemid="186000242" m_count="4" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="22" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="50" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188053296" m_count="1"/>
 		<legion_reward itemid="122001663" m_count="1"/>
+		<merc_zone id="1" costs="36" cooldown="900" msg_id="1402451" announce_id="1402448"/>
+		<merc_zone id="2" costs="36" cooldown="900" msg_id="1402452" announce_id="1402449"/>
 	</siege_location>
 	<siege_location id="1012" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020000" count="3" skill="12092" cd="1800"/>
@@ -151,13 +153,16 @@
 	</siege_location>
 	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="801831" occupy_count="2" siege_duration="3600" influence="7">
 		<artifact_activation itemid="188020000" count="1" skill="12152" cd="5400"/>
-		<siege_reward top="12" itemid="186000242" m_count="3" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="188052762" m_count="1"/>
 		<legion_reward itemid="188052114" m_count="1"/>
 		<legion_reward itemid="122001629" m_count="1"/>
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402176" announce_id="1402173"/>
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402177" announce_id="1402174"/>
+		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402178" announce_id="1402175"/>
 	</siege_location>
 	<siege_location id="1222" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
@@ -170,13 +175,16 @@
 	</siege_location>
 	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="801833" occupy_count="2" siege_duration="3600" influence="7">
 		<artifact_activation itemid="188020000" count="1" skill="12153" cd="5400"/>
-		<siege_reward top="12" itemid="186000242" m_count="3" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="188052763" m_count="1"/>
 		<legion_reward itemid="188052115" m_count="1"/>
 		<legion_reward itemid="122001630" m_count="1"/>
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402182" announce_id="1402179"/>
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402183" announce_id="1402180"/>
+		<merc_zone id="3" costs="8" cooldown="900" msg_id="1402184" announce_id="1402181"/>
 	</siege_location>
 	<siege_location id="1232" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
@@ -186,13 +194,15 @@
 	</siege_location>
 	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="801835" occupy_count="2" siege_duration="3600" influence="7">
 		<artifact_activation itemid="188020000" count="1" skill="12154" cd="5400"/>
-		<siege_reward top="12" itemid="186000242" m_count="3" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="188052764" m_count="1"/>
 		<legion_reward itemid="188052116" m_count="1"/>
 		<legion_reward itemid="122001631" m_count="1"/>
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402188" announce_id="1402185"/>
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402189" announce_id="1402186"/>
 	</siege_location>
 	<siege_location id="1242" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
@@ -232,13 +242,17 @@
 	</siege_location>
 	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="802577" occupy_count="2" siege_duration="2400" influence="6">
 		<artifact_activation itemid="188020001" count="3" skill="12155" cd="7200"/>
-		<siege_reward top="12" itemid="188053164" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="40" itemid="188053165" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="40" itemid="188053166" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="100" itemid="188053167" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188053164" m_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" itemid="188053165" m_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="33" itemid="188053166" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="188053167" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052119" m_count="1"/>
-		<legion_reward itemid="122001655" m_count="1"/>
+		<legion_reward itemid="188053136" m_count="1"/>
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402301" announce_id="1402292"/>
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402305" announce_id="1402296"/>
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402302" announce_id="1402293"/>
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402304" announce_id="1402294"/>
 	</siege_location>
 	<siege_location id="2012" type="ARTIFACT" world="210050000">
 		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
@@ -251,13 +265,17 @@
 	</siege_location>
 	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="802581" occupy_count="2" siege_duration="2400" influence="6">
 		<artifact_activation itemid="188020001" count="2" skill="12156" cd="7200"/>
-		<siege_reward top="12" itemid="188053159" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="40" itemid="188053160" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="40" itemid="188053161" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="100" itemid="188053162" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188053159" m_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" itemid="188053160" m_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="33" itemid="188053161" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="188053162" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052118" m_count="1"/>
-		<legion_reward itemid="122001654" m_count="1"/>
+		<legion_reward itemid="188053136" m_count="1"/>
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402319" announce_id="1402310"/>
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402323" announce_id="1402314"/>
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402320" announce_id="1402311"/>
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402322" announce_id="1402312"/>
 	</siege_location>
 	<siege_location id="2022" type="ARTIFACT" world="210050000">
 		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
@@ -270,13 +288,17 @@
 	</siege_location>
 	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="802585" occupy_count="2" siege_duration="2400" influence="6">
 		<artifact_activation itemid="188020001" count="2" skill="12157" cd="7200"/>
-		<siege_reward top="12" itemid="188053171" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="40" itemid="188053172" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="40" itemid="188053173" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="100" itemid="188053174" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188053171" m_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" itemid="188053172" m_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="33" itemid="188053173" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="188053174" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
-		<legion_reward itemid="122001655" m_count="1"/>
+		<legion_reward itemid="188053136" m_count="1"/>
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402337" announce_id="1402328"/>
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402341" announce_id="1402332"/>
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402338" announce_id="1402329"/>
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402339" announce_id="1402330"/>
 	</siege_location>
 	<siege_location id="3012" type="ARTIFACT" world="220070000">
 		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
@@ -289,13 +311,17 @@
 	</siege_location>
 	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="802589" occupy_count="2" siege_duration="2400" influence="6">
 		<artifact_activation itemid="188020001" count="3" skill="12158" cd="7200"/>
-		<siege_reward top="12" itemid="188053167" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="40" itemid="188053168" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="40" itemid="188053169" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="100" itemid="188053170" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188053167" m_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" itemid="188053168" m_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="33" itemid="188053169" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="188053170" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052120" m_count="1"/>
-		<legion_reward itemid="122001655" m_count="1"/>
+		<legion_reward itemid="188053136" m_count="1"/>
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402355" announce_id="1402346"/>
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402359" announce_id="1402350"/>
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402356" announce_id="1402347"/>
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402358" announce_id="1402348"/>
 	</siege_location>
 	<siege_location id="3022" type="ARTIFACT" world="220070000">
 		<artifact_activation itemid="188020002" count="2" skill="12049" cd="1800"/>
@@ -310,9 +336,10 @@
 	<siege_location id="3111" type="BOSSRAID_DARK" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
 	<!-- 3.0 -->
 	<siege_location id="4011" type="SOURCE" world="600030000" name_id="804123" siege_duration="1800">
-		<siege_reward top="24" itemid="186000147" m_count="2"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
+		<siege_reward top="11" itemid="186000147" m_count="2"/>
+		<siege_reward top="22" itemid="186000147" m_count="1"/>
+		<siege_reward top="33" itemid="186000147" m_count="1"/>
+		<siege_reward top="200" itemid="186000096" m_count="2"/>
 	</siege_location>
 	<siege_location id="4012" type="ARTIFACT" world="600030000">
 		<artifact_activation itemid="188020001" count="1" skill="12124" cd="300"/>
@@ -321,9 +348,10 @@
 		<artifact_activation itemid="188020001" count="1" skill="12125" cd="300"/>
 	</siege_location>
 	<siege_location id="4021" type="SOURCE" world="600030000" name_id="804127" siege_duration="1800">
-		<siege_reward top="24" itemid="186000147" m_count="2"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
+		<siege_reward top="11" itemid="186000147" m_count="2"/>
+		<siege_reward top="22" itemid="186000147" m_count="1"/>
+		<siege_reward top="33" itemid="186000147" m_count="1"/>
+		<siege_reward top="200" itemid="186000096" m_count="2"/>
 	</siege_location>
 	<siege_location id="4022" type="ARTIFACT" world="600030000">
 		<artifact_activation itemid="188020001" count="1" skill="12126" cd="300"/>
@@ -332,9 +360,10 @@
 		<artifact_activation itemid="188020001" count="1" skill="12127" cd="300"/>
 	</siege_location>
 	<siege_location id="4031" type="SOURCE" world="600030000" name_id="804131" siege_duration="1800">
-		<siege_reward top="24" itemid="186000147" m_count="2"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
+		<siege_reward top="11" itemid="186000147" m_count="2"/>
+		<siege_reward top="22" itemid="186000147" m_count="1"/>
+		<siege_reward top="33" itemid="186000147" m_count="1"/>
+		<siege_reward top="200" itemid="186000096" m_count="2"/>
 	</siege_location>
 	<siege_location id="4032" type="ARTIFACT" world="600030000">
 		<artifact_activation itemid="188020001" count="1" skill="12128" cd="300"/>
@@ -343,9 +372,10 @@
 		<artifact_activation itemid="188020001" count="1" skill="12129" cd="300"/>
 	</siege_location>
 	<siege_location id="4041" type="SOURCE" world="600030000" name_id="804135" siege_duration="1800">
-		<siege_reward top="24" itemid="186000147" m_count="2"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
-		<siege_reward top="16" itemid="186000147" m_count="1"/>
+		<siege_reward top="11" itemid="186000147" m_count="2"/>
+		<siege_reward top="22" itemid="186000147" m_count="1"/>
+		<siege_reward top="33" itemid="186000147" m_count="1"/>
+		<siege_reward top="200" itemid="186000096" m_count="2"/>
 	</siege_location>
 	<siege_location id="4042" type="ARTIFACT" world="600030000">
 		<artifact_activation itemid="188020001" count="1" skill="12130" cd="300"/>
@@ -363,90 +393,110 @@
 		<artifact_activation itemid="188020001" count="1" skill="12134" cd="300"/>
 	</siege_location>
 	<siege_location id="5011" type="FORTRESS" world="600050000" name_id="807221" occupy_count="2" siege_duration="2400" influence="7">
-		<siege_reward top="12" itemid="188052363" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="188052364" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="188052365" m_count="1" gp_win="200" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188052363" m_count="1" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="22" itemid="188052364" m_count="1" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="33" itemid="188052365" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="188052366" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052376" m_count="1"/>
 		<legion_reward itemid="188052377" m_count="1"/>
 		<legion_reward itemid="190000079" m_count="1"/>
+		<merc_zone id="1" costs="16" cooldown="900" msg_id="1401864" announce_id="1401828"/>
+		<merc_zone id="2" costs="8" cooldown="900" msg_id="1401865" announce_id="1401829"/>
+		<merc_zone id="3" costs="16" cooldown="900" msg_id="1401866" announce_id="1401830"/>
 	</siege_location>
 	<siege_location id="6011" type="FORTRESS" world="600060000" name_id="807225" occupy_count="2" siege_duration="2400" influence="7">
-		<siege_reward top="12" itemid="188052367" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="188052368" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="188052369" m_count="1" gp_win="200" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188052367" m_count="1" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="22" itemid="188052368" m_count="1" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="33" itemid="188052369" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="188052370" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052378" m_count="1"/>
 		<legion_reward itemid="188052379" m_count="1"/>
 		<legion_reward itemid="187000118" m_count="1"/>
+		<merc_zone id="1" costs="14" cooldown="900" msg_id="1401867" announce_id="1401831"/>
+		<merc_zone id="2" costs="10" cooldown="900" msg_id="1401868" announce_id="1401832"/>
+		<merc_zone id="3" costs="10" cooldown="900" msg_id="1401869" announce_id="1401833"/>
 	</siege_location>
 	<siege_location id="6021" type="FORTRESS" world="600060000" name_id="807229" occupy_count="2" siege_duration="2400" influence="7">
-		<siege_reward top="12" itemid="188052371" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="188052372" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="188052373" m_count="1" gp_win="200" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188052371" m_count="1" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="22" itemid="188052372" m_count="1" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="33" itemid="188052373" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="188052374" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052380" m_count="1"/>
 		<legion_reward itemid="188052381" m_count="1"/>
 		<legion_reward itemid="125003501" m_count="1"/>
+		<merc_zone id="1" costs="12" cooldown="900" msg_id="1401870" announce_id="1401834"/>
+		<merc_zone id="2" costs="20" cooldown="900" msg_id="1401871" announce_id="1401835"/>
+		<merc_zone id="3" costs="12" cooldown="900" msg_id="1401872" announce_id="1401836"/>
 	</siege_location>
 	<!-- Wealhtheow's Keep -->
-	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="808285" occupy_count="2" owner_gp="1000" siege_duration="3600" influence="10">
-	    <siege_reward top="12" itemid="188053140" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="30" itemid="188053141" m_count="1" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="50" itemid="188053142" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="200" itemid="188053143" m_count="1" gp_win="100" gp_defeat="50"/>
-		<legion_reward itemid="186000242" m_count="1"/>
+	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="808285" occupy_count="2" siege_duration="3600" influence="10">
+	    <siege_reward top="11" itemid="188053140" m_count="1" gp_win="400" gp_defeat="200"/>
+		<siege_reward top="30" itemid="188053141" m_count="1" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="60" itemid="188053142" m_count="1" gp_win="250" gp_defeat="100"/>
+		<siege_reward top="200" itemid="188053143" m_count="1" gp_win="200" gp_defeat="50"/>
+		<legion_reward itemid="186000242" m_count="4"/>
 		<legion_reward itemid="182215545" m_count="1"/>
 		<legion_reward itemid="185000215" m_count="1"/>
 		<legion_reward itemid="188053138" m_count="1"/>
-		<legion_reward itemid="188053139" m_count="1"/>		
-		<legion_reward itemid="188052121" m_count="1"/>
+		<legion_reward itemid="188053139" m_count="1"/>	
+		<legion_reward itemid="169610149" m_count="1"/>
+		<merc_zone id="1" costs="29" cooldown="900" msg_id="1402494" announce_id="1402487"/>
+		<merc_zone id="2" costs="29" cooldown="900" msg_id="1402495" announce_id="1402488"/>
+		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402492" announce_id="1402485"/>
+		<merc_zone id="4" costs="12" cooldown="900" msg_id="1402493" announce_id="1402486"/>
+		<merc_zone id="5" costs="39" cooldown="900" msg_id="1402496" announce_id="1402489"/>
+		<merc_zone id="6" costs="39" cooldown="900" msg_id="1402497" announce_id="1402490"/>
+		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491"/>
 	</siege_location>
 	<!-- Hero's Fall -->
-	<siege_location id="7012" type="ARTIFACT" world="600090000" influence="1">
+	<siege_location id="7012" type="ARTIFACT" world="600090000">
 		<artifact_activation itemid="188020002" count="4" skill="12159" repeat_count="5" repeat_interval="3" cd="900"/>
 	</siege_location>
 	<!-- Ashen Glade -->
-	<siege_location id="7013" type="ARTIFACT" world="600090000" influence="1">
-		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="600"/>
+	<siege_location id="7013" type="ARTIFACT" world="600090000">
+		<artifact_activation itemid="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600"/>
 	</siege_location>
 	<!-- Molten Cliffs -->
-	<siege_location id="7014" type="ARTIFACT" world="600090000" influence="1">
-		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="600"/>
+	<siege_location id="7014" type="ARTIFACT" world="600090000">
+		<artifact_activation itemid="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600"/>
 	</siege_location>
 	<!-- Panesterra -->
-	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="808317" siege_duration="3600">
-		<siege_reward top="12" itemid="188053144" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="18" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="30" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="40" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="808317" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="808347" siege_duration="3600">
-		<siege_reward top="12" itemid="188053145" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="18" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="30" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="40" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="808347" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="808349" siege_duration="3600">
-		<siege_reward top="12" itemid="188053146" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="18" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="30" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="40" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="808349" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="808351" siege_duration="3600">
-		<siege_reward top="12" itemid="188053147" m_count="1" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="18" itemid="186000242" m_count="2" gp_win="250" gp_defeat="75"/>
-		<siege_reward top="30" itemid="186000242" m_count="1" gp_win="200" gp_defeat="50"/>
-		<siege_reward top="40" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="808351" siege_duration="3600" influence="8">
+		<siege_reward top="10" itemid="186000096" m_count="1"/>
+		<siege_reward top="10" itemid="188052121" m_count="1"/>
+		<siege_reward top="20" itemid="186000096" m_count="1"/>
+		<siege_reward top="30" itemid="186000096" m_count="1"/>
+		<siege_reward top="40" itemid="186000096" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>

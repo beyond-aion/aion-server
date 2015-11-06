@@ -33,6 +33,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author M@xx, IlBuono, xTz, Rolandas
@@ -176,6 +177,10 @@ public class PetService {
 			for (;;) {
 				Item useItem = items.get(0);
 				ItemActions itemActions = useItem.getItemTemplate().getActions();
+				
+				if (!isPetItemUseAllowed(player, useItem))
+				   return;
+				
 				ItemUseLimits limit = new ItemUseLimits();
 				int useDelay = player.getItemCooldown(useItem.getItemTemplate()) / 3;
 				if (useDelay < 3000)
@@ -232,6 +237,17 @@ public class PetService {
 			pet.getCommonData().setIsBuffing(false);
 			PacketSendUtility.sendPacket(player, new SM_PET(1, false));
 		}
+	}
+	
+	private boolean isPetItemUseAllowed(Player player, Item item) {
+	   //TODO: more restrictions?
+	   if (item.getItemTemplate().hasAreaRestriction()) {
+			ZoneName restriction = item.getItemTemplate().getUseArea();
+			if (restriction != null && !player.isInsideItemUseZone(restriction)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void activateLoot(Player player, boolean activate) {

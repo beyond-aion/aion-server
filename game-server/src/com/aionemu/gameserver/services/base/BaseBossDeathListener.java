@@ -12,11 +12,11 @@ import com.aionemu.gameserver.services.BaseService;
  * @author Source
  * @modified Rolandas
  */
-public class BossDeathListener extends OnDieEventListener {
+public class BaseBossDeathListener extends OnDieEventListener {
 
 	private final Base<?> base;
 
-	public BossDeathListener(Base<?> base) {
+	public BaseBossDeathListener(Base<?> base) {
 		this.base = base;
 	}
 
@@ -31,15 +31,17 @@ public class BossDeathListener extends OnDieEventListener {
 		if (winner instanceof Creature) {
 			Creature kill = (Creature) winner;
 			if (kill.getRace().isPlayerRace())
-				base.setRace(kill.getRace());
-		} else if (winner instanceof TemporaryPlayerTeam) {
+				base.setLocRace(kill.getRace());
+		}
+		else if (winner instanceof TemporaryPlayerTeam) {
 			TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
 			if (team.getRace().isPlayerRace())
-				base.setRace(team.getRace());
-		} else
-			base.setRace(Race.NPC);
+				base.setLocRace(team.getRace());
+		}
+		else
+			base.setLocRace(Race.NPC);
 
-		BaseService.getInstance().capture(base.getId(), base.getRace());
+		BaseService.getInstance().capture(base.getId());
 	}
 
 	@Override
@@ -47,3 +49,4 @@ public class BossDeathListener extends OnDieEventListener {
 	}
 
 }
+

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.siegeservice;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javolution.util.FastTable;
 
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -47,6 +49,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class FortressSiege extends Siege<FortressLocation> {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
+	private final Map<Integer, MercenaryLocation> activeMercenaryLocs = new ConcurrentHashMap<>();
 	private final AbyssPointsListener addAPListener = new AbyssPointsListener(this);
 	private int oldLegionId;
 
@@ -77,6 +80,19 @@ public class FortressSiege extends Siege<FortressLocation> {
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
+		initMercenaryZones();
+	}
+	
+	private final void initMercenaryZones() {
+		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
+			return;
+		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); //can be null if not implemented
+		if (mercs == null)
+			return;
+		for (SiegeMercenaryZone zone : mercs) {
+			MercenaryLocation mLoc = new MercenaryLocation(zone, getSiegeLocation().getRace(), getSiegeLocationId());
+				activeMercenaryLocs.put(zone.getId(), mLoc);
+		}
 	}
 
 	@Override
@@ -155,18 +171,15 @@ public class FortressSiege extends Siege<FortressLocation> {
 		try {
 			// Players gain buffs on capture of some fortresses
 			applyWorldBuffs(winner.getSiegeRace(), getSiegeLocation().getRace());
-			for (int i = 1; i <= 4; i++) {
-				getSiegeLocation().despawnMercenaries(i);
-			}
 		} catch (Exception e) {
-			log.error("Error while despawning mercenaries/applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
+			log.error("Error while applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
 		}
 		// Set new fortress and artifact owner race
 		getSiegeLocation().setRace(winner.getSiegeRace());
 		getArtifact().setRace(winner.getSiegeRace());
 
 		// reset occupy count
-		getSiegeLocation().setOccupiedCount(0);
+		getSiegeLocation().setOccupiedCount(1);
 
 		if (this.oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
@@ -317,14 +330,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	protected void giveRewardsToLegion() {
 		try {
-			// We do not give rewards if fortress was captured for first time
-			if (isBossKilled()) {
-				if (LoggingConfig.LOG_SIEGE)
-					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :"
-						+ getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress was captured(siege boss killed).");
-				return;
-			}
-
 			// Legion with id 0 = not exists?
 			if (getSiegeLocation().getLegionId() == 0) {
 				if (LoggingConfig.LOG_SIEGE)
@@ -397,7 +402,11 @@ public class FortressSiege extends Siege<FortressLocation> {
 			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
 			List<Integer> topPlayersIds = new FastTable<>();
 			topPlayersIds.addAll(playerAbyssPoints.keySet());
-			SiegeResult result = isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER;
+			SiegeResult result;
+			if (isBossKilled())
+				result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
+			else
+				result = isWinner ? SiegeResult.DEFENDER : SiegeResult.EMPTY;
 
 			int i = 0;
 			List<SiegeReward> playerRewards = getSiegeLocation().getReward();
@@ -408,16 +417,16 @@ public class FortressSiege extends Siege<FortressLocation> {
 					Integer playerId = topPlayersIds.get(i);
 					PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 					++rewardedPC;
-
-					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
-						topGrade.getMedalCount(), 0);
+					if (result.equals(SiegeResult.OCCUPY) || result.equals(SiegeResult.DEFENDER))
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), 
+							topGrade.getItemId(), topGrade.getMedalCount(), 0);
 
 					if (getSiegeLocation().hasValidGpRewards())
 						GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while calculating rewards for fortress siege.", e);
+			log.error("[SIEGE] Error while calculating rewards for fortress siege.", e);
 		}
 	}
 
@@ -439,4 +448,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		return getArtifact() != null;
 	}
 
+	public MercenaryLocation getMercenaryLocationByZoneId(int zoneId) {
+		return activeMercenaryLocs.get(zoneId);
+	}
 }

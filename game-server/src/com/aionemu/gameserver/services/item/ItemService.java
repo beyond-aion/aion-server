@@ -134,22 +134,18 @@ public class ItemService {
 		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		if (sourceItem.hasManaStones()) {
-			for (ManaStone manaStone : sourceItem.getItemStones()) {
+			for (ManaStone manaStone : sourceItem.getItemStones())
 				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
-			}
 		}
-		if (sourceItem.getGodStone() != null) {
-			newItem.addGodStone(sourceItem.getGodStone().getItemId());
-		}
-		if (sourceItem.getEnchantLevel() > 0) {
+		if (sourceItem.getGodStone() != null)
+			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());
+		if (sourceItem.getEnchantLevel() > 0)
 			newItem.setEnchantLevel(sourceItem.getEnchantLevel());
-		}
-		if (sourceItem.getTempering() > 0) {
+		if (sourceItem.getTempering() > 0)
 			newItem.setTempering(sourceItem.getTempering());
-		}
-		if (sourceItem.isSoulBound()) {
+		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
-		}
+		
 		newItem.setBonusNumber(sourceItem.getBonusNumber());
 		newItem.setRandomStats(sourceItem.getRandomStats());
 		newItem.setRandomCount(sourceItem.getRandomCount());
@@ -295,24 +291,6 @@ public class ItemService {
 	public static boolean checkRandomTemplate(int randomItemId) {
 		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(randomItemId);
 		return template != null;
-	}
-
-	/**
-	 * @param object
-	 * @param unk
-	 * @param unk1
-	 * @param unk2
-	 */
-	public static Item newItem(int resultItemId, int count, Object object, int unk, int unk1, int unk2) {
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(resultItemId);
-		if (count <= 0 || itemTemplate == null) {
-			return null;
-		}
-		Preconditions.checkNotNull(itemTemplate, "No item with id " + resultItemId);
-
-		Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
-
-		return newItem;
 	}
 
 }
