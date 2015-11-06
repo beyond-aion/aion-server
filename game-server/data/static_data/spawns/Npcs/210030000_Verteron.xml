@@ -2218,7 +2218,7 @@
 		</spawn>
 		<!-- Spatalos -->
 		<spawn npc_id="203098" respawn_time="295">
-			<spot x="1725.12" y="1493.89" z="121.883" h="120"/>
+			<spot x="1725.12" y="1493.89" z="121.883" h="60"/>
 		</spawn>
 		<!-- Spiral Lobnite -->
 		<spawn npc_id="210264" respawn_time="295">
