@@ -40,6 +40,11 @@ public class Preview extends PlayerCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
+		if (player.getLevel() < 10) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT);
+			return;
+		}
+
 		if (params.length == 0) {
 			sendInfo(player);
 			return;
