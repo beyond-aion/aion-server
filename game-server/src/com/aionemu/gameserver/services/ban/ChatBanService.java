@@ -1,80 +1,86 @@
 package com.aionemu.gameserver.services.ban;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Future;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javolution.util.FastMap;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ViAl
+ * @reworked Neon
  */
 public class ChatBanService {
 
-	private static final Logger log = LoggerFactory.getLogger(ChatBanService.class);
 	/**
-	 * accountId - expiration time
+	 * List for player chat bans <player, expiration time>. Resets on server restart.
 	 */
-	private static final Map<Integer, Long> bannedAccounts = new HashMap<Integer, Long>();
+	private static final Map<Integer, Long> chatBans = new FastMap<Integer, Long>().atomic();
 
-	public static void onLogin(final Player player) {
-		try {
-			Long expireTime = bannedAccounts.get(player.getPlayerAccount().getId());
-			if (expireTime == null)
-				return;
-			Long now = System.currentTimeMillis();
-			if (now > expireTime) {
-				deleteBan(player.getPlayerAccount().getId());
-				return;
-			}
-			Long restTime = expireTime - now;
-			banPlayer(player, restTime);
-		} catch (Exception e) {
-			log.error("Error while login, player " + player.getName(), e);
-		}
+	/**
+	 * Bans a player from all chats.
+	 * 
+	 * @param player
+	 * @param duration
+	 *          Ban time in milliseconds.
+	 */
+	public static void banPlayer(Player player, long duration) {
+		if (GSConfig.ENABLE_CHAT_SERVER)
+			ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), duration);
+		chatBans.put(player.getObjectId(), System.currentTimeMillis() + duration);
+		registerUnban(player, duration);
 	}
 
-	public static void banPlayer(final Player player, Long time) {
-		player.setGagged(true);
-		Future<?> task = player.getController().getTask(TaskId.GAG);
-		if (task != null)
-			player.getController().cancelTask(TaskId.GAG);
+	public static void unbanPlayer(Player player) {
+		player.getController().cancelTask(TaskId.GAG);
+		if (GSConfig.ENABLE_CHAT_SERVER)
+			ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), 0);
+		if (chatBans.remove(player.getObjectId()) != null && player.isOnline())
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_CHAT_NOW);
+	}
+
+	private static void registerUnban(Player player, long delay) {
 		player.getController().addTask(TaskId.GAG, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				player.setGagged(false);
-				PacketSendUtility.sendMessage(player, "You have been ungagged");
+				unbanPlayer(player);
 			}
-		}, time));
-
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), time);
-
-		PacketSendUtility.sendMessage(player, "You are gagged for " + (time / 1000 / 60) + " minutes.");
+		}, delay));
 	}
 
-	public static void unbanPlayer(Player player) {
-		player.setGagged(false);
-		Future<?> task = player.getController().getTask(TaskId.GAG);
-		if (task != null)
-			player.getController().cancelTask(TaskId.GAG);
-		PacketSendUtility.sendMessage(player, "You have been ungagged");
+	public static boolean isBanned(Player player) {
+		return getBanMinutes(player) > 0;
 	}
 
-	public static synchronized void deleteBan(Integer accountId) {
-		bannedAccounts.remove(accountId);
-	}
+	/**
+	 * Checks time left for the players ban.<br>
+	 * If ban is over, this method automatically unbans the player.<br>
+	 * If not and unban task is missing (e.g. due to logout), an unban task will be started.
+	 * 
+	 * @param player
+	 * @return The remaining ban time in minutes. Only returns 0 if ban time is really over.
+	 */
+	public static int getBanMinutes(Player player) {
+		Long expireTime = chatBans.get(player.getObjectId());
+		if (expireTime == null)
+			return 0;
 
-	public static synchronized void saveBan(Integer accountId, Long expireTime) {
-		bannedAccounts.put(accountId, expireTime);
+		long millisLeft = expireTime - System.currentTimeMillis();
+		if (millisLeft <= 0) {
+			unbanPlayer(player);
+			return 0;
+		}
+
+		if (!player.getController().hasTask(TaskId.GAG))
+			registerUnban(player, millisLeft);
+
+		return (int) Math.max(0, Math.ceil(millisLeft / 60000f));
 	}
 }

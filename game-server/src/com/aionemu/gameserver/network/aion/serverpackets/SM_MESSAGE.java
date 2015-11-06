@@ -31,7 +31,9 @@ public class SM_MESSAGE extends AionServerPacket {
 
 	/**
 	 * Maximum valid message line count for a single chat message packet.<br>
-	 * The client does not always correctly display more than this number of lines.
+	 * The client does not always correctly display more than this number of lines.<br>
+	 * Actual line limit depends on the message size, not sure how they exactly correlate. Usually a shorter overall message results in more allowed
+	 * lines.
 	 */
 	public static final short MESSAGE_LINE_LIMIT = 15;
 

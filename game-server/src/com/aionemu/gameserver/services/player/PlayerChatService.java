@@ -3,14 +3,10 @@ package com.aionemu.gameserver.services.player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Source
@@ -30,22 +26,8 @@ public class PlayerChatService {
 	public static boolean isFlooding(final Player player) {
 		player.setLastMessageTime();
 
-		if (player.floodMsgCount() > SecurityConfig.FLOOD_MSG) {
-			player.setGagged(true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLOODING);
-			player.getController().cancelTask(TaskId.GAG);
-			player.getController().addTask(TaskId.GAG, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					player.setGagged(false);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAN_CHAT_NOW);
-				}
-
-			}, 2 * 60000L));
-
+		if (player.floodMsgCount() > SecurityConfig.FLOOD_MSG)
 			return true;
-		}
 
 		return false;
 	}

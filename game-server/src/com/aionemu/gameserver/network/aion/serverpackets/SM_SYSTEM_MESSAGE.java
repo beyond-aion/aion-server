@@ -12086,7 +12086,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are not allowed to chat for %0 minutes for the following reason(s).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_ENABLE_NO_CHAT(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_ENABLE_NO_CHAT(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300808, value0);
 	}
 
@@ -12122,7 +12122,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are currently unable to chat. There are %0 minute(s) left in your ban.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_IN_NO_CHAT(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_IN_NO_CHAT(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300814, value0);
 	}
 

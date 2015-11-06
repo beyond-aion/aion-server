@@ -103,7 +103,6 @@ import com.aionemu.gameserver.services.SurveyService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WarehouseService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
-import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -424,7 +423,6 @@ public final class PlayerEnterWorldService {
 
 			DisputeLandService.getInstance().onLogin(player);
 			client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
-			ChatBanService.onLogin(player);
 
 			// Intro message
 			if (welcomeInfo != null && !welcomeInfo.isEmpty())
