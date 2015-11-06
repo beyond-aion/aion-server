@@ -19,55 +19,6 @@ import com.aionemu.gameserver.network.aion.SystemMessageId;
  */
 public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 
-	private static DescriptionId calculateNameId(int id) {
-		return new DescriptionId(id * 2 + 1);
-	}
-
-	/**
-	 * Purification System
-	 */
-	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402397, new Object[] { nameId });
-	}
-
-	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
-		return new SM_SYSTEM_MESSAGE(1402579, new Object[] { nameId, nameId2 });
-	}
-
-	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP = new SM_SYSTEM_MESSAGE(1402571);
-
-	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA = new SM_SYSTEM_MESSAGE(1402572);
-
-	/**
-	 * Atreian Passport
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE = new SM_SYSTEM_MESSAGE(1402601);
-
-	/**
-	 * Amplification System
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402657, new Object[] { nameId });
-	}
-
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402650, new Object[] { nameId });
-	}
-
-	/**
-	 * %0 cannot be used to enchant an amplified item.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402661, new Object[] { nameId });
-	}
-
-	/**
-	 * %0 successfully enchanted to level %1. The %2 skill has been added.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
-		return new SM_SYSTEM_MESSAGE(1402662, new Object[] { targetName, level, skillName });
-	}
-
 	/**
 	 * You inflicted %num1 damage on %0.
 	 */
@@ -22249,6 +22200,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Purification System
+	 */
+	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402397, nameId);
+	}
+
+	/**
 	 * A battle is raging in the West Picket.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_CHIEF_V01() {
@@ -22430,6 +22388,47 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
 
+	/**
+	 * Purification System
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP = new SM_SYSTEM_MESSAGE(1402571);
+
+	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA = new SM_SYSTEM_MESSAGE(1402572);
+
+	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
+		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
+	}
+
+	/**
+	 * Atreian Passport
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE = new SM_SYSTEM_MESSAGE(1402601);
+
+	/**
+	 * Amplification System
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402650, nameId);
+	}
+
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402657, nameId);
+	}
+
+	/**
+	 * %0 cannot be used to enchant an amplified item.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402661, nameId);
+	}
+
+	/**
+	 * %0 successfully enchanted to level %1. The %2 skill has been added.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
+		return new SM_SYSTEM_MESSAGE(1402662, targetName, level, skillName);
+	}
+
 	private final int code;
 	private final Object[] params;
 	private boolean npcShout = false;
@@ -22499,5 +22498,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public int getId() {
 		return code;
+	}
+
+	private static DescriptionId calculateNameId(int id) {
+		return new DescriptionId(id * 2 + 1);
 	}
 }
