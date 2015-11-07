@@ -4,12 +4,13 @@ import java.util.List;
 
 import javolution.util.FastTable;
 
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.aionemu.gameserver.geoEngine.collision.bih.BIHNodeEx.BIHStackData;
 import com.jme3.math.Matrix4f;
 import com.jme3.math.Vector3f;
 
 /**
- * Modified replication of {@link com.jme3.util.TempVars TempVars}, needed for {@link com.jme3.collision.bih.BIHNode BIHNode}.
+ * Modified replication of {@link com.jme3.util.TempVars TempVars}, needed for {@link BIHNodeEx} and {@link BIHTreeEx}.
  * 
  * @author Neon (based on MrPoke & Rolandas' work)
  * @see com.jme3.util.TempVars
@@ -40,6 +41,7 @@ class BIHTempVars {
 	protected final Vector3f vect4 = new Vector3f();
 	protected final Vector3f vect5 = new Vector3f();
 	protected final Matrix4f tempMat4 = new Matrix4f();
+	protected final CollisionResultsEx collisionResults = new CollisionResultsEx();
 	protected final float[] bihSwapTmp = new float[9];
 	protected final List<BIHStackData> bihStack = new FastTable<BIHStackData>();
 
