@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
 
 /**
  * System message packet.
@@ -22693,14 +22692,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		this.params = params;
 	}
 
-	public SM_SYSTEM_MESSAGE(SystemMessageId sm, Object... params) {
-		this.code = sm.getId();
-		this.params = params;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(textColorId);

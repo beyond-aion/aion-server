@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -231,7 +230,7 @@ public class _20093FalsityIsAWayOfLife extends QuestHandler {
 				if (var > 0 && var < 13) {
 					qs.setQuestVarById(0, 0);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
 						.getName()));
 					return true;
 				}
@@ -249,7 +248,7 @@ public class _20093FalsityIsAWayOfLife extends QuestHandler {
 			if (var > 0 && var < 13) {
 				qs.setQuestVar(0);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
 					.getName()));
 				return true;
 			}
