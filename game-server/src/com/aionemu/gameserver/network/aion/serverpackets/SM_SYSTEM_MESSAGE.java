@@ -11348,22 +11348,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Current users: %0
 	 */
-	public static SM_SYSTEM_MESSAGE STR_LIST_USER(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300641, value0);
+	public static SM_SYSTEM_MESSAGE STR_LIST_USER(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300641, num0);
 	}
 
 	/**
 	 * The server is due to shut down in %0 seconds. Please quit the game.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_SERVER_SHUTDOWN(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300642, value0);
+	public static SM_SYSTEM_MESSAGE STR_SERVER_SHUTDOWN(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300642, num0);
 	}
 
 	/**
 	 * Please do not flood chat. Blocked for %0m.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CHAT_DISABLED_FOR(String value0m) {
-		return new SM_SYSTEM_MESSAGE(1300643, value0m);
+	public static SM_SYSTEM_MESSAGE STR_CHAT_DISABLED_FOR(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300643, num0);
 	}
 
 	/**

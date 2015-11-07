@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -55,7 +56,7 @@ public class CM_CRAFT extends AionClientPacket {
 		if (player == null || !player.isSpawned())
 			return;
 		// disallow crafting in shutdown progress..
-		if (player.getController().isInShutdownProgress())
+		if (GameServer.isShuttingDown())
 			return;
 
 		// 129 = Morph Substances

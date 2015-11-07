@@ -120,7 +120,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class PlayerController extends CreatureController<Player> {
 
 	private Logger log = LoggerFactory.getLogger(PlayerController.class);
-	private boolean isInShutdownProgress;
 	private long lastAttackMilis = 0;
 	private long lastAttackedMilis = 0;
 	private int stance = 0;
@@ -638,16 +637,6 @@ public class PlayerController extends CreatureController<Player> {
 	// TODO [AT] move to Player
 	public boolean isDueling(Player player) {
 		return DuelService.getInstance().isDueling(player.getObjectId(), getOwner().getObjectId());
-	}
-
-	// TODO [AT] rename or remove
-	public boolean isInShutdownProgress() {
-		return isInShutdownProgress;
-	}
-
-	// TODO [AT] rename or remove
-	public void setInShutdownProgress(boolean isInShutdownProgress) {
-		this.isInShutdownProgress = isInShutdownProgress;
 	}
 
 	@Override
