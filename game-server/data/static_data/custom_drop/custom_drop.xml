@@ -18,6 +18,245 @@
 	</npc_drop>
 	-->
 	<!-- Chests -->
+	<!-- Abyssal Splinter -->
+	<!-- 701574 >> Unstable Abyssal Splinter -->
+	<npc_drop npc_id="700860" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="112101058" name="Forgotten Abyssal Pauldrons" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112301044" name="Forgotten Abyssal Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112501033" name="Forgotten Abyssal Spaulders" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="112601047" name="Forgotten Abyssal Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
+	<!-- 700861 >> Unstable Abyssal Splinter -->
+	<npc_drop npc_id="700934" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000030" name="Gold Medal" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700935" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Key">
+			<drop item_id="185000104" name="Abyssal Fragment" min_amount="1" max_amount="1" chance="100" no_reduce="true"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="111101098" name="Forgotten Abyssal Gloves" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111301097" name="Forgotten Abyssal Vambrace" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111501082" name="Forgotten Abyssal Handguards" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="111601072" name="Forgotten Abyssal Gauntlets" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700936" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="113101112" name="Forgotten Abyssal Leggings" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113301115" name="Forgotten Abyssal Breeches" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113501091" name="Forgotten Abyssal Chausses" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="113601056" name="Forgotten Abyssal Greaves" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114101139" name="Forgotten Abyssal Shoes" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114301149" name="Forgotten Abyssal Boots" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114501098" name="Forgotten Abyssal Brogans" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="114601052" name="Forgotten Abyssal Sabatons" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700937" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Souvenir">
+			<drop item_id="170490004" name="[Souvenir] Yamennes Bust" min_amount="1" max_amount="1" chance="10" no_reduce="true"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Unique)">
+			<drop item_id="100200940" name="Forgotten Abyssal Dagger" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100900803" name="Forgotten Abyssal Greatsword" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100500826" name="Forgotten Abyssal Jewel" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101700848" name="Forgotten Abyssal Longbow" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101300775" name="Forgotten Abyssal Spear" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101500831" name="Forgotten Abyssal Staff" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100001060" name="Forgotten Abyssal Sword" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100600881" name="Forgotten Abyssal Tome" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100100805" name="Forgotten Abyssal Warhammer" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101800702" name="Forgotten Abyssal Pistol" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101900706" name="Forgotten Abyssal Aethercannon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="102000740" name="Forgotten Abyssal Harp" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="102100620" name="Forgotten Abyssal Cipher-Blade" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110101208" name="Forgotten Abyssal Tunic" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="110301143" name="Forgotten Abyssal Jerkin" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="110501113" name="Forgotten Abyssal Hauberk" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="110601095" name="Forgotten Abyssal Breastplate" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Unique)">
+			<drop item_id="125002425" name="Forgotten Abyssal Headband" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125002426" name="Forgotten Abyssal Hat" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125002427" name="Forgotten Abyssal Chain Hood" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125002428" name="Forgotten Abyssal Helm" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115001094" name="Forgotten Abyssal Shield" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700938" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Souvenir">
+			<drop item_id="170490004" name="[Souvenir] Yamennes Bust" min_amount="1" max_amount="1" chance="10" no_reduce="true"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Epic)">
+			<drop item_id="100200941" name="Yamennes' Dagger" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="100900804" name="Yamennes' Greatsword" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="100500827" name="Yamennes' Jewel" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="101700849" name="Yamennes' Longbow" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="101300776" name="Yamennes' Spear" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="101500832" name="Yamennes' Staff" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="100001061" name="Yamennes' Sword" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="100600882" name="Yamennes' Tome" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="100100806" name="Yamennes' Warhammer" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="101800703" name="Yamennes' Pistol" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="101900707" name="Yamennes' Aethercannon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="102000741" name="Yamennes' Harp" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="102100621" name="Yamennes' Cipher-Blade" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Weapon (Unique)">
+			<drop item_id="100200940" name="Forgotten Abyssal Dagger" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100900803" name="Forgotten Abyssal Greatsword" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100500826" name="Forgotten Abyssal Jewel" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101700848" name="Forgotten Abyssal Longbow" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101300775" name="Forgotten Abyssal Spear" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101500831" name="Forgotten Abyssal Staff" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100001060" name="Forgotten Abyssal Sword" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100600881" name="Forgotten Abyssal Tome" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="100100805" name="Forgotten Abyssal Warhammer" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101800702" name="Forgotten Abyssal Pistol" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="101900706" name="Forgotten Abyssal Aethercannon" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="102000740" name="Forgotten Abyssal Harp" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="102100620" name="Forgotten Abyssal Cipher-Blade" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Unique)">
+			<drop item_id="110101208" name="Forgotten Abyssal Tunic" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110301143" name="Forgotten Abyssal Jerkin" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110501113" name="Forgotten Abyssal Hauberk" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="110601095" name="Forgotten Abyssal Breastplate" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Unique)">
+			<drop item_id="125002425" name="Forgotten Abyssal Headband" min_amount="1" max_amount="1" chance="50"/>
+			<drop item_id="125002426" name="Forgotten Abyssal Hat" min_amount="1" max_amount="1" chance="50"/>
+			<drop item_id="125002427" name="Forgotten Abyssal Chain Hood" min_amount="1" max_amount="1" chance="50"/>
+			<drop item_id="125002428" name="Forgotten Abyssal Helm" min_amount="1" max_amount="1" chance="50"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Epic)">
+			<drop item_id="115001095" name="Yamennes' Shield" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Unique)">
+			<drop item_id="115001094" name="Forgotten Abyssal Shield" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Aetherogenetics Lab -->
 	<npc_drop npc_id="212335" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Head (Rare)">
@@ -3122,9 +3361,6 @@
 	</npc_drop>
 	<!-- Unstable Abyssal Splinter -->
 	<npc_drop npc_id="701574" replace_type="FULL">
-		<drop_group race="PC_ALL" use_category="true" name="Named Legion Coin">
-			<drop item_id="186000199" name="Legion Coin" min_amount="1" max_amount="10" chance="40"/>
-		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
 			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
 			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="10"/>
@@ -3145,9 +3381,6 @@
 			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="0.4"/>
 			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="0.3"/>
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="0.2"/>
-		</drop_group>
-		<drop_group race="PC_ALL" use_category="true" name="Named Supplements">
-			<drop item_id="166100011" name="Greater Supplements (Mythic)" min_amount="10" max_amount="30" chance="10"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701575" replace_type="FULL">
@@ -3183,6 +3416,14 @@
 			<drop item_id="112301278" name="Unstable Abyssal Shoulderguards" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="112501267" name="Unstable Abyssal Spaulders" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="112601286" name="Unstable Abyssal Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="700861" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Quest Item">
+			<!-- ASMODIANS -->
+			<drop item_id="182209822" name="quest_30364a" min_amount="1" max_amount="1" chance="100" each_member="true"/>
+			<!-- ELYOS -->
+			<drop item_id="182209802" name="quest_30264a" min_amount="1" max_amount="1" chance="100" each_member="true"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701576" replace_type="FULL">
