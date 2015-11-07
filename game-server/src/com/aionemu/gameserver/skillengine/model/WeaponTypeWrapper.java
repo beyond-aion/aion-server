@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.aionemu.gameserver.services.MotionLoggingService;
 
 /**
  * @author kecimis
@@ -40,10 +39,6 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,8 +48,6 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 		if (getClass() != obj.getClass())
 			return false;
 		WeaponTypeWrapper other = (WeaponTypeWrapper) obj;
-		if (!getOuterType().equals(other.getOuterType()))
-			return false;
 		if (mainHand != other.mainHand)
 			return false;
 		if (offHand != other.offHand)
@@ -64,19 +57,13 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 
 	@Override
 	public String toString() {
-		return "mainHandType=\"" + (mainHand != null ? mainHand.toString() : "null") + "\"" + " offHandType=\""
-			+ (offHand != null ? offHand.toString() : "null");
+		return "mainHandType=\"" + mainHand  + "\"" + " offHandType=\"" + offHand;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + getOuterType().hashCode();
 		result = prime * result + ((mainHand == null) ? 0 : mainHand.hashCode());
 		result = prime * result + ((offHand == null) ? 0 : offHand.hashCode());
 		return result;
@@ -102,9 +89,5 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 
 	public ItemGroup getOffHand() {
 		return this.offHand;
-	}
-
-	private MotionLoggingService getOuterType() {
-		return MotionLoggingService.getInstance();
 	}
 }

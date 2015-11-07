@@ -58,6 +58,7 @@ public class MotionLoggingService {
 		this.started = true;
 		// load data from sql
 		this.loadFromSql();
+		log.info("MotionLoggingService started.");
 	}
 
 	public void logTime(Player player, SkillTemplate sk, int clientTime, double distance) {
@@ -481,7 +482,6 @@ public class MotionLoggingService {
 	}
 
 	private MotionLoggingService() {
-		log.info("MotionLoggingService started.");
 	}
 
 	@SuppressWarnings("synthetic-access")
