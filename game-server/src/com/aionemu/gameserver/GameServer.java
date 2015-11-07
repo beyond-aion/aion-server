@@ -3,17 +3,23 @@ package com.aionemu.gameserver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +46,6 @@ import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -49,7 +54,6 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.house.MaintenanceTask;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.network.BannedMacManager;
 import com.aionemu.gameserver.network.aion.GameConnectionFactoryImpl;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -109,12 +113,11 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
- * <tt>GameServer </tt> is the main class of the application and represents the whole game server.<br>
+ * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
  * This class is also an entry point with main() method.
  * 
- * @author -Nemesiss-
- * @author SoulKeeper
- * @author cura
+ * @author -Nemesiss-, SoulKeeper, cura
+ * @modified Neon
  */
 public class GameServer {
 
@@ -123,41 +126,74 @@ public class GameServer {
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
 	private static int ASMOS_COUNT = 0;
-	private static double ELYOS_RATIO = 0.0;
-	private static double ASMOS_RATIO = 0.0;
+	private static float ELYOS_RATIO = 0f;
+	private static float ASMOS_RATIO = 0f;
 	private static final ReentrantLock lock = new ReentrantLock();
 
+	/**
+	 * Prevent instantiation
+	 */
+	private GameServer() {
+	}
+
+	/**
+	 * Archives old logs in log folder (recursively) and configures the logging service.
+	 */
 	private static void initalizeLoggger() {
-		new File("./log/backup/").mkdirs();
-		File[] files = new File("log").listFiles(new FilenameFilter() {
+		try {
+			Path logFolder = Paths.get("./log");
+			Path oldLogsFolder = Paths.get(logFolder + "/archived");
+			List<File> files = new FastTable<>();
+			File gsStartTimeFile = new File("./log/[server_start_marker]");
+			long gsStartTime;
+			long[] gsEndTime = { 0 }; // for mutability within a stream (file walker), we need to use an array here
 
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".log");
-			}
-		});
+			Files.createDirectories(gsStartTimeFile.toPath().getParent());
+			gsStartTimeFile.createNewFile(); // creates the file only if it does not exists
+			gsStartTime = gsStartTimeFile.lastModified();
+			gsStartTimeFile.setLastModified(ManagementFactory.getRuntimeMXBean().getStartTime()); // update with new server start time
 
-		if (files != null && files.length > 0) {
-			byte[] buf = new byte[1024];
-			String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
-			try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename))) {
-				out.setMethod(ZipOutputStream.DEFLATED);
-				out.setLevel(Deflater.BEST_COMPRESSION);
+			Files.createDirectories(logFolder);
+			Files.walkFileTree(logFolder, new SimpleFileVisitor<Path>() {
 
-				for (File logFile : files) {
-					try (FileInputStream in = new FileInputStream(logFile)) {
-						out.putNextEntry(new ZipEntry(logFile.getName()));
-						int len;
-						while ((len = in.read(buf)) > 0) {
-							out.write(buf, 0, len);
-						}
-						out.closeEntry();
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+					if (!attrs.isDirectory() && file.toString().toLowerCase().endsWith(".log")) {
+						files.add(file.toFile());
+						if (gsEndTime[0] < attrs.lastModifiedTime().toMillis())
+							gsEndTime[0] = attrs.lastModifiedTime().toMillis();
 					}
-					logFile.delete();
+					return FileVisitResult.CONTINUE;
 				}
-			} catch (IOException | SecurityException sex) {
+			});
+
+			if (!files.isEmpty()) {
+				Files.createDirectories(oldLogsFolder);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm");
+				String outFilename = (gsStartTime < gsEndTime[0] ? sdf.format(gsStartTime) : "Unknown") + " to " + sdf.format(gsEndTime[0]) + ".zip";
+				try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(oldLogsFolder + "/" + outFilename))) {
+					byte[] buf = new byte[1024];
+					out.setMethod(ZipOutputStream.DEFLATED);
+					out.setLevel(Deflater.BEST_COMPRESSION);
+					for (File logFile : files) {
+						try (FileInputStream in = new FileInputStream(logFile)) {
+							out.putNextEntry(new ZipEntry(logFolder.relativize(logFile.toPath()).toString()));
+							int len;
+							while ((len = in.read(buf)) > 0)
+								out.write(buf, 0, len);
+							out.closeEntry();
+						}
+					}
+				}
+				for (File logFile : files) { // remove files after successful archiving
+					logFile.delete();
+					logFile.getParentFile().delete(); // attempt to delete the parent directory (only succeeds if empty)
+				}
 			}
+		} catch (IOException | SecurityException e) {
+			throw new RuntimeException("Error gathering and archiving old logs, shutting down...", e);
 		}
+
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		try {
 			JoranConfigurator configurator = new JoranConfigurator();
@@ -178,23 +214,19 @@ public class GameServer {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 
-		Lambda.enableJitting(true);
-		final GameEngine[] parallelEngines = new GameEngine[] { QuestEngine.getInstance(), InstanceEngine.getInstance(), AI2Engine.getInstance(),
-			ChatProcessor.getInstance() };
-
-		final CountDownLatch progressLatch = new CountDownLatch(parallelEngines.length);
-
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
-
-		ConsoleUtil.printSection("Static Data");
-		DataManager.getInstance();
+		DatabaseCleaningService.getInstance();
 
 		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
 
-		ConsoleUtil.printSection("Zone");
-		ZoneService.getInstance().load(null);
+		ConsoleUtil.printSection("Static Data");
+		DataManager.getInstance();
+
+		ConsoleUtil.printSection("Handlers");
+		loadMultithreaded(QuestEngine.getInstance(), AI2Engine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(),
+			ZoneService.getInstance()); // ZoneService before GeoService
 
 		ConsoleUtil.printSection("Geodata");
 		GeoService.getInstance().initializeGeo();
@@ -207,32 +239,7 @@ public class GameServer {
 		ConsoleUtil.printSection("Drops");
 		DropRegistrationService.getInstance();
 
-		GameServer gs = new GameServer();
-		// Set all players is offline
-		DAOManager.getDAO(PlayerDAO.class).setPlayersOffline(false);
-		DatabaseCleaningService.getInstance();
-
-		BannedMacManager.getInstance();
-
-		ConsoleUtil.printSection("Handlers");
-		for (int i = 0; i < parallelEngines.length; i++) {
-			final int index = i;
-			ThreadPoolManager.getInstance().execute(new Runnable() {
-
-				@Override
-				public void run() {
-					parallelEngines[index].load(progressLatch);
-				}
-			});
-		}
-
-		try {
-			progressLatch.await();
-		} catch (InterruptedException e1) {
-		}
-
-		// This is loading only siege location data
-		// No Siege schedule or spawns
+		// This is loading only siege location data, no siege schedule or spawns
 		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance().initBaseLocations();
 		SiegeService.getInstance().initSiegeLocations();
@@ -250,6 +257,16 @@ public class GameServer {
 			ShieldService.getInstance().spawnAll();
 
 		ConsoleUtil.printSection("Limits");
+		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
+			lock.lock();
+			try {
+				ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
+				ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
+			} finally {
+				lock.unlock();
+			}
+			updateRatio(null, 0);
+		}
 		LimitedItemTradeService.getInstance().start();
 		if (CustomConfig.LIMITS_ENABLED)
 			PlayerLimitService.getInstance().scheduleUpdate();
@@ -257,24 +274,22 @@ public class GameServer {
 
 		// Init Sieges... It's separated due to spawn engine.
 		// It should not spawn siege NPCs
-		ConsoleUtil.printSection("Siege Schedule initialization");
+		ConsoleUtil.printSection("Siege Schedule");
 		SiegeService.getInstance().initSieges();
 
-		ConsoleUtil.printSection("World Bases initialization");
+		ConsoleUtil.printSection("World Bases");
 		BaseService.getInstance().initBases();
 
-		ConsoleUtil.printSection("Monster Raid initialization");
+		ConsoleUtil.printSection("Monster Raid");
 		MonsterRaidService.getInstance().initMonsterRaids();
 
-		ConsoleUtil.printSection("Serial Killers initialization");
+		ConsoleUtil.printSection("Serial Killers");
 		SerialKillerService.getInstance().initSerialKillers();
 
-		ConsoleUtil.printSection("Dispute Lands initialization");
+		ConsoleUtil.printSection("Dispute Lands");
 		DisputeLandService.getInstance().init();
 
 		ConsoleUtil.printSection("TaskManagers");
-		// PacketBroadcaster.getInstance();
-
 		GameTimeService.getInstance();
 		AnnouncementService.getInstance();
 		DebugService.getInstance();
@@ -317,67 +332,46 @@ public class GameServer {
 
 		CommandsAccessService.getInstance();
 		WebshopService.getInstance();
+		System.gc();
 
 		ConsoleUtil.printSection("System Info");
 		VersionInfoUtil.printAllInfo(GameServer.class);
 		SystemInfoUtil.printAllInfo();
-		log.info("AL Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
-		System.gc();
-		gs.startServers();
+		startServers();
 
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-
-		if (GSConfig.ENABLE_RATIO_LIMITATION) {
-			addStartupHook(new StartupHook() {
-
-				@Override
-				public void onStartup() {
-					lock.lock();
-					try {
-						ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
-						ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
-						computeRatios();
-					} catch (Exception e) {
-					} finally {
-						lock.unlock();
-					}
-					displayRatios(false);
-				}
-			});
-		}
-
-		onStartup();
 	}
 
 	/**
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
-	private void startServers() {
+	private static void startServers() {
 		ConsoleUtil.printSection("Starting Network");
 		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS, NetworkConfig.GAME_PORT,
 			"Game Connections", new GameConnectionFactoryImpl()));
 
-		LoginServer ls = LoginServer.getInstance();
-		ChatServer cs = ChatServer.getInstance();
-
-		ls.setNioServer(nioServer);
-		cs.setNioServer(nioServer);
-
 		// Nio must go first
 		nioServer.connect();
+
+		LoginServer ls = LoginServer.getInstance();
+		ls.setNioServer(nioServer);
 		ls.connect();
 
-		if (GSConfig.ENABLE_CHAT_SERVER)
+		if (GSConfig.ENABLE_CHAT_SERVER) {
+			ChatServer cs = ChatServer.getInstance();
+			cs.setNioServer(nioServer);
 			cs.connect();
+		}
 	}
 
 	/**
 	 * Initialize all helper services, that are not directly related to aion gs, which includes:
 	 * <ul>
-	 * <li>Logging</li>
 	 * <li>Database factory</li>
 	 * <li>Thread pool</li>
+	 * <li>Cron service</li>
 	 * </ul>
 	 * This method also initializes {@link Config}
 	 */
@@ -389,9 +383,6 @@ public class GameServer {
 		if (JavaAgentUtils.isConfigured())
 			log.info("JavaAgent [Callback Support] is configured.");
 
-		// Initialize cron service
-		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
-
 		// init config
 		ConsoleUtil.printSection("Configuration");
 		Config.load();
@@ -402,93 +393,84 @@ public class GameServer {
 		DatabaseFactory.init();
 		// Initialize DAOs
 		DAOManager.init();
+		DAOManager.getDAO(PlayerDAO.class).setAllPlayersOffline();
 		// Initialize thread pools
 		ConsoleUtil.printSection("Threads");
-		ThreadConfig.load();
 		ThreadPoolManager.getInstance();
+		// Initialize cron service
+		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 	}
 
-	private static Set<StartupHook> startUpHooks = new HashSet<StartupHook>();
+	private static void loadMultithreaded(GameEngine... engines) {
+		Lambda.enableJitting(true);
+		CountDownLatch progressLatch = new CountDownLatch(engines.length);
 
-	public synchronized static void addStartupHook(StartupHook hook) {
-		if (startUpHooks != null)
-			startUpHooks.add(hook);
-		else
-			hook.onStartup();
+		for (int i = 0; i < engines.length; i++) {
+			final int index = i;
+			ThreadPoolManager.getInstance().execute(new Runnable() {
+
+				@Override
+				public void run() {
+					engines[index].load(progressLatch);
+				}
+			});
+		}
+
+		try {
+			progressLatch.await();
+		} catch (InterruptedException e) {
+		}
 	}
 
-	private synchronized static void onStartup() {
-		final Set<StartupHook> startupHooks = startUpHooks;
-
-		startUpHooks = null;
-
-		for (StartupHook hook : startupHooks)
-			hook.onStartup();
+	public static boolean isShuttingDown() {
+		return ShutdownHook.isRunning.get();
 	}
 
-	public interface StartupHook {
-
-		public void onStartup();
-	}
-
-	/**
-	 * @param race
-	 * @param i
-	 */
 	public static void updateRatio(Race race, int i) {
 		lock.lock();
 		try {
 			switch (race) {
 				case ASMODIANS:
-					GameServer.ASMOS_COUNT += i;
+					ASMOS_COUNT += i;
 					break;
 				case ELYOS:
-					GameServer.ELYOS_COUNT += i;
+					ELYOS_COUNT += i;
 					break;
 				default:
 					break;
 			}
 
-			computeRatios();
-		} catch (Exception e) {
+			if ((ASMOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT) && (ELYOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT)) {
+				ASMOS_RATIO = ELYOS_RATIO = 50f;
+			} else {
+				ASMOS_RATIO = ASMOS_COUNT * 100 / (ASMOS_COUNT + ELYOS_COUNT);
+				ELYOS_RATIO = ELYOS_COUNT * 100 / (ASMOS_COUNT + ELYOS_COUNT);
+			}
 		} finally {
 			lock.unlock();
 		}
 
-		displayRatios(true);
+		log.info("FACTIONS RATIO" + (race != null ? " UPDATED" : "") + ": E " + String.format("%.1f", ELYOS_RATIO) + " % / A "
+			+ String.format("%.1f", ASMOS_RATIO) + " %");
 	}
 
-	private static void computeRatios() {
-		if ((GameServer.ASMOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT) && (GameServer.ELYOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT)) {
-			GameServer.ASMOS_RATIO = GameServer.ELYOS_RATIO = 50.0;
-		} else {
-			GameServer.ASMOS_RATIO = GameServer.ASMOS_COUNT * 100.0 / (GameServer.ASMOS_COUNT + GameServer.ELYOS_COUNT);
-			GameServer.ELYOS_RATIO = GameServer.ELYOS_COUNT * 100.0 / (GameServer.ASMOS_COUNT + GameServer.ELYOS_COUNT);
-		}
-	}
-
-	private static void displayRatios(boolean updated) {
-		log.info("FACTIONS RATIO " + (updated ? "UPDATED " : "") + ": E " + String.format("%.1f", GameServer.ELYOS_RATIO) + " % / A "
-			+ String.format("%.1f", GameServer.ASMOS_RATIO) + " %");
-	}
-
-	public static double getRatiosFor(Race race) {
+	public static float getRatiosFor(Race race) {
 		switch (race) {
 			case ASMODIANS:
-				return GameServer.ASMOS_RATIO;
+				return ASMOS_RATIO;
 			case ELYOS:
-				return GameServer.ELYOS_RATIO;
+				return ELYOS_RATIO;
 			default:
-				return 0.0;
+				return 0f;
 		}
 	}
 
 	public static int getCountFor(Race race) {
 		switch (race) {
 			case ASMODIANS:
-				return GameServer.ASMOS_COUNT;
+				return ASMOS_COUNT;
 			case ELYOS:
-				return GameServer.ELYOS_COUNT;
+				return ELYOS_COUNT;
 			default:
 				return 0;
 		}
