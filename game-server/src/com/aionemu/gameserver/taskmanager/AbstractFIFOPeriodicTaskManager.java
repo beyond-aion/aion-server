@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.taskmanager;
 
-import java.util.Iterator;
+import java.util.Set;
 
 import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,14 +12,14 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
  * @author lord_rex and MrPoke based on l2j-free engines.
+ * @modified Neon
  */
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
 	protected static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
 
-	private final FastSet<T> queue = new FastSet<T>();
-
-	private final FastSet<T> activeTasks = new FastSet<T>();
+	private final Set<T> queue = new FastSet<T>(); // set (keeps insertion order) to avoid duplicate tasks
+	private final FastTable<T> activeTasks = new FastTable<T>().atomic(); // atomic deque in case a thread isn't done when the new one starts
 
 	public AbstractFIFOPeriodicTaskManager(int period) {
 		super(period);
@@ -43,13 +44,12 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 			writeUnlock();
 		}
 
-		for (Iterator<T> i = activeTasks.iterator(); i.hasNext();) {
-			T task = i.next();
+		while (!activeTasks.isEmpty()) {
+			T task = activeTasks.pollFirst();
 			final long begin = System.nanoTime();
 
 			try {
 				callTask(task);
-				i.remove();
 			} catch (RuntimeException e) {
 				log.warn("", e);
 			} finally {
