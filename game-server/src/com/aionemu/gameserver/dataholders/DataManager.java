@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.templates.mail.Mails;
  */
 public final class DataManager {
 
-	static Logger log = LoggerFactory.getLogger(DataManager.class);
+	private static final Logger log = LoggerFactory.getLogger(DataManager.class);
 	public static NpcData NPC_DATA;
 	public static CustomDrop CUSTOM_NPC_DROP;
 	public static GlobalDropData GLOBAL_DROP_DATA;
@@ -108,8 +108,6 @@ public final class DataManager {
 	public static AtreianPassportData ATREIAN_PASSPORT_DATA;
 	public static MonsterRaidData RAID_DATA;
 
-	private XmlDataLoader loader;
-
 	/**
 	 * Constructor creating <tt>DataManager</tt> instance.<br>
 	 * NOTICE: calling constructor implies loading whole data from /data/static_data immediately
@@ -119,13 +117,10 @@ public final class DataManager {
 	}
 
 	private DataManager() {
-
-		this.loader = XmlDataLoader.getInstance();
-
 		long start = System.currentTimeMillis();
-		StaticData data = loader.loadStaticData();
+		StaticData data = XmlDataLoader.getInstance().loadStaticData();
 		long time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
+		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
 
 		start = System.currentTimeMillis();
 		NPC_DATA = data.npcData;
@@ -224,7 +219,7 @@ public final class DataManager {
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData());
 
 		time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data processed in " + String.format("%.1f", time / 1000.0f) + " seconds] #####");
+		log.info("##### [Static Data processed in " + String.format("%.1f", time / 1000f) + " seconds] #####");
 	}
 
 	@SuppressWarnings("synthetic-access")
