@@ -201,6 +201,9 @@
 	<logger name="PLAYERTRANSFER">
 		<appender-ref ref="app_playertransfer" />
 	</logger>
+	<logger name="org.quartz">
+		<level value="WARN" /> <!-- disable info messages from quartz lib (cron service) -->
+	</logger>
 	<root level="INFO">
 		<appender-ref ref="out_console" />
 		<appender-ref ref="app_console" />
