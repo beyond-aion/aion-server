@@ -1,6 +1,9 @@
 package com.aionemu.commons.utils.concurrent;
 
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +17,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastTable;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,6 @@ import org.slf4j.LoggerFactory;
 public final class RunnableStatsManager {
 
 	private static final Logger log = LoggerFactory.getLogger(RunnableStatsManager.class);
-
 	private static final Map<Class<?>, ClassStat> classStats = new HashMap<Class<?>, ClassStat>();
 
 	private static final class ClassStat {
@@ -296,16 +297,15 @@ public final class RunnableStatsManager {
 
 		lines.add("</entries>");
 
-		PrintStream ps = null;
 		try {
-			ps = new PrintStream("MethodStats-" + System.currentTimeMillis() + ".log");
-
-			for (String line : lines)
-				ps.println(line);
+			Path statsFolder = Paths.get("./log/stats");
+			Files.createDirectories(statsFolder);
+			try (PrintStream ps = new PrintStream(statsFolder + "/MethodStats.log")) {
+				for (String line : lines)
+					ps.println(line);
+			}
 		} catch (Exception e) {
 			log.warn("", e);
-		} finally {
-			IOUtils.closeQuietly(ps);
 		}
 	}
 

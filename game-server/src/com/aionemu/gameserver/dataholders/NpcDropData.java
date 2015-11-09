@@ -26,13 +26,13 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 /**
  * @author MrPoke
+ * @modified Neon
  */
 public class NpcDropData {
 
-	private static Logger log = LoggerFactory.getLogger(DataManager.class);
+	private static final Logger log = LoggerFactory.getLogger(DataManager.class);
 
 	public static void load() {
-
 		List<Drop> drops = new FastTable<Drop>();
 		List<String> names = new FastTable<String>();
 		FileChannel roChannel = null;
@@ -141,7 +141,7 @@ public class NpcDropData {
 		if (npcsSkippedCustom > 0)
 			log.error("Drop loader: Couldn't set custom drops for " + npcsSkippedCustom + " npcs (missing npc templates or drop info).");
 
-		log.info("Drop loader: Loaded drops successfully for " + (npcCount - npcsSkipped) + " npcs.");
+		log.info("Drop loader: Loaded npc drops successfully for " + (npcCount - npcsSkipped) + " npcs.");
 	}
 
 	public static void reload() {

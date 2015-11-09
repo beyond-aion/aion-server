@@ -316,7 +316,7 @@
 	<item_collecting id="2419" start_npc_ids="204383"/>
 	<item_collecting id="2425" start_npc_ids="204433" end_npc_ids="730037"/>
 	<item_collecting id="2427" start_npc_ids="204433"/>
-	<item_collecting id="2429" start_npc_ids="204378"/>
+	<item_collecting id="2429" start_npc_ids="204378" end_npc_ids="204424"/>
 	<item_collecting id="2431" start_npc_ids="204387"/>
 	<item_collecting id="2440" start_npc_ids="204390"/>
 	<item_collecting id="2442" start_npc_ids="204403"/>

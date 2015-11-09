@@ -133,7 +133,7 @@ public class World {
 			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
 			int baseId = bst.getId();
 			if (!baseNpc.containsKey(baseId)) {
-				baseNpc.put(baseId, new FastTable<Npc>());
+				baseNpc.put(baseId, new FastTable<Npc>().shared());
 			}
 			baseNpc.get(baseId).add((Npc) object);
 		}

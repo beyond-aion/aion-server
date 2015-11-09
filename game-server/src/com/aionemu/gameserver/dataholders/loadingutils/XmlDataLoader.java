@@ -28,8 +28,8 @@ public class XmlDataLoader {
 	/** File containing xml schema declaration */
 	private final static String XML_SCHEMA_FILE = "./data/static_data/static_data.xsd";
 
-	private static final String CACHE_DIRECTORY = "./cache/";
-	private static final String CACHE_XML_FILE = "./cache/static_data.xml";
+	private static final String CACHE_DIRECTORY = "./cache";
+	private static final String CACHE_XML_FILE = CACHE_DIRECTORY + "/static_data.xml";
 	private static final String MAIN_XML_FILE = "./data/static_data/static_data.xml";
 
 	public static final XmlDataLoader getInstance() {
@@ -37,7 +37,6 @@ public class XmlDataLoader {
 	}
 
 	private XmlDataLoader() {
-
 	}
 
 	/**
@@ -46,11 +45,11 @@ public class XmlDataLoader {
 	 * @return StaticData object, containing all game data defined in xml files
 	 */
 	public StaticData loadStaticData() {
-		makeCacheDirectory();
-
+		new File(CACHE_DIRECTORY).mkdirs();
 		File cachedXml = new File(CACHE_XML_FILE);
 		File cleanMainXml = new File(MAIN_XML_FILE);
 
+		log.info("Updating cache file...");
 		mergeXmlFiles(cachedXml, cleanMainXml);
 
 		try {
@@ -58,15 +57,9 @@ public class XmlDataLoader {
 			Unmarshaller un = jc.createUnmarshaller();
 			un.setEventHandler(new XmlValidationHandler());
 			un.setSchema(getSchema());
+			log.info("Processing cache file...");
 			return (StaticData) un.unmarshal(new FileReader(CACHE_XML_FILE));
-		}
-		/*
-		 * catch (IllegalAnnotationsException e) { for (IllegalAnnotationException detail : e.getErrors()) log.error(detail.getMessage()); throw new
-		 * Error("Error while loading static data", e); } catch (FileNotFoundException e) { log.error("Error while loading static data", e); throw new
-		 * Error("Error while loading static data", e); } catch (JAXBException e) { log.error("Error while loading static data", e); throw new
-		 * Error("Error while loading static data", e); }
-		 */
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Error while loading static data", e);
 			return null;
 		}
@@ -89,13 +82,6 @@ public class XmlDataLoader {
 		}
 
 		return schema;
-	}
-
-	/** Creates directory for cache files if it doesn't already exist */
-	private void makeCacheDirectory() {
-		File cacheDir = new File(CACHE_DIRECTORY);
-		if (!cacheDir.exists())
-			cacheDir.mkdir();
 	}
 
 	/**

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true" restriction_race="ASMODIANS">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233095" name="Shulack Mercenary Veteran Mage"/>
+			<gd_npc npc_id="233060" name="Inspection Team Dreadmage"/>
+			<gd_npc npc_id="233118" name="Research Team Elite Mage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000172" name="Red Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true" restriction_race="ELYOS">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233095" name="Shulack Mercenary Veteran Mage"/>
+			<gd_npc npc_id="233060" name="Inspection Team Dreadmage"/>
+			<gd_npc npc_id="233118" name="Research Team Elite Mage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000173" name="Blue Key"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001636" name="Danann Divine Scale Shield"/>
+			<gd_item id="115001635" name="Danann Divine Battle Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001637" name="Danann Noble Battle Shield"/>
+			<gd_item id="115001638" name="Danann Noble Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233093" name="Bodyguard Girakin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101413" name="Steel Rose Pirates' Cloth Pants"/>
+			<gd_item id="113301412" name="Steel Rose Pirates' Leather Leg Protectors"/>
+			<gd_item id="113501382" name="Steel Rose Pirates' Chain Leg Armor"/>
+			<gd_item id="113601335" name="Steel Rose Pirates' Plate Gaiters"/>
+			<gd_item id="110101551" name="Steel Rose Pirates' Cloth Jacket"/>
+			<gd_item id="110301447" name="Steel Rose Pirates' Leather Vest"/>
+			<gd_item id="110501408" name="Steel Rose Pirates' Chain Armor"/>
+			<gd_item id="110601383" name="Steel Rose Pirates' Plate Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233091" name="Unscrupulous Sachirunerk"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101442" name="Steel Rose Pirates' Cloth Shoes"/>
+			<gd_item id="114301448" name="Steel Rose Pirates' Leather Shoes"/>
+			<gd_item id="114501390" name="Steel Rose Pirates' Chain Boots"/>
+			<gd_item id="114601333" name="Steel Rose Pirates' Plate Boots"/>
+			<gd_item id="112101349" name="Steel Rose Pirates' Cloth Pauldrons"/>
+			<gd_item id="112301331" name="Steel Rose Pirates' Leather Pauldrons"/>
+			<gd_item id="112501307" name="Steel Rose Pirates' Chain Pauldrons"/>
+			<gd_item id="112601327" name="Steel Rose Pirates' Plate Pauldrons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233092" name="Bodyguard Yatakin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101395" name="Steel Rose Pirates' Cloth Gloves"/>
+			<gd_item id="111301387" name="Steel Rose Pirates' Leather Gloves"/>
+			<gd_item id="111501365" name="Steel Rose Pirates' Chain Gloves"/>
+			<gd_item id="111601345" name="Steel Rose Pirates' Plate Gloves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101563" name="Danann Divine Shoes"/>
+			<gd_item id="114301696" name="Danann Divine Boots"/>
+			<gd_item id="114501501" name="Danann Divine Brogans"/>
+			<gd_item id="114601446" name="Danann Divine Sabatons"/>
+			<gd_item id="110101682" name="Danann Divine Tunic"/>
+			<gd_item id="110301690" name="Danann Divine Jerkin"/>
+			<gd_item id="110501519" name="Danann Divine Hauberk"/>
+			<gd_item id="110601493" name="Danann Divine Breastplate"/>
+			<gd_item id="113101529" name="Danann Divine Leggings"/>
+			<gd_item id="113301659" name="Danann Divine Breeches"/>
+			<gd_item id="113501492" name="Danann Divine Chausses"/>
+			<gd_item id="113601439" name="Danann Divine Greaves"/>
+			<gd_item id="111101514" name="Danann Divine Gloves"/>
+			<gd_item id="111301628" name="Danann Divine Vambrace"/>
+			<gd_item id="111501474" name="Danann Divine Handguards"/>
+			<gd_item id="111601456" name="Danann Divine Gauntlets"/>
+			<gd_item id="112101467" name="Danann Divine Pauldrons"/>
+			<gd_item id="112301567" name="Danann Divine Shoulderguards"/>
+			<gd_item id="112501416" name="Danann Divine Spaulders"/>
+			<gd_item id="112601437" name="Danann Divine Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101565" name="Danann Noble Shoes"/>
+			<gd_item id="114301698" name="Danann Noble Boots"/>
+			<gd_item id="114501503" name="Danann Noble Brogans"/>
+			<gd_item id="114601448" name="Danann Noble Sabatons"/>
+			<gd_item id="113101531" name="Danann Noble Leggings"/>
+			<gd_item id="113301661" name="Danann Noble Breeches"/>
+			<gd_item id="113501494" name="Danann Noble Chausses"/>
+			<gd_item id="113601441" name="Danann Noble Greaves"/>
+			<gd_item id="110101684" name="Danann Noble Tunic"/>
+			<gd_item id="110301692" name="Danann Noble Jerkin"/>
+			<gd_item id="110501521" name="Danann Noble Hauberk"/>
+			<gd_item id="110601495" name="Danann Noble Breastplate"/>
+			<gd_item id="111101516" name="Danann Noble Gloves"/>
+			<gd_item id="111301630" name="Danann Noble Vambrace"/>
+			<gd_item id="111501476" name="Danann Noble Handguards"/>
+			<gd_item id="111601458" name="Danann Noble Gauntlets"/>
+			<gd_item id="112101469" name="Danann Noble Pauldrons"/>
+			<gd_item id="112301569" name="Danann Noble Shoulderguards"/>
+			<gd_item id="112501418" name="Danann Noble Spaulders"/>
+			<gd_item id="112601439" name="Danann Noble Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Crate (Epic)" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233089" name="Chief Medic Tagnu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052613" name="Sanctuary Treasure Crate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233089" name="Chief Medic Tagnu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="169405253" name="Weapon Shard"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Quest Item" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- ASMODIANS -->
+			<gd_item id="188100112" name="The Danuar Head Priest's Record"/>
+			<!-- ELYOS -->
+			<gd_item id="188100111" name="The Danuar Head Priest's Tome"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Ancient Manastone (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233092" name="Bodyguard Yatakin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="167020056" name="Ancient Manastone: Accuracy +33"/>
+			<gd_item id="167020057" name="Ancient Manastone: Evasion +23"/>
+			<gd_item id="167020058" name="Ancient Manastone: Parry +33"/>
+			<gd_item id="167020059" name="Ancient Manastone: Block +33"/>
+			<gd_item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22"/>
+			<gd_item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9"/>
+			<gd_item id="167020062" name="Ancient Manastone: Physical Defense +80"/>
+			<gd_item id="167020063" name="Ancient Manastone: Attack +7"/>
+			<gd_item id="167020064" name="Ancient Manastone: Magical Accuracy +20"/>
+			<gd_item id="167020065" name="Ancient Manastone: Magic Boost +32"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233092" name="Bodyguard Yatakin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000174" name="Sentry Post of Eternity Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

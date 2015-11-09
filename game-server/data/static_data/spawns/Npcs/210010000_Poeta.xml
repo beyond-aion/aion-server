@@ -1273,7 +1273,7 @@
 		</spawn>
 		<!-- Supervisor Duaguru -->
 		<spawn npc_id="210162" respawn_time="180">
-			<spot x="288.71" y="1019.37" z="131.964" h="16"/>
+			<spot x="288.71" y="1019.37" z="131.964" h="60"/>
 		</spawn>
 		<!-- Suspicious Box -->
 		<spawn npc_id="700107" respawn_time="295">

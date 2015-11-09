@@ -107,7 +107,7 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	 *
 	 * @param online
 	 */
-	public abstract void setPlayersOffline(final boolean online);
+	public abstract void setAllPlayersOffline();
 
 	/**
 	 * get commondata by name for MailService

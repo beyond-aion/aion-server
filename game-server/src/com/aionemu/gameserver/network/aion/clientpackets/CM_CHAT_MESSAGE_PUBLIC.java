@@ -63,7 +63,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 		if (LoggingConfig.LOG_CHAT)
 			PlayerChatService.chatLogging(player, type, message);
 
-		if (RestrictionsManager.canChat(player) && !PlayerChatService.isFlooding(player)) {
+		if (RestrictionsManager.canChat(player)) {
 			switch (this.type) {
 				case GROUP:
 					if (!player.isInTeam())

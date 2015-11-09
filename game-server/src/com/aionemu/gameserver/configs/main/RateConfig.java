@@ -34,13 +34,13 @@ public class RateConfig {
 	/**
 	 * Quest XP Rates - Regular (1), Premium (2), VIP (3)
 	 */
-	@Property(key = "gameserver.rate.regular.quest.xp", defaultValue = "2")
+	@Property(key = "gameserver.rate.regular.quest.xp", defaultValue = "1.0")
 	public static float QUEST_XP_RATE;
 
-	@Property(key = "gameserver.rate.premium.quest.xp", defaultValue = "4")
+	@Property(key = "gameserver.rate.premium.quest.xp", defaultValue = "2.0")
 	public static float PREMIUM_QUEST_XP_RATE;
 
-	@Property(key = "gameserver.rate.vip.quest.xp", defaultValue = "6")
+	@Property(key = "gameserver.rate.vip.quest.xp", defaultValue = "3.0")
 	public static float VIP_QUEST_XP_RATE;
 
 	/**
@@ -250,11 +250,6 @@ public class RateConfig {
 	@Property(key = "gameserver.vip.premium.idgelresearchcenter.instance", defaultValue = "1")
 	public static float VIP_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
 
-	/**
-	 * Rate which affects amount of required ap for Abyss rank
-	 */
-	@Property(key = "gameserver.rate.ap.rank", defaultValue = "1")
-	public static int ABYSS_RANK_RATE;
 	/**
 	 * Sell limits rate
 	 */

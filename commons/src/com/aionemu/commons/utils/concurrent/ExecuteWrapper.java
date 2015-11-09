@@ -1,9 +1,8 @@
 package com.aionemu.commons.utils.concurrent;
 
+import java.lang.management.ManagementFactory;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import javolution.text.TextBuilder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,23 +29,15 @@ public class ExecuteWrapper implements Executor {
 		} catch (Throwable t) {
 			log.warn("Exception in a Runnable execution:", t);
 		} finally {
-
 			long runtimeInNanosec = System.nanoTime() - begin;
 			Class<? extends Runnable> clazz = runnable.getClass();
 
-			if (CommonsConfig.RUNNABLESTATS_ENABLE) {
+			if (CommonsConfig.RUNNABLESTATS_ENABLE)
 				RunnableStatsManager.handleStats(clazz, runtimeInNanosec);
-			}
 
 			long runtimeInMillisec = TimeUnit.NANOSECONDS.toMillis(runtimeInNanosec);
-			if (runtimeInMillisec > maximumRuntimeInMillisecWithoutWarning) {
-				TextBuilder tb = new TextBuilder();
-				tb.append(clazz);
-				tb.append(" - execution time: ");
-				tb.append(runtimeInMillisec);
-				tb.append("msec");
-				log.warn(tb.toString());
-			}
+			if (runtimeInMillisec > maximumRuntimeInMillisecWithoutWarning && ManagementFactory.getRuntimeMXBean().getUptime() > 60000)
+				log.warn(clazz + " - execution time: " + runtimeInMillisec + "ms");
 		}
 	}
 }

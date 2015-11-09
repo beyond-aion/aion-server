@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -72,6 +71,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 855) {
 				QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800843, 137.46f, 158.9f, 120.73f, (byte) 113);
+				(player.getPosition().getWorldMapInstance().getNpc(800842)).getController().onDelete();
 				return true;
 			} else if (movieId == 857) {
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 107.37f, 145.05f, 125.69f, (byte) 105,
@@ -153,7 +153,9 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.04f, 136.029f, 112.17f, (byte) 53);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230401, 120.39f, 139.96f, 111.99f, (byte) 60);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.97f, 144.26f, 112.17f, (byte) 66);
-						return defaultCloseDialog(env, 6, 7);
+						changeQuestStep(env, 6, 7, false);
+						closeDialogWindow(env);
+						return true;
 					}
 					case SETPRO8: {
 						playQuestMovie(env, 857);
@@ -232,7 +234,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 				if (var > 0 && var < 13) {
 					qs.setQuestVarById(0, 0);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
 						.getName()));
 					return true;
 				}
@@ -250,7 +252,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 			if (var > 0 && var < 13) {
 				qs.setQuestVar(0);
 				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
 					.getName()));
 				return true;
 			}

@@ -18,6 +18,8 @@ import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.ban.ChatBanService;
+import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -327,7 +329,18 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player == null || !player.isOnline())
 			return false;
 
-		return !player.isGagged();
+		if (ChatBanService.isBanned(player)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INGAME_BLOCK_IN_NO_CHAT(ChatBanService.getBanMinutes(player)));
+			return false;
+		}
+
+		if (PlayerChatService.isFlooding(player)) {
+			ChatBanService.banPlayer(player, 2 * 60 * 1000);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLOODING);
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override

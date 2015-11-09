@@ -5,6 +5,7 @@ import static java.lang.Math.max;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 
+import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.bounding.BoundingSphere;
 import com.jme3.bounding.BoundingVolume;
@@ -284,10 +285,12 @@ public class BIHTreeEx implements CollisionData {
 
 	private int collideWithRay(Ray r, Matrix4f worldMatrix, BoundingVolume worldBound, CollisionResults results) {
 
-		TempVars vars = TempVars.get();
+		BIHTempVars vars = BIHTempVars.get();
 		try {
-			CollisionResults boundResults = vars.collisionResults;
+			CollisionResultsEx boundResults = vars.collisionResults;
 			boundResults.clear();
+			if (results instanceof CollisionResultsEx)
+				boundResults.copyAttributes((CollisionResultsEx) results);
 			worldBound.collideWith(r, boundResults);
 			if (boundResults.size() > 0) {
 				float tMin = boundResults.getClosestCollision().getDistance();

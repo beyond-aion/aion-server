@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javolution.util.FastTable;
 
 import org.hamcrest.Matchers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcName;
@@ -38,6 +40,9 @@ public class GlobalDropData {
 
 	@XmlTransient
 	private List<GlobalRule> gdRules = new FastTable<GlobalRule>();
+	
+	@XmlTransient
+	private static final Logger log = LoggerFactory.getLogger(GlobalDropData.class);
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (GlobalRule gr : globalDropRules) {
@@ -60,6 +65,7 @@ public class GlobalDropData {
 				}
 			}
 		}
+		log.info("Global drops: Processed " + gdRules.size() + " global drop rules.");
 	}
 
 	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {

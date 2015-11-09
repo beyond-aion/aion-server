@@ -170,7 +170,6 @@ public class Player extends Creature {
 	private boolean isResByPlayer = false;
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
-	private boolean isGagged = false;
 	private boolean edit_mode = false;
 	private Npc postman = null;
 	private boolean isInResurrectPosState = false;
@@ -1404,21 +1403,6 @@ public class Player extends Creature {
 		if (itemCoolDowns == null)
 			return;
 		itemCoolDowns.remove(itemMask);
-	}
-
-	/**
-	 * @param isGagged
-	 *          the isGagged to set
-	 */
-	public void setGagged(boolean isGagged) {
-		this.isGagged = isGagged;
-	}
-
-	/**
-	 * @return the isGagged
-	 */
-	public boolean isGagged() {
-		return isGagged;
 	}
 
 	/**

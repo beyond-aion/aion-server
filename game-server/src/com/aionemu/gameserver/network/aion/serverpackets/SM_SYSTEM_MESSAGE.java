@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
 
 /**
  * System message packet.
@@ -18,55 +17,6 @@ import com.aionemu.gameserver.network.aion.SystemMessageId;
  * @author Sarynth
  */
 public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
-
-	private static DescriptionId calculateNameId(int id) {
-		return new DescriptionId(id * 2 + 1);
-	}
-
-	/**
-	 * Purification System
-	 */
-	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402397, new Object[] { nameId });
-	}
-
-	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
-		return new SM_SYSTEM_MESSAGE(1402579, new Object[] { nameId, nameId2 });
-	}
-
-	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP = new SM_SYSTEM_MESSAGE(1402571);
-
-	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA = new SM_SYSTEM_MESSAGE(1402572);
-
-	/**
-	 * Atreian Passport
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE = new SM_SYSTEM_MESSAGE(1402601);
-
-	/**
-	 * Amplification System
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402657, new Object[] { nameId });
-	}
-
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402650, new Object[] { nameId });
-	}
-
-	/**
-	 * %0 cannot be used to enchant an amplified item.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402661, new Object[] { nameId });
-	}
-
-	/**
-	 * %0 successfully enchanted to level %1. The %2 skill has been added.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
-		return new SM_SYSTEM_MESSAGE(1402662, new Object[] { targetName, level, skillName });
-	}
 
 	/**
 	 * You inflicted %num1 damage on %0.
@@ -10680,6 +10630,238 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_FACTION_TIMORITH = new SM_SYSTEM_MESSAGE(1300529);
 
 	/**
+	 * %num0:%num1:%num2
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUR_MIN_SEC(byte num0, byte num1, byte num2) {
+		return new SM_SYSTEM_MESSAGE(1300530, num0, num1, num2);
+	}
+
+	/**
+	 * %num0:%num1
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUR_MIN(byte num0, byte num1) {
+		return new SM_SYSTEM_MESSAGE(1300531, num0, num1);
+	}
+
+	/**
+	 * %num0:0:%num1
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUR_0MIN_SEC(byte num0, byte num1) {
+		return new SM_SYSTEM_MESSAGE(1300532, num0, num1);
+	}
+
+	/**
+	 * %num0h
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUR(byte num0) {
+		return new SM_SYSTEM_MESSAGE(1300533, num0);
+	}
+
+	/**
+	 * %num0:%num1
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MIN_SEC(byte num0, byte num1) {
+		return new SM_SYSTEM_MESSAGE(1300534, num0, num1);
+	}
+
+	/**
+	 * %num0m
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MIN(byte num0) {
+		return new SM_SYSTEM_MESSAGE(1300535, num0);
+	}
+
+	/**
+	 * %num0s
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SEC(byte num0) {
+		return new SM_SYSTEM_MESSAGE(1300536, num0);
+	}
+
+	/**
+	 * Please visit http://support.en.aionfreetoplay.com for customer support.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_VISIT_WEB = new SM_SYSTEM_MESSAGE(1300537);
+
+	/**
+	 * The petition is too short. A Support Petition must be at least 5 words in length.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_TOO_SHORT = new SM_SYSTEM_MESSAGE(1300538);
+
+	/**
+	 * The Support Petition has been received. The receipt number is %num0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_RECEIVED(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300539, num0);
+	}
+
+	/**
+	 * This is your %num0th petition. You may make %num1 more Support Petitions today.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_COUNT(int num0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1300540, num0, num1);
+	}
+
+	/**
+	 * There are %num0 users waiting in the queue to lodge Support Petitions.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_QUEUE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300541, num0);
+	}
+
+	/**
+	 * %value0 has received a request from the GM for consultation.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_HE_RECEIVED_CONVERSATION_REQUEST(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300542, value0);
+	}
+
+	/**
+	 * %value0 has received a proxy petition generated by the GM. The petition number is %num1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_HE_RECEIVED_PETITION(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1300543, value0, num1);
+	}
+
+	/**
+	 * A proxy petition by the GM has been received, but the user is offline. The petition number is %num0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_HE_RECEIVED_PETITION_OFFLINE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300544, num0);
+	}
+
+	/**
+	 * Please visit http://support.en.aionfreetoplay.com for customer support.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_VISIT_WEB2 = new SM_SYSTEM_MESSAGE(1300545);
+
+	/**
+	 * Your support request has failed. Please try again later.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_REQUEST_FAILED = new SM_SYSTEM_MESSAGE(1300546);
+
+	/**
+	 * You have used up your daily quota of %num0 Support Petitions. You cannot make any more inquiries with this account today.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_QUOTA_REACHED(byte num0) {
+		return new SM_SYSTEM_MESSAGE(1300547, num0);
+	}
+
+	/**
+	 * A Support Petition has already been received. Please wait for a reply.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_ALREADY_RECEIVED = new SM_SYSTEM_MESSAGE(1300548);
+
+	/**
+	 * Your proxy petition request has failed. %value0 has already received the Support Petition.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PROXY_PETITION_ALREADY_RECEIVED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300549, value0);
+	}
+
+	/**
+	 * Your proxy petition request for %value0 has failed. The error code is %num1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PROXY_PETITION_REQUEST_FAILED(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1300550, value0, num1);
+	}
+
+	/**
+	 * The request for a proxy petition has failed. (The user is currently offline.) The error code is %num0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PROXY_PETITION_REQUEST_FAILED_OFFLINE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300551, num0);
+	}
+
+	/**
+	 * Petition No. %num0 has been cancelled.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_CANCELLED(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300552, num0);
+	}
+
+	/**
+	 * The petition has been cancelled. You have %num0 Support Petitions left for today.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_CANCELLED2(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300553, num0);
+	}
+
+	/**
+	 * You cancelled the proxy petition request for %value0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PROXY_PETITION_CANCELLED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300554, value0);
+	}
+
+	/**
+	 * Failed to cancel the petition. Please try again later.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_CANCEL_FAILED = new SM_SYSTEM_MESSAGE(1300555);
+
+	/**
+	 * The support petition is already being processed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_ALREADY_IN_PROCESS = new SM_SYSTEM_MESSAGE(1300556);
+
+	/**
+	 * Support Petitions cannot be submitted at the moment.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PETITION_NOT_SUBMITTABLE = new SM_SYSTEM_MESSAGE(1300557);
+
+	/**
+	 * Failed to cancel the request for a proxy petition to %value0. The error code is %num1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_PROXY_PETITION_REQUEST_CANCEL_FAIL(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1300558, value0, num1);
+	}
+
+	/**
+	 * The User (%value0) is not in the game server.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_USER_NOT_IN_GAME(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300559, value0);
+	}
+
+	/**
+	 * Your consultation with the GM (%value0) has started.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_CONVERSATION_START(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300560, value0);
+	}
+
+	/**
+	 * The GM (%value0)'s response is complete. Please evaluate the Support Petition service in a moment.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_CONVERSATION_RESPONSE_COMPLETE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300561, value0);
+	}
+
+	/**
+	 * You are not in a consultation with the GM.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_CONVERSATION_NOT_ACTIVE = new SM_SYSTEM_MESSAGE(1300562);
+
+	/**
+	 * An error has occurred while transmitting the conversation log to the GM. Please try again later.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_CONVERSATION_ERROR = new SM_SYSTEM_MESSAGE(1300563);
+
+	/**
+	 * $value0: $value1
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SUPPORT_MESSAGE(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300564, value0, value1);
+	}
+
+	/**
+	 * This is a message from the GM: %value0
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MESSAGE_FROM_GM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300565, value0);
+	}
+
+	/**
 	 * Only the group leader can receive this quest.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_PARTY_LEADER_ONLY = new SM_SYSTEM_MESSAGE(1300566);
@@ -11166,22 +11348,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Current users: %0
 	 */
-	public static SM_SYSTEM_MESSAGE STR_LIST_USER(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300641, value0);
+	public static SM_SYSTEM_MESSAGE STR_LIST_USER(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300641, num0);
 	}
 
 	/**
 	 * The server is due to shut down in %0 seconds. Please quit the game.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_SERVER_SHUTDOWN(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300642, value0);
+	public static SM_SYSTEM_MESSAGE STR_SERVER_SHUTDOWN(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300642, num0);
 	}
 
 	/**
 	 * Please do not flood chat. Blocked for %0m.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CHAT_DISABLED_FOR(String value0m) {
-		return new SM_SYSTEM_MESSAGE(1300643, value0m);
+	public static SM_SYSTEM_MESSAGE STR_CHAT_DISABLED_FOR(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300643, num0);
 	}
 
 	/**
@@ -12086,7 +12268,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are not allowed to chat for %0 minutes for the following reason(s).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_ENABLE_NO_CHAT(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_ENABLE_NO_CHAT(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300808, value0);
 	}
 
@@ -12122,7 +12304,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are currently unable to chat. There are %0 minute(s) left in your ban.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_IN_NO_CHAT(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_INGAME_BLOCK_IN_NO_CHAT(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300814, value0);
 	}
 
@@ -22177,75 +22359,82 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
 		return new SM_SYSTEM_MESSAGE(1402031, itemName1);
 	}
-	
+
 	/**
 	 * The Beritra Legion's Invasion Corridor has appeared.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_01() {
 		return new SM_SYSTEM_MESSAGE(1402383);
 	}
-	
+
 	/**
 	 * The Devil Unit has infiltrated through the Invasion Corridor.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_02() {
 		return new SM_SYSTEM_MESSAGE(1402384);
 	}
-	
+
 	/**
 	 * The Devil Unit is preparing for its return.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_03() {
 		return new SM_SYSTEM_MESSAGE(1402385);
 	}
-	
+
 	/**
 	 * The Devil Unit has returned through the Invasion Corridor.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_04() {
 		return new SM_SYSTEM_MESSAGE(1402386);
 	}
-	
+
 	/**
 	 * The Devil Unit's Magno has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_01() {
 		return new SM_SYSTEM_MESSAGE(1402387);
 	}
-	
+
 	/**
 	 * The Devil Unit's Tarmat Beta has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_02() {
 		return new SM_SYSTEM_MESSAGE(1402388);
 	}
-	
+
 	/**
 	 * The Devil Unit's Initiator has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_03() {
 		return new SM_SYSTEM_MESSAGE(1402389);
 	}
-	
+
 	/**
 	 * The Devil Unit's Tumon has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_04() {
 		return new SM_SYSTEM_MESSAGE(1402390);
 	}
-	
+
 	/**
 	 * The Devil Unit's Raedon Beta has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_05() {
 		return new SM_SYSTEM_MESSAGE(1402391);
 	}
-	
+
 	/**
 	 * The Devil Unit's Benoid has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_DIE_06() {
 		return new SM_SYSTEM_MESSAGE(1402392);
+	}
+
+	/**
+	 * Purification System
+	 */
+	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402397, nameId);
 	}
 
 	/**
@@ -22430,6 +22619,47 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
 
+	/**
+	 * Purification System
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP = new SM_SYSTEM_MESSAGE(1402571);
+
+	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA = new SM_SYSTEM_MESSAGE(1402572);
+
+	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
+		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
+	}
+
+	/**
+	 * Atreian Passport
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE = new SM_SYSTEM_MESSAGE(1402601);
+
+	/**
+	 * Amplification System
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402650, nameId);
+	}
+
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402657, nameId);
+	}
+
+	/**
+	 * %0 cannot be used to enchant an amplified item.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
+		return new SM_SYSTEM_MESSAGE(1402661, nameId);
+	}
+
+	/**
+	 * %0 successfully enchanted to level %1. The %2 skill has been added.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
+		return new SM_SYSTEM_MESSAGE(1402662, targetName, level, skillName);
+	}
+
 	private final int code;
 	private final Object[] params;
 	private boolean npcShout = false;
@@ -22462,14 +22692,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		this.params = params;
 	}
 
-	public SM_SYSTEM_MESSAGE(SystemMessageId sm, Object... params) {
-		this.code = sm.getId();
-		this.params = params;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(textColorId);
@@ -22499,5 +22721,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public int getId() {
 		return code;
+	}
+
+	private static DescriptionId calculateNameId(int id) {
+		return new DescriptionId(id * 2 + 1);
 	}
 }

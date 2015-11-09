@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.team2.league.League;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.HousingService;
@@ -119,7 +118,7 @@ public class InstanceService {
 			VisibleObject obj = it.next();
 			if (obj instanceof Player) {
 				Player player = (Player) obj;
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.LEAVE_INSTANCE_NOT_PARTY));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY);
 				moveToExitPoint((Player) obj);
 			} else {
 				obj.getController().onDelete();
