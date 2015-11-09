@@ -312,7 +312,7 @@ public class HousingBidService extends AbstractCronTask {
 				PacketSendUtility.sendPacket(buyerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(sellData.getKey().getAddress()));
 			}
 
-			long returnKinah = sellData.getKey().getBidPrice() + sellData.getKey().getRefundKinah();
+			long returnKinah = sellData.getKey().getBidPrice() - sellData.getKey().getRefundKinah();
 			if (soldHouse.isInGracePeriod()) {
 				soldHouse.revokeOwner();
 				// activate previously obtained house
