@@ -71,6 +71,7 @@ public class _10093TheKazaIdentity extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 855) {
 				QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 800843, 137.46f, 158.9f, 120.73f, (byte) 113);
+				(player.getPosition().getWorldMapInstance().getNpc(800842)).getController().onDelete();
 				return true;
 			} else if (movieId == 857) {
 				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 107.37f, 145.05f, 125.69f, (byte) 105,
@@ -152,7 +153,9 @@ public class _10093TheKazaIdentity extends QuestHandler {
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.04f, 136.029f, 112.17f, (byte) 53);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230401, 120.39f, 139.96f, 111.99f, (byte) 60);
 						QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 230402, 117.97f, 144.26f, 112.17f, (byte) 66);
-						return defaultCloseDialog(env, 6, 7);
+						changeQuestStep(env, 6, 7, false);
+						closeDialogWindow(env);
+						return true;
 					}
 					case SETPRO8: {
 						playQuestMovie(env, 857);
