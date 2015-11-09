@@ -904,7 +904,7 @@
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>2</maxcount>
+		<maxcount>4</maxcount>
 		<max_member_light>12</max_member_light>
 		<max_member_dark>12</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
