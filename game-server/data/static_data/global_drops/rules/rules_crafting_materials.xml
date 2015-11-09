@@ -731,7 +731,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Horns & Scales -->
-	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -749,7 +749,7 @@
 			<gd_item id="152014012" name="Solid Balaur Scale" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="-5" max_diff="0">
+	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="-5" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -761,7 +761,7 @@
 			<gd_item id="152014017" name="Firm Balaur Scale" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Horns &amp; Scales" base_chance="4" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />

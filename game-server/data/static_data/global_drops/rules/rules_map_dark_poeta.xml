@@ -47,7 +47,7 @@
 			<gd_item id="125002029" name="Dragon Flame Helm"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -136,7 +136,7 @@
 			<gd_item id="111600844" name="Anuhart Legionary's Gauntlets"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="114600827" name="Anuhart Legionary's Sabatons"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -192,7 +192,7 @@
 			<gd_item id="112600818" name="Anuhart Legionary's Shoulderplates"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -231,7 +231,7 @@
 			<gd_item id="122001039" name="Noah's Tears"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -245,7 +245,7 @@
 			<gd_item id="111500856" name="Anuhart Legionary's Handguards"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -332,7 +332,7 @@
 			<gd_item id="111600844" name="Anuhart Legionary's Gauntlets"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -360,7 +360,7 @@
 			<gd_item id="114600827" name="Anuhart Legionary's Sabatons"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -388,7 +388,7 @@
 			<gd_item id="112600818" name="Anuhart Legionary's Shoulderplates"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -716,7 +716,7 @@
 			<gd_item id="122001040" name="Elder's Tears"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -730,7 +730,7 @@
 			<gd_item id="114600827" name="Anuhart Legionary's Sabatons"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -743,7 +743,7 @@
 			<gd_item id="113600834" name="Anuhart Gladiator's Greaves"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>
@@ -757,7 +757,7 @@
 			<gd_item id="112600818" name="Anuhart Legionary's Shoulderplates"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 		</gd_maps>

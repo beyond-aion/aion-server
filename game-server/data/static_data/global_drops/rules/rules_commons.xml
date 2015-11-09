@@ -763,7 +763,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (blue, dmg) -->
-	<gd_rule rule_name="Godstones (Legend)" base_chance="0.05">
+	<gd_rule rule_name="Godstones (Legend)" base_chance="0.016">
 		<gd_items>
 			<gd_item id="168000028" name="Godstone: Magical Fire Strike" />
 			<gd_item id="168000029" name="Godstone: Magical Fire Smash" />
