@@ -73,15 +73,14 @@ public class CM_MANASTONE extends AionClientPacket {
 				EnchantItemAction action = new EnchantItemAction();
 				Item manastone = player.getInventory().getItemByObjId(stoneUniqueId);
 				Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
-				if (targetItem == null) {
+				if (targetItem == null)
 					targetItem = player.getInventory().getItemByObjId(targetItemUniqueId);
-				}
+
 				if (action.canAct(player, manastone, targetItem)) {
 					Item supplement = player.getInventory().getItemByObjId(supplementUniqueId);
 					if (supplement != null) {
-						if (supplement.getItemId() / 100000 != 1661) { // suppliment id check
+						if (supplement.getItemId() / 100000 != 1661) // suppliment id check
 							return;
-						}
 					}
 					action.act(player, manastone, targetItem, supplement, targetFusedSlot);
 				}
@@ -95,7 +94,12 @@ public class CM_MANASTONE extends AionClientPacket {
 				}
 				break;
 			case 4: // add godstone
-				ItemSocketService.socketGodstone(player, targetItemUniqueId, stoneUniqueId);
+				Item weaponItem = player.getInventory().getItemByObjId(targetItemUniqueId);
+				if (weaponItem == null) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM);
+					return;
+				}
+				ItemSocketService.socketGodstone(player, weaponItem, stoneUniqueId);
 				break;
 			case 8: // amplification
 				EnchantService.amplifyItem(player, targetItemUniqueId, supplementUniqueId, stoneUniqueId);

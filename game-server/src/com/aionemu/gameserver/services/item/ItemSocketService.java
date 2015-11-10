@@ -292,15 +292,17 @@ public class ItemSocketService {
 		ItemPacketService.updateItemAfterInfoChange(player, item);
 	}
 
-	public static void socketGodstone(Player player, int weaponId, int stoneId) {
-		Item weaponItem = player.getInventory().getItemByObjId(weaponId);
-		if (weaponItem == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM);
-			return;
+	public static void socketGodstone(Player player, Item weapon, int stoneId) {
+		if (weapon.getGodStone() != null) {
+			if (weapon.isEquipped())
+				weapon.getGodStone().onUnEquip(player);
+			weapon.getGodStone().setPersistentState(PersistentState.DELETED);
+			DAOManager.getDAO(ItemStoneListDAO.class).storeGodStones(weapon.getGodStone());
+			weapon.setGodStone(null);
 		}
 
-		if (!weaponItem.canSocketGodstone()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_ADD_PROC(new DescriptionId(weaponItem.getNameId())));
+		if (!weapon.canSocketGodstone()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_ADD_PROC(new DescriptionId(weapon.getNameId())));
 			AuditLogger.info(player, "Player try insert godstone in not compatible item");
 			return;
 		}
@@ -311,7 +313,7 @@ public class ItemSocketService {
 			public void moved() {
 				super.moved();
 				player.getObserveController().removeObserver(this);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, new DescriptionId(weaponItem.getNameId())));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, new DescriptionId(weapon.getNameId())));
 				if (player.getMoveController().isInMove()) {
 					player.getMoveController().abortMove();
 					player.getController().cancelUseItem();
@@ -342,19 +344,18 @@ public class ItemSocketService {
 			public void run() {
 				player.getObserveController().removeObserver(move);
 
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, 
-					itemTemplate.getTemplateId(), 0, 1, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(),
+					0, 1, 0));
 
 				if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 					return;
 
-				weaponItem.addGodStone(godStoneItemId);
-				if (weaponItem.isEquipped())
-					weaponItem.getGodStone().onEquip(player);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new 
-					DescriptionId(weaponItem.getNameId())));
-				
-				ItemPacketService.updateItemAfterInfoChange(player, weaponItem);
+				weapon.addGodStone(godStoneItemId);
+				if (weapon.isEquipped())
+					weapon.getGodStone().onEquip(player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weapon.getNameId())));
+
+				ItemPacketService.updateItemAfterInfoChange(player, weapon);
 			}
 		}, 2000));
 	}

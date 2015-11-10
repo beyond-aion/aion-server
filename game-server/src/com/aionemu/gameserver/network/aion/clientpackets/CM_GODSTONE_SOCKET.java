@@ -14,6 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer
  */
+@SuppressWarnings("unused")
 public class CM_GODSTONE_SOCKET extends AionClientPacket {
 
 	private int npcObjectId;
@@ -44,7 +45,7 @@ public class CM_GODSTONE_SOCKET extends AionClientPacket {
 
 		VisibleObject obj = activePlayer.getKnownList().getObject(npcObjectId);
 		if (obj != null && obj instanceof Npc && MathUtil.isInRange(activePlayer, obj, 7)) {
-			ItemSocketService.socketGodstone(activePlayer, weaponId, stoneId);
+			//ItemSocketService.socketGodstone(activePlayer, weaponId, stoneId);
 		}
 	}
 }

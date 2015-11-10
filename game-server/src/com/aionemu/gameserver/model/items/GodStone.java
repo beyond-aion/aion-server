@@ -43,6 +43,7 @@ public class GodStone extends ItemStone {
 
 	public GodStone(int itemObjId, int activatedCount, int itemId, PersistentState persistentState) {
 		super(itemObjId, itemId, 0, persistentState);
+		log.info("" + itemId);
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 		godItem = itemTemplate;
 		godstoneInfo = itemTemplate.getGodstoneInfo();

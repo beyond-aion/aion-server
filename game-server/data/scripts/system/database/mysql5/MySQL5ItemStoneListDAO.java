@@ -175,6 +175,11 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	}
 
 	@Override
+	public void storeGodStones(GodStone godStones) {
+		store(Collections.singleton(godStones), ItemStoneType.GODSTONE);
+	}
+
+	@Override
 	public void storeFusionStone(Set<ManaStone> manaStones) {
 		store(manaStones, ItemStoneType.FUSIONSTONE);
 	}
@@ -237,11 +242,10 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					st.setInt(6, 0);
 				}
 				if (is instanceof GodStone) {
-				   GodStone gs = (GodStone) is;
-				   st.setInt(7, gs.getActivatedCount());
-				}
-				else {
-				   st.setInt(7, 0);
+					GodStone gs = (GodStone) is;
+					st.setInt(7, gs.getActivatedCount());
+				} else {
+					st.setInt(7, 0);
 				}
 
 				st.addBatch();
@@ -277,11 +281,10 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 					st.setInt(4, 0);
 				}
 				if (is instanceof GodStone) {
-				   GodStone gs = (GodStone) is;
-				   st.setInt(5, gs.getActivatedCount());
-				}
-				else {
-				   st.setInt(5, 0);
+					GodStone gs = (GodStone) is;
+					st.setInt(5, gs.getActivatedCount());
+				} else {
+					st.setInt(5, 0);
 				}
 				st.setInt(6, is.getItemObjId());
 				st.setInt(7, ist.ordinal());

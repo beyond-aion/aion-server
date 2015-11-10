@@ -532,7 +532,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		
 	public GodStone addGodStone(int itemId, int activatedCount) {
 		PersistentState state = godStone != null ? PersistentState.UPDATE_REQUIRED : PersistentState.NEW;
-		godStone = new GodStone(getObjectId(), itemId, activatedCount, state);
+		godStone = new GodStone(getObjectId(), activatedCount, itemId, state);
 		return godStone;
 	}
 
