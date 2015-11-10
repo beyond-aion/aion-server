@@ -83,7 +83,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 				cancelIdeResonatorTask();
 				cancelFailTask();
 				despawnAdds();
-				rewardGP();
+				//rewardGP();
 				break;
 		}
 	}
