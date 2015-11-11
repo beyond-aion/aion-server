@@ -9,7 +9,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
@@ -219,13 +218,13 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void rewardGP() {
+	/*private void rewardGP() {
 		int reward = 600 / instance.getPlayersInside().size();
 		for (Player p : instance.getPlayersInside()) {
 			if (p != null && p.isOnline())
 				GloryPointsService.addGp(p, reward, true);
 		}
-	}
+	}*/
 
 	private void cancelIdeResonatorTask() {
 		if (ideResonatorTask != null && !ideResonatorTask.isCancelled()) {
