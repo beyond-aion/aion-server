@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214691" name="Captain Mundirve"/>
+			<gd_npc npc_id="214692" name="Butler Luitart"/>
+			<gd_npc npc_id="214693" name="Chief Maid Miladi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000032" name="Observation Post Passage Key"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000728" name="Lannok's Sword"/>
+			<gd_item id="100100573" name="Lannok's Warhammer"/>
+			<gd_item id="100200678" name="Lannok's Dagger"/>
+			<gd_item id="101700599" name="Lannok's Longbow"/>
+			<gd_item id="101500571" name="Lannok's Staff"/>
+			<gd_item id="101300543" name="Lannok's Spear"/>
+			<gd_item id="100900571" name="Lannok's Greatsword"/>
+			<gd_item id="100600614" name="Lannok's Tome"/>
+			<gd_item id="100600690" name="Lannok's Spellbook"/>
+			<gd_item id="100500577" name="Lannok's Jewel"/>
+			<gd_item id="100500633" name="Lannok's Orb"/>
+			<gd_item id="101800914" name="Lannok's Pistol"/>
+			<gd_item id="101900565" name="Lannok's Aethercannon"/>
+			<gd_item id="102000595" name="Lannok's Harp"/>
+			<gd_item id="102100769" name="Lannok's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214694" name="Bloodthirster"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000833" name="Liches' Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214691" name="Captain Mundirve"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100794" name="Adma Guard's Pauldrons"/>
+			<gd_item id="112300788" name="Adma Guard's Shoulderguards"/>
+			<gd_item id="114500840" name="Adma Guard's Brogans"/>
+			<gd_item id="114600799" name="Adma Guard's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214692" name="Butler Luitart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111500828" name="Adma Guard's Handguards"/>
+			<gd_item id="111600816" name="Adma Guard's Gauntlets"/>
+			<gd_item id="114100872" name="Adma Guard's Shoes"/>
+			<gd_item id="114300897" name="Adma Guard's Boots"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214693" name="Chief Maid Miladi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100837" name="Adma Guard's Gloves"/>
+			<gd_item id="111300838" name="Adma Guard's Vambrace"/>
+			<gd_item id="112500779" name="Adma Guard's Spaulders"/>
+			<gd_item id="112600790" name="Adma Guard's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214694" name="Bloodthirster"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100847" name="Adma Guard's Leggings"/>
+			<gd_item id="113500830" name="Adma Guard's Chausses"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100847" name="Adma Guard's Leggings"/>
+			<gd_item id="113300864" name="Adma Guard's Breeches"/>
+			<gd_item id="113500830" name="Adma Guard's Chausses"/>
+			<gd_item id="113600805" name="Adma Guard's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100939" name="Adma Guard's Tunic"/>
+			<gd_item id="110300887" name="Adma Guard's Jerkin"/>
+			<gd_item id="110500854" name="Adma Guard's Hauberk"/>
+			<gd_item id="110600839" name="Adma Guard's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214691" name="Captain Mundirve"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100880" name="Adma Elite's Shoes"/>
+			<gd_item id="114300905" name="Adma Elite's Boots"/>
+			<gd_item id="114500848" name="Adma Elite's Brogans"/>
+			<gd_item id="114600807" name="Adma Elite's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214692" name="Butler Luitart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100845" name="Adma Elite's Gloves"/>
+			<gd_item id="111300846" name="Adma Elite's Vambrace"/>
+			<gd_item id="111500836" name="Adma Elite's Handguards"/>
+			<gd_item id="111600824" name="Adma Elite's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214693" name="Chief Maid Miladi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100802" name="Adma Elite's Pauldrons"/>
+			<gd_item id="112300796" name="Adma Elite's Shoulderguards"/>
+			<gd_item id="112500787" name="Adma Elite's Spaulders"/>
+			<gd_item id="112600798" name="Adma Elite's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100855" name="Adma Elite's Leggings"/>
+			<gd_item id="113300872" name="Adma Elite's Breeches"/>
+			<gd_item id="113500838" name="Adma Elite's Chausses"/>
+			<gd_item id="113600813" name="Adma Elite's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100947" name="Adma Elite's Tunic"/>
+			<gd_item id="110300895" name="Adma Elite's Jerkin"/>
+			<gd_item id="110500862" name="Adma Elite's Hauberk"/>
+			<gd_item id="110600847" name="Adma Elite's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="60">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002032" name="Princess' Crown"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214691" name="Captain Mundirve"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001038" name="Lonely Diamond Ring"/>
+			<gd_item id="120000899" name="Lonely Ruby Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214692" name="Butler Luitart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000900" name="Lonely Sapphire Earrings"/>
+			<gd_item id="122001036" name="Lonely Ruby Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214693" name="Chief Maid Miladi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000901" name="Lonely Diamond Earrings"/>
+			<gd_item id="122001037" name="Lonely Sapphire Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000928" name="Karemiwen's Band"/>
+			<gd_item id="123000927" name="Karemiwen's Leather Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000813" name="Lonely Ruby Necklace"/>
+			<gd_item id="121000814" name="Lonely Sapphire Necklace"/>
+			<gd_item id="121000815" name="Lonely Diamond Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170175031" name="[Souvenir] Karemiwen's Teddy Bear"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" base_chance="20" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170495001" name="[Souvenir] Valeir the Thinker Statue"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000028" name="Main Hall Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214698" name="Bard Guionbark"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000027" name="Library Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214699" name="Templar Taliesin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000029" name="Great Dining Hall Key"/>
+			<gd_item id="185000030" name="Treasury Key"/>
+			<gd_item id="185000031" name="Servants Quarters Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214711" name="Rune of Distraction"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000020" name="Wind Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214712" name="Rune of Distraction"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000018" name="Water Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>
