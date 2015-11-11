@@ -192,7 +192,7 @@
 	<!-- 4.3 Void Cube Legion -->
 	<instance_exit instance_id="301180000" exit_world="600060000" race="PC_ALL" x="1433.1357" y="677.2937" z="122.32242" h="90"/>
 	<!-- Infinity Shard -->
-	<instance_exit instance_id="300800000" exit_world="600070000" race="PC_ALL" x="1288.7612" y="769.0617" z="564.20056"/>
+	<instance_exit instance_id="300800000" exit_world="600100000" race="PC_ALL" x="1072.4126" y="982.45844" z="337.7758"/>
 	<!-- Rukibuki Circus Troupe -->
 	<instance_exit instance_id="301160000" exit_world="110010000" race="ELYOS" x="1450.5635" y="1502.4572" z="573.0719"/>
 	<instance_exit instance_id="301160000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
