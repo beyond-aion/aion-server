@@ -201,7 +201,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		} else if (player.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD);
 			return false;
-		} else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId() == target.getPlayerGroup2().getTeamId()) {
+		} else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId().equals(target.getPlayerGroup2().getTeamId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
 		} else if (target.isInGroup2()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OTHER_PARTY(target.getName()));

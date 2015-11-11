@@ -80,7 +80,7 @@ public class ChallengeTaskService {
 		Map<Integer, Map<Integer, ChallengeTask>> taskMap = null;
 		if (challengeType == ChallengeType.LEGION)
 			taskMap = legionTasks;
-		else if (challengeType == ChallengeType.TOWN)
+		else
 			taskMap = cityTasks;
 		int playerTownId = TownService.getInstance().getTownResidence(player);
 		List<ChallengeTask> availableTasks = new FastTable<ChallengeTask>();

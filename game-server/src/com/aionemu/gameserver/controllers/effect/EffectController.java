@@ -903,7 +903,7 @@ public class EffectController {
 		}
 		rDelay = delayId;
 
-		if (delayId == rDelay && effects.size() >= size) {
+		if (effects.size() >= size) {
 			int i = 0;
 			Effect toRemove = null;
 			Iterator<Effect> iter2 = effects.iterator();

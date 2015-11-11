@@ -25,7 +25,7 @@ public class LegionMemberContainer {
 	 */
 	public void addMember(LegionMember legionMember) {
 		if (!legionMemberById.containsKey(legionMember.getObjectId()))
-			legionMemberById.put(legionMember.getObjectId(), legionMember);
+			legionMemberById.putIfAbsent(legionMember.getObjectId(), legionMember);
 	}
 
 	/**

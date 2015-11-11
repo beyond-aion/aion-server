@@ -589,7 +589,7 @@ public class DropRegistrationService {
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			// check for prevent different race drops
 			if (player.getRace() == Race.ASMODIANS && globalItem.getItemTemplate().getRace().equals(Race.ELYOS) || player.getRace() == Race.ELYOS
-				&& globalItem.getItemTemplate().equals(Race.ASMODIANS)) {
+				&& globalItem.getItemTemplate().getRace().equals(Race.ASMODIANS)) {
 				continue;
 			}
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();

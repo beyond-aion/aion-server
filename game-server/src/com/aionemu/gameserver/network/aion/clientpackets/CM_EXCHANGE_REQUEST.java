@@ -39,7 +39,7 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 		final Player activePlayer = getConnection().getActivePlayer();
 		final Player targetPlayer = World.getInstance().findPlayer(targetObjectId);
 
-		if (targetPlayer == null || activePlayer.getObjectId() == targetPlayer.getObjectId()) {
+		if (targetPlayer == null || activePlayer.getObjectId().equals(targetPlayer.getObjectId())) {
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_NO_ONE_TO_EXCHANGE);
 			return;
 		}

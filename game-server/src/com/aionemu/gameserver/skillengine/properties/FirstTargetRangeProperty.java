@@ -30,7 +30,7 @@ public class FirstTargetRangeProperty {
 		if (firstTarget == null)
 			return false;
 
-		if (firstTarget.getObjectId() == effector.getObjectId()) {
+		if (firstTarget.getObjectId().equals(effector.getObjectId())) {
 			return true;
 		}
 

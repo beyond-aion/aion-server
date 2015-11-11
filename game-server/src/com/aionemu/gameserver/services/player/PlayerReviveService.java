@@ -191,7 +191,7 @@ public class PlayerReviveService {
 			@Override
 			public void visit(Player visitor) {
 				VisibleObject target = visitor.getTarget();
-				if (target != null && target.getObjectId() == player.getObjectId()) {
+				if (target != null && target.getObjectId().equals(player.getObjectId())) {
 					visitor.setTarget(null);
 					PacketSendUtility.sendPacket(visitor, new SM_TARGET_SELECTED(null));
 				}

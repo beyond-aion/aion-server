@@ -74,7 +74,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 				first = firstOne;
 			}
 
-			if (first.getObjectId() != player.getObjectId()) {
+			if (first.getObjectId().equals(player.getObjectId())) {
 				if (isInvader) {
 					invAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_OFFENCE);
 				} else {

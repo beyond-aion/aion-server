@@ -325,7 +325,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	public void setColor(Integer color) {
-		if (color != this.color) {
+		if (!color.equals(this.color)) {
 			this.color = color;
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}

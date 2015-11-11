@@ -60,7 +60,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int maxHp = this.getOwner().getGameStats().getMaxHp().getCurrent();
 		if (maxHp == 0) {
 			maxHp = 1;
-			log.warn("CHECKPOINT: maxhp is 0 :" + this.getOwner().getGameStats());
+			
+			log.warn("CHECKPOINT: maxhp is 0 :" + this.getOwner().getSpawn().getNpcId());
 		}
 		return maxHp;
 	}

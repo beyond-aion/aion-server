@@ -427,6 +427,8 @@ public class GameServer {
 	}
 
 	public static void updateRatio(Race race, int i) {
+		if (race == null)
+			return;
 		lock.lock();
 		try {
 			switch (race) {
@@ -450,7 +452,7 @@ public class GameServer {
 			lock.unlock();
 		}
 
-		log.info("FACTIONS RATIO" + (race != null ? " UPDATED" : "") + ": E " + String.format("%.1f", ELYOS_RATIO) + " % / A "
+		log.info("FACTIONS RATIO UPDATED: E " + String.format("%.1f", ELYOS_RATIO) + " % / A "
 			+ String.format("%.1f", ASMOS_RATIO) + " %");
 	}
 

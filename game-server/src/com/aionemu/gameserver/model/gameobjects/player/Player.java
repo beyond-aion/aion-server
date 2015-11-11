@@ -1232,7 +1232,7 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
-		if (this.getObjectId() == enemy.getObjectId())
+		if (this.getObjectId().equals(enemy.getObjectId()))
 			return false;
 		else if ((this.getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1))
 			return false;
@@ -1275,7 +1275,7 @@ public class Player extends Creature {
 		if (creature instanceof Player && isInSameTeam((Player) creature))
 			return true;
 
-		if (creature instanceof Trap && ((Trap) creature).getCreator().getObjectId() == this.getObjectId())
+		if (creature instanceof Trap && ((Trap) creature).getCreator().getObjectId().equals(this.getObjectId()))
 			return true;
 
 		return creature.getVisualState() <= getSeeState();

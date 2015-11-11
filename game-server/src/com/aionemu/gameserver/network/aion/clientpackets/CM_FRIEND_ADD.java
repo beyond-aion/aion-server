@@ -49,7 +49,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 		}	else if (targetPlayer == null || !targetPlayer.getCommonData().isOnline()) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_OFFLINE);
-		}	else if (activePlayer.getObjectId() == targetPlayer.getObjectId()) {
+		}	else if (activePlayer.getObjectId().equals(targetPlayer.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY);
 		} else if (CustomConfig.FRIENDLIST_GM_RESTRICT && ((targetPlayer.isGM() && !activePlayer.isGM()) || (activePlayer.isGM() && !targetPlayer.isGM()))) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDY_CANT_ADD_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName(AdminConfig.CUSTOMTAG_ENABLE)));

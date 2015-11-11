@@ -38,7 +38,7 @@ public class SummonController extends CreatureController<Summon> {
 		if (getOwner().getMaster() == null)
 			return;
 
-		if (object.getObjectId() == getOwner().getMaster().getObjectId()) {
+		if (getOwner().getMaster().getObjectId().equals(object.getObjectId())) {
 			SummonsService.release(getOwner(), UnsummonType.DISTANCE, isAttacked);
 		}
 	}

@@ -331,7 +331,6 @@ public class ItemSocketService {
 
 		if (godstoneInfo == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM);
-			log.warn("Godstone info missing for itemid " + godStoneItemId);
 			return;
 		}
 
