@@ -134,9 +134,11 @@
 	<report_to id="4104" start_npc_ids="205193" end_npc_ids="205159"/>
 	<report_to_many id="39000" start_npc_ids="800165" end_npc_ids="800500">
 		<npc_infos var="0" npc_id="800501" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="800500" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<report_to_many id="39003" start_npc_ids="800500" end_npc_ids="800504">
 		<npc_infos var="0" npc_id="800512" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="800504" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<report_to id="39010" start_npc_ids="800501" end_npc_ids="800500"/>
 	<!-- COLLECTING QUESTS -->
