@@ -5,7 +5,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javolution.util.FastTable;
 
@@ -61,7 +63,7 @@ public class World {
 	/**
 	 * Container with all Npcs related to base spawns
 	 */
-	private final ConcurrentHashMap<Integer, FastTable<Npc>> baseNpc;
+	private final ConcurrentHashMap<Integer, List<Npc>> baseNpc;
 
 	/**
 	 * Container with all Npcs in the world
@@ -133,10 +135,10 @@ public class World {
 			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
 			int baseId = bst.getId();
 			if (!baseNpc.containsKey(baseId)) {
-				baseNpc.put(baseId, new FastTable<Npc>().shared());
+				baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<Npc>());
 			}
 			baseNpc.get(baseId).add((Npc) object);
-		}
+		} 
 
 		if (object instanceof Npc) {
 			allNpcs.put(object.getObjectId(), (Npc) object);
@@ -189,7 +191,7 @@ public class World {
 		return result != null ? result : Collections.<SiegeNpc> emptySet();
 	}
 
-	public FastTable<Npc> getBaseSpawns(int baseId) {
+	public List<Npc> getBaseSpawns(int baseId) {
 		return baseNpc.get(baseId);
 	}
 

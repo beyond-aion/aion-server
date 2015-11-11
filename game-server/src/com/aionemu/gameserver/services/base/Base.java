@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -140,7 +138,7 @@ public abstract class Base<T extends BaseLocation> {
 	}
 	
 	private Race chooseAssaultRace() {
-		List<Race> coll = new FastTable<>();
+		List<Race> coll = new ArrayList<>();
 		coll.add(Race.ASMODIANS);
 		coll.add(Race.ELYOS);
 		coll.add(Race.NPC);
@@ -155,14 +153,18 @@ public abstract class Base<T extends BaseLocation> {
 			public void run() {
 				if (isFinished.get())
 					return;
-				for (Npc npc : assaulter) {
-					if (!npc.getLifeStats().isAlreadyDead())
-						npc.getController().onDelete();
-				}
-				assaulter.clear();
+				despawnAssaulter();
 				scheduleAssault();
 			}
 		}, getAssaultDespawnDelay());
+	}
+	
+	private void despawnAssaulter() {
+		for (Npc npc : assaulter) {
+			if (npc != null && !npc.getLifeStats().isAlreadyDead())
+				npc.getController().onDelete();
+		}
+		assaulter.clear();
 	}
 	
 	public void spawnBySpawnHandler(SpawnHandlerType type, Race targetRace) {
