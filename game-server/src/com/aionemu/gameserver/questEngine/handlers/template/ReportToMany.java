@@ -19,7 +19,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Hilgert @modified vlog
+ * @author Hilgert @modified vlog, Pad
  */
 public class ReportToMany extends QuestHandler {
 
@@ -159,11 +159,24 @@ public class ReportToMany extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD && endNpcs.contains(targetId)) {
+			int var = qs.getQuestVarById(0);
 			NpcInfos targetNpcInfo = npcInfos.get(targetId);
-			if (dialog == DialogAction.USE_OBJECT && targetNpcInfo != null && targetNpcInfo.getQuestDialog() != 0) {
-				return sendQuestDialog(env, targetNpcInfo.getQuestDialog());
+			if (var >= maxVar && targetNpcInfo != null) {
+				int closeDialog;
+				if (targetNpcInfo.getCloseDialog() == 0) {
+					closeDialog = 10000 + targetNpcInfo.getVar();
+				} 
+				else {
+					closeDialog = targetNpcInfo.getCloseDialog();
+				}
+				if (dialog == DialogAction.USE_OBJECT) { 
+					if (closeDialog == 1009 || closeDialog == 20002)
+						return sendQuestEndDialog(env);
+					if (targetNpcInfo.getQuestDialog() != 0)
+						return sendQuestDialog(env, targetNpcInfo.getQuestDialog());
+				}
+				return sendQuestEndDialog(env);
 			}
-			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
