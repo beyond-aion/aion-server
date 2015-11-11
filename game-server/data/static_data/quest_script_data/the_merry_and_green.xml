@@ -21,7 +21,7 @@
 			39717 [TODO] [Daily] A Conspiracy Unfolds
 			39718 [TODO] [Daily] Vile Waters
 			39719 [TODO] [Daily] Trainspotting
-			49700 [TODO] Meet the Merry and Green
+			49700 [XML] Meet the Merry and Green
 			49701 [XML] [Daily] Blowing the Whistle
 			49702 [XML] [Daily] Invasive Species
 			49703 [TODO] [Daily] The Plantation Situation
@@ -44,6 +44,7 @@
 	-->
 	<!-- REPORTING QUESTS -->
 	<report_to id="39700" start_npc_ids="800930" end_npc_ids="800945"/>
+	<report_to id="49700" start_npc_ids="800933" end_npc_ids="800948"/>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="39701" start_npc_ids="800931 800932" />
 	<item_collecting id="39708" start_npc_ids="800931 800932" />
