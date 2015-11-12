@@ -831,7 +831,7 @@
 		</spawn>
 		<!-- Mercenary -->
 		<spawn npc_id="203054" respawn_time="295">
-			<spot x="1026.06" y="975.29" z="135.00" h="60"/>
+			<spot x="1026.06" y="975.29" z="130.72" h="60"/>
 		</spawn>
 		<!-- Mercenary -->
 		<spawn npc_id="203055" respawn_time="295">

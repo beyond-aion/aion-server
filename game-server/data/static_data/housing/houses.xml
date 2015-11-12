@@ -616,7 +616,7 @@
     </land>
     <land id="329001" teleport_npc="810003" manager_npc="810021" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
         <addresses>
-            <address id="2001" map="720010000" town="0" x="366.242615" y="295.776093" z="221.539993" exit_map="700010000" exit_x="2573.0" exit_y="1961.0" exit_z="185.0"/>
+            <address id="2001" map="720010000" town="0" x="366.242615" y="295.776093" z="222.3536" exit_map="700010000" exit_x="2573.0" exit_y="1961.0" exit_z="185.0"/>
         </addresses>
         <buildings>
             <building id="355000" default="true"/>
