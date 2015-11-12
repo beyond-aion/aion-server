@@ -35,7 +35,7 @@ public class Wish extends ConsoleCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if ((params.length < 0) || (params.length < 1)) {
+		if (params.length < 1) {
 			info(admin, null);
 			return;
 		}
@@ -157,6 +157,7 @@ public class Wish extends ConsoleCommand {
 
 			if (visibleObject == null) {
 				PacketSendUtility.sendMessage(admin, "Spawn id " + objId + " was not found!");
+				return;
 			}
 
 			String objectName = visibleObject.getObjectTemplate().getName();

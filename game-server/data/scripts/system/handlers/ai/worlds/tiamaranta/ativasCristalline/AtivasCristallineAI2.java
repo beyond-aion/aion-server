@@ -1,7 +1,9 @@
 package ai.worlds.tiamaranta.ativasCristalline;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Collections;
+import java.util.List;
 
+import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.utils.Rnd;
@@ -14,11 +16,14 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 
 @AIName("ativascristalline")
 public class AtivasCristallineAI2 extends AggressiveNpcAI2 {
+	
+	private List<Integer> percents = new FastTable<>();
 
-	private AtomicBoolean isStart90Event = new AtomicBoolean(false);
-	private AtomicBoolean isStart60Event = new AtomicBoolean(false);
-	private AtomicBoolean isStart30Event = new AtomicBoolean(false);
-	private AtomicBoolean isStart10Event = new AtomicBoolean(false);
+	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		addPercent();
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -28,31 +33,32 @@ public class AtivasCristallineAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	protected void handleBackHome() {
-		isStart90Event.set(false);
-		isStart60Event.set(false);
-		isStart30Event.set(false);
-		isStart10Event.set(false);
+		addPercent();
 		super.handleBackHome();
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 90) {
-			if (isStart90Event.compareAndSet(false, true)) {
-				topazKomad();
+	private synchronized void checkPercentage(int hpPercentage) {
+		for (Integer percent : percents) {
+			if (hpPercentage <= percent) {
+				switch (percent) {
+					case 90:
+					case 30:
+						topazKomad();
+						break;
+					case 60:
+					case 10:
+						garnetKomad();
+						break;
+				}
 			}
-		} else if (hpPercentage <= 60) {
-			if (isStart60Event.compareAndSet(false, true)) {
-				garnetKomad();
-			}
-		} else if (hpPercentage <= 30) {
-			if (isStart30Event.compareAndSet(false, true)) {
-				topazKomad();
-			}
-		} else if (hpPercentage <= 10) {
-			if (isStart10Event.compareAndSet(false, true)) {
-				garnetKomad();
-			}
+			percents.remove(percent);
+			break;
 		}
+	}
+	
+	private void addPercent() {
+		percents.clear();
+		Collections.addAll(percents, new Integer[] { 100, 75, 50, 25 });
 	}
 
 	private void garnetKomad() {

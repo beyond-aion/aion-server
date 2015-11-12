@@ -39,17 +39,16 @@ public class AncientWindStreamActivatorAI2 extends NpcAI2 {
 			@Override
 			public void run() {
 				Npc npc2 = (Npc) spawn(600020000, 207088, 158.58449f, 2204.0615f, 556.51917f, (byte) 0, 0, 1);
-				windStreamAnnounce(npc2, 1);
-				PacketSendUtility.broadcastPacket(npc2, new SM_SYSTEM_MESSAGE(1401331));
-				spawn(207089, 158.58449f, 2204.0615f, 556.51917f, (byte) 0);
-				PacketSendUtility.broadcastPacket(npc2, new SM_WINDSTREAM_ANNOUNCE(1, 600020000, 163, 1));
-
 				if (npc2 != null) {
+					windStreamAnnounce(npc2, 1);
+					PacketSendUtility.broadcastPacket(npc2, new SM_SYSTEM_MESSAGE(1401331));
+					spawn(207089, 158.58449f, 2204.0615f, 556.51917f, (byte) 0);
+					PacketSendUtility.broadcastPacket(npc2, new SM_WINDSTREAM_ANNOUNCE(1, 600020000, 163, 1));
 					npc2.getController().onDelete();
 				}
-				if (npc != null) {
+
+				if (npc != null)
 					npc.getController().onDelete();
-				}
 			}
 
 		}, 15000);

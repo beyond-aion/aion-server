@@ -78,6 +78,8 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 			if (instance != null) {
 				List<Npc> npcs = instance.getNpcs(281514);
 				for (Npc npc : npcs) {
+					if (npc == null)
+						continue;
 					SpawnTemplate template = npc.getSpawn();
 					if (npc != null && (template.getX() == 518 || template.getX() == 551 || template.getX() == 574)) {
 						npc.getController().onDelete();

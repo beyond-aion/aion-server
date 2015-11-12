@@ -28,6 +28,8 @@ public abstract class AbstractRestrictions implements Restrictions {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
 		return getClass().equals(obj.getClass());
 	}
 

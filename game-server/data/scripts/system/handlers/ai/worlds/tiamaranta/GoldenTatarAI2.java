@@ -27,9 +27,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 @AIName("golden_tatar")
 public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
-	private Future<?> phaseTask;
 	private Future<?> thinkTask;
 	private Future<?> specialSkillTask;
 	private boolean think = true;
@@ -244,12 +243,6 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void cancelPhaseTask() {
-		if (phaseTask != null && !phaseTask.isDone()) {
-			phaseTask.cancel(true);
-		}
-	}
-
 	private void cancelThinkTask() {
 		if (thinkTask != null && !thinkTask.isDone()) {
 			thinkTask.cancel(true);
@@ -274,7 +267,6 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		cancelspecialSkillTask();
 		cancelThinkTask();
-		cancelPhaseTask();
 		percents.clear();
 		super.handleDespawned();
 	}
@@ -284,7 +276,6 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 		sendMsg(1500503);
 		cancelspecialSkillTask();
 		cancelThinkTask();
-		cancelPhaseTask();
 		percents.clear();
 		deleteNpcs(282746);
 		deleteNpcs(282743);
@@ -297,7 +288,6 @@ public class GoldenTatarAI2 extends AggressiveNpcAI2 {
 		think = true;
 		cancelspecialSkillTask();
 		cancelThinkTask();
-		cancelPhaseTask();
 		addPercent();
 		curentPercent = 100;
 		deleteNpcs(282746);

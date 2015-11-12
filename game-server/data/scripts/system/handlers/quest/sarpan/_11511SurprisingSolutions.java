@@ -75,16 +75,16 @@ public class _11511SurprisingSolutions extends QuestHandler {
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		if (player == null)
+			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int var = qs.getQuestVarById(1);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (var == 15) {
+			if (qs.getQuestVarById(1) == 15) {
 				changeQuestStep(env, 1, 1, false);
 				return true;
 			} else {
-				qs.setQuestVarById(1, var);
+				qs.setQuestVarById(1, qs.getQuestVarById(1));
 			}
-
 		}
 		return false;
 	}

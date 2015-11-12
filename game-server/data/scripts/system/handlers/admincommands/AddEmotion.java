@@ -46,11 +46,12 @@ public class AddEmotion extends AdminCommand {
 
 		target = admin.getTarget();
 
-		if (target == null) {
+		if (target == null)
 			finalTarget = admin;
-		} else if (target instanceof Player) {
+		else if (target instanceof Player)
 			finalTarget = (Player) target;
-		}
+		else
+			return;
 
 		if (finalTarget.getEmotions().contains(emotionId)) {
 			PacketSendUtility.sendMessage(admin, "Target has aldready this emotion !");

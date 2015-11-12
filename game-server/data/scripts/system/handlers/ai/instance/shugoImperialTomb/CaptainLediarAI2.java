@@ -77,7 +77,7 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	public int modifyOwnerDamage(int damage) {
-		return damage = 1;
+		return 1;
 	}
 
 	@Override

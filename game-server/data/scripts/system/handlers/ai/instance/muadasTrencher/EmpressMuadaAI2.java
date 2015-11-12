@@ -40,7 +40,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 	private Future<?> addSpawnTask;
 	private Future<?> swipingBlowTask;
 	private Future<?> neuroToxinTask;
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 
 	@Override
 	public boolean canThink() {

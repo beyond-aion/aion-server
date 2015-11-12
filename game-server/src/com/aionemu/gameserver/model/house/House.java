@@ -298,7 +298,7 @@ public class House extends VisibleObject {
 		permissions = HousePermissions.setNoticeState(permissions, noticeState);
 	}
 
-	public HouseStatus getStatus() {
+	public synchronized HouseStatus getStatus() {
 		return status;
 	}
 

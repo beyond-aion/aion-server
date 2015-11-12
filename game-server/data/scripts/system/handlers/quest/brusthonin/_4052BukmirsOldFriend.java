@@ -92,19 +92,6 @@ public class _4052BukmirsOldFriend extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 730152) {
-			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
-					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
-					qs.setQuestVar(3);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
-			}
 		}
 		return false;
 	}

@@ -111,13 +111,13 @@ public class BollvigAI2 extends AggressiveNpcAI2 {
 			@Override
 			public void run() {
 				int hpPercent = getLifeStats().getHpPercentage();
-				if (75 >= hpPercent && hpPercent > 50) {
+				if (hpPercent <= 75 && hpPercent > 50) {
 					useSkill(18025);// Curse of Soul
 					firstSkill();
-				} else if (50 >= hpPercent) {
+				} else if (hpPercent <= 50 && hpPercent > 25) {
 					useSkill(18025);// Curse of Soul
 					firstSkill();
-				} else if (25 >= hpPercent) {
+				} else if (hpPercent <= 25) {
 					useSkill(18027);// Mortal Cutting
 					lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 

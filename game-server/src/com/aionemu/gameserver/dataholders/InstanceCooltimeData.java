@@ -70,31 +70,28 @@ public class InstanceCooltimeData {
 		int instanceCooldownRate = InstanceService.getInstanceRate(player, worldId);
 		long instanceCoolTime = 0;
 		InstanceCooltime clt = getInstanceCooltimeByWorldId(worldId);
-		if (clt.getMaxCount() == 0)
+		if (clt == null || clt.getMaxCount() == 0)
 			return 0;
-		if (clt != null) {
-			instanceCoolTime = clt.getEntCoolTime();
-			if (clt.getCoolTimeType().isDaily()) {
-				DateTime now = DateTime.now();
-				DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), (int) (instanceCoolTime / 100), 0, 0);
-				if (now.isAfter(repeatDate)) {
-					repeatDate = repeatDate.plusHours(24);
-					instanceCoolTime = repeatDate.getMillis();
-				} else {
-					instanceCoolTime = repeatDate.getMillis();
-				}
-			} else if (clt.getCoolTimeType().isWeekly()) {
-				String[] days = clt.getTypeValue().split(",");
-				instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
+		instanceCoolTime = clt.getEntCoolTime();
+		if (clt.getCoolTimeType().isDaily()) {
+			DateTime now = DateTime.now();
+			DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), (int) (instanceCoolTime / 100), 0, 0);
+			if (now.isAfter(repeatDate)) {
+				repeatDate = repeatDate.plusHours(24);
+				instanceCoolTime = repeatDate.getMillis();
 			} else {
-				if (instanceCoolTime == 0) // unlimited entrance, no need to store
-					return 0;
-				instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
+				instanceCoolTime = repeatDate.getMillis();
 			}
+		} else if (clt.getCoolTimeType().isWeekly()) {
+			String[] days = clt.getTypeValue().split(",");
+			instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
+		} else {
+			if (instanceCoolTime == 0) // unlimited entrance, no need to store
+				return 0;
+			instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
 		}
-		if (instanceCooldownRate != 1) {
+		if (instanceCooldownRate != 1)
 			instanceCoolTime = System.currentTimeMillis() + ((instanceCoolTime - System.currentTimeMillis()) / instanceCooldownRate);
-		}
 		return instanceCoolTime;
 	}
 

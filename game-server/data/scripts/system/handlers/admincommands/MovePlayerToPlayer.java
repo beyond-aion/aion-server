@@ -37,7 +37,7 @@ public class MovePlayerToPlayer extends AdminCommand {
 			return;
 		}
 
-		if (playerToMove.getObjectId() == playerDestination.getObjectId()) {
+		if (playerToMove.getObjectId().equals(playerDestination.getObjectId())) {
 			PacketSendUtility.sendMessage(admin, "Cannot move the specified player to their own position.");
 			return;
 		}

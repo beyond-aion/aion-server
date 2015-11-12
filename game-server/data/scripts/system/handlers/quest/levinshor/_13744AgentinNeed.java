@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Pad TODO: implement AgentFight condition
+ * @author Pad 
  */
 public class _13744AgentinNeed extends QuestHandler {
 
@@ -33,12 +33,8 @@ public class _13744AgentinNeed extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000")) /*
-																																																															 * &&
-																																																															 * AgentsFightService.
-																																																															 * getInstance
-																																																															 * ().isStarted()
-																																																															 */) {
+		//TODO: implement AgentFight condition
+		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) {
 			Player player = env.getPlayer();
 			if (player == null)
 				return false;
@@ -55,6 +51,8 @@ public class _13744AgentinNeed extends QuestHandler {
 	@Override
 	public boolean onKillInZoneEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		if (player == null)
+			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;

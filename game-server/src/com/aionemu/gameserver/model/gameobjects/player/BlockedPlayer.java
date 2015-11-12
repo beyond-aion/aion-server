@@ -27,7 +27,7 @@ public class BlockedPlayer {
 		return pcd.getName();
 	}
 
-	public String getReason() {
+	public synchronized String getReason() {
 		return reason;
 	}
 

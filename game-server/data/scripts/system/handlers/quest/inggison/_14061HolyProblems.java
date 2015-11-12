@@ -164,7 +164,7 @@ public class _14061HolyProblems extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() != 300190000) {
 				int var = qs.getQuestVarById(0);
-				if (var <= 3 && var >= 24 && player.getInventory().getItemCountByItemId(182215346) == 0) {
+				if (var <= 3 && var >= 24 && player.getInventory().getItemCountByItemId(182215346) == 0) { //TODO: Check this shit
 					removeQuestItem(env, 182206627, 1);
 					removeQuestItem(env, 182206628, 1);
 					qs.setQuestVar(2);

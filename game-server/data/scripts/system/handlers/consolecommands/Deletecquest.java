@@ -21,7 +21,7 @@ public class Deletecquest extends ConsoleCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if ((params.length < 0) || (params.length < 1)) {
+		if (params.length < 1) {
 			info(admin, null);
 			return;
 		}
@@ -50,6 +50,7 @@ public class Deletecquest extends ConsoleCommand {
 		QuestStateList list = player.getQuestStateList();
 		if (list == null || list.getQuestState(id) == null) {
 			PacketSendUtility.sendMessage(admin, "Quest not deleted.");
+			return;
 		}
 
 		QuestState qs = list.getQuestState(id);

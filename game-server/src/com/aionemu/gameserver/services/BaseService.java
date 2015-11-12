@@ -190,8 +190,10 @@ public class BaseService {
 	 */
 	private static void despawnByHandlerType(SpawnHandlerType type, int id) {
 		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
+			if (npc == null)
+				continue;
 			if (npc.getSpawn().getHandlerType().equals(type)) {
-				if (npc != null && !npc.getLifeStats().isAlreadyDead())
+				if (!npc.getLifeStats().isAlreadyDead())
 					npc.getController().onDelete();
 			}
 		}

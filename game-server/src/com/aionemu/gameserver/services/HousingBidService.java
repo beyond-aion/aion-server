@@ -205,7 +205,7 @@ public class HousingBidService extends AbstractCronTask {
 			}
 
 			if (playerBid.getPlayerId() != 0) {
-				HouseBidEntry playerEntry = (HouseBidEntry) entry.Clone();
+				HouseBidEntry playerEntry = entry.cloneHouseBidEntry();
 				playerEntry.setBidPrice(playerBid.getBidOffer());
 				playerBids.put(playerBid.getPlayerId(), playerEntry);
 
@@ -691,7 +691,7 @@ public class HousingBidService extends AbstractCronTask {
 			entry.setLastBidTime(time.getTime());
 			entry.setBidPrice(bidOffer);
 
-			HouseBidEntry playerBid = (HouseBidEntry) entry.Clone();
+			HouseBidEntry playerBid = entry.cloneHouseBidEntry();
 			playerBids.put(player.getObjectId(), playerBid);
 
 			DAOManager.getDAO(HouseBidsDAO.class).addBid(player.getObjectId(), bidHouse.getObjectId(), bidOffer, time);

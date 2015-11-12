@@ -335,8 +335,8 @@ public class DropInfo extends AdminCommand {
 
 	private boolean checkRestrictionRace(GlobalRule rule, Player player) {
 		if (rule.getRestrictionRace() != null) {
-			if (player.getRace() == Race.ASMODIANS && rule.getRestrictionRace().equals("ELYOS") || player.getRace() == Race.ELYOS
-				&& rule.getRestrictionRace().equals("ASMODIANS"))
+			if (player.getRace() == Race.ASMODIANS && rule.getRestrictionRace().toString().equals("ELYOS") || player.getRace() == Race.ELYOS
+				&& rule.getRestrictionRace().toString().equals("ASMODIANS"))
 				return false;
 		}
 		return true;

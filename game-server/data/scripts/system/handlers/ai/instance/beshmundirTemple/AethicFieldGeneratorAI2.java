@@ -124,7 +124,6 @@ public class AethicFieldGeneratorAI2 extends GeneralNpcAI2 {
 		}
 		isAggred.set(false);
 		addPercent();
-		deleteNpcs(instance.getNpcs(216532));
 		super.handleBackHome();
 	}
 

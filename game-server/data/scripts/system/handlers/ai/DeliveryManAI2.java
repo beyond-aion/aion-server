@@ -50,7 +50,7 @@ public class DeliveryManAI2 extends FollowingNpcAI2 {
 	@Override
 	protected void handleDialogFinish(Player player) {
 		super.handleDialogFinish(player);
-		if (player.getObjectId() == owner.getObjectId()) {
+		if (player.getObjectId().equals(owner.getObjectId())) {
 			AI2Actions.deleteOwner(DeliveryManAI2.this);
 			if (despawnTask != null) {
 				despawnTask.cancel(false);

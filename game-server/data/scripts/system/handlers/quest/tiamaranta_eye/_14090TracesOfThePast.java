@@ -161,10 +161,9 @@ public class _14090TracesOfThePast extends QuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int var = qs.getQuestVarById(0);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q14090"))) {
-				if (var == 1) {
+				if (qs.getQuestVarById(0) == 1) {
 					TeleportService2.teleportTo(player, 300490000, player.getInstanceId(), 504, 515, 417, (byte) 10);
 					QuestService.addNewSpawn(300490000, player.getInstanceId(), 730889, (float) 504.54, (float) 515.5, 417, (byte) 95);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));

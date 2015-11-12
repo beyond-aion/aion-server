@@ -1,7 +1,6 @@
 package quest.rentus_base;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -54,10 +53,6 @@ public class _30503RodelionRescue extends QuestHandler {
 						changeQuestStep(env, 0, 0, true);
 						return closeDialogWindow(env);
 				}
-			} else if (targetId == 799541) {
-				Npc npc = (Npc) env.getVisibleObject();
-				npc.getController().onDelete();
-				return true;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205438) {

@@ -76,18 +76,6 @@ public class _2767AFruitfulPartnership extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 279004) {
-			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
-					return sendQuestDialog(env, 5);
-				else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-					qs.setQuestVar(3);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
-			}
 		}
 		return false;
 	}

@@ -19,7 +19,7 @@ public class TelepathyControllerAI2 extends AggressiveNpcAI2 {
 	private AtomicBoolean isStart10Event = new AtomicBoolean(false);
 
 	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 50) {
+		if (hpPercentage <= 50 && hpPercentage > 10) {
 			if (isStart50Event.compareAndSet(false, true)) {
 				helper();
 			}

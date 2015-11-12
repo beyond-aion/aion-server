@@ -1065,7 +1065,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 			@Override
 			public void visit(Player p) {
-				if (player.getObjectId() == p.getObjectId()) {
+				if (player.getObjectId().equals(p.getObjectId())) {
 					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400932));
 				} else
 					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400933, player.getName()));

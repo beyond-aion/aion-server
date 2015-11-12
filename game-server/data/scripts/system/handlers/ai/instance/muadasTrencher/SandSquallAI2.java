@@ -77,7 +77,7 @@ public class SandSquallAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void startLifeTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+		lifeTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
@@ -90,9 +90,8 @@ public class SandSquallAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void cancelLifeTask() {
-		if (lifeTask != null && !lifeTask.isDone()) {
+		if (lifeTask != null && !lifeTask.isDone())
 			lifeTask.cancel(true);
-		}
 	}
 
 	@Override

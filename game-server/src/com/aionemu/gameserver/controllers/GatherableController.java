@@ -93,7 +93,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			case 1: // player has equipped item, or have a consumable in inventory, so he will obtain extra items
 				materials = template.getExtraMaterials().getMaterial();
 				break;
-			case 2:// regular thing
+			default:// regular thing
 				materials = template.getMaterials().getMaterial();
 				break;
 		}

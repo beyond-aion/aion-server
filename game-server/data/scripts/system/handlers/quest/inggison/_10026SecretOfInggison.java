@@ -78,8 +78,6 @@ public class _10026SecretOfInggison extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
-					else if (var == 1)
-						return sendQuestDialog(env, 1353);
 				case SET_SUCCEED:
 					if (var == 1) {
 						qs.setStatus(QuestStatus.REWARD);

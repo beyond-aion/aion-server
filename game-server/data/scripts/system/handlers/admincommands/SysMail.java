@@ -108,8 +108,8 @@ public class SysMail extends AdminCommand {
 		if (letterType == LetterType.BLACKCLOUD)
 			sender = "$$CASH_ITEM_MAIL";
 
-		Boolean express = checkExpress(admin, item, count, kinah, recipient, recipientType, letterType);
-		if (express == null)
+		boolean express = checkExpress(admin, item, count, kinah, recipient, recipientType, letterType);
+		if (!express)
 			return;
 
 		if (item <= 0)
@@ -193,24 +193,24 @@ public class SysMail extends AdminCommand {
 		return wordCount;
 	}
 
-	private static Boolean checkExpress(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType,
+	private static boolean checkExpress(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType,
 		LetterType letterType) {
-		Boolean shouldExpress = null;
+		boolean shouldExpress = false;
 
 		if (recipientType == null) {
 			PacketSendUtility.sendMessage(admin, "Please insert Recipient Type.\n" + "Recipient = player, @all, @elyos or @asmodians");
-			return null;
+			return false;
 		} else if (recipientType == RecipientType.PLAYER) {
 			if (letterType == LetterType.NORMAL) {
 				if (!DAOManager.getDAO(PlayerDAO.class).isNameUsed(recipient)) {
 					PacketSendUtility.sendMessage(admin, "Could not find a Recipient by that name.");
-					return null;
+					return false;
 				}
-				shouldExpress = false;
+				shouldExpress = true;
 			} else if (letterType == LetterType.EXPRESS) {
 				if (World.getInstance().findPlayer(recipient) == null) {
 					PacketSendUtility.sendMessage(admin, "This Recipient is offline.");
-					return null;
+					return false;
 				}
 				shouldExpress = true;
 			} else { // Black cloud
@@ -222,38 +222,38 @@ public class SysMail extends AdminCommand {
 
 		if (item == 0 && count != 0) {
 			PacketSendUtility.sendMessage(admin, "Please insert Item Id..");
-			return null;
+			return false;
 		}
 
 		if (count == 0 && item != 0) {
 			PacketSendUtility.sendMessage(admin, "Please insert Item Count.");
-			return null;
+			return false;
 		}
 
 		if (count <= 0 && item <= 0 && kinah <= 0) {
 			PacketSendUtility.sendMessage(admin, "Parameters <Item> <Count> <Kinah> are icorrect.");
-			return null;
+			return false;
 		}
 
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(item);
 		if (item != 0) {
 			if (itemTemplate == null) {
 				PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + item);
-				return null;
+				return false;
 			}
 			long maxStackCount = itemTemplate.getMaxStackCount();
 			if (count > maxStackCount && maxStackCount != 0) {
 				PacketSendUtility.sendMessage(admin, "Please insert correct Item Count.");
-				return null;
+				return false;
 			}
 		}
 
 		if (kinah < 0) {
 			PacketSendUtility.sendMessage(admin, "Kinah value must be >= 0.");
-			return null;
+			return false;
 		} else if (kinah > 0 && letterType == LetterType.BLACKCLOUD) {
 			PacketSendUtility.sendMessage(admin, "Kinah attachment are not for black cloud letters!");
-			return null;
+			return false;
 		}
 		return shouldExpress;
 	}

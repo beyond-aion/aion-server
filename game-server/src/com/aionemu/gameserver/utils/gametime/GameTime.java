@@ -262,8 +262,9 @@ public class GameTime implements Cloneable {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		GameTime other = (GameTime) o;
-		return this.getTime() == other.getTime();
+		if (o == null)
+			return false;
+		return this.getTime() == ((GameTime) o).getTime();
 	}
 
 	@Override

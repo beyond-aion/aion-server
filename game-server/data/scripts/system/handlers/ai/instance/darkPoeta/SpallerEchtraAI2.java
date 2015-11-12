@@ -25,7 +25,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 public class SpallerEchtraAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> skillTask;
-	private Future<?> skill2Task;
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -67,8 +66,6 @@ public class SpallerEchtraAI2 extends AggressiveNpcAI2 {
 	private void cancelTask() {
 		if (skillTask != null && !skillTask.isDone())
 			skillTask.cancel(true);
-		else if (skill2Task != null && !skill2Task.isDone())
-			skill2Task.cancel(true);
 	}
 
 	@Override

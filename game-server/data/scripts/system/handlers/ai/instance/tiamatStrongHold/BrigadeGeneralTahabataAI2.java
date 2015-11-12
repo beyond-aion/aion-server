@@ -115,6 +115,8 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 			}
 		}
 		Player target = !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
+		if (target == null)
+			return;
 		AI2Actions.targetCreature(this, target);
 		World.getInstance().updatePosition(getOwner(), target.getX(), target.getY(), target.getZ(), (byte) 0);
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));

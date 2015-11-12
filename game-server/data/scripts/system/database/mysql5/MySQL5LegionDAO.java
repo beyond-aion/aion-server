@@ -187,7 +187,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 		log.debug("[MySQL5LegionDAO] Loaded " + legion.getLegionId() + " legion.");
 
-		return (success && legion.getLegionName() != "") ? legion : null;
+		return (success && !legion.getLegionName().equals("")) ? legion : null;
 	}
 
 	/**

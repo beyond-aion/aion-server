@@ -107,7 +107,7 @@ public class HouseBidEntry implements Cloneable {
 		this.lastBidTime = lastBidTime;
 	}
 
-	public Object Clone() {
+	public HouseBidEntry cloneHouseBidEntry() {
 		HouseBidEntry cloned = new HouseBidEntry();
 		cloned.address = this.address;
 		cloned.bidCount = this.bidCount;

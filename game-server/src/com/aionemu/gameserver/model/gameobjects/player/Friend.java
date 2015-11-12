@@ -99,7 +99,7 @@ public class Friend {
 		return pcd.isOnline();
 	}
 
-	public String getFriendMemo() {
+	public synchronized String getFriendMemo() {
 		return memo;
 	}
 

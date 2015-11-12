@@ -106,10 +106,9 @@ public class _14081TheHeartOfThePresent extends QuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int var = qs.getQuestVarById(0);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideZone(ZoneName.get("LDF4B_ITEMUSEAREA_Q10060A"))) {
-				if (var == 1) {
+				if (qs.getQuestVarById(0) == 1) {
 					QuestService.addNewSpawn(600030000, player.getInstanceId(), 702314, player.getX(), player.getY(), player.getZ(), (byte) 95);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
 				}

@@ -36,8 +36,9 @@ class _18904AccordingToHisAbility extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		if (player == null)
+			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		if (env.getVisibleObject() instanceof Npc) {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
@@ -58,7 +59,7 @@ class _18904AccordingToHisAbility extends QuestHandler {
 			} else if (targetId == 205844) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)// 26
 					return sendQuestDialog(env, 1352);// select2
-				else if (var == 9) {
+				else if (qs.getQuestVarById(0) == 9) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));

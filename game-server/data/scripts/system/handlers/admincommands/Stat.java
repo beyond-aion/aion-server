@@ -60,10 +60,6 @@ public class Stat extends AdminCommand {
 						PacketSendUtility.sendMessage(admin, "Only players can be selected");
 						return;
 					}
-					if (params.length < 2) {
-						PacketSendUtility.sendMessage(admin, "Syntax: stat abs [templateId|cancel]");
-						return;
-					}
 					AbsoluteStatOwner absStats = ((Player) target).getAbsoluteStats();
 					try {
 						Integer templateId = Integer.parseInt(params[1]);

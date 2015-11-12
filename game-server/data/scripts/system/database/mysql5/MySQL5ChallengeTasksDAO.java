@@ -53,7 +53,7 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
 							Map<Integer, ChallengeQuest> quests = new HashMap<Integer, ChallengeQuest>(2);
 							quests.put(quest.getQuestId(), quest);
 							ChallengeTask task = new ChallengeTask(taskId, ownerId, quests, date);
-							tasks.put(taskId, task);
+							tasks.putIfAbsent(taskId, task);
 						} else {
 							tasks.get(taskId).getQuests().put(questId, quest);
 						}
