@@ -100,11 +100,9 @@ public class LoginServer {
 				log.info("Cant connect to LoginServer: " + e.getMessage());
 			}
 			try {
-				/**
-				 * 10s sleep
-				 */
 				Thread.sleep(10 * 1000);
 			} catch (Exception e) {
+				log.error("[LoginServer] Error occured while trying to sleep connection-thread.");
 			}
 		}
 	}

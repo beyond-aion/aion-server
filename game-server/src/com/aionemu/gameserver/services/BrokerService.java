@@ -126,7 +126,7 @@ public class BrokerService {
 		} else
 			searchItems = getFilteredItems(player);
 
-		if (searchItems == null || searchItems.length < 0)
+		if (searchItems == null)
 			return;
 
 		int totalSearchItemsCount = searchItems.length;

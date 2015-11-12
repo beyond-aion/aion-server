@@ -73,7 +73,7 @@ public class AutoGroupService {
 			return;
 		}
 		if (lfp == null) {
-			searchers.put(obj, new LookingForParty(player, instanceMaskId, ert));
+			searchers.putIfAbsent(obj, new LookingForParty(player, instanceMaskId, ert));
 		} else if (lfp.hasPenalty() || lfp.isRegistredInstance(instanceMaskId)) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400181, agt.getInstanceMapId()));
 			return;

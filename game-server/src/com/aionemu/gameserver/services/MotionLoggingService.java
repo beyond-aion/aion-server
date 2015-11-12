@@ -467,7 +467,7 @@ public class MotionLoggingService {
 		if (!motionsMap.containsKey(motionName)) {
 			MotionLog motionLog = new MotionLog();
 			boolean result = motionLog.addSkillTime(weapon, new SkillTime(skillId, currentAttackSpeed, race, gender, clientTime));
-			motionsMap.put(motionName, motionLog);
+			motionsMap.putIfAbsent(motionName, motionLog);
 			return result;
 		} else
 			return motionsMap.get(motionName).addSkillTime(weapon, new SkillTime(skillId, currentAttackSpeed, race, gender, clientTime));

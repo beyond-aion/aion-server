@@ -32,6 +32,8 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 			}
 			writeH(player.getHouseRegistry().getNotSpawnedObjects().size());
 			for (HouseObject<?> obj : player.getHouseRegistry().getNotSpawnedObjects()) {
+				if (obj == null)
+					continue;
 				writeD(obj.getObjectId());
 				int templateId = obj.getObjectTemplate().getTemplateId();
 				writeD(templateId);

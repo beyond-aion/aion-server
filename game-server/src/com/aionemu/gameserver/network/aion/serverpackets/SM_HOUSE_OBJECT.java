@@ -21,11 +21,16 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		if (houseObject == null)
+			return;
 		Player player = con.getActivePlayer();
 		if (player == null)
 			return;
 
 		House house = houseObject.getOwnerHouse();
+		if (house == null)
+			return;
+		
 		int templateId = houseObject.getObjectTemplate().getTemplateId();
 
 		writeD(house.getAddress().getId()); // if painted 0 ?

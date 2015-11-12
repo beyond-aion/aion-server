@@ -23,6 +23,8 @@ public class QuestHandlerLoader implements ClassListener {
 	@Override
 	public void postLoad(Class<?>[] classes) {
 		for (Class<?> c : classes) {
+			if (c == null)
+				continue;
 			if (logger.isDebugEnabled())
 				logger.debug("Load class " + c.getName());
 

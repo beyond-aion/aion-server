@@ -39,9 +39,6 @@ public class ChatServer {
 		this.nioServer = nioServer;
 	}
 
-	/**
-	 * @return
-	 */
 	public ChatServerConnection connect() {
 		SocketChannel sc;
 		for (;;) {
@@ -65,11 +62,9 @@ public class ChatServer {
 				log.info("Cant connect to ChatServer: " + e.getMessage());
 			}
 			try {
-				/**
-				 * 10s sleep
-				 */
 				Thread.sleep(10 * 1000);
 			} catch (Exception e) {
+				log.error("[ChatServer] Error occured while trying to sleep connection-thread.");
 			}
 		}
 	}

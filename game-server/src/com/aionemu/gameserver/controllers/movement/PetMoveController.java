@@ -7,10 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.Pet;
  */
 public class PetMoveController extends CreatureMoveController<Pet> {
 
-	protected float targetDestX;
-	protected float targetDestY;
-	protected float targetDestZ;
-	protected byte heading;
 	protected byte movementMask;
 
 	public PetMoveController() {
