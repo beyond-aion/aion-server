@@ -145,10 +145,8 @@
 	<!-- Ide Materials -->
 	<gd_rule rule_name="Ide Materials" base_chance="4" max_diff="5" fixed_chance="true">
 		<gd_worlds>
-			<gd_world wd_type="KATALAMIA" />
+			<gd_world wd_type="KATALAM" />
 			<gd_world wd_type="KATALAM_INSTANCE" />
-			<gd_world wd_type="DANARIA_INSTANCE" />
-			<gd_world wd_type="IDIAN_DEPTH_INSTANCE" />
 		</gd_worlds>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />

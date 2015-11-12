@@ -12,8 +12,6 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
@@ -2956,8 +2954,6 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
@@ -3372,8 +3368,7 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
+
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
@@ -3393,8 +3388,6 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
@@ -3428,8 +3421,6 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
@@ -3454,8 +3445,6 @@
 						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
 						<gd_world wd_type="SARPAN_INSTANCE"/>
 						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="DANARIA_INSTANCE"/>
-						<gd_world wd_type="IDIAN_DEPTH_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
 						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>

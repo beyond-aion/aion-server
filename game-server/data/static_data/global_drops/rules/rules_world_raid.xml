@@ -88,7 +88,6 @@
 			<gd_npc npc_id="234606" name="Prime Benoid II"/>
 			<gd_npc npc_id="234607" name="Prime Tumon II"/>
 			<gd_npc npc_id="234608" name="Prime Raedon II"/>
-			<gd_npc npc_id="234610" name="Elite Magnorion II"/>
 			<gd_npc npc_id="234611" name="Elite Magnorion II"/>
 			<gd_npc npc_id="234612" name="Prime Benoid II"/>
 			<gd_npc npc_id="234614" name="Prime Eiter II"/>
@@ -106,7 +105,8 @@
 			<gd_npc npc_id="234600" name="Prime Eiter I"/>
 			<gd_npc npc_id="234601" name="Prime Raedon I"/>
 			<gd_npc npc_id="234604" name="Prime Tarmat I"/>
-			<gd_npc npc_id="234609" name="Prime Tarmat I"/>
+			<gd_npc npc_id="234609" name="Prime Raedon I"/>
+			<gd_npc npc_id="234610" name="Prime Tarmat I"/>
 			<gd_npc npc_id="234613" name="Prime Benoid I"/>
 		</gd_npcs>
 		<gd_items>

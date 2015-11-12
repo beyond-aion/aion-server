@@ -186,12 +186,9 @@
 			<gd_world wd_type="TIAMARANTA_SARPAN" />
 			<gd_world wd_type="SARPAN_INSTANCE" />
 			<gd_world wd_type="TIAMARANTA_INSTANCE" />
-			<gd_world wd_type="KATALAMIA" />
+			<gd_world wd_type="KATALAM" />
 			<gd_world wd_type="KATALAM_INSTANCE" />
-			<gd_world wd_type="DANARIA_INSTANCE" />
 			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="IDIAN_DEPTH_INSTANCE" />
-			<gd_world wd_type="LEVINSHOR_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 		</gd_worlds>
 		<gd_ratings>
@@ -1240,6 +1237,12 @@
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_INSTANCE"/>
+			<gd_world wd_type="TIAMARANTA_SARPAN"/>
+			<gd_world wd_type="SARPAN_INSTANCE"/>
+			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
+			<gd_world wd_type="KATALAM"/>
+			<gd_world wd_type="IDIAN_DEPTH"/>
+			<gd_world wd_type="KATALAM_INSTANCE"/>
 		</gd_worlds>
 		<gd_items>
 			<gd_item id="166020000" name="Omega Enchantment Stone"/>

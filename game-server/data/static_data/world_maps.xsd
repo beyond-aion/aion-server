@@ -69,12 +69,9 @@
       <xs:enumeration value="TIAMARANTA_SARPAN" />
       <xs:enumeration value="SARPAN_INSTANCE" />
       <xs:enumeration value="TIAMARANTA_INSTANCE" />
-      <xs:enumeration value="KATALAMIA" />
+      <xs:enumeration value="KATALAM" />
       <xs:enumeration value="IDIAN_DEPTH" />
       <xs:enumeration value="KATALAM_INSTANCE" />
-      <xs:enumeration value="DANARIA_INSTANCE" />
-      <xs:enumeration value="IDIAN_DEPTH_INSTANCE" />
-      <xs:enumeration value="LEVINSHOR_INSTANCE" />
       <xs:enumeration value="DREDGION_INSTANCE" />
       <xs:enumeration value="BATTLEFIELD_INSTANCE" />
       <xs:enumeration value="STEEL_ROSE_INSTANCE" />
