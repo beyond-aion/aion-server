@@ -32,8 +32,8 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	/**
 	 * Related to the character creation mode
 	 */
+	private final int characterCreationMode;
 	private final int characterFactionsMode;
-	private final int characterCreateMode;
 
 	/**
 	 * @param chatService
@@ -48,16 +48,8 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		}
 
 		characterLimitCount *= NetworkController.getInstance().getServerCount();
-
-		if (GSConfig.CHARACTER_CREATION_MODE < 0 || GSConfig.CHARACTER_CREATION_MODE > 2)
-			characterFactionsMode = 0;
-		else
-			characterFactionsMode = GSConfig.CHARACTER_CREATION_MODE;
-
-		if (GSConfig.CHARACTER_FACTION_LIMITATION_MODE < 0 || GSConfig.CHARACTER_FACTION_LIMITATION_MODE > 3)
-			characterCreateMode = 0;
-		else
-			characterCreateMode = GSConfig.CHARACTER_FACTION_LIMITATION_MODE * 0x04;
+		characterCreationMode = GSConfig.CHARACTER_CREATION_MODE;
+		characterFactionsMode = GSConfig.CHARACTER_FACTION_LIMITATION_MODE * 0x04;
 	}
 
 	/**
@@ -89,7 +81,8 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(GSConfig.SERVER_COUNTRY_CODE);// country code;
 		writeC(0x00);// unk
 
-		int serverMode = (characterLimitCount * 0x10) | characterFactionsMode;
+		int serverMode = (characterLimitCount * 0x10);
+		serverMode |=  con.getAccount().getAccessLevel() > 0 ? 1 : characterCreationMode; // on accesslevel: enable both factions and disable char reservation restrictions
 
 		if (GSConfig.ENABLE_RATIO_LIMITATION) {
 			if (GameServer.getCountFor(Race.ELYOS) + GameServer.getCountFor(Race.ASMODIANS) > GSConfig.RATIO_HIGH_PLAYER_COUNT_DISABLING)
@@ -101,7 +94,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 			else
 				writeC(serverMode);
 		} else {
-			writeC(serverMode | characterCreateMode);
+			writeC(serverMode | characterFactionsMode);
 		}
 		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond());// server time
 		writeH(350);// unk
