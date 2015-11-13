@@ -18,6 +18,95 @@
 	</npc_drop>
 	-->
 	<!-- Chests -->
+	<!-- Tiamarantas Eye -->
+	<!-- Rare Chest -->
+	<npc_drop npc_id="701388" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="2" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Safe">
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Standard">
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Additional">
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Unique Chest -->
+	<npc_drop npc_id="701389" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="3" chance="50"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Safe">
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Standard">
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="2" chance="40"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Additional">
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="4" chance="25"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="25"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Legend Chest -->
+	<npc_drop npc_id="701390" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Medal">
+			<drop item_id="186000096" name="Platinum Medal" min_amount="2" max_amount="4" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Enchantment Stone">
+			<drop item_id="166000195" name="Epsilon Enchantment Stone" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Safe">
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="3" max_amount="3" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Standard">
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="3" chance="50"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="4" chance="50"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="4" chance="50"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="50"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="2" chance="50"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named AP Additional">
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="25"/>
+		</drop_group>
+	</npc_drop>
+	<!-- END Tiamarantas Eye -->
 	<!-- Abyssal Splinter -->
 	<!-- 701574 >> Unstable Abyssal Splinter -->
 	<npc_drop npc_id="700860" replace_type="FULL">
@@ -3645,6 +3734,174 @@
 	<npc_drop npc_id="701936" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Bundle">
 			<drop item_id="188052724" name="Beritran Hoard" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Eternal Bastion S-Grade-->
+	<npc_drop npc_id="701917" replace_type="FULL">
+	<drop_group race="PC_ALL" use_category="true" name="Named Epic Weapon">
+			<drop item_id="100001584" name="Bastion Aggressor Sword" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="100101222" name="Bastion Aggressor Mace" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="100201392" name="Bastion Aggressor Dagger" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="100501212" name="Bastion Aggressor Orb" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="100601304" name="Bastion Aggressor Spellbook" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="100901234" name="Bastion Aggressor Greatsword" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="101301160" name="Bastion Aggressor Polearm" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="101501248" name="Bastion Aggressor Staff" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="101701263" name="Bastion Aggressor Bow" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="101801069" name="Bastion Aggressor Pistol" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="101901020" name="Bastion Aggressor Aethercannon" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="102001094" name="Bastion Aggressor Harp" min_amount="1" max_amount="1" chance="80"/>
+			<drop item_id="102100846" name="Bastion Defender Cipher-Blade" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Weapon">
+			<drop item_id="100001585" name="Bastion Aggressor Firm Sword" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="100101223" name="Bastion Aggressor Firm Mace" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="100201393" name="Bastion Aggressor Firm Dagger" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="100501213" name="Bastion Aggressor Firm Orb" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="100601305" name="Bastion Aggressor Firm Spellbook" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="100901235" name="Bastion Aggressor Firm Greatsword" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="101301161" name="Bastion Aggressor Firm Polearm" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="101501249" name="Bastion Aggressor Firm Staff" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="101701264" name="Bastion Aggressor Firm Bow" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="101801070" name="Bastion Aggressor Firm Pistol" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="101901021" name="Bastion Aggressor Firm Aethercannon" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="102001095" name="Bastion Aggressor Firm Harp" min_amount="1" max_amount="1" chance="100"/>
+			<drop item_id="102100847" name="Bastion Aggressor Firm Cipher-Blade" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Cloth Armor">
+			<drop item_id="110101686" name="Bastion Defender Firm Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111101518" name="Bastion Defender Firm Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112101471" name="Bastion Defender Firm Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113101533" name="Bastion Defender Firm Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114101567" name="Bastion Defender Firm Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110101688" name="Bastion Protector Firm Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111101520" name="Bastion Protector Firm Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112101473" name="Bastion Protector Firm Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113101535" name="Bastion Protector Firm Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114101569" name="Bastion Protector Firm Shoes" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Leather Armor">
+			<drop item_id="110301694" name="Bastion Defender Firm Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111301632" name="Bastion Defender Firm Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112301571" name="Bastion Defender Firm Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113301663" name="Bastion Defender Firm Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114301700" name="Bastion Defender Firm Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110301696" name="Bastion Protector Firm Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111301634" name="Bastion Protector Firm Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112301573" name="Bastion Protector Firm Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113301665" name="Bastion Protector Firm Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114301702" name="Bastion Protector Firm Boots" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Chain Armor">
+			<drop item_id="110501523" name="Bastion Defender Firm Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501478" name="Bastion Defender Firm Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501420" name="Bastion Defender Firm Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501496" name="Bastion Defender Firm Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501505" name="Bastion Defender Firm Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110501528" name="Bastion Protector Firm Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501480" name="Bastion Protector Firm Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501422" name="Bastion Protector Firm Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501498" name="Bastion Protector Firm Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501507" name="Bastion Protector Firm Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110550929" name="Bastion Defender Firm Magic Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501487" name="Bastion Defender Firm Magic Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501429" name="Bastion Defender Firm Magic Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501505" name="Bastion Defender Firm Magic Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501514" name="Bastion Defender Firm Magic Brogans" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Plate Armor">
+			<drop item_id="110601497" name="Bastion Defender Firm Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111601460" name="Bastion Defender Firm Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112601441" name="Bastion Defender Firm Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113601443" name="Bastion Defender Firm Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114601450" name="Bastion Defender Firm Sabatons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110601499" name="Bastion Protector Firm Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111601462" name="Bastion Protector Firm Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112601443" name="Bastion Protector Firm Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113601445" name="Bastion Protector Firm Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114601452" name="Bastion Protector Firm Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Epic Cloth Armor">
+			<drop item_id="110101685" name="Bastion Defender Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111101517" name="Bastion Defender Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112101470" name="Bastion Defender Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113101532" name="Bastion Defender Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114101566" name="Bastion Defender Shoes" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110101687" name="Bastion Protector Tunic" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111101519" name="Bastion Protector Gloves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112101472" name="Bastion Protector Pauldrons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113101534" name="Bastion Protector Leggings" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114101568" name="Bastion Protector Shoes" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Epic Leather Armor">
+			<drop item_id="110301693" name="Bastion Defender Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111301631" name="Bastion Defender Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112301570" name="Bastion Defender Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113301662" name="Bastion Defender Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114301699" name="Bastion Defender Boots" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110301695" name="Bastion Protector Jerkin" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111301633" name="Bastion Protector Vambrace" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112301572" name="Bastion Protector Shoulderguards" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113301664" name="Bastion Protector Breeches" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114301701" name="Bastion Protector Boots" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Epic Chain Armor">
+			<drop item_id="110501522" name="Bastion Defender Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501477" name="Bastion Defender Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501419" name="Bastion Defender Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501495" name="Bastion Defender Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501504" name="Bastion Defender Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110501527" name="Bastion Protector Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501479" name="Bastion Protector Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501421" name="Bastion Protector Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501497" name="Bastion Protector Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501506" name="Bastion Protector Brogans" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="110550929" name="Bastion Defender Magic Hauberk" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111501487" name="Bastion Defender Magic Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112501429" name="Bastion Defender Magic Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="113501505" name="Bastion Defender Magic Chausses" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="114501514" name="Bastion Defender Magic Brogans" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Epic Plate Armor">
+			<drop item_id="110601496" name="Bastion Defender Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111601459" name="Bastion Defender Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112601440" name="Bastion Defender Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113601442" name="Bastion Defender Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114601449" name="Bastion Defender Sabatons" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="110601498" name="Bastion Protector Breastplate" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="111601461" name="Bastion Protector Gauntlets" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="112601442" name="Bastion Protector Shoulderplates" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="113601444" name="Bastion Protector Greaves" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="114601451" name="Bastion Protector Sabatons" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Mythic Headgear">
+			<drop item_id="125003748" name="Bastion Protector Helm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003756" name="Bastion Protector Helm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003749" name="Bastion Protector Chain Hood" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003757" name="Bastion Protector Chain Hood" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003783" name="Bastion Protector Magic Helm" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003750" name="Bastion Protector Hat" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003758" name="Bastion Protector Hat" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003751" name="Bastion Protector Headband" min_amount="1" max_amount="1" chance="25"/>
+			<drop item_id="125003759" name="Bastion Protector Headband" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Augment Bundle">
+			<drop item_id="188052614" name="Defender's Augment Bundle" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Quest Bundle">
+			<drop item_id="188052619" name="Pashid's Claw Bundle" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Relic Bundle">
+			<drop item_id="188052607" name="Major Relic Box" min_amount="1" max_amount="4" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Composite Bundle">
+			<drop item_id="188052599" name="Defender's Supply Box" min_amount="4" max_amount="4" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Amplification Stone">
+			<drop item_id="166500002" name="Amplification Stone" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Tempering Solution Chest">
+			<drop item_id="188053083" name="Tempering Solution Chest" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 </custom_drop>
