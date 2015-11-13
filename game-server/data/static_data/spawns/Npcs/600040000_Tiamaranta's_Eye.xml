@@ -15,7 +15,7 @@
 			<spot x="1002.27" y="1194.45" z="1197.1019" h="68" walker_id="BCED55C734B72C1E0E2BFA63BA42502B2B82CD1A"/>
 		</spawn>
 		<!-- Keymaster Dabra -->
-		<spawn npc_id="219193" respawn_time="15930" pool="2">
+		<spawn npc_id="219193" respawn_time="7310" pool="2">
 			<spot x="454.24" y="683.36" z="1206.5035" h="56" walker_id="48E8648C4AB3D8FD355C4D503F02906419B37685"/>
 			<spot x="445.52" y="517.87" z="1206.7036" h="34" walker_id="78AD7E3E8D2032CFED32797DC9D556D3D7744100"/>
 			<spot x="486.73" y="466.11" z="1206.7036" h="36" walker_id="27D2A60EA868B4CD181C3491D015D8E05DC758BD"/>
@@ -85,7 +85,7 @@
 			<spot x="1055.7926" y="1100.1683" z="1183.6907" h="63"/>
 		</spawn>
 		<!-- Keymaster Zumita -->
-		<spawn npc_id="219192" respawn_time="5310" pool="2">
+		<spawn npc_id="219192" respawn_time="5210" pool="3">
 			<spot x="1139.01" y="503.24" z="1183.6903" h="26" walker_id="73A2220AC5325CE490023E615AAB57EB0C8DB389"/>
 			<spot x="537.39" y="1178.52" z="1183.6908" h="72" walker_id="448E65D658ECCB169545343B6F6DD8F9A3AD7836"/>
 			<spot x="503.77" y="373.07" z="1183.6903" h="96" walker_id="132CE59B33680108BF0896DA15CF22BFAE68A076"/>
@@ -995,7 +995,7 @@
 			<spot x="1376.2117" y="520.36139" z="1183.9845" h="40"/>
 		</spawn>
 		<!-- Protectorate's Treasure Box -->
-		<spawn npc_id="701390" respawn_time="7965" pool="1">
+		<spawn npc_id="701390" respawn_time="7310" pool="1">
 			<spot x="236.72287" y="1013.4218" z="1185.0458" h="113"/>
 			<spot x="260.03018" y="543.73193" z="1185.0458" h="67"/>
 			<spot x="453.73447" y="795.97186" z="1206.8364" h="60"/>
