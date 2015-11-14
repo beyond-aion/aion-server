@@ -63,29 +63,34 @@ public class EnchantService {
 		float qualityMod;
 		switch (itemTemplate.getItemQuality()) {
 			case COMMON:
-				qualityMod = 0.2f;
+				qualityMod = 0.25f;
 				break;
 			case RARE:
-				qualityMod = 0.3f;
-				break;
-			case LEGEND:
 				qualityMod = 0.4f;
 				break;
+			case LEGEND:
+				qualityMod = 0.55f;
+				break;
+			case UNIQUE:
+				qualityMod = 0.7f;
+				break;
 			case EPIC:
-				qualityMod = 0.5f;
+				qualityMod = 0.85f;
 				break;
 			case MYTHIC:
-				qualityMod = 0.6f;
+				qualityMod = 1.0f;
 				break;
 			default:
 				qualityMod = 0.1f;
 				break;
 		}
 
-		float typeMod = itemTemplate.isWeapon() ? 2.0f : 1.0f;
+		float typeMod = itemTemplate.isWeapon() ? 0.6f : 0.4f;
 		int itemLevel = itemTemplate.getLevel();
-
-		int finalLevel = Rnd.get(itemLevel, Math.round((qualityMod + typeMod) * itemLevel));
+		
+		int averageLevel = (int) (itemLevel * typeMod * qualityMod);
+		
+		int finalLevel = Rnd.get(averageLevel - 10, averageLevel + 10);
 
 		int stoneId = 166000191; // Alpha
 
@@ -101,7 +106,7 @@ public class EnchantService {
 
 		if (inventory.delete(targetItem) != null) {
 			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1))
-				ItemService.addItem(player, stoneId, Rnd.get(1, 3));
+				ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
 		} else
 			AuditLogger.info(player, "Possible break item hack, do not remove item.");
 		return true;
@@ -245,16 +250,15 @@ public class EnchantService {
 		}
 
 		boolean result = false;
-		float random = Rnd.get(1, 1000) / 10f;
+		float random = Rnd.get() * 100;
 
 		// If the random number < or = overall success rate,
 		// The item will be successfully enchanted
 		if (random <= success)
 			result = true;
 
-		if (targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL) {
+		if (targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL)
 			result = false;
-		}
 
 		// For test purpose. To use by administrator
 		if (player.getAccessLevel() > 2)
