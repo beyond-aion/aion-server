@@ -2114,9 +2114,9 @@
 		<portal_path dialog="10000" loc_id="3012300" player_count="6" instance="true">
 			<portal_req min_level="65"/>
 		</portal_path>
-		<!--<portal_path dialog="10001" loc_id="3013700" player_count="6" instance="true">
+		<portal_path dialog="10001" loc_id="3013700" player_count="6" instance="true">
 			<portal_req min_level="65"/>
-		</portal_path> -->
+		</portal_path>
 	</portal_dialog>
 	<!-- Linkgate Foundry -->
 	<!-- Linkgate Foundry Entrance Elyos -->

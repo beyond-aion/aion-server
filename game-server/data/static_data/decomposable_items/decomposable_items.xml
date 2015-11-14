@@ -27651,14 +27651,125 @@
     <decomposable item_id="188053090" decomposable_name="Ahserion's Flight Champion's Bundle"/>
     <decomposable item_id="188053091" decomposable_name="Modor's Curiosity Box"/>
     <decomposable item_id="188053092" decomposable_name="Danuar Reliquary Expedition's Artifacts"/>
-    <decomposable item_id="188053093" decomposable_name="Dynatoum's Curiosity Box"/>
-    <decomposable item_id="188053094" decomposable_name="Illuminary Obelisk Supplies Bundle"/>
+    <decomposable item_id="188053093" decomposable_name="Dynatoum's Curiosity Box">
+		<items chance="10">
+			<item id="125004085" name="Pure Dynatoum Radiant Helm" player_class="TEMPLAR"/>
+			<item id="125004086" name="Pure Dynatoum Radiant Helm" player_class="GLADIATOR"/>
+			<item id="125004089" name="Pure Dynatoum Radiant Hat" player_class="ASSASSIN"/>
+			<item id="125004089" name="Pure Dynatoum Radiant Hat" player_class="RANGER"/>
+			<item id="125004090" name="Pure Dynatoum Radiant Hat" player_class="GUNNER"/>
+			<item id="125004088" name="Pure Dynatoum Radiant Chain Helm" player_class="CHANTER"/>
+			<item id="125004087" name="Pure Dynatoum Radiant Chain Helm" player_class="CLERIC"/>
+			<item id="125004087" name="Pure Dynatoum Radiant Chain Helm" player_class="RIDER"/>
+			<item id="125004091" name="Pure Dynatoum Radiant Headband" player_class="SORCERER"/>
+			<item id="125004091" name="Pure Dynatoum Radiant Headband" player_class="SPIRIT_MASTER"/>
+			<item id="125004092" name="Pure Dynatoum Radiant Headband" player_class="BARD"/>
+			<item id="188053100" name="Pure Dynatoum's Equipment Crux Box"/>
+		</items>
+		<items chance="25">
+			<item id="188052828" name="Dynatoum's Weapon Box"/>
+		</items>
+		<items chance="25">
+			<item id="188052829" name="Dynatoum's Armor Box"/>
+		</items>
+		<items chance="20">
+			<item id="188052830" name="Dynatoum's Brazen Weapon Box"/>
+		</items>
+		<items chance="20">
+			<item id="188052831" name="Dynatoum's Brazen Armor Box"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053094" decomposable_name="Illuminary Obelisk Supplies Bundle">
+        <items>
+            <item id="152012591" name="Water Fragment"/>
+            <item id="188052825" name="Illuminary Obelisk Idian Pouch"/>
+            <item id="152012612" name="Heart of Eternity"/>
+        </items>
+        <items>
+            <item id="152012588" name="Wind Fragment"/>
+            <item id="188052825" name="Illuminary Obelisk Idian Pouch"/>
+            <item id="152012611" name="Heart of Safety"/>
+        </items>
+        <items>
+            <item id="152012585" name="Wind Mote"/>
+            <item id="188052825" name="Illuminary Obelisk Idian Pouch"/>
+            <item id="152012610" name="Heart of Chaos"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188053095" decomposable_name="Modor's Eternal Weapon Box"/>
     <decomposable item_id="188053096" decomposable_name="Modor's Eternal Armor Box"/>
     <decomposable item_id="188053097" decomposable_name="Modor's Mythic Weapon Box"/>
     <decomposable item_id="188053098" decomposable_name="Modor's Mythic Armor Box"/>
     <decomposable item_id="188053099" decomposable_name="Pure Modor's Equipment Crux Box"/>
-    <decomposable item_id="188053100" decomposable_name="Pure Dynatoum's Equipment Crux Box"/>
+    <decomposable item_id="188053100" decomposable_name="Pure Dynatoum's Equipment Crux Box">
+		<items chance="6">
+			<item id="169405320" name="Pure Dynatoum's Radiant Greatsword Crux" player_class="TEMPLAR"/>
+			<item id="169405323" name="Pure Dynatoum's Radiant Polearm Crux" player_class="GLADIATOR"/>
+			<item id="169405321" name="Pure Dynatoum's Radiant Shield Crux" player_class="CLERIC"/>
+			<item id="169405329" name="Pure Dynatoum's Radiant Cipher-Blade Crux" player_class="RIDER"/>
+			<item id="169405328" name="Pure Dynatoum's Radiant Staff Crux" player_class="CHANTER"/>
+			<item id="169405322" name="Pure Dynatoum's Radiant Dagger Crux" player_class="ASSASSIN"/>
+			<item id="169405324" name="Pure Dynatoum's Radiant Bow Crux" player_class="RANGER"/>
+			<item id="169405325" name="Pure Dynatoum's Radiant Pistol Crux" player_class="GUNNER"/>
+			<item id="169405331" name="Pure Dynatoum's Radiant Spellbook Crux" player_class="SORCERER"/>
+			<item id="169405330" name="Pure Dynatoum's Radiant Orb Crux" player_class="SPIRIT_MASTER"/>
+			<item id="169405332" name="Pure Dynatoum's Radiant Harp Crux" player_class="BARD"/>
+		</items>
+		<items chance="3">
+			<item id="169405319" name="Pure Dynatoum's Radiant Sword Crux" player_class="TEMPLAR"/>
+			<item id="169405319" name="Pure Dynatoum's Radiant Sword Crux" player_class="GLADIATOR"/>
+			<item id="169405327" name="Pure Dynatoum's Radiant Mace Crux" player_class="CLERIC"/>
+			<item id="169405329" name="Pure Dynatoum's Radiant Cipher-Blade Crux" player_class="RIDER"/>
+			<item id="169405327" name="Pure Dynatoum's Radiant Mace Crux" player_class="CHANTER"/>
+			<item id="169405324" name="Pure Dynatoum's Radiant Bow Crux" player_class="ASSASSIN"/>
+			<item id="169405322" name="Pure Dynatoum's Radiant Dagger Crux" player_class="RANGER"/>
+			<item id="169405326" name="Pure Dynatoum's Radiant Aethercannon Crux" player_class="GUNNER"/>
+			<item id="169405330" name="Pure Dynatoum's Radiant Orb Crux" player_class="SORCERER"/>
+			<item id="169405331" name="Pure Dynatoum's Radiant Spellbook Crux" player_class="SPIRIT_MASTER"/>
+			<item id="169405332" name="Pure Dynatoum's Radiant Harp Crux" player_class="BARD"/>
+		</items>
+		<items chance="3">
+			<item id="169405321" name="Pure Dynatoum's Radiant Shield Crux" player_class="TEMPLAR"/>
+			<item id="169405322" name="Pure Dynatoum's Radiant Dagger Crux" player_class="GLADIATOR"/>
+			<item id="169405327" name="Pure Dynatoum's Radiant Mace Crux" player_class="CLERIC"/>
+			<item id="169405329" name="Pure Dynatoum's Radiant Cipher-Blade Crux" player_class="RIDER"/>
+			<item id="169405321" name="Pure Dynatoum's Radiant Shield Crux" player_class="CHANTER"/>
+			<item id="169405319" name="Pure Dynatoum's Radiant Sword Crux" player_class="ASSASSIN"/>
+			<item id="169405319" name="Pure Dynatoum's Radiant Sword Crux" player_class="RANGER"/>
+			<item id="169405326" name="Pure Dynatoum's Radiant Aethercannon Crux" player_class="GUNNER"/>
+			<item id="169405331" name="Pure Dynatoum's Radiant Spellbook Crux" player_class="SORCERER"/>
+			<item id="169405330" name="Pure Dynatoum's Radiant Orb Crux" player_class="SPIRIT_MASTER"/>
+			<item id="169405332" name="Pure Dynatoum's Radiant Harp Crux" player_class="BARD"/>
+		</items>
+		<items chance="3">
+			<item id="169405320" name="Pure Dynatoum's Radiant Greatsword Crux" player_class="TEMPLAR"/>
+			<item id="169405320" name="Pure Dynatoum's Radiant Greatsword Crux" player_class="GLADIATOR"/>
+			<item id="169405321" name="Pure Dynatoum's Radiant Shield Crux" player_class="CLERIC"/>
+			<item id="169405329" name="Pure Dynatoum's Radiant Cipher-Blade Crux" player_class="RIDER"/>
+			<item id="169405328" name="Pure Dynatoum's Radiant Staff Crux" player_class="CHANTER"/>
+			<item id="169405319" name="Pure Dynatoum's Radiant Sword Crux" player_class="ASSASSIN"/>
+			<item id="169405324" name="Pure Dynatoum's Radiant Bow Crux" player_class="RANGER"/>
+			<item id="169405325" name="Pure Dynatoum's Radiant Pistol Crux" player_class="GUNNER"/>
+			<item id="169405330" name="Pure Dynatoum's Radiant Orb Crux" player_class="SORCERER"/>
+			<item id="169405331" name="Pure Dynatoum's Radiant Spellbook Crux" player_class="SPIRIT_MASTER"/>
+			<item id="169405332" name="Pure Dynatoum's Radiant Harp Crux" player_class="BARD"/>
+		</items>		
+		<items chance="17">
+			<item id="169405333" name="Pure Dynatoum's Radiant Chest Crux"/>
+		</items>
+		<items chance="17">
+			<item id="169405334" name="Pure Dynatoum's Radiant Leg Crux"/>
+		</items>
+		<items chance="17">
+			<item id="169405335" name="Pure Dynatoum's Radiant Hand Crux"/>
+		</items>
+		<items chance="17">
+			<item id="169405336" name="Pure Dynatoum's Radiant Foot Crux"/>
+		</items>
+		<items chance="17">
+			<item id="169405337" name="Pure Dynatoum's Radiant Shoulder Crux"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053101" decomposable_name="Mysterious Reward Box"/>
     <decomposable item_id="188053102" decomposable_name="Lucky Danuar Reliquary Bundle">
         <items>
