@@ -1,41 +1,28 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author pixfid, Rolandas
+ * @modified Yeats & Neon
  */
 public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
 
-	private boolean isGM;
-
-	public SM_ACCOUNT_PROPERTIES(boolean isGM) {
-		this.isGM = isGM;
+	public SM_ACCOUNT_PROPERTIES() {
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		if (isGM) {
-			writeH(1);
-			writeH(0x00);
-			writeD(0x00);
-			writeD(9);
-			writeD(0x00);
-			writeD(0x00);
-			writeC(0x00);
-			writeD(0x08);
-			writeD(0x04);
-		} else {
-			writeH(0x00);
-			writeH(0x00);
-			writeD(0x00);
-			writeD(9);
-			writeD(0x00);
-			writeD(0x00);
-			writeC(0x00);
-			writeD(0x00);
-			writeD(0x00);
-		}
+		writeH(con.getAccount().getAccessLevel() >= AdminConfig.GM_PANEL ? 1 : 0);
+		writeH(0);
+		writeD(0);
+		writeD(0); // gold pack related (0 = no chat restriction)
+		writeD(0);
+		writeD(0);
+		writeC(0);
+		writeD(0); // gold pack time limit (8 = unlimited?), 0 when veteran
+		writeD(4); // account status (0 = gold-user, 1/2 = starter, 3/4 = veteran)
 	}
 }

@@ -34,7 +34,7 @@ public class Config {
 	/**
 	 * Password for GS authentication
 	 */
-	@Property(key = "chatserver.network.gameserver.password", defaultValue = "*")
+	@Property(key = "chatserver.network.gameserver.password", defaultValue = "")
 	public static String GAME_SERVER_PASSWORD;
 
 	/**
