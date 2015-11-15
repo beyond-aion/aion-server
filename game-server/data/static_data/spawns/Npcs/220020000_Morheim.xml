@@ -6025,9 +6025,21 @@
 		<spawn npc_id="212877" respawn_time="295">
 			<spot x="1307.54" y="254.221" z="539.852" h="63"/>
 		</spawn>
-		<!-- Purra? -->
+		<!-- Purra? 1st Spot -->
 		<spawn npc_id="204435" respawn_time="295">
-			<spot x="329.114" y="2293.8" z="454.0641" h="42"/>
+			<spot x="329.114" y="2293.8" z="461.27" h="42"/>
+		</spawn>
+		<!-- Purra? 2nd Spot -->
+		<spawn npc_id="204436" respawn_time="295">
+			<spot x="335" y="2287.8" z="463.517" h="45"/>
+		</spawn>
+		<!-- Purra? 3rd Spot -->
+		<spawn npc_id="204437" respawn_time="295">
+			<spot x="371" y="2402.4" z="462.0855" h="6"/>
+		</spawn>
+		<!-- Purra? 4th Spot -->
+		<spawn npc_id="204438" respawn_time="295">
+			<spot x="235.2" y="2419.5" z="461.7288" h="108"/>
 		</spawn>
 		<!-- Queen Kint -->
 		<spawn npc_id="212847" respawn_time="3600">
