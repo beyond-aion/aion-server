@@ -651,22 +651,12 @@
 			<gd_item id="140001023" name="Riplash VI" />
 			<gd_item id="140001033" name="Steel Storm V" />
 			<gd_item id="140001037" name="Gattling Gun II" />
-			<gd_item id="140000691" name="Fettertwine I" />
-			<gd_item id="140000692" name="Somnolence I" />
-			<gd_item id="140000693" name="Punishing Thrust I" />
-			<gd_item id="140000694" name="Dilation Arrow I" />
-			<gd_item id="140000696" name="Searching Strike I" />
-			<gd_item id="140000699" name="Retribution Lightning I" />
-			<gd_item id="140000700" name="Leaping Flash I" />
-			<gd_item id="140000701" name="Command: Bodyguard I" />
 			<gd_item id="140000708" name="Dauntless Spirit VI" />
 			<gd_item id="140000713" name="Vengeful Strike VII" />
 			<gd_item id="140000752" name="Absorb Vitality IX" />
 			<gd_item id="140000784" name="Sigil Strike IX" />
 			<gd_item id="140000862" name="Song of Sanctuary I" />
 			<gd_item id="140000940" name="Frozen Blitz VI" />
-			<gd_item id="140000981" name="Missile Guide I" />
-			<gd_item id="140001038" name="Leeching Steel I" />
 			<!-- Elyos only -->
 			<gd_item id="140000132" name="Ice Sheet I" />
 			<gd_item id="140000052" name="Snare Trap I" />
@@ -1155,7 +1145,7 @@
 			<gd_item id="166500002" name="Amplification Stone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="5" each_member="true">
+	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="2.5" each_member="true">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab"/>
 			<gd_map map_id="320130000" name="Adma_Stronghold"/>
@@ -1294,24 +1284,6 @@
 			<gd_item id="166030005" name="Tempering Solution"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution (Shared)" base_chance="2.5">
-		<gd_maps>			
-			<gd_map map_id="320080000" name="Draupnir_Cave"/>
-			<gd_map map_id="300280000" name="Rentus_Base"/>
-			<gd_map map_id="301230000" name="Illuminary_Obelisk"/>
-		</gd_maps>
-		<gd_npcs>
-			<!-- Draupnir Cave -->
-			<gd_npc npc_id="213780" name="Commander Bakarma"/>
-			<!-- Rentus Base -->
-			<gd_npc npc_id="218614" name="Brigade General Vasharti"/>
-			<!-- Illuminary Obelisk -->
-			<gd_npc npc_id="233740" name="Test Weapon Dynatoum"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="166030005" name="Tempering Solution"/>
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="2.5" each_member="true">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
@@ -1355,14 +1327,27 @@
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 			<gd_map map_id="320080000" name="Draupnir_Cave"/>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
 			<gd_map map_id="310110000" name="Theobomos_Lab"/>
 			<gd_map map_id="320130000" name="Adma_Stronghold"/>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
+			<gd_map map_id="300150000" name="Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
 			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
+			<gd_map map_id="320150000" name="Padmarashkas_Cave"/>
+			<gd_map map_id="300380000" name="Muadas_Trencher"/>
+			<gd_map map_id="300310000" name="Raksang"/>
+			<gd_map map_id="300260000" name="Elementis_Forest"/>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
 			<gd_map map_id="300280000" name="Rentus_Base"/>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 			<gd_map map_id="301230000" name="Illuminary_Obelisk"/>
 			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
+			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
+			<gd_map map_id="300800000" name="Infinity_Shard"/>
+			<gd_map map_id="301110000" name="Danuar_Reliquary"/>
+			<gd_map map_id="301340000" name="Linkgate_Foundry"/>
 		</gd_maps>
 		<gd_npcs>
 			<!-- Fire Temple -->
@@ -1370,6 +1355,8 @@
 			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
 			<!-- Draupnir Cave -->
 			<gd_npc npc_id="213780" name="Commander Bakarma"/>
+			<!-- Indratu Fortress -->
+			<gd_npc npc_id="214159" name="Brigadier Indratu"/>
 			<!-- Theobomos Lab -->
 			<gd_npc npc_id="214669" name="Unstable Triroan"/>
 			<!-- Adma Stronghold -->
@@ -1377,9 +1364,25 @@
 			<!-- Dark Poeta -->
 			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
 			<gd_npc npc_id="217166" name="Tahabata Pyrelord"/>
+			<!-- Udas Temple -->
+			<gd_npc npc_id="215793" name="Devoted Anurati"/>
+			<!-- Lower Udas Temple -->
+			<gd_npc npc_id="215795" name="Debilkarim the maker"/>
 			<!-- Beshmundirs Temple -->
 			<gd_npc npc_id="216183" name="Stormwing"/>
 			<gd_npc npc_id="216264" name="Stormwing"/>
+			<!-- Padmarashkas Cave -->
+			<gd_npc npc_id="218756" name="Padmarashka"/>
+			<!-- Muadas Trencher -->
+			<gd_npc npc_id="218782" name="Empress Muada"/>
+			<!-- Raksang -->
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+			<!-- Elementis Forest -->
+			<gd_npc npc_id="217234" name="Tuali"/>
+			<!-- Argent Manor -->
+			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+			<!-- Tiamat Stronghold -->
+			<gd_npc npc_id="219358" name="Brigade General Tahabata"/>
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" name="Brigade General Vasharti"/>
 			<!-- Ophidan Bridge -->
@@ -1388,6 +1391,15 @@
 			<gd_npc npc_id="233740" name="Test Weapon Dynatoum"/>
 			<!-- Danuar Sanctuary -->
 			<gd_npc npc_id="233090" name="Virulent Ukahim"/>
+			<!-- Sauro Supply Base -->
+			<gd_npc npc_id="230857" name="Guard Captain Ahuradim"/>
+			<gd_npc npc_id="230858" name="Brigade General Sheba"/>
+			<!-- Infinity Shard -->
+			<gd_npc npc_id="231073" name="Hyperion"/>
+			<!-- Danuar Reliquary -->
+			<gd_npc npc_id="231305" name="Enraged Queen Modor"/>
+			<!-- Linkgate Foundry -->
+			<gd_npc npc_id="234991" name="Furious Belsagos"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053295" name="Empyrean Plume Chest"/>

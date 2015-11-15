@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="600070000">
-		<!-- Illuminary Obelisk Teleporter -->
-		<spawn npc_id="730883" respawn_time="295">
-			<spot x="711.4581" y="1374.6948" z="494.7040" h="90" static_id="1798"/>
-		</spawn>
 		<!-- Danuar Sanctuary Teleporter -->
 		<spawn npc_id="730862" respawn_time="295">
 			<spot x="355.7318" y="515.6278" z="571.0645" h="8" static_id="300"/>

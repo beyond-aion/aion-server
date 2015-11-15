@@ -621,7 +621,7 @@ public class DropRegistrationService {
 	}
 
 	private float getRankModifier(Npc npc) {
-		// Rank modifier : NOVICE:0.5f, DISCIPLINED:1f, SEASONED:1.5f, EXPERT:2f, VETERAN:2.5f, MASTER:3f;
+		// Default Rank modifier : NOVICE:0.5f, DISCIPLINED:1f, SEASONED:1.5f, EXPERT:2f, VETERAN:2.5f, MASTER:3f;
 		float rankModifier = 1f;
 		if (npc.getRank() != null) {
 			if (npc.getRank().equals(NpcRank.NOVICE))
@@ -629,19 +629,19 @@ public class DropRegistrationService {
 			else if (npc.getRank().equals(NpcRank.DISCIPLINED))
 				rankModifier = 1f;
 			else if (npc.getRank().equals(NpcRank.SEASONED))
-				rankModifier = 1.5f;
+				rankModifier = 1.1f;
 			else if (npc.getRank().equals(NpcRank.EXPERT))
-				rankModifier = 2f;
+				rankModifier = 1.2f;
 			else if (npc.getRank().equals(NpcRank.VETERAN))
-				rankModifier = 2.5f;
+				rankModifier = 1.3f;
 			else if (npc.getRank().equals(NpcRank.MASTER))
-				rankModifier = 3f;
+				rankModifier = 1.4f;
 		}
 		return rankModifier;
 	}
 
 	private float getRatingModifier(Npc npc) {
-		// Rating modifier: JUNK: 0.5f, NORMAL:1, ELITE:1.5f, HERO:2f, LEGENDARY:2.2f;
+		// Default Rating modifier: JUNK: 0.5f, NORMAL:1, ELITE:1.5f, HERO:2f, LEGENDARY:2.2f;
 		float ratingModifier = 1f;
 		if (npc.getRating() != null) {
 			if (npc.getRating().equals(NpcRating.JUNK))
@@ -651,9 +651,9 @@ public class DropRegistrationService {
 			else if (npc.getRating().equals(NpcRating.ELITE))
 				ratingModifier = 1.5f;
 			else if (npc.getRating().equals(NpcRating.HERO))
-				ratingModifier = 2f;
+				ratingModifier = 1.8f;
 			else if (npc.getRating().equals(NpcRating.LEGENDARY))
-				ratingModifier = 2.2f;
+				ratingModifier = 2f;
 		}
 		return ratingModifier;
 	}
