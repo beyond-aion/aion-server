@@ -136,7 +136,6 @@ public class PlayerLeaveWorldService {
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
-		player.setClientConnection(null);
 
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
@@ -155,6 +154,7 @@ public class PlayerLeaveWorldService {
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
 		con.setActivePlayer(null);
+		player.setClientConnection(null);
 	}
 
 	/**
