@@ -38,7 +38,7 @@
 	<item_collecting id="18509" start_npc_ids="799523" end_npc_ids="799524"/>
 	<item_collecting id="28501" start_npc_ids="799522" end_npc_ids="799523"/>
 	<item_collecting id="28503" start_npc_ids="799523" end_npc_ids="804605"/>
-	<item_collecting id="28505" start_npc_ids="203659"/>
+	<item_collecting id="28505" start_npc_ids="804605"/>
 	<item_collecting id="28509" start_npc_ids="799523" end_npc_ids="799524"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18504" start_npc_ids="203166">
