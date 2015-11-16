@@ -3,6 +3,7 @@ package com.aionemu.gameserver.world.knownlist;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastMap;
@@ -37,7 +38,7 @@ public class KnownList {
 	/**
 	 * List of objects that this KnownList owner known
 	 */
-	protected final Map<Integer, VisibleObject> knownObjects = new FastMap<Integer, VisibleObject>().shared();
+	protected final Map<Integer, VisibleObject> knownObjects = new ConcurrentHashMap<>();
 
 	/**
 	 * List of player that this KnownList owner known
@@ -47,7 +48,7 @@ public class KnownList {
 	/**
 	 * List of objects that this KnownList owner known
 	 */
-	protected final Map<Integer, VisibleObject> visualObjects = new FastMap<Integer, VisibleObject>().shared();
+	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
 
 	/**
 	 * List of player that this KnownList owner known
