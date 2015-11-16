@@ -129,7 +129,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMResist() {
-		return getStat(StatEnum.MAGICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getMresist());
+		int mres = owner.getObjectTemplate().getStatsTemplate().getMresist();
+		if (owner.getLevel() < 50)
+			mres *= 0.8f;
+		return getStat(StatEnum.MAGICAL_RESIST, mres);
 	}
 
 	@Override
