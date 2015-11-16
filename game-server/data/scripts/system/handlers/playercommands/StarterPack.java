@@ -25,6 +25,7 @@ public class StarterPack extends PlayerCommand {
 	
 	private final LocalDateTime maxCreationTime = LocalDateTime.of(2015, Month.NOVEMBER, 15, 23, 59, 59);
 	private final StarterPackDAO dao = DAOManager.getDAO(StarterPackDAO.class);
+	private boolean isRewarded = false;
 
 	public StarterPack() {
 		super("starterpack", "Sends the starter pack to the specified player.\n" + ChatUtil.color("ATTENTION!", Color.RED) 
@@ -35,7 +36,7 @@ public class StarterPack extends PlayerCommand {
 
 	@Override
 	protected void execute(Player player, String... params) {
-		if (params == null || params.length == 0) {
+		if (params.length == 0) {
 			sendInfo(player);
 			return;
 		}
@@ -55,20 +56,22 @@ public class StarterPack extends PlayerCommand {
 			PlayerCommonData pcd = pad.getPlayerCommonData();
 			if (pcd == null)
 				continue;
-			if (pcd.getName().equalsIgnoreCase(name)) {
+			if (pcd.getName().equals(name)) {
 				sendReward(pcd);
 				dao.storePlayer(player, objectId);
-				PacketSendUtility.sendMessage(player, "Starter Pack successfully sended to charakter " + pcd.getName());
+				PacketSendUtility.sendMessage(player, "Starter Pack successfully sent to character " + pcd.getName());
 			}
-		}		
+		}
+		
+		if (!isRewarded)
+			PacketSendUtility.sendMessage(player, "No player with the specified name was found on your account!");
 	}
-
 	
 	private void sendReward(PlayerCommonData pcd) {
-		//TODO: Give me nice text by sir pls!
 		SystemMailService.getInstance().sendMail("Beyond Aion",	pcd.getName(), "Starter Pack",
-			"Greetings Daeva!\n\n" + "You have reached level 65 with your first character and therefore we have a special something for you."
-				+ " In gratitude for your support we have prepared a package with valuable items for you.\n\n"
-				+ "Enjoy your stay on Beyond Aion!", 188051867, 1, 0, LetterType.EXPRESS);
+			"Greetings Daeva!\n\n" + "With this, you received your exclusive starter package which marks you as a backer of the Beyond Aion project."
+				+ " We thank you for your support and wish you the best fun for the future of this server.\n\n" + "Enjoy your stay on Beyond Aion!"
+				, 188051867, 1, 0, LetterType.EXPRESS);
+		isRewarded = true;
 	}
 }
