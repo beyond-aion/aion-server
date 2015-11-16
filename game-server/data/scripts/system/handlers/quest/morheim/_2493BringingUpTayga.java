@@ -45,7 +45,7 @@ public class _2493BringingUpTayga extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 204435) { // Purra?
+			if (targetId == 204435) { // Purra? 1st Spot
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1011);
@@ -56,6 +56,13 @@ public class _2493BringingUpTayga extends QuestHandler {
 					npc.getController().onDelete();
 					changeQuestStep(env, 0, 0, true); // reward
 					return closeDialogWindow(env);
+				}
+			}
+			else if (targetId == 204436 || targetId == 204437 || targetId == 204438) { // Purra? other Spots
+				if (dialog == DialogAction.QUEST_SELECT) {
+					if (var == 0) {
+						return sendQuestDialog(env, 1353);
+					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
