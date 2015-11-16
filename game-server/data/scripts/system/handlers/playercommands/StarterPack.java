@@ -42,10 +42,10 @@ public class StarterPack extends PlayerCommand {
 		}
 		
 		int receivingPlayerId = dao.loadReceivingPlayer(player);
-		int objectId = player.getObjectId();
-		if (receivingPlayerId > 0 && objectId != receivingPlayerId)
+		if (receivingPlayerId > 0) {
+			PacketSendUtility.sendMessage(player, "You already got your starter pack!");
 			return;
-		
+		}
 		String name = Util.convertName(params[0]);
 		
 		Account acc = player.getClientConnection().getAccount();
@@ -58,7 +58,7 @@ public class StarterPack extends PlayerCommand {
 				continue;
 			if (pcd.getName().equals(name)) {
 				sendReward(pcd);
-				dao.storePlayer(player, objectId);
+				dao.storePlayer(player, player.getObjectId());
 				PacketSendUtility.sendMessage(player, "Starter Pack successfully sent to character " + pcd.getName());
 			}
 		}
