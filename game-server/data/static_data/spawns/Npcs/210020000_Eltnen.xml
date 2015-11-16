@@ -875,7 +875,7 @@
 			<spot x="2409.8352" y="519.9561" z="370.1298" h="30"/>
 		</spawn>
 		<!-- Fat Athos -->
-		<spawn npc_id="213795" respawn_time="1800">
+		<spawn npc_id="213795" respawn_time="295">
 			<spot x="127.673" y="1837.83" z="256.988" h="84"/>
 		</spawn>
 		<!-- Kaidan Scout -->
@@ -888,7 +888,7 @@
 			<spot x="1809.95" y="1107.07" z="435.5" h="91" random_walk="8"/>
 		</spawn>
 		<!-- Dirty Chindu -->
-		<spawn npc_id="213794" respawn_time="1800">
+		<spawn npc_id="213794" respawn_time="295">
 			<spot x="883.86" y="2789.8" z="264.0125" h="33" walker_id="D05F38FC832A80F59F41924BBABD3BAE1B5571A5"/>
 		</spawn>
 		<!-- Kaidan Brute -->
@@ -911,8 +911,7 @@
 			<spot x="2592.1699" y="406.5300" z="499.7663" h="53"/>
 		</spawn>
 		<!-- Nimble Aramis -->
-		<spawn npc_id="213797" respawn_time="1800">
-			<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
+		<spawn npc_id="213797" respawn_time="295">
 			<spot x="583.41" y="1723.98" z="238.09062" h="79" walker_id="5E214B2F2016FA251780B543B81E4B078D52E536"/>
 		</spawn>
 		<!-- Grand Chieftain Saendukal -->
@@ -924,7 +923,7 @@
 			<spot x="2364.8091" y="923.4686" z="447.9959" h="60"/>
 		</spawn>
 		<!-- Runty Porthos -->
-		<spawn npc_id="213796" respawn_time="1800">
+		<spawn npc_id="213796" respawn_time="295">
 			<spot x="419.34" y="1868.32" z="227.89626" h="47" walker_id="F5F47052FAC5AFFCB8AA3AB1A9CD640EF60B62ED"/>
 		</spawn>
 		<!-- Mamaki Bruiser Boss -->

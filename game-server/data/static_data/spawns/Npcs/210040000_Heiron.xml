@@ -2232,11 +2232,13 @@
 		</spawn>
 		<!-- Firescar -->
 		<spawn npc_id="204609" respawn_time="295">
+			<temporary_spawn spawn_time="21.*.*" despawn_time="6.*.*"/>
 			<spot x="1785.04" y="1350.86" z="102.25" h="33"/>
 		</spawn>
 		<!-- Firescar -->
-		<spawn npc_id="211074" respawn_time="1800">
-			<spot x="1785" y="1350" z="116.5"/>
+		<spawn npc_id="211074" respawn_time="295">
+			<temporary_spawn spawn_time="6.*.*" despawn_time="21.*.*"/>
+			<spot x="1785" y="1350" z="102.25" h="33"/>
 		</spawn>
 		<!-- First Stone Plate -->
 		<spawn npc_id="700356" respawn_time="295">
