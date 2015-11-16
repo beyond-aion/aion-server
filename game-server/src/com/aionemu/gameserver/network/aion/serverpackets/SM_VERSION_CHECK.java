@@ -73,7 +73,8 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeH(350);// unk
 		writeH(2561);// unk
 		writeH(2561);// unk
-		writeH(5140);// unk
+		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // min level to write in channel chats
+		writeC(20); // some other restriction
 		writeH(276);// unk
 		writeH(2); // unk
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
