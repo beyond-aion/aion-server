@@ -9976,7 +9976,18 @@
     </decomposable>
     <decomposable item_id="188051324" decomposable_name="[Event] Light of Fancy"/>
     <decomposable item_id="188051325" decomposable_name="[Event] Light Fantastic"/>
-    <decomposable item_id="188051326" decomposable_name="[Event] Ornate Lockbox"/>
+    <decomposable item_id="188051326" decomposable_name="[Event] Ornate Lockbox">
+		<items>
+			<item id="186000199" name="Legion Coin" count="80"/>
+			<item id="186000051" name="Major Ancient Crown" count="3"/>
+			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
+			<item id="169630007" name="[Expand Card] Expand Cube Ticket (lvl 4)"/>
+			<item id="169620072" name="AP Boost Charm II - 30%"/>
+			<item id="169620082" name="Gathering Boost Charm II - 100%"/>
+			<item id="169620094" name="Crafting Boost Charm III - 100%"/>
+			<item id="190020026" name="Boxing King Kerub Egg"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188051327" decomposable_name="[Event] Cool Box"/>
     <decomposable item_id="188051328" decomposable_name="[Event] Cold Box"/>
     <decomposable item_id="188051329" decomposable_name="[Event] Mysterious Lockbox"/>
@@ -11013,7 +11024,26 @@
     </decomposable>
     <decomposable item_id="188051460" decomposable_name="Box Blessed by Veille"/>
     <decomposable item_id="188051461" decomposable_name="Box Blessed by Mastarius"/>
-    <decomposable item_id="188051462" decomposable_name="Piloti's Balic Materials"/>
+    <decomposable item_id="188051462" decomposable_name="Piloti's Balic Materials">
+		<items>
+			<item id="152014015" name="Fresh Balaur Meat" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items>
+			<item id="152014016" name="Firm Balaur Horn" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items>
+			<item id="152014017" name="Firm Balaur Scale" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items>
+			<item id="152014018" name="Firm Balaur Skin" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items>
+			<item id="152014019" name="Burning Balaur Blood Stain" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items>
+			<item id="152014020" name="Lustrous Balaur Meat" rnd_min="2" rnd_max="5"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188051463" decomposable_name="[Event] Liltese's Belongings"/>
     <decomposable item_id="188051464" decomposable_name="[Event] Amyna's Belongings"/>
     <decomposable item_id="188051465" decomposable_name="[Event] Challenger's Treasure Box"/>
@@ -14997,7 +15027,18 @@
             <item id="160001146" name="Frillneck Aether Bulgogi"/>
         </items>
     </decomposable>
-    <decomposable item_id="188051867" decomposable_name="[Event] New Daeva Supplies"/>
+    <decomposable item_id="188051867" decomposable_name="[Event] New Daeva Supplies">
+		<items>
+			<item id="169610020" name="[Title Card] 'Adept of Aion'"/>
+			<item id="161001001" name="Revival Stone" count="3"/>
+			<item id="169620010" name="Berdin's 50% XP Amulet" count="2"/>
+			<item id="164002116" name="[Event] Rx: Accelerox" count="20"/>
+			<item id="164002117" name="[Event] Rx: Blitzopan" count="20"/>
+			<item id="164002118" name="[Event] Rx: Castafodin" count="20"/>
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" count="20"/>
+			<item id="190020049" name="Dapper Team Spirit Shugo Egg"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188051868" decomposable_name="[Event] Strongest Inquin Form Candy Pouch"/>
     <decomposable item_id="188051869" decomposable_name="[Event] Lovely Dye Pouch"/>
     <decomposable item_id="188051870" decomposable_name="[Event] Heavy Scroll Bundle"/>
@@ -29895,10 +29936,41 @@
     <decomposable item_id="188053402" decomposable_name="Fine Enchanting Supplement Bundle"/>
     <decomposable item_id="188053403" decomposable_name="Greater Enchanting Supplement Bundle"/>
     <decomposable item_id="188053404" decomposable_name="Enchanting Supplement Bundle"/>
-    <decomposable item_id="188053405" decomposable_name="Supply Scroll Bundle"/>
-    <decomposable item_id="188053406" decomposable_name="Lesser Supply Manastone Box"/>
-    <decomposable item_id="188053407" decomposable_name="Supply Manastone Box"/>
-    <decomposable item_id="188053408" decomposable_name="Greater Supply Manastone Box"/>
+    <decomposable item_id="188053405" decomposable_name="Supply Scroll Bundle">
+		<items>
+			<item id="164000076" name="Greater Running Scroll" count="5"/>
+		</items>
+		<items>
+			<item id="164000073" name="Greater Courage Scroll" count="5"/>
+		</items>
+		<items>
+			<item id="164000134" name="Greater Awakening Scroll" count="5"/>
+		</items>
+		<items>
+			<item id="164000079" name=" Greater Raging Wind Scroll" count="5"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053406" decomposable_name="Lesser Supply Manastone Box" selectable="true">
+		<items>
+			<item id="167000358" name="Manastone: Attack +3"/>
+			<item id="167000423" name="Manastone: Magic Boost +19"/>
+			<item id="167000418" name="Manastone: HP +55"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053407" decomposable_name="Supply Manastone Box" selectable="true">
+		<items>
+			<item id="167000454" name="Manastone: Attack +4"/>
+			<item id="167000487" name="Manastone: Magic Boost +23"/>
+			<item id="167000482" name="Manastone: HP +75"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053408" decomposable_name="Greater Supply Manastone Box" selectable="true">
+		<items>
+			<item id="167000518" name="Manastone: Attack +5"/>
+			<item id="167000519" name="Manastone: Magic Boost +25"/>
+			<item id="167000514" name="Manastone: HP +85"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053409" decomposable_name="[Stamp] Daily Gift Box">
         <items>
             <item id="188053631" name="[Stamp] Noble Potion Bundle"/>
