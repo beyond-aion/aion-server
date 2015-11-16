@@ -30940,7 +30940,7 @@
     </decomposable>
     <decomposable item_id="188053664" decomposable_name="[Event] Kahrun's Insignia Box">
     	<items>
-    		<item id="186000143" name="Kahrun's Symbol"/>
+    		<item id="186000143" name="Kahrun's Symbol" count="10"/>
     	</items>
     </decomposable>
     <decomposable item_id="188053665" decomposable_name="[Event] Fine Ancient Crown Box">
@@ -30950,12 +30950,12 @@
     </decomposable>
     <decomposable item_id="188053666" decomposable_name="[Event] Ceramium Medal Box">
     	<items>
-    		<item id="186000242" name="Ceramium Medal"/>
+    		<item id="186000242" name="Ceramium Medal" rnd_min="1" rnd_max="3"/>
     	</items>
     </decomposable>
     <decomposable item_id="188053667" decomposable_name="[Event] Mithril Medal Box">
     	<items>
-    		<item id="186000147" name="Mithril Medal"/>
+    		<item id="186000147" name="Mithril Medal" rnd_min="1" rnd_max="3"/>
     	</items>
     </decomposable>
     <decomposable item_id="188053668" decomposable_name="[Event] Sonatine's Friendship Box"/>
