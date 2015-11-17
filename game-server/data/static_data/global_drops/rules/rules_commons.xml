@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Kinah -->
-	<gd_rule rule_name="Kinah" base_chance="17.5" min_count="9" max_count="22">
+	<gd_rule rule_name="Kinah" base_chance="25" min_count="10" max_count="25">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
