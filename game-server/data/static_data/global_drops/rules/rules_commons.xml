@@ -1223,7 +1223,13 @@
 			<gd_item id="166500002" name="Amplification Stone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1">
+	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL"/>
+			<gd_rating rating="ELITE"/>
+			<gd_rating rating="HERO"/>
+			<gd_rating rating="LEGENDARY"/>
+		</gd_rating>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_INSTANCE"/>
@@ -1240,6 +1246,7 @@
 	</gd_rule>
 	<gd_rule rule_name="Tempering Solution (Single)" base_chance="5">
 		<gd_maps>
+			<gd_map map_id="320100000" name="Fire_Temple"/>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
 			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
@@ -1255,6 +1262,9 @@
 			<gd_map map_id="301260000" name="Legions_Krotan_Barracks"/>
 		</gd_maps>
 		<gd_npcs>
+			<!-- Fire Temple -->
+			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
+			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
 			<!-- Dark Poeta -->
 			<gd_npc npc_id="214904" name="Brigade General Anuhart"/>
 			<!-- Beshmundir Temple -->
@@ -1286,7 +1296,6 @@
 	</gd_rule>
 	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="2.5" each_member="true">
 		<gd_maps>
-			<gd_map map_id="320100000" name="Fire_Temple"/>
 			<gd_map map_id="310110000" name="Theobomos_Lab"/>
 			<gd_map map_id="320080000" name="Draupnir_Cave"/>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
@@ -1297,9 +1306,6 @@
 			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
 		</gd_maps>
 		<gd_npcs>
-			<!-- Fire Temple -->
-			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
-			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
 			<!-- Theobomos Lab -->
 			<gd_npc npc_id="214669" name="Unstable Triroan"/>
 			<!-- Draupnir Cave -->
@@ -1323,13 +1329,33 @@
 			<gd_item id="188053083" name="Tempering Solution Chest"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest" base_chance="2.5" each_member="true">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" base_chance="2.5">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 			<gd_map map_id="320080000" name="Draupnir_Cave"/>
 			<gd_map map_id="310090000" name="Indratu_Fortress"/>
 			<gd_map map_id="310110000" name="Theobomos_Lab"/>
 			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<!-- Fire Temple -->
+			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
+			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+			<!-- Draupnir Cave -->
+			<gd_npc npc_id="213780" name="Commander Bakarma"/>
+			<!-- Indratu Fortress -->
+			<gd_npc npc_id="214159" name="Brigadier Indratu"/>
+			<!-- Theobomos Lab -->
+			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<!-- Adma Stronghold -->
+			<gd_npc npc_id="214696" name="Lord Lannok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053295" name="Empyrean Plume Chest"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Empyrean Plume Chest (Shared)" base_chance="2.5" each_member="true">
+		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta"/>
 			<gd_map map_id="300150000" name="Udas_Temple"/>
 			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
@@ -1350,17 +1376,6 @@
 			<gd_map map_id="301340000" name="Linkgate_Foundry"/>
 		</gd_maps>
 		<gd_npcs>
-			<!-- Fire Temple -->
-			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
-			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
-			<!-- Draupnir Cave -->
-			<gd_npc npc_id="213780" name="Commander Bakarma"/>
-			<!-- Indratu Fortress -->
-			<gd_npc npc_id="214159" name="Brigadier Indratu"/>
-			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
-			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" name="Lord Lannok"/>
 			<!-- Dark Poeta -->
 			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
 			<gd_npc npc_id="217166" name="Tahabata Pyrelord"/>

@@ -18,6 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
@@ -365,6 +366,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private void upgradePlayerData() {
 		Player player = getPlayer();
 		if (player != null) {
+			BonusPackService.getInstance().addPlayerCustomReward(player);
 			player.getController().upgradePlayer();
 			resetSalvationPoints();
 		}

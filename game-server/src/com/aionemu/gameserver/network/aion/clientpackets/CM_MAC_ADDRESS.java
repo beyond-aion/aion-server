@@ -102,6 +102,6 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 					}
 				}
 			}
-		}, 5 * 1000);
+		}, 10 * 1000);
 	}
 }

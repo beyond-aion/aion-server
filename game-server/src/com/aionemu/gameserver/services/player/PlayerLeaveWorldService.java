@@ -62,7 +62,7 @@ public class PlayerLeaveWorldService {
 	 * anywhere else</b>
 	 */
 	public static final void leaveWorld(Player player) {
-		AionConnection con = player.getClientConnection();
+		final AionConnection con = player.getClientConnection();
 		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
@@ -153,7 +153,10 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		con.setActivePlayer(null);
+		if (con != null)
+			con.setActivePlayer(null);
+		else
+			log.warn("While leaving world, player connection is null for player: " + player.getName());
 		player.setClientConnection(null);
 	}
 
