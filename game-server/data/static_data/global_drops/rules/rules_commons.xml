@@ -1223,7 +1223,13 @@
 			<gd_item id="166500002" name="Amplification Stone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1">
+	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL"/>
+			<gd_rating rating="ELITE"/>
+			<gd_rating rating="HERO"/>
+			<gd_rating rating="LEGENDARY"/>
+		</gd_rating>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_INSTANCE"/>
