@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -130,8 +131,15 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMResist() {
 		int mres = owner.getObjectTemplate().getStatsTemplate().getMresist();
-		if (owner.getLevel() < 50)
-			mres *= 0.8f;
+		int level = owner.getLevel();
+		if (owner.getRating() != NpcRating.LEGENDARY) {
+			if (level < 25)
+				mres *= 0.7f;
+			else if (level >= 25 && level < 50)
+				mres *= 0.8f;
+			else if (level >= 50 && level < 55)
+				mres *= 0.9f;
+		}
 		return getStat(StatEnum.MAGICAL_RESIST, mres);
 	}
 
