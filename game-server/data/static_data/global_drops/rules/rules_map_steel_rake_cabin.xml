@@ -293,4 +293,15 @@
 			<gd_item id="185000081" name="Large Gun Deck Key"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219026" name="Sweeper Nunukin"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000042" name="Sailor Waiting Room Key"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>
