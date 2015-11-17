@@ -86,7 +86,7 @@ public class PlayerAccountData {
 		this.playerCommonData = playerCommonData;
 	}
 
-	public PlayerAppearance getAppereance() {
+	public PlayerAppearance getAppearance() {
 		return appereance;
 	}
 

@@ -26,20 +26,14 @@ public class CM_CHARACTER_LIST extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		playOk2 = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
-		sendPacket(new SM_CHARACTER_LIST(playOk2));
 		sendPacket(new SM_ACCOUNT_PROPERTIES());
+		sendPacket(new SM_CHARACTER_LIST(playOk2));
 	}
 }
