@@ -15,7 +15,7 @@ public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(con.getAccount().getAccessLevel() >= AdminConfig.GM_PANEL ? 1 : 0);
+		writeH(con.getAccount().getAccessLevel() >= AdminConfig.GM_PANEL ? 1 : 0); // enables GM panel and other windows, also disables client-side faction restriction for char creation
 		writeH(0);
 		writeD(0);
 		writeD(0); // gold pack related (0 = no chat restriction)

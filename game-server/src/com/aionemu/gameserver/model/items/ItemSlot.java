@@ -117,6 +117,21 @@ public enum ItemSlot {
 		return (VISIBLE.slotIdMask & slot) == slot;
 	}
 
+	public static boolean isTwoHandedWeapon(long slot) {
+		return (slot & MAIN_OR_SUB.slotIdMask) == slot || (slot & MAIN_OFF_OR_SUB_OFF.slotIdMask) == slot;
+	}
+
+	public static byte getEquipmentSlotType(long slot) {
+		if (!isVisible(slot))
+			return 0; // not equippable
+
+		long leftSlotMask = SUB_HAND.slotIdMask | EARRINGS_LEFT.slotIdMask | RING_LEFT.slotIdMask | POWER_SHARD_LEFT.slotIdMask | SUB_OFF_HAND.slotIdMask;
+		if ((slot & leftSlotMask) == 0 || isTwoHandedWeapon(slot))
+			return 1; // default (right-hand) slot
+
+		return 2; // secondary (left-hand) slot
+	}
+
 	public static ItemSlot[] getSlotsFor(long slot) {
 		List<ItemSlot> slots = new FastTable<ItemSlot>();
 		for (ItemSlot itemSlot : values()) {

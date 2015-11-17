@@ -1970,7 +1970,7 @@
 			<spot x="2418.42" y="538.703" z="339.041" h="34"/>
 		</spawn>
 		<!-- Chieftain Promakis -->
-		<spawn npc_id="212653" respawn_time="3600">
+		<spawn npc_id="212653" respawn_time="295">
 			<spot x="284.957" y="1104.83" z="335.133" h="77"/>
 		</spawn>
 		<!-- Chieftain Suroot -->
@@ -4044,7 +4044,7 @@
 			<spot x="334.285" y="2361.88" z="445" h="63"/>
 		</spawn>
 		<!-- Iron Paw Kalsek -->
-		<spawn npc_id="212640" respawn_time="1800">
+		<spawn npc_id="212640" respawn_time="295">
 			<spot x="532.72" y="1657.19" z="426.2787" h="22" walker_id="457ED08C1BD791B96963B3B4F0981E3715529CAE"/>
 		</spawn>
 		<!-- Ironback Snuffler -->

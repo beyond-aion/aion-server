@@ -2,39 +2,50 @@ package com.aionemu.gameserver.network.aion;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javolution.util.FastTable;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.MailDAO;
+import com.aionemu.gameserver.dao.PlayerSettingsDAO;
+import com.aionemu.gameserver.model.account.CharacterBanInfo;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.services.BrokerService;
 
 /**
- * @author AEJTester
- * @author Nemesiss
- * @author Niato
+ * @author AEJTester, Nemesiss, Niato
+ * @modified Neon
  */
 public abstract class PlayerInfo extends AionServerPacket {
-
-	private static Logger log = LoggerFactory.getLogger(PlayerInfo.class);
 
 	protected PlayerInfo() {
 	}
 
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
-		PlayerCommonData pbd = accPlData.getPlayerCommonData();
-		final int raceId = pbd.getRace().getRaceId();
-		final int genderId = pbd.getGender().getGenderId();
-		final PlayerAppearance playerAppearance = accPlData.getAppereance();
-		writeD(pbd.getPlayerObjId());
-		writeS(pbd.getName(), 52);
+		PlayerCommonData pcd = accPlData.getPlayerCommonData();
+		int playerId = pcd.getPlayerObjId();
+		int raceId = pcd.getRace().getRaceId();
+		int genderId = pcd.getGender().getGenderId();
+		PlayerAppearance playerAppearance = accPlData.getAppearance();
+		CharacterBanInfo cbi = accPlData.getCharBanInfo();
+		boolean isBanned = (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000);
+
+		List<Item> itemList = new FastTable<Item>();
+		for (Item item : accPlData.getEquipment()) {
+			if (itemList.size() == 16)
+				break;
+			if (ItemSlot.isVisible(item.getEquipmentSlot()))
+				itemList.add(item);
+		}
+
+		writeD(playerId);
+		writeS(pcd.getName(), 52);
 		writeD(genderId);
 		writeD(raceId);
-		writeD(pbd.getPlayerClass().getClassId());
+		writeD(pcd.getPlayerClass().getClassId());
 		writeD(playerAppearance.getVoice());
 		writeD(playerAppearance.getSkinRGB());
 		writeD(playerAppearance.getHairRGB());
@@ -73,11 +84,9 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(playerAppearance.getEarShape());
 		writeC(playerAppearance.getHeadSize());
 		// 1.5.x 0x00, shoulderSize, armLength, legLength (BYTE) after HeadSize
-
 		writeC(playerAppearance.getNeck());
 		writeC(playerAppearance.getNeckLength());
-		writeC(playerAppearance.getShoulderSize()); // shoulderSize
-
+		writeC(playerAppearance.getShoulderSize());
 		writeC(playerAppearance.getTorso());
 		writeC(playerAppearance.getChest());
 		writeC(playerAppearance.getWaist());
@@ -88,8 +97,8 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(playerAppearance.getFootSize());
 		writeC(playerAppearance.getFacialRate());
 		writeC(0x00); // 0x00
-		writeC(playerAppearance.getArmLength()); // armLength
-		writeC(playerAppearance.getLegLength()); // legLength
+		writeC(playerAppearance.getArmLength());
+		writeC(playerAppearance.getLegLength());
 		writeC(playerAppearance.getShoulders());
 		writeC(playerAppearance.getFaceShape());
 		writeC(0x00); // always 0 may be acessLevel
@@ -98,52 +107,48 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeF(playerAppearance.getHeight());
 		int raceSex = 100000 + raceId * 2 + genderId;
 		writeD(raceSex);
-		writeD(pbd.getPosition().getMapId());// mapid for preloading map
-		writeF(pbd.getPosition().getX());
-		writeF(pbd.getPosition().getY());
-		writeF(pbd.getPosition().getZ());
-		writeD(pbd.getPosition().getHeading());
-		writeH(pbd.getLevel());// lvl confirmed
+		writeD(pcd.getPosition().getMapId());// mapid for preloading map
+		writeF(pcd.getPosition().getX());
+		writeF(pcd.getPosition().getY());
+		writeF(pcd.getPosition().getZ());
+		writeD(pcd.getPosition().getHeading());
+		writeH(pcd.getLevel());
 		writeH(0); // unk 2.5
-		writeD(pbd.getTitleId());
-		if (accPlData.isLegionMember()) {
-			writeD(accPlData.getLegion().getLegionId());
-			writeS(accPlData.getLegion().getLegionName(), 82);
-		} else {
-			writeB(new byte[86]);
+		writeD(pcd.getTitleId());
+		writeD(accPlData.isLegionMember() ? accPlData.getLegion().getLegionId() : 0);
+		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getLegionName() : "", 82);
+		writeH(accPlData.isLegionMember() ? 1 : 0);
+		writeD(pcd.getLastOnline() != null ? (int) pcd.getLastOnline().getTime() : 0);// last online
+		for (int i = 0; i < 16; i++) { // 16 items is always expected by the client...
+			Item item = i < itemList.size() ? itemList.get(i) : null;
+			writeC(item == null ? 0 : ItemSlot.getEquipmentSlotType(item.getEquipmentSlot())); // 0 = not visible, 1 = default (right-hand) slot, 2 = secondary (left-hand) slot
+			writeD(item == null ? 0 : item.getItemSkinTemplate().getTemplateId());
+			writeD(item == null || item.getGodStone() == null ? 0 : item.getGodStone().getItemId());
+			writeD(item == null ? 0 : item.getItemColor());
 		}
-
-		writeH(accPlData.isLegionMember() ? 0x01 : 0x00);// is in legion?
-		writeD(pbd.getLastOnline() != null ? (int) pbd.getLastOnline().getTime() : 0);// last online
-
-		int itemsDataSize = 0;
-		// TODO figure out this part when fully equipped
-		List<Item> items = accPlData.getEquipment();
-
-		for (Item item : items) {
-			if (itemsDataSize >= 208)
-				break;
-
-			ItemTemplate itemTemplate = item.getItemTemplate();
-			if (itemTemplate == null) {
-				log.warn("Missing item. PlayerId: " + pbd.getPlayerObjId() + " ItemId: " + item.getObjectId());
-				continue;
-			}
-
-			if (itemTemplate.isArmor() || itemTemplate.isWeapon()) {
-				if (itemTemplate.getItemSlot() <= ItemSlot.PANTS.getSlotIdMask()) {
-					writeC(1); // this flas is needed to show equipment on selection screen
-					writeD(item.getItemSkinTemplate().getTemplateId());
-					GodStone godStone = item.getGodStone();
-					writeD(godStone != null ? godStone.getItemId() : 0);
-					writeD(item.getItemColor());
-
-					itemsDataSize += 13;
-				}
-			}
-		}
-
-		byte[] stupidNc = new byte[208 - itemsDataSize];
-		writeB(stupidNc);
+		writeD(0);
+		writeD(0);
+		writeD(0); // 4.5
+		writeD(0); // 4.5
+		writeD(0); // 4.5
+		writeD(0); // 4.5
+		writeB(new byte[68]); // 4.7
+		writeD(accPlData.getDeletionTimeInSeconds());
+		writeH(DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(playerId).getDisplay()); // display helmet 0 show, 5 dont show , possible bit operation
+		writeH(0);
+		writeD(0);
+		writeD(DAOManager.getDAO(MailDAO.class).haveUnread(playerId) ? 1 : 0); // mail
+		writeD(0); // unk
+		writeD(0); // unk
+		writeQ(BrokerService.getInstance().getCollectedMoney(pcd)); // collected money from broker
+		writeD(0);
+		writeD(0);
+		writeD(0);
+		writeD(0);
+		writeD(0);
+		// client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
+		writeD(isBanned ? (int) cbi.getStart() : 0); // startPunishDate
+		writeD(isBanned ? (int) cbi.getEnd() : 0); // endPunishDate
+		writeS(isBanned ? cbi.getReason() : "");
 	}
 }

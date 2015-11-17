@@ -8,12 +8,13 @@ import com.aionemu.gameserver.network.aion.PlayerInfo;
  * This packet is response for CM_CREATE_CHARACTER
  * 
  * @author Nemesiss, AEJTester
+ * @modified Neon
  */
 public class SM_CREATE_CHARACTER extends PlayerInfo {
 
 	/** If response is ok */
 	public static final int RESPONSE_OK = 0x00;
-
+	/** Failed to create the character */
 	public static final int FAILED_TO_CREATE_THE_CHARACTER = 1;
 	/** Failed to create the character due to world db error */
 	public static final int RESPONSE_DB_ERROR = 2;
@@ -33,18 +34,18 @@ public class SM_CREATE_CHARACTER extends PlayerInfo {
 	public static final int RESPONSE_PERMISSION_TO_CREATE = 20;
 	/** open create characters window */
 	public static final int RESPONSE_OPEN_CREATION_WINDOW = 22;
+
 	/**
 	 * response code
 	 */
 	private final int responseCode;
-
 	/**
 	 * Newly created player.
 	 */
-	private final PlayerAccountData player;
+	private final PlayerAccountData playerAccData;
 
 	/**
-	 * Constructs new <tt>SM_CREATE_CHARACTER </tt> packet
+	 * Constructs new <tt>SM_CREATE_CHARACTER</tt> packet
 	 * 
 	 * @param accPlData
 	 *          playerAccountData of player that was created
@@ -53,22 +54,17 @@ public class SM_CREATE_CHARACTER extends PlayerInfo {
 	 */
 
 	public SM_CREATE_CHARACTER(PlayerAccountData accPlData, int responseCode) {
-		this.player = accPlData;
+		this.playerAccData = accPlData;
 		this.responseCode = responseCode;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(responseCode);
 
-		if (responseCode == RESPONSE_OK) {
-			writePlayerInfo(player); // if everything is fine, all the character's data should be sent
-			writeB(new byte[156]);
-		} else {
-			writeB(new byte[616]); // if something is wrong, only return code should be sent in the packet
-		}
+		if (responseCode != RESPONSE_OK)
+			return;
+
+		writePlayerInfo(playerAccData);
 	}
 }
