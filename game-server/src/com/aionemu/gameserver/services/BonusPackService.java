@@ -45,7 +45,7 @@ public class BonusPackService {
 			
 		int receivingPlayerId = dao.loadReceivingPlayer(player);
 		int objectId = player.getObjectId();
-		if (receivingPlayerId > 0 && objectId != receivingPlayerId)
+		if (receivingPlayerId > 0)
 			return;
 
 		int level = player.getLevel();
