@@ -118,7 +118,7 @@ public enum ItemSlot {
 	}
 
 	public static boolean isTwoHandedWeapon(long slot) {
-		return (slot & MAIN_OR_SUB.slotIdMask) == slot || (slot & MAIN_OFF_OR_SUB_OFF.slotIdMask) == slot;
+		return (slot & MAIN_OR_SUB.slotIdMask) == MAIN_OR_SUB.slotIdMask || (slot & MAIN_OFF_OR_SUB_OFF.slotIdMask) == MAIN_OFF_OR_SUB_OFF.slotIdMask;
 	}
 
 	public static byte getEquipmentSlotType(long slot) {
