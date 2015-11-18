@@ -171,9 +171,9 @@
 	<item_collecting id="4085" start_npc_ids="205170" end_npc_ids="205164"/>
 	<item_collecting id="4089" start_npc_ids="205203"/>
 	<item_collecting id="4090" start_npc_ids="205205"/>
-	<item_collecting id="4091" start_npc_ids="205156"/>
+	<item_collecting id="4091" start_npc_ids="205225"/>
 	<item_collecting id="4092" start_npc_ids="205225"/>
-	<item_collecting id="4094" start_npc_ids="205226"/>
+	<item_collecting id="4094" start_npc_ids="205225"/>
 	<item_collecting id="4095" start_npc_ids="205206"/>
 	<item_collecting id="4098" start_npc_ids="205190" end_npc_ids="205187"/>
 	<item_collecting id="4099" start_npc_ids="205149"/>
@@ -218,14 +218,13 @@
 		<monster var="1" end_var="30" npc_ids="214369 214370"/>
 	</monster_hunt>
 	<monster_hunt id="4032" start_npc_ids="205152">
-		<monster var="0" end_var="24" npc_ids="214376 214377"/>
-		<monster var="1" end_var="20" npc_ids="214378 214379"/>
+		<monster var="0" end_var="6" npc_ids="214376 214377"/>
+		<monster var="1" end_var="6" npc_ids="214378 214379"/>
 	</monster_hunt>
 	<monster_hunt id="4039" start_npc_ids="205193">
 		<monster var="0" end_var="30" npc_ids="214413 214414"/>
 		<monster var="1" end_var="18" npc_ids="214415"/>
 	</monster_hunt>
-	<!-- The Alpha Alitaur -->
 	<monster_hunt id="4040" start_npc_ids="205193">
 		<monster var="0" end_var="1" npc_ids="214588"/>
 	</monster_hunt>
@@ -245,11 +244,11 @@
 		<monster var="1" end_var="35" npc_ids="214465 214466"/>
 	</monster_hunt>
 	<monster_hunt id="4055" start_npc_ids="205203">
-		<monster var="0" end_var="10" npc_ids="214480 214481"/>
-		<monster var="1" end_var="20" npc_ids="214478 214479"/>
+		<monster var="0" end_var="4" npc_ids="214480 214481"/>
+		<monster var="1" end_var="8" npc_ids="214478 214479"/>
 	</monster_hunt>
 	<monster_hunt id="4058" start_npc_ids="205204">
-		<monster var="0" end_var="30" npc_ids="214497 214498"/>
+		<monster var="0" end_var="12" npc_ids="214497 214498"/>
 	</monster_hunt>
 	<monster_hunt id="4079" start_npc_ids="205156">
 		<monster var="0" end_var="20" npc_ids="214404 214405"/>
