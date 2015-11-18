@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="300030000">
+		<base_spawn id="10"> <!-- First Base -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="232195">
+					<spot x="340.76968" y="631.2266" z="368.07645" h="88" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="321.67188" y="592.1045" z="373.0002" h="113" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="322.45538" y="599.294" z="372.99915" h="8" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="308.0611" y="605.35474" z="373.0145" h="40" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="303.4204" y="599.9546" z="373.00592" h="54" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="319.36057" y="600.25507" z="373.29898" h="16" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="311.66647" y="604.0086" z="373.02917" h="30" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="306.39536" y="568.33435" z="367.038" h="13" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="340.00607" y="584.6114" z="355.93954" h="102" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="350.39975" y="589.13715" z="356.21063" h="106" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="336.07654" y="572.2344" z="351.9291" h="115" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="393.1814" y="514.4861" z="345.4827" h="37" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="387.5081" y="518.00055" z="345.03073" h="10" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="456.86795" y="549.4275" z="339.53464" h="28" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="473.16544" y="648.9108" z="337.38013" h="4" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="470.94003" y="642.02515" z="336.93375" h="106" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="379.64627" y="635.947" z="357.44357" h="1" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="511.5109" y="630.6806" z="330.93887" h="27" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="525.1547" y="629.24896" z="330.25403" h="29" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="517.3999" y="623.61804" z="330.39886" h="30" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="431.92706" y="661.0028" z="341.53787" h="115" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="419.4594" y="538.2084" z="344.59894" h="45" />
+				</spawn>
+				<spawn npc_id="231648" handler="BOSS">
+					<spot x="310.1163" y="589.26636" z="373.0198" h="22" />
+				</spawn>
+				<spawn npc_id="831877">
+					<spot x="310.1163" y="589.26636" z="373.0198" h="22" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="232290">
+					<spot x="340.76968" y="631.2266" z="368.07645" h="88" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="321.67188" y="592.1045" z="373.0002" h="113" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="322.45538" y="599.294" z="372.99915" h="8" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="308.0611" y="605.35474" z="373.0145" h="40" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="303.4204" y="599.9546" z="373.00592" h="54" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="319.36057" y="600.25507" z="373.29898" h="16" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="311.66647" y="604.0086" z="373.02917" h="30" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="306.39536" y="568.33435" z="367.038" h="13" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="340.00607" y="584.6114" z="355.93954" h="102" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="350.39975" y="589.13715" z="356.21063" h="106" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="336.07654" y="572.2344" z="351.9291" h="115" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="393.1814" y="514.4861" z="345.4827" h="37" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="387.5081" y="518.00055" z="345.03073" h="10" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="456.86795" y="549.4275" z="339.53464" h="28" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="473.16544" y="648.9108" z="337.38013" h="4" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="470.94003" y="642.02515" z="336.93375" h="106" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="379.64627" y="635.947" z="357.44357" h="1" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="511.5109" y="630.6806" z="330.93887" h="27" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="525.1547" y="629.24896" z="330.25403" h="29" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="517.3999" y="623.61804" z="330.39886" h="30" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="431.92706" y="661.0028" z="341.53787" h="115" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="419.4594" y="538.2084" z="344.59894" h="45" />
+				</spawn>
+				<spawn npc_id="231649" handler="BOSS">
+					<spot x="310.1163" y="589.26636" z="373.0198" h="22" />
+				</spawn>
+				<spawn npc_id="831885">
+					<spot x="310.1163" y="589.26636" z="373.0198" h="22" />
+				</spawn>
+
+
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="11"> <!-- Second Base -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="232195">
+					<spot x="472.48306" y="525.7714" z="359.8581" h="94" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="480.7882" y="532.0861" z="361.42554" h="116" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="431.31662" y="496.36478" z="361.16458" h="28" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="380.89578" y="519.92114" z="355.36972" h="18" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="397.34894" y="511.40988" z="355.36206" h="20" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="373.88132" y="434.30518" z="367.875" h="44" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="347.52112" y="438.24072" z="363.10995" h="28" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="362.66473" y="436.35614" z="362.66284" h="46" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="397.92807" y="451.1257" z="366.41388" h="41" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="361.69308" y="470.4321" z="352.98434" h="24" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="357.02823" y="443.65417" z="360.35806" h="29" />
+				</spawn>
+				<spawn npc_id="231648" handler="BOSS">
+					<spot x="475.96667" y="534.94476" z="361.5852" h="105" />
+				</spawn>
+				<spawn npc_id="831875">
+					<spot x="475.96667" y="534.94476" z="361.5852" h="105" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="232290">
+					<spot x="472.48306" y="525.7714" z="359.8581" h="94" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="480.7882" y="532.0861" z="361.42554" h="116" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="431.31662" y="496.36478" z="361.16458" h="28" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="380.89578" y="519.92114" z="355.36972" h="18" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="397.34894" y="511.40988" z="355.36206" h="20" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="373.88132" y="434.30518" z="367.875" h="44" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="347.52112" y="438.24072" z="363.10995" h="28" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="362.66473" y="436.35614" z="362.66284" h="46" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="397.92807" y="451.1257" z="366.41388" h="41" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="361.69308" y="470.4321" z="352.98434" h="24" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="357.02823" y="443.65417" z="360.35806" h="29" />
+				</spawn>
+				<spawn npc_id="231649" handler="BOSS">
+					<spot x="475.96667" y="534.94476" z="361.5852" h="105" />
+				</spawn>
+				<spawn npc_id="831887">
+					<spot x="475.96667" y="534.94476" z="361.5852" h="105" />
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="12"> <!-- Third base -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="232195">
+					<spot x="347.55817" y="429.65344" z="377.99875" h="25" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="362.30148" y="425.48822" z="378.00293" h="25" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="374.83243" y="386.10715" z="364.44797" h="53" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="316.44968" y="415.4393" z="371.50208" h="68" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="358.38675" y="378.11774" z="375.3918" h="48" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="343.9194" y="376.1104" z="374.96866" h="35" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="373.57785" y="352.97147" z="378.03433" h="40" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="385.24393" y="358.46298" z="377.73325" h="38" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="380.39844" y="353.2136" z="377.8234" h="40" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="392.92572" y="344.171" z="379.56995" h="60" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="377.31662" y="339.207" z="378.25684" h="18" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="397.10016" y="307.6259" z="378.85327" h="37" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="313.4438" y="355.23514" z="379.13037" h="17" />
+				</spawn>
+				<spawn npc_id="231648" handler="BOSS">
+					<spot x="318.34103" y="426.5621" z="376.82706" h="116" />
+				</spawn>
+				<spawn npc_id="831879">
+					<spot x="318.34103" y="426.5621" z="376.82706" h="116" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="232290">
+					<spot x="347.55817" y="429.65344" z="377.99875" h="25" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="362.30148" y="425.48822" z="378.00293" h="25" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="374.83243" y="386.10715" z="364.44797" h="53" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="316.44968" y="415.4393" z="371.50208" h="68" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="358.38675" y="378.11774" z="375.3918" h="48" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="343.9194" y="376.1104" z="374.96866" h="35" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="373.57785" y="352.97147" z="378.03433" h="40" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="385.24393" y="358.46298" z="377.73325" h="38" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="380.39844" y="353.2136" z="377.8234" h="40" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="392.92572" y="344.171" z="379.56995" h="60" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="377.31662" y="339.207" z="378.25684" h="18" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="397.10016" y="307.6259" z="378.85327" h="37" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="313.4438" y="355.23514" z="379.13037" h="17" />
+				</spawn>
+				<spawn npc_id="231649" handler="BOSS">
+					<spot x="318.34103" y="426.5621" z="376.82706" h="116" />
+				</spawn>
+				<spawn npc_id="831889">
+					<spot x="318.34103" y="426.5621" z="376.82706" h="116" />
+				</spawn>
+			</simple_race>
+		</base_spawn>
+		<base_spawn id="13"> <!-- Fortress Boss -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="258280">
+					<spot x="330.03995" y="261.42664" z="384.3628" h="26" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="350.007" y="270.30594" z="384.2954" h="57" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="347.9148" y="262.09262" z="384.2954" h="44" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="312.1026" y="267.8278" z="384.2954" h="12" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="313.7782" y="275.15622" z="384.2954" h="115" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="340.83893" y="296.19403" z="382.05795" h="22" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="331.7766" y="297.98657" z="382.05798" h="35" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="299.50037" y="298.30414" z="389.87958" h="19" />
+				</spawn>
+				<spawn npc_id="232195">
+					<spot x="340.16406" y="322.85748" z="380.08923" h="26" />
+				</spawn>
+				<spawn npc_id="701458">
+					<spot x="345.41" y="278.16223" z="384.59244" h="73" />
+				</spawn>
+				<spawn npc_id="831379">
+					<spot x="343.5429" y="273.2337" z="384.74738" h="57" />
+				</spawn>
+				<spawn npc_id="831024">
+					<spot x="327.7011" y="286.44537" z="384.75693" h="105" />
+				</spawn>
+				<spawn npc_id="231648" handler="BOSS">
+					<spot x="336.21463" y="297.85883" z="403.3898" h="27" />
+				</spawn>
+				<spawn npc_id="831883">
+					<spot x="336.21463" y="297.85883" z="403.3898" h="27" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="258281">
+					<spot x="330.03995" y="261.42664" z="384.3628" h="26" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="350.007" y="270.30594" z="384.2954" h="57" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="347.9148" y="262.09262" z="384.2954" h="44" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="312.1026" y="267.8278" z="384.2954" h="12" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="313.7782" y="275.15622" z="384.2954" h="115" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="340.83893" y="296.19403" z="382.05795" h="22" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="331.7766" y="297.98657" z="382.05798" h="35" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="299.50037" y="298.30414" z="389.87958" h="19" />
+				</spawn>
+				<spawn npc_id="232290">
+					<spot x="340.16406" y="322.85748" z="380.08923" h="26" />
+				</spawn>
+				<spawn npc_id="701459">
+					<spot x="345.41" y="278.16223" z="384.59244" h="73" />
+				</spawn>
+				<spawn npc_id="831380">
+					<spot x="343.5429" y="273.2337" z="384.74738" h="57" />
+				</spawn>
+				<spawn npc_id="831027">
+					<spot x="327.7011" y="286.44537" z="384.75693" h="105" />
+				</spawn>
+				<spawn npc_id="231649" handler="BOSS">
+					<spot x="336.21463" y="297.85883" z="403.3898" h="27" />
+				</spawn>
+				<spawn npc_id="831893">
+					<spot x="336.21463" y="297.85883" z="403.3898" h="27" />
+				</spawn>
+			</simple_race>
+		</base_spawn>
+
+		<base_spawn id="21"> <!-- TP BASE 1 -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="730407" handler="MERCHANT">
+					<spot x="503.60242" y="557.088" z="331.875" h="34" />
+				</spawn>
+				<spawn npc_id="234213" handler="BOSS">
+					<spot x="510.84216" y="561.42755" z="332.76318" h="53" />
+				</spawn>
+				<spawn npc_id="700137" handler="RIFT">
+					<spot x="513.86224" y="520.2061" z="379.2071" h="60" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="730408" handler="MERCHANT">
+					<spot x="503.60242" y="557.088" z="331.875" h="34" />
+				</spawn>
+				<spawn npc_id="234208" handler="BOSS">
+					<spot x="510.84216" y="561.42755" z="332.76318" h="53" />
+				</spawn>
+				<spawn npc_id="700137" handler="RIFT">
+					<spot x="513.86224" y="520.2061" z="379.2071" h="60" />
+				</spawn>
+			</simple_race>
+		</base_spawn>
+
+		<base_spawn id="22"> <!-- TP BASE 2 -->
+			<simple_race race="ELYOS">
+				<spawn npc_id="730407" handler="MERCHANT">
+					<spot x="327.94583" y="486.23145" z="361.7356" h="4" />
+				</spawn>
+				<spawn npc_id="234213" handler="BOSS">
+					<spot x="336.39597" y="485.456" z="361.66812" h="61" />
+				</spawn>
+				<spawn npc_id="700137" handler="RIFT">
+					<spot x="300.9316" y="430.27383" z="379.5995" h="116" />
+				</spawn>
+			</simple_race>
+			<simple_race race="ASMODIANS">
+				<spawn npc_id="730408" handler="MERCHANT">
+					<spot x="327.94583" y="486.23145" z="361.7356" h="4" />
+				</spawn>
+				<spawn npc_id="234208" handler="BOSS">
+					<spot x="336.39597" y="485.456" z="361.66812" h="61" />
+				</spawn>
+				<spawn npc_id="700137" handler="RIFT">
+					<spot x="300.9316" y="430.27383" z="379.5995" h="116" />
+				</spawn>
+			</simple_race>
+		</base_spawn>
+	</spawn_map>
+</spawns>
