@@ -225,7 +225,6 @@
 		<monster var="0" end_var="30" npc_ids="214413 214414"/>
 		<monster var="1" end_var="18" npc_ids="214415"/>
 	</monster_hunt>
-	<!-- The Alpha Alitaur -->
 	<monster_hunt id="4040" start_npc_ids="205193">
 		<monster var="0" end_var="1" npc_ids="214588"/>
 	</monster_hunt>
@@ -249,7 +248,7 @@
 		<monster var="1" end_var="8" npc_ids="214478 214479"/>
 	</monster_hunt>
 	<monster_hunt id="4058" start_npc_ids="205204">
-		<monster var="0" end_var="30" npc_ids="214497 214498"/>
+		<monster var="0" end_var="12" npc_ids="214497 214498"/>
 	</monster_hunt>
 	<monster_hunt id="4079" start_npc_ids="205156">
 		<monster var="0" end_var="20" npc_ids="214404 214405"/>
