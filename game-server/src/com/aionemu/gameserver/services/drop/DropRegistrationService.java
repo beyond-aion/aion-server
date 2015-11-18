@@ -48,6 +48,7 @@ import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTem
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
@@ -307,9 +308,17 @@ public class DropRegistrationService {
 					if (rule.getGlobalRuleNpcs() == null) {
 						// EXCLUSIONS:
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-						if (npc.getSpawn() instanceof SiegeSpawnTemplate || npc.getSpawn() instanceof RiftSpawnTemplate
-							|| npc.getSpawn() instanceof VortexSpawnTemplate || npc.getSpawn() instanceof BaseSpawnTemplate)
+						if (npc.getSpawn() instanceof SiegeSpawnTemplate)
 							continue;
+						//if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
+						//	continue;
+						
+						//exclude Inner Base Npcs
+						if (npc.getSpawn() instanceof BaseSpawnTemplate) {
+							if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+								continue;
+						}
+							
 						// if npc level ==1 means missing stats, so better exclude it from drops
 						if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
 							continue;
@@ -626,7 +635,7 @@ public class DropRegistrationService {
 		float rankModifier = 1f;
 		if (npc.getRank() != null) {
 			if (npc.getRank().equals(NpcRank.NOVICE))
-				rankModifier = 0.5f;
+				rankModifier = 1f;
 			else if (npc.getRank().equals(NpcRank.DISCIPLINED))
 				rankModifier = 1f;
 			else if (npc.getRank().equals(NpcRank.SEASONED))
