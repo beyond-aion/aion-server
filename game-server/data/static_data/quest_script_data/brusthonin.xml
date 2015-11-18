@@ -173,7 +173,7 @@
 	<item_collecting id="4090" start_npc_ids="205205"/>
 	<item_collecting id="4091" start_npc_ids="205225"/>
 	<item_collecting id="4092" start_npc_ids="205225"/>
-	<item_collecting id="4094" start_npc_ids="205226"/>
+	<item_collecting id="4094" start_npc_ids="205225"/>
 	<item_collecting id="4095" start_npc_ids="205206"/>
 	<item_collecting id="4098" start_npc_ids="205190" end_npc_ids="205187"/>
 	<item_collecting id="4099" start_npc_ids="205149"/>
