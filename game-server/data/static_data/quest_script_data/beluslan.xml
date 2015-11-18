@@ -119,7 +119,7 @@
 			2606 [XML] A Ribbit in Need
 			2607 [XML] Silencing the Hermit
 			2608 [XML] Halt the Contamination
-			2611 [SCRIPT] Consulting the Leaders
+			2611 [XML] Consulting the Leaders
 			2612 [XML] A Tonic for Nargatal
 			2613 [XML] Devoted Husband Akagitan
 			2614 [XML] Decorative Skulls
@@ -329,6 +329,12 @@
 	<report_to id="4221" start_npc_ids="204710" end_npc_ids="204839"/>
 	<report_to id="4521" start_npc_ids="204725" end_npc_ids="205143"/>
 	<report_to id="4538" start_npc_ids="204701" end_npc_ids="204768"/>
+	<report_to_many id="2611" start_npc_ids="204763" end_npc_ids="204763">
+		<npc_infos var="0" npc_id="204783" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="204784" quest_dialog="1693"/>
+		<npc_infos var="2" npc_id="204700" quest_dialog="2034"/>
+		<npc_infos var="3" npc_id="204763" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2502" start_npc_ids="204701"/>
 	<item_collecting id="2503" start_npc_ids="204733"/>
