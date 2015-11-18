@@ -245,8 +245,8 @@
 		<monster var="1" end_var="35" npc_ids="214465 214466"/>
 	</monster_hunt>
 	<monster_hunt id="4055" start_npc_ids="205203">
-		<monster var="0" end_var="10" npc_ids="214480 214481"/>
-		<monster var="1" end_var="20" npc_ids="214478 214479"/>
+		<monster var="0" end_var="4" npc_ids="214480 214481"/>
+		<monster var="1" end_var="8" npc_ids="214478 214479"/>
 	</monster_hunt>
 	<monster_hunt id="4058" start_npc_ids="205204">
 		<monster var="0" end_var="30" npc_ids="214497 214498"/>
