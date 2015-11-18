@@ -302,7 +302,6 @@ public class DropRegistrationService {
 					if (npc.getWorldDropType().equals(WorldDropType.NONE)) {
 						continue;
 					}
-
 					// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 					// so the following restrictions will be ignored
 					if (rule.getGlobalRuleNpcs() == null) {
@@ -323,15 +322,17 @@ public class DropRegistrationService {
 
 					float chance = rule.getChance();
 					// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
-					if (!rule.isFixedChance())
-						chance *= getRankModifier(npc) * getRatingModifier(npc);
-					// add drop rate multiplier
-					float percent = chance * dropRate;
-					if (Rnd.get() * 100 > percent) {
-						continue;
+					if (!rule.isFixedChance()) {
+						chance *= getRankModifier(npc) * getRatingModifier(npc) * boostDropRate;
+						if (!rule.getNoReduction())
+							chance *= dropRate;
 					}
+					// add drop rate multiplier
+					//float percent = chance * dropRate;
+					if (Rnd.get() * 100 > chance)
+						continue;
 
-					if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
+					if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest) && !noReductionMaps.contains(npc.getWorldId())) {
 						if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
 							continue;
 					}
