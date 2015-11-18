@@ -76,6 +76,23 @@
 			<gd_item id="122000901" name="Tursin Seal"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Lepharist Crest" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210316" name="Cavil"/>
+			<gd_npc npc_id="210688" name="Thief"/>
+			<gd_npc npc_id="210077" name="Peon"/>
+			<gd_npc npc_id="210698" name="Peon"/>
+			<gd_npc npc_id="210699" name="Shaman"/>
+			<gd_npc npc_id="210700" name="Shaman"/>
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 11 -->
+			<gd_item id="186000013" name="Lepharist Crest"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Lepharist Mask" base_chance="1">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
