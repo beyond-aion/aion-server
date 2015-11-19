@@ -44,13 +44,7 @@ public class CustomBase implements Comparable<CustomBase> {
 		this.owner = initialOwner;
 		this.id = id;
 		this.ownerEvent = ownerEvent;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn();
-			}
-		}, 10 * 1000);
+		spawn();
 	}
 
 	public Npc getTarget() {

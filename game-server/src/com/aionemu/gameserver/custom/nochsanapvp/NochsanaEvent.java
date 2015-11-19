@@ -111,7 +111,7 @@ public class NochsanaEvent extends GameEvent {
 		for (VisibleObject o : spawnControl.values()) {
 			o.getController().delete();
 		}
-		announceAll("Go! Fight!");
+		announceAll("Nochsana is under Siege! Fight!");
 	}
 
 	protected void checkWorldCapture(CustomBase base, Race winner) {
