@@ -29862,14 +29862,67 @@
             <item id="187100018" name="Marchutan's Plume: Magic Boost" race="ASMODIANS"/>
         </items>
     </decomposable>
-    <decomposable item_id="188053322" decomposable_name="Levinshor Alliance Manastone Box"/>
-    <decomposable item_id="188053323" decomposable_name="Levinshor Alliance Ancient Manastone Box"/>
-    <decomposable item_id="188053324" decomposable_name="Levinshor Alliance Noble Ancient Manastone Box"/>
-    <decomposable item_id="188053325" decomposable_name="Heavy Ancient Manastone Box of Levinshor Alliance"/>
-    <decomposable item_id="188053326" decomposable_name="Levinshor Alliance Composite Manastone Box"/>
-    <decomposable item_id="188053327" decomposable_name="Levinshor Alliance Noble Composite Manastone Box"/>
-    <decomposable item_id="188053328" decomposable_name="Levinshor Alliance Heavy Composite Manastone Box"/>
-    <decomposable item_id="188053329" decomposable_name="Composite Manastone Box of Ancient Monster"/>
+   <decomposable item_id="188053322" decomposable_name="Levinshor Alliance Manastone Box">
+		<items>
+			<random_item type="MANASTONE_COMMON_GRADE_70"/>
+		</items>
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053323" decomposable_name="Levinshor Alliance Ancient Manastone Box">
+		<items chance="50">
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="20">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053324" decomposable_name="Levinshor Alliance Noble Ancient Manastone Box">
+		<items chance="60">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="30">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items chance="10">
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053325" decomposable_name="Heavy Ancient Manastone Box of Levinshor Alliance">
+		<items chance="40">
+			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
+		</items>
+		<items chance="40">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="20">
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053326" decomposable_name="Levinshor Alliance Composite Manastone Box">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_40"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053327" decomposable_name="Levinshor Alliance Noble Composite Manastone Box">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053328" decomposable_name="Levinshor Alliance Heavy Composite Manastone Box">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053329" decomposable_name="Composite Manastone Box of Ancient Monster">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053330" decomposable_name="Blessed Medal Box"/>
     <decomposable item_id="188053331" decomposable_name="Linkgate Foundry Small Ancient Manastone Bundle">
 		<items chance="60">
