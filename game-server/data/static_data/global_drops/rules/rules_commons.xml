@@ -1223,7 +1223,7 @@
 			<gd_item id="166500002" name="Amplification Stone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1" fixed_chance="true">
+	<gd_rule rule_name="Omega Enchantment Stone" base_chance="0.9" fixed_chance="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>

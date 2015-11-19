@@ -517,7 +517,7 @@
 			<spot x="526.363" y="666.353" z="161.822" h="114"/>
 		</spawn>
 		<!-- Steward Gutorum -->
-		<spawn npc_id="214697">
+		<spawn npc_id="214697" pool="1">
 			<spot x="377.67" y="222.57" z="164.00676" h="65" walker_id="D07559B9BFD70DC267C0D64E38488622D10F3BBB"/>
 			<spot x="526.1" y="222.72" z="164.00676" h="88" walker_id="948DCAEBE757974DF4A07BF31FC6F0EDC025E3E0"/>
 		</spawn>

@@ -25,7 +25,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 204303, 204332, 700246, 204301, 204399, 802047 };
+		int[] npcs = { 204329, 204332, 204335, 700246, 204301, 802047 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(204417).addOnKillEvent(questId);
@@ -49,7 +49,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204303: { // Nina
+				case 204329: { // Tofa
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0) {
@@ -67,7 +67,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 					}
 					break;
 				}
-				case 204399: { // Ohre
+				case 204335: { // Aprily
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 1) {

@@ -32,6 +32,54 @@ public class NpcStatsTemplate extends StatsTemplate {
 		return speeds == null ? 0 : speeds.getGroupWalkSpeed();
 	}
 
+	
+	/**
+	 * @param pdef the pdef to set
+	 */
+	public void setPdef(int pdef) {
+		this.pdef = pdef;
+	}
+
+	
+	/**
+	 * @param mdef the mdef to set
+	 */
+	public void setMdef(int mdef) {
+		this.mdef = mdef;
+	}
+
+	
+	/**
+	 * @param mresist the mresist to set
+	 */
+	public void setMresist(int mresist) {
+		this.mresist = mresist;
+	}
+
+	
+	/**
+	 * @param crit the crit to set
+	 */
+	public void setCrit(int crit) {
+		this.crit = crit;
+	}
+
+	
+	/**
+	 * @param accuracy the accuracy to set
+	 */
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
+	}
+
+	
+	/**
+	 * @param maxXp the maxXp to set
+	 */
+	public void setMaxXp(int maxXp) {
+		this.maxXp = maxXp;
+	}
+
 	@Override
 	public float getRunSpeedFight() {
 		return speeds == null ? 0 : speeds.getRunSpeedFight();

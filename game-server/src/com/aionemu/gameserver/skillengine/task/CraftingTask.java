@@ -135,7 +135,7 @@ public class CraftingTask extends AbstractCraftTask {
 			multi = 0;
 
 		if (Rnd.get(100) > multi)
-			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 5, 1)));
+			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 3, 1)));
 		else
 			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 5, 1)));
 
