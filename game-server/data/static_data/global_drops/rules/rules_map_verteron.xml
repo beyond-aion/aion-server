@@ -121,15 +121,13 @@
 			<gd_item id="125001816" name="Novice Lepharist Hood"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Krall Ration" base_chance="4" >
+	<gd_rule rule_name="Krall Ration" base_chance="4" min_diff="0" max_diff="4">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="210692" name="Veteran Tursin Gateblocker"/>
-			<gd_npc npc_id="210693" name="Veteran Tursin Gateblocker"/>
-			<gd_npc npc_id="210694" name="Crack Krall Tower Wallarm"/>
-		</gd_npcs>
+		<gd_races>
+			<gd_race race="KRALL"/>
+		</gd_races>
 		<gd_items>
 			<gd_item id="186000012" name="Krall Ration"/>
 		</gd_items>
