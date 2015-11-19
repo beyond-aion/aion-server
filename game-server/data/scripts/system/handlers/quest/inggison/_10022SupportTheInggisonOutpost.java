@@ -1,6 +1,7 @@
 package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -9,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -127,8 +129,11 @@ public class _10022SupportTheInggisonOutpost extends QuestHandler {
 						return defaultCloseDialog(env, 7, 8); // 8
 					break;
 				case SETPRO9:
-					if (var == 8)
-						return defaultCloseDialog(env, 8, 9); // 9
+					if (var == 8) {
+						changeQuestStep(env, 8, 9, false); // 9
+						TeleportService2.teleportTo(player, 210050000, 1079.54f, 1584.13f, 407.91f, (byte)90, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
+					}
 			}
 		} else if (targetId == 204656) {
 			switch (env.getDialog()) {
@@ -136,8 +141,11 @@ public class _10022SupportTheInggisonOutpost extends QuestHandler {
 					if (var == 5)
 						return sendQuestDialog(env, 2716);
 				case SETPRO6:
-					if (var == 5)
-						return defaultCloseDialog(env, 5, 6); // 6
+					if (var == 5) {
+						changeQuestStep(env, 5, 6, false); // 6
+						TeleportService2.teleportTo(player, 210060000, 450.988f, 1236.97f, 126.63f, (byte)59, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
+					}
 			}
 		} else if (targetId == 798176) {
 			switch (env.getDialog()) {
@@ -145,8 +153,11 @@ public class _10022SupportTheInggisonOutpost extends QuestHandler {
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
 				case SETPRO7:
-					if (var == 6)
-						return defaultCloseDialog(env, 6, 7); // 7
+					if (var == 6) {
+						changeQuestStep(env, 6, 7, false); // 7
+						TeleportService2.teleportTo(player, 110010000, 1846.3f, 1450.4f, 590.123f, (byte)30, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
+					}
 			}
 		} else if (targetId == 700601) {
 			if (var == 9 && env.getDialog() == DialogAction.USE_OBJECT) {

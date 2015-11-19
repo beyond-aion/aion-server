@@ -41,7 +41,7 @@ public class _22525CleanUpOnIdeSeven extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					}
 					case QUEST_ACCEPT_SIMPLE: {
-						return sendQuestStartDialog(env, 182213313, 1);
+						return sendQuestStartDialog(env, 182213344, 1);
 					}
 				}
 			}
