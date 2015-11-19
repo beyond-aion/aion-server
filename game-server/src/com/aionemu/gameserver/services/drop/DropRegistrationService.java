@@ -332,7 +332,7 @@ public class DropRegistrationService {
 					float chance = rule.getChance();
 					// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
 					if (!rule.isFixedChance()) {
-						chance *= getRankModifier(npc) * getRatingModifier(npc) * boostDropRate;
+						chance *= getRankModifier(npc) * getRatingModifier(npc);
 						if (!rule.getNoReduction())
 							chance *= dropRate;
 					}
