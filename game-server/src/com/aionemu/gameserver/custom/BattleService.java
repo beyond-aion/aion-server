@@ -1,8 +1,10 @@
 package com.aionemu.gameserver.custom;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ public class BattleService {
 	private final static Logger log = LoggerFactory.getLogger(BattleService.class);
 	private boolean isPublic = false;
 	private List<Player> invitedPlayers = new LinkedList<Player>();
+	private Map<Player, GameEvent> registeredPlayers = new HashMap<Player, GameEvent>();
 	private int rewardID = 0;
 	
 
@@ -63,8 +66,28 @@ public class BattleService {
 		log("Battlegrounds have been set to " + (isPublic ? "Public" : "Invitation"));
 	}
 	
+	public void onPlayerLogout(Player player) {
+		invitedPlayers.remove(player);
+		unregisterPlayer(player);
+	}
+	
+	public void unregisterPlayer(Player player) {
+		if(registeredPlayers.containsKey(player)) {
+			GameEvent event = registeredPlayers.get(player);
+			event.unregisterParticipant(player);
+		}
+	}
+	
 	public boolean isPublic() {
 		return isPublic;
+	}
+	
+	public void destroyEvents() {
+		for(GameEventType type : GameEventType.values()) {
+			for(GameEvent event : type.getActiveSubEvents()) {
+				type.unsetActiveEvent(event);
+			}
+		}
 	}
 	
 	public boolean invitePlayer(Player player) {
@@ -72,7 +95,7 @@ public class BattleService {
 			return false;
 		}
 		PacketSendUtility.sendMessage(player, "You have been Invited to an Event Test! \n"
-			+ " Wait until the Event is getting Announced and use the .evreg command to register by typing .evreg <event_name>");
+			+ " Wait until the Event is getting Announced and use the .evreg command to register by typing .evreg <event id>");
 		return invitedPlayers.add(player);
 	}
 	
@@ -119,6 +142,7 @@ public class BattleService {
 			PacketSendUtility.sendMessage(player, "There is a ZergRush on the way in this Event. Currently no Place for you in there!");
 		} else {
 			PacketSendUtility.sendMessage(player, "You succesfully registered for the Event. Waiting for more Players to Join...");
+		  registeredPlayers.put(player, matchingEvent);
 		}
 	}
 

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<gd_rule rule_name="Named Ancient Coin" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000237" name="Ancient Coin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Blood Mark" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000236" name="Blood Mark"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Revival Stone" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="161000004" name="Tombstone of Revival"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Box" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053322" name="Levinshor Alliance Manastone Box"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Ancient Manastone Box" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053323" name="Levinshor Alliance Ancient Manastone Box"/>
+			<gd_item id="188053324" name="Levinshor Alliance Noble Ancient Manastone Box"/>
+			<gd_item id="188053325" name="Heavy Ancient Manastone Box of Levinshor Alliance"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Composit Manastone Box" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053326" name="Levinshor Alliance Composite Manastone Box"/>
+			<gd_item id="188053327" name="Levinshor Alliance Noble Composite Manastone Box"/>
+			<gd_item id="188053328" name="Levinshor Alliance Heavy Composite Manastone Box"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Rare Idian" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166050055" name="Audacious Idian: Physical Attack"/>
+			<gd_item id="166050056" name="Audacious Idian: Magical Attack"/>
+			<gd_item id="166050057" name="Audacious Idian: Physical Defense"/>
+			<gd_item id="166050058" name="Audacious Idian: Magical Defense"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Legend Idian" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="600100000" name="Levinshor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235346" name="Tomul Brawler"/>
+			<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235348" name="Tomul Shaman"/>
+			<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235351" name="Denku Fang"/>
+			<gd_npc npc_id="235352" name="Denku Restorer"/>
+			<gd_npc npc_id="235353" name="Denku Feralmage"/>
+			<gd_npc npc_id="235354" name="Tomul Brawler"/>
+			<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235356" name="Tomul Shaman"/>
+			<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235359" name="Denku Fang"/>
+			<gd_npc npc_id="235360" name="Denku Restorer"/>
+			<gd_npc npc_id="235361" name="Denku Feralmage"/>
+			<gd_npc npc_id="235362" name="Tomul Brawler"/>
+			<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235364" name="Tomul Shaman"/>
+			<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235367" name="Denku Fang"/>
+			<gd_npc npc_id="235368" name="Denku Restorer"/>
+			<gd_npc npc_id="235369" name="Denku Feralmage"/>
+			<gd_npc npc_id="235370" name="Tomul Brawler"/>
+			<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235372" name="Tomul Shaman"/>
+			<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235375" name="Denku Fang"/>
+			<gd_npc npc_id="235376" name="Denku Restorer"/>
+			<gd_npc npc_id="235377" name="Denku Feralmage"/>
+			<gd_npc npc_id="235378" name="Tomul Brawler"/>
+			<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+			<gd_npc npc_id="235380" name="Tomul Shaman"/>
+			<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+			<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+			<gd_npc npc_id="235383" name="Denku Fang"/>
+			<gd_npc npc_id="235384" name="Denku Restorer"/>
+			<gd_npc npc_id="235385" name="Denku Feralmage"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166050059" name="Sparkling Idian: Physical Attack"/>
+			<gd_item id="166050060" name="Sparkling Idian: Magical Attack"/>
+			<gd_item id="166050061" name="Sparkling Idian: Physical Defense"/>
+			<gd_item id="166050062" name="Sparkling Idian: Magical Defense"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

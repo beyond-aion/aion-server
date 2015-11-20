@@ -36,8 +36,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	private int skillId;
-	private List<Integer> movies = new FastTable<Integer>();
+	private List<Integer> movies = new FastTable<>();
 	private boolean isSpawned = false;
+	private boolean isInDungeon = false; //Workaround
+	
+	@Override
+	public void onDie(Npc npc) {
+		if (npc.getNpcId() == 216968)
+			isInDungeon = true;
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -136,7 +143,10 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-		TeleportService2.teleportTo(player, player.getWorldId(), 248, 244, 189);
+		if (!isInDungeon)
+			TeleportService2.teleportTo(player, player.getWorldId(), 248, 244, 189);
+		else
+			TeleportService2.teleportTo(player, player.getWorldId(), 686, 676, 201);
 		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
 		player.unsetResPosState();
 		return true;

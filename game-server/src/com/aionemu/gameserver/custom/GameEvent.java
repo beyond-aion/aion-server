@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -20,6 +21,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -57,11 +59,16 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	public void onInstanceDestroy() {
 		this.gameEventType.unsetActiveEvent(this);
 	}
+	
+	public synchronized void unregisterParticipant(Player player) {
+	 participants.remove(player);
+	 statistics.remove(player);
+	}
 
 	@Override
 	public void onPlayerLogOut(Player player) {
 		TeleportService2.teleportToCapital(player);
-		participants.remove(player);
+		unregisterParticipant(player);
 		tryDestroyInstance();
 	}
 
@@ -70,12 +77,13 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			this.gameEventType.unsetActiveEvent(this);
 		}
 	}
-
+	
 	@Override
 	public void onLeaveInstance(Player player) {
-		participants.remove(player);
+		unregisterParticipant(player);
 		PacketSendUtility.sendMessage(player, "You left during an Event.\n Please note"
 			+ " that your Teammates Need you and we will keep track of your amount of leaves.");
+		BattleService.getInstance().unregisterPlayer(player);
 		tryDestroyInstance();
 	}
 
@@ -98,9 +106,10 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		} else {
 			BattleService.sendBattleNotice(player, "You're late, Daeva! The Battle is already on.");
 		}
+		HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("nochsanaGuide.xhtml"));
 	}
 
-	public void onEventEnd(Race winningRace) {
+	public synchronized void onEventEnd(Race winningRace) {
 		currentStage = EventStage.AFTER_END;
 		Race looser = (winningRace == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS);
 
@@ -159,13 +168,13 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		return this.instanceId;
 	}
 
-	public void announceAll(String announce, String sender) {
+	public synchronized void announceAll(String announce, String sender) {
 		for (Player player : participants) {
 			BattleService.sendBattleNotice(player, announce, sender);
 		}
 	}
 
-	public void announceAll(String announce, String sender, Race race) {
+	public synchronized void announceAll(String announce, String sender, Race race) {
 		for (Player player : participants) {
 			if (player.getRace() == race) {
 				BattleService.sendBattleNotice(player, announce, sender);
@@ -174,13 +183,13 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		}
 	}
 
-	public void announceAll(String announce) {
+	public synchronized void announceAll(String announce) {
 		for (Player player : participants) {
 			BattleService.sendBattleNotice(player, announce);
 		}
 	}
 
-	public void sendCornerTimer(int seconds) {
+	public synchronized void sendCornerTimer(int seconds) {
 		for (Player participant : participants) {
 			PacketSendUtility.sendPacket(participant, new SM_QUEST_ACTION(0, seconds));
 		}
@@ -190,7 +199,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		return super.spawn(npcId, x, y, z, heading);
 	}
 
-	public boolean registerPlayer(Player player) {
+	public synchronized boolean registerPlayer(Player player) {
 		if (participants.contains(player)) {
 			return false;
 		}
@@ -267,7 +276,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		return missing;
 	}
 
-	private void teleportPlayersIn(int trys) {
+	private synchronized void teleportPlayersIn(int trys) {
 		List<Player> missing = getMissingPlayers();
 
 		for (Player player : missing) {
@@ -321,7 +330,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		handleGameStart();
 	}
 
-	private List<Player> getPlayerByRace(Race race) {
+	private synchronized List<Player> getPlayerByRace(Race race) {
 		List<Player> result = new LinkedList<Player>();
 		for (Player p : participants) {
 			if (p.getRace() == race) {
