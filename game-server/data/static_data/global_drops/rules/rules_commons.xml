@@ -817,6 +817,7 @@
 			<gd_item id="167000232" name="Manastone: Parry +12" />
 			<gd_item id="167000233" name="Manastone: Block +12" />
 			<gd_item id="167000235" name="Manastone: Crit Strike +4" />
+			<gd_item id="167000525" name="Manastone: Manastone: Magical Accuracy +3" />
 			<!-- Level 20 -->
 			<gd_item id="167000258" name="Manastone: HP +30" />
 			<gd_item id="167000259" name="Manastone: MP +30" />
@@ -826,6 +827,7 @@
 			<gd_item id="167000264" name="Manastone: Parry +14" />
 			<gd_item id="167000265" name="Manastone: Block +14" />
 			<gd_item id="167000267" name="Manastone: Crit Strike +6" />
+			<gd_item id="167000527" name="Manastone: Manastone: Magical Accuracy +4" />
 			<!-- Level 30 -->
 			<gd_item id="167000290" name="Manastone: HP +40" />
 			<gd_item id="167000291" name="Manastone: MP +40" />
@@ -836,6 +838,7 @@
 			<gd_item id="167000296" name="Manastone: Parry +16" />
 			<gd_item id="167000297" name="Manastone: Block +16" />
 			<gd_item id="167000299" name="Manastone: Crit Strike +8" />
+			<gd_item id="167000529" name="Manastone: Manastone: Magical Accuracy +5" />
 			<!-- Level 40 -->
 			<gd_item id="167000322" name="Manastone: HP +50" />
 			<gd_item id="167000323" name="Manastone: MP +50" />
@@ -845,6 +848,7 @@
 			<gd_item id="167000328" name="Manastone: Parry +18" />
 			<gd_item id="167000329" name="Manastone: Block +18" />
 			<gd_item id="167000331" name="Manastone: Crit Strike +10" />
+			<gd_item id="167000531" name="Manastone: Manastone: Magical Accuracy +7" />
 			<!-- Level 50 -->
 			<gd_item id="167000354" name="Manastone: HP +60" />
 			<gd_item id="167000355" name="Manastone: MP +60" />
@@ -855,6 +859,7 @@
 			<gd_item id="167000360" name="Manastone: Parry +20" />
 			<gd_item id="167000361" name="Manastone: Block +20" />
 			<gd_item id="167000363" name="Manastone: Crit Strike +12" />
+			<gd_item id="167000533" name="Manastone: Manastone: Magical Accuracy +9" />
 			<!-- Level 60 -->
 			<gd_item id="167000543" name="Manastone: HP +70" />
 			<gd_item id="167000544" name="Manastone: MP +70" />
@@ -898,6 +903,7 @@
 		<gd_items>
 			<!-- Level 50 -->
 			<gd_item id="167000358" name="Manastone: Attack +3" />
+			<gd_item id="167000533" name="Manastone: Manastone: Magical Accuracy +9" />
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (green) -->
@@ -917,6 +923,7 @@
 			<gd_item id="167000424" name="Manastone: Parry +19" />
 			<gd_item id="167000425" name="Manastone: Block +19" />
 			<gd_item id="167000427" name="Manastone: Crit Strike +9" />
+			<gd_item id="167000535" name="Manastone: Magical Accuracy +6" />
 			<!-- Level 30 -->
 			<gd_item id="167000450" name="Manastone: HP +65" />
 			<gd_item id="167000451" name="Manastone: MP +65" />
@@ -927,6 +934,7 @@
 			<gd_item id="167000456" name="Manastone: Parry +21" />
 			<gd_item id="167000457" name="Manastone: Block +21" />
 			<gd_item id="167000459" name="Manastone: Crit Strike +11" />
+			<gd_item id="167000537" name="Manastone: Magical Accuracy +8" />
 			<!-- Level 40 -->
 			<gd_item id="167000482" name="Manastone: HP +75" />
 			<gd_item id="167000483" name="Manastone: MP +75" />
@@ -936,6 +944,7 @@
 			<gd_item id="167000488" name="Manastone: Parry +23" />
 			<gd_item id="167000489" name="Manastone: Block +23" />
 			<gd_item id="167000491" name="Manastone: Crit Strike +13" />
+			<gd_item id="167000539" name="Manastone: Magical Accuracy +10" />
 			<!-- Level 50 -->
 			<gd_item id="167000514" name="Manastone: HP +85" />
 			<gd_item id="167000515" name="Manastone: MP +85" />
@@ -953,14 +962,14 @@
 			<gd_item id="167000552" name="Manastone: MP +95" />
 			<gd_item id="167000553" name="Manastone: Accuracy +27" />
 			<gd_item id="167000554" name="Manastone: Evasion +17" />
-			<gd_item id="167000563" name="Manastone: Healing Boost +3" />
 			<gd_item id="167000555" name="Manastone: Magic Boost +27" />
 			<gd_item id="167000556" name="Manastone: Parry +27" />
 			<gd_item id="167000557" name="Manastone: Block +27" />
 			<gd_item id="167000558" name="Manastone: Crit Strike +17" />
-			<gd_item id="167000560" name="Manastone: Magical Accuracy +14" />
 			<gd_item id="167000559" name="Manastone: Maximum Flight Time +7" />
+			<gd_item id="167000560" name="Manastone: Magical Accuracy +14" />
 			<gd_item id="167000561" name="Manastone: Resist Magic +14" />
+			<gd_item id="167000563" name="Manastone: Healing Boost +3" />
 			<!-- Level 70 -->
 			<gd_item id="167000766" name="Manastone: HP +100" />
 			<gd_item id="167000767" name="Manastone: MP +105" />
