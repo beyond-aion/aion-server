@@ -392,5 +392,9 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	public GroupDropType getGroupDrop() {
 		return groupDrop;
 	}
+	
+	public void setLevel(byte level) {
+		this.level = level;
+	}
 
 }

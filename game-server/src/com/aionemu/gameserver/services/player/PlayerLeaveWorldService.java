@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
 import com.aionemu.gameserver.dao.ItemCooldownsDAO;
 import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
@@ -65,6 +66,7 @@ public class PlayerLeaveWorldService {
 		final AionConnection con = player.getClientConnection();
 		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
+		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
 		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));

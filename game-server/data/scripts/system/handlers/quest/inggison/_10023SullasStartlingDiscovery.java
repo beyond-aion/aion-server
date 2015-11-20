@@ -1,6 +1,7 @@
 package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -120,7 +121,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO7: {
 							if (defaultCloseDialog(env, 6, 7)) { // 7
-								TeleportService2.teleportToNpc(player, 798513);
+								TeleportService2.teleportTo(player, 110020000, 2185.53f, 1568.016f, 1212.08f, (byte)99, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 						}
@@ -152,7 +153,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO8: {
 							if (defaultCloseDialog(env, 7, 8)) { // 8
-								TeleportService2.teleportToNpc(player, 798225);
+								TeleportService2.teleportTo(player, 210060000, 2968.42f, 193.822f, 171.617f, (byte)96, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 						}
@@ -168,7 +169,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO9: {
 							if (defaultCloseDialog(env, 8, 9)) { // 9
-								TeleportService2.teleportToNpc(player, 798975);
+								TeleportService2.teleportTo(player, 210050000, 2697.758f, 1400.5f, 370.578f, (byte)101, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 						}
