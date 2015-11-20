@@ -17301,9 +17301,6 @@
     <decomposable item_id="188052286" decomposable_name="[Event] Coin Bundle"/>
     <decomposable item_id="188052287" decomposable_name="Silverine Ltd. Supplies">
         <items>
-            <item id="169000010" name="Superior Power Shard" count="250"/>
-        </items>
-        <items>
             <item id="162000122" name="Superior Life Serum" count="5"/>
         </items>
         <items>
@@ -17335,9 +17332,6 @@
         </items>
     </decomposable>
     <decomposable item_id="188052288" decomposable_name="The Merry and Green Supplies">
-        <items>
-            <item id="169000010" name="Superior Power Shard" count="250"/>
-        </items>
         <items>
             <item id="162000122" name="Superior Life Serum" count="5"/>
         </items>
