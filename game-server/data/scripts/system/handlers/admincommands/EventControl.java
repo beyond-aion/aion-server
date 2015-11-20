@@ -38,6 +38,11 @@ public class EventControl extends AdminCommand {
 			} else if(params[1].equals("public")) {
 				BattleService.getInstance().setPublic(true);
 			} else if(params[1].equals("reward")) {
+				//TODO for tests only, reward should be set in code for production.
+				if(player.getAccessLevel() < 8) {
+					PacketSendUtility.sendMessage(player, "You are not allowed to set an Reward.");
+					return;
+				}
 				try {
 					BattleService.getInstance().setReardID(Integer.parseInt(params[2]));
 					PacketSendUtility.sendMessage(player, "Item set for Reward: " + params[2]);
@@ -59,7 +64,10 @@ public class EventControl extends AdminCommand {
 		} else if (params[0].equals("uninvite")) {
 			BattleService.getInstance().undoInvites();
 			PacketSendUtility.sendMessage(player, "All invitations have been deleted.");
-		}	
+		} else if (params[0].equals("destroy")) {
+			BattleService.getInstance().destroyEvents();
+			PacketSendUtility.sendMessage(player, "All Events have been destroyed.");
+		}
 		
 	}
 
