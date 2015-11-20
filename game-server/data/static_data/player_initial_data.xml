@@ -12,6 +12,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 	<player_data class="MAGE">
@@ -24,6 +29,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 	<player_data class="PRIEST">
@@ -36,6 +46,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 	<player_data class="SCOUT">
@@ -48,6 +63,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 	<player_data class="ENGINEER">
@@ -60,6 +80,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 	<player_data class="ARTIST">
@@ -72,6 +97,11 @@
 			<item id="169300002" count="20"/>
 			<item id="162000052" count="100"/>
 			<item id="162000057" count="100"/>
+			<!-- Custom bonus items -->
+			<item id="164002116" count="20"/><!-- 30min 30% speed -->
+			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
 		</items>
 	</player_data>
 </player_initial_data>
