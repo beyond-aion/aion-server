@@ -1,20 +1,16 @@
 package quest.verteron;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Balthazar
+ * @modified Pad
  */
 public class _1162AltenosWeddingRing extends QuestHandler {
 
@@ -55,36 +51,59 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700005: {
-					switch (env.getDialog()) {
-						case USE_OBJECT: {
-							if (player.getInventory().getItemCountByItemId(182200563) == 0) {
-								if (!giveQuestItem(env, 182200563, 1)) {
-									return true;
-								}
+					if (qs.getQuestVarById(0) == 0) {
+						switch (env.getDialog()) {
+							case USE_OBJECT: {
+								return sendQuestDialog(env, 3739);
 							}
-							qs = player.getQuestStateList().getQuestState(questId);
-							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-							updateQuestStatus(env);
-							PacketSendUtility.broadcastPacket(player.getTarget(), new SM_EMOTION((Creature) player.getTarget(), EmotionType.DIE, 128, 0)); // wtf ?
-							return true;
+							case SETPRO1: {
+								if (player.getInventory().getItemCountByItemId(182200563) == 0) {
+									if (!giveQuestItem(env, 182200563, 1))
+										return true;
+								}
+								return defaultCloseDialog(env, 0, 1);
+							}
 						}
 					}
+					return false;
 				}
-				case 203093:
+				case 203093: {
+					if (qs.getQuestVarById(0) == 1) {
+						switch (env.getDialog()) {
+							case USE_OBJECT:
+								return sendQuestDialog(env, 2034);
+							case CHECK_USER_HAS_QUEST_ITEM:
+								return checkQuestItems(env, 1, 1, true, 6, 2375);
+							case SETPRO2:
+								return sendQuestDialog(env, 2375);
+						}
+					}
+					return false;
+				}
 				case 203095: {
 					if (qs.getQuestVarById(0) == 1) {
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						removeQuestItem(env, 182200563, 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+						switch (env.getDialog()) {
+							case USE_OBJECT:
+								return sendQuestDialog(env, 1352);
+							case CHECK_USER_HAS_QUEST_ITEM:
+								return checkQuestItems(env, 1, 1, true, 5, 1693);
+							case SETPRO2:
+								return sendQuestDialog(env, 1693);
+						}
 					}
-				}
 					return false;
+				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203095) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+		} 
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 203093) {
+				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
+					return sendQuestDialog(env, 6);
+				else
+					return sendQuestEndDialog(env);
+			}
+			else if (targetId == 203095) {
+				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
