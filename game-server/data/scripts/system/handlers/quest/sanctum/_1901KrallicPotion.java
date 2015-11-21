@@ -53,9 +53,6 @@ public class _1901KrallicPotion extends QuestHandler {
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
 					&& qs.getStatus() != QuestStatus.NONE) {
-					qs.setQuestVar(7);
-					updateQuestStatus(env);
-					qs.setStatus(QuestStatus.REWARD);
 					return sendQuestEndDialog(env);
 				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
@@ -76,24 +73,22 @@ public class _1901KrallicPotion extends QuestHandler {
 								case SELECT_ACTION_1438:
 									Storage inventory = player.getInventory();
 									if (inventory.tryDecreaseKinah(10000)) {
-										qs.setQuestVarById(0, var + 1);
-										updateQuestStatus(env);
-										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-										return true;
+										return sendQuestDialog(env, 1438);
 									} else
 										return sendQuestDialog(env, 1523);
-								case SETPRO1:// oui 10000
-									qs.setQuestVarById(0, var + 1);// var==1
+								case SETPRO1:
+									qs.setQuestVarById(0, 5); // Reward (5)
+									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 									return true;
-								case SETPRO2:// non
-									qs.setQuestVarById(0, var + 1);// var==1
+								case SETPRO2:
+									qs.setQuestVarById(0, 1); // 1
 									updateQuestStatus(env);
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 									return true;
 								case SETPRO7:
-									qs.setQuestVarById(0, var + 1);// var==5
+									qs.setQuestVarById(0, 5); // 5
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
