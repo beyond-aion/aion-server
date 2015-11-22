@@ -3,7 +3,6 @@ package playercommands;
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -56,6 +55,8 @@ public class Faction extends PlayerCommand {
 		String message = CustomConfig.FACTION_CHAT_CHANNEL ? StringUtils.join(params, " ") : senderName + ": " + StringUtils.join(params, " ");
 		ChatType channel = CustomConfig.FACTION_CHAT_CHANNEL ? ChatType.CH1 : ChatType.BRIGHT_YELLOW;
 
+		PlayerChatService.logMessage(player, ChatType.NORMAL, "[Faction Msg] " + message);
+
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
@@ -67,9 +68,5 @@ public class Faction extends PlayerCommand {
 				}
 			}
 		});
-
-		if (LoggingConfig.LOG_FACTION) {
-			PlayerChatService.chatLogging(player, ChatType.NORMAL, "[Faction Msg] " + message);
-		}
 	}
 }

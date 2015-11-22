@@ -448,9 +448,10 @@ public class Skill {
 		// adjust client time with ammotime
 		long ammoTime = 0;
 		double distance = MathUtil.getDistance(effector, firstTarget);
-		if (getSkillTemplate().getAmmoSpeed() != 0)
+		if (getSkillTemplate().getAmmoSpeed() != 0) {
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
-		clientTime -= ammoTime;
+			clientTime -= ammoTime;
+		}
 
 		// adjust servertime with motion play speed
 		if (motion.getSpeed() != 100) {
@@ -466,7 +467,7 @@ public class Skill {
 
 		// tolerance
 		if (duration == 0)
-			serverTime *= 0.9f;
+			serverTime *= 0.85f;
 		else
 			serverTime *= 0.5f;
 
@@ -476,25 +477,17 @@ public class Skill {
 		} else {
 			if (clientTime < finalTime) {
 				// check for no animation Hacks
+				AuditLogger.info(player, "Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
 				if (SecurityConfig.NO_ANIMATION) {
-					float clientTme = clientTime;
-					float serverTme = serverTime;
-					float checkTme = clientTme / serverTme;
-					// check if values are too low
-					if (clientTime < 0 || checkTme < SecurityConfig.NO_ANIMATION_VALUE) {
+					// check if values are too low and disable skill usage / kick player
+					if (clientTime < 0 || (clientTime / serverTime) < SecurityConfig.NO_ANIMATION_VALUE) {
 						if (SecurityConfig.NO_ANIMATION_KICK) {
 							player.getClientConnection().close(new SM_QUIT_RESPONSE());
-							AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime
-								+ ") Kicking Player: " + player.getName());
-						} else {
-							AuditLogger
-								.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime + ")");
+							AuditLogger.info(player, "Kicking player for No Ani: " + player.getName());
 						}
 						return false;
 					}
 				}
-				log.warn("Possible modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime
-					+ ") player Name: " + player.getName());
 			}
 			this.serverTime = hitTime;
 		}

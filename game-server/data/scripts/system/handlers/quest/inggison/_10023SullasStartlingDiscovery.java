@@ -153,7 +153,7 @@ public class _10023SullasStartlingDiscovery extends QuestHandler {
 						}
 						case SETPRO8: {
 							if (defaultCloseDialog(env, 7, 8)) { // 8
-								TeleportService2.teleportTo(player, 210060000, 2968.42f, 193.822f, 171.617f, (byte)96, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService2.teleportTo(player, 210060000, 2677.72f, 813.27f, 138.36f, (byte)92, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 						}

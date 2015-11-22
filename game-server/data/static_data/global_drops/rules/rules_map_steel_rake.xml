@@ -66,6 +66,17 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon Box (Unique)" base_chance="20" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215081" name="Brass-Eye Grogget"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051416" name="Grogget's Fabled Weapon Chest"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="300100000" name="Steel_Rake"/>
@@ -86,6 +97,17 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115000500" name="Oblate Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor Box (Unique)" base_chance="25" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215070" name="Chief Gunner Koakoa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051413" name="Koakoa's Fabled Pants Chest"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="20">
@@ -191,6 +213,30 @@
 			<gd_item id="122001045" name="Genie's Ring"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215070" name="Chief Gunner Koakoa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000826" name="Koakoa's Diamond Necklace"/>
+			<gd_item id="121000827" name="Koakoa's Sapphire Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215069" name="Chief Mate Menekiki"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000908" name="Menekiki's Diamond Earrings"/>
+			<gd_item id="120000909" name="Menekiki's Sapphire Earrings"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300100000" name="Steel_Rake"/>
@@ -200,6 +246,44 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="123000938" name="Genie's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Rare)" base_chance="35">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215081" name="Brass-Eye Grogget"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002030" name="Grogget's Hat"/>
+			<gd_item id="125002014" name="Grogget's Headband"/>
+			<gd_item id="125002017" name="Grogget's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215069" name="Chief Mate Menekiki"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001979" name="Menekiki's Headband"/>
+			<gd_item id="125001980" name="Menekiki's Hat"/>
+			<gd_item id="125001981" name="Menekiki's Chain Helm"/>
+			<gd_item id="125001982" name="Menekiki's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215081" name="Brass-Eye Grogget"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170170030" name="[Souvenir] Steel Rake Statue"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
@@ -317,6 +401,28 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000042" name="Sailor Waiting Room Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215070" name="Chief Gunner Koakoa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000074" name="Gun Repair Deck Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300100000" name="Steel_Rake"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215069" name="Chief Mate Menekiki"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000053" name="Weapon Military Supply Base Key"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>

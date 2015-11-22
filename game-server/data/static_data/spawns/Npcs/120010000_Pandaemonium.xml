@@ -374,9 +374,9 @@
 			<spot x="1465.24" y="1358.58" z="177.048"/>
 		</spawn>
 		<!-- Fatebound Abbey Teleport Statue -->
-		<spawn npc_id="209677" respawn_time="295">
+		<!-- <spawn npc_id="209677" respawn_time="295">
 			<spot x="1601.096" y="1417.954" z="193.1284" static_id="2543"/>
-		</spawn>
+		</spawn> -->
 		<!-- Feden -->
 		<spawn npc_id="204169" respawn_time="295">
 			<spot x="1054.75" y="1151.71" z="201.52095" h="60" walker_id="182825632A766E4ABA5EF16C2CC6304EA1D12237"/>

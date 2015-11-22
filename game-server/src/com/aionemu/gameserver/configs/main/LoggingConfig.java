@@ -16,17 +16,17 @@ public class LoggingConfig {
 	@Property(key = "gameserver.log.autogroup", defaultValue = "true")
 	public static boolean LOG_AUTOGROUP;
 
-	@Property(key = "gameserver.log.chat", defaultValue = "true")
-	public static boolean LOG_CHAT;
-
 	@Property(key = "gameserver.log.craft", defaultValue = "true")
 	public static boolean LOG_CRAFT;
 
-	@Property(key = "gameserver.log.faction", defaultValue = "false")
-	public static boolean LOG_FACTION;
-
 	@Property(key = "gameserver.log.gmaudit", defaultValue = "true")
 	public static boolean LOG_GMAUDIT;
+
+	@Property(key = "gameserver.log.chats.general", defaultValue = "true")
+	public static boolean LOG_GENERAL_CHATS;
+
+	@Property(key = "gameserver.log.chats.private", defaultValue = "false")
+	public static boolean LOG_PRIVATE_CHATS;
 
 	@Property(key = "gameserver.log.ingameshop", defaultValue = "false")
 	public static boolean LOG_INGAMESHOP;
