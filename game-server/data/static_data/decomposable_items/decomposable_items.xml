@@ -28842,7 +28842,14 @@
             <item id="186000247" name="Major Danuar Relic"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle"/>
+    <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle">
+		<items>
+            <item id="160003584" name="Broiled Rava" count="25"/>
+            <item id="160003585" name="Rava Dumplings" count="25"/>
+            <item id="160003586" name="Refreshing Rava Juice" count="25"/>
+            <item id="160003587" name="Pepento Jelly" count="10"/>
+        </items>
+	</decomposable>
     <decomposable item_id="188053138" decomposable_name="Wealhtheow's Keep Siege Defense Reward Box">
 		<items>
             <item id="162000143" name="Brigade General's Liquid Courage" count="5"/>
