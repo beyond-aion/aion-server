@@ -28772,7 +28772,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053124" name="Infinity Shard Equipment Loot"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28780,7 +28780,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053120" name="Danuar Reliquary Loot [Weapon]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28788,7 +28788,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053121" name="Danuar Reliquary Loot [Armor]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28796,7 +28796,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_RARE_GRADE_70"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053122" name="Illuminary Obelisk Loot [Weapon]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28804,7 +28804,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053123" name="Illuminary Obelisk Loot [Armor]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
