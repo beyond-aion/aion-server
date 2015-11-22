@@ -435,7 +435,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 300010000, 270, 200, 206);
 		// GM zone
 		else if (destination.equalsIgnoreCase("gm"))
-			goTo(admin, 120020000, 1442, 1133, 302);
+			TeleportService2.teleportTo(admin, 900110000, 2594.29f, 85.48f, 121f, (byte) 20);
 
 		/**
 		 * 2.5 Maps
