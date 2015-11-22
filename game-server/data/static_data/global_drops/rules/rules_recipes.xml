@@ -1,7 +1,7 @@
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Scrolls -->
 	<!-- Running Scrolls -->
-	<gd_rule rule_name="Design Lesser Running Scroll Elyos" min_diff="3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Running Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -13,7 +13,7 @@
 			<gd_item id="152201233" name="Design: Lesser Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Running Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Running Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -25,7 +25,7 @@
 			<gd_item id="152206239" name="Design: Lesser Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Running Scroll Elyos" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Running Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -37,7 +37,7 @@
 			<gd_item id="152201234" name="Design: Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Running Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Running Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -49,7 +49,7 @@
 			<gd_item id="152206240" name="Design: Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Running Scroll Elyos" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Running Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -61,7 +61,7 @@
 			<gd_item id="152201235" name="Design: Greater Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Running Scroll Asmodian" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Running Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -73,7 +73,7 @@
 			<gd_item id="152206241" name="Design: Greater Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Running Scroll Elyos" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Type B Greater Running Scroll Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -87,7 +87,7 @@
 			<gd_item id="152203533" name="Design: [Type B] Greater Running Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Running Scroll Asmodian" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Type B Greater Running Scroll Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -102,7 +102,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Courage Scrolls -->
-	<gd_rule rule_name="Design Lesser Courage Scroll Elyos" min_diff="3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Courage Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -114,7 +114,7 @@
 			<gd_item id="152201230" name="Design: Lesser Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Courage Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Courage Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -126,7 +126,7 @@
 			<gd_item id="152206236" name="Design: Lesser Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Courage Scroll Elyos" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Courage Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -138,7 +138,7 @@
 			<gd_item id="152201231" name="Design: Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Courage Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Courage Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -150,7 +150,7 @@
 			<gd_item id="152206237" name="Design: Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Courage Scroll Elyos" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Courage Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -162,7 +162,7 @@
 			<gd_item id="152201232" name="Design: Greater Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Courage Scroll Asmodian" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Courage Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -174,7 +174,7 @@
 			<gd_item id="152206238" name="Design: Greater Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Courage Scroll Elyos" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Type B Greater Courage Scroll Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -188,7 +188,7 @@
 			<gd_item id="152203531" name="Design: [Type B] Greater Courage Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Courage Scroll Asmodian" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Type B Greater Courage Scroll Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -203,7 +203,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Awakening Scrolls -->
-	<gd_rule rule_name="Design Lesser Awakening Scroll Elyos" min_diff="3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Awakening Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -215,7 +215,7 @@
 			<gd_item id="152202125" name="Design: Lesser Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Awakening Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Awakening Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -227,7 +227,7 @@
 			<gd_item id="152207127" name="Design: Lesser Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Awakening Scroll Elyos" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Awakening Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -239,7 +239,7 @@
 			<gd_item id="152202126" name="Design: Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Awakening Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Awakening Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -251,7 +251,7 @@
 			<gd_item id="152207128" name="Design: Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Awakening Scroll Elyos" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Awakening Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -263,7 +263,7 @@
 			<gd_item id="152202127" name="Design: Greater Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Awakening Scroll Asmodian" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Awakening Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -275,7 +275,7 @@
 			<gd_item id="152207129" name="Design: Greater Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Awakening Scroll Elyos" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Type B Greater Awakening Scroll Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -289,7 +289,7 @@
 			<gd_item id="152203532" name="Design: [Type B] Greater Awakening Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Awakening Scroll Asmodian" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Type B Greater Awakening Scroll Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -304,7 +304,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Raging Wind Scrolls -->
-	<gd_rule rule_name="Design Lesser Raging Wind Scroll Elyos" min_diff="3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Raging Wind Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -316,7 +316,7 @@
 			<gd_item id="152201236" name="Design: Lesser Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Raging Wind Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Raging Wind Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -328,7 +328,7 @@
 			<gd_item id="152206242" name="Design: Lesser Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Raging Wind Scroll Elyos" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Raging Wind Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -340,7 +340,7 @@
 			<gd_item id="152201237" name="Design: Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Raging Wind Scroll Asmodian" min_diff="-3" max_diff="7" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Raging Wind Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -352,7 +352,7 @@
 			<gd_item id="152206243" name="Design: Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Raging Wind Scroll Elyos" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Raging Wind Scroll Elyos" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -364,7 +364,7 @@
 			<gd_item id="152201238" name="Design: Greater Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Raging Wind Scroll Asmodian" min_diff="-3" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Raging Wind Scroll Asmodian" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -376,7 +376,7 @@
 			<gd_item id="152206244" name="Design: Greater Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Raging Wind Scroll Elyos" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Type B Greater Raging Wind Scroll Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -390,7 +390,7 @@
 			<gd_item id="152203534" name="Design: [Type B] Greater Raging Wind Scroll"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Type B Greater Raging Wind Scroll Asmodian" min_diff="-9" max_diff="0" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Type B Greater Raging Wind Scroll Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -407,7 +407,7 @@
 	<!-- END Scrolls -->
 	<!-- Potions -->
 	<!-- Life Serum -->
-	<gd_rule rule_name="Design Lesser Life Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Life Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -419,7 +419,7 @@
 			<gd_item id="152201247" name="Design: Lesser Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Life Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Life Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -431,7 +431,7 @@
 			<gd_item id="152206253" name="Design: Lesser Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Life Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Life Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -443,7 +443,7 @@
 			<gd_item id="152201248" name="Design: Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Life Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Life Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -455,7 +455,7 @@
 			<gd_item id="152206254" name="Design: Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Life Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Life Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -467,7 +467,7 @@
 			<gd_item id="152201249" name="Design: Greater Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Life Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Life Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -479,7 +479,7 @@
 			<gd_item id="152206255" name="Design: Greater Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Life Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Major Life Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -491,7 +491,7 @@
 			<gd_item id="152201250" name="Design: Major Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Life Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Major Life Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -503,7 +503,7 @@
 			<gd_item id="152206256" name="Design: Major Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Life Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Fine Life Serum Elyos" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -515,7 +515,7 @@
 			<gd_item id="152202130" name="Design: Fine Life Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Life Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Fine Life Serum Asmodian" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -528,7 +528,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Mana Serum -->
-	<gd_rule rule_name="Design Lesser Mana Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Lesser Mana Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -540,7 +540,7 @@
 			<gd_item id="152201251" name="Design: Lesser Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Lesser Mana Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Lesser Mana Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -552,7 +552,7 @@
 			<gd_item id="152206257" name="Design: Lesser Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Mana Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Mana Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -564,7 +564,7 @@
 			<gd_item id="152201252" name="Design: Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Mana Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Mana Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -576,7 +576,7 @@
 			<gd_item id="152206258" name="Design: Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Mana Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Mana Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -588,7 +588,7 @@
 			<gd_item id="152201253" name="Design: Greater Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Mana Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Mana Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -600,7 +600,7 @@
 			<gd_item id="152206259" name="Design: Greater Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Mana Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Major Mana Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -612,7 +612,7 @@
 			<gd_item id="152201254" name="Design: Major Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Mana Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Major Mana Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -624,7 +624,7 @@
 			<gd_item id="152206260" name="Design: Major Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Mana Serum Elyos" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Fine Mana Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -636,7 +636,7 @@
 			<gd_item id="152202131" name="Design: Fine Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Mana Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Fine Mana Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -649,7 +649,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Recovery Serum -->
-	<gd_rule rule_name="Design Greater Recovery Serum Elyos" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Recovery Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -661,7 +661,7 @@
 			<gd_item id="152201329" name="Design: Greater Recovery Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Recovery Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Recovery Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -673,7 +673,7 @@
 			<gd_item id="152206334" name="Design: Greater Recovery Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Recovery Serum Elyos" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Major Recovery Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -685,7 +685,7 @@
 			<gd_item id="152201330" name="Design: Major Recovery Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Recovery Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Major Recovery Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -697,7 +697,7 @@
 			<gd_item id="152206335" name="Design: Major Recovery Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Recovery Serum Elyos" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Fine Recovery Serum Elyos" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -709,7 +709,7 @@
 			<gd_item id="152202151" name="Design: Fine Recovery Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Recovery Serum Asmodian" min_diff="0" max_diff="9" base_chance="0.1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Fine Recovery Serum Asmodian" min_diff="-5" max_diff="5" base_chance="0.1" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -722,7 +722,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Recovery Potion -->
-	<gd_rule rule_name="Design Recovery Potion Elyos" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Recovery Potion Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -734,7 +734,7 @@
 			<gd_item id="152201326" name="Design: Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Recovery Potion Asmodian" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Recovery Potion Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -746,7 +746,7 @@
 			<gd_item id="152206331" name="Design: Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Recovery Potion Elyos" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Greater Recovery Potion Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -758,7 +758,7 @@
 			<gd_item id="152201327" name="Design: Greater Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Greater Recovery Potion Asmodian" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Greater Recovery Potion Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -770,7 +770,7 @@
 			<gd_item id="152206332" name="Design: Greater Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Recovery Potion Elyos" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Major Recovery Potion Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -782,7 +782,7 @@
 			<gd_item id="152201328" name="Design: Recovery Potion Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Major Recovery Potion Asmodian" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Major Recovery Potion Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -794,7 +794,7 @@
 			<gd_item id="152206333" name="Design: Major Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Recovery Potion Elyos" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ELYOS">
+	<gd_rule rule_name="Design Fine Recovery Potion Elyos" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -806,7 +806,7 @@
 			<gd_item id="152202234" name="Design: Fine Recovery Potion"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Design Fine Recovery Potion Asmodian" min_diff="0" max_diff="9" base_chance="0.25" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Design Fine Recovery Potion Asmodian" min_diff="-5" max_diff="5" base_chance="0.25" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -819,9 +819,9 @@
 		</gd_items>
 	</gd_rule>
 	<!-- END Potions -->
-	<!-- Cooking Recipes -->
+	<!-- Cooking Recipes --> <!-- TODO: Unique Recipes (such as 152207200) -->
 	<!-- Eltnen -->
-	<gd_rule rule_name="Rare Eltnen Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Rare Eltnen Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -840,7 +840,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Morheim -->
-	<gd_rule rule_name="Rare Morheim Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Rare Morheim Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -859,7 +859,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Heiron -->
-	<gd_rule rule_name="Rare Heiron Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Rare Heiron Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -880,7 +880,7 @@
 			<gd_item id="152201426" name="Recipe: Rynoce Bulgogi"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Heiron Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Legend Heiron Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -900,7 +900,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Beluslan -->
-	<gd_rule rule_name="Rare Beluslan Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Rare Beluslan Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -919,7 +919,7 @@
 			<gd_item id="152206431" name="Recipe: Tipolid Bulgogi"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Beluslan Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Legend Beluslan Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -939,7 +939,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Theobomos -->
-	<gd_rule rule_name="Rare Theobomos Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Rare Theobomos Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -960,7 +960,7 @@
 			<gd_item id="152201564" name="Recipe: Cellatu Porridge"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Theobomos Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Legend Theobomos Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -980,7 +980,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Brusthonin -->
-	<gd_rule rule_name="Rare Brusthonin Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Rare Brusthonin Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -1003,7 +1003,7 @@
 			<gd_item id="152206570" name="Recipe: Graveknight Candy"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Brusthonin Cooking Designs" min_diff="-5" max_diff="5" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Legend Brusthonin Cooking Designs" min_diff="-2" max_diff="2" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -1023,7 +1023,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Inggison -->
-	<gd_rule rule_name="Rare Inggison Cooking Designs" min_diff="-9" max_diff="0" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Rare Inggison Cooking Designs" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -1044,7 +1044,7 @@
 			<gd_item id="152202186" name="Recipe: Plindit Bulgogi"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Theobomos Cooking Designs" min_diff="-9" max_diff="0" base_chance="0.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Legend Inggison Cooking Designs" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -1065,7 +1065,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Gelkmaros -->
-	<gd_rule rule_name="Rare Gelkmaros Cooking Designs" min_diff="-9" max_diff="0" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Rare Gelkmaros Cooking Designs" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
@@ -1086,7 +1086,7 @@
 			<gd_item id="152207188" name="Recipe: Poma Bulgogi"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Legend Gelkmaros Cooking Designs" min_diff="-9" max_diff="0" base_chance="0.5" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Legend Gelkmaros Cooking Designs" min_diff="-5" max_diff="0" base_chance="0.5" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL"/>
 			<gd_rating rating="ELITE"/>
