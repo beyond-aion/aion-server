@@ -28221,7 +28221,7 @@
 			<item id="102100820" name="Lunatic Modor's Cipher-Blade" player_class="RIDER"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]">
+    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]" selectable="true">
 		<items>
 			<item id="110101618" name="Lunatic Modor's Tunic" player_class="SORCERER"/>
 			<item id="111101459" name="Lunatic Modor's Gloves" player_class="SORCERER"/>
