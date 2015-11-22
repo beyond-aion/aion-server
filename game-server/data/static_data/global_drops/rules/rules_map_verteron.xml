@@ -121,6 +121,21 @@
 			<gd_item id="125001816" name="Novice Lepharist Hood"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Dukaki Amulet" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210030000" name="Verteron"/>
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="DUKAKI_SETTLEMENT_210030000"/>
+			<gd_zone zone="DUKAKI_MINE_210030000"/>
+		</gd_zones>
+		<gd_races>
+			<gd_race race="BROWNIE"/>
+		</gd_races>
+		<gd_items>
+			<gd_item id="186000011" name="Dukaki Amulet"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Krall Ration" base_chance="4" min_diff="0" max_diff="4">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
