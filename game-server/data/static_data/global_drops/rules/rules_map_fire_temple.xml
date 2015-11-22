@@ -275,6 +275,29 @@
 			<gd_item id="102100770" name="Reaper's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="320100000" name="Fire_Temple"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101700810" name="Longbow of the Judge"/>
+			<gd_item id="100500788" name="Jewel of the Judge"/>
+			<gd_item id="100900765" name="Greatsword of the Judge"/>
+			<gd_item id="100200903" name="Dagger of the Judge"/>
+			<gd_item id="100001021" name="Sword of the Judge"/>
+			<gd_item id="101500793" name="Staff of the Judge"/>
+			<gd_item id="101300737" name="Spear of the Judge"/>
+			<gd_item id="100600843" name="Tome of the Judge"/>
+			<gd_item id="100100768" name="Warhammer of the Judge"/>
+			<gd_item id="101800915" name="Pistol of the Judge"/>
+			<gd_item id="101900670" name="Aethercannon of the Judge"/>
+			<gd_item id="102000704" name="Harp of the Judge"/>
+			<gd_item id="102100770" name="Reaper's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
@@ -298,7 +321,7 @@
 			<gd_item id="102100761" name="Kromede's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>
@@ -306,19 +329,19 @@
 			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101700810" name="Longbow of the Judge"/>
-			<gd_item id="100500788" name="Jewel of the Judge"/>
-			<gd_item id="100900765" name="Greatsword of the Judge"/>
-			<gd_item id="100200903" name="Dagger of the Judge"/>
-			<gd_item id="100001021" name="Sword of the Judge"/>
-			<gd_item id="101500793" name="Staff of the Judge"/>
-			<gd_item id="101300737" name="Spear of the Judge"/>
-			<gd_item id="100600843" name="Tome of the Judge"/>
-			<gd_item id="100100768" name="Warhammer of the Judge"/>
-			<gd_item id="101800915" name="Pistol of the Judge"/>
-			<gd_item id="101900670" name="Aethercannon of the Judge"/>
-			<gd_item id="102000704" name="Harp of the Judge"/>
-			<gd_item id="102100770" name="Reaper's Cipher-Blade"/>
+			<gd_item id="100200298" name="Kromede's Dagger"/>
+			<gd_item id="100900197" name="Kromede's Greatsword"/>
+			<gd_item id="101700216" name="Kromede's Longbow"/>
+			<gd_item id="100500204" name="Kromede's Jewel"/>
+			<gd_item id="101300194" name="Kromede's Spear"/>
+			<gd_item id="101500205" name="Kromede's Staff"/>
+			<gd_item id="100000275" name="Kromede's Sword"/>
+			<gd_item id="100600219" name="Kromede's Tome"/>
+			<gd_item id="100100191" name="Kromede's Warhammer"/>
+			<gd_item id="101800872" name="Kromede's Pistol"/>
+			<gd_item id="101900290" name="Kromede's Aethercannon"/>
+			<gd_item id="102000301" name="Kromede's Harp"/>
+			<gd_item id="102100761" name="Kromede's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>

@@ -18,7 +18,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _24053TheMaulingoftheMau extends QuestHandler {
 
 	private final static int questId = 24053;
-	private final static int[] npc_ids = { 204787, 204795, 204796, 204702 };
+	private final static int[] npc_ids = { 204787, 204795, 204796, 204700 };
 
 	public _24053TheMaulingoftheMau() {
 		super(questId);
@@ -81,7 +81,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204702) {
+			if (targetId == 204700) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
@@ -127,12 +127,11 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 				case SETPRO3:
 					if (var == 2) {
-						changeQuestStep(env, 2, 3, false); // 3
 						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),
 							player.getZ(), (byte) 0);
 						survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 						player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
-						return true;
+						return defaultCloseDialog(env, 2, 3);
 					}
 			}
 		}

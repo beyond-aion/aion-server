@@ -38,7 +38,8 @@ public class _1964ASouvenirForNoris extends QuestHandler {
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
 					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1, true, false, 0, 0, 0, 182206033, 1);
+						changeQuestStep(env, 0, 1, false);
+						return defaultCloseDialog(env, 1, 1, true, false, 0, 0, 0, 182206033, 1);
 				}
 			}
 		}
