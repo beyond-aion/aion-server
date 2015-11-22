@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1022KrallDesecration extends QuestHandler {
 
 	private final static int questId = 1022;
-	private final static int[] mob_ids = { 216892 };
+	private final static int[] mob_ids = { 216892, 210178 };
 
 	public _1022KrallDesecration() {
 		super(questId);
@@ -89,6 +89,7 @@ public class _1022KrallDesecration extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		switch (targetId) {
 			case 216892:
+			case 210178:
 				if (var >= 1 && var <= 4) {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
