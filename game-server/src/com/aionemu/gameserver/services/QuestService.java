@@ -464,15 +464,15 @@ public final class QuestService {
 			if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
 				return false;
 
-			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+			/*NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
 			if (faction == null) {
-				log.error("[QUEST_SERVICE] checkStartConditionsImpl() null for player " + player.getName());
+				log.error("[QUEST_SERVICE] checkStartConditionsImpl() null for player " + player.getName() + ", for QuestID " + env.getQuestId());
 				return false;
 			}
 			if (!faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId())) {
 				AuditLogger.info(player, "Possible packet hack to start NpcFaction quest " + ChatUtil.quest(env.getQuestId()) + ".");
 				return false;
-			}
+			} */
 		}
 
 		return true;
