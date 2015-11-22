@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
-import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -13,7 +12,6 @@ import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
@@ -46,7 +44,6 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-
 		final Player player = getConnection().getActivePlayer();
 
 		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CHATMESSAGES) {
@@ -58,61 +55,56 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 		if (ChatProcessor.getInstance().handleChatCommand(player, message))
 			return;
 
+		if (!RestrictionsManager.canChat(player))
+			return;
+
+		PlayerChatService.logMessage(player, type, message);
 		message = NameRestrictionService.filterMessage(message);
 
-		if (LoggingConfig.LOG_CHAT)
-			PlayerChatService.chatLogging(player, type, message);
-
-		if (RestrictionsManager.canChat(player)) {
-			switch (this.type) {
-				case GROUP:
-					if (!player.isInTeam())
-						return;
+		switch (type) {
+			case GROUP:
+				if (!player.isInTeam())
+					return;
+				broadcastToGroupMembers(player);
+				break;
+			case ALLIANCE:
+				if (!player.isInAlliance2())
+					return;
+				broadcastToAllianceMembers(player);
+				break;
+			case GROUP_LEADER:
+				if (!player.isInTeam())
+					return;
+				// Alert must go to entire group or alliance.
+				if (player.isInGroup2())
 					broadcastToGroupMembers(player);
-					break;
-				case ALLIANCE:
-					if (!player.isInAlliance2())
-						return;
+				else
 					broadcastToAllianceMembers(player);
-					break;
-				case GROUP_LEADER:
-					if (!player.isInTeam())
-						return;
-					// Alert must go to entire group or alliance.
-					if (player.isInGroup2())
-						broadcastToGroupMembers(player);
-					else
-						broadcastToAllianceMembers(player);
-					break;
-				case LEGION:
-					broadcastToLegionMembers(player);
-					break;
-				case LEAGUE:
-				case LEAGUE_ALERT:
-					if (!player.isInLeague())
-						return;
-					broadcastToLeagueMembers(player);
-					break;
-				case NORMAL:
-				case SHOUT:
-					if (player.isGM()) {
-						broadcastToAllPlayers(player);
-					} else {
-						broadcastToNonBlockedPlayers(player);
-					}
-					break;
-				case COMMAND:
-					if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER)
-						broadcastFromCommander(player);
-					break;
-				default:
-					if (player.isGM()) {
-						broadcastToAllPlayers(player);
-					} else {
-						AuditLogger.info(player, String.format("Player %s sent message type %s. Message: %s", player.getName(), type, message));
-					}
-					break;
-			}
+				break;
+			case LEGION:
+				if (!player.isLegionMember())
+					return;
+				broadcastToLegionMembers(player);
+				break;
+			case LEAGUE:
+			case LEAGUE_ALERT:
+				if (!player.isInLeague())
+					return;
+				broadcastToLeagueMembers(player);
+				break;
+			case NORMAL:
+			case SHOUT:
+				broadcastToPlayers(player);
+				break;
+			case COMMAND:
+				if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER)
+					broadcastFromCommander(player);
+				break;
+			default:
+				if (!player.isGM())
+					return;
+				broadcastToPlayers(player);
+				break;
 		}
 	}
 
@@ -122,49 +114,35 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 			@Override
 			public boolean acceptObject(Player object) {
-				return (senderRace == object.getRace().getRaceId() || object.isGM());
+				return (senderRace == object.getRace().getRaceId() || player.isGM() || object.isGM());
 			}
 
 		});
 	}
 
 	/**
-	 * Sends message to all players from admin
+	 * Sends message to all players that are not in blocklist (except GMs)
 	 *
 	 * @param player
 	 */
-	private void broadcastToAllPlayers(final Player player) {
-		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true);
-	}
-
-	/**
-	 * Sends message to all players that are not in blocklist
-	 *
-	 * @param player
-	 */
-	private void broadcastToNonBlockedPlayers(final Player player) {
+	private void broadcastToPlayers(final Player player) {
 		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
 
 			@Override
 			public boolean acceptObject(Player object) {
-				return !object.getBlockList().contains(player.getObjectId());
+				return !object.getBlockList().contains(player.getObjectId()) || player.isGM() || object.isGM();
 			}
 
 		});
 	}
 
 	/**
-	 * Sends message to all group members (regular player group, or alliance sub-group Error 105, random value for players to report. Should never
-	 * happen.
+	 * Sends message to all group members.
 	 *
 	 * @param player
 	 */
 	private void broadcastToGroupMembers(final Player player) {
-		if (player.isInTeam()) {
-			player.getCurrentGroup().sendPacket(new SM_MESSAGE(player, message, type));
-		} else {
-			PacketSendUtility.sendMessage(player, "You are not in an alliance or group. (Error 105)");
-		}
+		player.getCurrentGroup().sendPacket(new SM_MESSAGE(player, message, type));
 	}
 
 	/**
@@ -191,9 +169,6 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToLegionMembers(final Player player) {
-		if (player.isLegionMember()) {
-			PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_MESSAGE(player, message, type));
-		}
+		PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_MESSAGE(player, message, type));
 	}
-
 }
