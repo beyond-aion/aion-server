@@ -22760,7 +22760,26 @@
     <decomposable item_id="188052551" decomposable_name="Writhing Chaotic Aethercannon Box"/>
     <decomposable item_id="188052552" decomposable_name="Writhing Chaotic Aethercannon Box"/>
     <decomposable item_id="188052553" decomposable_name="[Event] Clever Café Bundle"/>
-    <decomposable item_id="188052554" decomposable_name="[Event] Beritra Idian Pouch"/>
+    <decomposable item_id="188052554" decomposable_name="[Event] Beritra Idian Pouch">
+		<items>
+			<item id="166050031" name="Esoteric Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050032" name="Esoteric Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050033" name="Esoteric Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050034" name="Esoteric Idian: Magical Defense"/>
+		</items>
+		<items>
+			<item id="166050035" name="Esoteric Idian: Assistance"/>
+		</items>
+		<items>
+			<item id="166050036" name="Esoteric Idian: Resistance"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052555" decomposable_name="[Event] Greater Composite Manastone Chest"/>
     <decomposable item_id="188052556" decomposable_name="Composite Manastone Bundle">
         <items chance="50.0">
@@ -28221,7 +28240,7 @@
 			<item id="102100820" name="Lunatic Modor's Cipher-Blade" player_class="RIDER"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]">
+    <decomposable item_id="188053121" decomposable_name="Danuar Reliquary Loot [Armor]" selectable="true">
 		<items>
 			<item id="110101618" name="Lunatic Modor's Tunic" player_class="SORCERER"/>
 			<item id="111101459" name="Lunatic Modor's Gloves" player_class="SORCERER"/>
@@ -28772,7 +28791,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_RARE_GRADE_70" count="5"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053124" name="Infinity Shard Equipment Loot"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28780,7 +28799,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053120" name="Danuar Reliquary Loot [Weapon]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28788,7 +28807,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053121" name="Danuar Reliquary Loot [Armor]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28796,7 +28815,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="MANASTONE_RARE_GRADE_70"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053122" name="Illuminary Obelisk Loot [Weapon]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28804,7 +28823,7 @@
 			<item id="162000124" name="Superior Recovery Serum" count="50"/>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
-		<items chance="6.0">
+		<items chance="3.0">
 			<item id="188053183" name="Level 1 Grand Invasion Reward Box"/>
 			<item id="188053123" name="Illuminary Obelisk Loot [Armor]"/>
 			<item id="188053628" name="Pallasite Bundle"/>
@@ -28842,7 +28861,14 @@
             <item id="186000247" name="Major Danuar Relic"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle"/>
+    <decomposable item_id="188053137" decomposable_name="Balaurea Buffet Bundle">
+		<items>
+            <item id="160003584" name="Broiled Rava" count="25"/>
+            <item id="160003585" name="Rava Dumplings" count="25"/>
+            <item id="160003586" name="Refreshing Rava Juice" count="25"/>
+            <item id="160003587" name="Pepento Jelly" count="10"/>
+        </items>
+	</decomposable>
     <decomposable item_id="188053138" decomposable_name="Wealhtheow's Keep Siege Defense Reward Box">
 		<items>
             <item id="162000143" name="Brigade General's Liquid Courage" count="5"/>

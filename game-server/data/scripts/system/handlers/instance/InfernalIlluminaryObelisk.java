@@ -10,7 +10,7 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
  */
 
 @InstanceID(301370000)
-public class TheInfernalIlluminaryObelisk extends TheIlluminaryObeliskInstance {
+public class InfernalIlluminaryObelisk extends IlluminaryObeliskInstance {
 	
 	@Override
 	protected int getBossId() {

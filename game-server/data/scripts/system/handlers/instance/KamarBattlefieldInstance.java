@@ -157,8 +157,8 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						sendMsg(1401840);
 						break;
 					case 12:
-						spawnAndSetReaspawn(701808, 1285.834f, 1489.1963f, 595.66486f, (byte) 0, 180);
-						spawnAndSetReaspawn(701912, 1414.2816f, 1463.925f, 598.7676f, (byte) 0, 180);
+						spawnAndSetRespawn(701808, 1285.834f, 1489.1963f, 595.66486f, (byte) 0, 180);
+						spawnAndSetRespawn(701912, 1414.2816f, 1463.925f, 598.7676f, (byte) 0, 180);
 						sendMsg(1401841);
 						break;
 					case 14:

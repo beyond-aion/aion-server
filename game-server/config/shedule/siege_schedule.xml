@@ -54,19 +54,23 @@
 	</fortress>
 	<!-- Heart of Fissure -->
 	<source id="4011">
-		<siegeTime>0 0 16 ? * MON,WED,FRI</siegeTime>
+		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
+		<siegeTime>0 0 18 ? * FRI</siegeTime>
 	</source>
 	<!-- Heart of Gravity -->
 	<source id="4021">
-		<siegeTime>0 0 16 ? * MON,WED,FRI</siegeTime>
+		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
+		<siegeTime>0 0 18 ? * FRI</siegeTime>
 	</source>
 	<!-- Heart of Wrath -->
 	<source id="4031">
-		<siegeTime>0 0 16 ? * MON,WED,FRI</siegeTime>
+		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
+		<siegeTime>0 0 18 ? * FRI</siegeTime>
 	</source>
 	<!-- Heart of Petrification -->
 	<source id="4041">
-		<siegeTime>0 0 16 ? * MON,WED,FRI</siegeTime>
+		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
+		<siegeTime>0 0 18 ? * FRI</siegeTime>
 	</source>
 	<!-- Sillus Fortress -->
 	<fortress id="5011">

@@ -155,10 +155,7 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		if (con != null)
-			con.setActivePlayer(null);
-		else
-			log.warn("While leaving world, player connection is null for player: " + player.getName());
+		con.setActivePlayer(null);
 		player.setClientConnection(null);
 	}
 

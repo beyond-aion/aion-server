@@ -102,7 +102,7 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 					player.getObserveController().removeObserver(this);
 				}
 			};
-			final int delay = 30000;
+			final int delay = 20000;
 			player.getObserveController().attach(observer);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
