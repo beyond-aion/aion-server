@@ -16,6 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke, synchro2
+ * @rework Yeats
  */
 public class CraftingTask extends AbstractCraftTask {
 
@@ -65,9 +66,7 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue, this.craftType.getPacketId(), this.executionSpeed, this.delay));
-		//PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue,
-		//	1));
+		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue, craftType.getCritId(), executionSpeed, delay));
 	}
 
 	@Override
@@ -130,23 +129,18 @@ public class CraftingTask extends AbstractCraftTask {
 		if (recipeTemplate.getSkillid() == 40009) { //morph
 			currentSuccessValue = completeValue;
 			return;
-		} else if (skillLvlDiff >= 41) {
-			currentSuccessValue = completeValue;
-			this.executionSpeed = 300;
-			this.delay = 500;
-			return;
 		} else if (skillLvlDiff < 0) {
 			currentFailureValue = completeValue;
 			return;
 		}
 		
-		int lvlDiff = skillLvlDiff <= 0 ? 1 : skillLvlDiff;
-		int maxFailureChance = ((int) (CraftConfig.MAX_CRAFT_FAILURE_CHANCE - (skillLvlDiff/5)));
+		float multi = Rnd.get() + 1f;
+		int maxFailureChance =  Math.round((CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3));
 		boolean success = Rnd.get(1, 100) <= maxFailureChance ? false : true;
 		
 		if (success) {
 			int critChance = Rnd.get(1, 100);
-			if (critChance <= (15 + getRnd(0, skillLvlDiff/5))) {
+			if (critChance <= (15 + skillLvlDiff/3)) {
 				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10%
 			} else {
 				craftType = CraftType.NORMAL;
@@ -156,24 +150,19 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 		
 		ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductid()).getItemQuality();
-		float qualy = 1;
-		int minValue = 70;
+		float speedModifier = 1;
 		switch (quality) {
 			case LEGEND:
-				minValue = 60;
-				qualy = 0.9f;
+				speedModifier = 0.9f;
 				break;
 			case UNIQUE:
-				minValue = 50;
-				qualy = 0.8f;
+				speedModifier = 0.7f;
 				break;
 			case EPIC:
-				minValue = 30;
-				qualy = 0.5f;
+				speedModifier = 0.5f;
 				break;
 			case MYTHIC:
-				minValue = 20;
-				qualy = 0.3f;
+				speedModifier = 0.3f;
 				break;
 				default:
 					break;
@@ -181,10 +170,9 @@ public class CraftingTask extends AbstractCraftTask {
 		
 		if (success) {
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
-			int currentValue = (int) Math.round(((this.craftType.getCritId() == CraftType.CRIT_BLUE.getCritId() ? 100 : 0) + 10 * (getRnd(1+(lvlDiff/2.5), (lvlDiff/2.5) +3) + (lvlDiff/5) + lvlBoni)));
-			currentSuccessValue += (int) Math.round((minValue + (currentValue * qualy)));
+			currentSuccessValue += Math.round((70 + (((craftType == CraftType.CRIT_BLUE ? 100 :0) + ((skillLvlDiff/3) + (skillLvlDiff/5) + lvlBoni) * 10) * multi) * speedModifier)); //70 = minValue
 		} else {
-			currentFailureValue += (int) Math.round((minValue + (getRnd(7 + (lvlDiff/3), 12 + (lvlDiff/1.5)) * 10) * qualy));
+			currentFailureValue += Math.round((140 + (((skillLvlDiff/1.5 * 10) * multi) * speedModifier))); //140 = minFailValue
 		}
 		
 		if (currentSuccessValue > completeValue) {
@@ -193,38 +181,9 @@ public class CraftingTask extends AbstractCraftTask {
 			currentFailureValue = completeValue;
 		}
 		
-		int speed = 900 - (skillLvlDiff * 30);
-		this.executionSpeed = speed < 300 ? 300 : speed;
-		int showDelay = 1200 - (skillLvlDiff * 30);
-		this.delay = showDelay < 500 ? 500 : showDelay;
+		int speed = speedModifier < 1 ? Math.round(900 * (2-speedModifier)) : (900 - (skillLvlDiff * 30));
+		executionSpeed = speed < 300 ? 300 : speed;
+		int showDelay = speedModifier < 1 ? 1200 : (1200 - (skillLvlDiff * 30));
+		delay = showDelay < 500 ? 500 : showDelay;
 	}
-	
-	private int getRnd(double min, double max) {
-		return (int) Math.round((min + Math.floor(Rnd.nextDouble() * (max - min + 1))));
-	}
-		//OLD AL 4.7.5 CALCULATION
-		/*// TODO: handle progress speed and display light blue / purple progress bar
-		int easeLevel = skillLvlDiff / 10;
-		easeLevel += easeLevel < skillLvlDiff ? 1 : 0;
-
-		int maxFailureChance = CraftConfig.MAX_CRAFT_FAILURE_CHANCE;
-		while (easeLevel > 1)
-			maxFailureChance /= easeLevel--;
-
-		int multi = Math.max(1, maxFailureChance);
-		if (recipeTemplate.getSkillid() == 40009)
-			multi = 0;
-
-		if (Rnd.get(100) > multi)
-			currentSuccessValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 3, 1)));
-		else
-			currentFailureValue += Rnd.get(completeValue / (multi + 1) / 2, completeValue / (Math.max(multi / 5, 1)));
-
-		if (currentSuccessValue >= completeValue) {
-			currentSuccessValue = completeValue;
-		} else if (currentFailureValue >= completeValue) {
-			currentFailureValue = completeValue;
-		}
-	}
-	*/
 }

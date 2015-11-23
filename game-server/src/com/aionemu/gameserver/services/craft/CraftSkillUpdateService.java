@@ -200,13 +200,13 @@ public class CraftSkillUpdateService {
 				|| (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
 				|| (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027))) || (skillId == 40010 && (!player
 				.isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400286));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER);
 			return;
 		}
 
 		// There is no Master upgrade for Aether and Essence tapping yet.
-		if (skillLvl == 499 && (skillId == 30002 || skillId == 30003)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400286));
+		if (skillLvl >= 499 && (skillId == 30002 || skillId == 30003)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER);
 			return;
 		}
 

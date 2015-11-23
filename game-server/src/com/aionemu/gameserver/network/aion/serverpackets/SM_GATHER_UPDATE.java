@@ -12,7 +12,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author ATracer, orz
- * @modified Yeats
+ * @rework Yeats
  */
 public class SM_GATHER_UPDATE extends AionServerPacket {
 
@@ -54,64 +54,68 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 
 		switch (action) {
 			case 0: { //init
-				writeD(success);//template.getSuccessAdj()); //max 
-				writeD(failure);//template.getFailureAdj()); //max
+				writeD(success); //max 
+				writeD(failure); //max
 				writeD(executionSpeed); //executionSpeed
-				writeD(delay); //delay //1200); // timer??
+				writeD(delay); //delay
 				writeD(STR_EXTRACT_GATHER_START_1_BASIC.getId()); //msgId
-				writeH(0x24); // 0x24 //decoding or smth
+				writeH(0x24); //decoding or smth
 				writeD(nameId); //nameId
-				writeH(0); // 0x24 //symbol or smth
+				writeH(0); // 0x24, decoding/symbol or smth
 				break;
 			}
 			case 1: // For updates both for ground and aerial
-			case 2: // Light blue bar
-			case 3: // Purple bar
+			case 2: // Light blue bar = +10%
+			case 3: // Purple bar = 100%
 			{
 				writeD(success);
 				writeD(failure);
-				writeD(executionSpeed);//700);// unk timer??
-				writeD(delay);//1200); // unk timer??
-				writeD(0); //msg id
-				writeH(0); //decoding?
-				writeD(0); //nameId
+				writeD(executionSpeed);
+				writeD(delay);
+				writeD(0);
+				writeH(0); 
+				writeD(0); 
 				writeH(0);
 				break;
 			}
-			case 5: {
+			case 5: //canceled
+			{
 				writeD(success);
 				writeD(failure);
-				writeD(executionSpeed);//700);// unk timer??
-				writeD(delay);//1200); // unk timer??
+				writeD(executionSpeed);
+				writeD(delay);
 				writeD(STR_EXTRACT_GATHER_CANCEL_1_BASIC.getId());
-				writeH(0x24); //decoding or smth
-				writeD(0); //nameid
+				writeH(0x24); 
+				writeD(0); 
 				writeH(0); 
 				break;
 			}
-			case 6: { //success
-				writeD(success);//template.getSuccessAdj());
+			case 6: //success
+			{
+				writeD(success);
 				writeD(failure);
-				writeD(executionSpeed);//700); // unk timer??
-				writeD(delay);//1200); // unk timer??
-				writeD(1330078); //msg id //You have gathered %.
-				writeH(0x24); //decoding?
+				writeD(executionSpeed);
+				writeD(delay);
+				writeD(1330078); //You have gathered nameId.
+				writeH(0x24); 
 				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 7: { //failure
+			case 7: //failure
+			{ 
 				writeD(success);
-				writeD(failure);//template.getFailureAdj());
+				writeD(failure);
 				writeD(executionSpeed);
-				writeD(delay);//1200); // timer??
+				writeD(delay);
 				writeD(STR_EXTRACT_GATHER_FAIL_1_BASIC.getId());
-				writeH(0x24); // 0x24
+				writeH(0x24);
 				writeD(nameId);
-				writeH(0); // 0x24
+				writeH(0); 
 				break;
 			}
-			case 8: { //Occupied by another player
+			case 8: //occupied by another player
+			{
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);

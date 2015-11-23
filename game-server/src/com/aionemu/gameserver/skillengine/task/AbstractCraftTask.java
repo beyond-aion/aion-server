@@ -24,11 +24,8 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
 		private CraftType(int critId) {
 			this.critId = critId;			
 		}
-		public int getCritId() {
-			return critId;
-		}
 		
-		public int getPacketId() {
+		public int getCritId() {
 			return critId;
 		}
 	}

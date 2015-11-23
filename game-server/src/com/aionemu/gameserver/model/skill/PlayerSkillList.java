@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javolution.util.FastTable;
 
+import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.Stigma.StigmaSkill;
@@ -135,19 +136,20 @@ public final class PlayerSkillList implements SkillList<Player> {
 	 */
 	public boolean addSkillXp(Player player, int skillId, int xpReward, int objSkillPoints) {
 		PlayerSkillEntry skillEntry = getSkillEntry(skillId);
+		int skillLvl = skillEntry.getSkillLevel();
 		int maxDiff = 40;
-		int SkillLvlDiff = skillEntry.getSkillLevel() - objSkillPoints;
-		if (maxDiff < SkillLvlDiff) {
+		int SkillLvlDiff = skillLvl - objSkillPoints;
+		if (maxDiff < SkillLvlDiff)
 			return false;
-		}
+
 		switch (skillEntry.getSkillId()) {
 			case 30001:
-				if (skillEntry.getSkillLevel() == 49)
-					return false;
+				if (skillLvl == 49)
+					return false; // disable exp gain to force mastering upgrade via npc
 			case 30002:
 			case 30003:
-				if (skillEntry.getSkillLevel() == 449)
-					break;
+				if (skillLvl == 449 || skillLvl >= 499 && CraftConfig.DISABLE_AETHER_AND_ESSENCE_TAPPING_CAP)
+					break; // break here to enable gather exp on master max lvl
 			case 40001:
 			case 40002:
 			case 40003:
@@ -155,7 +157,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 			case 40007:
 			case 40008:
 			case 40010:
-				switch (skillEntry.getSkillLevel()) {
+				switch (skillLvl) {
 					case 99:
 					case 199:
 					case 299:
@@ -163,9 +165,9 @@ public final class PlayerSkillList implements SkillList<Player> {
 					case 449:
 					case 499:
 					case 549:
-						return false;
+						return false; // disable exp gain to force mastering upgrade via npc
 				}
-				player.getRecipeList().autoLearnRecipe(player, skillId, skillEntry.getSkillLevel());
+				player.getRecipeList().autoLearnRecipe(player, skillId, skillLvl);
 		}
 		boolean updateSkill = skillEntry.addSkillXp(player, xpReward);
 		if (updateSkill)
