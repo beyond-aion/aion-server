@@ -26,6 +26,12 @@ public class CraftConfig {
 	public static int MAX_MASTER_CRAFTING_SKILLS;
 
 	/**
+	 * Enable leveling of aether and essence tapping skills above 499 points
+	 */
+	@Property(key = "gameserver.craft.disable.tapping.cap", defaultValue = "false")
+	public static boolean DISABLE_AETHER_AND_ESSENCE_TAPPING_CAP;
+
+	/**
 	 * Chance to have a critical procraft (applied on first step)
 	 */
 	@Property(key = "gameserver.craft.critical.rate.regular", defaultValue = "15")
