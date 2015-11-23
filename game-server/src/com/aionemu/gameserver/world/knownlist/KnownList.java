@@ -6,8 +6,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -361,7 +359,7 @@ public class KnownList {
 		if (knownPlayers == null) {
 			synchronized (this) {
 				if (knownPlayers == null) {
-					knownPlayers = new FastMap<Integer, Player>().shared();
+					knownPlayers = new ConcurrentHashMap<Integer, Player>();
 				}
 			}
 		}
@@ -371,7 +369,7 @@ public class KnownList {
 		if (visualPlayers == null) {
 			synchronized (this) {
 				if (visualPlayers == null) {
-					visualPlayers = new FastMap<Integer, Player>().shared();
+					visualPlayers = new ConcurrentHashMap<Integer, Player>();
 				}
 			}
 		}
