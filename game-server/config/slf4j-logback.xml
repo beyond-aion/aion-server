@@ -60,6 +60,7 @@
 		<file>${logFolder}/chat.log</file>
 		<encoder>
 			<Pattern>%date %message%n</Pattern>
+			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_craft" class="ch.qos.logback.core.FileAppender">

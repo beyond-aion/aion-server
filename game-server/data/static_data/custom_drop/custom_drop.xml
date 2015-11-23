@@ -471,22 +471,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="1"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="0.5"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="4" chance="50"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700476" replace_type="FULL">
@@ -545,28 +551,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="4"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="4" chance="50"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700477" replace_type="FULL">
@@ -625,28 +631,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="4"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="35"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701483" replace_type="FULL">
@@ -699,22 +705,22 @@
 			<drop item_id="112600770" name="Guardian Centurion's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="30"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="1"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="0.5"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="0.5"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="0.3"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="0.2"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="4"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Chamber of Roah -->
@@ -774,28 +780,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="2" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="3" chance="50"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700473" replace_type="FULL">
@@ -854,28 +860,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="2" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="3" chance="50"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700474" replace_type="FULL">
@@ -934,28 +940,28 @@
 			<drop item_id="112600816" name="Ancient Reshanta Shoulderplates" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="6" chance="55"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="5" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="5" chance="50"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="25"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="15"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701484" replace_type="FULL">
@@ -1689,22 +1695,28 @@
 			<drop item_id="112600772" name="Archon Centurion's Shoulderplates" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="35"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Kysis Barracks -->
@@ -1817,28 +1829,28 @@
 			<drop item_id="114600846" name="Elite Archon Tribunus' Sabatons" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="35"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Left Wing Chamber -->
@@ -1887,20 +1899,20 @@
 			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="3" chance="60"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="2" chance="20"/>
 			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="40"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
 		</drop_group>
@@ -1953,19 +1965,19 @@
 			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="60"/>
 			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
 			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="7.5"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="3"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="3" chance="20"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="10"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="5"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701486" replace_type="FULL">
@@ -2073,22 +2085,28 @@
 	<!-- Miren Chamber -->
 	<npc_drop npc_id="700543" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="2.5"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="35"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700544" replace_type="FULL">
@@ -2157,28 +2175,28 @@
 			<drop item_id="114600846" name="Elite Archon Tribunus' Sabatons" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="1" chance="30"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="6" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="4" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="3" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="7.5"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="5" chance="45"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="4" chance="35"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="1" chance="3"/>
-			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="2"/>
-			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="1"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="1" max_amount="3" chance="25"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="1" max_amount="2" chance="20"/>
+			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000051" name="Major Ancient Crown" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Nightmare Circus -->
@@ -2979,26 +2997,26 @@
 			<drop item_id="114600824" name="Reshanta Sabatons" min_amount="1" max_amount="1" chance="25"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="2" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="50"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="40"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="2" chance="20"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
 			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Crown">
-			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="2" max_amount="2" chance="5"/>
-			<drop item_id="186000053" name="Ancient Crown" min_amount="2" max_amount="2" chance="3"/>
+			<drop item_id="186000054" name="Lesser Ancient Crown" min_amount="2" max_amount="2" chance="10"/>
+			<drop item_id="186000053" name="Ancient Crown" min_amount="2" max_amount="2" chance="5"/>
 			<drop item_id="186000052" name="Greater Ancient Crown" min_amount="2" max_amount="2" chance="2"/>
 			<drop item_id="186000051" name="Major Ancient Crown" min_amount="2" max_amount="2" chance="1"/>
 		</drop_group>
@@ -3237,20 +3255,20 @@
 			<drop item_id="114600780" name="Guardian Squad Leader's Sabatons" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Icon">
-			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="2" chance="40"/>
-			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="15"/>
+			<drop item_id="186000066" name="Lesser Ancient Icon" min_amount="1" max_amount="4" chance="40"/>
+			<drop item_id="186000065" name="Ancient Icon" min_amount="1" max_amount="3" chance="30"/>
+			<drop item_id="186000064" name="Greater Ancient Icon" min_amount="1" max_amount="1" chance="20"/>
 			<drop item_id="186000063" name="Major Ancient Icon" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Seal">
-			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="2" chance="25"/>
-			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="15"/>
-			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="15"/>
-			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="5"/>
+			<drop item_id="186000062" name="Lesser Ancient Seal" min_amount="1" max_amount="3" chance="40"/>
+			<drop item_id="186000061" name="Ancient Seal" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000060" name="Greater Ancient Seal" min_amount="1" max_amount="1" chance="20"/>
+			<drop item_id="186000059" name="Major Ancient Seal" min_amount="1" max_amount="1" chance="10"/>
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Goblet">
-			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
-			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
+			<drop item_id="186000058" name="Lesser Ancient Goblet" min_amount="1" max_amount="2" chance="30"/>
+			<drop item_id="186000057" name="Ancient Goblet" min_amount="1" max_amount="1" chance="20"/>
 			<drop item_id="186000056" name="Greater Ancient Goblet" min_amount="1" max_amount="1" chance="10"/>
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="1" max_amount="1" chance="5"/>
 		</drop_group>

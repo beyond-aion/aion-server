@@ -34,6 +34,10 @@ public class GSConfig {
 	@Property(key = "gameserver.chatserver.enable", defaultValue = "false")
 	public static boolean ENABLE_CHAT_SERVER;
 
+	/** Min. required level to write in CS channels */
+	@Property(key = "gameserver.chatserver.min_level", defaultValue = "10")
+	public static byte CHAT_SERVER_MIN_LEVEL;
+
 	/**
 	 * Character creation
 	 */

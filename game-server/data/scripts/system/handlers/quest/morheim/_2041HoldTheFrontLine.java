@@ -108,7 +108,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 						case SETPRO3: {
 							balaurKilled = 0;
 							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 259.10f, 261.79f, 227.77f, (byte) 94); // Draconute Scout
+							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
 							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
 						}
@@ -139,7 +139,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 				balaurKilled++;
 				if (balaurKilled == 2) {
 					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 259.10f, 261.79f, 227.77f, (byte) 94); // Draconute Scout
+					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
 				} else if (balaurKilled == 4) {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {

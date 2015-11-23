@@ -28,8 +28,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
 	 * TODO 1) analyze possibility to zip settings 2) insert/update instead of replace 0 - uisettings 1 - shortcuts 2 - display 3 - deny
 	 */
 	@Override
-	public void loadSettings(final Player player) {
-		final int playerId = player.getObjectId();
+	public PlayerSettings loadSettings(int playerId) {
 		final PlayerSettings playerSettings = new PlayerSettings();
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
@@ -62,7 +61,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
 			log.error("Could not restore PlayerSettings data for player " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		playerSettings.setPersistentState(PersistentState.UPDATED);
-		player.setPlayerSettings(playerSettings);
+		return playerSettings;
 	}
 
 	@Override

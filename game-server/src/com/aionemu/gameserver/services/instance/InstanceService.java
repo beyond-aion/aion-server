@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.custom.GameEvent;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -65,7 +66,7 @@ public class InstanceService {
 	 *          - playerObjectId or Legion id in future
 	 * @return
 	 */
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult) {
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GameEvent event) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 
 		if (!map.isInstanceType())
@@ -76,7 +77,13 @@ public class InstanceService {
 		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
 
 		map.addInstance(nextInstanceId, worldMapInstance);
-		SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficult, ownerId);
+		
+		if(event == null) {
+			SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficult, ownerId);
+		} else {
+			worldMapInstance.setInstanceHandler(event);
+		}
+		
 		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
 
 		// finally start the checker
@@ -85,6 +92,10 @@ public class InstanceService {
 		}
 
 		return worldMapInstance;
+	}
+	
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult) {
+		return getNextAvailableInstance(worldId, ownerId, difficult, null);
 	}
 
 	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId) {

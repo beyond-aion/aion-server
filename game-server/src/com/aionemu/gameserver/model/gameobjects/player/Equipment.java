@@ -266,6 +266,7 @@ public class Equipment {
 			// update stats
 			notifyItemEquipped(item);
 			owner.getLifeStats().updateCurrentStats();
+			owner.getGameStats().updateStatsAndSpeedVisually();
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0, 0), item.getItemId());
 			return item;

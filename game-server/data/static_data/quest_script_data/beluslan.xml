@@ -119,7 +119,7 @@
 			2606 [XML] A Ribbit in Need
 			2607 [XML] Silencing the Hermit
 			2608 [XML] Halt the Contamination
-			2611 [SCRIPT] Consulting the Leaders
+			2611 [XML] Consulting the Leaders
 			2612 [XML] A Tonic for Nargatal
 			2613 [XML] Devoted Husband Akagitan
 			2614 [XML] Decorative Skulls
@@ -329,6 +329,12 @@
 	<report_to id="4221" start_npc_ids="204710" end_npc_ids="204839"/>
 	<report_to id="4521" start_npc_ids="204725" end_npc_ids="205143"/>
 	<report_to id="4538" start_npc_ids="204701" end_npc_ids="204768"/>
+	<report_to_many id="2611" start_npc_ids="204763" end_npc_ids="204763">
+		<npc_infos var="0" npc_id="204783" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="204784" quest_dialog="1693"/>
+		<npc_infos var="2" npc_id="204700" quest_dialog="2034"/>
+		<npc_infos var="3" npc_id="204763" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2502" start_npc_ids="204701"/>
 	<item_collecting id="2503" start_npc_ids="204733"/>
@@ -373,7 +379,7 @@
 	<item_collecting id="2623" start_npc_ids="204751" end_npc_ids="204751"/>
 	<item_collecting id="2625" start_npc_ids="204792"/>
 	<item_collecting id="2626" start_npc_ids="204752"/>
-	<item_collecting id="2627" start_npc_ids="204790" end_npc_ids="204748"/>
+	<item_collecting id="2627" start_npc_ids="204790"/>
 	<item_collecting id="2640" start_npc_ids="204792"/>
 	<item_collecting id="2642" start_npc_ids="204796"/>
 	<item_collecting id="2643" start_npc_ids="204795"/>
@@ -566,11 +572,11 @@
 		<monster var="1" end_var="6" npc_ids="213033"/>
 	</monster_hunt>
 	<monster_hunt id="2615" start_npc_ids="204783">
-		<monster var="0" end_var="5" npc_ids="700333"/>
+		<monster var="0" end_var="2" npc_ids="700333"/>
 	</monster_hunt>
 	<monster_hunt id="2616" start_npc_ids="204783">
-		<monster var="0" end_var="10" npc_ids="213211 213212"/>
-		<monster var="1" end_var="15" npc_ids="213213 213214"/>
+		<monster var="0" end_var="4" npc_ids="213211 213212"/>
+		<monster var="1" end_var="6" npc_ids="213213 213214"/>
 	</monster_hunt>
 	<monster_hunt id="2618" start_npc_ids="204763">
 		<monster var="0" end_var="6" npc_ids="213105 213106"/>
@@ -588,7 +594,7 @@
 		<monster var="0" end_var="6" npc_ids="213122 213123"/>
 		<monster var="1" end_var="4" npc_ids="213124"/>
 	</monster_hunt>
-	<monster_hunt id="2635" start_npc_ids="204817">
+	<monster_hunt id="2635" start_npc_ids="802053">
 		<monster var="0" end_var="3" npc_ids="213663 213664 213665 213666"/>
 		<monster var="1" end_var="3" npc_ids="213669"/>
 		<monster var="2" end_var="3" npc_ids="213672"/>
@@ -639,15 +645,15 @@
 		<monster var="0" end_var="6" npc_ids="213934 213935"/>
 		<monster var="1" end_var="4" npc_ids="213947 213948"/>
 	</monster_hunt>
-	<monster_hunt id="2671" start_npc_ids="204785">
+	<monster_hunt id="2671" start_npc_ids="802053">
 		<monster var="0" end_var="9" npc_ids="213624 213625 213627"/>
 	</monster_hunt>
-	<monster_hunt id="2674" start_npc_ids="204785">
+	<monster_hunt id="2674" start_npc_ids="802053">
 		<monster var="0" end_var="2" npc_ids="213642 213643"/>
 		<monster var="1" end_var="3" npc_ids="213644 213645"/>
 		<monster var="2" end_var="5" npc_ids="213648 213649"/>
 	</monster_hunt>
-	<monster_hunt id="2676" start_npc_ids="204785">
+	<monster_hunt id="2676" start_npc_ids="802053">
 		<monster var="0" end_var="3" npc_ids="213667 213668"/>
 		<monster var="1" end_var="3" npc_ids="213670 213671"/>
 		<monster var="2" end_var="2" npc_ids="213676 213677"/>
@@ -733,7 +739,7 @@
 	<monster_hunt id="28606" start_npc_ids="205236">
 		<monster var="0" end_var="1" npc_ids="216968"/>
 	</monster_hunt>
-	<monster_hunt id="28617" start_npc_ids="204760">
+	<monster_hunt id="28617" start_npc_ids="205235">
 		<monster var="0" end_var="1" npc_ids="217119 217006"/>
 	</monster_hunt>
 	<monster_hunt id="26902" start_npc_ids="204702">

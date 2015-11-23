@@ -3,20 +3,22 @@ package com.aionemu.gameserver.services.player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author Source
+ * @modified Neon
  */
 public class PlayerChatService {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = LoggerFactory.getLogger("CHAT_LOG");
+	private static final Logger playerLog = LoggerFactory.getLogger("CHAT_LOG");
+	private static final Logger gmLog = LoggerFactory.getLogger("ADMINAUDIT_LOG");
 
 	/**
 	 * This method will control players msg
@@ -32,36 +34,52 @@ public class PlayerChatService {
 		return false;
 	}
 
-	public static void chatLogging(Player player, ChatType type, String message) {
+	public static void logWhisper(Player sender, Player receiver, String message) {
+		logMessage(sender, ChatType.WHISPER, message, receiver);
+	}
+
+	public static void logMessage(Player sender, ChatType type, String message) {
+		logMessage(sender, type, message, null);
+	}
+
+	private static void logMessage(Player sender, ChatType type, String message, Player receiver) {
+		Logger log = playerLog;
+
+		// log whisper to adminaudit.log, if GM is involved (ignores private chat logging settings)
+		if (type == ChatType.WHISPER && (sender.isGM() || (receiver != null && receiver.isGM())) && LoggingConfig.LOG_GMAUDIT)
+			log = gmLog;
+		else {
+			switch (type) {
+				case WHISPER:
+				case LEGION:
+					if (!LoggingConfig.LOG_PRIVATE_CHATS)
+						return;
+					break;
+				default:
+					if (!LoggingConfig.LOG_GENERAL_CHATS)
+						return;
+			}
+		}
+
 		switch (type) {
+			case WHISPER:
+				log.info(String.format("[%s] - [%s]>[%s]: %s", type.toString(), sender.getName(), receiver.getName(), message));
+				break;
 			case GROUP:
-				log.info(String.format("[MESSAGE] - GROUP <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
-				break;
 			case ALLIANCE:
-				log.info(String.format("[MESSAGE] - ALLIANCE <%d>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
-				break;
 			case GROUP_LEADER:
-				log.info(String.format("[MESSAGE] - LEADER_ALERT: [%s]> %s", player.getName(), message));
-				break;
-			case LEGION:
-				log.info(String.format("[MESSAGE] - LEGION <%s>: [%s]> %s", player.getLegion().getLegionName(), player.getName(), message));
-				break;
 			case LEAGUE:
 			case LEAGUE_ALERT:
-				log.info(String.format("[MESSAGE] - LEAGUE <%s>: [%s]> %s", player.getCurrentTeamId(), player.getName(), message));
+				log.info(String.format("[%s] <%d> - [%s]: %s", type.toString(), sender.getCurrentTeamId(), sender.getName(), message));
+				break;
+			case LEGION:
+				log.info(String.format("[%s] <%s> - [%s]: %s", type.toString(), sender.getLegion().getLegionName(), sender.getName(), message));
 				break;
 			case NORMAL:
 			case SHOUT:
-				if (player.getRace() == Race.ASMODIANS)
-					log.info(String.format("[MESSAGE] - ALL (ASMO): [%s]> %s", player.getName(), message));
-				else
-					log.info(String.format("[MESSAGE] - ALL (ELYOS): [%s]> %s", player.getName(), message));
-				break;
 			default:
-				if (player.isGM())
-					log.info(String.format("[MESSAGE] - ALL (GM): [%s]> %s", player.getName(), message));
+				log.info(String.format("[%s] - [%s](%s): %s", type.toString(), sender.getName(), sender.getRace().toString(), message));
 				break;
 		}
 	}
-
 }

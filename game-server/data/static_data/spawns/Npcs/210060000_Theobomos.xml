@@ -4245,7 +4245,7 @@
 		</spawn>
 		<!-- Pyrrha -->
 		<spawn npc_id="798225" respawn_time="295">
-			<spot x="2969.16" y="191.773" z="171.942" h="35"/>
+			<spot x="2678.0" y="810.5" z="138.3572" h="35"/>
 		</spawn>
 		<!-- Poison Tail Scolopen -->
 		<spawn npc_id="214195" respawn_time="295">

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
 import com.aionemu.gameserver.dao.ItemCooldownsDAO;
 import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
@@ -62,9 +63,10 @@ public class PlayerLeaveWorldService {
 	 * anywhere else</b>
 	 */
 	public static final void leaveWorld(Player player) {
-		AionConnection con = player.getClientConnection();
+		final AionConnection con = player.getClientConnection();
 		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
+		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
 		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
@@ -136,7 +138,6 @@ public class PlayerLeaveWorldService {
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
-		player.setClientConnection(null);
 
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
@@ -154,7 +155,11 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		con.setActivePlayer(null);
+		if (con != null)
+			con.setActivePlayer(null);
+		else
+			log.warn("While leaving world, player connection is null for player: " + player.getName());
+		player.setClientConnection(null);
 	}
 
 	/**

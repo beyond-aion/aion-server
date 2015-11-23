@@ -465,6 +465,10 @@ public final class QuestService {
 				return false;
 
 			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+			if (faction == null) {
+				log.error("[QUEST_SERVICE] checkStartConditionsImpl() null for player " + player.getName());
+				return false;
+			}
 			if (!faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId())) {
 				AuditLogger.info(player, "Possible packet hack to start NpcFaction quest " + ChatUtil.quest(env.getQuestId()) + ".");
 				return false;

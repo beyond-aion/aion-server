@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spawns>
-    <spawn_map map_id="301230000">
+    <spawn_map map_id="301370000">
 	    <!-- Portals by Script
         <spawn npc_id="702014">
             <spot x="343.1202" y="254.10585" z="291.62302" static_id="34"/>

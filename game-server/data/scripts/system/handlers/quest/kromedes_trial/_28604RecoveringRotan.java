@@ -12,10 +12,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas
+ * @modified Pad
  */
 public class _28604RecoveringRotan extends QuestHandler {
 
-	private final static int questId = 28604;
+	private static final int questId = 28604;
 
 	public _28604RecoveringRotan() {
 		super(questId);
@@ -31,34 +32,40 @@ public class _28604RecoveringRotan extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null)
-			return false;
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			return QuestService.startQuest(env, QuestStatus.START);
+		}
 
 		if (env.getTargetId() == 700961) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
-				if (qs.getStatus() == QuestStatus.START) {
-					env.setQuestId(questId);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return QuestService.finishQuest(env);
-				}
-				if (this.checkItemExistence(env, 164000141, 1, false)) {
+				if (checkItemExistence(env, 164000141, 1, false)) {
 					env.setQuestId(0);
 					return sendQuestDialog(env, 27);
-				} else {
-					env.setQuestId(0);
+				}
+				if (qs.getStatus() == QuestStatus.START) {
+					return sendQuestDialog(env, 10002);
+				}
+				else {
 					giveQuestItem(env, 164000141, 1);
+					env.setQuestId(0);
 					return sendQuestDialog(env, 1012);
 				}
 			}
+			else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				return sendQuestDialog(env, 5);
+			}
+			else {
+				changeQuestStep(env, 0, 0, true);
+				return sendQuestEndDialog(env);
+			}
 		}
-
+		
 		return false;
 	}
 
 	@Override
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
-		// Allow to use body even when quest was completed
+		// allow to use body even when quest is completed
 		return env.getTargetId() == 700961 && questEventType == QuestActionType.ACTION_ITEM_USE;
 	}
 

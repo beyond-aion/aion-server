@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <events_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="events_config.xsd">
-	<active>Atreian City Festival;The Fortune Fayre;Doppelgangers;Ascension Energy;Spring Event;Spring Event Inventory;Crab Fest;Celebrate Solorius;New Year Event;Trick or treat! The witch and the king;Daru Days;Ardent heat;Ascension Energy Inventory;Ardent heat Inventory;Valentine's Day;Valentine's Day Inventory;Love is in the Air;Love is in the Aether;Growth;Transform and battle as a Guardian General;Guardian General Showdown;GGS Event 1;GGS Event 2;GGS Event 3;GGS Event 4;GGS Event 5;GGS Event 6;GGS Event 7;GGS Event 8;Code Red: Atreia;Shugo Imperial Tomb;Summer Block Party;Alchemy Event;Visit the Brax Cafe!;Nightmare Circus;Aion Community Appreciation Event;The Scattered Deck;The Lost Words!;New Beginning's Event;Boiling Point;Glory Points Exchange;Gank the Grankers Inventory;Gank the Grankers;Frozen Magic Event;Joker's Wild Event</active>
+	<active>Code Red: Atreia</active>
   	<events>
 		<event name="The Scattered Deck" start="2015-03-12T00:00:00+00:00" end="2015-03-26T00:00:00+00:00">
 			<event_drops>
@@ -2253,7 +2253,7 @@
                 </spawn_map>
 			</spawns>
 		</event>
-		<event name="Code Red: Atreia" start="2015-06-05T00:00:00+00:00" end="2015-06-26T00:00:00+00:00">
+		<event name="Code Red: Atreia" start="2015-11-16T00:00:00+00:00" end="2015-11-20T23:59:59+00:00">
 			<quests>
 				<maintainable>80324;80325;80326;80327</maintainable>
 			</quests>

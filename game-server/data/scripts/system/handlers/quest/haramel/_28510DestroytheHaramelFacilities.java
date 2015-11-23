@@ -21,8 +21,8 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 203649, 700953 };
-		qe.registerQuestNpc(203649).addOnQuestStart(questId);
+		int[] npcs = { 203560, 700953 };
+		qe.registerQuestNpc(804605).addOnQuestStart(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -42,7 +42,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203649) { // Gulkalla
+			if (targetId == 804605) { // Shezen
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
@@ -63,7 +63,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203649) { // Gulkalla
+			if (targetId == 203560) { // Morn
 				switch (dialog) {
 					case USE_OBJECT: {
 						return sendQuestDialog(env, 10002);

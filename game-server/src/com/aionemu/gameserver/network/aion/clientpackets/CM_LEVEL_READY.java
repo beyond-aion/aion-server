@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -61,10 +60,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		}
 		sendPacket(new SM_PLAYER_INFO(activePlayer, false));
 		activePlayer.getController().startProtectionActiveTask();
-		if (getConnection().getAccount().getAccessLevel() >= AdminConfig.GM_PANEL)
-			sendPacket(new SM_ACCOUNT_PROPERTIES(true));
-		else
-			sendPacket(new SM_ACCOUNT_PROPERTIES(false));
+		sendPacket(new SM_ACCOUNT_PROPERTIES());
 		sendPacket(new SM_MOTION(activePlayer.getObjectId(), activePlayer.getMotions().getActiveMotions()));
 
 		WindstreamTemplate template = DataManager.WINDSTREAM_DATA.getStreamTemplate(activePlayer.getPosition().getMapId());

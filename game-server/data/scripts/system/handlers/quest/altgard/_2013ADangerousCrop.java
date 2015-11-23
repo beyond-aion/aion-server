@@ -75,7 +75,7 @@ public class _2013ADangerousCrop extends QuestHandler {
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (var >= 3 && var < 5) {
-								return useQuestObject(env, var, var + 1, false, true); // 4,5
+								return useQuestObject(env, var, var + 1, false, true); // 4, 5
 							} else if (var == 5) {
 								return useQuestObject(env, 5, 8, false, true); // 8
 							}

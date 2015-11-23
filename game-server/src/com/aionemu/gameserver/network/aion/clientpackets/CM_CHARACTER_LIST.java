@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ACCOUNT_PROPERTIES;
@@ -27,24 +26,14 @@ public class CM_CHARACTER_LIST extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		playOk2 = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
+		sendPacket(new SM_ACCOUNT_PROPERTIES());
 		sendPacket(new SM_CHARACTER_LIST(playOk2));
-		if (getConnection().getAccount().getAccessLevel() >= AdminConfig.GM_PANEL) {
-			sendPacket(new SM_ACCOUNT_PROPERTIES(true));
-		} else {
-			sendPacket(new SM_ACCOUNT_PROPERTIES(false));
-		}
 	}
 }

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.services.EventService;
 
 /**
  * @author -Nemesiss- CC fix
- * @modified by Novo, cura
+ * @modified by Novo, cura, Neon
  */
 public class SM_VERSION_CHECK extends AionServerPacket {
 
@@ -24,39 +24,28 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	 * Aion Client version
 	 */
 	private int version;
-	/**
-	 * Number of characters can be created
-	 */
-	private int characterLimitCount;
 
-	/**
-	 * Related to the character creation mode
-	 */
-	private final int characterCreationMode;
-	private final int characterFactionsMode;
-
-	/**
-	 * @param chatService
-	 */
 	public SM_VERSION_CHECK(int version) {
 		this.version = version;
-
-		if (MembershipConfig.CHARACTER_ADDITIONAL_ENABLE != 10 && MembershipConfig.CHARACTER_ADDITIONAL_COUNT > GSConfig.CHARACTER_LIMIT_COUNT) {
-			characterLimitCount = MembershipConfig.CHARACTER_ADDITIONAL_COUNT;
-		} else {
-			characterLimitCount = GSConfig.CHARACTER_LIMIT_COUNT;
-		}
-
-		characterLimitCount *= NetworkController.getInstance().getServerCount();
-		characterCreationMode = GSConfig.CHARACTER_CREATION_MODE;
-		characterFactionsMode = GSConfig.CHARACTER_FACTION_LIMITATION_MODE * 0x04;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
+		int characterLimitCount = GSConfig.CHARACTER_LIMIT_COUNT;
+		int limitFactionMode = GSConfig.CHARACTER_FACTION_LIMITATION_MODE;
+		
+		if (MembershipConfig.CHARACTER_ADDITIONAL_COUNT > characterLimitCount && MembershipConfig.CHARACTER_ADDITIONAL_ENABLE != 10)
+			characterLimitCount = MembershipConfig.CHARACTER_ADDITIONAL_COUNT;
+
+		if (GSConfig.ENABLE_RATIO_LIMITATION) {
+			if (GameServer.getRatiosFor(Race.ELYOS) > GSConfig.RATIO_MIN_VALUE)
+				limitFactionMode = 1;
+			else if (GameServer.getRatiosFor(Race.ASMODIANS) > GSConfig.RATIO_MIN_VALUE)
+				limitFactionMode = 2;
+			else if (GameServer.getCountFor(Race.ELYOS) + GameServer.getCountFor(Race.ASMODIANS) > GSConfig.RATIO_HIGH_PLAYER_COUNT_DISABLING)
+				limitFactionMode = 3;
+		}
+
 		// aion 3.0.0.0 = 194
 		// aion 3.1.0.0 = 195
 		// aion 3.5.0.0 = 196
@@ -65,46 +54,31 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		// aion 4.5.0.15 = 204
 		// aion 4.7.0.5 = 205
 		// aion 4.7.5.0 = 206
-		if (version < 206) {
-			// Send wrong client version
-			writeC(0x02);
+		if (version != 206) {
+			writeC(0x01); // Send wrong client version
 			return;
 		}
-		writeC(0x00);
+		writeC(0x00); // version ok
 		writeC(NetworkConfig.GAMESERVER_ID);
 		writeD(150119);// start year month day
 		writeD(141120);// start year month day
 		writeD(0x00);// spacing
 		writeD(141120);// year month day
-		writeD(1422571326);// start server time in mili
+		writeD(GameServer.START_TIME_SECONDS);// start server time in seconds
 		writeC(0x00);// unk
 		writeC(GSConfig.SERVER_COUNTRY_CODE);// country code;
 		writeC(0x00);// unk
-
-		int serverMode = (characterLimitCount * 0x10);
-		serverMode |=  con.getAccount().getAccessLevel() > 0 ? 1 : characterCreationMode; // on accesslevel: enable both factions and disable char reservation restrictions
-
-		if (GSConfig.ENABLE_RATIO_LIMITATION) {
-			if (GameServer.getCountFor(Race.ELYOS) + GameServer.getCountFor(Race.ASMODIANS) > GSConfig.RATIO_HIGH_PLAYER_COUNT_DISABLING)
-				writeC(serverMode | 0x0C);
-			else if (GameServer.getRatiosFor(Race.ELYOS) > GSConfig.RATIO_MIN_VALUE)
-				writeC(serverMode | 0x04);
-			else if (GameServer.getRatiosFor(Race.ASMODIANS) > GSConfig.RATIO_MIN_VALUE)
-				writeC(serverMode | 0x08);
-			else
-				writeC(serverMode);
-		} else {
-			writeC(serverMode | characterFactionsMode);
-		}
-		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond());// server time
+		writeC((characterLimitCount * NetworkController.getInstance().getServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
+		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond()); // server time
 		writeH(350);// unk
 		writeH(2561);// unk
 		writeH(2561);// unk
-		writeH(5140);// unk
+		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // min level to write in channel chats
+		writeC(20); // some other restriction
 		writeH(276);// unk
 		writeH(2); // unk
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
-		writeC(EventService.getInstance().getEventType().getId());
+		writeC(EventService.getInstance().getEventType().getId()); // city decoration
 		writeC(0);// unk
 		writeC(0);// unk
 		writeD(0 * 65536); // negative server time offset (timeInSeconds * 2^16, accepts only positive numbers)

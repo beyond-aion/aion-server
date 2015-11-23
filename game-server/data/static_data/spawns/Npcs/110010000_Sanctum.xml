@@ -177,10 +177,6 @@
 		<spawn npc_id="203821" respawn_time="295">
 			<spot x="1918.73" y="1617.33" z="590.359" h="56"/>
 		</spawn>
-		<!-- Berus -->
-		<spawn npc_id="203730" respawn_time="295">
-			<spot x="1623.78" y="1513.10" z="573.629" h="60"/>
-		</spawn>
 		<!-- Biesa -->
 		<spawn npc_id="203831" respawn_time="295">
 			<spot x="2018.52" y="1534.27" z="581.252" h="90"/>
@@ -627,7 +623,7 @@
 		</spawn>
 		<!-- Kane -->
 		<spawn npc_id="203729" respawn_time="295">
-			<spot x="1618.86" y="1469.71" z="573.345" h="57"/>
+			<spot x="1618.827" y="1469.736" z="573.345" h="50"/>
 		</spawn>
 		<!-- Kareinus -->
 		<spawn npc_id="203827" respawn_time="295">
@@ -701,7 +697,7 @@
 		</spawn>
 		<!-- Laokones -->
 		<spawn npc_id="203731" respawn_time="295">
-			<spot x="1623.79" y="1510.27" z="573.629" h="60"/>
+			<spot x="1623.699" y="1510.399" z="573.6294" h="60"/>
 		</spawn>
 		<!-- Lapis -->
 		<spawn npc_id="203858" respawn_time="295">
@@ -782,6 +778,7 @@
 		<!-- Lukania -->
 		<spawn npc_id="203750" respawn_time="295">
 			<spot x="1367.04" y="1371.85" z="573.386" h="10"/>
+			<spot x="1887.06" y="1527.82" z="590.1345" h="58"/>
 		</spawn>
 		<!-- Lukian -->
 		<spawn npc_id="203839" respawn_time="295">
@@ -1365,15 +1362,15 @@
 		</spawn>
 		<!-- Teleios -->
 		<spawn npc_id="804188" respawn_time="295">
-			<spot x="1623.2723" y="1511.6615" z="573.6294" h="60"/>
+			<spot x="1623.732" y="1512.784" z="573.6294" h="60"/>
 		</spawn>
 		<!-- Neperphon -->
 		<spawn npc_id="832843" respawn_time="295">
 			<spot x="1620.047" y="1521.449" z="573.6293" h="60" />
 		</spawn>
 		<!-- Wisplight Abbey Teleport Statue -->
-		<spawn npc_id="209676" respawn_time="295">
+		<!-- <spawn npc_id="209676" respawn_time="295">
 			<spot x="1366.524" y="1480.733" z="569.0385" static_id="1" />
-		</spawn>
+		</spawn> -->
 	</spawn_map>
 </spawns>

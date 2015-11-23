@@ -123,6 +123,8 @@ public class GameServer {
 
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
+	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
+	
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
 	private static int ASMOS_COUNT = 0;
