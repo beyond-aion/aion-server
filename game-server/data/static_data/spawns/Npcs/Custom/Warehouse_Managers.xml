@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spawns>
+    <!-- Sanctum -->
+    <spawn_map map_id="110010000">
+        <spawn npc_id="810035" respawn_time="295">
+            <spot x="1887.06" y="1527.82" z="590.1345" h="58"/>
+        </spawn>
+    </spawn_map>
+    <!-- Pandaemonium -->
+    <spawn_map map_id="120010000">
+        <spawn npc_id="810036" respawn_time="295">
+            <spot x="1189.4474" y="1544.111" z="213.96336" h="7"/>
+        </spawn>
+    </spawn_map>
+</spawns>

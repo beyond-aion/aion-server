@@ -778,7 +778,6 @@
 		<!-- Lukania -->
 		<spawn npc_id="203750" respawn_time="295">
 			<spot x="1367.04" y="1371.85" z="573.386" h="10"/>
-			<spot x="1887.06" y="1527.82" z="590.1345" h="58"/>
 		</spawn>
 		<!-- Lukian -->
 		<spawn npc_id="203839" respawn_time="295">

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spawns>
+    <!-- 900110000_Housing_barrack -->
+    <spawn_map map_id="900110000">
+        <spawn npc_id="700000" respawn_time="295">
+            <spot x="2637.4797" y="216.3937" z="117.79796" h="64"/>
+        </spawn>
+        <spawn npc_id="700079" respawn_time="295">
+            <spot x="2622.3088" y="213.28381" z="117.79796" h="4"/>
+        </spawn>
+        <spawn npc_id="204202" respawn_time="295">
+            <spot x="2622.728" y="211.1286" z="117.79796" h="3"/>
+        </spawn>
+        <spawn npc_id="798056" respawn_time="295">
+            <spot x="2623.0854" y="209.55208" z="117.79796" h="3"/>
+        </spawn>
+        <spawn npc_id="798312" respawn_time="295">
+            <spot x="2623.4062" y="208.04102" z="117.79796" h="3"/>
+        </spawn>
+        <spawn npc_id="204074" respawn_time="295">
+            <spot x="2623.7776" y="206.29451" z="117.79796" h="3"/>
+        </spawn>
+        <spawn npc_id="830154" respawn_time="295">
+            <spot x="2624.141" y="204.58481" z="117.79796" h="3"/>
+        </spawn>
+        <spawn npc_id="830070" respawn_time="295">
+            <spot x="2639.453" y="207.48909" z="117.79796" h="63"/>
+        </spawn>
+        <spawn npc_id="203751" respawn_time="295">
+            <spot x="2639.1643" y="209.05585" z="117.79796" h="63"/>
+        </spawn>
+        <spawn npc_id="203749" respawn_time="295">
+            <spot x="2638.871" y="210.64604" z="117.79796" h="63"/>
+        </spawn>
+        <spawn npc_id="798010" respawn_time="295">
+            <spot x="2638.56" y="212.33507" z="117.79796" h="63"/>
+        </spawn>
+        <spawn npc_id="203735" respawn_time="295">
+            <spot x="2638.2097" y="214.23415" z="117.79796" h="63"/>
+        </spawn>
+    </spawn_map>
+</spawns>
