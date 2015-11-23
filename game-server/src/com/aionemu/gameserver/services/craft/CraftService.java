@@ -106,9 +106,12 @@ public class CraftService {
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
 		player.setCraftingTask(new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0));
 
-		if (skillId == 40009)
+		if (skillId == 40009) {
 			player.getCraftingTask().setInterval(200);
-
+		} else {
+			int interval = 2500 - (skillLvlDiff * 60);
+			player.getCraftingTask().setInterval(interval < 1200 ? 1200 : interval);
+		}
 		player.getCraftingTask().start();
 	}
 
@@ -177,7 +180,7 @@ public class CraftService {
 
 	private static void sendCancelCraft(Player player, int skillId, int targetObjId, ItemTemplate itemTemplate) {
 
-		PacketSendUtility.sendPacket(player, new SM_CRAFT_UPDATE(skillId, itemTemplate, 0, 0, 4));
+		PacketSendUtility.sendPacket(player, new SM_CRAFT_UPDATE(skillId, itemTemplate, 0, 0, 4, 0 , 0));
 		PacketSendUtility.broadcastPacket(player, new SM_CRAFT_ANIMATION(player.getObjectId(), targetObjId, 0, 2), true);
 	}
 

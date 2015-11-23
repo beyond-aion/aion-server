@@ -6,6 +6,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Mr. Poke
+ * @modifed Yeats
  */
 public class SM_CRAFT_UPDATE extends AionServerPacket {
 
@@ -16,6 +17,7 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 	private int failure;
 	private int nameId;
 	private int executionSpeed;
+	private int delay = 1200;
 
 	/**
 	 * @param skillId
@@ -23,19 +25,21 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 	 * @param success
 	 * @param failure
 	 * @param action
+	 * @param executionSpeed
+	 * @param delay
 	 */
-	public SM_CRAFT_UPDATE(int skillId, ItemTemplate item, int success, int failure, int action) {
+	public SM_CRAFT_UPDATE(int skillId, ItemTemplate item, int success, int failure, int action, int executionSpeed, int delay) {
 		this.action = action;
 		this.skillId = skillId;
 		this.itemId = item.getTemplateId();
 		this.success = success;
 		this.failure = failure;
 		this.nameId = item.getNameId();
-
+		this.executionSpeed = executionSpeed;
 		if (skillId == 40009) {
-			this.executionSpeed = 1500;
+			this.delay = 1000;
 		} else {
-			this.executionSpeed = 700;
+			this.delay = delay;
 		}
 	}
 
@@ -50,54 +54,69 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 			{
 				writeD(success);
 				writeD(failure);
-				writeD(0);
-				writeD(1200); // timer??
-				writeD(1330048);
-				writeH(0x24); // 0x24
+				writeD(executionSpeed);
+				writeD(delay);//1200); 
+				writeD(1330048); //msgId
+				writeH(0x24); // 0x24 //decode or smth
 				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 1: // update
-			case 2: // crit
-			case 5: // sucess
+			case 1: // update (normal)
+			case 2: // crit (blue)
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);
-				writeD(1200);
+				writeD(delay);//1200);
+				writeD(0); //msgId
+				writeH(0);
 				writeD(0);
 				writeH(0);
 				break;
 			}
-			case 3: // crit
+			case 3: //crit
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(0);
-				writeD(1200);
-				writeD(1330048); // message
+				writeD(delay); //1200);
+				writeD(0);//1330048); // message
+				writeH(0x24);
+				writeD(0);//nameId);
+				writeH(0);
+				break;
+			}
+			case 4: //canceled
+			{
+				writeD(success);
+				writeD(failure);
+				writeD(executionSpeed);
+				writeD(delay);
+				writeD(1330051);
+				writeH(0);
+				writeD(0);
+				writeH(0);
+				break;
+			}
+			case 5: // sucess (end)
+			{
+				writeD(success);
+				writeD(failure);
+				writeD(executionSpeed);
+				writeD(delay);
+				writeD(1330049);
 				writeH(0x24);
 				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 4: // cancel
-			{
-				writeD(success);
-				writeD(failure);
-				writeD(0);
-				writeD(0);
-				writeD(1330051);
-				writeH(0);
-				break;
-			}
-			case 6: // failed
+			case 6: // failed (end)
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);
-				writeD(1200);
+				writeD(delay); //1200);
 				writeD(1330050);
 				writeH(0x24);
 				writeD(nameId);
@@ -107,8 +126,8 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 			case 7: {
 				writeD(success);
 				writeD(failure);
-				writeD(0);
-				writeD(1200);
+				writeD(executionSpeed);
+				writeD(delay); //1200);
 				writeD(1330050);
 				writeH(0x24);
 				writeD(nameId);
