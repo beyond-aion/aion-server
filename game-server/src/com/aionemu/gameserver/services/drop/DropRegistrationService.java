@@ -334,7 +334,7 @@ public class DropRegistrationService {
 					if (!rule.isFixedChance()) {
 						chance *= getRankModifier(npc) * getRatingModifier(npc);
 						if (!rule.getNoReduction())
-							chance *= boostDropRate;
+							chance *= dropChance;
 					}
 					// add drop rate multiplier
 					//float percent = chance * dropRate;
