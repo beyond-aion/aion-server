@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_CANCEL_1_BASIC;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_FAIL_1_BASIC;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_START_1_BASIC;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER;
 
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
@@ -11,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author ATracer, orz
+ * @modified Yeats
  */
 public class SM_GATHER_UPDATE extends AionServerPacket {
 
@@ -20,16 +22,30 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 	private int success;
 	private int failure;
 	private int nameId;
+	private int executionSpeed = 700;
+	private int delay = 1200;
 
-	public SM_GATHER_UPDATE(GatherableTemplate template, Material material, int success, int failure, int action) {
+	/**
+	 * 
+	 * @param template
+	 * @param material
+	 * @param success
+	 * @param failure
+	 * @param action
+	 * @param executionSpeed
+	 * @param delay
+	 */
+	public SM_GATHER_UPDATE(GatherableTemplate template, Material material, int success, int failure, int action, int executionSpeed, int delay) {
 		this.action = action;
 		this.template = template;
 		this.itemId = material.getItemid();
 		this.success = success;
 		this.failure = failure;
 		this.nameId = material.getNameid();
+		this.executionSpeed = executionSpeed;
+		this.delay = delay;
 	}
-
+	
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(template.getHarvestSkill());
@@ -37,57 +53,73 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 		writeD(itemId);
 
 		switch (action) {
-			case 0: {
-				writeD(template.getSuccessAdj());
-				writeD(template.getFailureAdj());
-				writeD(0);
-				writeD(1200); // timer??
-				writeD(STR_EXTRACT_GATHER_START_1_BASIC.getId());
-				writeH(0x24); // 0x24
-				writeD(nameId);
-				writeH(0); // 0x24
+			case 0: { //init
+				writeD(success);//template.getSuccessAdj()); //max 
+				writeD(failure);//template.getFailureAdj()); //max
+				writeD(executionSpeed); //executionSpeed
+				writeD(delay); //delay //1200); // timer??
+				writeD(STR_EXTRACT_GATHER_START_1_BASIC.getId()); //msgId
+				writeH(0x24); // 0x24 //decoding or smth
+				writeD(nameId); //nameId
+				writeH(0); // 0x24 //symbol or smth
 				break;
 			}
 			case 1: // For updates both for ground and aerial
 			case 2: // Light blue bar
 			case 3: // Purple bar
-			case 8: // Occupied by other player
 			{
 				writeD(success);
 				writeD(failure);
-				writeD(700);// unk timer??
-				writeD(1200); // unk timer??
-				writeD(0);
+				writeD(executionSpeed);//700);// unk timer??
+				writeD(delay);//1200); // unk timer??
+				writeD(0); //msg id
+				writeH(0); //decoding?
+				writeD(0); //nameId
 				writeH(0);
 				break;
 			}
 			case 5: {
 				writeD(success);
 				writeD(failure);
-				writeD(700);// unk timer??
-				writeD(1200); // unk timer??
+				writeD(executionSpeed);//700);// unk timer??
+				writeD(delay);//1200); // unk timer??
 				writeD(STR_EXTRACT_GATHER_CANCEL_1_BASIC.getId());
-				writeH(0);
+				writeH(0x24); //decoding or smth
+				writeD(0); //nameid
+				writeH(0); 
 				break;
 			}
-			case 6: { // the last update before success
-				writeD(template.getSuccessAdj());
+			case 6: { //success
+				writeD(success);//template.getSuccessAdj());
 				writeD(failure);
-				writeD(700); // unk timer??
-				writeD(1200); // unk timer??
-				writeD(0);
+				writeD(executionSpeed);//700); // unk timer??
+				writeD(delay);//1200); // unk timer??
+				writeD(1330078); //msg id //You have gathered %.
+				writeH(0x24); //decoding?
+				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 7: {
+			case 7: { //failure
 				writeD(success);
-				writeD(template.getFailureAdj());
-				writeD(0);
-				writeD(1200); // timer??
+				writeD(failure);//template.getFailureAdj());
+				writeD(executionSpeed);
+				writeD(delay);//1200); // timer??
 				writeD(STR_EXTRACT_GATHER_FAIL_1_BASIC.getId());
 				writeH(0x24); // 0x24
 				writeD(nameId);
 				writeH(0); // 0x24
+				break;
+			}
+			case 8: { //Occupied by another player
+				writeD(success);
+				writeD(failure);
+				writeD(executionSpeed);
+				writeD(delay);
+				writeD(STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER.getId());
+				writeH(0);
+				writeD(0);
+				writeH(0);
 				break;
 			}
 		}
