@@ -2939,7 +2939,7 @@
 		</spawn>
 		<!-- Fafner -->
 		<spawn npc_id="802053" respawn_time="295">
-			<spot x="1905.6372" y="1912.902" z="596.98956" h="40"/>
+			<spot x="1571.6" y="2461.1" z="653.17" h="61"/>
 		</spawn>
 		<!-- Fang Troll Hunter -->
 		<spawn npc_id="213211" respawn_time="295">
