@@ -135,7 +135,7 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 		
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get(1, 100) > Math.round((CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3));
+		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3);
 		
 		if (success) {
 			int critChance = Rnd.get(1, 100);
