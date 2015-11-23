@@ -297,8 +297,8 @@
 		<spawn npc_id="214660">
 			<spot x="648.28" y="212.35" z="166.04839" h="49" walker_id="685610B35229698A605911DE4FA340234DF669CB"/>
 		</spawn>
-		<!-- Hidden Escape Exit -->
-		<spawn npc_id="730206">
+		<!-- Theobomos Lab Exit -->
+		<spawn npc_id="730168">
 			<spot x="477.62" y="196.8" z="170.132" h="106" static_id="74"/>
 		</spawn>
 		<!-- Icy Kalgolem -->

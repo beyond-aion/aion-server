@@ -62,8 +62,8 @@
 	<!-- Alquimia Research Center -->
 	<instance_exit instance_id="320110000" exit_world="220040000" race="ASMODIANS" x="2209.6526" y="2926.3257" z="699.80756"/>
 	<!-- Theobomos Lab -->
-	<instance_exit instance_id="310110000" exit_world="210060000" race="ELYOS" x="2978.09" y="193.51" z="172.14"/>
-	<instance_exit instance_id="310110000" exit_world="220050000" race="ASMODIANS" x="1427.5475" y="2037.9175" z="51.5"/>
+	<instance_exit instance_id="310110000" exit_world="210060000" race="ELYOS" x="2675.8037" y="820.8912" z="138.36"/>
+	<instance_exit instance_id="310110000" exit_world="220050000" race="ASMODIANS" x="1540.615" y="389.8516" z="231.212"/>
 	<!-- Adma Stronghold -->
 	<instance_exit instance_id="320130000" exit_world="210060000" race="ELYOS" x="2248.0725" y="2289.3433" z="51.385"/>
 	<instance_exit instance_id="320130000" exit_world="220050000" race="ASMODIANS" x="2343.4673" y="159.91887" z="246.448"/>

@@ -8,11 +8,31 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public abstract class AbstractCraftTask extends AbstractInteractionTask {
 
-	protected int completeValue = 100;
+	protected int completeValue = 1000;
 	protected int currentSuccessValue;
 	protected int currentFailureValue;
 	protected int skillLvlDiff;
-
+	protected CraftType craftType = CraftType.NORMAL;
+	
+	protected enum CraftType {
+		NORMAL(1), 
+		CRIT_BLUE(2), 
+		CRIT_PURPLE(3);
+		
+		private int critId;
+		
+		private CraftType(int critId) {
+			this.critId = critId;			
+		}
+		public int getCritId() {
+			return critId;
+		}
+		
+		public int getPacketId() {
+			return critId;
+		}
+	}
+	
 	/**
 	 * @param requestor
 	 * @param responder

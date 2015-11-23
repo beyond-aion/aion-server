@@ -3,7 +3,6 @@ package instance;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -25,17 +24,18 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		if (isInstanceDestroyed)
 			return;
-		Creature master = npc.getMaster();
-		if (master instanceof Player)
+
+		if (npc.getMaster() instanceof Player)
 			return;
 
-		int npcId = npc.getNpcId();
-		switch (npcId) {
+		switch (npc.getNpcId()) {
+			case 214669: // Triroan
+				spawn(730178, 571.15f, 490.6607f, 196.7324f, (byte) 60);
+				break;
 			case 280971:
-			case 280972: {
+			case 280972:
 				if (guardDie(npc))
 					removeBuff();
-			}
 		}
 	}
 
@@ -44,7 +44,6 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 	 *           qs.getStatus() == QuestStatus.COMPLETE) doors.get(37).setOpen(true); else doors.get(37).setOpen(false); }//this door is static door, so
 	 *           we cant control it.
 	 */
-
 	@Override
 	public void onInstanceDestroy() {
 		isDead1 = false;

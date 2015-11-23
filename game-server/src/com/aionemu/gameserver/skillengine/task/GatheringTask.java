@@ -2,14 +2,12 @@ package com.aionemu.gameserver.skillengine.task;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -20,20 +18,25 @@ public class GatheringTask extends AbstractCraftTask {
 
 	private GatherableTemplate template;
 	private Material material;
-	private int barType = 1;
+	//private int barType = 1;
+	private int showBarDelay = 1000;
+	private int executionSpeed = 900;
 
 	public GatheringTask(Player requestor, Gatherable gatherable, Material material, int skillLvlDiff) {
 		super(requestor, gatherable, skillLvlDiff);
 		this.template = gatherable.getObjectTemplate();
 		this.material = material;
 		this.delay = Rnd.get(200, 600);
-		this.interval = 1850;
+		//this.interval = 1850;
+		int gatherInterval = 2500 - (skillLvlDiff * 60);
+		this.interval = gatherInterval < 1200 ? 1200 : gatherInterval;
 	}
 
 	@Override
 	protected void onInteractionAbort() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 4));
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 5));
+		//PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 4));
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 4));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 5, 0, 0));
 	}
 
 	@Override
@@ -43,29 +46,35 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionStart() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, completeValue, completeValue, 0, 0, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
 		// TODO: missing packet for initial failure/success
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 0), true);
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 1), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 1), true);
+		//PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 0), true);
+		//PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 1), true);
 	}
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, barType));
+		//PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, barType));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, this.craftType.getPacketId(), this.executionSpeed, this.showBarDelay));
 	}
 
 	@Override
 	protected void onFailureFinish() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 1));
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 7));
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 3), true);
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 1, 0, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 7, 0, 0));
+		//PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 3), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 3), true);
 	}
 
 	@Override
 	protected boolean onSuccessFinish() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 2), true);
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6));
-		PacketSendUtility.sendPacket(requestor, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_SUCCESS_1_BASIC(new DescriptionId(material.getNameid())));
+		//PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), 2), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 2), true);
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
+		//PacketSendUtility.sendPacket(requestor, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_SUCCESS_1_BASIC(new DescriptionId(material.getNameid())));
 		if (template.getEraseValue() > 0)
 			requestor.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
 		ItemService.addItem(requestor, material.getItemid(), requestor.getRates().getGatheringCountRate(), ItemService.DEFAULT_UPDATE_PREDICATE);
@@ -83,6 +92,65 @@ public class GatheringTask extends AbstractCraftTask {
 	 */
 	@Override
 	protected final void analyzeInteraction() {
+		//BEYOND AION CALCULATION
+		if (skillLvlDiff >= 41) {
+			currentSuccessValue = completeValue;
+			this.executionSpeed = 300;
+			this.showBarDelay = 500;
+			return;
+		} else if (skillLvlDiff < 0) {
+			currentFailureValue = completeValue;
+			return;
+		}
+		
+		int lvlDiff = skillLvlDiff <= 0 ? 1 : skillLvlDiff;
+		int maxFailureChance = ((int) (CraftConfig.MAX_GATHER_FAILURE_CHANCE -/* (skillLvlDiff/1.5) -*/ (skillLvlDiff/5)));
+		boolean success = Rnd.get(1, 100) <= maxFailureChance ? false : true;
+		
+		if (success) {
+			int critChance = Rnd.get(1, 100);
+			if (critChance <= (5 + getRnd(0, skillLvlDiff/5))) { //PURPLE CRIT = 100%
+				craftType = CraftType.CRIT_PURPLE;
+				currentSuccessValue = completeValue;
+				this.executionSpeed = 300;
+				this.showBarDelay = 500;
+				return;
+			} else if (critChance <= (15 + getRnd(0, skillLvlDiff/5))) { //LIGHT BLUE CRIT = +10%
+				craftType = CraftType.CRIT_BLUE;
+			} else {
+				craftType = CraftType.NORMAL;
+			}
+		} else {
+			craftType = CraftType.NORMAL;
+		}
+		
+		int minValue = 70;
+		if (success) {
+			int currentValue = (int) Math.round(((this.craftType.getCritId() == CraftType.CRIT_BLUE.getCritId() ? 100 : 0) + 10 * (getRnd(1+(lvlDiff/2.5), (lvlDiff/2.5) +3) + (lvlDiff/3))));
+			currentSuccessValue += (minValue + currentValue);
+		} else {
+			currentFailureValue += (int) Math.round(((minValue + (getRnd(7+(lvlDiff/3), 12+(lvlDiff/1.5)) * 10))));
+		}
+		
+		if (currentSuccessValue > completeValue) {
+			currentSuccessValue = completeValue;
+		} else if (currentFailureValue > completeValue) {
+			currentFailureValue = completeValue;
+		}
+		
+		int speed = 900 - (skillLvlDiff * 30);
+		this.executionSpeed = speed < 300 ? 300 : speed;
+		int showDelay = 1200 - (skillLvlDiff * 30);
+		this.showBarDelay = showDelay < 500 ? 500 : showDelay;
+		
+	}
+	
+	private int getRnd(double min, double max) {
+		return (int) Math.round((min + Math.floor(Rnd.nextDouble() * (max - min + 1))));
+	}
+	
+		//OLD AL 4.7.5 CALCULATION
+		/*
 		int easeLevel = skillLvlDiff / 10;
 		easeLevel += easeLevel < skillLvlDiff ? 1 : 0;
 
@@ -149,4 +217,5 @@ public class GatheringTask extends AbstractCraftTask {
 			currentFailureValue = completeValue;
 		}
 	}
+	*/
 }
