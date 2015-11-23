@@ -37,16 +37,16 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  * @reworked Estrayl
  */
 @InstanceID(301230000)
-public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
+public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
 	private AtomicBoolean isRaceSet = new AtomicBoolean(false);
 	public Map<Integer, StaticDoor> doors;
 	private List<Future<?>> spawnTasks = new FastTable<>();	
 	private Future<?> generatorCheckTask;
-	Future<?> wipeTask;
+	protected Future<?> wipeTask;
 	public boolean isInstanceDestroyed;
-	int wipeMsgProgress = 1402129;
-	byte wipeProgress = 0;
+	protected int wipeMsgProgress = 1402129;
+	protected byte wipeProgress = 0;
 	
 	protected int getBossId() {
 		return 233740;
@@ -141,7 +141,7 @@ public class TheIlluminaryObeliskInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				if (!isInstanceDestroyed)
+				if (isInstanceDestroyed)
 					return;
 				instance.doOnAllPlayers(new Visitor<Player>() {
 					@Override
