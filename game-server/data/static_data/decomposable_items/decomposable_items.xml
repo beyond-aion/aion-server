@@ -22760,7 +22760,26 @@
     <decomposable item_id="188052551" decomposable_name="Writhing Chaotic Aethercannon Box"/>
     <decomposable item_id="188052552" decomposable_name="Writhing Chaotic Aethercannon Box"/>
     <decomposable item_id="188052553" decomposable_name="[Event] Clever Café Bundle"/>
-    <decomposable item_id="188052554" decomposable_name="[Event] Beritra Idian Pouch"/>
+    <decomposable item_id="188052554" decomposable_name="[Event] Beritra Idian Pouch">
+		<items>
+			<item id="166050031" name="Esoteric Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050032" name="Esoteric Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050033" name="Esoteric Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050034" name="Esoteric Idian: Magical Defense"/>
+		</items>
+		<items>
+			<item id="166050035" name="Esoteric Idian: Assistance"/>
+		</items>
+		<items>
+			<item id="166050036" name="Esoteric Idian: Resistance"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052555" decomposable_name="[Event] Greater Composite Manastone Chest"/>
     <decomposable item_id="188052556" decomposable_name="Composite Manastone Bundle">
         <items chance="50.0">
