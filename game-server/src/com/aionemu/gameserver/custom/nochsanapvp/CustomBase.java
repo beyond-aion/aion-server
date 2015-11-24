@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.custom.nochsanapvp;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
@@ -13,12 +14,9 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
-import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
 /**
@@ -37,18 +35,25 @@ public class CustomBase implements Comparable<CustomBase> {
 	private boolean siegeBoss = false;
 	private boolean isTeleport = false;
 	private Npc target;
+	private int buffID;
+	private List<Npc> spawned = new LinkedList<Npc>();
 
-	public CustomBase(int id, NochsanaEvent ownerEvent, boolean siegeBoss, Race initialOwner) {
+	public CustomBase(int id, NochsanaEvent ownerEvent, boolean siegeBoss, Race initialOwner, int buffID) {
 		bossDeathListener = new CBaseDeathListener(this);
 		this.siegeBoss = siegeBoss;
 		this.owner = initialOwner;
 		this.id = id;
 		this.ownerEvent = ownerEvent;
+		this.buffID = buffID;
 		spawn();
 	}
 
 	public Npc getTarget() {
 		return target;
+	}
+	
+	public int getBuffId() {
+		return buffID;
 	}
 
 	public boolean isTeleport() {
@@ -56,7 +61,15 @@ public class CustomBase implements Comparable<CustomBase> {
 	}
 
 	public boolean isPreparingToSpawn() {
-		return bossRespawn != null;
+		if(this.bossRespawn == null) {
+			return false;
+		}
+		
+		if(this.bossRespawn.isCancelled()) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	protected void spawn() {
@@ -67,9 +80,9 @@ public class CustomBase implements Comparable<CustomBase> {
 					if (template.getHandlerType() != SpawnHandlerType.BOSS) {
 						Npc npc = (Npc) ownerEvent.spawnObject(template.getNpcId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 							template.getRespawnTime());
-						NpcTemplate npcTemplate = npc.getObjectTemplate();
-						changeNpcStats(npcTemplate, npc);
-						if (npcTemplate.getNpcTemplateType().equals(NpcTemplateType.FLAG)) {
+						spawned.add(npc);
+
+						if (template.getHandlerType() == SpawnHandlerType.FLAG) {
 							flag = npc;
 						}
 						if (template.getHandlerType() == SpawnHandlerType.MERCHANT) {
@@ -88,29 +101,6 @@ public class CustomBase implements Comparable<CustomBase> {
 		if (!siegeBoss) {
 			scheduleBossRespawn();
 		}
-
-	}
-
-	private int getNewValue(int value, Npc npc) {
-		return (value / npc.getLevel()) * ownerEvent.getNpcLevel(npc);
-	}
-
-	private void changeNpcStats(NpcTemplate template, Npc npc) {
-		NpcStatsTemplate stats = template.getStatsTemplate();
-		stats.setAccuracy(getNewValue((int) stats.getAccuracy(), npc));
-		stats.setBlock(getNewValue((int) stats.getBlock(), npc));
-		stats.setCrit(getNewValue((int) stats.getCrit(), npc));
-		stats.setEvasion(getNewValue((int) stats.getEvasion(), npc));
-		stats.setMaxHp(getNewValue((int) stats.getMaxHp(), npc));
-		stats.setMaxMp(getNewValue((int) stats.getMaxMp(), npc));
-		stats.setMaxXp(getNewValue((int) stats.getMaxXp(), npc));
-		stats.setMdef(getNewValue((int) stats.getMdef(), npc));
-		stats.setMresist(getNewValue((int) stats.getMresist(), npc));
-		stats.setParry(getNewValue((int) stats.getParry(), npc));
-		stats.setPdef(getNewValue((int) stats.getPdef(), npc));
-		stats.setPower(getNewValue((int) stats.getPower(), npc));
-
-		template.setLevel(ownerEvent.getNpcLevel(npc));
 
 	}
 
@@ -135,8 +125,6 @@ public class CustomBase implements Comparable<CustomBase> {
 							if (template.getHandlerType() != null && template.getHandlerType().equals(SpawnHandlerType.BOSS)) {
 								Npc npc = (Npc) ownerEvent.spawnObject(template.getNpcId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 									0);
-								NpcTemplate npcTemplate = npc.getObjectTemplate();
-								changeNpcStats(npcTemplate, npc);
 								boss = npc;
 								addBossListeners();
 							}
@@ -150,11 +138,19 @@ public class CustomBase implements Comparable<CustomBase> {
 		}, 30 * 1000);
 	}
 
-	protected void despawn() {
+	protected synchronized void despawn() {
 
 		if (!bossRespawn.isDone()) {
 			bossRespawn.cancel(false);
 		}
+		
+			for(Npc npc : spawned) {
+				if(npc != null) {
+					if(npc.getSpawn().getHandlerType() != null || npc.getRace() != owner) {
+						npc.getController().onDelete();
+					}
+				}
+			}
 
 		flag = null;
 
@@ -185,7 +181,7 @@ public class CustomBase implements Comparable<CustomBase> {
 			boss = null;
 			despawn();
 			this.owner = winner;
-			ownerEvent.announceAll(name + " of " + winner.name() + " Captured a Base");
+			ownerEvent.announceAll(name + " of " + winner.name() + " captured a Base");
 			ownerEvent.checkWorldCapture(this, winner);
 			ownerEvent.onBaseCapture(killer);
 			if (!siegeBoss) {
