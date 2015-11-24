@@ -96,7 +96,7 @@ public class GatheringTask extends AbstractCraftTask {
 		}
 		
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3);
+		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3f);
 		
 		if (success) {
 			int critChance = Rnd.get(1, 100);
