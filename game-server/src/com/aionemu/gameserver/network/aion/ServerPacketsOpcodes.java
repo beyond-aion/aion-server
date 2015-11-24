@@ -49,7 +49,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_PLAYER_STANCE.class, 0x1F, idSet);
 		addPacketOpcode(SM_PLAYER_INFO.class, 0x20, idSet);
 		addPacketOpcode(SM_CASTSPELL.class, 0x21, idSet);
-		addPacketOpcode(SM_GATHER_STATUS.class, 0x22, idSet);
+		addPacketOpcode(SM_GATHER_ANIMATION.class, 0x22, idSet);
 		addPacketOpcode(SM_GATHER_UPDATE.class, 0x23, idSet);
 		addPacketOpcode(SM_UPDATE_PLAYER_APPEARANCE.class, 0x24, idSet);
 		addPacketOpcode(SM_EMOTION.class, 0x25, idSet);
