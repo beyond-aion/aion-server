@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
@@ -39,9 +39,9 @@ public class EffectController {
 
 	private Creature owner;
 
-	protected Map<String, Effect> passiveEffectMap = new FastMap<String, Effect>().shared();
-	protected Map<String, Effect> noshowEffects = new FastMap<String, Effect>().shared();
-	protected Map<String, Effect> abnormalEffectMap = new FastMap<String, Effect>().shared();
+	protected Map<String, Effect> passiveEffectMap = new ConcurrentHashMap<>();
+	protected Map<String, Effect> noshowEffects = new ConcurrentHashMap<>();
+	protected Map<String, Effect> abnormalEffectMap = new ConcurrentHashMap<>();
 	private long abnormalMapUpdate;
 
 	private final Lock lock = new ReentrantLock();

@@ -3,8 +3,8 @@ package com.aionemu.gameserver.utils.audit;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastMap;
 import javolution.util.FastSet;
 
 import com.aionemu.commons.objects.filter.ObjectFilter;
@@ -28,7 +28,7 @@ public class GMService {
 		return SingletonHolder.instance;
 	}
 
-	private Map<Integer, Player> gms = new FastMap<Integer, Player>().shared();
+	private Map<Integer, Player> gms = new ConcurrentHashMap<>();
 	private Set<Byte> announceList;
 
 	private GMService() {

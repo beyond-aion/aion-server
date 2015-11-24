@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,7 +120,7 @@ public class World {
 					} else {
 						// We now have multi-threaded siege timers
 						// This should be thread-safe
-						npcs = new FastTable<SiegeNpc>().shared();
+						npcs = new CopyOnWriteArrayList<>();
 						localSiegeNpcs.put(siegeNpc.getSiegeId(), npcs);
 					}
 				}
