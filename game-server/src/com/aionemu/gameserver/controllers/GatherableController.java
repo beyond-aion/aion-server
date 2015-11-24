@@ -132,8 +132,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			task = new GatheringTask(player, getOwner(), curMaterial, skillLvlDiff);
 			task.start();
 		} else {
-			//PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER);
-			// dummy failure value, doesn't matter
+			// dummy failure, value doesn't matter
 			PacketSendUtility.sendPacket(player, new SM_GATHER_UPDATE(template, curMaterial, 0, 17, 8, 0 ,0));
 		}
 	}
