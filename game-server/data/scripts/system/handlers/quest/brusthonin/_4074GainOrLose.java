@@ -39,7 +39,6 @@ public class _4074GainOrLose extends QuestHandler {
 			if (targetId == 205181) { // Bonarunerk
 				if (dialog == DialogAction.EXCHANGE_COIN) {
 					if (QuestService.startQuest(env)) {
-						qs.setReward(-1);
 						return sendQuestDialog(env, 1011);
 					} else {
 						return sendQuestSelectionDialog(env);

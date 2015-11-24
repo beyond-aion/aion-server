@@ -17,12 +17,12 @@
 	<item_collecting id="16992" start_npc_ids="802048" end_npc_ids="801543"/>
 	<item_collecting id="26992" start_npc_ids="802049" end_npc_ids="801547"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="16991" start_npc_ids="802048" end_npc_ids="801543">
+	<monster_hunt id="16991" start_npc_ids="802048" end_npc_ids="804598">
 		<monster var="0" end_var="4" npc_ids="233720 233882 233722 233723 233724 233725 233726 233727"/>
 		<monster var="1" end_var="4" npc_ids="233728 233729 233730 233731 233732 233733 233734 233735"/>
 		<monster var="2" end_var="2" npc_ids="233736 233737 233738 233739"/>
 	</monster_hunt>
-	<monster_hunt id="26991" start_npc_ids="802049" end_npc_ids="801547">
+	<monster_hunt id="26991" start_npc_ids="802049" end_npc_ids="804599">
 		<monster var="0" end_var="4" npc_ids="233720 233882 233722 233723 233724 233725 233726 233727"/>
 		<monster var="1" end_var="4" npc_ids="233728 233729 233730 233731 233732 233733 233734 233735"/>
 		<monster var="2" end_var="2" npc_ids="233736 233737 233738 233739"/>
