@@ -2,8 +2,9 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_CANCEL_1_BASIC;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_FAIL_1_BASIC;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_START_1_BASIC;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_START_1_BASIC;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHER_SUCCESS_1_BASIC;
 
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
@@ -11,122 +12,77 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * This packet updates the players current gathering status / progress.
+ * 
  * @author ATracer, orz
- * @rework Yeats
+ * @rework Yeats, Neon
  */
 public class SM_GATHER_UPDATE extends AionServerPacket {
 
-	private GatherableTemplate template;
+	private int skillId;
 	private int action;
 	private int itemId;
 	private int success;
 	private int failure;
 	private int nameId;
-	private int executionSpeed = 700;
-	private int delay = 1200;
+	private int executionSpeed;
+	private int delay;
 
-	/**
-	 * 
-	 * @param template
-	 * @param material
-	 * @param success
-	 * @param failure
-	 * @param action
-	 * @param executionSpeed
-	 * @param delay
-	 */
 	public SM_GATHER_UPDATE(GatherableTemplate template, Material material, int success, int failure, int action, int executionSpeed, int delay) {
+		this.skillId = template.getHarvestSkill();
 		this.action = action;
-		this.template = template;
 		this.itemId = material.getItemid();
 		this.success = success;
 		this.failure = failure;
-		this.nameId = material.getNameid();
 		this.executionSpeed = executionSpeed;
 		this.delay = delay;
+		this.nameId = material.getNameid();
 	}
-	
+
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(template.getHarvestSkill());
+		writeH(skillId);
 		writeC(action);
 		writeD(itemId);
+		writeD(success);
+		writeD(failure);
+		writeD(executionSpeed);
+		writeD(delay);
 
 		switch (action) {
-			case 0: { //init
-				writeD(success); //max 
-				writeD(failure); //max
-				writeD(executionSpeed); //executionSpeed
-				writeD(delay); //delay
-				writeD(STR_EXTRACT_GATHER_START_1_BASIC.getId()); //msgId
-				writeH(0x24); //decoding or smth
-				writeD(nameId); //nameId
-				writeH(0); // 0x24, decoding/symbol or smth
+			case 0: // init
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_START_1_BASIC(null).getId());
 				break;
-			}
 			case 1: // For updates both for ground and aerial
 			case 2: // Light blue bar = +10%
 			case 3: // Purple bar = 100%
-			{
-				writeD(success);
-				writeD(failure);
-				writeD(executionSpeed);
-				writeD(delay);
-				writeD(0);
-				writeH(0); 
-				writeD(0); 
-				writeH(0);
+				writeSystemMsgInfo(0);
 				break;
-			}
-			case 5: //canceled
-			{
-				writeD(success);
-				writeD(failure);
-				writeD(executionSpeed);
-				writeD(delay);
-				writeD(STR_EXTRACT_GATHER_CANCEL_1_BASIC.getId());
-				writeH(0x24); 
-				writeD(0); 
-				writeH(0); 
+			case 5: // canceled
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_CANCEL_1_BASIC.getId());
 				break;
-			}
-			case 6: //success
-			{
-				writeD(success);
-				writeD(failure);
-				writeD(executionSpeed);
-				writeD(delay);
-				writeD(1330078); //You have gathered nameId.
-				writeH(0x24); 
-				writeD(nameId);
-				writeH(0);
+			case 6: // success
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_SUCCESS_1_BASIC(null).getId());
 				break;
-			}
-			case 7: //failure
-			{ 
-				writeD(success);
-				writeD(failure);
-				writeD(executionSpeed);
-				writeD(delay);
-				writeD(STR_EXTRACT_GATHER_FAIL_1_BASIC.getId());
-				writeH(0x24);
-				writeD(nameId);
-				writeH(0); 
+			case 7: // failure
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_FAIL_1_BASIC(null).getId());
 				break;
-			}
-			case 8: //occupied by another player
-			{
-				writeD(success);
-				writeD(failure);
-				writeD(executionSpeed);
-				writeD(delay);
-				writeD(STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER.getId());
-				writeH(0);
-				writeD(0);
-				writeH(0);
+			case 8: // occupied by another player
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER.getId());
 				break;
-			}
 		}
 	}
 
+	/**
+	 * Writes the system message information for the specified ID.<br>
+	 * The structure and contents are the same as in SM_SYSTEM_MESSAGE when sending a {@link com.aionemu.gameserver.model.DescriptionId DescriptionId}
+	 * 
+	 * @param msgId
+	 */
+	private void writeSystemMsgInfo(int msgId) {
+		writeD(msgId); // msgId
+		writeH(0x24); // decoding or smth
+		writeD(nameId); // nameId
+		writeH(0); // decoding/symbol or smth
+	}
 }
