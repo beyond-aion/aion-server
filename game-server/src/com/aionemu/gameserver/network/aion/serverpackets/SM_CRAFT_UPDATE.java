@@ -6,7 +6,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Mr. Poke
- * @modifed Yeats
+ * @rework Yeats
  */
 public class SM_CRAFT_UPDATE extends AionServerPacket {
 
@@ -52,38 +52,38 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 		switch (action) {
 			case 0: // init
 			{
-				writeD(success);
-				writeD(failure);
+				writeD(success); //max
+				writeD(failure); //max
 				writeD(executionSpeed);
-				writeD(delay);//1200); 
+				writeD(delay); //delay
 				writeD(1330048); //msgId
 				writeH(0x24); // 0x24 //decode or smth
-				writeD(nameId);
-				writeH(0);
+				writeD(nameId); //nameId of item
+				writeH(0); //decoding or symbol
 				break;
 			}
 			case 1: // update (normal)
-			case 2: // crit (blue)
+			case 2: // crit (blue) = +10%
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);
-				writeD(delay);//1200);
-				writeD(0); //msgId
+				writeD(delay);
+				writeD(0); 
 				writeH(0);
 				writeD(0);
 				writeH(0);
 				break;
 			}
-			case 3: //crit
+			case 3: //crit = proc
 			{
 				writeD(success);
 				writeD(failure);
 				writeD(0);
-				writeD(delay); //1200);
-				writeD(0);//1330048); // message
+				writeD(delay); 
+				writeD(0);
 				writeH(0x24);
-				writeD(0);//nameId);
+				writeD(0);
 				writeH(0);
 				break;
 			}
@@ -116,18 +116,19 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);
-				writeD(delay); //1200);
+				writeD(delay);
 				writeD(1330050);
 				writeH(0x24);
 				writeD(nameId);
 				writeH(0);
 				break;
 			}
-			case 7: {
+			case 7: //failure //never used?
+			{
 				writeD(success);
 				writeD(failure);
 				writeD(executionSpeed);
-				writeD(delay); //1200);
+				writeD(delay);
 				writeD(1330050);
 				writeH(0x24);
 				writeD(nameId);

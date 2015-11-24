@@ -99,18 +99,28 @@ public class CraftService {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
-
+		
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());
 
+		int intervalCap = 1200;
+		switch (itemTemplate.getItemQuality()) {				
+			case UNIQUE:
+			case EPIC:
+				intervalCap = 1500;
+				break;
+			case MYTHIC:
+				intervalCap = 1700;
+				break;
+		}
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
 		player.setCraftingTask(new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0));
-
+		
 		if (skillId == 40009) {
 			player.getCraftingTask().setInterval(200);
 		} else {
 			int interval = 2500 - (skillLvlDiff * 60);
-			player.getCraftingTask().setInterval(interval < 1200 ? 1200 : interval);
+			player.getCraftingTask().setInterval(interval < intervalCap ? intervalCap : interval);
 		}
 		player.getCraftingTask().start();
 	}
