@@ -38,7 +38,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Boss Belt (Legend)" base_chance="20">
+	<gd_rule rule_name="Boss Belt (Legend)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
@@ -57,7 +57,7 @@
 			<gd_item id="123000889" name="Tursin Leather Belt"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Boss Accessory (Legend)" base_chance="20">
+	<gd_rule rule_name="Boss Accessory (Legend)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210030000" name="Verteron"/>
 		</gd_maps>
