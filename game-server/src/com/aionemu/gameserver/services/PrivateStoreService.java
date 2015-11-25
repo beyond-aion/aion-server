@@ -3,8 +3,6 @@ package com.aionemu.gameserver.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -296,29 +294,10 @@ public class PrivateStoreService {
 	 * @param activePlayer
 	 */
 	public static void openPrivateStore(Player activePlayer, String name) {
-		final int senderRace = activePlayer.getRace().getRaceId();
 		final Player playerActive = activePlayer;
 		if (name != null) {
 			activePlayer.getStore().setStoreMessage(name);
-			if (CustomConfig.SPEAKING_BETWEEN_FACTIONS) {
-				PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true);
-			} else {
-				PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true,
-					new ObjectFilter<Player>() {
-
-						@Override
-						public boolean acceptObject(Player object) {
-							return ((senderRace == object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId())) || object.isGM());
-						}
-					});
-				PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), ""), false, new ObjectFilter<Player>() {
-
-					@Override
-					public boolean acceptObject(Player object) {
-						return senderRace != object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId()) && !object.isGM();
-					}
-				});
-			}
+			PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true);
 		} else {
 			PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), ""), true);
 		}
