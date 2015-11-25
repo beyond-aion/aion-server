@@ -11087,7 +11087,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can do the %0 quest only %1 times.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(String value0, String value1) {
+	public static SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(String value0, int value1) {
 		return new SM_SYSTEM_MESSAGE(1300600, value0, value1);
 	}
 

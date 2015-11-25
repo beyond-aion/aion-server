@@ -361,7 +361,7 @@ public final class QuestService {
 				return false;
 			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount()) {
 				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()+""));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
 				return false;
 			}
 		}
@@ -464,15 +464,9 @@ public final class QuestService {
 			if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
 				return false;
 
-			/*NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
-			if (faction == null) {
-				log.error("[QUEST_SERVICE] checkStartConditionsImpl() null for player " + player.getName() + ", for QuestID " + env.getQuestId());
+			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+			if (faction == null || !faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId()))
 				return false;
-			}
-			if (!faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId())) {
-				AuditLogger.info(player, "Possible packet hack to start NpcFaction quest " + ChatUtil.quest(env.getQuestId()) + ".");
-				return false;
-			} */
 		}
 
 		return true;
