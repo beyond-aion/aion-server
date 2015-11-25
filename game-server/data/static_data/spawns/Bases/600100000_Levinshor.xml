@@ -2912,7 +2912,7 @@
 				</spawn>
 				
 				<!-- Denku Feralclaw -->
-				<spawn npc_id="2353782" handler="OUTRIDER" respawn_time="295">
+				<spawn npc_id="235378" handler="OUTRIDER" respawn_time="295">
 					<spot x="822.5720" y="1034.7391" z="330.67120"/>
 					<spot x="840.9554" y="1103.4373" z="338.48660"/>
 					<spot x="922.3542" y="1113.4689" z="330.70572" h="40"/>
