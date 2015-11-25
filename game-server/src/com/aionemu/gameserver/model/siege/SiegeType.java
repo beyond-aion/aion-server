@@ -5,26 +5,15 @@ package com.aionemu.gameserver.model.siege;
  */
 public enum SiegeType {
 	// Standard
-	FORTRESS(0),
-	ARTIFACT(1),
+	FORTRESS,
+	ARTIFACT,
 
-	// Balauria Commanders?
-	BOSSRAID_LIGHT(2),
-	BOSSRAID_DARK(3),
+	VEILLE,
+	MASTARIUS,
+	AGENT_FIGHT,
 
 	// Unk
-	INDUN(4),
-	UNDERPASS(5),
-	SOURCE(6);
-
-	private int typeId;
-
-	private SiegeType(int id) {
-		this.typeId = id;
-	}
-
-	public int getTypeId() {
-		return this.typeId;
-	}
-
+	INDUN,
+	UNDERPASS,
+	SOURCE;
 }

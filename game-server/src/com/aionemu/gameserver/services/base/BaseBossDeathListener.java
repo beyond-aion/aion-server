@@ -41,7 +41,7 @@ public class BaseBossDeathListener extends OnDieEventListener {
 		else
 			base.setLocRace(Race.NPC);
 
-		BaseService.getInstance().capture(base.getId());
+		BaseService.getInstance().capture(base.getId(), null); //TODO: Improve me!
 	}
 
 	@Override

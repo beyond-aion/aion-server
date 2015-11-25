@@ -36260,6 +36260,20 @@
 		<npcskill skillid="21532" skilllevel="1" probability="25"/>
 		<npcskill skillid="21533" skilllevel="1" probability="25"/>
 	</npcskills>
+	<npcskills npcid="235064">
+		<npcskill skillid="21773" skilllevel="65" probability="50" cooldown="20000" maxhp="95"/>
+		<npcskill skillid="21774" skilllevel="65" probability="50" cooldown="40000" maxhp="95"/>
+		<npcskill skillid="21775" skilllevel="65" probability="50" cooldown="60000" maxhp="95"/>
+		<npcskill skillid="21776" skilllevel="65" probability="50" cooldown="50000" maxhp="95"/>
+		<npcskill skillid="21777" skilllevel="65" probability="50" cooldown="90000" maxhp="50"/>
+	</npcskills>
+	<npcskills npcid="235065">
+		<npcskill skillid="21773" skilllevel="65" probability="50" cooldown="20000" maxhp="95"/>
+		<npcskill skillid="21774" skilllevel="65" probability="50" cooldown="40000" maxhp="95"/>
+		<npcskill skillid="21775" skilllevel="65" probability="50" cooldown="60000" maxhp="95"/>
+		<npcskill skillid="21776" skilllevel="65" probability="50" cooldown="50000" maxhp="95"/>
+		<npcskill skillid="21777" skilllevel="65" probability="50" cooldown="90000" maxhp="50"/>
+	</npcskills>
     <npcskills npcid="251001">
         <npcskill skillid="17829" skilllevel="42" probability="25"/>
         <npcskill skillid="17830" skilllevel="42" probability="25"/>

@@ -86,7 +86,7 @@ public class BaseCommand extends AdminCommand {
 		Base<?> base = BaseService.getInstance().getActiveBase(baseId);
 		if (base != null) {
 			base.setLocRace(race);
-			BaseService.getInstance().capture(baseId);
+			BaseService.getInstance().capture(baseId, null);
 		}		
 	}
 

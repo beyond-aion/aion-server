@@ -62,10 +62,6 @@ public abstract class Siege<SL extends SiegeLocation> {
 		}
 
 		onSiegeStart();
-		// Check for Balaur Assault
-		if (SiegeConfig.BALAUR_AUTO_ASSAULT) {
-			BalaurAssaultService.getInstance().onSiegeStart(this);
-		}
 	}
 
 	public final void startSiege(int locationId) {
