@@ -257,6 +257,7 @@ public class GameServer {
 		TemporarySpawnEngine.spawnAll();
 		if (SiegeConfig.SIEGE_ENABLED)
 			ShieldService.getInstance().spawnAll();
+		FlyRingService.getInstance();
 
 		ConsoleUtil.printSection("Limits");
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
@@ -301,12 +302,12 @@ public class GameServer {
 		ExchangeService.getInstance();
 		PeriodicSaveService.getInstance();
 		AtreianPassportService.getInstance();
+		WebshopService.getInstance();
 
 		if (AIConfig.SHOUTS_ENABLE)
 			NpcShoutsService.getInstance();
 		InstanceService.load();
 
-		FlyRingService.getInstance();
 		if (!GeoDataConfig.GEO_MATERIALS_ENABLE)
 			CuringZoneService.getInstance();
 		RoadService.getInstance();
@@ -323,7 +324,11 @@ public class GameServer {
 		if (EventsConfig.ENABLE_EVENT_SERVICE)
 			EventService.getInstance().start();
 
+		ConsoleUtil.printSection("Access Management");
 		AdminService.getInstance();
+		CommandsAccessService.getInstance();
+
+		ConsoleUtil.printSection("Player Transfers");
 		PlayerTransferService.getInstance();
 
 		ConsoleUtil.printSection("Housing");
@@ -332,8 +337,6 @@ public class GameServer {
 		TownService.getInstance();
 		ChallengeTaskService.getInstance();
 
-		CommandsAccessService.getInstance();
-		WebshopService.getInstance();
 		System.gc();
 
 		ConsoleUtil.printSection("System Info");
