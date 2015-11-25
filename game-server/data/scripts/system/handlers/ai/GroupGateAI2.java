@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -74,13 +73,6 @@ public class GroupGateAI2 extends NpcAI2 {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		getOwner().setVisualState(CreatureVisualState.HIDE10);
-	}
-
-	@Override
 	protected void handleDialogFinish(Player player) {
 	}
-
 }
