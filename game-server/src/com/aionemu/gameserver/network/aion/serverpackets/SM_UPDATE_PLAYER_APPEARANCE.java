@@ -28,17 +28,13 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 
 		int mask = 0;
 		for (Item item : items) {
-			if (item.getItemTemplate().isTwoHandWeapon()) {
-				ItemSlot[] slots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
-				if (slots.length > 0) {
-					mask |= slots[0].getSlotIdMask();
-				}
-			} else {
-				mask |= item.getEquipmentSlot();
-			}
+			mask |= item.getEquipmentSlot();
+			// remove sub hand mask bits (sub hand is present on TwoHandeds by default and would produce display bugs)
+			if (ItemSlot.isTwoHandedWeapon(item.getEquipmentSlot()))
+				mask &= ~(ItemSlot.SUB_HAND.getSlotIdMask() | ItemSlot.SUB_OFF_HAND.getSlotIdMask());
 		}
-		writeD(mask);
 
+		writeD(mask);
 		for (Item item : items) {
 			writeD(item.getItemSkinTemplate().getTemplateId());
 			GodStone godStone = item.getGodStone();
