@@ -14547,7 +14547,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have started gathering %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_START_1_BASIC = new SM_SYSTEM_MESSAGE(1330077);
+	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_START_1_BASIC(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1330077, descriptionId);
+	}
 
 	/**
 	 * You have gathered %0.
@@ -14559,7 +14561,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have failed to gather %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_FAIL_1_BASIC = new SM_SYSTEM_MESSAGE(1330079);
+	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_FAIL_1_BASIC(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1330079, descriptionId);
+	}
 
 	/**
 	 * You have stopped gathering.

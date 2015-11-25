@@ -1,20 +1,15 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
-import com.aionemu.gameserver.model.templates.quest.Rewards;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Balthazar
+ * @modified Pad
  */
 
 public class _3096ExamineTheExtractionDevices extends QuestHandler {
@@ -64,32 +59,13 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 				case 798225: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
-							long itemCount1 = player.getInventory().getItemCountByItemId(182208067);
-							long itemCount2 = player.getInventory().getItemCountByItemId(182208068);
-							long itemCount3 = player.getInventory().getItemCountByItemId(182208069);
-							long itemCount4 = player.getInventory().getItemCountByItemId(182208070);
-							if (itemCount1 >= 1 && itemCount2 >= 1 && itemCount3 >= 1 && itemCount4 >= 1) {
-								return sendQuestDialog(env, 5);
-							}
+							return sendQuestDialog(env, 2375);
 						}
-						case SELECTED_QUEST_NOREWARD: {
-							qs.setStatus(QuestStatus.COMPLETE);
-							qs.setCompleteCount(qs.getCompleteCount() + 1);
-							removeQuestItem(env, 182208067, 1);
-							removeQuestItem(env, 182208068, 1);
-							removeQuestItem(env, 182208069, 1);
-							removeQuestItem(env, 182208070, 1);
-							Rewards rewards = DataManager.QUEST_DATA.getQuestById(questId).getRewards().get(0);
-							int rewardExp = rewards.getExp();
-							int rewardKinah = (int) (player.getRates().getQuestKinahRate() * rewards.getGold());
-							giveQuestItem(env, 182400001, rewardKinah);
-							player.getCommonData().addExp(rewardExp, RewardType.QUEST);
-							PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE, 2, 0));
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-							updateQuestStatus(env);
-							return true;
+						case CHECK_USER_HAS_QUEST_ITEM: {
+							return checkQuestItems(env, 0, 1, true, 5, 2716);
 						}
 					}
+					return false;
 				}
 				case 700423: {
 					switch (env.getDialog()) {
@@ -99,6 +75,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700424: {
 					switch (env.getDialog()) {
@@ -108,6 +85,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700425: {
 					switch (env.getDialog()) {
@@ -117,6 +95,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700426: {
 					switch (env.getDialog()) {
@@ -126,7 +105,14 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
+			}
+			return false;
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 798225) {
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

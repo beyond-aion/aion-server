@@ -13,12 +13,12 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HTMLService;
@@ -46,10 +46,10 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	};
 
 	private boolean firstBlood = false;
-	private byte npcLevelAsmo, npcLevelEly;
 	protected GameEventType gameEventType = null;
 	protected EventStage currentStage = EventStage.IDLE;
 	protected long openTime = 0;
+	protected Race defender;
 
 	public GameEvent() {
 		super();
@@ -67,6 +67,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 
 	@Override
 	public void onPlayerLogOut(Player player) {
+		player.getEffectController().removeAllEffects();
 		TeleportService2.teleportToCapital(player);
 		unregisterParticipant(player);
 		tryDestroyInstance();
@@ -80,9 +81,13 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	
 	@Override
 	public void onLeaveInstance(Player player) {
+		player.getEffectController().removeAllEffects();
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_STANCE(player, 0));
 		unregisterParticipant(player);
-		PacketSendUtility.sendMessage(player, "You left during an Event.\n Please note"
-			+ " that your Teammates Need you and we will keep track of your amount of leaves.");
+		if(currentStage != EventStage.AFTER_END) {
+			PacketSendUtility.sendMessage(player, "You left during an Event.\n Please note"
+				+ " that your Teammates Need you and we will keep track of your amount of leaves.");
+		}		
 		BattleService.getInstance().unregisterPlayer(player);
 		tryDestroyInstance();
 	}
@@ -94,12 +99,13 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	@Override
 	public void onInstanceCreate(WorldMapInstance in) {
 		super.onInstanceCreate(in);
-		currentStage = EventStage.WAITING;
 	}
 
 	@Override
 	public void onEnterInstance(Player player) {
+		player.getEffectController().removeAllEffects();
 		if (currentStage == EventStage.WAITING) {
+			PacketSendUtility.sendPacket(player, new SM_PLAYER_STANCE(player, 2));
 			long time = (openTime - System.currentTimeMillis());
 			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, (int) (time / 1000)));
 			BattleService.sendBattleNotice(player, "Welcome to the Nochsana Battlegrounds");
@@ -116,7 +122,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		this.announceAll("# V I C T O R Y #", "Beyond Aion", winningRace);
 		this.announceAll("# D E F E A T #", "Beyond Aion", looser);
 
-		String text = "Thank you for participating in the Tests for our Nochsana Battlegrounds feature."
+		String text = "Thank you for participating in the Tests for our Event features."
 			+ " \n Even tought there is still a lot of work to do, we want to reward your help with some items. \n"
 			+ " Keep going! \n The Beyond Aion Team";
 
@@ -128,7 +134,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			Player p = iter.next();
 			TeleportService2.teleportTo(p, statistics.get(p).getOrigin());
 			if (BattleService.getInstance().getRewardId() != 0) {
-				SystemMailService.getInstance().sendMail("Beyond Aion", p.getName(), "Nochsana Battleground", text,
+				SystemMailService.getInstance().sendMail("Beyond Aion", p.getName(), "Reward for Participating", text,
 					BattleService.getInstance().getRewardId(), 1, 0, LetterType.NORMAL);
 			}
 		}
@@ -136,6 +142,9 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 
 	@Override
 	public boolean onReviveEvent(Player player) {
+		if(this.currentStage == EventStage.AFTER_END) {
+			return false;
+		}
 		Point3D respawn = this.getSpawn(player);
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
@@ -147,16 +156,27 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-
+		Player killer = null;
 		if (lastAttacker instanceof Player) {
-			Player killer = (Player) lastAttacker;
+			killer = (Player) lastAttacker;
+		} else {
+			if(player.getAggroList().getMostPlayerDamage() != null) {
+				killer = player.getAggroList().getMostPlayerDamage();
+			}		
+		}
+		
+		if(killer != null) {
 			statistics.get(killer).addKill();
 			announceAll(killer.getName() + " has slain " + player.getName(), statistics.get(killer).getStreakName());
+			
 			if (!this.firstBlood) {
 				announceAll(killer.getName() + " of " + killer.getRace().name() + " has drawn FIRST BLOOD");
 				this.firstBlood = true;
 			}
+		} else {
+			announceAll(player.getName() + " was EXECUTED");
 		}
+	
 		statistics.get(player).addDeath();
 		PacketSendUtility.broadcastPacket(player,
 			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
@@ -194,6 +214,12 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			PacketSendUtility.sendPacket(participant, new SM_QUEST_ACTION(0, seconds));
 		}
 	}
+	
+	public synchronized void sendMajorTimer(int seconds) {
+		for (Player participant : participants) {
+			PacketSendUtility.sendPacket(participant, new SM_QUEST_ACTION(-1, seconds));
+		}
+	}
 
 	public VisibleObject spawnObject(int npcId, float x, float y, float z, byte heading, int respawnTime) {
 		return super.spawn(npcId, x, y, z, heading);
@@ -207,7 +233,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		if (getPlayerByRace(player.getRace()).size() < gameEventType.getMaxPlayerPerRace()) {
 			participants.add(player);
 
-			if (currentStage == EventStage.WAITING) {
+			if (currentStage == EventStage.IDLE) {
 				checkStartConditions();
 			} else {
 				teleportPlayersIn(0);
@@ -218,44 +244,14 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		return false;
 	}
 
-	public byte calcNpcLevel(Race enemyRace) {
-		byte counter = 0;
-		byte level = 0;
-
-		for (Player p : getPlayerByRace(enemyRace)) {
-			counter++;
-			level = (byte) (level + p.getLevel());
-		}
-
-		if (counter == 0 || level == 0) {
-			return 10;
-		}
-
-		byte result = (byte) (level / counter);
-
-		if (result < 10) {
-			return 40;
-		}
-
-		return result;
-	}
-
-	public byte getNpcLevel(Npc npc) {
-
-		if (npc.getRace() == Race.ASMODIANS || npc.getRace() == Race.GCHIEF_DARK) {
-			return npcLevelAsmo;
-		} else {
-			return npcLevelEly;
-		}
-	}
-
 	private void checkStartConditions() {
-		if (participants.size() >= 4) {//if (participants.size() == gameEventType.getMaxPlayerPerRace() * 2) {
-			announceAll("Your Event is going to start within the next few seconds. Get out of Fight and prepare for the Teleport.");
+		if (participants.size() >= gameEventType.getMaxPlayerPerRace() * 2)  {
+		if(currentStage != EventStage.WAITING) {
+			currentStage = EventStage.WAITING;
 			scheduleGameStart();
-
+		}
+		announceAll("Your Event is going to start within the next few seconds. Get out of Fight and prepare for the Teleport.");
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
 				@Override
 				public void run() {
 					teleportPlayersIn(0);
@@ -264,7 +260,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		}
 	}
 
-	private List<Player> getMissingPlayers() {
+	private synchronized List<Player> getMissingPlayers() {
 		List<Player> missing = new LinkedList<Player>();
 
 		for (Player player : participants) {
@@ -320,17 +316,24 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 				startGame();
 			}
 		}, 40 * 1000);
+		
+		if(this.getPlayerByRace(Race.ELYOS).size() < this.getPlayerByRace(Race.ASMODIANS).size()) {
+			this.defender = Race.ELYOS;
+		} else {
+			this.defender= Race.ASMODIANS;
+		}
 
 	}
 
 	public void startGame() {
 		this.currentStage = EventStage.STARTING;
-		this.npcLevelAsmo = this.calcNpcLevel(Race.ELYOS);
-		this.npcLevelEly = this.calcNpcLevel(Race.ASMODIANS);
+		for(Player player : participants) {
+			PacketSendUtility.sendPacket(player, new SM_PLAYER_STANCE(player, 0));
+		}
 		handleGameStart();
 	}
 
-	private synchronized List<Player> getPlayerByRace(Race race) {
+	protected synchronized List<Player> getPlayerByRace(Race race) {
 		List<Player> result = new LinkedList<Player>();
 		for (Player p : participants) {
 			if (p.getRace() == race) {
@@ -344,11 +347,11 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		int difference = participants.size() - getPlayerByRace(race).size();
 		switch (currentStage) {
 			case IDLE:
-				return 50;
+				return 0;
 			case WAITING:
-				return 60 + difference;
+				return 1 + difference;
 			case STARTING:
-				return 50 + difference;
+				return 2 + difference;
 			case LATE:
 				return 40 + difference;
 			default:

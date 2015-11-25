@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_UPDATE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -33,7 +33,7 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionAbort() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 4));
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 4));
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 5, 0, 0));
 	}
 
@@ -47,8 +47,8 @@ public class GatheringTask extends AbstractCraftTask {
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, completeValue, completeValue, 0, 0, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
 		// TODO: missing packet for initial failure/success
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 1), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 1), true);
 	}
 
 	@Override
@@ -60,12 +60,12 @@ public class GatheringTask extends AbstractCraftTask {
 	protected void onFailureFinish() {
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 1, 0, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 7, 0, 0));
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 3), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 3), true);
 	}
 
 	@Override
 	protected boolean onSuccessFinish() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_STATUS(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 2), true);
+		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 2), true);
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
 		if (template.getEraseValue() > 0)
 			requestor.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
@@ -96,8 +96,7 @@ public class GatheringTask extends AbstractCraftTask {
 		}
 		
 		float multi = Rnd.get() + 1f;
-		int maxFailureChance =  Math.round((CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3));
-		boolean success = Rnd.get(1, 100) <= maxFailureChance ? false : true;
+		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3f);
 		
 		if (success) {
 			int critChance = Rnd.get(1, 100);

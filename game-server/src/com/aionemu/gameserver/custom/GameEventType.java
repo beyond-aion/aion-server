@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 public enum GameEventType {
 
-	EVENT_1(NochsanaEvent.class, 6, "Nochsana Battlegrounds");
+	EVENT_1(NochsanaEvent.class, 6, "Battle for Nochsana");
 
 	private final Class<? extends GameEvent> eventClazz;
 	private final int playersPerRace;

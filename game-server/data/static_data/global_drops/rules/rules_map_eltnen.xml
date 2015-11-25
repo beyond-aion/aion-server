@@ -399,6 +399,136 @@
 			<gd_item id="102100255" name="Tukroll's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211679" name="Moomba the Earthshaker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900149" name="Moomba's Greatsword"/>
+			<gd_item id="100500154" name="Moomba's Jewel"/>
+			<gd_item id="101700165" name="Moomba's Longbow"/>
+			<gd_item id="101300146" name="Moomba's Spear"/>
+			<gd_item id="101500155" name="Moomba's Staff"/>
+			<gd_item id="101900273" name="Moomba's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211702" name="Highpriest Rhipel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100144" name="Rhipel's Warhammer"/>
+			<gd_item id="101500156" name="Rhipel's Staff"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211703" name="Commander Xenon"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000230" name="Xenon's Sword"/>
+			<gd_item id="102100256" name="Xenon's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211705" name="Highmage Wyron"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500155" name="Wyrons Kugel"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211704" name="Spiritmaster Shapiel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100600168" name="Shapiel's Tome"/>
+			<gd_item id="102000284" name="Shapiel's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211710" name="Spiritmaster Czubarto"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500156" name="Czubarto's Orb"/>
+			<gd_item id="100600169" name="Czubarto's Tome"/>
+			<gd_item id="102000285" name="Czubarto's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211711" name="Bladeclaw"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000231" name="Bladeclaw's Claw"/>
+			<gd_item id="100200248" name="Bladeclaw's Fang"/>
+			<gd_item id="101800273" name="Bladeclaw's Pistol"/>
+			<gd_item id="101900275" name="Bladeclaw's Aethercannon"/>
+			<gd_item id="101700167" name="Bladeclaw's Longbow"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211712" name="Sartemon the Insane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101300148" name="Sartemon's Spear"/>
+			<gd_item id="100900151" name="Sartemon's Greatsword"/>
+			<gd_item id="102100257" name="Bladeclaw's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211713" name="Millennium Laupede"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100145" name="Laupede's Pincers"/>
+			<gd_item id="101500157" name="Laupede's Leg"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211727" name="Lekion"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200247" name="Lekion's Dagger"/>
+			<gd_item id="101700166" name="Lekion's Longbow"/>
+			<gd_item id="101800272" name="Lekion's Pistol"/>
+			<gd_item id="101900274" name="Lekion's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" base_chance="33">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -497,6 +627,41 @@
 			<gd_item id="102100258" name="Andre's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211700" name="Summoner Klacha"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200240" name="Klacha's Dagger"/>
+			<gd_item id="100000224" name="Klacha's Sword"/>
+			<gd_item id="100100138" name="Klacha's Warhammer"/>
+			<gd_item id="100900145" name="Klacha's Greatsword"/>
+			<gd_item id="100500148" name="Klacha's Jewel"/>
+			<gd_item id="101700160" name="Klacha's Longbow"/>
+			<gd_item id="101300141" name="Klacha's Spear"/>
+			<gd_item id="101500150" name="Klacha's Staff"/>
+			<gd_item id="100600163" name="Klacha's Tome"/>
+			<gd_item id="101800266" name="Klacha's Pistol"/>
+			<gd_item id="101900268" name="Klacha's Aethercannon"/>
+			<gd_item id="102000279" name="Klacha's Harp"/>
+			<gd_item id="102100250" name="Klacha's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100600171" name="Taran's Tome"/>
+			<gd_item id="102000287" name="Kraterr's Harp"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -508,6 +673,17 @@
 			<gd_item id="100900153" name="Saendukal's Anger"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500159" name="Kraterr's Heart"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Shield (Rare)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -517,6 +693,39 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115000398" name="Iceheart Queen's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211675" name="Razorjaw"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000396" name="Razorjaw's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211703" name="Commander Xenon"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000400" name="Xenon's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211714" name="Chieftain Mamaku"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000401" name="Mamaku's Shield"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="2">
@@ -539,6 +748,17 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115000397" name="Snaggletooth's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211712" name="Sartemon the Insane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000402" name="Sartemon's Shield"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="33">
@@ -583,6 +803,104 @@
 			<gd_item id="113600386" name="Iceheart's Greaves"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211702" name="Highpriest Rhipel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100433" name="Vizier's Tunic"/>
+			<gd_item id="110300391" name="Vaegir's Jerkin"/>
+			<gd_item id="110500422" name="Seeker Hauberk"/>
+			<gd_item id="110600419" name="Commander's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211703" name="Commander Xenon"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100366" name="Vizier's Leggings"/>
+			<gd_item id="113300380" name="Vaegir's Breeches"/>
+			<gd_item id="113500405" name="Seeker's Chausses"/>
+			<gd_item id="113600389" name="Commander's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211704" name="Spiritmaster Shapiel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100384" name="Vizier's Shoes"/>
+			<gd_item id="114300393" name="Vaegir's Boots"/>
+			<gd_item id="114500411" name="Seeker's Brogans"/>
+			<gd_item id="114600384" name="Commander's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211705" name="Highmage Wyron"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100332" name="Vizier's Pauldrons"/>
+			<gd_item id="112300334" name="Vaegir's Shoulderguards"/>
+			<gd_item id="112500375" name="Seeker's Spaulders"/>
+			<gd_item id="112600376" name="Commander's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211710" name="Spiritmaster Czubarto"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100434" name="Kaidan Tunic"/>
+			<gd_item id="110300392" name="Kaidan Jerkin"/>
+			<gd_item id="110500423" name="Kaidan Hauberk"/>
+			<gd_item id="110600420" name="Kaidan Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211714" name="Chieftain Mamaku"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100367" name="Kaidan Leggings"/>
+			<gd_item id="113300381" name="Kaidan Breeches"/>
+			<gd_item id="113500406" name="Kaidan Chausses"/>
+			<gd_item id="113600390" name="Kaidan Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211727" name="Lekion"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100362" name="Vizier's Gloves"/>
+			<gd_item id="111300361" name="Vaegir's Vambrace"/>
+			<gd_item id="111500404" name="Seeker Handguards"/>
+			<gd_item id="111600394" name="Commander's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="48">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -592,6 +910,28 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="113500399" name="Supervisor's Chausses"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211698" name="Greathealer Quvak"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110500416" name="Great Healer's Hauberk"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211699" name="Kantu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110300385" name="Outrider's Jerkin"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="22">
@@ -638,6 +978,20 @@
 			<gd_item id="113300382" name="Anointed Breeches"/>
 			<gd_item id="113500407" name="Anointed Chausses"/>
 			<gd_item id="113600391" name="Anointed Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211712" name="Sartemon the Insane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100386" name="Anointed Shoes"/>
+			<gd_item id="114300395" name="Anointed Boots"/>
+			<gd_item id="114500413" name="Anointed Brogans"/>
+			<gd_item id="114600386" name="Anointed Sabatons"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
@@ -706,6 +1060,129 @@
 			<gd_item id="120000471" name="Tukroll's Skull Earrings"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211675" name="Razorjaw"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000509" name="Lightning Horn Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211679" name="Moomba the Earthshaker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000511" name="Moomba's Tear"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211696" name="Kamtak the Destroyer"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000417" name="Kamtak's Amulet"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211698" name="Greathealer Quvak"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000508" name="Great Healer's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211699" name="Kantu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000469" name="Kantu's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211704" name="Spiritmaster Shapiel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000512" name="Spiritmaster's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211705" name="Highmage Wyron"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000472" name="Wyron's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211710" name="Spiritmaster Czubarto"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000473" name="Czubarto's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211711" name="Bladeclaw"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000419" name="Bladeclaw's Neck Strap"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211713" name="Millennium Laupede"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000513" name="Millennium Laupede's Essence"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000474" name="Bloody Flame Earrings"/>
+			<gd_item id="121000420" name="Bloody Flame Necklace"/>
+			<gd_item id="122000514" name="Bloody Flame Ring"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -762,6 +1239,31 @@
 			<gd_item id="125001813" name="Veteran Lepharist Red Headband"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Headband (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211700" name="Summoner Klacha"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125000930" name="Head Mage's Headband"/>
+			<gd_item id="125000931" name="Outrider's Hat"/>
+			<gd_item id="125000932" name="Great Healer's Chain Helm"/>
+			<gd_item id="125000933" name="Assault Leader's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001724" name="Red Flame Headband"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Headband (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -771,6 +1273,20 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125000955" name="Saendukal's Mask"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001550" name="Bloody Flame Headband"/>
+			<gd_item id="125001551" name="Bloody Flame Hat"/>
+			<gd_item id="125001552" name="Bloody Flame Chain Helm"/>
+			<gd_item id="125001553" name="Bloody Flame Helm"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Belt (Rare)" base_chance="20">
@@ -806,6 +1322,28 @@
 			<gd_item id="123000511" name="Klawtaka's Leather Belt"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211697" name="Greatmage Teotem"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000510" name="Teotem's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211714" name="Chieftain Mamaku"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000514" name="Mamaku's Leather Belt"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Quest-Start Item" base_chance="5">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -828,5 +1366,38 @@
 			<gd_item id="152012028" name="Andre Skin"/>
 		</gd_items>
 	</gd_rule>
-	<!-- Proceed with 211675 -->
+	<gd_rule rule_name="Named Material" base_chance="2.5">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211706" name="Adult Mamut"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012017" name="Huge Tusk"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211712" name="Sartemon the Insane"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012029" name="Sartemon's Heart"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211715" name="Raging Kraterr"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012027" name="Flaming Elemental Water"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Proceed with 211740 -->
 </global_rules>

@@ -22,8 +22,10 @@ public class EventStatistic {
 	}
 
 	public int getKillStreak() {
-		if ((System.currentTimeMillis() - lastKillTime) <= 30 * 1000) {
+		if ((System.currentTimeMillis() - lastKillTime) <= 45 * 1000) {
 			streak++;
+		} else {
+			streak = 0;
 		}
 		lastKillTime = System.currentTimeMillis();
 		return streak;
@@ -47,7 +49,7 @@ public class EventStatistic {
 		}
 
 		if (count > 5) {
-			return "Legendary";
+			return "HOLY SHIT! killimanjaro!";
 		}
 
 		return "Kill";

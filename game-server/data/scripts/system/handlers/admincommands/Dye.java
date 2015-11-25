@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.awt.Color;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -23,7 +24,7 @@ public class Dye extends AdminCommand {
 	public Dye() {
 		super("dye", "Dyes a players visible equipment.");
 
-		setParamInfo("<color> - Dyes the selected player in the specified color (can be dye item link/ID or color HEX code). 0 removes all dyeing.");
+		setParamInfo("<color> - Dyes the selected player in the specified color (can be dye item link/ID, color name or color HEX code). 0 removes all dyeing.");
 	}
 
 	@Override
@@ -39,10 +40,11 @@ public class Dye extends AdminCommand {
 
 		int itemColor = 0; // 0 = default item color
 		String colorText = "default";
+		String colorParam = params[0];
 
-		if (!"0".equalsIgnoreCase(params[0])) {
+		if (!"0".equalsIgnoreCase(colorParam)) {
 			// try to get itemId of a dyeing item
-			itemColor = ChatUtil.getItemId(params[0]);
+			itemColor = ChatUtil.getItemId(colorParam);
 			ItemTemplate dyeItemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemColor);
 
 			if (itemColor != 0 && dyeItemTemplate != null && dyeItemTemplate.getActions() != null && dyeItemTemplate.getActions().getDyeAction() != null) {
@@ -50,14 +52,19 @@ public class Dye extends AdminCommand {
 				colorText = ChatUtil.item(itemColor);
 			} else {
 				try {
-					String colorParam = params[0];
-					if (colorParam.length() <= 8) {
-						if (colorParam.startsWith("#"))
-							colorParam = colorParam.substring(1);
-						else if (colorParam.startsWith("0x") || colorParam.startsWith("0X"))
-							colorParam = colorParam.substring(2);
+					try {
+						// try to get color by name
+						itemColor = ((Color) Class.forName("java.awt.Color").getField(colorParam.toUpperCase()).get(null)).getRGB();
+					} catch (Exception e) {
+						// try to get color by hex code
+						if (colorParam.length() <= 8) {
+							if (colorParam.startsWith("#"))
+								colorParam = colorParam.substring(1);
+							else if (colorParam.startsWith("0x") || colorParam.startsWith("0X"))
+								colorParam = colorParam.substring(2);
+						}
+						itemColor = Integer.valueOf(colorParam, 16);
 					}
-					itemColor = Integer.valueOf(colorParam, 16);
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
 					itemColor = Util.toColorBGRA(itemColor);
 				} catch (NumberFormatException e) {
