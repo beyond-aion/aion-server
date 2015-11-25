@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.Race;
@@ -59,6 +60,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	@Override
 	public void onSiegeStart() {
+		// Check for Balaur Assault
+		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
+			BalaurAssaultService.getInstance().onSiegeStart(this);
 		if (LoggingConfig.LOG_SIEGE)
 			log.info("[SIEGE] > Siege started. [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"
 				+ getSiegeLocation().getLegionId() + "]");

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -32,6 +33,9 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 	@Override
 	protected void onSiegeStart() {
+		// Check for Balaur Assault
+		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
+			BalaurAssaultService.getInstance().onSiegeStart(this);
 		initSiegeBoss();
 	}
 

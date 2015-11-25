@@ -88,6 +88,9 @@
 	<fortress id="7011">
 		<siegeTime>0 0 20 ? * SUN</siegeTime>
 	</fortress>
+	<agent_fight id="8011">
+		<siegeTime>0 50 19 ? * WED</siegeTime>
+	</agent_fight>
 	<!--
 	<fortress id="10111">
 		<siegeTime>0 0 19 ? * SUN</siegeTime>

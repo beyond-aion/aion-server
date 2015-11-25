@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastTable;
@@ -33,9 +34,9 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 public class ObserveController {
 
 	private ReentrantLock lock = new ReentrantLock();
-	protected Collection<ActionObserver> observers = new FastTable<ActionObserver>().shared();
-	protected FastTable<ActionObserver> onceUsedObservers = new FastTable<ActionObserver>();
-	protected Collection<AttackCalcObserver> attackCalcObservers = new FastTable<AttackCalcObserver>().shared();
+	protected Collection<ActionObserver> observers = new CopyOnWriteArrayList<>();
+	protected FastTable<ActionObserver> onceUsedObservers = new FastTable<>();
+	protected Collection<AttackCalcObserver> attackCalcObservers = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Once used observer add to observerController. If observer notify will be removed.

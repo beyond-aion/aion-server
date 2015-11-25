@@ -15,6 +15,8 @@ import com.aionemu.commons.utils.xml.JAXBUtil;
 
 /**
  * @author SoulKeeper, Source
+ * @modified Estrayl
+ *           TODO: Remove code redundancy
  */
 @XmlRootElement(name = "siege_schedule")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,21 +26,19 @@ public class SiegeSchedule {
 	private List<Fortress> fortressesList;
 	@XmlElement(name = "source", required = true)
 	private List<Source> sourcesList;
+	@XmlElement(name = "agent_fight", required = true)
+	private List<AgentFight> agentFights;
 
 	public List<Fortress> getFortressesList() {
 		return fortressesList;
-	}
-
-	public void setFortressesList(List<Fortress> fortressList) {
-		this.fortressesList = fortressList;
 	}
 
 	public List<Source> getSourcesList() {
 		return sourcesList;
 	}
 
-	public void setSourcesList(List<Source> sourceList) {
-		this.sourcesList = sourceList;
+	public List<AgentFight> getAgentFights() {
+		return agentFights;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
@@ -54,18 +54,9 @@ public class SiegeSchedule {
 			return id;
 		}
 
-		public void setId(int id) {
-			this.id = id;
-		}
-
 		public List<String> getSiegeTimes() {
 			return siegeTimes;
 		}
-
-		public void setSiegeTimes(List<String> siegeTimes) {
-			this.siegeTimes = siegeTimes;
-		}
-
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
@@ -81,18 +72,27 @@ public class SiegeSchedule {
 			return id;
 		}
 
-		public void setId(int id) {
-			this.id = id;
+		public List<String> getSiegeTimes() {
+			return siegeTime;
+		}
+	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlRootElement(name = "agent_fight")
+	public static class AgentFight {
+
+		@XmlAttribute(required = true)
+		private int id;
+		@XmlElement(name = "siegeTime", required = true)
+		private List<String> siegeTime;
+
+		public int getId() {
+			return id;
 		}
 
 		public List<String> getSiegeTimes() {
 			return siegeTime;
 		}
-
-		public void setSiegeTimes(List<String> siegeTime) {
-			this.siegeTime = siegeTime;
-		}
-
 	}
 
 	public static SiegeSchedule load() {

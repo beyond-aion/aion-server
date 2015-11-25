@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="600100000">
+		<siege_spawn siege_id="8011">
+			<siege_race race="BALAUR">
+				<siege_mod mod="SIEGE">
+					<!-- Empowered Veille -->
+					<spawn npc_id="235064" handler="BOSS">
+						<spot x="876.84" y="680.76" z="271.725" h="4"/>
+					</spawn>
+					<!-- Empowered Mastarius -->
+					<spawn npc_id="235065" handler="BOSS">
+						<spot x="1023.62" y="1397.43" z="264.95813" h="7"/>
+					</spawn>
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+	</spawn_map>
+</spawns>

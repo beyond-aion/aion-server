@@ -22622,7 +22622,28 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
-
+	
+	/**
+	 * The Agent battle will start in 10 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_01() {
+		return new SM_SYSTEM_MESSAGE(1402544);
+	}
+	
+	/**
+	 * The Agent battle will start in 5 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02() {
+		return new SM_SYSTEM_MESSAGE(1402545);
+	}
+	
+	/**
+	 * The Agent battle has ended.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03() {
+		return new SM_SYSTEM_MESSAGE(1402546);
+	}
+	
 	/**
 	 * Purification System
 	 */

@@ -2020,27 +2020,6 @@
 		<spawn npc_id="832898" respawn_time="295">
 			<spot x="854" y="1089" z="332.75" h="59"/>
 		</spawn> -->
-		<!-- Patch note : - Empowered Veille will spawn near Lawbringer’s Cut, and Empowered Mastarius will spawn near
-Valpura Heights. They march to battle in Flameberth Downs. -->
-		<!-- Empowered Mastarius
-		<spawn npc_id="832831" respawn_time="295">
-			<spot x="912.7304" y="1126.947" z="331.4515"/>
-		</spawn> -->
-		<!-- Empowered Veille 
-		<spawn npc_id="832830" respawn_time="295">
-			<spot x="855.919" y="1066.405" z="332.6346"/>
-		</spawn> -->
-		<!-- BLDF4_Advance_Asmodian_Agent 
-		<spawn npc_id="855417" respawn_time="295">
-			<spot x="875.1378" y="1089.957" z="332.7829"/>
-			<spot x="874.0696" y="1088.911" z="332.7829"/>
-			<spot x="874.9136" y="1089.964" z="332.7829"/>
-		</spawn> -->
-		<!-- BLDF4_Advance_Elyos Agent 
-		<spawn npc_id="855415" respawn_time="295">
-			<spot x="869.1142" y="1082.823" z="332.7829"/>
-			<spot x="869.114" y="1083.742" z="332.7829"/>
-		</spawn> -->
 		<!-- Upright Inspector 
         <spawn npc_id="234217" respawn_time="295">
             <spot x="242.62437" y="1577.2107" z="227.77995" h="30"/>
@@ -2065,32 +2044,6 @@ Valpura Heights. They march to battle in Flameberth Downs. -->
 			<spot x="818.7015" y="1498.764" z="264.2395" h="29"/>
 			<spot x="743.9664" y="1542.596" z="242.3356" h="61"/>
 		</spawn>
-		<!-- Veille Assassin 
-        <spawn npc_id="235337" respawn_time="295">
-            <spot x="879.25665" y="1073.9158" z="332.47516" h="15"/>
-        </spawn> -->
-		<!-- Veille Battlemage 
-        <spawn npc_id="235336" respawn_time="295">
-            <spot x="891.14954" y="1084.6208" z="332.62933" h="15"/>
-        </spawn> -->
-		<!-- Veille Healer 
-        <spawn npc_id="235339" respawn_time="295">
-            <spot x="861.56366" y="1093.5527" z="332.47516" h="15"/>
-        </spawn> -->
-		<!-- Veille Protector 
-        <spawn npc_id="235334" respawn_time="295">
-            <spot x="866.6202" y="1074.9463" z="332.6346" h="15"/>
-            <spot x="887.33167" y="1097.6967" z="332.6475" h="15"/>
-        </spawn> -->
-		<!-- Veille Seeker 
-        <spawn npc_id="235338" respawn_time="295">
-            <spot x="868.40796" y="1103.6102" z="332.47516" h="15"/>
-        </spawn> -->
-		<!-- Veille Soldier 
-        <spawn npc_id="235335" respawn_time="295">
-            <spot x="858.4362" y="1083.3335" z="332.53122" h="15"/>
-            <spot x="878.1199" y="1106.6002" z="332.47516" h="15"/>
-        </spawn> -->
 		<!-- Yasan -->
 		<spawn npc_id="802353" respawn_time="295">
 			<spot x="1837.935" y="1790.859" z="305.5" h="90"/>

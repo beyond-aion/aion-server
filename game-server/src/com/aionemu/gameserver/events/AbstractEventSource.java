@@ -3,8 +3,7 @@ package com.aionemu.gameserver.events;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Iterator;
-
-import javolution.util.FastTable;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 
 	private static Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
 
-	private Collection<EventListener<T>> listeners = new FastTable<EventListener<T>>().shared();
+	private Collection<EventListener<T>> listeners = new CopyOnWriteArrayList<>();
 	protected boolean isFirstMethodFill;
 
 	public AbstractEventSource() {

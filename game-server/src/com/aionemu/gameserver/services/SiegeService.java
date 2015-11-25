@@ -32,6 +32,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.Influence;
@@ -60,6 +61,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.siegeservice.AgentSiege;
 import com.aionemu.gameserver.services.siegeservice.ArtifactSiege;
 import com.aionemu.gameserver.services.siegeservice.FortressSiege;
 import com.aionemu.gameserver.services.siegeservice.OutpostSiege;
@@ -144,6 +146,7 @@ public class SiegeService {
 	private Map<Integer, OutpostLocation> outposts;
 	private Map<Integer, SourceLocation> sources;
 	private Map<Integer, SiegeLocation> locations;
+	private AgentLocation agent;
 
 	/**
 	 * Initializer. Should be called once.
@@ -163,6 +166,7 @@ public class SiegeService {
 			outposts = DataManager.SIEGE_LOCATION_DATA.getOutpost();
 			sources = DataManager.SIEGE_LOCATION_DATA.getSource();
 			locations = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations();
+			agent = DataManager.SIEGE_LOCATION_DATA.getAgentLoc();
 			DAOManager.getDAO(SiegeDAO.class).loadSiegeLocations(locations);
 		} else {
 			artifacts = Collections.emptyMap();
@@ -227,6 +231,14 @@ public class SiegeService {
 					CronService.getInstance().schedule(new SiegeStartRunnable(s.getId()), preperationCron);
 					log.debug("Scheduled siege of sourceID " + s.getId() + " based on cron expression: " + preperationCron);
 				}
+			}
+		}
+		
+		// Schedule agent fights
+		for (final SiegeSchedule.AgentFight a : siegeSchedule.getAgentFights()) {
+			for (String siegeTime : a.getSiegeTimes()) {
+				CronService.getInstance().schedule(new SiegeStartRunnable(a.getId()), siegeTime);
+				log.debug("Scheduled agentfight based on cron expression: " + siegeTime);
 			}
 		}
 
@@ -394,7 +406,9 @@ public class SiegeService {
 	}
 
 	public void checkSiegeStart(final int locationId) {
-		if (getSource(locationId) == null)
+		if (agent.getLocationId() == locationId)
+			startSiege(locationId);
+		else if (getSource(locationId) == null)
 			startPreparations(locationId);
 		// instead of four using one bcoz same start time
 		else if (locationId == 4011)
@@ -795,6 +809,10 @@ public class SiegeService {
 
 		return mapLocations;
 	}
+	
+	public AgentLocation getAgentLocation() {
+		return agent;
+	}
 
 	protected Siege<?> newSiege(int siegeLocationId) {
 		if (fortresses.containsKey(siegeLocationId))
@@ -805,6 +823,8 @@ public class SiegeService {
 			return new OutpostSiege(outposts.get(siegeLocationId));
 		else if (artifacts.containsKey(siegeLocationId))
 			return new ArtifactSiege(artifacts.get(siegeLocationId));
+		else if (agent != null && agent.getLocationId() == siegeLocationId)
+			return new AgentSiege(agent);
 		else
 			throw new SiegeException("Unknown siege handler for siege location: " + siegeLocationId);
 	}

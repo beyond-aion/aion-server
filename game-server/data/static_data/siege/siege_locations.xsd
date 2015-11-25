@@ -36,8 +36,9 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="FORTRESS"/>
 			<xs:enumeration value="ARTIFACT"/>
-			<xs:enumeration value="BOSSRAID_LIGHT"/>
-			<xs:enumeration value="BOSSRAID_DARK"/>
+			<xs:enumeration value="VEILLE"/>
+			<xs:enumeration value="MASTARIUS"/>
+			<xs:enumeration value="AGENT_FIGHT"/>
 			<xs:enumeration value="INDUN"/>
 			<xs:enumeration value="UNDERPASS"/>
 			<xs:enumeration value="SOURCE"/>

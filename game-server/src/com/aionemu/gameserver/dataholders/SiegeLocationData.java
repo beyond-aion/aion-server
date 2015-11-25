@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import javolution.util.FastMap;
 
+import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
@@ -40,6 +41,8 @@ public class SiegeLocationData {
 	private FastMap<Integer, SourceLocation> sourceLocations = new FastMap<Integer, SourceLocation>();
 	@XmlTransient
 	private FastMap<Integer, SiegeLocation> siegeLocations = new FastMap<Integer, SiegeLocation>();
+	@XmlTransient
+	private AgentLocation agentLoc;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		artifactLocations.clear();
@@ -60,11 +63,15 @@ public class SiegeLocationData {
 					artifactLocations.put(template.getId(), artifact);
 					siegeLocations.put(template.getId(), artifact);
 					break;
-				case BOSSRAID_LIGHT:
-				case BOSSRAID_DARK:
+				case VEILLE:
+				case MASTARIUS:
 					OutpostLocation protector = new OutpostLocation(template);
 					outpostLocations.put(template.getId(), protector);
 					siegeLocations.put(template.getId(), protector);
+					break;
+				case AGENT_FIGHT:
+					agentLoc = new AgentLocation(template);
+					siegeLocations.put(template.getId(), agentLoc);
 					break;
 				case SOURCE:
 					SourceLocation source = new SourceLocation(template);
@@ -98,6 +105,10 @@ public class SiegeLocationData {
 
 	public FastMap<Integer, SiegeLocation> getSiegeLocations() {
 		return siegeLocations;
+	}
+	
+	public AgentLocation getAgentLoc() {
+		return agentLoc;
 	}
 
 }

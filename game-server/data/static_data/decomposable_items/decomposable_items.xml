@@ -29074,8 +29074,8 @@
 			<item id="100501277" name="Fine Betrayer's Orb" player_class="SORCERER"/>
 			<item id="100501277" name="Fine Betrayer's Orb" player_class="SPIRIT_MASTER"/>
 			<item id="101801178" name="Fine Betrayer's Pistol" player_class="GUNNER"/>
-			<item id="102101012" name="Fine Betrayer's Harp" player_class="BARD"/>
-			<item id="102101021" name="Fine Betrayer's Cipher-Blade" player_class="RIDER"/>
+			<item id="102001206" name="Fine Betrayer's Harp" player_class="BARD"/>
+			<item id="102101012" name="Fine Betrayer's Cipher-Blade" player_class="RIDER"/>
 		</items>
 		<items>
 			<item id="100101292" name="Superb Betrayer's Mace" player_class="TEMPLAR"/>
@@ -29087,8 +29087,8 @@
 			<item id="100601387" name="Fine Betrayer's Spellbook" player_class="SORCERER"/>
 			<item id="100601387" name="Fine Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
 			<item id="101901089" name="Fine Betrayer's Aethercannon" player_class="GUNNER"/>
-			<item id="102101013" name="Superb Betrayer's Harp" player_class="BARD"/>
-			<item id="102101021" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
+			<item id="102001207" name="Superb Betrayer's Harp" player_class="BARD"/>
+			<item id="102101013" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
 		</items>
 		<items>
 			<item id="100001701" name="Superb Betrayer's Shield" player_class="TEMPLAR"/>
@@ -29100,8 +29100,8 @@
 			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SORCERER"/>
 			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
 			<item id="101901090" name="Superb Betrayer's Aethercannon" player_class="GUNNER"/>
-			<item id="102101013" name="Superb Betrayer's Harp" player_class="BARD"/>
-			<item id="102101021" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
+			<item id="102001207" name="Superb Betrayer's Harp" player_class="BARD"/>
+			<item id="102101013" name="Superb Betrayer's Cipher-Blade" player_class="RIDER"/>
 		</items>
 		<items>
 			<item id="110101783" name="Fine Betrayer's Tunic" player_class="SORCERER"/>

@@ -332,8 +332,8 @@
 	<siege_location id="3024" type="ARTIFACT" world="220070000">
 		<artifact_activation itemid="188020002" count="2" skill="12159" cd="1800"/>
 	</siege_location>
-	<siege_location id="2111" type="BOSSRAID_LIGHT" world="210050000" fortress_dependency="2011 2021" siege_duration="7200"/>
-	<siege_location id="3111" type="BOSSRAID_DARK" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
+	<siege_location id="2111" type="VEILLE" world="210050000" fortress_dependency="2011 2021" siege_duration="7200"/>
+	<siege_location id="3111" type="MASTARIUS" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
 	<!-- 3.0 -->
 	<siege_location id="4011" type="SOURCE" world="600030000" name_id="804123" siege_duration="1800">
 		<siege_reward top="11" itemid="186000147" m_count="2"/>
@@ -450,6 +450,13 @@
 		<merc_zone id="5" costs="39" cooldown="900" msg_id="1402496" announce_id="1402489"/>
 		<merc_zone id="6" costs="39" cooldown="900" msg_id="1402497" announce_id="1402490"/>
 		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491"/>
+	</siege_location>
+	<!-- Agent Fight -->
+	<siege_location id="8011" type="AGENT_FIGHT" world="600100000" siege_duration="3720">
+		<siege_reward top="11" itemid="186000242" m_count="4" gp_win="300" gp_defeat="100"/>
+		<siege_reward top="20" itemid="186000242" m_count="3" gp_win="200" gp_defeat="75"/>
+		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="150" gp_defeat="50"/>
+		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<!-- Hero's Fall -->
 	<siege_location id="7012" type="ARTIFACT" world="600090000">

@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,19 +106,21 @@ public class BaseService {
 	 * @param id
 	 * @param race
 	 */
-	public final void capture(int id) {
+	public final void capture(int id, Race race) {
 		if (!isActive(id))
 			return;
 		
 		Base<?> base = getActiveBase(id);
 		if (base instanceof StainedBase)
 			handleStainedFeatures((StainedBase) base);
+		if (race != null)
+			base.setLocRace(race);
 		stop(id);
 		start(id);
 	}
 	
 	private final void handleStainedFeatures(StainedBase target) {
-		List<StainedBase> spec = new ArrayList<>();
+		List<StainedBase> spec = new FastTable<>();
 		for (Base<?> possibleSBase : activeBases.values()) {
 			if (possibleSBase instanceof StainedBase) {
 				StainedBase sb = (StainedBase) possibleSBase;
