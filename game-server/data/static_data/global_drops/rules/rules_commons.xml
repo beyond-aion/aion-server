@@ -800,7 +800,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white) -->
-	<gd_rule rule_name="Manastones (Common)" base_chance="15" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Manastones (Common)" base_chance="12.5" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -881,7 +881,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white, with odd lvl diffs) -->
-	<gd_rule rule_name="Manastones (Common)" base_chance="1.3" min_diff="1" max_diff="10">
+	<gd_rule rule_name="Manastones (Common)" base_chance="1.25" min_diff="1" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -894,7 +894,7 @@
 			<gd_item id="167000294" name="Manastone: Attack +2" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Manastones (Common)" base_chance="1.3" min_diff="1" max_diff="15">
+	<gd_rule rule_name="Manastones (Common)" base_chance="1.25" min_diff="1" max_diff="15">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -907,7 +907,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (green) -->
-	<gd_rule rule_name="Manastones (Rare)" base_chance="6" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Manastones (Rare)" base_chance="5.5" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
