@@ -9900,12 +9900,12 @@
     <decomposable item_id="188051292" decomposable_name="[Event] Bloitinerk's Happy Gift Box"/>
     <decomposable item_id="188051293" decomposable_name="[Event] 12 Solorius Polar Bear Form Candy">
         <items>
-            <item id="160010123" name="Solorius Polar Bear Form Candy" count="12"/>
+            <item id="160010156" name="[Event] Solorius Polar Bear Form Candy" count="12"/>
         </items>
     </decomposable>
     <decomposable item_id="188051294" decomposable_name="[Event] 12 Solorius Polar Bear Form Candy">
         <items>
-            <item id="160010124" name="Solorius Polar Bear Form Candy" count="12"/>
+            <item id="160010157" name="[Event] Solorius Polar Bear Form Candy" count="12"/>
         </items>
     </decomposable>
     <decomposable item_id="188051295" decomposable_name="12 Solorius Polar Bear Form Candy">
@@ -25596,7 +25596,27 @@
             <item id="164002111" name="Greater Running Scroll (1 hour)" count="5"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052717" decomposable_name="[Event] Noble Idian Bundle"/>
+    <decomposable item_id="188052717" decomposable_name="[Event] Noble Idian Bundle">
+        <items chance="50">
+            <item id="166050069" name="[Event] Noble Tidal Idian: Physical Attack" player_class="ASSASSIN"/>
+            <item id="166050069" name="[Event] Noble Tidal Idian: Physical Attack" player_class="TEMPLAR"/>
+            <item id="166050069" name="[Event] Noble Tidal Idian: Physical Attack" player_class="GLADIATOR"/>
+            <item id="166050069" name="[Event] Noble Tidal Idian: Physical Attack" player_class="CHANTER"/>
+            <item id="166050069" name="[Event] Noble Tidal Idian: Physical Attack" player_class="RANGER"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="SORCERER"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="SPIRIT_MASTER"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="CLERIC"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="GUNNER"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="BARD"/>
+            <item id="166050070" name="[Event] Noble Tidal Idian: Magical Attack" player_class="RIDER"/>
+        </items>
+        <items chance="25">
+            <item id="166050071" name="[Event] Noble Tidal Idian: Physical Defense"/>
+        </items>
+        <items chance="25">
+            <item id="166050072" name="[Event] Noble Tidal Idian: Magical Defense"/>
+        </items>
+    </decomposable>
     <decomposable item_id="188052718" decomposable_name="Hyperion's Weapons Chest"/>
     <decomposable item_id="188052719" decomposable_name="[Event] Dye Bundle"/>
     <decomposable item_id="188052720" decomposable_name="[Event] Aion's Gift Box">
