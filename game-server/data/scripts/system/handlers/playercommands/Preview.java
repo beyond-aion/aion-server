@@ -1,5 +1,6 @@
 package playercommands;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -35,7 +36,7 @@ public class Preview extends PlayerCommand {
 	public Preview() {
 		super("preview", "Previews equipment.");
 
-		setParamInfo("<item> [color] - Previews the specified item on your character (default: standard item color, optional: dye item link/ID or color HEX code).");
+		setParamInfo("<item> [color] - Previews the specified item on your character (default: standard item color, optional: dye item link/ID, color name or color HEX code).");
 	}
 
 	@Override
@@ -79,8 +80,7 @@ public class Preview extends PlayerCommand {
 			}
 		}
 
-		long itemSlot = ItemSlot.getSlotFor(itemTemplate.getItemSlot()).getSlotIdMask();
-		if (!ItemSlot.isVisible(itemSlot)) {
+		if (!ItemSlot.isVisible(itemTemplate.getItemSlot())) {
 			sendInfo(player, "Item is no visible equipment.");
 			return;
 		}
@@ -94,7 +94,8 @@ public class Preview extends PlayerCommand {
 			}
 
 			// try to get itemId of a dyeing item
-			itemColor = ChatUtil.getItemId(params[1]);
+			String colorParam = params[1];
+			itemColor = ChatUtil.getItemId(colorParam);
 			ItemTemplate dyeItemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemColor);
 
 			if (itemColor != 0 && dyeItemTemplate != null && dyeItemTemplate.getActions() != null && dyeItemTemplate.getActions().getDyeAction() != null) {
@@ -102,14 +103,19 @@ public class Preview extends PlayerCommand {
 				colorText = ChatUtil.item(itemColor);
 			} else {
 				try {
-					String colorParam = params[1];
-					if (colorParam.length() <= 8) {
-						if (colorParam.startsWith("#"))
-							colorParam = colorParam.substring(1);
-						else if (colorParam.startsWith("0x") || colorParam.startsWith("0X"))
-							colorParam = colorParam.substring(2);
+					try {
+						// try to get color by name
+						itemColor = ((Color) Class.forName("java.awt.Color").getField(colorParam.toUpperCase()).get(null)).getRGB();
+					} catch (Exception e) {
+						// try to get color by hex code
+						if (colorParam.length() <= 8) {
+							if (colorParam.startsWith("#"))
+								colorParam = colorParam.substring(1);
+							else if (colorParam.startsWith("0x") || colorParam.startsWith("0X"))
+								colorParam = colorParam.substring(2);
+						}
+						itemColor = Integer.valueOf(colorParam, 16);
 					}
-					itemColor = Integer.valueOf(colorParam, 16);
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
 					itemColor = Util.toColorBGRA(itemColor);
 				} catch (NumberFormatException e) {
@@ -120,7 +126,7 @@ public class Preview extends PlayerCommand {
 		}
 
 		// create fake item for preview (ObjId 0, since it'll not be used anywhere and to avoid allocating new IDFactory IDs)
-		Item previewItem = new Item(0, itemTemplate, 1, true, itemSlot);
+		Item previewItem = new Item(0, itemTemplate, 1, true, itemTemplate.getItemSlot());
 		previewItem.setItemColor(itemColor);
 
 		registerPreviewReset(player, PREVIEW_TIME);
@@ -130,13 +136,16 @@ public class Preview extends PlayerCommand {
 
 	private static List<Item> getPreviewItems(Player player, Item previewItem) {
 		long previewSlot = previewItem.getEquipmentSlot();
-		List<Item> previewItems = new FastTable<>();
-		previewItems.addAll(player.getEquipment().getEquippedForAppearence());
+		List<Item> previewItems = FastTable.of(player.getEquipment().getEquippedForAppearence());
 
+		if (ItemSlot.isTwoHandedWeapon(previewSlot))
+			// remove shield or sub hand weapons if previewing TwoHanded
+			previewItems.removeIf(item -> item.getEquipmentSlot() == ItemSlot.SUB_HAND.getSlotIdMask());
+		
 		// put item in the new appearance list (at the correct position)
 		for (int i = 0; i < previewItems.size(); i++) {
 			long currentSlot = previewItems.get(i).getEquipmentSlot();
-			if (currentSlot == previewSlot) {
+			if ((currentSlot & previewSlot) != 0) {
 				// replace players current appearance item at that slot
 				previewItems.set(i, previewItem);
 				break;
