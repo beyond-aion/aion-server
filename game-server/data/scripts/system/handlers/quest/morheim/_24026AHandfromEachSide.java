@@ -2,17 +2,10 @@ package quest.morheim;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
