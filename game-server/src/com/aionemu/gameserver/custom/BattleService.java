@@ -55,7 +55,7 @@ public class BattleService {
 
 		if (createNew) {
 			type.createGameEvent();
-			announceToAllPlayers("Upcoming Event: " + type.getViewableName() + "\n Register by using .evreg!");
+			announceToAllPlayers("A new " + type.getViewableName() + " will start Soon! \n Make sure to join your faction by using .evreg!");
 		}
 		return type;
 
@@ -95,7 +95,7 @@ public class BattleService {
 			return false;
 		}
 		PacketSendUtility.sendMessage(player, "You have been Invited to an Event Test! \n"
-			+ " Wait until the Event is getting Announced and use the .evreg command to register by typing .evreg <event id>");
+			+ " Wait until the Event is Announced and use the .evreg command to register by typing .evreg <event id>");
 		return invitedPlayers.add(player);
 	}
 	
