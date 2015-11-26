@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- TODO:
-		Recipes,
 		Special Crafting Materials
 	-->
 	<!-- Candy Essences -->
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="SPAKLE" />
 		</gd_npc_groups>
@@ -14,7 +13,7 @@
 			<gd_item id="152016001" name="Sparkie Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="LUPYLLINI" />
 		</gd_npc_groups>
@@ -23,7 +22,7 @@
 			<gd_item id="152016002" name="Pluma Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="FLYINGEYE" />
 		</gd_npc_groups>
@@ -32,7 +31,7 @@
 			<gd_item id="152016003" name="Oculazen Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="FUNGY" />
 			<gd_npc_group group="FUNGUS" />
@@ -42,7 +41,7 @@
 			<gd_item id="152016004" name="Oculazen Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="DRAKY" />
 		</gd_npc_groups>
@@ -51,7 +50,7 @@
 			<gd_item id="152016005" name="Wasteland Drakie Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="GRIFFO" />
 		</gd_npc_groups>
@@ -60,7 +59,7 @@
 			<gd_item id="152016006" name="Griffo Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="AGRINT" />
 		</gd_npc_groups>
@@ -69,7 +68,7 @@
 			<gd_item id="152016007" name="Agrint Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="MAHISHA_DRAKY" />
 		</gd_npc_groups>
@@ -81,7 +80,7 @@
 			<gd_item id="152016008" name="Malek Drake Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="AGRINT_ICE" />
 		</gd_npc_groups>
@@ -90,7 +89,7 @@
 			<gd_item id="152016009" name="Frozen Agrint Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="BROWNIEF" />
 		</gd_npc_groups>
@@ -102,7 +101,7 @@
 			<gd_item id="152016010" name="Kobold Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="KRALLSCOUT" />
 		</gd_npc_groups>
@@ -111,7 +110,7 @@
 			<gd_item id="152016011" name="Krall Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="SKELETON" />
 		</gd_npc_groups>
@@ -120,7 +119,7 @@
 			<gd_item id="152016012" name="Anubite Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
 			<gd_npc_group group="GRAVEKNIGHT" />
 		</gd_npc_groups>
@@ -129,7 +128,7 @@
 			<gd_item id="152016013" name="Unfest Essence" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-5" fixed_chance="true">
+	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-5">
 		<gd_npc_groups>
 			<gd_npc_group group="FUNGY_MOOKIE" />
 		</gd_npc_groups>
@@ -143,7 +142,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Ide Materials -->
-	<gd_rule rule_name="Ide Materials" base_chance="4" max_diff="5" fixed_chance="true">
+	<gd_rule rule_name="Ide Materials" base_chance="4" max_diff="5">
 		<gd_worlds>
 			<gd_world wd_type="KATALAM" />
 			<gd_world wd_type="KATALAM_INSTANCE" />
@@ -174,7 +173,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Rawhide -->
-	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -206,7 +205,7 @@
 			<gd_item id="152010318" name="Firm Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Rawhide (Common)" base_chance="12" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -217,7 +216,7 @@
 			<gd_item id="152010322" name="Sublime Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Rare)" base_chance="8" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Rawhide (Rare)" base_chance="8" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -241,7 +240,7 @@
 			<gd_item id="152010323" name="Buttery Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Legend)" base_chance="4" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Rawhide (Legend)" base_chance="4" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -266,7 +265,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Elemental Stones -->
-	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -300,7 +299,7 @@
 			<gd_item id="152010319" name="Fine Elemental Stone" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -326,7 +325,7 @@
 			<gd_item id="152010325" name="Wispy Elemental Stone" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="8" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="8" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -337,7 +336,7 @@
 			<gd_item id="152010326" name="Sublime Wispy Elemental Stone" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="4" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="4" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -364,7 +363,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Flux -->
-	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="-2" max_diff="2" fixed_chance="true">
+	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -412,7 +411,7 @@
 			<gd_item id="152011088" name="Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -424,7 +423,7 @@
 			<gd_item id="152011106" name="Lesser Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="-2" max_diff="2" fixed_chance="true">
+	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -465,7 +464,7 @@
 			<gd_item id="152011089" name="Worthy Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -478,7 +477,7 @@
 			<gd_item id="152011107" name="Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="-2" max_diff="2" fixed_chance="true">
+	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -512,7 +511,7 @@
 			<gd_item id="152011090" name="Expert Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="0" max_diff="4" fixed_chance="true">
+	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -526,7 +525,7 @@
 			<gd_item id="152011108" name="Greater Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Unique)" base_chance="1" min_diff="-2" max_diff="2" fixed_chance="true">
+	<gd_rule rule_name="Flux (Unique)" base_chance="1" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="ELITE" />
 			<gd_rating rating="HERO" />
