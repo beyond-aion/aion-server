@@ -2,14 +2,20 @@ package com.aionemu.gameserver.utils.stats;
 
 import java.util.NoSuchElementException;
 
+/**
+ * @author ?
+ * @modified Neon
+ */
 public enum DropRewardEnum {
 	MINUS_10(-10, 0),
-	MINUS_9(-9, 39),
-	MINUS_8(-8, 79),
-	MINUS_7(-7, 100);
+	MINUS_9(-9, 40),
+	MINUS_8(-8, 60),
+	MINUS_7(-7, 70),
+	MINUS_6(-6, 80),
+	MINUS_5(-5, 90),
+	MINUS_4(-4, 100);
 
 	private int dropRewardPercent;
-
 	private int levelDifference;
 
 	private DropRewardEnum(int levelDifference, int dropRewardPercent) {
@@ -27,12 +33,10 @@ public enum DropRewardEnum {
 	 * @return Drop reward percentage
 	 */
 	public static int dropRewardFrom(int levelDifference) {
-		if (levelDifference < MINUS_10.levelDifference) {
+		if (levelDifference <= MINUS_10.levelDifference)
 			return MINUS_10.dropRewardPercent;
-		}
-		if (levelDifference > MINUS_7.levelDifference) {
-			return MINUS_7.dropRewardPercent;
-		}
+		else if (levelDifference >= MINUS_4.levelDifference)
+			return MINUS_4.dropRewardPercent;
 
 		for (DropRewardEnum dropReward : values()) {
 			if (dropReward.levelDifference == levelDifference) {
