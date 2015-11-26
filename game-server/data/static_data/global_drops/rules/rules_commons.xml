@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Kinah -->
-	<gd_rule rule_name="Kinah" base_chance="30" min_count="10" max_count="30">
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
+	<gd_rule rule_name="Kinah" base_chance="40" min_count="5" max_count="25">
+		<gd_races>
+			<gd_race race="ELYOS"/>
+			<gd_race race="ASMODIANS"/>
+			<gd_race race="BROWNIE"/>
+			<gd_race race="CONSTRUCT"/>
+			<gd_race race="DEMIHUMANOID"/>
+			<gd_race race="DRAGON"/>
+			<gd_race race="DRAKAN"/>
+			<gd_race race="ELEMENTAL"/>
+			<gd_race race="GCHIEF_DARK"/>
+			<gd_race race="GCHIEF_LIGHT"/>
+			<gd_race race="KRALL"/>
+			<gd_race race="LIZARDMAN"/>
+			<gd_race race="LYCAN"/>
+			<gd_race race="MAGICALMONSTER"/>
+			<gd_race race="NAGA"/>
+			<gd_race race="RATMAN"/>
+			<gd_race race="NAGA"/>
+			<gd_race race="SHULACK"/>
+			<gd_race race="UNDEAD"/>
+		</gd_races>
 		<gd_items>
 			<!-- Level 1 -->
 			<gd_item id="182400001" name="Kinah" />
