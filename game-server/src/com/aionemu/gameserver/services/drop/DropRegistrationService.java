@@ -39,8 +39,6 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalExclusion;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
-import com.aionemu.gameserver.model.templates.npc.NpcRank;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -626,41 +624,37 @@ public class DropRegistrationService {
 	}
 
 	public float getRankModifier(Npc npc) {
-		// Default Rank modifier : NOVICE:0.5f, DISCIPLINED:1f, SEASONED:1.5f, EXPERT:2f, VETERAN:2.5f, MASTER:3f;
-		float rankModifier = 1f;
-		if (npc.getRank() != null) {
-			if (npc.getRank().equals(NpcRank.NOVICE))
-				rankModifier = 1f;
-			else if (npc.getRank().equals(NpcRank.DISCIPLINED))
-				rankModifier = 1f;
-			else if (npc.getRank().equals(NpcRank.SEASONED))
-				rankModifier = 1.1f;
-			else if (npc.getRank().equals(NpcRank.EXPERT))
-				rankModifier = 1.2f;
-			else if (npc.getRank().equals(NpcRank.VETERAN))
-				rankModifier = 1.3f;
-			else if (npc.getRank().equals(NpcRank.MASTER))
-				rankModifier = 1.4f;
+		switch (npc.getRank()) {
+			case NOVICE:
+				return 0.9f;
+			case DISCIPLINED:
+				return 1f;
+			case SEASONED:
+				return 1.1f;
+			case EXPERT:
+				return 1.2f;
+			case VETERAN:
+				return 1.3f;
+			case MASTER:
+				return 1.4f;
 		}
-		return rankModifier;
+		return 1f;
 	}
 
 	public float getRatingModifier(Npc npc) {
-		// Default Rating modifier: JUNK: 0.5f, NORMAL:1, ELITE:1.5f, HERO:2f, LEGENDARY:2.2f;
-		float ratingModifier = 1f;
-		if (npc.getRating() != null) {
-			if (npc.getRating().equals(NpcRating.JUNK))
-				ratingModifier = 0.5f;
-			else if (npc.getRating().equals(NpcRating.NORMAL))
-				ratingModifier = 1f;
-			else if (npc.getRating().equals(NpcRating.ELITE))
-				ratingModifier = 1.5f;
-			else if (npc.getRating().equals(NpcRating.HERO))
-				ratingModifier = 1.8f;
-			else if (npc.getRating().equals(NpcRating.LEGENDARY))
-				ratingModifier = 2f;
+		switch (npc.getRating()) {
+			case JUNK:
+				return 0.5f;
+			case NORMAL:
+				return 1f;
+			case ELITE:
+				return 1.4f;
+			case HERO:
+				return 1.8f;
+			case LEGENDARY:
+				return 2f;
 		}
-		return ratingModifier;
+		return 1f;
 	}
 
 	@SuppressWarnings("synthetic-access")
