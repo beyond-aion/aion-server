@@ -57,6 +57,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author xTz, Aioncool, Bobobear
+ * @modified Neon
  */
 public class DropRegistrationService {
 
@@ -236,11 +237,11 @@ public class DropRegistrationService {
 						// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
 						if (!rule.isFixedChance())
 							chance *= getRankModifier(npc) * getRatingModifier(npc);
-						// add drop rate multiplier
-						float percent = chance * dropRate;
-						if (Rnd.get() * 100 > percent) {
+						// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance) 
+						if (!rule.getNoReduction())
+							chance *= dropRate;
+						if (Rnd.get() * 100 > chance)
 							continue;
-						}
 
 						if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
 							if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
@@ -318,7 +319,7 @@ public class DropRegistrationService {
 							if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
 								continue;
 						}
-							
+
 						// if npc level ==1 means missing stats, so better exclude it from drops
 						if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
 							continue;
@@ -331,13 +332,11 @@ public class DropRegistrationService {
 
 					float chance = rule.getChance();
 					// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
-					if (!rule.isFixedChance()) {
+					if (!rule.isFixedChance())
 						chance *= getRankModifier(npc) * getRatingModifier(npc);
-						if (!rule.getNoReduction())
-							chance *= dropRate;
-					}
-					// add drop rate multiplier
-					//float percent = chance * dropRate;
+					// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance) 
+					if (!rule.getNoReduction())
+						chance *= dropRate;
 					if (Rnd.get() * 100 > chance)
 						continue;
 
@@ -437,7 +436,7 @@ public class DropRegistrationService {
 		return SingletonHolder.instance;
 	}
 
-	private boolean hasGlobalNpcExclusions(Npc npc) {
+	public boolean hasGlobalNpcExclusions(Npc npc) {
 		for (GlobalExclusion gde : DataManager.GLOBAL_EXCLUSION_DATA.getGlobalExclusions()) {
 			if (gde.getNpcIds() != null && gde.getNpcIds().contains(npc.getNpcId()) || gde.getNpcNames() != null
 				&& gde.getNpcNames().contains(npc.getName()) || gde.getNpcTemplateTypes() != null
@@ -448,7 +447,7 @@ public class DropRegistrationService {
 		return false;
 	}
 
-	private boolean checkRestrictionRace(GlobalRule rule, Player player) {
+	public boolean checkRestrictionRace(GlobalRule rule, Player player) {
 		if (rule.getRestrictionRace() != null) {
 			if (player.getRace() == Race.ASMODIANS && rule.getRestrictionRace().equals(GlobalRule.RestrictionRace.ELYOS) || player.getRace() == Race.ELYOS
 				&& rule.getRestrictionRace().equals(GlobalRule.RestrictionRace.ASMODIANS))
@@ -457,7 +456,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleMaps(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleMaps(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleMaps() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropMap gdMap : rule.getGlobalRuleMaps().getGlobalDropMaps()) {
@@ -471,7 +470,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleWorlds(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleWorlds(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleWorlds() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropWorld gdWorld : rule.getGlobalRuleWorlds().getGlobalDropWorlds()) {
@@ -485,7 +484,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleRatings(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleRatings(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRatings() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropRating gdRating : rule.getGlobalRuleRatings().getGlobalDropRatings()) {
@@ -499,7 +498,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleRaces(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleRaces(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRaces() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropRace gdRace : rule.getGlobalRuleRaces().getGlobalDropRaces()) {
@@ -513,7 +512,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleTribes(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleTribes(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleTribes() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropTribe gdTribe : rule.getGlobalRuleTribes().getGlobalDropTribes()) {
@@ -527,7 +526,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleZones() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropZone gdZone : rule.getGlobalRuleZones().getGlobalDropZones()) {
@@ -541,7 +540,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleNpcs(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleNpcs(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcs() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropNpc gdNpc : rule.getGlobalRuleNpcs().getGlobalDropNpcs()) {
@@ -555,7 +554,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private boolean checkGlobalRuleNpcGroups(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleNpcGroups(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcGroups() != null) {
 			boolean stepCheck = false;
 			for (GlobalDropNpcGroup gdGroup : rule.getGlobalRuleNpcGroups().getGlobalDropNpcGroups()) {
@@ -580,7 +579,7 @@ public class DropRegistrationService {
 	 * (gdNpcName.getFunction().equals(StringFunction.EQUALS) && npc.getName().toLowerCase().equals(gdNpcName.getValue().toLowerCase())) stepCheck =
 	 * true; } return stepCheck; } return true; }
 	 **/
-	private boolean checkGlobalRuleExcludedNpcs(GlobalRule rule, Npc npc) {
+	public boolean checkGlobalRuleExcludedNpcs(GlobalRule rule, Npc npc) {
 		boolean stepCheck = false;
 		if (rule.getGlobalRuleExcludedNpcs() != null) {
 			for (GlobalDropExcludedNpc gdExcludedNpc : rule.getGlobalRuleExcludedNpcs().getGlobalDropExcludedNpcs()) {
@@ -593,7 +592,7 @@ public class DropRegistrationService {
 		return stepCheck;
 	}
 
-	private List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
+	public List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
 		List<Integer> alloweditems = new FastTable<Integer>();
 		List<Integer> droppeditems = new FastTable<Integer>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
@@ -619,18 +618,14 @@ public class DropRegistrationService {
 		return droppeditems;
 	}
 
-	private long getItemCount(int itemId, GlobalRule rule, Npc npc) {
-		long count = 1;
+	public long getItemCount(int itemId, GlobalRule rule, Npc npc) {
+		long count = rule.getMaxCount() > 1 ? Rnd.get((int) rule.getMinCount(), (int) rule.getMaxCount()) : rule.getMinCount();
 		if (itemId == 182400001)
-			count = rule.getMaxCount() > 1 ? Rnd.get((int) (rule.getMinCount() * npc.getLevel() * getRatingModifier(npc)),
-				(int) (rule.getMaxCount() * npc.getLevel() * getRatingModifier(npc) * npc.getHpGauge())) : (int) (rule.getMinCount() * npc.getLevel()
-				* getRatingModifier(npc) * npc.getHpGauge());
-		else
-			count = rule.getMaxCount() > 1 ? Rnd.get((int) rule.getMinCount(), (int) rule.getMaxCount()) : rule.getMinCount();
+			count *= npc.getLevel() * Math.pow(getRankModifier(npc) * getRatingModifier(npc), 6);
 		return count;
 	}
 
-	private float getRankModifier(Npc npc) {
+	public float getRankModifier(Npc npc) {
 		// Default Rank modifier : NOVICE:0.5f, DISCIPLINED:1f, SEASONED:1.5f, EXPERT:2f, VETERAN:2.5f, MASTER:3f;
 		float rankModifier = 1f;
 		if (npc.getRank() != null) {
@@ -650,7 +645,7 @@ public class DropRegistrationService {
 		return rankModifier;
 	}
 
-	private float getRatingModifier(Npc npc) {
+	public float getRatingModifier(Npc npc) {
 		// Default Rating modifier: JUNK: 0.5f, NORMAL:1, ELITE:1.5f, HERO:2f, LEGENDARY:2.2f;
 		float ratingModifier = 1f;
 		if (npc.getRating() != null) {
