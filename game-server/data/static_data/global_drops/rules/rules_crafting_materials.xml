@@ -728,7 +728,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Horns & Scales -->
-	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -744,21 +744,12 @@
 			<!-- Level 50 -->
 			<gd_item id="152014011" name="Solid Balaur Horn" />
 			<gd_item id="152014012" name="Solid Balaur Scale" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="-5" max_diff="0">
-		<gd_races>
-			<gd_race race="DRAKAN" />
-			<gd_race race="NAGA" />
-			<gd_race race="LIZARDMAN" />
-		</gd_races>
-		<gd_items>
 			<!-- Level 60 -->
 			<gd_item id="152014016" name="Firm Balaur Horn" />
 			<gd_item id="152014017" name="Firm Balaur Scale" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Horns Scales" base_chance="4" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="4" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -771,7 +762,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Skin & Meat -->
-	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -787,19 +778,9 @@
 			<!-- Level 50 -->
 			<gd_item id="152014013" name="Solid Balaur Skin" />
 			<gd_item id="152014015" name="Fresh Balaur Meat" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-5" max_diff="0">
-		<gd_races>
-			<gd_race race="DRAKAN" />
-			<gd_race race="NAGA" />
-			<gd_race race="LIZARDMAN" />
-		</gd_races>
-		<gd_items>
 			<!-- Level 60 -->
 			<gd_item id="152014018" name="Firm Balaur Skin" />
 			<gd_item id="152014020" name="Lustrous Balaur Meat" />
-
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="0" max_diff="4">
@@ -815,7 +796,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Blood -->
-	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -828,15 +809,6 @@
 			<gd_item id="152014009" name="Hot Balaur Blood Stain" />
 			<!-- Level 50 -->
 			<gd_item id="152014014" name="Boiling Balaur Blood Stain" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-5" max_diff="0">
-		<gd_races>
-			<gd_race race="DRAKAN" />
-			<gd_race race="NAGA" />
-			<gd_race race="LIZARDMAN" />
-		</gd_races>
-		<gd_items>
 			<!-- Level 60 -->
 			<gd_item id="152014019" name="Burning Balaur Blood Stain" />
 		</gd_items>
