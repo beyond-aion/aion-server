@@ -115,6 +115,8 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
+		if (qs.getQuestVarById(0) != 4 && qs.getQuestVarById(0) != 11)
+			return false;
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
@@ -122,19 +124,25 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 		if (targetId == 210158) // Tursin Loudmouth Boss
 		{
 			if (MathUtil.getDistance(env.getVisibleObject(), 1552.7401f, 1160.3622f, 114.06791f) <= 30) {
-				if (qs.getQuestVarById(0) == 11) {
+				Npc boss = (Npc)player.getTarget();
+				if (boss == null || boss.getLifeStats().isAlreadyDead())
+					return false;
+				if (boss.getLifeStats().getHpPercentage() <= 20) {
+					if (qs.getQuestVarById(0) == 4)
+						qs.setQuestVarById(0, 5); // 5
+					else if (qs.getQuestVarById(0) == 11) {
+						qs.setQuestVarById(0, 10);
+						qs.setStatus(QuestStatus.REWARD); // reward
+					}
+					updateQuestStatus(env);
+					boss.getController().onDie(player);
 					playQuestMovie(env, 22);
-					((Npc) env.getVisibleObject()).getController().onDie(player);
-					qs.setQuestVar(10);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
 					return true;
-				} else if (qs.getQuestVarById(0) == 4) {
-					playQuestMovie(env, 13);
-					((Npc) env.getVisibleObject()).getController().onDie(player);
-					qs.setQuestVarById(0, 5); // 5
-					updateQuestStatus(env);
-					return true;
+				}
+				else {
+						boss.getController().onDie(player);
+						playQuestMovie(env, 13);
+						return true;
 				}
 			}
 		}
@@ -156,8 +164,10 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 18));
 
 		if (id == 182200023) // Flint
-			if (var == 9 && player.isInsideZone(ZoneName.get("TURSIN_TOTEM_POLE_210030000")))
+			if (var == 9 && player.isInsideZone(ZoneName.get("TURSIN_TOTEM_POLE_210030000"))) {
+				playQuestMovie(env, 174);
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false));
+			}
 		return HandlerResult.FAILED;
 	}
 
@@ -174,10 +184,11 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 
 		switch (targetId) {
 			case 210697: // Ziloota the Seer
-				return defaultOnKillEvent(env, targetId, 10, true);
+				return defaultOnKillEvent(env, targetId, 10, 11);
 			case 216891: // High Priest Munuka
-				return defaultOnKillEvent(env, targetId, 10, true);
+				return defaultOnKillEvent(env, targetId, 10, 11);
 		}
 		return false;
 	}
+
 }
