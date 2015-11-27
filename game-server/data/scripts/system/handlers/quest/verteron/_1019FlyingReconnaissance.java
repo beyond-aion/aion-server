@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -116,6 +115,8 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
+		if (qs.getQuestVarById(0) != 4 && qs.getQuestVarById(0) != 11)
+			return false;
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
@@ -133,19 +134,15 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 						qs.setQuestVarById(0, 10);
 						qs.setStatus(QuestStatus.REWARD); // reward
 					}
-					else
-						return false;
 					updateQuestStatus(env);
-					boss.getController().delete();
+					boss.getController().onDie(player);
 					playQuestMovie(env, 22);
 					return true;
 				}
 				else {
-					if (qs.getQuestVarById(0) == 4 || qs.getQuestVarById(0) == 11) {
-						boss.getController().delete();
+						boss.getController().onDie(player);
 						playQuestMovie(env, 13);
 						return true;
-					}
 				}
 			}
 		}
