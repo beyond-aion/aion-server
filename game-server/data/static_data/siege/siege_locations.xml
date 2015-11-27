@@ -35,7 +35,7 @@
 		<siege_reward top="50" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
-		<legion_reward itemid="188053296" m_count="1"/>
+		<legion_reward itemid="188052117" m_count="1"/>
 		<legion_reward itemid="122001663" m_count="1"/>
 		<merc_zone id="1" costs="36" cooldown="900" msg_id="1402451" announce_id="1402448"/>
 		<merc_zone id="2" costs="36" cooldown="900" msg_id="1402452" announce_id="1402449"/>
