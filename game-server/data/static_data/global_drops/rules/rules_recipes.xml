@@ -67,7 +67,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206241" name="Design: Greater Running Scroll"/>
@@ -93,7 +93,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
@@ -168,7 +168,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206238" name="Design: Greater Courage Scroll"/>
@@ -194,7 +194,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
@@ -269,7 +269,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207129" name="Design: Greater Awakening Scroll"/>
@@ -295,7 +295,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
@@ -370,7 +370,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206244" name="Design: Greater Raging Wind Scroll"/>
@@ -396,7 +396,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
@@ -497,7 +497,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206256" name="Design: Major Life Serum"/>
@@ -521,7 +521,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207132" name="Design: Fine Life Serum"/>
@@ -618,7 +618,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206260" name="Design: Major Mana Serum"/>
@@ -642,7 +642,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207133" name="Design: Fine Mana Serum"/>
@@ -691,7 +691,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206335" name="Design: Major Recovery Serum"/>
@@ -715,7 +715,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207153" name="Design: Fine Recovery Serum"/>
@@ -788,7 +788,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206333" name="Design: Major Recovery Potion"/>
@@ -812,7 +812,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207236" name="Design: Fine Recovery Potion"/>
@@ -986,7 +986,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206449" name="Recipe: Leopis Cocktail"/>
@@ -1009,7 +1009,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220060000" name="Brusthonin"/>
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152206457" name="Recipe: Lobnite Aether Cream Pasta"/>
@@ -1071,7 +1071,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
@@ -1092,7 +1092,7 @@
 			<gd_rating rating="ELITE"/>
 		</gd_ratings>
 		<gd_maps>
-			<gd_map map_id="220050000" name="Gelkmaros"/>
+			<gd_map map_id="220070000" name="Gelkmaros"/>
 			<gd_map map_id="600020000" name="Sarpan"/>
 			<gd_map map_id="600030000" name="Tiamaranta"/>
 		</gd_maps>
