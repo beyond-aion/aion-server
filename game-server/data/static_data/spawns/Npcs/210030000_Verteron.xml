@@ -2698,7 +2698,7 @@
 			<spot x="1039.17" y="2170.62" z="166.28876" h="111" walker_id="3684968765C08E216C5F34274366F93760D9B154"/>
 		</spawn>
 		<!-- Tursin Loudmouth Boss -->
-		<spawn npc_id="210158" respawn_time="295">
+		<spawn npc_id="210158" respawn_time="60">
 			<spot x="1639.1465" y="1050.5951" z="118.2473" h="40"/>
 		</spawn>
 		<!-- Tursin Loudmouth Chief -->
