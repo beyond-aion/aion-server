@@ -1,5 +1,6 @@
 package ai.siege;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
@@ -37,7 +37,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class EmpoweredAgent extends AggressiveNpcAI2 {
 	
 	private final List<Integer> guardIds = new FastTable<>();
-	private final List<Integer> percents = new FastTable<>();
+	private final List<Integer> percents = Arrays.asList(80, 70, 60, 50, 40, 30, 25, 20, 5);
 	private boolean canThink = true;
 	
 	@Override
@@ -59,7 +59,6 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 				Collections.addAll(guardIds, new Integer[] {235340, 235341, 235342, 235343, 235344, 235345});
 				break;
 		}
-		Collections.addAll(percents, new Integer[] {80, 60, 40, 30, 20, 5});
 	}
 	
 	@Override
@@ -73,20 +72,33 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 			if (hpPercentage <= percent) {
 				switch (percent) {
 					case 80:
+					case 70:
 					case 60:
+					case 50:
 					case 40:
+					case 30:
 					case 20:
 						onGuardSpawnEvent();
 						break;
-					case 30:
+					case 25:
 					case 5:
-						AI2Actions.useSkill(this, 21778);
+						onHealEvent(hpPercentage);
 						break;
 				}
 				percents.remove(percent);
 				break;
 			}
 		}
+	}
+	
+	/**
+	 * Increases the life by 20% if skill wasn't used correctly
+	 * TODO: Remove me if AI can use skills without interruption
+	 * @param hpPercentage
+	 */
+	private void onHealEvent(int hpPercentage) {
+		if (!SkillEngine.getInstance().getSkill(getOwner(), 21778, 1, getOwner()).useSkill())
+			getOwner().getLifeStats().setCurrentHp(hpPercentage + 20);
 	}
 	
 	@Override
@@ -166,10 +178,13 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 	
 	private void onGuardSpawnEvent() {
 		int worldId = getOwner().getWorldId();
-		for (Integer id : guardIds) {
+		float guardAmount = getOwner().getAggroList().getList().size() / 2.5f;
+		if (guardAmount < 6)
+			guardAmount = 6;
+		for (int i = 0; i < guardAmount; i++) {
 			Point3D pos = getRndPos();
 			//TODO: change to dynamic siegeID
-			SiegeSpawnTemplate template = SpawnEngine.addNewSiegeSpawn(worldId, id, 8011, SiegeRace.BALAUR, SiegeModType.SIEGE,
+			SiegeSpawnTemplate template = SpawnEngine.addNewSiegeSpawn(worldId, Rnd.get(guardIds.size() - 1), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE,
 				pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 			SpawnEngine.spawnObject(template, 1);
 		}
