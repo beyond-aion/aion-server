@@ -10,7 +10,7 @@ public abstract class BonusPackDAO implements DAO {
 
 	public abstract int loadReceivingPlayer(final Player player);
 
-	public abstract void storePlayer(final Player player, final int receivingPlayer);
+	public abstract void storeReceivingPlayer(int accountId, int playerId);
 
 	@Override
 	public String getClassName() {

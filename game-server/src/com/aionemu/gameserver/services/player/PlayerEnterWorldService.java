@@ -85,6 +85,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.DisputeLandService;
@@ -546,6 +547,9 @@ public final class PlayerEnterWorldService {
 				RelinquishCraftStatus.removeExcessCraftStatus(player, false);
 
 			PlayerTransferService.getInstance().onEnterWorld(player);
+
+			// try to send bonus pack (if mailbox was full on lvlup)
+			BonusPackService.getInstance().addPlayerCustomReward(player);
 		} else {
 			log.info("[DEBUG] enter world" + objectId + ", Player: " + player);
 		}
