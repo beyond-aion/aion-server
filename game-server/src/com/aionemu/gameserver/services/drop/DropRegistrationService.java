@@ -235,7 +235,7 @@ public class DropRegistrationService {
 						// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
 						if (!rule.isFixedChance())
 							chance *= getRankModifier(npc) * getRatingModifier(npc);
-						// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance) 
+						// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
 						if (!rule.getNoReduction())
 							chance *= dropRate;
 						if (Rnd.get() * 100 > chance)
@@ -275,7 +275,13 @@ public class DropRegistrationService {
 						if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2())) {
 							for (Player member : winningPlayers) {
 								for (int itemListed : alloweditems) {
-									droppedItems.add(regDropItem(index++, member.getObjectId(), npcObjId, itemListed, getItemCount(itemListed, rule, npc)));
+									DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
+									dropitem.setCount(getItemCount(itemListed, rule, npc));
+									dropitem.setIndex(index++);
+									dropitem.setPlayerObjId(member.getObjectId());
+									dropitem.setWinningPlayer(member);
+									dropitem.isDistributeItem(true);
+									droppedItems.add(dropitem);
 								}
 							}
 						} else {
@@ -309,12 +315,13 @@ public class DropRegistrationService {
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
 						if (npc.getSpawn() instanceof SiegeSpawnTemplate)
 							continue;
-						//if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
-						//	continue;
-						
-						//exclude Inner Base Npcs
+						// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
+						// continue;
+
+						// exclude Inner Base Npcs
 						if (npc.getSpawn() instanceof BaseSpawnTemplate) {
-							if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+							if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+								&& npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
 								continue;
 						}
 
@@ -332,7 +339,7 @@ public class DropRegistrationService {
 					// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
 					if (!rule.isFixedChance())
 						chance *= getRankModifier(npc) * getRatingModifier(npc);
-					// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance) 
+					// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
 					if (!rule.getNoReduction())
 						chance *= dropRate;
 					if (Rnd.get() * 100 > chance)
@@ -372,7 +379,13 @@ public class DropRegistrationService {
 					if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2())) {
 						for (Player member : winningPlayers) {
 							for (int itemListed : alloweditems) {
-								droppedItems.add(regDropItem(index++, member.getObjectId(), npcObjId, itemListed, getItemCount(itemListed, rule, npc)));
+								DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
+								dropitem.setCount(getItemCount(itemListed, rule, npc));
+								dropitem.setIndex(index++);
+								dropitem.setPlayerObjId(member.getObjectId());
+								dropitem.setWinningPlayer(member);
+								dropitem.isDistributeItem(true);
+								droppedItems.add(dropitem);
 							}
 						}
 					} else {
