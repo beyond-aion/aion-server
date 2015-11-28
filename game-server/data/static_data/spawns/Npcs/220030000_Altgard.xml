@@ -3163,9 +3163,8 @@
 			<spot x="1770.54" y="820.312" z="248.538" h="16"/>
 		</spawn>
 		<!-- Suspicious Box -->
-		<spawn npc_id="211823" respawn_time="60">
+		<spawn npc_id="211823" respawn_time="900">
 			<spot x="1605.5" y="1286.51" z="275.968" h="39"/>
-			<spot x="2538.11" y="1499.46" z="258.365" h="113"/>
 		</spawn>
 		<!-- Suspicious Clothing -->
 		<spawn npc_id="700211" respawn_time="295">

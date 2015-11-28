@@ -18,7 +18,32 @@
 	</npc_drop>
 	-->
 	<!-- Chests -->
-	<!-- Open-World-Maps -->
+	<!-- World-Maps -->
+	<!-- Verteron/Altgard -->
+	<npc_drop npc_id="211823" replace_type="FULL">
+		<!-- use_category="false" to disable drop limit for groups -->
+		<drop_group race="PC_ALL" use_category="false" name="Named Accessory (Rare)">
+			<!-- Level 16 -->
+			<drop item_id="122000600" name="Head Priest's Jewel Ring" min_amount="1" max_amount="1" chance="6.5"/>
+			<drop item_id="122000601" name="Head Priest's Manastone Ring" min_amount="1" max_amount="1" chance="6.5"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="false" name="Named Weapon (Rare)">
+			<!-- Level 16 -->
+			<drop item_id="100000219" name="Head Priest's Sword" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="100200235" name="Head Priest's Dagger" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="100500143" name="Head Priest's Orb" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="101700155" name="Head Priest's Longbow" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="100900140" name="Head Priest's Greatsword" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="101300136" name="Head Priest's Spear" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="100100133" name="Head Priest's Warhammer" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="101500144" name="Head Priest's Staff" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="100600158" name="Head Priest's Tome" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="101800261" name="Head Priest's Pistol" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="101900263" name="Head Priest's Aethercannon" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="102000274" name="Head Priest's Harp" min_amount="1" max_amount="1" chance="7.5"/>
+			<drop item_id="102100245" name="Head Priest's Cipher-Blade" min_amount="1" max_amount="1" chance="7.5"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Eltnen -->
 	<npc_drop npc_id="211857" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Rare)">
