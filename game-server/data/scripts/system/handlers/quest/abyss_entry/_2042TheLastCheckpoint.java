@@ -70,15 +70,14 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							}
-							if (var == 8) {
+							} else if (var == 8) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 9) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
 						case SELECT_ACTION_1354: {
-							if (var == 1 || var == 9) {
+							if (var == 1 || var == 10) {
 								playQuestMovie(env, 89);
 								return sendQuestDialog(env, 1354);
 							}
@@ -100,7 +99,7 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 							}
 						}
 						case FINISH_DIALOG: {
-							return defaultCloseDialog(env, 9, 9);
+							return sendQuestSelectionDialog(env);
 						}
 					}
 				}
@@ -167,29 +166,13 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var > 1 && var < 9) {
-				QuestService.questTimerEnd(env);
-				return this.onQuestTimerEndEvent(env);
-			}
-		}
-		return false;
+		QuestService.questTimerEnd(env);
+		return onQuestTimerEndEvent(env);
 	}
 
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var > 1 && var < 9) {
-				QuestService.questTimerEnd(env);
-				return this.onQuestTimerEndEvent(env);
-			}
-		}
-		return false;
+		QuestService.questTimerEnd(env);
+		return onQuestTimerEndEvent(env);
 	}
 }
