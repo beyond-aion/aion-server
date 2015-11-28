@@ -64402,6 +64402,7 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
 	<npcskills npcid="234596">
 		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64409,6 +64410,7 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
 	<npcskills npcid="234600">
 		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64416,6 +64418,7 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
 	<npcskills npcid="234602">
 		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64423,6 +64426,7 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
 	<npcskills npcid="234614">
 		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64430,6 +64434,7 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
 	<!-- Prime Benoid (sandworm) -->
 	<npcskills npcid="234588">
