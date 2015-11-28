@@ -105,8 +105,6 @@ public class DropInfo extends AdminCommand {
 		boostDropRate += player.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 
 		float dropRate = player.getRates().getDropRate() * boostDropRate * dropChance / 100F;
-
-		sendInfo(player, "rate: " + player.getRates().getDropRate() + " * boost: " + boostDropRate + " = droprate: " + dropRate);
 		
 		int count = 0;
 		PacketSendUtility.sendMessage(player, "\n[Drop Info for the specified NPC]");

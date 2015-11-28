@@ -283,7 +283,7 @@
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231196" name="Executioner Penemon" />
+			<gd_npc npc_id="231001" name="Executioner Penemon" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000237" name="Ancient Coin" />
@@ -294,7 +294,7 @@
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231196" name="Executioner Penemon" />
+			<gd_npc npc_id="231001" name="Executioner Penemon" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101657" name="Penemon's Tunic" />
@@ -312,7 +312,7 @@
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231196" name="Executioner Penemon" />
+			<gd_npc npc_id="231001" name="Executioner Penemon" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001645" name="Penemon's Magic Shield" />
@@ -324,7 +324,7 @@
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231196" name="Executioner Penemon" />
+			<gd_npc npc_id="231001" name="Executioner Penemon" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001644" name="Penemon's Shield" />
@@ -336,7 +336,7 @@
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231196" name="Executioner Penemon" />
+			<gd_npc npc_id="231001" name="Executioner Penemon" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125003652" name="Penemon's Headband" />
