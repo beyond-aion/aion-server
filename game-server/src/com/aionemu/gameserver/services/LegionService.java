@@ -1537,7 +1537,7 @@ public class LegionService {
 		 */
 		private boolean canCreateLegion(Player activePlayer, String legionName) {
 			/* Some reasons why legions can' be created */
-			if (!NameRestrictionService.isValidLegionName(legionName) || NameRestrictionService.isForbiddenWord(legionName)) {
+			if (!NameRestrictionService.isValidLegionName(legionName) || NameRestrictionService.isForbidden(legionName)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CREATE_INVALID_GUILD_NAME);
 				return false;
 			} // STR_GUILD_CREATE_TOO_FAR_FROM_CREATOR_NPC TODO

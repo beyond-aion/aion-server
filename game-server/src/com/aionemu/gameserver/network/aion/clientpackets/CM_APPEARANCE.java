@@ -71,7 +71,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 	private void tryChangeCharacterName(Player player, String newName, int itemObjId) {
 		if (player.getName().equals(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_SAME_YOUR_NAME);
-		else if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbiddenWord(newName))
+		else if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbidden(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT);
 		else if (!PlayerService.isFreeName(newName) || !CustomConfig.OLD_NAMES_COUPON_DISABLED && PlayerService.isOldName(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST);
@@ -96,7 +96,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME);
 		else if (player.getLegion().getLegionName().equals(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME);
-		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbiddenWord(newName))
+		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbidden(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT);
 		else if (DAOManager.getDAO(LegionDAO.class).isNameUsed(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST);

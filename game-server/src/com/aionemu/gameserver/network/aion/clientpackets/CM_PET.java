@@ -112,7 +112,7 @@ public class CM_PET extends AionClientPacket {
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
-				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbiddenWord(petName))
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
 				else
 					PetAdoptionService.adoptPet(player, eggObjId, petId, petName, decorationId);
@@ -148,7 +148,7 @@ public class CM_PET extends AionClientPacket {
 				}
 				break;
 			case RENAME:
-				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbiddenWord(petName))
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
 				else
 					PetService.getInstance().renamePet(player, petName);
