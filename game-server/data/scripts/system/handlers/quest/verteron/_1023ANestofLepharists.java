@@ -7,6 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -74,8 +75,10 @@ public class _1023ANestofLepharists extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
-						else if (var == 3)
+						else if (var == 3) {
+							player.getEffectController().removeEffect(8197);
 							return sendQuestDialog(env, 1693);
+						}
 						else if (var == 4)
 							return sendQuestDialog(env, 2034);
 						else if (var == 5)
@@ -84,6 +87,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 						return sendQuestDialog(env, 1353);
 					case SETPRO2:
 						if (var == 1) {
+							SkillEngine.getInstance().applyEffectDirectly(8197, player, player, 0);
 							playQuestMovie(env, 30);
 							return defaultCloseDialog(env, 1, 2); // 2
 						}

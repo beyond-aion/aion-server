@@ -322,6 +322,8 @@ public class VisibleObjectSpawner {
 			owner.getY() + (float) (Math.sin(radian) * 5), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(iDFactory.nextId(), new NpcController(), spawn, template);
+		postman.setCreatorId(owner.getObjectId());
+		postman.setMasterName(owner.getName());
 		postman.setKnownlist(new PlayerAwareKnownList(postman));
 		postman.setEffectController(new EffectController(postman));
 		postman.getAi2().onCustomEvent(1, owner);
