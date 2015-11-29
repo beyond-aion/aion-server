@@ -11,15 +11,12 @@ public class NameRestrictionService {
 	private static String[] forbiddenSequences;
 	private static String[] forbiddenByClient;
 
-	/**
-	 * Checks if a name is valid. It should contain only english letters
-	 * 
-	 * @param character
-	 *          name
-	 * @return true if name is valid, false otherwise
-	 */
 	public static boolean isValidName(String name) {
 		return NameConfig.CHAR_NAME_PATTERN.matcher(name).matches();
+	}
+
+	public static boolean isValidPetName(String name) {
+		return NameConfig.PET_NAME_PATTERN.matcher(name).matches();
 	}
 
 	/**
@@ -36,10 +33,10 @@ public class NameRestrictionService {
 	 * Checks if a name is forbidden (contains string sequences from config)
 	 * 
 	 * @param name
-	 * @return true if name is forbidden
+	 * @return True if name is forbidden.
 	 */
 	private static boolean isForbiddenByClient(String name) {
-		if (!NameConfig.NAME_FORBIDDEN_ENABLE || NameConfig.NAME_FORBIDDEN_CLIENT.equals(""))
+		if (NameConfig.NAME_FORBIDDEN_CLIENT.equals(""))
 			return false;
 
 		if (forbiddenByClient == null || forbiddenByClient.length == 0)
@@ -53,12 +50,12 @@ public class NameRestrictionService {
 	}
 
 	/**
-	 * Checks if a name is forbidden (contains string sequences from config)
+	 * Checks if a part of a string contains a forbidden sequence.
 	 * 
-	 * @param name
-	 * @return true if name is forbidden
+	 * @param string
+	 * @return True if string contains forbidden sequence.
 	 */
-	private static boolean isForbiddenBySequence(String name) {
+	private static boolean isForbiddenBySequence(String string) {
 		if (NameConfig.NAME_SEQUENCE_FORBIDDEN.equals(""))
 			return false;
 
@@ -66,7 +63,7 @@ public class NameRestrictionService {
 			forbiddenSequences = NameConfig.NAME_SEQUENCE_FORBIDDEN.toLowerCase().split(",");
 
 		for (String s : forbiddenSequences) {
-			if (name.toLowerCase().contains(s))
+			if (string.toLowerCase().contains(s))
 				return true;
 		}
 		return false;

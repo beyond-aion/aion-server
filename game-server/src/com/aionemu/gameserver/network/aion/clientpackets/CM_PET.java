@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
@@ -11,6 +8,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.services.toypet.PetMoodService;
@@ -22,9 +20,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author M@xx, xTz
  */
 public class CM_PET extends AionClientPacket {
-
-	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(CM_PET.class);
 
 	private int actionId;
 	private PetAction action;
@@ -44,13 +39,7 @@ public class CM_PET extends AionClientPacket {
 	private int activateLoot;
 
 	@SuppressWarnings("unused")
-	private int unk2;
-	@SuppressWarnings("unused")
-	private int unk3;
-	@SuppressWarnings("unused")
-	private int unk5;
-	@SuppressWarnings("unused")
-	private int unk6;
+	private int unk2, unk3, unk5, unk6;
 
 	public CM_PET(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -123,11 +112,10 @@ public class CM_PET extends AionClientPacket {
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
-				if (NameRestrictionService.isForbiddenWord(petName)) {
-					PacketSendUtility.sendMessage(player, "You are trying to use a forbidden name. Choose another one!");
-				} else {
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbiddenWord(petName))
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
+				else
 					PetAdoptionService.adoptPet(player, eggObjId, petId, petName, decorationId);
-				}
 				break;
 			case SURRENDER:
 				PetAdoptionService.surrenderPet(player, petId);
@@ -160,11 +148,10 @@ public class CM_PET extends AionClientPacket {
 				}
 				break;
 			case RENAME:
-				if (NameRestrictionService.isForbiddenWord(petName)) {
-					PacketSendUtility.sendMessage(player, "You are trying to use a forbidden name. Choose another one!");
-				} else {
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbiddenWord(petName))
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
+				else
 					PetService.getInstance().renamePet(player, petName);
-				}
 				break;
 			case MOOD:
 				if (pet != null
