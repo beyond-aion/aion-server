@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Kinah -->
-	<gd_rule rule_name="Kinah" base_chance="40" min_count="5" max_count="25">
+	<gd_rule rule_name="Kinah" base_chance="50" min_count="5" max_count="25">
 		<gd_races>
 			<gd_race race="ELYOS"/>
 			<gd_race race="ASMODIANS"/>
