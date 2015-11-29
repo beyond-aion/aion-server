@@ -1,0 +1,54 @@
+package ai.instance.theShugoEmperorsVault;
+
+import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai2.poll.AIAnswer;
+import com.aionemu.gameserver.ai2.poll.AIAnswers;
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai2.poll.NpcAIPolls;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+
+import ai.AggressiveNpcAI2;
+
+
+/**
+ * @author Yeats
+ *
+ */
+@AIName("IDSweep_shugos")
+public class IDSweep_Shugos extends AggressiveNpcAI2 {
+
+	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		InstanceHandler handler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
+		InstanceReward<?> reward = null;
+		if (handler != null) {
+			reward = handler.getInstanceReward();
+			if (reward != null) {
+				if (reward.getInstanceScoreType() == InstanceScoreType.END_PROGRESS) {
+					getOwner().getController().delete();
+				}
+			}
+		}
+	}
+	
+	@Override
+	protected AIAnswer pollInstance(AIQuestion question) {
+		switch (question) {
+			case SHOULD_DECAY:
+				return NpcAIPolls.shouldDecay(this);
+			case SHOULD_RESPAWN:
+				return NpcAIPolls.shouldRespawn(this);
+			case SHOULD_REWARD:
+				return AIAnswers.NEGATIVE;
+			case SHOULD_LOOT:
+				return AIAnswers.NEGATIVE;
+			case CAN_SHOUT:
+				return isMayShout() ? AIAnswers.POSITIVE : AIAnswers.NEGATIVE;
+			default:
+				return null;
+		}
+	}
+}

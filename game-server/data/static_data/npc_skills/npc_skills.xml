@@ -64656,4 +64656,35 @@
 		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
+	<!-- Shugo Emperors Vault -->
+	<npcskills npcid="235660">
+		<npcskill skillid="21863" skilllevel="1" probability="100" minhp="0" maxhp="40" cooldown="180000"/>
+		<npcskill skillid="21871" skilllevel="1" probability="100" minhp="0" maxhp="70" cooldown="10000"/>
+	</npcskills>
+	<npcskills npcid="235634">
+		<npcskill skillid="21835" skilllevel="1" probability="100" minhp="0" maxhp="60" cooldown="10000"/>
+	</npcskills>
+	<npcskills npcid="235640">
+		<npcskill skillid="21839" skilllevel="1" probability="100" minhp="0" maxhp="40" cooldown="180000"/>
+		<npcskill skillid="21840" skilllevel="1" probability="100" minhp="0" maxhp="50" cooldown="15000"/>
+	</npcskills>
+	<npcskills npcid="235685">
+		<npcskill skillid="21869" skilllevel="1" probability="100" cooldown="10000"/>
+	</npcskills>
+	<npcskills npcid="235684">
+		<npcskill skillid="21915" skilllevel="1" probability="100" minhp="0" maxhp="55" cooldown="20000"/>
+		<npcskill skillid="21870" skilllevel="1" probability="100" minhp="0" maxhp="45" cooldown="10000" />
+	</npcskills>
+	<npcskills npcid="235683">
+		<npcskill skillid="21867" skilllevel="1" probability="100" cooldown="180000"/>
+		<npcskill skillid="21916" skilllevel="1" probability="100" minhp="45" maxhp="80" cooldown="15000" />
+		<npcskill skillid="21915" skilllevel="1" probability="100" minhp="30" maxhp="65" cooldown="15000"/>
+		<npcskill skillid="21917" skilllevel="1" probability="100" minhp="0" maxhp="25" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="235647">
+		<npcskill skillid="21868" skilllevel="1" probability="100" cooldown="180000"/>
+		<npcskill skillid="21915" skilllevel="1" probability="100" minhp="0" maxhp="90" cooldown="5000" />
+		<npcskill skillid="21912" skilllevel="1" probability="100" minhp="0" maxhp="55" cooldown="90000"/>
+		<npcskill skillid="21916" skilllevel="1" probability="100" minhp="0" maxhp="20" cooldown="30000"/>
+	</npcskills>
 </npc_skill_templates>
