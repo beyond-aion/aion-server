@@ -1,26 +1,36 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.dao.LegionDAO;
+import com.aionemu.gameserver.dao.OldNamesDAO;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RENAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.RenameService;
+import com.aionemu.gameserver.services.NameRestrictionService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author xTz
+ * @modified Neon
  */
 public class CM_APPEARANCE extends AionClientPacket {
 
 	private int type;
-
 	private int itemObjId;
-
-	private String name;
+	private String newName;
 
 	public CM_APPEARANCE(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -35,7 +45,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 		switch (type) {
 			case 0:
 			case 1:
-				name = readS();
+				newName = readS();
 				break;
 		}
 
@@ -46,31 +56,77 @@ public class CM_APPEARANCE extends AionClientPacket {
 		final Player player = getConnection().getActivePlayer();
 
 		switch (type) {
-			case 0: // Change Char Name,
-				name = Util.convertName(name);
-				if (RenameService.renamePlayer(player, player.getName(), name, itemObjId)) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400157, name));
-				}
+			case 0: // Change Char Name
+				tryChangeCharacterName(player, Util.convertName(newName), itemObjId);
 				break;
 			case 1: // Change Legion Name
-				if (RenameService.renameLegion(player, name, itemObjId)) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400158, name));
-				}
+				tryChangeLegionName(player, newName, itemObjId);
 				break;
 			case 2: // cosmetic items
-				Item item = player.getInventory().getItemByObjId(itemObjId);
-				if (item != null) {
-					for (AbstractItemAction action : item.getItemTemplate().getActions().getItemActions()) {
-						if (action instanceof CosmeticItemAction) {
-							if (!action.canAct(player, null, null)) {
-								return;
-							}
-							action.act(player, null, item);
-							break;
-						}
-					}
-				}
+				tryUseCosmeticItem(player, itemObjId);
 				break;
+		}
+	}
+
+	private void tryChangeCharacterName(Player player, String newName, int itemObjId) {
+		if (player.getName().equals(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_SAME_YOUR_NAME);
+		else if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbiddenWord(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT);
+		else if (!PlayerService.isFreeName(newName) || !CustomConfig.OLD_NAMES_COUPON_DISABLED && PlayerService.isOldName(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST);
+		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670001)
+			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
+			AuditLogger.info(player, "Tried to rename himself without coupon.");
+		else {
+			String oldName = player.getName();
+			if (!CustomConfig.OLD_NAMES_COUPON_DISABLED)
+				DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), oldName, newName);
+
+			player.getCommonData().setName(newName);
+			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
+
+			PacketSendUtility.broadcastPacket(player, new SM_RENAME(player.getObjectId(), oldName, newName), true);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_SUCCESS(newName));
+		}
+	}
+
+	private void tryChangeLegionName(Player player, String newName, int itemObjId) {
+		if (!player.isLegionMember() || !player.getLegionMember().isBrigadeGeneral())
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME);
+		else if (player.getLegion().getLegionName().equals(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME);
+		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbiddenWord(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT);
+		else if (DAOManager.getDAO(LegionDAO.class).isNameUsed(newName))
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST);
+		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680001)
+			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
+			AuditLogger.info(player, "Tried to rename legion without coupon.");
+		else {
+			Legion legion = player.getLegion();
+
+			legion.setLegionName(newName);
+			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+
+			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
+			for (Player member : legion.getOnlineLegionMembers()) {
+				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getLegionName(),
+					member.getLegionMember().getRank().getRankId()), true);
+			}
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_SUCCESS(newName));
+		}
+	}
+
+	private void tryUseCosmeticItem(Player player, int itemObjId) {
+		Item item = player.getInventory().getItemByObjId(itemObjId);
+		if (item != null) {
+			for (AbstractItemAction action : item.getItemTemplate().getActions().getItemActions()) {
+				if (action instanceof CosmeticItemAction && action.canAct(player, null, null)) {
+					action.act(player, null, item);
+					break;
+				}
+			}
 		}
 	}
 }

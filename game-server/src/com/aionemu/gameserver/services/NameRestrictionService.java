@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 
 /**
@@ -17,6 +18,10 @@ public class NameRestrictionService {
 
 	public static boolean isValidPetName(String name) {
 		return NameConfig.PET_NAME_PATTERN.matcher(name).matches();
+	}
+
+	public static boolean isValidLegionName(String name) {
+		return LegionConfig.LEGION_NAME_PATTERN.matcher(name).matches();
 	}
 
 	/**
