@@ -81,8 +81,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = { 20020, 2094 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		return defaultOnLvlUpEvent(env, 20020, true);
 	}
 
 	@Override

@@ -29,6 +29,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _1929ASliverofDarkness extends QuestHandler {
 
 	private final static int questId = 1929;
+	private long existingStigmaShardsCount = 300;
 
 	public _1929ASliverofDarkness() {
 		super(questId);
@@ -108,6 +109,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
 								TeleportService2.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
+								existingStigmaShardsCount = player.getInventory().getItemCountByItemId(141000001);
 								return closeDialogWindow(env);
 							}
 						}
@@ -168,10 +170,9 @@ public class _1929ASliverofDarkness extends QuestHandler {
 						case SELECT_ACTION_2546: {
 							if (var == 98) {
 								if (giveQuestItem(env, getStoneId(player), 1)) {
-									long existendStigmaShards = player.getInventory().getItemCountByItemId(141000001);
-									if (existendStigmaShards < 300) {
+									if (existingStigmaShardsCount < 300) {
 										if (!player.getInventory().isFull()) {
-											ItemService.addItem(player, 141000001, 300 - existendStigmaShards);
+											ItemService.addItem(player, 141000001, 300 - existingStigmaShardsCount);
 											PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 											return true;
 										}
@@ -243,6 +244,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 97) {
+				removeStigma(env);
 				changeQuestStep(env, 97, 8, false); // 8
 				TeleportService2.teleportTo(player, 210030000, 1, 2315.9f, 1800f, 195.2f);
 				return true;
@@ -283,9 +285,6 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
 						.getName()));
 					return true;
-				} else if (var == 8) {
-					removeStigma(env);
-					return true;
 				}
 			}
 		}
@@ -319,13 +318,13 @@ public class _1929ASliverofDarkness extends QuestHandler {
 				return 140000112;// Rage Spell I
 			}
 			case BARD: {
-				return 140000859;
+				return 140000859;// Freestyle I
 			}
 			case GUNNER: {
-				return 140000943;
+				return 140000943;// Nature's Favor I
 			}
 			case RIDER: {
-				return 140001002;
+				return 140001002;// Nullification Trigger I
 			}
 			default: {
 				return 0;
@@ -349,6 +348,8 @@ public class _1929ASliverofDarkness extends QuestHandler {
 			player.getEquipment().unEquipItem(item.getObjectId(), 0);
 		}
 		removeQuestItem(env, getStoneId(player), 1);
+		removeQuestItem(env, 141000001, player.getInventory().getItemCountByItemId(141000001));
+		giveQuestItem(env, 141000001, existingStigmaShardsCount);
 	}
 
 	@Override

@@ -6680,7 +6680,7 @@
 		</spawn>
 		<!-- Lodas -->
 		<spawn npc_id="730019" respawn_time="295">
-			<spot x="407.16" y="1839.8" z="243.06" h="35"/>
+			<spot x="399.4" y="1837.7" z="242.86" h="35"/>
 		</spawn>
 		<!-- Turiel -->
 		<spawn npc_id="203943" respawn_time="295">
