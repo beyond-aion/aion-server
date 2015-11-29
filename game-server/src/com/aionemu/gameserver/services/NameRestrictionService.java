@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 
@@ -61,8 +63,9 @@ public class NameRestrictionService {
 		if (forbiddenSequences[0].isEmpty())
 			return false;
 
+		string = string.toLowerCase();
 		for (String s : forbiddenSequences) {
-			if (string.toLowerCase().contains(s))
+			if (string.contains(s))
 				return true;
 		}
 		return false;
@@ -77,7 +80,7 @@ public class NameRestrictionService {
 	public static String filterMessage(String message) {
 		for (String word : message.split(" ")) {
 			if (isForbidden(word))
-				message.replace(word, "---");
+				message = message.replace(word, StringUtils.repeat("*", word.length()));
 		}
 		return message;
 	}
