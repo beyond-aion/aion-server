@@ -61,7 +61,7 @@
 		<gd_item id="114600944" name="Dragonbound Sabatons" />
 	 -->
 	<!-- Weapons (white, 1-50, Asmodae) -->
-	<gd_rule rule_name="Weapons (Common)" base_chance="1.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Weapons (Common)" base_chance="1.3" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -468,7 +468,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (white, 1-50, Elysea) -->
-	<gd_rule rule_name="Weapons (Common)" base_chance="1.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Weapons (Common)" base_chance="1.3" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1330,7 +1330,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (green, 3-52, Asmodae) -->
-	<gd_rule rule_name="Weapons (Rare)" base_chance="1" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Weapons (Rare)" base_chance="0.8" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1743,7 +1743,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (green, 3-52, Elysea) -->
-	<gd_rule rule_name="Weapons (Rare)" base_chance="1" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Weapons (Rare)" base_chance="0.8" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -2589,7 +2589,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (blue, 23-52, Asmodae) -->
-	<gd_rule rule_name="Weapons (Legend)" base_chance="0.33" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Weapons (Legend)" base_chance="0.275" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -2854,7 +2854,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (blue, 23-52, Elysea) -->
-	<gd_rule rule_name="Weapons (Legend)" base_chance="0.33" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Weapons (Legend)" base_chance="0.275" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -3573,7 +3573,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (gold, 21-50, Asmodae) -->
-	<gd_rule rule_name="Weapons (Unique)" base_chance="0.075" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Weapons (Unique)" base_chance="0.066" min_diff="-4" max_diff="5">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -3631,7 +3631,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Weapons (gold, 21-50, Elysea) -->
-	<gd_rule rule_name="Weapons (Unique)" base_chance="0.075" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Weapons (Unique)" base_chance="0.066" min_diff="-4" max_diff="5">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -3835,7 +3835,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (white, 2-51, Asmodae) -->
-	<gd_rule rule_name="Armor (Common)" base_chance="3" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Armor (Common)" base_chance="2.75" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -4435,7 +4435,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (white, 2-51, Elysea) -->
-	<gd_rule rule_name="Armor (Common)" base_chance="3" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Armor (Common)" base_chance="2.75" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -5663,7 +5663,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (green, 5-49, Asmodae) -->
-	<gd_rule rule_name="Armor (Rare)" base_chance="2" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Armor (Rare)" base_chance="1.65" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -6234,7 +6234,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (green, 5-49, Elysea) -->
-	<gd_rule rule_name="Armor (Rare)" base_chance="2" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Armor (Rare)" base_chance="1.65" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -7528,7 +7528,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (blue, 22-51, Asmodae) -->
-	<gd_rule rule_name="Armor (Legend)" base_chance="0.66" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Armor (Legend)" base_chance="0.55" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -7939,7 +7939,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (blue, 22-51, Elysea) -->
-	<gd_rule rule_name="Armor (Legend)" base_chance="0.66" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Armor (Legend)" base_chance="0.55" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -9077,7 +9077,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (gold, 21-50, Asmodae) -->
-	<gd_rule rule_name="Armor (Unique)" base_chance="0.15" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Armor (Unique)" base_chance="0.1375" min_diff="-4" max_diff="5">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -9153,7 +9153,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (gold, 21-50, Elysea) -->
-	<gd_rule rule_name="Armor (Unique)" base_chance="0.15" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Armor (Unique)" base_chance="0.1375" min_diff="-4" max_diff="5">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -9411,7 +9411,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (white, 6-49, Asmodae) -->
-	<gd_rule rule_name="Accessory (Common)" base_chance="2.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Accessory (Common)" base_chance="2.2" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -9505,7 +9505,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (white, 6-50, Elysea) -->
-	<gd_rule rule_name="Accessory (Common)" base_chance="2.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Accessory (Common)" base_chance="2.2" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -9747,7 +9747,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (green, 8-52, Asmodae) -->
-	<gd_rule rule_name="Accessory (Rare)" base_chance="1.5" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Accessory (Rare)" base_chance="1.3" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -9850,7 +9850,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (green, 8-52, Elysea) -->
-	<gd_rule rule_name="Accessory (Rare)" base_chance="1.5" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Accessory (Rare)" base_chance="1.3" min_diff="-2" max_diff="2">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -10089,7 +10089,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (blue, 23-52, Asmodae) -->
-	<gd_rule rule_name="Accessory (Legend)" base_chance="0.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Accessory (Legend)" base_chance="0.4" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -10174,7 +10174,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Accessory (blue, 23-52, Elysea) -->
-	<gd_rule rule_name="Accessory (Legend)" base_chance="0.5" min_diff="-1" max_diff="3">
+	<gd_rule rule_name="Accessory (Legend)" base_chance="0.4" min_diff="-1" max_diff="3">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
