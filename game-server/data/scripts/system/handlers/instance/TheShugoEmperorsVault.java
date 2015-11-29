@@ -245,7 +245,6 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				amount++;
 				if(amount >=2) {
 					doors.get(428).setOpen(true);
-					//PacketSendUtility.broadcastPacket(player, new SM_EMOTION(428, EmotionType.OPEN_DOOR, 0x9), true);
 					spawnRoom3();
 				}
 				break;
@@ -296,9 +295,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				break;
 			case 235647: //Grand Commander Gradi
 				addPoints(npc, 224000);
-				//PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDSweep_Stage2_End());
 				sendMsg(1402681); //Intruders have fled
-				//despawnAll();
 				checkRank(instanceReward.getPoints());
 				break;
 				default:
