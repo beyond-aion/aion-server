@@ -1,87 +1,86 @@
 package com.aionemu.gameserver.services;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 
 /**
  * @author nrg
+ * @modified Neon
  */
 public class NameRestrictionService {
 
-	private static final String ENCODED_BAD_WORD = "----";
-	private static String[] forbiddenSequences;
-	private static String[] forbiddenByClient;
+	private static String[] forbiddenSequences = NameConfig.NAME_SEQUENCE_FORBIDDEN.toLowerCase().replaceAll(",+ +,+|,,+", ",").split(",");
+	private static String[] forbiddenByClient = NameConfig.NAME_FORBIDDEN_CLIENT.replaceAll(",+ +,+|,,+", ",").split(",");
 
-	/**
-	 * Checks if a name is valid. It should contain only english letters
-	 * 
-	 * @param character
-	 *          name
-	 * @return true if name is valid, false otherwise
-	 */
 	public static boolean isValidName(String name) {
 		return NameConfig.CHAR_NAME_PATTERN.matcher(name).matches();
+	}
+
+	public static boolean isValidPetName(String name) {
+		return NameConfig.PET_NAME_PATTERN.matcher(name).matches();
+	}
+
+	public static boolean isValidLegionName(String name) {
+		return LegionConfig.LEGION_NAME_PATTERN.matcher(name).matches();
 	}
 
 	/**
 	 * Checks if a name is forbidden
 	 * 
-	 * @param name
+	 * @param string
 	 * @return true if name is forbidden
 	 */
-	public static boolean isForbiddenWord(String name) {
-		return isForbiddenByClient(name) || isForbiddenBySequence(name);
+	public static boolean isForbidden(String string) {
+		return isForbiddenByClient(string) || containsForbiddenSequence(string);
 	}
 
 	/**
 	 * Checks if a name is forbidden (contains string sequences from config)
 	 * 
-	 * @param name
-	 * @return true if name is forbidden
+	 * @param string
+	 * @return True if name is forbidden.
 	 */
-	private static boolean isForbiddenByClient(String name) {
-		if (!NameConfig.NAME_FORBIDDEN_ENABLE || NameConfig.NAME_FORBIDDEN_CLIENT.equals(""))
+	private static boolean isForbiddenByClient(String string) {
+		if (forbiddenByClient[0].isEmpty())
 			return false;
-
-		if (forbiddenByClient == null || forbiddenByClient.length == 0)
-			forbiddenByClient = NameConfig.NAME_FORBIDDEN_CLIENT.split(",");
 
 		for (String s : forbiddenByClient) {
-			if (name.equalsIgnoreCase(s))
+			if (string.equalsIgnoreCase(s))
 				return true;
 		}
 		return false;
 	}
 
 	/**
-	 * Checks if a name is forbidden (contains string sequences from config)
+	 * Checks if a part of a string contains a forbidden sequence.
 	 * 
-	 * @param name
-	 * @return true if name is forbidden
+	 * @param string
+	 * @return True if string contains forbidden sequence.
 	 */
-	private static boolean isForbiddenBySequence(String name) {
-		if (NameConfig.NAME_SEQUENCE_FORBIDDEN.equals(""))
+	private static boolean containsForbiddenSequence(String string) {
+		if (forbiddenSequences[0].isEmpty())
 			return false;
 
-		if (forbiddenSequences == null || forbiddenSequences.length == 0)
-			forbiddenSequences = NameConfig.NAME_SEQUENCE_FORBIDDEN.toLowerCase().split(",");
-
+		string = string.toLowerCase();
 		for (String s : forbiddenSequences) {
-			if (name.toLowerCase().contains(s))
+			if (string.contains(s))
 				return true;
 		}
 		return false;
 	}
 
 	/**
-	 * Filters chatmessages
+	 * Filters chat messages.
 	 * 
 	 * @param message
 	 * @return
 	 */
 	public static String filterMessage(String message) {
 		for (String word : message.split(" ")) {
-			if (isForbiddenWord(word))
-				message.replace(word, ENCODED_BAD_WORD);
+			if (isForbidden(word))
+				message = message.replace(word, StringUtils.repeat("*", word.length()));
 		}
 		return message;
 	}

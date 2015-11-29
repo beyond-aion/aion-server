@@ -210,7 +210,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 			return;
 		}
-		if (NameRestrictionService.isForbiddenWord(playerCommonData.getName())) {
+		if (NameRestrictionService.isForbidden(playerCommonData.getName())) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_FORBIDDEN_CHAR_NAME));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 			return;

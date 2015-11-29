@@ -11,7 +11,6 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -45,9 +44,6 @@ public class CM_LEGION extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		exOpcode = readC();
@@ -125,9 +121,6 @@ public class CM_LEGION extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final Player activePlayer = getConnection().getActivePlayer();
@@ -172,11 +165,7 @@ public class CM_LEGION extends AionClientPacket {
 			switch (exOpcode) {
 			/** Create a legion **/
 				case 0x00:
-					if (NameRestrictionService.isForbiddenWord(legionName)) {
-						PacketSendUtility.sendMessage(activePlayer, "You are trying to use a forbidden name. Choose another one!");
-					} else {
-						LegionService.getInstance().createLegion(activePlayer, legionName);
-					}
+					LegionService.getInstance().createLegion(activePlayer, legionName);
 					break;
 			}
 		}
