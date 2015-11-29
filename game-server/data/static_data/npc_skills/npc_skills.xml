@@ -64156,4 +64156,504 @@
 	<npcskills npcid="701950">
         <npcskill skillid="21420" skilllevel="1" probability="100"/>
     </npcskills>
+	<!-- Invasion Bosses -->
+	<!-- Level 20 (hero) -->
+	<!-- Benoid (sandworm) -->
+	<npcskills npcid="234560">
+		<npcskill skillid="21692" skilllevel="20" probability="35" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="20" probability="35" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="20" probability="35" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234561">
+		<npcskill skillid="21692" skilllevel="20" probability="35" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="20" probability="35" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="20" probability="35" cooldown="30000"/>
+	</npcskills>
+	<!-- Eiter -->
+	<npcskills npcid="234558">
+		<npcskill skillid="21710" skilllevel="20" probability="35" cooldown="35000"/>
+		<npcskill skillid="21711" skilllevel="20" probability="35" cooldown="35000"/>
+		<npcskill skillid="21714" skilllevel="20" probability="35" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234562">
+		<npcskill skillid="21710" skilllevel="20" probability="35" cooldown="20000"/>
+		<npcskill skillid="21711" skilllevel="20" probability="35" cooldown="20000"/>
+		<npcskill skillid="21714" skilllevel="20" probability="35" cooldown="30000"/>
+	</npcskills>
+	<!-- Tumon -->
+	<npcskills npcid="234559">
+		<npcskill skillid="21737" skilllevel="65" probability="35" cooldown="40000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="35" cooldown="30000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="35" cooldown="30000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="35" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234563">
+		<npcskill skillid="21737" skilllevel="65" probability="35" cooldown="40000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="35" cooldown="30000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="35" cooldown="30000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="35" cooldown="30000"/>
+	</npcskills>
+	<!-- Level 30 (hero) -->
+	<!-- Tarmat (dynatum) -->
+	<npcskills npcid="234564">
+		<npcskill skillid="21665" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21667" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21668" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21669" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21670" skilllevel="30" probability="45" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234565">
+		<npcskill skillid="21665" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21667" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21668" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21669" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21670" skilllevel="30" probability="45" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234567">
+		<npcskill skillid="21665" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21667" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21668" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21669" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21670" skilllevel="30" probability="45" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234569">
+		<npcskill skillid="21665" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21667" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21668" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21669" skilllevel="30" probability="45" cooldown="35000"/>
+		<npcskill skillid="21670" skilllevel="30" probability="45" cooldown="35000"/>
+	</npcskills>
+	<!-- Eiter -->
+	<npcskills npcid="234566">
+		<npcskill skillid="21710" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="30" probability="45" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234568">
+		<npcskill skillid="21710" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="30" probability="45" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="30" probability="45" cooldown="30000"/>
+	</npcskills>
+	<!-- Level 40 (hero) -->
+	<!-- Benoid (sandworm) -->
+	<npcskills npcid="234572">
+		<npcskill skillid="21692" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21693" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21694" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21695" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234575">
+		<npcskill skillid="21692" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21693" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21694" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21695" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<!-- Eiter -->
+	<npcskills npcid="234571">
+		<npcskill skillid="21710" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21711" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21712" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21713" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21714" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234574">
+		<npcskill skillid="21710" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21711" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21712" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21713" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21714" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<!-- Magnorion (hyperion) -->
+	<npcskills npcid="234570">
+		<npcskill skillid="21683" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21684" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21685" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21686" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21687" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21688" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234573">
+		<npcskill skillid="21683" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21684" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21685" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21686" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21687" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21688" skilllevel="40" probability="55" cooldown="35000"/>
+	</npcskills>
+	<!-- Level 50 (hero) -->
+	<!-- Benoid (sandworm) -->
+	<npcskills npcid="234576">
+		<npcskill skillid="21692" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21693" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21697" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234579">
+		<npcskill skillid="21692" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21693" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21697" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000"/>
+	</npcskills>
+	<!-- Eiter -->
+	<npcskills npcid="234578">
+		<npcskill skillid="21710" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21713" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="50" probability="65" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234580">
+		<npcskill skillid="21710" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21713" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="50" probability="65" cooldown="30000"/>
+	</npcskills>
+	<!-- Magnorion (hyperion) -->
+	<npcskills npcid="234577">
+		<npcskill skillid="21683" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21684" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21685" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21686" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21687" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21688" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21690" skilllevel="50" probability="65" cooldown="35000"/>
+	</npcskills>
+	<npcskills npcid="234581">
+		<npcskill skillid="21683" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21684" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21685" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21686" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21687" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21688" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21690" skilllevel="50" probability="65" cooldown="35000"/>
+	</npcskills>
+	<!-- Level 55 (hero) -->
+	<!-- Elite Benoid (sandworm) -->
+	<npcskills npcid="234582">
+		<npcskill skillid="21692" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21693" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21697" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234585">
+		<npcskill skillid="21692" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21693" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21694" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21695" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21697" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<!-- Elite Eiter -->
+	<npcskills npcid="234583">
+		<npcskill skillid="21710" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21713" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234586">
+		<npcskill skillid="21710" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21711" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21712" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21713" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21714" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<!-- Elite Magnorion (hyperion) -->
+	<npcskills npcid="234584">
+		<npcskill skillid="21683" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21684" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21685" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21686" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21687" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21688" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000"/>
+		<npcskill skillid="21690" skilllevel="55" probability="70" cooldown="35000"/>
+		<npcskill skillid="21691" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<npcskills npcid="234587">
+		<npcskill skillid="21683" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21684" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21685" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21686" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21687" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21688" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000"/>
+		<npcskill skillid="21690" skilllevel="55" probability="70" cooldown="35000"/>
+		<npcskill skillid="21691" skilllevel="55" probability="70" cooldown="30000"/>
+	</npcskills>
+	<!-- Level 65 (legendary) -->
+	<!-- Prime Eiter -->
+	<npcskills npcid="234593">
+		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21711" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234596">
+		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21711" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234600">
+		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21711" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234602">
+		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21711" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234614">
+		<npcskill skillid="21710" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21711" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<!-- Prime Benoid (sandworm) -->
+	<npcskills npcid="234588">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234595">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234598">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234606">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234612">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234613">
+		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21696" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21697" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<!-- Prime Magnorion (hyperion) -->
+	<npcskills npcid="234599">
+		<npcskill skillid="21683" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21684" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21685" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21686" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21687" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21688" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000"/>
+		<npcskill skillid="21690" skilllevel="65" probability="80" cooldown="30000"/>
+		<npcskill skillid="21691" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234611">
+		<npcskill skillid="21683" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21684" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21685" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21686" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21687" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21688" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000"/>
+		<npcskill skillid="21690" skilllevel="65" probability="80" cooldown="30000"/>
+		<npcskill skillid="21691" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<!-- Prime Raedon -->
+	<npcskills npcid="234589">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234590">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234594">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234597">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234601">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234608">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234609">
+		<npcskill skillid="21673" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21674" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21675" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21676" skilllevel="65" probability="80" cooldown="80000"/>
+		<npcskill skillid="21677" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21678" skilllevel="65" probability="80" cooldown="60000"/>
+		<npcskill skillid="21680" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21681" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21682" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<!-- Prime Tarmat (dynatum) -->
+	<npcskills npcid="234604">
+		<npcskill skillid="21727" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21665" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21666" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21667" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21668" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21669" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21670" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21671" skilllevel="65" useinspawned="true"/>
+		<npcskill skillid="21672" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234610">
+		<npcskill skillid="21727" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21665" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21666" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21667" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21668" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21669" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21670" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21671" skilllevel="65" useinspawned="true"/>
+		<npcskill skillid="21672" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<!-- Prime Tumon -->
+	<npcskills npcid="234591">
+		<npcskill skillid="21737" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234592">
+		<npcskill skillid="21737" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234603">
+		<npcskill skillid="21737" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234605">
+		<npcskill skillid="21737" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
+	<npcskills npcid="234615">
+		<npcskill skillid="21737" skilllevel="65" probability="80" cooldown="35000"/>
+		<npcskill skillid="21701" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21703" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21704" skilllevel="65" probability="80" cooldown="25000"/>
+		<npcskill skillid="21705" skilllevel="65" probability="80" cooldown="25000"/>
+	</npcskills>
 </npc_skill_templates>
