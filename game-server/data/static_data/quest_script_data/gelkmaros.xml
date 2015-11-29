@@ -222,6 +222,14 @@
 			21300 [XML] Enhancing the Aethercannon
 			21301 [XML] [Spy/League] Harp's Fate
 			21302 [XML] Enhancing the Harp
+			21311 [XML] [Thu/Sun] Stopping to Smell the Malodors
+			21312 [XML] [Thu/Sun] Gone Fishing for Allies
+			21313 [XML] [Thu/Sun] Rynoce Redirection
+			21314 [XML] [Thu/Sun] Raiders of the Lost Army
+			21315 [XML] [Thu/Sun] An Amberhue Coup
+			21316 [XML] [Thu/Sun] Toady Tomuls
+			21317 [XML] [Thu/Sun] Hrimfaxi's Asking
+			21318 [XML] [Thu/Sun] Picket in Moon Thicket
 			21450 [XML] Finding Taloc's Young Leaf
 			21451 [XML] Intervention
 			21452 [XML] Searching for a Cure
@@ -607,6 +615,30 @@
 	<monster_hunt id="21301" start_npc_ids="799340" start_dialog_id="4762">
 		<monster var="0" end_var="1" npc_ids="257000"/>
 		<monster var="1" end_var="1" npc_ids="257300"/>
+	</monster_hunt>
+	<monster_hunt id="21311" start_npc_ids="799354">
+		<monster var="0" end_var="9" npc_ids="234692"/>
+	</monster_hunt>
+	<monster_hunt id="21312" start_npc_ids="799354">
+		<monster var="0" end_var="9" npc_ids="233931 233932 233929 233930 233933 233934 233935 233936"/>
+	</monster_hunt>
+	<monster_hunt id="21313" start_npc_ids="799360">
+		<monster var="0" end_var="9" npc_ids="233900"/>
+	</monster_hunt>
+	<monster_hunt id="21314" start_npc_ids="799360">
+		<monster var="0" end_var="9" npc_ids="233921 233922 233923 233924 233927 233928 233925 233926"/>
+	</monster_hunt>
+	<monster_hunt id="21315" start_npc_ids="799327">
+		<monster var="0" end_var="9" npc_ids="234713"/>
+	</monster_hunt>
+	<monster_hunt id="21316" start_npc_ids="799327">
+		<monster var="0" end_var="9" npc_ids="233931 233932 233929 233930 233933 233934 233935 233936"/>
+	</monster_hunt>
+	<monster_hunt id="21317" start_npc_ids="799328">
+		<monster var="0" end_var="9" npc_ids="234715"/>
+	</monster_hunt>
+	<monster_hunt id="21318" start_npc_ids="799328">
+		<monster var="0" end_var="9" npc_ids="233921 233922 233923 233924 233927 233928 233925 233926"/>
 	</monster_hunt>
 	<monster_hunt id="21456" start_npc_ids="799247">
 		<monster var="0" end_var="100" npc_ids="215454 215455 215456 215457 215458 215459 215460 215461 215462 215463 215464 215465 215466 215467 215482 216133 216134 216135 216136 216137 216138 216139 216140 216141 216142 216143 216144 216145 216146 216459 216460"/>
