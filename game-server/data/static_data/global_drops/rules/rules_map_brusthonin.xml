@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1.5" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220050000" name="Brusthonin" />
 		</gd_maps>
