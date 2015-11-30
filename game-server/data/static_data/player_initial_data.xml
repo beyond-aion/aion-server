@@ -10,13 +10,14 @@
 			<item id="113500001" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 	<player_data class="MAGE">
@@ -27,13 +28,14 @@
 			<item id="113100005" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 	<player_data class="PRIEST">
@@ -44,13 +46,14 @@
 			<item id="113300278" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 	<player_data class="SCOUT">
@@ -61,13 +64,14 @@
 			<item id="113300005" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 	<player_data class="ENGINEER">
@@ -78,13 +82,14 @@
 			<item id="113301636" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 	<player_data class="ARTIST">
@@ -95,13 +100,14 @@
 			<item id="113101509" count="1"/>
 			<item id="160000001" count="12"/>
 			<item id="169300002" count="20"/>
-			<item id="162000052" count="100"/>
-			<item id="162000057" count="100"/>
+			<item id="162000002" count="100"/>
+			<item id="162000007" count="100"/>
 			<!-- Custom bonus items -->
-			<item id="164002116" count="20"/><!-- 30min 30% speed -->
-			<item id="164002117" count="20"/><!-- 30min 9% atk speed -->
-			<item id="164002118" count="20"/><!-- 30min 9% cast speed -->
+			<item id="164002116" count="50"/><!-- 30min 30% speed -->
+			<item id="164002117" count="50"/><!-- 30min 9% atk speed -->
+			<item id="164002118" count="50"/><!-- 30min 9% cast speed -->
 			<item id="169620005" count="2"/><!-- 2h 20% boost, 4h cooldown -->
+			<item id="164002039" count="1"/><!-- Administrator's Boon – 3-Day Pass -->
 		</items>
 	</player_data>
 </player_initial_data>

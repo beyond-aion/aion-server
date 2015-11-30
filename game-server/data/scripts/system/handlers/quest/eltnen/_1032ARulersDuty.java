@@ -142,10 +142,11 @@ public class _1032ARulersDuty extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-
 			else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
+				else if (env.getDialog() == DialogAction.SELECT_ACTION_2035)
+					return playQuestMovie(env, 49);
 				else if (env.getDialog() == DialogAction.SETPRO4) {
 					removeQuestItem(env, 182201001, 1);
 					qs.setQuestVar(5);

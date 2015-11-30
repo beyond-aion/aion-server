@@ -75,8 +75,6 @@ public class LegionService {
 	private static final Logger log = LoggerFactory.getLogger(LegionService.class);
 	private final LegionContainer allCachedLegions = new LegionContainer();
 	private final LegionMemberContainer allCachedLegionMembers = new LegionMemberContainer();
-	private World world;
-	public final static int LEGION_ACTION_KICK = 4;
 	/**
 	 * Legion Permission variables
 	 */
@@ -91,19 +89,7 @@ public class LegionService {
 		return SingletonHolder.instance;
 	}
 
-	public LegionService() {
-		this.world = World.getInstance();
-	}
-
-	/**
-	 * Checks if a name is valid. It should contain only english letters
-	 *
-	 * @param name
-	 *          legion name
-	 * @return true if name is valid, false overwise
-	 */
-	public boolean isValidName(String name) {
-		return LegionConfig.LEGION_NAME_PATTERN.matcher(name).matches();
+	private LegionService() {
 	}
 
 	/**
@@ -954,7 +940,7 @@ public class LegionService {
 			if (objExcluded != null && objExcluded.equals(memberObjId)) {
 				continue;
 			}
-			Player memberPlayer = world.findPlayer(memberObjId);
+			Player memberPlayer = World.getInstance().findPlayer(memberObjId);
 			if (memberPlayer != null) {
 				legionMemberEx = new LegionMemberEx(memberPlayer, memberPlayer.getLegionMember(), true);
 			} else {
@@ -1149,23 +1135,6 @@ public class LegionService {
 	}
 
 	/**
-	 * @param legion
-	 * @param newLegionName
-	 */
-	public void setLegionName(Legion legion, String newLegionName, boolean save) {
-		legion.setLegionName(newLegionName);
-		PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
-
-		for (Player legionMember : legion.getOnlineLegionMembers()) {
-			PacketSendUtility.broadcastPacket(legionMember,
-				new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getLegionName(), legionMember.getLegionMember().getRank()
-					.getRankId()), true);
-		}
-		if (save)
-			storeLegion(legion);
-	}
-
-	/**
 	 * This will add a new announcement to the DB and change the current announcement
 	 *
 	 * @param legion
@@ -1314,7 +1283,7 @@ public class LegionService {
 		/**
 		 * If player is online send packet and reset legion member
 		 */
-		Player player = world.findPlayer(charName);
+		Player player = World.getInstance().findPlayer(charName);
 		if (player != null) {
 			PacketSendUtility.broadcastPacket(player, new SM_LEGION_UPDATE_TITLE(player.getObjectId(), 0, "", 2), true);
 		}
@@ -1344,7 +1313,7 @@ public class LegionService {
 		Legion legion = activePlayer.getLegion();
 
 		charName = Util.convertName(charName);
-		Player targetPlayer = world.findPlayer(charName);
+		Player targetPlayer = World.getInstance().findPlayer(charName);
 
 		switch (exOpcode) {
 		/**
@@ -1364,7 +1333,7 @@ public class LegionService {
 			/**
 			 * Kick member from legion *
 			 */
-			case LEGION_ACTION_KICK:
+			case 0x04:
 				/**
 				 * Check if player can be kicked
 				 */
@@ -1568,7 +1537,7 @@ public class LegionService {
 		 */
 		private boolean canCreateLegion(Player activePlayer, String legionName) {
 			/* Some reasons why legions can' be created */
-			if (!isValidName(legionName)) {
+			if (!NameRestrictionService.isValidLegionName(legionName) || NameRestrictionService.isForbidden(legionName)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CREATE_INVALID_GUILD_NAME);
 				return false;
 			} // STR_GUILD_CREATE_TOO_FAR_FROM_CREATOR_NPC TODO

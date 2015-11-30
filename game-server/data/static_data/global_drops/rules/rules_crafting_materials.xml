@@ -551,7 +551,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Hearts -->
-	<gd_rule rule_name="Balaur Heart" base_chance="4" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Heart" base_chance="4.4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -589,7 +589,7 @@
 			<gd_item id="152013043" name="Mortal Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2.2" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -610,7 +610,7 @@
 			<gd_item id="152013015" name="Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="0" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2.2" min_diff="0" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -623,7 +623,7 @@
 			<gd_item id="152013025" name="Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="2.2" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -649,7 +649,7 @@
 			<gd_item id="152013044" name="Deadly Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.65" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -671,7 +671,7 @@
 			<gd_item id="152013018" name="Fatal Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="0" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.65" min_diff="0" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -684,7 +684,7 @@
 			<gd_item id="152013026" name="Fatal Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.5" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="1.65" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -710,7 +710,7 @@
 			<gd_item id="152013045" name="Malicious Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.1" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -728,7 +728,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Horns & Scales -->
-	<gd_rule rule_name="Balaur Horns + Scales" base_chance="4" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="4.4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -762,7 +762,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Skin & Meat -->
-	<gd_rule rule_name="Balaur Flesh" base_chance="4" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Flesh" base_chance="4.4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -796,7 +796,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Blood -->
-	<gd_rule rule_name="Balaur Blood" base_chance="4" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Blood" base_chance="4.4" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />

@@ -6493,4 +6493,15 @@
 			<box x1="89.532814" y1="73.91663" z1="20.8202477" x2="100.877518" y2="75.06342" z2="30.2200489" />
 		</staticdoor>
 	</world>
+	<world world="301400000">
+		<staticdoor keyid="0" doorid="430" x="549.1" y="314.6" z="399.279" state="0xA">
+			<box x1="545" y1="314.6" z1="399" x2="554" y2="314.121" z2="409"/>
+		</staticdoor>
+		<staticdoor keyid="1" doorid="431" x="549.9" y="320" z="395.375" state="0xA">
+			<box x1="545" y1="429.9" z1="394" x2="554" y2="429.9" z2="407"/>
+		</staticdoor>
+		<staticdoor keyid="1" doorid="428" x="531.3" y="587.7" z="394.375" state="0xA">
+			<box x1="526" y1="587.75" z1="394" x2="535" y2="587.75" z2="407"/>
+		</staticdoor>
+	</world>
 </staticdoor_templates>

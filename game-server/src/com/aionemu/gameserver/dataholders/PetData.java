@@ -50,4 +50,7 @@ public class PetData {
 		return petData.get(id);
 	}
 
+	public int[] getPetIds() {
+		return petData.keys();
+	}
 }

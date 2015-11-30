@@ -20,7 +20,8 @@ import com.aionemu.gameserver.world.World;
 import com.google.common.base.Predicate;
 
 /**
- * @author lyahim @modified antness
+ * @author lyahim
+ * @modified antness
  */
 public class PlayerInfo extends AdminCommand {
 
@@ -62,7 +63,7 @@ public class PlayerInfo extends AdminCommand {
 				while (it.hasNext()) {
 
 					Item act = it.next();
-					strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId()) + "\n");
+					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
 				}
 			items.clear();
 			items = target.getEquipment().getEquippedItems();
@@ -73,7 +74,7 @@ public class PlayerInfo extends AdminCommand {
 			else
 				while (it.hasNext()) {
 					Item act = it.next();
-					strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId()) + "\n");
+					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
 				}
 
 			// items.clear();
@@ -85,7 +86,7 @@ public class PlayerInfo extends AdminCommand {
 			else
 				while (it.hasNext()) {
 					Item act = it.next();
-					strbld.append("    " + act.getItemCount() + "(s) of " + "[item:" + act.getItemTemplate().getTemplateId() + "]" + "\n");
+					strbld.append("\t" + act.getItemCount() + "x "  + ChatUtil.item(act.getItemId()) + "\n");
 				}
 			showAllLines(admin, strbld.toString());
 		} else if (params[1].equals("group")) {
@@ -116,8 +117,8 @@ public class PlayerInfo extends AdminCommand {
 			showAllLines(admin, strbld.toString());
 		} else if (params[1].equals("loc")) {
 			String chatLink = ChatUtil.position(target.getName(), target.getPosition());
-			PacketSendUtility.sendMessage(admin, "- " + chatLink + "'s location:\n  mapid: " + target.getWorldId() + "\n  X: " + target.getX() + " Y: "
-				+ target.getY() + "Z: " + target.getZ() + "heading: " + target.getHeading());
+			PacketSendUtility.sendMessage(admin, "- " + chatLink + "'s location:\n\tMap ID: " + target.getWorldId() + "\n  X: " + target.getX() + " Y: "
+				+ target.getY() + " Z: " + target.getZ() + " Heading: " + target.getHeading());
 		} else if (params[1].equals("legion")) {
 			StringBuilder strbld = new StringBuilder();
 

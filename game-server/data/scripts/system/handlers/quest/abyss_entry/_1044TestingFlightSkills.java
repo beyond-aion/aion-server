@@ -71,24 +71,29 @@ public class _1044TestingFlightSkills extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 8) {
-								return sendQuestDialog(env, 1693);
 							} else if (var == 9) {
+								return sendQuestDialog(env, 1693);
+							} else if (var == 10) {
 								return sendQuestDialog(env, 3057);
+							}
+						}
+						case SELECT_ACTION_1354: {
+							if (var == 1 || var == 10) {
+								playQuestMovie(env, 40);
+								return sendQuestDialog(env, 1354);
 							}
 						}
 						case SETPRO2: {
 							if (var == 1) {
 								QuestService.questTimerStart(env, 150);
 								return defaultCloseDialog(env, 1, 2); // 2
-							} else if (var == 9) {
+							} else if (var == 10) {
 								QuestService.questTimerStart(env, 150);
-								return defaultCloseDialog(env, 9, 2); // 2
+								return defaultCloseDialog(env, 10, 2); // 2
 							}
 						}
 						case SET_SUCCEED: {
-							if (var == 8) {
-								qs.setQuestVar(9);
+							if (var == 9) {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestSelectionDialog(env);
@@ -138,7 +143,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 				changeQuestStep(env, 6, 7, false); // 7
 				return true;
 			} else if (rings[5].equals(flyingRing)) {
-				changeQuestStep(env, 7, 8, false); // 8
+				changeQuestStep(env, 7, 9, false); // 9
 				QuestService.questTimerEnd(env);
 				return true;
 			}
@@ -153,7 +158,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var > 1 && var < 8) {
-				changeQuestStep(env, var, 9, false); // 9
+				changeQuestStep(env, var, 10, false); // 10
 				return true;
 			}
 		}
@@ -163,12 +168,12 @@ public class _1044TestingFlightSkills extends QuestHandler {
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		QuestService.questTimerEnd(env);
-		return this.onQuestTimerEndEvent(env);
+		return onQuestTimerEndEvent(env);
 	}
 
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		QuestService.questTimerEnd(env);
-		return this.onQuestTimerEndEvent(env);
+		return onQuestTimerEndEvent(env);
 	}
 }

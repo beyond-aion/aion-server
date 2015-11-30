@@ -5,6 +5,7 @@ import java.util.List;
 import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,8 +14,11 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -34,6 +38,10 @@ public class LegionCommand extends AdminCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
+		if (params.length == 0) {
+			info(player, null);
+			return;
+		}
 
 		if (params[0].equalsIgnoreCase("disband")) {
 			if (!verifyLenght(player, 2, params)) // legion disband NAME
@@ -101,12 +109,19 @@ public class LegionCommand extends AdminCommand {
 			if (legion == null)
 				return;
 
-			if (!service.isValidName(params[2])) {
+			if (!NameRestrictionService.isValidLegionName(params[2])) {
 				PacketSendUtility.sendMessage(player, params[2] + " is incorrect for legion name!");
 				return;
 			}
 			String old = legion.getLegionName();
-			service.setLegionName(legion, params[2], true);
+			legion.setLegionName(params[2]);
+			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
+			for (Player legionMember : legion.getOnlineLegionMembers()) {
+				PacketSendUtility.broadcastPacket(legionMember,
+					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getLegionName(), legionMember.getLegionMember().getRank()
+						.getRankId()), true);
+			}
 			PacketSendUtility.sendMessage(player, "legion " + old + " has changed name from " + old + " to " + params[2] + ".");
 		} else if (params[0].equalsIgnoreCase("info")) {
 			if (!verifyLenght(player, 2, params)) // legion info NAME

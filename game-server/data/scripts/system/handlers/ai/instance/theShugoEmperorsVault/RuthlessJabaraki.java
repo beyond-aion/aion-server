@@ -1,0 +1,152 @@
+package ai.instance.theShugoEmperorsVault;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ai.AggressiveNpcAI2;
+
+
+/**
+ * @author Yeats
+ *
+ */
+@AIName("ruthless_jabaraki")
+public class RuthlessJabaraki extends AggressiveNpcAI2 {
+
+	protected List<Integer> percents = new ArrayList<Integer>();
+	private List<Npc> spawnedAdds = new ArrayList<Npc>();
+	//private Map<Integer, Integer> skills = new FastMap<>(); 
+	
+	@Override
+	protected void handleAttack(Creature creature) {
+		super.handleAttack(creature);
+		checkPercentage(getLifeStats().getHpPercentage());
+	}
+	
+	private void addPercent() {
+		percents.clear();
+		Collections.addAll(percents, new Integer[]{96, 80, 60, 45, 40, 35});
+	}
+	
+	private synchronized void checkPercentage(int hpPercentage) {
+		for (Integer percent : percents) {
+			if (hpPercentage <= percent) {
+				switch (percent) {
+					case 96:
+						spawnAdds(1);
+						break;
+					case 80:
+						spawnAdds(1);
+						break;
+					case 60:
+						spawnAdds(2);
+					case 45:
+						spawnAdds(3);
+						break;
+					case 40:
+						spawnAdds(4);
+						break;
+					case 35:
+						spawnAdds(5);
+						break;
+				}
+				percents.remove(percent);
+				break;
+			}
+		}
+	}
+	
+	private void spawnAdds(int stage) {
+		switch (stage) {
+			case 1:
+				spawnedAdds.add((Npc) spawn(235631, 541.625f, 407.0712f, 395.46875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235631, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235631, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235631, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
+				break; 
+			case 2:
+				spawnedAdds.add((Npc) spawn(235630, 541.625f, 407.0712f, 395.46875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235630, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235630, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235630, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235630, 540.625f, 406.0712f, 395.76875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235630, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235630, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235630, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
+				break;
+			case 3:
+				spawnedAdds.add((Npc) spawn(235629, 541.625f, 407.0712f, 395.46875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235629, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235629, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235629, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235629, 540.625f, 406.0712f, 395.76875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235629, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235629, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235629, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
+				break;
+			case 4:
+				spawnedAdds.add((Npc) spawn(235630, 541.625f, 407.0712f, 395.46875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235630, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235630, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235630, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235630, 540.625f, 406.0712f, 395.76875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235630, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235630, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235630, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235630, 541.625f, 407.0712f, 396.06875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235630, 540.86127f, 391.05258f, 396.0342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235630, 560.6854f, 384.02362f, 395.86785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235630, 566.9021f, 402.29718f, 395.86262f, (byte) 69));
+				break;
+			case 5:
+				spawnedAdds.add((Npc) spawn(235631, 541.625f, 407.0712f, 395.46875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235631, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235631, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235631, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235631, 540.625f, 406.0712f, 395.76875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235631, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235631, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235631, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
+				
+				spawnedAdds.add((Npc) spawn(235631, 541.625f, 407.0712f, 396.06875f, (byte) 110));
+				spawnedAdds.add((Npc) spawn(235631, 540.86127f, 391.05258f, 396.0342f, (byte) 8));
+				spawnedAdds.add((Npc) spawn(235631, 560.6854f, 384.02362f, 395.86785f, (byte) 43));
+				spawnedAdds.add((Npc) spawn(235631, 566.9021f, 402.29718f, 395.86262f, (byte) 69));
+				break;
+				default:
+				break;
+		}
+		startHate();
+	}
+	
+	private void startHate() {
+		for (Npc npc : spawnedAdds) {
+			if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
+				npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
+			}
+		}
+	}
+	
+	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		addPercent();
+	}
+	
+	@Override
+	protected void handleDied() {
+		super.handleDied();
+		percents.clear();
+		getOwner().getController().onDelete();
+	}
+}

@@ -628,4 +628,8 @@
 	<portal_loc world_id="130090000" loc_id="1300900" x="247.05283" y="223.70496" z="129.38268" h="31"/>
 	<!-- Fatebound Abbey -->
 	<portal_loc world_id="140010000" loc_id="1400100" x="283.0107" y="266.0985" z="96.48729" h="60"/>
+<!-- Shugo Emperors Vault -->
+	<portal_loc world_id="301400000" loc_id="3014000" x="542.9366" y="299.9885" z="401" h="22"/>
+	<portal_loc world_id="110010000" loc_id="3014001" x="1450" y="1511" z="574" h="118"/>
+	<portal_loc world_id="120010000" loc_id="3014002" x="1612" y="1400" z="194" h="60"/>
 </portal_locs>
