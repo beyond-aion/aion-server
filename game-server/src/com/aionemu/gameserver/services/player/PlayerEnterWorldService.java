@@ -420,7 +420,7 @@ public final class PlayerEnterWorldService {
 				AutoGroupService.getInstance().onPlayerLogin(player);
 			}
 
-			client.sendPacket(new SM_INSTANCE_INFO(player, false, player.getCurrentTeam()));
+			client.sendPacket(new SM_INSTANCE_INFO(player, player.getCurrentTeam()));
 
 			DisputeLandService.getInstance().onLogin(player);
 			client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
