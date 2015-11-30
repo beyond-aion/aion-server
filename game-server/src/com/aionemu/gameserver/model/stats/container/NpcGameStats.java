@@ -195,7 +195,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMainHandPAttack() {
-		return getStat(StatEnum.PHYSICAL_ATTACK, owner.getObjectTemplate().getStatsTemplate().getMainHandAttack());
+		int atk = owner.getObjectTemplate().getStatsTemplate().getMainHandAttack();
+		if (owner.getRating() == NpcRating.NORMAL)
+			atk *= 0.7f;
+		return getStat(StatEnum.PHYSICAL_ATTACK, atk);
 	}
 
 	@Override
