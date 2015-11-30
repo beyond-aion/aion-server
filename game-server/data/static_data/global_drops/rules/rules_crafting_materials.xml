@@ -265,7 +265,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Elemental Stones -->
-	<gd_rule rule_name="Elemental Stones (Common)" base_chance="12" min_diff="0" max_diff="10">
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="40" min_diff="0" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
