@@ -108,6 +108,7 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
+import com.aionemu.gameserver.services.reward.AdventService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.toypet.PetService;
@@ -484,6 +485,8 @@ public final class PlayerEnterWorldService {
 
 			if (HTMLConfig.ENABLE_GUIDES)
 				HTMLService.onPlayerLogin(player);
+			
+			AdventService.getInstance().onLogin(player);
 
 			for (StorageType st : StorageType.values()) {
 				if (st == StorageType.LEGION_WAREHOUSE)
