@@ -7,6 +7,7 @@ import javolution.util.FastTable;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
+import com.aionemu.gameserver.model.team2.TeamMember;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -22,7 +23,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
 	private Integer[] instanceIds = new Integer[] {}; // if this is set, only portal info for these portals will be sent
 	private Collection<Player> players; // list of players for which their cooldown info will be sent to the active player
 
-	public SM_INSTANCE_INFO(Player player, boolean isAnswer, TemporaryPlayerTeam<?> playerTeam) {
+	public SM_INSTANCE_INFO(Player player, TemporaryPlayerTeam<? extends TeamMember<Player>> playerTeam) {
 		this.updateType = (byte) (playerTeam == null ? 2 : 1);
 		this.players = playerTeam == null ? FastTable.of(player) : playerTeam.getMembers();
 	}

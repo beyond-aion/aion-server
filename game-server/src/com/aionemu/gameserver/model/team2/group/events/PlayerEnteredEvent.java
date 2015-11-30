@@ -39,7 +39,7 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 		PlayerGroupService.addPlayerToGroup(group, enteredPlayer);
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_INFO(group));
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.JOIN));
-		PacketSendUtility.sendPacket(enteredPlayer, new SM_INSTANCE_INFO(enteredPlayer, false, group));
+		PacketSendUtility.sendPacket(enteredPlayer, new SM_INSTANCE_INFO(enteredPlayer, group));
 		PacketSendUtility.broadcastPacketTeam(enteredPlayer, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer), true, false);
 		PacketSendUtility.sendPacket(enteredPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_ENTERED_PARTY);
 		group.applyOnMembers(this);
@@ -50,7 +50,7 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 		if (!player.getObjectId().equals(enteredPlayer.getObjectId())) {
 			// TODO probably here JOIN event
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.ENTER));
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(enteredPlayer, false, group));
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(enteredPlayer, group));
 			if (player.getKnownList().getKnownPlayers().containsKey(enteredPlayer.getObjectId())) {
 				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer));
 			}

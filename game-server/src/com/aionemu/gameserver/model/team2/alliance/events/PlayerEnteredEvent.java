@@ -47,7 +47,7 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 		PacketSendUtility.sendPacket(invited, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 		PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE);
 		PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
-		PacketSendUtility.sendPacket(invited, new SM_INSTANCE_INFO(invited, false, alliance));
+		PacketSendUtility.sendPacket(invited, new SM_INSTANCE_INFO(invited, alliance));
 		PacketSendUtility.broadcastPacketTeam(invited, new SM_ABYSS_RANK_UPDATE(1, invited), true, false);
 
 		alliance.apply(this);
@@ -62,7 +62,7 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 		Player player = member.getObject();
 		if (!invited.getObjectId().equals(player.getObjectId())) {
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(invited, false, alliance));
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(invited, alliance));
 			if (player.getKnownList().getKnownPlayers().containsKey(invited.getObjectId())) {
 				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, invited));
 			}

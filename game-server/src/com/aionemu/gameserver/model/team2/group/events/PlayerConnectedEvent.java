@@ -46,7 +46,7 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 	public boolean apply(Player member) {
 		if (!player.equals(member)) {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
-			PacketSendUtility.sendPacket(member, new SM_INSTANCE_INFO(player, false, group));
+			PacketSendUtility.sendPacket(member, new SM_INSTANCE_INFO(player, group));
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
 		}
 		return true;
