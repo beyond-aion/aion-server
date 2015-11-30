@@ -65,10 +65,7 @@ public class PortalCooldownList {
 	}
 
 	public PortalCooldown getPortalCooldown(int worldId) {
-		if (portalCooldowns == null || !portalCooldowns.containsKey(worldId))
-			return null;
-
-		return portalCooldowns.get(worldId);
+		return portalCooldowns == null ? null : portalCooldowns.get(worldId);
 	}
 
 	public FastMap<Integer, PortalCooldown> getPortalCoolDowns() {

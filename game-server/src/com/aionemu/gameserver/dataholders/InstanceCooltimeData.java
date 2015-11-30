@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -42,10 +43,10 @@ public class InstanceCooltimeData {
 		instanceCooltime.clear();
 	}
 
-	/**
-	 * @param worldId
-	 * @return
-	 */
+	public Map<Integer, InstanceCooltime> getInstanceCooltimes() {
+		return FastMap.of(instanceCooltimes);
+	}
+
 	public InstanceCooltime getInstanceCooltimeByWorldId(int worldId) {
 		return instanceCooltimes.get(worldId);
 	}
