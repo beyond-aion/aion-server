@@ -3,23 +3,23 @@
 	<!-- Kinah -->
 	<gd_rule rule_name="Kinah" base_chance="50" min_count="5" max_count="25">
 		<gd_races>
-			<gd_race race="ELYOS"/>
-			<gd_race race="ASMODIANS"/>
-			<gd_race race="BROWNIE"/>
-			<gd_race race="CONSTRUCT"/>
-			<gd_race race="DEMIHUMANOID"/>
-			<gd_race race="DRAGON"/>
-			<gd_race race="DRAKAN"/>
-			<gd_race race="ELEMENTAL"/>
-			<gd_race race="KRALL"/>
-			<gd_race race="LIZARDMAN"/>
-			<gd_race race="LYCAN"/>
-			<gd_race race="MAGICALMONSTER"/>
-			<gd_race race="NAGA"/>
-			<gd_race race="RATMAN"/>
-			<gd_race race="NAGA"/>
-			<gd_race race="SHULACK"/>
-			<gd_race race="UNDEAD"/>
+			<gd_race race="ELYOS" />
+			<gd_race race="ASMODIANS" />
+			<gd_race race="BROWNIE" />
+			<gd_race race="CONSTRUCT" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="DRAKAN" />
+			<gd_race race="ELEMENTAL" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="RATMAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
 		</gd_races>
 		<gd_items>
 			<!-- Level 1 -->
@@ -797,10 +797,6 @@
 	<!-- Godstones (gold) -->
 	<gd_rule rule_name="Godstones (Unique)" base_chance="0.005" fixed_chance="true">
 		<gd_items>
-			<gd_item id="168000051" name="Godstone: Nezekan's Valiance" />
-			<gd_item id="168000052" name="Godstone: Kaisinel's Terror" />
-			<gd_item id="168000053" name="Godstone: Yustiel's Heart" />
-			<gd_item id="168000054" name="Godstone: Vaizel's Will" />
 			<gd_item id="168000117" name="Godstone: Meslamtaeda's Greed" />
 			<gd_item id="168000118" name="Godstone: Ereshkigal's Honor" />
 			<gd_item id="168000119" name="Godstone: Nezekan's Advance" />
@@ -810,6 +806,14 @@
 			<gd_item id="168000123" name="Godstone: Kaisinel's Fantasy" />
 			<gd_item id="168000124" name="Godstone: Zikel's Arrogance" />
 			<gd_item id="168000125" name="Godstone: Fregion's Stratagem" />
+			<gd_item id="168000126" name="Godstone: Tiamat's Counterattack" />
+			<gd_item id="168000127" name="Godstone: Marchutan's Impartiality" />
+			<gd_item id="168000128" name="Godstone: Yustiel's Generosity" />
+			<gd_item id="168000129" name="Godstone: Beritra's Selfishness" />
+			<gd_item id="168000130" name="Godstone: Tiamat's Fury" />
+			<gd_item id="168000131" name="Godstone: Triniel's Rationality" />
+			<gd_item id="168000132" name="Godstone: Vaizel's Vow" />
+			<gd_item id="168000133" name="Godstone: Meslamtaeda's Regret" />
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white) -->
@@ -1034,411 +1038,411 @@
 	</gd_rule>
 	<gd_rule rule_name="Amplification Stone (Single)" base_chance="2">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
-			<gd_map map_id="320130000" name="Adma_Stronghold"/>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
-			<gd_map map_id="300150000" name="Udas_Temple"/>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
-			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
-			<gd_map map_id="300310000" name="Raksang"/>
-			<gd_map map_id="300270000" name="Argent_Manor"/>
-			<gd_map map_id="300260000" name="Elementis_Forest"/>
-			<gd_map map_id="300280000" name="Rentus_Base"/>
-			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
-			<gd_map map_id="300520000" name="Dragon_Lords_Refuge"/>
-			<gd_map map_id="301050000" name="Steel_Rose_Deck"/>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
+			<gd_map map_id="320130000" name="Adma_Stronghold" />
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+			<gd_map map_id="300150000" name="Udas_Temple" />
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300310000" name="Raksang" />
+			<gd_map map_id="300270000" name="Argent_Manor" />
+			<gd_map map_id="300260000" name="Elementis_Forest" />
+			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300510000" name="Tiamat_Stronghold" />
+			<gd_map map_id="300520000" name="Dragon_Lords_Refuge" />
+			<gd_map map_id="301050000" name="Steel_Rose_Deck" />
+			<gd_map map_id="300590000" name="Ophidan_Bridge" />
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214663" name="Torch Spirit Iprita"/>
-			<gd_npc npc_id="214664" name="Wistful Syripne"/>
-			<gd_npc npc_id="214665" name="Soul Spirit Nomura"/>
-			<gd_npc npc_id="214666" name="Water Spirit Undine"/>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214663" name="Torch Spirit Iprita" />
+			<gd_npc npc_id="214664" name="Wistful Syripne" />
+			<gd_npc npc_id="214665" name="Soul Spirit Nomura" />
+			<gd_npc npc_id="214666" name="Water Spirit Undine" />
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214691" name="Captain Mundirve"/>
-			<gd_npc npc_id="214692" name="Butler Luitart"/>
-			<gd_npc npc_id="214693" name="Chief Maid Miladi"/>
-			<gd_npc npc_id="214694" name="Bloodthirster"/>
-			<gd_npc npc_id="214695" name="Princess Karemiwen"/>
+			<gd_npc npc_id="214691" name="Captain Mundirve" />
+			<gd_npc npc_id="214692" name="Butler Luitart" />
+			<gd_npc npc_id="214693" name="Chief Maid Miladi" />
+			<gd_npc npc_id="214694" name="Bloodthirster" />
+			<gd_npc npc_id="214695" name="Princess Karemiwen" />
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="214843" name="Spiritmaster Atmach"/>
-			<gd_npc npc_id="214864" name="Noah's Furious Shade"/>
-			<gd_npc npc_id="215386" name="Professor Hewahewa"/>
-			<gd_npc npc_id="215387" name="Spectral Elim Elder"/>
-			<gd_npc npc_id="215388" name="Spaller Rakanatra"/>
-			<gd_npc npc_id="215389" name="Spaller Dhatra"/>
-			<gd_npc npc_id="214880" name="Spaller Echtra"/>
-			<gd_npc npc_id="214895" name="Main Power Generator"/>
-			<gd_npc npc_id="214896" name="Auxiliary Power Generator"/>
-			<gd_npc npc_id="214897" name="Emergency Generator"/>
-			<gd_npc npc_id="214904" name="Brigade General Anuhart"/>
+			<gd_npc npc_id="214843" name="Spiritmaster Atmach" />
+			<gd_npc npc_id="214864" name="Noah's Furious Shade" />
+			<gd_npc npc_id="215386" name="Professor Hewahewa" />
+			<gd_npc npc_id="215387" name="Spectral Elim Elder" />
+			<gd_npc npc_id="215388" name="Spaller Rakanatra" />
+			<gd_npc npc_id="215389" name="Spaller Dhatra" />
+			<gd_npc npc_id="214880" name="Spaller Echtra" />
+			<gd_npc npc_id="214895" name="Main Power Generator" />
+			<gd_npc npc_id="214896" name="Auxiliary Power Generator" />
+			<gd_npc npc_id="214897" name="Emergency Generator" />
+			<gd_npc npc_id="214904" name="Brigade General Anuhart" />
 			<!-- Udas Temple -->
-			<gd_npc npc_id="215782" name="Vallakhan"/>
-			<gd_npc npc_id="215783" name="Nexus"/>
+			<gd_npc npc_id="215782" name="Vallakhan" />
+			<gd_npc npc_id="215783" name="Nexus" />
 			<!-- Lower Udas Temple -->
-			<gd_npc npc_id="215784" name="Chura Twinblade"/>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215784" name="Chura Twinblade" />
+			<gd_npc npc_id="215792" name="Kingspin" />
 			<!-- Beshmundir Temple -->
-			<gd_npc npc_id="216238" name="Captain Lakhara"/>
-			<gd_npc npc_id="216157" name="Captain Lakhara"/>
-			<gd_npc npc_id="216241" name="Manadar"/>
-			<gd_npc npc_id="216160" name="Manadar"/>
-			<gd_npc npc_id="216735" name="Macunbello"/>
-			<gd_npc npc_id="216734" name="Macunbello"/>
-			<gd_npc npc_id="216737" name="Macunbello"/>
-			<gd_npc npc_id="216245" name="Macunbello"/>
-			<gd_npc npc_id="216244" name="The Plaguebearer"/>
-			<gd_npc npc_id="216163" name="The Plaguebearer"/>
-			<gd_npc npc_id="216242" name="Vehala the Cursed"/>
-			<gd_npc npc_id="216161" name="Vehala the Cursed"/>
-			<gd_npc npc_id="216158" name="Ahbana the Wicked"/>
-			<gd_npc npc_id="216239" name="Ahbana the Wicked"/>
-			<gd_npc npc_id="216246" name="The Great Virhana"/>
-			<gd_npc npc_id="216165" name="The Great Virhana"/>
-			<gd_npc npc_id="216250" name="Dorakiki the Bold"/>
-			<gd_npc npc_id="216169" name="Dorakiki the Bold"/>
-			<gd_npc npc_id="216248" name="Taros Lifebane"/>
-			<gd_npc npc_id="216167" name="Taros Lifebane"/>
-			<gd_npc npc_id="216263" name="Isbariya the Resolute"/>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute"/>
-			<gd_npc npc_id="216159" name="The Soulcaller"/>
-			<gd_npc npc_id="216240" name="The Soulcaller"/>
-			<gd_npc npc_id="216166" name="Shadowshift"/>
-			<gd_npc npc_id="216247" name="Shadowshift"/>
-			<gd_npc npc_id="216525" name="Thurzon the Undying"/>
-			<gd_npc npc_id="216590" name="Temadaro"/>
-			<gd_npc npc_id="216249" name="Flarestorm"/>
-			<gd_npc npc_id="216168" name="Flarestorm"/>
+			<gd_npc npc_id="216238" name="Captain Lakhara" />
+			<gd_npc npc_id="216157" name="Captain Lakhara" />
+			<gd_npc npc_id="216241" name="Manadar" />
+			<gd_npc npc_id="216160" name="Manadar" />
+			<gd_npc npc_id="216735" name="Macunbello" />
+			<gd_npc npc_id="216734" name="Macunbello" />
+			<gd_npc npc_id="216737" name="Macunbello" />
+			<gd_npc npc_id="216245" name="Macunbello" />
+			<gd_npc npc_id="216244" name="The Plaguebearer" />
+			<gd_npc npc_id="216163" name="The Plaguebearer" />
+			<gd_npc npc_id="216242" name="Vehala the Cursed" />
+			<gd_npc npc_id="216161" name="Vehala the Cursed" />
+			<gd_npc npc_id="216158" name="Ahbana the Wicked" />
+			<gd_npc npc_id="216239" name="Ahbana the Wicked" />
+			<gd_npc npc_id="216246" name="The Great Virhana" />
+			<gd_npc npc_id="216165" name="The Great Virhana" />
+			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216248" name="Taros Lifebane" />
+			<gd_npc npc_id="216167" name="Taros Lifebane" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216159" name="The Soulcaller" />
+			<gd_npc npc_id="216240" name="The Soulcaller" />
+			<gd_npc npc_id="216166" name="Shadowshift" />
+			<gd_npc npc_id="216247" name="Shadowshift" />
+			<gd_npc npc_id="216525" name="Thurzon the Undying" />
+			<gd_npc npc_id="216590" name="Temadaro" />
+			<gd_npc npc_id="216249" name="Flarestorm" />
+			<gd_npc npc_id="216168" name="Flarestorm" />
 			<!-- Raksang -->
-			<gd_npc npc_id="217392" name="Gatekeeper Melkennis"/>
-			<gd_npc npc_id="217456" name="Paruam Sealguard"/>
-			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
-			<gd_npc npc_id="217451" name="The Flamelord"/>
+			<gd_npc npc_id="217392" name="Gatekeeper Melkennis" />
+			<gd_npc npc_id="217456" name="Paruam Sealguard" />
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik" />
+			<gd_npc npc_id="217451" name="The Flamelord" />
 			<!-- Argent Manor -->
-			<gd_npc npc_id="217237" name="Cadella"/>
-			<gd_npc npc_id="217239" name="Unfinished Pletus"/>
+			<gd_npc npc_id="217237" name="Cadella" />
+			<gd_npc npc_id="217239" name="Unfinished Pletus" />
 			<!-- Elementis Forest -->
-			<gd_npc npc_id="217233" name="The Canyonguard"/>
-			<gd_npc npc_id="217238" name="Jurdin the Cursed"/>
-			<gd_npc npc_id="217277" name="Head Kutol"/>
+			<gd_npc npc_id="217233" name="The Canyonguard" />
+			<gd_npc npc_id="217238" name="Jurdin the Cursed" />
+			<gd_npc npc_id="217277" name="Head Kutol" />
 			<!-- Rentus Base -->
-			<gd_npc npc_id="217312" name="Pagati Tamer Nishaka"/>
-			<gd_npc npc_id="217315" name="Umatha the Crazed"/>
-			<gd_npc npc_id="217307" name="Zantaraz"/>
-			<gd_npc npc_id="217308" name="Tarotran"/>
-			<gd_npc npc_id="217316" name="Ambusher Kiriana"/>
-			<gd_npc npc_id="217309" name="Captain Xasta"/>
-			<gd_npc npc_id="217311" name="Kuhara the Volatile"/>
-			<gd_npc npc_id="217317" name="Archmagus Upadi"/>
+			<gd_npc npc_id="217312" name="Pagati Tamer Nishaka" />
+			<gd_npc npc_id="217315" name="Umatha the Crazed" />
+			<gd_npc npc_id="217307" name="Zantaraz" />
+			<gd_npc npc_id="217308" name="Tarotran" />
+			<gd_npc npc_id="217316" name="Ambusher Kiriana" />
+			<gd_npc npc_id="217309" name="Captain Xasta" />
+			<gd_npc npc_id="217311" name="Kuhara the Volatile" />
+			<gd_npc npc_id="217317" name="Archmagus Upadi" />
 			<!-- Tiamat Stronghold -->
-			<gd_npc npc_id="219352" name="Invincible Shabokan"/>
-			<gd_npc npc_id="219353" name="Brigade General Chantra"/>
-			<gd_npc npc_id="219354" name="Brigade General Terath"/>
-			<gd_npc npc_id="219355" name="Traitor Kumbanda"/>
-			<gd_npc npc_id="219356" name="Brigade General Laksyaka"/>
-			<gd_npc npc_id="219357" name="Adjutant Anuhart"/>
+			<gd_npc npc_id="219352" name="Invincible Shabokan" />
+			<gd_npc npc_id="219353" name="Brigade General Chantra" />
+			<gd_npc npc_id="219354" name="Brigade General Terath" />
+			<gd_npc npc_id="219355" name="Traitor Kumbanda" />
+			<gd_npc npc_id="219356" name="Brigade General Laksyaka" />
+			<gd_npc npc_id="219357" name="Adjutant Anuhart" />
 			<!-- Dragon Lords Refuge -->
-			<gd_npc npc_id="219359" name="Calindi Flamelord"/>
+			<gd_npc npc_id="219359" name="Calindi Flamelord" />
 			<!-- Steel Rose Deck -->
-			<gd_npc npc_id="230727" name="Swordmistress Stakin"/>
-			<gd_npc npc_id="230728" name="Alchemist Toxikki"/>
-			<gd_npc npc_id="230729" name="Quickdraw Shutkiki"/>
-			<gd_npc npc_id="230730" name="Srokiki the Lazy"/>
-			<gd_npc npc_id="230741" name="Boatswain Nahuraki"/>
-			<gd_npc npc_id="230742" name="Chief Gunner Utsuraki"/>
+			<gd_npc npc_id="230727" name="Swordmistress Stakin" />
+			<gd_npc npc_id="230728" name="Alchemist Toxikki" />
+			<gd_npc npc_id="230729" name="Quickdraw Shutkiki" />
+			<gd_npc npc_id="230730" name="Srokiki the Lazy" />
+			<gd_npc npc_id="230741" name="Boatswain Nahuraki" />
+			<gd_npc npc_id="230742" name="Chief Gunner Utsuraki" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231052" name="Vera Defender Archmage"/>
+			<gd_npc npc_id="231052" name="Vera Defender Archmage" />
 			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka"/>
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata"/>
-			<gd_npc npc_id="233258" name="Derakanak the Reaver"/>
-			<gd_npc npc_id="230850" name="Researcher Teselik"/>
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir"/>
-			<gd_npc npc_id="233316" name="Commander Ranodim"/>
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka"/>
-			<gd_npc npc_id="233257" name="Archmagus Sayahum"/>
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata"/>
+			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
+			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
+			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230850" name="Researcher Teselik" />
+			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
+			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
+			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
+			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166500002" name="Amplification Stone"/>
+			<gd_item id="166500002" name="Amplification Stone" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="1.5" each_member="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
-			<gd_map map_id="320130000" name="Adma_Stronghold"/>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
-			<gd_map map_id="300150000" name="Udas_Temple"/>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
-			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
-			<gd_map map_id="320150000" name="Padmarashkas_Cave"/>
-			<gd_map map_id="300310000" name="Raksang"/>
-			<gd_map map_id="300270000" name="Argent_Manor"/>
-			<gd_map map_id="300260000" name="Elementis_Forest"/>
-			<gd_map map_id="300380000" name="Muadas_Trencher"/>
-			<gd_map map_id="300280000" name="Rentus_Base"/>
-			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
-			<gd_map map_id="301050000" name="Steel_Rose_Deck"/>
-			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
-			<gd_map map_id="300800000" name="Infinity_Shard"/>
-			<gd_map map_id="301230000" name="Illuminary_Obelisk"/>
-			<gd_map map_id="300540000" name="The_Eternal_Bastion"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
+			<gd_map map_id="320130000" name="Adma_Stronghold" />
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+			<gd_map map_id="300150000" name="Udas_Temple" />
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="320150000" name="Padmarashkas_Cave" />
+			<gd_map map_id="300310000" name="Raksang" />
+			<gd_map map_id="300270000" name="Argent_Manor" />
+			<gd_map map_id="300260000" name="Elementis_Forest" />
+			<gd_map map_id="300380000" name="Muadas_Trencher" />
+			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300510000" name="Tiamat_Stronghold" />
+			<gd_map map_id="301050000" name="Steel_Rose_Deck" />
+			<gd_map map_id="301140000" name="Danuar_Sanctuary" />
+			<gd_map map_id="300590000" name="Ophidan_Bridge" />
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="300800000" name="Infinity_Shard" />
+			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
+			<gd_map map_id="300540000" name="The_Eternal_Bastion" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" name="Lord Lannok"/>
+			<gd_npc npc_id="214696" name="Lord Lannok" />
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="215284" name="Chramati Firetail"/>
-			<gd_npc npc_id="215283" name="Asaratu Bloodshade"/>
-			<gd_npc npc_id="215282" name="Vanuka Infernus"/>
-			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
-			<gd_npc npc_id="217166" name="Tahabata Pyrelord"/>
+			<gd_npc npc_id="215284" name="Chramati Firetail" />
+			<gd_npc npc_id="215283" name="Asaratu Bloodshade" />
+			<gd_npc npc_id="215282" name="Vanuka Infernus" />
+			<gd_npc npc_id="215281" name="Calindi Flamelord" />
+			<gd_npc npc_id="217166" name="Tahabata Pyrelord" />
 			<!-- Udas Temple -->
-			<gd_npc npc_id="215793" name="Devoted Anurati"/>
+			<gd_npc npc_id="215793" name="Devoted Anurati" />
 			<!-- Lower Udas Temple -->
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 			<!-- Beshmundir Temple -->
-			<gd_npc npc_id="216183" name="Stormwing"/>
-			<gd_npc npc_id="216264" name="Stormwing"/>
+			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216264" name="Stormwing" />
 			<!-- Padmarashkas Cave -->
-			<gd_npc npc_id="216580" name="Padmarashka"/>
-			<gd_npc npc_id="218756" name="Padmarashka"/>
+			<gd_npc npc_id="216580" name="Padmarashka" />
+			<gd_npc npc_id="218756" name="Padmarashka" />
 			<!-- Raksang -->
-			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart" />
 			<!-- Argent Manor -->
-			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver" />
 			<!-- Elementis Forest -->
-			<gd_npc npc_id="217234" name="Tuali"/>
+			<gd_npc npc_id="217234" name="Tuali" />
 			<!-- Muadas Trencher -->
-			<gd_npc npc_id="218782" name="Empress Muada"/>
+			<gd_npc npc_id="218782" name="Empress Muada" />
 			<!-- Rentus Base -->
-			<gd_npc npc_id="218614" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="218614" name="Brigade General Vasharti" />
 			<!-- Tiamat Stronghold -->
-			<gd_npc npc_id="219358" name="Brigade General Tahabata"/>
+			<gd_npc npc_id="219358" name="Brigade General Tahabata" />
 			<!-- Steel Rose Deck -->
-			<gd_npc npc_id="230743" name="Captain Rumakiki"/>
+			<gd_npc npc_id="230743" name="Captain Rumakiki" />
 			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233089" name="Chief Medic Tagnu"/>
-			<gd_npc npc_id="233090" name="Virulent Ukahim"/>
-			<gd_npc npc_id="233086" name="Warmage Suyaroka"/>
+			<gd_npc npc_id="233089" name="Chief Medic Tagnu" />
+			<gd_npc npc_id="233090" name="Virulent Ukahim" />
+			<gd_npc npc_id="233086" name="Warmage Suyaroka" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="231050" name="Vera" />
 			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim"/>
-			<gd_npc npc_id="230858" name="Brigade General Sheba"/>
+			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
+			<gd_npc npc_id="230858" name="Brigade General Sheba" />
 			<!-- Infinity Shard -->
-			<gd_npc npc_id="231073" name="Hyperion"/>
+			<gd_npc npc_id="231073" name="Hyperion" />
 			<!-- Illuminary Obelisk -->
-			<gd_npc npc_id="233740" name="Test Weapon Dynatoum"/>
+			<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
 			<!-- Eternal Bastion -->
-			<gd_npc npc_id="231130" name="Grand Commander Pashid"/>
+			<gd_npc npc_id="231130" name="Grand Commander Pashid" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166500002" name="Amplification Stone"/>
+			<gd_item id="166500002" name="Amplification Stone" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1" fixed_chance="true">
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
-			<gd_rating rating="LEGENDARY"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
 		</gd_ratings>
 		<gd_worlds>
-			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="IDIAN_DEPTH"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
+			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_INSTANCE" />
+			<gd_world wd_type="TIAMARANTA_SARPAN" />
+			<gd_world wd_type="SARPAN_INSTANCE" />
+			<gd_world wd_type="TIAMARANTA_INSTANCE" />
+			<gd_world wd_type="KATALAM" />
+			<gd_world wd_type="IDIAN_DEPTH" />
+			<gd_world wd_type="KATALAM_INSTANCE" />
 		</gd_worlds>
 		<gd_items>
-			<gd_item id="166020000" name="Omega Enchantment Stone"/>
+			<gd_item id="166020000" name="Omega Enchantment Stone" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Tempering Solution (Single)" base_chance="4">
 		<gd_maps>
-			<gd_map map_id="320100000" name="Fire_Temple"/>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
-			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
-			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-			<gd_map map_id="301110000" name="Danuar_Reliquary"/>
-			<gd_map map_id="300800000" name="Infinity_Shard"/>
-			<gd_map map_id="301280000" name="Kysis_Barracks"/>
-			<gd_map map_id="301290000" name="Miren_Barracks"/>
-			<gd_map map_id="301300000" name="Krotan_Barracks"/>
-			<gd_map map_id="301240000" name="Legions_Kysis_Barracks"/>
-			<gd_map map_id="301250000" name="Legions_Miren_Barracks"/>
-			<gd_map map_id="301260000" name="Legions_Krotan_Barracks"/>
+			<gd_map map_id="320100000" name="Fire_Temple" />
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301140000" name="Danuar_Sanctuary" />
+			<gd_map map_id="300590000" name="Ophidan_Bridge" />
+			<gd_map map_id="301110000" name="Danuar_Reliquary" />
+			<gd_map map_id="300800000" name="Infinity_Shard" />
+			<gd_map map_id="301280000" name="Kysis_Barracks" />
+			<gd_map map_id="301290000" name="Miren_Barracks" />
+			<gd_map map_id="301300000" name="Krotan_Barracks" />
+			<gd_map map_id="301240000" name="Legions_Kysis_Barracks" />
+			<gd_map map_id="301250000" name="Legions_Miren_Barracks" />
+			<gd_map map_id="301260000" name="Legions_Krotan_Barracks" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Fire Temple -->
-			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
-			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+			<gd_npc npc_id="212846" name="Kromede the Corrupt" />
+			<gd_npc npc_id="214621" name="Vile Judge Kromede" />
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="214904" name="Brigade General Anuhart"/>
+			<gd_npc npc_id="214904" name="Brigade General Anuhart" />
 			<!-- Beshmundir Temple -->
-			<gd_npc npc_id="216183" name="Stormwing"/>
-			<gd_npc npc_id="216264" name="Stormwing"/>
+			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216264" name="Stormwing" />
 			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata"/>
+			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
 			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233089" name="Chief Medic Tagnu"/>
+			<gd_npc npc_id="233089" name="Chief Medic Tagnu" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="231050" name="Vera" />
 			<!-- Danuar Reliquary -->
-			<gd_npc npc_id="231305" name="Enraged Queen Modor"/>
+			<gd_npc npc_id="231305" name="Enraged Queen Modor" />
 			<!-- Infinity Shard -->
-			<gd_npc npc_id="231073" name="Hyperion"/>
+			<gd_npc npc_id="231073" name="Hyperion" />
 			<!-- (Legions) Kysis Barracks -->
-			<gd_npc npc_id="233675" name="Weakened Kysis Duke"/>
-			<gd_npc npc_id="233676" name="Enraged Kysis Duke"/>
+			<gd_npc npc_id="233675" name="Weakened Kysis Duke" />
+			<gd_npc npc_id="233676" name="Enraged Kysis Duke" />
 			<!-- (Legions) Miren Barracks -->
-			<gd_npc npc_id="233718" name="Weakend Miren Prince"/>
-			<gd_npc npc_id="233719" name="Enraged Miren Prince"/>
+			<gd_npc npc_id="233718" name="Weakend Miren Prince" />
+			<gd_npc npc_id="233719" name="Enraged Miren Prince" />
 			<!-- (Legions) Krotan Barracks -->
-			<gd_npc npc_id="233632" name="Weakened Krotan Lord"/>
-			<gd_npc npc_id="233633" name="Enraged Krotan Lord"/>
+			<gd_npc npc_id="233632" name="Weakened Krotan Lord" />
+			<gd_npc npc_id="233633" name="Enraged Krotan Lord" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166030005" name="Tempering Solution"/>
+			<gd_item id="166030005" name="Tempering Solution" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="2.5" each_member="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
-			<gd_map map_id="320080000" name="Draupnir_Cave"/>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
-			<gd_map map_id="300280000" name="Rentus_Base"/>
-			<gd_map map_id="301230000" name="Illuminary_Obelisk"/>
-			<gd_map map_id="320130000" name="Adma_Stronghold"/>
-			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
+			<gd_map map_id="320080000" name="Draupnir_Cave" />
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
+			<gd_map map_id="320130000" name="Adma_Stronghold" />
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 			<!-- Draupnir Cave -->
-			<gd_npc npc_id="213780" name="Commander Bakarma"/>
+			<gd_npc npc_id="213780" name="Commander Bakarma" />
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
-			<gd_npc npc_id="217166" name="Tahabata Pyrelord"/>
+			<gd_npc npc_id="215281" name="Calindi Flamelord" />
+			<gd_npc npc_id="217166" name="Tahabata Pyrelord" />
 			<!-- Rentus Base -->
-			<gd_npc npc_id="218614" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="218614" name="Brigade General Vasharti" />
 			<!-- Illuminary Obelisk -->
-			<gd_npc npc_id="233740" name="Test Weapon Dynatoum"/>
+			<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
 			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" name="Lord Lannok"/>
+			<gd_npc npc_id="214696" name="Lord Lannok" />
 			<!-- Beshmundir Temple (HM) -->
-			<gd_npc npc_id="216182" name="Isbariya the Resolute"/>
+			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
 			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim"/>
-			<gd_npc npc_id="230858" name="Brigade General Sheba"/>
+			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
+			<gd_npc npc_id="230858" name="Brigade General Sheba" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053083" name="Tempering Solution Chest"/>
+			<gd_item id="188053083" name="Tempering Solution Chest" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Empyrean Plume Chest (Single)" base_chance="2.5">
 		<gd_maps>
-			<gd_map map_id="320100000" name="Fire_Temple"/>
-			<gd_map map_id="320080000" name="Draupnir_Cave"/>
-			<gd_map map_id="310090000" name="Indratu_Fortress"/>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
-			<gd_map map_id="320130000" name="Adma_Stronghold"/>
+			<gd_map map_id="320100000" name="Fire_Temple" />
+			<gd_map map_id="320080000" name="Draupnir_Cave" />
+			<gd_map map_id="310090000" name="Indratu_Fortress" />
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
+			<gd_map map_id="320130000" name="Adma_Stronghold" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Fire Temple -->
-			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
-			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+			<gd_npc npc_id="212846" name="Kromede the Corrupt" />
+			<gd_npc npc_id="214621" name="Vile Judge Kromede" />
 			<!-- Draupnir Cave -->
-			<gd_npc npc_id="213780" name="Commander Bakarma"/>
+			<gd_npc npc_id="213780" name="Commander Bakarma" />
 			<!-- Indratu Fortress -->
-			<gd_npc npc_id="214159" name="Brigadier Indratu"/>
+			<gd_npc npc_id="214159" name="Brigadier Indratu" />
 			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" name="Lord Lannok"/>
+			<gd_npc npc_id="214696" name="Lord Lannok" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053295" name="Empyrean Plume Chest"/>
+			<gd_item id="188053295" name="Empyrean Plume Chest" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Empyrean Plume Chest (Shared)" base_chance="1.5" each_member="true">
 		<gd_maps>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
-			<gd_map map_id="300150000" name="Udas_Temple"/>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
-			<gd_map map_id="300170000" name="Beshmundir_Temple"/>
-			<gd_map map_id="320150000" name="Padmarashkas_Cave"/>
-			<gd_map map_id="300380000" name="Muadas_Trencher"/>
-			<gd_map map_id="300310000" name="Raksang"/>
-			<gd_map map_id="300260000" name="Elementis_Forest"/>
-			<gd_map map_id="300270000" name="Argent_Manor"/>
-			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
-			<gd_map map_id="300280000" name="Rentus_Base"/>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-			<gd_map map_id="301230000" name="Illuminary_Obelisk"/>
-			<gd_map map_id="301140000" name="Danuar_Sanctuary"/>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base"/>
-			<gd_map map_id="300800000" name="Infinity_Shard"/>
-			<gd_map map_id="301110000" name="Danuar_Reliquary"/>
-			<gd_map map_id="301340000" name="Linkgate_Foundry"/>
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+			<gd_map map_id="300150000" name="Udas_Temple" />
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="320150000" name="Padmarashkas_Cave" />
+			<gd_map map_id="300380000" name="Muadas_Trencher" />
+			<gd_map map_id="300310000" name="Raksang" />
+			<gd_map map_id="300260000" name="Elementis_Forest" />
+			<gd_map map_id="300270000" name="Argent_Manor" />
+			<gd_map map_id="300510000" name="Tiamat_Stronghold" />
+			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300590000" name="Ophidan_Bridge" />
+			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
+			<gd_map map_id="301140000" name="Danuar_Sanctuary" />
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="300800000" name="Infinity_Shard" />
+			<gd_map map_id="301110000" name="Danuar_Reliquary" />
+			<gd_map map_id="301340000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
-			<gd_npc npc_id="217166" name="Tahabata Pyrelord"/>
+			<gd_npc npc_id="215281" name="Calindi Flamelord" />
+			<gd_npc npc_id="217166" name="Tahabata Pyrelord" />
 			<!-- Udas Temple -->
-			<gd_npc npc_id="215793" name="Devoted Anurati"/>
+			<gd_npc npc_id="215793" name="Devoted Anurati" />
 			<!-- Lower Udas Temple -->
-			<gd_npc npc_id="215795" name="Debilkarim the maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the maker" />
 			<!-- Beshmundirs Temple -->
-			<gd_npc npc_id="216183" name="Stormwing"/>
-			<gd_npc npc_id="216264" name="Stormwing"/>
+			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216264" name="Stormwing" />
 			<!-- Padmarashkas Cave -->
-			<gd_npc npc_id="218756" name="Padmarashka"/>
+			<gd_npc npc_id="218756" name="Padmarashka" />
 			<!-- Muadas Trencher -->
-			<gd_npc npc_id="218782" name="Empress Muada"/>
+			<gd_npc npc_id="218782" name="Empress Muada" />
 			<!-- Raksang -->
-			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart" />
 			<!-- Elementis Forest -->
-			<gd_npc npc_id="217234" name="Tuali"/>
+			<gd_npc npc_id="217234" name="Tuali" />
 			<!-- Argent Manor -->
-			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver" />
 			<!-- Tiamat Stronghold -->
-			<gd_npc npc_id="219358" name="Brigade General Tahabata"/>
+			<gd_npc npc_id="219358" name="Brigade General Tahabata" />
 			<!-- Rentus Base -->
-			<gd_npc npc_id="218614" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="218614" name="Brigade General Vasharti" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="231050" name="Vera" />
 			<!-- Illuminary Obelisk -->
-			<gd_npc npc_id="233740" name="Test Weapon Dynatoum"/>
+			<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
 			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233090" name="Virulent Ukahim"/>
+			<gd_npc npc_id="233090" name="Virulent Ukahim" />
 			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim"/>
-			<gd_npc npc_id="230858" name="Brigade General Sheba"/>
+			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
+			<gd_npc npc_id="230858" name="Brigade General Sheba" />
 			<!-- Infinity Shard -->
-			<gd_npc npc_id="231073" name="Hyperion"/>
+			<gd_npc npc_id="231073" name="Hyperion" />
 			<!-- Danuar Reliquary -->
-			<gd_npc npc_id="231305" name="Enraged Queen Modor"/>
+			<gd_npc npc_id="231305" name="Enraged Queen Modor" />
 			<!-- Linkgate Foundry -->
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053295" name="Empyrean Plume Chest"/>
+			<gd_item id="188053295" name="Empyrean Plume Chest" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
