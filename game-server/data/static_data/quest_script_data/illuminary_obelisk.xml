@@ -14,8 +14,8 @@
 	<report_to id="16990" start_npc_ids="801543" end_npc_ids="802048"/>
 	<report_to id="26990" start_npc_ids="801547" end_npc_ids="802049"/>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="16992" start_npc_ids="802048" end_npc_ids="801543"/>
-	<item_collecting id="26992" start_npc_ids="802049" end_npc_ids="801547"/>
+	<item_collecting id="16992" start_npc_ids="802048" end_npc_ids="804598"/>
+	<item_collecting id="26992" start_npc_ids="802049" end_npc_ids="804599"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="16991" start_npc_ids="802048" end_npc_ids="804598">
 		<monster var="0" end_var="4" npc_ids="233720 233882 233722 233723 233724 233725 233726 233727"/>
