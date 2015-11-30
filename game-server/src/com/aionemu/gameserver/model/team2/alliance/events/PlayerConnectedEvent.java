@@ -44,7 +44,7 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 		Player player = member.getObject();
 		if (!connected.getObjectId().equals(player.getObjectId())) {
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(connected, false, alliance));
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(connected, alliance));
 
 			PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.RECONNECT));
 		}
