@@ -30012,7 +30012,97 @@
     <decomposable item_id="188053336" decomposable_name="Rising Daeva's Box"/>
     <decomposable item_id="188053337" decomposable_name="Exquisite Daeva's Box"/>
     <decomposable item_id="188053338" decomposable_name="Exquisite Daeva's Outfit Box"/>
-    <decomposable item_id="188053339" decomposable_name="Ancestor's Reward Bundle"/>
+    <decomposable item_id="188053339" decomposable_name="Ancestor's Reward Bundle">
+		<items chance="80">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="7">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="188052554" name="[Event] Beritra Idian Pouch"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100001732" name="Inherid Sword"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100101329" name="Inherid Mace"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100201498" name="Inherid Dagger"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100501309" name="Inherid Orb"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100601426" name="Inherid Spellbook"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="100901370" name="Inherid Greatsword"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="101301262" name="Inherid Polearm"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="101501352" name="Inherid Staff"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="101701363" name="Inherid Bow"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="101801213" name="Inherid Pistol"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="101901122" name="Inherid Aethercannon"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="102001241" name="Inherid Harp"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="1">
+			<item id="186000236" name="Blood Mark" rnd_min="10" rnd_max="20"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="20" rnd_max="50"/>
+			<item id="102101067" name="Inherid Cipher-Blade"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053340" decomposable_name="Honorable Governor's Renown Box"/>
     <decomposable item_id="188053341" decomposable_name="Honorable General's Renown Box"/>
     <decomposable item_id="188053342" decomposable_name="Honorable Officer's Renown Box"/>
