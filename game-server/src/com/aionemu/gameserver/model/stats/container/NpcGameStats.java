@@ -132,7 +132,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public Stat2 getMResist() {
 		int mres = owner.getObjectTemplate().getStatsTemplate().getMresist();
 		int level = owner.getLevel();
-		if (owner.getRating() != NpcRating.LEGENDARY) {
+		if (owner.getRating() != NpcRating.LEGENDARY) { // FIXME: fix templates or formula
 			if (level < 25)
 				mres *= 0.7f;
 			else if (level >= 25 && level < 50)
@@ -196,8 +196,14 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMainHandPAttack() {
 		int atk = owner.getObjectTemplate().getStatsTemplate().getMainHandAttack();
-		if (owner.getRating() == NpcRating.NORMAL)
-			atk *= 0.7f;
+		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
+			if (owner.getLevel() <= 50)
+				atk *= 0.75f;
+			else if (owner.getLevel() <= 60)
+				atk *= 0.8f;
+			else
+				atk *= 0.9f;
+		}
 		return getStat(StatEnum.PHYSICAL_ATTACK, atk);
 	}
 
