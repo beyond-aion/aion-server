@@ -1,25 +1,31 @@
 package com.aionemu.gameserver.services.reward;
 
-import java.util.ArrayList;
+import java.awt.Color;
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.YearMonth;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javolution.util.FastMap;
-
-import org.joda.time.DateTime;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dao.AdventDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.survey.CustomSurveyItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Nathan
- * @modified Estrayl
+ * @modified Estrayl, Neon
  */
 public class AdventService {
 
@@ -28,14 +34,14 @@ public class AdventService {
 
 	private AdventService() {
 		for (int i = 1; i <= 25; i++) {
-			rewards.put(i, new ArrayList<>());
+			rewards.put(i, new FastTable<>());
 		}
 		initMaps();
 	}
 
 	private void initMaps() {
 		rewards.get(1).add(new CustomSurveyItem(125040122, 1));
-		
+
 		rewards.get(2).add(new CustomSurveyItem(169600206, 1));
 
 		rewards.get(3).add(new CustomSurveyItem(169620082, 1));
@@ -53,7 +59,8 @@ public class AdventService {
 		rewards.get(9).add(new CustomSurveyItem(160010095, 10));
 		rewards.get(9).add(new CustomSurveyItem(160010201, 10));
 
-		rewards.get(10).add(new CustomSurveyItem(188050006, 5)); // ASMO 188050009
+		rewards.get(10).add(new CustomSurveyItem(188050006, 5)); // ely
+		rewards.get(10).add(new CustomSurveyItem(188050009, 5)); // asmo
 
 		rewards.get(11).add(new CustomSurveyItem(164002116, 10));
 		rewards.get(11).add(new CustomSurveyItem(164002272, 10));
@@ -62,7 +69,8 @@ public class AdventService {
 
 		rewards.get(13).add(new CustomSurveyItem(169620072, 1));
 
-		rewards.get(14).add(new CustomSurveyItem(188051293, 1)); // ASMO 188051294
+		rewards.get(14).add(new CustomSurveyItem(188051293, 1)); // ely
+		rewards.get(14).add(new CustomSurveyItem(188051294, 1)); // asmo
 
 		rewards.get(15).add(new CustomSurveyItem(164002117, 10));
 		rewards.get(15).add(new CustomSurveyItem(164002118, 10));
@@ -79,7 +87,8 @@ public class AdventService {
 		rewards.get(20).add(new CustomSurveyItem(162001032, 25));
 		rewards.get(20).add(new CustomSurveyItem(162001034, 25));
 
-		rewards.get(21).add(new CustomSurveyItem(188050006, 5)); // ASMO 188050009
+		rewards.get(21).add(new CustomSurveyItem(188050006, 5)); // ely
+		rewards.get(21).add(new CustomSurveyItem(188050009, 5)); // asmo
 
 		rewards.get(22).add(new CustomSurveyItem(188052717, 1));
 
@@ -90,83 +99,72 @@ public class AdventService {
 	}
 
 	public void onLogin(Player player) {
-		if (!DAOManager.getDAO(AdventDAO.class).containAllready(player))
+		int day = MonthDay.now().getDayOfMonth();
+		if (YearMonth.now().getMonth() != Month.DECEMBER || day > 24)
 			return;
-		DateTime date = new DateTime(System.currentTimeMillis());
-		final int day = date.getDayOfMonth();
-		int month = date.getMonthOfYear();
-		if (month != 12 || day > 24)
+		if (!rewards.containsKey(day) || rewards.get(day).isEmpty() && day != 6)
 			return;
-		if (!rewards.containsKey(day) || rewards.get(day).isEmpty())
-			return;
-		int lastDay = DAOManager.getDAO(AdventDAO.class).get(player);
-		if (lastDay == -1 || lastDay >= day)
-			return;
-		if (isRewardPossible(player))
-			sendReward(player, day);
+		if (DAOManager.getDAO(AdventDAO.class).getLastReceivedDay(player) < day)
+			PacketSendUtility.sendYellowMessage(player, "You can open your advent calendar door for today!"
+				+ "\nType in .advent to redeem todays reward on this character.\n" + ChatUtil.color("ATTENTION:", Color.ORANGE)
+				+ " Only one character per account can receive this reward!");
 	}
 
-	private void sendReward(Player player, int date) {
-		List<CustomSurveyItem> items = new ArrayList<>(rewards.get(date));
+	public void redeemReward(Player player) {
+		int day = MonthDay.now().getDayOfMonth();
 
-		if (items.isEmpty())
+		if (DAOManager.getDAO(AdventDAO.class).getLastReceivedDay(player) >= day) {
+			PacketSendUtility.sendMessage(player, "You have already opened todays advent calendar door on this account.");
 			return;
-		
-		if (date == 6) {
-			sendRewardMail(player, getRndMount(), 1);
-		} else {
-			for (CustomSurveyItem item : items) {
-				int id = getAsmodianItem(item.getId());
-				sendRewardMail(player, id, item.getCount());
+		}
+
+		if (day != 6 && player.getMailbox().size() + rewards.get(day).size() > 100 || !player.getMailbox().haveFreeSlots()) {
+			PacketSendUtility.sendMessage(player, "Your mailbox is full, please make some room.");
+			return;
+		}
+
+		if (!DAOManager.getDAO(AdventDAO.class).storeLastReceivedDay(player, day)) {
+			PacketSendUtility.sendMessage(player, "Sorry. Some shugo broke our database, please report this in our bugtracker :(");
+			return;
+		}
+
+		if (day == 6) {
+			sendRewardMail(player, getRndMount(), 1, day);
+		} else if (day <= 24) {
+			for (CustomSurveyItem item : rewards.get(day)) {
+				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
+				if (template != null && template.getRace() == player.getCommonData().getOppositeRace())
+					return;
+				sendRewardMail(player, item.getId(), item.getCount(), day);
 			}
 		}
 	}
 
-	public boolean isRewardPossible(Player player) {
-		if (!DAOManager.getDAO(AdventDAO.class).containAllready(player))
-			return false;
-		DateTime date = new DateTime(System.currentTimeMillis());
-		final int day = date.getDayOfMonth();
-		int month = date.getMonthOfYear();
-		if (month != 12 || day > 24)
-			return false;
-
-		int lastDay = DAOManager.getDAO(AdventDAO.class).get(player);
-		if (lastDay == -1 || lastDay >= day)
-			return false;
-
-		if (!player.getMailbox().haveFreeSlots()) {
-			PacketSendUtility.sendMessage(player, "Your inventory is full, you should make some room and relogg!");
-			return false;
-		}
-
-		DAOManager.getDAO(AdventDAO.class).set(player, day);
-		return true;
+	private void sendRewardMail(Player player, int id, int count, int day) {
+		SystemMailService.getInstance().sendMail("Beyond Aion", player.getName(), "Advent Calendar", "Greetings Daeva!\n\nToday is December " + day
+				+ " and you know what that means! Another day, another advent calendar door.\n\nWe hope you can use this well~\n\n-Beyond Aion", id, count, 0, LetterType.EXPRESS);
 	}
 
-	private void sendRewardMail(Player player, int id, int count) {
-		SystemMailService.getInstance().sendMail(
-			"Beyond Aion",
-			player.getName(),
-			"Advent Calendar",
-			"Greetings Daeva!\n\n" + "You have reached level 65 with your first character and therefore we have a special something for you."
-				+ " In gratitude for your support we have prepared a package with valuable items for you.\n\n" + "Enjoy your stay on Beyond Aion!", id,
-			count, 0, LetterType.EXPRESS);
-	}
-	
-	public int getAsmodianItem(int id) {
-		switch (id) {
-			case 188050006:
-				return 188050009;
-			case 188051293:
-				return 188051294;
+	public void showTodaysReward(Player player) {
+		int day = MonthDay.now().getDayOfMonth();
+		StringBuilder sb = new StringBuilder("Todays advent calendar reward(s):\n");
+		if (day == 6)
+			sb.append("One random mount (30 days)");
+		else if (day <= 24) {
+			Iterator<CustomSurveyItem> iter = rewards.get(day).iterator();
+			while (iter.hasNext()) {
+				int id = iter.next().getId();
+				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(id);
+				if (template != null && template.getRace() == player.getCommonData().getOppositeRace())
+					continue;
+				sb.append(ChatUtil.item(id) + (iter.hasNext() ? ", " : ""));
+			}
 		}
-		return id;
+		PacketSendUtility.sendMessage(player, sb.toString());
 	}
 
 	public int getRndMount() {
-		int rnd = Rnd.get(1, 19);
-		switch (rnd) {
+		switch (Rnd.get(1, 19)) {
 			case 1:
 				return 190100022;
 			case 2:

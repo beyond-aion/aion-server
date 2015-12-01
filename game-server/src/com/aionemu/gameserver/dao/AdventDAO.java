@@ -4,7 +4,7 @@ import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- * @author Nathan
+ * @author Neon
  */
 public abstract class AdventDAO implements DAO {
 
@@ -13,11 +13,7 @@ public abstract class AdventDAO implements DAO {
 		return AdventDAO.class.getName();
 	}
 
-	public abstract boolean containAllready(Player player);
+	public abstract int getLastReceivedDay(Player player);
 
-	public abstract int get(Player player);
-
-	public abstract void set(Player player, int date);
-
-	public abstract boolean newAdvent(Player player);
+	public abstract boolean storeLastReceivedDay(Player player, int dayOfMonth);
 }
