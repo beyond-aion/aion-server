@@ -1,6 +1,7 @@
 package quest.reshanta;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,6 +12,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -77,9 +79,8 @@ public class _1071SpeakingBalaur extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 				case SETPRO1:
 					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						changeQuestStep(env, 0, 1, false);
+						TeleportService2.teleportTo(player, 110010000, 1656.1f, 1446.93f, 549.4f, (byte)0, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;
@@ -105,9 +106,8 @@ public class _1071SpeakingBalaur extends QuestHandler {
 					return false;
 				case SETPRO7:
 					if (var == 6 || var == 8) {
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						changeQuestStep(env, var, 6, true);
+						TeleportService2.teleportTo(player, 400010000, 2979.94f, 922.42f, 1538.92f, (byte)103, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;
