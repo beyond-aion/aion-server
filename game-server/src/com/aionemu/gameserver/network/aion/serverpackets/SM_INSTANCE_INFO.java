@@ -7,8 +7,6 @@ import javolution.util.FastTable;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
-import com.aionemu.gameserver.model.team2.TeamMember;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -19,19 +17,18 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_INSTANCE_INFO extends AionServerPacket {
 
-	private byte updateType; // 0 = reset existing data and write new info, 1 = update team info, 2 = overwrite existing data without resetting other
-	private Integer[] instanceIds = new Integer[] {}; // if this is set, only portal info for these portals will be sent
+	private byte updateType; // 0 = reset existing data and write new info, 1 = update team member info, 2 = overwrite existing data without resetting other
 	private Collection<Player> players; // list of players for which their cooldown info will be sent to the active player
+	private Integer[] instanceIds; // list of instances for which the data should be updated
 
-	public SM_INSTANCE_INFO(Player player, TemporaryPlayerTeam<? extends TeamMember<Player>> playerTeam) {
-		this.updateType = (byte) (playerTeam == null ? 2 : 1);
-		this.players = playerTeam == null ? FastTable.of(player) : playerTeam.getMembers();
+	public SM_INSTANCE_INFO(byte updateType, Player player, Integer... instanceId) {
+		this(updateType, FastTable.of(player), instanceId);
 	}
 
-	public SM_INSTANCE_INFO(Player player, Integer... instanceId) {
-		this.updateType = (byte) (instanceId.length > 0 ? 2 : 0);
-		this.players = FastTable.of(player);
-		this.instanceIds = instanceId;
+	public SM_INSTANCE_INFO(byte updateType, Collection<Player> players, Integer... instanceId) {
+		this.updateType = updateType;
+		this.players = players;
+		this.instanceIds =  instanceId.length > 0 ? instanceId : DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimes().keySet().toArray(new Integer[0]);
 	}
 
 	@Override
@@ -42,12 +39,6 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
 		writeC(0x00); // unk1
 		writeH(players.size());
 		for (Player player : players) {
-			if (instanceIds.length == 0) { // if no IDs were specified, update dynamically
-				if (activePlayer.getObjectId() == player.getObjectId())
-					instanceIds = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimes().keySet().toArray(new Integer[0]); // full instance list
-				else
-					instanceIds = player.getPortalCooldownList().getPortalCoolDowns().keySet().toArray(new Integer[0]); // only list where player has cooldowns
-			}
 			writeD(player.getObjectId());
 			writeH(instanceIds.length);
 			for (int worldId : instanceIds) {

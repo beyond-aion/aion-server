@@ -1,44 +1,41 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team2.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 
 /**
  * @author nrg
+ * @modified Neon
  */
 public class CM_INSTANCE_INFO extends AionClientPacket {
 
-	private static Logger log = LoggerFactory.getLogger(CM_INSTANCE_INFO.class);
-
-	@SuppressWarnings("unused")
-	private int unk1, unk2;
+	private byte updateType; // 0 = reset to client default values and overwrite, 1 = update team member info, 2 = overwrite only
 
 	public CM_INSTANCE_INFO(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		unk1 = readD();
-		unk2 = readC(); // team?
+		readD(); // unk (always 0)
+		updateType = (byte) readC();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (unk2 == 1 && !player.isInTeam())
-			log.debug("Received CM_INSTANCE_INFO with teamdata request but player has no team!");
-		sendPacket(new SM_INSTANCE_INFO(player, player.getCurrentTeam()));
+		if (updateType == 1) {
+			// update team info
+			sendPacket(new SM_INSTANCE_INFO(updateType, player.isInTeam() ? player.getCurrentTeam().filterMembers(new ExcludePlayerFilter(player)) : new FastTable<>()));
+			// update own info
+			sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
+		} else {
+			sendPacket(new SM_INSTANCE_INFO(updateType, player));
+		}
 	}
 }

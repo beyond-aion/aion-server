@@ -95,11 +95,9 @@ public class InstanceTimeClear extends AbstractItemAction {
 						player.getPortalCooldownList().removePortalCoolDown(mapid);
 					}
 
-					if (player.isInTeam()) {
-						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO(player, mapid));
-					} else {
-						PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(player, mapid));
-					}
+					if (player.isInTeam())
+						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 1, player, mapid));
+					PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO((byte) 2, player, mapid));
 				}
 				PacketSendUtility.broadcastPacketAndReceive(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
