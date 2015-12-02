@@ -29970,7 +29970,11 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053330" decomposable_name="Blessed Medal Box"/>
+    <decomposable item_id="188053330" decomposable_name="Blessed Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal" count="3"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053331" decomposable_name="Linkgate Foundry Small Ancient Manastone Bundle">
 		<items chance="60">
 			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
