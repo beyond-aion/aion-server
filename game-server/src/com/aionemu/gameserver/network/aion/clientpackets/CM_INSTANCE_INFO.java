@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
@@ -14,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
  */
 public class CM_INSTANCE_INFO extends AionClientPacket {
 
+	@SuppressWarnings("unused")
 	private byte updateType; // 0 = reset to client default values and overwrite, 1 = update team member info, 2 = overwrite only
 
 	public CM_INSTANCE_INFO(int opcode, State state, State... restStates) {
@@ -29,6 +27,8 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		sendPacket(new SM_INSTANCE_INFO((byte) 0, player)); // remove this line when fixed
+		/* FIXME: find out why sending team info crashes with 5+ team members
 		if (updateType == 1) {
 			// update team info
 			sendPacket(new SM_INSTANCE_INFO(updateType, player.isInTeam() ? player.getCurrentTeam().filterMembers(new ExcludePlayerFilter(player)) : new FastTable<>()));
@@ -37,5 +37,6 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 		} else {
 			sendPacket(new SM_INSTANCE_INFO(updateType, player));
 		}
+		*/
 	}
 }
