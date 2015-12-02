@@ -2744,6 +2744,9 @@
 				<spawn npc_id="235195" handler="SENTINEL" respawn_time="295">
 					<spot x="943.4745" y="1052.504" z="334.2469" h="45"/>
 				</spawn>
+				<spawn npc_id="832840" handler="MERCHANT" respawn_time="295">
+					<spot x="920.0331" y="1056.658" z="334.2469" h="48"/>
+				</spawn>
 				<!-- Povit -->
 				<spawn npc_id="802328" handler="MERCHANT" respawn_time="295">
 					<spot x="934.19684" y="1027.8263" z="334.24686" h="45"/>
