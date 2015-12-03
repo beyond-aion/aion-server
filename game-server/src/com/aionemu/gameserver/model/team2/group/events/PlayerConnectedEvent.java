@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 
@@ -44,9 +43,8 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 
 	@Override
 	public boolean apply(Player member) {
-		if (!player.equals(member)) {
+		if (!player.getObjectId().equals(member.getObjectId())) {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
-			PacketSendUtility.sendPacket(member, new SM_INSTANCE_INFO(player, group));
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
 		}
 		return true;

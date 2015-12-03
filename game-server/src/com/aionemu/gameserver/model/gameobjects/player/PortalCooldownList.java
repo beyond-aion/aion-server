@@ -93,20 +93,17 @@ public class PortalCooldownList {
 
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
 
-		if (owner.isInTeam()) {
-			owner.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO(owner, worldId));
-		} else {
-			PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO(owner, worldId));
-		}
+		if (owner.isInTeam())
+			owner.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 1, owner, worldId));
+		PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO((byte) 2, owner, worldId));
 	}
 
 	/**
 	 * @param worldId
 	 */
 	public void removePortalCoolDown(int worldId) {
-		if (portalCooldowns != null) {
+		if (portalCooldowns != null)
 			portalCooldowns.remove(worldId);
-		}
 	}
 
 	/**

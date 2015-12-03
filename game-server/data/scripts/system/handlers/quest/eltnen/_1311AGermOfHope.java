@@ -52,7 +52,7 @@ public class _1311AGermOfHope extends QuestHandler {
 					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
 						removeQuestItem(env, 182201305, 1);
 						qs.setStatus(QuestStatus.REWARD);
-						qs.setQuestVarById(0, 1);
+						qs.setQuestVarById(0, 3);
 						updateQuestStatus(env);
 						return true;
 					}
