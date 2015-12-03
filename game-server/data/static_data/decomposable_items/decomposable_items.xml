@@ -29929,24 +29929,15 @@
 		</items>
 	</decomposable>
     <decomposable item_id="188053324" decomposable_name="Levinshor Alliance Noble Ancient Manastone Box">
-		<items chance="60">
-			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
-		</items>
-		<items chance="30">
+		<items chance="80">
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
 		</items>
-		<items chance="10">
+		<items chance="20">
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053325" decomposable_name="Heavy Ancient Manastone Box of Levinshor Alliance">
-		<items chance="40">
-			<random_item type="SPECIAL_MANASTONE_RARE_GRADE"/>
-		</items>
-		<items chance="40">
-			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
-		</items>
-		<items chance="20">
+		<items>
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
 		</items>
 	</decomposable>
