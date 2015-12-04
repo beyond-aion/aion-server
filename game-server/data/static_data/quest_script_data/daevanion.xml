@@ -31,6 +31,18 @@
 			2997 [UNUSED] Daevanion Ceremony (level 99)
 			2998 [UNUSED] Daevanion Ceremony (level 99)
 			2999 [UNUSED] Daevanion Ceremony (level 99)
+			19631 [SCRIPT] Coastal Crush
+			19632 [SCRIPT] Cascade Critters
+			19633 [SCRIPT] Alisary Assistance
+			19634 [SCRIPT] Further Aid for Alisary
+			19635 [SCRIPT] Southern Quell
+			19636 [SCRIPT] Final Stabilization
+			29631 [SCRIPT] Glug, Glug, Glug
+			29632 [SCRIPT] Sweeping Nahor Lake
+			29633 [SCRIPT] Stabilize the Saplands
+			29634 [SCRIPT] Scared Skurvs
+			29635 [SCRIPT] Beach Day
+			29636 [SCRIPT] Back to Surt
 			80290 [XML] Durable Daevanion Armor
 			80291 [SCRIPT] Durable Daevanion Weapon
 			80292 [TODO] Out With the Old Armor
@@ -57,5 +69,4 @@
 	<item_collecting id="1999" start_npc_ids="203771"/>
 	<item_collecting id="80290" start_npc_ids="831384"/>
 	<item_collecting id="80294" start_npc_ids="831387"/>
-	<!-- HUNTING QUESTS -->
 </quest_scripts>
