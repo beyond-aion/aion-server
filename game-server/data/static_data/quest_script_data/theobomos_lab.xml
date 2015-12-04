@@ -15,13 +15,13 @@
 		<npc_infos var="1" npc_id="800421" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="4116" start_npc_ids="800421" end_npc_ids="205143"/>
-	<item_collecting id="4118" start_npc_ids="800421" end_npc_ids="205155"/>
+	<item_collecting id="4116" start_npc_ids="800421"/>
+	<item_collecting id="4118" start_npc_ids="800421"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="4117" start_npc_ids="800421" end_npc_ids="205150">
+	<monster_hunt id="4117" start_npc_ids="800421">
 		<monster var="0" end_var="1" npc_ids="214669"/>
 	</monster_hunt>
-	<monster_hunt id="4119" start_npc_ids="800421" end_npc_ids="205150">
+	<monster_hunt id="4119" start_npc_ids="800421">
 		<monster var="0" end_var="1" npc_ids="214662"/>
 	</monster_hunt>
 </quest_scripts>
