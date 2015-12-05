@@ -27,7 +27,6 @@ public class AncientMonsterAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		MoveEventHandler.onMoveArrived(this);
 		if (getOwner().getDistanceToSpawnLocation() > 15) {
 			TargetEventHandler.onTargetGiveup(this);
 		}
