@@ -1,7 +1,6 @@
 package instance;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
@@ -9,7 +8,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -22,7 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
-import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -272,10 +269,6 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 			case 2:
 			case 3:
 				spawn(701526, 546.6725f, 413.5222f, 96.0598f, (byte) 53, 113);
-			case 4:
-				Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(boss.getObjectId());
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, boss.getNpcId(), 185000127, 1));
-				break;
 			default:
 				break;
 		}

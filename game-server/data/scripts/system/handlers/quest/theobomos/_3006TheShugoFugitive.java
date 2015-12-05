@@ -28,7 +28,6 @@ public class _3006TheShugoFugitive extends QuestHandler {
 		qe.registerQuestNpc(798132).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798146).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700339).addOnTalkEvent(questId);
-		qe.registerOnMovieEndQuest(361, questId);
 	}
 
 	@Override
@@ -71,6 +70,7 @@ public class _3006TheShugoFugitive extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 700339: {
 					switch (env.getDialog()) {
@@ -82,8 +82,15 @@ public class _3006TheShugoFugitive extends QuestHandler {
 						case SELECT_ACTION_1694: {
 							if (qs.getQuestVarById(0) == 1) {
 								playQuestMovie(env, 361);
-								return true;
+								return sendQuestDialog(env, 1694);
 							}
+						}
+						case SETPRO2: {
+							giveQuestItem(env, 182208003, 1);
+							qs.setQuestVarById(0, 2);
+							qs.setStatus(QuestStatus.REWARD);
+							updateQuestStatus(env);
+							return closeDialogWindow(env);
 						}
 					}
 				}
@@ -99,18 +106,4 @@ public class _3006TheShugoFugitive extends QuestHandler {
 		return false;
 	}
 
-	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId != 361)
-			return false;
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-
-		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-		qs.setStatus(QuestStatus.REWARD);
-		updateQuestStatus(env);
-		return sendQuestDialog(env, 1353);
-	}
 }
