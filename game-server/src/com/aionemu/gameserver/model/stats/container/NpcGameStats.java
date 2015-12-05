@@ -199,10 +199,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
 			if (owner.getLevel() <= 50)
 				atk *= 0.75f;
-			else if (owner.getLevel() <= 60)
-				atk *= 0.8f;
 			else
-				atk *= 0.9f;
+				atk *= 0.8f;
 		}
 		return getStat(StatEnum.PHYSICAL_ATTACK, atk);
 	}
