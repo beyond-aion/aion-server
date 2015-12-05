@@ -20,7 +20,7 @@
 	<!-- Inggison -->
 	<rift id="210050000">
 		<open schedule="0 0 17 ? * FRI,MON" spawn="true"/>
-		<open schedule="0 0 0 ? * WED,SUN" spawn="true"/>
+		<open schedule="0 0 0 ? * THU,SUN" spawn="true"/>
 		<open schedule="0 0 3,6,9,12,15,21 ? * SUN"/>
 		<open schedule="0 0 2,5,8,11,14,20 ? * MON"/>
 		<open schedule="0 0 3,6,9,12,15,21 ? * TUE"/>
@@ -49,7 +49,7 @@
 	<!-- Gelkmaros -->
 	<rift id="220070000">
 		<open schedule="0 0 17 ? * SUN,THU" spawn="true"/>
-		<open schedule="0 0 0 ? * TUE,SAT" spawn="true"/>
+		<open schedule="0 0 0 ? * WED,SAT" spawn="true"/>
 		<open schedule="0 0 2,5,8,11,14,20 ? * SUN"/>
 		<open schedule="0 0 3,6,9,12,15,21 ? * MON"/>
 		<open schedule="0 0 2,5,8,11,14,20 ? * TUE"/>
