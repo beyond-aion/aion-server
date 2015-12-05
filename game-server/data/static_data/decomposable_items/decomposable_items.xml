@@ -29095,8 +29095,8 @@
 			<item id="101701328" name="Fine Betrayer's Bow" player_class="GLADIATOR"/>
 			<item id="101701328" name="Fine Betrayer's Bow" player_class="ASSASSIN"/>
 			<item id="101701329" name="Superb Betrayer's Bow" player_class="RANGER"/>
-			<item id="115001723" name="Superb Betrayer's Shield" player_class="CLERIC"/>
-			<item id="101501323" name="Superb Betrayer's Shield" player_class="CHANTER"/>
+			<item id="115001709" name="Superb Betrayer's Shield" player_class="CLERIC"/>
+			<item id="115001709" name="Superb Betrayer's Shield" player_class="CHANTER"/>
 			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SORCERER"/>
 			<item id="100601388" name="Superb Betrayer's Spellbook" player_class="SPIRIT_MASTER"/>
 			<item id="101901090" name="Superb Betrayer's Aethercannon" player_class="GUNNER"/>
@@ -29106,145 +29106,79 @@
 		<items>
 			<item id="110101783" name="Fine Betrayer's Tunic" player_class="SORCERER"/>
 			<item id="110101783" name="Fine Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
-			<item id="110101783" name="Fine Betrayer's Tunic" player_class="BARD"/>
-			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="ASSASSIN"/>
-			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="RANGER"/>
+			<item id="110101784" name="Fine Betrayer's Tunic" player_class="BARD"/>
+			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="RANGER"/>
 			<item id="110301768" name="Fine Betrayer's Jerkin" player_class="GUNNER"/>
 			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="CLERIC"/>
-			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="CHANTER"/>
+			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="CHANTER"/>
 			<item id="110551102" name="Fine Betrayer's Hauberk" player_class="RIDER"/>
 			<item id="110601571" name="Fine Betrayer's Breastplate" player_class="TEMPLAR"/>
-			<item id="110601571" name="Fine Betrayer's Breastplate" player_class="GLADIATOR"/>
+			<item id="110601572" name="Superb Betrayer's Breastplate" player_class="GLADIATOR"/>
 		</items>
 		<items>
 			<item id="111101603" name="Fine Betrayer's Gloves" player_class="SORCERER"/>
 			<item id="111101603" name="Fine Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
-			<item id="111101603" name="Fine Betrayer's Gloves" player_class="BARD"/>
-			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="ASSASSIN"/>
-			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="RANGER"/>
-			<item id="111301706" name="Fine Betrayer's Vambrace" player_class="GUNNER"/>
+			<item id="111101604" name="Superb Betrayer's Gloves" player_class="BARD"/>
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="GUNNER"/>
 			<item id="111501661" name="Fine Betrayer's Handguards" player_class="CLERIC"/>
-			<item id="111501661" name="Fine Betrayer's Handguards" player_class="CHANTER"/>
+			<item id="111501662" name="Superb Betrayer's Handguards" player_class="CHANTER"/>
 			<item id="111501661" name="Fine Betrayer's Handguards" player_class="RIDER"/>
 			<item id="111601534" name="Fine Betrayer's Gauntlets" player_class="TEMPLAR"/>
-			<item id="111601534" name="Fine Betrayer's Gauntlets" player_class="GLADIATOR"/>
+			<item id="111601535" name="Superb Betrayer's Gauntlets" player_class="GLADIATOR"/>
 		</items>
 		<items>
 			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="SORCERER"/>
 			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
-			<item id="112101553" name="Fine Betrayer's Pauldrons" player_class="BARD"/>
-			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="ASSASSIN"/>
-			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="RANGER"/>
+			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="BARD"/>
+			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="RANGER"/>
 			<item id="112301645" name="Fine Betrayer's Shoulderguards" player_class="GUNNER"/>
 			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="CLERIC"/>
-			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="CHANTER"/>
+			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="CHANTER"/>
 			<item id="112501600" name="Fine Betrayer's Spaulders" player_class="RIDER"/>
 			<item id="112601516" name="Fine Betrayer's Shoulderplates" player_class="TEMPLAR"/>
-			<item id="112601516" name="Fine Betrayer's Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112601517" name="Superb Betrayer's Shoulderplates" player_class="GLADIATOR"/>
 		</items>
 		<items>
 			<item id="113101615" name="Fine Betrayer's Leggings" player_class="SORCERER"/>
 			<item id="113101615" name="Fine Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
-			<item id="113101615" name="Fine Betrayer's Leggings" player_class="BARD"/>
-			<item id="113301737" name="Fine Betrayer's Breeches" player_class="ASSASSIN"/>
-			<item id="113301737" name="Fine Betrayer's Breeches" player_class="RANGER"/>
+			<item id="113101616" name="Superb Betrayer's Leggings" player_class="BARD"/>
+			<item id="113301738" name="Superb Betrayer's Breeches" player_class="ASSASSIN"/>
+			<item id="113301738" name="Superb Betrayer's Breeches" player_class="RANGER"/>
 			<item id="113301737" name="Fine Betrayer's Breeches" player_class="GUNNER"/>
 			<item id="113501679" name="Fine Betrayer's Chausses" player_class="CLERIC"/>
-			<item id="113501679" name="Fine Betrayer's Chausses" player_class="CHANTER"/>
+			<item id="113501680" name="Superb Betrayer's Chausses" player_class="CHANTER"/>
 			<item id="113501679" name="Fine Betrayer's Chausses" player_class="RIDER"/>
 			<item id="113601517" name="Fine Betrayer's Greaves" player_class="TEMPLAR"/>
-			<item id="113601517" name="Fine Betrayer's Greaves" player_class="GLADIATOR"/>
+			<item id="113601518" name="Superb Betrayer's Greaves" player_class="GLADIATOR"/>
 		</items>
 		<items>
 			<item id="114101649" name="Fine Betrayer's Shoes" player_class="SORCERER"/>
 			<item id="114101649" name="Fine Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
-			<item id="114101649" name="Fine Betrayer's Shoes" player_class="BARD"/>
-			<item id="114301774" name="Fine Betrayer's Boots" player_class="ASSASSIN"/>
-			<item id="114301774" name="Fine Betrayer's Boots" player_class="RANGER"/>
+			<item id="114101650" name="Superb Betrayer's Shoes" player_class="BARD"/>
+			<item id="114301775" name="Superb Betrayer's Boots" player_class="ASSASSIN"/>
+			<item id="114301775" name="Superb Betrayer's Boots" player_class="RANGER"/>
 			<item id="114301774" name="Fine Betrayer's Boots" player_class="GUNNER"/>
 			<item id="114501689" name="Fine Betrayer's Brogans" player_class="CLERIC"/>
-			<item id="114501689" name="Fine Betrayer's Brogans" player_class="CHANTER"/>
+			<item id="114501690" name="Superb Betrayer's Brogans" player_class="CHANTER"/>
 			<item id="114501689" name="Fine Betrayer's Brogans" player_class="RIDER"/>
 			<item id="114601524" name="Fine Betrayer's Sabatons" player_class="TEMPLAR"/>
-			<item id="114601524" name="Fine Betrayer's Sabatons" player_class="GLADIATOR"/>
+			<item id="114601525" name="Superb Betrayer's Sabatons" player_class="GLADIATOR"/>
 		</items>
 		<items>
 			<item id="125004013" name="Fine Betrayer's Headband" player_class="SORCERER"/>
 			<item id="125004013" name="Fine Betrayer's Headband" player_class="SPIRIT_MASTER"/>
-			<item id="125004013" name="Fine Betrayer's Headband" player_class="BARD"/>
-			<item id="125004015" name="Fine Betrayer's Hat" player_class="ASSASSIN"/>
-			<item id="125004015" name="Fine Betrayer's Hat" player_class="RANGER"/>
+			<item id="125004014" name="Superb Betrayer's Headband" player_class="BARD"/>
+			<item id="125004016" name="Superb Betrayer's Hat" player_class="ASSASSIN"/>
+			<item id="125004016" name="Superb Betrayer's Hat" player_class="RANGER"/>
 			<item id="125004015" name="Fine Betrayer's Hat" player_class="GUNNER"/>
 			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="CLERIC"/>
-			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="CHANTER"/>
+			<item id="125004018" name="Superb Betrayer's Chain Helm" player_class="CHANTER"/>
 			<item id="125004017" name="Fine Betrayer's Chain Helm" player_class="RIDER"/>
 			<item id="125004019" name="Fine Betrayer's Helm" player_class="TEMPLAR"/>
-			<item id="125004019" name="Fine Betrayer's Helm" player_class="GLADIATOR"/>
-		</items>
-		<items>
-			<item id="110101784" name="Superb Betrayer's Tunic" player_class="SORCERER"/>
-			<item id="110101784" name="Superb Betrayer's Tunic" player_class="SPIRIT_MASTER"/>
-			<item id="110101784" name="Superb Betrayer's Tunic" player_class="BARD"/>
-			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="ASSASSIN"/>
-			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="RANGER"/>
-			<item id="110301769" name="Superb Betrayer's Jerkin" player_class="GUNNER"/>
-			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="CLERIC"/>
-			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="CHANTER"/>
-			<item id="110551103" name="Superb Betrayer's Hauberk" player_class="RIDER"/>
-			<item id="110601572" name="Superb Betrayer's Breastplate" player_class="TEMPLAR"/>
-			<item id="110601572" name="Superb Betrayer's Breastplate" player_class="GLADIATOR"/>
-		</items>
-		<items>
-			<item id="111101604" name="Superb Betrayer's Gloves" player_class="SORCERER"/>
-			<item id="111101604" name="Superb Betrayer's Gloves" player_class="SPIRIT_MASTER"/>
-			<item id="111101604" name="Superb Betrayer's Gloves" player_class="BARD"/>
-			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="ASSASSIN"/>
-			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="RANGER"/>
-			<item id="111301707" name="Superb Betrayer's Vambrace" player_class="GUNNER"/>
-			<item id="111501662" name="Superb Betrayer's Handguards" player_class="CLERIC"/>
-			<item id="111501662" name="Superb Betrayer's Handguards" player_class="CHANTER"/>
-			<item id="111501662" name="Superb Betrayer's Handguards" player_class="RIDER"/>
-			<item id="111601535" name="Superb Betrayer's Gauntlets" player_class="TEMPLAR"/>
-			<item id="111601535" name="Superb Betrayer's Gauntlets" player_class="GLADIATOR"/>
-		</items>
-		<items>
-			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="SORCERER"/>
-			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="SPIRIT_MASTER"/>
-			<item id="112101554" name="Superb Betrayer's Pauldrons" player_class="BARD"/>
-			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="ASSASSIN"/>
-			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="RANGER"/>
-			<item id="112301646" name="Superb Betrayer's Shoulderguards" player_class="GUNNER"/>
-			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="CLERIC"/>
-			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="CHANTER"/>
-			<item id="112501601" name="Superb Betrayer's Spaulders" player_class="RIDER"/>
-			<item id="112601517" name="Superb Betrayer's Shoulderplates" player_class="TEMPLAR"/>
-			<item id="112601517" name="Superb Betrayer's Shoulderplates" player_class="GLADIATOR"/>
-		</items>
-		<items>
-			<item id="113101616" name="Superb Betrayer's Leggings" player_class="SORCERER"/>
-			<item id="113101616" name="Superb Betrayer's Leggings" player_class="SPIRIT_MASTER"/>
-			<item id="113101616" name="Superb Betrayer's Leggings" player_class="BARD"/>
-			<item id="113301738" name="Superb Betrayer's Breeches" player_class="ASSASSIN"/>
-			<item id="113301738" name="Superb Betrayer's Breeches" player_class="RANGER"/>
-			<item id="113301738" name="Superb Betrayer's Breeches" player_class="GUNNER"/>
-			<item id="113501680" name="Superb Betrayer's Chausses" player_class="CLERIC"/>
-			<item id="113501680" name="Superb Betrayer's Chausses" player_class="CHANTER"/>
-			<item id="113501680" name="Superb Betrayer's Chausses" player_class="RIDER"/>
-			<item id="113601518" name="Superb Betrayer's Greaves" player_class="TEMPLAR"/>
-			<item id="113601518" name="Superb Betrayer's Greaves" player_class="GLADIATOR"/>
-		</items>
-		<items>
-			<item id="114101650" name="Superb Betrayer's Shoes" player_class="SORCERER"/>
-			<item id="114101650" name="Superb Betrayer's Shoes" player_class="SPIRIT_MASTER"/>
-			<item id="114101650" name="Superb Betrayer's Shoes" player_class="BARD"/>
-			<item id="114301775" name="Superb Betrayer's Boots" player_class="ASSASSIN"/>
-			<item id="114301775" name="Superb Betrayer's Boots" player_class="RANGER"/>
-			<item id="114301775" name="Superb Betrayer's Boots" player_class="GUNNER"/>
-			<item id="114501690" name="Superb Betrayer's Brogans" player_class="CLERIC"/>
-			<item id="114501690" name="Superb Betrayer's Brogans" player_class="CHANTER"/>
-			<item id="114501690" name="Superb Betrayer's Brogans" player_class="RIDER"/>
-			<item id="114601525" name="Superb Betrayer's Sabatons" player_class="TEMPLAR"/>
-			<item id="114601525" name="Superb Betrayer's Sabatons" player_class="GLADIATOR"/>
+			<item id="125004020" name="Superb Betrayer's Helm" player_class="GLADIATOR"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053184" decomposable_name="[Event] Golden Rice Cake Soup Ingredients Bundle"/>
