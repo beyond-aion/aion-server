@@ -171,7 +171,8 @@ public class CraftingTask extends AbstractCraftTask {
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
 			currentSuccessValue += Math.round((70 + (((craftType == CraftType.CRIT_BLUE ? 100 :0) + ((skillLvlDiff/3) + (skillLvlDiff/5) + lvlBoni) * 10) * multi) * speedModifier)); //70 = minValue
 		} else {
-			currentFailureValue += Math.round((140 + (((skillLvlDiff/1.5 * 10) * multi) * speedModifier))); //140 = minFailValue
+			int minFailureValue = recipeTemplate.getMaxProductionCount() != null ? 140 : 70; //140 = minFailValue
+			currentFailureValue += Math.round((minFailureValue + (((skillLvlDiff/1.5 * 10) * multi) * speedModifier)));
 		}
 		
 		if (currentSuccessValue > completeValue) {
