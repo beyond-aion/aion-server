@@ -1,4 +1,4 @@
-package quest.oriel;
+package quest.pernon;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -8,22 +8,22 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author zhkchi
+ * @author Pad
  */
-public class _18809DaevaontheRide extends QuestHandler {
+public class _28809FirstClassorCoach extends QuestHandler {
 
-	private static final int questId = 18809;
+	private static final int questId = 28809;
 
-	public _18809DaevaontheRide() {
+	public _28809FirstClassorCoach() {
 		super(questId);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(830168).addOnQuestStart(questId);
-		qe.registerQuestNpc(830168).addOnTalkEvent(questId);
-		qe.registerQuestNpc(830263).addOnTalkEvent(questId);
-		qe.registerQuestNpc(830201).addOnTalkEvent(questId);
+		qe.registerQuestNpc(830169).addOnQuestStart(questId);
+		qe.registerQuestNpc(830169).addOnTalkEvent(questId);
+		qe.registerQuestNpc(830408).addOnTalkEvent(questId);
+		qe.registerQuestNpc(830417).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 830168) {
+			if (targetId == 830169) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1011);
@@ -47,7 +47,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 830263: {
+				case 830408: {
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -57,7 +57,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 						}
 					}
 				}
-				case 830201: {
+				case 830417: {
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -67,7 +67,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 						}
 					}
 				}
-				case 830168: {
+				case 830169: {
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -80,7 +80,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 830168) {
+			if (targetId == 830169) {
 				return sendQuestEndDialog(env);
 			}
 		}
