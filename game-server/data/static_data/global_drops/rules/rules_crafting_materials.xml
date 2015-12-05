@@ -205,18 +205,31 @@
 			<gd_item id="152010318" name="Firm Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Common)" base_chance="25" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Rawhide (Common)" base_chance="25" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
 			<gd_rating rating="HERO" />
 		</gd_ratings>
+		<gd_races>
+			<gd_race race="BEAST" />
+			<gd_race race="DEMIHUMANOID" />
+			<gd_race race="DRAGON" />
+			<gd_race race="KRALL" />
+			<gd_race race="LIZARDMAN" />
+			<gd_race race="LYCAN" />
+			<gd_race race="MAGICALMONSTER" />
+			<gd_race race="NAGA" />
+			<gd_race race="RATMAN" />
+			<gd_race race="SHULACK" />
+			<gd_race race="UNDEAD" />
+		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
 			<gd_item id="152010322" name="Sublime Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Rare)" base_chance="15" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Rawhide (Rare)" base_chance="15" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -240,7 +253,7 @@
 			<gd_item id="152010323" name="Buttery Rawhide" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Legend)" base_chance="5" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Rawhide (Legend)" base_chance="5" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
