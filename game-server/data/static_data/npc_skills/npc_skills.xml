@@ -2544,18 +2544,131 @@
         <npcskill skillid="17065" skilllevel="60" probability="45" maxhp="100"/>
         <npcskill skillid="17230" skilllevel="60" probability="55"/>
     </npcskills>
-    <npcskills npcid="209549">
-        <npcskill skillid="17065" skilllevel="60" probability="25" minhp="5" maxhp="100"/>
-        <npcskill skillid="18321" skilllevel="60" probability="17" minhp="5" maxhp="100"/>
-        <npcskill skillid="17230" skilllevel="60" probability="17" minhp="5" maxhp="100"/>
-        <npcskill skillid="19599" skilllevel="2" probability="8"/>
-        <npcskill skillid="20666" skilllevel="60" probability="8"/>
+	<!-- Eltnen Elite Templar -->
+	<npcskills npcid="209524">
+		<npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
     </npcskills>
-    <npcskills npcid="209552">
-        <npcskill skillid="19606" skilllevel="1" probability="26" minhp="5" maxhp="100"/>
-        <npcskill skillid="19581" skilllevel="4" probability="35" minhp="5" maxhp="100"/>
-        <npcskill skillid="17119" skilllevel="60" probability="35" minhp="5" maxhp="100"/>
+	<!-- Eltnen Elite Sorcerer -->
+    <npcskills npcid="209527">
         <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
+    </npcskills>
+	<!-- Heiron Elite Templar -->
+	<npcskills npcid="209529">
+       <npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
+    </npcskills>
+	<!-- Heiron Elite Sorcerer -->
+    <npcskills npcid="209532">
+        <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
+    </npcskills>
+	<!-- Inggison Elite Templar -->
+	<npcskills npcid="209534">
+        <npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
+    </npcskills>
+	<!-- Inggison Elite Sorcerer -->
+    <npcskills npcid="209537">
+        <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
+    </npcskills>
+	<!-- Morheim Elite Templar -->
+	<npcskills npcid="209539">
+        <npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
+    </npcskills>
+	<!-- Morheim Elite Sorcerer -->
+    <npcskills npcid="209542">
+        <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
+    </npcskills>
+	<!-- Beluslan Elite Templar -->
+	<npcskills npcid="209544">
+       <npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
+    </npcskills>
+	<!-- Beluslan Elite Sorcerer -->
+    <npcskills npcid="209547">
+        <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
+    </npcskills>
+	<!-- Gelkmaros Elite Templar -->
+    <npcskills npcid="209549">
+        <npcskill skillid="18315" skilllevel="60" probability="100" minhp="5" maxhp="50" cooldown="150000"/>
+        <npcskill skillid="18317" skilllevel="60" probability="1" minhp="10" maxhp="25" cooldown="600000"/>
+        <npcskill skillid="18318" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18319" skilllevel="60" probability="17" cooldown="30000"/>
+        <npcskill skillid="18320" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18322" skilllevel="60" probability="17" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="60" probability="17" cooldown="30000"/>
+    </npcskills>
+	<!-- Gelkmaros Elite Sorcerer -->
+    <npcskills npcid="209552">
+        <npcskill skillid="17111" skilllevel="60" probability="4"/>
+		<npcskill skillid="17113" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17114" skilllevel="60" probability="50" cooldown="30000"/>
+		<npcskill skillid="17115" skilllevel="60" probability="30" cooldown="30000"/>
+		<npcskill skillid="17117" skilllevel="1" probability="30" cooldown="30000"/>
+		<npcskill skillid="17119" skilllevel="60" probability="100" cooldown="60000"/>
+        <npcskill skillid="17120" skilllevel="4" probability="35" cooldown="600000"/>
     </npcskills>
     <npcskills npcid="209586">
         <npcskill skillid="20672" skilllevel="65" probability="25" minhp="95" maxhp="100"/>
