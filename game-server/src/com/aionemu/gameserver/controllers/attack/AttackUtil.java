@@ -317,12 +317,12 @@ public class AttackUtil {
 		HitType ht = HitType.PHHIT;
 		float damageMultiplier = 0;
 		if (!noReduce) {
-			switch (effector.getAttackType()) {
+			switch (effect.getSkillType()) {
 				case PHYSICAL:
 					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true);
 					break;
-				default:
+				case MAGICAL:
 					ht = HitType.MAHIT;
 					if (effector instanceof Npc)
 						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
