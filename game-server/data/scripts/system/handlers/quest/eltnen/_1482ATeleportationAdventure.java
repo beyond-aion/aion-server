@@ -60,13 +60,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 									return sendQuestDialog(env, 1011);
 								}
 								case 1: {
-									long itemCount1 = player.getInventory().getItemCountByItemId(182201399);
-									if (itemCount1 >= 3) {
-										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-										updateQuestStatus(env);
-										return sendQuestDialog(env, 1352);
-									} else
-										return sendQuestDialog(env, 10001);
+									return sendQuestDialog(env, 1352);
 								}
 								case 2: {
 									return sendQuestDialog(env, 1693);
@@ -88,6 +82,16 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 							updateQuestStatus(env);
 							TeleportService2.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20);
 							return true;
+						}
+						case CHECK_USER_HAS_QUEST_ITEM: {
+							long itemCount1 = player.getInventory().getItemCountByItemId(182201399);
+							if (itemCount1 >= 3) {
+								removeQuestItem(env, 182201399, itemCount1);
+								changeQuestStep(env, 1, 2, false);
+								return sendQuestDialog(env, 10000);
+							}
+							else
+								return sendQuestDialog(env, 10001);
 						}
 						default:
 							return sendQuestStartDialog(env);
