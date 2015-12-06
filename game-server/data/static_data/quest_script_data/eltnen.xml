@@ -451,7 +451,7 @@
 	</monster_hunt>
 	<monster_hunt id="1347" start_npc_ids="203965" end_npc_ids="203966">
 		<monster var="0" end_var="7" npc_ids="210874 210908"/>
-		<monster var="0" end_var="3" npc_ids="210917"/>
+		<monster var="1" end_var="3" npc_ids="212137 212056 210917"/>
 	</monster_hunt>
 	<monster_hunt id="1348" start_npc_ids="203966">
 		<monster var="0" end_var="5" npc_ids="210928"/>
