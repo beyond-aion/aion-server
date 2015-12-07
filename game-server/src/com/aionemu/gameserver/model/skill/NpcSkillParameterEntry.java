@@ -4,6 +4,7 @@ package com.aionemu.gameserver.model.skill;
  * Skill entry which can be created on the fly (skills of servants, traps)
  * 
  * @author ATracer, nrg
+ * @modified Yeats
  */
 public class NpcSkillParameterEntry extends NpcSkillEntry {
 
@@ -39,5 +40,10 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	@Override
 	public boolean UseInSpawned() {
 		return true;
+	}
+
+	@Override
+	public int getPriority() {
+		return 0;
 	}
 }
