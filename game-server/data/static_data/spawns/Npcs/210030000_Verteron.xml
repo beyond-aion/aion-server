@@ -65,7 +65,7 @@
 		</spawn>
 		<!-- Abolos -->
 		<spawn npc_id="203126" respawn_time="295">
-			<spot x="1283.02" y="2167.30" z="151.095" h="23"/>
+			<spot x="1283.047" y="2168.1" z="151.054" h="23"/>
 		</spawn>
 		<!-- Aggressive Worg -->
 		<spawn npc_id="210326" respawn_time="295">
