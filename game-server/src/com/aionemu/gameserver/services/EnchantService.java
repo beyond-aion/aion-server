@@ -88,7 +88,7 @@ public class EnchantService {
 		float typeMod = itemTemplate.isWeapon() ? 0.6f : 0.4f;
 		int itemLevel = itemTemplate.getLevel();
 		
-		int averageLevel = (int) (itemLevel * 1.4f * (typeMod + qualityMod));
+		int averageLevel = (int) (itemLevel * 1.5f * (typeMod + qualityMod));
 		
 		int finalLevel = Rnd.get(averageLevel - 10, averageLevel + 10);
 
