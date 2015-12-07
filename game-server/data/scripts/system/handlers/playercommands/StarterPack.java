@@ -48,13 +48,13 @@ public class StarterPack extends PlayerCommand {
 			String name = Util.convertName(params[0]);
 	
 			for (PlayerAccountData pad : player.getPlayerAccount().getSortedAccountsList()) {
-				LocalDateTime creationTime = pad.getCreationDate().toLocalDateTime();
-				if (!creationTime.isBefore(maxCreationTime))
-					continue;
 				PlayerCommonData pcd = pad.getPlayerCommonData();
-				if (pcd == null)
-					continue;
-				if (pcd.getName().equals(name)) {
+				if (pcd != null && pcd.getName().equals(name)) {
+					LocalDateTime creationTime = pad.getCreationDate().toLocalDateTime();
+					if (!creationTime.isBefore(maxCreationTime)) {
+						sendInfo(player, "The character " + pcd.getName() + "'s creation date is too late.");
+						return;
+					}
 					if (pcd.getMailboxLetters() >= 100) {
 						sendInfo(player, "The mailbox of " + pcd.getName() + " is full.");
 						return;
