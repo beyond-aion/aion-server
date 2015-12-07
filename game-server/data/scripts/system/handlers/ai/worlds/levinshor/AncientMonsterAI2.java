@@ -3,7 +3,6 @@ package ai.worlds.levinshor;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
 import com.aionemu.gameserver.ai2.handler.TargetEventHandler;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
