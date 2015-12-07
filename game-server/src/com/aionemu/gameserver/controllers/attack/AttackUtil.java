@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
@@ -318,16 +319,15 @@ public class AttackUtil {
 		float damageMultiplier = 0;
 		if (!noReduce) {
 			switch (effect.getSkillType()) {
-				case PHYSICAL:
-					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true);
-					break;
 				case MAGICAL:
 					ht = HitType.MAHIT;
-					if (effector instanceof Npc)
-						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-					else
-						baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
+					baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
+					if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
+						baseAttack = 1;
+					break;
+				default:
+					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true);
 					break;
 			}
 		}
