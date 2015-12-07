@@ -141,22 +141,6 @@
 			<gd_item id="152016015" name="Essence of Poco Mookie" /><!-- Asmodian -->
 		</gd_items>
 	</gd_rule>
-	<!-- Ide Materials -->
-	<gd_rule rule_name="Ide Materials" base_chance="4" max_diff="5">
-		<gd_worlds>
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
-		</gd_worlds>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-		</gd_ratings>
-		<gd_items>
-			<gd_item id="186000315" name="Ide Shard" />
-			<gd_item id="186000316" name="Strange Ide Crystal" />
-		</gd_items>
-	</gd_rule>
 	<!-- Enigmatic Ore -->
 	<gd_rule rule_name="Enigmatic Ore" base_chance="2" min_diff="0" max_diff="4">
 		<gd_maps>
