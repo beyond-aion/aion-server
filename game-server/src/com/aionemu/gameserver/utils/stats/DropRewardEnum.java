@@ -12,8 +12,7 @@ public enum DropRewardEnum {
 	MINUS_8(-8, 60),
 	MINUS_7(-7, 70),
 	MINUS_6(-6, 80),
-	MINUS_5(-5, 90),
-	MINUS_4(-4, 100);
+	MINUS_5(-5, 100);
 
 	private int dropRewardPercent;
 	private int levelDifference;
@@ -35,8 +34,8 @@ public enum DropRewardEnum {
 	public static int dropRewardFrom(int levelDifference) {
 		if (levelDifference <= MINUS_10.levelDifference)
 			return MINUS_10.dropRewardPercent;
-		else if (levelDifference >= MINUS_4.levelDifference)
-			return MINUS_4.dropRewardPercent;
+		else if (levelDifference >= MINUS_5.levelDifference)
+			return MINUS_5.dropRewardPercent;
 
 		for (DropRewardEnum dropReward : values()) {
 			if (dropReward.levelDifference == levelDifference) {
