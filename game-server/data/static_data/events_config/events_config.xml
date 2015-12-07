@@ -1254,6 +1254,28 @@
 			</spawns>
 		</event>
 		<event name="Celebrate Solorius" start="2015-12-06T06:00:00+01:00" end="2016-01-04T00:00:00+01:00" theme="christmas">
+			<event_drops>
+				<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
+					<gd_npcs>
+						<gd_npc name="Red Nosed Granker King" npc_id="219292"/>
+						<gd_npc name="Granker King's Second" npc_id="219293"/>
+						<gd_npc name="Red Nosed Granker King" npc_id="219294"/>
+						<gd_npc name="Granker King's Second" npc_id="219295"/>
+					</gd_npcs>
+					<gd_items>
+						<gd_item id="160010203" name="[Event] Red Nose Granker Horn"/>
+					</gd_items>
+				</gd_rule>
+				<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
+					<gd_npcs>
+						<gd_npc name="Red Nosed Granker King" npc_id="219292"/>
+						<gd_npc name="Red Nosed Granker King" npc_id="219294"/>
+					</gd_npcs>
+					<gd_items>
+						<gd_item id="188052132" name="[Event] Granker's Gratitude Box"/>
+					</gd_items>
+				</gd_rule>
+			</event_drops>
 			<quests>
 				<maintainable>50007;50008;50009;51007;51008;51009</maintainable>
 			</quests>
@@ -1344,7 +1366,7 @@
 						<spot x="1045" y="1537" z="98" h="60"/>
 					</spawn>
 					<!-- Red Nosed Granker King -->
-					<spawn npc_id="219294" respawn_time="28320">
+					<spawn npc_id="219294" respawn_time="12600">
 						<spot x="780.65857" y="1643.0098" z="131.87744"/>
 					</spawn>
 					<!-- Lazy Shugo Courier -->
