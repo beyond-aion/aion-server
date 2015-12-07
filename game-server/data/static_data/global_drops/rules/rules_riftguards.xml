@@ -44,7 +44,7 @@
 			<gd_item id="162000070" name="Major Divine Mana Serum"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="RIFT_GUARD_RELICS" base_chance="30" fixed_chance="true">
+	<gd_rule rule_name="RIFT_GUARD_RELICS" base_chance="40" fixed_chance="true">
 		<gd_npcs>
 			<gd_npc npc_id="209518" name="Eltnen Sentinel"/>
 			<gd_npc npc_id="209519" name="Heiron Protector"/>
@@ -88,7 +88,7 @@
 			<gd_item id="186000052" name="Greater Ancient Crown"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="RIFT_GUARD_MEDAL" base_chance="30" fixed_chance="true">
+	<gd_rule rule_name="RIFT_GUARD_MEDAL" base_chance="35" fixed_chance="true">
 		<gd_npcs>
 			<gd_npc npc_id="209518" name="Eltnen Sentinel"/>
 			<gd_npc npc_id="209519" name="Heiron Protector"/>
