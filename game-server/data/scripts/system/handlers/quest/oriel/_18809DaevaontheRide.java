@@ -41,6 +41,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
+						giveQuestItem(env, 190100013, 1);
 						return sendQuestStartDialog(env);
 				}
 			}

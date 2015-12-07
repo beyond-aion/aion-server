@@ -57,7 +57,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(playerAppearance.getTattoo());
 		writeC(playerAppearance.getFaceContour());
 		writeC(playerAppearance.getExpression());
-		writeC(4);// always 4 o0
+		writeC(5);// always 5 o0
 		writeC(playerAppearance.getJawLine());
 		writeC(playerAppearance.getForehead());
 		writeC(playerAppearance.getEyeHeight());

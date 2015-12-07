@@ -58,19 +58,19 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
-								long itemCount = player.getInventory().getItemCountByItemId(182208008);
-								if (itemCount >= 1) {
-									return sendQuestDialog(env, 1011);
-								} else
-									return sendQuestDialog(env, 10001);
+								return sendQuestDialog(env, 1011);
 							}
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
-							removeQuestItem(env, 182208008, 1);
-							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-							updateQuestStatus(env);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							long itemCount = player.getInventory().getItemCountByItemId(182208008);
+							if (itemCount >= 1) {
+								removeQuestItem(env, 182208008, itemCount);
+								changeQuestStep(env, 0, 1, false);
+								return sendQuestDialog(env, 10000);
+							} 
+							else {
+								return sendQuestDialog(env, 10001);
+							}
 						}
 					}
 				}

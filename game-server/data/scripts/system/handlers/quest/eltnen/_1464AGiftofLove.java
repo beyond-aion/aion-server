@@ -54,7 +54,7 @@ public class _1464AGiftofLove extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0 && itemCount1 >= 15) {
 								qs.setQuestVar(0);
 								qs.setStatus(QuestStatus.REWARD);
-								removeQuestItem(env, 152000455, 1);
+								removeQuestItem(env, 152000455, itemCount1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
 							} else

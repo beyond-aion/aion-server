@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.Future;
@@ -10,8 +9,6 @@ import java.util.concurrent.Future;
 import javolution.util.FastTable;
 
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -29,21 +26,15 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class EventService {
 
-	Logger log = LoggerFactory.getLogger(EventService.class);
-
 	private final int CHECK_TIME_PERIOD = 1000 * 60 * 5;
-
-	private boolean isStarted = false;
-
 	private Future<?> checkTask = null;
-
-	private List<EventTemplate> activeEvents;
+	private List<EventTemplate> enabledEvents = new FastTable<>();
 
 	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<List<EventTemplate>>();
-
 	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<List<EventTemplate>>();
 
 	private static class SingletonHolder {
@@ -56,8 +47,8 @@ public class EventService {
 	}
 
 	private EventService() {
-		activeEvents = Collections.synchronizedList(DataManager.EVENT_DATA.getActiveEvents());
-		updateQuestMap();
+		if (EventsConfig.ENABLE_EVENT_SERVICE)
+			start();
 	}
 
 	/**
@@ -66,13 +57,16 @@ public class EventService {
 	 * <b><font color='red'>NOTICE: </font>This method must not be called from anywhere else.</b>
 	 */
 	public void onPlayerLogin(Player player) {
+		if (!EventsConfig.ENABLE_EVENT_SERVICE)
+			return;
+
 		List<Integer> activeStartQuests = new FastTable<Integer>();
 		List<Integer> activeMaintainQuests = new FastTable<Integer>();
 		TIntObjectHashMap<List<EventTemplate>> map1 = null;
 		TIntObjectHashMap<List<EventTemplate>> map2 = null;
 
-		synchronized (activeEvents) {
-			for (EventTemplate et : activeEvents) {
+		synchronized (enabledEvents) {
+			for (EventTemplate et : enabledEvents) {
 				if (et.isActive()) {
 					activeStartQuests.addAll(et.getStartableQuests());
 					activeMaintainQuests.addAll(et.getMaintainableQuests());
@@ -161,15 +155,9 @@ public class EventService {
 		}
 	}
 
-	public boolean isStarted() {
-		return isStarted;
-	}
-
 	public void start() {
-		if (isStarted)
-			checkTask.cancel(false);
-
-		isStarted = true;
+		if (checkTask != null)
+			checkTask.cancel(true);
 
 		checkTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -181,43 +169,42 @@ public class EventService {
 	}
 
 	public void stop() {
-		if (isStarted)
-			checkTask.cancel(false);
-		checkTask = null;
-		isStarted = false;
+		if (checkTask != null) {
+			checkTask.cancel(true);
+			checkTask = null;
+		}
 	}
 
 	private void checkEvents() {
-		List<EventTemplate> newEvents = new FastTable<EventTemplate>();
-		List<EventTemplate> allEvents = DataManager.EVENT_DATA.getActiveEvents();
+		List<EventTemplate> newEnabledEvents = new FastTable<EventTemplate>();
+		List<String> availableEventNames = DataManager.EVENT_DATA.getEventNames();
+		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames : FastTable.of(EventsConfig.ENABLED_EVENTS.split(","));
 
-		for (EventTemplate et : allEvents) {
-			if (et.isActive()) {
-				newEvents.add(et);
-				et.Start();
-			}
-		}
-
-		synchronized (activeEvents) {
-			for (EventTemplate et : activeEvents) {
-				if (et.isExpired() || !DataManager.EVENT_DATA.Contains(et.getName())) {
+		synchronized (enabledEvents) {
+			for (EventTemplate et : enabledEvents) {
+				if (et.isExpired() || !availableEventNames.contains(et.getName()) || !enabledEventNames.contains(et.getName()))
 					et.Stop();
+			}
+
+			for (String eventName : enabledEventNames) {
+				EventTemplate et = DataManager.EVENT_DATA.getEvent(eventName.trim());
+				if (et != null) {
+					newEnabledEvents.add(et);
+					if (et.isActive())
+						et.Start();
 				}
 			}
 
-			activeEvents.clear();
+			enabledEvents.clear();
 			eventsForStartQuest.clear();
 			eventsForMaintainQuest.clear();
-			activeEvents.addAll(newEvents);
+			enabledEvents.addAll(newEnabledEvents);
 			updateQuestMap();
 		}
-
-		newEvents.clear();
-		allEvents.clear();
 	}
 
 	private void updateQuestMap() {
-		for (EventTemplate et : activeEvents) {
+		for (EventTemplate et : enabledEvents) {
 			for (int qId : et.getStartableQuests()) {
 				if (!eventsForStartQuest.containsKey(qId))
 					eventsForStartQuest.put(qId, new FastTable<EventTemplate>());
@@ -232,7 +219,7 @@ public class EventService {
 	}
 
 	public boolean checkQuestIsActive(int questId) {
-		synchronized (activeEvents) {
+		synchronized (enabledEvents) {
 			if (eventsForStartQuest.containsKey(questId) || eventsForMaintainQuest.containsKey(questId))
 				return true;
 		}
@@ -241,7 +228,7 @@ public class EventService {
 
 	public EventType getEventType() {
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
-			for (EventTemplate et : activeEvents) {
+			for (EventTemplate et : enabledEvents) {
 				String theme = et.getTheme();
 				if (theme != null) {
 					EventType type = EventType.getEventType(theme);
@@ -254,7 +241,7 @@ public class EventService {
 		return EventType.NONE;
 	}
 
-	public List<EventTemplate> getActiveEvents() {
-		return activeEvents;
+	public List<EventTemplate> getEnabledEvents() {
+		return enabledEvents;
 	}
 }

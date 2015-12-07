@@ -193,7 +193,7 @@
 			1476 [XML] Violent Frillneck
 			1477 [XML] The Manduri Polluters
 			1478 [XML] A Feast for Phomona
-			1479 [XML] Helping Memnes
+			1479 [SCRIPT] Helping Memnes
 			1480 [XML] Kerubian Weapons
 			1481 [XML] Troll Hammers
 			1482 [SCRIPT] A Teleportation Adventure
@@ -293,7 +293,6 @@
 	<report_to id="1449" start_npc_ids="790004" end_npc_ids="203992"/>
 	<report_to id="1451" start_npc_ids="203992" end_npc_ids="790004"/>
 	<report_to id="1465" start_npc_ids="203903" end_npc_ids="212649"/>
-	<report_to id="1479" start_npc_ids="730020" end_npc_ids="203912"/>
 	<report_to id="3330" start_npc_ids="203956" end_npc_ids="203949"/>
 	<report_to id="3337" start_npc_ids="203954" end_npc_ids="790006"/>
 	<!-- COLLECTING QUESTS -->
@@ -452,7 +451,7 @@
 	</monster_hunt>
 	<monster_hunt id="1347" start_npc_ids="203965" end_npc_ids="203966">
 		<monster var="0" end_var="7" npc_ids="210874 210908"/>
-		<monster var="0" end_var="3" npc_ids="210917"/>
+		<monster var="1" end_var="3" npc_ids="212137 212056 210917"/>
 	</monster_hunt>
 	<monster_hunt id="1348" start_npc_ids="203966">
 		<monster var="0" end_var="5" npc_ids="210928"/>

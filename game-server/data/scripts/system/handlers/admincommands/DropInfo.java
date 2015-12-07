@@ -126,9 +126,8 @@ public class DropInfo extends AdminCommand {
 
 			// some exclusion from drops
 			if (!isNpcQuest && !drs.hasGlobalNpcExclusions(currentNpc)) {
-				List<EventTemplate> activeEvents = EventService.getInstance().getActiveEvents();
-				for (EventTemplate eventTemplate : activeEvents) {
-					if (eventTemplate.getEventDrops() == null) {
+				for (EventTemplate eventTemplate : EventService.getInstance().getEnabledEvents()) {
+					if (eventTemplate.getEventDrops() == null || !eventTemplate.isActive()) {
 						continue;
 					}
 					List<GlobalRule> eventDropRules = eventTemplate.getEventDrops().getAllRules();

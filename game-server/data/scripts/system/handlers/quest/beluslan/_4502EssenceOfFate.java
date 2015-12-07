@@ -11,14 +11,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Quest Starter: Hresvelgr (204837). Go to Dark Poeta and find the Balaur Operation Order (730192). Destroy the Telepathy Controller (214894) (1).
  * Destroy power generators to close the Balaur Abyss Gate: Main Power Generator (214895) (1), Auxiliary Power Generator (214896) (1), Emergency
- * Generator (214897) (1). Get rid of Brigade General Anuhart (214904), and take the Concentrated Vitality (182204534) to Heimdall (204182).
+ * Generator (214897) (1). Get rid of Brigade General Anuhart (214904), and take the Concentrated Vitality (182204534) to Hresvelgr (204837).
  * 
  * @author vlog
  */
 public class _4502EssenceOfFate extends QuestHandler {
 
 	private final static int questId = 4502;
-	private final static int[] npcs = { 204837, 730192, 204182 };
+	private final static int[] npcs = { 204837, 730192 };
 	private final static int[] mobs = { 214894, 214895, 214896, 214897, 214904 };
 
 	public _4502EssenceOfFate() {
@@ -66,7 +66,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 					}
 					break;
 				}
-				case 204182: { // Heimdall
+				case 204837: { // Hresvelgr
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 2) {
@@ -83,7 +83,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204182) {
+			if (targetId == 204837) {
 				return sendQuestEndDialog(env);
 			}
 		}

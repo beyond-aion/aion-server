@@ -46,22 +46,21 @@ public class BonusPackService {
 		if (player.getLevel() != 65)
 			return;
 
-		if (player.getCommonData().getMailboxLetters() > (100 - rewards.size()))
+		if (player.getCommonData().getMailboxLetters() + rewards.size() > 100)
 			return;
 
-		int receivingPlayerId = dao.loadReceivingPlayer(player);
-		if (receivingPlayerId > 0)
+		int accountId = player.getPlayerAccount().getId();
+		if (dao.loadReceivingPlayer(accountId) > 0)
 			return;
 
-		try {
-			for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-				SystemMailService.getInstance().sendMail("Beyond Aion",	player.getName(), "Bonus Pack",
-					"Greetings Daeva!\n\n" + "You have reached level 65 with your first character and therefore we have a special something for you."
-						+ " In gratitude for your support we have prepared a package with valuable items for you.\n\n"
-						+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
-			}
-		} finally {
-			dao.storeReceivingPlayer(player.getPlayerAccount().getId(), player.getObjectId());
+		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
+			return;
+
+		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
+			SystemMailService.getInstance().sendMail("Beyond Aion",	player.getName(), "Bonus Pack",
+				"Greetings Daeva!\n\n" + "You have reached level 65 with your first character and therefore we have a special something for you."
+					+ " In gratitude for your support we have prepared a package with valuable items for you.\n\n"
+					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
 		}
 	}
 }

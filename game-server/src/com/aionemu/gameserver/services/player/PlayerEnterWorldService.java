@@ -19,7 +19,6 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
@@ -542,9 +541,7 @@ public final class PlayerEnterWorldService {
 					PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
 			SurveyService.getInstance().showAvailable(player);
-
-			if (EventsConfig.ENABLE_EVENT_SERVICE)
-				EventService.getInstance().onPlayerLogin(player);
+			EventService.getInstance().onPlayerLogin(player);
 
 			if (CraftConfig.DELETE_EXCESS_CRAFT_ENABLE)
 				RelinquishCraftStatus.removeExcessCraftStatus(player, false);

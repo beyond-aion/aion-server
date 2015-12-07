@@ -568,15 +568,4 @@
 			<gd_item id="188051337" name="[Event] Sugarcrook's Pack"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Bundle" base_chance="2" no_reduction="true">
-		<gd_maps>
-			<gd_map map_id="210030000" name="Verteron"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="217733" name="Epiclone"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188051340" name="[Event] Aion's Star"/>
-		</gd_items>
-	</gd_rule>	
 </global_rules>
