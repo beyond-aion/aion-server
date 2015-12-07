@@ -321,8 +321,7 @@ public class GameServer {
 			RewardService.getInstance();
 		if (EventsConfig.EVENT_ENABLED)
 			PlayerEventService.getInstance();
-		if (EventsConfig.ENABLE_EVENT_SERVICE)
-			EventService.getInstance().start();
+		EventService.getInstance();
 
 		ConsoleUtil.printSection("Access Management");
 		AdminService.getInstance();

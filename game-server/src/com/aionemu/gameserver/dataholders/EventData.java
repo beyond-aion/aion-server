@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
@@ -31,7 +27,6 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="active" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="event" maxOccurs="unbounded" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
@@ -47,60 +42,44 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EventData", propOrder = { "active", "events" })
+@XmlType(name = "EventData")
 @XmlRootElement(name = "events_config")
 public class EventData {
-
-	@XmlElement(required = true)
-	protected String active;
 
 	@XmlElementWrapper(name = "events")
 	@XmlElement(name = "event")
 	protected List<EventTemplate> events;
 
 	@XmlTransient
-	private THashMap<String, EventTemplate> activeEvents = new THashMap<String, EventTemplate>();
-
-	@XmlTransient
-	private THashMap<String, EventTemplate> allEvents = new THashMap<String, EventTemplate>();
-
-	@XmlTransient
-	private int counter = 0;
+	private FastMap<String, EventTemplate> allEvents = new FastMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (active == null || events == null)
+		if (events == null)
 			return;
 
-		counter = 0;
 		allEvents.clear();
-		activeEvents.clear();
-
-		Set<String> ae = new HashSet<String>();
-		Collections.addAll(ae, active.split(";"));
-
-		for (EventTemplate ev : events) {
-			if (ae.contains(ev.getName()) && ev.isActive()) {
-				activeEvents.put(ev.getName(), ev);
-				counter++;
-			}
+		for (EventTemplate ev : events)
 			allEvents.put(ev.getName(), ev);
-		}
 
 		events.clear();
 		events = null;
-		active = null;
 	}
 
 	public int size() {
-		return counter;
+		return allEvents.size();
 	}
 
-	public String getActiveText() {
-		return active;
+	public List<String> getEventNames() {
+		List<String> result = new FastTable<>();
+		synchronized (allEvents) {
+			result.addAll(allEvents.keySet());
+		}
+
+		return result;
 	}
 
-	public List<EventTemplate> getAllEvents() {
-		List<EventTemplate> result = new FastTable<EventTemplate>();
+	public List<EventTemplate> getEvents() {
+		List<EventTemplate> result = new FastTable<>();
 		synchronized (allEvents) {
 			result.addAll(allEvents.values());
 		}
@@ -108,33 +87,15 @@ public class EventData {
 		return result;
 	}
 
-	public void setAllEvents(List<EventTemplate> events, String active) {
-		if (events == null)
-			events = new FastTable<EventTemplate>();
-		this.events = events;
-		this.active = active;
+	public EventTemplate getEvent(String name) {
+		return allEvents.get(name);
+	}
 
-		for (EventTemplate et : this.events) {
-			if (allEvents.containsKey(et.getName())) {
-				EventTemplate oldEvent = allEvents.get(et.getName());
-				if (oldEvent.isActive() && oldEvent.isStarted())
-					et.setStarted();
-			}
-		}
+	public void setEvents(List<EventTemplate> events) {
+		for (EventTemplate et : allEvents.values())
+			et.Stop();
+
+		this.events = events == null ? new FastTable<>() : events;
 		afterUnmarshal(null, null);
 	}
-
-	public List<EventTemplate> getActiveEvents() {
-		List<EventTemplate> result = new FastTable<EventTemplate>();
-		synchronized (activeEvents) {
-			result.addAll(activeEvents.values());
-		}
-
-		return result;
-	}
-
-	public boolean Contains(String eventName) {
-		return activeEvents.containsKey(eventName);
-	}
-
 }

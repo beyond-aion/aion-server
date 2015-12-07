@@ -353,7 +353,7 @@ public class StaticData {
 		log.info("Loaded " + cosmeticItemsData.size() + " cosmetic items entries");
 		log.info("Loaded " + autoGroupData.size() + " auto group entries");
 		log.info("Loaded " + spawnsData2.size() + " spawn maps entries");
-		log.info("Loaded " + eventData.size() + " active events");
+		log.info("Loaded " + eventData.size() + " events");
 		log.info("Loaded " + panelSkillsData.size() + " skill panel entries");
 		log.info("Loaded " + instanceBuffData.size() + " instance Buffs entries");
 		log.info("Loaded " + housingObjectData.size() + " housing object entries");

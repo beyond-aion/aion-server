@@ -179,13 +179,10 @@ public class Reload extends AdminCommand {
 			}
 			if (data != null) {
 				EventService.getInstance().stop();
-				String text = data.getActiveText();
-				if (text == null || text.trim().length() == 0)
-					text = "NONE";
-				DataManager.EVENT_DATA.setAllEvents(data.getAllEvents(), data.getActiveText());
-				PacketSendUtility.sendMessage(admin, "Active events: " + text);
+				DataManager.EVENT_DATA.setEvents(data.getEvents());
 				EventService.getInstance().start();
 			}
+			PacketSendUtility.sendMessage(admin, DataManager.EVENT_DATA.size() + " Events reloaded (" + EventService.getInstance().getEnabledEvents().size() + " active).");
 		} else
 			PacketSendUtility.sendMessage(admin, SYNTAX);
 

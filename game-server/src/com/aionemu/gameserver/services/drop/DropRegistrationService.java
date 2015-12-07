@@ -195,9 +195,8 @@ public class DropRegistrationService {
 			// if npc ai == quest_use_item it will be always excluded from event drops
 			// also check if npc must be excluded due to global npc restrictions
 			if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
-				List<EventTemplate> activeEvents = EventService.getInstance().getActiveEvents();
-				for (EventTemplate eventTemplate : activeEvents) {
-					if (eventTemplate.getEventDrops() == null) {
+				for (EventTemplate eventTemplate : EventService.getInstance().getEnabledEvents()) {
+					if (eventTemplate.getEventDrops() == null || !eventTemplate.isActive()) {
 						continue;
 					}
 					// instances with world drop type == None must not have global drops (example Arenas)
