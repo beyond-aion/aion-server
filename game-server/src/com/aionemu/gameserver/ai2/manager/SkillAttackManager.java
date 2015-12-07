@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.ai2.manager;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.ai2.AI2Logger;
@@ -122,9 +123,11 @@ public class SkillAttackManager {
 			List<Integer> priorities = skillList.getPriorities();
 			if (priorities != null && !priorities.isEmpty()) {
 				
-				for (int index = priorities.size()-1; index > 0; index--) {
+				for (int index = priorities.size()-1; index >= 0; index--) {
 					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities.get(index));
-					if (skillsByPriority != null) {
+					if (skillsByPriority != null && !skillsByPriority.isEmpty()) {
+						if (skillsByPriority.size() > 2)
+							Collections.shuffle(skillsByPriority);
 						
 						for (NpcSkillEntry entry : skillsByPriority) {
 							if (entry != null) {
@@ -136,9 +139,9 @@ public class SkillAttackManager {
 									if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 										|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 										|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-										|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills()== 1))
-										return null;
-
+										|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills() == 1)) 
+										continue;
+									
 									entry.setLastTimeUsed();
 
 									return entry;
