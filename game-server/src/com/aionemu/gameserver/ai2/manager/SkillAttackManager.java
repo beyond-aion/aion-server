@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.ai2.manager;
 
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -36,7 +38,7 @@ public class SkillAttackManager {
 		if (npcAI.setSubStateIfNot(AISubState.CAST)) {
 			if (delay > 0) {
 				ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI),
-					delay + DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration());
+					delay /*+ DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration()*/);
 			} else {
 				skillAction(npcAI);
 			}
@@ -117,24 +119,39 @@ public class SkillAttackManager {
 		}
 
 		if (owner.getGameStats().canUseNextSkill()) {
-			NpcSkillEntry npcSkill = skillList.getRandomSkill();
-			if (npcSkill != null) {
-				int currentHpPercent = owner.getLifeStats().getHpPercentage();
+			List<Integer> priorities = skillList.getPriorities();
+			if (priorities != null && !priorities.isEmpty()) {
+				
+				for (int index = priorities.size()-1; index > 0; index--) {
+					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities.get(index));
+					if (skillsByPriority != null) {
+						
+						for (NpcSkillEntry entry : skillsByPriority) {
+							if (entry != null) {
+								int currentHpPercent = owner.getLifeStats().getHpPercentage();
+								
+								//Check for Bind/Silence/Fear/stun etc debuffs on npc
+								if (entry.isReady(currentHpPercent, System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
+									SkillTemplate template = entry.getSkillTemplate();
+									if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+										|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
+										|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+										|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills()== 1))
+										return null;
 
-				if (npcSkill.isReady(currentHpPercent, System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
-					// Check for Bind/Silence/Fear debuffs on npc
-					SkillTemplate template = npcSkill.getSkillTemplate();
-					if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-						|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
-						|| (owner.getEffectController().isUnderFear()))
-						return null;
+									entry.setLastTimeUsed();
 
-					npcSkill.setLastTimeUsed();
-
-					return npcSkill;
+									return entry;
+								}
+							}
+						}
+						
+					}
 				}
+	
 			}
 		}
+		
 		return null;
 	}
 
