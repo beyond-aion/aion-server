@@ -40,6 +40,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -134,8 +135,10 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			float abyssPoint = playerReward.getPoints() * RateConfig.DREDGION_REWARD_RATE; // to do finde on what depend this modifier
 			if (player.getRace().equals(dredgionReward.getWinningRace())) {
 				abyssPoint += dredgionReward.getWinnerPoints();
+				ItemService.addItem(player, 186000242, 1); // Ceramium Medal
 			} else {
 				abyssPoint += dredgionReward.getLooserPoints();
+				ItemService.addItem(player, 186000147, 1); // Mithril Medal
 			}
 			AbyssPointsService.addAp(player, (int) abyssPoint);
 			QuestEnv env = new QuestEnv(null, player, 0, 0);
