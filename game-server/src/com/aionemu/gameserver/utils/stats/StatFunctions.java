@@ -330,10 +330,10 @@ public class StatFunctions {
 		int resultDamage = 0;
 		if (element == SkillElement.NONE) {
 			// physical damage
-			resultDamage = calculatePhysicalAttackDamage(attacker, target, isMainHand);
+			resultDamage = calculatePhysicalAttackDamage(attacker, target, isMainHand, false);
 		} else {
 			// magical damage
-			resultDamage = calculateMagicalAttackDamage(attacker, target, element);
+			resultDamage = calculateMagicalAttackDamage(attacker, target, element, isMainHand);
 		}
 
 		// adjusting baseDamages according to attacker and target level
@@ -359,7 +359,7 @@ public class StatFunctions {
 	 * @param skillDamages
 	 * @return Damage made to target (-hp value)
 	 */
-	public static int calculatePhysicalAttackDamage(Creature attacker, Creature target, boolean isMainHand) {
+	public static int calculatePhysicalAttackDamage(Creature attacker, Creature target, boolean isMainHand, boolean isSkill) {
 		Stat2 pAttack;
 		if (isMainHand)
 			pAttack = attacker.getGameStats().getMainHandPAttack();
@@ -401,9 +401,9 @@ public class StatFunctions {
 				if (attacker.isInState(CreatureState.POWERSHARD)) {
 					Item firstShard;
 					Item secondShard = null;
-					if (isMainHand) {
+					if (isMainHand || isSkill) {
 						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon())
+						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill)
 							secondShard = equipment.getOffHandPowerShard();
 					} else
 						firstShard = equipment.getOffHandPowerShard();
@@ -448,14 +448,22 @@ public class StatFunctions {
 		return Math.round(resultDamage);
 	}
 
-	public static int calculateMagicalAttackDamage(Creature attacker, Creature target, SkillElement element) {
+	public static int calculateMagicalAttackDamage(Creature attacker, Creature target, SkillElement element, boolean isMainHand) {
 		Preconditions.checkNotNull(element, "Skill element should be NONE instead of null");
-		Stat2 mAttack = attacker.getGameStats().getMainHandMAttack();
+		Stat2 mAttack;
+		if (isMainHand)
+			mAttack = attacker.getGameStats().getMainHandMAttack();
+		else 
+			mAttack = ((Player) attacker).getGameStats().getOffHandMAttack();
 		float resultDamage = mAttack.getCurrent();
 		if (attacker instanceof Player) {
 			Equipment equipment = ((Player) attacker).getEquipment();
-			Item weapon = equipment.getMainHandWeapon();
-
+			Item weapon;
+			if (isMainHand)
+				weapon = equipment.getMainHandWeapon();
+			else 
+				weapon = equipment.getOffHandWeapon();
+			
 			if (weapon != null) {
 				WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
 				if (weaponStat == null)
@@ -470,12 +478,25 @@ public class StatFunctions {
 				}
 				float knowledge = attacker.getGameStats().getKnowledge().getCurrent() * 0.01f;
 				int diff = Math.round((totalMax - totalMin) * knowledge / 2);
+				
+				int negativeDiff = diff;
+				if (!isMainHand)
+					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
+				
 				resultDamage = mAttack.getBonus() + mAttack.getBase();
-				resultDamage += Rnd.get(-diff, diff);
+				resultDamage += Rnd.get(-negativeDiff /*-diff*/, diff);
 
 				if (attacker.isInState(CreatureState.POWERSHARD)) {
-					Item firstShard = equipment.getMainHandPowerShard();
-					Item secondShard = equipment.getOffHandPowerShard();
+					Item firstShard; // = equipment.getMainHandPowerShard();
+					Item secondShard = null; //equipment.getOffHandPowerShard();
+					if (isMainHand) {
+						firstShard = equipment.getMainHandPowerShard();
+						if (weapon.getItemTemplate().isTwoHandWeapon())
+							secondShard = equipment.getOffHandPowerShard();
+					} else {
+						firstShard = equipment.getOffHandPowerShard();
+					}
+					
 					if (firstShard != null) {
 						equipment.usePowerShard(firstShard, 1);
 						resultDamage += firstShard.getItemTemplate().getWeaponBoost();
