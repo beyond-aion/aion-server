@@ -92,10 +92,7 @@ public class CM_TUNE extends AionClientPacket {
 				item.setOptionalSocket(Rnd.get(0, item.getItemTemplate().getOptionSlotBonus()));
 				item.setRndBonus();
 				item.setEnchantBonus(Rnd.get(0, item.getItemTemplate().getMaxEnchantBonus()));
-				// not tuned have count = -1
-				item.setRandomCount(item.getRandomCount() + 1);
-				if (item.getRandomCount() == 0 && item.getItemTemplate().getRandomBonusCount() > 0)
-					item.setRandomCount(item.getRandomCount() + 1);
+				item.setRandomCount(item.getRandomCount() + 1); // not tuned have count = -1
 				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));

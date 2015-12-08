@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="Named First Key" base_chance="100">
+	<gd_rule rule_name="Named First Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -11,7 +11,7 @@
 			<gd_item id="185000014" name="Arena Basement Level 3 Key 1"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Second Key" base_chance="100">
+	<gd_rule rule_name="Named Second Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -22,7 +22,7 @@
 			<gd_item id="185000011" name="Arena Basement Level 2 Key 1"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Third Key" base_chance="100">
+	<gd_rule rule_name="Named Third Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -33,7 +33,7 @@
 			<gd_item id="185000012" name="Arena Basement Level 2 Key 2"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Fourth Key" base_chance="100">
+	<gd_rule rule_name="Named Fourth Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -44,7 +44,7 @@
 			<gd_item id="185000013" name="Arena Basement Level 2 Key 3"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Fifth Key" base_chance="100">
+	<gd_rule rule_name="Named Fifth Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -55,7 +55,7 @@
 			<gd_item id="185000008" name="Arena Basement Level 1 Key 1"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Sixth Key" base_chance="100">
+	<gd_rule rule_name="Named Sixth Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>
@@ -65,7 +65,8 @@
 		<gd_items>
 			<gd_item id="185000009" name="Arena Basement Level 1 Key 2"/>
 		</gd_items>
-	</gd_rule><gd_rule rule_name="Named Seventh Key" base_chance="100">
+	</gd_rule>
+	<gd_rule rule_name="Named Seventh Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320120000" name="Shadow_Court_Dungeon"/>
 		</gd_maps>

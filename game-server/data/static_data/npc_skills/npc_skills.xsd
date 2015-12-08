@@ -27,6 +27,7 @@
         <xs:attribute name="conjunction" type="ConjunctionType"/>
         <xs:attribute name="cooldown" type="xs:int"/>
 		<xs:attribute name="useinspawned" type="xs:boolean"/>
+		<xs:attribute name="priority" type="xs:int"/>
 	</xs:complexType>
         <xs:simpleType name="ConjunctionType">
             <xs:restriction base="xs:string">

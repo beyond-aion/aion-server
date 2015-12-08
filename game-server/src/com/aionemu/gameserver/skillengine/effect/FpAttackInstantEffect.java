@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
 
@@ -42,6 +44,6 @@ public class FpAttackInstantEffect extends EffectTemplate {
 		if (!(effect.getEffected() instanceof Player))
 			return;
 		Player player = (Player) effect.getEffected();
-		player.getLifeStats().reduceFp(effect.getReserveds(position).getValue());
+		player.getLifeStats().reduceFp(TYPE.FP_DAMAGE, effect.getReserveds(position).getValue(), effect.getSkillId(), SM_ATTACK_STATUS.LOG.FPATTACK);
 	}
 }

@@ -327,7 +327,7 @@ public class AttackUtil {
 					break;
 				default:
 					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true);
+					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
 					break;
 			}
 		}

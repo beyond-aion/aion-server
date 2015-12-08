@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
  * Skill entry which inherits properties from template (regular npc skills)
  * 
  * @author ATracer, nrg
+ * @modified Yeats
  */
 public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
@@ -67,5 +68,10 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public boolean UseInSpawned() {
 		return template.getUseInSpawned();
+	}
+
+	@Override
+	public int getPriority() {
+		return template.getPriority();
 	}
 }

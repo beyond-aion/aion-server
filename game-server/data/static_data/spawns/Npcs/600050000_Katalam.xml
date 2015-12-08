@@ -7023,7 +7023,7 @@
 		</spawn>
 		<!-- Tjorvi -->
 		<spawn npc_id="800607" respawn_time="295">
-			<spot x="367.17792" y="344.6687" z="274.0832" h="75"/>
+			<spot x="363.34" y="347.52" z="274.04" h="76"/>
 		</spawn>
 		<!-- Torio -->
 		<spawn npc_id="800548" respawn_time="295">

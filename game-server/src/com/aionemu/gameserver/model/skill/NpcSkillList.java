@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.skill;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,12 +17,14 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 
 /**
  * @author ATracer
+ * @modified Yeats
  */
 public class NpcSkillList implements SkillList<Npc> {
 
 	private static final Logger log = LoggerFactory.getLogger(NpcSkillList.class);
 
 	private List<NpcSkillEntry> skills;
+	private List<Integer> priorities;
 
 	public NpcSkillList(Npc owner) {
 		initSkillList(owner.getNpcId());
@@ -39,7 +42,11 @@ public class NpcSkillList implements SkillList<Npc> {
 					continue;
 				}
 				skills.add(new NpcSkillTemplateEntry(template));
+				if (!priorities.contains(template.getPriority())) {
+					priorities.add(template.getPriority());
+				}
 			}
+			Collections.sort(priorities);
 		}
 	}
 
@@ -85,6 +92,10 @@ public class NpcSkillList implements SkillList<Npc> {
 		if (skills == null) {
 			skills = new FastTable<NpcSkillEntry>();
 		}
+		
+		if (priorities == null) {
+			priorities = new FastTable<Integer>();
+		}
 	}
 
 	public NpcSkillEntry getRandomSkill() {
@@ -125,4 +136,27 @@ public class NpcSkillList implements SkillList<Npc> {
 		return null;
 	}
 
+	public List<NpcSkillEntry> getNpcSkills() {
+		return skills;
+	}
+	
+	public List<NpcSkillEntry> getSkillsByPriority(int priority) {
+		if (skills != null && priorities != null && priorities.contains(priority)) {
+			List<NpcSkillEntry> skillsByPriority = new FastTable<>();	
+			
+			for (NpcSkillEntry entry : skills) {
+				if (entry.getPriority() == priority) {
+					skillsByPriority.add(entry);
+				}
+			}
+			return skillsByPriority;
+			
+		} else {	
+			return null;
+		}
+	}
+	
+	public List<Integer> getPriorities() {
+		return priorities;
+	}
 }
