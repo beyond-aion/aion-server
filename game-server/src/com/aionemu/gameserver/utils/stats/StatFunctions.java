@@ -403,7 +403,7 @@ public class StatFunctions {
 					Item secondShard = null;
 					if (isMainHand || isSkill) {
 						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)//.getOffHandWeapon().)
+						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
 							secondShard = equipment.getOffHandPowerShard();
 					} else
 						firstShard = equipment.getOffHandPowerShard();
@@ -484,11 +484,11 @@ public class StatFunctions {
 					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
 				
 				resultDamage = mAttack.getBonus() + mAttack.getBase();
-				resultDamage += Rnd.get(-negativeDiff /*-diff*/, diff);
+				resultDamage += Rnd.get(-negativeDiff, diff);
 
 				if (attacker.isInState(CreatureState.POWERSHARD)) {
-					Item firstShard; // = equipment.getMainHandPowerShard();
-					Item secondShard = null; //equipment.getOffHandPowerShard();
+					Item firstShard;
+					Item secondShard = null;
 					if (isMainHand) {
 						firstShard = equipment.getMainHandPowerShard();
 						if (weapon.getItemTemplate().isTwoHandWeapon())
