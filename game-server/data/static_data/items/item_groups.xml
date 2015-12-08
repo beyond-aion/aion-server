@@ -4463,6 +4463,8 @@
 		<item id="186000242" level="5" count="3" chance="0.5"/>
 		<item id="186000242" level="5" count="4" chance="0.1"/>
 		<item id="186000243" level="5" count="1" chance="18.4"/>
+		<item id="182005206" level="6" count="1" chance="67"/>
+		<item id="186000242" level="6" count="1" chance="33"/>
 	</medals>
 	<food_common bonusType="FOOD" chance="100">
 		<item id="152015001" level="30"/>
