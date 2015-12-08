@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.skill;
 
 /**
  * @author ATracer, nrg
+ * @modified Yeats
  */
 public abstract class NpcSkillEntry extends SkillEntry {
 
@@ -30,5 +31,7 @@ public abstract class NpcSkillEntry extends SkillEntry {
 	public void setLastTimeUsed() {
 		this.lastTimeUsed = System.currentTimeMillis();
 	}
+	
+	public abstract int getPriority();
 }
 

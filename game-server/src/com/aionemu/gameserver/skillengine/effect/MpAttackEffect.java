@@ -24,6 +24,6 @@ public class MpAttackEffect extends AbstractOverTimeEffect {
 		if (percent)
 			newValue = (maxMP * value) / 100;
 		// sm_attack_status for type and log - 4.5 checked
-		effect.getEffected().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.MP, newValue, effect.getSkillId(), SM_ATTACK_STATUS.LOG.MPATTACK);
+		effect.getEffected().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.DAMAGE_MP, newValue, effect.getSkillId(), SM_ATTACK_STATUS.LOG.MPATTACK);
 	}
 }

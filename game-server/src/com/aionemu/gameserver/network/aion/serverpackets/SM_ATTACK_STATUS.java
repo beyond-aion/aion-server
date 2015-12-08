@@ -42,7 +42,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		DISPELBUFFCOUNTERATK(16), // TODO implement
 		FALL_DAMAGE(17),
 		HEAL_MP(19),
-		DAMAGE_MP(19),
+		DAMAGE_MP(20),
 		ABSORBED_MP(20),
 		MP(21),
 		NATURAL_MP(22),
@@ -79,6 +79,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		MAGICCOUNTERATK(112),
 		SPELLATKDRAIN(132), // changed in 4.5
 		FPHEAL(134), // changed in 4.5
+		FPATTACK(137),
 		MPATTACK(141),
 		REGULAR(187); // 4.5
 

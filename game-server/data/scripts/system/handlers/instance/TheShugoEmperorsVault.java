@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,6 +19,8 @@ import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.instanceinfo.NormalScoreInfo;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -570,4 +574,14 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	public InstanceReward<?> getInstanceReward() {
 		return instanceReward;
 	}
+	
+	@Override
+	public boolean onDie(final Player player, Creature lastAttacker) {
+		PacketSendUtility.broadcastPacket(player,
+			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+
+		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
+		return true;
+	}
+	
 }

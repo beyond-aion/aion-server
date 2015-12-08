@@ -31,6 +31,6 @@ public class FpAttackEffect extends AbstractOverTimeEffect {
 		// Support for values in percentage
 		if (percent)
 			newValue = (maxFP * value) / 100;
-		effected.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.REGULAR);
+		effected.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.FPATTACK);
 	}
 }

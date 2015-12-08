@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author AionChs Master, nrg
+ * @modified Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "npcskill")
@@ -34,6 +35,8 @@ public class NpcSkillTemplate {
 	protected int cooldown = 0;
 	@XmlAttribute(name = "useinspawned")
 	protected boolean useinspawned = false;
+	@XmlAttribute(name = "priority")
+	protected int priority = 0;
 
 	/**
 	 * @return the id
@@ -112,5 +115,9 @@ public class NpcSkillTemplate {
 	 */
 	public boolean getUseInSpawned() {
 		return useinspawned;
+	}
+	
+	public int getPriority() {
+		return priority;
 	}
 }
