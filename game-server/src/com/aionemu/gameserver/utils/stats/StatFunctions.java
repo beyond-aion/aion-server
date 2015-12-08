@@ -403,7 +403,7 @@ public class StatFunctions {
 					Item secondShard = null;
 					if (isMainHand || isSkill) {
 						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill)
+						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)//.getOffHandWeapon().)
 							secondShard = equipment.getOffHandPowerShard();
 					} else
 						firstShard = equipment.getOffHandPowerShard();
