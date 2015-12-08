@@ -36,20 +36,29 @@ public class _50009TisTheSeason extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == 831032 || targetId == 831038) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return sendQuestDialog(env, 1004);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831032 || targetId == 831038) {
-				changeQuestStep(env, 0, 0, true); // reward
-				return sendQuestDialog(env, 2375);
+				switch (dialog) {
+					case QUEST_SELECT:
+						return sendQuestDialog(env, 2375);
+					case SELECT_QUEST_REWARD:
+						changeQuestStep(env, 0, 0, true);
+						return sendQuestEndDialog(env);
+				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831032 || targetId == 831038)
 				return sendQuestEndDialog(env);
 		}
