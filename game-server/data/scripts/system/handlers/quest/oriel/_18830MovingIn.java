@@ -7,10 +7,12 @@ import java.util.Set;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rolandas
@@ -66,18 +68,31 @@ public class _18830MovingIn extends QuestHandler {
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return closeDialogWindow(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
-			if (house.getButler().getNpcId() != targetId)
-				return false;
-			switch (dialog) {
-				case USE_OBJECT:
-					return sendQuestDialog(env, 1352);
-				case SETPRO1:
-					return defaultCloseDialog(env, 0, 1);
+		} 
+		else if (qs.getStatus() == QuestStatus.START) {
+			if (butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
+				if (house.getButler().getNpcId() != targetId)
+					return false;
+				switch (dialog) {
+					case USE_OBJECT:
+						return sendQuestDialog(env, 1352);
+					case SETPRO1:
+						return defaultCloseDialog(env, 0, 1);
+				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830645) {
+			else if (targetId == 830645) {
+				if (dialog == DialogAction.QUEST_SELECT) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED);
+					return closeDialogWindow(env);
+				}
+			}
+		} 
+		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830645) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
