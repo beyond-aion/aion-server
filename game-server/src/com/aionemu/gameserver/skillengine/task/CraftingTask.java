@@ -6,7 +6,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CRAFT_ANIMATION;
@@ -125,7 +124,6 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected final void analyzeInteraction() {
-		//BEYOND AION CALCULATION
 		if (recipeTemplate.getSkillid() == 40009) { //morph
 			currentSuccessValue = completeValue;
 			return;
@@ -135,55 +133,46 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 		
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3f);
-		
-		if (success) {
-			int critChance = Rnd.get(1, 100);
-			if (critChance <= (15 + skillLvlDiff/3)) {
-				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10%
-			} else {
-				craftType = CraftType.NORMAL;
-			}
-		} else {
-			craftType = CraftType.NORMAL;
-		}
-		
-		ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductid()).getItemQuality();
-		float speedModifier = 1;
-		switch (quality) {
+		boolean success = Rnd.get() * 100 > (CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3f);
+
+		float bonusModifier = 1;
+		switch (itemTemplate.getItemQuality()) {
 			case LEGEND:
-				speedModifier = 0.9f;
+				bonusModifier = 0.9f;
 				break;
 			case UNIQUE:
-				speedModifier = 0.7f;
+				bonusModifier = 0.7f;
 				break;
 			case EPIC:
-				speedModifier = 0.5f;
+				bonusModifier = 0.5f;
 				break;
 			case MYTHIC:
-				speedModifier = 0.3f;
+				bonusModifier = 0.3f;
 				break;
-				default:
-					break;
 		}
 		
 		if (success) {
+			if (Rnd.get() * 100 <= (15 + skillLvlDiff/3f))
+				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10%
+
+			int minStep = 70;
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
-			currentSuccessValue += Math.round((70 + (((craftType == CraftType.CRIT_BLUE ? 100 :0) + ((skillLvlDiff/3) + (skillLvlDiff/5) + lvlBoni) * 10) * multi) * speedModifier)); //70 = minValue
+			int bonus = (int) (((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff+1)/2f) + lvlBoni) * 10) * multi);
+			currentSuccessValue += Math.round(minStep + (bonus * bonusModifier));
 		} else {
-			int minFailureValue = recipeTemplate.getMaxProductionCount() != null ? 70 : 140; //140 = minFailValue
-			currentFailureValue += Math.round((minFailureValue + (((skillLvlDiff/1.5 * 10) * multi) * speedModifier)));
+			int minStep = recipeTemplate.getMaxProductionCount() != null ? 70 : 140;
+			int bonus = (int) (((skillLvlDiff+1)/1.5f * 10) * multi);
+			currentFailureValue += Math.round(minStep + (bonus * bonusModifier));
 		}
 		
-		if (currentSuccessValue > completeValue) {
+		if (currentSuccessValue > completeValue)
 			currentSuccessValue = completeValue;
-		} else if (currentFailureValue > completeValue) {
+		else if (currentFailureValue > completeValue)
 			currentFailureValue = completeValue;
-		}
 		
-		int speed = speedModifier < 1 ? Math.round(900 * (2-speedModifier)) : (900 - (skillLvlDiff * 30));
+		int speed = bonusModifier < 1 ? Math.round(900 * (2-bonusModifier)) : (900 - (skillLvlDiff * 30));
 		executionSpeed = speed < 300 ? 300 : speed;
-		int showDelay = speedModifier < 1 ? 1200 : (1200 - (skillLvlDiff * 30));
+		int showDelay = bonusModifier < 1 ? 1200 : (1200 - (skillLvlDiff * 30));
 		delay = showDelay < 500 ? 500 : showDelay;
 	}
 }

@@ -77,14 +77,8 @@ public class GatheringTask extends AbstractCraftTask {
 		return true;
 	}
 
-	/**
-	 * Explanation of formulas are in the following graph: <img src="doc-files/gathering_bounds.png" />
-	 * 
-	 * @see com.aionemu.gameserver.skillengine.task.AbstractCraftTask#analyzeInteraction()
-	 */
 	@Override
 	protected final void analyzeInteraction() {
-		//BEYOND AION CALCULATION
 		if (skillLvlDiff >= 41) {
 			currentSuccessValue = completeValue;
 			this.executionSpeed = 300;
@@ -96,30 +90,24 @@ public class GatheringTask extends AbstractCraftTask {
 		}
 		
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get(1, 100) > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3f);
+		boolean success = Rnd.get() * 100 > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3f);
 		
 		if (success) {
-			int critChance = Rnd.get(1, 100);
-			if (critChance <= (3 + skillLvlDiff/10)) { //PURPLE CRIT = 100%
+			float critChance = Rnd.get() * 100;
+			if (critChance <= (3 + skillLvlDiff/10f)) { //PURPLE CRIT = 100%
 				craftType = CraftType.CRIT_PURPLE;
 				currentSuccessValue = completeValue;
 				this.executionSpeed = 300;
 				this.showBarDelay = 500;
 				return;
-			} else if (critChance <= (15 + skillLvlDiff/3)) { //LIGHT BLUE CRIT = +10%
+			} else if (critChance <= (15 + skillLvlDiff/3f)) { //LIGHT BLUE CRIT = +10%
 				craftType = CraftType.CRIT_BLUE;
-			} else {
-				craftType = CraftType.NORMAL;
 			}
-		} else {
-			craftType = CraftType.NORMAL;
-		}
-		
-		if (success) {
+			
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
-			currentSuccessValue += Math.round((70 + ((craftType == CraftType.CRIT_BLUE ? 100 :0) + ((skillLvlDiff/3) + (skillLvlDiff/5) + lvlBoni) * 10) * multi)); //minValue = 70
+			currentSuccessValue += Math.round((70 + ((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff+1)/2f) + lvlBoni) * 10) * multi)); //minValue = 70
 		} else {
-			currentFailureValue += Math.round((140 + ((skillLvlDiff/2 * 10) * multi))); //minFailValue = 140
+			currentFailureValue += Math.round((140 + (((skillLvlDiff+1)/2f * 10) * multi))); //minFailValue = 140
 		}
 		
 		if (currentSuccessValue > completeValue) {
