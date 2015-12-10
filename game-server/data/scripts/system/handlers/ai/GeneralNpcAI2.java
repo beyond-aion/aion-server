@@ -149,7 +149,7 @@ public class GeneralNpcAI2 extends NpcAI2 {
 			return AttackIntention.FINISH_ATTACK;
 		}
 
-		if (currentTarget == null || !currentTarget.getObjectId().equals(mostHated.getObjectId())) {
+		if (currentTarget == null) {
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 			return AttackIntention.SWITCH_TARGET;
 		}
@@ -168,6 +168,10 @@ public class GeneralNpcAI2 extends NpcAI2 {
 				skillLevel = skill.getSkillLevel();
 				return AttackIntention.SKILL_ATTACK;
 			}
+		}
+		if (!currentTarget.getObjectId().equals(mostHated.getObjectId())) {
+			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+			return AttackIntention.SWITCH_TARGET;
 		}
 		return AttackIntention.SIMPLE_ATTACK;
 	}
