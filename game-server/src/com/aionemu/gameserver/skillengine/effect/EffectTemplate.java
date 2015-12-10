@@ -337,14 +337,14 @@ public abstract class EffectTemplate {
 
 	private boolean firstEffectCheck(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
 		if (this.getPosition() == 1) {
-			// check effectresistrate
-			if (!this.calculateEffectResistRate(effect, statEnum)) {
-				return false;
-			}
 			boolean cannotMiss = false;
 			if (this instanceof SkillAttackInstantEffect)
 				cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
 			if (!noResist || !cannotMiss) {
+				// check effectresistrate
+				if (!this.calculateEffectResistRate(effect, statEnum)) {
+					return false;
+				}
 				// check for BOOST_RESIST
 				int boostResist = 0;
 				switch (effect.getSkillTemplate().getSubType()) {
