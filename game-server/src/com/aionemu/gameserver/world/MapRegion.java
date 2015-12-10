@@ -256,7 +256,7 @@ public class MapRegion {
 	private void deactivateObjects() {
 		for (VisibleObject visObject : objects.values()) {
 			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
-				&& !((Creature) visObject).isRaidMonster()) {
+				&& !((Creature) visObject).isRaidMonster() && !((Creature) visObject).isInInstance()) {
 				Creature creature = (Creature) visObject;
 				creature.getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
