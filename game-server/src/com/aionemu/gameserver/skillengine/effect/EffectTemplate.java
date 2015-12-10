@@ -337,14 +337,14 @@ public abstract class EffectTemplate {
 
 	private boolean firstEffectCheck(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
 		if (this.getPosition() == 1) {
-			// check effectresistrate
-			if (!this.calculateEffectResistRate(effect, statEnum)) {
-				return false;
-			}
 			boolean cannotMiss = false;
 			if (this instanceof SkillAttackInstantEffect)
 				cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-			if (!noResist && !cannotMiss) {
+			if (!noResist || !cannotMiss) {
+				// check effectresistrate
+				if (!this.calculateEffectResistRate(effect, statEnum)) {
+					return false;
+				}
 				// check for BOOST_RESIST
 				int boostResist = 0;
 				switch (effect.getSkillTemplate().getSubType()) {
@@ -372,7 +372,7 @@ public abstract class EffectTemplate {
 	private boolean nextEffectCheck(Effect effect, SpellStatus spellStatus, StatEnum statEnum) {
 		EffectTemplate firstEffect = effect.effectInPos(1);
 		if (this.getPosition() > 1) {
-			if (Rnd.get(0, 100) < this.getPreEffectProb()) {
+			if (Rnd.get(0, 100) <= this.getPreEffectProb()) {
 				FastTable<Integer> positions = getPreEffects();
 				int successCount = 0;
 				for (int pos : positions) {
@@ -384,7 +384,7 @@ public abstract class EffectTemplate {
 					boolean cannotMiss = false;
 					if (this instanceof SkillAttackInstantEffect)
 						cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-					if (!noResist && !cannotMiss) {
+					if (!noResist || !cannotMiss) {
 						if (!this.calculateEffectResistRate(effect, statEnum)) {
 							if (!(firstEffect instanceof DamageEffect)) {
 								effect.getSuccessEffect().remove(firstEffect);
