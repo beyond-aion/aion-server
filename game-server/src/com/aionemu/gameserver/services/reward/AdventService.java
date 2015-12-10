@@ -134,7 +134,7 @@ public class AdventService {
 			for (CustomSurveyItem item : rewards.get(day)) {
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
 				if (template != null && template.getRace() == player.getCommonData().getOppositeRace())
-					return;
+					continue;
 				sendRewardMail(player, item.getId(), item.getCount(), day);
 			}
 		}
