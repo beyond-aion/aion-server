@@ -323,7 +323,7 @@ public class AttackUtil {
 					ht = HitType.MAHIT;
 					baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
 					if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
-						baseAttack = 1;
+						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 					break;
 				default:
 					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
