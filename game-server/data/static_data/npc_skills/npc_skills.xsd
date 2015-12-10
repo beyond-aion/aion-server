@@ -52,6 +52,8 @@
         		<xs:enumeration value="SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED"/>
         		<xs:enumeration value="HELP_FRIEND"/>
         		<xs:enumeration value="HELP_SELF"/>
+        		<xs:enumeration value="TARGET_IS_IN_ANY_STUN"/>
+        		<xs:enumeration value="TARGET_IS_IN_STUMBLE"/>
         		<xs:enumeration value="TARGET_IS_STUNNED"/>
         		<xs:enumeration value="TARGET_IS_SLEEPING"/>
         		<xs:enumeration value="TARGET_IS_AETHERS_HOLD"/>

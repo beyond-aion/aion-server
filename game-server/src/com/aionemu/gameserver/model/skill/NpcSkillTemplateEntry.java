@@ -158,9 +158,19 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case TARGET_IS_STUNNED:
 				if (curTarget != null && curTarget instanceof Creature) {
 					Creature target = (Creature) curTarget;
-					if (target.getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN)) {
-						return true;
-					}
+					return target.getEffectController().isInAnyAbnormalState(AbnormalState.STUN);
+				}
+				return false;
+			case TARGET_IS_IN_ANY_STUN:
+				if (curTarget != null && curTarget instanceof Creature) {
+					Creature target = (Creature) curTarget;
+					return target.getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN);
+				}
+				return false;
+			case TARGET_IS_IN_STUMBLE:
+				if (curTarget != null && curTarget instanceof Creature) {
+					Creature target = (Creature) curTarget;
+					return target.getEffectController().isInAnyAbnormalState(AbnormalState.STUMBLE);
 				}
 				return false;
 			case TARGET_IS_SLEEPING:
