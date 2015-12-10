@@ -64812,8 +64812,10 @@
 		<npcskill skillid="19549" skilllevel="45" probability="80" cooldown="30000"/>
 		<npcskill skillid="19549" skilllevel="95" probability="80" minhp="0" maxhp="55" cooldown="50000"/>
 		<npcskill skillid="19550" skilllevel="50" probability="80" cooldown="30000"/>
-		<npcskill skillid="19552" skilllevel="65" probability="80" minhp="0" maxhp="35" cooldown="50000"/>
-	<!--<npcskill skillid="19553" skilllevel="65" probability="80" minhp="0" maxhp="30" cooldown="35000"/> -->
+		<npcskill skillid="19552" skilllevel="65" probability="80" minhp="0" maxhp="35" cooldown="50000" nextSkillTime="0"/>
+		<npcskill skillid="19553" skilllevel="65" probability="100" minhp="0" maxhp="30" cooldown="35000" priority="1">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
 		<npcskill skillid="21780" skilllevel="75" probability="70" cooldown="20000"/>
 	</npcskills>
 	<npcskills npcid="235219">

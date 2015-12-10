@@ -20,6 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
+ * @reworked Yeats
  */
 public class SkillAttackManager {
 
@@ -135,16 +136,19 @@ public class SkillAttackManager {
 								
 								//Check for Bind/Silence/Fear/stun etc debuffs on npc
 								if (entry.isReady(currentHpPercent, System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
-									SkillTemplate template = entry.getSkillTemplate();
-									if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-										|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
-										|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-										|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills() == 1)) 
-										continue;
+									if (entry.conditionReady(owner)) {
+										SkillTemplate template = entry.getSkillTemplate();
+										if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+											|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
+											|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+											|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills() == 1)) 
+											continue;
 									
-									entry.setLastTimeUsed();
+										owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
+										entry.setLastTimeUsed();
 
-									return entry;
+										return entry;
+									}
 								}
 							}
 						}
