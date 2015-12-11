@@ -19,7 +19,7 @@
 	-->
 	<!-- Chests -->
 	<!-- World-Maps -->
-	<!-- Verteron/Altgard -->
+	<!-- Altgard/Verteron -->
 	<npc_drop npc_id="211823" replace_type="FULL">
 		<!-- use_category="false" to disable drop limit for groups -->
 		<drop_group race="PC_ALL" use_category="false" name="Named Accessory (Rare)">
@@ -54,6 +54,34 @@
 	<npc_drop npc_id="211860" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Rare)">
 			<drop item_id="125000952" name="Kaidan Hat" min_amount="1" max_amount="1" chance="12"/>
+		</drop_group>
+	</npc_drop>
+	<!-- Pernon/Oriel -->
+	<npc_drop npc_id="701519" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Paint">
+			<drop item_id="169120001" name="Paint: Red" min_amount="1" max_amount="2" chance="90"/>
+			<drop item_id="169120002" name="Paint: Pink" min_amount="1" max_amount="2" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Essence">
+			<drop item_id="182006982" name="Flower's Essence" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701520" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Paint">
+			<drop item_id="169120003" name="Paint: Blue" min_amount="1" max_amount="2" chance="90"/>
+			<drop item_id="169120004" name="Paint: Purple" min_amount="1" max_amount="2" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Essence">
+			<drop item_id="182006982" name="Flower's Essence" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701521" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Paint">
+			<drop item_id="169120005" name="Paint: Orange" min_amount="1" max_amount="2" chance="90"/>
+			<drop item_id="169120006" name="Paint: Mustard" min_amount="1" max_amount="2" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Essence">
+			<drop item_id="182006982" name="Flower's Essence" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Instances -->
