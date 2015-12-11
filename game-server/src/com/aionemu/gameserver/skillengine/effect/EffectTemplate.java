@@ -340,7 +340,7 @@ public abstract class EffectTemplate {
 			boolean cannotMiss = false;
 			if (this instanceof SkillAttackInstantEffect)
 				cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-			if (!noResist || !cannotMiss) {
+			if (!noResist && !cannotMiss) {
 				// check effectresistrate
 				if (!this.calculateEffectResistRate(effect, statEnum)) {
 					return false;
@@ -384,7 +384,7 @@ public abstract class EffectTemplate {
 					boolean cannotMiss = false;
 					if (this instanceof SkillAttackInstantEffect)
 						cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-					if (!noResist || !cannotMiss) {
+					if (!noResist && !cannotMiss) {
 						if (!this.calculateEffectResistRate(effect, statEnum)) {
 							if (!(firstEffect instanceof DamageEffect)) {
 								effect.getSuccessEffect().remove(firstEffect);
