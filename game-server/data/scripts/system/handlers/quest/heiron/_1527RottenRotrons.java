@@ -11,7 +11,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke remod By Nephis
+ * @author MrPoke 
+ * @modified Nephis
  */
 public class _1527RottenRotrons extends QuestHandler {
 
@@ -26,7 +27,7 @@ public class _1527RottenRotrons extends QuestHandler {
 		qe.registerQuestNpc(204555).addOnQuestStart(questId);
 		qe.registerQuestNpc(204555).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204562).addOnTalkEvent(questId);
-		qe.registerQuestNpc(730024).addOnTalkEvent(questId);
+		qe.registerQuestNpc(205229).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class _1527RottenRotrons extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 730024) {
+		} else if (targetId == 205229) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
