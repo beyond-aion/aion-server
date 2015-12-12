@@ -242,10 +242,10 @@
 	</siege_location>
 	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="802577" occupy_count="2" siege_duration="2400" influence="6">
 		<artifact_activation itemid="188020001" count="3" skill="12155" cd="7200"/>
-		<siege_reward top="11" itemid="188053164" m_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" itemid="188053165" m_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="33" itemid="188053166" m_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" itemid="188053167" m_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" itemid="188053163" m_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" itemid="188053164" m_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="33" itemid="188053165" m_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="200" itemid="188053166" m_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052119" m_count="1"/>
 		<legion_reward itemid="188053136" m_count="1"/>
