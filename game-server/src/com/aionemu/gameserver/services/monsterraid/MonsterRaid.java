@@ -72,11 +72,14 @@ public class MonsterRaid {
 								broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
 								scheduleDespawn();
 							}
-						}, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce
+						}, 300000);
+						//}, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce
 					}
-				}, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
+				}, 900000);
+				//}, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
 			}
-		}, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
+		}, 600000);
+		//}, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
 	}
 
 	private final void onMonsterRaidFinish() {
@@ -85,6 +88,8 @@ public class MonsterRaid {
 		if (isBossKilled()) { // TODO: Switch for different NPCs
 			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_DIE_03());
 			cancelDespawn();
+		} else {
+			boss.getController().onDelete();
 		}
 	}
 
