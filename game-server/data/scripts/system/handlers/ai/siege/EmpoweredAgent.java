@@ -1,6 +1,5 @@
 package ai.siege;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class EmpoweredAgent extends AggressiveNpcAI2 {
 	
 	private final List<Integer> guardIds = new FastTable<>();
-	private final List<Integer> percents = Arrays.asList(80, 70, 60, 50, 40, 30, 25, 20, 5);
+	private final List<Integer> percents = new FastTable<>();
 	private boolean canThink = true;
 	
 	@Override
@@ -59,6 +58,7 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 				Collections.addAll(guardIds, new Integer[] {235340, 235341, 235342, 235343, 235344, 235345});
 				break;
 		}
+		Collections.addAll(percents, new Integer[] {80, 70, 60, 50, 40, 30, 25, 20, 5});
 	}
 	
 	@Override
