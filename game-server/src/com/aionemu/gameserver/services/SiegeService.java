@@ -494,6 +494,18 @@ public class SiegeService {
 			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
 			this.resetSiegeLocation(loc);
 		}
+		//Special case for Anoha Fortress artifacts
+		if (locationId == 7011) {
+			List<ArtifactLocation> artis = new FastTable<>();
+			artis.add(getArtifact(7012));
+			artis.add(getArtifact(7013));
+			artis.add(getArtifact(7014));
+			for (ArtifactLocation arti : artis) {
+				if (!arti.getRace().equals(SiegeRace.BALAUR))
+					resetSiegeLocation(arti);
+			}
+			artis.clear();
+		}
 	}
 
 	public void startSiege(final int siegeLocationId) {
