@@ -12,7 +12,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Coin" base_chance="100" min_count="15" max_count="45">
+	<gd_rule rule_name="Named Coin" base_chance="100" min_count="15" max_count="45" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
 		</gd_maps>
@@ -25,7 +25,7 @@
 			<gd_item id="186000237" name="Ancient Coin"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Supplements" base_chance="100" min_count="20" max_count="50">
+	<gd_rule rule_name="Named Supplements" base_chance="100" min_count="20" max_count="50" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
 		</gd_maps>
@@ -50,7 +50,7 @@
 			<gd_item id="185000196" name="Abyss Gap Sealing Key"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
 		</gd_maps>
@@ -61,7 +61,7 @@
 			<gd_item id="188053332" name="Linkgate Foundry Heavy Ancient Manastone Bundle"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
 		</gd_maps>
@@ -72,7 +72,7 @@
 			<gd_item id="188053331" name="Linkgate Foundry Small Ancient Manastone Bundle"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
 		</gd_maps>
