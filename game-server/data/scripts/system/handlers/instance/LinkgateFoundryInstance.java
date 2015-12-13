@@ -79,24 +79,25 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				timeInMin++;
 				switch (timeInMin) {
 					case 5:
-						sendMsg(1402453); // 15 min
+						sendMsg(1402454); // 15 min
 						break;
 					case 10:
-						sendMsg(1402454); // 10 min
+						sendMsg(1402455); // 10 min
 						break;
 					case 15:
-						sendMsg(1402455); // 5 min
+						sendMsg(1402456); // 5 min
 						break;
 					case 17:
-						sendMsg(1402456); // 3 min
+						sendMsg(1402457); // 3 min
 						break;
 					case 19:
-						sendMsg(1402457); // 1 min
+						sendMsg(1402458); // 1 min
 						break;
 					case 20:
 						sendMsg(1402461);
 						for (Npc npc : instance.getNpcs()) {
-							if (npc.getNpcId() != 233898 && npc.getNpcId() != 702339) {
+							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 && npc.getNpcId() != 234542 //belsagos does not despawn
+								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { //teleport device does not despawn
 								npc.getController().onDelete();
 							}
 						}
