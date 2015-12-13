@@ -32,6 +32,8 @@ public class BaseBossDeathListener extends OnDieEventListener {
 			Creature kill = (Creature) winner;
 			if (kill.getRace().isPlayerRace())
 				base.setLocRace(kill.getRace());
+			else
+				base.setLocRace(Race.NPC);
 		}
 		else if (winner instanceof TemporaryPlayerTeam) {
 			TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
