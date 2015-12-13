@@ -42279,6 +42279,12 @@
     <npcskills npcid="258281">
         <npcskill skillid="20373" skilllevel="65" probability="100"/>
     </npcskills>
+	<npcskills npcid="258313">
+        <npcskill skillid="20374" skilllevel="65" probability="100"/>
+    </npcskills>
+    <npcskills npcid="258314">
+        <npcskill skillid="20373" skilllevel="65" probability="100"/>
+    </npcskills>
     <npcskills npcid="259011">
         <npcskill skillid="20147" skilllevel="60" probability="10"/>
         <npcskill skillid="20146" skilllevel="60" probability="10"/>
