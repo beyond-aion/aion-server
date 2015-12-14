@@ -85,7 +85,7 @@
 			<spot x="1055.7926" y="1100.1683" z="1183.6907" h="63"/>
 		</spawn>
 		<!-- Keymaster Zumita -->
-		<spawn npc_id="219192" respawn_time="5210" pool="3">
+		<spawn npc_id="219192" respawn_time="5210" pool="2">
 			<spot x="1139.01" y="503.24" z="1183.6903" h="26" walker_id="73A2220AC5325CE490023E615AAB57EB0C8DB389"/>
 			<spot x="537.39" y="1178.52" z="1183.6908" h="72" walker_id="448E65D658ECCB169545343B6F6DD8F9A3AD7836"/>
 			<spot x="503.77" y="373.07" z="1183.6903" h="96" walker_id="132CE59B33680108BF0896DA15CF22BFAE68A076"/>
