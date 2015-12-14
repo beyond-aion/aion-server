@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Map Drops -->
+	<gd_rule rule_name="Ettin Skin" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="ETTIN"/>
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="152012504" name="Ettin Skin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Fungen Cap" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="FUNGY"/>
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="152015502" name="Fungen Cap"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Ksellid Meat" base_chance="40" min_count="2" max_count="2">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="SHELLIZARD"/>
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="152015503" name="Raw Ksellid Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Basilisk Back Skin" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="BASILISK"/>
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="152012507" name="Basilisk Back Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Quest-Start Item" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211395" name="Ruthless Tayga"/>
+			<gd_npc npc_id="211426" name="Ruthless Tayga"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182204134" name="quest_2343a"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211461" name="Chieftain Kiwanunu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900192" name="Kiwanunu's Greatsword"/>
+			<gd_item id="101300190" name="Kiwanunu's Spear"/>
+			<gd_item id="100100187" name="Kiwanunu's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211461" name="Chieftain Kiwanunu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100472" name="Ice Claw Tunic"/>
+			<gd_item id="110300434" name="Ice Claw Jerkin"/>
+			<gd_item id="110500462" name="Ice Claw Hauberk"/>
+			<gd_item id="110600458" name="Ice Claw Breastplate"/>
+			<gd_item id="113100403" name="Ice Claw Leggings"/>
+			<gd_item id="113300419" name="Ice Claw Breeches"/>
+			<gd_item id="113500442" name="Ice Claw Chausses"/>
+			<gd_item id="113600426" name="Ice Claw Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Proceed with MORHEIM_2 -->
+</global_rules>

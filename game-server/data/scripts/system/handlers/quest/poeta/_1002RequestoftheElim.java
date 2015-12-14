@@ -113,7 +113,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 							if (var == 2) {
 								((Npc) env.getVisibleObject()).getController().scheduleRespawn();
 								((Npc) env.getVisibleObject()).getController().onDelete();
-								useQuestObject(env, 2, 4, false, false); // 4
+								return useQuestObject(env, 2, 4, false, false); // 4
 							} else if (var == 4) {
 								((Npc) env.getVisibleObject()).getController().scheduleRespawn();
 								((Npc) env.getVisibleObject()).getController().onDelete();
