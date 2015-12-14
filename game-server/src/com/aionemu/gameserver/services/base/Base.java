@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -130,9 +131,15 @@ public abstract class Base<T extends BaseLocation> {
 			public void run() {
 				if (isFinished.get())
 					return;
-				spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
-				broadcastMessage(getAssaultMsg());
-				scheduleAssaultDespawn();
+				if (flag.getPosition().getMapRegion().isMapRegionActive()) {
+					spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
+					broadcastMessage(getAssaultMsg());
+					scheduleAssaultDespawn();
+				} else {
+					if (Rnd.get() * 100 < 25)
+						BaseService.getInstance().capture(id, chooseAssaultRace());
+					scheduleAssault();
+				}
 			}
 		}, getAssaultDelay());
 	}
