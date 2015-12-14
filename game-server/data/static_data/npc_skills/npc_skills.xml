@@ -64841,4 +64841,152 @@
 		<npcskill skillid="19562" skilllevel="15" probability="70" cooldown="35000"/>
 		<npcskill skillid="19563" skilllevel="20" probability="80" minhp="0" maxhp="40" cooldown="35000"/>
 	</npcskills>
+	<!-- Tiamaranta's Eye -->
+	<!-- Ranger -->
+	<npcskills npcid="219188">
+		<npcskill skillid="19721" skilllevel="65" probability="100" cooldown="40000" priority="8" nextSkillTime="2000"/>
+		<npcskill skillid="19722" skilllevel="65" probability="100" cooldown="40000" priority="7" nextSkillTime="2000"/>
+		<npcskill skillid="19723" skilllevel="65" probability="100" cooldown="40000" priority="6" nextSkillTime="2000"/>
+		<npcskill skillid="19724" skilllevel="65" probability="100" cooldown="40000" priority="5" nextSkillTime="2000"/>
+		<npcskill skillid="19725" skilllevel="65" probability="100" cooldown="40000" priority="4" nextSkillTime="2000"/>
+		<npcskill skillid="19726" skilllevel="65" probability="100" cooldown="40000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="19727" skilllevel="65" probability="100" cooldown="40000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="19728" skilllevel="65" probability="100" cooldown="40000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="19730" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<npcskills npcid="218549">
+		<npcskill skillid="19721" skilllevel="65" probability="100" cooldown="40000" priority="8" nextSkillTime="2000"/>
+		<npcskill skillid="19722" skilllevel="65" probability="100" cooldown="40000" priority="7" nextSkillTime="2000"/>
+		<npcskill skillid="19723" skilllevel="65" probability="100" cooldown="40000" priority="6" nextSkillTime="2000"/>
+		<npcskill skillid="19724" skilllevel="65" probability="100" cooldown="40000" priority="5" nextSkillTime="2000"/>
+		<npcskill skillid="19725" skilllevel="65" probability="100" cooldown="40000" priority="4" nextSkillTime="2000"/>
+		<npcskill skillid="19726" skilllevel="65" probability="100" cooldown="40000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="19727" skilllevel="65" probability="100" cooldown="40000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="19728" skilllevel="65" probability="100" cooldown="40000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="19730" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<!-- Cleric -->
+	<npcskills npcid="218547">
+		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="219197">
+		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="218551">
+		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="219190">
+		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="219169">
+		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+	</npcskills>
+	<!-- Assassin -->
+	<npcskills npcid="218545">
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="219195">
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+	</npcskills>
+	<npcskills npcid="219167">
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+	</npcskills>
+	<!-- Fighter -->
+	<npcskills npcid="218544">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<npcskills npcid="219194">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<npcskills npcid="218548">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<npcskills npcid="219187">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<npcskills npcid="219207">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<npcskills npcid="219166">
+		<npcskill skillid="20504" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="5000"/>
+		<npcskill skillid="20505" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20506" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="0"/>
+		<npcskill skillid="20507" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="6000"/>
+	</npcskills>
+	<!-- Mage -->
+	<npcskills npcid="218546">
+		<npcskill skillid="20508" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20511" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20513" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<npcskills npcid="218550">
+		<npcskill skillid="20508" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20511" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20513" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<npcskills npcid="219196">
+		<npcskill skillid="20508" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20511" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20513" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<npcskills npcid="219189">
+		<npcskill skillid="20508" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20511" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20513" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<npcskills npcid="219168">
+		<npcskill skillid="20508" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20511" skilllevel="65" probability="100" cooldown="15000" priority="1"/>
+		<npcskill skillid="20513" skilllevel="65" probability="100" cooldown="35000" nextSkillTime="35000"/>
+	</npcskills>
+	<!-- Assault Leader -->
+	<npcskills npcid="219202">
+		<npcskill skillid="20545" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
+		<npcskill skillid="20546" skilllevel="65" probability="100" cooldown="20000" priority="1"/>
+		<npcskill skillid="20547" skilllevel="65" probability="100" cooldown="20000"/>
+		<npcskill skillid="20544" skilllevel="65" probability="100" cooldown="60000" maxhp="50" priority="3"/>
+		<npcskill skillid="20543" skilllevel="65" probability="100" cooldown="60000" maxhp="10" priority="4"/>
+	</npcskills>
 </npc_skill_templates>
