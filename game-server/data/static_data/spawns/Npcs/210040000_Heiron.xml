@@ -7686,6 +7686,10 @@
 			<spot x="1626.97" y="1553.12" z="108.881" h="113"/>
 			<spot x="1663.08" y="1553.84" z="114.518" h="42"/>
 		</spawn>
+		<!-- Stone Teleport Statue -->
+		<spawn npc_id="730609" respawn_time="295">
+			<spot x="1824.853" y="1600.342" z="127.3549" h="15" static_id="71" />
+		</spawn>
 		<!-- Strange Object -->
 		<spawn npc_id="280603" respawn_time="295">
 			<spot x="189.02" y="1261.11" z="114.056" h="16"/>

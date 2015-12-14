@@ -1271,6 +1271,11 @@
 			<portal_req min_level="41"/>
 		</portal_path>
 	</portal_use>
+	<portal_use npc_id="730609">
+		<portal_path loc_id="2100406" race="ELYOS">
+			<portal_req min_level="41"/>
+		</portal_path>
+	</portal_use>
 	<!-- Statue Of Mau Hero [The Hand Behind The IceClaw] Asmodians Exit-->
 	<portal_use npc_id="730053">
 		<portal_path loc_id="2200203" race="ASMODIANS">
