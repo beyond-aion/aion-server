@@ -13,7 +13,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235318" handler="ATTACKER">
-					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+					<spot x="809.0790" y="626.8760" z="275.5" h="75"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -100,7 +100,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235312" handler="ATTACKER">
-					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+					<spot x="809.0790" y="626.8760" z="275.5" h="75"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -187,7 +187,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235313" handler="ATTACKER">
-					<spot x="808.63086" y="626.49109" z="276.5" h="75"/>
+					<spot x="809.0790" y="626.8760" z="275.5" h="75"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -227,7 +227,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235234" handler="ATTACKER">
-					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+					<spot x="536.1101" y="583.8931" z="265.3750" h="10"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -311,7 +311,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235247" handler="ATTACKER">
-					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+					<spot x="536.1101" y="583.8931" z="265.3750" h="10"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -391,7 +391,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235223" handler="ATTACKER">
-					<spot x="542.16302" y="1551.3583" z="265.375" h="90"/>
+					<spot x="536.1101" y="583.8931" z="265.3750" h="10"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -423,7 +423,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235238" handler="ATTACKER">
-					<spot x="378.05429" y="1002.6058" z="248.4784"/>
+					<spot x="376.0106" y="1000.015" z="248.3759" h="21"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -524,7 +524,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235251" handler="ATTACKER">
-					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+					<spot x="376.0106" y="1000.015" z="248.3759" h="21"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -625,7 +625,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235227" handler="ATTACKER">
-					<spot x="376.8368" y="1002.311" z="248.4784" h="81"/>
+					<spot x="376.0106" y="1000.015" z="248.3759" h="21"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -665,7 +665,7 @@
 				</spawn>
 				<!-- Guardian Blademaster -->
 				<spawn npc_id="235242" handler="ATTACKER">
-					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+					<spot x="519.3566" y="1170.219" z="277.4935" h="30"/>
 				</spawn>
 				<!-- Guardian Elite Templar -->
 				<spawn npc_id="235190" handler="SENTINEL" respawn_time="295">
@@ -769,7 +769,7 @@
 				</spawn>
 				<!-- Archon Thunderstrike -->
 				<spawn npc_id="235255" handler="ATTACKER">
-					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+					<spot x="519.3566" y="1170.219" z="277.4935" h="30"/>
 				</spawn>
 				<!-- Archon Elite Knight -->
 				<spawn npc_id="235202" handler="SENTINEL" respawn_time="295">
@@ -873,7 +873,7 @@
 				</spawn>
 				<!-- Drakan Blademaster -->
 				<spawn npc_id="235231" handler="ATTACKER">
-					<spot x="519.20374" y="1170.8458" z="277.4935" h="60"/>
+					<spot x="519.3566" y="1170.219" z="277.4935" h="30"/>
 				</spawn>
 				<!-- Sheban Elite Scaleguard -->
 				<spawn npc_id="235178" handler="SENTINEL" respawn_time="295">
@@ -916,7 +916,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235318" handler="ATTACKER">
-					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+					<spot x="891.4230" y="1864.828" z="229.5361" h="15"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -1007,7 +1007,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235312" handler="ATTACKER">
-					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+					<spot x="891.4230" y="1864.828" z="229.5361" h="15"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -1098,7 +1098,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235313" handler="ATTACKER">
-					<spot x="893.7803" y="1866.289" z="229.52" h="75"/>
+					<spot x="891.4230" y="1864.828" z="229.5361" h="15"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -1138,7 +1138,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235268" handler="ATTACKER">
-					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+					<spot x="542.7355" y="1552.493" z="234.625" h="83"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -1232,7 +1232,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235262" handler="ATTACKER">
-					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+					<spot x="542.7355" y="1552.493" z="234.625" h="83"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -1326,7 +1326,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235263" handler="ATTACKER">
-					<spot x="542.0028" y="1550.562" z="234.625" h="21"/>
+					<spot x="542.7355" y="1552.493" z="234.625" h="83"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -1366,7 +1366,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235288" handler="ATTACKER">
-					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+					<spot x="1909.457" y="813.1184" z="237.8750"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -1453,7 +1453,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235301" handler="ATTACKER">
-					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+					<spot x="1909.457" y="813.1184" z="237.8750"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -1540,7 +1540,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235277" handler="ATTACKER">
-					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+					<spot x="1909.457" y="813.1184" z="237.8750"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -1580,7 +1580,7 @@
 				</spawn>
 				<!-- Guardian Blademaster -->
 				<spawn npc_id="235292" handler="ATTACKER">
-					<spot x="1401.609" y="852.7" z="259.5403"/>
+					<spot x="1401.075" y="849.9788" z="259.5404" h="28"/>
 				</spawn>
 				<!-- Guardian Elite Templar -->
 				<spawn npc_id="235190" handler="SENTINEL" respawn_time="295">
@@ -1687,7 +1687,7 @@
 				</spawn>
 				<!-- Archon Thunderstrike -->
 				<spawn npc_id="235305" handler="ATTACKER">
-					<spot x="1401.609" y="852.7" z="259.5403"/>
+					<spot x="1401.075" y="849.9788" z="259.5404" h="28"/>
 				</spawn>
 				<!-- Archon Elite Knight -->
 				<spawn npc_id="235202" handler="SENTINEL" respawn_time="295">
@@ -1794,7 +1794,7 @@
 				</spawn>
 				<!-- Drakan Blademaster -->
 				<spawn npc_id="235281" handler="ATTACKER">
-					<spot x="1401.609" y="852.7" z="259.5403"/>
+					<spot x="1401.075" y="849.9788" z="259.5404" h="28"/>
 				</spawn>
 				<!-- Sheban Elite Scaleguard -->
 				<spawn npc_id="235178" handler="SENTINEL" respawn_time="295">
@@ -1840,7 +1840,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235284" handler="ATTACKER">
-					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+					<spot x="1909.270" y="813.6143" z="237.8750" h="115"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -1918,7 +1918,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235297" handler="ATTACKER">
-					<spot x="1627.852" y="1559.819" z="247.8637" h="75"/>
+					<spot x="1909.270" y="813.6143" z="237.8750" h="115"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -2000,7 +2000,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235273" handler="ATTACKER">
-					<spot x="1912.038" y="813.0278" z="237.875" h="63"/>
+					<spot x="1909.270" y="813.6143" z="237.8750" h="115"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -2032,7 +2032,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235318" handler="ATTACKER">
-					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+					<spot x="1165.1284" y="246.3990" z="239.125" h="72"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -2122,7 +2122,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235312" handler="ATTACKER">
-					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+					<spot x="1165.1284" y="246.3990" z="239.125" h="72"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -2216,7 +2216,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235313" handler="ATTACKER">
-					<spot x="1162.95" y="245.0622" z="239.125" h="15"/>
+					<spot x="1165.1284" y="246.3990" z="239.125" h="72"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -2256,7 +2256,7 @@
 				</spawn>
 				<!-- Guardian Windblade -->
 				<spawn npc_id="235318" handler="ATTACKER">
-					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+					<spot x="1677.6266" y="238.5763" z="251.750" h="113"/>
 				</spawn>
 				<!-- Guardian Templar -->
 				<spawn npc_id="235184" handler="SENTINEL" respawn_time="295">
@@ -2350,7 +2350,7 @@
 				</spawn>
 				<!-- Archon Quickblade -->
 				<spawn npc_id="235312" handler="ATTACKER">
-					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+					<spot x="1677.6266" y="238.5763" z="251.750" h="113"/>
 				</spawn>
 				<!-- Archon Knight -->
 				<spawn npc_id="235196" handler="SENTINEL" respawn_time="295">
@@ -2444,7 +2444,7 @@
 				</spawn>
 				<!-- Drakan Spiralblade -->
 				<spawn npc_id="235313" handler="ATTACKER">
-					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
+					<spot x="1677.6266" y="238.5763" z="251.750" h="113"/>
 				</spawn>
 				<!-- Sheban Scaleguard -->
 				<spawn npc_id="235172" handler="SENTINEL" respawn_time="295">
@@ -2710,7 +2710,7 @@
 				</spawn>
 				<!-- Archon Thunderstrike -->
 				<spawn npc_id="235255" handler="ATTACKER">
-					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+					<spot x="953.9714" y="1040.153" z="334.9939" h="76"/>
 				</spawn>
 				<!-- Guardian Elite Templar -->
 				<spawn npc_id="235190" handler="SENTINEL" respawn_time="295">
@@ -2843,7 +2843,7 @@
 				</spawn>
 				<!-- Archon Thunderstrike -->
 				<spawn npc_id="235255" handler="ATTACKER">
-					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
+					<spot x="953.9714" y="1040.153" z="334.9939" h="76"/>
 				</spawn>
 				<!-- Archon Elite Knight -->
 				<spawn npc_id="235202" handler="SENTINEL" respawn_time="295">
@@ -2975,13 +2975,9 @@
 				<spawn npc_id="235145" handler="BOSS">
 					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
 				</spawn>
-				<!-- Archon Thunderstrike
-				<spawn npc_id="235255" handler="ATTACKER">
-					<spot x="952.5361" y="1038.002" z="334.9939" h="45"/>
-				</spawn> -->
 				<!-- Drakan Elite Raider -->
 				<spawn npc_id="235321" handler="ATTACKER">
-					<spot x="951.1838" y="1037.079" z="335.0511" h="15"/>
+					<spot x="953.9714" y="1040.153" z="334.9939" h="76"/>
 				</spawn>
 				<!-- Sheban Elite Scaleguard -->
 				<spawn npc_id="235178" handler="SENTINEL" respawn_time="295">
