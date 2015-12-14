@@ -39,6 +39,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Ritsu
+ * @modified Estrayl
  */
 @InstanceID(301310000)
 public class IdgelDomeInstance extends GeneralInstanceHandler {
@@ -47,10 +48,10 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	private Map<Integer, StaticDoor> doors;
 	private long instanceTime;
 	private Future<?> instanceTask;
-	private Future<?> timeCheckTask;
 	private Future<?> spawnChestTask;
 	private Future<?> spawnBossTask;
 	private boolean isInstanceDestroyed = false;
+	private boolean isBossKilled = false;
 
 	private void addPlayerToReward(Player player) {
 		idgelDomeReward.addPlayerReward(new IdgelDomePlayerReward(player.getObjectId(), player.getRace()));
@@ -62,9 +63,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!containPlayer(player.getObjectId())) {
+		if (!containPlayer(player.getObjectId()))
 			addPlayerToReward(player);
-		}
+
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 3, player.getObjectId()), idgelDomeReward, getTime()));
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 6, player.getObjectId()), idgelDomeReward,
 			getTime()));
@@ -79,8 +80,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				openFirstDoors();
 				idgelDomeReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
 				sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 6, 0), idgelDomeReward, getTime()));
-				spawnChestTask();
-				bossSpawn();
+				scheduleChestSpawn();
+				scheduleBossSpawn();
 			}
 
 		}, 120000);
@@ -94,7 +95,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		}, 1320000);
 	}
 
-	private void spawnChestTask() {
+	private void scheduleChestSpawn() {
 		spawnChestTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
@@ -105,7 +106,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		}, 0, 300000);
 	}
 
-	private void bossSpawn() {
+	private void scheduleBossSpawn() {
 		spawnBossTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -118,21 +119,15 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	}
 
 	public void stopInstance() {
-		if (instanceTask != null && !instanceTask.isDone()) {
+		if (instanceTask != null && !instanceTask.isDone())
 			instanceTask.cancel(true);
-		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
-		if (spawnChestTask != null && !spawnChestTask.isDone()) {
+		if (spawnChestTask != null && !spawnChestTask.isDone())
 			spawnChestTask.cancel(true);
-		}
-		if (spawnBossTask != null && !spawnBossTask.isDone()) {
+		if (spawnBossTask != null && !spawnBossTask.isDone())
 			spawnBossTask.cancel(true);
-		}
-		if (idgelDomeReward.isRewarded()) {
+		if (idgelDomeReward.isRewarded())
 			return;
-		}
+
 		idgelDomeReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = idgelDomeReward.getWinningRace();
 		instance.doOnAllPlayers(new Visitor<Player>() {
@@ -156,7 +151,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
 				GloryPointsService.addGp(player, reward.getGloryPoints());
 				if (reward.getIdgelDomeBox() > 0) {
-					ItemService.addItem(player, 188053030, reward.getIdgelDomeBox());
+					ItemService.addItem(player, 188053030, 1);
+					if (isBossKilled) //TODO: Show as additional reward (packet stuff)
+						ItemService.addItem(player, 188053032, 1);
 				}
 			}
 
@@ -170,9 +167,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (!isInstanceDestroyed) {
 					for (Player player : instance.getPlayersInside()) {
-						if (PlayerActions.isAlreadyDead(player)) {
+						if (PlayerActions.isAlreadyDead(player))
 							PlayerReviveService.duelRevive(player);
-						}
 						onExitInstance(player);
 					}
 					AutoGroupService.getInstance().unRegisterInstance(instanceId);
@@ -190,41 +186,34 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-		if (instanceTask != null && !instanceTask.isDone()) {
+		if (instanceTask != null && !instanceTask.isDone())
 			instanceTask.cancel(true);
-		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
-		if (spawnChestTask != null && !spawnChestTask.isDone()) {
+		if (spawnChestTask != null && !spawnChestTask.isDone())
 			spawnChestTask.cancel(true);
-		}
-		if (spawnBossTask != null && !spawnBossTask.isDone()) {
+		if (spawnBossTask != null && !spawnBossTask.isDone())
 			spawnBossTask.cancel(true);
-		}
 	}
 
 	private void updatePoints(int points, Race race, boolean check, int nameId, Player player) {
-		if (check && !idgelDomeReward.isStartProgress()) {
+		if (check && !idgelDomeReward.isStartProgress())
 			return;
-		}
-		if (nameId != 0) {
+
+		if (nameId != 0)
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
-		}
+			
 		idgelDomeReward.addPointsByRace(race, points);
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 10, race.equals(Race.ELYOS) ? 0 : 1), idgelDomeReward, getTime()));
 		int diff = Math.abs(idgelDomeReward.getAsmodiansPoint().intValue() - idgelDomeReward.getElyosPoints().intValue());
-		if (diff >= 30000) {
+		if (diff >= 30000)
 			stopInstance();
-		}
 	}
 
 	@Override
 	public void onDie(Npc npc) {
 		Player player = npc.getAggroList().getMostPlayerDamage();
-		if (player == null) {
+		if (player == null)
 			return;
-		}
+		
 		int points = 0;
 		switch (npc.getNpcId()) {
 			case 234186:
@@ -239,12 +228,12 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				break;
 			case 234190:
 				points = 6000;
+				isBossKilled = true;
 				stopInstance();
 				break;
 		}
-		if (points > 0) {
+		if (points > 0)
 			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
-		}
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
@@ -304,9 +293,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			if (lastAttacker.getRace() != player.getRace()) {
 				int killPoints = 200;
 				if (idgelDomeReward.isStartProgress() && getTime() >= 600000) // After 10 minutes increase reward points
-				{
 					killPoints = 300; // TODO: Check on retail
-				}
+
 				updatePoints(killPoints, lastAttacker.getRace(), true, 0, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
 				idgelDomeReward.getKillsByRace(lastAttacker.getRace()).increment();
