@@ -316,7 +316,7 @@ public class PlayerController extends CreatureController<Player> {
 		// High ranked kill announce
 		AbyssRank ar = player.getAbyssRank();
 		if (AbyssService.isOnPvpMap(player) && ar != null) {
-			if (ar.getRank().getId() >= 14)
+			if (ar.getRank().getId() >= 9)
 				AbyssService.rankedKillAnnounce(player);
 		}
 
