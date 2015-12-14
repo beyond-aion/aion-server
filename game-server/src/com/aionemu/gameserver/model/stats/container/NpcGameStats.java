@@ -137,7 +137,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				mres *= 0.7f;
 			else if (level >= 25 && level < 50)
 				mres *= 0.8f;
-			else if (level >= 50 && level < 55)
+			else
 				mres *= 0.9f;
 		}
 		return getStat(StatEnum.MAGICAL_RESIST, mres);
