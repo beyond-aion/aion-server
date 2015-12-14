@@ -322,7 +322,7 @@ public class AttackUtil {
 				case MAGICAL:
 					ht = HitType.MAHIT;
 					baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
-					if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
+					if (effector instanceof Npc || baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
 						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 					break;
 				default:
@@ -340,7 +340,7 @@ public class AttackUtil {
 					break;
 				case PERCENT:
 					if (effector instanceof Npc)
-						damage = Math.round(baseAttack * skillDamage / 100f);
+						damage += Math.round(baseAttack * skillDamage / 100f);
 					else
 						damage += baseAttack * skillDamage / 100f;
 					break;
