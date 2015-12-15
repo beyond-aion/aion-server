@@ -64,6 +64,8 @@ public class _50008SoloriusShugoSlackers extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 219290) {
 				final Npc npc = (Npc) env.getVisibleObject();
+				if (!npc.isSpawned())
+					return false;
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 831036);
 				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {

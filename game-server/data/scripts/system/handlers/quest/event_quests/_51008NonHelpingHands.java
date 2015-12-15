@@ -64,6 +64,8 @@ public class _51008NonHelpingHands extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 219291) {
 				final Npc npc = (Npc) env.getVisibleObject();
+				if (!npc.isSpawned())
+					return false;
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 831037);
 				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {
