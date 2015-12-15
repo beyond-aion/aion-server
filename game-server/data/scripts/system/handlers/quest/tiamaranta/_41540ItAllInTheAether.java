@@ -53,14 +53,7 @@ public class _41540ItAllInTheAether extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205954) {
-				switch (dialog) {
-					case USE_OBJECT: {
-						return sendQuestDialog(env, 10002);
-					}
-					default: {
-						return sendQuestEndDialog(env);
-					}
-				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

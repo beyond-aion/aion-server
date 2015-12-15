@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305" name="Arrogant Darok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101901087" name="Darok's Aethercannon"/>
+			<gd_item id="101801176" name="Darok's Pistol"/>
+			<gd_item id="102101010" name="Darok's Cipher-Blade"/>
+			<gd_item id="101701326" name="Darok's Bow"/>
+			<gd_item id="100201461" name="Darok's Dagger"/>
+			<gd_item id="100901316" name="Darok's Greatsword"/>
+			<gd_item id="100501275" name="Darok's Orb"/>
+			<gd_item id="102001204" name="Darok's Harp"/>
+			<gd_item id="100001690" name="Darok's Sword"/>
+			<gd_item id="101501312" name="Darok's Staff"/>
+			<gd_item id="101301221" name="Darok's Polearm"/>
+			<gd_item id="100101289" name="Darok's Mace"/>
+			<gd_item id="100601385" name="Darok's Spellbook"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234306" name="Moaning Throil"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101556" name="Throil's Pauldrons"/>
+			<gd_item id="112301648" name="Throil's Shoulderguards"/>
+			<gd_item id="112501603" name="Throil's Spaulders"/>
+			<gd_item id="112601519" name="Throil's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234307" name="Grieving Minorda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101606" name="Minorda's Gloves"/>
+			<gd_item id="111301709" name="Minorda's Vambrace"/>
+			<gd_item id="111501664" name="Minorda's Handguards"/>
+			<gd_item id="111601537" name="Minorda's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234310" name="Magma Belcher Buldon"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101786" name="Buldon's Tunic"/>
+			<gd_item id="110301771" name="Buldon's Jerkin"/>
+			<gd_item id="110551105" name="Buldon's Hauberk"/>
+			<gd_item id="110601574" name="Buldon's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234306" name="Moaning Throil"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101785" name="Throil's Tunic"/>
+			<gd_item id="110301770" name="Throil's Jerkin"/>
+			<gd_item id="110551104" name="Throil's Hauberk"/>
+			<gd_item id="110601573" name="Throil's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234307" name="Grieving Minorda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101617" name="Minorda's Leggings"/>
+			<gd_item id="113301739" name="Minorda's Breeches"/>
+			<gd_item id="113501681" name="Minorda's Chausses"/>
+			<gd_item id="113601519" name="Minorda’s Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234310" name="Magma Belcher Buldon"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101651" name="Buldon's Shoes"/>
+			<gd_item id="114301776" name="Buldon's Boots"/>
+			<gd_item id="114501691" name="Buldon's Brogans"/>
+			<gd_item id="114601526" name="Buldon's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="600090000" name="Kaldor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305" name="Arrogant Darok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125004021" name="Darok's Mask"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

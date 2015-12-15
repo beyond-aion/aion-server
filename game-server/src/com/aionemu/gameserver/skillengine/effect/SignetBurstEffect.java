@@ -72,4 +72,22 @@ public class SignetBurstEffect extends DamageEffect {
 			}
 		}
 	}
+
+	
+	/**
+	 * @return the signetlvl
+	 */
+	public int getSignetlvl() {
+		return signetlvl;
+	}
+
+	
+	/**
+	 * @return the signet
+	 */
+	public String getSignet() {
+		return signet;
+	}
+	
+	
 }

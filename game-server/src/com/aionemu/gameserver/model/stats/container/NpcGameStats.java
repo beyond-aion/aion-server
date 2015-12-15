@@ -23,6 +23,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	private long lastAttackedTime = 0;
 	private long nextAttackTime = 0;
 	private long lastSkillTime = 0;
+	private long nextSkillTime = 0;
 	private long fightStartingTime = 0;
 	private int cachedState;
 	private AISubState cachedSubState;
@@ -341,12 +342,20 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	// only use skills after a minimum cooldown of 3 to 9 seconds
 	// TODO: Check wether this is a suitable time or not
 	public boolean canUseNextSkill() {
-		if (getLastSkillTimeDelta() >= 6 + Rnd.get(-3, 3))
-			return true;
-		else
-			return false;
+		if (nextSkillTime < 0) {
+			if (getLastSkillTimeDelta() >= 6 + Rnd.get(-3, 3))
+				return true;
+		} else {
+			if (System.currentTimeMillis() >= lastSkillTime + nextSkillTime)
+				return true;
+		}
+		return false;
 	}
 
+	public void setNextSkillTime(int nextSkillTime) {
+		this.nextSkillTime = nextSkillTime;
+	}
+	
 	@Override
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));

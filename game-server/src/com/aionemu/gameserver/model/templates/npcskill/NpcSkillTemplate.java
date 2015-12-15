@@ -3,11 +3,15 @@ package com.aionemu.gameserver.model.templates.npcskill;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author AionChs Master, nrg
- * @modified Yeats
+ * @reworked Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "npcskill")
@@ -37,6 +41,11 @@ public class NpcSkillTemplate {
 	protected boolean useinspawned = false;
 	@XmlAttribute(name = "priority")
 	protected int priority = 0;
+	@XmlAttribute(name = "nextSkillTime")
+	protected int nextSkillTime = -1; //-1 = random time between 3s and 9s
+	@XmlElement(name = "cond")
+	protected NpcSkillConditionTemplate conditionTemplate = null;
+	
 
 	/**
 	 * @return the id
@@ -117,7 +126,35 @@ public class NpcSkillTemplate {
 		return useinspawned;
 	}
 	
+	/**
+	 * @return priority
+	 */
 	public int getPriority() {
 		return priority;
 	}
+
+	/**
+	 * @return the conditionTemplate
+	 */
+	public NpcSkillConditionTemplate getConditionTemplate() {
+		return conditionTemplate;
+	}
+	
+	/**
+	 * @return SkillTemplate
+	 */
+	public SkillTemplate getSkillTemplate() {
+		if (skillid <= 0) {
+			return null;
+		}
+		return DataManager.SKILL_DATA.getSkillTemplate(skillid);
+	}
+
+	/**
+	 * @return nextSkillTime
+	 */
+	public int getNextSkillTime() {
+		return nextSkillTime;
+	}
+	
 }

@@ -89,6 +89,10 @@ public class TribeRelationService {
 	}
 
 	public static boolean isSupport(Creature creature1, Creature creature2) {
+		if (creature1.getTribe() == creature2.getTribe() || creature1.getBaseTribe() == creature2.getTribe()
+			|| creature1.getTribe() == creature2.getBaseTribe() || creature1.getBaseTribe() == creature2.getBaseTribe()) {
+			return true;
+		}
 		switch (creature1.getBaseTribe()) {
 			case GUARD_DARK:
 				switch (creature2.getBaseTribe()) {

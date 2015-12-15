@@ -30,6 +30,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.knownlist.Visitor;
@@ -318,17 +319,24 @@ public class AttackUtil {
 		HitType ht = HitType.PHHIT;
 		float damageMultiplier = 0;
 		if (!noReduce) {
-			switch (effect.getSkillType()) {
-				case MAGICAL:
-					ht = HitType.MAHIT;
-					baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
-					if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
-						baseAttack = 1;
-					break;
-				default:
-					baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-					damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
-					break;
+			if (effector instanceof Npc) {
+				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
+				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+				//should we calculate damage always?
+				damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
+			} else {			
+				switch (effect.getSkillType()) {
+					case MAGICAL:
+						ht = HitType.MAHIT;
+						baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
+						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
+							baseAttack = 1;//back to 1, till we've done some tests on official servers
+						break;
+					default:
+						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+						damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
+						break;
+				}
 			}
 		}
 
@@ -339,10 +347,7 @@ public class AttackUtil {
 					damage += skillDamage;
 					break;
 				case PERCENT:
-					if (effector instanceof Npc)
-						damage = Math.round(baseAttack * skillDamage / 100f);
-					else
-						damage += baseAttack * skillDamage / 100f;
+					damage += Math.round(baseAttack * skillDamage / 100f);
 					break;
 			}
 		}

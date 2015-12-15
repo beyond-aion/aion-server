@@ -16,6 +16,9 @@
 		<xs:attribute name="npcid" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="NpcSkillTemplate">
+		<xs:sequence>
+			<xs:element name="cond" type="NpcSkillConditionTemplate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
 		<xs:attribute name="id" type="xs:int"/>
 		<xs:attribute name="skillid" type="xs:int"/>
 		<xs:attribute name="skilllevel" type="xs:int"/>
@@ -28,6 +31,12 @@
         <xs:attribute name="cooldown" type="xs:int"/>
 		<xs:attribute name="useinspawned" type="xs:boolean"/>
 		<xs:attribute name="priority" type="xs:int"/>
+		<xs:attribute name="nextSkillTime" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="NpcSkillConditionTemplate">
+		<xs:attribute name="condType" type="ConditionType"/>
+		<xs:attribute name="range" type="xs:int"/>
+		<xs:attribute name="hpBelow" type="xs:int"/>
 	</xs:complexType>
         <xs:simpleType name="ConjunctionType">
             <xs:restriction base="xs:string">
@@ -35,5 +44,30 @@
                 <xs:enumeration value="OR"/>
                 <xs:enumeration value="XOR"/>
             </xs:restriction>
+        </xs:simpleType>
+        <xs:simpleType name="ConditionType">
+        	<xs:restriction base="xs:string">
+        		<xs:enumeration value="NONE"/>
+        		<xs:enumeration value="SELECT_RANDOM_ENEMY"/>
+        		<xs:enumeration value="SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED"/>
+        		<xs:enumeration value="HELP_FRIEND"/>
+        		<xs:enumeration value="HELP_SELF"/>
+        		<xs:enumeration value="TARGET_IS_IN_ANY_STUN"/>
+        		<xs:enumeration value="TARGET_IS_IN_STUMBLE"/>
+        		<xs:enumeration value="TARGET_IS_STUNNED"/>
+        		<xs:enumeration value="TARGET_IS_SLEEPING"/>
+        		<xs:enumeration value="TARGET_IS_AETHERS_HOLD"/>
+        		<xs:enumeration value="TARGET_IS_POISONED"/>
+        		<xs:enumeration value="TARGET_IS_BLEEDING"/>
+        		<xs:enumeration value="TARGET_IS_GATE"/>
+        		<xs:enumeration value="TARGET_IS_PLAYER"/>
+        		<xs:enumeration value="TARGET_IS_PHYSICAL_CLASS"/>
+        		<xs:enumeration value="TARGET_IS_MAGICAL_CLASS"/>
+        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET"/>
+        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_II"/>
+        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_III"/>
+        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV"/>
+        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
+        	</xs:restriction>
         </xs:simpleType>
 </xs:schema>
