@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This class is only a container for Stats. Created on: 04.08.2009 14:59:10
  * 
  * @author Aquanox
+ * @modified Estrayl
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "stats_template")
@@ -26,16 +27,32 @@ public abstract class StatsTemplate {
 	private int block;
 	@XmlAttribute(name = "parry")
 	private int parry;
-
-	@XmlAttribute(name = "main_hand_attack")
-	private int mainHandAttack;
-	@XmlAttribute(name = "main_hand_accuracy")
-	private int mainHandAccuracy;
-	@XmlAttribute(name = "main_hand_crit_rate")
-	private int mainHandCritRate;
-
-	@XmlAttribute(name = "magic_accuracy")
-	private int magicAccuracy;
+	@XmlAttribute(name = "pdef")
+	private int pdef;
+	@XmlAttribute(name = "mdef")
+	private int mdef;
+	@XmlAttribute(name = "mresist")
+	private int mresist;
+	@XmlAttribute(name = "msup")
+	private int msup;
+	@XmlAttribute(name = "strike_resist")
+	private int strikeResist;
+	@XmlAttribute(name = "spell_resist")
+	private int spellResist;
+	
+	@XmlAttribute(name = "attack")
+	private int attack;
+	@XmlAttribute(name = "accuracy")
+	private int accuracy;
+	@XmlAttribute(name = "pcrit")
+	private int pcrit;
+	
+	@XmlAttribute(name = "mcrit")
+	private int mcrit;
+	@XmlAttribute(name = "macc")
+	private int macc;
+	@XmlAttribute(name = "mboost")
+	private int magicBoost;
 
 	@XmlElement
 	protected CreatureSpeeds speeds;
@@ -109,24 +126,57 @@ public abstract class StatsTemplate {
 	public void setParry(int parry) {
 		this.parry = parry;
 	}
+	
+	public int getPdef() {
+		return pdef;
+	}
+	
+	public int getMdef() {
+		return mdef;
+	}
+	
+	public int getMresist() {
+		return mresist;
+	}
+	
+	public int getMsup() {
+		return msup;
+	}
+
+	public int getStrikeResist() {
+		return strikeResist;
+	}
+	
+	public int getSpellResist() {
+		return spellResist;
+	}
 
 	/* ======================================= */
 
-	public int getMainHandAttack() {
-		return mainHandAttack;
+	public int getAttack() {
+		return attack;
 	}
 
-	public int getMainHandAccuracy() {
-		return mainHandAccuracy;
+	public int getAccuracy() {
+		return accuracy;
 	}
-
-	public int getMainHandCritRate() {
-		return mainHandCritRate;
+	
+	public int getPcrit() {
+		return pcrit;
 	}
 
 	/* ======================================= */
 
-	public int getMagicAccuracy() {
-		return magicAccuracy;
+	public int getMcrit() {
+		return mcrit;
 	}
+	
+	public int getMacc() {
+		return macc;
+	}
+	
+	public int getMagicBoost() {
+		return magicBoost;
+	}
+	
 }

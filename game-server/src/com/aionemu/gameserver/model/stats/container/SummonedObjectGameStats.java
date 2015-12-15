@@ -43,7 +43,7 @@ public class SummonedObjectGameStats extends NpcGameStats {
 
 	@Override
 	public Stat2 getMainHandMAttack() {
-		int power = owner.getObjectTemplate().getStatsTemplate().getPower();
+		int power = owner.getObjectTemplate().getStatsTemplate().getMagicalAttack();
 		return getStat(StatEnum.MAGICAL_ATTACK, power);
 	}
 

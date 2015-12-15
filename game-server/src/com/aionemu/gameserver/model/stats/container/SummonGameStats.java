@@ -130,7 +130,7 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	@Override
 	public Stat2 getPDef() {
-		return getStat(StatEnum.PHYSICAL_DEFENSE, statsTemplate.getPdefense());
+		return getStat(StatEnum.PHYSICAL_DEFENSE, statsTemplate.getPdef());
 	}
 
 	@Override
@@ -196,17 +196,17 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	@Override
 	public Stat2 getMainHandPAttack() {
-		return getStat(StatEnum.PHYSICAL_ATTACK, statsTemplate.getMainHandAttack());
+		return getStat(StatEnum.PHYSICAL_ATTACK, statsTemplate.getAttack());
 	}
 
 	@Override
 	public Stat2 getMainHandPCritical() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL, statsTemplate.getMainHandCritRate());
+		return getStat(StatEnum.PHYSICAL_CRITICAL, statsTemplate.getPcrit());
 	}
 
 	@Override
 	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, statsTemplate.getMainHandAccuracy());
+		return getStat(StatEnum.PHYSICAL_ACCURACY, statsTemplate.getAccuracy());
 	}
 
 	@Override
@@ -221,7 +221,7 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	@Override
 	public Stat2 getMAccuracy() {
-		return getStat(StatEnum.MAGICAL_ACCURACY, statsTemplate.getMagicAccuracy());
+		return getStat(StatEnum.MAGICAL_ACCURACY, statsTemplate.getMacc());
 	}
 
 	@Override

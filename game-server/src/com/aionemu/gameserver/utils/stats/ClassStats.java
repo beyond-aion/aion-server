@@ -66,7 +66,7 @@ public class ClassStats {
 	 * @param playerClass
 	 * @return int
 	 */
-	public static int getAccuracyFor(PlayerClass playerClass) {
+	public static int getBaseAccuracyFor(PlayerClass playerClass) {
 		return ACCURACY.valueOf(playerClass.toString()).getValue();
 	}
 
@@ -90,7 +90,7 @@ public class ClassStats {
 	 * @param playerClass
 	 * @return int
 	 */
-	public static int getMainHandAttackFor(PlayerClass playerClass) {
+	public static int getAttackFor(PlayerClass playerClass) {
 		return MAIN_HAND_ATTACK.valueOf(playerClass.toString()).getValue();
 	}
 
@@ -98,7 +98,7 @@ public class ClassStats {
 	 * @param playerClass
 	 * @return int
 	 */
-	public static int getMainHandCritRateFor(PlayerClass playerClass) {
+	public static int getCritFor(PlayerClass playerClass) {
 		return MAIN_HAND_CRITRATE.valueOf(playerClass.toString()).getValue();
 	}
 
@@ -106,7 +106,7 @@ public class ClassStats {
 	 * @param playerClass
 	 * @return int
 	 */
-	public static int getMainHandAccuracyFor(PlayerClass playerClass) {
+	public static int getAccuracyFor(PlayerClass playerClass) {
 		return MAIN_HAND_ACCURACY.valueOf(playerClass.toString()).getValue();
 	}
 

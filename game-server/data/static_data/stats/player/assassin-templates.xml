@@ -2,343 +2,343 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="9">
-		<stats_template maxHp="612" maxMp="730" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="204" block="204" parry="204" main_hand_attack="19" main_hand_accuracy="282" main_hand_crit_rate="3" magic_accuracy="128">
+		<stats_template maxHp="612" maxMp="730" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="204" block="204" parry="204" attack="19" accuracy="282" pcrit="3" macc="128">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="10">
-		<stats_template maxHp="670" maxMp="800" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="217" block="217" parry="217" main_hand_attack="19" main_hand_accuracy="290" main_hand_crit_rate="3" magic_accuracy="142">
+		<stats_template maxHp="670" maxMp="800" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="217" block="217" parry="217" attack="19" accuracy="290" pcrit="3" macc="142">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="11">
-		<stats_template maxHp="730" maxMp="870" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="229" block="229" parry="229" main_hand_attack="19" main_hand_accuracy="298" main_hand_crit_rate="3" magic_accuracy="156">
+		<stats_template maxHp="730" maxMp="870" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="229" block="229" parry="229" attack="19" accuracy="298" pcrit="3" macc="156">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="12">
-		<stats_template maxHp="793" maxMp="940" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="241" block="241" parry="241" main_hand_attack="19" main_hand_accuracy="306" main_hand_crit_rate="3" magic_accuracy="171">
+		<stats_template maxHp="793" maxMp="940" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="241" block="241" parry="241" attack="19" accuracy="306" pcrit="3" macc="171">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="13">
-		<stats_template maxHp="858" maxMp="1010" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="254" block="254" parry="254" main_hand_attack="19" main_hand_accuracy="314" main_hand_crit_rate="3" magic_accuracy="185">
+		<stats_template maxHp="858" maxMp="1010" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="254" block="254" parry="254" attack="19" accuracy="314" pcrit="3" macc="185">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="14">
-		<stats_template maxHp="924" maxMp="1080" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="266" block="266" parry="266" main_hand_attack="19" main_hand_accuracy="322" main_hand_crit_rate="3" magic_accuracy="199">
+		<stats_template maxHp="924" maxMp="1080" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="266" block="266" parry="266" attack="19" accuracy="322" pcrit="3" macc="199">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="15">
-		<stats_template maxHp="993" maxMp="1151" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="279" block="279" parry="279" main_hand_attack="19" main_hand_accuracy="330" main_hand_crit_rate="3" magic_accuracy="213">
+		<stats_template maxHp="993" maxMp="1151" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="279" block="279" parry="279" attack="19" accuracy="330" pcrit="3" macc="213">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="16">
-		<stats_template maxHp="1064" maxMp="1221" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="291" block="291" parry="291" main_hand_attack="19" main_hand_accuracy="338" main_hand_crit_rate="3" magic_accuracy="228">
+		<stats_template maxHp="1064" maxMp="1221" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="291" block="291" parry="291" attack="19" accuracy="338" pcrit="3" macc="228">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="17">
-		<stats_template maxHp="1137" maxMp="1291" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="303" block="303" parry="303" main_hand_attack="19" main_hand_accuracy="346" main_hand_crit_rate="3" magic_accuracy="242">
+		<stats_template maxHp="1137" maxMp="1291" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="303" block="303" parry="303" attack="19" accuracy="346" pcrit="3" macc="242">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="18">
-		<stats_template maxHp="1211" maxMp="1361" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="316" block="316" parry="316" main_hand_attack="19" main_hand_accuracy="354" main_hand_crit_rate="3" magic_accuracy="256">
+		<stats_template maxHp="1211" maxMp="1361" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="316" block="316" parry="316" attack="19" accuracy="354" pcrit="3" macc="256">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="19">
-		<stats_template maxHp="1288" maxMp="1431" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="368" block="328" parry="328" main_hand_attack="19" main_hand_accuracy="362" main_hand_crit_rate="3" magic_accuracy="270">
+		<stats_template maxHp="1288" maxMp="1431" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="368" block="328" parry="328" attack="19" accuracy="362" pcrit="3" macc="270">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="20">
-		<stats_template maxHp="1368" maxMp="1502" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="381" block="341" parry="341" main_hand_attack="19" main_hand_accuracy="370" main_hand_crit_rate="3" magic_accuracy="285">
+		<stats_template maxHp="1368" maxMp="1502" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="381" block="341" parry="341" attack="19" accuracy="370" pcrit="3" macc="285">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="21">
-		<stats_template maxHp="1449" maxMp="1572" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="393" block="353" parry="353" main_hand_attack="19" main_hand_accuracy="378" main_hand_crit_rate="3" magic_accuracy="299">
+		<stats_template maxHp="1449" maxMp="1572" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="393" block="353" parry="353" attack="19" accuracy="378" pcrit="3" macc="299">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="22">
-		<stats_template maxHp="1532" maxMp="1642" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="405" block="365" parry="365" main_hand_attack="19" main_hand_accuracy="386" main_hand_crit_rate="3" magic_accuracy="313">
+		<stats_template maxHp="1532" maxMp="1642" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="405" block="365" parry="365" attack="19" accuracy="386" pcrit="3" macc="313">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="23">
-		<stats_template maxHp="1617" maxMp="1712" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="418" block="378" parry="378" main_hand_attack="19" main_hand_accuracy="394" main_hand_crit_rate="3" magic_accuracy="327">
+		<stats_template maxHp="1617" maxMp="1712" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="418" block="378" parry="378" attack="19" accuracy="394" pcrit="3" macc="327">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="24">
-		<stats_template maxHp="1704" maxMp="1782" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="430" block="390" parry="390" main_hand_attack="19" main_hand_accuracy="402" main_hand_crit_rate="3" magic_accuracy="342">
+		<stats_template maxHp="1704" maxMp="1782" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="430" block="390" parry="390" attack="19" accuracy="402" pcrit="3" macc="342">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="25">
-		<stats_template maxHp="1794" maxMp="1853" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="443" block="403" parry="403" main_hand_attack="19" main_hand_accuracy="410" main_hand_crit_rate="53" magic_accuracy="356">
+		<stats_template maxHp="1794" maxMp="1853" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="443" block="403" parry="403" attack="19" accuracy="410" pcrit="53" macc="356">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="26">
-		<stats_template maxHp="1885" maxMp="1923" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="455" block="415" parry="415" main_hand_attack="19" main_hand_accuracy="418" main_hand_crit_rate="53" magic_accuracy="370">
+		<stats_template maxHp="1885" maxMp="1923" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="455" block="415" parry="415" attack="19" accuracy="418" pcrit="53" macc="370">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="27">
-		<stats_template maxHp="1979" maxMp="1993" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="467" block="427" parry="427" main_hand_attack="19" main_hand_accuracy="426" main_hand_crit_rate="53" magic_accuracy="384">
+		<stats_template maxHp="1979" maxMp="1993" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="467" block="427" parry="427" attack="19" accuracy="426" pcrit="53" macc="384">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="28">
-		<stats_template maxHp="2075" maxMp="2063" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="480" block="440" parry="440" main_hand_attack="19" main_hand_accuracy="434" main_hand_crit_rate="53" magic_accuracy="399">
+		<stats_template maxHp="2075" maxMp="2063" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="480" block="440" parry="440" attack="19" accuracy="434" pcrit="53" macc="399">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="29">
-		<stats_template maxHp="2172" maxMp="2134" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="492" block="452" parry="452" main_hand_attack="19" main_hand_accuracy="442" main_hand_crit_rate="53" magic_accuracy="413">
+		<stats_template maxHp="2172" maxMp="2134" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="492" block="452" parry="452" attack="19" accuracy="442" pcrit="53" macc="413">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="30">
-		<stats_template maxHp="2272" maxMp="2204" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="505" block="465" parry="465" main_hand_attack="19" main_hand_accuracy="450" main_hand_crit_rate="53" magic_accuracy="427">
+		<stats_template maxHp="2272" maxMp="2204" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="505" block="465" parry="465" attack="19" accuracy="450" pcrit="53" macc="427">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="31">
-		<stats_template maxHp="2374" maxMp="2274" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="517" block="477" parry="477" main_hand_attack="19" main_hand_accuracy="498" main_hand_crit_rate="53" magic_accuracy="441">
+		<stats_template maxHp="2374" maxMp="2274" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="517" block="477" parry="477" attack="19" accuracy="498" pcrit="53" macc="441">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="32">
-		<stats_template maxHp="2478" maxMp="2345" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="529" block="489" parry="489" main_hand_attack="19" main_hand_accuracy="506" main_hand_crit_rate="53" magic_accuracy="456">
+		<stats_template maxHp="2478" maxMp="2345" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="529" block="489" parry="489" attack="19" accuracy="506" pcrit="53" macc="456">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="33">
-		<stats_template maxHp="2584" maxMp="2415" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="542" block="502" parry="502" main_hand_attack="19" main_hand_accuracy="514" main_hand_crit_rate="53" magic_accuracy="470">
+		<stats_template maxHp="2584" maxMp="2415" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="542" block="502" parry="502" attack="19" accuracy="514" pcrit="53" macc="470">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="34">
-		<stats_template maxHp="2692" maxMp="2485" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="574" block="514" parry="514" main_hand_attack="19" main_hand_accuracy="522" main_hand_crit_rate="53" magic_accuracy="484">
+		<stats_template maxHp="2692" maxMp="2485" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="574" block="514" parry="514" attack="19" accuracy="522" pcrit="53" macc="484">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="35">
-		<stats_template maxHp="2802" maxMp="2556" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="587" block="527" parry="527" main_hand_attack="19" main_hand_accuracy="530" main_hand_crit_rate="53" magic_accuracy="498">
+		<stats_template maxHp="2802" maxMp="2556" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="587" block="527" parry="527" attack="19" accuracy="530" pcrit="53" macc="498">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="36">
-		<stats_template maxHp="2914" maxMp="2626" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="599" block="539" parry="539" main_hand_attack="19" main_hand_accuracy="538" main_hand_crit_rate="53" magic_accuracy="513">
+		<stats_template maxHp="2914" maxMp="2626" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="599" block="539" parry="539" attack="19" accuracy="538" pcrit="53" macc="513">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="37">
-		<stats_template maxHp="3028" maxMp="2696" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="611" block="551" parry="551" main_hand_attack="19" main_hand_accuracy="546" main_hand_crit_rate="53" magic_accuracy="527">
+		<stats_template maxHp="3028" maxMp="2696" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="611" block="551" parry="551" attack="19" accuracy="546" pcrit="53" macc="527">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="38">
-		<stats_template maxHp="3145" maxMp="2767" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="624" block="564" parry="564" main_hand_attack="19" main_hand_accuracy="554" main_hand_crit_rate="53" magic_accuracy="541">
+		<stats_template maxHp="3145" maxMp="2767" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="624" block="564" parry="564" attack="19" accuracy="554" pcrit="53" macc="541">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="39">
-		<stats_template maxHp="3263" maxMp="2837" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="636" block="576" parry="576" main_hand_attack="19" main_hand_accuracy="562" main_hand_crit_rate="53" magic_accuracy="555">
+		<stats_template maxHp="3263" maxMp="2837" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="636" block="576" parry="576" attack="19" accuracy="562" pcrit="53" macc="555">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="40">
-		<stats_template maxHp="3384" maxMp="2908" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="649" block="589" parry="589" main_hand_attack="19" main_hand_accuracy="570" main_hand_crit_rate="78" magic_accuracy="570">
+		<stats_template maxHp="3384" maxMp="2908" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="649" block="589" parry="589" attack="19" accuracy="570" pcrit="78" macc="570">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="41">
-		<stats_template maxHp="3506" maxMp="2978" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="661" block="601" parry="601" main_hand_attack="19" main_hand_accuracy="598" main_hand_crit_rate="78" magic_accuracy="584">
+		<stats_template maxHp="3506" maxMp="2978" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="661" block="601" parry="601" attack="19" accuracy="598" pcrit="78" macc="584">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="42">
-		<stats_template maxHp="3631" maxMp="3048" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="673" block="613" parry="613" main_hand_attack="19" main_hand_accuracy="606" main_hand_crit_rate="78" magic_accuracy="598">
+		<stats_template maxHp="3631" maxMp="3048" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="673" block="613" parry="613" attack="19" accuracy="606" pcrit="78" macc="598">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="43">
-		<stats_template maxHp="3757" maxMp="3119" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="686" block="626" parry="626" main_hand_attack="19" main_hand_accuracy="614" main_hand_crit_rate="78" magic_accuracy="612">
+		<stats_template maxHp="3757" maxMp="3119" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="686" block="626" parry="626" attack="19" accuracy="614" pcrit="78" macc="612">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="44">
-		<stats_template maxHp="3886" maxMp="3189" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="718" block="638" parry="638" main_hand_attack="19" main_hand_accuracy="622" main_hand_crit_rate="78" magic_accuracy="627">
+		<stats_template maxHp="3886" maxMp="3189" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="718" block="638" parry="638" attack="19" accuracy="622" pcrit="78" macc="627">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="45">
-		<stats_template maxHp="4017" maxMp="3260" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="731" block="651" parry="651" main_hand_attack="19" main_hand_accuracy="630" main_hand_crit_rate="78" magic_accuracy="641">
+		<stats_template maxHp="4017" maxMp="3260" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="731" block="651" parry="651" attack="19" accuracy="630" pcrit="78" macc="641">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="46">
-		<stats_template maxHp="4150" maxMp="3330" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="743" block="663" parry="663" main_hand_attack="19" main_hand_accuracy="638" main_hand_crit_rate="78" magic_accuracy="655">
+		<stats_template maxHp="4150" maxMp="3330" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="743" block="663" parry="663" attack="19" accuracy="638" pcrit="78" macc="655">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="47">
-		<stats_template maxHp="4285" maxMp="3401" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="755" block="675" parry="675" main_hand_attack="19" main_hand_accuracy="646" main_hand_crit_rate="78" magic_accuracy="669">
+		<stats_template maxHp="4285" maxMp="3401" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="755" block="675" parry="675" attack="19" accuracy="646" pcrit="78" macc="669">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="48">
-		<stats_template maxHp="4422" maxMp="3471" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="768" block="688" parry="688" main_hand_attack="19" main_hand_accuracy="654" main_hand_crit_rate="78" magic_accuracy="684">
+		<stats_template maxHp="4422" maxMp="3471" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="768" block="688" parry="688" attack="19" accuracy="654" pcrit="78" macc="684">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="49">
-		<stats_template maxHp="4561" maxMp="3542" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="780" block="700" parry="700" main_hand_attack="19" main_hand_accuracy="662" main_hand_crit_rate="103" magic_accuracy="698">
+		<stats_template maxHp="4561" maxMp="3542" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="780" block="700" parry="700" attack="19" accuracy="662" pcrit="103" macc="698">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="50">
-		<stats_template maxHp="4702" maxMp="3612" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="793" block="713" parry="713" main_hand_attack="19" main_hand_accuracy="670" main_hand_crit_rate="103" magic_accuracy="712">
+		<stats_template maxHp="4702" maxMp="3612" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="793" block="713" parry="713" attack="19" accuracy="670" pcrit="103" macc="712">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="51">
-		<stats_template maxHp="4845" maxMp="3683" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="805" block="725" parry="725" main_hand_attack="19" main_hand_accuracy="678" main_hand_crit_rate="103" magic_accuracy="726">
+		<stats_template maxHp="4845" maxMp="3683" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="805" block="725" parry="725" attack="19" accuracy="678" pcrit="103" macc="726">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="52">
-		<stats_template maxHp="4991" maxMp="3753" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="817" block="737" parry="737" main_hand_attack="19" main_hand_accuracy="686" main_hand_crit_rate="103" magic_accuracy="741">
+		<stats_template maxHp="4991" maxMp="3753" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="817" block="737" parry="737" attack="19" accuracy="686" pcrit="103" macc="741">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="53">
-		<stats_template maxHp="5138" maxMp="3824" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="830" block="750" parry="750" main_hand_attack="19" main_hand_accuracy="694" main_hand_crit_rate="103" magic_accuracy="755">
+		<stats_template maxHp="5138" maxMp="3824" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="830" block="750" parry="750" attack="19" accuracy="694" pcrit="103" macc="755">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="54">
-		<stats_template maxHp="5287" maxMp="3894" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="842" block="762" parry="762" main_hand_attack="19" main_hand_accuracy="702" main_hand_crit_rate="103" magic_accuracy="769">
+		<stats_template maxHp="5287" maxMp="3894" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="842" block="762" parry="762" attack="19" accuracy="702" pcrit="103" macc="769">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="55">
-		<stats_template maxHp="5439" maxMp="3965" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="855" block="775" parry="775" main_hand_attack="19" main_hand_accuracy="710" main_hand_crit_rate="103" magic_accuracy="783">
+		<stats_template maxHp="5439" maxMp="3965" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="855" block="775" parry="775" attack="19" accuracy="710" pcrit="103" macc="783">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="56">
-		<stats_template maxHp="5592" maxMp="4035" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="887" block="787" parry="787" main_hand_attack="19" main_hand_accuracy="718" main_hand_crit_rate="103" magic_accuracy="798">
+		<stats_template maxHp="5592" maxMp="4035" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="887" block="787" parry="787" attack="19" accuracy="718" pcrit="103" macc="798">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="57">
-		<stats_template maxHp="5748" maxMp="4106" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="899" block="799" parry="799" main_hand_attack="19" main_hand_accuracy="726" main_hand_crit_rate="103" magic_accuracy="812">
+		<stats_template maxHp="5748" maxMp="4106" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="899" block="799" parry="799" attack="19" accuracy="726" pcrit="103" macc="812">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="58">
-		<stats_template maxHp="5906" maxMp="4176" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="912" block="812" parry="812" main_hand_attack="19" main_hand_accuracy="734" main_hand_crit_rate="103" magic_accuracy="826">
+		<stats_template maxHp="5906" maxMp="4176" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="912" block="812" parry="812" attack="19" accuracy="734" pcrit="103" macc="826">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="59">
-		<stats_template maxHp="6066" maxMp="4247" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="924" block="824" parry="824" main_hand_attack="19" main_hand_accuracy="742" main_hand_crit_rate="103" magic_accuracy="840">
+		<stats_template maxHp="6066" maxMp="4247" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="924" block="824" parry="824" attack="19" accuracy="742" pcrit="103" macc="840">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="60">
-		<stats_template maxHp="6228" maxMp="4318" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="937" block="837" parry="837" main_hand_attack="19" main_hand_accuracy="750" main_hand_crit_rate="128" magic_accuracy="855">
+		<stats_template maxHp="6228" maxMp="4318" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="937" block="837" parry="837" attack="19" accuracy="750" pcrit="128" macc="855">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="61">
-		<stats_template maxHp="6391" maxMp="4388" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="949" block="849" parry="849" main_hand_attack="19" main_hand_accuracy="758" main_hand_crit_rate="128" magic_accuracy="869">
+		<stats_template maxHp="6391" maxMp="4388" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="949" block="849" parry="849" attack="19" accuracy="758" pcrit="128" macc="869">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="62">
-		<stats_template maxHp="6557" maxMp="4459" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="961" block="861" parry="861" main_hand_attack="19" main_hand_accuracy="766" main_hand_crit_rate="128" magic_accuracy="883">
+		<stats_template maxHp="6557" maxMp="4459" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="961" block="861" parry="861" attack="19" accuracy="766" pcrit="128" macc="883">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="63">
-		<stats_template maxHp="6726" maxMp="4529" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="974" block="874" parry="874" main_hand_attack="19" main_hand_accuracy="774" main_hand_crit_rate="128" magic_accuracy="897">
+		<stats_template maxHp="6726" maxMp="4529" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="974" block="874" parry="874" attack="19" accuracy="774" pcrit="128" macc="897">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="64">
-		<stats_template maxHp="6896" maxMp="4600" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="986" block="886" parry="886" main_hand_attack="19" main_hand_accuracy="782" main_hand_crit_rate="128" magic_accuracy="912">
+		<stats_template maxHp="6896" maxMp="4600" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="986" block="886" parry="886" attack="19" accuracy="782" pcrit="128" macc="912">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="ASSASSIN" level="65">
-		<stats_template maxHp="7068" maxMp="4671" power="110" health="100" agility="110" accuracy="110" knowledge="90" will="90" evasion="999" block="899" parry="899" main_hand_attack="19" main_hand_accuracy="790" main_hand_crit_rate="128" magic_accuracy="926">
+		<stats_template maxHp="7068" maxMp="4671" power="110" health="100" agility="110" base_accuracy="110" knowledge="90" will="90" evasion="999" block="899" parry="899" attack="19" accuracy="790" pcrit="128" macc="926">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>

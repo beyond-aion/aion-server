@@ -14,6 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author xavier
+ * @modified Estrayl
  */
 public class NpcGameStats extends CreatureGameStats<Npc> {
 
@@ -66,18 +67,20 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getPCR() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, getStrikeResist());
+		int value = owner.getObjectTemplate().getStatsTemplate().getStrikeResist();
+		if (value == 0)
+			value = getStrikeResist();
+		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, value);
 	}
 
 	@Override
 	public Stat2 getMCR() {
-		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, 0);
+		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getSpellResist());
 	}
 
 	@Override
 	public Stat2 getAllSpeed() {
-		int base = 7500; // TODO current value
-		return getStat(StatEnum.ALLSPEED, base);
+		return getStat(StatEnum.ALLSPEED, 7500); // TODO current value
 	}
 
 	@Override
@@ -145,7 +148,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMBResist() {
-		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, getMsup());
+		int msup = owner.getObjectTemplate().getStatsTemplate().getMsup();
+		if (msup == 0)
+			msup = getMsup();
+		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, msup);
 	}
 
 	@Override
@@ -185,17 +191,20 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getParry() {
-		return getStat(StatEnum.PARRY, getParryAmount());
+		int value = owner.getObjectTemplate().getStatsTemplate().getParry();
+		if (value == 0)
+			value = getParryAmount();
+		return getStat(StatEnum.PARRY, value);
 	}
 
 	@Override
 	public Stat2 getBlock() {
-		return getStat(StatEnum.BLOCK, 0);
+		return getStat(StatEnum.BLOCK, owner.getObjectTemplate().getStatsTemplate().getBlock());
 	}
 
 	@Override
 	public Stat2 getMainHandPAttack() {
-		int atk = owner.getObjectTemplate().getStatsTemplate().getMainHandAttack();
+		int atk = owner.getObjectTemplate().getStatsTemplate().getAttack();
 		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
 			if (owner.getLevel() <= 50)
 				atk *= 0.75f;
@@ -207,35 +216,38 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMainHandPCritical() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL, 10);
+		return getStat(StatEnum.PHYSICAL_CRITICAL, owner.getObjectTemplate().getStatsTemplate().getPcrit());
 	}
 
 	@Override
 	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, getMainHandAccuracy());
+		return getStat(StatEnum.PHYSICAL_ACCURACY, getMainHandAccuracy()); //FIXME: Recalculate template values
 		//return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getMainHandAccuracy());
 	}
 
 	@Override
 	public Stat2 getMainHandMAttack() {
-		int power = owner.getObjectTemplate().getStatsTemplate().getPower();
-		return getStat(StatEnum.MAGICAL_ATTACK, Math.round(owner.getAi2().modifyMattack(power)));
+		int matk = owner.getObjectTemplate().getStatsTemplate().getMagicalAttack();
+		return getStat(StatEnum.MAGICAL_ATTACK, owner.getAi2().modifyMattack(matk));
 	}
 
 	@Override
 	public Stat2 getMBoost() {
-		return getStat(StatEnum.BOOST_MAGICAL_SKILL, 100);
+		return getStat(StatEnum.BOOST_MAGICAL_SKILL, owner.getObjectTemplate().getStatsTemplate().getMagicBoost());
 	}
 
 	@Override
 	public Stat2 getMAccuracy() {
-		int base = owner.getAi2().modifyMaccuracy(Math.round(owner.getObjectTemplate().getStatsTemplate().getAccuracy()));
+		int base = owner.getAi2().modifyMaccuracy(Math.round(owner.getObjectTemplate().getStatsTemplate().getMacc() * 0.8f));
 		return getStat(StatEnum.MAGICAL_ACCURACY, base);
 	}
 
 	@Override
 	public Stat2 getMCritical() {
-		return getStat(StatEnum.MAGICAL_CRITICAL, 50);
+		int value = owner.getObjectTemplate().getStatsTemplate().getMcrit();
+		if (value == 0)
+			value = 50;
+		return getStat(StatEnum.MAGICAL_CRITICAL, value);
 	}
 
 	@Override

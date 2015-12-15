@@ -32,7 +32,7 @@ public class HomingGameStats extends SummonedObjectGameStats {
 	@Override
 	public Stat2 getMainHandMAttack() {
 		Homing homing = (Homing) owner;
-		int power = homing.getObjectTemplate().getStatsTemplate().getPower();
+		int power = homing.getObjectTemplate().getStatsTemplate().getMagicalAttack();
 		SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(homing.getSkillId());
 		int skillLvl = skill.getLvl();
 		if (homing.getName().equals("gryphu"))

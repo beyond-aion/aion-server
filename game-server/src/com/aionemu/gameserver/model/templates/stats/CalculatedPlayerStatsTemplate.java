@@ -15,8 +15,8 @@ public class CalculatedPlayerStatsTemplate extends PlayerStatsTemplate {
 	}
 
 	@Override
-	public int getAccuracy() {
-		return ClassStats.getAccuracyFor(playerClass);
+	public int getBaseAccuracy() {
+		return ClassStats.getBaseAccuracyFor(playerClass);
 	}
 
 	@Override
@@ -56,28 +56,27 @@ public class CalculatedPlayerStatsTemplate extends PlayerStatsTemplate {
 
 	@Override
 	public float getFlySpeed() {
-		// TODO Auto-generated method stub
 		return ClassStats.getFlySpeedFor(playerClass);
 	}
 
 	@Override
-	public int getMagicAccuracy() {
+	public int getMacc() {
 		return ClassStats.getMagicAccuracyFor(playerClass);
 	}
 
 	@Override
-	public int getMainHandAccuracy() {
-		return ClassStats.getMainHandAccuracyFor(playerClass);
+	public int getAccuracy() {
+		return ClassStats.getAccuracyFor(playerClass);
 	}
 
 	@Override
-	public int getMainHandAttack() {
-		return ClassStats.getMainHandAttackFor(playerClass);
+	public int getAttack() {
+		return ClassStats.getAttackFor(playerClass);
 	}
 
 	@Override
-	public int getMainHandCritRate() {
-		return ClassStats.getMainHandCritRateFor(playerClass);
+	public int getPcrit() {
+		return ClassStats.getCritFor(playerClass);
 	}
 
 	@Override

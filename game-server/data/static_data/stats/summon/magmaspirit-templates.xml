@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <summon_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<summon_stats npc_id_dark="201041" level="50">
-		<stats_template maxHp="9701" evasion="0" parry="1293" main_hand_attack="358" main_hand_accuracy="1293" main_hand_crit_rate="50" magic_accuracy="1177" pdefense="1611" mresist="1052" mcrit="9">
+		<stats_template maxHp="9701" evasion="0" parry="1293" attack="358" accuracy="1293" pcrit="50" macc="1177" pdef="1611" mresist="1052" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="51">
-		<stats_template maxHp="9888" evasion="0" parry="1484" main_hand_attack="362" main_hand_accuracy="1484" main_hand_crit_rate="50" magic_accuracy="1368" pdefense="1636" mresist="1070" mcrit="9">
+		<stats_template maxHp="9888" evasion="0" parry="1484" attack="362" accuracy="1484" pcrit="50" macc="1368" pdef="1636" mresist="1070" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<!-- Checked by Tibald on offy -->
 	<summon_stats npc_id_dark="201041" level="52">
-		<stats_template maxHp="10111" evasion="0" parry="1159" main_hand_attack="369" main_hand_accuracy="1159" main_hand_crit_rate="50" magic_accuracy="1043" pdefense="1671" mresist="1086" mcrit="9">
+		<stats_template maxHp="10111" evasion="0" parry="1159" attack="369" accuracy="1159" pcrit="50" macc="1043" pdef="1671" mresist="1086" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="53">
-		<stats_template maxHp="10262" evasion="0" parry="1866" main_hand_attack="370" main_hand_accuracy="1866" main_hand_crit_rate="50" magic_accuracy="1750" pdefense="1676" mresist="1106" mcrit="9">
+		<stats_template maxHp="10262" evasion="0" parry="1866" attack="370" accuracy="1866" pcrit="50" macc="1750" pdef="1676" mresist="1106" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="54">
-		<stats_template maxHp="10449" evasion="0" parry="2057" main_hand_attack="374" main_hand_accuracy="2057" main_hand_crit_rate="50" magic_accuracy="1941" pdefense="1691" mresist="1124" mcrit="9">
+		<stats_template maxHp="10449" evasion="0" parry="2057" attack="374" accuracy="2057" pcrit="50" macc="1941" pdef="1691" mresist="1124" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="55">
-		<stats_template maxHp="10636" evasion="0" parry="2248" main_hand_attack="378" main_hand_accuracy="2248" main_hand_crit_rate="50" magic_accuracy="2132" pdefense="1716" mresist="1142" mcrit="9">
+		<stats_template maxHp="10636" evasion="0" parry="2248" attack="378" accuracy="2248" pcrit="50" macc="2132" pdef="1716" mresist="1142" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="56">
-		<stats_template maxHp="10823" evasion="0" parry="2439" main_hand_attack="382" main_hand_accuracy="2439" main_hand_crit_rate="50" magic_accuracy="2323" pdefense="1731" mresist="1160" mcrit="9">
+		<stats_template maxHp="10823" evasion="0" parry="2439" attack="382" accuracy="2439" pcrit="50" macc="2323" pdef="1731" mresist="1160" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="57">
-		<stats_template maxHp="11010" evasion="0" parry="2630" main_hand_attack="386" main_hand_accuracy="2630" main_hand_crit_rate="50" magic_accuracy="2514" pdefense="1756" mresist="1178" mcrit="9">
+		<stats_template maxHp="11010" evasion="0" parry="2630" attack="386" accuracy="2630" pcrit="50" macc="2514" pdef="1756" mresist="1178" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="58">
-		<stats_template maxHp="11197" evasion="0" parry="2821" main_hand_attack="390" main_hand_accuracy="2821" main_hand_crit_rate="50" magic_accuracy="2705" pdefense="1771" mresist="1196" mcrit="9">
+		<stats_template maxHp="11197" evasion="0" parry="2821" attack="390" accuracy="2821" pcrit="50" macc="2705" pdef="1771" mresist="1196" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201041" level="59">
-		<stats_template maxHp="11384" evasion="0" parry="3012" main_hand_attack="394" main_hand_accuracy="3012" main_hand_crit_rate="50" magic_accuracy="2896" pdefense="1796" mresist="1214" mcrit="9">
+		<stats_template maxHp="11384" evasion="0" parry="3012" attack="394" accuracy="3012" pcrit="50" macc="2896" pdef="1796" mresist="1214" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<!-- Checked by Tibald on offy -->
 	<summon_stats npc_id_dark="201067" level="60">
-		<stats_template maxHp="12564" evasion="0" parry="3203" main_hand_attack="412" main_hand_accuracy="3203" main_hand_crit_rate="50" magic_accuracy="3087" pdefense="1906" mresist="1222" mcrit="9">
+		<stats_template maxHp="12564" evasion="0" parry="3203" attack="412" accuracy="3203" pcrit="50" macc="3087" pdef="1906" mresist="1222" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201067" level="61">
-		<stats_template maxHp="12811" evasion="0" parry="3394" main_hand_attack="417" main_hand_accuracy="3394" main_hand_crit_rate="50" magic_accuracy="3278" pdefense="1941" mresist="1239" mcrit="9">
+		<stats_template maxHp="12811" evasion="0" parry="3394" attack="417" accuracy="3394" pcrit="50" macc="3278" pdef="1941" mresist="1239" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201067" level="62">
-		<stats_template maxHp="13111" evasion="0" parry="3585" main_hand_attack="422" main_hand_accuracy="3585" main_hand_crit_rate="50" magic_accuracy="3469" pdefense="1971" mresist="1256" mcrit="9">
+		<stats_template maxHp="13111" evasion="0" parry="3585" attack="422" accuracy="3585" pcrit="50" macc="3469" pdef="1971" mresist="1256" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201067" level="63">
-		<stats_template maxHp="13411" evasion="0" parry="3776" main_hand_attack="428" main_hand_accuracy="3776" main_hand_crit_rate="50" magic_accuracy="3660" pdefense="2001" mresist="1273" mcrit="9">
+		<stats_template maxHp="13411" evasion="0" parry="3776" attack="428" accuracy="3776" pcrit="50" macc="3660" pdef="2001" mresist="1273" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201067" level="64">
-		<stats_template maxHp="13711" evasion="0" parry="3967" main_hand_attack="433" main_hand_accuracy="3967" main_hand_crit_rate="50" magic_accuracy="3851" pdefense="2031" mresist="1290" mcrit="9">
+		<stats_template maxHp="13711" evasion="0" parry="3967" attack="433" accuracy="3967" pcrit="50" macc="3851" pdef="2031" mresist="1290" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>
 	<summon_stats npc_id_dark="201067" level="65">
-		<stats_template maxHp="14011" evasion="0" parry="4158" main_hand_attack="438" main_hand_accuracy="4158" main_hand_crit_rate="50" magic_accuracy="4042" pdefense="2061" mresist="1307" mcrit="9">
+		<stats_template maxHp="14011" evasion="0" parry="4158" attack="438" accuracy="4158" pcrit="50" macc="4042" pdef="2061" mresist="1307" mcrit="9">
 			<speeds run="10"/>
 		</stats_template>
 	</summon_stats>

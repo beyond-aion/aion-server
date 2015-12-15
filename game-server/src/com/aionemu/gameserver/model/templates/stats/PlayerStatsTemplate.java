@@ -18,7 +18,7 @@ public class PlayerStatsTemplate extends StatsTemplate {
 	private int health;
 	@XmlAttribute(name = "agility")
 	private int agility;
-	@XmlAttribute(name = "accuracy")
+	@XmlAttribute(name = "base_accuracy")
 	private int accuracy;
 	@XmlAttribute(name = "knowledge")
 	private int knowledge;
@@ -37,7 +37,7 @@ public class PlayerStatsTemplate extends StatsTemplate {
 		return agility;
 	}
 
-	public int getAccuracy() {
+	public int getBaseAccuracy() {
 		return accuracy;
 	}
 

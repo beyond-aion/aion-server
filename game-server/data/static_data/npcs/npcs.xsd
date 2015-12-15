@@ -56,11 +56,7 @@
 			<xs:extension base="statsTemplate">
 				<xs:sequence/>
 				<xs:attribute name="maxXp" type="xs:int"/>
-				<xs:attribute name="accuracy" type="xs:int"/>
-				<xs:attribute name="power" type="xs:int"/>
-				<xs:attribute name="mresist" type="xs:int"/>
-				<xs:attribute name="mcrit" type="xs:int"/>
-				<xs:attribute name="pdef" type="xs:int"/>
+				<xs:attribute name="matk" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

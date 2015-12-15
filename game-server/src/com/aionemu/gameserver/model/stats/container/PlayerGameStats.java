@@ -317,7 +317,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	@Override
 	public Stat2 getMainHandPAccuracy() {
 		PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
-		int base = pst.getMainHandAccuracy();
+		int base = pst.getAccuracy();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
@@ -334,7 +334,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			offHandWeapon = null;
 		if (offHandWeapon != null && offHandWeapon.getItemTemplate().isWeapon()) {
 			PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
-			int base = pst.getMainHandAccuracy();
+			int base = pst.getAccuracy();
 			base += offHandWeapon.getItemTemplate().getWeaponStats().getPhysicalAccuracy();
 			return getStat(StatEnum.PHYSICAL_ACCURACY, base);
 		}
@@ -360,7 +360,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	@Override
 	public Stat2 getMAccuracy() {
 		PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
-		int base = pst.getMagicAccuracy();
+		int base = pst.getMacc();
 		Item mainHandWeapon = owner.getEquipment().getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			base += mainHandWeapon.getItemTemplate().getWeaponStats().getMagicalAccuracy();

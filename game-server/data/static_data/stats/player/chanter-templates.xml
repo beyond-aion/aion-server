@@ -2,343 +2,343 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="9">
-		<stats_template maxHp="630" maxMp="1152" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="142" block="142" parry="142" main_hand_attack="19" main_hand_accuracy="242" main_hand_crit_rate="1" magic_accuracy="128">
+		<stats_template maxHp="630" maxMp="1152" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="142" block="142" parry="142" attack="19" accuracy="242" pcrit="1" macc="128">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="10">
-		<stats_template maxHp="688" maxMp="1257" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="155" block="155" parry="155" main_hand_attack="19" main_hand_accuracy="250" main_hand_crit_rate="1" magic_accuracy="142">
+		<stats_template maxHp="688" maxMp="1257" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="155" block="155" parry="155" attack="19" accuracy="250" pcrit="1" macc="142">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="11">
-		<stats_template maxHp="748" maxMp="1362" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="167" block="167" parry="167" main_hand_attack="19" main_hand_accuracy="258" main_hand_crit_rate="1" magic_accuracy="156">
+		<stats_template maxHp="748" maxMp="1362" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="167" block="167" parry="167" attack="19" accuracy="258" pcrit="1" macc="156">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="12">
-		<stats_template maxHp="811" maxMp="1468" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="179" block="179" parry="179" main_hand_attack="19" main_hand_accuracy="266" main_hand_crit_rate="1" magic_accuracy="171">
+		<stats_template maxHp="811" maxMp="1468" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="179" block="179" parry="179" attack="19" accuracy="266" pcrit="1" macc="171">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="13">
-		<stats_template maxHp="876" maxMp="1573" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="192" block="192" parry="192" main_hand_attack="19" main_hand_accuracy="274" main_hand_crit_rate="1" magic_accuracy="185">
+		<stats_template maxHp="876" maxMp="1573" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="192" block="192" parry="192" attack="19" accuracy="274" pcrit="1" macc="185">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="14">
-		<stats_template maxHp="942" maxMp="1678" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="204" block="204" parry="204" main_hand_attack="19" main_hand_accuracy="282" main_hand_crit_rate="1" magic_accuracy="199">
+		<stats_template maxHp="942" maxMp="1678" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="204" block="204" parry="204" attack="19" accuracy="282" pcrit="1" macc="199">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="15">
-		<stats_template maxHp="1011" maxMp="1783" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="217" block="217" parry="217" main_hand_attack="19" main_hand_accuracy="290" main_hand_crit_rate="1" magic_accuracy="213">
+		<stats_template maxHp="1011" maxMp="1783" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="217" block="217" parry="217" attack="19" accuracy="290" pcrit="1" macc="213">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="16">
-		<stats_template maxHp="1082" maxMp="1888" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="229" block="229" parry="229" main_hand_attack="19" main_hand_accuracy="298" main_hand_crit_rate="1" magic_accuracy="228">
+		<stats_template maxHp="1082" maxMp="1888" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="229" block="229" parry="229" attack="19" accuracy="298" pcrit="1" macc="228">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="17">
-		<stats_template maxHp="1155" maxMp="1994" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="241" block="241" parry="241" main_hand_attack="19" main_hand_accuracy="306" main_hand_crit_rate="1" magic_accuracy="242">
+		<stats_template maxHp="1155" maxMp="1994" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="241" block="241" parry="241" attack="19" accuracy="306" pcrit="1" macc="242">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="18">
-		<stats_template maxHp="1229" maxMp="2099" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="254" block="254" parry="254" main_hand_attack="19" main_hand_accuracy="314" main_hand_crit_rate="1" magic_accuracy="256">
+		<stats_template maxHp="1229" maxMp="2099" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="254" block="254" parry="254" attack="19" accuracy="314" pcrit="1" macc="256">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="19">
-		<stats_template maxHp="1306" maxMp="2204" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="266" block="266" parry="266" main_hand_attack="19" main_hand_accuracy="322" main_hand_crit_rate="1" magic_accuracy="270">
+		<stats_template maxHp="1306" maxMp="2204" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="266" block="266" parry="266" attack="19" accuracy="322" pcrit="1" macc="270">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="20">
-		<stats_template maxHp="1386" maxMp="2310" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="279" block="279" parry="279" main_hand_attack="19" main_hand_accuracy="330" main_hand_crit_rate="1" magic_accuracy="285">
+		<stats_template maxHp="1386" maxMp="2310" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="279" block="279" parry="279" attack="19" accuracy="330" pcrit="1" macc="285">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="21">
-		<stats_template maxHp="1467" maxMp="2415" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="291" block="291" parry="291" main_hand_attack="19" main_hand_accuracy="338" main_hand_crit_rate="1" magic_accuracy="299">
+		<stats_template maxHp="1467" maxMp="2415" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="291" block="291" parry="291" attack="19" accuracy="338" pcrit="1" macc="299">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="22">
-		<stats_template maxHp="1550" maxMp="2520" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="303" block="303" parry="303" main_hand_attack="19" main_hand_accuracy="346" main_hand_crit_rate="1" magic_accuracy="313">
+		<stats_template maxHp="1550" maxMp="2520" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="303" block="303" parry="303" attack="19" accuracy="346" pcrit="1" macc="313">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="23">
-		<stats_template maxHp="1635" maxMp="2625" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="316" block="316" parry="316" main_hand_attack="19" main_hand_accuracy="354" main_hand_crit_rate="1" magic_accuracy="327">
+		<stats_template maxHp="1635" maxMp="2625" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="316" block="316" parry="316" attack="19" accuracy="354" pcrit="1" macc="327">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="24">
-		<stats_template maxHp="1722" maxMp="2731" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="328" block="328" parry="328" main_hand_attack="19" main_hand_accuracy="362" main_hand_crit_rate="1" magic_accuracy="342">
+		<stats_template maxHp="1722" maxMp="2731" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="328" block="328" parry="328" attack="19" accuracy="362" pcrit="1" macc="342">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="25">
-		<stats_template maxHp="1812" maxMp="2836" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="341" block="341" parry="341" main_hand_attack="26" main_hand_accuracy="370" main_hand_crit_rate="1" magic_accuracy="356">
+		<stats_template maxHp="1812" maxMp="2836" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="341" block="341" parry="341" attack="26" accuracy="370" pcrit="1" macc="356">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="26">
-		<stats_template maxHp="1903" maxMp="2942" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="353" block="353" parry="353" main_hand_attack="26" main_hand_accuracy="378" main_hand_crit_rate="1" magic_accuracy="370">
+		<stats_template maxHp="1903" maxMp="2942" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="353" block="353" parry="353" attack="26" accuracy="378" pcrit="1" macc="370">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="27">
-		<stats_template maxHp="1997" maxMp="3047" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="365" block="365" parry="365" main_hand_attack="26" main_hand_accuracy="386" main_hand_crit_rate="1" magic_accuracy="384">
+		<stats_template maxHp="1997" maxMp="3047" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="365" block="365" parry="365" attack="26" accuracy="386" pcrit="1" macc="384">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="28">
-		<stats_template maxHp="2093" maxMp="3152" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="378" block="378" parry="378" main_hand_attack="26" main_hand_accuracy="394" main_hand_crit_rate="1" magic_accuracy="399">
+		<stats_template maxHp="2093" maxMp="3152" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="378" block="378" parry="378" attack="26" accuracy="394" pcrit="1" macc="399">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="29">
-		<stats_template maxHp="2190" maxMp="3258" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="390" block="390" parry="390" main_hand_attack="26" main_hand_accuracy="402" main_hand_crit_rate="1" magic_accuracy="413">
+		<stats_template maxHp="2190" maxMp="3258" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="390" block="390" parry="390" attack="26" accuracy="402" pcrit="1" macc="413">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="30">
-		<stats_template maxHp="2290" maxMp="3363" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="403" block="403" parry="403" main_hand_attack="26" main_hand_accuracy="410" main_hand_crit_rate="1" magic_accuracy="427">
+		<stats_template maxHp="2290" maxMp="3363" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="403" block="403" parry="403" attack="26" accuracy="410" pcrit="1" macc="427">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="31">
-		<stats_template maxHp="2392" maxMp="3469" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="415" block="415" parry="415" main_hand_attack="26" main_hand_accuracy="418" main_hand_crit_rate="1" magic_accuracy="441">
+		<stats_template maxHp="2392" maxMp="3469" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="415" block="415" parry="415" attack="26" accuracy="418" pcrit="1" macc="441">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="32">
-		<stats_template maxHp="2496" maxMp="3574" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="427" block="427" parry="427" main_hand_attack="26" main_hand_accuracy="426" main_hand_crit_rate="1" magic_accuracy="456">
+		<stats_template maxHp="2496" maxMp="3574" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="427" block="427" parry="427" attack="26" accuracy="426" pcrit="1" macc="456">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="33">
-		<stats_template maxHp="2602" maxMp="3680" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="440" block="440" parry="440" main_hand_attack="26" main_hand_accuracy="434" main_hand_crit_rate="1" magic_accuracy="470">
+		<stats_template maxHp="2602" maxMp="3680" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="440" block="440" parry="440" attack="26" accuracy="434" pcrit="1" macc="470">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="34">
-		<stats_template maxHp="2710" maxMp="3785" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="452" block="452" parry="452" main_hand_attack="26" main_hand_accuracy="442" main_hand_crit_rate="1" magic_accuracy="484">
+		<stats_template maxHp="2710" maxMp="3785" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="452" block="452" parry="452" attack="26" accuracy="442" pcrit="1" macc="484">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="35">
-		<stats_template maxHp="2820" maxMp="3891" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="465" block="465" parry="465" main_hand_attack="26" main_hand_accuracy="450" main_hand_crit_rate="1" magic_accuracy="498">
+		<stats_template maxHp="2820" maxMp="3891" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="465" block="465" parry="465" attack="26" accuracy="450" pcrit="1" macc="498">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="36">
-		<stats_template maxHp="2932" maxMp="3996" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="477" block="477" parry="477" main_hand_attack="26" main_hand_accuracy="458" main_hand_crit_rate="1" magic_accuracy="513">
+		<stats_template maxHp="2932" maxMp="3996" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="477" block="477" parry="477" attack="26" accuracy="458" pcrit="1" macc="513">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="37">
-		<stats_template maxHp="3046" maxMp="4102" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="489" block="489" parry="489" main_hand_attack="26" main_hand_accuracy="466" main_hand_crit_rate="1" magic_accuracy="527">
+		<stats_template maxHp="3046" maxMp="4102" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="489" block="489" parry="489" attack="26" accuracy="466" pcrit="1" macc="527">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="38">
-		<stats_template maxHp="3163" maxMp="4207" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="502" block="502" parry="502" main_hand_attack="26" main_hand_accuracy="474" main_hand_crit_rate="1" magic_accuracy="541">
+		<stats_template maxHp="3163" maxMp="4207" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="502" block="502" parry="502" attack="26" accuracy="474" pcrit="1" macc="541">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="39">
-		<stats_template maxHp="3281" maxMp="4313" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="514" block="514" parry="514" main_hand_attack="26" main_hand_accuracy="482" main_hand_crit_rate="1" magic_accuracy="555">
+		<stats_template maxHp="3281" maxMp="4313" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="514" block="514" parry="514" attack="26" accuracy="482" pcrit="1" macc="555">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="40">
-		<stats_template maxHp="3402" maxMp="4419" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="527" block="527" parry="527" main_hand_attack="26" main_hand_accuracy="490" main_hand_crit_rate="1" magic_accuracy="570">
+		<stats_template maxHp="3402" maxMp="4419" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="527" block="527" parry="527" attack="26" accuracy="490" pcrit="1" macc="570">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="41">
-		<stats_template maxHp="3524" maxMp="4524" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="539" block="539" parry="539" main_hand_attack="26" main_hand_accuracy="498" main_hand_crit_rate="1" magic_accuracy="584">
+		<stats_template maxHp="3524" maxMp="4524" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="539" block="539" parry="539" attack="26" accuracy="498" pcrit="1" macc="584">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="42">
-		<stats_template maxHp="3649" maxMp="4630" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="551" block="551" parry="551" main_hand_attack="26" main_hand_accuracy="506" main_hand_crit_rate="1" magic_accuracy="598">
+		<stats_template maxHp="3649" maxMp="4630" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="551" block="551" parry="551" attack="26" accuracy="506" pcrit="1" macc="598">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="43">
-		<stats_template maxHp="3775" maxMp="4735" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="564" block="564" parry="564" main_hand_attack="26" main_hand_accuracy="514" main_hand_crit_rate="1" magic_accuracy="612">
+		<stats_template maxHp="3775" maxMp="4735" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="564" block="564" parry="564" attack="26" accuracy="514" pcrit="1" macc="612">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="44">
-		<stats_template maxHp="3904" maxMp="4841" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="576" block="576" parry="576" main_hand_attack="26" main_hand_accuracy="522" main_hand_crit_rate="1" magic_accuracy="627">
+		<stats_template maxHp="3904" maxMp="4841" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="576" block="576" parry="576" attack="26" accuracy="522" pcrit="1" macc="627">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="45">
-		<stats_template maxHp="4035" maxMp="4947" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="589" block="589" parry="589" main_hand_attack="26" main_hand_accuracy="530" main_hand_crit_rate="1" magic_accuracy="641">
+		<stats_template maxHp="4035" maxMp="4947" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="589" block="589" parry="589" attack="26" accuracy="530" pcrit="1" macc="641">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="46">
-		<stats_template maxHp="4168" maxMp="5052" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="601" block="601" parry="601" main_hand_attack="26" main_hand_accuracy="538" main_hand_crit_rate="1" magic_accuracy="655">
+		<stats_template maxHp="4168" maxMp="5052" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="601" block="601" parry="601" attack="26" accuracy="538" pcrit="1" macc="655">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="47">
-		<stats_template maxHp="4303" maxMp="5158" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="613" block="613" parry="613" main_hand_attack="26" main_hand_accuracy="546" main_hand_crit_rate="1" magic_accuracy="669">
+		<stats_template maxHp="4303" maxMp="5158" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="613" block="613" parry="613" attack="26" accuracy="546" pcrit="1" macc="669">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="48">
-		<stats_template maxHp="4440" maxMp="5264" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="626" block="626" parry="626" main_hand_attack="26" main_hand_accuracy="554" main_hand_crit_rate="1" magic_accuracy="684">
+		<stats_template maxHp="4440" maxMp="5264" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="626" block="626" parry="626" attack="26" accuracy="554" pcrit="1" macc="684">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="49">
-		<stats_template maxHp="4579" maxMp="5370" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="638" block="638" parry="638" main_hand_attack="33" main_hand_accuracy="562" main_hand_crit_rate="1" magic_accuracy="698">
+		<stats_template maxHp="4579" maxMp="5370" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="638" block="638" parry="638" attack="33" accuracy="562" pcrit="1" macc="698">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="50">
-		<stats_template maxHp="4720" maxMp="5475" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="651" block="651" parry="651" main_hand_attack="33" main_hand_accuracy="570" main_hand_crit_rate="1" magic_accuracy="712">
+		<stats_template maxHp="4720" maxMp="5475" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="651" block="651" parry="651" attack="33" accuracy="570" pcrit="1" macc="712">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="51">
-		<stats_template maxHp="4863" maxMp="5581" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="663" block="663" parry="663" main_hand_attack="33" main_hand_accuracy="578" main_hand_crit_rate="1" magic_accuracy="726">
+		<stats_template maxHp="4863" maxMp="5581" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="663" block="663" parry="663" attack="33" accuracy="578" pcrit="1" macc="726">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="52">
-		<stats_template maxHp="5009" maxMp="5687" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="675" block="675" parry="675" main_hand_attack="33" main_hand_accuracy="586" main_hand_crit_rate="1" magic_accuracy="741">
+		<stats_template maxHp="5009" maxMp="5687" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="675" block="675" parry="675" attack="33" accuracy="586" pcrit="1" macc="741">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="53">
-		<stats_template maxHp="5156" maxMp="5793" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="688" block="688" parry="688" main_hand_attack="33" main_hand_accuracy="594" main_hand_crit_rate="1" magic_accuracy="755">
+		<stats_template maxHp="5156" maxMp="5793" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="688" block="688" parry="688" attack="33" accuracy="594" pcrit="1" macc="755">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="54">
-		<stats_template maxHp="5305" maxMp="5898" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="700" block="700" parry="700" main_hand_attack="33" main_hand_accuracy="602" main_hand_crit_rate="1" magic_accuracy="769">
+		<stats_template maxHp="5305" maxMp="5898" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="700" block="700" parry="700" attack="33" accuracy="602" pcrit="1" macc="769">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="55">
-		<stats_template maxHp="5457" maxMp="6004" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="713" block="713" parry="713" main_hand_attack="33" main_hand_accuracy="610" main_hand_crit_rate="1" magic_accuracy="783">
+		<stats_template maxHp="5457" maxMp="6004" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="713" block="713" parry="713" attack="33" accuracy="610" pcrit="1" macc="783">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="56">
-		<stats_template maxHp="5610" maxMp="6110" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="725" block="725" parry="725" main_hand_attack="33" main_hand_accuracy="618" main_hand_crit_rate="1" magic_accuracy="798">
+		<stats_template maxHp="5610" maxMp="6110" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="725" block="725" parry="725" attack="33" accuracy="618" pcrit="1" macc="798">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="57">
-		<stats_template maxHp="5766" maxMp="6216" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="737" block="737" parry="737" main_hand_attack="33" main_hand_accuracy="626" main_hand_crit_rate="1" magic_accuracy="812">
+		<stats_template maxHp="5766" maxMp="6216" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="737" block="737" parry="737" attack="33" accuracy="626" pcrit="1" macc="812">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="58">
-		<stats_template maxHp="5924" maxMp="6322" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="750" block="750" parry="750" main_hand_attack="33" main_hand_accuracy="634" main_hand_crit_rate="1" magic_accuracy="826">
+		<stats_template maxHp="5924" maxMp="6322" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="750" block="750" parry="750" attack="33" accuracy="634" pcrit="1" macc="826">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="59">
-		<stats_template maxHp="6084" maxMp="6428" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="762" block="762" parry="762" main_hand_attack="33" main_hand_accuracy="642" main_hand_crit_rate="1" magic_accuracy="840">
+		<stats_template maxHp="6084" maxMp="6428" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="762" block="762" parry="762" attack="33" accuracy="642" pcrit="1" macc="840">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="60">
-		<stats_template maxHp="6246" maxMp="6534" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="775" block="775" parry="775" main_hand_attack="33" main_hand_accuracy="650" main_hand_crit_rate="1" magic_accuracy="855">
+		<stats_template maxHp="6246" maxMp="6534" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="775" block="775" parry="775" attack="33" accuracy="650" pcrit="1" macc="855">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="61">
-		<stats_template maxHp="6409" maxMp="6639" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="787" block="787" parry="787" main_hand_attack="33" main_hand_accuracy="658" main_hand_crit_rate="1" magic_accuracy="869">
+		<stats_template maxHp="6409" maxMp="6639" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="787" block="787" parry="787" attack="33" accuracy="658" pcrit="1" macc="869">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="62">
-		<stats_template maxHp="6575" maxMp="6745" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="799" block="799" parry="799" main_hand_attack="33" main_hand_accuracy="666" main_hand_crit_rate="1" magic_accuracy="883">
+		<stats_template maxHp="6575" maxMp="6745" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="799" block="799" parry="799" attack="33" accuracy="666" pcrit="1" macc="883">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="63">
-		<stats_template maxHp="6744" maxMp="6851" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="812" block="812" parry="812" main_hand_attack="33" main_hand_accuracy="674" main_hand_crit_rate="1" magic_accuracy="897">
+		<stats_template maxHp="6744" maxMp="6851" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="812" block="812" parry="812" attack="33" accuracy="674" pcrit="1" macc="897">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="64">
-		<stats_template maxHp="6914" maxMp="6957" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="824" block="824" parry="824" main_hand_attack="33" main_hand_accuracy="682" main_hand_crit_rate="1" magic_accuracy="912">
+		<stats_template maxHp="6914" maxMp="6957" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="824" block="824" parry="824" attack="33" accuracy="682" pcrit="1" macc="912">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="CHANTER" level="65">
-		<stats_template maxHp="7086" maxMp="7063" power="110" health="105" agility="90" accuracy="90" knowledge="105" will="110" evasion="837" block="837" parry="837" main_hand_attack="33" main_hand_accuracy="690" main_hand_crit_rate="1" magic_accuracy="926">
+		<stats_template maxHp="7086" maxMp="7063" power="110" health="105" agility="90" base_accuracy="90" knowledge="105" will="110" evasion="837" block="837" parry="837" attack="33" accuracy="690" pcrit="1" macc="926">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
