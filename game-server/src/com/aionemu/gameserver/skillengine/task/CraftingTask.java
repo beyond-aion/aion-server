@@ -25,8 +25,8 @@ public class CraftingTask extends AbstractCraftTask {
 	protected boolean crit = false;
 	protected int maxCritCount;
 	private int bonus;
-	private int delay = 1200;
-	private int executionSpeed = 900;
+	private int delay;
+	private int executionSpeed;
 
 	/**
 	 * @param requestor
@@ -51,7 +51,7 @@ public class CraftingTask extends AbstractCraftTask {
 	@Override
 	protected boolean onSuccessFinish() {
 		if (crit && recipeTemplate.getComboProduct(critCount) != null) {
-			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 3, 0 ,0));
+			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 3, 0, 0));
 			onInteractionStart();
 			return false;
 		} else {
@@ -106,7 +106,7 @@ public class CraftingTask extends AbstractCraftTask {
 			}
 		}
 
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, completeValue, completeValue, 0, 0, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, fullBarValue, fullBarValue, 0, 0, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, 0, 0, 1, 0, 0));
 		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(),
 			recipeTemplate.getSkillid(), 0), true);
@@ -124,16 +124,18 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected final void analyzeInteraction() {
-		if (recipeTemplate.getSkillid() == 40009) { //morph
-			currentSuccessValue = completeValue;
+		if (recipeTemplate.getSkillid() == 40009) { // morph
+			currentSuccessValue = fullBarValue;
 			return;
 		} else if (skillLvlDiff < 0) {
-			currentFailureValue = completeValue;
+			currentFailureValue = fullBarValue;
 			return;
 		}
-		
+
+		craftType = CraftType.NORMAL;
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get() * 100 > (CraftConfig.MAX_CRAFT_FAILURE_CHANCE - skillLvlDiff/3f);
+		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
+		boolean success = Rnd.get() * 100 > CraftConfig.MAX_CRAFT_FAILURE_CHANCE * failReduction;
 
 		float bonusModifier = 1;
 		switch (itemTemplate.getItemQuality()) {
@@ -150,27 +152,27 @@ public class CraftingTask extends AbstractCraftTask {
 				bonusModifier = 0.3f;
 				break;
 		}
-		
+
 		if (success) {
-			if (Rnd.get() * 100 <= (15 + skillLvlDiff/3f))
-				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10%
+			if (Rnd.get() * 100 <= (15 + skillLvlDiff / 3f))
+				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10-20%
 
 			int minStep = 70;
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
-			int bonus = (int) (((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff+1)/2f) + lvlBoni) * 10) * multi);
+			int bonus = (int) (((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff + 1) / 2f) + lvlBoni) * 10) * multi);
 			currentSuccessValue += Math.round(minStep + (bonus * bonusModifier));
 		} else {
-			int minStep = recipeTemplate.getMaxProductionCount() != null ? 70 : 140;
-			int bonus = (int) (((skillLvlDiff+1)/1.5f * 10) * multi);
+			int minStep = recipeTemplate.getMaxProductionCount() != null ? 70 : 120;
+			int bonus = (int) (((skillLvlDiff + 1) / 1.5f * 10) * multi);
 			currentFailureValue += Math.round(minStep + (bonus * bonusModifier));
 		}
-		
-		if (currentSuccessValue > completeValue)
-			currentSuccessValue = completeValue;
-		else if (currentFailureValue > completeValue)
-			currentFailureValue = completeValue;
-		
-		int speed = bonusModifier < 1 ? Math.round(900 * (2-bonusModifier)) : (900 - (skillLvlDiff * 30));
+
+		if (currentSuccessValue > fullBarValue)
+			currentSuccessValue = fullBarValue;
+		else if (currentFailureValue > fullBarValue)
+			currentFailureValue = fullBarValue;
+
+		int speed = bonusModifier < 1 ? Math.round(900 * (2 - bonusModifier)) : (900 - (skillLvlDiff * 30));
 		executionSpeed = speed < 300 ? 300 : speed;
 		int showDelay = bonusModifier < 1 ? 1200 : (1200 - (skillLvlDiff * 30));
 		delay = showDelay < 500 ? 500 : showDelay;

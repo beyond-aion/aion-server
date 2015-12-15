@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public abstract class AbstractCraftTask extends AbstractInteractionTask {
 
-	protected int completeValue = 1000;
+	protected static final int fullBarValue = 1000;
 	protected int currentSuccessValue;
 	protected int currentFailureValue;
 	protected int skillLvlDiff;
@@ -43,10 +43,10 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
 
 	@Override
 	protected boolean onInteraction() {
-		if (currentSuccessValue == completeValue) {
+		if (currentSuccessValue == fullBarValue) {
 			return onSuccessFinish();
 		}
-		if (currentFailureValue == completeValue) {
+		if (currentFailureValue == fullBarValue) {
 			onFailureFinish();
 			return true;
 		}
