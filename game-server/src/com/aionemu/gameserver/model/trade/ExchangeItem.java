@@ -9,7 +9,6 @@ public class ExchangeItem {
 
 	private int itemObjId;
 	private long itemCount;
-	private int itemDesc;
 	private Item item;
 
 	/**
@@ -23,7 +22,6 @@ public class ExchangeItem {
 		this.itemObjId = itemObjId;
 		this.itemCount = itemCount;
 		this.item = item;
-		this.itemDesc = item.getItemTemplate().getNameId();
 	}
 
 	/**
@@ -61,12 +59,5 @@ public class ExchangeItem {
 	 */
 	public long getItemCount() {
 		return itemCount;
-	}
-
-	/**
-	 * @return the itemDesc
-	 */
-	public int getItemDesc() {
-		return itemDesc;
 	}
 }
