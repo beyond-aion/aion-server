@@ -671,7 +671,7 @@
 			<gd_npc npc_id="235361" name="Denku Feralmage"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item iid="152012597" name="Unity Mote"/>
+			<gd_item id="152012597" name="Unity Mote"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Mote" base_chance="2.5">
