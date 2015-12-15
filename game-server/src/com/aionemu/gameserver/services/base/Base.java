@@ -190,6 +190,7 @@ public abstract class Base<T extends BaseLocation> {
 								break;
 							case FLAG:
 								initFlag(npc);
+								npc.getPosition().getMapRegion().activate();
 								break;
 						}
 					}
