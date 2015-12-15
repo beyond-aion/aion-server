@@ -135,7 +135,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public Stat2 getMResist() {
 		int mres = owner.getObjectTemplate().getStatsTemplate().getMresist();
 		int level = owner.getLevel();
-		if (owner.getRating() != NpcRating.LEGENDARY) { // FIXME: fix templates or formula
+		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
 			if (level < 25)
 				mres *= 0.7f;
 			else if (level >= 25 && level < 50)
