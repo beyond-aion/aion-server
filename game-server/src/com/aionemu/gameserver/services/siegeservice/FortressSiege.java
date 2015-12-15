@@ -60,9 +60,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	@Override
 	public void onSiegeStart() {
-		// Check for Balaur Assault
-		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
-			BalaurAssaultService.getInstance().onSiegeStart(this);
 		if (LoggingConfig.LOG_SIEGE)
 			log.info("[SIEGE] > Siege started. [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"
 				+ getSiegeLocation().getLegionId() + "]");
@@ -85,6 +82,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
 		initMercenaryZones();
+		// Check for Balaur Assault
+		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
+			BalaurAssaultService.getInstance().onSiegeStart(this);
 	}
 	
 	private final void initMercenaryZones() {

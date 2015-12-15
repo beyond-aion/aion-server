@@ -33,10 +33,10 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 	@Override
 	protected void onSiegeStart() {
+		initSiegeBoss();
 		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
 			BalaurAssaultService.getInstance().onSiegeStart(this);
-		initSiegeBoss();
 	}
 
 	@Override

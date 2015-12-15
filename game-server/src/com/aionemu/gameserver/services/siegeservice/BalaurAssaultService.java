@@ -54,7 +54,7 @@ public class BalaurAssaultService {
 				return;
 		} else
 			return;
-		newAssault(siege, Rnd.get(60, 600));
+		newAssault(siege, Rnd.get(1, 10));
 		if (LoggingConfig.LOG_SIEGE)
 			log.info("[SIEGE] Balaur Assault scheduled on Siege ID: " + siege.getSiegeLocationId() + "!");
 	}
@@ -82,13 +82,12 @@ public class BalaurAssaultService {
 	}
 
 	private boolean calculateFortressAssault(FortressLocation fortress) {
-		boolean isBalaurea = fortress.getWorldId() != 400010000;
-		int locationId = fortress.getLocationId();
-
-		if (fortressAssaults.containsKey(locationId))
+		if (fortress.getRace() == SiegeRace.BALAUR || !fortress.isVulnerable())
 			return false;
 
-		if (!calcFortressInfluence(isBalaurea, fortress))
+		boolean isBalaurea = fortress.getWorldId() == 210050000 || fortress.getWorldId() == 220070000;
+
+		if (fortressAssaults.containsKey(fortress.getLocationId()))
 			return false;
 
 		int count = 0; // Allow only 2 Balaur attacks per map, 1 per Balaurea map
@@ -96,10 +95,15 @@ public class BalaurAssaultService {
 			if (fa.getWorldId() == fortress.getWorldId())
 				count++;
 		}
-
 		if (count >= (isBalaurea ? 1 : 2))
 			return false;
 
+		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getGlobalAsmodiansInfluence()
+			: Influence.getInstance().getGlobalElyosInfluence();
+
+		if (Rnd.get() >= influence * SiegeConfig.BALAUR_ASSAULT_RATE)
+			return false;
+		
 		return true;
 	}
 
@@ -131,27 +135,6 @@ public class BalaurAssaultService {
 			assault.startAssault(delay);
 			artifactAssaults.put(siege.getSiegeLocationId(), assault);
 		}
-	}
-
-	private boolean calcFortressInfluence(boolean isBalaurea, FortressLocation fortress) {
-		SiegeRace locationRace = fortress.getRace();
-		float influence;
-
-		if (locationRace.equals(SiegeRace.BALAUR) || !fortress.isVulnerable())
-			return false;
-
-		int ownedForts = 0;
-		if (isBalaurea) {
-			for (FortressLocation fl : SiegeService.getInstance().getFortresses().values()) {
-				if (fl.getWorldId() != 400010000 && !fortressAssaults.containsKey(fl.getLocationId()) && fl.getRace().equals(locationRace))
-					ownedForts++;
-			}
-			influence = ownedForts >= 2 ? 0.25f : 0.1f;
-		} else
-			influence = locationRace.equals(SiegeRace.ASMODIANS) ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence.getInstance()
-				.getGlobalElyosInfluence();
-
-		return Rnd.get() < influence * SiegeConfig.BALAUR_ASSAULT_RATE;
 	}
 
 	public void spawnDredgion(int spawnId) {
