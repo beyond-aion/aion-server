@@ -157,14 +157,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setInt(23, mails);
 				stmt.setLong(24, pcd.getCurrentReposteEnergy());
 				stmt.setInt(25, pcd.getMentorFlagTime());
-				if (player.getPosition().getWorldMapInstance() == null) { // FIXME!
-					log.error("Error saving player: " + player.getObjectId() + " " + player.getName()
-						+ ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " " + player.getY()
-						+ " " + player.getZ());
-					stmt.setInt(26, 0);
-				} else {
-					stmt.setInt(26, player.getPosition().getWorldMapInstance().getOwnerId());
-				}
+				stmt.setInt(26, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
 				stmt.setInt(27, player.getObjectId());
 				stmt.execute();
 			}
