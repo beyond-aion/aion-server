@@ -45,6 +45,10 @@ public class NpcSkillTemplate {
 	protected int nextSkillTime = -1; //-1 = random time between 3s and 9s
 	@XmlElement(name = "cond")
 	protected NpcSkillConditionTemplate conditionTemplate = null;
+	@XmlAttribute(name = "nextChainId")
+	protected int nextChainId = 0;
+	@XmlAttribute(name = "chainId")
+	protected int chainId = 0;
 	
 
 	/**
@@ -157,4 +161,19 @@ public class NpcSkillTemplate {
 		return nextSkillTime;
 	}
 	
+	/**
+	 * 
+	 * @return nextChainId
+	 */
+	public int getNextChainId() {
+		return nextChainId;
+	}
+	
+	/**
+	 * 
+	 * @return chainId
+	 */
+	public int getChainId() {
+		return chainId;
+	}
 }

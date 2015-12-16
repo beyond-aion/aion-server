@@ -83,24 +83,20 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 				for (Integer syncId : syncIds) {
 					int mapid = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-					PortalCooldown portalCD;
-					if ((portalCD = player.getPortalCooldownList().getPortalCooldown(mapid)) == null) {
+					PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(mapid);
+					if (portalCD == null || portalCD.getEnterCount() < 1)
 						continue; // don't spam with not needed packets!
-					}
-					if (portalCD.getEnterCount() < 1) {
-						continue;
-					}
+
 					portalCD.decreaseEnterCount();
-					if (portalCD.getEnterCount() < 1) {
+					if (portalCD.getEnterCount() < 1)
 						player.getPortalCooldownList().removePortalCoolDown(mapid);
-					}
 
 					if (player.isInTeam())
-						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 1, player, mapid));
-					PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO((byte) 2, player, mapid));
+						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 2, player, mapid));
+					else
+						PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO((byte) 2, player, mapid));
 				}
-				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
 			}
 
 		}, 1000));

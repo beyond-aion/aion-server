@@ -4,9 +4,6 @@ import com.aionemu.commons.configuration.Property;
 
 public class LoggingConfig {
 
-	@Property(key = "gameserver.enable.advanced.logging", defaultValue = "false")
-	public static boolean ENABLE_ADVANCED_LOGGING;
-
 	/**
 	 * Logging
 	 */

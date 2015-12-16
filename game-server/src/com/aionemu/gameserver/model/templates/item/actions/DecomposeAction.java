@@ -39,7 +39,10 @@ import com.aionemu.gameserver.model.templates.item.ResultedItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FIRST_SHOW_DECOMPOSABLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -178,7 +181,7 @@ public class DecomposeAction extends AbstractItemAction {
 					if (selectedCollection.getItems().size() > 0) {
 						for (ResultedItem resultItem : selectedCollection.getItems()) {
 							if (canAcquire(player, resultItem)) {
-								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount());
+								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}
@@ -417,7 +420,7 @@ public class DecomposeAction extends AbstractItemAction {
 									}
 								}
 								if (randomId != 0 && randomId != 167000524)
-									ItemService.addItem(player, randomId, randomItem.getResultCount());
+									ItemService.addItem(player, randomId, randomItem.getResultCount(), new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}

@@ -124,7 +124,7 @@ public class BonusService {
 			case MOVIE:
 				return null;
 			default:
-				log.warn("Bonus of type " + bonus.getType() + " is not implemented");
+				log.warn("Quest bonus of type " + bonus.getType() + " is not implemented (quest " + questTemplate.getId() + ")");
 				return null;
 		}
 	}

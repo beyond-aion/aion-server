@@ -484,6 +484,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (skill == null)
 			return;
 		creature.setCasting(null);
+		if (creature instanceof Npc) 
+			((Npc) creature).getGameStats().setLastSkill(null);
 		if (creature.getSkillNumber() > 0)
 			creature.setSkillNumber(creature.getSkillNumber() - 1);
 	}
@@ -501,6 +503,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		castingSkill.cancelCast();
 		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
 		creature.setCasting(null);
+		if (creature instanceof Npc) 
+			((Npc) creature).getGameStats().setLastSkill(null);
 		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
 		if (getOwner().getAi2() instanceof NpcAI2) {
 			NpcAI2 npcAI = (NpcAI2) getOwner().getAi2();

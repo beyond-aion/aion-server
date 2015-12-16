@@ -366,7 +366,7 @@ public class BrokerService {
 			}
 
 			Item item = buyingItem.getItem();
-			long price = buyingItem.getPrice() * itemCount;;
+			long price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
 				return;
@@ -407,9 +407,8 @@ public class BrokerService {
 			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
 
 			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("[BROKER EXCHANGE] > [Player: " + player.getName() + "] bought [Item: " + buyingItem.getItemId() + "] " + "[Count: "
-					+ buyingItem.getItemCount() + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + item.getItemName() : "]") + " from [Player: "
-					+ buyingItem.getSeller() + "] for [Price: " + buyingItem.getPrice() + "]");
+				log.info("Player: " + player.getName() + " bought item " + boughtItem.getItemId() + " [" + boughtItem.getItemName() + "] (count: "
+					+ itemCount + ") from player: " + buyingItem.getSeller() + " (total price: " + price + ")");
 
 			// create save task
 			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());

@@ -19,8 +19,8 @@ public class GatheringTask extends AbstractCraftTask {
 
 	private GatherableTemplate template;
 	private Material material;
-	private int showBarDelay = 1000;
-	private int executionSpeed = 900;
+	private int showBarDelay;
+	private int executionSpeed;
 
 	public GatheringTask(Player requestor, Gatherable gatherable, Material material, int skillLvlDiff) {
 		super(requestor, gatherable, skillLvlDiff);
@@ -44,7 +44,7 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionStart() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, completeValue, completeValue, 0, 0, 0));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, fullBarValue, fullBarValue, 0, 0, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
 		// TODO: missing packet for initial failure/success
 		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
@@ -80,46 +80,47 @@ public class GatheringTask extends AbstractCraftTask {
 	@Override
 	protected final void analyzeInteraction() {
 		if (skillLvlDiff >= 41) {
-			currentSuccessValue = completeValue;
-			this.executionSpeed = 300;
-			this.showBarDelay = 500;
+			currentSuccessValue = fullBarValue;
+			executionSpeed = 300;
+			showBarDelay = 500;
 			return;
 		} else if (skillLvlDiff < 0) {
-			currentFailureValue = completeValue;
+			currentFailureValue = fullBarValue;
 			return;
 		}
-		
+
+		craftType = CraftType.NORMAL;
 		float multi = Rnd.get() + 1f;
-		boolean success = Rnd.get() * 100 > (CraftConfig.MAX_GATHER_FAILURE_CHANCE - skillLvlDiff/3f);
-		
+		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
+		boolean success = Rnd.get() * 100 > CraftConfig.MAX_GATHER_FAILURE_CHANCE * failReduction;
+
 		if (success) {
 			float critChance = Rnd.get() * 100;
-			if (critChance <= (3 + skillLvlDiff/10f)) { //PURPLE CRIT = 100%
+			if (critChance <= (1 + skillLvlDiff / 10f)) { // PURPLE CRIT = 100%
 				craftType = CraftType.CRIT_PURPLE;
-				currentSuccessValue = completeValue;
-				this.executionSpeed = 300;
-				this.showBarDelay = 500;
+				currentSuccessValue = fullBarValue;
+				executionSpeed = 300;
+				showBarDelay = 500;
 				return;
-			} else if (critChance <= (15 + skillLvlDiff/3f)) { //LIGHT BLUE CRIT = +10%
+			} else if (critChance <= (5 + skillLvlDiff / 3f)) { // LIGHT BLUE CRIT = +10%
 				craftType = CraftType.CRIT_BLUE;
 			}
-			
+
 			int lvlBoni = skillLvlDiff > 10 ? ((skillLvlDiff - 10) * 2) : 0;
-			currentSuccessValue += Math.round((70 + ((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff+1)/2f) + lvlBoni) * 10) * multi)); //minValue = 70
+			currentSuccessValue += Math.round(70 + ((craftType == CraftType.CRIT_BLUE ? 100 : 0) + (((skillLvlDiff + 1) / 2f) + lvlBoni) * 10) * multi);
 		} else {
-			currentFailureValue += Math.round((140 + (((skillLvlDiff+1)/2f * 10) * multi))); //minFailValue = 140
+			currentFailureValue += Math.round(120 + (((skillLvlDiff + 1) / 2f * 10) * multi));
 		}
-		
-		if (currentSuccessValue > completeValue) {
-			currentSuccessValue = completeValue;
-		} else if (currentFailureValue > completeValue) {
-			currentFailureValue = completeValue;
+
+		if (currentSuccessValue > fullBarValue) {
+			currentSuccessValue = fullBarValue;
+		} else if (currentFailureValue > fullBarValue) {
+			currentFailureValue = fullBarValue;
 		}
-		
+
 		int speed = 900 - (skillLvlDiff * 30);
 		executionSpeed = speed < 300 ? 300 : speed;
 		int showDelay = 1200 - (skillLvlDiff * 30);
 		showBarDelay = showDelay < 500 ? 500 : showDelay;
-		
 	}
 }

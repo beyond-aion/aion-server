@@ -61,11 +61,10 @@ public class CraftService {
 			}
 		});
 
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
 		if (LoggingConfig.LOG_CRAFT) {
-			log.info((critCount > 0 ? "[CRAFT][Critical] ID/Count" : "[CRAFT][Normal] ID/Count")
-				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + productItemId + "/" + recipetemplate.getQuantity() + "/"
-					+ itemTemplate.getName() : " - " + productItemId + "/" + recipetemplate.getQuantity()) + " to player " + player.getName());
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
+			log.info("Player " + player.getName() + " crafted item " + productItemId + " [" + itemTemplate.getName() + "] (count: "
+				+ recipetemplate.getQuantity() + ")" + (critCount > 0 ? " - critical" : ""));
 		}
 
 		int gainedCraftExp = (int) RewardType.CRAFTING.calcReward(player, xpReward);
@@ -99,12 +98,12 @@ public class CraftService {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
-		
+
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());
 
 		int intervalCap = 1200;
-		switch (itemTemplate.getItemQuality()) {				
+		switch (itemTemplate.getItemQuality()) {
 			case UNIQUE:
 			case EPIC:
 				intervalCap = 1500;
@@ -115,7 +114,7 @@ public class CraftService {
 		}
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
 		player.setCraftingTask(new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0));
-		
+
 		if (skillId == 40009) {
 			player.getCraftingTask().setInterval(200);
 		} else {
@@ -190,7 +189,7 @@ public class CraftService {
 
 	private static void sendCancelCraft(Player player, int skillId, int targetObjId, ItemTemplate itemTemplate) {
 
-		PacketSendUtility.sendPacket(player, new SM_CRAFT_UPDATE(skillId, itemTemplate, 0, 0, 4, 0 , 0));
+		PacketSendUtility.sendPacket(player, new SM_CRAFT_UPDATE(skillId, itemTemplate, 0, 0, 4, 0, 0));
 		PacketSendUtility.broadcastPacket(player, new SM_CRAFT_ANIMATION(player.getObjectId(), targetObjId, 0, 2), true);
 	}
 

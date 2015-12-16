@@ -399,30 +399,26 @@ public final class PlayerEnterWorldService {
 			player.getController().validateLoginZone();
 			VortexService.getInstance().validateLoginZone(player);
 
+			// ----------------------------- Retail sequence -----------------------------
+			client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
 			client.sendPacket(new SM_PLAYER_SPAWN(player));
-
-			// SM_WEATHER miss on login (but he 'live' in CM_LEVEL_READY.. need invistigate)
+			// SM_WEATHER miss on login (but he 'live' in CM_LEVEL_READY.. need investigate)
 			client.sendPacket(new SM_GAME_TIME());
-
-			SerialKillerService.getInstance().onLogin(player);
-
 			if (player.isLegionMember())
 				LegionService.getInstance().onLogin(player);
-
-			client.sendPacket(new SM_TITLE_INFO(player));
 			sendWarehouseItemInfos(client, player);
+			client.sendPacket(new SM_TITLE_INFO(player));
 			client.sendPacket(new SM_EMOTION_LIST((byte) 0, player.getEmotions().getEmotions()));
-
-			// SM_INFLUENCE_RATIO, SM_SIEGE_LOCATION_INFO, SM_RIFT_ANNOUNCE (Balaurea), SM_RIFT_ANNOUNCE (Tiamaranta)
+			// SM_BD_UNK h 0
 			SiegeService.getInstance().onPlayerLogin(player);
-
 			client.sendPacket(new SM_PRICES());
+			// SM_A5_UNK ch 1 0
+			// SM_A5_UNK ch 0 0
+			// ----------------------------- Retail sequence -----------------------------
 
 			if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 				AutoGroupService.getInstance().onPlayerLogin(player);
 			}
-
-			client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
 
 			DisputeLandService.getInstance().onLogin(player);
 			client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
@@ -478,6 +474,7 @@ public final class PlayerEnterWorldService {
 			 */
 			player.getLifeStats().updateCurrentStats();
 			player.getObserveController().notifyHPChangeObservers(player.getLifeStats().getCurrentHp());
+			SerialKillerService.getInstance().onLogin(player);
 
 			if (HTMLConfig.ENABLE_HTML_WELCOME)
 				HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));

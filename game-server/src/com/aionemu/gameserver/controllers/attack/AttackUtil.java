@@ -72,8 +72,6 @@ public class AttackUtil {
 					mainHandWeapon = ((Player) attacker).getEquipment().getMainHandWeapon();
 					if (mainHandWeapon != null)
 						mainHandHits = Rnd.get(1, mainHandWeapon.getItemTemplate().getWeaponStats().getHitCount());
-				} else {
-					mainHandHits = 1;
 				}
 				splitPhysicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, mainHandWeapon);
 				break;
@@ -84,8 +82,6 @@ public class AttackUtil {
 					mainHandWeapon = ((Player) attacker).getEquipment().getMainHandWeapon();
 					if (mainHandWeapon != null)
 						mainHandHits = Rnd.get(1, mainHandWeapon.getItemTemplate().getWeaponStats().getHitCount());
-				} else {
-					mainHandHits = 1;
 				}
 				splitMagicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, mainHandWeapon);
 				break;
@@ -322,15 +318,15 @@ public class AttackUtil {
 			if (effector instanceof Npc) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
 				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-				//should we calculate damage always?
+				// should we calculate damage always? usually only if ht == PHHIT
 				damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
-			} else {			
+			} else {
 				switch (effect.getSkillType()) {
 					case MAGICAL:
 						ht = HitType.MAHIT;
 						baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
-						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL && func == Func.PERCENT) // dirty fix for staffs and maces -.-
-							baseAttack = 1;//back to 1, till we've done some tests on official servers
+						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL) // dirty fix for staffs and maces -.-
+							baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 						break;
 					default:
 						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();

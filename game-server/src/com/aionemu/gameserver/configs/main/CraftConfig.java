@@ -50,8 +50,8 @@ public class CraftConfig {
 	public static int PREMIUM_CRAFT_COMBO_RATE;
 	@Property(key = "gameserver.craft.combo.rate.vip", defaultValue = "25")
 	public static int VIP_CRAFT_COMBO_RATE;
-	@Property(key = "gameserver.craft.fail.chance", defaultValue = "35")
+	@Property(key = "gameserver.craft.fail.chance", defaultValue = "33")
 	public static int MAX_CRAFT_FAILURE_CHANCE;
-	@Property(key = "gameserver.gather.fail.chance", defaultValue = "38")
+	@Property(key = "gameserver.gather.fail.chance", defaultValue = "33")
 	public static int MAX_GATHER_FAILURE_CHANCE;
 }

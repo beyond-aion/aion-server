@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
@@ -24,6 +25,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	private long nextAttackTime = 0;
 	private long lastSkillTime = 0;
 	private long nextSkillTime = 0;
+	private NpcSkillEntry lastSkill = null;
 	private long fightStartingTime = 0;
 	private int cachedState;
 	private AISubState cachedSubState;
@@ -354,6 +356,14 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	public void setNextSkillTime(int nextSkillTime) {
 		this.nextSkillTime = nextSkillTime;
+	}
+
+	public void setLastSkill(NpcSkillEntry lastSkill) {
+		this.lastSkill = lastSkill;
+	}
+	
+	public NpcSkillEntry getLastSkill() {
+		return lastSkill;
 	}
 	
 	@Override

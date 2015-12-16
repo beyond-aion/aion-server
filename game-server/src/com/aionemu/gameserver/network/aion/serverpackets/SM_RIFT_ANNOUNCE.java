@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -14,7 +14,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 
 	private int actionId;
 	private RVController rift;
-	private FastMap<Integer, Integer> rifts;
+	private Map<Integer, Integer> rifts;
 	private int objectId;
 	private int gelkmaros, inggison;
 	private int cl, cr, tl, tr;
@@ -24,7 +24,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 	 *
 	 * @param player
 	 */
-	public SM_RIFT_ANNOUNCE(FastMap<Integer, Integer> rifts) {
+	public SM_RIFT_ANNOUNCE(Map<Integer, Integer> rifts) {
 		this.actionId = 0;
 		this.rifts = rifts;
 	}
@@ -59,31 +59,27 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 		this.cl = cl ? 1 : 0; // Western Tiamaranta's Eye Entrance (Center left)
 		this.cr = cr ? 1 : 0; // Eastern Tiamaranta's Eye Entrance (Center right)
 		this.tl = tl ? 1 : 0; // Eye Abyss Gate Elyos (Top left)
-		this.tr = tr ? 1 : 0; // Eye Abyss Gate Asmodians (Top rigft)
+		this.tr = tr ? 1 : 0; // Eye Abyss Gate Asmodians (Top right)
 		this.actionId = 5;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		switch (actionId) {
 			case 0: // announce
-				writeH(0x19);// 4.0 // old -->writeH(0x11); // 0x11
+				writeH(1 + (rifts.values().size() * 4)); // following byte length
 				writeC(actionId);
-				for (int value : rifts.values()) {
+				for (int value : rifts.values())
 					writeD(value);
-				}
 				break;
-			case 1:
-				writeH(0x09); // 0x09
+			case 1: // silentera
+				writeH(9); // following byte length
 				writeC(actionId);
 				writeD(gelkmaros);
 				writeD(inggison);
 				break;
 			case 2:
-				writeH(0x23); // 0x23
+				writeH(35); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getMaxEntries());
@@ -97,7 +93,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeC(rift.isMaster() ? 1 : 0); // display | hide
 				break;
 			case 3:
-				writeH(0x0f); // 0x0f
+				writeH(15); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getUsedEntries());
@@ -105,21 +101,19 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeC(rift.isVortex() ? 1 : 0);
 				writeC(0); // unk
 				break;
-			case 4:
-				writeH(0x05);
+			case 4: // rift despawn
+				writeH(5); // following byte length
 				writeC(actionId);
 				writeD(objectId);
 				break;
-			case 5:
-				writeH(0x05); // 0x05
+			case 5: // tiamaranta
+				writeH(5); // following byte length
 				writeC(actionId);
 				writeC(cl);
 				writeC(cr);
 				writeC(tl);
 				writeC(tr);
 				break;
-
 		}
 	}
-
 }

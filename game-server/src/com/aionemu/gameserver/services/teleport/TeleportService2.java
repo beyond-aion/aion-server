@@ -304,7 +304,6 @@ public class TeleportService2 {
 
 		if (animation.getId() == TeleportAnimation.NONE.getId()) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
-			PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
 			changePosition(player, worldId, instanceId, x, y, z, heading, animation);
 		} else {
 			sendLoc(player, worldId, instanceId, x, y, z, heading, animation);

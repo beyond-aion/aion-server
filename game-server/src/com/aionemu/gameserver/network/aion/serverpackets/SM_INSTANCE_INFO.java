@@ -17,8 +17,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_INSTANCE_INFO extends AionServerPacket {
 
-	private byte updateType; // 0 = reset existing data and write new info, 1 = update team member info, 2 = overwrite existing data without resetting other
-	private Collection<Player> players; // list of players for which their cooldown info will be sent to the active player
+	private byte updateType; // 0 = reset existing data and write new info, 1 = update team info (leader is always first), 2 = add/overwrite data without resetting other
+	private Collection<Player> players; // list of players for which their cooldown info will be sent (as of 4.7 there are client bugs which can crash it on 4+ players)
 	private Integer[] instanceIds; // list of instances for which the data should be updated
 
 	public SM_INSTANCE_INFO(byte updateType, Player player, Integer... instanceId) {

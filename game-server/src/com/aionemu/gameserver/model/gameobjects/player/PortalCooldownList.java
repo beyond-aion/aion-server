@@ -81,21 +81,22 @@ public class PortalCooldownList {
 	 * @param time
 	 */
 	public void addPortalCooldown(int worldId, long useDelay) {
-		if (portalCooldowns == null) {
+		if (portalCooldowns == null)
 			portalCooldowns = new FastMap<>();
-		}
+
 		PortalCooldown portalCooldown = portalCooldowns.get(worldId);
-		if (portalCooldown == null) {
+		if (portalCooldown == null)
 			portalCooldown = new PortalCooldown(worldId, useDelay, 0);
-		}
+
 		portalCooldown.increaseEnterCount();
 		portalCooldowns.put(worldId, portalCooldown);
 
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
 
 		if (owner.isInTeam())
-			owner.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 1, owner, worldId));
-		PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO((byte) 2, owner, worldId));
+			owner.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 2, owner, worldId));
+		else
+			PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO((byte) 2, owner, worldId));
 	}
 
 	/**
