@@ -85,4 +85,19 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	public int getNextSkillTime() {
 		return -1;
 	}
+	
+	@Override
+	public boolean hasChain() {
+		return false;
+	}
+
+	@Override
+	public int getNextChainId() {
+		return 0;
+	}
+	
+	@Override
+	public int getChainId() {
+		return 0;
+	}
 }

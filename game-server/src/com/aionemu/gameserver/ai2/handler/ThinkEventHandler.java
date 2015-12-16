@@ -86,6 +86,7 @@ public class ThinkEventHandler {
 		if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead()) {
 			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 		} else {
+			npc.getGameStats().setLastSkill(null);
 			npc.getMoveController().recallPreviousStep();
 			npcAI.onGeneralEvent(AIEventType.ATTACK_FINISH);
 			npcAI.onGeneralEvent(npc.isAtSpawnLocation() ? AIEventType.BACK_HOME : AIEventType.NOT_AT_HOME);
