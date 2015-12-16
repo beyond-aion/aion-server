@@ -245,9 +245,8 @@ public class MailService {
 
 		if (attachedItem != null) {
 			if (LoggingConfig.LOG_MAIL)
-				log.info("[MAILSERVICE] [Player: " + sender.getName() + "] send [Item: " + attachedItem.getItemId()
-					+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + attachedItem.getItemName() + "]" : "]") + " [Count: "
-					+ attachedItem.getItemCount() + "] to [Reciever: " + recipientName + "]");
+				log.info("Player: " + sender.getName() + " sent item " + attachedItem.getItemId() + " [" + attachedItem.getItemName() + "] (count: "
+					+ attachedItem.getItemCount() + ") to player " + recipientName);
 		}
 
 		/**

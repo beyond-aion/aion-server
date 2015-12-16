@@ -81,11 +81,8 @@ public class ItemService {
 		Preconditions.checkNotNull(itemTemplate, "No item with id " + itemId);
 		Preconditions.checkNotNull(predicate, "Predicate is not supplied");
 
-		if (LoggingConfig.LOG_ITEM) {
-			log.info("[ITEM] ID/Count"
-				+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/" + itemTemplate.getName()
-					: " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
-		}
+		if (LoggingConfig.LOG_ITEM)
+			log.info("Item: " +  itemTemplate.getTemplateId() + " [" + itemTemplate.getName()+ "] added to player " + player.getName() + " (count: " + count + ") (type: " + predicate.getAddType() + ")");
 
 		Storage inventory = player.getInventory();
 		if (itemTemplate.isKinah()) {
