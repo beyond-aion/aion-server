@@ -101,7 +101,7 @@ public class MonsterRaid {
 				if (!boss.getLifeStats().isAlreadyDead())
 					stopRaid();
 			}
-		}, Rnd.get(100, 130) * 60000); // two hours should be enough + some latency for troll
+		}, 3600000); // two hours should be enough + some latency for troll
 	}
 
 	private final void cancelDespawn() {
