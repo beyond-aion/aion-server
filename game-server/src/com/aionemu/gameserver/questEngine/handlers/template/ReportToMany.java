@@ -5,11 +5,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javolution.util.FastMap;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.NpcInfos;
@@ -17,12 +21,15 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
  * @author Hilgert @modified vlog, Pad
  */
 public class ReportToMany extends QuestHandler {
 
+	private static final Logger log = LoggerFactory.getLogger(ReportToMany.class);
+	
 	private final int startItem;
 	private final Set<Integer> startNpcs = new HashSet<Integer>();
 	private final Set<Integer> endNpcs = new HashSet<Integer>();
@@ -31,6 +38,7 @@ public class ReportToMany extends QuestHandler {
 	private final int maxVar;
 	private final FastMap<Integer, NpcInfos> npcInfos;
 	private boolean mission;
+	private QuestItems workItem;
 
 	/**
 	 * @param questId
@@ -59,6 +67,17 @@ public class ReportToMany extends QuestHandler {
 		this.mission = mission;
 	}
 
+	@Override
+	protected void onWorkItemsLoaded() {
+		if (workItems == null) {
+			return;
+		}
+	/*if (workItems.size() > 1) {
+			log.warn("Q{} (ReportToMany) has more than 1 work item.", questId); 
+		}   commented out until distribution and removal of quest work items depend on quest step*/
+		workItem = workItems.get(0);
+	}
+	
 	@Override
 	public void register() {
 		if (mission) {
@@ -94,7 +113,16 @@ public class ReportToMany extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (startItem != 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
+					if (QuestService.startQuest(env)) {
+						if (workItem != null) {
+							// some quest work items come from other quests, so we don't add them again
+							long count = workItem.getCount();
+							count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
+							if (count != 0) {
+								giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM);
+							}
+						}
+					}
 					return closeDialogWindow(env);
 				}
 			}
@@ -104,7 +132,22 @@ public class ReportToMany extends QuestHandler {
 						return sendQuestDialog(env, startDialog);
 					else
 						return sendQuestDialog(env, 1011);
-				} else {
+				}
+				else if (dialog == DialogAction.QUEST_ACCEPT || dialog == DialogAction.QUEST_ACCEPT_1 || dialog == DialogAction.QUEST_ACCEPT_SIMPLE){
+					if (workItem != null) {
+						// some quest work items come from other quests, so we don't add them again
+						long count = workItem.getCount();
+						count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
+						if (count == 0 || giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM)) {
+							return sendQuestStartDialog(env);
+						}
+						return false;
+					}
+					else {
+						return sendQuestStartDialog(env);
+					}
+				}
+				else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -116,16 +159,19 @@ public class ReportToMany extends QuestHandler {
 					int closeDialog;
 					if (targetNpcInfo.getCloseDialog() == 0) {
 						closeDialog = 10000 + targetNpcInfo.getVar();
-					} else {
+					} 
+					else {
 						closeDialog = targetNpcInfo.getCloseDialog();
 					}
 
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, targetNpcInfo.getQuestDialog());
-					} else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
+					} 
+					else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
 						sendQuestDialog(env, targetNpcInfo.getQuestDialog() + 1);
 						return playQuestMovie(env, targetNpcInfo.getMovie());
-					} else if (dialog.id() == closeDialog) {
+					} 
+					else if (dialog.id() == closeDialog) {
 						if ((dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)
 							|| QuestService.collectItemCheck(env, true)) {
 							if (var == maxVar) {
@@ -146,11 +192,19 @@ public class ReportToMany extends QuestHandler {
 				if (endNpcs.contains(targetId)) {
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, endDialog);
-					} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+					} 
+					else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 						if (startItem != 0) {
 							if (!removeQuestItem(env, startItem, 1)) {
 								return false;
 							}
+						}
+						if (workItem != null) {
+							long count = player.getInventory().getItemCountByItemId(workItem.getItemId());
+							if (count < workItem.getCount()) {
+								return sendQuestSelectionDialog(env);
+							}
+							removeQuestItem(env, workItem.getItemId(), count, QuestStatus.COMPLETE);
 						}
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
