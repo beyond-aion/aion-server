@@ -50,47 +50,21 @@
 		[END] SUMMARY
 -->
 	<!-- REPORTING QUESTS -->
+	<report_to_many id="1118" start_npc_ids="203059" end_npc_ids="203079">
+		<npc_infos var="0" npc_id="203070" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="203079" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many start_npc_ids="203075" end_npc_ids="203058" id="1115">
+		<npc_infos var="0" npc_id="203072" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="203058" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<report_to start_npc_ids="203049" end_npc_ids="203057" id="1101"/>
 	<report_to start_npc_ids="203057" end_npc_ids="203059" id="1104"/>
 	<report_to start_npc_ids="203050" end_npc_ids="203061" id="1106"/>
 	<report_to start_npc_ids="203065" end_npc_ids="203075" id="1110"/>
-	<report_to start_npc_ids="203059" end_npc_ids="203070" id="1118"/>
 	<report_to start_npc_ids="203075" end_npc_ids="203080" id="1119"/>
 	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1230"/>
 	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1231"/>
-	<xml_quest start_npc_id="203075" end_npc_id="203058" id="1115">
-		<on_talk_event ids="203072 203058">
-			<var value="0">
-				<npc id="203072">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="1352"/>
-						</operations>
-					</dialog>
-					<dialog id="10000">
-						<operations>
-							<set_quest_var var_id="0" value="1"/>
-							<npc_dialog id="1352" quest_id="0"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-			<var value="1">
-				<npc id="203058">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="2375"/>
-						</operations>
-					</dialog>
-					<dialog id="1009">
-						<operations override="false">
-							<set_quest_status status="REWARD"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-		</on_talk_event>
-	</xml_quest>
 	<xml_quest start_npc_id="798008" end_npc_id="798008" id="1127">
 		<on_talk_event ids="700001">
 			<conditions operate="AND">
