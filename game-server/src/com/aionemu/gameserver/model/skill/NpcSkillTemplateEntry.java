@@ -284,4 +284,19 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public int getNextSkillTime() {
 		return template.getNextSkillTime();
 	}
+	
+	@Override
+	public boolean hasChain() {
+		return template.getNextChainId() > 0;
+	}
+	
+	@Override
+	public int getNextChainId() {
+		return template.getNextChainId();
+	}
+	
+	@Override
+	public int getChainId() {
+		return template.getChainId();
+	}
 }

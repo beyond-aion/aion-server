@@ -32,6 +32,8 @@
 		<xs:attribute name="useinspawned" type="xs:boolean"/>
 		<xs:attribute name="priority" type="xs:int"/>
 		<xs:attribute name="nextSkillTime" type="xs:int"/>
+		<xs:attribute name="nextChainId" type="xs:int"/>
+		<xs:attribute name="chainId" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="NpcSkillConditionTemplate">
 		<xs:attribute name="condType" type="ConditionType"/>

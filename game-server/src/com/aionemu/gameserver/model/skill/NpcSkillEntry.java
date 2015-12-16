@@ -52,5 +52,11 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract int getNextSkillTime();
 	
+	public abstract boolean hasChain();
+	
+	public abstract int getNextChainId();
+	
+	public abstract int getChainId();
+	
 }
 

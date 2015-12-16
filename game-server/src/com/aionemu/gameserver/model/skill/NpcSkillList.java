@@ -159,4 +159,18 @@ public class NpcSkillList implements SkillList<Npc> {
 	public List<Integer> getPriorities() {
 		return priorities;
 	}
+	
+	public NpcSkillEntry getChainSkill(NpcSkillEntry curSkill) {
+		if (skills != null && curSkill != null) {
+			int id = curSkill.getNextChainId();
+			if (id > 0) {
+				for (NpcSkillEntry entry : skills) {
+					if (entry != null && entry.getChainId() == id) {
+						return entry;
+					}
+				}
+			}
+		}
+		return null;
+	}
 }
