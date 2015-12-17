@@ -39,6 +39,7 @@
 		<xs:attribute name="condType" type="ConditionType"/>
 		<xs:attribute name="range" type="xs:int"/>
 		<xs:attribute name="hpBelow" type="xs:int"/>
+		<xs:attribute name="skill_id" type="xs:int"/>
 	</xs:complexType>
         <xs:simpleType name="ConjunctionType">
             <xs:restriction base="xs:string">
@@ -70,6 +71,7 @@
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_III"/>
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV"/>
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
+				<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
         	</xs:restriction>
         </xs:simpleType>
 </xs:schema>

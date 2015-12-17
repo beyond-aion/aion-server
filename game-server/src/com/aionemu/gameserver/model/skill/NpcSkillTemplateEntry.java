@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
+import java.util.List;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -20,6 +22,8 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
+
+import javolution.util.FastTable;
 
 /**
  * Skill entry which inherits properties from template (regular npc skills)
@@ -96,7 +100,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public boolean conditionReady(Creature creature) {
 		NpcSkillConditionTemplate condTemp = template.getConditionTemplate();	
-		if (creature == null) {
+		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
 		} else if (condTemp == null) {
 			return true;
@@ -109,14 +113,37 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return true;
 			case SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED:
 			case SELECT_RANDOM_ENEMY:
+				List<Creature> knownCreatures = new FastTable<>();
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj != null && obj instanceof Creature) {
 						Creature target = (Creature) obj;
+						if (target.getLifeStats().isAlreadyDead()  || target.getLifeStats().isAboutToDie()) 
+							continue;
 						if (condType == NpcSkillCondition.SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED 
-								&& creature.getAggroList().getMostHated().equals(target)) {
+								&& creature.getAggroList().getMostHated().equals(target))
 								continue;
-						}
 						if (creature.isEnemy(target) && creature.canSee(target)
+								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
+								&& GeoService.getInstance().canSee(creature, target)) {
+								knownCreatures.add(target);
+						}
+					}
+				}
+				if (!knownCreatures.isEmpty()) {
+					Creature target = knownCreatures.get(Rnd.get(0, knownCreatures.size() - 1));
+					if (target != null) {
+						creature.setTarget(target);
+						return true;
+					}
+				}
+				return false;
+			case SELECT_TARGET_AFFECTED_BY_SKILL:
+				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
+					if (obj != null && obj instanceof Creature) {
+						Creature target = (Creature) obj;
+						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie()) 
+							continue;
+						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
 								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
 								&& GeoService.getInstance().canSee(creature, target)) {
 								creature.setTarget(target);
@@ -126,18 +153,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				}
 				return false;
 			case HELP_SELF:
-				if (creature != null && !creature.getLifeStats().isAlreadyDead()) {
-					if (creature.getLifeStats().getHpPercentage() <= condTemp.getHpBelow()) {
-						creature.setTarget(creature);
-						return true;
-					}
+				if (creature.getLifeStats().getHpPercentage() <= condTemp.getHpBelow()) {
+					creature.setTarget(creature);
+					return true;
 				}
 				return false;
 			case HELP_FRIEND:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj != null && obj instanceof Creature) {
 						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead()) 
+						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie()) 
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target)) 
 								&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target) 
@@ -151,50 +176,42 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return false;
 			case TARGET_IS_AETHERS_HOLD:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.OPENAERIAL);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.OPENAERIAL);
 				}
 				return false;
 			case TARGET_IS_STUNNED:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.STUN);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.STUN);
 				}
 				return false;
 			case TARGET_IS_IN_ANY_STUN:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN);
 				}
 				return false;
 			case TARGET_IS_IN_STUMBLE:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.STUMBLE);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.STUMBLE);
 				}
 				return false;
 			case TARGET_IS_SLEEPING:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.SLEEP);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.SLEEP);
 				}
 				return false;
 			case TARGET_IS_POISONED:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.POISON);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.POISON);
 				}
 				return false;
 			case TARGET_IS_BLEEDING:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					return target.getEffectController().isInAnyAbnormalState(AbnormalState.BLEED);
+					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.BLEED);
 				}
 				return false;
 			case TARGET_IS_GATE:
 				if (curTarget != null && curTarget instanceof Creature) {
-					Creature target = (Creature) curTarget;
-					NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(target.getObjectId());
+					NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(((Creature) curTarget).getObjectId());
 					if (template != null && template.getAbyssNpcType() == AbyssNpcType.DOOR) {
 						return true;
 					}
@@ -209,10 +226,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case TARGET_IS_PHYSICAL_CLASS:
 				boolean magical = condType == NpcSkillCondition.TARGET_IS_PHYSICAL_CLASS ? false : true;
 				if (curTarget != null && curTarget instanceof Player) {
-					Player player = (Player) curTarget;
-					if (magical && player.getPlayerClass() == PlayerClass.MAGICAL_CLASS) {
+					if (magical && ((Player) curTarget).getPlayerClass() == PlayerClass.MAGICAL_CLASS) {
 						return true;
-					} else if (!magical && player.getPlayerClass() == PlayerClass.PHYSICAL_CLASS) {
+					} else if (!magical && ((Player) curTarget).getPlayerClass() == PlayerClass.PHYSICAL_CLASS) {
 						return true;
 					}
 				}
@@ -234,7 +250,8 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
-		if (curTarget != null && curTarget instanceof Creature) {
+		if (curTarget != null && curTarget instanceof Creature 
+				&& !((Creature) curTarget).getLifeStats().isAlreadyDead() && !((Creature) curTarget).getLifeStats().isAboutToDie()) {
 			if (skillTemp != null && skillTemp.getEffects().getEffectTypes().contains(EffectType.SIGNETBURST)) {
 				for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
 					if (effectTemp instanceof SignetBurstEffect) {
