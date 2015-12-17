@@ -31,6 +31,7 @@ import com.aionemu.gameserver.dataholders.CustomDrop;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.EventData;
 import com.aionemu.gameserver.dataholders.NpcDropData;
+import com.aionemu.gameserver.dataholders.NpcSkillData;
 import com.aionemu.gameserver.dataholders.QuestsData;
 import com.aionemu.gameserver.dataholders.SkillData;
 import com.aionemu.gameserver.dataholders.StaticData;
@@ -38,6 +39,7 @@ import com.aionemu.gameserver.dataholders.XMLQuests;
 import com.aionemu.gameserver.dataholders.loadingutils.XmlValidationHandler;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -51,7 +53,7 @@ import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 public class Reload extends AdminCommand {
 
 	private static final Logger log = LoggerFactory.getLogger(Reload.class);
-	private static final String SYNTAX = "syntax //reload <quest | skill | npc | items | portal | commands | drop | gameshop | events | config | ai>";
+	private static final String SYNTAX = "syntax //reload <quest | skill | npcskill | npc | items | portal | commands | drop | gameshop | events | config | ai>";
 
 	public Reload() {
 		super("reload");
@@ -107,6 +109,25 @@ public class Reload extends AdminCommand {
 				log.error("Skill reload failed!", e);
 			} finally {
 				PacketSendUtility.sendMessage(admin, "Skill reload Success!");
+			}
+		} else if (params[0].equalsIgnoreCase("npcskill")) {
+			File dir = new File("./data/static_data/npc_skills");
+			try {
+				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
+				Unmarshaller un = jc.createUnmarshaller();
+				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
+				List<NpcSkillTemplates> newTemplates = new FastTable<NpcSkillTemplates>();
+				for (File file : listFiles(dir, true)) {
+					NpcSkillData data = (NpcSkillData) un.unmarshal(file);
+					if (data != null) {
+						newTemplates.addAll(data.getAllNpcSkillTemplates());
+					}
+				}
+				DataManager.NPC_SKILL_DATA.setNpcSkillTemplates(newTemplates);
+			} catch (Exception e) {
+				PacketSendUtility.sendMessage(admin, "Npc_Skill reload failed!");
+			} finally {
+				PacketSendUtility.sendMessage(admin, "Npc_Skill reload Success!");
 			}
 		} else if (params[0].equals("npc")) {
 			DataManager.NPC_DATA.reload(admin);
