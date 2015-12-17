@@ -29,8 +29,7 @@ public class Rnd {
 	/**
 	 * @param min
 	 * @param max
-	 * @return value
-	 * get random number from min to max (not max-1 !)
+	 * @return Integer between min(inclusive) and max(inclusive)
 	 */
 	public static int get(int min, int max) 
 	{
