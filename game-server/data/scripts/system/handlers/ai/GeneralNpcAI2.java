@@ -169,10 +169,7 @@ public class GeneralNpcAI2 extends NpcAI2 {
 				return AttackIntention.SKILL_ATTACK;
 			}
 		}
-		if (!currentTarget.getObjectId().equals(mostHated.getObjectId())) {
-			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
-			return AttackIntention.SWITCH_TARGET;
-		}
+
 		return AttackIntention.SIMPLE_ATTACK;
 	}
 }
