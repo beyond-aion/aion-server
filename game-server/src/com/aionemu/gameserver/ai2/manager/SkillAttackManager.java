@@ -42,8 +42,7 @@ public class SkillAttackManager {
 		}
 		if (npcAI.setSubStateIfNot(AISubState.CAST)) {
 			if (delay > 0) {
-				ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI),
-					delay /*+ DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration()*/);
+				ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI), delay);
 			} else {
 				skillAction(npcAI);
 			}
@@ -89,7 +88,10 @@ public class SkillAttackManager {
 					}
 					break;
 			}
-			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME || template.getProperties().getTargetType() == TargetRangeAttribute.AREA) {
+			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME 
+				|| (template.getProperties().getTargetType() == TargetRangeAttribute.AREA 
+						&& template.getProperties().getEffectiveAngle() <= 0 && template.getProperties().getEffectiveDist() <= 0)
+						&& template.getProperties().getFirstTargetRange() <= template.getProperties().getEffectiveRange()) {
 				npcAI.getOwner().setTarget(npcAI.getOwner());
 			}
 			boolean success = npcAI.getOwner().getController().useSkill(skillId, skillLevel);
@@ -194,16 +196,20 @@ public class SkillAttackManager {
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
 		if (owner.getTarget() != null) {
 			if (((Creature)owner.getTarget()).getLifeStats().isAlreadyDead() || !owner.canSee((Creature)owner.getTarget())) {
+				System.out.println("Target too far.");
 				return true;
 			}
 			SkillTemplate template = entry.getSkillTemplate();
 			Properties prop = template.getProperties();
 			if (prop.getFirstTarget() != FirstTargetAttribute.ME && prop.getTargetType() != TargetRangeAttribute.AREA) {
-				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange())) {
+				float collision = owner.getObjectTemplate().getBoundRadius().getCollision() < 1f ? 1f : owner.getObjectTemplate().getBoundRadius().getCollision();
+				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision)) {
+					System.out.println("2Target too far.");
 					return true;
 				}
 			}
 		} else {
+			System.out.println("3Target too far.");
 			return true;
 		}
 		return false;

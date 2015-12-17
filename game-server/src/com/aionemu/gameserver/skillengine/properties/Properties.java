@@ -61,7 +61,10 @@ public class Properties {
 
 	@XmlAttribute(name = "target_species")
 	protected TargetSpeciesAttribute targetSpecies = TargetSpeciesAttribute.ALL;
-
+	
+	@XmlAttribute(name = "ineffective_range")
+	protected int ineffectiveRange;
+	
 	/**
 	 * @param skill
 	 */
@@ -218,5 +221,9 @@ public class Properties {
 		public boolean isCastStart() {
 			return isCastStart;
 		}
+	}
+	
+	public int getIneffectiveRange() {
+		return ineffectiveRange;
 	}
 }

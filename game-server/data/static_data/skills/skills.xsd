@@ -237,6 +237,7 @@
 		<xs:attribute name="effective_altitude" type="xs:int" />
 		<xs:attribute default="NONE" name="direction" type="Directions"/>
 		<xs:attribute name="target_species" type="TargetSpeciesAttribute" default="ALL"/>
+		<xs:attribute name="ineffective_range" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="Actions">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
