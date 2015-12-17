@@ -196,7 +196,6 @@ public class SkillAttackManager {
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
 		if (owner.getTarget() != null) {
 			if (((Creature)owner.getTarget()).getLifeStats().isAlreadyDead() || !owner.canSee((Creature)owner.getTarget())) {
-				System.out.println("Target too far.");
 				return true;
 			}
 			SkillTemplate template = entry.getSkillTemplate();
@@ -204,12 +203,10 @@ public class SkillAttackManager {
 			if (prop.getFirstTarget() != FirstTargetAttribute.ME && prop.getTargetType() != TargetRangeAttribute.AREA) {
 				float collision = owner.getObjectTemplate().getBoundRadius().getCollision() < 1f ? 1f : owner.getObjectTemplate().getBoundRadius().getCollision();
 				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision)) {
-					System.out.println("2Target too far.");
 					return true;
 				}
 			}
 		} else {
-			System.out.println("3Target too far.");
 			return true;
 		}
 		return false;
