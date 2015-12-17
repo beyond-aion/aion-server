@@ -30,9 +30,9 @@ public class Rnd {
 	 * @param min
 	 * @param max
 	 * @return value
+	 * get random number from min to max (not max-1 !)
 	 */
-	public static int get(int min, int max) // get random number from
-	// min to max (not max-1 !)
+	public static int get(int min, int max) 
 	{
 		return min + (int) Math.floor(rnd.nextDouble() * (max - min + 1));
 	}
