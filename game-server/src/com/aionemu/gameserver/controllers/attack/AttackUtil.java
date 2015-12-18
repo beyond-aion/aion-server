@@ -378,7 +378,7 @@ public class AttackUtil {
 		}
 
 		if (randomDamage > 0) {
-			int randomChance = Rnd.get(100);
+			int randomChance = Rnd.get(1, 100);
 			int dmgMod = Rnd.get(1, 3);
 			// TODO Hard fix
 			if (effect.getSkillId() == 20033)
@@ -810,7 +810,7 @@ public class AttackUtil {
 			return;
 		// On retail this effect apply on each crit with 10% of base chance
 		// plus bonus effect penetration calculated above
-		if (Rnd.get(100) > 10)
+		if (Rnd.get(1, 100) > 10)
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);

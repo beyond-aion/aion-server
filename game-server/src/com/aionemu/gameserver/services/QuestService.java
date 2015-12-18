@@ -877,9 +877,9 @@ public final class QuestService {
 		}
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npc.getObjectId());
 		for (QuestDrop drop : drops) {
-			if (Rnd.get() * 100 > drop.getChance()) {
+			if (Rnd.get(1, 100) > drop.getChance())
 				continue;
-			}
+
 			if (players != null && player.isInGroup2()) {
 				List<Player> pls = new FastTable<Player>();
 				if (drop.isDropEachMemberGroup()) {

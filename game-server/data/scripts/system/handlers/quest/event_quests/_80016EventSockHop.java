@@ -106,10 +106,7 @@ public class _80016EventSockHop extends QuestHandler {
 				rewardItems.add(new QuestItems(188051106, 1));
 			}
 			// randomize movie
-			if (Rnd.get() * 100 < 50)
-				playQuestMovie(env, 103);
-			else
-				playQuestMovie(env, 104);
+			playQuestMovie(env, Rnd.nextBoolean() ? 103 : 104);
 			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;
