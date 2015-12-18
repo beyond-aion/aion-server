@@ -54,7 +54,7 @@ public class GloryPointsService {
 		if (additionalGp > 0)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(additionalGp));
 		else
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402219, additionalGp * -1));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(additionalGp * -1));
 		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player.getAbyssRank()));
 	}
 }
