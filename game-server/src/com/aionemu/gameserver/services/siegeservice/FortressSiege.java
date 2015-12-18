@@ -27,7 +27,6 @@ import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.LegionService;
@@ -37,7 +36,6 @@ import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
@@ -189,13 +187,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
 			if (oldLegionGeneral != 0) {
 				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
-				Legion legion = LegionService.getInstance().getLegion(this.oldLegionId);
-				legion.decreaseSiegeGloryPoints(1000);
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(oldLegionGeneral);
-				if (pcd != null) { // who knows? :D
-					for (Player p : World.getInstance().getAllPlayers())
-						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(pcd.getName(), 1000));
-				}
+				LegionService.getInstance().getLegion(oldLegionId).decreaseSiegeGloryPoints(1000);
 			}
 		}
 

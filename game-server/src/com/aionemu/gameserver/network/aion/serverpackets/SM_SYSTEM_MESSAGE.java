@@ -22267,6 +22267,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %num0 Glory Points have been deducted from you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1402219, num0);
+	}
+
+	/**
 	 * The %1 on %0 has been destroyed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {

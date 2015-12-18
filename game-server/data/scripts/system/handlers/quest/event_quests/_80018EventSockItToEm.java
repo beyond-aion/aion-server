@@ -106,10 +106,7 @@ public class _80018EventSockItToEm extends QuestHandler {
 				rewardItems.add(new QuestItems(188051106, 1));
 			}
 			// randomize movie
-			if (Rnd.get() * 100 < 50)
-				playQuestMovie(env, 135);
-			else
-				playQuestMovie(env, 136);
+			playQuestMovie(env, Rnd.nextBoolean() ? 135 : 136);
 			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;

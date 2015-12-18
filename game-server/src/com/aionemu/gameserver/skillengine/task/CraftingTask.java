@@ -100,7 +100,7 @@ public class CraftingTask extends AbstractCraftTask {
 					}
 			}
 
-			if ((critCount < maxCritCount) && (Rnd.get(100) < chance)) {
+			if ((critCount < maxCritCount) && (Rnd.get(1, 100) <= chance)) {
 				critCount++;
 				crit = true;
 			}

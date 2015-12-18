@@ -75,7 +75,7 @@ public class GatesSummonedAI2 extends GeneralNpcAI2 {
 				if (isAlreadyDead() && getOwner() == null)
 					cancelEventTask();
 				else {
-					if (Rnd.get(1) == 0)
+					if (Rnd.get(0, 1) == 0)
 						SkillEngine.getInstance().getSkill(getOwner(), 19257, 55, boss).useNoAnimationSkill();
 					else
 						SkillEngine.getInstance().getSkill(getOwner(), 19281, 55, boss).useNoAnimationSkill();
