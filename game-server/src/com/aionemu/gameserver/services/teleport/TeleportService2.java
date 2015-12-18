@@ -195,13 +195,17 @@ public class TeleportService2 {
 		boolean isInstance = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).isInstance();
 		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player, animation.getDefaultObjectDeleteAnimation()));
 		PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(isInstance, instanceId, mapId, x, y, z, h, animation));
+		player.clearKnownlist();
 		player.unsetPlayerMode(PlayerMode.RIDE);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if (player.getLifeStats().isAlreadyDead() || !player.isSpawned())
+				if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
+					PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player, false), true);
+					player.updateKnownlist();
 					return;
+				}
 				changePosition(player, mapId, instanceId, x, y, z, h, animation);
 			}
 
