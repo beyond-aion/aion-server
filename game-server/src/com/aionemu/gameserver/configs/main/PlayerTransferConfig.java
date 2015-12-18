@@ -58,7 +58,7 @@ public class PlayerTransferConfig {
 	@Property(key = "ptransfer.server.name.prefix", defaultValue = "_UNK")
 	public static String NAME_PREFIX;
 
-	@Property(key = "ptransfer.retransfer.hours", defaultValue = "_UNK")
+	@Property(key = "ptransfer.retransfer.hours", defaultValue = "0")
 	public static int REUSE_HOURS;
 
 	@Property(key = "ptransfer.remove.skills.list", defaultValue = "*")
