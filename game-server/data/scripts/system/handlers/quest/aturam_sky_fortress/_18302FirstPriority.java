@@ -44,7 +44,7 @@ public class _18302FirstPriority extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
-					playQuestMovie(env, 468);
+					playQuestMovie(env, 469);
 					return sendQuestStartDialog(env);
 				} else
 					return sendQuestStartDialog(env);
