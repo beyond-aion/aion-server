@@ -233,7 +233,7 @@ public class SiegeService {
 				}
 			}
 		}
-		
+
 		// Schedule agent fights
 		for (final SiegeSchedule.AgentFight a : siegeSchedule.getAgentFights()) {
 			for (String siegeTime : a.getSiegeTimes()) {
@@ -484,6 +484,15 @@ public class SiegeService {
 
 			@Override
 			public void run() {
+				// Special case for Anoha Fortress artifacts
+				if (locationId == 7011) {
+					List<ArtifactLocation> artis = FastTable.of(getArtifact(7012), getArtifact(7013), getArtifact(7014));
+					for (ArtifactLocation arti : artis) {
+						if (!arti.getRace().equals(SiegeRace.BALAUR))
+							resetSiegeLocation(arti);
+					}
+					artis.clear();
+				}
 				// Start siege warfare
 				startSiege(locationId);
 			}
@@ -493,18 +502,6 @@ public class SiegeService {
 			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
 			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
 			this.resetSiegeLocation(loc);
-		}
-		//Special case for Anoha Fortress artifacts
-		if (locationId == 7011) {
-			List<ArtifactLocation> artis = new FastTable<>();
-			artis.add(getArtifact(7012));
-			artis.add(getArtifact(7013));
-			artis.add(getArtifact(7014));
-			for (ArtifactLocation arti : artis) {
-				if (!arti.getRace().equals(SiegeRace.BALAUR))
-					resetSiegeLocation(arti);
-			}
-			artis.clear();
 		}
 	}
 
@@ -821,7 +818,7 @@ public class SiegeService {
 
 		return mapLocations;
 	}
-	
+
 	public AgentLocation getAgentLocation() {
 		return agent;
 	}
