@@ -160,17 +160,18 @@ public class NpcSkillList implements SkillList<Npc> {
 		return priorities;
 	}
 	
-	public NpcSkillEntry getChainSkill(NpcSkillEntry curSkill) {
+	public List<NpcSkillEntry> getChainSkills(NpcSkillEntry curSkill) {
+		List<NpcSkillEntry> chainSkills = new FastTable<>();
 		if (skills != null && curSkill != null) {
 			int id = curSkill.getNextChainId();
 			if (id > 0) {
 				for (NpcSkillEntry entry : skills) {
 					if (entry != null && entry.getChainId() == id) {
-						return entry;
+						chainSkills.add(entry);
 					}
 				}
 			}
 		}
-		return null;
+		return chainSkills;
 	}
 }

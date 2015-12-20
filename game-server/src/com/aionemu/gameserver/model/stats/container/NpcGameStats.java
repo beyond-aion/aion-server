@@ -340,6 +340,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
 	}
+	
+	public long getLastSkillTime() {
+		return lastSkillTime;
+	}
 
 	// only use skills after a minimum cooldown of 3 to 9 seconds
 	// TODO: Check wether this is a suitable time or not

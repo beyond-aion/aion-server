@@ -34,7 +34,9 @@
 		<xs:attribute name="nextSkillTime" type="xs:int"/>
 		<xs:attribute name="nextChainId" type="xs:int"/>
 		<xs:attribute name="chainId" type="xs:int"/>
-	</xs:complexType>
+		<xs:attribute name="maxChainTime" type="xs:int"/>
+		<xs:attribute name="target" type="NpcSkillTargetAttribute"/>
+		</xs:complexType>
 	<xs:complexType name="NpcSkillConditionTemplate">
 		<xs:attribute name="condType" type="ConditionType"/>
 		<xs:attribute name="range" type="xs:int"/>
@@ -74,4 +76,11 @@
 				<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
         	</xs:restriction>
         </xs:simpleType>
+		<xs:simpleType name="NpcSkillTargetAttribute">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ME"/>
+        		<xs:enumeration value="MOST_HATED"/>
+				<xs:enumeration value="NONE"/>
+			</xs:restriction>
+		</xs:simpleType>
 </xs:schema>

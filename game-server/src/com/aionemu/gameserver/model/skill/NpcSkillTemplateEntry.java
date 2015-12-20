@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
@@ -98,14 +99,13 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public boolean conditionReady(Creature creature) {
-		NpcSkillConditionTemplate condTemp = template.getConditionTemplate();	
+	public boolean conditionReady(Creature creature) {	
 		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
-		} else if (condTemp == null) {
+		} 
+		NpcSkillConditionTemplate condTemp = template.getConditionTemplate();
+		if (condTemp == null) 
 			return true;
-		}
-		
 		VisibleObject curTarget = creature.getTarget();
 		NpcSkillCondition condType = condTemp.getCondType();
 		switch (condType) {
@@ -150,12 +150,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 								return true;
 						}
 					}
-				}
-				return false;
-			case HELP_SELF:
-				if (creature.getLifeStats().getHpPercentage() <= condTemp.getHpBelow()) {
-					creature.setTarget(creature);
-					return true;
 				}
 				return false;
 			case HELP_FRIEND:
@@ -246,7 +240,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			default:
 				return true;
 		}
-		
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
@@ -270,11 +263,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 	
 	@Override
-	public NpcSkillCondition getCondition() {
-		return template.getConditionTemplate().getCondType();
-	}
-
-	@Override
 	public NpcSkillConditionTemplate getConditionTemplate() {
 		return template.getConditionTemplate();
 	}
@@ -285,16 +273,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public int getRange() {
-		return getConditionTemplate().getRange();
-	}
-
-	@Override
-	public int getHpBelow() {
-		return getConditionTemplate().getHpBelow();
 	}
 
 	@Override
@@ -315,5 +293,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public int getChainId() {
 		return template.getChainId();
+	}
+	
+	public NpcSkillTemplate getTemplate() {
+		return template;
+	}
+	
+	@Override
+	public boolean canUseNextChain(Npc owner) {
+		if (owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) > template.getMaxChainTime())
+			return false;
+		return true;
 	}
 }

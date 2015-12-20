@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.skill;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 
 /**
  * Skill entry which can be created on the fly (skills of servants, traps)
@@ -57,11 +58,6 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public NpcSkillCondition getCondition() {
-		return NpcSkillCondition.NONE;
-	}
-
-	@Override
 	public NpcSkillConditionTemplate getConditionTemplate() {
 		return null;
 	}
@@ -69,16 +65,6 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	@Override
 	public boolean hasCondition() {
 		return false;
-	}
-
-	@Override
-	public int getRange() {
-		return 0;
-	}
-
-	@Override
-	public int getHpBelow() {
-		return 0;
 	}
 
 	@Override
@@ -99,5 +85,15 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	@Override
 	public int getChainId() {
 		return 0;
+	}
+	
+	@Override
+	public boolean canUseNextChain(Npc owner) {
+		return false;
+	}
+	
+	@Override
+	public NpcSkillTemplate getTemplate() {
+		return null;
 	}
 }
