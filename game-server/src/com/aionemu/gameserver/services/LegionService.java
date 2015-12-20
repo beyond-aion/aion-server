@@ -2001,4 +2001,53 @@ public class LegionService {
 		}
 		return false;
 	}
+	
+	/**
+	 * for name changes
+	 */
+	public void updateLegionMemberList(Player activePlayer) {
+		//TODO FIX NULL POINTER BECAUSE OF GE TLEGION MEMBEREX
+		if (activePlayer != null && activePlayer.getLegion() != null) {
+			Legion legion = activePlayer.getLegion();
+			List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
+			ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
+			// Send the member list to all online members
+			while (splits.hasMore()) {
+				boolean isSplit = false;
+				boolean isFirst = splits.isFirst();
+				List<LegionMemberEx> curentMembers = splits.getNext();
+				if (isFirst && curentMembers.size() < totalMembers.size()) {
+					isSplit = true;
+				}
+				PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_MEMBERLIST(curentMembers, isSplit, isFirst));
+			}
+		}
+	}
+	
+	/**
+	 * for name changes
+	 * @param activePlayer
+	 */
+	public void removeFromCache(Player activePlayer) {
+		if (activePlayer == null) {
+			return;
+		}
+		if (allCachedLegionMembers.contains(activePlayer.getObjectId())) {
+			allCachedLegionMembers.remove(activePlayer);
+		}
+	}
+	
+	/**
+	 * for name changes
+	 * @param activePlayer
+	 */
+	public void addToCache(Player activePlayer) {
+		if (activePlayer == null) {
+			return;
+		}
+		if (!allCachedLegionMembers.contains(activePlayer.getObjectId())) {
+			allCachedLegionMembers.add(activePlayer);
+		}
+	}
+
 }

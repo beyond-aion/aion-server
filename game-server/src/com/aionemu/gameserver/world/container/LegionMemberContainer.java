@@ -2,6 +2,9 @@ package com.aionemu.gameserver.world.container;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.LegionMemberDAO;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -112,5 +115,52 @@ public class LegionMemberContainer {
 		legionMemberById.clear();
 		legionMemberExById.clear();
 		legionMemberExByName.clear();
+	}
+	
+	/**
+	 * for name changes
+	 * @param player
+	 */
+	public void remove(Player player) {
+		if (player == null) {
+			return;
+		}
+		if (legionMemberById.containsKey(player)) {
+			legionMemberById.remove(player);
+		}
+		if (legionMemberExById.containsKey(player)) {
+			legionMemberExById.remove(player);
+		}
+		if (legionMemberExByName.containsKey(player.getName())) {
+			legionMemberExByName.remove(player.getName());
+		}
+	}
+	
+	/**
+	 * for name changes
+	 * @param player
+	 */
+	public void add(Player player) {
+		if (player == null) {
+			return;
+		}
+		if (!legionMemberById.containsKey(player)) {
+			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(player.getObjectId());
+			if (legionMember != null) {
+				legionMemberById.put(legionMember.getObjectId(), legionMember);
+			}
+		}
+		if (!legionMemberExById.containsKey(player)) {
+			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
+			if (legionMember != null) {
+				legionMemberExById.put(legionMember.getObjectId(), legionMember);
+			}
+		}
+		if (!legionMemberExByName.containsKey(player.getName())) {
+			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
+			if (legionMember != null) {
+				legionMemberExByName.put(legionMember.getName(), legionMember);
+			}
+		}
 	}
 }
