@@ -1,16 +1,19 @@
 package quest.crafting;
 
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+/*
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+*/
 
 /**
  * @author Ritsu
+ * @modified Pad (Crafting-Quest-Rework needed)
  */
 public class _29055ExpertConstructorsFinalExam extends QuestHandler {
 
@@ -22,10 +25,11 @@ public class _29055ExpertConstructorsFinalExam extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(798452).addOnQuestStart(questId);
-		qe.registerQuestNpc(798452).addOnTalkEvent(questId);
+		// qe.registerQuestNpc(798452).addOnQuestStart(questId);
+		// qe.registerQuestNpc(798452).addOnTalkEvent(questId);
 	}
 
+	/*
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
@@ -69,4 +73,5 @@ public class _29055ExpertConstructorsFinalExam extends QuestHandler {
 		}
 		return false;
 	}
+	*/
 }
