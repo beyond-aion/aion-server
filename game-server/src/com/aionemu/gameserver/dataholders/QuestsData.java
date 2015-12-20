@@ -61,6 +61,8 @@ public class QuestsData {
 				continue;
 			if (questTemplate.getMinlevelPermitted() != 0 && player.getLevel() < questTemplate.getMinlevelPermitted())
 				continue;
+			if (questTemplate.getMaxlevelPermitted() != 0 && player.getLevel() > questTemplate.getMaxlevelPermitted())
+				continue;
 			questEnv.setQuestId(questTemplate.getId());
 			if (QuestService.checkStartConditions(questEnv, false))
 				quests.add(questTemplate);

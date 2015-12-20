@@ -465,7 +465,7 @@ public final class QuestService {
 				return false;
 
 			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
-			if (faction == null || !faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId()))
+			if (faction == null || !faction.isActive())
 				return false;
 		}
 
