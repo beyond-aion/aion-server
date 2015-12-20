@@ -250,8 +250,8 @@ public final class PlayerEnterWorldService {
 		if (player != null && client.setActivePlayer(player)) {
 			player.setClientConnection(client);
 
-			log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress()
-				+ " MAC, and " + client.getHddSerial() + " HDD serial.");
+			log.info("Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC and "
+				+ client.getHddSerial() + " HDD serial.");
 			World.getInstance().storeObject(player);
 
 			if (SecurityConfig.DUALBOXING) {
@@ -483,7 +483,7 @@ public final class PlayerEnterWorldService {
 
 			if (HTMLConfig.ENABLE_GUIDES)
 				HTMLService.onPlayerLogin(player);
-			
+
 			AdventService.getInstance().onLogin(player);
 
 			for (StorageType st : StorageType.values()) {
@@ -617,7 +617,6 @@ public final class PlayerEnterWorldService {
 	 * @param player
 	 */
 	private static void playerLoggedIn(Player player) {
-		log.info("Player logged in: " + player.getName() + " Account: " + player.getClientConnection().getAccount().getName());
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, true);
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
 		player.onLoggedIn();

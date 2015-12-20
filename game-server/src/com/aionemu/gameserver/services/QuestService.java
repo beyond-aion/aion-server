@@ -377,10 +377,10 @@ public final class QuestService {
 		// min level - 2 so that the gray quest arrow shows when quest is almost available
 		// quest level will be checked again in QuestService.startQuest() when attempting to start
 		int levelDiff = template.getMinlevelPermitted() - player.getLevel();
-		if (levelDiff > 2 && template.getMinlevelPermitted() != 99)
+		if (levelDiff > 2)
 			return false;
 
-		if (levelDiff > 0 && template.getMinlevelPermitted() != 99) {
+		if (levelDiff > 0) {
 			if (warn)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
 			return false;
@@ -465,7 +465,7 @@ public final class QuestService {
 				return false;
 
 			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
-			if (faction == null || !faction.isActive() || (faction.getQuestId() != 0 && faction.getQuestId() != env.getQuestId()))
+			if (faction == null || !faction.isActive())
 				return false;
 		}
 
@@ -492,7 +492,7 @@ public final class QuestService {
 		if (!checkStartConditions(env, warn)) {
 			return false;
 		}
-		if ((player.getLevel() < template.getMinlevelPermitted()) && (template.getMinlevelPermitted() != 99)) {
+		if (player.getLevel() < template.getMinlevelPermitted()) {
 			return false;
 		}
 
@@ -621,7 +621,7 @@ public final class QuestService {
 		int id = env.getQuestId();
 		Player player = env.getPlayer();
 
-		if ((player.getLevel() < template.getMinlevelPermitted()) && (template.getMinlevelPermitted() != 99)) {
+		if (player.getLevel() < template.getMinlevelPermitted()) {
 			return false;
 		}
 
@@ -1032,8 +1032,6 @@ public final class QuestService {
 		QuestTemplate template = questsData.getQuestById(questId);
 		if (template == null)
 			return 99;
-		if (questsData.getQuestById(questId).getMinlevelPermitted() == 99)
-			return 0;
 		return questsData.getQuestById(questId).getMinlevelPermitted() - playerLevel;
 	}
 
