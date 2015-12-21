@@ -107,6 +107,7 @@ public final class DataManager {
 	public static ArcadeUpgradeData ARCADE_UPGRADE_DATA;
 	public static AtreianPassportData ATREIAN_PASSPORT_DATA;
 	public static MonsterRaidData RAID_DATA;
+	public static KillBountyData KILL_BOUNTY_DATA;
 
 	/**
 	 * Constructor creating <tt>DataManager</tt> instance.<br>
@@ -212,6 +213,7 @@ public final class DataManager {
 		ARCADE_UPGRADE_DATA = data.arcadeUpgradeData;
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
 		RAID_DATA = data.raidData;
+		KILL_BOUNTY_DATA = data.killBountyData;
 
 		// subsequent data processing and modifications (order is important)
 		ITEM_DATA.cleanup();

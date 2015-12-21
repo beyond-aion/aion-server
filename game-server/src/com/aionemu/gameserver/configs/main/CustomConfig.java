@@ -202,26 +202,6 @@ public class CustomConfig {
 	public static boolean ENABLE_KILL_REWARD;
 
 	/**
-	 * Kills needed for item reward
-	 */
-	@Property(key = "gameserver.kills.needed1", defaultValue = "5")
-	public static int KILLS_NEEDED1;
-	@Property(key = "gameserver.kills.needed2", defaultValue = "10")
-	public static int KILLS_NEEDED2;
-	@Property(key = "gameserver.kills.needed3", defaultValue = "15")
-	public static int KILLS_NEEDED3;
-
-	/**
-	 * Item Rewards
-	 */
-	@Property(key = "gameserver.item.reward1", defaultValue = "186000031")
-	public static int REWARD1;
-	@Property(key = "gameserver.item.reward2", defaultValue = "186000030")
-	public static int REWARD2;
-	@Property(key = "gameserver.item.reward3", defaultValue = "186000096")
-	public static int REWARD3;
-
-	/**
 	 * Show dialog id and quest id
 	 */
 	@Property(key = "gameserver.dialog.showid", defaultValue = "true")
