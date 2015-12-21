@@ -484,7 +484,7 @@ public abstract class EffectTemplate {
 		}
 
 		// chance to trigger subeffect
-		if (Rnd.get(100) > subEffect.getChance())
+		if (Rnd.get(1, 100) > subEffect.getChance())
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());
@@ -618,7 +618,7 @@ public abstract class EffectTemplate {
 			effectPower -= hpGaugeMod * 100;
 		}
 
-		return Rnd.get(1000) <= effectPower;
+		return Rnd.get(1, 1000) <= effectPower;
 	}
 
 	private boolean isImuneToAbnormal(Effect effect, StatEnum statEnum) {

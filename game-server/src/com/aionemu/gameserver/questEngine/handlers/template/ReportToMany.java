@@ -29,7 +29,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 public class ReportToMany extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ReportToMany.class);
-	
+
 	private final int startItem;
 	private final Set<Integer> startNpcs = new HashSet<Integer>();
 	private final Set<Integer> endNpcs = new HashSet<Integer>();
@@ -72,12 +72,14 @@ public class ReportToMany extends QuestHandler {
 		if (workItems == null) {
 			return;
 		}
-	/*if (workItems.size() > 1) {
-			log.warn("Q{} (ReportToMany) has more than 1 work item.", questId); 
-		}   commented out until distribution and removal of quest work items depend on quest step*/
+		/*
+		 * if (workItems.size() > 1) {
+		 * log.warn("Q{} (ReportToMany) has more than 1 work item.", questId);
+		 * } commented out until distribution and removal of quest work items depend on quest step
+		 */
 		workItem = workItems.get(0);
 	}
-	
+
 	@Override
 	public void register() {
 		if (mission) {
@@ -132,8 +134,7 @@ public class ReportToMany extends QuestHandler {
 						return sendQuestDialog(env, startDialog);
 					else
 						return sendQuestDialog(env, 1011);
-				}
-				else if (dialog == DialogAction.QUEST_ACCEPT || dialog == DialogAction.QUEST_ACCEPT_1 || dialog == DialogAction.QUEST_ACCEPT_SIMPLE){
+				} else if (dialog == DialogAction.QUEST_ACCEPT || dialog == DialogAction.QUEST_ACCEPT_1 || dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					if (workItem != null) {
 						// some quest work items come from other quests, so we don't add them again
 						long count = workItem.getCount();
@@ -142,12 +143,10 @@ public class ReportToMany extends QuestHandler {
 							return sendQuestStartDialog(env);
 						}
 						return false;
-					}
-					else {
+					} else {
 						return sendQuestStartDialog(env);
 					}
-				}
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
@@ -159,19 +158,16 @@ public class ReportToMany extends QuestHandler {
 					int closeDialog;
 					if (targetNpcInfo.getCloseDialog() == 0) {
 						closeDialog = 10000 + targetNpcInfo.getVar();
-					} 
-					else {
+					} else {
 						closeDialog = targetNpcInfo.getCloseDialog();
 					}
 
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, targetNpcInfo.getQuestDialog());
-					} 
-					else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
+					} else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
 						sendQuestDialog(env, targetNpcInfo.getQuestDialog() + 1);
 						return playQuestMovie(env, targetNpcInfo.getMovie());
-					} 
-					else if (dialog.id() == closeDialog) {
+					} else if (dialog.id() == closeDialog) {
 						if ((dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)
 							|| QuestService.collectItemCheck(env, true)) {
 							if (var == maxVar) {
@@ -192,8 +188,7 @@ public class ReportToMany extends QuestHandler {
 				if (endNpcs.contains(targetId)) {
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, endDialog);
-					} 
-					else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 						if (startItem != 0) {
 							if (!removeQuestItem(env, startItem, 1)) {
 								return false;
@@ -219,11 +214,10 @@ public class ReportToMany extends QuestHandler {
 				int closeDialog;
 				if (targetNpcInfo.getCloseDialog() == 0) {
 					closeDialog = 10000 + targetNpcInfo.getVar();
-				} 
-				else {
+				} else {
 					closeDialog = targetNpcInfo.getCloseDialog();
 				}
-				if (dialog == DialogAction.USE_OBJECT) { 
+				if (dialog == DialogAction.USE_OBJECT) {
 					if (closeDialog == 1009 || closeDialog == 20002)
 						return sendQuestEndDialog(env);
 					if (targetNpcInfo.getQuestDialog() != 0)

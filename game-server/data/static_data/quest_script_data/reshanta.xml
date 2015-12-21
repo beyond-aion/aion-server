@@ -59,7 +59,7 @@
 			1747 [XML] Eliminating the Memory Reaper
 			1748 [XML] Threat of the Thunder Shout Legion
 			1749 [XML] Decimate the East Garrison
-			1750 [XML] Eliminating the Soul Reaper
+			1750 [UNUSED] Eliminating the Soul Reaper
 			1751 [XML] Nemea's Research Sample
 			1752 [XML] Daeva of Flame's Request
 			1753 [XML] The Interfering Embers
@@ -607,9 +607,6 @@
 	</monster_hunt>
 	<monster_hunt id="1747" start_npc_ids="278594">
 		<monster var="0" end_var="8" npc_ids="252539"/>
-	</monster_hunt>
-	<monster_hunt id="1750" start_npc_ids="278599">
-		<monster var="0" end_var="5" npc_ids="252537 252538"/>
 	</monster_hunt>
 	<monster_hunt id="1752" start_npc_ids="278588">
 		<monster var="0" end_var="3" npc_ids="253711 253712"/>

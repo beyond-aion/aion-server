@@ -45,7 +45,7 @@ public class DisputeLandService {
 
 			@Override
 			public void run() {
-				setActive(chance > Rnd.get(100));
+				setActive(Rnd.get(1, 100) <= chance);
 
 				if (isActive()) {
 					// Disable after 30 mins

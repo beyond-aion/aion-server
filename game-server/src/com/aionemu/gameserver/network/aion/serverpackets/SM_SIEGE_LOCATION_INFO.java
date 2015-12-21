@@ -4,9 +4,6 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
@@ -27,7 +24,6 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 	 */
 	private int infoType;
 	private Map<Integer, SiegeLocation> locations;
-	private static final Logger log = LoggerFactory.getLogger(SM_SIEGE_LOCATION_INFO.class);
 
 	public SM_SIEGE_LOCATION_INFO() {
 		this.infoType = 0;
@@ -59,11 +55,8 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			int legionId = loc.getLegionId();
 			writeD(legionId);
 
-			if (legionId != 0)
-				if (LegionService.getInstance().getLegion(legionId) == null)
-					log.error("Can't find or load legion with id " + legionId);
-				else
-					emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
+			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null)
+				emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
 
 			if (emblem.getEmblemType() == LegionEmblemType.DEFAULT) {
 				writeD(emblem.getEmblemId());

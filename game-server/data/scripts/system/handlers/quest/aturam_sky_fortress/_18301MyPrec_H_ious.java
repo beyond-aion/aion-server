@@ -43,7 +43,7 @@ public class _18301MyPrec_H_ious extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
-					playQuestMovie(env, 469);
+					playQuestMovie(env, 468);
 					return sendQuestStartDialog(env);
 				} else
 					return sendQuestStartDialog(env);

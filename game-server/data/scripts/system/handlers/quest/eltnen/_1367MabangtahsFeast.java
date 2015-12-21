@@ -14,7 +14,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1367MabangtahsFeast extends QuestHandler {
 
-	private final static int questId = 1367;
+	private static final int questId = 1367;
+	private static final int ITEM_ID_1 = 182201331;
+	private static final int ITEM_ID_2 = 182201332;
+	private static final int ITEM_ID_3 = 182201333;
+
+	private long itemCount1, itemCount2, itemCount3;
 
 	public _1367MabangtahsFeast() {
 		super(questId);
@@ -40,43 +45,36 @@ public class _1367MabangtahsFeast extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.START) {
-				long itemCount;
-				long itemCount1;
-				long itemCount2;
+				itemCount1 = player.getInventory().getItemCountByItemId(ITEM_ID_1);
+				itemCount2 = player.getInventory().getItemCountByItemId(ITEM_ID_2);
+				itemCount3 = player.getInventory().getItemCountByItemId(ITEM_ID_3);
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 0) {
-					itemCount = player.getInventory().getItemCountByItemId(182201333); // 2
-					itemCount1 = player.getInventory().getItemCountByItemId(182201332); // 5
-					itemCount2 = player.getInventory().getItemCountByItemId(182201331); // 1
-					if (itemCount > 1 || itemCount1 > 5 || itemCount2 > 0) {
+					if (itemCount1 >= 1 || itemCount2 >= 5 || itemCount3 >= 2) {
 						return sendQuestDialog(env, 1352);
 					} else {
 						return sendQuestDialog(env, 1693);
 					}
 				} else if (env.getDialog() == DialogAction.SETPRO1) {
-					itemCount2 = player.getInventory().getItemCountByItemId(182201331); // 1
-					if (itemCount2 > 0) {
+					if (itemCount1 >= 1) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						qs.setQuestVarById(0, 1);
+						removeQuestItems(env);
 						return sendQuestDialog(env, 5);
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialog() == DialogAction.SETPRO2) {
-					itemCount1 = player.getInventory().getItemCountByItemId(182201332); // 5
-					if (itemCount1 > 4) {
+					if (itemCount2 >= 5) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						qs.setQuestVarById(0, 2);
+						removeQuestItems(env);
 						return sendQuestDialog(env, 6);
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialog() == DialogAction.SETPRO3) {
-					itemCount = player.getInventory().getItemCountByItemId(182201333); // 2
-					if (itemCount > 1) {
+					if (itemCount3 >= 2) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						qs.setQuestVarById(0, 3);
-						updateQuestStatus(env);
+						removeQuestItems(env);
 						return sendQuestDialog(env, 7);
 					} else
 						return sendQuestDialog(env, 1352);
@@ -87,6 +85,12 @@ public class _1367MabangtahsFeast extends QuestHandler {
 			}
 		}
 		return false;
+	}
+
+	private void removeQuestItems(QuestEnv env) {
+		removeQuestItem(env, ITEM_ID_1, itemCount1);
+		removeQuestItem(env, ITEM_ID_2, itemCount2);
+		removeQuestItem(env, ITEM_ID_3, itemCount3);
 	}
 
 }

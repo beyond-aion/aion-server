@@ -31,8 +31,8 @@ public class SocialService {
 	public static boolean addBlockedUser(Player player, Player blockedPlayer, String reason) {
 		if (DAOManager.getDAO(BlockListDAO.class).addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
 			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getCommonData(), reason));
-			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.BLOCK_SUCCESSFUL, blockedPlayer.getName()));
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
+			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.BLOCK_SUCCESSFUL, blockedPlayer.getName()));
 			return true;
 		}
 		return false;
@@ -49,8 +49,8 @@ public class SocialService {
 	public static boolean deleteBlockedUser(Player player, BlockedPlayer target) {
 		if (DAOManager.getDAO(BlockListDAO.class).delBlockedUser(player.getObjectId(), target.getObjId())) {
 			player.getBlockList().remove(target.getObjId());
-			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.UNBLOCK_SUCCESSFUL, target.getName()));
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
+			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.UNBLOCK_SUCCESSFUL, target.getName()));
 			return true;
 		}
 		return false;
@@ -72,6 +72,7 @@ public class SocialService {
 			if (DAOManager.getDAO(BlockListDAO.class).setReason(player.getObjectId(), target.getObjId(), reason)) {
 				target.setReason(reason);
 				PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
+				PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.EDIT_NOTE, target.getName()));
 				return true;
 			}
 		}

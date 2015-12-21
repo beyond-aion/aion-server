@@ -32,13 +32,6 @@ public class SimpleAttackManager {
 			return;
 		}
 
-		if (!isTargetInAttackRange(npcAI.getOwner())) {
-			if (npcAI.isLogging()) {
-				AI2Logger.info(npcAI, "Attack will not be scheduled because of range");
-			}
-			npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
-			return;
-		}
 		npcAI.getOwner().getGameStats().setNextAttackTime(System.currentTimeMillis() + delay);
 		if (delay > 0) {
 			ThreadPoolManager.getInstance().schedule(new SimpleAttackAction(npcAI), delay);
@@ -85,6 +78,11 @@ public class SimpleAttackManager {
 		Npc npc = npcAI.getOwner();
 		Creature target = (Creature) npc.getTarget();
 		if (target != null && !target.getLifeStats().isAlreadyDead()) {
+			Creature mostHated = npc.getAggroList().getMostHated();
+			if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead() && !target.getObjectId().equals(mostHated.getObjectId())) {
+				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+				return;
+			}
 			if (!npc.canSee(target) || !GeoService.getInstance().canSee(npc, target)) { // delete check geo when the Path Finding
 				npc.getController().cancelCurrentSkill();
 				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);

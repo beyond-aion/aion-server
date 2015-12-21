@@ -136,7 +136,7 @@ public abstract class Base<T extends BaseLocation> {
 					broadcastMessage(getAssaultMsg());
 					scheduleAssaultDespawn();
 				} else {
-					if (Rnd.get() * 100 < 25)
+					if (Rnd.get(1, 100) <= 25)
 						BaseService.getInstance().capture(id, chooseAssaultRace());
 					scheduleAssault();
 				}

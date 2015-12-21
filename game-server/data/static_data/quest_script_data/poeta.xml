@@ -50,18 +50,18 @@
 		[END] SUMMARY
 -->
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="1118" start_npc_ids="203059" end_npc_ids="203079">
-		<npc_infos var="0" npc_id="203070" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="203079" quest_dialog="2375" close_dialog="1009"/>
-	</report_to_many>
-	<report_to_many start_npc_ids="203075" end_npc_ids="203058" id="1115">
-		<npc_infos var="0" npc_id="203072" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="203058" quest_dialog="2375" close_dialog="1009"/>
-	</report_to_many>
 	<report_to start_npc_ids="203049" end_npc_ids="203057" id="1101"/>
 	<report_to start_npc_ids="203057" end_npc_ids="203059" id="1104"/>
 	<report_to start_npc_ids="203050" end_npc_ids="203061" id="1106"/>
 	<report_to start_npc_ids="203065" end_npc_ids="203075" id="1110"/>
+	<report_to_many id="1115" start_npc_ids="203075" end_npc_ids="203058">
+		<npc_infos var="0" npc_id="203072" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="203058" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="1118" start_npc_ids="203059" end_npc_ids="203079">
+		<npc_infos var="0" npc_id="203070" quest_dialog="1352"/>
+		<npc_infos var="1" npc_id="203079" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<report_to start_npc_ids="203075" end_npc_ids="203080" id="1119"/>
 	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1230"/>
 	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1231"/>

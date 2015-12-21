@@ -44,4 +44,14 @@ public class NpcSkillData {
 	public NpcSkillTemplates getNpcSkillList(int id) {
 		return npcSkillData.get(id);
 	}
+	
+	public void setNpcSkillTemplates(List<NpcSkillTemplates> template) {
+		this.npcSkills = template;
+		npcSkillData.clear();
+		afterUnmarshal(null, null);
+	}
+	
+	public List<NpcSkillTemplates> getAllNpcSkillTemplates() {
+		return npcSkills;
+	}
 }

@@ -59,8 +59,8 @@ public class _1799PupilsDiary extends QuestHandler {
 		} else if (targetId == 279018) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+					return sendQuestDialog(env, 1693);
+				else if (env.getDialog() == DialogAction.SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

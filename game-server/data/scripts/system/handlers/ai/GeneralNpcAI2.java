@@ -145,14 +145,11 @@ public class GeneralNpcAI2 extends NpcAI2 {
 		VisibleObject currentTarget = getTarget();
 		Creature mostHated = getAggroList().getMostHated();
 
-		if (mostHated == null || mostHated.getLifeStats().isAlreadyDead()) {
+		if (mostHated == null || mostHated.getLifeStats().isAlreadyDead())
 			return AttackIntention.FINISH_ATTACK;
-		}
 
-		if (currentTarget == null) {
+		if (currentTarget == null)
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
-			return AttackIntention.SWITCH_TARGET;
-		}
 
 		if (getOwner().getObjectTemplate().getAttackRange() == 0) {
 			NpcSkillEntry skill = getOwner().getSkillList().getRandomSkill();
@@ -169,10 +166,7 @@ public class GeneralNpcAI2 extends NpcAI2 {
 				return AttackIntention.SKILL_ATTACK;
 			}
 		}
-		if (!currentTarget.getObjectId().equals(mostHated.getObjectId())) {
-			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
-			return AttackIntention.SWITCH_TARGET;
-		}
+
 		return AttackIntention.SIMPLE_ATTACK;
 	}
 }

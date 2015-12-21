@@ -38,7 +38,8 @@ public class TargetRangeProperty {
 		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent() : properties
 			.getEffectiveRange();
 		int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
-
+		int ineffectiveRange = properties.getIneffectiveRange();
+		
 		final List<Creature> effectedList = skill.getEffectedList();
 		skill.setTargetRangeAttribute(value);
 		switch (value) {
@@ -114,6 +115,9 @@ public class TargetRangeProperty {
 						}
 					} else if (MathUtil
 						.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+						//for target_range_area_type = fireball
+						if (ineffectiveRange > 0 && MathUtil.isIn3dRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
+							continue;
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
 						skill.getEffectedList().add((Creature) nextCreature);

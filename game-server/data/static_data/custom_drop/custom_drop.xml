@@ -57,6 +57,94 @@
 		</drop_group>
 	</npc_drop>
 	<!-- Pernon/Oriel -->
+	<npc_drop npc_id="218874" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012058" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006852" name="Rough Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006847" name="Vernal Flower Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218876" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012058" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006853" name="Hard Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006848" name="Pyre Spirit Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218878" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012058" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006852" name="Rough Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006849" name="Maple Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218880" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012058" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006851" name="Broken Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006850" name="Ice Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218882" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012558" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006852" name="Rough Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006847" name="Vernal Flower Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218884" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012558" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006853" name="Hard Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006848" name="Pyre Spirit Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218886" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012558" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006852" name="Rough Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006849" name="Maple Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218888" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">
+			<drop item_id="152012558" name="Life Leaf" min_amount="1" max_amount="1" chance="100"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Gem">
+			<drop item_id="182006851" name="Broken Aether Gem" min_amount="1" max_amount="1" chance="80"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Aether Ore">
+			<drop item_id="182006850" name="Ice Aether Ore" min_amount="1" max_amount="1" chance="20"/>
+		</drop_group>
+	</npc_drop>
 	<npc_drop npc_id="701519" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Paint">
 			<drop item_id="169120001" name="Paint: Red" min_amount="1" max_amount="2" chance="90"/>

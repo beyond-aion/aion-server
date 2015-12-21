@@ -81,20 +81,6 @@
 			<gd_item id="182006981" name="Divine Fertile Soil"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Life Leaf" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218874" name="Vernal Audria"/>
-			<gd_npc npc_id="218876" name="Sweltering Audria"/>
-			<gd_npc npc_id="218878" name="Foliage Audria"/>
-			<gd_npc npc_id="218880" name="Ice Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012558" name="Life Leaf"/>
-		</gd_items>
-	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Season Crystal" base_chance="100" max_count="3">
 		<gd_maps>
@@ -182,84 +168,6 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="182006846" name="Winter Leaf"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Gem" base_chance="80">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218874" name="Vernal Audria"/>
-			<gd_npc npc_id="218878" name="Foliage Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006852" name="Rough Aether Gem"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Gem" base_chance="80">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218876" name="Sweltering Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006853" name="Hard Aether Gem"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Gem" base_chance="80">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218880" name="Ice Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006851" name="Broken Aether Gem"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Ore" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218874" name="Vernal Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006847" name="Vernal Flower Aether Ore"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Ore" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218876" name="Sweltering Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006848" name="Pyre Spirit Aether Ore"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Ore" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218878" name="Foliage Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006849" name="Maple Aether Ore"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Aether Ore" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="700010000" name="Oriel"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="218880" name="Ice Audria"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006850" name="Ice Aether Ore"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>
