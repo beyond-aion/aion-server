@@ -4080,7 +4080,7 @@
 	<!-- Celebrate Solorius Chest -->
 	<npc_drop npc_id="701457" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Celebrate Solorius Event Drops">
-			<drop item_id="188051731" name="[Event] Lenatinerk's Lost Gift Box" min_amount="1" max_amount="1" chance="40" no_reduce="true" each_member="true"/>
+			<drop item_id="188051731" name="[Event] Lenatinerk's Lost Gift Box" min_amount="1" max_amount="1" chance="45" no_reduce="true" each_member="true"/>
 			<drop item_id="171110053" name="Solorius Wallpaper" min_amount="1" max_amount="1" chance="30" no_reduce="true"/>
 			<drop item_id="170030057" name="Solorius Tree" min_amount="1" max_amount="1" chance="25" no_reduce="true"/>
 		</drop_group>
