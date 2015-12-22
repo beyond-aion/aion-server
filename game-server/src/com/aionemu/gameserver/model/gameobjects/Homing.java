@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.stats.container.HomingGameStats;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
@@ -34,7 +32,7 @@ public class Homing extends SummonedObject<Creature> {
 	}
 
 	@Override
-	protected void setupStatContainers(byte level) {
+	protected void setupStatContainers() {
 		setGameStats(new HomingGameStats(this));
 		setLifeStats(new NpcLifeStats(this));
 	}
@@ -64,7 +62,7 @@ public class Homing extends SummonedObject<Creature> {
 
 	@Override
 	public String getMasterName() {
-		return StringUtils.EMPTY;
+		return "";
 	}
 
 	@Override

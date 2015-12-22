@@ -197,7 +197,7 @@ public class VisibleObjectSpawner {
 			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
 		} else if (spawn.isAssault() && loc.isVulnerable() && spawn.getSiegeRace().equals(SiegeRace.BALAUR)) {
-			// attakers
+			// attackers
 			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
 			npc.setKnownlist(new NpcKnownList(npc));
 		} else {

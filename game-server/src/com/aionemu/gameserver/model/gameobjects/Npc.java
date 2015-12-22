@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Iterator;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.ai2.AITemplate;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
@@ -55,23 +53,19 @@ public class Npc extends Creature {
 	private NpcSkillList skillList;
 	private WalkerGroupShift walkerGroupShift;
 	private long lastShoutedSeconds;
-	private String masterName = StringUtils.EMPTY;
+	private String masterName = "";
 	private int creatorId = 0;
 	private int townId;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 	private int aRange = getObjectTemplate().getAggroRange();
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
-		this(objId, controller, spawnTemplate, objectTemplate, objectTemplate.getLevel());
-	}
-
-	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		Preconditions.checkNotNull(objectTemplate, "Npcs should be based on template");
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
 		skillList = new NpcSkillList(this);
-		setupStatContainers(level);
+		setupStatContainers();
 
 		boolean aiOverride = false;
 		if (spawnTemplate.getModel() != null) {
@@ -92,10 +86,7 @@ public class Npc extends Creature {
 		return (NpcMoveController) super.getMoveController();
 	}
 
-	/**
-	 * @param level
-	 */
-	protected void setupStatContainers(byte level) {
+	protected void setupStatContainers() {
 		setGameStats(new NpcGameStats(this));
 		setLifeStats(new NpcLifeStats(this));
 	}

@@ -26,13 +26,6 @@ public abstract class VisibleObjectTemplate {
 	 */
 	public abstract int getNameId();
 
-	// /**
-	// * Global race of the object
-	// *
-	// * @return
-	// */
-	// public abstract Race getRace();
-
 	/**
 	 * @return
 	 */

@@ -32,12 +32,12 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	 * @param level
 	 */
 	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
-		super(objId, controller, spawnTemplate, objectTemplate, level);
+		super(objId, controller, spawnTemplate, objectTemplate);
 		this.level = level;
 	}
 
 	@Override
-	protected void setupStatContainers(byte level) {
+	protected void setupStatContainers() {
 		setGameStats(new SummonedObjectGameStats(this));
 		setLifeStats(new NpcLifeStats(this));
 	}
