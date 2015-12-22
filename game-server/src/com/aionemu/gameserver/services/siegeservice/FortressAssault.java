@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,9 +11,6 @@ import com.aionemu.gameserver.model.siege.AssaultType;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -133,21 +129,11 @@ public class FortressAssault extends Assault<FortressSiege> {
 	}
 
 	private void spawnAssaulter(int mapId, int npcId, int locId, float x, float y, float z, byte heading, AssaultType aType) {
-
 		float x1 = (float) (x + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 		float y1 = (float) (y + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 
 		SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(mapId, npcId, locId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, z, heading);
 		Npc invader = (Npc) SpawnEngine.spawnObject(spawnTemplate, 1);
-		if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED && invader != null) {
-			NpcTemplate templ = invader.getObjectTemplate();
-			if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-				NpcLifeStats life = invader.getLifeStats();
-				int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-				templ.getStatsTemplate().setMaxHp(maxHpPercent);
-				life.setCurrentHpPercent(100);
-			}
-		}
 		if (aType != AssaultType.TELEPORT)
 			invader.getAggroList().addHate(boss, 100000);
 	}

@@ -39,9 +39,6 @@ import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SourceLocation;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -979,16 +976,7 @@ public class SiegeService {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
 				if (siegetemplate.getSiegeRace().equals(race) && siegetemplate.getSiegeModType().equals(type)) {
-					Npc npc = (Npc) SpawnEngine.spawnObject(siegetemplate, 1);
-					if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
-						NpcTemplate templ = npc.getObjectTemplate();
-						if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-							NpcLifeStats life = npc.getLifeStats();
-							int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-							templ.getStatsTemplate().setMaxHp(maxHpPercent);
-							life.setCurrentHpPercent(100);
-						}
-					}
+					SpawnEngine.spawnObject(siegetemplate, 1);
 				}
 			}
 		}
