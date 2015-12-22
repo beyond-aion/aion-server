@@ -197,8 +197,8 @@
 			29051 [TODO] Running the Tables
 			29052 [SCRIPT] [Expert] Passion for Construction
 			29053 [SCRIPT] [Expert] Expert of Construction
-			29054 [UNUSED/XML] [Expert] Construction Zeal
-			29055 [UNUSED/SCRIPT] [Expert] Constructor's Final Exam
+			29054 [XML] [Expert] Construction Zeal
+			29055 [SCRIPT] [Expert] Constructor's Final Exam
 			29056 [XML] [Expert] Expert Constructor
 			29057 [SCRIPT] [Master] Constructor's Potential
 			29058 [XML] [Master] Construction Master
@@ -446,7 +446,7 @@
 	<item_collecting id="9552" start_npc_ids="204209"/>
 	<item_collecting id="29042" start_npc_ids="204286"/>
 	<item_collecting id="29043" start_npc_ids="798445"/>
-	<!-- item_collecting id="29054" start_npc_ids="798452"/ -->
+	<item_collecting id="29054" start_npc_ids="798452"/>
 	<item_collecting id="80015" start_npc_ids="799788"/>
 	<item_collecting id="80025" start_npc_ids="799777"/>
 	<item_collecting id="80026" start_npc_ids="799777"/>

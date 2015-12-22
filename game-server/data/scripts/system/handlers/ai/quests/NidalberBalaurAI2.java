@@ -10,15 +10,15 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 /**
  * @author Yeats, Pad
  */
-@AIName("_2041_nidalber_balaur")
-public class NidalberBalaurQ2041AI2 extends AggressiveNpcAI2 {
+@AIName("nidalber_balaur")
+public class NidalberBalaurAI2 extends AggressiveNpcAI2 {
 
-	private Npc kargate = null;
+	private Npc questNpc = null;
 
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		findKargate();
+		findQuestNpc();
 	}
 
 	private void setNewSpawnPosition() {
@@ -27,19 +27,20 @@ public class NidalberBalaurQ2041AI2 extends AggressiveNpcAI2 {
 		getSpawnTemplate().setZ(204.52f);
 	}
 
-	private void findKargate() {
-		if (getOwner().getPosition().getMapId() != 320040000)
+	private void findQuestNpc() {
+		int mapId = getOwner().getPosition().getMapId();
+		if (mapId != 310040000 && mapId != 320040000)
 			return;
-		kargate = getOwner().getPosition().getWorldMapInstance().getNpc(204432);
-		if (kargate != null && !kargate.getLifeStats().isAlreadyDead()) {
+		questNpc = getOwner().getPosition().getWorldMapInstance().getNpc(mapId == 310040000 ? 204044 : 204432);
+		if (questNpc != null && !questNpc.getLifeStats().isAlreadyDead()) {
 			setNewSpawnPosition();
-			moveToKargate();
+			moveToQuestNpc();
 		} else {
 			getOwner().getController().onDelete();
 		}
 	}
 
-	private void moveToKargate() {
+	private void moveToQuestNpc() {
 		setStateIfNot(AIState.WALKING);
 		getOwner().setState(1);
 		getOwner().getMoveController().moveToPoint(getSpawnTemplate().getX(), getSpawnTemplate().getY(), getSpawnTemplate().getZ());
@@ -47,10 +48,10 @@ public class NidalberBalaurQ2041AI2 extends AggressiveNpcAI2 {
 
 	@Override
 	public void handleNotAtHome() {
-		if (getOwner().getPosition().getMapId() != 320040000)
+		if (getOwner().getPosition().getMapId() != 310040000 && getOwner().getPosition().getMapId() != 320040000)
 			super.handleNotAtHome();
 		else
-			moveToKargate();
+			moveToQuestNpc();
 	}
 
 	@Override
@@ -67,18 +68,18 @@ public class NidalberBalaurQ2041AI2 extends AggressiveNpcAI2 {
 	}
 
 	private void addHate() {
-		if (getOwner().getPosition().getMapId() != 320040000)
+		if (getOwner().getPosition().getMapId() != 310040000 && getOwner().getPosition().getMapId() != 320040000)
 			return;
-		if (kargate == null || kargate.getLifeStats().isAlreadyDead()) {
+		if (questNpc == null || questNpc.getLifeStats().isAlreadyDead()) {
 			getOwner().getController().onDelete();
 			return;
 		}
 		for (AggroInfo info : getOwner().getAggroList().getList()) {
 			if (info == null)
 				continue;
-			if (info.getAttacker() == kargate && info.getHate() > 0)
+			if (info.getAttacker() == questNpc && info.getHate() > 0)
 				return;
 		}
-		getOwner().getAggroList().addHate(kargate, 100);
+		getOwner().getAggroList().addHate(questNpc, 100);
 	}
 }

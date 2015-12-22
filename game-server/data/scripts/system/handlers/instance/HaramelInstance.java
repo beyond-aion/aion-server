@@ -44,6 +44,7 @@ public class HaramelInstance extends GeneralInstanceHandler {
 						break;
 					case CLERIC:
 					case CHANTER:
+					case RIDER:
 						spawn(700832, 224.137f, 268.608f, 144.898f, (byte) 90); // chest cleric
 						break;
 				}
