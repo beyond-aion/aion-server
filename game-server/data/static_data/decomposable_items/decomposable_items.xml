@@ -30072,11 +30072,11 @@
 		</items>
 	</decomposable>
     <decomposable item_id="188053304" decomposable_name="Expeditionary Force Ceramium Medal Box">
-		<items chance="80">
-			<item id="166100008" name="Greater Supplements (Eternal)" rnd_min="20" rnd_max="50"/>
+		<items>
+			<item id="186000242" name="Ceramium Medal" rnd_min="1" rnd_max="2"/>
 		</items>
-		<items chance="20">
-			<item id="166100011" name="Greater Supplements (Mythic)" rnd_min="10" rnd_max="25"/>
+		<items>
+			<item id="186000243" name="Fragmented Ceramium" rnd_min="3" rnd_max="10"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053305" decomposable_name="Ancient Goblet Bundle"/>
