@@ -159,7 +159,8 @@ public class FirstTargetProperty {
 
 		if (skill.getFirstTarget() != null) {
 			// update heading
-			skill.getEffector().getPosition().setH(MathUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
+			if (skill.getFirstTarget() != skill.getEffector())
+				skill.getEffector().getPosition().setH(MathUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
 			skill.getEffectedList().add(skill.getFirstTarget());
 		}
 		return true;

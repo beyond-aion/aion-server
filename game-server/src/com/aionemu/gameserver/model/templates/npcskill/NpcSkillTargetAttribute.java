@@ -12,7 +12,9 @@ import javax.xml.bind.annotation.XmlType;
 public enum NpcSkillTargetAttribute {
 
 	ME,
-	MOST_HATED, 
+	MOST_HATED,
+	RANDOM,
+	RANDOM_EXCEPT_MOST_HATED,
 	NONE;
 	
 }

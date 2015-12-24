@@ -22,13 +22,25 @@ public class NpcSkillConditionTemplate {
 	@XmlAttribute(name = "range")
 	protected int range = 10;
 	@XmlAttribute(name = "npc_id")
-	protected int npc_id = 0;
+	protected int npc_id;
 	@XmlAttribute(name = "delay")
-	protected int delay = 0;
-	@XmlAttribute(name = "distance")
-	protected int distance = 0;
+	protected int delay;
+	@XmlAttribute(name = "min_distance")
+	protected int min_distance;
+	@XmlAttribute(name = "max_distance")
+	protected int max_distance;
 	@XmlAttribute(name = "direction")
-	protected float direction;
+	protected int direction;
+	@XmlAttribute(name = "random_direction")
+	protected boolean random_direction;
+	@XmlAttribute(name = "min_amount")
+	protected int min_amount = 1;
+	@XmlAttribute(name = "max_amount")
+	protected int max_amount = 0;
+	@XmlAttribute(name = "canDie")
+	protected boolean canDie = true;
+	@XmlAttribute(name = "despawn_time")
+	protected int despawn_time = 500;
 	
 	/**
 	 * @return the condType
@@ -73,16 +85,55 @@ public class NpcSkillConditionTemplate {
 	}
 	
 	/**
-	 * @return distance
+	 * @return min distance
 	 */
-	public int getDistance() {
-		return distance;
+	public int getMinDistance() {
+		return min_distance;
+	}
+	
+	/**
+	 * @return max distance
+	 */
+	public int getMaxDistance() {
+		return max_distance;
 	}
 	
 	/**
 	 * @return direction
 	 */
-	public float getDirection() {
+	public int getDirection() {
 		return direction;
+	}
+	
+	/**
+	 * @return direction
+	 */
+	public boolean isRandomDirection() {
+		return random_direction;
+	}
+	
+	/**
+	 * @return min amount
+	 */
+	public int getMinAmount() {
+		return min_amount;
+	}
+	
+	/**
+	 * @return max amount
+	 */
+	public int getMaxAmount() {
+		return max_amount;
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean canDie() {
+		return canDie;
+	}
+	
+	public int getDespawnTime() {
+		return despawn_time;
 	}
 }
