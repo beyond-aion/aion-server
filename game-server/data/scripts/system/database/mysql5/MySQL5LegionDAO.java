@@ -44,8 +44,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String SELECT_ANNOUNCEMENTLIST_QUERY = "SELECT * FROM legion_announcement_list WHERE legion_id=? ORDER BY date ASC LIMIT 0,7;";
 	private static final String DELETE_ANNOUNCEMENT_QUERY = "DELETE FROM legion_announcement_list WHERE legion_id = ? AND date = ?";
 	/** Emblem Queries **/
-	private static final String INSERT_EMBLEM_QUERY = "INSERT INTO legion_emblems(legion_id, emblem_id, color_r, color_g, color_b, emblem_type, emblem_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_EMBLEM_QUERY = "UPDATE legion_emblems SET emblem_id=?, color_r=?, color_g=?, color_b=?, emblem_type=?, emblem_data=? WHERE legion_id=?";
+	private static final String INSERT_EMBLEM_QUERY = "INSERT INTO legion_emblems(legion_id, emblem_id, color_a, color_r, color_g, color_b, emblem_type, emblem_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_EMBLEM_QUERY = "UPDATE legion_emblems SET emblem_id=?, color_a=?, color_r=?, color_g=?, color_b=?, emblem_type=?, emblem_data=? WHERE legion_id=?";
 	private static final String SELECT_EMBLEM_QUERY = "SELECT * FROM legion_emblems WHERE legion_id=?";
 	/** Storage Queries **/
 	private static final String SELECT_STORAGE_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
@@ -370,11 +370,12 @@ public class MySQL5LegionDAO extends LegionDAO {
 			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
 				preparedStatement.setInt(1, legionId);
 				preparedStatement.setInt(2, legionEmblem.getEmblemId());
-				preparedStatement.setInt(3, legionEmblem.getColor_r());
-				preparedStatement.setInt(4, legionEmblem.getColor_g());
-				preparedStatement.setInt(5, legionEmblem.getColor_b());
-				preparedStatement.setString(6, legionEmblem.getEmblemType().toString());
-				preparedStatement.setBytes(7, legionEmblem.getCustomEmblemData());
+				preparedStatement.setByte(3, legionEmblem.getColor_a());
+				preparedStatement.setByte(4, legionEmblem.getColor_r());
+				preparedStatement.setByte(5, legionEmblem.getColor_g());
+				preparedStatement.setByte(6, legionEmblem.getColor_b());
+				preparedStatement.setString(7, legionEmblem.getEmblemType().toString());
+				preparedStatement.setBytes(8, legionEmblem.getCustomEmblemData());
 				preparedStatement.execute();
 			}
 		});
@@ -390,12 +391,13 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
 				stmt.setInt(1, legionEmblem.getEmblemId());
-				stmt.setInt(2, legionEmblem.getColor_r());
-				stmt.setInt(3, legionEmblem.getColor_g());
-				stmt.setInt(4, legionEmblem.getColor_b());
-				stmt.setString(5, legionEmblem.getEmblemType().toString());
-				stmt.setBytes(6, legionEmblem.getCustomEmblemData());
-				stmt.setInt(7, legionId);
+				stmt.setByte(2, legionEmblem.getColor_a());
+				stmt.setByte(3, legionEmblem.getColor_r());
+				stmt.setByte(4, legionEmblem.getColor_g());
+				stmt.setByte(5, legionEmblem.getColor_b());
+				stmt.setString(6, legionEmblem.getEmblemType().toString());
+				stmt.setBytes(7, legionEmblem.getCustomEmblemData());
+				stmt.setInt(8, legionId);
 				stmt.execute();
 			}
 		});
@@ -418,8 +420,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
-					legionEmblem.setEmblem(resultSet.getInt("emblem_id"), resultSet.getInt("color_r"), resultSet.getInt("color_g"),
-						resultSet.getInt("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
+					legionEmblem.setEmblem(resultSet.getByte("emblem_id"), resultSet.getByte("color_a"), resultSet.getByte("color_r"), resultSet.getByte("color_g"),
+						resultSet.getByte("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
 				}
 			}
 		});

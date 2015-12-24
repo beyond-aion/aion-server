@@ -10,13 +10,14 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Simple modified cura
+ * @author Simple
+ * @modified cura, Neon
  */
 public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 
-	/** Emblem related information **/
 	private int legionId;
 	private int emblemId;
+	private int alpha;
 	private int red;
 	private int green;
 	private int blue;
@@ -34,7 +35,7 @@ public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 		legionId = readD();
 		emblemId = readC();
 		emblemType = (readC() == LegionEmblemType.DEFAULT.getValue()) ? LegionEmblemType.DEFAULT : LegionEmblemType.CUSTOM;
-		readC(); // 0xFF (Fixed)
+		alpha = readC();
 		red = readC();
 		green = readC();
 		blue = readC();
@@ -51,7 +52,7 @@ public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 			return;
 		}
 
-		if (activePlayer.isLegionMember())
-			LegionService.getInstance().storeLegionEmblem(activePlayer, legionId, emblemId, red, green, blue, emblemType);
+		if (activePlayer.isLegionMember() && activePlayer.getLegion().getLegionId() == legionId)
+			LegionService.getInstance().storeLegionEmblem(activePlayer, emblemId, alpha, red, green, blue, emblemType);
 	}
 }

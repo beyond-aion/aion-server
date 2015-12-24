@@ -53,24 +53,15 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			int locId = loc.getLocationId();
 			writeD(locId);
 			writeD(legionId);
-
-			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null)
+			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null) // can be null if legion got deleted
 				emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
-
-			if (emblem.getEmblemType() == LegionEmblemType.DEFAULT) {
-				writeD(emblem.getEmblemId());
-				writeC(255);
-				writeC(emblem.getColor_r());
-				writeC(emblem.getColor_g());
-				writeC(emblem.getColor_b());
-			} else {
-				writeD(emblem.getCustomEmblemData().length);
-				writeC(255);
-				writeC(emblem.getColor_r());
-				writeC(emblem.getColor_g());
-				writeC(emblem.getColor_b());
-			}
-
+			writeC(emblem.getEmblemId());
+			writeC(emblem.getEmblemType().getValue());
+			writeH(0);
+			writeC(emblem.getColor_a());
+			writeC(emblem.getColor_r());
+			writeC(emblem.getColor_g());
+			writeC(emblem.getColor_b());
 			writeC(loc.getRace().getRaceId());
 			writeC(loc.isVulnerable() ? 2 : 0); // is vulnerable (0 - no, 2 - yes)
 			writeC(loc.isCanTeleport(player) ? 1 : 0);
@@ -83,5 +74,4 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeD(loc.getOccupiedCount());
 		}
 	}
-
 }

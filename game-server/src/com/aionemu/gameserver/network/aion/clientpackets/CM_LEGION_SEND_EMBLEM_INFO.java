@@ -3,9 +3,9 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionEmblem;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_SEND_EMBLEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -39,11 +39,7 @@ public class CM_LEGION_SEND_EMBLEM_INFO extends AionClientPacket {
 		}
 
 		Legion legion = LegionService.getInstance().getLegion(legionId);
-		if (legion != null) {
-			LegionEmblem legionEmblem = legion.getLegionEmblem();
-			if (legionEmblem.getCustomEmblemData() == null)
-				return;
-			LegionService.getInstance().sendEmblemData(getConnection().getActivePlayer(), legionEmblem, legionId, legion.getLegionName());
-		}
+		if (legion != null)
+			sendPacket(new SM_LEGION_SEND_EMBLEM(legionId, legion.getLegionEmblem(), 0, legion.getLegionName())); // send only info without following EMBLEM_DATA packets
 	}
 }
