@@ -16,7 +16,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 
 	private final static int questId = 14025;
 	private final static int[] npcs = { 203989, 203901, 204020, 204024 };
-	private final static int[] mobs = { 212010, 211017, 217090 };
+	private final static int[] mobs = { 211017, 211034, 211776, 232133, 217090 };
 
 	public _14025CookingUpDisasters() {
 		super(questId);
@@ -54,7 +54,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		if (targetId == 211017) {
+		if (targetId == 211017 || targetId == 211034 || targetId == 211776 || targetId == 232133) {
 				if (qs.getQuestVarById(0) == 5 && qs.getQuestVarById(1) < 4) {
 					qs.setQuestVarById(1, qs.getQuestVarById(1) + 1);
 					updateQuestStatus(env);
@@ -146,7 +146,6 @@ public class _14025CookingUpDisasters extends QuestHandler {
 							return sendQuestDialog(env, 3057);
 					case SETPRO3:
 						if (var == 3) {
-							TeleportService2.teleportTo(player, 210020000, 2211, 811, 513);
 							qs.setQuestVarById(0, 5);
 							updateQuestStatus(env);
 							return true;

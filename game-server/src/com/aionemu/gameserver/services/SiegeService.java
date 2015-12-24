@@ -39,9 +39,6 @@ import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SourceLocation;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -81,6 +78,7 @@ import com.google.common.collect.Maps;
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
  * 
  * @author SoulKeeper, Source
+ * @modified Neon
  */
 public class SiegeService {
 
@@ -699,39 +697,22 @@ public class SiegeService {
 		return 3600 - (minutesAsSeconds + seconds);
 	}
 
-	/**
-	 * TODO: Check if it's valid
-	 * <p/>
-	 * If siege duration is endless - will return -1
-	 * 
-	 * @param siegeLocationId
-	 *          Scheduled siege end time
-	 * @return remaining seconds in current hour
-	 */
 	public int getRemainingSiegeTimeInSeconds(int siegeLocationId) {
-		Siege<?> siege = getSiege(siegeLocationId);
-		if (siege == null || siege.isFinished())
+		Siege<? extends SiegeLocation> siege = getSiege(siegeLocationId);
+		if (siege == null || siege.isFinished() || !siege.isStarted())
 			return 0;
 
-		if (!siege.isStarted())
-			return siege.getSiegeLocation().getSiegeDuration();
+		long endTime = siege.getStartTime().toInstant().plusSeconds(siege.getSiegeLocation().getSiegeDuration()).getEpochSecond();
+		int secondsLeft =  (int) (endTime - System.currentTimeMillis() / 1000);
 
-		// endless siege
-		if (siege.getSiegeLocation().getSiegeDuration() == -1)
-			return -1;
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.SECOND, siege.getSiegeLocation().getSiegeDuration());
-
-		int result = (int) ((calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000);
-		return result > 0 ? result : 0;
+		return secondsLeft > 0 ? secondsLeft : 0;
 	}
 
-	public Siege<?> getSiege(SiegeLocation loc) {
-		return activeSieges.get(loc.getLocationId());
+	public Siege<? extends SiegeLocation> getSiege(SiegeLocation loc) {
+		return getSiege(loc.getLocationId());
 	}
 
-	public Siege<?> getSiege(Integer siegeLocationId) {
+	public Siege<? extends SiegeLocation> getSiege(int siegeLocationId) {
 		return activeSieges.get(siegeLocationId);
 	}
 
@@ -976,16 +957,7 @@ public class SiegeService {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
 				if (siegetemplate.getSiegeRace().equals(race) && siegetemplate.getSiegeModType().equals(type)) {
-					Npc npc = (Npc) SpawnEngine.spawnObject(siegetemplate, 1);
-					if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
-						NpcTemplate templ = npc.getObjectTemplate();
-						if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-							NpcLifeStats life = npc.getLifeStats();
-							int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-							templ.getStatsTemplate().setMaxHp(maxHpPercent);
-							life.setCurrentHpPercent(100);
-						}
-					}
+					SpawnEngine.spawnObject(siegetemplate, 1);
 				}
 			}
 		}

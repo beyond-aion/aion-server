@@ -8,6 +8,10 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
+import com.aionemu.gameserver.model.team2.common.legacy.PlayerAllianceEvent;
+import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -16,11 +20,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RENAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz
@@ -83,11 +89,25 @@ public class CM_APPEARANCE extends AionClientPacket {
 			if (!CustomConfig.OLD_NAMES_COUPON_DISABLED)
 				DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), oldName, newName);
 
+			World.getInstance().removeObject(player);
+			if (player.getLegion() != null) {
+				LegionService.getInstance().removeFromCache(player);
+			}
 			player.getCommonData().setName(newName);
 			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
-
+			World.getInstance().storeObject(player);
 			PacketSendUtility.broadcastPacket(player, new SM_RENAME(player.getObjectId(), oldName, newName), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_SUCCESS(newName));
+			if (player.getLegion() != null) {
+				LegionService.getInstance().addToCache(player);
+				LegionService.getInstance().updateLegionMemberList(player);
+			}
+			if (player.isInAlliance2()) {
+				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
+			} 
+			if (player.isInGroup2()) {
+				PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
+			}
 		}
 	}
 

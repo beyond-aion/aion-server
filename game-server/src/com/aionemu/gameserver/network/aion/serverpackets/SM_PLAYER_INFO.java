@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
-import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -19,7 +18,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * This packet is displaying visible players.
  *
  * @author -Nemesiss-, Avol, srx47
- * @modified cura, -Enomine-, -Artur-
+ * @modified cura, -Enomine-, -Artur-, Neon
  */
 public class SM_PLAYER_INFO extends AionServerPacket {
 
@@ -101,7 +100,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			writeD(player.getLegion().getLegionId());
 			writeC(player.getLegion().getLegionEmblem().getEmblemId());
 			writeC(player.getLegion().getLegionEmblem().getEmblemType().getValue());
-			writeC(player.getLegion().getLegionEmblem().getEmblemType() == LegionEmblemType.DEFAULT ? 0x00 : 0xFF);
+			writeC(player.getLegion().getLegionEmblem().getColor_a());
 			writeC(player.getLegion().getLegionEmblem().getColor_r());
 			writeC(player.getLegion().getLegionEmblem().getColor_g());
 			writeC(player.getLegion().getLegionEmblem().getColor_b());

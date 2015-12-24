@@ -36368,10 +36368,10 @@
 		<npcskill skillid="21528" skilllevel="1" probability="25" cooldown="25000"/>
 		<npcskill skillid="21527" skilllevel="1" probability="25" cooldown="40000"/>
 		<npcskill skillid="21533" skilllevel="1" probability="25" cooldown="40000"/>
-		<npcskill skillid="21529" skilllevel="1" probability="40" minhp="0" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="120000">
+		<npcskill skillid="21529" skilllevel="1" probability="40" minhp="0" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="120000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21530" skilllevel="1" probability="100" chainId="1" nextSkillTime="10000">
+		<npcskill skillid="21530" skilllevel="1" probability="100" chainId="1" nextSkillTime="10000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21529"/>
 		</npcskill>
 		<npcskill skillid="21531" skilllevel="1" probability="70" minhp="50" maxhp="100" nextChainId="2" nextSkillTime="0" cooldown="40000"/>
@@ -64379,14 +64379,14 @@
 		<npcskill skillid="21693" skilllevel="40" probability="55" cooldown="35000"/>
 		<npcskill skillid="21694" skilllevel="40" probability="55" cooldown="35000"/>
 		<npcskill skillid="21695" skilllevel="40" probability="55" cooldown="35000"/>
-		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234575">
 		<npcskill skillid="21692" skilllevel="40" probability="55" cooldown="35000"/>
 		<npcskill skillid="21693" skilllevel="40" probability="55" cooldown="35000"/>
 		<npcskill skillid="21694" skilllevel="40" probability="55" cooldown="35000"/>
 		<npcskill skillid="21695" skilllevel="40" probability="55" cooldown="35000"/>
-		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000"/>
+		<npcskill skillid="21698" skilllevel="40" probability="55" cooldown="35000" target="ME"/>
 	</npcskills>
 	<!-- Eiter -->
 	<npcskills npcid="234571">
@@ -64428,7 +64428,7 @@
 		<npcskill skillid="21694" skilllevel="50" probability="65" cooldown="30000"/>
 		<npcskill skillid="21695" skilllevel="50" probability="65" cooldown="30000"/>
 		<npcskill skillid="21697" skilllevel="50" probability="65" cooldown="30000"/>
-		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234579">
 		<npcskill skillid="21692" skilllevel="50" probability="65" cooldown="30000"/>
@@ -64436,7 +64436,7 @@
 		<npcskill skillid="21694" skilllevel="50" probability="65" cooldown="30000"/>
 		<npcskill skillid="21695" skilllevel="50" probability="65" cooldown="30000"/>
 		<npcskill skillid="21697" skilllevel="50" probability="65" cooldown="30000"/>
-		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="50" probability="65" cooldown="30000" target="ME"/>
 	</npcskills>
 	<!-- Eiter -->
 	<npcskills npcid="234578">
@@ -64479,18 +64479,18 @@
 		<npcskill skillid="21693" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21695" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21697" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000" nextSkillTime="0" nextChainId="1"/>
+		<npcskill skillid="21697" skilllevel="55" probability="100" chainId="1" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234585">
 		<npcskill skillid="21692" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21693" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21695" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21697" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000"/>
+		<npcskill skillid="21696" skilllevel="55" probability="70" cooldown="30000" nextSkillTime="0" nextChainId="1"/>
+		<npcskill skillid="21697" skilllevel="55" probability="100" chainId="1" cooldown="30000"/>
+		<npcskill skillid="21698" skilllevel="55" probability="70" cooldown="30000" target="ME"/>
 	</npcskills>
 	<!-- Elite Eiter -->
 	<npcskills npcid="234583">
@@ -64515,7 +64515,7 @@
 		<npcskill skillid="21686" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21687" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21688" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000"/>
+		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000" target="ME"/>
 		<npcskill skillid="21690" skilllevel="55" probability="70" cooldown="35000"/>
 		<npcskill skillid="21691" skilllevel="55" probability="70" cooldown="30000"/>
 	</npcskills>
@@ -64526,7 +64526,7 @@
 		<npcskill skillid="21686" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21687" skilllevel="55" probability="70" cooldown="30000"/>
 		<npcskill skillid="21688" skilllevel="55" probability="70" cooldown="30000"/>
-		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000"/>
+		<npcskill skillid="21689" skilllevel="55" probability="70" cooldown="200000" target="ME"/>
 		<npcskill skillid="21690" skilllevel="55" probability="70" cooldown="35000"/>
 		<npcskill skillid="21691" skilllevel="55" probability="70" cooldown="30000"/>
 	</npcskills>
@@ -64538,10 +64538,10 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21715" skilllevel="65" probability="80" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="40000">
+		<npcskill skillid="21715" skilllevel="65" probability="80" minhp="0" maxhp="50" priority="1" nextChainId="1" nextSkillTime="0" cooldown="30000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000">
+		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715"/>
 		</npcskill>
 		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64552,10 +64552,10 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21715" skilllevel="65" probability="80" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="40000">
+		<npcskill skillid="21715" skilllevel="65" probability="80" minhp="0" maxhp="50" priority="1" nextChainId="1" nextSkillTime="0" cooldown="30000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000">
+		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715"/>
 		</npcskill>
 		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64566,10 +64566,10 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21715" skilllevel="65" probability="80" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="40000">
+		<npcskill skillid="21715" skilllevel="65" probability="80" minhp="0" maxhp="50" priority="1" nextChainId="1" nextSkillTime="0" cooldown="30000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000">
+		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715"/>
 		</npcskill>
 		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64580,10 +64580,10 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21715" skilllevel="65" probability="80" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="40000">
+		<npcskill skillid="21715" skilllevel="65" probability="80" minhp="0" maxhp="50" priority="1" nextChainId="1" nextSkillTime="0" cooldown="30000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000">
+		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715"/>
 		</npcskill>
 		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64594,10 +64594,10 @@
 		<npcskill skillid="21712" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21713" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21714" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21715" skilllevel="65" probability="80" maxhp="50" nextChainId="1" nextSkillTime="0" cooldown="40000">
+		<npcskill skillid="21715" skilllevel="65" probability="80" minhp="0" maxhp="50" priority="1" nextChainId="1" nextSkillTime="0" cooldown="30000" target="NONE">
 			<cond condType="SELECT_RANDOM_ENEMY"/>
 		</npcskill>
-		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000">
+		<npcskill skillid="21716" skilllevel="65" probability="100" chainId="1" nextSkillTime="7000" cooldown="20000" target="NONE">
 			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715"/>
 		</npcskill>
 		<npcskill skillid="21717" skilllevel="65" probability="80" cooldown="25000"/>
@@ -64608,9 +64608,9 @@
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64621,19 +64621,17 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234595">
 		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64644,19 +64642,17 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234598">
 		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64667,19 +64663,17 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234606">
 		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64690,19 +64684,17 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234612">
 		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64713,19 +64705,17 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<npcskills npcid="234613">
 		<npcskill skillid="21692" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21693" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21694" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21695" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0"/>
-		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000"/>
+		<npcskill skillid="21698" skilllevel="65" probability="80" nextChainId="1" cooldown="40000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="20000" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21698" skilllevel="65" probability="100" chainId="2" cooldown="20000" nextSkillTime="7000" target="ME"/>
 		<npcskill skillid="21696" skilllevel="65" probability="80" nextChainId="3" cooldown="35000" nextSkillTime="0"/>
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="3" nextChainId="4" cooldown="20000" nextSkillTime="1000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
@@ -64736,10 +64726,8 @@
 		<npcskill skillid="21697" skilllevel="65" probability="100" chainId="5" cooldown="20000" nextSkillTime="7000">
 			<cond condType="SELECT_RANDOM_ENEMY" range="40"/>
 		</npcskill>
-		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1"/>
-		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0">
-			<cond condType="HELP_SELF"/>
-		</npcskill>
+		<npcskill skillid="21699" skilllevel="65" probability="100" nextChainId="6" cooldown="180000" nextSkillTime="0" minhp="45" maxhp="50" priority="1" target="ME"/>
+		<npcskill skillid="21718" skilllevel="65" probability="100" chainId="6" cooldown="60000" nextSkillTime="0" target="ME"/>
 	</npcskills>
 	<!-- Prime Magnorion (hyperion) -->
 	<npcskills npcid="234599">
@@ -64749,7 +64737,7 @@
 		<npcskill skillid="21686" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21687" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21688" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000"/>
+		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000" target="ME"/>
 		<npcskill skillid="21690" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21691" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
@@ -64760,7 +64748,7 @@
 		<npcskill skillid="21686" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21687" skilllevel="65" probability="80" cooldown="25000"/>
 		<npcskill skillid="21688" skilllevel="65" probability="80" cooldown="25000"/>
-		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000"/>
+		<npcskill skillid="21689" skilllevel="65" probability="80" cooldown="180000" target="ME"/>
 		<npcskill skillid="21690" skilllevel="65" probability="80" cooldown="30000"/>
 		<npcskill skillid="21691" skilllevel="65" probability="80" cooldown="25000"/>
 	</npcskills>
@@ -64940,24 +64928,24 @@
 	<!-- Vocolith Summons -->
 	<npcskills npcid="235217">
 		<npcskill skillid="21781" skilllevel="65" probability="100" cooldown="35000"/>
-		<npcskill skillid="18770" skilllevel="65" probability="100" cooldown="30000" />
+		<npcskill skillid="18770" skilllevel="65" probability="100" cooldown="30000" target="ME"/>
 		<npcskill skillid="16519" skilllevel="65" probability="100" cooldown="30000"/>
 		<npcskill skillid="21790" skilllevel="65" probability="80" minhp="0" maxhp="80" cooldown="30000"/>
 		<npcskill skillid="21783" skilllevel="65" probability="100" minhp="0" maxhp="70" cooldown="30000"/>
 	</npcskills>
 	<npcskills npcid="235218">
-		<npcskill skillid="19549" skilllevel="45" probability="80" cooldown="30000"/>
-		<npcskill skillid="19549" skilllevel="95" probability="80" minhp="0" maxhp="55" cooldown="50000"/>
-		<npcskill skillid="19550" skilllevel="50" probability="80" cooldown="30000"/>
-		<npcskill skillid="19552" skilllevel="65" probability="80" minhp="0" maxhp="35" nextChainId="1" cooldown="50000" nextSkillTime="0"/>
-		<npcskill skillid="19553" skilllevel="65" probability="100" minhp="0" maxhp="30" chainId="1" cooldown="35000" priority="1">
+		<npcskill skillid="19549" skilllevel="30" probability="80" cooldown="30000"/>
+		<npcskill skillid="19549" skilllevel="70" probability="60" minhp="0" maxhp="55" cooldown="80000"/>
+		<npcskill skillid="19550" skilllevel="35" probability="80" cooldown="30000"/>
+		<npcskill skillid="19552" skilllevel="55" probability="80" minhp="0" maxhp="35" nextChainId="1" cooldown="50000" nextSkillTime="0"/>
+		<npcskill skillid="19553" skilllevel="45" probability="100" minhp="0" maxhp="30" chainId="1" cooldown="35000" priority="1">
 			<cond condType="TARGET_IS_AETHERS_HOLD"/>
 		</npcskill>
-		<npcskill skillid="21780" skilllevel="75" probability="70" cooldown="20000"/>
+		<npcskill skillid="21780" skilllevel="65" probability="70" cooldown="20000"/>
 	</npcskills>
 	<npcskills npcid="235219">
 		<npcskill skillid="21785" skilllevel="65" probability="100" cooldown="25000"/>
-		<npcskill skillid="18770" skilllevel="65" probability="100" cooldown="25000" />
+		<npcskill skillid="18770" skilllevel="65" probability="100" cooldown="25000" target="ME"/>
 		<npcskill skillid="21786" skilllevel="65" probability="80" minhp="0" maxhp="70" cooldown="30000"/>
 		<npcskill skillid="21784" skilllevel="65" probability="100" minhp="0" maxhp="55" cooldown="30000"/>
 		<npcskill skillid="16519" skilllevel="65" probability="100" cooldown="30000"/>
@@ -64998,56 +64986,62 @@
 	</npcskills>
 	<!-- Cleric -->
 	<npcskills npcid="218547">
-		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
-		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
-		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+		<npcskill skillid="20517" skilllevel="65" probability="90" cooldown="15000" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" chainId="1" nextChainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" chainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="15000" nextSkillTime="6000"/>
 	</npcskills>
 	<npcskills npcid="219197">
-		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
-		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
-		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+		<npcskill skillid="20517" skilllevel="65" probability="90" cooldown="15000" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" chainId="1" nextChainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" chainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="15000" nextSkillTime="6000"/>
 	</npcskills>
 	<npcskills npcid="218551">
-		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
-		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
-		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+		<npcskill skillid="20517" skilllevel="65" probability="90" cooldown="15000" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" chainId="1" nextChainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" chainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="15000" nextSkillTime="6000"/>
 	</npcskills>
 	<npcskills npcid="219190">
-		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
-		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
-		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+		<npcskill skillid="20517" skilllevel="65" probability="90" cooldown="15000" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" chainId="1" nextChainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" chainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="15000" nextSkillTime="6000"/>
 	</npcskills>
 	<npcskills npcid="219169">
-		<npcskill skillid="20517" skilllevel="65" probability="100" cooldown="15000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" priority="2" nextSkillTime="2000"/>
-		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" priority="1" nextSkillTime="2000"/>
-		<npcskill skillid="20515" skilllevel="65" probability="100" cooldown="15000" nextSkillTime="9000"/>
+		<npcskill skillid="20517" skilllevel="65" probability="90" cooldown="15000" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="20518" skilllevel="65" probability="100" cooldown="15000" chainId="1" nextChainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20519" skilllevel="65" probability="100" cooldown="15000" chainId="2" nextSkillTime="2000"/>
+		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="15000" nextSkillTime="6000"/>
 	</npcskills>
 	<!-- Assassin -->
 	<npcskills npcid="218545">
-		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
-		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
-		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
-		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" nextChainId="1" nextSkillTime="1000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" chainId="1" nextChainId="2" nextSkillTime="1000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" chainId="2" nextSkillTime="4000"/>
+		<npcskill skillid="20525" skilllevel="65" probability="100" cooldown="20000" nextChainId="3" nextSkillTime="0" />
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="3" nextChainId="4" nextSkillTime="0"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="4" nextSkillTime="4000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="5000"/>
 	</npcskills>
 	<npcskills npcid="219195">
-		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
-		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
-		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
-		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" nextChainId="1" nextSkillTime="1000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" chainId="1" nextChainId="2" nextSkillTime="1000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" chainId="2" nextSkillTime="4000"/>
+		<npcskill skillid="20525" skilllevel="65" probability="100" cooldown="20000" nextChainId="3" nextSkillTime="0" />
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="3" nextChainId="4" nextSkillTime="0"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="4" nextSkillTime="4000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="5000"/>
 	</npcskills>
 	<npcskills npcid="219167">
-		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" priority="4" nextSkillTime="2000"/>
-		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" priority="3" nextSkillTime="2000"/>
-		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="5000"/>
-		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" priority="1" nextSkillTime="5000"/>
-		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="9000"/>
+		<npcskill skillid="20522" skilllevel="65" probability="100" cooldown="20000" nextChainId="1" nextSkillTime="1000"/>
+		<npcskill skillid="20523" skilllevel="65" probability="100" cooldown="20000" chainId="1" nextChainId="2" nextSkillTime="1000"/>
+		<npcskill skillid="20524" skilllevel="65" probability="100" cooldown="20000" chainId="2" nextSkillTime="4000"/>
+		<npcskill skillid="20525" skilllevel="65" probability="100" cooldown="20000" nextChainId="3" nextSkillTime="0" />
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="3" nextChainId="4" nextSkillTime="0"/>
+		<npcskill skillid="20526" skilllevel="65" probability="100" cooldown="20000" chainId="4" nextSkillTime="4000"/>
+		<npcskill skillid="20527" skilllevel="65" probability="100" cooldown="20000" nextSkillTime="5000"/>
 	</npcskills>
 	<!-- Fighter -->
 	<npcskills npcid="218544">
@@ -65120,10 +65114,165 @@
 	</npcskills>
 	<!-- Assault Leader -->
 	<npcskills npcid="219202">
-		<npcskill skillid="20545" skilllevel="65" probability="100" cooldown="20000" priority="2" nextSkillTime="0"/>
-		<npcskill skillid="20546" skilllevel="65" probability="100" cooldown="20000" priority="1"/>
+		<npcskill skillid="20545" skilllevel="65" probability="100" cooldown="20000" nextChainId="1" nextSkillTime="0"/>
+		<npcskill skillid="20546" skilllevel="65" probability="100" cooldown="10000" chainId="1"/>
 		<npcskill skillid="20547" skilllevel="65" probability="100" cooldown="20000"/>
-		<npcskill skillid="20544" skilllevel="65" probability="100" cooldown="60000" maxhp="50" priority="3"/>
-		<npcskill skillid="20543" skilllevel="65" probability="100" cooldown="60000" maxhp="10" priority="4"/>
+		<npcskill skillid="20544" skilllevel="65" probability="100" cooldown="60000" maxhp="50" priority="1"/>
+		<npcskill skillid="20543" skilllevel="65" probability="100" cooldown="60000" maxhp="10" priority="2"/>
+	</npcskills>
+	<!-- Some Basic Class Skill-Lists -->
+	<!-- ASMODIANS -->
+	<!-- Ranger -->
+	<!-- NOT FINISHED YET.
+	<npcskills npcid="234082">
+		<npcskill skillid="17098" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17099" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17100" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17101" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17102" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17103" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17104" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17105" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> -->
+	<!-- WITCH -->
+	<!--
+	<npcskills npcid="234085">
+		<npcskill skillid="17107" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17108" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17109" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17110" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17111" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17112" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17113" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17114" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17115" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17117" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17118" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17119" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17120" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> -->
+	<!-- PRIEST -->
+	<!--
+	<npcskills npcid="234088">
+		<npcskill skillid="17121" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17122" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17123" skilllevel="65" probability="70" cooldown="30000" target="NONE">
+			<cond condType="TARGET_IS_PHYSICAL_CLASS"/>
+		</npcskill>
+		<npcskill skillid="17124" skilllevel="65" probability="70" cooldown="30000" target="NONE">
+			<cond condType="TARGET_IS_PHYSICAL_CLASS"/>
+		</npcskill>
+		<npcskill skillid="17126" skilllevel="65" probability="100" minhp="0" maxhp="60" cooldown="15000" priority="2" target="ME"/>
+		<npcskill skillid="17126" skilllevel="65" probability="100" cooldown="15000" priority="1" target="NONE">
+			<cond condType="HELP_FRIEND" hpBelow="60" range="35"/>
+		</npcskill>
+		<npcskill skillid="17130" skilllevel="65" probability="100" cooldown="15000" priority="1" target="NONE">
+			<cond condType="HELP_FRIEND" hpBelow="60" range="10"/>
+		</npcskill>
+		<npcskill skillid="17131" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17132" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17133" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17134" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17135" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17136" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills> -->
+	<!-- FIGHTER -->
+	<!--
+	<npcskills npcid="234079">
+		<npcskill skillid="17066" skilllevel="65" probability="80" nextChainId="1" nextSkillTime="0" cooldown="30000"/>
+		<npcskill skillid="17067" skilllevel="65" probability="100" chainId="1" cooldown="10000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="17058" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17059" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17060" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17061" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17062" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17064" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17077" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17078" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17079" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17081" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17082" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17083" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17084" skilllevel="65" probability="50" cooldown="20000"/>
+	</npcskills> -->
+	<!-- KNIGHT -->
+	<!--
+	<npcskills npcid="234076">
+		<npcskill skillid="18314" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="18315" skilllevel="65" probability="100" priority="2" minhp="0" maxhp="50" cooldown="60000"/>
+		<npcskill skillid="18316" skilllevel="65" probability="70" minhp="55" maxhp="100" cooldown="25000"/>
+		<npcskill skillid="18317" skilllevel="65" probability="100" priority="3" minhp="0" maxhp="15" cooldown="120000"/>
+		<npcskill skillid="18318" skilllevel="65" probability="50" nextChainId="1" nextSkillTime="0" cooldown="25000"/>
+		<npcskill skillid="18319" skilllevel="65" probability="100" chainId="1" cooldown="10000"/>
+		<npcskill skillid="18320" skilllevel="65" probability="50" cooldown="30000"/>
+		<npcskill skillid="18321" skilllevel="65" probability="60" cooldown="20000"/>
+		<npcskill skillid="18322" skilllevel="65" probability="50" cooldown="30000"/>
+		<npcskill skillid="18323" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="18324" skilllevel="65" probability="100" cooldown="80000" priority="1" nextSkillTime="0" nextChainId="2" target="NONE">
+			<cond condType="HELP_FRIEND" hpBelow="60" range="26"/>
+		</npcskill>
+		<npcskill skillid="18315" skilllevel="65" probability="100" chainId="2" cooldown="60000"/>
+		<npcskill skillid="18325" skilllevel="65" probability="50" cooldown="20000"/>
+	</npcskills> -->
+	<!-- ASSASSIN -->
+	<!--
+	<npcskills npcid="235205">
+		<npcskill skillid="17166" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17167" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17168" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17173" skilllevel="65" probability="50" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_PHYSICAL_CLASS"/>
+		</npcskill>
+		<npcskill skillid="17176" skilllevel="65" probability="50" cooldown="20000"/>
+		<npcskill skillid="17177" skilllevel="65" probability="50" nextChainId="1" nextSkillTime="0" cooldown="20000"/>
+		<npcskill skillid="17178" skilllevel="65" probability="100" chainId="1" cooldown="10000"/>
+		<npcskill skillid="17179" skilllevel="65" probability="50" nextChainId="2" nextSkillTime="0" cooldown="40000"/>
+		<npcskill skillid="17181" skilllevel="65" probability="100" chainId="2" cooldown="20000"/>
+		<npcskill skillid="17180" skilllevel="65" probability="50" nextChainId="3" nextSkillTime="0" cooldown="40000"/>
+		<npcskill skillid="17182" skilllevel="65" probability="100" chainId="3" cooldown="20000"/>
+		<npcskill skillid="17183" skilllevel="65" probability="50" nextChainId="4" nextSkillTime="2000" cooldown="20000"/>
+		<npcskill skillid="17184" skilllevel="65" probability="100" chainId="4" nextChainId="5" nextSkillTime="2000" cooldown="10000"/>
+		<npcskill skillid="17185" skilllevel="65" probability="100" chainId="5" cooldown="10000"/>
+		<npcskill skillid="17192" skilllevel="65" probability="100" chainId="5" cooldown="25000"/>
+		<npcskill skillid="17193" skilllevel="65" probability="100" chainId="5" cooldown="35000"/>
+		<npcskill skillid="17191" skilllevel="65" probability="50" cooldown="10000"/>
+	</npcskills>-->
+	<!-- Ahserion -->
+	<npcskills npcid="277224">
+		<npcskill skillid="21562" skilllevel="65" probability="85" nextChainId="1" cooldown="30000" nextSkillTime="0" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21565" skilllevel="65" probability="100" chainId="1" nextChainId="2" cooldown="10000" nextSkillTime="0" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21565" skilllevel="65" probability="100" chainId="2" cooldown="10000" nextSkillTime="7000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21563" skilllevel="65" probability="80" cooldown="40000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21564" skilllevel="65" probability="60" cooldown="40000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21566" skilllevel="65" probability="80" cooldown="30000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21567" skilllevel="65" probability="60" cooldown="30000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21568" skilllevel="65" probability="70" cooldown="30000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21569" skilllevel="65" probability="80" minhp="0" maxhp="50" cooldown="40000" target="ME"/>
+		<npcskill skillid="21571" skilllevel="65" probability="80" minhp="10" maxhp="80" priority="2" cooldown="300000" target="ME"/>
+		<npcskill skillid="21571" skilllevel="65" probability="100" minhp="0" maxhp="5" priority="2" cooldown="300000" target="ME"/>
+		<npcskill skillid="21573" skilllevel="65" minhp="0" maxhp="75" probability="70" cooldown="40000" target="NONE">
+			<cond condType="SELECT_RANDOM_ENEMY" range="20"/>
+		</npcskill>
+		<npcskill skillid="21574" skilllevel="65" probability="100" minhp="0" maxhp="35" priority="1" cooldown="50000" target="ME" nextSkillTime="10000">
+			<cond condType="SPAWN_NPC" npc_id="297195"/>
+		</npcskill>
 	</npcskills>
 </npc_skill_templates>

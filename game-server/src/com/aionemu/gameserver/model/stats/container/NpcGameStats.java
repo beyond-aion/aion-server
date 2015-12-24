@@ -3,12 +3,15 @@ package com.aionemu.gameserver.model.stats.container;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -55,7 +58,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMaxHp() {
-		return getStat(StatEnum.MAXHP, owner.getObjectTemplate().getStatsTemplate().getMaxHp());
+		Stat2 stat = getStat(StatEnum.MAXHP, owner.getObjectTemplate().getStatsTemplate().getMaxHp());
+		if (owner.getSpawn() instanceof SiegeSpawnTemplate && owner.getRating() == NpcRating.LEGENDARY && owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS)
+			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
+		return stat;
 	}
 
 	@Override
@@ -339,6 +345,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
+	}
+	
+	public long getLastSkillTime() {
+		return lastSkillTime;
 	}
 
 	// only use skills after a minimum cooldown of 3 to 9 seconds

@@ -14,6 +14,7 @@ import com.mysql.jdbc.StringUtils;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class SM_HOUSE_UPDATE extends AionServerPacket {
 
@@ -97,7 +98,7 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
 			writeC(emblem.getEmblemType().getValue());
-			writeC(emblem.isDefaultEmblem() ? 0x0 : 0xFF); // Alpha Channel
+			writeC(emblem.getColor_a());
 			writeC(emblem.getColor_r());
 			writeC(emblem.getColor_g());
 			writeC(emblem.getColor_b());

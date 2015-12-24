@@ -60,7 +60,7 @@ public class SatraTreasureHoardInstance extends GeneralInstanceHandler {
 					PacketSendUtility.sendPacket(p, STR_MSG_INSTANCE_START_IDABRE);
 					PacketSendUtility.sendPacket(p, new SM_QUEST_ACTION(0, 600));
 				}
-				doors.get(77).setOpen(false);
+				//doors.get(77).setOpen(false); commented out also on instance create, need to investigate what door this is...
 				startFail();
 			}
 		}

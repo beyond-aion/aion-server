@@ -9371,7 +9371,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your Legion is now at level %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_GUILD_CHANGE_LEVEL_DONE(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_GUILD_CHANGE_LEVEL_DONE(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300320, value0);
 	}
 

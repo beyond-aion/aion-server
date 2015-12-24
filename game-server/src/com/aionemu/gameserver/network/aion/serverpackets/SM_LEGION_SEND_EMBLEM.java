@@ -1,55 +1,44 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
+import com.aionemu.gameserver.model.team.legion.LegionEmblem;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Simple modified cura
+ * @author Simple
+ * @modified cura, Neon
  */
 public class SM_LEGION_SEND_EMBLEM extends AionServerPacket {
 
-	/** Legion information **/
 	private int legionId;
 	private int emblemId;
-	private int color_r;
-	private int color_g;
-	private int color_b;
+	private byte emblemType;
+	private int emblemDataSize; // used when EMBLEM_DATA is sent afterwards, so the client knows the incoming byte length
+	private byte color_a;
+	private byte color_r;
+	private byte color_g;
+	private byte color_b;
 	private String legionName;
-	private LegionEmblemType emblemType;
-	private int emblemDataSize;
 
-	/**
-	 * This constructor will handle legion emblem info
-	 * 
-	 * @param legionId
-	 * @param emblemId
-	 * @param color_r
-	 * @param color_g
-	 * @param color_b
-	 * @param legionName
-	 * @param emblemType
-	 * @param emblemDataSize
-	 */
-	public SM_LEGION_SEND_EMBLEM(int legionId, int emblemId, int color_r, int color_g, int color_b, String legionName, LegionEmblemType emblemType,
-		int emblemDataSize) {
+	public SM_LEGION_SEND_EMBLEM(int legionId, LegionEmblem emblem, int emblemDataSize, String legionName) {
 		this.legionId = legionId;
-		this.emblemId = emblemId;
-		this.color_r = color_r;
-		this.color_g = color_g;
-		this.color_b = color_b;
-		this.legionName = legionName;
-		this.emblemType = emblemType;
+		this.emblemId = emblem.getEmblemId();
+		this.emblemType = emblem.getEmblemType().getValue();
 		this.emblemDataSize = emblemDataSize;
+		this.color_a = emblem.getColor_a();
+		this.color_r = emblem.getColor_r();
+		this.color_g = emblem.getColor_g();
+		this.color_b = emblem.getColor_b();
+		this.legionName = legionName;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(legionId);
 		writeC(emblemId);
-		writeC(emblemType.getValue());
+		writeC(emblemType);
 		writeD(emblemDataSize);
-		writeC(emblemType.equals(LegionEmblemType.DEFAULT) ? 0x00 : 0xFF);
+		writeC(color_a);
 		writeC(color_r);
 		writeC(color_g);
 		writeC(color_b);

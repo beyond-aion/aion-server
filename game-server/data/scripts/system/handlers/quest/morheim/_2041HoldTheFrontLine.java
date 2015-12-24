@@ -6,14 +6,12 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423). Protect Kargate from the Balaur:
@@ -25,8 +23,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2041HoldTheFrontLine extends QuestHandler {
 
 	private final static int questId = 2041;
+	private final static int mobId = 213575;
 	private final static int[] npcIds = { 204301, 204403, 204432 };
-	private final static int[] mobIds = { 213575, 280818 };
 	private int balaurKilled = 0;
 
 	public _2041HoldTheFrontLine() {
@@ -42,8 +40,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 		qe.registerOnEnterWorld(questId);
 		for (int npcId : npcIds)
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		for (int mobId : mobIds)
-			qe.registerQuestNpc(mobId).addOnKillEvent(questId);
+		qe.registerQuestNpc(mobId).addOnKillEvent(questId);
 	}
 
 	@Override
@@ -107,8 +104,8 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 						case SETPRO3: {
 							balaurKilled = 0;
-							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), mobId, 248.78f, 259.28f, 227.74f, (byte) 94);
+							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), mobId, 259.10f, 261.79f, 227.77f, (byte) 94);
 							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
 						}
@@ -134,17 +131,16 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 			return false;
 
 		if (qs.getQuestVarById(0) == 3) {
-			int targetId = env.getTargetId();
-			if (targetId == 213575 || targetId == 280818) {
+			if (env.getTargetId() == mobId) {
 				balaurKilled++;
 				if (balaurKilled == 2) {
-					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), mobId, 248.78f, 259.28f, 227.74f, (byte) 94);
+					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), mobId, 259.10f, 261.79f, 227.77f, (byte) 94);
 				} else if (balaurKilled == 4) {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {
 						changeQuestStep(env, 3, 4, false);
-						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+						playQuestMovie(env, 158);
 					} else {
 						changeQuestStep(env, 3, 2, false);
 						QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
@@ -167,7 +163,7 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 			deleteBalaur(env);
 			if (kargateIsAlive(env)) {
 				changeQuestStep(env, 3, 4, false);
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+				playQuestMovie(env, 158);
 			} else {
 				changeQuestStep(env, 3, 2, false);
 				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
@@ -218,10 +214,9 @@ public class _2041HoldTheFrontLine extends QuestHandler {
 	}
 
 	private void deleteBalaur(QuestEnv env) {
-		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs();
+		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs(mobId);
 		for (Npc npc : npcs) {
-			if (npc.getNpcId() == 213575 || npc.getNpcId() == 280818)
-				npc.getController().onDelete();
+			npc.getController().onDelete();
 		}
 	}
 }

@@ -20,6 +20,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author ATracer
+ * @modified Yeats & Neon
  */
 public class TargetRangeProperty {
 
@@ -106,15 +107,13 @@ public class TargetRangeProperty {
 						skill.getEffectedList().add((Creature) nextCreature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
-						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature, distanceToTarget, properties.getEffectiveDist(),
-							properties.getDirection())
-							|| MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature, (properties.getEffectiveDist() + skill.getEffector().getObjectTemplate().getBoundRadius().getFront()), 
+							((effectiveRange/2f) + skill.getEffector().getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
 							skill.getEffectedList().add((Creature) nextCreature);
 						}
-					} else if (MathUtil
-						.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+					} else if (MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
 						//for target_range_area_type = fireball
 						if (ineffectiveRange > 0 && MathUtil.isIn3dRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
 							continue;

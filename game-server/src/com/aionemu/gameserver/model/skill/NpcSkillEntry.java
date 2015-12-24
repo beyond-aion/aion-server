@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.skill;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 
 /**
  * @author ATracer, nrg
@@ -40,15 +41,9 @@ public abstract class NpcSkillEntry extends SkillEntry {
 	
 	public abstract boolean conditionReady(Creature creature);
 	
-	public abstract NpcSkillCondition getCondition();
-	
 	public abstract NpcSkillConditionTemplate getConditionTemplate();
 	
 	public abstract boolean hasCondition();
-	
-	public abstract int getRange();
-	
-	public abstract int getHpBelow();
 
 	public abstract int getNextSkillTime();
 	
@@ -57,6 +52,12 @@ public abstract class NpcSkillEntry extends SkillEntry {
 	public abstract int getNextChainId();
 	
 	public abstract int getChainId();
+
+	public abstract boolean canUseNextChain(Npc owner);
+
+	public abstract NpcSkillTemplate getTemplate();
+
+	public abstract void fireAfterUseSkillEvents(Npc npc);
 	
 }
 

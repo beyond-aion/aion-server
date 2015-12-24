@@ -1,47 +1,39 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
+import com.aionemu.gameserver.model.team.legion.LegionEmblem;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Simple modified cura
+ * @author Simple
+ * @modified cura, Neon
  */
 public class SM_LEGION_UPDATE_EMBLEM extends AionServerPacket {
 
-	/** Legion emblem information **/
 	private int legionId;
-	private int emblemId;
-	private int color_r;
-	private int color_g;
-	private int color_b;
-	private LegionEmblemType emblemType;
+	private byte emblemId;
+	private byte color_a;
+	private byte color_r;
+	private byte color_g;
+	private byte color_b;
+	private byte emblemType;
 
-	/**
-	 * This constructor will handle legion emblem info
-	 * 
-	 * @param legionId
-	 * @param emblemId
-	 * @param color_r
-	 * @param color_g
-	 * @param color_b
-	 * @param emblemType
-	 */
-	public SM_LEGION_UPDATE_EMBLEM(int legionId, int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
+	public SM_LEGION_UPDATE_EMBLEM(int legionId, LegionEmblem emblem) {
 		this.legionId = legionId;
-		this.emblemId = emblemId;
-		this.color_r = color_r;
-		this.color_g = color_g;
-		this.color_b = color_b;
-		this.emblemType = emblemType;
+		this.emblemId = emblem.getEmblemId();
+		this.color_a = emblem.getColor_a();
+		this.color_r = emblem.getColor_r();
+		this.color_g = emblem.getColor_g();
+		this.color_b = emblem.getColor_b();
+		this.emblemType = emblem.getEmblemType().getValue();
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(legionId);
 		writeC(emblemId);
-		writeC(emblemType.getValue());
-		writeC(0xFF); // Fixed
+		writeC(emblemType);
+		writeC(color_a);
 		writeC(color_r);
 		writeC(color_g);
 		writeC(color_b);

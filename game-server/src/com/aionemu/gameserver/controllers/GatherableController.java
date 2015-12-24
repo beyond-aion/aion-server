@@ -8,6 +8,7 @@ import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -54,6 +55,10 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			}
 		}
 
+		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+			//TODO message to send
+			return;
+		}
 		if (player.getInventory().isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INVENTORY_IS_FULL);
 			return;

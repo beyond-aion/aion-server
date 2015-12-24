@@ -49,7 +49,10 @@ public class NpcSkillTemplate {
 	protected int nextChainId = 0;
 	@XmlAttribute(name = "chainId")
 	protected int chainId = 0;
-	
+	@XmlAttribute(name = "maxChainTime")
+	protected int maxChainTime = 15000;
+	@XmlAttribute(name = "target")
+	protected NpcSkillTargetAttribute target = NpcSkillTargetAttribute.MOST_HATED;
 
 	/**
 	 * @return the id
@@ -175,5 +178,19 @@ public class NpcSkillTemplate {
 	 */
 	public int getChainId() {
 		return chainId;
+	}
+
+	/**
+	 * @return maxChainTime
+	 */
+	public int getMaxChainTime() {
+		return maxChainTime;
+	}
+
+	/**
+	 * @return target to select
+	 */
+	public NpcSkillTargetAttribute getTarget() {
+		return target;
 	}
 }

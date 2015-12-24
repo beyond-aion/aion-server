@@ -71,6 +71,16 @@ public abstract class BaseServerPacket extends BasePacket {
 	}
 
 	/**
+	 * Write byte to buffer.
+	 * 
+	 * @param buf
+	 * @param value
+	 */
+	protected final void writeC(byte value) {
+		buf.put(value);
+	}
+
+	/**
 	 * Write double to buffer.
 	 * 
 	 * @param buf

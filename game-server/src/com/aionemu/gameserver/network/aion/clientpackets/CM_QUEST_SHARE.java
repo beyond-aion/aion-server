@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ginho1
+ * @modified Neon
  */
 public class CM_QUEST_SHARE extends AionClientPacket {
 
@@ -26,111 +27,53 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		this.questId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
-		Player player = this.getConnection().getActivePlayer();
-
-		if (player == null)
-			return;
-
+		Player player = getConnection().getActivePlayer();
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
+		QuestState questState = player.getQuestStateList().getQuestState(questId);
 
-		if (questTemplate == null || questTemplate.isCannotShare())
+		if (questTemplate == null || questTemplate.isCannotShare()) {
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100001)); // quest cannot be shared
 			return;
-
-		QuestState questState = player.getQuestStateList().getQuestState(this.questId);
+		}
 
 		if ((questState == null) || (questState.getStatus() == QuestStatus.COMPLETE))
 			return;
 
-		if (player.isInGroup2()) {
-			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
-				if (player == member)
-					continue;
-
-				if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
-					continue;
-				}
-
-				if (questTemplate.getTarget().equals(QuestTarget.ALLIANCE)) {
-					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100005, player.getName()));
-					continue;
-				}
-
-				if (!questTemplate.isRepeatable()) {
-					if (member.getQuestStateList().getQuestState(questId) != null)
-						if (member.getQuestStateList().getQuestState(questId).getStatus() != null
-							&& member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
-							continue;
-				} else {
-					if (member.getQuestStateList().getQuestState(questId) != null)
-						if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
-							|| member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
-							continue;
-				}
-
-				if (member.isInFlyingState()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
-					continue;
-				}
-
-				if (!QuestService.checkLevelRequirement(this.questId, member.getLevel())) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
-					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100003, player.getName()));
-					continue;
-				}
-				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(this.questId, member.getObjectId(), true));
-			}
+		if (!player.isInAlliance2() && questTemplate.getTarget() == QuestTarget.ALLIANCE) {
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100005, player.getName())); // no alliance member to share the quest with
+			return;
 		}
 
-		else if (player.isInAlliance2()) {
-			for (Player member : player.getPlayerAllianceGroup2().getOnlineMembers()) {
-				if (player == member)
-					continue;
-				if (!MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE)) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000, member.getName()));
-					continue;
-				}
-
-				if (!questTemplate.isRepeatable()) {
-					if (member.getQuestStateList().getQuestState(questId).getStatus() != null
-						&& member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE)
-						continue;
-				}
-
-				else {
-					if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
-						|| member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD)
-						continue;
-				}
-
-				if (member.isInFlyingState()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
-					continue;
-				}
-
-				if (!QuestService.checkLevelRequirement(this.questId, member.getLevel())) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
-					PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1100003, player.getName()));
-					continue;
-				}
-				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(this.questId, member.getObjectId(), true));
-			}
-		} else {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000));
+		if (!player.isInTeam()) {
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000)); // no group member to share the quest with
 			return;
+		}
+
+		for (Player member : player.isInGroup2() ? player.getPlayerGroup2().getOnlineMembers() : player.getPlayerAllianceGroup2().getOnlineMembers()) {
+			if (player.getObjectId().equals(member.getObjectId()) || !MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+				continue;
+
+			if (member.getQuestStateList().getQuestState(questId) != null) {
+				QuestStatus qs = member.getQuestStateList().getQuestState(questId).getStatus();
+				if (!questTemplate.isRepeatable() && qs != QuestStatus.NONE)
+					continue;
+				else if (qs == QuestStatus.START || qs == QuestStatus.REWARD)
+					continue;
+			}
+
+			if (!QuestService.checkLevelRequirement(questId, member.getLevel())) {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
+			} else {
+				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(questId, member.getObjectId(), true));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100002, member.getName()));
+			}
 		}
 	}
 }

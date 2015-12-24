@@ -218,10 +218,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return attackRange;
 	}
 
-	public void setAttackRange(int value) {
-		this.attackRange = value;
-	}
-
 	public int getAttackRate() {
 		return attackRate;
 	}
@@ -392,9 +388,4 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	public GroupDropType getGroupDrop() {
 		return groupDrop;
 	}
-	
-	public void setLevel(byte level) {
-		this.level = level;
-	}
-
 }

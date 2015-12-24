@@ -17440,56 +17440,20 @@
             <item id="170195090" name="Dragonbound Cloth Costume Guestbloom"/>
         </items>
     </decomposable>
-    <decomposable item_id="188052295" decomposable_name="Customized Skill Book Bundle">
+    <decomposable item_id="188052295" decomposable_name="Customized Skill Book Bundle" selectable="true">
         <items>
             <item id="169500935" name="Fear: Ginseng I"/>
-        </items>
-        <items>
-            <item id="169500934" name="Fear: Poppy I"/>
-        </items>
-        <items>
-            <item id="169500932" name="Sleep: Frightcorn I"/>
-        </items>
-        <items>
             <item id="169500933" name="Sleep: Scarecrow I"/>
-        </items>
-        <items>
             <item id="169500947" name="Summon Divine Crystal IV"/>
-        </items>
-        <items>
-            <item id="169500939" name="Summon Divine Mirror IV"/>
-        </items>
-        <items>
             <item id="169500927" name="Transformation: Krall IV"/>
         </items>
-        <items>
-            <item id="169500919" name="Transformation: White Tiger IV"/>
-        </items>
     </decomposable>
-    <decomposable item_id="188052296" decomposable_name="Customized Skill Book Bundle">
+    <decomposable item_id="188052296" decomposable_name="Customized Skill Book Bundle" selectable="true">
         <items>
             <item id="169500935" name="Fear: Ginseng I"/>
-        </items>
-        <items>
-            <item id="169500934" name="Fear: Poppy I"/>
-        </items>
-        <items>
-            <item id="169500932" name="Sleep: Frightcorn I"/>
-        </items>
-        <items>
             <item id="169500933" name="Sleep: Scarecrow I"/>
-        </items>
-        <items>
             <item id="169500951" name="Summon Divine Crystal IV"/>
-        </items>
-        <items>
-            <item id="169500943" name="Summon Divine Mirror IV"/>
-        </items>
-        <items>
             <item id="169500931" name="Transformation: Krall IV"/>
-        </items>
-        <items>
-            <item id="169500923" name="Transformation: White Tiger IV"/>
         </items>
     </decomposable>
     <decomposable item_id="188052297" decomposable_name="Noble Composite Manastone Bundle">

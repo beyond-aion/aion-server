@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
@@ -67,9 +68,8 @@ public class SkillAttackManager {
 			final int skillLevel = npcAI.getSkillLevel();
 
 			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-			int duration = template.getDuration();
 			if (npcAI.isLogging()) {
-				AI2Logger.info(npcAI, "Using skill " + skillId + " level: " + skillLevel + " duration: " + duration);
+				AI2Logger.info(npcAI, "Using skill " + skillId + " level: " + skillLevel + " duration: " + template.getDuration());
 			}
 			switch (template.getSubType()) {
 				case BUFF:
@@ -88,15 +88,43 @@ public class SkillAttackManager {
 					}
 					break;
 			}
-			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME 
-				|| (template.getProperties().getTargetType() == TargetRangeAttribute.AREA 
-						&& template.getProperties().getEffectiveAngle() <= 0 && template.getProperties().getEffectiveDist() <= 0)
-						&& template.getProperties().getFirstTargetRange() <= template.getProperties().getEffectiveRange()) {
-				npcAI.getOwner().setTarget(npcAI.getOwner());
-			}
-			boolean success = npcAI.getOwner().getController().useSkill(skillId, skillLevel);
-			if (!success) {
+			if ((template.getType() == SkillType.MAGICAL && npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+				|| (template.getType() == SkillType.PHYSICAL && npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
+				|| (npcAI.getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+				|| (npcAI.getOwner().getTransformModel().isActive() && npcAI.getOwner().getTransformModel().getBanUseSkills() == 1)) {
 				afterUseSkill(npcAI);
+			} else {
+				if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME) {
+					npcAI.getOwner().setTarget(npcAI.getOwner());
+				} else {
+					NpcSkillEntry lastSkill = npcAI.getOwner().getGameStats().getLastSkill();
+					if (lastSkill != null) {
+						NpcSkillTemplate temp = lastSkill.getTemplate();
+						if (temp != null) {
+							switch (temp.getTarget()) {
+								case ME:
+									if(!npcAI.getOwner().getTarget().equals(npcAI.getOwner())) {
+										npcAI.getOwner().setTarget(npcAI.getOwner());
+									}
+									break;
+								case MOST_HATED:
+									Creature target2 = npcAI.getOwner().getAggroList().getMostHated();
+									if (target2 != null) {
+										if (!npcAI.getOwner().getTarget().equals(target2)) {
+											npcAI.getOwner().setTarget(target2);
+										}
+									}
+									break;
+									default:
+										break;
+							}
+						}
+					}
+				}
+				boolean success = npcAI.getOwner().getController().useSkill(skillId, skillLevel);
+				if (!success) {
+					afterUseSkill(npcAI);
+				}
 			}
 		} else {
 			npcAI.setSubStateIfNot(AISubState.NONE);
@@ -130,17 +158,23 @@ public class SkillAttackManager {
 
 		if (owner.getGameStats().canUseNextSkill()) {
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill() ;
-			if (lastSkill != null && lastSkill.hasChain()) {
-				NpcSkillEntry chainSkill = skillList.getChainSkill(lastSkill);
-				if (chainSkill != null && isReady(owner, chainSkill)) {
-					if (targetTooFar(owner, chainSkill)) {
-						owner.getGameStats().setNextSkillTime(5000);
-						return null;
+			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
+				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
+				if (chainSkills != null && !chainSkills.isEmpty()) {
+					if (chainSkills.size() > 1)
+						Collections.shuffle(chainSkills);
+					for (NpcSkillEntry entry : chainSkills) {
+						if (entry != null && isReady(owner, entry)) {
+							if (targetTooFar(owner, entry)) {
+								owner.getGameStats().setNextSkillTime(5000);
+								return null;
+							}
+							owner.getGameStats().setLastSkill(entry);
+							owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
+							entry.setLastTimeUsed();
+							return entry;
+						}
 					}
-					owner.getGameStats().setLastSkill(chainSkill.hasChain() ? chainSkill : null);
-					owner.getGameStats().setNextSkillTime(chainSkill.getNextSkillTime());
-					chainSkill.setLastTimeUsed();
-					return chainSkill;
 				}
 			}
 			
@@ -160,7 +194,7 @@ public class SkillAttackManager {
 									owner.getGameStats().setNextSkillTime(5000);
 									return null;
 								}
-								owner.getGameStats().setLastSkill(entry.hasChain() ? entry : null);
+								owner.getGameStats().setLastSkill(entry);
 								owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
 								entry.setLastTimeUsed();
 								return entry;

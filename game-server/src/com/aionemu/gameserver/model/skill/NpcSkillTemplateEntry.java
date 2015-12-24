@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
@@ -13,6 +14,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
@@ -20,7 +22,9 @@ import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.SignetBurstEffect;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 import javolution.util.FastTable;
@@ -98,14 +102,13 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public boolean conditionReady(Creature creature) {
-		NpcSkillConditionTemplate condTemp = template.getConditionTemplate();	
+	public boolean conditionReady(Creature creature) {	
 		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
-		} else if (condTemp == null) {
+		} 
+		NpcSkillConditionTemplate condTemp = getConditionTemplate();
+		if (condTemp == null) 
 			return true;
-		}
-		
 		VisibleObject curTarget = creature.getTarget();
 		NpcSkillCondition condType = condTemp.getCondType();
 		switch (condType) {
@@ -150,12 +153,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 								return true;
 						}
 					}
-				}
-				return false;
-			case HELP_SELF:
-				if (creature.getLifeStats().getHpPercentage() <= condTemp.getHpBelow()) {
-					creature.setTarget(creature);
-					return true;
 				}
 				return false;
 			case HELP_FRIEND:
@@ -246,7 +243,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			default:
 				return true;
 		}
-		
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
@@ -270,10 +266,62 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 	
 	@Override
-	public NpcSkillCondition getCondition() {
-		return template.getConditionTemplate().getCondType();
+	public void fireAfterUseSkillEvents(Npc npc) {
+		if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+			return;
+		}
+		NpcSkillConditionTemplate condTemp = getConditionTemplate();
+		if (condTemp == null) {
+			return;
+		}
+		NpcSkillCondition condType = condTemp.getCondType();
+		switch (condType) {
+			case SPAWN_NPC:
+				if (condTemp.getDelay() > 0) {
+					ThreadPoolManager.getInstance().schedule(new Runnable() {
+						@Override
+						public void run() {
+							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+								return;
+							}
+							float x1 = 0;
+							float y1 = 0;
+							if (condTemp.getDistance() > 0) {
+								float direction = condTemp.getDirection() / 100f;
+								double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+								x1 = (float) (Math.cos(Math.PI * direction + radian) * condTemp.getDistance());
+								y1 = (float) (Math.sin(Math.PI * direction + radian) * condTemp.getDistance());
+							}
+							SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+								npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+							if (template != null) {
+								template.setCreatorId(npc.getObjectTemplate().getTemplateId());
+								SpawnEngine.spawnObject(template, npc.getInstanceId());
+							}
+						}
+					}, condTemp.getDelay());
+				} else {
+					float x1 = 0;
+					float y1 = 0;
+					if (condTemp.getDistance() > 0) {
+						float direction = condTemp.getDirection() / 100f;
+						double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+						x1 = (float) ((Math.cos(Math.PI * direction + radian) * condTemp.getDistance()));
+						y1 = (float) ((Math.sin(Math.PI * direction + radian) * condTemp.getDistance()));
+					}
+					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), 297195, 
+						npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+					if (template != null) {
+						template.setCreatorId(npc.getObjectTemplate().getTemplateId());
+						SpawnEngine.spawnObject(template, npc.getInstanceId());
+					}
+				}
+				break;
+			default:
+				break;
+		}
 	}
-
+	
 	@Override
 	public NpcSkillConditionTemplate getConditionTemplate() {
 		return template.getConditionTemplate();
@@ -285,16 +333,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public int getRange() {
-		return getConditionTemplate().getRange();
-	}
-
-	@Override
-	public int getHpBelow() {
-		return getConditionTemplate().getHpBelow();
 	}
 
 	@Override
@@ -315,5 +353,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public int getChainId() {
 		return template.getChainId();
+	}
+	
+	public NpcSkillTemplate getTemplate() {
+		return template;
+	}
+	
+	@Override
+	public boolean canUseNextChain(Npc owner) {
+		if (owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) > template.getMaxChainTime())
+			return false;
+		return true;
 	}
 }

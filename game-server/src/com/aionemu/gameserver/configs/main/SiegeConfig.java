@@ -41,13 +41,8 @@ public class SiegeConfig {
 	@Property(key = "gameserver.moltenus.time", defaultValue = "0 0 22 ? * SUN")
 	public static String MOLTENUS_SPAWN_SCHEDULE;
 	/**
-	 * Legendary npc's health mod
-	 */
-	@Property(key = "gameserver.siege.health.mod", defaultValue = "false")
-	public static boolean SIEGE_HEALTH_MOD_ENABLED;
-	/**
 	 * Legendary npc's health multiplier
 	 */
-	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1.0")
-	public static double SIEGE_HEALTH_MULTIPLIER = 1.0;
+	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1")
+	public static float SIEGE_HEALTH_MULTIPLIER;
 }
