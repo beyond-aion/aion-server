@@ -89,6 +89,7 @@ public class SimpleAttackManager {
 				return;
 			}
 			if (isTargetInAttackRange(npc)) {
+				npc.getPosition().setH(MathUtil.getHeadingTowards(npc, target));
 				npc.getController().attackTarget(target, 0);
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 				return;

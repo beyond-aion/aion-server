@@ -440,11 +440,17 @@ public class MathUtil {
 		return ((getDistance(object1, object2) - offset) <= range);
 	}
 
-	public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius, AreaDirections directions) {
+	/**
+	 * This method tests if {@code obj2} is within a cylinder, originating from {@code obj1} with the given {@code length}.
+	 * Source: <a href="http://www.flipcode.com/archives/Fast_Point-In-Cylinder_Test.shtml">link</a>
+	 */
+	public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, float length, float radius, AreaDirections direction) {
 		double radian = Math.toRadians(convertHeadingToDegree(obj1.getHeading()));
-		int direction = directions == AreaDirections.FRONT ? 0 : 1;
-		float dx = (float) (Math.cos(Math.PI * direction + radian) * length);
-		float dy = (float) (Math.sin(Math.PI * direction + radian) * length);
+		if (direction == AreaDirections.BACK)
+			radian += Math.PI;
+
+		float dx = (float) (Math.cos(radian) * length);
+		float dy = (float) (Math.sin(radian) * length);
 
 		float tdx = obj2.getX() - obj1.getX();
 		float tdy = obj2.getY() - obj1.getY();
@@ -456,7 +462,7 @@ public class MathUtil {
 			return false;
 
 		// distance squared to the cylinder axis
-		return (tdx * tdx + tdy * tdy + tdz * tdz) - dot * dot / lengthSqr <= radius;
+		return ((tdx * tdx + tdy * tdy + tdz * tdz) - (dot * dot / lengthSqr)) <= (radius * radius);
 	}
 
 	/**
@@ -555,5 +561,19 @@ public class MathUtil {
 		}
 
 		return x; // return sqrt(squarD) with precision of rootMC
+	}
+	
+	/**
+	 * @return The heading for obj1 to look towards the specified x and y coordinates.
+	 */
+	public static byte getHeadingTowards(VisibleObject obj1, float x, float y) {
+		return convertDegreeToHeading(calculateAngleFrom(obj1.getX(), obj1.getY(), x, y));
+	}
+
+	/**
+	 * @return The heading for obj1 to look towards obj2.
+	 */
+	public static byte getHeadingTowards(VisibleObject obj1, VisibleObject obj2) {
+		return getHeadingTowards(obj1, obj2.getX(), obj2.getY());
 	}
 }
