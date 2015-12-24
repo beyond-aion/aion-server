@@ -55,6 +55,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -918,12 +919,8 @@ public class LegionService {
 	public void storeLegionEmblem(Player activePlayer, int legionId, int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
 		if (legionRestrictions.canStoreLegionEmblem(activePlayer, legionId, emblemId)) {
 			Legion legion = activePlayer.getLegion();
-			if (legion.getLegionEmblem().isDefaultEmblem())
-				addHistory(legion, "", LegionHistoryType.EMBLEM_REGISTER);
-			else
-				addHistory(legion, "", LegionHistoryType.EMBLEM_MODIFIED);
-
-			activePlayer.getInventory().decreaseKinah(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH);
+			addHistory(legion, "", LegionHistoryType.EMBLEM_MODIFIED);
+			activePlayer.getInventory().decreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()));
 			legion.getLegionEmblem().setEmblem(emblemId, color_r, color_g, color_b, emblemType, null);
 			updateMembersEmblem(legion, emblemType);
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_EMBLEM);
@@ -1082,7 +1079,7 @@ public class LegionService {
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE);
 					return;
 				}
-				if (!activePlayer.getInventory().tryDecreaseKinah(1130000)) {
+				if (!activePlayer.getInventory().tryDecreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()))) {
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY);
 					return;
 				}
@@ -1895,7 +1892,8 @@ public class LegionService {
 			} else if (legion.getLegionLevel() < 2) {
 				// legion level not high enough
 				return false;
-			} else if (activePlayer.getInventory().getKinah() < LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH) {
+			} else if (activePlayer.getInventory().getKinah() < PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH,
+				activePlayer.getRace())) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH));
 				return false;
 			}
