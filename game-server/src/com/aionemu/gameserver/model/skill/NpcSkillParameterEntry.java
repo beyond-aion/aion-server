@@ -96,4 +96,8 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	public NpcSkillTemplate getTemplate() {
 		return null;
 	}
+
+	@Override
+	public void fireAfterUseSkillEvents(Npc npc) {
+	}
 }

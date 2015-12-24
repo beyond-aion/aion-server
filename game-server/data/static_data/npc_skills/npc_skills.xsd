@@ -42,6 +42,10 @@
 		<xs:attribute name="range" type="xs:int"/>
 		<xs:attribute name="hpBelow" type="xs:int"/>
 		<xs:attribute name="skill_id" type="xs:int"/>
+		<xs:attribute name="npc_id" type="xs:int"/>
+		<xs:attribute name="delay" type="xs:int"/>
+		<xs:attribute name="distance" type="xs:int"/>
+		<xs:attribute name="direction" type="xs:float"/>
 	</xs:complexType>
         <xs:simpleType name="ConjunctionType">
             <xs:restriction base="xs:string">
@@ -74,6 +78,7 @@
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV"/>
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
 				<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
+				<xs:enumeration value="SPAWN_NPC"/>
         	</xs:restriction>
         </xs:simpleType>
 		<xs:simpleType name="NpcSkillTargetAttribute">

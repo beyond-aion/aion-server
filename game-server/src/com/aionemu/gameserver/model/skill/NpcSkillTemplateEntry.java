@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
@@ -21,7 +22,9 @@ import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.SignetBurstEffect;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 import javolution.util.FastTable;
@@ -103,7 +106,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
 		} 
-		NpcSkillConditionTemplate condTemp = template.getConditionTemplate();
+		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) 
 			return true;
 		VisibleObject curTarget = creature.getTarget();
@@ -260,6 +263,63 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public void fireAfterUseSkillEvents(Npc npc) {
+		if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+			return;
+		}
+		NpcSkillConditionTemplate condTemp = getConditionTemplate();
+		if (condTemp == null) {
+			return;
+		}
+		NpcSkillCondition condType = condTemp.getCondType();
+		switch (condType) {
+			case SPAWN_NPC:
+				if (condTemp.getDelay() > 0) {
+					ThreadPoolManager.getInstance().schedule(new Runnable() {
+						@Override
+						public void run() {
+							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+								return;
+							}
+							float x1 = 0;
+							float y1 = 0;
+							if (condTemp.getDistance() > 0) {
+								float direction = condTemp.getDirection() / 100f;
+								double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+								x1 = (float) (Math.cos(Math.PI * direction + radian) * condTemp.getDistance());
+								y1 = (float) (Math.sin(Math.PI * direction + radian) * condTemp.getDistance());
+							}
+							SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+								npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+							if (template != null) {
+								template.setCreatorId(npc.getObjectTemplate().getTemplateId());
+								SpawnEngine.spawnObject(template, npc.getInstanceId());
+							}
+						}
+					}, condTemp.getDelay());
+				} else {
+					float x1 = 0;
+					float y1 = 0;
+					if (condTemp.getDistance() > 0) {
+						float direction = condTemp.getDirection() / 100f;
+						double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+						x1 = (float) ((Math.cos(Math.PI * direction + radian) * condTemp.getDistance()));
+						y1 = (float) ((Math.sin(Math.PI * direction + radian) * condTemp.getDistance()));
+					}
+					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), 297195, 
+						npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+					if (template != null) {
+						template.setCreatorId(npc.getObjectTemplate().getTemplateId());
+						SpawnEngine.spawnObject(template, npc.getInstanceId());
+					}
+				}
+				break;
+			default:
+				break;
+		}
 	}
 	
 	@Override

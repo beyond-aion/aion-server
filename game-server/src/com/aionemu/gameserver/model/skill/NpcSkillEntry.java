@@ -56,6 +56,8 @@ public abstract class NpcSkillEntry extends SkillEntry {
 	public abstract boolean canUseNextChain(Npc owner);
 
 	public abstract NpcSkillTemplate getTemplate();
+
+	public abstract void fireAfterUseSkillEvents(Npc npc);
 	
 }
 
