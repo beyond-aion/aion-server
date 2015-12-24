@@ -22,7 +22,6 @@ import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.shedule.SiegeSchedule;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -30,7 +29,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
@@ -41,10 +39,6 @@ import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SourceLocation;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -597,13 +591,7 @@ public class SiegeService {
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(legionId);
 			if (oldLegionGeneral != 0) {
 				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
-				Legion legion = LegionService.getInstance().getLegion(legionId);
-				legion.decreaseSiegeGloryPoints(1000);
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(oldLegionGeneral);
-				if (pcd != null) { // who knows? :D
-					for (Player p : World.getInstance().getAllPlayers())
-						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(pcd.getName(), 1000));
-				}
+				LegionService.getInstance().getLegion(legionId).decreaseSiegeGloryPoints(1000);
 			}
 		}
 		loc.setOccupiedCount(0);
@@ -988,16 +976,7 @@ public class SiegeService {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
 				if (siegetemplate.getSiegeRace().equals(race) && siegetemplate.getSiegeModType().equals(type)) {
-					Npc npc = (Npc) SpawnEngine.spawnObject(siegetemplate, 1);
-					if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
-						NpcTemplate templ = npc.getObjectTemplate();
-						if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-							NpcLifeStats life = npc.getLifeStats();
-							int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-							templ.getStatsTemplate().setMaxHp(maxHpPercent);
-							life.setCurrentHpPercent(100);
-						}
-					}
+					SpawnEngine.spawnObject(siegetemplate, 1);
 				}
 			}
 		}

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.siegeservice;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -12,25 +11,18 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SourceLocation;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Source
@@ -87,41 +79,6 @@ public class SourceSiege extends Siege<SourceLocation> {
 			giveRewardsToPlayers(getSiegeCounter().getRaceCounter(getSiegeLocation().getRace()));
 		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
 		updateTiamarantaRiftsStatus(false, false);
-	}
-
-	@Override
-	protected void initSiegeBoss() {
-
-		SiegeNpc boss = null;
-
-		Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(getSiegeLocationId());
-		for (SiegeNpc npc : npcs) {
-			if (npc.getObjectTemplate().getAbyssNpcType().equals(AbyssNpcType.BOSS)) {
-
-				if (boss != null) {
-					throw new SiegeException("Found 2 siege bosses for outpost " + getSiegeLocationId());
-				}
-
-				boss = npc;
-			}
-		}
-
-		if (boss == null) {
-			throw new SiegeException("Siege Boss not found for siege " + getSiegeLocationId());
-		}
-
-		if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
-			NpcTemplate templ = boss.getObjectTemplate();
-			if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-				NpcLifeStats life = boss.getLifeStats();
-				int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-				templ.getStatsTemplate().setMaxHp(maxHpPercent);
-				life.setCurrentHpPercent(100);
-			}
-		}
-
-		setBoss(boss);
-		registerSiegeBossListeners();
 	}
 
 	@Override

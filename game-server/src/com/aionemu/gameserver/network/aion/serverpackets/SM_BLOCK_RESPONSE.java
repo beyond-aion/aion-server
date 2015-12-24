@@ -30,6 +30,10 @@ public class SM_BLOCK_RESPONSE extends AionServerPacket {
 	 * You cannot block yourself.
 	 */
 	public static final int CANT_BLOCK_SELF = 4;
+	/**
+	 * This code is sent after editing the note (block reason).
+	 */
+	public static final int EDIT_NOTE = 5;
 
 	private int code;
 	private String playerName;
@@ -50,7 +54,6 @@ public class SM_BLOCK_RESPONSE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeS(playerName);
-		writeD(code);
-
+		writeC(code);
 	}
 }

@@ -59,6 +59,88 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211613" name="Greathealer Hamina"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="102100275" name="Humnadun's Cipher-Blade"/>
+			<gd_item id="101500208" name="Hamina's Staff"/>
+			<gd_item id="100100195" name="Hamina's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211614" name="Greatpriest Maropapa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500207" name="Maropapa's Jewel"/>
+			<gd_item id="102000305" name="Maropapa's Harp"/>
+			<gd_item id="100600223" name="Maropapa's Tome"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212641" name="Head Hamok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900188" name="Hamok's Greatsword"/>
+			<gd_item id="101500195" name="Hamok's Staff"/>
+			<gd_item id="100100181" name="Hamok's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212643" name="Captain Subaku"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101900281" name="Subaku's Aethercannon"/>
+			<gd_item id="100500195" name="Subaku's Jewel"/>
+			<gd_item id="101700207" name="Subaku's Longbow"/>
+			<gd_item id="101300186" name="Subakus Speer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212650" name="Weary Fidelio"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="102100265" name="Fidelio's Cipher-Blade"/>
+			<gd_item id="100900191" name="Fidelio's Greatsword"/>
+			<gd_item id="100000269" name="Fidelio's Sword"/>
+			<gd_item id="101300189" name="Fidelio's Spear"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212663" name="Mistress Harfuia"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101900288" name="Harfuia's Aethercannon"/>
+			<gd_item id="100900195" name="Harfuia's Greatsword"/>
+			<gd_item id="100500202" name="Harfuia's Jewel"/>
+			<gd_item id="101700214" name="Harfuia's Longbow"/>
+			<gd_item id="101500203" name="Harfuia's Staff"/>
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="220020000" name="Morheim"/>
@@ -70,6 +152,143 @@
 			<gd_item id="100900192" name="Kiwanunu's Greatsword"/>
 			<gd_item id="101300190" name="Kiwanunu's Spear"/>
 			<gd_item id="100100187" name="Kiwanunu's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211478" name="Floating Wriggot"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500201" name="Wriggot's Jewel"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212644" name="King Zugog"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101800282" name="King Zugog's Pistol"/>
+			<gd_item id="102100266" name="King Zugog's Cipher-Blade"/>
+			<gd_item id="100200291" name="King Zugog's Dagger"/>
+			<gd_item id="100100185" name="King Zugog's Warhammer"/>
+			<gd_item id="100600213" name="King Zugog's Tome"/>
+			<gd_item id="102000295" name="King Zugog's Harp"/>
+			<gd_item id="100000270" name="King Zugog's Sword"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212648" name="King Consierd"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="102100273" name="King's Cipher-Blade"/>
+			<gd_item id="101900292" name="King's Aethercannon"/>
+			<gd_item id="101800290" name="King's Pistol"/>
+			<gd_item id="100200300" name="King's Dagger"/>
+			<gd_item id="100900199" name="King's Greatsword"/>
+			<gd_item id="100500206" name="King's Jewel"/>
+			<gd_item id="100100194" name="King's Warhammer"/>
+			<gd_item id="101700218" name="King's Longbow"/>
+			<gd_item id="100600221" name="King's Tome"/>
+			<gd_item id="102000303" name="King's Harp"/>
+			<gd_item id="100000277" name="King's Sword"/>
+			<gd_item id="101300196" name="King's Spear"/>
+			<gd_item id="101500207" name="King's Staff"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212655" name="Queen Octanu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101900284" name="Octanu's Aethercannon"/>
+			<gd_item id="101800285" name="Octanu's Pistol"/>
+			<gd_item id="100200294" name="Octanu's Fang"/>
+			<gd_item id="101700210" name="Octanu's Longbow"/>
+			<gd_item id="101500198" name="Octanu's Staff"/>
+			<gd_item id="100500198" name="Octanu's Tear"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212642" name="Azure Fungen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000433" name="Quartz Head Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212662" name="Lonely Tusker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000438" name="Tusker's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212644" name="King Zugog"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000436" name="King Zugog's Carapace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212643" name="Captain Subaku"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100400" name="Subaku's Gloves"/>
+			<gd_item id="111300402" name="Subaku's Vambrace"/>
+			<gd_item id="111500440" name="Subaku's Handguards"/>
+			<gd_item id="111600428" name="Subaku's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212650" name="Weary Fidelio"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114300431" name="Contaminated Boots"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212655" name="Queen Octanu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100471" name="Web Tunic"/>
+			<gd_item id="110300433" name="Web Jerkin"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="33">
@@ -90,5 +309,115 @@
 			<gd_item id="113600426" name="Ice Claw Greaves"/>
 		</gd_items>
 	</gd_rule>
-	<!-- Proceed with MORHEIM_2 -->
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212647" name="Black Tears Sequoel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113600427" name="Sequoel's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212661" name="Fire Canyon Guardian"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100473" name="Lonely Protector's Tunic"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212650" name="Weary Fidelio"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000555" name="Fidelio's Soul"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212663" name="Mistress Harfuia"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000457" name="Harfuia's Heart"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211478" name="Floating Wriggot"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000578" name="Wriggot's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212648" name="King Consierd"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000581" name="King's Leather Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Rare)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212642" name="Azure Fungen"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001094" name="Quartz Head Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212662" name="Lonely Tusker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000577" name="Tusker's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212641" name="Head Hamok"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000573" name="Hamok's Leather Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="220020000" name="Morheim"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212648" name="King Consierd"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012532" name="King's Blood"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Proceed with 212664 (MORHEIM_2) -->
 </global_rules>

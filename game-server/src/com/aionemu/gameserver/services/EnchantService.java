@@ -273,7 +273,7 @@ public class EnchantService {
 		int maxEnchant = targetItem.getItemTemplate().getMaxEnchantLevel(); // max enchant level from item_templates
 		maxEnchant += targetItem.getEnchantBonus();
 		if (!targetItem.isAmplified()) {
-			int rnd = Rnd.get(100); // crit modifier
+			int rnd = Rnd.get(1, 100); // crit modifier
 			if (rnd < 2)
 				addLevel = 3;
 			else if (rnd < 7)

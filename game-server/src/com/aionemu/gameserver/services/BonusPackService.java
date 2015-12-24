@@ -40,6 +40,9 @@ public class BonusPackService {
 	}
 
 	public void addPlayerCustomReward(Player player) {
+		if (!player.getCommonData().isOnline()) // possible fix for incorrect rewardings on other char than the one logged in 
+			return;
+		
 		if (rewards == null || rewards.isEmpty())
 			return;
 

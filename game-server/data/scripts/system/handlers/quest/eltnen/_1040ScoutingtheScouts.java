@@ -6,6 +6,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
@@ -20,7 +21,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 
 	private final static int questId = 1040;
 	private final static int[] npcs = { 203989, 203901, 204020, 204024 };
-	private final static int[] mobs = { 212010, 204046 };
+	private final static int[] mobs = { 212010, 212011, 204046 };
 
 	public _1040ScoutingtheScouts() {
 		super(questId);
@@ -54,8 +55,8 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (targetId == 212010)
-			return defaultOnKillEvent(env, targetId, 1, 4); // 2, 3, 4
+		if (targetId == 212010 || targetId == 212011)
+			return defaultOnKillEvent(env, new int[] { 212010, 212011 }, 1, 4); // 2, 3, 4
 		else if (targetId == 204046)
 			if (defaultOnKillEvent(env, targetId, 8, 9)) // 9
 			{
@@ -79,10 +80,17 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203989) // Tumblusen
-				return sendQuestEndDialog(env);
+				switch (env.getDialog()) {
+					case USE_OBJECT:
+						return sendQuestDialog(env, 3398);
+					case SELECT_QUEST_REWARD:
+						return sendQuestEndDialog(env);
+					case SELECTED_QUEST_NOREWARD:
+						QuestService.finishQuest(env);
+						return closeDialogWindow(env);
+				}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203989) // Tumblusen
-			{
+			if (targetId == 203989) { // Tumblusen
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 0)
@@ -97,8 +105,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 					case SETPRO2:
 						return defaultCloseDialog(env, 4, 5); // 5
 				}
-			} else if (targetId == 203901) // Telemachus
-			{
+			} else if (targetId == 203901) { // Telemachus
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 5)
@@ -109,8 +116,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 							return true;
 						}
 				}
-			} else if (targetId == 204020) // Mabangtah
-			{
+			} else if (targetId == 204020) { // Mabangtah
 				switch (env.getDialog()) {
 					case USE_OBJECT:
 						if (var == 7)
@@ -130,8 +136,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 					case SETPRO7:
 						return defaultCloseDialog(env, 10, 10, true, false); // reward
 				}
-			} else if (targetId == 204024) // Targatu
-			{
+			} else if (targetId == 204024) { // Targatu
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 7)

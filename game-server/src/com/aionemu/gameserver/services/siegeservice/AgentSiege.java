@@ -11,7 +11,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -24,9 +23,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -178,18 +174,9 @@ public class AgentSiege extends Siege<AgentLocation> {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;				
 				if (siegetemplate.getSiegeRace().equals(SiegeRace.BALAUR) && siegetemplate.getSiegeModType().equals(SiegeModType.SIEGE)) {
-					Npc npc = (Npc) SpawnEngine.spawnObject(siegetemplate, 1);
-					if (SiegeConfig.SIEGE_HEALTH_MOD_ENABLED) {
-						NpcTemplate templ = npc.getObjectTemplate();
-						if (templ.getRating().equals(NpcRating.LEGENDARY)) {
-							NpcLifeStats life = npc.getLifeStats();
-							int maxHpPercent = (int) (life.getMaxHp() * SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-							templ.getStatsTemplate().setMaxHp(maxHpPercent);
-							life.setCurrentHpPercent(100);
-						}
-					}
+					SiegeNpc npc = (SiegeNpc) SpawnEngine.spawnObject(siegetemplate, 1);
 					if (npc.getSpawn().getHandlerType() == SpawnHandlerType.BOSS)
-						initNpc((SiegeNpc) npc);
+						initNpc(npc);
 				}
 			}
 		}
