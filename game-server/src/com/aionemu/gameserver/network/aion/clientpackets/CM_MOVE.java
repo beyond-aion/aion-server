@@ -157,6 +157,7 @@ public class CM_MOVE extends AionClientPacket {
 		}
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
+			player.getFlyController().onStopGliding();
 			m.updateFalling(z);
 		} else {
 			m.stopFalling(z);
