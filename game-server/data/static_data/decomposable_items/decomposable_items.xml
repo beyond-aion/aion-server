@@ -30421,7 +30421,7 @@
 	</decomposable>
     <decomposable item_id="188053406" decomposable_name="Lesser Supply Manastone Box" selectable="true">
 		<items>
-			<item id="167000358" name="Manastone: Attack +3"/>
+			<item id="167000294" name="Manastone: Attack +2"/>
 			<item id="167000423" name="Manastone: Magic Boost +19"/>
 			<item id="167000418" name="Manastone: HP +55"/>
 		</items>
