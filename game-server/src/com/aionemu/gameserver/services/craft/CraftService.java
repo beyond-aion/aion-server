@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -150,6 +151,11 @@ public class CraftService {
 			return false;
 		}
 
+		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+			//TODO message to send
+			return false;
+		}
+		
 		if (player.getInventory().isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_INVENTORY_IS_FULL);
 			return false;
