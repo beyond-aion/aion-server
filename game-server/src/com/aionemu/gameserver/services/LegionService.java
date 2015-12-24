@@ -802,6 +802,7 @@ public class LegionService {
 	 */
 	public void changeLevel(Legion legion, int newLevel, boolean save) {
 		legion.setLegionLevel(newLevel);
+		legion.getLegionWarehouse().setLimit(legion.getWarehouseSlots());
 		PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_EDIT(0x00, legion));
 		PacketSendUtility.broadcastPacketToLegion(legion, SM_SYSTEM_MESSAGE.STR_GUILD_EVENT_LEVELUP(newLevel));
 		if (save)
