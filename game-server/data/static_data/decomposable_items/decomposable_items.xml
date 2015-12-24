@@ -25643,41 +25643,212 @@
     </decomposable>
     <decomposable item_id="188052721" decomposable_name="[Event] Manastones of Grace">
  		<items>
-			<item id="167000734" name="Manastone: Magic Boost +27 / Resist Magic +8" count="3"/>
-		</items>
-		<items>
-			<item id="167000735" name="Manastone: Magic Boost +27 / Magical Accuracy +8" count="3"/>
-		</items>
-		<items>
-			<item id="167000744" name="Manastone: Magical Accuracy +16 / Resist Magic +8" count="3"/>
-		</items>
-		<items>
-			<item id="167000743" name="Manastone: Magical Accuracy +16 / Crit Strike +9" count="3"/>
-		</items>
-		<items>
-			<item id="167000742" name="Manastone: Magical Accuracy +16 / Block +14" count="3"/>
-		</items>
-		<items>
-			<item id="167000738" name="Manastone: Magical Accuracy +16 / Magic Boost +14" count="3"/>
-		</items>
-		<items>
-			<item id="167000715" name="Manastone: Attack +5 / Crit Strike +9" count="3"/>
-		</items>
-		<items>
-			<item id="167000716" name="Manastone: Attack +5 / Resist Magic + 8" count="3"/>
-		</items>
-		<items>
-			<item id="167000725" name="Manastone: Crit Strike +19 / Resist Magic +8" count="3"/>
-		</items>
-		<items>
-			<item id="167000720" name="Manastone: Critical Hit +19 / Attack +2" count="3"/>
-		</items>
-		<items>
-			<item id="167000724" name="Manastone: Crit Strike +19 / Block +14" count="3"/>
-		</items>
-		<items>
-			<item id="167000726" name="Manastone: Crit Strike +19 / Magical Accuracy +8" count="3"/>
-		</items>
+            <item id="167000885" name="[Stamp] Manastone: Attack +5 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000886" name="[Stamp] Manastone: Attack +5 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000887" name="[Stamp] Manastone: Attack +5 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000888" name="[Stamp] Manastone: Attack +5 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000889" name="[Stamp] Manastone: Attack +5 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000890" name="[Stamp] Manastone: Attack +5 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000891" name="[Stamp] Manastone: Attack +5 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000892" name="[Stamp] Manastone: Attack +5 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000893" name="[Stamp] Manastone: Attack +5 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000894" name="[Stamp] Manastone: Crit Strike +17 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000895" name="[Stamp] Manastone: Crit Strike +17 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000896" name="[Stamp] Manastone: Crit Strike +17 / Attack +2"/>
+        </items>
+        <items>
+            <item id="167000897" name="[Stamp] Manastone: Crit Strike +17 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000898" name="[Stamp] Manastone: Crit Strike +17 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000899" name="[Stamp] Manastone: Crit Strike +17 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000900" name="[Stamp] Manastone: Crit Strike +17 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000901" name="[Stamp] Manastone: Crit Strike +17 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000902" name="[Stamp] Manastone: Crit Strike +17 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000903" name="[Stamp] Manastone: Magic Boost +27 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000904" name="[Stamp] Manastone: Magic Boost +27 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000905" name="[Stamp] Manastone: Magic Boost +27 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000906" name="[Stamp] Manastone: Magic Boost +27 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000907" name="[Stamp] Manastone: Magic Boost +27 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000908" name="[Stamp] Manastone: Magic Boost +27 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000909" name="[Stamp] Manastone: Magic Boost +27 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000910" name="[Stamp] Manastone: Magic Boost +27 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000911" name="[Stamp] Manastone: Magic Boost +27 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000912" name="[Stamp] Manastone: Magical Accuracy +14 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000913" name="[Stamp] Manastone: Magical Accuracy +14 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000914" name="[Stamp] Manastone: Magical Accuracy +14 / Magic Boost +13"/>
+        </items>
+        <items>
+            <item id="167000915" name="[Stamp] Manastone: Magical Accuracy +14 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000916" name="[Stamp] Manastone: Magical Accuracy +14 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000917" name="[Stamp] Manastone: Magical Accuracy +14 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000918" name="[Stamp] Manastone: Magical Accuracy +14 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000919" name="[Stamp] Manastone: Magical Accuracy +14 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000920" name="[Stamp] Manastone: Magical Accuracy +14 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000921" name="[Stamp] Manastone: HP +95 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000922" name="[Stamp] Manastone: HP +95 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000923" name="[Stamp] Manastone: HP +95 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000924" name="[Stamp] Manastone: HP +95 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000925" name="[Stamp] Manastone: HP +95 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000926" name="[Stamp] Manastone: HP +95 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000927" name="[Stamp] Manastone: HP +95 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000928" name="[Stamp] Manastone: HP +95 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000929" name="[Stamp] Manastone: MP +95 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000930" name="[Stamp] Manastone: MP +95 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000931" name="[Stamp] Manastone: MP +95 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000932" name="[Stamp] Manastone: MP +95 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000933" name="[Stamp] Manastone: MP +95 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000934" name="[Stamp] Manastone: MP +95 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000935" name="[Stamp] Manastone: MP +95 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000936" name="[Stamp] Manastone: MP +95 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000937" name="[Stamp] Manastone: Evasion +17 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000938" name="[Stamp] Manastone: Evasion +17 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000939" name="[Stamp] Manastone: Evasion +17 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000940" name="[Stamp] Manastone: Evasion +17 / Parry +13"/>
+        </items>
+        <items>
+            <item id="167000941" name="[Stamp] Manastone: Evasion +17 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000942" name="[Stamp] Manastone: Evasion +17 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000943" name="[Stamp] Manastone: Evasion +17 / Resist Magic +7"/>
+        </items>
+        <items>
+            <item id="167000944" name="[Stamp] Manastone: Evasion +17 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000945" name="[Stamp] Manastone: Parry +27 / HP +47"/>
+        </items>
+        <items>
+            <item id="167000946" name="[Stamp] Manastone: Parry +27 / MP +47"/>
+        </items>
+        <items>
+            <item id="167000947" name="[Stamp] Manastone: Parry +27 / Accuracy +13"/>
+        </items>
+        <items>
+            <item id="167000948" name="[Stamp] Manastone: Parry +27 / Evasion +13"/>
+        </items>
+        <items>
+            <item id="167000949" name="[Stamp] Manastone: Parry +27 / Block +13"/>
+        </items>
+        <items>
+            <item id="167000950" name="[Stamp] Manastone: Parry +27 / Crit Strike +8"/>
+        </items>
+        <items>
+            <item id="167000951" name="[Stamp] Manastone: Parry +27 / Resist Magic+7"/>
+        </items>
+        <items>
+            <item id="167000952" name="[Stamp] Manastone: Parry +27 / Magical Accuracy +7"/>
+        </items>
+        <items>
+            <item id="167000953" name="[Stamp] Manastone: Magical Accuracy +14 / Attack +2"/>
+        </items>
 	</decomposable>
     <decomposable item_id="188052722" decomposable_name="[Event] Daeva's Day Kisk Present">
         <items>
@@ -30656,212 +30827,11 @@
         </items>
     </decomposable>
     <decomposable item_id="188053419" decomposable_name="[Stamp] Noble Composite Manastone Box">
-        <items>
-            <item id="167000885" name="[Stamp] Manastone: Attack +5 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000886" name="[Stamp] Manastone: Attack +5 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000887" name="[Stamp] Manastone: Attack +5 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000888" name="[Stamp] Manastone: Attack +5 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000889" name="[Stamp] Manastone: Attack +5 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000890" name="[Stamp] Manastone: Attack +5 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000891" name="[Stamp] Manastone: Attack +5 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000892" name="[Stamp] Manastone: Attack +5 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000893" name="[Stamp] Manastone: Attack +5 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000894" name="[Stamp] Manastone: Crit Strike +17 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000895" name="[Stamp] Manastone: Crit Strike +17 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000896" name="[Stamp] Manastone: Crit Strike +17 / Attack +2"/>
-        </items>
-        <items>
-            <item id="167000897" name="[Stamp] Manastone: Crit Strike +17 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000898" name="[Stamp] Manastone: Crit Strike +17 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000899" name="[Stamp] Manastone: Crit Strike +17 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000900" name="[Stamp] Manastone: Crit Strike +17 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000901" name="[Stamp] Manastone: Crit Strike +17 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000902" name="[Stamp] Manastone: Crit Strike +17 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000903" name="[Stamp] Manastone: Magic Boost +27 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000904" name="[Stamp] Manastone: Magic Boost +27 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000905" name="[Stamp] Manastone: Magic Boost +27 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000906" name="[Stamp] Manastone: Magic Boost +27 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000907" name="[Stamp] Manastone: Magic Boost +27 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000908" name="[Stamp] Manastone: Magic Boost +27 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000909" name="[Stamp] Manastone: Magic Boost +27 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000910" name="[Stamp] Manastone: Magic Boost +27 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000911" name="[Stamp] Manastone: Magic Boost +27 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000912" name="[Stamp] Manastone: Magical Accuracy +14 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000913" name="[Stamp] Manastone: Magical Accuracy +14 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000914" name="[Stamp] Manastone: Magical Accuracy +14 / Magic Boost +13"/>
-        </items>
-        <items>
-            <item id="167000915" name="[Stamp] Manastone: Magical Accuracy +14 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000916" name="[Stamp] Manastone: Magical Accuracy +14 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000917" name="[Stamp] Manastone: Magical Accuracy +14 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000918" name="[Stamp] Manastone: Magical Accuracy +14 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000919" name="[Stamp] Manastone: Magical Accuracy +14 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000920" name="[Stamp] Manastone: Magical Accuracy +14 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000921" name="[Stamp] Manastone: HP +95 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000922" name="[Stamp] Manastone: HP +95 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000923" name="[Stamp] Manastone: HP +95 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000924" name="[Stamp] Manastone: HP +95 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000925" name="[Stamp] Manastone: HP +95 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000926" name="[Stamp] Manastone: HP +95 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000927" name="[Stamp] Manastone: HP +95 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000928" name="[Stamp] Manastone: HP +95 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000929" name="[Stamp] Manastone: MP +95 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000930" name="[Stamp] Manastone: MP +95 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000931" name="[Stamp] Manastone: MP +95 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000932" name="[Stamp] Manastone: MP +95 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000933" name="[Stamp] Manastone: MP +95 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000934" name="[Stamp] Manastone: MP +95 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000935" name="[Stamp] Manastone: MP +95 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000936" name="[Stamp] Manastone: MP +95 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000937" name="[Stamp] Manastone: Evasion +17 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000938" name="[Stamp] Manastone: Evasion +17 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000939" name="[Stamp] Manastone: Evasion +17 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000940" name="[Stamp] Manastone: Evasion +17 / Parry +13"/>
-        </items>
-        <items>
-            <item id="167000941" name="[Stamp] Manastone: Evasion +17 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000942" name="[Stamp] Manastone: Evasion +17 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000943" name="[Stamp] Manastone: Evasion +17 / Resist Magic +7"/>
-        </items>
-        <items>
-            <item id="167000944" name="[Stamp] Manastone: Evasion +17 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000945" name="[Stamp] Manastone: Parry +27 / HP +47"/>
-        </items>
-        <items>
-            <item id="167000946" name="[Stamp] Manastone: Parry +27 / MP +47"/>
-        </items>
-        <items>
-            <item id="167000947" name="[Stamp] Manastone: Parry +27 / Accuracy +13"/>
-        </items>
-        <items>
-            <item id="167000948" name="[Stamp] Manastone: Parry +27 / Evasion +13"/>
-        </items>
-        <items>
-            <item id="167000949" name="[Stamp] Manastone: Parry +27 / Block +13"/>
-        </items>
-        <items>
-            <item id="167000950" name="[Stamp] Manastone: Parry +27 / Crit Strike +8"/>
-        </items>
-        <items>
-            <item id="167000951" name="[Stamp] Manastone: Parry +27 / Resist Magic+7"/>
-        </items>
-        <items>
-            <item id="167000952" name="[Stamp] Manastone: Parry +27 / Magical Accuracy +7"/>
-        </items>
-        <items>
-            <item id="167000953" name="[Stamp] Manastone: Magical Accuracy +14 / Attack +2"/>
+       <items chance="34.0">
+           <item id="188052721" name="[Event] Manastones of Grace"></item>
+        </items>
+       <items chance="66.0">
+           <item id="186000273" name="Ruined Hazy Crystal"></item>
         </items>
     </decomposable>
     <decomposable item_id="188053420" decomposable_name="[Stamp] Noble Manastone Pouch">
