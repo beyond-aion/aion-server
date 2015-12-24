@@ -3,6 +3,7 @@ package com.aionemu.gameserver.ai2.manager;
 import java.util.Collections;
 import java.util.List;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -10,8 +11,10 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -21,6 +24,9 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.geo.GeoService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -54,12 +60,13 @@ public class SkillAttackManager {
 	 * @param npcAI
 	 */
 	protected static void skillAction(NpcAI2 npcAI) {
-		Creature target = (Creature) npcAI.getOwner().getTarget();
-		if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
-			if (npcAI.getOwner().getTarget() != null
-				&& !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
+		Npc owner = npcAI.getOwner();
+		Creature target = (Creature) owner.getTarget();
+		if (owner.getObjectTemplate().getAttackRange() == 0) {
+			if (owner.getTarget() != null
+				&& !MathUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
-				npcAI.getOwner().getController().abortCast();
+				owner.getController().abortCast();
 				return;
 			}
 		}
@@ -75,7 +82,7 @@ public class SkillAttackManager {
 				case BUFF:
 					switch (template.getProperties().getFirstTarget()) {
 						case ME:
-							if (npcAI.getOwner().getEffectController().isAbnormalPresentBySkillId(skillId)) {
+							if (owner.getEffectController().isAbnormalPresentBySkillId(skillId)) {
 								afterUseSkill(npcAI);
 								return;
 							}
@@ -88,30 +95,55 @@ public class SkillAttackManager {
 					}
 					break;
 			}
-			if ((template.getType() == SkillType.MAGICAL && npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-				|| (template.getType() == SkillType.PHYSICAL && npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
-				|| (npcAI.getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-				|| (npcAI.getOwner().getTransformModel().isActive() && npcAI.getOwner().getTransformModel().getBanUseSkills() == 1)) {
+			if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+				|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
+				|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+				|| (owner.getTransformModel().isActive() && owner.getTransformModel().getBanUseSkills() == 1)) {
 				afterUseSkill(npcAI);
 			} else {
 				if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME) {
-					npcAI.getOwner().setTarget(npcAI.getOwner());
+					owner.setTarget(owner);
 				} else {
-					NpcSkillEntry lastSkill = npcAI.getOwner().getGameStats().getLastSkill();
+					NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
 					if (lastSkill != null) {
 						NpcSkillTemplate temp = lastSkill.getTemplate();
 						if (temp != null) {
 							switch (temp.getTarget()) {
 								case ME:
-									if(!npcAI.getOwner().getTarget().equals(npcAI.getOwner())) {
-										npcAI.getOwner().setTarget(npcAI.getOwner());
+									if(!owner.getTarget().equals(owner)) {
+										owner.setTarget(owner);
 									}
 									break;
 								case MOST_HATED:
-									Creature target2 = npcAI.getOwner().getAggroList().getMostHated();
-									if (target2 != null) {
-										if (!npcAI.getOwner().getTarget().equals(target2)) {
-											npcAI.getOwner().setTarget(target2);
+									Creature target2 = owner.getAggroList().getMostHated();
+									if (target2 != null && !target2.getLifeStats().isAlreadyDead()) {
+										if (!owner.getTarget().equals(target2)) {
+											owner.setTarget(target2);
+										}
+									}
+									break;
+								case RANDOM:
+								case RANDOM_EXCEPT_MOST_HATED:
+									List<Creature> knownCreatures = new FastTable<>();
+									for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
+										if (obj != null && obj instanceof Creature) {
+											Creature target3 = (Creature) obj;
+											if (target3.getLifeStats().isAlreadyDead()  || target3.getLifeStats().isAboutToDie()) 
+												continue;
+											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED
+													&& owner.getAggroList().getMostHated().equals(target3))
+													continue;
+											if (owner.isEnemy(target3) && owner.canSee(target3)
+													&& MathUtil.isIn3dRange(owner, target3, template.getProperties().getFirstTargetRange())
+													&& GeoService.getInstance().canSee(owner, target3)) {
+													knownCreatures.add(target3);
+											}
+										}
+									}
+									if (!knownCreatures.isEmpty()) {
+										Creature target3 = knownCreatures.get(Rnd.get(0, knownCreatures.size() - 1));
+										if (target3 != null) {
+											owner.setTarget(target3);
 										}
 									}
 									break;
@@ -121,7 +153,7 @@ public class SkillAttackManager {
 						}
 					}
 				}
-				boolean success = npcAI.getOwner().getController().useSkill(skillId, skillLevel);
+				boolean success = owner.getController().useSkill(skillId, skillLevel);
 				if (!success) {
 					afterUseSkill(npcAI);
 				}

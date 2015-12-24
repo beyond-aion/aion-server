@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.List;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -26,8 +24,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import javolution.util.FastTable;
 
 /**
  * Skill entry which inherits properties from template (regular npc skills)
@@ -114,32 +110,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		switch (condType) {
 			case NONE:
 				return true;
-			case SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED:
-			case SELECT_RANDOM_ENEMY:
-				List<Creature> knownCreatures = new FastTable<>();
-				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj != null && obj instanceof Creature) {
-						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead()  || target.getLifeStats().isAboutToDie()) 
-							continue;
-						if (condType == NpcSkillCondition.SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED 
-								&& creature.getAggroList().getMostHated().equals(target))
-								continue;
-						if (creature.isEnemy(target) && creature.canSee(target)
-								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
-								&& GeoService.getInstance().canSee(creature, target)) {
-								knownCreatures.add(target);
-						}
-					}
-				}
-				if (!knownCreatures.isEmpty()) {
-					Creature target = knownCreatures.get(Rnd.get(0, knownCreatures.size() - 1));
-					if (target != null) {
-						creature.setTarget(target);
-						return true;
-					}
-				}
-				return false;
 			case SELECT_TARGET_AFFECTED_BY_SKILL:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj != null && obj instanceof Creature) {
@@ -267,9 +237,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	
 	@Override
 	public void fireAfterUseSkillEvents(Npc npc) {
-		if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
-			return;
-		}
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
 			return;
@@ -284,36 +251,51 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
 								return;
 							}
-							float x1 = 0;
-							float y1 = 0;
-							if (condTemp.getDistance() > 0) {
-								float direction = condTemp.getDirection() / 100f;
-								double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
-								x1 = (float) (Math.cos(Math.PI * direction + radian) * condTemp.getDistance());
-								y1 = (float) (Math.sin(Math.PI * direction + radian) * condTemp.getDistance());
-							}
-							SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
-								npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
-							if (template != null) {
-								template.setCreatorId(npc.getObjectTemplate().getTemplateId());
-								SpawnEngine.spawnObject(template, npc.getInstanceId());
+							int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount(); 
+							for (int i = 0; i < amount; i++) {
+								float x1 = 0;
+								float y1 = 0;
+								if (condTemp.getMinDistance() > 0) {
+									float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
+									double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+									float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
+									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
+									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
+								}
+								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+									npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+								if (template != null) {
+									template.setCreatorId(npc.getObjectId());
+									SpawnEngine.spawnObject(template, npc.getInstanceId());
+								} else {
+									break;
+								}
 							}
 						}
 					}, condTemp.getDelay());
 				} else {
-					float x1 = 0;
-					float y1 = 0;
-					if (condTemp.getDistance() > 0) {
-						float direction = condTemp.getDirection() / 100f;
-						double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
-						x1 = (float) ((Math.cos(Math.PI * direction + radian) * condTemp.getDistance()));
-						y1 = (float) ((Math.sin(Math.PI * direction + radian) * condTemp.getDistance()));
+					if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+						return;
 					}
-					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), 297195, 
-						npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
-					if (template != null) {
-						template.setCreatorId(npc.getObjectTemplate().getTemplateId());
-						SpawnEngine.spawnObject(template, npc.getInstanceId());
+					int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount(); 
+					for (int i = 0; i < amount; i++) {
+						float x1 = 0;
+						float y1 = 0;
+						if (condTemp.getMinDistance() > 0) {
+							float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
+							double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+							float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
+							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
+							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
+						}
+						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+							npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+						if (template != null) {
+							template.setCreatorId(npc.getObjectId());
+							SpawnEngine.spawnObject(template, npc.getInstanceId());
+						} else {
+							break;
+						}
 					}
 				}
 				break;

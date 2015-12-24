@@ -3,8 +3,6 @@ package com.aionemu.gameserver.skillengine.model;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +54,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer Modified by Wakzashi
@@ -262,7 +262,7 @@ public class Skill {
 				return false;
 			}
 		}
-
+		
 		// notify skill use observers
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			effector.getObserveController().notifyStartSkillCastObservers(this);
@@ -748,8 +748,13 @@ public class Skill {
 			AbyssService.rankerSkillAnnounce((Player) effector, this.getSkillTemplate().getNameId());
 		}
 
-		if (effector instanceof Npc)
+		if (effector instanceof Npc) {
+			Npc npc = (Npc) effector;
+			if (npc.getGameStats().getLastSkill() != null) {
+				npc.getGameStats().getLastSkill().fireAfterUseSkillEvents(npc);
+			}
 			SkillAttackManager.afterUseSkill((NpcAI2) ((Npc) effector).getAi2());
+		}
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
 			if (effector instanceof Player)

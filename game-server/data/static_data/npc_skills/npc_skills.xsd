@@ -44,8 +44,14 @@
 		<xs:attribute name="skill_id" type="xs:int"/>
 		<xs:attribute name="npc_id" type="xs:int"/>
 		<xs:attribute name="delay" type="xs:int"/>
-		<xs:attribute name="distance" type="xs:int"/>
-		<xs:attribute name="direction" type="xs:float"/>
+		<xs:attribute name="min_distance" type="xs:int"/>
+		<xs:attribute name="max_distance" type="xs:int"/>
+		<xs:attribute name="direction" type="xs:int"/>
+		<xs:attribute name="min_amount" type="xs:int"/>
+		<xs:attribute name="max_amount" type="xs:int"/>
+		<xs:attribute name="despawn_time" type="xs:int"/>
+		<xs:attribute name="random_direction" type="xs:boolean"/>
+		<xs:attribute name="canDie" type="xs:boolean"/>
 	</xs:complexType>
         <xs:simpleType name="ConjunctionType">
             <xs:restriction base="xs:string">
@@ -57,8 +63,6 @@
         <xs:simpleType name="ConditionType">
         	<xs:restriction base="xs:string">
         		<xs:enumeration value="NONE"/>
-        		<xs:enumeration value="SELECT_RANDOM_ENEMY"/>
-        		<xs:enumeration value="SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED"/>
         		<xs:enumeration value="HELP_FRIEND"/>
         		<xs:enumeration value="HELP_SELF"/>
         		<xs:enumeration value="TARGET_IS_IN_ANY_STUN"/>
@@ -85,6 +89,8 @@
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="ME"/>
         		<xs:enumeration value="MOST_HATED"/>
+        		<xs:enumeration value="RANDOM"/>
+        		<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED"/>
 				<xs:enumeration value="NONE"/>
 			</xs:restriction>
 		</xs:simpleType>
