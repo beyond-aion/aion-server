@@ -3,15 +3,16 @@ package com.aionemu.gameserver.model.team.legion;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 
 /**
- * @author Simple modified cura
+ * @author Simple
+ ' @modified cura, Neon
  */
 public class LegionEmblem {
 
-	private int emblemId = 0x00;
-	private int color_r = 0x00;
-	private int color_g = 0x00;
-	private int color_b = 0x00;
-	private boolean defaultEmblem = true;
+	private byte emblemId = 0;
+	private byte color_a = 0;
+	private byte color_r = 0;
+	private byte color_g = 0;
+	private byte color_b = 0;
 	private LegionEmblemType emblemType = LegionEmblemType.DEFAULT;
 	private PersistentState persistentState;
 
@@ -43,68 +44,53 @@ public class LegionEmblem {
 		setPersistentState(PersistentState.NEW);
 	}
 
-	/**
-	 * @param emblemId
-	 *          the emblemId to set
-	 * @param color_r
-	 *          the color_r to set
-	 * @param color_g
-	 *          the color_g to set
-	 * @param color_b
-	 *          the color_b to set
-	 * @param emblemType
-	 *          the emblemType to set
-	 * @param emblem_data
-	 */
-	public void setEmblem(int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType, byte[] emblem_data) {
-		this.emblemId = emblemId;
-		this.color_r = color_r;
-		this.color_g = color_g;
-		this.color_b = color_b;
+	public void setEmblem(int emblemId, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType, byte[] emblem_data) {
+		this.emblemId = (byte) emblemId;
+		this.color_a = (byte) color_a;
+		this.color_r = (byte) color_r;
+		this.color_g = (byte) color_g;
+		this.color_b = (byte) color_b;
 		this.emblemType = emblemType;
 		this.customEmblemData = emblem_data;
-		if (this.emblemType.equals(LegionEmblemType.CUSTOM) && customEmblemData == null) {
-			this.emblemId = 0;
+		if (this.emblemType.equals(LegionEmblemType.CUSTOM) && customEmblemData == null)
 			this.emblemType = LegionEmblemType.DEFAULT;
-		}
 
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		this.defaultEmblem = false;
 	}
 
 	/**
 	 * @return the emblemId
 	 */
-	public int getEmblemId() {
+	public byte getEmblemId() {
 		return emblemId;
+	}
+
+	/**
+	 * @return The alpha value.
+	 */
+	public byte getColor_a() {
+		return color_a;
 	}
 
 	/**
 	 * @return the color_r
 	 */
-	public int getColor_r() {
+	public byte getColor_r() {
 		return color_r;
 	}
 
 	/**
 	 * @return the color_g
 	 */
-	public int getColor_g() {
+	public byte getColor_g() {
 		return color_g;
 	}
 
 	/**
 	 * @return the color_b
 	 */
-	public int getColor_b() {
+	public byte getColor_b() {
 		return color_b;
-	}
-
-	/**
-	 * @return the defaultEmblem
-	 */
-	public boolean isDefaultEmblem() {
-		return defaultEmblem;
 	}
 
 	/**

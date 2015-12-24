@@ -45,6 +45,9 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	public void addDamage(Creature attacker, int damage) {
 		if (!isAware(attacker))
 			return;
+		// If the incoming damage is higher than the rest life it will decreased to the rest life
+		if (damage > owner.getLifeStats().getCurrentHp())
+			damage = owner.getLifeStats().getCurrentHp();
 
 		AddDamageEvent evObj = null;
 		if (hasSubscribers()) {

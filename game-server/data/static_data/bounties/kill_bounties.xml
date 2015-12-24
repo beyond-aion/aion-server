@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kill_bounties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="kill_bounties.xsd">
+	<kill_bounty type="PER_X_KILLS" kill_count="20">
+		<bounty item_id="186000147" count="1"/>
+		<bounty item_id="168310018" count="1"/>
+		<bounty item_id="188053609" count="1"/>
+	</kill_bounty>
+	<kill_bounty type="PER_X_KILLS" kill_count="10">
+		<bounty item_id="168310018" count="1"/>
+		<bounty item_id="188053609" count="1"/>
+	</kill_bounty>
+	<kill_bounty type="DAILY_KILLS" kill_count="10">
+		<bounty item_id="166030005" count="3"/>
+		<bounty item_id="166500002" count="3"/>
+	</kill_bounty>
+</kill_bounties>

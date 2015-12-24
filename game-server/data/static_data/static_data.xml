@@ -171,4 +171,5 @@
 	<import file="events_config/arcadelist.xml"/>
 	<import file="events_config/login_events.xml"/>
 	<import file="monster_raid/raid_locations.xml"/>
+	<import file="bounties/kill_bounties.xml"/>
 </ae_static_data>

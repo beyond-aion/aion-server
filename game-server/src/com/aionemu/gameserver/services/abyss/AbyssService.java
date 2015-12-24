@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class AbyssService {
 
 	private static final int[] abyssMapList = { 210050000, 220070000, 400010000, 600010000, 600020000, 600030000, 600040000, 600050000, 600060000,
-		600070000 };
+		600070000, 600090000, 600100000 };
 
 	/**
 	 * @param player

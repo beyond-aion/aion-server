@@ -16,6 +16,7 @@ import com.mysql.jdbc.StringUtils;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class SM_HOUSE_RENDER extends AionServerPacket {
 
@@ -97,12 +98,11 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
 			writeC(emblem.getEmblemType().getValue());
-			writeC(emblem.isDefaultEmblem() ? 0x0 : 0xFF); // Alpha Channel
+			writeC(emblem.getColor_a());
 			writeC(emblem.getColor_r());
 			writeC(emblem.getColor_g());
 			writeC(emblem.getColor_b());
 		}
-
 	}
 
 	private void writePartData(House house, PartType partType, int room, boolean skipPersonal) {

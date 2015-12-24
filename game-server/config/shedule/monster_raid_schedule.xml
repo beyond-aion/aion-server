@@ -167,19 +167,19 @@
 	</raid>
 	<!-- Levinshor -->
 	<raid id="45">
-		<raidTime>0 0 18 7.22 * ?</raidTime>
+		<raidTime>0 0 18 7,22 * ?</raidTime>
 		<raidTime>0 0 21 14,28 * ?</raidTime>
 	</raid>
 	<raid id="46">
-		<raidTime>0 0 18 7.22 * ?</raidTime>
+		<raidTime>0 0 18 7,22 * ?</raidTime>
 		<raidTime>0 0 21 14,28 * ?</raidTime>
 	</raid>
 	<raid id="47">
-		<raidTime>0 0 18 7.22 * ?</raidTime>
+		<raidTime>0 0 18 7,22 * ?</raidTime>
 		<raidTime>0 0 21 14,28 * ?</raidTime>
 	</raid>
 	<raid id="48">
-		<raidTime>0 0 18 7.22 * ?</raidTime>
+		<raidTime>0 0 18 7,22 * ?</raidTime>
 		<raidTime>0 0 21 14,28 * ?</raidTime>
 	</raid>
 	<!-- Kaldor -->

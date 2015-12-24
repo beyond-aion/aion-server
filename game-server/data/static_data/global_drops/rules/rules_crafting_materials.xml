@@ -959,4 +959,16 @@
 			<gd_item id="152012578" name="Ceramium Fragment"/>
 		</gd_items>
 	</gd_rule>
+	<!-- Calydon Meat -->
+	<gd_rule rule_name="Calydon Meat" base_chance="100" fixed_chance="true">
+		<gd_npc_groups>
+			<gd_npc_group group="CALYDON_ASSASSIN"/>
+			<gd_npc_group group="CALYDON_FIGHTER"/>
+			<gd_npc_group group="CALYDON_MAGE"/>
+			<gd_npc_group group="CALYDON_PRIEST"/>
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="152015012" name="Calydon Meat"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

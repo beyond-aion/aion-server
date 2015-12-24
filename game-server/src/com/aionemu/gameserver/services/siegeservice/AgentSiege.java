@@ -106,10 +106,10 @@ public class AgentSiege extends Siege<AgentLocation> {
 		GlobalCallbackHelper.removeCallback(apListener);
 		removeListeners();
 		onDespawn();
-		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
-		BaseService.getInstance().capture(6113, winnerRace);
 		if (winner == null)
 			return;
+		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
+		BaseService.getInstance().capture(6113, winnerRace);
 		if (!getSiegeLocation().hasValidGpRewards())
 			return;
 		SiegeRace looser = winner == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;

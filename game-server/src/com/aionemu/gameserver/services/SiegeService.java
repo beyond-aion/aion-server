@@ -78,6 +78,7 @@ import com.google.common.collect.Maps;
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
  * 
  * @author SoulKeeper, Source
+ * @modified Neon
  */
 public class SiegeService {
 
@@ -227,7 +228,7 @@ public class SiegeService {
 				}
 			}
 		}
-		
+
 		// Schedule agent fights
 		for (final SiegeSchedule.AgentFight a : siegeSchedule.getAgentFights()) {
 			for (String siegeTime : a.getSiegeTimes()) {
@@ -478,6 +479,15 @@ public class SiegeService {
 
 			@Override
 			public void run() {
+				// Special case for Anoha Fortress artifacts
+				if (locationId == 7011) {
+					List<ArtifactLocation> artis = FastTable.of(getArtifact(7012), getArtifact(7013), getArtifact(7014));
+					for (ArtifactLocation arti : artis) {
+						if (!arti.getRace().equals(SiegeRace.BALAUR))
+							resetSiegeLocation(arti);
+					}
+					artis.clear();
+				}
 				// Start siege warfare
 				startSiege(locationId);
 			}
@@ -487,18 +497,6 @@ public class SiegeService {
 			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
 			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
 			this.resetSiegeLocation(loc);
-		}
-		//Special case for Anoha Fortress artifacts
-		if (locationId == 7011) {
-			List<ArtifactLocation> artis = new FastTable<>();
-			artis.add(getArtifact(7012));
-			artis.add(getArtifact(7013));
-			artis.add(getArtifact(7014));
-			for (ArtifactLocation arti : artis) {
-				if (!arti.getRace().equals(SiegeRace.BALAUR))
-					resetSiegeLocation(arti);
-			}
-			artis.clear();
 		}
 	}
 
@@ -699,39 +697,22 @@ public class SiegeService {
 		return 3600 - (minutesAsSeconds + seconds);
 	}
 
-	/**
-	 * TODO: Check if it's valid
-	 * <p/>
-	 * If siege duration is endless - will return -1
-	 * 
-	 * @param siegeLocationId
-	 *          Scheduled siege end time
-	 * @return remaining seconds in current hour
-	 */
 	public int getRemainingSiegeTimeInSeconds(int siegeLocationId) {
-		Siege<?> siege = getSiege(siegeLocationId);
-		if (siege == null || siege.isFinished())
+		Siege<? extends SiegeLocation> siege = getSiege(siegeLocationId);
+		if (siege == null || siege.isFinished() || !siege.isStarted())
 			return 0;
 
-		if (!siege.isStarted())
-			return siege.getSiegeLocation().getSiegeDuration();
+		long endTime = siege.getStartTime().toInstant().plusSeconds(siege.getSiegeLocation().getSiegeDuration()).getEpochSecond();
+		int secondsLeft =  (int) (endTime - System.currentTimeMillis() / 1000);
 
-		// endless siege
-		if (siege.getSiegeLocation().getSiegeDuration() == -1)
-			return -1;
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.SECOND, siege.getSiegeLocation().getSiegeDuration());
-
-		int result = (int) ((calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000);
-		return result > 0 ? result : 0;
+		return secondsLeft > 0 ? secondsLeft : 0;
 	}
 
-	public Siege<?> getSiege(SiegeLocation loc) {
-		return activeSieges.get(loc.getLocationId());
+	public Siege<? extends SiegeLocation> getSiege(SiegeLocation loc) {
+		return getSiege(loc.getLocationId());
 	}
 
-	public Siege<?> getSiege(Integer siegeLocationId) {
+	public Siege<? extends SiegeLocation> getSiege(int siegeLocationId) {
 		return activeSieges.get(siegeLocationId);
 	}
 
@@ -809,7 +790,7 @@ public class SiegeService {
 
 		return mapLocations;
 	}
-	
+
 	public AgentLocation getAgentLocation() {
 		return agent;
 	}

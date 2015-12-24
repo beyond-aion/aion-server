@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.util.List;
+import java.util.Map;
 
 import javolution.util.FastMap;
 import javolution.util.FastTable;
@@ -8,15 +9,20 @@ import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.KillList;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
+import com.aionemu.gameserver.model.templates.bounty.BountyType;
+import com.aionemu.gameserver.model.templates.bounty.KillBountyTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -40,10 +46,12 @@ public class PvpService {
 		return SingletonHolder.instance;
 	}
 
-	private FastMap<Integer, KillList> pvpKillLists;
+	private final List<KillBountyTemplate> killBounties;
+	private Map<Integer, KillList> pvpKillLists;
 
 	private PvpService() {
-		pvpKillLists = new FastMap<Integer, KillList>();
+		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
+		pvpKillLists = new FastMap<>();
 	}
 
 	/**
@@ -72,6 +80,22 @@ public class PvpService {
 		winnerKillList.addKillFor(victimId);
 	}
 
+	public void sendBountyReward(Player player, BountyType type, int neededKills) {
+		for (KillBountyTemplate template : killBounties) {
+			if (template.getBountyType() != type || template.getKillCount() != neededKills)
+				continue;
+			List<BountyTemplate> bounties = new FastTable<>();
+			if (type == BountyType.PER_X_KILLS) {
+				bounties.add(template.getBounties().get(Rnd.get(0, template.getBounties().size() - 1)));
+			} else {
+				for (BountyTemplate bounty : template.getBounties())
+					bounties.add(bounty);
+			}
+			for (BountyTemplate bounty : bounties)
+				ItemService.addItem(player, bounty.getItemId(), bounty.getCount()); // FIXME: Overflow inventory!
+		}
+	}
+
 	/**
 	 * @param victim
 	 */
@@ -81,35 +105,34 @@ public class PvpService {
 
 		int totalDamage = victim.getAggroList().getTotalDamage();
 
-		if (totalDamage == 0 || winner == null) {
+		if (totalDamage == 0 || winner == null)
 			return;
-		}
 
 		// Add Player Kill to record.
-		if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-			winner.getAbyssRank().setAllKill();
+		winner.getAbyssRank().setAllKill();
+		// Pvp Kill Reward.
+		if (CustomConfig.ENABLE_KILL_REWARD) {
 			int kills = winner.getAbyssRank().getAllKill();
-			// Pvp Kill Reward.
-			if (CustomConfig.ENABLE_KILL_REWARD) {
-				if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
-					ItemService.addItem(winner, CustomConfig.REWARD1, 1);
-					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1 + "] for having killed "
-						+ CustomConfig.KILLS_NEEDED1 + " players !");
-					log.info("[REWARD] Player [" + winner.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
-				}
-				if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
-					ItemService.addItem(winner, CustomConfig.REWARD2, 1);
-					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2 + "] for having killed "
-						+ CustomConfig.KILLS_NEEDED2 + " players !");
-					log.info("[REWARD] Player [" + winner.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
-				}
-				if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
-					ItemService.addItem(winner, CustomConfig.REWARD3, 1);
-					PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3 + "] for having killed "
-						+ CustomConfig.KILLS_NEEDED3 + " players !");
-					log.info("[REWARD] Player [" + winner.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
-				}
-			}
+			if (kills % 1000 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 1000);
+			else if (kills % 500 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 500);
+			else if (kills % 250 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 250);
+			else if (kills % 100 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 100);
+			else if (kills % 50 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 50);
+			else if (kills % 20 == 0)
+				sendBountyReward(winner, BountyType.PER_X_KILLS, 20);
+			// Check Weekly Kills for Bounty Reward
+			kills = winner.getAbyssRank().getWeeklyKill();
+			if (kills % 100 == 0)
+				sendBountyReward(winner, BountyType.WEEKLY_KILLS, 100);
+			// Check Daily Kills for Bounty Reward
+			kills = winner.getAbyssRank().getDailyKill();
+			if (kills % 100 == 0)
+				sendBountyReward(winner, BountyType.DAILY_KILLS, 100);
 		}
 
 		// Announce that player has died.

@@ -55,6 +55,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -802,6 +803,7 @@ public class LegionService {
 	 */
 	public void changeLevel(Legion legion, int newLevel, boolean save) {
 		legion.setLegionLevel(newLevel);
+		legion.getLegionWarehouse().setLimit(legion.getWarehouseSlots());
 		PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_EDIT(0x00, legion));
 		PacketSendUtility.broadcastPacketToLegion(legion, SM_SYSTEM_MESSAGE.STR_GUILD_EVENT_LEVELUP(newLevel));
 		if (save)
@@ -856,14 +858,12 @@ public class LegionService {
 	 * @param legion
 	 * @param emblemType
 	 */
-	private void updateMembersEmblem(Legion legion, LegionEmblemType emblemType) {
+	private void updateMembersEmblem(Legion legion) {
 		LegionEmblem legionEmblem = legion.getLegionEmblem();
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
-			PacketSendUtility.broadcastPacket(onlineLegionMember, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem.getEmblemId(),
-				legionEmblem.getColor_r(), legionEmblem.getColor_g(), legionEmblem.getColor_b(), emblemType), true);
-			if (legionEmblem.getEmblemType() == LegionEmblemType.CUSTOM) {
+			PacketSendUtility.broadcastPacket(onlineLegionMember, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem), true);
+			if (legionEmblem.getEmblemType() == LegionEmblemType.CUSTOM)
 				sendEmblemData(onlineLegionMember, legionEmblem, legion.getLegionId(), legion.getLegionName());
-			}
 		}
 	}
 
@@ -894,17 +894,6 @@ public class LegionService {
 	}
 
 	/**
-	 * @param activePlayer
-	 * @param customEmblem
-	 */
-	public void storeLegionEmblem(Player activePlayer, LegionEmblem customEmblem) {
-		addHistory(activePlayer.getLegion(), "", LegionHistoryType.EMBLEM_MODIFIED);
-		activePlayer.getLegion().setLegionEmblem(customEmblem);
-		updateMembersEmblem(activePlayer.getLegion(), customEmblem.getEmblemType());
-		PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_EMBLEM);
-	}
-
-	/**
 	 * Stores the new legion emblem
 	 *
 	 * @param activePlayer
@@ -915,17 +904,13 @@ public class LegionService {
 	 * @param color_b
 	 * @param emblemType
 	 */
-	public void storeLegionEmblem(Player activePlayer, int legionId, int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
-		if (legionRestrictions.canStoreLegionEmblem(activePlayer, legionId, emblemId)) {
+	public void storeLegionEmblem(Player activePlayer, int emblemId, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
+		if (legionRestrictions.canStoreLegionEmblem(activePlayer, emblemId)) {
 			Legion legion = activePlayer.getLegion();
-			if (legion.getLegionEmblem().isDefaultEmblem())
-				addHistory(legion, "", LegionHistoryType.EMBLEM_REGISTER);
-			else
-				addHistory(legion, "", LegionHistoryType.EMBLEM_MODIFIED);
-
-			activePlayer.getInventory().decreaseKinah(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH);
-			legion.getLegionEmblem().setEmblem(emblemId, color_r, color_g, color_b, emblemType, null);
-			updateMembersEmblem(legion, emblemType);
+			addHistory(legion, "", LegionHistoryType.EMBLEM_MODIFIED);
+			activePlayer.getInventory().decreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()));
+			legion.getLegionEmblem().setEmblem(emblemId, color_a, color_r, color_g, color_b, emblemType, null);
+			updateMembersEmblem(legion);
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_EMBLEM);
 		}
 	}
@@ -1046,23 +1031,15 @@ public class LegionService {
 			storeLegion(legion);
 	}
 
-	/**
-	 * @param activePlayer
-	 * @param totalSize
-	 * @param color_r
-	 * @param color_g
-	 * @param color_b
-	 * @param emblemType
-	 */
-	public void uploadEmblemInfo(Player activePlayer, int totalSize, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
-		if (legionRestrictions.canUploadEmblemInfo(activePlayer)) {
-			LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+	public void uploadEmblemInfo(Player activePlayer, int totalSize, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
+		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		if (legionRestrictions.canUploadEmblem(activePlayer, true)) {
 			legionEmblem.resetUploadSettings();
-
-			int emblemId = legionEmblem.getEmblemId() + 1;
-			legionEmblem.setEmblem(emblemId, color_r, color_g, color_b, emblemType, null);
+			legionEmblem.setEmblem(legionEmblem.getEmblemId(), color_a, color_r, color_g, color_b, emblemType, null);
 			legionEmblem.setUploadSize(totalSize);
 			legionEmblem.setUploading(true);
+		} else {
+			legionEmblem.resetUploadSettings();
 		}
 	}
 
@@ -1072,26 +1049,28 @@ public class LegionService {
 	 * @param data
 	 */
 	public void uploadEmblemData(Player activePlayer, int size, byte[] data) {
-		if (legionRestrictions.canUploadEmblem(activePlayer)) {
-			LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		if (legionRestrictions.canUploadEmblem(activePlayer, false)) {
 			legionEmblem.addUploadedSize(size);
 			legionEmblem.addUploadData(data);
 
-			if (legionEmblem.getUploadSize() == legionEmblem.getUploadedSize()) {
-				if (legionEmblem.getUploadedSize() == 0 || legionEmblem.getUploadSize() == 0) {
+			if (legionEmblem.getUploadedSize() >= legionEmblem.getUploadSize()) {
+				if (legionEmblem.getUploadedSize() == 0 || legionEmblem.getUploadedSize() > legionEmblem.getUploadSize()) {
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE);
 					return;
 				}
-				if (!activePlayer.getInventory().tryDecreaseKinah(1130000)) {
-					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY);
-					return;
-				}
+				activePlayer.getInventory().decreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()));
 				// Finished
 				legionEmblem.setCustomEmblemData(legionEmblem.getUploadData());
 				DAOManager.getDAO(LegionDAO.class).storeLegionEmblem(activePlayer.getLegion().getLegionId(), legionEmblem);
-				LegionEmblem emblem = DAOManager.getDAO(LegionDAO.class).loadLegionEmblem(activePlayer.getLegion().getLegionId());
-				LegionService.getInstance().storeLegionEmblem(activePlayer, emblem);
+				addHistory(activePlayer.getLegion(), "", LegionHistoryType.EMBLEM_REGISTER);
+				updateMembersEmblem(activePlayer.getLegion());
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_SUCCESS_UPLOAD_EMBLEM);
+				legionEmblem.resetUploadSettings();
 			}
+		} else {
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_FAILURE_UPLOAD_EMBLEM);
+			legionEmblem.resetUploadSettings();
 		}
 	}
 
@@ -1102,36 +1081,37 @@ public class LegionService {
 	 * @param legionName
 	 */
 	public void sendEmblemData(Player player, LegionEmblem legionEmblem, int legionId, String legionName) {
-		PacketSendUtility.sendPacket(player,
-			new SM_LEGION_SEND_EMBLEM(legionId, legionEmblem.getEmblemId(), legionEmblem.getColor_r(), legionEmblem.getColor_g(),
-				legionEmblem.getColor_b(), legionName, legionEmblem.getEmblemType(), legionEmblem.getCustomEmblemData().length));
-		ByteBuffer buf = ByteBuffer.allocate(legionEmblem.getCustomEmblemData().length);
-		buf.put(legionEmblem.getCustomEmblemData()).position(0);
-		log.debug("legionEmblem size: " + buf.capacity() + " bytes");
-		int maxSize = 7993;
-		int currentSize;
-		byte[] bytes;
-		do {
-			log.debug("legionEmblem data position: " + buf.position());
-			currentSize = buf.capacity() - buf.position();
-			log.debug("legionEmblem data remaining capacity: " + currentSize + " bytes");
+		int dataLength = legionEmblem.getCustomEmblemData().length;
+		PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM(legionId, legionEmblem, dataLength, legionName));
+		if (dataLength > 0) {
+			ByteBuffer buf = ByteBuffer.allocate(dataLength);
+			buf.put(legionEmblem.getCustomEmblemData()).position(0);
+			log.debug("legionEmblem size: " + buf.capacity() + " bytes");
+			int maxSize = 7993;
+			int currentSize;
+			byte[] bytes;
+			do {
+				log.debug("legionEmblem data position: " + buf.position());
+				currentSize = buf.capacity() - buf.position();
+				log.debug("legionEmblem data remaining capacity: " + currentSize + " bytes");
 
-			if (currentSize >= maxSize) {
-				bytes = new byte[maxSize];
-				for (int i = 0; i < maxSize; i++) {
-					bytes[i] = buf.get();
+				if (currentSize >= maxSize) {
+					bytes = new byte[maxSize];
+					for (int i = 0; i < maxSize; i++) {
+						bytes[i] = buf.get();
+					}
+					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(maxSize, bytes));
+				} else {
+					bytes = new byte[currentSize];
+					for (int i = 0; i < currentSize; i++) {
+						bytes[i] = buf.get();
+					}
+					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(currentSize, bytes));
 				}
-				log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
-				PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(maxSize, bytes));
-			} else {
-				bytes = new byte[currentSize];
-				for (int i = 0; i < currentSize; i++) {
-					bytes[i] = buf.get();
-				}
-				log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
-				PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(currentSize, bytes));
-			}
-		} while (buf.capacity() != buf.position());
+			} while (buf.capacity() != buf.position());
+		}
 	}
 
 	/**
@@ -1247,8 +1227,7 @@ public class LegionService {
 		PacketSendUtility.sendPacket(player, new SM_LEGION_ADD_MEMBER(player, false, 0, ""));
 		// Send legion emblem information
 		LegionEmblem legionEmblem = legion.getLegionEmblem();
-		PacketSendUtility.broadcastPacket(player, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem.getEmblemId(),
-			legionEmblem.getColor_r(), legionEmblem.getColor_g(), legionEmblem.getColor_b(), legionEmblem.getEmblemType()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem), true);
 
 		// Send legion edit
 		PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_EDIT(0x08));
@@ -1807,42 +1786,21 @@ public class LegionService {
 		}
 
 		/**
-		 * This method checks all restrictions for upload emblem info
-		 *
-		 * @param activePlayer
-		 * @return true if allowed to upload emblem info
-		 */
-		private boolean canUploadEmblemInfo(Player activePlayer) {
-			// TODO: System Messages
-			if (!isBrigadeGeneral(activePlayer))
-				// Not legion leader
-				return false;
-			else if (activePlayer.getLegion().getLegionLevel() < 3) {
-				// Legion level isn't high enough
-				return false;
-			} else if (activePlayer.getLegion().getLegionEmblem().isUploading()) {
-				// Already uploading emblem, reset uploading
-				activePlayer.getLegion().getLegionEmblem().setUploading(false);
-				return false;
-			}
-			return true;
-		}
-
-		/**
 		 * This method checks all restrictions for uploading emblem
 		 *
-		 * @param activePlayer
 		 * @return true if allowed to upload emblem
 		 */
-		private boolean canUploadEmblem(Player activePlayer) {
-			if (!isBrigadeGeneral(activePlayer)) {
-				// Not legion leader
+		private boolean canUploadEmblem(Player activePlayer, boolean initUpload) {
+			if (!canStoreLegionEmblem(activePlayer, MIN_EMBLEM_ID)) {
 				return false;
 			} else if (activePlayer.getLegion().getLegionLevel() < 3) {
 				// Legion level isn't high enough
 				return false;
-			} else if (!activePlayer.getLegion().getLegionEmblem().isUploading()) {
-				// Not uploading emblem
+			} else if (initUpload && activePlayer.getLegion().getLegionEmblem().isUploading()) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_FAILURE_UPLOAD_EMBLEM);
+				return false;
+			} else if (!initUpload && !activePlayer.getLegion().getLegionEmblem().isUploading()) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_FAILURE_UPLOAD_EMBLEM);
 				return false;
 			}
 			return true;
@@ -1884,19 +1842,19 @@ public class LegionService {
 		 * @param emblemId
 		 * @return
 		 */
-		public boolean canStoreLegionEmblem(Player activePlayer, int legionId, int emblemId) {
-			Legion legion = activePlayer.getLegion();
+		public boolean canStoreLegionEmblem(Player activePlayer, int emblemId) {
 			if (emblemId < MIN_EMBLEM_ID || emblemId > MAX_EMBLEM_ID) {
 				// Not a valid emblemId
 				return false;
-			} else if (legionId != legion.getLegionId()) {
-				// legion id not equal
+			} else if (!isBrigadeGeneral(activePlayer)) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_EMBLEM_DONT_HAVE_RIGHT);
 				return false;
-			} else if (legion.getLegionLevel() < 2) {
+			} else if (activePlayer.getLegion().getLegionLevel() < 2) {
 				// legion level not high enough
 				return false;
-			} else if (activePlayer.getInventory().getKinah() < LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH) {
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH));
+			} else if (activePlayer.getInventory().getKinah() < PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH,
+				activePlayer.getRace())) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY);
 				return false;
 			}
 			return true;

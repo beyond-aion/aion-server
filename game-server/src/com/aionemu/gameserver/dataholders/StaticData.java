@@ -288,6 +288,9 @@ public class StaticData {
 
 	@XmlElement(name = "raid_locations")
 	public MonsterRaidData raidData;
+	
+	@XmlElement(name = "kill_bounties")
+	public KillBountyData killBountyData;
 
 	// JAXB callback
 	@SuppressWarnings("unused")

@@ -16,6 +16,7 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 
 	/** Emblem related information **/
 	private int totalSize;
+	private int alpha;
 	private int red;
 	private int green;
 	private int blue;
@@ -30,7 +31,7 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		totalSize = readD();
-		readC(); // 0xFF
+		alpha = readC();
 		red = readC();
 		green = readC();
 		blue = readC();
@@ -47,6 +48,6 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 			return;
 		}
 
-		LegionService.getInstance().uploadEmblemInfo(activePlayer, totalSize, red, green, blue, LegionEmblemType.CUSTOM);
+		LegionService.getInstance().uploadEmblemInfo(activePlayer, totalSize, alpha, red, green, blue, LegionEmblemType.CUSTOM);
 	}
 }

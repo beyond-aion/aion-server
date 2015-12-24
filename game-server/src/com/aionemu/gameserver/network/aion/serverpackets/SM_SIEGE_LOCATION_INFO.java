@@ -8,7 +8,6 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.team.legion.LegionEmblem;
-import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LegionService;
@@ -16,6 +15,7 @@ import com.aionemu.gameserver.services.SiegeService;
 
 /**
  * @author Sarynth
+ * @modified Neon
  */
 public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 
@@ -47,57 +47,31 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 
 		writeC(infoType);
 		writeH(locations.size());
-
 		for (SiegeLocation loc : locations.values()) {
 			LegionEmblem emblem = new LegionEmblem();
-			writeD(loc.getLocationId());
-
 			int legionId = loc.getLegionId();
+			int locId = loc.getLocationId();
+			writeD(locId);
 			writeD(legionId);
-
-			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null)
+			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null) // can be null if legion got deleted
 				emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
-
-			if (emblem.getEmblemType() == LegionEmblemType.DEFAULT) {
-				writeD(emblem.getEmblemId());
-				writeC(255);
-				writeC(emblem.getColor_r());
-				writeC(emblem.getColor_g());
-				writeC(emblem.getColor_b());
-			} else {
-				writeD(emblem.getCustomEmblemData().length);
-				writeC(255);
-				writeC(emblem.getColor_r());
-				writeC(emblem.getColor_g());
-				writeC(emblem.getColor_b());
-			}
-
+			writeC(emblem.getEmblemId());
+			writeC(emblem.getEmblemType().getValue());
+			writeH(0);
+			writeC(emblem.getColor_a());
+			writeC(emblem.getColor_r());
+			writeC(emblem.getColor_g());
+			writeC(emblem.getColor_b());
 			writeC(loc.getRace().getRaceId());
-
-			// is vulnerable (0 - no, 2 - yes)
-			writeC(loc.isVulnerable() ? 2 : 0);
-
-			// faction can teleport (0 - no, 1 - yes)
+			writeC(loc.isVulnerable() ? 2 : 0); // is vulnerable (0 - no, 2 - yes)
 			writeC(loc.isCanTeleport(player) ? 1 : 0);
-
-			// Next State (0 - invulnerable, 1 - vulnerable)
-			writeC(loc.getNextState());
-
+			writeC(loc.getNextState()); // Next State (0 - invulnerable, 1 - vulnerable)
 			writeH(0); // unk
-			writeH(1);
-			switch (loc.getLocationId()) {
-				case 2111: // veille timer
-				case 3111: // mastarius timer
-					writeD(SiegeService.getInstance().getRemainingSiegeTimeInSeconds(loc.getLocationId()));
-					break;
-				default:
-					writeD(10000);
-					break;
-			}
-			writeD(0); // unk 4.7
-			writeD(0); // unk 4.7 (maybe Capture Date? )
-			writeD(0); // unk 4.7
+			writeH(0);
+			writeD(locId == 2111 || locId == 3111 ? SiegeService.getInstance().getRemainingSiegeTimeInSeconds(locId) : 0); // veille/masta timer
+			writeD(36); // unk 4.7 (almost always 36, sometimes 37 to 42 o.O)
+			writeD(0); // unk 4.7 (some timestamp, maybe Capture Date?)
+			writeD(loc.getOccupiedCount());
 		}
 	}
-
 }

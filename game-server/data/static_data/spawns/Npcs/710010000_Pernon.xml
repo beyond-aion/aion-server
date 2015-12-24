@@ -1131,6 +1131,10 @@
 		<spawn npc_id="830400" respawn_time="295">
 			<spot x="1098.2953" y="213.2108" z="73.0830" h="53"/>
 		</spawn>
+		<!-- Gravir -->
+		<spawn npc_id="206344" respawn_time="295">
+			<spot x="1057.5719" y="1625.8499" z="101.48663" h="45"/>
+		</spawn>
 		<!-- Greenleaf Village Gardener -->
 		<spawn npc_id="831288" respawn_time="295">
 			<spot x="1781.1365" y="1473.7368" z="111.6250" h="13"/>
@@ -3385,7 +3389,7 @@
 		</spawn>
 		<!-- Vimaro -->
 		<spawn npc_id="830137" respawn_time="295">
-			<spot x="1058.0353" y="1626.4935" z="101.80695" h="45"/>
+			<spot x="1058.8497" y="1627.5448" z="101.48663" h="45"/>
 		</spawn>
 		<!-- Vintage Grab Box -->
 		<spawn npc_id="730525" respawn_time="295">

@@ -89,6 +89,7 @@
 	<xs:include schemaLocation="events_config/arcadelist.xsd"/>
 	<xs:include schemaLocation="events_config/login_events.xsd"/>
 	<xs:include schemaLocation="monster_raid/raid_locations.xsd"/>
+	<xs:include schemaLocation="bounties/kill_bounties.xsd"/>
 	<xs:element name="ae_static_data">
 		<xs:complexType>
 			<xs:sequence>
@@ -183,6 +184,7 @@
 					<xs:element ref="arcadelist" minOccurs="0"/>
 					<xs:element ref="login_events" minOccurs="0"/>
 					<xs:element ref="raid_locations" minOccurs="0"/>
+					<xs:element ref="kill_bounties" minOccurs="0"/>
 				</xs:choice>
 			</xs:sequence>
 		</xs:complexType>

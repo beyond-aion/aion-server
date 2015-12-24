@@ -452,7 +452,7 @@
 		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491"/>
 	</siege_location>
 	<!-- Agent Fight -->
-	<siege_location id="8011" type="AGENT_FIGHT" world="600100000" siege_duration="3720">
+	<siege_location id="8011" type="AGENT_FIGHT" world="600100000" siege_duration="4200">
 		<siege_reward top="11" itemid="186000242" m_count="4" gp_win="300" gp_defeat="100"/>
 		<siege_reward top="20" itemid="186000242" m_count="3" gp_win="200" gp_defeat="75"/>
 		<siege_reward top="30" itemid="186000242" m_count="2" gp_win="150" gp_defeat="50"/>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
+	<xs:element name="kill_bounties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kill_bounty" type="KillBounty" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="KillBounty">
+		<xs:sequence>
+			<xs:element name="bounty" type="Bounty" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="BountyType" use="required"/>
+		<xs:attribute name="kill_count" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="Bounty">
+		<xs:attribute name="item_id" type="xs:int"/>
+		<xs:attribute name="count" type="xs:int"/>
+	</xs:complexType>
+	<xs:simpleType name="BountyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PER_X_KILLS"/>
+			<xs:enumeration value="TOTAL_KILLS"/>
+			<xs:enumeration value="DAILY_KILLS"/>
+			<xs:enumeration value="WEEKLY_KILLS"/>
+			<xs:enumeration value="SEASON_KILLS"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -62,7 +62,7 @@ public class LegionConfig {
 	/**
 	 * Sets required kinah to create emblem
 	 */
-	@Property(key = "gameserver.legion.emblemrequiredkinah", defaultValue = "10000")
+	@Property(key = "gameserver.legion.emblemrequiredkinah", defaultValue = "800000")
 	public static int LEGION_EMBLEM_REQUIRED_KINAH;
 
 	/**
