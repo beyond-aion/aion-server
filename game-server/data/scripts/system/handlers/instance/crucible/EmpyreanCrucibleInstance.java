@@ -1458,27 +1458,18 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 205341: // skillbooks
 				if (Rnd.get(1, 100) < 51) {
 					Race race = instance.getRegisteredGroup().getRace();
-					switch (Rnd.get(1, 6)) {
+					switch (Rnd.get(1, 4)) {
 						case 1:
 							itemId = 169500935;
 							break;
 						case 2:
-							itemId = 169500934;
+							itemId = 169500933;
 							break;
 						case 3:
-							itemId = 169500932;
-							break;
-						case 4:
 							itemId = race.equals(Race.ELYOS) ? 169500947 : 169500951;
 							break;
-						case 5:
-							itemId = race.equals(Race.ELYOS) ? 169500939 : 169500943;
-							break;
-						case 6:
+						case 4:
 							itemId = race.equals(Race.ELYOS) ? 169500927 : 169500931;
-							break;
-						case 7:
-							itemId = race.equals(Race.ELYOS) ? 169500919 : 169500923;
 							break;
 					}
 					break;
