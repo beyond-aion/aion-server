@@ -4,8 +4,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -14,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
@@ -22,12 +21,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz, Gigi
@@ -44,8 +47,42 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		if (npc.getNpcId() == 216968)
 			isInDungeon = true;
+		
+		switch (npc.getNpcId()) {
+			case 282093: //mana relic
+				Npc kaliga = instance.getNpc(217006);
+				if (kaliga != null && !kaliga.getLifeStats().isAlreadyDead()) {
+					kaliga.getEffectController().removeEffect(19248);
+					respawn(282093, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), npc.getInstanceId(), npc.getWorldId(), npc.getSpawn().getStaticId());
+				}
+				npc.getController().onDelete();
+				break;
+			case 282095: //strength relic
+				Npc kaliga2 = instance.getNpc(217006);
+				if (kaliga2 != null && !kaliga2.getLifeStats().isAlreadyDead()) {
+					kaliga2.getEffectController().removeEffect(19247);
+					respawn(282095, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), npc.getInstanceId(), npc.getWorldId(), npc.getSpawn().getStaticId());
+				}
+				npc.getController().onDelete();
+				break;
+				default:
+					break;
+		}
 	}
 
+	private void respawn(int npcId, float x, float y, float z, byte heading, int instanceId, int worldId, int staticId) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void run() {
+				Npc kaliga = instance.getNpc(217006);
+				if (kaliga != null && !kaliga.getLifeStats().isAlreadyDead()) {
+					SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+					temp.setStaticId(staticId);
+					SpawnEngine.spawnObject(temp, instanceId);
+				}
+			}
+		}, 10000);
+	}
 	@Override
 	public void onEnterInstance(Player player) {
 		if (movies.contains(453)) {

@@ -31814,10 +31814,10 @@
         <npcskill skillid="16526" skilllevel="27" probability="25"/>
     </npcskills>
     <npcskills npcid="216968">
-        <npcskill skillid="16516" skilllevel="27" probability="25"/>
-        <npcskill skillid="16526" skilllevel="27" probability="25"/>
-        <npcskill skillid="19252" skilllevel="27" probability="100" minhp="98" maxhp="100"/>
-        <npcskill skillid="19277" skilllevel="27" probability="25" minhp="0" maxhp="50"/>
+        <npcskill skillid="16516" skilllevel="27" probability="70" cooldown="15000"/>
+        <npcskill skillid="16526" skilllevel="27" probability="70" cooldown="15000"/>
+        <npcskill skillid="19252" skilllevel="27" probability="80" cooldown="20000"/>
+        <npcskill skillid="19277" skilllevel="27" probability="25" minhp="0" maxhp="50" cooldown="20000"/>
     </npcskills>
     <npcskills npcid="216971">
         <npcskill skillid="19262" skilllevel="27" probability="25"/>
@@ -31854,14 +31854,14 @@
         <npcskill skillid="17181" skilllevel="27" probability="25"/>
     </npcskills>
     <npcskills npcid="216982">
-        <npcskill skillid="16516" skilllevel="27" probability="25"/>
-        <npcskill skillid="16542" skilllevel="27" probability="25"/>
-        <npcskill skillid="16550" skilllevel="27" probability="25"/>
-        <npcskill skillid="16554" skilllevel="27" probability="25"/>
-        <npcskill skillid="16556" skilllevel="27" probability="25"/>
-        <npcskill skillid="16623" skilllevel="27" probability="25"/>
-        <npcskill skillid="18785" skilllevel="27" probability="25"/>
-        <npcskill skillid="18746" skilllevel="5" probability="25"/>
+        <npcskill skillid="16516" skilllevel="27" probability="70" cooldown="10000"/>
+        <npcskill skillid="16542" skilllevel="27" probability="60" cooldown="20000"/>
+        <npcskill skillid="16550" skilllevel="27" probability="60" cooldown="40000"/>
+        <npcskill skillid="16554" skilllevel="27" probability="70" cooldown="15000"/>
+        <npcskill skillid="16556" skilllevel="27" probability="60" cooldown="10000"/>
+        <npcskill skillid="16623" skilllevel="27" probability="70" cooldown="40000"/>
+        <npcskill skillid="18785" skilllevel="27" probability="80" cooldown="30000"/>
+        <npcskill skillid="18746" skilllevel="5" probability="90" cooldown="25000"/>
     </npcskills>
     <npcskills npcid="216983">
         <npcskill skillid="16516" skilllevel="27" probability="25"/>
@@ -31907,25 +31907,25 @@
         <npcskill skillid="16704" skilllevel="27" probability="25"/>
     </npcskills>
     <npcskills npcid="217002">
-        <npcskill skillid="16526" skilllevel="27" probability="25"/>
-        <npcskill skillid="16542" skilllevel="27" probability="25"/>
-        <npcskill skillid="18748" skilllevel="10" probability="25"/>
-        <npcskill skillid="19286" skilllevel="20" probability="25"/>
+        <npcskill skillid="16526" skilllevel="27" probability="70" cooldown="10000"/>
+        <npcskill skillid="16542" skilllevel="27" probability="60" cooldown="20000"/>
+        <npcskill skillid="18748" skilllevel="10" probability="60" cooldown="20000"/>
+        <npcskill skillid="19286" skilllevel="20" probability="100" minhp="0" maxhp="30" cooldown="40000"/>
     </npcskills>
     <npcskills npcid="217005">
-        <npcskill skillid="16401" skilllevel="27" probability="25"/>
-        <npcskill skillid="16516" skilllevel="27" probability="25"/>
-        <npcskill skillid="16526" skilllevel="27" probability="25"/>
-        <npcskill skillid="17698" skilllevel="27" probability="25"/>
+        <npcskill skillid="16401" skilllevel="27" probability="60" cooldown="50000"/>
+        <npcskill skillid="16516" skilllevel="27" probability="60" cooldown="10000"/>
+        <npcskill skillid="16526" skilllevel="27" probability="25" cooldown="10000"/>
+        <npcskill skillid="17698" skilllevel="27" probability="50" cooldown="30000"/>
     </npcskills>
     <npcskills npcid="217006">
-        <npcskill skillid="16401" skilllevel="27" probability="25"/>
-        <npcskill skillid="16521" skilllevel="27" probability="25"/>
-        <npcskill skillid="16523" skilllevel="27" probability="25"/>
-        <npcskill skillid="17698" skilllevel="27" probability="25"/>
-        <npcskill skillid="19246" skilllevel="27" probability="-1"/>
-        <npcskill skillid="19247" skilllevel="27" probability="25"/>
-        <npcskill skillid="19248" skilllevel="27" probability="25"/>
+        <npcskill skillid="16401" skilllevel="27" probability="60" cooldown="50000"/>
+        <npcskill skillid="16521" skilllevel="27" probability="70" cooldown="20000"/>
+        <npcskill skillid="16523" skilllevel="27" probability="70" cooldown="20000"/>
+        <npcskill skillid="17698" skilllevel="27" probability="50" cooldown="30000"/>
+        <npcskill skillid="19246" skilllevel="27" probability="100" cooldown="300000"/>
+        <npcskill skillid="19247" skilllevel="27" probability="25" cooldown="30000"/>
+        <npcskill skillid="19248" skilllevel="27" probability="25" cooldown="30000"/>
     </npcskills>
     <npcskills npcid="217007">
         <npcskill skillid="16516" skilllevel="42" probability="25"/>
