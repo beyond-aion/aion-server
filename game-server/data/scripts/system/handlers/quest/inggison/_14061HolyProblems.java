@@ -178,6 +178,6 @@ public class _14061HolyProblems extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14060);
+		return defaultOnLvlUpEvent(env);
 	}
 }
