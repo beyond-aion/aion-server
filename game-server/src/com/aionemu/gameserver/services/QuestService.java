@@ -243,7 +243,10 @@ public final class QuestService {
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
 		}
 		if (rewards.getAp() != null) {
-			AbyssPointsService.addAp(player, (int) (player.getRates().getQuestApRate() * rewards.getAp()));
+			int ap = rewards.getAp();
+			if (questsData.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT)
+				ap *= player.getRates().getQuestApRate();
+			AbyssPointsService.addAp(player, ap);
 		}
 		if (rewards.getDp() != null) {
 			player.getCommonData().addDp(rewards.getDp());
