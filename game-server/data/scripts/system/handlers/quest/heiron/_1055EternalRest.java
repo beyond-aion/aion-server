@@ -1,15 +1,22 @@
 package quest.heiron;
 
+import org.fusesource.jansi.Ansi.Color;
+
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rhys2002
@@ -181,7 +188,9 @@ public class _1055EternalRest extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700270) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getQuestVarById(0) == 3) {
+				QuestService.addNewSpawn(210040000, player.getInstanceId(), 204623, 195f, 1916.7f, 114.02f, (byte) 112, 1);
+				QuestService.addNewSpawn(210040000, player.getInstanceId(), 204624, 197.8f, 1914.5f, 114.38f, (byte) 29, 1);
 				return useQuestObject(env, 3, 4, false, 0, 0, 1, 182201613, 1); // 4
 			}
 		}
