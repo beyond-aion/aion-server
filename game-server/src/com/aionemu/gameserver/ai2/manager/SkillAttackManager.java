@@ -11,6 +11,8 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
@@ -126,7 +128,8 @@ public class SkillAttackManager {
 								case RANDOM_EXCEPT_MOST_HATED:
 									List<Creature> knownCreatures = new FastTable<>();
 									for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
-										if (obj != null && obj instanceof Creature) {
+										if (obj != null && obj instanceof Creature 
+											&& !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
 											Creature target3 = (Creature) obj;
 											if (target3.getLifeStats().isAlreadyDead()  || target3.getLifeStats().isAboutToDie()) 
 												continue;
@@ -260,15 +263,17 @@ public class SkillAttackManager {
 	}
 	
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
-		if (owner.getTarget() != null) {
-			if (((Creature)owner.getTarget()).getLifeStats().isAlreadyDead() || !owner.canSee((Creature)owner.getTarget())) {
+		if (owner.getTarget() != null && owner.getTarget() instanceof Creature) {
+			Creature target = (Creature) owner.getTarget();
+			if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
 				return true;
 			}
 			SkillTemplate template = entry.getSkillTemplate();
 			Properties prop = template.getProperties();
 			if (prop.getFirstTarget() != FirstTargetAttribute.ME && prop.getTargetType() != TargetRangeAttribute.AREA) {
-				float collision = owner.getObjectTemplate().getBoundRadius().getCollision() < 1f ? 1f : owner.getObjectTemplate().getBoundRadius().getCollision();
-				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision)) {
+				float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
+				float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
+				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision + targetCollision)) {
 					return true;
 				}
 			}
