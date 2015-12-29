@@ -31923,7 +31923,7 @@
         <npcskill skillid="16521" skilllevel="27" probability="70" cooldown="20000"/>
         <npcskill skillid="16523" skilllevel="27" probability="70" cooldown="20000"/>
         <npcskill skillid="17698" skilllevel="27" probability="50" cooldown="30000"/>
-        <!--<npcskill skillid="19246" skilllevel="27" probability="-1"/> -->
+        <npcskill skillid="19246" skilllevel="27" probability="100" cooldown="300000"/>
         <npcskill skillid="19247" skilllevel="27" probability="25" cooldown="30000"/>
         <npcskill skillid="19248" skilllevel="27" probability="25" cooldown="30000"/>
     </npcskills>

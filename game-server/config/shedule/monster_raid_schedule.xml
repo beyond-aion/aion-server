@@ -2,197 +2,197 @@
 <raid_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="monster_raid_schedule.xsd">
 	<!-- Verteron -->
 	<raid id="1">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<raid id="2">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<raid id="3">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<!-- Altgard -->
 	<raid id="4">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<raid id="5">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<raid id="6">
-		<raidTime>0 0 18 3,18 * ?</raidTime>
+		<raidTime>0 30 17 3,18 * ?</raidTime>
 	</raid>
 	<!-- Eltnen -->
 	<raid id="7">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<raid id="8">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<raid id="9">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<!-- Morheim -->
 	<raid id="10">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<raid id="11">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<raid id="12">
-		<raidTime>0 0 18 6,21 * ?</raidTime>
+		<raidTime>0 30 17 6,21 * ?</raidTime>
 	</raid>
 	<!-- Theobomos -->
 	<raid id="13">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<raid id="14">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<raid id="15">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<!-- Brusthonin -->
 	<raid id="16">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<raid id="17">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<raid id="18">
-		<raidTime>0 0 21 9,24 * ?</raidTime>
+		<raidTime>0 30 20 9,24 * ?</raidTime>
 	</raid>
 	<!-- Heiron -->
 	<raid id="19">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<raid id="20">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<raid id="21">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<!-- Beluslan -->
 	<raid id="22">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<raid id="23">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<raid id="24">
-		<raidTime>0 0 21 12,27 * ?</raidTime>
+		<raidTime>0 30 20 12,27 * ?</raidTime>
 	</raid>
 	<!-- Inggison -->
 	<raid id="25">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<raid id="26">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<raid id="27">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<!-- Gelkmaros -->
 	<raid id="28">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<raid id="29">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<raid id="30">
-		<raidTime>0 0 18 15 * ?</raidTime>
-		<raidTime>0 0 21 30 * ?</raidTime>
+		<raidTime>0 30 17 15 * ?</raidTime>
+		<raidTime>0 30 20 30 * ?</raidTime>
 	</raid>
 	<!-- Reshanta -->
 	<raid id="31">
-		<raidTime>0 0 18 2,17 * ?</raidTime>
-		<raidTime>0 0 21 10,25 * ?</raidTime>
+		<raidTime>0 30 17 2,17 * ?</raidTime>
+		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
 	<raid id="32">
-		<raidTime>0 0 18 2,17 * ?</raidTime>
-		<raidTime>0 0 21 10,25 * ?</raidTime>
+		<raidTime>0 30 17 2,17 * ?</raidTime>
+		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
 	<raid id="33">
-		<raidTime>0 0 18 2,17 * ?</raidTime>
-		<raidTime>0 0 21 10,25 * ?</raidTime>
+		<raidTime>0 30 17 2,17 * ?</raidTime>
+		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
 	<raid id="34">
-		<raidTime>0 0 18 2,17 * ?</raidTime>
-		<raidTime>0 0 21 10,25 * ?</raidTime>
+		<raidTime>0 30 17 2,17 * ?</raidTime>
+		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
 	<raid id="35">
-		<raidTime>0 0 18 2,17 * ?</raidTime>
-		<raidTime>0 0 21 10,25 * ?</raidTime>
+		<raidTime>0 30 17 2,17 * ?</raidTime>
+		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
 	<!-- Katalam -->
 	<raid id="36">
-		<raidTime>0 0 18 4,19 * ?</raidTime>
-		<raidTime>0 0 21 11,26 * ?</raidTime>
+		<raidTime>0 30 17 4,19 * ?</raidTime>
+		<raidTime>0 30 20 11,26 * ?</raidTime>
 	</raid>
 	<raid id="37">
-		<raidTime>0 0 18 4,19 * ?</raidTime>
-		<raidTime>0 0 21 11,26 * ?</raidTime>
+		<raidTime>0 30 17 4,19 * ?</raidTime>
+		<raidTime>0 30 20 11,26 * ?</raidTime>
 	</raid>
 	<raid id="38">
-		<raidTime>0 0 18 4,19 * ?</raidTime>
-		<raidTime>0 0 21 11,26 * ?</raidTime>
+		<raidTime>0 30 17 4,19 * ?</raidTime>
+		<raidTime>0 30 20 11,26 * ?</raidTime>
 	</raid>
 	<raid id="39">
-		<raidTime>0 0 18 4,19 * ?</raidTime>
-		<raidTime>0 0 21 11,26 * ?</raidTime>
+		<raidTime>0 30 17 4,19 * ?</raidTime>
+		<raidTime>0 30 20 11,26 * ?</raidTime>
 	</raid>
 	<!-- Danaria -->
 	<raid id="40">
-		<raidTime>0 0 18 5,20 * ?</raidTime>
-		<raidTime>0 0 21 13,28 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<raid id="41">
-		<raidTime>0 0 18 5,20 * ?</raidTime>
-		<raidTime>0 0 21 13,28 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<raid id="42">
-		<raidTime>0 0 18 5,20 * ?</raidTime>
-		<raidTime>0 0 21 13,28 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<raid id="43">
-		<raidTime>0 0 18 5,20 * ?</raidTime>
-		<raidTime>0 0 21 13,28 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<raid id="44">
-		<raidTime>0 0 18 5,20 * ?</raidTime>
-		<raidTime>0 0 21 13,28 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<!-- Levinshor -->
 	<raid id="45">
-		<raidTime>0 0 18 7,22 * ?</raidTime>
-		<raidTime>0 0 21 14,28 * ?</raidTime>
+		<raidTime>0 30 17 7,22 * ?</raidTime>
+		<raidTime>0 30 20 14,28 * ?</raidTime>
 	</raid>
 	<raid id="46">
-		<raidTime>0 0 18 7,22 * ?</raidTime>
-		<raidTime>0 0 21 14,28 * ?</raidTime>
+		<raidTime>0 30 17 7,22 * ?</raidTime>
+		<raidTime>0 30 20 14,28 * ?</raidTime>
 	</raid>
 	<raid id="47">
-		<raidTime>0 0 18 7,22 * ?</raidTime>
-		<raidTime>0 0 21 14,28 * ?</raidTime>
+		<raidTime>0 30 17 7,22 * ?</raidTime>
+		<raidTime>0 30 20 14,28 * ?</raidTime>
 	</raid>
 	<raid id="48">
-		<raidTime>0 0 18 7,22 * ?</raidTime>
-		<raidTime>0 0 21 14,28 * ?</raidTime>
+		<raidTime>0 30 17 7,22 * ?</raidTime>
+		<raidTime>0 30 20 14,28 * ?</raidTime>
 	</raid>
 	<!-- Kaldor -->
 	<raid id="49">
-		<raidTime>0 0 18 1,16 * ?</raidTime>
-		<raidTime>0 0 21 8,23 * ?</raidTime>
+		<raidTime>0 30 17 1,16 * ?</raidTime>
+		<raidTime>0 30 20 8,23 * ?</raidTime>
 	</raid>
 	<raid id="50">
-		<raidTime>0 0 18 1,16 * ?</raidTime>
-		<raidTime>0 0 21 8,23 * ?</raidTime>
+		<raidTime>0 30 17 1,16 * ?</raidTime>
+		<raidTime>0 30 20 8,23 * ?</raidTime>
 	</raid>
 	<raid id="51">
-		<raidTime>0 0 18 1,16 * ?</raidTime>
-		<raidTime>0 0 21 8,23 * ?</raidTime>
+		<raidTime>0 30 17 1,16 * ?</raidTime>
+		<raidTime>0 30 20 8,23 * ?</raidTime>
 	</raid>
 </raid_schedule>

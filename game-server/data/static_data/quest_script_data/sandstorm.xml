@@ -112,7 +112,7 @@
 		<monster var="0" end_var="1" npc_ids="217376 219183"/>
 	</monster_hunt>
 	<monster_hunt id="41121" start_npc_ids="799434" aggro_start_npcs="217475 217647">
-		<monster var="0" end_var="1" npc_ids="217475"/>
+		<monster var="0" end_var="1" npc_ids="217475 217647"/>
 	</monster_hunt>
 	<monster_hunt id="41122" start_npc_ids="799549" aggro_start_npcs="217313">
 		<monster var="0" end_var="1" npc_ids="217313"/>

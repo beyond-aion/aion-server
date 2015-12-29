@@ -6186,10 +6186,6 @@
 			<spot x="835.554" y="2539.45" z="141.098" h="52"/>
 			<spot x="859.024" y="2517.01" z="139.947" h="74"/>
 		</spawn>
-		<!-- Released Soul -->
-		<spawn npc_id="204623" respawn_time="295">
-			<spot x="195.015" y="1916.66" z="114.252" h="55"/>
-		</spawn>
 		<!-- Resha -->
 		<spawn npc_id="204525" respawn_time="295">
 			<spot x="2424.49" y="377.545" z="414.794" h="117"/>

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Nephis
- * @modified Gigi
+ * @modified Gigi, Pad
  */
 public class _2988TheWiseInDisguise extends QuestHandler {
 
@@ -39,70 +39,34 @@ public class _2988TheWiseInDisguise extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 204182)// Heimdall
-			{
+			if (targetId == 204182) { // Heimdall
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 204338)// Utgar
-		{
-
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (targetId == 204338) { // Utgar
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialog() == DialogAction.SETPRO1)
+					return defaultCloseDialog(env, 0, 1);
 			}
-
-		} else if (targetId == 204213)// Brakan
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		} else if (targetId == 204213) { // Brakan
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialog() == DialogAction.SETPRO2)
+					return defaultCloseDialog(env, 1, 2);
 			}
-		} else if (targetId == 204146)// Kanensa
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+		} else if (targetId == 204146) { // Kanensa
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialogId() == DialogAction.SELECT_ACTION_2035.id()) {
-					if (player.getInventory().getItemCountByItemId(186000039) > 0)
-						return sendQuestDialog(env, 2035);
-					else
-						return sendQuestDialog(env, 2120);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					removeQuestItem(env, 186000039, 1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)// Reward
-			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 4080);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					qs.setQuestVar(8);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
+				else if (env.getDialog() == DialogAction.SELECT_ACTION_2035)
+					return checkQuestItems(env, 2, 2, true, 2035, 2120);
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
+				return sendQuestEndDialog(env);
 			}
 		}
 

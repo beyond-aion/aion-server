@@ -104,7 +104,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeH(0); // unk
 			writeH(0);
 			writeD(locId == 2111 || locId == 3111 ? SiegeService.getInstance().getRemainingSiegeTimeInSeconds(locId) : 0); // veille/masta timer
-			writeD(NetworkConfig.GAMESERVER_ID); // unk 4.7 (almost always 36, sometimes 37 to 42 o.O)
+			writeD(NetworkConfig.GAMESERVER_ID); // server ID of the fortress owner (TODO relevant for panesterra, so change this later)
 			writeD(0); // unk 4.7 (some timestamp, maybe Capture Date?)
 			writeD(loc.getOccupiedCount());
 		}
