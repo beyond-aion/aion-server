@@ -20,12 +20,6 @@ import ai.AggressiveNpcAI2;
 @AIName("ahserion")
 public class Ahserion extends AggressiveNpcAI2 {
 
-	
-	@Override
-	public void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-	}
-
 	@Override
 	protected void handleDied() {
 		if (getOwner().getWorldId() == 400030000) {
