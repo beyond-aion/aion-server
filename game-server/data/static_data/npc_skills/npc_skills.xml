@@ -37973,33 +37973,34 @@
         <npcskill skillid="17303" skilllevel="27" probability="25"/>
         <npcskill skillid="17305" skilllevel="27" probability="25"/>
     </npcskills>
+	<!-- Dux Scales -->
     <npcskills npcid="257000">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257002">
         <npcskill skillid="18009" skilllevel="46" probability="25"/>
@@ -38015,31 +38016,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Stallari Scales -->
     <npcskills npcid="257005">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257007">
         <npcskill skillid="18009" skilllevel="46" probability="25"/>
@@ -38055,32 +38059,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Ulsaruk Scales -->
     <npcskills npcid="257010">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257012">
         <npcskill skillid="18009" skilllevel="46" probability="25"/>
@@ -38997,33 +39003,34 @@
         <npcskill skillid="18923" skilllevel="46" probability="25"/>
         <npcskill skillid="18944" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Dux Avarice -->
     <npcskills npcid="257300">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257302">
         <npcskill skillid="18009" skilllevel="46" probability="25"/>
@@ -39039,31 +39046,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Stallari Avarice -->
     <npcskills npcid="257305">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257307">
         <npcskill skillid="18009" skilllevel="46" probability="25"/>
@@ -39079,32 +39089,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Ulsaruk Avarice -->
     <npcskills npcid="257310">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257312">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -40007,33 +40019,34 @@
         <npcskill skillid="18923" skilllevel="46" probability="25"/>
         <npcskill skillid="18944" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Dux Citadel -->
     <npcskills npcid="257600">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257602">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -40063,33 +40076,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Stallari Citadel -->
     <npcskills npcid="257605">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257607">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -40119,32 +40133,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Ulsaruk Citadel -->
     <npcskills npcid="257610">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+       <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257612">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -41078,33 +41094,34 @@
         <npcskill skillid="18923" skilllevel="46" probability="25"/>
         <npcskill skillid="18944" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Dux Crimson -->
     <npcskills npcid="257900">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257902">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -41134,33 +41151,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Stallari Crimson -->
     <npcskills npcid="257905">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257907">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -41190,32 +41208,34 @@
         <npcskill skillid="19109" skilllevel="46" probability="25"/>
         <npcskill skillid="19113" skilllevel="46" probability="25"/>
     </npcskills>
+	<!-- Stallari Crimson -->
     <npcskills npcid="257910">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="257912">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -42437,22 +42457,34 @@
         <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
     </npcskills>
+	<!-- Stallari Divine -->
     <npcskills npcid="260005">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="1" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="260006">
         <npcskill skillid="17197" skilllevel="1" probability="20"/>
@@ -42542,23 +42574,64 @@
         <npcskill skillid="19099" skilllevel="1" probability="25"/>
         <npcskill skillid="18009" skilllevel="1" probability="25"/>
     </npcskills>
+	<!-- Ulsaruk Divine -->
     <npcskills npcid="260011">
-        <npcskill skillid="18435" skilllevel="41" probability="25"/>
-        <npcskill skillid="18436" skilllevel="41" probability="25"/>
-        <npcskill skillid="18437" skilllevel="41" probability="25"/>
-        <npcskill skillid="18438" skilllevel="41" probability="25"/>
-        <npcskill skillid="18439" skilllevel="41" probability="25"/>
-        <npcskill skillid="18440" skilllevel="41" probability="25"/>
-        <npcskill skillid="18441" skilllevel="41" probability="25"/>
-        <npcskill skillid="18442" skilllevel="41" probability="25"/>
-        <npcskill skillid="18443" skilllevel="41" probability="25"/>
-        <npcskill skillid="18444" skilllevel="41" probability="25"/>
-        <npcskill skillid="18445" skilllevel="41" probability="25"/>
-        <npcskill skillid="18446" skilllevel="41" probability="25"/>
-        <npcskill skillid="18447" skilllevel="41" probability="25"/>
-        <npcskill skillid="18448" skilllevel="41" probability="25"/>
-        <npcskill skillid="18449" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Dux Divine -->
+	<npcskills npcid="260000">
+		<!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
+	</npcskills>
     <npcskills npcid="260012">
         <npcskill skillid="18435" skilllevel="41" probability="25"/>
         <npcskill skillid="18436" skilllevel="41" probability="25"/>
@@ -50770,34 +50843,34 @@
         <npcskill skillid="18011" skilllevel="41" probability="25"/>
         <npcskill skillid="18423" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Dux Krotan -->
     <npcskills npcid="267802">
-        <npcskill skillid="17564" skilllevel="1" probability="20"/>
-        <npcskill skillid="18422" skilllevel="1" probability="20"/>
-        <npcskill skillid="17561" skilllevel="1" probability="20"/>
-        <npcskill skillid="17990" skilllevel="1" probability="20"/>
-        <npcskill skillid="17566" skilllevel="1" probability="25"/>
-        <npcskill skillid="17996" skilllevel="1" probability="25"/>
-        <npcskill skillid="17993" skilllevel="1" probability="20"/>
-        <npcskill skillid="17555" skilllevel="1" probability="25"/>
-        <npcskill skillid="17195" skilllevel="1" probability="25"/>
-        <npcskill skillid="18001" skilllevel="1" probability="20"/>
-        <npcskill skillid="17574" skilllevel="1" probability="25"/>
-        <npcskill skillid="17552" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25" minhp="0" maxhp="50"/>
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="41" probability="25"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25"/>
-        <npcskill skillid="18011" skilllevel="41" probability="25"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="267803">
         <npcskill skillid="17197" skilllevel="41" probability="25"/>
@@ -50880,34 +50953,34 @@
         <npcskill skillid="18011" skilllevel="41" probability="25"/>
         <npcskill skillid="18423" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Stallari Krotan -->
     <npcskills npcid="267807">
-        <npcskill skillid="17564" skilllevel="1" probability="20"/>
-        <npcskill skillid="18422" skilllevel="1" probability="20"/>
-        <npcskill skillid="17561" skilllevel="1" probability="20"/>
-        <npcskill skillid="17990" skilllevel="1" probability="20"/>
-        <npcskill skillid="17566" skilllevel="1" probability="25"/>
-        <npcskill skillid="17996" skilllevel="1" probability="25"/>
-        <npcskill skillid="17993" skilllevel="1" probability="20"/>
-        <npcskill skillid="17555" skilllevel="1" probability="25"/>
-        <npcskill skillid="17195" skilllevel="1" probability="25"/>
-        <npcskill skillid="18001" skilllevel="1" probability="20"/>
-        <npcskill skillid="17574" skilllevel="1" probability="25"/>
-        <npcskill skillid="17552" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25" minhp="0" maxhp="50"/>
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="41" probability="25"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25"/>
-        <npcskill skillid="18011" skilllevel="41" probability="25"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="267808">
         <npcskill skillid="17197" skilllevel="41" probability="25"/>
@@ -50961,23 +51034,34 @@
         <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
     </npcskills>
+	<!-- Ulsaruk Krotan -->
     <npcskills npcid="267811">
-        <npcskill skillid="17197" skilllevel="41" probability="20"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="20"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="20"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="41" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="267812">
         <npcskill skillid="17564" skilllevel="1" probability="20"/>
@@ -52707,22 +52791,34 @@
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
         <npcskill skillid="18423" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Dux Kysis -->
     <npcskills npcid="269002">
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="41" probability="25"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25"/>
-        <npcskill skillid="18011" skilllevel="1" probability="25"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="269003">
         <npcskill skillid="17197" skilllevel="41" probability="20"/>
@@ -52791,14 +52887,34 @@
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
         <npcskill skillid="18423" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Stallari Kysis -->
     <npcskills npcid="269007">
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="269008">
         <npcskill skillid="17197" skilllevel="41" probability="20"/>
@@ -52870,20 +52986,34 @@
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
         <npcskill skillid="18423" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Ulsaruk Kysis -->
     <npcskills npcid="269012">
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25"/>
-        <npcskill skillid="18011" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="269013">
         <npcskill skillid="17197" skilllevel="41" probability="20"/>
@@ -54048,22 +54178,34 @@
         <npcskill skillid="17374" skilllevel="41" probability="25"/>
         <npcskill skillid="17335" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Dux Miren -->
     <npcskills npcid="269901">
-        <npcskill skillid="17197" skilllevel="41" probability="25"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="25"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="25"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="41" probability="25"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25"/>
-        <npcskill skillid="18011" skilllevel="41" probability="25"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="269902">
         <npcskill skillid="17197" skilllevel="41" probability="25"/>
@@ -54133,23 +54275,36 @@
         <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
     </npcskills>
+	<!-- Stallari Miren -->
     <npcskills npcid="269906">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="1" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Guardian General -->
     <npcskills npcid="269907">
         <npcskill skillid="17197" skilllevel="41" probability="25"/>
         <npcskill skillid="17554" skilllevel="41" probability="25"/>
@@ -54218,23 +54373,34 @@
         <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
         <npcskill skillid="18424" skilllevel="1" probability="30"/>
     </npcskills>
+	<!-- Ulsaruk Miren -->
     <npcskills npcid="269911">
-        <npcskill skillid="17197" skilllevel="41" probability="20"/>
-        <npcskill skillid="17554" skilllevel="41" probability="25"/>
-        <npcskill skillid="17557" skilllevel="41" probability="25"/>
-        <npcskill skillid="17563" skilllevel="41" probability="20"/>
-        <npcskill skillid="17989" skilllevel="41" probability="25"/>
-        <npcskill skillid="17992" skilllevel="41" probability="25"/>
-        <npcskill skillid="17995" skilllevel="41" probability="20"/>
-        <npcskill skillid="17998" skilllevel="41" probability="25"/>
-        <npcskill skillid="18000" skilllevel="41" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="41" probability="25"/>
-        <npcskill skillid="18009" skilllevel="41" probability="25"/>
-        <npcskill skillid="18010" skilllevel="41" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="41" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="18423" skilllevel="41" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="269912">
         <npcskill skillid="17197" skilllevel="41" probability="25"/>
@@ -57017,256 +57183,266 @@
         <npcskill skillid="17379" skilllevel="41" probability="25"/>
         <npcskill skillid="17705" skilllevel="41" probability="25"/>
     </npcskills>
+	<!-- Dux Sillus -->
     <npcskills npcid="272000">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+       <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Stallari Sillus -->
     <npcskills npcid="272005">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Ulsaruk Sillus -->
     <npcskills npcid="272010">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Dux Silona -->
     <npcskills npcid="272502">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Stallari Silon -->
     <npcskills npcid="272507">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Ulsaruk Silona -->
     <npcskills npcid="272512">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Dux Pradeth -->
     <npcskills npcid="273000">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Stallari Pradeth -->
     <npcskills npcid="273005">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
+	<!-- Ulsaruk Pradeth -->
     <npcskills npcid="273010">
-        <npcskill skillid="17197" skilllevel="1" probability="20"/>
-        <npcskill skillid="17554" skilllevel="1" probability="25"/>
-        <npcskill skillid="17557" skilllevel="1" probability="25"/>
-        <npcskill skillid="17563" skilllevel="1" probability="20"/>
-        <npcskill skillid="17989" skilllevel="1" probability="25"/>
-        <npcskill skillid="17992" skilllevel="1" probability="25"/>
-        <npcskill skillid="17995" skilllevel="1" probability="20"/>
-        <npcskill skillid="17998" skilllevel="1" probability="25"/>
-        <npcskill skillid="18000" skilllevel="1" probability="25"/>
-        <npcskill skillid="18002" skilllevel="1" probability="20" minhp="0" maxhp="50"/>
-        <npcskill skillid="18003" skilllevel="1" probability="25"/>
-        <npcskill skillid="18009" skilllevel="46" probability="25"/>
-        <npcskill skillid="18010" skilllevel="1" probability="25" minhp="0" maxhp="75"/>
-        <npcskill skillid="18011" skilllevel="1" probability="20" minhp="0" maxhp="80"/>
-        <npcskill skillid="18424" skilllevel="1" probability="30"/>
-        <npcskill skillid="19099" skilllevel="46" probability="25"/>
-        <npcskill skillid="19100" skilllevel="46" probability="25"/>
-        <npcskill skillid="19101" skilllevel="46" probability="25"/>
-        <npcskill skillid="19102" skilllevel="46" probability="25"/>
-        <npcskill skillid="19103" skilllevel="46" probability="25"/>
-        <npcskill skillid="19104" skilllevel="46" probability="25"/>
-        <npcskill skillid="19105" skilllevel="46" probability="25"/>
-        <npcskill skillid="19107" skilllevel="46" probability="25"/>
-        <npcskill skillid="19108" skilllevel="46" probability="25"/>
-        <npcskill skillid="19109" skilllevel="46" probability="25"/>
-        <npcskill skillid="19113" skilllevel="46" probability="25"/>
+        <!-- 10m range -->
+        <npcskill skillid="19100" skilllevel="46" probability="25" nextChainId="1" nextSkillTime="0" cooldown="120000" minhp="55"  maxhp="100"/>
+        <npcskill skillid="19101" skilllevel="46" probability="100" chainId="1" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<!-- 20m range-->
+        <npcskill skillid="17992" skilllevel="1" probability="25" nextChainId="2" nextSkillTime="0" cooldown="120000" minhp="0" maxhp="50"/>
+        <npcskill skillid="17995" skilllevel="1" probability="100" chainId="2" nextSkillTime="8000" cooldown="20000" target="NONE">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+		<npcskill skillid="19107" skilllevel="46" probability="25" nextChainId="3" nextSkillTime="6000" cooldown="60000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="3" nextChainId="4" nextSkillTime="6000" minhp="0" maxhp="75" cooldown="20000"/>
+		<npcskill skillid="19107" skilllevel="46" probability="100" chainId="4" nextSkillTime="12000" minhp="0" maxhp="50" cooldown="20000"/>
+        <npcskill skillid="18000" skilllevel="1" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+        <npcskill skillid="19104" skilllevel="46" probability="25" minhp="0" maxhp="30" cooldown="40000"/>
+		<npcskill skillid="18002" skilllevel="1" probability="25" minhp="0" maxhp="50" cooldown="40000"/>
+		<npcskill skillid="19105" skilllevel="46" probability="100" minhp="0" maxhp="50" cooldown="100000"/>
+		<npcskill skillid="18011" skilllevel="1" probability="25" minhp="0" maxhp="70" cooldown="90000"/>
+		<npcskill skillid="19102" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="19099" skilllevel="46" probability="25" cooldown="50000"/>
+        <npcskill skillid="19103" skilllevel="46" probability="25" minhp="0" maxhp="40" cooldown="60000"/>
+        <npcskill skillid="19113" skilllevel="46" probability="25" minhp="0" maxhp="70" cooldown="60000"/>
+		<npcskill skillid="18009" skilllevel="46" probability="20" minhp="0" maxhp="50" cooldown="180000" target="RANDOM"/>
+		<npcskill skillid="18010" skilllevel="1" probability="20" minhp="0" maxhp="30" cooldown="220000"/>
+		<!-- Summon Illusion Gate; deactivated for now -->
+        <!--<npcskill skillid="18003" skilllevel="1" probability="25"/> -->
     </npcskills>
     <npcskills npcid="273334">
         <npcskill skillid="17293" skilllevel="46" probability="25"/>
