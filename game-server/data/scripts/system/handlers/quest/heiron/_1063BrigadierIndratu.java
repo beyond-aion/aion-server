@@ -58,7 +58,9 @@ public class _1063BrigadierIndratu extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 					case SET_SUCCEED: {
-						return defaultCloseDialog(env, 2, 2, true, false); // reward
+						defaultCloseDialog(env, 2, 2, true, false); // reward
+						TeleportService2.teleportTo(player, 110010000, 1874.77f, 1511.06f, 812.68f, (byte)0);
+						return true;
 					}
 				}
 			}
