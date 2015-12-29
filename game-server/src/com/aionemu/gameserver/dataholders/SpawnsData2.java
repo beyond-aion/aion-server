@@ -49,6 +49,7 @@ import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenaryRace;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenarySpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenaryZone;
+import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawn;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawn;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
@@ -78,6 +79,7 @@ public class SpawnsData2 {
 	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<MercenarySpawn>();
 	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<AssaultSpawn>();
 	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<Spawn>();
+	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>(); //ahserions flight
 
 	/**
 	 * @param u
@@ -207,6 +209,32 @@ public class SpawnsData2 {
 						awave.setSiegeId(assaultSpawn.getSiegeId());
 					}
 				}
+				
+				for (AhserionsFlightSpawn ahserionSpawn : spawnMap.getAhserionSpawns()) {
+					int teamId = ahserionSpawn.getTeam().getId();
+					if (!ahserionSpawnMaps.containsKey(teamId)) {
+						ahserionSpawnMaps.put(teamId, new FastTable<SpawnGroup2>());
+					}
+					
+					for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
+						if (stageTemplate == null || stageTemplate.getSpawns() == null) {
+							continue;
+						}
+						
+						for (Spawn spawn : stageTemplate.getSpawns()) {
+							if (spawn.isCustom())  {
+								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
+									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
+								customs.put(spawn.getNpcId(), spawn);
+							} else if (customs.contains(spawn.getNpcId())) {
+								continue;	
+							}
+							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, stageTemplate.getStage(), ahserionSpawn.getTeam());
+							ahserionSpawnMaps.get(teamId).add(spawnGroup);
+						}
+					}
+				}
+				
 				customs.clear();
 			}
 		}
@@ -439,6 +467,10 @@ public class SpawnsData2 {
 
 	public List<SpawnMap> getTemplates() {
 		return templates;
+	}
+
+	public List<SpawnGroup2> getAhserionSpawnByTeamId(int id) {
+		return ahserionSpawnMaps.get(id);
 	}
 
 }

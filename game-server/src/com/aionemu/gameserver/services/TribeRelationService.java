@@ -4,8 +4,10 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 
 /**
  * @author Cheatkiller
@@ -14,6 +16,24 @@ public class TribeRelationService {
 
 	public static boolean isAggressive(Creature creature1, Creature creature2) {
 		switch (creature1.getBaseTribe()) {
+			case GAB1_SUB_DEST_69_AGGRESSIVE:
+			case GAB1_SUB_DEST_70_AGGRESSIVE:
+			case GAB1_SUB_DEST_71_AGGRESSIVE:
+			case GAB1_SUB_DEST_72_AGGRESSIVE:
+				if (creature2 instanceof Player) {
+					if (checkPanesterraRelation(creature1, (Player) creature2)) {
+					return true;
+					}
+				}
+				break;
+			case GAB1_SUB_DRAKAN:
+			case GAB1_SUB_KILLER:
+				if (creature2.getBaseTribe() != TribeClass.GAB1_SUB_DRAKAN 
+					&& creature2.getBaseTribe() != TribeClass.GAB1_SUB_KILLER 
+					&& creature2.getBaseTribe() != TribeClass.GAB1_SUB_ATTACKABLE_FOBJ) {
+					return true;
+				}
+				break;
 			case GUARD_DARK:
 				switch (creature2.getBaseTribe()) {
 					case PC:
@@ -53,6 +73,20 @@ public class TribeRelationService {
 		if (creature1.getTribe() == creature2.getTribe()) // OR BASE ????
 			return true;
 		switch (creature1.getBaseTribe()) {
+			case GAB1_SUB_DEST_69:
+			case GAB1_SUB_DEST_70:
+			case GAB1_SUB_DEST_71:
+			case GAB1_SUB_DEST_72:
+			case GAB1_SUB_DEST_69_AGGRESSIVE:
+			case GAB1_SUB_DEST_70_AGGRESSIVE:
+			case GAB1_SUB_DEST_71_AGGRESSIVE:
+			case GAB1_SUB_DEST_72_AGGRESSIVE:
+				if (creature2 instanceof Player) {
+					if (!checkPanesterraRelation(creature1, (Player) creature2)) {
+						return true;
+					}
+				} 
+				break;
 			case USEALL:
 			case FIELD_OBJECT_ALL:
 				return true;
@@ -94,6 +128,20 @@ public class TribeRelationService {
 			return true;
 		}
 		switch (creature1.getBaseTribe()) {
+			case GAB1_SUB_DEST_69:
+			case GAB1_SUB_DEST_70:
+			case GAB1_SUB_DEST_71:
+			case GAB1_SUB_DEST_72:
+			case GAB1_SUB_DEST_69_AGGRESSIVE:
+			case GAB1_SUB_DEST_70_AGGRESSIVE:
+			case GAB1_SUB_DEST_71_AGGRESSIVE:
+			case GAB1_SUB_DEST_72_AGGRESSIVE:
+				if (creature2 instanceof Player) {
+					if (!checkPanesterraRelation(creature1, (Player) creature2)) {
+						return true;
+					}
+				}
+				break;
 			case GUARD_DARK:
 				switch (creature2.getBaseTribe()) {
 					case PC_DARK:
@@ -149,6 +197,18 @@ public class TribeRelationService {
 			return true;
 		}
 		switch (creature1.getBaseTribe()) {
+			case GAB1_SUB_DEST_69:
+			case GAB1_SUB_DEST_70:
+			case GAB1_SUB_DEST_71:
+			case GAB1_SUB_DEST_72:
+				if (creature2 instanceof Player) {
+					if (checkPanesterraRelation(creature1, (Player) creature2)) {
+						return true;
+					}
+				}
+				break;
+			case GAB1_SUB_ATTACKABLE_FOBJ:
+			case GAB1_SUB_NONAGGRESSIVE_DRAKAN:
 			case MONSTER:
 				switch (creature2.getBaseTribe()) {
 					case PC_DARK:
@@ -167,5 +227,35 @@ public class TribeRelationService {
 				.getTribe() == TribeClass.PC))
 			|| npc.getBaseTribe() == TribeClass.GENERAL_DRAGON
 			&& npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT;
+	}
+	
+	public static boolean checkPanesterraRelation(Creature creature1, Player player) {
+		switch (creature1.getBaseTribe()) {
+			case GAB1_SUB_DEST_69:
+			case GAB1_SUB_DEST_69_AGGRESSIVE:
+				if (player.getPanesterraTeam() != null) {
+					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_69;
+				}
+				break;
+			case GAB1_SUB_DEST_70:
+			case GAB1_SUB_DEST_70_AGGRESSIVE:
+				if (player.getPanesterraTeam() != null) {
+					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_70;
+				}
+				break;
+			case GAB1_SUB_DEST_71:
+			case GAB1_SUB_DEST_71_AGGRESSIVE:
+				if (player.getPanesterraTeam() != null) {
+					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_71;
+				}
+				break;
+			case GAB1_SUB_DEST_72:
+			case GAB1_SUB_DEST_72_AGGRESSIVE:
+				if (player.getPanesterraTeam() != null) {
+					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_72;
+				}
+				break;
+		}
+		return false;
 	}
 }

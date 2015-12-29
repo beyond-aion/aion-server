@@ -1,9 +1,11 @@
 package quest.heiron;
 
+import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -181,7 +183,22 @@ public class _1055EternalRest extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700270) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getQuestVarById(0) == 3) {
+				Npc soul1 = (Npc) QuestService.spawnQuestNpc(210040000, player.getInstanceId(), 204623, 195f, 1916.7f, 114.02f, (byte) 112);
+				Npc soul2 = (Npc) QuestService.spawnQuestNpc(210040000, player.getInstanceId(), 204624, 197.8f, 1914.5f, 114.38f, (byte) 29);
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(true, 1111051, soul1.getObjectId(), 0));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(true, 1111052, soul2.getObjectId(), 0));
+
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+					@Override
+					public void run() {
+						if (soul1 != null && !soul1.getLifeStats().isAlreadyDead())
+							soul1.getController().onDelete();
+						if (soul2 != null && !soul2.getLifeStats().isAlreadyDead())
+							soul2.getController().onDelete();
+					}
+				}, 20000);
 				return useQuestObject(env, 3, 4, false, 0, 0, 1, 182201613, 1); // 4
 			}
 		}

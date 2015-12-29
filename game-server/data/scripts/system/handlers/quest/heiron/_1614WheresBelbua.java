@@ -56,10 +56,16 @@ public class _1614WheresBelbua extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
+							} else if (qs.getQuestVarById(0) == 1) {
+								return sendQuestDialog(env, 1352);
 							}
 						}
 						case SETPRO1: {
-							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 376f, 529f, 133f, 0, 1);
+							changeQuestStep(env, 0, 1, false);
+							return sendQuestDialog(env, 1352);
+						}
+						case SETPRO2: {
+							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 376f, 529f, 133f, 1, 2);
 						}
 					}
 				}
@@ -80,9 +86,8 @@ public class _1614WheresBelbua extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 1) {
-				changeQuestStep(env, 1, 0, false);
+			if (qs.getQuestVarById(0) == 2) {
+				changeQuestStep(env, 2, 1, false);
 			}
 		}
 		return false;
@@ -90,11 +95,11 @@ public class _1614WheresBelbua extends QuestHandler {
 
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 1, true); // reward
+		return defaultFollowEndEvent(env, 2, 2, true); // reward
 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 0, false); // 0
+		return defaultFollowEndEvent(env, 2, 1, false); // 1
 	}
 }

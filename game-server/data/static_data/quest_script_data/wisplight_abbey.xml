@@ -36,12 +36,12 @@
 		[END] SUMMARY
 	-->
 	<!-- REPORTING QUESTS --> 
-	<report_to id="19600" start_npc_ids="000000" end_npc_ids="804651"/>
-	<report_to_many id="19601" start_npc_ids="804651" end_npc_ids="804655">
-		<npc_infos var="0" npc_id="804652" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="804653" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="804654" quest_dialog="2034"/>
-		<npc_infos var="3" npc_id="804655" quest_dialog="2375" close_dialog="1009"/>
+	<report_to id="19600" start_npc_ids="804651" end_npc_ids="804651"/>
+	<report_to_many id="19601" start_npc_ids="804651" start_dialog_id="4762" end_npc_ids="804655">
+		<npc_infos var="0" npc_id="804652" quest_dialog="1011"/>
+		<npc_infos var="1" npc_id="804653" quest_dialog="1352"/>
+		<npc_infos var="2" npc_id="804654" quest_dialog="1693"/>
+		<npc_infos var="3" npc_id="804655" quest_dialog="10002" close_dialog="1009"/>
 	</report_to_many>
 	<report_to_many id="19602" start_npc_ids="804652" end_npc_ids="798155">
 		<npc_infos var="0" npc_id="205985" quest_dialog="1352"/>

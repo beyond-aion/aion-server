@@ -45,4 +45,16 @@ public class SiegeConfig {
 	 */
 	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1")
 	public static float SIEGE_HEALTH_MULTIPLIER;
+	
+	@Property(key ="gameserver.siege.panesterra.ahserion.enable", defaultValue="true")
+	public static boolean AHSERION_ENABLED = false;
+	
+	@Property(key ="gameserver.siege.panesterra.ahserion.minplayer.type1", defaultValue="12")
+	public static int AHSERION_MIN_PLAYERS_TEAM_TYPE_1 = 12;
+	
+	@Property(key ="gameserver.siege.panesterra.ahserion.maxplayer.type1", defaultValue="24")
+	public static int AHSERION_MAX_PLAYERS_TEAM_TYPE_1 = 24;
+	
+	@Property(key ="gameserver.siege.panesterra.ahserion.teamType", defaultValue="2")
+	public static byte AHSERION_TEAM_TYPE = 2;
 }

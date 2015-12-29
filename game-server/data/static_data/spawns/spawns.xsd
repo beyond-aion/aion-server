@@ -19,6 +19,7 @@
 			<xs:element name="vortex_spawn" type="VortexSpawn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="mercenary_spawn" type="MercenarySpawn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="assault_spawn" type="AssaultSpawn" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ahserion_spawn" type="AhserionsFlightSpawn" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="map_id" type="xs:int"/>
 	</xs:complexType>
@@ -54,6 +55,27 @@
 		</xs:sequence>
 		<xs:attribute name="state" type="StateType"/>
 	</xs:complexType>
+	<xs:complexType name="AhserionsFlightSpawn">
+		<xs:sequence>
+			<xs:element name="ahserion_stage_spawn" type="AhserionStageSpawnTemplate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="team" type="PanesterraTeam"/>
+	</xs:complexType>
+	<xs:complexType name="AhserionStageSpawnTemplate">
+		<xs:sequence>
+			<xs:element name="spawn" type="Spawn" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="stage" type="xs:int"/>
+	</xs:complexType>
+	<xs:simpleType name="PanesterraTeam">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GAB1_SUB_DEST_69"/>
+			<xs:enumeration value="GAB1_SUB_DEST_70"/>
+			<xs:enumeration value="GAB1_SUB_DEST_71"/>
+			<xs:enumeration value="GAB1_SUB_DEST_72"/>
+			<xs:enumeration value="BALAUR"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="StateType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="INVASION"/>

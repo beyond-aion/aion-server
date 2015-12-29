@@ -169,19 +169,20 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	public void onCapture() {
 		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRace winnerRace = winner.getSiegeRace();
 
 		try {
 			// Players gain buffs on capture of some fortresses
-			applyWorldBuffs(winner.getSiegeRace(), getSiegeLocation().getRace());
+			applyWorldBuffs(winnerRace, getSiegeLocation().getRace());
 		} catch (Exception e) {
 			log.error("Error while applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
 		}
 		// Set new fortress and artifact owner race
-		getSiegeLocation().setRace(winner.getSiegeRace());
-		getArtifact().setRace(winner.getSiegeRace());
+		getSiegeLocation().setRace(winnerRace);
+		getArtifact().setRace(winnerRace);
 
 		// reset occupy count
-		getSiegeLocation().setOccupiedCount(1);
+		getSiegeLocation().setOccupiedCount(winnerRace == SiegeRace.BALAUR ? 0 : 1);
 
 		if (this.oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
 			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
@@ -192,7 +193,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 
 		// If new race is balaur
-		if (SiegeRace.BALAUR == winner.getSiegeRace()) {
+		if (SiegeRace.BALAUR == winnerRace) {
 			getSiegeLocation().setLegionId(0);
 			getArtifact().setLegionId(0);
 		} else {

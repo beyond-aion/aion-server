@@ -885,11 +885,6 @@
 		<spawn npc_id="203501" respawn_time="295">
 			<spot x="223.975" y="2679.86" z="295.25" h="105"/>
 		</spawn>
-		<!-- Gunghelm -->
-		<spawn npc_id="790009" respawn_time="295">
-			<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
-			<spot x="1080.68" y="2368.71" z="259.651" h="74"/>
-		</spawn>
 		<!-- Gurt -->
 		<spawn npc_id="203503" respawn_time="295">
 			<spot x="235.498" y="2700.16" z="295.161" h="60"/>

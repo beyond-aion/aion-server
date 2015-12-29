@@ -3,17 +3,15 @@ package quest.heiron;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Gigi, Shepper
+ * @modified Pad
  */
 public class _1563TheLegendofVindachinerk extends QuestHandler {
 
@@ -26,6 +24,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798096).addOnQuestStart(questId); // Poporinerk
+		qe.registerQuestNpc(798096).addOnTalkEvent(questId); // Poporinerk
 		qe.registerQuestNpc(279005).addOnTalkEvent(questId); // Kohrunerk
 		qe.registerQuestItem(182201729, questId); // Jaiorunerk's Diary
 	}
@@ -51,53 +50,63 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 
-		if (qs.getStatus() == QuestStatus.START) {
+		if (qs.getStatus() == QuestStatus.START && var == 1) {
 			switch (targetId) {
 				case 798096: // Poporinerk
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
-							return checkQuestItems(env, 1, 0, true, 5, 1353);
+							if (player.getInventory().getItemCountByItemId(182201729) < 1) {
+								return sendQuestDialog(env, 1353);
+							}
+							else {
+								player.getInventory().decreaseByItemId(182201729, 1);
+								qs.setQuestVar(2);
+								qs.setStatus(QuestStatus.REWARD);
+								updateQuestStatus(env);
+								return sendQuestDialog(env, 5);
+							}
 					}
 					break;
-				case 279005:
+				case 279005: // Kohrunerk
 					switch (dialog) {
 						case QUEST_SELECT:
-							if (var == 1)
-								return sendQuestDialog(env, 1352);
+							return sendQuestDialog(env, 1438);
 						case SETPRO2:
-							return checkQuestItems(env, 1, 2, true, 6, 1439);
+							if (player.getInventory().getItemCountByItemId(182201729) < 1) {
+								return sendQuestDialog(env, 1439);
+							}
+							else {
+								player.getInventory().decreaseByItemId(182201729, 1);
+								qs.setQuestVar(2);
+								qs.setStatus(QuestStatus.REWARD);
+								updateQuestStatus(env);
+								return sendQuestDialog(env, 6);
+							}
 					}
 			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 798096)
+				return sendQuestEndDialog(env, 0);
+			else if (targetId == 279005)
+				return sendQuestEndDialog(env, 1);
 		}
-		if (sendQuestRewardDialog(env, 798096, 0, 0) || sendQuestRewardDialog(env, 279005, 0, 1))
-			return true;
-		else
-			return false;
+		return false;
 	}
 
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 
 		if (id != 182201729)
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				qs.setQuestVar(1);
-				updateQuestStatus(env);
-			}
-		}, 3000);
+		changeQuestStep(env, 0, 1, false);
+		
 		return HandlerResult.SUCCESS;
 	}
 }
