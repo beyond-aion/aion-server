@@ -557,8 +557,6 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 		if (player.getInventory().getFirstItemByItemId(186000134) == null) {
 			doReward(player);
-		} else {
-			player.getInventory().decreaseByItemId(186000134, 1);
 		}
 		return true;
 	}

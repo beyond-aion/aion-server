@@ -16,13 +16,17 @@ public class ArbiterAi2 extends NpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
+		if (player.getInventory().getFirstItemByItemId(186000134) != null) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
+		} else {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+		}
 	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		int instanceId = getPosition().getInstanceId();
-		if (dialogId == DialogAction.SETPRO1.id()) {
+		if (dialogId == DialogAction.SETPRO1.id() && player.getInventory().decreaseByItemId(186000134, 1)) {
 			switch (getNpcId()) {
 				case 205682:
 					TeleportService2.teleportTo(player, 300320000, instanceId, 357.10208f, 1662.702f, 95.9803f, (byte) 60);
@@ -47,6 +51,7 @@ public class ArbiterAi2 extends NpcAI2 {
 					break;
 			}
 		}
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		return true;
 	}
 
