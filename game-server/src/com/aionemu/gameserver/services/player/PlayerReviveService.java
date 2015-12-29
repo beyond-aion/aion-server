@@ -20,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.services.VortexService;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -164,6 +165,11 @@ public class PlayerReviveService {
 
 	public static final void instanceRevive(Player player, int skillId) {
 		// Revive in Instances
+		if (player.getPanesterraTeam() != null) {
+  			if (AhserionInstance.getInstance().revivePlayer(player, skillId)) {
+  				return;
+  			}
+  		}
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player)) {
 			return;
 		}

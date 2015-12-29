@@ -84,6 +84,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -241,6 +242,9 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
+	
+	/*------ Panesterra ------*/
+	private PanesterraTeam panesterraTeam = null;
 
 	/**
 	 * Used for JUnit tests
@@ -1355,14 +1359,11 @@ public class Player extends Creature {
 			return false;
 
 		Long coolDown = itemCoolDowns.get(limits.getDelayId()).getReuseTime();
-		if (coolDown == null)
-			return false;
 
 		if (coolDown < System.currentTimeMillis()) {
 			itemCoolDowns.remove(limits.getDelayId());
 			return false;
 		}
-
 		return true;
 	}
 
@@ -2253,4 +2254,11 @@ public class Player extends Creature {
 		return super.canPerformMove();
 	}
 
+	public void setPanesterraTeam(PanesterraTeam panesterraTeam) {
+		this.panesterraTeam = panesterraTeam;
+	}
+
+	public PanesterraTeam getPanesterraTeam() {
+		return panesterraTeam;
+	}
 }

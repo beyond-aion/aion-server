@@ -40,7 +40,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 				public void died(Creature creature) {
 					if (effected instanceof Player) {
 						Player effected = (Player) effect.getEffected();
-						if (effected.isInInstance())
+						if (effected.isInInstance() || effected.getPanesterraTeam() != null)
 							PlayerReviveService.instanceRevive(effected, skillId);
 						else if (effected.getKisk() != null)
 							PlayerReviveService.kiskRevive(effected, skillId);

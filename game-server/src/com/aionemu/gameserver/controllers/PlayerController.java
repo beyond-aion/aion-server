@@ -403,7 +403,9 @@ public class PlayerController extends CreatureController<Player> {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
-		if (showPacket) {
+		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
+			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));
+		}else if (showPacket) {
 			int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
 			if (player.getSKInfo().getRank() > 1)
 				kiskTimeRemaining = 0;
