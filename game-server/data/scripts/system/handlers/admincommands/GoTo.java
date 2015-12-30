@@ -114,6 +114,8 @@ public class GoTo extends AdminCommand {
 		// Marchutran
 		else if (destination.equalsIgnoreCase("Marchutan"))
 			goTo(player, WorldMapType.MARCHUTAN.getId(), 1557, 1429, 266);
+		else if (destination.equalsIgnoreCase("Fatebound") || destination.equalsIgnoreCase("Fatebound Abbey"))
+			goTo(player, WorldMapType.FATEBOUND_ABBEY.getId(), 281, 266, 97);
 		// Ishalgen
 		else if (destination.equalsIgnoreCase("Ishalgen"))
 			goTo(player, WorldMapType.ISHALGEN.getId(), 529, 2449, 281);

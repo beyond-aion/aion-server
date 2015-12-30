@@ -34,6 +34,9 @@ public class _19600WelcometoWisplightAbbey extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
+		if (qs == null)
+			return false;
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
 				switch (dialog) {

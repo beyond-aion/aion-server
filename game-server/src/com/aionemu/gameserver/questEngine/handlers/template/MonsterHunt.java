@@ -217,7 +217,7 @@ public class MonsterHunt extends QuestHandler {
 								if (m.getRewardVar()) {
 									qs.setStatus(QuestStatus.REWARD);
 								} else if (m.getRewardNextStep()) {
-									qs.setQuestVar(qs.getQuestVarById(0) + 1);
+									qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 									qs.setStatus(QuestStatus.REWARD);
 								}
 							}
