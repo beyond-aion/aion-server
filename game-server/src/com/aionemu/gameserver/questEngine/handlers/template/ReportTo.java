@@ -19,7 +19,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
  * @author MrPoke Like: Sleeping on the Job quest.
- * @modified Rolandas
+ * @modified Rolandas, Pad
  */
 public class ReportTo extends QuestHandler {
 
@@ -27,6 +27,8 @@ public class ReportTo extends QuestHandler {
 
 	private final Set<Integer> startNpcs = new HashSet<Integer>();
 	private final Set<Integer> endNpcs = new HashSet<Integer>();
+	private final int startDialogId;
+	private final int endDialogId;
 	private QuestItems workItem;
 
 	/**
@@ -35,7 +37,7 @@ public class ReportTo extends QuestHandler {
 	 * @param endNpcIds
 	 * @param itemId2
 	 */
-	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds) {
+	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, int startDialogId, int endDialogId) {
 		super(questId);
 		startNpcs.addAll(startNpcIds);
 		startNpcs.remove(0);
@@ -43,6 +45,8 @@ public class ReportTo extends QuestHandler {
 			endNpcs.addAll(endNpcIds);
 			endNpcs.remove(0);
 		}
+		this.startDialogId = startDialogId;
+		this.endDialogId = endDialogId;
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class ReportTo extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, 1011);
+						return sendQuestDialog(env, startDialogId == 0 ? 1011 : startDialogId);
 					}
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
@@ -112,7 +116,7 @@ public class ReportTo extends QuestHandler {
 			} else if (endNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, 2375);
+						return sendQuestDialog(env, endDialogId == 0 ? 2375 : endDialogId);
 					}
 					case SELECT_QUEST_REWARD: {
 						if (workItem != null) {
