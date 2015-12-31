@@ -2,7 +2,7 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
-			29600 [XML] Welcome Back
+			29600 [SCRIPT] Welcome Back
 			29601 [XML] Instruction on Instructors
 			29602 [XML] The Sheen of Newness
 			29603 [XML] [Daily] Brusthonin Brushback
@@ -36,55 +36,54 @@
 		[END] SUMMARY
 	-->
 	<!-- REPORTING QUESTS -->
-    <report_to id="29600" start_npc_ids="209677" end_npc_ids="804662"/>
-	<report_to_many id="29601" start_npc_ids="804662" end_npc_ids="804666">
-		<npc_infos var="0" npc_id="804663" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="804664" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="804665" quest_dialog="2034"/>
-		<npc_infos var="3" npc_id="804666" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="29601" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="804666">
+		<npc_infos var="0" npc_id="804663" quest_dialog="1011"/>
+		<npc_infos var="1" npc_id="804664" quest_dialog="1352"/>
+		<npc_infos var="2" npc_id="804665" quest_dialog="1693"/>
+		<npc_infos var="3" npc_id="804666" quest_dialog="10002" close_dialog="1009"/>
 	</report_to_many>
-	<report_to_many id="29602" start_npc_ids="804663" end_npc_ids="798155">
-		<npc_infos var="0" npc_id="205986" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="209476" quest_dialog="1693" close_dialog="1009"/>
+	<report_to_many id="29602" start_npc_ids="804663" start_dialog_id="4762" end_npc_ids="205150">
+		<npc_infos var="0" npc_id="205986" quest_dialog="1011"/>
+		<npc_infos var="1" npc_id="205150" quest_dialog="10002" close_dialog="1009"/>
 	</report_to_many>
-	<report_to id="29604" start_npc_ids="804663" end_npc_ids="204817"/>
-	<report_to id="29605" start_npc_ids="804663" end_npc_ids="800421"/>
-	<report_to id="29606" start_npc_ids="804663" end_npc_ids="205225"/>
-	<report_to id="29607" start_npc_ids="804663" end_npc_ids="204837"/>
-	<report_to_many id="29608" start_npc_ids="804664" end_npc_ids="799225">
-		<npc_infos var="0" npc_id="205986" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799225" quest_dialog="1693" close_dialog="1009"/>
+	<report_to id="29604" start_npc_ids="804663" start_dialog_id="4762" end_npc_ids="204817" end_dialog_id="10002"/>
+	<report_to id="29605" start_npc_ids="804663" start_dialog_id="4762" end_npc_ids="800421" end_dialog_id="10002"/>
+	<report_to id="29606" start_npc_ids="804663" start_dialog_id="4762" end_npc_ids="205225" end_dialog_id="10002"/>
+	<report_to id="29607" start_npc_ids="804663" start_dialog_id="4762" end_npc_ids="204837" end_dialog_id="10002"/>
+	<report_to_many id="29608" start_npc_ids="804664" start_dialog_id="4762" end_npc_ids="799225">
+		<npc_infos var="0" npc_id="205986" quest_dialog="1011"/>
+		<npc_infos var="1" npc_id="799225" quest_dialog="10002" close_dialog="1009"/>
 	</report_to_many>
-	<report_to id="29610" start_npc_ids="804664" end_npc_ids="799208"/>
-	<report_to id="29611" start_npc_ids="804664" end_npc_ids="799333"/>
-	<report_to id="29612" start_npc_ids="804664" end_npc_ids="799225"/>
-	<report_to id="29613" start_npc_ids="804664" end_npc_ids="802463"/>
-	<report_to id="29615" start_npc_ids="804665" end_npc_ids="799531"/>
-	<report_to id="29616" start_npc_ids="804665" end_npc_ids="205864"/>
-	<report_to id="29617" start_npc_ids="804665" end_npc_ids="205886"/>
-	<report_to id="29618" start_npc_ids="804665" end_npc_ids="205864"/>
-	<report_to id="29619" start_npc_ids="804665" end_npc_ids="800070"/>
-	<report_to id="29620" start_npc_ids="804666" end_npc_ids="800529"/>
-	<report_to id="29621" start_npc_ids="804666" end_npc_ids="802054"/>
-	<report_to id="29622" start_npc_ids="804666" end_npc_ids="801545"/>
-	<report_to id="29623" start_npc_ids="804666" end_npc_ids="802353"/>
-	<report_to id="29624" start_npc_ids="804666" end_npc_ids="802433"/>
-	<report_to id="29626" start_npc_ids="804666" end_npc_ids="804614"/>
-	<report_to id="29627" start_npc_ids="804666" end_npc_ids="804614"/>
-	<report_to id="29628" start_npc_ids="804666" end_npc_ids="802353"/>
-	<report_to id="29629" start_npc_ids="804666" end_npc_ids="801947"/>
-	<report_to id="29630" start_npc_ids="804666" end_npc_ids="804599"/>
+	<report_to id="29610" start_npc_ids="804664" start_dialog_id="4762" end_npc_ids="799208" end_dialog_id="10002"/>
+	<report_to id="29611" start_npc_ids="804664" start_dialog_id="4762" end_npc_ids="799333" end_dialog_id="10002"/>
+	<report_to id="29612" start_npc_ids="804664" start_dialog_id="4762" end_npc_ids="799225" end_dialog_id="10002"/>
+	<report_to id="29613" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="205579" end_dialog_id="10002"/>
+	<report_to id="29615" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="799531" end_dialog_id="10002"/>
+	<report_to id="29616" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="205864" end_dialog_id="10002"/>
+	<report_to id="29617" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="205886" end_dialog_id="10002"/>
+	<report_to id="29618" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="205864" end_dialog_id="10002"/>
+	<report_to id="29619" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="800070" end_dialog_id="10002"/>
+	<report_to id="29620" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="800529" end_dialog_id="10002"/>
+	<report_to id="29621" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="801280" end_dialog_id="10002"/>
+	<report_to id="29622" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="801545" end_dialog_id="10002"/>
+	<report_to id="29623" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="802353" end_dialog_id="10002"/>
+	<report_to id="29624" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="802433" end_dialog_id="10002"/>
+	<report_to id="29626" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="804614" end_dialog_id="10002"/>
+	<report_to id="29627" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="804614" end_dialog_id="10002"/>
+	<report_to id="29628" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="802353" end_dialog_id="10002"/>
+	<report_to id="29629" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="801947" end_dialog_id="10002"/>
+	<report_to id="29630" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="804599" end_dialog_id="10002"/>
 	<!-- MONSTER HUNT QUESTS -->
-	<monster_hunt id="29603" start_npc_ids="804651" end_npc_ids="209476">	
-		<monster var="0" npc_ids="214498 214494" end_var="10"/>
+	<monster_hunt id="29603" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205150">	
+		<monster var="1" npc_ids="214497 214498 214493 214494" end_var="10" end_reward_next_step="true"/>
 	</monster_hunt>
-	<monster_hunt id="29609" start_npc_ids="804651" end_npc_ids="799225">	
-		<monster var="0" npc_ids="215989 215931" end_var="10"/>
+	<monster_hunt id="29609" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="799225">	
+		<monster var="1" npc_ids="215989 215931" end_var="10" end_reward_next_step="true"/>
 	</monster_hunt>
-	<monster_hunt id="29614" start_npc_ids="804651" end_npc_ids="802463">	
-		<monster var="0" npc_ids="217873 217879" end_var="10"/>
+	<monster_hunt id="29614" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205579">	
+		<monster var="1" npc_ids="217872 217873 217878 217879" end_var="10" end_reward_next_step="true"/>
 	</monster_hunt>
-	<monster_hunt id="29625" start_npc_ids="804651" end_npc_ids="800529">	
-		<monster var="0" npc_ids="230162 230161" end_var="10"/>
+	<monster_hunt id="29625" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="800529">	
+		<monster var="1" npc_ids="230162 230161" end_var="10" end_reward_next_step="true"/>
 	</monster_hunt>
 </quest_scripts>

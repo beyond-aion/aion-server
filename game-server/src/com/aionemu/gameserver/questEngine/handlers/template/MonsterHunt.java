@@ -30,7 +30,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
- * @reworked vlog, Bobobear
+ * @reworked vlog, Bobobear, Pad
  */
 public class MonsterHunt extends QuestHandler {
 
@@ -109,7 +109,8 @@ public class MonsterHunt extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
+			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
+				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, startDialog != 0 ? startDialog : 1011);
 				} else {
@@ -212,8 +213,13 @@ public class MonsterHunt extends QuestHandler {
 								total >>= 6;
 								qs.setQuestVarById(varsUsed, value);
 							}
-							if (total <= m.getEndVar() && m.getRewardVar()) {
-								qs.setStatus(QuestStatus.REWARD);
+							if (qs.getQuestVarById(m.getVar()) == m.getEndVar()) {
+								if (m.getRewardVar()) {
+									qs.setStatus(QuestStatus.REWARD);
+								} else if (m.getRewardNextStep()) {
+									qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+									qs.setStatus(QuestStatus.REWARD);
+								}
 							}
 							updateQuestStatus(env);
 						}
