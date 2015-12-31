@@ -282,7 +282,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
 						cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));
 						cd.setWhBonusExpands(resultSet.getInt("wh_bonus_expands"));
-						cd.setOnline(resultSet.getBoolean("online"));
 						cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
 						cd.setDp(resultSet.getInt("dp"));
 						cd.setDeathCount(resultSet.getInt("soul_sickness"));
