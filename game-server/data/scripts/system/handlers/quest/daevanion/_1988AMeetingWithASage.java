@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Nephis
+ * @modified Pad
  */
 public class _1988AMeetingWithASage extends QuestHandler {
 
@@ -26,6 +27,7 @@ public class _1988AMeetingWithASage extends QuestHandler {
 		qe.registerQuestNpc(203725).addOnQuestStart(questId);// Leah
 		qe.registerQuestNpc(203725).addOnTalkEvent(questId);// Leah
 		qe.registerQuestNpc(203989).addOnTalkEvent(questId);// Tumblusen
+		qe.registerQuestNpc(798018).addOnTalkEvent(questId);// Paorunerk
 		qe.registerQuestNpc(203771).addOnTalkEvent(questId);// Fermina
 	}
 
@@ -37,66 +39,34 @@ public class _1988AMeetingWithASage extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203725)// Leah
-			{
+			if (targetId == 203725) { // Leah
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 203989)// Tumblusen
-		{
-
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (targetId == 203989) { // Tumblusen
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialog() == DialogAction.SETPRO1)
+					return defaultCloseDialog(env, 0, 1);
 			}
-
-		} else if (targetId == 798018)// Paorunerk
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		} else if (targetId == 798018) { // Paorunerk
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialog() == DialogAction.SETPRO2)
+					return defaultCloseDialog(env, 1, 2);
 			}
-		} else if (targetId == 203771)// Fermina
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+		} else if (targetId == 203771) { // Fermina
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					removeQuestItem(env, 186000039, 1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)// Reward
-			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 4080);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
-					qs.setQuestVar(8);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
+				else if (env.getDialog() == DialogAction.SELECT_ACTION_2035)
+					return checkQuestItems(env, 2, 2, true, 2035, 2120);
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
+				return sendQuestEndDialog(env);
 			}
 		}
 

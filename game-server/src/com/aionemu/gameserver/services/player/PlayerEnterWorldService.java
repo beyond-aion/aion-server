@@ -109,6 +109,7 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
 import com.aionemu.gameserver.services.reward.AdventService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -398,6 +399,7 @@ public final class PlayerEnterWorldService {
 			World.getInstance().preSpawn(player);
 			player.getController().validateLoginZone();
 			VortexService.getInstance().validateLoginZone(player);
+			AhserionInstance.getInstance().onPlayerLogin(player);
 
 			// ----------------------------- Retail sequence -----------------------------
 			client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));

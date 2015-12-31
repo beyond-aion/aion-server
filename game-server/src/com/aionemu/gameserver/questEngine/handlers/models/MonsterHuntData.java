@@ -20,7 +20,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
 
 /**
- * @author MrPoke, modified Bobobear
+ * @author MrPoke, @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MonsterHuntData", propOrder = { "monster" })
@@ -70,6 +70,8 @@ public class MonsterHuntData extends XMLQuest {
 								mn.setEndVar(m.getEndVar());
 							if (m.getRewardVar())
 								mn.setRewardVar(m.getRewardVar());
+							if (m.getRewardNextStep())
+								mn.setRewardNextStep(m.getRewardNextStep());
 							if (m.getNpcIds() != null)
 								mn.addNpcIds(m.getNpcIds());
 							if (m.getNpcSequence() != null)

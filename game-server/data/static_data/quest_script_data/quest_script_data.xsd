@@ -283,6 +283,8 @@
 			<xs:extension base="QuestScriptData">
 				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
 				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
+				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
+				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -355,6 +357,7 @@
 		<xs:attribute name="npc_ids" type="IntListType"/>
 		<xs:attribute name="npc_seq" type="xs:int"/>
 		<xs:attribute name="end_var_reward" type="xs:boolean" default="false"/>
+		<xs:attribute name="end_reward_next_step" type="xs:boolean" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="KillInWorldData">
 		<xs:complexContent>

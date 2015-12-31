@@ -2,10 +2,9 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.team.legion.LegionEmblem;
@@ -13,6 +12,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
+
+import javolution.util.FastMap;
 
 /**
  * @author Sarynth
@@ -44,10 +45,43 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeC(0);
 			writeH(0);
 			return;
-		}
+		} 
 
-		writeC(infoType);
-		writeH(locations.size());
+		if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() >= 69 
+				&& player.getPanesterraTeam().getTeamId().getId() <= 72) {
+			writeC(0);
+			writeH(4); //4 Panesterra Fortresses
+			
+			int fortressId = player.getPanesterraTeam().getFortressId();
+			Race playerRace = player.getRace();
+			for (int i=0; i < 4; i++) {
+				int curFortress = 10111 + (i*100); // 10111, 10211, 10311, 10411
+				writeD(curFortress);
+				writeD(0); //belongs to no legion
+				//default emblem id & color
+				writeD(0x00);
+				writeC(255);
+				writeC(0x00);
+				writeC(0x00);
+				writeC(0x00);
+					
+				writeC(curFortress == fortressId ? playerRace.getRaceId() : playerRace == Race.ASMODIANS ? Race.ELYOS.getRaceId() : Race.ASMODIANS.getRaceId());
+				writeC(0); //not vulnerable
+				writeC(0); //cannot teleport
+				writeC(0); //next state invulnerable
+					
+				writeH(0); 
+				writeH(0);
+				writeD(0);
+					
+				writeD(NetworkConfig.GAMESERVER_ID); //serverId, we dont have to save it since theres only 1 server running
+				writeD(0);
+				writeD(0);
+			}
+		} else {
+			writeC(infoType);
+			writeH(locations.size());
+
 		for (SiegeLocation loc : locations.values()) {
 			LegionEmblem emblem = new LegionEmblem();
 			int legionId = loc.getLegionId();
@@ -74,5 +108,6 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeD(0); // unk 4.7 (some timestamp, maybe Capture Date?)
 			writeD(loc.getOccupiedCount());
 		}
+	}
 	}
 }

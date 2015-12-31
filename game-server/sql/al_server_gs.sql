@@ -345,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `legion_members` (
 CREATE TABLE IF NOT EXISTS `legion_emblems` (
   `legion_id` int(11) NOT NULL,
   `emblem_id` tinyint(3) NOT NULL DEFAULT 0,
-  `color_a` tinyint(3) NOT NULL DEFAULT 0;
+  `color_a` tinyint(3) NOT NULL DEFAULT 0,
   `color_r` tinyint(3) NOT NULL DEFAULT 0,
   `color_g` tinyint(3) NOT NULL DEFAULT 0,
   `color_b` tinyint(3) NOT NULL DEFAULT 0,

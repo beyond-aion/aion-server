@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.templates.spawns;
 import java.util.HashMap;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +12,15 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
+import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexStateType;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -90,6 +92,20 @@ public class SpawnGroup2 extends AbstractLockManager {
 			spawnTemplate.setSiegeRace(race);
 			spawnTemplate.setSiegeModType(mod);
 			spots.add(spawnTemplate);
+		}
+	}
+	
+	/**
+	 * For Ahserions Flight
+	 */
+	public SpawnGroup2(int worldId, Spawn spawn, int stage, PanesterraTeamId team) {
+		this.worldId = worldId;
+		initializing(spawn);
+		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
+			AhserionsFlightSpawnTemplate ahserionTemplate = new AhserionsFlightSpawnTemplate(this, template);
+			ahserionTemplate.setStage(stage);
+			ahserionTemplate.setPanesterraTeam(team);
+			spots.add(ahserionTemplate);
 		}
 	}
 

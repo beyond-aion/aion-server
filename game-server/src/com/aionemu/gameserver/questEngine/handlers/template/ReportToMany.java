@@ -163,6 +163,11 @@ public class ReportToMany extends QuestHandler {
 					} else if (dialog.id() == targetNpcInfo.getQuestDialog() + 1 && targetNpcInfo.getMovie() != 0) {
 						sendQuestDialog(env, targetNpcInfo.getQuestDialog() + 1);
 						return playQuestMovie(env, targetNpcInfo.getMovie());
+					} else if (dialog == DialogAction.SET_SUCCEED) {
+						qs.setQuestVar(maxVar);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return closeDialogWindow(env);
 					} else if (dialog.id() == closeDialog) {
 						if ((dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)
 							|| QuestService.collectItemCheck(env, true)) {

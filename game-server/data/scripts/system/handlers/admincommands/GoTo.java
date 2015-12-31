@@ -44,6 +44,9 @@ public class GoTo extends AdminCommand {
 		// Kaisinel
 		else if (destination.equalsIgnoreCase("Kaisinel"))
 			goTo(player, WorldMapType.KAISINEL.getId(), 2155, 1567, 1205);
+		// Wisplight Abbey
+		else if (destination.equalsIgnoreCase("Wisplight") || destination.equalsIgnoreCase("Wisplight Abbey"))
+			goTo(player, WorldMapType.WISPLIGHT_ABBEY.getId(), 247, 228, 130);
 		// Poeta
 		else if (destination.equalsIgnoreCase("Poeta"))
 			goTo(player, WorldMapType.POETA.getId(), 806, 1242, 119);
@@ -111,6 +114,8 @@ public class GoTo extends AdminCommand {
 		// Marchutran
 		else if (destination.equalsIgnoreCase("Marchutan"))
 			goTo(player, WorldMapType.MARCHUTAN.getId(), 1557, 1429, 266);
+		else if (destination.equalsIgnoreCase("Fatebound") || destination.equalsIgnoreCase("Fatebound Abbey"))
+			goTo(player, WorldMapType.FATEBOUND_ABBEY.getId(), 281, 266, 97);
 		// Ishalgen
 		else if (destination.equalsIgnoreCase("Ishalgen"))
 			goTo(player, WorldMapType.ISHALGEN.getId(), 529, 2449, 281);

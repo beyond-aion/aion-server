@@ -8,14 +8,15 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultSpawn;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenarySpawn;
+import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawn;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawn;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -38,6 +39,8 @@ public class SpawnMap {
 	private List<AssaultSpawn> assaultSpawns;
 	@XmlElement(name = "vortex_spawn")
 	private List<VortexSpawn> vortexSpawns;
+	@XmlElement(name = "ahserion_spawn")
+	private List<AhserionsFlightSpawn> ahserionSpawns;
 	@XmlAttribute(name = "map_id")
 	private int mapId;
 
@@ -121,6 +124,13 @@ public class SpawnMap {
 
 	public void addVortexSpawns(VortexSpawn spawns) {
 		getVortexSpawns().add(spawns);
+	}
+
+	public List<AhserionsFlightSpawn> getAhserionSpawns() {
+		if (ahserionSpawns == null) {
+			ahserionSpawns = new FastTable<AhserionsFlightSpawn>();
+		}
+		return ahserionSpawns;
 	}
 
 }
