@@ -71,6 +71,9 @@ public class SkillLearnService {
 				// Why adding after the packet ?
 				player.getSkillList().addSkill(player, 30002, skillLevel);
 			}
+		} else {
+			if (!player.getSkillList().isSkillPresent(3512))
+				player.getSkillList().addSkill(player, 3512, 129);
 		}
 	}
 

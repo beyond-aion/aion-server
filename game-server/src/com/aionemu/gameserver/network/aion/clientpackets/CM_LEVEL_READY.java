@@ -50,9 +50,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
-		if (!activePlayer.getCommonData().isOnline())
-			activePlayer.getCommonData().setOnline(true);
-
 		if (activePlayer.getHouseRegistry() != null)
 			sendPacket(new SM_HOUSE_OBJECTS(activePlayer));
 		if (activePlayer.isInInstance()) {

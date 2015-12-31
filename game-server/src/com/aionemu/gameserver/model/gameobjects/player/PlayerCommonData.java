@@ -279,7 +279,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public boolean isReadyForSalvationPoints() {
-		return getLevel() >= 15 && getLevel() < GSConfig.PLAYER_MAX_LEVEL + 1;
+		return getLevel() >= 15;
 	}
 
 	public boolean isReadyForReposteEnergy() {
@@ -287,9 +287,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public void addReposteEnergy(long add) {
-		if (!this.isReadyForReposteEnergy())
-			return;
-
 		reposteCurrent += add;
 		if (reposteCurrent < 0)
 			reposteCurrent = 0;
@@ -310,11 +307,11 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public long getCurrentReposteEnergy() {
-		return isReadyForReposteEnergy() ? this.reposteCurrent : 0;
+		return reposteCurrent;
 	}
 
 	public long getMaxReposteEnergy() {
-		return isReadyForReposteEnergy() ? this.reposteMax : 0;
+		return reposteMax;
 	}
 
 	/**

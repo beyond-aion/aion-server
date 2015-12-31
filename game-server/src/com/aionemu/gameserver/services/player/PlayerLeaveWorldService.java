@@ -16,6 +16,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.summons.SummonMode;
@@ -70,7 +71,8 @@ public class PlayerLeaveWorldService {
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
 		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
-		player.onLoggedOut();
+		player.getResponseRequester().denyAll();
+		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);
 		ExchangeService.getInstance().cancelExchange(player);
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
@@ -155,8 +157,9 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		con.setActivePlayer(null);
 		player.setClientConnection(null);
+		if (con != null)
+			con.setActivePlayer(null);
 	}
 
 	/**

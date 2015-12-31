@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Nonnull;
+
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 
@@ -42,7 +44,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
-import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
@@ -246,18 +247,7 @@ public class Player extends Creature {
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
-	/**
-	 * Used for JUnit tests
-	 */
-	private Player(PlayerCommonData plCommonData) {
-		super(plCommonData.getPlayerObjId(), new PlayerController(), null, plCommonData, null);
-		this.playerCommonData = plCommonData;
-		this.playerAccount = new Account(0);
-		this.absStatsHolder = new AbsoluteStatOwner(this, 0);
-		this.skList = new SerialKiller(this);
-	}
-
-	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
+	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance, @Nonnull Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
 		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;
@@ -834,15 +824,6 @@ public class Player extends Creature {
 	@Override
 	public PlayerEffectController getEffectController() {
 		return (PlayerEffectController) super.getEffectController();
-	}
-
-	public void onLoggedIn() {
-		friendList.setStatus(Status.ONLINE, getCommonData());
-	}
-
-	public void onLoggedOut() {
-		requester.denyAll();
-		friendList.setStatus(FriendList.Status.OFFLINE, getCommonData());
 	}
 
 	/**
