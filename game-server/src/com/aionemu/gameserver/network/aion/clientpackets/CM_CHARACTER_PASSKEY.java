@@ -79,7 +79,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 					client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
 
 					if (chaPasskey.getConnectType() == ConnectType.ENTER)
-						PlayerEnterWorldService.startEnterWorld(chaPasskey.getObjectId(), client);
+						PlayerEnterWorldService.enterWorld(client, chaPasskey.getObjectId(), false);
 					else if (chaPasskey.getConnectType() == ConnectType.DELETE) {
 						PlayerAccountData playerAccData = client.getAccount().getPlayerAccountData(chaPasskey.getObjectId());
 

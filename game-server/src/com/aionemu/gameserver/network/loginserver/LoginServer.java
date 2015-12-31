@@ -238,9 +238,6 @@ public class LoginServer {
 					// kick
 					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 					PlayerLeaveWorldService.leaveWorld(player);
-				} else {
-					// this should never happen, but if: set offline
-					accountData.getPlayerCommonData().setOnline(false);
 				}
 				return false;
 			}

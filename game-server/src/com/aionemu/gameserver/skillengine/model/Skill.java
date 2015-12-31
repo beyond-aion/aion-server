@@ -1138,7 +1138,7 @@ public class Skill {
 			case 1826:
 			case 1828:
 			case 2673:
-			case 3512:
+			case 3512: // escape
 				return true;
 		}
 

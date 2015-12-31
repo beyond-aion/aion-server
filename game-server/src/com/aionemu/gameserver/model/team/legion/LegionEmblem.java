@@ -21,7 +21,7 @@ public class LegionEmblem {
 	private int uploadedSize = 0;
 	private byte[] uploadData;
 
-	private byte[] customEmblemData;
+	private byte[] customEmblemData = {};
 
 	/**
 	 * @return the customEmblemData

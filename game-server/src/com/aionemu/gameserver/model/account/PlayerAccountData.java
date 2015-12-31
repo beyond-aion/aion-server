@@ -40,6 +40,10 @@ public class PlayerAccountData {
 		return cbi;
 	}
 
+	public void setCharBanInfo(CharacterBanInfo cbi) {
+		this.cbi = cbi;
+	}
+
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}

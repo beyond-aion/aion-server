@@ -163,7 +163,7 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();
-		PlayerEnterWorldService.enterWorld(client, objectId);
+		PlayerEnterWorldService.enterWorld(client, objectId, true);
 		Player player = client.getActivePlayer();
 		if (!check_ticket) {
 			if (!gender_change)

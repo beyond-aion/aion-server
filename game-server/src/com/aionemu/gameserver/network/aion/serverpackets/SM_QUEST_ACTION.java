@@ -19,8 +19,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	protected int action;
 	private int timer;
 	private int sharerId;
-	@SuppressWarnings("unused")
-	private boolean unk;
+	private boolean shareInAlliance;
 
 	SM_QUEST_ACTION() {
 
@@ -79,11 +78,14 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		this.step = 0;
 	}
 
-	public SM_QUEST_ACTION(int questId, int sharerId, boolean unk) {
+	/**
+	 * Share quest with packet receiver.
+	 */
+	public SM_QUEST_ACTION(int questId, int sharerId, boolean shareInAlliance) {
 		this.action = 5;
 		this.questId = questId;
 		this.sharerId = sharerId;
-		this.unk = unk;
+		this.shareInAlliance = shareInAlliance;
 	}
 
 	/**
@@ -99,10 +101,6 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		this.step = 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.mmocore.SendablePacket#writeImpl(com.aionemu.commons.network.mmocore.MMOConnection)
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 
@@ -132,8 +130,8 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 				writeD(timer);// sets client timer ie 84030000 is 900 seconds/15 mins
 				writeC(timer > 0 ? 1 : 0);
 			case 5:
-				writeD(this.sharerId);
-				writeD(0);
+				writeD(sharerId);
+				writeD(shareInAlliance ? 1 : 0); // 0: group, 1: alliance
 				break;
 			case 6:
 				writeH(0x01);// ???
