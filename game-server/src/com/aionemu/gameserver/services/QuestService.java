@@ -428,38 +428,8 @@ public final class QuestService {
 		if (!inventoryItemCheck(env, warn))
 			return false;
 
-		if (template.getCombineSkill() != null) {
-			List<Integer> skills = new FastTable<Integer>(); // skills to check
-			if (template.getCombineSkill() == -1) // any skill
-			{
-				skills.add(30002);
-				skills.add(30003);
-				skills.add(40001);
-				skills.add(40002);
-				skills.add(40003);
-				skills.add(40004);
-				skills.add(40007);
-				skills.add(40008);
-				skills.add(40010);
-			} else {
-				skills.add(template.getCombineSkill());
-			}
-			boolean result = false;
-			for (int skillId : skills) {
-				PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()) {
-					if (template.getCategory().equals(QuestCategory.TASK) && skill.getSkillLevel() - 40 > template.getCombineSkillPoint())
-						continue;
-					result = true;
-					break;
-				}
-			}
-			if (!result) {
-				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TS_RANK(Integer.toString(template.getCombineSkillPoint())));
-				return false;
-			}
-		}
+		if (!checkCombineSkill(env, warn))
+			return false;
 
 		// check if NpcFaction daily quest
 		if (template.getNpcFactionId() != 0) {
@@ -583,12 +553,32 @@ public final class QuestService {
 			return false;
 
 		// Check required skills
+		if (!checkCombineSkill(env, false))
+			return false;
+
+		// Everything is ok
+		return true;
+	}
+
+	/**
+	 * Checks if the crafting/tapping skill point requirements for this quest
+	 * 
+	 * @return True, if the quest skill requirement meets the players skill points. 
+	 */
+	public static boolean checkCombineSkill(QuestEnv env, boolean warn) {
+		Player player = env.getPlayer();
+		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+
+		if (template == null)
+			return false;
+
 		if (template.getCombineSkill() != null) {
 			List<Integer> skills = new FastTable<Integer>(); // skills to check
-			if (template.getCombineSkill() == -1) // any skill
-			{
-				skills.add(30002);
-				skills.add(30003);
+			if (template.getCombineSkill() == -1) { // any skill
+				if (template.getNpcFactionId() != 12 && template.getNpcFactionId() != 13) { // exclude essence/aether tapping for crafting dailies
+					skills.add(30002);
+					skills.add(30003);
+				}
 				skills.add(40001);
 				skills.add(40002);
 				skills.add(40003);
@@ -602,17 +592,20 @@ public final class QuestService {
 			boolean result = false;
 			for (int skillId : skills) {
 				PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()
-					&& skill.getSkillLevel() - 40 <= template.getCombineSkillPoint()) {
+				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()) {
+					if (template.getCategory() == QuestCategory.TASK && skill.getSkillLevel() - 40 > template.getCombineSkillPoint())
+						continue;
 					result = true;
 					break;
 				}
 			}
-			if (!result)
+			if (!result) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TS_RANK(Integer.toString(template.getCombineSkillPoint())));
 				return false;
+			}
 		}
 
-		// Everything is ok
 		return true;
 	}
 
