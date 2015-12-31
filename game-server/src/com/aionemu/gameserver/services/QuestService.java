@@ -298,7 +298,6 @@ public final class QuestService {
 			player.getController().upgradePlayer();
 			SkillLearnService.addMissingSkills(player);
 		}
-		QuestEngine.getInstance().onLvlUp(env);
 		if (template.getNpcFactionId() != 0) {
 			player.getNpcFactions().completeQuest(template);
 		}
