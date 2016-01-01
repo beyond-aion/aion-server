@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Future;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.GeneralAIEvent;
 import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.custom.BattleService;
