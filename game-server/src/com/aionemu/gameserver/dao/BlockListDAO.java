@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dao;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.gameobjects.player.BlockList;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * Responsible for saving and loading data on players' block lists
@@ -17,7 +16,7 @@ public abstract class BlockListDAO implements DAO {
 	 * @param player
 	 * @return BlockList
 	 */
-	public abstract BlockList load(Player player);
+	public abstract BlockList load(int playerObjId);
 
 	/**
 	 * Adds the given object id to the list of blocked players for the given player
