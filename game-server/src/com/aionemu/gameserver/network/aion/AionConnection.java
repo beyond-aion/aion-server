@@ -237,21 +237,25 @@ public class AionConnection extends AConnection {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onDisconnect() {
 		pingChecker.stop();
-		if (getAccount() != null) {
+		if (getAccount() != null)
 			LoginServer.getInstance().aionClientDisconnected(getAccount().getId());
-		}
+
 		Player player = getActivePlayer();
 		if (player != null) {
 			// force stop movement of player
 			player.getMoveController().abortMove();
 			player.getController().stopMoving();
-			PlayerLeaveWorldService.leaveWorldAfterDelay(player, 15); // prevent ctrl+alt+del / close window exploit
+
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+				@Override
+				public void run() {
+					PlayerLeaveWorldService.leaveWorld(player);
+				}
+			}, 10 * 1000); // prevent ctrl+alt+del / close window exploit
 		}
 	}
 

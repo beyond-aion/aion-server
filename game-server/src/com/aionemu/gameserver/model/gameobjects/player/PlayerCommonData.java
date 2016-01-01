@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -64,6 +63,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int mentorFlagTime;
 	private int worldOwnerId;
 	private boolean isDaeva;
+	private boolean isInEditMode;
 
 	private BoundRadius boundRadius;
 
@@ -195,9 +195,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		if (this.noExp)
 			return;
 
-		if (CustomConfig.ENABLE_EXP_CAP)
-			value = value > CustomConfig.EXP_CAP_VALUE ? CustomConfig.EXP_CAP_VALUE : value;
-
 		long reward = value;
 		if (this.getPlayer() != null && rewardType != null)
 			reward = rewardType.calcReward(this.getPlayer(), value);
@@ -278,8 +275,16 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		}
 	}
 
+	public boolean isInEditMode() {
+		return isInEditMode;
+	}
+
+	public void setInEditMode(boolean isInEditMode) {
+		this.isInEditMode = isInEditMode;
+	}
+
 	public boolean isReadyForSalvationPoints() {
-		return getLevel() >= 15 && getLevel() < GSConfig.PLAYER_MAX_LEVEL + 1;
+		return getLevel() >= 15;
 	}
 
 	public boolean isReadyForReposteEnergy() {
@@ -287,9 +292,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public void addReposteEnergy(long add) {
-		if (!this.isReadyForReposteEnergy())
-			return;
-
 		reposteCurrent += add;
 		if (reposteCurrent < 0)
 			reposteCurrent = 0;
@@ -310,11 +312,11 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public long getCurrentReposteEnergy() {
-		return isReadyForReposteEnergy() ? this.reposteCurrent : 0;
+		return reposteCurrent;
 	}
 
 	public long getMaxReposteEnergy() {
-		return isReadyForReposteEnergy() ? this.reposteMax : 0;
+		return reposteMax;
 	}
 
 	/**
@@ -463,9 +465,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public int getLevel() {
-		if (isDaeva || !online)
-			return level;
-		return Math.min(level, 9);
+		return isDaeva ? level : Math.min(level, 9);
 	}
 
 	/* Get level without Daeva-check. Used for Guides for now */

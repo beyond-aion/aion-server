@@ -68,7 +68,7 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(realName));
 		} else if (!receiver.isWispable() && !sender.isGM()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_WHISPER_REFUSE(receiver.getName(AdminConfig.CUSTOMTAG_ENABLE)));
-		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER) {
+		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER && !receiver.isGM()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));
 		} else if (receiver.getBlockList().contains(sender.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_YOU_EXCLUDED(receiver.getName()));

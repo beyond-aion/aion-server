@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Nonnull;
+
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.PlayerController;
@@ -42,7 +43,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
-import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
@@ -171,7 +171,6 @@ public class Player extends Creature {
 	private boolean isResByPlayer = false;
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
-	private boolean edit_mode = false;
 	private Npc postman = null;
 	private boolean isInResurrectPosState = false;
 	private float resPosX = 0;
@@ -246,18 +245,7 @@ public class Player extends Creature {
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
-	/**
-	 * Used for JUnit tests
-	 */
-	private Player(PlayerCommonData plCommonData) {
-		super(plCommonData.getPlayerObjId(), new PlayerController(), null, plCommonData, null);
-		this.playerCommonData = plCommonData;
-		this.playerAccount = new Account(0);
-		this.absStatsHolder = new AbsoluteStatOwner(this, 0);
-		this.skList = new SerialKiller(this);
-	}
-
-	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
+	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance, @Nonnull Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
 		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;
@@ -792,18 +780,6 @@ public class Player extends Creature {
 	}
 
 	public void setTitleList(TitleList titleList) {
-		if (havePermission(MembershipConfig.TITLES_ADDITIONAL_ENABLE)) {
-			titleList.addEntry(102, 0);
-			titleList.addEntry(103, 0);
-			titleList.addEntry(104, 0);
-			titleList.addEntry(105, 0);
-			titleList.addEntry(106, 0);
-			titleList.addEntry(146, 0);
-			titleList.addEntry(151, 0);
-			titleList.addEntry(152, 0);
-			titleList.addEntry(160, 0);
-			titleList.addEntry(161, 0);
-		}
 		this.titleList = titleList;
 		titleList.setOwner(this);
 	}
@@ -834,15 +810,6 @@ public class Player extends Creature {
 	@Override
 	public PlayerEffectController getEffectController() {
 		return (PlayerEffectController) super.getEffectController();
-	}
-
-	public void onLoggedIn() {
-		friendList.setStatus(Status.ONLINE, getCommonData());
-	}
-
-	public void onLoggedOut() {
-		requester.denyAll();
-		friendList.setStatus(FriendList.Status.OFFLINE, getCommonData());
 	}
 
 	/**
@@ -1519,20 +1486,6 @@ public class Player extends Creature {
 
 	public void setSKInfo(SerialKiller serialKiller) {
 		skList = serialKiller;
-	}
-
-	/**
-	 * @author IlBuono
-	 */
-	public void setEditMode(boolean edit_mode) {
-		this.edit_mode = edit_mode;
-	}
-
-	/**
-	 * @return true, if the character is in plastic surgery/gender switch screen
-	 */
-	public boolean isInEditMode() {
-		return edit_mode;
 	}
 
 	public Npc getPostman() {

@@ -11,7 +11,7 @@ import javolution.util.FastTable;
 
 /**
  * @author MrPoke
- * @reworked vlog, Bobobear, Artur
+ * @reworked vlog, Bobobear, Artur, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Monster")
@@ -29,6 +29,9 @@ public class Monster {
 	@XmlAttribute(name = "end_var_reward")
 	protected boolean rewardVar = false;
 
+	@XmlAttribute(name = "end_reward_next_step")
+	protected boolean rewardNextStep = false;
+	
 	@XmlAttribute(name = "npc_ids")
 	protected List<Integer> npcIds;
 
@@ -94,8 +97,16 @@ public class Monster {
 	public boolean getRewardVar() {
 		return rewardVar;
 	}
+	
+	public boolean getRewardNextStep() {
+		return rewardNextStep;
+	}
 
 	public void setRewardVar(boolean value) {
 		this.rewardVar = value;
+	}
+	
+	public void setRewardNextStep(boolean value) {
+		this.rewardNextStep = value;
 	}
 }

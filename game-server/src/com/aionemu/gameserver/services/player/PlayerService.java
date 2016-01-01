@@ -184,7 +184,7 @@ public class PlayerService {
 		player.setSkillList(DAOManager.getDAO(PlayerSkillListDAO.class).loadSkillList(playerObjId));
 		player.setKnownlist(new KnownList(player));
 		player.setFriendList(DAOManager.getDAO(FriendListDAO.class).load(player));
-		player.setBlockList(DAOManager.getDAO(BlockListDAO.class).load(player));
+		player.setBlockList(DAOManager.getDAO(BlockListDAO.class).load(playerObjId));
 		player.setTitleList(DAOManager.getDAO(PlayerTitleListDAO.class).loadTitleList(playerObjId));
 		player.setPlayerSettings(DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(playerObjId));
 		DAOManager.getDAO(AbyssRankDAO.class).loadAbyssRank(player);

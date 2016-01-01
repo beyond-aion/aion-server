@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.Objects;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;

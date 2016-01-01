@@ -34,6 +34,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -503,17 +504,19 @@ public class BrokerService {
 			return;
 
 		int registeredItemsCount = getRegisteredItemsCount(player);
-		int registrationCommition = 0;
+		long registrationCommition = 0;
 		if (registeredItemsCount > 14) {
 			PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(BrokerMessages.NO_SPACE_AVAIABLE.getId()));
 			return;
-		} else if (registeredItemsCount > 9)
-			registrationCommition = Math.round(price * 0.04f);
+		} else if (registeredItemsCount > 9) // round down in order to match client prices
+			registrationCommition = (long) (price * count * 0.04f);
 		else
-			registrationCommition = Math.round(price * 0.02f);
+			registrationCommition = (long) (price * count * 0.02f);
 
 		if (registrationCommition < 10)
 			registrationCommition = 10;
+		else
+			registrationCommition = PricesService.getPriceForService(registrationCommition, player.getRace());
 
 		if (player.getInventory().getKinah() < registrationCommition) {
 			PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(BrokerMessages.NO_ENOUGHT_KINAH.getId()));
@@ -608,12 +611,11 @@ public class BrokerService {
 		}
 		if (brokerItem != null) {
 			if (!brokerItem.getSeller().equals(player.getName())) {
-				log.info("[AUDIT] Player: {} try get from broker not own item", player.getName());
+				log.info("[AUDIT] Player: {} tried to get item from broker that he doesn't own (may be due to name change)", player.getName());
 				return;
 			}
 			if (player.getInventory().isFull(brokerItem.getItem().getItemTemplate().getExtraInventoryId())) {
-				// TODO message
-				// TODO find on retail whether its possible to add to stacks when inventory is full
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_FULL_INVENTORY);
 				return;
 			}
 			synchronized (this) {

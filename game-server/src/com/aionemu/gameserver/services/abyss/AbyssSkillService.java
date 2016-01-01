@@ -36,13 +36,6 @@ public class AbyssSkillService {
 			}
 		}
 	}
-
-	/**
-	 * @param player
-	 */
-	public static final void onEnterWorld(Player player) {
-		updateSkills(player);
-	}
 }
 
 enum AbyssSkills {

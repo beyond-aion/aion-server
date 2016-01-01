@@ -5,7 +5,7 @@ import java.util.concurrent.Future;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
