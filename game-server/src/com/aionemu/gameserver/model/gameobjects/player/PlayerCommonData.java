@@ -469,9 +469,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public int getLevel() {
-		if (isDaeva || !online)
-			return level;
-		return Math.min(level, 9);
+		return isDaeva ? level : Math.min(level, 9);
 	}
 
 	/* Get level without Daeva-check. Used for Guides for now */
