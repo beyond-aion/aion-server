@@ -13,7 +13,6 @@ import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.PlayerController;
@@ -781,18 +780,6 @@ public class Player extends Creature {
 	}
 
 	public void setTitleList(TitleList titleList) {
-		if (havePermission(MembershipConfig.TITLES_ADDITIONAL_ENABLE)) {
-			titleList.addEntry(102, 0);
-			titleList.addEntry(103, 0);
-			titleList.addEntry(104, 0);
-			titleList.addEntry(105, 0);
-			titleList.addEntry(106, 0);
-			titleList.addEntry(146, 0);
-			titleList.addEntry(151, 0);
-			titleList.addEntry(152, 0);
-			titleList.addEntry(160, 0);
-			titleList.addEntry(161, 0);
-		}
 		this.titleList = titleList;
 		titleList.setOwner(this);
 	}
