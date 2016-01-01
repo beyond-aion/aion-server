@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.AccountTime;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_L2AUTH_LOGIN_CHECK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
@@ -231,7 +232,10 @@ public class LoginServer {
 	 */
 	private boolean validateAccount(Account account) {
 		for (PlayerAccountData accountData : account) {
-			if (accountData.getPlayerCommonData().isOnline()) {
+			PlayerCommonData pcd = accountData.getPlayerCommonData();
+			if (pcd.isInEditMode())
+				pcd.setInEditMode(false);
+			if (pcd.isOnline()) {
 				log.warn("[AUDIT] Possible dupe hack account: " + account.getId());
 				Player player = World.getInstance().findPlayer(accountData.getPlayerCommonData().getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {

@@ -51,7 +51,7 @@ public class CM_QUIT extends AionClientPacket {
 				for (PlayerAccountData plAccData : account.getSortedAccountsList())
 					plAccData.setCharBanInfo(DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
-			charEditScreen = player.isInEditMode();
+			charEditScreen = player.getCommonData().isInEditMode();
 			PlayerLeaveWorldService.leaveWorld(player);
 		}
 

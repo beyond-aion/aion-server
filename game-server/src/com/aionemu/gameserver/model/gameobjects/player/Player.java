@@ -172,7 +172,6 @@ public class Player extends Creature {
 	private boolean isResByPlayer = false;
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
-	private boolean edit_mode = false;
 	private Npc postman = null;
 	private boolean isInResurrectPosState = false;
 	private float resPosX = 0;
@@ -1500,20 +1499,6 @@ public class Player extends Creature {
 
 	public void setSKInfo(SerialKiller serialKiller) {
 		skList = serialKiller;
-	}
-
-	/**
-	 * @author IlBuono
-	 */
-	public void setEditMode(boolean edit_mode) {
-		this.edit_mode = edit_mode;
-	}
-
-	/**
-	 * @return true, if the character is in plastic surgery/gender switch screen
-	 */
-	public boolean isInEditMode() {
-		return edit_mode;
 	}
 
 	public Npc getPostman() {

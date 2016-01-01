@@ -139,7 +139,7 @@ public final class PlayerEnterWorldService {
 	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + gsVer.getDate();
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
 
-	public static final void enterWorld(final AionConnection client, int objectId, boolean ignoreReentryTime) {
+	public static final void enterWorld(final AionConnection client, int objectId) {
 		Account account = client.getAccount();
 		PlayerAccountData playerAccData = account.getPlayerAccountData(objectId);
 		if (playerAccData == null) {
@@ -148,7 +148,8 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (playerAccData.getPlayerCommonData() == null) {
+		PlayerCommonData pcd = playerAccData.getPlayerCommonData();
+		if (pcd == null) {
 			log.warn("Player enterWorld fail: CommonData for character obj ID {} is null.", objectId);
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
@@ -180,15 +181,15 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		Timestamp lastOnline = playerAccData.getPlayerCommonData().getLastOnline();
-		if (!ignoreReentryTime && lastOnline != null && System.currentTimeMillis() - lastOnline.getTime() < (GSConfig.CHARACTER_REENTRY_TIME * 1000)) {
+		Timestamp lastOnline = pcd.getLastOnline();
+		if (!pcd.isInEditMode() && lastOnline != null && System.currentTimeMillis() - lastOnline.getTime() < (GSConfig.CHARACTER_REENTRY_TIME * 1000)) {
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 			return;
 		}
 
 		final Player player = PlayerService.getPlayer(objectId, account);
 		if (player == null) {
-			log.warn("Player enterWorld fail: couldn't load player with obj ID {}.", objectId);
+			log.warn("Player enterWorld fail: couldn't load player with obj ID {}, account ID {}.", objectId, account.getId());
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
 		}
@@ -270,6 +271,7 @@ public final class PlayerEnterWorldService {
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
 		log.info("Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC and "
 			+ client.getHddSerial() + " HDD serial.");
+		pcd.setInEditMode(false);
 
 		World.getInstance().storeObject(player);
 

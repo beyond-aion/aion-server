@@ -64,6 +64,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int mentorFlagTime;
 	private int worldOwnerId;
 	private boolean isDaeva;
+	private boolean isInEditMode;
 
 	private BoundRadius boundRadius;
 
@@ -276,6 +277,14 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 				}
 			}
 		}
+	}
+
+	public boolean isInEditMode() {
+		return isInEditMode;
+	}
+
+	public void setInEditMode(boolean isInEditMode) {
+		this.isInEditMode = isInEditMode;
 	}
 
 	public boolean isReadyForSalvationPoints() {

@@ -134,8 +134,6 @@ public class PlayerLeaveWorldService {
 			player.getPostman().getController().onDelete();
 		player.setPostman(null);
 
-		player.setEditMode(false);
-
 		PunishmentService.stopPrisonTask(player, true);
 		PunishmentService.stopGatherableTask(player, true);
 
