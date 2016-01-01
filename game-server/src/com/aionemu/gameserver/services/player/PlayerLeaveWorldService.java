@@ -16,6 +16,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -45,8 +46,8 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
@@ -67,6 +68,12 @@ public class PlayerLeaveWorldService {
 		final AionConnection con = player.getClientConnection();
 		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
+		if (player.isSpawned() && player.getPosition().getMapRegion() == null) {
+			log.warn("Player " + player.getName() + " had mapRegion null in world " + player.getPosition().getMapId() + " so he was reset to bind point position");
+			BindPointPosition bp = player.getBindPoint();
+			player.setPosition(World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 0));
+		}
+
 		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
@@ -82,7 +89,7 @@ public class PlayerLeaveWorldService {
 		SerialKillerService.getInstance().onLogout(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
-		KiskService.getInstance().onLogout(player);	
+		KiskService.getInstance().onLogout(player);
 		player.getMoveController().abortMove();
 
 		if (player.isLooting())
@@ -160,22 +167,5 @@ public class PlayerLeaveWorldService {
 		player.setClientConnection(null);
 		if (con != null)
 			con.setActivePlayer(null);
-	}
-
-	/**
-	 * @param player
-	 *          the player that left the game
-	 * @param delay
-	 *          the delay in seconds
-	 */
-	public static final void leaveWorldAfterDelay(final Player player, int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				leaveWorld(player);
-			}
-
-		}, delay * 1000);
 	}
 }

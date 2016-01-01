@@ -31,8 +31,6 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.PlayerInitialData;
-import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -40,7 +38,6 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.google.common.collect.Maps;
@@ -286,24 +283,11 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setDp(resultSet.getInt("dp"));
 						cd.setDeathCount(resultSet.getInt("soul_sickness"));
 						cd.setCurrentReposteEnergy(resultSet.getLong("reposte_energy"));
-
 						float x = resultSet.getFloat("x");
 						float y = resultSet.getFloat("y");
 						float z = resultSet.getFloat("z");
 						byte heading = resultSet.getByte("heading");
 						int worldId = resultSet.getInt("world_id");
-						PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
-						MapRegion mr = World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().getRegion(x, y, z);
-						if (mr == null && playerInitialData != null) {
-							// unstuck unlucky characters :)
-							LocationData ld = playerInitialData.getSpawnLocation(cd.getRace());
-							x = ld.getX();
-							y = ld.getY();
-							z = ld.getZ();
-							heading = ld.getHeading();
-							worldId = ld.getMapId();
-						}
-
 						WorldPosition position = World.getInstance().createPosition(worldId, x, y, z, heading, 0);
 						cd.setPosition(position);
 						cd.setWorldOwnerId(resultSet.getInt("world_owner"));
