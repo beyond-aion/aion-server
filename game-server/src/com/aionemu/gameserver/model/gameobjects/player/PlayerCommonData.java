@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -195,9 +194,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	public void addExp(long value, RewardType rewardType, int npcNameId, String name) {
 		if (this.noExp)
 			return;
-
-		if (CustomConfig.ENABLE_EXP_CAP)
-			value = value > CustomConfig.EXP_CAP_VALUE ? CustomConfig.EXP_CAP_VALUE : value;
 
 		long reward = value;
 		if (this.getPlayer() != null && rewardType != null)
