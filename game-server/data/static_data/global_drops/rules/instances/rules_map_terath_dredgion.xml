@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Boss Medal Bundle" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219265" name="Bosun Kuchuran"/>
+			<gd_npc npc_id="219266" name="Archivist Davorkar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051594" name="Greater Contribution Bundle"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Hairpin Unique" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219265" name="Bosun Kuchuran"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003152" name="Kucharan's Hairpin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt Epic" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219265" name="Bosun Kuchuran"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001269" name="Kucharan's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Hairpin Unique" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219266" name="Archivist Davorkar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003153" name="Ksanat's Hairpin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt Epic" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219266" name="Archivist Davorkar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001270" name="Ksanat's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300440000" name="Terath_Dredgion"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219269" name="Gatekeeper Payad"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000117" name="Captain's Cabin Passage Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

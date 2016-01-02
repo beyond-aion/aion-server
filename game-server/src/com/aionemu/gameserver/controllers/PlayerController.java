@@ -173,8 +173,11 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
+		MapRegion region = getOwner().getPosition().getMapRegion();
+		if (region == null) // usually when player isn't spawned yet
+			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
-		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
+		for (int questId : region.getParent().getQuestIds()) {
 			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			// if (template.isTimeBased())
 			// continue;

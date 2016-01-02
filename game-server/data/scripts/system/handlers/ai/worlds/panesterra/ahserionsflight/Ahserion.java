@@ -3,15 +3,14 @@ package ai.worlds.panesterra.ahserionsflight;
 import java.util.HashMap;
 import java.util.Map;
 
+import ai.AggressiveNpcAI2;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstanceStatus;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
-
-import ai.AggressiveNpcAI2;
 
 /**
  * @author Yeats

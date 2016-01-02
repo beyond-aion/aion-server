@@ -332,7 +332,7 @@ public class DialogService {
 						}
 					}
 					PacketSendUtility.sendPacket(player, new SM_PLASTIC_SURGERY(player, check_ticket, changesex));
-					player.setEditMode(true);
+					player.getCommonData().setInEditMode(true);
 					break;
 				}
 				case MATCH_MAKER: // dredgion

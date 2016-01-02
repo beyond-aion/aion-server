@@ -154,18 +154,6 @@ public class CustomConfig {
 	public static long AP_CAP_VALUE;
 
 	/**
-	 * Enable EXP cap
-	 */
-	@Property(key = "gameserver.enable.exp.cap", defaultValue = "false")
-	public static boolean ENABLE_EXP_CAP;
-
-	/**
-	 * EXP cap value
-	 */
-	@Property(key = "gameserver.exp.cap.value", defaultValue = "48000000")
-	public static long EXP_CAP_VALUE;
-
-	/**
 	 * Enable no AP in mentored group.
 	 */
 	@Property(key = "gameserver.noap.mentor.group", defaultValue = "false")

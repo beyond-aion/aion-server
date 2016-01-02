@@ -22,8 +22,8 @@
 	<teleloc_template loc_id="21" mapid="210020000" name="Eltnen Fortress" name_id="400593"/><!-- flying -->
 	<teleloc_template loc_id="22" mapid="210020000" name="Golden Bough Garrison" name_id="400594"/><!-- flying -->
 	<teleloc_template loc_id="23" mapid="210020000" name="Agairon Village" name_id="400595"/><!-- flying -->
-	<teleloc_template loc_id="24" mapid="110010000" name="Elyos Square" name_id="400508" posX="1458.6332" posY="1450.5676" posZ="572.87573" heading="15"/><!-- teleport -->
-	<teleloc_template loc_id="25" mapid="110010000" name="Divine Road" name_id="400509" posX="1930.9808" posY="1514.3209" posZ="590.01074" heading="60"/><!-- teleport -->
+	<teleloc_template loc_id="24" mapid="110010000" name="Elyos Square" name_id="400508" posX="1460.36" posY="1448.84" posZ="572.87524" heading="7"/><!-- teleport -->
+	<teleloc_template loc_id="25" mapid="110010000" name="Divine Road" name_id="400509" posX="1930.9" posY="1516.9" posZ="590.0108" heading="60"/><!-- teleport -->
 	<teleloc_template loc_id="28" mapid="210040000" name="New Heiron Gate" name_id="400596"/><!-- flying -->
 	<teleloc_template loc_id="29" mapid="210040000" name="Heiron Observatory" name_id="400597"/><!-- flying -->
 	<teleloc_template loc_id="30" mapid="210040000" name="Arbolu's Haven" name_id="400598"/><!-- flying -->
@@ -93,8 +93,8 @@
 	<teleloc_template loc_id="102" mapid="220070000" name="Gelkmaros Fortress" name_id="401549"/><!-- flying -->
 	<teleloc_template loc_id="103" mapid="220070000" name="Rhonnam Refugee Village" name_id="401550"/><!-- flying -->
 	<teleloc_template loc_id="104" mapid="220070000" name="Subterranea Observation Post" name_id="401551"/><!-- flying -->
-	<teleloc_template loc_id="105" mapid="110010000" name="Outer Dock" name_id="401552" posX="1817.1605" posY="2154.2178" posZ="527.9301" heading="83"/><!-- teleport -->
-	<teleloc_template loc_id="106" mapid="120010000" name="Crandale District" name_id="401553" posX="1175.7998" posY="1167.0049" posZ="207.97896" heading="20"/><!-- teleport -->
+	<teleloc_template loc_id="105" mapid="110010000" name="Outer Dock" name_id="401552" posX="1813.9645" posY="2156.7532" posZ="527.9296" heading="6"/><!-- teleport -->
+	<teleloc_template loc_id="106" mapid="120010000" name="Crandale District" name_id="401553" posX="1178.5159" posY="1170.1064" posZ="207.97896" heading="0"/><!-- teleport -->
 	<teleloc_template loc_id="107" mapid="110010000" name="Sanctum Gate" name_id="401554" posX="1322.1704" posY="1512.1475" posZ="567.8929" heading="0"/><!-- new teleport 4.3 NA -->
 	<teleloc_template loc_id="108" mapid="110020000" name="Seraphim Gate" name_id="401555" posX="2154.8271" posY="1577.7524" posZ="1204.897" heading="8"/><!-- new teleport 4.3 NA -->
 	<teleloc_template loc_id="109" mapid="120010000" name="Pandaemonium Entrance" name_id="401556" posX="1685.7" posY="1400.5" posZ="195.48618" heading="60"/><!-- new teleport 4.3 NA -->

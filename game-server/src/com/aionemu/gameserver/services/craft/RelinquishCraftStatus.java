@@ -57,7 +57,7 @@ public class RelinquishCraftStatus {
 		if (!successDecreaseKinah(player, masterPrice)) {
 			return;
 		}
-		skill.setSkillLvl(masterMinValue);
+		skill.setSkillLvl(masterMinValue - 1);
 		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
 		removeRecipesAbove(player, skillId, masterMinValue);
 		deleteCraftStatusQuests(skillId, player, false);

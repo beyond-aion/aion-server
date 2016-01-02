@@ -42,7 +42,6 @@ import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
@@ -91,7 +90,6 @@ import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.periodic.PeriodicInstanceManager;
-import com.aionemu.gameserver.services.player.PlayerEventService;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.reward.RewardService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
@@ -319,8 +317,6 @@ public class GameServer {
 		PeriodicInstanceManager.getInstance();
 		if (CustomConfig.ENABLE_REWARD_SERVICE)
 			RewardService.getInstance();
-		if (EventsConfig.EVENT_ENABLED)
-			PlayerEventService.getInstance();
 		EventService.getInstance();
 
 		ConsoleUtil.printSection("Access Management");

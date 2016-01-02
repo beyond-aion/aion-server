@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
+import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -41,7 +45,13 @@ public class CM_QUIT extends AionClientPacket {
 		boolean charEditScreen = false;
 
 		if (player != null) {
-			charEditScreen = player.isInEditMode();
+			if (stayConnected) { // update char selection info
+				Account account = con.getAccount();
+				account.getPlayerAccountData(player.getObjectId()).setEquipment(player.getEquipment().getEquippedForAppearence());
+				for (PlayerAccountData plAccData : account.getSortedAccountsList())
+					plAccData.setCharBanInfo(DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
+			}
+			charEditScreen = player.getCommonData().isInEditMode();
 			PlayerLeaveWorldService.leaveWorld(player);
 		}
 
@@ -50,7 +60,7 @@ public class CM_QUIT extends AionClientPacket {
 		if (!stayConnected) {
 			// delay to avoid client disconnect error
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					LoginServer.getInstance().aionClientDisconnected(con.getAccount().getId());
