@@ -6,7 +6,7 @@
 			13701 [XML] A New Land, A New War
 			13702 [XML] Tomul Tap
 			13703 [XML] [Group] Igniting the Conflict
-			13704 [XML] Fona's Quick Fix
+			13704 [SCRIPT] Fona's Quick Fix
 			13705 [XML] Coastal Bypass Operation
 			13706 [XML] North Relay Relay
 			13707 [TODO] Unused Quest
@@ -41,7 +41,7 @@
 			23701 [XML] Levinshor Chagrin
 			23702 [XML] Blood for Blood, Literally
 			23703 [XML] [Group] Secure the Shrin
-			23704 [XML] Loud Noises
+			23704 [SCRIPT] Loud Noises
 			23705 [XML] We Don't Need No Stinking Road
 			23706 [XML] Don't Eat the Messenger
 			23707 [TODO] Unused Quest
@@ -93,11 +93,9 @@
 	<!-- REPORTING QUESTS -->
 	<report_to id="13700" start_npc_ids="800527" end_npc_ids="802350"/>
 	<report_to id="13701" start_npc_ids="798926" end_npc_ids="802350"/>
-	<report_to id="13704" start_npc_ids="802343" end_npc_ids="802343"/>
 	<report_to id="13708" start_npc_ids="802344" end_npc_ids="802344"/>
 	<report_to id="23700" start_npc_ids="800529" end_npc_ids="802353"/>
 	<report_to id="23701" start_npc_ids="800529" end_npc_ids="802353"/>
-	<report_to id="23704" start_npc_ids="802343" end_npc_ids="802343"/>
 	<report_to id="23708" start_npc_ids="802344" end_npc_ids="802344"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375">
