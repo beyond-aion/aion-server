@@ -104,7 +104,7 @@
 	<monster_hunt id="13703" start_npc_ids="802350" end_npc_ids="802350" end_dialog_id="2375">	
 		<monster var="0" npc_ids="235145 235171" end_var="1"/>
 	</monster_hunt>
-	<monster_hunt id="13705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375">	
+	<monster_hunt id="13705" start_npc_ids="802331" end_npc_ids="802333" end_dialog_id="2375">	
 		<monster var="0" npc_ids="233919" end_var="3"/>
 		<monster var="1" npc_ids="233920" end_var="3"/>
 	</monster_hunt>
