@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Quest-Start Item" base_chance="4.5">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210377" name="Whitefoot Daru"/>
+			<gd_npc npc_id="210378" name="Whitefoot Daru"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182203130" name="doc_quest_2136a"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Quest-Start Item" base_chance="4.5">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210592" name="Vengeful Ghost"/>
+			<gd_npc npc_id="210593" name="Vengeful Ghost"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182203120" name="quest_2122a"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210594" name="Rusty Threehands"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100600206" name="Rusty's Tome"/>
+			<gd_item id="102000288" name="Rusty's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Common)" base_chance="90">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210590" name="Hulker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111300398" name="Hulker's Vambrace"/>
+			<gd_item id="111500437" name="Hulker's Handguards"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210590" name="Hulker"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100433" name="Hulker's Leggings"/>
+			<gd_item id="113300449" name="Hulker's Breeches"/>
+			<gd_item id="113500472" name="Hulker's Chausses"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Common)" base_chance="80">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210409" name="Hatata the Torturer"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121001208" name="Hatata's Aether Necklace"/>
+			<gd_item id="121001207" name="Hatata's Necklace"/>
+			<gd_item id="120001305" name="Hatata's Aether Earrings"/>
+			<gd_item id="120001304" name="Hatata's Earrings"/>
+			<gd_item id="122001458" name="Hatata's Aether Ring"/>
+			<gd_item id="122001457" name="Hatata's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="60">
+		<gd_maps>
+			<gd_map map_id="220010000" name="Ishalgen"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210409" name="Hatata the Torturer"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001268" name="Hatata's Belt"/>
+			<gd_item id="123001267" name="Hatata's Leather Belt"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214156" name="Praetorius Artair"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101700542" name="Artair's Longbow"/>
+			<gd_item id="100200630" name="Artair's Dagger"/>
+			<gd_item id="101800530" name="Artair's Pistol"/>
+			<gd_item id="101900519" name="Artair's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214156" name="Praetorius Artair"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000857" name="Artair's Earrings"/>
+			<gd_item id="122000899" name="Artair's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214158" name="Staff Captain Lahumu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500524" name="Lahumu's Jewel"/>
+			<gd_item id="100500628" name="Lahumu's Jewel"/>
+			<gd_item id="100600562" name="Lahumu's Tome"/>
+			<gd_item id="100600687" name="Lahumu's Tome"/>
+			<gd_item id="102000552" name="Lahumu's Harp"/>
+			<gd_item id="102000625" name="Lahumu's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214158" name="Staff Captain Lahumu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001885" name="Lahumu's Silver Diadem"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214158" name="Staff Captain Lahumu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000783" name="Lahumu's Ruby Necklace"/>
+			<gd_item id="121000784" name="Lahumu's Sapphire Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214163" name="Adjutant Ursanafi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101500522" name="Ursanafi's Staff"/>
+			<gd_item id="100100524" name="Ursanafi's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214163" name="Adjutant Ursanafi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000858" name="Ursanafi's Earrings"/>
+			<gd_item id="122000900" name="Ursanafi's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214164" name="Commander Inshar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900506" name="Inshar's Greatsword"/>
+			<gd_item id="101300498" name="Inshar's Spear"/>
+			<gd_item id="100000675" name="Inshar's Sword"/>
+			<gd_item id="102100504" name="Inshar's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214164" name="Commander Inshar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000887" name="Inshar's Leather Belt"/>
+			<gd_item id="123000888" name="Inshar's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="310090000" name="Indratu_Fortress"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214164" name="Commander Inshar"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000788" name="Inshar's Shield"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>
