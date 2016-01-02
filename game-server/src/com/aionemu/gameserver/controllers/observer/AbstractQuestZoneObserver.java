@@ -2,10 +2,10 @@ package com.aionemu.gameserver.controllers.observer;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.jme3.math.Vector3f;
 
 /**
  * @author Rolandas

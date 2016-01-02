@@ -25,7 +25,7 @@
 	<item_collecting id="18916" start_npc_ids="801945"/>
 	<item_collecting id="28913" start_npc_ids="801947"/>
 	<item_collecting id="28914" start_npc_ids="801947"/>
-	<item_collecting id="28916" start_npc_ids="801947" end_npc_ids="801946"/>
+	<item_collecting id="28916" start_npc_ids="801947"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18911" start_npc_ids="801945" end_npc_ids="801945">
 		<monster var="0" npc_ids="230849" end_var="1"/>

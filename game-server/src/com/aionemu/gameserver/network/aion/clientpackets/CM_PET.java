@@ -98,6 +98,9 @@ public class CM_PET extends AionClientPacket {
 				subType = readD();
 				emotionId = readD();
 				break;
+			case EXTEND_EXPIRATION: //extend expiration date
+				eggObjId = readD(); //itemObjId
+				petId = readD(); //petObjId
 			default:
 				break;
 		}
@@ -112,10 +115,14 @@ public class CM_PET extends AionClientPacket {
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
-				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName)) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
+				}
 				else
 					PetAdoptionService.adoptPet(player, eggObjId, petId, petName, decorationId);
+				break;
+			case EXTEND_EXPIRATION:
+				//for now we will do nothing, cause expiration-time is shitty
 				break;
 			case SURRENDER:
 				PetAdoptionService.surrenderPet(player, petId);

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217237" name="Cadella"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112301181" name="Primal Spirit Shoulderguards"/>
+			<gd_item id="112301461" name="Ancient Spirit's Magic Shoulderguards"/>
+			<gd_item id="112501174" name="Primal Spirit Spaulders"/>
+			<gd_item id="112501503" name="Ancient Spirit's Magic Spaulders"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217237" name="Cadella"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100201119" name="Primal Spirit Dagger"/>
+			<gd_item id="100201120" name="Primal Spirit Dirk"/>
+			<gd_item id="100601035" name="Primal Spirit Spellbook"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="12.5">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217237" name="Cadella"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001398" name="Hidden Manor Corundum Ring"/>
+			<gd_item id="122001399" name="Hidden Manor Turquoise Ring"/>
+			<gd_item id="121001155" name="Hidden Manor Corundum Necklace"/>
+			<gd_item id="121001156" name="Hidden Manor Turquoise Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217237" name="Cadella"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114601189" name="Fallen Spirit Sabatons"/>
+			<gd_item id="114501247" name="Fallen Spirit Brogans"/>
+			<gd_item id="114301289" name="Fallen Spirit Boots"/>
+			<gd_item id="114101283" name="Fallen Spirit Shoes"/>
+			<gd_item id="112601183" name="Fallen Spirit Shoulderplates"/>
+			<gd_item id="112501171" name="Fallen Spirit Spaulders"/>
+			<gd_item id="112301178" name="Fallen Spirit Shoulderguards"/>
+			<gd_item id="112101195" name="Fallen Spirit Pauldrons"/>
+			<gd_item id="111601205" name="Fallen Spirit Gauntlets"/>
+			<gd_item id="111501226" name="Fallen Spirit Handguards"/>
+			<gd_item id="111301232" name="Fallen Spirit Vambrace"/>
+			<gd_item id="111101237" name="Fallen Spirit Gloves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Wings (Epic)" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="187000058" name="Ancient Spirit's Wings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101365" name="Primal Spirit Tunic"/>
+			<gd_item id="110301292" name="Primal Spirit Jerkin"/>
+			<gd_item id="110301582" name="Ancient Spirit's Magic Jerkin"/>
+			<gd_item id="110501270" name="Primal Spirit Hauberk"/>
+			<gd_item id="110551003" name="Ancient Spirit's Magic Hauberk"/>
+			<gd_item id="110601239" name="Primal Spirit Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101701007" name="Primal Spirit Longbow"/>
+			<gd_item id="100201118" name="Primal Spirit Dagger"/>
+			<gd_item id="100001259" name="Primal Spirit's Scale Sword"/>
+			<gd_item id="100001260" name="Primal Spirit's Scale Sword"/>
+			<gd_item id="100100961" name="Primal Spirit Warhammer"/>
+			<gd_item id="101500990" name="Primal Spirit Staff"/>
+			<gd_item id="102100739" name="Primal Spirit Cipher-Blade"/>
+			<gd_item id="101800847" name="Ancient Spirit's Pistol"/>
+			<gd_item id="101800846" name="Ancient Spirit's Pistol"/>
+			<gd_item id="101900858" name="Ancient Spirit's Aethercannon"/>
+			<gd_item id="102000892" name="Ancient Spirit's Harp"/>
+			<gd_item id="102000895" name="Ancient Spirit's Harp"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300270000" name="Argent_Manor"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217242" name="Zadra Spellweaver"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113601196" name="Fallen Spirit Greaves"/>
+			<gd_item id="113501243" name="Fallen Spirit Chausses"/>
+			<gd_item id="113301258" name="Fallen Spirit Breeches"/>
+			<gd_item id="113101256" name="Fallen Spirit Leggings"/>
+			<gd_item id="110601236" name="Fallen Spirit Breastplate"/>
+			<gd_item id="110501267" name="Fallen Spirit Hauberk"/>
+			<gd_item id="110301289" name="Fallen Spirit Jerkin"/>
+			<gd_item id="110101362" name="Fallen Spirit Tunic"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

@@ -36,9 +36,9 @@ import com.google.common.collect.Collections2;
 public class MySQL5InventoryDAO extends InventoryDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5InventoryDAO.class);
-	public static final String SELECT_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `is_soul_bound`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
-	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equiped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equiped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, rnd_bonus=?, rnd_count=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=? WHERE item_unique_id=?";
+	public static final String SELECT_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `is_soul_bound`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
+	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equiped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equiped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, rnd_bonus=?, rnd_count=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=?, rnd_plume_bonus=? WHERE item_unique_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM inventory WHERE item_unique_id=?";
 	public static final String DELETE_CLEAN_QUERY = "DELETE FROM inventory WHERE item_owner=? AND item_location != 2"; // legion warehouse needs not to
 																																																											// be excluded, since players
@@ -208,10 +208,11 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		int packCount = rset.getInt("pack_count");
 		int isAmplified = rset.getInt("is_amplified");
 		int buffSkill = rset.getInt("buff_skill");
+		int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
 
 		Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 			isSoulBound == 1, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus,
-			rndCount, tempering, packCount, isAmplified == 1, buffSkill);
+			rndCount, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 		return item;
 	}
 
@@ -373,6 +374,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(24, item.getPackCount());
 				stmt.setBoolean(25, item.isAmplified());
 				stmt.setInt(26, item.getBuffSkill());
+				stmt.setInt(27, item.getRndPlumeBonusValue());
 				stmt.addBatch();
 			}
 
@@ -422,7 +424,8 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(22, item.getPackCount());
 				stmt.setBoolean(23, item.isAmplified());
 				stmt.setInt(24, item.getBuffSkill());
-				stmt.setInt(25, item.getObjectId());
+				stmt.setInt(25, item.getRndPlumeBonusValue());
+				stmt.setInt(26, item.getObjectId());
 				stmt.addBatch();
 			}
 

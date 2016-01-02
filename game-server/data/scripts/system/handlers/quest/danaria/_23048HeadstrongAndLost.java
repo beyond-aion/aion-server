@@ -47,7 +47,10 @@ public class _23048HeadstrongAndLost extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 801278) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1011);
+					if (qs.getQuestVarById(0) == 0)
+						return sendQuestDialog(env, 1011);
+					else
+						return closeDialogWindow(env);
 				} else if (dialog == DialogAction.SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 206322, 0, 1);
 				}

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Map Drops -->
+	<gd_rule rule_name="Quest Item" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_items>
+			<gd_item id="182212209" name="QUEST_28703a"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001140" name="Raksha's Sword"/>
+			<gd_item id="100001252" name="Raksha's Sword"/>
+			<gd_item id="100001253" name="Raksha's Scale Sword"/>
+			<gd_item id="100001254" name="Raksha's Azure Scale Sword"/>
+			<gd_item id="100201007" name="Raksha's Dagger"/>
+			<gd_item id="100201114" name="Raksha's Dagger"/>
+			<gd_item id="100201115" name="Raksha's Dirk"/>
+			<gd_item id="100100878" name="Raksha's Mace"/>
+			<gd_item id="100100959" name="Raksha's Warhammer"/>
+			<gd_item id="100900873" name="Raksha's Greatsword"/>
+			<gd_item id="101500899" name="Raksha's Staff"/>
+			<gd_item id="101700915" name="Raksha's Longbow"/>
+			<gd_item id="100500890" name="Raksha's Jewel"/>
+			<gd_item id="100600948" name="Raksha's Tome"/>
+			<gd_item id="101800735" name="Raksha's Pistol"/>
+			<gd_item id="101800843" name="Raksha's Pistol"/>
+			<gd_item id="101800842" name="Raksha's Short Gun"/>
+			<gd_item id="101900741" name="Raksha's Aethercannon"/>
+			<gd_item id="102000775" name="Raksha's Harp"/>
+			<gd_item id="101300840" name="Raksha's Spear"/>
+			<gd_item id="102100647" name="Raksha's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001223" name="Raksha's Shield"/>
+			<gd_item id="115001224" name="Raksha's Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Common Material" base_chance="100" min_count="5" max_count="5" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182006427" name="Ancient Balaur Scale"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir (Legend)" base_chance="10" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170030044" name="[Souvenir] Raksha Wall-mount Trophy"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217451" name="The Flamelord"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001252" name="Raksha's Sword"/>
+			<gd_item id="100201115" name="Raksha's Dirk"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001223" name="Raksha's Shield"/>
+			<gd_item id="115001224" name="Raksha's Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217392" name="Gatekeeper Melkennis"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101156" name="Raksang Gloves"/>
+			<gd_item id="111301151" name="Raksang Vambrace"/>
+			<gd_item id="111501145" name="Raksang Handguards"/>
+			<gd_item id="111601124" name="Raksang Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101114" name="Raksang Pauldrons"/>
+			<gd_item id="112301097" name="Raksang Shoulderguards"/>
+			<gd_item id="112501090" name="Raksang Spaulders"/>
+			<gd_item id="112601102" name="Raksang Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217451" name="The Flamelord"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101202" name="Raksang Shoes"/>
+			<gd_item id="114301208" name="Raksang Boots"/>
+			<gd_item id="114501166" name="Raksang Brogans"/>
+			<gd_item id="114601108" name="Raksang Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217469" name="Hellpath Guardian Fireye"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101175" name="Raksang Leggings"/>
+			<gd_item id="113301177" name="Raksang Breeches"/>
+			<gd_item id="113501162" name="Raksang Leg Armor"/>
+			<gd_item id="113601115" name="Raksang Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101281" name="Raksang Tunic"/>
+			<gd_item id="110301208" name="Raksang Jerkin"/>
+			<gd_item id="110501186" name="Raksang Hauberk"/>
+			<gd_item id="110601155" name="Raksang Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="80">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101281" name="Raksang Tunic"/>
+			<gd_item id="110301208" name="Raksang Jerkin"/>
+			<gd_item id="110501186" name="Raksang Hauberk"/>
+			<gd_item id="110601155" name="Raksang Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217392" name="Gatekeeper Melkennis"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101113" name="Raksha Legionary's Pauldrons"/>
+			<gd_item id="112301096" name="Raksha Legionary's Shoulderguards"/>
+			<gd_item id="112301462" name="Raksha Legionary's Magic Shoulderguards"/>
+			<gd_item id="112501089" name="Raksha Legionary's Spaulders"/>
+			<gd_item id="112501504" name="Raksha Legionary's Magic Spaulders"/>
+			<gd_item id="112601101" name="Raksha Legionary's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101201" name="Raksha Legionary's Shoes"/>
+			<gd_item id="114301207" name="Raksha Legionary's Boots"/>
+			<gd_item id="114301587" name="Raksha Legionary's Magic Boots"/>
+			<gd_item id="114501165" name="Raksha Legionary's Brogans"/>
+			<gd_item id="114501589" name="Raksha Legionary's Magic Brogans"/>
+			<gd_item id="114601107" name="Raksha Legionary's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217451" name="The Flamelord"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101155" name="Raksha Legionary's Gloves"/>
+			<gd_item id="111301150" name="Raksha Legionary's Vambrace"/>
+			<gd_item id="111301521" name="Raksha Legionary's Magic Vambrace"/>
+			<gd_item id="111501144" name="Raksha Legionary's Handguards"/>
+			<gd_item id="111501562" name="Raksha Legionary's Magic Handguards"/>
+			<gd_item id="111601123" name="Raksha Legionary's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217469" name="Hellpath Guardian Fireye"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101174" name="Raksha Legionary Leggings"/>
+			<gd_item id="113301176" name="Raksha Legionary's Breeches"/>
+			<gd_item id="113301549" name="Raksha Legionary's Magic Breeches"/>
+			<gd_item id="113501161" name="Raksha Legionary's Chausses"/>
+			<gd_item id="113501580" name="Raksha Legionary's Magic Chausses"/>
+			<gd_item id="113601114" name="Raksha Legionary's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101280" name="Raksha Legionary's Tunic"/>
+			<gd_item id="110301207" name="Raksha Legionary's Jerkin"/>
+			<gd_item id="110301583" name="Raksha Legionary's Magic Jerkin"/>
+			<gd_item id="110501185" name="Raksha Legionary's Hauberk"/>
+			<gd_item id="110551004" name="Raksha Legionary's Magic Hauberk"/>
+			<gd_item id="110601154" name="Raksha Legionary's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101280" name="Raksha Legionary's Tunic"/>
+			<gd_item id="110301207" name="Raksha Legionary's Jerkin"/>
+			<gd_item id="110301583" name="Raksha Legionary's Magic Jerkin"/>
+			<gd_item id="110501185" name="Raksha Legionary's Hauberk"/>
+			<gd_item id="110551004" name="Raksha Legionary's Magic Hauberk"/>
+			<gd_item id="110601154" name="Raksha Legionary's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="45">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217392" name="Gatekeeper Melkennis"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001209" name="Melkennis' Leather Belt"/>
+			<gd_item id="123001210" name="Melkennis' Sash"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001296" name="Sharik's Corundum Ring"/>
+			<gd_item id="122001297" name="Sharik's Turquoise Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217451" name="The Flamelord"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001141" name="The Flamelord's Corundum Earrings"/>
+			<gd_item id="120001142" name="The Flamelord's Turquoise Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="40">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217469" name="Hellpath Guardian Fireye"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121001055" name="Paruam's Corundum Necklace"/>
+			<gd_item id="121001056" name="Paruam's Turquoise Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217475" name="Raksha"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001144" name="Raksha's Turquoise Earrings"/>
+			<gd_item id="120001143" name="Raksha's Corundum Earrings"/>
+			<gd_item id="121001058" name="Raksha's Turquoise Necklace"/>
+			<gd_item id="121001057" name="Raksha's Corundum Necklace"/>
+			<gd_item id="122001299" name="Raksha's Turquoise Ring"/>
+			<gd_item id="122001298" name="Raksha's Corundum Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217647" name="Raksha Boilheart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001144" name="Raksha's Turquoise Earrings"/>
+			<gd_item id="120001143" name="Raksha's Corundum Earrings"/>
+			<gd_item id="121001058" name="Raksha's Turquoise Necklace"/>
+			<gd_item id="121001057" name="Raksha's Corundum Necklace"/>
+			<gd_item id="122001299" name="Raksha's Turquoise Ring"/>
+			<gd_item id="122001298" name="Raksha's Corundum Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Common Material" base_chance="100" min_count="2" max_count="2" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217425" name="Illusionmaster Sharik"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182006427" name="Ancient Balaur Scale"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300310000" name="Raksang"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217423" name="Raksang Keymaster"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000112" name="Watchman's Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

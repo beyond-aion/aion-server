@@ -2,9 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.List;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,13 +10,17 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.CollisionDieActor;
 import com.aionemu.gameserver.controllers.observer.ShieldObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.shield.Shield;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.jme3.math.Vector3f;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 
 /**
  * @author xavier

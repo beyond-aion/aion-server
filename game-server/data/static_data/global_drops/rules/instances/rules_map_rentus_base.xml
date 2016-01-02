@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217307" name="Zantaraz"/>
+			<gd_npc npc_id="217315" name="Umatha the Crazed"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101284" name="Rebel Sorcerer's Shoes"/>
+			<gd_item id="114101285" name="Rebel Spiritmaster's Shoes"/>
+			<gd_item id="114101434" name="Rebel Songweaver's Shoes"/>
+			<gd_item id="114301290" name="Rebel Assassin's Boots"/>
+			<gd_item id="114301291" name="Rebel Ranger's Boots"/>
+			<gd_item id="114301440" name="Rebel Gunslinger's Boots"/>
+			<gd_item id="114501248" name="Rebel Cleric's Brogans"/>
+			<gd_item id="114501249" name="Rebel Chanter's Brogans"/>
+			<gd_item id="114501646" name="Rebel Aethertech's Magic Brogans"/>
+			<gd_item id="114601190" name="Rebel Gladiator's Sabatons"/>
+			<gd_item id="114601191" name="Rebel Templar's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217308" name="Tarotran"/>
+			<gd_npc npc_id="217316" name="Ambusher Kiriana"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101257" name="Rebel Sorcerer's Leggings"/>
+			<gd_item id="113101258" name="Rebel Spiritmaster's Leggings"/>
+			<gd_item id="113101403" name="Rebel Songweaver's Leggings"/>
+			<gd_item id="113301259" name="Rebel Assassin's Breeches"/>
+			<gd_item id="113301260" name="Rebel Ranger's Breeches"/>
+			<gd_item id="113301402" name="Rebel Gunslinger's Breeches"/>
+			<gd_item id="113501244" name="Rebel Cleric's Chausses"/>
+			<gd_item id="113501245" name="Rebel Chanter's Chausses"/>
+			<gd_item id="113501637" name="Rebel Aethertech's Magic Chausses"/>
+			<gd_item id="113601197" name="Rebel Gladiator's Greaves"/>
+			<gd_item id="113601198" name="Rebel Templar's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217310" name="Captain Xasta"/>
+			<gd_npc npc_id="217317" name="Archmagus Upadi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101238" name="Rebel Sorcerer's Gloves"/>
+			<gd_item id="111101239" name="Rebel Spiritmaster's Gloves"/>
+			<gd_item id="111101387" name="Rebel Songweaver's Gloves"/>
+			<gd_item id="111301233" name="Rebel Assassin's Vambrace"/>
+			<gd_item id="111301234" name="Rebel Ranger's Vambrace"/>
+			<gd_item id="111301379" name="Rebel Gunslinger's Vambrace"/>
+			<gd_item id="111501227" name="Rebel Cleric's Handguards"/>
+			<gd_item id="111501228" name="Rebel Chanter's Handguards"/>
+			<gd_item id="111501617" name="Rebel Aethertech's Magic Handguards"/>
+			<gd_item id="111601206" name="Rebel Gladiator's Gauntlets"/>
+			<gd_item id="111601207" name="Rebel Templar's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217307" name="Zantaraz"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101236" name="Defeated Reian's Gloves"/>
+			<gd_item id="111301231" name="Defeated Reian's Vambrace"/>
+			<gd_item id="111501225" name="Defeated Reian's Handguards"/>
+			<gd_item id="111601204" name="Defeated Reian's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217308" name="Tarotran"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101194" name="Defeated Reian's Pauldrons"/>
+			<gd_item id="112301177" name="Defeated Reian's Shoulderguards"/>
+			<gd_item id="112501170" name="Defeated Reian's Spaulders"/>
+			<gd_item id="112601182" name="Defeated Reian's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217310" name="Captain Xasta"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101255" name="Defeated Reian's Leggings"/>
+			<gd_item id="113301257" name="Defeated Reian's Breeches"/>
+			<gd_item id="113501242" name="Defeated Reian's Chausses"/>
+			<gd_item id="113601195" name="Defeated Reian's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Epic)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217312" name="Pagati Tamer Nishaka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001310" name="Nishaka's Shield"/>
+			<gd_item id="115001311" name="Nishaka's Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217312" name="Pagati Tamer Nishaka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101196" name="Rebel Sorcerer's Pauldrons"/>
+			<gd_item id="112101197" name="Rebel Spiritmaster's Pauldrons"/>
+			<gd_item id="112101341" name="Rebel Songweaver's Pauldrons"/>
+			<gd_item id="112301179" name="Rebel Assassin's Shoulderguards"/>
+			<gd_item id="112301180" name="Rebel Ranger's Shoulderguards"/>
+			<gd_item id="112301323" name="Rebel Gunslinger's Shoulderguards"/>
+			<gd_item id="112501172" name="Rebel Cleric's Spaulders"/>
+			<gd_item id="112501173" name="Rebel Chanter's Spaulders"/>
+			<gd_item id="112501558" name="Rebel Aethertech's Magic Spaulder"/>
+			<gd_item id="112601184" name="Rebel Gladiator's Shoulderplates"/>
+			<gd_item id="112601185" name="Rebel Templar's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217312" name="Pagati Tamer Nishaka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101361" name="Defeated Reian's Tunic"/>
+			<gd_item id="110301288" name="Defeated Reian's Jerkin"/>
+			<gd_item id="110501266" name="Defeated Reian's Hauberk"/>
+			<gd_item id="110601235" name="Defeated Reian's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Head (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002892" name="Defeated Reian's Headband"/>
+			<gd_item id="125002893" name="Defeated Reian's Hat"/>
+			<gd_item id="125002894" name="Defeated Reian's Chain Hood"/>
+			<gd_item id="125002895" name="Defeated Reian's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Legend)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001211" name="Vasharti's Leather Belt"/>
+			<gd_item id="123001212" name="Vasharti's Sash"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101363" name="Rebel Sorcerer's Tunic"/>
+			<gd_item id="110101364" name="Rebel Spiritmaster's Tunic"/>
+			<gd_item id="110101541" name="Rebel Songweaver's Tunic"/>
+			<gd_item id="110301290" name="Rebel Assassin's Jerkin"/>
+			<gd_item id="110301291" name="Rebel Ranger's Jerkin"/>
+			<gd_item id="110301437" name="Rebel Gunslinger's Jerkin"/>
+			<gd_item id="110501268" name="Rebel Cleric's Hauberk"/>
+			<gd_item id="110501269" name="Rebel Chanter's Hauberk"/>
+			<gd_item id="110551060" name="Rebel Aethertech's Magic Hauberk"/>
+			<gd_item id="110601237" name="Rebel Gladiator's Breastplate"/>
+			<gd_item id="110601238" name="Rebel Templar's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001262" name="Vasharti's Sword"/>
+			<gd_item id="101701008" name="Vasharti's Longbow"/>
+			<gd_item id="101500991" name="Vasharti's Staff"/>
+			<gd_item id="101300928" name="Vasharti's Spear"/>
+			<gd_item id="100900965" name="Vasharti's Greatsword"/>
+			<gd_item id="100601037" name="Vasharti's Tome"/>
+			<gd_item id="100500983" name="Vasharti's Jewel"/>
+			<gd_item id="100201121" name="Vasharti's Dagger"/>
+			<gd_item id="100100963" name="Vasharti's Warhammer"/>
+			<gd_item id="101800855" name="Vasharti's Pistol"/>
+			<gd_item id="101900853" name="Vasharti's Aethercannon"/>
+			<gd_item id="102000887" name="Vasharti's Harp"/>
+			<gd_item id="102100747" name="Vasharti's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Mount (Epic)" base_chance="1.5">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="190100004" name="Pagati Veyron"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217315" name="Umatha the Crazed"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001396" name="Umatha's Corundum Ring"/>
+			<gd_item id="122001397" name="Umatha's Turquoise Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217316" name="Ambusher Kiriana"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001237" name="Kiriana's Corundum Earrings"/>
+			<gd_item id="120001238" name="Kiriana's Turquoise Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217317" name="Archmagus Upadi"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121001153" name="Upadi's Corundum Necklace"/>
+			<gd_item id="121001154" name="Upadi's Turquoise Necklace"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

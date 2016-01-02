@@ -76,39 +76,31 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, 0x00);
 
 		if (item.getTempering() > 0 && item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-			writeD(buf, PlumStatEnum.PLUM_HP.getId()); // 1satId Plum
+			PlumStatEnum stat = item.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL") ? PlumStatEnum.PLUM_PHISICAL_ATTACK
+				: PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL;
+			writeD(buf, PlumStatEnum.PLUM_HP.getId()); // 1st satId
 			writeD(buf, PlumStatEnum.PLUM_HP.getBoostValue() * item.getTempering()); // value
+			writeD(buf, stat.getId()); //2nd statId
+			writeD(buf, (stat.getBoostValue() * item.getTempering()) + item.getRndPlumeBonusValue()); //value
 		} else {
-			writeD(buf, 0x00); // 1satId Plum
+			writeD(buf, 0x00); // 1st statId
 			writeD(buf, 0x00); // value
-		}
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-			if (item.getTempering() > 0) {
-				PlumStatEnum stat = item.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL") ? PlumStatEnum.PLUM_PHISICAL_ATTACK
-					: PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL;
-				writeD(buf, stat.getId());// 2satId Plum
-				writeD(buf, stat.getBoostValue() * item.getTempering());
-			} else {
-				writeD(buf, 0x00);// 2satId Plum
-				writeD(buf, 0x00);
-			}
-		} else {
-			writeD(buf, 0x00);// 2satId Plum
-			writeD(buf, 0x00);
-		}
-		writeD(buf, 0x00);// 3satId Plum
+			writeD(buf, 0x00); // 2nd statId
+			writeD(buf, 0x00); // value
+		}	
+		writeD(buf, 0x00); // 3rd statId
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);// 4satId Plum
+		writeD(buf, 0x00); // 4th statId
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);// 5satId Plum
+		writeD(buf, 0x00); // 5th statId
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);// 6satId Plum
+		writeD(buf, 0x00); // 6th statId
 		writeD(buf, 0x00);
-		writeD(buf, 0x00);// unk 4.7.5
+		writeD(buf, 0x00); // unk 4.7.5
 		writeC(buf, item.isAmplified() ? 1 : 0);
 		writeD(buf, item.getBuffSkill());
-		writeD(buf, 0x00);// skillId
-		writeD(buf, 0x00);// skillId
+		writeD(buf, 0x00); // skillId
+		writeD(buf, 0x00); // skillId
 	}
 
 	/**
