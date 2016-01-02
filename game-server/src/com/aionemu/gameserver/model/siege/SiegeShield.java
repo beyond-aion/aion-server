@@ -1,16 +1,17 @@
 package com.aionemu.gameserver.model.siege;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.IActor;
+import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
-import com.jme3.scene.Spatial;
+
+import javolution.util.FastMap;
+
 
 /**
  * Shields have material ID 11 in geo.
