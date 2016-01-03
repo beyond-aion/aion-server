@@ -3,8 +3,10 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
@@ -17,6 +19,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.questEngine.model.QuestState;
+import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.FactionPackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -80,6 +84,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public long getExp() {
 		return this.exp;
+	}
+
+	public void setExpValue(long exp) {
+		this.exp = exp;
 	}
 
 	public int getQuestExpands() {
@@ -325,12 +333,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	 * @param exp
 	 */
 	public void setExp(long exp) {
-		// maxLevel is 56 but in game 55 should be shown with full XP bar
-		int maxLevel = DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel();
-
-		if (getPlayerClass() != null && getPlayerClass().isStartingClass())
-			maxLevel = 10;
-
+		// maxLevel is 66 but in game 65 should be shown with full XP bar
+		int maxLevel = isDaeva ? DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() : 10;
 		long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
 
 		if (exp > maxExp)
@@ -465,18 +469,18 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public int getLevel() {
-		return isDaeva ? level : Math.min(level, 9);
-	}
-
-	/* Get level without Daeva-check. Used for Guides for now */
-	public int getLevelValue() {
 		return level;
 	}
 
+	public void setLevelValue(int level) {
+		this.level = level;
+	}
+
+	/**
+	 * This will only set the specified level >= 10 if the player is a daeva. 
+	 */
 	public void setLevel(int level) {
-		if (level <= DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel()) {
-			this.setExp(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
-		}
+		setExp(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
 	}
 
 	public String getNote() {
@@ -654,5 +658,35 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public void setDaeva(boolean isDaeva) {
 		this.isDaeva = isDaeva;
+	}
+
+	/**
+	 * @return True, if player was promoted to daeva. False if he already has daeva status or wasn't promoted.
+	 */
+	public boolean updateDaeva() {
+		if (isDaeva)
+			return false;
+
+		if (playerClass.isStartingClass())
+			return false;
+		
+		QuestStateList qsl;
+
+		Player player = getPlayer();
+		if (player != null)
+			qsl = player.getQuestStateList();
+		else
+			qsl = DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId);
+
+		if (qsl == null)
+			throw new AssertionError("Player " + playerObjId + " has no valid questStateList");
+
+		QuestState ceremonyQuestState = qsl.getQuestState(race == Race.ELYOS ? 1006 : 2008);
+
+		if (ceremonyQuestState == null || ceremonyQuestState.getStatus() != QuestStatus.COMPLETE)
+			return false;
+
+		setDaeva(true);
+		return true;
 	}
 }

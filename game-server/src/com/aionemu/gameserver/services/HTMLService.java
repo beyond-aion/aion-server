@@ -69,7 +69,7 @@ public class HTMLService {
 		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
 		if (ceil > Byte.MAX_VALUE)
 			return;
-			
+
 		packet_count = (byte) ceil;
 		for (byte i = 0; i < packet_count; i++) {
 			try {
@@ -88,8 +88,7 @@ public class HTMLService {
 
 	public static void sendGuideHtml(Player player) {
 		if (player.getLevel() > 1) {
-			GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player.getRace(), player.getCommonData()
-				.getLevelValue()); // Get real level, even if player is capped on level 9, maybe fix elsewhere
+			GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player.getRace(), player.getLevel());
 
 			for (GuideTemplate template : surveyTemplate) {
 				if (!template.isActivated())

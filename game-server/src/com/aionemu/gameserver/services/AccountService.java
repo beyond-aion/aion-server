@@ -31,7 +31,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMap;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
-import com.aionemu.gameserver.world.World;
 
 /**
  * This class is a front-end for daos and it's responsibility is to retrieve the Account objects
@@ -126,19 +125,9 @@ public class AccountService {
 		for (int playerId : playerIdList) {
 			PlayerCommonData playerCommonData = playerDAO.loadPlayerCommonData(playerId);
 			CharacterBanInfo cbi = DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(playerId);
-			if (playerCommonData.isOnline()) {
-				if (World.getInstance().findPlayer(playerId) == null) {
-					playerCommonData.setOnline(false);
-					log.warn(playerCommonData.getName() + " has online status, but I cant find it in World. Skip online status");
-				}
-			}
 			PlayerAppearance appereance = appereanceDAO.load(playerId);
-
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerId);
-
-			/**
-			 * Load only equipment and its stones to display on character selection screen
-			 */
+			//Load only equipment and its stones to display on character selection screen
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(playerId);
 
 			PlayerAccountData acData = new PlayerAccountData(playerCommonData, cbi, appereance, equipment, legionMember);

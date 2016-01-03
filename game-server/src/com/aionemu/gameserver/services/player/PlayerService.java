@@ -196,7 +196,7 @@ public class PlayerService {
 		player.setFlyController(new FlyController(player));
 		PlayerStatFunctions.addPredefinedStatFunctions(player);
 
-		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(player));
+		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId));
 		player.setRecipeList(DAOManager.getDAO(PlayerRecipesDAO.class).load(player.getObjectId()));
 
 		/**

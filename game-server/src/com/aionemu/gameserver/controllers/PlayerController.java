@@ -77,7 +77,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
-import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
@@ -668,9 +667,6 @@ public class PlayerController extends CreatureController<Player> {
 		// Guides Html on level up
 		if (HTMLConfig.ENABLE_GUIDES)
 			HTMLService.sendGuideHtml(player);
-
-		// Temporal
-		ClassChangeService.showClassChangeDialog(player);
 
 		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
 		updateNearbyQuests();
