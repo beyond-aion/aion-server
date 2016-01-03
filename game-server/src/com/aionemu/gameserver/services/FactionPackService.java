@@ -20,6 +20,7 @@ public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime minCreationTime = LocalDateTime.of(2015, Month.DECEMBER, 7, 5, 0, 0);
+	private final LocalDateTime maxCreationTime = LocalDateTime.of(2016, Month.JANUARY, 3, 4, 0, 0);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final HashMap<Integer, Integer> rewards = new HashMap<>();
 
@@ -48,6 +49,8 @@ public class FactionPackService {
 			return;
 		LocalDateTime creationTime = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate().toLocalDateTime();
 		if (creationTime.isBefore(minCreationTime))
+			return;
+		if (creationTime.isAfter(maxCreationTime))
 			return;
 		
 		if (player.getLevel() != 65)
