@@ -84,6 +84,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	private TemperingEffect temperingEffect;
 	private boolean isAmplified = false;
 	private int buffSkill;
+	private int rndPlumeBonusValue;
 
 	/**
 	 * Create simple item with minimum information
@@ -121,7 +122,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public Item(int objId, int itemId, long itemCount, int itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
 		boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int enchantBonus, int itemSkin, int fusionedItem,
 		int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int rndCount, int tempering, int packCount, boolean isAmplified,
-		int buffSkill) {
+		int buffSkill, int rndPlumeBonusValue) {
 		super(objId);
 
 		this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
@@ -154,6 +155,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		this.packCount = packCount;
 		this.isAmplified = isAmplified;
 		this.buffSkill = buffSkill;
+		this.rndPlumeBonusValue = rndPlumeBonusValue;
 		if (itemTemplate.getRandomBonusId() != 0 && bonusNumber > 0) {
 			randomStats = new RandomStats(itemTemplate.getRandomBonusId(), bonusNumber);
 		}
@@ -1022,5 +1024,13 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public void setBuffSkill(int buffSkill) {
 		this.buffSkill = buffSkill;
+	}
+
+	public int getRndPlumeBonusValue() {
+		return rndPlumeBonusValue;
+	}
+	
+	public void setRndPlumeBonusValue(int rndPlumeBonusValue) {
+	this.rndPlumeBonusValue = rndPlumeBonusValue;	
 	}
 }

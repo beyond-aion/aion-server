@@ -146,10 +146,11 @@ public class MySQL5MailDAO extends MailDAO {
 					int packCount = rset.getInt("pack_count");
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
+					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
 
 					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 						isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket,
-						charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill);
+						charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 					item.setPersistentState(PersistentState.UPDATED);
 					mailboxItems.add(item);
 				}

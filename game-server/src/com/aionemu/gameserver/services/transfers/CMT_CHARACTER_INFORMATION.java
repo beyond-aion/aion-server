@@ -216,9 +216,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				int newId = IDFactory.getInstance().nextId();
 				// bonus probably is lost, don't know [RR]
 				// dye expiration is lost
+				// plume Bonus is lost
 				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill);
+					packCount, itemAmplified, buffSkill, 0);
 				if (manastones.size() > 0) {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -305,9 +306,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				int newId = IDFactory.getInstance().nextId();
 				// bonus probably is lost, don't know [RR]
 				// dye expiration is lost
+				// Plume Bonus is lost
 				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill);
+					packCount, itemAmplified, buffSkill, 0);
 				if (manastones.size() > 0) {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
