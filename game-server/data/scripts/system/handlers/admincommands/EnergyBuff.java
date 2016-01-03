@@ -31,12 +31,12 @@ public class EnergyBuff extends AdminCommand {
 			if (params[0].equals("repose")) {
 				Player targetPlayer = (Player) creature;
 				if (params[1].equals("info"))
-					PacketSendUtility.sendMessage(player, "Current EoR: " + targetPlayer.getCommonData().getCurrentReposteEnergy() + "\n Max EoR: "
-						+ targetPlayer.getCommonData().getMaxReposteEnergy());
+					PacketSendUtility.sendMessage(player, "Current EoR: " + targetPlayer.getCommonData().getCurrentReposeEnergy() + "\n Max EoR: "
+						+ targetPlayer.getCommonData().getMaxReposeEnergy());
 				else if (params[1].equals("add"))
-					targetPlayer.getCommonData().addReposteEnergy(Long.parseLong(params[2]));
+					targetPlayer.getCommonData().addReposeEnergy(Long.parseLong(params[2]));
 				else if (params[1].equals("reset"))
-					targetPlayer.getCommonData().setCurrentReposteEnergy(0);
+					targetPlayer.getCommonData().setCurrentReposeEnergy(0);
 			} else if (params[0].equals("salvation")) {
 				Player targetPlayer = (Player) creature;
 				if (params[1].equals("info"))

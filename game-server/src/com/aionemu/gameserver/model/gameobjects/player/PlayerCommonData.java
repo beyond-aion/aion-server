@@ -61,8 +61,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int mailboxLetters;
 	private int soulSickness = 0;
 	private boolean noExp = false;
-	private long reposteCurrent;
-	private long reposteMax;
+	private long reposeCurrent;
+	private long reposeMax;
 	private long salvationPoint;
 	private int mentorFlagTime;
 	private int worldOwnerId;
@@ -162,8 +162,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			this.expRecoverable = Math.round(getExpNeed() * 0.25);
 		}
 		if (this.getPlayer() != null)
-			PacketSendUtility.sendPacket(getPlayer(),
-				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy()));
+			PacketSendUtility.sendPacket(getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(),
+				this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
 	}
 
 	public void setRecoverableExp(long expRecoverable) {
@@ -208,9 +208,9 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			reward = rewardType.calcReward(this.getPlayer(), value);
 
 		long repose = 0;
-		if (this.isReadyForReposteEnergy() && this.getCurrentReposteEnergy() > 0) {
+		if (this.isReadyForReposeEnergy() && this.getCurrentReposeEnergy() > 0) {
 			repose = (long) ((reward / 100f) * 40); // 40% bonus
-			this.addReposteEnergy(-repose);
+			this.addReposeEnergy(-repose);
 		}
 
 		long salvation = 0;
@@ -295,36 +295,36 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		return getLevel() >= 15;
 	}
 
-	public boolean isReadyForReposteEnergy() {
+	public boolean isReadyForReposeEnergy() {
 		return getLevel() >= 10;
 	}
 
-	public void addReposteEnergy(long add) {
-		reposteCurrent += add;
-		if (reposteCurrent < 0)
-			reposteCurrent = 0;
-		else if (reposteCurrent > getMaxReposteEnergy())
-			reposteCurrent = getMaxReposteEnergy();
+	public void addReposeEnergy(long add) {
+		reposeCurrent += add;
+		if (reposeCurrent < 0)
+			reposeCurrent = 0;
+		else if (reposeCurrent > getMaxReposeEnergy())
+			reposeCurrent = getMaxReposeEnergy();
 	}
 
-	public void updateMaxReposte() {
-		if (!isReadyForReposteEnergy()) {
-			reposteCurrent = 0;
-			reposteMax = 0;
+	public void updateMaxRepose() {
+		if (!isReadyForReposeEnergy()) {
+			reposeCurrent = 0;
+			reposeMax = 0;
 		} else
-			reposteMax = (long) (getExpNeed() * 0.25f); // Retail 99%
+			reposeMax = (long) (getExpNeed() * 0.25f); // Retail 99%
 	}
 
-	public void setCurrentReposteEnergy(long value) {
-		reposteCurrent = value;
+	public void setCurrentReposeEnergy(long value) {
+		reposeCurrent = value;
 	}
 
-	public long getCurrentReposteEnergy() {
-		return reposteCurrent;
+	public long getCurrentReposeEnergy() {
+		return reposeCurrent;
 	}
 
-	public long getMaxReposteEnergy() {
-		return reposteMax;
+	public long getMaxReposeEnergy() {
+		return reposeMax;
 	}
 
 	/**
@@ -363,10 +363,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 					GameServer.updateRatio(getRace(), -1);
 			}
 			if (oldLvl != level)
-				updateMaxReposte();
+				updateMaxRepose();
 
 			PacketSendUtility.sendPacket(this.getPlayer(),
-				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy()));
+				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
 		}
 	}
 
