@@ -89,6 +89,6 @@ public class Crypt {
 	 * @return obfuscated opcodec
 	 */
 	public static final int encodeOpcodec(int op) {
-		return (op + 0xCE) ^ 0xDF;
+		return (op + 0xCF) ^ 0xDF;
 	}
 }
