@@ -228,6 +228,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(item.getRandomCount());
 					writeD(item.getTempering());
 					writeD(item.getPackCount());
+					writeC(item.isAmplified() ? 1 : 0);
+          writeH(item.getBuffSkill());
 				}
 
 				inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE);
