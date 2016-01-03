@@ -411,6 +411,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canFly(Player player) {
+		if (!player.getCommonData().isDaeva()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN);
+			return false;
+		}
 		if (player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
 			if (!player.isInsideZoneType(ZoneType.FLY)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE);
@@ -424,7 +428,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 		// cannot fly in transform
 		if (player.getTransformModel().getRes6() == 1) {
-			// client sends message itself?
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS);
 			return false;
 		}
 		// cannot fly while private store is active
@@ -436,14 +440,15 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canGlide(Player player) {
-		// cannot glide in transform
-		if (player.getTransformModel().getRes6() == 1) {
-			// client sends message itself?
+		if (!player.getCommonData().isDaeva()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN);
 			return false;
 		}
-		// cannot glide while private store is active
-		if (player.getStore() != null)
+		// cannot glide in transform
+		if (player.getTransformModel().getRes6() == 1) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS);
 			return false;
+		}
 
 		return true;
 	}
