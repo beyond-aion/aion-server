@@ -54,11 +54,11 @@ public class Heal extends AdminCommand {
 		} else if (params[0].equals("repose") && creature instanceof Player) {
 			Player targetPlayer = (Player) creature;
 			PlayerCommonData pcd = targetPlayer.getCommonData();
-			pcd.setCurrentReposteEnergy(pcd.getMaxReposteEnergy());
-			PacketSendUtility.sendMessage(player, targetPlayer.getName() + " Reposte Energy has been fully refreshed !");
+			pcd.setCurrentReposeEnergy(pcd.getMaxReposeEnergy());
+			PacketSendUtility.sendMessage(player, targetPlayer.getName() + " Repose Energy has been fully refreshed !");
 			PacketSendUtility
-				.sendPacket(targetPlayer, new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(), pcd.getCurrentReposteEnergy(),
-					pcd.getMaxReposteEnergy()));
+				.sendPacket(targetPlayer, new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(), pcd.getCurrentReposeEnergy(),
+					pcd.getMaxReposeEnergy()));
 		} else {
 			int hp;
 			try {

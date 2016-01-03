@@ -180,48 +180,20 @@ public class ClassChangeService {
 		}
 	}
 
-	public static void setClass(Player player, PlayerClass playerClass) {
-		if (validateSwitch(player, playerClass)) {
-			player.getCommonData().setPlayerClass(playerClass);
-			player.getController().upgradePlayer();
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
-		}
-	}
-
-	private static boolean validateSwitch(Player player, PlayerClass playerClass) {
-		int level = player.getLevel();
+	public static boolean setClass(Player player, PlayerClass newClass) {
 		PlayerClass oldClass = player.getPlayerClass();
-		if (level != 9) {
-			PacketSendUtility.sendMessage(player, "You can only switch class at level 9");
-			return false;
-		}
 		if (!oldClass.isStartingClass()) {
 			PacketSendUtility.sendMessage(player, "You already switched class");
 			return false;
 		}
-		switch (oldClass) {
-			case WARRIOR:
-				if (playerClass == PlayerClass.GLADIATOR || playerClass == PlayerClass.TEMPLAR)
-					break;
-			case SCOUT:
-				if (playerClass == PlayerClass.ASSASSIN || playerClass == PlayerClass.RANGER)
-					break;
-			case MAGE:
-				if (playerClass == PlayerClass.SORCERER || playerClass == PlayerClass.SPIRIT_MASTER)
-					break;
-			case PRIEST:
-				if (playerClass == PlayerClass.CLERIC || playerClass == PlayerClass.CHANTER)
-					break;
-			case ENGINEER:
-				if (playerClass == PlayerClass.GUNNER || playerClass == PlayerClass.RIDER)
-					break;
-			case ARTIST:
-				if (playerClass == PlayerClass.BARD)
-					break;
-			default:
-				PacketSendUtility.sendMessage(player, "Invalid class switch chosen");
-				return false;
+		int id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
+		if (id > PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
+			PacketSendUtility.sendMessage(player, "Invalid class chosen");
+			return false;
 		}
+		player.getCommonData().setPlayerClass(newClass);
+		player.getController().upgradePlayer();
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
 		return true;
 	}
 }
