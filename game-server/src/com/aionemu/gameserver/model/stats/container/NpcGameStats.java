@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -59,7 +60,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMaxHp() {
 		Stat2 stat = getStat(StatEnum.MAXHP, owner.getObjectTemplate().getStatsTemplate().getMaxHp());
-		if (owner.getSpawn() instanceof SiegeSpawnTemplate && owner.getRating() == NpcRating.LEGENDARY && owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS)
+		if (owner.getSpawn() instanceof SiegeSpawnTemplate && owner.getRating() == NpcRating.LEGENDARY 
+			&& (owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS || owner.getRace() == Race.GHENCHMAN_LIGHT || owner.getRace() == Race.GHENCHMAN_DARK))
 			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 		return stat;
 	}
