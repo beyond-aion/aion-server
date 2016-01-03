@@ -24,21 +24,21 @@ public class ProcVPHealInstantEffect extends EffectTemplate {
 			Player player = (Player) effect.getEffected();
 			PlayerCommonData pcd = player.getCommonData();
 
-			long cap = pcd.getMaxReposteEnergy() * value2 / 100;
+			long cap = pcd.getMaxReposeEnergy() * value2 / 100;
 
-			if (pcd.isReadyForReposteEnergy() && pcd.getCurrentReposteEnergy() < cap) {
+			if (pcd.isReadyForReposeEnergy() && pcd.getCurrentReposeEnergy() < cap) {
 				int valueWithDelta = value + delta * effect.getSkillLevel();
 				long addEnergy = 0;
 				if (percent)
-					addEnergy = (int) (pcd.getMaxReposteEnergy() * valueWithDelta * 0.001);// recheck when more skills
+					addEnergy = (int) (pcd.getMaxReposeEnergy() * valueWithDelta * 0.001);// recheck when more skills
 				else
 					addEnergy = valueWithDelta;
 
-				pcd.addReposteEnergy(addEnergy);
+				pcd.addReposeEnergy(addEnergy);
 				PacketSendUtility.sendPacket(
 					player,
-					new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(), pcd.getCurrentReposteEnergy(), pcd
-						.getMaxReposteEnergy()));
+					new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(), pcd.getCurrentReposeEnergy(), pcd
+						.getMaxReposeEnergy()));
 			}
 		}
 	}

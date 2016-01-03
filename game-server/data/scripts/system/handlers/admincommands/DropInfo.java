@@ -96,7 +96,7 @@ public class DropInfo extends AdminCommand {
 
 		// Some personal drop boost
 		// EoR 10% Boost drop rate
-		boostDropRate += player.getCommonData().getCurrentReposteEnergy() > 0 ? 0.1f : 0;
+		boostDropRate += player.getCommonData().getCurrentReposeEnergy() > 0 ? 0.1f : 0;
 		// EoS 5% Boost drop rate
 		boostDropRate += player.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
