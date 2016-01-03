@@ -28603,7 +28603,7 @@
 			<item id="115001594" name="Lunatic Modor's Shield" player_class="TEMPLAR"/>
 			<item id="115001594" name="Lunatic Modor's Shield" player_class="GLADIATOR"/>
 			<item id="115001594" name="Lunatic Modor's Shield" player_class="CHANTER"/>
-			<item id="115001594" name="Lunatic Modor's Scale Shield" player_class="CLERIC"/>
+			<item id="115001595" name="Lunatic Modor's Scale Shield" player_class="CLERIC"/>
 		</items>
 	</decomposable>
     <decomposable item_id="188053122" decomposable_name="Illuminary Obelisk Loot [Weapon]" selectable="true">
