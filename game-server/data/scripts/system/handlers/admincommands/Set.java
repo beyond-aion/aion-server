@@ -3,14 +3,11 @@ package admincommands;
 import java.util.Arrays;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -113,27 +110,12 @@ public class Set extends AdminCommand {
 			Player player = target;
 
 			if (level <= GSConfig.PLAYER_MAX_LEVEL) {
-				int questId = player.getRace() == Race.ELYOS ? 1007 : 2009;
-				QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-				if (!player.getPlayerClass().isStartingClass() && level >= 10) {
-					if (qs == null) {
-						player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
-						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
-					} else if (qs.getStatus() != QuestStatus.COMPLETE) {
-						qs.setStatus(QuestStatus.COMPLETE);
-						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-					}
-					player.getCommonData().setDaeva(true);
-					player.getController().upgradePlayer();
-				} else if (level < 10 && qs == null) {
-					// don't delete ceremony quest
-					player.getCommonData().setDaeva(false);
-				}
-				player.getCommonData().setLevel(level);
+				player.getCommonData().setExpValue(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
+				player.getCommonData().setLevelValue(level);
+				player.getController().upgradePlayer();
 			}
 
-			PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + level);
+			PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + player.getLevel());
 		} else if (params[0].equals("title")) {
 			int titleId;
 			try {

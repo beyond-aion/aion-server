@@ -572,18 +572,6 @@ public class Player extends Creature {
 	 */
 	public void setQuestStateList(QuestStateList questStateList) {
 		this.questStateList = questStateList;
-		QuestState ceremonyQuestState = null;
-		switch (getRace()) {
-			case ELYOS:
-				ceremonyQuestState = questStateList.getQuestState(1007);
-				break;
-			case ASMODIANS:
-				ceremonyQuestState = questStateList.getQuestState(2009);
-				break;
-		}
-		if (ceremonyQuestState == null)
-			return;
-		playerCommonData.setDaeva(ceremonyQuestState.getStatus() == QuestStatus.COMPLETE);
 	}
 
 	/**

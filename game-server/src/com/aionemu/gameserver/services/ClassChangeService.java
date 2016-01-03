@@ -117,7 +117,6 @@ public class ClassChangeService {
 
 				}
 				completeQuest(player, 1006);
-				completeQuest(player, 1007);
 
 				// Stigma Quests Elyos
 				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
@@ -161,7 +160,6 @@ public class ClassChangeService {
 				}
 				// Optimate @Enomine
 				completeQuest(player, 2008);
-				completeQuest(player, 2009);
 
 				// Stigma Quests Asmodians
 				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
@@ -171,7 +169,7 @@ public class ClassChangeService {
 		}
 	}
 
-	private static void completeQuest(Player player, int questId) {
+	public static void completeQuest(Player player, int questId) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null) {
 			player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));

@@ -293,8 +293,7 @@ public final class QuestService {
 			qs.setNextRepeatTime(countNextRepeatTime(player, template));
 		}
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		if (player.getRace() == Race.ELYOS && id == 1007 || player.getRace() == Race.ASMODIANS && id == 2009) {
-			player.getCommonData().setDaeva(true);
+		if (player.getCommonData().updateDaeva()) {
 			player.getController().upgradePlayer();
 			SkillLearnService.addMissingSkills(player);
 		}
