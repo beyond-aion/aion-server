@@ -11,6 +11,7 @@ import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -143,6 +144,12 @@ public class EffectController {
 			if (nextEffect.isToggle() && nextEffect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW) {
 				int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
 				Collection<Effect> filteredMap = (nextEffect.getSkillSubType() == SkillSubType.CHANT ? this.getAuraEffects() : this.getNoShowToggleEffects());
+				// for ranger 2 toggle
+				if (nextEffect.getEffector() instanceof Player) {
+					Player player = (Player) nextEffect.getEffector();
+					if (player.getPlayerClass() == PlayerClass.RANGER)
+						mts = 2;
+				}
 				if (filteredMap.size() >= mts) {
 					Iterator<Effect> iter = filteredMap.iterator();
 					iter.next().endEffect();
@@ -308,6 +315,18 @@ public class EffectController {
 	public void removeHideEffects() {
 		for (Effect effect : abnormalEffectMap.values()) {
 			if (effect.isHideEffect() && owner.getVisualState() < 10) {
+				effect.endEffect();
+				abnormalEffectMap.remove(effect.getStack());
+			}
+		}
+	}
+
+	/**
+	 * Removes Petorderunsummon effects from owner.
+	 */
+	public void removePetOrderUnSummonEffects() {
+		for (Effect effect : abnormalEffectMap.values()) {
+			if (effect.isPetOrderUnSummonEffect()) {
 				effect.endEffect();
 				abnormalEffectMap.remove(effect.getStack());
 			}
@@ -563,43 +582,45 @@ public class EffectController {
 		}
 	}
 
-	public void dispelBuffCounterAtkEffect(int count, int dispelLevel, int power) {
+	private int removeEffectByTargetSlot(int count, SkillTargetSlot targetSlot, int dispelLevel, int power) {
 		for (Effect effect : abnormalEffectMap.values()) {
+			SkillTargetSlot ts = effect.getSkillTemplate().getTargetSlot();
 			DispelCategoryType dispelCat = effect.getDispelCategory();
-			SkillTargetSlot tragetSlot = effect.getSkillTemplate().getTargetSlot();
-			if (count == 0)
-				break;
-
-			if (effect.getDuration() >= 86400000 && !removebleEffect(effect)) {
-				continue;
-			}
-
-			if (effect.isSanctuaryEffect())
-				continue;
-
-			if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
-				|| effect.getTargetSlotLevel() >= 2)
-				continue;
-
-			boolean remove = false;
-			switch (dispelCat) {
-				case ALL:
-				case BUFF:
-					if (effect.getReqDispelLevel() <= dispelLevel)
-						remove = true;
+			if (ts == targetSlot) {
+				if (count == 0)
 					break;
-			}
+				if (effect.getDuration() >= 86400000 && !removebleEffect(effect))
+					continue;
+				if (effect.isSanctuaryEffect())
+					continue;
+				if (effect.getTargetSlotLevel() >= 2)
+					continue;
 
-			if (remove) {
-				if (removePower(effect, power)) {
-					effect.endEffect();
-					abnormalEffectMap.remove(effect.getStack());
+				boolean remove = false;
+				switch (dispelCat) {
+					case ALL:
+					case BUFF:
+						if (effect.getReqDispelLevel() <= dispelLevel)
+							remove = true;
+						break;
+				}
+				if (remove) {
+					if (removePower(effect, power)) {
+						effect.endEffect();
+						abnormalEffectMap.remove(effect.getStack());
+					} else if (owner instanceof Player)
+						PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT);
+					count--;
 				} else if (owner instanceof Player)
-					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT);
-				count--;
-			} else if (owner instanceof Player)
-				PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL);
+					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL);
+			}
 		}
+		return count;
+	}
+
+	public void dispelBuffCounterAtkEffect(int count, int dispelLevel, int power) {
+		if (removeEffectByTargetSlot(count, SkillTargetSlot.BUFF, dispelLevel, power) > 0)
+			removeEffectByTargetSlot(count, SkillTargetSlot.DEBUFF, dispelLevel, power);
 	}
 
 	// TODO this should be removed
@@ -892,7 +913,6 @@ public class EffectController {
 		if (delayId == 1)
 			return;
 		switch (delayId) {
-			case 2005:
 			case 273:
 			case 353:
 				size = 2;
@@ -915,8 +935,32 @@ public class EffectController {
 						toRemove = nextEffect;
 				}
 			}
-			if (i >= size && toRemove != null) {
+			if (i >= size && toRemove != null)
 				toRemove.endEffect();
+		}
+		// archer buffs
+		Iterator<Effect> iter2 = effects.iterator();
+		int count = 0;
+		Effect toRemove = null;
+		while (iter2.hasNext()) {
+			Effect nextEffect = iter2.next();
+			switch (nextEffect.getSkillTemplate().getCooldownId()) {
+				case 2005:// Dodging I
+				case 2020:// Dodging
+				case 2022:// Focused Shots
+				case 2024:// Aiming
+				case 2026:// Bestial Fury
+				case 2028:// Hunter's Eye
+				case 2030:// Strong Shots
+					count++;
+					if (toRemove == null) {
+						toRemove = nextEffect;
+						continue;
+					}
+					if (count >= 2) {
+						toRemove.endEffect();
+						break;
+					}
 			}
 		}
 	}

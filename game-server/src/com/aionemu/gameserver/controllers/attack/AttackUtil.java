@@ -6,7 +6,6 @@ import java.util.List;
 import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.effect.DamageEffect;
@@ -29,7 +27,6 @@ import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
 import com.aionemu.gameserver.skillengine.model.HitType;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
@@ -140,11 +137,9 @@ public class AttackUtil {
 		}
 
 		if (status.isCritical()) {
-			if (attacker instanceof Player) {
+			if (attacker instanceof Player)
 				damage = (int) calculateWeaponCritical(attacked, damage, weapon, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
-				// Proc Stumble/Stagger on Crit calculation
-				applyEffectOnCritical((Player) attacker, attacked);
-			} else
+			else
 				damage = (int) calculateWeaponCritical(attacked, damage, null, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
 		}
 
@@ -457,26 +452,15 @@ public class AttackUtil {
 				break;
 		}
 
-		boolean blockedCriticalEffect = false;
-
 		switch (element) {
 			case NONE:
 				switch (AttackStatus.getBaseStatus(status)) {
 					case CRITICAL:
-						if (effector instanceof Player) {
+						if (effector instanceof Player)
 							damage = (int) calculateWeaponCritical(effected, damage, ((Player) effector).getEquipment().getMainHandWeapon(), critAddDmg,
 								StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
-							for (EffectTemplate et : effect.getEffectTemplates()) {
-								if (et.getSubEffect() != null) {
-									blockedCriticalEffect = true;
-									break;
-								}
-							}
-							if (!blockedCriticalEffect)
-								applyEffectOnCritical((Player) effector, effected);
-						} else {
+						else
 							damage = (int) calculateWeaponCritical(effected, damage, null, critAddDmg, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
-						}
 						break;
 				}
 				break;
@@ -505,9 +489,9 @@ public class AttackUtil {
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())
 			damage /= effect.getSkill().getEffectedList().size();
 
-		if (template instanceof ProcAtkInstantEffect && !effect.getStack().startsWith("ITEM_SKILL_PROC")) //FIXME: I'm not very amused, what I've seen!
+		if (template instanceof ProcAtkInstantEffect && !effect.getStack().startsWith("ITEM_SKILL_PROC")) // FIXME: I'm not very amused, what I've seen!
 			damage = skillDamage;
-		
+
 		if (damage < 0)
 			damage = 0;
 
@@ -787,38 +771,4 @@ public class AttackUtil {
 
 		});
 	}
-
-	public static void applyEffectOnCritical(Player attacker, Creature attacked) {
-		int skillId = 0;
-		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
-		if (mainHandWeaponType != null) {
-			switch (mainHandWeaponType) {
-				case POLEARM:
-				case STAFF:
-				case GREATSWORD:
-					skillId = 8218;
-					break;
-				case BOW:
-					skillId = 8217;
-			}
-		}
-
-		if (skillId == 0)
-			return;
-
-		if (attacked.getEffectController().isUnderShield())
-			return;
-		// On retail this effect apply on each crit with 10% of base chance
-		// plus bonus effect penetration calculated above
-		if (Rnd.get(1, 100) > 10)
-			return;
-
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (template == null)
-			return;
-		Effect e = new Effect(attacker, attacked, template, template.getLvl(), 0);
-		e.initialize();
-		e.applyEffect();
-	}
-
 }

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers;
 
 import java.util.Objects;
 
+import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -103,7 +104,7 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG log) {
+	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG log, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 
@@ -111,7 +112,7 @@ public class SummonController extends CreatureController<Summon> {
 		if (getOwner().getMode() == SummonMode.RELEASE)
 			return;
 
-		super.onAttack(creature, skillId, type, damage, notifyAttack, log);
+		super.onAttack(creature, skillId, type, damage, notifyAttack, log, attackStatus);
 		PacketSendUtility.sendPacket(getOwner().getMaster(), new SM_SUMMON_UPDATE(getOwner()));
 	}
 

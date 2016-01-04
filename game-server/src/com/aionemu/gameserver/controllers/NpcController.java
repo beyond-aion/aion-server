@@ -11,6 +11,7 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
+import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -30,6 +31,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
@@ -41,6 +43,7 @@ import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -286,9 +289,13 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onDialogRequest(Player player) {
 		// notify npc dialog request observer
-		if (!getOwner().getObjectTemplate().canInteract()) {
+		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC);
+			AuditLogger.info(player, "Player " + player.getName() + " try to talk NPC in wrong distance ");
 			return;
 		}
+		if (!getOwner().getObjectTemplate().canInteract())
+			return;
 		player.getObserveController().notifyRequestDialogObservers(getOwner());
 
 		getOwner().getAi2().onCreatureEvent(AIEventType.DIALOG_START, player);
@@ -306,7 +313,7 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId) {
+	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 		final Creature actingCreature;
@@ -317,7 +324,7 @@ public class NpcController extends CreatureController<Npc> {
 		else
 			actingCreature = creature.getActingCreature();
 
-		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId);
+		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus);
 
 		Npc npc = getOwner();
 

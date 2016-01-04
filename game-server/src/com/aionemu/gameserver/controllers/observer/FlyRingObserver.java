@@ -24,7 +24,7 @@ public class FlyRingObserver extends ActionObserver {
 
 	private Point3D oldPosition;
 
-	SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(1856);
+	SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(265); // Wings of Aether
 
 	public FlyRingObserver() {
 		super(ObserverType.MOVE);

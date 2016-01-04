@@ -17,6 +17,7 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Homing;
@@ -26,6 +27,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -33,8 +35,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -184,7 +188,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
 	 */
-	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId) {
+	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
 
 		// avoid killing players after duel
 		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && getOwner() != attacker)
@@ -239,6 +243,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		getOwner().incrementAttackedCount();
 
+		if (attacker instanceof Player)
+			applyEffectOnCritical((Player) attacker, getOwner(), status);
+
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
 
@@ -250,15 +257,56 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		});
 	}
 
+	private void applyEffectOnCritical(Player attacker, Creature attacked, AttackStatus status) {
+		if (status == AttackStatus.CRITICAL) {
+			int skillId = 0;
+			ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
+			if (mainHandWeaponType != null) {
+				switch (mainHandWeaponType) {
+					case POLEARM:
+					case STAFF:
+					case GREATSWORD:
+						skillId = 8218;
+						break;
+					case BOW:
+						skillId = 8217;
+				}
+			}
+
+			if (skillId == 0)
+				return;
+
+			if (attacked.getEffectController().isUnderShield())
+				return;
+			// On retail this effect apply on each crit with 10% of base chance
+			// plus bonus effect penetration calculated above
+			if (Rnd.get(100) > 10)
+				return;
+
+			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			if (template == null)
+				return;
+			Effect e = new Effect(attacker, attacked, template, template.getLvl(), 0);
+			e.initialize();
+			e.applyEffect();
+
+		}
+
+	}
+
 	/**
 	 * Perform tasks when Creature was attacked
 	 */
-	public final void onAttack(Creature creature, int skillId, final int damage, boolean notifyAttack) {
-		this.onAttack(creature, skillId, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR);
+	public final void onAttack(Creature creature, int skillId, final int damage, boolean notifyAttack, AttackStatus attackStatus) {
+		this.onAttack(creature, skillId, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, attackStatus);
 	}
 
 	public final void onAttack(Creature creature, final int damage, boolean notifyAttack) {
-		this.onAttack(creature, 0, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR);
+		this.onAttack(creature, 0, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, null);
+	}
+
+	public final void onAttack(Creature creature, final int damage, boolean notifyAttack, AttackStatus attackStatus) {
+		this.onAttack(creature, 0, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, attackStatus);
 	}
 
 	/**
@@ -320,6 +368,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			damage += result.getDamage();
 		}
 
+		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.get(0).getAttackStatus());
+
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time,
 			attackType, attackResult), AIEventType.CREATURE_NEEDS_HELP);
 
@@ -328,11 +378,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackObservers(target);
 
 		final Creature creature = getOwner();
-		if (time == 0) {
-			target.getController().onAttack(getOwner(), damage, true);
-		} else {
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, creature, damage), time);
-		}
+		if (time == 0)
+			target.getController().onAttack(getOwner(), damage, true, firstAttackStatus);
+		else
+			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, creature, damage, firstAttackStatus), time);
 	}
 
 	/**
@@ -484,7 +533,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (skill == null)
 			return;
 		creature.setCasting(null);
-		if (creature instanceof Npc) 
+		if (creature instanceof Npc)
 			((Npc) creature).getGameStats().setLastSkill(null);
 		if (creature.getSkillNumber() > 0)
 			creature.setSkillNumber(creature.getSkillNumber() - 1);
@@ -503,7 +552,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		castingSkill.cancelCast();
 		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
 		creature.setCasting(null);
-		if (creature instanceof Npc) 
+		if (creature instanceof Npc)
 			((Npc) creature).getGameStats().setLastSkill(null);
 		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
 		if (getOwner().getAi2() instanceof NpcAI2) {
@@ -539,16 +588,18 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		private Creature target;
 		private Creature creature;
 		private int finalDamage;
+		private AttackStatus attackStatus;
 
-		public DelayedOnAttack(Creature target, Creature creature, int finalDamage) {
+		public DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus) {
 			this.target = target;
 			this.creature = creature;
 			this.finalDamage = finalDamage;
+			this.attackStatus = attackStatus;
 		}
 
 		@Override
 		public void run() {
-			target.getController().onAttack(creature, finalDamage, true);
+			target.getController().onAttack(creature, finalDamage, true, attackStatus);
 			target = null;
 			creature = null;
 		}

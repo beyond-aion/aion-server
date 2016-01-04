@@ -139,8 +139,11 @@ public class AttackShieldObserver extends AttackCalcObserver {
 						continue;
 				}
 				if (MathUtil.isIn3dRange(attacker, effect.getEffected(), maxradius)) {
-					int reflectedDamage = attackResult.getDamage() * totalHit / 100;
-					int reflectedHit = Math.max(reflectedDamage, hit); // percentage of damage, but at least hit value
+					int reflectedHit = attackResult.getDamage();
+					if (hit > 0 || totalHit > 0) {
+						int reflectedDamage = attackResult.getDamage() * totalHit / 100;
+						reflectedHit = Math.max(reflectedDamage, hit); // percentage of damage, but at least hit value
+					}
 					attackResult.setShieldType(shieldType.getId());
 					if (attacker instanceof Npc) {
 						reflectedHit = attacker.getAi2().modifyDamage(attacker, reflectedHit);
@@ -185,7 +188,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedSkillId(effect.getSkillId());
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
-					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR);
+					effect.getEffector().getController()
+						.onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR, attackResult.getAttackStatus());
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -173,6 +174,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
+		if (getOwner().getPosition().getMapRegion() == null) // Prevents exception when method is called before the char is spawned
+			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
@@ -181,9 +184,8 @@ public class PlayerController extends CreatureController<Player> {
 			int diff = 0;
 			if (questId <= 0xFFFF)
 				diff = QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel());
-			if (diff <= 2 && QuestService.checkStartConditions(new QuestEnv(null, getOwner(), questId, 0), false)) {
+			if (diff <= 2 && QuestService.checkStartConditions(new QuestEnv(null, getOwner(), questId, 0), false))
 				nearbyQuestList.put(questId, diff);
-			}
 		}
 		PacketSendUtility.sendPacket(getOwner(), new SM_NEARBY_QUESTS(nearbyQuestList));
 	}
@@ -405,7 +407,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
 			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));
-		}else if (showPacket) {
+		} else if (showPacket) {
 			int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
 			if (player.getSKInfo().getRank() > 1)
 				kiskTimeRemaining = 0;
@@ -480,7 +482,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId) {
+	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 
@@ -489,7 +491,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		cancelUseItem();
 		cancelGathering();
-		super.onAttack(creature, skillId, type, damage, notifyAttack, logId);
+		super.onAttack(creature, skillId, type, damage, notifyAttack, logId, attackStatus);
 
 		if (creature instanceof Npc) {
 			QuestEngine.getInstance().onAttack(new QuestEnv(creature, getOwner(), 0, 0));
@@ -621,9 +623,8 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
 			Skill skill = SkillEngine.getInstance().getSkillFor(player, skillEntry.getSkillId(), player.getTarget());
-			if (skill != null && skill.isPassive()) {
-				skill.useSkill();
-			}
+			if (skill != null && skill.isPassive())
+				SkillEngine.getInstance().applyEffectDirectly(skill.getSkillId(), player, player, 0);
 		}
 	}
 
