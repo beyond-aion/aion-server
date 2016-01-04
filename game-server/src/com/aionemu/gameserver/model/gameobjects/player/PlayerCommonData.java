@@ -204,28 +204,32 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			return;
 
 		long reward = value;
-		if (this.getPlayer() != null && rewardType != null)
-			reward = rewardType.calcReward(this.getPlayer(), value);
-
 		long repose = 0;
-		if (getCurrentReposeEnergy() > 0) {
-			long allowedExp = Math.min(getCurrentReposeEnergy(), reward);
-			addReposeEnergy(-allowedExp);
-			repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
-		}
-
 		long salvation = 0;
-		if (this.isReadyForSalvationPoints() && this.getCurrentSalvationPercent() > 0) {
-			salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
-			// TODO! remove salvation points?
+		Player player = getPlayer();
+		if (player != null && player.getWorldId() == 301160000) // nightmare circus
+			return;
+
+		if (player != null && rewardType != null)
+			reward = rewardType.calcReward(player, value);
+
+		if (reward > 0) {
+			if (getCurrentReposeEnergy() > 0) {
+				long allowedExp = Math.min(getCurrentReposeEnergy(), reward);
+				addReposeEnergy(-allowedExp);
+				repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
+			}
+
+			if (this.isReadyForSalvationPoints() && this.getCurrentSalvationPercent() > 0) {
+				salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
+				// TODO! remove salvation points?
+			}
+	
+			reward += repose + salvation;
 		}
 
-		reward += repose + salvation;
-		if (getPlayer() != null && getPlayer().getWorldId() == 301160000) {
-			reward = 0;
-		}
 		this.setExp(this.exp + reward);
-		if (this.getPlayer() != null) {
+		if (player != null) {
 			if (rewardType != null) {
 				switch (rewardType) {
 					case GROUP_HUNTING:
@@ -233,51 +237,51 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 					case QUEST:
 						if (npcNameId == 0) // Exeption quest w/o reward npc
 							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 						else if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
 						else
 							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
 						break;
 					case PVP_KILL:
 						if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
 						else
 							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
 						break;
 					case CRAFTING:
 					case GATHERING:
 						if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP(Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP(Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
 						else
 							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 						break;
 				}
 			}
