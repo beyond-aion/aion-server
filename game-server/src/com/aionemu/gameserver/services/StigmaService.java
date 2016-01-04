@@ -16,14 +16,12 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
-import com.aionemu.gameserver.model.templates.item.RequireSkill;
 import com.aionemu.gameserver.model.templates.item.Stigma;
-import com.aionemu.gameserver.model.templates.item.Stigma.StigmaSkill;
+import com.aionemu.gameserver.model.templates.item.StigmaSkill;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -266,7 +264,7 @@ public class StigmaService {
 
 	public static void removeLinkedStigmaSkills(Player player) {
 		boolean sendRemoveMsg = false;
-		int level = player.getSkillList().getLinkedStigmaSkills().length;
+		int level = player.getSkillList().getLinkedStigmaSkills().size();
 		for (PlayerSkillEntry sSkill : player.getSkillList().getLinkedStigmaSkills()) {
 			SkillLearnService.removeSkill(player, sSkill.getSkillId());
 			if (!sendRemoveMsg) {

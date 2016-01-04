@@ -200,7 +200,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int randomNum = readD();
 			int tempering = readD();
 			int packCount = readD();
-			boolean itemAmplified = readD() == 1;
+			boolean itemAmplified = readC() == 1;
 			int buffSkill = readH();
 			if (PlayerTransferConfig.ALLOW_INV) {
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(itemId);
@@ -288,7 +288,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int randomNum = readD();
 			int tempering = readD();
 			int packCount = readD();
-			boolean itemAmplified = readD() == 1;
+			boolean itemAmplified = readC() == 1;
 			int buffSkill = readH();
 
 			if (PlayerTransferConfig.ALLOW_WAREHOUSE) {

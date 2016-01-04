@@ -232,34 +232,26 @@ public final class QuestService {
 
 	private static void giveReward(QuestEnv env, Rewards rewards) {
 		Player player = env.getPlayer();
-		if (rewards.getGold() != null) {
+		if (rewards.getGold() != null)
 			player.getInventory().increaseKinah((long) (player.getRates().getQuestKinahRate() * rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
-		}
 		if (rewards.getExp() != null) {
 			NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(env.getTargetId());
 			player.getCommonData().addExp(rewards.getExp(), RewardType.QUEST, npcTemplate != null ? npcTemplate.getNameId() : 0);
 		}
-		if (rewards.getTitle() != null) {
+		if (rewards.getTitle() != null)
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
-		}
-		if (rewards.getAp() != null) {
+		if (rewards.getAp() != null)
 			AbyssPointsService.addAp(player, (int) (player.getRates().getQuestApRate() * rewards.getAp()));
-		}
-		if (rewards.getDp() != null) {
+		if (rewards.getDp() != null)
 			player.getCommonData().addDp(rewards.getDp());
-		}
-		if (rewards.getGp() != null) {
+		if (rewards.getGp() != null)
 			GloryPointsService.addGp(player, rewards.getGp());
-		}
+
 		if (rewards.getExtendInventory() != null) {
-			if (rewards.getExtendInventory() == 1) {
+			if (rewards.getExtendInventory() == 1)
 				CubeExpandService.questExpand(player);
-			} else if (rewards.getExtendInventory() == 2) {
+			else if (rewards.getExtendInventory() == 2)
 				WarehouseService.expand(player, false);
-			}
-		}
-		if (rewards.getExtendStigma() != null) {
-			StigmaService.extendAdvancedStigmaSlots(player);
 		}
 	}
 
@@ -275,9 +267,8 @@ public final class QuestService {
 				if (qi != null) {
 					count = player.getInventory().getItemCountByItemId(qi.getItemId());
 					if (count > 0) {
-						if (!player.getInventory().decreaseByItemId(qi.getItemId(), count, QuestStatus.COMPLETE)) {
+						if (!player.getInventory().decreaseByItemId(qi.getItemId(), count, QuestStatus.COMPLETE))
 							return false;
-						}
 					}
 				}
 			}
@@ -295,10 +286,11 @@ public final class QuestService {
 			player.getController().upgradePlayer();
 			SkillLearnService.addMissingSkills(player);
 		}
+		QuestEngine.getInstance().onEnterZoneMissionEnd(env); // Notifies mission end @ToDo: to rename to onMissionEnd
 		QuestEngine.getInstance().onLvlUp(env);
-		if (template.getNpcFactionId() != 0) {
+		if (template.getNpcFactionId() != 0)
 			player.getNpcFactions().completeQuest(template);
-		}
+
 		player.getController().updateNearbyQuests();
 		return true;
 	}
@@ -361,7 +353,8 @@ public final class QuestService {
 				return false;
 			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount()) {
 				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
+					PacketSendUtility.sendPacket(player,
+						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
 				return false;
 			}
 		}
@@ -1014,7 +1007,7 @@ public final class QuestService {
 		for (CollectItem collectItem : collectItems.getCollectItem()) {
 			int collectItemId = collectItem.getItemId();
 			long count = player.getInventory().getItemCountByItemId(collectItemId);
-			if (collectItem.getCount() > count)
+			if (collectItem.getCount() > count && drop.getItemId() == collectItemId)
 				return true;
 		}
 		return false;

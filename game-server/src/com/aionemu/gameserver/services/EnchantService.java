@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.services;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javolution.util.FastTable;
 
@@ -22,7 +22,6 @@ import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.actions.EnchantItemAction;
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -87,9 +86,9 @@ public class EnchantService {
 
 		float typeMod = itemTemplate.isWeapon() ? 0.6f : 0.4f;
 		int itemLevel = itemTemplate.getLevel();
-		
+
 		int averageLevel = (int) (itemLevel * 1.4f * (typeMod + qualityMod));
-		
+
 		int finalLevel = Rnd.get(averageLevel - 10, averageLevel + 10);
 
 		int stoneId = 166000191; // Alpha
@@ -314,9 +313,8 @@ public class EnchantService {
 			}
 		}
 
-		if (targetItem.isAmplified()) {
+		if (targetItem.isAmplified())
 			maxEnchant = EnchantsConfig.MAX_AMPLIFICATION_LEVEL;
-		}
 
 		// Temp fix for not increasing over max; see TODO above
 		targetItem.setEnchantLevel(Math.min(currentEnchant, maxEnchant));
@@ -330,9 +328,9 @@ public class EnchantService {
 			int buffId = getEquipBuff(targetItem);
 			targetItem.setBuffSkill(buffId);
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
-			if (targetItem.isEquipped()) {
+			if (targetItem.isEquipped())
 				SkillLearnService.addSkill(player, buffId);
-			}
+
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), addLevel,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}
@@ -343,11 +341,9 @@ public class EnchantService {
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
 
 		if (targetItem.getEnchantLevel() > 0 && targetItem.isEquipped()) {
-			ItemGroup itemGroup = targetItem.getItemTemplate().getItemGroup();
-			HashMap<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemGroup);
-			if (enchant != null) {
+			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(targetItem.getItemTemplate());
+			if (enchant != null)
 				targetItem.setEnchantEffect(new EnchantEffect(targetItem, player, enchant.get(targetItem.getEnchantLevel())));
-			}
 		}
 
 		if (result)
@@ -511,9 +507,8 @@ public class EnchantService {
 
 		// Decrease required supplements
 		player.updateSupplements();
-		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
-		}
 		if (result) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(new DescriptionId(targetItem.getNameId())));
 			if (targetWeapon == 1) {
@@ -538,7 +533,7 @@ public class EnchantService {
 	}
 
 	public static int getEquipBuff(Item item) {
-		List<Integer> skillsSet = new FastTable<Integer>();
+		List<Integer> skillsSet = new FastTable<>();
 		switch (item.getItemTemplate().getExceedEnchantSkill()) {
 			case RANK1_SET1_MAGICAL_GLOVES:
 				skillsSet = (Arrays.asList(13046, 13042, 13055));
@@ -852,21 +847,53 @@ public class EnchantService {
 			case RANK4_SET3_PHYSICAL_WEAPON:
 				skillsSet = (Arrays.asList(13037, 13001, 13005));
 				break;
+			case RANK5_SET1_MAGICAL_TORSO:
+				skillsSet = (Arrays.asList(13235, 13236, 13238));
+				break;
+			case RANK5_SET1_MAGICAL_GLOVES:
+				skillsSet = (Arrays.asList(13248, 13253, 13251));
+				break;
+			case RANK5_SET1_MAGICAL_PANTS:
+				skillsSet = (Arrays.asList(13241, 13079, 13240));
+				break;
+			case RANK5_SET1_MAGICAL_SHOULDER:
+				skillsSet = (Arrays.asList(13269, 13279, 13247));
+				break;
+			case RANK5_SET1_MAGICAL_SHOES:
+				skillsSet = (Arrays.asList(13245, 13266, 13246));
+				break;
+			case RANK5_SET1_PHYSICAL_TORSO:
+				skillsSet = (Arrays.asList(13235, 13236, 13238));
+				break;
+			case RANK5_SET1_PHYSICAL_GLOVES:
+				skillsSet = (Arrays.asList(13251, 13249, 13248));
+				break;
+			case RANK5_SET1_PHYSICAL_SHOULDER:
+				skillsSet = (Arrays.asList(13270, 13247, 13269));
+				break;
+			case RANK5_SET1_PHYSICAL_PANTS:
+				skillsSet = (Arrays.asList(13241, 13079, 13240));
+				break;
+			case RANK5_SET1_PHYSICAL_SHOES:
+				skillsSet = (Arrays.asList(13245, 13244, 13266));
+				break;
+			case RANK5_SET1_MAGICAL_WEAPON:
+				skillsSet = (Arrays.asList(13228, 13234, 13238));
+				break;
+			case RANK5_SET1_PHYSICAL_WEAPON:
+				skillsSet = (Arrays.asList(13229, 13234, 13238));
+				break;
 		}
 		return skillsSet.get(Rnd.get(0, skillsSet.size() - 1));
 	}
 
 	public static void amplifyItem(Player player, int targetItemObjId, int materialId, int toolId) {
-
-		if (player == null) {
+		if (player == null)
 			return;
-		}
-
 		Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemObjId);
 
-		if (targetItem == null) {
+		if (targetItem == null)
 			targetItem = player.getInventory().getItemByObjId(targetItemObjId);
-		}
 
 		Item material = player.getInventory().getItemByObjId(materialId);
 		Item tool = player.getInventory().getItemByObjId(toolId);
@@ -875,27 +902,22 @@ public class EnchantService {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402655));
 			return;
 		}
-
 		if (targetItem.isAmplified()) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402656));
 			return;
 		}
-
 		if (!targetItem.getItemTemplate().canExceedEnchant()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_01(new DescriptionId(targetItem.getNameId())));
 			return;
 		}
-
 		if (targetItem.getEnchantLevel() < targetItem.getMaxEnchantLevel()) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402651));
 			return;
 		}
-
 		if (targetItem.getItemId() != material.getItemId() && material.getItemId() != 166500002) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402655));
 			return;
 		}
-
 		if (player.getInventory().decreaseByObjectId(material.getObjectId(), 1) && player.getInventory().decreaseByObjectId(tool.getObjectId(), 1)) {
 			targetItem.setAmplified(true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SUCCEED(new DescriptionId(targetItem.getNameId())));

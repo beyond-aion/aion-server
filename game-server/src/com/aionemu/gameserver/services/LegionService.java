@@ -17,6 +17,7 @@ import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -952,7 +953,7 @@ public class LegionService {
 				PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(splitter.getNext(), storageId, whLvl, splitter.isFirst(), player));
 			}
 			PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, storageId, whLvl, items.isEmpty(), player));
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 25));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.LEGION_WAREHOUSE.id()));
 		}
 	}
 

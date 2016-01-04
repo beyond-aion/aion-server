@@ -5,6 +5,7 @@ import java.util.List;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
@@ -19,18 +20,18 @@ import com.aionemu.gameserver.skillengine.change.Func;
  */
 public class SerialKillerDebuff implements StatOwner {
 
-	private List<IStatFunction> functions = new FastTable<IStatFunction>();
+	private List<IStatFunction> functions = new FastTable<>();
 	private RankRestriction rankRestriction;
 
-	public void applyEffect(Player player, int rank) {
+	public void applyEffect(Player player, String type, Race race, int rank) {
 		if (rank == 0)
 			return;
 
-		rankRestriction = DataManager.SERIAL_KILLER_DATA.getRankRestriction(rank);
-
-		if (hasDebuff()) {
+		rankRestriction = DataManager.SERIAL_KILLER_DATA.getRankRestriction(type, race, rank);
+		if (rankRestriction == null)
+			return;
+		if (hasDebuff())
 			endEffect(player);
-		}
 
 		for (RankPenaltyAttr rankPenaltyAttr : rankRestriction.getPenaltyAttr()) {
 			if (rankPenaltyAttr.getFunc().equals(Func.PERCENT))

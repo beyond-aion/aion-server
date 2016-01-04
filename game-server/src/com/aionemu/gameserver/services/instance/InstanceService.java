@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javolution.util.FastTable;
 
@@ -43,8 +44,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
-	private static final FastTable<Integer> instanceAggro = new FastTable<Integer>();
-	private static final FastTable<Integer> instanceCoolDownFilter = new FastTable<Integer>();
+	private static final List<Integer> instanceAggro = new FastTable<>();
+	private static final List<Integer> instanceCoolDownFilter = new FastTable<>();
 	private static final int SOLO_INSTANCES_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {
@@ -78,18 +79,16 @@ public class InstanceService {
 
 		map.addInstance(nextInstanceId, worldMapInstance);
 		
-		if(event == null) {
+		if(event == null)
 			SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficult, ownerId);
-		} else {
+		else
 			worldMapInstance.setInstanceHandler(event);
-		}
 		
 		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
 
 		// finally start the checker
-		if (map.isInstanceType()) {
+		if (map.isInstanceType())
 			startInstanceChecker(worldMapInstance);
-		}
 
 		return worldMapInstance;
 	}
@@ -110,9 +109,8 @@ public class InstanceService {
 	 * Instance will be destroyed All players moved to bind location All objects - deleted
 	 */
 	public static void destroyInstance(WorldMapInstance instance) {
-		if (instance.getEmptyInstanceTask() != null) {
+		if (instance.getEmptyInstanceTask() != null)
 			instance.getEmptyInstanceTask().cancel(false);
-		}
 
 		int worldId = instance.getMapId();
 		WorldMap map = World.getInstance().getWorldMap(worldId);
@@ -387,7 +385,7 @@ public class InstanceService {
 				continue;
 			for (Item item : storage.getItems()) {
 				if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
-					player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
+					storage.decreaseByObjectId(item.getObjectId(), item.getItemCount());
 			}
 		}
 

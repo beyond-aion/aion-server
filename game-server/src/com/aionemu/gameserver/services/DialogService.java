@@ -10,6 +10,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.PricesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.SubDialogType;
+import com.aionemu.gameserver.model.templates.npc.TalkInfo;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
@@ -66,28 +68,22 @@ public class DialogService {
 	private static final Logger log = LoggerFactory.getLogger(DialogService.class);
 
 	public static void onCloseDialog(Npc npc, Player player) {
-		switch (npc.getObjectTemplate().getTitleId()) {
-			case 350409:
-			case 315073:
-			case 463212:
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 0));
-				Legion legion = player.getLegion();
-				if (legion != null) {
-					LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
-					if (lwh.getWhUser() == player.getObjectId()) {
-						lwh.setWhUser(0);
-					}
+		if (checkFuncDialog(DialogAction.OPEN_LEGION_WAREHOUSE.id(), npc)) {
+			sendDialogWindow(DialogAction.NULL.id(), player, npc);
+			Legion legion = player.getLegion();
+			if (legion != null) {
+				LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
+				if (lwh.getWhUser() == player.getObjectId()) {
+					lwh.setWhUser(0);
 				}
-				break;
+			}
 		}
 	}
 
 	public static void onDialogSelect(int dialogId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
-
 		QuestEnv env = new QuestEnv(npc, player, questId, dialogId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
 		int targetObjectId = npc.getObjectId();
-		int titleId = npc.getObjectTemplate().getTitleId();
 
 		if (player.getAccessLevel() >= 3 && CustomConfig.ENABLE_SHOW_DIALOGID) {
 			PacketSendUtility.sendMessage(player, "dialogId: " + dialogId);
@@ -125,41 +121,39 @@ public class DialogService {
 					}
 					break;
 				}
-				case OPEN_STIGMA_WINDOW: { // stigma
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 1));
+				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
+					if (!RestrictionsManager.canUseWarehouse(player))
+						return;
+					sendDialogWindow(dialogId, player, npc);
 					break;
-				}
-				case CREATE_LEGION: { // create legion
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 2));
+				case OPEN_VENDOR: // Consign trade?? npc karinerk, koorunerk (2.5)
+				case OPEN_STIGMA_WINDOW: // stigma
+				case CREATE_LEGION: // create legion
+				case OPEN_STIGMA_ENCHANT:
+				case GIVE_ITEM_PROC: // Godstone socketing (2.5)
+				case REMOVE_MANASTONE: // remove mana stone (2.5)
+				case CHANGE_ITEM_SKIN: // modify appearance (2.5)
+				case ITEM_UPGRADE: // item upgrade (4.7)
+				case CLOSE_LEGION_WAREHOUSE: // WTF??? Quest dialog packet (2.5)
+				case CRAFT: // (2.5)
+				case OPEN_INSTANCE_RECRUIT: // TODO NEW INSTANCE FIND GROUP SYSTEM
+				case INSTANCE_ENTRY: // (2.5)
+				case COMPOUND_WEAPON: // armsfusion (2.5)
+				case DECOMPOUND_WEAPON: // armsbreaking (2.5)
+				case HOUSING_BUILD: // housing build
+				case HOUSING_DESTRUCT: // housing destruct
+				case CHARGE_ITEM_SINGLE: // condition an individual item
+				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
+				case TOWN_CHALLENGE: // town improvement
+					sendDialogWindow(dialogId, player, npc);
 					break;
-				}
-				case DISPERSE_LEGION: { // disband legion
+				case DISPERSE_LEGION: // disband legion
 					LegionService.getInstance().requestDisbandLegion(npc, player);
 					break;
-				}
-				case RECREATE_LEGION: { // recreate legion
+				case RECREATE_LEGION: // recreate legion
 					LegionService.getInstance().recreateLegion(npc, player);
 					break;
-				}
-				case DEPOSIT_CHAR_WAREHOUSE: { // warehouse (2.5)
-					switch (titleId) {
-						case 315008:
-						case 350417:
-						case 462878:
-						case 0:
-							if (!RestrictionsManager.canUseWarehouse(player))
-								return;
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 26));
-							// WarehouseService.sendWarehouseInfo(player, true);
-							break;
-					}
-					break;
-				}
-				case OPEN_VENDOR: { // Consign trade?? npc karinerk, koorunerk (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 13));
-					break;
-				}
-				case RECOVERY: { // soul healing (2.5)
+				case RECOVERY:// soul healing (2.5)
 					final long expLost = player.getCommonData().getExpRecoverable();
 					if (expLost == 0) {
 						player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
@@ -199,8 +193,7 @@ public class DialogService {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE);
 					}
 					break;
-				}
-				case ENTER_PVP: { // (2.5)
+				case ENTER_PVP: // (2.5)
 					switch (npc.getNpcId()) {
 						case 204089: // pvp arena in pandaemonium.
 							TeleportService2.teleportTo(player, 120010000, 1, 984f, 1543f, 222.1f);
@@ -213,8 +206,7 @@ public class DialogService {
 							break;
 					}
 					break;
-				}
-				case LEAVE_PVP: { // (2.5)
+				case LEAVE_PVP: // (2.5)
 					switch (npc.getNpcId()) {
 						case 204087:
 							TeleportService2.teleportTo(player, 120010000, 1, 1005.1f, 1528.9f, 222.1f);
@@ -227,38 +219,20 @@ public class DialogService {
 							break;
 					}
 					break;
-				}
-				case GIVE_ITEM_PROC: { // Godstone socketing (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 21));
-					break;
-				}
-				case REMOVE_MANASTONE: { // remove mana stone (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 20));
-					break;
-				}
-				case CHANGE_ITEM_SKIN: { // modify appearance (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 19));
-					break;
-				}
-				case ITEM_UPGRADE: { // item upgrade (4.7)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 52));
-					break;
-				}
-				case AIRLINE_SERVICE: { // flight and teleport (2.5)
+				case AIRLINE_SERVICE: // flight and teleport (2.5)
 					if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
 						int level = player.getLevel();
-						if (level < 9) {
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
-						} else {
+						if (level < 9)
+							sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
+						else
 							TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-						}
 					} else {
 						switch (npc.getNpcId()) {
 							case 203194: {
 								if (player.getRace() == Race.ELYOS) {
 									QuestState qs = player.getQuestStateList().getQuestState(1006);
 									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
+										sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
 									else
 										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
 								}
@@ -268,7 +242,7 @@ public class DialogService {
 								if (player.getRace() == Race.ASMODIANS) {
 									QuestState qs = player.getQuestStateList().getQuestState(2008);
 									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
+										sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
 									else
 										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
 								}
@@ -280,39 +254,21 @@ public class DialogService {
 						}
 					}
 					break;
-				}
 				case GATHER_SKILL_LEVELUP: // improve extraction (2.5)
-				case COMBINE_SKILL_LEVELUP: { // learn tailoring armor smithing etc. (2.5)
+				case COMBINE_SKILL_LEVELUP: // learn tailoring armor smithing etc. (2.5)
 					CraftSkillUpdateService.getInstance().learnSkill(player, npc);
 					break;
-				}
-				case EXTEND_INVENTORY: { // expand cube (2.5)
+				case EXTEND_INVENTORY: // expand cube (2.5)
 					CubeExpandService.expandCube(player, npc);
 					break;
-				}
-				case EXTEND_CHAR_WAREHOUSE: { // (2.5)
+				case EXTEND_CHAR_WAREHOUSE: // (2.5)
 					WarehouseService.expandWarehouse(player, npc);
 					break;
-				}
-				case OPEN_LEGION_WAREHOUSE: { // legion warehouse (2.5)
-					switch (titleId) {
-						case 350409:
-						case 315073:
-						case 463212:
-							LegionService.getInstance().openLegionWarehouse(player, npc);
-							break;
-					}
+				case OPEN_LEGION_WAREHOUSE: // legion warehouse (2.5)
+					LegionService.getInstance().openLegionWarehouse(player, npc);
 					break;
-				}
-				case CLOSE_LEGION_WAREHOUSE: { // WTF??? Quest dialog packet (2.5)
-					break;
-				}
-				case CRAFT: { // (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 28));
-					break;
-				}
 				case EDIT_CHARACTER:
-				case EDIT_GENDER: { // (2.5) and (4.3)
+				case EDIT_GENDER: // (2.5) and (4.3)
 					byte changesex = 0; // 0 plastic surgery, 1 gender switch
 					byte check_ticket = 2; // 2 no ticket, 1 have ticket
 					if (dialogId == DialogAction.EDIT_GENDER.id()) {
@@ -334,70 +290,35 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_PLASTIC_SURGERY(player, check_ticket, changesex));
 					player.setEditMode(true);
 					break;
-				}
 				case MATCH_MAKER: // dredgion
 					if (AutoGroupConfig.AUTO_GROUP_ENABLE && DredgionService2.getInstance().isRegisterAvailable()) {
 						AutoGroupType agt = AutoGroupType.getAutoGroup(npc.getNpcId());
-						if (agt != null && agt.isDredgion()) {
+						if (agt != null && agt.isDredgion())
 							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
-						} else {
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 0));
-						}
+						else
+							sendDialogWindow(DialogAction.NULL.id(), player, npc);
 					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 1011));
 					}
 					break;
-				case OPEN_INSTANCE_RECRUIT: {
-					// TODO NEW INSTANCE FIND GROUP SYSTEM
-					break;
-				}
-				case INSTANCE_ENTRY: { // (2.5)
-					break;
-				}
-				case COMPOUND_WEAPON: { // armsfusion (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 29));
-					break;
-				}
-				case DECOMPOUND_WEAPON: { // armsbreaking (2.5)
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 30));
-					break;
-				}
-				case FACTION_JOIN: { // join npcFaction (2.5)
+				case FACTION_JOIN: // join npcFaction (2.5)
 					player.getNpcFactions().enterGuild(npc);
 					break;
-				}
-				case FACTION_SEPARATE: { // leave npcFaction (2.5)
+				case FACTION_SEPARATE: // leave npcFaction (2.5)
 					player.getNpcFactions().leaveNpcFaction(npc);
 					break;
-				}
-				case BUY_AGAIN: { // repurchase (2.5)
+				case BUY_AGAIN: // repurchase (2.5)
 					PacketSendUtility.sendPacket(player, new SM_REPURCHASE(player, npc.getObjectId()));
 					break;
-				}
-				case PET_ADOPT: { // adopt pet (2.5)
+				case PET_ADOPT: // adopt pet (2.5)
 					PacketSendUtility.sendPacket(player, new SM_PET(6));
 					break;
-				}
-				case PET_ABANDON: { // surrender pet (2.5)
+				case PET_ABANDON: // surrender pet (2.5)
 					PacketSendUtility.sendPacket(player, new SM_PET(7));
 					break;
-				}
-				case HOUSING_BUILD: { // housing build
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 32));
-					break;
-				}
-				case HOUSING_DESTRUCT: { // housing destruct
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 33));
-					break;
-				}
-				case CHARGE_ITEM_SINGLE: { // condition an individual item
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 35));
-					break;
-				}
-				case CHARGE_ITEM_MULTI: { // condition all equiped items
+				case CHARGE_ITEM_MULTI: // condition all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 1);
 					break;
-				}
 				case TRADE_IN: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeInListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
@@ -418,15 +339,13 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_SELL_ITEM(targetObjectId, tradeListTemplate, tradeModifier));
 					break;
 				}
-				case GIVEUP_CRAFT_EXPERT: { // relinquish Expert Status
+				case GIVEUP_CRAFT_EXPERT: // relinquish Expert Status
 					RelinquishCraftStatus.relinquishExpertStatus(player, npc);
 					break;
-				}
-				case GIVEUP_CRAFT_MASTER: { // relinquish Master Status
+				case GIVEUP_CRAFT_MASTER: // relinquish Master Status
 					RelinquishCraftStatus.relinquishMasterStatus(player, npc);
 					break;
-				}
-				case HOUSING_PERSONAL_AUCTION: { // housing auction
+				case HOUSING_PERSONAL_AUCTION: // housing auction
 					if ((player.getBuildingOwnerStates() & PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId()) == 0) {
 						if (player.getRace() == Race.ELYOS)
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(18802));
@@ -434,26 +353,19 @@ public class DialogService {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(28802));
 						return;
 					}
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 38));
+					sendDialogWindow(dialogId, player, npc);
 					break;
-				}
 				case FUNC_PET_H_ADOPT:
 					PacketSendUtility.sendPacket(player, new SM_PET(16));
 					break;
 				case FUNC_PET_H_ABANDON:
 					PacketSendUtility.sendPacket(player, new SM_PET(17));
 					break;
-				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 42));
-					break;
 				case CHARGE_ITEM_MULTI2: // augmenting all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 2);
 					break;
 				case HOUSING_RECREATE_PERSONAL_INS: // recreate personal house instance (studio)
 					HousingService.getInstance().recreatePlayerStudio(player);
-					break;
-				case TOWN_CHALLENGE: // town improvement
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 43));
 					break;
 				case SETPRO1:
 				case SETPRO2:
@@ -468,10 +380,9 @@ public class DialogService {
 						PortalService.port(portalPath, player, targetObjectId);
 					} else if (template != null) {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
-						if (loc != null) {
-							TeleportService2.teleport(template, loc.getLocId(), player, npc,
-								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
-						}
+						if (loc != null)
+							TeleportService2.teleport(template, loc.getLocId(), player, npc, npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN
+								: TeleportAnimation.FADE_OUT_BEAM);
 					}
 					break;
 				default:
@@ -482,10 +393,33 @@ public class DialogService {
 					break;
 			}
 		} else {
-			if (QuestEngine.getInstance().onDialog(env)) {
+			if (QuestEngine.getInstance().onDialog(env))
 				return;
-			}
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId, questId));
+		}
+	}
+
+	private static boolean checkFuncDialog(int dialogId, Npc npc) {
+		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
+		if (talkInfo == null || talkInfo.getFuncDialogIds() == null)
+			return false;
+		if (!talkInfo.getFuncDialogIds().contains(dialogId))
+			return false;
+		return true;
+	}
+
+	private static void sendDialogWindow(int dialogId, final Player player, Npc npc) {
+		if (checkFuncDialog(dialogId, npc)) {
+			DialogPage showPage = DialogPage.getPageByAction(dialogId);
+
+			if (showPage != null) {
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), showPage.id()));
+			} else {
+				if (dialogId == DialogPage.NO_RIGHT.id()) {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+
+				}
+			}
 		}
 	}
 

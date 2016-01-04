@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.services.craft;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import org.slf4j.Logger;
@@ -39,9 +39,9 @@ public class CraftSkillUpdateService {
 
 	private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);
 
-	protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new HashMap<Integer, CraftLearnTemplate>();
-	private static final Map<Integer, Integer> cost = new HashMap<Integer, Integer>();
-	private static final List<Integer> craftingSkillIds = new FastTable<Integer>();
+	protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new FastMap<>();
+	private static final Map<Integer, Integer> cost = new FastMap<>();
+	private static final List<Integer> craftingSkillIds = new FastTable<>();
 
 	public static final CraftSkillUpdateService getInstance() {
 		return SingletonHolder.instance;
@@ -221,7 +221,7 @@ public class CraftSkillUpdateService {
 					PlayerSkillList skillList = responder.getSkillList();
 					skillList.addSkill(responder, skillId, skillLevel + 1);
 					responder.getRecipeList().autoLearnRecipe(responder, skillId, skillLevel + 1);
-					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, false));
+					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, null, false, false));
 				} else {
 					PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1300388));
 				}

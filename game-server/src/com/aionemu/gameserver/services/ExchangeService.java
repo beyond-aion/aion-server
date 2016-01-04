@@ -393,8 +393,16 @@ public class ExchangeService {
 	private boolean validateExchange(Player activePlayer, Player currentPartner) {
 		Exchange exchange1 = getCurrentExchange(activePlayer);
 		Exchange exchange2 = getCurrentExchange(currentPartner);
-
-		return validateInventorySize(activePlayer, exchange2) && validateInventorySize(currentPartner, exchange1);
+		boolean activePlayerCheck = validateInventorySize(activePlayer, exchange2);
+		boolean currentPartnerCheck = validateInventorySize(currentPartner, exchange1);
+		if(!activePlayerCheck) {
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM);
+			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE);
+		}	else if(!currentPartnerCheck) {
+			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM);
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE);
+		}
+		return activePlayerCheck && currentPartnerCheck;
 	}
 
 	private boolean validateInventorySize(Player activePlayer, Exchange exchange) {

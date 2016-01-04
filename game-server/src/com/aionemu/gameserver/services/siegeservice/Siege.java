@@ -163,24 +163,19 @@ public abstract class Siege<SL extends SiegeLocation> {
 	}
 
 	protected void initSiegeBoss() {
-
 		SiegeNpc boss = null;
 
 		Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(getSiegeLocationId());
 		for (SiegeNpc npc : npcs) {
 			if (npc.getObjectTemplate().getAbyssNpcType().equals(AbyssNpcType.BOSS)) {
-
-				if (boss != null) {
+				if (boss != null)
 					throw new SiegeException("Found 2 siege bosses for outpost " + getSiegeLocationId());
-				}
 
 				boss = npc;
 			}
 		}
-
-		if (boss == null) {
+		if (boss == null)
 			throw new SiegeException("Siege Boss not found for siege " + getSiegeLocationId());
-		}
 
 		setBoss(boss);
 		registerSiegeBossListeners();
@@ -209,9 +204,4 @@ public abstract class Siege<SL extends SiegeLocation> {
 	protected void updateOutpostStatusByFortress(FortressLocation location) {
 		SiegeService.getInstance().updateOutpostStatusByFortress(location);
 	}
-
-	protected void updateTiamarantaRiftsStatus(boolean isPreparation, boolean isSync) {
-		SiegeService.getInstance().updateTiamarantaRiftsStatus(isPreparation, isSync);
-	}
-
 }

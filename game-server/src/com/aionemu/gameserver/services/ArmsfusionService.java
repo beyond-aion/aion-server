@@ -101,6 +101,8 @@ public class ArmsfusionService {
 				return;
 			}
 		}
+		
+		secondItem.setBuffSkill(0);
 
 		firstItem.setFusionedItem(secondItem.getItemTemplate());
 

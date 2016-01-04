@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.List;
+
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -7,6 +9,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
+import com.aionemu.gameserver.model.templates.item.StigmaSkill;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -23,8 +26,8 @@ public class SkillLearnService {
 	 * @param player
 	 */
 	public static void addNewSkills(Player player) {
-		int level = player.getCommonData().getLevel();
-		PlayerClass playerClass = player.getCommonData().getPlayerClass();
+		int level = player.getLevel();
+		PlayerClass playerClass = player.getPlayerClass();
 		Race playerRace = player.getRace();
 
 		if (player.getCommonData().isDaeva() && player.getSkillList().getSkillEntry(30001) != null) {
@@ -34,10 +37,40 @@ public class SkillLearnService {
 			// Why adding after the packet ?
 			player.getSkillList().addSkill(player, 30002, skillLevel);
 		}
-		if (player.getCommonData().isDaeva() && !(player.getSkillList().getSkillEntry(40009) != null)) {
+		if (player.getCommonData().isDaeva() && !(player.getSkillList().getSkillEntry(40009) != null))
 			player.getSkillList().addSkill(player, 40009, 1);
-		}
 		addSkills(player, level, playerClass, playerRace);
+	}
+
+	public static void onEnterWorld(Player player) {
+		int level = player.getLevel();
+		PlayerClass playerClass = player.getPlayerClass();
+		Race playerRace = player.getRace();
+
+		if (playerClass.isStartingClass()) {
+			for (int i = 1; i <= level; i++)
+				addSkills(player, i, playerClass, playerRace);
+			return;
+		}
+		for (int i = 1; i <= level; i++)
+			addSkills(player, i, playerClass, playerRace);
+
+		PlayerClass startinClass = PlayerClass.getStartingClassFor(playerClass);
+		for (int i = 1; i < 10; i++)
+			addSkills(player, i, startinClass, playerRace);
+
+		if (player.getSkillList().getSkillEntry(30001) != null) {
+			int skillLevel = player.getSkillList().getSkillLevel(30001);
+			player.getSkillList().removeSkill(30001);
+			// Not sure about that, mysterious code
+			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
+			for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(stigmaSkill));
+			for (PlayerSkillEntry linkedStigmaSkill : player.getSkillList().getLinkedStigmaSkills())
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(linkedStigmaSkill));
+			// Why adding after the packet ?
+			player.getSkillList().addSkill(player, 30002, skillLevel);
+		}
 	}
 
 	/**
@@ -46,20 +79,16 @@ public class SkillLearnService {
 	 * @param player
 	 */
 	public static void addMissingSkills(Player player) {
-		int level = player.getCommonData().getLevel();
-		PlayerClass playerClass = player.getCommonData().getPlayerClass();
+		int level = player.getLevel();
+		PlayerClass playerClass = player.getPlayerClass();
 		Race playerRace = player.getRace();
-
-		for (int i = 0; i <= level; i++) {
+		for (int i = 0; i <= level; i++)
 			addSkills(player, i, playerClass, playerRace);
-		}
 
 		if (!playerClass.isStartingClass()) {
 			PlayerClass startinClass = PlayerClass.getStartingClassFor(playerClass);
-
-			for (int i = 1; i < 10; i++) {
+			for (int i = 1; i < 10; i++)
 				addSkills(player, i, startinClass, playerRace);
-			}
 
 			if (player.getSkillList().getSkillEntry(30001) != null) {
 				int skillLevel = player.getSkillList().getSkillLevel(30001);
@@ -68,6 +97,8 @@ public class SkillLearnService {
 				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
 				for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
 					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(stigmaSkill));
+				for (PlayerSkillEntry linkedStigmaSkill : player.getSkillList().getLinkedStigmaSkills())
+					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(linkedStigmaSkill));
 				// Why adding after the packet ?
 				player.getSkillList().addSkill(player, 30002, skillLevel);
 			}
@@ -91,10 +122,16 @@ public class SkillLearnService {
 				continue;
 
 			if (template.isStigma())
-				playerSkillList.addStigmaSkill(player, template.getSkillId(), template.getSkillLevel());
+				if (template.isLinkedStigma())
+					playerSkillList.addLinkedStigmaSkill(player, template.getSkillId(), template.getSkillLevel());
+				else
+					playerSkillList.addStigmaSkill(player, template.getSkillId(), template.getSkillLevel());
 			else
 				playerSkillList.addSkill(player, template.getSkillId(), template.getSkillLevel());
 		}
+		List<StigmaSkill> mSkills = StigmaService.getMissingStigmaSkills(player);
+		for (StigmaSkill template : mSkills)
+			playerSkillList.addStigmaSkill(player, template.getSkillId(), template.getSkillLvl());
 	}
 
 	/**
@@ -106,7 +143,7 @@ public class SkillLearnService {
 	 */
 	private static boolean checkLearnIsPossible(Player player, PlayerSkillList playerSkillList, SkillLearnTemplate template) {
 		if (playerSkillList.isSkillPresent(template.getSkillId()))
-			return true;
+			return false;
 
 		if (player.havePermission(MembershipConfig.STIGMA_AUTOLEARN) && template.isStigma())
 			return true;
@@ -138,14 +175,11 @@ public class SkillLearnService {
 	public static void removeSkill(Player player, int skillId) {
 		if (player.getSkillList().isSkillPresent(skillId)) {
 			Integer skillLevel = player.getSkillList().getSkillLevel(skillId);
-			if (skillLevel == null)
-				skillLevel = 1;
-			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).isStigma()));
+			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).getSkillType()));
 			player.getSkillList().removeSkill(skillId);
 			SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-			if (skill != null && skill.isPassive()) {
+			if (skill != null && skill.isPassive())
 				player.getEffectController().removeEffect(skillId);
-			}
 		}
 	}
 
@@ -157,7 +191,7 @@ public class SkillLearnService {
 		}
 	}
 
-	public static int getSkillLearnLevel(int skillId, int playerLevel, int wantedSkillLevel) {
+	public static int getSummonSkillLearnLevel(int skillId, int playerLevel, int wantedSkillLevel) {
 		SkillLearnTemplate[] skillTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId);
 		int learnFinishes = 0;
 		int maxLevel = 0;
@@ -179,7 +213,7 @@ public class SkillLearnService {
 		return Math.max(wantedSkillLevel, Math.min(playerLevel - (learnFinishes - maxLevel) + 1, maxLevel));
 	}
 
-	public static int getSkillMinLevel(int skillId, int playerLevel, int wantedSkillLevel) {
+	public static int getSummonSkillMinLevel(int skillId, int playerLevel, int wantedSkillLevel) {
 		SkillLearnTemplate[] skillTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId);
 		SkillLearnTemplate foundTemplate = null;
 

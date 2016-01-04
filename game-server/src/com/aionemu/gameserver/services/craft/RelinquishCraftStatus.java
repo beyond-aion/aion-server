@@ -42,7 +42,7 @@ public class RelinquishCraftStatus {
 			return;
 		}
 		skill.setSkillLvl(expertMinValue - 1);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
+		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
 		removeRecipesAbove(player, skillId, expertMinValue);
 		deleteCraftStatusQuests(skillId, player, true);
 	}
@@ -58,7 +58,7 @@ public class RelinquishCraftStatus {
 			return;
 		}
 		skill.setSkillLvl(masterMinValue);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
+		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
 		removeRecipesAbove(player, skillId, masterMinValue);
 		deleteCraftStatusQuests(skillId, player, false);
 	}
@@ -129,7 +129,7 @@ public class RelinquishCraftStatus {
 				skillLevel = skill.getSkillLevel();
 				if (CraftSkillUpdateService.isCraftingSkill(skillId) && skillLevel > minValue && skillLevel <= maxValue) {
 					skill.setSkillLvl(minValue - 1);
-					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
+					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
 					removeRecipesAbove(player, skillId, minValue);
 					deleteCraftStatusQuests(skillId, player, isExpert);
 				}

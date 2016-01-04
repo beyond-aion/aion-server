@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.rift;
 
 import java.util.List;
+import java.util.Map;
 
 import javolution.util.FastMap;
 import javolution.util.FastTable;
@@ -21,36 +22,31 @@ public class RiftInformer {
 
 	public static List<Npc> getSpawned(int worldId) {
 		List<Npc> rifts = RiftManager.getSpawned();
-		List<Npc> worldRifts = new FastTable<Npc>();
+		List<Npc> worldRifts = new FastTable<>();
 		for (Npc rift : rifts) {
-			if (rift.getWorldId() == worldId) {
+			if (rift.getWorldId() == worldId)
 				worldRifts.add(rift);
-			}
 		}
-
 		return worldRifts;
 	}
 
 	public static void sendRiftsInfo(int worldId) {
 		syncRiftsState(worldId, getPackets(worldId));
 		int twinId = getTwinId(worldId);
-		if (twinId > 0) {
+		if (twinId > 0)
 			syncRiftsState(twinId, getPackets(twinId));
-		}
 	}
 
 	public static void sendRiftsInfo(Player player) {
 		syncRiftsState(player, getPackets(player.getWorldId()));
 		int twinId = getTwinId(player.getWorldId());
-		if (twinId > 0) {
+		if (twinId > 0)
 			syncRiftsState(twinId, getPackets(twinId));
-		}
 	}
 
 	public static void sendRiftInfo(int[] worlds) {
-		for (int worldId : worlds) {
+		for (int worldId : worlds)
 			syncRiftsState(worldId, getPackets(worlds[0], -1));
-		}
 	}
 
 	public static void sendRiftDespawn(int worldId, int objId) {
@@ -62,7 +58,7 @@ public class RiftInformer {
 	}
 
 	private static List<AionServerPacket> getPackets(int worldId, int objId) {
-		List<AionServerPacket> packets = new FastTable<AionServerPacket>();
+		List<AionServerPacket> packets = new FastTable<>();
 		if (objId == -1) {
 			for (Npc rift : getSpawned(worldId)) {
 				RVController controller = (RVController) rift.getController();
@@ -115,11 +111,11 @@ public class RiftInformer {
 		});
 	}
 
-	private static FastMap<Integer, Integer> getAnnounceData(int worldId) {
-		FastMap<Integer, Integer> localRifts = new FastMap<Integer, Integer>();
+	private static Map<Integer, Integer> getAnnounceData(int worldId) {
+		Map<Integer, Integer> localRifts = new FastMap<>();
 
 		// init empty list
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 8; i++) {
 			localRifts.put(i, 0);
 		}
 
@@ -131,19 +127,19 @@ public class RiftInformer {
 		return localRifts;
 	}
 
-	private static FastMap<Integer, Integer> calcRiftsData(RVController rift, FastMap<Integer, Integer> local) {
+	private static Map<Integer, Integer> calcRiftsData(RVController rift, Map<Integer, Integer> local) {
 		if (rift.isMaster()) {
 			local.put(0, local.get(0) + 1);
-			if (rift.isVortex()) {
+			if (rift.isVortex())
 				local.put(1, local.get(1) + 1);
-			}
-			// live party concert hall
-			// local.put(2, local.get(2) + 1);
+			local.put(2, local.get(2) + 1);// live party
+			local.put(3, local.get(3) + 1);// shugo emperor vault
+			local.put(4, local.get(4) + 1);// rift battle
 		} else {
-			local.put(3, local.get(3) + 1);
-			if (rift.isVortex()) {
-				local.put(4, local.get(4) + 1);
-			}
+			local.put(5, local.get(5) + 1);// rift battle
+			local.put(6, local.get(6) + 1);// rift battle
+			if (rift.isVortex())
+				local.put(7, local.get(7) + 1);
 		}
 		return local;
 	}
@@ -160,6 +156,8 @@ public class RiftInformer {
 				return 220070000;
 			case 210060000: // Theobomos -> Marchutan Priory
 				return 120080000;
+			case 210070000: // Cygnea -> Enshar
+				return 220080000;
 			case 120080000: // Marchutan Priory -> Theobomos
 				return 210060000;
 			case 220020000: // Morheim -> Eltnen
@@ -170,6 +168,8 @@ public class RiftInformer {
 				return 110070000;
 			case 220070000: // Gelkmaros -> Inggison
 				return 210050000;
+			case 220080000: // Enshar -> Cygnea
+				return 210070000;
 			default:
 				return 0;
 		}

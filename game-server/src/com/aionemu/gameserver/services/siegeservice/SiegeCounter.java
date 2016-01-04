@@ -35,6 +35,15 @@ public class SiegeCounter {
 		siegeRaceCounters.get(siegeRace).addPoints(creature, damage);
 	}
 
+	/**
+	 * Clear all damage progress (on siege protector reset)
+	 */
+	public void clearDamageCounters() {
+		getRaceCounter(SiegeRace.ELYOS).clearDamages();
+		getRaceCounter(SiegeRace.ASMODIANS).clearDamages();
+		getRaceCounter(SiegeRace.BALAUR).clearDamages();
+	}
+
 	public void addAbyssPoints(Player player, int ap) {
 		SiegeRace sr = SiegeRace.getByRace(player.getRace());
 		siegeRaceCounters.get(sr).addAbyssPoints(player, ap);

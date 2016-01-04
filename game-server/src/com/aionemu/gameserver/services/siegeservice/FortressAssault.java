@@ -215,12 +215,6 @@ public class FortressAssault extends Assault<FortressSiege> {
 			case 3011:
 			case 3021:
 				return 258236;
-			case 5011: // Katalam
-				return 272295;
-			case 6011:
-				return 272795;
-			case 6021:
-				return 273343;
 			default:
 				return 258236;
 		}
@@ -254,12 +248,6 @@ public class FortressAssault extends Assault<FortressSiege> {
 				return 19;
 			case 1011:
 				return 20;
-			case 5011:
-				return 23;
-			case 6011:
-				return 21;
-			case 6021:
-				return 22;
 				// TODO: recheck 4.0
 			default:
 				return 1;

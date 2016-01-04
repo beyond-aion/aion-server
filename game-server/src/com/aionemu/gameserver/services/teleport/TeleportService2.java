@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.teleport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
@@ -40,14 +39,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SERIAL_KILLER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_LOC;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_MAP;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.PrivateStoreService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -217,9 +214,9 @@ public class TeleportService2 {
 		if (player.getWorldId() == pos.getMapId()) {
 			player.getPosition().setXYZH(pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			Pet pet = player.getPet();
-			if (pet != null) {
+			if (pet != null)
 				World.getInstance().setPosition(pet, pos.getMapId(), player.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-			}
+
 			PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 			PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 			player.setPortAnimation(ArrivalAnimation.FADE_IN_BEAM);
@@ -228,19 +225,11 @@ public class TeleportService2 {
 			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 			player.getEffectController().updatePlayerEffectIcons(null);
 			player.getController().updateZone();
-			if (pet != null) {
+			if (pet != null)
 				World.getInstance().spawn(pet);
-			}
+
 			player.getKnownList().clear();
 			player.updateKnownlist();
-
-			SerialKillerService sks = SerialKillerService.getInstance();
-			if (CustomConfig.SERIALKILLER_ENABLED) {
-				PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(false, player.getSKInfo().getRank()));
-				if (sks.isHandledWorld(player.getWorldId()) && !sks.isEnemyWorld(player)) {
-					PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(sks.getWorldKillers(player.getWorldId()).values()));
-				}
-			}
 		} else if (player.getLifeStats().isAlreadyDead()) {
 			teleportDeadTo(player, pos.getMapId(), 1, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		} else {
@@ -351,24 +340,14 @@ public class TeleportService2 {
 				World.getInstance().spawn(pet);
 			player.setPortAnimation(ArrivalAnimation.NONE);
 		} else {
-			if (player.getPanesterraTeam() != null && worldId != player.getPanesterraTeam().getStartPosition().getMapId()) {
+			if (player.getPanesterraTeam() != null && worldId != player.getPanesterraTeam().getStartPosition().getMapId())
 				player.getPanesterraTeam().onLeave(player);
-			}
 			// teleport with full map reloading
 			PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		}
-		if (player.isLegionMember()) {
+		if (player.isLegionMember())
 			PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
-		}
-
-		SerialKillerService sks = SerialKillerService.getInstance();
-		if (CustomConfig.SERIALKILLER_ENABLED) {
-			PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(false, player.getSKInfo().getRank()));
-			if (sks.isHandledWorld(player.getWorldId()) && !sks.isEnemyWorld(player)) {
-				PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(sks.getWorldKillers(player.getWorldId()).values()));
-			}
-		}
 		sendWorldSwitchMessage(player, currentWorldId, worldId, isInstance);
 	}
 

@@ -276,18 +276,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 				loserSkillId = 0;
 				winnerSkillId = 12158;
 				break;
-			case 5011:
-				loserSkillId = 12141;
-				winnerSkillId = 12135;
-				break;
-			case 6011:
-				loserSkillId = 12142;
-				winnerSkillId = 12137;
-				break;
-			case 6021:
-				loserSkillId = 12143;
-				winnerSkillId = 12139;
-				break;
 			default:
 				return;
 		}

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services.item;
 
-import javolution.util.FastMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class ItemPurificationService {
 			return false;
 		}
 
-		FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
+		Map<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 
 		if (!resultItemMap.containsKey(resultItemId)) {
 			AuditLogger.info(player, resultItemId + " item's baseItem and resultItem is not matched (possible client modify)");
@@ -74,7 +74,7 @@ public class ItemPurificationService {
 	}
 
 	public static boolean decreaseMaterial(Player player, Item baseItem, int resultItemId) {
-		FastMap<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
+		Map<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 
 		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
 

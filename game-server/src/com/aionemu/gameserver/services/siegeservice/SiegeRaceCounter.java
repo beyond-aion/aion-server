@@ -57,6 +57,11 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 		addToCounter(player.getObjectId(), abyssPoints, playerAPCounter);
 	}
 
+	public void clearDamages() {
+		totalDamage.set(0);
+		playerDamageCounter.clear();
+	}
+
 	protected <K> void addToCounter(K key, int value, Map<K, AtomicLong> counterMap) {
 
 		// Get the counter for specific key

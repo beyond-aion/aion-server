@@ -30,13 +30,11 @@ public class ItemRemodelService {
 
 		long remodelCost = PricesService.getPriceForService(1000, player.getRace());
 
-		if (keepItem == null || extractItem == null) { // NPE check.
+		if (keepItem == null || extractItem == null) // NPE check.
 			return;
-		}
 
 		// Check Player Level
 		if (player.getLevel() < 10) {
-
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT);
 			return;
 		}
@@ -88,7 +86,8 @@ public class ItemRemodelService {
 		// Check that types match.
 		ItemGroup keep = keepItem.getItemTemplate().getItemGroup();
 		ItemGroup extract = extractItem.getItemSkinTemplate().getItemGroup();
-		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES) && keep.getSlots() == extract.getSlots()))
+		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES) || extract.getItemSubType() == ItemSubType.ALL_ARMOR
+			&& keep.getSlots() == extract.getSlots()))
 			|| keep.getItemSubType().equals(ItemSubType.CLOTHES)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(new DescriptionId(keepItem.getItemTemplate()
 				.getNameId()), new DescriptionId(extractItem.getItemSkinTemplate().getNameId())));

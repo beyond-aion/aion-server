@@ -58,7 +58,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_TIME_CHECK_4_7_5;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHANNEL_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHARACTER_SELECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ENTER_WORLD_CHECK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
@@ -338,9 +337,8 @@ public final class PlayerEnterWorldService {
 			}
 			InstanceService.onPlayerLogin(player);
 			client.sendPacket(new SM_UNK_3_5_1());
-			if (!player.getSkillList().isSkillPresent(3512)) {
-				player.getSkillList().addSkill(player, 3512, 129);
-			}
+			if (!player.getSkillList().isSkillPresent(302))
+				player.getSkillList().addSkill(player, 302, 145);
 			// check for missing skill/recipes after ascension
 			// TODO Remove in future. Temp fix for those player who still have missing skills
 			if (player.getCommonData().isDaeva()
@@ -349,12 +347,16 @@ public final class PlayerEnterWorldService {
 				SkillLearnService.addNewSkills(player);
 				CraftSkillUpdateService.getInstance().setMorphRecipe(player);
 			}
+			// Update player skills!!!
+			SkillLearnService.onEnterWorld(player);
 			// Update player skills first!!!
 			AbyssSkillService.onEnterWorld(player);
 			// TODO: check the split size
 			client.sendPacket(new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
 			for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
 				client.sendPacket(new SM_SKILL_LIST(stigmaSkill));
+			for (PlayerSkillEntry linkedStigmaSkill : player.getSkillList().getLinkedStigmaSkills())
+				client.sendPacket(new SM_SKILL_LIST(linkedStigmaSkill));
 
 			if (player.getSkillCoolDowns() != null)
 				client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
@@ -503,6 +505,13 @@ public final class PlayerEnterWorldService {
 				if (item.getExpireTime() > 0)
 					ExpireTimerTask.getInstance().addTask(item, player);
 
+			for (Item item : player.getEquipment().getEquippedItems()) {
+				if (item.getItemTemplate().isArmor()) {
+					int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
+					if (!player.getEquipment().checkAvailableEquipSkills(requiredSkills))
+						player.getEquipment().unEquipItem(item.getItemId(), item.getEquipmentSlot());
+				}
+			}
 			player.getEquipment().checkRankLimitItems(); // Remove items after offline changed rank
 
 			for (Motion motion : player.getMotions().getMotions().values()) {
@@ -587,7 +596,6 @@ public final class PlayerEnterWorldService {
 
 		client.sendPacket(new SM_INVENTORY_INFO(false, new FastTable<>(), npcExpands, questExpands, itemExpands, player));
 		client.sendPacket(new SM_STATS_INFO(player));
-		client.sendPacket(SM_CUBE_UPDATE.stigmaSlots(player.getCommonData().getAdvancedStigmaSlotSize()));
 	}
 
 	private static void sendWarehouseItemInfos(AionConnection client, Player player) {

@@ -6,6 +6,7 @@ import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_GAMEGUARD;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
