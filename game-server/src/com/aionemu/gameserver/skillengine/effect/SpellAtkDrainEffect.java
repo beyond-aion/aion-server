@@ -28,7 +28,8 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, true, this.critProbMod2, critAddDmg);
-		effect.getEffected().getController().onAttack(effect.getEffector(), effect.getSkillId(), TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);
+		effect.getEffected().getController()
+			.onAttack(effect.getEffector(), effect.getSkillId(), TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN, effect.getAttackStatus());
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 
 		// Drain (heal) portion of damage inflicted

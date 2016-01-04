@@ -27,6 +27,24 @@ public class StumbleEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
+		final Creature effector = effect.getEffector();
+		final Creature effected = effect.getEffected();
+		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
+		float x1 = (float) (Math.cos(radian) * 1.5f);
+		float y1 = (float) (Math.sin(radian) * 1.5f);
+		float z = effected.getZ();
+		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, z,
+			false, intentions);
+		float zAfterColl = closestCollision.z;
+		x1 = closestCollision.x;
+		y1 = closestCollision.y;
+		if (Math.abs(z - zAfterColl) > 0.1f && !effected.getMoveController().isJumping()) {
+			x1 = effected.getX();
+			y1 = effected.getY();
+			zAfterColl = z;
+		}
+		effect.setTargetLoc(x1, y1, zAfterColl);
 		effect.addToEffectedController();
 	}
 
@@ -58,24 +76,6 @@ public class StumbleEffect extends EffectTemplate {
 		if (!super.calculate(effect, StatEnum.STUMBLE_RESISTANCE, SpellStatus.STUMBLE))
 			return;
 		effect.setSkillMoveType(SkillMoveType.STUMBLE);
-		final Creature effector = effect.getEffector();
-		final Creature effected = effect.getEffected();
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
-		float x1 = (float) (Math.cos(radian) * 1.5f);
-		float y1 = (float) (Math.sin(radian) * 1.5f);
-		float z = effected.getZ();
-		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, z, false,
-			intentions);
-		float zAfterColl = closestCollision.z;
-		x1 = closestCollision.x;
-		y1 = closestCollision.y;
-		if (Math.abs(z - zAfterColl) > 0.1f && !effected.getMoveController().isJumping()) {
-			x1 = effected.getX();
-			y1 = effected.getY();
-			zAfterColl = z;
-		}
-		effect.setTargetLoc(x1, y1, zAfterColl);
 	}
 
 	@Override

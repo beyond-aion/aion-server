@@ -13,5 +13,7 @@ public enum HitType {
 	NMLATK,
 	MAHIT,
 	PHHIT,
-	FEAR
+	FEAR,
+	SKILL,
+	BACKATK
 }

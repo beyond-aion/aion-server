@@ -45,6 +45,7 @@ public class SummonEffect extends EffectTemplate {
 				}
 			}, time * 1000);
 			summon.getController().addTask(TaskId.DESPAWN, task);
+			effected.getEffectController().removePetOrderUnSummonEffects();
 		}
 	}
 

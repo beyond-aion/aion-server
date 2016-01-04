@@ -1229,6 +1229,10 @@ public class Effect implements StatOwner {
 	public boolean isSummoning() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isSummoning();
 	}
+	
+	public boolean isPetOrderUnSummonEffect() {
+		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUNSUMMON);
+	}
 
 	/**
 	 * @return the signetBurstedCount

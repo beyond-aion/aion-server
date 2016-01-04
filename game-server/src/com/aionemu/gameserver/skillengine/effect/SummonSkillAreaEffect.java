@@ -49,12 +49,16 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 				useTime = 10;
 				break;
 		}
-
 		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
-
+		
 		int delay = 3000;
-		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equalsIgnoreCase("KN_THREATENINGWAVE"))
+		String group = effect.getSkillTemplate().getGroup();
+		
+		if (group != null && group.equalsIgnoreCase("KN_THREATENINGWAVE"))
 			delay = 2000;
+		else if (group != null && group.equalsIgnoreCase("WI_SUMMONTORNADO"))
+			delay = 1000;
+
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			int position = 1;

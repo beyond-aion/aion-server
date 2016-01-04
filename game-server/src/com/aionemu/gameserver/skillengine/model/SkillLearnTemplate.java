@@ -3,6 +3,7 @@ package com.aionemu.gameserver.skillengine.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.PlayerClass;
@@ -19,8 +20,10 @@ public class SkillLearnTemplate {
 	private PlayerClass classId = PlayerClass.ALL;
 	@XmlAttribute(name = "skillId", required = true)
 	private int skillId;
-	@XmlAttribute(name = "skillLevel", required = true)
-	private int skillLevel;
+	@XmlAttribute(name = "skillLevels", required = false)
+	private Integer skillLevels;
+	@XmlAttribute(name = "skillLearn", required = false)
+	private Integer skillLearn;
 	@XmlAttribute(name = "name", required = true)
 	private String name;
 	@XmlAttribute(name = "race", required = true)
@@ -30,7 +33,10 @@ public class SkillLearnTemplate {
 	@XmlAttribute
 	private boolean autolearn;
 	@XmlAttribute
-	private boolean stigma = false;
+	private byte stigma = 0;
+	
+	@XmlTransient
+	private int skillLevel = 1;
 
 	/**
 	 * @return the classId
@@ -85,6 +91,28 @@ public class SkillLearnTemplate {
 	 * @return the stigma
 	 */
 	public boolean isStigma() {
-		return stigma;
+		return stigma > 0;
+	}
+	
+
+	public boolean isLinkedStigma() {
+		return stigma == 4;
+	}
+	/**
+	 * @return the skillLearn, null if learn is not needed
+	 */
+	public Integer getLearnSkill() {
+		return skillLearn;
+	}
+
+	/**
+	 * The max skill level that the skill could reach.
+	 * For the highest player level skill, the value used is constant for the skill group.
+	 * Exception from the rule are passive skills, which have the value 10 at the highest player level (hardcoded)
+	 * Null values - unknown, probably have to be hardcoded.
+	 * @return skillLevels
+	 */
+	public Integer getSkillLevels() {
+		return skillLevels;
 	}
 }

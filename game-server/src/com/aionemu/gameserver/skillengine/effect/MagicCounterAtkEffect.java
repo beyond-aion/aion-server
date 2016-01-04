@@ -47,7 +47,8 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 						return;
 					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, true, LOG.MAGICCOUNTERATK);
+						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK,
+							effect.getAttackStatus());
 					}
 				}
 			};
@@ -62,7 +63,8 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 						return;
 					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, true, LOG.MAGICCOUNTERATK);
+						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK,
+							effect.getAttackStatus());
 					}
 				}
 			};

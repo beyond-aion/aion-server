@@ -54,7 +54,7 @@ public class SkillTemplate {
 	protected int nameId;
 	@XmlAttribute
 	protected String stack = "NONE";
-	@XmlAttribute
+	@XmlAttribute(name = "group", required = false)
 	private String group;
 	@XmlAttribute
 	protected int cooldownId;
@@ -82,6 +82,8 @@ public class SkillTemplate {
 	protected int toggleTimer;
 	@XmlAttribute(name = "cooldown")
 	protected int cooldown;
+	@XmlAttribute(name = "cooldown_delta_lv")
+  protected int cooldownDeltaLv;
 	@XmlAttribute(name = "penalty_skill_id")
 	protected int penaltySkillId;
 	@XmlAttribute(name = "pvp_damage")
@@ -335,6 +337,10 @@ public class SkillTemplate {
 	 */
 	public int getCooldown() {
 		return cooldown;
+	}
+	
+	public int getCooldownDeltaLv() {
+		return cooldownDeltaLv;
 	}
 
 	/**

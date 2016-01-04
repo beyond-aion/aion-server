@@ -110,7 +110,8 @@ public class Skill {
 
 	private String chainCategory = null;
 	private volatile boolean isMultiCast = false;
-	private List<ChargedSkill> chargeSkillList = new FastTable<ChargedSkill>();
+	private List<ChargedSkill> chargeSkillList = new FastTable<>();
+	private boolean isPenaltySkill;
 
 	public enum SkillMethod {
 		CAST,
@@ -130,11 +131,11 @@ public class Skill {
 	 * @param world
 	 */
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget) {
-		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null);
+		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null, false);
 	}
 
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget, int skillLevel) {
-		this(skillTemplate, effector, skillLevel, firstTarget, null);
+		this(skillTemplate, effector, skillLevel, firstTarget, null, false);
 	}
 
 	/**
@@ -143,8 +144,8 @@ public class Skill {
 	 * @param skillLvl
 	 * @param firstTarget
 	 */
-	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
-		this.effectedList = new FastTable<Creature>();
+	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate, boolean isPenaltySkill) {
+		this.effectedList = new FastTable<>();
 		this.conditionChangeListener = new StartMovingListener();
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
@@ -153,6 +154,7 @@ public class Skill {
 		this.effector = effector;
 		this.duration = skillTemplate.getDuration();
 		this.itemTemplate = itemTemplate;
+		this.isPenaltySkill = isPenaltySkill;
 
 		if (itemTemplate != null)
 			skillMethod = SkillMethod.ITEM;
@@ -262,7 +264,7 @@ public class Skill {
 				return false;
 			}
 		}
-		
+
 		// notify skill use observers
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			effector.getObserveController().notifyStartSkillCastObservers(this);
@@ -279,7 +281,8 @@ public class Skill {
 		// send packets to start casting
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
 			castStartTime = System.currentTimeMillis();
-			startCast();
+			if (!isPenaltySkill)
+				startCast();
 			if (effector instanceof Npc)
 				((NpcAI2) ((Npc) effector).getAi2()).setSubStateIfNot(AISubState.CAST);
 		}
@@ -297,9 +300,19 @@ public class Skill {
 	private void setCooldowns() {
 		int cooldown = effector.getSkillCooldown(skillTemplate);
 		if (cooldown != 0) {
+			if (skillTemplate.getCooldownDeltaLv() != 0)
+				cooldown = cooldown + skillTemplate.getCooldownDeltaLv() * skillLevel;
 			effector.setSkillCoolDown(skillTemplate.getCooldownId(), cooldown * 100 + System.currentTimeMillis());
 			effector.setSkillCoolDownBase(skillTemplate.getCooldownId(), System.currentTimeMillis());
 		}
+	}
+
+	public int getCooldown() {
+		int cooldown = effector.getSkillCooldown(skillTemplate);
+		if (cooldown != 0)
+			if (skillTemplate.getCooldownDeltaLv() != 0)
+				cooldown = cooldown + skillTemplate.getCooldownDeltaLv() * skillLevel;
+		return cooldown;
 	}
 
 	protected void calculateSkillDuration() {
@@ -307,10 +320,6 @@ public class Skill {
 		duration = 0;
 		int boostValue = 0;
 
-		if (isCastTimeFixed()) {
-			duration = skillTemplate.getDuration();
-			return;
-		}
 		boolean noBaseDurationCap = false;
 		if (skillTemplate.getType() == SkillType.MAGICAL) {
 			duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, skillTemplate.getDuration());
@@ -318,12 +327,12 @@ public class Skill {
 			switch (skillTemplate.getSubType()) {
 				case SUMMON:
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
-					if (effector.getEffectController().hasAbnormalEffect(1778))
+					if (effector.getEffectController().hasAbnormalEffect(3779))
 						noBaseDurationCap = true;
 					break;
 				case SUMMONHOMING:
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMONHOMING, boostValue);
-					if (effector.getEffectController().hasAbnormalEffect(1778))
+					if (effector.getEffectController().hasAbnormalEffect(3779))
 						noBaseDurationCap = true;
 					break;
 				case SUMMONTRAP:
@@ -332,7 +341,7 @@ public class Skill {
 					if (boostValue == 0 && duration < tempBoostVal) {
 						boostValue = tempBoostVal - duration;
 					}
-					if (effector.getEffectController().hasAbnormalEffect(2386))
+					if (effector.getEffectController().hasAbnormalEffect(913))
 						noBaseDurationCap = true;
 					break;
 				case HEAL:
@@ -361,6 +370,11 @@ public class Skill {
 				duration = 0;
 			}
 		}
+		if (isCastTimeFixed())
+			duration = skillTemplate.getDuration();
+
+		if (skillTemplate.getName().equals("Resurrection"))
+			duration = 0;
 
 		if (duration < 0) {
 			duration = 0;
@@ -379,35 +393,22 @@ public class Skill {
 		/**
 		 * exceptions for certain skills -herb and mana treatment -traps
 		 */
-		// dont check herb , mana treatment and concentration enhancement
-		switch (this.getSkillId()) {
-			case 1803:// bandage heal
-			case 1804:// herb treatment
-			case 1805:
-			case 1825:
-			case 1827:
-			case 2672:
-			case 1823:// mana treatment
-			case 1824:
-			case 1826:
-			case 1828:
-			case 2673:
-			case 1078: // concentration enhancement
-			case 1125:
-			case 1468:
-			case 11580:
-			case 3597: // Embark skill
-			case 3598:
-			case 3599:
-			case 3600:
-			case 3601:
-				return true;
+		if (this.getSkillTemplate().getGroup() != null) {
+			switch (this.getSkillTemplate().getGroup()) {
+				case "MENDING_L": // Bandage Heal
+				case "MENDING": // Herb Treatment
+				case "AROMATHERAPY": // Mana Treatment
+				case "PR_FOCUSCASTING":// Prayer of focus
+				case "RI_SUMMONARMOR": // Embark skill
+					return true;
+			}
 		}
+		if (this.getSkillId() == 11580)
+			return true;
 
 		if (player.getTransformModel().isActive()) {
-			if (player.getTransformModel().getType() == TransformType.FORM1) {
+			if (player.getTransformModel().getType() == TransformType.FORM1)
 				return true;
-			}
 		}
 
 		if (this.getSkillTemplate().getSubType() == SkillSubType.SUMMONTRAP)
@@ -477,7 +478,8 @@ public class Skill {
 		} else {
 			if (clientTime < finalTime) {
 				// check for no animation Hacks
-				AuditLogger.info(player, "Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
+				AuditLogger.info(player, "Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/"
+					+ finalTime + ")");
 				if (SecurityConfig.NO_ANIMATION) {
 					// check if values are too low and disable skill usage / kick player
 					if (clientTime < 0 || (clientTime / serverTime) < SecurityConfig.NO_ANIMATION_VALUE) {
@@ -502,6 +504,13 @@ public class Skill {
 		int penaltySkill = skillTemplate.getPenaltySkillId();
 		if (penaltySkill == 0)
 			return;
+
+		SkillTemplate _penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
+		String stack = _penaltyTemplate.getStack();
+		if (stack != null && (stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT")))
+			SkillEngine.getInstance().getSkill(effector, penaltySkill, 1, effector, true).useNoAnimationSkill();
+		else
+			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector, 0);
 
 		SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector, 0);
 	}
@@ -725,7 +734,7 @@ public class Skill {
 			QuestEngine.getInstance().onUseSkill(env, skillTemplate.getSkillId());
 		}
 
-		if (setCooldowns)
+		if (setCooldowns && !isPenaltySkill)
 			this.setCooldowns();
 
 		if (instantSkill)
@@ -740,7 +749,8 @@ public class Skill {
 			}, hitTime);
 		}
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
-			sendCastspellEnd(dashStatus, effects);
+			if (!isPenaltySkill)
+				sendCastspellEnd(dashStatus, effects);
 
 		endCondCheck();
 
@@ -1103,19 +1113,19 @@ public class Skill {
 			return true;
 
 		switch (this.getSkillId()) {
-			case 1636:// Fear I
-			case 2318:
-			case 2319:
-			case 1685:// Fear Shriek I
-			case 2006:// Hand of Torpor
-			case 2011:// Spirit Hypnosis
-			case 1495:// Sleep I
-			case 2316:
-			case 2317:
-			case 1443:// Sleeping Storm
-			case 1454:// Curse of Roots
-			case 1430:// Curse of Old Roots
-			case 1497:// Tranquilizing Cloud I
+			case 3775:// Fear I
+			case 19:
+			case 20:
+			case 3589:// Fear Shriek I
+			//case 2006:// Hand of Torpor removed on 4.8??
+			case 8707:// Spirit Hypnosis
+			case 1337:// Sleep I
+			case 17:
+			case 18:
+			case 1339:// Sleeping Storm
+			case 1417:// Curse of Roots
+			case 1416:// Curse of Old Roots
+			case 1338:// Tranquilizing Cloud I
 			case 11885:// abyss transformation elyos
 			case 11886:
 			case 11887:
@@ -1126,19 +1136,19 @@ public class Skill {
 			case 11892:
 			case 11893:
 			case 11894:
-			case 1801:// return skill
-			case 1803:// herb treatment
-			case 1804:
-			case 1805:
-			case 1825:
-			case 1827:
-			case 2672:
-			case 1823:// mana treatment
-			case 1824:
-			case 1826:
-			case 1828:
-			case 2673:
-			case 3512:
+			case 243:// return skill
+			case 245:// herb treatment
+			case 246:
+			case 247:
+			case 251:
+			case 253:
+			case 297:
+			case 249:// mana treatment
+			case 250:
+			case 252:
+			case 254:
+			case 298:
+			case 315:
 				return true;
 		}
 

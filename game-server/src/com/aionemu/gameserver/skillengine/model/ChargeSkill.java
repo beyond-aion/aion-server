@@ -11,7 +11,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 public class ChargeSkill extends Skill {
 
 	public ChargeSkill(SkillTemplate skillTemplate, Player effector, int skillLevel, Creature firstTarget, ItemTemplate itemTemplate) {
-		super(skillTemplate, effector, skillLevel, firstTarget, null);
+		super(skillTemplate, effector, skillLevel, firstTarget, null, false);
 	}
 
 	@Override

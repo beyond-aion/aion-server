@@ -90,6 +90,29 @@ public class FirstTargetProperty {
 						}
 					}
 				}
+				
+				if (relation == TargetRelationAttribute.MYPARTY) {
+					Creature effected = skill.getFirstTarget();
+					boolean myParty = false;
+					if (effected == null || skill.getEffector() == null)
+						myParty = false;
+					if (!(effected instanceof Player) || !(skill.getEffector() instanceof Player) || !((Player) skill.getEffector()).isInTeam())
+						myParty = false;
+					for (Player member : ((Player) skill.getEffector()).getCurrentTeam().getMembers()) {
+						if (member == skill.getEffector())
+							continue;
+						if (member == effected) {
+							myParty = true;
+							break;
+						}
+					}
+					if (!myParty) {
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+						return false;
+					}
+
+					skill.setFirstTargetRangeCheck(false);
+				}
 
 				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill)) {
 					if (skill.getEffector() instanceof Player) {

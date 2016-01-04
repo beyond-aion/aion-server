@@ -17,6 +17,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ProvokeTarget;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer modified by kecimis
@@ -47,7 +48,7 @@ public class ProvokerEffect extends ShieldEffect {
 
 					@Override
 					public void attack(Creature creature) {
-						if (Rnd.get(0, 100) <= prob2) {
+						if (Rnd.get(0, 99) <= prob2) {
 							Creature target = getProvokeTarget(provokeTarget, effector, creature);
 							createProvokedEffect(effector, target);
 						}
@@ -64,11 +65,26 @@ public class ProvokerEffect extends ShieldEffect {
 							if (!MathUtil.isIn3dRange(effector, creature, radius))
 								return;
 						}
-						if (Rnd.get(0, 100) <= prob2) {
+						if (Rnd.get(0, 99) <= prob2) {
 							Creature target = getProvokeTarget(provokeTarget, effector, creature);
 							createProvokedEffect(effector, target);
 						}
 					}
+				};
+				break;
+			case BACKATK:// ATTACK opponents from back
+				observer = new ActionObserver(ObserverType.ATTACK) {
+
+					@Override
+					public void attack(Creature creature) {
+						if (PositionUtil.isBehind(creature, effector)) {
+							if (Rnd.get(0, 99) <= prob2) {
+								Creature target = getProvokeTarget(provokeTarget, effector, creature);
+								createProvokedEffect(effector, target);
+							}
+						}
+					}
+
 				};
 				break;
 		// TODO MAHIT and PHHIT

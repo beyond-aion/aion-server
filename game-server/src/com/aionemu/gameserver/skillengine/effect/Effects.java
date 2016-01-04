@@ -111,7 +111,14 @@ public class Effects {
 		@XmlElement(name = "escape", type = EscapeEffect.class), @XmlElement(name = "skillcooltimereset", type = SkillCooltimeResetEffect.class),
 		@XmlElement(name = "riderobot", type = RideRobotEffect.class), @XmlElement(name = "absstatbuff", type = AbsoluteStatToPCBuffEffect.class),
 		@XmlElement(name = "absstatdebuff", type = AbsoluteStatToPCDebuffEffect.class),
-		@XmlElement(name = "petrification", type = PetrificationEffect.class) })
+		@XmlElement(name = "petrification", type = PetrificationEffect.class),
+		@XmlElement(name = "absexppointhealinstant", type = AbsoluteEXPPointHealInstantEffect.class),
+		@XmlElement(name = "limitedreduceDamage", type = LimitedReduceDamageEffect.class),
+		@XmlElement(name = "activateenslave", type = ActivateEnslaveEffect.class),
+		@XmlElement(name = "petorderunsummon", type = PetOrderUnSummonEffect.class), @XmlElement(name = "supportevent", type = SupportEventEffect.class),
+		@XmlElement(name = "targetchange", type = TargetChangeEffect.class), @XmlElement(name = "dummy", type = DummyEffect.class),
+		@XmlElement(name = "alwayshit", type = AlwaysHitEffect.class), @XmlElement(name = "alwaysnoresist", type = AlwaysNoResistEffect.class),
+		@XmlElement(name = "utility", type = UtilityEffect.class) })
 	protected List<EffectTemplate> effects;
 
 	@XmlTransient
