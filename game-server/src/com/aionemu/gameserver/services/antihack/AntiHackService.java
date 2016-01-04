@@ -163,4 +163,14 @@ public class AntiHackService {
 			player.prevMoveType = type;
 	}
 
+	public static void checkAionBin(int size, Player player) {
+		int legitSize = 212; // NA+GF
+		if (SecurityConfig.AION_BIN_CHECK) {
+			if (size != legitSize) {
+				AuditLogger.info(player, "Detected modified aion.bin");
+				player.getClientConnection().close(new SM_QUIT_RESPONSE());
+			}
+		}
+		PacketSendUtility.sendPacket(player, new SM_GAMEGUARD(size));
+	}
 }

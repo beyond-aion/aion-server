@@ -27,7 +27,6 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
-import com.aionemu.gameserver.spawnengine.InstanceRiftSpawnManager;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -93,7 +92,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		// SM_RIFT_ANNOUNCE
 		RiftInformer.sendRiftsInfo(activePlayer);
-		InstanceRiftSpawnManager.sendInstanceRiftStatus(activePlayer);
 
 		// SM_AUTO_GROUP's
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {

@@ -6,11 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SECURITY_TOKEN_REQUEST_STATUS;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_CHANGE_SESSION_ID;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
@@ -19,16 +19,15 @@ public class SecurityTokenService {
 
 	private final Logger log = LoggerFactory.getLogger(SecurityTokenService.class);
 
-	public void generateToken(Player player) {
-		String token = MD5(player.getName() + System.currentTimeMillis());
-		player.getPlayerAccount().setSecurityToken(token);
-		sendToken(player, player.getPlayerAccount().getSecurityToken());
-		LoginServer.getInstance().sendPacket(
-			new SM_CHANGE_SESSION_ID(player.getPlayerAccount().getId(), player.getPlayerAccount().getSecurityToken().substring(0, 16)));
+	public void generateToken(Account account, AionConnection con) {
+		String token = MD5(account.getName() + System.currentTimeMillis());
+		account.setSecurityToken(token);
+		sendToken(con, account.getSecurityToken());
+		LoginServer.getInstance().sendPacket(new SM_CHANGE_SESSION_ID(account.getId(), account.getSecurityToken().substring(0, 16)));
 	}
 
-	public void sendToken(Player player, String token) {
-		PacketSendUtility.sendPacket(player, new SM_SECURITY_TOKEN_REQUEST_STATUS(token));
+	public void sendToken(AionConnection con, String token) {
+		con.sendPacket(new SM_SECURITY_TOKEN_REQUEST_STATUS(token));
 	}
 
 	private String MD5(String md5) {

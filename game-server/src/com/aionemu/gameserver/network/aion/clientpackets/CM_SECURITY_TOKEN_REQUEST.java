@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.player.SecurityTokenService;
@@ -26,16 +26,11 @@ public class CM_SECURITY_TOKEN_REQUEST extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		Player player = this.getConnection().getActivePlayer();
-		if (player == null) {
+		Account account = this.getConnection().getAccount();
+		if (account == null)
 			return;
-		}
-
-		if (player.getPlayerAccount().getSecurityToken().equals("")) {
-			SecurityTokenService.getInstance().generateToken(player);
-		}
-		SecurityTokenService.getInstance().sendToken(player, player.getPlayerAccount().getSecurityToken());
-
+		if (account.getSecurityToken().equals(""))
+			SecurityTokenService.getInstance().generateToken(account, this.getConnection());
+		SecurityTokenService.getInstance().sendToken(this.getConnection(), account.getSecurityToken());
 	}
-
 }

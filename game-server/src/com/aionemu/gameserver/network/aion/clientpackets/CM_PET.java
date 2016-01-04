@@ -84,6 +84,11 @@ public class CM_PET extends AionClientPacket {
 						dopingItemId = readD();
 						dopingSlot1 = readD();
 					}
+					// TODO: PetBuffs go here.
+					// Commented out now, no crash if handled in else clause
+					// else if (actionType == 5) {
+					// readD(); // cherry count or buff enabled? Read value = 1
+					// }
 				} else {
 					objectId = readD();
 					count = readD();

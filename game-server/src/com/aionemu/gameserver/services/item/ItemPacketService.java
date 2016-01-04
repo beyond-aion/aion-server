@@ -39,6 +39,7 @@ public class ItemPacketService {
 		DEC_ITEM_SPLIT(0x06, true),
 		DEC_ITEM_SPLIT_MOVE(0x0A, true), // move to other storage with split
 		DEC_ITEM_USE(0x16, true),
+		DEC_STIGMA_USE(0x17, true),
 		INC_ITEM_COLLECT(0x19, true),
 		INC_KINAH_COLLECT(0x1A, true),
 		DEC_KINAH_BUY(0x1D, true),

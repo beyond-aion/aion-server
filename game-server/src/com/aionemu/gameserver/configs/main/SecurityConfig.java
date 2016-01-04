@@ -3,6 +3,9 @@ package com.aionemu.gameserver.configs.main;
 import com.aionemu.commons.configuration.Property;
 
 public class SecurityConfig {
+	
+	@Property(key = "gameserver.security.aion.bin.check", defaultValue = "true")
+	public static boolean AION_BIN_CHECK;
 
 	@Property(key = "gameserver.security.gmaudit.message.broadcast", defaultValue = "false")
 	public static boolean GM_AUDIT_MESSAGE_BROADCAST;

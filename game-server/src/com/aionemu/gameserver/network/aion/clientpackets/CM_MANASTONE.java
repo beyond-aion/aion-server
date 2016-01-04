@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.EnchantService;
+import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -70,19 +71,23 @@ public class CM_MANASTONE extends AionClientPacket {
 		switch (actionType) {
 			case 1: // enchant stone
 			case 2: // add manastone
-				EnchantItemAction action = new EnchantItemAction();
-				Item manastone = player.getInventory().getItemByObjId(stoneUniqueId);
+				Item stone = player.getInventory().getItemByObjId(stoneUniqueId);
 				Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
 				if (targetItem == null)
 					targetItem = player.getInventory().getItemByObjId(targetItemUniqueId);
 
-				if (action.canAct(player, manastone, targetItem)) {
-					Item supplement = player.getInventory().getItemByObjId(supplementUniqueId);
-					if (supplement != null) {
-						if (supplement.getItemId() / 100000 != 1661) // suppliment id check
-							return;
+				if (stone.getItemTemplate().isStigma() && targetItem.getItemTemplate().isStigma()) {
+					StigmaService.chargeStigma(player, targetItem, stone);
+				} else {
+					EnchantItemAction action = new EnchantItemAction();
+					if (action.canAct(player, stone, targetItem)) {
+						Item supplement = player.getInventory().getItemByObjId(supplementUniqueId);
+						if (supplement != null) {
+							if (supplement.getItemId() / 100000 != 1661) // suppliment id check
+								return;
+						}
+						action.act(player, stone, targetItem, supplement, targetFusedSlot);
 					}
-					action.act(player, manastone, targetItem, supplement, targetFusedSlot);
 				}
 				break;
 			case 3: // remove manastone

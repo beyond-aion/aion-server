@@ -3,34 +3,30 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.SerialKillerService;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author Lyahim
+ * @author ginho1
  */
-public class CM_SHOW_MAP extends AionClientPacket {
-	
-	private int action;
+public class CM_CHECK_PAK extends AionClientPacket {
 
-	public CM_SHOW_MAP(int opcode, State state, State... restStates) {
+	// private int unk;
+	private String pakStatus;
+
+	public CM_CHECK_PAK(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
 	@Override
 	protected void readImpl() {
-		action = readC();
+		// unk = readC();
+		pakStatus = readS();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		switch (action) {
-			case 0:
-				SerialKillerService.getInstance().intruderScan(player);
-				break;
-		}
+		if (pakStatus.indexOf("1:OK") < 5)
+			AuditLogger.info(player, "Player using modified data pak: " + pakStatus);
 	}
 }
