@@ -208,9 +208,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			reward = rewardType.calcReward(this.getPlayer(), value);
 
 		long repose = 0;
-		if (this.isReadyForReposeEnergy() && this.getCurrentReposeEnergy() > 0) {
-			repose = (long) ((reward / 100f) * 40); // 40% bonus
-			this.addReposeEnergy(-repose);
+		if (getCurrentReposeEnergy() > 0) {
+			long allowedExp = Math.min(getCurrentReposeEnergy(), reward);
+			addReposeEnergy(-allowedExp);
+			repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
 		}
 
 		long salvation = 0;
