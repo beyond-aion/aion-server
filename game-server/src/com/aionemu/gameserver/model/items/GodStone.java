@@ -63,9 +63,6 @@ public class GodStone extends ItemStone {
 
 	}
 
-	/**
-	 * @param player
-	 */
 	public void onEquip(final Player player) {
 		if (godstoneInfo == null || godItem == null)
 			return;
@@ -78,8 +75,8 @@ public class GodStone extends ItemStone {
 			@Override
 			public void attack(Creature creature) {
 				if (handProbability > Rnd.get(0, 1000)) {
-					Skill skill = SkillEngine.getInstance()
-						.getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), player.getTarget(), godItem);
+					Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), player.getTarget(),
+						godItem, false);
 					skill.setFirstTargetRangeCheck(false);
 					if (skill.canUseSkill(CastState.CAST_START)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
@@ -87,12 +84,13 @@ public class GodStone extends ItemStone {
 						effect.initialize();
 						effect.applyEffect();
 						effect = null;
-						//Illusion Godstones
+						// Illusion Godstones
 						if (breakProb > 0) {
 							increaseActivatedCount();
 							if (activatedCount > nonBreakCount && Rnd.get(0, 1000) < breakProb) {
-							  //TODO: Delay 10 Minutes, send messages etc
-							  //PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(), godItem.getNameId()));
+								// TODO: Delay 10 Minutes, send messages etc
+								// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
+								// godItem.getNameId()));
 								breakGodstone(player, equippedItem);
 							}
 						}
@@ -111,14 +109,14 @@ public class GodStone extends ItemStone {
 		if (actionListener != null)
 			player.getObserveController().removeObserver(actionListener);
 	}
-	
+
 	private void increaseActivatedCount() {
-	   this.activatedCount++;
-	   this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		this.activatedCount++;
+		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
-	
+
 	public int getActivatedCount() {
-	   return this.activatedCount;
+		return this.activatedCount;
 	}
 
 	private void breakGodstone(Player player, Item item) {

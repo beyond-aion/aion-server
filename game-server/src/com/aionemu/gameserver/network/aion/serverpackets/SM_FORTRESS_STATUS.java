@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.model.siege.SourceLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.SiegeService;
@@ -14,7 +13,6 @@ public class SM_FORTRESS_STATUS extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Map<Integer, FortressLocation> fortresses = SiegeService.getInstance().getFortresses();
-		Map<Integer, SourceLocation> sources = SiegeService.getInstance().getSources();
 		Influence inf = Influence.getInstance();
 
 		writeC(1);
@@ -39,16 +37,10 @@ public class SM_FORTRESS_STATUS extends AionServerPacket {
 		writeF(inf.getKaldorElyosInfluence());
 		writeF(inf.getKaldorAsmodiansInfluence());
 		writeF(inf.getKaldorBalaursInfluence());
-		writeH(fortresses.size() + sources.size());
 
 		for (FortressLocation fortress : fortresses.values()) {
 			writeD(fortress.getLocationId());
 			writeC(fortress.getNextState());
-		}
-
-		for (SourceLocation source : sources.values()) {
-			writeD(source.getLocationId());
-			writeC(source.getNextState());
 		}
 	}
 
