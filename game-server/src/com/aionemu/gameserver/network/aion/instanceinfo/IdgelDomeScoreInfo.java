@@ -54,7 +54,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, 0);
 
 				if (idgelDomePlayerReward.getIdgelDomeBox() > 0) { // item two
-					writeD(buf, 188052729);
+					writeD(buf, 188053030);
 					writeD(buf, idgelDomePlayerReward.getIdgelDomeBox());
 				} else {
 					writeD(buf, 0);
