@@ -79,7 +79,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- needs to be moved to junk_materials.xml later -->
-	<gd_rule rule_name="Pitted Carapace" base_chance="5">
+	<gd_rule rule_name="Pitted Carapace" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -87,7 +87,7 @@
 			<gd_item id="182007000" name="Pitted Carapace"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Splintered Talon" base_chance="5">
+	<gd_rule rule_name="Splintered Talon" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -95,7 +95,7 @@
 			<gd_item id="182007001" name="Splintered Talon"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Ore" base_chance="5">
+	<gd_rule rule_name="Pitted Ore" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -103,7 +103,7 @@
 			<gd_item id="182007002" name="Pitted Ore"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Idium Crystal" base_chance="5">
+	<gd_rule rule_name="Pitted Idium Crystal" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -111,7 +111,7 @@
 			<gd_item id="182007003" name="Pitted Idium Crystal"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Chunky Elim Sap" base_chance="5">
+	<gd_rule rule_name="Chunky Elim Sap" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -119,7 +119,7 @@
 			<gd_item id="182007004" name="Chunky Elim Sap"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Accessory Bits" base_chance="5">
+	<gd_rule rule_name="Pitted Accessory Bits" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -127,7 +127,7 @@
 			<gd_item id="182007005" name="Pitted Accessory Bits"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Damaged Spirit Fragment" base_chance="5">
+	<gd_rule rule_name="Damaged Spirit Fragment" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -135,7 +135,7 @@
 			<gd_item id="182007006" name="Damaged Spirit Fragment"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Old Used Manastone" base_chance="5">
+	<gd_rule rule_name="Old Used Manastone" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -143,7 +143,7 @@
 			<gd_item id="182007007" name="Old Used Manastone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Scale" base_chance="5">
+	<gd_rule rule_name="Pitted Scale" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="182007008" name="Pitted Scale"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Feeler" base_chance="5">
+	<gd_rule rule_name="Pitted Feeler" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -159,7 +159,7 @@
 			<gd_item id="182007009" name="Pitted Feeler"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Splintered Marrowbone" base_chance="5">
+	<gd_rule rule_name="Splintered Marrowbone" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -167,7 +167,7 @@
 			<gd_item id="182007010" name="Splintered Marrowbone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Inactive Metal Powder" base_chance="5">
+	<gd_rule rule_name="Inactive Metal Powder" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -175,7 +175,7 @@
 			<gd_item id="182007011" name="Inactive Metal Powder"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Clouded Crystal" base_chance="5">
+	<gd_rule rule_name="Clouded Crystal" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -183,7 +183,7 @@
 			<gd_item id="182007012" name="Clouded Crystal"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Molding Elim Essence" base_chance="5">
+	<gd_rule rule_name="Molding Elim Essence" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -191,7 +191,7 @@
 			<gd_item id="182007013" name="Molding Elim Essence"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Pitted Relic Bits" base_chance="5">
+	<gd_rule rule_name="Pitted Relic Bits" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -199,7 +199,7 @@
 			<gd_item id="182007014" name="Pitted Relic Bits"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Damaged Spirit Essence" base_chance="5">
+	<gd_rule rule_name="Damaged Spirit Essence" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -207,7 +207,7 @@
 			<gd_item id="182007015" name="Damaged Spirit Essence"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Ancient Used Manastone" base_chance="5">
+	<gd_rule rule_name="Ancient Used Manastone" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -215,7 +215,7 @@
 			<gd_item id="182007016" name="Ancient Used Manastone"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Ruptured Membrane" base_chance="5">
+	<gd_rule rule_name="Ruptured Membrane" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -223,7 +223,7 @@
 			<gd_item id="182007017" name="Ruptured Membrane"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Ceramium Fragment" base_chance="10">
+	<gd_rule rule_name="Ceramium Fragment" base_chance="6">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
@@ -231,7 +231,7 @@
 			<gd_item id="152012578" name="Ceramium Fragment"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Enigmatic Ore" base_chance="10">
+	<gd_rule rule_name="Enigmatic Ore" base_chance="6">
 		<gd_maps>
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
