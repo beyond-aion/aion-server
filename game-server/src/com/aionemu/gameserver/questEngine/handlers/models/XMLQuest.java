@@ -15,7 +15,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 @XmlType(name = "QuestScriptData")
 @XmlSeeAlso({ ReportToData.class, RelicRewardsData.class, CraftingRewardsData.class, ReportToManyData.class, MonsterHuntData.class,
 	ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class, FountainRewardsData.class,
-	SkillUseData.class })
+	SkillUseData.class, ReportOnLevelUpData.class })
 public abstract class XMLQuest {
 
 	@XmlAttribute(name = "id", required = true)

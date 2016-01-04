@@ -13,6 +13,8 @@ import com.aionemu.gameserver.questEngine.handlers.template.ItemCollecting;
 /**
  * @author MrPoke
  * @modified Rolandas
+ * @Modified Majka (2015.07.13) - Added the attributes check_ok_dialog_id, check_fail_dialog_id to manage
+ *           the new collecting quests in Cygnea, Enshar with quest script template.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemCollectingData")
@@ -33,9 +35,16 @@ public class ItemCollectingData extends XMLQuest {
 	@XmlAttribute(name = "start_dialog_id2")
 	protected int startDialogId2;
 
+	@XmlAttribute(name = "check_ok_dialog_id")
+	protected int checkOkDialogId;
+
+	@XmlAttribute(name = "check_fail_dialog_id")
+	protected int checkFailDialogId;
+
 	@Override
 	public void register(QuestEngine questEngine) {
-		ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, endNpcIds, questMovie, startDialogId, startDialogId2);
+		ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, endNpcIds, questMovie, startDialogId, startDialogId2, checkOkDialogId,
+			checkFailDialogId);
 		questEngine.addQuestHandler(template);
 	}
 

@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,18 +18,23 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
+ * @Modified Majka
  */
 public class KillInZone extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(KillInZone.class);
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
+	private final Set<Integer> startNpcs = new HashSet<>();
+	private final Set<Integer> endNpcs = new HashSet<>();
 	private final int killAmount;
+	private final int minRank;
+	private final int levelDiff;
 	private final int startDistanceNpc;
-	private final String zone;
+	private final Set<String> zones = new HashSet<>();
+	private final boolean isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 
-	public KillInZone(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, String zone, int killAmount, int startDistanceNpc) {
+	public KillInZone(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<String> zones, int killAmount, int minRank, int levelDiff,
+		int startDistanceNpc) {
 		super(questId);
 		if (startNpcIds != null) {
 			this.startNpcs.addAll(startNpcIds);
@@ -41,8 +46,10 @@ public class KillInZone extends QuestHandler {
 			this.endNpcs.addAll(endNpcIds);
 			this.endNpcs.remove(0);
 		}
-		this.zone = zone;
+		this.zones.addAll(zones);
 		this.killAmount = killAmount;
+		this.minRank = minRank;
+		this.levelDiff = levelDiff;
 		this.startDistanceNpc = startDistanceNpc;
 	}
 
@@ -50,26 +57,20 @@ public class KillInZone extends QuestHandler {
 	protected void onWorkItemsLoaded() {
 		if (workItems == null)
 			return;
-		if (workItems.size() > 0) {
+		if (workItems.size() > 0)
 			log.warn("Q{} (KillInWorld) has a work item.", questId);
-		}
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcs.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
+		for (Integer startNpc : startNpcs) {
 			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
 			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
 		}
-		iterator = endNpcs.iterator();
-		while (iterator.hasNext()) {
-			int endNpc = iterator.next();
+		for (Integer endNpc : endNpcs)
 			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
-		}
-		qe.registerOnKillInZone(zone, questId);
-
+		for (String zone : zones)
+			qe.registerOnKillInZone(zone, questId);
 		if (startDistanceNpc != 0)
 			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
 	}
@@ -96,6 +97,8 @@ public class KillInZone extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
+				if (isDataDriven && dialog == DialogAction.USE_OBJECT)
+					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
 			}
 		}
@@ -104,7 +107,13 @@ public class KillInZone extends QuestHandler {
 
 	@Override
 	public boolean onKillInZoneEvent(QuestEnv env) {
-		return defaultOnKillInZoneEvent(env, 0, killAmount, true); // reward
+		// Rank restriction
+		if (minRank > 0 && ((Player) env.getVisibleObject()).getAbyssRank().getRank().getId() < minRank)
+			return false;
+		// Level restriction
+		if (levelDiff > 0 && (env.getPlayer().getLevel() - ((Player) env.getVisibleObject()).getLevel()) > levelDiff)
+			return false;
+		return defaultOnKillInZoneEvent(env, 0, killAmount, true, isDataDriven); // reward
 	}
 
 	@Override

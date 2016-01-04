@@ -2,6 +2,7 @@ package com.aionemu.gameserver.questEngine.handlers.models;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -43,27 +44,30 @@ public class MonsterHuntData extends XMLQuest {
 	protected int invasionWorld;
 	@XmlAttribute(name = "start_dist_npc_id")
 	protected int startDistanceNpc;
-
+	
 	@Override
 	public void register(QuestEngine questEngine) {
-		FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<Monster, Set<Integer>>();
+		Map<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
-		if (questTemplate.getQuestKill() != null) {
+		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
 			for (QuestKill qk : questTemplate.getQuestKill()) {
 				Monster mn = new Monster();
 				if (qk.getKillCount() > 0)
 					mn.setEndVar(qk.getKillCount());
-				if (qk.getNpcIds() != null) {
+				if (qk.getNpcIds() != null)
 					mn.addNpcIds(qk.getNpcIds());
-				}
+				if (qk.getVar() >= 0)
+					mn.setVar(qk.getVar());
+				if (qk.getQuestStep() >= 0)
+					mn.setStep(qk.getQuestStep()); // Quest step
 				if (qk.getSequenceNumber() >= 0)
 					mn.setVar(qk.getSequenceNumber());
 				// if monster != null then try to add into mn all values
 				if (monster != null) {
 					for (Monster m : monster) {
-						// if monster with the same var is present, the values from quest template will be overrided (excluding npcs who will be merged)
-						if (m.getVar() == mn.getVar()) {
+						// if monster with the same var and step is present, the values from quest template will be overrided (excluding npcs who will be merged)
+						if (m.getVar() == mn.getVar() && m.getStep() == mn.getStep()) {
 							if (m.getStartVar() != null)
 								mn.setStartVar(m.getStartVar());
 							if (m.getEndVar() > 0)
@@ -81,11 +85,11 @@ public class MonsterHuntData extends XMLQuest {
 						}
 					}
 				}
-				monsterNpcs.put(mn, new HashSet<Integer>(mn.getNpcIds()));
+				monsterNpcs.put(mn, new HashSet<>(mn.getNpcIds()));
 			}
 		} else if (monster != null) {
 			for (Monster m : monster) {
-				monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
+				monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
 			}
 		}
 
@@ -102,8 +106,7 @@ public class MonsterHuntData extends XMLQuest {
 		 * monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } } else { monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } }
 		 **/
 
-		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld,
-			startDistanceNpc);
+		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld, startDistanceNpc);
 		questEngine.addQuestHandler(template);
 	}
 

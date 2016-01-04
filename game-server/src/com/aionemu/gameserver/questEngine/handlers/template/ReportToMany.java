@@ -5,9 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javolution.util.FastMap;
 
 import com.aionemu.gameserver.model.DialogAction;
@@ -24,11 +21,10 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
- * @author Hilgert @modified vlog, Pad
+ * @author Hilgert 
+ * @modified vlog, Pad
  */
 public class ReportToMany extends QuestHandler {
-
-	private static final Logger log = LoggerFactory.getLogger(ReportToMany.class);
 
 	private final int startItem;
 	private final Set<Integer> startNpcs = new HashSet<Integer>();

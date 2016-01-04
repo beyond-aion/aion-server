@@ -28,6 +28,10 @@ public class KillInWorldData extends XMLQuest {
 	protected List<Integer> endNpcIds;
 	@XmlAttribute(name = "amount")
 	protected int amount;
+	@XmlAttribute(name = "min_rank")
+	protected int minRank;
+	@XmlAttribute(name = "level_diff")
+	protected int levelDiff;
 	@XmlAttribute(name = "worlds", required = true)
 	protected List<Integer> worldIds;
 	@XmlAttribute(name = "invasion_world")
@@ -47,7 +51,8 @@ public class KillInWorldData extends XMLQuest {
 				worldIds.add(template.getMapId());
 			}
 		}
-		KillInWorld template = new KillInWorld(id, endNpcIds, startNpcIds, worldIds, amount, invasionWorld, startDialog, startDistanceNpc);
+		KillInWorld template = new KillInWorld(id, endNpcIds, startNpcIds, worldIds, amount, minRank, levelDiff, invasionWorld, startDialog,
+			startDistanceNpc);
 		questEngine.addQuestHandler(template);
 	}
 }

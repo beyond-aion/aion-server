@@ -2,9 +2,8 @@ package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import javolution.util.FastMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,22 +30,26 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author MrPoke
  * @reworked vlog, Bobobear, Pad
+ * @Modified Majka (2015.07.13) - Removed getDialog() cases: QUEST_REFUSE_1,
+ *           FINISH_DIALOG on onDialogEvent method; already managed on
+ *           sendQuestStartDialog method.
  */
 public class MonsterHunt extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MonsterHunt.class);
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
-	private final FastMap<Monster, Set<Integer>> monsters;
+	private final Set<Integer> startNpcs = new HashSet<>();
+	private final Set<Integer> endNpcs = new HashSet<>();
+	private final Map<Monster, Set<Integer>> monsters;
 	private final int startDialog;
 	private final int endDialog;
-	private final Set<Integer> aggroNpcs = new HashSet<Integer>();
+	private final Set<Integer> aggroNpcs = new HashSet<>();
 	private final int invasionWorldId;
 	private QuestItems workItem;
 	private final int startDistanceNpc;
+	private final boolean dataDriven;
 
-	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters, int startDialog,
+	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
 		int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc) {
 		super(questId);
 		this.startNpcs.addAll(startNpcIds);
@@ -66,15 +69,15 @@ public class MonsterHunt extends QuestHandler {
 		}
 		this.invasionWorldId = invasionWorld;
 		this.startDistanceNpc = startDistanceNpc;
+		this.dataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
 	protected void onWorkItemsLoaded() {
 		if (workItems == null)
 			return;
-		if (workItems.size() > 1) {
+		if (workItems.size() > 1)
 			log.warn("Q{} (MonsterHunt) has more than 1 work item.", questId);
-		}
 		workItem = workItems.get(0);
 	}
 
@@ -109,15 +112,11 @@ public class MonsterHunt extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
-				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
+			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, startDialog != 0 ? startDialog : 1011);
 				} else {
 					switch (env.getDialog()) {
-						case QUEST_REFUSE_1:
-						case FINISH_DIALOG:
-							return closeDialogWindow(env);
 						case QUEST_ACCEPT:
 						case QUEST_ACCEPT_1:
 						case QUEST_ACCEPT_SIMPLE:
@@ -163,19 +162,18 @@ public class MonsterHunt extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
-				if (!aggroNpcs.isEmpty()) {
+				if (!aggroNpcs.isEmpty() || dataDriven) {
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 						case USE_OBJECT:
 							return sendQuestDialog(env, 10002);
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							if (workItem != null) {
 								long currentCount = player.getInventory().getItemCountByItemId(workItem.getItemId());
 								if (currentCount > 0)
 									removeQuestItem(env, workItem.getItemId(), currentCount, QuestStatus.COMPLETE);
 							}
 							return sendQuestDialog(env, 5);
-						}
 						default:
 							return sendQuestEndDialog(env);
 					}
@@ -191,7 +189,15 @@ public class MonsterHunt extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int currentTotalVar = 0;
+			int totalEndVar = 0;
+			int curStep = qs.getQuestVarById(0);
+			int lastStep = 0;
+
 			for (Monster m : monsters.keySet()) {
+				lastStep = Math.max(lastStep, m.getStep());
+				if (dataDriven && m.getStep() != curStep) // Check only for current step for new style quests
+					continue;
 				if (m.getNpcIds().contains(env.getTargetId())) {
 					int endVar = m.getEndVar();
 					int varId = m.getVar();
@@ -207,25 +213,37 @@ public class MonsterHunt extends QuestHandler {
 						if (!aggroNpcs.isEmpty()) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
+							return true;
 						} else {
 							for (int varsUsed = m.getVar(); varsUsed < varId; varsUsed++) {
 								int value = total & 0x3F;
 								total >>= 6;
 								qs.setQuestVarById(varsUsed, value);
 							}
-							if (qs.getQuestVarById(m.getVar()) == m.getEndVar()) {
-								if (m.getRewardVar()) {
-									qs.setStatus(QuestStatus.REWARD);
-								} else if (m.getRewardNextStep()) {
-									qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-									qs.setStatus(QuestStatus.REWARD);
-								}
-							}
 							updateQuestStatus(env);
+							if (!dataDriven) { // Old quest style
+								if (total <= m.getEndVar() && m.getRewardVar()) {
+									qs.setStatus(QuestStatus.REWARD);
+									updateQuestStatus(env);
+								}
+								return true;
+							}
 						}
-						return true;
 					}
 				}
+				// Totals for quest step
+				totalEndVar += m.getEndVar();
+				currentTotalVar += qs.getQuestVarById(m.getVar());
+			}
+
+			// Checks if step is completed
+			if (currentTotalVar >= totalEndVar && dataDriven) { // New quest style
+				qs.setQuestVar(curStep + 1);
+				if (curStep >= lastStep) {
+					qs.setStatus(QuestStatus.REWARD);
+				}
+				updateQuestStatus(env);
+				return true;
 			}
 		}
 		return false;

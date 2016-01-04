@@ -37,6 +37,9 @@ public class Monster {
 
 	@XmlAttribute(name = "npc_seq")
 	private Integer npcSequence;
+	
+	@XmlAttribute(name = "step")
+	private Integer step = 0;
 
 	@XmlAttribute(name = "spawner_object")
 	protected int spawnerObject;
@@ -71,7 +74,7 @@ public class Monster {
 
 	public void addNpcIds(List<Integer> value) {
 		if (this.npcIds == null)
-			this.npcIds = new FastTable<Integer>();
+			this.npcIds = new FastTable<>();
 		for (Integer npc : value) {
 			if (!this.npcIds.contains(npc))
 				this.npcIds.add(npc);
@@ -84,6 +87,14 @@ public class Monster {
 
 	public void setNpcSequence(Integer value) {
 		this.npcSequence = value;
+	}
+	
+	public Integer getStep() {
+		return step;
+	}
+
+	public void setStep(Integer value) {
+		this.step = value;
 	}
 
 	public int getSpawnerObject() {

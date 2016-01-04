@@ -29,6 +29,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author MrPoke
  * @reworked vlog, Rolandas
+ * @Modified Majka (2015.07.13) - Added management of the new properties checkOkDialogId, checkFailDialogId
  */
 public class ItemCollecting extends QuestHandler {
 
@@ -40,10 +41,12 @@ public class ItemCollecting extends QuestHandler {
 	private final int nextNpcId;
 	private final int startDialogId;
 	private final int startDialogId2;
+	private final int checkOkDialogId;
+	private final int checkFailDialogId;
 	private QuestItems workItem;
 
 	public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> endNpcIds, int questMovie, int startDialogId,
-		int startDialogId2) {
+		int startDialogId2, int checkOkDialogId, int checkFailDialogId) {
 		super(questId);
 		startNpcs.addAll(startNpcIds);
 		startNpcs.remove(0);
@@ -57,6 +60,8 @@ public class ItemCollecting extends QuestHandler {
 		this.questMovie = questMovie;
 		this.startDialogId = startDialogId;
 		this.startDialogId2 = startDialogId2;
+		this.checkOkDialogId = checkOkDialogId;
+		this.checkFailDialogId = checkFailDialogId;
 	}
 
 	@Override
@@ -151,7 +156,9 @@ public class ItemCollecting extends QuestHandler {
 						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : 2375);
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
-						return checkQuestItems(env, var, var, true, 5, 1004); // reward
+						int okDialogId = checkOkDialogId != 0 ? checkOkDialogId : 5;
+						int failDialogId = checkFailDialogId != 0 ? checkFailDialogId : 2716;
+						return checkQuestItems(env, var, var, true, okDialogId, failDialogId); // reward
 					}
 					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
 						return checkQuestItemsSimple(env, var, var, true, 5, 0, 0); // reward

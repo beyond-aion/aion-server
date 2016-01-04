@@ -25,8 +25,8 @@ public class ReportTo extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ReportTo.class);
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
+	private final Set<Integer> startNpcs = new HashSet<>();
+	private final Set<Integer> endNpcs = new HashSet<>();
 	private final int startDialogId;
 	private final int endDialogId;
 	private QuestItems workItem;

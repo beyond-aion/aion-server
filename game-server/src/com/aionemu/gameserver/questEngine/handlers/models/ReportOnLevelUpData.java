@@ -8,31 +8,24 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.handlers.template.ReportTo;
+import com.aionemu.gameserver.questEngine.handlers.template.ReportOnLevelUp;
 
 /**
- * @author MrPoke
- * @modified Pad
+ * @author Majka, Bobobear
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ReportToData")
-public class ReportToData extends XMLQuest {
-
-	@XmlAttribute(name = "start_npc_ids")
-	protected List<Integer> startNpcIds;
+@XmlType(name = "ReportOnLevelUpData")
+public class ReportOnLevelUpData extends XMLQuest {
 
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
 
-	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialog = 1011;
-
 	@XmlAttribute(name = "end_dialog_id")
 	protected int endDialog = 2375;
-	
+
 	@Override
 	public void register(QuestEngine questEngine) {
-		ReportTo template = new ReportTo(id, startNpcIds, endNpcIds, startDialog, endDialog);
+		ReportOnLevelUp template = new ReportOnLevelUp(id, endNpcIds, endDialog);
 		questEngine.addQuestHandler(template);
 	}
 }

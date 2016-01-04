@@ -122,7 +122,7 @@ public class CraftingRewards extends QuestHandler {
 			if (movieId == questMovie && canLearn(player)) {
 				player.getSkillList().addSkill(player, skillId, levelReward);
 				player.getRecipeList().autoLearnRecipe(player, skillId, levelReward);
-				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getSkillEntry(skillId), 1330064, false));
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getSkillEntry(skillId), 1330064, null, false, false));
 				return true;
 			}
 		}

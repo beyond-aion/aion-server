@@ -51,7 +51,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author MrPoke
- * @modified vlog
+ * @modified vlog, Majka
  */
 public abstract class QuestHandler extends AbstractQuestHandler implements ConstantSpawnHandler {
 
@@ -600,30 +600,48 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		return false;
 	}
 
-	/** Handle onKillPlayer event */
 	public boolean defaultOnKillRankedEvent(QuestEnv env, int startVar, int endVar, boolean reward) {
+		return defaultOnKillRankedEvent(env, startVar, endVar, reward, false);
+	}
+
+	public boolean defaultOnKillRankedEvent(QuestEnv env, int startVar, int endVar, boolean reward, boolean isDataDriven) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (var >= startVar && var < (endVar - 1)) {
-				changeQuestStep(env, var, var + 1, false);
-				return true;
-			} else if (var == (endVar - 1)) {
-				if (reward) {
-					qs.setStatus(QuestStatus.REWARD);
-				} else {
-					qs.setQuestVarById(0, var + 1);
+			if (isDataDriven) {
+				int varKill = qs.getQuestVarById(1);
+				if (varKill >= startVar && varKill < (endVar - 1)) {
+					changeQuestStep(env, varKill, varKill + 1, false, 1);
+					return true;
+				} else if (varKill == (endVar - 1)) {
+					if (reward)
+						qs.setStatus(QuestStatus.REWARD);
+					qs.setQuestVar(var + 1);
 				}
-				updateQuestStatus(env);
-				return true;
+			} else {
+				if (var >= startVar && var < (endVar - 1)) {
+					changeQuestStep(env, var, var + 1, false);
+					return true;
+				} else if (var == (endVar - 1)) {
+					if (reward)
+						qs.setStatus(QuestStatus.REWARD);
+					else
+						qs.setQuestVarById(0, var + 1);
+				}
 			}
+			updateQuestStatus(env);
+			return true;
 		}
 		return false;
 	}
 
 	public boolean defaultOnKillInZoneEvent(QuestEnv env, int startVar, int endVar, boolean reward) {
-		return defaultOnKillRankedEvent(env, startVar, endVar, reward);
+		return defaultOnKillRankedEvent(env, startVar, endVar, reward, false);
+	}
+	
+	public boolean defaultOnKillInZoneEvent(QuestEnv env, int startVar, int endVar, boolean reward, boolean isDataDriven) {
+		return defaultOnKillRankedEvent(env, startVar, endVar, reward, isDataDriven);
 	}
 
 	public boolean defaultOnUseSkillEvent(QuestEnv env, int startVar, int endVar, int varNum) {
@@ -921,20 +939,14 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		// Only null and LOCKED quests can be started
-		if (qs != null && qs.getStatus() != QuestStatus.LOCKED) {
+		if (qs != null && qs.getStatus() != QuestStatus.LOCKED)
 			return false;
-		}
-
 		// Check all player requirements
-		if (!QuestService.checkMissionStatConditions(env)) {
+		if (!QuestService.checkMissionStatConditions(env))
 			return false;
-		}
-
 		// Check, if the player has required level
-		if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel())) {
+		if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel()))
 			return false;
-		}
-
 		// Check the quests, that has to be done before starting this one
 		// Set the quest status to LOCKED, if these requirements aren't there
 		// Zone missions should be already LOCKED before!
@@ -943,9 +955,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			if (id != 0) {
 				QuestState qs2 = player.getQuestStateList().getQuestState(id);
 				if (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE) {
-					if (qs == null && !isZoneMission) {
+					if (qs == null && !isZoneMission)
 						QuestService.startMission(env, QuestStatus.LOCKED);
-					}
 					return false;
 				}
 			}
@@ -955,10 +966,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		// Zone missions should be already LOCKED before!
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-			if (!startCondition.check(player, false)) {
+			if (!startCondition.check(player, false))
 				if (qs == null && !isZoneMission) {
 					QuestService.startMission(env, QuestStatus.LOCKED);
-				}
 				return false;
 			}
 		}

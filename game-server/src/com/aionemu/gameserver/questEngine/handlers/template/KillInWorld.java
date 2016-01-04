@@ -8,6 +8,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.rift.RiftLocation;
@@ -29,16 +30,19 @@ public class KillInWorld extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(KillInWorld.class);
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
-	private final Set<Integer> worldIds = new HashSet<Integer>();
+	private final Set<Integer> startNpcs = new HashSet<>();
+	private final Set<Integer> endNpcs = new HashSet<>();
+	private final Set<Integer> worldIds = new HashSet<>();
 	private final int killAmount;
+	private final int minRank;
+	private final int levelDiff;
 	private final int invasionWorldId;
 	private final int startDialog;
 	private final int startDistanceNpc;
+	private final boolean isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 
-	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int invasionWorld,
-		int startDialog, int startDistanceNpc) {
+	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int minRank,
+		int levelDiff, int invasionWorld, int startDialog, int startDistanceNpc) {
 		super(questId);
 		if (startNpcIds != null) {
 			this.startNpcs.addAll(startNpcIds);
@@ -53,6 +57,8 @@ public class KillInWorld extends QuestHandler {
 		this.worldIds.addAll(worldIds);
 		this.worldIds.remove(0);
 		this.killAmount = killAmount;
+		this.minRank = minRank;
+		this.levelDiff = levelDiff;
 		this.invasionWorldId = invasionWorld;
 		this.startDialog = startDialog;
 		this.startDistanceNpc = startDistanceNpc;
@@ -113,8 +119,10 @@ public class KillInWorld extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
+				if (isDataDriven && dialog == DialogAction.USE_OBJECT)
+					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
 			}
 		}
@@ -146,7 +154,13 @@ public class KillInWorld extends QuestHandler {
 
 	@Override
 	public boolean onKillInWorldEvent(QuestEnv env) {
-		return defaultOnKillRankedEvent(env, 0, killAmount, true); // reward
+		// Rank restriction
+		if (minRank > 0 && ((Player) env.getVisibleObject()).getAbyssRank().getRank().getId() < minRank)
+			return false;
+		// Level restriction
+		if (levelDiff > 0 && (env.getPlayer().getLevel() - ((Player) env.getVisibleObject()).getLevel()) > levelDiff)
+			return false;
+		return defaultOnKillRankedEvent(env, 0, killAmount, true, isDataDriven); // reward
 	}
 
 	@Override
