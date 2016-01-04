@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,11 +98,9 @@ public class TamperingAction extends AbstractItemAction {
 							if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 								targetItem.setTemperingEffect(new TemperingEffect(player, targetItem));
 							} else {
-								HashMap<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA
-									.getTemplates(targetItem.getItemTemplate().getItemGroup());
-								if (tempering != null) {
+								Map<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(targetItem.getItemTemplate());
+								if (tempering != null)
 									targetItem.setTemperingEffect(new TemperingEffect(player, tempering.get(targetItem.getTempering())));
-								}
 							}
 						}
 						PacketSendUtility
@@ -165,7 +163,7 @@ public class TamperingAction extends AbstractItemAction {
 		if (target.getItemTemplate().getItemGroup().equals(ItemGroup.PLUME)) {
 			if (curTemp < 10)
 				chance = 100 - (curTemp * 10);
-			else 
+			else
 				chance = 10;
 		}
 		return chance;

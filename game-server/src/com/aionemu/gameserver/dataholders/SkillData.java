@@ -3,13 +3,16 @@ package com.aionemu.gameserver.dataholders;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -28,24 +31,33 @@ public class SkillData {
 	/**
 	 * Map that contains skillId - SkillTemplate key-value pair
 	 */
+	@XmlTransient
 	private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
+	
+	@XmlTransient
+	private Map<String, List<SkillTemplate>> skillTemplatesByGroups = new FastMap<>();
 
 	/**
 	 * Map that contains cooldownId - skillId List
 	 */
+	@XmlTransient
 	private TIntObjectHashMap<List<Integer>> cooldownGroups = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillData.clear();
+		skillTemplatesByGroups.clear();
 		cooldownGroups.clear();
 		for (SkillTemplate skillTemplate : skillTemplates) {
 			int skillId = skillTemplate.getSkillId();
 			int cooldownId = skillTemplate.getCooldownId();
 			skillData.put(skillId, skillTemplate);
-			if (!cooldownGroups.containsKey(cooldownId)) {
+			if (!cooldownGroups.containsKey(cooldownId))
 				cooldownGroups.put(cooldownId, new FastTable<>());
-			}
 			cooldownGroups.get(cooldownId).add(skillId);
+			
+			if(skillTemplate.getGroup() != null)
+				if(!skillTemplatesByGroups.containsKey(skillTemplate.getGroup()))
+					skillTemplatesByGroups.put(skillTemplate.getGroup(), new FastTable<>()).add(skillTemplate);
 		}
 	}
 
@@ -55,6 +67,13 @@ public class SkillData {
 	 */
 	public SkillTemplate getSkillTemplate(int skillId) {
 		return skillData.get(skillId);
+	}
+	
+	public List<SkillTemplate> getSkillTemplate(String skillGroup) {
+		List<SkillTemplate> skills = skillTemplatesByGroups.get(skillGroup);
+		if(skills != null)
+			return skills;
+		return new FastTable<>();
 	}
 
 	/**

@@ -16,7 +16,7 @@ import javolution.util.FastTable;
 import com.aionemu.gameserver.model.enchants.EnchantList;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.EnchantTemplateData;
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author xTz
@@ -53,8 +53,11 @@ public class EnchantData {
 		return templates.size();
 	}
 
-	public Map<Integer, List<EnchantStat>> getTemplates(ItemGroup group) {
-		return templates.get(group);
+	public Map<Integer, List<EnchantStat>> getTemplates(ItemTemplate itemTemplate) {
+		if (itemTemplate.getEnchantName() != null)
+			return templates.get(itemTemplate.getEnchantName());
+		else
+			return templates.get(itemTemplate.getItemGroup().toString());
 	}
 
 }
