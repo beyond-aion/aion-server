@@ -54,16 +54,17 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		// aion 4.5.0.15 = 204
 		// aion 4.7.0.5 = 205
 		// aion 4.7.5.0 = 206
-		if (version != 206) {
+		// aion 4.8.0.0 = 207
+		if (version != 207) {
 			writeC(0x01); // Send wrong client version
 			return;
 		}
 		writeC(0x00); // version ok
 		writeC(NetworkConfig.GAMESERVER_ID);
-		writeD(150119);// start year month day
-		writeD(141120);// start year month day
+		writeD(150602);// start year month day
+		writeD(150326);// start year month day
 		writeD(0x00);// spacing
-		writeD(141120);// year month day
+		writeD(150317);// year month day
 		writeD(GameServer.START_TIME_SECONDS);// start server time in seconds
 		writeC(0x00);// unk
 		writeC(GSConfig.SERVER_COUNTRY_CODE);// country code;
@@ -95,10 +96,32 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0);// 4.7
 		writeC(0);// 4.7
 		writeC(1);// 4.7
-		writeC(0);// 4.7
-		writeC(0);// 4.7
-		writeH(0);// 4.7
-		writeC(0);// 4.7
+		writeC(240);//4.8
+		writeC(241);//4.8
+		writeC(255);//4.8
+		writeC(255);//4.8
+		writeC(1);//4.8
+		writeC(1);//4.8
+		writeD(0);//4.8
+		writeD(0);//4.8
+		writeD(0);//4.8
+		writeD(0);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeD(1000);//4.8
+		writeC(0);//4.8
+		writeC(0);//4.8
+		writeC(0);//4.8
+		writeC(0x40);//4.8
+		writeC(0x40);//4.8
 		writeH(0x01);// its loop size
 		// for... chat servers?
 		{

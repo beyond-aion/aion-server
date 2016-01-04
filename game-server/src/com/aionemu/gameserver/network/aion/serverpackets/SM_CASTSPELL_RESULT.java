@@ -34,7 +34,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 		this.effector = skill.getEffector();
 		this.target = skill.getFirstTarget();
 		this.effects = effects;
-		this.cooldown = effector.getSkillCooldown(skill.getSkillTemplate());
+		this.cooldown = skill.getCooldown();
 		this.chainSuccess = chainSuccess;
 		this.targetType = 0;
 		this.hitTime = hitTime;

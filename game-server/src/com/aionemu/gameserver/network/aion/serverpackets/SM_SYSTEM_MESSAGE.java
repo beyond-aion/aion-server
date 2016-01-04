@@ -22629,28 +22629,28 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
-	
+
 	/**
 	 * The Agent battle will start in 10 minutes.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_01() {
 		return new SM_SYSTEM_MESSAGE(1402544);
 	}
-	
+
 	/**
 	 * The Agent battle will start in 5 minutes.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02() {
 		return new SM_SYSTEM_MESSAGE(1402545);
 	}
-	
+
 	/**
 	 * The Agent battle has ended.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03() {
 		return new SM_SYSTEM_MESSAGE(1402546);
 	}
-	
+
 	/**
 	 * Purification System
 	 */
@@ -22690,6 +22690,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
 		return new SM_SYSTEM_MESSAGE(1402662, targetName, level, skillName);
+	}
+
+	/**
+	 * You can no longer use the %2 %0 skill (Level %1) because your Linked Stigma combination has changed
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(int value0, int value1) {
+		return new SM_SYSTEM_MESSAGE(1402895, new DescriptionId(value0), value1);
+	}
+
+	/**
+	 * You have successfully enchanted %0 and the Stigma's enchantment level has increased by 1 level.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_SUCCESS(int value0) {
+		return new SM_SYSTEM_MESSAGE(1402930, new DescriptionId(value0));
+	}
+
+	/**
+	 * You have failed to enchant %0 and the Stigma has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_FAIL(int value0) {
+		return new SM_SYSTEM_MESSAGE(1402931, new DescriptionId(value0));
 	}
 
 	private final int code;

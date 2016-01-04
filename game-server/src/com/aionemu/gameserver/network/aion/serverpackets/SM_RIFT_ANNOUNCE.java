@@ -17,7 +17,6 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 	private Map<Integer, Integer> rifts;
 	private int objectId;
 	private int gelkmaros, inggison;
-	private int cl, cr, tl, tr;
 
 	/**
 	 * Rift announce packet
@@ -55,31 +54,23 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 		this.actionId = 4;
 	}
 
-	public SM_RIFT_ANNOUNCE(boolean cl, boolean cr, boolean tl, boolean tr) {
-		this.cl = cl ? 1 : 0; // Western Tiamaranta's Eye Entrance (Center left)
-		this.cr = cr ? 1 : 0; // Eastern Tiamaranta's Eye Entrance (Center right)
-		this.tl = tl ? 1 : 0; // Eye Abyss Gate Elyos (Top left)
-		this.tr = tr ? 1 : 0; // Eye Abyss Gate Asmodians (Top right)
-		this.actionId = 5;
-	}
-
 	@Override
 	protected void writeImpl(AionConnection con) {
 		switch (actionId) {
 			case 0: // announce
-				writeH(1 + (rifts.values().size() * 4)); // following byte length
+				writeH(0x21); // following byte length
 				writeC(actionId);
 				for (int value : rifts.values())
 					writeD(value);
 				break;
 			case 1: // silentera
-				writeH(9); // following byte length
+				writeH(0x09); // following byte length
 				writeC(actionId);
 				writeD(gelkmaros);
 				writeD(inggison);
 				break;
 			case 2:
-				writeH(35); // following byte length
+				writeH(0x35); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getMaxEntries());
@@ -93,7 +84,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeC(rift.isMaster() ? 1 : 0); // display | hide
 				break;
 			case 3:
-				writeH(15); // following byte length
+				writeH(0x15); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getUsedEntries());
@@ -105,14 +96,6 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeH(5); // following byte length
 				writeC(actionId);
 				writeD(objectId);
-				break;
-			case 5: // tiamaranta
-				writeH(5); // following byte length
-				writeC(actionId);
-				writeC(cl);
-				writeC(cr);
-				writeC(tl);
-				writeC(tr);
 				break;
 		}
 	}

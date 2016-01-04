@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.SerialKillerService;
 
 /**
  * This packet is displaying visible players.
@@ -252,7 +253,13 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		else
 			writeD(0x01);
 		writeD(0x01); // unk 4.7
-		writeC(raceId == 0 ? 3 : 5); // Game language Asmo 3 Yly 5
+		writeC(raceId == 0 ? 3 : 5); // Game language Asmo 3 Ely 5
+
+		boolean isEnemyWorld = SerialKillerService.getInstance().isEnemyWorld(player);
+		writeC(isEnemyWorld ? player.getSKInfo().getRank() : 0); // Conqueror rank
+		writeC(!isEnemyWorld ? player.getSKInfo().getRank() : 0); // Protector rank
+
+		writeC(0); // Officer rank icon
 	}
 
 }

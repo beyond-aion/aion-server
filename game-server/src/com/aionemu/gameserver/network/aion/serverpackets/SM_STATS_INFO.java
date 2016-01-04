@@ -38,9 +38,6 @@ public class SM_STATS_INFO extends AionServerPacket {
 		this.pls = player.getLifeStats();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(player.getObjectId());// Player ObjectId
@@ -145,8 +142,10 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(0); // 4.3 NA
 		writeH(1); // 4.3 NA
 		writeH(0); // 4.3 NA
-		writeD(0); // 4.7
-		writeD(0); // 4.7
+		writeH(0); //4.8
+		writeH(0); //4.8
+		writeH(0); //4.8
+		writeH(0); //4.8
 		writeH(pgs.getPower().getBase());// [base power]
 		writeH(pgs.getHealth().getBase());// [base health]
 		writeH(pgs.getAccuracy().getBase());// [base accuracy]
@@ -161,7 +160,8 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(pgs.getStat(StatEnum.ELEMENTAL_RESISTANCE_DARK, 0).getBase());// [base dark resistance]
 		writeD(pgs.getMaxHp().getBase());// [base hp]
 		writeD(pgs.getMaxMp().getBase());// [base mana]
-		writeD(pgs.getMaxDp().getBase());// [base dp]
+		writeH(pgs.getMaxDp().getBase());// [base dp]
+		writeH(21592);// to do display_max_point
 		writeD(pgs.getFlyTime().getBase());// [fly time]
 		writeH(pgs.getMainHandPAttack().getBase());// [base main hand attack]
 		writeH(pgs.getOffHandPAttack().getBase());// [base off hand attack]

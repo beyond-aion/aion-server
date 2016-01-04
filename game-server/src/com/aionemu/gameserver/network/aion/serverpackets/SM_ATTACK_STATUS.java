@@ -81,7 +81,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		FPHEAL(134), // changed in 4.5
 		FPATTACK(137),
 		MPATTACK(141),
-		REGULAR(187); // 4.5
+		REGULAR(191); // 4.8
 
 		private int value;
 

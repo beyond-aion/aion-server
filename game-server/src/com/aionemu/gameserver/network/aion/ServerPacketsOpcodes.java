@@ -251,6 +251,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_SECURITY_TOKEN.class, 0x98, idSet);
 		addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet);
 		addPacketOpcode(SM_ATREIAN_PASSPORT.class, 0x12B, idSet);
+		addPacketOpcode(SM_GAMEGUARD.class, 0x7D, idSet);
 		addPacketOpcode(SM_CUSTOM_PACKET.class, 99999, idSet); // fake packet
 
 		// Unknow packet

@@ -56,7 +56,8 @@ public class SM_TRADELIST extends AionServerPacket {
 			writeC(tradeNpcType.index()); // reward, abyss or normal
 			writeD(buyPriceModifier); // Vendor Buy Price Modifier
 			writeD(100);// new aion 4.5
-			writeH(1);// new 4.3 looks like some flags. Seen value 257 for npc 279052, in binary 100000001
+			writeC(1);// new 4.3 looks like some flags. Seen value 257 for npc 279052, in binary 100000001
+			writeC(1);
 			writeH(tradeTablist.size());
 			for (TradeTab tradeTabl : tradeTablist) {
 				writeD(tradeTabl.getId());

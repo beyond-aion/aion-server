@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.gameobjects.player.passport.Passport;
-import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
+import com.aionemu.gameserver.model.account.Passport;
+import com.aionemu.gameserver.model.account.PassportsList;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 

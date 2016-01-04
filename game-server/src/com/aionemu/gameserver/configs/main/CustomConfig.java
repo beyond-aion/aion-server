@@ -238,18 +238,20 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.serialkiller.enable", defaultValue = "true")
 	public static boolean SERIALKILLER_ENABLED;
-	@Property(key = "gameserver.serialkiller.handledworlds", defaultValue = "")
+	@Property(key = "gameserver.serialkiller.handledworlds", defaultValue = "210020000,210040000,210050000,210070000,220020000,220040000,220070000,220080000")
 	public static String SERIALKILLER_WORLDS = "";
-	@Property(key = "gameserver.serialkiller.kills.refresh", defaultValue = "5")
+	@Property(key = "gameserver.serialkiller.kills.refresh", defaultValue = "10")
 	public static int SERIALKILLER_REFRESH;
 	@Property(key = "gameserver.serialkiller.kills.decrease", defaultValue = "1")
 	public static int SERIALKILLER_DECREASE;
-	@Property(key = "gameserver.serialkiller.level.diff", defaultValue = "10")
+	@Property(key = "gameserver.serialkiller.level.diff", defaultValue = "5")
 	public static int SERIALKILLER_LEVEL_DIFF;
-	@Property(key = "gameserver.serialkiller.1st.rank.kills", defaultValue = "25")
+	@Property(key = "gameserver.serialkiller.1st.rank.kills", defaultValue = "1")
 	public static int KILLER_1ST_RANK_KILLS;
-	@Property(key = "gameserver.serialkiller.2nd.rank.kills", defaultValue = "50")
+	@Property(key = "gameserver.serialkiller.2nd.rank.kills", defaultValue = "10")
 	public static int KILLER_2ND_RANK_KILLS;
+	@Property(key = "gameserver.serialkiller.3nd.rank.kills", defaultValue = "30")
+	public static int KILLER_3ND_RANK_KILLS;
 
 	@Property(key = "gameserver.reward.service.enable", defaultValue = "false")
 	public static boolean ENABLE_REWARD_SERVICE;
@@ -283,5 +285,8 @@ public class CustomConfig {
 
 	@Property(key = "character.deletion.time.minutes", defaultValue = "5")
 	public static int CHARACTER_DELETION_TIME_MINUTES;
+	
+	@Property(key = "gameserver.req.stigmaStone", defaultValue = "true")
+	public static boolean REQ_STIGMA_STONE;
 
 }
