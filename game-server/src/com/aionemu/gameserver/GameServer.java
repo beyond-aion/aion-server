@@ -96,7 +96,6 @@ import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.reward.RewardService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.services.webshop.WebshopService;
-import com.aionemu.gameserver.spawnengine.InstanceRiftSpawnManager;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.taskmanager.fromdb.TaskFromDBManager;
@@ -253,7 +252,6 @@ public class GameServer {
 		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();
 		RiftService.getInstance().initRifts();
-		InstanceRiftSpawnManager.spawnAll();
 		TemporarySpawnEngine.spawnAll();
 		if (SiegeConfig.SIEGE_ENABLED)
 			ShieldService.getInstance().spawnAll();
