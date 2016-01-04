@@ -18,6 +18,8 @@ public class PetFunction {
 	private int id;
 	@XmlAttribute(name = "slots")
 	private int slots;
+	@XmlAttribute(name = "rate_price")
+	private int ratePrice;
 
 	public PetFunctionType getPetFunctionType() {
 		return type;
@@ -29,6 +31,10 @@ public class PetFunction {
 
 	public int getSlots() {
 		return slots;
+	}
+
+	public int getRatePrice() {
+		return ratePrice;
 	}
 
 	public static PetFunction CreateEmpty() {

@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.Race;
+
 import javolution.util.FastTable;
 
 /**
@@ -19,6 +21,10 @@ public class RankRestriction {
 
 	@XmlElement(name = "penalty_attr")
 	protected List<RankPenaltyAttr> penaltyAttr;
+	@XmlAttribute(name = "type", required = true)
+	protected String type;
+	@XmlAttribute(name = "race", required = true)
+	private Race race;
 	@XmlAttribute(name = "rank_num", required = true)
 	protected int rankNum;
 	@XmlAttribute(name = "restrict_direct_portal", required = true)
@@ -57,9 +63,8 @@ public class RankRestriction {
 	}
 
 	public List<RankPenaltyAttr> getPenaltyAttr() {
-		if (penaltyAttr == null) {
-			penaltyAttr = new FastTable<RankPenaltyAttr>();
-		}
+		if (penaltyAttr == null)
+			penaltyAttr = new FastTable<>();
 		return this.penaltyAttr;
 	}
 
@@ -67,8 +72,15 @@ public class RankRestriction {
 		return rankNum;
 	}
 
+	public Race getRace() {
+		return race;
+	}
+
+	public String getType() {
+		return type;
+	}
+
 	public void setRankNum(int value) {
 		this.rankNum = value;
 	}
-
 }

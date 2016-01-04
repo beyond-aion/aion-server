@@ -132,8 +132,10 @@ public class QuestTemplate {
 	protected QuestMentorType mentorType = QuestMentorType.NONE;
 	@XmlAttribute(name = "target")
 	private QuestTarget target = QuestTarget.NONE;
-	@XmlAttribute
+	@XmlAttribute(name = "restricted")
 	private boolean restricted = false;
+	@XmlAttribute(name = "data_driven")
+	private boolean dataDriven = false;
 
 	public QuestTemplate() {
 		rewards = new FastTable<>();
@@ -705,5 +707,12 @@ public class QuestTemplate {
 	 */
 	public boolean isRestricted() {
 		return restricted;
+	}
+
+	/**
+	 * @return the dataDriven property, if true quest setting are retrieved from quest_data_driven.xml file
+	 */
+	public boolean isDataDriven() {
+		return dataDriven;
 	}
 }

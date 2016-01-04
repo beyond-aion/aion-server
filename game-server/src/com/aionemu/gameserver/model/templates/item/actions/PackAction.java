@@ -37,8 +37,16 @@ public class PackAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_EXCHANGE());
 			return false;
 		}
+		if (!targetItem.isSoulBound()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_SEAL());
+			return false;
+		}
 		if (targetItem.getFusionedItemId() != 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_COMPOSITION());
+			return false;
+		}
+		if (!targetItem.isTuned()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_NEED_IDENTIFY());
 			return false;
 		}
 		if (targetItem.getItemTemplate().getItemQuality() != parentItem.getItemTemplate().getItemQuality()) {
@@ -62,28 +70,33 @@ public class PackAction extends AbstractItemAction {
 			case GREATSWORD:
 			case POLEARM:
 			case STAFF:
-			case SHIELD:
 			case HARP:
 			case GUN:
 			case CANNON:
 			case KEYBLADE:
 				type = UseTarget.WEAPON;
 				break;
+			case SHIELD:
 			case RB_TORSO:
 			case RB_PANTS:
 			case RB_SHOULDER:
 			case RB_GLOVES:
 			case RB_SHOES:
-			case LT_TORSO:
-			case LT_PANTS:
-			case LT_SHOULDER:
-			case LT_GLOVES:
-			case LT_SHOES:
+			case CL_TORSO:
+			case CL_PANTS:
+			case CL_SHOULDER:
+			case CL_GLOVES:
+			case CL_SHOES:
 			case CH_TORSO:
 			case CH_PANTS:
 			case CH_SHOULDER:
 			case CH_GLOVES:
 			case CH_SHOES:
+			case LT_TORSO:
+			case LT_PANTS:
+			case LT_SHOULDER:
+			case LT_GLOVES:
+			case LT_SHOES:
 			case PL_TORSO:
 			case PL_PANTS:
 			case PL_SHOULDER:
@@ -91,11 +104,11 @@ public class PackAction extends AbstractItemAction {
 			case PL_SHOES:
 				type = UseTarget.ARMOR;
 				break;
-			case NECKLACES:
-			case EARRINGS:
-			case RINGS:
-			case BELTS:
-			case HEADS:
+			case NECKLACE:
+			case EARRING:
+			case RING:
+			case BELT:
+			case HEAD:
 				type = UseTarget.ACCESSORY;
 				break;
 			default:

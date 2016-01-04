@@ -54,16 +54,21 @@ public class ApExtractAction extends AbstractItemAction {
 			case RB_SHOULDER:
 			case RB_GLOVES:
 			case RB_SHOES:
-			case LT_TORSO:
-			case LT_PANTS:
-			case LT_SHOULDER:
-			case LT_GLOVES:
-			case LT_SHOES:
+			case CL_TORSO:
+			case CL_PANTS:
+			case CL_SHOULDER:
+			case CL_GLOVES:
+			case CL_SHOES:
 			case CH_TORSO:
 			case CH_PANTS:
 			case CH_SHOULDER:
 			case CH_GLOVES:
 			case CH_SHOES:
+			case LT_TORSO:
+			case LT_PANTS:
+			case LT_SHOULDER:
+			case LT_GLOVES:
+			case LT_SHOES:
 			case PL_TORSO:
 			case PL_PANTS:
 			case PL_SHOULDER:
@@ -71,11 +76,11 @@ public class ApExtractAction extends AbstractItemAction {
 			case PL_SHOES:
 				type = UseTarget.ARMOR;
 				break;
-			case NECKLACES:
-			case EARRINGS:
-			case RINGS:
-			case BELTS:
-			case HEADS:
+			case NECKLACE:
+			case EARRING:
+			case RING:
+			case BELT:
+			case HEAD:
 				type = UseTarget.ACCESSORY;
 				break;
 			case NONE:

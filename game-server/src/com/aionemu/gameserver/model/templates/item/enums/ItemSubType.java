@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlEnum;
 @XmlEnum
 public enum ItemSubType {
 
+	ALL_ARMOR(ArmorType.GENERAL),
 	NONE(EquipType.NONE),
 	CHAIN(ArmorType.GENERAL),
 	CLOTHES(ArmorType.GENERAL),

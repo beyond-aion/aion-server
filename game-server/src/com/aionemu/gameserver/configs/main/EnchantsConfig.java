@@ -29,7 +29,7 @@ public class EnchantsConfig {
 	public static boolean CLEAN_STONE;
 
 	@Property(key = "gameserver.tampering.chance", defaultValue = "65")
-	public static int TAMPERING_CHANCE;
+	public static int TEMPERING_CHANCE;
 
 	@Property(key = "use.hard.tampering.formula.for.plume", defaultValue = "true")
 	public static boolean USE_HARD_TAMPERING_FORMULA_FOR_PLUME;

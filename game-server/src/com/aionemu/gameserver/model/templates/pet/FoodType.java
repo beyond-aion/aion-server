@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "FoodType")
 @XmlEnum
 public enum FoodType {
+	AETHER_CHERRY,
 	AETHER_CRYSTAL_BISCUIT,
 	AETHER_GEM_BISCUIT,
 	AETHER_POWDER_BISCUIT,

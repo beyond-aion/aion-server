@@ -26,6 +26,9 @@ public class QuestKill {
 	@XmlAttribute(name = "count")
 	private int kill;
 
+	@XmlAttribute(name = "var")
+	private int var;
+
 	@XmlAttribute(name = "step")
 	private int step;
 
@@ -43,6 +46,10 @@ public class QuestKill {
 		return kill;
 	}
 
+	public int getVar() {
+		return var;
+	}
+
 	public int getQuestStep() {
 		return step;
 	}
@@ -51,9 +58,8 @@ public class QuestKill {
 	 * @return the npcIds
 	 */
 	public List<Integer> getNpcIds() {
-		if (npcIdSet == null) {
-			npcIdSet = new FastTable<Integer>();
-		}
+		if (npcIdSet == null)
+			npcIdSet = new FastTable<>();
 		if (npcIds != null) {
 			npcIdSet.addAll(npcIds);
 			npcIds.clear();
@@ -61,5 +67,4 @@ public class QuestKill {
 		}
 		return npcIdSet;
 	}
-
 }

@@ -22302,70 +22302,77 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * %0%: нельзя упаковать.
+	 * You cannot wrap %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(DescriptionId itemName) {
 		return new SM_SYSTEM_MESSAGE(1402015, itemName);
 	}
 
 	/**
-	 * %0: уровень ниже %1-го. Упаковка невозможна.
+	 * %0's level is lower than %1, so you cannot wrap it.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_LEVEL(DescriptionId itemName1, int levelRequired) {
 		return new SM_SYSTEM_MESSAGE(1402016, itemName1, levelRequired);
 	}
 
 	/**
-	 * %0: ранг ниже, чем %1. Упаковка невозможна.
+	 * %0's rank is lower than %1, so you cannot wrap it.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_QUALITY(DescriptionId itemName1, DescriptionId itemName2) {
 		return new SM_SYSTEM_MESSAGE(1402017, itemName1, itemName1);
 	}
 
 	/**
-	 * %1%: нельзя упаковать с помощью %0%.
+	 * %1 cannot be wrapped with %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(DescriptionId itemName1, DescriptionId itemName2) {
 		return new SM_SYSTEM_MESSAGE(1402018, itemName1, itemName1);
 	}
 
 	/**
-	 * Совмещенное двуручное оружие упаковать нельзя.
+	 * A combined two-handed weapon item cannot be wrapped.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_COMPOSITION() {
 		return new SM_SYSTEM_MESSAGE(1402019);
 	}
 
 	/**
-	 * Невозможно упаковать используемый предмет.
+	 * You cannot wrap equipped items
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_EQUIPED() {
 		return new SM_SYSTEM_MESSAGE(1402020);
 	}
 
 	/**
-	 * Невозможно упаковать запечатанный предмет.
+	 * You cannot wrap sealed items.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_SEAL() {
 		return new SM_SYSTEM_MESSAGE(1402021);
 	}
 
 	/**
-	 * Предмет можно продать, поэтому его незачем упаковывать.
+	 * A tradeable item cannot be wrapped.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_EXCHANGE() {
 		return new SM_SYSTEM_MESSAGE(1402022);
 	}
 
 	/**
-	 * Предмет для упаковки не найден.
+	 * Cannot find the item to wrap.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_NO_TARGET_ITEM() {
 		return new SM_SYSTEM_MESSAGE(1402029);
 	}
+	
+	/**
+	 * You must tune your equipment before wrapping.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_NEED_IDENTIFY() {
+		return new SM_SYSTEM_MESSAGE(1402030);
+	}
 
 	/**
-	 * %0: упаковано.
+	 * Wrapping of %0 is complete.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
 		return new SM_SYSTEM_MESSAGE(1402031, itemName1);

@@ -119,6 +119,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private String activationTarget;
 	@XmlAttribute(name = "tempering_name")
 	private String temperingName;
+	@XmlAttribute(name = "enchant_name")
+	private String enchantName;
+	@XmlAttribute(name = "subtype_prefix")
+	private String subtypePrefix;
 	@XmlAttribute(name = "activate_count")
 	private int activationCount;
 	@XmlAttribute(name = "activate_combat")
@@ -524,8 +528,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	public boolean isCloth() {
-		// not sure about LT_HEADS and CL_HEADS, check in retail
-		return isArmor() && (itemGroup.getArmorType() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELTS || itemGroup == ItemGroup.HEADS);
+		// not sure about LT_HEAD and CL_HEAD, check in retail
+		return isArmor() && (itemGroup.getArmorType() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELT || itemGroup == ItemGroup.HEAD);
 	}
 
 	public boolean isPotion() {
@@ -585,11 +589,19 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	public int[] getRequiredSkills() {
-		return itemGroup.getRequiredSkills();
+		return itemGroup.getRequiredSkills(subtypePrefix);
 	}
 
 	public String getTemperingName() {
 		return temperingName;
+	}
+	
+	public String getEnchantName() {
+		return enchantName;
+	}
+
+	public String getSubtypePrefix() {
+		return subtypePrefix;
 	}
 
 	public boolean canExceedEnchant() {

@@ -75,7 +75,7 @@ public class SkillUseAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
-		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
+		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate(), false);
 		if (skill != null) {
 			player.getController().cancelUseItem();
 			skill.setItemObjectId(parentItem.getObjectId());

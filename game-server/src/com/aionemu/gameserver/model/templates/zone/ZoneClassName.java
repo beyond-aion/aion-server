@@ -20,5 +20,6 @@ public enum ZoneClassName {
 	PVP,
 	DUEL,
 	HOUSE,
-	WEATHER;
+	WEATHER,
+	DOMINION;
 }

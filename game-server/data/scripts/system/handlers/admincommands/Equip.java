@@ -283,15 +283,15 @@ public class Equip extends AdminCommand {
 	}
 
 	public static boolean isTampering(Item item) {
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.EARRINGS)
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.EARRING)
 			return true;
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.RINGS)
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.RING)
 			return true;
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.NECKLACES)
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.NECKLACE)
 			return true;
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.BELTS)
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.BELT)
 			return true;
-		if (item.getItemTemplate().getItemGroup() == ItemGroup.HEADS)
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.HEAD)
 			return true;
 		if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME)
 			return true;

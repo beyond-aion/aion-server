@@ -25,7 +25,7 @@ public class ItemUseLimits {
 	@XmlAttribute(name = "ownership_world")
 	private int ownershipWorldId;
 
-	@XmlAttribute
+	@XmlAttribute(name = "usearea")
 	private String usearea;
 
 	@XmlAttribute(name = "gender")
@@ -73,7 +73,7 @@ public class ItemUseLimits {
 			return null;
 
 		try {
-			return ZoneName.get(this.usearea);
+			return ZoneName.createOrGet(this.usearea);
 		} catch (Exception e) {
 			return null;
 		}

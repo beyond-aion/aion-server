@@ -8,9 +8,11 @@ public enum PetFunctionType {
 	FOOD(1, 64),
 	DOPING(2, 256),
 	LOOT(3, 8),
+	BUFF(4, 8), //FIXME: find correct value
+	MERCHANT(5, true),
 
 	APPEARANCE(1),
-	NONE(4, true),
+	NONE(6, true),
 
 	// non writable to packets
 	BAG(-1),

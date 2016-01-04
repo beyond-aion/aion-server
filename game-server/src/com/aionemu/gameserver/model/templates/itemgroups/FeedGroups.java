@@ -93,4 +93,9 @@ public final class FeedGroups {
 	@XmlType(name = "ShugoEventCoinGroup")
 	public static class ShugoEventCoinGroup extends FeedItemGroup {
 	}
+	
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "AetherCherryGroup")
+	public static class AetherCherryGroup extends FeedItemGroup {
+	}
 }
