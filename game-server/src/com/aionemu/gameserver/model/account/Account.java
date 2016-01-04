@@ -11,7 +11,6 @@ import java.util.Map;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
 import com.aionemu.gameserver.model.items.storage.Storage;
 
 /**

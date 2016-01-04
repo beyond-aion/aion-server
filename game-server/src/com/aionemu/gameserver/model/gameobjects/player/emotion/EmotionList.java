@@ -2,8 +2,9 @@ package com.aionemu.gameserver.model.gameobjects.player.emotion;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+
+import javolution.util.FastMap;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -29,9 +30,9 @@ public class EmotionList {
 	}
 
 	public void add(int emotionId, int dispearTime, boolean isNew) {
-		if (emotions == null) {
-			emotions = new HashMap<Integer, Emotion>();
-		}
+		if (emotions == null)
+			emotions = new FastMap<>();
+
 		Emotion emotion = new Emotion(emotionId, dispearTime);
 		emotions.put(emotionId, emotion);
 
@@ -56,8 +57,7 @@ public class EmotionList {
 	}
 
 	public boolean canUse(int emotionId) {
-		return emotionId < 64 || emotionId > 149 || (emotions != null && emotions.containsKey(emotionId))
-			|| owner.havePermission(MembershipConfig.EMOTIONS_ALL);
+		return emotionId < 64 || (emotions != null && emotions.containsKey(emotionId)) || owner.havePermission(MembershipConfig.EMOTIONS_ALL);
 	}
 
 	public Collection<Emotion> getEmotions() {

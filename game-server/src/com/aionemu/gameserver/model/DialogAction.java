@@ -230,6 +230,7 @@ public enum DialogAction {
 	TRADE_SELL_LIST(103),
 	MOVE_ITEM_SKIN(106),
 	TRADE_IN_UPGRADE(107),
+	OPEN_STIGMA_ENCHANT(125),
 	USE_OBJECT(-1);
 
 	private int id;

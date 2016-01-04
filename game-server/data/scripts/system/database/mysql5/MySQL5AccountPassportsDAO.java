@@ -14,9 +14,9 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.Passport;
+import com.aionemu.gameserver.model.account.PassportsList;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.passport.Passport;
-import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
 
 /**
  * @author ViAl

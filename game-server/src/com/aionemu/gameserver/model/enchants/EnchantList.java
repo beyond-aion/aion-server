@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-
 /**
  * @author xTz
  */
@@ -21,14 +19,13 @@ public class EnchantList {
 	protected List<EnchantTemplateData> enchantDatas;
 
 	@XmlAttribute(name = "item_group", required = true)
-	private ItemGroup itemGroup = ItemGroup.NONE;
+	private String itemGroup;
 
 	public List<EnchantTemplateData> getEnchantDatas() {
 		return enchantDatas;
 	}
 
-	public ItemGroup getItemGroup() {
+	public String getItemGroup() {
 		return itemGroup;
 	}
-
 }

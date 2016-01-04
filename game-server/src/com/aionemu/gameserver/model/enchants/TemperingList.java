@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-
 /**
  * @author xTz
  */
@@ -21,9 +19,9 @@ public class TemperingList {
 	protected List<TemperingTemplateData> temperingDatas;
 
 	@XmlAttribute(name = "item_group", required = true)
-	private ItemGroup itemGroup = ItemGroup.NONE;
+	private String itemGroup;
 
-	public ItemGroup getItemGroup() {
+	public String getItemGroup() {
 		return itemGroup;
 	}
 

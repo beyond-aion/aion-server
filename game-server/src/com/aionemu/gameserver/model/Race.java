@@ -75,7 +75,9 @@ public enum Race {
 	GCHIEF_DRAGON(43),
 	WORLD_EVENT_BONFIRE(44),
 	// 4.7.5
-	DOOR_KILLER(45);
+	DOOR_KILLER(45),
+	// 4.8.0
+	LF5_Q_ITEM(46);
 
 	private int raceId;
 	private DescriptionId descriptionId;

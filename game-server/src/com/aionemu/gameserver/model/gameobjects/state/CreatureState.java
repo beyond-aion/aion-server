@@ -16,6 +16,7 @@ public enum CreatureState {
 	LOOTING(3 << 2), // 12
 	WEAPON_EQUIPPED(1 << 5), // 32
 	WALKING(1 << 6), // 64
+	UNK(1 << 4),
 	NPC_IDLE(1 << 6), // 64 (for npc)
 	POWERSHARD(1 << 7), // 128
 	TREATMENT(1 << 8), // 256

@@ -219,7 +219,10 @@ public enum StatEnum {
 	PVP_PARRY,
 	PVP_HIT_ACCURACY,
 	PVP_MAGICAL_RESIST,
-	PVP_MAGICAL_HIT_ACCURACY;
+	PVP_MAGICAL_HIT_ACCURACY,
+
+	// 4.8
+	BLOCK_PENETRATION;
 
 	// If STAT id = 135 - Shrewd Cloth Set oOo
 	// Checked up to 160 in 3.5

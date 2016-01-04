@@ -269,6 +269,10 @@ public class Equipment {
 			owner.getGameStats().updateStatsAndSpeedVisually();
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0, 0), item.getItemId());
+
+			if (item.getItemTemplate().isStigma() && StigmaService.isLinkedStigmaAvailable(owner))
+				StigmaService.addLinkedStigmaSkills(owner, true);
+
 			return item;
 		}
 	}
@@ -380,8 +384,8 @@ public class Equipment {
 	 * @return true if player can equip two one-handed weapons
 	 */
 	private boolean hasDualWieldingSkills() {
-		return owner.getSkillList().isSkillPresent(19) || owner.getSkillList().isSkillPresent(360) || owner.getSkillList().isSkillPresent(127)
-			|| owner.getSkillList().isSkillPresent(128) || owner.getSkillList().isSkillPresent(924);
+		return owner.getSkillList().isSkillPresent(55) || owner.getSkillList().isSkillPresent(171) || owner.getSkillList().isSkillPresent(143)
+			|| owner.getSkillList().isSkillPresent(144) || owner.getSkillList().isSkillPresent(207);
 	}
 
 	/**
@@ -503,7 +507,7 @@ public class Equipment {
 	 * @param requiredSkills
 	 * @return
 	 */
-	private boolean checkAvailableEquipSkills(int[] requiredSkills) {
+	public boolean checkAvailableEquipSkills(int[] requiredSkills) {
 		boolean isSkillPresent = false;
 
 		// if no skills required - validate as true

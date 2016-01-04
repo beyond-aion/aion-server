@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects.player.motion;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import javolution.util.FastMap;
 
 import com.aionemu.gameserver.model.IExpirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,7 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class Motion implements IExpirable {
 
-	static final Map<Integer, Integer> motionType = new HashMap<Integer, Integer>();
+	static final Map<Integer, Integer> motionType = new FastMap<>();
+
 	static {
 		motionType.put(1, 1);
 		motionType.put(2, 2);
@@ -27,7 +29,20 @@ public class Motion implements IExpirable {
 		motionType.put(12, 2);
 		motionType.put(13, 3);
 		motionType.put(14, 4);
+		motionType.put(15, 1);
+		motionType.put(16, 2);
+		motionType.put(17, 3);
+		motionType.put(18, 4);
+		motionType.put(19, 5);
+		motionType.put(20, 1);
+		motionType.put(21, 1);
+		motionType.put(22, 1);
+		motionType.put(23, 1);
+		motionType.put(24, 2);
+		motionType.put(25, 4);
+		motionType.put(26, 3);
 	}
+
 	private int id;
 	private int deletionTime = 0;
 	private boolean active = false;

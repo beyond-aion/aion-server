@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.gameobjects.player.passport;
+package com.aionemu.gameserver.model.account;
 
 import java.sql.Timestamp;
 

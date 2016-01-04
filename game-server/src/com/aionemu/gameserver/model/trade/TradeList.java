@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.trade;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -22,13 +22,13 @@ public class TradeList {
 
 	private int sellerObjId;
 
-	private List<TradeItem> tradeItems = new FastTable<TradeItem>();
+	private List<TradeItem> tradeItems = new FastTable<>();
 
 	private long requiredKinah;
 
 	private int requiredAp;
 
-	private Map<Integer, Long> requiredItems = new HashMap<Integer, Long>();
+	private Map<Integer, Long> requiredItems = new FastMap<>();
 
 	public TradeList() {
 

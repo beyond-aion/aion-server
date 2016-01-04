@@ -27,15 +27,6 @@ public class Influence {
 	private float abyss_e = 0;
 	private float abyss_a = 0;
 	private float abyss_b = 0;
-	private float tiamaranta_e = 0;
-	private float tiamaranta_a = 0;
-	private float tiamaranta_b = 0;
-	private float katalam_e = 0;
-	private float katalam_a = 0;
-	private float katalam_b = 0;
-	private float danaria_e = 0;
-	private float danaria_a = 0;
-	private float danaria_b = 0;
 	private float kaldor_e = 0;
 	private float kaldor_a = 0;
 	private float kaldor_b = 0;
@@ -71,12 +62,6 @@ public class Influence {
 		float e_abyss = 0;
 		float a_abyss = 0;
 		float b_abyss = 0;
-		float e_katalam = 0;
-		float a_katalam = 0;
-		float b_katalam = 0;
-		float e_danaria = 0;
-		float a_danaria = 0;
-		float b_danaria = 0;
 		float e_kaldor = 0;
 		float a_kaldor = 0;
 		float b_kaldor = 0;
@@ -123,32 +108,6 @@ public class Influence {
 								break;
 						}
 						break;
-					case 600050000:
-						switch (sLoc.getRace()) {
-							case ELYOS:
-								e_katalam += sLoc.getInfluenceValue();
-								break;
-							case ASMODIANS:
-								a_katalam += sLoc.getInfluenceValue();
-								break;
-							case BALAUR:
-								b_katalam += sLoc.getInfluenceValue();
-								break;
-						}
-						break;
-					case 600060000:
-						switch (sLoc.getRace()) {
-							case ELYOS:
-								e_danaria += sLoc.getInfluenceValue();
-								break;
-							case ASMODIANS:
-								a_danaria += sLoc.getInfluenceValue();
-								break;
-							case BALAUR:
-								b_danaria += sLoc.getInfluenceValue();
-								break;
-						}
-						break;
 					case 600090000:
 						switch (sLoc.getRace()) {
 							case ELYOS:
@@ -175,19 +134,13 @@ public class Influence {
 		gelkmaros_e = e_gelkmaros;
 		gelkmaros_a = a_gelkmaros;
 		gelkmaros_b = b_gelkmaros;
-		katalam_e = e_katalam;
-		katalam_a = a_katalam;
-		katalam_b = b_katalam;
-		danaria_e = e_danaria;
-		danaria_a = a_danaria;
-		danaria_b = b_danaria;
 		kaldor_e = e_kaldor;
 		kaldor_a = a_kaldor;
 		kaldor_b = b_kaldor;
 
-		global_e = (abyss_e + inggison_e + gelkmaros_e + katalam_e + danaria_e + kaldor_e) / 100f;
-		global_a = (abyss_a + inggison_a + gelkmaros_a + katalam_a + danaria_a + kaldor_a) / 100f;
-		global_b = (abyss_b + inggison_b + gelkmaros_b + katalam_b + danaria_b + kaldor_b) / 100f;
+		global_e = (abyss_e + inggison_e + gelkmaros_e + kaldor_e) / 100f;
+		global_a = (abyss_a + inggison_a + gelkmaros_a + kaldor_a) / 100f;
+		global_b = (abyss_b + inggison_b + gelkmaros_b + kaldor_b) / 100f;
 	}
 
 	/**
@@ -205,170 +158,62 @@ public class Influence {
 		}
 	}
 
-	/**
-	 * @return elyos control
-	 */
 	public float getGlobalElyosInfluence() {
 		return this.global_e;
 	}
 
-	/**
-	 * @return asmos control
-	 */
 	public float getGlobalAsmodiansInfluence() {
 		return this.global_a;
 	}
 
-	/**
-	 * @return balaur control
-	 */
 	public float getGlobalBalaursInfluence() {
 		return this.global_b;
 	}
 
-	/**
-	 * @return elyos control
-	 */
 	public float getInggisonElyosInfluence() {
 		return this.inggison_e;
 	}
 
-	/**
-	 * @return asmos control
-	 */
 	public float getInggisonAsmodiansInfluence() {
 		return this.inggison_a;
 	}
 
-	/**
-	 * @return balaur control
-	 */
 	public float getInggisonBalaursInfluence() {
 		return this.inggison_b;
 	}
 
-	/**
-	 * @return elyos control
-	 */
 	public float getGelkmarosElyosInfluence() {
 		return this.gelkmaros_e;
 	}
 
-	/**
-	 * @return asmos control
-	 */
 	public float getGelkmarosAsmodiansInfluence() {
 		return this.gelkmaros_a;
 	}
 
-	/**
-	 * @return balaur control
-	 */
 	public float getGelkmarosBalaursInfluence() {
 		return this.gelkmaros_b;
 	}
 
-	/**
-	 * @return elyos control
-	 */
 	public float getAbyssElyosInfluence() {
 		return this.abyss_e;
 	}
 
-	/**
-	 * @return asmos control
-	 */
 	public float getAbyssAsmodiansInfluence() {
 		return this.abyss_a;
 	}
 
-	/**
-	 * @return balaur control
-	 */
 	public float getAbyssBalaursInfluence() {
 		return this.abyss_b;
 	}
 
-	/**
-	 * @return elyos control
-	 */
-	public float getTiamarantaElyosInfluence() {
-		return this.tiamaranta_e;
-	}
-
-	/**
-	 * @return asmos control
-	 */
-	public float getTiamarantaAsmodiansInfluence() {
-		return this.tiamaranta_a;
-	}
-
-	/**
-	 * @return balaur control
-	 */
-	public float getTiamarantaBalaursInfluence() {
-		return this.tiamaranta_b;
-	}
-
-	/**
-	 * @return elyos control
-	 */
-	public float getKatalamElyosInfluence() {
-		return this.katalam_e;
-	}
-
-	/**
-	 * @return asmos control
-	 */
-	public float getKatalamAsmodiansInfluence() {
-		return this.katalam_a;
-	}
-
-	/**
-	 * @return balaur control
-	 */
-	public float getKatalamBalaursInfluence() {
-		return this.katalam_b;
-	}
-
-	/**
-	 * @return elyos control
-	 */
-	public float getDanariaElyosInfluence() {
-		return this.danaria_e;
-	}
-
-	/**
-	 * @return asmos control
-	 */
-	public float getDanariaAsmodiansInfluence() {
-		return this.danaria_a;
-	}
-
-	/**
-	 * @return balaur control
-	 */
-	public float getDanariaBalaursInfluence() {
-		return this.danaria_b;
-	}
-
-	/**
-	 * @return elyos control
-	 */
 	public float getKaldorElyosInfluence() {
 		return kaldor_e;
 	}
 
-	/**
-	 * @return asmos control
-	 */
 	public float getKaldorAsmodiansInfluence() {
 		return kaldor_a;
 	}
 
-	/**
-	 * @return balaur control
-	 */
 	public float getKaldorBalaursInfluence() {
 		return kaldor_b;
 	}

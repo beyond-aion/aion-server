@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public class PlayerSkillEntry extends SkillEntry {
 
-	private boolean isStigma;
+	private int skillType;
 
 	/**
 	 * for crafting skills
@@ -19,17 +19,26 @@ public class PlayerSkillEntry extends SkillEntry {
 
 	private PersistentState persistentState;
 
-	public PlayerSkillEntry(int skillId, boolean isStigma, int skillLvl, PersistentState persistentState) {
+	public PlayerSkillEntry(int skillId, int skillLvl, int skillType, PersistentState persistentState) {
 		super(skillId, skillLvl);
-		this.isStigma = isStigma;
+		this.skillType = skillType;
 		this.persistentState = persistentState;
 	}
 
-	/**
-	 * @return isStigma
-	 */
+	public int getSkillType() {
+		return this.skillType;
+	}
+
+	public void setSkillType(int type) {
+		this.skillType = type;
+	}
+
 	public boolean isStigma() {
-		return this.isStigma;
+		return this.skillType > 0 && this.skillType < 3 ;
+	}
+
+	public boolean isLinkedStigma() {
+		return this.skillType >= 3;
 	}
 
 	@Override

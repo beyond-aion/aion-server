@@ -61,21 +61,14 @@ public enum ItemSlot {
 	STIGMA1(1L << 30),
 	STIGMA2(1L << 31),
 	STIGMA3(1L << 32),
-	STIGMA4(1L << 33),
-	STIGMA5(1L << 34),
-	STIGMA6(1L << 35),
 
-	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask | STIGMA4.slotIdMask | STIGMA5.slotIdMask | STIGMA6.slotIdMask, true),
-
+	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask, true),
 	ADV_STIGMA1(1L << 47),
 	ADV_STIGMA2(1L << 48),
 	ADV_STIGMA3(1L << 49),
-	ADV_STIGMA4(1L << 50),
-	ADV_STIGMA5(1L << 51),
-	ADV_STIGMA6(1L << 52),
 
-	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask | ADV_STIGMA4.slotIdMask | ADV_STIGMA5.slotIdMask
-		| ADV_STIGMA6.slotIdMask, true),
+	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask, true),
+	
 	ALL_STIGMA(REGULAR_STIGMAS.slotIdMask | ADVANCED_STIGMAS.slotIdMask, true);
 
 	private long slotIdMask;

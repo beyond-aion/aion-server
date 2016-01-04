@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.stats.listeners;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javolution.util.FastTable;
@@ -87,20 +88,17 @@ public class ItemEquipmentListener {
 		int enchantLevel = item.getEnchantLevel();
 		int temperingLevel = item.getTempering();
 		if (enchantLevel > 0) {
-			ItemGroup itemGroup = itemTemplate.getItemGroup();
-			HashMap<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemGroup);
-			if (enchant != null) {
+			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemTemplate);
+			if (enchant != null)
 				item.setEnchantEffect(new EnchantEffect(item, owner, enchant.get(enchantLevel)));
-			}
 		}
 		if (temperingLevel > 0) {
 			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 				item.setTemperingEffect(new TemperingEffect(owner, item));
 			} else {
-				HashMap<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(itemTemplate.getItemGroup());
-				if (tempering != null) {
+				Map<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(itemTemplate);
+				if (tempering != null)
 					item.setTemperingEffect(new TemperingEffect(owner, tempering.get(temperingLevel)));
-				}
 			}
 		}
 	}

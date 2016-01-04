@@ -1685,9 +1685,6 @@ public class Player extends Creature {
 			case 210050000:
 			case 220070000:
 			case 400010000:
-			case 600030000:
-			case 600050000:
-			case 600060000:
 				return true;
 			default:
 				return false;

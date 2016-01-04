@@ -270,6 +270,10 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public boolean isTuned() {
 		return itemTemplate.canTune() && rndCount >= 0;
 	}
+	
+	public boolean isStigmaChargeable() {
+		return itemTemplate.getStigma() != null && itemTemplate.getStigma().isChargeable();
+	}
 
 	/**
 	 * @return the itemTemplate
