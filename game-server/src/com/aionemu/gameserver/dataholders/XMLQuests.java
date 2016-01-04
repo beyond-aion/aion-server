@@ -18,6 +18,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.KillSpawnedData;
 import com.aionemu.gameserver.questEngine.handlers.models.MentorMonsterHuntData;
 import com.aionemu.gameserver.questEngine.handlers.models.MonsterHuntData;
 import com.aionemu.gameserver.questEngine.handlers.models.RelicRewardsData;
+import com.aionemu.gameserver.questEngine.handlers.models.ReportOnLevelUpData;
 import com.aionemu.gameserver.questEngine.handlers.models.ReportToData;
 import com.aionemu.gameserver.questEngine.handlers.models.ReportToManyData;
 import com.aionemu.gameserver.questEngine.handlers.models.SkillUseData;
@@ -39,7 +40,7 @@ public class XMLQuests {
 		@XmlElement(name = "kill_in_zone", type = KillInZoneData.class), @XmlElement(name = "skill_use", type = SkillUseData.class),
 		@XmlElement(name = "kill_spawned", type = KillSpawnedData.class), @XmlElement(name = "mentor_monster_hunt", type = MentorMonsterHuntData.class),
 		@XmlElement(name = "fountain_rewards", type = FountainRewardsData.class), @XmlElement(name = "item_order", type = ItemOrdersData.class),
-		@XmlElement(name = "work_order", type = WorkOrdersData.class) })
+		@XmlElement(name = "work_order", type = WorkOrdersData.class), @XmlElement(name = "report_on_levelup", type = ReportOnLevelUpData.class) })
 	protected List<XMLQuest> data;
 
 	/**

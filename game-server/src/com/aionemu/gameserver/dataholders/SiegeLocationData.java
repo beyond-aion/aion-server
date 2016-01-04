@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SourceLocation;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 
 /**
@@ -32,15 +32,13 @@ public class SiegeLocationData {
 	 * Map that contains skillId - SkillTemplate key-value pair
 	 */
 	@XmlTransient
-	private FastMap<Integer, ArtifactLocation> artifactLocations = new FastMap<Integer, ArtifactLocation>();
+	private Map<Integer, ArtifactLocation> artifactLocations = new FastMap<>();
 	@XmlTransient
-	private FastMap<Integer, FortressLocation> fortressLocations = new FastMap<Integer, FortressLocation>();
+	private Map<Integer, FortressLocation> fortressLocations = new FastMap<>();
 	@XmlTransient
-	private FastMap<Integer, OutpostLocation> outpostLocations = new FastMap<Integer, OutpostLocation>();
+	private Map<Integer, OutpostLocation> outpostLocations = new FastMap<>();
 	@XmlTransient
-	private FastMap<Integer, SourceLocation> sourceLocations = new FastMap<Integer, SourceLocation>();
-	@XmlTransient
-	private FastMap<Integer, SiegeLocation> siegeLocations = new FastMap<Integer, SiegeLocation>();
+	private Map<Integer, SiegeLocation> siegeLocations = new FastMap<>();
 	@XmlTransient
 	private AgentLocation agentLoc;
 
@@ -48,7 +46,6 @@ public class SiegeLocationData {
 		artifactLocations.clear();
 		fortressLocations.clear();
 		outpostLocations.clear();
-		sourceLocations.clear();
 		siegeLocations.clear();
 		for (SiegeLocationTemplate template : siegeLocationTemplates)
 			switch (template.getType()) {
@@ -73,11 +70,6 @@ public class SiegeLocationData {
 					agentLoc = new AgentLocation(template);
 					siegeLocations.put(template.getId(), agentLoc);
 					break;
-				case SOURCE:
-					SourceLocation source = new SourceLocation(template);
-					sourceLocations.put(template.getId(), source);
-					siegeLocations.put(template.getId(), source);
-					break;
 				default:
 					break;
 			}
@@ -87,23 +79,19 @@ public class SiegeLocationData {
 		return siegeLocations.size();
 	}
 
-	public FastMap<Integer, ArtifactLocation> getArtifacts() {
+	public Map<Integer, ArtifactLocation> getArtifacts() {
 		return artifactLocations;
 	}
 
-	public FastMap<Integer, FortressLocation> getFortress() {
+	public Map<Integer, FortressLocation> getFortress() {
 		return fortressLocations;
 	}
 
-	public FastMap<Integer, OutpostLocation> getOutpost() {
+	public Map<Integer, OutpostLocation> getOutpost() {
 		return outpostLocations;
 	}
 
-	public FastMap<Integer, SourceLocation> getSource() {
-		return sourceLocations;
-	}
-
-	public FastMap<Integer, SiegeLocation> getSiegeLocations() {
+	public Map<Integer, SiegeLocation> getSiegeLocations() {
 		return siegeLocations;
 	}
 	

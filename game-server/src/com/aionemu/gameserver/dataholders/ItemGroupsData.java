@@ -6,9 +6,9 @@ import static ch.lambdaj.collection.LambdaCollections.with;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.templates.itemgroups.BossGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.CraftItemGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.CraftRecipeGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.EnchantGroup;
+import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCherryGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCrystalBiscuitGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherGemBiscuitGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherPowderBiscuitGroup;
@@ -62,11 +63,11 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
  * @author Rolandas
  */
 @XmlRootElement(name = "item_groups")
-@XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare", "medals",
-	"foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary", "oresUnique",
-	"oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns", "feedBones", "feedBalaurScales",
-	"feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit", "aetherCrystalBiscuit",
-	"aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins" })
+@XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare",
+	"medals", "foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary",
+	"oresUnique", "oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns", "feedBones",
+	"feedBalaurScales", "feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit",
+	"aetherCrystalBiscuit", "aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins", "aetherCherries" })
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemGroupsData {
 
@@ -185,11 +186,14 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "feed_shugo_event_coin")
 	protected ShugoEventCoinGroup shugoCoins;
+	
+	@XmlElement(name = "feed_aether_cherry")
+	protected AetherCherryGroup aetherCherries;
 
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftShopBySkill = new FastMap<>();
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftShopBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
 
 	BonusItemGroup[] craftGroups;
 	BonusItemGroup[] manastoneGroups;
@@ -201,7 +205,7 @@ public class ItemGroupsData {
 	BonusItemGroup[] enchantGroups;
 	BonusItemGroup[] bossGroups;
 
-	Map<FoodType, FastSet<Integer>> petFood = new HashMap<FoodType, FastSet<Integer>>();
+	Map<FoodType, Set<Integer>> petFood = new FastMap<>();
 
 	private int count = 0;
 	private int petFoodCount = 0;
@@ -253,7 +257,7 @@ public class ItemGroupsData {
 			List<ItemRaceEntry> food = getPetFood(foodType);
 			if (food == null)
 				continue;
-			FastSet<Integer> itemIds = new FastSet<>();
+			Set<Integer> itemIds = new FastSet<>();
 			itemIds.addAll(selectDistinct(with(food).extract(on(ItemRaceEntry.class).getId())));
 			petFood.put(foodType, itemIds);
 			if (foodType != FoodType.EXCLUDES && foodType != FoodType.STINKY)
@@ -262,8 +266,8 @@ public class ItemGroupsData {
 		}
 	}
 
-	void MapCraftReward(FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
-		FastMap<Range<Integer>, List<CraftReward>> ranges;
+	void MapCraftReward(Map<Integer, Map<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
+		Map<Range<Integer>, List<CraftReward>> ranges;
 		int lowerBound = 0, upperBound = 0;
 
 		if (reward instanceof CraftRecipe) {
@@ -283,7 +287,7 @@ public class ItemGroupsData {
 		if (dataHolder.containsKey(reward.getSkill()))
 			ranges = dataHolder.get(reward.getSkill());
 		else {
-			ranges = new FastMap<Range<Integer>, List<CraftReward>>();
+			ranges = new FastMap<>();
 			dataHolder.put(reward.getSkill(), ranges);
 		}
 
@@ -291,7 +295,7 @@ public class ItemGroupsData {
 		if (ranges.containsKey(range))
 			items = ranges.get(range);
 		else {
-			items = new FastTable<CraftReward>();
+			items = new FastTable<>();
 			ranges.put(range, items);
 		}
 		items.add(reward);
@@ -300,7 +304,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftMaterials(int skillId) {
 		if (craftMaterialsBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<CraftReward>();
+		List<CraftReward> result = new FastTable<>();
 		for (List<CraftReward> items : craftMaterialsBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -313,7 +317,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftShopItems(int skillId) {
 		if (craftShopBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<CraftReward>();
+		List<CraftReward> result = new FastTable<>();
 		for (List<CraftReward> items : craftShopBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -326,7 +330,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftBundles(int skillId) {
 		if (craftBundlesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<CraftReward>();
+		List<CraftReward> result = new FastTable<>();
 		for (List<CraftReward> items : craftBundlesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -530,7 +534,7 @@ public class ItemGroupsData {
 	}
 
 	public boolean isFood(int itemId, FoodType foodType) {
-		FastSet<Integer> food = petFood.get(FoodType.EXCLUDES);
+		Set<Integer> food = petFood.get(FoodType.EXCLUDES);
 		if (food.contains(itemId))
 			return false;
 		food = petFood.get(FoodType.STINKY);
