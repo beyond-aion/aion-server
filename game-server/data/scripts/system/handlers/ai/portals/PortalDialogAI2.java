@@ -105,7 +105,7 @@ public class PortalDialogAI2 extends PortalAI2 {
 		checkDialog(player);
 	}
 
-	private void checkDialog(Player player) {
+	protected void checkDialog(Player player) {
 		if (DialogService.isSubDialogRestricted(startingDialogId, player, getOwner())) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id()));
 			return;
@@ -141,19 +141,16 @@ public class PortalDialogAI2 extends PortalAI2 {
 					break;
 				}
 			}
-			if (!isRewardStep) { // normal dialog
+			if (!isRewardStep) // normal dialog
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), questDialogId));
-			}
 		} else if (playerCanStartQuest) { // start quest dialog
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), startingDialogId));
-		} else // show teleportation dialog
-		{
+		} else { // show teleportation dialog
 			switch (npcId) {
 				case 831117:
 				case 831131:
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012, 0));
 					break;
-				case 730840:
 				case 730841:
 				case 730883:
 				case 804621:

@@ -251,7 +251,6 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 		if (p != null) {
 			deleteNpcs(p.getWorldMapInstance().getNpcs(282394));
 			deleteNpcs(p.getWorldMapInstance().getNpcs(282396));
-			spawn(219215, p.getX(), p.getY(), p.getZ(), p.getHeading());
 			p.getWorldMapInstance().getDoors().get(43).setOpen(false);
 			p.getWorldMapInstance().getDoors().get(150).setOpen(true);
 		}

@@ -73,45 +73,14 @@ public class SiegeCannonAI2 extends NpcAI2 {
 			case 251772:
 			case 251773:
 			case 251774:
-			case 272848: // Silona Elyos - Sky Cannon
-			case 272849:
-			case 272850:
-			case 272851:
-			case 272852:
-			case 272853:
 				return 0x540D41; // 21517 65
-			case 272841: // Silona Elyos - normal Cannon
-			case 272842:
-			case 272843:
-			case 272844:
-			case 272845:
-			case 272846:
-			case 272847:
-			case 273344: // Pradeth Elyos - normal Cannon
-			case 273345:
-			case 273346:
-			case 273347:
-			case 273353:
-			case 273354:
-			case 273355:
-			case 273356:
-			case 272342: // Sillus Elyos - normal Cannon
-			case 272343:
-			case 272344:
-			case 272345:
-			case 272346:
-			case 272347:
-			case 272348:
-			case 272349:
-			case 272350:
-			case 272351:
-			case 252164: //Wealhtheow Elyos
-      case 252165:
-      case 252166:
-      case 252167:
-      case 252168:
-      case 252169:
-      case 252170:
+			case 252164: // Wealhtheow Elyos
+			case 252165:
+			case 252166:
+			case 252167:
+			case 252168:
+			case 252169:
+			case 252170:
 				return 0x538941; // 21385 65
 			case 251735: // Krotan Asmo - Sky Cannon
 			case 251736:
@@ -143,45 +112,14 @@ public class SiegeCannonAI2 extends NpcAI2 {
 			case 251782:
 			case 251783:
 			case 251784:
-			case 272861: // Silona Asmo - Sky Cannon
-			case 272862:
-			case 272863:
-			case 272864:
-			case 272865:
-			case 272866:
 				return 0x540E41; // 21518 65
-			case 272854: // Silona Asmo - normal Cannon
-			case 272855:
-			case 272856:
-			case 272857:
-			case 272858:
-			case 272859:
-			case 272860:
-			case 273348: // Pradeth Asmo - normal Cannon
-			case 273349:
-			case 273350:
-			case 273351:
-			case 273357:
-			case 273358:
-			case 273359:
-			case 273360:
-			case 272352: // Sillus Asmo - normal Cannon
-			case 272353:
-			case 272354:
-			case 272355:
-			case 272356:
-			case 272357:
-			case 272358:
-			case 272359:
-			case 272360:
-			case 272361:
-			case 252171: //Wealhtheow Asmo
-      case 252172:
-      case 252173:
-      case 252174:
-      case 252175:
-      case 252176:
-      case 252177:
+			case 252171: // Wealhtheow Asmo
+			case 252172:
+			case 252173:
+			case 252174:
+			case 252175:
+			case 252176:
+			case 252177:
 				return 0x538A41; // 21386 65
 			default:
 				return 0;

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ViAl
- * @modified Whoop
+ * @reworked Whoop
  */
 @AIName("mercenary")
 public class MercenaryAI2 extends GeneralNpcAI2 {
@@ -67,9 +67,6 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 					case 1221:
 					case 1231:
 					case 1241:
-					case 5011:
-					case 6011:
-					case 6021:
 						zoneId = 1;
 						break;
 					case 2011:
@@ -135,9 +132,6 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 					case 1221:
 					case 1231:
 					case 1241:
-					case 5011:
-					case 6011:
-					case 6021:
 						zoneId = 2;
 						break;
 					case 7011:
@@ -162,9 +156,6 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 				switch (siegeId) {
 					case 1221:
 					case 1231:
-					case 5011:
-					case 6011:
-					case 6021:
 						zoneId = 3;
 						break;
 					case 7011: // Currently no npcid switch necessary
