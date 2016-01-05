@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `last_transfer_time` decimal(20) NOT NULL default '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`),
-  INDEX (`account_id`)
+  KEY (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `player_skills` (
   `player_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
   `skill_level` int(3) NOT NULL default '1',
+  `skill_type` int(3) NOT NULL default '0',
   PRIMARY KEY (`player_id`,`skill_id`),
   FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
