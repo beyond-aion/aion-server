@@ -29,6 +29,14 @@
 		<open schedule="0 0 2,5,8,11,14,20 ? * FRI"/>
 		<open schedule="0 0 3,6,9,12,15,21 ? * SAT"/>
 	</rift>
+	<!-- Cygnea -->
+	<rift id="210070000">
+		<open schedule="0 0 15 ? * SUN"/>
+		<open schedule="0 0 19 ? * MON"/>
+		<open schedule="0 0 19 ? * WED"/>
+		<open schedule="0 0 19 ? * SAT"/>
+	</rift>
+	
 	<!-- Morheim -->
 	<rift id="220020000">
 		<open schedule="0 0 12 ? * WED,SAT" spawn="true"/>
@@ -57,5 +65,12 @@
 		<open schedule="0 0 2,5,8,11,14,20 ? * THU"/>
 		<open schedule="0 0 3,6,9,12,15,21 ? * FRI"/>
 		<open schedule="0 0 2,5,8,11,14,20 ? * SAT"/>
+	</rift>
+	<!-- Enshar -->
+	<rift id="220080000">
+		<open schedule="0 0 19 ? * SUN"/>
+		<open schedule="0 0 19 ? * TUE"/>
+		<open schedule="0 0 19 ? * THU"/>
+		<open schedule="0 0 15 ? * SAT"/>
 	</rift>
 </rift_schedule>

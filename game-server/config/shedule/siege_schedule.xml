@@ -52,38 +52,6 @@
 	<fortress id="3021">
 		<siegeTime>0 0 18 ? * WED,SAT</siegeTime>
 	</fortress>
-	<!-- Heart of Fissure -->
-	<source id="4011">
-		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
-		<siegeTime>0 0 18 ? * FRI</siegeTime>
-	</source>
-	<!-- Heart of Gravity -->
-	<source id="4021">
-		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
-		<siegeTime>0 0 18 ? * FRI</siegeTime>
-	</source>
-	<!-- Heart of Wrath -->
-	<source id="4031">
-		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
-		<siegeTime>0 0 18 ? * FRI</siegeTime>
-	</source>
-	<!-- Heart of Petrification -->
-	<source id="4041">
-		<siegeTime>0 0 16 ? * SUN,WED</siegeTime>
-		<siegeTime>0 0 18 ? * FRI</siegeTime>
-	</source>
-	<!-- Sillus Fortress -->
-	<fortress id="5011">
-		<siegeTime>0 0 20 ? * TUE,FRI</siegeTime>
-	</fortress>
-	<!-- Silona Fortress -->
-	<fortress id="6011">
-		<siegeTime>0 0 20 ? * TUE,FRI</siegeTime>
-	</fortress>
-	<!-- Pradeth Fortress -->
-	<fortress id="6021">
-		<siegeTime>0 0 20 ? * TUE,FRI</siegeTime>
-	</fortress>
 	<!-- Wealhtheow Keep -->
 	<fortress id="7011">
 		<siegeTime>0 0 20 ? * SUN</siegeTime>

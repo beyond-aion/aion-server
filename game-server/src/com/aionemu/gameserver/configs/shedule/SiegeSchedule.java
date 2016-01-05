@@ -24,17 +24,11 @@ public class SiegeSchedule {
 
 	@XmlElement(name = "fortress", required = true)
 	private List<Fortress> fortressesList;
-	@XmlElement(name = "source", required = true)
-	private List<Source> sourcesList;
 	@XmlElement(name = "agent_fight", required = true)
 	private List<AgentFight> agentFights;
 
 	public List<Fortress> getFortressesList() {
 		return fortressesList;
-	}
-
-	public List<Source> getSourcesList() {
-		return sourcesList;
 	}
 
 	public List<AgentFight> getAgentFights() {
@@ -56,24 +50,6 @@ public class SiegeSchedule {
 
 		public List<String> getSiegeTimes() {
 			return siegeTimes;
-		}
-	}
-
-	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlRootElement(name = "source")
-	public static class Source {
-
-		@XmlAttribute(required = true)
-		private int id;
-		@XmlElement(name = "siegeTime", required = true)
-		private List<String> siegeTime;
-
-		public int getId() {
-			return id;
-		}
-
-		public List<String> getSiegeTimes() {
-			return siegeTime;
 		}
 	}
 
