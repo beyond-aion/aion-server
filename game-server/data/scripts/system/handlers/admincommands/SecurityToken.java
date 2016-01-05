@@ -45,7 +45,7 @@ public class SecurityToken extends AdminCommand {
 				return;
 			}
 
-			SecurityTokenService.getInstance().generateToken(receiver);
+			SecurityTokenService.getInstance().generateToken(receiver.getPlayerAccount(), receiver.getClientConnection());
 		}
 
 	}

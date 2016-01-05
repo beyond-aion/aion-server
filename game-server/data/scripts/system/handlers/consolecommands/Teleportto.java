@@ -275,8 +275,10 @@ public class Teleportto extends ConsoleCommand {
 		else if (destination.equalsIgnoreCase("Roah Chamber"))
 			goTo(admin, 300070000, 504, 396, 94);
 		// Divine
-		else if (destination.equalsIgnoreCase("Abyssal Splinter") || destination.equalsIgnoreCase("Core"))
+		else if (destination.equalsIgnoreCase("Abyssal Splinter") || destination.equalsIgnoreCase("AS"))
 			goTo(admin, 300220000, 704, 153, 453);
+		else if (destination.equalsIgnoreCase("Unstable Abyssal Splinter") || destination.equalsIgnoreCase("UAS"))
+			goTo(admin, 300600000, 704, 153, 453);
 		else if (destination.equalsIgnoreCase("Dredgion"))
 			goTo(admin, 300110000, 414, 193, 431);
 		else if (destination.equalsIgnoreCase("Chantra") || destination.equalsIgnoreCase("Chantra Dredgion"))
@@ -293,7 +295,7 @@ public class Teleportto extends ConsoleCommand {
 		else if (destination.equalsIgnoreCase("Beshmundir") || destination.equalsIgnoreCase("BT") || destination.equalsIgnoreCase("Beshmundir Temple"))
 			goTo(admin, 300170000, 1477, 237, 243);
 		// Padmaraska Cave
-		else if (destination.equalsIgnoreCase("Padmaraska Cave"))
+		else if (destination.equalsIgnoreCase("Padmarashka Cave"))
 			goTo(admin, 320150000, 385, 506, 66);
 		// 4.0 Instances
 		else if (destination.equalsIgnoreCase("Sauro") || destination.equalsIgnoreCase("Sauro Supply Base"))
@@ -302,27 +304,16 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 300540000, 745.86206f, 291.18323f, 233.7940f);
 		else if (destination.equalsIgnoreCase("Danuar Mysticarium") || destination.equalsIgnoreCase("DM"))
 			goTo(admin, 300480000, 184.35f, 121.3f, 231.3f);
-		else if (destination.equalsIgnoreCase("Legion Danuar Mysticarium") || destination.equalsIgnoreCase("LDM"))
-			goTo(admin, 301190000, 184.35f, 121.3f, 231.3f);
-		else if (destination.equalsIgnoreCase("Void Cube") || destination.equalsIgnoreCase("VC"))
-			goTo(admin, 300580000, 183.08714f, 261.59024f, 310.0941f);
-		else if (destination.equalsIgnoreCase("Legion Void Cube") || destination.equalsIgnoreCase("LVC"))
-			goTo(admin, 301180000, 183.08714f, 261.59024f, 310.0941f);
 		else if (destination.equalsIgnoreCase("Ophidan Bridge") || destination.equalsIgnoreCase("OB"))
 			goTo(admin, 300590000, 755.41864f, 560.617f, 572.9637f);
-		else if (destination.equalsIgnoreCase("Idgel Research Center") || destination.equalsIgnoreCase("IRC"))
-			goTo(admin, 300530000, 560.5229f, 508.58438f, 102.67931f);
-		else if (destination.equalsIgnoreCase("Legion Idgel Research Center") || destination.equalsIgnoreCase("LIRC"))
-			goTo(admin, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Danuar Reliquary") || destination.equalsIgnoreCase("DR"))
 			goTo(admin, 301110000, 256.60f, 257.99f, 241.78f);
+		else if (destination.equalsIgnoreCase("Danuar Sanctuary") || destination.equalsIgnoreCase("DS"))
+			goTo(admin, 301140000, 388.66f, 1185.07f, 55.31f);
 		else if (destination.equalsIgnoreCase("Idgel Research Center Legion") || destination.equalsIgnoreCase("IRCL"))
 			goTo(admin, 301170000, 560.5229f, 508.58438f, 102.67931f);
 		else if (destination.equalsIgnoreCase("Nightmare Circus") || destination.equalsIgnoreCase("NC"))
 			goTo(admin, 301160000, 467.64f, 568.34f, 201.67f);
-		// 4.0 instances
-		else if (destination.equalsIgnoreCase("Danuar Reliquary") || destination.equalsIgnoreCase("KB"))
-			goTo(admin, 301110000, 255, 245, 242);
 		else if (destination.equalsIgnoreCase("Kamar Battlefield") || destination.equalsIgnoreCase("KB"))
 			goTo(admin, 301120000, 1329, 1501, 593);
 		// 4.5 instances
@@ -333,7 +324,9 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 301320000, 750, 554, 574);
 		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR")
 			|| destination.equalsIgnoreCase("Lucky Danuar"))
-			goTo(admin, 301330000, 256, 246, 242);
+			goTo(admin, 301320000, 750, 554, 574);
+		else if (destination.equalsIgnoreCase("Illuminary Obelisk") || destination.equalsIgnoreCase("IB"))
+			goTo(admin, 301230000, 322.38f, 324.47f, 405.49997f);
 
 		/**
 		 * Quest Instance Maps
@@ -454,28 +447,10 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 710010000, 1069, 1539, 98);
 		else if (destination.equalsIgnoreCase("Oriel"))
 			goTo(admin, 700010000, 1261, 1845, 98);
-		else if (destination.equalsIgnoreCase("Sarpan"))
-			goTo(admin, 600020000, 1374, 1455, 600);
-		else if (destination.equalsIgnoreCase("Tiamaranta"))
-			goTo(admin, 600030000, 40, 1732, 297);
-		else if (destination.equalsIgnoreCase("Tiamaranta Eye"))
-			goTo(admin, 600040000, 159, 768, 1202);
-		else if (destination.equalsIgnoreCase("Steel Rake Cabin") || destination.equalsIgnoreCase("Steel Rake Solo"))
-			goTo(admin, 300460000, 248, 244, 189);
-		else if (destination.equalsIgnoreCase("Aturam") || destination.equalsIgnoreCase("Aturam Sky Fortress"))
-			goTo(admin, 300240000, 636, 446, 655);
-		else if (destination.equalsIgnoreCase("Elementis") || destination.equalsIgnoreCase("Elementis Forest"))
-			goTo(admin, 300260000, 176, 612, 231);
-		else if (destination.equalsIgnoreCase("Argent") || destination.equalsIgnoreCase("Argent Manor"))
-			goTo(admin, 300270000, 1005, 1089, 70);
 		else if (destination.equalsIgnoreCase("Rentus") || destination.equalsIgnoreCase("Rentus Base"))
 			goTo(admin, 300280000, 579, 606, 153);
 		else if (destination.equalsIgnoreCase("Raksang"))
 			goTo(admin, 300310000, 665, 735, 1188);
-		else if (destination.equalsIgnoreCase("Muada") || destination.equalsIgnoreCase("Muada's Trencher"))
-			goTo(admin, 300380000, 492, 553, 106);
-		else if (destination.equalsIgnoreCase("Satra"))
-			goTo(admin, 300470000, 510, 180, 159);
 
 		/**
 		 * 3.5
@@ -486,18 +461,39 @@ public class Teleportto extends ConsoleCommand {
 		else if (destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat"))
 			goTo(admin, 300520000, 495, 528, 417);
 
-		/**
-		 * 4.3
-		 */
+		// 4.7 Instances
+		else if (destination.equalsIgnoreCase("idgel_dome"))
+			goTo(admin, 301310000, 254, 179, 83);
+		else if (destination.equalsIgnoreCase("linkgate_foundry"))
+			goTo(admin, 301270000, 362, 260, 312);
 
-		else if (destination.equalsIgnoreCase("Beacon"))
-			goTo(admin, WorldMapType.NORHTERN_KATALAM.getId(), 400, 2717, 143);
-		else if (destination.equalsIgnoreCase("Danuar"))
-			goTo(admin, WorldMapType.NORHTERN_KATALAM.getId(), 364, 385, 282);
-		else if (destination.equalsIgnoreCase("Danaria"))
-			goTo(admin, WorldMapType.SOUTHERN_KATALAM.getId(), 2544, 1699, 142);
-		else if (destination.equalsIgnoreCase("Idian") || destination.equalsIgnoreCase("Idian Depths"))
-			goTo(admin, WorldMapType.UNDERGROUND_KATALAM.getId(), 666, 644, 515);
+		// New map 4.7
+		else if (destination.equalsIgnoreCase("kaldor"))
+			goTo(admin, 600090000, 397, 1380, 163);
+		else if (destination.equalsIgnoreCase("levinshor"))
+			goTo(admin, 600100000, 207, 183, 374);
+		else if (destination.equalsIgnoreCase("belus"))
+			goTo(admin, 400020000, 1238, 1232, 1518);
+		else if (destination.equalsIgnoreCase("transidium"))
+			goTo(admin, 400030000, 509, 513, 675);
+		else if (destination.equalsIgnoreCase("aspida"))
+			goTo(admin, 400040000, 1238, 1232, 1518);
+		else if (destination.equalsIgnoreCase("atanatos"))
+			goTo(admin, 400050000, 1238, 1232, 1518);
+		else if (destination.equalsIgnoreCase("disillon"))
+			goTo(admin, 400060000, 1238, 1232, 1518);
+
+		// New maps 4.8
+		else if (destination.equalsIgnoreCase("cygnea"))
+			goTo(admin, 210070000, 2905, 803, 570);
+		else if (destination.equalsIgnoreCase("enshar"))
+			goTo(admin, 220080000, 454, 2262, 220);
+		else if (destination.equalsIgnoreCase("griffoen"))
+			goTo(admin, 210080000, 226, 111, 500);
+		else if (destination.equalsIgnoreCase("new idian asmo"))
+			goTo(admin, 220100000, 684, 654, 515);
+		else if (destination.equalsIgnoreCase("new idian elyos"))
+			goTo(admin, 210090000, 684, 654, 515);
 		else
 			PacketSendUtility.sendMessage(admin, "Could not find the specified destination !");
 	}

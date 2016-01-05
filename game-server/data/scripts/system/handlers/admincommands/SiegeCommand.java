@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.siege.SourceLocation;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -120,9 +119,6 @@ public class SiegeCommand extends AdminCommand {
 		for (OutpostLocation o : SiegeService.getInstance().getOutposts().values()) {
 			PacketSendUtility.sendMessage(player, "Outpost: " + o.getLocationId() + " belongs to " + o.getRace());
 		}
-		for (SourceLocation s : SiegeService.getInstance().getSources().values()) {
-			PacketSendUtility.sendMessage(player, "Source: " + s.getLocationId() + " belongs to " + s.getRace());
-		}
 		for (ArtifactLocation a : SiegeService.getInstance().getStandaloneArtifacts().values()) {
 			PacketSendUtility.sendMessage(player, "Artifact: " + a.getLocationId() + " belongs to " + a.getRace());
 		}
@@ -212,12 +208,6 @@ public class SiegeCommand extends AdminCommand {
 				case 3021:
 					SiegeService.getInstance().updateOutpostStatusByFortress((FortressLocation) loc);
 					break;
-				case 4011:
-				case 4021:
-				case 4031:
-				case 4041:
-					SiegeService.getInstance().updateTiamarantaRiftsStatus(false, true);
-					break;
 			}
 		}
 		SiegeService.getInstance().broadcastUpdate(loc);
@@ -245,11 +235,9 @@ public class SiegeCommand extends AdminCommand {
 
 		java.util.Set<Integer> fortressIds = SiegeService.getInstance().getFortresses().keySet();
 		java.util.Set<Integer> artifactIds = SiegeService.getInstance().getStandaloneArtifacts().keySet();
-		java.util.Set<Integer> sourceIds = SiegeService.getInstance().getSources().keySet();
 		java.util.Set<Integer> outpostIds = SiegeService.getInstance().getOutposts().keySet();
 		PacketSendUtility.sendMessage(player, "Fortress: " + StringUtils.join(fortressIds, ", "));
 		PacketSendUtility.sendMessage(player, "Artifacts: " + StringUtils.join(artifactIds, ", "));
-		PacketSendUtility.sendMessage(player, "Sources: " + StringUtils.join(sourceIds, ", "));
 		PacketSendUtility.sendMessage(player, "Outposts: " + StringUtils.join(outpostIds, ", "));
 	}
 

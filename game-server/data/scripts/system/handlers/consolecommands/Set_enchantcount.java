@@ -1,7 +1,7 @@
 package consolecommands;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -34,13 +34,10 @@ public class Set_enchantcount extends ConsoleCommand {
 
 		int objId;
 		int enchant;
-		@SuppressWarnings("unused")
-		int unk;
 
 		try {
 			objId = Integer.parseInt(params[0]);
 			enchant = Integer.parseInt(params[1]);
-			unk = Integer.parseInt(params[2]);
 		} catch (NumberFormatException e) {
 			PacketSendUtility.sendMessage(admin, "Invalid params.");
 			return;
@@ -68,10 +65,9 @@ public class Set_enchantcount extends ConsoleCommand {
 				}
 
 				if (item.getEnchantLevel() > 0 && item.isEquipped()) {
-					HashMap<Integer, List<EnchantStat>> enc = DataManager.ENCHANT_DATA.getTemplates(item.getItemTemplate().getItemGroup());
-					if (enc != null) {
+					Map<Integer, List<EnchantStat>> enc = DataManager.ENCHANT_DATA.getTemplates(item.getItemTemplate());
+					if (enc != null)
 						item.setEnchantEffect(new EnchantEffect(item, admin, enc.get(item.getEnchantLevel())));
-					}
 				}
 				if (item.isEquipped())
 					admin.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
