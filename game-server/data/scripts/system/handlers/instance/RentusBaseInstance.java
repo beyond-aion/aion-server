@@ -43,11 +43,13 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(final Npc npc) {
-		if (isInstanceDestroyed) {
+		if (isInstanceDestroyed)
 			return;
-		}
 
 		switch (npc.getNpcId()) {
+			case 236298: // Kuhara
+				spawn(219215, 141.54f, 255.06f, 213f, (byte) 25);
+				break;
 			case 217312:
 				doors.get(98).setOpen(true);
 				break;

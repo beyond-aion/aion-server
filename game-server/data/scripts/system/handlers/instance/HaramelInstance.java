@@ -20,17 +20,16 @@ public class HaramelInstance extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		Player player = npc.getAggroList().getMostPlayerDamage();
-		if (player == null) {
+		if (player == null)
 			return;
-		}
 		switch (npc.getNpcId()) {
 			case 216922:
 				npc.getController().onDelete();
+				sendMsg(1400713); // Hamerun has dropped a treasure chest.
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 457));
 				switch (player.getPlayerClass()) {
 					case GLADIATOR:
 					case TEMPLAR:
-					case BARD:
 						spawn(700829, 224.137f, 268.608f, 144.898f, (byte) 90); // chest warrior
 						break;
 					case ASSASSIN:
@@ -38,6 +37,7 @@ public class HaramelInstance extends GeneralInstanceHandler {
 					case GUNNER:
 						spawn(700830, 224.137f, 268.608f, 144.898f, (byte) 90); // chest scout
 						break;
+					case BARD:
 					case SORCERER:
 					case SPIRIT_MASTER:
 						spawn(700831, 224.137f, 268.608f, 144.898f, (byte) 90); // chest mage
@@ -49,6 +49,13 @@ public class HaramelInstance extends GeneralInstanceHandler {
 						break;
 				}
 				spawn(700852, 224.5984f, 331.1431f, 141.8925f, (byte) 90); // spawn opened dimensional gate
+				break;
+			case 216920: // Brainwashed Dukaki Weakarm
+			case 216921: // Brainwashed Dukaki Peon
+			case 217067: // Brainwashed MuMu Worker
+			case 700950: // Aether Cart
+				npc.getController().onDelete();
+				break;
 		}
 	}
 

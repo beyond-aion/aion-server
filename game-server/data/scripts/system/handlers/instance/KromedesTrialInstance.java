@@ -95,6 +95,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	@Override
 	public void onLeaveInstance(Player player) {
 		player.getEffectController().removeEffect(skillId);
+		removeItems(player);
 	}
 
 	@Override
@@ -187,5 +188,18 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
 		player.unsetResPosState();
 		return true;
+	}
+	
+	//Removes all instance items
+	private void removeItems(Player player) {
+		// Temple Vault Door Key		185000098
+		// Dungeon Grate Key				185000099
+		// Dungeon Door Key					185000100
+		// Secret Safe Key					185000101
+		// Relic Key								185000109
+		List<Integer> items = FastTable.of(185000098, 185000099, 185000100, 185000101, 185000109);
+		Storage storage = player.getInventory();
+		for (int item : items)
+			storage.decreaseByItemId(item, storage.getItemCountByItemId(item));
 	}
 }

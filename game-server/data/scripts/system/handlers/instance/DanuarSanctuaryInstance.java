@@ -41,9 +41,9 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CRYPTS_301140000")
-			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHARNELS_301140000")
-			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CATACOMBS_301140000")) {
+		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CRYPTS_1_301140000")
+			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHARNELS_1_301140000")
+			|| zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CATACOMBS_1_301140000")) {
 			if (timer4minTask == null) {
 				sendMsg(1401855); // The Beritran Special Research Team commanders are nearing The Chamber of Ruin.
 				timer4minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -116,7 +116,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 				}, 1200000); // 20 min
 			}
 		}
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHAMBER_OF_RUIN_301140000")) {
+		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("THE_CHAMBER_OF_RUIN_1_301140000")) {
 			cancelTasks();
 		}
 	}

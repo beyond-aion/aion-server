@@ -12,7 +12,6 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -21,8 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -50,7 +47,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 		}
 
 		switch (npc.getNpcId()) {
-			case 700981:
+			case 702651:
 				spawn(282281, 524.1896f, 489.7742f, 649.916f, (byte) 34);
 				break;
 			case 700982:
@@ -60,11 +57,11 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				spawn(282278, 449.5576f, 420.7812f, 652.9143f, (byte) 89);
 				doors.get(68).setOpen(true);
 				break;
-			case 700984:
-				spawn(282280, 581.1f, 401.3544f, 648.6401f, (byte) 9);
-				break;
-			case 700985:
+			case 702650:
 				spawn(282277, 572.8088f, 459.4094f, 647.93896f, (byte) 15);
+				break;
+			case 702652:
+				spawn(282280, 581.1f, 401.3544f, 648.6401f, (byte) 9);
 				break;
 			case 217373:
 				doors.get(26).setOpen(true);
@@ -176,7 +173,6 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
-		doors.get(234).setOpen(true);
 		doors.get(177).setOpen(true);
 		doors.get(17).setOpen(true);
 		Npc npc = instance.getNpc(217371);
@@ -186,18 +182,12 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onEnterInstance(Player player) {
-		final QuestState qs = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18302 : 28302);
-		if (qs != null && qs.getStatus() == QuestStatus.COMPLETE) {
-			doors.get(26).setOpen(true);
-		}
-	}
-
-	@Override
 	public void onLeaveInstance(Player player) {
 		player.getEffectController().removeEffect(19407);
 		player.getEffectController().removeEffect(19408);
 		player.getEffectController().removeEffect(19520);
+		player.getEffectController().removeEffect(21807);
+		player.getEffectController().removeEffect(21808);
 	}
 
 	@Override
@@ -230,6 +220,12 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				break;
 			case 730410:
 				doors.get(90).setOpen(true);
+				break;
+			case 731533:
+				SkillEngine.getInstance().getSkill(player, 21807, 1, player).useNoAnimationSkill();
+				break;
+			case 731534:
+				SkillEngine.getInstance().getSkill(player, 21808, 1, player).useNoAnimationSkill();
 				break;
 		}
 	}

@@ -55,14 +55,10 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	private void addItems(Player player) {
-		QuestState qs1 = player.getQuestStateList().getQuestState(10021);
-		QuestState qs2 = player.getQuestStateList().getQuestState(20021);
-		QuestState qs3 = player.getQuestStateList().getQuestState(14061);
-		QuestState qs4 = player.getQuestStateList().getQuestState(24061);
-		if ((qs1 != null && qs1.getStatus() == QuestStatus.START) || (qs2 != null && qs2.getStatus() == QuestStatus.START)
-			|| (qs3 != null && qs3.getStatus() == QuestStatus.START) || (qs4 != null && qs4.getStatus() == QuestStatus.START)) {
+		QuestState qs1 = player.getQuestStateList().getQuestState(10032);
+		QuestState qs2 = player.getQuestStateList().getQuestState(20032);
+		if ((qs1 != null && qs1.getStatus() == QuestStatus.START) || (qs2 != null && qs2.getStatus() == QuestStatus.START))
 			return;
-		}
 		switch (player.getRace()) {
 			case ELYOS:
 				ItemService.addItem(player, 160001286, 1);
