@@ -33,9 +33,6 @@
 		<staticdoor type="HOUSE" doorid="8">
 			<box x1="1179.26416" y1="843.0261" z1="520.6926" x2="1179.49" y2="843.252" z2="520.892639" />
 		</staticdoor>
-		<staticdoor type="HOUSE" doorid="11">
-			<box x1="2269.57544" y1="150.884262" z1="463.73822" x2="2269.80713" y2="151.115952" z2="463.938232" />
-		</staticdoor>
 		<staticdoor type="HOUSE" doorid="15">
 			<box x1="1132.261" y1="813.2663" z1="525.2291" x2="1132.53149" y2="813.536743" z2="525.429138" />
 		</staticdoor>
@@ -51,62 +48,26 @@
 		<staticdoor type="HOUSE" doorid="272">
 			<box x1="2269.577" y1="150.8857" z1="463.73822" x2="2269.80566" y2="151.114517" z2="463.938232" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="371" x="1343.769" y="1668.17529" z="363.949127" mesh="ab_castledoor_100.cgf">
-			<box x1="1340.89355" y1="1664.61963" z1="363.949158" x2="1347.43164" y2="1672.01855" z2="376.4023" />
-		</staticdoor>
 		<staticdoor type="ABYSS" doorid="372" x="1343.769" y="1668.17529" z="363.949127" mesh="ab_castledoor_100.cgf">
 			<box x1="1340.89355" y1="1664.61963" z1="363.949158" x2="1347.43164" y2="1672.01855" z2="376.4023" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="373" x="834.1229" y="1863.29761" z="334.071136" mesh="ab_castledoor_100.cgf">
-			<box x1="830.18396" y1="1859.51282" z1="334.071167" x2="837.7219" y2="1866.31641" z2="346.524323" />
 		</staticdoor>
 		<staticdoor type="ABYSS" doorid="374" x="834.1229" y="1863.29761" z="334.071136" mesh="ab_castledoor_100.cgf">
 			<box x1="830.18396" y1="1859.51282" z1="334.071167" x2="837.7219" y2="1866.31641" z2="346.524323" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="376" x="1691.5188" y="2107.79346" z="320.509979" mesh="ab_castledoor_100.cgf">
-			<box x1="1688.80566" y1="2104.29956" z1="320.51" x2="1695.03723" y2="2111.51929" z2="332.963165" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="377" x="1691.5188" y="2107.79346" z="320.509979" mesh="ab_castledoor_100.cgf">
-			<box x1="1688.80566" y1="2104.29956" z1="320.51" x2="1695.03723" y2="2111.51929" z2="332.963165" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="378" x="1779.02649" y="1326.31445" z="380.776581" mesh="ab_castledoor_100.cgf">
+		<staticdoor type="ABYSS" doorid="379" x="1779.02649" y="1326.31445" z="380.776581" mesh="ab_castledoor_100.cgf">
 			<box x1="1775.66064" y1="1323.876" z1="380.7766" x2="1782.53687" y2="1329.57849" z2="393.229767" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="379" x="1763.60925" y="2114.7002" z="321.6866" mesh="ab_castledoor_100.cgf">
-			<box x1="1775.66064" y1="1323.876" z1="380.7766" x2="1782.53687" y2="1329.57849" z2="393.229767" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="380" x="774.4676" y="1904.32727" z="333.067383" mesh="ab_castledoor_100.cgf">
+		<staticdoor type="ABYSS" doorid="380" x="1763.60925" y="2114.7002" z="321.6866" mesh="ab_castledoor_100.cgf">
 			<box x1="1760.11548" y1="2111.18164" z1="321.686646" x2="1767.33508" y2="2117.41333" z2="334.1398" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="381" x="774.4676" y="1904.32727" z="333.067383" mesh="ab_castledoor_100.cgf">
-			<box x1="771.448853" y1="1900.38831" z1="333.0674" x2="778.252441" y2="1907.92627" z2="345.520569" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="388" x="858.857239" y="1918.75842" z="335.747528" mesh="ab_castledoor_100.cgf">
+		<staticdoor type="ABYSS" doorid="389" x="858.857239" y="1918.75842" z="335.747528" mesh="ab_castledoor_100.cgf">
 			<box x1="854.9183" y1="1914.97363" z1="335.747559" x2="862.456238" y2="1921.77722" z2="348.2007" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="389" x="1746.88452" y="2172.96313" z="323.305328" mesh="ab_castledoor_100.cgf">
-			<box x1="854.9183" y1="1914.97363" z1="335.747559" x2="862.456238" y2="1921.77722" z2="348.2007" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="390" x="618.923" y="1248.743" z="395.66156" mesh="ab_castledoor_100.cgf">
+		<staticdoor type="ABYSS" doorid="390" x="1746.88452" y="2172.96313" z="323.305328" mesh="ab_castledoor_100.cgf">
 			<box x1="1743.39075" y1="2169.44458" z1="323.305359" x2="1750.61035" y2="2175.67627" z2="335.7585" />
 		</staticdoor>
 		<staticdoor type="ABYSS" doorid="437" x="618.923" y="1248.743" z="395.66156" mesh="ab_castledoor_100.cgf">
 			<box x1="615.2941" y1="1245.36853" z1="395.6616" x2="623.0436" y2="1252.796" z2="408.114746" />
-		</staticdoor>
-		<staticdoor type="HOUSE" doorid="1214">
-			<box x1="2311.59961" y1="118.368774" z1="466.365051" x2="2311.82837" y2="118.5976" z2="466.565063" />
-		</staticdoor>
-		<staticdoor type="HOUSE" doorid="3570">
-			<box x1="1132.90674" y1="758.7939" z1="520.6334" x2="1133.117" y2="759.004" z2="520.833435" />
-		</staticdoor>
-		<staticdoor type="HOUSE" doorid="3572">
-			<box x1="2363.05371" y1="142.977615" z1="468.990723" x2="2363.29346" y2="143.217468" z2="469.190735" />
-		</staticdoor>
-		<staticdoor type="HOUSE" doorid="3576">
-			<box x1="1132.26172" y1="813.267" z1="525.2291" x2="1132.53076" y2="813.5361" z2="525.429138" />
-		</staticdoor>
-		<staticdoor type="HOUSE" doorid="3580">
-			<box x1="1179.26416" y1="843.0261" z1="520.6926" x2="1179.49" y2="843.252" z2="520.892639" />
 		</staticdoor>
 	</world>
 	<world world="220040000">
@@ -166,14 +127,8 @@
 		<staticdoor type="ABYSS" doorid="963" x="1198.49622" y="930.1961" z="306.773773" mesh="ab_castledoor_100.cgf">
 			<box x1="1195.38171" y1="928.2006" z1="306.7738" x2="1201.627" y2="933.029541" z2="319.226959" />
 		</staticdoor>
-		<staticdoor type="ABYSS" doorid="965" x="1269.32874" y="915.8508" z="305.695038" mesh="ab_castledoor_100.cgf">
-			<box x1="1266.49536" y1="912.7362" z1="305.695068" x2="1271.32422" y2="918.9815" z2="318.148224" />
-		</staticdoor>
 		<staticdoor type="ABYSS" doorid="970" x="1346.51221" y="1825.91064" z="346.325684" mesh="ab_castledoor_100.cgf">
 			<box x1="1342.95874" y1="1822.25378" z1="346.3257" x2="1350.351" y2="1828.77942" z2="358.77887" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="979" x="1951.30994" y="1155.68274" z="322.635162" mesh="ab_castledoor_100.cgf">
-			<box x1="1948.53027" y1="1152.60168" z1="322.6352" x2="1953.25146" y2="1158.76514" z2="335.088348" />
 		</staticdoor>
 		<staticdoor type="ABYSS" doorid="981" x="1197.39014" y="869.553345" z="308.4099" mesh="ab_castledoor_100.cgf">
 			<box x1="1194.27563" y1="867.557861" z1="308.409943" x2="1200.52087" y2="872.3868" z2="320.8631" />
@@ -183,9 +138,6 @@
 		</staticdoor>
 		<staticdoor type="HOUSE" doorid="1215">
 			<box x1="659.5595" y1="2840.06055" z1="409.9546" x2="659.842" y2="2840.343" z2="410.1546" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="1235" x="2974.4292" y="1205.78528" z="241.9072" mesh="dramata_door.cgf">
-			<box x1="2958.827" y1="1190.7821" z1="240.256042" x2="2990.02759" y2="1221.60779" z2="260.358551" />
 		</staticdoor>
 	</world>
 	<world world="300030000">
@@ -552,11 +504,8 @@
 		<staticdoor keyid="1" doorid="17" x="331.369" y="859.8553" z="911.6335" mesh="surkana_control_door_02.cga" state="0x4">
 			<box x1="325.79538" y1="849.2238" z1="876.835754" x2="336.9426" y2="870.4868" z2="900.547363" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="26" x="636.7546" y="424.795868" z="658.459" mesh="idstation_doorstart3f_01.cga" state="0x4">
-			<box x1="627.3277" y1="424.604584" z1="655.242554" x2="646.6858" y2="424.987152" z2="661.675354" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="68" x="435.212952" y="424.529083" z="657.418335" mesh="idstation_door3f_01.cga" state="0x4">
-			<box x1="434.1961" y1="420.546753" z1="652.798" x2="436.2298" y2="428.511444" z2="662.038757" />
+		<staticdoor doorid="68" x="749.2766" y="169.781265" z="608.174438" mesh="cunbandaroom_exit_door.cga" state="0x4">
+			<box x1="743.164734" y1="169.05162" z1="607.5703" x2="755.38855" y2="170.523392" z2="624.6703" />
 		</staticdoor>
 		<staticdoor doorid="85" x="815.007446" y="213.404327" z="608.292053" mesh="idstation_door1f_2.cga" state="0x2">
 			<box x1="807.1096" y1="212.363785" z1="617.873169" x2="822.886047" y2="213.8726" z2="641.232544" />
@@ -566,6 +515,9 @@
 		</staticdoor>
 		<staticdoor doorid="103" x="378.1342" y="837.041443" z="907.264648" mesh="surkana_control_door_03.cga" state="0x4">
 			<box x1="369.615723" y1="821.303345" z1="866.66925" x2="386.652618" y2="852.779541" z2="902.0658" />
+		</staticdoor>
+		<staticdoor doorid="126" x="435.212952" y="424.529083" z="657.418335" mesh="idstation_door3f_01.cga" state="0x4">
+			<box x1="434.1961" y1="420.546722" z1="652.798" x2="436.2298" y2="428.5114" z2="662.038757" />
 		</staticdoor>
 		<staticdoor keyid="1" doorid="128" x="710.944946" y="118.49826" z="606.2056" mesh="idstation_doorstart3f_02.cga" state="0x4">
 			<box x1="703.459" y1="118.36776" z1="603.578" x2="718.430847" y2="118.628769" z2="608.833252" />
@@ -587,9 +539,6 @@
 		</staticdoor>
 		<staticdoor keyid="1" doorid="230" x="260.9991" y="801.86145" z="914.90155" mesh="idstation_doobigrf3_01a.cga" state="0x4">
 			<box x1="254.272858" y1="797.2588" z1="901.2135" x2="267.725342" y2="806.46405" z2="928.5896" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="234" x="599.9359" y="448.42865" z="656.7209" mesh="idstation_doorstart3f_01.cga" state="0x5">
-			<box x1="599.7446" y1="439.00174" z1="653.504456" x2="600.1272" y2="458.359863" z2="659.937256" />
 		</staticdoor>
 		<staticdoor doorid="307" x="244.581055" y="769.1706" z="919.4448" mesh="idstion_3fwindow1_01a.cga" state="0x6">
 			<box x1="247.4859" y1="714.521667" z1="893.940247" x2="297.647034" y2="788.669434" z2="944.632751" />
@@ -630,46 +579,6 @@
 			<box x1="1126.54065" y1="715.8923" z1="246.59671" x2="1153.32568" y2="767.862366" z2="316.291931" />
 		</staticdoor>
 	</world>
-	<world world="300260000">
-		<staticdoor doorid="51" x="317.2856" y="690.9974" z="183.927368" mesh="idelemental_effect_door.cga" state="0x0">
-			<box x1="302.786835" y1="687.1832" z1="183.921082" x2="330.281738" y2="692.339661" z2="201.245148" />
-		</staticdoor>
-	</world>
-	<world world="300270000">
-		<staticdoor doorid="10" x="973.7174" y="1200.20789" z="94.62036" mesh="elemental_door_01a.cga" state="0x0">
-			<box x1="972.743042" y1="1196.48889" z1="94.50276" x2="973.9129" y2="1203.84851" z2="104.573166" />
-		</staticdoor>
-		<staticdoor doorid="11" x="880.9898" y="1214.54419" z="194.9936" mesh="elemental_jail_door.cga" state="0x0">
-			<box x1="875.876038" y1="1209.35022" z1="194.8257" x2="886.705" y2="1219.0874" z2="201.345657" />
-		</staticdoor>
-		<staticdoor doorid="14" x="994.6239" y="1150.15833" z="82.6438751" mesh="incinerator_door_01.cga" state="0x0">
-			<box x1="988.6239" y1="1150.07861" z1="77.0805054" x2="1000.62396" y2="1150.23792" z2="88.20724" />
-		</staticdoor>
-		<staticdoor doorid="15" x="934.6873" y="1138.83972" z="69.83553" mesh="elemental_door_01a.cga" state="0x0">
-			<box x1="933.712952" y1="1135.12073" z1="69.71793" x2="934.8828" y2="1142.48035" z2="79.78834" />
-		</staticdoor>
-		<staticdoor doorid="18" x="848.1598" y="1214.00183" z="195.069885" mesh="elemental_jail_door.cga" state="0x0">
-			<box x1="842.3052" y1="1209.00574" z1="194.901978" x2="853.4903" y2="1218.28345" z2="201.421936" />
-		</staticdoor>
-		<staticdoor doorid="26" x="942.272" y="1090.82458" z="91.19965" mesh="elemental_drystand_door.cga" state="0x0">
-			<box x1="941.837158" y1="1084.42688" z1="91.03175" x2="943.592651" y2="1097.24939" z2="97.55171" />
-		</staticdoor>
-		<staticdoor doorid="64" x="1007.22247" y="1052.89734" z="71.2381439" mesh="elemental_elevator_door.cga" state="0x0">
-			<box x1="1004.88354" y1="1052.41711" z1="69.80362" x2="1009.56134" y2="1053.33716" z2="73.78872" />
-		</staticdoor>
-		<staticdoor doorid="76" x="955.5606" y="1166.31982" z="55.2934341" mesh="elemental_door_01a.cga" state="0x0">
-			<box x1="951.8416" y1="1166.12439" z1="55.1758347" x2="959.2013" y2="1167.29419" z2="65.24624" />
-		</staticdoor>
-		<staticdoor doorid="158" x="955.095642" y="1148.31018" z="93.59859" mesh="elemental_door_01a.cga" state="0x6">
-			<box x1="951.376648" y1="1148.11475" z1="93.48099" x2="958.7363" y2="1149.28455" z2="103.551392" />
-		</staticdoor>
-		<staticdoor doorid="210" x="1006.01" y="1293.98" z="109.72" mesh="elemental_bossroom_door.cga" state="0x0">
-			<box x1="983.1408" y1="1285.77991" z1="92.74077" x2="1028.87915" y2="1301.98657" z2="126.775269" />
-		</staticdoor>
-		<staticdoor doorid="517" x="864.67" y="1233.18" z="196.53" mesh="idelemental_rooftop_direct.cga" state="0x6">
-			<box x1="834.6554" y1="1222.33" z1="204.622375" x2="850.8224" y2="1257.13318" z2="222.141312" />
-		</staticdoor>
-	</world>
 	<world world="300280000">
 		<staticdoor keyid="1" doorid="16" x="489.9325" y="569.7305" z="146.959915" mesh="idyun_house_08a.cga" state="0x4">
 			<box x1="477.088043" y1="555.74176" z1="145.131424" x2="504.1725" y2="582.589233" z2="164.33136" />
@@ -698,138 +607,82 @@
 		<staticdoor keyid="1" doorid="150" x="139.046143" y="227.814087" z="211.08754" mesh="idyun_door_02.cga" state="0x4">
 			<box x1="126.814651" y1="223.553" z1="210.564819" x2="151.915482" y2="231.723465" z2="231.148026" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="236" x="576.1434" y="600.4345" z="153.478119" mesh="idyun_door_11.cga" state="0x4">
-			<box x1="555.251038" y1="575.21" z1="135.913666" x2="586.707458" y2="615.6838" z2="170.055878" />
-		</staticdoor>
 	</world>
 	<world world="300290000">
-		<staticdoor doorid="1" x="262.519379" y="278.4227" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="1" x="262.519379" y="278.4227" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="256.50528" y1="274.1045" z1="155.113327" x2="268.533478" y2="282.740875" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="2" x="283.278564" y="258.287476" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="2" x="283.278564" y="258.287476" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="278.9604" y1="252.273361" z1="155.113327" x2="287.596771" y2="264.301575" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="3" x="290.9562" y="229.818329" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="3" x="290.9562" y="229.818329" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="289.490967" y1="223.719788" z1="155.113327" x2="292.421417" y2="235.916855" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="4" x="234.456116" y="285.795776" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="4" x="234.456116" y="285.795776" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="228.35759" y1="284.330536" z1="155.113327" x2="240.554657" y2="287.261" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="5" x="283.851257" y="201.169556" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="5" x="283.851257" y="201.169556" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="279.533051" y1="195.155457" z1="155.113327" x2="288.169434" y2="207.183655" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="6" x="262.538544" y="181.440811" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="6" x="262.538544" y="181.440811" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="256.524445" y1="177.12262" z1="155.113327" x2="268.552643" y2="185.759" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="7" x="234.6669" y="174.00972" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="7" x="234.6669" y="174.00972" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="228.568375" y1="172.5445" z1="155.113327" x2="240.765442" y2="175.474945" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="8" x="206.730637" y="180.9217" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="8" x="206.730637" y="180.9217" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="200.716537" y1="176.603516" z1="155.113327" x2="212.744736" y2="185.2399" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="9" x="186.128" y="201.838135" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="9" x="186.128" y="201.838135" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="181.809814" y1="195.824036" z1="155.113327" x2="190.4462" y2="207.852234" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="10" x="178.067642" y="229.679352" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="10" x="178.067642" y="229.679352" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="176.602417" y1="223.580826" z1="155.113327" x2="179.532867" y2="235.7779" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="11" x="186.016052" y="257.7695" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="11" x="186.016052" y="257.7695" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="181.697876" y1="251.7554" z1="155.113327" x2="190.334244" y2="263.7836" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="12" x="206.032135" y="278.74295" z="167.68898" mesh="bu_mrt_test_door_01a.cga">
+		<staticdoor doorid="12" x="206.032135" y="278.74295" z="167.68898" mesh="bu_mrt_test_door_01a.cga" state="0x6">
 			<box x1="200.018036" y1="274.424774" z1="155.113327" x2="212.046234" y2="283.061157" z2="180.264618" />
 		</staticdoor>
-		<staticdoor doorid="49" x="184.382141" y="230.412384" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="49" x="184.382141" y="230.412384" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="182.913467" y1="217.24559" z1="154.359283" x2="186.033951" y2="243.591782" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="50" x="191.484146" y="255.5495" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="50" x="191.484146" y="255.5495" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="183.62883" y1="243.320816" z1="154.359283" x2="199.504349" y2="267.69754" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="51" x="210.04631" y="273.47818" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="51" x="210.04631" y="273.47818" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="197.9092" y1="265.4643" z1="154.359283" x2="222.2859" y2="281.3398" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="52" x="234.59967" y="280.419342" z="155.016754" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="52" x="234.59967" y="280.419342" z="155.016754" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="221.432877" y1="278.767548" z1="154.356033" x2="247.779068" y2="281.888031" z2="205.5398" />
 		</staticdoor>
-		<staticdoor doorid="53" x="260.228546" y="272.926422" z="155.016754" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="53" x="260.228546" y="272.926422" z="155.016754" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="247.999863" y1="264.906219" z1="154.356033" x2="272.3766" y2="280.781738" z2="205.5398" />
 		</staticdoor>
-		<staticdoor doorid="54" x="278.259918" y="254.554459" z="155.016754" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="54" x="278.259918" y="254.554459" z="155.016754" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="270.246033" y1="242.31488" z1="154.356033" x2="286.121552" y2="266.6916" z2="205.5398" />
 		</staticdoor>
-		<staticdoor doorid="55" x="284.7029" y="229.521881" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="55" x="284.7029" y="229.521881" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="283.051117" y1="216.342484" z1="154.359283" x2="286.1716" y2="242.688675" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="56" x="277.989746" y="203.910828" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="56" x="277.989746" y="203.910828" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="270.155548" y1="191.671814" z1="154.359283" x2="285.657684" y2="216.22757" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="57" x="259.407" y="185.902161" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="57" x="259.407" y="185.902161" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="247.167419" y1="178.040527" z1="154.359283" x2="271.544128" y2="193.916061" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="58" x="234.073181" y="179.719086" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="58" x="234.073181" y="179.719086" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="220.893784" y1="178.2504" z1="154.359283" x2="247.239975" y2="181.3709" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="59" x="208.893692" y="186.688065" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="59" x="208.893692" y="186.688065" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="196.745667" y1="178.832748" z1="154.359283" x2="221.122375" y2="194.708282" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="60" x="190.96817" y="205.257416" z="155.02" mesh="bu_mrt_test_door_02b.cga">
+		<staticdoor doorid="60" x="190.96817" y="205.257416" z="155.02" mesh="bu_mrt_test_door_02b.cga" state="0x6">
 			<box x1="183.106552" y1="193.1203" z1="154.359283" x2="198.982071" y2="217.497009" z2="205.543045" />
 		</staticdoor>
-		<staticdoor doorid="73" x="234.59967" y="229.835327" z="154.920792" mesh="bu_mrt_test_well_04d_loop.cga">
+		<staticdoor doorid="73" x="234.59967" y="229.835327" z="154.920792" mesh="bu_mrt_test_well_04d_loop.cga" state="0x6">
 			<box x1="189.936417" y1="185.051636" z1="218.5176" x2="279.2519" y2="274.367126" z2="233.314362" />
-		</staticdoor>
-	</world>
-	<world world="300310000">
-		<staticdoor keyid="1" doorid="87" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
-			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="103" x="586.2234" y="664.1832" z="1184.78381" mesh="idraksha_entrance_seal.cga" state="0x0">
-			<box x1="554.52124" y1="632.5646" z1="1185.044" x2="618.4711" y2="696.4577" z2="1201.136" />
-		</staticdoor>
-		<staticdoor doorid="104" x="825.378" y="867.146851" z="1209.82178" mesh="jail_entrance_door.cga" state="0x2">
-			<box x1="821.236267" y1="862.2837" z1="1207.37012" x2="829.5067" y2="871.999146" z2="1220.51306" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="105" x="1068.5" y="967.31" z="161.6" mesh="idraksha_rockroom01.cga" state="0x0">
-			<box x1="1040.54529" y1="937.211243" z1="137.806915" x2="1096.45471" y2="997.4088" z2="185.393082" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="107" x="304.633423" y="631.726563" z="148.204346" mesh="stone_gate_jail_5.cga" state="0x0">
-			<box x1="299.673645" y1="623.2903" z1="147.053314" x2="309.5932" y2="640.162842" z2="163.584442" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="114" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
-			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="118" x="778.24115" y="953.443054" z="792.573364" mesh="idraksha_3fbosszone_door.cga" state="0x0">
-			<box x1="777.186951" y1="951.264038" z1="792.475464" x2="779.3529" y2="955.491333" z2="797.020752" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="165" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
-			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="167" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
-			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
-		</staticdoor>
-		<staticdoor doorid="183" x="627.097046" y="709.9314" z="1209.893" mesh="shield_generator_plug.cga" state="0x0">
-			<box x1="624.941833" y1="709.0203" z1="1209.1405" x2="627.9968" y2="712.2115" z2="1213.16748" />
-		</staticdoor>
-		<staticdoor doorid="189" x="622.9599" y="713.640442" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0">
-			<box x1="620.00116" y1="712.714844" z1="1203.09814" x2="623.8418" y2="716.50885" z2="1206.74573" />
-		</staticdoor>
-		<staticdoor doorid="200" x="637.8341" y="699.364868" z="1209.95544" mesh="shield_generator_plug.cga" state="0x0">
-			<box x1="636.936768" y1="697.285645" z1="1209.27185" x2="639.9511" y2="700.2849" z2="1213.281" />
-		</staticdoor>
-		<staticdoor doorid="205" x="640.7976" y="695.325867" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0">
-			<box x1="639.828064" y1="692.3366" z1="1203.08655" x2="643.685852" y2="696.1776" z2="1206.77051" />
-		</staticdoor>
-		<staticdoor doorid="219" x="322.549652" y="572.7561" z="127.404411" mesh="idraksha5f_eventbridge01a.cga" state="0x0">
-			<box x1="235.448425" y1="544.749268" z1="115.121071" x2="339.5744" y2="649.1134" z2="320.337036" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="294" x="751.62" y="310.34" z="910.630554" mesh="stone_gate_jail.cga" state="0x0">
-			<box x1="751.1267" y1="306.841553" z1="910.5917" x2="752.1133" y2="313.83847" z2="918.416443" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="295" x="749.5" y="270.969482" z="910.642" mesh="stone_gate_jail.cga" state="0x0">
-			<box x1="749.0067" y1="267.471039" z1="910.603149" x2="749.9933" y2="274.467957" z2="918.4279" />
-		</staticdoor>
-		<staticdoor keyid="185000112" doorid="307" x="552.1979" y="255.455322" z="929.0113" mesh="idraksha_3fprison_door.cga" state="0x2">
-			<box x1="548.962036" y1="252.4819" z1="928.8193" x2="555.3938" y2="258.3916" z2="937.4215" />
 		</staticdoor>
 	</world>
 	<world world="300350000">
@@ -1098,11 +951,6 @@
 		</staticdoor>
 		<staticdoor doorid="151" x="1817.52344" y="1737.3136" z="311.6712" mesh="arena_start_sphere.cga" state="0x0">
 			<box x1="1815.27112" y1="1735.23938" z1="310.974762" x2="1819.71436" y2="1739.67517" z2="321.9241" />
-		</staticdoor>
-	</world>
-	<world world="300380000">
-		<staticdoor doorid="9" x="477.41626" y="572.1413" z="109.671227" mesh="idldf4a_door_01a.cga" state="0x4">
-			<box x1="463.336456" y1="559.1098" z1="75.38636" x2="494.146362" y2="586.295349" z2="109.323326" />
 		</staticdoor>
 	</world>
 	<world world="300420000">
@@ -1622,79 +1470,35 @@
 			<box x1="538.960754" y1="501.031921" z1="951.9546" x2="539.238" y2="504.012482" z2="955.345459" />
 		</staticdoor>
 	</world>
-	<world world="300470000">
-		<staticdoor keyid="1" doorid="62" x="460.317657" y="618.4507" z="177.489944" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="459.63324" y1="614.5099" z1="177.366638" x2="460.824127" y2="622.3888" z2="186.316284" />
-		</staticdoor>
-		<staticdoor doorid="79" x="521.709167" y="745.8081" z="180.9431" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="519.773865" y1="744.1562" z1="177.097931" x2="523.6445" y2="747.46" z2="184.788269" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="82" x="537.032166" y="618.587341" z="177.489944" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="536.3478" y1="614.646545" z1="177.366638" x2="537.5387" y2="622.525452" z2="186.316284" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="84" x="556.959351" y="349.23703" z="158.680786" mesh="idtiamat_reward_door_01a.cga" state="0x8">
-			<box x1="554.194763" y1="344.1967" z1="158.504471" x2="559.4525" y2="354.14505" z2="173.804459" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="86" x="673.493469" y="531.8911" z="168.4291" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="671.8179" y1="527.942932" z1="168.305786" x2="674.997864" y2="535.7906" z2="177.255432" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="88" x="464.35" y="349.6" z="158.68" mesh="idtiamat_reward_door_01a.cga" state="0x8">
-			<box x1="461.503082" y1="344.732452" z1="158.503677" x2="466.927856" y2="354.6047" z2="173.803665" />
-		</staticdoor>
-		<staticdoor doorid="90" x="471.8691" y="745.8239" z="180.962692" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="469.9333" y1="744.1726" z1="177.117523" x2="473.804932" y2="747.4752" z2="184.807861" />
-		</staticdoor>
-		<staticdoor doorid="91" x="483.7665" y="752.6777" z="180.980942" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="481.4462" y1="751.7348" z1="177.135773" x2="486.086853" y2="753.6206" z2="184.826111" />
-		</staticdoor>
-		<staticdoor doorid="92" x="463.365845" y="735.5616" z="181.035583" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="462.048035" y1="733.401062" z1="177.190414" x2="464.683655" y2="737.7221" z2="184.880753" />
-		</staticdoor>
-		<staticdoor doorid="93" x="496.9851" y="754.9543" z="181.041153" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="494.5601" y1="754.832642" z1="177.195984" x2="499.410126" y2="755.075867" z2="184.886322" />
-		</staticdoor>
-		<staticdoor doorid="94" x="510.115234" y="752.5759" z="181.12616" mesh="idtiamat_reward_boss_door.cga" state="0x8">
-			<box x1="507.795166" y1="751.632263" z1="177.280991" x2="512.4353" y2="753.519653" z2="184.971329" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="108" x="411.631073" y="587.7748" z="168.86" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="407.755524" y1="585.731262" z1="168.7367" x2="415.439545" y2="589.653442" z2="177.68634" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="117" x="605.626831" y="588.8469" z="170.088364" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="601.7366" y1="587.0295" z1="169.965057" x2="609.4538" y2="590.8307" z2="178.9147" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="118" x="342.6955" y="532.230652" z="168.6253" mesh="idtiamat_reward_cave_door.cga" state="0x0">
-			<box x1="341.806915" y1="528.279053" z1="168.502" x2="343.4066" y2="536.1951" z2="177.45166" />
-		</staticdoor>
-	</world>
 	<world world="300480000">
-		<staticdoor doorid="3" x="164.479324" y="123.25132" z="231.49707" mesh="idldf5re_solo_door_01.cga">
+		<staticdoor doorid="3" x="164.479324" y="123.25132" z="231.49707" mesh="idldf5re_solo_door_01.cga" state="0x0">
 			<box x1="163.48642" y1="117.6871" z1="231.491821" x2="165.617615" y2="129.0886" z2="240.891617" />
 		</staticdoor>
-		<staticdoor keyid="185000127" doorid="4" x="523.531067" y="464.2762" z="95.2277756" mesh="idldf5re_solo_door_02.cga">
+		<staticdoor keyid="185000127" doorid="4" x="523.531067" y="464.2762" z="95.2277756" mesh="idldf5re_solo_door_02.cga" state="0x2">
 			<box x1="515.4821" y1="458.380371" z1="95.21954" x2="531.1049" y2="470.07132" z2="109.977234" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="6" x="232.741882" y="520.166565" z="152.8816" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="6" x="232.741882" y="520.166565" z="152.8816" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="228.090683" y1="516.3883" z1="150.283737" x2="237.41243" y2="523.9501" z2="163.027557" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="7" x="246.118835" y="529.882446" z="152.511917" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="7" x="246.118835" y="529.882446" z="152.511917" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="240.833481" y1="527.292" z1="149.914047" x2="251.424225" y2="532.472961" z2="162.657867" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="8" x="261.518036" y="533.9747" z="150.669739" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="8" x="261.518036" y="533.9747" z="150.669739" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="255.96022" y1="533.4195" z1="148.071869" x2="267.094177" y2="534.5218" z2="160.815689" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="10" x="295.628723" y="536.3879" z="148.861221" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="10" x="295.628723" y="536.3879" z="148.861221" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="290.0621" y1="535.639954" z1="146.263351" x2="301.2142" y2="537.129" z2="159.007172" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="11" x="314.159882" y="536.212036" z="148.838623" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="11" x="314.159882" y="536.212036" z="148.838623" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="308.7625" y1="533.9658" z1="146.240753" x2="319.5722" y2="538.4449" z2="158.984573" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="12" x="327.738983" y="524.2498" z="148.386108" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="12" x="327.738983" y="524.2498" z="148.386108" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="323.8202" y1="519.6892" z1="145.788239" x2="331.6637" y2="528.7913" z2="158.532059" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="13" x="334.721619" y="509.0433" z="148.2667" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="13" x="334.721619" y="509.0433" z="148.2667" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="332.84256" y1="503.54538" z1="145.668823" x2="336.597961" y2="514.521362" z2="158.412643" />
 		</staticdoor>
-		<staticdoor keyid="185000126" doorid="101" x="224.275009" y="505.0375" z="153.28566" mesh="ldf5re_02_door3.cga">
+		<staticdoor keyid="185000126" doorid="101" x="224.275009" y="505.0375" z="153.28566" mesh="ldf5re_02_door3.cga" state="0x2">
 			<box x1="221.865448" y1="499.691345" z1="150.68779" x2="226.698425" y2="510.3981" z2="163.43161" />
 		</staticdoor>
 	</world>
@@ -1745,49 +1549,8 @@
 			<box x1="1026.95313" y1="436.4849" z1="442.161377" x2="1035.05774" y2="437.3228" z2="453.875671" />
 		</staticdoor>
 	</world>
-	<world world="300530000">
-		<staticdoor keyid="185000168" doorid="1" x="493.499542" y="467.505219" z="102.75412" mesh="ldf5re_02_door3.cga">
-			<box x1="493.049255" y1="461.954529" z1="100.15625" x2="493.9576" y2="473.074341" z2="112.90007" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="9" x="586.9631" y="490.265564" z="102.752136" mesh="ldf5re_02_door1.cga">
-			<box x1="581.493958" y1="488.173981" z1="100.154266" x2="592.404" y2="492.3283" z2="112.898087" />
-		</staticdoor>
-		<staticdoor doorid="32" x="558.8129" y="495.1578" z="102.8886" mesh="ldf5re_02_door3.cga">
-			<box x1="553.2438" y1="494.70752" z1="100.290726" x2="564.3636" y2="495.615875" z2="113.034546" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="40" x="598.7687" y="501.0503" z="102.832413" mesh="ldf5re_02_door3.cga">
-			<box x1="596.522461" y1="495.63797" z1="100.234543" x2="601.0015" y2="506.447662" z2="112.978363" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="42" x="633.7687" y="487.408234" z="102.7594" mesh="ldf5re_02_door1.cga">
-			<box x1="628.1995" y1="486.9181" z1="100.16153" x2="639.319336" y2="487.862579" z2="112.90535" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="43" x="649.1707" y="467.468567" z="102.554314" mesh="ldf5re_02_door1.cga">
-			<box x1="648.680542" y1="461.9179" z1="99.9564362" x2="649.625061" y2="473.0377" z2="112.700256" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="45" x="615.238" y="428.097534" z="97.1927261" mesh="ldf5re_02_door3.cga">
-			<box x1="612.821167" y1="422.734131" z1="94.59485" x2="617.6542" y2="433.4409" z2="107.338669" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="46" x="600.5418" y="410.5032" z="97.33266" mesh="ldf5re_02_door1.cga">
-			<box x1="595.184143" y1="408.089844" z1="94.73479" x2="605.9039" y2="412.9566" z2="107.478607" />
-		</staticdoor>
-		<staticdoor keyid="185000167" doorid="48" x="534.245056" y="441.839417" z="102.775879" mesh="ldf5re_02_door2.cga">
-			<box x1="528.7483" y1="440.580872" z1="100.003143" x2="539.7526" y2="443.058319" z2="112.66983" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="49" x="499.938324" y="447.052155" z="102.831444" mesh="ldf5re_02_door3.cga">
-			<box x1="494.3692" y1="446.601868" z1="100.233566" x2="505.489" y2="447.510223" z2="112.977386" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="50" x="492.2838" y="433.073273" z="103.030479" mesh="ldf5re_02_door3.cga">
-			<box x1="491.833527" y1="427.522583" z1="100.4326" x2="492.741882" y2="438.6424" z2="113.176422" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="53" x="506.223633" y="515.565735" z="109.6886" mesh="ldf5re_02_door3.cga">
-			<box x1="504.439423" y1="510.071045" z1="107.090729" x2="508.0109" y2="521.080261" z2="119.834549" />
-		</staticdoor>
-		<staticdoor keyid="185000168" doorid="54" x="523.2677" y="530.4549" z="109.71534" mesh="ldf5re_02_door1.cga">
-			<box x1="517.7391" y1="528.724548" z1="107.117462" x2="528.7863" y2="532.14624" z2="119.861282" />
-		</staticdoor>
-	</world>
 	<world world="300540000">
-		<staticdoor keyid="1" doorid="311" x="744.21936" y="293.016785" z="231.929291" mesh="idldf5b_td_startdoor.cga">
+		<staticdoor keyid="1" doorid="311" x="744.21936" y="293.016785" z="231.929291" mesh="idldf5b_td_startdoor.cga" state="0x0">
 			<box x1="723.4908" y1="272.2882" z1="230.82933" x2="764.948" y2="313.7454" z2="245.790756" />
 		</staticdoor>
 	</world>
@@ -2155,16 +1918,6 @@
 			<box x1="1844.77478" y1="1147.37915" z1="216.971573" x2="1849.218" y2="1151.815" z2="227.920929" />
 		</staticdoor>
 	</world>
-	<world world="300580000">
-		<staticdoor doorid="26" x="198.13002" y="261.048584" z="325.081635" mesh="bu_id_ldf5re_03_cube_door01.cga">
-			<box x1="197.873688" y1="254.700516" z1="318.697723" x2="198.386337" y2="267.396667" z2="331.465576" />
-		</staticdoor>
-	</world>
-	<world world="300590000">
-		<staticdoor doorid="47" x="370.8" y="491.55" z="606.01" mesh="vritra_bridge_01a.cga">
-			<box x1="301.799377" y1="479.210968" z1="603.075562" x2="435.29248" y2="503.577881" z2="608.369141" />
-		</staticdoor>
-	</world>
 	<world world="300600000">
 		<staticdoor doorid="15" x="719.830139" y="380.787842" z="463.8542" mesh="door_od_01a.cga" state="0x0">
 			<box x1="718.3919" y1="376.516235" z1="463.390869" x2="721.2684" y2="385.059448" z2="473.776764" />
@@ -2180,6 +1933,97 @@
 		</staticdoor>
 		<staticdoor doorid="69" x="697.6393" y="405.41687" z="462.714844" mesh="door_od_01a.cga" state="0x0">
 			<box x1="696.20105" y1="401.145264" z1="462.251526" x2="699.0775" y2="409.688477" z2="472.637421" />
+		</staticdoor>
+	</world>
+	<world world="300610000">
+		<staticdoor doorid="64" x="981.903931" y="895.059631" z="762.557739" mesh="idraksha_3fprison_door.cga" state="0x0">
+			<box x1="979.026245" y1="891.7433" z1="762.3657" x2="984.747253" y2="898.3336" z2="770.967957" />
+		</staticdoor>
+		<staticdoor doorid="87" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
+			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
+		</staticdoor>
+		<staticdoor doorid="103" x="586.2234" y="664.1832" z="1184.78381" mesh="idraksha_entrance_seal.cga" state="0x0">
+			<box x1="554.52124" y1="632.5646" z1="1185.044" x2="618.4711" y2="696.4577" z2="1201.136" />
+		</staticdoor>
+		<staticdoor doorid="104" x="825.378" y="867.146851" z="1209.82178" mesh="jail_entrance_door.cga" state="0x2">
+			<box x1="821.236267" y1="862.2837" z1="1207.37012" x2="829.5067" y2="871.999146" z2="1220.51306" />
+		</staticdoor>
+		<staticdoor doorid="105" x="1068.5" y="967.31" z="161.6" mesh="idraksha_rockroom01.cga" state="0x0">
+			<box x1="1040.54529" y1="937.211243" z1="137.806915" x2="1096.45471" y2="997.4088" z2="185.393082" />
+		</staticdoor>
+		<staticdoor doorid="107" x="304.633423" y="631.726563" z="147.030991" mesh="stone_gate_jail_5.cga" state="0x0">
+			<box x1="299.673645" y1="623.2903" z1="145.879959" x2="309.5932" y2="640.162842" z2="162.4111" />
+		</staticdoor>
+		<staticdoor doorid="114" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
+			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
+		</staticdoor>
+		<staticdoor doorid="118" x="778.24115" y="953.443054" z="792.573364" mesh="idraksha_3fbosszone_door.cga" state="0x0">
+			<box x1="777.186951" y1="951.264038" z1="792.475464" x2="779.3529" y2="955.491333" z2="797.020752" />
+		</staticdoor>
+		<staticdoor doorid="165" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
+			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
+		</staticdoor>
+		<staticdoor doorid="167" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
+			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
+		</staticdoor>
+		<staticdoor doorid="183" x="627.097046" y="709.9314" z="1209.893" mesh="shield_generator_plug.cga" state="0x0">
+			<box x1="624.941833" y1="709.0203" z1="1209.1405" x2="627.9968" y2="712.2115" z2="1213.16748" />
+		</staticdoor>
+		<staticdoor doorid="189" x="622.9599" y="713.640442" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0">
+			<box x1="620.00116" y1="712.714844" z1="1203.09814" x2="623.8418" y2="716.50885" z2="1206.74573" />
+		</staticdoor>
+		<staticdoor doorid="200" x="637.8341" y="699.364868" z="1209.95544" mesh="shield_generator_plug.cga" state="0x0">
+			<box x1="636.936768" y1="697.285645" z1="1209.27185" x2="639.9511" y2="700.2849" z2="1213.281" />
+		</staticdoor>
+		<staticdoor doorid="205" x="640.7976" y="695.325867" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0">
+			<box x1="639.828064" y1="692.3366" z1="1203.08655" x2="643.685852" y2="696.1776" z2="1206.77051" />
+		</staticdoor>
+		<staticdoor doorid="219" x="322.549652" y="572.7561" z="127.404411" mesh="idraksha5f_eventbridge01a.cga" state="0x0">
+			<box x1="235.448425" y1="544.749268" z1="115.121071" x2="339.5744" y2="649.1134" z2="320.337036" />
+		</staticdoor>
+		<staticdoor doorid="294" x="751.62" y="310.34" z="910.630554" mesh="stone_gate_jail.cga" state="0x0">
+			<box x1="751.1267" y1="306.841553" z1="910.5917" x2="752.1133" y2="313.83847" z2="918.416443" />
+		</staticdoor>
+		<staticdoor doorid="295" x="749.5" y="270.969482" z="910.642" mesh="stone_gate_jail.cga" state="0x0">
+			<box x1="749.0067" y1="267.471039" z1="910.603149" x2="749.9933" y2="274.467957" z2="918.4279" />
+		</staticdoor>
+		<staticdoor doorid="307" x="552.1979" y="255.455322" z="929.0113" mesh="idraksha_3fprison_door.cga" state="0x0">
+			<box x1="548.962036" y1="252.4819" z1="928.8193" x2="555.3938" y2="258.3916" z2="937.4215" />
+		</staticdoor>
+		<staticdoor doorid="324" x="346.47052" y="778.269348" z="147.17157" mesh="stone_gate_jail_5.cga" state="0x0">
+			<box x1="340.751221" y1="770.211" z1="146.020538" x2="352.189819" y2="786.3277" z2="162.551666" />
+		</staticdoor>
+		<staticdoor doorid="457" x="973.9459" y="767.0186" z="734.2712" mesh="idraksha_3fprison_door.cga" state="0x0">
+			<box x1="970.066467" y1="765.262634" z1="734.079163" x2="977.774536" y2="768.755066" z2="742.6814" />
+		</staticdoor>
+	</world>
+	<world world="300620000">
+		<staticdoor doorid="16" x="489.9325" y="569.7305" z="146.959915" mesh="idyun_house_08a.cga" state="0x4">
+			<box x1="477.088043" y1="555.74176" z1="145.131424" x2="504.1725" y2="582.589233" z2="164.33136" />
+		</staticdoor>
+		<staticdoor doorid="43" x="151.857819" y="276.9822" z="216.5916" mesh="idyun_door_01.cga" state="0x4">
+			<box x1="112.176193" y1="266.1119" z1="188.4191" x2="189.436142" y2="288.4161" z2="205.509857" />
+		</staticdoor>
+		<staticdoor doorid="54" x="163.053009" y="337.2753" z="206.441437" mesh="idyun_dummy_room_30.cga" state="0x4">
+			<box x1="140.45192" y1="323.210846" z1="206.486069" x2="190.3826" y2="351.937042" z2="236.73204" />
+		</staticdoor>
+		<staticdoor doorid="70" x="180.9359" y="378.021027" z="260.3571" mesh="idyun_door_03.cga" state="0x0">
+			<box x1="179.226181" y1="377.514343" z1="259.1276" x2="182.64563" y2="378.52774" z2="267.4638" />
+		</staticdoor>
+		<staticdoor doorid="75" x="320.026367" y="603.176331" z="150.589447" mesh="idyun_house_08a.cga" state="0x6">
+			<box x1="308.64856" y1="591.209534" z1="148.760956" x2="333.1214" y2="614.6181" z2="167.960892" />
+		</staticdoor>
+		<staticdoor doorid="82" x="712.7447" y="630.1079" z="166.771347" mesh="idyun_door_01.cga" state="0x4">
+			<box x1="710.120667" y1="623.419556" z1="155.845276" x2="712.1972" y2="635.898254" z2="174.908966" />
+		</staticdoor>
+		<staticdoor doorid="98" x="820.8049" y="415.7417" z="108.947723" mesh="idyun_door_10.cga" state="0x0">
+			<box x1="815.9577" y1="410.0544" z1="108.78997" x2="826.0215" y2="421.543732" z2="123.5534" />
+		</staticdoor>
+		<staticdoor doorid="145" x="219.3658" y="530.605957" z="192.312592" mesh="idyun_bridge_01a.cga" state="0x4">
+			<box x1="189.30957" y1="497.5939" z1="175.980667" x2="256.472046" y2="575.4303" z2="203.9089" />
+		</staticdoor>
+		<staticdoor doorid="150" x="139.046143" y="227.814087" z="211.08754" mesh="idyun_door_02.cga" state="0x4">
+			<box x1="126.814651" y1="223.553" z1="210.564819" x2="151.915482" y2="231.723465" z2="231.148026" />
 		</staticdoor>
 	</world>
 	<world world="300700000">
@@ -2200,75 +2044,6 @@
 		</staticdoor>
 		<staticdoor keyid="185000135" doorid="66" x="257.5982" y="733.7148" z="366.6793" mesh="ab_low_door.cga" state="0xA">
 			<box x1="255.452469" y1="729.6159" z1="366.601746" x2="259.753052" y2="737.8401" z2="384.705627" />
-		</staticdoor>
-	</world>
-	<world world="301000000">
-		<staticdoor doorid="3" x="164.479324" y="123.25132" z="231.49707" mesh="idldf5re_solo_door_01.cga">
-			<box x1="163.48642" y1="117.6871" z1="231.491821" x2="165.617615" y2="129.0886" z2="240.891617" />
-		</staticdoor>
-	</world>
-	<world world="301010000">
-		<staticdoor keyid="185000139" doorid="70" x="342.9589" y="464.4597" z="898.8893" mesh="shulack_keydoor_01a.cga">
-			<box x1="342.9508" y1="464.451721" z1="897.193848" x2="345.931366" y2="464.728943" z2="900.5847" />
-		</staticdoor>
-		<staticdoor keyid="185000140" doorid="80" x="538.905151" y="441.539185" z="884.1578" mesh="shulack_keydoor_01a.cga">
-			<box x1="538.6359" y1="441.5311" z1="882.462341" x2="538.913147" y2="444.511658" z2="885.8532" />
-		</staticdoor>
-		<staticdoor keyid="185000138" doorid="813" x="278.058533" y="538.0716" z="902.9318" mesh="shulack_keydoor_01a.cga">
-			<box x1="275.08606" y1="537.802368" z1="901.2364" x2="278.06662" y2="538.0796" z2="904.627258" />
-		</staticdoor>
-	</world>
-	<world world="301020000">
-		<staticdoor keyid="185000143" doorid="91" x="329.9119" y="549.4354" z="953.72876" mesh="shulack_keydoor_01a.cga">
-			<box x1="327.8044" y1="547.1432" z1="952.0333" x2="330.108" y2="549.446838" z2="955.4242" />
-		</staticdoor>
-		<staticdoor keyid="185000144" doorid="93" x="411.710144" y="552.252136" z="947.8562" mesh="shulack_keydoor_01a.cga">
-			<box x1="411.517273" y1="552.2408" z1="946.160767" x2="413.853882" y2="554.5107" z2="949.551636" />
-		</staticdoor>
-		<staticdoor keyid="185000145" doorid="94" x="374.074" y="490.420624" z="948.555542" mesh="shulack_keydoor_01a.cga">
-			<box x1="374.065765" y1="490.360779" z1="946.8601" x2="377.05072" y2="490.69" z2="950.251" />
-		</staticdoor>
-		<staticdoor keyid="185000146" doorid="809" x="539.198547" y="501.026581" z="953.6396" mesh="shulack_keydoor_01a.cga">
-			<box x1="538.9293" y1="501.0185" z1="951.944153" x2="539.206543" y2="503.999054" z2="955.335" />
-		</staticdoor>
-		<staticdoor keyid="185000147" doorid="810" x="454.8353" y="530.8251" z="953.4786" mesh="shulack_keydoor_01a.cga">
-			<box x1="454.827332" y1="527.8526" z1="951.783142" x2="455.104553" y2="530.8332" z2="955.174" />
-		</staticdoor>
-	</world>
-	<world world="301030000">
-		<staticdoor keyid="185000153" doorid="70" x="342.9589" y="464.4597" z="898.8893" mesh="shulack_keydoor_01a.cga">
-			<box x1="342.9508" y1="464.451721" z1="897.193848" x2="345.931366" y2="464.728943" z2="900.5847" />
-		</staticdoor>
-		<staticdoor keyid="185000154" doorid="80" x="538.905151" y="441.539185" z="884.1578" mesh="shulack_keydoor_01a.cga">
-			<box x1="538.6359" y1="441.5311" z1="882.462341" x2="538.913147" y2="444.511658" z2="885.8532" />
-		</staticdoor>
-		<staticdoor keyid="185000152" doorid="813" x="278.058533" y="538.0716" z="902.9318" mesh="shulack_keydoor_01a.cga">
-			<box x1="275.08606" y1="537.802368" z1="901.2364" x2="278.06662" y2="538.0796" z2="904.627258" />
-		</staticdoor>
-	</world>
-	<world world="301040000">
-		<staticdoor keyid="185000157" doorid="91" x="329.9119" y="549.4354" z="953.72876" mesh="shulack_keydoor_01a.cga">
-			<box x1="327.8044" y1="547.1432" z1="952.0333" x2="330.108" y2="549.446838" z2="955.4242" />
-		</staticdoor>
-		<staticdoor keyid="185000158" doorid="93" x="411.710144" y="552.252136" z="947.8562" mesh="shulack_keydoor_01a.cga">
-			<box x1="411.517273" y1="552.2408" z1="946.160767" x2="413.853882" y2="554.5107" z2="949.551636" />
-		</staticdoor>
-		<staticdoor keyid="185000159" doorid="94" x="374.074" y="490.420624" z="948.555542" mesh="shulack_keydoor_01a.cga">
-			<box x1="374.065765" y1="490.360779" z1="946.8601" x2="377.05072" y2="490.69" z2="950.251" />
-		</staticdoor>
-		<staticdoor keyid="185000160" doorid="809" x="539.198547" y="501.026581" z="953.6396" mesh="shulack_keydoor_01a.cga">
-			<box x1="538.9293" y1="501.0185" z1="951.944153" x2="539.206543" y2="503.999054" z2="955.335" />
-		</staticdoor>
-		<staticdoor keyid="185000161" doorid="810" x="454.8353" y="530.8251" z="953.4786" mesh="shulack_keydoor_01a.cga">
-			<box x1="454.827332" y1="527.8526" z1="951.783142" x2="455.104553" y2="530.8332" z2="955.174" />
-		</staticdoor>
-	</world>
-	<world world="301050000">
-		<staticdoor keyid="185000151" doorid="811" x="712.2445" y="531.3955" z="1014.87738" mesh="shulack_keydoor_01a.cga">
-			<box x1="709.272034" y1="531.1263" z1="1013.18195" x2="712.2526" y2="531.4035" z2="1016.57281" />
-		</staticdoor>
-		<staticdoor keyid="185000149" doorid="814" x="638.9521" y="470.8528" z="1032.87439" mesh="shulack_keydoor_01a.cga">
-			<box x1="638.682739" y1="470.844574" z1="1031.179" x2="639.0119" y2="473.829529" z2="1034.56982" />
 		</staticdoor>
 	</world>
 	<world world="301100000">
@@ -2490,543 +2265,512 @@
 		</staticdoor>
 	</world>
 	<world world="301120000">
-		<staticdoor doorid="4" x="1514.298" y="1560.73389" z="614.3546" mesh="kamar_indoor.cga">
+		<staticdoor doorid="4" x="1514.298" y="1560.73389" z="614.3546" mesh="kamar_indoor.cga" state="0x0">
 			<box x1="1512.46643" y1="1558.25415" z1="609.974365" x2="1515.73389" y2="1563.08093" z2="618.656067" />
 		</staticdoor>
-		<staticdoor doorid="5" x="1381.08679" y="1253.463" z="620.0402" mesh="warship_kamar_01a.cga">
+		<staticdoor doorid="5" x="1381.08679" y="1253.463" z="620.0402" mesh="warship_kamar_01a.cga" state="0x6">
 			<box x1="1283.02954" y1="1194.212" z1="581.194641" x2="1482.4165" y2="1387.5929" z2="707.5089" />
 		</staticdoor>
-		<staticdoor doorid="8" x="1225.79785" y="1363.97717" z="614.857056" mesh="kamar_indoor.cga">
+		<staticdoor doorid="8" x="1225.79785" y="1363.97717" z="614.857056" mesh="kamar_indoor.cga" state="0x0">
 			<box x1="1224.32617" y1="1361.6499" z1="610.4768" x2="1227.66284" y2="1366.444" z2="619.1585" />
 		</staticdoor>
-		<staticdoor doorid="10" x="1436.70313" y="1235.91882" z="592.521667" mesh="kamar_outdoor.cga">
+		<staticdoor doorid="10" x="1436.70313" y="1235.91882" z="592.521667" mesh="kamar_outdoor.cga" state="0x0">
 			<box x1="1434.46631" y1="1231.24219" z1="586.032" x2="1439.49658" y2="1241.33923" z2="603.042053" />
 		</staticdoor>
-		<staticdoor doorid="11" x="1116.47131" y="1541.27454" z="591.4218" mesh="kamar_outdoor.cga">
+		<staticdoor doorid="11" x="1116.47131" y="1541.27454" z="591.4218" mesh="kamar_outdoor.cga" state="0x0">
 			<box x1="1115.11292" y1="1535.78" z1="584.9321" x2="1117.49976" y2="1545.90076" z2="601.9422" />
 		</staticdoor>
-		<staticdoor doorid="144" x="1172.7251" y="1549.14392" z="615.0018" mesh="warship_kamar_01a.cga">
+		<staticdoor doorid="144" x="1172.7251" y="1549.14392" z="615.0018" mesh="warship_kamar_01a.cga" state="0x6">
 			<box x1="1115.82" y1="1457.39246" z1="576.1562" x2="1273.15149" y2="1579.87537" z2="702.470459" />
 		</staticdoor>
 	</world>
 	<world world="301130000">
-		<staticdoor keyid="1" doorid="59" x="567.467957" y="486.8745" z="192.208832" mesh="vritra_base_door_005.cga">
+		<staticdoor keyid="1" doorid="59" x="567.467957" y="486.8745" z="192.208832" mesh="vritra_base_door_005.cga" state="0x8">
 			<box x1="564.5535" y1="481.729065" z1="192.127274" x2="570.568665" y2="491.7635" z2="204.504745" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="372" x="480.019531" y="356.178528" z="181.875" mesh="vritra_common_door.cga">
+		<staticdoor keyid="1" doorid="372" x="480.019531" y="356.178528" z="181.875" mesh="vritra_common_door.cga" state="0x8">
 			<box x1="475.634064" y1="355.660126" z1="181.7003" x2="484.405" y2="357.077484" z2="194.604126" />
 		</staticdoor>
-		<staticdoor doorid="373" x="485.937866" y="407.1957" z="182.24" mesh="vritra_base_door_001.cga">
+		<staticdoor doorid="373" x="485.937866" y="407.1957" z="182.24" mesh="vritra_base_door_001.cga" state="0xA">
 			<box x1="485.511322" y1="404.645" z1="182.220352" x2="486.352417" y2="409.74646" z2="188.538513" />
 		</staticdoor>
-		<staticdoor doorid="374" x="474.393921" y="383.766083" z="182.24" mesh="vritra_base_door_001.cga">
+		<staticdoor doorid="374" x="474.393921" y="383.766083" z="182.24" mesh="vritra_base_door_001.cga" state="0xA">
 			<box x1="473.97937" y1="381.215332" z1="182.220352" x2="474.820465" y2="386.3168" z2="188.538513" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="375" x="480.015381" y="321.324341" z="182.218216" mesh="vritra_base_door_002.cga">
+		<staticdoor keyid="1" doorid="375" x="480.015381" y="321.324341" z="182.218216" mesh="vritra_base_door_002.cga" state="0x8">
 			<box x1="463.882446" y1="320.7265" z1="181.786713" x2="496.529449" y2="321.92215" z2="196.589676" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="376" x="166.224014" y="429.595764" z="151.30542" mesh="vritra_common_door.cga">
+		<staticdoor keyid="1" doorid="376" x="166.224014" y="429.595764" z="151.30542" mesh="vritra_common_door.cga" state="0x8">
 			<box x1="165.705612" y1="425.2103" z1="151.130722" x2="167.122955" y2="433.981232" z2="164.034546" />
 		</staticdoor>
-		<staticdoor doorid="377" x="485.937866" y="364.1117" z="182.24" mesh="vritra_base_door_001.cga">
+		<staticdoor doorid="377" x="485.937866" y="364.1117" z="182.24" mesh="vritra_base_door_001.cga" state="0xA">
 			<box x1="485.511322" y1="361.560974" z1="182.220352" x2="486.352417" y2="366.662445" z2="188.538513" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="378" x="328.113037" y="291.514862" z="159.474838" mesh="vritra_base_door_006.cga">
+		<staticdoor keyid="1" doorid="378" x="328.113037" y="291.514862" z="159.474838" mesh="vritra_base_door_006.cga" state="0x8">
 			<box x1="327.53952" y1="283.212128" z1="156.019836" x2="328.673" y2="299.817566" z2="172.373016" />
 		</staticdoor>
-		<staticdoor keyid="185000176" doorid="379" x="270.318878" y="364.212036" z="159.203781" mesh="vritra_base_doorr_001.cga">
+		<staticdoor keyid="185000176" doorid="379" x="270.318878" y="364.212036" z="159.203781" mesh="vritra_base_doorr_001.cga" state="0xA">
 			<box x1="269.6754" y1="361.0189" z1="159.143951" x2="271.232147" y2="367.407166" z2="165.204941" />
 		</staticdoor>
-		<staticdoor doorid="380" x="485.937866" y="386.927856" z="182.24" mesh="vritra_base_door_001.cga">
+		<staticdoor doorid="380" x="485.937866" y="386.927856" z="182.24" mesh="vritra_base_door_001.cga" state="0xA">
 			<box x1="485.511322" y1="384.377136" z1="182.220352" x2="486.352417" y2="389.4786" z2="188.538513" />
 		</staticdoor>
-		<staticdoor keyid="185000178" doorid="381" x="309.1393" y="388.4098" z="159.265381" mesh="vritra_base_doorg_001.cga">
+		<staticdoor keyid="185000178" doorid="381" x="309.1393" y="388.4098" z="159.265381" mesh="vritra_base_doorg_001.cga" state="0xE">
 			<box x1="308.226044" y1="385.214661" z1="159.205551" x2="309.782776" y2="391.602936" z2="165.266541" />
 		</staticdoor>
-		<staticdoor keyid="185000175" doorid="382" x="602.2675" y="504.670746" z="191.19" mesh="vritra_base_door_004.cga">
+		<staticdoor keyid="185000175" doorid="382" x="602.2675" y="504.670746" z="191.19" mesh="vritra_base_door_004.cga" state="0xA">
 			<box x1="599.843" y1="502.93866" z1="191.034958" x2="604.666138" y2="506.3275" z2="197.416672" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="383" x="640.0773" y="401.54837" z="202.857727" mesh="vritra_common_door.cga">
+		<staticdoor keyid="1" doorid="383" x="640.0773" y="401.54837" z="202.857727" mesh="vritra_common_door.cga" state="0x8">
 			<box x1="635.691833" y1="400.6494" z1="202.683029" x2="644.462769" y2="402.066772" z2="215.586853" />
 		</staticdoor>
-		<staticdoor doorid="384" x="474.393921" y="407.0394" z="182.24" mesh="vritra_base_door_001.cga">
+		<staticdoor doorid="384" x="474.393921" y="407.0394" z="182.24" mesh="vritra_base_door_001.cga" state="0xA">
 			<box x1="473.97937" y1="404.488647" z1="182.220352" x2="474.820465" y2="409.590118" z2="188.538513" />
 		</staticdoor>
-		<staticdoor keyid="185000177" doorid="385" x="309.817657" y="364.000671" z="159.299408" mesh="vritra_base_doorb_001.cga">
+		<staticdoor keyid="185000177" doorid="385" x="309.817657" y="364.000671" z="159.299408" mesh="vritra_base_doorb_001.cga" state="0xA">
 			<box x1="308.9044" y1="360.805542" z1="159.239578" x2="310.461121" y2="367.193817" z2="165.300568" />
 		</staticdoor>
-		<staticdoor keyid="185000180" doorid="387" x="602.7271" y="467.758148" z="191.260071" mesh="vritra_base_door_004.cga">
+		<staticdoor keyid="185000180" doorid="387" x="602.7271" y="467.758148" z="191.260071" mesh="vritra_base_door_004.cga" state="0xA">
 			<box x1="600.275" y1="466.138733" z1="191.105026" x2="605.1297" y2="469.4399" z2="197.48674" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="388" x="290.202057" y="348.73053" z="159.104568" mesh="vritra_common_door.cga">
+		<staticdoor keyid="1" doorid="388" x="290.202057" y="348.73053" z="159.104568" mesh="vritra_common_door.cga" state="0x8">
 			<box x1="285.8166" y1="347.831573" z1="158.929871" x2="294.587524" y2="349.248932" z2="171.8337" />
 		</staticdoor>
 	</world>
 	<world world="301140000">
-		<staticdoor keyid="1" doorid="10" x="1056.63232" y="553.5248" z="284.9664" mesh="idldf5_under02_nomaldoor_01a.cga">
-			<box x1="1053.72546" y1="553.271667" z1="284.927948" x2="1059.53931" y2="553.777954" z2="292.938446" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="154" x="1055.82678" y="909.429749" z="282.140472" mesh="idldf5_under02_nomaldoor_03c.cga">
-			<box x1="1052.923" y1="909.2273" z1="282.10202" x2="1058.73059" y2="909.632263" z2="290.112518" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="159" x="756.70166" y="956.58905" z="317.053467" mesh="idldf5_under02_treasuredoor_01a.cga">
+		<staticdoor keyid="1" doorid="159" x="756.70166" y="956.58905" z="317.053467" mesh="idldf5_under02_treasuredoor_01a.cga" state="0x0">
 			<box x1="754.99115" y1="954.019165" z1="317.015" x2="758.4122" y2="959.1589" z2="325.0255" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="160" x="974.527161" y="912.6603" z="296.437317" mesh="idldf5_under02_nomaldoor_02b.cga">
-			<box x1="972.81665" y1="910.0904" z1="296.398865" x2="976.2377" y2="915.2301" z2="304.409363" />
-		</staticdoor>
-		<staticdoor doorid="177" x="814.2772" y="962.594666" z="304.960175" mesh="idldf5_under02_nomaldoor_04d.cga">
-			<box x1="812.5667" y1="960.024841" z1="304.921722" x2="815.987732" y2="965.164551" z2="312.93222" />
-		</staticdoor>
-		<staticdoor doorid="202" x="1061.00586" y="1387.40051" z="336.219879" mesh="idldf5_under02_nomaldoor_04d.cga">
-			<box x1="1058.593" y1="1385.45313" z1="336.181427" x2="1063.4187" y2="1389.34778" z2="344.191925" />
-		</staticdoor>
-		<staticdoor keyid="185000173" doorid="319" x="874.912537" y="957.0726" z="293.509125" mesh="idldf5_under02_selectdoor_02b.cga">
+		<staticdoor keyid="185000173" doorid="319" x="874.912537" y="957.0726" z="293.509125" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
 			<box x1="872.3192" y1="955.403442" z1="293.470673" x2="877.505859" y2="958.7417" z2="301.481171" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="350" x="1097.6748" y="450.418549" z="285.166" mesh="idldf5_under02_treasuredoor_01a.cga">
-			<box x1="1094.771" y1="450.216064" z1="285.127533" x2="1100.57861" y2="450.621" z2="293.138031" />
-		</staticdoor>
-		<staticdoor doorid="400" x="1030.21692" y="478.113831" z="290.663635" mesh="idldf5_under02_nomaldoor_04d.cga">
-			<box x1="1027.31311" y1="477.911377" z1="290.625183" x2="1033.12073" y2="478.3163" z2="298.635681" />
-		</staticdoor>
-		<staticdoor keyid="185000172" doorid="430" x="1070.77173" y="317.203156" z="301.800171" mesh="idldf5_under02_selectdoor_01a.cga">
+		<staticdoor keyid="185000172" doorid="430" x="1070.77173" y="317.203156" z="301.800171" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
 			<box x1="1070.56934" y1="314.299347" z1="301.761719" x2="1070.97424" y2="320.106964" z2="309.772217" />
 		</staticdoor>
-		<staticdoor keyid="185000172" doorid="467" x="892.6487" y="964.2402" z="293.455" mesh="idldf5_under02_selectdoor_01a.cga">
+		<staticdoor keyid="185000172" doorid="467" x="892.6487" y="964.2402" z="293.455" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
 			<box x1="890.9382" y1="961.670349" z1="293.416534" x2="894.3592" y2="966.810059" z2="301.427032" />
 		</staticdoor>
-		<staticdoor keyid="185000173" doorid="689" x="1108.79639" y="1190.14783" z="303.8512" mesh="idldf5_under02_selectdoor_02b.cga">
+		<staticdoor keyid="185000173" doorid="689" x="1108.79639" y="1190.14783" z="303.8512" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
 			<box x1="1106.84912" y1="1187.735" z1="303.812744" x2="1110.74377" y2="1192.56067" z2="311.823242" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="690" x="976.0025" y="1332.80725" z="335.849365" mesh="idldf5_under02_treasuredoor_01a.cga">
-			<box x1="973.1276" y1="1331.95679" z1="335.8109" x2="978.877441" y2="1333.65771" z2="343.8214" />
-		</staticdoor>
-		<staticdoor keyid="185000172" doorid="691" x="1037.40991" y="1139.79016" z="304.3102" mesh="idldf5_under02_selectdoor_01a.cga">
+		<staticdoor keyid="185000172" doorid="691" x="1037.40991" y="1139.79016" z="304.3102" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
 			<box x1="1035.61829" y1="1137.26965" z1="304.271759" x2="1039.20154" y2="1142.31079" z2="312.282257" />
 		</staticdoor>
-		<staticdoor keyid="185000173" doorid="1530" x="1088.48926" y="329.680756" z="301.8245" mesh="idldf5_under02_selectdoor_02b.cga">
+		<staticdoor keyid="185000173" doorid="1530" x="1088.48926" y="329.680756" z="301.8245" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
 			<box x1="1085.58545" y1="329.478271" z1="301.786041" x2="1091.39307" y2="329.8832" z2="309.796539" />
 		</staticdoor>
 	</world>
-	<world world="301170000">
-		<staticdoor keyid="185000171" doorid="1" x="493.499542" y="467.505219" z="102.75412" mesh="ldf5re_02_door3.cga">
-			<box x1="493.049255" y1="461.954529" z1="100.15625" x2="493.9576" y2="473.074341" z2="112.90007" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="9" x="586.5923" y="490.016968" z="102.752136" mesh="ldf5re_02_door1.cga">
-			<box x1="581.123169" y1="487.925385" z1="100.154266" x2="592.0332" y2="492.0797" z2="112.898087" />
-		</staticdoor>
-		<staticdoor doorid="32" x="558.8129" y="495.1578" z="102.8886" mesh="ldf5re_02_door3.cga">
-			<box x1="553.2438" y1="494.70752" z1="100.290726" x2="564.3636" y2="495.615875" z2="113.034546" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="40" x="598.7687" y="501.0503" z="102.832413" mesh="ldf5re_02_door3.cga">
-			<box x1="596.522461" y1="495.63797" z1="100.234543" x2="601.0015" y2="506.447662" z2="112.978363" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="42" x="633.7687" y="487.408234" z="102.7594" mesh="ldf5re_02_door1.cga">
-			<box x1="628.1995" y1="486.9181" z1="100.16153" x2="639.319336" y2="487.862579" z2="112.90535" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="43" x="649.1707" y="467.468567" z="102.554314" mesh="ldf5re_02_door1.cga">
-			<box x1="648.680542" y1="461.9179" z1="99.9564362" x2="649.625061" y2="473.0377" z2="112.700256" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="45" x="615.238" y="428.097534" z="97.1927261" mesh="ldf5re_02_door3.cga">
-			<box x1="612.821167" y1="422.734131" z1="94.59485" x2="617.6542" y2="433.4409" z2="107.338669" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="46" x="600.5418" y="410.5032" z="97.33266" mesh="ldf5re_02_door1.cga">
-			<box x1="595.184143" y1="408.089844" z1="94.73479" x2="605.9039" y2="412.9566" z2="107.478607" />
-		</staticdoor>
-		<staticdoor keyid="185000170" doorid="48" x="534.245056" y="441.839417" z="102.775879" mesh="ldf5re_02_door2.cga">
-			<box x1="528.7483" y1="440.580872" z1="100.003143" x2="539.7526" y2="443.058319" z2="112.66983" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="49" x="499.938324" y="447.052155" z="102.831444" mesh="ldf5re_02_door3.cga">
-			<box x1="494.3692" y1="446.601868" z1="100.233566" x2="505.489" y2="447.510223" z2="112.977386" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="50" x="492.2838" y="433.073273" z="103.030479" mesh="ldf5re_02_door3.cga">
-			<box x1="491.833527" y1="427.522583" z1="100.4326" x2="492.741882" y2="438.6424" z2="113.176422" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="53" x="506.223633" y="515.565735" z="109.6886" mesh="ldf5re_02_door3.cga">
-			<box x1="504.439423" y1="510.071045" z1="107.090729" x2="508.0109" y2="521.080261" z2="119.834549" />
-		</staticdoor>
-		<staticdoor keyid="185000171" doorid="54" x="523.2677" y="530.4549" z="109.71534" mesh="ldf5re_02_door1.cga">
-			<box x1="517.7391" y1="528.724548" z1="107.117462" x2="528.7863" y2="532.14624" z2="119.861282" />
-		</staticdoor>
-	</world>
-	<world world="301180000">
-		<staticdoor doorid="26" x="198.13002" y="261.048584" z="325.081635" mesh="bu_id_ldf5re_03_cube_door01.cga">
-			<box x1="197.873688" y1="254.700516" z1="318.697723" x2="198.386337" y2="267.396667" z2="331.465576" />
-		</staticdoor>
-	</world>
-	<world world="301190000">
-		<staticdoor doorid="3" x="164.479324" y="123.25132" z="231.49707" mesh="idldf5re_solo_door_01.cga">
-			<box x1="163.48642" y1="117.6871" z1="231.491821" x2="165.617615" y2="129.0886" z2="240.891617" />
-		</staticdoor>
-		<staticdoor keyid="185000165" doorid="4" x="523.531067" y="464.2762" z="95.2277756" mesh="idldf5re_solo_door_02.cga">
-			<box x1="515.4821" y1="458.380371" z1="95.21954" x2="531.1049" y2="470.07132" z2="109.977234" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="6" x="232.741882" y="520.166565" z="152.8816" mesh="ldf5re_02_door3.cga">
-			<box x1="228.090683" y1="516.3883" z1="150.283737" x2="237.41243" y2="523.9501" z2="163.027557" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="7" x="246.118835" y="529.882446" z="152.511917" mesh="ldf5re_02_door3.cga">
-			<box x1="240.833481" y1="527.292" z1="149.914047" x2="251.424225" y2="532.472961" z2="162.657867" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="8" x="261.518036" y="533.9747" z="150.669739" mesh="ldf5re_02_door3.cga">
-			<box x1="255.96022" y1="533.4195" z1="148.071869" x2="267.094177" y2="534.5218" z2="160.815689" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="10" x="295.628723" y="536.3879" z="148.861221" mesh="ldf5re_02_door3.cga">
-			<box x1="290.0621" y1="535.639954" z1="146.263351" x2="301.2142" y2="537.129" z2="159.007172" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="11" x="314.159882" y="536.212036" z="148.838623" mesh="ldf5re_02_door3.cga">
-			<box x1="308.7625" y1="533.9658" z1="146.240753" x2="319.5722" y2="538.4449" z2="158.984573" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="12" x="327.738983" y="524.2498" z="148.386108" mesh="ldf5re_02_door3.cga">
-			<box x1="323.8202" y1="519.6892" z1="145.788239" x2="331.6637" y2="528.7913" z2="158.532059" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="13" x="334.721619" y="509.0433" z="148.2667" mesh="ldf5re_02_door3.cga">
-			<box x1="332.84256" y1="503.54538" z1="145.668823" x2="336.597961" y2="514.521362" z2="158.412643" />
-		</staticdoor>
-		<staticdoor keyid="185000164" doorid="101" x="224.275009" y="505.0375" z="153.28566" mesh="ldf5re_02_door3.cga">
-			<box x1="221.865448" y1="499.691345" z1="150.68779" x2="226.698425" y2="510.3981" z2="163.43161" />
-		</staticdoor>
-	</world>
 	<world world="301210000">
-		<staticdoor keyid="1" doorid="176" x="362.4" y="492.21" z="593.5783" mesh="vritra_under_war_door.cga">
+		<staticdoor keyid="1" doorid="176" x="362.4" y="492.21" z="593.5783" mesh="vritra_under_war_door.cga" state="0x8">
 			<box x1="359.451752" y1="481.557678" z1="593.2148" x2="364.552" y2="503.429047" z2="607.8146" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="177" x="751.244446" y="515.807556" z="579.3967" mesh="vritra_under_war_door.cga">
+		<staticdoor keyid="1" doorid="177" x="751.244446" y="515.807556" z="579.3967" mesh="vritra_under_war_door.cga" state="0x8">
 			<box x1="740.3803" y1="511.7401" z1="579.0332" x2="762.805054" y2="520.5607" z2="593.632935" />
 		</staticdoor>
 	</world>
 	<world world="301220000">
-		<staticdoor doorid="2" x="331.840485" y="630.9504" z="247.345245" mesh="td_war_runedoor_01.cga">
+		<staticdoor doorid="2" x="331.840485" y="630.9504" z="247.345245" mesh="td_war_runedoor_01.cga" state="0x0">
 			<box x1="328.779144" y1="627.766846" z1="246.756989" x2="334.92926" y2="634.1074" z2="252.458862" />
 		</staticdoor>
-		<staticdoor doorid="17" x="584.7568" y="701.1814" z="220.70192" mesh="td_war_runedoor_02.cga">
+		<staticdoor doorid="17" x="584.7568" y="701.1814" z="220.70192" mesh="td_war_runedoor_02.cga" state="0x0">
 			<box x1="581.8979" y1="697.8446" z1="220.426025" x2="587.644836" y2="704.542664" z2="225.815552" />
 		</staticdoor>
-		<staticdoor doorid="26" x="287.6895" y="395.988831" z="237.922516" mesh="td_war_runedoor_02.cga">
+		<staticdoor doorid="26" x="287.6895" y="395.988831" z="237.922516" mesh="td_war_runedoor_02.cga" state="0x0">
 			<box x1="284.649536" y1="392.7594" z1="237.646622" x2="290.7016" y2="399.1923" z2="243.036148" />
 		</staticdoor>
-		<staticdoor doorid="35" x="707.613342" y="640.245544" z="212.0548" mesh="td_war_runedoor_01.cga">
+		<staticdoor doorid="35" x="707.613342" y="640.245544" z="212.0548" mesh="td_war_runedoor_01.cga" state="0x0">
 			<box x1="703.6796" y1="638.419" z1="211.466537" x2="711.56134" y2="642.036743" z2="217.168411" />
 		</staticdoor>
 	</world>
 	<world world="301230000">
-		<staticdoor doorid="129" x="308.674164" y="309.953644" z="405.291473" mesh="idldf5_under03_door.cga">
+		<staticdoor doorid="129" x="308.674164" y="309.953644" z="405.291473" mesh="idldf5_under03_door.cga" state="0x0">
 			<box x1="295.2122" y1="296.872162" z1="403.929718" x2="322.3219" y2="323.108521" z2="435.267181" />
 		</staticdoor>
 	</world>
 	<world world="301240000">
-		<staticdoor keyid="185000062" doorid="1" x="554.296265" y="195.14357" z="179.386887" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000062" doorid="1" x="554.296265" y="195.14357" z="179.386887" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.674866" y1="191.870087" z1="179.345" x2="555.9176" y2="198.417053" z2="190.707565" />
 		</staticdoor>
-		<staticdoor keyid="185000061" doorid="2" x="501.4325" y="194.115387" z="179.232651" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000061" doorid="2" x="501.4325" y="194.115387" z="179.232651" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.54187" y1="190.974533" z1="179.132767" x2="503.32312" y2="197.256241" z2="190.495331" />
 		</staticdoor>
-		<staticdoor keyid="185000063" doorid="3" x="525.508362" y="241.174011" z="179.16214" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000063" doorid="3" x="525.508362" y="241.174011" z="179.16214" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.9584" y1="241.025955" z1="179.062256" x2="529.0584" y2="241.322067" z2="190.42482" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="11" x="541.91925" y="881.670349" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="11" x="541.91925" y="881.670349" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.5992" y1="880.7267" z1="199.4101" x2="544.2393" y2="882.6141" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000065" doorid="14" x="577.8909" y="845.233765" z="199.341644" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000065" doorid="14" x="577.8909" y="845.233765" z="199.341644" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="576.1888" y1="845.130432" z1="199.3228" x2="579.5907" y2="845.3377" z2="204.435959" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="15" x="528.615662" y="883.9597" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="15" x="528.615662" y="883.9597" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="526.1906" y1="883.8381" z1="199.4101" x2="531.040649" y2="884.0813" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="17" x="515.252747" y="881.5756" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="17" x="515.252747" y="881.5756" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.9324" y1="880.632751" z1="199.4101" x2="517.573059" y2="882.518555" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="18" x="503.5706" y="874.971558" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="18" x="503.5706" y="874.971558" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.634766" y1="873.320251" z1="199.4101" x2="505.5064" y2="876.622864" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="19" x="495.0369" y="864.6957" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="19" x="495.0369" y="864.6957" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.7191" y1="862.535156" z1="199.4101" x2="496.3547" y2="866.8562" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="20" x="490.29245" y="852.1168" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="20" x="490.29245" y="852.1168" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.7516" y1="849.707642" z1="199.4101" x2="490.8333" y2="854.52594" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="28" x="490.274017" y="838.503845" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="28" x="490.274017" y="838.503845" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.733948" y1="836.0946" z1="199.4101" x2="490.814056" y2="840.913147" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="74" x="494.889862" y="825.8789" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="74" x="494.889862" y="825.8789" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.537384" y1="823.7377" z1="199.4101" x2="496.242371" y2="828.0202" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="76" x="553.536743" y="874.795" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="76" x="553.536743" y="874.795" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.60144" y1="873.143066" z1="199.4101" x2="555.472046" y2="876.4469" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="79" x="562.1176" y="864.5233" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="79" x="562.1176" y="864.5233" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.8005" y1="862.3624" z1="199.4101" x2="563.4347" y2="866.6842" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="80" x="566.672058" y="851.998535" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="80" x="566.672058" y="851.998535" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="566.132" y1="849.5893" z1="199.4101" x2="567.2121" y2="854.407837" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301250000">
-		<staticdoor keyid="185000067" doorid="1" x="554.1375" y="194.803131" z="179.283783" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000067" doorid="1" x="554.1375" y="194.803131" z="179.283783" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.5161" y1="191.529648" z1="179.2419" x2="555.75885" y2="198.076614" z2="190.604462" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="2" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="2" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.184753" y1="880.4161" z1="199.4101" x2="543.8249" y2="882.303467" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="3" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="3" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="525.7763" y1="883.600464" z1="199.4101" x2="530.626343" y2="883.8437" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="5" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="5" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.6342" y1="880.4922" z1="199.4101" x2="517.2749" y2="882.378" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="6" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="6" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.2724" y1="873.069458" z1="199.4101" x2="505.144043" y2="876.3721" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000066" doorid="9" x="501.409546" y="194.155121" z="179.232651" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000066" doorid="9" x="501.409546" y="194.155121" z="179.232651" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.518921" y1="191.014267" z1="179.132767" x2="503.300171" y2="197.295975" z2="190.495331" />
 		</staticdoor>
-		<staticdoor keyid="185000068" doorid="10" x="525.1815" y="241.1727" z="179.224426" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000068" doorid="10" x="525.1815" y="241.1727" z="179.224426" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.631531" y1="241.024643" z1="179.124542" x2="528.731567" y2="241.320755" z2="190.4871" />
 		</staticdoor>
-		<staticdoor keyid="185000070" doorid="14" x="577.4918" y="845.1633" z="199.341644" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000070" doorid="14" x="577.4918" y="845.1633" z="199.341644" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="575.7897" y1="845.06" z1="199.3228" x2="579.1916" y2="845.2673" z2="204.435959" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="17" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="17" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.2361" y1="862.4103" z1="199.4101" x2="495.871735" y2="866.7313" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="18" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="18" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.429443" y1="849.423" z1="199.4101" x2="490.511169" y2="854.2413" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.352051" y1="835.8996" z1="199.4101" x2="490.432159" y2="840.71814" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.177765" y1="823.5009" z1="199.4101" x2="495.882751" y2="827.783447" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.1837" y1="873.008057" z1="199.4101" x2="555.0543" y2="876.3119" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.417664" y1="862.143" z1="199.4101" x2="563.0519" y2="866.4648" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="565.7424" y1="849.2315" z1="199.4101" x2="566.822449" y2="854.050049" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301260000">
-		<staticdoor keyid="185000057" doorid="1" x="554.001038" y="194.813461" z="179.321579" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000057" doorid="1" x="554.001038" y="194.813461" z="179.321579" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.324768" y1="191.564545" z1="179.2797" x2="555.6773" y2="198.062378" z2="190.642258" />
 		</staticdoor>
-		<staticdoor keyid="185000056" doorid="2" x="501.3952" y="194.081161" z="179.249237" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000056" doorid="2" x="501.3952" y="194.081161" z="179.249237" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.5383" y1="190.921967" z1="179.149353" x2="503.252136" y2="197.240341" z2="190.511917" />
 		</staticdoor>
-		<staticdoor keyid="185000058" doorid="3" x="525.201" y="241.208557" z="179.16214" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000058" doorid="3" x="525.201" y="241.208557" z="179.16214" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.6515" y1="241.074753" z1="179.062256" x2="528.7505" y2="241.342361" z2="190.42482" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="11" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="11" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.184753" y1="880.4161" z1="199.4101" x2="543.8249" y2="882.303467" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000060" doorid="14" x="577.4918" y="845.1633" z="199.398575" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000060" doorid="14" x="577.4918" y="845.1633" z="199.398575" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="575.7897" y1="845.06" z1="199.37973" x2="579.1916" y2="845.2673" z2="204.492889" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="15" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="15" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="525.7763" y1="883.600464" z1="199.4101" x2="530.626343" y2="883.8437" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="17" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="17" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.6342" y1="880.4922" z1="199.4101" x2="517.2749" y2="882.378" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="18" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="18" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.2724" y1="873.069458" z1="199.4101" x2="505.144043" y2="876.3721" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="19" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="19" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.2361" y1="862.4103" z1="199.4101" x2="495.871735" y2="866.7313" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="20" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="20" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.429443" y1="849.423" z1="199.4101" x2="490.511169" y2="854.2413" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.352051" y1="835.8996" z1="199.4101" x2="490.432159" y2="840.71814" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.177765" y1="823.5009" z1="199.4101" x2="495.882751" y2="827.783447" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.1837" y1="873.008057" z1="199.4101" x2="555.0543" y2="876.3119" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.417664" y1="862.143" z1="199.4101" x2="563.0519" y2="866.4648" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="565.7424" y1="849.2315" z1="199.4101" x2="566.822449" y2="854.050049" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301280000">
-		<staticdoor keyid="185000062" doorid="1" x="554.296265" y="195.14357" z="179.386887" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000062" doorid="1" x="554.296265" y="195.14357" z="179.386887" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.674866" y1="191.870087" z1="179.345" x2="555.9176" y2="198.417053" z2="190.707565" />
 		</staticdoor>
-		<staticdoor keyid="185000061" doorid="2" x="501.4325" y="194.115387" z="179.232651" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000061" doorid="2" x="501.4325" y="194.115387" z="179.232651" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.54187" y1="190.974533" z1="179.132767" x2="503.32312" y2="197.256241" z2="190.495331" />
 		</staticdoor>
-		<staticdoor keyid="185000063" doorid="3" x="525.508362" y="241.174011" z="179.16214" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000063" doorid="3" x="525.508362" y="241.174011" z="179.16214" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.9584" y1="241.025955" z1="179.062256" x2="529.0584" y2="241.322067" z2="190.42482" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="11" x="541.91925" y="881.670349" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="11" x="541.91925" y="881.670349" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.5992" y1="880.7267" z1="199.4101" x2="544.2393" y2="882.6141" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000065" doorid="14" x="577.8909" y="845.233765" z="199.341644" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000065" doorid="14" x="577.8909" y="845.233765" z="199.341644" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="576.1888" y1="845.130432" z1="199.3228" x2="579.5907" y2="845.3377" z2="204.435959" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="15" x="528.615662" y="883.9597" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="15" x="528.615662" y="883.9597" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="526.1906" y1="883.8381" z1="199.4101" x2="531.040649" y2="884.0813" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="17" x="515.252747" y="881.5756" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="17" x="515.252747" y="881.5756" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.9324" y1="880.632751" z1="199.4101" x2="517.573059" y2="882.518555" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="18" x="503.5706" y="874.971558" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="18" x="503.5706" y="874.971558" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.634766" y1="873.320251" z1="199.4101" x2="505.5064" y2="876.622864" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="19" x="495.0369" y="864.6957" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="19" x="495.0369" y="864.6957" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.7191" y1="862.535156" z1="199.4101" x2="496.3547" y2="866.8562" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="20" x="490.29245" y="852.1168" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="20" x="490.29245" y="852.1168" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.7516" y1="849.707642" z1="199.4101" x2="490.8333" y2="854.52594" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="28" x="490.274017" y="838.503845" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="28" x="490.274017" y="838.503845" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.733948" y1="836.0946" z1="199.4101" x2="490.814056" y2="840.913147" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="74" x="494.889862" y="825.8789" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="74" x="494.889862" y="825.8789" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.537384" y1="823.7377" z1="199.4101" x2="496.242371" y2="828.0202" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="76" x="553.536743" y="874.795" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="76" x="553.536743" y="874.795" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.60144" y1="873.143066" z1="199.4101" x2="555.472046" y2="876.4469" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="79" x="562.1176" y="864.5233" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="79" x="562.1176" y="864.5233" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.8005" y1="862.3624" z1="199.4101" x2="563.4347" y2="866.6842" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000064" doorid="80" x="566.672058" y="851.998535" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000064" doorid="80" x="566.672058" y="851.998535" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="566.132" y1="849.5893" z1="199.4101" x2="567.2121" y2="854.407837" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301290000">
-		<staticdoor keyid="185000067" doorid="1" x="554.1375" y="194.803131" z="179.283783" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000067" doorid="1" x="554.1375" y="194.803131" z="179.283783" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.5161" y1="191.529648" z1="179.2419" x2="555.75885" y2="198.076614" z2="190.604462" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="2" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="2" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.184753" y1="880.4161" z1="199.4101" x2="543.8249" y2="882.303467" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="3" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="3" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="525.7763" y1="883.600464" z1="199.4101" x2="530.626343" y2="883.8437" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="5" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="5" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.6342" y1="880.4922" z1="199.4101" x2="517.2749" y2="882.378" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="6" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="6" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.2724" y1="873.069458" z1="199.4101" x2="505.144043" y2="876.3721" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000066" doorid="9" x="501.409546" y="194.155121" z="179.232651" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000066" doorid="9" x="501.409546" y="194.155121" z="179.232651" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.518921" y1="191.014267" z1="179.132767" x2="503.300171" y2="197.295975" z2="190.495331" />
 		</staticdoor>
-		<staticdoor keyid="185000068" doorid="10" x="525.1815" y="241.1727" z="179.224426" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000068" doorid="10" x="525.1815" y="241.1727" z="179.224426" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.631531" y1="241.024643" z1="179.124542" x2="528.731567" y2="241.320755" z2="190.4871" />
 		</staticdoor>
-		<staticdoor keyid="185000070" doorid="14" x="577.4918" y="845.1633" z="199.341644" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000070" doorid="14" x="577.4918" y="845.1633" z="199.341644" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="575.7897" y1="845.06" z1="199.3228" x2="579.1916" y2="845.2673" z2="204.435959" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="17" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="17" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.2361" y1="862.4103" z1="199.4101" x2="495.871735" y2="866.7313" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="18" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="18" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.429443" y1="849.423" z1="199.4101" x2="490.511169" y2="854.2413" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.352051" y1="835.8996" z1="199.4101" x2="490.432159" y2="840.71814" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.177765" y1="823.5009" z1="199.4101" x2="495.882751" y2="827.783447" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.1837" y1="873.008057" z1="199.4101" x2="555.0543" y2="876.3119" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.417664" y1="862.143" z1="199.4101" x2="563.0519" y2="866.4648" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000069" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000069" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="565.7424" y1="849.2315" z1="199.4101" x2="566.822449" y2="854.050049" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301300000">
-		<staticdoor keyid="185000057" doorid="1" x="554.001038" y="194.813461" z="179.321579" mesh="ab_up3_naga.cga">
+		<staticdoor keyid="185000057" doorid="1" x="554.001038" y="194.813461" z="179.321579" mesh="ab_up3_naga.cga" state="0xA">
 			<box x1="552.324768" y1="191.564545" z1="179.2797" x2="555.6773" y2="198.062378" z2="190.642258" />
 		</staticdoor>
-		<staticdoor keyid="185000056" doorid="2" x="501.3952" y="194.081161" z="179.249237" mesh="ab_up3_lizard.cga">
+		<staticdoor keyid="185000056" doorid="2" x="501.3952" y="194.081161" z="179.249237" mesh="ab_up3_lizard.cga" state="0xA">
 			<box x1="499.5383" y1="190.921967" z1="179.149353" x2="503.252136" y2="197.240341" z2="190.511917" />
 		</staticdoor>
-		<staticdoor keyid="185000058" doorid="3" x="525.201" y="241.208557" z="179.16214" mesh="ab_up3_drakan.cga">
+		<staticdoor keyid="185000058" doorid="3" x="525.201" y="241.208557" z="179.16214" mesh="ab_up3_drakan.cga" state="0xA">
 			<box x1="521.6515" y1="241.074753" z1="179.062256" x2="528.7505" y2="241.342361" z2="190.42482" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="11" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="11" x="541.5048" y="881.359741" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="539.184753" y1="880.4161" z1="199.4101" x2="543.8249" y2="882.303467" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000060" doorid="14" x="577.4918" y="845.1633" z="199.398575" mesh="ab_up3_door_04a.cga">
+		<staticdoor keyid="185000060" doorid="14" x="577.4918" y="845.1633" z="199.398575" mesh="ab_up3_door_04a.cga" state="0xA">
 			<box x1="575.7897" y1="845.06" z1="199.37973" x2="579.1916" y2="845.2673" z2="204.492889" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="15" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="15" x="528.201355" y="883.7221" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="525.7763" y1="883.600464" z1="199.4101" x2="530.626343" y2="883.8437" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="17" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="17" x="514.9546" y="881.435059" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="512.6342" y1="880.4922" z1="199.4101" x2="517.2749" y2="882.378" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="18" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="18" x="503.208221" y="874.720764" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="501.2724" y1="873.069458" z1="199.4101" x2="505.144043" y2="876.3721" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="19" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="19" x="494.553925" y="864.5708" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.2361" y1="862.4103" z1="199.4101" x2="495.871735" y2="866.7313" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="20" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="20" x="489.9703" y="851.832153" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.429443" y1="849.423" z1="199.4101" x2="490.511169" y2="854.2413" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="28" x="489.89212" y="838.308838" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="489.352051" y1="835.8996" z1="199.4101" x2="490.432159" y2="840.71814" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="74" x="494.530243" y="825.642151" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="493.177765" y1="823.5009" z1="199.4101" x2="495.882751" y2="827.783447" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="76" x="553.119" y="874.66" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="551.1837" y1="873.008057" z1="199.4101" x2="555.0543" y2="876.3119" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="79" x="561.7348" y="864.3039" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="560.417664" y1="862.143" z1="199.4101" x2="563.0519" y2="866.4648" z2="207.167862" />
 		</staticdoor>
-		<staticdoor keyid="185000059" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga">
+		<staticdoor keyid="185000059" doorid="80" x="566.2824" y="851.640747" z="199.611069" mesh="ab_up3_door_glass.cga" state="0xA">
 			<box x1="565.7424" y1="849.2315" z1="199.4101" x2="566.822449" y2="854.050049" z2="207.167862" />
 		</staticdoor>
 	</world>
 	<world world="301310000">
-		<staticdoor doorid="1" x="248.913757" y="179.707291" z="79.8473053" mesh="idldf5_fortress_re_door.cga">
+		<staticdoor doorid="1" x="248.913757" y="179.707291" z="79.8473053" mesh="idldf5_fortress_re_door.cga" state="0x0">
 			<box x1="246.210358" y1="177.06842" z1="79.73147" x2="251.65419" y2="182.3545" z2="86.98319" />
 		</staticdoor>
-		<staticdoor doorid="99" x="280.384979" y="338.575317" z="79.8601" mesh="idldf5_fortress_re_door.cga">
+		<staticdoor doorid="99" x="280.384979" y="338.575317" z="79.8601" mesh="idldf5_fortress_re_door.cga" state="0x0">
 			<box x1="277.644531" y1="335.9281" z1="79.74426" x2="283.088348" y2="341.214172" z2="86.99599" />
 		</staticdoor>
 	</world>
-	<world world="301320000">
-		<staticdoor doorid="47" x="370.8" y="491.55" z="606.01" mesh="vritra_bridge_01a.cga">
-			<box x1="301.799377" y1="479.210968" z1="603.075562" x2="435.29248" y2="503.577881" z2="608.369141" />
-		</staticdoor>
-	</world>
 	<world world="301340000">
-		<staticdoor doorid="18" x="341.299042" y="259.836365" z="311.104553" mesh="idldf4re_door_02b.cga">
+		<staticdoor doorid="18" x="341.299042" y="259.836365" z="311.104553" mesh="idldf4re_door_02b.cga" state="0x6">
 			<box x1="340.990753" y1="256.4358" z1="311.024963" x2="341.6123" y2="263.276855" z2="319.140778" />
 		</staticdoor>
 	</world>
 	<world world="301370000">
-		<staticdoor doorid="129" x="308.674164" y="309.953644" z="405.291473" mesh="idldf5_under03_door.cga">
+		<staticdoor doorid="129" x="308.674164" y="309.953644" z="405.291473" mesh="idldf5_under03_door.cga" state="0x0">
 			<box x1="295.2122" y1="296.872162" z1="403.929718" x2="322.3219" y2="323.108521" z2="435.267181" />
 		</staticdoor>
 	</world>
+	<world world="301380000">
+		<staticdoor doorid="159" x="756.70166" y="956.58905" z="317.053467" mesh="idldf5_under02_treasuredoor_01a.cga" state="0x0">
+			<box x1="754.99115" y1="954.019165" z1="317.015" x2="758.4122" y2="959.1589" z2="325.0255" />
+		</staticdoor>
+		<staticdoor keyid="185000173" doorid="319" x="874.912537" y="957.0726" z="293.509125" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
+			<box x1="872.3192" y1="955.403442" z1="293.470673" x2="877.505859" y2="958.7417" z2="301.481171" />
+		</staticdoor>
+		<staticdoor keyid="185000172" doorid="430" x="1070.77173" y="317.203156" z="301.800171" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
+			<box x1="1070.56934" y1="314.299347" z1="301.761719" x2="1070.97424" y2="320.106964" z2="309.772217" />
+		</staticdoor>
+		<staticdoor keyid="185000172" doorid="467" x="892.6487" y="964.2402" z="293.455" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
+			<box x1="890.9382" y1="961.670349" z1="293.416534" x2="894.3592" y2="966.810059" z2="301.427032" />
+		</staticdoor>
+		<staticdoor keyid="185000173" doorid="689" x="1108.79639" y="1190.14783" z="303.8512" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
+			<box x1="1106.84912" y1="1187.735" z1="303.812744" x2="1110.74377" y2="1192.56067" z2="311.823242" />
+		</staticdoor>
+		<staticdoor keyid="185000172" doorid="691" x="1037.40991" y="1139.79016" z="304.3102" mesh="idldf5_under02_selectdoor_01a.cga" state="0x2">
+			<box x1="1035.61829" y1="1137.26965" z1="304.271759" x2="1039.20154" y2="1142.31079" z2="312.282257" />
+		</staticdoor>
+		<staticdoor keyid="185000173" doorid="1530" x="1088.48926" y="329.680756" z="301.8245" mesh="idldf5_under02_selectdoor_02b.cga" state="0x2">
+			<box x1="1085.58545" y1="329.478271" z1="301.786041" x2="1091.39307" y2="329.8832" z2="309.796539" />
+		</staticdoor>
+	</world>
+	<world world="301390000">
+		<staticdoor keyid="185000219" doorid="5" x="864.3243" y="261.381531" z="1714.49646" mesh="idseal_2st_door_01a.cga" state="0xA">
+			<box x1="861.234436" y1="257.367554" z1="1711.13489" x2="867.4141" y2="265.3955" z2="1729.274" />
+		</staticdoor>
+		<staticdoor doorid="7" x="608.1797" y="877.0763" z="1599.14075" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="607.08075" y1="869.8217" z1="1598.01257" x2="609.2481" y2="884.272" z2="1607.921" />
+		</staticdoor>
+		<staticdoor doorid="210" x="615.5933" y="896.161438" z="1600.00781" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="609.8962" y1="890.8168" z1="1598.87964" x2="621.2254" y2="901.4927" z2="1608.78809" />
+		</staticdoor>
+		<staticdoor doorid="267" x="615.9494" y="857.359" z="1600.36841" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="610.618164" y1="851.6619" z1="1599.24023" x2="621.294067" y2="862.99115" z2="1609.14868" />
+		</staticdoor>
+		<staticdoor doorid="271" x="655.5575" y="851.8751" z="1599.94788" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="650.6953" y1="845.8528" z1="1598.8197" x2="660.4817" y2="857.920837" z2="1608.72815" />
+		</staticdoor>
+		<staticdoor doorid="310" x="660.5564" y="877.226135" z="1599.35156" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="659.990967" y1="870.0524" z1="1598.22339" x2="661.1564" y2="884.4565" z2="1608.13184" />
+		</staticdoor>
+		<staticdoor doorid="312" x="653.029053" y="895.586548" z="1600.12671" mesh="idseal_4st_door_02a.cga" state="0x8">
+			<box x1="647.7708" y1="889.8771" z1="1598.99854" x2="658.2751" y2="901.3612" z2="1608.907" />
+		</staticdoor>
+		<staticdoor doorid="374" x="479.9776" y="221.839645" z="1689.09875" mesh="idseal_door_01a.cga" state="0x8">
+			<box x1="476.271637" y1="221.709579" z1="1686.44727" x2="483.666565" y2="222.00177" z2="1695.07263" />
+		</staticdoor>
+		<staticdoor doorid="375" x="787.044067" y="383.020416" z="1696.54822" mesh="idseal_2st_door_01a.cga" state="0x8">
+			<box x1="782.18634" y1="382.630249" z1="1693.18665" x2="791.9018" y2="383.4106" z2="1711.32581" />
+		</staticdoor>
+		<staticdoor doorid="376" x="856.707153" y="365.913849" z="1723.22656" mesh="idseal_2st_door_01a.cga" state="0x8">
+			<box x1="851.983459" y1="364.35495" z1="1719.865" x2="861.430847" y2="367.472717" z2="1738.00415" />
+		</staticdoor>
+		<staticdoor doorid="377" x="403.888062" y="170.608963" z="1686.673" mesh="idseal_door_01a.cga" state="0x8">
+			<box x1="400.1821" y1="170.4789" z1="1684.02148" x2="407.577026" y2="170.771088" z2="1692.64685" />
+		</staticdoor>
+		<staticdoor doorid="378" x="897.312256" y="289.1328" z="1714.33032" mesh="idseal_2st_door_01a.cga" state="0x8">
+			<box x1="894.631165" y1="284.854767" z1="1710.96875" x2="899.993347" y2="293.410828" z2="1729.10791" />
+		</staticdoor>
+		<staticdoor doorid="379" x="480.154816" y="140.83638" z="1689.29529" mesh="idseal_door_01a.cga" state="0x8">
+			<box x1="476.465851" y1="140.674255" z1="1686.6438" x2="483.860779" y2="140.966446" z2="1695.26917" />
+		</staticdoor>
+		<staticdoor doorid="380" x="411.292145" y="182.730576" z="1684.27881" mesh="idseal_door_02b.cga" state="0x8">
+			<box x1="410.583832" y1="170.954132" z1="1661.19788" x2="412.000458" y2="194.507" z2="1680.02234" />
+		</staticdoor>
+		<staticdoor keyid="185000219" doorid="390" x="780.982544" y="340.629822" z="1696.58862" mesh="idseal_2st_door_01a.cga" state="0xA">
+			<box x1="776.3757" y1="338.675842" z1="1693.227" x2="785.5894" y2="342.583771" z2="1711.36621" />
+		</staticdoor>
+		<staticdoor doorid="391" x="403.59256" y="195.2992" z="1686.673" mesh="idseal_door_01a.cga" state="0x8">
+			<box x1="399.8866" y1="195.169128" z1="1684.02148" x2="407.281525" y2="195.461319" z2="1692.64685" />
+		</staticdoor>
+		<staticdoor keyid="185000219" doorid="480" x="850.1436" y="324.191528" z="1723.44751" mesh="idseal_2st_door_01a.cga" state="0xA">
+			<box x1="845.2903" y1="323.5392" z1="1720.08594" x2="854.997" y2="324.843842" z2="1738.2251" />
+		</staticdoor>
+	</world>
 	<world world="301400000">
-		<staticdoor doorid="428" x="531.4157" y="587.6455" z="395.351685" mesh="idsweep_door02.cga">
+		<staticdoor doorid="428" x="531.4157" y="587.6455" z="395.351685" mesh="idsweep_door02.cga" state="0x8">
 			<box x1="527.6157" y1="587.1455" z1="395.3608" x2="535.2157" y2="588.1455" z2="405.8521" />
 		</staticdoor>
-		<staticdoor doorid="430" x="549.194" y="315.47" z="399.006317" mesh="idsweep_door01.cga">
+		<staticdoor doorid="430" x="549.194" y="315.47" z="399.006317" mesh="idsweep_door01.cga" state="0xA">
 			<box x1="545.394" y1="314.97" z1="399.015442" x2="552.993958" y2="315.97" z2="409.506744" />
 		</staticdoor>
-		<staticdoor doorid="431" x="549.8981" y="429.919128" z="395.211426" mesh="idsweep_door02.cga">
+		<staticdoor doorid="431" x="549.8981" y="429.919128" z="395.211426" mesh="idsweep_door02.cga" state="0x8">
 			<box x1="546.0981" y1="429.419128" z1="395.220551" x2="553.698059" y2="430.419128" z2="405.711853" />
 		</staticdoor>
 	</world>
@@ -3277,16 +3021,16 @@
 		</staticdoor>
 	</world>
 	<world world="400030000">
-		<staticdoor doorid="176" x="344.460236" y="677.2234" z="693.1947" mesh="gab1_sub_door_01.cga">
+		<staticdoor doorid="176" x="344.460236" y="677.2234" z="693.1947" mesh="gab1_sub_door_01.cga" state="0x4">
 			<box x1="339.068329" y1="671.8315" z1="692.319336" x2="349.781769" y2="682.5449" z2="701.837646" />
 		</staticdoor>
-		<staticdoor doorid="177" x="345.2142" y="348.809448" z="693.142334" mesh="gab1_sub_door_01.cga">
+		<staticdoor doorid="177" x="345.2142" y="348.809448" z="693.142334" mesh="gab1_sub_door_01.cga" state="0x4">
 			<box x1="339.89267" y1="343.417542" z1="692.266968" x2="350.6061" y2="354.130981" z2="701.7853" />
 		</staticdoor>
-		<staticdoor doorid="178" x="673.676147" y="349.6166" z="693.201965" mesh="gab1_sub_door_01.cga">
+		<staticdoor doorid="178" x="673.676147" y="349.6166" z="693.201965" mesh="gab1_sub_door_01.cga" state="0x4">
 			<box x1="668.3547" y1="344.295074" z1="692.3266" x2="679.068054" y2="355.0085" z2="701.8449" />
 		</staticdoor>
-		<staticdoor doorid="179" x="672.8097" y="677.9018" z="693.155945" mesh="gab1_sub_door_01.cga">
+		<staticdoor doorid="179" x="672.8097" y="677.9018" z="693.155945" mesh="gab1_sub_door_01.cga" state="0x4">
 			<box x1="667.4178" y1="672.5803" z1="692.2806" x2="678.1312" y2="683.2937" z2="701.7989" />
 		</staticdoor>
 	</world>
@@ -3377,45 +3121,6 @@
 		</staticdoor>
 		<staticdoor keyid="1" doorid="860" x="664.278564" y="2921.14941" z="416.936249" mesh="bu_y_boss_rockdoor_01a.cga" state="0x4">
 			<box x1="617.5486" y1="2900.09033" z1="407.207367" x2="735.6391" y2="2984.67261" z2="470.523468" />
-		</staticdoor>
-	</world>
-	<world world="600030000">
-		<staticdoor doorid="164" x="144.41391" y="2062.75146" z="296.887451" mesh="jail_entrance_door.cga" state="0x2">
-			<box x1="138.800385" y1="2059.84082" z1="294.4358" x2="150.034836" y2="2065.67725" z2="307.5787" />
-		</staticdoor>
-	</world>
-	<world world="600050000">
-		<staticdoor type="ABYSS" doorid="290" x="2002.98352" y="1800.22986" z="317.136078" mesh="rune_castle_door.cgf">
-			<box x1="1996.89624" y1="1798.02673" z1="317.073425" x2="2008.87769" y2="1802.3811" z2="327.8554" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="1668" x="2103.358" y="1872.5542" z="317.128" mesh="rune_castle_door.cgf">
-			<box x1="2099.15869" y1="1867.27368" z1="317.065338" x2="2107.437" y2="1877.67493" z2="327.847321" />
-		</staticdoor>
-	</world>
-	<world world="600060000">
-		<staticdoor type="ABYSS" doorid="888" x="2707.71118" y="2648.12915" z="255.50174" mesh="ldf5_castle_door_01.cgf">
-			<box x1="2702.82178" y1="2642.996" z1="254.3505" x2="2712.67773" y2="2653.34521" z2="263.457" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="1124" x="2609.46436" y="2739.55273" z="255.3785" mesh="ldf5_castle_door_01.cgf">
-			<box x1="2604.575" y1="2734.41968" z1="254.227249" x2="2614.431" y2="2744.7688" z2="263.333771" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="1321" x="2728.29956" y="2768.66821" z="254.653625" mesh="ldf5_castle_door_01.cgf">
-			<box x1="2723.0835" y1="2763.77881" z1="253.50238" x2="2733.43262" y2="2773.63477" z2="262.6089" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="1657" x="2588.68018" y="2618.91162" z="254.596741" mesh="ldf5_castle_door_01.cgf">
-			<box x1="2583.547" y1="2613.945" z1="253.4455" x2="2593.89624" y2="2623.801" z2="262.552" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="2443" x="1433.1864" y="718.143738" z="130.573669" mesh="ldf5_flycastle_door_02.cgf">
-			<box x1="1429.3396" y1="716.2343" z1="127.653183" x2="1437.06116" y2="720.0531" z2="138.129242" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="2467" x="1433.2688" y="658.8785" z="130.560425" mesh="ldf5_flycastle_door_02.cgf">
-			<box x1="1429.394" y1="656.9691" z1="127.639938" x2="1437.1156" y2="660.7879" z2="138.116" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="2468" x="1462.883" y="688.461853" z="130.593369" mesh="ldf5_flycastle_door_02.cgf">
-			<box x1="1460.97375" y1="684.587036" z1="127.672882" x2="1464.79248" y2="692.308655" z2="138.148941" />
-		</staticdoor>
-		<staticdoor type="ABYSS" doorid="2469" x="1403.593" y="688.440857" z="130.58638" mesh="ldf5_flycastle_door_02.cgf">
-			<box x1="1401.68359" y1="684.594055" z1="127.665894" x2="1405.50232" y2="692.3157" z2="138.141953" />
 		</staticdoor>
 	</world>
 	<world world="600090000">
@@ -6484,12 +6189,12 @@
 		</staticdoor>
 	</world>
 	<world world="900190000">
-		<staticdoor doorid="1" x="95.06283" y="74.55054" z="20.82549" mesh="idldf5re_solo_door_01.cga">
+		<staticdoor doorid="1" x="95.06283" y="74.55054" z="20.82549" mesh="idldf5re_solo_door_01.cga" state="0x2">
 			<box x1="89.532814" y1="73.91663" z1="20.8202477" x2="100.877518" y2="75.06342" z2="30.2200489" />
 		</staticdoor>
 	</world>
 	<world world="900200000">
-		<staticdoor doorid="1" x="95.06283" y="74.55054" z="20.82549" mesh="idldf5re_solo_door_01.cga">
+		<staticdoor doorid="1" x="95.06283" y="74.55054" z="20.82549" mesh="idldf5re_solo_door_01.cga" state="0x2">
 			<box x1="89.532814" y1="73.91663" z1="20.8202477" x2="100.877518" y2="75.06342" z2="30.2200489" />
 		</staticdoor>
 	</world>
