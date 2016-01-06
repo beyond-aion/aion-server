@@ -8,11 +8,7 @@
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="ARENA_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
 					</gd_worlds>
 					<gd_ratings>
@@ -3054,140 +3050,6 @@
 						<spot x="937.3000" y="2966.2000" z="1646.3000" h="32"/>
 					</spawn>
 				 </spawn_map>
-				<!-- Sarpan -->
-		        <spawn_map map_id="600020000">
-					<!-- Casre -->
-					<spawn npc_id="831433" respawn_time="295">
-						<spot x="1330.1000" y="1477.8000" z="593.9000" h="74"/>
-					</spawn>
-					<!-- Rella -->
-					<spawn npc_id="831434" respawn_time="295">
-						<spot x="1331.2000" y="1476.4000" z="593.9000" h="73"/>
-					</spawn>
-					<!-- Jorpine (MON-THU) -->
-					<spawn npc_id="831435" respawn_time="295">
-						<spot x="1328.2000" y="1478.2000" z="593.9000" h="73"/>
-					</spawn>
-					<!-- Yennu (MON-THU) -->
-					<spawn npc_id="831436" respawn_time="295">
-						<spot x="1365" y="1506" z="593.9000" h="73"/>
-					</spawn>
-					<!-- Dalloren (FRI-SAT) -->
-					<spawn npc_id="831437" respawn_time="295">
-						<spot x="1328.2000" y="1478.2000" z="593.9000" h="73"/>
-					</spawn>
-					<!-- Dalliea (FRI-SAT) -->
-					<spawn npc_id="831518" respawn_time="295">
-						<spot x="1331" y="1474" z="593.9000" h="17"/>
-					</spawn>
-					<!-- Largos -->
-					<spawn npc_id="831439" respawn_time="295">
-						<spot x="1365.2000" y="1504.2000" z="593.9000" h="8"/>
-					</spawn>
-					<!-- Yukita -->
-					<spawn npc_id="831440" respawn_time="295">
-						<spot x="1366" y="1502.9000" z="593.9000" h="18"/>
-					</spawn>
-					<!-- Hylian (MON-THU) -->
-					<spawn npc_id="831441" respawn_time="295">
-						<spot x="1367.6000" y="1501.9000" z="593.9000" h="17"/>
-					</spawn>
-					<!-- Rordah (MON-THU) -->
-					<spawn npc_id="831442" respawn_time="295">
-						<spot x="1331" y="1474" z="593.9000" h="17"/>
-					</spawn>
-					<!-- Mazka (FRI-SAT) -->
-					<spawn npc_id="831443" respawn_time="295">
-						<spot x="1367.6000" y="1501.9000" z="593.9000" h="17"/>
-					</spawn>
-					<!-- Deshna (FRI-SAT) -->
-					<spawn npc_id="831524" respawn_time="295">
-						<spot x="1365" y="1506" z="593.9000" h="73"/>
-					</spawn>
-					<!-- Medical Tent -->
-					<spawn npc_id="831445" respawn_time="295">
-						<spot x="1333.2000" y="1479.4000" z="593.9000" h="74"/>
-					</spawn>
-					<!-- Medical Tent -->
-					<spawn npc_id="831446" respawn_time="295">
-						<spot x="1363" y="1502" z="593.9000" h="11"/>
-					</spawn>
-					<!-- Medical Supplies -->
-					<spawn npc_id="831447" respawn_time="295">
-						<spot x="1327.9000" y="1484.8000" z="593.9000" h="70"/>
-					</spawn>
-					<!-- Medical Supplies -->
-					<spawn npc_id="831448" respawn_time="295">
-						<spot x="1361.6000" y="1507.3000" z="593.9000" h="7"/>
-					</spawn>
-				 </spawn_map>
-				<!-- Tiamaranta -->
-		        <spawn_map map_id="600030000">
-					<!-- Casre -->
-					<spawn npc_id="831433" respawn_time="295">
-						<spot x="146.9000" y="1568.4000" z="295.8000" h="30"/>
-					</spawn>
-					<!-- Rella -->
-					<spawn npc_id="831434" respawn_time="295">
-						<spot x="148.7000" y="1568.4000" z="295.8000" h="31"/>
-					</spawn>
-					<!-- Jorpine (MON-THU) -->
-					<spawn npc_id="831435" respawn_time="295">
-						<spot x="150.4000" y="1569.8000" z="295.7000" h="30"/>
-					</spawn>
-					<!-- Yennu (MON-THU) -->
-					<spawn npc_id="831436" respawn_time="295">
-						<spot x="145.7000" y="1570.2000" z="295.8000" h="37"/>
-					</spawn>
-					<!-- Dalloren (FRI-SAT) -->
-					<spawn npc_id="831437" respawn_time="295">
-						<spot x="150.4000" y="1569.8000" z="295.7000" h="30"/>
-					</spawn>
-					<!-- Dalliea (FRI-SAT) -->
-					<spawn npc_id="831518" respawn_time="295">
-						<spot x="145.7000" y="1570.2000" z="295.8000" h="37"/>
-					</spawn>
-					<!-- Largos -->
-					<spawn npc_id="831439" respawn_time="295">
-						<spot x="172.3000" y="1906.1000" z="295.1000" h="95"/>
-					</spawn>
-					<!-- Yukita -->
-					<spawn npc_id="831440" respawn_time="295">
-						<spot x="170.5000" y="1905.9000" z="295.1000" h="87"/>
-					</spawn>
-					<!-- Hylian (MON-THU) -->
-					<spawn npc_id="831441" respawn_time="295">
-						<spot x="169.5000" y="1905.5000" z="295.1000" h="90"/>
-					</spawn>
-					<!-- Rordah (MON-THU) -->
-					<spawn npc_id="831442" respawn_time="295">
-						<spot x="173.4000" y="1905.1000" z="295.2000" h="86"/>
-					</spawn>
-					<!-- Mazka (FRI-SAT) -->
-					<spawn npc_id="831443" respawn_time="295">
-						<spot x="169.5000" y="1905.5000" z="295.1000" h="90"/>
-					</spawn>
-					<!-- Deshna (FRI-SAT) -->
-					<spawn npc_id="831524" respawn_time="295">
-						<spot x="173.4000" y="1905.1000" z="295.2000" h="86"/>
-					</spawn>
-					<!-- Medical Tent -->
-					<spawn npc_id="831445" respawn_time="295">
-						<spot x="148" y="1564.3000" z="295.8000" h="32"/>
-					</spawn>
-					<!-- Medical Tent -->
-					<spawn npc_id="831446" respawn_time="295">
-						<spot x="171.5000" y="1909.1000" z="295.1000" h="90"/>
-					</spawn>
-					<!-- Medical Supplies -->
-					<spawn npc_id="831447" respawn_time="295">
-						<spot x="142.1000" y="1568.8000" z="295.8000" h="29"/>
-					</spawn>
-					<!-- Medical Supplies -->
-					<spawn npc_id="831448" respawn_time="295">
-						<spot x="177.4000" y="1909" z="295.5000" h="74"/>
-					</spawn>
-				 </spawn_map>
 			</spawns>
 		</event>
 		<!-- TODO: Check on retail NPC spawn position. real activation date is 2015-04-01 to 2015-05-22 but make it 2015 for test purpose -->
@@ -3216,17 +3078,6 @@
 					<!-- Marayrinerk -->
 					<spawn npc_id="831119" respawn_time="295">
 						<spot x="1458.9354" y="1506.0077" z="573.0719" h="60"/>
-					</spawn>
-				</spawn_map>
-				<!-- Sarpan -->
-				<spawn_map map_id="600020000">
-					<!-- Indiarunark -->
-					<spawn npc_id="831117" respawn_time="295">
-						<spot x="1398.5302" y="1437.847" z="599.3814" h="42"/>
-					</spawn>
-					<!-- Marayrinerk -->
-					<spawn npc_id="831119" respawn_time="295">
-						<spot x="1397.5477" y="1435.0927" z="599.3814" h="42"/>
 					</spawn>
 				</spawn_map>
 				<!-- Inggison -->
@@ -3260,11 +3111,7 @@
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="ARENA_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
 					</gd_worlds>
 					<gd_ratings>
@@ -3465,80 +3312,6 @@
 						<spot x="1541" y="1511" z="566"/>
 					</spawn>
 				</spawn_map>
-				<!-- Tiamaranta -->
-				<spawn_map map_id="600030000">
-					<!-- Suspicious Alchemist -->
-					<spawn npc_id="831788" respawn_time="295">
-						<spot x="152" y="1863" z="295"/>
-						<spot x="156" y="1607" z="295"/>
-					</spawn>
-					<!-- Suspicious Alchemist -->
-					<spawn npc_id="831787" respawn_time="295">
-						<spot x="154" y="1860" z="295"/>
-						<spot x="156" y="1605" z="295" h="116"/>
-					</spawn>
-					<!-- Premium Treasure Box -->
-					<spawn npc_id="831785" respawn_time="295">
-						<spot x="162" y="1850" z="295"/>
-						<spot x="162" y="1855" z="295"/>
-						<spot x="162" y="1845" z="295"/>
-						<spot x="160" y="1602" z="295"/>
-						<spot x="160" y="1592" z="295"/>
-						<spot x="160" y="1597" z="295"/>
-					</spawn>
-					<!-- Common Treasure Box -->
-					<spawn npc_id="831786" respawn_time="295">
-						<spot x="162" y="1864" z="295"/>
-						<spot x="162" y="1861" z="295"/>
-						<spot x="165" y="1861" z="295"/>
-						<spot x="162" y="1867" z="295"/>
-						<spot x="165" y="1864" z="295"/>
-						<spot x="165" y="1867" z="295"/>
-						<spot x="159" y="1616" z="295"/>
-						<spot x="162" y="1616" z="295"/>
-						<spot x="159" y="1610" z="295"/>
-						<spot x="159" y="1613" z="295"/>
-						<spot x="162" y="1610" z="295"/>
-						<spot x="162" y="1613" z="295"/>
-					</spawn>
-				</spawn_map>
-				<!-- Katalam -->
-				<spawn_map map_id="110010000">
-					<!-- Suspicious Alchemist -->
-					<spawn npc_id="831787" respawn_time="295">
-						<spot x="372" y="426" z="282" h="60"/>
-						<spot x="354" y="2710" z="143" h="96"/>
-					</spawn>
-					<!-- Suspicious Alchemist -->
-					<spawn npc_id="831788" respawn_time="295">
-						<spot x="371" y="429" z="282" h="60"/>
-						<spot x="353" y="2707" z="143"/>
-					</spawn>
-					<!-- Premium Treasure Box -->
-					<spawn npc_id="831785" respawn_time="295">
-						<spot x="356" y="426" z="282"/>
-						<spot x="357" y="421" z="282"/>
-						<spot x="354" y="432" z="282"/>
-						<spot x="345" y="2699" z="143" h="3"/>
-						<spot x="340" y="2698" z="143" h="3"/>
-						<spot x="334" y="2699" z="143" h="3"/>
-					</spawn>
-					<!-- Common Treasure Box -->
-					<spawn npc_id="831786" respawn_time="295">
-						<spot x="363" y="430" z="282" h="3"/>
-						<spot x="363" y="433" z="282" h="3"/>
-						<spot x="366" y="436" z="282" h="3"/>
-						<spot x="366" y="430" z="282" h="3"/>
-						<spot x="366" y="433" z="282" h="3"/>
-						<spot x="363" y="436" z="282" h="3"/>
-						<spot x="358" y="2712" z="143"/>
-						<spot x="361" y="2715" z="143"/>
-						<spot x="358" y="2715" z="143"/>
-						<spot x="361" y="2712" z="143"/>
-						<spot x="361" y="2709" z="143"/>
-						<spot x="358" y="2709" z="143"/>
-					</spawn>
-				</spawn_map>
 			</spawns>
 		</event>
 		<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00+00:00" end="2015-10-23T00:00:00+00:00" theme="brax_cafe">
@@ -3608,55 +3381,6 @@
 				</spawn_map>
 			</spawns>
 		</event>
-		<event name="Nightmare Circus" start="2014-11-15T00:00:00+00:00" end="2014-11-30T00:00:00+00:00">
-			<quests>
-				<maintainable>80332;80333;80334;80335;80336;80337;80338;80339;80340;80341;80342;80343</maintainable>
-			</quests>
-			<spawns>
-				<!-- Pandaemonium -->
-				<spawn_map map_id="120010000">
-					<!-- Saia (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831714" respawn_time="295">
-						<spot x="1602.3253" y="1407.0521" z="193.12877" h="115"/>
-					</spawn>
-				</spawn_map>
-				<!-- Tiamaranta Asmo -->
-				<spawn_map map_id="600030000">
-					<!-- Saia (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831714" respawn_time="295">
-						<spot x="168.6338" y="1909.073" z="295.19965" h="74"/>
-					</spawn>
-				</spawn_map>
-				<!-- Katalam Asmo -->
-				<spawn_map map_id="600050000">
-					<!-- Saia (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831714" respawn_time="295">
-						<spot x="359.4249" y="409.23462" z="282.2278" h="1"/>
-					</spawn>
-				</spawn_map>
-				<!-- Sanctum -->
-				<spawn_map map_id="110010000">
-					<!-- Dormira (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831712" respawn_time="295">
-						<spot x="1455.6761" y="1503.6438" z="573.0719" h="55"/>
-					</spawn>
-				</spawn_map>
-				<!-- Tiamaranta Elyos -->
-				<spawn_map map_id="600030000">
-					<!-- Dormira (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831712" respawn_time="295">
-						<spot x="121.92181" y="1572.6621" z="295.8338" h="11"/>
-					</spawn>
-				</spawn_map>
-				<!-- Katalam Elyos -->
-				<spawn_map map_id="600050000">
-					<!-- Dormira (Nightmare Circus Event NPC) -->
-					<spawn npc_id="831712" respawn_time="295">
-						<spot x="350.15048" y="2705.642" z="143.22882" h="114"/>
-					</spawn>
-				</spawn_map>
-			</spawns>
-		</event>
 		<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00+00:00" end="2015-12-04T00:00:00+00:00">
 			<event_drops>
 				<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="5" min_diff="-20" max_diff="70">
@@ -3674,11 +3398,6 @@
 					<gd_worlds>
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
-
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
 				<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="0.5" min_diff="-20" max_diff="70">
@@ -3694,10 +3413,6 @@
 					<gd_worlds>
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
 			</event_drops>
@@ -3727,11 +3442,7 @@
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="ARENA_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
@@ -3751,11 +3462,7 @@
 						<gd_world wd_type="ABYSS_INSTANCE"/>
 						<gd_world wd_type="ARENA_INSTANCE"/>
 						<gd_world wd_type="BALAUREA_INSTANCE"/>
-						<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-						<gd_world wd_type="SARPAN_INSTANCE"/>
-						<gd_world wd_type="KATALAM_INSTANCE"/>
 						<gd_world wd_type="DREDGION_INSTANCE"/>
-						<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
 						<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
 					</gd_worlds>
 				</gd_rule>
@@ -3940,29 +3647,6 @@
 					<!-- Mendrunerk -->
 					<spawn npc_id="832750" respawn_time="295">
 						<spot x="1275.3" y="1350.1" z="204.4608" h="90"/>
-					</spawn>
-				</spawn_map>
-			</spawns>
-		</event>
-		<event name="Glory Points Exchange" start="2015-08-30T00:00:00+00:00" end="2015-09-14T00:00:00+00:00">
-			<quests>
-				<maintainable>80565;80566;80581;80582;80583;80584</maintainable>
-			</quests>
-			<spawns>
-				<!-- Katalam -->
-				<spawn_map map_id="600050000">
-					<!-- Rollirunerk -->
-					<spawn npc_id="832264" respawn_time="295">
-						<spot x="297.4172" y="2683.151" z="143.31617" h="30"/>
-						<spot x="355.41617" y="425.11066" z="282.2036" h="2"/>
-					</spawn>
-					<!-- Victria -->
-					<spawn npc_id="832015" respawn_time="295">
-						<spot x="302.26022" y="2683.017" z="143.31691" h="29"/>
-					</spawn>
-					<!-- Nesfir -->
-					<spawn npc_id="832016" respawn_time="295">
-						<spot x="354.83505" y="430.45798" z="282.2041" h="1"/>
 					</spawn>
 				</spawn_map>
 			</spawns>
