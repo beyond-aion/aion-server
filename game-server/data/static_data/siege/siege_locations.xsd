@@ -41,7 +41,6 @@
 			<xs:enumeration value="AGENT_FIGHT"/>
 			<xs:enumeration value="INDUN"/>
 			<xs:enumeration value="UNDERPASS"/>
-			<xs:enumeration value="SOURCE"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="ArtifactActivation">

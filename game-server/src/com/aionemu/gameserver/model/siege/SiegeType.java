@@ -14,6 +14,5 @@ public enum SiegeType {
 
 	// Unk
 	INDUN,
-	UNDERPASS,
-	SOURCE;
+	UNDERPASS;
 }
