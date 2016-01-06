@@ -38,6 +38,30 @@
 			<gd_item id="166100011" name="Greater Supplements (Mythic)"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Earth Scrap" base_chance="45">
+		<gd_maps>
+			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012592" name="Earth Scrap"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Crystal and Ore" base_chance="13.33" >
+		<gd_maps>
+			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012600" name="Patience Crystal"/>
+			<gd_item id="152012602" name="Ore of Patience"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
