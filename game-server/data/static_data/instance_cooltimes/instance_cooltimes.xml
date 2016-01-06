@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<instance_cooltimes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="instance_cooltimes.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<instance_cooltimes>
 	<instance_cooltime race="PC_ALL" worldId="310090000" id="1" sync_id="1">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>0</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>41</enter_min_level_light>
@@ -33,7 +33,7 @@
 	<instance_cooltime race="PC_ALL" worldId="310050000" id="4" sync_id="4">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>16</maxcount>
+		<maxcount>10</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>35</enter_min_level_light>
@@ -43,7 +43,7 @@
 	<instance_cooltime race="PC_ALL" worldId="320110000" id="5" sync_id="5">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>16</maxcount>
+		<maxcount>10</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>35</enter_min_level_light>
@@ -53,7 +53,7 @@
 	<instance_cooltime race="PC_ALL" worldId="310110000" id="6" sync_id="6">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>16</maxcount>
+		<maxcount>10</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>46</enter_min_level_light>
@@ -63,7 +63,7 @@
 	<instance_cooltime race="PC_ALL" worldId="320130000" id="7" sync_id="7">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>16</maxcount>
+		<maxcount>10</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>46</enter_min_level_light>
@@ -187,7 +187,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>46</enter_min_level_light>
+		<enter_max_level_light>50</enter_max_level_light>
 		<enter_min_level_dark>46</enter_min_level_dark>
+		<enter_max_level_dark>50</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="ELYOS" worldId="310030000" id="20" sync_id="20">
@@ -196,7 +198,6 @@
 		<maxcount>1</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>15</enter_min_level_light>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="ELYOS" worldId="310040000" id="21" sync_id="21">
@@ -205,7 +206,6 @@
 		<maxcount>1</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>35</enter_min_level_light>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="ASMODIANS" worldId="320030000" id="22" sync_id="22">
@@ -238,7 +238,7 @@
 	<instance_cooltime race="PC_ALL" worldId="310100000" id="25" sync_id="25">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>0</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>35</enter_min_level_light>
@@ -415,6 +415,26 @@
 		<enter_min_level_dark>1</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="300020000" id="52" sync_id="52">
+		<type>RELATIVE</type>
+		<ent_cool_time>0</ent_cool_time>
+		<maxcount>1</maxcount>
+		<max_member_light>1</max_member_light>
+		<max_member_dark>1</max_member_dark>
+		<enter_min_level_light>1</enter_min_level_light>
+		<enter_min_level_dark>1</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="300200000" id="46" sync_id="46">
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>16</maxcount>
+		<max_member_light>1</max_member_light>
+		<max_member_dark>1</max_member_dark>
+		<enter_min_level_light>16</enter_min_level_light>
+		<enter_min_level_dark>16</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300210000" id="43" sync_id="43">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
@@ -422,7 +442,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>51</enter_min_level_light>
+		<enter_max_level_light>55</enter_max_level_light>
 		<enter_min_level_dark>51</enter_min_level_dark>
+		<enter_max_level_dark>55</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300220000" id="44" sync_id="44">
@@ -446,50 +468,10 @@
 		<enter_min_level_dark>37</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300200000" id="46" sync_id="46">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>16</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>16</enter_min_level_light>
-		<enter_min_level_dark>16</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300260000" id="47" sync_id="47">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>12</max_member_light>
-		<max_member_dark>12</max_member_dark>
-		<enter_min_level_light>57</enter_min_level_light>
-		<enter_min_level_dark>57</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300270000" id="48" sync_id="48">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>12</max_member_light>
-		<max_member_dark>12</max_member_dark>
-		<enter_min_level_light>57</enter_min_level_light>
-		<enter_min_level_dark>57</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300280000" id="49" sync_id="49">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>2</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>59</enter_min_level_light>
-		<enter_min_level_dark>59</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300240000" id="50" sync_id="50">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>55</enter_min_level_light>
@@ -506,14 +488,14 @@
 		<enter_min_level_dark>50</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300020000" id="52" sync_id="52">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
+	<instance_cooltime race="PC_ALL" worldId="300280000" id="49" sync_id="49">
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>2</maxcount>
+		<max_member_light>6</max_member_light>
+		<max_member_dark>6</max_member_dark>
+		<enter_min_level_light>57</enter_min_level_light>
+		<enter_min_level_dark>57</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300290000" id="53" sync_id="53">
@@ -545,16 +527,6 @@
 		<enter_min_level_light>1</enter_min_level_light>
 		<enter_min_level_dark>1</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300310000" id="56" sync_id="56">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>5</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>56</enter_min_level_light>
-		<enter_min_level_dark>56</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300320000" id="57" sync_id="57">
 		<type>DAILY</type>
@@ -606,46 +578,6 @@
 		<enter_min_level_dark>46</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300380000" id="64" sync_id="62">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>12</max_member_light>
-		<max_member_dark>12</max_member_dark>
-		<enter_min_level_light>57</enter_min_level_light>
-		<enter_min_level_dark>57</enter_min_level_dark>
-		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300390000" id="65" sync_id="63">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300330000" id="66" sync_id="64">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300400000" id="67" sync_id="65">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="320150000" id="68" sync_id="66">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
@@ -677,16 +609,6 @@
 		<enter_min_level_dark>46</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300410000" id="71" sync_id="69">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>false</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300440000" id="73" sync_id="70">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
@@ -694,7 +616,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>56</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>56</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300450000" id="74" sync_id="71">
@@ -717,44 +641,14 @@
 		<enter_min_level_dark>40</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300470000" id="76" sync_id="73">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>55</enter_min_level_light>
-		<enter_min_level_dark>55</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300480000" id="77" sync_id="74">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
+		<type>RELATIVE</type>
+		<ent_cool_time>0</ent_cool_time>
 		<maxcount>1</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
 		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300490000" id="78" sync_id="75">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300500000" id="79" sync_id="76">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300510000" id="80" sync_id="77">
@@ -763,8 +657,8 @@
 		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
+		<enter_min_level_light>57</enter_min_level_light>
+		<enter_min_level_dark>57</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300520000" id="81" sync_id="78">
@@ -778,20 +672,11 @@
 		<enter_min_level_dark>60</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300530000" id="82" sync_id="79">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300540000" id="83" sync_id="80">
-		<type>DAILY</type>
+		<type>WEEKLY</type>
+		<typevalue>Tue,Thu,Sat,Sun</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>24</max_member_light>
 		<max_member_dark>24</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -809,13 +694,13 @@
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300560000" id="85" sync_id="82">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
 		<maxcount>1</maxcount>
 		<max_member_light>3</max_member_light>
 		<max_member_dark>3</max_member_dark>
-		<enter_min_level_light>51</enter_min_level_light>
-		<enter_min_level_dark>51</enter_min_level_dark>
+		<enter_min_level_light>45</enter_min_level_light>
+		<enter_min_level_dark>45</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300570000" id="86" sync_id="83">
@@ -828,31 +713,18 @@
 		<enter_min_level_dark>46</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300580000" id="87" sync_id="99">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300590000" id="88" sync_id="100">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
+		<enter_min_level_light>63</enter_min_level_light>
+		<enter_min_level_dark>63</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="900130000" id="89" sync_id="52">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
+	<instance_cooltime race="PC_ALL" worldId="900130000" id="89">
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>1</enter_min_level_light>
@@ -887,7 +759,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>60</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>60</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="900150000" id="93" sync_id="87">
@@ -897,7 +771,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>60</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>60</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300800000" id="94" sync_id="90">
@@ -911,26 +787,6 @@
 		<enter_min_level_dark>65</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="300900000" id="95" sync_id="91">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301000000" id="96" sync_id="88">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>1</enter_min_level_light>
-		<enter_min_level_dark>1</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301100000" id="97" sync_id="92">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
@@ -941,21 +797,11 @@
 		<enter_min_level_dark>46</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301010000" id="98" sync_id="89">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301110000" id="99" sync_id="93">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -963,29 +809,23 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301120000" id="100" sync_id="94">
-		<type>DAILY</type>
+		<type>WEEKLY</type>
+		<typevalue>Tue,Thu,Sat,Sun</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>12</max_member_light>
 		<max_member_dark>12</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301020000" id="101" sync_id="95">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301130000" id="103" sync_id="96">
-		<type>DAILY</type>
+		<type>WEEKLY</type>
+		<typevalue>Tue,Thu,Sat,Sun</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -993,44 +833,13 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301140000" id="104" sync_id="97">
-		<type>WEEKLY</type>
-		<typevalue>Wed</typevalue>
+		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
 		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301030000" id="105" sync_id="89">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>3</max_member_light>
-		<max_member_dark>3</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301040000" id="106" sync_id="95">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>3</max_member_light>
-		<max_member_dark>3</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301050000" id="107" sync_id="98">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>3</max_member_light>
-		<max_member_dark>3</max_member_dark>
-		<enter_min_level_light>60</enter_min_level_light>
-		<enter_min_level_dark>60</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301160000" id="109" sync_id="102">
@@ -1043,39 +852,9 @@
 		<enter_min_level_dark>30</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301170000" id="110" sync_id="79">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301180000" id="111" sync_id="99">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>6</max_member_light>
-		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301190000" id="112" sync_id="74">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
-		<max_member_light>1</max_member_light>
-		<max_member_dark>1</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
-		<can_enter_mentor>true</can_enter_mentor>
-	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301200000" id="113" sync_id="106">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
 		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
@@ -1084,31 +863,36 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301210000" id="114" sync_id="107">
-		<type>DAILY</type>
+		<type>WEEKLY</type>
+		<typevalue>Mon,Wed,Fri,Sun</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301220000" id="115" sync_id="108">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>2</maxcount>
+		<maxcount>3</maxcount>
 		<max_member_light>24</max_member_light>
 		<max_member_dark>24</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301230000" id="116" sync_id="109">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -1122,7 +906,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301240000" id="118" sync_id="111">
@@ -1132,7 +918,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301250000" id="119" sync_id="112">
@@ -1142,23 +930,27 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="900190000" id="120" sync_id="113">
 		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>10</maxcount>
+		<ent_cool_time>1</ent_cool_time>
+		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>1</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>1</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301270000" id="121" sync_id="114">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -1172,7 +964,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301280000" id="123" sync_id="111">
@@ -1182,7 +976,9 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301290000" id="124" sync_id="112">
@@ -1192,33 +988,37 @@
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301310000" id="125" sync_id="118">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>2</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>61</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>61</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301320000" id="126" sync_id="126">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
+	<instance_cooltime race="PC_ALL" worldId="301320000" id="126" sync_id="119">
+		<type>RELATIVE</type>
+		<ent_cool_time>0</ent_cool_time>
 		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
-		<enter_min_level_light>65</enter_min_level_light>
-		<enter_min_level_dark>65</enter_min_level_dark>
+		<enter_min_level_light>63</enter_min_level_light>
+		<enter_min_level_dark>63</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301330000" id="127" sync_id="127">
+	<instance_cooltime race="PC_ALL" worldId="301330000" id="127" sync_id="120">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>1</maxcount>
+		<maxcount>3</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -1228,11 +1028,13 @@
 	<instance_cooltime race="PC_ALL" worldId="900200000" id="128" sync_id="121">
 		<type>RELATIVE</type>
 		<ent_cool_time>0</ent_cool_time>
-		<maxcount>10</maxcount>
+		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>1</enter_min_level_light>
+		<enter_max_level_light>65</enter_max_level_light>
 		<enter_min_level_dark>1</enter_min_level_dark>
+		<enter_max_level_dark>65</enter_max_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301340000" id="129" sync_id="122">
@@ -1245,36 +1047,95 @@
 		<enter_min_level_dark>65</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301360000" id="131" sync_id="93">
+	<instance_cooltime race="PC_ALL" worldId="301360000" id="131" sync_id="124">
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
 		<enter_min_level_dark>65</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
-	<instance_cooltime race="PC_ALL" worldId="301370000" id="132" sync_id="109">
-		<type>WEEKLY</type>
-		<typevalue>Wed</typevalue>
-		<ent_cool_time>900</ent_cool_time>
-		<maxcount>4</maxcount>
+	<instance_cooltime race="PC_ALL" worldId="301370000" id="132">
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
 		<enter_min_level_dark>65</enter_min_level_dark>
 		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="301380000" id="134" sync_id="126">
+		<type>WEEKLY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>5</maxcount>
+		<max_member_light>6</max_member_light>
+		<max_member_dark>6</max_member_dark>
+		<enter_min_level_light>63</enter_min_level_light>
+		<enter_min_level_dark>63</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="301390000" id="135" sync_id="127">
+		<type>WEEKLY</type>
+		<typevalue>Wed</typevalue>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>2</maxcount>
+		<max_member_light>12</max_member_light>
+		<max_member_dark>12</max_member_dark>
+		<enter_min_level_light>65</enter_min_level_light>
+		<enter_min_level_dark>65</enter_min_level_dark>
+		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301400000" id="136" sync_id="128">
-		<type>RELATIVE</type>
-		<ent_cool_time>0</ent_cool_time>
-		<maxcount>1</maxcount>
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>2</maxcount>
 		<max_member_light>3</max_member_light>
 		<max_member_dark>3</max_member_dark>
 		<enter_min_level_light>40</enter_min_level_light>
+		<enter_min_level_dark>40</enter_min_level_dark>
+		<can_enter_mentor>false</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="300610000" id="137" sync_id="129">
+		<type>WEEKLY</type>
+		<typevalue>Wed</typevalue>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>5</maxcount>
+		<max_member_light>1</max_member_light>
+		<max_member_dark>1</max_member_dark>
+		<enter_min_level_light>60</enter_min_level_light>
+		<enter_min_level_dark>60</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="300620000" id="138" sync_id="130">
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>1</maxcount>
+		<max_member_light>6</max_member_light>
+		<max_member_dark>6</max_member_dark>
+		<enter_min_level_light>65</enter_min_level_light>
+		<enter_min_level_dark>65</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="301500000" id="139" sync_id="131">
+		<type>WEEKLY</type>
+		<typevalue>Wed</typevalue>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>2</maxcount>
+		<max_member_light>12</max_member_light>
+		<max_member_dark>12</max_member_dark>
+		<enter_min_level_light>65</enter_min_level_light>
 		<enter_min_level_dark>65</enter_min_level_dark>
 		<can_enter_mentor>false</can_enter_mentor>
+	</instance_cooltime>
+	<instance_cooltime race="PC_ALL" worldId="300630000" id="140" sync_id="132">
+		<type>DAILY</type>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>1</maxcount>
+		<max_member_light>12</max_member_light>
+		<max_member_dark>12</max_member_dark>
+		<enter_min_level_light>65</enter_min_level_light>
+		<enter_min_level_dark>65</enter_min_level_dark>
+		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 </instance_cooltimes>
