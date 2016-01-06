@@ -14,7 +14,7 @@
             <point x="200.84297" y="295.26022"/>
         </points>
     </zone>
-    <zone mapid="140010000" name="LIMITAREALIMIT_AREA1" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="140010000" name="LIMITAREALIMIT_AREA1_140010000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="96.0755" top="146.0755">
             <point x="298.50058" y="258.36505"/>
             <point x="298.33676" y="274.8251"/>

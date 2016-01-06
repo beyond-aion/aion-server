@@ -25,9 +25,9 @@
         </points>
     </zone>
     <zone mapid="300240000" name="ATRIUM_300240000" area_type="POLYGON" zone_type="SUB" priority="9" flags="6">
-        <points bottom="630.0" top="690.0">
-            <point x="595.34906" y="431.92"/>
-            <point x="594.675" y="461.67468"/>
+        <points bottom="627.6851" top="687.6851">
+            <point x="618.3871" y="436.12473"/>
+            <point x="619.264" y="462.86984"/>
             <point x="626.67114" y="461.68857"/>
             <point x="626.6255" y="481.47485"/>
             <point x="666.5717" y="481.43076"/>
@@ -75,7 +75,7 @@
         </points>
     </zone>
     <zone mapid="300240000" name="DREDGION_FABRICATION_ZONE_300240000" area_type="POLYGON" zone_type="SUB" priority="12" flags="6">
-        <points bottom="640.0" top="690.0">
+        <points bottom="628.72314" top="678.72314">
             <point x="436.22" y="372.59567"/>
             <point x="436.21994" y="488.58527"/>
             <point x="507.31848" y="488.736"/>
@@ -83,8 +83,8 @@
             <point x="521.5693" y="527.50806"/>
             <point x="537.9847" y="517.46277"/>
             <point x="537.9851" y="489.23486"/>
-            <point x="595.07965" y="488.9722"/>
-            <point x="594.86664" y="431.65982"/>
+            <point x="617.76447" y="490.92282"/>
+            <point x="618.1591" y="435.2646"/>
             <point x="624.1419" y="431.7852"/>
             <point x="623.7049" y="372.69992"/>
         </points>
@@ -100,7 +100,7 @@
             <point x="724.9234" y="426.92004"/>
         </points>
     </zone>
-    <zone mapid="300240000" name="IDSTATION_ITEMUSEAREA_3F" area_type="POLYGON" zone_type="ITEM_USE" flags="6">
+    <zone mapid="300240000" name="IDSTATION_ITEMUSEAREA_3F_300240000" area_type="POLYGON" zone_type="ITEM_USE" flags="6">
         <points bottom="890.0" top="940.0">
             <point x="92.283775" y="619.9553"/>
             <point x="100.90118" y="724.5449"/>
@@ -120,6 +120,64 @@
             <point x="436.4519" y="384.67004"/>
         </points>
     </zone>
+    <zone mapid="300240000" name="POWER_GENERATOR_NO_1_300240000" area_type="POLYGON" zone_type="SUB" priority="11" flags="6">
+        <points bottom="647.1056" top="677.1056">
+            <point x="595.93787" y="481.45245"/>
+            <point x="578.51074" y="480.78473"/>
+            <point x="568.115" y="464.0975"/>
+            <point x="579.8579" y="458.21246"/>
+            <point x="595.8412" y="458.52142"/>
+        </points>
+    </zone>
+    <zone mapid="300240000" name="POWER_GENERATOR_NO_2_300240000" area_type="POLYGON" zone_type="SUB" priority="11" flags="6">
+        <points bottom="647.0056" top="677.0056">
+            <point x="608.0122" y="429.52768"/>
+            <point x="593.5488" y="429.89258"/>
+            <point x="583.2983" y="417.7235"/>
+            <point x="583.0891" y="410.1724"/>
+            <point x="582.9923" y="399.1787"/>
+            <point x="584.5613" y="394.1818"/>
+            <point x="606.1911" y="394.29608"/>
+            <point x="607.26434" y="427.148"/>
+        </points>
+    </zone>
+    <zone mapid="300240000" name="POWER_GENERATOR_NO_3_300240000" area_type="POLYGON" zone_type="SUB" priority="11" flags="6">
+        <points bottom="647.1056" top="677.1056">
+            <point x="512.75146" y="510.466"/>
+            <point x="512.5188" y="503.5943"/>
+            <point x="514.2184" y="500.53427"/>
+            <point x="506.80078" y="491.70477"/>
+            <point x="506.73187" y="481.8273"/>
+            <point x="512.9065" y="472.11652"/>
+            <point x="524.3209" y="468.30487"/>
+            <point x="534.7835" y="471.0814"/>
+            <point x="541.45264" y="481.17"/>
+            <point x="541.90625" y="493.30542"/>
+            <point x="535.23267" y="501.79703"/>
+            <point x="536.0571" y="510.44763"/>
+            <point x="530.4629" y="517.0166"/>
+            <point x="524.39935" y="518.90735"/>
+        </points>
+    </zone>
+    <zone mapid="300240000" name="POWER_GENERATOR_NO_4_300240000" area_type="POLYGON" zone_type="SUB" priority="11" flags="6">
+        <points bottom="647.0259" top="677.0259">
+            <point x="450.37866" y="465.34143"/>
+            <point x="458.71646" y="465.79684"/>
+            <point x="458.42905" y="456.51337"/>
+            <point x="484.38455" y="458.20126"/>
+            <point x="468.14502" y="483.65823"/>
+            <point x="450.78625" y="483.62796"/>
+        </points>
+    </zone>
+    <zone mapid="300240000" name="POWER_GENERATOR_NO_5_300240000" area_type="POLYGON" zone_type="SUB" priority="11" flags="6">
+        <points bottom="649.90344" top="679.90344">
+            <point x="438.47318" y="391.51282"/>
+            <point x="454.2003" y="392.81946"/>
+            <point x="454.36264" y="415.19476"/>
+            <point x="438.09595" y="416.33148"/>
+            <point x="437.1848" y="395.5612"/>
+        </points>
+    </zone>
     <zone mapid="300240000" name="SKY_FORTRESS_COMMAND_CENTER_300240000" area_type="POLYGON" zone_type="SUB" priority="9" flags="6">
         <points bottom="890.0" top="960.0">
             <point x="202.9712" y="563.63934"/>
@@ -134,25 +192,25 @@
     </zone>
     <zone mapid="300240000" name="SKY_FORTRESS_WAREHOUSE_ZONE_300240000" area_type="POLYGON" zone_type="SUB" priority="12" flags="6">
         <points bottom="600.0" top="690.0">
-            <point x="460.1373" y="154.98685"/>
-            <point x="460.13724" y="339.42236"/>
-            <point x="598.06525" y="338.8924"/>
-            <point x="598.06525" y="363.9488"/>
-            <point x="690.7517" y="363.91095"/>
-            <point x="690.54913" y="324.8815"/>
-            <point x="640.4324" y="325.08725"/>
-            <point x="640.6573" y="208.84683"/>
-            <point x="659.25903" y="208.81505"/>
-            <point x="659.3933" y="184.65604"/>
-            <point x="639.6633" y="154.98688"/>
+            <point x="443.79507" y="161.80573"/>
+            <point x="443.795" y="346.24124"/>
+            <point x="581.723" y="345.71127"/>
+            <point x="581.723" y="370.76767"/>
+            <point x="674.4095" y="370.72983"/>
+            <point x="674.2069" y="331.70038"/>
+            <point x="624.09015" y="331.90613"/>
+            <point x="624.31506" y="215.66571"/>
+            <point x="642.9168" y="215.63393"/>
+            <point x="643.0511" y="191.47491"/>
+            <point x="623.3211" y="161.80576"/>
         </points>
     </zone>
     <zone mapid="300240000" name="SUPPLY_STATION_300240000" area_type="POLYGON" zone_type="SUB" priority="9" flags="6">
         <points bottom="600.0" top="650.0">
-            <point x="529.8047" y="15.123878"/>
-            <point x="529.8046" y="158.10188"/>
-            <point x="623.7013" y="157.98872"/>
-            <point x="623.4883" y="15.123906"/>
+            <point x="602.3335" y="26.488777"/>
+            <point x="602.33344" y="169.4668"/>
+            <point x="696.2301" y="169.35364"/>
+            <point x="696.0171" y="26.488806"/>
         </points>
     </zone>
     <zone mapid="300240000" name="TALON_LABORATORY_300240000" area_type="POLYGON" zone_type="SUB" priority="8" flags="6">

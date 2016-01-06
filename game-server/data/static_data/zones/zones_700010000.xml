@@ -4556,7 +4556,7 @@
             <point x="1406.5028" y="1808.7318"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_01_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_01_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1374.7024" y="1739.8308"/>
             <point x="1385.6295" y="1742.7767"/>
@@ -4572,7 +4572,7 @@
             <point x="1370.2252" y="1756.4672"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_02_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_02_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="87.770836" top="137.77084">
             <point x="1347.7892" y="1981.9478"/>
             <point x="1345.9897" y="1993.5431"/>
@@ -4588,7 +4588,7 @@
             <point x="1330.4879" y="1979.2614"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_10_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_10_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1349.599" y="1942.6472"/>
             <point x="1361.1116" y="1943.9418"/>
@@ -4604,7 +4604,7 @@
             <point x="1347.7794" y="1960.1456"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_12_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_12_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1258.707" y="1769.3522"/>
             <point x="1272.574" y="1768.7247"/>
@@ -4616,7 +4616,7 @@
             <point x="1258.971" y="1772.3641"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_13_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_13_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1236.5759" y="1736.7637"/>
             <point x="1247.7982" y="1728.0486"/>
@@ -4630,7 +4630,7 @@
             <point x="1239.2902" y="1740.4232"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_14_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_14_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1150.0284" y="1925.8348"/>
             <point x="1159.7966" y="1918.8313"/>
@@ -4658,7 +4658,7 @@
             <point x="1152.3596" y="1929.3518"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_3_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_3_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1316.7625" y="1755.3206"/>
             <point x="1326.7024" y="1754.3065"/>
@@ -4674,7 +4674,7 @@
             <point x="1320.8418" y="1794.6722"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_4_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_4_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1387.6155" y="1775.5918"/>
             <point x="1390.8185" y="1776.1938"/>
@@ -4690,7 +4690,7 @@
             <point x="1384.4318" y="1786.8285"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_5_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_5_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1409.5272" y="1792.0222"/>
             <point x="1420.3158" y="1793.9768"/>
@@ -4710,7 +4710,7 @@
             <point x="1406.3475" y="1808.6194"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_6_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_6_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1400.5366" y="1831.1677"/>
             <point x="1398.2521" y="1842.5417"/>
@@ -4726,7 +4726,7 @@
             <point x="1383.4868" y="1827.4795"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_7_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_7_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1369.422" y="1886.2338"/>
             <point x="1376.488" y="1876.8668"/>
@@ -4742,7 +4742,7 @@
             <point x="1383.4581" y="1896.7124"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_8_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_8_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1407.9893" y="1909.2344"/>
             <point x="1418.8367" y="1912.0684"/>
@@ -4762,7 +4762,7 @@
             <point x="1403.6925" y="1925.4769"/>
         </points>
     </zone>
-    <zone mapid="700010000" name="LIMITAREA_9_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="700010000" name="LIMITAREA_9_1_700010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="86.39368" top="136.39368">
             <point x="1371.6589" y="1943.7098"/>
             <point x="1375.7157" y="1943.9897"/>

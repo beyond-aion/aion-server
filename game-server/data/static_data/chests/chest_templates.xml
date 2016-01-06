@@ -562,4 +562,11 @@
 	<chest npcid="702583">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>
+	<!-- Occupied Rentus Base -->
+	<chest npcid="833047">
+		<keyitem id="1" itemid="185000228" quantity="1"/>
+	</chest>
+	<chest npcid="833048">
+		<keyitem id="1" itemid="185000229" quantity="1"/>
+	</chest>
 </chest_templates>

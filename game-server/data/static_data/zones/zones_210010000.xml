@@ -142,7 +142,7 @@
             <point x="881.1332" y="1086.6588"/>
         </points>
     </zone>
-    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q1006" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
+    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q1006_210010000" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
         <points bottom="95.0" top="145.0">
             <point x="659.15" y="1031.3351"/>
             <point x="667.8078" y="1059.8772"/>
@@ -153,7 +153,7 @@
             <point x="638.5594" y="1023.51886"/>
         </points>
     </zone>
-    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q14031" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
+    <zone mapid="210010000" name="LF1_ITEMUSEAREA_Q14031_210010000" area_type="POLYGON" zone_type="ITEM_USE" flags="7">
         <points bottom="128.78297" top="138.78297">
             <point x="282.616" y="1014.4377"/>
             <point x="284.9224" y="1025.5674"/>
@@ -163,29 +163,6 @@
             <point x="306.37662" y="1005.6477"/>
             <point x="289.33942" y="1009.25037"/>
             <point x="285.46042" y="1014.036"/>
-        </points>
-    </zone>
-    <zone mapid="210010000" name="LF1_NEIN_AKARIOS_1" area_type="POLYGON" zone_type="SUB">
-        <points bottom="111.0" top="161.0">
-            <point x="1056.11" y="1010.73"/>
-            <point x="1052.7585" y="1030.0403"/>
-            <point x="1069.8346" y="1054.4575"/>
-            <point x="1085.1553" y="1056.213"/>
-            <point x="1092.6559" y="1045.8397"/>
-            <point x="1093.9326" y="1014.87933"/>
-            <point x="1072.8668" y="1005.9423"/>
-        </points>
-    </zone>
-    <zone mapid="210010000" name="LF1_NEIN_AKARIOS_2" area_type="POLYGON" zone_type="SUB">
-        <points bottom="111.0" top="161.0">
-            <point x="1035.8132" y="1139.2426"/>
-            <point x="1037.526" y="1149.0573"/>
-            <point x="1055.3617" y="1160.3074"/>
-            <point x="1062.0731" y="1156.7452"/>
-            <point x="1064.1296" y="1152.196"/>
-            <point x="1055.0245" y="1150.7351"/>
-            <point x="1045.6066" y="1147.1156"/>
-            <point x="1040.3542" y="1138.48"/>
         </points>
     </zone>
     <zone mapid="210010000" name="MELPONEHS_CAMPSITE_210010000" area_type="POLYGON" zone_type="SUB" priority="16" flags="7">

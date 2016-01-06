@@ -90,7 +90,7 @@
             <point x="1165.6959" y="1173.855"/>
         </points>
     </zone>
-    <zone mapid="120010000" name="DC1_PVP_ZONE" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="120010000" name="DC1_PVP_ZONE_120010000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="220.8" top="251.8">
             <point x="951.98" y="1624.84"/>
             <point x="1010.2319" y="1566.5159"/>
@@ -102,7 +102,7 @@
             <point x="943.92065" y="1624.2922"/>
         </points>
     </zone>
-    <zone mapid="120010000" name="FLYINGZONESHAPEDC1_ENTITY2" area_type="POLYGON" zone_type="FLY" flags="62">
+    <zone mapid="120010000" name="FLYINGZONESHAPEDC1_ENTITY2_120010000" area_type="POLYGON" zone_type="FLY" flags="62">
         <points bottom="220.47307" top="244.47307">
             <point x="1008.683" y="1566.0203"/>
             <point x="968.9656" y="1525.0808"/>
@@ -164,7 +164,7 @@
             <point x="1155.0145" y="1359.3604"/>
         </points>
     </zone>
-    <zone mapid="120010000" name="LIMIT_AREA_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="120010000" name="LIMIT_AREA_1_120010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="172.06398" top="272.06396">
             <point x="1393.2177" y="1539.4427"/>
             <point x="1310.173" y="1569.292"/>
@@ -180,7 +180,7 @@
             <point x="1382.1906" y="1509.2875"/>
         </points>
     </zone>
-    <zone mapid="120010000" name="LIMIT_AREA_2" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="120010000" name="LIMIT_AREA_2_120010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="172.51195" top="272.51196">
             <point x="1245.6853" y="1581.2711"/>
             <point x="1222.5383" y="1573.9535"/>

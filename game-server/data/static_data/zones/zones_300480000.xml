@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="300480000" name="DANUAR_MYSTICARIUM_300480000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
-        <points bottom="0.1" top="500.1">
-            <point x="15.86361" y="33.61584"/>
-            <point x="18.288935" y="734.5415"/>
-            <point x="710.7259" y="732.11615"/>
-            <point x="707.0879" y="31.190521"/>
-        </points>
-    </zone>
     <zone mapid="300480000" name="DESTROYED_PASSAGE_300480000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
         <points bottom="216.70781" top="316.7078">
             <point x="152.46388" y="270.93677"/>
@@ -37,7 +29,15 @@
             <point x="504.8504" y="423.56274"/>
         </points>
     </zone>
-    <zone mapid="300480000" name="SECRET_PASSAGE_300480000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
+    <zone mapid="300480000" name="SEALED_DANUAR_MYSTICARIUM_300480000" area_type="POLYGON" zone_type="SUB" priority="16" flags="0">
+        <points bottom="0.1" top="500.1">
+            <point x="15.86361" y="33.61584"/>
+            <point x="18.288935" y="734.5415"/>
+            <point x="710.7259" y="732.11615"/>
+            <point x="707.0879" y="31.190521"/>
+        </points>
+    </zone>
+    <zone mapid="300480000" name="SECRET_PASSAGE_300480000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
         <points bottom="228.88539" top="328.88538">
             <point x="197.4654" y="102.70389"/>
             <point x="111.98117" y="110.24316"/>

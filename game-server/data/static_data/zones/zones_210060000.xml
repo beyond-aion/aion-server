@@ -623,7 +623,7 @@
             <point x="2746.9038" y="2106.8982"/>
         </points>
     </zone>
-    <zone mapid="210060000" name="LF2A_ITEMUSEAREA_Q1093" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210060000" name="LF2A_ITEMUSEAREA_Q1093_210060000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="100.0" top="200.0">
             <point x="334.8684" y="314.25073"/>
             <point x="402.37875" y="408.63687"/>
@@ -635,7 +635,7 @@
             <point x="332.75128" y="300.32672"/>
         </points>
     </zone>
-    <zone mapid="210060000" name="LIMITAREALF2A_LIMITAREA_V30" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="210060000" name="LIMITAREALF2A_LIMITAREA_V30_210060000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="56.299057" top="71.29906">
             <point x="2202.9412" y="2099.9854"/>
             <point x="2207.213" y="2109.986"/>

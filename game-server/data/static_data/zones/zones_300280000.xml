@@ -18,7 +18,7 @@
             <point x="115.37717" y="448.88464"/>
         </points>
     </zone>
-    <zone mapid="300280000" name="MEMORIAL_ALTAR_300280000" area_type="POLYGON" zone_type="SUB" priority="8" flags="0">
+    <zone mapid="300280000" name="MEMORIAL_ALTAR_300280000" area_type="POLYGON" zone_type="SUB" priority="4" flags="0">
         <points bottom="40.0" top="1040.0">
             <point x="491.98953" y="604.05945"/>
             <point x="512.92285" y="597.5571"/>
@@ -67,15 +67,23 @@
             <point x="1023.0566" y="-1.595356"/>
         </points>
     </zone>
+    <zone mapid="300280000" name="RESIDENTIAL_ENTRANCE_300280000" area_type="POLYGON" zone_type="SUB" priority="5" flags="0">
+        <points bottom="147.1" top="247.1">
+            <point x="552.7484" y="553.2759"/>
+            <point x="510.4202" y="592.1249"/>
+            <point x="553.068" y="639.0969"/>
+            <point x="605.6051" y="565.2673"/>
+        </points>
+    </zone>
     <zone mapid="300280000" name="RESIDENTIAL_ZONE_300280000" area_type="POLYGON" zone_type="SUB" priority="9" flags="0">
-        <points bottom="40.0" top="1040.0">
-            <point x="625.4148" y="499.06885"/>
-            <point x="536.4582" y="676.3862"/>
-            <point x="366.31415" y="780.08203"/>
-            <point x="178.24106" y="823.4933"/>
-            <point x="154.14746" y="649.34454"/>
-            <point x="299.66623" y="617.8491"/>
-            <point x="418.8409" y="301.01328"/>
+        <points bottom="-59.482895" top="440.5171">
+            <point x="665.80194" y="484.76358"/>
+            <point x="567.8557" y="740.2525"/>
+            <point x="368.2234" y="774.865"/>
+            <point x="180.1503" y="818.27637"/>
+            <point x="156.0567" y="644.12756"/>
+            <point x="301.57547" y="612.63214"/>
+            <point x="420.75015" y="295.7963"/>
         </points>
     </zone>
     <zone mapid="300280000" name="SIELS_FORGE_300280000" area_type="POLYGON" zone_type="SUB" priority="7" flags="0">
@@ -84,14 +92,6 @@
             <point x="272.72885" y="407.6153"/>
             <point x="115.21777" y="450.7561"/>
             <point x="52.624466" y="213.68413"/>
-        </points>
-    </zone>
-    <zone mapid="300280000" name="SPARRING_GROUNDS_300280000" area_type="POLYGON" zone_type="SUB" priority="10" flags="0">
-        <points bottom="40.0" top="1040.0">
-            <point x="739.17" y="552.46"/>
-            <point x="710.527" y="758.14307"/>
-            <point x="535.2927" y="675.88385"/>
-            <point x="624.3209" y="498.62476"/>
         </points>
     </zone>
     <zone mapid="300280000" name="THE_BRIDGE_300280000" area_type="POLYGON" zone_type="SUB" priority="5" flags="0">

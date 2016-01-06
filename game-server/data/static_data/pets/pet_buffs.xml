@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pet_buffs>
+	<buff id="1" feed_count="5">
+		<modifiers>
+			<rate name="ATTACK_SPEED" value="-2" bonus="true"/>
+			<rate name="BOOST_CASTING_TIME" value="2" bonus="true"/>
+			<rate name="SPEED" value="5" bonus="true"/>
+			<add name="MAXHP" value="120" bonus="true"/>
+			<add name="MAXMP" value="200" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="2" feed_count="2">
+		<modifiers>
+			<rate name="ATTACK_SPEED" value="-1" bonus="true"/>
+			<rate name="BOOST_CASTING_TIME" value="1" bonus="true"/>
+			<rate name="SPEED" value="3" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="3" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="BOOST_MAGICAL_SKILL" value="11" bonus="true"/>
+			<add name="PHYSICAL_ATTACK" value="2" bonus="true"/>
+			<add name="PHYSICAL_CRITICAL" value="8" bonus="true"/>
+			<add name="MAGICAL_CRITICAL" value="2" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="4" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="PHYSICAL_DEFENSE" value="30" bonus="true"/>
+			<add name="PARRY" value="8" bonus="true"/>
+			<add name="MAGICAL_RESIST" value="6" bonus="true"/>
+			<add name="MAGIC_SKILL_BOOST_RESIST" value="6" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="5" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<rate name="FLY_SPEED" value="2" bonus="true"/>
+			<add name="FLY_TIME" value="3" bonus="true"/>
+			<add name="MAXMP" value="44" bonus="true"/>
+			<add name="MAXHP" value="40" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="6" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="BOOST_MAGICAL_SKILL" value="11" bonus="true"/>
+			<add name="MAGICAL_CRITICAL" value="2" bonus="true"/>
+			<add name="MAGICAL_ACCURACY" value="6" bonus="true"/>
+			<add name="MAXHP" value="40" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="7" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="PHYSICAL_ATTACK" value="2" bonus="true"/>
+			<add name="PHYSICAL_CRITICAL" value="8" bonus="true"/>
+			<add name="PHYSICAL_ACCURACY" value="12" bonus="true"/>
+			<add name="MAXHP" value="40" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="8" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="MAGICAL_RESIST" value="6" bonus="true"/>
+			<add name="MAGIC_SKILL_BOOST_RESIST" value="6" bonus="true"/>
+			<add name="MAXHP" value="40" bonus="true"/>
+			<add name="MAXMP" value="44" bonus="true"/>
+		</modifiers>
+	</buff>
+	<buff id="9" feed_count="5">
+		<modifiers>
+			<rate name="SPEED" value="2" bonus="true"/>
+			<add name="PVP_ATTACK_RATIO" value="4" bonus="true"/>
+			<add name="PVP_DEFEND_RATIO" value="4" bonus="true"/>
+			<add name="MAXHP" value="40" bonus="true"/>
+			<add name="MAXMP" value="44" bonus="true"/>
+		</modifiers>
+	</buff>
+</pet_buffs>

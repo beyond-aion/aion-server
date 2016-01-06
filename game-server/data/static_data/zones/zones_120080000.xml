@@ -18,7 +18,17 @@
             <point x="426.886" y="203.63136"/>
         </points>
     </zone>
-    <zone mapid="120080000" name="LIMITAREA_ARENA_D_LOBBY_45" area_type="POLYGON" zone_type="LIMIT" flags="48">
+    <zone mapid="120080000" name="LIMITAREAARENA_D_LOBBY_WORLD_41_120080000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+        <points bottom="82.1" top="132.09999">
+            <point x="333.0" y="212.0"/>
+            <point x="445.0" y="212.0"/>
+            <point x="467.0" y="239.0"/>
+            <point x="467.0" y="262.0"/>
+            <point x="445.0" y="296.0"/>
+            <point x="333.0" y="296.0"/>
+        </points>
+    </zone>
+    <zone mapid="120080000" name="LIMITAREA_ARENA_D_LOBBY_45_120080000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="92.50318" top="122.50318">
             <point x="331.13" y="223.64"/>
             <point x="330.6646" y="276.3468"/>

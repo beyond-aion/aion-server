@@ -112,7 +112,7 @@
             <point x="464.12323" y="342.20038"/>
         </points>
     </zone>
-    <zone mapid="300210000" name="IDDREADGION_02_ITEMUSEAREA_Q3722" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300210000" name="IDDREADGION_02_ITEMUSEAREA_Q3722_300210000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="135.038" top="635.03796">
             <point x="389.3857" y="201.912"/>
             <point x="429.8653" y="173.03"/>
@@ -184,7 +184,7 @@
             <point x="440.28555" y="289.47363"/>
         </points>
     </zone>
-    <zone mapid="300210000" name="READY_ROOM_1_1_300210000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+    <zone mapid="300210000" name="READY_ROOM_1_300210000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
         <points bottom="200.00002" top="600.0">
             <point x="441.52527" y="507.15298"/>
             <point x="442.69296" y="482.6318"/>
@@ -194,7 +194,7 @@
             <point x="428.60217" y="531.3113"/>
         </points>
     </zone>
-    <zone mapid="300210000" name="READY_ROOM_2_1_300210000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+    <zone mapid="300210000" name="READY_ROOM_2_300210000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
         <points bottom="200.00002" top="600.0">
             <point x="602.2017" y="509.59372"/>
             <point x="601.03406" y="475.34192"/>

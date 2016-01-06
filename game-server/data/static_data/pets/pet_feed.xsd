@@ -34,6 +34,7 @@
   
   <xs:simpleType name="FoodType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="AETHER_CHERRY"/>
       <xs:enumeration value="AETHER_CRYSTAL_BISCUIT"/>
       <xs:enumeration value="AETHER_GEM_BISCUIT"/>
       <xs:enumeration value="AETHER_POWDER_BISCUIT"/>

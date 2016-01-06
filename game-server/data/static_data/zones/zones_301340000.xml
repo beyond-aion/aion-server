@@ -17,7 +17,7 @@
             <point x="204.87468" y="251.45494"/>
         </points>
     </zone>
-    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_1" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_1_301340000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="214.15343" top="614.15344">
             <point x="341.53043" y="242.70467"/>
             <point x="342.27307" y="286.70828"/>
@@ -44,7 +44,7 @@
             <point x="340.63504" y="238.2803"/>
         </points>
     </zone>
-    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_BOSS_1" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301340000" name="IDLDF4RE_01_ITEMUSEAREA_BOSS_1_301340000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="214.05345" top="614.05347">
             <point x="226.79466" y="224.02011"/>
             <point x="249.90364" y="222.45354"/>

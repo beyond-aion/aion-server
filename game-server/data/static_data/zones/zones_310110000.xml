@@ -98,7 +98,7 @@
             <point x="446.39655" y="324.82245"/>
         </points>
     </zone>
-    <zone mapid="310110000" name="LF2A_LAB_NOGLIDEAREA_BOSSROOM" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="310110000" name="LF2A_LAB_NOGLIDEAREA_BOSSROOM_310110000" area_type="POLYGON" zone_type="LIMIT" flags="2">
         <points bottom="180.88412" top="240.88412">
             <point x="568.16" y="453.9"/>
             <point x="646.1795" y="454.81473"/>

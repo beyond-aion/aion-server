@@ -58,7 +58,7 @@
             <point x="1014.8283" y="651.04596"/>
         </points>
     </zone>
-    <zone mapid="300510000" name="IDTIAMAT_NOGLIDEAREA_1" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="300510000" name="IDTIAMAT_NOGLIDEAREA_1_300510000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="380.0" top="500.0">
             <point x="1029.98" y="332.87"/>
             <point x="1020.7184" y="331.72366"/>

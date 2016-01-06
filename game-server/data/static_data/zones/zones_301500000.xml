@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="301500000" name="STONESPEAR_REACH_301500000" area_type="POLYGON" zone_type="SUB" priority="30" flags="3">
+        <points bottom="53.4862" top="153.48619">
+            <point x="67.29224" y="102.93351"/>
+            <point x="396.22266" y="78.545166"/>
+            <point x="420.58597" y="419.06497"/>
+            <point x="104.15448" y="453.52075"/>
+        </points>
+    </zone>
+</zones>

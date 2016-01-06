@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="210080000" name="GRIFFOEN_1_210080000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="477.1005" top="577.10046">
+            <point x="203.6519" y="84.27532"/>
+            <point x="206.37273" y="330.2394"/>
+            <point x="260.66003" y="484.8128"/>
+            <point x="317.28192" y="335.11835"/>
+            <point x="324.71506" y="82.70228"/>
+            <point x="266.7373" y="79.94274"/>
+        </points>
+    </zone>
+</zones>

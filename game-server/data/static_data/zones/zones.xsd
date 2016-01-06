@@ -77,6 +77,7 @@
 			<xs:enumeration value="DUEL"/>
 			<xs:enumeration value="HOUSE"/>
 			<xs:enumeration value="WEATHER"/>
+			<xs:enumeration value="DOMINION"/>
 		</xs:restriction>
 	</xs:simpleType>
 

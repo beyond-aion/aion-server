@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="220100000" name="BERITRAS_FIST_GARRISON_220100000" area_type="POLYGON" zone_type="SUB" priority="11" flags="48">
+        <points bottom="480.235" top="680.235">
+            <point x="999.28326" y="831.7871"/>
+            <point x="999.28326" y="949.6474"/>
+            <point x="1029.2714" y="951.73956"/>
+            <point x="1033.4557" y="982.42505"/>
+            <point x="1061.1975" y="994.8893"/>
+            <point x="1111.8228" y="978.47034"/>
+            <point x="1134.3988" y="958.6307"/>
+            <point x="1124.821" y="942.8958"/>
+            <point x="1133.8811" y="922.44885"/>
+            <point x="1115.0513" y="898.0399"/>
+            <point x="1110.1696" y="833.87933"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="CLAWED_FIST_GARRISON_220100000" area_type="POLYGON" zone_type="SUB" priority="9" flags="48">
+        <points bottom="488.27173" top="688.2717">
+            <point x="28.566483" y="407.83948"/>
+            <point x="37.315033" y="718.83386"/>
+            <point x="329.5288" y="716.9702"/>
+            <point x="318.3542" y="596.36"/>
+            <point x="368.88647" y="401.78317"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="DANUAR_MAUSOLEUM_220100000" area_type="POLYGON" zone_type="SUB" priority="7" flags="48">
+        <points bottom="291.72482" top="791.72485">
+            <point x="505.31537" y="212.70064"/>
+            <point x="591.4509" y="287.53967"/>
+            <point x="683.5382" y="287.72067"/>
+            <point x="682.07294" y="319.22418"/>
+            <point x="916.15375" y="322.3325"/>
+            <point x="920.8498" y="137.75989"/>
+            <point x="687.0486" y="75.75166"/>
+            <point x="506.61346" y="98.46833"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="DANUAR_PROCESSIONAL_220100000" area_type="POLYGON" zone_type="SUB" priority="8" flags="48">
+        <points bottom="488.4717" top="688.4717">
+            <point x="588.10626" y="282.40897"/>
+            <point x="780.3887" y="280.5743"/>
+            <point x="781.8674" y="604.9205"/>
+            <point x="591.25073" y="602.13196"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="DANUAR_VESTIBULE_220100000" area_type="POLYGON" zone_type="SUB" priority="6" flags="48">
+        <points bottom="500.5179" top="600.51794">
+            <point x="600.9483" y="58.970528"/>
+            <point x="627.1605" y="183.87117"/>
+            <point x="732.5152" y="187.01761"/>
+            <point x="800.49115" y="52.045197"/>
+            <point x="718.1165" y="8.727493"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="FIRST_CANAL_220100000" area_type="POLYGON" zone_type="SUB" priority="8" flags="48">
+        <points bottom="488.5717" top="688.5717">
+            <point x="781.9759" y="604.5668"/>
+            <point x="781.9759" y="462.21265"/>
+            <point x="955.98315" y="462.38763"/>
+            <point x="956.6224" y="608.85596"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="GRAND_PASSAGE_220100000" area_type="POLYGON" zone_type="SUB" priority="10" flags="48">
+        <points bottom="528.82104" top="728.82104">
+            <point x="56.886997" y="712.5839"/>
+            <point x="57.285126" y="834.10986"/>
+            <point x="589.9997" y="839.0515"/>
+            <point x="590.82043" y="957.24115"/>
+            <point x="1001.8178" y="961.4057"/>
+            <point x="1001.7368" y="840.6728"/>
+            <point x="1446.2355" y="841.5631"/>
+            <point x="1446.0244" y="697.2566"/>
+            <point x="1024.6868" y="702.6158"/>
+            <point x="1022.6394" y="700.05646"/>
+            <point x="1021.10394" y="556.2238"/>
+            <point x="954.0501" y="554.68823"/>
+            <point x="952.51465" y="606.89795"/>
+            <point x="883.83234" y="605.9552"/>
+            <point x="591.6412" y="601.8514"/>
+            <point x="590.82043" y="707.7297"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_ALPHA_1_220100000" area_type="POLYGON" zone_type="SUB" priority="8" flags="48">
+        <points bottom="488.4717" top="688.4717">
+            <point x="428.62512" y="490.5977"/>
+            <point x="506.08685" y="491.61694"/>
+            <point x="526.98114" y="464.60724"/>
+            <point x="533.60614" y="436.57834"/>
+            <point x="592.21204" y="391.7321"/>
+            <point x="590.1736" y="322.42422"/>
+            <point x="512.71185" y="237.31827"/>
+            <point x="440.3463" y="234.77017"/>
+            <point x="388.36542" y="326.50116"/>
+            <point x="358.29803" y="445.75143"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_ALPHA_220100000" area_type="POLYGON" zone_type="SUB" priority="9" flags="48">
+        <points bottom="488.37173" top="688.37177">
+            <point x="329.7405" y="716.6857"/>
+            <point x="318.55188" y="597.34033"/>
+            <point x="387.8951" y="326.316"/>
+            <point x="589.99915" y="311.61093"/>
+            <point x="590.8131" y="706.7466"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_BETA_1_220100000" area_type="POLYGON" zone_type="SUB" priority="6" flags="48">
+        <points bottom="510.28833" top="710.2883">
+            <point x="462.4293" y="1075.4001"/>
+            <point x="550.8611" y="1066.3147"/>
+            <point x="558.12946" y="1108.7135"/>
+            <point x="553.2839" y="1182.6085"/>
+            <point x="561.69586" y="1192.135"/>
+            <point x="554.44214" y="1236.3025"/>
+            <point x="538.0252" y="1245.3832"/>
+            <point x="423.66464" y="1255.2922"/>
+            <point x="429.11594" y="1198.3567"/>
+            <point x="413.3678" y="1144.4496"/>
+            <point x="453.34384" y="1115.3761"/>
+            <point x="456.3723" y="1088.7255"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_BETA_220100000" area_type="POLYGON" zone_type="SUB" priority="5" flags="48">
+        <points bottom="528.921" top="728.921">
+            <point x="486.01688" y="837.93414"/>
+            <point x="488.78763" y="914.96106"/>
+            <point x="454.4303" y="951.535"/>
+            <point x="446.67218" y="996.9753"/>
+            <point x="450.55124" y="1052.9445"/>
+            <point x="461.0801" y="1071.7856"/>
+            <point x="540.3236" y="1067.3524"/>
+            <point x="559.16473" y="980.35077"/>
+            <point x="585.764" y="945.43933"/>
+            <point x="582.4391" y="908.3112"/>
+            <point x="552.51495" y="837.93414"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_BETA_2_220100000" area_type="POLYGON" zone_type="SUB" priority="7" flags="48">
+        <points bottom="529.0211" top="729.0211">
+            <point x="9.92373" y="941.6661"/>
+            <point x="19.817822" y="1480.8958"/>
+            <point x="516.17303" y="1463.581"/>
+            <point x="504.62988" y="1254.1555"/>
+            <point x="418.0563" y="1250.033"/>
+            <point x="430.42395" y="1193.9662"/>
+            <point x="412.28473" y="1146.1447"/>
+            <point x="455.9838" y="1111.5153"/>
+            <point x="457.6328" y="1077.7103"/>
+            <point x="439.4936" y="1022.4681"/>
+            <point x="395.79453" y="1013.3985"/>
+            <point x="353.7445" y="1043.0808"/>
+            <point x="355.39352" y="1090.0779"/>
+            <point x="329.0092" y="1148.6182"/>
+            <point x="256.4523" y="1092.5515"/>
+            <point x="242.43562" y="1078.5348"/>
+            <point x="233.36601" y="1052.1504"/>
+            <point x="162.45813" y="968.0504"/>
+            <point x="138.54732" y="940.017"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_BETA_3_220100000" area_type="POLYGON" zone_type="SUB" priority="6" flags="48">
+        <points bottom="528.921" top="728.921">
+            <point x="200.4104" y="834.658"/>
+            <point x="204.84222" y="1019.6871"/>
+            <point x="243.62079" y="1061.2356"/>
+            <point x="257.47028" y="1102.23"/>
+            <point x="326.1637" y="1155.9661"/>
+            <point x="363.8343" y="1090.5964"/>
+            <point x="355.5246" y="1041.2924"/>
+            <point x="399.84296" y="1010.8234"/>
+            <point x="441.94537" y="1002.51373"/>
+            <point x="448.59314" y="991.43414"/>
+            <point x="459.11874" y="957.6414"/>
+            <point x="499.55923" y="902.24347"/>
+            <point x="485.15576" y="854.60126"/>
+            <point x="457.45682" y="837.9819"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_GAMMA_1_220100000" area_type="POLYGON" zone_type="SUB" priority="6" flags="48">
+        <points bottom="488.67178" top="688.67175">
+            <point x="885.3907" y="467.07675"/>
+            <point x="950.2485" y="472.7995"/>
+            <point x="950.2485" y="529.0732"/>
+            <point x="1011.2911" y="530.9808"/>
+            <point x="1054.2117" y="485.1988"/>
+            <point x="1145.7756" y="519.5353"/>
+            <point x="1184.8811" y="514.7663"/>
+            <point x="1505.2352" y="491.02197"/>
+            <point x="1501.776" y="15.382202"/>
+            <point x="1356.4896" y="13.652618"/>
+            <point x="936.1971" y="18.8414"/>
+            <point x="922.3603" y="134.72452"/>
+            <point x="925.81946" y="364.7612"/>
+            <point x="892.9571" y="363.03162"/>
+            <point x="892.9571" y="449.51157"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDE_MINE_GAMMA_220100000" area_type="POLYGON" zone_type="SUB" priority="7" flags="48">
+        <points bottom="488.67166" top="688.67163">
+            <point x="956.61615" y="528.3534"/>
+            <point x="955.7847" y="557.69336"/>
+            <point x="1020.2479" y="556.6827"/>
+            <point x="1044.6492" y="619.55865"/>
+            <point x="1268.2406" y="618.08826"/>
+            <point x="1259.3783" y="502.87756"/>
+            <point x="1134.6722" y="513.639"/>
+            <point x="1085.2963" y="492.11612"/>
+            <point x="1049.8468" y="483.8868"/>
+            <point x="1010.7177" y="527.5777"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDIAN_DEPTHS_220100000" area_type="POLYGON" zone_type="SUB" priority="16" flags="48">
+        <points bottom="-91.34971" top="708.65027">
+            <point x="4.447235" y="8.461599"/>
+            <point x="13.893667" y="1534.0756"/>
+            <point x="1525.338" y="1538.799"/>
+            <point x="1527.6997" y="1.376835"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="IDIUM_REACTOR_COMPLEX_220100000" area_type="POLYGON" zone_type="SUB" priority="10" flags="48">
+        <points bottom="323.80008" top="1123.8">
+            <point x="1155.3558" y="896.9329"/>
+            <point x="1545.8909" y="899.41254"/>
+            <point x="1548.3704" y="1521.7891"/>
+            <point x="1092.1263" y="1523.0288"/>
+            <point x="1040.0549" y="1394.0903"/>
+            <point x="954.5092" y="1273.8303"/>
+            <point x="991.703" y="1187.0447"/>
+            <point x="1024.7521" y="1159.218"/>
+            <point x="1015.55994" y="1057.7054"/>
+            <point x="1058.6519" y="988.6777"/>
+            <point x="1119.4019" y="966.3614"/>
+            <point x="1152.8762" y="935.3665"/>
+            <point x="1154.1161" y="919.2492"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="SECOND_CANAL_220100000" area_type="POLYGON" zone_type="SUB" priority="8" flags="48">
+        <points bottom="488.67178" top="688.67175">
+            <point x="785.565" y="935.28973"/>
+            <point x="785.7731" y="1070.1669"/>
+            <point x="793.95105" y="1128.1562"/>
+            <point x="828.16296" y="1130.369"/>
+            <point x="857.3322" y="1180.2671"/>
+            <point x="949.2526" y="1184.8804"/>
+            <point x="1018.02313" y="1174.3997"/>
+            <point x="1027.3978" y="1160.2032"/>
+            <point x="1018.4141" y="1058.2863"/>
+            <point x="1044.9377" y="1001.2025"/>
+            <point x="1012.5692" y="959.9039"/>
+            <point x="1002.84875" y="935.719"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="SEGARUNERKS_BAZAAR_220100000" area_type="POLYGON" zone_type="SUB" priority="9" flags="48">
+        <points bottom="440.94284" top="540.9429">
+            <point x="590.69525" y="602.0034"/>
+            <point x="590.499" y="956.41284"/>
+            <point x="875.82135" y="959.4849"/>
+            <point x="884.0485" y="603.9155"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="TOWER_APPROACH_220100000" area_type="POLYGON" zone_type="SUB" priority="8" flags="48">
+        <points bottom="491.18704" top="891.187">
+            <point x="587.9047" y="953.95013"/>
+            <point x="564.53754" y="976.1775"/>
+            <point x="550.8592" y="1023.48175"/>
+            <point x="549.1494" y="1061.6671"/>
+            <point x="561.6879" y="1099.8525"/>
+            <point x="652.7932" y="1105.0446"/>
+            <point x="652.8769" y="1189.912"/>
+            <point x="802.1779" y="1192.1917"/>
+            <point x="800.59357" y="1151.4865"/>
+            <point x="789.0904" y="1061.0972"/>
+            <point x="790.80023" y="955.09"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="TOWER_ENTRYWAY_220100000" area_type="POLYGON" zone_type="SUB" priority="6" flags="48">
+        <points bottom="484.94482" top="884.9448">
+            <point x="551.9779" y="1323.4734"/>
+            <point x="558.45636" y="1442.7677"/>
+            <point x="715.88916" y="1437.8047"/>
+            <point x="650.24896" y="1325.484"/>
+            <point x="625.8697" y="1323.222"/>
+            <point x="619.335" y="1297.0834"/>
+            <point x="590.1804" y="1298.3401"/>
+            <point x="587.6671" y="1322.9707"/>
+        </points>
+    </zone>
+    <zone mapid="220100000" name="TOWER_MAUSOLEUM_220100000" area_type="POLYGON" zone_type="SUB" priority="7" flags="48">
+        <points bottom="329.4311" top="829.4311">
+            <point x="558.02216" y="1093.9818"/>
+            <point x="652.3897" y="1092.9908"/>
+            <point x="652.47455" y="1183.127"/>
+            <point x="792.71796" y="1183.8862"/>
+            <point x="870.1903" y="1267.5538"/>
+            <point x="882.01117" y="1297.1058"/>
+            <point x="926.3392" y="1286.7627"/>
+            <point x="1017.9505" y="1402.0156"/>
+            <point x="1039.3385" y="1468.0166"/>
+            <point x="1013.15564" y="1517.302"/>
+            <point x="883.7816" y="1455.6953"/>
+            <point x="740.5461" y="1414.1107"/>
+            <point x="592.69006" y="1426.4321"/>
+            <point x="514.0134" y="1382.6669"/>
+            <point x="504.90057" y="1275.4957"/>
+            <point x="502.76993" y="1246.3231"/>
+            <point x="539.1435" y="1241.8057"/>
+            <point x="552.0177" y="1233.0771"/>
+            <point x="557.8442" y="1193.4045"/>
+            <point x="545.9977" y="1176.4502"/>
+            <point x="555.7261" y="1130.7201"/>
+        </points>
+    </zone>
+</zones>

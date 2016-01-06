@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="300100000" name="ANCHOR_POINT_1_300100000" area_type="POLYGON" zone_type="SUB" priority="13" flags="2">
+    <zone mapid="300100000" name="ANCHOR_POINT_1_300100000" area_type="POLYGON" zone_type="SUB" priority="12" flags="2">
+        <points bottom="854.99854" top="904.99854">
+            <point x="723.84766" y="447.55295"/>
+            <point x="739.62396" y="449.23746"/>
+            <point x="748.0238" y="469.79694"/>
+            <point x="735.596" y="482.624"/>
+            <point x="721.5943" y="480.90897"/>
+            <point x="713.9226" y="461.31284"/>
+        </points>
+    </zone>
+    <zone mapid="300100000" name="ANCHOR_POINT_300100000" area_type="POLYGON" zone_type="SUB" priority="13" flags="2">
         <points bottom="1003.9579" top="1053.9579">
             <point x="628.72406" y="449.54007"/>
             <point x="648.7869" y="444.11163"/>
@@ -11,16 +21,6 @@
             <point x="673.2219" y="457.34937"/>
             <point x="649.87244" y="455.81348"/>
             <point x="628.483" y="459.65265"/>
-        </points>
-    </zone>
-    <zone mapid="300100000" name="ANCHOR_POINT_2_300100000" area_type="POLYGON" zone_type="SUB" priority="12" flags="2">
-        <points bottom="854.99854" top="904.99854">
-            <point x="723.84766" y="447.55295"/>
-            <point x="739.62396" y="449.23746"/>
-            <point x="748.0238" y="469.79694"/>
-            <point x="735.596" y="482.624"/>
-            <point x="721.5943" y="480.90897"/>
-            <point x="713.9226" y="461.31284"/>
         </points>
     </zone>
     <zone mapid="300100000" name="ANTIQUE_STORAGE_300100000" area_type="POLYGON" zone_type="SUB" priority="13" flags="2">
@@ -56,7 +56,7 @@
             <point x="354.86124" y="575.4071"/>
         </points>
     </zone>
-    <zone mapid="300100000" name="CARGO_ELEVATOR_1_300100000" area_type="POLYGON" zone_type="SUB" priority="13" flags="2">
+    <zone mapid="300100000" name="CARGO_ELEVATOR_300100000" area_type="POLYGON" zone_type="SUB" priority="13" flags="2">
         <points bottom="890.0" top="990.0">
             <point x="274.1" y="441.72"/>
             <point x="291.77625" y="441.6185"/>
@@ -106,7 +106,7 @@
             <point x="656.08594" y="551.8714"/>
         </points>
     </zone>
-    <zone mapid="300100000" name="IDSHULACK_ITEMUSEAREA_Q3200_1" area_type="POLYGON" zone_type="ITEM_USE" flags="2">
+    <zone mapid="300100000" name="IDSHULACK_ITEMUSEAREA_Q3200_1_300100000" area_type="POLYGON" zone_type="ITEM_USE" flags="2">
         <points bottom="881.2694" top="901.2694">
             <point x="399.24817" y="499.79865"/>
             <point x="399.22714" y="520.091"/>
@@ -146,7 +146,7 @@
             <point x="213.12717" y="637.80914"/>
         </points>
     </zone>
-    <zone mapid="300100000" name="MAIN_DECK_1_300100000" area_type="POLYGON" zone_type="SUB" priority="15" flags="2">
+    <zone mapid="300100000" name="MAIN_DECK_300100000" area_type="POLYGON" zone_type="SUB" priority="15" flags="2">
         <points bottom="1005.0" top="1155.0">
             <point x="348.37" y="419.42"/>
             <point x="656.1535" y="420.12592"/>

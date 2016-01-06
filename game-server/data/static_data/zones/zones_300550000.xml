@@ -32,7 +32,7 @@
             <point x="1247.5969" y="575.5234"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_FLYING_ZONE_S4" area_type="POLYGON" zone_type="FLY" flags="12">
+    <zone mapid="300550000" name="IDARENA_GLORY_FLYING_ZONE_S4_300550000" area_type="POLYGON" zone_type="FLY" flags="12">
         <points bottom="157.09819" top="257.09818">
             <point x="659.46027" y="1797.0221"/>
             <point x="718.99646" y="1788.0353"/>
@@ -40,7 +40,7 @@
             <point x="664.57275" y="1865.6154"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S1" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S1_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="216.48914" top="416.48914">
             <point x="1690.1886" y="1873.9161"/>
             <point x="1674.0437" y="1649.1608"/>
@@ -48,7 +48,7 @@
             <point x="1920.6108" y="1868.7426"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S2" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S2_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="278.00345" top="378.00345">
             <point x="1811.1255" y="1097.55"/>
             <point x="1892.9366" y="1094.4939"/>
@@ -56,7 +56,7 @@
             <point x="1812.3162" y="1184.6345"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S3" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S3_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="486.996" top="686.996">
             <point x="1571.1067" y="209.63412"/>
             <point x="1662.7885" y="206.7952"/>
@@ -64,7 +64,7 @@
             <point x="1564.1505" y="308.1953"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S4" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S4_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="129.38959" top="329.3896">
             <point x="613.59467" y="1776.4944"/>
             <point x="761.01465" y="1771.555"/>
@@ -72,7 +72,7 @@
             <point x="615.11" y="1881.3335"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S5" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S5_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="347.311" top="547.31104">
             <point x="413.49442" y="1061.4208"/>
             <point x="566.6477" y="1066.8376"/>
@@ -80,7 +80,7 @@
             <point x="411.08936" y="1206.5216"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S6" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="IDARENA_GLORY_PVPZONE_S6_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="144.82552" top="344.82553">
             <point x="418.4349" y="302.31815"/>
             <point x="577.7345" y="293.1726"/>
@@ -88,7 +88,7 @@
             <point x="417.89618" y="463.3626"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_ITEMUSEAREA_ALL_7" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
+    <zone mapid="300550000" name="IDARENA_ITEMUSEAREA_ALL_7_300550000" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
         <points bottom="125.45441" top="725.4544">
             <point x="1658.3512" y="1597.403"/>
             <point x="2027.4366" y="1598.9695"/>
@@ -126,7 +126,7 @@
             <point x="741.54736" y="1892.658"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_PVP02_FLYINGZONE_S3_1" area_type="POLYGON" zone_type="FLY" flags="12">
+    <zone mapid="300550000" name="IDARENA_PVP02_FLYINGZONE_S3_1_300550000" area_type="POLYGON" zone_type="FLY" flags="12">
         <points bottom="153.81805" top="653.81805">
             <point x="655.4417" y="1792.6417"/>
             <point x="656.34973" y="1865.205"/>
@@ -134,7 +134,7 @@
             <point x="735.1668" y="1792.2701"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="IDARENA_PVP_ITEMUSEAREA_ALL_5" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
+    <zone mapid="300550000" name="IDARENA_PVP_ITEMUSEAREA_ALL_5_300550000" area_type="POLYGON" zone_type="ITEM_USE" flags="4">
         <points bottom="118.38373" top="718.3837">
             <point x="1655.759" y="1586.7164"/>
             <point x="2035.4847" y="1547.3918"/>
@@ -172,7 +172,7 @@
             <point x="747.4728" y="1893.1476"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_189_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_65_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="365.53336" top="565.5334">
             <point x="419.51932" y="1060.4325"/>
             <point x="575.31726" y="1060.0818"/>
@@ -180,7 +180,7 @@
             <point x="413.92386" y="1216.6392"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_190_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_66_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="161.599" top="261.599">
             <point x="591.29266" y="1766.8097"/>
             <point x="749.934" y="1764.7252"/>
@@ -188,7 +188,7 @@
             <point x="591.0418" y="1882.8094"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_191_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_67_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="487.78845" top="687.78845">
             <point x="1569.0826" y="208.12299"/>
             <point x="1658.2844" y="204.8349"/>
@@ -196,7 +196,7 @@
             <point x="1565.7599" y="307.74316"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_192_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_68_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="225.23505" top="425.23505">
             <point x="1615.9948" y="1581.7758"/>
             <point x="1925.8147" y="1583.4159"/>
@@ -204,7 +204,7 @@
             <point x="1620.6115" y="1882.1802"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_193_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_69_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="306.59592" top="406.59592">
             <point x="1825.9872" y="1081.2903"/>
             <point x="1898.1218" y="1081.2462"/>
@@ -212,7 +212,7 @@
             <point x="1823.9742" y="1184.7445"/>
         </points>
     </zone>
-    <zone mapid="300550000" name="PVP_194_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="300550000" name="PVP_70_300550000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="140.42245" top="340.42245">
             <point x="418.2469" y="307.44772"/>
             <point x="578.5336" y="304.09976"/>

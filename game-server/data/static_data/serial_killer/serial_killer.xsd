@@ -12,6 +12,8 @@
 		<xs:sequence>
 			<xs:element name="penalty_attr" type="RankPenaltyAttr" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute name="type" type="rankType" use="required"/>
+		<xs:attribute name="race" type="rankRace" use="required"/>
 		<xs:attribute name="rank_num" type="xs:int" use="required"/>
 		<xs:attribute name="restrict_direct_portal" type="xs:boolean" use="required"/>
 		<xs:attribute name="restrict_dynamic_bindstone" type="xs:boolean" use="required"/>
@@ -21,4 +23,16 @@
 		<xs:attribute name="func" type="StatFunc" use="required"/>
 		<xs:attribute name="value" type="xs:int" use="required"/>
 	</xs:complexType>
+	<xs:simpleType name="rankType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KILLER"/>
+			<xs:enumeration value="GUARD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rankRace">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ELYOS"/>
+			<xs:enumeration value="ASMODIANS"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

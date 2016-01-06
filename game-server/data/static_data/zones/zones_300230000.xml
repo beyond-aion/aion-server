@@ -79,7 +79,7 @@
             <point x="501.97314" y="675.7293"/>
         </points>
     </zone>
-    <zone mapid="300230000" name="IDCROMEDE_ITEMUSEAREA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300230000" name="IDCROMEDE_ITEMUSEAREA_300230000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="10.0" top="310.0">
             <point x="154.65" y="124.47"/>
             <point x="768.3424" y="125.21929"/>

@@ -115,4 +115,18 @@
     <bind_point npcid="800057" name="LDF4a_D_Binding_stone" price="61165"/><!-- Hushblade Garrison -->
     <bind_point npcid="800058" name="LDF4a_D_Binding_stone_D" price="61165"/><!-- Fatebound Garrison -->
     <bind_point npcid="800112" name="Yun_Binding_stone_LDF4a_A2_2" price="56026"/><!-- Nalotia's Cabin -->	
+	<bind_point npcid="804757" name="DF5_OP1_Binding_stone_D" price="112307"/><!-- Dragonrest Temple -->
+    <bind_point npcid="804763" name="DF5_OP2_Binding_stone_D" price="112307"/><!-- Dawnbreak Temple -->
+    <bind_point npcid="804768" name="DF5_OP3_Binding_stone_D" price="112307"/><!-- Whirlpool Temple -->
+    <bind_point npcid="804771" name="DF5_Vil1_Binding_stone_D" price="112307"/><!-- Arden Village -->
+    <bind_point npcid="804774" name="DF5_Vil2_Binding_stone_D" price="112307"/><!-- Cet Village -->
+    <bind_point npcid="804777" name="DF5_Vil3_Binding_stone_D" price="112307"/><!-- Bomire Village -->
+    <bind_point npcid="804780" name="DF5_Vil4_Binding_stone_D" price="112307"/><!-- Fatebound Legion Outpost -->
+    <bind_point npcid="804786" name="LF5_OP1_Binding_stone_L" price="112307"/><!-- Aequis Headquarters -->
+    <bind_point npcid="804792" name="LF5_OP2_Binding_stone_L" price="112307"/><!-- Aequis Advance Post -->
+    <bind_point npcid="804797" name="LF5_OP3_Binding_stone_L" price="112307"/><!-- Aequis Outpost -->
+    <bind_point npcid="804800" name="LF5_Vil1_Binding_stone_L" price="112307"/><!-- Henor Territory Village -->
+    <bind_point npcid="804803" name="LF5_Vil2_Binding_stone_L" price="112307"/><!-- Aedra Territory Village -->
+    <bind_point npcid="804806" name="LF5_Vil3_Binding_stone_L" price="112307"/><!-- Erivale Territory Village -->
+    <bind_point npcid="804809" name="LF5_Vil4_Binding_stone_L" price="112307"/><!-- Aequis Detachment Post -->
 </bind_points>

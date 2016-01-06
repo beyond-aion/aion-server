@@ -137,7 +137,7 @@
             <point x="628.99084" y="579.2389"/>
         </points>
     </zone>
-    <zone mapid="320080000" name="IDDF3_DRAGON_NOGLIDEAREA_00" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="320080000" name="IDDF3_DRAGON_NOGLIDEAREA_00_320080000" area_type="POLYGON" zone_type="LIMIT" flags="2">
         <points bottom="521.91693" top="671.91693">
             <point x="515.00824" y="552.00745"/>
             <point x="519.8825" y="576.91003"/>
@@ -151,7 +151,7 @@
             <point x="489.79233" y="540.4866"/>
         </points>
     </zone>
-    <zone mapid="320080000" name="IDDF3_DRAGON_NOGLIDEAREA_01" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="320080000" name="IDDF3_DRAGON_NOGLIDEAREA_01_320080000" area_type="POLYGON" zone_type="LIMIT" flags="2">
         <points bottom="350.67404" top="500.67404">
             <point x="510.20697" y="557.1287"/>
             <point x="519.8825" y="576.91003"/>

@@ -11187,7 +11187,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11227,7 +11227,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11267,7 +11267,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11307,7 +11307,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="68" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="128" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="28" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11427,7 +11427,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11467,7 +11467,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11507,7 +11507,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11547,7 +11547,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11587,7 +11587,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11627,7 +11627,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11667,7 +11667,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -11707,7 +11707,7 @@
         </partbonus>
         <partbonus count="6">
             <modifiers>
-                <add name="BOOST_MAGICAL_SKILL" value="84" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="124" bonus="true"/>
                 <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
                 <add name="PHYSICAL_DEFENSE" value="118" bonus="true"/>
                 <add name="MAGIC_SKILL_BOOST_RESIST" value="68" bonus="true"/>
@@ -12943,6 +12943,1670 @@
                 <rate name="SPEED" value="22" bonus="true"/>
                 <add name="FLY_TIME" value="42" bonus="true"/>
                 <add name="PARRY" value="286" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="529" name="Nasto's Scale Sword Set">
+        <itempart itemid="100001781"/>
+        <itempart itemid="100001782"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="MAXHP" value="467" bonus="true"/>
+                <rate name="ATTACK_SPEED" value="-19" bonus="true"/>
+            </modifiers>
+        </partbonus>
+    </itemset>
+    <itemset id="530" name="Nasto's Dirk Set">
+        <itempart itemid="100201543"/>
+        <itempart itemid="100201544"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="MAXHP" value="467" bonus="true"/>
+                <rate name="ATTACK_SPEED" value="-19" bonus="true"/>
+            </modifiers>
+        </partbonus>
+    </itemset>
+    <itemset id="531" name="Nasto's Azure Scale Sword Set">
+        <itempart itemid="100001783"/>
+        <itempart itemid="115001810"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="35" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="137" bonus="true"/>
+            </modifiers>
+        </partbonus>
+    </itemset>
+    <itemset id="532" name="Nasto's War Hammer Set">
+        <itempart itemid="100101372"/>
+        <itempart itemid="115001811"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="MAGICAL_ACCURACY" value="56" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="80" bonus="true"/>
+            </modifiers>
+        </partbonus>
+    </itemset>
+    <itemset id="533" name="Nasto's Pistol Set">
+        <itempart itemid="101801251"/>
+        <itempart itemid="101801252"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="MAXHP" value="467" bonus="true"/>
+                <rate name="ATTACK_SPEED" value="-19" bonus="true"/>
+            </modifiers>
+        </partbonus>
+    </itemset>
+    <itemset id="534" name="Nasto Legionnaire's Cloth Set">
+        <itempart itemid="110101866"/>
+        <itempart itemid="113101692"/>
+        <itempart itemid="112101630"/>
+        <itempart itemid="111101681"/>
+        <itempart itemid="114101726"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="7" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="16" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="535" name="Nasto Legionnaire's Leather Set">
+        <itempart itemid="110301856"/>
+        <itempart itemid="113301825"/>
+        <itempart itemid="112301733"/>
+        <itempart itemid="111301794"/>
+        <itempart itemid="114301862"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="14" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="38" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="536" name="Nasto Legionnaire's Chain Set">
+        <itempart itemid="110551183"/>
+        <itempart itemid="113501760"/>
+        <itempart itemid="112501681"/>
+        <itempart itemid="111501742"/>
+        <itempart itemid="114501770"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="58" bonus="true"/>
+                <add name="PHYSICAL_ATTACK" value="11" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="537" name="Nasto Legionnaire's Plate Set">
+        <itempart itemid="110601653"/>
+        <itempart itemid="113601599"/>
+        <itempart itemid="112601598"/>
+        <itempart itemid="111601616"/>
+        <itempart itemid="114601606"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="14" bonus="true"/>
+                <add name="PHYSICAL_CRITICAL" value="17" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="538" name="Nasto Legionnaire's Magic Leather Set">
+        <itempart itemid="110301859"/>
+        <itempart itemid="113301828"/>
+        <itempart itemid="112301736"/>
+        <itempart itemid="111301797"/>
+        <itempart itemid="114301865"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="7" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="16" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="539" name="Nasto Legionnaire's Magic Chain Set">
+        <itempart itemid="110551186"/>
+        <itempart itemid="113501763"/>
+        <itempart itemid="112501684"/>
+        <itempart itemid="111501745"/>
+        <itempart itemid="114501773"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="29" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="34" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="40" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="45" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="7" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="16" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="540" name="Cloth Set of Rentus Recovery Squad">
+        <itempart itemid="110101867"/>
+        <itempart itemid="113101693"/>
+        <itempart itemid="112101631"/>
+        <itempart itemid="111101682"/>
+        <itempart itemid="114101727"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="70" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="21" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="541" name="Leather Set of Rentus Recovery Squad">
+        <itempart itemid="110301857"/>
+        <itempart itemid="113301826"/>
+        <itempart itemid="112301734"/>
+        <itempart itemid="111301795"/>
+        <itempart itemid="114301863"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="19" bonus="true"/>
+                <add name="PHYSICAL_CRITICAL" value="22" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="542" name="Chain Set of Rentus Recovery Squad">
+        <itempart itemid="110551184"/>
+        <itempart itemid="113501761"/>
+        <itempart itemid="112501682"/>
+        <itempart itemid="111501743"/>
+        <itempart itemid="114501771"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="19" bonus="true"/>
+                <add name="BOOST_MAGICAL_SKILL" value="70" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="543" name="Plate Set of Rentus Recovery Squad">
+        <itempart itemid="110601654"/>
+        <itempart itemid="113601600"/>
+        <itempart itemid="112601599"/>
+        <itempart itemid="111601617"/>
+        <itempart itemid="114601607"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="19" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="544" name="Magic Leather Set of Rentus Recovery Squad">
+        <itempart itemid="110301858"/>
+        <itempart itemid="113301827"/>
+        <itempart itemid="112301735"/>
+        <itempart itemid="111301796"/>
+        <itempart itemid="114301864"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="70" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="21" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="545" name="Magic Chain Set of Rentus Recovery Squad">
+        <itempart itemid="110551185"/>
+        <itempart itemid="113501762"/>
+        <itempart itemid="112501683"/>
+        <itempart itemid="111501744"/>
+        <itempart itemid="114501772"/>
+        <partbonus count="3">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="138" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="5">
+            <modifiers>
+                <add name="PHYSICAL_DEFENSE" value="159" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="70" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="21" bonus="true"/>
+                <add name="MAGICAL_RESIST" value="41" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="546" name="Balaur Lord Templar Set">
+        <itempart itemid="100001800"/>
+        <itempart itemid="110601669"/>
+        <itempart itemid="113601615"/>
+        <itempart itemid="111601632"/>
+        <itempart itemid="114601622"/>
+        <itempart itemid="112601614"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="42" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="40" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="45" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="547" name="Dark Lord Templar Set">
+        <itempart itemid="100001801"/>
+        <itempart itemid="110601671"/>
+        <itempart itemid="113601617"/>
+        <itempart itemid="111601634"/>
+        <itempart itemid="114601624"/>
+        <itempart itemid="112601616"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="548" name="Darken Lord Templar Set">
+        <itempart itemid="100901427"/>
+        <itempart itemid="110601672"/>
+        <itempart itemid="113601618"/>
+        <itempart itemid="111601635"/>
+        <itempart itemid="114601625"/>
+        <itempart itemid="112601617"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="549" name="Balaur Lord Gladiator Set">
+        <itempart itemid="101301316"/>
+        <itempart itemid="110601670"/>
+        <itempart itemid="113601616"/>
+        <itempart itemid="111601633"/>
+        <itempart itemid="114601623"/>
+        <itempart itemid="112601615"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="42" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="40" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="45" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="550" name="Dark Lord Gladiator Set">
+        <itempart itemid="100001802"/>
+        <itempart itemid="110601673"/>
+        <itempart itemid="113601619"/>
+        <itempart itemid="111601636"/>
+        <itempart itemid="114601626"/>
+        <itempart itemid="112601618"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="551" name="Darken Lord Gladiator Set">
+        <itempart itemid="101301317"/>
+        <itempart itemid="110601674"/>
+        <itempart itemid="113601620"/>
+        <itempart itemid="111601637"/>
+        <itempart itemid="114601627"/>
+        <itempart itemid="112601619"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="552" name="Balaur Lord Assassin Set">
+        <itempart itemid="100201565"/>
+        <itempart itemid="110301875"/>
+        <itempart itemid="113301844"/>
+        <itempart itemid="111301813"/>
+        <itempart itemid="114301881"/>
+        <itempart itemid="112301752"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="42" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="40" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="45" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="553" name="Dark Lord Assassin Set">
+        <itempart itemid="100201566"/>
+        <itempart itemid="110301878"/>
+        <itempart itemid="113301847"/>
+        <itempart itemid="111301816"/>
+        <itempart itemid="114301884"/>
+        <itempart itemid="112301755"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="554" name="Darken Lord Assassin Set">
+        <itempart itemid="100001803"/>
+        <itempart itemid="110301879"/>
+        <itempart itemid="113301848"/>
+        <itempart itemid="111301817"/>
+        <itempart itemid="114301885"/>
+        <itempart itemid="112301756"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="555" name="Balaur Lord Ranger Set">
+        <itempart itemid="101701409"/>
+        <itempart itemid="110301876"/>
+        <itempart itemid="113301845"/>
+        <itempart itemid="111301814"/>
+        <itempart itemid="114301882"/>
+        <itempart itemid="112301753"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="42" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="40" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="45" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="556" name="Dark Lord Ranger Set">
+        <itempart itemid="101701410"/>
+        <itempart itemid="110301880"/>
+        <itempart itemid="113301849"/>
+        <itempart itemid="111301818"/>
+        <itempart itemid="114301886"/>
+        <itempart itemid="112301757"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="557" name="Darken Lord Ranger Set">
+        <itempart itemid="101701411"/>
+        <itempart itemid="110301881"/>
+        <itempart itemid="113301850"/>
+        <itempart itemid="111301819"/>
+        <itempart itemid="114301887"/>
+        <itempart itemid="112301758"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="558" name="Balaur Lord Gunslinger Set">
+        <itempart itemid="101801267"/>
+        <itempart itemid="110301877"/>
+        <itempart itemid="113301846"/>
+        <itempart itemid="111301815"/>
+        <itempart itemid="114301883"/>
+        <itempart itemid="112301754"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="559" name="Dark lord Gunslinger Set">
+        <itempart itemid="101801268"/>
+        <itempart itemid="110301882"/>
+        <itempart itemid="113301851"/>
+        <itempart itemid="111301820"/>
+        <itempart itemid="114301888"/>
+        <itempart itemid="112301759"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="560" name="Darken Lord Gunslinger Set">
+        <itempart itemid="101901174"/>
+        <itempart itemid="110301883"/>
+        <itempart itemid="113301852"/>
+        <itempart itemid="111301821"/>
+        <itempart itemid="114301889"/>
+        <itempart itemid="112301760"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="561" name="Balaur Lord Gunslinger Set">
+        <itempart itemid="100101392"/>
+        <itempart itemid="110551207"/>
+        <itempart itemid="113501784"/>
+        <itempart itemid="111501766"/>
+        <itempart itemid="114501794"/>
+        <itempart itemid="112501705"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="562" name="Dark Lord Cleric Set">
+        <itempart itemid="100101393"/>
+        <itempart itemid="110551211"/>
+        <itempart itemid="113501788"/>
+        <itempart itemid="111501770"/>
+        <itempart itemid="114501798"/>
+        <itempart itemid="112501709"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="563" name="Darken Lord Cleric Set">
+        <itempart itemid="101501409"/>
+        <itempart itemid="110551212"/>
+        <itempart itemid="113501789"/>
+        <itempart itemid="111501771"/>
+        <itempart itemid="114501799"/>
+        <itempart itemid="112501710"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="564" name="Balaur Lord Cleric Set">
+        <itempart itemid="101501407"/>
+        <itempart itemid="110551206"/>
+        <itempart itemid="113501783"/>
+        <itempart itemid="111501765"/>
+        <itempart itemid="114501793"/>
+        <itempart itemid="112501704"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="42" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="40" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="45" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="565" name="Chanter Set Dark Lord">
+        <itempart itemid="101501408"/>
+        <itempart itemid="110551209"/>
+        <itempart itemid="113501786"/>
+        <itempart itemid="111501768"/>
+        <itempart itemid="114501796"/>
+        <itempart itemid="112501707"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="566" name="Chanter Set Darken Lord">
+        <itempart itemid="100101394"/>
+        <itempart itemid="110551210"/>
+        <itempart itemid="113501787"/>
+        <itempart itemid="111501769"/>
+        <itempart itemid="114501797"/>
+        <itempart itemid="112501708"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="8" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="10" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="PHYSICAL_ATTACK" value="50" bonus="true"/>
+                <add name="PHYSICAL_ACCURACY" value="48" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="PHYSICAL_CRITICAL" value="60" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="567" name="Balaur Lord Aethertech Set">
+        <itempart itemid="102101110"/>
+        <itempart itemid="110551208"/>
+        <itempart itemid="113501785"/>
+        <itempart itemid="111501767"/>
+        <itempart itemid="114501795"/>
+        <itempart itemid="112501706"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="568" name="Dark Lord Aethertech Set">
+        <itempart itemid="102101111"/>
+        <itempart itemid="110551213"/>
+        <itempart itemid="113501790"/>
+        <itempart itemid="111501772"/>
+        <itempart itemid="114501800"/>
+        <itempart itemid="112501711"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="569" name="Darken Lord Aethertech Set">
+        <itempart itemid="102101112"/>
+        <itempart itemid="110551214"/>
+        <itempart itemid="113501791"/>
+        <itempart itemid="111501773"/>
+        <itempart itemid="114501801"/>
+        <itempart itemid="112501712"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="570" name="Balaur Lord Sorcerer Set">
+        <itempart itemid="100501356"/>
+        <itempart itemid="110101882"/>
+        <itempart itemid="113101708"/>
+        <itempart itemid="111101697"/>
+        <itempart itemid="114101742"/>
+        <itempart itemid="112101646"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="571" name="Dark Lord Sorcerer Set">
+        <itempart itemid="100501357"/>
+        <itempart itemid="110101885"/>
+        <itempart itemid="113101711"/>
+        <itempart itemid="111101700"/>
+        <itempart itemid="114101745"/>
+        <itempart itemid="112101649"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="572" name="Darken Lord Sorcerer Set">
+        <itempart itemid="100601475"/>
+        <itempart itemid="110101886"/>
+        <itempart itemid="113101712"/>
+        <itempart itemid="111101701"/>
+        <itempart itemid="114101746"/>
+        <itempart itemid="112101650"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="573" name="Balaur Lord Spiritmaster Set">
+        <itempart itemid="100601473"/>
+        <itempart itemid="110101883"/>
+        <itempart itemid="113101709"/>
+        <itempart itemid="111101698"/>
+        <itempart itemid="114101743"/>
+        <itempart itemid="112101647"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="574" name="Dark Lord Spiritmaster Set">
+        <itempart itemid="100601474"/>
+        <itempart itemid="110101887"/>
+        <itempart itemid="113101713"/>
+        <itempart itemid="111101702"/>
+        <itempart itemid="114101747"/>
+        <itempart itemid="112101651"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="575" name="Darken Lord Spiritmaster Set">
+        <itempart itemid="100501358"/>
+        <itempart itemid="110101888"/>
+        <itempart itemid="113101714"/>
+        <itempart itemid="111101703"/>
+        <itempart itemid="114101748"/>
+        <itempart itemid="112101652"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="576" name="Balaur Lord Songweaver Set">
+        <itempart itemid="102001293"/>
+        <itempart itemid="110101884"/>
+        <itempart itemid="113101710"/>
+        <itempart itemid="111101699"/>
+        <itempart itemid="114101744"/>
+        <itempart itemid="112101648"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="18" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="5" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="18" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="15" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="121" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="20" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="81" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="48" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="20" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="12" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+                <add name="FLY_TIME" value="42" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="577" name="Dark Lord Songweaver Set">
+        <itempart itemid="102001294"/>
+        <itempart itemid="110101889"/>
+        <itempart itemid="113101715"/>
+        <itempart itemid="111101704"/>
+        <itempart itemid="114101749"/>
+        <itempart itemid="112101653"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
+            </modifiers>
+        </fullbonus>
+    </itemset>
+    <itemset id="578" name="Darken Lord Songweaver Set">
+        <itempart itemid="102001295"/>
+        <itempart itemid="110101890"/>
+        <itempart itemid="113101716"/>
+        <itempart itemid="111101705"/>
+        <itempart itemid="114101750"/>
+        <itempart itemid="112101654"/>
+        <partbonus count="2">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="40" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="4">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="50" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="7" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="32" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="20" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <partbonus count="6">
+            <modifiers>
+                <add name="BOOST_MAGICAL_SKILL" value="146" bonus="true"/>
+                <add name="MAGICAL_ACCURACY" value="24" bonus="true"/>
+                <add name="PHYSICAL_DEFENSE" value="126" bonus="true"/>
+                <add name="MAGIC_SKILL_BOOST_RESIST" value="70" bonus="true"/>
+            </modifiers>
+        </partbonus>
+        <fullbonus>
+            <modifiers>
+                <add name="MAGICAL_CRITICAL" value="29" bonus="true"/>
+                <add name="PVP_ATTACK_RATIO" value="22" bonus="true"/>
+                <add name="PVP_DEFEND_RATIO" value="55" bonus="true"/>
+                <add name="FLY_TIME" value="50" bonus="true"/>
             </modifiers>
         </fullbonus>
     </itemset>

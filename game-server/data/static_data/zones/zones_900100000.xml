@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="900100000" name="DUEL_20_900100000" area_type="POLYGON" zone_type="DUEL" flags="0">
-        <points bottom="5.0" top="55.0">
-            <point x="426.58307" y="659.4574"/>
-            <point x="426.59418" y="681.2437"/>
-            <point x="446.63187" y="681.2987"/>
-            <point x="446.57584" y="659.45734"/>
-        </points>
-    </zone>
-    <zone mapid="900100000" name="DUEL_21_900100000" area_type="POLYGON" zone_type="DUEL" flags="0">
+    <zone mapid="900100000" name="DUEL_1_900100000" area_type="POLYGON" zone_type="DUEL" flags="0">
         <points bottom="5.0" top="55.0">
             <point x="481.07837" y="659.9241"/>
             <point x="481.08948" y="681.7104"/>
@@ -16,7 +8,15 @@
             <point x="501.07114" y="659.924"/>
         </points>
     </zone>
-    <zone mapid="900100000" name="PVP_143_900100000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="900100000" name="DUEL_900100000" area_type="POLYGON" zone_type="DUEL" flags="0">
+        <points bottom="5.0" top="55.0">
+            <point x="426.58307" y="659.4574"/>
+            <point x="426.59418" y="681.2437"/>
+            <point x="446.63187" y="681.2987"/>
+            <point x="446.57584" y="659.45734"/>
+        </points>
+    </zone>
+    <zone mapid="900100000" name="PVP_35_900100000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="5.0" top="55.0">
             <point x="466.51462" y="654.76605"/>
             <point x="466.5192" y="670.7204"/>
@@ -24,7 +24,7 @@
             <point x="486.45892" y="654.81445"/>
         </points>
     </zone>
-    <zone mapid="900100000" name="PVP_144_900100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="900100000" name="PVP_36_900100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="5.0" top="55.0">
             <point x="466.45312" y="670.7532"/>
             <point x="466.4311" y="686.6458"/>
@@ -32,7 +32,7 @@
             <point x="486.46655" y="670.6571"/>
         </points>
     </zone>
-    <zone mapid="900100000" name="PVP_145_900100000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="900100000" name="PVP_37_900100000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="5.0" top="55.0">
             <point x="437.47" y="649.12"/>
             <point x="437.4261" y="676.0784"/>
@@ -40,7 +40,7 @@
             <point x="457.46277" y="649.11993"/>
         </points>
     </zone>
-    <zone mapid="900100000" name="PVP_146_900100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="900100000" name="PVP_38_900100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="5.0" top="55.0">
             <point x="437.42447" y="665.1841"/>
             <point x="437.45093" y="692.0809"/>

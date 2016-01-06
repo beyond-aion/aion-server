@@ -67,11 +67,8 @@
 		<return_loc index="6" worldid="700010000" desc="Elian" alias="HLFP_Binding_Alias_1"/>
 		<return_loc index="7" worldid="400010000" desc="Teminon Fortress" alias="Ab1_Light_Return_Alias"/>
 		<return_loc index="8" worldid="210050000" desc="Inggison Illusion Fortress" alias="LF4_Return_Area_1"/>
-		<return_loc index="9" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
-		<return_loc index="10" worldid="600030000" desc="Rancora Fortress" alias="LDF4b_Return_Area_1"/>
-		<return_loc index="11" worldid="600050000" desc="Kaisinel's Beacon" alias="LDF5a_L_return_Area_1"/>
-		<return_loc index="12" worldid="600060000" desc="Pandarunerk's Delve" alias="LDF5b_return_Area_1"/>
-		<return_loc index="13" worldid="600100000" desc="Lumewillow Glade" alias="LDF4_Advance_Return_Area_L"/>
+		<return_loc index="9" worldid="600100000" desc="Lumewillow Glade" alias="LDF4_Advance_Return_Area_L"/>
+		<return_loc index="10" worldid="210070000" desc="Aequis Expedition Headquarters" alias="LF5_Return_Area_1"/>
 	</return_item>
 	<return_item id="7">
 		<return_loc index="0" worldid="120010000" desc="Pandaemonium" alias="DC1_Return_Area_1"/>
@@ -83,10 +80,7 @@
 		<return_loc index="6" worldid="710010000" desc="Pernon" alias="HDFP_Binding_Alias_1"/>
 		<return_loc index="7" worldid="400010000" desc="Primum Fortress" alias="Ab1_Dark_Return_Alias"/>
 		<return_loc index="8" worldid="220070000" desc="Gelkmaros Fortress" alias="DF4_Return_Area_1"/>
-		<return_loc index="9" worldid="600020000" desc="Kamar" alias="LDF4a_Return_Area_1"/>
-		<return_loc index="10" worldid="600030000" desc="Rancora Fortress" alias="LDF4b_Return_Area_1"/>
-		<return_loc index="11" worldid="600050000" desc="Danuar Spire" alias="LDF5a_D_return_Area_1"/>
-		<return_loc index="12" worldid="600060000" desc="Pandarunerk" alias="LDF5b_return_Area_2"/>
-		<return_loc index="13" worldid="600100000" desc="Pinnacle Cataract" alias="LDF4_Advance_Return_Area_D"/>
+		<return_loc index="9" worldid="600100000" desc="Pinnacle Cataract" alias="LDF4_Advance_Return_Area_D"/>
+		<return_loc index="10" worldid="220080000" desc="Dragonrest Temple" alias="DF5_Return_Area_1"/>
 	</return_item>
 </multi_return_item>

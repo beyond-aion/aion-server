@@ -636,7 +636,7 @@
             <point x="1281.4524" y="1058.5852"/>
         </points>
     </zone>
-    <zone mapid="220050000" name="DF2A_ITEMUSEAREA_Q4056B" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="220050000" name="DF2A_ITEMUSEAREA_Q4056B_220050000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="109.56435" top="119.56435">
             <point x="846.99414" y="293.79233"/>
             <point x="840.03577" y="310.25137"/>
@@ -644,7 +644,7 @@
             <point x="860.961" y="300.08652"/>
         </points>
     </zone>
-    <zone mapid="220050000" name="DF2A_LIMITAREA_A_TOWN" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="220050000" name="DF2A_LIMITAREA_A_TOWN_220050000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="40.0" top="50.97">
             <point x="1331.95" y="2023.74"/>
             <point x="1346.9012" y="2029.18"/>

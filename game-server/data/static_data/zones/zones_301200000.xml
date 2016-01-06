@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="301200000" name="IDASTERIA_IU_WORLD_ITEM_USE_AREA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301200000" name="IDASTERIA_IU_WORLD_ITEM_USE_AREA_301200000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="115.6833" top="265.6833">
             <point x="455.2696" y="712.29474"/>
             <point x="448.5992" y="434.2293"/>

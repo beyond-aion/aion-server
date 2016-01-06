@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="600080000" name="LIMITAREAIDIU_DESIGN2" area_type="POLYGON" zone_type="LIMIT" flags="4">
+    <zone mapid="600080000" name="LIMITAREAIDIU_DESIGN2_600080000" area_type="POLYGON" zone_type="LIMIT" flags="4">
         <points bottom="532.0" top="632.0">
             <point x="1344.8359" y="1356.7966"/>
             <point x="1653.9684" y="1357.8481"/>
@@ -16,7 +16,7 @@
             <point x="1657.7864" y="1348.8907"/>
         </points>
     </zone>
-    <zone mapid="600080000" name="PVP_182_600080000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600080000" name="PVP_59_600080000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="532.6942" top="632.6942">
             <point x="1653.0109" y="1685.5421"/>
             <point x="1344.6094" y="1684.9253"/>

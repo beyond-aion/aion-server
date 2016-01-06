@@ -28,28 +28,28 @@
         <skill id="8302" level="1" target="PLAYER" frequency="5.0" time="NIGHT"/>
     </material>
     <material id="91">
-        <skill id="1855" level="1" target="PLAYER" frequency="6.0"/>
+        <skill id="259" level="1" target="PLAYER" frequency="6.0"/>
     </material>
     <material id="92">
-        <skill id="1858" level="1" target="PLAYER" frequency="1.0"/>
+        <skill id="262" level="1" target="PLAYER" frequency="1.0"/>
     </material>
     <material id="93">
-        <skill id="1859" level="1" target="PLAYER" frequency="1.0"/>
+        <skill id="263" level="1" target="PLAYER" frequency="1.0"/>
     </material>
     <material id="97">
         <skill id="8589" level="1" target="PLAYER" frequency="3.0"/>
     </material>
     <material id="99">
-        <skill id="1936" level="1" target="PLAYER" frequency="12.0"/>
-        <skill id="1935" level="1" target="NPC" frequency="12.0"/>
+        <skill id="116" level="1" target="PLAYER" frequency="12.0"/>
+        <skill id="304" level="1" target="NPC" frequency="12.0"/>
     </material>
     <material id="100">
-        <skill id="1936" level="1" target="NPC" frequency="12.0"/>
-        <skill id="1934" level="1" target="PLAYER" frequency="12.0"/>
+        <skill id="116" level="1" target="NPC" frequency="12.0"/>
+        <skill id="303" level="1" target="PLAYER" frequency="12.0"/>
     </material>
     <material id="101">
-        <skill id="1936" level="1" target="PLAYER_WITH_PET" frequency="12.0"/>
-        <skill id="1934" level="1" target="NPC" frequency="12.0"/>
+        <skill id="116" level="1" target="PLAYER_WITH_PET" frequency="12.0"/>
+        <skill id="303" level="1" target="NPC" frequency="12.0"/>
     </material>
     <material id="103">
         <skill id="8647" level="1" target="PLAYER_WITH_PET" frequency="3.0"/>

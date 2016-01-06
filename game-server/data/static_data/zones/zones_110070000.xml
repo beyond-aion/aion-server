@@ -32,7 +32,17 @@
             <point x="543.1609" y="193.87756"/>
         </points>
     </zone>
-    <zone mapid="110070000" name="LIMITAREA_ARENA_L_LOBBY_AREA" area_type="POLYGON" zone_type="LIMIT" flags="52">
+    <zone mapid="110070000" name="LIMITAREAARENA_L_LOBBY_WORLD_41_110070000" area_type="POLYGON" zone_type="LIMIT" flags="4">
+        <points bottom="119.6" top="169.59999">
+            <point x="461.5" y="356.0"/>
+            <point x="461.5" y="473.0"/>
+            <point x="552.5" y="473.0"/>
+            <point x="552.5" y="356.0"/>
+            <point x="516.5" y="337.5"/>
+            <point x="490.0" y="337.5"/>
+        </points>
+    </zone>
+    <zone mapid="110070000" name="LIMITAREA_ARENA_L_LOBBY_AREA_110070000" area_type="POLYGON" zone_type="LIMIT" flags="4">
         <points bottom="125.0" top="175.0">
             <point x="475.83" y="468.89"/>
             <point x="475.63406" y="444.59375"/>

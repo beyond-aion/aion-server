@@ -16,7 +16,7 @@
             <point x="805.59796" y="264.71014"/>
         </points>
     </zone>
-    <zone mapid="300150000" name="DANUAR_VESTIBULE_1_300150000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+    <zone mapid="300150000" name="DANUAR_VESTIBULE_2_300150000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
         <points bottom="100.0" top="200.0">
             <point x="600.1085" y="573.62775"/>
             <point x="672.6223" y="573.84735"/>

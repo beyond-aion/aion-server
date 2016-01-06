@@ -12,27 +12,6 @@
 	<!-- Beluslan -->
 	<base_location id="2240" type="CASUAL" world="220040000"/>
 	<base_location id="2241" type="CASUAL" world="220040000"/>
-	<!-- Katalam -->
-	<base_location id="6050" type="CASUAL" world="600050000"/>
-	<base_location id="6051" type="CASUAL" world="600050000"/>
-	<base_location id="6052" type="CASUAL" world="600050000"/>
-	<base_location id="6053" type="CASUAL" world="600050000"/>
-	<base_location id="6054" type="CASUAL" world="600050000"/>
-	<base_location id="6055" type="CASUAL" world="600050000"/>
-	<base_location id="6056" type="CASUAL" world="600050000"/>
-	<base_location id="6057" type="CASUAL" world="600050000"/>
-	<base_location id="6058" type="CASUAL" world="600050000"/>
-	<!-- Danaria -->
-	<base_location id="6060" type="CASUAL" world="600060000"/>
-	<base_location id="6061" type="CASUAL" world="600060000"/>
-	<base_location id="6062" type="CASUAL" world="600060000"/>
-	<base_location id="6063" type="CASUAL" world="600060000"/>
-	<base_location id="6064" type="CASUAL" world="600060000"/>
-	<base_location id="6065" type="CASUAL" world="600060000"/>
-	<base_location id="6066" type="CASUAL" world="600060000"/>
-	<base_location id="6067" type="CASUAL" world="600060000"/>
-	<base_location id="6068" type="CASUAL" world="600060000"/>
-	<base_location id="6069" type="CASUAL" world="600060000"/>
 	<!-- Kaldor -->
 	<base_location id="6090" type="CASUAL" world="600090000"/>
 	<base_location id="6091" type="CASUAL" world="600090000"/>

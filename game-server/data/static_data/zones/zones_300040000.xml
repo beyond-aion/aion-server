@@ -61,7 +61,7 @@
             <point x="369.9495" y="1128.2198"/>
         </points>
     </zone>
-    <zone mapid="300040000" name="IDLF1_BOMBAREA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300040000" name="IDLF1_BOMBAREA_300040000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="129.0" top="159.0">
             <point x="157.1853" y="405.87836"/>
             <point x="164.61436" y="394.16397"/>

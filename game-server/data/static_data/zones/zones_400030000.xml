@@ -100,7 +100,7 @@
             <point x="555.6837" y="266.4577"/>
         </points>
     </zone>
-    <zone mapid="400030000" name="LIMITAREAGAB1_SUB_DESIGN_41" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="400030000" name="LIMITAREAGAB1_SUB_DESIGN_41_400030000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="477.4518" top="977.45184">
             <point x="182.57175" y="43.104614"/>
             <point x="191.19865" y="937.43286"/>

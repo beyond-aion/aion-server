@@ -80,7 +80,7 @@
             <point x="395.2541" y="506.37964"/>
         </points>
     </zone>
-    <zone mapid="320130000" name="NOGLIDEAREA" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="320130000" name="NOGLIDEAREA_320130000" area_type="POLYGON" zone_type="LIMIT" flags="2">
         <points bottom="190.0" top="240.0">
             <point x="569.61" y="707.3"/>
             <point x="569.3006" y="753.39215"/>

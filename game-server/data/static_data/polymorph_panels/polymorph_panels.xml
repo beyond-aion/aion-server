@@ -1,68 +1,64 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<polymorph_panels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="polymorph_panels.xsd">
-	<panel panel_id="1" panel_skills="493825"/>
-	<panel panel_id="2" panel_skills="493826 494082"/>
-	<panel panel_id="3" panel_skills="494337"/>
-	<panel panel_id="4" panel_skills="4992001 4992257 4991745 4998145"/>
-	<panel panel_id="5" panel_skills="598785 599041 593921"/>
-	<panel panel_id="6" panel_skills="5125692 5125948 5126204 5126460 5126716"/>
-	<panel panel_id="7" panel_skills="5127228 5127484 5127740 5127996 5128252"/>
-	<panel panel_id="8" panel_skills="5128508 5129532 5129788"/>
-	<panel panel_id="9" panel_skills="5133057 5133313"/>
-	<panel panel_id="10" panel_skills="5133058 5133314"/>
-	<panel panel_id="11" panel_skills="5133059 5133315"/>
-	<panel panel_id="12" panel_skills="5172028"/>
-	<panel panel_id="13" panel_skills="5172796"/>
-	<panel panel_id="15" panel_skills="5246465 5246721 5246977"/>
-	<panel panel_id="16" panel_skills="5213953 5214209 5213697"/>
-	<panel panel_id="17" panel_skills="5341756 5342012"/>
-	<panel panel_id="18" panel_skills="5390849 5391105 5390593"/>
-	<panel panel_id="19" panel_skills="5392129 5392385 5391873"/>
-	<panel panel_id="20" panel_skills="5393409 5393665 5393153"/>
-	<panel panel_id="21" panel_skills="5394689 5394945 5394433"/>
-	<panel panel_id="22" panel_skills="5395969 5396225 5395713"/>
-	<panel panel_id="23" panel_skills="5397249 5397505 5396993"/>
-	<panel panel_id="24" panel_skills="5398529 5398785 5398273"/>
-	<panel panel_id="25" panel_skills="5403393 5403649 5403905"/>
-	<panel panel_id="26" panel_skills="5403393 5403649 5403905 5404161"/>
-	<panel panel_id="27" panel_skills="5403393 5403649 5403905 5404161 5404417"/>
-	<panel panel_id="28" panel_skills="5408257 5390593"/>
-	<panel panel_id="29" panel_skills="5403137 5403649 5403905 5404161 5410817"/>
-	<panel panel_id="30" panel_skills="5445121 5411842 5390593"/>
-	<panel panel_id="31" panel_skills="5445377 5412354 5390593"/>
-	<panel panel_id="32" panel_skills="5456897 5457153 5457409"/>
-	<panel panel_id="33" panel_skills="5458689 5458945 5459201 5459457 5459713"/>
-	<panel panel_id="34" panel_skills="5472513 5472769 5459201 5473281 5459969"/>
-	<panel panel_id="35" panel_skills="5464833 5472001 5465089 5465857 5470465"/>
-	<panel panel_id="36" panel_skills="5133060 5133316"/>
-	<panel panel_id="37" panel_skills="5133061 5133317"/>
-	<panel panel_id="38" panel_skills="5492481 5492737 5492993 5493249 5494529"/>
-	<panel panel_id="39" panel_skills="5493505 5494273 5493761 5494017 5495041"/>
-	<panel panel_id="40" panel_skills="5475329 5475585 5475073"/>
-	<panel panel_id="41" panel_skills="5476609 5476865 5476353"/>
-	<panel panel_id="42" panel_skills="5477377 5390593"/>
-	<panel panel_id="43" panel_skills="5479937 5480193 5479681"/>
-	<panel panel_id="44" panel_skills="5488404 5481729"/>
-	<panel panel_id="45" panel_skills="5479956 5481729"/>
-	<panel panel_id="46" panel_skills="5487873 5487617"/>
-	<panel panel_id="47" panel_skills="5504001 5504257 5503745"/>
-	<panel panel_id="48" panel_skills="5504513 5504769 5503745"/>
-	<panel panel_id="49" panel_skills="5505025 5505281 5503745"/>
-	<panel panel_id="50" panel_skills="5505537 5505793 5503745"/>
-	<panel panel_id="51" panel_skills="5507073 5507329 5503745"/>
-	<panel panel_id="52" panel_skills="5508865 5509121 5390593"/>
-	<panel panel_id="53" panel_skills="5509889 5510145 5523457 5390593"/>
-	<panel panel_id="54" panel_skills="5390593"/>
-	<panel panel_id="55" panel_skills="5543169 5543425 5481729"/>
-	<panel panel_id="56" panel_skills="5524481 5524737 5390593"/>
-	<panel panel_id="57" panel_skills="5525249 5525505 5525761 5390593"/>
-	<panel panel_id="58" panel_skills="5528065 5528321 5528577 5390593"/>
-	<panel panel_id="59" panel_skills="5545473 5545729 5390593"/>
-	<panel panel_id="60" panel_skills="5535489"/>
-	<panel panel_id="61" panel_skills="4992001 5581569 4991745"/>
-	<panel panel_id="62" panel_skills="4992001 4992257 4991745 5581313"/>
-	<panel panel_id="63" panel_skills="5579521 5583361"/>
-	<panel panel_id="64" panel_skills="988929 989185 989441 989697 989953"/>
-	<panel panel_id="65" panel_skills="990209 990465 990721 990977 991233"/>
-	<panel panel_id="66" panel_skills="991489 991745 992001 992257 992513"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<polymorph_panels>
+    <panel panel_id="4" panel_skills="4992001 4992257 4991745 4998145"/>
+    <panel panel_id="5" panel_skills="5377"/>
+    <panel panel_id="6" panel_skills="5125692 5125948 5126204 5126460 5126716"/>
+    <panel panel_id="7" panel_skills="5127228 5127484 5127740 5127996 5128252"/>
+    <panel panel_id="8" panel_skills="5128508 5129532 5129788"/>
+    <panel panel_id="9" panel_skills="5133057 5133313"/>
+    <panel panel_id="10" panel_skills="5133058 5133314"/>
+    <panel panel_id="11" panel_skills="5133059 5133315"/>
+    <panel panel_id="12" panel_skills="5172028"/>
+    <panel panel_id="13" panel_skills="5172796"/>
+    <panel panel_id="15" panel_skills="5246465 5246721 5246977"/>
+    <panel panel_id="16" panel_skills="5213953 5214209 5213697"/>
+    <panel panel_id="17" panel_skills="5341756 5342012"/>
+    <panel panel_id="18" panel_skills="5390849 5391105 5390593"/>
+    <panel panel_id="19" panel_skills="5392129 5392385 5391873"/>
+    <panel panel_id="20" panel_skills="5393409 5393665 5393153"/>
+    <panel panel_id="21" panel_skills="5394689 5394945 5394433"/>
+    <panel panel_id="22" panel_skills="5395969 5396225 5395713"/>
+    <panel panel_id="23" panel_skills="5397249 5397505 5396993"/>
+    <panel panel_id="24" panel_skills="5398529 5398785 5398273"/>
+    <panel panel_id="25" panel_skills="5403393 5403649 5403905"/>
+    <panel panel_id="26" panel_skills="5403393 5403649 5403905 5404161"/>
+    <panel panel_id="27" panel_skills="5403393 5403649 5403905 5404161 5404417"/>
+    <panel panel_id="28" panel_skills="5408257 5390593"/>
+    <panel panel_id="29" panel_skills="5403137 5403649 5403905 5404161 5410817"/>
+    <panel panel_id="30" panel_skills="5445121 5411842 5390593"/>
+    <panel panel_id="31" panel_skills="5445377 5412354 5390593"/>
+    <panel panel_id="32" panel_skills="5456897 5457153 5457409"/>
+    <panel panel_id="33" panel_skills="5458689 5458945 5459201 5459457 5459713"/>
+    <panel panel_id="34" panel_skills="5472513 5472769 5459201 5473281 5459969"/>
+    <panel panel_id="35" panel_skills="5464833 5472001 5465089 5465857 5470465"/>
+    <panel panel_id="36" panel_skills="5133060 5133316"/>
+    <panel panel_id="37" panel_skills="5133061 5133317"/>
+    <panel panel_id="38" panel_skills="5492481 5492737 5492993 5493249 5494529"/>
+    <panel panel_id="39" panel_skills="5493505 5494273 5493761 5494017 5495041"/>
+    <panel panel_id="40" panel_skills="5475329 5475585 5475073"/>
+    <panel panel_id="41" panel_skills="5476609 5476865 5476353"/>
+    <panel panel_id="42" panel_skills="5477377 5390593"/>
+    <panel panel_id="43" panel_skills="5479937 5480193 5479681"/>
+    <panel panel_id="44" panel_skills="5488404 5481729"/>
+    <panel panel_id="45" panel_skills="5479956 5481729"/>
+    <panel panel_id="46" panel_skills="5487873 5487617"/>
+    <panel panel_id="47" panel_skills="5504001 5504257 5503745"/>
+    <panel panel_id="48" panel_skills="5504513 5504769 5503745"/>
+    <panel panel_id="49" panel_skills="5505025 5505281 5503745"/>
+    <panel panel_id="50" panel_skills="5505537 5505793 5503745"/>
+    <panel panel_id="51" panel_skills="5507073 5507329 5503745"/>
+    <panel panel_id="52" panel_skills="5508865 5509121 5390593"/>
+    <panel panel_id="53" panel_skills="5509889 5510145 5523457 5390593"/>
+    <panel panel_id="54" panel_skills="5390593"/>
+    <panel panel_id="55" panel_skills="5543169 5543425 5481729"/>
+    <panel panel_id="56" panel_skills="5524481 5524737 5390593"/>
+    <panel panel_id="57" panel_skills="5525249 5525505 5525761 5390593"/>
+    <panel panel_id="58" panel_skills="5528065 5528321 5528577 5390593"/>
+    <panel panel_id="59" panel_skills="5545473 5545729 5390593"/>
+    <panel panel_id="61" panel_skills="5544705 5581569 4991745"/>
+    <panel panel_id="62" panel_skills="4992001 4992257 4991745"/>
+    <panel panel_id="63" panel_skills="5579521 5583361"/>
+    <panel panel_id="64" panel_skills="82945 83201 83457 83713 83969"/>
+    <panel panel_id="65" panel_skills="84225 84481 84737 84993 85249"/>
+    <panel panel_id="66" panel_skills="85505 85761 86017 86273 86529"/>
 </polymorph_panels>

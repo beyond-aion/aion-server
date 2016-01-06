@@ -133,7 +133,7 @@
             <point x="445.41208" y="359.34088"/>
         </points>
     </zone>
-    <zone mapid="301220000" name="MILITARY_SUPPLY_BASE_1_301220000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+    <zone mapid="301220000" name="MILITARY_SUPPLY_BASE_2_301220000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
         <points bottom="36.145653" top="436.14566">
             <point x="294.20776" y="676.2143"/>
             <point x="312.25516" y="676.8005"/>
@@ -211,7 +211,7 @@
             <point x="38.05836" y="1009.1994"/>
         </points>
     </zone>
-    <zone mapid="301220000" name="UNDERGROUND_WATERWAY_3_301220000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
+    <zone mapid="301220000" name="UNDERGROUND_WATERWAY_1_301220000" area_type="POLYGON" zone_type="SUB" priority="14" flags="0">
         <points bottom="138.42361" top="238.42361">
             <point x="576.0096" y="150.48396"/>
             <point x="587.18024" y="164.4473"/>

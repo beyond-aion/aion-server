@@ -14,6 +14,7 @@
 					<xs:attribute name="type" type="functionType"/>
 					<xs:attribute name="id" type="xs:int"/>
 					<xs:attribute name="slots" type="xs:int"/>
+					<xs:attribute name="rate_price" type="xs:int"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="petstats">
@@ -39,6 +40,8 @@
 			<xs:enumeration value="WING"/>
 			<xs:enumeration value="LOOT"/>
 			<xs:enumeration value="DOPING"/>
+			<xs:enumeration value="BUFF"/>
+			<xs:enumeration value="MERCHANT"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

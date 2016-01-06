@@ -23,7 +23,7 @@
             <point x="657.8986" y="502.0044"/>
         </points>
     </zone>
-    <zone mapid="301320000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_2" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301320000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_2_301320000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="478.2479" top="778.24786">
             <point x="235.38264" y="641.6372"/>
             <point x="243.38167" y="332.39078"/>
@@ -31,7 +31,7 @@
             <point x="817.88696" y="638.008"/>
         </points>
     </zone>
-    <zone mapid="301320000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_LOSE_2" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301320000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_LOSE_2_301320000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="478.2479" top="778.24786">
             <point x="239.03528" y="640.3707"/>
             <point x="247.0343" y="331.1243"/>
@@ -58,7 +58,7 @@
             <point x="505.62073" y="454.31863"/>
         </points>
     </zone>
-    <zone mapid="301320000" name="PVP_184_301320000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="301320000" name="PVP_60_301320000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="476.8878" top="776.8878">
             <point x="142.45432" y="702.1127"/>
             <point x="135.53311" y="291.07"/>

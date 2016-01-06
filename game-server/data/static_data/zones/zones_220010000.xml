@@ -112,7 +112,7 @@
             <point x="1023.518" y="2343.4563"/>
         </points>
     </zone>
-    <zone mapid="220010000" name="DF1_ITEMUSEAREA_Q24031" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+    <zone mapid="220010000" name="DF1_ITEMUSEAREA_Q24031_220010000" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
         <points bottom="317.5877" top="327.5877">
             <point x="658.8078" y="864.6806"/>
             <point x="670.46185" y="866.78955"/>
@@ -123,7 +123,7 @@
             <point x="655.3538" y="859.3701"/>
         </points>
     </zone>
-    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5012" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5012_220010000" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
         <points bottom="220.0" top="320.0">
             <point x="1120.15" y="2378.2"/>
             <point x="1101.4846" y="2359.7937"/>
@@ -135,7 +135,7 @@
             <point x="1113.2179" y="2412.25"/>
         </points>
     </zone>
-    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5029" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
+    <zone mapid="220010000" name="DF1_USEITEMAREA_Q5029_220010000" area_type="POLYGON" zone_type="ITEM_USE" flags="3">
         <points bottom="250.0" top="350.0">
             <point x="467.66992" y="1339.618"/>
             <point x="454.18732" y="1340.4879"/>

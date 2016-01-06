@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="310060000" name="LF1B_FLYINGZONE" area_type="POLYGON" zone_type="FLY" flags="12">
+    <zone mapid="310060000" name="LF1B_FLYINGZONE_310060000" area_type="POLYGON" zone_type="FLY" flags="12">
         <points bottom="761.51" top="1611.51">
             <point x="1471.834" y="536.61383"/>
             <point x="1966.2268" y="476.35876"/>

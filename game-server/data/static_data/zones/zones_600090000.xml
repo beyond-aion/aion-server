@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="600090000" name="ABYSS_CASTLE_AREA_7011" siege_id="7011" area_type="POLYGON" zone_type="FORT" flags="51">
+    <zone mapid="600090000" name="ABYSS_CASTLE_AREA_7011_600090000" siege_id="7011" area_type="POLYGON" zone_type="FORT" flags="51">
         <points bottom="1.978149" top="501.97815">
             <point x="145.58" y="168.16"/>
             <point x="144.66824" y="906.98694"/>
@@ -118,7 +118,7 @@
             <point x="741.5907" y="544.4123"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="ARTIFACT_RESULT_AREA_7011" siege_id="7012" area_type="POLYGON" zone_type="ARTIFACT" flags="51">
+    <zone mapid="600090000" name="ARTIFACT_RESULT_AREA_7011_600090000" siege_id="7012" area_type="POLYGON" zone_type="ARTIFACT" flags="51">
         <points bottom="-26.377167" top="473.62283">
             <point x="304.02902" y="1410.9878"/>
             <point x="331.9468" y="1366.3379"/>
@@ -147,7 +147,7 @@
             <point x="21.158813" y="1467.1029"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="ARTIFACT_RESULT_AREA_7012" siege_id="7013 7014" area_type="POLYGON" zone_type="ARTIFACT" flags="51">
+    <zone mapid="600090000" name="ARTIFACT_RESULT_AREA_7012_600090000" siege_id="7013 7014" area_type="POLYGON" zone_type="ARTIFACT" flags="51">
         <points bottom="-26.377167" top="473.62283">
             <point x="18.938124" y="1468.0415"/>
             <point x="305.64215" y="1414.3368"/>
@@ -431,7 +431,7 @@
             <point x="618.1336" y="948.81274"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITAREA10" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600090000" name="LIMITAREA10_600090000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="10.0" top="510.0">
             <point x="143.88562" y="149.53352"/>
             <point x="1416.7784" y="144.60388"/>
@@ -521,7 +521,7 @@
             <point x="150.80923" y="655.1024"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITAREA9" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="600090000" name="LIMITAREA9_600090000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="10.0" top="510.0">
             <point x="668.55" y="218.08"/>
             <point x="905.44464" y="214.83487"/>
@@ -531,7 +531,7 @@
             <point x="670.4043" y="353.44843"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA1" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600090000" name="LIMITEDAREA1_600090000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="164.6" top="264.6">
             <point x="1239.6952" y="1300.9032"/>
             <point x="1315.0505" y="1286.6487"/>
@@ -542,7 +542,7 @@
             <point x="1228.8146" y="1316.0042"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA2" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="600090000" name="LIMITEDAREA2_600090000" area_type="POLYGON" zone_type="LIMIT" flags="2">
         <points bottom="110.06519" top="260.0652">
             <point x="328.8764" y="1370.0248"/>
             <point x="359.20737" y="1347.8835"/>
@@ -558,7 +558,7 @@
             <point x="345.82867" y="1392.7992"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA4" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600090000" name="LIMITEDAREA4_600090000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="173.07796" top="183.07796">
             <point x="1196.9805" y="1157.1869"/>
             <point x="1199.084" y="1154.8685"/>
@@ -582,7 +582,7 @@
             <point x="1197.4114" y="1160.6976"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA5" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600090000" name="LIMITEDAREA5_600090000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="177.44594" top="187.44594">
             <point x="1085.1476" y="1248.9569"/>
             <point x="1088.0231" y="1246.224"/>
@@ -606,7 +606,7 @@
             <point x="1085.2013" y="1251.822"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA6" area_type="POLYGON" zone_type="LIMIT" flags="48">
+    <zone mapid="600090000" name="LIMITEDAREA6_600090000" area_type="POLYGON" zone_type="LIMIT" flags="48">
         <points bottom="123.32346" top="133.32346">
             <point x="326.47272" y="1073.351"/>
             <point x="328.49698" y="1070.2104"/>
@@ -630,7 +630,7 @@
             <point x="327.91602" y="1076.6011"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="LIMITEDAREA8" area_type="POLYGON" zone_type="LIMIT" flags="48">
+    <zone mapid="600090000" name="LIMITEDAREA8_600090000" area_type="POLYGON" zone_type="LIMIT" flags="48">
         <points bottom="129.98598" top="139.98598">
             <point x="445.9872" y="1260.8706"/>
             <point x="447.65118" y="1258.3153"/>
@@ -675,7 +675,7 @@
             <point x="1407.366" y="141.05406"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="NOGLIDEAREA_1" area_type="POLYGON" zone_type="LIMIT" flags="51">
+    <zone mapid="600090000" name="NOGLIDEAREA_1_600090000" area_type="POLYGON" zone_type="LIMIT" flags="51">
         <points bottom="99.65945" top="149.65945">
             <point x="668.40125" y="217.31328"/>
             <point x="670.59357" y="354.11554"/>
@@ -771,7 +771,7 @@
             <point x="545.1108" y="804.707"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_131_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_23_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="107.97711" top="257.9771">
             <point x="412.3068" y="1320.5303"/>
             <point x="379.63318" y="1337.4016"/>
@@ -787,7 +787,7 @@
             <point x="441.02893" y="1352.1952"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_132_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_24_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="172.95528" top="182.95528">
             <point x="1197.3395" y="1157.2316"/>
             <point x="1199.2888" y="1155.1461"/>
@@ -811,7 +811,7 @@
             <point x="1197.9492" y="1160.8608"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_133_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_25_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="129.98598" top="139.98598">
             <point x="446.4035" y="1260.7537"/>
             <point x="447.76767" y="1258.5957"/>
@@ -835,7 +835,7 @@
             <point x="447.18948" y="1264.1193"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_134_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_26_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="163.15674" top="263.15674">
             <point x="1312.3828" y="1288.0079"/>
             <point x="1240.5337" y="1301.4257"/>
@@ -848,7 +848,7 @@
             <point x="1320.2999" y="1299.7688"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_135_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_27_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="177.41978" top="187.41978">
             <point x="1099.7832" y="1237.6829"/>
             <point x="1102.8057" y="1240.8665"/>
@@ -872,7 +872,7 @@
             <point x="1097.5474" y="1237.6918"/>
         </points>
     </zone>
-    <zone mapid="600090000" name="PVP_136_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600090000" name="PVP_28_600090000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="123.32346" top="133.32346">
             <point x="326.94485" y="1073.3763"/>
             <point x="328.81973" y="1070.4688"/>

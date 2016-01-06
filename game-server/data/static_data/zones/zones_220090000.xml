@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zones>
+    <zone mapid="220090000" name="HABROK_1_220090000" area_type="POLYGON" zone_type="SUB" priority="16" flags="3">
+        <points bottom="344.09998" top="544.1">
+            <point x="176.0" y="56.0"/>
+            <point x="176.0" y="404.0"/>
+            <point x="336.0" y="404.0"/>
+            <point x="336.0" y="56.0"/>
+        </points>
+    </zone>
+</zones>

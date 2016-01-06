@@ -148,7 +148,7 @@
             <point x="440.28555" y="289.47363"/>
         </points>
     </zone>
-    <zone mapid="300110000" name="READY_ROOM_1_3_300110000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+    <zone mapid="300110000" name="READY_ROOM_1_2_300110000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
         <points bottom="200.00002" top="600.0">
             <point x="441.52527" y="507.15298"/>
             <point x="442.69296" y="482.6318"/>
@@ -158,7 +158,7 @@
             <point x="428.60217" y="531.3113"/>
         </points>
     </zone>
-    <zone mapid="300110000" name="READY_ROOM_2_3_300110000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
+    <zone mapid="300110000" name="READY_ROOM_2_2_300110000" area_type="POLYGON" zone_type="SUB" priority="2" flags="0">
         <points bottom="200.00002" top="600.0">
             <point x="602.2017" y="509.59372"/>
             <point x="601.03406" y="475.34192"/>

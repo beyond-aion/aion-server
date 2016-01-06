@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="301360000" name="IDLDF5_UNDER_RUNE_ITEMUSEAREA_ALL_2" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301360000" name="IDLDF5_UNDER_RUNE_ITEMUSEAREA_ALL_2_301360000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="232.4862" top="332.4862">
             <point x="232.84074" y="231.08412"/>
             <point x="256.5028" y="218.8231"/>
@@ -12,7 +12,7 @@
             <point x="222.96252" y="258.5326"/>
         </points>
     </zone>
-    <zone mapid="301360000" name="IDLDF5_UNDER_RUNE_ITEMUSEAREA_ALL_LOSE_2" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301360000" name="IDLDF5_UNDER_RUNE_ITEMUSEAREA_ALL_LOSE_2_301360000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="232.4862" top="332.4862">
             <point x="232.64157" y="230.70135"/>
             <point x="256.30365" y="218.44034"/>
@@ -36,7 +36,7 @@
             <point x="219.34021" y="255.21237"/>
         </points>
     </zone>
-    <zone mapid="301360000" name="PVP_201_301360000" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="301360000" name="PVP_75_301360000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="232.28221" top="332.2822">
             <point x="227.45163" y="239.22505"/>
             <point x="245.52397" y="222.58965"/>

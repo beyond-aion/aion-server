@@ -152,20 +152,20 @@
     </zone>
     <zone mapid="301130000" name="MORIATAS_QUARTERS_301130000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
         <points bottom="81.8406" top="531.8406">
-            <point x="136.04399" y="402.96054"/>
-            <point x="122.57848" y="411.5415"/>
-            <point x="117.033875" y="430.02353"/>
-            <point x="121.12633" y="446.7894"/>
-            <point x="134.72385" y="458.27466"/>
-            <point x="150.82964" y="458.2747"/>
-            <point x="162.97498" y="451.93796"/>
-            <point x="166.53937" y="442.3009"/>
-            <point x="166.53937" y="418.27423"/>
-            <point x="162.31491" y="406.921"/>
-            <point x="149.39162" y="402.47806"/>
+            <point x="136.09335" y="402.5863"/>
+            <point x="122.627846" y="411.16727"/>
+            <point x="117.08324" y="429.6493"/>
+            <point x="121.17569" y="446.41516"/>
+            <point x="134.77321" y="457.90042"/>
+            <point x="150.879" y="457.90045"/>
+            <point x="163.02434" y="451.56372"/>
+            <point x="166.58873" y="441.92667"/>
+            <point x="166.58873" y="417.9"/>
+            <point x="162.36427" y="406.54675"/>
+            <point x="149.44098" y="402.10382"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_1" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_1_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="89.68917" y="865.078"/>
             <point x="85.52164" y="869.5234"/>
@@ -218,7 +218,7 @@
             <point x="92.18969" y="863.411"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_2" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_2_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="287.78275" y="865.8725"/>
             <point x="283.6152" y="870.3179"/>
@@ -271,7 +271,7 @@
             <point x="290.28326" y="864.2055"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_3" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_3_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="484.59958" y="865.30524"/>
             <point x="480.43204" y="869.7506"/>
@@ -324,7 +324,7 @@
             <point x="487.1001" y="863.63824"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_4" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_4_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="684.24316" y="865.39984"/>
             <point x="680.0756" y="869.8452"/>
@@ -377,7 +377,7 @@
             <point x="686.74365" y="863.73285"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_5" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_5_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="880.9114" y="865.0225"/>
             <point x="876.74384" y="869.4679"/>

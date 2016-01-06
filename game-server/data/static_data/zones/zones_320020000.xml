@@ -17,7 +17,7 @@
             <point x="35.0" y="188.0"/>
         </points>
     </zone>
-    <zone mapid="320020000" name="FLYINGZONESHAPEIDABPRO_SUBZONE1_1" area_type="POLYGON" zone_type="FLY" flags="14">
+    <zone mapid="320020000" name="FLYINGZONESHAPEIDABPRO_SUBZONE1_1_320020000" area_type="POLYGON" zone_type="FLY" flags="14">
         <points bottom="65.1" top="75.1">
             <point x="128.0" y="895.0"/>
             <point x="128.0" y="861.0"/>

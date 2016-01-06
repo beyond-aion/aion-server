@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="400040000" name="ABYSS_CASTLE_AREA10111_CASTLE_WORLD1_1" siege_id="10211" area_type="POLYGON" zone_type="FORT" flags="60">
+    <zone mapid="400040000" name="ABYSS_CASTLE_AREA10111_CASTLE_WORLD1_1_400040000" siege_id="10211" area_type="POLYGON" zone_type="FORT" flags="60">
         <points bottom="1232.5697" top="1932.5697">
             <point x="500.76404" y="494.3109"/>
             <point x="1027.5742" y="254.56439"/>
@@ -142,7 +142,7 @@
             <point x="439.31442" y="1218.8112"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="FLYINGZONESHAPE1_1" area_type="POLYGON" zone_type="FLY" flags="60">
+    <zone mapid="400040000" name="FLYINGZONESHAPE1_1_400040000" area_type="POLYGON" zone_type="FLY" flags="60">
         <points bottom="1376.7504" top="1876.7504">
             <point x="1.515979" y="0.56012"/>
             <point x="2047.6018" y="0.507726"/>
@@ -150,7 +150,7 @@
             <point x="1.941176" y="2047.4844"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="GAB1_01_FLYING_ZONE01_1" area_type="POLYGON" zone_type="NO_FLY" flags="60">
+    <zone mapid="400040000" name="GAB1_01_FLYING_ZONE01_1_400040000" area_type="POLYGON" zone_type="NO_FLY" flags="48">
         <points bottom="1526.8693" top="1746.8693">
             <point x="865.17865" y="1026.0901"/>
             <point x="874.3849" y="974.8433"/>
@@ -174,7 +174,7 @@
             <point x="872.8349" y="1074.184"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="GAB1_01_FLYING_ZONE02" area_type="POLYGON" zone_type="FLY" flags="60">
+    <zone mapid="400040000" name="GAB1_01_FLYING_ZONE02_400040000" area_type="POLYGON" zone_type="FLY" flags="60">
         <points bottom="849.55383" top="1749.5538">
             <point x="7.722694" y="12.721764"/>
             <point x="562.4661" y="3.433815"/>
@@ -202,7 +202,7 @@
             <point x="1423.8195" y="586.3251"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="LIMITAREA10111_CASTLE_WORLD1_1" area_type="POLYGON" zone_type="LIMIT" flags="12">
+    <zone mapid="400040000" name="LIMITAREA10111_CASTLE_WORLD1_1_400040000" area_type="POLYGON" zone_type="LIMIT" flags="12">
         <points bottom="1249.3984" top="1949.3984">
             <point x="490.2173" y="489.20847"/>
             <point x="1030.0825" y="248.82986"/>
@@ -302,7 +302,7 @@
             <point x="446.16818" y="497.51794"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="PVP_95_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="400040000" name="PVP_11_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="1426.0994" top="1496.0994">
             <point x="-1.526899" y="1040.6064"/>
             <point x="-1.115357" y="1007.7326"/>
@@ -310,7 +310,7 @@
             <point x="96.67474" y="1042.6836"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="PVP_96_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="400040000" name="PVP_12_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="1425.6929" top="1495.6929">
             <point x="1045.8883" y="2055.7898"/>
             <point x="1003.38116" y="2054.5986"/>
@@ -318,7 +318,7 @@
             <point x="1044.4131" y="1950.2385"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="PVP_97_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="400040000" name="PVP_13_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="1426.167" top="1496.167">
             <point x="2050.8406" y="1002.3964"/>
             <point x="2051.4858" y="1044.6166"/>
@@ -326,7 +326,7 @@
             <point x="1947.496" y="1003.6103"/>
         </points>
     </zone>
-    <zone mapid="400040000" name="PVP_98_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="400040000" name="PVP_14_400040000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="1425.6749" top="1495.6749">
             <point x="999.2427" y="-15.633223"/>
             <point x="1044.3145" y="-14.445339"/>

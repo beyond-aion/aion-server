@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="300010000" name="FLYINGZONESHAPEMAIN1" area_type="POLYGON" zone_type="FLY" flags="15">
+    <zone mapid="300010000" name="FLYINGZONESHAPEMAIN1_300010000" area_type="POLYGON" zone_type="FLY" flags="15">
         <points bottom="0.1" top="320.1">
             <point x="16.159874" y="15.645449"/>
             <point x="496.11496" y="14.900203"/>

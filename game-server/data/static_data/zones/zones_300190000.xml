@@ -65,7 +65,7 @@
             <point x="245.9697" y="339.70236"/>
         </points>
     </zone>
-    <zone mapid="300190000" name="IDELIM_ITEMUSE" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300190000" name="IDELIM_ITEMUSE_300190000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="1000.0" top="1500.0">
             <point x="96.69" y="179.23"/>
             <point x="413.1363" y="189.1633"/>

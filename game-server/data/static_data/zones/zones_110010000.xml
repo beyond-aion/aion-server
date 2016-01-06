@@ -167,7 +167,7 @@
             <point x="1415.8087" y="1471.4878"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LC1_FZ_C" area_type="POLYGON" zone_type="FLY" flags="62">
+    <zone mapid="110010000" name="LC1_FZ_C_110010000" area_type="POLYGON" zone_type="FLY" flags="62">
         <points bottom="561.0506" top="587.0506">
             <point x="1453.5411" y="1341.1088"/>
             <point x="1451.978" y="1340.8773"/>
@@ -195,7 +195,7 @@
             <point x="1450.0364" y="1332.89"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LC1_ITEMUSEAREA_Q1345" area_type="POLYGON" zone_type="ITEM_USE" flags="54">
+    <zone mapid="110010000" name="LC1_ITEMUSEAREA_Q1345_110010000" area_type="POLYGON" zone_type="ITEM_USE" flags="54">
         <points bottom="555.03156" top="585.03156">
             <point x="1654.3838" y="1366.5562"/>
             <point x="1655.5702" y="1357.5796"/>
@@ -207,7 +207,7 @@
             <point x="1659.4932" y="1371.1786"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LC1_PVP_SUB_C" area_type="POLYGON" zone_type="PVP" flags="64">
+    <zone mapid="110010000" name="LC1_PVP_SUB_C_110010000" area_type="POLYGON" zone_type="PVP" flags="64">
         <points bottom="560.9854" top="588.0454">
             <point x="1454.3134" y="1341.6619"/>
             <point x="1450.8776" y="1333.0725"/>
@@ -267,7 +267,7 @@
             <point x="1954.7456" y="1523.1342"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LIMIT_AREA_1_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="110010000" name="LIMIT_AREA_1_1_110010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="549.00543" top="649.00543">
             <point x="1457.5846" y="1434.1298"/>
             <point x="1455.257" y="1439.3574"/>
@@ -283,7 +283,7 @@
             <point x="1462.874" y="1422.7335"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LIMIT_AREA_2_1" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="110010000" name="LIMIT_AREA_2_1_110010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="549.00543" top="849.00543">
             <point x="1901.8812" y="1587.9086"/>
             <point x="1832.9965" y="1588.2"/>

@@ -96,7 +96,7 @@
             <point x="98.341156" y="397.86203"/>
         </points>
     </zone>
-    <zone mapid="300560000" name="IDDF2FLYING_EVENT01_ITEM_AREA_TO_USE" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300560000" name="IDDF2FLYING_EVENT01_ITEM_AREA_TO_USE_300560000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="123.06434" top="923.06433">
             <point x="577.75256" y="-133.22536"/>
             <point x="589.0728" y="678.305"/>

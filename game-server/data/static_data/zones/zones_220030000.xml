@@ -197,7 +197,7 @@
             <point x="1434.9994" y="2280.4353"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_FZ_TOWN3" area_type="POLYGON" zone_type="FLY">
+    <zone mapid="220030000" name="DF1A_FZ_TOWN3_220030000" area_type="POLYGON" zone_type="FLY">
         <points bottom="200.0" top="440.0">
             <point x="2407.38" y="1604.5"/>
             <point x="2428.38" y="1561.125"/>
@@ -225,7 +225,7 @@
             <point x="2401.755" y="1639.875"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_IMPETUSIUM_LIMITAREA" area_type="POLYGON" zone_type="LIMIT" flags="52">
+    <zone mapid="220030000" name="DF1A_IMPETUSIUM_LIMITAREA_220030000" area_type="POLYGON" zone_type="LIMIT" flags="52">
         <points bottom="100.0" top="450.0">
             <point x="2731.62" y="1485.91"/>
             <point x="2768.604" y="1519.0339"/>
@@ -256,7 +256,7 @@
             <point x="2684.4795" y="1461.3816"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q2016" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q2016_220030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="260.19998" top="360.19998">
             <point x="1687.2004" y="248.435"/>
             <point x="1674.0039" y="258.64365"/>
@@ -269,7 +269,23 @@
             <point x="1720.1907" y="248.28806"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q24031" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q23403A_220030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+        <points bottom="239.69446" top="289.69446">
+            <point x="1839.0878" y="1705.7378"/>
+            <point x="1834.2163" y="1644.8079"/>
+            <point x="1909.2925" y="1642.5436"/>
+            <point x="1909.4489" y="1701.5254"/>
+        </points>
+    </zone>
+    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q23403B_220030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+        <points bottom="230.52289" top="280.5229">
+            <point x="1763.4456" y="555.18896"/>
+            <point x="1807.8239" y="502.45267"/>
+            <point x="1756.6394" y="454.71506"/>
+            <point x="1710.3315" y="503.81018"/>
+        </points>
+    </zone>
+    <zone mapid="220030000" name="DF1A_ITEMUSEAREA_Q24031_220030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="314.84222" top="324.84222">
             <point x="2444.1184" y="2564.212"/>
             <point x="2457.406" y="2566.4236"/>
@@ -279,42 +295,7 @@
             <point x="2438.4646" y="2556.7385"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_NEIN_9A" area_type="POLYGON" zone_type="SUB">
-        <points bottom="260.0" top="270.0">
-            <point x="1552.01" y="1483.87"/>
-            <point x="1553.4191" y="1482.9093"/>
-            <point x="1555.5327" y="1483.8059"/>
-            <point x="1555.3406" y="1484.7667"/>
-            <point x="1554.4438" y="1485.7274"/>
-            <point x="1553.0348" y="1485.8556"/>
-            <point x="1551.2413" y="1485.023"/>
-        </points>
-    </zone>
-    <zone mapid="220030000" name="DF1A_NEIN_9A_2" area_type="POLYGON" zone_type="SUB">
-        <points bottom="260.0" top="270.0">
-            <point x="1546.4341" y="1489.1302"/>
-            <point x="1548.6758" y="1487.9133"/>
-            <point x="1548.8038" y="1487.2089"/>
-            <point x="1548.9961" y="1486.3121"/>
-            <point x="1550.277" y="1485.6716"/>
-            <point x="1551.3658" y="1485.9279"/>
-            <point x="1551.2388" y="1486.5636"/>
-            <point x="1551.8142" y="1486.6965"/>
-            <point x="1552.2625" y="1487.7853"/>
-            <point x="1553.2874" y="1490.0912"/>
-            <point x="1547.8431" y="1492.589"/>
-        </points>
-    </zone>
-    <zone mapid="220030000" name="DF1A_NEIN_9A_3" area_type="POLYGON" zone_type="SUB">
-        <points bottom="260.0" top="270.0">
-            <point x="1542.524" y="1474.9661"/>
-            <point x="1543.2927" y="1474.966"/>
-            <point x="1543.485" y="1475.9269"/>
-            <point x="1542.6522" y="1476.183"/>
-            <point x="1542.2039" y="1475.9908"/>
-        </points>
-    </zone>
-    <zone mapid="220030000" name="DF1A_OP_LIMITAREA_NORIDE" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="220030000" name="DF1A_OP_LIMITAREA_NORIDE_220030000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="250.0" top="261.81">
             <point x="1747.8" y="1829.71"/>
             <point x="1743.9373" y="1845.2467"/>
@@ -322,7 +303,7 @@
             <point x="1763.8726" y="1833.7251"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1_FZ_VERTERRON" area_type="POLYGON" zone_type="FLY">
+    <zone mapid="220030000" name="DF1_FZ_VERTERRON_220030000" area_type="POLYGON" zone_type="FLY">
         <points bottom="240.0" top="440.0">
             <point x="1397.0083" y="1772.6348"/>
             <point x="1391.5197" y="1727.9484"/>

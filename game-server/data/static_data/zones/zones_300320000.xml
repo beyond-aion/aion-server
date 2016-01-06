@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="300320000" name="IDARENA_ITEMUSEAREA_ALL_1" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300320000" name="IDARENA_ITEMUSEAREA_ALL_1_300320000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="42.053467" top="492.05347">
             <point x="320.63467" y="1645.5122"/>
             <point x="346.7466" y="1632.791"/>

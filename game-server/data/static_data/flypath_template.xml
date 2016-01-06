@@ -162,64 +162,6 @@
 	<flypath_location id="160" sx="398" sy="553" sz="318" sworld="300250000" ex="1279" ey="597" ez="304" eworld="300250000" time="24.6"/>
 	<flypath_location id="161" sx="396" sy="552" sz="320" sworld="300250000" ex="769" ey="863" ez="374" eworld="300250000" time="26.9"/>
 	<flypath_location id="162" sx="900" sy="1100" sz="363" sworld="300250000" ex="1083" ey="1121" ez="241" eworld="300250000" time="16.5"/>
-	<flypath_location id="163" sx="143" sy="2212" sz="566" sworld="600020000" ex="550" ey="2624" ez="666" eworld="600020000" time="25"/>
-	<flypath_location id="164" sx="1628" sy="1536" sz="20" sworld="600030000" ex="1599" ey="1529" ez="151" eworld="600030000" time="25"/>
-	<flypath_location id="165" sx="1372" sy="1538" sz="21" sworld="600030000" ex="1399" ey="1551" ez="152" eworld="600030000" time="25"/>
-	<flypath_location id="166" sx="141" sy="1591" sz="297" sworld="600030000" ex="1715" ey="466" ez="258" eworld="600030000" time="60"/>
-	<flypath_location id="167" sx="1715" sy="466" sz="258" sworld="600030000" ex="141" ey="1591" ez="297" eworld="600030000" time="60"/>
-	<flypath_location id="168" sx="146" sy="1880" sz="297" sworld="600030000" ex="1715" ey="466" ez="258" eworld="600030000" time="63"/>
-	<flypath_location id="169" sx="1715" sy="466" sz="258" sworld="600030000" ex="146" ey="1880" ez="297" eworld="600030000" time="63"/>
-	<flypath_location id="170" sx="141" sy="1591" sz="297" sworld="600030000" ex="1350" ey="2654" ez="257" eworld="600030000" time="63"/>
-	<flypath_location id="171" sx="1350" sy="2654" sz="257" sworld="600030000" ex="141" ey="1591" ez="297" eworld="600030000" time="63"/>
-	<flypath_location id="172" sx="146" sy="1880" sz="297" sworld="600030000" ex="1350" ey="2654" ez="257" eworld="600030000" time="63"/>
-	<flypath_location id="173" sx="1350" sy="2654" sz="257" sworld="600030000" ex="146" ey="1880" ez="297" eworld="600030000" time="63"/>
-	<flypath_location id="174" sx="1715" sy="466" sz="258" sworld="600030000" ex="2524" ey="1486" ez="239" eworld="600030000" time="63"/>
-	<flypath_location id="175" sx="2524" sy="1486" sz="239" sworld="600030000" ex="1715" ey="466" ez="258" eworld="600030000" time="63"/>
-	<flypath_location id="176" sx="1350" sy="2654" sz="257" sworld="600030000" ex="2524" ey="1486" ez="239" eworld="600030000" time="64"/>
-	<flypath_location id="177" sx="2524" sy="1486" sz="239" sworld="600030000" ex="1350" ey="2654" ez="257" eworld="600030000" time="64"/>
-	<flypath_location id="178" sx="2524" sy="1486" sz="239" sworld="600030000" ex="2802" ey="1009" ez="161" eworld="600030000" time="47"/>
-	<flypath_location id="179" sx="2802" sy="1009" sz="161" sworld="600030000" ex="2524" ey="1486" ez="239" eworld="600030000" time="47"/>
-	<flypath_location id="180" sx="1350" sy="2654" sz="257" sworld="600030000" ex="756" ey="2359" ez="110" eworld="600030000" time="64"/>
-	<flypath_location id="181" sx="756" sy="2359" sz="110" sworld="600030000" ex="1350" ey="2654" ez="257" eworld="600030000" time="64"/>
-	<flypath_location id="182" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="1931.77" ey="913.39" ez="569.61" eworld="600020000" time="68.3"/>
-	<flypath_location id="183" sx="1930.79" sy="917.14" sz="567.82" sworld="600020000" ex="1366.34" ey="1464.54" ez="600.03" eworld="600020000" time="68.3"/>
-	<flypath_location id="184" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="1415.25" ey="2445.43" ez="485.31" eworld="600020000" time="58.3"/>
-	<flypath_location id="185" sx="1422.84" sy="2447.18" sz="485.6" sworld="600020000" ex="1366.81" ey="1463.56" ez="599.86" eworld="600020000" time="58.3"/>
-	<flypath_location id="186" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="2801" ey="2048" ez="551.25" eworld="600020000" time="58.3"/>
-	<flypath_location id="187" sx="2801" sy="2048" sz="551.25" sworld="600020000" ex="1368.45" ey="1465.33" ez="600.25" eworld="600020000" time="58.3"/>
-	<flypath_location id="188" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="2879.6" ey="2283.07" ez="568.04" eworld="600020000" time="58.3"/>
-	<flypath_location id="189" sx="2879.04" sy="2284.81" sz="568.06" sworld="600020000" ex="1368.45" ey="1465.33" ez="600.25" eworld="600020000" time="58.3"/>
-	<flypath_location id="190" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="175.03" ey="293.23" ez="715.34" eworld="600020000" time="58.3"/>
-	<flypath_location id="191" sx="169.77" sy="292.88" sz="715.68" sworld="600020000" ex="1363.8" ey="1463.11" ez="600.09" eworld="600020000" time="58.3"/>
-	<flypath_location id="192" sx="1930.79" sy="917.14" sz="567.82" sworld="600020000" ex="1422.8" ey="2447.69" ez="485.55" eworld="600020000" time="58.3"/>
-	<flypath_location id="193" sx="1422.8" sy="2447.69" sz="485.55" sworld="600020000" ex="1930.79" ey="917.14" ez="567.82" eworld="600020000" time="58.3"/>
-	<flypath_location id="194" sx="796.26" sy="871.85" sz="675.39" sworld="600020000" ex="985" ey="693" ez="659.37" eworld="600020000" time="49.4"/>
-	<flypath_location id="195" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="587" ey="1093" ez="655" eworld="600020000" time="33"/>
-	<flypath_location id="196" sx="587" sy="1093" sz="655" sworld="600020000" ex="1363.8" ey="1463.11" ez="600.09" eworld="600020000" time="32"/>
-	<flypath_location id="197" sx="1366.81" sy="1463.56" sz="599.86" sworld="600020000" ex="930" ey="2208" ez="533" eworld="600020000" time="39.6"/>
-	<flypath_location id="198" sx="930" sy="2208" sz="533" sworld="600020000" ex="1363.8" ey="1463.56" ez="599.86" eworld="600020000" time="39"/>
-	<flypath_location id="199" sx="170.33" sy="293.49" sz="714.3" sworld="600020000" ex="1414.33" ey="288.49" ez="627.29" eworld="600020000" time="46"/>
-	<flypath_location id="200" sx="1415" sy="289" sz="626" sworld="600020000" ex="171" ey="294" ez="714" eworld="600020000" time="36.6"/>
-	<flypath_location id="201" sx="1366.81" sy="1463.56" sz="599.55" sworld="600020000" ex="2154" ey="1639" ez="398.38" eworld="600020000" time="23.8"/>
-	<flypath_location id="202" sx="2154" sy="1639" sz="398.38" sworld="600020000" ex="1371.13" ey="1463.12" ez="599.39" eworld="600020000" time="23.8"/>
-	<flypath_location id="203" sx="495" sy="1660" sz="282" sworld="600030000" ex="407" ey="580" ez="327" eworld="600030000" time="40"/>
-	<flypath_location id="204" sx="433" sy="484" sz="320" sworld="600030000" ex="456" ey="1671" ez="295" eworld="600030000" time="40"/>
-	<flypath_location id="205" sx="1680" sy="493" sz="258" sworld="600030000" ex="2573" ey="278" ez="323" eworld="600030000" time="30"/>
-	<flypath_location id="206" sx="2514.29" sy="207.23" sz="300.79" sworld="600030000" ex="1860" ey="440" ez="270" eworld="600030000" time="30"/>
-	<flypath_location id="207" sx="1416.48" sy="2532.97" sz="258" sworld="600030000" ex="661" ey="2748" ez="333" eworld="600030000" time="30"/>
-	<flypath_location id="208" sx="716" sy="2776" sz="311" sworld="600030000" ex="1423" ey="2605" ez="285" eworld="600030000" time="30"/>
-	<flypath_location id="209" sx="2589.9" sy="1640.61" sz="271.05" sworld="600030000" ex="2702" ey="2509" ez="376" eworld="600030000" time="40"/>
-	<flypath_location id="210" sx="2693.51" sy="2496.93" sz="356" sworld="600030000" ex="2551" ey="1610" ez="271.81" eworld="600030000" time="35"/>
-	<flypath_location id="211" sx="1207" sy="1819" sz="205" sworld="600030000" ex="1207" ey="1840" ez="220" eworld="600030000" time="90"/>
-	<flypath_location id="212" sx="2119.92" sy="1116" sz="185" sworld="600030000" ex="2090" ey="1095" ez="200" eworld="600030000" time="85"/>
-	<flypath_location id="213" sx="2744" sy="905" sz="164" sworld="600030000" ex="2622" ey="1516" ez="260" eworld="600030000" time="40"/>
-	<flypath_location id="214" sx="1523.72" sy="1037.85" sz="259.2" sworld="600030000" ex="1900" ey="1300" ez="270" eworld="600030000" time="14"/>
-	<flypath_location id="215" sx="1998" sy="1505" sz="205" sworld="600030000" ex="1523" ey="1161" ez="263" eworld="600030000" time="20"/>
-	<flypath_location id="216" sx="1525" sy="2009" sz="262" sworld="600030000" ex="1872" ey="1720" ez="259" eworld="600030000" time="14"/>
-	<flypath_location id="217" sx="1998" sy="1572" sz="205" sworld="600030000" ex="1526" ey="1875" ez="267" eworld="600030000" time="20"/>
-	<flypath_location id="218" sx="1288" sy="712" sz="1202" sworld="600040000" ex="214" ey="715" ez="1205" eworld="600040000" time="35"/>
-	<flypath_location id="219" sx="1288.89" sy="819.63" sz="1202" sworld="600040000" ex="214.11" ey="822.12" ez="1205" eworld="600040000" time="35"/>
-	<flypath_location id="220" sx="283.6" sy="766.7" sz="1204" sworld="600040000" ex="1210.2" ey="766.8" ez="1210" eworld="600040000" time="40"/>
 	<flypath_location id="221" sx="456.64" sy="1256.94" sz="128.42" sworld="210060000" ex="1213.36" ey="381.59" ez="218.11" eworld="210060000" time="30"/>
 	<flypath_location id="222" sx="1216.96" sy="381.47" sz="218.41" sworld="210060000" ex="456.64" ey="1256" ez="127.54" eworld="210060000" time="30"/>
 	<flypath_location id="223" sx="2681.61" sy="847.99" sz="138.77" sworld="210060000" ex="1217.13" ey="381.75" ez="217.79" eworld="210060000" time="33.6"/>
@@ -240,39 +182,30 @@
 	<flypath_location id="238" sx="241.79" sy="2529.66" sz="269.3" sworld="220050000" ex="840" ey="2016" ez="307.85" eworld="220050000" time="16"/>
 	<flypath_location id="239" sx="2431" sy="2060" sz="580.04" sworld="220040000" ex="533" ey="1867" ez="262.4" eworld="220040000" time="47.8"/>
 	<flypath_location id="240" sx="533" sy="1867" sz="262.85" sworld="220040000" ex="2431" ey="2060" ez="580.04" eworld="220040000" time="47.8"/>
-	<flypath_location id="241" sx="287.28" sy="323.88" sz="273.27" sworld="600050000" ex="178.85" ey="2192.83" ez="221.25" eworld="600050000" time="74.72"/>
-	<flypath_location id="242" sx="306.71" sy="2643.3" sz="138" sworld="600050000" ex="269.81" ey="806" ez="238.08" eworld="600050000" time="75"/>
-	<flypath_location id="243" sx="2876.94" sy="256.45" sz="306.09" sworld="600050000" ex="2791" ey="2674" ez="270" eworld="600050000" time="96.7"/>
-	<flypath_location id="244" sx="2802.43" sy="2603.79" sz="267.87" sworld="600050000" ex="2841" ey="271" ez="316" eworld="600050000" time="95.6"/>
-	<flypath_location id="245" sx="203.34" sy="320.58" sz="636.76" sworld="600060000" ex="182.28" ey="2869.49" ez="476.97" eworld="600060000" time="105"/>
-	<flypath_location id="246" sx="158.71" sy="2893.28" sz="482.74" sworld="600060000" ex="222.13" ey="306.85" ez="625.09" eworld="600060000" time="105"/>
-	<flypath_location id="247" sx="678.09" sy="550.12" sz="1026.46" sworld="301050000" ex="468.16" ey="513.14" ez="1072.07" eworld="301050000" time="11"/>
-	<flypath_location id="248" sx="402" sy="2715" sz="147" sworld="600050000" ex="1952" ey="2962" ez="297" eworld="600050000" time="60"/>
-	<flypath_location id="249" sx="1952" sy="2962" sz="297" sworld="600050000" ex="402" ey="2715" ez="147" eworld="600050000" time="60"/>
-	<flypath_location id="250" sx="1952" sy="2962" sz="297" sworld="600050000" ex="2783" ey="2574" ez="261" eworld="600050000" time="58.3"/>
-	<flypath_location id="251" sx="2783" sy="2574" sz="261" sworld="600050000" ex="1952" ey="2962" ez="297" eworld="600050000" time="58.3"/>
-	<flypath_location id="252" sx="358" sy="381" sz="285" sworld="600050000" ex="1690" ey="82" ez="117" eworld="600050000" time="85"/>
-	<flypath_location id="253" sx="1690" sy="82" sz="117" sworld="600050000" ex="358" ey="381" ez="285" eworld="600050000" time="85"/>
-	<flypath_location id="254" sx="1690" sy="82" sz="117" sworld="600050000" ex="2877" ey="294" ez="300" eworld="600050000" time="75"/>
-	<flypath_location id="255" sx="2877" sy="294" sz="300" sworld="600050000" ex="1690" ey="82" ez="117" eworld="600050000" time="75"/>
-	<flypath_location id="256" sx="86" sy="2884" sz="473" sworld="600060000" ex="982" ey="2780" ez="300" eworld="600060000" time="58.3"/>
-	<flypath_location id="257" sx="982" sy="2780" sz="300" sworld="600060000" ex="86" ey="2884" ez="473" eworld="600060000" time="58.3"/>
-	<flypath_location id="258" sx="982" sy="2780" sz="300" sworld="600060000" ex="2737" ey="374" ez="247" eworld="600060000" time="92"/>
-	<flypath_location id="259" sx="2737" sy="374" sz="247" sworld="600060000" ex="982" ey="2780" ez="300" eworld="600060000" time="95"/>
-	<flypath_location id="260" sx="48" sy="1593" sz="525" sworld="600060000" ex="2453" ey="1349" ez="60" eworld="600060000" time="64"/>
-	<flypath_location id="261" sx="143" sy="344" sz="626" sworld="600060000" ex="844" ey="268" ez="466" eworld="600060000" time="50"/>
-	<flypath_location id="262" sx="844" sy="268" sz="466" sworld="600060000" ex="143" ey="344" ez="626" eworld="600060000" time="57.5"/>
-	<flypath_location id="263" sx="844" sy="268" sz="466" sworld="600060000" ex="2633" ey="349" ez="228" eworld="600060000" time="74"/>
-	<flypath_location id="264" sx="2633" sy="349" sz="228" sworld="600060000" ex="844" ey="268" ez="466" eworld="600060000" time="74"/>
-	<flypath_location id="265" sx="49.12" sy="1935.1" sz="520.22" sworld="600060000" ex="2408.03" ey="1355.26" ez="54.95" eworld="600060000" time="75"/>
-	<flypath_location id="266" sx="2407" sy="1357" sz="60" sworld="600060000" ex="49" ey="1935" ez="520" eworld="600060000" time="75"/>
-	<flypath_location id="267" sx="2453" sy="1349" sz="60" sworld="600060000" ex="48" ey="1593" ez="525" eworld="600060000" time="64"/>
-	<flypath_location id="268" sx="581.93" sy="1641.19" sz="382.88" sworld="600060000" ex="844.4" ey="611.64" ez="415.69" eworld="600060000" time="50"/>
-	<flypath_location id="269" sx="608.34" sy="1760.48" sz="384.09" sworld="600060000" ex="844.17" ey="2496.06" ez="305.61" eworld="600060000" time="39"/>
-	<flypath_location id="270" sx="1129.77" sy="1638" sz="366.19" sworld="600060000" ex="1742" ey="1654" ez="190.24" eworld="600060000" time="86.4"/>
-	<flypath_location id="271" sx="1257" sy="1526" sz="190" sworld="600060000" ex="1091" ey="1557" ez="400" eworld="600060000" time="20"/>
-	<flypath_location id="272" sx="2483.67" sy="1257.45" sz="92.32" sworld="600060000" ex="2503.65" ey="142.23" ez="292.81" eworld="600060000" time="65"/>
-	<flypath_location id="273" sx="2715.74" sy="497.95" sz="252.57" sworld="600060000" ex="2602" ey="865" ez="160" eworld="600060000" time="21"/>
 	<flypath_location id="274" sx="1843" sy="1774.65" sz="306" sworld="600100000" ex="1433.33" ey="249.75" ez="262.36" eworld="600100000" time="60.5"/>
 	<flypath_location id="275" sx="114" sy="127" sz="348" sworld="600100000" ex="331.05" ey="1414.74" ez="244.78" eworld="600100000" time="50"/>
+	<flypath_location id="276" sx="1484.62" sy="1732.62" sz="480" sworld="210070000" ex="2013.36" ey="1995.25" ez="230.56" eworld="210070000" time="60"/>
+	<flypath_location id="277" sx="1429.44" sy="1471.26" sz="294.66" sworld="220080000" ex="1446.29" ey="1010.78" ez="152.64" eworld="220080000" time="80"/>
+	<flypath_location id="278" sx="711.31" sy="1098.8" sz="231.42" sworld="220080000" ex="521.78" ey="681.62" ez="259.77" eworld="220080000" time="16"/>
+	<flypath_location id="279" sx="809.98" sy="485.39" sz="584.41" sworld="210070000" ex="641.89" ey="327.33" ez="441.35" eworld="210070000" time="12.2"/>
+	<flypath_location id="280" sx="1873.59" sy="2269" sz="376.29" sworld="210070000" ex="1821.7" ey="2248.59" ez="159.32" eworld="210070000" time="27"/>
+	<flypath_location id="281" sx="788.66" sy="524.83" sz="423.2" sworld="210070000" ex="797.47" ey="532.21" ez="567.67" eworld="210070000" time="15.4"/>
+	<flypath_location id="282" sx="1867.64" sy="2235" sz="156.32" sworld="210070000" ex="1867.01" ey="2281.77" ez="374.76" eworld="210070000" time="14.5"/>
+	<flypath_location id="283" sx="1087.42" sy="962.14" sz="242.42" sworld="220080000" ex="1387.32" ey="993.12" ez="170.07" eworld="220080000" time="25.8"/>
+	<flypath_location id="284" sx="2516.43" sy="2613.2" sz="182.32" sworld="220080000" ex="2188.94" ey="2233.61" ez="322.83" eworld="220080000" time="33.2"/>
+	<flypath_location id="285" sx="1445" sy="882" sz="159" sworld="220080000" ex="1103.91" ey="986.08" ez="256.18" eworld="220080000" time="25.6"/>
+	<flypath_location id="286" sx="2183.94" sy="2263.11" sz="314.42" sworld="220080000" ex="2426.37" ey="2645.53" ez="211.32" eworld="220080000" time="43.5"/>
+	<flypath_location id="287" sx="805.46" sy="613.59" sz="1703.66" sworld="301390000" ex="634.84" ey="760.42" ez="1597.83" eworld="301390000" time="16.5"/>
+	<flypath_location id="288" sx="452.42" sy="2254.32" sz="220.94" sworld="220080000" ex="2688.69" ey="1422.51" ez="340.08" eworld="220080000" time="52.8"/>
+	<flypath_location id="289" sx="452.42" sy="2254.32" sz="220.94" sworld="220080000" ex="1578.95" ey="151.19" ez="189.21" eworld="220080000" time="56.6"/>
+	<flypath_location id="290" sx="2688.96" sy="1422.09" sz="339.58" sworld="220080000" ex="450.05" ey="2252.28" ez="221.21" eworld="220080000" time="53.2"/>
+	<flypath_location id="291" sx="2689.17" sy="1421.58" sz="339.53" sworld="220080000" ex="1578.95" ey="151.19" ez="189.21" eworld="220080000" time="38.2"/>
+	<flypath_location id="292" sx="1578.95" sy="151.19" sz="189.21" sworld="220080000" ex="452.42" ey="2254.32" ez="220.94" eworld="220080000" time="74.6"/>
+	<flypath_location id="293" sx="1578.95" sy="151.19" sz="189.21" sworld="220080000" ex="2688.43" ey="1423.84" ez="339.92" eworld="220080000" time="32"/>
+	<flypath_location id="294" sx="2902.63" sy="798.41" sz="571.51" sworld="210070000" ex="508.38" ey="1902.79" ez="467.95" eworld="210070000" time="61"/>
+	<flypath_location id="295" sx="2903.31" sy="789.02" sz="571.15" sworld="210070000" ex="2172.21" ey="2902.69" ez="326.75" eworld="210070000" time="49.4"/>
+	<flypath_location id="296" sx="508.05" sy="1904.39" sz="468.13" sworld="210070000" ex="2899.26" ey="798.05" ez="571.12" eworld="210070000" time="58"/>
+	<flypath_location id="297" sx="508.05" sy="1904.39" sz="468.13" sworld="210070000" ex="2171.52" ey="2905.67" ez="325.88" eworld="210070000" time="55.55"/>
+	<flypath_location id="298" sx="2170.41" sy="2904.33" sz="326.23" sworld="210070000" ex="2902.17" ey="798.95" ez="570.13" eworld="210070000" time="43.96"/>
+	<flypath_location id="299" sx="2171.31" sy="2907.36" sz="326.23" sworld="210070000" ex="508.13" ey="1904.32" ez="467.3" eworld="210070000" time="61.8"/>
 </flypath_template>

@@ -407,7 +407,7 @@
             <point x="695.77655" y="351.58478"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q13704" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
+    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q13704_600100000" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
         <points bottom="225.86794" top="255.86794">
             <point x="215.43369" y="1174.6654"/>
             <point x="251.59917" y="1169.9309"/>
@@ -416,7 +416,7 @@
             <point x="209.47943" y="1161.4208"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q13708" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
+    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q13708_600100000" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
         <points bottom="234.84346" top="264.84344">
             <point x="1056.5239" y="1828.3837"/>
             <point x="1050.153" y="1846.4955"/>
@@ -427,7 +427,7 @@
             <point x="1046.0117" y="1821.5576"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q23704" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
+    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q23704_600100000" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
         <points bottom="235.01637" top="265.0164">
             <point x="1848.0428" y="1142.9622"/>
             <point x="1845.171" y="1159.0023"/>
@@ -437,7 +437,7 @@
             <point x="1865.9742" y="1139.2498"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q23708" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
+    <zone mapid="600100000" name="LDF4_ADVANCE_ITEMUSEAREA_Q23708_600100000" area_type="POLYGON" zone_type="ITEM_USE" flags="51">
         <points bottom="241.4462" top="271.4462">
             <point x="1063.1553" y="305.53647"/>
             <point x="1083.9894" y="323.07724"/>
@@ -446,7 +446,7 @@
             <point x="1075.1832" y="287.27972"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_1" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_1_600100000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="238.13089" top="288.1309">
             <point x="322.50458" y="1414.8154"/>
             <point x="323.1483" y="1417.5793"/>
@@ -476,7 +476,7 @@
             <point x="321.9549" y="1412.8225"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_2" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_2_600100000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="277.04166" top="327.04166">
             <point x="946.58673" y="692.471"/>
             <point x="949.2646" y="693.1663"/>
@@ -506,7 +506,7 @@
             <point x="945.63513" y="691.1978"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_3" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_3_600100000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="254.23004" top="304.23004">
             <point x="1438.9279" y="256.19577"/>
             <point x="1440.558" y="253.99484"/>
@@ -536,7 +536,7 @@
             <point x="1437.6224" y="256.85916"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_4" area_type="POLYGON" zone_type="LIMIT" flags="50">
+    <zone mapid="600100000" name="LDF4_ADVANCE_LIMITAREA_4_600100000" area_type="POLYGON" zone_type="LIMIT" flags="50">
         <points bottom="264.61948" top="314.61948">
             <point x="1064.9093" y="1495.266"/>
             <point x="1066.3413" y="1498.1561"/>
@@ -769,7 +769,7 @@
             <point x="1594.5629" y="1906.3444"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="PVP_185_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600100000" name="PVP_61_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="260.97116" top="290.97116">
             <point x="1428.1786" y="257.85757"/>
             <point x="1429.6101" y="257.93402"/>
@@ -799,7 +799,7 @@
             <point x="1424.8055" y="253.92638"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="PVP_186_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600100000" name="PVP_62_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="272.32147" top="302.32147">
             <point x="1070.2246" y="1485.6329"/>
             <point x="1068.1206" y="1486.8561"/>
@@ -829,7 +829,7 @@
             <point x="1072.3567" y="1485.0157"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="PVP_187_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600100000" name="PVP_63_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="283.95547" top="313.95547">
             <point x="941.66815" y="682.44916"/>
             <point x="942.38654" y="683.0759"/>
@@ -859,7 +859,7 @@
             <point x="944.41296" y="678.14966"/>
         </points>
     </zone>
-    <zone mapid="600100000" name="PVP_188_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
+    <zone mapid="600100000" name="PVP_64_600100000" area_type="POLYGON" zone_type="PVP" flags="0">
         <points bottom="243.237" top="273.237">
             <point x="329.1731" y="1406.3677"/>
             <point x="326.72757" y="1407.1019"/>

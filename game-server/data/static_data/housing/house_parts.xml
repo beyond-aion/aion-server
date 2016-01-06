@@ -124,7 +124,7 @@
     <house_part id="3524001" name="Sky Blue Doodle Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3524002" name="Lime Doodle Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3524003" name="Light Yellow Doodle Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
-    <house_part id="3524004" name="Light Blue Scale Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3524004" name="Seafoam Green Scale Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3524005" name="Apricot Scale Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3524006" name="Pink Scale Patterned Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3524007" name="Apricot Floral Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
@@ -265,4 +265,15 @@
     <house_part id="3594057" name="Solorius Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3594058" name="Eastern Thourak Flower Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
     <house_part id="3594059" name="Eastern Camellia Flower Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594060" name="Flavorful Summer Camp Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594061" name="Fresh Summer Camp Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594062" name="Breezy Fall Camp Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594063" name="Cozy Winter Camp Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594064" name="Flavorful Summer Camp Floor" quality="UNIQUE" type="INFLOOR_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594065" name="Fresh Summer Camp Floor" quality="UNIQUE" type="INFLOOR_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594066" name="Cool Fall Camp Wallpaper" quality="UNIQUE" type="INFLOOR_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594067" name="Cozy Winter Camp Floor" quality="UNIQUE" type="INFLOOR_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594068" name="Night Club Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594069" name="Musician's Wallpaper" quality="UNIQUE" type="INWALL_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
+    <house_part id="3594070" name="Sleek Marble Floor" quality="UNIQUE" type="INFLOOR_ANY" building_tags="CP_S CP_A CP_B CP_C CP_D"/>
 </house_parts>

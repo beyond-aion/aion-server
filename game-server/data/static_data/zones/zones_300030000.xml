@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="300030000" name="IDAB1_MINICASTLE_ITEMUSEAREA_Q3072" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300030000" name="IDAB1_MINICASTLE_ITEMUSEAREA_Q3072_300030000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="373.505" top="423.505">
             <point x="325.0758" y="358.82883"/>
             <point x="367.3839" y="352.7778"/>

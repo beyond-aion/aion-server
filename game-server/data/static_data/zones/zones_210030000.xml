@@ -710,7 +710,23 @@
             <point x="2565.9207" y="1117.0095"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_ITEMUSEAREA_Q14031" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_ITEMUSEAREA_Q13403A_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+        <points bottom="80.402985" top="130.40298">
+            <point x="1686.4347" y="1719.122"/>
+            <point x="1651.8973" y="1645.9653"/>
+            <point x="1723.1293" y="1607.5227"/>
+            <point x="1761.9169" y="1679.4564"/>
+        </points>
+    </zone>
+    <zone mapid="210030000" name="LF1A_ITEMUSEAREA_Q13403B_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+        <points bottom="148.22104" top="198.22104">
+            <point x="1628.652" y="2117.3706"/>
+            <point x="1629.317" y="2040.8477"/>
+            <point x="1547.7435" y="2040.5431"/>
+            <point x="1549.439" y="2113.9678"/>
+        </points>
+    </zone>
+    <zone mapid="210030000" name="LF1A_ITEMUSEAREA_Q14031_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="197.56662" top="207.56662">
             <point x="2673.8865" y="1068.296"/>
             <point x="2677.5142" y="1081.3594"/>
@@ -719,7 +735,7 @@
             <point x="2677.232" y="1056.782"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_LIMITAREA_ILLUSIONARY_LAKE" area_type="POLYGON" zone_type="LIMIT" flags="54">
+    <zone mapid="210030000" name="LF1A_LIMITAREA_ILLUSIONARY_LAKE_210030000" area_type="POLYGON" zone_type="LIMIT" flags="54">
         <points bottom="90.1" top="590.1">
             <point x="2166.911" y="1659.7712"/>
             <point x="2174.051" y="1618.8778"/>
@@ -771,7 +787,7 @@
             <point x="2157.6184" y="1675.2764"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_LIMITAREA_VERTERRON" area_type="POLYGON" zone_type="LIMIT" flags="52">
+    <zone mapid="210030000" name="LF1A_LIMITAREA_VERTERRON_210030000" area_type="POLYGON" zone_type="LIMIT" flags="52">
         <points bottom="50.0" top="350.0">
             <point x="1373.48" y="1561.93"/>
             <point x="1418.4601" y="1517.9927"/>
@@ -797,7 +813,7 @@
             <point x="1325.408" y="1568.2684"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_SENSORY_AREA_Q1014" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_SENSORY_AREA_Q1014_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="50.0" top="300.0">
             <point x="777.66" y="2487.96"/>
             <point x="788.3918" y="2470.6157"/>
@@ -811,7 +827,7 @@
             <point x="792.29425" y="2508.1228"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q51" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q51_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="80.0" top="180.0">
             <point x="2371.2976" y="1117.0939"/>
             <point x="2368.6714" y="1121.6749"/>
@@ -822,7 +838,7 @@
             <point x="2380.2983" y="1116.4769"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q64" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q64_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="80.0" top="130.0">
             <point x="2274.88" y="1738.88"/>
             <point x="2299.488" y="1738.327"/>
@@ -848,7 +864,7 @@
             <point x="2270.1545" y="1767.7261"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q80" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q80_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="90.0" top="140.0">
             <point x="1667.312" y="1050.5906"/>
             <point x="1678.6853" y="1053.7107"/>
@@ -858,7 +874,7 @@
             <point x="1649.5692" y="1078.9137"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q99" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
+    <zone mapid="210030000" name="LF1A_USEITEMAREA_Q99_210030000" area_type="POLYGON" zone_type="ITEM_USE" flags="55">
         <points bottom="0.1" top="200.1">
             <point x="2317.46" y="690.02"/>
             <point x="2314.1292" y="691.5251"/>
@@ -872,7 +888,7 @@
             <point x="2319.363" y="690.23804"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1_FZ_ILLUSIONARY_LAKE" area_type="POLYGON" zone_type="FLY">
+    <zone mapid="210030000" name="LF1_FZ_ILLUSIONARY_LAKE_210030000" area_type="POLYGON" zone_type="FLY">
         <points bottom="90.0" top="260.0">
             <point x="2181.62" y="2062.75"/>
             <point x="2154.2537" y="2028.7267"/>
@@ -920,7 +936,7 @@
             <point x="2184.9863" y="2084.386"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LF1_FZ_VERTERRON" area_type="POLYGON" zone_type="FLY">
+    <zone mapid="210030000" name="LF1_FZ_VERTERRON_210030000" area_type="POLYGON" zone_type="FLY">
         <points bottom="96.95" top="296.95">
             <point x="1456.5647" y="1455.0878"/>
             <point x="1433.3638" y="1391.285"/>
@@ -950,7 +966,7 @@
             <point x="1434.6383" y="1520.1366"/>
         </points>
     </zone>
-    <zone mapid="210030000" name="LIMITAREALF1A_LIMITAREA_V30" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="210030000" name="LIMITAREALF1A_LIMITAREA_V30_210030000" area_type="POLYGON" zone_type="LIMIT" flags="6">
         <points bottom="116.64954" top="124.64954">
             <point x="1676.9487" y="1521.5277"/>
             <point x="1678.1442" y="1520.7413"/>

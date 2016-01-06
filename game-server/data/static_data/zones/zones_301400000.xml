@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="301400000" name="IDSWEEP_ITEMAREA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301400000" name="IDSWEEP_ITEMAREA_301400000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="19.280296" top="669.2803">
             <point x="50.75171" y="52.958588"/>
             <point x="663.76965" y="53.78894"/>
@@ -8,7 +8,15 @@
             <point x="13.51442" y="970.3185"/>
         </points>
     </zone>
-    <zone mapid="301400000" name="IDSWEEP_WORLD_NOGLIDE" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301400000" name="IDSWEEP_ITEMAREA_SUMMON_301400000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+        <points bottom="391.30484" top="441.30484">
+            <point x="526.07336" y="278.3044"/>
+            <point x="567.297" y="279.95895"/>
+            <point x="565.7543" y="327.80994"/>
+            <point x="524.5766" y="328.17316"/>
+        </points>
+    </zone>
+    <zone mapid="301400000" name="IDSWEEP_WORLD_NOGLIDE_301400000" area_type="POLYGON" zone_type="LIMIT" flags="0">
         <points bottom="14.314783" top="664.31476">
             <point x="56.63315" y="44.098038"/>
             <point x="688.28955" y="44.1604"/>

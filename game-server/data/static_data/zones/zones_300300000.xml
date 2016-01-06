@@ -8,7 +8,7 @@
             <point x="-24.99036" y="2134.6157"/>
         </points>
     </zone>
-    <zone mapid="300300000" name="IDARENA_ITEMUSEAREA_ALL_2" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300300000" name="IDARENA_ITEMUSEAREA_ALL_2_300300000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="42.60068" top="482.60068">
             <point x="278.7827" y="281.0587"/>
             <point x="448.56906" y="279.6626"/>
@@ -52,7 +52,7 @@
             <point x="278.90295" y="415.08356"/>
         </points>
     </zone>
-    <zone mapid="300300000" name="IDARENA_ITEMUSEAREA_TAHABATA" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300300000" name="IDARENA_ITEMUSEAREA_TAHABATA_300300000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="382.17096" top="412.17096">
             <point x="1723.0751" y="1234.8975"/>
             <point x="1806.4565" y="1234.9786"/>

@@ -48,7 +48,7 @@
             <point x="659.236" y="965.6384"/>
         </points>
     </zone>
-    <zone mapid="300160000" name="IDTEMPLE_ITEMUSEAREA_Q30006" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="300160000" name="IDTEMPLE_ITEMUSEAREA_Q30006_300160000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="180.0" top="250.0">
             <point x="505.68936" y="1273.2095"/>
             <point x="555.7661" y="1273.2759"/>

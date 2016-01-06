@@ -30,7 +30,7 @@
             <point x="235.39577" y="641.6328"/>
         </points>
     </zone>
-    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_301210000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="478.2479" top="778.24786">
             <point x="235.38264" y="641.6372"/>
             <point x="243.38167" y="332.39078"/>
@@ -38,7 +38,7 @@
             <point x="817.88696" y="638.008"/>
         </points>
     </zone>
-    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_LOSE" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
+    <zone mapid="301210000" name="IDLDF5_UNDER_01_ITEMUSEAREA_ALL_LOSE_301210000" area_type="POLYGON" zone_type="ITEM_USE" flags="0">
         <points bottom="478.2479" top="778.24786">
             <point x="239.03528" y="640.3707"/>
             <point x="247.0343" y="331.1243"/>
