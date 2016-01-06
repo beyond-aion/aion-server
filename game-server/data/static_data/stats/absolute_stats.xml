@@ -1277,4 +1277,48 @@
             <abs name="ROOT_RESISTANCE" value="9999"/>
         </modifiers>
     </stats_set>
+    <stats_set id="46">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="92000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="92000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="2000"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="MAGICAL_DEFEND" value="80"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="SPEED" value="8000"/>
+        </modifiers>
+    </stats_set>
+    <stats_set id="47">
+        <modifiers>
+            <abs name="POWER" value="100"/>
+            <abs name="HEALTH" value="100"/>
+            <abs name="AGILITY" value="100"/>
+            <abs name="ACCURACY" value="100"/>
+            <abs name="KNOWLEDGE" value="100"/>
+            <abs name="WILL" value="100"/>
+            <abs name="MAXHP" value="92000"/>
+            <abs name="REGEN_HP" value="0"/>
+            <abs name="MAXHP" value="92000" bonus="true"/>
+            <abs name="PHYSICAL_DEFENSE" value="2000"/>
+            <abs name="EVASION" value="0"/>
+            <abs name="PARRY" value="0"/>
+            <abs name="BLOCK" value="0"/>
+            <abs name="MAGICAL_DEFEND" value="80"/>
+            <abs name="BOOST_MAGICAL_SKILL" value="0"/>
+            <abs name="MAGICAL_CRITICAL" value="0"/>
+            <abs name="MAGICAL_ACCURACY" value="4000"/>
+            <abs name="SPEED" value="10000"/>
+        </modifiers>
+    </stats_set>
 </absolute_stats>

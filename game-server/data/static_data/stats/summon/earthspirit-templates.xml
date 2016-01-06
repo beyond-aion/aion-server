@@ -1,221 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Summon_EarthElemental -->
 <summon_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="16">
-		<stats_template maxHp="1740" evasion="524" parry="0" attack="88" accuracy="524" pcrit="50" macc="312" pdef="604" mresist="357" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833287" npc_id_dark="833288" level="16">
+		<stats_template maxHp="5178" evasion="672" parry="0" attack="121" accuracy="695" pcrit="50" macc="695" pdef="400" mresist="566" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="17">
-		<stats_template maxHp="1905" evasion="545" parry="0" attack="91" accuracy="545" pcrit="50" macc="333" pdef="633" mresist="374" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833289" npc_id_dark="833290" level="21">
+		<stats_template maxHp="6553" evasion="882" parry="0" attack="164" accuracy="913" pcrit="50" macc="913" pdef="500" mresist="680" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="18">
-		<stats_template maxHp="2070" evasion="566" parry="0" attack="94" accuracy="566" pcrit="50" macc="354" pdef="662" mresist="391" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833291" npc_id_dark="833292" level="26">
+		<stats_template maxHp="7928" evasion="1092" parry="0" attack="213" accuracy="1130" pcrit="50" macc="1130" pdef="600" mresist="794" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="19">
-		<stats_template maxHp="2235" evasion="587" parry="0" attack="97" accuracy="587" pcrit="50" macc="375" pdef="691" mresist="408" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833293" npc_id_dark="833294" level="31">
+		<stats_template maxHp="9303" evasion="1302" parry="0" attack="266" accuracy="1347" pcrit="50" macc="1347" pdef="700" mresist="908" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="20">
-		<stats_template maxHp="2400" evasion="608" parry="0" attack="100" accuracy="608" pcrit="50" macc="396" pdef="720" mresist="425" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833295" npc_id_dark="833296" level="36">
+		<stats_template maxHp="10678" evasion="1512" parry="0" attack="325" accuracy="1565" pcrit="50" macc="1565" pdef="800" mresist="1022" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="21">
-		<stats_template maxHp="2565" evasion="629" parry="0" attack="103" accuracy="629" pcrit="50" macc="417" pdef="749" mresist="442" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833297" npc_id_dark="833298" level="41">
+		<stats_template maxHp="12053" evasion="1722" parry="0" attack="388" accuracy="1782" pcrit="50" macc="1782" pdef="900" mresist="1136" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="22">
-		<stats_template maxHp="2730" evasion="650" parry="0" attack="106" accuracy="650" pcrit="50" macc="438" pdef="778" mresist="459" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833299" npc_id_dark="833300" level="46">
+		<stats_template maxHp="13428" evasion="1932" parry="0" attack="457" accuracy="2000" pcrit="50" macc="2000" pdef="1000" mresist="1250" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="23">
-		<stats_template maxHp="2895" evasion="671" parry="0" attack="109" accuracy="671" pcrit="50" macc="459" pdef="807" mresist="476" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833301" npc_id_dark="833302" level="51">
+		<stats_template maxHp="14803" evasion="2142" parry="0" attack="530" accuracy="2217" pcrit="50" macc="2217" pdef="1100" mresist="1364" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201010" npc_id_dark="201011" level="24">
-		<stats_template maxHp="3060" evasion="692" parry="0" attack="112" accuracy="692" pcrit="50" macc="480" pdef="836" mresist="493" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833303" npc_id_dark="833304" level="56">
+		<stats_template maxHp="16178" evasion="2352" parry="0" attack="609" accuracy="2434" pcrit="50" macc="2434" pdef="1200" mresist="1478" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="28">
-		<stats_template maxHp="3845" evasion="779" parry="0" attack="140" accuracy="779" pcrit="50" macc="522" pdef="959" mresist="567" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="29">
-		<stats_template maxHp="4080" evasion="800" parry="0" attack="143" accuracy="800" pcrit="50" macc="543" pdef="988" mresist="584" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="30">
-		<stats_template maxHp="4315" evasion="821" parry="0" attack="147" accuracy="821" pcrit="50" macc="564" pdef="1017" mresist="601" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="31">
-		<stats_template maxHp="4550" evasion="842" parry="0" attack="150" accuracy="842" pcrit="50" macc="585" pdef="1046" mresist="618" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="32">
-		<stats_template maxHp="4785" evasion="863" parry="0" attack="153" accuracy="863" pcrit="50" macc="606" pdef="1075" mresist="635" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="33">
-		<stats_template maxHp="5020" evasion="884" parry="0" attack="157" accuracy="884" pcrit="50" macc="627" pdef="1104" mresist="652" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="34">
-		<stats_template maxHp="5255" evasion="905" parry="0" attack="160" accuracy="905" pcrit="50" macc="648" pdef="1133" mresist="669" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="35">
-		<stats_template maxHp="5490" evasion="926" parry="0" attack="164" accuracy="926" pcrit="50" macc="669" pdef="1162" mresist="686" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201014" npc_id_dark="201015" level="36">
-		<stats_template maxHp="5725" evasion="947" parry="0" attack="168" accuracy="947" pcrit="50" macc="690" pdef="1191" mresist="703" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="40">
-		<stats_template maxHp="6638" evasion="1033" parry="0" attack="199" accuracy="1033" pcrit="50" macc="732" pdef="1313" mresist="777" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="41">
-		<stats_template maxHp="6890" evasion="1054" parry="0" attack="202" accuracy="1054" pcrit="50" macc="753" pdef="1342" mresist="794" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="42">
-		<stats_template maxHp="7142" evasion="1075" parry="0" attack="205" accuracy="1075" pcrit="50" macc="774" pdef="1371" mresist="811" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="43">
-		<stats_template maxHp="7394" evasion="1096" parry="0" attack="208" accuracy="1096" pcrit="50" macc="795" pdef="1400" mresist="828" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="44">
-		<stats_template maxHp="7646" evasion="1117" parry="0" attack="211" accuracy="1117" pcrit="50" macc="816" pdef="1429" mresist="845" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="45">
-		<stats_template maxHp="7898" evasion="1138" parry="0" attack="214" accuracy="1138" pcrit="50" macc="837" pdef="1458" mresist="862" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="46">
-		<stats_template maxHp="8150" evasion="1159" parry="0" attack="217" accuracy="1159" pcrit="50" macc="858" pdef="1487" mresist="879" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="47">
-		<stats_template maxHp="8402" evasion="1180" parry="0" attack="220" accuracy="1180" pcrit="50" macc="879" pdef="1516" mresist="896" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201018" npc_id_dark="201019" level="48">
-		<stats_template maxHp="8654" evasion="1201" parry="0" attack="223" accuracy="1201" pcrit="50" macc="900" pdef="1545" mresist="913" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="51">
-		<stats_template maxHp="9420" evasion="1266" parry="0" attack="236" accuracy="1266" pcrit="50" macc="924" pdef="1632" mresist="964" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="52">
-		<stats_template maxHp="9777" evasion="1287" parry="0" attack="245" accuracy="1287" pcrit="50" macc="945" pdef="1668" mresist="987" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="53">
-		<stats_template maxHp="9944" evasion="1308" parry="0" attack="246" accuracy="1308" pcrit="50" macc="966" pdef="1690" mresist="998" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="54">
-		<stats_template maxHp="10369" evasion="1329" parry="0" attack="253" accuracy="1329" pcrit="50" macc="1021" pdef="1726" mresist="1021" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="55">
-		<stats_template maxHp="10665" evasion="1350" parry="0" attack="257" accuracy="1350" pcrit="50" macc="1008" pdef="1755" mresist="1038" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="56">
-		<stats_template maxHp="10961" evasion="1371" parry="0" attack="261" accuracy="1371" pcrit="50" macc="1029" pdef="1777" mresist="1055" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="57">
-		<stats_template maxHp="10992" evasion="1392" parry="0" attack="269" accuracy="1392" pcrit="50" macc="1050" pdef="1806" mresist="1074" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="58">
-		<stats_template maxHp="11254" evasion="1413" parry="0" attack="275" accuracy="1413" pcrit="50" macc="1071" pdef="1835" mresist="1093" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201038" npc_id_dark="201039" level="59">
-		<stats_template maxHp="11516" evasion="1434" parry="0" attack="281" accuracy="1434" pcrit="50" macc="1075" pdef="1864" mresist="1112" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<!-- Checked by Tibald on offy -->
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="60">
-		<stats_template maxHp="11849" evasion="1456" parry="0" attack="273" accuracy="1456" pcrit="50" macc="1092" pdef="1871" mresist="1106" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="61">
-		<stats_template maxHp="12163" evasion="1477" parry="0" attack="281" accuracy="1477" pcrit="50" macc="1109" pdef="1903" mresist="1126" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="62">
-		<stats_template maxHp="12475" evasion="1498" parry="0" attack="285" accuracy="1498" pcrit="50" macc="1125" pdef="1933" mresist="1143" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="63">
-		<stats_template maxHp="12791" evasion="1520" parry="0" attack="290" accuracy="1520" pcrit="50" macc="1142" pdef="1962" mresist="1161" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="64">
-		<stats_template maxHp="13110" evasion="1541" parry="0" attack="295" accuracy="1541" pcrit="50" macc="1159" pdef="1992" mresist="1178" mcrit="18">
-			<speeds run="7"/>
-		</stats_template>
-	</summon_stats>
-	<summon_stats npc_id_light="201070" npc_id_dark="201071" level="65">
-		<stats_template maxHp="13432" evasion="1541" parry="0" attack="299" accuracy="1434" pcrit="50" macc="1176" pdef="2022" mresist="1196" mcrit="18">
-			<speeds run="7"/>
+	<!-- Checked by ginho1 on NA -->
+	<summon_stats npc_id_light="833253" npc_id_dark="833254" level="61">
+		<stats_template maxHp="17515" evasion="2562" parry="0" attack="692" accuracy="2652" pcrit="50" macc="2652" pdef="1300" mresist="1592" mcrit="9">
+			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
 </summon_stats_templates>
