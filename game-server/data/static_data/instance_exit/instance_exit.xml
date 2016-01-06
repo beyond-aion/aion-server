@@ -6,9 +6,10 @@
 	<!-- Chantra Dredgion -->
 	<instance_exit instance_id="300210000" exit_world="110070000" race="ELYOS" x="444.95486" y="250.77603" z="126.97165"/>
 	<instance_exit instance_id="300210000" exit_world="120080000" race="ASMODIANS" x="549.487" y="202.21657" z="93.479576" h="29"/>
-	<!-- Terath Dredgion -->
+	<!-- Terath Dredgion
 	<instance_exit instance_id="300440000" exit_world="600030000" race="ELYOS" x="144.1655" y="1611.9403" z="295.27646" h="2"/>
 	<instance_exit instance_id="300440000" exit_world="600030000" race="ASMODIANS" x="143.6365" y="1857.7517" z="294.6865" h="119"/>
+	-->
 	<!-- Nochsana Training Camp -->
 	<instance_exit instance_id="300030000" exit_world="400010000" race="ELYOS" x="2890" y="754" z="1498.5786"/>
 	<instance_exit instance_id="300030000" exit_world="400010000" race="ASMODIANS" x="876.7211" y="3079.2874" z="1644.5786"/>
@@ -77,12 +78,9 @@
 	<instance_exit instance_id="300160000" exit_world="220070000" race="ASMODIANS" x="2261.6108" y="1728.4307" z="309.1358"/>
 	<!-- Beshmundir Temple -->
 	<instance_exit instance_id="300170000" exit_world="600010000" race="PC_ALL" x="1408.07" y="767.05" z="312.7"/>
-	<!-- Elementis Forest -->
-	<instance_exit instance_id="300260000" exit_world="600020000" race="PC_ALL" x="1390.3824" y="287.6444" z="628.60944"/>
-	<!-- Argent Manor -->
-	<instance_exit instance_id="300270000" exit_world="600020000" race="PC_ALL" x="1412.4607" y="289.53616" z="626.3078"/>
 	<!-- Rentus Base -->
-	<instance_exit instance_id="300280000" exit_world="600030000" race="PC_ALL" x="131.3827" y="2766.5945" z="293.44507" h="102"/>
+	<instance_exit instance_id="300280000" exit_world="210070000" race="ELYOS" x="1144.6798" y="798.103" z="562.75" h="13"/>
+	<instance_exit instance_id="300280000" exit_world="220080000" race="ASMODIANS" x="1977.5001" y="2019.8245" z="328.69846" h="68"/>
 	<!-- Esoterrace -->
 	<instance_exit instance_id="300250000" exit_world="210050000" race="ELYOS" x="1339.667" y="276.2391" z="589.3656"/>
 	<instance_exit instance_id="300250000" exit_world="220070000" race="ASMODIANS" x="1763.0" y="2911.0" z="554.7982"/>
@@ -118,31 +116,17 @@
 	<!-- Padmarashka's Cave -->
 	<instance_exit instance_id="320150000" exit_world="210050000" race="ELYOS" x="138.09879" y="2005.2008" z="433.98132"/>
 	<instance_exit instance_id="320150000" exit_world="220070000" race="ASMODIANS" x="2972.322" y="1212.870" z="242.125"/>
-	<!-- Satra Treasure Hoard -->
-	<instance_exit instance_id="300520000" exit_world="600030000" race="ELYOS" x="143.43855" y="1572.9404" z="295.8338" h="30"/>
-	<instance_exit instance_id="300520000" exit_world="600030000" race="ASMODIANS" x="140.28073" y="1895.7826" z="295.2438" h="87"/>
-	<!-- Muada's Trencher -->
-	<instance_exit instance_id="300380000" exit_world="600020000" race="ELYOS" x="2329.652" y="2367.9143" z="541.6087" h="36"/>
-	<instance_exit instance_id="300380000" exit_world="600020000" race="ASMODIANS" x="2329.652" y="2367.9143" z="541.6087" h="36"/>
-	<!-- Sarpan Sky -->
-	<instance_exit instance_id="300410000" exit_world="600020000" race="ELYOS" x="1219.1166" y="1361.548" z="1358.9019" h="10"/>
-	<instance_exit instance_id="300410000" exit_world="600020000" race="ASMODIANS" x="1511.9075" y="1559.2152" z="1359.1228" h="70"/>
 	<!-- Aturam Sky Fortress -->
-	<instance_exit instance_id="300240000" exit_world="600020000" race="PC_ALL" x="538.3228" y="1050.5643" z="657.125" h="60"/>
-	<!-- Raksang -->
-	<instance_exit instance_id="300310000" exit_world="600020000" race="PC_ALL" x="2733.3938" y="2422.6194" z="601.65533" h="90"/>
-	<!-- Isphrael's Tract -->
-	<instance_exit instance_id="300390000" exit_world="600020000" race="PC_ALL" x="648.9753" y="1186.955" z="641.375" h="116"/>
-	<!-- Protector's Realm -->
-	<instance_exit instance_id="300330000" exit_world="600020000" race="PC_ALL" x="2652.199" y="1100.5045" z="200.46848" h="88"/>
+	<instance_exit instance_id="300240000" exit_world="210070000" race="ELYOS" x="2416.5352" y="627.2169" z="548.0" h="7"/>
+	<instance_exit instance_id="300240000" exit_world="220080000" race="ASMODIANS" x="704.18" y="2853.332" z="215.72034" h="67"/>
 	<!-- Sanctum Underground Arena -->
 	<instance_exit instance_id="310080000" exit_world="110010000" race="ELYOS" x="1466.1178" y="1336.6044" z="566.41583" h="82"/>
 	<!-- Tiamat Stronghold -->
-	<instance_exit instance_id="300510000" exit_world="600030000" race="ELYOS" x="143.43855" y="1572.9404" z="295.8338" h="30"/>
-	<instance_exit instance_id="300510000" exit_world="600030000" race="ASMODIANS" x="140.28073" y="1895.7826" z="295.2438" h="87"/>
-	<!-- Dragon Lord's Refuge -->
-	<instance_exit instance_id="300520000" exit_world="600030000" race="ELYOS" x="143.43855" y="1572.9404" z="295.8338" h="30"/>
-	<instance_exit instance_id="300520000" exit_world="600030000" race="ASMODIANS" x="140.28073" y="1895.7826" z="295.2438" h="87"/>
+	<instance_exit instance_id="300510000" exit_world="210070000" race="ELYOS" x="97.80567" y="1469.4922" z="491.5476" h="44"/>
+	<instance_exit instance_id="300510000" exit_world="220080000" race="ASMODIANS" x="2840.8413" y="1664.5078" z="302.76703" h="107"/>
+	 <!-- Dragon Lord's Refuge -->
+	<instance_exit instance_id="300520000" exit_world="210070000" race="ELYOS" x="106.4101" y="1466.2885" z="491.8714" h="78"/>
+	<instance_exit instance_id="300520000" exit_world="220080000" race="ASMODIANS" x="2857.5056" y="1674.4569" z="306.40497" h="13"/>
 	<!-- Arena of Glory -->
 	<instance_exit instance_id="300550000" exit_world="110070000" race="ELYOS" x="584.598" y="251.76744" z="127.008286"/>
 	<instance_exit instance_id="300550000" exit_world="120080000" race="ASMODIANS" x="549.32" y="328.39505" z="93.49"/>
@@ -157,42 +141,28 @@
 	<!-- Test Subject Prison -->
 	<instance_exit instance_id="301000000" exit_world="600060000" race="ELYOS" x="292.5209" y="2371.7844" z="521.131" h="119"/>
 	<instance_exit instance_id="301000000" exit_world="600060000" race="ASMODIANS" x="158.7789" y="944.99554" z="547.9603" h="88"/>
-	<!-- Kamar Battlefield -->
+	<!-- Kamar Battlefield
 	<instance_exit instance_id="301120000" exit_world="600020000" race="PC_ALL" x="1374.0" y="1455.0" z="599.3814" h="98"/>
-	<!-- 4.3 Steel Rose Cargo (Solo) -->
-	<instance_exit instance_id="301010000" exit_world="600060000" race="PC_ALL" x="2520.4045" y="1728.3208" z="137.25128" h="9"/>
-	<!-- 4.3 Steel Rose Quarters (Solo) -->
-	<instance_exit instance_id="301020000" exit_world="600060000" race="PC_ALL" x="2520.4045" y="1728.3208" z="137.25128" h="9"/>
-	<!-- 4.3 Steel Rose Cargo (Group) -->
-	<instance_exit instance_id="301030000" exit_world="600060000" race="PC_ALL" x="2520.4045" y="1728.3208" z="137.25128" h="9"/>
-	<!-- 4.3 Steel Rose Quarters (Group) -->
-	<instance_exit instance_id="301040000" exit_world="600060000" race="PC_ALL" x="2520.4045" y="1728.3208" z="137.25128" h="9"/>
-	<!-- 4.3 Steel Rose Deck -->
-	<instance_exit instance_id="301050000" exit_world="600060000" race="PC_ALL" x="2520.4045" y="1728.3208" z="137.25128" h="9"/>
-	<!-- Danuar Reliquary -->
+	-->
+	<!-- Danuar Reliquary
 	<instance_exit instance_id="301110000" exit_world="600090000" race="PC_ALL" x="775.7178" y="1029.159" z="112.1926"/>
+	-->
 	<!-- 4.3 Sauro Supply Base -->
 	<instance_exit instance_id="301130000" exit_world="600100000" race="ELYOS" x="351.01273" y="154.34937" z="352.5" h="112"/>
 	<instance_exit instance_id="301130000" exit_world="600100000" race="ASMODIANS" x="1578.6261" y="1729.967" z="284.375" h="66"/>
-	<!-- 4.3 Eternal Bastion -->
+	<!-- 4.3 Eternal Bastion 
 	<instance_exit instance_id="300540000" exit_world="600050000" race="ELYOS" x="397.67697" y="2718.1467" z="142.14284" h="109"/>
 	<instance_exit instance_id="300540000" exit_world="600050000" race="ASMODIANS" x="363.3748" y="384.92285" z="281.80835" h="72"/>
-	<!-- 4.3 Idgel Research Center -->
-	<instance_exit instance_id="300530000" exit_world="600060000" race="PC_ALL" x="2662.424" y="2624.3806" z="255.13252" h="104"/>
-	<!-- 4.3 Danuar Sanctuary -->
-	<instance_exit instance_id="301140000" exit_world="600060000" race="ELYOS" x="1048.4282" y="2779.2983" z="299.41885" h="12"/>
-	<instance_exit instance_id="301140000" exit_world="600060000" race="ASMODIANS" x="817.96216" y="250.36755" z="466.0" h="72"/>
-	<!-- 4.3 Danuar Mysticarium -->
+	-->
+	<!-- 4.8 Danuar Sanctuary -->
+	<instance_exit instance_id="301140000" exit_world="210070000" race="ELYOS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
+	<instance_exit instance_id="301140000" exit_world="220080000" race="ASMODIANS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
+	 <!-- 4.3 Danuar Mysticarium
 	<instance_exit instance_id="300480000" exit_world="600050000" race="PC_ALL" x="1981.4227" y="1926.7712" z="334.80017" h="105"/>
-	<!-- 4.3 Void Cube -->
-	<instance_exit instance_id="300580000" exit_world="600060000" race="PC_ALL" x="1433.1357" y="677.2937" z="122.32242" h="90"/>
-	<!-- 4.3 Ophidian Bridge -->
-	<instance_exit instance_id="300590000" exit_world="600060000" race="ELYOS" x="1048.4282" y="2779.2983" z="299.41885" h="12"/>
-	<instance_exit instance_id="300590000" exit_world="600060000" race="ASMODIANS" x="817.96216" y="250.36755" z="466.0" h="72"/>
-	<!-- 4.3 Legion Danuar Mysticarium -->
-	<instance_exit instance_id="301190000" exit_world="600070000" race="PC_ALL" x="494.96967" y="1040.3678" z="564.59106"/>
-	<!-- 4.3 Void Cube Legion -->
-	<instance_exit instance_id="301180000" exit_world="600060000" race="PC_ALL" x="1433.1357" y="677.2937" z="122.32242" h="90"/>
+	 -->
+	<!-- 4.8 Ophidian Bridge -->
+	<instance_exit instance_id="300590000" exit_world="210070000" race="ELYOS" x="2783.5369" y="3003.8613" z="274.875" h="24"/>
+	<instance_exit instance_id="300590000" exit_world="220080000" race="ASMODIANS" x="490.745" y="93.0318" z="199.121" h="99"/>
 	<!-- Infinity Shard -->
 	<instance_exit instance_id="300800000" exit_world="600100000" race="PC_ALL" x="1072.4126" y="982.45844" z="337.7758"/>
 	<!-- Rukibuki Circus Troupe -->
@@ -205,13 +175,16 @@
 	<!-- Illuminary Obelisk -->
 	<instance_exit instance_id="301230000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102"/>
 	<instance_exit instance_id="301230000" exit_world="600100000" race="ASMODIANS" x="1398.4855" y="378.34225" z="248.37592" h="29"/>
-	<!-- Engulfed Ophidian Bridge -->
+	<!-- Engulfed Ophidian Bridge
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ELYOS" x="687.22705" y="653.72125" z="514.68646"/>
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ASMODIANS" x="716.3487" y="871.67554" z="514.59405" h="60"/>
-	<!-- Iron Wall Warfront -->
+	-->
+	<!-- Iron Wall Warfront
 	<instance_exit instance_id="301220000" exit_world="600070000" race="ELYOS" x="687.22705" y="653.72125" z="514.68646"/>
 	<instance_exit instance_id="301220000" exit_world="600070000" race="ASMODIANS" x="716.3487" y="871.67554" z="514.59405" h="60"/>
-	<!-- Idgel Dome -->
+	-->
+	<!-- Idgel Dome
 	<instance_exit instance_id="301310000" exit_world="600090000" race="ELYOS" x="1301.1755" y="1322.0941" z="199.75026"/>
 	<instance_exit instance_id="301310000" exit_world="600090000" race="ASMODIANS" x="400.58868" y="1361.6609" z="163.7344" h="100"/>
+	-->
 </instance_exits>
