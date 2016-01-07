@@ -2235,12 +2235,15 @@
 		<item id="152203046" skill="40004" level="399"/>
 		<item id="152203095" skill="40004" level="399"/>
 		<item id="152200075" skill="40002" level="1"/>
+		<item id="152204289" skill="40002" level="1"/>
 		<item id="152200076" skill="40002" level="5"/>
 		<item id="152200077" skill="40002" level="10"/>
 		<item id="152200078" skill="40002" level="10"/>
 		<item id="152202515" skill="40002" level="10"/>
 		<item id="152220428" skill="40002" level="10"/>
 		<item id="152220541" skill="40002" level="10"/>
+		<item id="152221498" skill="40002" level="10"/>
+		<item id="152221530" skill="40002" level="10"/>
 		<item id="152200079" skill="40002" level="20"/>
 		<item id="152202516" skill="40002" level="20"/>
 		<item id="152200080" skill="40002" level="30"/>
@@ -2255,8 +2258,11 @@
 		<item id="152202520" skill="40002" level="60"/>
 		<item id="152220430" skill="40002" level="60"/>
 		<item id="152220543" skill="40002" level="60"/>
+		<item id="152221499" skill="40002" level="60"/>
+		<item id="152221531" skill="40002" level="60"/>
 		<item id="152200088" skill="40002" level="65"/>
 		<item id="152220432" skill="40002" level="65"/>
+		<item id="152221515" skill="40002" level="65"/>
 		<item id="152200084" skill="40002" level="70"/>
 		<item id="152202521" skill="40002" level="70"/>
 		<item id="152200089" skill="40002" level="75"/>
@@ -2279,6 +2285,10 @@
 		<item id="152220435" skill="40002" level="110"/>
 		<item id="152220545" skill="40002" level="110"/>
 		<item id="152220568" skill="40002" level="110"/>
+		<item id="152221500" skill="40002" level="110"/>
+		<item id="152221504" skill="40002" level="110"/>
+		<item id="152221532" skill="40002" level="110"/>
+		<item id="152221536" skill="40002" level="110"/>
 		<item id="152200094" skill="40002" level="120"/>
 		<item id="152200099" skill="40002" level="120"/>
 		<item id="152202526" skill="40002" level="120"/>
@@ -2307,6 +2317,10 @@
 		<item id="152220439" skill="40002" level="160"/>
 		<item id="152220547" skill="40002" level="160"/>
 		<item id="152220570" skill="40002" level="160"/>
+		<item id="152221501" skill="40002" level="160"/>
+		<item id="152221505" skill="40002" level="160"/>
+		<item id="152221533" skill="40002" level="160"/>
+		<item id="152221537" skill="40002" level="160"/>
 		<item id="152200113" skill="40002" level="165"/>
 		<item id="152200104" skill="40002" level="170"/>
 		<item id="152200109" skill="40002" level="170"/>
@@ -2342,6 +2356,10 @@
 		<item id="152220444" skill="40002" level="210"/>
 		<item id="152220549" skill="40002" level="210"/>
 		<item id="152220572" skill="40002" level="210"/>
+		<item id="152221502" skill="40002" level="210"/>
+		<item id="152221506" skill="40002" level="210"/>
+		<item id="152221534" skill="40002" level="210"/>
+		<item id="152221538" skill="40002" level="210"/>
 		<item id="152200149" skill="40002" level="215"/>
 		<item id="152200120" skill="40002" level="220"/>
 		<item id="152200125" skill="40002" level="220"/>
@@ -2349,6 +2367,7 @@
 		<item id="152202892" skill="40002" level="220"/>
 		<item id="152200150" skill="40002" level="225"/>
 		<item id="152220454" skill="40002" level="225"/>
+		<item id="152221516" skill="40002" level="225"/>
 		<item id="152200121" skill="40002" level="230"/>
 		<item id="152200126" skill="40002" level="230"/>
 		<item id="152202537" skill="40002" level="230"/>
@@ -2377,6 +2396,10 @@
 		<item id="152220450" skill="40002" level="260"/>
 		<item id="152220551" skill="40002" level="260"/>
 		<item id="152220574" skill="40002" level="260"/>
+		<item id="152221503" skill="40002" level="260"/>
+		<item id="152221507" skill="40002" level="260"/>
+		<item id="152221535" skill="40002" level="260"/>
+		<item id="152221539" skill="40002" level="260"/>
 		<item id="152200153" skill="40002" level="265"/>
 		<item id="152200135" skill="40002" level="270"/>
 		<item id="152200140" skill="40002" level="270"/>
@@ -2398,6 +2421,7 @@
 		<item id="152220575" skill="40002" level="290"/>
 		<item id="152200156" skill="40002" level="295"/>
 		<item id="152220457" skill="40002" level="295"/>
+		<item id="152221517" skill="40002" level="295"/>
 		<item id="152200138" skill="40002" level="299"/>
 		<item id="152200143" skill="40002" level="299"/>
 		<item id="152200196" skill="40002" level="299"/>
@@ -2418,6 +2442,10 @@
 		<item id="152220460" skill="40002" level="310"/>
 		<item id="152220553" skill="40002" level="310"/>
 		<item id="152220576" skill="40002" level="310"/>
+		<item id="152221508" skill="40002" level="310"/>
+		<item id="152221510" skill="40002" level="310"/>
+		<item id="152221542" skill="40002" level="310"/>
+		<item id="152221544" skill="40002" level="310"/>
 		<item id="152200191" skill="40002" level="315"/>
 		<item id="152220470" skill="40002" level="315"/>
 		<item id="152200161" skill="40002" level="320"/>
@@ -2452,9 +2480,14 @@
 		<item id="152220466" skill="40002" level="360"/>
 		<item id="152220555" skill="40002" level="360"/>
 		<item id="152220578" skill="40002" level="360"/>
+		<item id="152221509" skill="40002" level="360"/>
+		<item id="152221511" skill="40002" level="360"/>
+		<item id="152221543" skill="40002" level="360"/>
+		<item id="152221545" skill="40002" level="360"/>
 		<item id="152200194" skill="40002" level="365"/>
 		<item id="152201540" skill="40002" level="365"/>
 		<item id="152220510" skill="40002" level="365"/>
+		<item id="152221518" skill="40002" level="365"/>
 		<item id="152200176" skill="40002" level="370"/>
 		<item id="152200181" skill="40002" level="370"/>
 		<item id="152202551" skill="40002" level="370"/>
@@ -4044,6 +4077,8 @@
 		<item id="152207517" skill="40002" level="10"/>
 		<item id="152230418" skill="40002" level="10"/>
 		<item id="152230530" skill="40002" level="10"/>
+		<item id="152231486" skill="40002" level="10"/>
+		<item id="152231518" skill="40002" level="10"/>
 		<item id="152205079" skill="40002" level="20"/>
 		<item id="152207518" skill="40002" level="20"/>
 		<item id="152205080" skill="40002" level="30"/>
@@ -4058,8 +4093,11 @@
 		<item id="152207522" skill="40002" level="60"/>
 		<item id="152230420" skill="40002" level="60"/>
 		<item id="152230532" skill="40002" level="60"/>
+		<item id="152231487" skill="40002" level="60"/>
+		<item id="152231519" skill="40002" level="60"/>
 		<item id="152205088" skill="40002" level="65"/>
 		<item id="152230422" skill="40002" level="65"/>
+		<item id="152231503" skill="40002" level="65"/>
 		<item id="152205084" skill="40002" level="70"/>
 		<item id="152207523" skill="40002" level="70"/>
 		<item id="152205089" skill="40002" level="75"/>
@@ -4082,6 +4120,10 @@
 		<item id="152230425" skill="40002" level="110"/>
 		<item id="152230534" skill="40002" level="110"/>
 		<item id="152230557" skill="40002" level="110"/>
+		<item id="152231488" skill="40002" level="110"/>
+		<item id="152231492" skill="40002" level="110"/>
+		<item id="152231520" skill="40002" level="110"/>
+		<item id="152231524" skill="40002" level="110"/>
 		<item id="152205094" skill="40002" level="120"/>
 		<item id="152205099" skill="40002" level="120"/>
 		<item id="152207528" skill="40002" level="120"/>
@@ -4111,8 +4153,13 @@
 		<item id="152230429" skill="40002" level="160"/>
 		<item id="152230536" skill="40002" level="160"/>
 		<item id="152230559" skill="40002" level="160"/>
+		<item id="152231489" skill="40002" level="160"/>
+		<item id="152231493" skill="40002" level="160"/>
+		<item id="152231521" skill="40002" level="160"/>
+		<item id="152231525" skill="40002" level="160"/>
 		<item id="152205114" skill="40002" level="165"/>
 		<item id="152230431" skill="40002" level="165"/>
+		<item id="152231504" skill="40002" level="165"/>
 		<item id="152205104" skill="40002" level="170"/>
 		<item id="152205109" skill="40002" level="170"/>
 		<item id="152207533" skill="40002" level="170"/>
@@ -4145,6 +4192,10 @@
 		<item id="152230434" skill="40002" level="210"/>
 		<item id="152230538" skill="40002" level="210"/>
 		<item id="152230561" skill="40002" level="210"/>
+		<item id="152231490" skill="40002" level="210"/>
+		<item id="152231494" skill="40002" level="210"/>
+		<item id="152231522" skill="40002" level="210"/>
+		<item id="152231526" skill="40002" level="210"/>
 		<item id="152205120" skill="40002" level="220"/>
 		<item id="152205125" skill="40002" level="220"/>
 		<item id="152207538" skill="40002" level="220"/>
@@ -4178,6 +4229,10 @@
 		<item id="152230440" skill="40002" level="260"/>
 		<item id="152230540" skill="40002" level="260"/>
 		<item id="152230563" skill="40002" level="260"/>
+		<item id="152231491" skill="40002" level="260"/>
+		<item id="152231495" skill="40002" level="260"/>
+		<item id="152231523" skill="40002" level="260"/>
+		<item id="152231527" skill="40002" level="260"/>
 		<item id="152205135" skill="40002" level="270"/>
 		<item id="152205140" skill="40002" level="270"/>
 		<item id="152207543" skill="40002" level="270"/>
@@ -4215,6 +4270,10 @@
 		<item id="152230448" skill="40002" level="310"/>
 		<item id="152230542" skill="40002" level="310"/>
 		<item id="152230565" skill="40002" level="310"/>
+		<item id="152231496" skill="40002" level="310"/>
+		<item id="152231498" skill="40002" level="310"/>
+		<item id="152231530" skill="40002" level="310"/>
+		<item id="152231532" skill="40002" level="310"/>
 		<item id="152205187" skill="40002" level="315"/>
 		<item id="152205158" skill="40002" level="320"/>
 		<item id="152205163" skill="40002" level="320"/>
@@ -4227,6 +4286,7 @@
 		<item id="152207905" skill="40002" level="330"/>
 		<item id="152205189" skill="40002" level="335"/>
 		<item id="152230458" skill="40002" level="335"/>
+		<item id="152231505" skill="40002" level="335"/>
 		<item id="152205160" skill="40002" level="340"/>
 		<item id="152205165" skill="40002" level="340"/>
 		<item id="152206576" skill="40002" level="340"/>
@@ -4239,6 +4299,7 @@
 		<item id="152230566" skill="40002" level="340"/>
 		<item id="152205190" skill="40002" level="345"/>
 		<item id="152230459" skill="40002" level="345"/>
+		<item id="152231506" skill="40002" level="345"/>
 		<item id="152205161" skill="40002" level="350"/>
 		<item id="152205166" skill="40002" level="350"/>
 		<item id="152207551" skill="40002" level="350"/>
@@ -4252,6 +4313,10 @@
 		<item id="152230454" skill="40002" level="360"/>
 		<item id="152230544" skill="40002" level="360"/>
 		<item id="152230567" skill="40002" level="360"/>
+		<item id="152231497" skill="40002" level="360"/>
+		<item id="152231499" skill="40002" level="360"/>
+		<item id="152231531" skill="40002" level="360"/>
+		<item id="152231533" skill="40002" level="360"/>
 		<item id="152206543" skill="40002" level="365"/>
 		<item id="152205173" skill="40002" level="370"/>
 		<item id="152205178" skill="40002" level="370"/>
@@ -4433,6 +4498,13 @@
 		<item id="167000776"/>
 		<item id="167000777"/>
 		<item id="167000778"/>
+		<item id="167000878"/>
+		<item id="167000879"/>
+		<item id="167000880"/>
+		<item id="167000881"/>
+		<item id="167000882"/>
+		<item id="167000883"/>
+		<item id="167000884"/>
 	</manastones_rare>
 	<medals bonusType="MEDAL" chance="100">
 		<item id="186000031" level="1" count="2" chance="22"/>
@@ -4648,6 +4720,8 @@
 		<item id="162000122" level="70"/>
 		<item id="162000123" level="70"/>
 		<item id="162000125" level="70"/>
+		<item id="162000151" level="1"/>
+		<item id="162000154" level="1"/>
 <!--
 		<item id="162000130" level="70"/> 
 		<item id="164002167" level="60"/>
@@ -4908,6 +4982,13 @@
 		<item id="166000188" level="415"/>
 		<item id="166000189" level="415"/>
 		<item id="166000190" level="415"/>
+		<item id="166000191" level="1"/>
+		<item id="166000192" level="10"/>
+		<item id="166000193" level="50"/>
+		<item id="166000194" level="100"/>
+		<item id="166000195" level="150"/>
+		<item id="166000196" level="175"/>
+		<item id="166020000" level="200"/>
 	</enchants>
 	<boss_rare bonusType="BOSS">
 		<item id="110100122" race="ELYOS"/>
@@ -6005,4 +6086,7 @@
 	<feed_shugo_event_coin group="NONE">
 		<item id="182006999"/>
 	</feed_shugo_event_coin>
+	<feed_aether_cherry group="NONE">
+		<item id="182007162" />
+	</feed_aether_cherry>
 </item_groups>
