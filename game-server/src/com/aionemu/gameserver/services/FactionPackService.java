@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.FactionPackDAO;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.mail.SystemMailService;
@@ -42,6 +43,9 @@ public class FactionPackService {
 	}
 
 	public void addPlayerCustomReward(Player player) {
+		if (player.getRace() != Race.ELYOS)
+			return;
+
 		if (!player.getCommonData().isOnline()) // possible fix for incorrect rewardings on other char than the one logged in 
 			return;
 

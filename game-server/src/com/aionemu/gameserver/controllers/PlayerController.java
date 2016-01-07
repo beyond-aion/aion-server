@@ -14,7 +14,6 @@ import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -52,7 +51,6 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
@@ -71,19 +69,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_REPEAT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.DuelService;
-import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -405,7 +400,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
 			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));
-		}else if (showPacket) {
+		} else if (showPacket) {
 			int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
 			if (player.getSKInfo().getRank() > 1)
 				kiskTimeRemaining = 0;
@@ -652,32 +647,19 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void upgradePlayer() {
 		Player player = getOwner();
-
-		PlayerStatsTemplate statsTemplate = DataManager.PLAYER_STATS_DATA.getTemplate(player);
-		player.setPlayerStatsTemplate(statsTemplate);
-
+		updatePassiveStats();
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getLifeStats().updateCurrentStats();
-
-		// Guides Html on level up
-		if (HTMLConfig.ENABLE_GUIDES)
-			HTMLService.sendGuideHtml(player);
+		player.getGameStats().updateStatsVisually();
 
 		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
 		updateNearbyQuests();
 
-		// add new skills
-		SkillLearnService.addNewSkills(player);
-
-		player.getController().updatePassiveStats();
-
-		if (player.isInTeam()) {
+		if (player.isInTeam())
 			TeamEffectUpdater.getInstance().startTask(player);
-		}
+
 		if (player.isLegionMember())
 			LegionService.getInstance().updateMemberInfo(player);
-		player.getNpcFactions().onLevelUp();
-		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 	}
 
 	/**

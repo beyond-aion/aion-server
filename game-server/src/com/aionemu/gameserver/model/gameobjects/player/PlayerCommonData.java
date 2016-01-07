@@ -6,6 +6,7 @@ import java.util.Calendar;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -23,6 +24,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.FactionPackService;
+import com.aionemu.gameserver.services.HTMLService;
+import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
@@ -317,8 +320,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		if (!isReadyForReposeEnergy()) {
 			reposeCurrent = 0;
 			reposeMax = 0;
-		} else
+		} else {
 			reposeMax = (long) (getExpNeed() * 0.25f); // Retail 99%
+			reposeCurrent = Math.min(reposeMax, reposeCurrent);
+		}
 	}
 
 	public void setCurrentReposeEnergy(long value) {
@@ -346,6 +351,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		if (exp > maxExp)
 			exp = maxExp;
 
+		Player player = getPlayer();
 		int oldLvl = this.level;
 		this.exp = exp;
 		// make sure level is never larger than maxLevel-1
@@ -357,10 +363,15 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			else
 				this.level--;
 
-			upgradePlayerData();
+			if (player != null) {
+				// Guides Html on level up
+				if (HTMLConfig.ENABLE_GUIDES)
+					HTMLService.sendGuideHtml(player);
+				// add new skills
+				SkillLearnService.addNewSkills(player);
+			}
 		}
 
-		Player player = getPlayer();
 		if (player != null) {
 			if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
 				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
@@ -370,23 +381,18 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 					GameServer.updateRatio(getRace(), -1);
 			}
 			if (oldLvl != level) {
-				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
 				updateMaxRepose();
+				resetSalvationPoints();
+				player.getNpcFactions().onLevelUp();
+				player.getController().upgradePlayer();
+				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
+
+				BonusPackService.getInstance().addPlayerCustomReward(player);
+				FactionPackService.getInstance().addPlayerCustomReward(player);
 			}
 
-			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposeEnergy(),
-				this.getMaxReposeEnergy()));
-		}
-	}
-
-	private void upgradePlayerData() {
-		Player player = getPlayer();
-		if (player != null) {
-			BonusPackService.getInstance().addPlayerCustomReward(player);
-			if (player.getRace() == Race.ELYOS)
-				FactionPackService.getInstance().addPlayerCustomReward(player);
-			player.getController().upgradePlayer();
-			resetSalvationPoints();
+			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
+				getMaxReposeEnergy()));
 		}
 	}
 

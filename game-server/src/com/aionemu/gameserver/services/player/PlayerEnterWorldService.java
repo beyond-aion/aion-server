@@ -30,7 +30,6 @@ import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
@@ -519,8 +518,7 @@ public final class PlayerEnterWorldService {
 
 		// try to send bonus pack (if mailbox was full on lvlup)
 		BonusPackService.getInstance().addPlayerCustomReward(player);
-		if (player.getRace() == Race.ELYOS)
-			FactionPackService.getInstance().addPlayerCustomReward(player);
+		FactionPackService.getInstance().addPlayerCustomReward(player);
 	}
 
 	/**
