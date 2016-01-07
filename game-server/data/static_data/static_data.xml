@@ -89,6 +89,7 @@
 	<import file="pets/pets.xml"/>
 	<import file="pets/pet_feed.xml"/>
 	<import file="pets/pet_doping.xml"/>
+	<import file="pets/pet_buffs.xml"/>
 	<import file="quest_data/quest_data.xml"/>
 	<quest_scripts>
 		<import file="quest_script_data" skipRoot="true"/>
