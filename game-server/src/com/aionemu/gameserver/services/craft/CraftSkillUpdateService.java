@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.RecipeList;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -109,39 +110,18 @@ public class CraftSkillUpdateService {
 	}
 
 	/**
-	 * add recipe for morph for level 10
+	 * add morph recipes after ascending to daeva
 	 */
-	public void setMorphRecipe(Player player) {
-		int object = player.getObjectId();
-		Race race = player.getRace();
-		if (player.getCommonData().isDaeva()) {
-			RecipeList recipelist = null;
-			recipelist = DAOManager.getDAO(PlayerRecipesDAO.class).load(object);
-			if (race == Race.ELYOS) {
-				if (!recipelist.isRecipePresent(155000005)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000005);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000005));
-				}
-				if (!recipelist.isRecipePresent(155000002)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000002);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000002));
-				}
-				if (!recipelist.isRecipePresent(155000001)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000001);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000001));
-				}
-			} else if (race == Race.ASMODIANS) {
-				if (!recipelist.isRecipePresent(155005005)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005005);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005005));
-				}
-				if (!recipelist.isRecipePresent(155005002)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005002);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005002));
-				}
-				if (!recipelist.isRecipePresent(155005001)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005001);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005001));
+	public void setMorphRecipe(PlayerCommonData pcd, Player player) {
+		if (pcd.isDaeva()) {
+			int[] recipes = pcd.getRace() == Race.ELYOS ? new int[] { 155000001, 155000002, 155000005 } : new int[] { 155005001, 155005002, 155005005 };
+			int objectId = pcd.getPlayerObjId();
+			RecipeList recipeList = player == null ? DAOManager.getDAO(PlayerRecipesDAO.class).load(objectId) : player.getRecipeList();
+
+			for (int recipeId : recipes) {
+				if (recipeList.addRecipe(objectId, recipeId) && player != null) {
+					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARN(recipeId, player.getName()));
 				}
 			}
 		}

@@ -16,13 +16,14 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.FactionPackService;
+import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
@@ -224,7 +225,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 				salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
 				// TODO! remove salvation points?
 			}
-	
+
 			reward += repose + salvation;
 		}
 
@@ -359,19 +360,22 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			upgradePlayerData();
 		}
 
-		if (this.getPlayer() != null) {
+		Player player = getPlayer();
+		if (player != null) {
 			if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && getPlayer().getPlayerAccount().getNumberOf(getRace()) == 1)
+				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
 					GameServer.updateRatio(getRace(), 1);
 
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && getPlayer().getPlayerAccount().getNumberOf(getRace()) == 1)
+				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
 					GameServer.updateRatio(getRace(), -1);
 			}
-			if (oldLvl != level)
+			if (oldLvl != level) {
+				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
 				updateMaxRepose();
+			}
 
-			PacketSendUtility.sendPacket(this.getPlayer(),
-				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
+			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposeEnergy(),
+				this.getMaxReposeEnergy()));
 		}
 	}
 
@@ -482,7 +486,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	/**
-	 * This will only set the specified level >= 10 if the player is a daeva. 
+	 * This will only set the specified level >= 10 if the player is a daeva.
 	 */
 	public void setLevel(int level) {
 		setExp(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
@@ -674,9 +678,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 		if (playerClass.isStartingClass())
 			return false;
-		
-		QuestStateList qsl;
 
+		QuestStateList qsl;
 		Player player = getPlayer();
 		if (player != null)
 			qsl = player.getQuestStateList();
@@ -692,6 +695,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			return false;
 
 		setDaeva(true);
+		CraftSkillUpdateService.getInstance().setMorphRecipe(this, player);
 		return true;
 	}
 }

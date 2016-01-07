@@ -61,7 +61,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHERABLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NEARBY_QUESTS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
@@ -86,7 +85,6 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -654,15 +652,12 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void upgradePlayer() {
 		Player player = getOwner();
-		byte level = player.getLevel();
 
 		PlayerStatsTemplate statsTemplate = DataManager.PLAYER_STATS_DATA.getTemplate(player);
 		player.setPlayerStatsTemplate(statsTemplate);
 
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getLifeStats().updateCurrentStats();
-
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
 
 		// Guides Html on level up
 		if (HTMLConfig.ENABLE_GUIDES)
@@ -675,10 +670,6 @@ public class PlayerController extends CreatureController<Player> {
 		SkillLearnService.addNewSkills(player);
 
 		player.getController().updatePassiveStats();
-
-		// add recipe for morph
-		if (player.getCommonData().isDaeva())
-			CraftSkillUpdateService.getInstance().setMorphRecipe(player);
 
 		if (player.isInTeam()) {
 			TeamEffectUpdater.getInstance().startTask(player);

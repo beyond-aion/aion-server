@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -245,7 +244,6 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		CraftSkillUpdateService.getInstance().setMorphRecipe(env.getPlayer());
 		return defaultOnLvlUpEvent(env, 2008);
 	}
 }
