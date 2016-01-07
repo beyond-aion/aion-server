@@ -344,56 +344,60 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	 * @param exp
 	 */
 	public void setExp(long exp) {
-		// maxLevel is 66 but in game 65 should be shown with full XP bar
-		int maxLevel = isDaeva ? DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() : 10;
-		long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
-
-		if (exp > maxExp)
-			exp = maxExp;
-
 		Player player = getPlayer();
-		int oldLvl = this.level;
-		this.exp = exp;
-		// make sure level is never larger than maxLevel-1
-		boolean up = false;
-		while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
-			|| (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
-			if (up)
-				this.level++;
-			else
-				this.level--;
+
+		if (exp != this.exp) {
+			// maxLevel is 66 but in game 65 should be shown with full XP bar
+			int maxLevel = isDaeva ? DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() : 10;
+			long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
+
+			if (exp > maxExp)
+				exp = maxExp;
+
+			int oldLvl = this.level;
+			this.exp = exp;
+			// make sure level is never larger than maxLevel-1
+			boolean up = false;
+			while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
+				|| (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
+				if (up)
+					this.level++;
+				else
+					this.level--;
+
+				if (player != null) {
+					// Guides Html on level up
+					if (HTMLConfig.ENABLE_GUIDES)
+						HTMLService.sendGuideHtml(player);
+					// add new skills
+					SkillLearnService.addNewSkills(player);
+				}
+			}
 
 			if (player != null) {
-				// Guides Html on level up
-				if (HTMLConfig.ENABLE_GUIDES)
-					HTMLService.sendGuideHtml(player);
-				// add new skills
-				SkillLearnService.addNewSkills(player);
+				if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
+					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+						GameServer.updateRatio(getRace(), 1);
+
+					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+						GameServer.updateRatio(getRace(), -1);
+				}
+				if (oldLvl != level) {
+					updateMaxRepose();
+					resetSalvationPoints();
+					player.getNpcFactions().onLevelUp();
+					player.getController().upgradePlayer();
+					PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
+
+					BonusPackService.getInstance().addPlayerCustomReward(player);
+					FactionPackService.getInstance().addPlayerCustomReward(player);
+				}
 			}
 		}
 
-		if (player != null) {
-			if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
-					GameServer.updateRatio(getRace(), 1);
-
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
-					GameServer.updateRatio(getRace(), -1);
-			}
-			if (oldLvl != level) {
-				updateMaxRepose();
-				resetSalvationPoints();
-				player.getNpcFactions().onLevelUp();
-				player.getController().upgradePlayer();
-				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
-
-				BonusPackService.getInstance().addPlayerCustomReward(player);
-				FactionPackService.getInstance().addPlayerCustomReward(player);
-			}
-
+		if (player != null)
 			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
 				getMaxReposeEnergy()));
-		}
 	}
 
 	public void setNoExp(boolean value) {
