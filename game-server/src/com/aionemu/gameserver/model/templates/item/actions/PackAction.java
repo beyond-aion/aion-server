@@ -80,27 +80,27 @@ public class PackAction extends AbstractItemAction {
 			case RB_TORSO:
 			case RB_PANTS:
 			case RB_SHOULDER:
-			case RB_GLOVES:
+			case RB_GLOVE:
 			case RB_SHOES:
 			case CL_TORSO:
 			case CL_PANTS:
 			case CL_SHOULDER:
-			case CL_GLOVES:
+			case CL_GLOVE:
 			case CL_SHOES:
 			case CH_TORSO:
 			case CH_PANTS:
 			case CH_SHOULDER:
-			case CH_GLOVES:
+			case CH_GLOVE:
 			case CH_SHOES:
 			case LT_TORSO:
 			case LT_PANTS:
 			case LT_SHOULDER:
-			case LT_GLOVES:
+			case LT_GLOVE:
 			case LT_SHOES:
 			case PL_TORSO:
 			case PL_PANTS:
 			case PL_SHOULDER:
-			case PL_GLOVES:
+			case PL_GLOVE:
 			case PL_SHOES:
 				type = UseTarget.ARMOR;
 				break;
