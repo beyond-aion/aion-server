@@ -689,9 +689,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		if (qsl == null)
 			throw new AssertionError("Player " + playerObjId + " has no valid questStateList");
 
-		QuestState ceremonyQuestState = qsl.getQuestState(race == Race.ELYOS ? 1006 : 2008);
-
-		if (ceremonyQuestState == null || ceremonyQuestState.getStatus() != QuestStatus.COMPLETE)
+		// check both quest states in case a player changed race
+		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : QuestStatus.NONE;
+		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : QuestStatus.NONE;
+		if (elyAscentQuestStatus != QuestStatus.COMPLETE && asmoAscentQuestStatus != QuestStatus.COMPLETE)
 			return false;
 
 		setDaeva(true);
