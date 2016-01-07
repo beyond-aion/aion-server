@@ -5369,4 +5369,17 @@
 			<gd_world wd_type="PANESTERRA"/>
 		</gd_worlds>
 	</gd_rule>
+	<!-- Zombie -->
+	<gd_rule rule_name="Zombie Rags" base_chance="40" min_diff="-4" max_diff="5">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ZOMBIE_FARMER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 25 -->
+			<gd_item id="182004967" name="Old Undead Rags"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

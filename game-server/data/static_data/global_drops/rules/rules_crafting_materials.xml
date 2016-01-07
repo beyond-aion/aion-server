@@ -144,6 +144,7 @@
 	<!-- Enigmatic Ore -->
 	<gd_rule rule_name="Enigmatic Ore" base_chance="2" min_diff="0" max_diff="4">
 		<gd_maps>
+			<gd_map map_id="600050000" name="Katalam"/>
 			<gd_map map_id="600070000" name="Idian Depths" />
 		</gd_maps>
 		<gd_ratings>
@@ -821,6 +822,417 @@
 			<gd_item id="152014024" name="Gleaming Balaur Blood" />
 		</gd_items>
 	</gd_rule>
+	<!-- BEGIN of Animas -->
+	<gd_rule rule_name="Grassy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600050000" name="Katalam"/>
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TORN_LAND_600050000"/>
+			<gd_zone zone="IRIGANI_KEEP_600050000"/>
+			<gd_zone zone="SILLUS_MOUNTAINS_600050000"/>
+			<gd_zone zone="BROKEN_CLIFF_CAMP_600050000"/>
+			<gd_zone zone="TALONIN_TRAIL_600050000"/>
+			<gd_zone zone="TALONIN_VILLAGE_600050000"/>
+			<gd_zone zone="BERITRAS_BANE_PROTECTORATE_600050000"/>
+			<gd_zone zone="CRUMBLING_REDOUBT_600050000"/>
+			<gd_zone zone="HAVENS_FALLS_600050000"/>
+			<gd_zone zone="STELLMANS_FOLLY_600050000"/>
+			<gd_zone zone="THE_MIST_POOLS_600050000"/>
+			<gd_zone zone="RELICS_OF_SORROW_600050000"/>
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL"/>
+			<gd_rating rating="ELITE"/>
+			<gd_rating rating="HERO"/>
+			<gd_rating rating="LEGENDARY"/>
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012559" name="Grassy Anima"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tainted Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600050000" name="Katalam"/>
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="QUARANTINE_AREA_600050000"/>
+			<gd_zone zone="PRIDES_LEGACY_600050000"/>
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL"/>
+			<gd_rating rating="ELITE"/>
+			<gd_rating rating="HERO"/>
+			<gd_rating rating="LEGENDARY"/>
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012560" name="Tainted Anima"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Frozen Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600050000" name="Katalam"/>
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="SILLUS_FORTRESS_600050000"/>
+			<gd_zone zone="SILLUS_MOUNTAINS_600050000"/>
+			<gd_zone zone="SILLUS_FORTRESS_PATHWAY_600050000"/>
+			<gd_zone zone="SILLUS_PASS_WATCHPOST_600050000"/>
+			<gd_zone zone="WINDSWEPT_CAMP_600050000"/>
+			<gd_zone zone="CHILLBREEZE_VALLEY_600050000"/>
+			<gd_zone zone="MAIRINERKS_LEAGUE_600050000"/>
+			<gd_zone zone="CRERUNERK_LEAGUE_600050000"/>
+			<gd_zone zone="PATH_OF_SORROW_600050000"/>
+			<gd_zone zone="DETACHMENT_600050000"/>
+			<gd_zone zone="KATALAM_GATE_600050000"/>
+			<gd_zone zone="ICE_ROAD_600050000"/>
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL"/>
+			<gd_rating rating="ELITE"/>
+			<gd_rating rating="HERO"/>
+			<gd_rating rating="LEGENDARY"/>
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012561" name="Frozen Anima"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Windy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="FROZEN_PLATEAU_600060000" />
+			<gd_zone zone="CRYSTAL_CAVE_600060000" />
+			<gd_zone zone="DANARIA_GATE_600060000" />
+			<gd_zone zone="SLEEPING_ELDERS_PLATEAU_600060000" />
+			<gd_zone zone="ICETHORN_FRONTIER_POST_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012562" name="Windy Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Sylvan Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TAINTED_LANDS_600060000" />
+			<gd_zone zone="DESOLATIONS_EDGE_600060000" />
+			<gd_zone zone="BATTLEGROUP_ENCAMPMENT_600060000" />
+			<gd_zone zone="REDFANG_TERRITORY_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012563" name="Sylvan Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mysterious Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="SILONA_FORTRESS_600060000" />
+			<gd_zone zone="SILONA_FOUNTAINHEAD_600060000" />
+			<gd_zone zone="SILONA_CASCADE_OVERLOOK_600060000" />
+			<gd_zone zone="SILONA_BASIN_600060000" />
+			<gd_zone zone="DRAINED_BASIN_600060000" />
+			<gd_zone zone="EARTHSHAPED_PROMONTORY_600060000" />
+			<gd_zone zone="TIAMATS_FALL_600060000" />
+			<gd_zone zone="SAURO_FOOT_PATH_600060000" />
+			<gd_zone zone="SAURO_MOUNTAINS_600060000" />
+			<gd_zone zone="ELDRIS_VALLEY_CAMPSITE_600060000" />
+			<gd_zone zone="SOARING_ARCHWAYS_RAMPART_600060000" />
+			<gd_zone zone="SILENT_HILLS_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012564" name="Mysterious Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Snowy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="IDEAN_LAKE_600060000" />
+			<gd_zone zone="STARLIT_GROVE_600060000" />
+			<gd_zone zone="BERITRAS_BANE_ENCAMPMENT_600060000" />
+			<gd_zone zone="BERITRAS_BANE_TERRITORY_600060000" />
+			<gd_zone zone="BALAUR_BATTLEFIELD_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012565" name="Snowy Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Devastated Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="OPHIDAN_HOLY_GROUNDS_600060000" />
+			<gd_zone zone="GOLDRINE_FREE_CITY_600060000" />
+			<gd_zone zone="GOLDRINE_VILLAGE_600060000" />
+			<gd_zone zone="GOLDRINE_RIDGE_600060000" />
+			<gd_zone zone="PANDARUNERKS_DELVE_600060000" />
+			<gd_zone zone="PANDARUNERKS_PORT_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012566" name="Devastated Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mossy Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="STONEWATCH_RAMPART_600060000" />
+			<gd_zone zone="BERITRAN_DEFENSE_ZONE_600060000" />
+			<gd_zone zone="TWO_VIGILS_OUTPOST_600060000" />
+			<gd_zone zone="PRADETH_FORTRESS_600060000" />
+			<gd_zone zone="PRADETH_MEADOWS_600060000" />
+			<gd_zone zone="PRADETH_PLAINS_600060000" />
+			<gd_zone zone="PRADETH_SUPPLY_ROAD_600060000" />
+			<gd_zone zone="PRADETH_TEMPLE_RUINS_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012567" name="Mossy Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Waterlogged Anima" min_count="1" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600060000" name="Danaria" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="KELIDEN_SWAMP_600060000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012568" name="Waterlogged Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Vengeful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_ALPHA_600070000" />
+			<gd_zone zone="IDE_MINE_ALPHA_1_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012569" name="Vengeful Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Hopeless Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_BETA_600070000" />
+			<gd_zone zone="IDE_MINE_BETA_1_600070000" />
+			<gd_zone zone="IDE_MINE_BETA_2_600070000" />
+			<gd_zone zone="IDE_MINE_BETA_3_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012570" name="Hopeless Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Zealous Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_GAMMA_600070000" />
+			<gd_zone zone="IDE_MINE_GAMMA_1_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012571" name="Zealous Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Ambitious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="IDIUM_REACTOR_COMPLEX_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012572" name="Ambitious Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Remorseful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TOWER_APPROACH_600070000" />
+			<gd_zone zone="DANUAR_PROCESSIONAL_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012573" name="Remorseful Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Avaricious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="GRAND_PASSAGE_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012574" name="Avaricious Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Desperate Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="BERITRAS_FIST_GARRISON_600070000" />
+			<gd_zone zone="CLAWED_FIST_GARRISON_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012575" name="Desperate Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Deluded Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="FIRST_CANAL_600070000" />
+			<gd_zone zone="SECOND_CANAL_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012576" name="Deluded Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Wrathful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="600070000" name="Idian Depths" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TOWER_ENTRYWAY_600070000" />
+			<gd_zone zone="TOWER_MAUSOLEUM_600070000" />
+			<gd_zone zone="DANUAR_MAUSOLEUM_600070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152012577" name="Wrathful Anima" />
+		</gd_items>
+	</gd_rule>
+	<!-- END of Animas -->
 	<!-- Elyos Spirit -->
 	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" min_diff="-2" max_diff="2">
 		<gd_worlds>
@@ -873,6 +1285,18 @@
 			<gd_item id="152012004" name="Monitor Back Skin"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Monitor Meat" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="VARANUS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015504" name="Raw Monitor Meat"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Spiner -->
 	<gd_rule rule_name="Spiner Red Carapace" base_chance="2" min_diff="-2" max_diff="2">
 		<gd_worlds>
@@ -899,6 +1323,18 @@
 			<gd_item id="152012006" name="Ancient Caryatid Fragment"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="OTHER_INSTANCES"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MAIDENGOLEM"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012509" name="Desert Caryatid Fragment"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Basilisk -->
 	<gd_rule rule_name="Basilisk Backbone" base_chance="2" min_diff="-2" max_diff="2">
 		<gd_worlds>
@@ -922,6 +1358,18 @@
 		<gd_items>
 			<!-- Level 50 -->
 			<gd_item id="152015009" name="Raw Basilisk Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Basilisk Back Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BASILISK"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012507" name="Basilisk Back Skin"/>
 		</gd_items>
 	</gd_rule>
 	<!-- Wind Spirit -->
@@ -1166,6 +1614,18 @@
 			<gd_item id="152012041" name="Dionae Vine"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Dionae Stem" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="DIONAEA"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 47 -->
+			<gd_item id="152012545" name="Dionae Stem"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Nagolem -->
 	<gd_rule rule_name="Nagolem Core" base_chance="2" min_diff="-2" max_diff="2">
 		<gd_worlds>
@@ -1180,7 +1640,6 @@
 			<gd_item id="152012043" name="Nagolem Core"/>
 		</gd_items>
 	</gd_rule>
-	
 	<!-- Pluma -->
 	<gd_rule rule_name="Raw Pluma Meat" base_chance="20" min_diff="-2" max_diff="2">
 		<gd_worlds>
@@ -1218,6 +1677,18 @@
 		<gd_items>
 			<!-- Level 30 -->
 			<gd_item id="152015003" name="Crestlich Breast Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Crestlich Meat" base_chance="27" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CRESTLICH"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015505" name="Raw Crestlich Meat"/>
 		</gd_items>
 	</gd_rule>
 	<!-- Rynoce -->
@@ -1312,6 +1783,135 @@
 		<gd_items>
 			<!-- Level 50 -->
 			<gd_item id="152015010" name="Moonflower Fruit"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Mosbear -->
+	<gd_rule rule_name="Mosbear Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BABYMOSBEAR"/>
+			<gd_npc_group group="MOSBEAR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 16 -->
+			<gd_item id="152012501" name="Mosbear Skin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mosbear Skin" base_chance="10" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MOSBEAR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 33 -->
+			<gd_item id="152012516" name="Snowy Mosbear Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Drake -->
+	<gd_rule rule_name="Drake Claw" base_chance="10" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="DRAKE_VIOLET"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012517" name="Malek Drake Claw"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Granker -->
+	<gd_rule rule_name="Granker Horn" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BIGHORNDEER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012518" name="Noble Granker Horn"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Granker Meat" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BIGHORNDEER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015506" name="Raw Granker Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Frightcorn -->
+	<gd_rule rule_name="Corn's Candy" base_chance="15" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CORN"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="164000036" name="Frightcorn's Memory"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Rotron -->
+	<gd_rule rule_name="Wild Ginseng" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ROTTENTREE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015512" name="Wild Ginseng"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Ettin -->
+	<gd_rule rule_name="Ettin Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ETTIN"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 22 -->
+			<gd_item id="152012504" name="Ettin Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Fungy -->
+	<gd_rule rule_name="Fungen Cap" base_chance="40" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FUNGY"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015502" name="Fungen Cap"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Ksellid -->
+	<gd_rule rule_name="Ksellid Meat" base_chance="40" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="SHELLIZARD"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015503" name="Raw Ksellid Meat"/>
 		</gd_items>
 	</gd_rule>
 	

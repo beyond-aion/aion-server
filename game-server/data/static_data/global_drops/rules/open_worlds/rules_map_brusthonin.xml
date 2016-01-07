@@ -1,51 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map/Zone Drops -->
-	<gd_rule rule_name="Corn's Candy" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="220050000" name="Brusthonin"/>
-		</gd_maps>
-		<gd_npc_groups>
-			<gd_npc_group group="CORN"/>
-		</gd_npc_groups>
-		<gd_items>
-			<gd_item id="164000036" name="Frightcorn's Memory"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Zombie Rags" base_chance="40">
-		<gd_maps>
-			<gd_map map_id="220050000" name="Brusthonin"/>
-		</gd_maps>
-		<gd_npc_groups>
-			<gd_npc_group group="ZOMBIE_FARMER"/>
-		</gd_npc_groups>
-		<gd_items>
-			<gd_item id="182004967" name="Old Undead Rags"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Dionae Stem" base_chance="5">
-		<gd_maps>
-			<gd_map map_id="220050000" name="Brusthonin"/>
-		</gd_maps>
-		<gd_npc_groups>
-			<gd_npc_group group="DIONAEA"/>
-		</gd_npc_groups>
-		<gd_items>
-			<gd_item id="152012545" name="Dionae Stem"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Wild Ginseng" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="220050000" name="Brusthonin"/>
-		</gd_maps>
-		<gd_npc_groups>
-			<gd_npc_group group="ROTTENTREE"/>
-		</gd_npc_groups>
-		<gd_items>
-			<gd_item id="152015512" name="Wild Ginseng"/>
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1.5"
 		restriction_race="ASMODIANS">
 		<gd_maps>
