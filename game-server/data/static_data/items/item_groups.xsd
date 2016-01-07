@@ -41,6 +41,7 @@
         <xs:element minOccurs="0" name="tasty_poppy_snack" type="PoppySnackTastyGroup"/>
         <xs:element minOccurs="0" name="nutritious_poppy_snack" type="PoppySnackNutritiousGroup"/>
         <xs:element minOccurs="0" name="feed_shugo_event_coin" type="ShugoEventCoinGroup"/>
+		<xs:element minOccurs="0" name="feed_aether_cherry" type="AetherCherryGroup"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -277,6 +278,12 @@
   </xs:complexType>
   
   <xs:complexType name="ShugoEventCoinGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FeedItemGroup"/>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="AetherCherryGroup">
     <xs:complexContent mixed="false">
       <xs:extension base="FeedItemGroup"/>
     </xs:complexContent>

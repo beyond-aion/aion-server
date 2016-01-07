@@ -60,6 +60,7 @@
 		<xs:attribute name="mentor" type="xs:boolean"/>
 		<xs:attribute name="target" type="QuestTarget" default="NONE"/>
 		<xs:attribute name="restricted" type="xs:boolean" default="false" />
+		<xs:attribute name="data_driven" type="xs:boolean" default="false" />
 	</xs:complexType>
 	<xs:complexType name="CollectItems">
 		<xs:sequence>
@@ -83,6 +84,7 @@
 		<xs:attribute name="seq" type="xs:int" use="required" />
 		<xs:attribute name="npc_ids" type="IntListType" />
 		<xs:attribute name="count" type="xs:int" use="optional"/>
+		<xs:attribute name="var" type="xs:int" use="optional" />
 		<xs:attribute name="step" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="Rewards">

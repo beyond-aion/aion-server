@@ -41,7 +41,6 @@
 		<xs:attribute name="arange" type="xs:int"/>
 		<xs:attribute name="arate" type="xs:int"/>
 		<xs:attribute name="adelay" type="xs:int" default="2000"/>
-		<xs:attribute name="mevent" type="xs:int"/>
 		<xs:attribute name="state" type="xs:int"/>
 		<xs:attribute name="floatcorpse" type="xs:boolean" default="false"/>
 		<xs:attribute name="stare_range" type="xs:int" default="10"/>
@@ -157,6 +156,10 @@
 			<xs:enumeration value="LEVEL"/>
 			<xs:enumeration value="LEVEL_LOW"/>
 			<xs:enumeration value="LEVEL_HIGH"/>
+			<xs:enumeration value="LEGION_DOMINION_NPC"/>	
+			<xs:enumeration value="TARGET_LEGION_DOMINION"/>
+			<xs:enumeration value="PACK_3"/>
+			<xs:enumeration value="PACK_4"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="npcId">

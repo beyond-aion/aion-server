@@ -45,6 +45,7 @@
 		<xs:attribute name="duration" type="xs:int" use="required"/>
 		<xs:attribute name="toggle_timer" type="xs:int"/>
 		<xs:attribute name="cooldown" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="cooldown_delta_lv" type="xs:int" use="optional" default="0" />
 		<xs:attribute name="skill_category" type="skillCategory" default="NONE" />
 		<xs:attribute name="pvp_damage" type="xs:int"/>
 		<xs:attribute name="pvp_duration" type="xs:int"/>
@@ -218,7 +219,17 @@
 			<xs:element name="absstatbuff" type="AbsoluteStatToPCBuff" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="absstatdebuff" type="AbsoluteStatToPCDebuff" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="mpshield" type="MPShieldEffect" minOccurs="0" maxOccurs="1" />
-      <xs:element name="petrification" type="PetrificationEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="petrification" type="PetrificationEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="absexppointhealinstant" type="AbsoluteEXPPointHealInstantEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="limitedreduceDamage" type="LimitedReduceDamageEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="activateenslave" type="ActivateEnslaveEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="petorderunsummon" type="PetOrderUnSummonEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="supportevent" type="SupportEventEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="targetchange" type="TargetChangeEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="dummy" type="DummyEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="alwayshit" type="AlwaysHitEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="alwaysnoresist" type="AlwaysNoResistEffect" minOccurs="0" maxOccurs="1" />
+			<xs:element name="utility" type="UtilityEffect" minOccurs="0" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Properties">
@@ -1455,10 +1466,60 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-  <xs:complexType name="PetrificationEffect">
+	<xs:complexType name="PetrificationEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LimitedReduceDamageEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbsoluteEXPPointHealInstantEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateEnslaveEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PetOrderUnSummonEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SupportEventEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TargetChangeEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DummyEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AlwaysHitEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AlwaysNoResistEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UtilityEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect" />
 		</xs:complexContent>
 	</xs:complexType>
 	<!-- MISC -->
@@ -1659,6 +1720,8 @@
 			<xs:enumeration value="MAHIT"/>
 			<xs:enumeration value="PHHIT"/>
 			<xs:enumeration value="FEAR"/>
+			<xs:enumeration value="SKILL"/>
+			<xs:enumeration value="BACKATK"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ProvokeType">

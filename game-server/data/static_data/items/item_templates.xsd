@@ -19,11 +19,9 @@
 		<xs:attribute name="nonbreakcount" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="Stigma">
-		<xs:sequence>
-			<xs:element name="require_skill" type="RequireSkill" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="skill" type="StigmaSkillList"/>
-		<xs:attribute name="shard" type="xs:int"/>
+		<xs:attribute name="gain_skill_group1" type="xs:string"/>
+		<xs:attribute name="gain_skill_group2" type="xs:string"/>
+		<xs:attribute name="chargeable" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="WeaponStats">
 		<xs:attribute name="min_damage" type="xs:int"/>
@@ -40,8 +38,7 @@
 	</xs:complexType>
 	<xs:complexType name="TradeinList">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
-			<xs:element name="tradein_item" type="TradeinItem" minOccurs="0"
-				maxOccurs="unbounded"/>
+			<xs:element name="tradein_item" type="TradeinItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TradeinItem">
@@ -146,6 +143,8 @@
 		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="cName" type="xs:string"/>
 		<xs:attribute name="tempering_name" type="xs:string"/>
+		<xs:attribute name="enchant_name" type="xs:string" />
+		<xs:attribute name="subtype_prefix" type="xs:string" />
 		<xs:attribute name="multi_return" type="xs:string"/>
 		<xs:attribute name="can_exceed_enchant" type="xs:boolean" use="optional"/>
 		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet" use="optional"/>
@@ -488,9 +487,6 @@
 			<xs:enumeration value="ALL" />
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="StigmaSkillList">
-		<xs:list itemType="xs:string"/>
-	</xs:simpleType>
 	<xs:simpleType name="ItemGroup">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="NONE"/>
@@ -510,6 +506,11 @@
 			<xs:enumeration value="CANNON"/>
 			<xs:enumeration value="KEYBLADE"/>
 			<xs:enumeration value="SHIELD"/>
+			<xs:enumeration value="TORSO"/>
+			<xs:enumeration value="PANTS"/>
+			<xs:enumeration value="SHOULDER"/>
+			<xs:enumeration value="GLOVES"/>
+			<xs:enumeration value="SHOES"/>
 			<xs:enumeration value="RB_TORSO"/>
 			<xs:enumeration value="RB_PANTS"/>
 			<xs:enumeration value="RB_SHOULDER"/>
@@ -539,14 +540,13 @@
 			<xs:enumeration value="CL_SHIELD"/>
 			<xs:enumeration value="WINGS"/>
 			<xs:enumeration value="POWER_SHARDS"/>
-			<xs:enumeration value="EARRINGS"/>
-			<xs:enumeration value="RINGS"/>
-			<xs:enumeration value="NECKLACES"/>
-			<xs:enumeration value="BELTS"/>
-			<xs:enumeration value="HEADS"/>
+			<xs:enumeration value="EARRING"/>
+			<xs:enumeration value="RING"/>
+			<xs:enumeration value="NECKLACE"/>
+			<xs:enumeration value="BELT"/>
+			<xs:enumeration value="HEAD"/>
 			<xs:enumeration value="LT_HEADS"/>
 			<xs:enumeration value="CL_HEADS"/>
-			<xs:enumeration value="TGFSL_ROBE"/>
 			<xs:enumeration value="STIGMA"/>
 			<xs:enumeration value="ARROW"/>
 			<xs:enumeration value="NPC_MACE"/>
@@ -705,6 +705,18 @@
 			<xs:enumeration value="RANK4_SET2_PHYSICAL_WEAPON" />
 			<xs:enumeration value="RANK4_SET3_MAGICAL_WEAPON" />
 			<xs:enumeration value="RANK4_SET3_PHYSICAL_WEAPON" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_WEAPON" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_TORSO" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_GLOVES" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_SHOULDER" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_PANTS" />
+			<xs:enumeration value="RANK5_SET1_MAGICAL_SHOES" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_WEAPON" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_TORSO" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_GLOVES" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_SHOULDER" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_PANTS" />
+			<xs:enumeration value="RANK5_SET1_PHYSICAL_SHOES" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
