@@ -251,6 +251,74 @@
         <hostile>PC PC_DARK</hostile>
         <support>DECOY_HUNGER</support>
     </tribe>
+	<tribe name="DF5_DUMMY1" base="MONSTER"/>
+    <tribe name="DF5_DUMMY1_DGUARD" base="GENERAL_DARK">
+        <aggro>DF5_DUMMY1</aggro>
+        <neutral>DF5_DUMMY2</neutral>
+        <none>PC DF5_DUMMY2_DGUARD</none>
+    </tribe>
+    <tribe name="DF5_DUMMY2" base="MONSTER"/>
+    <tribe name="DF5_DUMMY2_DGUARD" base="GENERAL_DARK">
+        <aggro>DF5_DUMMY2</aggro>
+        <neutral>DF5_DUMMY1</neutral>
+        <none>PC DF5_DUMMY1_DGUARD</none>
+    </tribe>
+    <tribe name="DF5_FRILLFAIMAM" base="MONSTER">
+        <aggro>PC PC_DARK DF5_MERMAN</aggro>
+        <support>DF5_FRILLFAIMAM</support>
+    </tribe>
+    <tribe name="DF5_FRILLFAIMAM_BABY" base="MONSTER">
+        <aggro>DF5_MERMAN</aggro>
+        <hostile>PC PC_DARK</hostile>
+        <support>DF5_FRILLFAIMAM DF5_FRILLFAIMAM_BABY</support>
+    </tribe>
+    <tribe name="DF5_FUNGY" base="MONSTER">
+        <hostile>DF5_MERMAN</hostile>
+        <support>DF5_FUNGY</support>
+    </tribe>
+    <tribe name="DF5_GUARD_01_DARK" base="GENERAL_DARK">
+        <aggro>PC GUARD</aggro>
+        <friend>MONSTER PROTECTGUARD_DARK</friend>
+        <support>DF5_GUARD_01_DARK</support>
+    </tribe>
+    <tribe name="DF5_GUARD_02_DARK" base="GENERAL_DARK">
+        <aggro>PC GUARD</aggro>
+        <friend>MONSTER PROTECTGUARD_DARK</friend>
+        <support>DF5_GUARD_02_DARK</support>
+    </tribe>
+    <tribe name="DF5_GUARD_03_DARK" base="GENERAL_DARK">
+        <aggro>PC GUARD</aggro>
+        <friend>MONSTER PROTECTGUARD_DARK</friend>
+        <support>DF5_GUARD_03_DARK</support>
+    </tribe>
+    <tribe name="DF5_GUARD_04_DARK" base="GENERAL_DARK">
+        <aggro>PC GUARD</aggro>
+        <friend>MONSTER PROTECTGUARD_DARK</friend>
+        <support>DF5_GUARD_04_DARK</support>
+    </tribe>
+    <tribe name="DF5_GUARD_SCENE" base="GENERAL_DARK">
+        <aggro>DF5_VRITRA_SCENE</aggro>
+        <support>DF5_GUARD_SCENE</support>
+    </tribe>
+    <tribe name="DF5_GUARD_TRAP" base="GENERAL_DARK">
+        <aggro>PC GUARD</aggro>
+        <friend>MONSTER PROTECTGUARD_DARK</friend>
+    </tribe>
+    <tribe name="DF5_MERMAN" base="MONSTER">
+        <aggro>DF5_FUNGY DF5_FRILLFAIMAM DF5_FRILLFAIMAM_BABY PC PC_DARK DF5_MERMAN_MURATUN</aggro>
+        <support>DF5_MERMAN</support>
+    </tribe>
+    <tribe name="DF5_MERMAN_MURATUN" base="USEALL">
+        <hostile>DF5_MERMAN</hostile>
+    </tribe>
+    <tribe name="DF5_VRITRA" base="MONSTER">
+        <aggro>PC PC_DARK</aggro>
+        <support>DF5_VRITRA</support>
+    </tribe>
+    <tribe name="DF5_VRITRA_SCENE" base="MONSTER">
+        <aggro>DF5_GUARD_SCENE</aggro>
+        <support>DF5_VRITRA_SCENE</support>
+    </tribe>
     <tribe name="DRAGGMOB_ADRGUARD1" base="MONSTER">
         <aggro>L_DRGUARD_ADRAGGMOB1</aggro>
     </tribe>
@@ -264,7 +332,6 @@
         <aggro>PC GUARD PC_DARK GUARD_DARK</aggro>
         <support>DRAGON</support>
     </tribe>
-    <tribe name="DRAKAN"/>
     <tribe name="DRAKANDF3BOSS" base="MONSTER">
         <aggro>PC GENERAL GUARD PC_DARK GENERAL_DARK GUARD_DARK</aggro>
         <support>DRAKANDF3SLAVE DRAKANDF3BOSS</support>
@@ -1185,8 +1252,18 @@
         <aggro>IDLDF4_RE_01 AGGRESSIVESINGLEMONSTER</aggro>
         <support>PC_DARK</support>
     </tribe>
+	<tribe name="IDLDF5RE_SOLO_CRISTAL_01" base="USEALL">
+        <aggro>IDLDF5RE_SOLO_VRITRA_01</aggro>
+        <hostile>IDF5_U3_VRITRA_01 IDF5_U3_VRITRA_02 IDF5_U3_VRITRA_HIDE VRITRA VRITRASUPPORT IDF5_U3_VRITRA_SUM IDF5_U3_VRITRA IDLDF5RE_SOLO_VRITRA_01</hostile>
+        <friend>PC PC_DARK</friend>
+    </tribe>
     <tribe name="IDLDF5RE_SOLO_Q" base="USEALL">
         <aggro>VRITRA</aggro>
+    </tribe>
+	<tribe name="IDLDF5RE_SOLO_VRITRA_01" base="MONSTER">
+        <aggro>PC PC_DARK IDLDF5RE_SOLO_CRISTAL_01</aggro>
+        <friend>IDLDF5RE_SOLO_VRITRA_01</friend>
+        <neutral>XDRAKAN</neutral>
     </tribe>
     <tribe name="IDLDF5_UNDER_RUNE" base="MONSTER">
         <aggro>PC GUARD PC_DARK GUARD_DARK ESCORT</aggro>
@@ -1243,27 +1320,132 @@
     </tribe>
     <tribe name="IDSEAL_BOSS" base="MONSTER">
         <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY</aggro>
-        <hostile>IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_02 IDSEAL_BOSS_SKILL_03</hostile>
+        <hostile>IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_04</hostile>
+        <friend>IDSEAL_BOSS_SUMMON IDSEAL_PCGUARD_SCENE IDSEAL_BOSS_SCENE</friend>
+        <support>IDSEAL_PCGUARD</support>
     </tribe>
     <tribe name="IDSEAL_BOSS_OBEY" base="MONSTER">
-        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_SEALGUARD</hostile>
-        <friend>IDSEAL_BOSS_OBEY</friend>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_SEALGUARD IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_BOSS_OBEY IDSEAL_BOSS IDSEAL_BOSS_SUMMON IDSEAL_PCGUARD_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_BOSS_SCENE" base="MONSTER">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY</hostile>
+        <friend>IDSEAL_BOSS_SUMMON IDSEAL_BOSS IDSEAL_PCGUARD_SCENE</friend>
     </tribe>
     <tribe name="IDSEAL_BOSS_SKILL_01" base="MONSTER">
-        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY IDSEAL_BOSS_SKILL_02 IDSEAL_BOSS_SKILL_03</hostile>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS</hostile>
+        <friend>IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SUMMON IDSEAL_PCGUARD_SCENE</friend>
     </tribe>
     <tribe name="IDSEAL_BOSS_SKILL_02" base="MONSTER">
-        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_03</hostile>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY IDSEAL_BOSS_SKILL_03</hostile>
+        <friend>IDSEAL_BOSS IDSEAL_BOSS_SKILL_02 IDSEAL_BOSS_SUMMON IDSEAL_PCGUARD_SCENE</friend>
     </tribe>
-    <tribe name="IDSEAL_BOSS_SKILL_03" base="MONSTER">
-        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_02</hostile>
+    <tribe name="IDSEAL_BOSS_SKILL_03" base="USEALL">
+        <friend>IDSEAL_BOSS IDSEAL_BOSS_SKILL_03 IDSEAL_BOSS_SUMMON IDSEAL_PCGUARD_SCENE</friend>
+    </tribe>
+	<tribe name="IDSEAL_BOSS_SKILL_04" base="MONSTER">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK</hostile>
+        <friend>IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SUMMON IDSEAL_BOSS_SKILL_04 IDSEAL_BOSS IDSEAL_PCGUARD_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_BOSS_SKILL_05" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY</aggro>
+        <hostile>IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_BOSS_SUMMON IDSEAL_BOSS IDSEAL_PCGUARD_SCENE IDSEAL_BOSS_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_BOSS_SUMMON" base="USEALL">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_BOSS IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_02 IDSEAL_BOSS_SKILL_03 IDSEAL_PCGUARD_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_GROUPLEADER_1" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK</aggro>
+        <friend>IDSEAL_PCGUARD_SCENE IDSEAL_PCGUARD</friend>
+    </tribe>
+    <tribe name="IDSEAL_GROUPLEADER_2" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK</aggro>
+        <friend>IDSEAL_PCGUARD_SCENE IDSEAL_PCGUARD</friend>
+    </tribe>
+    <tribe name="IDSEAL_GROUPLEADER_3" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK</aggro>
+        <friend>IDSEAL_PCGUARD_SCENE IDSEAL_PCGUARD</friend>
+    </tribe>
+    <tribe name="IDSEAL_GROUPMONSTER_1" base="MONSTER">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_GROUPLEADER_1</support>
+    </tribe>
+    <tribe name="IDSEAL_GROUPMONSTER_2" base="MONSTER">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_GROUPLEADER_2</support>
+    </tribe>
+    <tribe name="IDSEAL_GROUPMONSTER_3" base="MONSTER">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_GROUPLEADER_3</support>
+    </tribe>
+    <tribe name="IDSEAL_MONSTER" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK</aggro>
+        <friend>IDSEAL_PCGUARD_SCENE IDSEAL_PCGUARD</friend>
+    </tribe>
+    <tribe name="IDSEAL_PCGUARD" base="USEALL">
+        <aggro>IDSEAL_BOSS IDSEAL_WAVE_DEALER IDSEAL_WAVE_TANKER IDSEAL_WAVE_HEALER IDSEAL_WAVELEADER</aggro>
+        <friend>IDSEAL_MONSTER</friend>
+    </tribe>
+    <tribe name="IDSEAL_PCGUARD_SCENE" base="USEALL">
+        <none>MONSTER</none>
     </tribe>
     <tribe name="IDSEAL_SEALGUARD" base="MONSTER">
+        <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS_OBEY</aggro>
+        <friend>IDSEAL_BOSS_SUMMON IDSEAL_BOSS IDSEAL_PCGUARD_SCENE IDSEAL_BOSS_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_SEALGUARD_SKILL" base="MONSTER">
         <aggro>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_BOSS IDSEAL_BOSS_OBEY</aggro>
+        <friend>IDSEAL_PCGUARD IDSEAL_BOSS_SUMMON IDSEAL_BOSS_SKILL_01 IDSEAL_BOSS_SKILL_02 IDSEAL_BOSS_SKILL_03 IDSEAL_BOSS_SKILL_04 IDSEAL_BOSS_SKILL_05 IDSEAL_BOSS_SCENE</friend>
+    </tribe>
+	<tribe name="IDSEAL_WAVELEADER" base="MONSTER">
+        <aggro>IDSEAL_PCGUARD</aggro>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK</hostile>
+        <friend>IDSEAL_WAVELEADER IDSEAL_WAVE_DEALER IDSEAL_WAVE_TANKER IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_WAVE_HEALER</support>
+    </tribe>
+    <tribe name="IDSEAL_WAVETARGET" base="USEALL">
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK GUARD GUARD_DARK IDSEAL_PCGUARD</hostile>
+        <friend>IDSEAL_WAVELEADER IDSEAL_WAVE_DEALER IDSEAL_WAVE_HEALER IDSEAL_WAVE_TANKER IDSEAL_PCGUARD_SCENE</friend>
+    </tribe>
+    <tribe name="IDSEAL_WAVE_DEALER" base="MONSTER">
+        <aggro>IDSEAL_PCGUARD</aggro>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK IDSEAL_WAVETARGET</hostile>
+        <friend>IDSEAL_WAVE_DEALER IDSEAL_WAVE_TANKER IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_WAVE_HEALER IDSEAL_WAVELEADER</support>
+    </tribe>
+    <tribe name="IDSEAL_WAVE_HEALER" base="MONSTER">
+        <aggro>IDSEAL_PCGUARD</aggro>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK</hostile>
+        <friend>IDSEAL_WAVE_DEALER IDSEAL_WAVE_HEALER IDSEAL_WAVE_TANKER IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_WAVELEADER</support>
+    </tribe>
+    <tribe name="IDSEAL_WAVE_TANKER" base="MONSTER">
+        <aggro>IDSEAL_PCGUARD</aggro>
+        <hostile>PC PC_DARK PET PET_DARK GENERAL GENERAL_DARK</hostile>
+        <friend>IDSEAL_WAVELEADER IDSEAL_WAVE_TANKER IDSEAL_PCGUARD_SCENE</friend>
+        <support>IDSEAL_WAVE_DEALER IDSEAL_WAVE_HEALER</support>
     </tribe>
     <tribe name="IDSTATION_BOOM" base="GENERAL">
-        <hostile>AGGRESSIVESINGLEMONSTER AGGRESSIVESUPPORTMONSTER</hostile>
-        <friend>PC PC_DARK</friend>
+        <hostile>IDSTATION_MONSTER MONSTER</hostile>
+        <friend>PC PC_DARK IDSTATION_POLYMORPH</friend>
+    </tribe>
+    <tribe name="IDSTATION_GUIDE" base="GENERAL">
+        <none>PC PC_DARK IDSTATION_POLYMORPH IDSTATION_MONSTER</none>
+    </tribe>
+    <tribe name="IDSTATION_MONSTER" base="MONSTER">
+        <aggro>IDSTATION_POLYMORPH PC PC_DARK</aggro>
+        <support>IDSTATION_MONSTER</support>
+        <none>IDSTATION_GUIDE</none>
+    </tribe>
+    <tribe name="IDSTATION_POLYMORPH" base="USEALL">
+        <aggro>IDSTATION_MONSTER</aggro>
+        <friend>PC_DARK PC</friend>
+        <none>IDSTATION_GUIDE</none>
     </tribe>
     <tribe name="IDSWEEP_BONUS" base="MONSTER">
         <hostile>IDSWEEP_MINE PC PC_DARK IDSWEEP_POLYMORPHL IDSWEEP_POLYMORPHD</hostile>
@@ -1815,6 +1997,51 @@
     <tribe name="LEHPAR_APRETOR" base="MONSTER">
         <aggro>PC GUARD PC_DARK GUARD_DARK PRETOR_ALEHPAR</aggro>
         <support>LEHPAR LEHPAR_AGUARDDARK LEHPAR_APRETOR</support>
+    </tribe>
+	<tribe name="LF5_DUMMY1" base="MONSTER"/>
+    <tribe name="LF5_DUMMY1_LGUARD" base="GUARD">
+        <aggro>LF5_DUMMY1</aggro>
+        <neutral>LF5_DUMMY2 DUMMY LDF5_DUMMY1 LDF5_DUMMY2</neutral>
+        <none>PC_DARK</none>
+    </tribe>
+    <tribe name="LF5_DUMMY2" base="MONSTER"/>
+    <tribe name="LF5_DUMMY2_LGUARD" base="GUARD">
+        <aggro>LF5_DUMMY2</aggro>
+        <neutral>LF5_DUMMY1 DUMMY LDF5_DUMMY1 LDF5_DUMMY2</neutral>
+        <none>PC_DARK</none>
+    </tribe>
+    <tribe name="LF5_GUARD_01_LIGHT" base="GENERAL">
+        <aggro>PC_DARK GUARD_DARK</aggro>
+        <friend>MONSTER PROTECTGUARD_LIGHT</friend>
+        <support>LF5_GUARD_01_LIGHT</support>
+    </tribe>
+    <tribe name="LF5_GUARD_02_LIGHT" base="GENERAL">
+        <aggro>PC_DARK GUARD_DARK</aggro>
+        <friend>MONSTER PROTECTGUARD_LIGHT</friend>
+        <support>LF5_GUARD_02_LIGHT</support>
+    </tribe>
+    <tribe name="LF5_GUARD_03_LIGHT" base="GENERAL">
+        <aggro>PC_DARK GUARD_DARK</aggro>
+        <friend>MONSTER PROTECTGUARD_LIGHT</friend>
+        <support>LF5_GUARD_03_LIGHT</support>
+    </tribe>
+    <tribe name="LF5_GUARD_04_LIGHT" base="GENERAL">
+        <aggro>PC_DARK GUARD_DARK</aggro>
+        <friend>MONSTER PROTECTGUARD_LIGHT</friend>
+        <support>LF5_GUARD_04_LIGHT</support>
+    </tribe>
+    <tribe name="LF5_GUARD_TRAP" base="GENERAL">
+        <aggro>PC_DARK GUARD_DARK</aggro>
+        <friend>MONSTER PROTECTGUARD_LIGHT</friend>
+    </tribe>
+    <tribe name="LF5_ITEM" base="MONSTER">
+        <aggro>PC GUARD PC_DARK GUARD_DARK</aggro>
+        <friend>LF5_ITEM</friend>
+        <support>LF5_ITEM</support>
+    </tribe>
+    <tribe name="LF5_ITEM_SUM" base="MONSTER">
+        <friend>LF5_ITEM</friend>
+        <support>LF5_ITEM</support>
     </tribe>
     <tribe name="LICH_SOULEDSTONE" base="MONSTER">
         <friend>DARK_LICH LIGHT_LICH</friend>
