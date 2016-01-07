@@ -911,6 +911,7 @@
 		</spawn>
 		<!-- Manemori -->
 		<spawn npc_id="204276" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="1383.5" y="1185.49" z="209.47" h="12"/>
 		</spawn>
 		<!-- Manic Aukwi -->

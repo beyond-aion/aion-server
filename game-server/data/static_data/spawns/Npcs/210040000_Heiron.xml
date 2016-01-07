@@ -673,6 +673,7 @@
 		</spawn>
 		<!-- Berone -->
 		<spawn npc_id="204589" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="1123.77" y="1701.77" z="110.1" h="120"/>
 		</spawn>
 		<!-- Bio Experiment Device -->
@@ -7728,6 +7729,7 @@
 		</spawn>
 		<!-- Tombstone of Litonos -->
 		<spawn npc_id="700193" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="912.79" y="1727.38" z="117.122" h="120"/>
 		</spawn>
 		<!-- Torch of Attack -->
@@ -8063,6 +8065,10 @@
 			<spot x="1720.73" y="1053.25" z="169.259" h="87" random_walk="8"/>
 			<spot x="1726.2" y="1067.38" z="167.262" h="9"/>
 			<spot x="1734.65" y="1037.28" z="169.374" h="83" random_walk="8"/>
+		</spawn>
+		<!-- Kurochinerk -->
+		<spawn npc_id="804601" respawn_time="295">
+			<spot x="2433.342" y="396.7922" z="412.4353" h="16"/>
 		</spawn>
 		<!-- Twisting Windwisp -->
 		<spawn npc_id="211172" respawn_time="295">

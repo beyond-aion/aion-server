@@ -1,37 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="300280000">
-		<!-- Abex -->
-		<spawn npc_id="217323">
-			<spot x="331.947" y="622.789" z="150.375" h="117"/>
-			<spot x="334.704" y="629.437" z="150.294" h="119"/>
-			<spot x="336.879" y="626.351" z="150.530" h="19"/>
-			<spot x="337.897" y="624.325" z="150.835" h="23"/>
-		</spawn>
-		<!-- Acidic Secretion -->
-		<spawn npc_id="282382">
-			<spot x="588.618" y="633.051" z="154.468"/>
-			<spot x="607.230" y="584.200" z="154.725"/>
-			<spot x="611.615" y="659.915" z="155.811"/>
-			<spot x="616.858" y="622.467" z="154.125"/>
-			<spot x="640.377" y="645.735" z="154.237"/>
-			<spot x="643.269" y="585.230" z="154.752"/>
-			<spot x="646.600" y="613.417" z="154.188"/>
-			<spot x="668.962" y="647.924" z="155.555"/>
-			<spot x="674.171" y="605.985" z="155.001"/>
-			<spot x="695.780" y="624.070" z="155.861"/>
-		</spawn>
-		<!-- Ariana -->
-		<spawn npc_id="799666">
-			<spot x="819.252" y="156.299" z="79.238" h="7"/>
-		</spawn>
-		<!-- Ariana -->
-		<spawn npc_id="799668">
-			<spot x="239.880" y="604.820" z="178.480" h="25"/>
-		</spawn>
-		<!-- Ashi -->
-		<spawn npc_id="282951">
-			<spot x="807.800" y="409.300" z="109.000" h="69"/>
+		<!-- Ariana's Jewelry Box -->
+		<spawn npc_id="218572">
+			<spot x="227.95291" y="318.03699" z="253.18086" h="100"/>
 		</spawn>
 		<!-- Blue Flame Smash -->
 		<spawn npc_id="283009">

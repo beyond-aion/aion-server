@@ -14,13 +14,17 @@
 			<spot x="638.725" y="441.301" z="140" h="103" static_id="117"/>
 		</spawn>
 		<!-- Brainwashed Reian -->
-		<spawn npc_id="799515">
-			<spot x="585.037" y="221.475" z="134.349" h="60"/>
+		<spawn npc_id="799513">
+			<spot x="541.691" y="220.877" z="134.349" h="117"/>
 		</spawn>
 		<!-- Brainwashed Reian -->
 		<spawn npc_id="799514">
 			<spot x="541.181" y="214.526" z="134.349" h="1"/>
 			<spot x="541.691" y="220.877" z="134.349" h="117"/>
+		</spawn>
+		<!-- Brainwashed Reian -->
+		<spawn npc_id="799515">
+			<spot x="585.037" y="221.475" z="134.349" h="60"/>
 		</spawn>
 		<!-- Brainwashed Reian -->
 		<spawn npc_id="799516">

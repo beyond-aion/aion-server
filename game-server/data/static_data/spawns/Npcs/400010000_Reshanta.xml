@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="400010000">
-		<!-- Sulfur Isle Guard Tower -->
-		<spawn npc_id="275413" respawn_time="295">
-			<spot x="1179.51" y="1969.28" z="1605.25" h="75"/>
-		</spawn>
-		<!-- Gagrad -->
-		<spawn npc_id="278087" respawn_time="295">
-			<spot x="1172.76" y="1970.45" z="1605.59" h="75"/>
-		</spawn>
-		<!-- Sinjah -->
-		<spawn npc_id="278086" respawn_time="295">
-			<spot x="1172.83" y="1959.83" z="1605.35" h="75"/>
-		</spawn>
-		<!-- Glati -->
-		<spawn npc_id="278088" respawn_time="295">
-			<spot x="1181.93" y="1959.97" z="1604.82" h="75"/>
-		</spawn>
-		<!-- Nemea -->
-		<spawn npc_id="278588" respawn_time="295">
-			<spot x="882" y="784.073" z="1675.15"/>
-		</spawn>
-		<!-- Kenia -->
-		<spawn npc_id="278589" respawn_time="295">
-			<spot x="878.206" y="788" z="1674.13"/>
-		</spawn>
-		<!-- Dactyl -->
-		<spawn npc_id="278590" respawn_time="295">
-			<spot x="886.309" y="788" z="1675.05"/>
-		</spawn>
 		<!-- Abend -->
 		<spawn npc_id="278129" respawn_time="295">
 			<spot x="687.21" y="2841.99" z="1595.24"/>
@@ -65,6 +37,10 @@
 		<spawn npc_id="278004" respawn_time="295">
 			<spot x="930.186" y="3002.56" z="1655.35" h="44"/>
 		</spawn>
+		<!-- Aimele -->
+		<spawn npc_id="278607" respawn_time="295">
+			<spot x="569.318" y="3337.6" z="2818" h="105"/>
+		</spawn>
 		<!-- Akastos -->
 		<spawn npc_id="278529" respawn_time="295">
 			<spot x="2989.35" y="924.413" z="1539.08" h="75"/>
@@ -84,6 +60,10 @@
 		<!-- Altgard Teleport Device -->
 		<spawn npc_id="730076" respawn_time="295">
 			<spot x="1090.32" y="2963.23" z="1638.98" static_id="996"/>
+		</spawn>
+		<!-- Amalien -->
+		<spawn npc_id="205458" respawn_time="295">
+			<spot x="966.6854" y="3034.944" z="1641.623" h="106" />
 		</spawn>
 		<!-- Amarunerk -->
 		<spawn npc_id="279058" respawn_time="295">
@@ -239,6 +219,10 @@
 		<!-- Aries -->
 		<spawn npc_id="278538" respawn_time="295">
 			<spot x="2993.24" y="889.093" z="1546.09" h="45"/>
+		</spawn>
+		<!-- Arnora -->
+		<spawn npc_id="278108" respawn_time="295">
+			<spot x="568.802" y="2589.26" z="2886.06" h="45"/>
 		</spawn>
 		<!-- Artifact of the Inception -->
 		<spawn npc_id="700355" respawn_time="295">
@@ -453,6 +437,10 @@
 		<spawn npc_id="278043" respawn_time="295">
 			<spot x="970.36" y="2944.14" z="1644.53" h="104"/>
 		</spawn>
+		<!-- Asteria Guard Tower -->
+		<spawn npc_id="276516" respawn_time="295">
+			<spot x="574.118" y="2592.98" z="2887.46" h="45"/>
+		</spawn>
 		<!-- Asteria Trico -->
 		<spawn npc_id="256602" respawn_time="295">
 			<spot x="426.439" y="3228.88" z="2839.34" h="65"/>
@@ -472,9 +460,13 @@
 		<spawn npc_id="205454" respawn_time="295">
 			<spot x="3010.302" y="948.22955" z="1546.1555" h="103"/>
 		</spawn>
+		<!-- Aurunerk -->
+		<spawn npc_id="278651" respawn_time="295">
+			<spot x="2890.655" y="989.0407" z="1527.997" h="30" />
+		</spawn>
 		<!-- Bacht -->
 		<spawn npc_id="278011" respawn_time="295">
-			<spot x="971.783" y="3029.94" z="1641.62" h="74"/>
+			<spot x="972.0428" y="3029.14" z="1641.623" h="75" />
 		</spawn>
 		<!-- Bakan -->
 		<spawn npc_id="278145" respawn_time="295">
@@ -895,6 +887,10 @@
 			<spot x="3024.93" y="1401.25" z="2716.708" h="39" walker_id="31573954A0B8F23CA3C4F03BE8FB598478DD8EA3"/>
 			<spot x="3029.83" y="1445.98" z="2632.42" h="94" random_walk="3"/>
 		</spawn>
+		<!-- Dactyl -->
+		<spawn npc_id="278590" respawn_time="295">
+			<spot x="886.309" y="788" z="1675.05"/>
+		</spawn>
 		<!-- Dagr -->
 		<spawn npc_id="278079" respawn_time="295">
 			<spot x="1594.04" y="2955.21" z="2943.25"/>
@@ -1164,6 +1160,14 @@
 		<spawn npc_id="278053" respawn_time="295">
 			<spot x="1068.56" y="2879.44" z="1635.9315" walker_id="E499B0B085202B5D48984D2A920CBF8B879FB9AB"/>
 		</spawn>
+		<!-- Draeh -->
+		<spawn npc_id="804504" respawn_time="295">
+			<spot x="897.3097" y="2967.936" z="1641.652" h="108"/>
+		</spawn>
+		<!-- Dranitas -->
+		<spawn npc_id="804494" respawn_time="295">
+			<spot x="2937.738" y="895.509" z="1539.119" h="105" />
+		</spawn>
 		<!-- Dredgion Part -->
 		<spawn npc_id="700304" respawn_time="295">
 			<spot x="1530.36" y="1878.83" z="2919.6" static_id="1025"/>
@@ -1254,6 +1258,10 @@
 		<!-- Durin -->
 		<spawn npc_id="278085" respawn_time="295">
 			<spot x="1651" y="2875.25" z="1666.55"/>
+		</spawn>
+		<!-- Dvergr -->
+		<spawn npc_id="278106" respawn_time="295">
+			<spot x="564.837" y="2599.48" z="2886.32" h="45"/>
 		</spawn>
 		<!-- Echo -->
 		<spawn npc_id="278513" respawn_time="295">
@@ -1624,6 +1632,10 @@
 			<spot x="1249.76" y="2023.38" z="2881.87" h="56"/>
 			<spot x="1267.67" y="2052.75" z="2883.73" h="116"/>
 		</spawn>
+		<!-- Felix -->
+		<spawn npc_id="804495" respawn_time="295">
+			<spot x="2938.658" y="896.363" z="1539.119" h="105"/>
+		</spawn>
 		<!-- Fichte -->
 		<spawn npc_id="279051" respawn_time="295">
 			<spot x="905.6129" y="2960.76" z="1641.652" h="45"/>
@@ -1811,11 +1823,11 @@
 		</spawn>
 		<!-- Flavius -->
 		<spawn npc_id="278512" respawn_time="295">
-			<spot x="3011.49" y="932.512" z="1546.13" h="45"/>
+			<spot x="3010.857" y="932.4392" z="1546.156" h="45" />
 		</spawn>
 		<!-- Fraiban -->
 		<spawn npc_id="278010" respawn_time="295">
-			<spot x="969.222" y="3019.79" z="1641.62" h="45"/>
+			<spot x="969.3842" y="3020.515" z="1641.623" h="45" />
 		</spawn>
 		<!-- Fright Reaper -->
 		<spawn npc_id="253043" respawn_time="295">
@@ -1846,6 +1858,14 @@
 			<spot x="1073.33" y="1872.59" z="2918.5" h="63"/>
 			<spot x="1080.17" y="1898.36" z="2918.16" h="119"/>
 		</spawn>
+		<!-- Gadorunerk -->
+		<spawn npc_id="278150" respawn_time="295">
+			<spot x="961.3004" y="3027.346" z="1641.623" h="106" />
+		</spawn>
+		<!-- Gagrad -->
+		<spawn npc_id="278087" respawn_time="295">
+			<spot x="1172.76" y="1970.45" z="1605.59" h="75"/>
+		</spawn>
 		<!-- Ganglot -->
 		<spawn npc_id="278089" respawn_time="295">
 			<spot x="2014.26" y="3223.02" z="1651.65"/>
@@ -1869,6 +1889,10 @@
 		<!-- Garkbinerk -->
 		<spawn npc_id="279006" respawn_time="295">
 			<spot x="3389.64" y="2447.05" z="2766.7" h="90"/>
+		</spawn>
+		<!-- Garpedo -->
+		<spawn npc_id="278606" respawn_time="295">
+			<spot x="556.509" y="3337.88" z="2818.63" h="105"/>
 		</spawn>
 		<!-- General Luhut -->
 		<spawn npc_id="253020" respawn_time="1800">
@@ -1923,6 +1947,10 @@
 		<spawn npc_id="278090" respawn_time="295">
 			<spot x="2013.31" y="3227.39" z="1651.55"/>
 		</spawn>
+		<!-- Glati -->
+		<spawn npc_id="278088" respawn_time="295">
+			<spot x="1181.93" y="1959.97" z="1604.82" h="75"/>
+		</spawn>
 		<!-- Glaucos -->
 		<spawn npc_id="278634" respawn_time="295">
 			<spot x="2945.08" y="887.041" z="1539.12" h="45"/>
@@ -1930,6 +1958,10 @@
 		<!-- Glen -->
 		<spawn npc_id="278071" respawn_time="295">
 			<spot x="2131.88" y="661" z="2843.07"/>
+		</spawn>
+		<!-- Grabakr -->
+		<spawn npc_id="278105" respawn_time="295">
+			<spot x="569.11" y="2603.8" z="2887.41" h="45"/>
 		</spawn>
 		<!-- Grania -->
 		<spawn npc_id="278565" respawn_time="295">
@@ -1981,12 +2013,16 @@
 			<spot x="3001.46" y="879.534" z="1546.28" h="45"/>
 		</spawn>
 		<!-- Guard Tower -->
-		<spawn npc_id="276625" respawn_time="295">
-			<spot x="2536.35" y="1156.96" z="2800.76" h="112"/>
+		<spawn npc_id="276512" respawn_time="295">
+			<spot x="551.147" y="3342.79" z="2817.85" h="105"/>
 		</spawn>
 		<!-- Guard Tower -->
 		<spawn npc_id="276606" respawn_time="295">
 			<spot x="3218.47" y="1825.75" z="1471.29" h="52"/>
+		</spawn>
+		<!-- Guard Tower -->
+		<spawn npc_id="276625" respawn_time="295">
+			<spot x="2536.35" y="1156.96" z="2800.76" h="112"/>
 		</spawn>
 		<!-- Gufrinerk -->
 		<spawn npc_id="279008" respawn_time="295">
@@ -2111,6 +2147,10 @@
 		<!-- Iacchus -->
 		<spawn npc_id="278644" respawn_time="295">
 			<spot x="2912.33" y="1018.95" z="1528" h="58"/>
+		</spawn>
+		<!-- Ickulnerk -->
+		<spawn npc_id="278151" respawn_time="295">
+			<spot x="1056.794" y="2892.108" z="1636.146" h="90" />
 		</spawn>
 		<!-- Igla -->
 		<spawn npc_id="278027" respawn_time="295">
@@ -2388,31 +2428,6 @@
 		<spawn npc_id="278138" respawn_time="295">
 			<spot x="912.216" y="3014.08" z="1655.48" h="14"/>
 		</spawn>
-		<!-- Young Asteria Trico -->
-		<spawn npc_id="256606" respawn_time="295">
-			<spot x="424.453" y="3193.94" z="2841.8" h="12"/>
-			<spot x="425.454" y="3120.24" z="2849.93" h="50" random_walk="8"/>
-			<spot x="428.491" y="3272.41" z="2838.73" h="93"/>
-			<spot x="458.535" y="3195.52" z="2835.76" h="93"/>
-			<spot x="467.349" y="3154.01" z="2837.46" h="106"/>
-			<spot x="471.083" y="3075.21" z="2843.71" h="89"/>
-			<spot x="493.185" y="3119.89" z="2833.72" h="52"/>
-			<spot x="494.913" y="3183.1" z="2830.28" h="120"/>
-			<spot x="753.805" y="3226.34" z="2864.51" h="31"/>
-			<spot x="815.601" y="3202.17" z="2880.22" h="89" random_walk="8"/>
-			<spot x="816.977" y="3236.59" z="2880.82" h="43" random_walk="8"/>
-			<spot x="938.785" y="3144.73" z="2908.21" h="29"/>
-			<spot x="953.996" y="3177.76" z="2910.97" h="1"/>
-			<spot x="962.834" y="3154.15" z="2912" h="17"/>
-		</spawn>
-		<!-- Yourunerk -->
-		<spawn npc_id="279003" respawn_time="295">
-			<spot x="920.032" y="3029.81" z="1646.44" h="104"/>
-		</spawn>
-		<!-- Yuditio -->
-		<spawn npc_id="278500" respawn_time="295">
-			<spot x="2966" y="676" z="1521.16"/>
-		</spawn>
 		<!-- Jafnhar -->
 		<spawn npc_id="278137" respawn_time="295">
 			<spot x="3376.05" y="2477.88" z="2861.69"/>
@@ -2465,6 +2480,10 @@
 		<spawn npc_id="279027" respawn_time="295">
 			<spot x="870" y="3102" z="1642.93"/>
 		</spawn>
+		<!-- Kenia -->
+		<spawn npc_id="278589" respawn_time="295">
+			<spot x="878.206" y="788" z="1674.13"/>
+		</spawn>
 		<!-- Kirhenzar -->
 		<spawn npc_id="278009" respawn_time="295">
 			<spot x="895.495" y="3006.58" z="1646.43" h="104"/>
@@ -2480,6 +2499,14 @@
 		<!-- Kizelmanon -->
 		<spawn npc_id="279047" respawn_time="295">
 			<spot x="2936.83" y="884.218" z="1539.12" h="14"/>
+		</spawn>
+		<!-- Kukurunerk -->
+		<spawn npc_id="278650" respawn_time="295">
+			<spot x="3011.904" y="933.3404" z="1546.156" h="45" />
+		</spawn>
+		<!-- Kuponerk -->
+		<spawn npc_id="278648" respawn_time="295">
+			<spot x="3003.878" y="940.376" z="1546.156" h="105" />
 		</spawn>
 		<!-- Kysis Flame Tribe -->
 		<spawn npc_id="255670" respawn_time="295">
@@ -2860,7 +2887,7 @@
 		</spawn>
 		<!-- Lawusan -->
 		<spawn npc_id="278012" respawn_time="295">
-			<spot x="961.421" y="3027.91" z="1641.62" h="107"/>
+			<spot x="962.3212" y="3028.232" z="1641.623" h="106" />
 		</spawn>
 		<!-- Lead Klaw Searcher -->
 		<spawn npc_id="255125" respawn_time="295">
@@ -2941,7 +2968,7 @@
 		</spawn>
 		<!-- Lucius -->
 		<spawn npc_id="278510" respawn_time="295">
-			<spot x="3003.95" y="940.946" z="1546.13" h="104"/>
+			<spot x="3005.052" y="941.2883" z="1546.156" h="105" />
 		</spawn>
 		<!-- Lugbug -->
 		<spawn npc_id="279029" respawn_time="295">
@@ -3156,7 +3183,7 @@
 		</spawn>
 		<!-- Minon -->
 		<spawn npc_id="278511" respawn_time="295">
-			<spot x="3014.48" y="942.746" z="1546.13" h="75"/>
+			<spot x="3014.893" y="942.0665" z="1546.156" h="76" />
 		</spawn>
 		<!-- Minonerk -->
 		<spawn npc_id="279017" respawn_time="295">
@@ -3269,6 +3296,10 @@
 		<spawn npc_id="730077" respawn_time="295">
 			<spot x="1059.59" y="2859.23" z="1636.41" static_id="271"/>
 		</spawn>
+		<!-- Muirica -->
+		<spawn npc_id="278107" respawn_time="295">
+			<spot x="577.722" y="2598.18" z="2888.78" h="45"/>
+		</spawn>
 		<!-- Muirunerk -->
 		<spawn npc_id="279036" respawn_time="295">
 			<spot x="540.73694" y="1090.3556" z="2841.255" h="14"/>
@@ -3303,6 +3334,14 @@
 			<spot x="2269.59" y="1800.41" z="2238.58" h="47"/>
 			<spot x="2271" y="1800.26" z="2238.58" h="118"/>
 			<spot x="2307.27" y="1770.29" z="2240.32" h="29"/>
+		</spawn>
+		<!-- Nemea -->
+		<spawn npc_id="278588" respawn_time="295">
+			<spot x="882" y="784.073" z="1675.15"/>
+		</spawn>
+		<!-- Nenekunerk -->
+		<spawn npc_id="278148" respawn_time="295">
+			<spot x="968.4337" y="3019.555" z="1641.623" h="45" />
 		</spawn>
 		<!-- Nereus -->
 		<spawn npc_id="278517" respawn_time="295">
@@ -3342,6 +3381,10 @@
 		<!-- Noiman -->
 		<spawn npc_id="278136" respawn_time="295">
 			<spot x="732.517" y="2802.66" z="1595.22"/>
+		</spawn>
+		<!-- Nonorerk -->
+		<spawn npc_id="278649" respawn_time="295">
+			<spot x="3014.051" y="943.1288" z="1546.156" h="76" />
 		</spawn>
 		<!-- Nordri -->
 		<spawn npc_id="278075" respawn_time="295">
@@ -3453,9 +3496,17 @@
 		<spawn npc_id="278023" respawn_time="295">
 			<spot x="904.437" y="3022.59" z="1655.48" h="14"/>
 		</spawn>
+		<!-- Paranerk -->
+		<spawn npc_id="278149" respawn_time="295">
+			<spot x="971.1077" y="3030.24" z="1641.623" h="75" />
+		</spawn>
 		<!-- Pareten -->
 		<spawn npc_id="278038" respawn_time="295">
 			<spot x="923.279" y="3009.71" z="1655.35" h="104"/>
+		</spawn>
+		<!-- Peja -->
+		<spawn npc_id="832827" respawn_time="295">
+			<spot x="1403.275" y="1439.12" z="208.1002" h="90"/>
 		</spawn>
 		<!-- Pelasgus -->
 		<spawn npc_id="279056" respawn_time="295">
@@ -3482,6 +3533,10 @@
 		<spawn npc_id="700309" respawn_time="295">
 			<spot x="2534.92" y="1571.44" z="2955.87" static_id="1027"/>
 			<spot x="2552.7" y="1563.43" z="2976.12" static_id="1019"/>
+		</spawn>
+		<!-- Petryr -->
+		<spawn npc_id="804505" respawn_time="295">
+			<spot x="898.4001" y="2968.942" z="1641.652" h="108"/>
 		</spawn>
 		<!-- Philemon -->
 		<spawn npc_id="278646" respawn_time="295">
@@ -3559,6 +3614,10 @@
 		<!-- Ragerock -->
 		<spawn npc_id="254540" respawn_time="3600">
 			<spot x="2694" y="551" z="2936.78" h="75"/>
+		</spawn>
+		<!-- Rais -->
+		<spawn npc_id="206333" respawn_time="295">
+			<spot x="2942.95" y="900.2321" z="1539.12" h="106" />
 		</spawn>
 		<!-- Raithor -->
 		<spawn npc_id="278643" respawn_time="295">
@@ -3899,6 +3958,10 @@
 		<spawn npc_id="278626" respawn_time="295">
 			<spot x="2669.39" y="792.36" z="2728.2"/>
 		</spawn>
+		<!-- Sbarog -->
+		<spawn npc_id="206340" respawn_time="295">
+			<spot x="903.389" y="2974.246" z="1641.652" h="106"/>
+		</spawn>
 		<!-- Scoda -->
 		<spawn npc_id="278036" respawn_time="295">
 			<spot x="903.514" y="3027.75" z="1655.41" h="104"/>
@@ -4017,9 +4080,21 @@
 		<spawn npc_id="279026" respawn_time="295">
 			<spot x="594.8494" y="1127.4353" z="2836.501" h="45"/>
 		</spawn>
+		<!-- Sierinererk -->
+		<spawn npc_id="279013" respawn_time="295">
+			<spot x="561.044" y="3338.76" z="2818.22" h="105"/>
+		</spawn>
 		<!-- Sileni -->
 		<spawn npc_id="278628" respawn_time="295">
 			<spot x="3096.87" y="970.77" z="1513.91"/>
+		</spawn>
+		<!-- Sinjah -->
+		<spawn npc_id="278086" respawn_time="295">
+			<spot x="1172.83" y="1959.83" z="1605.35" h="75"/>
+		</spawn>
+		<!-- Sione -->
+		<spawn npc_id="278608" respawn_time="295">
+			<spot x="554.441" y="3323.66" z="2819.17" h="105"/>
 		</spawn>
 		<!-- Sirr -->
 		<spawn npc_id="279052" respawn_time="295">
@@ -4175,6 +4250,10 @@
 			<spot x="1457.048" y="937.958" z="1471.412" h="7"/>
 			<spot x="1458.999" y="972.719" z="1473.459" h="93"/>
 		</spawn>
+		<!-- Sohonerk -->
+		<spawn npc_id="279014" respawn_time="295">
+			<spot x="554.104" y="3331.82" z="2818.63" h="105"/>
+		</spawn>
 		<!-- Soniksius -->
 		<spawn npc_id="278519" respawn_time="295">
 			<spot x="2973.78" y="1054.5" z="1534.85" h="86"/>
@@ -4318,6 +4397,10 @@
 		<!-- Suirunerk -->
 		<spawn npc_id="279060" respawn_time="295">
 			<spot x="2158.98" y="1581.87" z="2272.57" h="30"/>
+		</spawn>
+		<!-- Sulfur Isle Guard Tower -->
+		<spawn npc_id="275413" respawn_time="295">
+			<spot x="1179.51" y="1969.28" z="1605.25" h="75"/>
 		</spawn>
 		<!-- Sulfur Oculazen -->
 		<spawn npc_id="253682" respawn_time="295">
@@ -4817,77 +4900,34 @@
 		<spawn npc_id="279053" respawn_time="295">
 			<spot x="900.941" y="2973.07" z="1641.65" h="104"/>
 		</spawn>
+		<!-- Young Asteria Trico -->
+		<spawn npc_id="256606" respawn_time="295">
+			<spot x="424.453" y="3193.94" z="2841.8" h="12"/>
+			<spot x="425.454" y="3120.24" z="2849.93" h="50" random_walk="8"/>
+			<spot x="428.491" y="3272.41" z="2838.73" h="93"/>
+			<spot x="458.535" y="3195.52" z="2835.76" h="93"/>
+			<spot x="467.349" y="3154.01" z="2837.46" h="106"/>
+			<spot x="471.083" y="3075.21" z="2843.71" h="89"/>
+			<spot x="493.185" y="3119.89" z="2833.72" h="52"/>
+			<spot x="494.913" y="3183.1" z="2830.28" h="120"/>
+			<spot x="753.805" y="3226.34" z="2864.51" h="31"/>
+			<spot x="815.601" y="3202.17" z="2880.22" h="89" random_walk="8"/>
+			<spot x="816.977" y="3236.59" z="2880.82" h="43" random_walk="8"/>
+			<spot x="938.785" y="3144.73" z="2908.21" h="29"/>
+			<spot x="953.996" y="3177.76" z="2910.97" h="1"/>
+			<spot x="962.834" y="3154.15" z="2912" h="17"/>
+		</spawn>
+		<!-- Yourunerk -->
+		<spawn npc_id="279003" respawn_time="295">
+			<spot x="920.032" y="3029.81" z="1646.44" h="104"/>
+		</spawn>
+		<!-- Yuditio -->
+		<spawn npc_id="278500" respawn_time="295">
+			<spot x="2966" y="676" z="1521.16"/>
+		</spawn>
 		<!-- Zeth -->
 		<spawn npc_id="278508" respawn_time="295">
 			<spot x="2938.9" y="879.978" z="1546.13" h="14"/>
-		</spawn>
-		<!-- Dranitas -->
-		<spawn npc_id="804494" respawn_time="295">
-			<spot x="2937.738" y="875.509" z="1539.119" h="105"/>
-		</spawn>
-		<!-- Felix -->
-		<spawn npc_id="804495" respawn_time="295">
-			<spot x="2938.658" y="896.363" z="1539.119" h="105"/>
-		</spawn>
-		<!-- Sbarog -->
-		<spawn npc_id="206340" respawn_time="295">
-			<spot x="903.389" y="2974.246" z="1641.652" h="106"/>
-		</spawn>
-		<!-- Petryr -->
-		<spawn npc_id="804505" respawn_time="295">
-			<spot x="898.4001" y="2968.942" z="1641.652" h="108"/>
-		</spawn>
-		<!-- Draeh -->
-		<spawn npc_id="804504" respawn_time="295">
-			<spot x="897.3097" y="2967.936" z="1641.652" h="108"/>
-		</spawn>
-		<!-- Peja -->
-		<spawn npc_id="832827" respawn_time="295">
-			<spot x="1403.275" y="1439.12" z="208.1002" h="90"/>
-		</spawn>
-		<!-- Guard Tower -->
-		<spawn npc_id="276512" respawn_time="295">
-			<spot x="551.147" y="3342.79" z="2817.85" h="105"/>
-		</spawn>
-		<!-- Sierinererk -->
-		<spawn npc_id="279013" respawn_time="295">
-			<spot x="561.044" y="3338.76" z="2818.22" h="105"/>
-		</spawn>
-		<!-- Sohonerk -->
-		<spawn npc_id="279014" respawn_time="295">
-			<spot x="554.104" y="3331.82" z="2818.63" h="105"/>
-		</spawn>
-		<!-- Garpedo -->
-		<spawn npc_id="278606" respawn_time="295">
-			<spot x="556.509" y="3337.88" z="2818.63" h="105"/>
-		</spawn>
-		<!-- Aimele -->
-		<spawn npc_id="278607" respawn_time="295">
-			<spot x="569.318" y="3337.6" z="2818" h="105"/>
-		</spawn>
-		<!-- Sione -->
-		<spawn npc_id="278608" respawn_time="295">
-			<spot x="554.441" y="3323.66" z="2819.17" h="105"/>
-		</spawn>
-		<!-- Grabakr -->
-		<spawn npc_id="278105" respawn_time="295">
-			<spot x="569.11" y="2603.8" z="2887.41" h="45"/>
-		</spawn>
-		<!-- Dvergr -->
-		<spawn npc_id="278106" respawn_time="295">
-			<spot x="564.837" y="2599.48" z="2886.32" h="45"/>
-		</spawn>
-		<!-- Muirica -->
-		<spawn npc_id="278107" respawn_time="295">
-			<spot x="577.722" y="2598.18" z="2888.78" h="45"/>
-		</spawn>
-		<!-- Arnora -->
-		<spawn npc_id="278108" respawn_time="295">
-			<spot x="568.802" y="2589.26" z="2886.06" h="45"/>
-		</spawn>
-		<!-- Asteria Guard Tower -->
-		<spawn npc_id="276516" respawn_time="295">
-			<spot x="574.118" y="2592.98" z="2887.46" h="45"/>
 		</spawn>
 	</spawn_map>
 </spawns>

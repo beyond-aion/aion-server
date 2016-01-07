@@ -2,7 +2,7 @@
 <spawns>
 	<spawn_map map_id="210040000">
 		<!-- Rift -->
-		<spawn npc_id="700137" handler="RIFT">
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="2662.01" y="434.266" z="398.717" anchor="HEIRON_AM"/>	<!-- id 2140 -->
 			<spot x="1300.27" y="1437.92" z="112.788" anchor="HEIRON_BM"/>	<!-- id 2141 -->
 			<spot x="1103.57" y="656.18" z="132.959" anchor="HEIRON_CM"/>	<!-- id 2142 -->

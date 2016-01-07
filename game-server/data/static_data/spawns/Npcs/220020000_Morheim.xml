@@ -3728,6 +3728,7 @@
 		</spawn>
 		<!-- Hermod -->
 		<spawn npc_id="204373" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="682.573" y="1144.39" z="285" h="10"/>
 		</spawn>
 		<!-- Herner -->
@@ -3933,8 +3934,13 @@
 		</spawn>
 		<!-- Igraine -->
 		<spawn npc_id="204347" respawn_time="295">
-			<spot x="2479.46" y="1801.02" z="95.6547" h="75"/>
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="2522.29" y="1703.93" z="92.0406" h="50"/>
+		</spawn>
+		<!-- Igraine -->
+		<spawn npc_id="204347" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			<spot x="2479.46" y="1801.02" z="95.6547" h="75"/>
 		</spawn>
 		<!-- Ilaina Aetherleech -->
 		<spawn npc_id="212827" respawn_time="3600" pool="1">
@@ -8544,7 +8550,12 @@
 		</spawn>
 		<!-- Virashak -->
 		<spawn npc_id="204348" respawn_time="295">
-			<spot x="1510.07" y="2804.37" z="363.606" h="73"/>
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
+			<spot x="2493" y="1713" z="96" h="73"/>
+		</spawn>
+		<!-- Virashak -->
+		<spawn npc_id="204348" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="2488.72" y="1795.96" z="96" h="112"/>
 		</spawn>
 		<!-- Visionmaster Omutata -->

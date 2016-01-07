@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="900020000">
+		<!-- Abandoned Danuar Device -->
+		<spawn npc_id="230524" respawn_time="295">
+			<spot x="212.84349" y="111.89733" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Agile Supraklaw Gatherer -->
+		<spawn npc_id="231300" respawn_time="295">
+			<spot x="227.74779" y="124.54282" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Alpine Griffon -->
+		<spawn npc_id="230448" respawn_time="295">
+			<spot x="205.01529" y="99.555511" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Ambush Crynac -->
+		<spawn npc_id="230575" respawn_time="295">
+			<spot x="218.60991" y="111.97719" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Ancient Glacial Agrint -->
+		<spawn npc_id="230483" respawn_time="295">
+			<spot x="207.57312" y="109.65705" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Arza -->
+		<spawn npc_id="799439" respawn_time="295">
+			<spot x="243.34589" y="107.07979" z="21.870781"/>
+			<spot x="243.3557" y="99.992661" z="21.870781"/>
+			<spot x="243.36549" y="101.73749" z="21.870781"/>
+			<spot x="243.36549" y="104.39393" z="21.870781"/>
+			<spot x="246.76369" y="95.744339" z="21.870781"/>
+		</spawn>
+		<!-- Asmo and Ellie -->
+		<spawn npc_id="730084" respawn_time="295">
+			<spot x="46.613926" y="13.48663" z="19.875"/>
+		</spawn>
+		<!-- Backwoods Lichenar -->
+		<spawn npc_id="230590" respawn_time="295">
+			<spot x="221.36488" y="99.400162" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Balaur Floating Mine -->
+		<spawn npc_id="230525" respawn_time="295">
+			<spot x="212.84349" y="114.57245" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Balaur, Who Are They! -->
+		<spawn npc_id="730083" respawn_time="295">
+			<spot x="55.300377" y="13.738411" z="19.875"/>
+		</spawn>
+		<!-- Balloon Sylphen -->
+		<spawn npc_id="231256" respawn_time="295">
+			<spot x="224.66289" y="94.607689" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Basin Starturtle -->
+		<spawn npc_id="230487" respawn_time="295">
+			<spot x="207.57312" y="117.84211" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Basin Zathany -->
+		<spawn npc_id="230526" respawn_time="295">
+			<spot x="212.84349" y="117.20764" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Beckham (For Testing PC Café Exclusive NPCs) -->
+		<spawn npc_id="831407" respawn_time="295">
+			<spot x="9.3556976" y="51.992661" z="21.875"/>
+		</spawn>
+		<!-- Bellicose Crynac -->
+		<spawn npc_id="230496" respawn_time="295">
+			<spot x="210.20831" y="99.595436" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Blue Clawed Tayga -->
+		<spawn npc_id="230461" respawn_time="295">
+			<spot x="205.01529" y="114.80766" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Blue Crystal Komad -->
+		<spawn npc_id="231258" respawn_time="295">
+			<spot x="224.66289" y="97.31633" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Book of Prophecy -->
+		<spawn npc_id="730093" respawn_time="295">
+			<spot x="121.30468" y="38.630684" z="19.875"/>
+		</spawn>
+		<!-- Brutal Malodor -->
+		<spawn npc_id="230511" respawn_time="295">
+			<spot x="212.84349" y="91.574455" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Bulwark Ametgolem -->
+		<spawn npc_id="230447" respawn_time="295">
+			<spot x="205.01529" y="96.640831" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Bunton (For Testing Paid User Exclusive NPCs) -->
+		<spawn npc_id="831408" respawn_time="295">
+			<spot x="9.3556976" y="54.992661" z="21.875"/>
+		</spawn>
+		<!-- Coppertop Monitor -->
+		<spawn npc_id="230563" respawn_time="295">
+			<spot x="218.60991" y="94.449211" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Cracked Earth Spirit -->
+		<spawn npc_id="230464" respawn_time="295">
+			<spot x="207.57312" y="91.649963" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Cursed Lake Seiren -->
+		<spawn npc_id="231262" respawn_time="295">
+			<spot x="224.66289" y="102.54464" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Dangerlily -->
+		<spawn npc_id="230592" respawn_time="295">
+			<spot x="221.36488" y="102.19506" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Darfen -->
+		<spawn npc_id="798452" respawn_time="295">
+			<spot x="135.18025" y="155.35149" z="23.056122"/>
+		</spawn>
+		<!-- Devious Water Spirit -->
+		<spawn npc_id="230484" respawn_time="295">
+			<spot x="207.57312" y="112.29224" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Devious Water Spirit -->
+		<spawn npc_id="230517" respawn_time="295">
+			<spot x="212.84349" y="102.27491" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Dionera -->
+		<spawn npc_id="285972" respawn_time="295">
+			<spot x="156.52" y="131.84" z="21" h="90"/>
+		</spawn>
+		<!-- Dionera -->
+		<spawn npc_id="285973" respawn_time="295">
+			<spot x="159.77113" y="138.53543" z="20" h="90"/>
+		</spawn>
+		<!-- Drained Basin Rotron -->
+		<spawn npc_id="231280" respawn_time="295">
+			<spot x="224.66289" y="123.82954" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Duncan (for returning user exclusive NPC testing) -->
+		<spawn npc_id="831409" respawn_time="295">
+			<spot x="9.3556976" y="57.992661" z="21.875"/>
+		</spawn>
+		<!-- Elder Frost Spirit -->
+		<spawn npc_id="230479" respawn_time="295">
+			<spot x="207.57312" y="104.46654" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Enraged Northlands Brax -->
+		<spawn npc_id="230529" respawn_time="295">
+			<spot x="215.73517" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Famished Karnif -->
+		<spawn npc_id="231295" respawn_time="295">
+			<spot x="227.70183" y="111.30502" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Fierce Red Gryphu -->
+		<spawn npc_id="230533" respawn_time="295">
+			<spot x="215.73517" y="94.209648" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Fin Back Cellatu -->
+		<spawn npc_id="230584" respawn_time="295">
+			<spot x="221.36488" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Floating Balaur Mine -->
+		<spawn npc_id="230465" respawn_time="295">
+			<spot x="207.57312" y="94.165352" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Fluorescent  Basilisk -->
+		<spawn npc_id="231276" respawn_time="295">
+			<spot x="224.66289" y="113.21173" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Frisky Virago -->
+		<spawn npc_id="231298" respawn_time="295">
+			<spot x="227.74779" y="119.119" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Furious Waterworm -->
+		<spawn npc_id="230559" respawn_time="295">
+			<spot x="218.60991" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Glacial Arachna -->
+		<spawn npc_id="231245" respawn_time="295">
+			<spot x="221.36488" y="109.66142" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Glowing Wanderer Spirit -->
+		<spawn npc_id="230582" respawn_time="295">
+			<spot x="218.60991" y="122.07874" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Golden Tayga -->
+		<spawn npc_id="230554" respawn_time="295">
+			<spot x="215.73517" y="117.46716" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Guide to the Abyss -->
+		<spawn npc_id="730092" respawn_time="295">
+			<spot x="108.61629" y="16.794731" z="19.875"/>
+		</spawn>
+		<!-- Halliwell (For Testing Skill Exclusive NPCs) -->
+		<spawn npc_id="831405" respawn_time="295">
+			<spot x="9.3556976" y="45.992661" z="21.875"/>
+		</spawn>
+		<!-- Hippogriff -->
+		<spawn npc_id="231296" respawn_time="295">
+			<spot x="227.70183" y="113.7871" z="21.235954" h="30"/>
+		</spawn>
+		<!-- History of Ancient Atreia -->
+		<spawn npc_id="730079" respawn_time="295">
+			<spot x="89.149574" y="14.431932" z="19.875"/>
+		</spawn>
+		<!-- Hoarfrost Crasaur -->
+		<spawn npc_id="231246" respawn_time="295">
+			<spot x="221.36488" y="112.37646" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Hoverstone Kalgolem -->
+		<spawn npc_id="231281" respawn_time="295">
+			<spot x="227.70183" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Huge Vespine -->
+		<spawn npc_id="230589" respawn_time="295">
+			<spot x="221.36488" y="96.844833" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Hurugaga Brawler -->
+		<spawn npc_id="230565" respawn_time="295">
+			<spot x="218.60991" y="96.92469" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Hurugaga Shaman -->
+		<spawn npc_id="230567" respawn_time="295">
+			<spot x="218.60991" y="102.15514" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Hurugaga Supplicator -->
+		<spawn npc_id="230566" respawn_time="295">
+			<spot x="218.60991" y="99.639732" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Ide Mimic -->
+		<spawn npc_id="231254" respawn_time="295">
+			<spot x="224.66289" y="91.773056" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Impetusium of Glory -->
+		<spawn npc_id="730081" respawn_time="295">
+			<spot x="71.917915" y="14.116082" z="19.875"/>
+		</spawn>
+		<!-- Indratu Outpost Guard -->
+		<spawn npc_id="219104" respawn_time="295">
+			<spot x="180.01714" y="170.35692" z="20.412827"/>
+		</spawn>
+		<!-- Infused Kirrin -->
+		<spawn npc_id="230519" respawn_time="295">
+			<spot x="212.84349" y="104.55076" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Infused Komad Worker -->
+		<spawn npc_id="230451" respawn_time="295">
+			<spot x="205.01529" y="107.10172" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Infused Luciferin -->
+		<spawn npc_id="230503" respawn_time="295">
+			<spot x="210.20831" y="109.5772" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Infused Trooper Ghost -->
+		<spawn npc_id="230507" respawn_time="295">
+			<spot x="210.20831" y="114.84757" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Infused Warrior -->
+		<spawn npc_id="230505" respawn_time="295">
+			<spot x="210.20831" y="112.17246" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Infused Waterworm -->
+		<spawn npc_id="230509" respawn_time="295">
+			<spot x="210.20831" y="117.60255" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Interesting Asmodae -->
+		<spawn npc_id="730085" respawn_time="295">
+			<spot x="38.987537" y="13.790558" z="19.875"/>
+		</spawn>
+		<!-- Journal of an Explorer -->
+		<spawn npc_id="730080" respawn_time="295">
+			<spot x="80.730247" y="14.241974" z="19.875"/>
+		</spawn>
+		<!-- Katalam Malodor -->
+		<spawn npc_id="230491" respawn_time="295">
+			<spot x="210.20831" y="91.72982" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Kosta (For Testing the Ranking of Exclusive NPCs) -->
+		<spawn npc_id="831410" respawn_time="295">
+			<spot x="9.3556976" y="60.992661" z="21.875"/>
+		</spawn>
+		<!-- Lake Airon -->
+		<spawn npc_id="230514" respawn_time="295">
+			<spot x="212.84349" y="96.844833" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lake Hornskull -->
+		<spawn npc_id="231264" respawn_time="295">
+			<spot x="224.66289" y="105.31627" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lake Seiren -->
+		<spawn npc_id="231260" respawn_time="295">
+			<spot x="224.66289" y="100.02497" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lakuri Fighter -->
+		<spawn npc_id="230542" respawn_time="295">
+			<spot x="215.73517" y="104.59068" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lakuri Shaman -->
+		<spawn npc_id="230546" respawn_time="295">
+			<spot x="215.73517" y="109.36197" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lakuri Supplicant -->
+		<spawn npc_id="230544" respawn_time="295">
+			<spot x="215.73517" y="107.06616" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Large Plains Vortile -->
+		<spawn npc_id="231303" respawn_time="295">
+			<spot x="227.74779" y="130.05856" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lee Ryan (For Testing PC Café Exclusive NPCs) -->
+		<spawn npc_id="831411" respawn_time="295">
+			<spot x="9.3556976" y="63.992661" z="21.875"/>
+		</spawn>
+		<!-- Leowasp Smasher -->
+		<spawn npc_id="231279" respawn_time="295">
+			<spot x="224.66289" y="121.30149" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Loyal Hetgolem -->
+		<spawn npc_id="217264" respawn_time="295">
+			<spot x="97.728516" y="236.17641" z="20.974998" h="90"/>
+			<spot x="107.48251" y="236.06593" z="20.974998" h="90"/>
+			<spot x="117.46694" y="235.83847" z="20.974998" h="90"/>
+			<spot x="127.34712" y="235.86493" z="20.974998" h="90"/>
+			<spot x="137.70111" y="235.98312" z="20.974998" h="90"/>
+			<spot x="147.48521" y="235.88467" z="20.974998" h="90"/>
+		</spawn>
+		<!-- Luluba Axeman -->
+		<spawn npc_id="231284" respawn_time="295">
+			<spot x="227.70183" y="91.862" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Luluba Firecaller -->
+		<spawn npc_id="231288" respawn_time="295">
+			<spot x="227.70183" y="97.377747" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Luluba Shaman -->
+		<spawn npc_id="231286" respawn_time="295">
+			<spot x="227.70183" y="94.849693" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Luminous Ksellid -->
+		<spawn npc_id="231270" respawn_time="295">
+			<spot x="224.66289" y="110.68368" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Luminous Sparkle -->
+		<spawn npc_id="231252" respawn_time="295">
+			<spot x="221.36488" y="122.43808" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Lurine -->
+		<spawn npc_id="798451" respawn_time="295">
+			<spot x="128.95248" y="155.29588" z="23.056122"/>
+		</spawn>
+		<!-- Maned Kirrin -->
+		<spawn npc_id="230478" respawn_time="295">
+			<spot x="207.57312" y="102.1907" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Marine Malador -->
+		<spawn npc_id="231302" respawn_time="295">
+			<spot x="227.74779" y="127.30069" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Melanie (for new user exclusive NPC testing) -->
+		<spawn npc_id="831406" respawn_time="295">
+			<spot x="9.3556976" y="48.992661" z="21.875"/>
+		</spawn>
+		<!-- Mossback Troll -->
+		<spawn npc_id="231291" respawn_time="295">
+			<spot x="227.70183" y="102.70963" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Mossy Earth Spirit -->
+		<spawn npc_id="230499" respawn_time="295">
+			<spot x="210.20831" y="104.46654" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Mutated Lapilima -->
+		<spawn npc_id="231277" respawn_time="295">
+			<spot x="224.66289" y="115.8317" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Mutated Serrator -->
+		<spawn npc_id="231244" respawn_time="295">
+			<spot x="221.36488" y="107.38557" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Northlands Mamut -->
+		<spawn npc_id="230462" respawn_time="295">
+			<spot x="205.01529" y="117.84211" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Obelisk -->
+		<spawn npc_id="700012" respawn_time="295">
+			<spot x="131.12637" y="120.01453" z="20.557297" h="60"/>
+		</spawn>
+		<!-- Ossified Troll -->
+		<spawn npc_id="231294" respawn_time="295">
+			<spot x="227.70183" y="108.86889" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Petrified Agrint -->
+		<spawn npc_id="230516" respawn_time="295">
+			<spot x="212.84349" y="99.599808" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Phasing Crynac -->
+		<spawn npc_id="230512" respawn_time="295">
+			<spot x="212.84349" y="94.409286" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Plains Karnif -->
+		<spawn npc_id="230571" respawn_time="295">
+			<spot x="218.60991" y="107.14601" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Plains Sparkle -->
+		<spawn npc_id="230578" respawn_time="295">
+			<spot x="218.60991" y="114.33289" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Plateau Bloodwing -->
+		<spawn npc_id="230454" respawn_time="295">
+			<spot x="205.01529" y="112.17246" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Pradeth Mugolem -->
+		<spawn npc_id="230579" respawn_time="295">
+			<spot x="218.60991" y="116.88822" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Prairie Crestlich -->
+		<spawn npc_id="230568" respawn_time="295">
+			<spot x="218.60991" y="104.79032" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Primal Wind Spirit -->
+		<spawn npc_id="230550" respawn_time="295">
+			<spot x="215.73517" y="114.47263" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Quagmire Slime -->
+		<spawn npc_id="230510" respawn_time="295">
+			<spot x="212.84349" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Raksang Entrance -->
+		<spawn npc_id="730451" respawn_time="295">
+			<spot x="246.68349" y="89.372726" z="21.870781"/>
+		</spawn>
+		<!-- Rare Poison Guide -->
+		<spawn npc_id="730091" respawn_time="295">
+			<spot x="119.62364" y="16.69574" z="19.875"/>
+		</spawn>
+		<!-- Rayot -->
+		<spawn npc_id="798453" respawn_time="295">
+			<spot x="141.35239" y="155.5739" z="23.056122"/>
+		</spawn>
+		<!-- Red Thorn Oculis -->
+		<spawn npc_id="231253" respawn_time="295">
+			<spot x="224.66289" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Redtail Pluma -->
+		<spawn npc_id="230498" respawn_time="295">
+			<spot x="210.20831" y="102.07092" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Refined Kalgolem -->
+		<spawn npc_id="231297" respawn_time="295">
+			<spot x="227.74779" y="116.36111" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Roaming Novun -->
+		<spawn npc_id="230486" respawn_time="295">
+			<spot x="207.57312" y="114.8875" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Rooting Kerub -->
+		<spawn npc_id="230452" respawn_time="295">
+			<spot x="205.01529" y="109.53728" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Rynoce Calf -->
+		<spawn npc_id="230548" respawn_time="295">
+			<spot x="215.73517" y="111.99715" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Sandscale Hornskull -->
+		<spawn npc_id="230561" respawn_time="295">
+			<spot x="218.60991" y="91.414749" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Scrub Dionae -->
+		<spawn npc_id="230534" respawn_time="295">
+			<spot x="215.73517" y="96.964622" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Shale Kalgolem -->
+		<spawn npc_id="230536" respawn_time="295">
+			<spot x="215.73517" y="99.559875" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Shivering Gust Spirit -->
+		<spawn npc_id="230531" respawn_time="295">
+			<spot x="215.73517" y="91.574463" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Simon Webbe (For Testing Paid User Exclusive NPCs) -->
+		<spawn npc_id="831412" respawn_time="295">
+			<spot x="9.3556976" y="66.992661" z="21.875"/>
+		</spawn>
+		<!-- Snow Tayga -->
+		<spawn npc_id="230450" respawn_time="295">
+			<spot x="205.01529" y="104.50647" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Snowdrift Griffon -->
+		<spawn npc_id="230449" respawn_time="295">
+			<spot x="205.01529" y="102.07092" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Snowfield Bosbear -->
+		<spawn npc_id="230443" respawn_time="295">
+			<spot x="205.01529" y="91.570107" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Snowfield Lapilima -->
+		<spawn npc_id="230482" respawn_time="295">
+			<spot x="207.57312" y="107.10172" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Snowfield Sparkle -->
+		<spawn npc_id="230463" respawn_time="295">
+			<spot x="207.57312" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Stealthy Swamp Tayga -->
+		<spawn npc_id="230501" respawn_time="295">
+			<spot x="210.20831" y="107.10172" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Stealthy Tayga -->
+		<spawn npc_id="230488" respawn_time="295">
+			<spot x="210.20831" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Supraklaw Forager -->
+		<spawn npc_id="230557" respawn_time="295">
+			<spot x="215.73517" y="120.02249" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Swamp Alitaur -->
+		<spawn npc_id="230593" respawn_time="295">
+			<spot x="221.36488" y="104.83025" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Swamp Arachna -->
+		<spawn npc_id="230587" respawn_time="295">
+			<spot x="221.36488" y="94.369354" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Swamp Gnarl -->
+		<spawn npc_id="230586" respawn_time="295">
+			<spot x="221.36488" y="91.454681" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Talus Ametgolem -->
+		<spawn npc_id="230523" respawn_time="295">
+			<spot x="212.84349" y="109.1823" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Test_Controlling_OFF_KyungHyoBum -->
+		<spawn npc_id="287215" respawn_time="295">
+			<spot x="240.36971" y="240.21362" z="20" h="30"/>
+		</spawn>
+		<!-- Test_Controlling_ON_KyungHyoBum -->
+		<spawn npc_id="287214" respawn_time="295">
+			<spot x="242.05911" y="238.31871" z="20" h="30"/>
+		</spawn>
+		<!-- Tigran Scout -->
+		<spawn npc_id="231249" respawn_time="295">
+			<spot x="221.36488" y="117.24756" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Tigran Shaman -->
+		<spawn npc_id="231247" respawn_time="295">
+			<spot x="221.36488" y="114.69223" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Timid Luciferin -->
+		<spawn npc_id="230495" respawn_time="295">
+			<spot x="210.20831" y="96.800545" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Timid Manduri -->
+		<spawn npc_id="230540" respawn_time="295">
+			<spot x="215.73517" y="102.1152" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Titan Sparkle -->
+		<spawn npc_id="231278" respawn_time="295">
+			<spot x="224.66289" y="118.54362" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Trained Wardrake -->
+		<spawn npc_id="230574" respawn_time="295">
+			<spot x="218.60991" y="109.54163" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Tundra Abex -->
+		<spawn npc_id="230441" respawn_time="295">
+			<spot x="205.01529" y="88.725624" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Tundra Manduri Beater -->
+		<spawn npc_id="230466" respawn_time="295">
+			<spot x="207.57312" y="96.680763" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Tundra Manduri Thrower -->
+		<spawn npc_id="230467" respawn_time="295">
+			<spot x="207.57312" y="99.475662" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Tundra Mudthorn -->
+		<spawn npc_id="230445" respawn_time="295">
+			<spot x="205.01529" y="94.005646" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Undin -->
+		<spawn npc_id="798450" respawn_time="295">
+			<spot x="121.97443" y="155.35294" z="24.417593"/>
+		</spawn>
+		<!-- Urganon of Earth -->
+		<spawn npc_id="231266" respawn_time="295">
+			<spot x="224.66289" y="108.08791" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Voracious Karnif -->
+		<spawn npc_id="231292" respawn_time="295">
+			<spot x="227.70183" y="105.8812" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Wasteland Dionae -->
+		<spawn npc_id="230522" respawn_time="295">
+			<spot x="212.84349" y="106.90645" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Weathered Female Statue -->
+		<spawn npc_id="230580" respawn_time="295">
+			<spot x="218.60991" y="119.32377" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Wild Drake -->
+		<spawn npc_id="231290" respawn_time="295">
+			<spot x="227.70183" y="100.08966" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Wild Drake -->
+		<spawn npc_id="231299" respawn_time="295">
+			<spot x="227.74779" y="121.73898" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Wily Gnarl -->
+		<spawn npc_id="230494" respawn_time="295">
+			<spot x="210.20831" y="94.285141" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Wind Breeze -->
+		<spawn npc_id="730094" respawn_time="295">
+			<spot x="110.1728" y="38.466202" z="19.875"/>
+		</spawn>
+		<!-- Worg Trap Arachna -->
+		<spawn npc_id="231251" respawn_time="295">
+			<spot x="221.36488" y="119.88274" z="21.235954" h="30"/>
+		</spawn>
+		<!-- Zemurru -->
+		<spawn npc_id="730082" respawn_time="295">
+			<spot x="63.735039" y="14.11608" z="19.875"/>
+		</spawn>
+	</spawn_map>
+</spawns>

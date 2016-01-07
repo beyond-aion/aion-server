@@ -664,7 +664,7 @@
 		<!-- Kunberunerk -->
 		<spawn npc_id="798026" respawn_time="295">
 			<temporary_spawn/>
-			<spot x="1824.54" y="2187.58" z="528.766" h="91">
+			<spot x="1818.54" y="2192.09" z="528.766" h="91">
 				<temporary_spawn spawn_time="22.*.*" despawn_time="8.*.*"/>
 			</spot>
 			<spot x="1968" y="1768" z="576.759" h="60">
@@ -1009,6 +1009,7 @@
 		</spawn>
 		<!-- Opeia -->
 		<spawn npc_id="203899" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="1839" y="2189" z="528.766" h="105"/>
 		</spawn>
 		<!-- Ophenes -->

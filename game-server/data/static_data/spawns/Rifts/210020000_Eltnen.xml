@@ -2,7 +2,7 @@
 <spawns>
 	<spawn_map map_id="210020000">
 		<!-- Rift -->
-		<spawn npc_id="700137" handler="RIFT">
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="224.042" y="2934.95" z="155.5" anchor="ELTNEN_AM"/>	<!-- id 2120 -->
 			<spot x="777.936" y="1947.14" z="290.717" anchor="ELTNEN_BM"/>	<!-- id 2121 -->
 			<spot x="1629.42" y="1762.11" z="345.332" anchor="ELTNEN_CM"/>	<!-- id 2122 -->

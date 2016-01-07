@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="900220000">
+		<!-- Builder Order Execution NPC -->
+		<spawn npc_id="287281" respawn_time="295">
+			<spot x="259" y="252.5" z="3.5" h="30"/>
+		</spawn>
+	</spawn_map>
+</spawns>

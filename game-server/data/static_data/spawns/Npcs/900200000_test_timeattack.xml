@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="900200000">
+		<!-- BIDF5_R1_Contaminated Scientist_Magic Response -->
+		<spawn npc_id="283818" respawn_time="295">
+			<spot x="96.103249" y="144.44595" z="31.087664" h="30"/>
+		</spawn>
+		<!-- BIDF5_R1_Idgel Mutated Test Subject_Group -->
+		<spawn npc_id="283807" respawn_time="295">
+			<spot x="123.7984" y="118.98833" z="31.087664"/>
+			<spot x="124.96126" y="109.19296" z="31.087664"/>
+			<spot x="133.62529" y="114.09612" z="31.087664"/>
+		</spawn>
+		<!-- BIDF5_R1_Idgel Mutated Test Subject_Single -->
+		<spawn npc_id="283806" respawn_time="295">
+			<spot x="63.966362" y="109.33125" z="31.087664"/>
+			<spot x="64.209435" y="119.72902" z="31.087664"/>
+			<spot x="71.576874" y="114.68085" z="31.087664" h="60"/>
+		</spawn>
+		<!-- BIDF5_R1_Lightweight Turret -->
+		<spawn npc_id="283803" respawn_time="295">
+			<spot x="83.568932" y="127.0046" z="31.087664" h="90"/>
+		</spawn>
+		<!-- BIDF5_R1_Monitoring Device -->
+		<spawn npc_id="283804" respawn_time="295">
+			<spot x="111.63087" y="127.64933" z="31.087664" h="30"/>
+		</spawn>
+		<!-- First Mate Aznaya -->
+		<spawn npc_id="215086" respawn_time="295">
+			<spot x="183.47687" y="112.40227" z="37.009155"/>
+		</spawn>
+		<!-- Normal_BabyFrillneck_10_An -->
+		<spawn npc_id="280017" respawn_time="295">
+			<spot x="21.536865" y="111.32095" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Brax_3_n -->
+		<spawn npc_id="280016" respawn_time="295">
+			<spot x="21.356583" y="106.58163" z="31.087664"/>
+		</spawn>
+		<!-- Normal_FlagKobold_13_An -->
+		<spawn npc_id="280003" respawn_time="295">
+			<spot x="19.634193" y="39.61607" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Fungus_8_An -->
+		<spawn npc_id="280031" respawn_time="295">
+			<spot x="24.30319" y="181.81926" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Hydroramphis_19_An -->
+		<spawn npc_id="280010" respawn_time="295">
+			<spot x="20.557026" y="76.727509" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Kalgolem_17_An -->
+		<spawn npc_id="280018" respawn_time="295">
+			<spot x="21.91176" y="116.07775" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Kepra_11_n -->
+		<spawn npc_id="280021" respawn_time="295">
+			<spot x="22.650862" y="130.94135" z="31.087664"/>
+		</spawn>
+		<!-- Normal_KoboldWarriorMale_13_An -->
+		<spawn npc_id="280015" respawn_time="295">
+			<spot x="21.564907" y="101.74837" z="31.087664"/>
+		</spawn>
+		<!-- Normal_KrallWizardlf1Hero_21_Ah -->
+		<spawn npc_id="280001" respawn_time="295">
+			<spot x="19.569252" y="27.281433" z="31.087664"/>
+			<spot x="34.58403" y="27.593651" z="31.087664"/>
+			<spot x="34.820412" y="34.362732" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Lobnite_10_n -->
+		<spawn npc_id="280006" respawn_time="295">
+			<spot x="20.206724" y="56.658432" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Methu_1_n -->
+		<spawn npc_id="280009" respawn_time="295">
+			<spot x="20.364319" y="71.7808" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Mimic_19_n -->
+		<spawn npc_id="280013" respawn_time="295">
+			<spot x="21.292074" y="91.64846" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Nependeth_16_An -->
+		<spawn npc_id="280005" respawn_time="295">
+			<spot x="19.832523" y="50.978851" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Obscura_19_An -->
+		<spawn npc_id="280019" respawn_time="295">
+			<spot x="21.996889" y="120.96648" z="31.087664"/>
+		</spawn>
+		<!-- Normal_OctasideS_16_An -->
+		<spawn npc_id="280026" respawn_time="295">
+			<spot x="23.288124" y="156.52234" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Ribbit_16_n -->
+		<spawn npc_id="280004" respawn_time="295">
+			<spot x="19.732216" y="45.232162" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Rippleworm_18_An -->
+		<spawn npc_id="280002" respawn_time="295">
+			<spot x="19.502296" y="34.008278" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Scolopen_16_An -->
+		<spawn npc_id="280020" respawn_time="295">
+			<spot x="22.379482" y="126.34563" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Simuroog_16_An -->
+		<spawn npc_id="280029" respawn_time="295">
+			<spot x="24.482491" y="171.33658" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Slime_16_An -->
+		<spawn npc_id="280025" respawn_time="295">
+			<spot x="23.482784" y="151.44974" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Sparkle_11_n -->
+		<spawn npc_id="280023" respawn_time="295">
+			<spot x="22.733482" y="141.11209" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Sparky_6_n -->
+		<spawn npc_id="280024" respawn_time="295">
+			<spot x="23.01285" y="146.19522" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Starturtle_11_n -->
+		<spawn npc_id="280022" respawn_time="295">
+			<spot x="22.64389" y="135.97649" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Sylphen_6_n -->
+		<spawn npc_id="280012" respawn_time="295">
+			<spot x="20.912262" y="86.65654" z="31.087664"/>
+		</spawn>
+		<!-- Normal_TheLehparRevolutionariesAssassinS_11_An -->
+		<spawn npc_id="280007" respawn_time="295">
+			<spot x="20.397337" y="61.501869" z="31.087664"/>
+		</spawn>
+		<!-- Normal_TheLehparRevolutionariesWarriorS_11_An -->
+		<spawn npc_id="280008" respawn_time="295">
+			<spot x="20.277819" y="66.825264" z="31.087664"/>
+		</spawn>
+		<!-- Normal_Tog_13_An -->
+		<spawn npc_id="280030" respawn_time="295">
+			<spot x="24.482801" y="176.647" z="31.087664"/>
+		</spawn>
+		<!-- Normal_WaterSpiritLv1_18_An -->
+		<spawn npc_id="280011" respawn_time="295">
+			<spot x="20.824743" y="81.64241" z="31.087664"/>
+		</spawn>
+		<!-- Normal_WindSpiritLv1_18_An -->
+		<spawn npc_id="280014" respawn_time="295">
+			<spot x="21.380709" y="96.726639" z="31.087664"/>
+		</spawn>
+		<!-- Normal_ZaifM_11_An -->
+		<spawn npc_id="280028" respawn_time="295">
+			<spot x="24.024477" y="166.36107" z="31.087664"/>
+		</spawn>
+		<!-- Normal_ZaifS_6_An -->
+		<spawn npc_id="280027" respawn_time="295">
+			<spot x="23.659929" y="161.57422" z="31.087664"/>
+		</spawn>
+	</spawn_map>
+</spawns>

@@ -29,11 +29,14 @@
 		</spawn>
 		<!-- Balaur Armament Box -->
 		<spawn npc_id="701033">
+			<spot x="549.9543" y="397.3575" z="650.0026" static_id="8" />
+			<spot x="595.767" y="60.51034" z="611.9988" static_id="73" />
+			<spot x="548.1289" y="30.38037" z="611.9988" static_id="237" />
 			<spot x="692.776" y="107.546" z="613.999" static_id="22"/>
 			<spot x="741.713" y="99.655" z="613.999" static_id="51"/>
 		</spawn>
 		<!-- Balaur Spy Crystal -->
-		<spawn npc_id="730373">
+		<spawn npc_id="702656">
 			<spot x="542.527" y="89.004" z="614.014" static_id="28"/>
 			<spot x="591.022" y="188.963" z="612.929" static_id="276"/>
 			<spot x="604.116" y="84.038" z="614.044" static_id="87"/>
@@ -115,23 +118,23 @@
 			<spot x="261.947" y="752.862" z="900.695" h="53"/>
 		</spawn>
 		<!-- Dredgion Generator -->
-		<spawn npc_id="700985">
+		<spawn npc_id="702650">
 			<spot x="583.568" y="468.144" z="649.116" static_id="77"/>
 		</spawn>
 		<!-- Dredgion Generator -->
-		<spawn npc_id="700981">
+		<spawn npc_id="702651">
 			<spot x="523.260" y="502.319" z="651.062" static_id="24"/>
 		</spawn>
 		<!-- Dredgion Generator -->
-		<spawn npc_id="700984">
+		<spawn npc_id="702652">
 			<spot x="595.227" y="409.266" z="650.138" static_id="82"/>
 		</spawn>
 		<!-- Dredgion Generator -->
-		<spawn npc_id="700982">
+		<spawn npc_id="702653">
 			<spot x="462.586" y="474.305" z="649.081" static_id="80"/>
 		</spawn>
 		<!-- Dredgion Generator -->
-		<spawn npc_id="700983">
+		<spawn npc_id="702654">
 			<spot x="449.396" y="408.125" z="654.192" static_id="81"/>
 		</spawn>
 		<!-- Energy Barrier -->
@@ -151,8 +154,10 @@
 		</spawn>
 		<!-- Flagon -->
 		<spawn npc_id="730398">
-			<spot x="482.251" y="406.255" z="648.036" static_id="44"/>
-			<spot x="544.775" y="401.032" z="648.029" static_id="59"/>
+			<spot x="544.7755" y="401.032" z="648.0292" static_id="59" />
+			<spot x="482.2515" y="406.2547" z="648.0363" static_id="44" />
+			<spot x="544.3787" y="106.5208" z="614.0145" static_id="133" />
+			<spot x="660.9862" y="71.53168" z="612.4829" static_id="129" />
 			<spot x="733.760" y="121.829" z="612.931" static_id="381"/>
 		</spawn>
 		<!-- Hariken -->
@@ -181,12 +186,16 @@
 			<spot x="292.266" y="857.401" z="900.351" h="84"/>
 		</spawn>
 		<!-- Lift Controls -->
-		<spawn npc_id="730538">
-			<spot x="696.852" y="453.651" z="599.487" static_id="125"/>
-		</spawn>
-		<!-- Lift Controls -->
 		<spawn npc_id="730537">
 			<spot x="699.029" y="454.553" z="655.780" static_id="179"/>
+		</spawn>
+		<!-- Magma Tachysphere -->
+		<spawn npc_id="731533" respawn_time="295">
+			<spot x="606.7734" y="463.0358" z="653.4902" h="90" />
+		</spawn>
+		<!-- Magma Tachysphere -->
+		<spawn npc_id="731534" respawn_time="295">
+			<spot x="611.2321" y="347.8508" z="639.0731" />
 		</spawn>
 		<!-- Marabata Watcher -->
 		<spawn npc_id="217337">
@@ -380,6 +389,10 @@
 		<!-- Teleporter -->
 		<spawn npc_id="730463">
 			<spot x="378.919" y="801.266" z="903.695" static_id="229"/>
+		</spawn>
+		<!-- Teleporter -->
+		<spawn npc_id="702660">
+			<spot x="637.0627" y="448.5865" z="655.4818" h="76" static_id="107" />
 		</spawn>
 		<!-- Weapon H -->
 		<spawn npc_id="217371">

@@ -262,11 +262,11 @@
 		</spawn>
 		<!-- Brunto -->
 		<spawn npc_id="800518" respawn_time="295">
-			<spot x="289.3881" y="2743.1594" z="263.4984" h="15"/>
+			<spot x="327.4482" y="2730.58" z="263.4721" h="10"/>
 		</spawn>
 		<!-- Rogan -->
-		<spawn npc_id="800509" respawn_time="295">
-			<spot x="288.7081" y="2743.7625" z="263.4984" h="15"/>
+		<spawn npc_id="800507" respawn_time="295">
+			<spot x="327.0764" y="2732.051" z="263.4721" h="6"/>
 		</spawn>
 		<!-- Water Tank -->
 		<spawn npc_id="700173" respawn_time="295">
@@ -5043,6 +5043,7 @@
 		</spawn>
 		<!-- Rock Mountain Griffon -->
 		<spawn npc_id="211730" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="2449.29" y="2648.49" z="276" h="21"/>
 			<spot x="2420.38" y="2602.8" z="331.65" h="113"/>
 			<spot x="1756.59" y="2483.11" z="346.754" h="18"/>
@@ -6339,6 +6340,7 @@
 		</spawn>
 		<!-- Dancing Feather -->
 		<spawn npc_id="204029" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="2185.25" y="2555.48" z="360.953" h="90"/>
 		</spawn>
 		<!-- Trader's Bodyguard -->
@@ -6987,18 +6989,23 @@
 		</spawn>
 		<!-- Harumonerk -->
 		<spawn npc_id="798126" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
+			<temporary_spawn spawn_time="9.*.*" despawn_time="17.*.*"/>
 			<spot x="392.72397" y="1837.5984" z="241.9064" h="14"/>
 		</spawn>
 		<!-- Harumonerk -->
 		<spawn npc_id="798126" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
-			<spot x="752.76135" y="1010.50630" z="285.00000" h="97"/>
+			<temporary_spawn spawn_time="22.*.*" despawn_time="4.*.*"/>
+			<spot x="752.76135" y="1010.5063" z="285" h="97"/>
 		</spawn>
 		<!-- Chiyorinrinerk -->
 		<spawn npc_id="798127" respawn_time="295">
-			<spot x="1017.14" y="1826.45" z="278" h="70"/>
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="1522.97" y="1763.98" z="305" h="30"/>
+		</spawn>
+		<!-- Chiyorinrinerk -->
+		<spawn npc_id="798127" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			<spot x="1017.14" y="1826.45" z="278" h="70"/>
 		</spawn>
 		<!-- Metea -->
 		<spawn npc_id="798112" respawn_time="295">

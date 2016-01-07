@@ -2,7 +2,7 @@
 <spawns>
 	<spawn_map map_id="210050000">
 		<!-- Rift -->
-		<spawn npc_id="700137" handler="RIFT">
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="2269.9521" y="1440.8226" z="202.2073" h="30" anchor="INGGISON_AM"/>	<!-- id 2150 -->
 			<spot x="854.4329" y="1286.3925" z="428.9761" h="60" anchor="INGGISON_BM"/>		<!-- id 2151 -->
 			<spot x="2025.0779" y="2086.3252" z="298.7062" h="30" anchor="INGGISON_CM"/>	<!-- id 2152 -->

@@ -52,7 +52,7 @@
 		</spawn>
 		<!-- Ancient Cube -->
 		<spawn npc_id="700001" respawn_time="295">
-			<spot x="231.56" y="2006.29" z="150.621" static_id="427"/>
+			<spot x="629.4" y="1059.3" z="102.269"/>
 		</spawn>
 		<!-- Asteros -->
 		<spawn npc_id="203058" respawn_time="295">

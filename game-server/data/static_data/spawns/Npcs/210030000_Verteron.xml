@@ -2334,6 +2334,7 @@
 		</spawn>
 		<!-- Stone -->
 		<spawn npc_id="203121" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="1670.8358" y="1496.6965" z="119.193" h="45"/>
 		</spawn>
 		<!-- Stony the Stone Fist -->

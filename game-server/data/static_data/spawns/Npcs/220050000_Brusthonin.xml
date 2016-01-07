@@ -3958,9 +3958,14 @@
 			<spot x="516.145" y="468.556" z="6.82209" h="14"/>
 		</spawn>
 		<!-- Jadorunerk -->
-		<spawn npc_id="205218" respawn_time="295" pool="1">
-			<spot x="391.62" y="2277.87" z="329.563" h="105"/>
+		<spawn npc_id="205218" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="784.871" y="1014.65" z="45.8346" h="50"/>
+		</spawn>
+		<!-- Jadorunerk -->
+		<spawn npc_id="205218" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			<spot x="391.62" y="2277.87" z="329.563" h="105"/>
 		</spawn>
 		<!-- Jarnsaxa -->
 		<spawn npc_id="205121" respawn_time="295">
@@ -7837,6 +7842,12 @@
 		</spawn>
 		<!-- Vorena -->
 		<spawn npc_id="205189" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
+			<spot x="1266.4384" y="2664.417" z="95.1284"/>
+		</spawn>
+		<!-- Vorena -->
+		<spawn npc_id="205189" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="1285.62" y="2570.29" z="95.1284" h="89"/>
 		</spawn>
 		<!-- Wailing Banshee -->

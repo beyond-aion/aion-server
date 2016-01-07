@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300290000">
+		<!-- Commander Bakarma -->
+		<spawn npc_id="286931" respawn_time="295">
+			<spot x="234.49474" y="229.64665" z="161.07867"/>
+		</spawn>
+	</spawn_map>
+</spawns>

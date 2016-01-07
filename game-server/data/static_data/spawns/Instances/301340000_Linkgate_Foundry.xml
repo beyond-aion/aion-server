@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="301340000">
+		<!-- idldf4re_01_q_vritra_portal -->
+		<spawn npc_id="832852" respawn_time="295">
+			<spot x="200.52431" y="287.48395" z="393.0788" h="60"/>
+			<spot x="212.80002" y="302.22205" z="393.0788" h="60"/>
+			<spot x="234.52176" y="313.8381" z="393.0788" h="60"/>
+			<spot x="253.71161" y="313.68356" z="393.0788" h="60"/>
+		</spawn>
+		<!-- Linkgate Bruiser -->
+		<spawn npc_id="234681" respawn_time="295">
+			<spot x="185.0799" y="302.97568" z="392.89258" h="110"/>
+			<spot x="194.41551" y="290.68723" z="392.89258" h="30"/>
+		</spawn>
+		<!-- Linkgate Foundry Invasion Zone -->
+		<spawn npc_id="206359" respawn_time="295">
+			<spot x="214.93018" y="316.45572" z="392.89258" h="60"/>
+		</spawn>
+		<!-- Linkgate Lookout -->
+		<spawn npc_id="234680" respawn_time="295">
+			<spot x="233.40561" y="330.93774" z="392.89258"/>
+			<spot x="253.93089" y="329.28723" z="392.89258" h="60"/>
+		</spawn>
+		<!-- Spy Ditono -->
+		<spawn npc_id="804556" respawn_time="295">
+			<spot x="198.59158" y="315.88727" z="392.89258" h="100"/>
+		</spawn>
+	</spawn_map>
+</spawns>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+    <spawn_map map_id="300610000">
+        <!-- Umrian -->
+        <spawn npc_id="799431">
+            <spot x="656.404236" y="842.534851" z="826.635681"/>
+        </spawn>
+        <!-- Arza's Corridor -->
+        <spawn npc_id="730450">
+            <spot x="860.723" y="946.104" z="1206.705" h="60"/>
+        </spawn>
+        <!-- Sealed Key Box -->
+        <spawn npc_id="701369">
+            <spot x="602.514" y="664.853" z="1183.356" static_id="108"/>
+        </spawn>
+        <!-- Torment Blaze -->
+        <spawn npc_id="282577">
+            <spot x="638.698" y="709.057" z="1186.740" h="106"/>
+        </spawn>
+        <!-- Torment Blaze -->
+        <spawn npc_id="282608">
+            <spot x="588.621" y="666.006" z="1177.167" h="106"/>
+        </spawn>
+        <!-- Vasuki Lifespark -->
+        <spawn npc_id="217761">
+            <spot x="582.550" y="660.707" z="1174.669" h="10"/>
+        </spawn>
+        <!-- Dungeon Entrance -->
+        <spawn npc_id="730436">
+            <spot x="587.540" y="561.328" z="923.446" static_id="279"/>
+        </spawn>
+        <!-- Trained Vespine -->
+        <spawn npc_id="236009">
+			<spot x="477.37967" y="385.73495" z="928.49066" random_walk="8"/>
+        </spawn>
+        <!-- Dungeon Exit -->
+        <spawn npc_id="730457">
+            <spot x="526.138" y="432.861" z="927.196" static_id="209"/>
+        </spawn>
+        <!-- Sealed Key Box -->
+        <spawn npc_id="701370">
+            <spot x="572.063" y="218.895" z="927.991" static_id="92"/>
+        </spawn>
+        <!-- Interrogation Room Entrance -->
+        <spawn npc_id="730438">
+            <spot x="628.132" y="187.505" z="924.860" static_id="280"/>
+        </spawn>
+        <!-- Summoning Mirror -->
+        <spawn npc_id="282581">
+            <spot x="736.025" y="271.147" z="910.678"/>
+        </spawn>
+        <!-- Mirror Of Projection -->
+        <spawn npc_id="730449">
+            <spot x="728.897" y="288.308" z="910.678" static_id="64"/>
+        </spawn>
+        <!-- Mirror Of Projection -->
+        <spawn npc_id="730448">
+            <spot x="729.343" y="295.185" z="910.678" static_id="110"/>
+        </spawn>
+        <!-- Summoning Mirror -->
+        <spawn npc_id="282580">
+            <spot x="738.798" y="312.291" z="910.678"/>
+        </spawn>
+        <!-- Drill Instructor Diplito -->
+        <spawn npc_id="236303">
+            <spot x="738.065" y="311.606" z="910.678" h="53"/>
+        </spawn>
+        <!-- Interrogation Room Exit -->
+        <spawn npc_id="730439">
+            <spot x="766.685" y="327.520" z="910.577" static_id="277"/>
+        </spawn>
+        <!-- Dungeon Entrance -->
+        <spawn npc_id="730440">
+            <spot x="690.813" y="766.449" z="729.884" static_id="2"/>
+        </spawn>
+        <!-- Hellpath Entrance -->
+        <spawn npc_id="730443">
+            <spot x="614.526" y="633.776" z="523.978" static_id="176"/>
+        </spawn>
+        <!-- Dungeon Exit -->
+        <spawn npc_id="730458">
+            <spot x="805.945" y="827.435" z="733.670" static_id="203"/>
+        </spawn>
+        <!-- Trained Raksang Ksellid -->
+        <spawn npc_id="217433">
+            <spot x="888.709" y="819.911" z="728.762" h="91"/>
+            <spot x="893.390" y="818.598" z="728.759" h="101"/>
+            <spot x="896.743" y="820.790" z="728.759" h="53"/>
+        </spawn>
+		<!-- Classified Drill Camp Instructor -->
+		<spawn npc_id="236084">
+			<spot x="550.325" y="259.041" z="928.948" h="43"/>
+		</spawn>
+		<!-- Drill Camp Guard -->
+		<spawn npc_id="236008">
+			<spot x="627.854" y="193.670" z="924.613" h="43"/>
+			<spot x="518.13" y="264.25" z="927.9906" h="44"/> <!-- walker_id="B4B58BFD1CD6850957702D9B2760AE8956F232C0"/> -->
+			<spot x="494.494" y="395.714" z="927.975" h="13"/>
+			<spot x="850.987" y="838.102" z="733.678" h="63"/>
+			<spot x="934.89" y="808.04" z="734.07367" h="37"/><!-- walker_id="ADD98D2D1D549730AE834870CD625DD5EA0A0990"/> -->
+			<spot x="1008.2644" y="801.7274" z="745.4158"/>
+			<spot x="990.9635" y="884.1573" z="762.55774" h="100"/><!-- walker_id="ADD98D2D1D549730AE834870CD625DD5EA0A0991"/> -->
+			<spot x="963.905" y="892.576" z="762.916" h="10"/>
+			<spot x="920.353" y="897.538" z="769.492" h="30"/>
+			<spot x="837.073" y="893.177" z="783.8847" h="116"/><!-- walker_id="ADD98D2D1D549730AE834870CD625DD5EA0A0992"/> -->
+			<spot x="830.994" y="902.133" z="784.56696" h="100"/>
+			<spot x="467.3" y="357.51" z="927.9754" h="44"/> <!--walker_id="F4A054E21314050E33421363A3D55C25568A326D"/> -->
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702675">
+			<spot x="942.1294" y="774.3695" z="734.0187" h="30" static_id="153" />
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702673">
+			<spot x="963.2832" y="790.428" z="734.046" h="30" static_id="154" />
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702674">
+			<spot x="962.0091" y="775.2953" z="734.0549" h="30" static_id="152" />
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702690">
+			<spot x="989.4364" y="877.4996" z="762.5577" h="76" static_id="156" />
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702691">
+			<spot x="1007.087" y="894.9708" z="762.5577" h="76" static_id="155" />
+		</spawn>
+		<!-- Tombstone of Liberation -->
+		<spawn npc_id="702692">
+			<spot x="993.6567" y="899.7623" z="762.5577" h="76" static_id="309" />
+		</spawn>
+               
+        <!-- Draconute Scout -->
+        <spawn npc_id="236005">
+			<spot x="508.1076" y="334.66324" z="927.9906" h="74"/>
+			<spot x="525.508" y="316.753" z="927.991"/>
+            <spot x="884.560" y="842.253" z="729.728" h="21"/>
+            <spot x="918.248" y="835.458" z="727.289" h="14"/>
+            <spot x="965.551" y="908.533" z="763.235" h="39"/>
+			<spot x="863.553" y="866.747" z="731.545" h="99"/>
+			<spot x="874.323" y="871.808" z="731.553" h="96"/>
+			<spot x="1005.541" y="785.194" z="743.5843"/>
+			<spot x="1006.685" y="790.150" z="744.2923"/>
+			<spot x="1009.6345" y="770.4454" z="741.05225" h="6"/> <!--walker_id="773B2C7611493C2E00E9CC85FF954E0177C8653F"/> -->
+			<spot x="1016.22" y="823.06" z="748.989" h="23"/> <!--walker_id="9804768C91575465C6644125F57E041504FA1ABC"/> -->
+			<spot x="1023.977" y="834.627" z="752.6318" h="70"/>
+			<spot x="1024.867" y="842.917" z="754.7268" h="70"/>
+        </spawn>
+		<!-- Draconute Combatant -->
+		<spawn npc_id="236006">
+			<spot x="515.1201" y="319.3618" z="928.09033" h="46"/>
+		</spawn>
+        <!-- Execution Ground Entrance -->
+        <spawn npc_id="730441">
+            <spot x="829.653" y="904.918" z="784.287" static_id="146"/>
+        </spawn>
+        <!-- Drill Camp Assasin -->
+        <spawn npc_id="236007">
+			<spot x="622.493" y="189.423" z="924.685" h="43"/>
+			<spot x="490.916" y="321.978" z="928.948" h="43"/>
+			<spot x="517.491" y="292.664" z="928.948" h="43"/>
+			<spot x="496.05" y="317.59" z="929.1009" h="13"/> <!--walker_id="374D219E14A3B73F4B8071FECE82C91C0E0173E1"/> -->
+			<spot x="882.869" y="912.246" z="778.083" h="90"/>
+            <spot x="941.38" y="903.66" z="765.2845" h="61"/> <!--walker_id="9FEBDA098710FEE689E654A533B05F3FD451CFC7"/> -->
+        </spawn>
+        <!-- Mandali Flower -->
+        <spawn npc_id="701115">
+            <spot x="985.747" y="903.929" z="762.558" h="110"/>
+        </spawn>
+        <!-- Inferno Brazier -->
+        <spawn npc_id="701064">
+            <spot x="822.484" y="957.660" z="792.129" static_id="398"/>
+        </spawn>
+        <!-- Drill Instructor Pratica-->
+        <spawn npc_id="236304">
+            <spot x="805.367" y="959.980" z="792.070" h="96"/>
+        </spawn>
+        <!-- Inferno Brazier -->
+        <spawn npc_id="701065">
+            <spot x="795.756" y="945.440" z="792.129" static_id="399"/>
+        </spawn>
+        <!-- Burned To Ashes Entrance -->
+        <spawn npc_id="701061">
+            <spot x="802.805" y="964.878" z="792.102" static_id="395"/>
+        </spawn>
+
+        <!-- Execution Ground Exit -->
+        <spawn npc_id="730442">
+            <spot x="752.795" y="931.010" z="786.244" static_id="1"/>
+        </spawn>
+		<!-- Reviver Nasto -->
+		<spawn npc_id="236306">
+            <spot x="624.63715" y="685.9858" z="522.0487" h="86"/>
+        </spawn>
+        <!-- Inferno Brazier -->
+        <spawn npc_id="701062">
+            <spot x="783.405" y="972.037" z="792.129" static_id="396"/>
+        </spawn>
+        <!-- Inferno Brazier -->
+        <spawn npc_id="701063">
+            <spot x="810.067" y="984.519" z="792.129" static_id="397"/>
+        </spawn>
+        <!-- Synthral Legionary Spirit -->
+        <spawn npc_id="217645">
+            <spot x="316.952" y="493.201" z="119.739" h="70"/>
+            <spot x="324.19" y="492.51" z="121.022194" h="71"/> <!--walker_id="0D1AF54359AF12BE2FA24452A8D197A16844F5E7"/> -->
+        </spawn>
+        <!-- Synthral Healer -->
+        <spawn npc_id="217777">
+            <spot x="311.420" y="481.632" z="119.169" h="83"/>
+            <spot x="357.221" y="497.825" z="122.550" h="88"/>
+            <spot x="272.12" y="775.3" z="147.51134" h="78"/> <!--walker_id="FFCA17CAF2E92B6D6E441411FD4C9BD3DEDBC3B6"/> -->
+        </spawn>
+        <!-- Synthral Shaman Spirit -->
+        <spawn npc_id="217646">
+            <spot x="322.767" y="506.101" z="121.030" h="72"/>
+            <spot x="267.336" y="717.262" z="146.521" h="60"/>
+        </spawn>
+        <!-- Regressed Leowasp Warrior -->
+        <spawn npc_id="218759">
+            <spot x="320.702" y="563.741" z="130.831" h="40"/>
+            <spot x="324.388" y="563.906" z="131.074" h="24"/>
+        </spawn>
+        <!-- Synthral Ambusher -->
+        <spawn npc_id="217771">
+            <spot x="324.927" y="568.264" z="131.527" h="76"/>
+            <spot x="372.28" y="796.33" z="161.12926" h="100"/> <!--walker_id="5F0C1CF4E0FD60A96CAAA8E7B2BDBE1F27F7D82E"/> -->
+        </spawn>
+        <!-- Torment Blaze -->
+        <spawn npc_id="282625">
+            <spot x="323.962" y="561.544" z="130.611"/>
+        </spawn>
+        <!-- Synthral Invader -->
+        <spawn npc_id="217642">
+            <spot x="350.42" y="595.53" z="138.42566" h="32"/> <!--walker_id="C67C211000F6E78F40E2BBB9058A7072D251A3AF"/> -->
+            <spot x="250.112" y="702.385" z="146.878"/>
+        </spawn>
+        <!-- Synthral Protector -->
+        <spawn npc_id="217643">
+            <spot x="336.820" y="612.928" z="146.514" h="100"/>
+            <spot x="343.088" y="616.394" z="146.514" h="100"/>
+            <spot x="339.710" y="776.478" z="147.204" h="46"/>
+            <spot x="345.584" y="785.716" z="147.147" h="46"/>
+            <spot x="406.209" y="812.244" z="163.289" h="66"/>
+            <spot x="403.502" y="816.785" z="163.289" h="66"/>
+        </spawn>
+        <!-- Hellpath Guardian Fireye -->
+        <spawn npc_id="217469">
+            <spot x="309.602" y="629.382" z="146.514" h="106"/>
+        </spawn>
+        <!-- Synthral Shaman -->
+        <spawn npc_id="217644">
+            <spot x="267.51" y="662.08" z="148.7013" h="45"/> <!--walker_id="673C3F19396C7472D4974CCAB1B349FF58DDCAE8"/> -->
+        </spawn>
+        <!-- Synthral Combatant -->
+        <spawn npc_id="217641">
+            <spot x="251.631" y="726.591" z="143.714" h="76"/>
+            <spot x="298.720" y="797.399" z="147.270" h="60"/>
+            <spot x="298.635" y="789.771" z="147.320" h="60"/>
+        </spawn>
+        <!-- Ancient Drakan's Treasure Box -->
+        <spawn npc_id="701372">
+            <spot x="372.788" y="815.622" z="160.854" static_id="102"/>
+        </spawn>
+		<!-- Supplies Box -->
+		<spawn npc_id="702694">
+			<spot x="816.0431" y="933.92883" z="1207.4312" h="2"/>
+		</spawn>
+        <!-- Sealed Area Entrance -->
+        <spawn npc_id="730444">
+            <spot x="448.866" y="842.577" z="163.840" static_id="106"/>
+        </spawn>
+        <!-- Sapping Gargoyle -->
+        <spawn npc_id="217472">
+            <spot x="1048.490" y="956.380" z="138.744" h="10"/>
+        </spawn>
+        <!-- Soul Gargoyle -->
+        <spawn npc_id="217471">
+            <spot x="1086.940" y="953.550" z="138.744" h="47"/>
+        </spawn>
+        <!-- Magic Gargoyle -->
+        <spawn npc_id="217473">
+            <spot x="1067.019" y="946.022" z="138.744" h="29"/>
+        </spawn>
+        <!-- Torment Blaze -->
+        <!--<spawn npc_id="282575">
+                <spot x="1069.289" y="974.717" z="138.743" h="27"/>
+        </spawn>-->
+        <!-- Raksha Sealing Wall -->
+        <spawn npc_id="701084">
+            <spot x="1063.560" y="875.890" z="108.150" h="29"/>
+        </spawn>
+    </spawn_map>
+</spawns>

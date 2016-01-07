@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="900190000">
+		<!-- Ahserion -->
+		<spawn npc_id="297189" respawn_time="295">
+			<spot x="161.2153" y="45.026958" z="31.087664"/>
+		</spawn>
+		<!-- BIDF5_R1_Contaminated Scientist_Magic Response -->
+		<spawn npc_id="283818" respawn_time="295">
+			<spot x="96.103249" y="144.44595" z="31.087664" h="30"/>
+		</spawn>
+		<!-- BIDF5_R1_Idgel Mutated Test Subject_Group -->
+		<spawn npc_id="283807" respawn_time="295">
+			<spot x="123.7984" y="118.98833" z="31.087664"/>
+			<spot x="124.96126" y="109.19296" z="31.087664"/>
+			<spot x="133.62529" y="114.09612" z="31.087664"/>
+		</spawn>
+		<!-- BIDF5_R1_Idgel Mutated Test Subject_Single -->
+		<spawn npc_id="283806" respawn_time="295">
+			<spot x="63.966362" y="109.33125" z="31.087664"/>
+			<spot x="64.209435" y="119.72902" z="31.087664"/>
+			<spot x="71.576874" y="114.68085" z="31.087664" h="60"/>
+		</spawn>
+		<!-- BIDF5_R1_Lightweight Turret -->
+		<spawn npc_id="283803" respawn_time="295">
+			<spot x="83.568932" y="127.0046" z="31.087664" h="90"/>
+		</spawn>
+		<!-- BIDF5_R1_Monitoring Device -->
+		<spawn npc_id="283804" respawn_time="295">
+			<spot x="111.63087" y="127.64933" z="31.087664" h="30"/>
+		</spawn>
+		<!-- Brigade General Vasharti -->
+		<spawn npc_id="217313" respawn_time="295">
+			<spot x="161.02986" y="71.917503" z="31.087664"/>
+		</spawn>
+		<!-- Test Weapon Dynatoum -->
+		<spawn npc_id="233740" respawn_time="295">
+			<spot x="161.2153" y="58.750408" z="31.087664"/>
+		</spawn>
+	</spawn_map>
+</spawns>

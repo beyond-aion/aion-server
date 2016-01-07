@@ -581,7 +581,12 @@
 		</spawn>
 		<!-- Boburunerk -->
 		<spawn npc_id="798217" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="539.436" y="2162.26" z="48.3942" h="113"/>
+		</spawn>
+		<!-- Boburunerk -->
+		<spawn npc_id="798217" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="2684" y="1067.77" z="97" h="7"/>
 		</spawn>
 		<!-- Bored Ramnodase -->

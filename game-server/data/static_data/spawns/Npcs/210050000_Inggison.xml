@@ -4,8 +4,25 @@
 		<!-- 1221_Temporary Door -->
 		<spawn npc_id="700545" respawn_time="295">
 			<spot x="978.149" y="1018.74" z="335.395" h="33" static_id="2312"/>
+			<spot x="1454.7737" y="1526.7189" z="362" h="33" static_id="2310"/>
+		</spawn>
+		<!-- 1221_Temporary Door -->
+		<spawn npc_id="700545" respawn_time="295">
+			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
 			<spot x="1633.24" y="1623.51" z="172" h="33" static_id="756"/>
-			<spot x="1745.53" y="1716.73" z="226.582" h="33" static_id="1039"/>
+		</spawn>
+		<!-- 1221_Temporary Door -->
+		<spawn npc_id="700545" respawn_time="295">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
+			<spot x="749.15466" y="1285.6238" z="198" static_id="1174"/>
+		</spawn>
+		<!-- 1221_Temporary Door (spawned when windstream is opened) -->
+		<spawn npc_id="700545" respawn_time="295">
+			<spot x="1660.0983" y="928.6717" z="406" static_id="2292"/>
+			<spot x="1745.9287" y="1716.3834" z="226.582" h="33" static_id="755"/>
+			<spot x="2288.0205" y="1067.0623" z="286.0" static_id="2311"/>
+			<spot x="338.14932" y="573.5503" z="460.0" static_id="1039"/>
+			<spot x="2602.8613" y="1525.5096" z="260.0" static_id="754"/>
 		</spawn>
 		<!-- Abyss Murmur -->
 		<spawn npc_id="216476" respawn_time="295">
@@ -8476,6 +8493,10 @@
 		<!-- Ancillary Camp -->
 		<spawn npc_id="206349" respawn_time="295">
 			<spot x="1270.2319" y="2182.4146" z="357.20963" h="89"/>
+		</spawn>
+		<!-- Ambrinerk-->
+		<spawn npc_id="799086" respawn_time="295">
+			<spot x="1782.4" y="1740.8" z="283.03854" h="71"/>
 		</spawn>
 	</spawn_map>
 </spawns>
