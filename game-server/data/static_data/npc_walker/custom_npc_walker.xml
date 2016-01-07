@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd">
 	<!-- how to get correct route id 300280000 + id for example if id = 26-> 30028000026 -->
+	<!-- Bregirun -->
+	<walker_template route_id="320030000211624A" pool="1">
+		<routestep step="1" x="236.61838" y="211.2701" z="206.63214"/>
+		<routestep step="2" x="244.53847" y="206.76016" z="204.77235"/>
+		<routestep step="3" x="253.31989" y="201.5837" z="203.66057"/>
+		<routestep step="4" x="259.7738" y="202.31389" z="206.95355"/>
+		<routestep step="5" x="266.18845" y="199.26955" z="207.38405"/>
+		<routestep step="6" x="266.3102" y="199.49121" z="207.40833"/>
+		<routestep step="7" x="259.85986" y="202.51558" z="207.01755"/>
+		<routestep step="8" x="253.46759" y="201.93041" z="203.79132"/>
+		<routestep step="9" x="244.71017" y="207.06342" z="204.82408"/>
+		<routestep step="10" x="236.69301" y="211.65488" z="206.63991"/>
+		<routestep step="11" x="229.20108" y="215.4878" z="207.17484"/>
+		<routestep step="12" x="229.06114" y="215.12743" z="207.10368"/>
+	</walker_template>
+	<walker_template route_id="320030000211624B" pool="1">
+		<routestep step="1" x="281.57272" y="227.89272" z="207.21823"/>
+		<routestep step="2" x="282.2792" y="235.40775" z="208.1907"/>
+		<routestep step="3" x="284.39163" y="240.89032" z="208.8044"/>
+		<routestep step="4" x="285.52518" y="246.77582" z="209.65611"/>
+		<routestep step="5" x="285.73178" y="246.7691" z="209.69063"/>
+		<routestep step="6" x="284.60754" y="240.7724" z="208.78969"/>
+		<routestep step="7" x="282.45703" y="235.34898" z="208.1877"/>
+		<routestep step="8" x="281.94266" y="228.18825" z="207.21786"/>
+		<routestep step="9" x="281.59448" y="220.9982" z="206.21712"/>
+		<routestep step="10" x="276.92035" y="217.1128" z="207.72047"/>
+		<routestep step="11" x="270.595" y="214.60072" z="209.55638"/>
+		<routestep step="12" x="264.81107" y="210.90637" z="209.26448"/>
+		<routestep step="13" x="263.84973" y="205.53389" z="208.38165"/>
+		<routestep step="14" x="263.53863" y="205.6359" z="208.41043"/>
+		<routestep step="15" x="264.6815" y="210.99518" z="209.28516"/>
+		<routestep step="16" x="270.46597" y="214.70515" z="209.59372"/>
+		<routestep step="17" x="276.89" y="217.2436" z="207.73325"/>
+		<routestep step="18" x="281.4939" y="221.41315" z="206.28621"/>
+	</walker_template>
 	<!-- Crucible Challenge -->
 	<walker_template route_id="3003200001" pool="1">
 		<routestep step="1" x="1780.5665" y="307.40463" z="469.25"/>
