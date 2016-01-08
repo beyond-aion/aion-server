@@ -52,10 +52,7 @@ public class _1935TissueIDontEvenKnowYou extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
+					return defaultCloseDialog(env, 2, 2, true, true);
 				} else
 					return sendQuestEndDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
