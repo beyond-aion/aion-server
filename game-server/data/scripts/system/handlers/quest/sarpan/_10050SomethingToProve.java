@@ -127,6 +127,7 @@ public class _10050SomethingToProve extends QuestHandler {
 				break;
 			case 218665: {
 				if (qs.getQuestVarById(1) >= 3 && qs.getQuestVarById(0) == 3) {
+					qs.setQuestVarById(1, 0);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return true;
