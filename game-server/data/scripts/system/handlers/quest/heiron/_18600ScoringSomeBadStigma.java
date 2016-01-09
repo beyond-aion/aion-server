@@ -43,11 +43,10 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
-					giveQuestItem(env, 182213000, 1);
-					return sendQuestStartDialog(env);
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id())
+					return sendQuestStartDialog(env, 182213000, 1);
+				else
+					return sendQuestStartDialog(env, 182213000, 1);
 			}
 			if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
@@ -77,6 +76,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 					qs.setQuestVar(3);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
+					giveQuestItem(env, 182213001, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
