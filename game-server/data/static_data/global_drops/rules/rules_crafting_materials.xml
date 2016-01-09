@@ -1785,6 +1785,19 @@
 			<gd_item id="152015010" name="Moonflower Fruit"/>
 		</gd_items>
 	</gd_rule>
+	<!-- Specter -->
+	<gd_rule rule_name="Bone with Specter Magic" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="SPECTRE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 45 -->
+			<gd_item id="152012024" name="Bone with Specter Magic"/>
+		</gd_items>
+	</gd_rule>
 	<!-- Mosbear -->
 	<gd_rule rule_name="Mosbear Skin" base_chance="5" min_diff="-2" max_diff="2">
 		<gd_worlds>
