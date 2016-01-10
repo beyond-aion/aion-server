@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.drop;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
@@ -13,9 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.main.DropConfig;
+import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -41,10 +44,13 @@ import com.aionemu.gameserver.services.item.ItemInfoService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
+import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, xTz
@@ -70,7 +76,19 @@ public class DropService {
 					DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId).startFreeForAll();
 					VisibleObject npc = World.getInstance().findVisibleObject(npcUniqueId);
 					if (npc != null && npc.isSpawned()) {
-						PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0));
+						//fix for elyos/asmodians being able to loot elyos/asmodian npcs
+						//TODO there might be more npcs who are friendly towards players and should not be loot able by them
+						if (npc instanceof Npc && (Race.ASMODIANS == ((Npc)npc).getRace() || Race.ELYOS == ((Npc) npc).getRace())) {
+							PacketSendUtility.broadcastFilteredPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), new ObjectFilter<Player>() {
+							
+								@Override
+								public boolean acceptObject(Player object) {
+									return ((Npc)npc).getRace() != object.getRace();
+								}
+							});
+						} else {
+							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0));
+						}
 					}
 				}
 			}
@@ -350,9 +368,35 @@ public class DropService {
 			}
 		}
 
+		//Kinah is distributed to all group/alliance members nearby.
 		if (itemId == 182400001) {
-			// to do distribution
-			currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount, ItemService.DEFAULT_UPDATE_PREDICATE);
+			if (player.isInAlliance2() || player.isInGroup2()) {
+				Collection<Player> members = player.getPlayerAlliance2() == null ? player.getPlayerGroup2().getMembers() : player.getPlayerAlliance2().getMembers();
+				List<Player> entitledPlayers = new FastTable<>();
+				if (!members.isEmpty() && members.size() > 1) {
+					for (Player member : members) {
+						if (member != null) {
+							if (member.equals(player))
+								continue;
+							if (member.isOnline() && !member.getLifeStats().isAlreadyDead() && MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+								entitledPlayers.add(member);
+						}
+					}
+					if (!entitledPlayers.isEmpty()) {
+						long remainder = currentDropItemCount % (entitledPlayers.size() + 1);//all alliance/group members AND currently looting player
+						long kinahForEach = (currentDropItemCount - remainder)/(entitledPlayers.size() + 1); //same here
+						currentDropItemCount = 0;
+						
+						ItemService.addItem(player, itemId, (kinahForEach + remainder), ItemService.DEFAULT_UPDATE_PREDICATE);
+						for (Player member : entitledPlayers) {
+							if (member != null && member.isOnline())
+								ItemService.addItem(member, itemId, kinahForEach, ItemService.DEFAULT_UPDATE_PREDICATE);
+						}
+					} 
+				} 
+			} 
+			if (currentDropItemCount > 0)
+				currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount, ItemService.DEFAULT_UPDATE_PREDICATE);
 		} else if (!player.isInGroup2() && !player.isInAlliance2() && !requestedItem.isItemWonNotCollected() && dropNpc.getDistributionId() == 0) {
 			currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount, ItemService.DEFAULT_UPDATE_PREDICATE);
 			uniqueDropAnnounce(player, requestedItem);
