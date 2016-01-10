@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Oriel -->
+	<spawn_map map_id="700010000">
+		<!-- Autumn Agrint -->
+		<spawn npc_id="218852" custom="true">
+			<temporary_spawn/>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.01.09" despawn_time="0.16.09"/>
+			</spot>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.16.09" despawn_time="0.31.09"/>
+			</spot>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.01.10" despawn_time="0.16.10"/>
+			</spot>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.16.10" despawn_time="0.31.10"/>
+			</spot>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.01.11" despawn_time="0.16.11"/>
+			</spot>
+			<spot x="1779.0214" y="2613.0684" z="117.375" h="62">
+				<temporary_spawn spawn_time="0.16.11" despawn_time="0.31.11"/>
+			</spot>
+		</spawn>
+		<!-- Spring Agrint -->
+		<spawn npc_id="218850" custom="true">
+			<temporary_spawn/>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.01.03" despawn_time="0.16.03"/>
+			</spot>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.16.03" despawn_time="0.31.03"/>
+			</spot>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.01.04" despawn_time="0.16.04"/>
+			</spot>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.16.04" despawn_time="0.31.04"/>
+			</spot>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.01.05" despawn_time="0.16.05"/>
+			</spot>
+			<spot x="1008.7296" y="2235.6062" z="132.5" h="62">
+				<temporary_spawn spawn_time="0.16.05" despawn_time="0.31.05"/>
+			</spot>
+		</spawn>
+		<!-- Winter Agrint -->
+		<spawn npc_id="218853" custom="true">
+			<temporary_spawn/>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.01.12" despawn_time="0.16.12"/>
+			</spot>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.16.12" despawn_time="0.31.12"/>
+			</spot>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.01.01" despawn_time="0.16.01"/>
+			</spot>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.16.01" despawn_time="0.31.01"/>
+			</spot>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.01.02" despawn_time="0.16.02"/>
+			</spot>
+			<spot x="2269.6438" y="1123.4985" z="103.0" h="62">
+				<temporary_spawn spawn_time="0.16.02" despawn_time="0.31.02"/>
+			</spot>
+		</spawn>
+		<!-- Summer Agrint -->
+		<spawn npc_id="218851" custom="true">
+			<temporary_spawn/>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.01.06" despawn_time="0.16.06"/>
+			</spot>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.16.06" despawn_time="0.31.06"/>
+			</spot>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.01.07" despawn_time="0.16.07"/>
+			</spot>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.16.07" despawn_time="0.31.07"/>
+			</spot>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.01.08" despawn_time="0.16.08"/>
+			</spot>
+			<spot x="1024.6577" y="1167.9644" z="95.375" h="62">
+				<temporary_spawn spawn_time="0.16.08" despawn_time="0.31.08"/>
+			</spot>
+		</spawn>
+	</spawn_map>
+	<!-- Pernon -->
+	<spawn_map map_id="710010000">
+		<!-- Autumn Agrint -->
+		<spawn npc_id="218864" custom="true">
+			<temporary_spawn/>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.01.09" despawn_time="0.16.09"/>
+			</spot>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.16.09" despawn_time="0.31.09"/>
+			</spot>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.01.10" despawn_time="0.16.10"/>
+			</spot>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.16.10" despawn_time="0.31.10"/>
+			</spot>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.01.11" despawn_time="0.16.11"/>
+			</spot>
+			<spot x="635.10339" y="2353.249" z="199.1403" h="62">
+				<temporary_spawn spawn_time="0.16.11" despawn_time="0.31.11"/>
+			</spot>
+		</spawn>
+		<!-- Spring Agrint -->
+		<spawn npc_id="218862" custom="true">
+			<temporary_spawn/>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.01.03" despawn_time="0.16.03"/>
+			</spot>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.16.03" despawn_time="0.31.03"/>
+			</spot>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.01.04" despawn_time="0.16.04"/>
+			</spot>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.16.04" despawn_time="0.31.04"/>
+			</spot>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.01.05" despawn_time="0.16.05"/>
+			</spot>
+			<spot x="763.6795" y="532.53076" z="123.08408" h="62">
+				<temporary_spawn spawn_time="0.16.05" despawn_time="0.31.05"/>
+			</spot>
+		</spawn>
+		<!-- Summer Agrint -->
+		<spawn npc_id="218863" custom="true">
+			<temporary_spawn/>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.01.06" despawn_time="0.16.06"/>
+			</spot>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.16.06" despawn_time="0.31.06"/>
+			</spot>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.01.07" despawn_time="0.16.07"/>
+			</spot>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.16.07" despawn_time="0.31.07"/>
+			</spot>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.01.08" despawn_time="0.16.08"/>
+			</spot>
+			<spot x="2569.6382" y="1205.5317" z="99.0" h="27">
+				<temporary_spawn spawn_time="0.16.08" despawn_time="0.31.08"/>
+			</spot>
+		</spawn>
+		<!-- Winter Agrint -->
+		<spawn npc_id="218865" custom="true">
+			<temporary_spawn/>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.01.12" despawn_time="0.16.12"/>
+			</spot>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.16.12" despawn_time="0.31.12"/>
+			</spot>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.01.01" despawn_time="0.16.01"/>
+			</spot>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.16.01" despawn_time="0.31.01"/>
+			</spot>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.01.02" despawn_time="0.16.02"/>
+			</spot>
+			<spot x="2605.9629" y="2243.2695" z="328.58087" h="62">
+				<temporary_spawn spawn_time="0.16.02" despawn_time="0.31.02"/>
+			</spot>
+		</spawn>
+	</spawn_map>
+</spawns>
