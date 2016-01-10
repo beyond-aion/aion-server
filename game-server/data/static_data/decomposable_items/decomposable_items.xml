@@ -11128,15 +11128,18 @@
     </decomposable>
     <decomposable item_id="188051491" decomposable_name="Vintage Grab Bag">
         <items>
-            <item id="182006855" name="Old Metal Piece"/>
+            <item id="188051601" name="Construction Flux Bundle"/>
+        </items>
+        <items>
+            <item id="186000146" name="Guestpetal"/>
         </items>
     </decomposable>
     <decomposable item_id="188051492" decomposable_name="Vintage Grab Bag">
         <items>
-            <item id="182006855" name="Old Metal Piece"/>
+            <item id="188051601" name="Construction Flux Bundle"/>
         </items>
         <items>
-            <item id="170415021" name="Plain Tecoma Chair"/>
+            <item id="186000146" name="Guestpetal"/>
         </items>
     </decomposable>
     <decomposable item_id="188051493" decomposable_name="Vintage Grab Bag"/>
@@ -12649,19 +12652,19 @@
     </decomposable>
     <decomposable item_id="188051600" decomposable_name="[Event] Everlasting Enchantment Stone Box"/>
     <decomposable item_id="188051601" decomposable_name="Construction Flux Bundle">
-        <items chance="40.0">
+        <items chance="30.0">
             <item id="152011092" name="Minor Construction Flux" rnd_min="1" rnd_max="5"/>
         </items>
         <items chance="25.0">
             <item id="152011093" name="Lesser Construction Flux" rnd_min="1" rnd_max="4"/>
         </items>
-        <items chance="20.0">
+        <items chance="25.0">
             <item id="152011094" name="Construction Flux" rnd_min="1" rnd_max="3"/>
         </items>
-        <items chance="10.0">
+        <items chance="12.5">
             <item id="152011095" name="Greater Construction Flux" rnd_min="1" rnd_max="2"/>
         </items>
-        <items chance="5.0">
+        <items chance="7.5">
             <item id="152011096" name="Major Construction Flux"/>
         </items>
     </decomposable>
