@@ -282,6 +282,17 @@
 			<gd_map map_id="600050000" name="Katalam"/>
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="231474" name="Granu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101403" name="Fiendish Gloves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="600050000" name="Katalam"/>
+		</gd_maps>
+		<gd_npcs>
 			<gd_npc npc_id="231492" name="Ururinerk"/>
 		</gd_npcs>
 		<gd_items>
