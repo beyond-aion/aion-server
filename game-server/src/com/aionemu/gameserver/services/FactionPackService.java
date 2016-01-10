@@ -46,9 +46,6 @@ public class FactionPackService {
 		if (player.getRace() != Race.ELYOS)
 			return;
 
-		if (!player.getCommonData().isOnline()) // possible fix for incorrect rewardings on other char than the one logged in 
-			return;
-
 		if (rewards == null || rewards.isEmpty())
 			return;
 		LocalDateTime creationTime = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate().toLocalDateTime();
@@ -56,7 +53,7 @@ public class FactionPackService {
 			return;
 		if (creationTime.isAfter(maxCreationTime))
 			return;
-		
+
 		if (player.getLevel() != 65)
 			return;
 		if (player.getCommonData().getMailboxLetters() + rewards.size() > 100)
