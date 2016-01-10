@@ -548,6 +548,24 @@
 			<gd_item id="152011091" name="Master Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Construction Flux" base_chance="2.5">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="152011092" name="Minor Weapon Flux" />
+			<!-- Level 21 -->
+			<gd_item id="152011093" name="Lesser Weapon Flux" />
+			<!-- Level 25 -->
+			<gd_item id="152011094" name="Weapon Flux" />
+			<!-- Level 33 -->
+			<gd_item id="152011095" name="Major Weapon Flux" />
+			<!-- Level 42 -->
+			<gd_item id="152011096" name="Finest Weapon Flux" />
+		</gd_items>
+	</gd_rule>
 	<!-- Balic Hearts -->
 	<gd_rule rule_name="Balaur Heart" base_chance="5.5" min_diff="-9" max_diff="0">
 		<gd_races>
