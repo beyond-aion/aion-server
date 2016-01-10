@@ -44,9 +44,9 @@ public class Set_makeup_bonus extends ConsoleCommand {
 			return;
 		}
 
-		player.getCommonData().setCurrentReposteEnergy(value);
+		player.getCommonData().setCurrentReposeEnergy(value);
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		PacketSendUtility.sendMessage(admin, "Reposte Energy set to: " + value);
+		PacketSendUtility.sendMessage(admin, "Repose Energy set to: " + value);
 	}
 
 	@Override

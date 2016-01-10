@@ -152,7 +152,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				Mailbox mailBox = player.getMailbox();
 				int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
 				stmt.setInt(23, mails);
-				stmt.setLong(24, pcd.getCurrentReposteEnergy());
+				stmt.setLong(24, pcd.getCurrentReposeEnergy());
 				stmt.setInt(25, pcd.getMentorFlagTime());
 				stmt.setInt(26, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
 				stmt.setInt(27, player.getObjectId());
@@ -263,9 +263,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					if (resultSet.next()) {
 						success = true;
 						cd.setName(resultSet.getString("name"));
-						// set player class before exp
 						cd.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
-						cd.setExp(resultSet.getLong("exp"));
+						cd.setExpValue(resultSet.getLong("exp"));
+						cd.setLevelValue(DataManager.PLAYER_EXPERIENCE_TABLE.getLevelForExp(cd.getExp()));
 						cd.setRecoverableExp(resultSet.getLong("recoverexp"));
 						cd.setRace(Race.valueOf(resultSet.getString("race")));
 						cd.setGender(Gender.valueOf(resultSet.getString("gender")));
@@ -282,7 +282,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
 						cd.setDp(resultSet.getInt("dp"));
 						cd.setDeathCount(resultSet.getInt("soul_sickness"));
-						cd.setCurrentReposteEnergy(resultSet.getLong("reposte_energy"));
+						cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
 						float x = resultSet.getFloat("x");
 						float y = resultSet.getFloat("y");
 						float z = resultSet.getFloat("z");
@@ -303,6 +303,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 
 		if (success) {
+			cd.updateDaeva();
 			if (CacheConfig.CACHE_COMMONDATA) {
 				playerCommonData.put(playerObjId, cd);
 				playerCommonDataByName.put(cd.getName().toLowerCase(), cd);

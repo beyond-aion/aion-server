@@ -1,87 +1,52 @@
 package consolecommands;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
  * @author ginho1
+ * @reworked Neon
  */
 public class Levelup extends ConsoleCommand {
 
 	public Levelup() {
-		super("levelup");
+		super("levelup", "Levels a player up.");
+
+		setParamInfo("<value> - Levels your target up by the specified number of levels.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
-			return;
-		}
-
-		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
-			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
+			sendInfo(admin);
 			return;
 		}
 
 		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
 		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
 			return;
 		}
 
 		final Player player = (Player) target;
-
-		int level;
+		int newLevel;
 		try {
-			level = Integer.parseInt(params[0]);
+			newLevel = player.getLevel() + Integer.parseInt(params[0]);
 		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "You should enter valid value!");
+			sendInfo(admin, "Please specify the number of levels to subtract.");
 			return;
 		}
 
-		level = player.getLevel() + level;
-
-		if (level <= GSConfig.PLAYER_MAX_LEVEL) {
-			int questId = player.getRace() == Race.ELYOS ? 1007 : 2009;
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-			if (!player.getPlayerClass().isStartingClass() && level >= 10) {
-				if (qs == null) {
-					player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
-					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
-				} else if (qs.getStatus() != QuestStatus.COMPLETE) {
-					qs.setStatus(QuestStatus.COMPLETE);
-					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-				}
-				player.getCommonData().setDaeva(true);
-			} else if (level < 10 && qs == null) {
-				// don't delete ceremony quest
-				player.getCommonData().setDaeva(false);
-			}
-
-			player.getController().upgradePlayer();
-			player.getCommonData().setLevel(level);
-
+		if (newLevel < 1 || newLevel > GSConfig.PLAYER_MAX_LEVEL) {
+			sendInfo(admin, "Invalid level.");
+			return;
 		}
-		PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + level);
-	}
 
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///levelup <value>");
+		player.getCommonData().setLevel(newLevel);
+		sendInfo(admin, "Set " + player.getName() + "'s level to " + player.getLevel());
 	}
 }

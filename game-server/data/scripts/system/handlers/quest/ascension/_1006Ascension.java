@@ -282,10 +282,7 @@ public class _1006Ascension extends QuestHandler {
 	}
 
 	private boolean setPlayerClass(QuestEnv env, QuestState qs, PlayerClass playerClass) {
-		Player player = env.getPlayer();
-		if (player.getPlayerClass().isStartingClass()) {
-			ClassChangeService.setClass(player, playerClass);
-			player.getController().upgradePlayer();
+		if (ClassChangeService.setClass(env.getPlayer(), playerClass)) {
 			changeQuestStep(env, 5, 5, true); // reward
 			return sendQuestDialog(env, 5);
 		}

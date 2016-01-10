@@ -1,79 +1,61 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.PlayerClass;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
  * @author ginho1
+ * @reworked Neon
  */
 public class Classup extends ConsoleCommand {
 
 	public Classup() {
-		super("classup");
+		super("classup", "Promotes a players class.");
+
+		setParamInfo("<class> - Promotes your characters class to the one specified.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
-			return;
-		}
-
-		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
-			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
+			sendInfo(admin);
 			return;
 		}
 
 		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
 		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
 			return;
 		}
 
-		final Player player = (Player) target;
-
-		if (player.getLevel() < 10) {
-			// why is this called and then not used in any meaningful way?
-			// int questId = player.getRace() == Race.ELYOS ? 1007 : 2009;
-			// QuestState qs = player.getQuestStateList().getQuestState(questId);
-			int level = 10;
-			player.getCommonData().setDaeva(true);
-			player.getCommonData().setLevel(level);
-			player.getController().upgradePlayer();
-		}
-
+		Player player = (Player) target;
 		String newClass = params[0];
 
-		if (newClass.equals("fighter"))
+		if (newClass.equalsIgnoreCase("fighter"))
 			newClass = "GLADIATOR";
-		if (newClass.equals("knight"))
+		else if (newClass.equalsIgnoreCase("knight"))
 			newClass = "TEMPLAR";
-		if (newClass.equals("wizard"))
+		else if (newClass.equalsIgnoreCase("wizard"))
 			newClass = "SORCERER";
-		if (newClass.equals("elementalist"))
+		else if (newClass.equalsIgnoreCase("elementalist"))
 			newClass = "SPIRIT_MASTER";
 
-		setClass(player, newClass);
-	}
+		PlayerClass playerClass = PlayerClass.getPlayerClassByString(newClass.toUpperCase());
+		if (playerClass == null || playerClass.isStartingClass() || playerClass.getClassId() >= PlayerClass.ALL.getClassId()) {
+			sendInfo(admin, "Invalid player class.");
+			return;
+		}
 
-	private void setClass(Player player, String value) {
-		PlayerClass playerClass = PlayerClass.getPlayerClassByString(value.toUpperCase());
 		player.getCommonData().setPlayerClass(playerClass);
+		ClassChangeService.completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
+		player.getCommonData().updateDaeva();
 		player.getController().upgradePlayer();
-		PacketSendUtility.sendMessage(player, "You have successfuly switched class");
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///classup <value>");
+		sendInfo(admin, "You have successfully promoted " + player.getName() + "'s class to " + playerClass.toString().toLowerCase() + ".");
 	}
 }

@@ -43,7 +43,7 @@ public class _4969GrowthNinissFourthCharm extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, 182207139, 1);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
@@ -54,7 +54,7 @@ public class _4969GrowthNinissFourthCharm extends QuestHandler {
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
 						case SETPRO1:
-							return defaultCloseDialog(env, 0, 1, 182207139, 1, 0, 0); // 1
+							return defaultCloseDialog(env, 0, 1, 0, 0, 182207139, 1); // 1
 					}
 					break;
 				}
@@ -67,7 +67,7 @@ public class _4969GrowthNinissFourthCharm extends QuestHandler {
 							}
 						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemAmount = player.getInventory().getItemCountByItemId(186000093);
-							if (var == 1 && player.getInventory().tryDecreaseKinah(90000) && itemAmount >= 1) {
+							if (var == 1 && itemAmount >= 1 && player.getInventory().tryDecreaseKinah(90000)) {
 								removeQuestItem(env, 186000093, 1);
 								changeQuestStep(env, 1, 1, true); // reward
 								return sendQuestDialog(env, 5);

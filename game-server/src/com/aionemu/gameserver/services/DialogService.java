@@ -10,6 +10,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.PricesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -42,8 +43,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADELIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADE_IN_LIST;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
@@ -245,39 +244,15 @@ public class DialogService {
 					break;
 				}
 				case AIRLINE_SERVICE: { // flight and teleport (2.5)
-					if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
-						int level = player.getLevel();
-						if (level < 9) {
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
-						} else {
+					switch (npc.getNpcId()) {
+						case 203679: // ishalgen teleporter
+						case 203194: // poeta teleporter
+							if (!player.getCommonData().isDaeva()) {
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, DialogPage.NO_RIGHT.id()));
+								break;
+							}
+						default:
 							TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-						}
-					} else {
-						switch (npc.getNpcId()) {
-							case 203194: {
-								if (player.getRace() == Race.ELYOS) {
-									QuestState qs = player.getQuestStateList().getQuestState(1006);
-									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
-									else
-										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-								}
-								break;
-							}
-							case 203679: {
-								if (player.getRace() == Race.ASMODIANS) {
-									QuestState qs = player.getQuestStateList().getQuestState(2008);
-									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 27));
-									else
-										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-								}
-								break;
-							}
-							default: {
-								TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-							}
-						}
 					}
 					break;
 				}
@@ -469,8 +444,8 @@ public class DialogService {
 					} else if (template != null) {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
 						if (loc != null) {
-							TeleportService2.teleport(template, loc.getLocId(), player, npc,
-								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleport(template, loc.getLocId(), player, npc, npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN
+								: TeleportAnimation.FADE_OUT_BEAM);
 						}
 					}
 					break;

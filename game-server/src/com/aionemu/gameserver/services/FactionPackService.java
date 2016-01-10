@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.FactionPackDAO;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.mail.SystemMailService;
@@ -20,6 +21,7 @@ public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime minCreationTime = LocalDateTime.of(2015, Month.DECEMBER, 7, 5, 0, 0);
+	private final LocalDateTime maxCreationTime = LocalDateTime.of(2016, Month.JANUARY, 3, 4, 0, 0);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final HashMap<Integer, Integer> rewards = new HashMap<>();
 
@@ -41,7 +43,7 @@ public class FactionPackService {
 	}
 
 	public void addPlayerCustomReward(Player player) {
-		if (!player.getCommonData().isOnline()) // possible fix for incorrect rewardings on other char than the one logged in 
+		if (player.getRace() != Race.ELYOS)
 			return;
 
 		if (rewards == null || rewards.isEmpty())
@@ -49,7 +51,9 @@ public class FactionPackService {
 		LocalDateTime creationTime = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate().toLocalDateTime();
 		if (creationTime.isBefore(minCreationTime))
 			return;
-		
+		if (creationTime.isAfter(maxCreationTime))
+			return;
+
 		if (player.getLevel() != 65)
 			return;
 		if (player.getCommonData().getMailboxLetters() + rewards.size() > 100)

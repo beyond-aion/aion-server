@@ -1,34 +1,512 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1.5" restriction_race="ASMODIANS">
+	<!-- Map/Zone Drops -->
+	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1.5"
+		restriction_race="ASMODIANS">
 		<gd_maps>
-			<gd_map map_id="220050000" name="Brusthonin" />
+			<gd_map map_id="220050000" name="Brusthonin"/>
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="VIGRID_PLAINS_220050000" />
+			<gd_zone zone="VIGRID_PLAINS_220050000"/>
 		</gd_zones>
 		<gd_items>
 			<!-- Level 22 -->
-			<gd_item id="114300791" name="Dispassionate Boots" />
-			<gd_item id="110600757" name="Dispassionate Breastplate" />
-			<gd_item id="113300776" name="Dispassionate Breeches" />
-			<gd_item id="114500757" name="Dispassionate Brogans" />
-			<gd_item id="113500749" name="Dispassionate Chausses" />
-			<gd_item id="111600730" name="Dispassionate Gauntlets" />
-			<gd_item id="111100749" name="Dispassionate Gloves" />
-			<gd_item id="113600723" name="Dispassionate Greaves" />
-			<gd_item id="111500738" name="Dispassionate Handguards" />
-			<gd_item id="110500769" name="Dispassionate Hauberk" />
-			<gd_item id="110300793" name="Dispassionate Jerkin" />
-			<gd_item id="113100759" name="Dispassionate Leggings" />
-			<gd_item id="112100710" name="Dispassionate Pauldrons" />
-			<gd_item id="114600717" name="Dispassionate Sabatons" />
-			<gd_item id="114100778" name="Dispassionate Shoes" />
-			<gd_item id="112300710" name="Dispassionate Shoulderguards" />
-			<gd_item id="112600706" name="Dispassionate Shoulderplates" />
-			<gd_item id="112500698" name="Dispassionate Spaulders" />
-			<gd_item id="110100841" name="Dispassionate Tunic" />
-			<gd_item id="111300751" name="Dispassionate Vambrace" />
+			<gd_item id="114300791" name="Dispassionate Boots"/>
+			<gd_item id="110600757" name="Dispassionate Breastplate"/>
+			<gd_item id="113300776" name="Dispassionate Breeches"/>
+			<gd_item id="114500757" name="Dispassionate Brogans"/>
+			<gd_item id="113500749" name="Dispassionate Chausses"/>
+			<gd_item id="111600730" name="Dispassionate Gauntlets"/>
+			<gd_item id="111100749" name="Dispassionate Gloves"/>
+			<gd_item id="113600723" name="Dispassionate Greaves"/>
+			<gd_item id="111500738" name="Dispassionate Handguards"/>
+			<gd_item id="110500769" name="Dispassionate Hauberk"/>
+			<gd_item id="110300793" name="Dispassionate Jerkin"/>
+			<gd_item id="113100759" name="Dispassionate Leggings"/>
+			<gd_item id="112100710" name="Dispassionate Pauldrons"/>
+			<gd_item id="114600717" name="Dispassionate Sabatons"/>
+			<gd_item id="114100778" name="Dispassionate Shoes"/>
+			<gd_item id="112300710" name="Dispassionate Shoulderguards"/>
+			<gd_item id="112600706" name="Dispassionate Shoulderplates"/>
+			<gd_item id="112500698" name="Dispassionate Spaulders"/>
+			<gd_item id="110100841" name="Dispassionate Tunic"/>
+			<gd_item id="111300751" name="Dispassionate Vambrace"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213910" name="Botanist Aello"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200544" name="Aello's Dagger"/>
+			<gd_item id="100000563" name="Aello's Sword"/>
+			<gd_item id="100100440" name="Aello's Warhammer"/>
+			<gd_item id="100600466" name="Aello's Tome"/>
+			<gd_item id="101800485" name="Aello's Pistol"/>
+			<gd_item id="102000500" name="Aello's Harp"/>
+			<gd_item id="102100468" name="Aello's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214579" name="Healer Kanar's Ghost"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101500554" name="Kianir's Staff"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214580" name="Vengeful Narka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100555" name="Narka's Warhammer"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214581" name="Rusty Scale Shalba"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900538" name="Shalba's Greatsword"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214582" name="Thorn Beard Latulatu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500556" name="Latulatu's Jewel"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214584" name="Ranger Agueria"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200662" name="Agueria's Dagger"/>
+			<gd_item id="101800561" name="Agueria's Pistol"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214585" name="Elder Kitarpa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101700576" name="Kitarpa's Longbow"/>
+			<gd_item id="101300529" name="Kitarpa's Spear"/>
+			<gd_item id="101900551" name="Kitarpa's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214586" name="Chief Mate Devahanson"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="102000584" name="Devahanson's Harp"/>
+			<gd_item id="100000707" name="Devahanson's Sword"/>
+			<gd_item id="100600594" name="Devahanson's Tome"/>
+			<gd_item id="102100513" name="Devahanson's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213908" name="Farmer Havenjark"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900430" name="Havenjark Scimitar"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214583" name="Vampire Queen Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500557" name="Ntuamu's Jewel"/>
+			<gd_item id="100900539" name="Ntuamu's Greatsword"/>
+			<gd_item id="101500555" name="Ntuamu's Staff"/>
+			<gd_item id="101700577" name="Ntuamu's Longbow"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214603" name="Unfaithful Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101900552" name="Ntuamu's Aethercannon"/>
+			<gd_item id="100900539" name="Ntuamu's Greatsword"/>
+			<gd_item id="100500557" name="Ntuamu's Jewel"/>
+			<gd_item id="101700577" name="Ntuamu's Longbow"/>
+			<gd_item id="101500555" name="Ntuamu's Staff"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214585" name="Elder Kitarpa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000816" name="Kitarpa's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213907" name="Ripened Frightcorn"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100692" name="Frightcorn's Shoes"/>
+			<gd_item id="114300705" name="Frightcorn's Boots"/>
+			<gd_item id="114500671" name="Frightcorn's Brogans"/>
+			<gd_item id="114600631" name="Frightcorn's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214579" name="Healer Kanar's Ghost"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100820" name="Kianir's Gloves"/>
+			<gd_item id="111300824" name="Kianir's Vambrace"/>
+			<gd_item id="113500817" name="Kianir's Chausses"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214580" name="Vengeful Narka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100856" name="Narka's Shoes"/>
+			<gd_item id="113300846" name="Narka's Breeches"/>
+			<gd_item id="114600785" name="Narka's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214581" name="Rusty Scale Shalba"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100778" name="Shalba's Pauldrons"/>
+			<gd_item id="112300775" name="Shalba's Shoulderguards"/>
+			<gd_item id="112500763" name="Shalba's Spaulders"/>
+			<gd_item id="112600774" name="Shalba's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214582" name="Thorn Beard Latulatu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114300882" name="Latulatu's Boots"/>
+			<gd_item id="114500828" name="Latulatu's Brogans"/>
+			<gd_item id="113600790" name="Latulatu's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214584" name="Ranger Agueria"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100828" name="Agueria's Leggings"/>
+			<gd_item id="111500807" name="Agueria's Handguards"/>
+			<gd_item id="111600799" name="Agueria's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214585" name="Elder Kitarpa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100916" name="Kitarpa's Tunic"/>
+			<gd_item id="110500841" name="Kitarpa's Hauberk"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214586" name="Chief Mate Devahanson"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110300871" name="Devahanson's Jerkin"/>
+			<gd_item id="110600826" name="Devahanson's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213908" name="Farmer Havenjark"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100624" name="Havenjark Pauldrons"/>
+			<gd_item id="112300624" name="Havenjark Shoulderguards"/>
+			<gd_item id="112500612" name="Havenjark Spaulders"/>
+			<gd_item id="112600620" name="Havenjark Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213909" name="Bakun the Zombified"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113500663" name="Bakun's Chausses"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213907" name="Ripened Frightcorn"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000668" name="Frightcorn's Zircon Necklace"/>
+			<gd_item id="121000669" name="Frightcorn's Aquamarine Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213908" name="Farmer Havenjark"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000782" name="Havenjark's Ring"/>
+			<gd_item id="122000783" name="Havenjark Seal"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214579" name="Healer Kanar's Ghost"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000917" name="Kianir's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214580" name="Vengeful Narka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000870" name="Narka's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214581" name="Rusty Scale Shalba"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000905" name="Shalba's Leather Belt"/>
+			<gd_item id="123000906" name="Shalba's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214582" name="Thorn Beard Latulatu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000916" name="Latulatu's Ring"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214584" name="Ranger Agueria"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000871" name="Agueria's Earrings"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214583" name="Vampire Queen Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000918" name="Ntuamu's Seal"/>
+			<gd_item id="121000796" name="Ntuamu's Ruby Necklace"/>
+			<gd_item id="121000797" name="Ntuamu's Sapphire Necklace"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214603" name="Unfaithful Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000796" name="Ntuamu's Ruby Necklace"/>
+			<gd_item id="121000797" name="Ntuamu's Sapphire Necklace"/>
+			<gd_item id="122000918" name="Ntuamu's Seal"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Legend)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214586" name="Chief Mate Devahanson"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001907" name="Devahanson's Hat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="33">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213910" name="Botanist Aello"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000780" name="Aello's Leather Belt"/>
+			<gd_item id="123000781" name="Aello's Belt"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214581" name="Rusty Scale Shalba"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012544" name="Hornskull Back Scale"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214582" name="Thorn Beard Latulatu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012542" name="Cellatu Heart"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214583" name="Vampire Queen Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012536" name="Ntuamu's Blood"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214584" name="Ranger Agueria"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012546" name="Trico Horn"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214585" name="Elder Kitarpa"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012547" name="Chieftain Kitarpa's Horn"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" base_chance="50">
+		<gd_maps>
+			<gd_map map_id="220050000" name="Brusthonin"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214603" name="Unfaithful Ntuamu"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012536" name="Ntuamu's Blood"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>

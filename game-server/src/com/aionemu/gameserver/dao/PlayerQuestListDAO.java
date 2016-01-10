@@ -22,7 +22,7 @@ public abstract class PlayerQuestListDAO implements DAO {
 	 * @param playerId
 	 * @return QuestStateList
 	 */
-	public abstract QuestStateList load(final Player player);
+	public abstract QuestStateList load(int playerObjId);
 
 	/**
 	 * @param Player

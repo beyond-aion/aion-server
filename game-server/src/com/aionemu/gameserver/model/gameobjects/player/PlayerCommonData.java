@@ -3,8 +3,11 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
+import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
@@ -14,11 +17,16 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.FactionPackService;
+import com.aionemu.gameserver.services.HTMLService;
+import com.aionemu.gameserver.services.SkillLearnService;
+import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
@@ -57,8 +65,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int mailboxLetters;
 	private int soulSickness = 0;
 	private boolean noExp = false;
-	private long reposteCurrent;
-	private long reposteMax;
+	private long reposeCurrent;
+	private long reposeMax;
 	private long salvationPoint;
 	private int mentorFlagTime;
 	private int worldOwnerId;
@@ -80,6 +88,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public long getExp() {
 		return this.exp;
+	}
+
+	public void setExpValue(long exp) {
+		this.exp = exp;
 	}
 
 	public int getQuestExpands() {
@@ -154,8 +166,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			this.expRecoverable = Math.round(getExpNeed() * 0.25);
 		}
 		if (this.getPlayer() != null)
-			PacketSendUtility.sendPacket(getPlayer(),
-				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy()));
+			PacketSendUtility.sendPacket(getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(),
+				this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
 	}
 
 	public void setRecoverableExp(long expRecoverable) {
@@ -196,27 +208,32 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			return;
 
 		long reward = value;
-		if (this.getPlayer() != null && rewardType != null)
-			reward = rewardType.calcReward(this.getPlayer(), value);
-
 		long repose = 0;
-		if (this.isReadyForReposteEnergy() && this.getCurrentReposteEnergy() > 0) {
-			repose = (long) ((reward / 100f) * 40); // 40% bonus
-			this.addReposteEnergy(-repose);
-		}
-
 		long salvation = 0;
-		if (this.isReadyForSalvationPoints() && this.getCurrentSalvationPercent() > 0) {
-			salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
-			// TODO! remove salvation points?
+		Player player = getPlayer();
+		if (player != null && player.getWorldId() == 301160000) // nightmare circus
+			return;
+
+		if (player != null && rewardType != null)
+			reward = rewardType.calcReward(player, value);
+
+		if (reward > 0) {
+			if (getCurrentReposeEnergy() > 0) {
+				long allowedExp = Math.min(getCurrentReposeEnergy(), reward);
+				addReposeEnergy(-allowedExp);
+				repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
+			}
+
+			if (this.isReadyForSalvationPoints() && this.getCurrentSalvationPercent() > 0) {
+				salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
+				// TODO! remove salvation points?
+			}
+
+			reward += repose + salvation;
 		}
 
-		reward += repose + salvation;
-		if (getPlayer() != null && getPlayer().getWorldId() == 301160000) {
-			reward = 0;
-		}
 		this.setExp(this.exp + reward);
-		if (this.getPlayer() != null) {
+		if (player != null) {
 			if (rewardType != null) {
 				switch (rewardType) {
 					case GROUP_HUNTING:
@@ -224,51 +241,51 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 					case QUEST:
 						if (npcNameId == 0) // Exeption quest w/o reward npc
 							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 						else if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(),
+							PacketSendUtility.sendPacket(player,
 								SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
 						else
 							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
 						break;
 					case PVP_KILL:
 						if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
 						else
 							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
 						break;
 					case CRAFTING:
 					case GATHERING:
 						if (repose > 0 && salvation > 0)
 							// You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
 						else if (repose > 0 && salvation == 0)
 							// You have gained %num1 XP(Energy of Repose %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
 						else if (repose == 0 && salvation > 0)
 							// You have gained %num1 XP(Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
 						else
 							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 						break;
 				}
 			}
@@ -287,36 +304,38 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		return getLevel() >= 15;
 	}
 
-	public boolean isReadyForReposteEnergy() {
+	public boolean isReadyForReposeEnergy() {
 		return getLevel() >= 10;
 	}
 
-	public void addReposteEnergy(long add) {
-		reposteCurrent += add;
-		if (reposteCurrent < 0)
-			reposteCurrent = 0;
-		else if (reposteCurrent > getMaxReposteEnergy())
-			reposteCurrent = getMaxReposteEnergy();
+	public void addReposeEnergy(long add) {
+		reposeCurrent += add;
+		if (reposeCurrent < 0)
+			reposeCurrent = 0;
+		else if (reposeCurrent > getMaxReposeEnergy())
+			reposeCurrent = getMaxReposeEnergy();
 	}
 
-	public void updateMaxReposte() {
-		if (!isReadyForReposteEnergy()) {
-			reposteCurrent = 0;
-			reposteMax = 0;
-		} else
-			reposteMax = (long) (getExpNeed() * 0.25f); // Retail 99%
+	public void updateMaxRepose() {
+		if (!isReadyForReposeEnergy()) {
+			reposeCurrent = 0;
+			reposeMax = 0;
+		} else {
+			reposeMax = (long) (getExpNeed() * 0.25f); // Retail 99%
+			reposeCurrent = Math.min(reposeMax, reposeCurrent);
+		}
 	}
 
-	public void setCurrentReposteEnergy(long value) {
-		reposteCurrent = value;
+	public void setCurrentReposeEnergy(long value) {
+		reposeCurrent = value;
 	}
 
-	public long getCurrentReposteEnergy() {
-		return reposteCurrent;
+	public long getCurrentReposeEnergy() {
+		return reposeCurrent;
 	}
 
-	public long getMaxReposteEnergy() {
-		return reposteMax;
+	public long getMaxReposeEnergy() {
+		return reposeMax;
 	}
 
 	/**
@@ -325,56 +344,60 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	 * @param exp
 	 */
 	public void setExp(long exp) {
-		// maxLevel is 56 but in game 55 should be shown with full XP bar
-		int maxLevel = DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel();
-
-		if (getPlayerClass() != null && getPlayerClass().isStartingClass())
-			maxLevel = 10;
-
-		long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
-
-		if (exp > maxExp)
-			exp = maxExp;
-
-		int oldLvl = this.level;
-		this.exp = exp;
-		// make sure level is never larger than maxLevel-1
-		boolean up = false;
-		while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
-			|| (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
-			if (up)
-				this.level++;
-			else
-				this.level--;
-
-			upgradePlayerData();
-		}
-
-		if (this.getPlayer() != null) {
-			if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && getPlayer().getPlayerAccount().getNumberOf(getRace()) == 1)
-					GameServer.updateRatio(getRace(), 1);
-
-				if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && getPlayer().getPlayerAccount().getNumberOf(getRace()) == 1)
-					GameServer.updateRatio(getRace(), -1);
-			}
-			if (oldLvl != level)
-				updateMaxReposte();
-
-			PacketSendUtility.sendPacket(this.getPlayer(),
-				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy()));
-		}
-	}
-
-	private void upgradePlayerData() {
 		Player player = getPlayer();
-		if (player != null) {
-			BonusPackService.getInstance().addPlayerCustomReward(player);
-			if (player.getRace() == Race.ELYOS)
-				FactionPackService.getInstance().addPlayerCustomReward(player);
-			player.getController().upgradePlayer();
-			resetSalvationPoints();
+
+		if (exp != this.exp) {
+			// maxLevel is 66 but in game 65 should be shown with full XP bar
+			int maxLevel = isDaeva ? DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() : 10;
+			long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
+
+			if (exp > maxExp)
+				exp = maxExp;
+
+			int oldLvl = this.level;
+			this.exp = exp;
+			// make sure level is never larger than maxLevel-1
+			boolean up = false;
+			while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
+				|| (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
+				if (up)
+					this.level++;
+				else
+					this.level--;
+
+				if (player != null) {
+					// Guides Html on level up
+					if (HTMLConfig.ENABLE_GUIDES)
+						HTMLService.sendGuideHtml(player);
+					// add new skills
+					SkillLearnService.addNewSkills(player);
+				}
+			}
+
+			if (player != null) {
+				if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
+					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+						GameServer.updateRatio(getRace(), 1);
+
+					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+						GameServer.updateRatio(getRace(), -1);
+				}
+				if (oldLvl != level) {
+					updateMaxRepose();
+					resetSalvationPoints();
+					player.getNpcFactions().onLevelUp();
+					player.getController().upgradePlayer();
+					PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
+
+					BonusPackService.getInstance().addPlayerCustomReward(player);
+					FactionPackService.getInstance().addPlayerCustomReward(player);
+				}
+			}
 		}
+
+		if (player != null)
+			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
+				getMaxReposeEnergy()));
 	}
 
 	public void setNoExp(boolean value) {
@@ -465,18 +488,18 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public int getLevel() {
-		return isDaeva ? level : Math.min(level, 9);
-	}
-
-	/* Get level without Daeva-check. Used for Guides for now */
-	public int getLevelValue() {
 		return level;
 	}
 
+	public void setLevelValue(int level) {
+		this.level = level;
+	}
+
+	/**
+	 * This will only set the specified level >= 10 if the player is a daeva.
+	 */
 	public void setLevel(int level) {
-		if (level <= DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel()) {
-			this.setExp(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
-		}
+		setExp(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
 	}
 
 	public String getNote() {
@@ -654,5 +677,36 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public void setDaeva(boolean isDaeva) {
 		this.isDaeva = isDaeva;
+	}
+
+	/**
+	 * @return True, if player was promoted to daeva. False if he already has daeva status or wasn't promoted.
+	 */
+	public boolean updateDaeva() {
+		if (isDaeva)
+			return false;
+
+		if (playerClass.isStartingClass())
+			return false;
+
+		QuestStateList qsl;
+		Player player = getPlayer();
+		if (player != null)
+			qsl = player.getQuestStateList();
+		else
+			qsl = DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId);
+
+		if (qsl == null)
+			throw new AssertionError("Player " + playerObjId + " has no valid questStateList");
+
+		// check both quest states in case a player changed race
+		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : QuestStatus.NONE;
+		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : QuestStatus.NONE;
+		if (elyAscentQuestStatus != QuestStatus.COMPLETE && asmoAscentQuestStatus != QuestStatus.COMPLETE)
+			return false;
+
+		setDaeva(true);
+		CraftSkillUpdateService.getInstance().setMorphRecipe(this, player);
+		return true;
 	}
 }

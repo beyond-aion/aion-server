@@ -344,4 +344,16 @@
 			<gd_item id="102100761" name="Kromede's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Stone of Silence" base_chance="100" >
+		<gd_maps>
+			<gd_map map_id="320100000" name="Fire_Temple"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
+			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012530" name="Stone of Silence"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

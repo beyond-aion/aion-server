@@ -189,7 +189,7 @@
 			<gd_item id="123001334" name="Corrupt Judge's Belt"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="10" no_reduction="true">
+	<gd_rule rule_name="Named Key" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="300230000" name="Kromedes_Trial"/>
 		</gd_maps>

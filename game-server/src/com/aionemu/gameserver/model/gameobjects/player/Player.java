@@ -76,7 +76,6 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
-import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -141,7 +140,6 @@ public class Player extends Creature {
 	private Equipment equipment;
 	private HouseRegistry houseRegistry;
 
-	private PlayerStatsTemplate playerStatsTemplate;
 	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
 
@@ -263,7 +261,6 @@ public class Player extends Creature {
 		moveController = new PlayerMoveController(this);
 		plCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, getPlayerAppearance().getHeight()));
 
-		setPlayerStatsTemplate(DataManager.PLAYER_STATS_DATA.getTemplate(this));
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
 		inGameShop = new InGameShop();
@@ -572,33 +569,6 @@ public class Player extends Creature {
 	 */
 	public void setQuestStateList(QuestStateList questStateList) {
 		this.questStateList = questStateList;
-		QuestState ceremonyQuestState = null;
-		switch (getRace()) {
-			case ELYOS:
-				ceremonyQuestState = questStateList.getQuestState(1007);
-				break;
-			case ASMODIANS:
-				ceremonyQuestState = questStateList.getQuestState(2009);
-				break;
-		}
-		if (ceremonyQuestState == null)
-			return;
-		playerCommonData.setDaeva(ceremonyQuestState.getStatus() == QuestStatus.COMPLETE);
-	}
-
-	/**
-	 * @return the playerStatsTemplate
-	 */
-	public PlayerStatsTemplate getPlayerStatsTemplate() {
-		return playerStatsTemplate;
-	}
-
-	/**
-	 * @param playerStatsTemplate
-	 *          the playerStatsTemplate to set
-	 */
-	public void setPlayerStatsTemplate(PlayerStatsTemplate playerStatsTemplate) {
-		this.playerStatsTemplate = playerStatsTemplate;
 	}
 
 	public RecipeList getRecipeList() {

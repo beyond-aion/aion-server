@@ -40,7 +40,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, 182206088, 1);
 			}
 		}
 
@@ -51,7 +51,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Talk with Nianalo
+				// 1 - Talk with Nianalo
 				case 798359:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -133,7 +133,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 3398);
 							case SETPRO8:
-								return defaultCloseDialog(env, 7, 8); // 8
+								return defaultCloseDialog(env, 7, 8, 182206089, 1, 182206088, 1); // 8
 						}
 					}
 					break;
@@ -167,7 +167,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
-					return sendQuestEndDialog(env);
+					return sendQuestEndDialog(env, new int[] { 182206089 });
 				}
 			}
 		}

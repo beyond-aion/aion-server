@@ -249,17 +249,6 @@
 			<gd_item id="123000925" name="Silikor's Leather Belt"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Design" base_chance="1">
-		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214670" name="Titan Protector"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152201601" name="Craft: Necsium Helm"/>
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab"/>

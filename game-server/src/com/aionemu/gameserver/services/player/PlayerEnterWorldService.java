@@ -30,7 +30,6 @@ import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
@@ -52,6 +51,7 @@ import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
@@ -248,6 +248,10 @@ public final class PlayerEnterWorldService {
 					try {
 						enterWorld(client, player);
 					} catch (Throwable ex) {
+						player.getController().delete();
+						pcd.setOnline(false);
+						DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
+						player.setClientConnection(null);
 						client.setActivePlayer(null);
 						client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 						log.error("Error during enter world " + objectId, ex);
@@ -282,16 +286,19 @@ public final class PlayerEnterWorldService {
 			if (secondsOffline > 10 * 60) // 10 mins offline = 0 salvation points
 				pcd.resetSalvationPoints();
 
-			pcd.updateMaxReposte();
-			if (pcd.isReadyForReposteEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy addition
+			pcd.updateMaxRepose();
+			if (pcd.isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy addition
 				double hours = secondsOffline / 3600d;
 				// 48 hours offline = 100% Repose Energy (~1% each 30mins source: http://forums.na.aiononline.com/na/showthread.php?t=105940)
-				long addResposeEnergy = Math.round((hours / 48) * pcd.getMaxReposteEnergy());
+				long addReposeEnergy = Math.round((hours / 48) * pcd.getMaxReposeEnergy());
 				// Additional Energy of Repose bonus if inside house
 				House house = player.getActiveHouse();
-				if (house != null && house.getAddress().getMapId() == player.getWorldId() && MathUtil.isIn3dRange(player, house, 7))
-					addResposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
-				pcd.addReposteEnergy(addResposeEnergy);
+				if (house != null) {
+					HouseAddress hPos = house.getAddress();
+					if (player.getWorldId() == hPos.getMapId() && MathUtil.isIn3dRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
+						addReposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
+				}
+				pcd.addReposeEnergy(addReposeEnergy);
 			}
 
 			if (secondsOffline > 5 * 60)
@@ -511,8 +518,7 @@ public final class PlayerEnterWorldService {
 
 		// try to send bonus pack (if mailbox was full on lvlup)
 		BonusPackService.getInstance().addPlayerCustomReward(player);
-		if (player.getRace() == Race.ELYOS)
-			FactionPackService.getInstance().addPlayerCustomReward(player);
+		FactionPackService.getInstance().addPlayerCustomReward(player);
 	}
 
 	/**

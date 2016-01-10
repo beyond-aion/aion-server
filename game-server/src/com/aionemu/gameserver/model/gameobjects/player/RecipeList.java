@@ -7,9 +7,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRecipesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_DELETE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -30,21 +28,12 @@ public class RecipeList {
 		return recipeList;
 	}
 
-	public void addRecipe(Player player, RecipeTemplate recipeTemplate) {
-		int recipeId = recipeTemplate.getId();
-		if (!player.getRecipeList().isRecipePresent(recipeId)) {
-			if (DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(player.getObjectId(), recipeId)) {
-				recipeList.add(recipeId);
-				PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARN(recipeId, player.getName()));
-			}
-		}
-	}
-
-	public void addRecipe(int playerId, int recipeId) {
-		if (DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(playerId, recipeId)) {
+	public boolean addRecipe(int playerId, int recipeId) {
+		if (!isRecipePresent(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(playerId, recipeId)) {
 			recipeList.add(recipeId);
+			return true;
 		}
+		return false;
 	}
 
 	public void deleteRecipe(Player player, int recipeId) {
@@ -57,9 +46,8 @@ public class RecipeList {
 	}
 
 	public void autoLearnRecipe(Player player, int skillId, int skillLvl) {
-		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getAutolearnRecipes(player.getRace(), skillId, skillLvl)) {
-			player.getRecipeList().addRecipe(player, recipe);
-		}
+		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getAutolearnRecipes(player.getRace(), skillId, skillLvl))
+			addRecipe(player.getObjectId(), recipe.getId());
 	}
 
 	public boolean isRecipePresent(int recipeId) {

@@ -72,7 +72,7 @@ public class ExpExtractAction extends AbstractItemAction {
 			}
 		}, 5000));
 		PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(player.getCommonData().getExpShown(), player.getCommonData().getExpRecoverable(),
-			player.getCommonData().getExpNeed(), player.getCommonData().getCurrentReposteEnergy(), player.getCommonData().getMaxReposteEnergy()));
+			player.getCommonData().getExpNeed(), player.getCommonData().getCurrentReposeEnergy(), player.getCommonData().getMaxReposeEnergy()));
 
 	}
 
