@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
@@ -29,6 +30,7 @@ import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.Effects;
+import com.aionemu.gameserver.skillengine.effect.HostileUpEffect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
@@ -628,15 +630,16 @@ public class Effect implements StatOwner {
 		 * broadcast final hate to all visible objects
 		 */
 		// TODO hostile_type?
-		if (effectHate != 0) {
+		if (effectHate != 0 && tauntHate >= 0) { //dont add hate if taunt hate is < 0!
 			if (getEffected() instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
 				getEffected().getAggroList().addHate(effector, 1);
 
 			effector.getController().broadcastHate(effectHate);
 		}
 
-		if (skillTemplate.getEffects() == null || successEffects.isEmpty())
+		if (skillTemplate.getEffects() == null || successEffects.isEmpty()) {
 			return;
+		}
 
 		for (EffectTemplate template : successEffects.values()) {
 			if (getEffected() != null) {

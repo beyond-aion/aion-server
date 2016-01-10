@@ -297,6 +297,7 @@ public final class QuestService {
 			player.getController().upgradePlayer();
 			SkillLearnService.addMissingSkills(player);
 		}
+		QuestEngine.getInstance().onLvlUp(env);
 		if (template.getNpcFactionId() != 0) {
 			player.getNpcFactions().completeQuest(template);
 		}
@@ -360,7 +361,7 @@ public final class QuestService {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(env.getQuestId())));
 				return false;
-			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount()) {
+			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
 				return false;

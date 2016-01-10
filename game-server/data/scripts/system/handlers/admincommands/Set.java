@@ -7,6 +7,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
@@ -113,6 +114,7 @@ public class Set extends AdminCommand {
 				player.getCommonData().setExpValue(DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(level));
 				player.getCommonData().setLevelValue(level);
 				player.getController().upgradePlayer();
+				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
 			}
 
 			PacketSendUtility.sendMessage(admin, "Set " + player.getCommonData().getName() + " level to " + player.getLevel());

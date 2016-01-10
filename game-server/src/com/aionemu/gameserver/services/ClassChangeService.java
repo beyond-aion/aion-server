@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -116,6 +117,7 @@ public class ClassChangeService {
 						break;
 
 				}
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
 				completeQuest(player, 1006);
 
 				// Stigma Quests Elyos
@@ -158,6 +160,7 @@ public class ClassChangeService {
 						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
 						break;
 				}
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
 				// Optimate @Enomine
 				completeQuest(player, 2008);
 
@@ -193,7 +196,7 @@ public class ClassChangeService {
 		}
 		player.getCommonData().setPlayerClass(newClass);
 		player.getController().upgradePlayer();
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
+		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
 		return true;
 	}
 }

@@ -83,18 +83,21 @@ public class SimpleAttackManager {
 				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 				return;
 			}
-			if (!npc.canSee(target) || !GeoService.getInstance().canSee(npc, target)) { // delete check geo when the Path Finding
+			if (!npc.canSee(target)) { 
 				npc.getController().cancelCurrentSkill();
 				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 				return;
 			}
-			if (isTargetInAttackRange(npc)) {
+			if (!isTargetInAttackRange(npc)) {
+				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
+			} else if (!GeoService.getInstance().canSee(npc, target)) { //delete geo check when we've implemented a pathfinding system
+				npc.getController().cancelCurrentSkill();
+				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
+			} else {
 				npc.getPosition().setH(MathUtil.getHeadingTowards(npc, target));
 				npc.getController().attackTarget(target, 0);
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
-				return;
 			}
-			npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 		} else {
 			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 		}

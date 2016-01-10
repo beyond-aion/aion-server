@@ -43,7 +43,7 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, 182207137, 1);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
@@ -54,7 +54,7 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
 						case SETPRO1:
-							return defaultCloseDialog(env, 0, 1, 182207137, 1, 0, 0); // 1
+							return defaultCloseDialog(env, 0, 1, 0, 0, 182207137, 1); // 1
 					}
 					break;
 				}

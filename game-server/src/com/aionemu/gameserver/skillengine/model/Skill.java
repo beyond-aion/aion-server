@@ -54,6 +54,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -743,7 +744,8 @@ public class Skill {
 			sendCastspellEnd(dashStatus, effects);
 
 		endCondCheck();
-
+		addHateAndNotifyFriends(effects);
+		
 		if (this.getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
 			AbyssService.rankerSkillAnnounce((Player) effector, this.getSkillTemplate().getNameId());
 		}
@@ -759,6 +761,25 @@ public class Skill {
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
 			if (effector instanceof Player)
 				effector.getObserveController().notifyEndSkillCastObservers(this);
+		}
+	}
+
+	private void addHateAndNotifyFriends(List<Effect> effects) {
+		if (effects == null || effects.isEmpty()) {
+			return;
+		}
+		for (Effect effect : effects) {
+			if (effect.getTauntHate() >= 0) {
+				effect.getEffected().getAggroList().addHate(effector, 1);
+				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
+					@Override
+					public void visit(Npc object) {
+						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected());
+					}
+
+				});
+			}
 		}
 	}
 
@@ -858,6 +879,8 @@ public class Skill {
 		return skillConditions != null ? skillConditions.validate(this) : true;
 	}
 
+	
+	
 	/**
 	 * @param value
 	 *          is the changeMpConsumptionValue to set

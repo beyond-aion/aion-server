@@ -47,8 +47,6 @@ public class Leveldown extends ConsoleCommand {
 		}
 
 		player.getCommonData().setLevel(newLevel);
-		player.getController().upgradePlayer();
-
 		sendInfo(admin, "Set " + player.getName() + "'s level to " + player.getLevel());
 	}
 }

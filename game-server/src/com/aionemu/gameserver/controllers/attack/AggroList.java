@@ -76,6 +76,8 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	public void addHate(final Creature creature, int hate) {
 		if (!isAware(creature))
 			return;
+		if (hate < 0 && !aggroList.containsKey(creature.getObjectId())) 
+			return;
 		addHateValue(creature, hate);
 	}
 
