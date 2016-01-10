@@ -81,7 +81,7 @@ public class _1092JosnacksDilemma extends QuestHandler {
 						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
 						case CHECK_USER_HAS_QUEST_ITEM:
-							return checkQuestItems(env, 4, 4, true, 10001, 10008); // reward
+							return checkQuestItems(env, 4, 4, true, 5, 10001); // reward
 					}
 					break;
 				case 798206: // Josnack

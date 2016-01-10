@@ -12,7 +12,7 @@
 			<gd_item id="185000114" name="Protectorate's Treasure Chest Key" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name=" Global AP Key (Legend)" base_chance="0.25">
+	<gd_rule rule_name="Global AP Key (Legend)" base_chance="0.25">
 		<gd_maps>
 			<gd_map map_id="600040000" name="Tiamarantas_Eye" />
 		</gd_maps>

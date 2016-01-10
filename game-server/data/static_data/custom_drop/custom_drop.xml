@@ -56,6 +56,20 @@
 			<drop item_id="125000952" name="Kaidan Hat" min_amount="1" max_amount="1" chance="12"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Heiron -->
+	<npc_drop npc_id="212333" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Rare)">
+			<drop item_id="120000733" name="Heironopolis Earrings" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Belt (Rare)">
+			<drop item_id="123000782" name="Heironopolis Belt" min_amount="1" max_amount="1" chance="10"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="214025" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<drop item_id="122000780" name="Azure Flame Ring" min_amount="1" max_amount="1" chance="25"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Pernon/Oriel -->
 	<npc_drop npc_id="218874" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Life Leaf">

@@ -705,13 +705,13 @@
 	<portal_use npc_id="730067">
 		<portal_path loc_id="1200103"/>
 	</portal_use>
-	<!-- Alukina's Palace Asmodians Entrance -->
+	<!-- Alukina's Palace Entrance -->
 	<portal_use npc_id="730137">
-		<portal_path loc_id="2200404" race="ASMODIANS">
+		<portal_path loc_id="2200404">
 			<portal_req min_level="38"/>
 		</portal_path>
 	</portal_use>
-	<!-- Alukina's Palace Asmodians Exit -->
+	<!-- Alukina's Palace Exit -->
 	<portal_use npc_id="730138">
 		<portal_path loc_id="2200405"/>
 	</portal_use>
