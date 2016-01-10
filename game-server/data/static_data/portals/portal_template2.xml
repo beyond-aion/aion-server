@@ -2805,7 +2805,7 @@
 		<portal_path dialog="10001" loc_id="6001006"/> <!-- Illuminary Obelisk -->
 		<portal_path dialog="10002" loc_id="6001008"/> <!-- Linkgate Foundry -->
 		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
-		<portal_path dialog="10004" loc_id="6000717"/> <!-- Danuar Sanctuary -->
+		<portal_path dialog="10004" loc_id="6000719"/> <!-- Danuar Sanctuary -->
 	</portal_dialog>
 	<!-- END WISPLIGHT ABBEY -->
 	
