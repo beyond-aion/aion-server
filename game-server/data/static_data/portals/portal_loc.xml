@@ -106,12 +106,12 @@
 	<portal_loc world_id="220040000" loc_id="2200406" x="2209.6526" y="2926.3257" z="699.80756"/>
 	<portal_loc world_id="220040000" loc_id="2200407" x="1466.8792" y="1947.9192" z="588.06555"/>
 	<portal_loc world_id="220040000" loc_id="2200408" x="2420.12" y="2061.31" z="579.7" h="0"/> <!-- Dark Poeta Exit -->
-	<portal_loc world_id="220040000" loc_id="2200409" x="2420.12" y="2723.541" z="705.3176" h="25"/> <!-- Atreia Defense Portal (Asmo) -->
-	<portal_loc world_id="220040000" loc_id="2200410" x="2420.12" y="2061.31" z="579.7"/> <!-- Atreia Defense Portal (Asmo) -->
+	<portal_loc world_id="220040000" loc_id="2200409" x="2206.5" y="2921.2" z="700" h="47"/> <!-- Atreia Defense Portal (Asmo) -->
+	<portal_loc world_id="220040000" loc_id="2200410" x="2422.25" y="2063.94" z="579.62" h="76"/> <!-- Atreia Defense Portal (Asmo) -->
 	<!-- Brusthonin -->
 	<portal_loc world_id="220050000" loc_id="2200500" x="1538.9861" y="388.8925" z="231.18079"/> <!-- Theobomos Lab Exit -->
-	<portal_loc world_id="220050000" loc_id="2200501" x="1540.0343" y="389.20572" z="231.20036"/> <!-- Atreia Defense Portal (Asmo) -->
-	<portal_loc world_id="220050000" loc_id="2200502" x="1538.5579" y="374.49298" z="231.125"/> <!-- Atreia Defense Portal (Asmo) -->
+	<portal_loc world_id="220050000" loc_id="2200501" x="1540.0343" y="389.20572" z="231.20036" h="18"/> <!-- Atreia Defense Portal (Asmo) -->
+	<portal_loc world_id="220050000" loc_id="2200502" x="1538.5579" y="374.49298" z="231.125" h="113"/> <!-- Atreia Defense Portal (Asmo) -->
 	<portal_loc world_id="220050000" loc_id="2200503" x="2339.747" y="160.00119" z="246.44734"/> <!-- Adma Stronghold Exit -->
 	<portal_loc world_id="220050000" loc_id="2200504" x="1411.0" y="2013.0" z="51.564507"/> <!-- Orb of Return to Baltasar Hill Village -->
 	<!-- Gelkmaros -->
@@ -131,9 +131,9 @@
 	<portal_loc world_id="220070000" loc_id="2200713" x="1196.989990" y="802.956970" z="313.450012"/>
 	<portal_loc world_id="220070000" loc_id="2200714" x="1783.3955" y="1815.8047" z="405.47815"/>
 	<portal_loc world_id="220070000" loc_id="2200715" x="1556" y="1119" z="321.4375"/> <!-- Infiltration Route to Gelkmaros (Asmo) -->
-	<portal_loc world_id="220070000" loc_id="2200716" x="985.00476" y="2565.9172" z="241.23906"/> <!-- Balaurea Advance Portal (Asmo) -->
-	<portal_loc world_id="220070000" loc_id="2200717" x="2268.8242" y="1604.5648" z="310.72098"/> <!-- Balaurea Advance Portal (Asmo) -->
-	<portal_loc world_id="220070000" loc_id="2200718" x="2256.5159" y="1732.5967" z="309.5974"/> <!-- Balaurea Advance Portal (Asmo) -->
+	<portal_loc world_id="220070000" loc_id="2200716" x="985.00476" y="2565.9172" z="241.23906" h="61"/> <!-- Balaurea Advance Portal (Asmo) -->
+	<portal_loc world_id="220070000" loc_id="2200717" x="2268.8242" y="1604.5648" z="310.72098" h="52"/> <!-- Balaurea Advance Portal (Asmo) -->
+	<portal_loc world_id="220070000" loc_id="2200718" x="2256.5159" y="1732.5967" z="309.5974" h="66"/> <!-- Balaurea Advance Portal (Asmo) -->
 	<!-- Nochsana Training Camp -->
 	<portal_loc world_id="300030000" loc_id="3000300" x="513" y="668" z="331"/>
 	<portal_loc world_id="400010000" loc_id="3000301" x="2890" y="754" z="1498.5786"/>
@@ -253,7 +253,7 @@
 	<portal_loc world_id="600010000" loc_id="6000100" x="471.12662" y="460.05142" z="330.0077"/>
 	<portal_loc world_id="600010000" loc_id="6000101" x="480" y="1094" z="334.7"/>
 	<portal_loc world_id="600010000" loc_id="6000102" x="1412" y="767" z="313"/>
-	<portal_loc world_id="600010000" loc_id="6000103" x="1409.1927" y="767.4404" z="312.77734"/> <!-- Balaurea Advance Portal -->
+	<portal_loc world_id="600010000" loc_id="6000103" x="1409.1927" y="767.4404" z="312.77734" h="119"/> <!-- Balaurea Advance Portal -->
 	<!-- Aetherogenetics Lab -->
 	<portal_loc world_id="310050000" loc_id="3100500" x="356.1951" y="230.04333" z="147.60022" h="59"/>
 	<!-- Left Wing Chamber -->
@@ -413,7 +413,7 @@
 	<portal_loc world_id="600030000" loc_id="6000351" x="148.58093" y="1879.1094" z="295.04648" h="1"/> <!-- Tiamaranta (Asmodians) -->
 	<portal_loc world_id="600030000" loc_id="6000352" x="132.4" y="2767.4" z="293.6" h="42"/> <!-- Balaurea Invasion Portal -->
 	<portal_loc world_id="600030000" loc_id="6000353" x="1524.4459" y="1246.9999" z="245.49893" h="30"/> <!-- Balaurea Invasion Portal (Elyos) -->
-	<portal_loc world_id="600030000" loc_id="6000354" x="1526.4774" y="1791.4181" z="249.22559"/> <!-- Balaurea Invasion Portal (Asmodians) -->
+	<portal_loc world_id="600030000" loc_id="6000354" x="1526.4774" y="1791.4181" z="249.22559" h="90"/> <!-- Balaurea Invasion Portal (Asmodians) -->
 	<!-- Rentus Base -->
 	<portal_loc world_id="300280000" loc_id="3002800" x="584.74915" y="124.48231" z="47.25" h="6"/> <!-- Rentus Base Entrance -->
 	<!-- Tiamaranta's Eye -->
@@ -538,9 +538,8 @@
 	<portal_loc world_id="600070000" loc_id="6000714" x="1160.8765" y="566.2549" z="561.56683" h="63"/> <!-- Idgel Research Center exit -->
 	<!-- <portal_loc world_id="600070000" loc_id="6000715" x="1288.7612" y="769.0617" z="564.20056" h="65"/> Infinity Shard exit -->
 	<!-- <portal_loc world_id="600070000" loc_id="6000716" x="359.5474" y="516.2621" z="571.15283" h="5"/> Danuar Sanctuary exit -->
-	<portal_loc world_id="600070000" loc_id="6000717" x="1058.48" y="965.37" z="566.13" h="30"/> <!-- Balaurea Frontier Portal (Elyos) -->
-	<portal_loc world_id="600070000" loc_id="6000718" x="816.71155" y="250.59845" z="466"/> <!-- Balaurea Frontier Portal (Asmodians) -->
-	<portal_loc world_id="600070000" loc_id="6000719" x="361.79" y="517.31" z="571.16" h="65"/> <!-- Balaurea Frontier Portal (Elyos) -->
+	<portal_loc world_id="600070000" loc_id="6000717" x="1058.48" y="965.37" z="566.13" h="30"/> <!-- Balaurea Frontier Portal -->
+	<portal_loc world_id="600070000" loc_id="6000718" x="361.79" y="517.31" z="571.16" h="65"/> <!-- Balaurea Frontier Portal -->
 	<!-- NOT USED: TODO FIND WHY --> <portal_loc world_id="600070000" loc_id="3011901" x="494.96967" y="1040.3678" z="564.59106"/> <!-- Danuar Mysticarium Legion exit -->
 	<!-- 4.3 Nightmare Circus (Rukibuki Circus Troupe) -->
 	<portal_loc world_id="301160000" loc_id="3011600" x="467.64584" y="568.34076" z="201.6762" h="117"/>
@@ -614,11 +613,11 @@
 	<portal_loc world_id="600100000" loc_id="6001002" x="334.06253" y="412.31686" z="318.5" h="83"/> <!-- Linkgate Foundry Lab exit -->
 	<portal_loc world_id="600100000" loc_id="6001003" x="1761.9077" y="1604.264" z="289.75" h="23"/> <!-- Linkgate Foundry Lab exit -->
 	<portal_loc world_id="600100000" loc_id="6001004" x="352.5449" y="153.11859" z="352.5" h="113"/> <!-- Balaurea Frontier Portal (Elyos) -->
-	<portal_loc world_id="600100000" loc_id="6001005" x="1578.7433" y="1729.1093" z="284.375"/> <!-- Balaurea Frontier Portal (Asmo) -->
+	<portal_loc world_id="600100000" loc_id="6001005" x="1578.7433" y="1729.1093" z="284.375" h="64"/> <!-- Balaurea Frontier Portal (Asmo) -->
 	<portal_loc world_id="600100000" loc_id="6001006" x="459.49335" y="1544.7773" z="241.50125" h="101"/> <!-- Balaurea Frontier Portal (Elyos) -->
-	<portal_loc world_id="600100000" loc_id="6001007" x="1397.602" y="375.5193" z="248.37592"/> <!-- Balaurea Frontier Portal (Asmo) -->
+	<portal_loc world_id="600100000" loc_id="6001007" x="1397.602" y="375.5193" z="248.37592" h="27"/> <!-- Balaurea Frontier Portal (Asmo) -->
 	<portal_loc world_id="600100000" loc_id="6001008" x="334.87" y="407.17" z="318.5" h="28"/> <!-- Balaurea Frontier Portal (Elyos) -->
-	<portal_loc world_id="600100000" loc_id="6001009" x="1763.0737" y="1610.8367" z="289.625"/> <!-- Balaurea Frontier Portal (Asmo) -->
+	<portal_loc world_id="600100000" loc_id="6001009" x="1763.0737" y="1610.8367" z="289.625" h="86"/> <!-- Balaurea Frontier Portal (Asmo) -->
 	<portal_loc world_id="600100000" loc_id="6001010" x="1072.4126" y="982.45844" z="337.7758"/> <!-- Infinity Shard exit -->
 	<portal_loc world_id="600100000" loc_id="6001011" x="351.01273" y="154.34937" z="352.5" h="112"/> <!-- Sauro Supply Base Exit(Elyos) -->
 	<portal_loc world_id="600100000" loc_id="6001012" x="1578.6261" y="1729.967" z="284.375" h="66"/> <!-- Sauro Supply Base Exit (Asmo) -->
