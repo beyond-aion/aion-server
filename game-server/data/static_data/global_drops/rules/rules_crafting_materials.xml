@@ -950,11 +950,9 @@
 	</gd_rule>
 	<!-- Ceramium Fragment -->
 	<gd_rule rule_name="Ceramium Fragment" base_chance="1.5">
-		<gd_maps>
-			<gd_map map_id="600050000" name="Katalam"/>
-			<gd_map map_id="600060000" name="Danaria"/>
-			<gd_map map_id="600070000" name="Idian_Depths"/>
-		</gd_maps>
+		<gd_worlds>
+			<gd_world wd_type="BALAUREA_HIGH"/>
+		</gd_worlds>
 		<gd_items>
 			<gd_item id="152012578" name="Ceramium Fragment"/>
 		</gd_items>

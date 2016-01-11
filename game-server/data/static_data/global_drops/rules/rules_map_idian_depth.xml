@@ -1,358 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<!-- Rata -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230995" name="Captain Rata" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230995" name="Captain Rata" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="101701254" name="Rata's Bow" />
-			<gd_item id="100901223" name="Rata's Greatsword" />
-			<gd_item id="100501203" name="Rata's Orb" />
-			<gd_item id="101501235" name="Rata's Staff" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Armor" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230995" name="Captain Rata" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112101447" name="Rata's Pauldrons" />
-			<gd_item id="112301544" name="Rata's Shoulderguards" />
-			<gd_item id="112501400" name="Rata's Spaulder" />
-			<gd_item id="112601421" name="Rata's Shoulderplates" />
-			<gd_item id="113101507" name="Rata's Leggings" />
-			<gd_item id="113301634" name="Rata's Breeches" />
-			<gd_item id="113501476" name="Rata's Chausses" />
-			<gd_item id="113601423" name="Rata's Greaves" />
-		</gd_items>
-	</gd_rule>
-	<!-- Slavir -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230998" name="Slavir the Ancient" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230998" name="Slavir the Ancient" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001615" name="Enraged Slavir's Protective Shield" />
-			<gd_item id="115001617" name="Enraged Slavir's Magic Shield" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Shield" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230998" name="Slavir the Ancient" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001614" name="Slavir's Protective Shield" />
-			<gd_item id="115001616" name="Slavir's Magic Shield" />
-		</gd_items>
-	</gd_rule>
-	<!-- Promion -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230999" name="Promion the Undying" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230999" name="Promion the Undying" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100501202" name="Promion's Orb" />
-			<gd_item id="100901222" name="Promion's Greatsword" />
-			<gd_item id="101501234" name="Promion's Staff" />
-			<gd_item id="101701253" name="Promion's Bow" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Weapon" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230999" name="Promion the Undying" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112101448" name="Promion's Pauldrons" />
-			<gd_item id="112301545" name="Promion's Shoulderguards" />
-			<gd_item id="112501401" name="Promion's Spaulders" />
-			<gd_item id="112601422" name="Promion's Shoulderplates" />
-			<gd_item id="113101508" name="Promion's Leggings" />
-			<gd_item id="113301635" name="Promion's Breeches" />
-			<gd_item id="113501477" name="Promion's Chausses" />
-			<gd_item id="113601424" name="Promion's Greaves" />
-		</gd_items>
-	</gd_rule>
-	<!-- Grigol -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231000" name="Bloodcrazed Grigol" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231000" name="Bloodcrazed Grigol" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100101208" name="Grigol's Mace" />
-			<gd_item id="100201381" name="Grigol's Dagger" />
-			<gd_item id="100601295" name="Grigol's Spellbook" />
-			<gd_item id="101801052" name="Grigol's Pistol" />
-			<gd_item id="102100838" name="Grigol's Cipher-Blade" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Armor" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231000" name="Bloodcrazed Grigol" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110101656" name="Grigol's Tunic" />
-			<gd_item id="110301665" name="Grigol's Jerkin" />
-			<gd_item id="110501503" name="Grigol's Hauberk" />
-			<gd_item id="110601477" name="Grigol's Breastplate" />
-			<gd_item id="111101494" name="Grigol's Gloves" />
-			<gd_item id="111301605" name="Grigol's Vambrace" />
-			<gd_item id="111501458" name="Grigol's Handguards" />
-			<gd_item id="111601440" name="Grigol's Gauntlets" />
-		</gd_items>
-	</gd_rule>
-	<!-- Serusia -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231003" name="Queen Serusia" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231003" name="Queen Serusia" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114101542" name="Serusia's Shoes" />
-			<gd_item id="114301672" name="Serusia's Boots" />
-			<gd_item id="114501484" name="Serusia's Brogans" />
-			<gd_item id="114601429" name="Serusia's Sabatons" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Head" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231003" name="Queen Serusia" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125003653" name="Serusia's Headband" />
-			<gd_item id="125003655" name="Serusia's Hat" />
-			<gd_item id="125003657" name="Serusia's Chain Hood" />
-			<gd_item id="125003659" name="Serusia's Helm" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Weapon" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231003" name="Queen Serusia" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001569" name="Serusia's Sword" />
-			<gd_item id="101301148" name="Serusia's Polearm" />
-			<gd_item id="101901001" name="Serusia's Aethercannon" />
-			<gd_item id="102001074" name="Serusia's Harp" />
-		</gd_items>
-	</gd_rule>
-	<!-- Kamara -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231196" name="Roaring Kamara" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231196" name="Roaring Kamara" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001570" name="Kamara's Sword" />
-			<gd_item id="101301149" name="Kamara's Polearm" />
-			<gd_item id="101901002" name="Kamara's Aethercannon" />
-			<gd_item id="102001075" name="Kamara's Harp" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Armor" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231196" name="Roaring Kamara" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114101541" name="Kamara's Shoes" />
-			<gd_item id="114301671" name="Kamara's Boots" />
-			<gd_item id="114501483" name="Kamara's Brogans" />
-			<gd_item id="114601428" name="Kamara's Sabatons" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Head" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231196" name="Roaring Kamara" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125003652" name="Kamara's Headband" />
-			<gd_item id="125003654" name="Kamara's Hat" />
-			<gd_item id="125003656" name="Kamara's Chain Hood" />
-			<gd_item id="125003658" name="Kamara's Helm" />
-		</gd_items>
-	</gd_rule>
-	<!-- Penemon -->
-	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231001" name="Executioner Penemon" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231001" name="Executioner Penemon" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110101657" name="Penemon's Tunic" />
-			<gd_item id="110301666" name="Penemon's Jerkin" />
-			<gd_item id="110501504" name="Penemon's Hauberk" />
-			<gd_item id="110601478" name="Penemon's Breastplate" />
-			<gd_item id="111101495" name="Penemon's Gloves" />
-			<gd_item id="111301606" name="Penemon's Vambrace" />
-			<gd_item id="111501459" name="Penemon's Handguards" />
-			<gd_item id="111601441" name="Penemon's Gauntlets" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231001" name="Executioner Penemon" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001645" name="Penemon's Magic Shield" />
-			<gd_item id="115001647" name="Enraged Penemon's Magic Shield" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Shield" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231001" name="Executioner Penemon" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001644" name="Penemon's Shield" />
-			<gd_item id="115001646" name="Enraged Penemon's Shield" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Unique Weapon" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231001" name="Executioner Penemon" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125003652" name="Penemon's Headband" />
-			<gd_item id="125003654" name="Penemon's Hat" />
-			<gd_item id="125003656" name="Penemon's Chain Hood" />
-			<gd_item id="125003658" name="Penemon's Helm" />
-		</gd_items>
-	</gd_rule>
 	<!-- Animas -->
 	<gd_rule rule_name="Vengeful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="IDE_MINE_ALPHA_600070000" />
-			<gd_zone zone="IDE_MINE_ALPHA_1_600070000" />
+			<gd_zone zone="IDE_MINE_ALPHA_220100000" />
+			<gd_zone zone="IDE_MINE_ALPHA_1_220100000" />
+			<gd_zone zone="IDE_MINE_ALPHA_2_210090000" />
+			<gd_zone zone="IDE_MINE_ALPHA_3_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -366,13 +24,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Hopeless Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="IDE_MINE_BETA_600070000" />
-			<gd_zone zone="IDE_MINE_BETA_1_600070000" />
-			<gd_zone zone="IDE_MINE_BETA_2_600070000" />
-			<gd_zone zone="IDE_MINE_BETA_3_600070000" />
+			<gd_zone zone="IDE_MINE_BETA_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_1_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_2_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_3_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_4_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_5_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_6_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_7_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -386,11 +49,14 @@
 	</gd_rule>
 	<gd_rule rule_name="Zealous Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="IDE_MINE_GAMMA_600070000" />
-			<gd_zone zone="IDE_MINE_GAMMA_1_600070000" />
+			<gd_zone zone="IDE_MINE_GAMMA_220100000" />
+			<gd_zone zone="IDE_MINE_GAMMA_1_220100000" />
+			<gd_zone zone="IDE_MINE_GAMMA_2_210090000" />
+			<gd_zone zone="IDE_MINE_GAMMA_3_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -404,10 +70,12 @@
 	</gd_rule>
 	<gd_rule rule_name="Ambitious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="IDIUM_REACTOR_COMPLEX_600070000" />
+			<gd_zone zone="IDIUM_REACTOR_COMPLEX_220100000" />
+			<gd_zone zone="IDIUM_REACTOR_COMPLEX_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -421,11 +89,14 @@
 	</gd_rule>
 	<gd_rule rule_name="Remorseful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="TOWER_APPROACH_600070000" />
-			<gd_zone zone="DANUAR_PROCESSIONAL_600070000" />
+			<gd_zone zone="TOWER_APPROACH_220100000" />
+			<gd_zone zone="TOWER_APPROACH_1_210090000" />
+			<gd_zone zone="DANUAR_PROCESSIONAL_220100000" />
+			<gd_zone zone="DANUAR_PROCESSIONAL_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -439,10 +110,12 @@
 	</gd_rule>
 	<gd_rule rule_name="Avaricious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="GRAND_PASSAGE_600070000" />
+			<gd_zone zone="GRAND_PASSAGE_220100000" />
+			<gd_zone zone="GRAND_PASSAGE_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -456,11 +129,14 @@
 	</gd_rule>
 	<gd_rule rule_name="Desperate Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="BERITRAS_FIST_GARRISON_600070000" />
-			<gd_zone zone="CLAWED_FIST_GARRISON_600070000" />
+			<gd_zone zone="BERITRAS_FIST_GARRISON_220100000" />
+			<gd_zone zone="BERITRAS_FIST_GARRISON_1_210090000" />
+			<gd_zone zone="CLAWED_FIST_GARRISON_220100000" />
+			<gd_zone zone="CLAWED_FIST_GARRISON_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -474,11 +150,14 @@
 	</gd_rule>
 	<gd_rule rule_name="Deluded Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="FIRST_CANAL_600070000" />
-			<gd_zone zone="SECOND_CANAL_600070000" />
+			<gd_zone zone="FIRST_CANAL_220100000" />
+			<gd_zone zone="FIRST_CANAL_1_210090000" />
+			<gd_zone zone="SECOND_CANAL_220100000" />
+			<gd_zone zone="SECOND_CANAL_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -492,12 +171,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Wrathful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="TOWER_ENTRYWAY_600070000" />
-			<gd_zone zone="TOWER_MAUSOLEUM_600070000" />
-			<gd_zone zone="DANUAR_MAUSOLEUM_600070000" />
+			<gd_zone zone="TOWER_ENTRYWAY_220100000" />
+			<gd_zone zone="TOWER_ENTRYWAY_1_210090000" />
+			<gd_zone zone="TOWER_MAUSOLEUM_220100000" />
+			<gd_zone zone="TOWER_MAUSOLEUM_1_210090000" />
+			<gd_zone zone="DANUAR_MAUSOLEUM_220100000" />
+			<gd_zone zone="DANUAR_MAUSOLEUM_1_210090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -512,7 +195,8 @@
 	<!-- Ancient Coins -->
 	<gd_rule rule_name="Ancient Coins" min_count="1" max_count="3" base_chance="3" min_diff="-5" max_diff="5" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -528,7 +212,8 @@
 	<!-- Superior Power Shards -->
 	<gd_rule rule_name="Superior Power Shards (Stack)" min_count="200" max_count="400" base_chance="0.5" min_diff="-5" max_diff="5">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -542,7 +227,8 @@
 	<!-- Ancient Manastones -->
 	<gd_rule rule_name="Ancient Manastones (Rare)" base_chance="4" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -571,7 +257,8 @@
 	</gd_rule>
 	<gd_rule rule_name="Ancient Manastones (Legend)" base_chance="2" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -602,7 +289,8 @@
 	</gd_rule>
 	<gd_rule rule_name="Ancient Manastones (Unique)" base_chance="1" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />

@@ -880,17 +880,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -2149,17 +2144,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -3133,17 +3123,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -3694,17 +3679,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -3752,17 +3732,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -5039,17 +5014,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -6803,17 +6773,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -8355,17 +8320,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -9234,17 +9194,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -9304,17 +9259,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -9604,17 +9554,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -9958,17 +9903,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -10264,17 +10204,12 @@
 			<gd_world wd_type="ABYSS" />
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_SARPAN" />
-			<gd_world wd_type="SARPAN_INSTANCE" />
-			<gd_world wd_type="TIAMARANTA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
-			<gd_world wd_type="KATALAM" />
-			<gd_world wd_type="IDIAN_DEPTH" />
-			<gd_world wd_type="KATALAM_INSTANCE" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
 			<gd_world wd_type="BATTLEFIELD_INSTANCE" />
-			<gd_world wd_type="STEEL_ROSE_INSTANCE" />
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>

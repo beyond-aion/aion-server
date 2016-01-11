@@ -80,8 +80,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210060000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152203533" name="Design: [Type B] Greater Running Scroll"/>
@@ -94,8 +93,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152208535" name="Design: [Type B] Greater Running Scroll"/>
@@ -181,8 +179,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210060000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152203531" name="Design: [Type B] Greater Courage Scroll"/>
@@ -195,8 +192,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152208533" name="Design: [Type B] Greater Courage Scroll"/>
@@ -282,8 +278,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210060000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152203532" name="Design: [Type B] Greater Awakening Scroll"/>
@@ -296,8 +291,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152203531" name="Design: [Type B] Greater Awakening Scroll"/>
@@ -383,8 +377,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210060000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152203534" name="Design: [Type B] Greater Raging Wind Scroll"/>
@@ -397,8 +390,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152208536" name="Design: [Type B] Greater Raging Wind Scroll"/>
@@ -1030,8 +1022,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210050000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152202179" name="Recipe: Beshu Cocktail"/>
@@ -1051,8 +1042,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="210050000" name="Inggison"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="210070000" name="Cygnea"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152202187" name="Recipe: Anevra Aether Cream Pasta"/>
@@ -1072,8 +1062,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207181" name="Recipe: Drupa Cocktail"/>
@@ -1093,8 +1082,7 @@
 		</gd_ratings>
 		<gd_maps>
 			<gd_map map_id="220070000" name="Gelkmaros"/>
-			<gd_map map_id="600020000" name="Sarpan"/>
-			<gd_map map_id="600030000" name="Tiamaranta"/>
+			<gd_map map_id="220080000" name="Enshar"/>
 		</gd_maps>
 		<gd_items>
 			<gd_item id="152207189" name="Recipe: Gorocle Aether Cream Pasta"/>

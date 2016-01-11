@@ -22,18 +22,10 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
-			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
-			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_AGRINT_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -230,18 +222,11 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
-			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_BONEDRAKE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1269,18 +1254,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_DRAKE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1385,18 +1364,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_ELEMENTALAIR_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1448,18 +1421,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_ELEMENTALEARTH_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1511,18 +1478,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_ELEMENTALFIRE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1574,18 +1535,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_ELEMENTALWATER_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1652,18 +1607,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_EVILEYE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -1802,18 +1751,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_FLYINGEYE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2009,18 +1952,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_FUNGY_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2083,18 +2020,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_GARGOYLE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2176,18 +2107,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_GIANTDEER_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2288,18 +2213,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_GRAVEKNIGHT_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2704,18 +2623,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_LUPYLLINI_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2778,18 +2691,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_MAIDENGOLEM_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -2985,18 +2892,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_MILLIPEDE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3250,18 +3151,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_NEUTH_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3307,18 +3202,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_NEUTL_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3458,18 +3347,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_PRETOR_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3551,18 +3434,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_ROTTENTREE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3663,18 +3540,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_SAM_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3775,18 +3646,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_SHADOWSTALKER_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3925,18 +3790,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_SKELETON_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -3999,18 +3858,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_SOULEDSTONE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4149,18 +4002,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_SPECTRE_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4337,18 +4184,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_TAURIC_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4468,18 +4309,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_TRICO_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4523,18 +4358,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_TRICORN_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4639,18 +4468,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_UNDEADDARK_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -4703,18 +4526,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_UNDEADLIGHT_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -5010,18 +4827,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_WATERWORM_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -5065,18 +4876,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_WORM_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
@@ -5120,18 +4925,12 @@
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
-			<gd_world wd_type="BALAUREA_INSTANCE"/>
-			<gd_world wd_type="BATTLEFIELD_INSTANCE"/>
-			<gd_world wd_type="DREDGION_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
-			<gd_world wd_type="KATALAM"/>
-			<gd_world wd_type="KATALAM_INSTANCE"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
-			<gd_world wd_type="SARPAN_INSTANCE"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
-			<gd_world wd_type="STEEL_ROSE_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_INSTANCE"/>
-			<gd_world wd_type="TIAMARANTA_SARPAN"/>
 		</gd_worlds>
 	</gd_rule>
 	<gd_rule rule_name="JUNK_A_XIPETO_MATERIAL" min_count="1" base_chance="40" min_diff="-4" max_diff="5">
