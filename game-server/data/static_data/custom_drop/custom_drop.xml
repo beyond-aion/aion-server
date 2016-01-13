@@ -186,6 +186,28 @@
 			<drop item_id="182006982" name="Flower's Essence" min_amount="1" max_amount="1" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Theobomos -->
+	<npc_drop npc_id="213919" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="111100664" name="Theobomos Gloves" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111300666" name="Theobomos Vambrace" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111500653" name="Theobomos Handguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="111600645" name="Theobomos Gauntlets" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="213921" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<drop item_id="112100623" name="Theobomos Pauldrons" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112300623" name="Theobomos Shoulderguards" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112500611" name="Theobomos Spaulders" min_amount="1" max_amount="1" chance="30"/>
+			<drop item_id="112600619" name="Theobomos Shoulderplates" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="214627" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Shield (Rare)">
+			<drop item_id="115000825" name="Shipwreck Shield" min_amount="1" max_amount="1" chance="30"/>
+		</drop_group>
+	</npc_drop>
 	<!-- Instances -->
 	<!-- Abyssal Splinter -->
 	<!-- 701574 >> Unstable Abyssal Splinter -->
