@@ -7,7 +7,6 @@ import static ch.lambdaj.collection.LambdaCollections.with;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
@@ -15,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import javolution.util.FastMap;
@@ -190,10 +190,14 @@ public class ItemGroupsData {
 	@XmlElement(name = "feed_aether_cherry")
 	protected AetherCherryGroup aetherCherries;
 
-	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
-	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftShopBySkill = new FastMap<>();
-	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
-	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
+	@XmlTransient
+	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
+	@XmlTransient
+	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftShopBySkill = new FastMap<>();
+	@XmlTransient
+	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
+	@XmlTransient
+	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
 
 	BonusItemGroup[] craftGroups;
 	BonusItemGroup[] manastoneGroups;
@@ -205,7 +209,7 @@ public class ItemGroupsData {
 	BonusItemGroup[] enchantGroups;
 	BonusItemGroup[] bossGroups;
 
-	Map<FoodType, Set<Integer>> petFood = new FastMap<>();
+	FastMap<FoodType, Set<Integer>> petFood = new FastMap<>();
 
 	private int count = 0;
 	private int petFoodCount = 0;
@@ -266,8 +270,8 @@ public class ItemGroupsData {
 		}
 	}
 
-	void MapCraftReward(Map<Integer, Map<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
-		Map<Range<Integer>, List<CraftReward>> ranges;
+	void MapCraftReward(FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
+		FastMap<Range<Integer>, List<CraftReward>> ranges;
 		int lowerBound = 0, upperBound = 0;
 
 		if (reward instanceof CraftRecipe) {

@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
+import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import org.apache.commons.lang3.Range;
@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.templates.rewards.CraftReward;
  */
 public abstract class CraftGroup extends BonusItemGroup {
 
-	private Map<Integer, Map<Range<Integer>, List<CraftReward>>> dataHolder;
+	private FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder;
 
 	public ItemRaceEntry[] getRewards(Integer skillId) {
 		if (!dataHolder.containsKey(skillId))
@@ -41,15 +41,15 @@ public abstract class CraftGroup extends BonusItemGroup {
 	/**
 	 * @return the dataHolder
 	 */
-	public Map<Integer, Map<Range<Integer>, List<CraftReward>>> getDataHolder() {
+	public FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> getDataHolder() {
 		return dataHolder;
 	}
 
 	/**
-	 * @param dataHolder
+	 * @param craftShopBySkill
 	 *          the dataHolder to set
 	 */
-	public void setDataHolder(Map<Integer, Map<Range<Integer>, List<CraftReward>>> dataHolder) {
-		this.dataHolder = dataHolder;
+	public void setDataHolder(FastMap<Integer,FastMap<Range<Integer>, List<CraftReward>>> craftShopBySkill) {
+		this.dataHolder = craftShopBySkill;
 	}
 }

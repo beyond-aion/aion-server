@@ -524,7 +524,7 @@
 			<xs:enumeration value="CH_TORSO"/>
 			<xs:enumeration value="CH_PANTS"/>
 			<xs:enumeration value="CH_SHOULDER"/>
-			<xs:enumeration value="CH_GLOVES"/>
+			<xs:enumeration value="CH_GLOVE"/>
 			<xs:enumeration value="CH_SHOES"/>
 			<xs:enumeration value="PL_TORSO"/>
 			<xs:enumeration value="PL_PANTS"/>

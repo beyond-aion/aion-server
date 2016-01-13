@@ -16,9 +16,6 @@
 		<xs:attribute type="ListTribeClass" name="npc_tribes" use="optional" />
 		<xs:attribute type="ListAbyssType" name="npc_abyss_types" use="optional" />
   </xs:complexType>
-	<xs:simpleType name="StringListType">
-		<xs:list itemType="xs:string"/>
-	</xs:simpleType>
 	<xs:simpleType name="ListNpcTemplateType">
 		<xs:list itemType="NpcTemplateType"/>
 	</xs:simpleType>

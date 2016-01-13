@@ -23,7 +23,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 		</gd_worlds>
@@ -223,7 +223,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="STEEL_RAKE_INSTANCE"/>
@@ -1255,7 +1255,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1365,7 +1365,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1422,7 +1422,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1479,7 +1479,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1536,7 +1536,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1608,7 +1608,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1752,7 +1752,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -1953,7 +1953,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2021,7 +2021,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2108,7 +2108,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2214,7 +2214,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2624,7 +2624,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2692,7 +2692,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -2893,7 +2893,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3152,7 +3152,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3203,7 +3203,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3348,7 +3348,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3435,7 +3435,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3541,7 +3541,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3647,7 +3647,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3791,7 +3791,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -3859,7 +3859,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4003,7 +4003,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4185,7 +4185,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4310,7 +4310,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4359,7 +4359,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4469,7 +4469,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4527,7 +4527,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4828,7 +4828,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4877,7 +4877,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>
@@ -4926,7 +4926,7 @@
 			<gd_world wd_type="ASMODAE"/>
 			<gd_world wd_type="BALAUREA"/>
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="ELYSEA"/>
 			<gd_world wd_type="OTHER_INSTANCES"/>

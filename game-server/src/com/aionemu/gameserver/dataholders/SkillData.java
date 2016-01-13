@@ -33,7 +33,7 @@ public class SkillData {
 	 */
 	@XmlTransient
 	private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
-	
+
 	@XmlTransient
 	private Map<String, List<SkillTemplate>> skillTemplatesByGroups = new FastMap<>();
 
@@ -54,10 +54,12 @@ public class SkillData {
 			if (!cooldownGroups.containsKey(cooldownId))
 				cooldownGroups.put(cooldownId, new FastTable<>());
 			cooldownGroups.get(cooldownId).add(skillId);
-			
-			if(skillTemplate.getGroup() != null)
-				if(!skillTemplatesByGroups.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByGroups.put(skillTemplate.getGroup(), new FastTable<>()).add(skillTemplate);
+
+			if (skillTemplate.getGroup() != null) {
+				if (!skillTemplatesByGroups.containsKey(skillTemplate.getGroup()))
+					skillTemplatesByGroups.put(skillTemplate.getGroup(), new FastTable<>());
+				skillTemplatesByGroups.get(skillTemplate.getGroup()).add(skillTemplate);
+			}
 		}
 	}
 
@@ -68,10 +70,10 @@ public class SkillData {
 	public SkillTemplate getSkillTemplate(int skillId) {
 		return skillData.get(skillId);
 	}
-	
+
 	public List<SkillTemplate> getSkillTemplate(String skillGroup) {
 		List<SkillTemplate> skills = skillTemplatesByGroups.get(skillGroup);
-		if(skills != null)
+		if (skills != null)
 			return skills;
 		return new FastTable<>();
 	}

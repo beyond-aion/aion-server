@@ -658,7 +658,7 @@
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_wordl wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 		</gd_worlds>
 		<gd_items>
