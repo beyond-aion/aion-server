@@ -2080,6 +2080,7 @@
 				<quest_req quest_id="20001"/>
 			</portal_req>
 		</portal_path>
+	</portal_dialog>
 	<!-- END AEROLINK -->
 	
 	<!-- GATES IN INGGISON/GELKMAROS -->

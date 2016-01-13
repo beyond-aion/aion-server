@@ -319,7 +319,6 @@
 			<spot x="2633.9412" y="1030.2489" z="314.20377" h="43"/>
 			<spot x="2665.8955" y="1108.6382" z="301.0569" h="90"/>
 		</spawn>
-		<!-- Blackpaw 
 		<!-- Blackpaw Karnif -->
 		<spawn npc_id="210423" respawn_time="295">
 			<spot x="1393.2" y="1398.54" z="282.751" h="42" random_walk="8"/>
