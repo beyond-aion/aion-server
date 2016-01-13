@@ -39,6 +39,10 @@ public class NpcStatsTemplate extends StatsTemplate {
 	public int getMagicalAttack() {
 		return matk;
 	}
+	
+	public void setMagicalAttack(int matk) {
+		this.matk = matk;
+	}
 
 	/**
 	 * @return the maxXp

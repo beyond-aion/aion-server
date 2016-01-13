@@ -76,10 +76,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getPCR() {
-		int value = owner.getObjectTemplate().getStatsTemplate().getStrikeResist();
-		if (value == 0)
-			value = getStrikeResist();
-		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, value);
+		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getStrikeResist());
 	}
 
 	@Override
@@ -142,25 +139,12 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMResist() {
-		int mres = owner.getObjectTemplate().getStatsTemplate().getMresist();
-		int level = owner.getLevel();
-		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
-			if (level < 25)
-				mres *= 0.7f;
-			else if (level >= 25 && level < 50)
-				mres *= 0.8f;
-			else
-				mres *= 0.9f;
-		}
-		return getStat(StatEnum.MAGICAL_RESIST, mres);
+		return getStat(StatEnum.MAGICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getMresist());
 	}
 
 	@Override
 	public Stat2 getMBResist() {
-		int msup = owner.getObjectTemplate().getStatsTemplate().getMsup();
-		if (msup == 0)
-			msup = getMsup();
-		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, msup);
+		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, owner.getObjectTemplate().getStatsTemplate().getMsup());
 	}
 
 	@Override
@@ -200,10 +184,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getParry() {
-		int value = owner.getObjectTemplate().getStatsTemplate().getParry();
-		if (value == 0)
-			value = getParryAmount();
-		return getStat(StatEnum.PARRY, value);
+		return getStat(StatEnum.PARRY, owner.getObjectTemplate().getStatsTemplate().getParry());
 	}
 
 	@Override
@@ -230,8 +211,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, getMainHandAccuracy()); //FIXME: Recalculate template values
-		//return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getMainHandAccuracy());
+		return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getAccuracy());
 	}
 
 	@Override
@@ -247,7 +227,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMAccuracy() {
-		int base = owner.getAi2().modifyMaccuracy(Math.round(owner.getObjectTemplate().getStatsTemplate().getMacc() * 0.8f));
+		int base = owner.getAi2().modifyMaccuracy(owner.getObjectTemplate().getStatsTemplate().getMacc());
 		return getStat(StatEnum.MAGICAL_ACCURACY, base);
 	}
 
@@ -392,169 +372,4 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public void setLastGeoZUpdate(long lastGeoZUpdate) {
 		this.lastGeoZUpdate = lastGeoZUpdate;
 	}
-
-//TODO: Remove this after transfering into npc_templates
-	private int getMainHandAccuracy() {		
-		return Math.round(owner.getLevel() * 40 * getRatingModifier(Stat.MAIN_HAND_ACCURACY) * getRankModifier(Stat.MAIN_HAND_ACCURACY));
-	}
-	
-	private int getParryAmount() {
-		return Math.round(owner.getLevel() * 40 * getRatingModifier(Stat.PARRY) * getRankModifier(Stat.PARRY));
-	}
-	
-	private int getMsup() {
-		if (owner.getLevel() < 60)
-			return 0;
-		
-		return Math.round(owner.getLevel() * 3 * getRatingModifier(Stat.MSUP) * getRankModifier(Stat.MSUP));
-	}
-	
-	private int getStrikeResist() {
-		if (owner.getLevel() < 60)
-			return 0;
-		
-		return Math.round(owner.getLevel() * 2.2f * getRatingModifier(Stat.STRIKE_RESIST) * getRankModifier(Stat.STRIKE_RESIST));
-	}
-	
-	private float getRankModifier(Stat stat) {
-		switch (owner.getRank()) {
-			case NOVICE:
-				switch(stat) {
-					case PARRY:
-					case MAIN_HAND_ACCURACY:
-					case MSUP:
-					case STRIKE_RESIST:		
-						return 1.0f;
-				}
-				break;
-			case DISCIPLINED:
-				switch(stat) {
-					case PARRY:
-						return 1.05f;
-					case MAIN_HAND_ACCURACY:
-						return 1.01f;
-					case MSUP:
-					case STRIKE_RESIST:
-						return 1.5f;
-				}
-				break;
-			case SEASONED:
-				switch(stat) {
-					case PARRY:
-						return 1.1f;
-					case MAIN_HAND_ACCURACY:
-						return 1.02f;
-					case MSUP:
-					case STRIKE_RESIST:
-						return 2.0f;
-				}
-				break;
-			case EXPERT:
-				switch(stat) {
-					case PARRY:
-						return 1.1f;
-					case MAIN_HAND_ACCURACY:
-						return 1.03f;
-					case MSUP:
-						return 2.5f;
-					case STRIKE_RESIST:
-						return 2.4f;
-				}
-				break;
-			case VETERAN:
-				switch(stat) {
-					case PARRY:
-						return 1.12f;
-					case MAIN_HAND_ACCURACY:
-						return 1.04f;
-					case MSUP:
-						return 3.0f;
-					case STRIKE_RESIST:
-						return 2.5f;
-				}
-				break;
-			case MASTER:
-				switch(stat) {
-					case PARRY:
-						return 1.12f;
-					case MAIN_HAND_ACCURACY:
-						return 1.05f;
-					case MSUP:
-						return 3.0f;
-					case STRIKE_RESIST:
-						return 2.6f;
-				}
-				break;
-		}		
-		return 0;
-	}
-	
-	private float getRatingModifier(Stat stat) {
-		switch (owner.getRating()) {
-			case JUNK:
-				switch(stat) {
-					case PARRY:
-					case MAIN_HAND_ACCURACY:
-						return 1.0f;
-					case MSUP:
-					case STRIKE_RESIST:
-						return 0;
-				}
-				break;
-			case NORMAL:
-				switch(stat) {
-					case MAIN_HAND_ACCURACY:
-						return 1.025f;
-					case PARRY:					
-					case MSUP:
-					case STRIKE_RESIST:		
-						return 1.0f;
-				}
-				break;
-			case ELITE:
-				switch(stat) {
-					case PARRY:
-						return 1.025f;
-					case MAIN_HAND_ACCURACY:
-						return 1.05f;
-					case MSUP:
-						return 1.5f;
-					case STRIKE_RESIST:	
-						return 1.5f;
-				}
-				break;
-			case HERO:
-				switch(stat) {
-					case PARRY:
-						return 1.08f;
-					case MAIN_HAND_ACCURACY:
-						return 1.075f;
-					case MSUP:
-						return 2.0f;
-					case STRIKE_RESIST:	
-						return 1.75f;
-				}
-				break;
-			case LEGENDARY:
-				switch(stat) {
-					case PARRY:
-						return 1.1f;
-					case MAIN_HAND_ACCURACY:
-						return 1.1f;
-					case MSUP:
-						return 2.5f;
-					case STRIKE_RESIST:	
-						return 2.1f;
-				}
-				break;
-		}		
-		return 0;
-	}
-}
-
-enum Stat {
-	PARRY,
-	MAIN_HAND_ACCURACY,
-	MSUP,
-	STRIKE_RESIST;
 }

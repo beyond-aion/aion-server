@@ -22,6 +22,10 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.calc.NpcStatCalculation;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.templates.npc.NpcRank;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -44,7 +48,7 @@ public class NpcData extends ReloadableData {
 	private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<NpcTemplate>();
 
 	@XmlTransient
-	private HashSet<TribeClass> unusedTribes = new HashSet<TribeClass>();
+	private HashSet<TribeClass> unusedTribes = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		unusedTribes.addAll(Arrays.asList(TribeClass.values()));
@@ -55,11 +59,29 @@ public class NpcData extends ReloadableData {
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogId : npc.getFuncDialogIds()) {
 					DialogAction dialogAction = DialogAction.getActionByDialogId(dialogId);
-					if (dialogAction == null) {
+					if (dialogAction == null)
 						log.warn("Missing dialog action " + dialogId + " for Npc " + npc.getTemplateId());
-					}
 				}
 			}
+			NpcRating rating = npc.getRating();
+			NpcRank rank = npc.getRank();
+			int level = npc.getLevel();
+			if (npc.getStatsTemplate().getAttack() == 0)
+				npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
+			if (npc.getStatsTemplate().getAccuracy() == 0)
+				npc.getStatsTemplate().setAccuracy(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ACCURACY, rating, rank, level));
+			if (npc.getStatsTemplate().getMagicalAttack() == 0)
+				npc.getStatsTemplate().setMagicalAttack(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ATTACK, rating, rank, level));
+			if (npc.getStatsTemplate().getMacc() == 0)
+				npc.getStatsTemplate().setMacc(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ACCURACY, rating, rank, level));
+			if (npc.getStatsTemplate().getMresist() == 0)
+				npc.getStatsTemplate().setMresist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_RESIST, rating, rank, level));
+			if (npc.getStatsTemplate().getPdef() == 0)
+				npc.getStatsTemplate().setPdef(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_DEFENSE, rating, rank, level));
+			if (npc.getStatsTemplate().getParry() == 0)
+				npc.getStatsTemplate().setParry(NpcStatCalculation.calculateStat(StatEnum.PARRY, rating, rank, level));
+			if (level >= 60 && npc.getStatsTemplate().getStrikeResist() == 0)
+				npc.getStatsTemplate().setStrikeResist(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_CRITICAL_RESIST, rating, rank, level));
 		}
 		npcs.clear();
 		npcs = null;

@@ -131,6 +131,10 @@ public abstract class StatsTemplate {
 		return pdef;
 	}
 	
+	public void setPdef(int pdef) {
+		this.pdef = pdef;
+	}
+	
 	public int getMdef() {
 		return mdef;
 	}
@@ -139,12 +143,20 @@ public abstract class StatsTemplate {
 		return mresist;
 	}
 	
+	public void setMresist(int mresist) {
+		this.mresist = mresist;
+	}
+	
 	public int getMsup() {
 		return msup;
 	}
 
 	public int getStrikeResist() {
 		return strikeResist;
+	}
+	
+	public void setStrikeResist(int strikeResist) {
+		this.strikeResist = strikeResist;
 	}
 	
 	public int getSpellResist() {
@@ -156,9 +168,17 @@ public abstract class StatsTemplate {
 	public int getAttack() {
 		return attack;
 	}
+	
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
 
 	public int getAccuracy() {
 		return accuracy;
+	}
+	
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
 	}
 	
 	public int getPcrit() {
@@ -173,6 +193,10 @@ public abstract class StatsTemplate {
 	
 	public int getMacc() {
 		return macc;
+	}
+	
+	public void setMacc(int macc) {
+		this.macc = macc;
 	}
 	
 	public int getMagicBoost() {
