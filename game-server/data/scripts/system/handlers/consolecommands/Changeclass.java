@@ -1,7 +1,6 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -52,14 +51,7 @@ public class Changeclass extends ConsoleCommand {
 			return;
 		}
 
-		player.getCommonData().setPlayerClass(playerClass);
-		if (!playerClass.isStartingClass()) {
-			ClassChangeService.completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
-			player.getCommonData().updateDaeva();
-		} else {
-			player.getCommonData().setDaeva(false);
-		}
-		player.getController().upgradePlayer();
-		sendInfo(admin, "You have successfully changed " + player.getName() + "'s class to " + playerClass.toString().toLowerCase() +  ".");
+		ClassChangeService.setClass(player, playerClass, false, true);
+		sendInfo(admin, "You have changed " + player.getName() + "'s class to " + playerClass.toString().toLowerCase() +  ".");
 	}
 }
