@@ -9,6 +9,7 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -88,10 +89,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public long getExp() {
 		return this.exp;
-	}
-
-	public void setExpValue(long exp) {
-		this.exp = exp;
 	}
 
 	public int getQuestExpands() {
@@ -342,59 +339,52 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	/**
-	 * sets the exp value
+	 * sets the exp and level value
 	 * 
 	 * @param exp
 	 */
 	public void setExp(long exp) {
 		Player player = getPlayer();
 
-		if (exp != this.exp) {
-			// maxLevel is 66 but in game 65 should be shown with full XP bar
-			int maxLevel = isDaeva ? DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() : 10;
-			long maxExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(maxLevel);
+		if (exp != this.exp || exp == 0 && level == 0) {
+			PlayerExperienceTable pxt = DataManager.PLAYER_EXPERIENCE_TABLE;
+			int maxLevel = isDaeva || !online && (updateDaeva() || exp > pxt.getStartExpForLevel(10)) ? pxt.getMaxLevel() : 10;
+			long maxExp = pxt.getStartExpForLevel(maxLevel);
 
-			if (exp > maxExp)
+			if (exp >= maxExp)
 				exp = maxExp;
 
-			int oldLvl = this.level;
 			this.exp = exp;
-			// make sure level is never larger than maxLevel-1
-			boolean up = false;
-			while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
-				|| (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
-				if (up)
-					this.level++;
-				else
-					this.level--;
-
-				if (player != null) {
-					// Guides Html on level up
+			int oldLevel = level;
+			// maxLevel is 66 (10 for non daeva) but 65 (9 for non daeva) should be shown with full XP bar
+			int newLevel = Math.min(pxt.getLevelForExp(this.exp), maxLevel - 1);
+			if (player == null || newLevel <= oldLevel) {
+				level = newLevel;
+			} else {
+				while (level < newLevel) { // increment in 1 level steps for skill learning
+					level++;
 					if (HTMLConfig.ENABLE_GUIDES)
 						HTMLService.sendGuideHtml(player);
-					// add new skills
 					SkillLearnService.addNewSkills(player);
 				}
 			}
 
-			if (player != null) {
-				if (up && GSConfig.ENABLE_RATIO_LIMITATION) {
-					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+			if (player != null && oldLevel != level) {
+				if (GSConfig.ENABLE_RATIO_LIMITATION
+					&& (player.getPlayerAccount().getNumberOf(race) == 1 || player.getPlayerAccount().getMaxPlayerLevel() == level)) {
+					if (oldLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL && level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL)
 						GameServer.updateRatio(getRace(), 1);
-
-					if (this.level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && player.getPlayerAccount().getNumberOf(getRace()) == 1)
+					else if (oldLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && level < GSConfig.RATIO_MIN_REQUIRED_LEVEL)
 						GameServer.updateRatio(getRace(), -1);
 				}
-				if (oldLvl != level) {
-					updateMaxRepose();
-					resetSalvationPoints();
-					player.getNpcFactions().onLevelUp();
-					player.getController().upgradePlayer();
-					PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
+				updateMaxRepose();
+				resetSalvationPoints();
+				player.getNpcFactions().onLevelUp();
+				player.getController().upgradePlayer();
+				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
 
-					BonusPackService.getInstance().addPlayerCustomReward(player);
-					FactionPackService.getInstance().addPlayerCustomReward(player);
-				}
+				BonusPackService.getInstance().addPlayerCustomReward(player);
+				FactionPackService.getInstance().addPlayerCustomReward(player);
 			}
 		}
 
@@ -492,10 +482,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public int getLevel() {
 		return level;
-	}
-
-	public void setLevelValue(int level) {
-		this.level = level;
 	}
 
 	/**
