@@ -232,7 +232,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			reward += repose + salvation;
 		}
 
-		this.setExp(this.exp + reward);
+		long oldExp = exp;
+		setExp(exp + reward);
+		if (exp == oldExp)
+			reward = repose = salvation = 0; // don't re-add used EoR and EoS since it boosts drop rates
 		if (player != null) {
 			if (rewardType != null) {
 				switch (rewardType) {
