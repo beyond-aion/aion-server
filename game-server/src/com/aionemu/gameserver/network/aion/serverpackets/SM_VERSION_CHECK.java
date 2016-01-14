@@ -93,7 +93,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeD(0);// 4.0
 		writeD(0);// 4.5
 		writeD(68536);// 4.5
-		writeC(0);// 4.7
+		//writeC(0);// 4.7
 		writeC(0);// 4.7
 		writeC(1);// 4.7
 		writeC(240);//4.8
