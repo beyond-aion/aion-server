@@ -81,8 +81,8 @@ public class AhserionInstance {
 		}
 		PanesterraMatchmakingService.getInstance().prepareTeams();
 		teams = PanesterraMatchmakingService.getInstance().getRegisteredTeams();
-		PanesterraMatchmakingService.getInstance().onStop();
 		if (teams != null && !teams.isEmpty()) {
+			PanesterraMatchmakingService.getInstance().onStop();
 			startInstance();
 		} else {
 			onStop();
@@ -453,12 +453,18 @@ public class AhserionInstance {
 	}
 
 	public void onPlayerLogin(Player player) {
-		if (started && (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING)) {
-			player.setPanesterraTeam(getPlayersTeam(player));
-		} else if (started && status == AhserionInstanceStatus.INSTANCE_FINISHED) {
-			if (winner != null) {
-				if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId())) {
+		if (started){
+			if (status == AhserionInstanceStatus.PREPARING_REGISTRATION) {
+				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player)) {
+					PacketSendUtility.sendWhiteMessageOnCenter(player, "You are currently registered for Ahserions Flight.");
+				}
+			} else if (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING) {
+				player.setPanesterraTeam(getPlayersTeam(player));
+			} else if (status == AhserionInstanceStatus.INSTANCE_FINISHED) {
+				if (winner != null) {
+					if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId())) {
 					player.setPanesterraTeam(winner);
+					}
 				}
 			}
 		}
