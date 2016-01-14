@@ -117,7 +117,7 @@ public class PlayerLeaveWorldService {
 		player.getLifeStats().cancelAllTasks();
 
 		if (player.getLifeStats().isAlreadyDead()) {
-			if (player.isInInstance())
+			if (player.isInInstance() || player.getPanesterraTeam() != null)
 				PlayerReviveService.instanceRevive(player);
 			else
 				PlayerReviveService.bindRevive(player);

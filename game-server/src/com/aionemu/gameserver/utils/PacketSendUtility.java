@@ -279,5 +279,25 @@ public class PacketSendUtility {
 
 		});
 	}
+	
+	/**
+	 * Broadcast filtered Packet to all Players from knownlist of the given VisibleObject
+	 * 
+	 * @param visibleObject
+	 * @param packet
+	 * @param filter
+	 */
+	public static void broadcastFilteredPacket(VisibleObject visibleObject, final AionServerPacket packet,final ObjectFilter<Player> filter ) {
+		visibleObject.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				if (player.isOnline() && filter.acceptObject(player)) {
+					sendPacket(player, packet);
+				}
+			}
+
+		});
+	}
 
 }

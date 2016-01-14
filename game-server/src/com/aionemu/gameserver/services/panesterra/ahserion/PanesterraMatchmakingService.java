@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
@@ -13,6 +14,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
@@ -30,6 +33,7 @@ public class PanesterraMatchmakingService {
 	private Map<PanesterraTeamId, PanesterraTeam> teams;
 	private AtomicBoolean started = new AtomicBoolean(false);
 	private AtomicBoolean isFinished = new AtomicBoolean(false);
+	private Future<?> notifier;
 	
 	public static PanesterraMatchmakingService getInstance() {
 		return instance;
@@ -48,6 +52,33 @@ public class PanesterraMatchmakingService {
 			}
 			started.set(true);
 			spawnPortals();
+			startNotifier();
+		}
+	}
+	
+	private void startNotifier() {		
+		notifier = ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void run() {
+				for (Integer id : elyos) {
+					Player p = World.getInstance().findPlayer(id);
+					if (p != null) {
+						PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight starts in 30 seconds.");
+					}
+				}
+				for (Integer id : asmodians) {
+					Player p = World.getInstance().findPlayer(id);
+					if (p != null) {
+						PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight starts in 30 seconds.");
+					}
+				}
+			}
+		}, 270000); //4,5min
+	}
+	
+	private void cancelNotifier() {
+		if (notifier != null && !notifier.isCancelled()) {
+			notifier.cancel(true);
 		}
 	}
 	
@@ -61,6 +92,7 @@ public class PanesterraMatchmakingService {
 	public void onStop() {
 		started.set(false);
 		isFinished.set(false);
+		cancelNotifier();
 		asmodians = null;
 		elyos = null;
 		registeredClasses = null;
@@ -93,6 +125,26 @@ public class PanesterraMatchmakingService {
 		return false;
 	}
 	
+	public boolean isPlayerRegistered(Player player) {
+		if (player == null || !started.get() || isFinished.get())
+			return false;
+		switch (player.getRace()) {
+			case ELYOS:
+				if (elyos.contains(player)) {
+					return true;
+				} else {
+					return false;
+				}
+			case ASMODIANS:
+				if (asmodians.contains(player)) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		return false;
+	}
+	
 	public void prepareTeams() {
 		if (started.get() && !isFinished.get()) {
 			isFinished.set(true);
@@ -112,6 +164,7 @@ public class PanesterraMatchmakingService {
 				}
 			}
 		} else {
+			notifyFail();
 			onStop();
 			return;
 		}
@@ -127,6 +180,7 @@ public class PanesterraMatchmakingService {
 				}
 			}
 		} else {
+			notifyFail();
 			onStop();
 			return;
 		}
@@ -147,6 +201,7 @@ public class PanesterraMatchmakingService {
 
 		//set teamType and maximum Players
 		if (asmodians.size() < minPlayers || elyos.size() < minPlayers) {
+			notifyFail();
 			onStop();
 			return;
 		} 
@@ -227,6 +282,7 @@ public class PanesterraMatchmakingService {
 		if (teamType == 1) {
 			while (currentPlayerNumber < maxPlayers) {
 				if (registeredClasses == null || elyos == null || elyos.isEmpty() || asmodians == null || asmodians.isEmpty()) {
+					notifyFail();
 					onStop();
 					return;
 				} else if (registeredClasses.isEmpty()) {
@@ -313,12 +369,14 @@ public class PanesterraMatchmakingService {
 		} else {
 			while (currentPlayerNumber < maxPlayers) {
 				if (registeredClasses == null) {
+					notifyFail();
 					onStop();
 					return;
 				} else if (registeredClasses.isEmpty()) {
 					Player ely = findPlayer(elyos, 0);
 					Player asmo = findPlayer(asmodians, 0);
 					if (ely == null || asmo == null) {
+						notifyFail();
 						onStop();
 						return;
 					}
@@ -397,6 +455,33 @@ public class PanesterraMatchmakingService {
 			player = World.getInstance().findPlayer(objectId);
 		}
 		return player;
+	}
+	
+	public void notifyFail() {
+		for (Integer id : elyos) {
+			Player p = World.getInstance().findPlayer(id);
+			if (p != null) {
+				PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+			}
+		}
+		for (Integer id : asmodians) {
+			Player p = World.getInstance().findPlayer(id);
+			if (p != null) {
+				PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+			}
+		}
+		if (teams != null && !teams.isEmpty()) {
+			for (PanesterraTeam team : teams.values()) {
+				if (team != null && team.getTeamMembers() != null && !team.getTeamMembers().isEmpty()) {
+					for (Integer id : team.getTeamMembers()) {
+						Player p = World.getInstance().findPlayer(id);
+						if (p != null) {
+							PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	public Map<PanesterraTeamId, PanesterraTeam> getRegisteredTeams() {
