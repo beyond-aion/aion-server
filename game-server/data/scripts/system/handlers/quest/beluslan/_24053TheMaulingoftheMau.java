@@ -65,7 +65,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24050, true);
+		return defaultOnLvlUpEvent(env, 24050);
 	}
 
 	@Override
@@ -76,13 +76,12 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204700) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -92,7 +91,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204787) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -111,7 +110,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204795) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -121,7 +120,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204796) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
