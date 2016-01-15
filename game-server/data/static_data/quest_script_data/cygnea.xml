@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+	[BEGIN] SUMMARY
+		10500 [SCRIPT] Expedition Coalition (Campaign)
+		10501 [SCRIPT] Research the Ruins (Campaign)
+		10502 [SCRIPT] Cygnea Secrets (Campaign)
+		10503 [SCRIPT] Guard Down, Secrets Out (Campaign)
+		10504 [SCRIPT] Confiscate the Slate (Campaign)
+		10505 [SCRIPT] Sneeze Attack (Campaign)
+		10506 [SCRIPT] Mind Over Matter (Campaign)
+		10507 [SCRIPT] A Big Plot to Foil (Campaign)
+		15000 [ToDo] Not Any Fool's Tool (Multistep)
+		15001 [XML] Lending Both Hands (Monster Hunt)
+		15002 [XML] Cold Hands, Warm Luciferin (Collect Item)
+		15003 [UNUSED] HOLD
+		15004 [UNUSED] HOLD
+		15005 [UNUSED] HOLD
+		15006 [UNUSED] HOLD
+		15007 [UNUSED] HOLD
+		15008 [UNUSED] HOLD
+		15009 [UNUSED] HOLD
+		15010 [XML] Grabbin' Grub (Collect Item)
+		15011 [XML] Flowers for Bilogea (Collect Item)
+		15012 [XML] Corral the Coral Horns (Collect Item)
+		15013 [UNUSED] Plant Research
+		15014 [UNUSED] Discord Among the Scholars
+		15015 [UNUSED] HOLD
+		15016 [UNUSED] HOLD
+		15017 [UNUSED] HOLD
+		15018 [UNUSED] HOLD
+		15019 [UNUSED] HOLD
+		15020 [XML] La Fin De Black Fin Tribe (Monster Hunt)
+		15021 [XML] Hooch Mooch (Collect Item)
+		15022 [XML] A Reward for the Sword (Collect Item)
+		15023 [UNUSED] An Important Figure of the Yuns (Call of Garnon)
+		15024 [UNUSED] Assisting the Yuns
+		15025 [UNUSED] Akula's Accessory
+		15026 [UNUSED] HOLD
+		15027 [UNUSED] HOLD
+		15028 [UNUSED] HOLD
+		15029 [UNUSED] HOLD
+		15030 [UNUSED] [Group] Area Guide Quest
+		15031 [UNUSED] [Group] Time and Space and Investigation
+		15032 [UNUSED] [Group] Eradicate Group Area Monsters
+		15033 [UNUSED] [Group] Eliminate a Named Monster
+		15034 [UNUSED] [Group] Violent Tyrant Squallo
+		15035 [UNUSED] HOLD
+		15036 [UNUSED] HOLD
+		15037 [UNUSED] HOLD
+		15038 [UNUSED] HOLD
+		15039 [UNUSED] HOLD
+		15040 [UNUSED] Cursed Klaw
+		15041 [XML] Flak from the Brohum (Monster Hunt)
+		15042 [ToDo] Calling Kaisinel's Butterfly
+		15043 [XML] Shiny Spiner Stuff (Collect Item)
+		15044 [XML] Drana Seed Deed (Collect Item)
+		15045 [UNUSED] HOLD
+		15046 [UNUSED] HOLD
+		15047 [UNUSED] HOLD
+		15048 [UNUSED] HOLD
+		15049 [UNUSED] HOLD
+		15050 [XML] Guardians in the Gardens (Monster Hunt)
+		15051 [UNUSED] A Face-Off With Beritra's Watcher Unit
+		15052 [XML] What's in the Box in the Box? (Collect Item)
+		15053 [XML] All the Wondrous Treasures (Collect Item)
+		15054 [UNUSED] I Just Don't Like the Way It Looks
+		15055 [UNUSED] HOLD
+		15056 [UNUSED] HOLD
+		15057 [UNUSED] HOLD
+		15058 [UNUSED] HOLD
+		15059 [UNUSED] HOLD
+		15060 [XML] The Adversity with Averse (Monster Hunt)
+		15061 [UNUSED] Missing Yunish Sisters (Seed of the Black Tree)
+		15062 [XML] Kill the Corasks (Monster Hunt)
+		15063 [UNUSED] HOLD
+		15064 [UNUSED] HOLD
+		15065 [XML] Knock Out the Nagarants (Monster Hunt)
+		15066 [XML] Work Hard for the Shard (Collect Item)
+		15067 [UNUSED] HOLD
+		15068 [UNUSED] HOLD
+		15069 [UNUSED] HOLD
+		15070 [XML] Shelling Out Crystals (Collect Item)
+		15071 [XML] No Notebook for Noep (Collect Item)
+		15072 [XML] Head Remedy (Collect Item)
+		15073 [XML] Perennial Struggles (Monster Hunt)
+		15074 [XML] Sheluk Amuck (Monster Hunt)
+		15075 [UNUSED] HOLD
+		15076 [UNUSED] HOLD
+		15077 [UNUSED] HOLD
+		15078 [UNUSED] HOLD
+		15079 [UNUSED] HOLD
+		15080 [UNUSED] I Area Guide Quest
+		15081 [UNUSED] Eliminate Balaur Followers' Gorgon
+		15082 [UNUSED] Eradicate the Tipolids
+		15083 [UNUSED] [Group] Eliminate Sunayaka
+		15084 [UNUSED] HOLD
+		15085 [UNUSED] HOLD
+		15086 [UNUSED] HOLD
+		15087 [UNUSED] HOLD
+		15088 [UNUSED] HOLD
+		15089 [UNUSED] HOLD
+		15090 [UNUSED] [Group] Lead to the Gap of Coldness
+		15091 [UNUSED] [Group] Chill-Induced Mutants
+		15092 [UNUSED] [Group] Beritra Research Base
+		15093 [UNUSED] [Group] Time and Space and Contribution Quest
+		15094 [UNUSED] HOLD
+		15095 [UNUSED] HOLD
+		15100 [XML] Desert Vermin (Monster Hunt)
+		15101 [ToDo] Time For Your Close Up (Multistep)
+		15102 [XML] The Creeping Desert (Collect Item)
+		15103 [XML] The Collector (Collect Item)
+		15104 [XML] Landshark! (Monster Hunt)
+		15105 [UNUSED] HOLD
+		15106 [UNUSED] HOLD
+		15107 [UNUSED] HOLD
+		15108 [UNUSED] HOLD
+		15109 [UNUSED] HOLD
+		15200 [ToDo] A Token of Victory (PvP)
+		15201 [XML] [Repeat] The Black Fin Threat (Monster Hunt)
+		15202 [XML] [Repeat] Take out the Elites (Monster Hunt)
+		15203 [XML] [Repeat] Dangerous Wildlife (Monster Hunt)
+		15204 [ToDo] [Daily/Repeat] Sending a Message (PvP)
+		15205 [XML] Cygnea Fountain of Luck (Fountain Reward)
+		15210 [XML] Medal Morph (Collect Item)
+		15211 [XML] Mighty Morphing Medals (Collect Item)
+		15212 [XML] Medals Make Medals, Maybe? (Collect Item)
+		15213 [XML] Feelin' Lucky? (Collect Item)
+		15215 [XML] [Daily] The Briar Bout (Collect Item)
+		15216 [XML] [Daily] Clear the Cavern (Collect Item)
+		15217 [XML] [Daily] Black Fin Fracas (Collect Item)
+		15220 [ToDo] [Daily] Help in Henor (PvP)
+		15221 [ToDo] [Daily] Aedra Altercation (PvP)
+		15222 [ToDo] [Daily] Erivale Expunge (PvP)
+		15223 [ToDo] [Spy/Daily] Enter Enshar
+		15224 [ToDo] [Spy/Daily] Set for Cet
+		15225 [ToDo] [Spy/Daily] Down to the Bomire Wire
+		15230 [XML] Keys Please (Collect Item)
+		15231 [XML] Key Decree (Collect Item)
+		15232 [XML] Honor Thee Key (Collect Item)
+		18970 [XML] The Corridor Lore (Reporting)
+		18971 [XML] [Weekly] Help Hold the Lines (Monster Hunt)
+	[END] SUMMARY
+	-->
+		
+	<!-- COLLECTING QUESTS -->
+	<item_collecting id="15002" start_npc_ids="804698" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15010" start_npc_ids="804700" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15011" start_npc_ids="804875" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15012" start_npc_ids="804875" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15021" start_npc_ids="804877" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15022" start_npc_ids="804878" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15043" start_npc_ids="804886" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15044" start_npc_ids="804887" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15052" start_npc_ids="804888" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15053" start_npc_ids="804888" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15066" start_npc_ids="804889" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15070" start_npc_ids="804891" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15071" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15072" start_npc_ids="804890" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15102" start_npc_ids="804895" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15103" start_npc_ids="804896" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15210" start_npc_ids="805133"/>
+	<item_collecting id="15211" start_npc_ids="805134"/>
+	<item_collecting id="15212" start_npc_ids="805135"/>
+	<item_collecting id="15213" start_npc_ids="805261"/>
+	<item_collecting id="15215" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15216" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15217" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15230" start_npc_ids="805222"/>
+	<item_collecting id="15231" start_npc_ids="805222"/>
+	<item_collecting id="15232" start_npc_ids="805222"/>
+	
+	<!-- FOUNTAIN REWARD -->
+	<fountain_rewards id="15205" start_npc_ids="804788"/>
+	
+	<!-- KILL IN ZONE QUESTS -->
+	<kill_in_zone id="15220" start_npc_ids="804876" zones="CRIMSON_HILLS_210070000 CORAL_RISE_210070000" amount="2" end_npc_ids="804876" level_diff="5"/>
+	<kill_in_zone id="15221" start_npc_ids="804706" zones="DRAGON_LORDS_CENTERPIECE_210070000 DRAGON_LORDS_GARDENS_210070000" amount="2" end_npc_ids="804706" level_diff="5"/>
+	<kill_in_zone id="15222" start_npc_ids="804707" zones="PERENNIAL_MOSSWOOD_210070000 TWILIGHT_TEMPLE_210070000" amount="2" end_npc_ids="804707" level_diff="5"/>
+	<kill_in_zone id="15223" start_npc_ids="804699" zones="WASHRUN_STRETCH_220080000 BROKEN_HIGHLANDS_220080000" amount="2" end_npc_ids="804699" level_diff="5"/>
+	<kill_in_zone id="15224" start_npc_ids="804699" zones="AURELIAN_TIMBERS_220080000 MOONTIDE_DIVE_220080000 LUNASHIN_CAVE_220080000" amount="2" end_npc_ids="804699" level_diff="5"/>
+	<kill_in_zone id="15225" start_npc_ids="804699" zones="BONECREAK_VALLEY_220080000 SCALEFANG_DALE_220080000 THE_SANGUISANDS_220080000 THE_BLOOD_GRAINS_220080000" amount="2" end_npc_ids="804699" level_diff="5"/>
+	
+	<!-- KILL IN WORLD QUESTS -->
+	<kill_in_world id="15204" start_npc_ids="804704" worlds="210070000" amount="5" end_npc_ids="804704" level_diff="5"/>
+		
+	<!-- MONSTER HUNT QUESTS -->
+	<monster_hunt id="15001" start_npc_ids="804698" start_dialog_id="4762"/>
+	<monster_hunt id="15020" start_npc_ids="804876" start_dialog_id="4762"/>
+	<monster_hunt id="15041" start_npc_ids="804704" start_dialog_id="4762"/>
+	<monster_hunt id="15050" start_npc_ids="804706" start_dialog_id="4762"/>
+	<monster_hunt id="15060" start_npc_ids="804707" start_dialog_id="4762"/>
+	<monster_hunt id="15062" start_npc_ids="804707" start_dialog_id="4762"/>
+	<monster_hunt id="15065" start_npc_ids="804707" start_dialog_id="4762"/>
+	<monster_hunt id="15073" start_npc_ids="804709" start_dialog_id="4762"/>
+	<monster_hunt id="15074" start_npc_ids="804709" start_dialog_id="4762"/>
+	<monster_hunt id="15100" start_npc_ids="804711" start_dialog_id="4762"/>
+	<monster_hunt id="15104" start_npc_ids="804711" start_dialog_id="4762"/>
+	<monster_hunt id="15201" start_npc_ids="804704" start_dialog_id="4762"/>
+	<monster_hunt id="15202" start_npc_ids="804704" start_dialog_id="4762"/>
+	<monster_hunt id="15203" start_npc_ids="804704" start_dialog_id="4762"/>
+	<monster_hunt id="18971" start_npc_ids="804865" start_dialog_id="4762" end_npc_ids="805213 805214 805215"/>
+	
+	<!-- REPORTING QUESTS -->
+	<report_to id="18970" start_npc_ids="804709" start_dialog_id="4762" end_npc_ids="805213 805214 805215" end_dialog_id="10002"/>
+</quest_scripts>
