@@ -71,6 +71,8 @@ public class _1044TestingFlightSkills extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
+							} else if (var >= 2 && var <= 7) {
+								return sendQuestDialog(env, 3143);
 							} else if (var == 9) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 10) {
@@ -85,10 +87,10 @@ public class _1044TestingFlightSkills extends QuestHandler {
 						}
 						case SETPRO2: {
 							if (var == 1) {
-								QuestService.questTimerStart(env, 150);
+								QuestService.questTimerStart(env, 110);
 								return defaultCloseDialog(env, 1, 2); // 2
 							} else if (var == 10) {
-								QuestService.questTimerStart(env, 150);
+								QuestService.questTimerStart(env, 110);
 								return defaultCloseDialog(env, 10, 2); // 2
 							}
 						}
@@ -144,7 +146,8 @@ public class _1044TestingFlightSkills extends QuestHandler {
 				return true;
 			} else if (rings[5].equals(flyingRing)) {
 				changeQuestStep(env, 7, 9, false); // 9
-				QuestService.questTimerEnd(env);
+				if (qs.getQuestVarById(0) == 9)
+					QuestService.questTimerEnd(env);
 				return true;
 			}
 		}

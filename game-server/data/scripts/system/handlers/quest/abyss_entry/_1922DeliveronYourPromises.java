@@ -29,6 +29,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 		qe.registerOnLevelUp(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
+		qe.registerOnMovieEndQuest(165, questId);
 		qe.registerOnMovieEndQuest(166, questId);
 		qe.registerQuestNpc(203830).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203901).addOnTalkEvent(questId);

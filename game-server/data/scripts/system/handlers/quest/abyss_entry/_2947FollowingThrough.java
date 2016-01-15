@@ -48,6 +48,7 @@ public class _2947FollowingThrough extends QuestHandler {
 		qe.registerOnLevelUp(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
+		qe.registerOnMovieEndQuest(167, questId);
 		qe.registerOnMovieEndQuest(168, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
