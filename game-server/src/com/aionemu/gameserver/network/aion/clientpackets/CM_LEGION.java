@@ -115,6 +115,8 @@ public class CM_LEGION extends AionClientPacket {
 				charName = readS();
 				newNickname = readS();
 				break;
+			case 0x10: //participate in stonespear siege
+				break;
 			default:
 				log.info("Unknown Legion exOpcode? 0x" + Integer.toHexString(exOpcode).toUpperCase());
 				break;

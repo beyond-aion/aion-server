@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,6 +73,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_STONESPEAR_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
@@ -124,6 +123,8 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -452,6 +453,7 @@ public final class PlayerEnterWorldService {
 			PetService.getInstance().onPlayerLogin(player);
 
 			// ----------------------------- Retail sequence -----------------------------
+			client.sendPacket(new SM_STONESPEAR_INFO());
 			MailService.getInstance().onPlayerLogin(player);
 			AtreianPassportService.getInstance().onLogin(player);
 			HousingService.getInstance().onPlayerLogin(player);
