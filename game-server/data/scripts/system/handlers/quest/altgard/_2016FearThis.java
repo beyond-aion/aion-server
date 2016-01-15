@@ -11,13 +11,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * Talk with Nokir (203631). Go to the MuMu Village and get rid of the Black Claw Tribe (5): Black Claw Sharpeye (210455, 210456), Black Claw Warrior
- * (214039, 210458), Black Claw Searcher (214032). Go back to Nokir. Talk with Shania (203621). Gather Arachna Poison Sacs (182203018) (3) and take
- * them to Shania. Go to the MuMu Village, and pour the toxin into the Fresh Water Source (MUMU_VILLAGE_220030000). Mission completed! Report the
- * result to Nokir.
+ * Talk with Nokir (203631). Go to the MuMu Village and get rid of the Black Claw Tribe (5): Black Claw Sharpeye
+ * (210455, 210456), Black Claw Warrior (214039, 210458), Black Claw Searcher (214032). Go back to Nokir. Talk with
+ * Shania (203621). Gather Arachna Poison Sacs (182203018) (3) and take them to Shania. Go to the MuMu Village, and pour
+ * the toxin into the Fresh Water Source (MUMU_VILLAGE_220030000). Mission completed! Report the result to Nokir.
  * 
  * @author Mr. Poke
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2016FearThis extends QuestHandler {
 
@@ -30,7 +31,6 @@ public class _2016FearThis extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203631).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203621).addOnTalkEvent(questId);
@@ -45,7 +45,7 @@ public class _2016FearThis extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-
+		
 		if (qs == null)
 			return false;
 
@@ -59,7 +59,8 @@ public class _2016FearThis extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 1352);
 							}
 						}
@@ -81,7 +82,8 @@ public class _2016FearThis extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 7) {
 								return sendQuestDialog(env, 1693);
-							} else if (var == 8) {
+							}
+							else if (var == 8) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -101,11 +103,13 @@ public class _2016FearThis extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) { // Nokir
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -121,19 +125,14 @@ public class _2016FearThis extends QuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if (player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016"))) {
+		if (player.isInsideItemUseZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016"))) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 10, 10, true)); // reward
 		}
 		return HandlerResult.FAILED;
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2200, true);
+		return defaultOnLvlUpEvent(env, 2200, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

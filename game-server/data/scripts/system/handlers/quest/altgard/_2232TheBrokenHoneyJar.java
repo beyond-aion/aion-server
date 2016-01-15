@@ -38,11 +38,13 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 			if (targetId == 203613) { // Gilungk
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else {
+				}
+				else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203613) { // Gilungk
 				switch (dialog) {
@@ -58,20 +60,24 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			} else if (targetId == 700061) { // Beehive
+			}
+			else if (targetId == 700061) { // Beehive
 				if (dialog == DialogAction.USE_OBJECT) {
 					return true; // loot
 				}
-			} else if (targetId == 203622) { // Tatural
+			}
+			else if (targetId == 203622) { // Tatural
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				}
+				else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203613) { // Gilungk
 				return sendQuestEndDialog(env);
 			}

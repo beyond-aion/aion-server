@@ -47,10 +47,12 @@ public class _2208MauInTenMinutesADay extends QuestHandler {
 					if (giveQuestItem(env, 182203205, 1))
 						return sendQuestStartDialog(env);
 					return true;
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203589) {
 				int var = qs.getQuestVarById(0);
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -58,13 +60,15 @@ public class _2208MauInTenMinutesADay extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					else if (var == 1)
 						return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				}
+				else if (env.getDialog() == DialogAction.SETPRO1) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestSelectionDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203591)
 				return sendQuestEndDialog(env);
 		}
@@ -82,12 +86,14 @@ public class _2208MauInTenMinutesADay extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.FAILED;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
+			0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
+					1, 0), true);
 				player.getInventory().decreaseByObjectId(itemObjId, 1);
 				qs.setQuestVarById(0, 1);
 				updateQuestStatus(env);

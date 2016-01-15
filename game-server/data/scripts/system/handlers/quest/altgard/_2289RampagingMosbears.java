@@ -39,11 +39,13 @@ public class _2289RampagingMosbears extends QuestHandler {
 			if (targetId == 203616) { // Gefion
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else {
+				}
+				else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203616: { // Gefion
@@ -54,7 +56,8 @@ public class _2289RampagingMosbears extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 5) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 7) {
+							}
+							else if (var == 7) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -87,7 +90,8 @@ public class _2289RampagingMosbears extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203616) { // Gefion
 				return sendQuestEndDialog(env);
 			}

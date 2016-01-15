@@ -9,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Mr. Poke
+ * @Modified Majka
  */
 public class _2015TaketheInitiative extends QuestHandler {
 
@@ -20,7 +21,6 @@ public class _2015TaketheInitiative extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203631).addOnTalkEvent(questId);
 		qe.registerQuestNpc(210510).addOnKillEvent(questId);
@@ -36,9 +36,7 @@ public class _2015TaketheInitiative extends QuestHandler {
 			return false;
 
 		final int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
@@ -60,7 +58,8 @@ public class _2015TaketheInitiative extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				return sendQuestEndDialog(env);
 			}
@@ -75,10 +74,8 @@ public class _2015TaketheInitiative extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
 
-		int targetId = 0;
 		int var = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 		switch (targetId) {
 			case 210510:
 				var = qs.getQuestVarById(1);
@@ -105,12 +102,7 @@ public class _2015TaketheInitiative extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2014);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2200, true);
+		return defaultOnLvlUpEvent(env, 2200, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

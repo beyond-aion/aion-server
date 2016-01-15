@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -9,12 +9,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
-public class _24011FungusAmongUs extends QuestHandler {
+public class _24011FunnyFloatingFungus extends QuestHandler {
 
 	private final static int questId = 24011;
 
-	public _24011FungusAmongUs() {
+	public _24011FunnyFloatingFungus() {
 		super(questId);
 	}
 
@@ -36,9 +37,7 @@ public class _24011FungusAmongUs extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
@@ -47,7 +46,8 @@ public class _24011FungusAmongUs extends QuestHandler {
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 				return true;
-			} else if (var == 6) {
+			}
+			else if (var == 6) {
 				changeQuestStep(env, 6, 6, true); // reward
 				return true;
 			}
@@ -63,31 +63,36 @@ public class _24011FungusAmongUs extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203558) {
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
-			} else if (targetId == 203572) {
-				switch (env.getDialog()) {
+			}
+			else if (targetId == 203572) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
+					case SELECT_ACTION_1353:
+						if (var == 1) {
+							playQuestMovie(env, 60);
+							return sendQuestDialog(env, 1353);
+						}
 					case SETPRO2:
-						playQuestMovie(env, 60);
 						return defaultCloseDialog(env, 1, 2); // 2
 				}
 			}
 
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203558) {
 				return sendQuestEndDialog(env);
 			}
@@ -102,7 +107,7 @@ public class _24011FungusAmongUs extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010, true);
+		return defaultOnLvlUpEvent(env, 24010);
 	}
 
 }
