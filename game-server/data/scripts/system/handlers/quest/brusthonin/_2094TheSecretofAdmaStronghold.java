@@ -126,7 +126,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 6) {
-						QuestService.addNewSpawn(220050000, 1, 205191, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+						QuestService.addNewSpawn(220050000, player.getInstanceId(), 205191, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 						npc.getController().scheduleRespawn();
 						npc.getController().onDelete();
 						return true;
