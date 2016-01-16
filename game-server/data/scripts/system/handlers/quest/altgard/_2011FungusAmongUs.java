@@ -1,6 +1,5 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -61,8 +60,6 @@ public class _2011FungusAmongUs extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203558) {
