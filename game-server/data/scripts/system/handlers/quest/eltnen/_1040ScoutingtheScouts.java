@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  * 
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1040ScoutingtheScouts extends QuestHandler {
 
@@ -29,7 +30,6 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnDie(questId);
 		for (int npc : npcs)
@@ -37,12 +37,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 		for (int mob : mobs)
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1036);
-	}
-
+	
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 1300, 1036 };

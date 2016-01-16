@@ -12,6 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Rhys2002 edited by xaerolt
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1042KeeperoftheKaidanKey extends QuestHandler {
 
@@ -24,7 +25,6 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npc_ids = { 203989, 203901, 730342 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182201026, questId);
 		qe.addHandlerSideQuestDrop(questId, 730342, 182201026, 1, 100);
@@ -63,13 +63,15 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			} else if (targetId == 730342) { // Strong Document Box
+			}
+			else if (targetId == 730342) { // Strong Document Box
 				if (dialog == DialogAction.USE_OBJECT) {
 					if (var == 1) {
 						return true; // loot;
 					}
 				}
-			} else if (targetId == 203901) { // Telemachus
+			}
+			else if (targetId == 203901) { // Telemachus
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -84,7 +86,8 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
 				return sendQuestEndDialog(env);
 			}
@@ -98,13 +101,8 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1040);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 1300, 1040 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		return defaultOnLvlUpEvent(env, quests, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

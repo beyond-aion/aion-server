@@ -34,7 +34,6 @@ public class _1032ARulersDuty extends QuestHandler {
 		qe.registerQuestNpc(730020).addOnTalkEvent(questId); // Demro
 		qe.registerQuestNpc(730019).addOnTalkEvent(questId); // Lodas
 		qe.registerQuestNpc(700157).addOnTalkEvent(questId); // Seau kerubien
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 	}
 
@@ -46,15 +45,17 @@ public class _1032ARulersDuty extends QuestHandler {
 
 		if (id != 182201001)
 			return HandlerResult.UNKNOWN;
-		if (!player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1032")))
+		if (!player.isInsideItemUseZone(ZoneName.get("LF2_ITEMUSEAREA_Q1032")))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
+			0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
+					1, 0), true);
 				qs.setQuestVar(4);
 				updateQuestStatus(env);
 			}
@@ -62,11 +63,6 @@ public class _1032ARulersDuty extends QuestHandler {
 
 		return HandlerResult.SUCCESS;
 
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

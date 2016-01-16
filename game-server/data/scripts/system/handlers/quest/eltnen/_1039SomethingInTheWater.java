@@ -15,6 +15,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Xitanium
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1039SomethingInTheWater extends QuestHandler {
 
@@ -30,7 +31,6 @@ public class _1039SomethingInTheWater extends QuestHandler {
 		qe.registerQuestItem(182201009, questId);
 		qe.registerQuestNpc(203946).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203705).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int mob : mobs)
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
@@ -102,7 +102,7 @@ public class _1039SomethingInTheWater extends QuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if (player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1039"))) {
+		if (player.isInsideItemUseZone(ZoneName.get("LF2_ITEMUSEAREA_Q1039"))) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 182201010, 1, 0)); // 2
 		}
 		return HandlerResult.FAILED;
@@ -131,11 +131,6 @@ public class _1039SomethingInTheWater extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

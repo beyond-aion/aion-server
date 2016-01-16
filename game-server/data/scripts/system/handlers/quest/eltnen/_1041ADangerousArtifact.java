@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 /**
  * @author Xitanium
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1041ADangerousArtifact extends QuestHandler {
 
@@ -28,7 +29,6 @@ public class _1041ADangerousArtifact extends QuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerAddOnReachTargetEvent(questId);
 		qe.registerAddOnLostTargetEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -53,9 +53,11 @@ public class _1041ADangerousArtifact extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 3) {
+							}
+							else if (var == 3) {
 								return sendQuestDialog(env, 1693);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -64,8 +66,8 @@ public class _1041ADangerousArtifact extends QuestHandler {
 						}
 						case SETPRO3: {
 							if (defaultCloseDialog(env, 3, 4)) {// 4
-								TeleportService2.teleportToNpc(player, 203833);
-								return true;
+							   TeleportService2.teleportToNpc(player, 203833);
+							   return true;
 							}
 						}
 						case SETPRO6: {
@@ -82,7 +84,7 @@ public class _1041ADangerousArtifact extends QuestHandler {
 							}
 						}
 						case SETPRO2: {
-							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 2264.636f, 2359.2563f, 278.62735f, 1, 2);
+							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 2264.636f, 2359.2563f, 278.62735f, 1 ,2);
 						}
 					}
 					break;
@@ -118,7 +120,8 @@ public class _1041ADangerousArtifact extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 7) {
 								return sendQuestDialog(env, 3057);
-							} else if (var == 9) {
+							}
+							else if (var == 9) {
 								return sendQuestDialog(env, 3398);
 							}
 						}
@@ -141,11 +144,13 @@ public class _1041ADangerousArtifact extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 3739);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -166,7 +171,7 @@ public class _1041ADangerousArtifact extends QuestHandler {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -191,12 +196,7 @@ public class _1041ADangerousArtifact extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
+		return defaultOnLvlUpEvent(env, 1300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

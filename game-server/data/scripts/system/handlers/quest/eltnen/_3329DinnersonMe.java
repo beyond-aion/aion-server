@@ -10,18 +10,21 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Ritsu
+ * 
  */
-public class _3329DinnersonMe extends QuestHandler {
-
-	private final static int questId = 3329;
+public class _3329DinnersonMe extends QuestHandler
+{
+	private final static int	questId	= 3329;
 	private final static int[] mob_ids = { 210887, 210912, 210914, 210932 };
 
-	public _3329DinnersonMe() {
+	public _3329DinnersonMe()
+	{
 		super(questId);
 	}
 
 	@Override
-	public void register() {
+	public void register()
+	{
 		qe.registerQuestNpc(203909).addOnQuestStart(questId);
 		qe.registerQuestNpc(203909).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203956).addOnTalkEvent(questId);
@@ -30,7 +33,8 @@ public class _3329DinnersonMe extends QuestHandler {
 	}
 
 	@Override
-	public boolean onKillEvent(QuestEnv env) {
+	public boolean onKillEvent(QuestEnv env) 
+	{
 		int[] mobs1 = { 210887, 210912 };
 		int[] mobs2 = { 210914, 210932 };
 		if (defaultOnKillEvent(env, mobs1, 0, 4, 0) || defaultOnKillEvent(env, mobs2, 0, 6, 1))
@@ -40,25 +44,27 @@ public class _3329DinnersonMe extends QuestHandler {
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env) {
+	public boolean onDialogEvent(QuestEnv env)
+	{
 		final Player player = env.getPlayer();
 		int targetId = 0;
 		DialogAction dialog = env.getDialog();
-		if (env.getVisibleObject() instanceof Npc)
+		if(env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203909) {
+		
+		if(qs == null || qs.getStatus() == QuestStatus.NONE){
+			if(targetId == 203909){
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203956) {
-				switch (dialog) {
-					case QUEST_SELECT: {
+		}
+		else if (qs.getStatus() == QuestStatus.START){
+			if (targetId == 203956){
+				switch (dialog){
+					case QUEST_SELECT:{
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 2375);
@@ -67,8 +73,9 @@ public class _3329DinnersonMe extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203956) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD){
+			if (targetId == 203956){
 				return sendQuestEndDialog(env);
 			}
 		}

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14022TheTestOfTheHeart extends QuestHandler {
 
@@ -38,7 +39,7 @@ public class _14022TheTestOfTheHeart extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020, true);
+		return defaultOnLvlUpEvent(env, 14020);
 	}
 
 	@Override
@@ -64,15 +65,15 @@ public class _14022TheTestOfTheHeart extends QuestHandler {
 					}
 					break;
 				case 203996: // Kimeia
-					switch (env.getDialog()) {
-						case QUEST_SELECT:
+						switch (env.getDialog()) {
+							case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
-						case SETPRO2:
-							return defaultCloseDialog(env, 1, 2); // 2
+							case SETPRO2: 
+								return defaultCloseDialog(env, 1, 2); // 2
+						}
 					}
-			}
-		}
+				}
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203996) // Kimeia
 			{
@@ -84,14 +85,17 @@ public class _14022TheTestOfTheHeart extends QuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		if (defaultOnKillEvent(env, mob_ids, 2, 8)) {
+		if (defaultOnKillEvent(env, mob_ids, 2, 8))
+		{
 			QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
-			if (qs.getQuestVarById(0) == 8) {
+			if(qs.getQuestVarById(0) == 8)
+			{
 				qs.setStatus(QuestStatus.REWARD);
 				super.updateQuestStatus(env);
 			}
 			return true;
-		} else
+		}
+		else
 			return false;
 	}
 }

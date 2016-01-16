@@ -43,11 +43,13 @@ public class _1414OperationWindmill extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
 
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 
