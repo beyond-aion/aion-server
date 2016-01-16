@@ -36,7 +36,11 @@ public class SM_LEGION_INFO extends AionServerPacket {
 		writeQ(legion.getContributionPoints());
 		writeD(0x00); // unk
 		writeD(0x00); // unk
-		writeD(0x00); // unk 3.0
+		writeD(0x00); // unk 3.0 //time till delete
+		//TODO
+		writeD(0); //occupied stonespear
+		writeD(0); //stonespear applied last week
+		writeD(0); //stonspear applied this week
 		/** Get Announcements List From DB By Legion **/
 		Map<Timestamp, String> announcementList = legion.getAnnouncementList().descendingMap();
 
