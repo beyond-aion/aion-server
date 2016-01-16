@@ -76,6 +76,7 @@ import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMap;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 import com.aionemu.gameserver.world.World;
@@ -254,7 +255,7 @@ public class PlayerService {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player, PunishmentType.GATHER);
 
 		// update passive stats after effect controller, stats and equipment are initialized
-		player.getController().updatePassiveStats();
+		SkillEngine.getInstance().activatePassiveSkills(player);
 		// load saved effects
 		DAOManager.getDAO(PlayerEffectsDAO.class).loadPlayerEffects(player);
 		// load saved player cooldowns
