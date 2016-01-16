@@ -12,17 +12,15 @@ import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 
-
 /**
  * @author Estrayl
- *
  */
 public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2015, Month.DECEMBER, 7, 5, 0, 0);
 	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2016, Month.JANUARY, 3, 4, 0, 0);
-	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2016, Month.JANUARY, 15, 3, 0, 0);
+	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2016, Month.JANUARY, 17, 2, 0, 0);
 	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2016, Month.MARCH, 15, 3, 0, 0);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final HashMap<Integer, Integer> rewards = new HashMap<>();
@@ -32,15 +30,15 @@ public class FactionPackService {
 	}
 
 	private FactionPackService() {
-						    // itemId, count
-		rewards.put(186000236, 230);  //Blood Mark
-		rewards.put(162000124, 250);  //Superior Restoration Serum
-		rewards.put(162000023, 100);  //Greater Healing Potion
-		rewards.put(186000137, 1500); //Courage Insignia
-		rewards.put(186000130, 3500); //Crucible Insignia
+		// itemId, count
+		rewards.put(186000236, 230); // Blood Mark
+		rewards.put(162000124, 250); // Superior Restoration Serum
+		rewards.put(162000023, 100); // Greater Healing Potion
+		rewards.put(186000137, 1500); // Courage Insignia
+		rewards.put(186000130, 3500); // Crucible Insignia
 
-		rewards.put(160010121, 10);   //Inquin Bonbon
-		rewards.put(160010122, 10);   //Inquin Bonbon
+		rewards.put(160010121, 10); // Inquin Bonbon
+		rewards.put(160010122, 10); // Inquin Bonbon
 	}
 
 	public void addPlayerCustomReward(Player player) {
@@ -65,12 +63,15 @@ public class FactionPackService {
 		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-			SystemMailService.getInstance().sendMail("Beyond Aion",	player.getName(), "Faction Pack",
+			SystemMailService.getInstance().sendMail(
+				"Beyond Aion",
+				player.getName(),
+				"Faction Pack",
 				"Greetings Daeva!\n\n" + "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n"
 					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
 		}
 	}
-	
+
 	public void addAsmodianCustomReward(Player player) {
 		LocalDateTime creationTime = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate().toLocalDateTime();
 		if (creationTime.isBefore(asmodianMinCreationTime))
@@ -83,7 +84,10 @@ public class FactionPackService {
 		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-			SystemMailService.getInstance().sendMail("Beyond Aion",	player.getName(), "Faction Pack",
+			SystemMailService.getInstance().sendMail(
+				"Beyond Aion",
+				player.getName(),
+				"Faction Pack",
 				"Greetings Daeva!\n\n" + "In gratitude for your decision to join the Asmodian faction we prepared an additional item pack.\n\n"
 					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
 		}
