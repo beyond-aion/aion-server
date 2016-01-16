@@ -5864,18 +5864,9 @@
 		<spawn npc_id="204608" respawn_time="295">
 			<spot x="981.768" y="701.253" z="136" h="105"/>
 		</spawn>
-		<!-- Protector Kentro -->
-		<spawn npc_id="831840" respawn_time="295">
-			<spot x="2543.2" y="2672.7" z="158.1512" h="46" />
-		</spawn>
 		<!-- Protector Phobos -->
 		<spawn npc_id="204646" respawn_time="295">
 			<spot x="2466.59" y="301.783" z="416.005" h="46"/>
-		</spawn>
-		<!-- Protector Siz -->
-		<spawn npc_id="831837" respawn_time="295">
-			<spot x="2515.5" y="2302.5" z="138.6328" h="17" />
-			<spot x="2529.476" y="2678.42" z="155.8647" h="36" />
 		</spawn>
 		<!-- Quake Spirit -->
 		<spawn npc_id="211194" respawn_time="295">

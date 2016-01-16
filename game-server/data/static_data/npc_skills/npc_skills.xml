@@ -65389,8 +65389,8 @@
 		<npcskill skillid="21567" skilllevel="65" probability="60" cooldown="30000" target="RANDOM"/>
 		<npcskill skillid="21568" skilllevel="65" probability="70" cooldown="30000" target="RANDOM"/>
 		<npcskill skillid="21569" skilllevel="65" probability="80" minhp="0" maxhp="50" cooldown="40000" target="ME"/>
-		<npcskill skillid="21571" skilllevel="65" probability="80" minhp="10" maxhp="80" priority="2" cooldown="300000" target="ME"/>
-		<npcskill skillid="21571" skilllevel="65" probability="100" minhp="0" maxhp="5" priority="2" cooldown="300000" target="ME"/>
+		<npcskill skillid="21571" skilllevel="65" probability="80" minhp="10" maxhp="80" priority="2" cooldown="380000" target="ME"/>
+		<npcskill skillid="21571" skilllevel="65" probability="100" minhp="0" maxhp="5" priority="2" cooldown="380000" target="ME"/>
 		<npcskill skillid="21573" skilllevel="65" minhp="0" maxhp="75" probability="70" cooldown="40000" target="RANDOM"/>
 		<npcskill skillid="21574" skilllevel="65" probability="100" minhp="0" maxhp="35" priority="1" cooldown="120000" target="ME" nextSkillTime="10000">
 			<cond condType="SPAWN_NPC" npc_id="297195"/>

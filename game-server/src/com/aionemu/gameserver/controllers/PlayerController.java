@@ -241,8 +241,9 @@ public class PlayerController extends CreatureController<Player> {
 
 		for (Effect ef : getOwner().getEffectController().getAbnormalEffects()) {
 			if (ef.isDeityAvatar()) {
-				// remove abyss transformation if worldtype != abyss && worldtype != balaurea
-				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA || getOwner().isInInstance()) {
+				// remove abyss transformation if worldtype != abyss && worldtype != balaurea && worldType != panesterra
+				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA && getOwner().getWorldType() != WorldType.PANESTERRA
+					|| getOwner().isInInstance()) {
 					ef.endEffect();
 					getOwner().getEffectController().clearEffect(ef);
 				}

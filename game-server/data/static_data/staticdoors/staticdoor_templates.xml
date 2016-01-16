@@ -3277,16 +3277,16 @@
 		</staticdoor>
 	</world>
 	<world world="400030000">
-		<staticdoor doorid="176" x="344.460236" y="677.2234" z="693.1947" mesh="gab1_sub_door_01.cga">
+		<staticdoor keyid="1" doorid="176" x="344.460236" y="677.2234" z="693.1947" mesh="gab1_sub_door_01.cga">
 			<box x1="339.068329" y1="671.8315" z1="692.319336" x2="349.781769" y2="682.5449" z2="701.837646" />
 		</staticdoor>
-		<staticdoor doorid="177" x="345.2142" y="348.809448" z="693.142334" mesh="gab1_sub_door_01.cga">
+		<staticdoor keyid="1" doorid="177" x="345.2142" y="348.809448" z="693.142334" mesh="gab1_sub_door_01.cga">
 			<box x1="339.89267" y1="343.417542" z1="692.266968" x2="350.6061" y2="354.130981" z2="701.7853" />
 		</staticdoor>
-		<staticdoor doorid="178" x="673.676147" y="349.6166" z="693.201965" mesh="gab1_sub_door_01.cga">
+		<staticdoor keyid="1" doorid="178" x="673.676147" y="349.6166" z="693.201965" mesh="gab1_sub_door_01.cga">
 			<box x1="668.3547" y1="344.295074" z1="692.3266" x2="679.068054" y2="355.0085" z2="701.8449" />
 		</staticdoor>
-		<staticdoor doorid="179" x="672.8097" y="677.9018" z="693.155945" mesh="gab1_sub_door_01.cga">
+		<staticdoor keyid="1" doorid="179" x="672.8097" y="677.9018" z="693.155945" mesh="gab1_sub_door_01.cga">
 			<box x1="667.4178" y1="672.5803" z1="692.2806" x2="678.1312" y2="683.2937" z2="701.7989" />
 		</staticdoor>
 	</world>

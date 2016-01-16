@@ -293,14 +293,10 @@ public final class QuestService {
 			qs.setNextRepeatTime(countNextRepeatTime(player, template));
 		}
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		if (player.getCommonData().updateDaeva()) {
-			player.getController().upgradePlayer();
-			SkillLearnService.addMissingSkills(player);
-		}
+		player.getCommonData().updateDaeva();
 		QuestEngine.getInstance().onLvlUp(env);
-		if (template.getNpcFactionId() != 0) {
+		if (template.getNpcFactionId() != 0)
 			player.getNpcFactions().completeQuest(template);
-		}
 		player.getController().updateNearbyQuests();
 		return true;
 	}
