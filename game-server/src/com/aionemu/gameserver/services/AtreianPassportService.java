@@ -35,13 +35,13 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class AtreianPassportService {
 
 	private static final AtreianPassportData DATA = DataManager.ATREIAN_PASSPORT_DATA;
-	private static final Calendar calendar = Calendar.getInstance();
 
 	private AtreianPassportService() {
 		CronService.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
+				Calendar calendar = Calendar.getInstance();
 				DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
 				if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
 					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();

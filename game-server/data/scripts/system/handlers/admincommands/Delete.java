@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.io.IOException;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -56,10 +54,7 @@ public class Delete extends AdminCommand {
 		else
 			gather.getController().onDelete();
 
-		try {
-			DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), true);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!DataManager.SPAWNS_DATA2.saveSpawn((npc != null ? npc : gather), true)) {
 			PacketSendUtility.sendMessage(admin, "Could not remove spawn");
 			return;
 		}
