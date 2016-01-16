@@ -1,13 +1,15 @@
 package admincommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Luno, modified Bobobear
@@ -15,54 +17,38 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Delete extends AdminCommand {
 
 	public Delete() {
-		super("delete");
+		super("delete", "Removes a spawn from world.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		Npc npc = null;
-		Gatherable gather = null;
-		SpawnTemplate spawn = null;
-
-		if (admin.getTarget() != null && admin.getTarget() instanceof Npc)
-			npc = (Npc) admin.getTarget();
-
-		if (admin.getTarget() != null && admin.getTarget() instanceof Gatherable)
-			gather = (Gatherable) admin.getTarget();
-
-		if (npc == null && gather == null) {
-			PacketSendUtility.sendMessage(admin, "you need to target an Npc or Gatherable type.");
+		VisibleObject target = admin.getTarget();
+		if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
+			sendInfo(admin, "You need to target an Npc or Gatherable type.");
 			return;
 		}
 
-		if (npc != null)
-			spawn = npc.getSpawn();
-		else
-			spawn = gather.getSpawn();
-
+		SpawnTemplate spawn = target.getSpawn();
 		if (spawn.hasPool()) {
-			PacketSendUtility.sendMessage(admin, "Can't delete pooled spawn template");
+			sendInfo(admin, "Can't delete pooled spawn template");
 			return;
 		}
 		if (spawn instanceof SiegeSpawnTemplate) {
-			PacketSendUtility.sendMessage(admin, "Can't delete siege spawn template");
+			sendInfo(admin, "Can't delete siege spawn template");
 			return;
 		}
 
-		if (npc != null)
-			npc.getController().onDelete();
-		else
-			gather.getController().onDelete();
+		if (target instanceof Npc) {
+			((Npc) target).getController().cancelTask(TaskId.RESPAWN);
+			target.getController().onDelete();
+		} else if (target instanceof Gatherable) {
+			World.getInstance().despawn(target); // onDelete would trigger a respawn task
+		}
+		sendInfo(admin, "Spawn removed.");
 
-		if(!DataManager.SPAWNS_DATA2.saveSpawn((npc != null ? npc : gather), true)) {
-			PacketSendUtility.sendMessage(admin, "Could not remove spawn");
+		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, true)) {
+			sendInfo(admin, "Could not save deleted spawn.");
 			return;
 		}
-		PacketSendUtility.sendMessage(admin, "Spawn removed");
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		// TODO Auto-generated method stub
 	}
 }
