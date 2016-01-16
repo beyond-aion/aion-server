@@ -79,7 +79,8 @@ public class DropInfo extends AdminCommand {
 		DropRegistrationService drs = DropRegistrationService.getInstance();
 		int dropChance = 100;
 		int npcLevel = currentNpc.getLevel();
-		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest");
+		String dropType = currentNpc.getGroupDrop().name().toLowerCase();
+		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		FastTable<Integer> noReductionMaps = new FastTable<Integer>();
 		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 			noReductionMaps.add(Integer.parseInt(zone));

@@ -95,7 +95,8 @@ public class DropRegistrationService {
 		int index = 1;
 		int dropChance = 100;
 		int npcLevel = npc.getLevel();
-		boolean isChest = npc.getAi2().getName().equals("chest");
+		String dropType = npc.getGroupDrop().name().toLowerCase();
+		boolean isChest = npc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - heighestLevel); // reduce chance depending on level
 		}
