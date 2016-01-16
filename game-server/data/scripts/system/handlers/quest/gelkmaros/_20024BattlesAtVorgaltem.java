@@ -183,7 +183,7 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20024"))) {
+		if (player.isInsideItemUseZone(ZoneName.get("DF4_ITEMUSEAREA_Q20024"))) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 8, 9, false)); // 9
 		}
 		return HandlerResult.FAILED;
