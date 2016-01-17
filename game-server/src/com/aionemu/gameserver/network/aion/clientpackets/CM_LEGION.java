@@ -6,10 +6,12 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -29,6 +31,7 @@ public class CM_LEGION extends AionClientPacket {
 	private short legionarPermission;
 	private short volunteerPermission;
 	private int rank;
+	private int legionDominionId;
 	private String legionName;
 	private String charName;
 	private String newNickname;
@@ -115,7 +118,8 @@ public class CM_LEGION extends AionClientPacket {
 				charName = readS();
 				newNickname = readS();
 				break;
-			case 0x10: //participate in stonespear siege
+			case 0x10: //select legion dominion
+				legionDominionId = readD();
 				break;
 			default:
 				log.info("Unknown Legion exOpcode? 0x" + Integer.toHexString(exOpcode).toUpperCase());
@@ -156,6 +160,12 @@ public class CM_LEGION extends AionClientPacket {
 					case 0x0D:
 						if (activePlayer.getLegionMember().isBrigadeGeneral())
 							LegionService.getInstance().changePermissions(legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
+						break;
+					/** Select Legion Dominion to participate **/
+					case 0x10:
+						if (activePlayer.getLegionMember().isBrigadeGeneral() || activePlayer.getLegionMember().getRank() == LegionRank.DEPUTY) {
+							LegionService.getInstance().joinLegionDominion(activePlayer, legion, legionDominionId);
+						}
 						break;
 					/** Misc. **/
 					default:

@@ -47,6 +47,9 @@ public class Legion {
 	private LegionWarehouse legionWarehouse;
 	private SortedSet<LegionHistory> legionHistory;
 	private AtomicBoolean hasBonus = new AtomicBoolean(false);
+	private int occupiedLegionDominion = 0;
+	private int currentLegionDominion = 0;
+	private int lastLegionDominion = 0;
 
 	/**
 	 * Only called when a legion is created!
@@ -578,5 +581,29 @@ public class Legion {
 	@Override
 	public int hashCode() {
 		return legionId;
+	}
+
+	public int getOccupiedLegionDominion() {
+		return occupiedLegionDominion;
+	}
+
+	public int getCurrentLegionDominion() {
+		return currentLegionDominion;
+	}
+
+	public int getLastLegionDominion() {
+		return lastLegionDominion;
+	}
+
+	public void setOccupiedLegionDominion(int occupiedLegionDominion) {
+		this.occupiedLegionDominion = occupiedLegionDominion;
+	}
+
+	public void setCurrentLegionDominion(int currentLegionDominion) {
+		this.currentLegionDominion = currentLegionDominion;
+	}
+
+	public void setLastLegionDominion(int lastLegionDominion) {
+		this.lastLegionDominion = lastLegionDominion;
 	}
 }

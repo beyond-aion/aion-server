@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +63,8 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.container.LegionContainer;
 import com.aionemu.gameserver.world.container.LegionMemberContainer;
+
+import javolution.util.FastTable;
 
 /**
  * This class is designed to do all the work related with loading/storing legions and their members.
@@ -2006,6 +2006,17 @@ public class LegionService {
 		}
 		if (!allCachedLegionMembers.contains(activePlayer.getObjectId())) {
 			allCachedLegionMembers.add(activePlayer);
+		}
+	}
+	
+	public void joinLegionDominion(Player player, Legion legion, int locId) {
+		if (legion.getCurrentLegionDominion() > 0) //already selected
+			return;
+		if (LegionDominionService.getInstance().join(legion.getLegionId(), locId)) {
+			legion.setCurrentLegionDominion(locId);
+			storeLegion(legion);
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); //applied for stonespear
+			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
 		}
 	}
 

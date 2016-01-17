@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STONESPEAR_RANKING;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -28,7 +28,7 @@ public class CM_STONESPEAR_RANKING extends AionClientPacket {
 		if (stonespearId >= 1 && stonespearId <= 6) { //idk sometimes it sends different bytes! TODO
 			Player player = getConnection().getActivePlayer();
 			if (player != null) {
-				PacketSendUtility.sendPacket(player, new SM_STONESPEAR_RANKING(stonespearId));
+				PacketSendUtility.sendPacket(player, new SM_LEGION_DOMINION_RANK(stonespearId));
 			}
 		}
 	}

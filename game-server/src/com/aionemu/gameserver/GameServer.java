@@ -19,15 +19,8 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.lambdaj.Lambda;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
@@ -74,6 +67,7 @@ import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.FlyRingService;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.HousingBidService;
+import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
 import com.aionemu.gameserver.services.MonsterRaidService;
 import com.aionemu.gameserver.services.NpcShoutsService;
@@ -110,6 +104,12 @@ import com.aionemu.gameserver.utils.javaagent.JavaAgentUtils;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
+
+import ch.lambdaj.Lambda;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
+import javolution.util.FastTable;
 
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
@@ -248,6 +248,7 @@ public class GameServer {
 		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
+		LegionDominionService.getInstance().initLocations();
 
 		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();

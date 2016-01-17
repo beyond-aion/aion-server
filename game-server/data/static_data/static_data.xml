@@ -173,4 +173,5 @@
 	<import file="events_config/login_events.xml"/>
 	<import file="monster_raid/raid_locations.xml"/>
 	<import file="bounties/kill_bounties.xml"/>
+	<import file="legion_dominion_template.xml"/>
 </ae_static_data>

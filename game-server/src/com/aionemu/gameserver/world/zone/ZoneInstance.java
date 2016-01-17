@@ -190,4 +190,8 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 	public Map<Integer, Creature> getCreatures() {
 		return creatures;
 	}
+	
+	public boolean isDominionZone() {
+		return template.getZoneTemplate().getZoneType() == ZoneClassName.DOMINION;
+	}
 }
