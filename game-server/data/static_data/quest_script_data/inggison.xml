@@ -579,30 +579,6 @@
 		<monster var="0" end_var="1" npc_ids="257605"/>
 		<monster var="1" end_var="1" npc_ids="257905"/>
 	</monster_hunt>
-	<monster_hunt id="11311" start_npc_ids="799024">
-		<monster var="0" end_var="9" npc_ids="234692"/>
-	</monster_hunt>
-	<monster_hunt id="11312" start_npc_ids="799024">
-		<monster var="0" end_var="9" npc_ids="233931 233932 233929 233930 233933 233934 233935 233936"/>
-	</monster_hunt>
-	<monster_hunt id="11313" start_npc_ids="799023">
-		<monster var="0" end_var="9" npc_ids="233900"/>
-	</monster_hunt>
-	<monster_hunt id="11314" start_npc_ids="799023">
-		<monster var="0" end_var="9" npc_ids="233921 233922 233923 233924 233927 233928 233925 233926"/>
-	</monster_hunt>
-	<monster_hunt id="11315" start_npc_ids="799043">
-		<monster var="0" end_var="9" npc_ids="234713"/>
-	</monster_hunt>
-	<monster_hunt id="11316" start_npc_ids="799043">
-		<monster var="0" end_var="9" npc_ids="233931 233932 233929 233930 233933 233934 233935 233936"/>
-	</monster_hunt>
-	<monster_hunt id="11317" start_npc_ids="799049">
-		<monster var="0" end_var="9" npc_ids="234715"/>
-	</monster_hunt>
-	<monster_hunt id="11318" start_npc_ids="799049">
-		<monster var="0" end_var="9" npc_ids="233921 233922 233923 233924 233927 233928 233925 233926"/>
-	</monster_hunt>
 	<monster_hunt id="11456" start_npc_ids="798954">
 		<monster var="0" end_var="100" npc_ids="215454 215455 215456 215457 215458 215459 215460 215461 215462 215463 215464 215465 215466 215467 215482 216133 216134 216135 216136 216137 216138 216139 216140 216141 216142 216143 216144 216145 216146 216459 216460"/>
 	</monster_hunt>
@@ -613,5 +589,13 @@
 		<monster var="0" end_var="1" npc_ids="257605 257610"/>
 		<monster var="1" end_var="1" npc_ids="257905 257910"/>
 	</monster_hunt>
+	<monster_hunt id="11311" start_npc_ids="799024"/>
+	<monster_hunt id="11312" start_npc_ids="799024"/>
+	<monster_hunt id="11313" start_npc_ids="799023"/>
+	<monster_hunt id="11314" start_npc_ids="799023"/>
+	<monster_hunt id="11315" start_npc_ids="799043"/>
+	<monster_hunt id="11316" start_npc_ids="799043"/>
+	<monster_hunt id="11317" start_npc_ids="799049"/>
+	<monster_hunt id="11318" start_npc_ids="799049"/>
 	<kill_in_world id="39022" end_npc_ids="799552" worlds="210050000" amount="5" invasion_world="210050000"/>
 </quest_scripts>
