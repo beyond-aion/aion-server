@@ -1,7 +1,6 @@
 package quest.sanctum;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -20,8 +19,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class _1926SecretLibraryAccess extends QuestHandler {
 
 	private final static int questId = 1926;
-	private final static int[] npc_ids = { 203894, 203098 };// 203894 - Latri(start and finish), 203098 - Spatalos(for
-																													// recomendation)
+	private final static int[] npc_ids = { 203894, 203701 };// Latri and Lavirintos
 
 	public _1926SecretLibraryAccess() {
 		super(questId);
@@ -35,9 +33,8 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 		}
 	}
 
-	// self explanatory
 	private boolean AreVerteronQuestsFinished(Player player) {
-		int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 14016 : 1020;
+		int id = player.getQuestStateList().getQuestState(1130) != null ? 1020 : 14016; //  1020 Old path, 14016 New path
 		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Verteron state
 		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
 	}
@@ -75,7 +72,7 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 					}
 				}, 3000);
 			}
-		} else if (targetId == 203098) {
+		} else if (targetId == 203701) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (AreVerteronQuestsFinished(player)) {

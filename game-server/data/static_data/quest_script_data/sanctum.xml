@@ -357,6 +357,10 @@
 	<report_to id="80545" start_npc_ids="831999" end_npc_ids="831999"/>
 	<report_to id="80546" start_npc_ids="831999" end_npc_ids="831999"/>
 	<report_to id="80547" start_npc_ids="832008" end_npc_ids="831999"/>
+	<report_to_many id="1971" start_npc_ids="203812" end_npc_ids="203812">
+		<npc_infos npc_id="203820" var="0" quest_dialog="1352"/>
+		<npc_infos npc_id="203812" var="1" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<report_to_many id="3201" start_npc_ids="798318" end_npc_ids="203852">
 	    <npc_infos npc_id="279009" var="0" quest_dialog="1352"/>
 		<npc_infos npc_id="203852" var="1" quest_dialog="2375" close_dialog="1009"/>
@@ -476,34 +480,34 @@
 		<skill end_var="20" ids="972 973 974 990 1057 1128 1051 2139"/>
 	</skill_use>
 	<skill_use id="3922" start_npc_id="203704">
-		<skill end_var="10" ids="272"/>
+		<skill end_var="10" ids="599"/>
 	</skill_use>
 	<skill_use id="3923" start_npc_id="203704">
-		<skill end_var="10" ids="516"/>
+		<skill end_var="10" ids="3161"/>
 	</skill_use>
 	<skill_use id="3924" start_npc_id="203705">
-		<skill end_var="10" ids="798"/>
+		<skill end_var="10" ids="18260"/>
 	</skill_use>
 	<skill_use id="3925" start_npc_id="203705">
-		<skill end_var="10" ids="851"/>
+		<skill end_var="10" ids="3491"/>
 	</skill_use>
 	<skill_use id="3926" start_npc_id="203706">
-		<skill end_var="10" ids="1497"/>
+		<skill end_var="10" ids="1338"/>
 	</skill_use>
 	<skill_use id="3927" start_npc_id="203706">
-		<skill end_var="10" ids="1627"/>
+		<skill end_var="10" ids="3781"/>
 	</skill_use>
 	<skill_use id="3928" start_npc_id="203707">
-		<skill end_var="10" ids="1165"/>
+		<skill end_var="10" ids="4220"/>
 	</skill_use>
 	<skill_use id="3929" start_npc_id="203707">
-		<skill end_var="10" ids="1328"/>
+		<skill end_var="10" ids="1810"/>
 	</skill_use>
 	<skill_use id="19074" start_npc_id="801214">
-		<skill end_var="10" ids="3282"/>
+		<skill end_var="10" ids="2007"/>
 	</skill_use>
 	<skill_use id="19075" start_npc_id="801215">
-		<skill end_var="10" ids="3115"/>
+		<skill end_var="10" ids="4469"/>
 	</skill_use>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1902" start_npc_ids="203788"/>
@@ -520,7 +524,6 @@
 	<item_collecting id="1933" start_npc_ids="203833"/>
 	<item_collecting id="1934" start_npc_ids="203833"/>
 	<item_collecting id="1949" start_npc_ids="279006" end_npc_ids="279016"/>
-	<item_collecting id="1971" start_npc_ids="203812"/>
 	<item_collecting id="3202" start_npc_ids="203852"/>
 	<item_collecting id="3203" start_npc_ids="798319"/>
 	<item_collecting id="3206" start_npc_ids="798321"/>
