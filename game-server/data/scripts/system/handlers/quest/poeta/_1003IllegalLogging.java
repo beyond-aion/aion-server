@@ -11,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1003IllegalLogging extends QuestHandler {
 
@@ -37,7 +38,7 @@ public class _1003IllegalLogging extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100, true);
+		return defaultOnLvlUpEvent(env, 1100);
 	}
 
 	@Override
@@ -71,7 +72,8 @@ public class _1003IllegalLogging extends QuestHandler {
 						}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
@@ -112,7 +114,8 @@ public class _1003IllegalLogging extends QuestHandler {
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				} else if (var == 10) {
+				}
+				else if (var == 10) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return true;

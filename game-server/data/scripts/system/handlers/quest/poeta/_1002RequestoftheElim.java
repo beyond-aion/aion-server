@@ -21,6 +21,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author MrPoke
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1002RequestoftheElim extends QuestHandler {
 
@@ -216,6 +217,6 @@ public class _1002RequestoftheElim extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100, true);
+		return defaultOnLvlUpEvent(env, 1100);
 	}
 }

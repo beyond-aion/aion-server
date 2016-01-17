@@ -1,5 +1,6 @@
 package quest.poeta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -10,6 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1004NeutralizingOdium extends QuestHandler {
 
@@ -23,10 +25,10 @@ public class _1004NeutralizingOdium extends QuestHandler {
 	public void register() {
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
-		qe.registerQuestNpc(203082).addOnTalkEvent(questId);
-		qe.registerQuestNpc(700030).addOnTalkEvent(questId);
-		qe.registerQuestNpc(790001).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203067).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203082).addOnTalkEvent(questId); // Tula
+		qe.registerQuestNpc(700030).addOnTalkEvent(questId); // The Cauldron
+		qe.registerQuestNpc(790001).addOnTalkEvent(questId); // Pernos
+		qe.registerQuestNpc(203067).addOnTalkEvent(questId); // Kalio
 	}
 
 	@Override
@@ -38,10 +40,11 @@ public class _1004NeutralizingOdium extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203082) {
-				switch (env.getDialog()) {
+			if (targetId == 203082) { // Tula
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -64,22 +67,21 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							return true;
 						}
 				}
-			} else if (targetId == 700030 && var == 1 || var == 4) {
-				switch (env.getDialog()) {
+			} else if (targetId == 700030 && var == 1 || var == 4) { // The Cauldron
+				switch (dialog) {
 					case USE_OBJECT:
-						if (qs.getQuestVarById(0) == 1) {
+						if (var == 1) {
 							if (giveQuestItem(env, 182200005, 1))
-								qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-						} else if (qs.getQuestVarById(0) == 4) {
-							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+								qs.setQuestVarById(0, var + 1);
+						} else if (var == 4) {
+							qs.setQuestVarById(0, var + 1);
 							removeQuestItem(env, 182200005, 1);
 						}
 						updateQuestStatus(env);
-						sendEmotion(env, player, EmotionId.STAND, true);
 						return false;
 				}
-			} else if (targetId == 790001) {
-				switch (env.getDialog()) {
+			} else if (targetId == 790001) { // Pernos
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1352);
@@ -115,7 +117,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203067)
+			if (targetId == 203067) // Kalio
 				return sendQuestEndDialog(env);
 		}
 		return false;
@@ -128,6 +130,6 @@ public class _1004NeutralizingOdium extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100, true);
+		return defaultOnLvlUpEvent(env, 1100);
 	}
 }

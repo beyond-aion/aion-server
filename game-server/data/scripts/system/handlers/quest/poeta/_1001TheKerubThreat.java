@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1001TheKerubThreat extends QuestHandler {
 
@@ -26,7 +27,6 @@ public class _1001TheKerubThreat extends QuestHandler {
 		qe.registerQuestNpc(210670).addOnKillEvent(questId);
 		qe.registerQuestNpc(203071).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203067).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 	}
 
@@ -61,7 +61,7 @@ public class _1001TheKerubThreat extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100, true);
+		return defaultOnLvlUpEvent(env, 1100);
 	}
 
 	@Override
