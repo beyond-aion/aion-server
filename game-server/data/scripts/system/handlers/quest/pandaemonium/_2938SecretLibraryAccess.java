@@ -1,7 +1,6 @@
 package quest.pandaemonium;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -20,8 +19,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class _2938SecretLibraryAccess extends QuestHandler {
 
 	private final static int questId = 2938;
-	private final static int[] npc_ids = { 204267, 203557 }; // 204267 - Oubliette (start and finish), 203557 -
-																														// Suthran(for recomendation)
+	private final static int[] npc_ids = { 204267, 203557 }; // Oubliette and Suthran
 
 	public _2938SecretLibraryAccess() {
 		super(questId);
@@ -35,9 +33,8 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 		}
 	}
 
-	// // self explanatory //
 	private boolean AreAltgardQuestsFinished(Player player) {
-		int id = player.getPlayerClass().equals(PlayerClass.RIDER) ? 24016 : 2022;
+		int id = player.getQuestStateList().getQuestState(2200) != null ? 2022 : 24016; //  2022 Old path, 24016 New path
 		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Altgard state
 		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
 	}

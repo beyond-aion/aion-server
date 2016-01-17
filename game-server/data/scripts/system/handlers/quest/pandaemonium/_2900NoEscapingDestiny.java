@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -25,7 +24,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _2900NoEscapingDestiny extends QuestHandler {
 
 	private final static int questId = 2900;
-	private long existingStigmaShardsCount = 300;
 
 	public _2900NoEscapingDestiny() {
 		super(questId);
@@ -34,8 +32,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204182, 203550, 790003, 790002, 203546, 204264, 204061 };
-		int[] stigmas = { 140000008, 140000027, 140000047, 140000076, 140000131, 140000147, 140000098, 140000112, 140000859, 140000859, 140000943,
-			140001002 };
+		int[] stigmas = { 140000001, 140000002, 140000003, 140000004 };
 		qe.registerOnLevelUp(questId);
 		qe.registerOnMovieEndQuest(156, questId);
 		qe.registerQuestNpc(204263).addOnKillEvent(questId);
@@ -71,7 +68,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						}
 						case SETPRO1: {
 							if (defaultCloseDialog(env, 0, 1)) { // 1
-								TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f);
+								TeleportService2.teleportTo(player, 220010000, 1, 389.0f, 1896.0f, 327.5f, (byte) 61, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 						}
@@ -138,14 +135,13 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								changeQuestStep(env, 4, 95, false); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 268.47397f, 251.80275f, 125.8369f);
-								existingStigmaShardsCount = player.getInventory().getItemCountByItemId(141000001);
+								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}
 						}
 						case SETPRO9: {
 							changeQuestStep(env, 9, 10, false); // 10
-							TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f);
+							TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						}
 					}
@@ -175,24 +171,14 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						}
 						case SELECT_ACTION_3058: {
 							if (var == 96) {
-								if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
-									if (existingStigmaShardsCount < 300) {
-										if (!player.getInventory().isFull()) {
-											ItemService.addItem(player, 141000001, 300 - existingStigmaShardsCount);
-											changeQuestStep(env, 96, 99, false); // 99
-											return sendQuestDialog(env, 3058);
-										} else {
-											return closeDialogWindow(env);
-										}
-									} else {
+								if (!player.getInventory().isFull()) {
+									if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
 										changeQuestStep(env, 96, 99, false); // 99
 										return sendQuestDialog(env, 3058);
+									} else {
+										return closeDialogWindow(env);
 									}
-								} else {
-									return closeDialogWindow(env);
 								}
-							} else if (var == 99) {
-								return sendQuestDialog(env, 3058);
 							}
 						}
 						case SETPRO7: {
@@ -242,9 +228,8 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 98) {
-				removeStigma(env);
 				changeQuestStep(env, 98, 9, false); // 9
-				TeleportService2.teleportTo(player, 220010000, 1, 1113.8882f, 1719.497f, 271.07687f);
+				TeleportService2.teleportTo(player, 220010000, 1, 1112.492f, 1718.974f, 270.45917f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
 				return true;
 			}
 		}
@@ -257,15 +242,12 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
-			if (player.getWorldId() != 320070000) {
-				if (var >= 95 && var <= 99) {
-					removeStigma(env);
-					qs.setQuestVar(4);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-						.getName()));
-					return true;
-				}
+			if (var >= 95 && var <= 99) {
+				removeStigma(env);
+				qs.setQuestVar(4);
+				updateQuestStatus(env);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				return true;
 			}
 		}
 		return false;
@@ -282,8 +264,11 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					removeStigma(env);
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-						.getName()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					return true;
+				}
+				else if (var == 9) {
+					removeStigma(env);
 					return true;
 				}
 			}
@@ -293,42 +278,23 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 
 	private int getStoneId(Player player) {
 		switch (player.getCommonData().getPlayerClass()) {
-			case GLADIATOR: {
-				return 140000008; // Improved Stamina I
-			}
-			case TEMPLAR: {
-				return 140000027; // Divine Fury I
-			}
-			case RANGER: {
-				return 140000047; // Arrow Deluge I
-			}
-			case ASSASSIN: {
-				return 140000076; // Sigil Strike I
-			}
-			case SORCERER: {
-				return 140000131; // Lumiel's Wisdom I
-			}
-			case SPIRIT_MASTER: {
-				return 140000147; // Absorb Vitality I
-			}
-			case CLERIC: {
-				return 140000098; // Grace of Empyrean Lord I
-			}
-			case CHANTER: {
-				return 140000112; // Rage Spell I
-			}
-			case BARD: {
-				return 140000859; // Freestyle I
-			}
-			case GUNNER: {
-				return 140000943; // Nature's Favor I
-			}
-			case RIDER: {
-				return 140001002; // Nullification Trigger I
-			}
-			default: {
+			case CHANTER: // (CHECK)
+			case CLERIC: // (CHECK)
+				return 140000001; // Healight Light II				
+			case GLADIATOR: // (CHECK)
+			case RIDER: // (CORRECT)
+			case TEMPLAR: // (CHECK)
+				return 140000002; // Flame Cage I
+			case ASSASSIN: // (CHECK)
+			case GUNNER: // (CHECK)
+			case RANGER: // (CHECK)
+				return 140000003; // Ferocious Strike III
+			case SORCERER: // (CHECK)
+			case SPIRIT_MASTER: // (CHECK)
+			case BARD: // (CHECK)
+				return 140000004; // Hydro Eruption II
+			default:
 				return 0;
-			}
 		}
 	}
 
@@ -338,8 +304,6 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 			player.getEquipment().unEquipItem(item.getObjectId(), 0);
 		}
 		removeQuestItem(env, getStoneId(player), 1);
-		removeQuestItem(env, 141000001, player.getInventory().getItemCountByItemId(141000001));
-		giveQuestItem(env, 141000001, existingStigmaShardsCount);
 	}
 
 	private boolean isStigmaEquipped(QuestEnv env) {
